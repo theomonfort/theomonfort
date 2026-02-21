@@ -1,0 +1,53 @@
+name: "Changelog Generator"
+
+on:
+  issues:
+    types: [labeled]
+  schedule:
+    - cron: "0 23 * * 1-5" # Weekdays 11 PM UTC (8 AM JST)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  models: read
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    # Only run for 'changelog' label (or non-issue triggers)
+    if: >-
+      github.event_name != 'issues' ||
+      github.event.label.name == 'changelog'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: pip3 install python-pptx requests beautifulsoup4 Pillow lxml
+
+      - name: Generate changelog deck
+        run: python3 scripts/changelog-ai-pipeline.py --days 14
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add 10-news/11-changelog/
+          if git diff --cached --quiet; then
+            echo "No new changelog data."
+          else
+            git commit -m "chore: generate changelog deck ($(date +%Y-%m-%d))"
+            git push
+          fi
+
+      - name: Comment and close issue
+        if: github.event_name == 'issues'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue comment ${{ github.event.issue.number }} \
+            --body "✅ Changelog deck generated and committed to main."
+          gh issue close ${{ github.event.issue.number }}

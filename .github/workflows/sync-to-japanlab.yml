@@ -1,0 +1,45 @@
+name: Sync to JapanLab
+
+on:
+  schedule:
+    - cron: '0 19 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source (cockpit)
+        uses: actions/checkout@v4
+        with:
+          path: source
+
+      - name: Checkout target (JapanLab)
+        uses: actions/checkout@v4
+        with:
+          repository: github/JapanLab
+          token: ${{ secrets.JAPANLAB_TOKEN }}
+          path: target
+
+      - name: Sync directories
+        run: |
+          rsync -av --delete source/.github/ target/.github/
+          rsync -av --delete source/10-news/ target/10-news/
+          rsync -av --delete source/scripts/ target/scripts/
+
+      - name: Commit and push changes
+        working-directory: target
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to sync"
+          else
+            SHORT_SHA=$(cd ../source && git rev-parse --short HEAD)
+            git commit -m "chore: sync from cockpit (${SHORT_SHA} @ $(date -u +%Y-%m-%dT%H:%M:%SZ))"
+            git push https://x-access-token:${{ secrets.JAPANLAB_TOKEN }}@github.com/github/JapanLab.git
+          fi

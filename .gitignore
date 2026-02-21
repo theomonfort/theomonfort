@@ -1,0 +1,29 @@
+# Fichiers temporaires et brouillons
+*.tmp
+*.bak
+*.swp
+*~
+.DS_Store
+
+# Fichiers de brouillon (commençant par draft-)
+draft-*
+brouillon-*
+
+# Dossiers de travail temporaire
+.tmp/
+temp/
+scratch/
+
+# Fichiers privés (utiliser ce préfixe pour les notes personnelles sensibles)
+private-*
+.private/
+
+# Node modules si jamais utilisé
+node_modules/
+
+# Logs
+*.log
+
+# Build artifacts
+dist/
+build/

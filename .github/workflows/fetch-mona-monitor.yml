@@ -1,0 +1,35 @@
+name: Fetch Mona Monitor
+
+on:
+  schedule:
+    # Runs every 2 weeks (1st and 15th of each month) at 09:00 UTC
+    - cron: '0 9 1,15 * *'
+  workflow_dispatch: # Allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch latest discussion
+        env:
+          GH_TOKEN: ${{ secrets.MONA_MONITOR_TOKEN }}
+        run: |
+          chmod +x scripts/fetch-mona-monitor.sh
+          bash scripts/fetch-mona-monitor.sh
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add 10-news/12-mona-monitor/
+          if git diff --cached --quiet; then
+            echo "No new discussion to commit"
+          else
+            git commit -m "Add latest Mona Monitor discussion"
+            git push
+          fi
