@@ -139,10 +139,10 @@ Output:
 
 ### Structure
 
-All knowledge documents in `40-knowledge/` are maintained in both English and Japanese using paired subfolders:
+All knowledge documents in `40-presentations/` are maintained in both English and Japanese using paired subfolders:
 
 ```
-40-knowledge/
+40-presentations/
 ├── 41-Copilot/
 │   ├── 41.01-english/       # English originals
 │   └── 41.02-japanese/      # Japanese translations
@@ -161,7 +161,7 @@ All knowledge documents in `40-knowledge/` are maintained in both English and Ja
 
 **Whenever an English knowledge document is created or updated**, the note-organizer must automatically create or update the corresponding Japanese translation:
 
-1. **Detect the change**: When organizing or editing any file under a `*.01-english/` folder in `40-knowledge/`, trigger translation.
+1. **Detect the change**: When organizing or editing any file under a `*.01-english/` folder in `40-presentations/`, trigger translation.
 2. **Translate**: Produce a natural, professional Japanese translation of the full document. Preserve all markdown formatting, code blocks, links, and structure. Translate prose, headings, and descriptions — keep code, commands, URLs, and proper nouns (product names, tool names) in their original form.
 3. **Save**: Write the translated file to the matching `*.02-japanese/` folder with the **same filename**.
    - Example: `41-Copilot/41.01-english/github-copilot-cli.md` → `41-Copilot/41.02-japanese/github-copilot-cli.md`
@@ -183,7 +183,7 @@ All knowledge documents in `40-knowledge/` are maintained in both English and Ja
 
 ## Template Reference
 
-Uses the standard template from `50-admin/41-templates/notes/note-template.md` which includes:
+Uses the standard template from the standard note template which includes:
 - Title and metadata (Date, Tags)
 - Context
 - Content

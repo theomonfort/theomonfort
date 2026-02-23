@@ -29,13 +29,15 @@ Or run the script directly:
 
 ```bash
 # Preview what would change (no push)
-./scripts/mirror-to-japanlab.sh --dry-run
+./scripts/mirror-to-targets.sh --dry-run
 
 # Perform the sync
-./scripts/mirror-to-japanlab.sh
+./scripts/mirror-to-targets.sh
 ```
 
 ## What Gets Mirrored
+
+### To `github/JapanLab`
 
 Everything **except**:
 
@@ -43,8 +45,18 @@ Everything **except**:
 |----------|--------|
 | `20-notes/` | Personal daily notes |
 | `30-meetings/` | Private meeting notes |
-| `50-admin/` | Administrative docs |
-| `README.md` | Cockpit-specific README (JapanLab has its own) |
+| `README.md` | Cockpit-specific README (targets have their own) |
+
+### To `theomonfort/theomonfort`
+
+Everything **except**:
+
+| Excluded | Reason |
+|----------|--------|
+| `20-notes/` | Personal daily notes |
+| `30-meetings/` | Private meeting notes |
+| `50-security-checklists/` | Customer-specific security data |
+| `README.md` | Cockpit-specific README (targets have their own) |
 
 ## How It Works
 
@@ -62,7 +74,7 @@ Everything **except**:
 
 ## Script
 
-`scripts/mirror-to-japanlab.sh`
+`scripts/mirror-to-targets.sh`
 
 ## Dependencies
 

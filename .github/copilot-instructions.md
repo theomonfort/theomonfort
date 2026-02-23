@@ -13,7 +13,7 @@ This repository (`cockpit`) is a personal workspace for managing daily notes, ta
   - Organized by project or person (e.g., `apac-weekly-standup/`, `1-1-anthony/`).
   - Stores Markdown notes for each session.
 
-- **`knowledge/`** (`40-knowledge/`):
+- **`knowledge/`** (`40-presentations/`):
   - Each topic folder contains bilingual subfolders: `*.01-english/` (source of truth) and `*.02-japanese/` (auto-translated).
   - `41-Copilot/`: GitHub Copilot tips, prompts, and best practices.
   - `42-Actions/`: Tips and patterns for GitHub Actions workflows.
