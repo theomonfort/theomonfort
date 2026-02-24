@@ -1,3 +1,8 @@
+---
+name: note-organizer
+description: Organize raw notes into structured format using the standard template. Use when user wants to clean up, reorganize, or format notes and manage task workflows.
+---
+
 # Note Organizer Skill
 
 This skill automatically organizes raw notes into a structured format using the standard note template. It analyzes unstructured note content and reorganizes it into clean, properly formatted notes while managing task workflows across daily, weekly, and task files.

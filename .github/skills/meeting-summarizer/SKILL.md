@@ -1,3 +1,8 @@
+---
+name: meeting-summarizer
+description: Create compact meeting summaries using the standard template. Use when user provides raw meeting notes to format into structured summaries.
+---
+
 # Meeting Summarizer Skill
 
 ## Purpose

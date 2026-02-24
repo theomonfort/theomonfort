@@ -1,3 +1,8 @@
+---
+name: changelog-ppt-creator
+description: Fetch latest GitHub changelog updates, translate to Japanese, and generate English + Japanese PowerPoint presentations. Use when user asks to generate the changelog deck or summary.
+---
+
 # Changelog PPT Creator Skill
 
 ## Purpose

@@ -1,3 +1,8 @@
+---
+name: repo-mirror
+description: Mirror selected content from cockpit to multiple target repos, excluding private folders. Use when user wants to sync content to other repositories.
+---
+
 # Repo Mirror Skill
 
 ## Purpose
