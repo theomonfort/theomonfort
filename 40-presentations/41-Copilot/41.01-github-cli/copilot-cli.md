@@ -24,8 +24,7 @@ Copilot CLI is an **autonomous AI agent running in your terminal**. It plans, ex
 - **Fleet mode** — spawn multiple sub-agents that work in parallel on independent tasks. Dramatically faster for multi-file operations.
 - **Memory & context control** — persist facts across sessions, monitor your context window usage, and manage it actively. The CLI gives you visibility and control over your AI's working memory.
 - **Works anywhere a terminal runs** — over SSH, on remote servers, in containers, on headless machines. No IDE required. Lightweight, instant startup, entirely keyboard-driven.
-- **Image paste support** — paste screenshots directly into the terminal input for visual context.
-- **Session sharing** — `/share` exports your session as a GitHub gist or markdown for easy collaboration.
+- **Customizable with `~/.copilot/`** — define personal skills, agents, and instructions that follow you across every project on your machine. Your toolbox, everywhere.
 
 ## Setting It Up Right
 
@@ -35,13 +34,29 @@ This is your **personal** setup — it applies to all projects on your machine:
 
 ```
 ~/.copilot/
-├── copilot-instructions.md    # User-level instructions loaded for every project
-├── lsp-config.json            # Language server configuration
-└── session-state/             # Session data (managed automatically)
+├── copilot-instructions.md    # Global instructions loaded for every project
+├── agents/                     # Personal agents, available everywhere
+│   └── my-agent.md
+└── skills/                     # Personal skills, available everywhere
+    └── my-skill/
+        └── SKILL.md
 ```
 
-- **`copilot-instructions.md`** — global instructions that apply everywhere (your personal preferences, coding style, etc.).
-- **`lsp-config.json`** — configure language servers for enhanced code intelligence across all projects.
+### Repository-Level Configuration (`.github/`)
+
+This is your **project-specific** setup — it travels with the repo:
+
+```
+.github/
+├── copilot-instructions.md    # Project structure, conventions, preferences
+├── agents/                     # Repo-specific agents
+│   └── my-agent.md
+└── skills/                     # Repo-specific skills
+    └── my-skill/
+        └── SKILL.md
+```
+
+The CLI merges both levels — you get your personal tools plus whatever the repo provides.
 
 > 💡 **Theo's Tip**: The `~/.copilot/` folder is hidden by default. On macOS Finder, press **`Cmd+Shift+.`** to toggle hidden files. In terminal, just use `ls -a`.
 
@@ -49,7 +64,7 @@ This is your **personal** setup — it applies to all projects on your machine:
 
 ## Fleet Mode
 
-`/fleet` spawns **multiple sub-agents that work in parallel** on independent tasks. Instead of one agent handling everything sequentially, fleet mode distributes the work — dramatically speeding up operations that span multiple files or folders.
+`/fleet` spawns **multiple sub-agents that work in parallel** on independent tasks. This feature is **exclusive to the CLI** — VS Code Chat does not support parallel sub-agents. Instead of one agent handling everything sequentially, fleet mode distributes the work — dramatically speeding up operations that span multiple files or folders.
 
 ### Example
 
@@ -76,7 +91,7 @@ The CLI gives you **full visibility and control** over your context window — s
 | `/context` | Shows exactly how much of your context window is used (% and tokens) |
 | `/compact` | Summarizes the conversation to reclaim context space |
 
-When your context usage goes above ~60%, the agent starts losing track of earlier details. At that point:
+When your context gets high, the agent may start losing track of earlier details. If you notice degraded responses:
 1. Ask the CLI to **save important facts to memory** (`store_memory` persists knowledge across sessions)
 2. Start a **fresh session** — it loads your stored memories automatically
 
@@ -149,6 +164,20 @@ Create a simple 3-slide PowerPoint about our team's Q1 goals
 ```
 Read the Excel file data.xlsx and summarize the contents
 ```
+
+## When to Use What — Theo's Take
+
+| Scenario | Recommendation |
+|----------|---------------|
+| Writing or refactoring code | VS Code Chat |
+| Debugging with breakpoints | VS Code Chat |
+| Automating multi-step workflows | CLI |
+| Working on a remote server / SSH | CLI |
+| Parallel tasks across many files | CLI (`/fleet`) |
+| Creating/editing Excel, PPT, PDF | CLI |
+| Quick code question while editing | VS Code Chat |
+| CI investigation & log analysis | CLI |
+| Best of both worlds | Use them together |
 
 ## Keyboard Shortcuts
 
