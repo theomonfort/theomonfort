@@ -285,5 +285,35 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   if (currentLang === 'ja') applyNavLang('ja');
+
+  /* --- Nav expand/collapse state persistence --- */
+  function getNavKey(btn) {
+    var link = btn.parentElement.querySelector('.nav-list-link');
+    return link ? link.getAttribute('href') || link.textContent.trim() : null;
+  }
+  function saveNavState() {
+    var state = {};
+    document.querySelectorAll('.nav-list-expander').forEach(function(btn) {
+      var key = getNavKey(btn);
+      if (key) state[key] = btn.getAttribute('aria-pressed') === 'true';
+    });
+    localStorage.setItem('jtd-nav-state', JSON.stringify(state));
+  }
+  function restoreNavState() {
+    var raw = localStorage.getItem('jtd-nav-state');
+    if (!raw) return;
+    try { var state = JSON.parse(raw); } catch(e) { return; }
+    document.querySelectorAll('.nav-list-expander').forEach(function(btn) {
+      var key = getNavKey(btn);
+      if (key && typeof state[key] === 'boolean') {
+        var isOpen = btn.getAttribute('aria-pressed') === 'true';
+        if (state[key] !== isOpen) btn.click();
+      }
+    });
+  }
+  restoreNavState();
+  document.querySelectorAll('.nav-list-expander').forEach(function(btn) {
+    btn.addEventListener('click', function() { setTimeout(saveNavState, 50); });
+  });
 });
 </script>
