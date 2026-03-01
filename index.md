@@ -4,24 +4,41 @@ layout: default
 nav_order: 1
 ---
 
-# Theo Monfort
+<div class="hero" markdown="1">
 
-Welcome! This site hosts curated news and presentations about GitHub products and features.
-{: .fs-6 .fw-300 }
+# Hey, I'm Theo 👋
+{: .hero-title }
 
----
+Senior Solutions Architect at GitHub — I share notes on GitHub products, demos, and walkthroughs here.
+{: .hero-subtitle }
 
-## 📰 News
-
-Stay up to date with the latest GitHub changelog highlights.
-
-[Changelog Updates]({{ site.baseurl }}{% link 10-news/11-changelog/11.01-english/2026-02-14_to_2026-02-27-changelog.md %}){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+</div>
 
 ---
 
-## 🎤 Presentations
+<div class="card-grid" markdown="1">
 
-In-depth guides and walkthroughs for GitHub features.
+<div class="card" markdown="1">
 
-[Copilot CLI]({{ site.baseurl }}{% link 40-presentations/41-Copilot/41.01-github-cli/copilot-cli.md %}){: .btn .btn-blue .fs-5 .mb-4 .mb-md-0 .mr-2 }
-[Agentic Workflows]({{ site.baseurl }}{% link 40-presentations/41-Copilot/41.02-agentic-workflows/github-agentic-workflows.md %}){: .btn .btn-blue .fs-5 .mb-4 .mb-md-0 .mr-2 }
+### 📰 News
+{: .card-title }
+
+Curated changelog highlights from the GitHub ecosystem.
+
+[Browse changelog →]({{ site.baseurl }}{% link 10-news/11-changelog/11.01-english/2026-02-14_to_2026-02-27-changelog.md %}){: .card-link }
+
+</div>
+
+<div class="card" markdown="1">
+
+### 🎤 Presentations
+{: .card-title }
+
+In-depth guides and live-demo material.
+
+[Copilot CLI →]({{ site.baseurl }}{% link 40-presentations/41-Copilot/41.01-github-cli/copilot-cli.md %}){: .card-link }
+[Agentic Workflows →]({{ site.baseurl }}{% link 40-presentations/41-Copilot/41.02-agentic-workflows/github-agentic-workflows.md %}){: .card-link }
+
+</div>
+
+</div>

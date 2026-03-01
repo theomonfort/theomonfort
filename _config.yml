@@ -7,9 +7,7 @@ baseurl: "/theomonfort"
 
 color_scheme: dark
 
-aux_links:
-  "GitHub":
-    - "https://github.com/theomonfort/theomonfort"
+aux_links: {}
 
 nav_external_links: []
 
@@ -17,7 +15,7 @@ heading_anchors: true
 back_to_top: true
 back_to_top_text: "Back to top"
 
-footer_content: "Built with <a href=\"https://github.com/just-the-docs/just-the-docs\">Just the Docs</a>"
+footer_content: "Built with <a href=\"https://github.com/just-the-docs/just-the-docs\">Just the Docs</a> · <a href=\"https://github.com/theomonfort\">@theomonfort</a>"
 
 exclude:
   - scripts/
