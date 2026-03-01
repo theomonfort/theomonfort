@@ -336,12 +336,41 @@ def translate_with_ai(entries: list[dict], token: str) -> bool:
 # ============================================================================
 
 
-def generate_markdown(entries: list[dict], lang: str = "en") -> str:
+def generate_markdown(entries: list[dict], lang: str = "en", file_stem: str = "") -> str:
     today = datetime.now().strftime("%Y-%m-%d")
+
+    # Jekyll frontmatter for GitHub Pages
+    dates = [e["date"] for e in entries]
+    date_from = min(dates).strftime("%b %d")
+    date_to = max(dates).strftime("%b %d, %Y")
     if lang == "ja":
-        lines = [f"# GitHub Changelog アップデート\n", f"**生成日**: {today}\n"]
+        fm_lines = [
+            "---",
+            f"title: 変更履歴 ({date_from}–{date_to})",
+            "layout: default",
+            "parent: News",
+            "nav_exclude: true",
+            "lang: ja",
+        ]
+        if file_stem:
+            fm_lines.append(f"lang_pair: /10-news/11-changelog/11.01-english/{file_stem}-changelog.html")
+        fm_lines.append("---\n")
+        lines = ["\n".join(fm_lines)]
+        lines += [f"# GitHub Changelog アップデート\n", f"**生成日**: {today}\n"]
     else:
-        lines = [f"# GitHub Changelog Updates\n", f"**Generated**: {today}\n"]
+        fm_lines = [
+            "---",
+            f"title: Changelog ({date_from}–{date_to})",
+            "layout: default",
+            "parent: News",
+            "nav_order: 1",
+            "lang: en",
+        ]
+        if file_stem:
+            fm_lines.append(f"lang_pair: /10-news/11-changelog/11.02-japanese/{file_stem}-changelog.html")
+        fm_lines.append("---\n")
+        lines = ["\n".join(fm_lines)]
+        lines += [f"# GitHub Changelog Updates\n", f"**Generated**: {today}\n"]
 
     for entry in entries:
         title = entry.get("title_ja", entry["title"]) if lang == "ja" else entry["title"]
@@ -771,13 +800,13 @@ def main():
     date_to = max(dates).strftime("%Y-%m-%d")
     file_stem = f"{date_from}_to_{date_to}"
 
-    en_md = generate_markdown(entries, "en")
+    en_md = generate_markdown(entries, "en", file_stem)
     en_path = en_dir / f"{file_stem}-changelog.md"
     en_path.write_text(en_md, encoding="utf-8")
     print(f"Saved English markdown: {en_path}")
 
     if has_translations:
-        ja_md = generate_markdown(entries, "ja")
+        ja_md = generate_markdown(entries, "ja", file_stem)
         ja_path = ja_dir / f"{file_stem}-changelog.md"
         ja_path.write_text(ja_md, encoding="utf-8")
         print(f"Saved Japanese markdown: {ja_path}")
