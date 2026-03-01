@@ -1,7 +1,7 @@
 ---
 title: Copilot CLI
 layout: default
-parent: GitHub Copilot
+parent: Copilot
 nav_order: 1
 lang: en
 lang_pair: /github-copilot/copilot-cli-jp.html

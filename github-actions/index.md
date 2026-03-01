@@ -1,5 +1,5 @@
 ---
-title: GitHub Actions
+title: Actions
 layout: default
 nav_order: 4
 has_children: true

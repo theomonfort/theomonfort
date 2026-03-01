@@ -1,7 +1,7 @@
 ---
 title: Agentic Workflows
 layout: default
-parent: GitHub Copilot
+parent: Copilot
 nav_order: 2
 ---
 
