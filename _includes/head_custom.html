@@ -102,6 +102,19 @@ html[data-theme="light"] .chip-type[data-type="retired"] { background-color: rgb
 html[data-theme="light"] .chip-category { background-color: rgba(130,80,223,0.08); color: #8250df; border-color: rgba(130,80,223,0.15); }
 html[data-theme="light"] .chip-link { background-color: #f6f8fa; color: #57606a; }
 
+/* ===== Links grid ===== */
+.links-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 0.75rem; margin-top: 1.5rem; }
+.link-card { display: flex; align-items: flex-start; gap: 0.9rem; padding: 1rem 1.2rem; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; text-decoration: none !important; color: inherit; transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s; }
+.link-card:hover { border-color: rgba(44,132,250,0.4); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(44,132,250,0.08); }
+.link-icon { font-size: 1.6rem; line-height: 1; flex-shrink: 0; margin-top: 0.1rem; }
+.link-body { display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; }
+.link-name { font-weight: 600; font-size: 0.95rem; color: #e6edf3; }
+.link-desc { font-size: 0.82rem; opacity: 0.6; line-height: 1.4; }
+html[data-theme="light"] .link-card { border-color: #e1e4e8; }
+html[data-theme="light"] .link-card:hover { border-color: #0969da; box-shadow: 0 4px 12px rgba(9,105,218,0.08); }
+html[data-theme="light"] .link-name { color: #1f2328; }
+html[data-theme="light"] .link-desc { color: #57606a; }
+
 /* ===== Light theme overrides ===== */
 html[data-theme="light"] body { background-color: #ffffff; color: #1f2328; }
 html[data-theme="light"] h1, html[data-theme="light"] h2, html[data-theme="light"] h3,
@@ -236,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var translations = {
     'Home': 'ホーム', 'Changelog': '変更履歴', 'GitHub Copilot': 'GitHub Copilot',
     'GitHub Actions': 'GitHub Actions', 'GHEC': 'GHEC', 'GHES': 'GHES',
-    'Copilot CLI': 'Copilot CLI', 'Agentic Workflows': 'Agentic Workflows'
+    'Links': 'リンク集', 'Copilot CLI': 'Copilot CLI', 'Agentic Workflows': 'Agentic Workflows'
   };
   var reverseTr = {};
   for (var k in translations) reverseTr[translations[k]] = k;
@@ -309,7 +322,9 @@ document.addEventListener('DOMContentLoaded', function() {
     "GitHub Enterprise Cloud": "GitHub Enterprise Cloud",
     "Administration guides and reference material for GHEC.": "GHEC の管理ガイドとリファレンス資料。",
     "GitHub Enterprise Server": "GitHub Enterprise Server",
-    "Administration guides and reference material for GHES.": "GHES の管理ガイドとリファレンス資料。"
+    "Administration guides and reference material for GHES.": "GHES の管理ガイドとリファレンス資料。",
+    "Useful Links": "便利なリンク集",
+    "A curated collection of essential GitHub resources and tools.": "GitHub の主要なリソースとツールの厳選コレクション。"
   };
   var reverseContentTr = {};
   for (var ck in contentTr) reverseContentTr[contentTr[ck]] = ck;

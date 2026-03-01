@@ -29,4 +29,15 @@ Curated changelog highlights from the GitHub ecosystem.
 
 </div>
 
+<div class="card" markdown="1">
+
+### 🔗 Links
+{: .card-title }
+
+Essential GitHub resources — docs, blog, status, support, and more.
+
+[Browse links →]({{ site.baseurl }}{% link links/index.md %}){: .card-link }
+
+</div>
+
 </div>
