@@ -39,10 +39,10 @@ python3 scripts/fetch-changelog.py [--days 14]
 
 | Path | Description |
 |------|-------------|
-| `10-news/11-changelog/11.01-english/FROM_to_TO-changelog.md` | English markdown summary |
-| `10-news/11-changelog/11.02-japanese/FROM_to_TO-changelog.md` | Japanese markdown summary |
-| `10-news/11-changelog/11.03-ppt-english/FROM_to_TO-changelog.pptx` | English PowerPoint |
-| `10-news/11-changelog/11.04-ppt-japanese/FROM_to_TO-changelog.pptx` | Japanese PowerPoint |
+| `changelog/english/FROM_to_TO-changelog.md` | English markdown summary |
+| `changelog/japanese/FROM_to_TO-changelog.md` | Japanese markdown summary |
+| `changelog/ppt-english/FROM_to_TO-changelog.pptx` | English PowerPoint |
+| `changelog/ppt-japanese/FROM_to_TO-changelog.pptx` | Japanese PowerPoint |
 
 Filenames use the date range of the actual entries (e.g., `2026-02-06_to_2026-02-19-changelog.pptx`).
 
@@ -148,4 +148,4 @@ pip3 install python-pptx requests beautifulsoup4 Pillow
 | Flag | Default | Description |
 |------|---------|-------------|
 | `--days` | 14 | Number of days to look back |
-| `--output-dir` | `10-news/11-changelog` | Output base directory |
+| `--output-dir` | `changelog` | Output base directory |

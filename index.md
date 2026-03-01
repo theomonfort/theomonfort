@@ -20,12 +20,12 @@ Senior Solutions Architect at GitHub — I share notes on GitHub products, demos
 
 <div class="card" markdown="1">
 
-### 📰 News
+### 📰 Changelog
 {: .card-title }
 
 Curated changelog highlights from the GitHub ecosystem.
 
-[Browse changelog →]({{ site.baseurl }}{% link 10-news/11-changelog/11.01-english/2026-02-14_to_2026-02-27-changelog.md %}){: .card-link }
+[Browse changelog →]({{ site.baseurl }}{% link changelog/english/2026-02-14_to_2026-02-27-changelog.md %}){: .card-link }
 
 </div>
 

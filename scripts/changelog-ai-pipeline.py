@@ -6,7 +6,7 @@ Uses GitHub Models API for high-quality Japanese translation.
 Designed to run in a standard GitHub Actions workflow (no firewall restrictions).
 
 Usage:
-    python3 scripts/changelog-ai-pipeline.py [--days 14] [--output-dir 10-news/11-changelog]
+    python3 scripts/changelog-ai-pipeline.py [--days 14] [--output-dir changelog]
 
 Dependencies:
     pip3 install python-pptx requests beautifulsoup4 Pillow lxml
@@ -348,12 +348,12 @@ def generate_markdown(entries: list[dict], lang: str = "en", file_stem: str = ""
             "---",
             f"title: 変更履歴 ({date_from}–{date_to})",
             "layout: default",
-            "parent: News",
+            "parent: Changelog",
             "nav_exclude: true",
             "lang: ja",
         ]
         if file_stem:
-            fm_lines.append(f"lang_pair: /10-news/11-changelog/11.01-english/{file_stem}-changelog.html")
+            fm_lines.append(f"lang_pair: /changelog/english/{file_stem}-changelog.html")
         fm_lines.append("---\n")
         lines = ["\n".join(fm_lines)]
         lines += [f"# GitHub Changelog アップデート\n", f"**生成日**: {today}\n"]
@@ -362,12 +362,12 @@ def generate_markdown(entries: list[dict], lang: str = "en", file_stem: str = ""
             "---",
             f"title: Changelog ({date_from}–{date_to})",
             "layout: default",
-            "parent: News",
+            "parent: Changelog",
             "nav_order: 1",
             "lang: en",
         ]
         if file_stem:
-            fm_lines.append(f"lang_pair: /10-news/11-changelog/11.02-japanese/{file_stem}-changelog.html")
+            fm_lines.append(f"lang_pair: /changelog/japanese/{file_stem}-changelog.html")
         fm_lines.append("---\n")
         lines = ["\n".join(fm_lines)]
         lines += [f"# GitHub Changelog Updates\n", f"**Generated**: {today}\n"]
@@ -742,12 +742,12 @@ def main():
     parser.add_argument("--output-dir", type=str, default=None, help="Output directory")
     args = parser.parse_args()
 
-    output_dir = Path(args.output_dir) if args.output_dir else REPO_ROOT / "10-news" / "11-changelog"
+    output_dir = Path(args.output_dir) if args.output_dir else REPO_ROOT / "changelog"
     images_dir = output_dir / "images"
-    en_dir = output_dir / "11.01-english"
-    ja_dir = output_dir / "11.02-japanese"
-    ppt_en_dir = output_dir / "11.03-ppt-english"
-    ppt_ja_dir = output_dir / "11.04-ppt-japanese"
+    en_dir = output_dir / "english"
+    ja_dir = output_dir / "japanese"
+    ppt_en_dir = output_dir / "ppt-english"
+    ppt_ja_dir = output_dir / "ppt-japanese"
 
     for d in [images_dir, en_dir, ja_dir, ppt_en_dir, ppt_ja_dir]:
         d.mkdir(parents=True, exist_ok=True)

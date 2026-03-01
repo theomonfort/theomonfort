@@ -8,7 +8,7 @@ skill), not by this script. The script leaves title_ja/bullets_ja empty for the
 agent to fill in.
 
 Usage:
-    python3 scripts/fetch-changelog.py [--days 14] [--output-dir 10-news/11-changelog]
+    python3 scripts/fetch-changelog.py [--days 14] [--output-dir changelog]
 
 Requirements:
     pip3 install python-pptx requests beautifulsoup4 Pillow
@@ -707,11 +707,11 @@ def main():
     parser.add_argument("--output-dir", type=str, default=None, help="Output directory")
     args = parser.parse_args()
 
-    output_dir = Path(args.output_dir) if args.output_dir else REPO_ROOT / "10-news" / "11-changelog"
-    en_dir = output_dir / "11.01-english"
-    ja_dir = output_dir / "11.02-japanese"
-    ppt_en_dir = output_dir / "11.03-ppt-english"
-    ppt_ja_dir = output_dir / "11.04-ppt-japanese"
+    output_dir = Path(args.output_dir) if args.output_dir else REPO_ROOT / "changelog"
+    en_dir = output_dir / "english"
+    ja_dir = output_dir / "japanese"
+    ppt_en_dir = output_dir / "ppt-english"
+    ppt_ja_dir = output_dir / "ppt-japanese"
 
     for d in [en_dir, ja_dir, ppt_en_dir, ppt_ja_dir]:
         d.mkdir(parents=True, exist_ok=True)

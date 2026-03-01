@@ -28,11 +28,11 @@ jobs:
 
       - name: Clean previous changelog output
         run: |
-          rm -f 10-news/11-changelog/11.01-english/*.md
-          rm -f 10-news/11-changelog/11.02-japanese/*.md
-          rm -f 10-news/11-changelog/11.03-ppt-english/*.pptx
-          rm -f 10-news/11-changelog/11.04-ppt-japanese/*.pptx
-          rm -f 10-news/11-changelog/changelog-data.json
+          rm -f changelog/english/*.md
+          rm -f changelog/japanese/*.md
+          rm -f changelog/ppt-english/*.pptx
+          rm -f changelog/ppt-japanese/*.pptx
+          rm -f changelog/changelog-data.json
 
       - name: Generate changelog deck
         run: python3 scripts/changelog-ai-pipeline.py --days 14
@@ -43,7 +43,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A 10-news/11-changelog/
+          git add -A changelog/
           if git diff --cached --quiet; then
             echo "No new changelog data."
           else
