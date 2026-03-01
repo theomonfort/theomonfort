@@ -295,6 +295,25 @@ document.addEventListener('DOMContentLoaded', function() {
   auxNav.appendChild(gh.li);
 
   /* --- Nav translations --- */
+  var contentTr = {
+    "Hey, I'm Theo 👋": "こんにちは、Theo です 👋",
+    "Senior Solutions Architect at GitHub, based in Japan — covering Automotive & Manufacturing sectors. I share notes on GitHub products, demos, and walkthroughs here.": "GitHub シニアソリューションズアーキテクト。日本拠点で自動車・製造業セクターを担当。GitHub 製品のメモやデモ、ウォークスルーをここで共有しています。",
+    "📰 Changelog": "📰 変更履歴",
+    "Curated changelog highlights from the GitHub ecosystem.": "GitHub エコシステムの厳選された変更履歴ハイライト。",
+    "Browse changelog →": "変更履歴を見る →",
+    "Back to top": "トップに戻る",
+    "GitHub Copilot": "GitHub Copilot",
+    "Guides, demos, and walkthroughs for GitHub Copilot.": "GitHub Copilot のガイド、デモ、ウォークスルー。",
+    "GitHub Actions": "GitHub Actions",
+    "Tips, patterns, and best practices for GitHub Actions workflows.": "GitHub Actions ワークフローのヒント、パターン、ベストプラクティス。",
+    "GitHub Enterprise Cloud": "GitHub Enterprise Cloud",
+    "Administration guides and reference material for GHEC.": "GHEC の管理ガイドとリファレンス資料。",
+    "GitHub Enterprise Server": "GitHub Enterprise Server",
+    "Administration guides and reference material for GHES.": "GHES の管理ガイドとリファレンス資料。"
+  };
+  var reverseContentTr = {};
+  for (var ck in contentTr) reverseContentTr[contentTr[ck]] = ck;
+
   function applyNavLang(lang) {
     document.querySelectorAll('.nav-list-link').forEach(function(el) {
       var txt = el.textContent.trim();
@@ -311,6 +330,13 @@ document.addEventListener('DOMContentLoaded', function() {
       var txt = el.textContent.trim();
       if (lang === 'ja' && translations[txt]) { el.setAttribute('data-en', txt); el.textContent = translations[txt]; }
       else if (lang === 'en') { var en = el.getAttribute('data-en') || reverseTr[txt]; if (en) { el.textContent = en; el.removeAttribute('data-en'); } }
+    });
+    /* Translate page content */
+    var targets = document.querySelectorAll('.hero-title, .hero-subtitle, .card-title, .card p, .card-link, .main-content h1, .main-content > p, #back-to-top');
+    targets.forEach(function(el) {
+      var txt = el.textContent.trim();
+      if (lang === 'ja' && contentTr[txt]) { el.setAttribute('data-en', txt); el.textContent = contentTr[txt]; }
+      else if (lang === 'en') { var en = el.getAttribute('data-en') || reverseContentTr[txt]; if (en) { el.textContent = en; el.removeAttribute('data-en'); } }
     });
   }
   if (currentLang === 'ja') applyNavLang('ja');
