@@ -376,11 +376,18 @@ def generate_markdown(entries: list[dict], lang: str = "en", file_stem: str = ""
 
     for entry in entries:
         title = entry.get("title_ja", entry["title"]) if lang == "ja" else entry["title"]
+        entry_date = entry['date'].strftime('%Y-%m-%d')
+        entry_type = entry['type']
+        entry_type_lower = entry_type.lower()
+        entry_category = entry['label']
+        entry_link = entry['link']
         lines.append(f"## {title}\n")
-        lines.append(f"- **Date**: {entry['date'].strftime('%Y-%m-%d')}")
-        lines.append(f"- **Type**: {entry['type']}")
-        lines.append(f"- **Category**: {entry['label']}")
-        lines.append(f"- **Link**: {entry['link']}\n")
+        lines.append(f'<div class="changelog-meta" markdown="0">')
+        lines.append(f'  <span class="chip chip-date">📅 {entry_date}</span>')
+        lines.append(f'  <span class="chip chip-type" data-type="{entry_type_lower}">{entry_type}</span>')
+        lines.append(f'  <span class="chip chip-category">{entry_category}</span>')
+        lines.append(f'  <span class="chip chip-link"><a href="{entry_link}" target="_blank" rel="noopener">🔗 Read more</a></span>')
+        lines.append(f'</div>\n')
 
         bullets = entry.get("bullets_ja" if lang == "ja" else "bullets", [])
         for b in bullets:

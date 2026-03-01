@@ -73,6 +73,27 @@ hr { opacity: 0.15; }
 .card-title { margin-top: 0 !important; margin-bottom: 0.4rem !important; }
 .card-link { display: block; font-weight: 500; margin-top: 0.3rem; font-size: 0.95rem; }
 
+/* ===== Changelog chips ===== */
+.changelog-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.5rem 0 0.75rem; align-items: center; }
+.chip { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.78rem; font-weight: 500; line-height: 1.4; white-space: nowrap; border: 1px solid transparent; }
+.chip-date { background-color: rgba(139,148,158,0.15); color: #8b949e; }
+.chip-type { font-weight: 600; }
+.chip-type[data-type="release"] { background-color: rgba(52,199,89,0.15); color: #34c759; border-color: rgba(52,199,89,0.2); }
+.chip-type[data-type="improvement"] { background-color: rgba(44,132,250,0.15); color: #2c84fa; border-color: rgba(44,132,250,0.2); }
+.chip-type[data-type="retired"] { background-color: rgba(255,69,58,0.15); color: #ff453a; border-color: rgba(255,69,58,0.2); }
+.chip-category { background-color: rgba(175,130,255,0.12); color: #af82ff; border-color: rgba(175,130,255,0.2); }
+.chip-link a { color: inherit; text-decoration: none; }
+.chip-link a:hover { text-decoration: underline; }
+.chip-link { background-color: rgba(139,148,158,0.1); color: #8b949e; cursor: pointer; }
+
+/* Light mode chip overrides */
+html[data-theme="light"] .chip-date { background-color: #eaeef2; color: #57606a; }
+html[data-theme="light"] .chip-type[data-type="release"] { background-color: rgba(22,163,74,0.1); color: #16a34a; border-color: rgba(22,163,74,0.2); }
+html[data-theme="light"] .chip-type[data-type="improvement"] { background-color: rgba(9,105,218,0.1); color: #0969da; border-color: rgba(9,105,218,0.2); }
+html[data-theme="light"] .chip-type[data-type="retired"] { background-color: rgba(207,34,46,0.1); color: #cf222e; border-color: rgba(207,34,46,0.2); }
+html[data-theme="light"] .chip-category { background-color: rgba(130,80,223,0.08); color: #8250df; border-color: rgba(130,80,223,0.15); }
+html[data-theme="light"] .chip-link { background-color: #f6f8fa; color: #57606a; }
+
 /* ===== Light theme overrides ===== */
 html[data-theme="light"] body { background-color: #ffffff; color: #1f2328; }
 html[data-theme="light"] h1, html[data-theme="light"] h2, html[data-theme="light"] h3,
