@@ -9,7 +9,7 @@ nav_order: 1
 # Hey, I'm Theo 👋
 {: .hero-title }
 
-Senior Solutions Architect at GitHub — I share notes on GitHub products, demos, and walkthroughs here.
+Senior Solutions Architect at GitHub, based in Japan — covering Automotive & Manufacturing sectors. I share notes on GitHub products, demos, and walkthroughs here.
 {: .hero-subtitle }
 
 </div>
@@ -26,18 +26,6 @@ Senior Solutions Architect at GitHub — I share notes on GitHub products, demos
 Curated changelog highlights from the GitHub ecosystem.
 
 [Browse changelog →]({{ site.baseurl }}{% link changelog/2026-02-14_to_2026-02-27-changelog.md %}){: .card-link }
-
-</div>
-
-<div class="card" markdown="1">
-
-### 🎤 Presentations
-{: .card-title }
-
-In-depth guides and live-demo material.
-
-[Copilot CLI →]({{ site.baseurl }}{% link github-copilot/copilot-cli.md %}){: .card-link }
-[Agentic Workflows →]({{ site.baseurl }}{% link github-copilot/agentic-workflows.md %}){: .card-link }
 
 </div>
 
