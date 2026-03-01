@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var translations = {
     'Home': 'ホーム', 'Changelog': '変更履歴', 'Copilot': 'コパイロット',
     'Actions': 'アクション', 'GHEC': 'クラウド版', 'GHES': 'オンプレ版', 'GHAS': 'セキュリティ',
-    'Links': 'リンク集', 'Copilot CLI': 'Copilot CLI', 'Agentic Workflows': 'Agentic Workflows'
+    'Links': 'リンク集', 'Copilot CLI': 'Copilot CLI（コマンドライン）', 'Agentic Workflows': 'エージェントワークフロー'
   };
   var reverseTr = {};
   for (var k in translations) reverseTr[translations[k]] = k;
@@ -319,6 +319,9 @@ document.addEventListener('DOMContentLoaded', function() {
     "Essential GitHub resources \u2014 docs, blog, status, support, and more.": "GitHub \u306E\u4E3B\u8981\u306A\u30EA\u30BD\u30FC\u30B9 \u2014 \u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\u3001\u30D6\u30ED\u30B0\u3001\u30B9\u30C6\u30FC\u30BF\u30B9\u3001\u30B5\u30DD\u30FC\u30C8\u306A\u3069\u3002",
     "Browse links \u2192": "\u30EA\u30F3\u30AF\u3092\u898B\u308B \u2192",
     "Back to top": "\u30C8\u30C3\u30D7\u306B\u623B\u308B",
+    "TABLE OF CONTENTS": "\u76EE\u6B21",
+    "Copilot CLI": "Copilot CLI\uFF08\u30B3\u30DE\u30F3\u30C9\u30E9\u30A4\u30F3\uFF09",
+    "Agentic Workflows": "\u30A8\u30FC\u30B8\u30A7\u30F3\u30C8\u30EF\u30FC\u30AF\u30D5\u30ED\u30FC",
     "GitHub Copilot": "GitHub Copilot",
     "Guides, demos, and walkthroughs for GitHub Copilot.": "GitHub Copilot \u306E\u30AC\u30A4\u30C9\u3001\u30C7\u30E2\u3001\u30A6\u30A9\u30FC\u30AF\u30B9\u30EB\u30FC\u3002",
     "GitHub Actions": "GitHub Actions",
@@ -376,12 +379,16 @@ document.addEventListener('DOMContentLoaded', function() {
       else if (lang === 'en') { var en = el.getAttribute('data-en') || reverseTr[txt]; if (en) { el.textContent = en; el.removeAttribute('data-en'); } }
     });
     /* Translate page content */
-    var targets = document.querySelectorAll('.hero-title, .hero-subtitle, .card-title, .card p, .card-link, .main-content h1, .main-content > p, #back-to-top, .link-name, .link-desc');
+    var targets = document.querySelectorAll('.hero-title, .hero-subtitle, .card-title, .card p, .card-link, .main-content h1, .main-content > p, #back-to-top, .link-name, .link-desc, .main-content li a, .main-content strong');
     targets.forEach(function(el) {
       var txt = el.textContent.trim();
       var key = norm(txt);
-      if (lang === 'ja' && normContentTr[key]) { el.setAttribute('data-en', txt); el.textContent = normContentTr[key].ja; }
-      else if (lang === 'en') { var en = el.getAttribute('data-en') || reverseContentTr[txt]; if (en) { el.textContent = en; el.removeAttribute('data-en'); } }
+      /* Check both contentTr (normalized) and nav translations */
+      if (lang === 'ja') {
+        if (normContentTr[key]) { el.setAttribute('data-en', txt); el.textContent = normContentTr[key].ja; }
+        else if (translations[txt]) { el.setAttribute('data-en', txt); el.textContent = translations[txt]; }
+      }
+      else if (lang === 'en') { var en = el.getAttribute('data-en') || reverseContentTr[txt] || reverseTr[txt]; if (en) { el.textContent = en; el.removeAttribute('data-en'); } }
     });
   }
   if (currentLang === 'ja') applyNavLang('ja');
