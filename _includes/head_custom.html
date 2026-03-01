@@ -1,6 +1,7 @@
 <!-- Page metadata for JS -->
 <meta name="page-lang" content="{{ page.lang | default: '' }}">
 <meta name="page-lang-pair" content="{{ page.lang_pair | default: '' }}">
+<meta name="page-source-path" content="{{ page.path }}">
 
 <!-- Mona Sans Variable Font -->
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -72,6 +73,13 @@ hr { opacity: 0.15; }
 .card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-1px); }
 .card-title { margin-top: 0 !important; margin-bottom: 0.4rem !important; }
 .card-link { display: block; font-weight: 500; margin-top: 0.3rem; font-size: 0.95rem; }
+
+/* ===== Download button ===== */
+.dl-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.9rem; border-radius: 8px; font-size: 0.82rem; font-weight: 500; text-decoration: none !important; border: 1px solid rgba(255,255,255,0.12); color: #8b949e; background: rgba(255,255,255,0.04); transition: all 0.15s ease; margin-bottom: 1.5rem; }
+.dl-btn:hover { color: #e6edf3; border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.08); }
+.dl-btn svg { width: 15px; height: 15px; fill: currentColor; }
+html[data-theme="light"] .dl-btn { color: #57606a; border-color: #e1e4e8; background: #f6f8fa; }
+html[data-theme="light"] .dl-btn:hover { color: #0969da; border-color: #0969da; background: rgba(9,105,218,0.04); }
 
 /* ===== Changelog chips ===== */
 .changelog-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.5rem 0 0.75rem; align-items: center; }
@@ -336,5 +344,25 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.nav-list-expander').forEach(function(btn) {
     btn.addEventListener('click', function() { setTimeout(saveNavState, 50); });
   });
+
+  /* --- Download button --- */
+  var srcPath = document.querySelector('meta[name="page-source-path"]');
+  if (srcPath && srcPath.content) {
+    var rawUrl = 'https://raw.githubusercontent.com/theomonfort/theomonfort/main/' + srcPath.content;
+    var fname = srcPath.content.split('/').pop();
+    var dlSvg = '<svg viewBox="0 0 16 16"><path d="M2.75 14A1.75 1.75 0 0 1 1 12.25v-2.5a.75.75 0 0 1 1.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 1.5 0v2.5A1.75 1.75 0 0 1 13.25 14ZM7.25 7.689V2a.75.75 0 0 1 1.5 0v5.689l1.97-1.969a.749.749 0 1 1 1.06 1.06l-3.25 3.25a.749.749 0 0 1-1.06 0L4.22 6.78a.749.749 0 1 1 1.06-1.06l1.97 1.969Z"/></svg>';
+    var mainContent = document.getElementById('main-content');
+    if (mainContent) {
+      var h1 = mainContent.querySelector('h1');
+      var target = h1 ? h1.nextElementSibling : mainContent.firstChild;
+      var dlLink = document.createElement('a');
+      dlLink.className = 'dl-btn';
+      dlLink.href = rawUrl;
+      dlLink.setAttribute('download', fname);
+      dlLink.innerHTML = dlSvg + ' Download ' + fname;
+      if (target) mainContent.insertBefore(dlLink, target);
+      else mainContent.appendChild(dlLink);
+    }
+  }
 });
 </script>
