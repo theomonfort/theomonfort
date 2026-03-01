@@ -2,7 +2,7 @@
 title: Agentic Workflows
 layout: default
 parent: Presentations
-nav_order: 3
+nav_order: 2
 ---
 
 # GitHub Agentic Workflows

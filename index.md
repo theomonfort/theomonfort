@@ -24,11 +24,4 @@ Stay up to date with the latest GitHub changelog highlights.
 In-depth guides and walkthroughs for GitHub features.
 
 [Copilot CLI]({{ site.baseurl }}{% link 40-presentations/41-Copilot/41.01-github-cli/copilot-cli.md %}){: .btn .btn-blue .fs-5 .mb-4 .mb-md-0 .mr-2 }
-[Copilot CLI (日本語)]({{ site.baseurl }}{% link 40-presentations/41-Copilot/41.01-github-cli/copilot-cli-jp.md %}){: .btn .btn-blue .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [Agentic Workflows]({{ site.baseurl }}{% link 40-presentations/41-Copilot/41.02-agentic-workflows/github-agentic-workflows.md %}){: .btn .btn-blue .fs-5 .mb-4 .mb-md-0 .mr-2 }
-
----
-
-## 📚 Resources
-
-Additional resources (PDFs and slide decks) are available in the [60-resources](https://github.com/theomonfort/theomonfort/tree/main/60-resources) directory on GitHub.

@@ -3,7 +3,11 @@ title: Copilot CLI
 layout: default
 parent: Presentations
 nav_order: 1
+lang: en
+lang_pair: /40-presentations/41-Copilot/41.01-github-cli/copilot-cli-jp.html
 ---
+
+{% include lang-toggle.html %}
 
 # GitHub Copilot CLI
 
