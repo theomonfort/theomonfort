@@ -15,7 +15,7 @@ Welcome! This site hosts curated news and presentations about GitHub products an
 
 Stay up to date with the latest GitHub changelog highlights.
 
-[Changelog Updates]({% link 10-news/11-changelog/11.01-english/2026-02-14_to_2026-02-27-changelog.md %}){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[Changelog Updates]({{ site.baseurl }}{% link 10-news/11-changelog/11.01-english/2026-02-14_to_2026-02-27-changelog.md %}){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 
 ---
 
@@ -23,9 +23,9 @@ Stay up to date with the latest GitHub changelog highlights.
 
 In-depth guides and walkthroughs for GitHub features.
 
-[Copilot CLI]({% link 40-presentations/41-Copilot/41.01-github-cli/copilot-cli.md %}){: .btn .btn-blue .fs-5 .mb-4 .mb-md-0 .mr-2 }
-[Copilot CLI (日本語)]({% link 40-presentations/41-Copilot/41.01-github-cli/copilot-cli-jp.md %}){: .btn .btn-blue .fs-5 .mb-4 .mb-md-0 .mr-2 }
-[Agentic Workflows]({% link 40-presentations/41-Copilot/41.02-agentic-workflows/github-agentic-workflows.md %}){: .btn .btn-blue .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[Copilot CLI]({{ site.baseurl }}{% link 40-presentations/41-Copilot/41.01-github-cli/copilot-cli.md %}){: .btn .btn-blue .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[Copilot CLI (日本語)]({{ site.baseurl }}{% link 40-presentations/41-Copilot/41.01-github-cli/copilot-cli-jp.md %}){: .btn .btn-blue .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[Agentic Workflows]({{ site.baseurl }}{% link 40-presentations/41-Copilot/41.02-agentic-workflows/github-agentic-workflows.md %}){: .btn .btn-blue .fs-5 .mb-4 .mb-md-0 .mr-2 }
 
 ---
 
