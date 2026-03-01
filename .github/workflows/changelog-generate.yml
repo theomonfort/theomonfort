@@ -28,8 +28,8 @@ jobs:
 
       - name: Clean previous changelog output
         run: |
-          rm -f changelog/english/*.md
-          rm -f changelog/japanese/*.md
+          rm -f changelog/*-changelog.md
+          rm -f changelog/*-changelog-jp.md
           rm -f changelog/ppt-english/*.pptx
           rm -f changelog/ppt-japanese/*.pptx
           rm -f changelog/changelog-data.json

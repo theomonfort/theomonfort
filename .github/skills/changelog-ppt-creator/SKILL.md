@@ -39,8 +39,8 @@ python3 scripts/fetch-changelog.py [--days 14]
 
 | Path | Description |
 |------|-------------|
-| `changelog/english/FROM_to_TO-changelog.md` | English markdown summary |
-| `changelog/japanese/FROM_to_TO-changelog.md` | Japanese markdown summary |
+| `changelog/FROM_to_TO-changelog.md` | English markdown summary |
+| `changelog/FROM_to_TO-changelog-jp.md` | Japanese markdown summary |
 | `changelog/ppt-english/FROM_to_TO-changelog.pptx` | English PowerPoint |
 | `changelog/ppt-japanese/FROM_to_TO-changelog.pptx` | Japanese PowerPoint |
 

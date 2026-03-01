@@ -353,7 +353,7 @@ def generate_markdown(entries: list[dict], lang: str = "en", file_stem: str = ""
             "lang: ja",
         ]
         if file_stem:
-            fm_lines.append(f"lang_pair: /changelog/english/{file_stem}-changelog.html")
+            fm_lines.append(f"lang_pair: /changelog/{file_stem}-changelog.html")
         fm_lines.append("---\n")
         lines = ["\n".join(fm_lines)]
         lines += [f"# GitHub Changelog アップデート\n", f"**生成日**: {today}\n"]
@@ -367,7 +367,7 @@ def generate_markdown(entries: list[dict], lang: str = "en", file_stem: str = ""
             "lang: en",
         ]
         if file_stem:
-            fm_lines.append(f"lang_pair: /changelog/japanese/{file_stem}-changelog.html")
+            fm_lines.append(f"lang_pair: /changelog/{file_stem}-changelog-jp.html")
         fm_lines.append("---\n")
         lines = ["\n".join(fm_lines)]
         lines += [f"# GitHub Changelog Updates\n", f"**Generated**: {today}\n"]
@@ -744,12 +744,10 @@ def main():
 
     output_dir = Path(args.output_dir) if args.output_dir else REPO_ROOT / "changelog"
     images_dir = output_dir / "images"
-    en_dir = output_dir / "english"
-    ja_dir = output_dir / "japanese"
     ppt_en_dir = output_dir / "ppt-english"
     ppt_ja_dir = output_dir / "ppt-japanese"
 
-    for d in [images_dir, en_dir, ja_dir, ppt_en_dir, ppt_ja_dir]:
+    for d in [images_dir, ppt_en_dir, ppt_ja_dir]:
         d.mkdir(parents=True, exist_ok=True)
 
     # --- Phase 1: Fetch RSS ---
@@ -801,13 +799,13 @@ def main():
     file_stem = f"{date_from}_to_{date_to}"
 
     en_md = generate_markdown(entries, "en", file_stem)
-    en_path = en_dir / f"{file_stem}-changelog.md"
+    en_path = output_dir / f"{file_stem}-changelog.md"
     en_path.write_text(en_md, encoding="utf-8")
     print(f"Saved English markdown: {en_path}")
 
     if has_translations:
         ja_md = generate_markdown(entries, "ja", file_stem)
-        ja_path = ja_dir / f"{file_stem}-changelog.md"
+        ja_path = output_dir / f"{file_stem}-changelog-jp.md"
         ja_path.write_text(ja_md, encoding="utf-8")
         print(f"Saved Japanese markdown: {ja_path}")
 

@@ -25,7 +25,7 @@ Senior Solutions Architect at GitHub — I share notes on GitHub products, demos
 
 Curated changelog highlights from the GitHub ecosystem.
 
-[Browse changelog →]({{ site.baseurl }}{% link changelog/english/2026-02-14_to_2026-02-27-changelog.md %}){: .card-link }
+[Browse changelog →]({{ site.baseurl }}{% link changelog/2026-02-14_to_2026-02-27-changelog.md %}){: .card-link }
 
 </div>
 

@@ -708,12 +708,10 @@ def main():
     args = parser.parse_args()
 
     output_dir = Path(args.output_dir) if args.output_dir else REPO_ROOT / "changelog"
-    en_dir = output_dir / "english"
-    ja_dir = output_dir / "japanese"
     ppt_en_dir = output_dir / "ppt-english"
     ppt_ja_dir = output_dir / "ppt-japanese"
 
-    for d in [en_dir, ja_dir, ppt_en_dir, ppt_ja_dir]:
+    for d in [ppt_en_dir, ppt_ja_dir]:
         d.mkdir(parents=True, exist_ok=True)
 
     # Fetch entries
@@ -760,13 +758,13 @@ def main():
 
     # Generate English markdown
     en_md = generate_markdown(entries, "en")
-    en_path = en_dir / f"{file_stem}-changelog.md"
+    en_path = output_dir / f"{file_stem}-changelog.md"
     en_path.write_text(en_md, encoding="utf-8")
     print(f"Saved English markdown: {en_path}")
 
     # Generate Japanese markdown
     ja_md = generate_markdown(entries, "ja")
-    ja_path = ja_dir / f"{file_stem}-changelog.md"
+    ja_path = output_dir / f"{file_stem}-changelog-jp.md"
     ja_path.write_text(ja_md, encoding="utf-8")
     print(f"Saved Japanese markdown: {ja_path}")
 
