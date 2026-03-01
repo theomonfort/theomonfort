@@ -341,14 +341,15 @@ def generate_markdown(entries: list[dict], lang: str = "en", file_stem: str = ""
 
     # Jekyll frontmatter for GitHub Pages
     dates = [e["date"] for e in entries]
-    date_from = min(dates).strftime("%b %d")
-    date_to = max(dates).strftime("%b %d, %Y")
+    date_from_long = min(dates).strftime("%B %d")
+    date_to_long = max(dates).strftime("%B %d, %Y")
+    date_from_short = min(dates).strftime("%b %d")
+    date_to_short = max(dates).strftime("%b %d, %Y")
     if lang == "ja":
         fm_lines = [
             "---",
-            f"title: 変更履歴 ({date_from}–{date_to})",
+            "title: Changelog",
             "layout: default",
-            "parent: Changelog",
             "nav_exclude: true",
             "lang: ja",
         ]
@@ -356,21 +357,22 @@ def generate_markdown(entries: list[dict], lang: str = "en", file_stem: str = ""
             fm_lines.append(f"lang_pair: /changelog/{file_stem}-changelog.html")
         fm_lines.append("---\n")
         lines = ["\n".join(fm_lines)]
-        lines += [f"# GitHub Changelog アップデート\n", f"**生成日**: {today}\n"]
+        lines += [f"# 📰 GitHub Changelog アップデート\n",
+                  f"> **{date_from_long} \u2013 {date_to_long}** 対象 · {today} 生成\n"]
     else:
         fm_lines = [
             "---",
-            f"title: Changelog ({date_from}–{date_to})",
+            "title: Changelog",
             "layout: default",
-            "parent: Changelog",
-            "nav_order: 1",
+            "nav_order: 2",
             "lang: en",
         ]
         if file_stem:
             fm_lines.append(f"lang_pair: /changelog/{file_stem}-changelog-jp.html")
         fm_lines.append("---\n")
         lines = ["\n".join(fm_lines)]
-        lines += [f"# GitHub Changelog Updates\n", f"**Generated**: {today}\n"]
+        lines += [f"# 📰 GitHub Changelog Updates\n",
+                  f"> Covering **{date_from_long} \u2013 {date_to_long}** \u00b7 Generated on {today}\n"]
 
     for entry in entries:
         title = entry.get("title_ja", entry["title"]) if lang == "ja" else entry["title"]
