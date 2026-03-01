@@ -7,8 +7,6 @@ lang: en
 lang_pair: /40-presentations/41-Copilot/41.01-github-cli/copilot-cli-jp.html
 ---
 
-{% include lang-toggle.html %}
-
 # GitHub Copilot CLI
 
 📖 **Official docs**: [Install Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli)

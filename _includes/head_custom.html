@@ -1,19 +1,346 @@
+<!-- Page metadata for JS -->
+<meta name="page-lang" content="{{ page.lang | default: '' }}">
+<meta name="page-lang-pair" content="{{ page.lang_pair | default: '' }}">
+
+<!-- Mona Sans Variable Font -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <style>
-.lang-toggle {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 1rem;
+@font-face {
+  font-family: 'Mona Sans';
+  src: url('https://cdn.jsdelivr.net/npm/@fontsource-variable/mona-sans/files/mona-sans-latin-wght-normal.woff2') format('woff2');
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
 }
-.lang-toggle .btn {
-  font-size: 0.85rem;
-  padding: 0.3rem 0.8rem;
+
+/* Apply Mona Sans globally */
+body, .site-title, .nav-list .nav-list-link, .search-input,
+.btn, .site-button, .main-content, .breadcrumb-nav,
+h1, h2, h3, h4, h5, h6, p, li, td, th, blockquote,
+.site-footer, label, input, summary {
+  font-family: 'Mona Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+}
+
+/* Toggle buttons in aux nav */
+.toggle-btn {
+  background: none;
   border: 1px solid #768390;
   border-radius: 6px;
   color: #768390;
-  text-decoration: none;
+  cursor: pointer;
+  font-family: 'Mona Sans', sans-serif !important;
+  font-size: 0.78rem;
+  padding: 4px 10px;
+  transition: border-color 0.2s, color 0.2s;
+  white-space: nowrap;
 }
-.lang-toggle .btn:hover {
+.toggle-btn:hover {
   border-color: #adbac7;
   color: #adbac7;
 }
+
+/* ===== Light theme overrides (base is dark via _config.yml) ===== */
+html[data-theme="light"] body {
+  background-color: #ffffff;
+  color: #1f2328;
+}
+html[data-theme="light"] .side-bar {
+  background-color: #f6f8fa;
+  border-right: 1px solid #d0d7de;
+}
+html[data-theme="light"] .site-header {
+  border-bottom-color: #d0d7de;
+}
+html[data-theme="light"] .site-title {
+  color: #1f2328;
+}
+html[data-theme="light"] .nav-list-link {
+  color: #1f2328;
+}
+html[data-theme="light"] .nav-list-link:hover {
+  background-color: #eaeef2;
+}
+html[data-theme="light"] .nav-list-link.active {
+  font-weight: 600;
+}
+html[data-theme="light"] .nav-list-expander {
+  color: #656d76;
+}
+html[data-theme="light"] .main,
+html[data-theme="light"] .main-header {
+  background-color: #ffffff;
+}
+html[data-theme="light"] .main-header {
+  border-bottom-color: #d0d7de;
+}
+/* Search */
+html[data-theme="light"] .search-input {
+  background-color: #f6f8fa;
+  border-color: #d0d7de;
+  color: #1f2328;
+}
+html[data-theme="light"] .search-input::placeholder {
+  color: #656d76;
+}
+html[data-theme="light"] .search-results {
+  background-color: #ffffff;
+  border-color: #d0d7de;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+}
+html[data-theme="light"] .search-results .search-result {
+  color: #1f2328;
+}
+html[data-theme="light"] .search-results .search-result-title {
+  color: #0969da;
+}
+/* Links */
+html[data-theme="light"] a,
+html[data-theme="light"] .main-content a {
+  color: #0969da;
+}
+html[data-theme="light"] .site-title:hover {
+  color: #0969da;
+}
+/* Code */
+html[data-theme="light"] code {
+  background-color: #eff1f3;
+  color: #1f2328;
+}
+html[data-theme="light"] pre.highlight,
+html[data-theme="light"] .highlight pre,
+html[data-theme="light"] pre {
+  background-color: #f6f8fa;
+  color: #1f2328;
+}
+html[data-theme="light"] .highlight code {
+  background-color: transparent;
+}
+/* Syntax highlight token colors for light mode */
+html[data-theme="light"] .highlight .c,
+html[data-theme="light"] .highlight .cm,
+html[data-theme="light"] .highlight .c1 { color: #6a737d; }
+html[data-theme="light"] .highlight .k,
+html[data-theme="light"] .highlight .kd,
+html[data-theme="light"] .highlight .kn { color: #d73a49; }
+html[data-theme="light"] .highlight .s,
+html[data-theme="light"] .highlight .s1,
+html[data-theme="light"] .highlight .s2 { color: #032f62; }
+html[data-theme="light"] .highlight .nb { color: #005cc5; }
+html[data-theme="light"] .highlight .nf { color: #6f42c1; }
+html[data-theme="light"] .highlight .o { color: #d73a49; }
+html[data-theme="light"] .highlight .nt { color: #22863a; }
+/* Tables */
+html[data-theme="light"] th,
+html[data-theme="light"] td {
+  border-color: #d0d7de;
+  color: #1f2328;
+}
+html[data-theme="light"] th {
+  background-color: #f6f8fa;
+}
+html[data-theme="light"] td {
+  background-color: #ffffff;
+}
+/* Borders & separators */
+html[data-theme="light"] hr {
+  border-color: #d0d7de;
+}
+/* Breadcrumb */
+html[data-theme="light"] .breadcrumb-nav {
+  color: #656d76;
+}
+/* Footer */
+html[data-theme="light"] .site-footer {
+  border-top-color: #d0d7de;
+  color: #656d76;
+}
+html[data-theme="light"] .site-footer a {
+  color: #0969da;
+}
+/* Blockquotes */
+html[data-theme="light"] blockquote {
+  border-left-color: #d0d7de;
+  color: #57606a;
+}
+/* Buttons */
+html[data-theme="light"] .site-button,
+html[data-theme="light"] .btn {
+  color: #1f2328;
+  border-color: #d0d7de;
+}
+html[data-theme="light"] .site-button:hover,
+html[data-theme="light"] .btn:hover {
+  color: #0969da;
+  border-color: #0969da;
+}
+html[data-theme="light"] .btn-primary {
+  background-color: #2da44e;
+  color: #ffffff !important;
+  border-color: #2da44e;
+}
+html[data-theme="light"] .btn-primary:hover {
+  background-color: #218838;
+  border-color: #218838;
+}
+html[data-theme="light"] .btn-blue {
+  background-color: #0969da;
+  color: #ffffff !important;
+  border-color: #0969da;
+}
+html[data-theme="light"] .btn-blue:hover {
+  background-color: #0550ae;
+  border-color: #0550ae;
+}
+/* Toggle buttons adapt to light mode */
+html[data-theme="light"] .toggle-btn {
+  color: #656d76;
+  border-color: #d0d7de;
+}
+html[data-theme="light"] .toggle-btn:hover {
+  color: #1f2328;
+  border-color: #1f2328;
+}
+/* Back to top */
+html[data-theme="light"] .back-to-top {
+  color: #656d76;
+  background-color: #ffffff;
+  border-color: #d0d7de;
+}
+/* Copy code button */
+html[data-theme="light"] .copy-code-button {
+  color: #656d76;
+  background-color: #f6f8fa;
+  border-color: #d0d7de;
+}
+/* Label / Badge */
+html[data-theme="light"] .label {
+  color: #1f2328;
+}
 </style>
+
+<!-- Immediate theme init (prevents flash) -->
+<script>
+(function(){
+  var t = localStorage.getItem('jtd-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+
+<!-- Toggle logic -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var auxNav = document.querySelector('.aux-nav-list');
+  if (!auxNav) return;
+
+  var baseurl = '{{ site.baseurl }}';
+  var pageLang = document.querySelector('meta[name="page-lang"]').content;
+  var pageLangPair = document.querySelector('meta[name="page-lang-pair"]').content;
+
+  /* --- Build language pair map from all site pages --- */
+  var langPairs = {
+    {% for p in site.pages %}{% if p.lang_pair %}'{{ p.url | replace: ".md", ".html" }}':'{{ p.lang_pair }}',{% endif %}{% endfor %}
+  };
+
+  /* --- Nav translations --- */
+  var translations = {
+    'Home': 'ホーム',
+    'News': 'ニュース',
+    'Presentations': 'プレゼンテーション',
+    'Changelog (Feb 14\u201327, 2026)': '変更履歴 (2026年2月14日\u201327日)',
+    'Copilot CLI': 'Copilot CLI',
+    'Agentic Workflows': 'Agentic Workflows'
+  };
+  var reverseTr = {};
+  for (var k in translations) reverseTr[translations[k]] = k;
+
+  /* --- Language Toggle --- */
+  var currentLang = pageLang || localStorage.getItem('jtd-lang') || 'en';
+  localStorage.setItem('jtd-lang', currentLang);
+
+  var langBtn = document.createElement('button');
+  langBtn.className = 'toggle-btn';
+  langBtn.setAttribute('aria-label', 'Toggle language');
+  langBtn.textContent = currentLang === 'en' ? '\uD83C\uDDEF\uD83C\uDDF5 日本語' : '\uD83C\uDDEC\uD83C\uDDE7 English';
+
+  langBtn.addEventListener('click', function() {
+    var newLang = currentLang === 'en' ? 'ja' : 'en';
+    localStorage.setItem('jtd-lang', newLang);
+    if (pageLangPair) {
+      window.location.href = baseurl + pageLangPair;
+    } else {
+      currentLang = newLang;
+      langBtn.textContent = newLang === 'en' ? '\uD83C\uDDEF\uD83C\uDDF5 日本語' : '\uD83C\uDDEC\uD83C\uDDE7 English';
+      applyNavLang(newLang);
+    }
+  });
+
+  var langLi = document.createElement('li');
+  langLi.className = 'aux-nav-list-item';
+  langLi.appendChild(langBtn);
+  auxNav.insertBefore(langLi, auxNav.firstChild);
+
+  /* --- Theme Toggle --- */
+  var currentTheme = localStorage.getItem('jtd-theme') || 'dark';
+  var themeBtn = document.createElement('button');
+  themeBtn.className = 'toggle-btn';
+  themeBtn.setAttribute('aria-label', 'Toggle color theme');
+  themeBtn.textContent = currentTheme === 'dark' ? '\u2600\uFE0F Light' : '\uD83C\uDF19 Dark';
+
+  themeBtn.addEventListener('click', function() {
+    var t = document.documentElement.getAttribute('data-theme');
+    var n = t === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', n);
+    localStorage.setItem('jtd-theme', n);
+    themeBtn.textContent = n === 'dark' ? '\u2600\uFE0F Light' : '\uD83C\uDF19 Dark';
+  });
+
+  var themeLi = document.createElement('li');
+  themeLi.className = 'aux-nav-list-item';
+  themeLi.appendChild(themeBtn);
+  auxNav.insertBefore(themeLi, langLi.nextSibling);
+
+  /* --- Apply nav translations --- */
+  function applyNavLang(lang) {
+    var links = document.querySelectorAll('.nav-list-link');
+    links.forEach(function(el) {
+      var txt = el.textContent.trim();
+      if (lang === 'ja') {
+        if (translations[txt]) {
+          el.setAttribute('data-en', txt);
+          el.textContent = translations[txt];
+        }
+      } else {
+        var en = el.getAttribute('data-en') || reverseTr[txt];
+        if (en) { el.textContent = en; el.removeAttribute('data-en'); }
+      }
+    });
+    /* Update nav links to point to correct language version */
+    links.forEach(function(el) {
+      var href = el.getAttribute('href');
+      if (!href) return;
+      var path = href.replace(baseurl, '');
+      if (lang === 'ja' && langPairs[path]) {
+        el.setAttribute('data-href-en', href);
+        el.setAttribute('href', baseurl + langPairs[path]);
+      } else if (lang === 'en' && el.getAttribute('data-href-en')) {
+        el.setAttribute('href', el.getAttribute('data-href-en'));
+        el.removeAttribute('data-href-en');
+      }
+    });
+    /* Breadcrumbs */
+    document.querySelectorAll('.breadcrumb-nav-list-item span, .breadcrumb-nav-list-item a').forEach(function(el) {
+      var txt = el.textContent.trim();
+      if (lang === 'ja' && translations[txt]) {
+        el.setAttribute('data-en', txt);
+        el.textContent = translations[txt];
+      } else if (lang === 'en') {
+        var en = el.getAttribute('data-en') || reverseTr[txt];
+        if (en) { el.textContent = en; el.removeAttribute('data-en'); }
+      }
+    });
+  }
+
+  /* Apply language on page load */
+  if (currentLang === 'ja') applyNavLang('ja');
+});
+</script>
