@@ -1,3 +1,10 @@
+---
+title: Copilot CLI (日本語)
+layout: default
+parent: Presentations
+nav_order: 2
+---
+
 # GitHub Copilot CLI
 
 📖 **公式ドキュメント**: [Copilot CLIのインストール](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli)

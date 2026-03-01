@@ -1,3 +1,10 @@
+---
+title: Agentic Workflows
+layout: default
+parent: Presentations
+nav_order: 3
+---
+
 # GitHub Agentic Workflows
 
 ## What Are Agentic Workflows?

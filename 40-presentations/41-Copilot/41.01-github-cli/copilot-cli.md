@@ -1,3 +1,10 @@
+---
+title: Copilot CLI
+layout: default
+parent: Presentations
+nav_order: 1
+---
+
 # GitHub Copilot CLI
 
 📖 **Official docs**: [Install Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli)
