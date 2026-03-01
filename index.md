@@ -36,8 +36,8 @@ Curated changelog highlights from the GitHub ecosystem.
 
 In-depth guides and live-demo material.
 
-[Copilot CLI →]({{ site.baseurl }}{% link 40-presentations/41-Copilot/41.01-github-cli/copilot-cli.md %}){: .card-link }
-[Agentic Workflows →]({{ site.baseurl }}{% link 40-presentations/41-Copilot/41.02-agentic-workflows/github-agentic-workflows.md %}){: .card-link }
+[Copilot CLI →]({{ site.baseurl }}{% link github-copilot/copilot-cli.md %}){: .card-link }
+[Agentic Workflows →]({{ site.baseurl }}{% link github-copilot/agentic-workflows.md %}){: .card-link }
 
 </div>
 

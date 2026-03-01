@@ -1,10 +1,10 @@
 ---
 title: Copilot CLI
 layout: default
-parent: Presentations
+parent: GitHub Copilot
 nav_exclude: true
 lang: ja
-lang_pair: /40-presentations/41-Copilot/41.01-github-cli/copilot-cli.html
+lang_pair: /github-copilot/copilot-cli.html
 ---
 
 # GitHub Copilot CLI
