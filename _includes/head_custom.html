@@ -380,12 +380,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     /* Translate page content */
     var targets = document.querySelectorAll('.hero-title, .hero-subtitle, .card-title, .card p, .card-link, .main-content h1, .main-content > p, #back-to-top, .link-name, .link-desc, .main-content li a, .main-content strong');
-    console.log('[i18n] applyNavLang called with lang=' + lang + ', targets found=' + targets.length);
     targets.forEach(function(el) {
       var txt = el.textContent.trim();
       var key = norm(txt);
-      var match = normContentTr[key] ? 'contentTr' : (translations[txt] ? 'navTr' : 'NONE');
-      if (match === 'NONE' && txt.length < 100) console.log('[i18n] NO MATCH for: "' + txt.substring(0,80) + '" tag=' + el.tagName + ' class=' + el.className);
       /* Check both contentTr (normalized) and nav translations */
       if (lang === 'ja') {
         if (normContentTr[key]) { el.setAttribute('data-en', txt); el.textContent = normContentTr[key].ja; }
