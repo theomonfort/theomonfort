@@ -2,6 +2,8 @@
 title: Home
 layout: default
 nav_order: 1
+lang: en
+lang_pair: /index-jp.html
 ---
 
 <div class="hero" markdown="1">

@@ -2,6 +2,8 @@
 title: Links
 layout: default
 nav_order: 8
+lang: en
+lang_pair: /links/index-jp.html
 ---
 
 # Useful Links
