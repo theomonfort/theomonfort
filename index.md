@@ -22,6 +22,61 @@ Senior Solutions Architect at GitHub, based in Japan — covering Automotive & M
 
 <div class="card" markdown="1">
 
+### 🤖 Copilot
+{: .card-title }
+
+CLI, VS Code, custom instructions, PR reviews, and agentic workflows.
+
+[Explore Copilot →]({{ site.baseurl }}{% link github-copilot/index.md %}){: .card-link }
+
+</div>
+
+<div class="card" markdown="1">
+
+### ⚡ Actions
+{: .card-title }
+
+CI/CD fundamentals, reusable workflows, and security hardening.
+
+[Explore Actions →]({{ site.baseurl }}{% link github-actions/index.md %}){: .card-link }
+
+</div>
+
+<div class="card" markdown="1">
+
+### ☁️ Enterprise Cloud
+{: .card-title }
+
+SSO/SCIM setup, governance at scale, and migration guides.
+
+[Explore GHEC →]({{ site.baseurl }}{% link ghec/index.md %}){: .card-link }
+
+</div>
+
+<div class="card" markdown="1">
+
+### 🏢 Enterprise Server
+{: .card-title }
+
+Administration, backup/restore, high availability, and DR.
+
+[Explore GHES →]({{ site.baseurl }}{% link ghes/index.md %}){: .card-link }
+
+</div>
+
+<div class="card" markdown="1">
+
+### 🛡️ Advanced Security
+{: .card-title }
+
+Code scanning, secret scanning, Dependabot, and supply chain security.
+
+[Explore GHAS →]({{ site.baseurl }}{% link ghas/index.md %}){: .card-link }
+
+</div>
+
+<div class="card" markdown="1">
+
 ### 📰 Changelog
 {: .card-title }
 
