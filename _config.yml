@@ -1,5 +1,5 @@
-title: Theo Monfort
-description: News & Presentations
+title: GitHub Copilot Toolkit
+description: Recommended links, skills, agentic workflows & settings for GitHub Copilot
 remote_theme: just-the-docs/just-the-docs@v0.10.1
 
 url: "https://theomonfort.github.io"
@@ -18,9 +18,7 @@ back_to_top_text: "Back to top"
 footer_content: "Built with <a href=\"https://github.com/just-the-docs/just-the-docs\">Just the Docs</a> · <a href=\"https://github.com/theomonfort\">@theomonfort</a>"
 
 exclude:
-  - scripts/
   - .github/
-  - "*.pptx"
   - LICENSE
   - README.md
   - Gemfile
