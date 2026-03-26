@@ -88,9 +88,26 @@ hr { opacity: 0.15; }
   background: rgba(0,0,0,0.3); border-radius: 6px;
   word-break: break-all; white-space: pre-wrap;
   color: #e6edf3; user-select: all; cursor: text;
+  flex: 1; min-width: 0;
 }
-html[data-theme="light"] .skill-install { border-color: #e1e4e8; background: #f6f8fa; }
+.install-code-wrap {
+  display: flex; align-items: stretch; gap: 0; border-radius: 6px; overflow: hidden;
+}
+.copy-btn {
+  font-family: 'Mona Sans', sans-serif; font-size: 0.72rem; font-weight: 600;
+  padding: 0.4rem 0.7rem; border: none; cursor: pointer;
+  background: rgba(255,255,255,0.08); color: #8b949e;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap; flex-shrink: 0;
+}
+.copy-btn:hover { background: rgba(44,132,250,0.2); color: #e6edf3; }
+.copy-btn.copied { background: rgba(52,199,89,0.2); color: #34c759; }
+html[data-theme="light"] .install-code-wrap { border: 1px solid #e1e4e8; }
 html[data-theme="light"] .install-code { background: #eaeef2; color: #1f2328; }
+html[data-theme="light"] .copy-btn { background: #f6f8fa; color: #57606a; border-left: 1px solid #e1e4e8; }
+html[data-theme="light"] .copy-btn:hover { background: rgba(9,105,218,0.1); color: #0969da; }
+html[data-theme="light"] .copy-btn.copied { background: rgba(22,163,74,0.1); color: #16a34a; }
+html[data-theme="light"] .skill-install { border-color: #e1e4e8; background: #f6f8fa; }
 
 /* ===== Light theme overrides ===== */
 html[data-theme="light"] body { background-color: #ffffff; color: #1f2328; }
@@ -193,4 +210,13 @@ document.addEventListener('DOMContentLoaded', function() {
   var gh = mkLink('View on GitHub', 'https://github.com/theomonfort/theomonfort', ghSvg);
   auxNav.appendChild(gh.li);
 });
+
+function copyCmd(btn) {
+  var code = btn.parentElement.querySelector('.install-code').textContent;
+  navigator.clipboard.writeText(code).then(function() {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
 </script>

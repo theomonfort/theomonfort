@@ -28,9 +28,9 @@ These skills work together as a complete plan → implement → validate lifecyc
   </div>
   <div class="skill-install">
     <span class="install-label">Install to your project:</span>
-    <div class="install-code">mkdir -p .github/skills/create-plan && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/create-plan/SKILL.md -o .github/skills/create-plan/SKILL.md</div>
+    <div class="install-code-wrap"><div class="install-code">mkdir -p .github/skills/create-plan && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/create-plan/SKILL.md -o .github/skills/create-plan/SKILL.md</div><button class="copy-btn" onclick="event.stopPropagation();copyCmd(this)">Copy</button></div>
     <span class="install-label">Or install globally:</span>
-    <div class="install-code">mkdir -p ~/.copilot/skills/create-plan && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/create-plan/SKILL.md -o ~/.copilot/skills/create-plan/SKILL.md</div>
+    <div class="install-code-wrap"><div class="install-code">mkdir -p ~/.copilot/skills/create-plan && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/create-plan/SKILL.md -o ~/.copilot/skills/create-plan/SKILL.md</div><button class="copy-btn" onclick="event.stopPropagation();copyCmd(this)">Copy</button></div>
   </div>
 </div>
 
@@ -44,9 +44,9 @@ These skills work together as a complete plan → implement → validate lifecyc
   </div>
   <div class="skill-install">
     <span class="install-label">Install to your project:</span>
-    <div class="install-code">mkdir -p .github/skills/iterate-plan && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/iterate-plan/SKILL.md -o .github/skills/iterate-plan/SKILL.md</div>
+    <div class="install-code-wrap"><div class="install-code">mkdir -p .github/skills/iterate-plan && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/iterate-plan/SKILL.md -o .github/skills/iterate-plan/SKILL.md</div><button class="copy-btn" onclick="event.stopPropagation();copyCmd(this)">Copy</button></div>
     <span class="install-label">Or install globally:</span>
-    <div class="install-code">mkdir -p ~/.copilot/skills/iterate-plan && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/iterate-plan/SKILL.md -o ~/.copilot/skills/iterate-plan/SKILL.md</div>
+    <div class="install-code-wrap"><div class="install-code">mkdir -p ~/.copilot/skills/iterate-plan && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/iterate-plan/SKILL.md -o ~/.copilot/skills/iterate-plan/SKILL.md</div><button class="copy-btn" onclick="event.stopPropagation();copyCmd(this)">Copy</button></div>
   </div>
 </div>
 
@@ -60,9 +60,9 @@ These skills work together as a complete plan → implement → validate lifecyc
   </div>
   <div class="skill-install">
     <span class="install-label">Install to your project:</span>
-    <div class="install-code">mkdir -p .github/skills/implement-plan && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/implement-plan/SKILL.md -o .github/skills/implement-plan/SKILL.md</div>
+    <div class="install-code-wrap"><div class="install-code">mkdir -p .github/skills/implement-plan && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/implement-plan/SKILL.md -o .github/skills/implement-plan/SKILL.md</div><button class="copy-btn" onclick="event.stopPropagation();copyCmd(this)">Copy</button></div>
     <span class="install-label">Or install globally:</span>
-    <div class="install-code">mkdir -p ~/.copilot/skills/implement-plan && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/implement-plan/SKILL.md -o ~/.copilot/skills/implement-plan/SKILL.md</div>
+    <div class="install-code-wrap"><div class="install-code">mkdir -p ~/.copilot/skills/implement-plan && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/implement-plan/SKILL.md -o ~/.copilot/skills/implement-plan/SKILL.md</div><button class="copy-btn" onclick="event.stopPropagation();copyCmd(this)">Copy</button></div>
   </div>
 </div>
 
@@ -76,9 +76,9 @@ These skills work together as a complete plan → implement → validate lifecyc
   </div>
   <div class="skill-install">
     <span class="install-label">Install to your project:</span>
-    <div class="install-code">mkdir -p .github/skills/validate-plan && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/validate-plan/SKILL.md -o .github/skills/validate-plan/SKILL.md</div>
+    <div class="install-code-wrap"><div class="install-code">mkdir -p .github/skills/validate-plan && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/validate-plan/SKILL.md -o .github/skills/validate-plan/SKILL.md</div><button class="copy-btn" onclick="event.stopPropagation();copyCmd(this)">Copy</button></div>
     <span class="install-label">Or install globally:</span>
-    <div class="install-code">mkdir -p ~/.copilot/skills/validate-plan && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/validate-plan/SKILL.md -o ~/.copilot/skills/validate-plan/SKILL.md</div>
+    <div class="install-code-wrap"><div class="install-code">mkdir -p ~/.copilot/skills/validate-plan && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/validate-plan/SKILL.md -o ~/.copilot/skills/validate-plan/SKILL.md</div><button class="copy-btn" onclick="event.stopPropagation();copyCmd(this)">Copy</button></div>
   </div>
 </div>
 
@@ -102,9 +102,9 @@ These skills help you understand codebases and transfer context between sessions
   </div>
   <div class="skill-install">
     <span class="install-label">Install to your project:</span>
-    <div class="install-code">mkdir -p .github/skills/research-codebase && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/research-codebase/SKILL.md -o .github/skills/research-codebase/SKILL.md</div>
+    <div class="install-code-wrap"><div class="install-code">mkdir -p .github/skills/research-codebase && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/research-codebase/SKILL.md -o .github/skills/research-codebase/SKILL.md</div><button class="copy-btn" onclick="event.stopPropagation();copyCmd(this)">Copy</button></div>
     <span class="install-label">Or install globally:</span>
-    <div class="install-code">mkdir -p ~/.copilot/skills/research-codebase && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/research-codebase/SKILL.md -o ~/.copilot/skills/research-codebase/SKILL.md</div>
+    <div class="install-code-wrap"><div class="install-code">mkdir -p ~/.copilot/skills/research-codebase && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/research-codebase/SKILL.md -o ~/.copilot/skills/research-codebase/SKILL.md</div><button class="copy-btn" onclick="event.stopPropagation();copyCmd(this)">Copy</button></div>
   </div>
 </div>
 
@@ -118,9 +118,9 @@ These skills help you understand codebases and transfer context between sessions
   </div>
   <div class="skill-install">
     <span class="install-label">Install to your project:</span>
-    <div class="install-code">mkdir -p .github/skills/create-handoff && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/create-handoff/SKILL.md -o .github/skills/create-handoff/SKILL.md</div>
+    <div class="install-code-wrap"><div class="install-code">mkdir -p .github/skills/create-handoff && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/create-handoff/SKILL.md -o .github/skills/create-handoff/SKILL.md</div><button class="copy-btn" onclick="event.stopPropagation();copyCmd(this)">Copy</button></div>
     <span class="install-label">Or install globally:</span>
-    <div class="install-code">mkdir -p ~/.copilot/skills/create-handoff && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/create-handoff/SKILL.md -o ~/.copilot/skills/create-handoff/SKILL.md</div>
+    <div class="install-code-wrap"><div class="install-code">mkdir -p ~/.copilot/skills/create-handoff && curl -sL https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills/create-handoff/SKILL.md -o ~/.copilot/skills/create-handoff/SKILL.md</div><button class="copy-btn" onclick="event.stopPropagation();copyCmd(this)">Copy</button></div>
   </div>
 </div>
 
