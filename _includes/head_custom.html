@@ -66,6 +66,32 @@ hr { opacity: 0.15; }
 .link-name { font-weight: 600; font-size: 0.95rem; color: #e6edf3; }
 .link-desc { font-size: 0.82rem; opacity: 0.75; line-height: 1.45; }
 
+/* ===== Expandable skill cards ===== */
+.skill-card { cursor: pointer; }
+.skill-card .link-card { margin-bottom: 0; transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s, border-radius 0.2s; }
+.skill-card .skill-install {
+  max-height: 0; overflow: hidden; opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.08); border-top: none;
+  border-radius: 0 0 12px 12px; padding: 0 1.2rem;
+  background: rgba(255,255,255,0.02);
+}
+.skill-card.open .link-card { border-radius: 12px 12px 0 0; border-bottom-color: transparent; }
+.skill-card.open .skill-install { max-height: 400px; opacity: 1; padding: 0.8rem 1.2rem 1rem; }
+.skill-arrow { font-size: 0.7rem; opacity: 0.5; transition: transform 0.2s; display: inline-block; margin-left: 0.3rem; }
+.skill-card.open .skill-arrow { transform: rotate(90deg); }
+.install-label { display: block; font-size: 0.75rem; font-weight: 600; opacity: 0.6; margin-top: 0.5rem; margin-bottom: 0.3rem; }
+.install-label:first-child { margin-top: 0; }
+.install-code {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.72rem; line-height: 1.5; padding: 0.6rem 0.8rem;
+  background: rgba(0,0,0,0.3); border-radius: 6px;
+  word-break: break-all; white-space: pre-wrap;
+  color: #e6edf3; user-select: all; cursor: text;
+}
+html[data-theme="light"] .skill-install { border-color: #e1e4e8; background: #f6f8fa; }
+html[data-theme="light"] .install-code { background: #eaeef2; color: #1f2328; }
+
 /* ===== Light theme overrides ===== */
 html[data-theme="light"] body { background-color: #ffffff; color: #1f2328; }
 html[data-theme="light"] h1, html[data-theme="light"] h2, html[data-theme="light"] h3,
