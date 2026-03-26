@@ -2,16 +2,14 @@
 title: Home
 layout: default
 nav_order: 1
-lang: en
-lang_pair: /index-jp.html
 ---
 
 <div class="hero" markdown="1">
 
-# Hey, I'm Theo 👋
+# GitHub Copilot Toolkit 🚀
 {: .hero-title }
 
-Senior Solutions Architect at GitHub, based in Japan — covering Automotive & Manufacturing sectors. I share notes on GitHub products, demos, and walkthroughs here.
+A curated collection of recommended links, skills, agentic workflows, and settings for getting the most out of GitHub Copilot.
 {: .hero-subtitle }
 
 </div>
@@ -22,78 +20,39 @@ Senior Solutions Architect at GitHub, based in Japan — covering Automotive & M
 
 <div class="card" markdown="1">
 
-### 🤖 Copilot
+### 🔗 Recommended Links
 {: .card-title }
 
-CLI, VS Code, custom instructions, PR reviews, and agentic workflows.
-
-[Explore Copilot →]({{ site.baseurl }}{% link github-copilot/index.md %}){: .card-link }
-
-</div>
-
-<div class="card" markdown="1">
-
-### ⚡ Actions
-{: .card-title }
-
-CI/CD fundamentals, reusable workflows, and security hardening.
-
-[Explore Actions →]({{ site.baseurl }}{% link github-actions/index.md %}){: .card-link }
-
-</div>
-
-<div class="card" markdown="1">
-
-### ☁️ Enterprise Cloud
-{: .card-title }
-
-SSO/SCIM setup, governance at scale, and migration guides.
-
-[Explore GHEC →]({{ site.baseurl }}{% link ghec/index.md %}){: .card-link }
-
-</div>
-
-<div class="card" markdown="1">
-
-### 🏢 Enterprise Server
-{: .card-title }
-
-Administration, backup/restore, high availability, and DR.
-
-[Explore GHES →]({{ site.baseurl }}{% link ghes/index.md %}){: .card-link }
-
-</div>
-
-<div class="card" markdown="1">
-
-### 🛡️ Advanced Security
-{: .card-title }
-
-Code scanning, secret scanning, Dependabot, and supply chain security.
-
-[Explore GHAS →]({{ site.baseurl }}{% link ghas/index.md %}){: .card-link }
-
-</div>
-
-<div class="card" markdown="1">
-
-### 📰 Changelog
-{: .card-title }
-
-Curated changelog highlights from the GitHub ecosystem.
-
-[Browse changelog →]({{ site.baseurl }}{% link changelog/2026-02-14_to_2026-02-27-changelog.md %}){: .card-link }
-
-</div>
-
-<div class="card" markdown="1">
-
-### 🔗 Links
-{: .card-title }
-
-Essential GitHub resources — docs, blog, status, support, and more.
+Essential resources — news, docs, and community channels to stay up to date.
 
 [Browse links →]({{ site.baseurl }}{% link links/index.md %}){: .card-link }
+
+</div>
+
+<div class="card" markdown="1">
+
+### 🛠️ Recommended Skills
+{: .card-title }
+
+Coming soon — curated skills to supercharge your Copilot experience.
+
+</div>
+
+<div class="card" markdown="1">
+
+### 🤖 Agentic Workflows
+{: .card-title }
+
+Coming soon — patterns and templates for autonomous AI-driven development.
+
+</div>
+
+<div class="card" markdown="1">
+
+### ⚙️ Recommended Settings
+{: .card-title }
+
+Coming soon — optimal configurations for editors, CLI, and GitHub.com.
 
 </div>
 
