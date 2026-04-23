@@ -1,36 +1,29 @@
-# 👋 Théo Monfort
+# 👋 テオ・モンフォール (Théo Monfort)
 
-**Solutions Engineer @ GitHub Japan 🇯🇵**
+**ソリューションズ・エンジニア @ GitHub Japan 🇯🇵**
 
-I help Japanese developers and enterprises build better software with GitHub — from Copilot and Actions to platform-scale adoption.
-My obsession: **AI駆動開発 (AI-driven development)** — the craft of building with AI as a first-class collaborator, not a sidekick.
+GitHub Japan で、日本の開発者と企業がより良いソフトウェアを作るお手伝いをしています。
+Copilot、Actions、プラットフォーム規模の導入まで、**AI駆動開発** をテーマに日々活動しています。
 
 ---
 
 ## 🎮 AI KAIHATSU QUEST
 
-> A retro JRPG-style site about AI駆動開発 — built to make people *feel* the magic of building with AI.
+> AI駆動開発をテーマにしたレトロJRPG風サイト — AIと一緒にものづくりをする魔法を、肌で感じてもらうために作りました。
 
-🌐 **Live: https://theomonfort.github.io/theomonfort/**
+🌐 **公開中: https://theomonfort.github.io/theomonfort/**
 
-A pixel-art bedroom floating in deep space. Click the furniture to explore:
+宇宙船の中に浮かぶピクセルアートの寝室。家具をクリックして探索してください：
 
-- 📖 **Glossary** — Prompt / Context / Harness engineering, MCP, Skills, Agents, CLI, Cloud Agent, Agentic workflows
-- 🎴 **Equipment** — install my agentic workflows in one click (`gh skill install …`)
-- 💭 **Philosophy** — answers to the questions that keep developers awake at night
-- 🌐 **Links** — GitHub Blog, Changelog, YouTube, GitHub Japan
-- 📜 **Manifesto** — why taste matters more than ever when everyone can build anything
+- 📖 **用語集 (Glossary)** — Prompt / Context / Harness engineering、MCP、Skills、Agents、CLI、Cloud Agent、Agentic workflow
+- 🎴 **装備所 (Equipment)** — エージェント・ワークフローを `gh skill install …` でワンクリック導入
+- 💭 **哲学 (Philosophy)** — 開発者を夜眠れなくさせる問いへの答え
+- 🌐 **リンクの泉 (Links)** — GitHub Blog、Changelog、YouTube、GitHub Japan
+- 📜 **マニフェスト (Manifesto)** — 誰でも何でも作れる時代に、なぜ「センス」がより重要になるのか
 
-Built with **Astro 6 · React 18 · Tailwind 3 · WebAudio chiptune · Gemini Nano Banana** for the bedroom artwork.
+**スタック:** Astro 6 · React 18 · Tailwind 3 · WebAudio チップチューン · Gemini Nano Banana (寝室アート)
 
-### Easter eggs 🥚
-
-- Konami code (↑↑↓↓←→←→BA) → secret room
-- Scroll to gain EXP → LEVEL UP fanfare
-- 8-bit BGM toggle (bottom-right)
-- CRT scanlines + flicker (toggleable)
-
-### Run locally
+### ローカルで動かす
 
 ```bash
 pnpm install
