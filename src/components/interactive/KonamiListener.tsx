@@ -6,7 +6,7 @@ export default function KonamiListener() {
   useEffect(() => {
     const off = listenKonami(() => {
       play('levelup');
-      window.location.href = '/secret';
+      window.location.href = '/theomonfort/secret';
     });
     return off;
   }, []);

@@ -71,7 +71,7 @@ const accent = colorMap[entry.data.color];
             if (!r) return null;
             return (
               <a
-                href={`/glossary/${r.id}`}
+                href={`/theomonfort/glossary/${r.id}`}
                 class="font-pixel-jp text-xs px-3 py-1 border border-phosphor/30 hover:border-neon-cyan hover:text-neon-cyan transition-colors"
               >
                 {r.data.icon} {r.data.title}
@@ -84,12 +84,12 @@ const accent = colorMap[entry.data.color];
 
     <nav class="mt-12 grid grid-cols-2 gap-4 font-pixel text-[10px]">
       {prev ? (
-        <a href={`/glossary/${prev.id}`} class="block p-3 border-2 border-phosphor/30 hover:border-neon-cyan hover:text-neon-cyan transition-colors">
+        <a href={`/theomonfort/glossary/${prev.id}`} class="block p-3 border-2 border-phosphor/30 hover:border-neon-cyan hover:text-neon-cyan transition-colors">
           ◀ {prev.data.title}
         </a>
       ) : <span></span>}
       {next ? (
-        <a href={`/glossary/${next.id}`} class="block p-3 border-2 border-phosphor/30 hover:border-neon-magenta hover:text-neon-magenta transition-colors text-right">
+        <a href={`/theomonfort/glossary/${next.id}`} class="block p-3 border-2 border-phosphor/30 hover:border-neon-magenta hover:text-neon-magenta transition-colors text-right">
           {next.data.title} ▶
         </a>
       ) : <span></span>}
