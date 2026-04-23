@@ -38,10 +38,10 @@ const accent = colorMap[entry.data.color];
           NO.{String(entry.data.order).padStart(2, '0')}
         </span>
       </div>
-      <h1 class="font-pixel text-2xl md:text-4xl mb-2 leading-tight" style={`color:${accent}`}>
+      <h1 class="font-pixel text-base md:text-2xl mb-2 leading-tight" style={`color:${accent}`}>
         <span class="mr-3">{entry.data.icon}</span>{entry.data.titleEn}
       </h1>
-      <p class="font-pixel-jp text-base md:text-lg text-phosphor/50 mb-3">{entry.data.title}</p>
+      <p class="font-pixel-jp text-sm md:text-base text-phosphor/50 mb-3">{entry.data.title}</p>
       <p class="font-body text-base text-phosphor/90 leading-relaxed">{entry.data.summary}</p>
     </header>
 
