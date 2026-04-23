@@ -1,0 +1,202 @@
+@import './tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Pixel-perfect rendering for retro feel */
+* {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+html,
+body {
+  background: radial-gradient(ellipse at top, #1a0b2e 0%, #0a0e27 50%, #05060f 100%);
+  color: var(--c-phosphor);
+  font-family: 'Noto Sans JP', sans-serif;
+  min-height: 100%;
+  overflow-x: hidden;
+  font-feature-settings: 'palt';
+  letter-spacing: 0.02em;
+}
+
+::selection {
+  background: var(--c-neon-magenta);
+  color: var(--c-shadow-ink);
+}
+
+/* Scrollbar — chunky, retro */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #05060f;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--c-neon-magenta);
+  border: 2px solid #05060f;
+}
+
+/* Stars background */
+.bg-stars {
+  background-image:
+    radial-gradient(1px 1px at 25% 15%, #fff 1px, transparent 0),
+    radial-gradient(1px 1px at 67% 42%, #fff 1px, transparent 0),
+    radial-gradient(1px 1px at 81% 78%, #fff 1px, transparent 0),
+    radial-gradient(1px 1px at 12% 88%, #fff 1px, transparent 0),
+    radial-gradient(1px 1px at 44% 70%, #fff 1px, transparent 0),
+    radial-gradient(1px 1px at 90% 22%, #fff 1px, transparent 0);
+  background-size: 400px 400px;
+  background-repeat: repeat;
+}
+
+/* CRT scanlines (CSS fallback alongside canvas) */
+.crt-lines::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.18) 3px,
+    rgba(0, 0, 0, 0) 4px
+  );
+  mix-blend-mode: multiply;
+  z-index: 50;
+}
+
+.crt-vignette::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.55) 100%);
+  z-index: 51;
+}
+
+/* Honor reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Retro link */
+a.retro-link {
+  color: var(--c-neon-cyan);
+  text-decoration: none;
+  position: relative;
+}
+a.retro-link:hover {
+  color: var(--c-neon-magenta);
+  text-shadow: 0 0 6px currentColor;
+}
+a.retro-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.18s ease;
+}
+a.retro-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Caret block */
+.caret::after {
+  content: '▮';
+  margin-left: 4px;
+  animation: blink-cursor 1.1s step-end infinite;
+  color: var(--c-crt-amber);
+}
+
+/* =====================================================================
+   PAGE TRANSITIONS — Soft retro fade + gentle slide (Astro ClientRouter)
+   ===================================================================== */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  mix-blend-mode: normal;
+}
+
+/* OLD page: gentle fade out + tiny lift */
+::view-transition-old(root) {
+  animation: soft-fade-out 0.28s ease-in forwards;
+}
+@keyframes soft-fade-out {
+  0%   { opacity: 1; transform: translateY(0)    scale(1);    filter: blur(0); }
+  100% { opacity: 0; transform: translateY(-6px) scale(0.995); filter: blur(2px); }
+}
+
+/* NEW page: soft fade in + tiny rise */
+::view-transition-new(root) {
+  animation: soft-fade-in 0.42s cubic-bezier(0.2, 0.7, 0.2, 1) 0.05s backwards;
+}
+@keyframes soft-fade-in {
+  0%   { opacity: 0; transform: translateY(8px)  scale(0.995); filter: blur(3px); }
+  100% { opacity: 1; transform: translateY(0)    scale(1);     filter: blur(0); }
+}
+
+/* Soft phosphor sweep — barely-there warm glow drifting down once */
+.page-wipe {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9990;
+  opacity: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 35%,
+      rgba(255, 224, 102, 0.12) 48%,
+      rgba(255, 255, 255, 0.18) 50%,
+      rgba(0, 240, 255, 0.12) 52%,
+      transparent 65%,
+      transparent 100%
+    );
+  background-size: 100% 250%;
+  background-position: 0% -120%;
+  mix-blend-mode: screen;
+  filter: blur(8px);
+}
+.page-wipe.is-wiping {
+  animation: page-wipe-sweep 0.7s ease-out forwards;
+}
+@keyframes page-wipe-sweep {
+  0%   { opacity: 0;   background-position: 0% -120%; }
+  20%  { opacity: 0.7; }
+  60%  { opacity: 0.5; background-position: 0%  120%; }
+  100% { opacity: 0;   background-position: 0%  120%; }
+}
+
+@keyframes nav-flash {
+  0%   { box-shadow: 0 0 0 0 rgba(255, 46, 136, 0.0), inset 0 0 0 0 rgba(255, 224, 102, 0); }
+  40%  { box-shadow: 0 0 24px 4px rgba(255, 46, 136, 0.7), inset 0 0 12px rgba(255, 224, 102, 0.6); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 46, 136, 0), inset 0 0 0 0 rgba(255, 224, 102, 0); }
+}
+.nav-flashing {
+  animation: nav-flash 0.45s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.001s !important;
+    animation-name: none !important;
+  }
+  .page-wipe.is-wiping { animation: none !important; opacity: 0 !important; }
+}

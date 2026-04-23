@@ -1,0 +1,204 @@
+---
+// Pure-CSS/SVG isometric retro room.
+// Each "furniture" is a clickable nav target with its own pixel-art look.
+const items = [
+  {
+    href: '/glossary',
+    label: '本棚',
+    en: 'GLOSSARY',
+    icon: '📚',
+    color: 'amber',
+    desc: '用語の書',
+    pos: 'col-start-1 row-start-1',
+  },
+  {
+    href: '/skills',
+    label: 'チェスト',
+    en: 'EQUIPMENT',
+    icon: '🗃️',
+    color: 'magenta',
+    desc: '装備所',
+    pos: 'col-start-2 row-start-1',
+  },
+  {
+    href: '/philosophy',
+    label: 'CRTモニタ',
+    en: 'PHILOSOPHY',
+    icon: '🖥️',
+    color: 'cyan',
+    desc: '哲学の問',
+    pos: 'col-start-3 row-start-1',
+  },
+  {
+    href: '/links',
+    label: '窓（夜景）',
+    en: 'LINKS',
+    icon: '🌃',
+    color: 'cyan',
+    desc: 'リンクの泉',
+    pos: 'col-start-1 row-start-2',
+  },
+  {
+    href: '/manifesto',
+    label: '巻物',
+    en: 'MANIFESTO',
+    icon: '📜',
+    color: 'green',
+    desc: 'マニフェスト',
+    pos: 'col-start-2 row-start-2',
+  },
+  {
+    href: 'https://github.com/theomonfort',
+    label: 'ファミコン',
+    en: 'GITHUB',
+    icon: '🎮',
+    color: 'magenta',
+    desc: 'ソースコード',
+    pos: 'col-start-3 row-start-2',
+    external: true,
+  },
+];
+
+const colorMap: Record<string, { border: string; glow: string; text: string }> = {
+  magenta: { border: 'border-neon-magenta', glow: 'hover:shadow-neon-magenta', text: 'text-neon-magenta' },
+  cyan:    { border: 'border-neon-cyan',    glow: 'hover:shadow-neon-cyan',    text: 'text-neon-cyan'    },
+  amber:   { border: 'border-crt-amber',    glow: 'hover:shadow-neon-amber',   text: 'text-crt-amber'   },
+  green:   { border: 'border-gb-green',     glow: 'hover:shadow-neon-amber',   text: 'text-gb-green'    },
+};
+---
+
+<div class="relative w-full max-w-5xl">
+  <!-- Tatami floor (isometric grid backdrop) -->
+  <div class="iso-floor absolute inset-x-0 -bottom-6 h-48 pointer-events-none" aria-hidden="true"></div>
+
+  <!-- Window: distant Tokyo skyline -->
+  <div class="window absolute -top-4 right-4 md:right-12 w-44 h-28 pointer-events-none hidden sm:block" aria-hidden="true">
+    <div class="window-frame">
+      <div class="skyline">
+        <div class="moon"></div>
+        <div class="building b1"></div>
+        <div class="building b2"></div>
+        <div class="building b3"></div>
+        <div class="building b4"></div>
+        <div class="building b5"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Furniture grid -->
+  <div class="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 z-10">
+    {items.map((item) => {
+      const c = colorMap[item.color];
+      return (
+        <a
+          href={item.href}
+          target={item.external ? '_blank' : undefined}
+          rel={item.external ? 'noopener noreferrer' : undefined}
+          class={`furniture group relative block bg-shadow-ink/85 border-2 ${c.border} ${c.glow} p-5 transition-all duration-200 hover:-translate-y-1`}
+          data-sfx="select"
+        >
+          <div class="flex items-center gap-3 mb-2">
+            <span class="text-3xl md:text-4xl group-hover:scale-110 transition-transform">{item.icon}</span>
+            <div>
+              <div class={`font-pixel text-[10px] ${c.text}`}>{item.en}</div>
+              <div class="font-pixel-jp text-base text-phosphor">{item.desc}</div>
+            </div>
+          </div>
+          <div class="font-mono text-[10px] text-phosphor/50 group-hover:text-phosphor transition-colors">
+            ▶ {item.label}
+          </div>
+          <span class="absolute top-1 right-2 font-pixel text-[8px] text-phosphor/30 group-hover:text-neon-magenta transition-colors">
+            ENTER
+          </span>
+        </a>
+      );
+    })}
+  </div>
+</div>
+
+<script>
+  // Hook hover SFX onto every furniture item
+  import('../../lib/sfx').then(({ play }) => {
+    document.querySelectorAll<HTMLElement>('.furniture').forEach((el) => {
+      el.addEventListener('mouseenter', () => play('hover'));
+      el.addEventListener('click', () => play('select'));
+    });
+  });
+</script>
+
+<style>
+  .iso-floor {
+    background-image:
+      linear-gradient(to right, rgba(155, 188, 15, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(155, 188, 15, 0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
+    transform: perspective(700px) rotateX(60deg);
+    transform-origin: top;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  }
+
+  .window {
+    z-index: 0;
+  }
+  .window-frame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #060818 0%, #1a0b2e 100%);
+    border: 4px solid #2a1f3d;
+    box-shadow:
+      inset 0 0 0 2px #4a3760,
+      4px 4px 0 #05060f;
+    overflow: hidden;
+  }
+  .window-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to right, transparent 49%, #2a1f3d 49%, #2a1f3d 51%, transparent 51%),
+      linear-gradient(to bottom, transparent 49%, #2a1f3d 49%, #2a1f3d 51%, transparent 51%);
+    pointer-events: none;
+  }
+  .skyline { position: absolute; inset: 0; }
+  .moon {
+    position: absolute;
+    top: 6px;
+    right: 12px;
+    width: 14px;
+    height: 14px;
+    background: #ffb000;
+    box-shadow: 0 0 12px #ffb000, 0 0 4px #fff;
+    border-radius: 0;
+  }
+  .building {
+    position: absolute;
+    bottom: 0;
+    background: #ff2e88;
+    box-shadow: inset 0 0 0 1px #05060f;
+  }
+  .b1 { left: 0;   width: 18px; height: 50%; background: #00f0ff; opacity: 0.7; }
+  .b2 { left: 22px; width: 14px; height: 70%; background: #ff2e88; opacity: 0.8; }
+  .b3 { left: 40px; width: 22px; height: 45%; background: #ffb000; opacity: 0.6; }
+  .b4 { left: 66px; width: 16px; height: 80%; background: #00f0ff; opacity: 0.7; }
+  .b5 { left: 86px; width: 20px; height: 55%; background: #ff2e88; opacity: 0.6; }
+
+  .furniture {
+    image-rendering: pixelated;
+  }
+  .furniture::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border: 2px solid transparent;
+    pointer-events: none;
+    transition: border-color 0.2s;
+  }
+  .furniture:hover::before {
+    border-color: currentColor;
+    opacity: 0.3;
+  }
+</style>

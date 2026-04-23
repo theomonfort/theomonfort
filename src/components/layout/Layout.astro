@@ -1,0 +1,85 @@
+---
+import '../../styles/globals.css';
+import { ClientRouter } from 'astro:transitions';
+import CRTOverlay from '../retro/CRTOverlay.tsx';
+import BGMPlayer from '../interactive/BGMPlayer.tsx';
+import KonamiListener from '../interactive/KonamiListener.tsx';
+import XPHud from '../interactive/XPHud.tsx';
+import BootSequence from '../interactive/BootSequence.tsx';
+import Footer from './Footer.astro';
+import Nav from './Nav.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  hud?: boolean;
+}
+const {
+  title = 'AI KAIHATSU QUEST — AI開発クエスト',
+  description = 'AI駆動開発の伝説的な道場。プロンプト・コンテキスト・ハーネス・MCP・エージェントスキルの全てを、レトロJRPGの世界で学ぼう。',
+  hud = true,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0a0e27" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&family=VT323&family=Noto+Sans+JP:wght@400;700&family=IBM+Plex+Mono:wght@400;700&display=swap"
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <ClientRouter />
+  </head>
+  <body class="bg-stars min-h-screen relative">
+    <BootSequence client:load transition:persist />
+    <CRTOverlay client:load transition:persist />
+    {hud && <XPHud client:load transition:persist />}
+    <BGMPlayer client:load transition:persist />
+    <KonamiListener client:load transition:persist />
+
+    <!-- Page-transition wipe overlay (CRT scanline sweep) -->
+    <div class="page-wipe" aria-hidden="true" transition:persist></div>
+
+    <div class="relative z-10">
+      <Nav transition:persist />
+      <main class="relative" transition:animate="none">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+
+    <script>
+      // Retro page-transition: scanline wipe + SFX on every navigation.
+      import('../../lib/sfx').then(({ play }) => {
+        const wipe = document.querySelector<HTMLElement>('.page-wipe');
+
+        // Fire wipe + sound the moment a navigation begins
+        document.addEventListener('astro:before-preparation', () => {
+          if (wipe) {
+            wipe.classList.remove('is-wiping');
+            // force reflow so the animation restarts
+            void wipe.offsetWidth;
+            wipe.classList.add('is-wiping');
+          }
+          try { play('hover'); } catch {}
+        });
+
+        // Clean up the wipe class once the new page is in place
+        document.addEventListener('astro:after-swap', () => {
+          window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+        });
+        document.addEventListener('astro:page-load', () => {
+          setTimeout(() => wipe?.classList.remove('is-wiping'), 700);
+        });
+      });
+    </script>
+  </body>
+</html>

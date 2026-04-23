@@ -1,0 +1,13 @@
+:root {
+  --c-midnight: #0a0e27;
+  --c-deep-purple: #1a0b2e;
+  --c-neon-magenta: #ff2e88;
+  --c-neon-cyan: #00f0ff;
+  --c-crt-amber: #ffb000;
+  --c-gb-green: #9bbc0f;
+  --c-phosphor: #e8f4ff;
+  --c-shadow-ink: #05060f;
+
+  --grid: 8px;
+  --pixel: 2px;
+}

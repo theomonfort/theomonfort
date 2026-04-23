@@ -1,0 +1,86 @@
+---
+import Layout from '../components/layout/Layout.astro';
+import { getCollection } from 'astro:content';
+import TypewriterText from '../components/retro/TypewriterText.tsx';
+import MenuArrow from '../components/retro/MenuArrow.astro';
+
+const entries = (await getCollection('philosophy')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+// Render bodies to plain text so the typewriter has a string
+const items = entries.map((e) => ({
+  slug: e.id,
+  question: e.data.question,
+  short: e.data.short,
+  body: e.body ?? '',
+  link: e.data.link,
+}));
+---
+
+<Layout title="哲学の問 — AI 開発 QUEST">
+  <section class="max-w-3xl mx-auto px-4 py-12">
+    <header class="mb-10">
+      <p class="font-pixel text-[10px] text-crt-amber tracking-[0.3em] mb-2">▮ CHAPTER 3 ▮</p>
+      <h1 class="font-pixel text-2xl md:text-4xl text-neon-magenta mb-3">哲学の問</h1>
+      <p class="font-pixel-jp text-lg text-neon-cyan">— PHILOSOPHICAL Q&A —</p>
+      <p class="font-body text-sm text-phosphor/80 mt-4">
+        賢者が、君の心の問いに答える。テキストをクリックでスキップ可。
+      </p>
+    </header>
+
+    <ol class="space-y-8">
+      {items.map((it, i) => (
+        <li class="dq-dialog group">
+          <div class="font-pixel text-[10px] text-crt-amber mb-2">
+            ▮ Q.{String(i + 1).padStart(2, '0')}
+          </div>
+          <h2 class="font-pixel-jp text-xl md:text-2xl text-neon-cyan mb-4">
+            {it.question}
+          </h2>
+          <div class="dq-box bg-shadow-ink border-4 border-neon-cyan p-5 md:p-7 relative">
+            <div class="dq-corner tl"></div>
+            <div class="dq-corner tr"></div>
+            <div class="dq-corner bl"></div>
+            <div class="dq-corner br"></div>
+            <div class="font-body text-base text-phosphor leading-relaxed">
+              <TypewriterText
+                client:visible
+                text={it.body.trim().replace(/^---[\s\S]*?---/, '').trim() || it.short}
+                speed={22}
+                startDelay={150}
+              />
+            </div>
+            {it.link && (
+              <div class="mt-4 pt-4 border-t border-neon-cyan/30 font-mono text-sm">
+                <MenuArrow /> <a href={it.link.url} target="_blank" rel="noopener noreferrer" class="retro-link">
+                  {it.link.label}
+                </a>
+              </div>
+            )}
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    <div class="mt-16 text-center">
+      <a href="/" class="font-pixel text-[10px] text-phosphor/60 hover:text-neon-magenta">◀ HUB に戻る</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .dq-box {
+    box-shadow: 4px 4px 0 #05060f, 0 0 16px rgba(0, 240, 255, 0.25);
+  }
+  .dq-corner {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #00f0ff;
+  }
+  .dq-corner.tl { top: -4px; left: -4px; }
+  .dq-corner.tr { top: -4px; right: -4px; }
+  .dq-corner.bl { bottom: -4px; left: -4px; }
+  .dq-corner.br { bottom: -4px; right: -4px; }
+</style>

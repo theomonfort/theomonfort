@@ -1,0 +1,304 @@
+---
+// 90s Japanese teen bedroom — but in deep space.
+// Background = AI-generated pixel art (Gemini "Nano Banana").
+// Furniture is mapped via absolutely-positioned <a> hotspots that light up
+// on hover and show a JRPG-style floating label.
+//
+// Props:
+//   immersive (default true) - remove frame, fade edges into background
+interface Props {
+  immersive?: boolean;
+  src?: string;
+}
+const { immersive = true, src = '/room/bedroom-v2.png' } = Astro.props;
+const wrapClass = [
+  'pixelroom-wrap relative w-full mx-auto select-none',
+  immersive ? 'is-immersive max-w-7xl' : 'max-w-5xl',
+].join(' ');
+---
+
+<div class={wrapClass}>
+  <div class="pixelroom-frame relative">
+    <img
+      src={src}
+      alt="宇宙船の中の90年代日本のティーンの部屋。家具をクリックして探索できる。"
+      class="pixelroom-bg block w-full h-auto"
+      draggable="false"
+    />
+
+    <!-- Subtle scanline overlay for extra retro vibe -->
+    <div class="scanlines" aria-hidden="true"></div>
+
+    <!-- ============ HOTSPOTS ============ -->
+    <a href="/glossary" class="hotspot" data-target="bookshelf"
+       style="left:10%;top:25%;width:27%;height:37%"
+       aria-label="図書室 / 用語集へ"></a>
+
+    <a href="/links" class="hotspot" data-target="window"
+       style="left:37%;top:12%;width:38%;height:40%"
+       aria-label="夜景の窓 / リンクへ"></a>
+
+    <a href="/manifesto" class="hotspot" data-target="desk"
+       style="left:38%;top:48%;width:26%;height:30%"
+       aria-label="巻物の机 / マニフェストへ"></a>
+
+    <a href="/philosophy" class="hotspot" data-target="tv"
+       style="left:63%;top:53%;width:16%;height:25%"
+       aria-label="哲学のCRT / 哲学の問へ"></a>
+
+    <a href="/skills" class="hotspot" data-target="wardrobe"
+       style="left:77%;top:13%;width:14%;height:76%"
+       aria-label="装備所 / スキルへ"></a>
+
+    <a href="/secret" class="hotspot cat-hotspot" data-target="cat"
+       style="left:10%;top:68%;width:22%;height:17%"
+       aria-label="ねこ？"></a>
+
+    <!-- ============ FLOATING JRPG LABELS ============ -->
+    <div class="pixelroom-labels">
+      <div class="pr-label" data-target="bookshelf"><span class="pr-en">GLOSSARY</span><span class="pr-jp">▶ 図書室</span></div>
+      <div class="pr-label" data-target="wardrobe"><span class="pr-en">EQUIPMENT</span><span class="pr-jp">▶ 装備所</span></div>
+      <div class="pr-label" data-target="window"><span class="pr-en">LINKS</span><span class="pr-jp">▶ 銀河の窓</span></div>
+      <div class="pr-label" data-target="desk"><span class="pr-en">MANIFESTO</span><span class="pr-jp">▶ 巻物の机</span></div>
+      <div class="pr-label" data-target="tv"><span class="pr-en">PHILOSOPHY</span><span class="pr-jp">▶ 哲学のCRT</span></div>
+      <div class="pr-label" data-target="cat"><span class="pr-en">???</span><span class="pr-jp">▶ ねこ？</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Re-attach hotspot listeners on every page load (incl. SPA navigation).
+  function initPixelRoom() {
+    const root = document.querySelector<HTMLElement>('.pixelroom-wrap');
+    if (!root || root.dataset.prInit === '1') return;
+    root.dataset.prInit = '1';
+
+    import('../../lib/sfx').then(({ play }) => {
+      const hotspots = root.querySelectorAll<HTMLAnchorElement>('.hotspot');
+      hotspots.forEach((h) => {
+        const targetKey = h.dataset.target;
+        const label = root.querySelector<HTMLElement>(`.pr-label[data-target="${targetKey}"]`);
+
+        const show = () => {
+          if (!label) return;
+          const wrapRect = root.getBoundingClientRect();
+          const hotRect = h.getBoundingClientRect();
+          label.style.left = `${hotRect.left - wrapRect.left + hotRect.width / 2}px`;
+          label.style.top  = `${hotRect.top  - wrapRect.top  - 6}px`;
+          label.classList.add('show');
+        };
+        const hide = () => label?.classList.remove('show');
+
+        h.addEventListener('mouseenter', () => { play('hover'); show(); });
+        h.addEventListener('mouseleave', hide);
+        h.addEventListener('click', () => play('select'));
+        h.addEventListener('focus', show);
+        h.addEventListener('blur', hide);
+      });
+    });
+  }
+  initPixelRoom();
+  document.addEventListener('astro:page-load', initPixelRoom);
+</script>
+
+<style>
+  .pixelroom-frame {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    border: 4px solid #5a3018;
+    box-shadow:
+      inset 0 0 0 2px #2a1808,
+      0 0 0 4px #1a1228,
+      0 0 32px rgba(255, 46, 136, 0.18),
+      0 0 64px rgba(0, 240, 255, 0.08);
+    background: #05060f;
+    overflow: hidden;
+    max-height: 78vh;
+  }
+  .pixelroom-bg {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    max-height: 78vh;
+    object-fit: contain;
+    margin: 0 auto;
+  }
+
+  /* ===== Immersive mode: bleed image into background ===== */
+  .is-immersive .pixelroom-frame {
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+    max-height: none;
+    overflow: visible;
+  }
+  /* Mask is applied DIRECTLY to the <img> so it actually fades the visible
+     pixels (browsers don't reliably propagate gradient masks to children).
+     Two stacked linear gradients (one vertical, one horizontal) combined
+     with mask-composite: intersect → uniform fade on ALL four sides
+     regardless of aspect ratio (a radial gradient would over-fade sides
+     on a wide image). */
+  .is-immersive .pixelroom-bg {
+    max-height: 86vh;
+    -webkit-mask-image:
+      linear-gradient(to bottom,
+        transparent 0%,
+        rgba(0,0,0,0.4) 6%,
+        #000 18%,
+        #000 82%,
+        rgba(0,0,0,0.4) 94%,
+        transparent 100%),
+      linear-gradient(to right,
+        transparent 0%,
+        rgba(0,0,0,0.4) 6%,
+        #000 18%,
+        #000 82%,
+        rgba(0,0,0,0.4) 94%,
+        transparent 100%);
+    -webkit-mask-composite: source-in;
+            mask-image:
+      linear-gradient(to bottom,
+        transparent 0%,
+        rgba(0,0,0,0.4) 6%,
+        #000 18%,
+        #000 82%,
+        rgba(0,0,0,0.4) 94%,
+        transparent 100%),
+      linear-gradient(to right,
+        transparent 0%,
+        rgba(0,0,0,0.4) 6%,
+        #000 18%,
+        #000 82%,
+        rgba(0,0,0,0.4) 94%,
+        transparent 100%);
+            mask-composite: intersect;
+    -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%, 100% 100%;
+            mask-size: 100% 100%, 100% 100%;
+    filter: drop-shadow(0 0 60px rgba(255, 46, 136, 0.18))
+            drop-shadow(0 0 120px rgba(0, 240, 255, 0.10));
+  }
+  /* Scanlines must also be masked — easiest: hide them in immersive mode */
+  .is-immersive .scanlines {
+    display: none;
+  }
+
+  /* Subtle CRT scanlines on top of image */
+  .scanlines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.0) 0px,
+      rgba(0,0,0,0.0) 2px,
+      rgba(0,0,0,0.18) 3px,
+      rgba(0,0,0,0.0) 4px
+    );
+    mix-blend-mode: multiply;
+    z-index: 2;
+  }
+
+  /* Hotspots */
+  .hotspot {
+    position: absolute;
+    z-index: 5;
+    cursor: pointer;
+    outline: none;
+    border: 2px dashed transparent;
+    border-radius: 4px;
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.2s ease,
+      background 0.2s ease,
+      transform 0.15s ease;
+  }
+  .hotspot:hover,
+  .hotspot:focus-visible {
+    border-color: #ffe066;
+    background: rgba(255, 224, 102, 0.10);
+    box-shadow:
+      0 0 0 1px rgba(255, 224, 102, 0.25),
+      0 0 18px rgba(255, 224, 102, 0.55),
+      inset 0 0 16px rgba(255, 46, 136, 0.25);
+    transform: scale(1.015);
+  }
+  .cat-hotspot:hover,
+  .cat-hotspot:focus-visible {
+    border-color: #ff8fc8;
+    background: rgba(255, 143, 200, 0.10);
+    box-shadow: 0 0 12px rgba(255, 143, 200, 0.55);
+  }
+
+  /* Floating JRPG labels */
+  .pixelroom-labels {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 20;
+  }
+  .pr-label {
+    position: absolute;
+    transform: translate(-50%, -100%);
+    background: #1a1228;
+    border: 2px solid #ffe066;
+    box-shadow:
+      0 0 0 1px #1a1228,
+      4px 4px 0 #000,
+      0 0 12px rgba(255, 224, 102, 0.4);
+    padding: 6px 10px;
+    display: none;
+    flex-direction: column;
+    gap: 2px;
+    white-space: nowrap;
+  }
+  .pr-label.show {
+    display: flex;
+    animation: label-pop 0.18s ease-out;
+  }
+  @keyframes label-pop {
+    from { transform: translate(-50%, -90%); opacity: 0; }
+    to   { transform: translate(-50%, -100%); opacity: 1; }
+  }
+  .pr-label::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #ffe066;
+  }
+  .pr-en {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    color: #ffe066;
+    letter-spacing: 0.05em;
+  }
+  .pr-jp {
+    font-family: 'DotGothic16', monospace;
+    font-size: 12px;
+    color: #d4f5d4;
+  }
+
+  /* Debug: add ?debug=room to URL to visualize hotspot rectangles */
+  :global(body[data-room-debug="1"]) .hotspot {
+    border-color: #00f0ff !important;
+    background: rgba(0, 240, 255, 0.12) !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hotspot { transition: none; }
+    .pr-label.show { animation: none; }
+  }
+</style>
+
+<script>
+  // Debug toggle: ?debug=room → outline all hotspots
+  if (typeof window !== 'undefined' && new URLSearchParams(location.search).has('debug')) {
+    document.body.dataset.roomDebug = '1';
+  }
+</script>

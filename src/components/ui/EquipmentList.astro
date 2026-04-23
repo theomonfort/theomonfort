@@ -1,0 +1,53 @@
+---
+interface Item {
+  name: string;
+  icon?: string;
+  description: string;
+  url?: string;
+  install?: string;
+  badge?: string;
+}
+interface Props {
+  items: Item[];
+  color?: 'magenta' | 'cyan' | 'amber' | 'green';
+}
+const { items, color = 'cyan' } = Astro.props;
+const colorMap = {
+  magenta: { border: 'border-neon-magenta', text: 'text-neon-magenta', glow: 'hover:shadow-neon-magenta' },
+  cyan:    { border: 'border-neon-cyan',    text: 'text-neon-cyan',    glow: 'hover:shadow-neon-cyan' },
+  amber:   { border: 'border-crt-amber',    text: 'text-crt-amber',    glow: 'hover:shadow-neon-amber' },
+  green:   { border: 'border-gb-green',     text: 'text-gb-green',     glow: 'hover:shadow-neon-amber' },
+} as const;
+const c = colorMap[color];
+---
+
+<ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  {items.map((it) => (
+    <li class={`bg-shadow-ink/80 border-2 ${c.border} ${c.glow} p-4 transition-all duration-150 hover:-translate-y-0.5`}>
+      <div class="flex items-start gap-3">
+        {it.icon && <span class="text-2xl shrink-0">{it.icon}</span>}
+        <div class="flex-1 min-w-0">
+          <div class="flex items-baseline gap-2 flex-wrap mb-1">
+            <h3 class={`font-pixel text-xs ${c.text}`}>{it.name}</h3>
+            {it.badge && (
+              <span class="font-pixel text-[8px] px-1.5 py-0.5 border border-current text-phosphor/60">
+                {it.badge}
+              </span>
+            )}
+          </div>
+          <p class="font-body text-sm text-phosphor/85 leading-relaxed">
+            {it.description}
+          </p>
+          {it.install && (
+            <pre class="font-mono text-[11px] text-gb-green bg-shadow-ink border border-phosphor/20 p-2 mt-3 overflow-x-auto"><code>{it.install}</code></pre>
+          )}
+          {it.url && (
+            <a href={it.url} target="_blank" rel="noopener noreferrer" class="inline-block font-mono text-[11px] mt-2 retro-link">
+              ▶ 詳細を見る ↗
+            </a>
+          )}
+        </div>
+      </div>
+    </li>
+  ))}
+</ul>

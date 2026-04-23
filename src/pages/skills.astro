@@ -1,0 +1,351 @@
+---
+import Layout from '../components/layout/Layout.astro';
+import SkillGallery from '../components/interactive/SkillGallery.tsx';
+import EquipmentList from '../components/ui/EquipmentList.astro';
+
+// === SKILLS ===
+const base = 'https://raw.githubusercontent.com/theomonfort/theomonfort/main/.github/skills';
+const skills = [
+  { slug: 'create-plan',       name: 'create-plan',       icon: '📝', group: 'plan',     description: '機能・リファクタの実装計画を対話的に作る。要件曖昧なまま走らせない最初の一手。', url: `${base}/create-plan/SKILL.md` },
+  { slug: 'iterate-plan',      name: 'iterate-plan',      icon: '🔄', group: 'plan',     description: '既存の計画を新情報で更新・拡張する。フィードバック反映の標準ワークフロー。',   url: `${base}/iterate-plan/SKILL.md` },
+  { slug: 'implement-plan',    name: 'implement-plan',    icon: '🚀', group: 'plan',     description: '承認済みの計画をフェーズごとに実装。各段階で検証を挟む。',                       url: `${base}/implement-plan/SKILL.md` },
+  { slug: 'validate-plan',     name: 'validate-plan',     icon: '✅', group: 'plan',     description: '実装が計画の成功条件を満たしているか検証する。漏れと差分を洗い出す。',         url: `${base}/validate-plan/SKILL.md` },
+  { slug: 'research-codebase', name: 'research-codebase', icon: '🔬', group: 'research', description: '並列サブエージェントで全文調査・系統的に文書化。大きなリポジトリの初日に。',     url: `${base}/research-codebase/SKILL.md` },
+  { slug: 'create-handoff',    name: 'create-handoff',    icon: '🤝', group: 'research', description: 'セッション間の引き継ぎ文書を生成。次の自分・チームに進捗を渡す。',               url: `${base}/create-handoff/SKILL.md` },
+  { slug: 'describe-pr',       name: 'describe-pr',       icon: '📋', group: 'pr',       description: 'コード差分から PR 説明文を構造化生成。レビュアの時間を尊重する。',               url: `${base}/describe-pr/SKILL.md` },
+  { slug: 'note-organizer',    name: 'note-organizer',    icon: '🗂️', group: 'misc',     description: '生メモを標準テンプレに整理。日次・週次・タスクの相互同期を扱う。',             url: `${base}/note-organizer/SKILL.md` },
+];
+
+// === AGENTIC WORKFLOWS ===
+const workflows = [
+  {
+    name: 'PLAN → IMPLEMENT → VALIDATE',
+    icon: '🌀',
+    badge: 'CORE',
+    description: '王道のサイクル。create-plan で意図を文章化 → implement-plan で段階実装 → validate-plan で成功条件を検証。30分で1周回せれば理想。',
+  },
+  {
+    name: 'RESEARCH FIRST',
+    icon: '🗺️',
+    badge: 'INTRO',
+    description: '未知のリポジトリに入った初日に。research-codebase で全体像を掴み、create-plan に流し込む。"知らないまま走る"事故を消す。',
+  },
+  {
+    name: 'CRITIQUE LOOP',
+    icon: '🦆',
+    description: 'create-plan → rubber-duck で穴探し → iterate-plan で修正 → implement-plan。重要な変更ほど critique を最初に挟む。',
+  },
+  {
+    name: 'BUG-HUNT',
+    icon: '🐛',
+    description: '再現スクリプト → research-codebase で原因特定 → 小さな修正 → テスト追加 → describe-pr。"AIに直させる前に、再現できる状態を作る"。',
+  },
+  {
+    name: 'PR HANDOFF',
+    icon: '📦',
+    description: 'implement-plan で実装 → describe-pr で物語化 → create-handoff で次セッションへ引き継ぎ。"残し方"が君の評価を決める。',
+  },
+  {
+    name: 'PARALLEL EXPLORE',
+    icon: '⚡',
+    description: '大きな調査は単発でなく、複数の explore agent に並列で投げる。観点（性能 / 設計 / 依存 / セキュリティ）を分けると統合が楽。',
+  },
+];
+
+// === CUSTOM AGENTS ===
+const customAgents = [
+  {
+    name: 'rubber-duck',
+    icon: '🦆',
+    badge: 'BUILT-IN',
+    description: '計画や実装を独立した視点で批判する"アヒル"。重要な判断の前に必ず通すと事故が激減する。',
+  },
+  {
+    name: 'code-review',
+    icon: '🔍',
+    badge: 'BUILT-IN',
+    description: 'PR / 変更差分のレビュー専用。バグ・セキュリティ・ロジック誤りに集中、スタイルには触れない高 S/N。',
+  },
+  {
+    name: 'explore',
+    icon: '🧭',
+    badge: 'BUILT-IN',
+    description: '並列リサーチに最適化された軽量エージェント。複数の独立した調査を同時に投げて統合する用途で輝く。',
+  },
+  {
+    name: 'codebase-locator',
+    icon: '📍',
+    description: '"あの機能どこにあったっけ？"の超強化 grep。自然言語で検索し、関連ファイルを束で返す。',
+  },
+  {
+    name: 'codebase-pattern-finder',
+    icon: '🧩',
+    description: '似た実装・既存パターンを具体例つきで探してくる。"車輪の再発明"を防ぐ。',
+  },
+  {
+    name: 'web-search-researcher',
+    icon: '🌐',
+    description: '外部ドキュメント・最新ベストプラクティスをまとめて取得。ライブラリ更新やAPI調査に。',
+  },
+];
+
+// === MCP SERVERS ===
+const mcpServers = [
+  {
+    name: 'GitHub MCP Server',
+    icon: '🐙',
+    badge: 'OFFICIAL',
+    description: 'Issues / PRs / Code search / Actions / Repos を AI から直接操作。Copilot CLI / VS Code / Claude すべてで使える。',
+    url: 'https://github.com/github/github-mcp-server',
+  },
+  {
+    name: 'Filesystem',
+    icon: '📁',
+    description: '任意ディレクトリへの安全な読み書き。ローカルプロジェクトを横断で操作したいときに。',
+    url: 'https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem',
+  },
+  {
+    name: 'Playwright',
+    icon: '🎭',
+    description: 'ブラウザ自動操作。E2Eテスト生成、スクリーンショット、ウェブからのデータ取得をAIが直接実行。',
+    url: 'https://github.com/microsoft/playwright-mcp',
+  },
+  {
+    name: 'Postgres',
+    icon: '🐘',
+    description: 'スキーマ把握 + 安全なSQL実行。"このテーブルから先月のXを集計して"が会話で完結。',
+    url: 'https://github.com/modelcontextprotocol/servers/tree/main/src/postgres',
+  },
+  {
+    name: 'Slack',
+    icon: '💬',
+    description: 'チャンネル要約、メッセージ送信、スレッド調査。"昨日の議論を3行で"が秒で返ってくる。',
+    url: 'https://github.com/modelcontextprotocol/servers/tree/main/src/slack',
+  },
+  {
+    name: 'Memory (Knowledge Graph)',
+    icon: '🧠',
+    description: 'セッションを跨いで人物・概念・関係を記憶。"あのプロジェクトの担当誰だっけ"を AI が覚える。',
+    url: 'https://github.com/modelcontextprotocol/servers/tree/main/src/memory',
+  },
+  {
+    name: 'Azure / AWS MCP',
+    icon: '☁️',
+    description: 'クラウド資源の参照・操作。リソース監査、コスト確認、デプロイ補助に。',
+    url: 'https://github.com/Azure/azure-mcp',
+  },
+  {
+    name: 'Notion / Linear / Jira',
+    icon: '🗂️',
+    description: 'タスク管理ツールとの統合。issue 起票・更新・要約が会話で完結。チームの摩擦を消す。',
+    url: 'https://modelcontextprotocol.io/examples',
+  },
+];
+
+// === COPILOT CLI EXTENSIONS ===
+const cliPlugins = [
+  {
+    name: 'gh skill',
+    icon: '🎴',
+    badge: 'EXTENSION',
+    description: 'スキルを1コマンドで装備する gh 拡張。`gh skill install <name>` でグローバル/プロジェクトに即配置。',
+    install: 'gh extension install theomonfort/gh-skill\ngh skill install create-plan --global',
+  },
+  {
+    name: 'gh extension',
+    icon: '⚙️',
+    description: 'GitHub CLI の拡張機能エコシステム。`gh extension install` で gh コマンドを拡張する。',
+    install: 'gh extension install <owner>/<repo>',
+    url: 'https://docs.github.com/cli/extensions',
+  },
+  {
+    name: 'Copilot CLI MCP servers',
+    icon: '🔌',
+    description: 'Copilot CLI に MCP server を登録すると、agent が外部ツールを呼べるようになる。',
+    install: 'copilot mcp add github -- gh-mcp-server',
+    url: 'https://docs.github.com/copilot/github-copilot-in-the-cli',
+  },
+  {
+    name: 'Custom agents',
+    icon: '🥷',
+    description: '`.copilot/agents/` に YAML / Markdown で定義。役割・モデル・許可ツールを束ねた専用エージェントになる。',
+    url: 'https://docs.github.com/copilot',
+  },
+];
+
+// === VS CODE EXTENSIONS ===
+const vscodePlugins = [
+  {
+    name: 'GitHub Copilot',
+    icon: '🤖',
+    badge: 'MUST',
+    description: 'コード補完の本体。インラインで提案を受け取り、Tab で確定。AI駆動開発の基礎装備。',
+    url: 'https://marketplace.visualstudio.com/items?itemName=GitHub.copilot',
+  },
+  {
+    name: 'GitHub Copilot Chat',
+    icon: '💬',
+    badge: 'MUST',
+    description: 'チャット + agent mode + edit mode。複数ファイル横断の変更や、ターミナル実行までこなす。',
+    url: 'https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat',
+  },
+  {
+    name: 'GitLens',
+    icon: '🔭',
+    description: 'コード行ごとの blame、履歴、PR 統合。AI に "誰が・なぜ書いたか" を文脈として渡せる。',
+    url: 'https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens',
+  },
+  {
+    name: 'Error Lens',
+    icon: '⚠️',
+    description: 'エラー / 警告を行末にインライン表示。AI 提案の検証ループが激速になる。',
+    url: 'https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens',
+  },
+  {
+    name: 'Pretty TypeScript Errors',
+    icon: '✨',
+    description: 'TS の難解なエラーを人間にもAIにも読みやすく整形。型エラーの "壁" が低くなる。',
+    url: 'https://marketplace.visualstudio.com/items?itemName=yoavbls.pretty-ts-errors',
+  },
+  {
+    name: 'MCP for VS Code',
+    icon: '🔌',
+    description: 'VS Code のチャットから MCP server を直接呼び出せるようになる拡張。Copilot Chat と組み合わせて。',
+    url: 'https://code.visualstudio.com/docs/copilot/copilot-mcp',
+  },
+];
+
+const sections = [
+  { id: 'skills',      label: 'SKILLS',        kanji: 'スキル',         color: 'magenta' },
+  { id: 'workflows',   label: 'WORKFLOWS',     kanji: 'ワークフロー',   color: 'cyan' },
+  { id: 'agents',      label: 'CUSTOM AGENTS', kanji: '専用エージェント', color: 'amber' },
+  { id: 'mcp',         label: 'MCP SERVERS',   kanji: 'MCPサーバー',    color: 'green' },
+  { id: 'cli',         label: 'CLI PLUGINS',   kanji: 'CLI拡張',        color: 'magenta' },
+  { id: 'vscode',      label: 'VS CODE EXT',   kanji: 'VS Code 拡張',   color: 'cyan' },
+] as const;
+---
+
+<Layout title="装備所 — AI 開発 QUEST">
+  <section class="max-w-5xl mx-auto px-4 py-12">
+    <header class="mb-8">
+      <p class="font-pixel text-[10px] text-crt-amber tracking-[0.3em] mb-2">▮ CHAPTER 2 ▮</p>
+      <h1 class="font-pixel text-2xl md:text-4xl text-neon-magenta mb-3">装備所</h1>
+      <p class="font-pixel-jp text-lg text-neon-cyan">— EQUIPMENT ROOM —</p>
+      <p class="font-body text-sm text-phosphor/80 mt-4 max-w-2xl">
+        AI駆動開発の道具一式。<span class="text-crt-amber">スキル</span>で型を覚え、
+        <span class="text-neon-cyan">ワークフロー</span>で技を組み、
+        <span class="text-crt-amber">カスタムエージェント</span>で仲間を育て、
+        <span class="text-gb-green">MCP</span>で世界と繋がり、
+        <span class="text-neon-magenta">CLI / VS Code 拡張</span>で道場を整える。
+      </p>
+    </header>
+
+    <!-- Sticky in-page nav -->
+    <nav class="sticky top-[60px] z-30 -mx-4 px-4 py-3 bg-midnight/80 backdrop-blur border-y border-neon-magenta/30 mb-10">
+      <ul class="flex gap-2 overflow-x-auto font-pixel text-[10px]">
+        {sections.map((s) => (
+          <li>
+            <a
+              href={`#${s.id}`}
+              class="inline-block whitespace-nowrap px-3 py-2 border-2 border-phosphor/20 text-phosphor/70 hover:text-neon-cyan hover:border-neon-cyan transition-colors"
+            >
+              <span class="hidden sm:inline">▶ {s.label}</span>
+              <span class="sm:hidden font-pixel-jp">{s.kanji}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- 1. SKILLS -->
+    <section id="skills" class="scroll-mt-32 mb-16">
+      <div class="flex items-baseline gap-3 mb-6 pb-3 border-b-2 border-neon-magenta">
+        <span class="font-pixel text-xs text-neon-magenta">SECTION 01</span>
+        <h2 class="font-pixel-jp text-2xl text-neon-magenta">🎴 スキル</h2>
+        <span class="font-mono text-[10px] text-phosphor/50 ml-auto">{skills.length}個の装備</span>
+      </div>
+      <p class="font-body text-sm text-phosphor/80 mb-6">
+        再利用可能な手順書（<code class="text-gb-green">SKILL.md</code>）。チェックを付けて
+        <span class="text-crt-amber">セーブポイント</span>で一括コピー、ターミナルに貼って装備完了。
+      </p>
+      <SkillGallery client:load skills={skills} />
+    </section>
+
+    <!-- 2. WORKFLOWS -->
+    <section id="workflows" class="scroll-mt-32 mb-16">
+      <div class="flex items-baseline gap-3 mb-6 pb-3 border-b-2 border-neon-cyan">
+        <span class="font-pixel text-xs text-neon-cyan">SECTION 02</span>
+        <h2 class="font-pixel-jp text-2xl text-neon-cyan">🌀 エージェンティック・ワークフロー</h2>
+        <span class="font-mono text-[10px] text-phosphor/50 ml-auto">{workflows.length}個の型</span>
+      </div>
+      <p class="font-body text-sm text-phosphor/80 mb-6">
+        スキルを組み合わせた "技"。これを身につけると AI は "魔法" から "職人道具" になる。
+      </p>
+      <EquipmentList items={workflows} color="cyan" />
+    </section>
+
+    <!-- 3. CUSTOM AGENTS -->
+    <section id="agents" class="scroll-mt-32 mb-16">
+      <div class="flex items-baseline gap-3 mb-6 pb-3 border-b-2 border-crt-amber">
+        <span class="font-pixel text-xs text-crt-amber">SECTION 03</span>
+        <h2 class="font-pixel-jp text-2xl text-crt-amber">🥷 カスタムエージェント</h2>
+        <span class="font-mono text-[10px] text-phosphor/50 ml-auto">{customAgents.length}人の仲間</span>
+      </div>
+      <p class="font-body text-sm text-phosphor/80 mb-6">
+        役割・ツール・モデルを束ねた専用エージェント。仮想同僚を増やそう。
+      </p>
+      <EquipmentList items={customAgents} color="amber" />
+    </section>
+
+    <!-- 4. MCP SERVERS -->
+    <section id="mcp" class="scroll-mt-32 mb-16">
+      <div class="flex items-baseline gap-3 mb-6 pb-3 border-b-2 border-gb-green">
+        <span class="font-pixel text-xs text-gb-green">SECTION 04</span>
+        <h2 class="font-pixel-jp text-2xl text-gb-green">🔌 MCP サーバー</h2>
+        <span class="font-mono text-[10px] text-phosphor/50 ml-auto">{mcpServers.length}個の接続</span>
+      </div>
+      <p class="font-body text-sm text-phosphor/80 mb-6">
+        Model Context Protocol = AI と外部ツール／データを繋ぐ USB-C。一度差せばどのモデルでも動く。
+      </p>
+      <EquipmentList items={mcpServers} color="green" />
+    </section>
+
+    <!-- 5. CLI PLUGINS -->
+    <section id="cli" class="scroll-mt-32 mb-16">
+      <div class="flex items-baseline gap-3 mb-6 pb-3 border-b-2 border-neon-magenta">
+        <span class="font-pixel text-xs text-neon-magenta">SECTION 05</span>
+        <h2 class="font-pixel-jp text-2xl text-neon-magenta">💻 CLI 拡張</h2>
+      </div>
+      <p class="font-body text-sm text-phosphor/80 mb-6">
+        Copilot CLI / GitHub CLI を拡張する仕組み。ターミナルが "もう一人の自分" になる。
+      </p>
+      <EquipmentList items={cliPlugins} color="magenta" />
+    </section>
+
+    <!-- 6. VS CODE EXTENSIONS -->
+    <section id="vscode" class="scroll-mt-32 mb-16">
+      <div class="flex items-baseline gap-3 mb-6 pb-3 border-b-2 border-neon-cyan">
+        <span class="font-pixel text-xs text-neon-cyan">SECTION 06</span>
+        <h2 class="font-pixel-jp text-2xl text-neon-cyan">🧰 VS Code 拡張</h2>
+      </div>
+      <p class="font-body text-sm text-phosphor/80 mb-6">
+        AI駆動開発を支えるエディタ周辺装備。"提案 → 検証 → 反映" のループを最短化する。
+      </p>
+      <EquipmentList items={vscodePlugins} color="cyan" />
+    </section>
+
+    <div class="mt-12 p-5 bg-shadow-ink/70 border-2 border-dashed border-phosphor/30">
+      <h2 class="font-pixel text-xs text-crt-amber mb-2">▮ TIPS</h2>
+      <ul class="font-body text-sm text-phosphor/85 space-y-1 list-disc list-inside">
+        <li><strong class="text-neon-cyan">グローバル</strong>に置けば全プロジェクトで使える（個人マシン推奨）</li>
+        <li><strong class="text-neon-cyan">プロジェクト</strong>に置けばチームで共有できる（リポジトリにコミット）</li>
+        <li>スキルの<strong class="text-crt-amber">セーブポイント</strong>は何も選ばない状態で押すと<strong class="text-crt-amber">全装備</strong>を一括コピー</li>
+        <li><strong class="text-gb-green">MCP server</strong> は Copilot CLI / VS Code / Claude / Cursor すべてで再利用可能</li>
+      </ul>
+    </div>
+
+    <div class="mt-16 text-center">
+      <a href="/" class="font-pixel text-[10px] text-phosphor/60 hover:text-neon-magenta">◀ HUB に戻る</a>
+    </div>
+  </section>
+</Layout>

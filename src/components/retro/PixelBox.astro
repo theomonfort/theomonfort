@@ -1,0 +1,64 @@
+---
+// FF6/DQ-style double-border pixel box
+interface Props {
+  variant?: 'magenta' | 'cyan' | 'amber' | 'green';
+  padding?: string;
+  glow?: boolean;
+  class?: string;
+}
+const { variant = 'cyan', padding = 'p-5 md:p-7', glow = true, class: cls = '' } = Astro.props;
+
+const color = {
+  magenta: '#ff2e88',
+  cyan: '#00f0ff',
+  amber: '#ffb000',
+  green: '#9bbc0f',
+}[variant];
+
+const glowClass = glow
+  ? {
+      magenta: 'shadow-neon-magenta',
+      cyan: 'shadow-neon-cyan',
+      amber: 'shadow-neon-amber',
+      green: 'shadow-neon-amber',
+    }[variant]
+  : '';
+---
+
+<div
+  class={`pixel-box relative bg-shadow-ink/80 backdrop-blur-sm ${padding} ${glowClass} ${cls}`}
+  style={`--pb-color:${color}`}
+>
+  <slot />
+</div>
+
+<style>
+  .pixel-box {
+    border: 2px solid var(--pb-color);
+    box-shadow:
+      inset 0 0 0 4px var(--c-shadow-ink),
+      inset 0 0 0 6px var(--pb-color),
+      4px 4px 0 0 var(--c-shadow-ink);
+    image-rendering: pixelated;
+  }
+  .pixel-box::before,
+  .pixel-box::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--pb-color);
+  }
+  .pixel-box::before {
+    top: -2px;
+    left: -2px;
+    box-shadow:
+      calc(100% + 4px - 8px + 0px) 0 0 var(--pb-color);
+  }
+  .pixel-box::after {
+    bottom: -2px;
+    left: -2px;
+    box-shadow:
+      calc(100% + 4px - 8px + 0px) 0 0 var(--pb-color);
+  }
+</style>

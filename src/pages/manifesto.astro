@@ -1,0 +1,82 @@
+---
+import Layout from '../components/layout/Layout.astro';
+---
+
+<Layout title="マニフェスト — AI 開発 QUEST">
+  <section class="max-w-3xl mx-auto px-4 py-12">
+    <header class="mb-10 text-center">
+      <p class="font-pixel text-[10px] text-crt-amber tracking-[0.3em] mb-2">▮ FINAL CHAPTER ▮</p>
+      <h1 class="font-pixel text-2xl md:text-4xl text-neon-magenta mb-3">マニフェスト</h1>
+      <p class="font-pixel-jp text-lg text-neon-cyan">— THE SCROLL OF PASSION —</p>
+    </header>
+
+    <article class="scroll-paper p-8 md:p-12 mx-auto">
+      <div class="font-pixel-jp text-lg md:text-2xl leading-loose text-shadow-ink space-y-6">
+        <p class="opening">
+          <span class="text-3xl md:text-4xl">一</span>、コードは詩である。
+        </p>
+        <p>
+          AI は楽器だ。<br />
+          下手に弾けば騒音、心を込めれば音楽になる。
+        </p>
+        <p>
+          僕たちは、<span class="text-neon-magenta">何を作るか</span>を知っている人間でありたい。<br />
+          速さに溺れず、流行に飲まれず、<br />
+          自分の <span class="text-neon-magenta">"好み"</span> を世界に翻訳する者でありたい。
+        </p>
+        <p>
+          AI は道具だ。だが、道具を選ぶのも、振り下ろすのも、責任を負うのも——<br />
+          ぜんぶ、君だ。
+        </p>
+        <p>
+          だから、夢を持て。<br />
+          細部に宿る品質を愛せ。<br />
+          小さな勝ちを毎日積み上げろ。
+        </p>
+        <p class="text-center text-2xl md:text-3xl text-neon-magenta mt-10">
+          — 君の手の中に、世界を変える鍵がある。
+        </p>
+      </div>
+
+      <div class="mt-12 pt-6 border-t-2 border-dashed border-shadow-ink/40 text-center">
+        <p class="font-pixel text-[10px] text-shadow-ink/60">▮ 著・AI KAIHATSU QUEST ▮</p>
+      </div>
+    </article>
+
+    <div class="mt-16 text-center">
+      <a href="/" class="font-pixel text-[10px] text-phosphor/60 hover:text-neon-magenta">◀ HUB に戻る</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .scroll-paper {
+    background:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px, transparent 1px, transparent 6px),
+      linear-gradient(to bottom, #f3e2b6 0%, #ead3a0 50%, #d8b97a 100%);
+    border: 4px solid #6b4f2b;
+    box-shadow:
+      inset 0 0 24px rgba(107, 79, 43, 0.4),
+      8px 8px 0 #05060f,
+      0 0 40px rgba(255, 176, 0, 0.2);
+    position: relative;
+  }
+  .scroll-paper::before,
+  .scroll-paper::after {
+    content: '';
+    position: absolute;
+    left: -16px;
+    right: -16px;
+    height: 24px;
+    background: linear-gradient(to bottom, #6b4f2b, #4a3520);
+    border: 2px solid #2a1f10;
+    box-shadow: inset 0 0 0 2px #8b6a3b;
+  }
+  .scroll-paper::before { top: -12px; }
+  .scroll-paper::after { bottom: -12px; }
+
+  .opening {
+    border-left: 6px solid #ff2e88;
+    padding-left: 1em;
+  }
+</style>

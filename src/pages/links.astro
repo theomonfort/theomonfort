@@ -1,0 +1,76 @@
+---
+import Layout from '../components/layout/Layout.astro';
+import MenuArrow from '../components/retro/MenuArrow.astro';
+
+const groups = [
+  {
+    title: '📡 公式チャンネル',
+    items: [
+      { label: 'GitHub Blog', url: 'https://github.blog/', desc: '製品発表・エンジニアリング記事の本流' },
+      { label: 'GitHub Changelog', url: 'https://github.blog/changelog/', desc: '機能リリースの最速ソース' },
+      { label: 'GitHub YouTube', url: 'https://www.youtube.com/@GitHub', desc: 'GitHub Universe・チュートリアル' },
+    ],
+  },
+  {
+    title: '🇯🇵 日本コミュニティ',
+    items: [
+      { label: 'GitHub Japan YouTube', url: 'https://www.youtube.com/@GitHubJapan', desc: '日本語ウェビナーとイベント' },
+      { label: 'GitHub Japan X (Twitter)', url: 'https://twitter.com/GitHubJapan', desc: '日本語の最新情報' },
+    ],
+  },
+  {
+    title: '🛠️ 設計と実践',
+    items: [
+      { label: 'Well-Architected', url: 'https://wellarchitected.github.com/', desc: 'AI駆動開発の土台となる設計原則集' },
+      { label: 'Copilot Docs', url: 'https://docs.github.com/copilot', desc: '機能と設定の公式リファレンス' },
+      { label: 'Model Context Protocol', url: 'https://modelcontextprotocol.io/', desc: 'MCP の仕様と実装ガイド' },
+    ],
+  },
+  {
+    title: '🎴 スキルとレシピ',
+    items: [
+      { label: 'theomonfort skills', url: 'https://theomonfort.github.io/theomonfort/skills/', desc: 'agentic workflow の実戦スキル集（このサイトの源流）' },
+      { label: 'awesome-copilot-cli', url: 'https://github.com/topics/copilot-cli', desc: 'コミュニティの拡張・例' },
+    ],
+  },
+];
+---
+
+<Layout title="リンクの泉 — AI 開発 QUEST">
+  <section class="max-w-3xl mx-auto px-4 py-12">
+    <header class="mb-10">
+      <p class="font-pixel text-[10px] text-crt-amber tracking-[0.3em] mb-2">▮ CHAPTER 4 ▮</p>
+      <h1 class="font-pixel text-2xl md:text-4xl text-neon-magenta mb-3">リンクの泉</h1>
+      <p class="font-pixel-jp text-lg text-neon-cyan">— RESOURCES —</p>
+      <p class="font-body text-sm text-phosphor/80 mt-4">
+        旅の途中で立ち寄れる、信頼できる泉たち。
+      </p>
+    </header>
+
+    <div class="space-y-10">
+      {groups.map((g) => (
+        <section>
+          <h2 class="font-pixel-jp text-xl text-neon-cyan mb-4 border-b-2 border-neon-cyan/40 pb-2">{g.title}</h2>
+          <ul class="space-y-3">
+            {g.items.map((it) => (
+              <li class="bg-shadow-ink/70 border-l-4 border-neon-magenta px-4 py-3 hover:border-crt-amber transition-colors group">
+                <a href={it.url} target="_blank" rel="noopener noreferrer" class="block">
+                  <div class="flex items-baseline gap-2">
+                    <MenuArrow color="text-neon-magenta group-hover:text-crt-amber" />
+                    <span class="font-pixel-jp text-base text-phosphor group-hover:text-neon-cyan transition-colors">{it.label}</span>
+                    <span class="font-mono text-[10px] text-phosphor/40 ml-auto hidden sm:inline">↗</span>
+                  </div>
+                  <p class="font-body text-sm text-phosphor/70 mt-1 ml-6">{it.desc}</p>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+
+    <div class="mt-16 text-center">
+      <a href="/" class="font-pixel text-[10px] text-phosphor/60 hover:text-neon-magenta">◀ HUB に戻る</a>
+    </div>
+  </section>
+</Layout>

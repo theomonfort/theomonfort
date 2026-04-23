@@ -1,0 +1,49 @@
+---
+const path = Astro.url.pathname;
+const items = [
+  { href: '/', label: 'HUB', kanji: '部屋' },
+  { href: '/glossary', label: 'GLOSSARY', kanji: '用語' },
+  { href: '/skills', label: 'EQUIPMENT', kanji: '装備所' },
+  { href: '/philosophy', label: 'PHILOSOPHY', kanji: '哲学' },
+  { href: '/links', label: 'LINKS', kanji: '泉' },
+  { href: '/manifesto', label: 'MANIFESTO', kanji: '宣言' },
+];
+---
+
+<header class="sticky top-0 z-40 backdrop-blur bg-midnight/70 border-b-2 border-neon-magenta/40">
+  <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+    <a
+      href="/"
+      class="group inline-flex items-center gap-2.5 text-neon-magenta hover:text-neon-cyan transition-colors leading-none"
+      aria-label="AI 開発 QUEST — ホームへ"
+    >
+      <span
+        class="inline-block w-2.5 h-2.5 bg-neon-magenta group-hover:bg-neon-cyan transition-colors shrink-0"
+        aria-hidden="true"
+      ></span>
+      <span class="font-pixel text-[11px] md:text-[13px] tracking-[0.05em]">AI</span>
+      <span class="font-pixel-jp text-base md:text-lg leading-none -mt-0.5">開発</span>
+      <span class="font-pixel text-[11px] md:text-[13px] tracking-[0.1em]">QUEST</span>
+    </a>
+    <ul class="flex items-center gap-1 md:gap-2 flex-wrap text-[10px] md:text-xs font-pixel">
+      {items.slice(1).map((item) => {
+        const active = path === item.href || path.startsWith(item.href + '/');
+        return (
+          <li>
+            <a
+              href={item.href}
+              class={`px-2 md:px-3 py-2 border-2 transition-colors ${
+                active
+                  ? 'border-neon-cyan text-neon-cyan shadow-neon-cyan'
+                  : 'border-transparent text-phosphor/70 hover:text-neon-cyan hover:border-neon-cyan/40'
+              }`}
+            >
+              <span class="hidden md:inline">{item.label}</span>
+              <span class="md:hidden font-pixel-jp">{item.kanji}</span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </nav>
+</header>

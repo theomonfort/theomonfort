@@ -1,0 +1,148 @@
+---
+import Layout from '../../components/layout/Layout.astro';
+import { getCollection, render } from 'astro:content';
+import MenuArrow from '../../components/retro/MenuArrow.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('glossary');
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const all = (await getCollection('glossary')).sort((a, b) => a.data.order - b.data.order);
+const idx = all.findIndex((e) => e.id === entry.id);
+const prev = idx > 0 ? all[idx - 1] : null;
+const next = idx < all.length - 1 ? all[idx + 1] : null;
+
+const colorMap: Record<string, string> = {
+  magenta: '#ff2e88',
+  cyan: '#00f0ff',
+  amber: '#ffb000',
+  green: '#9bbc0f',
+};
+const accent = colorMap[entry.data.color];
+---
+
+<Layout title={`${entry.data.title} — 用語の書`}>
+  <section class="max-w-3xl mx-auto px-4 py-12">
+    <a href="/glossary" class="font-pixel text-[10px] text-phosphor/60 hover:text-neon-magenta">◀ 用語一覧</a>
+
+    <header class="mt-6 mb-8 pb-6 border-b-2 border-dashed" style={`border-color:${accent}`}>
+      <div class="flex items-center gap-2 mb-2">
+        <span class="font-pixel text-[10px]" style={`color:${accent}`}>
+          NO.{String(entry.data.order).padStart(2, '0')}
+        </span>
+        <span class="font-pixel text-[8px] text-phosphor/50">{entry.data.titleEn}</span>
+      </div>
+      <h1 class="font-pixel-jp text-3xl md:text-5xl mb-3" style={`color:${accent}`}>
+        <span class="mr-3">{entry.data.icon}</span>{entry.data.title}
+      </h1>
+      <p class="font-body text-base text-phosphor/90 leading-relaxed">{entry.data.summary}</p>
+    </header>
+
+    <article class="prose-akq">
+      <Content />
+    </article>
+
+    {entry.data.links.length > 0 && (
+      <aside class="mt-10 bg-shadow-ink/80 border-2 p-5" style={`border-color:${accent}`}>
+        <h2 class="font-pixel text-xs mb-3" style={`color:${accent}`}>▮ 公式リンク</h2>
+        <ul class="space-y-2">
+          {entry.data.links.map((l) => (
+            <li class="font-mono text-sm">
+              <MenuArrow /> <a href={l.url} target="_blank" rel="noopener noreferrer" class="retro-link">{l.label}</a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    )}
+
+    {entry.data.related.length > 0 && (
+      <aside class="mt-6">
+        <h2 class="font-pixel text-[10px] text-phosphor/60 mb-2">▮ 関連用語</h2>
+        <div class="flex flex-wrap gap-2">
+          {entry.data.related.map((slug) => {
+            const r = all.find((e) => e.id === slug);
+            if (!r) return null;
+            return (
+              <a
+                href={`/glossary/${r.id}`}
+                class="font-pixel-jp text-xs px-3 py-1 border border-phosphor/30 hover:border-neon-cyan hover:text-neon-cyan transition-colors"
+              >
+                {r.data.icon} {r.data.title}
+              </a>
+            );
+          })}
+        </div>
+      </aside>
+    )}
+
+    <nav class="mt-12 grid grid-cols-2 gap-4 font-pixel text-[10px]">
+      {prev ? (
+        <a href={`/glossary/${prev.id}`} class="block p-3 border-2 border-phosphor/30 hover:border-neon-cyan hover:text-neon-cyan transition-colors">
+          ◀ {prev.data.title}
+        </a>
+      ) : <span></span>}
+      {next ? (
+        <a href={`/glossary/${next.id}`} class="block p-3 border-2 border-phosphor/30 hover:border-neon-magenta hover:text-neon-magenta transition-colors text-right">
+          {next.data.title} ▶
+        </a>
+      ) : <span></span>}
+    </nav>
+  </section>
+</Layout>
+
+<style is:global>
+  .prose-akq {
+    color: #e8f4ff;
+    font-family: 'Noto Sans JP', sans-serif;
+    line-height: 1.85;
+  }
+  .prose-akq h2, .prose-akq h3 {
+    font-family: 'DotGothic16', monospace;
+    color: #00f0ff;
+    margin-top: 2em;
+    margin-bottom: 0.6em;
+  }
+  .prose-akq h3 { color: #ff2e88; font-size: 1.1em; }
+  .prose-akq p { margin: 1em 0; }
+  .prose-akq strong { color: #ffb000; }
+  .prose-akq code {
+    background: #05060f;
+    padding: 2px 6px;
+    border: 1px solid #00f0ff;
+    color: #9bbc0f;
+    font-size: 0.9em;
+  }
+  .prose-akq pre {
+    background: #05060f;
+    border: 2px solid #00f0ff;
+    padding: 1em;
+    margin: 1.5em 0;
+    overflow-x: auto;
+    box-shadow: 4px 4px 0 #05060f, 0 0 8px rgba(0, 240, 255, 0.4);
+  }
+  .prose-akq pre code { border: none; padding: 0; background: none; color: #e8f4ff; }
+  .prose-akq blockquote {
+    border-left: 4px solid #ff2e88;
+    padding-left: 1em;
+    color: #e8f4ff;
+    font-style: italic;
+    background: rgba(255, 46, 136, 0.06);
+    margin: 1.5em 0;
+    padding: 0.8em 1em;
+  }
+  .prose-akq ul, .prose-akq ol { padding-left: 1.5em; margin: 1em 0; }
+  .prose-akq li { margin: 0.4em 0; }
+  .prose-akq a {
+    color: #00f0ff;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .prose-akq a:hover { color: #ff2e88; }
+</style>

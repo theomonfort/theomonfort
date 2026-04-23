@@ -1,0 +1,59 @@
+---
+import Layout from '../components/layout/Layout.astro';
+import PixelRoom from '../components/room/PixelRoom.astro';
+import MenuArrow from '../components/retro/MenuArrow.astro';
+---
+
+<Layout title="AI 開発 QUEST — レトロ道場へようこそ">
+  <section class="hero-room relative min-h-[calc(100vh-72px)] overflow-hidden">
+    <!-- Bedroom: full-bleed background, fades into starfield top & bottom -->
+    <div class="absolute inset-0 flex items-center justify-center">
+      <PixelRoom immersive={true} />
+    </div>
+
+    <!-- Foreground content layered over the faded edges -->
+    <div class="relative z-10 flex flex-col items-center justify-between min-h-[calc(100vh-72px)] pt-2 md:pt-3 pb-8 md:pb-12 px-4 pointer-events-none">
+      <!-- Title sits over the soft TOP fade -->
+      <div class="text-center max-w-2xl">
+        <p class="font-pixel text-[9px] md:text-[10px] text-crt-amber mb-1 tracking-[0.3em] drop-shadow-[0_0_6px_rgba(255,176,0,0.5)]">▮ INSERT COIN ▮</p>
+        <h1 class="font-pixel text-2xl md:text-4xl text-neon-magenta tracking-wider drop-shadow-[0_0_14px_rgba(255,46,136,0.85)] leading-none">
+          AI 開発<br class="md:hidden" /> QUEST
+        </h1>
+        <p class="font-pixel-jp text-sm md:text-base text-neon-cyan mt-1 drop-shadow-[0_0_8px_rgba(0,240,255,0.7)]">— AI駆動開発の道場 —</p>
+      </div>
+
+      <!-- Hint sits over the soft BOTTOM fade -->
+      <div class="text-center font-pixel text-[10px] text-phosphor/80 space-y-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
+        <p class="font-body text-sm md:text-base text-phosphor/90 mb-3 max-w-xl mx-auto leading-relaxed">
+          家具をクリックして冒険を始めよう。<br class="md:hidden" />
+          用語、スキル、哲学——この部屋には、君の "好み" を世界に出す全てがある。
+        </p>
+        <p><MenuArrow color="text-crt-amber" /> 家具をクリック / Tabキーで移動</p>
+        <p class="text-phosphor/50">秘密のコマンド: ↑↑↓↓←→←→BA</p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Subtle radial vignette adds depth + helps text readability without
+     hiding the room. Sits between room and content. */
+  .hero-room::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at 50% 50%,
+        transparent 0%,
+        transparent 55%,
+        rgba(10, 14, 39, 0.45) 90%,
+        rgba(10, 14, 39, 0.85) 100%),
+      linear-gradient(to bottom,
+        rgba(10, 14, 39, 0.55) 0%,
+        transparent 18%,
+        transparent 82%,
+        rgba(10, 14, 39, 0.55) 100%);
+  }
+</style>

@@ -1,0 +1,24 @@
+---
+interface Props {
+  class?: string;
+  color?: string;
+}
+const { class: cls = '', color = 'text-neon-magenta' } = Astro.props;
+---
+
+<span class={`menu-arrow inline-block ${color} ${cls}`} aria-hidden="true">▶</span>
+
+<style>
+  .menu-arrow {
+    animation: arrow-bob 0.7s ease-in-out infinite;
+    text-shadow: 0 0 4px currentColor;
+  }
+  @keyframes arrow-bob {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(4px);
+    }
+  }
+</style>
