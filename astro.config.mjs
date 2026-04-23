@@ -5,7 +5,8 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'http://localhost:4321',
+  site: 'https://theomonfort.github.io',
+  base: '/theomonfort',
   integrations: [
     react(),
     mdx(),
