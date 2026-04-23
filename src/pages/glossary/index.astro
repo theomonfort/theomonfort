@@ -41,8 +41,8 @@ const colorMap: Record<string, { border: string; text: string; glow: string }> =
                   <div class="flex items-baseline gap-2 mb-1">
                     <span class={`font-pixel text-[10px] ${c.text}`}>NO.{String(e.data.order).padStart(2, '0')}</span>
                   </div>
-                  <h3 class={`font-pixel text-lg md:text-xl ${c.text} mb-1 leading-tight`}>{e.data.titleEn}</h3>
-                  <p class="font-pixel-jp text-sm text-phosphor/50 mb-2">{e.data.title}</p>
+                  <h3 class={`font-pixel text-sm md:text-base ${c.text} mb-1 leading-tight`}>{e.data.titleEn}</h3>
+                  <p class="font-pixel-jp text-xs text-phosphor/50 mb-2">{e.data.title}</p>
                   <p class="font-body text-sm text-phosphor/85 leading-relaxed line-clamp-3">
                     {e.data.summary}
                   </p>
