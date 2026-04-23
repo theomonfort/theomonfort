@@ -1,6 +1,6 @@
 ---
-title: MCP（Model Context Protocol）
-titleEn: Model Context Protocol
+title: MCP Server（Model Context Protocol）
+titleEn: MCP Server
 summary: AIエージェントと外部ツール／データを繋ぐ標準プロトコル。USB-Cのように、どのモデル・どのツールでも"差せば動く"。
 icon: 🔌
 color: cyan

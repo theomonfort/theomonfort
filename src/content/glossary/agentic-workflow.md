@@ -1,24 +1,44 @@
 ---
 title: エージェンティック・ワークフロー
 titleEn: Agentic Workflow
-summary: Plan → Implement → Validate を回す自律的開発サイクル。skill を組み合わせて"職人の流派"を作る。
+summary: 自然言語の Markdown を GitHub Actions で動く AI エージェントに変換する仕組み。文脈を読み、判断し、行動する自動化を、コードではなく文章で書く。
 icon: 🔄
 color: green
 order: 12
-related: ['agent-skills', 'harness-engineering', 'custom-agent']
+related: ['agent-skills', 'cloud-agent', 'mcp']
 links:
-  - label: theomonfort skills (workflow)
-    url: https://theomonfort.github.io/theomonfort/skills/
+  - label: GitHub Agentic Workflows (gh-aw)
+    url: https://github.github.io/gh-aw/introduction/overview/
+  - label: gh-aw リポジトリ
+    url: https://github.com/githubnext/gh-aw
+  - label: Agentics サンプル集
+    url: https://github.com/githubnext/agentics
 ---
 
-単発のプロンプトは"一撃"、agentic workflow は"型 → 試合 → 反省 → 次の型" のサイクルだ。
+従来の自動化は「if これなら then あれ」の固いルールだった。**Agentic Workflow** は違う。Copilot CLI / Claude / Codex のような coding agent を GitHub Actions の中で走らせ、自然言語の指示から **文脈を理解 → 判断 → 適切な行動** を取らせる。
 
-**最小構成:**
-1. **Plan** — `create-plan` で意図を文章化、リスクを洗う
-2. **Critique** — `rubber-duck` で穴を探させる
-3. **Implement** — `implement-plan` で段階実装
-4. **Validate** — `validate-plan` で達成基準を検証
-5. **Describe** — `describe-pr` で物語にして引き継ぐ
+**どう書く?**
+複雑なスクリプトの代わりに、Markdown ファイル一つ。frontmatter で「いつ動くか・何ができるか」を宣言、本文で「何をしてほしいか」を日本語や英語で書く。
 
-このサイクルを身につけると、AI は "魔法" から "職人道具" になる。
-そしてある日、君は気付く——**自分の判断力が伸びている**ことに。
+```yaml
+---
+on:
+  issues:
+    types: [opened]
+permissions: read-all
+safe-outputs:
+  add-comment:
+---
+# Issue Clarifier
+新しい issue を分析し、不明確なら追加情報をリクエストせよ。
+```
+
+`gh aw compile` がこの Markdown を堅牢化された `.lock.yml`（GitHub Actions ワークフロー）にコンパイルし、issue が開かれるたびに AI エージェントがコンテナ内で起動する。
+
+**なぜ重要?**
+- **コードではなく文章** — issue triage、コードレビュー、リリース管理を、書きたいことを書くだけで自動化
+- **セキュリティ・バイ・デフォルト** — 読み取り専用権限が初期設定。書き込みは `safe-outputs`（検証済みの安全な GitHub 操作）経由のみ
+- **AI に直接の write 権限を渡さない** — issue / コメント / PR の作成はサニタイズされた境界の中で
+- **チーム制限** — 実行できる人を絞れるので、AI エージェントが管理された範囲内で動く
+
+つまり Agentic Workflow は、GitHub Actions × Coding Agent × Markdown の組み合わせで作る、**自律的・安全・宣言的な開発自動化** の新しい形。
