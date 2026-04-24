@@ -1,4 +1,4 @@
-# 👋 テオ・モンフォール (Théo Monfort)
+# 👋 テオ・モンフォル (Théo Monfort)
 
 **ソリューションズ・エンジニア @ GitHub Japan 🇯🇵**
 
