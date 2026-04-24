@@ -13,9 +13,20 @@ links:
     url: https://github.com/githubnext/gh-aw
   - label: Agentics サンプル集
     url: https://github.com/githubnext/agentics
+  - label: Peli's Agent Factory (blog)
+    url: https://github.github.com/gh-aw/blog/2026-01-12-welcome-to-pelis-agent-factory/
+  - label: awesome-copilot
+    url: https://github.com/github/awesome-copilot
 ---
 
 従来の自動化は「if これなら then あれ」の固いルールだった。**Agentic Workflow** は違う。Copilot CLI / Claude / Codex のような coding agent を GitHub Actions の中で走らせ、自然言語の指示から **文脈を理解 → 判断 → 適切な行動** を取らせる。
+
+**インストール**
+`gh-aw` は GitHub CLI の拡張機能。一行で入る:
+
+```bash
+gh extension install githubnext/gh-aw
+```
 
 **どう書く?**
 複雑なスクリプトの代わりに、Markdown ファイル一つ。frontmatter で「いつ動くか・何ができるか」を宣言、本文で「何をしてほしいか」を日本語や英語で書く。
