@@ -112,26 +112,145 @@ const accent = colorMap[entry.data.color];
       <span><span class="key">←</span> <span class="key">→</span> 移動</span>
       <span><span class="key">Esc</span> 終了</span>
     </div>
+
+    <div class="slide-progress" aria-hidden="true"></div>
+    <div class="slide-counter font-pixel text-[10px]" aria-hidden="true"></div>
+    <div class="slide-title-tag" aria-hidden="true"></div>
   </section>
 </Layout>
 
 <script>
-  // ── Presentation mode (registered first, mermaid below) ────────
-  function setPresent(on: boolean) {
+  // ── Slide engine (split content by <h2>; cover = header + first H2 group) ──
+  type Slide = HTMLElement[];
+  let slides: Slide[] = [];
+  let current = 0;
+  let restoreFns: Array<() => void> = [];
+
+  function buildSlides(): Slide[] {
+    const section = document.querySelector<HTMLElement>('.glossary-detail');
+    if (!section) return [];
+    const header = section.querySelector<HTMLElement>(':scope > header');
+    const article = section.querySelector<HTMLElement>(':scope > article.prose-akq');
+    if (!article) return header ? [[header]] : [];
+
+    const groups: HTMLElement[][] = [];
+    let bucket: HTMLElement[] = [];
+    Array.from(article.children).forEach((child) => {
+      const el = child as HTMLElement;
+      if (el.tagName === 'H2' && bucket.length > 0) {
+        groups.push(bucket);
+        bucket = [el];
+      } else {
+        bucket.push(el);
+      }
+    });
+    if (bucket.length) groups.push(bucket);
+
+    if (header && groups[0]) groups[0] = [header, ...groups[0]];
+    else if (header) groups.unshift([header]);
+    return groups;
+  }
+
+  function showSlide(i: number) {
+    if (!slides.length) return;
+    current = Math.max(0, Math.min(slides.length - 1, i));
+    slides.forEach((slide, idx) => {
+      const active = idx === current;
+      slide.forEach((el) => {
+        el.classList.toggle('akq-slide-hidden', !active);
+        el.classList.toggle('akq-slide-active', active);
+      });
+    });
+    updateChrome();
+  }
+
+  function updateChrome() {
+    const counter = document.querySelector<HTMLElement>('.slide-counter');
+    if (counter) counter.textContent = `${current + 1} / ${slides.length}`;
+    const prog = document.querySelector<HTMLElement>('.slide-progress');
+    if (prog) {
+      prog.innerHTML = '';
+      for (let i = 0; i < slides.length; i++) {
+        const bar = document.createElement('span');
+        bar.className = 'slide-progress-bar' + (i <= current ? ' active' : '');
+        prog.appendChild(bar);
+      }
+    }
+    const tag = document.querySelector<HTMLElement>('.slide-title-tag');
+    if (tag) {
+      const titleEl = document.querySelector<HTMLElement>('.glossary-detail header h1');
+      const titleHtml = titleEl?.innerHTML ?? '';
+      tag.innerHTML = current === 0 ? '' : `<span class="tag-main">${titleHtml}</span>`;
+      tag.classList.toggle('visible', current > 0);
+    }
+  }
+
+  function enterSlideMode() {
+    slides = buildSlides();
+    if (!slides.length) return;
+
+    // Tag every slide element so CSS can apply
+    slides.forEach((slide) => slide.forEach((el) => el.classList.add('akq-slide-el')));
+    restoreFns.push(() => {
+      slides.forEach((slide) =>
+        slide.forEach((el) => {
+          el.classList.remove('akq-slide-el', 'akq-slide-hidden', 'akq-slide-active');
+        })
+      );
+    });
+
+    // start at slide param or 0
+    const params = new URLSearchParams(window.location.search);
+    const s = parseInt(params.get('slide') || '0', 10);
+    showSlide(isNaN(s) ? 0 : s);
+  }
+
+  function exitSlideMode() {
+    restoreFns.forEach((fn) => fn());
+    restoreFns = [];
+    slides = [];
+    current = 0;
+  }
+
+  // ── Presentation mode toggle ───────────────────────────────────
+  function setPresent(on: boolean, opts: { keepSlide?: boolean } = {}) {
+    const wasOn = document.body.classList.contains('present-mode');
     document.body.classList.toggle('present-mode', on);
     const url = new URL(window.location.href);
     if (on) url.searchParams.set('present', '1');
-    else url.searchParams.delete('present');
-    history.replaceState(null, '', url.pathname + (url.search ? url.search : '') + url.hash);
+    else { url.searchParams.delete('present'); url.searchParams.delete('slide'); }
+    history.replaceState(null, '', url.pathname + (url.search || '') + url.hash);
+
+    if (on && !wasOn) enterSlideMode();
+    if (!on && wasOn) exitSlideMode();
+
+    if (on) {
+      document.querySelectorAll<SVGSVGElement>('.mermaid-wrap svg').forEach((svg) => {
+        svg.removeAttribute('width');
+        svg.removeAttribute('height');
+        svg.style.maxWidth = 'none';
+        svg.style.width = '100%';
+        svg.style.height = 'auto';
+      });
+    }
+  }
+
+  function syncSlideUrl() {
+    const url = new URL(window.location.href);
+    url.searchParams.set('slide', String(current));
+    history.replaceState(null, '', url.pathname + (url.search || '') + url.hash);
   }
 
   function initPresent() {
     const params = new URLSearchParams(window.location.search);
     setPresent(params.get('present') === '1');
     const btn = document.getElementById('present-toggle');
-    btn?.addEventListener('click', () =>
-      setPresent(!document.body.classList.contains('present-mode'))
-    );
+    if (btn && !btn.dataset.bound) {
+      btn.dataset.bound = '1';
+      btn.addEventListener('click', () =>
+        setPresent(!document.body.classList.contains('present-mode'))
+      );
+    }
   }
 
   function onKey(e: KeyboardEvent) {
@@ -149,13 +268,29 @@ const accent = colorMap[entry.data.color];
       setPresent(false);
       return;
     }
-    if (present && (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ')) {
-      const nx = section?.dataset.next;
-      if (nx) { e.preventDefault(); window.location.href = nx + '?present=1'; }
+    if (!present) return;
+
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+      e.preventDefault();
+      if (current < slides.length - 1) {
+        showSlide(current + 1);
+        syncSlideUrl();
+      } else {
+        const nx = section?.dataset.next;
+        if (nx) window.location.href = nx + '?present=1';
+      }
+      return;
     }
-    if (present && (e.key === 'ArrowLeft' || e.key === 'PageUp')) {
-      const pv = section?.dataset.prev;
-      if (pv) { e.preventDefault(); window.location.href = pv + '?present=1'; }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (current > 0) {
+        showSlide(current - 1);
+        syncSlideUrl();
+      } else {
+        const pv = section?.dataset.prev;
+        if (pv) window.location.href = pv + `?present=1&slide=999`;
+      }
+      return;
     }
   }
 
@@ -192,11 +327,49 @@ const accent = colorMap[entry.data.color];
         const raw = pre.textContent || '';
         const wrap = document.createElement('div');
         wrap.className = 'mermaid-wrap';
+        // Preserve slide-engine classes if pre was tagged
+        if (pre.classList.contains('akq-slide-el')) wrap.classList.add('akq-slide-el');
+        if (pre.classList.contains('akq-slide-hidden')) wrap.classList.add('akq-slide-hidden');
+        if (pre.classList.contains('akq-slide-active')) wrap.classList.add('akq-slide-active');
         wrap.id = `mermaid-${Date.now()}-${i}`;
         wrap.textContent = raw;
         pre.replaceWith(wrap);
       });
-      mermaid.run({ querySelector: '.mermaid-wrap' });
+
+      // Mermaid can't render inside display:none slides — temporarily
+      // move hidden wraps offscreen, render, then restore.
+      const allWraps = Array.from(document.querySelectorAll<HTMLElement>('.mermaid-wrap'));
+      const restored: Array<{ el: HTMLElement; orig: string }> = [];
+      allWraps.forEach((el) => {
+        const cs = window.getComputedStyle(el);
+        if (cs.display === 'none') {
+          restored.push({ el, orig: el.getAttribute('style') || '' });
+          el.setAttribute(
+            'style',
+            (el.getAttribute('style') || '') +
+              ';display:block !important;position:absolute !important;left:-99999px !important;top:0 !important;width:1100px !important;'
+          );
+        }
+      });
+      await new Promise((r) => setTimeout(r, 30));
+      try { await mermaid.run({ querySelector: '.mermaid-wrap' }); } catch {}
+      // Strip mermaid's intrinsic width/height so CSS can scale the SVG to fill the wrap.
+      document.querySelectorAll<SVGSVGElement>('.mermaid-wrap svg').forEach((svg) => {
+        svg.removeAttribute('width');
+        svg.removeAttribute('height');
+        svg.style.maxWidth = 'none';
+        svg.style.width = '100%';
+        svg.style.height = 'auto';
+      });
+      restored.forEach(({ el, orig }) => {
+        if (orig) el.setAttribute('style', orig); else el.removeAttribute('style');
+      });
+
+      // If we're in present mode, rebuild slides to capture new wrappers
+      if (document.body.classList.contains('present-mode')) {
+        exitSlideMode();
+        enterSlideMode();
+      }
     } catch (err) {
       console.error('[mermaid]', err);
     }
@@ -218,7 +391,8 @@ const accent = colorMap[entry.data.color];
     margin-top: 2em;
     margin-bottom: 0.6em;
   }
-  .prose-akq h3 { color: #ff2e88; font-size: 1.1em; }
+  .prose-akq h2 { font-size: 2.2em; line-height: 1.25; }
+  .prose-akq h3 { color: #ff2e88; font-size: 1.4em; }
   .prose-akq p { margin: 1em 0; }
   .prose-akq strong { color: #ffb000; }
   .prose-akq code {
@@ -248,6 +422,53 @@ const accent = colorMap[entry.data.color];
   }
   .prose-akq blockquote p { margin: 0; }
   .prose-akq blockquote strong { color: #ffb000; }
+
+  /* ── Setup cards (scope comparison) ── */
+  .prose-akq .setup-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.2em;
+    margin: 1.8em 0;
+  }
+  @media (min-width: 720px) {
+    .prose-akq .setup-cards { grid-template-columns: 1fr 1fr; }
+  }
+  .prose-akq .setup-card {
+    background: rgba(10, 14, 39, 0.7);
+    border: 2px solid rgba(0, 240, 255, 0.45);
+    padding: 1em 1.2em;
+    box-shadow: 4px 4px 0 #05060f, 0 0 12px rgba(0, 240, 255, 0.15);
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .prose-akq .setup-card:hover {
+    transform: translate(-2px, -2px);
+    border-color: #ff2e88;
+  }
+  .prose-akq .setup-card-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.6em 0.9em;
+    margin-bottom: 0.7em;
+    padding-bottom: 0.7em;
+    border-bottom: 1px dashed rgba(0, 240, 255, 0.25);
+  }
+  .prose-akq .setup-card-head code {
+    font-size: 1.05em;
+    color: #9bbc0f;
+    background: rgba(155, 188, 15, 0.08);
+    border: 1px solid rgba(155, 188, 15, 0.3);
+    padding: 2px 8px;
+  }
+  .prose-akq .setup-card-tag {
+    font-family: 'DotGothic16', sans-serif;
+    font-size: 0.85em;
+    letter-spacing: 0.05em;
+  }
+  .prose-akq .setup-card-tag.tag-cyan { color: #00f0ff; }
+  .prose-akq .setup-card-tag.tag-magenta { color: #ff2e88; }
+  .prose-akq .setup-card p { margin: 0; line-height: 1.6; }
+
   .mermaid-wrap {
     background: #05060f;
     border: 2px solid #00f0ff;
@@ -271,7 +492,7 @@ const accent = colorMap[entry.data.color];
   .present-hint {
     position: fixed;
     right: 16px;
-    bottom: 16px;
+    bottom: 64px;
     padding: 8px 12px;
     background: rgba(10, 14, 39, 0.9);
     color: #00f0ff;
@@ -311,7 +532,7 @@ const accent = colorMap[entry.data.color];
   }
 
   /* ── Presentation mode ── */
-  body.present-mode { background: #05060f !important; }
+  body.present-mode { background: #05060f !important; overflow: hidden; }
   body.present-mode nav,
   body.present-mode footer,
   body.present-mode .xp-hud,
@@ -321,18 +542,146 @@ const accent = colorMap[entry.data.color];
   body.present-mode .present-overlay-hint { display: flex; }
 
   body.present-mode .glossary-detail {
-    max-width: 1100px;
-    padding: 4rem 3rem;
+    max-width: none !important;
+    width: 100vw !important;
+    min-height: 100vh;
+    padding: 5rem 4rem 3rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
-  body.present-mode .glossary-detail > a:first-child { display: none; }
-  body.present-mode .glossary-detail > nav { display: none; }
+  body.present-mode .glossary-detail > a:first-child,
+  body.present-mode .glossary-detail > nav,
+  body.present-mode .glossary-detail > aside { display: none !important; }
+
+  /* ── Slide visibility ── */
+  body.present-mode .akq-slide-el { /* no-op marker */ }
+  body.present-mode .akq-slide-hidden { display: none !important; }
+
+  body.present-mode .akq-slide-active {
+    animation: slide-in 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes slide-in {
+    0%   { opacity: 0; transform: translateY(24px) scale(0.98); filter: blur(4px); }
+    60%  { opacity: 1; filter: blur(0); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  }
+  body.present-mode .glossary-detail {
+    transition: background 0.4s ease;
+  }
+
+  /* Boost typography in slide mode */
+  body.present-mode .glossary-detail header { margin-bottom: 1.5rem; }
   body.present-mode .glossary-detail header h1 { font-size: 3rem !important; }
   body.present-mode .glossary-detail header > p:nth-of-type(2) { font-size: 1.5rem !important; }
-  body.present-mode .prose-akq { font-size: 1.35rem; line-height: 1.9; }
-  body.present-mode .prose-akq h2 { font-size: 2rem; margin-top: 2.5em; }
-  body.present-mode .prose-akq h3 { font-size: 1.5rem; }
+  body.present-mode .prose-akq { font-size: 1.5rem; line-height: 1.7; max-width: 1100px; margin: 0 auto; }
+  body.present-mode .prose-akq h2 { font-size: 2.4rem; margin-top: 0.5em; margin-bottom: 0.7em; }
+  body.present-mode .prose-akq h3 { font-size: 1.7rem; }
   body.present-mode .prose-akq pre,
-  body.present-mode .mermaid-wrap { font-size: 1rem; padding: 2em; margin: 2.5em 0; }
-  body.present-mode .mermaid-wrap svg { max-height: 60vh; }
-  body.present-mode aside { display: none; }
+  body.present-mode .mermaid-wrap {
+    font-size: 1.05rem;
+    padding: 2em;
+    margin: 1.5em 0;
+    width: 100% !important;
+    max-width: none !important;
+  }
+  body.present-mode .mermaid-wrap svg {
+    max-width: none !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: 65vh;
+  }
+  body.present-mode .prose-akq blockquote { font-size: 1.3rem; }
+
+  /* ── Progress bars (top) ── */
+  .slide-progress {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 12px 16px;
+    gap: 4px;
+    z-index: 60;
+  }
+  body.present-mode .slide-progress { display: flex; }
+  .slide-progress-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(0, 240, 255, 0.15);
+    transition: background 0.2s;
+  }
+  .slide-progress-bar.active { background: #00f0ff; box-shadow: 0 0 6px #00f0ff; }
+
+  /* ── Slide counter (bottom right) ── */
+  .slide-counter {
+    display: none;
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    color: #00f0ff;
+    z-index: 60;
+    padding: 6px 10px;
+    background: rgba(10, 14, 39, 0.8);
+    border: 1px solid rgba(0, 240, 255, 0.4);
+  }
+  body.present-mode .slide-counter { display: block; }
+
+  /* ── Slide title tag (top-left, shown after cover) ── */
+  .slide-title-tag {
+    display: none;
+    position: fixed;
+    top: 28px;
+    left: 28px;
+    z-index: 60;
+    padding: 10px 18px;
+    background: rgba(10, 14, 39, 0.85);
+    border: 2px solid rgba(255, 46, 136, 0.55);
+    box-shadow: 4px 4px 0 #05060f, 0 0 14px rgba(255, 46, 136, 0.25);
+    color: #e8f4ff;
+    letter-spacing: 0.05em;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    transform: translateX(-12px);
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    max-width: 80vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 17px;
+    line-height: 1.1;
+  }
+  body.present-mode .slide-title-tag { display: flex; }
+  body.present-mode .slide-title-tag.visible { opacity: 0.95; transform: translateX(0); }
+  .slide-title-tag .tag-main { color: #ff2e88; display: inline-flex; align-items: center; gap: 8px; }
+  .slide-title-tag .tag-main span { font-size: 1.1em; }
+  .slide-title-tag .tag-sep { color: #00f0ff; opacity: 0.7; font-size: 0.9em; }
+  .slide-title-tag .tag-sub { color: #00f0ff; font-family: 'DotGothic16', sans-serif; font-size: 0.95em; }
+
+  /* ── Match the overlay-hint style to the title tag ── */
+  body.present-mode .present-overlay-hint {
+    top: 28px;
+    right: 22px;
+    padding: 10px 16px;
+    background: rgba(10, 14, 39, 0.85);
+    border: 2px solid rgba(0, 240, 255, 0.55);
+    box-shadow: 4px 4px 0 #05060f, 0 0 14px rgba(0, 240, 255, 0.25);
+    opacity: 0.95;
+    font-size: 12px;
+    gap: 14px;
+  }
+
+  /* Counter: same retro card style */
+  body.present-mode .slide-counter {
+    bottom: 18px;
+    right: 22px;
+    padding: 8px 14px;
+    background: rgba(10, 14, 39, 0.85);
+    border: 2px solid rgba(0, 240, 255, 0.55);
+    box-shadow: 4px 4px 0 #05060f, 0 0 14px rgba(0, 240, 255, 0.25);
+    color: #00f0ff;
+    font-size: 12px;
+  }
 </style>

@@ -4,7 +4,7 @@ titleEn: GitHub Codespaces
 summary: クラウド上にホストされる、カスタマイズ可能なリモート開発環境。AI を"安全に閉じ込めて"実験・作業できる、AI駆動開発の理想的な遊び場。
 icon: ☁️
 color: cyan
-order: 13
+order: 15
 related: ['cloud-agent', 'agentic-workflow', 'cli']
 links:
   - label: GitHub Codespaces

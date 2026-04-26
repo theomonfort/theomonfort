@@ -92,7 +92,7 @@ export default function BGMPlayer() {
     <button
       type="button"
       onClick={toggle}
-      className="fixed bottom-4 right-4 z-[60] font-pixel text-[10px] px-3 py-2 border-2 bg-shadow-ink/80 hover:bg-neon-magenta/20 transition-colors flex items-center gap-2"
+      className="bgm-player fixed bottom-4 right-4 z-[60] font-pixel text-[10px] px-3 py-2 border-2 bg-shadow-ink/80 hover:bg-neon-magenta/20 transition-colors flex items-center gap-2"
       style={{
         borderColor: playing ? '#ff2e88' : '#444',
         color: playing ? '#ff2e88' : '#888',

@@ -4,7 +4,7 @@ titleEn: AI-powered Development
 summary: AIをペアプログラマーとして開発の全工程を回す方法論。設計、実装、レビュー、テスト、ドキュメントまで人とAIが協奏する。
 icon: 🎮
 color: magenta
-order: 1
+order: 8
 related: ['prompt-engineering', 'context-engineering', 'agentic-workflow']
 links:
   - label: GitHub Copilot

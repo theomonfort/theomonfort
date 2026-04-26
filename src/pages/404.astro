@@ -1,0 +1,57 @@
+---
+import Layout from '../components/layout/Layout.astro';
+---
+
+<Layout title="404 — 道に迷ったか?" description="このページは別のディメンションに存在する。">
+  <section class="min-h-[70vh] flex flex-col items-center justify-center px-4 text-center gap-8">
+    <div class="relative">
+      <img
+        src="/theomonfort/mascot.svg"
+        alt="迷子のマスコット"
+        class="w-40 md:w-56 mx-auto pixelated drop-shadow-[0_0_20px_rgba(255,46,136,0.6)] animate-float"
+      />
+      <span
+        class="absolute -top-3 -right-3 font-pixel text-[10px] text-crt-amber bg-shadow-ink/80 border-2 border-crt-amber px-2 py-1 rotate-[8deg]"
+        aria-hidden="true"
+      >?!</span>
+    </div>
+
+    <div class="space-y-4 max-w-xl">
+      <h1 class="font-pixel text-3xl md:text-5xl text-neon-magenta">404</h1>
+      <p class="font-pixel-jp text-lg md:text-2xl text-phosphor">
+        このページは<span class="text-neon-cyan">見つからない</span>。
+      </p>
+      <p class="font-body text-sm md:text-base text-phosphor/70 leading-relaxed">
+        別のディメンションに飛ばされたか、まだ作られていないか、<br class="hidden md:inline" />
+        あるいは <span class="text-crt-amber">隠しエリア</span> かもしれない。
+      </p>
+    </div>
+
+    <div class="flex flex-wrap items-center justify-center gap-4 font-pixel text-[10px] md:text-xs">
+      <a
+        href="/theomonfort/"
+        class="px-4 py-3 border-2 border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-midnight transition-colors shadow-neon-cyan"
+      >
+        ◀ ホームへ戻る
+      </a>
+      <a
+        href="/theomonfort/glossary"
+        class="px-4 py-3 border-2 border-neon-magenta/60 text-neon-magenta hover:bg-neon-magenta hover:text-midnight transition-colors"
+      >
+        用語の書を開く ▶
+      </a>
+    </div>
+
+    <p class="font-mono text-[10px] text-phosphor/40 mt-6">
+      ERR_NO_QUEST_FOUND · {new Date().getFullYear()}
+    </p>
+  </section>
+</Layout>
+
+<style>
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .animate-float { animation: float 2.4s ease-in-out infinite; }
+</style>

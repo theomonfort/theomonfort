@@ -65,10 +65,11 @@ export default function CRTOverlay() {
     <>
       {enabled && (
         <>
-          <div className="crt-lines crt-vignette" aria-hidden="true" />
+          <div className="crt-overlay crt-lines crt-vignette" aria-hidden="true" />
           <canvas
             ref={canvasRef}
             aria-hidden="true"
+            className="crt-overlay"
             style={{
               position: 'fixed',
               inset: 0,
@@ -82,7 +83,7 @@ export default function CRTOverlay() {
       <button
         type="button"
         onClick={() => setEnabled((v) => !v)}
-        className="fixed bottom-4 left-4 z-[60] font-pixel text-[10px] px-3 py-2 border-2 bg-shadow-ink/80 hover:bg-neon-cyan/20 transition-colors"
+        className="crt-overlay fixed bottom-4 left-4 z-[60] font-pixel text-[10px] px-3 py-2 border-2 bg-shadow-ink/80 hover:bg-neon-cyan/20 transition-colors"
         style={{
           borderColor: enabled ? '#00f0ff' : '#444',
           color: enabled ? '#00f0ff' : '#888',

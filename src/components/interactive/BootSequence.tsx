@@ -40,8 +40,10 @@ export default function BootSequence() {
       )}
       {phase === 'logo' && (
         <div className="text-center animate-fadeIn">
-          <div className="font-pixel text-neon-magenta text-2xl md:text-4xl mb-2 tracking-widest">
-            AI 開発 QUEST
+          <div className="font-pixel text-neon-magenta text-2xl md:text-4xl mb-2 tracking-widest leading-none flex items-center justify-center gap-3 md:gap-5 flex-wrap">
+            <span>AI</span>
+            <span className="font-pixel-jp text-[1.05em] leading-none -translate-y-[0.08em]">駆動開発</span>
+            <span>QUEST</span>
           </div>
           <div className="font-pixel-jp text-phosphor/70 text-xs md:text-sm">
             PRESS ANY KEY TO START

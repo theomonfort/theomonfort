@@ -4,7 +4,7 @@ titleEn: GitHub Spaces
 summary: GitHub が提供する、ナレッジを集約して Copilot に渡すための"文脈の入れ物"。リポジトリ・ドキュメント・URL をまとめて、目的別の AI コンパニオンを作れる。
 icon: 🗂️
 color: magenta
-order: 14
+order: 16
 related: ['context-engineering', 'instructions', 'custom-agent']
 links:
   - label: GitHub Copilot Spaces
