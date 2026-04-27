@@ -132,22 +132,27 @@ a.retro-link:hover::after {
   mix-blend-mode: normal;
 }
 
-/* OLD page: gentle fade out + tiny lift */
+/* OLD page: pure crossfade (no transform, no blur) */
 ::view-transition-old(root) {
-  animation: soft-fade-out 0.28s ease-in forwards;
+  animation: xfade-out 0.32s ease-out forwards;
 }
-@keyframes soft-fade-out {
-  0%   { opacity: 1; transform: translateY(0)    scale(1);    filter: blur(0); }
-  100% { opacity: 0; transform: translateY(-6px) scale(0.995); filter: blur(2px); }
+@keyframes xfade-out {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
 }
 
-/* NEW page: soft fade in + tiny rise */
+/* NEW page: pure crossfade in, fully overlapping the old one */
 ::view-transition-new(root) {
-  animation: soft-fade-in 0.42s cubic-bezier(0.2, 0.7, 0.2, 1) 0.05s backwards;
+  animation: xfade-in 0.32s ease-out forwards;
 }
-@keyframes soft-fade-in {
-  0%   { opacity: 0; transform: translateY(8px)  scale(0.995); filter: blur(3px); }
-  100% { opacity: 1; transform: translateY(0)    scale(1);     filter: blur(0); }
+@keyframes xfade-in {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Keep both pages painted simultaneously so the background never goes black */
+::view-transition-image-pair(root) {
+  isolation: auto;
 }
 
 /* Soft phosphor sweep — barely-there warm glow drifting down once */

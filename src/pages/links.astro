@@ -1,39 +1,11 @@
 ---
+import { getCollection } from 'astro:content';
 import Layout from '../components/layout/Layout.astro';
 import MenuArrow from '../components/retro/MenuArrow.astro';
 
-const groups = [
-  {
-    title: '📡 公式チャンネル',
-    items: [
-      { label: 'GitHub Blog', url: 'https://github.blog/', desc: '製品発表・エンジニアリング記事の本流' },
-      { label: 'GitHub Changelog', url: 'https://github.blog/changelog/', desc: '機能リリースの最速ソース' },
-      { label: 'GitHub YouTube', url: 'https://www.youtube.com/@GitHub', desc: 'GitHub Universe・チュートリアル' },
-    ],
-  },
-  {
-    title: '🇯🇵 日本コミュニティ',
-    items: [
-      { label: 'GitHub Japan YouTube', url: 'https://www.youtube.com/@GitHubJapan', desc: '日本語ウェビナーとイベント' },
-      { label: 'GitHub Japan X (Twitter)', url: 'https://twitter.com/GitHubJapan', desc: '日本語の最新情報' },
-    ],
-  },
-  {
-    title: '🛠️ 設計と実践',
-    items: [
-      { label: 'Well-Architected', url: 'https://wellarchitected.github.com/', desc: 'AI駆動開発の土台となる設計原則集' },
-      { label: 'Copilot Docs', url: 'https://docs.github.com/copilot', desc: '機能と設定の公式リファレンス' },
-      { label: 'Model Context Protocol', url: 'https://modelcontextprotocol.io/', desc: 'MCP の仕様と実装ガイド' },
-    ],
-  },
-  {
-    title: '🎴 スキルとレシピ',
-    items: [
-      { label: 'theomonfort skills', url: 'https://theomonfort.github.io/theomonfort/skills/', desc: 'agentic workflow の実戦スキル集（このサイトの源流）' },
-      { label: 'awesome-copilot-cli', url: 'https://github.com/topics/copilot-cli', desc: 'コミュニティの拡張・例' },
-    ],
-  },
-];
+const groups = (await getCollection('links')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
 ---
 
 <Layout title="リンクの泉 — AI 開発 QUEST">
@@ -50,9 +22,9 @@ const groups = [
     <div class="space-y-10">
       {groups.map((g) => (
         <section>
-          <h2 class="font-pixel-jp text-xl text-neon-cyan mb-4 border-b-2 border-neon-cyan/40 pb-2">{g.title}</h2>
+          <h2 class="font-pixel-jp text-xl text-neon-cyan mb-4 border-b-2 border-neon-cyan/40 pb-2">{g.data.icon} {g.data.title}</h2>
           <ul class="space-y-3">
-            {g.items.map((it) => (
+            {g.data.items.map((it) => (
               <li class="bg-shadow-ink/70 border-l-4 border-neon-magenta px-4 py-3 hover:border-crt-amber transition-colors group">
                 <a href={it.url} target="_blank" rel="noopener noreferrer" class="block">
                   <div class="flex items-baseline gap-2">

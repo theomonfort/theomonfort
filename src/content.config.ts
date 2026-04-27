@@ -29,4 +29,43 @@ const philosophy = defineCollection({
   }),
 });
 
-export const collections = { glossary, philosophy };
+const equipment = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/equipment' }),
+  schema: z.object({
+    section: z.enum([
+      'skills',
+      'workflows',
+      'custom-agents',
+      'mcp-servers',
+      'cli-plugins',
+      'vscode-extensions',
+    ]),
+    order: z.number().default(0),
+    name: z.string(),
+    icon: z.string(),
+    description: z.string(),
+    badge: z.string().optional(),
+    group: z.string().optional(),
+    url: z.string().url().optional(),
+    install: z.string().optional(),
+  }),
+});
+
+const links = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/links' }),
+  schema: z.object({
+    slug: z.string(),
+    order: z.number().default(0),
+    icon: z.string(),
+    title: z.string(),
+    items: z.array(
+      z.object({
+        label: z.string(),
+        url: z.string().url(),
+        desc: z.string(),
+      }),
+    ),
+  }),
+});
+
+export const collections = { glossary, philosophy, equipment, links };
