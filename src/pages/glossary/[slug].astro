@@ -129,7 +129,8 @@ const accent = colorMap[entry.data.color];
     </button>
 
     <div class="present-overlay-hint font-pixel text-[10px]" aria-hidden="true">
-      <span><span class="key">←</span> <span class="key">→</span> 移動</span>
+      <span><span class="key">←</span> <span class="key">→</span> スライド</span>
+      <span><span class="key">↑</span> <span class="key">↓</span> セクション</span>
       <span><span class="key">Esc</span> 終了</span>
     </div>
 
@@ -384,6 +385,30 @@ const accent = colorMap[entry.data.color];
       }
       return;
     }
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const target = tocSibling(1);
+      if (target) navigateSmooth(target + '?present=1');
+      return;
+    }
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      const target = tocSibling(-1);
+      if (target) navigateSmooth(target + '?present=1');
+      return;
+    }
+  }
+
+  function tocSibling(dir: 1 | -1): string | null {
+    const toc = document.querySelector<HTMLElement>('.present-toc');
+    if (!toc) return null;
+    const items = Array.from(
+      toc.querySelectorAll<HTMLAnchorElement>('.toc-item:not(.toc-hidden)'),
+    );
+    const idx = items.findIndex((el) => el.classList.contains('active'));
+    if (idx === -1) return null;
+    const target = items[idx + dir];
+    return target ? target.getAttribute('href') : null;
   }
 
   async function navigateSmooth(href: string) {
@@ -646,12 +671,15 @@ const accent = colorMap[entry.data.color];
   body.present-mode .glossary-detail {
     max-width: none !important;
     width: 100vw !important;
-    min-height: 100vh;
+    height: 100vh;
+    max-height: 100vh;
     padding: 5rem 4rem 3rem;
     margin: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: safe center;
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
   body.present-mode .glossary-detail > a:first-child,
   body.present-mode .glossary-detail > nav:not(.present-toc),

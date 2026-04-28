@@ -129,12 +129,12 @@ flowchart LR
   P["🌐 Playwright"]
   D["🗄️ DB / API"]
 
-  A <--> M
-  M <--> F
-  M <--> S
-  M <--> J
-  M <--> P
-  M <--> D
+  A --> M
+  M --> F
+  M --> S
+  M --> J
+  M --> P
+  M --> D
 
   classDef agent fill:#1a0a2e,stroke:#ff2e88,color:#ff2e88,stroke-width:2px
   classDef mcp fill:#1a0a2e,stroke:#ffb000,color:#ffb000,stroke-width:2px

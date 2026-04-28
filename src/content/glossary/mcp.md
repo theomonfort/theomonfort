@@ -19,6 +19,16 @@ links:
     url: https://registry.modelcontextprotocol.io/
   - label: MCP Registry repo
     url: https://github.com/modelcontextprotocol/registry
+  - label: GitHub Docs — Configure MCP server access (org/enterprise)
+    url: https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-mcp-usage/configure-mcp-server-access
+  - label: GitHub Docs — Configure MCP registry (org/enterprise)
+    url: https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-mcp-usage/configure-mcp-registry
+  - label: GitHub Docs — MCP server usage in your company
+    url: https://docs.github.com/en/copilot/concepts/mcp-management
+  - label: GitHub Blog — Find, install, manage MCP servers via the GitHub MCP Registry
+    url: https://github.blog/ai-and-ml/generative-ai/how-to-find-install-and-manage-mcp-servers-with-the-github-mcp-registry/
+  - label: GitHub Docs — MCP and the cloud agent
+    url: https://docs.github.com/en/copilot/concepts/agents/cloud-agent/mcp-and-cloud-agent
 ---
 
 ## 一言で
