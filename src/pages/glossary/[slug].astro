@@ -62,8 +62,9 @@ const accent = colorMap[entry.data.color];
           NO.{String(entry.data.order).padStart(2, '0')}
         </span>
       </div>
-      <h1 class="font-pixel text-base md:text-2xl mb-2 leading-tight" style={`color:${accent}`}>
-        <span class="mr-3">{entry.data.icon}</span>{entry.data.titleEn}
+      <h1 class="font-pixel text-base md:text-2xl mb-3 leading-tight flex items-center gap-3" style={`color:${accent}`}>
+        <span class="text-[1.2em] leading-none shrink-0">{entry.data.icon}</span>
+        <span>{entry.data.titleEn}</span>
       </h1>
       <p class="font-pixel-jp text-sm md:text-base text-phosphor/50 mb-3">{entry.data.title}</p>
       <p class="font-body text-base text-phosphor/90 leading-relaxed">{entry.data.summary}</p>
@@ -129,8 +130,8 @@ const accent = colorMap[entry.data.color];
     </button>
 
     <div class="present-overlay-hint font-pixel text-[10px]" aria-hidden="true">
-      <span><span class="key">←</span> <span class="key">→</span> スライド</span>
-      <span><span class="key">↑</span> <span class="key">↓</span> セクション</span>
+      <span><span class="key">◀</span> <span class="key">▶</span> スライド</span>
+      <span><span class="key">▲</span> <span class="key">▼</span> セクション</span>
       <span><span class="key">Esc</span> 終了</span>
     </div>
 
@@ -323,8 +324,12 @@ const accent = colorMap[entry.data.color];
       setPresent(!present);
       return;
     }
-    if (e.key === 'Escape' && present) {
-      setPresent(false);
+    if (e.key === 'Escape') {
+      if (present) {
+        setPresent(false);
+      } else {
+        navigateSmooth('/theomonfort/glossary');
+      }
       return;
     }
     if (!present) return;
@@ -453,7 +458,7 @@ const accent = colorMap[entry.data.color];
         }
       });
       await new Promise((r) => setTimeout(r, 30));
-      try { await mermaid.run({ querySelector: '.mermaid-wrap' }); } catch {}
+      try { await mermaid.run({ querySelector: '.mermaid-wrap' }); } catch (e) { console.error('[mermaid.run]', e); }
       // Strip mermaid's intrinsic width/height so CSS can scale the SVG to fill the wrap.
       document.querySelectorAll<SVGSVGElement>('.mermaid-wrap svg').forEach((svg) => {
         svg.removeAttribute('width');
@@ -625,8 +630,14 @@ const accent = colorMap[entry.data.color];
     opacity: 0.6;
   }
   .present-overlay-hint .key {
-    display: inline-block;
-    padding: 1px 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    font-size: 14px;
+    line-height: 1;
     background: rgba(0, 240, 255, 0.15);
     border: 1px solid #00f0ff;
     margin: 0 2px;
