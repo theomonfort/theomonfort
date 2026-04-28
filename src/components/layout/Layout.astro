@@ -59,26 +59,41 @@ const {
     <script>
       // Retro page-transition: scanline wipe + SFX on every navigation.
       import('../../lib/sfx').then(({ play }) => {
+        const win = window as Window & typeof globalThis & {
+          __akqPageTransitionCleanup?: () => void;
+        };
+
+        win.__akqPageTransitionCleanup?.();
+
         const wipe = document.querySelector<HTMLElement>('.page-wipe');
 
-        // Fire wipe + sound the moment a navigation begins
-        document.addEventListener('astro:before-preparation', () => {
+        const runWipe = () => {
           if (wipe) {
             wipe.classList.remove('is-wiping');
             // force reflow so the animation restarts
             void wipe.offsetWidth;
             wipe.classList.add('is-wiping');
           }
-          try { play('hover'); } catch {}
-        });
+          play('hover');
+        };
 
-        // Clean up the wipe class once the new page is in place
-        document.addEventListener('astro:after-swap', () => {
+        const resetScroll = () => {
           window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
-        });
-        document.addEventListener('astro:page-load', () => {
+        };
+
+        const clearWipe = () => {
           setTimeout(() => wipe?.classList.remove('is-wiping'), 700);
-        });
+        };
+
+        document.addEventListener('astro:before-preparation', runWipe);
+        document.addEventListener('astro:after-swap', resetScroll);
+        document.addEventListener('astro:page-load', clearWipe);
+
+        win.__akqPageTransitionCleanup = () => {
+          document.removeEventListener('astro:before-preparation', runWipe);
+          document.removeEventListener('astro:after-swap', resetScroll);
+          document.removeEventListener('astro:page-load', clearWipe);
+        };
       });
     </script>
   </body>

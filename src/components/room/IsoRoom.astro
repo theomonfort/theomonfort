@@ -1,7 +1,20 @@
 ---
+import { accentClasses, type AccentColor } from '../../lib/theme';
+
 // Pure-CSS/SVG isometric retro room.
 // Each "furniture" is a clickable nav target with its own pixel-art look.
-const items = [
+interface RoomItem {
+  href: string;
+  label: string;
+  en: string;
+  icon: string;
+  color: AccentColor;
+  desc: string;
+  pos: string;
+  external?: boolean;
+}
+
+const items: RoomItem[] = [
   {
     href: '/theomonfort/glossary',
     label: '本棚',
@@ -59,15 +72,9 @@ const items = [
   },
 ];
 
-const colorMap: Record<string, { border: string; glow: string; text: string }> = {
-  magenta: { border: 'border-neon-magenta', glow: 'hover:shadow-neon-magenta', text: 'text-neon-magenta' },
-  cyan:    { border: 'border-neon-cyan',    glow: 'hover:shadow-neon-cyan',    text: 'text-neon-cyan'    },
-  amber:   { border: 'border-crt-amber',    glow: 'hover:shadow-neon-amber',   text: 'text-crt-amber'   },
-  green:   { border: 'border-gb-green',     glow: 'hover:shadow-neon-amber',   text: 'text-gb-green'    },
-};
 ---
 
-<div class="relative w-full max-w-5xl">
+<div class="iso-room relative w-full max-w-5xl">
   <!-- Tatami floor (isometric grid backdrop) -->
   <div class="iso-floor absolute inset-x-0 -bottom-6 h-48 pointer-events-none" aria-hidden="true"></div>
 
@@ -88,7 +95,7 @@ const colorMap: Record<string, { border: string; glow: string; text: string }> =
   <!-- Furniture grid -->
   <div class="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 z-10">
     {items.map((item) => {
-      const c = colorMap[item.color];
+      const c = accentClasses[item.color];
       return (
         <a
           href={item.href}
@@ -117,13 +124,28 @@ const colorMap: Record<string, { border: string; glow: string; text: string }> =
 </div>
 
 <script>
-  // Hook hover SFX onto every furniture item
-  import('../../lib/sfx').then(({ play }) => {
-    document.querySelectorAll<HTMLElement>('.furniture').forEach((el) => {
-      el.addEventListener('mouseenter', () => play('hover'));
-      el.addEventListener('click', () => play('select'));
+  function initIsoRoom() {
+    const root = document.querySelector<HTMLElement>('.iso-room');
+    if (!root || root.dataset.isoInit === '1') return;
+    root.dataset.isoInit = '1';
+
+    import('../../lib/sfx').then(({ play }) => {
+      root.querySelectorAll<HTMLElement>('.furniture').forEach((el) => {
+        el.addEventListener('mouseenter', () => play('hover'));
+        el.addEventListener('click', () => play('select'));
+      });
     });
-  });
+  }
+
+  const win = window as Window & typeof globalThis & {
+    __akqIsoRoomBound?: boolean;
+  };
+
+  initIsoRoom();
+  if (!win.__akqIsoRoomBound) {
+    document.addEventListener('astro:page-load', initIsoRoom);
+    win.__akqIsoRoomBound = true;
+  }
 </script>
 
 <style>

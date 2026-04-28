@@ -2,6 +2,7 @@
 import Layout from '../../components/layout/Layout.astro';
 import { getCollection, render } from 'astro:content';
 import MenuArrow from '../../components/retro/MenuArrow.astro';
+import { accentColorValues } from '../../lib/theme';
 
 export async function getStaticPaths() {
   const entries = await getCollection('glossary');
@@ -27,27 +28,16 @@ const tocEntries = all.map((e) => ({
   url: `/theomonfort/glossary/${e.id}`,
 }));
 
-const colorMap: Record<string, string> = {
-  magenta: '#ff2e88',
-  cyan: '#00f0ff',
-  amber: '#ffb000',
-  green: '#9bbc0f',
-};
-const accent = colorMap[entry.data.color];
+const accent = accentColorValues[entry.data.color];
 ---
 
 <Layout title={`${entry.data.title} — 用語の書`}>
   <script is:inline>
     // Apply present-mode class synchronously to avoid FOUC of pink scrollbars
-    (function () {
-      try {
-        if (new URLSearchParams(location.search).get('present') === '1') {
-          document.documentElement.classList.add('present-mode');
-          if (document.body) document.body.classList.add('present-mode');
-          else document.addEventListener('DOMContentLoaded', () => document.body.classList.add('present-mode'));
-        }
-      } catch {}
-    })();
+    if (new URLSearchParams(location.search).get('present') === '1') {
+      document.documentElement.classList.add('present-mode');
+      document.body.classList.add('present-mode');
+    }
   </script>
   <section
     class="max-w-3xl mx-auto px-4 py-12 glossary-detail"
@@ -272,7 +262,8 @@ const accent = colorMap[entry.data.color];
   }
 
   // ── Presentation mode toggle ───────────────────────────────────
-  function setPresent(on: boolean, opts: { keepSlide?: boolean } = {}) {
+  function setPresent(on: boolean) {
+    if (on && !document.querySelector('.glossary-detail')) return;
     const wasOn = document.body.classList.contains('present-mode');
     document.body.classList.toggle('present-mode', on);
     document.documentElement.classList.toggle('present-mode', on);
@@ -317,6 +308,7 @@ const accent = colorMap[entry.data.color];
     const t = e.target as HTMLElement | null;
     if (t && t.matches('input,textarea,select')) return;
     const section = document.querySelector<HTMLElement>('.glossary-detail');
+    if (!section) return;
     const present = document.body.classList.contains('present-mode');
 
     if (e.key === 'p' || e.key === 'P') {
@@ -399,13 +391,39 @@ const accent = colorMap[entry.data.color];
     }
   }
 
+  const win = window as Window & typeof globalThis & {
+    __akqGlossaryCleanup?: () => void;
+  };
+
+  win.__akqGlossaryCleanup?.();
+
+  function initGlossaryInteractions() {
+    if (!document.querySelector('.glossary-detail')) {
+      setPresent(false);
+      return;
+    }
+
+    initPresent();
+    syncToc();
+    renderMermaid();
+  }
+
   document.addEventListener('keydown', onKey);
-  document.addEventListener('astro:page-load', () => { initPresent(); syncToc(); });
-  initPresent();
-  syncToc();
+  document.addEventListener('astro:page-load', initGlossaryInteractions);
+  win.__akqGlossaryCleanup = () => {
+    document.removeEventListener('keydown', onKey);
+    document.removeEventListener('astro:page-load', initGlossaryInteractions);
+  };
+
+  initGlossaryInteractions();
 
   // ── Mermaid (loaded async, won't block keyboard) ───────────────
   async function renderMermaid() {
+    const blocks = document.querySelectorAll(
+      'pre[data-language="mermaid"], pre > code.language-mermaid'
+    );
+    if (blocks.length === 0) return;
+
     try {
       const { default: mermaid } = await import('mermaid');
       mermaid.initialize({
@@ -421,11 +439,8 @@ const accent = colorMap[entry.data.color];
           tertiaryColor: '#05060f',
           fontFamily: 'DotGothic16, monospace',
         },
-        securityLevel: 'loose',
+          securityLevel: 'loose',
       });
-      const blocks = document.querySelectorAll(
-        'pre[data-language="mermaid"], pre > code.language-mermaid'
-      );
       blocks.forEach((el, i) => {
         const pre = el.tagName === 'PRE' ? (el as HTMLElement) : (el.parentElement as HTMLElement | null);
         if (!pre || pre.dataset.mermaidProcessed === '1') return;
@@ -481,8 +496,6 @@ const accent = colorMap[entry.data.color];
     }
   }
 
-  document.addEventListener('astro:page-load', renderMermaid);
-  renderMermaid();
 </script>
 
 <style is:global>

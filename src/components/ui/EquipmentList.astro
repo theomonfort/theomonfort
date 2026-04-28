@@ -1,4 +1,6 @@
 ---
+import { accentClasses, type AccentColor } from '../../lib/theme';
+
 interface Item {
   name: string;
   icon?: string;
@@ -9,16 +11,10 @@ interface Item {
 }
 interface Props {
   items: Item[];
-  color?: 'magenta' | 'cyan' | 'amber' | 'green';
+  color?: AccentColor;
 }
 const { items, color = 'cyan' } = Astro.props;
-const colorMap = {
-  magenta: { border: 'border-neon-magenta', text: 'text-neon-magenta', glow: 'hover:shadow-neon-magenta' },
-  cyan:    { border: 'border-neon-cyan',    text: 'text-neon-cyan',    glow: 'hover:shadow-neon-cyan' },
-  amber:   { border: 'border-crt-amber',    text: 'text-crt-amber',    glow: 'hover:shadow-neon-amber' },
-  green:   { border: 'border-gb-green',     text: 'text-gb-green',     glow: 'hover:shadow-neon-amber' },
-} as const;
-const c = colorMap[color];
+const c = accentClasses[color];
 ---
 
 <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">

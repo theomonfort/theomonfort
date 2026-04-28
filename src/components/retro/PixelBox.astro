@@ -1,28 +1,17 @@
 ---
+import { accentColorValues, accentGlowClasses, type AccentColor } from '../../lib/theme';
+
 // FF6/DQ-style double-border pixel box
 interface Props {
-  variant?: 'magenta' | 'cyan' | 'amber' | 'green';
+  variant?: AccentColor;
   padding?: string;
   glow?: boolean;
   class?: string;
 }
 const { variant = 'cyan', padding = 'p-5 md:p-7', glow = true, class: cls = '' } = Astro.props;
 
-const color = {
-  magenta: '#ff2e88',
-  cyan: '#00f0ff',
-  amber: '#ffb000',
-  green: '#9bbc0f',
-}[variant];
-
-const glowClass = glow
-  ? {
-      magenta: 'shadow-neon-magenta',
-      cyan: 'shadow-neon-cyan',
-      amber: 'shadow-neon-amber',
-      green: 'shadow-neon-amber',
-    }[variant]
-  : '';
+const color = accentColorValues[variant];
+const glowClass = glow ? accentGlowClasses[variant] : '';
 ---
 
 <div

@@ -18,42 +18,58 @@ export default function TypewriterText({
   const [shown, setShown] = useState(0);
   const [skipped, setSkipped] = useState(false);
   const doneRef = useRef(false);
+  const textRef = useRef(text);
 
   useEffect(() => {
-    if (skipped) {
+    if (textRef.current !== text) {
+      textRef.current = text;
+      doneRef.current = false;
+      setShown(0);
+      setSkipped(false);
+      return;
+    }
+
+    const complete = () => {
       setShown(text.length);
       if (!doneRef.current) {
         doneRef.current = true;
         onDone?.();
       }
+    };
+
+    if (skipped) {
+      complete();
       return;
     }
     const reduce =
       typeof window !== 'undefined' &&
       window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     if (reduce) {
-      setShown(text.length);
-      onDone?.();
+      complete();
       return;
     }
+
+    setShown(0);
     let i = 0;
-    let timer: ReturnType<typeof setTimeout>;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    let cancelled = false;
     const start = setTimeout(() => {
       const tick = () => {
+        if (cancelled) return;
         i += 1;
         setShown(i);
         if (i < text.length) {
           timer = setTimeout(tick, speed);
-        } else if (!doneRef.current) {
-          doneRef.current = true;
-          onDone?.();
+        } else {
+          complete();
         }
       };
       tick();
     }, startDelay);
     return () => {
+      cancelled = true;
       clearTimeout(start);
-      clearTimeout(timer!);
+      if (timer) clearTimeout(timer);
     };
   }, [text, speed, startDelay, skipped, onDone]);
 
