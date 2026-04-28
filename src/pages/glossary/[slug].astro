@@ -138,14 +138,14 @@ const accent = colorMap[entry.data.color];
     <div class="slide-counter font-pixel text-[10px]" aria-hidden="true"></div>
     <div class="slide-title-tag" aria-hidden="true"></div>
     <nav class="present-toc" aria-label="プレゼン目次" data-current-id={entry.id} transition:persist="present-toc">
-      {tocEntries.map((t) => (
+      {tocEntries.map((t, i) => (
         <a
           href={t.url}
           class="toc-item"
           data-id={t.id}
           data-active={t.id === entry.id ? 'true' : 'false'}
         >
-          <span class="toc-num"></span>
+          <span class="toc-num">{String(i + 1).padStart(2, '0')}</span>
           <span class="toc-text">{t.icon} {t.titleEn || t.title}</span>
         </a>
       ))}
@@ -220,52 +220,15 @@ const accent = colorMap[entry.data.color];
     // Update active item in left TOC (now glossary-entry-based, handled by syncToc)
   }
 
-  // ── TOC across glossary entries (visited list, persisted) ────
-  const TOC_KEY = 'glossary:visited';
-  function getVisited(): string[] {
-    try { return JSON.parse(localStorage.getItem(TOC_KEY) || '[]'); }
-    catch { return []; }
-  }
-  function setVisited(ids: string[]) {
-    try { localStorage.setItem(TOC_KEY, JSON.stringify(ids)); } catch {}
-  }
-  function markVisited(id: string) {
-    const v = getVisited();
-    if (!v.includes(id)) { v.push(id); setVisited(v); }
-  }
+  // ── TOC across glossary entries ──────────────────────────────
   function syncToc() {
     const toc = document.querySelector<HTMLElement>('.present-toc');
     if (!toc) return;
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('reset-toc') === '1') {
-      try { localStorage.removeItem(TOC_KEY); } catch {}
-      params.delete('reset-toc');
-      const u = new URL(window.location.href);
-      u.searchParams.delete('reset-toc');
-      history.replaceState(null, '', u.pathname + (u.search ? u.search : ''));
-    }
     const currentId = (location.pathname.match(/\/glossary\/([^/]+)/)?.[1]) || toc.dataset.currentId || '';
-    markVisited(currentId);
-    const visited = getVisited();
-    // Build the display order: visited entries (in visit order); current is already in visited.
     const items = Array.from(toc.querySelectorAll<HTMLElement>('.toc-item'));
-    const itemById = new Map(items.map((el) => [el.dataset.id || '', el]));
-    // Reorder DOM: visited items first in visit order, then hide non-visited.
-    visited.forEach((id, i) => {
-      const el = itemById.get(id);
-      if (!el) return;
-      el.classList.remove('toc-hidden');
-      el.classList.toggle('active', id === currentId);
-      const num = el.querySelector<HTMLElement>('.toc-num');
-      if (num) num.textContent = String(i + 1).padStart(2, '0');
-      toc.appendChild(el);
-    });
     items.forEach((el) => {
-      const id = el.dataset.id || '';
-      if (!visited.includes(id)) {
-        el.classList.add('toc-hidden');
-        el.classList.remove('active');
-      }
+      el.classList.remove('toc-hidden');
+      el.classList.toggle('active', el.dataset.id === currentId);
       // Preserve present mode in target href when navigating
       if (document.body.classList.contains('present-mode')) {
         const u = new URL(el.getAttribute('href') || '', window.location.origin);
@@ -273,6 +236,9 @@ const accent = colorMap[entry.data.color];
         el.setAttribute('href', u.pathname + (u.search ? u.search : ''));
       }
     });
+    // Auto-scroll active item into view
+    const active = toc.querySelector<HTMLElement>('.toc-item.active');
+    if (active) active.scrollIntoView({ block: 'nearest' });
   }
 
   function enterSlideMode() {
@@ -388,13 +354,13 @@ const accent = colorMap[entry.data.color];
     if (e.key === 'ArrowDown') {
       e.preventDefault();
       const target = tocSibling(1);
-      if (target) navigateSmooth(target + '?present=1');
+      if (target) navigateSmooth(target);
       return;
     }
     if (e.key === 'ArrowUp') {
       e.preventDefault();
       const target = tocSibling(-1);
-      if (target) navigateSmooth(target + '?present=1');
+      if (target) navigateSmooth(target);
       return;
     }
   }
@@ -405,10 +371,18 @@ const accent = colorMap[entry.data.color];
     const items = Array.from(
       toc.querySelectorAll<HTMLAnchorElement>('.toc-item:not(.toc-hidden)'),
     );
-    const idx = items.findIndex((el) => el.classList.contains('active'));
+    const currentId = location.pathname.match(/\/glossary\/([^/]+)/)?.[1] || '';
+    const idx = items.findIndex(
+      (el) => el.classList.contains('active') || el.dataset.id === currentId,
+    );
     if (idx === -1) return null;
     const target = items[idx + dir];
-    return target ? target.getAttribute('href') : null;
+    if (!target) return null;
+    const href = target.getAttribute('href') || '';
+    if (!href) return null;
+    const u = new URL(href, window.location.origin);
+    u.searchParams.set('present', '1');
+    return u.pathname + '?' + u.searchParams.toString();
   }
 
   async function navigateSmooth(href: string) {
