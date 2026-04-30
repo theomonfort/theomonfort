@@ -4,7 +4,7 @@ titleEn: Agent Skills
 summary: Copilot エージェントに「専門タスクのこなし方」を仕込む再利用可能な指示セット。プロンプトに合致したら自動で召喚され、毎回説明し直す必要がない。
 icon: 🎴
 color: magenta
-order: 4
+order: 6
 related: ['mcp', 'instructions', 'custom-agent', 'cli']
 links:
   - label: GitHub Docs — Create skills for Copilot

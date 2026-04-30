@@ -4,7 +4,7 @@ titleEn: Prompt Engineering
 summary: モデルの出力品質を最大化する指示の設計術。役割、文脈、制約、例示、出力形式を明確に書き分ける。
 icon: ✍️
 color: cyan
-order: 9
+order: 11
 related: ['context-engineering', 'instructions']
 links:
   - label: Prompt engineering for Copilot Chat

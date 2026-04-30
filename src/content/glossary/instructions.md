@@ -4,7 +4,7 @@ titleEn: Instructions
 summary: リポジトリやファイル単位でAIに常駐のルールを与える"指示書"。チーム全員のCopilotが同じ規約に従うようになる。
 icon: 📜
 color: amber
-order: 3
+order: 5
 related: ['prompt-engineering', 'context-engineering', 'agent-skills']
 links:
   - label: Custom instructions for Copilot

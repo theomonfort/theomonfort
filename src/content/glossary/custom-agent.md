@@ -4,7 +4,7 @@ titleEn: Custom Agent
 summary: 役割・モデル・ツール・指示・スキルを束ねた専用エージェント。"フロントエンド職人"や"レビュー番長"を作れる。
 icon: 🥷
 color: green
-order: 5
+order: 7
 related: ['agent-skills', 'agent-mode', 'cli']
 links:
   - label: Custom agents (Copilot CLI docs)

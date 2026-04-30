@@ -4,7 +4,7 @@ titleEn: Copilot Memory
 summary: Copilotがリポジトリで作業しながら学んだ知識を記憶し、未来の自分・チーム全員に引き継ぐ仕組み。使うほど賢くなる。
 icon: 🧠
 color: magenta
-order: 17
+order: 19
 related: ['cloud-agent', 'copilot-code-review', 'cli', 'instructions']
 links:
   - label: Blog — Building an agentic memory system

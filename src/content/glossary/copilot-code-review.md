@@ -4,7 +4,7 @@ titleEn: Copilot Code Review
 summary: PR の最初の目を Copilot が務める。文脈を読み、コメント・概要・修正提案を返す ── 人間レビューの前段ノイズ取りから自動化まで。
 icon: 🔍
 color: green
-order: 7
+order: 9
 related: ['cloud-agent', 'instructions', 'agentic-workflow']
 links:
   - label: 概要 — Code review (Docs)

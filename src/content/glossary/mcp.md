@@ -4,7 +4,7 @@ titleEn: MCP Server
 summary: AIモデルに「外の世界」へのアクセスを与える標準プロトコル。USB-Cのように、どのモデル・どのツールでも"差せば動く"。
 icon: 🔌
 color: cyan
-order: 2
+order: 4
 related: ['context-engineering', 'agent-skills']
 links:
   - label: MCP 公式（modelcontextprotocol.io）
