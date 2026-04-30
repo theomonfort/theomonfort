@@ -23,13 +23,9 @@ export default function CRTOverlay() {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    resize();
-    window.addEventListener('resize', resize);
+    const shouldAnimate = !reduce;
     let frame = 0;
+
     const draw = () => {
       const w = canvas.width;
       const h = canvas.height;
@@ -41,20 +37,30 @@ export default function CRTOverlay() {
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, w, h);
       // Subtle flicker
-      if (!reduce && frame % 6 === 0) {
+      if (shouldAnimate && frame % 6 === 0) {
         ctx.fillStyle = `rgba(255,255,255,${Math.random() * 0.015})`;
         ctx.fillRect(0, 0, w, h);
       }
       // Random horizontal noise band
-      if (!reduce && Math.random() < 0.012) {
+      if (shouldAnimate && Math.random() < 0.012) {
         const y = Math.random() * h;
         ctx.fillStyle = 'rgba(0,240,255,0.06)';
         ctx.fillRect(0, y, w, 2);
       }
       frame += 1;
-      rafRef.current = requestAnimationFrame(draw);
+      if (shouldAnimate) rafRef.current = requestAnimationFrame(draw);
     };
-    draw();
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      if (!shouldAnimate) draw();
+    };
+
+    resize();
+    window.addEventListener('resize', resize);
+    if (shouldAnimate) draw();
+
     return () => {
       window.removeEventListener('resize', resize);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);

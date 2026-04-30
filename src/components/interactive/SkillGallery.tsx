@@ -14,9 +14,16 @@ interface Props {
   skills: SkillEntry[];
 }
 
+const COPY_FEEDBACK_MS = 1500;
+const BATCH_COPY_FEEDBACK_MS = 2000;
+
 function buildCommand(s: SkillEntry, scope: 'project' | 'global'): string {
   const flag = scope === 'global' ? ' --global' : '';
   return `gh skill install ${s.slug}${flag}`;
+}
+
+function buildBatchCommand(skills: SkillEntry[], scope: 'project' | 'global'): string {
+  return skills.map((s) => buildCommand(s, scope)).join(' && \\\n');
 }
 
 export default function SkillGallery({ skills }: Props) {
@@ -39,23 +46,18 @@ export default function SkillGallery({ skills }: Props) {
     play('select');
     await navigator.clipboard.writeText(buildCommand(s, scope));
     setCopiedSlug(s.slug);
-    setTimeout(() => setCopiedSlug(null), 1500);
+    setTimeout(() => setCopiedSlug(null), COPY_FEEDBACK_MS);
   };
 
   const copyBatch = async () => {
-    if (selected.size === 0) {
-      const all = skills.map((s) => buildCommand(s, scope)).join(' && \\\n');
-      await navigator.clipboard.writeText(all);
-    } else {
-      const cmds = skills
-        .filter((s) => selected.has(s.slug))
-        .map((s) => buildCommand(s, scope))
-        .join(' && \\\n');
-      await navigator.clipboard.writeText(cmds);
-    }
+    const skillsToCopy = selected.size === 0
+      ? skills
+      : skills.filter((s) => selected.has(s.slug));
+
+    await navigator.clipboard.writeText(buildBatchCommand(skillsToCopy, scope));
     play('levelup');
     setCopiedAll(true);
-    setTimeout(() => setCopiedAll(false), 2000);
+    setTimeout(() => setCopiedAll(false), BATCH_COPY_FEEDBACK_MS);
   };
 
   return (

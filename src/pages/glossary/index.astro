@@ -2,17 +2,12 @@
 import Layout from '../../components/layout/Layout.astro';
 import { getCollection } from 'astro:content';
 import MenuArrow from '../../components/retro/MenuArrow.astro';
+import { accentClasses } from '../../lib/theme';
 
 const entries = (await getCollection('glossary')).sort(
   (a, b) => a.data.order - b.data.order
 );
 
-const colorMap: Record<string, { border: string; text: string; glow: string }> = {
-  magenta: { border: 'border-neon-magenta', text: 'text-neon-magenta', glow: 'hover:shadow-neon-magenta' },
-  cyan:    { border: 'border-neon-cyan',    text: 'text-neon-cyan',    glow: 'hover:shadow-neon-cyan' },
-  amber:   { border: 'border-crt-amber',    text: 'text-crt-amber',    glow: 'hover:shadow-neon-amber' },
-  green:   { border: 'border-gb-green',     text: 'text-gb-green',     glow: 'hover:shadow-neon-amber' },
-};
 ---
 
 <Layout title="用語の書 — AI 開発 QUEST">
@@ -28,7 +23,7 @@ const colorMap: Record<string, { border: string; text: string; glow: string }> =
 
     <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
       {entries.map((e) => {
-        const c = colorMap[e.data.color];
+        const c = accentClasses[e.data.color];
         return (
           <li>
             <a

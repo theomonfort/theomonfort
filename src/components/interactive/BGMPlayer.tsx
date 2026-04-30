@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { getAudioContextConstructor } from '../../lib/audio';
 
 const STORAGE_KEY = 'akq-bgm-on';
 
@@ -13,7 +14,6 @@ function startSynthLoop(ctx: AudioContext): { stop: () => void; gain: GainNode }
   const seq = [0, 2, 4, 2, 5, 4, 2, 0, 3, 5, 7, 5, 4, 2, 4, 2];
   let step = 0;
   const tempo = 0.18; // seconds per step
-  const oscs: OscillatorNode[] = [];
 
   const tick = () => {
     const now = ctx.currentTime;
@@ -29,7 +29,6 @@ function startSynthLoop(ctx: AudioContext): { stop: () => void; gain: GainNode }
     o.connect(g).connect(master);
     o.start(now);
     o.stop(now + tempo);
-    oscs.push(o);
     // Bass every 4 steps
     if (step % 4 === 0) {
       const b = ctx.createOscillator();
@@ -76,12 +75,11 @@ export default function BGMPlayer() {
       setPlaying(false);
       localStorage.setItem(STORAGE_KEY, '0');
     } else {
-      const Ctor =
-        (window as any).AudioContext || (window as any).webkitAudioContext;
+      const Ctor = getAudioContextConstructor();
       if (!Ctor) return;
       const ctx: AudioContext = ctxRef.current ?? new Ctor();
       ctxRef.current = ctx;
-      if (ctx.state === 'suspended') ctx.resume();
+      if (ctx.state === 'suspended') void ctx.resume();
       handleRef.current = startSynthLoop(ctx);
       setPlaying(true);
       localStorage.setItem(STORAGE_KEY, '1');

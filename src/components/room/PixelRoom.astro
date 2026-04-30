@@ -98,7 +98,15 @@ const wrapClass = [
     });
   }
   initPixelRoom();
-  document.addEventListener('astro:page-load', initPixelRoom);
+
+  const win = window as Window & typeof globalThis & {
+    __akqPixelRoomBound?: boolean;
+  };
+
+  if (!win.__akqPixelRoomBound) {
+    document.addEventListener('astro:page-load', initPixelRoom);
+    win.__akqPixelRoomBound = true;
+  }
 </script>
 
 <style>
