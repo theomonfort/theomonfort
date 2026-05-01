@@ -2,7 +2,7 @@
 title: MCP Server（Model Context Protocol）
 titleEn: MCP Server
 summary: AIモデルに「外の世界」へのアクセスを与える標準プロトコル。USB-Cのように、どのモデル・どのツールでも"差せば動く"。
-icon: 🔌
+icon: /theomonfort/mcp.png
 color: cyan
 order: 4
 related: ['context-engineering', 'agent-skills']

@@ -31,7 +31,9 @@ const entries = (await getCollection('glossary')).sort(
               class={`block bg-shadow-ink/80 border-2 ${c.border} ${c.glow} p-5 transition-all duration-200 hover:-translate-y-1 group`}
             >
               <div class="flex items-start gap-3">
-                <span class="text-3xl">{e.data.icon}</span>
+                {e.data.icon && /\.(svg|png|jpg|jpeg|webp|gif)$/i.test(e.data.icon)
+                  ? <img src={e.data.icon} alt="" class="h-8 w-8 object-contain shrink-0" />
+                  : <span class="text-3xl">{e.data.icon}</span>}
                 <div class="flex-1 min-w-0">
                   <div class="flex items-baseline gap-2 mb-1">
                     <span class={`font-pixel text-[10px] ${c.text}`}>NO.{String(e.data.order).padStart(2, '0')}</span>
