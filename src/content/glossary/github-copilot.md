@@ -68,7 +68,7 @@ radar-beta
 
 ## チームでの活用イメージ
 
-役割ごとに Copilot をどう使うか ── **準備・開発・レビュー・委任・自動化・学習**。
+SDLC のフェーズごとに Copilot をどう使うか ── **企画・開発・レビュー・品質保証・監視**。
 
 ```mermaid
 ---
@@ -85,11 +85,11 @@ config:
     .nodeLabel img { border-radius: 50% !important; width: 28px !important; height: 28px !important; min-width: 28px !important; max-width: 28px !important; min-height: 28px !important; max-height: 28px !important; object-fit: cover !important; display: block !important; margin: 0 auto 3px !important; }
 ---
 flowchart TB
-  A["<img src='https://i.pravatar.cc/120?img=47' width='28' height='28'/><b style='color:#00f0ff'>準備・企画</b> ・ チームマネージャー<br/>───<br/><b style='color:#00f0ff'>Issues</b> と <b style='color:#00f0ff'>Projects</b> で計画。<b style='color:#00f0ff'>MCP</b> サーバー、<b style='color:#00f0ff'>Instruction</b> ファイル、<b style='color:#00f0ff'>Agent Skills</b>、<b style='color:#00f0ff'>Custom Agent</b> を設定し AI のハーネスを整備"]
-  B["<img src='https://i.pravatar.cc/120?img=12' width='28' height='28'/><b style='color:#ff2e88'>企画・開発</b> ・ ジュニア開発者<br/>───<br/><b style='color:#ff2e88'>Codespaces</b> でチーム共通の環境を使い、<b style='color:#ff2e88'>Plan / Agent</b> モードや <b style='color:#ff2e88'>Copilot Chat</b>・<b style='color:#ff2e88'>CLI</b> でコーディング。<b style='color:#ff2e88'>Cloud Agent</b> にタスクを委譲して並列開発"]
+  A["<img src='https://i.pravatar.cc/120?img=47' width='28' height='28'/><b style='color:#00f0ff'>企画</b> ・ チームマネージャー<br/>───<br/><b style='color:#00f0ff'>Issues</b> と <b style='color:#00f0ff'>Projects</b> で計画。<b style='color:#00f0ff'>MCP</b> サーバー、<b style='color:#00f0ff'>Instruction</b> ファイル、<b style='color:#00f0ff'>Agent Skills</b>、<b style='color:#00f0ff'>Custom Agent</b> を設定し AI のハーネスを整備"]
+  B["<img src='https://i.pravatar.cc/120?img=12' width='28' height='28'/><b style='color:#ff2e88'>開発</b> ・ ジュニア開発者<br/>───<br/><b style='color:#ff2e88'>Codespaces</b> でチーム共通の環境を使い、<b style='color:#ff2e88'>Plan / Agent</b> モードや <b style='color:#ff2e88'>Copilot Chat</b>・<b style='color:#ff2e88'>CLI</b> でコーディング。<b style='color:#ff2e88'>Cloud Agent</b> にタスクを委譲して並列開発"]
   C["<img src='https://i.pravatar.cc/120?img=13' width='28' height='28'/><b style='color:#ffb000'>レビュー</b> ・ シニア開発者<br/>───<br/>Copilot が自動で <b style='color:#ffb000'>Code Review</b>。<b style='color:#ffb000'>PR</b> のレビュー時間を削減し、最終レビューに集中"]
-  D["<img src='https://i.pravatar.cc/120?img=13' width='28' height='28'/><b style='color:#9bbc0f'>テスト・Secure</b> ・ シニア開発者<br/>───<br/><b style='color:#9bbc0f'>GitHub Actions</b> でテストを自動化。<b style='color:#9bbc0f'>Code Scanning</b>・<b style='color:#9bbc0f'>Secret Scanning</b>・<b style='color:#9bbc0f'>Dependabot</b> を有効化してセキュリティを担保"]
-  E["<img src='https://i.pravatar.cc/120?img=68' width='28' height='28'/><b style='color:#5b8def'>監視・学習</b> ・ チーム全体<br/>───<br/><b style='color:#5b8def'>Agentic Workflow</b> で運用自動化。<b style='color:#5b8def'>Copilot Metrics</b> で AI 利用状況を可視化、<b style='color:#5b8def'>Memory</b> で知識を蓄積"]
+  D["<img src='https://i.pravatar.cc/120?img=13' width='28' height='28'/><b style='color:#9bbc0f'>品質保証</b> ・ シニア開発者<br/>───<br/><b style='color:#9bbc0f'>GitHub Actions</b> でテストを自動化。<b style='color:#9bbc0f'>Code Scanning</b>・<b style='color:#9bbc0f'>Secret Scanning</b>・<b style='color:#9bbc0f'>Dependabot</b> を有効化してセキュリティを担保"]
+  E["<img src='https://i.pravatar.cc/120?img=68' width='28' height='28'/><b style='color:#5b8def'>監視</b> ・ チーム全体<br/>───<br/><b style='color:#5b8def'>Agentic Workflow</b> で運用自動化。<b style='color:#5b8def'>Copilot Metrics</b> で AI 利用状況を可視化、<b style='color:#5b8def'>Memory</b> で知識を蓄積"]
 
   A --> B --> C --> D --> E
 
@@ -107,37 +107,41 @@ flowchart TB
 
 ## セキュアでコンプライアントなアーキテクチャ
 
-入力されたコードは **Copilot Proxy** を経由し、安心してエンタープライズで使える設計。
+入力されたコードは **Copilot Proxy (CAPI)** を経由し、安心してエンタープライズで使える設計。
 
 ```mermaid
+---
+config:
+  flowchart:
+    htmlLabels: true
+  themeCSS: |
+    .nodeLabel { text-align: center !important; }
+    .nodeLabel img { width: 36px !important; height: 36px !important; object-fit: contain !important; margin: 0 4px !important; vertical-align: middle !important; }
+    .nodeLabel img.proxy-ico { width: 18px !important; height: 18px !important; display: inline-block !important; margin: 0 6px 0 0 !important; vertical-align: middle !important; }
+---
 flowchart LR
-  Dev["👤 開発者"]
-  Ctx["📦 Context<br/>(コードの前後文脈)"]
-  Proxy["🛡️ Copilot Proxy"]
-  LLM["🧠 LLM"]
-  Sug["✨ Suggestions"]
+  LLM["<img src='/theomonfort/llm-openai.png'/><img src='/theomonfort/llm-anthropic.svg'/><img src='/theomonfort/llm-gemini.png'/><img src='/theomonfort/llm-grok.png'/><br/><b>LLM</b>"]
+  Proxy["<img class='proxy-ico' src='/theomonfort/github-copilot-white-icon.png'/><b>CAPI</b>"]
+  Dev["👤 Developer"]
 
-  Dev --> Ctx
-  Ctx --> Proxy
-  Proxy --> LLM
-  LLM --> Proxy
-  Proxy --> Sug
-  Sug --> Dev
+  LLM <-->|" "| Proxy
+  Dev -->|"文脈"| Proxy
+  Proxy -->|"生成提案"| Dev
 
-  classDef user fill:#1a0a2e,stroke:#ff2e88,color:#ff2e88,stroke-width:2px
-  classDef proxy fill:#0a0e27,stroke:#ffb000,color:#ffb000,stroke-width:2px
   classDef llm fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
-  class Dev,Ctx,Sug user
-  class Proxy proxy
+  classDef proxy fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
+  classDef dev fill:#1a0a2e,stroke:#ff2e88,color:#ff2e88,stroke-width:2px
   class LLM llm
+  class Proxy proxy
+  class Dev dev
 ```
 
 **Copilot Proxy で行われる処理：**
 
-- 🔒 **PII（個人識別情報）の除去**
-- 🚫 **不適切な表現のフィルタリング**
-- 🛡️ **一般的なセキュリティ脆弱性のチェック**
-- 🔐 **すべてのデータは転送中に暗号化**
-- ⚖️ **IP（知的財産）フィルター** で生成提案をチェック
+- 🔒 文脈から **PII（個人識別情報）** を除去
+- 🚫 文脈から **不適切な表現** をフィルタリング
+- 🛡️ 文脈の **一般的なセキュリティ脆弱性** をチェック
+- ⚖️ 生成提案を **IP（知的財産）フィルター** に通す
+- 🔐 すべてのデータは **転送中に暗号化**
 
 > 🔗 詳細は [Copilot Trust Center](https://resources.github.com/ja/copilot-trust-center/) を参照。
