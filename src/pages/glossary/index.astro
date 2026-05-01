@@ -3,56 +3,119 @@ import Layout from '../../components/layout/Layout.astro';
 import { getCollection } from 'astro:content';
 import MenuArrow from '../../components/retro/MenuArrow.astro';
 import { accentClasses } from '../../lib/theme';
+import { categories } from '../../lib/glossary-categories';
 
 const entries = (await getCollection('glossary')).sort(
   (a, b) => a.data.order - b.data.order
 );
 
+const grouped = categories.map((cat) => ({
+  ...cat,
+  items: entries.filter((e) => e.data.category === cat.id),
+}));
 ---
 
-<Layout title="用語の書 — AI 開発 QUEST">
+<Layout title="プレイブック — AI 開発 QUEST">
   <section class="max-w-5xl mx-auto px-4 py-12">
     <header class="mb-10">
       <p class="font-pixel text-[10px] text-crt-amber tracking-[0.3em] mb-2">▮ CHAPTER 1 ▮</p>
-      <h1 class="font-pixel text-2xl md:text-4xl text-neon-magenta mb-3">用語の書</h1>
-      <p class="font-pixel-jp text-lg text-neon-cyan">— GLOSSARY OF AI DRIVEN DEVELOPMENT —</p>
+      <h1 class="font-pixel text-2xl md:text-4xl text-neon-magenta mb-3">プレイブック</h1>
+      <p class="font-pixel-jp text-lg text-neon-cyan">— THE AI DEV PLAYBOOK —</p>
       <p class="font-body text-sm text-phosphor/80 mt-4 max-w-2xl">
-        これから旅で出会う{entries.length}の言霊。一つ一つが、君の装備になる。
+        これから旅で出会う{entries.length}の言霊。SDLC のフェーズごとに整理。
       </p>
+
+      <nav class="mt-6 flex flex-wrap items-center gap-3">
+        {grouped.filter((g) => g.items.length > 0 && g.id !== 'introduction').map((g, i, arr) => {
+          const c = accentClasses[g.color];
+          return (
+            <>
+              <a
+                href={`#cat-${g.id}`}
+                class={`font-pixel text-[10px] px-3 py-1.5 border ${c.border} ${c.text} hover:${c.glow} transition`}
+              >
+                {g.icon} {g.labelEn}
+              </a>
+              {i < arr.length - 1 && (
+                <span class="font-pixel text-phosphor/60 text-2xl md:text-3xl">→</span>
+              )}
+            </>
+          );
+        })}
+      </nav>
     </header>
 
-    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      {entries.map((e) => {
-        const c = accentClasses[e.data.color];
-        return (
-          <li>
-            <a
-              href={`/theomonfort/glossary/${e.id}`}
-              class={`block bg-shadow-ink/80 border-2 ${c.border} ${c.glow} p-5 transition-all duration-200 hover:-translate-y-1 group`}
-            >
-              <div class="flex items-start gap-3">
-                {e.data.icon && /\.(svg|png|jpg|jpeg|webp|gif)$/i.test(e.data.icon)
-                  ? <img src={e.data.icon} alt="" class="h-8 w-8 object-contain shrink-0" />
-                  : <span class="text-3xl">{e.data.icon}</span>}
+    {grouped.map((g) => {
+      if (g.items.length === 0) return null;
+      const c = accentClasses[g.color];
+      return (
+        <section id={`cat-${g.id}`} class="mb-12 scroll-mt-24">
+          <header class={`mb-5 pb-3 border-b-2 ${c.border}`}>
+            <div class="flex items-baseline gap-3 flex-wrap">
+              <span class="text-2xl">{g.icon}</span>
+              <h2 class={`font-pixel text-lg md:text-xl ${c.text}`}>{g.labelEn}</h2>
+              <span class="font-pixel-jp text-base text-phosphor/70">{g.labelJa}</span>
+              <span class={`font-pixel text-[10px] ${c.text} opacity-60 ml-auto`}>
+                {g.items.length} 項目
+              </span>
+            </div>
+            {(g.avatar || g.description) && (
+              <div class="mt-3 flex items-start gap-3">
+                {g.avatar && (
+                  <img
+                    src={g.avatar}
+                    alt={g.actor}
+                    class={`h-12 w-12 rounded-full object-cover border-2 ${c.border} shrink-0`}
+                  />
+                )}
                 <div class="flex-1 min-w-0">
-                  <div class="flex items-baseline gap-2 mb-1">
-                    <span class={`font-pixel text-[10px] ${c.text}`}>NO.{String(e.data.order).padStart(2, '0')}</span>
-                  </div>
-                  <h3 class={`font-pixel text-sm md:text-base ${c.text} mb-1 leading-tight`}>{e.data.titleEn}</h3>
-                  <p class="font-pixel-jp text-xs text-phosphor/50 mb-2">{e.data.title}</p>
-                  <p class="font-body text-sm text-phosphor/85 leading-relaxed line-clamp-3">
-                    {e.data.summary}
-                  </p>
-                  <div class={`mt-3 font-pixel text-[10px] ${c.text} opacity-0 group-hover:opacity-100 transition-opacity`}>
-                    <MenuArrow color={c.text} /> 詳細を読む
-                  </div>
+                  {g.actor && (
+                    <p class={`font-pixel text-[10px] ${c.text} mb-1`}>👤 {g.actor}</p>
+                  )}
+                  {g.description && (
+                    <p class="font-body text-sm text-phosphor/80 leading-relaxed" set:html={g.description}>
+                    </p>
+                  )}
                 </div>
               </div>
-            </a>
-          </li>
-        );
-      })}
-    </ul>
+            )}
+          </header>
+
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 auto-rows-fr">
+            {g.items.map((e) => {
+              const ec = c;
+              return (
+                <li class="h-full">
+                  <a
+                    href={`/theomonfort/glossary/${e.id}`}
+                    class={`flex h-full bg-shadow-ink/80 border-2 ${ec.border} ${ec.glow} p-5 transition-all duration-200 hover:-translate-y-1 group`}
+                  >
+                    <div class="flex items-start gap-3 w-full">
+                      {e.data.icon && /\.(svg|png|jpg|jpeg|webp|gif)$/i.test(e.data.icon)
+                        ? <img src={e.data.icon} alt="" class="h-8 w-8 object-contain shrink-0" />
+                        : <span class="text-3xl">{e.data.icon}</span>}
+                      <div class="flex-1 min-w-0">
+                        <div class="flex items-baseline gap-2 mb-1">
+                          <span class={`font-pixel text-[10px] ${ec.text}`}>NO.{String(e.data.order).padStart(2, '0')}</span>
+                        </div>
+                        <h3 class={`font-pixel text-sm md:text-base ${ec.text} mb-1 leading-tight`}>{e.data.titleEn}</h3>
+                        <p class="font-pixel-jp text-xs text-phosphor/50 mb-2">{e.data.title}</p>
+                        <p class="font-body text-sm text-phosphor/85 leading-relaxed line-clamp-3">
+                          {e.data.summary}
+                        </p>
+                        <div class={`mt-3 font-pixel text-[10px] ${ec.text} opacity-0 group-hover:opacity-100 transition-opacity`}>
+                          <MenuArrow color={ec.text} /> 詳細を読む
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      );
+    })}
 
     <div class="mt-12 text-center">
       <a href="/theomonfort/" class="font-pixel text-[10px] text-phosphor/60 hover:text-neon-magenta">◀ 道場に戻る</a>

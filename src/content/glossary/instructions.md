@@ -5,6 +5,7 @@ summary: リポジトリやファイル単位でAIに常駐のルールを与え
 icon: 📜
 color: amber
 order: 5
+category: plan
 related: ['prompt-engineering', 'context-engineering', 'agent-skills']
 links:
   - label: Custom instructions for Copilot

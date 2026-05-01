@@ -5,6 +5,7 @@ summary: IDE内でAIが自律的にコード変更・コマンド実行・テス
 icon: ⚔️
 color: magenta
 order: 13
+category: develop
 related: ['cli', 'cloud-agent', 'harness-engineering']
 links:
   - label: VS Code Agent mode

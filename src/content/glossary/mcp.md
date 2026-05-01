@@ -5,6 +5,7 @@ summary: AIモデルに「外の世界」へのアクセスを与える標準プ
 icon: /theomonfort/mcp.png
 color: cyan
 order: 4
+category: plan
 related: ['context-engineering', 'agent-skills']
 links:
   - label: MCP 公式（modelcontextprotocol.io）

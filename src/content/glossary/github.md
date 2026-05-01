@@ -5,6 +5,7 @@ summary: 1.8 億人以上の開発者が利用する AI ネイティブの開発
 icon: /theomonfort/github-white-icon.svg
 color: magenta
 order: 1
+category: introduction
 related: ['copilot-chat', 'cloud-agent', 'agent-mode']
 links:
   - label: About GitHub

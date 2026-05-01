@@ -5,6 +5,7 @@ summary: Copilot エージェントに「専門タスクのこなし方」を仕
 icon: 🎴
 color: magenta
 order: 6
+category: plan
 related: ['mcp', 'instructions', 'custom-agent', 'cli']
 links:
   - label: GitHub Docs — Create skills for Copilot

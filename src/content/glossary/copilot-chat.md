@@ -5,6 +5,7 @@ summary: コードと話すための入口。ひとつのサブスクで VS Code
 icon: 💬
 color: cyan
 order: 3
+category: develop
 related: ['agent-mode', 'mcp', 'instructions', 'cli', 'cloud-agent']
 links:
   - label: About GitHub Copilot Chat

@@ -5,6 +5,7 @@ summary: IDEを離れても夜通し働く"分身"。Issue を投げれば GitHu
 icon: ☁️
 color: amber
 order: 15
+category: develop
 related: ['copilot-code-review', 'instructions', 'mcp', 'agent-mode']
 links:
   - label: Customize the agent environment

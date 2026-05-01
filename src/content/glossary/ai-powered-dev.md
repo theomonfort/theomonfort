@@ -5,6 +5,7 @@ summary: AIをペアプログラマーとして開発の全工程を回す方法
 icon: 🎮
 color: magenta
 order: 10
+category: develop
 related: ['prompt-engineering', 'context-engineering', 'agentic-workflow']
 links:
   - label: GitHub Copilot
