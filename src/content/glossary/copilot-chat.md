@@ -4,7 +4,8 @@ titleEn: Copilot Chat
 summary: コードと話すための入口。ひとつのサブスクで VS Code / CLI / Cloud Agent / GitHub.com を行き来し、Ask・Plan・Agent の 3 モードで開発を駆動する。
 icon: 💬
 color: cyan
-order: 1
+order: 3
+category: develop
 related: ['agent-mode', 'mcp', 'instructions', 'cli', 'cloud-agent']
 links:
   - label: About GitHub Copilot Chat

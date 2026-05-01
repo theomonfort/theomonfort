@@ -25,13 +25,13 @@ const tocEntries = all.map((e) => ({
   title: e.data.title,
   titleEn: e.data.titleEn,
   icon: e.data.icon,
-  url: `/theomonfort/glossary/${e.id}`,
+  url: `/theomonfort/playbook/${e.id}`,
 }));
 
 const accent = accentColorValues[entry.data.color];
 ---
 
-<Layout title={`${entry.data.title} — 用語の書`}>
+<Layout title={`${entry.data.title} — プレイブック`}>
   <script is:inline>
     // Apply present-mode class synchronously to avoid FOUC of pink scrollbars
     if (new URLSearchParams(location.search).get('present') === '1') {
@@ -41,10 +41,10 @@ const accent = accentColorValues[entry.data.color];
   </script>
   <section
     class="max-w-3xl mx-auto px-4 py-12 glossary-detail"
-    data-prev={prev ? `/theomonfort/glossary/${prev.id}` : ''}
-    data-next={next ? `/theomonfort/glossary/${next.id}` : ''}
+    data-prev={prev ? `/theomonfort/playbook/${prev.id}` : ''}
+    data-next={next ? `/theomonfort/playbook/${next.id}` : ''}
   >
-    <a href="/theomonfort/glossary" class="font-pixel text-[10px] text-phosphor/60 hover:text-neon-magenta">◀ 用語一覧</a>
+    <a href="/theomonfort/playbook" class="font-pixel text-[10px] text-phosphor/60 hover:text-neon-magenta">◀ 用語一覧</a>
 
     <header class="mt-6 mb-8 pb-6 border-b-2 border-dashed" style={`border-color:${accent}`}>
       <div class="flex items-center gap-2 mb-2">
@@ -53,7 +53,9 @@ const accent = accentColorValues[entry.data.color];
         </span>
       </div>
       <h1 class="font-pixel text-base md:text-2xl mb-3 leading-tight flex items-center gap-3" style={`color:${accent}`}>
-        <span class="text-[1.2em] leading-none shrink-0">{entry.data.icon}</span>
+        {entry.data.icon && /\.(svg|png|jpg|jpeg|webp|gif)$/i.test(entry.data.icon)
+          ? <img src={entry.data.icon} alt="" class="h-[1.2em] w-auto shrink-0" />
+          : <span class="text-[1.2em] leading-none shrink-0">{entry.data.icon}</span>}
         <span>{entry.data.titleEn}</span>
       </h1>
       <p class="font-pixel-jp text-sm md:text-base text-phosphor/50 mb-3">{entry.data.title}</p>
@@ -86,10 +88,12 @@ const accent = accentColorValues[entry.data.color];
             if (!r) return null;
             return (
               <a
-                href={`/theomonfort/glossary/${r.id}`}
+                href={`/theomonfort/playbook/${r.id}`}
                 class="font-pixel-jp text-xs px-3 py-1 border border-phosphor/30 hover:border-neon-cyan hover:text-neon-cyan transition-colors"
               >
-                {r.data.icon} {r.data.title}
+                {r.data.icon && /\.(svg|png|jpg|jpeg|webp|gif)$/i.test(r.data.icon)
+                  ? <img src={r.data.icon} alt="" class="inline h-[1em] w-auto align-middle mr-1" />
+                  : <span>{r.data.icon} </span>}{r.data.title}
               </a>
             );
           })}
@@ -99,12 +103,12 @@ const accent = accentColorValues[entry.data.color];
 
     <nav class="mt-12 grid grid-cols-2 gap-4 font-pixel text-[10px]">
       {prev ? (
-        <a href={`/theomonfort/glossary/${prev.id}`} class="block p-3 border-2 border-phosphor/30 hover:border-neon-cyan hover:text-neon-cyan transition-colors">
+        <a href={`/theomonfort/playbook/${prev.id}`} class="block p-3 border-2 border-phosphor/30 hover:border-neon-cyan hover:text-neon-cyan transition-colors">
           ◀ {prev.data.title}
         </a>
       ) : <span></span>}
       {next ? (
-        <a href={`/theomonfort/glossary/${next.id}`} class="block p-3 border-2 border-phosphor/30 hover:border-neon-magenta hover:text-neon-magenta transition-colors text-right">
+        <a href={`/theomonfort/playbook/${next.id}`} class="block p-3 border-2 border-phosphor/30 hover:border-neon-magenta hover:text-neon-magenta transition-colors text-right">
           {next.data.title} ▶
         </a>
       ) : <span></span>}
@@ -137,7 +141,11 @@ const accent = accentColorValues[entry.data.color];
           data-active={t.id === entry.id ? 'true' : 'false'}
         >
           <span class="toc-num">{String(i + 1).padStart(2, '0')}</span>
-          <span class="toc-text">{t.icon} {t.titleEn || t.title}</span>
+          <span class="toc-text">
+            {t.icon && /\.(svg|png|jpg|jpeg|webp|gif)$/i.test(t.icon)
+              ? <img src={t.icon} alt="" class="inline h-[1em] w-auto align-middle mr-3" />
+              : <span>{t.icon} </span>}{t.titleEn || t.title}
+          </span>
         </a>
       ))}
     </nav>
@@ -215,7 +223,7 @@ const accent = accentColorValues[entry.data.color];
   function syncToc() {
     const toc = document.querySelector<HTMLElement>('.present-toc');
     if (!toc) return;
-    const currentId = (location.pathname.match(/\/glossary\/([^/]+)/)?.[1]) || toc.dataset.currentId || '';
+    const currentId = (location.pathname.match(/\/playbook\/([^/]+)/)?.[1]) || toc.dataset.currentId || '';
     const items = Array.from(toc.querySelectorAll<HTMLElement>('.toc-item'));
     items.forEach((el) => {
       el.classList.remove('toc-hidden');
@@ -320,7 +328,7 @@ const accent = accentColorValues[entry.data.color];
       if (present) {
         setPresent(false);
       } else {
-        navigateSmooth('/theomonfort/glossary');
+        navigateSmooth('/theomonfort/playbook');
       }
       return;
     }
@@ -368,7 +376,7 @@ const accent = accentColorValues[entry.data.color];
     const items = Array.from(
       toc.querySelectorAll<HTMLAnchorElement>('.toc-item:not(.toc-hidden)'),
     );
-    const currentId = location.pathname.match(/\/glossary\/([^/]+)/)?.[1] || '';
+    const currentId = location.pathname.match(/\/playbook\/([^/]+)/)?.[1] || '';
     const idx = items.findIndex(
       (el) => el.classList.contains('active') || el.dataset.id === currentId,
     );
@@ -474,12 +482,11 @@ const accent = accentColorValues[entry.data.color];
       });
       await new Promise((r) => setTimeout(r, 30));
       try { await mermaid.run({ querySelector: '.mermaid-wrap' }); } catch (e) { console.error('[mermaid.run]', e); }
-      // Strip mermaid's intrinsic width/height so CSS can scale the SVG to fill the wrap.
+      // Keep mermaid's intrinsic size so vertical diagrams stay readable; CSS handles scrolling.
       document.querySelectorAll<SVGSVGElement>('.mermaid-wrap svg').forEach((svg) => {
         svg.removeAttribute('width');
         svg.removeAttribute('height');
         svg.style.maxWidth = 'none';
-        svg.style.width = '100%';
         svg.style.height = 'auto';
       });
       restored.forEach(({ el, orig }) => {
@@ -589,17 +596,167 @@ const accent = accentColorValues[entry.data.color];
   .prose-akq .setup-card p { margin: 0; line-height: 1.6; }
 
   .mermaid-wrap {
-    background: #05060f;
-    border: 2px solid #00f0ff;
+    background: transparent;
+    border: none;
     padding: 1.5em;
     margin: 2em 0;
     text-align: center;
     overflow-x: auto;
-    box-shadow: 4px 4px 0 #05060f, 0 0 12px rgba(0, 240, 255, 0.3);
+    box-shadow: none;
   }
   .mermaid-wrap svg { max-width: 100%; height: auto; margin: 0 auto; }
+  .mermaid-wrap + .mermaid-wrap { margin-top: -0.5em; }
   .prose-akq ul, .prose-akq ol { padding-left: 1.5em; margin: 1em 0; }
   .prose-akq li { margin: 0.4em 0; }
+
+  /* Impact metric grid (Copilot stats slide) */
+  .prose-akq .impact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 1.5em 0;
+  }
+  @media (min-width: 900px) {
+    .prose-akq .impact-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .prose-akq .impact-card {
+    background: #05060f;
+    border: 1.5px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 1.2rem 1rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+  .prose-akq .impact-card[data-color="purple"]  { border-color: rgba(157,107,255,0.5); }
+  .prose-akq .impact-card[data-color="cyan"]    { border-color: rgba(0,240,255,0.5); }
+  .prose-akq .impact-card[data-color="amber"]   { border-color: rgba(255,176,0,0.5); }
+  .prose-akq .impact-card[data-color="magenta"] { border-color: rgba(255,46,136,0.5); }
+  .prose-akq .impact-head {
+    font-family: 'DotGothic16', 'Noto Sans JP', sans-serif;
+    font-size: 0.95rem;
+    background: rgba(255,255,255,0.95);
+    color: #0a0e27;
+    padding: 0.35em 0.9em;
+    border-radius: 999px;
+    align-self: flex-start;
+    font-weight: bold;
+  }
+  .prose-akq .impact-stat { display: flex; flex-direction: column; gap: 0.25rem; }
+  .prose-akq .impact-num {
+    font-family: 'DotGothic16', sans-serif;
+    font-size: 2.4rem;
+    line-height: 1;
+    color: #e8f4ff;
+    font-weight: bold;
+  }
+  .prose-akq .impact-card[data-color="purple"]  .impact-num { color: #c9a5ff; }
+  .prose-akq .impact-card[data-color="cyan"]    .impact-num { color: #00f0ff; }
+  .prose-akq .impact-card[data-color="amber"]   .impact-num { color: #ffb000; }
+  .prose-akq .impact-card[data-color="magenta"] .impact-num { color: #ff7ab2; }
+  .prose-akq .impact-desc {
+    font-size: 0.85rem;
+    color: rgba(232,244,255,0.75);
+    line-height: 1.4;
+  }
+
+  /* Why-split layout: large title on left, vertical line, list on right */
+  .prose-akq .why-split {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 1.5em 0;
+    align-items: stretch;
+  }
+  @media (min-width: 800px) {
+    .prose-akq .why-split {
+      grid-template-columns: minmax(220px, 1fr) 2fr;
+      gap: 2.5rem;
+    }
+    .prose-akq .why-list {
+      border-left: 2px solid #9bbc0f;
+      padding-left: 2.5rem;
+    }
+  }
+  .prose-akq .why-title {
+    font-family: 'DotGothic16', 'Noto Sans JP', sans-serif;
+    font-size: 1.8rem;
+    line-height: 1.35;
+    color: #e8f4ff;
+    font-weight: bold;
+    align-self: center;
+  }
+  .prose-akq .why-list { display: flex; flex-direction: column; gap: 1.4rem; }
+  .prose-akq .why-item { display: flex; flex-direction: column; gap: 0.3rem; }
+  .prose-akq .why-head {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: bold;
+    color: #9bbc0f;
+    font-size: 1.05rem;
+  }
+  .prose-akq .why-body {
+    font-size: 0.95rem;
+    color: rgba(232,244,255,0.85);
+    line-height: 1.5;
+  }
+
+  /* Smaller radar chart wrapper */
+  .prose-akq .radar-small { max-width: 720px; margin: 1em auto 0; }
+  .prose-akq .radar-intro { max-width: 720px; margin: 1.2em auto 0.4em; text-align: center; }
+  .prose-akq .radar-intro-title { font-size: 1.6rem; font-weight: 700; color: var(--phosphor); line-height: 1.3; }
+  .prose-akq .radar-intro-sub { font-size: 1rem; color: var(--phosphor); opacity: 0.8; margin-top: 0.4em; }
+  body.present-mode .prose-akq .radar-intro-title { font-size: 2rem; }
+  body.present-mode .prose-akq .radar-intro-sub { font-size: 1.2rem; }
+
+  /* Copilot Proxy architecture diagram */
+  .prose-akq .proxy-arch {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 2em auto;
+    padding: 2em 1em;
+  }
+  .prose-akq .proxy-col { text-align: center; }
+  .prose-akq .proxy-icons { font-size: 3rem; line-height: 1; margin-bottom: 0.4em; }
+  .prose-akq .proxy-icons-big { font-size: 4.5rem; }
+  .prose-akq .proxy-label { font-size: 1.4rem; font-weight: 700; color: var(--phosphor); line-height: 1.2; }
+  .prose-akq .proxy-arrow {
+    font-size: 2.5rem;
+    background: linear-gradient(90deg, #9d6bff, #00f0ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+  }
+  .prose-akq .proxy-flow { display: flex; flex-direction: column; gap: 1rem; }
+  .prose-akq .proxy-flow-row { display: flex; align-items: center; justify-content: center; gap: 0.6rem; }
+  .prose-akq .proxy-flow-label { font-size: 1.2rem; font-weight: 700; color: var(--phosphor); }
+  .prose-akq .proxy-flow-arrow {
+    font-size: 2rem;
+    background: linear-gradient(90deg, #9d6bff, #9bbc0f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+  }
+  .prose-akq .proxy-flow-left {
+    background: linear-gradient(270deg, #9d6bff, #9bbc0f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  body.present-mode .prose-akq .proxy-icons { font-size: 4rem; }
+  body.present-mode .prose-akq .proxy-icons-big { font-size: 6rem; }
+  body.present-mode .prose-akq .proxy-label { font-size: 1.8rem; }
+  body.present-mode .prose-akq .proxy-arrow { font-size: 3.5rem; }
+  body.present-mode .prose-akq .proxy-flow-label { font-size: 1.5rem; }
+  body.present-mode .prose-akq .proxy-flow-arrow { font-size: 2.6rem; }
+  .prose-akq .radar-small .mermaid-wrap { padding: 0.5em 2.5em; margin: 0; overflow: visible; }
+  .prose-akq .radar-small .mermaid-wrap svg { max-width: 100% !important; width: 100% !important; height: auto !important; overflow: visible !important; }
+  body.present-mode .prose-akq .radar-small { max-width: 680px; }
+  body.present-mode .prose-akq .radar-small .mermaid-wrap { padding: 0.5em 2.5em !important; max-height: none; overflow: visible !important; }
   .prose-akq a {
     color: #00f0ff;
     text-decoration: underline;
@@ -678,6 +835,12 @@ const accent = accentColorValues[entry.data.color];
     justify-content: safe center;
     overflow-y: auto;
     overscroll-behavior: contain;
+  }
+  body.present-mode .glossary-detail > header {
+    max-width: 64rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
   }
   body.present-mode .glossary-detail > a:first-child,
   body.present-mode .glossary-detail > nav:not(.present-toc),
@@ -793,7 +956,7 @@ const accent = accentColorValues[entry.data.color];
   body.present-mode .glossary-detail header { margin-bottom: 1.5rem; }
   body.present-mode .glossary-detail header h1 { font-size: 3rem !important; }
   body.present-mode .glossary-detail header > p:nth-of-type(2) { font-size: 1.5rem !important; }
-  body.present-mode .prose-akq { font-size: 1.5rem; line-height: 1.7; max-width: 1100px; margin: 0 auto; }
+  body.present-mode .prose-akq { font-size: 1.5rem; line-height: 1.7; max-width: 64rem; width: 100%; margin: 0 auto; }
   body.present-mode .prose-akq h2 { font-size: 2.4rem; margin-top: 0.5em; margin-bottom: 0.7em; }
   body.present-mode .prose-akq h3 { font-size: 1.7rem; }
   body.present-mode .prose-akq pre,
@@ -803,12 +966,14 @@ const accent = accentColorValues[entry.data.color];
     margin: 1.5em 0;
     width: 100% !important;
     max-width: none !important;
+    max-height: 75vh;
+    overflow-y: auto;
+    overflow-x: auto;
   }
   body.present-mode .mermaid-wrap svg {
     max-width: none !important;
-    width: 100% !important;
+    width: auto !important;
     height: auto !important;
-    max-height: 65vh;
   }
   body.present-mode .prose-akq blockquote { font-size: 1.3rem; }
 

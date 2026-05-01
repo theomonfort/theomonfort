@@ -2,9 +2,10 @@
 title: GitHub Codespaces
 titleEn: GitHub Codespaces
 summary: クラウド上にホストされる、カスタマイズ可能なリモート開発環境。AI を"安全に閉じ込めて"実験・作業できる、AI駆動開発の理想的な遊び場。
-icon: ☁️
+icon: /theomonfort/github-vscode-mark.png
 color: cyan
-order: 15
+order: 17
+category: develop
 related: ['cloud-agent', 'agentic-workflow', 'cli']
 links:
   - label: GitHub Codespaces

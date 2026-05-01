@@ -4,7 +4,8 @@ titleEn: Copilot CLI
 summary: ターミナルに住むCopilot。IDEを選ばず、計画→実装→レビューを Shift+Tab だけで往復する"端末の中の同僚"。
 icon: 💻
 color: cyan
-order: 12
+order: 14
+category: develop
 related: ['agent-mode', 'agent-skills', 'mcp', 'custom-agent', 'cloud-agent']
 links:
   - label: GitHub Copilot CLI — Docs

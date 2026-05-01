@@ -4,7 +4,8 @@ titleEn: Harness Engineering
 summary: エージェントが安全かつ効果的に動ける足場の設計。ツール群、制約、ループ、検証、ロールバックの設計術。
 icon: 🛡️
 color: green
-order: 6
+order: 8
+category: plan
 related: ['agentic-workflow', 'agent-skills', 'mcp']
 links:
   - label: Well-Architected (GitHub)

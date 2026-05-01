@@ -4,7 +4,8 @@ titleEn: Agentic Workflow
 summary: GitHub Actions の上で AI エージェントを走らせる新しい自動化。Markdown に「やってほしいこと」を自然言語で書くだけで、判断と行動を伴うワークフローが動く。
 icon: 🔄
 color: green
-order: 14
+order: 16
+category: operate
 related: ['cloud-agent', 'mcp', 'agent-skills', 'instructions']
 links:
   - label: gh-aw CLI（GitHub）

@@ -4,7 +4,8 @@ titleEn: Agent Mode
 summary: IDE内でAIが自律的にコード変更・コマンド実行・テスト実行までこなすモード。"会話"から"実行"へ。
 icon: ⚔️
 color: magenta
-order: 11
+order: 13
+category: develop
 related: ['cli', 'cloud-agent', 'harness-engineering']
 links:
   - label: VS Code Agent mode

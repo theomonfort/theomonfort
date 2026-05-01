@@ -14,6 +14,9 @@ const glossary = defineCollection({
       .array(z.object({ label: z.string(), url: z.string().url() }))
       .default([]),
     order: z.number().default(0),
+    category: z
+      .enum(['introduction', 'plan', 'develop', 'review', 'secure', 'operate'])
+      .default('introduction'),
   }),
 });
 

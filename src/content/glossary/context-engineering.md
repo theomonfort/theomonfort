@@ -4,7 +4,8 @@ titleEn: Context Engineering
 summary: モデルに渡す情報の選定・整形・順序の設計。何を見せ、何を隠すかが出力を決める。
 icon: 📚
 color: amber
-order: 10
+order: 12
+category: plan
 related: ['prompt-engineering', 'harness-engineering', 'mcp']
 links:
   - label: GitHub blog — context
