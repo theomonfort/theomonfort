@@ -25,7 +25,7 @@ const tocEntries = all.map((e) => ({
   title: e.data.title,
   titleEn: e.data.titleEn,
   icon: e.data.icon,
-  url: `/theomonfort/glossary/${e.id}`,
+  url: `/theomonfort/playbook/${e.id}`,
 }));
 
 const accent = accentColorValues[entry.data.color];
@@ -41,10 +41,10 @@ const accent = accentColorValues[entry.data.color];
   </script>
   <section
     class="max-w-3xl mx-auto px-4 py-12 glossary-detail"
-    data-prev={prev ? `/theomonfort/glossary/${prev.id}` : ''}
-    data-next={next ? `/theomonfort/glossary/${next.id}` : ''}
+    data-prev={prev ? `/theomonfort/playbook/${prev.id}` : ''}
+    data-next={next ? `/theomonfort/playbook/${next.id}` : ''}
   >
-    <a href="/theomonfort/glossary" class="font-pixel text-[10px] text-phosphor/60 hover:text-neon-magenta">◀ 用語一覧</a>
+    <a href="/theomonfort/playbook" class="font-pixel text-[10px] text-phosphor/60 hover:text-neon-magenta">◀ 用語一覧</a>
 
     <header class="mt-6 mb-8 pb-6 border-b-2 border-dashed" style={`border-color:${accent}`}>
       <div class="flex items-center gap-2 mb-2">
@@ -88,7 +88,7 @@ const accent = accentColorValues[entry.data.color];
             if (!r) return null;
             return (
               <a
-                href={`/theomonfort/glossary/${r.id}`}
+                href={`/theomonfort/playbook/${r.id}`}
                 class="font-pixel-jp text-xs px-3 py-1 border border-phosphor/30 hover:border-neon-cyan hover:text-neon-cyan transition-colors"
               >
                 {r.data.icon && /\.(svg|png|jpg|jpeg|webp|gif)$/i.test(r.data.icon)
@@ -103,12 +103,12 @@ const accent = accentColorValues[entry.data.color];
 
     <nav class="mt-12 grid grid-cols-2 gap-4 font-pixel text-[10px]">
       {prev ? (
-        <a href={`/theomonfort/glossary/${prev.id}`} class="block p-3 border-2 border-phosphor/30 hover:border-neon-cyan hover:text-neon-cyan transition-colors">
+        <a href={`/theomonfort/playbook/${prev.id}`} class="block p-3 border-2 border-phosphor/30 hover:border-neon-cyan hover:text-neon-cyan transition-colors">
           ◀ {prev.data.title}
         </a>
       ) : <span></span>}
       {next ? (
-        <a href={`/theomonfort/glossary/${next.id}`} class="block p-3 border-2 border-phosphor/30 hover:border-neon-magenta hover:text-neon-magenta transition-colors text-right">
+        <a href={`/theomonfort/playbook/${next.id}`} class="block p-3 border-2 border-phosphor/30 hover:border-neon-magenta hover:text-neon-magenta transition-colors text-right">
           {next.data.title} ▶
         </a>
       ) : <span></span>}
@@ -223,7 +223,7 @@ const accent = accentColorValues[entry.data.color];
   function syncToc() {
     const toc = document.querySelector<HTMLElement>('.present-toc');
     if (!toc) return;
-    const currentId = (location.pathname.match(/\/glossary\/([^/]+)/)?.[1]) || toc.dataset.currentId || '';
+    const currentId = (location.pathname.match(/\/playbook\/([^/]+)/)?.[1]) || toc.dataset.currentId || '';
     const items = Array.from(toc.querySelectorAll<HTMLElement>('.toc-item'));
     items.forEach((el) => {
       el.classList.remove('toc-hidden');
@@ -328,7 +328,7 @@ const accent = accentColorValues[entry.data.color];
       if (present) {
         setPresent(false);
       } else {
-        navigateSmooth('/theomonfort/glossary');
+        navigateSmooth('/theomonfort/playbook');
       }
       return;
     }
@@ -376,7 +376,7 @@ const accent = accentColorValues[entry.data.color];
     const items = Array.from(
       toc.querySelectorAll<HTMLAnchorElement>('.toc-item:not(.toc-hidden)'),
     );
-    const currentId = location.pathname.match(/\/glossary\/([^/]+)/)?.[1] || '';
+    const currentId = location.pathname.match(/\/playbook\/([^/]+)/)?.[1] || '';
     const idx = items.findIndex(
       (el) => el.classList.contains('active') || el.dataset.id === currentId,
     );
