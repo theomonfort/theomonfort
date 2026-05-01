@@ -17,11 +17,12 @@ export default function XPHud() {
       if (delta > 8) {
         setXp((prev) => {
           const next = prev + Math.min(Math.floor(delta / 40), 2);
-          if (next >= 100) {
+          if (next >= 1000) {
+            const inPresent = document.body.classList.contains('present-mode');
             play('levelup');
             setLevel((l) => l + 1);
-            setPopupKey((k) => k + 1);
-            return next - 100;
+            if (!inPresent) setPopupKey((k) => k + 1);
+            return next - 1000;
           }
           return next;
         });
@@ -42,10 +43,10 @@ export default function XPHud() {
         <div className="w-32 h-2 bg-shadow-ink border border-crt-amber relative overflow-hidden">
           <div
             className="h-full bg-crt-amber transition-[width] duration-150"
-            style={{ width: `${xp}%`, boxShadow: '0 0 6px #ffb000' }}
+            style={{ width: `${xp / 10}%`, boxShadow: '0 0 6px #ffb000' }}
           />
         </div>
-        <div className="text-[8px] text-crt-amber/80 mt-1">EXP {xp}/100</div>
+        <div className="text-[8px] text-crt-amber/80 mt-1">EXP {xp}/1000</div>
       </div>
       {popupKey > 0 && (
         <div
