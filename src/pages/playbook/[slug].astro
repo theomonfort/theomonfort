@@ -3,6 +3,7 @@ import Layout from '../../components/layout/Layout.astro';
 import { getCollection, render } from 'astro:content';
 import MenuArrow from '../../components/retro/MenuArrow.astro';
 import { accentColorValues } from '../../lib/theme';
+import { categories } from '../../lib/glossary-categories';
 
 export async function getStaticPaths() {
   const entries = await getCollection('glossary');
@@ -25,10 +26,23 @@ const tocEntries = all.map((e) => ({
   title: e.data.title,
   titleEn: e.data.titleEn,
   icon: e.data.icon,
+  category: e.data.category,
   url: `/theomonfort/playbook/${e.id}`,
 }));
 
-const accent = accentColorValues[entry.data.color];
+const tocGroups = categories
+  .map((cat) => ({
+    cat,
+    color: accentColorValues[cat.color],
+    items: tocEntries.filter((t) => t.category === cat.id),
+  }))
+  .filter((g) => g.items.length > 0);
+
+let _tocIdx = 0;
+
+const category = categories.find((c) => c.id === entry.data.category);
+const accentColor = category?.color ?? entry.data.color;
+const accent = accentColorValues[accentColor];
 ---
 
 <Layout title={`${entry.data.title} — プレイブック`}>
@@ -133,20 +147,32 @@ const accent = accentColorValues[entry.data.color];
     <div class="slide-counter font-pixel text-[10px]" aria-hidden="true"></div>
     <div class="slide-title-tag" aria-hidden="true"></div>
     <nav class="present-toc" aria-label="プレゼン目次" data-current-id={entry.id} transition:persist="present-toc">
-      {tocEntries.map((t, i) => (
-        <a
-          href={t.url}
-          class="toc-item"
-          data-id={t.id}
-          data-active={t.id === entry.id ? 'true' : 'false'}
-        >
-          <span class="toc-num">{String(i + 1).padStart(2, '0')}</span>
-          <span class="toc-text">
-            {t.icon && /\.(svg|png|jpg|jpeg|webp|gif)$/i.test(t.icon)
-              ? <img src={t.icon} alt="" class="inline h-[1em] w-auto align-middle mr-3" />
-              : <span>{t.icon} </span>}{t.titleEn || t.title}
-          </span>
-        </a>
+      {tocGroups.map((g) => (
+        <>
+          <div class="toc-section" style={`color:${g.color}; border-color:${g.color}`}>
+            {g.cat.labelEn}
+          </div>
+          {g.items.map((t) => {
+            _tocIdx += 1;
+            const num = _tocIdx;
+            return (
+              <a
+                href={t.url}
+                class="toc-item"
+                data-id={t.id}
+                data-active={t.id === entry.id ? 'true' : 'false'}
+                style={`--cat-color:${g.color}`}
+              >
+                <span class="toc-num">{String(num).padStart(2, '0')}</span>
+                <span class="toc-text">
+                  {t.icon && /\.(svg|png|jpg|jpeg|webp|gif)$/i.test(t.icon)
+                    ? <img src={t.icon} alt="" class="inline h-[1em] w-auto align-middle mr-3" />
+                    : <span>{t.icon} </span>}{t.titleEn || t.title}
+                </span>
+              </a>
+            );
+          })}
+        </>
       ))}
     </nav>
   </section>
@@ -915,15 +941,28 @@ const accent = accentColorValues[entry.data.color];
     background: rgba(0,240,255,0.1);
   }
   .present-toc .toc-item.active {
-    color: #ff2e88;
-    border-left-color: #ff2e88;
-    background: rgba(255,46,136,0.12);
+    color: var(--cat-color, #ff2e88) !important;
+    border-left-color: var(--cat-color, #ff2e88);
+    background: color-mix(in srgb, var(--cat-color, #ff2e88) 15%, transparent);
     font-weight: 700;
+  }
+  .present-toc .toc-section {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.85rem 0.6rem 0.35rem;
+    margin-top: 0.4rem;
+    border-bottom: 1px solid;
+    opacity: 0.85;
+  }
+  .present-toc .toc-section:first-child {
+    margin-top: 0;
   }
   .present-toc .toc-num {
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
     font-size: 0.72rem;
-    color: #ffb000;
+    color: var(--cat-color, #ffb000);
     flex-shrink: 0;
     min-width: 1.6rem;
   }

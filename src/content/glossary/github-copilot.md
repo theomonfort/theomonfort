@@ -86,24 +86,24 @@ config:
     .nodeLabel img { border-radius: 50% !important; width: 28px !important; height: 28px !important; min-width: 28px !important; max-width: 28px !important; min-height: 28px !important; max-height: 28px !important; object-fit: cover !important; display: block !important; margin: 0 auto 3px !important; }
 ---
 flowchart TB
-  A["<img src='/theomonfort/octocat-green.png' width='28' height='28'/><b style='color:#00f0ff'>企画</b> ・ チームマネージャー<br/>───<br/><b style='color:#00f0ff'>Issues</b> と <b style='color:#00f0ff'>Projects</b> で計画。<b style='color:#00f0ff'>MCP</b> サーバー、<b style='color:#00f0ff'>Instruction</b> ファイル、<b style='color:#00f0ff'>Agent Skills</b>、<b style='color:#00f0ff'>Custom Agent</b> を設定し AI のハーネスを整備"]
+  A["<img src='/theomonfort/octocat-green.png' width='28' height='28'/><b style='color:#9bbc0f'>企画</b> ・ チームマネージャー<br/>───<br/><b style='color:#9bbc0f'>Issues</b> と <b style='color:#9bbc0f'>Projects</b> で計画。<b style='color:#9bbc0f'>MCP</b> サーバー、<b style='color:#9bbc0f'>Instruction</b> ファイル、<b style='color:#9bbc0f'>Agent Skills</b>、<b style='color:#9bbc0f'>Custom Agent</b> を設定し AI のハーネスを整備"]
   B["<img src='/theomonfort/octocat-red.png' width='28' height='28'/><b style='color:#ff2e88'>開発</b> ・ ジュニア開発者<br/>───<br/><b style='color:#ff2e88'>Codespaces</b> でチーム共通の環境を使い、<b style='color:#ff2e88'>Plan / Agent</b> モードや <b style='color:#ff2e88'>Copilot Chat</b>・<b style='color:#ff2e88'>CLI</b> でコーディング。<b style='color:#ff2e88'>Cloud Agent</b> にタスクを委譲して並列開発"]
   C["<img src='/theomonfort/octocat-yellow.png' width='28' height='28'/><b style='color:#ffb000'>レビュー</b> ・ シニア開発者<br/>───<br/>Copilot が自動で <b style='color:#ffb000'>Code Review</b>。<b style='color:#ffb000'>PR</b> のレビュー時間を削減し、最終レビューに集中"]
-  D["<img src='/theomonfort/octocat-yellow.png' width='28' height='28'/><b style='color:#9bbc0f'>品質保証</b> ・ DevSecOps エンジニア<br/>───<br/><b style='color:#9bbc0f'>GitHub Actions</b> でテストを自動化。<b style='color:#9bbc0f'>Code Scanning</b>・<b style='color:#9bbc0f'>Secret Scanning</b>・<b style='color:#9bbc0f'>Dependabot</b> を有効化してセキュリティを担保"]
-  E["<img src='/theomonfort/octocat-team.png' width='28' height='28'/><b style='color:#5b8def'>監視</b> ・ チーム全体<br/>───<br/><b style='color:#5b8def'>Agentic Workflow</b> で運用自動化。<b style='color:#5b8def'>Copilot Metrics</b> で AI 利用状況を可視化、<b style='color:#5b8def'>Memory</b> で知識を蓄積"]
+  D["<img src='/theomonfort/octocat-blue.png' width='28' height='28'/><b style='color:#00f0ff'>品質保証</b> ・ DevSecOps エンジニア<br/>───<br/><b style='color:#00f0ff'>GitHub Actions</b> でテストを自動化。<b style='color:#00f0ff'>Code Scanning</b>・<b style='color:#00f0ff'>Secret Scanning</b>・<b style='color:#00f0ff'>Dependabot</b> を有効化してセキュリティを担保"]
+  E["<img src='/theomonfort/octocat-team.png' width='28' height='28'/><b style='color:#9bbc0f'>監視</b> ・ チーム全体<br/>───<br/><b style='color:#9bbc0f'>Agentic Workflow</b> で運用自動化。<b style='color:#9bbc0f'>Copilot Metrics</b> で AI 利用状況を可視化、<b style='color:#9bbc0f'>Memory</b> で知識を蓄積"]
 
   A --> B --> C --> D --> E
 
-  style A fill:#0a0e27,stroke:#00f0ff,stroke-width:4px
+  style A fill:#0a0e27,stroke:#9bbc0f,stroke-width:4px
   style B fill:#0a0e27,stroke:#ff2e88,stroke-width:4px
   style C fill:#0a0e27,stroke:#ffb000,stroke-width:4px
-  style D fill:#0a0e27,stroke:#9bbc0f,stroke-width:4px
-  style E fill:#0a0e27,stroke:#5b8def,stroke-width:4px
+  style D fill:#0a0e27,stroke:#00f0ff,stroke-width:4px
+  style E fill:#0a0e27,stroke:#9bbc0f,stroke-width:4px
 
-  linkStyle 0 stroke:#00f0ff,stroke-width:3px,fill:none
+  linkStyle 0 stroke:#9bbc0f,stroke-width:3px,fill:none
   linkStyle 1 stroke:#ff2e88,stroke-width:3px,fill:none
   linkStyle 2 stroke:#ffb000,stroke-width:3px,fill:none
-  linkStyle 3 stroke:#9bbc0f,stroke-width:3px,fill:none
+  linkStyle 3 stroke:#00f0ff,stroke-width:3px,fill:none
 ```
 
 ## セキュアでコンプライアントなアーキテクチャ
