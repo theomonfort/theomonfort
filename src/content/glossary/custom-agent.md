@@ -62,27 +62,34 @@ Custom Agent は Markdown ファイル。上の YAML frontmatter が設定、下
 
 ```yaml
 ---
-name: Planner
-description: 実装前に調査し、編集せずに計画を作る
-tools: ["read", "search"]
-model: "Claude Opus 4.5"
+name: design-reviewer
+description: Figma と実装を照合して UI 差分をレビューする
 target: github-copilot
+model: Claude Sonnet 4.5
+tools:
+  - read
+  - search
+  - github/pull-request-read
+  - figma/*
+mcp-servers:
+  figma:
+    type: local
+    command: npx
+    args: ["-y", "figma-mcp-server"]
 ---
 
 # Role
 
-あなたは実装前の計画担当。
-コード編集は禁止。調査、設計、リスク、検証手順だけを書く。
-```
+あなたは UI 実装の design reviewer。
+Figma の仕様と Pull Request の差分を比較し、見た目・余白・色・状態差分だけをレビューする。
 
-| フィールド | 必須 | 役割 |
-| --- | --- | --- |
-| `description` | Yes | 呼び出すタイミングを決める最重要メタデータ |
-| `name` | No | 表示名。省略時はファイル名 |
-| `tools` | No | 使える道具を制限。省略すると利用可能な tools 全部 |
-| `model` | No | IDE などで使うモデル指定 |
-| `target` | No | `vscode` / `github-copilot` など対象環境 |
-| `mcp-servers` | No | この agent 専用 MCP |
+# Rules
+
+- コードは編集しない
+- blocking / non-blocking を分けて指摘する
+- 再現手順と確認すべき画面幅を必ず書く
+- 推測で断定せず、Figma または diff に根拠があるものだけ指摘する
+```
 
 ## Tools は権限設計
 
