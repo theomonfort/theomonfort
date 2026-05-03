@@ -94,12 +94,11 @@ Multi-phase execution plan を作り、ファイルの重なりを検出し、Pl
 
 ```mermaid
 flowchart LR
-  User[User prompt] --> O[Orchestrator<br/>Claude Sonnet 4.6]
+  User[User prompt] --> O[Orchestrator<br/>Claude Sonnet 4.6<br/>multi-phase execution plan]
 
-  O --> Plan[Multi-phase execution plan<br/>file ownership<br/>parallel phases]
   O --> P[Planner<br/>Claude Opus 4.6<br/>research + docs]
-  Plan --> C[Coder<br/>GPT-5.3-Codex<br/>scoped code changes]
-  Plan --> D[Designer<br/>Claude Opus 4.6<br/>UI / UX owner]
+  O --> C[Coder<br/>GPT-5.3-Codex<br/>scoped code changes]
+  O --> D[Designer<br/>Claude Opus 4.6<br/>UI / UX owner]
 
   D -.-> S[Frontend Design Skill<br/>used by Designer<br/>brand, layout, CSS, components]
   C -.-> M[MCP Server<br/>used by Coder<br/>GitHub / Playwright / docs]
@@ -110,12 +109,10 @@ flowchart LR
   O --> R[Pull Request<br/>human review]
 
   classDef host fill:#102033,stroke:#00f0ff,color:#e8f4ff,stroke-width:2px;
-  classDef plan fill:#17192f,stroke:#c9a5ff,color:#f5edff,stroke-width:2px;
   classDef agent fill:#132812,stroke:#9bbc0f,color:#f4ffd8,stroke-width:2px;
   classDef harness fill:#2a1020,stroke:#ff2e88,color:#ffe8f4,stroke-width:2px;
   classDef ship fill:#302500,stroke:#ffb000,color:#fff4d6,stroke-width:2px;
   class O host;
-  class Plan plan;
   class P,C,D agent;
   class S,M harness;
   class R ship;
