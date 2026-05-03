@@ -97,7 +97,7 @@ flowchart LR
   User[User prompt] --> O[Orchestrator<br/>Claude Sonnet 4.6]
 
   O --> Plan[Multi-phase execution plan<br/>file ownership<br/>parallel phases]
-  Plan --> P[Planner<br/>Claude Opus 4.6<br/>research + docs]
+  O --> P[Planner<br/>Claude Opus 4.6<br/>research + docs]
   Plan --> C[Coder<br/>GPT-5.3-Codex<br/>scoped code changes]
   Plan --> D[Designer<br/>Claude Opus 4.6<br/>UI / UX owner]
 
