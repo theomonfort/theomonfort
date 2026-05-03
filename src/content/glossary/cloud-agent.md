@@ -6,7 +6,7 @@ icon: ☁️
 color: amber
 order: 15
 category: develop
-related: ['copilot-code-review', 'instructions', 'mcp', 'agent-mode']
+related: ['copilot-code-review', 'instructions', 'mcp']
 links:
   - label: Customize the agent environment
     url: https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/use-copilot-agents/cloud-agent/customize-the-agent-environment

@@ -6,7 +6,7 @@ icon: 💬
 color: cyan
 order: 3
 category: develop
-related: ['agent-mode', 'mcp', 'instructions', 'cli', 'cloud-agent']
+related: ['mcp', 'instructions', 'cli', 'cloud-agent']
 links:
   - label: About GitHub Copilot Chat
     url: https://docs.github.com/copilot/github-copilot-chat/about-github-copilot-chat

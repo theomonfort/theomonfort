@@ -6,7 +6,7 @@ icon: 🥷
 color: green
 order: 7
 category: plan
-related: ['agent-skills', 'agent-mode', 'cli']
+related: ['agent-skills', 'cli']
 links:
   - group: 📖 公式ドキュメント
     label: GitHub Docs — Creating custom agents for Copilot cloud agent

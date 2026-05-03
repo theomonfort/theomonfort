@@ -6,7 +6,7 @@ icon: 💻
 color: cyan
 order: 14
 category: develop
-related: ['agent-mode', 'agent-skills', 'mcp', 'custom-agent', 'cloud-agent']
+related: ['agent-skills', 'mcp', 'custom-agent', 'cloud-agent']
 links:
   - label: GitHub Copilot CLI — Docs
     url: https://docs.github.com/copilot/github-copilot-in-the-cli

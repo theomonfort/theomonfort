@@ -6,7 +6,7 @@ icon: /theomonfort/github-copilot-white-icon.png
 color: cyan
 order: 2
 category: introduction
-related: ['github', 'copilot-chat', 'agent-mode', 'cloud-agent']
+related: ['github', 'copilot-chat', 'cloud-agent']
 links:
   - label: GitHub Copilot 公式
     url: https://github.com/features/copilot

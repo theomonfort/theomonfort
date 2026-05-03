@@ -6,7 +6,7 @@ icon: /theomonfort/github-white-icon.svg
 color: magenta
 order: 1
 category: introduction
-related: ['copilot-chat', 'cloud-agent', 'agent-mode']
+related: ['copilot-chat', 'cloud-agent']
 links:
   - label: About GitHub
     url: https://github.com/about
