@@ -91,29 +91,6 @@ Figma の仕様と Pull Request の差分を比較し、見た目・余白・色
 - 推測で断定せず、Figma または diff に根拠があるものだけ指摘する
 ```
 
-## MCP を持たせる
-
-Repository 全体に MCP を置くこともできるが、Custom Agent にだけ専用 MCP を持たせると役割が明確になる。
-
-```yaml
----
-name: design-reviewer
-description: Figma と実装を照合して UI 差分をレビューする
-tools: ["read", "search", "figma/*"]
-mcp-servers:
-  figma:
-    type: local
-    command: npx
-    args: ["-y", "figma-mcp-server"]
----
-```
-
-| パターン | 向いている時 |
-| --- | --- |
-| Repository MCP | ほぼ全 agent が使う共通ツール |
-| Agent-local MCP | 特定 agent だけが使う専門ツール |
-| Tool subset | MCP はあるが、agent には一部 tool だけ渡したい |
-
 ## 例：レビュー番長
 
 ```yaml
