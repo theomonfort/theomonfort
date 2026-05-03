@@ -94,14 +94,14 @@ Multi-phase execution plan を作り、ファイルの重なりを検出し、Pl
 
 ```mermaid
 flowchart LR
-  User[User prompt] --> O[Orchestrator<br/>Claude Sonnet 4.6<br/>multi-phase execution plan]
+  User[User prompt] --> O[Orchestrator<br/>Claude Sonnet 4.6<br/>multi-phase plan]
 
   O --> P[Planner<br/>Claude Opus 4.6<br/>research + docs]
   O --> C[Coder<br/>GPT-5.3-Codex<br/>scoped code changes]
   O --> D[Designer<br/>Claude Opus 4.6<br/>UI / UX owner]
 
-  D -.-> S[Frontend Design Skill<br/>used by Designer<br/>brand, layout, CSS, components]
-  C -.-> M[MCP Server<br/>used by Coder<br/>GitHub / Playwright / docs]
+  D -.-> S[Frontend Design Skill<br/>used by Designer<br/>brand / layout / CSS]
+  C -.-> M[MCP Server<br/>used by Coder<br/>GitHub / Playwright<br/>docs]
 
   P --> O
   C --> O
