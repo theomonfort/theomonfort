@@ -37,4 +37,14 @@ links:
 
 > 迷ったら、まずは利用する agent host が読む場所に合わせる。チーム共有なら repository 配下、個人用なら home 配下。
 
+## いつ使う？
+
+| 使いたいもの | 向いているケース | 例 |
+| --- | --- | --- |
+| Instructions | 全員・全タスクに効く常識 | 「この repo は pnpm を使う」 |
+| Skills | 必要な時だけ読み込む専門手順 | 「PR description を生成する」 |
+| Custom Agent | 役割と権限を切り替えたい | 「編集禁止の Planner」「security 専用 reviewer」 |
+
+> 判断基準：**人格・ツール制限・モデル・MCP をまとめて変えたいなら Custom Agent**。
+
 > AI を信頼するな、harness を信頼せよ。
