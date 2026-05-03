@@ -90,13 +90,13 @@ AI を強くする道具は 1 つではない。**広く効かせるもの** と
 ## 例：Ultralight
 
 [Ultralight](https://burkeholland.github.io/ultralight/) は Microsoft の Developer Advocate、Burke Holland さんの multi-agent orchestration 例。  
-phased execution plan を作り、ファイルの重なりを検出し、Planner / Coder / Designer に並列で仕事を渡す harness になっている。
+Multi-phase execution plan を作り、ファイルの重なりを検出し、Planner / Coder / Designer に並列で仕事を渡す harness になっている。
 
 ```mermaid
 flowchart LR
   User[User prompt] --> O[Orchestrator<br/>Claude Sonnet 4.6]
 
-  O --> Plan[Multi-phase plan<br/>file ownership<br/>parallel phases]
+  O --> Plan[Multi-phase execution plan<br/>file ownership<br/>parallel phases]
   Plan --> P[Planner<br/>Claude Opus 4.6<br/>research + docs]
   Plan --> C[Coder<br/>GPT-5.3-Codex<br/>scoped code changes]
   Plan --> D[Designer<br/>Claude Opus 4.6<br/>UI / UX owner]
