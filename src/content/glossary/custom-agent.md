@@ -95,15 +95,17 @@ Figma の仕様と Pull Request の差分を比較し、見た目・余白・色
 
 ## 組み込みエージェント例
 
-CLI や Copilot Chat に最初からある agent も、考え方は同じ。  
-よく使う役割・権限・出力形式が、あらかじめパッケージ化されている。
+Copilot Chat や CLI にも、最初から目的別の agent が入っている。  
+Custom Agent は、この考え方を **自分のチーム用に増やす仕組み**。
 
-| Agent | 役割 | 権限のイメージ |
+| Surface | Agent | 何をする？ |
 | --- | --- | --- |
-| Plan | 実装前に調査し、作業分解と検証方針を作る | 読む・検索する。基本は編集しない |
-| Task | build / test / lint などのコマンドを実行して結果を返す | 実行する。成功時は要約、失敗時はログを詳しく返す |
-| Review | 差分や PR を読み、重大なバグ・セキュリティ・仕様漏れを指摘する | 読む・検索する。勝手に修正しない |
-| Explore | コードベースを横断的に調査して、場所・構造・依存関係を見つける | 読む・検索する。実装はしない |
-| Coder | 具体的な実装や修正を担当する | 読む・編集する・必要に応じて検証する |
+| Copilot Chat / VS Code | Agent | 複雑な coding task に対して、自律的に計画・編集・コマンド実行・tool 呼び出しを行う |
+| Copilot Chat / VS Code | Plan | コードを書く前に、構造化された step-by-step implementation plan を作る |
+| Copilot Chat / VS Code | Ask | コードベース・coding concept・VS Code について、ファイル変更なしで質問に答える |
+| Copilot CLI | Explore | Quick codebase analysis。main context に追加せず、コードについて質問できる |
+| Copilot CLI | Task | tests / builds などのコマンドを実行し、成功時は短い要約、失敗時は full output を返す |
+| Copilot CLI | General-purpose | Full toolset と高品質 reasoning が必要な complex multi-step task を別 context で処理する |
+| Copilot CLI | Code-review | 変更をレビューし、本当に重要な issue だけを低ノイズで指摘する |
 
-> Custom Agent は、こうした組み込み役割を **自分のチーム用に増やす仕組み** と考えると分かりやすい。
+> 画面上では preview / UI によって表示名が短く見えることがあるが、CLI docs の正式名は `General-purpose` と `Code-review`。
