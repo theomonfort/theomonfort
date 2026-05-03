@@ -22,4 +22,19 @@ links:
 - 観測（ログ、コスト、レイテンシ）
 - ロールバック（git, snapshots）
 
+## エコシステム対応表
+
+同じ「AI の足場」でも、置き場所やファイル名はエコシステムごとに少し違う。
+
+| レイヤー | GitHub / Copilot | Open ecosystem |
+| --- | --- | --- |
+| 全体指示 | `.github/copilot-instructions.md` | `AGENTS.md` |
+| パス別ルール | `.github/instructions/*.instructions.md` | nested `AGENTS.md` |
+| Skills（project） | `.github/skills/*/SKILL.md` | `.agents/skills/*/SKILL.md` |
+| Skills（personal） | `~/.copilot/skills/` | `~/.agents/skills/` |
+| Custom agents | Copilot custom agents | agent definitions / plugins |
+| MCP / tools | `mcp.config` | `mcp.config` |
+
+> 迷ったら、まずは利用する agent host が読む場所に合わせる。チーム共有なら repository 配下、個人用なら home 配下。
+
 > AI を信頼するな、harness を信頼せよ。

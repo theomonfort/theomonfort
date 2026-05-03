@@ -1,7 +1,7 @@
 ---
 title: MCP Server（Model Context Protocol）
 titleEn: MCP Server
-summary: AIモデルに「外の世界」へのアクセスを与える標準プロトコル。USB-Cのように、どのモデル・どのツールでも"差せば動く"。
+summary: MCP は AI モデルに対して追加の文脈を提供する方法である。
 icon: /theomonfort/mcp.png
 color: cyan
 order: 4
@@ -34,83 +34,102 @@ links:
 
 ## 一言で
 
-**MCP** は **Model Context Protocol** の略 ── AI モデルに「**現在操作している場所の外**から文脈を取りに行く」標準的な方法を与えるプロトコル。
+<div class="hero-quote">
 
-> 💡 **アナロジー**：MCP は **「AI のための USB-C」**。サードパーティのツールと Copilot を繋ぐ共通コネクタ。
+MCP は「Model Context Protocol」の略称で、AI モデルに対して追加の文脈や機能を提供するプロトコルである。
 
-## なぜ重要?
-
-LLM はそのままでは **"閉じた箱"**。学習データの外側 ── 君のファイル、社内 DB、Figma のデザイン、Slack の会話 ── には触れない。
-
-MCP がもたらす 3 つの価値：
-
-- **🧩 機能を拡張できる** ── Figma / Salesforce / Slack などを、それぞれカスタム統合せずに Copilot から直接制御
-- **🔗 ワークフローを統合** ── Copilot が GitHub / Jira / テストツールを繋ぐ **ハブ** になる
-- **🌐 標準プロトコル** ── MCP をサポートするあらゆるツールが、書き直しなしで動く
+</div>
 
 ## 仕組み
 
 ```mermaid
 flowchart LR
-  subgraph Host["🤖 AI Host"]
-    LLM[GitHub Copilot]
+  subgraph Host["🤖 AI Host (VS Code / Copilot CLI 等)"]
+    APP[Copilot]
+    CL1[MCP Client]
+    CL2[MCP Client]
+    CL3[MCP Client]
+    CL4[MCP Client]
+    CL5[MCP Client]
   end
-  subgraph MCP["🔌 MCP Layer"]
-    P[Model Context Protocol]
+  subgraph MCP["🔌 MCP Layer (1 Client ⇄ 1 Server)"]
+    SLs[Work IQ MCP Server]
+    JRs[GitHub MCP Server]
+    FSs[Playwright MCP Server]
+    PWs[Context7 MCP Server]
+    APIs[Salesforce MCP Server]
   end
   subgraph Tools["🛠️ External Tools"]
-    SL[Slack]
-    JR[Jira]
-    FS[ファイルシステム]
-    PW[Playwright]
-    API[各種 API]
+    SL[Work IQ]
+    JR[GitHub]
+    FS[Playwright]
+    PW[Context7]
+    API[Salesforce]
   end
-  LLM <--> P
-  P <--> SL
-  P <--> JR
-  P <--> FS
-  P <--> PW
-  P <--> API
+  APP --- CL1
+  APP --- CL2
+  APP --- CL3
+  APP --- CL4
+  APP --- CL5
+  CL1 <-->|stdio| SLs
+  CL2 <-->|HTTP| JRs
+  CL3 <-->|stdio| FSs
+  CL4 <-->|stdio| PWs
+  CL5 <-->|stdio| APIs
+  SLs <-->|API| SL
+  JRs <-->|API| JR
+  FSs <-->|API| FS
+  PWs <-->|API| PW
+  APIs <-->|API| API
 
   classDef host fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
   classDef proto fill:#1a0a2e,stroke:#ffb000,color:#ffb000,stroke-width:2px
   classDef tool fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
-  class LLM host
-  class P proto
+  class APP,CL1,CL2,CL3,CL4,CL5 host
+  class SLs,JRs,FSs,PWs,APIs proto
   class SL,JR,FS,PW,API tool
 ```
 
-エージェントは **「どんなツールが使えるか」** を MCP server に問い合わせ、必要なら呼び出す。プロトコルが固定なので、新しい server を足すだけで全エージェントが新しい能力を獲得する。
+**AI Host** (VS Code、Copilot CLI など) は内部に **複数の MCP Client** を持ち、**1 Client ⇄ 1 Server** の 1:1 接続を維持する。利用したい外部ツールごとに Client / Server のペアが追加される。プロトコルが固定なので、新しい Server を追加するだけで全エディタ・全エージェントが新しい能力を獲得する。
+
+## なぜ重要?
+
+MCP がもたらす 3 つの価値：
+
+- **🧩 機能拡張**：Copilot を **一つの起点** にして、あらゆる外部ツールを操作できる。
+  - 要件を読み書きする (**Jira**)
+  - デザインを作る (**Figma**)
+  - 3D デザインを生成して印刷する (**Blender** + 3D プリンター)
+  - メール・カレンダーを確認・編集する (**Work IQ**)
+  - 社内データベースに接続して分析する
+- **🔗 ワークフローを統合**：個別ツールを繋ぐカスタム実装が不要になり、Copilot が **複数システムを横断するハブ** として機能する。
+- **🌐 広いエコシステム対応**：MCP は **オープンなプロトコル** で、すでに **事実上の標準** になりつつあります。AI アシスタント、**Visual Studio** などの開発ツール、その他多くのアプリケーションが MCP をサポートしており、**一度作れば、どこでも繋がる**。コーディング統合との相性も抜群。
 
 ## どこで動く?
 
-MCP サーバーの実行場所は **2 種類**。用途とセキュリティ要件で使い分ける。
+<div class="split-image">
+  <div class="split-text">
 
-```mermaid
-flowchart TB
-  subgraph Local["💻 ローカルマシン"]
-    VS1["VS Code / Copilot CLI"]
-    Child["MCP Server<br/>子プロセス"]
-    VS1 -->|stdio| Child
-  end
-  subgraph Remote["☁️ クラウド / リモート"]
-    VS2["VS Code / Copilot CLI"]
-    SRV["MCP Server<br/>常駐サービス"]
-    VS2 -->|"HTTP / SSE"| SRV
-  end
+MCP サーバーの実行場所は **2 種類** あります。
 
-  classDef local fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
-  classDef remote fill:#1a0a2e,stroke:#ff2e88,color:#ff2e88,stroke-width:2px
-  class VS1,Child local
-  class VS2,SRV remote
-```
+1. **stdio 方式** では、VS Code が **ローカルマシン上で子プロセス** として MCP サーバーを起動します。
+2. **HTTP 方式（SSE / streamable-http）** では、MCP サーバーが **クラウドやリモートサーバー上で稼働** し、VS Code は **クライアントとして接続するだけ** です。
 
-- **stdio 方式** ── VS Code がローカルで子プロセスとして起動。**一番手軽・安全**（ネット越しに何も飛ばない）
-- **HTTP 方式（SSE / streamable-http）** ── サーバーがクラウドで常駐、クライアントは接続するだけ。**チーム共通・本番運用**向け
+用途やセキュリティ要件に応じて使い分けが可能です。
+
+  </div>
+  <div class="split-figure">
+    <img src="/theomonfort/mcp-activity-monitor.png" alt="Activity Monitor showing local MCP server processes" />
+    <figcaption>Activity Monitor で見ると、ローカル MCP サーバーが <code>npm exec</code> の <strong>子プロセス</strong> として動いているのが分かる</figcaption>
+  </div>
+</div>
 
 ## VS Code での設定
 
-設定ファイルは **2 か所**。スコープで使い分ける：
+VS Code の **Marketplace から MCP サーバーをインストール** する時、2 つのスコープを選べる：
+
+- **`Install`** → **個人設定** ファイル（User Settings）に追加
+- **`Install Workspace`** → **リポジトリ設定** ファイル（`.vscode/mcp.json`）に追加
 
 <div class="setup-cards">
   <div class="setup-card">
@@ -118,7 +137,7 @@ flowchart TB
       <code>.vscode/mcp.json</code>
       <span class="setup-card-tag tag-cyan">▸ リポジトリ共有</span>
     </div>
-    <p>プロジェクト固有の MCP を <strong>チーム全員</strong> で揃えたい時。Git に含まれる。</p>
+    <p>Git に含まれるので、<strong>チーム全員</strong> で MCP を揃えられる。メンバーが repo を clone すると VS Code が <strong>「有効化しますか？」</strong> と確認してくる。</p>
   </div>
   <div class="setup-card">
     <div class="setup-card-head">
@@ -126,10 +145,12 @@ flowchart TB
       <span class="setup-card-tag tag-magenta">▸ 自分の PC のみ</span>
     </div>
     <p><strong>個人用</strong> / 全プロジェクト共通で使いたい時。Git には含まれない。</p>
+    <ul class="setup-card-paths">
+      <li>📁 <strong>Mac</strong>：<code>~/.config/Code/User/settings.json</code></li>
+      <li>🪟 <strong>Windows</strong>：<code>%APPDATA%\Code\User\settings.json</code></li>
+    </ul>
   </div>
 </div>
-
-> 📁 **Mac の User Settings**：`~/.config/Code/User/settings.json`
 
 ## Copilot CLI で始める
 
@@ -141,6 +162,6 @@ copilot mcp add <server-name>
 copilot mcp list
 ```
 
-GitHub 公式 MCP server は最初から接続済 ── `gh` コマンドが叩ける感覚で、AI が Issues / PRs / Actions / Code search を操作する。
+GitHub 公式 MCP server は最初から接続済み。`gh` コマンドを叩く感覚で、AI が Issues / PRs / Actions / Code search を操作できる。
 
 `modelcontextprotocol/registry` には公式 + コミュニティ製の server が多数（filesystem / postgres / slack / puppeteer / playwright / Figma…）。

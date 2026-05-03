@@ -8,188 +8,79 @@ order: 6
 category: plan
 related: ['mcp', 'instructions', 'custom-agent', 'cli']
 links:
-  - label: GitHub Docs — Create skills for Copilot
+  - group: 📖 公式ドキュメント
+    label: GitHub Docs — Create skills for Copilot
     url: https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/create-skills
-  - label: theomonfort skills
+  - group: 📖 公式ドキュメント
+    label: Agent Skills 仕様（オープン標準）
+    url: https://agentskills.io/specification
+  - group: 🌟 コミュニティ製スキル
+    label: github/awesome-copilot — Skills 一覧
+    url: https://github.com/github/awesome-copilot/blob/main/docs/README.skills.md
+  - group: 🌟 コミュニティ製スキル
+    label: awesome-copilot.github.com — 検索 & 閲覧
+    url: https://awesome-copilot.github.com/skills
+  - group: 🌟 コミュニティ製スキル
+    label: skills.sh — オープン Agent Skills レジストリ
+    url: https://skills.sh/
+  - group: 🛠️ 参考実装
+    label: theomonfort skills
     url: https://theomonfort.github.io/theomonfort/skills/
 ---
 
 ## 一言で
 
-**Agent Skills** は、Copilot に **専門タスクのこなし方を教える "巻物"**。プロンプトがスキルに一致すると Copilot が自動で **検出・読み込み・適用** ── プロジェクト固有のノウハウを毎回口頭で伝える必要がなくなる。
-
-> 💡 **アナロジー**：Skill は **"AIに渡す秘伝の型（カタ）"**。一度書けば、君もチームも一生使える。プロンプトという呪文を唱えると、対応する型が自動発動する。
-
-## どこに置く
-
-スキルは `SKILL.md` を中心に、補助スクリプト・テンプレートを束ねた **1 フォルダ = 1 スキル** の構成。配置場所で **共有範囲** が変わる。
-
-```mermaid
-flowchart TB
-  subgraph Team["👥 チーム共有（リポジトリ）"]
-    R[".github/"]
-    SK1["skills/"]
-    S1A["create-plan/<br/>SKILL.md"]
-    S1B["describe-pr/<br/>SKILL.md"]
-    R --> SK1
-    SK1 --> S1A
-    SK1 --> S1B
-  end
-  subgraph User["👤 自分専用（ホーム）"]
-    H["~/.copilot/"]
-    SK2["skills/"]
-    S2A["note-organizer/<br/>SKILL.md"]
-    S2B["snippet-generator/<br/>SKILL.md"]
-    H --> SK2
-    SK2 --> S2A
-    SK2 --> S2B
-  end
-
-  classDef team fill:#1a0a2e,stroke:#ff2e88,color:#ff2e88,stroke-width:2px
-  classDef user fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
-  classDef leaf fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
-  class R,SK1 team
-  class H,SK2 user
-  class S1A,S1B,S2A,S2B leaf
-```
-
-- `.github/skills/<name>/SKILL.md` ── **リポジトリに含まれる** → チーム全員が同じスキルを使える
-- `.copilot/skills/<name>/SKILL.md` ── **ホーム配下のみ** → 自分の全セッションで使える個人装備
+<div class="hero-quote">
+  <p>
+    <strong>Agent Skills</strong> は、Copilot に <strong>専門タスクのこなし方</strong> を教える再利用可能な指示セット。
+  </p>
+  <p>
+    依頼内容が <strong>description</strong> と合った時だけ読み込まれ、毎回説明し直さなくても専門知識を適用できる。
+  </p>
+</div>
 
 ## 2 つのスコープ
 
-<div class="setup-cards">
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>.github/skills/</code>
-      <span class="setup-card-tag tag-magenta">👥 チーム共有</span>
-    </div>
-    <p><strong>適用範囲</strong>：そのリポジトリのみ<br /><strong>共有性</strong>：Git に含まれるためチーム全員が利用可<br /><strong>用途</strong>：プロジェクト固有のワークフロー（デプロイ手順・テスト生成・PR 説明文 …）</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>~/.copilot/skills/</code>
-      <span class="setup-card-tag tag-cyan">👤 個人用</span>
-    </div>
-    <p><strong>適用範囲</strong>：そのユーザーの全セッション<br /><strong>共有性</strong>：ローカル環境のみ・共有されない<br /><strong>用途</strong>：個人の作業効率化（メモ整理・スニペット生成・自分用テンプレ …）</p>
-  </div>
-</div>
+|  | 👥 チーム共有 | 👤 個人用 |
+| --- | --- | --- |
+| 📁 **配置場所** | リポジトリ内の `.github/skills/` | ユーザーホーム `~/.copilot/skills/` |
+| 🎯 **適用範囲** | そのリポジトリのみ | そのユーザーの全セッション |
+| 🤝 **共有性** | リポジトリに含まれるため、チーム全員が利用可能 | ローカル環境のみ、他のメンバーには共有されない |
+| 💡 **用途** | プロジェクト固有のワークフロー（デプロイ、テスト生成など） | 個人の作業効率化 |
 
-> 📁 **使い分けの目安**：「チームで揃えたい型」はリポジトリへ。「自分のクセ・自分の作業フロー」はホームへ。
+## 仕組み
 
-## エコシステム
+Agent Skills は **Progressive disclosure（段階的開示）** で読み込まれる。  
+最初から全スキルの本文をコンテキストに入れるのではなく、まず軽い **metadata** だけを見て、ユーザーの依頼に合うものだけを展開する。
 
-Skills は単独機能ではなく、**配布・発見・管理** を担う仲間と一緒に動く。Copilot 周辺で覚えておきたい 4 兄弟。
 
-<div class="setup-cards">
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>🧠 Agent Skills</code>
-      <span class="setup-card-tag tag-magenta">▸ 標準仕様</span>
-    </div>
-    <p><strong>SKILL.md + scripts + resources</strong> をまとめたオープン仕様。全エージェント間でポータブル、必要な時だけオンデマンドで読み込まれる。AI のための<strong>手順記憶</strong>。</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>📦 APM</code>
-      <span class="setup-card-tag tag-amber">▸ パッケージ管理</span>
-    </div>
-    <p>Microsoft 製 <strong>Agent Package Manager</strong>。<code>apm.yml</code> マニフェスト（package.json 風）→ <code>apm install</code> で誰の環境でも同じセットアップ。バージョン固定・CI/CD 連携・Copilot/Claude/Cursor 横断。</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>🌐 MCP Registry</code>
-      <span class="setup-card-tag tag-cyan">▸ サーバー検索</span>
-    </div>
-    <p><strong>registry.modelcontextprotocol.io</strong>。20,000+ MCP サーバーをインデックス化、namespace 認証、REST API、Enterprise 向けプライベートレジストリにも対応。</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>🔌 Plugins & CLI</code>
-      <span class="setup-card-tag tag-green">▸ 配信チャネル</span>
-    </div>
-    <p>IDE / ターミナルから 1-click インストール。VS Code <strong>MCP Skills Manager</strong>、<code>gh skill</code>、Copilot CLI <code>/skills</code>。Enterprise の allowlist 制御も可能。</p>
-  </div>
-</div>
+| 段階 | 読み込むもの | いつ読む？ | 役割 |
+| --- | --- | --- | --- |
+| 1 | `name` / `description` | 起動時・候補選定時 | どのスキルが使えそうかを判断する |
+| 2 | `SKILL.md` 本体 | description が依頼と一致した時 | 具体的な実行手順をエージェントに渡す |
+| 3 | scripts / references / assets | `SKILL.md` が必要とした時 | 実行に必要な補助情報だけを追加する |
 
-## インストール方法（3 つ）
+> 💡 **description が命**：曖昧だとマッチしない／違うスキルが呼ばれる。  
+> **「何をするスキルか」+「いつ使うスキルか」** を明確に書く。
 
-スキルを手に入れる経路は **CLI / GUI / Agent-native** の 3 ルート。好みと環境で選ぶ。
+## Example
 
-<div class="setup-cards">
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>⌨️ GitHub CLI</code>
-      <span class="setup-card-tag tag-cyan">▸ gh v2.90.0+</span>
-    </div>
-    <p>検索・インストール・更新・公開すべてターミナルから。バージョン or commit SHA に固定可。</p>
+スキルは自分で書くだけでなく、コミュニティ製のものをそのままインストールできる。  
+GitHub-hosted skill は GitHub CLI（v2.90.0+）の `gh skill install` で、今のリポジトリの skill directory（例：`.github/skills/` or `.copilot/skills/`）に追加する。
+
+### [github/awesome-copilot](https://awesome-copilot.github.com/skills)
+
+GitHub 公式キュレーションのスキル集。欲しいスキルを選んで追加できる。
+
 
 ```bash
-gh skill search copilot
-gh skill install github/awesome-copilot documentation-writer --pin v1.2
-gh skill update --all
-gh skill publish --dry-run
+gh skills install github/awesome-copilot <skill-name>
 ```
 
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>🖥️ VS Code 拡張</code>
-      <span class="setup-card-tag tag-magenta">▸ GUI 派</span>
-    </div>
-    <p><strong>Copilot MCP + Agent Skills Manager</strong>。Activity Bar → MCP Servers → Skills タブ → ワンクリックで導入。Cloud MCP は OAuth でローカルサーバー不要。</p>
+### [skills.sh - Visit page](https://skills.sh/)
 
-```text
-Activity Bar
-  └─ MCP Servers アイコン
-       └─ Skills タブ
-            └─ Search & Install ✨
-```
-
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>🤖 Copilot CLI</code>
-      <span class="setup-card-tag tag-green">▸ Agent-native</span>
-    </div>
-    <p>エージェント体験そのもの。スラッシュコマンドで Skill / MCP / Plugin をまるごと管理。</p>
+横断的なオープンレジストリ。GitHub-hosted skill を探して追加できる。
 
 ```bash
-$ copilot
-> /skills    # 一覧 & 管理
-> /mcp       # MCP server 設定
-> /plugin    # プラグイン管理
+gh skills install <owner>/<repo> <skill-name>
 ```
-
-  </div>
-</div>
-
-## 使う流れ
-
-```mermaid
-flowchart LR
-  U["👤 あなた<br/>プロンプト入力"]
-  C["🤖 Copilot<br/>意図解析"]
-  M{{"🎴 Skill<br/>マッチ判定"}}
-  S["📜 SKILL.md<br/>+ スクリプト読込"]
-  R["✨ 専門タスク実行<br/>＆ 結果返却"]
-  U --> C --> M
-  M -->|一致| S --> R
-  M -->|不一致| R
-
-  classDef you fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
-  classDef ai fill:#1a0a2e,stroke:#ff2e88,color:#ff2e88,stroke-width:2px
-  classDef skill fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
-  classDef out fill:#1a0a2e,stroke:#ffb000,color:#ffb000,stroke-width:2px
-  class U you
-  class C,M ai
-  class S skill
-  class R out
-```
-
-1. **君がプロンプトを唱える** ── 「この PR の説明文書いて」「実装計画立てて」
-2. **Copilot がスキルを検出** ── `.github/skills/` と `~/.copilot/skills/` を走査し、`SKILL.md` の説明文と意図を照合
-3. **対応スキルを召喚** ── 補助スクリプト・テンプレ・手順をまとめてコンテキストに装填
-4. **専門知識で応答** ── プロジェクト固有の作法に従った成果物が返ってくる
-
-> 🎮 **覚えておくこと**：Skill は **"書いた数だけチームの戦闘力が上がる"** 装備。`describe-pr` / `create-plan` / `research-codebase` あたりから真似て、自分の型を増やしていこう。

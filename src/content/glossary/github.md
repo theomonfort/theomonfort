@@ -38,35 +38,12 @@ GitHub の歩みを振り返れば、現在地が見えてくる ──
 - **2025・Agent HQ** で AI が自律的に開発を支える時代へ ── 本日はここを中心にお話しします
 
 ```mermaid
----
-config:
-  theme: base
-  timeline:
-    disableMulticolor: true
-  themeVariables:
-    # This unifies the color of ALL tiles (0 through 11)
-    cScale0: "#00f0ff"
-    cScale1: "#00f0ff"
-    cScale2: "#00f0ff"
-    # This sets the global font base
-    fontSize: "25px"
-  themeCSS: |
-    .section-text, .task-text, .event-text, .label, text {
-      font-size: 40px !important;
-      font-weight: bold;
-      fill: #0a0e27 !important;
-    }
-    .timeline-header-text, text.titleText, .titleText {
-      font-size: 44px !important;
-      font-weight: bold;
-      fill: #e8f4ff !important;
-    }
----
+%%{init: {"theme":"base","timeline":{"disableMulticolor":true},"themeVariables":{"cScale0":"#00f0ff","cScale1":"#00f0ff","cScale2":"#00f0ff","fontSize":"25px"}}}%%
 timeline
   title GitHub の進化
-  2008 : PULL Request
-  2012 : GHE
-  2019 : Actions GHAS
+  2008 : Pull Request
+  2012 : GitHub Enterprise
+  2019 : Actions / GHAS
   2021 : GitHub Copilot
   2025 : Agent HQ
 ```
@@ -76,40 +53,32 @@ timeline
 SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ → 運用** を、すべて GitHub 上の AI が一気通貫で支える。
 
 ```mermaid
----
-config:
-  theme: base
-  themeVariables:
-    fontSize: "20px"
-  themeCSS: |
-    .nodeLabel, .label, text { color: #e8f4ff !important; fill: #e8f4ff !important; font-family: 'Noto Sans JP', sans-serif !important; }
----
 kanban
   PLAN[📋 Plan]
-    GitHub Projects
-    Issues
-    Planning Agent
-    Spaces
+    plan_projects[GitHub Projects]
+    plan_issues[Issues]
+    plan_agent[Planning Agent]
+    plan_spaces[Spaces]
   CODE[💻 Code]
-    Agent Mode
-    Cloud Agent
-    Loops
-    Codespaces
+    code_agent_mode[Agent Mode]
+    code_cloud_agent[Cloud Agent]
+    code_loops[Loops]
+    code_codespaces[Codespaces]
   REVIEW[✅ Review]
-    Cloud Agent
-    Code Review
-    Playwright
-    Pull Requests
+    review_cloud_agent[Cloud Agent]
+    review_code_review[Code Review]
+    review_playwright[Playwright]
+    review_pr[Pull Requests]
   TEST[🔒 Test & Secure]
-    Actions
-    Autofix
-    Code Quality
-    Agentic Workflows
+    test_actions[Actions]
+    test_autofix[Autofix]
+    test_quality[Code Quality]
+    test_workflows[Agentic Workflows]
   OPS[🚀 Operate]
-    Metrics
-    Models
-    Agentic Workflows
-    SRE Agent
+    ops_metrics[Metrics]
+    ops_models[Models]
+    ops_workflows[Agentic Workflows]
+    ops_sre[SRE Agent]
 ```
 
 ## 業界からの評価
@@ -120,31 +89,11 @@ kanban
 - **Gartner**：マジック・クアドラント、**AI コーディングアシスタント** で **リーダー** に選出
 
 ```mermaid
----
-config:
-  theme: base
-  themeVariables:
-    fontSize: "16px"
-    quadrant1Fill: "#0a1a2e"
-    quadrant2Fill: "#1a0e1f"
-    quadrant3Fill: "#0f0a1f"
-    quadrant4Fill: "#0a1f1a"
-    quadrant1TextFill: "#00f0ff"
-    quadrant2TextFill: "#ff7ab2"
-    quadrant3TextFill: "#c9a5ff"
-    quadrant4TextFill: "#9bbc0f"
-    quadrantTitleFill: "#e8f4ff"
-    quadrantPointFill: "#ffb000"
-    quadrantPointTextFill: "#e8f4ff"
-    quadrantXAxisTextFill: "#e8f4ff"
-    quadrantYAxisTextFill: "#e8f4ff"
-    quadrantInternalBorderStrokeFill: "#2a3050"
-    quadrantExternalBorderStrokeFill: "#00f0ff"
----
+%%{init: {"theme":"base","themeVariables":{"quadrant1Fill":"#0a1a2e","quadrant2Fill":"#1a0e1f","quadrant3Fill":"#0f0a1f","quadrant4Fill":"#0a1f1a","quadrant1TextFill":"#00f0ff","quadrant2TextFill":"#ff7ab2","quadrant3TextFill":"#c9a5ff","quadrant4TextFill":"#9bbc0f","quadrantTitleFill":"#e8f4ff","quadrantPointFill":"#ffb000","quadrantPointTextFill":"#e8f4ff","quadrantXAxisTextFill":"#e8f4ff","quadrantYAxisTextFill":"#e8f4ff","quadrantInternalBorderStrokeFill":"#2a3050","quadrantExternalBorderStrokeFill":"#00f0ff"}}}%%
 quadrantChart
     title Magic Quadrant for AI Code Assistants (Aug 2025)
-    x-axis Completeness of Vision -->
-    y-axis Ability to Execute -->
+    x-axis Low Vision --> Completeness of Vision
+    y-axis Low Execution --> Ability to Execute
     quadrant-1 Leaders
     quadrant-2 Challengers
     quadrant-3 Niche Players
@@ -164,4 +113,3 @@ quadrantChart
     IBM: [0.37, 0.40]
     JetBrains: [0.32, 0.24]
 ```
-

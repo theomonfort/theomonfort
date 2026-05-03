@@ -11,7 +11,11 @@ const glossary = defineCollection({
     color: z.enum(['magenta', 'cyan', 'amber', 'green']).default('cyan'),
     related: z.array(z.string()).default([]),
     links: z
-      .array(z.object({ label: z.string(), url: z.string().url() }))
+      .array(z.object({
+        label: z.string(),
+        url: z.string().url(),
+        group: z.string().optional(),
+      }))
       .default([]),
     order: z.number().default(0),
     category: z
