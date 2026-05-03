@@ -6,7 +6,7 @@ icon: 🎮
 color: magenta
 order: 10
 category: develop
-related: ['prompt-engineering', 'context-engineering', 'agentic-workflow']
+related: ['agentic-workflow']
 links:
   - label: GitHub Copilot
     url: https://github.com/features/copilot

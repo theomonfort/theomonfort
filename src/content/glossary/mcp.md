@@ -6,7 +6,7 @@ icon: /theomonfort/mcp.png
 color: cyan
 order: 4
 category: plan
-related: ['context-engineering', 'agent-skills']
+related: ['agent-skills']
 links:
   - label: MCP 公式（modelcontextprotocol.io）
     url: https://modelcontextprotocol.io/introduction

@@ -6,7 +6,7 @@ icon: 📜
 color: amber
 order: 5
 category: plan
-related: ['prompt-engineering', 'context-engineering', 'agent-skills']
+related: ['agent-skills']
 links:
   - group: 👤 Personal インストラクション
     label: GitHub Docs — GitHub.com Personal instructions for Copilot Chat
