@@ -1253,6 +1253,12 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   body.present-mode .glossary-detail > nav:not(.present-toc),
   body.present-mode .glossary-detail > aside:not(.akq-slide-active) { display: none !important; }
   body.present-mode .glossary-detail > aside.akq-slide-active { display: block !important; }
+  body.present-mode .glossary-detail > aside.links-aside.akq-slide-active {
+    max-width: 72rem;
+    width: 100%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
   body.present-mode .slide-title-tag { display: none !important; }
 
   /* Subtle scrollbars in present mode (override global magenta chunky bars) */
