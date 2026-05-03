@@ -17,6 +17,12 @@ links:
   - group: 🛡️ Harness examples
     label: HumanLayer CodeLayer — AI coding workflows
     url: https://www.humanlayer.dev/
+  - group: 🧩 Spec-driven
+    label: GitHub Spec Kit — spec-driven development
+    url: https://github.com/github/spec-kit
+  - group: 🧩 Spec-driven
+    label: Kiro Specs
+    url: https://kiro.dev/docs/specs/
   - group: 📚 Context Engineering
     label: Context Engineering — interactive guide
     url: https://blog.cloud-eng.nl/context-engineering/
@@ -69,16 +75,17 @@ AI を強くする道具は 1 つではない。**広く効かせるもの** と
 
 ## よく使う型
 
-良い harness はツールの寄せ集めではなく、**AI が失敗しにくい進め方** を先に決める。
+良い harness はツールの寄せ集めではなく、**AI が迷わない進め方** を先に決める。
 
-| 型 | 何をする？ | 効く場面 |
+| 型 | 何をする？ | 何が良くなる？ |
 | --- | --- | --- |
-| Spec to Code | 仕様・非要件・成功条件を先に固定してから実装する | ゴールが曖昧な機能、品質基準が重要な変更 |
-| Multi-phase Plan | 調査 → 設計 → 実装 → 検証の段階に分ける | 大きい変更、複数ファイル、レビューしながら進めたい時 |
-| File Ownership | agent ごとに触るファイルを分ける | 並列実行、コンフリクト回避、責務分離 |
-| Human-in-the-loop | 重要な判断点だけ人間が承認する | 破壊的変更、セキュリティ、リリース判断 |
+| Spec-to-code / Spec-driven | 先に **what / why** を spec にし、plan → tasks → implement へ落とす | 仕様が source of truth になり、vibe coding ではなく予測可能な実装になる |
+| Multi-phase coding plan | orchestrator が実装を複数 phase に分解し、各 phase の目的・順序・完了条件を決める | 大きな変更でも、AI が一気に突っ込まず段階的に進められる |
+| File assignment | Planner が触るファイルを明示し、orchestrator が file overlap を見て並列化する | 複数 agent が同じファイルを壊し合わず、Coder / Designer を並列に走らせられる |
+| Context engineering | タスクに必要な context だけを構造化して渡す | 余計な情報で迷わず、コードベース・仕様・制約に沿った回答になる |
+| Approval gates | spec / plan / PR / release など重要な節目で人間が確認する | 自動化の速度を保ちながら、危険な判断だけ人間が止められる |
 
-> 先に「どう進めるか」を設計すると、AI は速くなるだけでなく、やり直しも減る。
+> 先に **spec・phase・file ownership・context・approval** を設計すると、AI は速くなるだけでなく、やり直しも減る。
 
 ## 例：Ultralight
 
