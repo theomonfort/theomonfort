@@ -1,7 +1,7 @@
 ---
 title: ハーネスエンジニアリング
 titleEn: Harness Engineering
-summary: エージェントが安全かつ効果的に動ける足場の設計。ツール群、制約、ループ、検証、ロールバックの設計術。
+summary: エージェントが安全かつ効果的に動ける足場の設計。ツール群、制約、権限、外部接続の設計術。
 icon: 🛡️
 color: green
 order: 8
@@ -44,19 +44,18 @@ links:
 
 ## 何でハーネスする？
 
-AI を強くする道具は 1 つではない。**広く効かせるもの** と **必要な時だけ使うもの** を分ける。
+AI を強くする技術ツールは 1 つではない。**常に読ませるもの** と **必要な時だけ呼ぶもの** を分ける。
 
-| 道具 | いつ使う？ | ハーネスとしての役割 |
+| 技術ツール | 置き場所 / 設定 | 使いどころ |
 | --- | --- | --- |
-| Instructions | 全員・全タスクに効く常識を渡す | コーディング規約、禁止事項、回答スタイル |
-| Path Instructions | 特定ファイルだけルールを変える | `tests/**` はテスト方針、`api/**` は認証ルール |
-| Skills | 必要な時だけ専門手順を読み込む | PR description、frontend design、security questionnaire |
-| Custom Agents | 役割・モデル・権限を切り替える | Planner は読むだけ、Coder は編集可、Reviewer は修正しない |
-| MCP | 外部システムや社内データにつなぐ | GitHub、Figma、Playwright、Jira、Salesforce |
-| Tool permissions | できる操作を制限する | `read/search` のみ、`edit` 可、GitHub API 可 |
-| Verification loop | 出力を信用せず確認する | build、test、lint、preview、人間レビュー |
+| Repository-wide custom instructions | `.github/copilot-instructions.md` | リポジトリ全体の規約・禁止事項・検証コマンド |
+| Path-specific custom instructions | `.github/instructions/*.instructions.md` + `applyTo` | `tests/**`、`api/**` など領域別ルール |
+| Agent skills | `.github/skills/*/SKILL.md` / `~/.copilot/skills/` | PR description、frontend design など専門手順 |
+| Custom agents | `.github/agents/*.agent.md` / `~/.copilot/agents/` | 役割・モデル・使えるツールを切り替える |
+| MCP servers | MCP 設定ファイル | GitHub、Figma、Playwright、Jira、Salesforce へ接続 |
+| Tool permissions | agent host の権限設定 | `read/search` のみ、`edit` 可、コマンド実行可などを制御 |
 
-> 判断基準：**常に効かせるなら Instructions、専門手順なら Skills、人格と権限を変えるなら Custom Agent、外部につなぐなら MCP**。
+> GitHub Docs の名称は **Repository-wide custom instructions** と **Path-specific custom instructions**。VS Code 側では後者を **file-based instructions** とも呼ぶ。
 
 ## エコシステム対応表
 
@@ -119,4 +118,4 @@ flowchart LR
   class R ship;
 ```
 
-> AI を信頼するな。**役割・モデル・ツール・スキル・MCP・検証ループ** で囲った harness を信頼せよ。
+> AI を信頼するな。**役割・モデル・ツール権限・スキル・MCP** で囲った harness を信頼せよ。
