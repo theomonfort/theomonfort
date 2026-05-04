@@ -39,11 +39,11 @@ links:
 
 VS Code の Copilot Chat には、用途別の **built-in agents** がある。
 
-| Mode | いつ使う？ | 何をする？ |
+| Mode | 裏の仕組み | 何をする？ |
 | --- | --- | --- |
-| Ask | 理解・調査・相談 | コードベースや技術概念に答える。基本はファイル変更しない |
-| Plan | 実装前の設計 | 要件を分解し、実装ステップを作る。納得してから実装に渡す |
-| Agent | 実装 | ファイル編集、terminal command、tool call、検証まで進める |
+| Ask | Ask built-in agent | GitHub Copilot として一番最初に登場したモード。質問に対して回答を行う。<br/>新しくプロジェクトに参入したメンバーがコードベースを理解する時などにオススメ |
+| Plan | Plan built-in agent | GitHub Copilot とやりとりをしながら実装可能なレベルのドキュメントを作成。<br/>Agent モードや Coding Agent を使って、作成されたドキュメントを元に実装 |
+| Agent | Raw agent | 半自立型のペアプログラマーとして要求内容に対して内部分析、実装内容提案、そして提案内容に対する検証まで実施。<br/>MCP サーバーを活用して GitHub 外のシステムとのやりとりが可能 |
 
 > 同じ Chat UI でも、Ask / Plan / Agent で「許される動き」が変わる。
 
