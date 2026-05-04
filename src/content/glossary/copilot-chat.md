@@ -1,7 +1,7 @@
 ---
 title: Copilot Chat
 titleEn: Copilot Chat
-summary: コードと話すための入口。ひとつのサブスクで VS Code / CLI / Cloud Agent / GitHub.com を行き来し、Ask・Plan・Agent の 3 モードで開発を駆動する。
+summary: コードと話すための入口。VS Code / CLI / Cloud Agent / GitHub.com で、Ask・Plan・Agent の 3 モードから開発を駆動する。
 icon: 💬
 color: cyan
 order: 3
@@ -19,46 +19,6 @@ links:
 **Copilot Chat はコードと話すための窓口。** ファイル・リポジトリ・issue・PR・エラーログ ── すべてを文脈にして、自然言語で質問・依頼できる。
 
 > 💡 **アナロジー**：常に隣にいるペアプロ相手。違うのは、その相手は **リポジトリ全体を一瞬で読める** こと。そして VS Code でも、ターミナルでも、GitHub.com でも、同じ顔で待っていてくれる。
-
-## ひとつのサブスクで自由な開発体験
-
-Copilot のサブスクは **入口を選ばない**。同じアカウントで、ローカルもクラウドも、純正 IDE も他社 SDK も横断できる。
-
-```mermaid
-flowchart TB
-  Sub["💎 GitHub Copilot<br/>ひとつのサブスクリプション"]
-
-  subgraph IDE["💻 IDE"]
-    VSC["VS Code<br/>Ask / Edit / Agent"]
-    JB["JetBrains / Visual Studio"]
-  end
-
-  subgraph CLI["⌨️ CLI"]
-    GHC["Copilot CLI"]
-    CDX["OpenAI Codex CLI"]
-    CC["Anthropic Claude Code"]
-  end
-
-  subgraph Cloud["☁️ Cloud"]
-    CA["Cloud Agent<br/>(非同期コーディング)"]
-    GH["GitHub.com / Mobile"]
-  end
-
-  Sub --> IDE
-  Sub --> CLI
-  Sub --> Cloud
-
-  classDef sub fill:#1a0a2e,stroke:#ff2e88,color:#ff2e88,stroke-width:2px
-  classDef ide fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
-  classDef cli fill:#1a0a2e,stroke:#ffb000,color:#ffb000,stroke-width:2px
-  classDef cloud fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
-  class Sub sub
-  class VSC,JB ide
-  class GHC,CDX,CC cli
-  class CA,GH cloud
-```
-
-> 🌐 **マルチモデル対応**：GPT・Claude・Gemini など、タスクに合うモデルを切り替えながら使える。
 
 ## 3 つのモード
 

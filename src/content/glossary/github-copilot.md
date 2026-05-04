@@ -41,6 +41,46 @@ Accenture 社の開発者 450 名を対象にした 6 か月間の調査結果
 | **94%**<br>作業の「フロー状態」を維持できたと回答 | **90%**<br>より良いコードを書けていると実感 | **50%**<br>ビルド数が増加 | **96%**<br>初日から成功を実感 |
 | **90%**<br>情報探索に費やす時間が減少 | **88%**<br>Copilot が提案したコードがそのまま採用された割合 | **84%**<br>ビルド成功率が向上 | **90%**<br>仕事への満足度が向上 |
 
+## ひとつのサブスクで自由な開発体験
+
+Copilot のサブスクは **入口を選ばない**。同じアカウントで、ローカルもクラウドも、純正 IDE も他社 SDK も横断できる。
+
+```mermaid
+flowchart TB
+  Sub["💎 GitHub Copilot<br/>ひとつのサブスクリプション"]
+
+  subgraph IDE["💻 IDE"]
+    VSC["VS Code<br/>Ask / Edit / Agent"]
+    JB["JetBrains / Visual Studio"]
+  end
+
+  subgraph CLI["⌨️ CLI"]
+    GHC["Copilot CLI"]
+    CDX["OpenAI Codex CLI"]
+    CC["Anthropic Claude Code"]
+  end
+
+  subgraph Cloud["☁️ Cloud"]
+    CA["Cloud Agent<br/>(非同期コーディング)"]
+    GH["GitHub.com / Mobile"]
+  end
+
+  Sub --> IDE
+  Sub --> CLI
+  Sub --> Cloud
+
+  classDef sub fill:#1a0a2e,stroke:#ff2e88,color:#ff2e88,stroke-width:2px
+  classDef ide fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
+  classDef cli fill:#1a0a2e,stroke:#ffb000,color:#ffb000,stroke-width:2px
+  classDef cloud fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
+  class Sub sub
+  class VSC,JB ide
+  class GHC,CDX,CC cli
+  class CA,GH cloud
+```
+
+> 🌐 **マルチモデル対応**：GPT・Claude・Gemini など、タスクに合うモデルを切り替えながら使える。
+
 ## なぜ企業は Copilot を選ぶのか
 
 - ✅ **オーケストレーション**<br/>　コーディングだけでなく、SDLC 全体にわたる AI
