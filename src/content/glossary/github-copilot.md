@@ -41,37 +41,45 @@ Accenture 社の開発者 450 名を対象にした 6 か月間の調査結果
 | **94%**<br>作業の「フロー状態」を維持できたと回答 | **90%**<br>より良いコードを書けていると実感 | **50%**<br>ビルド数が増加 | **96%**<br>初日から成功を実感 |
 | **90%**<br>情報探索に費やす時間が減少 | **88%**<br>Copilot が提案したコードがそのまま採用された割合 | **84%**<br>ビルド成功率が向上 | **90%**<br>仕事への満足度が向上 |
 
-## どこで使える？
+## ひとつのサブスクで自由な開発体験
 
-Copilot は 1 つの製品画面ではなく、**Chat / CLI / Cloud agents** をまたぐ開発プラットフォーム。
-同じ GitHub ワークフロー上で、IDE・ターミナル・GitHub.com・非同期エージェントを使い分ける。
+Copilot のサブスクは **入口を選ばない**。同じアカウントで、ローカルもクラウドも、純正 IDE も他社 SDK も横断できる。
 
 ```mermaid
-flowchart LR
-  Copilot["💎 GitHub Copilot<br/>subscription + governance"]
+flowchart TB
+  Sub["💎 GitHub Copilot<br/>ひとつのサブスクリプション"]
 
-  Chat["💬 Copilot Chat<br/>IDEs: VS Code / Visual Studio / JetBrains / Eclipse / Xcode<br/>GitHub.com / Mobile"]
-  CLI["⌨️ Copilot CLI<br/>local terminal<br/>interactive or prompt scripts"]
-  Cloud["☁️ Cloud coding agents<br/>Copilot cloud agent<br/>Claude / Codex partner agents<br/>GitHub.com / Mobile / VS Code"]
+  subgraph IDE["💻 IDE"]
+    VSC["VS Code<br/>Ask / Edit / Agent"]
+    JB["JetBrains / Visual Studio"]
+  end
 
-  Env["⚙️ GitHub Actions-powered environment<br/>branch + commits + PR"]
+  subgraph CLI["⌨️ CLI"]
+    GHC["Copilot CLI"]
+    CDX["OpenAI Codex CLI"]
+    CC["Anthropic Claude Code"]
+  end
 
-  Copilot --> Chat
-  Copilot --> CLI
-  Copilot --> Cloud
-  Cloud --> Env
+  subgraph Cloud["☁️ Cloud"]
+    CA["Cloud Agent<br/>(非同期コーディング)"]
+    GH["GitHub.com / Mobile"]
+  end
 
-  classDef root fill:#1a0a2e,stroke:#ff2e88,color:#ffe8f4,stroke-width:2px
-  classDef chat fill:#0a0e27,stroke:#00f0ff,color:#e8f4ff,stroke-width:2px
-  classDef cli fill:#302500,stroke:#ffb000,color:#fff4d6,stroke-width:2px
-  classDef cloud fill:#0a1a14,stroke:#9bbc0f,color:#f4ffd8,stroke-width:2px
-  class Copilot root
-  class Chat chat
-  class CLI cli
-  class Cloud,Env cloud
+  Sub --> IDE
+  Sub --> CLI
+  Sub --> Cloud
+
+  classDef sub fill:#1a0a2e,stroke:#ff2e88,color:#ff2e88,stroke-width:2px
+  classDef ide fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
+  classDef cli fill:#1a0a2e,stroke:#ffb000,color:#ffb000,stroke-width:2px
+  classDef cloud fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
+  class Sub sub
+  class VSC,JB ide
+  class GHC,CDX,CC cli
+  class CA,GH cloud
 ```
 
-> 補足：GitHub Docs では Claude / Codex は **coding agents** として説明される。OpenAI Codex の VS Code extension は Codex SDK を使い、Copilot Pro+ では “Sign in with Copilot” が使える。
+> 🌐 **マルチモデル対応**：GPT・Claude・Gemini など、タスクに合うモデルを切り替えながら使える。
 
 ## なぜ企業は Copilot を選ぶのか
 
