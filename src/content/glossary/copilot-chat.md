@@ -20,6 +20,15 @@ links:
   - group: VS Code agents
     label: VS Code — Local agents
     url: https://code.visualstudio.com/docs/copilot/agents/local-agents
+  - group: VS Code agents
+    label: VS Code — Agent customizations
+    url: https://code.visualstudio.com/docs/copilot/customization/overview
+  - group: VS Code agents
+    label: VS Code — Chat context
+    url: https://code.visualstudio.com/docs/copilot/chat/copilot-chat-context
+  - group: VS Code agents
+    label: VS Code — Agent tools
+    url: https://code.visualstudio.com/docs/copilot/agents/agent-tools
 ---
 
 ## 一言で
@@ -47,13 +56,18 @@ VS Code の Copilot Chat には、用途別の **built-in agents** がある。
 
 > 同じ Chat UI でも、Ask / Plan / Agent で「許される動き」が変わる。
 
-## PLAN の harness が効く
+## IDE Chat の操作
 
-Copilot Chat は単体で強いのではなく、**PLAN パートで作った harness を実行時に使う場所**。
+VS Code の Copilot Chat には、built-in skills、prompts、instructions、hooks、MCP servers などの部品が最初から見える。
 
-たとえば、Instructions、Skills、MCP、権限、検証方針を先に整えておくと、Chat の回答や Agent の実装はそのレールに乗る。
+| 操作 | どこを見る？ | 何ができる？ |
+| --- | --- | --- |
+| 部品を確認 | Chat 右上の cog icon → Agent Customizations | Agents、Skills、Instructions、Prompts、Hooks、MCP Servers、Plugins を確認 |
+| agent / prompt を呼ぶ | Chat input で `/` | Ask / Plan / Agent や built-in command、prompt を起動 |
+| context を追加 | `#` または Add Context | `#file`、`#codebase`、folder、symbol、terminal output、web fetch などを渡す |
+| tools を確認 | Configure Tools button | Agent が使える built-in tools、MCP tools、extension tools を選ぶ |
 
-> つまり、Plan で設計した「AI の足場」を、Chat で呼び出して使う。
+> PLAN パートで作った Instructions / Skills / MCP / 検証方針は、ここで context や tools として Chat / Agent に渡して使う。
 
 ## 3 つの Chat
 
