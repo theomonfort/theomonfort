@@ -31,3 +31,17 @@ links:
 </div>
 
 > 良い context は量ではなく **選び方**。不要な情報を減らし、必要な情報を欠かさない。
+
+## Context rot
+
+LLM は context window が大きいほど賢くなるわけではない。情報を詰め込みすぎると、重要な情報がノイズに埋もれ、判断が鈍る。
+
+これを **context rot** と呼ぶ。
+
+| 現象 | 何が起きる？ |
+| --- | --- |
+| Lost in the middle | 長い context の中央にある重要情報が埋もれる |
+| Recency bias | 直近に出てきた情報を過大評価する |
+| Context rot | ノイズが増え、LLM の判断精度が落ちる |
+
+> Context Engineering の目的は、context window を埋めることではなく、**必要な情報が目立つ状態を保つこと**。
