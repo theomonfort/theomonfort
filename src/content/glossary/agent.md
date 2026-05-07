@@ -9,6 +9,43 @@ category: develop
 related: ['copilot-chat', 'harness-engineering', 'cli', 'cloud-agent']
 ---
 
+## The good old days → Current
+
+LLM との会話は、単純な **prompt → answer** から、project context と tools を持つ **agent / harness** に変わった。
+
+| 時代 | 何が起きている？ |
+| --- | --- |
+| Good old days | You が prompt を投げ、LLM が answer を返す |
+| Current | Agent / Harness が context を組み立て、LLM と tools を loop させる |
+
+```mermaid
+flowchart LR
+  subgraph Old["Good old days: chatting with an LLM"]
+    You[You] -->|Prompt| LLM[The LLM]
+    LLM -->|Answer| You
+  end
+
+  subgraph Now["Current: agent / harness"]
+    Project[You + Project] --> Inputs[Prompts<br/>Instructions<br/>Skills<br/>MCP]
+    Inputs --> Agent[The Agent<br/>aka Harness]
+    Agent -->|context| Model[The LLM]
+    Model -->|next step| Agent
+    Agent -->|tool call| Tools[Tools<br/>read / edit / run]
+    Tools -->|result| Agent
+  end
+
+  classDef human fill:#102033,stroke:#00f0ff,color:#e8f4ff,stroke-width:2px;
+  classDef llm fill:#302500,stroke:#ffb000,color:#fff4d6,stroke-width:2px;
+  classDef agent fill:#132812,stroke:#9bbc0f,color:#f4ffd8,stroke-width:2px;
+  classDef context fill:#2a1020,stroke:#ff2e88,color:#ffe8f4,stroke-width:2px;
+  class You,Project human;
+  class LLM,Model llm;
+  class Agent,Tools agent;
+  class Inputs context;
+```
+
+> No magic. Agent は、LLM を直接呼ぶ代わりに、**何を読ませるか・どの tool を使わせるか・結果をどう戻すか** を管理する layer。
+
 ## Agent / Harness under the hood
 
 - **Execution Loop**：LLM が次の一手を決め、tool 実行 → 結果を context に戻す、を `done` まで繰り返す。
