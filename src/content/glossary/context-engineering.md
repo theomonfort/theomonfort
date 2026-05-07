@@ -38,6 +38,18 @@ LLM は context window が大きいほど賢くなるわけではない。情報
 
 これを **context rot** と呼ぶ。
 
+| 現象 | 何が起きる？ |
+| --- | --- |
+| Lost in the middle | 長い context の中央にある重要情報が埋もれる |
+| Recency bias | 直近に出てきた情報を過大評価する |
+| Context rot | ノイズが増え、LLM の判断精度が落ちる |
+
+> Context Engineering の目的は、context window を埋めることではなく、**必要な情報が目立つ状態を保つこと**。
+
+## Context window
+
+Context window は、system/tools、instructions、memory、prompt、作業用 context、buffer が取り合う限られた領域。
+
 ```mermaid
 treemap-beta
 "Context window"
@@ -54,11 +66,3 @@ classDef prompt fill:#7c3aed,stroke:#ddd6fe,color:#faf5ff
 classDef workspace fill:#bbf7d0,stroke:#86efac,color:#052e16
 classDef buffer fill:#22c55e,stroke:#bbf7d0,color:#f0fdf4
 ```
-
-| 現象 | 何が起きる？ |
-| --- | --- |
-| Lost in the middle | 長い context の中央にある重要情報が埋もれる |
-| Recency bias | 直近に出てきた情報を過大評価する |
-| Context rot | ノイズが増え、LLM の判断精度が落ちる |
-
-> Context Engineering の目的は、context window を埋めることではなく、**必要な情報が目立つ状態を保つこと**。
