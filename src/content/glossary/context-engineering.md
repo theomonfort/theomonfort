@@ -34,15 +34,18 @@ links:
 
 ## Context rot
 
-LLM は context window が大きいほど賢くなるわけではない。情報を詰め込みすぎると、重要な情報がノイズに埋もれ、判断が鈍る。
+LLM は context window が大きいほど賢くなるわけではない。情報を詰め込みすぎると、**Lost in the middle** で重要情報が中央に埋もれたり、**Recency bias** で直近の情報を過大評価したりして、判断が鈍る。
 
 これを **context rot** と呼ぶ。
 
-| 現象 | 何が起きる？ |
-| --- | --- |
-| Lost in the middle | 長い context の中央にある重要情報が埋もれる |
-| Recency bias | 直近に出てきた情報を過大評価する |
-| Context rot | ノイズが増え、LLM の判断精度が落ちる |
+```mermaid
+treemap-beta
+"Context window"
+  "Smart zone": 60:::smart
+  "Dumb zone": 40:::dumb
+classDef smart fill:#0a1a14,stroke:#9bbc0f,color:#d8ff9a
+classDef dumb fill:#2a1020,stroke:#ff2e88,color:#ffe8f4
+```
 
 > Context Engineering の目的は、context window を埋めることではなく、**必要な情報が目立つ状態を保つこと**。
 
