@@ -17,6 +17,9 @@ links:
   - group: 🛡️ Harness examples
     label: HumanLayer CodeLayer — AI coding workflows
     url: https://www.humanlayer.dev/
+  - group: 🛡️ Harness examples
+    label: Agent Config
+    url: https://agentconfig.org/
   - group: 🧩 Spec-driven
     label: GitHub Spec Kit — spec-driven development
     url: https://github.com/github/spec-kit
