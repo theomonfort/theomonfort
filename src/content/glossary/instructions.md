@@ -72,7 +72,7 @@ links:
   <div class="setup-card">
     <div class="setup-card-head">
       <code>.github/instructions/*.instructions.md</code>
-      <span class="setup-card-tag tag-magenta">🎯 ファイル単位</span>
+      <span class="setup-card-tag tag-magenta">🎯 ファイル単位 (Path Instruction)</span>
     </div>
     <p>
       <strong>適用範囲</strong>：<code>applyTo</code> グロブに一致するファイルのみ<br />

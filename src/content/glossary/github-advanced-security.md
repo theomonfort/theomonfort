@@ -1,6 +1,6 @@
 ---
 title: GitHub Advanced Security
-titleEn: GitHub Advanced Security (GHAS)
+titleEn: GHAS
 summary: コード・シークレット・依存関係の脆弱性を自動で検出する GitHub のセキュリティ製品群。Code Scanning、Secret Protection、Dependabot を含む、AI 時代の "安全弁"。
 icon: /theomonfort/github-white-icon.svg
 color: amber
