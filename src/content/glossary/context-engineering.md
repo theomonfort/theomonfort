@@ -44,7 +44,7 @@ treemap-beta
   "Smart zone": 60:::smart
   "Dumb zone": 40:::dumb
 classDef smart fill:#0891b2,stroke:#67e8f9,color:#ecfeff
-classDef dumb fill:#1a0a2e,stroke:#ff2e88,color:#ffe8f4
+classDef dumb fill:#3b0b24,stroke:#ff2e88,color:#ffe8f4
 ```
 
 > Context Engineering の目的は、context window を埋めることではなく、**必要な情報が目立つ状態を保つこと**。
@@ -59,7 +59,7 @@ treemap-beta
   "System & tools": 10:::used
   "Free space": 75:::free
   "Buffer": 15:::free
-classDef used fill:#1a0a2e,stroke:#ff2e88,color:#ffe8f4
+classDef used fill:#3b0b24,stroke:#ff2e88,color:#ffe8f4
 classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
 ```
 
@@ -78,7 +78,7 @@ treemap-beta
   "Prompt": 10:::used
   "Free space": 35:::free
   "Buffer": 15:::free
-classDef used fill:#1a0a2e,stroke:#ff2e88,color:#ffe8f4
+classDef used fill:#3b0b24,stroke:#ff2e88,color:#ffe8f4
 classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
 ```
 
@@ -99,7 +99,7 @@ treemap-beta
   "Memory": 10:::used
   "Free space": 15:::free
   "Buffer": 15:::free
-classDef used fill:#1a0a2e,stroke:#ff2e88,color:#ffe8f4
+classDef used fill:#3b0b24,stroke:#ff2e88,color:#ffe8f4
 classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
 ```
 
@@ -120,6 +120,6 @@ treemap-beta
   "Sub-agent data": 10:::used
   "Free space": 15:::free
   "Buffer": 15:::free
-classDef used fill:#1a0a2e,stroke:#ff2e88,color:#ffe8f4
+classDef used fill:#3b0b24,stroke:#ff2e88,color:#ffe8f4
 classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
 ```
