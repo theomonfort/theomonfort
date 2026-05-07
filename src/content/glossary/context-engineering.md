@@ -49,13 +49,13 @@ classDef dumb fill:#7a1748,stroke:#ff2e88,color:#ffe8f4
 
 > Context Engineering の目的は、context window を埋めることではなく、**必要な情報が目立つ状態を保つこと**。
 
-## Context window：start
+## Context window：Start
 
-最初は、system prompt、Copilot instructions、skill descriptions、available MCP/tools などの **常時必要なメタ情報** だけが入る。
+Start はほぼ理想状態。常時必要な system/tools だけが入り、作業用の余白が大きい。
 
 ```mermaid
 treemap-beta
-  "Context window"
+"Context window"
   "System & tools": 10:::used
   "Free space": 75:::free
   "Buffer": 15:::free
@@ -63,10 +63,24 @@ classDef used fill:#7a1748,stroke:#ff2e88,color:#ffe8f4
 classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
 ```
 
-## Context window：agent switch
+## Context window：Custom agent
 
-`Test coder` agent に切り替えると、custom agent instruction が追加される。  
-さらに「この test coverage を改善して」と頼むと、path instruction と skill description が match する。
+Custom agent に切り替えると、その agent instruction が context に追加される。
+
+```mermaid
+treemap-beta
+"Context window"
+  "System & tools": 10:::used
+  "Custom Agent": 10:::used
+  "Free space": 65:::free
+  "Buffer": 15:::free
+classDef used fill:#7a1748,stroke:#ff2e88,color:#ffe8f4
+classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
+```
+
+## Context window：Prompt
+
+Prompt を書く。たとえば「test を追加して」と頼むと、関連 skill と test 用の path instruction が読み込まれることがある。
 
 ```mermaid
 treemap-beta
@@ -74,7 +88,7 @@ treemap-beta
   "System & tools": 10:::used
   "Custom Agent": 10:::used
   "Path instruction": 10:::used
-  "Full Skill": 10:::used
+  "Skill": 10:::used
   "Prompt": 10:::used
   "Free space": 35:::free
   "Buffer": 15:::free
@@ -82,10 +96,9 @@ classDef used fill:#7a1748,stroke:#ff2e88,color:#ffe8f4
 classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
 ```
 
-## Context window：load relevant context
+## Context window：Sub-agent
 
-Skill description が match すると **full skill** が読み込まれる。  
-同時に、対象 file、test file、smartly selected memory、prompt が context に入る。
+Explore、database、review などの sub-agent は、調査結果の summary を main agent に返せる。
 
 ```mermaid
 treemap-beta
@@ -95,18 +108,16 @@ treemap-beta
   "Path instruction": 10:::used
   "Skill": 10:::used
   "Prompt": 10:::used
-  "Matching files": 10:::used
-  "Memory": 10:::used
-  "Free space": 15:::free
+  "Sub-agent data": 10:::used
+  "Free space": 25:::free
   "Buffer": 15:::free
 classDef used fill:#7a1748,stroke:#ff2e88,color:#ffe8f4
 classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
 ```
 
-## Context window：summarize with sub-agent
+## Context window：Memory
 
-大きな workspace を直接 main context に入れず、Explore sub-agent に調査させる。  
-main agent には **workspace summary** だけが戻るので、context window を overload しにくい。
+Repo で作業を続けると、memory が生成され、必要な時に動的に読み込まれることがある。
 
 ```mermaid
 treemap-beta
@@ -116,8 +127,8 @@ treemap-beta
   "Path instruction": 10:::used
   "Skill": 10:::used
   "Prompt": 10:::used
-  "Memory": 10:::used
   "Sub-agent data": 10:::used
+  "Memory": 10:::used
   "Free space": 15:::free
   "Buffer": 15:::free
 classDef used fill:#7a1748,stroke:#ff2e88,color:#ffe8f4
