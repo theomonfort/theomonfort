@@ -56,12 +56,12 @@ Context window を横長のメモリ領域として見ると、必要な context
 
 ```mermaid
 packet
-+10: "System & tools"
-+12: "Instructions"
-+20: "Custom agent"
-+10: "Prompt"
-+38: "Files / logs / history"
-+10: "Buffer"
+0-9: "System & tools"
+10-21: "Instructions"
+22-41: "Custom agent"
+42-51: "Prompt"
+52-89: "Files / logs / history"
+90-99: "Buffer"
 ```
 
 ## Context rot：Treemap
@@ -72,12 +72,12 @@ packet
 treemap-beta
 "Context window"
   "Useful context"
-    "System & tools": 10
-    "Instructions": 12
-    "Custom agent": 20
-    "Prompt": 10
+      "System & tools": 10
+      "Instructions": 12
+      "Custom agent": 20
+      "Prompt": 10
   "Context rot"
-    "Files / logs / history": 38
+      "Files / logs / history": 38
   "Buffer": 10
 ```
 
