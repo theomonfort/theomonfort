@@ -38,6 +38,23 @@ LLM は context window が大きいほど賢くなるわけではない。情報
 
 これを **context rot** と呼ぶ。
 
+```mermaid
+treemap-beta
+"Context window"
+  "System & tools": 8:::system
+  "Instructions": 8:::instructions
+  "Memories": 16:::memories
+  "Prompt": 8:::prompt
+  "Working space": 45:::workspace
+  "Buffer (reserved)": 15:::buffer
+classDef system fill:#047857,stroke:#a7f3d0,color:#ecfdf5
+classDef instructions fill:#0ea5e9,stroke:#bae6fd,color:#f0f9ff
+classDef memories fill:#fbbf24,stroke:#fde68a,color:#111827
+classDef prompt fill:#7c3aed,stroke:#ddd6fe,color:#faf5ff
+classDef workspace fill:#bbf7d0,stroke:#86efac,color:#052e16
+classDef buffer fill:#22c55e,stroke:#bbf7d0,color:#f0fdf4
+```
+
 | 現象 | 何が起きる？ |
 | --- | --- |
 | Lost in the middle | 長い context の中央にある重要情報が埋もれる |
