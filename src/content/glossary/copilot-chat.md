@@ -4,7 +4,7 @@ titleEn: Copilot Chat
 summary: Copilot と同期的に会話する入口。IDE、GitHub.com、Mobile で使えるが、最も深い harness は IDE 側にある。
 icon: 💬
 color: cyan
-order: 3
+order: 3.5
 category: develop
 related: ['mcp', 'instructions', 'cli', 'cloud-agent']
 links:
