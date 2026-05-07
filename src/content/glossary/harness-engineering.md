@@ -20,6 +20,9 @@ links:
   - group: 🛡️ Harness examples
     label: Agent Config
     url: https://agentconfig.org/
+  - group: 🛡️ Harness examples
+    label: Copilot Panorama — complete Copilot architecture
+    url: https://gh.io/copilot-panorama
   - group: 🧩 Spec-driven
     label: GitHub Spec Kit — spec-driven development
     url: https://github.com/github/spec-kit
