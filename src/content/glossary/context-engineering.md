@@ -32,24 +32,53 @@ links:
 
 > 良い context は量ではなく **選び方**。不要な情報を減らし、必要な情報を欠かさない。
 
-## Context rot
+## Context rot：Pie chart
 
-LLM は context window が大きいほど賢くなるわけではない。情報を詰め込みすぎると、重要な情報を見落とし、判断が鈍る。
+LLM は context window が大きいほど賢くなるわけではない。情報を詰め込みすぎると、重要な情報を見落とし、判断が鈍る。  
+これを **context rot** と呼ぶ。
 
 ```mermaid
-flowchart LR
-  Smart["Smart<br/>必要な context が見える"]
-  Rot["Context rot<br/>情報が多すぎる"]
-  Dumb["Dumb<br/>重要情報を見失う"]
+pie showData
+  title Context window
+  "System & tools" : 10
+  "Instructions" : 12
+  "Custom agent" : 20
+  "Prompt" : 10
+  "Files / logs / history" : 38
+  "Buffer" : 10
+```
 
-  Smart -->|"context window が埋まる"| Rot -->|"lost in the middle<br/>recency bias"| Dumb
+> Window が埋まるほど、**Lost in the middle** や **Recency bias** が起きやすくなる。
 
-  classDef smart fill:#0a1a14,stroke:#9bbc0f,color:#d8ff9a,stroke-width:3px;
-  classDef rot fill:#302500,stroke:#ffb000,color:#fff4d6,stroke-width:3px;
-  classDef dumb fill:#2a1020,stroke:#ff2e88,color:#ffe8f4,stroke-width:3px;
-  class Smart smart;
-  class Rot rot;
-  class Dumb dumb;
+## Context rot：Packet diagram
+
+Context window を横長のメモリ領域として見ると、必要な context とノイズが同じ場所を奪い合う。
+
+```mermaid
+packet
++10: "System & tools"
++12: "Instructions"
++20: "Custom agent"
++10: "Prompt"
++38: "Files / logs / history"
++10: "Buffer"
+```
+
+## Context rot：Treemap
+
+何が window を占有しているかを見るなら、treemap の方が比率を読みやすい。
+
+```mermaid
+treemap-beta
+"Context window"
+  "Useful context"
+    "System & tools": 10
+    "Instructions": 12
+    "Custom agent": 20
+    "Prompt": 10
+  "Context rot"
+    "Files / logs / history": 38
+  "Buffer": 10
 ```
 
 | 現象 | 何が起きる？ |
