@@ -90,7 +90,7 @@ flowchart LR
 
 > No magic. Agent は、LLM を直接呼ぶ代わりに、**何を読ませるか・どの tool を使わせるか・結果をどう戻すか** を管理する layer。
 
-## Agent / Harness under the hood
+## Agent / Harness の裏側（Simplified）
 
 - **Execution Loop**：LLM が次の一手を決め、tool 実行 → 結果を context に戻す、を `done` まで繰り返す。
 - **Context Management**：system prompt、available tools、user task、tool results を整理し、毎回の LLM call に必要な context として渡す。
