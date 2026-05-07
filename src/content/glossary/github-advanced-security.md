@@ -14,6 +14,8 @@ links:
     url: https://docs.github.com/code-security/code-scanning
   - label: Advanced Security Copilot plugin
     url: https://github.com/github/copilot-plugins/tree/main/plugins/advanced-security
+  - label: Scan for secrets with GitHub MCP Server
+    url: https://docs.github.com/en/code-security/how-tos/use-ghas-with-ai-coding-agents/scan-for-secrets-with-github-mcp-server
 ---
 
 GitHub Advanced Security (GHAS) は、開発フローに統合されたセキュリティ機能群。**Code Scanning** (CodeQL によるコード脆弱性検出)、**Secret Protection** (シークレット漏洩検出)、**Dependabot** (依存関係の脆弱性アラート・自動更新) を提供する。
