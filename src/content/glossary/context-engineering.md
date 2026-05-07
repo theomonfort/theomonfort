@@ -74,7 +74,7 @@ treemap-beta
   "System & tools": 10:::used
   "Custom Agent": 10:::used
   "Path instruction": 10:::used
-  "Skill metadata": 10:::used
+  "Full Skill": 10:::used
   "Prompt": 10:::used
   "Free space": 35:::free
   "Buffer": 15:::free
