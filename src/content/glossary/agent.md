@@ -33,7 +33,7 @@ flowchart LR
 ```mermaid
 flowchart LR
   Project[You + Project] --> Inputs[Prompts<br/>Instructions<br/>Skills<br/>MCP]
-  Inputs --> Agent[The Agent<br/>aka Harness]
+  Inputs --> Agent[The Agent<br/>aka Harness<br/><br/>Copilot Chat<br/>Copilot CLI<br/>Cloud Agent<br/>Claude Code<br/>Codex]
   Agent -->|context| LLM[The LLM]
   LLM -->|next step| Agent
   Agent -->|tool call| Tools[Tools<br/>read / edit / run]
