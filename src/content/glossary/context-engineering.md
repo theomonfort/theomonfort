@@ -12,6 +12,9 @@ links:
     label: Context Engineering — interactive guide
     url: https://blog.cloud-eng.nl/context-engineering/
   - group: 📚 Context Engineering
+    label: Context Rot — Product Talk
+    url: https://www.producttalk.org/context-rot
+  - group: 📚 Context Engineering
     label: Well-Architected (GitHub)
     url: https://wellarchitected.github.com/
 ---
