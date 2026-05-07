@@ -43,8 +43,8 @@ treemap-beta
 "Context window"
   "Smart zone": 60:::smart
   "Dumb zone": 40:::dumb
-classDef smart fill:#0a1a14,stroke:#9bbc0f,color:#d8ff9a
-classDef dumb fill:#2a1020,stroke:#ff2e88,color:#ffe8f4
+classDef smart fill:#0891b2,stroke:#67e8f9,color:#ecfeff
+classDef dumb fill:#7f1d1d,stroke:#fca5a5,color:#fee2e2
 ```
 
 > Context Engineering の目的は、context window を埋めることではなく、**必要な情報が目立つ状態を保つこと**。
@@ -55,10 +55,10 @@ classDef dumb fill:#2a1020,stroke:#ff2e88,color:#ffe8f4
 
 ```mermaid
 treemap-beta
-"Context window"
+  "Context window"
   "System & tools": 10:::used
   "Free space": 75:::free
-  "Buffer": 15:::used
+  "Buffer": 15:::free
 classDef used fill:#7f1d1d,stroke:#fca5a5,color:#fee2e2
 classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
 ```
@@ -77,7 +77,7 @@ treemap-beta
   "Skill metadata": 10:::used
   "Prompt": 10:::used
   "Free space": 35:::free
-  "Buffer": 15:::used
+  "Buffer": 15:::free
 classDef used fill:#7f1d1d,stroke:#fca5a5,color:#fee2e2
 classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
 ```
@@ -98,7 +98,7 @@ treemap-beta
   "Matching files": 10:::used
   "Memory": 10:::used
   "Free space": 15:::free
-  "Buffer": 15:::used
+  "Buffer": 15:::free
 classDef used fill:#7f1d1d,stroke:#fca5a5,color:#fee2e2
 classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
 ```
@@ -119,7 +119,7 @@ treemap-beta
   "Memory": 10:::used
   "Sub-agent data": 10:::used
   "Free space": 15:::free
-  "Buffer": 15:::used
+  "Buffer": 15:::free
 classDef used fill:#7f1d1d,stroke:#fca5a5,color:#fee2e2
 classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
 ```
