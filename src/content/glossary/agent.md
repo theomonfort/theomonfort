@@ -9,37 +9,42 @@ category: develop
 related: ['copilot-chat', 'harness-engineering', 'cli', 'cloud-agent']
 ---
 
-## The good old days → Current
+## The good old days
 
-LLM との会話は、単純な **prompt → answer** から、project context と tools を持つ **agent / harness** に変わった。
-
-| 時代 | 何が起きている？ |
-| --- | --- |
-| Good old days | You が prompt を投げ、LLM が answer を返す |
-| Current | Agent / Harness が context を組み立て、LLM と tools を loop させる |
+昔の LLM chat はシンプルだった。You が prompt を投げ、LLM が answer を返す。
 
 ```mermaid
 flowchart LR
-  subgraph Old["Good old days: chatting with an LLM"]
-    You[You] -->|Prompt| LLM[The LLM]
-    LLM -->|Answer| You
-  end
+  You[You] -->|Prompt| LLM[The LLM]
+  LLM -->|Answer| You
 
-  subgraph Now["Current: agent / harness"]
-    Project[You + Project] --> Inputs[Prompts<br/>Instructions<br/>Skills<br/>MCP]
-    Inputs --> Agent[The Agent<br/>aka Harness]
-    Agent -->|context| Model[The LLM]
-    Model -->|next step| Agent
-    Agent -->|tool call| Tools[Tools<br/>read / edit / run]
-    Tools -->|result| Agent
-  end
+  classDef human fill:#102033,stroke:#00f0ff,color:#e8f4ff,stroke-width:2px;
+  classDef llm fill:#302500,stroke:#ffb000,color:#fff4d6,stroke-width:2px;
+  class You human;
+  class LLM llm;
+```
+
+> この世界では、context はほぼ **prompt の中に人間が手で詰めるもの** だった。
+
+## Current
+
+現在は、project context と tools を持つ **agent / harness** が LLM の前に立つ。
+
+```mermaid
+flowchart LR
+  Project[You + Project] --> Inputs[Prompts<br/>Instructions<br/>Skills<br/>MCP]
+  Inputs --> Agent[The Agent<br/>aka Harness]
+  Agent -->|context| LLM[The LLM]
+  LLM -->|next step| Agent
+  Agent -->|tool call| Tools[Tools<br/>read / edit / run]
+  Tools -->|result| Agent
 
   classDef human fill:#102033,stroke:#00f0ff,color:#e8f4ff,stroke-width:2px;
   classDef llm fill:#302500,stroke:#ffb000,color:#fff4d6,stroke-width:2px;
   classDef agent fill:#132812,stroke:#9bbc0f,color:#f4ffd8,stroke-width:2px;
   classDef context fill:#2a1020,stroke:#ff2e88,color:#ffe8f4,stroke-width:2px;
-  class You,Project human;
-  class LLM,Model llm;
+  class Project human;
+  class LLM llm;
   class Agent,Tools agent;
   class Inputs context;
 ```
