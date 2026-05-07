@@ -32,7 +32,9 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-  Project[You + Project] --> Inputs[Prompts<br/>Instructions<br/>Skills<br/>MCP]
+  Project[You + Project] --> Agent[The Agent<br/>aka Harness<br/><br/>Copilot Chat<br/>Copilot CLI<br/>Cloud Agent<br/>Claude Code<br/>Codex]
+  Agent -->|answer / PR / edit| Project
+  Project -.-> Inputs[Prompts<br/>Instructions<br/>Skills<br/>MCP]
   Inputs --> Agent[The Agent<br/>aka Harness<br/><br/>Copilot Chat<br/>Copilot CLI<br/>Cloud Agent<br/>Claude Code<br/>Codex]
   Agent -->|context| LLM[The LLM]
   LLM -->|next step| Agent
@@ -42,11 +44,11 @@ flowchart LR
   classDef human fill:#102033,stroke:#00f0ff,color:#e8f4ff,stroke-width:2px;
   classDef llm fill:#302500,stroke:#ffb000,color:#fff4d6,stroke-width:2px;
   classDef agent fill:#132812,stroke:#9bbc0f,color:#f4ffd8,stroke-width:2px;
-  classDef context fill:#2a1020,stroke:#ff2e88,color:#ffe8f4,stroke-width:2px;
+  classDef context fill:#20242a,stroke:#8b949e,color:#d0d7de,stroke-width:2px;
   class Project human;
   class LLM llm;
-  class Agent,Tools agent;
-  class Inputs context;
+  class Agent agent;
+  class Inputs,Tools context;
 ```
 
 > No magic. Agent は、LLM を直接呼ぶ代わりに、**何を読ませるか・どの tool を使わせるか・結果をどう戻すか** を管理する layer。
