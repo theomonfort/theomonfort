@@ -26,173 +26,101 @@ links:
 
 ## 一言で
 
-**PR の最初の目を Copilot が務める。** レビュアーに `Copilot` を割り当てると、コードの **意図を読み取り**、インラインコメント・PR 概要・修正提案までを返す。人間レビュー前のノイズ取りから、Org 全体の自動化までスケールする。
+<div class="hero-quote hero-quote-stars">
+  <p>
+    <strong>Copilot Code Review</strong> は、PR の <strong>最初の目</strong> を Copilot が務める仕組み。
+  </p>
+  <p>
+    Reviewer に <code>Copilot</code> を割り当てると、コードの意図を読み、インラインコメント・PR 概要・修正提案を返してくれる。
+  </p>
+</div>
 
 > 💡 **アナロジー**：**24/7 で待機している新人レビュアー**。基礎的な指摘・スタイル・null 安全性は全部任せて、人間は **設計・ビジネスロジック・メンタリング** に集中できる。
 
-## 5 つの強み
+## Copilot Code Review の強み
 
-<div class="setup-cards">
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>🧠 文脈理解</code>
-      <span class="setup-card-tag tag-cyan">▸ Context-aware</span>
-    </div>
-    <p>コードの<strong>意図</strong>を把握し、ピンポイントで具体的な修正案を提示。表面的な lint ではない。</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>⚙️ 自動化</code>
-      <span class="setup-card-tag tag-magenta">▸ Repo / Org / Enterprise</span>
-    </div>
-    <p>PR 作成時に<strong>自動レビュー</strong>を発火。範囲は Repo 単位 → Org 単位 → Enterprise 単位で一括設定可。</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>📜 カスタマイズ</code>
-      <span class="setup-card-tag tag-amber">▸ instructions.md</span>
-    </div>
-    <p><code>copilot-instructions.md</code> にレビュー基準を書くだけ。チームの規約がそのまま AI のチェック項目に。</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>🔧 一括修正</code>
-      <span class="setup-card-tag tag-green">▸ One-click apply</span>
-    </div>
-    <p>指摘を <strong>1 件ずつ</strong> または <strong>まとめて一括</strong> で適用。Copilot がコミットまで作る。</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>🔎 透明性</code>
-      <span class="setup-card-tag tag-cyan">▸ 100% traceable</span>
-    </div>
-    <p>レビューと修正は GitHub Actions 上で実行。<strong>ログ・エージェントセッション</strong>で全判断を追跡可能。</p>
-  </div>
-</div>
+- 🧠 **文脈を理解** — コードの意図を把握し、具体的な修正案を提示
+- ⚙️ **自動化** — Repo / Org / Enterprise レベルで自動実行
+- 📜 **カスタマイズ** — `copilot-instructions.md` でレビュー基準を定義
+- 🔧 **修正** — 指摘を 1 件ずつ、またはまとめて一括修正
+- 🖥️ **快適な UI** — VS Code / GitHub.com 上で提案された変更を **diff ビュー** でスムーズに確認・適用
+- 🔎 **透明性** — Actions のログ・エージェントセッションですべて追跡可能
 
 ## 実績データ
 
-日本を代表する **製造業・自動車業界** の顧客（2025 年 9 月〜 2026 年 2 月、PR Open Duration の中央値）。
+日本を代表する **自動車業界・製造業** の顧客（2025 年 9 月〜 2026 年 2 月、PR Open Duration の中央値）。
 
-```mermaid
-flowchart LR
-  subgraph Maker["🏭 製造業"]
-    M1["Without Copilot<br/>📅 14.0 日"]
-    M2["With Copilot<br/>⚡ 11.6 日"]
-    M1 -->|"−2.4 日"| M2
-  end
-  subgraph Auto["🚗 自動車業界"]
-    A1["Without Copilot<br/>📅 13.6 日"]
-    A2["With Copilot<br/>⚡ 11.0 日"]
-    A1 -->|"−2.6 日"| A2
-  end
-
-  classDef before fill:#1a0a2e,stroke:#ff2e88,color:#ff2e88,stroke-width:2px
-  classDef after fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
-  class M1,A1 before
-  class M2,A2 after
-```
-
-> 💰 **ビジネス価値**：PR 承認 → マージ、コードレビュー完了までの期間が短縮 ── **開発リードタイム短縮**で市場投入スピードが上がり、極めて高い ROI を実現。
-
-## どう動くか
-
-```mermaid
-flowchart TB
-  PR["📥 PR opened<br/>または Reviewer に Copilot 指定"]
-  Read["🧠 Copilot がコードを読む<br/>diff + 関連ファイル + instructions"]
-  Out["💬 結果を返す"]
-  C1["インラインコメント<br/>(行ごとの指摘)"]
-  C2["PR Overview<br/>(全体の概要を自動生成)"]
-  C3["修正提案<br/>(1件ずつ / 一括適用)"]
-  Human["👤 人間レビュアー<br/>設計・ビジネスロジック・要件に集中"]
-  Act["⚙️ GitHub Actions 上で実行<br/>ログ・セッション完全公開"]
-
-  PR --> Read --> Out
-  Out --> C1
-  Out --> C2
-  Out --> C3
-  C1 --> Human
-  C2 --> Human
-  C3 --> Human
-  Read -.-> Act
-  Out -.-> Act
-
-  classDef pr fill:#1a0a2e,stroke:#ffb000,color:#ffb000,stroke-width:2px
-  classDef ai fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
-  classDef out fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
-  classDef human fill:#1a0a2e,stroke:#ff2e88,color:#ff2e88,stroke-width:2px
-  classDef act fill:#0a0e27,stroke:#ffb000,color:#ffb000,stroke-width:1px
-  class PR pr
-  class Read ai
-  class C1,C2,C3,Out out
-  class Human human
-  class Act act
-```
-
-レビューも修正も **GitHub Actions のジョブ** として実行 ── 何を読み、何を判断し、どう直したかが **100% 追跡可能** なプロセス。
-
-## 使い方
-
-<div class="setup-cards">
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>VS Code</code>
-      <span class="setup-card-tag tag-cyan">▸ Uncommitted</span>
-    </div>
-    <p>コミット前の変更に対してその場でレビュー。<strong>Source Control パネル</strong>から <code>Copilot: Review changes</code> を実行 → push 前にセルフチェック完了。</p>
+<div class="bar-chart">
+  <div class="bar-chart-title">PR の オープン期間 (日)</div>
+  <div class="bar-chart-legend">
+    <span><span class="dot dot-pink"></span> Copilot Code Review なし</span>
+    <span><span class="dot dot-purple"></span> Copilot Code Review あり</span>
   </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>GitHub.com</code>
-      <span class="setup-card-tag tag-magenta">▸ Reviewer 指定</span>
+  <div class="bar-groups">
+    <div class="bar-group">
+      <div class="bars">
+        <div class="bar bar-pink" style="height: 88.75%"><span class="bar-value">14.2 日</span></div>
+        <div class="bar bar-purple" style="height: 72.5%"><span class="bar-value">11.6 日</span></div>
+      </div>
+      <div class="bar-label">自動車業界の顧客</div>
     </div>
-    <p>PR の <strong>Reviewers</strong> に <code>Copilot</code> を追加するだけ。数分後にコメントと PR Overview が返ってくる。</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>自動レビュー</code>
-      <span class="setup-card-tag tag-amber">▸ Repo / Org / Enterprise</span>
+    <div class="bar-group">
+      <div class="bars">
+        <div class="bar bar-pink" style="height: 85%"><span class="bar-value">13.6 日</span></div>
+        <div class="bar bar-purple" style="height: 69.4%"><span class="bar-value">11.1 日</span></div>
+      </div>
+      <div class="bar-label">製造業界の顧客</div>
     </div>
-    <p>設定で <strong>「PR 作成時に自動レビュー」</strong> を ON。3 ステップで Org・Enterprise 全体に展開できる。</p>
   </div>
 </div>
 
+> 💰 **ビジネス価値**：PR 承認 → マージまでの期間が短縮 ── **開発リードタイム** が縮み、市場投入スピードが上がる。極めて高い ROI。
+
+## 使い方
+
+| 場所 | トリガー | 何が起きる |
+| --- | --- | --- |
+| **GitHub.com 手動レビュー** | PR の **Reviewers** に `Copilot` を追加 | 数分後にインラインコメント + PR Overview が返ってくる |
+| **GitHub.com 自動レビュー** | Repo / Org / Enterprise 設定で「PR 作成時に自動レビュー」を ON | すべての新規 PR が自動でレビューされる（3 ステップで Org 全体に展開可） |
+| **VS Code** | `Copilot: Review uncomitted changes` を Source Control パネルから実行 | コミット前の変更にその場でレビュー → push 前にセルフチェック完了 |
+| **GitHub CLI** | ターミナルで `/review` を実行 | 現在の作業ツリー / ブランチ差分をその場でレビュー — エディタを開かずに確認可能 |
+| **GitHub CLI (rubber duck)** | 設計や実装方針を相談 → `rubber-duck` エージェントに壁打ち | 実装前に盲点・ロジック欠陥・代替案を指摘 → 手戻りを未然に防ぐ |
+
+## 自動レビューのセットアップ
+
+**Ruleset** で「PR 作成時に自動でレビュー」を有効化。Repo / Org / Enterprise の 3 レベルで適用範囲を選べる。
+
+| スコープ | 設定パス | 主なオプション |
+| --- | --- | --- |
+| **リポジトリ** | Repo → **Settings** → *Code and automation* → **Rules** → **Rulesets** → *New branch ruleset* | ✅ Automatically request Copilot code review<br/>✅ Review new pushes<br/>✅ Review draft pull requests |
+| **Organization** | Org → **Settings** → *Repository* → **Rulesets** → *New branch ruleset* | リポジトリをパターンで一括対象（`*-feature` など） |
+| **Enterprise** | Enterprise → **Policies** → **Rulesets** | 全 Org に強制適用 — ガバナンスを一元管理 |
+
+> 📘 公式手順：[Configure automatic code review](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/request-a-code-review/configure-automatic-review) — スクリーンショット付き
+
 ## カスタマイズ
 
-リポジトリ全体のレビュー基準は **`.github/copilot-instructions.md`** に書くだけ。
+レビュー基準は **`.github/copilot-instructions.md`** に書くだけ。
 
 ```markdown
-# このリポジトリのコードレビュー基準
-
-## セキュリティ
-- 外部入力は必ずバリデーション・サニタイズ
-- SQL は parameterized query のみ（文字列連結禁止）
-- 秘密情報を `console.log` / コミットに含めない
-
-## 命名規則
-- 関数は動詞始まり（`fetchUser`, `calcTax`）
-- boolean は `is` / `has` / `can` プレフィックス
-
-## ライブラリ方針
-- 日付は dayjs を使用（moment は禁止）
-- HTTP は ky（axios は新規追加禁止）
+# コードレビュー基準
+## <セキュリティ>
+- ...
+## <命名規則>
+- ...
+## <ライブラリ方針>
+- ...
 ```
 
-ファイル種類ごとに **異なる基準** を当てたい時は **`NAME.instructions.md`** を併用：
+ファイル種類ごとに分けたい時は **`NAME.instructions.md`** を併用：
 
 ```yaml
 ---
 applyTo: "**/*.test.ts"
 ---
-
-このファイルはテストコード。
-- describe / it のネストは 2 階層まで
-- mock は vi.fn() を使用、jest.fn() 禁止
-- 1 テストにつき 1 アサーション原則
+## <テスト規約>
+- ...
 ```
-
-これで **テストには厳しめ、フロントエンドには別ルール、DB マイグレーションには安全規約** ── と粒度を分けられる。
 
 ## 限界と人間の役割
 
