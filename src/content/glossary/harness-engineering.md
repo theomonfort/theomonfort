@@ -143,7 +143,7 @@ AI を強くする技術ツールは 1 つではない。**常に読ませるも
 | Custom agents | Copilot custom agents | agent definitions / plugins |
 | MCP / tools | `mcp.config` | `mcp.config` |
 
-> 迷ったら、まずは利用する agent host が読む場所に合わせる。チーム共有なら repository 配下、個人用なら home 配下。
+> Copilot の強みは、主要ベンダーの形式を native にサポートできること。CLI では `/help` を入力すると、今使える形式やコマンドを確認できる。
 
 ## よく使う概念
 

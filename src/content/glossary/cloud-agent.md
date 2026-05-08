@@ -20,103 +20,30 @@ links:
 
 ## 一言で
 
-**Cloud Agent** は IDE を閉じても **クラウドで動き続ける Copilot の分身**。Issue やプロンプトを渡すと、GitHub Actions ランナー上で **リポジトリ全体を読み・実装し・検証し・PR を出す** ところまでを非同期でやってくれる。
-
-> 💡 **アナロジー**：**退社前に Issue を渡して帰る → 翌朝、レビュー待ちの PR が並んでいる**。ローカル agent が "伴走者" なら、cloud agent は **"夜勤シフトに入った同僚"**。
+<div class="hero-quote hero-quote-chat">
+  <p>
+    <strong>Cloud Agent</strong> は、GitHub 上で非同期に動く Copilot。
+  </p>
+  <p>
+    Issue やタスクを渡すと、クラウドでコードを読み、実装し、検証し、PR として返してくれる。
+  </p>
+</div>
 
 ## できること
 
-<div class="setup-cards">
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>Background 実行</code>
-      <span class="setup-card-tag tag-cyan">▸ 非同期</span>
-    </div>
-    <p>IDE を閉じても処理は <strong>クラウドで継続</strong>。大規模なコード生成やリサーチをマシンを占有せず流せる。</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>Repo 全域コンテキスト</code>
-      <span class="setup-card-tag tag-magenta">▸ 構造把握</span>
-    </div>
-    <p>リモートインデックスを参照し、<strong>依存関係・モジュール構造</strong>を踏まえて編集。狭い視野の局所修正で終わらない。</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>Claude / Codex 対応</code>
-      <span class="setup-card-tag tag-amber">▸ Public preview</span>
-    </div>
-    <p>Anthropic Claude と OpenAI Codex のコーディングエージェントを <strong>切り替えて</strong> 使える。</p>
-  </div>
-</div>
+- **Background 実行**：IDE を閉じても、処理はクラウドで継続する。
+- **Actions 上で実行**：セッションは GitHub Actions runner 上で動くため、実行ログを追えて透明性が高い。
+- **チームで確認**：Cloud Agent のセッションはチーム全員が参照でき、作業内容を共有しやすい。
+- **Repo 全域コンテキスト**：依存関係やモジュール構造を踏まえて編集できる。
+- **検証まで実行**：テスト・ビルド・静的解析などを実行し、結果を PR に反映する。
+- **複数ハーネス対応**：Anthropic Claude SDK や OpenAI Codex SDKも選択できる。(Third Party Agent)
 
 ## 起動方法
 
-入口は **3 つ**。普段の動線にあわせて選ぶ。
-
-<div class="setup-cards">
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>VS Code から</code>
-      <span class="setup-card-tag tag-cyan">▸ 3 steps</span>
-    </div>
-    <p>Chat の <strong>agent picker</strong> で Cloud Agent を選び、タスクを書いて送信。セッションは Web 側に引き継がれる。</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>GitHub.com から</code>
-      <span class="setup-card-tag tag-magenta">▸ 3 steps</span>
-    </div>
-    <p>リポジトリ画面の <strong>Agents パネル</strong> から起動。プロンプトとブランチ起点を指定するだけ。</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>Issue から</code>
-      <span class="setup-card-tag tag-amber">▸ assign</span>
-    </div>
-    <p>Issue を <strong>Copilot に assign</strong> するだけ。タイトルと本文がそのままタスク仕様になる。</p>
-  </div>
-</div>
-
-## 内部の仕組み
-
-```mermaid
-flowchart LR
-  U["👤 User<br/>Issue / Prompt"]
-  CA["☁️ Cloud Agent<br/>(GitHub Actions runner)"]
-  CTX["📚 Repo index +<br/>instructions"]
-  V{"🛡️ Validation"}
-  CQ["CodeQL"]
-  CR["Code Review"]
-  SS["Secret Scan"]
-  DV["Deps Vuln"]
-  PR["✅ Pull Request"]
-
-  U --> CA
-  CA <--> CTX
-  CA --> V
-  V --> CQ
-  V --> CR
-  V --> SS
-  V --> DV
-  CQ --> PR
-  CR --> PR
-  SS --> PR
-  DV --> PR
-
-  classDef user fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
-  classDef agent fill:#1a0a2e,stroke:#ffb000,color:#ffb000,stroke-width:2px
-  classDef ctx fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
-  classDef val fill:#1a0a2e,stroke:#ff2e88,color:#ff2e88,stroke-width:2px
-  classDef pr fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
-  class U user
-  class CA agent
-  class CTX ctx
-  class V,CQ,CR,SS,DV val
-  class PR pr
-```
-
-User がタスクを投げる → Cloud Agent が **Actions ランナー** 上で起動 → リポジトリインデックス + instructions を読み → 実装 → **検証ツールを通過** → PR を開く、までが 1 セッション。
+- **VS Code から**：Chat の `Local` と書いてあるところから `Cloud` に切り替える。
+- **GitHub.com から**：リポジトリ画面の **Agents パネル** から起動する。プロンプトとブランチ起点を指定するだけ。
+- **Issue から**：Issue を **Copilot に assign** するだけ。タイトルと本文がそのままタスク仕様になる。
+- **CLI から**：`/delegate` を使って Copilot Cloud Agent に作業を渡す。他の SDK / Harness には delegate できない。
 
 ## 環境カスタマイズ（`copilot-setup-steps.yml`）
 
@@ -157,36 +84,12 @@ jobs:
 
 Cloud Agent は生成コードに対し、PR 作成前に **4 つの検証** を自動実行。**問題を検出したら自前で修正を試みてから** PR を出す。
 
-<div class="setup-cards">
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>CodeQL</code>
-      <span class="setup-card-tag tag-cyan">🛡️ Security</span>
-    </div>
-    <p><strong>セキュリティ脆弱性</strong> をコードスキャンで検出。SQLi / XSS / 危険な API 使用などを止める。</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>Copilot Code Review</code>
-      <span class="setup-card-tag tag-magenta">🔍 Quality</span>
-    </div>
-    <p><strong>コード品質の問題</strong> を AI レビューで指摘。ロジックバグ・命名・無駄な複雑度。</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>Secret Scan</code>
-      <span class="setup-card-tag tag-amber">🔑 Secrets</span>
-    </div>
-    <p><strong>API キー・認証情報</strong> の誤コミットを防止。生成コード経由の漏洩リスクを潰す。</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>Dependency Vuln</code>
-      <span class="setup-card-tag tag-green">📦 Deps</span>
-    </div>
-    <p><strong>GitHub Advisory Database</strong> と照合し、脆弱なパッケージ追加をブロック。</p>
-  </div>
-</div>
+| 検証ツール | 見るもの | 目的 |
+|---|---|---|
+| **CodeQL Code scanning** | セキュリティ脆弱性 | SQLi、XSS、危険な API 使用などを検出する。 |
+| **Copilot Code Review** | コード品質 | ロジックバグ、不要な複雑さ、実装上の問題を指摘する。 |
+| **Secret Scanning** | API キー・認証情報 | 生成コード経由の secret 漏洩を防ぐ。 |
+| **Dependency Vulnerability checks** | 依存パッケージ | GitHub Advisory Database と照合し、脆弱な依存追加を検出する。 |
 
 > 💰 **無料で使える** ── GitHub Advanced Security ライセンスは **不要**。設定は `Settings → Copilot → Cloud agent → Validation tools` から ON/OFF 可能。
 
