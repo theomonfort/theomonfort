@@ -508,7 +508,6 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
           lineColor: '#00f0ff',
           secondaryColor: '#1a0a2e',
           tertiaryColor: '#05060f',
-          fontFamily: 'DotGothic16, monospace',
         },
           securityLevel: 'loose',
       });
@@ -643,6 +642,12 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
   .prose-akq .hero-quote.hero-quote-chat::before {
     background-image: url('/octocat-chat.png');
+  }
+  .prose-akq .hero-quote.hero-quote-soon::before {
+    background-image: url('/octocat-monocle.png');
+  }
+  .prose-akq .hero-quote.hero-quote-green::before {
+    background-image: url('/octocat-green.png');
   }
   /* Speech bubble pointer (notch on the left side, in accent color) */
   .prose-akq .hero-quote::after {

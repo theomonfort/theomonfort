@@ -8,24 +8,59 @@ order: 17
 category: develop
 related: ['cloud-agent', 'agentic-workflow', 'cli']
 links:
-  - label: GitHub Codespaces
+  - group: GitHub Docs
+    label: GitHub Codespaces (overview)
     url: https://github.com/features/codespaces
-  - label: devcontainer.json リファレンス
+  - group: GitHub Docs
+    label: Codespaces documentation
+    url: https://docs.github.com/en/codespaces
+  - group: GitHub Docs
+    label: Choosing the machine type for your codespace
+    url: https://docs.github.com/en/codespaces/setting-your-user-preferences/choosing-the-machine-type-for-your-codespace
+  - group: Dev Containers
+    label: devcontainer.json reference
     url: https://containers.dev/
+  - group: Dev Containers
+    label: Introduction to dev containers (GitHub Docs)
+    url: https://docs.github.com/en/codespaces/setting-up-your-project-for-codespaces/adding-a-dev-container-configuration/introduction-to-dev-containers
 ---
 
-Codespaces は GitHub がクラウド上でホストする、Docker コンテナベースの開発環境。ブラウザ・VS Code・GitHub CLI から数秒で接続でき、`devcontainer.json` で構成をコード化できる。
+## 一言で
 
-**AI駆動開発における意味:**
-- **隔離された実験場** — AI エージェントが暴走しても、ローカルマシンには影響なし。壊れたら捨てて作り直せる。
-- **再現可能な環境** — チーム全員が同じツール・ライブラリ・MCP server で動かせるので「自分の環境では動く」が消える。
-- **どこからでもアクセス** — ブラウザさえあれば iPad からでも本格的な開発ができる。
-- **AI に必要なツールを事前装備** — Copilot CLI、各種 MCP server、Skills を `devcontainer.json` で予め仕込んでおける。
+<div class="hero-quote hero-quote-chat">
+  <p>
+    <strong>Codespaces</strong> は、GitHub がクラウドでホストする <strong>使い捨て可能な開発環境</strong>。
+  </p>
+  <p>
+    ブラウザを開けば、数秒で <strong>VS Code 付きのフル開発環境</strong> が立ち上がる。AI に何かを試させたいときの第一選択肢。
+  </p>
+</div>
 
-**Codespaces を使う理由（要約）:**
-- 環境構築ゼロ
-- 全員同じ環境
-- どこからでもアクセス
-- 事前設定済み
+## 特徴
 
-ワークショップや POC で「セットアップに30分溶かす」を完全に消せる。AI に何かを試させたい時の第一選択肢。
+クラウド上の **Docker コンテナ** が 1 セッション = 1 codespace。設定は repo 内の `devcontainer.json` でコード化される。
+
+**接続方法（どこからでも）**
+
+- 🌐 **ブラウザ** — `github.com` から直接、URL 1 つで開ける
+- 💻 **VS Code Desktop** — ローカル VS Code から remote 接続
+- 🖥️ **GitHub CLI** (`gh codespace ssh`) — ターミナルから直接接続
+
+**コンテナ環境**
+
+- 🐳 **Docker ベース** — base image + features + post-create script を `devcontainer.json` で宣言
+- 📦 **再現性** — 同じ repo を開けば、誰でも同じ環境
+- 🔌 **VS Code 拡張も pre-install** — Copilot・MCP server・linter まで仕込める
+- ⚡ **マシンサイズ** — 必要に応じて切替可能（最大 **32 core / 128 GB RAM / 128 GB ストレージ**）
+
+> 重い build や AI agent を並列で走らせたいときは大きめを選ぶ。**起動後でもサイズ変更可能**。
+
+## メリット
+
+- 🚀 **セットアップ 0 分** — "Open in Codespaces" を押すだけ
+- 👥 **全員同じ環境** — "自分のマシンでは動く" が消える
+- 🌍 **どこからでもアクセス** — ブラウザさえあれば OK
+- 💪 **非力なマシンでも OK** — 手元が古い PC でも、クラウド側で **最大 32 core / 128 GB RAM** を使える
+- 🛡️ **AI を安全に隔離** — 壊れたら捨てて作り直す
+- 🤖 **AI ツール pre-install** — Copilot CLI・MCP server・Skills を事前装備
+

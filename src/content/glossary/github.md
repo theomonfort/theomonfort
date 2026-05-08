@@ -38,7 +38,7 @@ GitHub の歩みを振り返れば、現在地が見えてくる ──
 - **2025・Agent HQ** で AI が自律的に開発を支える時代へ ── 本日はここを中心にお話しします
 
 ```mermaid
-%%{init: {"theme":"base","timeline":{"disableMulticolor":true},"themeVariables":{"cScale0":"#00f0ff","cScale1":"#00f0ff","cScale2":"#00f0ff","fontSize":"25px"}}}%%
+%%{init: {"theme":"base","timeline":{"disableMulticolor":true},"themeVariables":{"cScale0":"#0a0e27","cScale1":"#0a0e27","cScale2":"#0a0e27","cScaleLabel0":"#00f0ff","cScaleLabel1":"#00f0ff","cScaleLabel2":"#00f0ff","primaryTextColor":"#00f0ff","textColor":"#00f0ff","fontSize":"25px"}}}%%
 timeline
   title GitHub の進化
   2008 : Pull Request
@@ -53,6 +53,7 @@ timeline
 SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ → 運用** を、すべて GitHub 上の AI が一気通貫で支える。
 
 ```mermaid
+%%{init: {"theme":"base","themeVariables":{"cScale2":"#0e1430","cScale3":"#0e1430","cScale4":"#0e1430","cScale5":"#0e1430","cScale6":"#0e1430","cScaleLabel2":"#9bbc0f","cScaleLabel3":"#ff2e88","cScaleLabel4":"#ffb000","cScaleLabel5":"#00f0ff","cScaleLabel6":"#9bbc0f"}}}%%
 kanban
   PLAN[📋 Plan]
     plan_projects[GitHub Projects]

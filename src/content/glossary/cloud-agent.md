@@ -100,3 +100,48 @@ Cloud Agent は生成コードに対し、PR 作成前に **4 つの検証** を
 **夜間** ── ランナー上で Cloud Agent が黙々と実装・自己検証。CodeQL も Code Review もパスしたものだけが PR になる。
 
 **翌朝** ── レビュー待ちの PR が並んでいる。あなたの仕事は "書く" ではなく **"判断する"**。人間は意思決定に集中、機械は反復に集中 ── これが AI 駆動開発のチーム運用の最小単位。
+
+## ワークフロー全体図
+
+人は **Issue を整える・レビューする・マージする** だけ。実装と修正のループは Cloud Agent が回す。
+
+```mermaid
+%%{init: {'themeVariables': {'fontSize': '40px'}}}%%
+flowchart LR
+  subgraph Human["👤 人（開発者）"]
+    direction TB
+    A["Issue の<br/>内容を調整"]
+    B["Issue を<br/>Copilot に assign"]
+    C["コメントで<br/>レビュー指摘"]
+    D{"修正<br/>完了?"}
+    M["マージ"]
+    A --> B
+  end
+
+  subgraph Copilot["☁️ Cloud Agent"]
+    direction TB
+    E["成果物作成"]
+    F["PR 作成"]
+    G["指摘を修正"]
+    E --> F
+  end
+
+  B --> E
+  F --> C
+  C --> G
+  G --> D
+  D -->|"修正NG /<br/>追加指摘"| C
+  D -->|"OK"| M
+  M -.->|"次の Issue へ"| A
+
+  classDef human fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
+  classDef agent fill:#1a1500,stroke:#ffb000,color:#ffb000,stroke-width:2px
+  classDef decide fill:#1a0a2e,stroke:#ff2e88,color:#ff2e88,stroke-width:2px
+  classDef done fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
+  class A,B,C human
+  class E,F,G agent
+  class D decide
+  class M done
+```
+
+> 人間のタスクは **判断と意思決定**、Copilot のタスクは **実装と反復**。境界を分けることで、レビュー待ちの PR がパイプラインのように流れる。
