@@ -88,7 +88,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       <p class="font-pixel-jp text-sm md:text-base text-phosphor/50 mb-3">{entry.data.title}</p>
     </header>
 
-    <article class="prose-akq" style={`--entry-accent:${accent}`}>
+    <article class="prose-akq" data-category={entry.data.category} style={`--entry-accent:${accent}`}>
       <Content />
     </article>
 
@@ -1622,5 +1622,79 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     box-shadow: 4px 4px 0 #05060f, 0 0 14px rgba(0, 240, 255, 0.25);
     color: #00f0ff;
     font-size: 12px;
+  }
+
+  /* ══════════════════════════════════════════════════════════════
+     ❄️  ICE FORTRESS THEME — TEST & SECURE category (cyan)
+     Subtle frost decorations: snowflake before each H2,
+     crystal dust in hero-quote corners, cool glow on links
+     ══════════════════════════════════════════════════════════════ */
+  [data-category="secure"].prose-akq h2 {
+    position: relative;
+    padding-left: 1.4em;
+  }
+  [data-category="secure"].prose-akq h2::before {
+    content: "❄";
+    position: absolute;
+    left: 0;
+    top: 0.08em;
+    font-size: 0.78em;
+    color: var(--entry-accent, #00f0ff);
+    opacity: 0.65;
+    text-shadow: 0 0 6px rgba(0, 240, 255, 0.55), 0 0 12px rgba(0, 240, 255, 0.25);
+    animation: ice-shimmer 5.5s ease-in-out infinite;
+  }
+  @keyframes ice-shimmer {
+    0%, 100% { opacity: 0.5; transform: translateY(0) rotate(0deg); }
+    50%      { opacity: 0.9; transform: translateY(-2px) rotate(15deg); }
+  }
+
+  /* Frost crystal dust in hero-quote corners */
+  [data-category="secure"].prose-akq .hero-quote {
+    background:
+      radial-gradient(circle at 10px 10px,                       rgba(0, 240, 255, 0.55) 0 1.5px, transparent 2.5px),
+      radial-gradient(circle at calc(100% - 10px) 10px,          rgba(0, 240, 255, 0.55) 0 1.5px, transparent 2.5px),
+      radial-gradient(circle at 10px calc(100% - 10px),          rgba(0, 240, 255, 0.55) 0 1.5px, transparent 2.5px),
+      radial-gradient(circle at calc(100% - 10px) calc(100% - 10px), rgba(0, 240, 255, 0.55) 0 1.5px, transparent 2.5px),
+      radial-gradient(circle at 22px 22px,                       rgba(0, 240, 255, 0.25) 0 1px,   transparent 1.5px),
+      radial-gradient(circle at calc(100% - 22px) calc(100% - 22px), rgba(0, 240, 255, 0.25) 0 1px, transparent 1.5px),
+      linear-gradient(var(--entry-accent, #00f0ff), var(--entry-accent, #00f0ff)) top    left  / 10px 10px no-repeat,
+      linear-gradient(var(--entry-accent, #00f0ff), var(--entry-accent, #00f0ff)) top    right / 10px 10px no-repeat,
+      linear-gradient(var(--entry-accent, #00f0ff), var(--entry-accent, #00f0ff)) bottom left  / 10px 10px no-repeat,
+      linear-gradient(var(--entry-accent, #00f0ff), var(--entry-accent, #00f0ff)) bottom right / 10px 10px no-repeat,
+      rgba(5, 6, 15, 0.85);
+  }
+
+  /* Subtle frost glow on link hover (warmer than default) */
+  [data-category="secure"].prose-akq a.retro-link:hover {
+    text-shadow: 0 0 6px rgba(0, 240, 255, 0.75), 0 0 14px rgba(0, 240, 255, 0.35);
+  }
+
+  /* Faint ice border accent on code blocks (pre) */
+  [data-category="secure"].prose-akq pre {
+    box-shadow:
+      4px 4px 0 #05060f,
+      0 0 8px rgba(0, 240, 255, 0.4),
+      inset 0 0 24px rgba(0, 240, 255, 0.04);
+  }
+
+  /* Decorative ❄ separator before HR (rarely used but ready) */
+  [data-category="secure"].prose-akq hr {
+    border: none;
+    height: 1px;
+    margin: 2.5em 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(0, 240, 255, 0.55) 50%, transparent 100%);
+    position: relative;
+  }
+  [data-category="secure"].prose-akq hr::before {
+    content: "❄";
+    position: absolute;
+    top: -0.7em;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(0, 240, 255, 0.7);
+    background: #05060f;
+    padding: 0 0.6em;
+    font-size: 0.85em;
   }
 </style>
