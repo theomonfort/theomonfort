@@ -9,8 +9,14 @@ export default function BootSequence() {
   useEffect(() => {
     const booted = sessionStorage.getItem(STORAGE_KEY) === '1';
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (booted || reduce) {
+    // Only show the boot animation when the user lands on the home page directly.
+    // Deep links (playbook, links, philosophy, etc.) skip straight to the content.
+    const path = window.location.pathname.replace(/\/+$/, '');
+    const base = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '');
+    const isHome = path === base || path === '' || path === '/';
+    if (booted || reduce || !isHome) {
       setPhase('done');
+      if (!isHome) sessionStorage.setItem(STORAGE_KEY, '1');
       return;
     }
     setPhase('power');

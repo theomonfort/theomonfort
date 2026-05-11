@@ -1,8 +1,8 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-const glossary = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/glossary' }),
+const playbook = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/playbook' }),
   schema: z.object({
     title: z.string(),
     titleEn: z.string(),
@@ -75,4 +75,4 @@ const links = defineCollection({
   }),
 });
 
-export const collections = { glossary, philosophy, equipment, links };
+export const collections = { playbook, philosophy, equipment, links };

@@ -3,9 +3,9 @@ import Layout from '../../components/layout/Layout.astro';
 import { getCollection } from 'astro:content';
 import MenuArrow from '../../components/retro/MenuArrow.astro';
 import { accentClasses } from '../../lib/theme';
-import { categories } from '../../lib/glossary-categories';
+import { categories } from '../../lib/playbook-categories';
 
-const entries = (await getCollection('glossary')).sort(
+const entries = (await getCollection('playbook')).sort(
   (a, b) => a.data.order - b.data.order
 );
 

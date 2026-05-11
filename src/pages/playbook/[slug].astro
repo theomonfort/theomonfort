@@ -3,10 +3,10 @@ import Layout from '../../components/layout/Layout.astro';
 import { getCollection, render } from 'astro:content';
 import MenuArrow from '../../components/retro/MenuArrow.astro';
 import { accentColorValues } from '../../lib/theme';
-import { categories } from '../../lib/glossary-categories';
+import { categories } from '../../lib/playbook-categories';
 
 export async function getStaticPaths() {
-  const entries = await getCollection('glossary');
+  const entries = await getCollection('playbook');
   return entries.map((entry) => ({
     params: { slug: entry.id },
     props: { entry },
@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 
-const all = (await getCollection('glossary')).sort((a, b) => a.data.order - b.data.order);
+const all = (await getCollection('playbook')).sort((a, b) => a.data.order - b.data.order);
 const idx = all.findIndex((e) => e.id === entry.id);
 const prev = idx > 0 ? all[idx - 1] : null;
 const next = idx < all.length - 1 ? all[idx + 1] : null;
@@ -67,7 +67,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     }
   </script>
   <section
-    class="max-w-5xl mx-auto px-4 py-12 glossary-detail"
+    class="max-w-5xl mx-auto px-4 py-12 playbook-detail"
     data-prev={prev ? `/theomonfort/playbook/${prev.id}` : ''}
     data-next={next ? `/theomonfort/playbook/${next.id}` : ''}
   >
@@ -219,7 +219,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   let restoreFns: Array<() => void> = [];
 
   function buildSlides(): Slide[] {
-    const section = document.querySelector<HTMLElement>('.glossary-detail');
+    const section = document.querySelector<HTMLElement>('.playbook-detail');
     if (!section) return [];
     const header = section.querySelector<HTMLElement>(':scope > header');
     const article = section.querySelector<HTMLElement>(':scope > article.prose-akq');
@@ -274,15 +274,15 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     }
     const tag = document.querySelector<HTMLElement>('.slide-title-tag');
     if (tag) {
-      const titleEl = document.querySelector<HTMLElement>('.glossary-detail header h1');
+      const titleEl = document.querySelector<HTMLElement>('.playbook-detail header h1');
       const titleHtml = titleEl?.innerHTML ?? '';
       tag.innerHTML = current === 0 ? '' : `<span class="tag-main">${titleHtml}</span>`;
       tag.classList.toggle('visible', current > 0);
     }
-    // Update active item in left TOC (now glossary-entry-based, handled by syncToc)
+    // Update active item in left TOC (now playbook-entry-based, handled by syncToc)
   }
 
-  // ── TOC across glossary entries ──────────────────────────────
+  // ── TOC across playbook entries ──────────────────────────────
   function syncToc() {
     const toc = document.querySelector<HTMLElement>('.present-toc');
     if (!toc) return;
@@ -334,7 +334,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 
   // ── Presentation mode toggle ───────────────────────────────────
   function setPresent(on: boolean) {
-    if (on && !document.querySelector('.glossary-detail')) return;
+    if (on && !document.querySelector('.playbook-detail')) return;
     const wasOn = document.body.classList.contains('present-mode');
     document.body.classList.toggle('present-mode', on);
     document.documentElement.classList.toggle('present-mode', on);
@@ -378,7 +378,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   function onKey(e: KeyboardEvent) {
     const t = e.target as HTMLElement | null;
     if (t && t.matches('input,textarea,select')) return;
-    const section = document.querySelector<HTMLElement>('.glossary-detail');
+    const section = document.querySelector<HTMLElement>('.playbook-detail');
     if (!section) return;
     const present = document.body.classList.contains('present-mode');
 
@@ -469,7 +469,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   win.__akqGlossaryCleanup?.();
 
   function initGlossaryInteractions() {
-    if (!document.querySelector('.glossary-detail')) {
+    if (!document.querySelector('.playbook-detail')) {
       setPresent(false);
       return;
     }
@@ -1358,7 +1358,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   body.present-mode .present-hint { display: none; }
   body.present-mode .present-overlay-hint { display: flex; }
 
-  body.present-mode .glossary-detail {
+  body.present-mode .playbook-detail {
     max-width: none !important;
     width: 100vw !important;
     height: 100vh;
@@ -1371,17 +1371,17 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     overflow-y: auto;
     overscroll-behavior: contain;
   }
-  body.present-mode .glossary-detail > header {
+  body.present-mode .playbook-detail > header {
     max-width: 72rem;
     margin-left: auto;
     margin-right: auto;
     width: 100%;
   }
-  body.present-mode .glossary-detail > a:first-child,
-  body.present-mode .glossary-detail > nav:not(.present-toc),
-  body.present-mode .glossary-detail > aside:not(.akq-slide-active) { display: none !important; }
-  body.present-mode .glossary-detail > aside.akq-slide-active { display: block !important; }
-  body.present-mode .glossary-detail > aside.links-aside.akq-slide-active {
+  body.present-mode .playbook-detail > a:first-child,
+  body.present-mode .playbook-detail > nav:not(.present-toc),
+  body.present-mode .playbook-detail > aside:not(.akq-slide-active) { display: none !important; }
+  body.present-mode .playbook-detail > aside.akq-slide-active { display: block !important; }
+  body.present-mode .playbook-detail > aside.links-aside.akq-slide-active {
     max-width: 72rem;
     width: 100%;
     margin-left: auto !important;
@@ -1427,7 +1427,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       border-right: 1px solid rgba(255,46,136,0.2);
       z-index: 40;
     }
-    body.present-mode .glossary-detail {
+    body.present-mode .playbook-detail {
       padding-left: 260px;
     }
   }
@@ -1504,14 +1504,14 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     60%  { opacity: 1; filter: blur(0); }
     100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
   }
-  body.present-mode .glossary-detail {
+  body.present-mode .playbook-detail {
     transition: background 0.4s ease;
   }
 
   /* Boost typography in slide mode */
-  body.present-mode .glossary-detail header { margin-bottom: 1.5rem; }
-  body.present-mode .glossary-detail header h1 { font-size: 3rem !important; }
-  body.present-mode .glossary-detail header > p:nth-of-type(2) { font-size: 1.5rem !important; }
+  body.present-mode .playbook-detail header { margin-bottom: 1.5rem; }
+  body.present-mode .playbook-detail header h1 { font-size: 3rem !important; }
+  body.present-mode .playbook-detail header > p:nth-of-type(2) { font-size: 1.5rem !important; }
   body.present-mode .prose-akq { font-size: 1.5rem; line-height: 1.7; max-width: 72rem; width: 100%; margin: 0 auto; }
   body.present-mode .prose-akq h2 { font-size: 2.4rem; margin-top: 0.5em; margin-bottom: 0.7em; }
   body.present-mode .prose-akq h3 { font-size: 1.7rem; }
