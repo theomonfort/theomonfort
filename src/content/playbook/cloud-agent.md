@@ -10,6 +10,8 @@ related: ['third-party-agent', 'copilot-code-review', 'instructions', 'mcp']
 links:
   - label: Customize the agent environment
     url: https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/use-copilot-agents/cloud-agent/customize-the-agent-environment
+  - label: Extend Cloud Agent with MCP
+    url: https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/extend-cloud-agent-with-mcp
   - label: Validation tools — docs
     url: https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent/configuring-agent-settings#enabling-or-disabling-built-in-code-quality-and-security-validation-tools
   - label: Claude & Codex on Cloud Agent (changelog)
@@ -79,6 +81,30 @@ jobs:
 - 📦 **Git LFS** の有効化
 - 🔑 **環境変数** の設定
 - 🔥 エージェント **ファイアウォール** の無効化・カスタマイズ
+
+## MCP サーバーで外部ツールを追加
+
+Cloud Agent には **専用の MCP サーバー設定** がある。ローカルの MCP 設定とは別管理で、ブラウザ上の `Settings → Copilot → Coding agent → MCP servers` から JSON を貼るだけ。設定したサーバーは、その Org / アカウントで起動するすべての Cloud Agent セッションに自動で接続される。
+
+**例：Context7 を MCP サーバーとして追加**
+
+```json
+{
+  "mcpServers": {
+    "context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp",
+      "tools": ["*"]
+    }
+  }
+}
+```
+
+- 🌐 **`type: "http"`** — リモート MCP サーバーに HTTP / SSE で接続(stdio はサンドボックス制約上ローカル子プロセスで起動するもののみ)
+- 🛠️ **`tools: ["*"]`** — そのサーバーが公開する全ツールを許可。特定ツールだけを使いたい場合はホワイトリスト指定可
+- 🔐 認証が必要なサーバーは `headers` で API トークンを渡す(GitHub Actions Secrets を `${{ secrets.* }}` で参照)
+
+> 💡 詳細は <a href="https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/extend-cloud-agent-with-mcp" target="_blank" rel="noopener noreferrer" class="retro-link">Extend Cloud Agent with MCP</a> を参照。
 
 ## 検証ツール（デフォルト ON）
 
