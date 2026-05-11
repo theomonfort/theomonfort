@@ -88,7 +88,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       <p class="font-pixel-jp text-sm md:text-base text-phosphor/50 mb-3">{entry.data.title}</p>
     </header>
 
-    <article class="prose-akq" style={`--entry-accent:${accent}`}>
+    <article class="prose-akq" data-category={entry.data.category} style={`--entry-accent:${accent}`}>
       <Content />
     </article>
 
@@ -610,6 +610,14 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
   .prose-akq blockquote p { margin: 0; }
   .prose-akq blockquote strong { color: #ffb000; }
+
+  /* TEST & SECURE category → cyan note style instead of amber */
+  [data-category="secure"].prose-akq blockquote {
+    border-left-color: #00f0ff;
+    background: rgba(0, 240, 255, 0.07);
+    box-shadow: 4px 4px 0 rgba(0, 240, 255, 0.18);
+  }
+  [data-category="secure"].prose-akq blockquote strong { color: #00f0ff; }
   .prose-akq .hero-quote {
     position: relative;
     margin: 1.8em 0;
@@ -654,6 +662,10 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
   .prose-akq .hero-quote.hero-quote-red::before {
     background-image: url('/octocat-red.png');
+  }
+  /* TEST & SECURE category → full-body blue octocat by default (overridable per-entry) */
+  [data-category="secure"].prose-akq .hero-quote::before {
+    background-image: url('/octocat-monocle.png');
   }
   /* Speech bubble pointer (notch on the left side, in accent color) */
   .prose-akq .hero-quote::after {
