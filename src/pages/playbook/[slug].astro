@@ -652,6 +652,9 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .prose-akq .hero-quote.hero-quote-stars::before {
     background-image: url('/octocat-stars.png');
   }
+  .prose-akq .hero-quote.hero-quote-red::before {
+    background-image: url('/octocat-red.png');
+  }
   /* Speech bubble pointer (notch on the left side, in accent color) */
   .prose-akq .hero-quote::after {
     content: '';
@@ -1271,6 +1274,11 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     text-underline-offset: 4px;
   }
   .prose-akq a:hover { color: #ff2e88; }
+  /* retro-link inside prose: no underline by default, animated on hover */
+  .prose-akq a.retro-link,
+  .prose-akq a.retro-link:hover {
+    text-decoration: none !important;
+  }
 
   /* ── Presentation-mode toggle button (subtle hint) ── */
   .present-hint {

@@ -1,7 +1,7 @@
 ---
 title: Copilot Code Review
 titleEn: Copilot Code Review
-summary: PR の最初の目を Copilot が務める。文脈を読み、コメント・概要・修正提案を返す ── 人間レビューの前段ノイズ取りから自動化まで。
+summary: Copilot をレビュアーとして手動・自動でアサインできる機能。コードの意図を読み、コメント・概要・修正提案を返す ── 人間レビューの前段ノイズ取りから自動化まで。
 icon: 🔍
 color: green
 order: 9
@@ -28,10 +28,10 @@ links:
 
 <div class="hero-quote hero-quote-stars">
   <p>
-    <strong>Copilot Code Review</strong> は、PR の <strong>最初の目</strong> を Copilot が務める仕組み。
+    <strong>Copilot Code Review</strong> は、Copilot を <strong>レビュアーとして手動・自動でアサインできる</strong> 機能。
   </p>
   <p>
-    Reviewer に <code>Copilot</code> を割り当てると、コードの意図を読み、インラインコメント・PR 概要・修正提案を返してくれる。
+    アサインされた Copilot がコードの意図を読み、インラインコメント・PR 概要・修正提案を返してくれる。
   </p>
 </div>
 
@@ -39,7 +39,7 @@ links:
 
 ## Copilot Code Review の強み
 
-- 🧠 **文脈を理解** — コードの意図を把握し、具体的な修正案を提示
+- 🧠 **文脈を理解** — コードの意図を把握し、インラインコメント・**PR 概要**・修正提案を返す
 - ⚙️ **自動化** — Repo / Org / Enterprise レベルで自動実行
 - 📜 **カスタマイズ** — `copilot-instructions.md` でレビュー基準を定義
 - 🔧 **修正** — 指摘を 1 件ずつ、またはまとめて一括修正
@@ -96,7 +96,7 @@ links:
 | **Organization** | Org → **Settings** → *Repository* → **Rulesets** → *New branch ruleset* | リポジトリをパターンで一括対象（`*-feature` など） |
 | **Enterprise** | Enterprise → **Policies** → **Rulesets** | 全 Org に強制適用 — ガバナンスを一元管理 |
 
-> 📘 公式手順：[Configure automatic code review](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/request-a-code-review/configure-automatic-review) — スクリーンショット付き
+> 📘 公式手順：<a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/request-a-code-review/configure-automatic-review" target="_blank" rel="noopener noreferrer" class="retro-link">Configure automatic code review</a> — スクリーンショット付き
 
 ## カスタマイズ
 

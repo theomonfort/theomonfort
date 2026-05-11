@@ -16,7 +16,7 @@ links:
 
 ## 一言で
 
-<div class="hero-quote hero-quote-green">
+<div class="hero-quote">
   <p>
     <strong>Copilot Metrics</strong>
   </p>
