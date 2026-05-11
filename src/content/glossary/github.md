@@ -14,8 +14,6 @@ links:
     url: https://github.com/features/copilot
   - label: GitHub Enterprise
     url: https://github.com/enterprise
-  - label: GitHub Actions
-    url: https://github.com/features/actions
 ---
 
 ## 一言で
@@ -57,19 +55,19 @@ SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ
 kanban
   PLAN[📋 Plan]
     plan_projects[GitHub Projects]
-    plan_issues[Issues]
-    plan_agent[Planning Agent]
-    plan_spaces[Spaces]
+    plan_issues[Issues/Discussions]
+    plan_agent[Plan mode]
+    plan_spaces[Skills/Instructions ...]
   CODE[💻 Code]
-    code_agent_mode[Agent Mode]
+    code_agent_mode[Copilot Chat]
     code_cloud_agent[Cloud Agent]
-    code_loops[Loops]
+    code_loops[CLI]
     code_codespaces[Codespaces]
   REVIEW[✅ Review]
-    review_cloud_agent[Cloud Agent]
+    review_cloud_agent[Pull Requests]
     review_code_review[Code Review]
     review_playwright[Playwright]
-    review_pr[Pull Requests]
+    review_pr[Rubber Duck]
   TEST[🔒 Test & Secure]
     test_actions[Actions]
     test_autofix[Autofix]
@@ -77,9 +75,9 @@ kanban
     test_workflows[Agentic Workflows]
   OPS[🚀 Operate]
     ops_metrics[Metrics]
-    ops_models[Models]
+    ops_models[Copilot Memory]
     ops_workflows[Agentic Workflows]
-    ops_sre[SRE Agent]
+    ops_sre[Copilot Metrics]
 ```
 
 ## 業界からの評価
@@ -88,6 +86,8 @@ kanban
 
 - **IDC**：AI コーディングとソフトウェアエンジニアリングテクノロジーで **リーダー** に選出
 - **Gartner**：マジック・クアドラント、**AI コーディングアシスタント** で **リーダー** に選出
+
+<div class="quadrant-small">
 
 ```mermaid
 %%{init: {"theme":"base","themeVariables":{"quadrant1Fill":"#0a1a2e","quadrant2Fill":"#1a0e1f","quadrant3Fill":"#0f0a1f","quadrant4Fill":"#0a1f1a","quadrant1TextFill":"#00f0ff","quadrant2TextFill":"#ff7ab2","quadrant3TextFill":"#c9a5ff","quadrant4TextFill":"#9bbc0f","quadrantTitleFill":"#e8f4ff","quadrantPointFill":"#ffb000","quadrantPointTextFill":"#e8f4ff","quadrantXAxisTextFill":"#e8f4ff","quadrantYAxisTextFill":"#e8f4ff","quadrantInternalBorderStrokeFill":"#2a3050","quadrantExternalBorderStrokeFill":"#00f0ff"}}}%%
@@ -114,3 +114,5 @@ quadrantChart
     IBM: [0.37, 0.40]
     JetBrains: [0.32, 0.24]
 ```
+
+</div>
