@@ -8,12 +8,33 @@ order: 1
 category: introduction
 related: ['copilot-chat', 'cloud-agent']
 links:
-  - label: About GitHub
+  - group: 🔗 公式リソース
+    label: About GitHub
     url: https://github.com/about
-  - label: GitHub Copilot
+  - group: 🔗 公式リソース
+    label: GitHub Copilot
     url: https://github.com/features/copilot
-  - label: GitHub Enterprise
+  - group: 🔗 公式リソース
+    label: GitHub Enterprise
     url: https://github.com/enterprise
+  - group: 🔗 公式リソース
+    label: GitHub Well-Architected
+    url: https://wellarchitected.github.com
+  - group: 📰 ニュース・発信
+    label: GitHub Blog
+    url: https://github.blog
+  - group: 📰 ニュース・発信
+    label: GitHub Changelog
+    url: https://github.blog/changelog
+  - group: 📰 ニュース・発信
+    label: GitHub YouTube
+    url: https://www.youtube.com/@GitHub
+  - group: 🇯🇵 日本コミュニティ
+    label: GitHub Japan YouTube
+    url: https://www.youtube.com/@GitHubJapan
+  - group: 🇯🇵 日本コミュニティ
+    label: GitHub Japan X (Twitter)
+    url: https://x.com/GitHubJapan
 ---
 
 ## 一言で
