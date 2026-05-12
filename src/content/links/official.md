@@ -3,6 +3,8 @@ slug: official
 order: 1
 icon: "📡"
 title: "公式チャンネル"
+subtitle: "発表とリリース情報"
+color: cyan
 items:
   - label: "GitHub Blog"
     url: "https://github.blog/"
@@ -10,10 +12,16 @@ items:
   - label: "GitHub Changelog"
     url: "https://github.blog/changelog/"
     desc: "機能リリースの最速ソース"
-  - label: "Claude and Codex for Copilot users"
-    url: "https://github.blog/changelog/2026-02-26-claude-and-codex-now-available-for-copilot-business-pro-users/"
-    desc: "Claude / Codex coding agents の Copilot サブスク提供に関する公式 changelog"
   - label: "GitHub YouTube"
     url: "https://www.youtube.com/@GitHub"
     desc: "GitHub Universe・チュートリアル"
+  - label: "GitHub Universe"
+    url: "https://githubuniverse.com/"
+    desc: "GitHub の年次グローバルカンファレンス"
+  - label: "GitHub on X"
+    url: "https://x.com/github"
+    desc: "速報・コミュニティの会話"
+  - label: "GitHub Status"
+    url: "https://www.githubstatus.com/"
+    desc: "全サービスのリアルタイム稼働状況"
 ---

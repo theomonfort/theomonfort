@@ -65,6 +65,8 @@ const links = defineCollection({
     order: z.number().default(0),
     icon: z.string(),
     title: z.string(),
+    subtitle: z.string().default(''),
+    color: z.enum(['magenta', 'cyan', 'amber', 'green']).default('cyan'),
     items: z.array(
       z.object({
         label: z.string(),
