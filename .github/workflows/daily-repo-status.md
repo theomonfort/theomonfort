@@ -40,10 +40,11 @@ safe-outputs:
     close-older-issues: true
 ---
 
-# Daily Repo Chronicle — `${{ github.repository }}`
+# Daily Repo Chronicle
 
-Create a single, **upbeat** daily status issue summarizing what happened in this
-repository over the **last 24 hours**. The repo is `theomonfort/theomonfort` — a
+Create a single, **upbeat** daily status issue summarizing what happened in
+`${{ github.repository }}` over the **last 24 hours**. The repo is
+`theomonfort/theomonfort` — a
 Japanese-language Astro site about AI-driven development with GitHub Copilot, so
 keep the tone friendly and a little playful 🎮 (RPG vibes welcome).
 
