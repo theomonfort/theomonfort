@@ -38,7 +38,7 @@ links:
 
 <div class="hero-quote">
   <p>
-    <strong>GitHub Advanced Security (GHAS)</strong> は、GitHub のセキュリティ機能をまとめた有料アドオン。Code scanning・Secret scanning・Dependabot の高度機能を private repo でも有効化するためのライセンスだった。
+    <strong>GitHub Advanced Security (GHAS)</strong> は、GitHub のセキュリティ機能をまとめた有料アドオン。Code scanning と Secret scanning を private repo でも有効化するためのライセンスだった。
   </p>
   <p>
     <strong>2025 年 4 月</strong> に <strong>GitHub Secret Protection</strong> と <strong>GitHub Code Security</strong> の 2 つに分割され、欲しい機能だけを選んで購入できるようになった。
@@ -46,15 +46,14 @@ links:
 </div>
 
 > 🌐 Public repo はすべて引き続き無料。GHAS / Secret Protection / Code Security のライセンスが必要になるのは **private / internal repo** で機能を有効化したい場合だけ。
+> 🤖 **Dependabot 本体** (alerts / security updates / version updates / dependency graph) は <strong>どのプランでも完全無料</strong>・GHAS 不要。詳細は <a class="retro-link" href="/theomonfort/playbook/dependabot">Dependabot ↗</a>。
 
 ## 何が入っている?
 
 | 製品 | 主な機能 | 詳細エントリー |
 | --- | --- | --- |
 | 🔑 **Secret Protection** | Secret scanning · Push protection (org/repo lvl) · Custom patterns · AI detection · Validity checks | <a class="retro-link" href="/theomonfort/playbook/secret-scanning">Secret Scanning ↗</a> |
-| 🔍 **Code Security** | Code scanning (CodeQL) · Copilot Autofix · Security campaigns · Dependabot の高度機能 · Dependency review · Security overview | <a class="retro-link" href="/theomonfort/playbook/code-scanning">Code Scanning ↗</a> · <a class="retro-link" href="/theomonfort/playbook/dependabot">Dependabot ↗</a> |
-
-> 📦 **Dependabot 本体** (alerts / security updates / version updates) は GHAS 不要・完全無料。Code Security に含まれるのは「より細かい制御や Security overview などの高度機能」だけ。
+| 🔍 **Code Security** | Code scanning (CodeQL) · Copilot Autofix · Security campaigns · Dependency review (PR enforcement) · Security overview | <a class="retro-link" href="/theomonfort/playbook/code-scanning">Code Scanning ↗</a> |
 
 ## 料金 (2025 年 4 月以降)
 
