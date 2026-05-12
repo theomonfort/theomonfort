@@ -81,7 +81,7 @@ links:
 
 ## 購入前の棚卸し — Risk Assessments
 
-<div class="hero-quote">
+<div class="hero-quote hero-quote-plain">
   <p>
     GitHub には <strong>ライセンス不要・完全無料</strong> で組織のセキュリティ姿勢を可視化できる 2 つの <strong>Risk Assessment</strong> が用意されている。
   </p>

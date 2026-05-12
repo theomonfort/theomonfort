@@ -663,10 +663,16 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .prose-akq .hero-quote.hero-quote-red::before {
     background-image: url('/octocat-red.png');
   }
+  /* Plain hero-quote — no mascot, no speech bubble notch, normal width */
+  .prose-akq .hero-quote.hero-quote-plain { margin-left: 0; }
+  .prose-akq .hero-quote.hero-quote-plain::before,
+  .prose-akq .hero-quote.hero-quote-plain::after { content: none; display: none; }
+  body.present-mode .prose-akq .hero-quote.hero-quote-plain { margin-left: 0; }
   /* TEST & SECURE category → full-body blue octocat by default (overridable per-entry) */
   [data-category="secure"].prose-akq .hero-quote::before {
     background-image: url('/octocat-monocle.png');
   }
+  [data-category="secure"].prose-akq .hero-quote.hero-quote-plain::before { background-image: none; }
   /* Speech bubble pointer (notch on the left side, in accent color) */
   .prose-akq .hero-quote::after {
     content: '';
