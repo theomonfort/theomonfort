@@ -23,6 +23,12 @@ links:
   - group: 📖 公式ドキュメント
     label: SARIF support for code scanning
     url: https://docs.github.com/en/code-security/code-scanning/integrating-with-code-scanning/sarif-support-for-code-scanning
+  - group: 🆓 無料の棚卸し (Risk Assessment)
+    label: Code security risk assessment (Docs)
+    url: https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment
+  - group: 🆓 無料の棚卸し (Risk Assessment)
+    label: Code Security Risk Assessment GA (2026/04)
+    url: https://github.blog/changelog/2026-04-08-code-security-risk-assessment-available-for-organizations/
 ---
 
 ## 一言で
@@ -151,3 +157,28 @@ Semgrep、ESLint security、Snyk などは **SARIF** 形式で結果をアップ
 - <a class="retro-link" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">Introducing GitHub Secret Protection & Code Security(2025 Mar)↗</a>
 - <a class="retro-link" href="https://docs.github.com/en/code-security/code-scanning/integrating-with-code-scanning/sarif-support-for-code-scanning" target="_blank" rel="noopener noreferrer">SARIF support for code scanning ↗</a>
 - <a class="retro-link" href="https://docs.github.com/en/code-security/securing-your-organization/introduction-to-securing-your-organization/configuring-global-security-settings-for-your-organization" target="_blank" rel="noopener noreferrer">Org default security settings ↗</a>
+
+## Code Security Risk Assessment(無料の棚卸しスキャン)
+
+<div class="hero-quote">
+  <p>
+    <strong>Code Security Risk Assessment</strong> は、Org の中で <strong>最もアクティブな最大 20 リポジトリ</strong> を 1 クリックで CodeQL スキャンし、「どこにどんなコード脆弱性が眠っているか」を可視化する機能(2026 年 4 月 GA)。
+  </p>
+  <p>
+    <strong>GHAS / Code Security 不要・完全無料</strong>。Team・Enterprise Cloud の全 Org が使え、ここで使う Actions 分も Actions の無料枠を消費しない。
+  </p>
+</div>
+
+- 🔎 対象 — Org の中で **最近のコミットが活発な repo を最大 20 件** までセレクト(毎回選び直し可)
+- 📊 出力 — 脆弱性を **重大度 (severity) ・ 言語 ・ ルール種別** ごとに集計したレポート。**Copilot Autofix で自動修正可能な件数** も表示される
+- 🕒 頻度 — **90 日に 1 回** 再実行できる(point-in-time の棚卸し)
+- 🛂 権限 — Organization owner / security manager のみ実行可能
+- 🚀 動かし方 — `Org → Security → Assessments → Run code security risk assessment`
+- 🆓 ライセンス不要、Actions 分無料 — Code Security 購入前の判断材料に最適
+
+> 📊 Secret Risk Assessment(<a class="retro-link" href="/theomonfort/playbook/secret-scanning">Secret Scanning ↗</a> 参照)とセットで「うちの組織のセキュリティ姿勢」を 1 日で可視化できる。結果を見て **Code Security 導入の是非** を判断するのが定石。
+
+📘 詳細:
+- <a class="retro-link" href="https://github.blog/changelog/2026-04-08-code-security-risk-assessment-available-for-organizations/" target="_blank" rel="noopener noreferrer">Code Security Risk Assessment GA(2026/04)↗</a>
+- <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment" target="_blank" rel="noopener noreferrer">Code security risk assessment(GitHub Docs)↗</a>
+- <a class="retro-link" href="https://github.blog/security/application-security/how-exposed-is-your-code-find-out-in-minutes-for-free/" target="_blank" rel="noopener noreferrer">How exposed is your code? Find out in minutes — for free ↗</a>

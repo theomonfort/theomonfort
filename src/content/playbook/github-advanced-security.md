@@ -23,6 +23,15 @@ links:
   - group: 💰 課金の仕組み
     label: About billing for GitHub Advanced Security
     url: https://docs.github.com/en/billing/managing-billing-for-your-products/about-billing-for-github-advanced-security
+  - group: 🆓 無料の棚卸し (Risk Assessment)
+    label: Secret Risk Assessment (Docs)
+    url: https://docs.github.com/en/code-security/secret-scanning/enabling-secret-scanning-features/enabling-secret-risk-assessment-for-your-organization
+  - group: 🆓 無料の棚卸し (Risk Assessment)
+    label: Code Security Risk Assessment (Docs)
+    url: https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment
+  - group: 🆓 無料の棚卸し (Risk Assessment)
+    label: Code Security Risk Assessment GA (2026/04)
+    url: https://github.blog/changelog/2026-04-08-code-security-risk-assessment-available-for-organizations/
 ---
 
 ## 一言で
@@ -69,9 +78,38 @@ links:
 3. 🔑 **シークレット漏洩を組織レベルで強制したい** → **Secret Protection** を購入
 4. 🔍 **コード脆弱性 (CodeQL) や Autofix まで欲しい** → **Code Security** を追加
 
-> 🎯 まずは Secret Risk Assessment で「うちの組織にどれだけ secret が眠っているか」を可視化してから、Secret Protection の費用対効果を判断するのが定石。詳細は <a class="retro-link" href="/theomonfort/playbook/secret-scanning">Secret Scanning ↗</a> を参照。
+> 🎯 まずは Risk Assessment (下記) で「うちの組織にどれだけ secret や脆弱性が眠っているか」を可視化してから、Secret Protection / Code Security の費用対効果を判断するのが定石。
 
-📘 詳細:
+## 購入前の棚卸し — Risk Assessments
+
+<div class="hero-quote">
+  <p>
+    GitHub には <strong>ライセンス不要・完全無料</strong> で組織のセキュリティ姿勢を可視化できる 2 つの <strong>Risk Assessment</strong> が用意されている。
+  </p>
+  <p>
+    どちらも <strong>Org → Security → Assessments</strong> から 1 クリックで実行でき、結果を見てから Secret Protection / Code Security の購入を判断できる。
+  </p>
+</div>
+
+| 棚卸し | 何を見る? | 対象 | 頻度 | 詳細 |
+| --- | --- | --- | :---: | --- |
+| 🔑 **Secret Risk Assessment** | Org 内のリポに眠る secret の種類・件数 | **すべての repo**(public / private / internal / archived) | 1 回限り | <a class="retro-link" href="/theomonfort/playbook/secret-scanning">Secret Scanning ↗</a> |
+| 🔍 **Code Security Risk Assessment** | コード脆弱性を CodeQL で検出 (severity / 言語 / Autofix 可能件数) | **最もアクティブな最大 20 repo** | 90 日に 1 回 | <a class="retro-link" href="/theomonfort/playbook/code-scanning">Code Scanning ↗</a> |
+
+- 🆓 **完全無料** — どちらも GHAS / Secret Protection / Code Security のライセンス不要
+- 🛂 **権限** — Organization owner または security manager のみ実行可能
+- 📊 **出力** — 集計レポート (個別 secret の値やコードはサーバーに保存されない)
+- 🏷️ **対象プラン** — GitHub Team および GitHub Enterprise Cloud (Server は 3.22 で対応予定)
+- ⚙️ **Actions 分** — Code Security Risk Assessment は専用の Actions 実行枠を消費しない
+
+> 💡 「予算稟議のために数字が欲しい」「導入前に効果を見たい」というケースで真っ先に使う。両方を同じ日に走らせれば 1 日で組織全体のセキュリティ姿勢が可視化できる。
+
+📘 Risk Assessment 関連:
+- <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/enabling-secret-scanning-features/enabling-secret-risk-assessment-for-your-organization" target="_blank" rel="noopener noreferrer">Enabling Secret Risk Assessment ↗</a>
+- <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment" target="_blank" rel="noopener noreferrer">Code security risk assessment(GitHub Docs)↗</a>
+- <a class="retro-link" href="https://github.blog/changelog/2026-04-08-code-security-risk-assessment-available-for-organizations/" target="_blank" rel="noopener noreferrer">Code Security Risk Assessment GA(2026/04)↗</a>
+
+📘 GHAS 全般:
 - <a class="retro-link" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">Introducing GitHub Secret Protection & Code Security (GitHub Blog) ↗</a>
 - <a class="retro-link" href="https://docs.github.com/en/billing/managing-billing-for-your-products/about-billing-for-github-advanced-security" target="_blank" rel="noopener noreferrer">About billing for GitHub Advanced Security ↗</a>
 - <a class="retro-link" href="https://github.com/security/advanced-security" target="_blank" rel="noopener noreferrer">GitHub Advanced Security 製品ページ ↗</a>
