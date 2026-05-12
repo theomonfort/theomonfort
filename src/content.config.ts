@@ -58,23 +58,4 @@ const equipment = defineCollection({
   }),
 });
 
-const links = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/links' }),
-  schema: z.object({
-    slug: z.string(),
-    order: z.number().default(0),
-    icon: z.string(),
-    title: z.string(),
-    subtitle: z.string().default(''),
-    color: z.enum(['magenta', 'cyan', 'amber', 'green']).default('cyan'),
-    items: z.array(
-      z.object({
-        label: z.string(),
-        url: z.string().url(),
-        desc: z.string(),
-      }),
-    ),
-  }),
-});
-
-export const collections = { playbook, philosophy, equipment, links };
+export const collections = { playbook, philosophy, equipment };

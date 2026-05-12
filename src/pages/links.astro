@@ -1,100 +1,142 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../components/layout/Layout.astro';
+import { categories } from '../lib/playbook-categories';
 
-const groups = (await getCollection('links')).sort(
-  (a, b) => a.data.order - b.data.order,
-);
+const allEntries = (await getCollection('playbook'))
+  .filter((e) => e.data.links.length > 0)
+  .sort((a, b) => a.data.order - b.data.order);
 
 const colorMap: Record<string, { hex: string; tw: string; bg: string }> = {
-  magenta: { hex: '#ff2e88', tw: 'text-neon-magenta',  bg: 'rgba(255,46,136,0.10)' },
-  cyan:    { hex: '#00f0ff', tw: 'text-neon-cyan',     bg: 'rgba(0,240,255,0.10)' },
-  amber:   { hex: '#ffb000', tw: 'text-crt-amber',     bg: 'rgba(255,176,0,0.10)' },
-  green:   { hex: '#9bbc0f', tw: 'text-gb-green',      bg: 'rgba(155,188,15,0.10)' },
+  magenta: { hex: '#ff2e88', tw: 'text-neon-magenta', bg: 'rgba(255,46,136,0.10)' },
+  cyan:    { hex: '#00f0ff', tw: 'text-neon-cyan',    bg: 'rgba(0,240,255,0.10)' },
+  amber:   { hex: '#ffb000', tw: 'text-crt-amber',    bg: 'rgba(255,176,0,0.10)' },
+  green:   { hex: '#9bbc0f', tw: 'text-gb-green',     bg: 'rgba(155,188,15,0.10)' },
 };
+
+type CatId = (typeof categories)[number]['id'];
+const grouped: Record<CatId, typeof allEntries> = {
+  introduction: [], plan: [], develop: [], review: [], secure: [], operate: [],
+};
+for (const e of allEntries) grouped[e.data.category as CatId].push(e);
+
+const totalLinks = allEntries.reduce((n, e) => n + e.data.links.length, 0);
+
+function groupLinks(links: { label: string; url: string; group?: string }[]) {
+  const buckets: { name: string; items: typeof links }[] = [];
+  for (const l of links) {
+    const g = l.group ?? '';
+    let b = buckets.find((x) => x.name === g);
+    if (!b) { b = { name: g, items: [] }; buckets.push(b); }
+    b.items.push(l);
+  }
+  return buckets;
+}
+
+const firstSlug = allEntries[0]?.id ?? '';
 ---
 
 <Layout title="リンクの泉 — AI 開発 QUEST">
-  <section class="max-w-5xl mx-auto px-4 py-12">
-    <header class="mb-10">
+  <section class="max-w-6xl mx-auto px-4 py-12">
+    <header class="mb-8">
       <p class="font-pixel text-[10px] text-crt-amber tracking-[0.3em] mb-2">▮ CHAPTER 4 ▮</p>
       <h1 class="font-pixel text-2xl md:text-4xl text-neon-magenta mb-3">リンクの泉</h1>
       <p class="font-pixel-jp text-lg text-neon-cyan">— RESOURCES —</p>
       <p class="font-body text-sm text-phosphor/80 mt-4">
-        旅の途中で立ち寄れる信頼できる泉たち。<span class="text-crt-amber">タイル</span>を選んで中身を見よう。
+        プレイブック全エントリーの公式リンクをまとめて素早くアクセス。
+        <span class="text-crt-amber">{allEntries.length}</span> エントリー ／
+        <span class="text-crt-amber">{totalLinks}</span> リンク。
       </p>
     </header>
 
-    <div id="tile-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-10">
-      {groups.map((g, i) => {
-        const c = colorMap[g.data.color];
+    <div class="space-y-6 mb-10">
+      {categories.map((cat) => {
+        const entries = grouped[cat.id];
+        if (entries.length === 0) return null;
+        const c = colorMap[cat.color];
         return (
-          <button
-            type="button"
-            class={`link-tile group relative text-left p-4 border-2 bg-shadow-ink/70 transition-all ${c.tw}`}
-            data-target={g.data.slug}
-            style={`border-color: ${c.hex}`}
-            aria-pressed={i === 0 ? 'true' : 'false'}
-          >
-            <span class="absolute top-1 right-2 font-pixel text-[8px] tracking-widest opacity-50">
-              {String(i + 1).padStart(2, '0')}
-            </span>
-            <div class="flex items-start gap-3">
-              <span class="text-3xl leading-none mt-1">{g.data.icon}</span>
-              <div class="flex-1 min-w-0">
-                <h2 class="font-pixel-jp text-base md:text-lg leading-tight mb-1">{g.data.title}</h2>
-                <p class="font-body text-[11px] md:text-xs text-phosphor/70 leading-snug truncate-2">
-                  {g.data.subtitle}
-                </p>
-              </div>
+          <div class="cat-block">
+            <div class="flex items-baseline gap-3 mb-3">
+              <span class="text-xl leading-none">{cat.icon}</span>
+              <h2 class={`font-pixel text-[11px] tracking-[0.25em] ${c.tw}`}>
+                {cat.labelEn.toUpperCase()}
+              </h2>
+              <span class="font-pixel-jp text-sm text-phosphor/60">／ {cat.labelJa}</span>
+              <span class="font-pixel text-[9px] text-phosphor/40 ml-auto">{entries.length} ENTRIES</span>
             </div>
-            <div class="mt-3 flex items-center justify-between font-pixel text-[9px]">
-              <span class="opacity-70">{g.data.items.length} LINKS</span>
-              <span class="select-arrow opacity-0 transition-opacity">▶</span>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+              {entries.map((e) => (
+                <button
+                  type="button"
+                  class={`link-tile group relative text-left p-3 border-2 bg-shadow-ink/70 transition-all ${c.tw}`}
+                  data-target={e.id}
+                  style={`border-color:${c.hex}`}
+                  aria-pressed={e.id === firstSlug ? 'true' : 'false'}
+                >
+                  <div class="flex items-start gap-2">
+                    <span class="text-xl leading-none mt-0.5 shrink-0">{e.data.icon.startsWith('/') ? '▶' : e.data.icon}</span>
+                    <div class="flex-1 min-w-0">
+                      <h3 class="font-pixel-jp text-sm leading-tight text-phosphor break-words">{e.data.title}</h3>
+                      <p class="font-pixel text-[8px] mt-1 opacity-70">{e.data.links.length} LINKS</p>
+                    </div>
+                  </div>
+                  <span class="select-arrow absolute bottom-1 right-2 font-pixel text-[9px] opacity-0 transition-opacity">▶</span>
+                  <span class="tile-scan pointer-events-none absolute inset-0" aria-hidden="true"></span>
+                </button>
+              ))}
             </div>
-            <span class="tile-scan pointer-events-none absolute inset-0" aria-hidden="true"></span>
-          </button>
+          </div>
         );
       })}
     </div>
 
-    <div id="link-panel" class="space-y-4">
-      {groups.map((g, i) => {
-        const c = colorMap[g.data.color];
+    <div id="link-panel" class="mt-2">
+      {allEntries.map((e) => {
+        const cat = categories.find((c) => c.id === e.data.category)!;
+        const c = colorMap[cat.color];
+        const buckets = groupLinks(e.data.links);
         return (
           <article
-            class={`link-panel-section ${i === 0 ? '' : 'hidden'}`}
-            data-section={g.data.slug}
+            class={`link-panel-section ${e.id === firstSlug ? '' : 'hidden'}`}
+            data-section={e.id}
             style={`--accent:${c.hex}; --accent-bg:${c.bg};`}
           >
             <header class="flex items-baseline gap-3 mb-4 pb-2 border-b-2" style={`border-color:${c.hex}`}>
-              <span class="text-2xl leading-none">{g.data.icon}</span>
-              <h2 class={`font-pixel-jp text-xl md:text-2xl ${c.tw}`}>{g.data.title}</h2>
-              <span class="font-pixel text-[9px] text-phosphor/50 ml-auto">{g.data.items.length} LINKS</span>
+              <span class="text-2xl leading-none">{e.data.icon.startsWith('/') ? '▶' : e.data.icon}</span>
+              <h2 class={`font-pixel-jp text-xl md:text-2xl ${c.tw}`}>{e.data.title}</h2>
+              <span class="font-pixel text-[9px] text-phosphor/50 ml-auto">{cat.labelEn.toUpperCase()}</span>
+              <a
+                href={`/theomonfort/playbook/${e.id}`}
+                class={`font-pixel text-[9px] px-2 py-1 border ${c.tw} hover:bg-[color:var(--accent-bg)] transition-colors`}
+              >
+                FULL ENTRY ↗
+              </a>
             </header>
-            <ul class="grid sm:grid-cols-2 gap-3">
-              {g.data.items.map((it) => (
-                <li>
-                  <a
-                    href={it.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="link-item block h-full p-3 border-2 border-phosphor/15 bg-shadow-ink/60 hover:bg-[color:var(--accent-bg)] hover:border-[color:var(--accent)] transition-colors group"
-                  >
-                    <div class="flex items-start gap-2">
-                      <span class={`font-pixel text-[10px] mt-1 ${c.tw}`}>▶</span>
-                      <div class="flex-1 min-w-0">
+            {buckets.map((bucket) => (
+              <div class="mb-5">
+                {bucket.name && (
+                  <h3 class="font-pixel-jp text-sm text-phosphor/70 mb-2">{bucket.name}</h3>
+                )}
+                <ul class="grid sm:grid-cols-2 gap-2">
+                  {bucket.items.map((it) => (
+                    <li>
+                      <a
+                        href={it.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="link-item block h-full p-3 border-2 border-phosphor/15 bg-shadow-ink/60 hover:bg-[color:var(--accent-bg)] hover:border-[color:var(--accent)] transition-colors group"
+                      >
                         <div class="flex items-baseline gap-2">
-                          <span class="font-pixel-jp text-sm md:text-base text-phosphor break-words">{it.label}</span>
-                          <span class="font-mono text-[10px] text-phosphor/40 ml-auto shrink-0">↗</span>
+                          <span class={`font-pixel text-[10px] ${c.tw} shrink-0`}>▶</span>
+                          <span class="font-pixel-jp text-sm text-phosphor flex-1 break-words leading-snug">{it.label}</span>
+                          <span class="font-mono text-[10px] text-phosphor/40 shrink-0">↗</span>
                         </div>
-                        <p class="font-body text-xs text-phosphor/70 mt-1 leading-snug">{it.desc}</p>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-              ))}
-            </ul>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </article>
         );
       })}
@@ -110,11 +152,12 @@ const colorMap: Record<string, { hex: string; tw: string; bg: string }> = {
   .link-tile {
     box-shadow: 4px 4px 0 #05060f;
     cursor: pointer;
+    min-height: 78px;
   }
   .link-tile:hover,
   .link-tile:focus-visible {
     transform: translate(-1px, -1px);
-    box-shadow: 5px 5px 0 #05060f, 0 0 16px currentColor;
+    box-shadow: 5px 5px 0 #05060f, 0 0 14px currentColor;
     outline: none;
   }
   .link-tile:hover .select-arrow,
@@ -123,7 +166,7 @@ const colorMap: Record<string, { hex: string; tw: string; bg: string }> = {
   }
   .link-tile[aria-pressed='true'] {
     transform: translate(-1px, -1px);
-    box-shadow: 5px 5px 0 #05060f, 0 0 24px currentColor;
+    box-shadow: 5px 5px 0 #05060f, 0 0 22px currentColor;
   }
   .link-tile[aria-pressed='true']::before {
     content: '';
@@ -135,35 +178,28 @@ const colorMap: Record<string, { hex: string; tw: string; bg: string }> = {
   }
 
   .tile-scan {
-    background:
-      repeating-linear-gradient(
-        to bottom,
-        rgba(255,255,255,0.03) 0 1px,
-        transparent 1px 3px
-      );
-    opacity: 0.45;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.03) 0 1px,
+      transparent 1px 3px
+    );
+    opacity: 0.4;
     mix-blend-mode: overlay;
   }
-  .link-tile[aria-pressed='true'] .tile-scan { opacity: 0.7; }
+  .link-tile[aria-pressed='true'] .tile-scan { opacity: 0.65; }
 
-  .truncate-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  .link-panel-section {
+    animation: panel-fade 220ms ease-out;
+    padding: 1.25rem;
+    background: rgba(5, 6, 15, 0.55);
+    border: 2px solid var(--accent);
+    box-shadow: 4px 4px 0 #05060f, 0 0 18px var(--accent-bg);
   }
-
-  .link-panel-section { animation: panel-fade 220ms ease-out; }
   @keyframes panel-fade {
     from { opacity: 0; transform: translateY(6px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-
   .link-item:hover .font-pixel-jp { color: var(--accent); }
-
-  @media (max-width: 640px) {
-    .link-tile { padding: 0.75rem; }
-  }
 </style>
 
 <script is:inline>
@@ -178,12 +214,10 @@ const colorMap: Record<string, { hex: string; tw: string; bg: string }> = {
       sections.forEach((s) => {
         s.classList.toggle('hidden', s.dataset.section !== slug);
       });
-      if (window.matchMedia('(max-width: 768px)').matches) {
-        const active = document.querySelector(`.link-panel-section[data-section="${slug}"]`);
-        if (active) {
-          const top = active.getBoundingClientRect().top + window.scrollY - 16;
-          window.scrollTo({ top, behavior: 'smooth' });
-        }
+      const active = document.querySelector(`.link-panel-section[data-section="${slug}"]`);
+      if (active && window.matchMedia('(max-width: 768px)').matches) {
+        const top = active.getBoundingClientRect().top + window.scrollY - 16;
+        window.scrollTo({ top, behavior: 'smooth' });
       }
     };
 
