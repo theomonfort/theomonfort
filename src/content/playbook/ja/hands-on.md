@@ -10,10 +10,10 @@ related: ['github-copilot', 'codespaces', 'mcp']
 links:
   - group: 🎮 ワークショップ
     label: 2026 GitHub Copilot Workshop (リポジトリ)
-    url: https://github.com/theomonfort/2026-Github-Copilot-Workshop
+    url: https://github.com/theomonfort/Github-copilot-workshop
   - group: 🎮 ワークショップ
     label: ワークショップ Codelabs を開く
-    url: https://theomonfort.github.io/2026-Github-Copilot-Workshop/github-copilot-workshop
+    url: https://theomonfort.github.io/2026-Github-Copilot-Workshop/github-copilot-workshop/custom/handson/
   - group: 📖 関連リソース
     label: GitHub Codespaces
     url: https://github.com/features/codespaces
@@ -37,8 +37,8 @@ links:
 > 🚀 来週開催の特別ワークショップに向けて準備中。Codelabs 形式で 1 ステップずつ進められます。
 
 📘 リポジトリと Codelabs:
-- <a class="retro-link" href="https://github.com/theomonfort/2026-Github-Copilot-Workshop" target="_blank" rel="noopener noreferrer">theomonfort/2026-Github-Copilot-Workshop ↗</a>
-- <a class="retro-link" href="https://theomonfort.github.io/2026-Github-Copilot-Workshop/github-copilot-workshop" target="_blank" rel="noopener noreferrer">ワークショップ Codelabs を開く ↗</a>
+- <a class="retro-link" href="https://github.com/theomonfort/Github-copilot-workshop" target="_blank" rel="noopener noreferrer">theomonfort/Github-copilot-workshop ↗</a>
+- <a class="retro-link" href="https://theomonfort.github.io/2026-Github-Copilot-Workshop/github-copilot-workshop/custom/handson/" target="_blank" rel="noopener noreferrer">ワークショップ Codelabs を開く ↗</a>
 
 ## ワークショップで体験する流れ
 
@@ -78,9 +78,9 @@ flowchart LR
 
 最短ルート — ブラウザだけで完結:
 
-1. 🌐 リポジトリを開く: <a class="retro-link" href="https://github.com/theomonfort/2026-Github-Copilot-Workshop" target="_blank" rel="noopener noreferrer">theomonfort/2026-Github-Copilot-Workshop ↗</a>
+1. 🌐 リポジトリを開く: <a class="retro-link" href="https://github.com/theomonfort/Github-copilot-workshop" target="_blank" rel="noopener noreferrer">theomonfort/Github-copilot-workshop ↗</a>
 2. 🟢 緑の **Code** ボタン → **Codespaces** タブ → **Create codespace on main**
-3. 📖 Codelabs を開く: <a class="retro-link" href="https://theomonfort.github.io/2026-Github-Copilot-Workshop/github-copilot-workshop" target="_blank" rel="noopener noreferrer">ワークショップを開く ↗</a>
+3. 📖 Codelabs を開く: <a class="retro-link" href="https://theomonfort.github.io/2026-Github-Copilot-Workshop/github-copilot-workshop/custom/handson/" target="_blank" rel="noopener noreferrer">ワークショップを開く ↗</a>
 4. ⌨️ 1 ステップずつ進めながら Copilot に話しかける
 
 > 💡 ローカルに環境が無くても OK。Codespaces で必要な拡張機能・依存関係はすべて準備済みです。
