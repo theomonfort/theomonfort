@@ -1,7 +1,7 @@
 ---
 title: Hands-on
 titleEn: Hands-on
-summary: A workshop where you can get hands-on with the concepts in this playbook by opening a repo in Codespaces. Built for next week's special workshop — a single simplified project that walks through everything end-to-end.
+summary: A workshop where you get hands-on with the concepts in this playbook by rebuilding a simplified version of this very playbook site from scratch — together with Copilot. Touches MCP / Instructions / Agent Skills / Plan mode / Cloud Agent / Code Review / Agentic Workflow end-to-end.
 icon: 🎮
 color: cyan
 order: 3
@@ -26,14 +26,15 @@ links:
 
 <div class="hero-quote hero-quote-chat">
   <p>
-    Get hands-on with the concepts in this playbook through a <strong>workshop repo</strong> you can open in <strong>Codespaces</strong>.
+    The project you'll build is <strong>a simplified version of this very playbook site</strong>. You'll rebuild the site you're reading right now — <strong>from scratch, together with Copilot</strong>.
   </p>
   <p>
-    No local setup — just click and start coding through the Codelabs flow.
+    Open the repo in <strong>Codespaces</strong> and you're coding in the browser, no local setup.
   </p>
 </div>
 
-> 🎮 **2026 GitHub Copilot Workshop** — a single simplified project that walks through MCP / Instructions / Agent Skills / Plan mode / Cloud Agent / Code Review / Agentic Workflow end-to-end.
+> 🪞 **What you build = this site (simplified)**. The end-goal is concrete, so you immediately see *which feature shines at which moment*.
+> 🎮 **Features you'll use** — MCP / Instructions / Agent Skills / Plan mode / Cloud Agent / Code Review / Agentic Workflow, all in one flow.
 > 🚀 Built for next week's special workshop. Codelabs format — one step at a time.
 
 📘 Repo & Codelabs:
@@ -42,7 +43,7 @@ links:
 
 ## Workshop Flow
 
-A **simplified end-to-end scenario** built around the core of this playbook, covered in 5 phases.
+You build a **simplified version of this playbook site** through 5 phases that exercise the core features end-to-end.
 
 ```mermaid
 flowchart LR

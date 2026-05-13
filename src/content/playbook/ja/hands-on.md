@@ -1,7 +1,7 @@
 ---
 title: ハンズオン
 titleEn: Hands-on
-summary: このプレイブックで紹介している概念を、実際にリポジトリを Codespaces で開いて手を動かしながら体験できるワークショップ。来週開催の特別ワークショップ向けに、簡略化された 1 つのプロジェクトで一気通貫に学べる内容。
+summary: このプレイブックで紹介している概念を、実際に手を動かしながら学べるワークショップ。題材は「このプレイブックサイトの簡略版」を Copilot と一緒にゼロから作ること。MCP / Instructions / Agent Skill / Plan モード / Cloud Agent / Code Review / Agentic Workflow をひと通り使い切る構成。
 icon: 🎮
 color: cyan
 order: 3
@@ -26,15 +26,16 @@ links:
 
 <div class="hero-quote hero-quote-chat">
   <p>
-    このプレイブックで紹介している概念を、<strong>実際に手を動かして</strong>体験できるワークショップを用意しています。
+    題材は <strong>このプレイブックサイトの簡略版</strong>。あなたが今読んでいるこのサイトを、<strong>Copilot と一緒にゼロから作り直します</strong>。
   </p>
   <p>
     リポジトリを <strong>Codespaces</strong> で開けば、環境構築なしでブラウザからすぐに始められます。
   </p>
 </div>
 
-> 🎮 **2026 GitHub Copilot Workshop** — このプレイブックで扱う MCP / Instructions / Agent Skills / Plan モード / Cloud Agent / Code Review / Agentic Workflow を、<strong>1 つの簡略化されたプロジェクト</strong>で一気通貫に体験する内容です。
-> 🚀 来週開催の特別ワークショップに向けて準備中。Codelabs 形式で 1 ステップずつ進められます。
+> 🪞 **作るもの = 今読んでいるこのサイト(の簡略版)**。だからゴールが分かりやすく、各機能がどの場面で効くかを実感できます。
+> 🎮 **使う機能** — MCP / Instructions / Agent Skills / Plan モード / Cloud Agent / Code Review / Agentic Workflow を <strong>一気通貫</strong> で体験。
+> 🚀 来週開催の特別ワークショップ向け。Codelabs 形式で 1 ステップずつ進められます。
 
 📘 リポジトリと Codelabs:
 - <a class="retro-link" href="https://github.com/theomonfort/Github-copilot-workshop" target="_blank" rel="noopener noreferrer">theomonfort/Github-copilot-workshop ↗</a>
@@ -42,7 +43,7 @@ links:
 
 ## ワークショップで体験する流れ
 
-このプレイブックの **コア部分を簡略化したシナリオ** を、5 つのフェーズで一気通貫に体験します。
+**このプレイブックサイトの簡略版** を作りながら、5 つのフェーズで主要機能を一気通貫に体験します。
 
 ```mermaid
 flowchart LR
