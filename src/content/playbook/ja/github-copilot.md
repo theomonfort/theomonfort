@@ -89,7 +89,7 @@ flowchart LR
 
 ## セキュアでコンプライアントなアーキテクチャ
 
-入力されたコードは **Copilot Proxy (CAPI)** を経由し、安心してエンタープライズで使える設計。
+入力されたコードは **Copilot Proxy** を経由し、安心してエンタープライズで使える設計。
 
 ```mermaid
 ---
@@ -104,7 +104,7 @@ config:
 ---
 flowchart LR
   Dev["👤 開発者"]
-  Proxy["<img class='proxy-ico' src='/theomonfort/github-copilot-white-icon.png'/><b>CAPI</b>"]
+  Proxy["<img class='proxy-ico' src='/theomonfort/github-copilot-white-icon.png'/><b>Copilot Proxy</b>"]
   LLM["<b>LLM プロバイダー</b><div class='llm-row'><img src='/theomonfort/llm-openai.png'/><img src='/theomonfort/llm-anthropic.svg'/><img src='/theomonfort/llm-gemini.png'/><img src='/theomonfort/llm-grok.png'/></div>"]
 
   Dev -->|"文脈"| Proxy

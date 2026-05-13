@@ -89,7 +89,7 @@ flowchart LR
 
 ## Secure & Compliant Architecture
 
-All code input passes through **Copilot Proxy (CAPI)** — designed for safe enterprise use.
+All code input passes through **Copilot Proxy** — designed for safe enterprise use.
 
 ```mermaid
 ---
@@ -104,7 +104,7 @@ config:
 ---
 flowchart LR
   Dev["👤 Developer"]
-  Proxy["<img class='proxy-ico' src='/theomonfort/github-copilot-white-icon.png'/><b>CAPI</b>"]
+  Proxy["<img class='proxy-ico' src='/theomonfort/github-copilot-white-icon.png'/><b>Copilot Proxy</b>"]
   LLM["<b>LLM Providers</b><div class='llm-row'><img src='/theomonfort/llm-openai.png'/><img src='/theomonfort/llm-anthropic.svg'/><img src='/theomonfort/llm-gemini.png'/><img src='/theomonfort/llm-grok.png'/></div>"]
 
   Dev -->|"Context"| Proxy
