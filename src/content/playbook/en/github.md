@@ -46,6 +46,8 @@ links:
 - **~90%** of the Fortune 100 have adopted Copilot
 - **42%** market share in paid AI coding tools
 
+> **Sources / validity:** 180M+ developers: [GitHub Octoverse 2025](https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/). 20M Copilot users and ~90% Fortune 100 Copilot adoption: [Microsoft FY25 Q4 earnings call](https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx), July 30, 2025. 77,000+ enterprise customers: [Microsoft FY2024 Annual Report](https://www.microsoft.com/investor/reports/ar24/). 4.7M paid subscriptions and 42% market share are third-party / working estimates; revalidate before external use.
+
 ## The Evolution of GitHub
 
 Looking back at GitHub's journey reveals where we are today ──

@@ -46,6 +46,8 @@ links:
 - Fortune 100 の **約 90%** が Copilot を採用
 - 有料 AI コーディングツール市場シェア **42%**
 
+> **出典 / 有効時点:** 1.8 億人以上の開発者数は [GitHub Octoverse 2025](https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/)。Copilot 2,000 万ユーザーおよび Fortune 100 約 90% の Copilot 採用率は [Microsoft FY25 Q4 earnings call](https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx)（2025年7月30日）。77,000 社以上のエンタープライズ顧客は [Microsoft FY2024 Annual Report](https://www.microsoft.com/investor/reports/ar24/)。470 万有料サブスクリプションおよび 42% 市場シェアは第三者情報 / 作業用推定値のため、外部利用前に再確認してください。
+
 ## 進化の歴史
 
 GitHub の歩みを振り返れば、現在地が見えてくる ──
