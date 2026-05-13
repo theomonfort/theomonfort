@@ -40,8 +40,8 @@ links:
 ## 一言で
 
 - GitHub 開発者：世界で **1.8 億人以上**（[2025](https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/)）
-- GitHub Copilot 登録ユーザー：**2,000 万人**（[2025](https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx)）
-- GitHub Copilot 有料サブスクリプション：**470 万人**（[2026](https://www.getpanto.ai/blog/github-copilot-statistics)）
+- GitHub Copilot 登録ユーザー：**2,000 万人以上**（[2025](https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx)）
+- GitHub Copilot 有料サブスクリプション：**470 万人以上**（[2026](https://www.getpanto.ai/blog/github-copilot-statistics)）
 - エンタープライズ顧客：**77,000 社以上**（[2024](https://www.microsoft.com/investor/reports/ar24/)）
 - Fortune 100 の **約 90%** が Copilot を採用（[2025](https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx)）
 - 有料 AI コーディングツール市場シェア **42%**（[2025](https://www.secondtalent.com/resources/github-copilot-statistics/)）
