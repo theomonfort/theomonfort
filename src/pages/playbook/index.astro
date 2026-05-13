@@ -35,7 +35,7 @@ const grouped = categories.map((cat) => ({
                 href={`#cat-${g.id}`}
                 class={`font-pixel text-xs md:text-sm px-4 py-2 border-2 ${c.border} ${c.text} hover:${c.glow} transition`}
               >
-                {g.icon} {g.label}
+                {g.icon} {g.labelEn}
               </a>
               {i < arr.length - 1 && (
                 <span class="font-pixel text-phosphor/60 text-3xl md:text-4xl">→</span>
@@ -54,7 +54,8 @@ const grouped = categories.map((cat) => ({
           <header class={`mb-5 pb-3 border-b-2 ${c.border}`}>
             <div class="flex items-baseline gap-3 flex-wrap">
               <span class="text-2xl">{g.icon}</span>
-              <h2 class={`font-pixel text-lg md:text-xl ${c.text}`}>{g.label}</h2>
+              <h2 class={`font-pixel text-lg md:text-xl ${c.text}`}>{g.labelEn}</h2>
+              {g.labelJa !== g.labelEn && <span class="font-pixel-jp text-base text-phosphor/70">{g.labelJa}</span>}
               <span class={`font-pixel text-[10px] ${c.text} opacity-60 ml-auto`}>
                 {g.items.length} {t.playbook.itemCount}
               </span>
@@ -86,9 +87,7 @@ const grouped = categories.map((cat) => ({
               const e = item.entry;
               const ec = c;
               const cardTitle = e.data.titleEn || playbookEntryTitle(item);
-              const cardSubtitle = locale === 'ja' && e.data.titleEn && e.data.title !== e.data.titleEn
-                ? e.data.title
-                : undefined;
+              const cardSubtitle = e.data.title !== cardTitle ? e.data.title : undefined;
               return (
                 <li class="h-full">
                   <a

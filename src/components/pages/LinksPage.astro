@@ -129,8 +129,11 @@ function host(url: string) {
             >
               <span class="text-2xl leading-none">{rawCat.icon}</span>
               <h2 class={`font-pixel text-sm md:text-base tracking-[0.25em] ${c.tw}`}>
-                {cat.label.toUpperCase()}
+                {rawCat.labelEn.toUpperCase()}
               </h2>
+              {rawCat.labelJa !== rawCat.labelEn && (
+                <span class="font-pixel-jp text-sm text-phosphor/60">／ {rawCat.labelJa}</span>
+              )}
             </header>
 
             <div class="space-y-5">
@@ -138,9 +141,7 @@ function host(url: string) {
                 const e = item.entry;
                 const buckets = groupLinks(e.data.links);
                 const cardTitle = e.data.titleEn || playbookEntryTitle(item);
-                const cardSubtitle = locale === 'ja' && e.data.titleEn && e.data.title !== e.data.titleEn
-                  ? e.data.title
-                  : undefined;
+                const cardSubtitle = e.data.title !== cardTitle ? e.data.title : undefined;
                 return (
                   <article class="entry-block pl-3 border-l-2" data-entry={item.slug} style={`border-color:${c.hex}40`}>
                     <header class="flex items-baseline gap-2 mb-2 flex-wrap">
@@ -164,7 +165,7 @@ function host(url: string) {
                         )}
                         <ul class="space-y-1">
                           {bucket.items.map((it) => {
-                            const search = `${it.label} ${it.url} ${cardTitle} ${cardSubtitle ?? ''} ${bucket.name ?? ''} ${cat.label}`.toLowerCase();
+                            const search = `${it.label} ${it.url} ${cardTitle} ${cardSubtitle ?? ''} ${bucket.name ?? ''} ${rawCat.labelEn} ${rawCat.labelJa}`.toLowerCase();
                             return (
                               <li
                                 class="link-row"
