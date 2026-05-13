@@ -134,10 +134,10 @@ AI を強くする技術ツールは 1 つではない。**常に読ませるも
 
 同じ「AI の足場」でも、置き場所やファイル名はエコシステムごとに少し違う。
 
-| レイヤー | GitHub / Copilot | Open ecosystem |
+| Layer | GitHub / Copilot | Open ecosystem |
 | --- | --- | --- |
-| 全体指示 | `.github/copilot-instructions.md` | `AGENTS.md` |
-| パス別ルール | `.github/instructions/*.instructions.md` | nested `AGENTS.md` |
+| Global instructions | `.github/copilot-instructions.md` | `AGENTS.md` |
+| Path-specific rules | `.github/instructions/*.instructions.md` | nested `AGENTS.md` |
 | Skills（project） | `.github/skills/*/SKILL.md` | `.agents/skills/*/SKILL.md` |
 | Skills（personal） | `~/.copilot/skills/` | `~/.agents/skills/` |
 | Custom agents | Copilot custom agents | agent definitions / plugins |
