@@ -29,7 +29,7 @@ const next = idx < all.length - 1 ? all[idx + 1] : null;
 
 const tocEntries = all.map((e) => ({
   id: e.slug,
-  title: playbookEntryTitle(e),
+  title: e.entry.data.titleEn || playbookEntryTitle(e),
   titleEn: playbookEntryKicker(e),
   icon: e.entry.data.icon,
   category: e.entry.data.category,
@@ -90,9 +90,11 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
         {entry.data.icon && /\.(svg|png|jpg|jpeg|webp|gif)$/i.test(entry.data.icon)
           ? <img src={entry.data.icon} alt="" class="h-[1.2em] w-auto shrink-0" />
           : <span class="text-[1.2em] leading-none shrink-0">{entry.data.icon}</span>}
-        <span>{playbookEntryTitle(item)}</span>
+        <span>{item.entry.data.titleEn || playbookEntryTitle(item)}</span>
       </h1>
-      {playbookEntryKicker(item) && <p class="font-pixel-jp text-sm md:text-base text-phosphor/50 mb-3">{playbookEntryKicker(item)}</p>}
+      {item.entry.data.titleEn && item.entry.data.titleEn !== item.entry.data.title && (
+        <p class="font-pixel-jp text-sm md:text-base text-phosphor/50 mb-3">{item.entry.data.title}</p>
+      )}
       {item.isFallback && (
         <p class="mt-4 p-3 border-2 border-crt-amber/60 bg-shadow-ink/70 font-body text-sm text-crt-amber">
           {t.common.translationPending}
