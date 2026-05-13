@@ -45,6 +45,8 @@ links:
 
 **このプレイブックサイトの簡略版** を作りながら、5 つのフェーズで主要機能を一気通貫に体験します。
 
+<div class="workshop-flow-vertical">
+
 ```mermaid
 flowchart TB
   Prep["🛠️ <b>リポジトリ準備</b><br/>MCP / Instructions / Skill"]
@@ -64,6 +66,8 @@ flowchart TB
   class Review rev
   class Maint ops
 ```
+
+</div>
 
 > 📝 ワークショップ用の **簡略フロー** です。実際の SDLC ではフェーズが行き来したり並列で走ったりします。「どの場面でどの機能を使うか」の感覚を掴むことが目的。
 

@@ -45,6 +45,8 @@ links:
 
 You build a **simplified version of this playbook site** through 5 phases that exercise the core features end-to-end.
 
+<div class="workshop-flow-vertical">
+
 ```mermaid
 flowchart TB
   Prep["🛠️ <b>Repo prep</b><br/>MCP / Instructions / Skill"]
@@ -64,6 +66,8 @@ flowchart TB
   class Review rev
   class Maint ops
 ```
+
+</div>
 
 > 📝 This is a **simplified workshop flow** — real SDLC phases overlap and loop. The goal is to build intuition for *which feature fits which moment*.
 

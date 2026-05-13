@@ -1328,6 +1328,13 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .prose-akq .copilot-flow-small .mermaid-wrap svg { max-width: 100% !important; width: 100% !important; height: auto !important; min-height: 380px; }
   body.present-mode .prose-akq .copilot-flow-small { max-width: 1100px; }
   body.present-mode .prose-akq .copilot-flow-small .mermaid-wrap svg { min-height: 480px; }
+
+  /* Vertical workshop flow — keep boxes compact so the whole stack fits in present mode */
+  .prose-akq .workshop-flow-vertical { max-width: 460px; margin: 1.2em auto 0; }
+  .prose-akq .workshop-flow-vertical .mermaid-wrap { padding: 0.4em 0.8em; margin: 0; overflow: visible; }
+  .prose-akq .workshop-flow-vertical .mermaid-wrap svg { max-width: 100% !important; width: 100% !important; height: auto !important; }
+  body.present-mode .prose-akq .workshop-flow-vertical { max-width: 380px; }
+  body.present-mode .prose-akq .workshop-flow-vertical .mermaid-wrap svg { max-height: 70vh; }
   .prose-akq .big-stat {
     display: inline-block;
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
