@@ -46,7 +46,7 @@ links:
 You build a **simplified version of this playbook site** through 5 phases that exercise the core features end-to-end.
 
 ```mermaid
-flowchart LR
+flowchart TB
   Prep["🛠️ <b>Repo prep</b><br/>MCP / Instructions / Skill"]
   Plan["📋 <b>Copilot</b><br/>Plan / Implement mode"]
   Review["🔍 <b>Copilot</b><br/>Code Review"]
@@ -64,14 +64,6 @@ flowchart LR
   class Review rev
   class Maint ops
 ```
-
-| Phase | What you do | Related entry |
-| --- | --- | --- |
-| 🛠️ **Prep** | Add MCP servers, write instructions files, define agent skills | <a class="retro-link" href="/theomonfort/playbook/mcp">MCP ↗</a> · <a class="retro-link" href="/theomonfort/playbook/instructions">Instructions ↗</a> · <a class="retro-link" href="/theomonfort/playbook/agent-skills">Agent Skills ↗</a> |
-| 📋 **Plan → Implement** | Design with Plan mode, then ship with Implement mode | <a class="retro-link" href="/theomonfort/playbook/copilot-chat">Copilot Chat ↗</a> |
-| 🔍 **Review** | Auto-review the PR with Copilot Code Review | <a class="retro-link" href="/theomonfort/playbook/copilot-code-review">Code Review ↗</a> |
-| 🤖 **Improve** | Delegate improvement tasks to Cloud Agent in parallel | <a class="retro-link" href="/theomonfort/playbook/cloud-agent">Cloud Agent ↗</a> |
-| 🔁 **Operate** | Automate daily / weekly maintenance with Agentic Workflow | <a class="retro-link" href="/theomonfort/playbook/agentic-workflow">Agentic Workflow ↗</a> |
 
 > 📝 This is a **simplified workshop flow** — real SDLC phases overlap and loop. The goal is to build intuition for *which feature fits which moment*.
 

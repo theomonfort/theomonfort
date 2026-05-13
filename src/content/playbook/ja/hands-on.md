@@ -46,7 +46,7 @@ links:
 **このプレイブックサイトの簡略版** を作りながら、5 つのフェーズで主要機能を一気通貫に体験します。
 
 ```mermaid
-flowchart LR
+flowchart TB
   Prep["🛠️ <b>リポジトリ準備</b><br/>MCP / Instructions / Skill"]
   Plan["📋 <b>Copilot</b><br/>Plan / Implement モード"]
   Review["🔍 <b>Copilot</b><br/>Code Review"]
@@ -64,14 +64,6 @@ flowchart LR
   class Review rev
   class Maint ops
 ```
-
-| フェーズ | やること | 関連エントリー |
-| --- | --- | --- |
-| 🛠️ **準備** | MCP サーバー追加、Instructions ファイル作成、Agent Skill 定義 | <a class="retro-link" href="/theomonfort/playbook/mcp">MCP ↗</a> · <a class="retro-link" href="/theomonfort/playbook/instructions">Instructions ↗</a> · <a class="retro-link" href="/theomonfort/playbook/agent-skills">Agent Skills ↗</a> |
-| 📋 **計画 → 実装** | Plan モードで設計 → Implement モードでコード化 | <a class="retro-link" href="/theomonfort/playbook/copilot-chat">Copilot Chat ↗</a> |
-| 🔍 **レビュー** | Copilot Code Review で PR を自動レビュー | <a class="retro-link" href="/theomonfort/playbook/copilot-code-review">Code Review ↗</a> |
-| 🤖 **改善** | Cloud Agent に改善タスクを委譲・並列実行 | <a class="retro-link" href="/theomonfort/playbook/cloud-agent">Cloud Agent ↗</a> |
-| 🔁 **運用** | Agentic Workflow で日次・週次の自動化 | <a class="retro-link" href="/theomonfort/playbook/agentic-workflow">Agentic Workflow ↗</a> |
 
 > 📝 ワークショップ用の **簡略フロー** です。実際の SDLC ではフェーズが行き来したり並列で走ったりします。「どの場面でどの機能を使うか」の感覚を掴むことが目的。
 
