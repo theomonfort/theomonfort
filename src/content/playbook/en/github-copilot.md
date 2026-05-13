@@ -84,6 +84,7 @@ flowchart LR
 - ✅ **Orchestration**<br/>　AI that spans the entire SDLC, not just coding
 - ✅ **Freedom of choice across models, agents, and surfaces**<br/>　The best model and interface for every workflow. No vendor lock-in
 - ✅ **Enterprise controls**<br/>　Centralized governance, visibility, and security
+- ✅ **Compliance**<br/>　Copilot Proxy, policy controls, public-code filtering, and Microsoft IP protection for eligible use
 - ✅ **Best cost-performance**<br/>　Pooled usage, rich built-in entitlements, and maximum price advantage via ACD
 
 ## Secure & Compliant Architecture
