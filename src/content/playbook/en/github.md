@@ -44,7 +44,7 @@ links:
 - GitHub Copilot paid subscriptions: **4.7 million+** ([2026](https://www.getpanto.ai/blog/github-copilot-statistics))
 - Enterprise customers: **77,000+** ([2024](https://www.microsoft.com/investor/reports/ar24/))
 - **~90%** of the Fortune 100 have adopted Copilot ([2025](https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx))
-- **42%** market share in paid AI coding tools ([2025](https://www.secondtalent.com/resources/github-copilot-statistics/))
+- **~42%** market share in paid AI coding tools ([2025](https://www.secondtalent.com/resources/github-copilot-statistics/))
 
 ## The Evolution of GitHub
 

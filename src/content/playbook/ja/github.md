@@ -44,7 +44,7 @@ links:
 - GitHub Copilot 有料サブスクリプション：**470 万人以上**（[2026](https://www.getpanto.ai/blog/github-copilot-statistics)）
 - エンタープライズ顧客：**77,000 社以上**（[2024](https://www.microsoft.com/investor/reports/ar24/)）
 - Fortune 100 の **約 90%** が Copilot を採用（[2025](https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx)）
-- 有料 AI コーディングツール市場シェア **42%**（[2025](https://www.secondtalent.com/resources/github-copilot-statistics/)）
+- 有料 AI コーディングツール市場シェア **約 42%**（[2025](https://www.secondtalent.com/resources/github-copilot-statistics/)）
 
 ## 進化の歴史
 
