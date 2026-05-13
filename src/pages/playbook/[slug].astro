@@ -29,7 +29,7 @@ const next = idx < all.length - 1 ? all[idx + 1] : null;
 
 const tocEntries = all.map((e) => ({
   id: e.slug,
-  title: e.entry.data.titleEn || playbookEntryTitle(e),
+  title: playbookEntryTitle(e),
   titleEn: playbookEntryKicker(e),
   icon: e.entry.data.icon,
   category: e.entry.data.category,
