@@ -100,7 +100,7 @@ export const siteCopy = {
       heading: 'プレイブック',
       subtitle: '— THE AI DEV PLAYBOOK —',
       intro:
-        'SDLC の各フェーズで使う GitHub Copilot のツールと概念を一覧化。企画 → 開発 → レビュー → テスト & 品質保証 → 監視まで、AI 駆動開発の全体像を体系的に学べる。',
+        'SDLC の各フェーズで使う GitHub Copilot のツールと概念を一覧化。企画 → 開発 → レビュー → テスト & 品質保証 → 運用まで、AI 駆動開発の全体像を体系的に学べる。',
       itemCount: '項目',
       readMore: '詳細を読む',
       backToList: '◀ 用語一覧',

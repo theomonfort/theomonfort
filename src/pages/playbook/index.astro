@@ -26,19 +26,19 @@ const grouped = categories.map((cat) => ({
         {t.playbook.intro}
       </p>
 
-      <nav class="mt-6 flex flex-wrap items-center gap-3">
+      <nav class="mt-8 flex flex-wrap items-center gap-4">
         {grouped.filter((g) => g.items.length > 0 && g.id !== 'introduction').map((g, i, arr) => {
           const c = accentClasses[g.color];
           return (
             <>
               <a
                 href={`#cat-${g.id}`}
-                class={`font-pixel text-[10px] px-3 py-1.5 border ${c.border} ${c.text} hover:${c.glow} transition`}
+                class={`font-pixel text-xs md:text-sm px-4 py-2 border-2 ${c.border} ${c.text} hover:${c.glow} transition`}
               >
                 {g.icon} {g.label}
               </a>
               {i < arr.length - 1 && (
-                <span class="font-pixel text-phosphor/60 text-2xl md:text-3xl">→</span>
+                <span class="font-pixel text-phosphor/60 text-3xl md:text-4xl">→</span>
               )}
             </>
           );

@@ -82,7 +82,7 @@ export const categories: Category[] = [
   },
   {
     id: 'operate',
-    labelJa: '監視',
+    labelJa: '運用',
     labelEn: 'Operate',
     icon: '📊',
     color: 'green',
