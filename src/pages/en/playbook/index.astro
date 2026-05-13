@@ -4,7 +4,7 @@ import MenuArrow from '../../../components/retro/MenuArrow.astro';
 import { accentClasses } from '../../../lib/theme';
 import { categories, localizedCategory } from '../../../lib/playbook-categories';
 import { localizedPath, siteCopy } from '../../../lib/i18n';
-import { getPlaybookEntries, playbookEntryKicker, playbookEntryTitle } from '../../../lib/playbook';
+import { getPlaybookEntries, playbookEntryTitle } from '../../../lib/playbook';
 
 const locale = 'en';
 const t = siteCopy[locale];
@@ -55,7 +55,6 @@ const grouped = categories.map((cat) => ({
             <div class="flex items-baseline gap-3 flex-wrap">
               <span class="text-2xl">{g.icon}</span>
               <h2 class={`font-pixel text-lg md:text-xl ${c.text}`}>{g.label}</h2>
-              <span class="font-pixel-jp text-base text-phosphor/70">{g.secondaryLabel}</span>
               <span class={`font-pixel text-[10px] ${c.text} opacity-60 ml-auto`}>
                 {g.items.length} {t.playbook.itemCount}
               </span>
@@ -86,6 +85,10 @@ const grouped = categories.map((cat) => ({
             {g.items.map((item) => {
               const e = item.entry;
               const ec = c;
+              const cardTitle = e.data.titleEn || playbookEntryTitle(item);
+              const cardSubtitle = locale === 'ja' && e.data.titleEn && e.data.title !== e.data.titleEn
+                ? e.data.title
+                : undefined;
               return (
                 <li class="h-full">
                   <a
@@ -100,8 +103,8 @@ const grouped = categories.map((cat) => ({
                         <div class="flex items-baseline gap-2 mb-1">
                           <span class={`font-pixel text-[10px] ${ec.text}`}>NO.{String(e.data.order).padStart(2, '0')}</span>
                         </div>
-                        <h3 class={`font-pixel text-sm md:text-base ${ec.text} mb-1 leading-tight`}>{playbookEntryTitle(item)}</h3>
-                        {playbookEntryKicker(item) && <p class="font-pixel-jp text-xs text-phosphor/50 mb-2">{playbookEntryKicker(item)}</p>}
+                        <h3 class={`font-pixel text-sm md:text-base ${ec.text} mb-1 leading-tight`}>{cardTitle}</h3>
+                        {cardSubtitle && <p class="font-pixel-jp text-xs text-phosphor/50 mb-2">{cardSubtitle}</p>}
                         {item.isFallback && <p class="font-pixel text-[9px] text-crt-amber mb-2">{t.common.translationPending}</p>}
                         <p class="font-body text-sm text-phosphor/85 leading-relaxed line-clamp-3">
                           {e.data.summary}
