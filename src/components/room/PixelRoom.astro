@@ -1,4 +1,6 @@
 ---
+import { localizedPath, siteCopy, type Locale } from '../../lib/i18n';
+
 // 90s Japanese teen bedroom — but in deep space.
 // Background = AI-generated pixel art (Gemini "Nano Banana").
 // Furniture is mapped via absolutely-positioned <a> hotspots that light up
@@ -9,8 +11,10 @@
 interface Props {
   immersive?: boolean;
   src?: string;
+  locale?: Locale;
 }
-const { immersive = true, src = '/theomonfort/room/bedroom-v2.png' } = Astro.props;
+const { immersive = true, src = '/theomonfort/room/bedroom-v2.png', locale = 'ja' } = Astro.props;
+const t = siteCopy[locale].room;
 const wrapClass = [
   'pixelroom-wrap relative w-full mx-auto select-none',
   immersive ? 'is-immersive max-w-7xl' : 'max-w-5xl',
@@ -21,7 +25,7 @@ const wrapClass = [
   <div class="pixelroom-frame relative">
     <img
       src={src}
-      alt="宇宙船の中の90年代日本のティーンの部屋。家具をクリックして探索できる。"
+      alt={t.alt}
       class="pixelroom-bg block w-full h-auto"
       draggable="false"
     />
@@ -30,38 +34,38 @@ const wrapClass = [
     <div class="scanlines" aria-hidden="true"></div>
 
     <!-- ============ HOTSPOTS ============ -->
-    <a href="/theomonfort/playbook" class="hotspot" data-target="bookshelf"
+    <a href={localizedPath(locale, '/playbook')} class="hotspot" data-target="bookshelf"
        style="left:10%;top:25%;width:27%;height:37%"
-       aria-label="図書室 / 用語集へ"></a>
+       aria-label={t.aria.playbook}></a>
 
-    <a href="/theomonfort/links" class="hotspot" data-target="window"
+    <a href={localizedPath(locale, '/links')} class="hotspot" data-target="window"
        style="left:37%;top:12%;width:38%;height:40%"
-       aria-label="夜景の窓 / リンクへ"></a>
+       aria-label={t.aria.links}></a>
 
-    <a href="/theomonfort/manifesto" class="hotspot easter-hotspot" data-target="desk"
+    <a href={localizedPath(locale, '/manifesto')} class="hotspot easter-hotspot" data-target="desk"
        style="left:46%;top:64%;width:5%;height:5%"
-       aria-label="？"></a>
+       aria-label={t.aria.manifesto}></a>
 
-    <a href="/theomonfort/philosophy" class="hotspot" data-target="tv"
+    <a href={localizedPath(locale, '/philosophy')} class="hotspot" data-target="tv"
        style="left:63%;top:53%;width:16%;height:25%"
-       aria-label="哲学のCRT / 哲学の問へ"></a>
+       aria-label={t.aria.philosophy}></a>
 
-    <a href="/theomonfort/skills" class="hotspot" data-target="wardrobe"
+    <a href={localizedPath(locale, '/skills')} class="hotspot" data-target="wardrobe"
        style="left:77%;top:13%;width:14%;height:76%"
-       aria-label="装備所 / スキルへ"></a>
+       aria-label={t.aria.equipment}></a>
 
-    <a href="/theomonfort/secret" class="hotspot cat-hotspot" data-target="cat"
+    <a href={localizedPath(locale, '/secret')} class="hotspot cat-hotspot" data-target="cat"
        style="left:16%;top:74%;width:9%;height:10%"
-       aria-label="ねこ？"></a>
+       aria-label={t.aria.secret}></a>
 
     <!-- ============ FLOATING JRPG LABELS ============ -->
     <div class="pixelroom-labels">
-      <div class="pr-label" data-target="bookshelf"><span class="pr-en">PLAYBOOK</span><span class="pr-jp">▶ プレイブック</span></div>
-      <div class="pr-label" data-target="wardrobe"><span class="pr-en">EQUIPMENT</span><span class="pr-jp">▶ 装備所</span></div>
-      <div class="pr-label" data-target="window"><span class="pr-en">LINKS</span><span class="pr-jp">▶ 銀河の窓</span></div>
-      <div class="pr-label" data-target="desk"><span class="pr-en">???</span><span class="pr-jp">▶ ？</span></div>
-      <div class="pr-label" data-target="tv"><span class="pr-en">PHILOSOPHY</span><span class="pr-jp">▶ 哲学のCRT</span></div>
-      <div class="pr-label" data-target="cat"><span class="pr-en">???</span><span class="pr-jp">▶ ねこ？</span></div>
+      <div class="pr-label" data-target="bookshelf"><span class="pr-en">PLAYBOOK</span><span class="pr-jp">{t.labels.playbook}</span></div>
+      <div class="pr-label" data-target="wardrobe"><span class="pr-en">EQUIPMENT</span><span class="pr-jp">{t.labels.equipment}</span></div>
+      <div class="pr-label" data-target="window"><span class="pr-en">LINKS</span><span class="pr-jp">{t.labels.links}</span></div>
+      <div class="pr-label" data-target="desk"><span class="pr-en">???</span><span class="pr-jp">{t.labels.manifesto}</span></div>
+      <div class="pr-label" data-target="tv"><span class="pr-en">PHILOSOPHY</span><span class="pr-jp">{t.labels.philosophy}</span></div>
+      <div class="pr-label" data-target="cat"><span class="pr-en">???</span><span class="pr-jp">{t.labels.secret}</span></div>
     </div>
   </div>
 </div>

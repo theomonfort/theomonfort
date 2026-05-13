@@ -1,0 +1,61 @@
+---
+import Layout from '../layout/Layout.astro';
+import PixelRoom from '../room/PixelRoom.astro';
+import MenuArrow from '../retro/MenuArrow.astro';
+import { siteCopy, type Locale } from '../../lib/i18n';
+
+interface Props {
+  locale?: Locale;
+}
+const { locale = 'ja' } = Astro.props;
+const t = siteCopy[locale];
+---
+
+<Layout locale={locale} currentPath="/" title={t.home.title}>
+  <section class="hero-room relative min-h-[calc(100vh-72px)] overflow-hidden">
+    <div class="absolute inset-0 flex items-center justify-center">
+      <PixelRoom immersive={true} locale={locale} />
+    </div>
+
+    <div class="relative z-10 flex flex-col items-center justify-between min-h-[calc(100vh-72px)] pt-2 md:pt-3 pb-8 md:pb-12 px-4 pointer-events-none">
+      <div class="text-center max-w-2xl">
+        <p class="font-pixel text-[9px] md:text-[10px] text-crt-amber mb-1 tracking-[0.3em] drop-shadow-[0_0_6px_rgba(255,176,0,0.5)]">{t.home.insertCoin}</p>
+        <h1 class="font-pixel text-2xl md:text-4xl text-neon-magenta tracking-wider drop-shadow-[0_0_14px_rgba(255,46,136,0.85)] leading-none flex items-center justify-center gap-3 md:gap-5 flex-wrap">
+          <span>AI</span>
+          <span class="font-pixel-jp text-[1.05em] leading-none -translate-y-[0.08em]">{t.brandMiddle}</span>
+          <span>QUEST</span>
+        </h1>
+        <p class="font-pixel-jp text-sm md:text-base text-neon-cyan mt-1 drop-shadow-[0_0_8px_rgba(0,240,255,0.7)]">{t.home.subtitle}</p>
+      </div>
+
+      <div class="text-center font-pixel text-[10px] text-phosphor/80 space-y-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
+        <p class="font-body text-sm md:text-base text-phosphor/90 mb-3 max-w-xl mx-auto leading-relaxed">
+          <span class="text-crt-amber">{t.home.hint[0].replace(/^▶\s*/, '▶ ')}</span><br />
+          {t.home.hint[1]}
+        </p>
+        <p><MenuArrow color="text-crt-amber" /> {t.home.navHint}</p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero-room::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at 50% 50%,
+        transparent 0%,
+        transparent 55%,
+        rgba(10, 14, 39, 0.45) 90%,
+        rgba(10, 14, 39, 0.85) 100%),
+      linear-gradient(to bottom,
+        rgba(10, 14, 39, 0.55) 0%,
+        transparent 18%,
+        transparent 82%,
+        rgba(10, 14, 39, 0.55) 100%);
+  }
+</style>

@@ -1,0 +1,156 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layout/Layout.astro';
+import SkillGallery, { type SkillEntry } from '../interactive/SkillGallery.tsx';
+import EquipmentList from '../ui/EquipmentList.astro';
+import { localizedPath, siteCopy, type Locale } from '../../lib/i18n';
+
+interface Props {
+  locale?: Locale;
+}
+const { locale = 'ja' } = Astro.props;
+const t = siteCopy[locale];
+
+const all = (await getCollection('equipment'))
+  .sort((a, b) => a.data.order - b.data.order);
+
+const bySection = (id: string) => all.filter((e) => e.data.section === id);
+
+const skillEntries: SkillEntry[] = bySection('skills').map((e) => ({
+  slug: e.id.split('--')[1] ?? e.id,
+  name: e.data.name,
+  icon: e.data.icon,
+  group: e.data.group,
+  description: e.data.description,
+  url: e.data.url ?? '',
+}));
+
+const toItem = (e: typeof all[number]) => ({
+  name: e.data.name,
+  icon: e.data.icon,
+  description: e.data.description,
+  badge: e.data.badge,
+  url: e.data.url,
+  install: e.data.install,
+});
+
+const workflows = bySection('workflows').map(toItem);
+const customAgents = bySection('custom-agents').map(toItem);
+const mcpServers = bySection('mcp-servers').map(toItem);
+const cliPlugins = bySection('cli-plugins').map(toItem);
+const vscodePlugins = bySection('vscode-extensions').map(toItem);
+
+const sections = [
+  { id: 'skills', label: 'SKILLS', short: locale === 'ja' ? 'スキル' : 'Skills', color: 'magenta' },
+  { id: 'workflows', label: 'WORKFLOWS', short: locale === 'ja' ? 'ワークフロー' : 'Flows', color: 'cyan' },
+  { id: 'agents', label: 'CUSTOM AGENTS', short: locale === 'ja' ? '専用エージェント' : 'Agents', color: 'amber' },
+  { id: 'mcp', label: 'MCP SERVERS', short: locale === 'ja' ? 'MCPサーバー' : 'MCP', color: 'green' },
+  { id: 'cli', label: 'CLI PLUGINS', short: locale === 'ja' ? 'CLI拡張' : 'CLI', color: 'magenta' },
+  { id: 'vscode', label: 'VS CODE EXT', short: locale === 'ja' ? 'VS Code 拡張' : 'VS Code', color: 'cyan' },
+] as const;
+---
+
+<Layout locale={locale} currentPath="/skills" title={t.skills.title}>
+  <section class="max-w-5xl mx-auto px-4 py-12">
+    <header class="mb-8">
+      <p class="font-pixel text-[10px] text-crt-amber tracking-[0.3em] mb-2">{t.skills.chapter}</p>
+      <h1 class="font-pixel text-2xl md:text-4xl text-neon-magenta mb-3">{t.skills.heading}</h1>
+      <p class="font-pixel-jp text-lg text-neon-cyan">{t.skills.subtitle}</p>
+      <p class="font-body text-sm text-phosphor/80 mt-4 max-w-2xl">
+        {t.skills.intro}
+      </p>
+      {locale === 'en' && (
+        <p class="mt-4 p-3 border-2 border-crt-amber/60 bg-shadow-ink/70 font-body text-sm text-crt-amber">
+          {t.common.translationPending} {t.skills.contentNotice}
+        </p>
+      )}
+    </header>
+
+    <nav class="sticky top-[60px] z-30 -mx-4 px-4 py-3 bg-midnight/80 backdrop-blur border-y border-neon-magenta/30 mb-10">
+      <ul class="flex gap-2 overflow-x-auto font-pixel text-[10px]">
+        {sections.map((s) => (
+          <li>
+            <a
+              href={`#${s.id}`}
+              class="inline-block whitespace-nowrap px-3 py-2 border-2 border-phosphor/20 text-phosphor/70 hover:text-neon-cyan hover:border-neon-cyan transition-colors"
+            >
+              <span class="hidden sm:inline">▶ {s.label}</span>
+              <span class="sm:hidden font-pixel-jp">{s.short}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <section id="skills" class="scroll-mt-32 mb-16">
+      <div class="flex items-baseline gap-3 mb-6 pb-3 border-b-2 border-neon-magenta">
+        <span class="font-pixel text-xs text-neon-magenta">SECTION 01</span>
+        <h2 class="font-pixel-jp text-2xl text-neon-magenta">{t.skills.sections.skills.heading}</h2>
+        <span class="font-mono text-[10px] text-phosphor/50 ml-auto">{skillEntries.length}{t.skills.sections.skills.count}</span>
+      </div>
+      <p class="font-body text-sm text-phosphor/80 mb-6">
+        {t.skills.sections.skills.body}
+      </p>
+      <SkillGallery client:load skills={skillEntries} copy={t.skillGallery} />
+    </section>
+
+    <section id="workflows" class="scroll-mt-32 mb-16">
+      <div class="flex items-baseline gap-3 mb-6 pb-3 border-b-2 border-neon-cyan">
+        <span class="font-pixel text-xs text-neon-cyan">SECTION 02</span>
+        <h2 class="font-pixel-jp text-2xl text-neon-cyan">{t.skills.sections.workflows.heading}</h2>
+        <span class="font-mono text-[10px] text-phosphor/50 ml-auto">{workflows.length}{t.skills.sections.workflows.count}</span>
+      </div>
+      <p class="font-body text-sm text-phosphor/80 mb-6">{t.skills.sections.workflows.body}</p>
+      <EquipmentList items={workflows} color="cyan" readMoreLabel={t.common.readDetails} />
+    </section>
+
+    <section id="agents" class="scroll-mt-32 mb-16">
+      <div class="flex items-baseline gap-3 mb-6 pb-3 border-b-2 border-crt-amber">
+        <span class="font-pixel text-xs text-crt-amber">SECTION 03</span>
+        <h2 class="font-pixel-jp text-2xl text-crt-amber">{t.skills.sections.agents.heading}</h2>
+        <span class="font-mono text-[10px] text-phosphor/50 ml-auto">{customAgents.length}{t.skills.sections.agents.count}</span>
+      </div>
+      <p class="font-body text-sm text-phosphor/80 mb-6">{t.skills.sections.agents.body}</p>
+      <EquipmentList items={customAgents} color="amber" readMoreLabel={t.common.readDetails} />
+    </section>
+
+    <section id="mcp" class="scroll-mt-32 mb-16">
+      <div class="flex items-baseline gap-3 mb-6 pb-3 border-b-2 border-gb-green">
+        <span class="font-pixel text-xs text-gb-green">SECTION 04</span>
+        <h2 class="font-pixel-jp text-2xl text-gb-green">{t.skills.sections.mcp.heading}</h2>
+        <span class="font-mono text-[10px] text-phosphor/50 ml-auto">{mcpServers.length}{t.skills.sections.mcp.count}</span>
+      </div>
+      <p class="font-body text-sm text-phosphor/80 mb-6">{t.skills.sections.mcp.body}</p>
+      <EquipmentList items={mcpServers} color="green" readMoreLabel={t.common.readDetails} />
+    </section>
+
+    <section id="cli" class="scroll-mt-32 mb-16">
+      <div class="flex items-baseline gap-3 mb-6 pb-3 border-b-2 border-neon-magenta">
+        <span class="font-pixel text-xs text-neon-magenta">SECTION 05</span>
+        <h2 class="font-pixel-jp text-2xl text-neon-magenta">{t.skills.sections.cli.heading}</h2>
+      </div>
+      <p class="font-body text-sm text-phosphor/80 mb-6">{t.skills.sections.cli.body}</p>
+      <EquipmentList items={cliPlugins} color="magenta" readMoreLabel={t.common.readDetails} />
+    </section>
+
+    <section id="vscode" class="scroll-mt-32 mb-16">
+      <div class="flex items-baseline gap-3 mb-6 pb-3 border-b-2 border-neon-cyan">
+        <span class="font-pixel text-xs text-neon-cyan">SECTION 06</span>
+        <h2 class="font-pixel-jp text-2xl text-neon-cyan">{t.skills.sections.vscode.heading}</h2>
+      </div>
+      <p class="font-body text-sm text-phosphor/80 mb-6">{t.skills.sections.vscode.body}</p>
+      <EquipmentList items={vscodePlugins} color="cyan" readMoreLabel={t.common.readDetails} />
+    </section>
+
+    <div class="mt-12 p-5 bg-shadow-ink/70 border-2 border-dashed border-phosphor/30">
+      <h2 class="font-pixel text-xs text-crt-amber mb-2">{t.skills.tipsTitle}</h2>
+      <ul class="font-body text-sm text-phosphor/85 space-y-1 list-disc list-inside">
+        {t.skills.tips.map((tip) => <li>{tip}</li>)}
+      </ul>
+    </div>
+
+    <div class="mt-16 text-center">
+      <a href={localizedPath(locale, '/')} class="font-pixel text-[10px] text-phosphor/60 hover:text-neon-magenta">{t.common.backHome}</a>
+    </div>
+  </section>
+</Layout>

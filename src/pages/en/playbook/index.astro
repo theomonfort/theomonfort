@@ -1,12 +1,12 @@
 ---
-import Layout from '../../components/layout/Layout.astro';
-import MenuArrow from '../../components/retro/MenuArrow.astro';
-import { accentClasses } from '../../lib/theme';
-import { categories, localizedCategory } from '../../lib/playbook-categories';
-import { localizedPath, siteCopy } from '../../lib/i18n';
-import { getPlaybookEntries, playbookEntryKicker, playbookEntryTitle } from '../../lib/playbook';
+import Layout from '../../../components/layout/Layout.astro';
+import MenuArrow from '../../../components/retro/MenuArrow.astro';
+import { accentClasses } from '../../../lib/theme';
+import { categories, localizedCategory } from '../../../lib/playbook-categories';
+import { localizedPath, siteCopy } from '../../../lib/i18n';
+import { getPlaybookEntries, playbookEntryKicker, playbookEntryTitle } from '../../../lib/playbook';
 
-const locale = 'ja';
+const locale = 'en';
 const t = siteCopy[locale];
 const entries = await getPlaybookEntries(locale);
 
@@ -102,6 +102,7 @@ const grouped = categories.map((cat) => ({
                         </div>
                         <h3 class={`font-pixel text-sm md:text-base ${ec.text} mb-1 leading-tight`}>{playbookEntryTitle(item)}</h3>
                         {playbookEntryKicker(item) && <p class="font-pixel-jp text-xs text-phosphor/50 mb-2">{playbookEntryKicker(item)}</p>}
+                        {item.isFallback && <p class="font-pixel text-[9px] text-crt-amber mb-2">{t.common.translationPending}</p>}
                         <p class="font-body text-sm text-phosphor/85 leading-relaxed line-clamp-3">
                           {e.data.summary}
                         </p>

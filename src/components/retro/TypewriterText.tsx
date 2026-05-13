@@ -5,6 +5,7 @@ interface Props {
   speed?: number; // ms per char
   startDelay?: number;
   className?: string;
+  skipLabel?: string;
   onDone?: () => void;
 }
 
@@ -13,6 +14,7 @@ export default function TypewriterText({
   speed = 28,
   startDelay = 0,
   className = '',
+  skipLabel = 'クリックでスキップ',
   onDone,
 }: Props) {
   const [shown, setShown] = useState(0);
@@ -82,7 +84,7 @@ export default function TypewriterText({
       onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleSkip()}
       role="button"
       tabIndex={0}
-      aria-label="クリックでスキップ"
+      aria-label={skipLabel}
     >
       {text.slice(0, shown)}
       {shown < text.length && <span className="caret-inline">▌</span>}

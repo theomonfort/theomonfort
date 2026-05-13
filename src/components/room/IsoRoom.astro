@@ -1,5 +1,6 @@
 ---
 import { accentClasses, type AccentColor } from '../../lib/theme';
+import { localizedPath, type Locale } from '../../lib/i18n';
 
 // Pure-CSS/SVG isometric retro room.
 // Each "furniture" is a clickable nav target with its own pixel-art look.
@@ -14,59 +15,64 @@ interface RoomItem {
   external?: boolean;
 }
 
+interface Props {
+  locale?: Locale;
+}
+const { locale = 'ja' } = Astro.props;
+
 const items: RoomItem[] = [
   {
-    href: '/theomonfort/playbook',
-    label: '本棚',
+    href: localizedPath(locale, '/playbook'),
+    label: locale === 'ja' ? '本棚' : 'Bookshelf',
     en: 'PLAYBOOK',
     icon: '📚',
     color: 'amber',
-    desc: 'プレイブック',
+    desc: locale === 'ja' ? 'プレイブック' : 'Playbook',
     pos: 'col-start-1 row-start-1',
   },
   {
-    href: '/theomonfort/skills',
-    label: 'チェスト',
+    href: localizedPath(locale, '/skills'),
+    label: locale === 'ja' ? 'チェスト' : 'Chest',
     en: 'EQUIPMENT',
     icon: '🗃️',
     color: 'magenta',
-    desc: '装備所',
+    desc: locale === 'ja' ? '装備所' : 'Equipment',
     pos: 'col-start-2 row-start-1',
   },
   {
-    href: '/theomonfort/philosophy',
-    label: 'CRTモニタ',
+    href: localizedPath(locale, '/philosophy'),
+    label: locale === 'ja' ? 'CRTモニタ' : 'CRT Monitor',
     en: 'PHILOSOPHY',
     icon: '🖥️',
     color: 'cyan',
-    desc: '哲学の問',
+    desc: locale === 'ja' ? '哲学の問' : 'Q&A',
     pos: 'col-start-3 row-start-1',
   },
   {
-    href: '/theomonfort/links',
-    label: '窓（夜景）',
+    href: localizedPath(locale, '/links'),
+    label: locale === 'ja' ? '窓（夜景）' : 'Night Window',
     en: 'LINKS',
     icon: '🌃',
     color: 'cyan',
-    desc: 'リンクの泉',
+    desc: locale === 'ja' ? 'リンクの泉' : 'Links',
     pos: 'col-start-1 row-start-2',
   },
   {
-    href: '/theomonfort/manifesto',
-    label: '巻物',
+    href: localizedPath(locale, '/manifesto'),
+    label: locale === 'ja' ? '巻物' : 'Scroll',
     en: 'MANIFESTO',
     icon: '📜',
     color: 'green',
-    desc: 'マニフェスト',
+    desc: locale === 'ja' ? 'マニフェスト' : 'Manifesto',
     pos: 'col-start-2 row-start-2',
   },
   {
     href: 'https://github.com/theomonfort',
-    label: 'ファミコン',
+    label: locale === 'ja' ? 'ファミコン' : 'Console',
     en: 'GITHUB',
     icon: '🎮',
     color: 'magenta',
-    desc: 'ソースコード',
+    desc: locale === 'ja' ? 'ソースコード' : 'Source code',
     pos: 'col-start-3 row-start-2',
     external: true,
   },

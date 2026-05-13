@@ -1,17 +1,17 @@
 ---
-import Layout from '../../components/layout/Layout.astro';
+import Layout from '../../../components/layout/Layout.astro';
 import { render } from 'astro:content';
-import MenuArrow from '../../components/retro/MenuArrow.astro';
-import { accentColorValues } from '../../lib/theme';
-import { categories, localizedCategory } from '../../lib/playbook-categories';
-import { localizedPath, siteCopy } from '../../lib/i18n';
-import { getPlaybookEntries, playbookEntryKicker, playbookEntryTitle } from '../../lib/playbook';
+import MenuArrow from '../../../components/retro/MenuArrow.astro';
+import { accentColorValues } from '../../../lib/theme';
+import { categories, localizedCategory } from '../../../lib/playbook-categories';
+import { localizedPath, siteCopy } from '../../../lib/i18n';
+import { getPlaybookEntries, playbookEntryKicker, playbookEntryTitle } from '../../../lib/playbook';
 
-const locale = 'ja';
+const locale = 'en';
 const t = siteCopy[locale];
 
 export async function getStaticPaths() {
-  const entries = await getPlaybookEntries('ja');
+  const entries = await getPlaybookEntries('en');
   return entries.map((item) => ({
     params: { slug: item.slug },
     props: { item },
@@ -413,7 +413,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       if (present) {
         setPresent(false);
       } else {
-        const index = section.dataset.index || '/playbook';
+        const index = section.dataset.index || '/en/playbook';
         navigateSmooth(index);
       }
       return;

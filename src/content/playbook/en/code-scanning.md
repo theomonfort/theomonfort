@@ -1,0 +1,184 @@
+---
+title: Code Scanning
+titleEn: Code Scanning
+summary: CodeQL statically analyzes source code for vulnerabilities, and Copilot Autofix generates fix PRs automatically. Default setup requires no config file — just one click. Free for public repos; private repos need GHAS / Code Security.
+icon: 🔍
+color: amber
+order: 19.4
+category: secure
+related: ['github-advanced-security', 'dependabot', 'secret-scanning']
+links:
+  - group: 📖 Official Documentation
+    label: About code scanning
+    url: https://docs.github.com/en/code-security/code-scanning/introduction-to-code-scanning/about-code-scanning
+  - group: 📖 Official Documentation
+    label: About CodeQL
+    url: https://docs.github.com/en/code-security/code-scanning/introduction-to-code-scanning/about-code-scanning-with-codeql
+  - group: 📖 Official Documentation
+    label: Configuring default setup
+    url: https://docs.github.com/en/code-security/code-scanning/enabling-code-scanning/configuring-default-setup-for-code-scanning
+  - group: 📖 Official Documentation
+    label: About Copilot Autofix
+    url: https://docs.github.com/en/code-security/code-scanning/managing-code-scanning-alerts/about-autofix-for-codeql-code-scanning
+  - group: 📖 Official Documentation
+    label: SARIF support for code scanning
+    url: https://docs.github.com/en/code-security/code-scanning/integrating-with-code-scanning/sarif-support-for-code-scanning
+  - group: 🆓 Free inventory (Risk Assessment)
+    label: Code security risk assessment (Docs)
+    url: https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment
+  - group: 🆓 Free inventory (Risk Assessment)
+    label: Code Security Risk Assessment GA (2026/04)
+    url: https://github.blog/changelog/2026-04-08-code-security-risk-assessment-available-for-organizations/
+---
+
+## In one sentence
+
+<div class="hero-quote">
+  <p>
+    <strong>Code Scanning</strong> is a GitHub feature that performs <strong>static analysis</strong> (SAST) on your repository's source code to find vulnerabilities.
+  </p>
+  <p>
+    The analysis engine is GitHub's own <strong>CodeQL</strong> (semantic analysis), and for each finding, <strong>Copilot Autofix</strong> generates an AI-powered fix suggestion with code ready to commit. Default setup starts with a single click — no config file needed.
+  </p>
+</div>
+
+## Default setup vs Advanced setup
+
+There are two ways to enable CodeQL. **Default setup is enough to start.**
+
+| Aspect | 🟢 Default setup | 🛠️ Advanced setup |
+| --- | --- | --- |
+| Configuration | One click in the UI, no config file | Write `.github/workflows/codeql.yml` |
+| Language detection | GitHub detects automatically | Explicitly specified in YAML |
+| Queries | `default` set (GitHub recommended) | `default` / `security-extended` / `security-and-quality` / custom |
+| Triggers | push / PR / weekly schedule (automatic) | You configure them |
+| Build | No build step needed for most languages (autobuild) | You can specify your own build command |
+| Scope | Can be rolled out to all repos with a click | For cases requiring fine-grained tuning |
+
+> 🔑 Unless you have a monorepo, special build requirements, or need custom queries, **Default setup is best practice**. You can switch to Advanced later.
+
+📘 Details: <a class="retro-link" href="https://docs.github.com/en/code-security/code-scanning/enabling-code-scanning/configuring-default-setup-for-code-scanning" target="_blank" rel="noopener noreferrer">Configuring default setup ↗</a>
+
+## Vulnerabilities CodeQL detects
+
+CodeQL **converts code into "queryable data"** before analyzing it, so it understands semantics rather than just matching patterns like grep-based SAST.
+
+- 🐛 **Injection** — SQL injection / Command injection / Path traversal / XSS / SSRF
+- 🔓 Auth & authorization — Hardcoded credentials, weak cryptographic algorithms, weak random
+- 💣 Memory safety (C/C++) — Buffer overflow / use after free / null dereference
+- 🧩 **Data flow tracking** — Tracks whether user input (taint source) reaches a dangerous function (sink)
+- 🌐 Supported languages — C/C++, C#, Go, Java/Kotlin, JavaScript/TypeScript, Python, Ruby, Swift
+
+> 🔬 CodeQL queries are open-sourced at [github/codeql](https://github.com/github/codeql). You can write and extend with your own custom queries.
+
+## Copilot Autofix — AI fixes it for you ★
+
+The killer feature of Code Scanning. When CodeQL raises an alert, **AI generates a fix** that you can commit directly to the PR.
+
+- 🤖 How it works — The alert is passed to an LLM (GPT-4 family), which generates a diff based on the relevant code + surrounding context + CodeQL's description
+- 💬 Shown in the PR — "Generate fix" button → review the proposed patch → commit as-is
+- ⚡ **Reduces MTTR** — GitHub internal data shows fix time is 3–4× faster
+- 🌐 Coverage — JavaScript/TypeScript, Python, Java/Kotlin, C#, and other CodeQL-supported languages
+- 🆓 **Free for OSS** — Copilot Autofix on public repos has been completely free since 2024 (no Copilot subscription required)
+
+> 💡 Not just "find vulnerabilities" — **"let AI fix them too"** is the new standard. Review burden drops dramatically.
+
+📘 Details: <a class="retro-link" href="https://docs.github.com/en/code-security/code-scanning/managing-code-scanning-alerts/about-autofix-for-codeql-code-scanning" target="_blank" rel="noopener noreferrer">About Copilot Autofix ↗</a>
+
+## Getting started (fastest path)
+
+**Step 1 — Enable Default setup (this alone is enough)**
+
+```
+Repo → Settings → Code security → Code scanning
+  → Set up CodeQL → Default
+```
+
+GitHub auto-detects your language and generates a CodeQL workflow behind the scenes. Runs automatically on push and PR — results appear in the **Security tab** + inline comments on the PR's Files Changed tab.
+
+**Step 2 — Enable Copilot Autofix**
+
+Enable **Copilot Autofix** inside Code scanning settings. A "Generate fix" button will appear on alert pages.
+
+**Step 3 — Migrate to Advanced setup (if needed)**
+
+```yaml
+# .github/workflows/codeql.yml
+name: CodeQL
+on:
+  push: { branches: [main] }
+  pull_request: { branches: [main] }
+  schedule: [{ cron: '30 5 * * 1' }]
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    permissions: { security-events: write, contents: read }
+    strategy:
+      matrix: { language: [javascript, python] }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          queries: security-extended
+      - uses: github/codeql-action/analyze@v3
+```
+
+**Step 4 — Integrate third-party SAST tools (SARIF)**
+
+Tools like Semgrep, ESLint security, and Snyk can upload results in **SARIF** format to appear alongside CodeQL in the Security tab.
+
+```yaml
+- uses: github/codeql-action/upload-sarif@v3
+  with:
+    sarif_file: results.sarif
+```
+
+**Step 5 — Enable org-wide / enterprise-wide**
+
+Use `Org → Settings → Code security → default settings` to apply to new and existing repos at once. Security campaigns let you manage goals like "fix all critical alerts across all repos within 30 days" (Code Security).
+
+## Eligibility and pricing
+
+| Feature | Public repo | Private repo (No GHAS / Code Security) | Private repo (With GHAS / Code Security) |
+| --- | :---: | :---: | :---: |
+| CodeQL (default + advanced) | ✅ Free | ❌ | ✅ |
+| Third-party SARIF upload | ✅ Free | ❌ | ✅ |
+| Copilot Autofix | ✅ Free (since 2024) | ❌ | ✅ |
+| Security overview / campaigns | ✅ Free | ❌ | ✅ |
+| PR inline comments | ✅ Free | ❌ | ✅ |
+| Custom CodeQL queries | ✅ Free | ❌ | ✅ |
+
+> 💰 In 2025, GHAS was split — if you only need code scanning, **GitHub Code Security** ($30/month/active committer) is enough (no full GHAS contract required). Combine with Secret Protection if you also want secret scanning.  
+> 🆓 **Public repos get CodeQL and Autofix completely free**. If you're OSS, there's no reason not to enable this right now.  
+> ⚙️ Code scanning workflows run on GitHub-hosted runners — free for public repos; included in GHAS/Code Security for private repos (no additional Actions charges).
+
+📘 Details:
+- <a class="retro-link" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">Introducing GitHub Secret Protection & Code Security (2025 Mar) ↗</a>
+- <a class="retro-link" href="https://docs.github.com/en/code-security/code-scanning/integrating-with-code-scanning/sarif-support-for-code-scanning" target="_blank" rel="noopener noreferrer">SARIF support for code scanning ↗</a>
+- <a class="retro-link" href="https://docs.github.com/en/code-security/securing-your-organization/introduction-to-securing-your-organization/configuring-global-security-settings-for-your-organization" target="_blank" rel="noopener noreferrer">Org default security settings ↗</a>
+
+## Code Security Risk Assessment (free inventory scan)
+
+<div class="hero-quote">
+  <p>
+    <strong>Code Security Risk Assessment</strong> scans the <strong>up to 20 most active repositories</strong> in your org with a single click using CodeQL, making visible "what code vulnerabilities are hiding and where" (GA April 2026).
+  </p>
+  <p>
+    <strong>No GHAS / Code Security license required — completely free</strong>. Available to all Team and Enterprise Cloud orgs, and the Actions minutes used don't count against your Actions quota.
+  </p>
+</div>
+
+- 🔎 Scope — selects **up to 20 repos with the most recent active commits** in the org (you can re-select each time)
+- 📊 Output — aggregated report of vulnerabilities by **severity, language, and rule type**, including **how many are fixable by Copilot Autofix**
+- 🕒 Frequency — can be re-run **once every 90 days** (point-in-time inventory)
+- 🛂 Permissions — only Organization owners / security managers can run it
+- 🚀 How to run — `Org → Security → Assessments → Run code security risk assessment`
+- 🆓 No license required, no Actions minutes charged — perfect for evaluating Code Security before purchase
+
+> 📊 Pair this with Secret Risk Assessment (see <a class="retro-link" href="/theomonfort/playbook/secret-scanning">Secret Scanning ↗</a>) to get a complete picture of your organization's security posture in a single day. Use the results to decide whether to adopt **Code Security**.
+
+📘 Details:
+- <a class="retro-link" href="https://github.blog/changelog/2026-04-08-code-security-risk-assessment-available-for-organizations/" target="_blank" rel="noopener noreferrer">Code Security Risk Assessment GA (2026/04) ↗</a>
+- <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment" target="_blank" rel="noopener noreferrer">Code security risk assessment (GitHub Docs) ↗</a>
+- <a class="retro-link" href="https://github.blog/security/application-security/how-exposed-is-your-code-find-out-in-minutes-for-free/" target="_blank" rel="noopener noreferrer">How exposed is your code? Find out in minutes — for free ↗</a>

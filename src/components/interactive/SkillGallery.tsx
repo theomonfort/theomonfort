@@ -12,6 +12,21 @@ export interface SkillEntry {
 
 interface Props {
   skills: SkillEntry[];
+  copy?: {
+    setupSummary: string;
+    setupIntro: string;
+    setupAfter: string;
+    global: string;
+    project: string;
+    savePrefix: string;
+    selected: string;
+    all: string;
+    copySuffix: string;
+    copiedAll: string;
+    selectAria: string;
+    copiedOne: string;
+    copyOne: string;
+  };
 }
 
 const COPY_FEEDBACK_MS = 1500;
@@ -26,7 +41,23 @@ function buildBatchCommand(skills: SkillEntry[], scope: 'project' | 'global'): s
   return skills.map((s) => buildCommand(s, scope)).join(' && \\\n');
 }
 
-export default function SkillGallery({ skills }: Props) {
+const defaultCopy: Required<Props>['copy'] = {
+  setupSummary: '▶ 初回セットアップ（gh skill 拡張のインストール）',
+  setupIntro: '"gh skill" は GitHub CLI の拡張です。一度だけ実行:',
+  setupAfter: 'その後、下のカードから装備したいスキルをコピーして実行してください。',
+  global: 'グローバル ~/',
+  project: 'プロジェクト .github/',
+  savePrefix: '💾 セーブポイント・',
+  selected: '選択',
+  all: '全装備',
+  copySuffix: 'を コピー',
+  copiedAll: '▶ コマンドをコピーしました！ターミナルに貼り付けてEnter。',
+  selectAria: 'を選択',
+  copiedOne: '✓ コピー完了',
+  copyOne: '▶ インストール・コマンドをコピー',
+};
+
+export default function SkillGallery({ skills, copy = defaultCopy }: Props) {
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [scope, setScope] = useState<'project' | 'global'>('global');
   const [copiedSlug, setCopiedSlug] = useState<string | null>(null);
@@ -64,15 +95,15 @@ export default function SkillGallery({ skills }: Props) {
     <div className="space-y-6">
       <details className="bg-shadow-ink/70 border-2 border-dashed border-crt-amber/50 p-4 group">
         <summary className="font-pixel text-[10px] text-crt-amber cursor-pointer select-none">
-          ▶ 初回セットアップ（gh skill 拡張のインストール）
+          {copy.setupSummary}
         </summary>
         <div className="mt-3 space-y-2 text-sm">
           <p className="font-body text-phosphor/85">
-            "gh skill" は GitHub CLI の拡張です。一度だけ実行:
+            {copy.setupIntro}
           </p>
           <pre className="font-mono text-[11px] text-gb-green bg-shadow-ink border border-phosphor/20 p-2 overflow-x-auto"><code>gh extension install theomonfort/gh-skill</code></pre>
           <p className="font-body text-[11px] text-phosphor/60">
-            その後、下のカードから装備したいスキルをコピーして実行してください。
+            {copy.setupAfter}
           </p>
         </div>
       </details>
@@ -91,7 +122,7 @@ export default function SkillGallery({ skills }: Props) {
                 : 'border-phosphor/30 text-phosphor/50'
             }`}
           >
-            グローバル ~/
+            {copy.global}
           </button>
           <button
             type="button"
@@ -105,7 +136,7 @@ export default function SkillGallery({ skills }: Props) {
                 : 'border-phosphor/30 text-phosphor/50'
             }`}
           >
-            プロジェクト .github/
+            {copy.project}
           </button>
         </div>
         <button
@@ -113,14 +144,14 @@ export default function SkillGallery({ skills }: Props) {
           onClick={copyBatch}
           className="px-4 py-2 border-2 border-crt-amber text-crt-amber bg-shadow-ink hover:bg-crt-amber/10 shadow-neon-amber transition-colors"
         >
-          💾 セーブポイント・
-          {selected.size > 0 ? `選択 ${selected.size}件` : '全装備'}を コピー
+          {copy.savePrefix}
+          {selected.size > 0 ? `${copy.selected} ${selected.size}` : copy.all}{copy.copySuffix}
         </button>
       </div>
 
       {copiedAll && (
         <div className="font-pixel text-[10px] text-gb-green border-2 border-gb-green p-3 bg-shadow-ink">
-          ▶ コマンドをコピーしました！ターミナルに貼り付けてEnter。
+          {copy.copiedAll}
         </div>
       )}
 
@@ -145,7 +176,7 @@ export default function SkillGallery({ skills }: Props) {
                   className="font-pixel text-base shrink-0 w-8 h-8 border-2 border-current flex items-center justify-center"
                   style={{ color: isSelected ? '#ff2e88' : '#e8f4ff' }}
                   aria-pressed={isSelected}
-                  aria-label={`${s.name} を選択`}
+                  aria-label={`${copy.selectAria} ${s.name}`}
                 >
                   {isSelected ? '✓' : ''}
                 </button>
@@ -164,7 +195,7 @@ export default function SkillGallery({ skills }: Props) {
                     onClick={() => copyOne(s)}
                     className="font-mono text-[10px] text-crt-amber hover:text-neon-magenta transition-colors underline-offset-4 hover:underline"
                   >
-                    {isCopied ? '✓ コピー完了' : '▶ インストール・コマンドをコピー'}
+                    {isCopied ? copy.copiedOne : copy.copyOne}
                   </button>
                 </div>
               </div>

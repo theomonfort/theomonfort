@@ -3,7 +3,14 @@ import { play } from '../../lib/sfx';
 
 const STORAGE_KEY = 'akq-booted';
 
-export default function BootSequence() {
+interface Props {
+  locale?: 'ja' | 'en';
+  copy?: {
+    brandMiddle: string;
+  };
+}
+
+export default function BootSequence({ locale = 'ja', copy }: Props) {
   const [phase, setPhase] = useState<'off' | 'power' | 'logo' | 'done'>('off');
 
   useEffect(() => {
@@ -13,7 +20,8 @@ export default function BootSequence() {
     // Deep links (playbook, links, philosophy, etc.) skip straight to the content.
     const path = window.location.pathname.replace(/\/+$/, '');
     const base = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '');
-    const isHome = path === base || path === '' || path === '/';
+    const homePath = locale === 'en' ? `${base}/en` : base;
+    const isHome = path === homePath || path === '' || path === '/';
     if (booted || reduce || !isHome) {
       setPhase('done');
       if (!isHome) sessionStorage.setItem(STORAGE_KEY, '1');
@@ -48,7 +56,7 @@ export default function BootSequence() {
         <div className="text-center animate-fadeIn">
           <div className="font-pixel text-neon-magenta text-2xl md:text-4xl mb-2 tracking-widest leading-none flex items-center justify-center gap-3 md:gap-5 flex-wrap">
             <span>AI</span>
-            <span className="font-pixel-jp text-[1.05em] leading-none -translate-y-[0.08em]">駆動開発</span>
+            <span className="font-pixel-jp text-[1.05em] leading-none -translate-y-[0.08em]">{copy?.brandMiddle ?? '駆動開発'}</span>
             <span>QUEST</span>
           </div>
           <div className="font-pixel-jp text-phosphor/70 text-xs md:text-sm">

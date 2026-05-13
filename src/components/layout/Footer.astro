@@ -1,18 +1,35 @@
 ---
+import { localizedPath, otherLocale, siteCopy, type Locale } from '../../lib/i18n';
+
+interface Props {
+  locale?: Locale;
+  currentPath?: string;
+}
+const { locale = 'ja', currentPath = '/' } = Astro.props;
 const year = new Date().getFullYear();
+const t = siteCopy[locale];
+const targetLocale = otherLocale(locale);
 ---
 
 <footer class="border-t-2 border-neon-magenta/30 mt-24 py-8 px-4 text-center font-pixel text-[10px] text-phosphor/60">
   <div class="max-w-3xl mx-auto space-y-3">
     <div class="flex items-center justify-center gap-3 text-crt-amber">
       <img src="/theomonfort/mascot.svg" alt="" class="w-6 h-6 pixelated opacity-90" aria-hidden="true" />
-      <span>▮ END OF DEMO</span>
+      <span>{t.footer.end}</span>
       <img src="/theomonfort/mascot.svg" alt="" class="w-6 h-6 pixelated opacity-90 -scale-x-100" aria-hidden="true" />
     </div>
     <p class="font-body text-xs leading-relaxed">
-      このサイトは AI駆動開発 への愛で作られた。<br />
-      コードは詩、AI は楽器、君の "好み" が世界を変える。
+      {t.footer.tagline[0]}<br />
+      {t.footer.tagline[1]}
     </p>
+
+    <div class="pt-2 font-pixel text-[10px] text-phosphor/70">
+      <span class="text-phosphor/40">{t.footer.languageLabel}</span>
+      <span aria-hidden="true"> · </span>
+      <a href={localizedPath(targetLocale, currentPath)} class="text-neon-cyan hover:text-neon-magenta transition-colors">
+        ▶ {t.footer.switchTo}
+      </a>
+    </div>
 
     <ul class="flex items-center justify-center gap-5 pt-2 font-pixel text-[10px]">
       <li>
@@ -35,6 +52,6 @@ const year = new Date().getFullYear();
       </li>
     </ul>
 
-    <p class="font-mono text-[10px] text-phosphor/40">© {year} — AI KUDŌ KAIHATSU QUEST · ↑↑↓↓←→←→BA で何かが起こる？</p>
+    <p class="font-mono text-[10px] text-phosphor/40">© {year} — AI KUDŌ KAIHATSU QUEST · {t.footer.konami}</p>
   </div>
 </footer>

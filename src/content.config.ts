@@ -5,7 +5,7 @@ const playbook = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/playbook' }),
   schema: z.object({
     title: z.string(),
-    titleEn: z.string(),
+    titleEn: z.string().optional(),
     summary: z.string(),
     icon: z.string().default('▶'),
     color: z.enum(['magenta', 'cyan', 'amber', 'green']).default('cyan'),

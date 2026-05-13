@@ -12,8 +12,9 @@ interface Item {
 interface Props {
   items: Item[];
   color?: AccentColor;
+  readMoreLabel?: string;
 }
-const { items, color = 'cyan' } = Astro.props;
+const { items, color = 'cyan', readMoreLabel = '▶ 詳細を見る ↗' } = Astro.props;
 const c = accentClasses[color];
 ---
 
@@ -39,7 +40,7 @@ const c = accentClasses[color];
           )}
           {it.url && (
             <a href={it.url} target="_blank" rel="noopener noreferrer" class="inline-block font-mono text-[11px] mt-2 retro-link">
-              ▶ 詳細を見る ↗
+              {readMoreLabel}
             </a>
           )}
         </div>

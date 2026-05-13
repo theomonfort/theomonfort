@@ -1,0 +1,53 @@
+---
+title: Copilot Memory
+titleEn: Copilot Memory
+summary: A mechanism for Copilot to remember and reuse knowledge learned while working in a repository, passing it on to future selves and the whole team. Gets smarter the more you use it.
+icon: 🧠
+color: magenta
+order: 19
+category: operate
+related: ['cloud-agent', 'copilot-code-review', 'cli', 'instructions']
+links:
+  - label: Blog — Building an agentic memory system
+    url: https://github.blog/ai-and-ml/github-copilot/building-an-agentic-memory-system-for-github-copilot/
+  - label: Docs — Copilot Memory
+    url: https://docs.github.com/en/copilot/concepts/agents/copilot-memory
+---
+
+## In a nutshell
+
+<div class="hero-quote">
+  <p>
+    <strong>Copilot Memory</strong> is a mechanism for <strong>Code Review / Cloud Agent / CLI</strong> to <strong>remember and reuse</strong> knowledge learned in a repository.
+  </p>
+  <p>
+    No more repeating the same preamble every time — <strong>the more you use it, the smarter Copilot becomes</strong>.
+  </p>
+</div>
+
+## Scope and mechanics
+
+### Scope
+
+- 📦 **Per repository** — memories are tied to a repository and used only within it
+- 👥 **Shared across users** — available in Copilot sessions for all users who have access to the repository
+- 🔀 **Cross-feature** — knowledge learned by Cloud Agent is available to Code Review, and vice versa
+
+### How it works
+
+- 🔍 Each memory carries **code citations** that are **verified against the current codebase** when the memory is used
+- ⏳ **Auto-deleted after 28 days** — refreshed and extended whenever the memory is used
+
+### Why it matters
+
+No more repeating the same explanation in every prompt — **the more you use it, the deeper Copilot's understanding of the repository grows**.
+
+## Where to configure it
+
+| Scope | Settings path | What you can do |
+| --- | --- | --- |
+| **Repository** | Repo → **Settings** → *Code and automation* → **Copilot** → **Memory** | **View the list** of saved memories and **delete individual entries** |
+| **Organization** | Org → **Settings** → *Code, planning, and automation* → **Copilot** → **Policies** → *Copilot Memory* | **Enable / Disable** for the entire org |
+| **Enterprise** | Enterprise → **AI controls** → **Copilot** → *Copilot Memory* | **Enabled / Disabled / Let orgs decide** for all orgs |
+
+> 📘 Official guide: [Managing and curating Copilot Memory](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/copilot-memory)

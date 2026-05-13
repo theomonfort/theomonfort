@@ -1,20 +1,27 @@
 ---
-const path = Astro.url.pathname;
+import { localizedPath, siteCopy, type Locale } from '../../lib/i18n';
+
+interface Props {
+  locale?: Locale;
+  currentPath?: string;
+}
+const { locale = 'ja', currentPath = '/' } = Astro.props;
+const t = siteCopy[locale];
 const items = [
-  { href: '/theomonfort/', label: 'HUB', kanji: '部屋' },
-  { href: '/theomonfort/playbook', label: 'PLAYBOOK', kanji: 'プレイブック' },
-  { href: '/theomonfort/skills', label: 'EQUIPMENT', kanji: '装備所' },
-  { href: '/theomonfort/philosophy', label: 'Q&A', kanji: '問答' },
-  { href: '/theomonfort/links', label: 'LINKS', kanji: '泉' },
+  { path: '/', label: t.nav.hub, short: t.nav.hubShort },
+  { path: '/playbook', label: t.nav.playbook, short: t.nav.playbookShort },
+  { path: '/skills', label: t.nav.equipment, short: t.nav.equipmentShort },
+  { path: '/philosophy', label: t.nav.philosophy, short: t.nav.philosophyShort },
+  { path: '/links', label: t.nav.links, short: t.nav.linksShort },
 ];
 ---
 
 <header class="sticky top-0 z-40 backdrop-blur bg-midnight/70 border-b-2 border-neon-magenta/40">
   <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
     <a
-      href="/theomonfort/"
+      href={localizedPath(locale, '/')}
       class="group inline-flex items-center gap-2.5 text-neon-magenta hover:text-neon-cyan transition-colors leading-none"
-      aria-label="AI 駆動開発 QUEST — ホームへ"
+      aria-label={t.brandAria}
     >
       <img
         src="/theomonfort/mascot.svg"
@@ -23,16 +30,16 @@ const items = [
         aria-hidden="true"
       />
       <span class="font-pixel text-[11px] md:text-[13px] tracking-[0.05em]">AI</span>
-      <span class="font-pixel-jp text-base md:text-lg leading-none -mt-0.5">駆動開発</span>
+      <span class="font-pixel-jp text-base md:text-lg leading-none -mt-0.5">{t.brandMiddle}</span>
       <span class="font-pixel text-[11px] md:text-[13px] tracking-[0.1em]">QUEST</span>
     </a>
     <ul class="flex items-center gap-1 md:gap-2 flex-wrap text-[10px] md:text-xs font-pixel">
       {items.slice(1).map((item) => {
-        const active = path === item.href || path.startsWith(item.href + '/');
+        const active = currentPath === item.path || currentPath.startsWith(item.path + '/');
         return (
           <li>
             <a
-              href={item.href}
+              href={localizedPath(locale, item.path)}
               class={`px-2 md:px-3 py-2 border-2 transition-colors ${
                 active
                   ? 'border-neon-cyan text-neon-cyan shadow-neon-cyan'
@@ -40,7 +47,7 @@ const items = [
               }`}
             >
               <span class="hidden md:inline">{item.label}</span>
-              <span class="md:hidden font-pixel-jp">{item.kanji}</span>
+              <span class="md:hidden font-pixel-jp">{item.short}</span>
             </a>
           </li>
         );
