@@ -141,4 +141,4 @@ Repo or Org → Settings → Code security → Secret scanning → Custom patter
 
 > 📊 「とりあえず社内に何件 secret が漏れてるか知りたい」「予算稟議のために数字が欲しい」というケースで真っ先に使う。結果を見て **Secret Protection 導入の是非** を判断すれば良い。
 
-📘 詳細: <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/enabling-secret-scanning-features/enabling-secret-risk-assessment-for-your-organization" target="_blank" rel="noopener noreferrer">Enabling Secret Risk Assessment ↗</a>
+📘 詳細: <a class="retro-link" href="https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk" target="_blank" rel="noopener noreferrer">Enabling Secret Risk Assessment ↗</a>

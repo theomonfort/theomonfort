@@ -11,7 +11,7 @@ links:
   - label: Copilot Metrics API
     url: https://docs.github.com/en/rest/copilot/copilot-metrics
   - label: Reviewing Copilot usage data
-    url: https://docs.github.com/en/copilot/how-tos/administer-copilot/admin-billing/about-billing-for-github-copilot
+    url: https://docs.github.com/en/copilot/concepts/billing/organizations-and-enterprises
 ---
 
 ## 一言で

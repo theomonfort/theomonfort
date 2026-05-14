@@ -22,10 +22,10 @@ links:
     url: https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/
   - group: 💰 Billing
     label: About billing for GitHub Advanced Security
-    url: https://docs.github.com/en/billing/managing-billing-for-your-products/about-billing-for-github-advanced-security
+    url: https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security
   - group: 🆓 Free inventory (Risk Assessment)
     label: Secret Risk Assessment (Docs)
-    url: https://docs.github.com/en/code-security/secret-scanning/enabling-secret-scanning-features/enabling-secret-risk-assessment-for-your-organization
+    url: https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk
   - group: 🆓 Free inventory (Risk Assessment)
     label: Code Security Risk Assessment (Docs)
     url: https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment
@@ -104,11 +104,11 @@ links:
 > 💡 Use these first when you "need numbers for a budget proposal" or "want to see the impact before buying." Running both on the same day gives you a complete view of your organization's security posture in hours.
 
 📘 Risk Assessment references:
-- <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/enabling-secret-scanning-features/enabling-secret-risk-assessment-for-your-organization" target="_blank" rel="noopener noreferrer">Enabling Secret Risk Assessment ↗</a>
+- <a class="retro-link" href="https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk" target="_blank" rel="noopener noreferrer">Enabling Secret Risk Assessment ↗</a>
 - <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment" target="_blank" rel="noopener noreferrer">Code security risk assessment (GitHub Docs) ↗</a>
 - <a class="retro-link" href="https://github.blog/changelog/2026-04-08-code-security-risk-assessment-available-for-organizations/" target="_blank" rel="noopener noreferrer">Code Security Risk Assessment GA (2026/04) ↗</a>
 
 📘 GHAS general:
 - <a class="retro-link" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">Introducing GitHub Secret Protection & Code Security (GitHub Blog) ↗</a>
-- <a class="retro-link" href="https://docs.github.com/en/billing/managing-billing-for-your-products/about-billing-for-github-advanced-security" target="_blank" rel="noopener noreferrer">About billing for GitHub Advanced Security ↗</a>
+- <a class="retro-link" href="https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security" target="_blank" rel="noopener noreferrer">About billing for GitHub Advanced Security ↗</a>
 - <a class="retro-link" href="https://github.com/security/advanced-security" target="_blank" rel="noopener noreferrer">GitHub Advanced Security product page ↗</a>
