@@ -24,7 +24,7 @@ links:
 
 ## 一言で
 
-<div class="hero-quote hero-quote-chat">
+<div class="hero-quote hero-quote-theo">
   <p>
     題材は <strong>このプレイブックサイトの簡略版</strong>。あなたが今読んでいるこのサイトを、<strong>Copilot と一緒にゼロから作り直します</strong>。
   </p>

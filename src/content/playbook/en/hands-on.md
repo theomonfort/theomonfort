@@ -24,7 +24,7 @@ links:
 
 ## At a Glance
 
-<div class="hero-quote hero-quote-chat">
+<div class="hero-quote hero-quote-theo">
   <p>
     The project you'll build is <strong>a simplified version of this very playbook site</strong>. You'll rebuild the site you're reading right now — <strong>from scratch, together with Copilot</strong>.
   </p>
