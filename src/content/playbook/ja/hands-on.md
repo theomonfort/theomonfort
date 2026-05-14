@@ -35,7 +35,6 @@ links:
 
 > 🪞 **作るもの = 今読んでいるこのサイト(の簡略版)**。だからゴールが分かりやすく、各機能がどの場面で効くかを実感できます。
 > 🎮 **使う機能** — MCP / Instructions / Agent Skills / Plan モード / Cloud Agent / Code Review / Agentic Workflow を <strong>一気通貫</strong> で体験。
-> 🚀 来週開催の特別ワークショップ向け。Codelabs 形式で 1 ステップずつ進められます。
 
 📘 リポジトリと Codelabs:
 - <a class="retro-link" href="https://github.com/theomonfort/Github-copilot-workshop" target="_blank" rel="noopener noreferrer">theomonfort/Github-copilot-workshop ↗</a>

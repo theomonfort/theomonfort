@@ -32,17 +32,17 @@ links:
 
 > 良い context は量ではなく **選び方**。不要な情報を減らし、必要な情報を欠かさない。
 
-## Context rot
+## Context rot（コンテキスト劣化）
 
-LLM は context window が大きいほど賢くなるわけではない。情報を詰め込みすぎると、**Lost in the middle** で重要情報が中央に埋もれたり、**Recency bias** で直近の情報を過大評価したりして、判断が鈍る。
+LLM は context window（コンテキストウィンドウ）が大きいほど賢くなるわけではない。情報を詰め込みすぎると、**Lost in the middle（中央埋没）** で重要情報が中央に埋もれたり、**Recency bias（直近性バイアス）** で直近の情報を過大評価したりして、判断が鈍る。
 
-これを **context rot** と呼ぶ。
+これを **context rot（コンテキスト劣化）** と呼ぶ。
 
 ```mermaid
 treemap-beta
-"Context window"
-  "Smart zone": 60:::smart
-  "Dumb zone": 40:::dumb
+"Context window / コンテキストウィンドウ"
+  "Smart zone / 賢いゾーン": 60:::smart
+  "Dumb zone / 鈍いゾーン": 40:::dumb
 classDef smart fill:#0891b2,stroke:#67e8f9,color:#ecfeff
 classDef dumb fill:#7a1748,stroke:#ff2e88,color:#ffe8f4
 ```
@@ -51,7 +51,7 @@ classDef dumb fill:#7a1748,stroke:#ff2e88,color:#ffe8f4
 
 ## Context window：Start
 
-Start はほぼ理想状態。常時必要な system/tools だけが入り、作業用の余白が大きい。
+Start はほぼ理想状態。常時必要な **System/tools**（skills descriptions / copilot-instructions / MCP servers）だけが入り、作業用の余白が大きい。
 
 ```mermaid
 treemap-beta
