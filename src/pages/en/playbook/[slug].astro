@@ -228,6 +228,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   let slides: Slide[] = [];
   let current = 0;
   let restoreFns: Array<() => void> = [];
+  let slideRefreshToken = 0;
 
   function buildSlides(): Slide[] {
     const section = document.querySelector<HTMLElement>('.playbook-detail');
@@ -306,6 +307,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       if (document.body.classList.contains('present-mode')) {
         const u = new URL(el.getAttribute('href') || '', window.location.origin);
         u.searchParams.set('present', '1');
+        u.searchParams.delete('slide');
         el.setAttribute('href', u.pathname + (u.search ? u.search : ''));
       }
     });
@@ -336,6 +338,18 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     showSlide(isNaN(s) ? 0 : s);
   }
 
+  function resetChrome() {
+    const counter = document.querySelector<HTMLElement>('.slide-counter');
+    if (counter) counter.textContent = '';
+    const prog = document.querySelector<HTMLElement>('.slide-progress');
+    if (prog) prog.innerHTML = '';
+    const tag = document.querySelector<HTMLElement>('.slide-title-tag');
+    if (tag) {
+      tag.innerHTML = '';
+      tag.classList.remove('visible');
+    }
+  }
+
   function exitSlideMode() {
     restoreFns.forEach((fn) => fn());
     restoreFns = [];
@@ -346,6 +360,18 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       });
     slides = [];
     current = 0;
+    resetChrome();
+  }
+
+  async function refreshSlideMode() {
+    const token = ++slideRefreshToken;
+    exitSlideMode();
+    await renderMermaid();
+    if (token !== slideRefreshToken) return;
+    if (!document.body.classList.contains('present-mode')) return;
+    if (!document.querySelector('.playbook-detail')) return;
+    enterSlideMode();
+    syncSlideUrl();
   }
 
   // ── Presentation mode toggle ───────────────────────────────────
@@ -359,14 +385,11 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     else { url.searchParams.delete('present'); url.searchParams.delete('slide'); }
     history.replaceState(null, '', url.pathname + (url.search || '') + url.hash);
 
-    if (on && !wasOn) {
-      void renderMermaid().then(() => {
-        if (document.body.classList.contains('present-mode') && slides.length === 0) {
-          enterSlideMode();
-        }
-      });
+    if (on) void refreshSlideMode();
+    if (!on) {
+      slideRefreshToken++;
+      if (wasOn || slides.length) exitSlideMode();
     }
-    if (!on && wasOn) exitSlideMode();
 
     if (on) {
       document.querySelectorAll<SVGSVGElement>('.mermaid-wrap svg').forEach((svg) => {
@@ -579,11 +602,6 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
         if (hadHidden) el.classList.add('akq-slide-hidden');
       });
 
-      // If we're in present mode, rebuild slides to capture new wrappers
-      if (document.body.classList.contains('present-mode')) {
-        exitSlideMode();
-        enterSlideMode();
-      }
     } catch (err) {
       console.error('[mermaid]', err);
     }
