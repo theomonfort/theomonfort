@@ -125,6 +125,7 @@ There is no single technology tool that makes AI powerful. Separate **what to al
 | Path-specific custom instructions | `.github/instructions/*.instructions.md` + `applyTo` | Area-specific rules for `tests/**`, `api/**`, etc. |
 | Agent skills | `.github/skills/*/SKILL.md` / `~/.copilot/skills/` | Specialized procedures like PR descriptions, frontend design |
 | Custom agents | `.github/agents/*.agent.md` / `~/.copilot/agents/` | Switch roles, models, and available tools |
+| Hooks | `.github/hooks/*.json` | Inject scripts before/after tool execution to deny, log, or notify |
 | MCP servers | MCP config file | Connect to GitHub, Figma, Playwright, Jira, Salesforce |
 | Tool permissions | Agent host permission settings | Control read/search only, allow edits, allow command execution, etc. |
 

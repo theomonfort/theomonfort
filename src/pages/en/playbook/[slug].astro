@@ -66,10 +66,12 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 
 <Layout locale={locale} currentPath={`/playbook/${item.slug}`} title={`${playbookEntryTitle(item)} — ${t.playbook.heading}`}>
   <script is:inline>
-    // Apply present-mode class synchronously to avoid FOUC of pink scrollbars
+    // Apply present-mode classes synchronously so the full article does not flash before slides initialize.
     if (new URLSearchParams(location.search).get('present') === '1') {
       document.documentElement.classList.add('present-mode');
+      document.documentElement.classList.add('slide-preparing');
       document.body.classList.add('present-mode');
+      document.body.classList.add('slide-preparing');
     }
   </script>
   <section
@@ -229,6 +231,12 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   let current = 0;
   let restoreFns: Array<() => void> = [];
   let slideRefreshToken = 0;
+  const SLIDE_PREPARING_CLASS = 'slide-preparing';
+
+  function setSlidePreparing(on: boolean) {
+    document.documentElement.classList.toggle(SLIDE_PREPARING_CLASS, on);
+    document.body.classList.toggle(SLIDE_PREPARING_CLASS, on);
+  }
 
   function buildSlides(): Slide[] {
     const section = document.querySelector<HTMLElement>('.playbook-detail');
@@ -316,7 +324,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     if (active) active.scrollIntoView({ block: 'nearest' });
   }
 
-  function enterSlideMode() {
+  function enterSlideMode(startSlide?: number) {
     slides = buildSlides();
     if (!slides.length) return;
 
@@ -334,7 +342,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 
     // start at slide param or 0
     const params = new URLSearchParams(window.location.search);
-    const s = parseInt(params.get('slide') || '0', 10);
+    const s = startSlide ?? parseInt(params.get('slide') || '0', 10);
     showSlide(isNaN(s) ? 0 : s);
   }
 
@@ -365,13 +373,31 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 
   async function refreshSlideMode() {
     const token = ++slideRefreshToken;
+    setSlidePreparing(true);
     exitSlideMode();
+    if (!document.body.classList.contains('present-mode')) {
+      setSlidePreparing(false);
+      return;
+    }
+    if (!document.querySelector('.playbook-detail')) {
+      setSlidePreparing(false);
+      return;
+    }
     await renderMermaid();
     if (token !== slideRefreshToken) return;
-    if (!document.body.classList.contains('present-mode')) return;
-    if (!document.querySelector('.playbook-detail')) return;
+    if (!document.body.classList.contains('present-mode')) {
+      setSlidePreparing(false);
+      return;
+    }
+    if (!document.querySelector('.playbook-detail')) {
+      setSlidePreparing(false);
+      return;
+    }
     enterSlideMode();
     syncSlideUrl();
+    requestAnimationFrame(() => {
+      if (token === slideRefreshToken) setSlidePreparing(false);
+    });
   }
 
   // ── Presentation mode toggle ───────────────────────────────────
@@ -388,6 +414,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     if (on) void refreshSlideMode();
     if (!on) {
       slideRefreshToken++;
+      setSlidePreparing(false);
       if (wasOn || slides.length) exitSlideMode();
     }
 
@@ -404,8 +431,12 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 
   function syncSlideUrl() {
     const url = new URL(window.location.href);
-    url.searchParams.set('slide', String(current));
-    history.replaceState(null, '', url.pathname + (url.search || '') + url.hash);
+    if (current > 0) url.searchParams.set('slide', String(current));
+    else url.searchParams.delete('slide');
+    const nextUrl = url.pathname + (url.search || '') + url.hash;
+    if (nextUrl !== window.location.pathname + window.location.search + window.location.hash) {
+      history.replaceState(null, '', nextUrl);
+    }
   }
 
   function initPresent() {
@@ -469,6 +500,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 
   async function navigateSmooth(href: string) {
     try {
+      if (document.body.classList.contains('present-mode')) setSlidePreparing(true);
       const mod = await import('astro:transitions/client');
       await mod.navigate(href);
     } catch {
@@ -488,15 +520,35 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       return;
     }
 
-    await renderMermaid();
     initPresent();
+    if (!document.body.classList.contains('present-mode')) {
+      await renderMermaid();
+    }
     syncToc();
   }
 
   document.addEventListener('keydown', onKey);
+  function preparePresentNavigation(event?: Event) {
+    const currentPresent = document.body.classList.contains('present-mode') || document.documentElement.classList.contains('present-mode');
+    const targetPresent = new URLSearchParams(location.search).get('present') === '1';
+    if (!currentPresent && !targetPresent) return;
+    setSlidePreparing(true);
+
+    const astroEvent = event as (Event & {
+      newDocument?: Document;
+      detail?: { newDocument?: Document };
+    });
+    const nextDocument = astroEvent.newDocument ?? astroEvent.detail?.newDocument;
+    nextDocument?.documentElement.classList.add('present-mode', SLIDE_PREPARING_CLASS);
+    nextDocument?.body?.classList.add('present-mode', SLIDE_PREPARING_CLASS);
+  }
+  document.addEventListener('astro:before-preparation', preparePresentNavigation);
+  document.addEventListener('astro:before-swap', preparePresentNavigation);
   document.addEventListener('astro:page-load', initGlossaryInteractions);
   win.__akqGlossaryCleanup = () => {
     document.removeEventListener('keydown', onKey);
+    document.removeEventListener('astro:before-preparation', preparePresentNavigation);
+    document.removeEventListener('astro:before-swap', preparePresentNavigation);
     document.removeEventListener('astro:page-load', initGlossaryInteractions);
   };
 
@@ -704,6 +756,9 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
   .prose-akq .hero-quote.hero-quote-theo::before {
     background-image: url('/theomonfort.png');
+    background-size: cover;
+    border-radius: 9999px;
+    clip-path: circle(50% at 50% 50%);
   }
   .prose-akq .hero-quote.hero-quote-soon::before {
     background-image: url('/octocat-monocle.png');
@@ -1465,6 +1520,11 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     width: 100%;
     margin-left: auto !important;
     margin-right: auto !important;
+  }
+  body.present-mode.slide-preparing .playbook-detail > header,
+  body.present-mode.slide-preparing .playbook-detail > article.prose-akq > *,
+  body.present-mode.slide-preparing .playbook-detail > aside.links-aside {
+    visibility: hidden !important;
   }
   body.present-mode .slide-title-tag { display: none !important; }
 

@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      {
+        "type": "command",
+        "bash": "./scripts/guard.sh",
+        "powershell": "./scripts/guard.ps1",
+        "cwd": ".github/hooks",
+        "timeoutSec": 30,
+        "env": { "LOG_LEVEL": "INFO" }
+      }
+    ]
+  }
+}
