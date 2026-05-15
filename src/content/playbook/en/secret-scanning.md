@@ -141,4 +141,4 @@ Use **default settings** in `Org → Settings → Code security` to apply to new
 
 > 📊 Use this first when you want to "just know how many secrets are leaking across the org" or "need numbers for a budget proposal." Review the results to decide whether to adopt **Secret Protection**.
 
-📘 Details: <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/enabling-secret-scanning-features/enabling-secret-risk-assessment-for-your-organization" target="_blank" rel="noopener noreferrer">Enabling Secret Risk Assessment ↗</a>
+📘 Details: <a class="retro-link" href="https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk" target="_blank" rel="noopener noreferrer">Enabling Secret Risk Assessment ↗</a>

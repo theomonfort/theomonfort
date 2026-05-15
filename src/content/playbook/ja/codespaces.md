@@ -16,7 +16,7 @@ links:
     url: https://docs.github.com/en/codespaces
   - group: GitHub Docs
     label: Choosing the machine type for your codespace
-    url: https://docs.github.com/en/codespaces/setting-your-user-preferences/choosing-the-machine-type-for-your-codespace
+    url: https://docs.github.com/en/codespaces/customizing-your-codespace/changing-the-machine-type-for-your-codespace
   - group: Dev Containers
     label: devcontainer.json reference
     url: https://containers.dev/
