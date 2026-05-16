@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 interface Props {
   text: string;
@@ -9,6 +9,29 @@ interface Props {
   onDone?: () => void;
 }
 
+interface Segment {
+  bold: boolean;
+  value: string;
+}
+
+function tokenize(text: string): Segment[] {
+  const segments: Segment[] = [];
+  const re = /\*\*([^*]+)\*\*/g;
+  let last = 0;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(text)) !== null) {
+    if (m.index > last) {
+      segments.push({ bold: false, value: text.slice(last, m.index) });
+    }
+    segments.push({ bold: true, value: m[1] });
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) {
+    segments.push({ bold: false, value: text.slice(last) });
+  }
+  return segments;
+}
+
 export default function TypewriterText({
   text,
   speed = 28,
@@ -17,6 +40,11 @@ export default function TypewriterText({
   skipLabel = 'クリックでスキップ',
   onDone,
 }: Props) {
+  const segments = useMemo(() => tokenize(text), [text]);
+  const totalLength = useMemo(
+    () => segments.reduce((sum, s) => sum + s.value.length, 0),
+    [segments]
+  );
   const [shown, setShown] = useState(0);
   const [skipped, setSkipped] = useState(false);
   const doneRef = useRef(false);
@@ -32,7 +60,7 @@ export default function TypewriterText({
     }
 
     const complete = () => {
-      setShown(text.length);
+      setShown(totalLength);
       if (!doneRef.current) {
         doneRef.current = true;
         onDone?.();
@@ -60,7 +88,7 @@ export default function TypewriterText({
         if (cancelled) return;
         i += 1;
         setShown(i);
-        if (i < text.length) {
+        if (i < totalLength) {
           timer = setTimeout(tick, speed);
         } else {
           complete();
@@ -73,9 +101,27 @@ export default function TypewriterText({
       clearTimeout(start);
       if (timer) clearTimeout(timer);
     };
-  }, [text, speed, startDelay, skipped, onDone]);
+  }, [text, speed, startDelay, skipped, onDone, totalLength]);
 
   const handleSkip = () => setSkipped(true);
+
+  let remaining = shown;
+  const rendered: React.ReactNode[] = [];
+  segments.forEach((seg, idx) => {
+    if (remaining <= 0) return;
+    const take = Math.min(seg.value.length, remaining);
+    const slice = seg.value.slice(0, take);
+    remaining -= take;
+    if (seg.bold) {
+      rendered.push(
+        <strong key={idx} className="font-bold text-phosphor">
+          {slice}
+        </strong>
+      );
+    } else {
+      rendered.push(<span key={idx}>{slice}</span>);
+    }
+  });
 
   return (
     <p
@@ -86,8 +132,8 @@ export default function TypewriterText({
       tabIndex={0}
       aria-label={skipLabel}
     >
-      {text.slice(0, shown)}
-      {shown < text.length && <span className="caret-inline">▌</span>}
+      {rendered}
+      {shown < totalLength && <span className="caret-inline">▌</span>}
     </p>
   );
 }

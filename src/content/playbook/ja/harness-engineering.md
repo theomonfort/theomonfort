@@ -192,4 +192,4 @@ flowchart LR
   class R ship;
 ```
 
-> AI を信頼するな。**役割・モデル・ツール権限・スキル・MCP** で囲った harness を信頼せよ。
+> 🚀 数クリックで試せるように Codespace 対応のリポジトリを用意しました： [theomonfort/ultralight-template](https://github.com/theomonfort/ultralight-template)

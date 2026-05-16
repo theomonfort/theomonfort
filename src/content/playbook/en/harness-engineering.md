@@ -192,4 +192,4 @@ flowchart LR
   class R ship;
 ```
 
-> Don't trust AI. Trust the **harness** — wrapped with roles, models, tool permissions, skills, and MCP.
+> 🚀 I made a Codespace-ready template repo so you can try it in a few clicks: [theomonfort/ultralight-template](https://github.com/theomonfort/ultralight-template)

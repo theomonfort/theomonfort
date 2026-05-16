@@ -34,7 +34,7 @@ const BATCH_COPY_FEEDBACK_MS = 2000;
 
 function buildCommand(s: SkillEntry, scope: 'project' | 'global'): string {
   const flag = scope === 'global' ? ' --global' : '';
-  return `gh skill install ${s.slug}${flag}`;
+  return `gh skill install theomonfort/skills ${s.slug}${flag}`;
 }
 
 function buildBatchCommand(skills: SkillEntry[], scope: 'project' | 'global'): string {
@@ -101,7 +101,10 @@ export default function SkillGallery({ skills, copy = defaultCopy }: Props) {
           <p className="font-body text-phosphor/85">
             {copy.setupIntro}
           </p>
-          <pre className="font-mono text-[11px] text-gb-green bg-shadow-ink border border-phosphor/20 p-2 overflow-x-auto"><code>gh extension install theomonfort/gh-skill</code></pre>
+          <pre className="font-mono text-[11px] text-gb-green bg-shadow-ink border border-phosphor/20 p-2 overflow-x-auto"><code>{`# macOS
+brew install gh
+# or upgrade if already installed
+brew upgrade gh`}</code></pre>
           <p className="font-body text-[11px] text-phosphor/60">
             {copy.setupAfter}
           </p>

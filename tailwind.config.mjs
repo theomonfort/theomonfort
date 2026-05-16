@@ -26,6 +26,7 @@ export default {
         'neon-magenta': '0 0 8px #ff2e88, 0 0 24px rgba(255,46,136,.4)',
         'neon-cyan': '0 0 8px #00f0ff, 0 0 24px rgba(0,240,255,.4)',
         'neon-amber': '0 0 8px #ffb000, 0 0 24px rgba(255,176,0,.4)',
+        'neon-green': '0 0 8px #9bbc0f, 0 0 24px rgba(155,188,15,.4)',
       },
       animation: {
         flicker: 'flicker 6s infinite',
