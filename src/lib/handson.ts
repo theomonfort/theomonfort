@@ -67,3 +67,44 @@ export function handsonStepTitle(item: LocalizedHandsonEntry): string {
   }
   return item.entry.data.title;
 }
+
+/**
+ * Section category for a hands-on step, derived from its slug prefix.
+ * Mirrors the playbook category palette so aside dialog boxes feel
+ * consistent across the two areas: every step page picks an accent
+ * color + matching octocat mascot for its asides.
+ */
+export type HandsonCategory =
+  | 'introduction'
+  | 'plan'
+  | 'develop'
+  | 'review'
+  | 'secure'
+  | 'operate';
+
+export function handsonCategoryForSlug(slug: string): HandsonCategory {
+  if (slug.startsWith('plan-')) return 'plan';
+  if (slug.startsWith('code-')) return 'develop';
+  if (slug.startsWith('review-')) return 'review';
+  if (slug.startsWith('test-secure-') || slug.startsWith('test-')) return 'secure';
+  if (slug.startsWith('operate-')) return 'operate';
+  return 'introduction';
+}
+
+export interface HandsonCategoryStyle {
+  accent: string;
+  mascot: string;
+}
+
+const CATEGORY_STYLES: Record<HandsonCategory, HandsonCategoryStyle> = {
+  introduction: { accent: '#ffb000', mascot: '/theomonfort/octocat-green.png' },
+  plan:         { accent: '#9bbc0f', mascot: '/theomonfort/octocat-green.png' },
+  develop:      { accent: '#ff2e88', mascot: '/theomonfort/octocat-red.png' },
+  review:       { accent: '#ffb000', mascot: '/theomonfort/octocat-yellow.png' },
+  secure:       { accent: '#00f0ff', mascot: '/theomonfort/octocat-blue.png' },
+  operate:      { accent: '#9bbc0f', mascot: '/theomonfort/octocat-team.png' },
+};
+
+export function handsonCategoryStyle(category: HandsonCategory): HandsonCategoryStyle {
+  return CATEGORY_STYLES[category];
+}

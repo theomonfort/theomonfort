@@ -24,7 +24,7 @@ links:
 
 ## 一言で
 
-<div class="hero-quote hero-quote-theo">
+<div class="hero-quote hero-quote-mona">
   <p>
     題材は <strong>このプレイブックサイトの簡略版</strong>。あなたが今読んでいるこのサイトを、<strong>Copilot と一緒にゼロから作り直します</strong>。
   </p>
@@ -32,6 +32,14 @@ links:
     リポジトリを <strong>Codespaces</strong> で開けば、環境構築なしでブラウザからすぐに始められます。
   </p>
 </div>
+
+## 何を作るのか
+
+ハンズオンのゴールは、特別なデモアプリではなく **今あなたが見ているこのサイトそのもの**（の簡略版）です。
+
+<img src="/theomonfort/handson/img/build-preview-playbook.png" alt="今日作る Copilot Playbook サイト" class="build-preview" />
+
+> 🎯 完成像がすでに目の前にあるので、各ステップで「次に作るのはどの部分か」が一目で分かります。
 
 > 🪞 **作るもの = 今読んでいるこのサイト(の簡略版)**。だからゴールが分かりやすく、各機能がどの場面で効くかを実感できます。
 > 🎮 **使う機能** — MCP / Instructions / Agent Skills / Plan モード / Cloud Agent / Code Review / Agentic Workflow を <strong>一気通貫</strong> で体験。

@@ -16,7 +16,7 @@ body {
   color: var(--c-phosphor);
   font-family: 'Noto Sans JP', sans-serif;
   min-height: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
   font-feature-settings: 'palt';
   letter-spacing: 0.02em;
 }
@@ -227,31 +227,31 @@ a.retro-link:hover::after {
   transition: width 0.45s ease;
 }
 
+/* Layout: TOC always-visible drawer (fixed) on desktop, collapsible on mobile.
+   The top site nav is sticky (~56px); we offset the TOC below it. */
 .handson-shell {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 2rem;
+  position: relative;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 3rem 1rem 4rem;
+  padding: 2rem 1rem 4rem;
 }
 @media (min-width: 1024px) {
   .handson-shell {
-    grid-template-columns: 260px minmax(0, 1fr);
+    padding-left: calc(280px + 2rem);
   }
 }
 
-.handson-toc-wrap {
-  position: relative;
-}
+.handson-toc-wrap { position: relative; }
 @media (min-width: 1024px) {
   .handson-toc-wrap {
-    position: sticky;
-    top: 80px;
-    align-self: start;
-    max-height: calc(100vh - 96px);
+    position: fixed;
+    top: 64px;
+    left: max(1rem, calc((100vw - 1200px) / 2 + 1rem));
+    width: 280px;
+    height: calc(100vh - 64px);
     overflow-y: auto;
-    padding-right: 0.5rem;
+    padding: 1.5rem 0.75rem 2rem 0;
+    z-index: 20;
   }
 }
 .handson-toc {
@@ -404,6 +404,26 @@ a.retro-link:hover::after {
   background: rgba(5, 6, 15, 0.5);
   padding: 4px;
 }
+/* Frameless mascot / hero icon variant (transparent PNGs that look bad in a chrome frame). */
+.handson-article img.handson-mascot {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  padding: 0;
+  max-width: 50%;
+}
+/* Full-bleed preview screenshot of what we'll build — bordered (it IS a UI screenshot) but bigger and centered. */
+.handson-article img.handson-build-preview,
+.prose-akq img.build-preview {
+  display: block;
+  margin: 1.5em auto 2em;
+  max-width: 100%;
+  width: 100%;
+  border: 2px solid rgba(0, 240, 255, 0.55);
+  box-shadow: 6px 6px 0 rgba(0, 240, 255, 0.18);
+  background: rgba(5, 6, 15, 0.6);
+  padding: 6px;
+}
 .handson-article hr {
   border: none;
   border-top: 1px dashed rgba(0, 240, 255, 0.35);
@@ -445,12 +465,26 @@ a.retro-link:hover::after {
 }
 
 /* Aside cards */
-.handson-aside {
-  position: relative;
+/* ── Hands-on asides / callouts ──────────────────────────────────────────────
+   Three variants:
+     positive  → 💡 TIP   bordered cyan box  with a corner label banner
+     negative  → ⚠️ NOTE  bordered amber box with a corner label banner
+     reference → Octocat dialog box (mascot speaking from the left, mirrors
+                 the playbook hero-quote style). Accent + mascot come from
+                 CSS vars set per-page on .handson-article based on the
+                 step's section (PLAN / CODE / REVIEW / TEST / OPERATE).
+*/
+.handson-aside { position: relative; margin: 1.8em 0; }
+.handson-aside .aside-body > *:first-child { margin-top: 0; }
+.handson-aside .aside-body > *:last-child { margin-bottom: 0; }
+.handson-aside .aside-body p { margin: 0.5em 0; }
+
+/* Simple bordered TIP / NOTE box (original design) */
+.handson-aside.aside-positive,
+.handson-aside.aside-negative {
   border: 2px solid #00f0ff;
   background: rgba(0, 240, 255, 0.06);
-  padding: 1.1em 1.3em 1.1em 1.3em;
-  margin: 1.8em 0;
+  padding: 1.1em 1.3em;
   box-shadow: 4px 4px 0 rgba(0, 240, 255, 0.18);
 }
 .handson-aside.aside-negative {
@@ -468,9 +502,77 @@ a.retro-link:hover::after {
   letter-spacing: 0.15em;
 }
 .handson-aside.aside-negative .aside-marker { color: #ffb000; }
-.handson-aside .aside-body > *:first-child { margin-top: 0; }
-.handson-aside .aside-body > *:last-child { margin-bottom: 0; }
-.handson-aside .aside-body p { margin: 0.5em 0; }
+
+/* 📖 参考 — Octocat dialog-box callout (playbook hero-quote style). */
+.handson-aside.aside-reference {
+  margin-left: 150px;
+  padding: 1.2em 1.4em 1.3em 1.7em;
+  color: #e8f4ff;
+  background:
+    linear-gradient(var(--aside-accent, #ffb000), var(--aside-accent, #ffb000)) top    left  / 10px 10px no-repeat,
+    linear-gradient(var(--aside-accent, #ffb000), var(--aside-accent, #ffb000)) top    right / 10px 10px no-repeat,
+    linear-gradient(var(--aside-accent, #ffb000), var(--aside-accent, #ffb000)) bottom left  / 10px 10px no-repeat,
+    linear-gradient(var(--aside-accent, #ffb000), var(--aside-accent, #ffb000)) bottom right / 10px 10px no-repeat,
+    rgba(5, 6, 15, 0.85);
+  border: 2px solid var(--aside-accent, #ffb000);
+  box-shadow: 4px 4px 0 #05060f;
+  font-family: 'DotGothic16', 'Courier New', monospace;
+  font-size: 1.05em;
+  line-height: 1.7;
+}
+.handson-aside.aside-reference::before {
+  content: '';
+  position: absolute;
+  left: -150px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 130px;
+  height: 130px;
+  background: var(--aside-mascot, url('/theomonfort/octocat-green.png')) center / contain no-repeat;
+  filter: drop-shadow(2px 4px 0 #05060f);
+}
+.handson-aside.aside-reference::after {
+  content: '';
+  position: absolute;
+  left: -14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-right: 14px solid var(--aside-accent, #ffb000);
+}
+.handson-aside.aside-reference .aside-body strong { color: var(--aside-accent, #ffb000); }
+.handson-aside.aside-reference .aside-body a {
+  color: var(--aside-accent, #ffb000);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+.handson-aside.aside-reference .aside-body a:hover { color: #00f0ff; }
+
+@media (max-width: 640px) {
+  .handson-aside.aside-reference {
+    margin-left: 0;
+    padding-top: 110px;
+  }
+  .handson-aside.aside-reference::before {
+    left: 50%;
+    top: -90px;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+  }
+  .handson-aside.aside-reference::after {
+    left: 50%;
+    top: -8px;
+    transform: translateX(-50%);
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 14px solid var(--aside-accent, #ffb000);
+    border-top: none;
+  }
+}
 
 /* Bottom step nav */
 .handson-step-nav {

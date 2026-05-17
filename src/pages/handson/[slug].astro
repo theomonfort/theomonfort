@@ -4,7 +4,7 @@ import { render } from 'astro:content';
 import HandsonTOC from '../../components/handson/HandsonTOC.astro';
 import HandsonStepNav from '../../components/handson/HandsonStepNav.astro';
 import { localizedPath, siteCopy } from '../../lib/i18n';
-import { getHandsonSteps, handsonStepTitle } from '../../lib/handson';
+import { getHandsonSteps, handsonStepTitle, handsonCategoryForSlug, handsonCategoryStyle } from '../../lib/handson';
 
 const locale = 'ja';
 const t = siteCopy[locale];
@@ -26,6 +26,10 @@ const idx = all.findIndex((e) => e.slug === item.slug);
 const prev = idx > 0 ? all[idx - 1] : null;
 const next = idx < all.length - 1 ? all[idx + 1] : null;
 const progress = Math.round(((idx + 1) / all.length) * 100);
+
+const category = handsonCategoryForSlug(item.slug);
+const { accent: asideAccent, mascot: asideMascot } = handsonCategoryStyle(category);
+const articleStyle = `--entry-accent:#00f0ff;--aside-accent:${asideAccent};--aside-mascot:url('${asideMascot}')`;
 ---
 
 <Layout locale={locale} currentPath={`/handson/${item.slug}`} title={`${handsonStepTitle(item)} — ${t.handson.heading}`}>
@@ -42,12 +46,6 @@ const progress = Math.round(((idx + 1) / all.length) * 100);
     data-index={localizedPath(locale, '/handson')}
   >
     <aside class="handson-toc-wrap">
-      <a
-        href={localizedPath(locale, '/handson')}
-        class="font-pixel text-[10px] text-phosphor/60 hover:text-neon-cyan block mb-4"
-      >
-        {t.handson.backToIndex}
-      </a>
       <HandsonTOC
         steps={all}
         currentSlug={item.slug}
@@ -88,7 +86,7 @@ const progress = Math.round(((idx + 1) / all.length) * 100);
         )}
       </header>
 
-      <article class="prose-akq handson-article" style="--entry-accent:#00f0ff">
+      <article class="prose-akq handson-article" data-handson-category={category} style={articleStyle}>
         <Content />
       </article>
 
@@ -99,43 +97,11 @@ const progress = Math.round(((idx + 1) / all.length) * 100);
         prevLabel={t.handson.prev}
         nextLabel={t.handson.next}
       />
-
-      <p class="handson-keyboard-hint font-pixel text-[10px] text-phosphor/40 mt-6 text-center">
-        {t.handson.keyboardHint}
-      </p>
     </main>
   </section>
 
   <script>
     (() => {
-      const shell = document.querySelector('.handson-shell') as HTMLElement | null;
-      if (!shell) return;
-      const prevUrl = shell.dataset.prev;
-      const nextUrl = shell.dataset.next;
-
-      function onKey(e: KeyboardEvent) {
-        if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
-        const target = e.target as HTMLElement | null;
-        const tag = target?.tagName;
-        if (
-          tag === 'INPUT' ||
-          tag === 'TEXTAREA' ||
-          tag === 'SELECT' ||
-          target?.isContentEditable
-        ) {
-          return;
-        }
-        if (e.key === 'ArrowLeft' && prevUrl) {
-          window.location.href = prevUrl;
-        } else if (e.key === 'ArrowRight' && nextUrl) {
-          window.location.href = nextUrl;
-        }
-      }
-      document.addEventListener('keydown', onKey);
-      document.addEventListener('astro:before-swap', () => {
-        document.removeEventListener('keydown', onKey);
-      }, { once: true });
-
       const toggle = document.querySelector('[data-handson-toc-toggle]') as HTMLButtonElement | null;
       const toc = document.querySelector('[data-handson-toc]') as HTMLElement | null;
       if (toggle && toc) {
@@ -144,6 +110,23 @@ const progress = Math.round(((idx + 1) / all.length) * 100);
           toggle.setAttribute('aria-expanded', String(open));
         });
       }
+
+      // Open every link inside the handson article in a new tab UNLESS it's
+      // an in-page anchor (#…) or another hands-on step (which should keep
+      // the smooth in-section navigation). This preserves the user's
+      // learning flow when they consult the playbook or external references.
+      const enhanceLinks = () => {
+        const links = document.querySelectorAll<HTMLAnchorElement>('.handson-article a[href]');
+        links.forEach((a) => {
+          const href = a.getAttribute('href') ?? '';
+          if (!href || href.startsWith('#')) return;
+          if (href.includes('/handson/')) return;
+          a.setAttribute('target', '_blank');
+          a.setAttribute('rel', 'noopener noreferrer');
+        });
+      };
+      enhanceLinks();
+      document.addEventListener('astro:page-load', enhanceLinks);
     })();
   </script>
 </Layout>

@@ -6,19 +6,17 @@ duration: 30
 summary: "ここまでで PLAN 側 (MCP・Instruction・Skill) のハーネスが整いました。いよいよ Copilot Chat の Plan モード で実装計画を立て、Agent モードで一気に実装します。"
 generated: true
 generatedFrom: "workshop-nikon.md"
-upstreamSha: "a4b841f7dc6c06e9e35ba0083332c02c07139015"
+upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
 ---
 {/*
   AUTO-GENERATED FILE — do not edit by hand.
-  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ a4b841f7dc6c06e9e35ba0083332c02c07139015
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ 6af362ccc165cae5c61ffc58550a5ebe9fe58b77
   Regenerate via: node scripts/import-handson.mjs --force
 */}
 
 import Aside from '../../../components/handson/Aside.astro';
 
-<img src="/theomonfort/handson/img/Octocat-red.png" alt="CODE フェーズの Octocat" style="float: right; width: 100px; margin: 0 0 1em 1em;" />
-
-<Aside type="positive">
+<Aside type="reference">
 
 **📖 参考**: [プレイブック / Copilot Chat](https://theomonfort.github.io/theomonfort/playbook/copilot-chat/) で Plan / Agent モードの違いと使い分けを確認できます。
 
@@ -50,18 +48,19 @@ Copilot Chat のモード切替えから **「Plan」** を選択してくださ
 
 以下のプロンプトをそのままコピーして Copilot Chat に貼り付けてください：
 
-```
+````
 小さな Astro サイトを作ってください（日本語のみ。i18n / 英語対応は不要）。新しいブランチ（例: feature/playbook-site）で作業してください。
 
-- グリッドのインデックスページ：src/content/playbook/*.md の各マークダウンエントリーを 1 タイル表示する（アイコン + タイトル + 短いサマリーを載せたクリック可能なカード）。
-- タイルをクリック → そのエントリーの詳細ページが開き、マークダウン全文をスクロール可能に表示する。
-- 詳細ページで「P」キーを押す → Presentation モードのトグル：
-    * 各 ## 見出しが 1 スライドになる。
-    * ← → でエントリー内のスライド間を移動。
-    * ↑ ↓ で前後のエントリーへ移動。
-    * Esc で Presentation モードを抜ける。
-- Presentation モード時の左サイドバーは全エントリーの目次にし、現在表示中のエントリーをハイライトする。
-```
+src/content/playbook/*.md を **Presentation モード（スライド表示）** で見るためのサイトです。インデックスページや詳細ページは作らず、最初からプレゼンテーション UI を表示してください。
+
+- 各マークダウンファイルを 1 つの「セクション」として扱う。セクション内では `##` 見出しごとに 1 スライドに分割する。
+- キーボード操作：
+    * `←` `→` … 同じセクション内のスライドを移動
+    * `↑` `↓` … 前 / 次のセクション（md ファイル）に移動
+- 左サイドバーに全セクションの目次を表示し、現在のセクションをハイライトする。
+- 各セクションのテーマカラーは、md ファイルの frontmatter（例: `color:` フィールド）から取得し、スライド背景・タイトル・サイドバーのアクセントに反映する。frontmatter にない場合はデフォルト色。
+- マークダウン内の Mermaid 図（` ```mermaid `）をレンダリングできるようにする。
+````
 
 Copilot がいくつか質問してくる場合があります（例：パッケージマネージャー、UI フレームワーク、デプロイ先など）。`copilot-instructions.md` を読んでいるはずなので Astro / Tailwind / pnpm を前提に答えてくれるはずですが、不足があれば回答してあげましょう。
 
@@ -85,10 +84,11 @@ Copilot が以下を自動で実行します：
 
 - Astro プロジェクトの初期化（pnpm）
 - `src/content.config.ts` で playbook collection を定義
-- グリッドのインデックスページ
-- 詳細ページ（dynamic route + content rendering）
-- Presentation モードのキーボード操作（P / ← → / ↑ ↓ / Esc）
-- 左サイドバー（目次 + 現在エントリーのハイライト）
+- Presentation UI（スライド表示）
+- キーボード操作（← → ↑ ↓）
+- 左サイドバー（セクション目次 + 現在セクションのハイライト）
+- frontmatter の `color` に基づくセクションごとのテーマカラー
+- Mermaid 図のレンダリング
 - design token に沿った Tailwind スタイル
 
 実装が完了したら開発サーバーを起動して確認しましょう：
@@ -101,7 +101,7 @@ pnpm dev
 
 <Aside type="positive">
 
-**やってみよう**: 詳細ページで `P` を押して Presentation モードに入り、← → ↑ ↓ Esc を試してみてください。挙動がおかしい箇所、UI の改善点、追加したい機能などをメモしておきましょう。
+**やってみよう**: スライドを ← → ↑ ↓ で操作してみてください。挙動がおかしい箇所、UI の改善点、追加したい機能などをメモしておきましょう。
 
 ここで重要なポイント — **Copilot Chat に直接「ここを直して」と頼むのではなく、それぞれを GitHub Issue として登録します**。Part 12（CODE: CLI）で、これらの Issue を Copilot CLI に **まとめて並列に** 実装してもらうためです。
 
@@ -110,15 +110,17 @@ Copilot Chat に以下のような依頼を投げて、気になった点を **3
 ```
 github-issues skill を使って、以下の改善点をこのリポジトリの Issue として個別に作成してください。
 
-1. タイトル: Presentation モードで Esc が効かない
-   詳細: P で入った後、Esc を押しても通常表示に戻らない。期待: Esc で詳細ページのスクロールビューへ戻る。
-   ラベル: bug, presentation
-
-2. タイトル: グリッドカードのホバーにネオングローを追加
-   詳細: 現在は色が少し変わるだけ。design token に従い 0 0 12px のシアン box-shadow を追加。
+1. タイトル: スライド間の遷移にフェードアニメーションを追加
+   詳細: 現在はスライドが切り替わる際にアニメーションがない。← → で移動するときに 150ms のフェードを入れたい。
    ラベル: enhancement, ui
 
-3. （他にあれば追加）
+2. タイトル: 英語対応（i18n）を追加する
+   詳細: 現在は日本語のみ。frontmatter の `titleEn` を活用しつつ、各 md に英語版コンテンツを追加できる仕組みを用意し、画面右上のトグルで日本語 / 英語を切り替えられるようにする。URL に `?lang=en` を付けても切り替え可能にする。
+   ラベル: enhancement, i18n
+
+3. タイトル: 進捗バーとスライド番号インジケーターを追加
+   詳細: 画面上部にセクションのテーマカラーで塗られた細い進捗バーを表示し、画面右下に「セクション 3 / 18 ・ スライド 2 / 5」のような小さなカウンターを置く。発表中に現在地が一目で分かるようにする。
+   ラベル: enhancement, ui
 ```
 
 作成された Issue のリストは [リポジトリの Issues タブ](#) で確認できます。次の章以降で Cloud Agent / Copilot CLI に実装させます。

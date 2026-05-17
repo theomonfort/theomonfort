@@ -208,6 +208,17 @@ function rewriteImages(node, usedImages) {
     const m = /github-copilot-workshop\/img\/([^?#]+)/.exec(node.url);
     if (m) {
       const filename = m[1];
+      // Replace the workshop's Copilot pixel-art logo with full-body Mona, rendered
+      // as raw HTML so we can attach the .handson-mascot class (frameless, half size).
+      if (/^copilot-pixel\.(png|jpe?g|gif|svg)$/i.test(filename)) {
+        node.type = 'html';
+        node.value = '<img src="/theomonfort/octocat-mona.png" alt="Mona the Octocat" class="handson-mascot" />';
+        delete node.url;
+        delete node.alt;
+        delete node.title;
+        delete node.children;
+        return;
+      }
       usedImages.add(filename);
       node.url = `${publicImgBase}${filename}`;
     }
@@ -217,6 +228,9 @@ function rewriteImages(node, usedImages) {
     node.value = node.value.replace(
       /(src=["'])github-copilot-workshop\/img\/([^"']+)(["'])/g,
       (_full, q1, file, q2) => {
+        if (/^copilot-pixel\.(png|jpe?g|gif|svg)$/i.test(file)) {
+          return `${q1}/theomonfort/octocat-mona.png${q2}`;
+        }
         usedImages.add(file);
         return `${q1}${publicImgBase}${file}${q2}`;
       },
@@ -224,6 +238,9 @@ function rewriteImages(node, usedImages) {
     // MDX (JSX) requires void elements to be self-closed. Convert any non-self-closed
     // <img ...> (and similar void HTML tags emitted by the workshop source) so MDX parses.
     node.value = selfCloseVoidTags(node.value);
+    // Drop floating-right phase mascot <img> tags (vestiges of the Codelabs design;
+    // our category-aware Aside dialog already displays the right Octocat per section).
+    node.value = stripFloatingPhaseMascots(node.value);
   }
   const arr = node.children;
   if (Array.isArray(arr)) for (const c of arr) rewriteImages(c, usedImages);
@@ -238,6 +255,17 @@ function selfCloseVoidTags(html) {
     out = out.replace(re, (_full, attrs) => `<${tag}${attrs.trimEnd()} />`);
   }
   return out;
+}
+
+/**
+ * Remove inline `<img>` tags that the Codelabs source used as floating-right phase
+ * mascots (e.g. `octocat-plan.png`, `Octocat-red.png`, etc. with `style="float: right;"`).
+ * Our category-aware Aside dialog already speaks with the right Octocat per section,
+ * so these inline mascots are redundant and visually collide with the dialog.
+ */
+function stripFloatingPhaseMascots(html) {
+  const re = /<img\s[^>]*src="[^"]*[Oo]ctocat[^"]*"[^>]*style="[^"]*float\s*:\s*right[^"]*"[^>]*\/>\s*/gi;
+  return html.replace(re, '');
 }
 
 /** Stringify a list of mdast nodes back into markdown. */
@@ -267,7 +295,10 @@ function renderStepBody(children, usedImages) {
     if (asideType) {
       // The blockquote children now contain the body content sans marker.
       const innerMd = unwrapAutolinks(stringifyNodes(node.children));
-      chunks.push(`<Aside type="${asideType}">\n\n${innerMd}\n\n</Aside>`);
+      // Detect 📖 参考 reference asides → render with the Octocat dialog variant.
+      const isReference = asideType === 'positive' && /^\s*\**\s*📖\s*参考/m.test(innerMd);
+      const renderedType = isReference ? 'reference' : asideType;
+      chunks.push(`<Aside type="${renderedType}">\n\n${innerMd}\n\n</Aside>`);
     } else {
       chunks.push(unwrapAutolinks(stringifyNodes([node])));
     }

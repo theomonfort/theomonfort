@@ -6,19 +6,17 @@ duration: 10
 summary: "このステップでは、Copilot に外部ツールへのアクセスを与える MCP（Model Context Protocol）Server を確認・追加します。MCP を整えると、Copilot が Issue 作成・最新ドキュメント参照などを直接実行できるようになります。"
 generated: true
 generatedFrom: "workshop-nikon.md"
-upstreamSha: "a4b841f7dc6c06e9e35ba0083332c02c07139015"
+upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
 ---
 {/*
   AUTO-GENERATED FILE — do not edit by hand.
-  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ a4b841f7dc6c06e9e35ba0083332c02c07139015
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ 6af362ccc165cae5c61ffc58550a5ebe9fe58b77
   Regenerate via: node scripts/import-handson.mjs --force
 */}
 
 import Aside from '../../../components/handson/Aside.astro';
 
-<img src="/theomonfort/handson/img/octocat-plan.png" alt="PLAN フェーズの Octocat" style="float: right; width: 100px; margin: 0 0 1em 1em;" />
-
-<Aside type="positive">
+<Aside type="reference">
 
 **📖 参考**: [プレイブック / MCP Server](https://theomonfort.github.io/theomonfort/playbook/mcp/) で MCP の仕組み・接続方式 (stdio / HTTP)・VS Code での設定方法を確認できます。
 
@@ -61,7 +59,8 @@ Copilot Chat の入力欄にある **🔧 ツールボタン**（モデル選択
 2. **「MCP: Add Server…」** を入力して選択
 3. トランスポートに **「HTTP」** を選択
 4. URL に `https://mcp.context7.com/mcp` を貼り付け
-5. 保存先に **「Workspace」** を選択
+5. **Server ID** を聞かれたら、デフォルトの `my-mcp-server-xxxxxxxx` ではなく **`context7`** に変更する（重要：Copilot Chat の `#` 補完やツール一覧で識別しやすくするため）
+6. 保存先に **「Workspace」** を選択
 
 インストール後、`.vscode/mcp.json` に `context7` が追加されていることを確認してください：
 
@@ -76,6 +75,8 @@ Copilot Chat の入力欄にある **🔧 ツールボタン**（モデル選択
   }
 }
 ```
+
+`.vscode/mcp.json` を開くと、各サーバーの上に **`Running | N tools`** のような小さなステータス表示が出ます。`context7` の横に **`2 tools`**（`resolve-library-id` と `get-library-docs`）が表示されていれば接続成功です。表示されない場合は **Start** をクリックしてください。
 
 動作確認として、Copilot Chat で以下を試してみましょう：
 

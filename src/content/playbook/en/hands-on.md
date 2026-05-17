@@ -24,7 +24,7 @@ links:
 
 ## At a Glance
 
-<div class="hero-quote hero-quote-theo">
+<div class="hero-quote hero-quote-mona">
   <p>
     The project you'll build is <strong>a simplified version of this very playbook site</strong>. You'll rebuild the site you're reading right now — <strong>from scratch, together with Copilot</strong>.
   </p>
@@ -32,6 +32,14 @@ links:
     Open the repo in <strong>Codespaces</strong> and you're coding in the browser, no local setup.
   </p>
 </div>
+
+## What You'll Build
+
+The goal isn't a contrived demo app — it's **this very site you're looking at** (a simplified version of it).
+
+<img src="/theomonfort/handson/img/build-preview-playbook.png" alt="The Copilot Playbook site you'll build today" class="build-preview" />
+
+> 🎯 The finished product is already right in front of you, so at every step you can see *exactly which part you're about to build next*.
 
 > 🪞 **What you build = this site (simplified)**. The end-goal is concrete, so you immediately see *which feature shines at which moment*.
 > 🎮 **Features you'll use** — MCP / Instructions / Agent Skills / Plan mode / Cloud Agent / Code Review / Agentic Workflow, all in one flow.

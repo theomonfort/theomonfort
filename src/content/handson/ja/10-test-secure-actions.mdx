@@ -1,30 +1,28 @@
 ---
-title: "TEST & SECURE: Actions（任意）"
+title: "TEST & SECURE: Actions"
 order: 10
 stepSlug: "test-secure-actions"
 duration: 15
-summary: "Presentation モードの キーボードナビゲーション が壊れないように、Playwright で E2E テストを書き、PR ごとに自動実行する Actions ワークフローを作ります。"
+summary: "Presentation サイトの キーボードナビゲーション が壊れないように、Playwright で E2E テストを書き、PR ごとに自動実行する Actions ワークフローを作ります。"
 generated: true
 generatedFrom: "workshop-nikon.md"
-upstreamSha: "a4b841f7dc6c06e9e35ba0083332c02c07139015"
+upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
 ---
 {/*
   AUTO-GENERATED FILE — do not edit by hand.
-  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ a4b841f7dc6c06e9e35ba0083332c02c07139015
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ 6af362ccc165cae5c61ffc58550a5ebe9fe58b77
   Regenerate via: node scripts/import-handson.mjs --force
 */}
 
 import Aside from '../../../components/handson/Aside.astro';
 
-<img src="/theomonfort/handson/img/Octocat-blue.png" alt="TEST & SECURE フェーズの Octocat" style="float: right; width: 100px; margin: 0 0 1em 1em;" />
-
-<Aside type="positive">
+<Aside type="reference">
 
 **📖 参考**: [プレイブック / GitHub Actions](https://theomonfort.github.io/theomonfort/playbook/github-actions/?present=1) で Actions のワークフロー構造とトリガーの仕組みを確認できます。
 
 </Aside>
 
-Presentation モードの **キーボードナビゲーション** が壊れないように、Playwright で E2E テストを書き、PR ごとに自動実行する Actions ワークフローを作ります。
+Presentation サイトの **キーボードナビゲーション** が壊れないように、Playwright で E2E テストを書き、PR ごとに自動実行する Actions ワークフローを作ります。
 
 ### 10.1 — Presentation モードのテストを作成する
 
@@ -33,18 +31,17 @@ Copilot Chat（Agent モード）で以下を入力してください：
 ```
 新しいブランチ `test-creation` を作成して、そのブランチで作業してください。
 
-Presentation モードのキーボードナビゲーションを検証する Playwright E2E テストを作成してください。
+Presentation サイトのキーボードナビゲーションを検証する Playwright E2E テストを作成してください。
 
 前提：
 - src/content/playbook/ に少なくとも 2 件のエントリーがあるとする。
-- 詳細ページの URL パターンは `/playbook/[slug]`。
+- サイトを開くと最初から Presentation モードが表示される。
 
 テストケース：
-1. 詳細ページで `P` を押すと Presentation モードに入る（DOM の状態クラスやサイドバー表示で確認）。
-2. Presentation モード中に `←` / `→` を押すとエントリー内のスライドが前後に移動する（## 見出しごとに 1 スライド）。
-3. Presentation モード中に `↓` / `↑` を押すと次 / 前のエントリーに移動する（URL が変わる）。
-4. Presentation モード中に `Esc` を押すと通常の詳細ページに戻る。
-5. 左サイドバーに全エントリーが目次として表示され、現在のエントリーがハイライトされている。
+1. `←` / `→` を押すと同じセクション内のスライドが前後に移動する（## 見出しごとに 1 スライド）。
+2. `↓` / `↑` を押すと次 / 前のセクション（md ファイル）に移動する。
+3. 左サイドバーに全セクションが目次として表示され、現在のセクションがハイライトされている。
+4. frontmatter の `color` が異なるセクションを切り替えると、テーマカラー（背景・タイトル・サイドバーアクセント）が変わる。
 
 ファイル配置:
 - テストは tests/e2e/presentation.spec.ts に配置。

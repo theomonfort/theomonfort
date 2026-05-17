@@ -1,14 +1,13 @@
 ---
 interface Props {
-  type?: 'positive' | 'negative';
+  type?: 'positive' | 'negative' | 'reference';
 }
 const { type = 'positive' } = Astro.props;
-const isNegative = type === 'negative';
-const label = isNegative ? '⚠️ NOTE' : '💡 TIP';
+const marker = type === 'negative' ? '⚠️ NOTE' : type === 'reference' ? null : '💡 TIP';
 ---
 
 <aside class={`handson-aside aside-${type}`} data-aside={type}>
-  <span class="aside-marker font-pixel text-[10px]" aria-hidden="true">{label}</span>
+  {marker && <span class="aside-marker font-pixel text-[10px]" aria-hidden="true">{marker}</span>}
   <div class="aside-body">
     <slot />
   </div>
