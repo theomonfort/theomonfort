@@ -1,0 +1,38 @@
+---
+title: "TEST & SECURE: CodeQL（任意）"
+order: 9
+stepSlug: "test-secure-codeql"
+duration: 2
+summary: "コードに潜むセキュリティ脆弱性を静的解析でスキャンする CodeQL を有効化します。"
+generated: true
+generatedFrom: "workshop-nikon.md"
+upstreamSha: "a4b841f7dc6c06e9e35ba0083332c02c07139015"
+---
+{/*
+  AUTO-GENERATED FILE — do not edit by hand.
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ a4b841f7dc6c06e9e35ba0083332c02c07139015
+  Regenerate via: node scripts/import-handson.mjs --force
+*/}
+
+import Aside from '../../../components/handson/Aside.astro';
+
+<img src="/theomonfort/handson/img/Octocat-blue.png" alt="TEST & SECURE フェーズの Octocat" style="float: right; width: 100px; margin: 0 0 1em 1em;" />
+
+コードに潜むセキュリティ脆弱性を静的解析でスキャンする **CodeQL** を有効化します。
+
+### 9.1 — CodeQL を有効化する
+
+1. リポジトリの **Settings** → **Security and quality** → **Advanced Security**
+2. **Tools** → **CodeQL analysis** → **Set up** → **Default** → **Enable CodeQL**
+
+<Aside type="negative">
+
+**注意**: CodeQL はデフォルトブランチに存在する言語のみスキャンします。最初の Astro PR をマージしてから CodeQL を有効化すると、以降の Push / PR で TypeScript / JavaScript の自動スキャンが実行されます。
+
+</Aside>
+
+<Aside type="positive">
+
+**ポイント**: CodeQL は静的解析でセキュリティ上の問題（XSS / SQL Injection 等）を検出します。
+
+</Aside>

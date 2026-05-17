@@ -1,0 +1,93 @@
+---
+title: "PLAN: MCP サーバー"
+order: 3
+stepSlug: "plan-mcp"
+duration: 10
+summary: "このステップでは、Copilot に外部ツールへのアクセスを与える MCP（Model Context Protocol）Server を確認・追加します。MCP を整えると、Copilot が Issue 作成・最新ドキュメント参照などを直接実行できるようになります。"
+generated: true
+generatedFrom: "workshop-nikon.md"
+upstreamSha: "a4b841f7dc6c06e9e35ba0083332c02c07139015"
+---
+{/*
+  AUTO-GENERATED FILE — do not edit by hand.
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ a4b841f7dc6c06e9e35ba0083332c02c07139015
+  Regenerate via: node scripts/import-handson.mjs --force
+*/}
+
+import Aside from '../../../components/handson/Aside.astro';
+
+<img src="/theomonfort/handson/img/octocat-plan.png" alt="PLAN フェーズの Octocat" style="float: right; width: 100px; margin: 0 0 1em 1em;" />
+
+<Aside type="positive">
+
+**📖 参考**: [プレイブック / MCP Server](https://theomonfort.github.io/theomonfort/playbook/mcp/) で MCP の仕組み・接続方式 (stdio / HTTP)・VS Code での設定方法を確認できます。
+
+</Aside>
+
+このステップでは、Copilot に外部ツールへのアクセスを与える **MCP（Model Context Protocol）Server** を確認・追加します。MCP を整えると、Copilot が Issue 作成・最新ドキュメント参照などを直接実行できるようになります。
+
+### 3.1 — GitHub MCP Server を確認する
+
+このリポジトリには既に GitHub MCP Server が `.vscode/mcp.json` に設定されています。Codespace 起動時に VS Code が自動的に接続を確認します。
+
+`.vscode/mcp.json` を開いて、以下の設定があることを確認してください：
+
+```json
+{
+  "servers": {
+    "github-mcp-server": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/"
+    }
+  }
+}
+```
+
+Copilot Chat の入力欄にある **🔧 ツールボタン**（モデル選択の右側）をクリックして、`github-mcp-server` のツール（Issues / PRs / code search など）が一覧に表示されていることを確認しましょう。
+
+⏱ 約1分
+
+<Aside type="positive">
+
+**ポイント**: GitHub MCP Server は GitHub 公式提供。`gh` コマンドを叩く感覚で、Copilot が Issues / PRs / Actions / Code search を直接操作できます。
+
+</Aside>
+
+### 3.2 — Context7 MCP Server を追加する
+
+**Context7** は、ライブラリやフレームワークの **最新の公式ドキュメント** を Copilot に取り込める MCP Server です。Astro / Tailwind / TypeScript など、進化の速いフレームワークを使う本ワークショップでは欠かせません。
+
+1. **Cmd+Shift+P** (Windows/Linux は **Ctrl+Shift+P**) でコマンドパレットを開く
+2. **「MCP: Add Server…」** を入力して選択
+3. トランスポートに **「HTTP」** を選択
+4. URL に `https://mcp.context7.com/mcp` を貼り付け
+5. 保存先に **「Workspace」** を選択
+
+インストール後、`.vscode/mcp.json` に `context7` が追加されていることを確認してください：
+
+```json
+{
+  "servers": {
+    "github-mcp-server": { "type": "http", "url": "https://api.githubcopilot.com/mcp/" },
+    "context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp"
+    }
+  }
+}
+```
+
+動作確認として、Copilot Chat で以下を試してみましょう：
+
+```
+Context7 を使って Astro の content collections の最新ドキュメントを要約してください。
+```
+
+⏱ 約2分
+
+<Aside type="positive">
+
+**ポイント**: HTTP 版を直接追加する方法を使うと、`npx` でパッケージをダウンロードする必要がないため、起動が一瞬で完了します。Marketplace の **「Browse MCP Servers」** から入る場合は stdio (npx 経由) 版の `io.github.upstash/context7` が選ばれ、初回起動時にパッケージのダウンロードで時間がかかる、または途中で止まることがあります。HTTP 版ならこの待ち時間が発生しません。
+以後「Astro の最新の API は？」「Tailwind v4 の新しい記法は？」と聞くだけで、Copilot が Context7 経由で公式ドキュメントを引っ張ってきます。学習データのカットオフを気にする必要がなくなります。
+
+</Aside>

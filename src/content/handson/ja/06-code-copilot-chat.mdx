@@ -1,0 +1,126 @@
+---
+title: "CODE: Copilot Chat"
+order: 6
+stepSlug: "code-copilot-chat"
+duration: 30
+summary: "ここまでで PLAN 側 (MCP・Instruction・Skill) のハーネスが整いました。いよいよ Copilot Chat の Plan モード で実装計画を立て、Agent モードで一気に実装します。"
+generated: true
+generatedFrom: "workshop-nikon.md"
+upstreamSha: "a4b841f7dc6c06e9e35ba0083332c02c07139015"
+---
+{/*
+  AUTO-GENERATED FILE — do not edit by hand.
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ a4b841f7dc6c06e9e35ba0083332c02c07139015
+  Regenerate via: node scripts/import-handson.mjs --force
+*/}
+
+import Aside from '../../../components/handson/Aside.astro';
+
+<img src="/theomonfort/handson/img/Octocat-red.png" alt="CODE フェーズの Octocat" style="float: right; width: 100px; margin: 0 0 1em 1em;" />
+
+<Aside type="positive">
+
+**📖 参考**: [プレイブック / Copilot Chat](https://theomonfort.github.io/theomonfort/playbook/copilot-chat/) で Plan / Agent モードの違いと使い分けを確認できます。
+
+</Aside>
+
+ここまでで PLAN 側 (MCP・Instruction・Skill) のハーネスが整いました。いよいよ **Copilot Chat の Plan モード** で実装計画を立て、Agent モードで一気に実装します。
+
+### 6.1 — モデルを Claude Opus 4.6 に切り替える
+
+Copilot Chat 画面下部のモデルセレクターをクリックし、**Claude Opus 4.6** を選択します。
+
+<Aside type="positive">
+
+**💡 ヒント**: 複雑な設計タスクや長文のコンテキストを扱う際は Opus 系モデルが強いです。日常の編集・補完は他のモデルで十分ですが、本セクションの「サイト全体を一気に組み立てる」ような作業では Opus 4.6 を使うと品質が安定します。
+
+</Aside>
+
+### 6.2 — Plan モードに切り替える
+
+Copilot Chat のモード切替えから **「Plan」** を選択してください。
+
+<Aside type="positive">
+
+**💡 ヒント**: Plan モードでは Copilot は **設計と質問** に徹し、すぐにファイルを書き換えません。要件が曖昧な部分は逆質問してきます。納得できる計画になるまで対話を重ねましょう。
+
+</Aside>
+
+### 6.3 — 実装計画を依頼する
+
+以下のプロンプトをそのままコピーして Copilot Chat に貼り付けてください：
+
+```
+小さな Astro サイトを作ってください（日本語のみ。i18n / 英語対応は不要）。新しいブランチ（例: feature/playbook-site）で作業してください。
+
+- グリッドのインデックスページ：src/content/playbook/*.md の各マークダウンエントリーを 1 タイル表示する（アイコン + タイトル + 短いサマリーを載せたクリック可能なカード）。
+- タイルをクリック → そのエントリーの詳細ページが開き、マークダウン全文をスクロール可能に表示する。
+- 詳細ページで「P」キーを押す → Presentation モードのトグル：
+    * 各 ## 見出しが 1 スライドになる。
+    * ← → でエントリー内のスライド間を移動。
+    * ↑ ↓ で前後のエントリーへ移動。
+    * Esc で Presentation モードを抜ける。
+- Presentation モード時の左サイドバーは全エントリーの目次にし、現在表示中のエントリーをハイライトする。
+```
+
+Copilot がいくつか質問してくる場合があります（例：パッケージマネージャー、UI フレームワーク、デプロイ先など）。`copilot-instructions.md` を読んでいるはずなので Astro / Tailwind / pnpm を前提に答えてくれるはずですが、不足があれば回答してあげましょう。
+
+⏱ 約3分
+
+<Aside type="positive">
+
+**ポイント**: 4.1 で書いた Stack ルールと、4.2 のフロントエンド design token がここで効きます。Plan が Astro + Tailwind + 指定カラーで提案されるはずです。
+
+</Aside>
+
+### 6.4 — Autopilot で実装する
+
+Plan に納得したら **「Start with Autopilot」** をクリックして実装を開始します。
+
+![Start with Autopilot](/theomonfort/handson/img/start-with-autopilot.png)
+
+⏱ 約15〜20分
+
+Copilot が以下を自動で実行します：
+
+- Astro プロジェクトの初期化（pnpm）
+- `src/content.config.ts` で playbook collection を定義
+- グリッドのインデックスページ
+- 詳細ページ（dynamic route + content rendering）
+- Presentation モードのキーボード操作（P / ← → / ↑ ↓ / Esc）
+- 左サイドバー（目次 + 現在エントリーのハイライト）
+- design token に沿った Tailwind スタイル
+
+実装が完了したら開発サーバーを起動して確認しましょう：
+
+```bash
+pnpm dev
+```
+
+ポートフォワーディングの通知から **「ブラウザで開く」** をクリックして動作確認してください。
+
+<Aside type="positive">
+
+**やってみよう**: 詳細ページで `P` を押して Presentation モードに入り、← → ↑ ↓ Esc を試してみてください。挙動がおかしい箇所、UI の改善点、追加したい機能などをメモしておきましょう。
+
+ここで重要なポイント — **Copilot Chat に直接「ここを直して」と頼むのではなく、それぞれを GitHub Issue として登録します**。Part 12（CODE: CLI）で、これらの Issue を Copilot CLI に **まとめて並列に** 実装してもらうためです。
+
+Copilot Chat に以下のような依頼を投げて、気になった点を **3〜5 件** Issue 化してください（`github-issues` skill が自動で構造化してくれます）：
+
+```
+github-issues skill を使って、以下の改善点をこのリポジトリの Issue として個別に作成してください。
+
+1. タイトル: Presentation モードで Esc が効かない
+   詳細: P で入った後、Esc を押しても通常表示に戻らない。期待: Esc で詳細ページのスクロールビューへ戻る。
+   ラベル: bug, presentation
+
+2. タイトル: グリッドカードのホバーにネオングローを追加
+   詳細: 現在は色が少し変わるだけ。design token に従い 0 0 12px のシアン box-shadow を追加。
+   ラベル: enhancement, ui
+
+3. （他にあれば追加）
+```
+
+作成された Issue のリストは [リポジトリの Issues タブ](#) で確認できます。次の章以降で Cloud Agent / Copilot CLI に実装させます。
+
+</Aside>

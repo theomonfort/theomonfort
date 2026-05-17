@@ -58,4 +58,19 @@ const equipment = defineCollection({
   }),
 });
 
-export const collections = { playbook, philosophy, equipment };
+const handson = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/handson' }),
+  schema: z.object({
+    title: z.string(),
+    titleEn: z.string().optional(),
+    order: z.number(),
+    stepSlug: z.string(),
+    duration: z.number().optional(),
+    summary: z.string().optional(),
+    generated: z.boolean().optional(),
+    generatedFrom: z.string().optional(),
+    upstreamSha: z.string().optional(),
+  }),
+});
+
+export const collections = { playbook, philosophy, equipment, handson };

@@ -1,0 +1,148 @@
+---
+title: "PLAN: Instruction"
+order: 4
+stepSlug: "plan-instruction"
+duration: 15
+summary: "Instruction ファイルは、リポジトリやファイル単位で Copilot に 常駐ルール を与える「指示書」です。チーム全員の Copilot が同じ規約に従うようになります。"
+generated: true
+generatedFrom: "workshop-nikon.md"
+upstreamSha: "a4b841f7dc6c06e9e35ba0083332c02c07139015"
+---
+{/*
+  AUTO-GENERATED FILE — do not edit by hand.
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ a4b841f7dc6c06e9e35ba0083332c02c07139015
+  Regenerate via: node scripts/import-handson.mjs --force
+*/}
+
+import Aside from '../../../components/handson/Aside.astro';
+
+<img src="/theomonfort/handson/img/octocat-plan.png" alt="PLAN フェーズの Octocat" style="float: right; width: 100px; margin: 0 0 1em 1em;" />
+
+<Aside type="positive">
+
+**📖 参考**: [プレイブック / Instructions](https://theomonfort.github.io/theomonfort/playbook/instructions) で Instruction ファイルの役割・スコープ・使い分けを確認できます。
+
+</Aside>
+
+Instruction ファイルは、リポジトリやファイル単位で Copilot に **常駐ルール** を与える「指示書」です。チーム全員の Copilot が同じ規約に従うようになります。
+
+このステップでは、2 種類の Instruction ファイルを作成します：
+
+- **`.github/copilot-instructions.md`** — リポジトリ全体に常時適用 (言語・Stack・規約)
+- **`.github/instructions/frontend.instructions.md`** — フロントエンド系ファイルにのみ適用される **Path Instruction**（デザイントークン）
+
+### 4.1 — リポジトリ共通の Instruction を作成する
+
+Copilot Chat で以下のプロンプトを貼り付けてください：
+
+<details>
+<summary>📋 プロンプトを表示 / コピー</summary>
+
+```
+.github/copilot-instructions.md を作成してください。本文はすべて日本語で書いてください。
+内容は以下のとおりにしてください：
+
+# Copilot Instructions
+
+## 言語
+
+- すべての応答・コメント・コミットメッセージ・PR 説明は **日本語** で書く。
+
+## Stack
+
+- **Astro** のみ。Next.js・React Router・SvelteKit は使わない。
+- ページ・レイアウトは Astro コンポーネント (.astro) を使う。
+- マークダウンコンテンツは Astro の **content collections** (src/content/) を使う。
+- スタイルは Tailwind CSS。必要に応じてスコープ付き <style> ブロック。
+- TypeScript をすべての場所で使う (.ts, .astro frontmatter)。
+
+## 規約
+
+- ページは src/pages/。
+- 再利用 UI は src/components/。
+- マークダウンは src/content/<collection>/*.md。スキーマは src/content.config.ts。
+- パッケージマネージャは **pnpm**。
+```
+
+</details>
+
+⏱ 約2分
+
+<Aside type="positive">
+
+**ポイント**: 以後 Copilot の応答が日本語に切り替わります。Stack 制約も自動で守られるようになります。
+
+</Aside>
+
+### 4.2 — フロントエンド専用の Path Instruction を作成する
+
+特定のファイルパターンにだけ適用される **Path Instruction** を作成します。VS Code は `applyTo` の glob にマッチするファイルを触るときだけ、このルールを Copilot に渡します。
+
+Copilot Chat で以下のプロンプトを貼り付けてください：
+
+<details>
+<summary>📋 プロンプトを表示 / コピー</summary>
+
+```
+.github/instructions/frontend.instructions.md を作成してください。
+本文はすべて日本語で書いてください。先頭の YAML frontmatter は以下のとおりにしてください：
+
+---
+applyTo: "**/*.{astro,css,tsx,jsx,ts,js,html}"
+description: "フロントエンドのデザイントークン（レトロ JRPG テーマ）"
+---
+
+本文は以下を日本語で含めてください：
+
+# フロントエンド設計ルール
+
+スタイル・コンポーネント・レイアウトを触るときは、以下のトークンを必ず適用する。
+
+## テーマ
+
+レトロ JRPG / サイバーパンクのアーケード。暗い背景にネオンのアクセント、ピクセル系タイポグラフィ。
+
+## カラー
+
+| 役割              | Hex        | 用途                              |
+| ----------------- | ---------- | --------------------------------- |
+| 背景 (ベース)     | `#05060f`  | body / page                       |
+| 背景 (パネル)     | `#0a0e27`  | カード・サイドバー                |
+| ネオンマゼンタ    | `#ff2e88`  | プライマリアクセント・アクティブ  |
+| ネオンシアン      | `#00f0ff`  | セカンダリ・ホバー・リンク        |
+| アンバー          | `#ffb000`  | 警告・ハイライト                  |
+| フォスファ緑      | `#9bbc0f`  | 成功・CRT 風テキスト              |
+| テキスト (通常)   | `#e6f1ff`  | 暗い背景上の本文                  |
+| テキスト (薄)     | `#7a8aa8`  | 補助テキスト                      |
+
+## フォント
+
+- 見出し / UI: **`'DotGothic16'`** (ピクセル)、fallback `monospace`。
+- 本文 (日本語 + ラテン): **`'Noto Sans JP'`**、fallback `system-ui, sans-serif`。
+- コード: `'JetBrains Mono', 'Menlo', monospace`。
+
+Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto Sans JP)。
+
+## エフェクト
+
+- 画面オーバーレイに控えめな CRT スキャンライン。
+- ネオングロー: `text-shadow: 0 0 8px <color>` / `box-shadow: 0 0 12px <color>`。
+- ボーダー: `1px dashed` または `2px solid` のネオンカラー。
+- コントラストは高めに。淡いパステルグラデは禁止。
+
+## してはいけないこと
+
+- 明るい / 白の背景。
+- 完全な丸 (pill) 形状。角丸は最大 4px まで。
+- 灰色のソフトドロップシャドウ。グロー (neon glow) のみ使う。
+```
+
+</details>
+
+⏱ 約2分
+
+<Aside type="positive">
+
+**ポイント**: `.astro` や `.css` を編集するときだけこの design token が自動的に Copilot に渡されます。`/init` や docs 編集など関係ないタスクでは混ざらないので、ノイズが減ります。
+
+</Aside>

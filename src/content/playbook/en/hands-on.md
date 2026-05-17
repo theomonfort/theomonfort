@@ -12,8 +12,8 @@ links:
     label: 2026 GitHub Copilot Workshop (repo)
     url: https://github.com/theomonfort/Github-copilot-workshop
   - group: 🎮 Workshop
-    label: Open the workshop Codelabs
-    url: https://theomonfort.github.io/2026-Github-Copilot-Workshop/github-copilot-workshop/custom/handson/
+    label: Open the hands-on workshop
+    url: https://theomonfort.github.io/theomonfort/en/handson/
   - group: 📖 Related
     label: GitHub Codespaces
     url: https://github.com/features/codespaces
@@ -37,9 +37,9 @@ links:
 > 🎮 **Features you'll use** — MCP / Instructions / Agent Skills / Plan mode / Cloud Agent / Code Review / Agentic Workflow, all in one flow.
 > 🚀 Built for next week's special workshop. Codelabs format — one step at a time.
 
-📘 Repo & Codelabs:
+📘 Repo & hands-on:
 - <a class="retro-link" href="https://github.com/theomonfort/Github-copilot-workshop" target="_blank" rel="noopener noreferrer">theomonfort/Github-copilot-workshop ↗</a>
-- <a class="retro-link" href="https://theomonfort.github.io/2026-Github-Copilot-Workshop/github-copilot-workshop/custom/handson/" target="_blank" rel="noopener noreferrer">Open the workshop Codelabs ↗</a>
+- <a class="retro-link" href="/theomonfort/en/handson/">Open the hands-on →</a>
 
 ## Workshop Flow
 
@@ -77,7 +77,7 @@ Fastest route — browser only:
 
 1. 🌐 Open the repo: <a class="retro-link" href="https://github.com/theomonfort/Github-copilot-workshop" target="_blank" rel="noopener noreferrer">theomonfort/Github-copilot-workshop ↗</a>
 2. 🟢 Click the green **Code** button → **Codespaces** tab → **Create codespace on main**
-3. 📖 Open the Codelabs: <a class="retro-link" href="https://theomonfort.github.io/2026-Github-Copilot-Workshop/github-copilot-workshop/custom/handson/" target="_blank" rel="noopener noreferrer">Open the workshop ↗</a>
+3. 📖 Open the hands-on: <a class="retro-link" href="/theomonfort/en/handson/">Open the hands-on →</a>
 4. ⌨️ Step through one task at a time, talking to Copilot as you go
 
 > 💡 No local setup needed — Codespaces ships with all extensions and dependencies preinstalled.

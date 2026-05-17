@@ -1,0 +1,69 @@
+---
+title: "INTRO：セットアップ"
+order: 2
+stepSlug: "intro-2"
+duration: 15
+summary: "このワークショップでは、以下の GitHub リポジトリを使用します："
+generated: true
+generatedFrom: "workshop-nikon.md"
+upstreamSha: "a4b841f7dc6c06e9e35ba0083332c02c07139015"
+---
+{/*
+  AUTO-GENERATED FILE — do not edit by hand.
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ a4b841f7dc6c06e9e35ba0083332c02c07139015
+  Regenerate via: node scripts/import-handson.mjs --force
+*/}
+
+import Aside from '../../../components/handson/Aside.astro';
+
+このワークショップでは、以下の GitHub リポジトリを使用します：
+
+**プロジェクトURL**: [https://github.com/theomonfort/Github-copilot-workshop](https://github.com/theomonfort/Github-copilot-workshop)
+
+### ステップ1: テンプレートからリポジトリを作成する
+
+1. プロジェクト URL をブラウザで開く
+2. 右上の **Use this template** ボタンをクリックし、**Create a new repository** を選択
+
+![Use this template → Create a new repository](/theomonfort/handson/img/use-this-template-dropdown.png)
+
+3. リポジトリ作成画面で以下を設定：
+
+- Owner は **Copilot / Actions / GHAS / Codespaces などが有効化された Organization** を選択
+- Visibility は **Public** を選択
+
+#### Repository name（リポジトリ名）
+
+- 任意の名前を入力してください（例: `hands-on-yourname`）
+
+4. **Create repository** をクリック
+
+![Create repository ボタンをクリック](/theomonfort/handson/img/create-repository-form.png)
+
+### ステップ2: Codespaces で開発環境を起動する
+
+1. 作成したリポジトリのページで、緑色の **Code** ボタンをクリック
+2. **Codespaces** タブを選択
+3. **Create codespace on main** をクリック
+
+<Aside type="positive">
+
+**⏳ 注意**: Codespace の起動には数分かかる場合があります。DevContainer のビルドが完了するまでお待ちください。
+
+</Aside>
+
+DevContainer が自動的に Node.js 22 環境をセットアップし、以下が事前にインストールされます：
+
+- GitHub Copilot & Copilot Chat 拡張機能
+- GitHub CLI（`gh`）
+- GitHub MCP Server（`.vscode/mcp.json`、自動検出有効化済み）
+- Copilot CLI（`@github/copilot`）
+- pnpm（パッケージマネージャ）
+- gh-aw（Agentic Workflow CLI）
+- Playwright（Chromium ブラウザ済み）
+
+### ステップ3: 題材コンテンツを確認する
+
+`src/content/playbook/` に Markdown ファイルが配置されています。これらが今日のサイトの題材です。
+
+VS Code のエクスプローラで `src/content/playbook/` を開き、いくつかファイルを覗いてみてください。後ほど Copilot にこれらを「グリッド + 詳細 + プレゼンテーションモード」で閲覧できるサイトに仕立ててもらいます。

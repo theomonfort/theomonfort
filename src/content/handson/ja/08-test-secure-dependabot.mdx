@@ -1,0 +1,56 @@
+---
+title: "TEST & SECURE: Dependabot（任意）"
+order: 8
+stepSlug: "test-secure-dependabot"
+duration: 3
+summary: "依存関係の脆弱性チェックを Dependabot で有効化します。設定は数クリックで完了します。"
+generated: true
+generatedFrom: "workshop-nikon.md"
+upstreamSha: "a4b841f7dc6c06e9e35ba0083332c02c07139015"
+---
+{/*
+  AUTO-GENERATED FILE — do not edit by hand.
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ a4b841f7dc6c06e9e35ba0083332c02c07139015
+  Regenerate via: node scripts/import-handson.mjs --force
+*/}
+
+import Aside from '../../../components/handson/Aside.astro';
+
+<img src="/theomonfort/handson/img/Octocat-blue.png" alt="TEST & SECURE フェーズの Octocat" style="float: right; width: 100px; margin: 0 0 1em 1em;" />
+
+<Aside type="positive">
+
+**📖 参考**: [プレイブック / Dependabot](http://127.0.0.1:4321/theomonfort/playbook/dependabot) で Dependabot の仕組みと設定方法を確認できます。
+
+</Aside>
+
+依存関係の脆弱性チェックを Dependabot で有効化します。設定は数クリックで完了します。
+
+### 8.1 — Dependabot を有効化する
+
+1. リポジトリの **Settings** → **Security and quality** → **Advanced Security**
+2. **Dependabot** セクション：
+   - **Dependabot security updates** を有効化
+   - **Dependabot version updates** を有効化 → エディタが開き `.github/dependabot.yml` のテンプレートが表示されます
+3. テンプレートの `package-ecosystem: ""` を **`"npm"`** に変更（本リポジトリは pnpm / npm エコシステム）：
+   ```yaml
+   version: 2
+   updates:
+     - package-ecosystem: "npm"
+       directory: "/"
+       schedule:
+         interval: "weekly"
+   ```
+4. **Commit changes…** → **「Create a new branch and start a pull request」** を選択 → PR を作成してマージ
+
+<Aside type="negative">
+
+**注意**: `package-ecosystem` が空のままだと **Commit changes** ボタンがグレーアウトします。`"npm"` などの有効な値を入れてから commit してください。また、セクション 7.2 で設定した Ruleset によって `main` への直接 commit はブロックされるので、PR 経由でマージします。
+
+</Aside>
+
+<Aside type="positive">
+
+**ポイント**: Dependabot は週次で依存関係をチェックし、脆弱性が見つかれば自動的に PR を作成してくれます。
+
+</Aside>

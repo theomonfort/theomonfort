@@ -12,8 +12,8 @@ links:
     label: 2026 GitHub Copilot Workshop (リポジトリ)
     url: https://github.com/theomonfort/Github-copilot-workshop
   - group: 🎮 ワークショップ
-    label: ワークショップ Codelabs を開く
-    url: https://theomonfort.github.io/2026-Github-Copilot-Workshop/github-copilot-workshop/custom/handson/
+    label: ワークショップ(ハンズオン)を開く
+    url: https://theomonfort.github.io/theomonfort/handson/
   - group: 📖 関連リソース
     label: GitHub Codespaces
     url: https://github.com/features/codespaces
@@ -36,9 +36,9 @@ links:
 > 🪞 **作るもの = 今読んでいるこのサイト(の簡略版)**。だからゴールが分かりやすく、各機能がどの場面で効くかを実感できます。
 > 🎮 **使う機能** — MCP / Instructions / Agent Skills / Plan モード / Cloud Agent / Code Review / Agentic Workflow を <strong>一気通貫</strong> で体験。
 
-📘 リポジトリと Codelabs:
+📘 リポジトリとハンズオン:
 - <a class="retro-link" href="https://github.com/theomonfort/Github-copilot-workshop" target="_blank" rel="noopener noreferrer">theomonfort/Github-copilot-workshop ↗</a>
-- <a class="retro-link" href="https://theomonfort.github.io/2026-Github-Copilot-Workshop/github-copilot-workshop/custom/handson/" target="_blank" rel="noopener noreferrer">ワークショップ Codelabs を開く ↗</a>
+- <a class="retro-link" href="/theomonfort/handson/">ハンズオンを開く →</a>
 
 ## ワークショップで体験する流れ
 
@@ -76,7 +76,7 @@ flowchart TB
 
 1. 🌐 リポジトリを開く: <a class="retro-link" href="https://github.com/theomonfort/Github-copilot-workshop" target="_blank" rel="noopener noreferrer">theomonfort/Github-copilot-workshop ↗</a>
 2. 🟢 緑の **Code** ボタン → **Codespaces** タブ → **Create codespace on main**
-3. 📖 Codelabs を開く: <a class="retro-link" href="https://theomonfort.github.io/2026-Github-Copilot-Workshop/github-copilot-workshop/custom/handson/" target="_blank" rel="noopener noreferrer">ワークショップを開く ↗</a>
+3. 📖 ハンズオンを開く: <a class="retro-link" href="/theomonfort/handson/">ハンズオンを開く →</a>
 4. ⌨️ 1 ステップずつ進めながら Copilot に話しかける
 
 > 💡 ローカルに環境が無くても OK。Codespaces で必要な拡張機能・依存関係はすべて準備済みです。

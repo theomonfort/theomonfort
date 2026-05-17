@@ -1,0 +1,156 @@
+---
+title: "OPERATE: Agentic Workflow"
+order: 13
+stepSlug: "operate-agentic-workflow"
+duration: 15
+summary: "GitHub Actions と Copilot（AI）を組み合わせることで、コードの変更を検知して自律的なタスクを自動実行する Agentic Workflow を体験しましょう。"
+generated: true
+generatedFrom: "workshop-nikon.md"
+upstreamSha: "a4b841f7dc6c06e9e35ba0083332c02c07139015"
+---
+{/*
+  AUTO-GENERATED FILE — do not edit by hand.
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ a4b841f7dc6c06e9e35ba0083332c02c07139015
+  Regenerate via: node scripts/import-handson.mjs --force
+*/}
+
+import Aside from '../../../components/handson/Aside.astro';
+
+<Aside type="positive">
+
+**📖 参考**: [プレイブック / Agentic Workflow](https://theomonfort.github.io/theomonfort/playbook/agentic-workflow) で Agentic Workflow の概念と GitHub Actions × Copilot の連携パターンを確認できます。
+
+</Aside>
+
+GitHub Actions と Copilot（AI）を組み合わせることで、コードの変更を検知して自律的なタスクを自動実行する **Agentic Workflow** を体験しましょう。
+
+**Agentic Workflow とは**: GitHub Actions のワークフロー内で Copilot を活用し、リポジトリの変更に応じた自律的なタスク（レポート生成、ドキュメント更新、コード修正など）を実行する仕組みです。
+
+#### gh aw のインストール
+
+まず、Agentic Workflow の CLI ツールをインストールします。
+
+ローカル環境の場合：
+
+```bash
+gh extension install github/gh-aw
+```
+
+Codespaces やネットワーク制限がある環境の場合（GA 前のため）：
+
+```bash
+curl -sL https://raw.githubusercontent.com/github/gh-aw/main/install-gh-aw.sh | bash
+```
+
+### 6.1 — Personal Access Token (PAT) を作成する
+
+Agentic Workflow で Copilot を活用するために PAT を作成します。
+
+1. [https://github.com/settings/personal-access-tokens/new](https://github.com/settings/personal-access-tokens/new) にアクセス
+2. 設定内容：
+   - **Token name**: `copilot-workshop-agent`
+   - **Resource owner**: リポジトリを作成した Organization（または個人アカウント）
+   - **Repository access**: Only select repositories → 作成したリポジトリを選択
+   - **Permissions**:
+     - **Actions**: Read and write
+     - **Contents**: Read-only
+     - **Issues**: Read and write
+     - **Metadata**: Read-only（自動付与）
+     - **Pull requests**: Read and write
+
+![PAT Permissions](/theomonfort/handson/img/pat-permissions.png)
+3\. 作成した PAT をコピー
+
+<Aside type="negative">
+
+**注意**: PAT は作成時に一度だけ表示されます。必ずコピーして安全な場所に保存してください。再表示はできません。
+
+</Aside>
+
+#### リポジトリシークレットに設定
+
+1. リポジトリの **Settings** → **Secrets and variables** → **Actions**
+2. **New repository secret** をクリック
+3. Name: `COPILOT_GITHUB_TOKEN`、Value: 作成した PAT
+
+#### Workflow permissions の確認
+
+1. **Settings** → **Actions** → **General**
+2. **Allow GitHub Actions to create and approve pull requests** にチェック
+
+### 6.2 — Daily Repo Status ワークフローを作成する
+
+今日のリポジトリ活動を自動レポートする Agentic Workflow を作成しましょう。
+
+エージェントモードで以下を実行：
+
+```
+以下の Agentic Workflow を作成してください。
+
+ファイル: .github/workflows/daily-repo-status.md
+
+目的: リポジトリの活動（Issue、PR、コード変更）を分析し、
+日次ステータスレポートを Issue として自動作成する。
+
+フォーマット:
+- YAML front matter で設定を定義（on, permissions, tools, safe-outputs）
+- Markdown 本文でワークフローの指示を記述
+
+設定:
+- トリガー: schedule: daily と workflow_dispatch
+- permissions: contents: read, issues: read, pull-requests: read
+- tools: github（lockdown: false, min-integrity: none）
+- safe-outputs: create-issue で title-prefix "[repo-status] "、
+  labels: [report, daily-status]、close-older-issues: true
+
+ワークフローの指示:
+1. リポジトリの最近の活動（Issue、PR、コード変更）を収集
+2. 進捗やハイライトを分析
+3. 結果を GitHub Issue として作成
+
+参考: https://github.com/githubnext/agentics/blob/main/workflows/daily-repo-status.md
+
+完了したら `gh aw compile` コマンドを実行してワークフローをコンパイルし、
+変更をコミットして PR を作成してください。
+```
+
+<Aside type="positive">
+
+**ポイント**: `gh aw compile` は `.md` ファイルから GitHub Actions が実行できる `.lock.yml` ファイルを生成します。コンパイルしないとワークフローは動作しません。
+
+</Aside>
+
+PR をマージした後、**Actions** タブからワークフローを手動実行します：
+
+1. リポジトリの **Actions** タブを開く
+2. 左メニューから **Daily Repo Status** を選択
+3. **Run workflow** → **Run workflow** をクリック
+
+![Actions から手動実行](/theomonfort/handson/img/actions-run-workflow.png)
+
+実行完了後（⏱ 約2分）、リポジトリの **Issues** タブに `[repo-status]` というプレフィックスの Issue が自動作成され、今日の PR、Issue、コード変更の活動サマリーが表示されます。
+
+<Aside type="positive">
+
+**ポイント**: Agentic Workflow は通常の GitHub Actions とは異なり、`gh aw run` コマンドで実行します。スケジュール実行（毎日自動）も設定可能です。
+
+</Aside>
+
+### 6.3 —（ボーナス）テストカバレッジ自動更新ワークフローを作成する
+
+余裕がある方は、テストカバレッジレポートを自動更新するワークフローも作成してみましょう。
+
+エージェントモードで以下を実行：
+
+```
+以下の Agentic Workflow を作成してください。
+参照: https://github.com/github/gh-aw/blob/main/create.md
+
+ワークフローの目的：
+- main ブランチへの push 時にトリガー
+- テストを実行してカバレッジレポートを生成
+- カバレッジ結果を README.md のバッジとして自動更新
+- 変更がある場合は PR を自動作成
+
+ワークフローファイルは .github/workflows/coverage-update.md に配置してください。
+```

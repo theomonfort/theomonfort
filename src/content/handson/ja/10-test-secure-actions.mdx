@@ -1,0 +1,84 @@
+---
+title: "TEST & SECURE: Actions（任意）"
+order: 10
+stepSlug: "test-secure-actions"
+duration: 15
+summary: "Presentation モードの キーボードナビゲーション が壊れないように、Playwright で E2E テストを書き、PR ごとに自動実行する Actions ワークフローを作ります。"
+generated: true
+generatedFrom: "workshop-nikon.md"
+upstreamSha: "a4b841f7dc6c06e9e35ba0083332c02c07139015"
+---
+{/*
+  AUTO-GENERATED FILE — do not edit by hand.
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ a4b841f7dc6c06e9e35ba0083332c02c07139015
+  Regenerate via: node scripts/import-handson.mjs --force
+*/}
+
+import Aside from '../../../components/handson/Aside.astro';
+
+<img src="/theomonfort/handson/img/Octocat-blue.png" alt="TEST & SECURE フェーズの Octocat" style="float: right; width: 100px; margin: 0 0 1em 1em;" />
+
+<Aside type="positive">
+
+**📖 参考**: [プレイブック / GitHub Actions](https://theomonfort.github.io/theomonfort/playbook/github-actions/?present=1) で Actions のワークフロー構造とトリガーの仕組みを確認できます。
+
+</Aside>
+
+Presentation モードの **キーボードナビゲーション** が壊れないように、Playwright で E2E テストを書き、PR ごとに自動実行する Actions ワークフローを作ります。
+
+### 10.1 — Presentation モードのテストを作成する
+
+Copilot Chat（Agent モード）で以下を入力してください：
+
+```
+新しいブランチ `test-creation` を作成して、そのブランチで作業してください。
+
+Presentation モードのキーボードナビゲーションを検証する Playwright E2E テストを作成してください。
+
+前提：
+- src/content/playbook/ に少なくとも 2 件のエントリーがあるとする。
+- 詳細ページの URL パターンは `/playbook/[slug]`。
+
+テストケース：
+1. 詳細ページで `P` を押すと Presentation モードに入る（DOM の状態クラスやサイドバー表示で確認）。
+2. Presentation モード中に `←` / `→` を押すとエントリー内のスライドが前後に移動する（## 見出しごとに 1 スライド）。
+3. Presentation モード中に `↓` / `↑` を押すと次 / 前のエントリーに移動する（URL が変わる）。
+4. Presentation モード中に `Esc` を押すと通常の詳細ページに戻る。
+5. 左サイドバーに全エントリーが目次として表示され、現在のエントリーがハイライトされている。
+
+ファイル配置:
+- テストは tests/e2e/presentation.spec.ts に配置。
+- 必要なら playwright.config.ts も更新してください（baseURL、webServer に pnpm dev を起動する設定）。
+
+テストを書き終えたらローカルで `pnpm exec playwright test` を実行して全部 pass することを確認してください。
+```
+
+⏱ 約5分
+
+### 10.2 — PR で自動実行する Actions ワークフローを作成する
+
+続けて Copilot Chat に以下を入力してください：
+
+```
+同じ `test-creation` ブランチで作業してください。
+
+.github/workflows/test.yml を作成してください。
+PR の作成・更新時にトリガーし、以下を実行してください：
+
+1. Node.js 22 をセットアップ
+2. pnpm をセットアップ
+3. 依存関係をインストール
+4. Playwright のブラウザをインストール（npx playwright install --with-deps chromium）
+5. `pnpm exec playwright test` を実行
+6. テスト失敗時は Playwright のレポートを artifact としてアップロード
+```
+
+⏱ 約2分
+
+PR を作成し直すと、Actions タブで `test.yml` の実行が確認できます。Presentation モードの挙動を変更したときにこの workflow が早期に壊れを検知してくれます。
+
+<Aside type="positive">
+
+**ポイント**: テストを書き、Actions で常時実行しておくことで、Cloud Agent や次の Agentic Workflow が自動的に PR を作るようになっても、レグレッションを検知できる安全網が手に入ります。
+
+</Aside>

@@ -1,0 +1,96 @@
+---
+title: "PLAN: Skills"
+order: 5
+stepSlug: "plan-skills"
+duration: 10
+summary: "Agent Skill は、Copilot に「特定のタスクのこなし方」を仕込む再利用可能な指示セットです。プロンプトに合致したときに自動で召喚され、毎回テンプレを説明し直す必要がなくなります。"
+generated: true
+generatedFrom: "workshop-nikon.md"
+upstreamSha: "a4b841f7dc6c06e9e35ba0083332c02c07139015"
+---
+{/*
+  AUTO-GENERATED FILE — do not edit by hand.
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ a4b841f7dc6c06e9e35ba0083332c02c07139015
+  Regenerate via: node scripts/import-handson.mjs --force
+*/}
+
+import Aside from '../../../components/handson/Aside.astro';
+
+<img src="/theomonfort/handson/img/octocat-plan.png" alt="PLAN フェーズの Octocat" style="float: right; width: 100px; margin: 0 0 1em 1em;" />
+
+<Aside type="positive">
+
+**📖 参考**: [プレイブック / Agent Skills](https://theomonfort.github.io/theomonfort/playbook/agent-skills) で Skill の仕組み・召喚され方を確認できます。
+
+</Aside>
+
+**Agent Skill** は、Copilot に「特定のタスクのこなし方」を仕込む再利用可能な指示セットです。プロンプトに合致したときに自動で召喚され、毎回テンプレを説明し直す必要がなくなります。
+
+このステップでは、Issue を整った形で書ける Skill を入れて、実際に Issue を 1 件作ってみます。
+
+### 5.1 — github-issues Skill をインストール
+
+[`theomonfort/skills`](https://github.com/theomonfort/skills) から **`github-issues`** Skill を入れます。このスキルは bug report / feature request / task など複数のテンプレを持ち、ラベル・優先度・依存関係まで含めた構造化された Issue を書けるようになります。
+
+VS Code のターミナルで以下を実行してください：
+
+```bash
+gh skill install theomonfort/skills github-issues
+```
+
+実行すると CLI から **対象エージェント** と **インストール先（scope）** を選ぶよう聞かれます：
+
+- **Agent**: `copilot` を選択（VS Code の GitHub Copilot Chat 用）
+- **Scope**: `project`（プロジェクト = このリポジトリ専用にインストール）
+
+<Aside type="positive">
+
+**💡 ヒント**: スキルの公開方法は標準化されており、**公開リポジトリ + `skills/<skill-name>/SKILL.md`** の構成にするだけで `gh skill install <owner>/<repo> <skill-name>` で誰でもインストールできます（仕様: [agentskills.io](https://agentskills.io/specification)）。`github/awesome-copilot` はコミュニティ版のコレクションですが、SAML SSO で守られた組織からインストールしようとすると認可ステップが必要になるため、本ワークショップではフォーク先の `theomonfort/skills` を使います。
+
+</Aside>
+
+インストールが完了すると `.agents/skills/github-issues/SKILL.md` が追加されます。中身を開いて Copilot がどんなときにこの Skill を呼ぶのか、どんなテンプレを持っているのかを確認してみてください。
+
+⏱ 約1分
+
+### 5.2 — MCP + Skill で Issue を作成する
+
+GitHub MCP Server + `github-issues` Skill を組み合わせて、構造化された Issue を 1 件作成します。Copilot Chat で以下のプロンプトを入力してください：
+
+<details>
+<summary>📋 プロンプトを表示 / コピー</summary>
+
+```
+github-issues skill を使って、このリポジトリに以下の Issue を作成してください。
+ユーザーストーリー・受け入れ基準・実装ノートを含む構造化された feature request にしてください。
+
+タイトル: Add English support on the website
+
+背景:
+- 現在サイトはすべて日本語で書かれている。海外のエンジニアにも届けたい。
+
+要件:
+- Astro の i18n ルーティング (`/en/...`) で英語版を追加する。フォールバックは日本語。
+- ナビゲーション・ボタン等の UI 文字列は src/i18n/ja.ts / en.ts に切り出す。
+- src/content/ のマークダウンは ja / en の両言語を併設できる構造にする。
+- 言語切替トグルをサイトのヘッダーに追加する。
+
+受け入れ基準:
+- /en/ ルートでサイト全体が英語で閲覧できる。
+- 翻訳が無いページはフォールバックで日本語を表示し、上部に warning banner を出す。
+- 既存の SEO (sitemap, OG tags) が両言語で正しく出力される。
+
+ラベル: feature, i18n, frontend
+```
+
+</details>
+
+⏱ 約2分
+
+<Aside type="positive">
+
+**ポイント**: **MCP** が「ツールへの接続」を、**Skill** が「そのツールでの作法」を持ち込みます。本来 Copilot は SKILL.md の説明から自動でスキルを召喚しますが、確実に発動させるために今回はプロンプトで明示的に指定しています。テンプレに沿った Issue が GitHub に直接立てられるのを確認してください。
+
+このあと作成された Issue は、Cloud Agent や Agentic Workflow のステップで実装担当として割り当てます（次の章で）。
+
+</Aside>

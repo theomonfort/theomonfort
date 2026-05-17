@@ -1,0 +1,40 @@
+---
+import { localizedPath, type Locale } from '../../lib/i18n';
+import { type LocalizedHandsonEntry, handsonStepTitle } from '../../lib/handson';
+
+interface Props {
+  steps: LocalizedHandsonEntry[];
+  currentSlug?: string;
+  locale: Locale;
+  tocLabel: string;
+  tocHeading: string;
+}
+
+const { steps, currentSlug, locale, tocLabel, tocHeading } = Astro.props;
+---
+
+<nav class="handson-toc" aria-label={tocLabel} data-handson-toc>
+  <div class="handson-toc-head font-pixel text-[10px] text-neon-cyan">{tocHeading}</div>
+  <ol class="handson-toc-list">
+    {steps.map((step) => {
+      const active = step.slug === currentSlug;
+      const order = step.entry.data.order;
+      return (
+        <li>
+          <a
+            href={localizedPath(locale, `/handson/${step.slug}`)}
+            class={`handson-toc-item ${active ? 'is-active' : ''}`}
+            data-active={active ? 'true' : 'false'}
+            data-slug={step.slug}
+          >
+            <span class="toc-num font-pixel text-[10px]">{String(order).padStart(2, '0')}</span>
+            <span class="toc-text font-pixel-jp">{handsonStepTitle(step)}</span>
+            {step.entry.data.duration != null && (
+              <span class="toc-duration font-pixel text-[8px]">{step.entry.data.duration}m</span>
+            )}
+          </a>
+        </li>
+      );
+    })}
+  </ol>
+</nav>

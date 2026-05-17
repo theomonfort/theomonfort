@@ -1,0 +1,92 @@
+---
+import Layout from '../../components/layout/Layout.astro';
+import MenuArrow from '../../components/retro/MenuArrow.astro';
+import { localizedPath, siteCopy } from '../../lib/i18n';
+import { getHandsonSteps, handsonStepTitle } from '../../lib/handson';
+
+const locale = 'ja';
+const t = siteCopy[locale];
+const steps = await getHandsonSteps(locale);
+const totalDuration = steps.reduce((acc, s) => acc + (s.entry.data.duration ?? 0), 0);
+const firstStep = steps[0];
+---
+
+<Layout locale={locale} currentPath="/handson" title={t.handson.title}>
+  <section class="max-w-5xl mx-auto px-4 py-12">
+    <header class="mb-10">
+      <p class="font-pixel text-[10px] text-crt-amber tracking-[0.3em] mb-2">{t.handson.chapter}</p>
+      <h1 class="font-pixel text-2xl md:text-4xl text-neon-cyan mb-3">{t.handson.heading}</h1>
+      <p class="font-pixel-jp text-lg text-neon-magenta">{t.handson.subtitle}</p>
+      <p class="font-body text-sm text-phosphor/80 mt-4 max-w-2xl leading-relaxed">
+        {t.handson.intro}
+      </p>
+
+      <dl class="mt-6 flex flex-wrap gap-x-8 gap-y-3 font-pixel text-[10px] text-neon-cyan">
+        <div>
+          <dt class="text-phosphor/60 mb-1">▮ {t.handson.tocHeading}</dt>
+          <dd>{t.handson.stepCount}{steps.length}{t.handson.stepCountSuffix}</dd>
+        </div>
+        {totalDuration > 0 && (
+          <div>
+            <dt class="text-phosphor/60 mb-1">⏱ {t.handson.durationLabel}</dt>
+            <dd>~{totalDuration}{t.handson.durationSuffix}</dd>
+          </div>
+        )}
+      </dl>
+
+      {firstStep && (
+        <div class="mt-8">
+          <a
+            href={localizedPath(locale, `/handson/${firstStep.slug}`)}
+            class="inline-flex items-center gap-3 px-6 py-4 border-2 border-neon-cyan bg-shadow-ink/80 text-neon-cyan hover:bg-neon-cyan/10 hover:shadow-[0_0_24px_rgba(0,240,255,0.55)] transition-all font-pixel text-xs md:text-sm"
+          >
+            {t.handson.start}
+          </a>
+        </div>
+      )}
+    </header>
+
+    <ol class="grid grid-cols-1 md:grid-cols-2 gap-4 auto-rows-fr">
+      {steps.map((item) => {
+        const e = item.entry;
+        return (
+          <li class="h-full">
+            <a
+              href={localizedPath(locale, `/handson/${item.slug}`)}
+              class="flex h-full bg-shadow-ink/80 border-2 border-neon-cyan/60 hover:border-neon-cyan hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] p-5 transition-all duration-200 hover:-translate-y-1 group"
+            >
+              <div class="flex items-start gap-4 w-full">
+                <span class="font-pixel text-2xl md:text-3xl text-neon-cyan shrink-0 leading-none">
+                  {String(e.data.order).padStart(2, '0')}
+                </span>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-baseline gap-2 mb-2 flex-wrap">
+                    <span class="font-pixel text-[10px] text-neon-cyan">{t.handson.stepLabel} {e.data.order}</span>
+                    {e.data.duration != null && (
+                      <span class="font-pixel text-[10px] text-crt-amber">⏱ {e.data.duration}{t.handson.durationSuffix}</span>
+                    )}
+                  </div>
+                  <h3 class="font-pixel-jp text-base md:text-lg text-neon-cyan mb-2 leading-tight">
+                    {handsonStepTitle(item)}
+                  </h3>
+                  {e.data.summary && (
+                    <p class="font-body text-sm text-phosphor/80 leading-relaxed line-clamp-3">
+                      {e.data.summary}
+                    </p>
+                  )}
+                  <div class="mt-3 font-pixel text-[10px] text-neon-cyan opacity-0 group-hover:opacity-100 transition-opacity">
+                    <MenuArrow color="text-neon-cyan" /> {t.playbook.readMore}
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+        );
+      })}
+    </ol>
+
+    <div class="mt-12 text-center">
+      <a href={localizedPath(locale, '/')} class="font-pixel text-[10px] text-phosphor/60 hover:text-neon-magenta">{t.common.backHome}</a>
+    </div>
+  </section>
+</Layout>

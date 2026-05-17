@@ -1,0 +1,107 @@
+---
+title: "REVIEW: Copilot Code Review"
+order: 7
+stepSlug: "review-copilot-code-review"
+duration: 15
+summary: "実装が動いたら、PR を作る前に Copilot Code Review をハーネスに組み込みます。copilot-instructions.md のルール（言語・Stack・コードレビュー観点）が自動でレビューに反映されます。"
+generated: true
+generatedFrom: "workshop-nikon.md"
+upstreamSha: "a4b841f7dc6c06e9e35ba0083332c02c07139015"
+---
+{/*
+  AUTO-GENERATED FILE — do not edit by hand.
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ a4b841f7dc6c06e9e35ba0083332c02c07139015
+  Regenerate via: node scripts/import-handson.mjs --force
+*/}
+
+import Aside from '../../../components/handson/Aside.astro';
+
+<img src="/theomonfort/handson/img/Octocat-yellow.png" alt="REVIEW フェーズの Octocat" style="float: right; width: 100px; margin: 0 0 1em 1em;" />
+
+<Aside type="positive">
+
+**📖 参考**: [プレイブック / Copilot Code Review](https://theomonfort.github.io/theomonfort/playbook/copilot-code-review/?present=1) で Code Review の自動化と Custom Instructions の効き方を確認できます。
+
+</Aside>
+
+実装が動いたら、PR を作る前に **Copilot Code Review** をハーネスに組み込みます。`copilot-instructions.md` のルール（言語・Stack・コードレビュー観点）が自動でレビューに反映されます。
+
+### 7.1 — Copilot Code Review の設定を有効化する
+
+まず、Copilot Code Review の設定を確認します。
+
+1. リポジトリの **Settings** → **Copilot** → **Code review**
+2. 以下を有効化：
+   - **Use custom instructions when reviewing pull requests** → On
+
+<Aside type="positive">
+
+**ポイント**: Custom instructions を有効にすると、`copilot-instructions.md` の内容がコードレビューにも反映されます。
+
+</Aside>
+
+### 7.2 — 自動レビューの Ruleset を作成する
+
+PR 作成時に Copilot が自動的にコードレビューを行うように設定します。**Code review 設定ページから直接** Ruleset を作成すると速いです。
+
+1. **Settings** → **Copilot** → **Code review** のページで、**Automatic code review** セクションを探す
+2. **Add a ruleset** （または **Create ruleset**）をクリック → Ruleset 作成画面が **Automatically request Copilot code review** が有効化された状態で開きます
+
+<Aside type="positive">
+
+**ポイント**: 開いた Ruleset 画面では、以下のオプションも有効化しておくのがおすすめです：
+
+- **Review new pushes** — push のたびに自動で再レビュー
+- **Require a pull request before merging** — 直接 push を禁止
+- **Bypass list** に **Repository admin** を追加 — ワークショップ中にレビュー待ちでブロックされないように
+
+</Aside>
+
+### 7.3 — PR を作成して結果を確認する
+
+セクション 6 で作ったサイトをリモートに push して PR を作ると、7.2 で設定した Ruleset で Copilot Code Review が自動実行されます。Copilot Chat の Agent モードに任せましょう：
+
+> 📋 プロンプトを表示 / コピー
+>
+> ```
+> 現在のブランチの変更をコミットして push し、main に対する PR を作成して。タイトルと本文は変更内容を要約して日本語で。
+> ```
+
+PR が開くと、Copilot Code Review が自動的に走ります（⏱ 約5分）：
+
+- ✅ **Pull Request Overview** — PR 全体のサマリーコメント
+- ✅ **コード提案** — 各ファイルへの具体的な改善提案
+
+<Aside type="positive">
+
+**ポイント**: レビュー中の挙動は PR 上の **「View session」** リンク、もしくはリポジトリの **Actions** タブから対応するワークフロー実行を開くことで透過的に確認できます。Copilot がどのファイルを読み、どう判断したかが追えます。
+
+</Aside>
+
+### 7.4 — レビュー提案を修正する
+
+Copilot のレビュー提案を修正する方法は2つあります：
+
+1. **Commit suggestion** — 個別の提案を1つずつコミット
+2. **Fix batch with Copilot** — すべての提案を一括で修正（おすすめ）
+
+**Fix batch with Copilot** をクリックすると、修正内容を含む **新しい PR** が自動的に作成されます（⏱ 約15分）。
+
+1. まず **修正用の新しい PR** をマージ
+2. 次に **元の PR** をマージ
+
+<Aside type="negative">
+
+**注意**: 場合によっては新しい PR が作成されず、修正が直接元の PR にコミットされることもあります。その場合はそのまま元の PR をマージしてください。
+
+</Aside>
+
+<Aside type="positive">
+
+**ポイント**:
+
+- Copilot Code Review のセッションは **Actions** タブで確認でき、レビュープロセスは完全に透明です。
+- レビューコメントが日本語で表示されているのは、`copilot-instructions.md` で設定した言語指定が反映されているためです！
+- `copilot-instructions.md` にレビュー観点（例: セキュリティ重視、パフォーマンス重視）を追記することで、レビュー内容をカスタマイズできます。
+
+</Aside>

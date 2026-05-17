@@ -1,0 +1,149 @@
+---
+import Layout from '../../components/layout/Layout.astro';
+import { render } from 'astro:content';
+import HandsonTOC from '../../components/handson/HandsonTOC.astro';
+import HandsonStepNav from '../../components/handson/HandsonStepNav.astro';
+import { localizedPath, siteCopy } from '../../lib/i18n';
+import { getHandsonSteps, handsonStepTitle } from '../../lib/handson';
+
+const locale = 'ja';
+const t = siteCopy[locale];
+
+export async function getStaticPaths() {
+  const steps = await getHandsonSteps('ja');
+  return steps.map((item) => ({
+    params: { slug: item.slug },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const entry = item.entry;
+const { Content } = await render(entry);
+
+const all = await getHandsonSteps(locale);
+const idx = all.findIndex((e) => e.slug === item.slug);
+const prev = idx > 0 ? all[idx - 1] : null;
+const next = idx < all.length - 1 ? all[idx + 1] : null;
+const progress = Math.round(((idx + 1) / all.length) * 100);
+---
+
+<Layout locale={locale} currentPath={`/handson/${item.slug}`} title={`${handsonStepTitle(item)} — ${t.handson.heading}`}>
+  <div
+    class="handson-progress"
+    style={`--handson-progress:${progress}%`}
+    aria-hidden="true"
+  ></div>
+
+  <section
+    class="handson-shell"
+    data-prev={prev ? localizedPath(locale, `/handson/${prev.slug}`) : ''}
+    data-next={next ? localizedPath(locale, `/handson/${next.slug}`) : ''}
+    data-index={localizedPath(locale, '/handson')}
+  >
+    <aside class="handson-toc-wrap">
+      <a
+        href={localizedPath(locale, '/handson')}
+        class="font-pixel text-[10px] text-phosphor/60 hover:text-neon-cyan block mb-4"
+      >
+        {t.handson.backToIndex}
+      </a>
+      <HandsonTOC
+        steps={all}
+        currentSlug={item.slug}
+        locale={locale}
+        tocLabel={t.handson.tocLabel}
+        tocHeading={t.handson.tocHeading}
+      />
+    </aside>
+
+    <main class="handson-main">
+      <button
+        type="button"
+        class="handson-toc-toggle font-pixel text-[10px]"
+        data-handson-toc-toggle
+        aria-expanded="false"
+      >
+        ☰ {t.handson.tocLabel}
+      </button>
+
+      <header class="handson-step-header">
+        <div class="flex items-baseline gap-3 flex-wrap mb-3">
+          <span class="font-pixel text-[10px] text-crt-amber tracking-[0.3em]">
+            ▮ {t.handson.stepLabel} {String(entry.data.order).padStart(2, '0')} / {String(all.length).padStart(2, '0')} ▮
+          </span>
+          {entry.data.duration != null && (
+            <span class="font-pixel text-[10px] text-neon-cyan border border-neon-cyan/60 px-2 py-1">
+              ⏱ {entry.data.duration}{t.handson.durationSuffix}
+            </span>
+          )}
+        </div>
+        <h1 class="font-pixel-jp text-2xl md:text-4xl text-neon-cyan leading-tight">
+          {handsonStepTitle(item)}
+        </h1>
+        {item.isFallback && (
+          <p class="mt-4 p-3 border-2 border-crt-amber/60 bg-shadow-ink/70 font-body text-sm text-crt-amber">
+            {t.common.translationPending}
+          </p>
+        )}
+      </header>
+
+      <article class="prose-akq handson-article" style="--entry-accent:#00f0ff">
+        <Content />
+      </article>
+
+      <HandsonStepNav
+        prev={prev}
+        next={next}
+        locale={locale}
+        prevLabel={t.handson.prev}
+        nextLabel={t.handson.next}
+      />
+
+      <p class="handson-keyboard-hint font-pixel text-[10px] text-phosphor/40 mt-6 text-center">
+        {t.handson.keyboardHint}
+      </p>
+    </main>
+  </section>
+
+  <script>
+    (() => {
+      const shell = document.querySelector('.handson-shell') as HTMLElement | null;
+      if (!shell) return;
+      const prevUrl = shell.dataset.prev;
+      const nextUrl = shell.dataset.next;
+
+      function onKey(e: KeyboardEvent) {
+        if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+        const target = e.target as HTMLElement | null;
+        const tag = target?.tagName;
+        if (
+          tag === 'INPUT' ||
+          tag === 'TEXTAREA' ||
+          tag === 'SELECT' ||
+          target?.isContentEditable
+        ) {
+          return;
+        }
+        if (e.key === 'ArrowLeft' && prevUrl) {
+          window.location.href = prevUrl;
+        } else if (e.key === 'ArrowRight' && nextUrl) {
+          window.location.href = nextUrl;
+        }
+      }
+      document.addEventListener('keydown', onKey);
+      document.addEventListener('astro:before-swap', () => {
+        document.removeEventListener('keydown', onKey);
+      }, { once: true });
+
+      const toggle = document.querySelector('[data-handson-toc-toggle]') as HTMLButtonElement | null;
+      const toc = document.querySelector('[data-handson-toc]') as HTMLElement | null;
+      if (toggle && toc) {
+        toggle.addEventListener('click', () => {
+          const open = toc.classList.toggle('is-open');
+          toggle.setAttribute('aria-expanded', String(open));
+        });
+      }
+    })();
+  </script>
+</Layout>

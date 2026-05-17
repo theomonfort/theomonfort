@@ -1,0 +1,42 @@
+---
+import { localizedPath, type Locale } from '../../lib/i18n';
+import { type LocalizedHandsonEntry, handsonStepTitle } from '../../lib/handson';
+
+interface Props {
+  prev: LocalizedHandsonEntry | null;
+  next: LocalizedHandsonEntry | null;
+  locale: Locale;
+  prevLabel: string;
+  nextLabel: string;
+}
+const { prev, next, locale, prevLabel, nextLabel } = Astro.props;
+---
+
+<nav class="handson-step-nav" aria-label="Step navigation">
+  {prev ? (
+    <a
+      href={localizedPath(locale, `/handson/${prev.slug}`)}
+      class="step-nav-card prev"
+      rel="prev"
+      data-handson-prev
+    >
+      <span class="font-pixel text-[10px] text-phosphor/60">◀ {prevLabel}</span>
+      <span class="font-pixel-jp text-sm md:text-base text-neon-cyan mt-1 block">
+        {String(prev.entry.data.order).padStart(2, '0')} · {handsonStepTitle(prev)}
+      </span>
+    </a>
+  ) : <span class="step-nav-card placeholder" aria-hidden="true"></span>}
+  {next ? (
+    <a
+      href={localizedPath(locale, `/handson/${next.slug}`)}
+      class="step-nav-card next"
+      rel="next"
+      data-handson-next
+    >
+      <span class="font-pixel text-[10px] text-phosphor/60 text-right block">{nextLabel} ▶</span>
+      <span class="font-pixel-jp text-sm md:text-base text-neon-magenta mt-1 block text-right">
+        {String(next.entry.data.order).padStart(2, '0')} · {handsonStepTitle(next)}
+      </span>
+    </a>
+  ) : <span class="step-nav-card placeholder" aria-hidden="true"></span>}
+</nav>

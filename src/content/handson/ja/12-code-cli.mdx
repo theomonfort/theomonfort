@@ -1,0 +1,141 @@
+---
+title: "CODE: CLI"
+order: 12
+stepSlug: "code-cli"
+duration: 30
+summary: "Copilot CLI は、ターミナル上で動作する対話型 AI アシスタントです。VS Code を開かずに、コード生成・レビュー・リファクタリングなどを自律的に実行できます。"
+generated: true
+generatedFrom: "workshop-nikon.md"
+upstreamSha: "a4b841f7dc6c06e9e35ba0083332c02c07139015"
+---
+{/*
+  AUTO-GENERATED FILE — do not edit by hand.
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ a4b841f7dc6c06e9e35ba0083332c02c07139015
+  Regenerate via: node scripts/import-handson.mjs --force
+*/}
+
+import Aside from '../../../components/handson/Aside.astro';
+
+<img src="/theomonfort/handson/img/Octocat-red.png" alt="CODE フェーズの Octocat" style="float: right; width: 100px; margin: 0 0 1em 1em;" />
+
+<Aside type="positive">
+
+**📖 参考**: [プレイブック / Copilot CLI](https://theomonfort.github.io/theomonfort/playbook/cli/) で Copilot CLI の Plan ↔ Agent 切替えとターミナル中心のワークフローを確認できます。
+
+</Aside>
+
+**Copilot CLI** は、ターミナル上で動作する対話型 AI アシスタントです。VS Code を開かずに、コード生成・レビュー・リファクタリングなどを自律的に実行できます。
+
+ここでは **Part 6 の最後で作成した Issue 群** を、CLI から `/fleet` で **並列に** 実装してもらいます。
+
+### 主なコマンド
+
+| コマンド         | 説明                        |
+| ------------ | ------------------------- |
+| `/model`     | AI モデルの選択（Claude / GPT 等） |
+| `/mode`      | モード切り替え（plan / agent）     |
+| `/allow-all` | 確認なしでツール実行を許可（Autopilot）  |
+| `/fleet`     | 複数エージェントを並列で動かす           |
+| `/tasks`     | 実行中の fleet タスクの状態を確認      |
+| `/chronicle` | セッション履歴・利用状況の分析           |
+| `/resume`    | 前回のセッションを再開               |
+
+### 12.1 — Copilot CLI を起動する
+
+まず、最新のコードを取得します。Cloud Agent や Code Review から PR がマージされているはずなので、ローカルブランチも更新しておきます：
+
+```bash
+git checkout main
+git pull
+```
+
+そして VS Code のターミナルで Copilot CLI を起動：
+
+```bash
+copilot
+```
+
+<Aside type="negative">
+
+**初回起動時**: 「Install GitHub Copilot CLI?」と表示されたら `y` を入力してインストールしてください。Codespaces には `postCreateCommand` で事前インストール済みです。
+
+</Aside>
+
+### 12.2 — モデル選択と Autopilot
+
+CLI 内で以下を実行：
+
+```
+/allow-all
+```
+
+```
+/model
+```
+
+最も高性能なモデル（例: Claude Opus 4.6）を選択してください。
+
+そして **Shift+Tab** で **Agent (Autopilot) モード** に切り替えます。
+
+### 12.3 — `/fleet` で Issue を並列に実装する
+
+Part 6 で作成した 3〜5 件の Issue を、CLI に並列で実装させます。プロンプトの最後に、別モデル（Codex 系）でラバーダックレビューさせる指示も含めます。
+
+<details>
+<summary>📋 プロンプトを表示 / コピー</summary>
+
+```
+/fleet このリポジトリの open Issue のうち、label が bug または enhancement のものをすべて、
+1 Issue につき 1 つの fleet エージェントを割り当てて並列で実装してください。
+
+各エージェントは以下のフローで作業すること：
+1. Issue 番号と一致するブランチ (fix/<number>-<slug>) を切る
+2. 修正を実装する
+3. pnpm dev で動作確認できる状態にする
+4. コミットして PR を出す（`Closes #<number>` を本文に入れる）
+
+すべての PR が作成されたら、最後に **GPT-5 Codex** モデルに切り替えて
+（実装させた Claude とは別モデルで盲点を避けるため）、
+作成された全 PR の差分を読みラバーダック視点でレビューしてください。
+観点：設計上の盲点・ロジックバグ、Issue 要件の漏れ、既存コードとの整合性、
+テスト・エラーハンドリングの不足。スタイルや軽微な指摘は無視し、
+本当に重要な問題だけ PR 単位で簡潔に列挙してください。
+```
+
+</details>
+
+⏱ 約10〜15分
+
+CLI が複数の fleet エージェントを spawn し、それぞれ別ブランチで実装 → PR 作成まで自律的に進めます。進捗はターミナルにストリーム表示され、最後に別モデルでのラバーダックレビューが出力されます。
+
+実行中・実行後の進捗を確認するには：
+
+```
+/tasks
+```
+
+各 fleet エージェントの状態（実行中 / 完了 / 失敗）と現在のステップが一覧表示されます。
+
+<Aside type="positive">
+
+**ポイント**: 実装させたモデル（Claude）と異なるモデル（Codex）でレビューさせることで、同質性バイアスを避けて盲点を炙り出せます。
+
+</Aside>
+
+### 12.4 — Chronicle で利用状況を分析する
+
+最後に、ワークショップ中の Copilot CLI 利用状況を Chronicle で振り返ります：
+
+```
+/experimental
+```
+
+```
+chronicle
+```
+
+<Aside type="positive">
+
+**Chronicle のポイント**: Chronicle は Copilot の利用パターンを分析し、より効果的な使い方のアドバイスを提供します。並列処理した fleet 実行の傾向もここで確認できます。
+
+</Aside>
