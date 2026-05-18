@@ -86,7 +86,14 @@ const articleStyle = `--entry-accent:#00f0ff;--aside-accent:${asideAccent};--asi
         )}
       </header>
 
-      <article class="prose-akq handson-article" data-handson-category={category} style={articleStyle}>
+      <article
+        class="prose-akq handson-article"
+        data-handson-category={category}
+        data-copy-label={t.handson.copy}
+        data-copied-label={t.handson.copied}
+        data-copy-aria={`${t.handson.copy} — ${t.handson.tocLabel}`}
+        style={articleStyle}
+      >
         <Content />
       </article>
 
@@ -127,6 +134,60 @@ const articleStyle = `--entry-accent:#00f0ff;--aside-accent:${asideAccent};--asi
       };
       enhanceLinks();
       document.addEventListener('astro:page-load', enhanceLinks);
+
+      // Inject a "copy" button into every <pre> code/prompt block so users
+      // can grab the full text without manually selecting (which is hard
+      // with wrapped lines + Mermaid + nested whitespace).
+      const enhanceCopyButtons = () => {
+        const article = document.querySelector('.handson-article') as HTMLElement | null;
+        if (!article) return;
+        const copyLabel = article.dataset.copyLabel ?? 'COPY';
+        const copiedLabel = article.dataset.copiedLabel ?? 'COPIED ✓';
+        const ariaLabel = article.dataset.copyAria ?? copyLabel;
+        const blocks = article.querySelectorAll<HTMLPreElement>('pre');
+        blocks.forEach((pre) => {
+          if (pre.dataset.copyEnhanced === '1') return;
+          pre.dataset.copyEnhanced = '1';
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'handson-copy-btn';
+          btn.textContent = copyLabel;
+          btn.setAttribute('aria-label', ariaLabel);
+          let resetTimer: number | undefined;
+          btn.addEventListener('click', async (event) => {
+            event.preventDefault();
+            const codeEl = pre.querySelector('code');
+            const text = (codeEl?.textContent ?? pre.textContent ?? '').replace(/\s+$/, '');
+            try {
+              if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(text);
+              } else {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.setAttribute('readonly', '');
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+              }
+              btn.textContent = copiedLabel;
+              btn.classList.add('is-copied');
+              if (resetTimer) window.clearTimeout(resetTimer);
+              resetTimer = window.setTimeout(() => {
+                btn.textContent = copyLabel;
+                btn.classList.remove('is-copied');
+              }, 1800);
+            } catch {
+              // Silently ignore; the user can still select & copy manually.
+            }
+          });
+          pre.appendChild(btn);
+        });
+      };
+      enhanceCopyButtons();
+      document.addEventListener('astro:page-load', enhanceCopyButtons);
     })();
   </script>
 </Layout>

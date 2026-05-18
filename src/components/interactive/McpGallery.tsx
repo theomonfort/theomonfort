@@ -35,7 +35,7 @@ function buildBatchCommand(servers: McpEntry[]): string {
 
 const defaultCopy: Required<Props>['copy'] = {
   intro: 'Copilot CLI に MCP サーバーを追加するコマンド。コピーしてターミナルで実行。',
-  savePrefix: '💾 セーブポイント・',
+  savePrefix: '💾 ',
   selected: '選択',
   all: '全装備',
   copySuffix: 'を コピー',

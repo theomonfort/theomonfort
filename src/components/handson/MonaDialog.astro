@@ -1,0 +1,14 @@
+---
+interface Props {
+  image?: string;
+  imageAlt?: string;
+  variant?: 'mona';
+}
+
+const { image, imageAlt = '', variant = 'mona' } = Astro.props;
+---
+
+<div class={`hero-quote hero-quote-${variant}`}>
+  <div class="hero-quote-text"><slot /></div>
+  {image && <img src={image} alt={imageAlt} />}
+</div>

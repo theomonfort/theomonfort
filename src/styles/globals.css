@@ -371,11 +371,15 @@ a.retro-link:hover::after {
   font-family: 'JetBrains Mono', 'Courier New', monospace;
 }
 .handson-article pre {
+  position: relative;
   background: #05060f;
   border: 2px solid #00f0ff;
-  padding: 1em;
+  padding: 2.4em 1em 1em;
   margin: 1.5em 0;
-  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  overflow-x: hidden;
   box-shadow: 4px 4px 0 #05060f, 0 0 8px rgba(0, 240, 255, 0.4);
 }
 .handson-article pre code {
@@ -384,6 +388,41 @@ a.retro-link:hover::after {
   background: none;
   color: #e8f4ff;
   font-size: 0.9em;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+.handson-copy-btn {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: 'Press Start 2P', 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  color: #00f0ff;
+  background: rgba(5, 6, 15, 0.85);
+  border: 1px solid rgba(0, 240, 255, 0.6);
+  padding: 6px 9px;
+  cursor: pointer;
+  z-index: 2;
+  transition: color 120ms ease, background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+}
+.handson-copy-btn:hover,
+.handson-copy-btn:focus-visible {
+  color: #05060f;
+  background: #00f0ff;
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+}
+.handson-copy-btn.is-copied {
+  color: #05060f;
+  background: #9bbc0f;
+  border-color: #9bbc0f;
+  box-shadow: 0 0 10px rgba(155, 188, 15, 0.6);
 }
 .handson-article blockquote {
   border-left: 4px solid #ffb000;
@@ -462,6 +501,117 @@ a.retro-link:hover::after {
   color: #00f0ff;
   font-family: 'DotGothic16', monospace;
   font-size: 0.95em;
+}
+
+/* ── Mona dialog (hero-quote-mona variant ported from the playbook) ─────────
+   JRPG-style speech bubble: Mona (octocat) stands OUTSIDE the box on the
+   left, the cyan corner-bracket frame holds her line + optional screenshot.
+   Used at the top of intro steps to set the goal in one glance. */
+.handson-article .hero-quote {
+  position: relative;
+  margin: 0.5em 0 2em 190px;
+  padding: 1.2em 1.4em 1.3em 1.7em;
+  color: #e8f4ff;
+  background:
+    linear-gradient(#00f0ff, #00f0ff) top    left  / 10px 10px no-repeat,
+    linear-gradient(#00f0ff, #00f0ff) top    right / 10px 10px no-repeat,
+    linear-gradient(#00f0ff, #00f0ff) bottom left  / 10px 10px no-repeat,
+    linear-gradient(#00f0ff, #00f0ff) bottom right / 10px 10px no-repeat,
+    rgba(5, 6, 15, 0.85);
+  border: 2px solid #00f0ff;
+  box-shadow: 4px 4px 0 #05060f;
+  font-family: 'DotGothic16', 'Courier New', monospace;
+  font-size: 1.05em;
+  line-height: 1.75;
+}
+.handson-article .hero-quote::before {
+  content: '';
+  position: absolute;
+  left: -190px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 170px;
+  height: 170px;
+  background: url('/theomonfort/octocat-mascot.png') center / contain no-repeat;
+  filter: drop-shadow(2px 4px 0 #05060f);
+}
+.handson-article .hero-quote.hero-quote-mona::before {
+  background-image: url('/theomonfort/octocat-mona.png');
+}
+.handson-article .hero-quote::after {
+  content: '';
+  position: absolute;
+  left: -14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-right: 14px solid #00f0ff;
+}
+.handson-article .hero-quote > p {
+  margin: 0 0 0.6em;
+}
+.handson-article .hero-quote > p:last-child {
+  margin-bottom: 0;
+}
+.handson-article .hero-quote strong {
+  color: #ffb000;
+}
+.handson-article .hero-quote a {
+  color: #00f0ff;
+  text-decoration-color: rgba(0, 240, 255, 0.6);
+}
+.handson-article .hero-quote a:hover {
+  color: #ff2e88;
+  text-decoration-color: #ff2e88;
+}
+.handson-article .hero-quote .hero-quote-text {
+  margin-bottom: 1em;
+}
+.handson-article .hero-quote .hero-quote-text > *:first-child {
+  margin-top: 0;
+}
+.handson-article .hero-quote .hero-quote-text > *:last-child {
+  margin-bottom: 0;
+}
+.handson-article .hero-quote img {
+  display: block;
+  width: 70%;
+  max-width: 460px;
+  height: auto;
+  margin: 0 auto;
+  padding: 4px;
+  border: 1px solid rgba(0, 240, 255, 0.45);
+  background: rgba(5, 6, 15, 0.6);
+  box-shadow: 4px 4px 0 rgba(0, 240, 255, 0.18);
+}
+@media (max-width: 1023px) {
+  .handson-article .hero-quote {
+    margin-left: 0;
+    padding-top: 140px;
+  }
+  .handson-article .hero-quote::before {
+    left: 50%;
+    top: -110px;
+    transform: translateX(-50%);
+    width: 130px;
+    height: 130px;
+  }
+  .handson-article .hero-quote::after {
+    left: 50%;
+    top: -8px;
+    transform: translateX(-50%);
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 14px solid #00f0ff;
+    border-top: none;
+  }
+  .handson-article .hero-quote img {
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
 /* Aside cards */

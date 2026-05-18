@@ -40,22 +40,18 @@ links:
 ## At a Glance
 
 <div class="hero-quote hero-quote-mona">
-  <p>Hi, I'm <strong>Mona</strong> — full name <strong>Mona Lisa Octocat</strong>. I was originally drawn by British illustrator <a href="https://en.wikipedia.org/wiki/Octocat" target="_blank" rel="noopener noreferrer">Simon Oxley</a> as a character called "Octopuss" sold on iStockphoto. In <strong>2008</strong>, GitHub bought the exclusive rights, renamed me Octocat, and I've been the face of GitHub ever since.</p>
+  <p>Hi, I'm <strong>Mona</strong> — the face of <strong>GitHub</strong>, watching over developers worldwide.</p>
   <p>Today's topic, <strong>GitHub</strong>, is the world's largest AI-native developer platform — home to <strong>180 million+</strong> developers.</p>
 </div>
 
 ## GitHub by the Numbers
 
-<div class="hero-quote hero-quote-plain">
-  <ul>
-    <li>GitHub developers: <strong>180 million+</strong> worldwide (<a href="https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/">2025</a>)</li>
-    <li>GitHub Copilot registered users: <strong>20 million+</strong> (<a href="https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx">2025</a>)</li>
-    <li>GitHub Copilot paid subscriptions: <strong>4.7 million+</strong> (<a href="https://www.getpanto.ai/blog/github-copilot-statistics">2026</a>)</li>
-    <li>Enterprise customers: <strong>77,000+</strong> (<a href="https://www.microsoft.com/investor/reports/ar24/">2024</a>)</li>
-    <li><strong>~90%</strong> of the Fortune 100 have adopted Copilot (<a href="https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx">2025</a>)</li>
-    <li><strong>~42%</strong> market share in paid AI coding tools (<a href="https://www.secondtalent.com/resources/github-copilot-statistics/">2025</a>)</li>
-  </ul>
-</div>
+- GitHub developers: **180 million+** worldwide ([2025](https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/))
+- GitHub Copilot registered users: **20 million+** ([2025](https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx))
+- GitHub Copilot paid subscriptions: **4.7 million+** ([2026](https://www.getpanto.ai/blog/github-copilot-statistics))
+- Enterprise customers: **77,000+** ([2024](https://www.microsoft.com/investor/reports/ar24/))
+- **~90%** of the Fortune 100 have adopted Copilot ([2025](https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx))
+- **~42%** market share in paid AI coding tools ([2025](https://www.secondtalent.com/resources/github-copilot-statistics/))
 
 ## The Evolution of GitHub
 

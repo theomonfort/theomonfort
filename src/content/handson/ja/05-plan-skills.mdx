@@ -2,7 +2,7 @@
 title: "PLAN: Skills"
 order: 5
 stepSlug: "plan-skills"
-duration: 10
+duration: 5
 summary: "Agent Skill は、Copilot に「特定のタスクのこなし方」を仕込む再利用可能な指示セットです。プロンプトに合致したときに自動で召喚され、毎回テンプレを説明し直す必要がなくなります。"
 generated: true
 generatedFrom: "workshop-nikon.md"
@@ -24,19 +24,35 @@ import Aside from '../../../components/handson/Aside.astro';
 
 **Agent Skill** は、Copilot に「特定のタスクのこなし方」を仕込む再利用可能な指示セットです。プロンプトに合致したときに自動で召喚され、毎回テンプレを説明し直す必要がなくなります。
 
-このステップでは、Issue を整った形で書ける Skill を入れて、実際に Issue を 1 件作ってみます。
+このステップでは、ワークショップで使う 3 つの Skill をまとめて装備します。Issue 作成・ハンズオン案内・スライド執筆など、後続セクションでの作業を Copilot に任せやすくなります。
 
-### 5.1 — github-issues Skill をインストール
+### 5.1 — Skill を 3 つインストール
 
-[`theomonfort/skills`](https://github.com/theomonfort/skills) から **`github-issues`** Skill を入れます。このスキルは bug report / feature request / task など複数のテンプレを持ち、ラベル・優先度・依存関係まで含めた構造化された Issue を書けるようになります。
+このワークショップで使う 3 つの Skill を [`theomonfort/skills`](https://github.com/theomonfort/skills) からまとめてインストールします。
 
-VS Code のターミナルで以下を実行してください：
+- **github-issues** — bug report / feature request / task など複数のテンプレを持ち、ラベル・優先度・依存関係まで含めた構造化された Issue を書ける。次のステップ 5.2 で使います。
+- **hands-on-helper** — このハンズオン参加者向けに、リポジトリ・手順書・Playbook の案内とトラブル解消をしてくれるガイド役。
+- **md-slides-creator** — Markdown を「H2 ごとに 1 スライド」形式の Playbook エントリとして書ける。Playbook の追記に便利。
+
+#### 方法 A: 装備所からまとめてコピー（推奨）
+
+1. 新しいタブで [**装備所 (EQUIPMENT ROOM)**](https://theomonfort.github.io/theomonfort/skills/#skills) を開く
+2. スコープ切替が **プロジェクト .github/**（左、デフォルト）になっていることを確認
+3. **🎴 スキル** セクションで `github-issues` / `hands-on-helper` / `md-slides-creator` の 3 枚にチェックを入れる
+4. 右上の **💾 選択 3 を コピー** ボタンを押す
+5. Codespace の VS Code ターミナルに貼り付けて Enter
+
+#### 方法 B: 下のコマンドを直接コピー
+
+装備所まで行かず、下のスニペットの **COPY** ボタンを押してそのままターミナルに貼り付けても OK です：
 
 ```bash
-gh skill install theomonfort/skills github-issues
+gh skill install theomonfort/skills github-issues && \
+gh skill install theomonfort/skills hands-on-helper && \
+gh skill install theomonfort/skills md-slides-creator
 ```
 
-実行すると CLI から **対象エージェント** と **インストール先（scope）** を選ぶよう聞かれます：
+実行すると Skill ごとに **対象エージェント** と **インストール先（scope）** を聞かれます：
 
 - **Agent**: `copilot` を選択（VS Code の GitHub Copilot Chat 用）
 - **Scope**: `project`（プロジェクト = このリポジトリ専用にインストール）
@@ -47,49 +63,12 @@ gh skill install theomonfort/skills github-issues
 
 </Aside>
 
-インストールが完了すると `.agents/skills/github-issues/SKILL.md` が追加されます。中身を開いて Copilot がどんなときにこの Skill を呼ぶのか、どんなテンプレを持っているのかを確認してみてください。
+インストールが完了すると `.agents/skills/github-issues/`, `.agents/skills/hands-on-helper/`, `.agents/skills/md-slides-creator/` の 3 つが追加されます。中身（`SKILL.md`）を開いて、Copilot がどんなときにこの Skill を呼ぶのか、どんなテンプレを持っているのかを確認してみてください。
 
 <Aside type="negative">
 
-**⚠️ 重要**: Skill をインストールした後は **Copilot Chat の新しいセッションを開いてください**（`+ New Chat`）。既存セッションには Skill が読み込まれないため、次のステップでうまく召喚されません。
+**⚠️ 重要**: Skill をインストールした後は **Copilot Chat の新しいセッションを開いてください**（`+ New Chat`）。既存セッションには Skill が読み込まれず、後続ステップでうまく召喚されません。
 
 </Aside>
-
-⏱ 約1分
-
-### 5.2 — Skill で Issue を作成する
-
-`github-issues` Skill を使って、構造化された Issue を 1 件作成します。Copilot Chat で以下のプロンプトを入力してください（GitHub MCP は前のステップで既に有効になっているので、Copilot は自然と Issue 作成ツールを呼んでくれます）：
-
-```
-github-issues skill を使って、このリポジトリに以下の Issue を作成してください。
-ユーザーストーリー・受け入れ基準・実装ノートを含む構造化された feature request にしてください。
-
-タイトル: Add English support on the website
-
-背景:
-- 現在サイトはすべて日本語で書かれている。海外のエンジニアにも届けたい。
-
-要件:
-- Astro の i18n ルーティング (`/en/...`) で英語版を追加する。フォールバックは日本語。
-- ナビゲーション・ボタン等の UI 文字列は src/i18n/ja.ts / en.ts に切り出す。
-- src/content/ のマークダウンは ja / en の両言語を併設できる構造にする。
-- 言語切替トグルをサイトのヘッダーに追加する。
-
-受け入れ基準:
-- /en/ ルートでサイト全体が英語で閲覧できる。
-- 翻訳が無いページはフォールバックで日本語を表示し、上部に warning banner を出す。
-- 既存の SEO (sitemap, OG tags) が両言語で正しく出力される。
-
-ラベル: feature, i18n, frontend
-```
 
 ⏱ 約2分
-
-<Aside type="positive">
-
-**ポイント**: Skill は「特定タスクの作法」を Copilot に持ち込みます。本来 Copilot は SKILL.md の説明から自動でスキルを召喚しますが、確実に発動させるために今回はプロンプトで明示的に指定しています。テンプレに沿った Issue が GitHub に直接立てられるのを確認してください。
-
-このあと作成された Issue は、Cloud Agent や Agentic Workflow のステップで実装担当として割り当てます（次の章で）。
-
-</Aside>

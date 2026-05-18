@@ -33,7 +33,7 @@ const COPY_FEEDBACK_MS = 1500;
 const BATCH_COPY_FEEDBACK_MS = 2000;
 
 function buildCommand(s: SkillEntry, scope: 'project' | 'global'): string {
-  const flag = scope === 'global' ? ' --global' : '';
+  const flag = scope === 'global' ? ' --scope user' : '';
   return `gh skill install theomonfort/skills ${s.slug}${flag}`;
 }
 
@@ -45,9 +45,9 @@ const defaultCopy: Required<Props>['copy'] = {
   setupSummary: '▶ 初回セットアップ（gh skill 拡張のインストール）',
   setupIntro: '"gh skill" は GitHub CLI の拡張です。一度だけ実行:',
   setupAfter: 'その後、下のカードから装備したいスキルをコピーして実行してください。',
-  global: 'グローバル ~/',
+  global: 'ユーザー ~/',
   project: 'プロジェクト .github/',
-  savePrefix: '💾 セーブポイント・',
+  savePrefix: '💾 ',
   selected: '選択',
   all: '全装備',
   copySuffix: 'を コピー',
@@ -59,7 +59,7 @@ const defaultCopy: Required<Props>['copy'] = {
 
 export default function SkillGallery({ skills, copy = defaultCopy }: Props) {
   const [selected, setSelected] = useState<Set<string>>(new Set());
-  const [scope, setScope] = useState<'project' | 'global'>('global');
+  const [scope, setScope] = useState<'project' | 'global'>('project');
   const [copiedSlug, setCopiedSlug] = useState<string | null>(null);
   const [copiedAll, setCopiedAll] = useState(false);
 
@@ -117,20 +117,6 @@ brew upgrade gh`}</code></pre>
             type="button"
             onClick={() => {
               play('click');
-              setScope('global');
-            }}
-            className={`px-3 py-2 border-2 transition-colors ${
-              scope === 'global'
-                ? 'border-neon-cyan text-neon-cyan shadow-neon-cyan'
-                : 'border-phosphor/30 text-phosphor/50'
-            }`}
-          >
-            {copy.global}
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              play('click');
               setScope('project');
             }}
             className={`px-3 py-2 border-2 transition-colors ${
@@ -140,6 +126,20 @@ brew upgrade gh`}</code></pre>
             }`}
           >
             {copy.project}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              play('click');
+              setScope('global');
+            }}
+            className={`px-3 py-2 border-2 transition-colors ${
+              scope === 'global'
+                ? 'border-neon-cyan text-neon-cyan shadow-neon-cyan'
+                : 'border-phosphor/30 text-phosphor/50'
+            }`}
+          >
+            {copy.global}
           </button>
         </div>
         <button

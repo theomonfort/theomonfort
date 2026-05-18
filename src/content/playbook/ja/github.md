@@ -40,22 +40,18 @@ links:
 ## 一言で
 
 <div class="hero-quote hero-quote-mona">
-  <p>こんにちは、<strong>Mona</strong> です！正式名は <strong>Mona Lisa Octocat</strong> ── イギリスのイラストレーター <a href="https://en.wikipedia.org/wiki/Octocat" target="_blank" rel="noopener noreferrer">Simon Oxley</a> さんが描いた「Octopuss」というキャラクターを、<strong>2008 年</strong>に GitHub が独占ライセンスし、Octocat に改名して生まれました。以来、GitHub の顔として世界中の開発者を見守っています。</p>
+  <p>こんにちは、<strong>Mona</strong> です！<strong>GitHub</strong> の顔として世界中の開発者を見守っています。</p>
   <p>今日お話しする <strong>GitHub</strong> は、<strong>1.8 億人以上</strong>の開発者が集う世界最大の AI ネイティブ開発者プラットフォームです。</p>
 </div>
 
 ## 数字で見る GitHub
 
-<div class="hero-quote hero-quote-plain">
-  <ul>
-    <li>GitHub 開発者：世界で <strong>1.8 億人以上</strong>（<a href="https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/">2025</a>）</li>
-    <li>GitHub Copilot 登録ユーザー：<strong>2,000 万人以上</strong>（<a href="https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx">2025</a>）</li>
-    <li>GitHub Copilot 有料サブスクリプション：<strong>470 万人以上</strong>（<a href="https://www.getpanto.ai/blog/github-copilot-statistics">2026</a>）</li>
-    <li>エンタープライズ顧客：<strong>77,000 社以上</strong>（<a href="https://www.microsoft.com/investor/reports/ar24/">2024</a>）</li>
-    <li>Fortune 100 の <strong>約 90%</strong> が Copilot を採用（<a href="https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx">2025</a>）</li>
-    <li>有料 AI コーディングツール市場シェア <strong>約 42%</strong>（<a href="https://www.secondtalent.com/resources/github-copilot-statistics/">2025</a>）</li>
-  </ul>
-</div>
+- GitHub 開発者：世界で **1.8 億人以上**（[2025](https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/)）
+- GitHub Copilot 登録ユーザー：**2,000 万人以上**（[2025](https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx)）
+- GitHub Copilot 有料サブスクリプション：**470 万人以上**（[2026](https://www.getpanto.ai/blog/github-copilot-statistics)）
+- エンタープライズ顧客：**77,000 社以上**（[2024](https://www.microsoft.com/investor/reports/ar24/)）
+- Fortune 100 の **約 90%** が Copilot を採用（[2025](https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx)）
+- 有料 AI コーディングツール市場シェア **約 42%**（[2025](https://www.secondtalent.com/resources/github-copilot-statistics/)）
 
 ## 進化の歴史
 

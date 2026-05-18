@@ -48,7 +48,7 @@ links:
   </p>
 </div>
 
-## The good old days
+## 古き良き時代（2021 〜 2024）
 
 昔の LLM chat はシンプルだった。You が prompt を投げ、LLM が answer を返す。
 
@@ -65,7 +65,7 @@ flowchart LR
 
 > この世界では、context はほぼ **prompt の中に人間が手で詰めるもの** だった。
 
-## Current
+## 現在（2025 〜）
 
 現在は、project context と tools を持つ **agent / harness** が LLM の前に立つ。
 
@@ -90,10 +90,10 @@ flowchart LR
 
 > No magic. Agent は、LLM を直接呼ぶ代わりに、**何を読ませるか・どの tool を使わせるか・結果をどう戻すか** を管理する layer。
 
-## Agent / Harness の裏側（Simplified）
+## Agent / Harness の裏側（簡略版）
 
-- **Execution Loop**：LLM が次の一手を決め、tool 実行 → 結果を context に戻す、を `done` まで繰り返す。
-- **Context Management**：system prompt、available tools、user task、tool results を整理し、毎回の LLM call に必要な context として渡す。
+- **実行ループ**：LLM が次の一手を決め、tool 実行 → 結果を context に戻す、を `done` まで繰り返す。
+- **コンテキスト管理**：system prompt、available tools、user task、tool results を整理し、毎回の LLM call に必要な context として渡す。
 
 ```python
 # --- Setup ---
