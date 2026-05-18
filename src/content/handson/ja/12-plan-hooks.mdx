@@ -38,7 +38,7 @@ Copilot（Chat / CLI / Cloud Agent など）が `.github/` の設定ファイル
       {
         "type": "command",
         "matcher": ".*(edit|create|write|delete|remove|rename|move|patch|replace|insert|update|bash|shell|terminal|command|run|execute|apply).*",
-        "bash": "node ./scripts/block-protected-paths.mjs",
+        "bash": "node ./scripts/block.mjs",
         "cwd": ".github/hooks",
         "timeoutSec": 5
       }
@@ -54,7 +54,7 @@ Copilot（Chat / CLI / Cloud Agent など）が `.github/` の設定ファイル
 
 ### N.2 — ブロック用スクリプトを作成する
 
-`.github/hooks/scripts/block-protected-paths.mjs` を新規作成し、以下を貼り付けてください：
+`.github/hooks/scripts/block.mjs` を新規作成し、以下を貼り付けてください：
 
 ```javascript
 import { stdin, stdout } from 'node:process';
@@ -72,7 +72,7 @@ if (!protectedPath) {
   process.exit(0);
 }
 
-deny(`Repository policy: agents must not modify ${protectedPath}. The ${toolName} tool referenced ${protectedPath}.`);
+deny(`Repository policy: agent writes to .github/, .env, or pnpm-lock.yaml are blocked. The ${toolName} tool referenced ${protectedPath}, which is one of these protected paths.`);
 
 async function readStdin() {
   const chunks = [];
@@ -95,7 +95,7 @@ function findProtectedPath(value) {
 }
 
 function deny(reason) {
-  const additionalContext = 'This hook blocks agent writes to protected repository configuration, environment, and lock files. Choose a different path or ask the user to make the protected-file change manually.';
+  const additionalContext = 'Protected paths in this repository: .github/ (Copilot config, hooks, workflows), .env (secrets), pnpm-lock.yaml (deterministic deps). The agent must NOT create, edit, write, delete, rename, move, or run shell commands that touch these paths. If the user explicitly needs such a change, instruct them to make it manually.';
   stdout.write(JSON.stringify({
     permissionDecision: 'deny',
     permissionDecisionReason: reason,
@@ -113,6 +113,7 @@ function deny(reason) {
 ポイント：
 
 - 保護対象は `.github/`、`.env`、`pnpm-lock.yaml` の 3 つ。
+- `permissionDecisionReason` と `additionalContext` で **保護パスの一覧と理由をエージェントに返す** ので、エージェントは次のターンで自分で軌道修正できる（"どこに触ってはいけないか" を知らされる）。
 - 出力は **Copilot CLI 形式**（`permissionDecision`）と **VS Code 形式**（`hookSpecificOutput`）の両方を返すので、どちらの環境でも動きます。
 
 ### N.3 — Copilot Chat を再起動する

@@ -37,16 +37,9 @@ links:
 
 ハンズオンのゴールは、特別なデモアプリではなく **今あなたが見ているこのサイトそのもの**（の簡略版）です。
 
-<img src="/theomonfort/handson/img/build-preview-playbook.png" alt="今日作る Copilot Playbook サイト" class="build-preview" />
+<img src="/theomonfort/handson/img/intro-context-window.png" alt="今日作る Copilot Playbook サイトのプレビュー（Context Engineering ページ）" class="build-preview" />
 
 > 🎯 完成像がすでに目の前にあるので、各ステップで「次に作るのはどの部分か」が一目で分かります。
-
-> 🪞 **作るもの = 今読んでいるこのサイト(の簡略版)**。だからゴールが分かりやすく、各機能がどの場面で効くかを実感できます。
-> 🎮 **使う機能** — MCP / Instructions / Agent Skills / Plan モード / Cloud Agent / Code Review / Agentic Workflow を <strong>一気通貫</strong> で体験。
-
-📘 リポジトリとハンズオン:
-- <a class="retro-link" href="https://github.com/theomonfort/Github-copilot-workshop" target="_blank" rel="noopener noreferrer">theomonfort/Github-copilot-workshop ↗</a>
-- <a class="retro-link" href="/theomonfort/handson/">ハンズオンを開く →</a>
 
 ## ワークショップで体験する流れ
 
@@ -56,22 +49,22 @@ links:
 
 ```mermaid
 flowchart TB
-  Prep["🛠️ <b>リポジトリ準備</b><br/>MCP / Instructions / Skill"]
-  Plan["📋 <b>Copilot</b><br/>Plan / Implement モード"]
-  Review["🔍 <b>Copilot</b><br/>Code Review"]
-  Improve["🤖 <b>Cloud Agent</b><br/>改善タスク"]
-  Maint["🔁 <b>Agentic Workflow</b><br/>リポジトリ運用自動化"]
+  Plan["1️⃣ <b>PLAN</b><br/>AI にハーネスを着せる<br/>MCP・Instructions・Skill で<br/>文脈・ルール・型を仕込む"]
+  Code["2️⃣ <b>CODE</b><br/>Copilot と一緒に設計し<br/>Plan モードで計画を立て<br/>Agent モードで実装まで進める"]
+  Review["3️⃣ <b>REVIEW</b><br/>Copilot Code Review が<br/>PR を自動でレビューし<br/>人の目に届く前に問題を潰す"]
+  Improve["4️⃣ <b>IMPROVE</b><br/>Cloud Agent に Issue を任せ<br/>あなたが寝ている間も<br/>改善 PR が積み上がる"]
+  Operate["5️⃣ <b>OPERATE</b><br/>Agentic Workflow で AI を定期実行し<br/>リポジトリの運用そのものを<br/>自動化する"]
 
-  Prep --> Plan --> Review --> Improve --> Maint
+  Plan --> Code --> Review --> Improve --> Operate
 
   classDef prep fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
   classDef dev  fill:#1a0a2e,stroke:#ff2e88,color:#ff2e88,stroke-width:2px
   classDef rev  fill:#1a1408,stroke:#ffb000,color:#ffb000,stroke-width:2px
   classDef ops  fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
-  class Prep prep
-  class Plan,Improve dev
+  class Plan prep
+  class Code,Improve dev
   class Review rev
-  class Maint ops
+  class Operate ops
 ```
 
 </div>

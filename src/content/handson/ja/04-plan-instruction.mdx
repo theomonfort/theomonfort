@@ -112,41 +112,46 @@ description: "フロントエンドのデザイントークン（レトロ JRPG 
 
 ## テーマ
 
-レトロ JRPG / サイバーパンクのアーケード。暗い背景にネオンのアクセント、ピクセル系タイポグラフィ。
+レトロ JRPG / サイバーパンクのアーケード。深紫 → 濃紺 → 漆黒のラジアル背景にネオンのアクセント、ピクセル系タイポグラフィ。
 
 ## カラー
 
-| 役割              | Hex        | 用途                              |
-| ----------------- | ---------- | --------------------------------- |
-| 背景 (ベース)     | `#05060f`  | body / page                       |
-| 背景 (パネル)     | `#0a0e27`  | カード・サイドバー                |
-| ネオンマゼンタ    | `#ff2e88`  | プライマリアクセント・アクティブ  |
-| ネオンシアン      | `#00f0ff`  | セカンダリ・ホバー・リンク        |
-| アンバー          | `#ffb000`  | 警告・ハイライト                  |
-| フォスファ緑      | `#9bbc0f`  | 成功・CRT 風テキスト              |
-| テキスト (通常)   | `#e6f1ff`  | 暗い背景上の本文                  |
-| テキスト (薄)     | `#7a8aa8`  | 補助テキスト                      |
+| 役割              | Hex       | Tailwind            |
+| ----------------- | --------- | ------------------- |
+| 漆黒 (ベース)     | `#05060f` | `bg-shadow-ink`     |
+| 濃紺 (パネル)     | `#0a0e27` | `bg-midnight`       |
+| 深紫 (背景上端)   | `#1a0b2e` | `bg-deep-purple`    |
+| ネオンマゼンタ    | `#ff2e88` | `text-neon-magenta` |
+| ネオンシアン      | `#00f0ff` | `text-neon-cyan`    |
+| アンバー          | `#ffb000` | `text-crt-amber`    |
+| フォスファ緑      | `#9bbc0f` | `text-gb-green`     |
+| 本文テキスト      | `#e8f4ff` | `text-phosphor`     |
+
+`body` 背景は深紫 → 濃紺 → 漆黒のラジアルグラデで作る。
 
 ## フォント
 
-- 見出し / UI: **`'DotGothic16'`** (ピクセル)、fallback `monospace`。
-- 本文 (日本語 + ラテン): **`'Noto Sans JP'`**、fallback `system-ui, sans-serif`。
-- コード: `'JetBrains Mono', 'Menlo', monospace`。
+| 用途                       | フォント            | Tailwind        |
+| -------------------------- | ------------------- | --------------- |
+| ラテン見出し (ピクセル)    | `'Press Start 2P'`  | `font-pixel`    |
+| 日本語見出し (ピクセル)    | `'DotGothic16'`     | `font-pixel-jp` |
+| 本文 (日 + 英、body 既定)  | `'Noto Sans JP'`    | `font-body`     |
+| コード                     | `'IBM Plex Mono'`   | `font-mono`     |
+| CRT 風 (数字・装飾)        | `'VT323'`           | `font-terminal` |
 
-Tailwind ユーティリティ: `font-pixel` (DotGothic16)、`font-body` (Noto Sans JP)。
+すべて `monospace` / `sans-serif` を fallback に。
 
 ## エフェクト
 
-- 画面オーバーレイに控えめな CRT スキャンライン。
-- ネオングロー: `text-shadow: 0 0 8px <color>` / `box-shadow: 0 0 12px <color>`。
-- ボーダー: `1px dashed` または `2px solid` のネオンカラー。
-- コントラストは高めに。淡いパステルグラデは禁止。
+- 控えめな CRT スキャンライン (`.crt-lines`) を全画面オーバーレイに。
+- ネオングロー: `shadow-neon-magenta` / `-cyan` / `-amber` / `-green` (= `0 0 8px <color>, 0 0 24px <rgba>`)。
+- ボーダー: `1px dashed` または `2px solid` のネオンカラー。コントラストは高めに、淡いパステルグラデは禁止。
 
 ## してはいけないこと
 
 - 明るい / 白の背景。
-- 完全な丸 (pill) 形状。角丸は最大 4px まで。
-- 灰色のソフトドロップシャドウ。グロー (neon glow) のみ使う。
+- pill 形状 / 4px 超の角丸。
+- 灰色のソフトドロップシャドウ（グローのみ使う）。
 ```
 
 ⏱ 約2分

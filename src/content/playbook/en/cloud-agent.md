@@ -6,7 +6,7 @@ icon: ☁️
 color: amber
 order: 15
 category: develop
-related: ['third-party-agent', 'copilot-code-review', 'instructions', 'mcp']
+related: ['partner-agent', 'copilot-code-review', 'instructions', 'mcp']
 links:
   - label: Customize the agent environment
     url: https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/use-copilot-agents/cloud-agent/customize-the-agent-environment
@@ -38,7 +38,7 @@ links:
 - **Team visibility**: Cloud Agent sessions are visible to the entire team, making it easy to share progress.
 - **Full repo context**: Can make edits with awareness of dependency and module structure.
 - **Runs verification**: Executes tests, builds, static analysis, and reflects the results in the PR.
-- **Multiple harness support**: The Anthropic Claude SDK and OpenAI Codex SDK are also available. (Third-party agents)
+- **Multiple harness support**: The Anthropic Claude SDK and OpenAI Codex SDK are also available. (Partner agents)
 
 ## How to launch
 

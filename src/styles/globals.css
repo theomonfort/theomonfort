@@ -451,13 +451,14 @@ a.retro-link:hover::after {
   padding: 0;
   max-width: 50%;
 }
-/* Full-bleed preview screenshot of what we'll build — bordered (it IS a UI screenshot) but bigger and centered. */
+/* Preview screenshot of what we'll build — bordered (it IS a UI screenshot), centered, and sized to match the hands-on tab's MonaDialog framing rather than full-bleed. */
 .handson-article img.handson-build-preview,
 .prose-akq img.build-preview {
   display: block;
   margin: 1.5em auto 2em;
-  max-width: 100%;
-  width: 100%;
+  width: 70%;
+  max-width: 520px;
+  height: auto;
   border: 2px solid rgba(0, 240, 255, 0.55);
   box-shadow: 6px 6px 0 rgba(0, 240, 255, 0.18);
   background: rgba(5, 6, 15, 0.6);

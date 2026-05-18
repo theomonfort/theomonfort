@@ -32,24 +32,34 @@ links:
 
 <div class="hero-quote">
   <p>
-    <strong>Hooks</strong> は、Copilot エージェントの実行ライフサイクルに独自のシェルスクリプトを差し込む仕組み。<strong>セッション開始 / プロンプト送信 / ツール実行前後 / エラー / セッション終了</strong> の 6 イベントを捕まえられる。
+    <strong>Hooks</strong> は、Copilot エージェントの実行ライフサイクルに独自のシェルスクリプトを差し込む仕組み。<strong>セッション開始 / プロンプト送信 / ツール実行前後 / サブエージェント開始・終了 / エラー / セッション終了</strong> などのイベントを捕まえられる。
   </p>
 </div>
 
 > 🧠 instructions が「お願い」で agent の判断に頼るのに対し、hooks は <strong>実行ロジックそのものを止める</strong>。policy enforcement が必要なら hooks 一択。
 
-## 6 つのフック種別
+## フック種別
 
 | フック | いつ走る | 入力 (CLI / Cloud Agent) | できること |
 | --- | --- | --- | --- |
 | 🟢 **sessionStart** | 新規 / 再開 / 起動時 | `source`, `initialPrompt` | ログ初期化・環境準備・通知 |
 | 📝 **userPromptSubmitted** | ユーザーがプロンプト送信した瞬間 | `prompt` | プロンプト監査ログ・キーワードアラート |
+| 🔐 **permissionRequest** | 権限サービスが走る **直前** (CLI のみ) | `toolName`, `toolArgs` | **allow / deny で許可フローを短絡** |
 | 🛡️ **preToolUse** ★ | ツール実行の **直前** | `toolName`, `toolArgs` | **deny で実行をブロック** ・ allow ・ ask |
 | 📊 **postToolUse** | ツール実行の **直後** | `toolResult` | 結果ログ・失敗時の通知・統計 |
+| 🌱 **subagentStart** | サブエージェントが起動する直前 | `agentName`, `agentDescription` | サブエージェントのプロンプトに `additionalContext` を追加 (**起動自体は止められない**) |
+| 🏁 **subagentStop** | サブエージェントの 1 ターン終了時 | `agentName`, `stopReason` | **block で続行を強制** ・ 結果ログ |
+| 🛑 **agentStop** | メイン agent が 1 ターン終了する時 | `stopReason: "end_turn"` | **block で続行を強制** (テスト未実行・PR 未作成などの再ループ) |
 | 💥 **errorOccurred** | agent がエラーで落ちた時 | `error` | Slack/メール通知・障害ログ |
 | 🔚 **sessionEnd** | セッション終了時 | `reason` | クリーンアップ・サマリー送信 |
 
-> 🔑 **PreToolUse だけが agent の動きを止められる**。他の 5 つは「観察 / 記録 / 通知」用と覚えておけばよい。
+> 🔑 **エージェントの動きを止められる / 分岐できるのは 4 つだけ**:
+> - 🛡️ **preToolUse** → ツール呼び出しを **deny**（rm -rf / sudo / prod push などを実行前にブロック）
+> - 🔐 **permissionRequest** → 権限フローを **allow / deny** で短絡（CLI のみ）
+> - 🏁 **subagentStop** → サブエージェントの停止を **block** して続行を強制
+> - 🛑 **agentStop** → メイン agent の停止を **block** して続行を強制（"テスト走らせるまで終わるな" 系）
+>
+> 他のフックは「観察 / 記録 / 通知」用途で、実行ロジックそのものは止められない。
 
 ## 設定方法
 

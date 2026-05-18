@@ -6,7 +6,7 @@ icon: ☁️
 color: amber
 order: 15
 category: develop
-related: ['third-party-agent', 'copilot-code-review', 'instructions', 'mcp']
+related: ['partner-agent', 'copilot-code-review', 'instructions', 'mcp']
 links:
   - label: Customize the agent environment
     url: https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/use-copilot-agents/cloud-agent/customize-the-agent-environment
@@ -38,7 +38,7 @@ links:
 - **チームで確認**：Cloud Agent のセッションはチーム全員が参照でき、作業内容を共有しやすい。
 - **Repo 全域コンテキスト**：依存関係やモジュール構造を踏まえて編集できる。
 - **検証まで実行**：テスト・ビルド・静的解析などを実行し、結果を PR に反映する。
-- **複数ハーネス対応**：Anthropic Claude SDK や OpenAI Codex SDKも選択できる。(Third Party Agent)
+- **複数ハーネス対応**：Anthropic Claude SDK や OpenAI Codex SDKも選択できる。(Partner Agent)
 
 ## 起動方法
 

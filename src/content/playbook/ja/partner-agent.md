@@ -1,6 +1,6 @@
 ---
-title: サードパーティエージェント
-titleEn: Third-party agents
+title: パートナーエージェント
+titleEn: Partner agents
 summary: Claude や Codex など、Copilot 以外の coding agent を、VS Code・GitHub 上で Copilot と同じ操作感で起動できる仕組み。
 icon: 🧬
 color: magenta
@@ -9,7 +9,7 @@ category: develop
 related: ['cloud-agent', 'copilot-chat', 'github-copilot']
 links:
   - group: GitHub Docs
-    label: About third-party agents
+    label: About Partner agents (third-party agents)
     url: https://docs.github.com/en/copilot/concepts/agents/about-third-party-agents
   - group: GitHub Docs
     label: Anthropic Claude in GitHub Copilot
@@ -27,13 +27,13 @@ links:
     label: Manage policies (Enterprise)
     url: https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-enterprise-policies
   - group: VS Code Docs
-    label: Third-party agents in Visual Studio Code
+    label: Partner agents in Visual Studio Code
     url: https://code.visualstudio.com/docs/copilot/agents/third-party-agents
   - group: VS Code Docs
     label: Cloud agents in Visual Studio Code
     url: https://code.visualstudio.com/docs/copilot/agents/cloud-agents
   - group: VS Code Docs
-    label: VS Code agent types (Local / Cloud / Third-party)
+    label: VS Code agent types (Local / Cloud / Partner)
     url: https://code.visualstudio.com/docs/copilot/agents/overview#_types-of-agents
   - group: VS Code Docs
     label: Enterprise — enable/disable agents in VS Code
@@ -56,7 +56,7 @@ links:
 
 <div class="hero-quote hero-quote-chat">
   <p>
-    <strong>Third-party agents</strong> は、Copilot 以外の coding agent を Copilot の workflow に並べる仕組み。
+    <strong>Partner agents</strong> は、Copilot 以外の coding agent を Copilot の workflow に並べる仕組み。
   </p>
   <p>
     代表例は <strong>Anthropic Claude</strong> と <strong>OpenAI Codex</strong>。VS Code でも GitHub でも、Copilot と同じ手触りで起動できる。
@@ -67,7 +67,7 @@ links:
 
 ## 有効化（Enterprise / Org / 個人）
 
-Third-party agents は **デフォルトで OFF**。使う前に、契約レベルに応じた管理者が **policy** で許可する必要がある。**3 段階のガバナンス階層** で制御される。
+Partner agents は **デフォルトで OFF**。使う前に、契約レベルに応じた管理者が **policy** で許可する必要がある。**3 段階のガバナンス階層** で制御される。
 
 | レベル | 誰が設定する | どこで | 何が起こる |
 | --- | --- | --- | --- |

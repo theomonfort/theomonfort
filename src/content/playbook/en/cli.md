@@ -61,7 +61,7 @@ A full-stack AI environment packed into a single terminal.
 | **Speed of new features** | New experiments like `/chronicle`, `/fleet`, `/share`, and Rubber Duck tend to land here first. | More stability-oriented. Often adopts good ideas that matured in the CLI. |
 | **Sub-agents** | Has many built-in agents — Explore, Task, Rubber Duck, Code Review — and can launch them natively. | Currently limited, but gradually catching up. |
 | **Session management** | Fine-grained session control with `/context`, `/compact`, `/session`, etc. | Improving, but not as granular as the CLI right now. |
-| **Third-party agents** | Copilot CLI runs within Copilot's harness. Codex / Claude harnesses are not available — you can use their **models**, but not their native harnesses. | Inside VS Code, it's easy to switch between Copilot, Codex, Claude, and other agents / extensions. |
+| **Partner agents** | Copilot CLI runs within Copilot's harness. Codex / Claude harnesses are not available — you can use their **models**, but not their native harnesses. | Inside VS Code, it's easy to switch between Copilot, Codex, Claude, and other agents / extensions. |
 | **Index** | Primarily uses terminal/search tools like `grep`, `rg`, and workspace commands. | Can use richer editor-side indexes like Blackbird. |
 
 ## Powerful Built-in Agents

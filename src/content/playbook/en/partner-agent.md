@@ -1,6 +1,6 @@
 ---
-title: Third-party agents
-titleEn: Third-party agents
+title: Partner agents
+titleEn: Partner agents
 summary: A mechanism to launch coding agents other than Copilot — such as Claude or Codex — from VS Code and GitHub with the same feel as Copilot.
 icon: 🧬
 color: magenta
@@ -9,7 +9,7 @@ category: develop
 related: ['cloud-agent', 'copilot-chat', 'github-copilot']
 links:
   - group: GitHub Docs
-    label: About third-party agents
+    label: About Partner agents (third-party agents)
     url: https://docs.github.com/en/copilot/concepts/agents/about-third-party-agents
   - group: GitHub Docs
     label: Anthropic Claude in GitHub Copilot
@@ -27,13 +27,13 @@ links:
     label: Manage policies (Enterprise)
     url: https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-enterprise-policies
   - group: VS Code Docs
-    label: Third-party agents in Visual Studio Code
+    label: Partner agents in Visual Studio Code
     url: https://code.visualstudio.com/docs/copilot/agents/third-party-agents
   - group: VS Code Docs
     label: Cloud agents in Visual Studio Code
     url: https://code.visualstudio.com/docs/copilot/agents/cloud-agents
   - group: VS Code Docs
-    label: VS Code agent types (Local / Cloud / Third-party)
+    label: VS Code agent types (Local / Cloud / Partner)
     url: https://code.visualstudio.com/docs/copilot/agents/overview#_types-of-agents
   - group: VS Code Docs
     label: Enterprise — enable/disable agents in VS Code
@@ -56,7 +56,7 @@ links:
 
 <div class="hero-quote hero-quote-chat">
   <p>
-    <strong>Third-party agents</strong> is a mechanism to line up coding agents other than Copilot alongside Copilot's workflow.
+    <strong>Partner agents</strong> is a mechanism to line up coding agents other than Copilot alongside Copilot's workflow.
   </p>
   <p>
     The primary examples are <strong>Anthropic Claude</strong> and <strong>OpenAI Codex</strong>. They can be launched from both VS Code and GitHub with the same feel as Copilot.
@@ -67,7 +67,7 @@ links:
 
 ## Enabling (Enterprise / Org / Personal)
 
-Third-party agents are **OFF by default**. Before using them, an admin at the appropriate contract level must permit them via **policy**. Controlled through a **3-tier governance hierarchy**.
+Partner agents are **OFF by default**. Before using them, an admin at the appropriate contract level must permit them via **policy**. Controlled through a **3-tier governance hierarchy**.
 
 | Level | Who configures | Where | What happens |
 | --- | --- | --- | --- |

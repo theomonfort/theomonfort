@@ -61,7 +61,7 @@ links:
 | **新機能の速さ** | `/chronicle`、`/fleet`、`/share`、Rubber Duck など、新しい実験が入りやすい。 | より安定志向。CLI で育った良いアイデアを取り込んでいくことが多い。 |
 | **Sub-agent** | Explore、Task、Rubber Duck、Code Review など、built-in agent を多く持ち、native に起動できる。 | 現時点では限定的だが、少しずつ追いついている。 |
 | **Session management** | `/context`、`/compact`、`/session` などで、session を細かく制御しやすい。 | 改善中だが、今は CLI ほど細かくはない。 |
-| **Third-party agent** | Copilot CLI は Copilot の Harness 内で動く。Codex / Claude の Harness は使えず、使えるのはそれらの **model**。 | VS Code 内では、Copilot、Codex、Claude などの agent / extension を切り替えやすい。 |
+| **Partner agent** | Copilot CLI は Copilot の Harness 内で動く。Codex / Claude の Harness は使えず、使えるのはそれらの **model**。 | VS Code 内では、Copilot、Codex、Claude などの agent / extension を切り替えやすい。 |
 | **Index** | 主に `grep`、`rg`、workspace command などの terminal/search tool を使う。 | Blackbird など、エディタ側の richer index を使える。 |
 
 ## 強力なビルトインエージェント

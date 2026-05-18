@@ -37,17 +37,9 @@ links:
 
 The goal isn't a contrived demo app — it's **this very site you're looking at** (a simplified version of it).
 
-<img src="/theomonfort/handson/img/build-preview-playbook.png" alt="The Copilot Playbook site you'll build today" class="build-preview" />
+<img src="/theomonfort/handson/img/intro-context-window.png" alt="Preview of the Copilot Playbook site you'll build today (Context Engineering page)" class="build-preview" />
 
 > 🎯 The finished product is already right in front of you, so at every step you can see *exactly which part you're about to build next*.
-
-> 🪞 **What you build = this site (simplified)**. The end-goal is concrete, so you immediately see *which feature shines at which moment*.
-> 🎮 **Features you'll use** — MCP / Instructions / Agent Skills / Plan mode / Cloud Agent / Code Review / Agentic Workflow, all in one flow.
-> 🚀 Built for next week's special workshop. Codelabs format — one step at a time.
-
-📘 Repo & hands-on:
-- <a class="retro-link" href="https://github.com/theomonfort/Github-copilot-workshop" target="_blank" rel="noopener noreferrer">theomonfort/Github-copilot-workshop ↗</a>
-- <a class="retro-link" href="/theomonfort/en/handson/">Open the hands-on →</a>
 
 ## Workshop Flow
 
@@ -57,22 +49,22 @@ You build a **simplified version of this playbook site** through 5 phases that e
 
 ```mermaid
 flowchart TB
-  Prep["🛠️ <b>Repo prep</b><br/>MCP / Instructions / Skill"]
-  Plan["📋 <b>Copilot</b><br/>Plan / Implement mode"]
-  Review["🔍 <b>Copilot</b><br/>Code Review"]
-  Improve["🤖 <b>Cloud Agent</b><br/>improvement tasks"]
-  Maint["🔁 <b>Agentic Workflow</b><br/>repo maintenance"]
+  Plan["1️⃣ <b>PLAN</b><br/>Put a harness on the AI<br/>Wire it to data with MCP,<br/>add rules with Instructions, patterns with Skills"]
+  Code["2️⃣ <b>CODE</b><br/>Design with Copilot Chat<br/>Use Plan mode to think,<br/>then Agent mode to ship the code"]
+  Review["3️⃣ <b>REVIEW</b><br/>Copilot Code Review scans every PR first<br/>so humans only see<br/>what really matters"]
+  Improve["4️⃣ <b>IMPROVE</b><br/>Hand issues to Cloud Agent<br/>and watch improvement PRs<br/>pile up while you sleep"]
+  Operate["5️⃣ <b>OPERATE</b><br/>Schedule Copilot via GitHub Actions<br/>with Agentic Workflows<br/>so the repo runs itself"]
 
-  Prep --> Plan --> Review --> Improve --> Maint
+  Plan --> Code --> Review --> Improve --> Operate
 
   classDef prep fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
   classDef dev  fill:#1a0a2e,stroke:#ff2e88,color:#ff2e88,stroke-width:2px
   classDef rev  fill:#1a1408,stroke:#ffb000,color:#ffb000,stroke-width:2px
   classDef ops  fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
-  class Prep prep
-  class Plan,Improve dev
+  class Plan prep
+  class Code,Improve dev
   class Review rev
-  class Maint ops
+  class Operate ops
 ```
 
 </div>
