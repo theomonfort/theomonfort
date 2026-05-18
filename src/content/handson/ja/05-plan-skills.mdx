@@ -24,22 +24,21 @@ import Aside from '../../../components/handson/Aside.astro';
 
 **Agent Skill** は、Copilot に「特定のタスクのこなし方」を仕込む再利用可能な指示セットです。プロンプトに合致したときに自動で召喚され、毎回テンプレを説明し直す必要がなくなります。
 
-このステップでは、ワークショップで使う 3 つの Skill をまとめて装備します。Issue 作成・ハンズオン案内・スライド執筆など、後続セクションでの作業を Copilot に任せやすくなります。
+このステップでは、ワークショップで使う 2 つの Skill をまとめて装備します。Issue 作成・ハンズオン案内など、後続セクションでの作業を Copilot に任せやすくなります。
 
-### 5.1 — Skill を 3 つインストール
+### 5.1 — Skill を 2 つインストール
 
-このワークショップで使う 3 つの Skill を [`theomonfort/skills`](https://github.com/theomonfort/skills) からまとめてインストールします。
+このワークショップで使う 2 つの Skill を [`theomonfort/skills`](https://github.com/theomonfort/skills) からまとめてインストールします。
 
 - **github-issues** — bug report / feature request / task など複数のテンプレを持ち、ラベル・優先度・依存関係まで含めた構造化された Issue を書ける。次のステップ 5.2 で使います。
 - **hands-on-helper** — このハンズオン参加者向けに、リポジトリ・手順書・Playbook の案内とトラブル解消をしてくれるガイド役。
-- **md-slides-creator** — Markdown を「H2 ごとに 1 スライド」形式の Playbook エントリとして書ける。Playbook の追記に便利。
 
 #### 方法 A: 装備所からまとめてコピー（推奨）
 
 1. 新しいタブで [**装備所 (EQUIPMENT ROOM)**](https://theomonfort.github.io/theomonfort/skills/#skills) を開く
 2. スコープ切替が **プロジェクト .github/**（左、デフォルト）になっていることを確認
-3. **🎴 スキル** セクションで `github-issues` / `hands-on-helper` / `md-slides-creator` の 3 枚にチェックを入れる
-4. 右上の **💾 選択 3 を コピー** ボタンを押す
+3. **🎴 スキル** セクションで `github-issues` / `hands-on-helper` の 2 枚にチェックを入れる
+4. 右上の **💾 選択 2 を コピー** ボタンを押す
 5. Codespace の VS Code ターミナルに貼り付けて Enter
 
 #### 方法 B: 下のコマンドを直接コピー
@@ -48,8 +47,7 @@ import Aside from '../../../components/handson/Aside.astro';
 
 ```bash
 gh skill install theomonfort/skills github-issues && \
-gh skill install theomonfort/skills hands-on-helper && \
-gh skill install theomonfort/skills md-slides-creator
+gh skill install theomonfort/skills hands-on-helper
 ```
 
 実行すると Skill ごとに **対象エージェント** と **インストール先（scope）** を聞かれます：
@@ -63,7 +61,7 @@ gh skill install theomonfort/skills md-slides-creator
 
 </Aside>
 
-インストールが完了すると `.agents/skills/github-issues/`, `.agents/skills/hands-on-helper/`, `.agents/skills/md-slides-creator/` の 3 つが追加されます。中身（`SKILL.md`）を開いて、Copilot がどんなときにこの Skill を呼ぶのか、どんなテンプレを持っているのかを確認してみてください。
+インストールが完了すると `.agents/skills/github-issues/`, `.agents/skills/hands-on-helper/` の 2 つが追加されます。中身（`SKILL.md`）を開いて、Copilot がどんなときにこの Skill を呼ぶのか、どんなテンプレを持っているのかを確認してみてください。
 
 <Aside type="negative">
 
