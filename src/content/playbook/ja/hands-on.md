@@ -49,11 +49,11 @@ links:
 
 ```mermaid
 flowchart TB
-  Plan["1️⃣ <b>PLAN</b><br/>AI にハーネスを着せる<br/>MCP・Instructions・Skill で<br/>文脈・ルール・型を仕込む"]
-  Code["2️⃣ <b>CODE</b><br/>Copilot と一緒に設計し<br/>Plan モードで計画を立て<br/>Agent モードで実装まで進める"]
-  Review["3️⃣ <b>REVIEW</b><br/>Copilot Code Review が<br/>PR を自動でレビューし<br/>人の目に届く前に問題を潰す"]
-  Improve["4️⃣ <b>IMPROVE</b><br/>Cloud Agent に Issue を任せ<br/>あなたが寝ている間も<br/>改善 PR が積み上がる"]
-  Operate["5️⃣ <b>OPERATE</b><br/>Agentic Workflow で AI を定期実行し<br/>リポジトリの運用そのものを<br/>自動化する"]
+  Plan["<div style='min-width:560px;text-align:center'>1️⃣ <b>PLAN</b> : MCP・Instructions・Skill で AI にハーネスを着せる</div>"]
+  Code["<div style='min-width:560px;text-align:center'>2️⃣ <b>CODE</b> : Plan モードで設計し、Agent モードで実装する</div>"]
+  Review["<div style='min-width:560px;text-align:center'>3️⃣ <b>REVIEW</b> : Copilot Code Review が PR を自動レビューする</div>"]
+  Improve["<div style='min-width:560px;text-align:center'>4️⃣ <b>IMPROVE</b> : Cloud Agent に Issue を任せて改善 PR を生成する</div>"]
+  Operate["<div style='min-width:560px;text-align:center'>5️⃣ <b>OPERATE</b> : Agentic Workflow で運用そのものを自動化する</div>"]
 
   Plan --> Code --> Review --> Improve --> Operate
 

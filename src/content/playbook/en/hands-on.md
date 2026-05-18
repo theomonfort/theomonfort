@@ -49,11 +49,11 @@ You build a **simplified version of this playbook site** through 5 phases that e
 
 ```mermaid
 flowchart TB
-  Plan["1️⃣ <b>PLAN</b><br/>Put a harness on the AI<br/>Wire it to data with MCP,<br/>add rules with Instructions, patterns with Skills"]
-  Code["2️⃣ <b>CODE</b><br/>Design with Copilot Chat<br/>Use Plan mode to think,<br/>then Agent mode to ship the code"]
-  Review["3️⃣ <b>REVIEW</b><br/>Copilot Code Review scans every PR first<br/>so humans only see<br/>what really matters"]
-  Improve["4️⃣ <b>IMPROVE</b><br/>Hand issues to Cloud Agent<br/>and watch improvement PRs<br/>pile up while you sleep"]
-  Operate["5️⃣ <b>OPERATE</b><br/>Schedule Copilot via GitHub Actions<br/>with Agentic Workflows<br/>so the repo runs itself"]
+  Plan["<div style='min-width:560px;text-align:center'>1️⃣ <b>PLAN</b> : Harness the AI with MCP, Instructions, and Skills</div>"]
+  Code["<div style='min-width:560px;text-align:center'>2️⃣ <b>CODE</b> : Design in Plan mode, then ship in Agent mode</div>"]
+  Review["<div style='min-width:560px;text-align:center'>3️⃣ <b>REVIEW</b> : Copilot Code Review checks every PR before humans do</div>"]
+  Improve["<div style='min-width:560px;text-align:center'>4️⃣ <b>IMPROVE</b> : Cloud Agent turns issues into PRs while you sleep</div>"]
+  Operate["<div style='min-width:560px;text-align:center'>5️⃣ <b>OPERATE</b> : Agentic Workflows let the repo run itself</div>"]
 
   Plan --> Code --> Review --> Improve --> Operate
 
