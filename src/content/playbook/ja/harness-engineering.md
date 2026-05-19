@@ -67,16 +67,16 @@ flowchart LR
 
 ## 現在（2025 〜）
 
-現在は、project context と tools を持つ **agent / harness** が LLM の前に立つ。
+現在は、**プロジェクトのコンテキスト** と **ツール群** を備えた **エージェント／ハーネス** が LLM の前に立つ。
 
 ```mermaid
 flowchart LR
-  Project[You + Project] -->|prompts / instructions / skills / MCP| Agent[The Agent<br/>aka Harness<br/><br/>Copilot Chat<br/>Copilot CLI<br/>Cloud Agent<br/>Claude Code<br/>Codex]
-  Agent -->|answer / PR / edit| Project
-  Agent -->|context| LLM[The LLM]
-  LLM -->|next step| Agent
-  Agent -->|tool call| Tools[Tools<br/>read / edit / run]
-  Tools -->|result| Agent
+  Project[あなた + プロジェクト] -->|プロンプト / 指示書 / スキル / MCP| Agent[エージェント<br/>別名：ハーネス<br/><br/>Copilot Chat<br/>Copilot CLI<br/>Cloud Agent<br/>Claude Code<br/>Codex]
+  Agent -->|回答 / PR / 編集| Project
+  Agent -->|コンテキスト| LLM[LLM]
+  LLM -->|次の一手| Agent
+  Agent -->|ツール呼び出し| Tools[ツール群<br/>読む / 編集 / 実行]
+  Tools -->|結果| Agent
 
   classDef human fill:#102033,stroke:#00f0ff,color:#e8f4ff,stroke-width:2px;
   classDef llm fill:#302500,stroke:#ffb000,color:#fff4d6,stroke-width:2px;
@@ -88,7 +88,7 @@ flowchart LR
   class Tools context;
 ```
 
-> No magic. Agent は、LLM を直接呼ぶ代わりに、**何を読ませるか・どの tool を使わせるか・結果をどう戻すか** を管理する layer。
+> 魔法ではない。エージェントは LLM を直接呼ぶ代わりに、**何を読ませるか・どのツールを使わせるか・結果をどう戻すか** を管理するレイヤー。
 
 ## Agent / Harness の裏側（簡略版）
 
