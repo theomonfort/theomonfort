@@ -1,7 +1,7 @@
 ---
 title: GitHub Copilot
 titleEn: GitHub Copilot
-summary: The world's most widely used AI development tool. An orchestrator offering the broadest choice of AI models and surfaces among its competitors.
+summary: The world's most widely used AI development tool. An orchestrator that lets you freely combine major AI models with a variety of surfaces.
 icon: /theomonfort/github-copilot-white-icon.png
 color: cyan
 order: 2
@@ -18,7 +18,7 @@ links:
 
 ## At a Glance
 
-GitHub Copilot is the world's most widely used AI development tool. It is the orchestrator that offers **the broadest choice of AI models and surfaces** among its competitors.
+GitHub Copilot is the world's most widely used AI development tool. It is the orchestrator that lets you **freely combine major AI models with a variety of surfaces**.
 
 Available AI models: OpenAI / Anthropic / Google Gemini / xAI Grok, plus support for custom models.
 

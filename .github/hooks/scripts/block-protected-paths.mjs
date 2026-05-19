@@ -1,66 +1,46 @@
 import { stdin, stdout } from 'node:process';
 
-// hooks.json already limits execution to mutating tools. This script only
-// checks whether the pending tool input mentions a protected repository path.
-const rawPayload = await readStdin();
-const payload = parseJson(rawPayload);
+const raw = await readStdin();
+const payload = parseJson(raw);
 if (!payload) process.exit(0);
 
-const toolName = String(payload.tool_name ?? payload.toolName ?? 'requested');
-const toolInput = payload.tool_input ?? payload.toolArgs ?? {};
+const input = payload.tool_input ?? payload.toolArgs ?? {};
+const cmd = String(input.command ?? input.bash ?? input.script ?? '');
+if (!cmd) process.exit(0);
 
-// File edits, patches, and shell commands all include their target path
-// somewhere in the JSON payload, so a normalized string scan is sufficient.
-const normalizedInput = JSON.stringify(toolInput).replaceAll('\\\\', '/');
-const protectedPath = findProtectedPath(normalizedInput);
-if (!protectedPath) {
-  process.exit(0);
-}
+const DANGEROUS = [
+  /\brm\s+(-[a-z]*r[a-z]*f|-[a-z]*f[a-z]*r)\b/i,   // rm -rf / rm -fr
+  /\brm\s+-rf?\s+\/(?!\S*\b(tmp|var\/tmp)\b)/i,    // rm -rf / outside tmp
+  /:\s*\(\s*\)\s*\{\s*:\s*\|\s*:\s*&\s*\}\s*;\s*:/,// fork bomb
+  /\bmkfs(\.|\s)/i,                                // mkfs
+  /\bdd\s+if=.*\s+of=\/dev\//i,                    // dd of=/dev/...
+  /\bshutdown\b|\breboot\b|\bhalt\b|\bpoweroff\b/i,
+  /\bgit\s+push\s+.*--force\b|--force-with-lease\b/i,
+  /\bgit\s+reset\s+--hard\b/i,
+  /\bcurl\s+[^|]*\|\s*(sudo\s+)?(bash|sh)\b/i,     // curl | sh
+  /\bwget\s+[^|]*\|\s*(sudo\s+)?(bash|sh)\b/i,
+];
 
-deny(`Repository policy: agents must not modify ${protectedPath}. The ${toolName} tool referenced ${protectedPath}.`);
+const hit = DANGEROUS.find(re => re.test(cmd));
+if (!hit) process.exit(0);
 
-async function readStdin() {
-  const chunks = [];
-  for await (const chunk of stdin) chunks.push(chunk);
-  return Buffer.concat(chunks).toString('utf8').trim();
-}
-
-function parseJson(raw) {
-  if (!raw) return null;
-  try {
-    return JSON.parse(raw);
-  } catch {
-    // Invalid hook payload: fail open rather than blocking unrelated work.
-    return null;
-  }
-}
-
-function findProtectedPath(value) {
-  // Match protected targets as path segments so e.g. "src/.githubish" is safe.
-  const protectedPaths = [
-    { label: '.github/', pattern: /(^|[\/\s"'`=:([{])(?:\.\/)?\.github(?:\/|$)/i },
-    { label: '.env', pattern: /(^|[\/\s"'`=:([{])(?:\.\/)?\.env(?:$|[\/\s"'`),}\]])/i },
-    { label: 'pnpm-lock.yaml', pattern: /(^|[\/\s"'`=:([{])pnpm-lock\.yaml(?:$|[\/\s"'`),}\]])/i },
-  ];
-
-  return protectedPaths.find(({ pattern }) => pattern.test(value))?.label;
-}
-
-function deny(reason) {
-  const additionalContext = 'This hook blocks agent writes to protected repository configuration, environment, and lock files. Choose a different path or ask the user to make the protected-file change manually.';
-
-  stdout.write(JSON.stringify({
-    // Copilot CLI / cloud agent output shape.
+const reason = `Repository policy: dangerous command blocked (${hit}).`;
+const additionalContext = 'This hook unconditionally blocks high-risk shell commands.';
+stdout.write(JSON.stringify({
+  permissionDecision: 'deny',
+  permissionDecisionReason: reason,
+  additionalContext,
+  hookSpecificOutput: {
+    hookEventName: 'PreToolUse',
     permissionDecision: 'deny',
     permissionDecisionReason: reason,
     additionalContext,
+  },
+}));
 
-    // VS Code-compatible output shape.
-    hookSpecificOutput: {
-      hookEventName: 'PreToolUse',
-      permissionDecision: 'deny',
-      permissionDecisionReason: reason,
-      additionalContext,
-    },
-  }));
+async function readStdin() {
+  const chunks = [];
+  for await (const c of stdin) chunks.push(c);
+  return Buffer.concat(chunks).toString('utf8').trim();
 }
+function parseJson(s) { try { return s ? JSON.parse(s) : null; } catch { return null; } }
