@@ -23,6 +23,12 @@ links:
   - group: Dev Containers
     label: Introduction to dev containers (GitHub Docs)
     url: https://docs.github.com/en/codespaces/setting-up-your-project-for-codespaces/adding-a-dev-container-configuration/introduction-to-dev-containers
+  - group: 📰 Recent Changelog
+    label: "Codespaces is now GA for GitHub Enterprise with data residency (2026-04-01)"
+    url: https://github.blog/changelog/2026-04-01-codespaces-is-now-generally-available-for-github-enterprise-with-data-residency
+  - group: 📰 Recent Changelog
+    label: "Codespaces with data residency now available in Japan (2026-03-19)"
+    url: https://github.blog/changelog/2026-03-19-codespaces-with-data-residency-now-available-in-japan
 ---
 
 ## 一言で

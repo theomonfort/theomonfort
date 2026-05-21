@@ -14,6 +14,18 @@ links:
     url: https://resources.github.com/copilot-trust-center/
   - label: Copilot ドキュメント
     url: https://docs.github.com/copilot
+  - group: 📰 Recent Changelog
+    label: "GitHub Copilot app is now available in technical preview (2026-05-14)"
+    url: https://github.blog/changelog/2026-05-14-github-copilot-app-is-now-available-in-technical-preview
+  - group: 📰 Recent Changelog
+    label: "GPT-5.5 is generally available for GitHub Copilot (2026-04-24)"
+    url: https://github.blog/changelog/2026-04-24-gpt-5-5-is-generally-available-for-github-copilot
+  - group: 📰 Recent Changelog
+    label: "Data residency (US + EU) and FedRAMP-authorized models in Copilot (2026-04-13)"
+    url: https://github.blog/changelog/2026-04-13-copilot-data-residency-in-us-eu-and-fedramp-compliance-now-available
+  - group: 📰 Recent Changelog
+    label: "Copilot SDK is now in public preview (2026-04-02)"
+    url: https://github.blog/changelog/2026-04-02-copilot-sdk-in-public-preview
 ---
 
 ## 一言で

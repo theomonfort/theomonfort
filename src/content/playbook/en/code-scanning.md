@@ -29,6 +29,21 @@ links:
   - group: 🆓 Free inventory (Risk Assessment)
     label: Code Security Risk Assessment GA (2026/04)
     url: https://github.blog/changelog/2026-04-08-code-security-risk-assessment-available-for-organizations/
+  - group: 📰 Recent Changelog
+    label: "Expanded OIDC support for Dependabot and code scanning (2026-05-19)"
+    url: https://github.blog/changelog/2026-05-19-expanded-oidc-support-for-dependabot-and-code-scanning
+  - group: 📰 Recent Changelog
+    label: "CodeQL now supports sanitizers and validators in models-as-data (2026-04-21)"
+    url: https://github.blog/changelog/2026-04-21-codeql-now-supports-sanitizers-and-validators-in-models-as-data
+  - group: 📰 Recent Changelog
+    label: "Link code scanning alerts to GitHub Issues (2026-04-14)"
+    url: https://github.blog/changelog/2026-04-14-link-code-scanning-alerts-to-github-issues
+  - group: 📰 Recent Changelog
+    label: "Batch apply security alert suggestions on PRs (2026-04-07)"
+    url: https://github.blog/changelog/2026-04-07-code-scanning-batch-apply-security-alert-suggestions-on-pull-requests
+  - group: 📰 Recent Changelog
+    label: "Faster incremental CodeQL analysis on pull requests (2026-03-24)"
+    url: https://github.blog/changelog/2026-03-24-faster-incremental-analysis-with-codeql-in-pull-requests
 ---
 
 ## In one sentence

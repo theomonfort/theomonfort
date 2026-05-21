@@ -30,6 +30,15 @@ links:
     url: https://github.blog/ai-and-ml/generative-ai/how-to-find-install-and-manage-mcp-servers-with-the-github-mcp-registry/
   - label: GitHub Docs — MCP and the cloud agent
     url: https://docs.github.com/en/copilot/concepts/agents/cloud-agent/mcp-and-cloud-agent
+  - group: 📰 Recent Changelog
+    label: "Secret scanning with GitHub MCP Server is now GA (2026-05-05)"
+    url: https://github.blog/changelog/2026-05-05-secret-scanning-with-github-mcp-server-is-now-generally-available
+  - group: 📰 Recent Changelog
+    label: "Dependency scanning with GitHub MCP Server (public preview) (2026-05-05)"
+    url: https://github.blog/changelog/2026-05-05-dependency-scanning-with-github-mcp-server-is-in-public-preview
+  - group: 📰 Recent Changelog
+    label: "Custom registry-based MCP allowlists for Copilot CLI (2026-04-16)"
+    url: https://github.blog/changelog/2026-04-16-copilot-cli-supports-custom-registry-based-mcp-allowlists
 ---
 
 ## 一言で

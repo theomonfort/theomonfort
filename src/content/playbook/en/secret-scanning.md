@@ -23,6 +23,15 @@ links:
   - group: 📖 Official Documentation
     label: Enabling secret scanning for your repo
     url: https://docs.github.com/en/code-security/secret-scanning/enabling-secret-scanning-features/enabling-secret-scanning-for-your-repository
+  - group: 📰 Recent Changelog
+    label: "Secret scanning with GitHub MCP Server is now GA (2026-05-05)"
+    url: https://github.blog/changelog/2026-05-05-secret-scanning-with-github-mcp-server-is-now-generally-available
+  - group: 📰 Recent Changelog
+    label: "Secret scanning pattern updates and product improvements (2026-04-14)"
+    url: https://github.blog/changelog/2026-04-14-secret-scanning-pattern-updates-and-product-improvements
+  - group: 📰 Recent Changelog
+    label: "Secret scanning in AI coding agents via the GitHub MCP Server (2026-03-17)"
+    url: https://github.blog/changelog/2026-03-17-secret-scanning-in-ai-coding-agents-via-the-github-mcp-server
 ---
 
 ## In one sentence

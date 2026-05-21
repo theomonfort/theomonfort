@@ -32,6 +32,12 @@ links:
   - group: 🆓 Free inventory (Risk Assessment)
     label: Code Security Risk Assessment GA (2026/04)
     url: https://github.blog/changelog/2026-04-08-code-security-risk-assessment-available-for-organizations/
+  - group: 📰 Recent Changelog
+    label: "Start a GitHub Advanced Security trial from a risk assessment (2026-05-19)"
+    url: https://github.blog/changelog/2026-05-19-start-a-github-advanced-security-trial-from-a-risk-assessment
+  - group: 📰 Recent Changelog
+    label: "GitHub Advanced Security setup made simple (2026-03-17)"
+    url: https://github.blog/changelog/2026-03-17-github-advanced-security-setup-made-simple
 ---
 
 ## In one sentence

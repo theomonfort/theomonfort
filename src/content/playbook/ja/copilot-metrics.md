@@ -12,6 +12,18 @@ links:
     url: https://docs.github.com/en/rest/copilot/copilot-metrics
   - label: Reviewing Copilot usage data
     url: https://docs.github.com/en/copilot/concepts/billing/organizations-and-enterprises
+  - group: 📰 Recent Changelog
+    label: "Team-level Copilot usage metrics via API (2026-05-14)"
+    url: https://github.blog/changelog/2026-05-14-team-level-copilot-usage-metrics-now-available-via-api
+  - group: 📰 Recent Changelog
+    label: "Cloud Agent fields added to usage metrics (2026-04-23)"
+    url: https://github.blog/changelog/2026-04-23-copilot-cloud-agent-fields-added-to-usage-metrics
+  - group: 📰 Recent Changelog
+    label: "Plan mode is now included in Copilot metrics (2026-03-02)"
+    url: https://github.blog/changelog/2026-03-02-copilot-metrics-now-includes-plan-mode
+  - group: 📰 Recent Changelog
+    label: "Copilot metrics is now generally available (2026-02-27)"
+    url: https://github.blog/changelog/2026-02-27-copilot-metrics-is-now-generally-available
 ---
 
 ## 一言で

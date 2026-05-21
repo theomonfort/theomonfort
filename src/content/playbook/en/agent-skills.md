@@ -26,6 +26,9 @@ links:
   - group: 🛠️ Reference Implementation
     label: theomonfort skills
     url: https://theomonfort.github.io/theomonfort/skills/
+  - group: 📰 Recent Changelog
+    label: "Manage agent skills with the GitHub CLI (2026-04-16)"
+    url: https://github.blog/changelog/2026-04-16-manage-agent-skills-with-github-cli
 ---
 
 ## At a Glance

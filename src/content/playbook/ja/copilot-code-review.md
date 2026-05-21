@@ -22,6 +22,18 @@ links:
     url: https://docs.github.com/en/enterprise-cloud@latest/copilot/tutorials/optimize-code-reviews
   - label: Blog — 60M Copilot code reviews
     url: https://github.blog/ai-and-ml/github-copilot/60-million-copilot-code-reviews-and-counting/
+  - group: 📰 Recent Changelog
+    label: "Apply review feedback via Cloud Agent (2026-05-19)"
+    url: https://github.blog/changelog/2026-05-19-easily-apply-copilot-code-review-feedback-with-copilot-cloud-agent
+  - group: 📰 Recent Changelog
+    label: "Comment experience improvements (2026-05-12)"
+    url: https://github.blog/changelog/2026-05-12-copilot-code-review-comment-experience-improvements
+  - group: 📰 Recent Changelog
+    label: "Code review will consume Actions minutes from 2026-06-01 (2026-04-27)"
+    url: https://github.blog/changelog/2026-04-27-github-copilot-code-review-will-start-consuming-github-actions-minutes-on-june-1-2026
+  - group: 📰 Recent Changelog
+    label: "Code review now runs on an agentic architecture (2026-03-05)"
+    url: https://github.blog/changelog/2026-03-05-copilot-code-review-now-runs-on-an-agentic-architecture
 ---
 
 ## 一言で

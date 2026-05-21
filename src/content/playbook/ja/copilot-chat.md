@@ -29,6 +29,15 @@ links:
   - group: VS Code agents
     label: VS Code — Agent tools
     url: https://code.visualstudio.com/docs/copilot/agents/agent-tools
+  - group: 📰 Recent Changelog
+    label: "Semantic issue search in Copilot Chat (2026-05-20)"
+    url: https://github.blog/changelog/2026-05-20-semantic-issue-search-in-copilot-chat
+  - group: 📰 Recent Changelog
+    label: "Ask questions in context with Copilot on web (2026-05-18)"
+    url: https://github.blog/changelog/2026-05-18-ask-questions-in-context-with-copilot-on-web
+  - group: 📰 Recent Changelog
+    label: "Copilot Chat improvements for pull requests (2026-04-23)"
+    url: https://github.blog/changelog/2026-04-23-copilot-chat-improvements-for-pull-requests
 ---
 
 ## 一言で

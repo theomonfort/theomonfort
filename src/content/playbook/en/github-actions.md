@@ -23,6 +23,15 @@ links:
   - group: 🛒 Marketplace
     label: GitHub Marketplace · Actions
     url: https://github.com/marketplace?type=actions
+  - group: 📰 Recent Changelog
+    label: "GitHub Actions: Upcoming image migrations (2026-05-14)"
+    url: https://github.blog/changelog/2026-05-14-github-actions-upcoming-image-migrations
+  - group: 📰 Recent Changelog
+    label: "Actions workflows are limited to 50 reruns (2026-04-10)"
+    url: https://github.blog/changelog/2026-04-10-actions-workflows-are-limited-to-50-reruns
+  - group: 📰 Recent Changelog
+    label: "Actions OIDC tokens now support repository custom properties (2026-03-12)"
+    url: https://github.blog/changelog/2026-03-12-actions-oidc-tokens-now-support-repository-custom-properties
 ---
 
 ## In one sentence

@@ -50,6 +50,18 @@ links:
   - group: Claude
     label: Claude Agent SDK
     url: https://code.claude.com/docs/en/agent-sdk/overview
+  - group: 📰 Recent Changelog
+    label: "GPT-5.3-Codex is now the base model for Business/Enterprise (2026-05-18)"
+    url: https://github.blog/changelog/2026-05-17-gpt-5-3-codex-is-now-the-base-model-for-copilot-business-and-enterprise
+  - group: 📰 Recent Changelog
+    label: "JetBrains inline agent mode (preview) (2026-04-24)"
+    url: https://github.blog/changelog/2026-04-24-inline-agent-mode-in-preview-and-more-in-github-copilot-for-jetbrains-ides
+  - group: 📰 Recent Changelog
+    label: "Model selection for Claude and Codex agents on github.com (2026-04-14)"
+    url: https://github.blog/changelog/2026-04-14-model-selection-for-claude-and-codex-agents-on-github-com
+  - group: 📰 Recent Changelog
+    label: "Claude and Codex now available for Business & Pro (2026-02-26)"
+    url: https://github.blog/changelog/2026-02-26-claude-and-codex-now-available-for-copilot-business-pro-users
 ---
 
 ## In one sentence

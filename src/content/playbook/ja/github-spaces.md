@@ -29,6 +29,9 @@ links:
   - group: 🔌 IDE 連携
     label: Remote GitHub MCP Server
     url: https://github.com/github/github-mcp-server/blob/main/docs/remote-server.md
+  - group: 📰 Recent Changelog
+    label: "Copilot Spaces API is now generally available (2026-05-18)"
+    url: https://github.blog/changelog/2026-05-18-copilot-spaces-api-now-generally-available
 ---
 
 ## 一言で

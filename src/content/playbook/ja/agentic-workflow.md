@@ -16,6 +16,9 @@ links:
     url: https://github.github.com/gh-aw/blog/2026-01-12-welcome-to-pelis-agent-factory/
   - label: githubnext/agentics（サンプル集）
     url: https://github.com/githubnext/agentics
+  - group: 📰 Recent Changelog
+    label: "View Agentic Workflow configs in the Actions run summary (2026-03-26)"
+    url: https://github.blog/changelog/2026-03-26-view-agentic-workflow-configs-in-the-actions-run-summary
 ---
 
 ## 一言で

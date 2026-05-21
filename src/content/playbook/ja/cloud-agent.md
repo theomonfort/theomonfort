@@ -18,6 +18,21 @@ links:
     url: https://github.blog/changelog/2026-02-04-claude-and-codex-are-now-available-in-public-preview-on-github/
   - label: Validation tools 20% faster (changelog)
     url: https://github.blog/changelog/2026-04-10-copilot-cloud-agents-validation-tools-are-now-20-faster/
+  - group: 📰 Recent Changelog
+    label: "Apply Copilot code review feedback via Cloud Agent (2026-05-19)"
+    url: https://github.blog/changelog/2026-05-19-easily-apply-copilot-code-review-feedback-with-copilot-cloud-agent
+  - group: 📰 Recent Changelog
+    label: "One-click fixes for failing Actions via Cloud Agent (2026-05-18)"
+    url: https://github.blog/changelog/2026-05-18-one-click-fixes-for-failing-actions-with-copilot-cloud-agent
+  - group: 📰 Recent Changelog
+    label: "Start Cloud Agent tasks via the REST API (2026-05-13)"
+    url: https://github.blog/changelog/2026-05-13-start-copilot-cloud-agent-tasks-via-the-rest-api
+  - group: 📰 Recent Changelog
+    label: "Fix merge conflicts in three clicks (2026-04-13)"
+    url: https://github.blog/changelog/2026-04-13-fix-merge-conflicts-in-three-clicks-with-copilot-cloud-agent
+  - group: 📰 Recent Changelog
+    label: "Research, plan, and code with Cloud Agent (2026-04-01)"
+    url: https://github.blog/changelog/2026-04-01-research-plan-and-code-with-copilot-cloud-agent
 ---
 
 ## 一言で

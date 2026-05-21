@@ -12,6 +12,12 @@ links:
     url: https://github.blog/ai-and-ml/github-copilot/building-an-agentic-memory-system-for-github-copilot/
   - label: Docs — Copilot Memory
     url: https://docs.github.com/en/copilot/concepts/agents/copilot-memory
+  - group: 📰 Recent Changelog
+    label: "User preferences for Pro / Pro+ (2026-05-15)"
+    url: https://github.blog/changelog/2026-05-15-copilot-memory-supports-user-preferences-for-pro-pro-users
+  - group: 📰 Recent Changelog
+    label: "On by default for Pro / Pro+ (public preview) (2026-03-04)"
+    url: https://github.blog/changelog/2026-03-04-copilot-memory-now-on-by-default-for-pro-and-pro-users-in-public-preview
 ---
 
 ## In a nutshell

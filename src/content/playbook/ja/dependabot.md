@@ -23,6 +23,21 @@ links:
   - group: 📖 公式ドキュメント
     label: Configuring Dependabot security updates
     url: https://docs.github.com/en/code-security/dependabot/dependabot-security-updates/configuring-dependabot-security-updates
+  - group: 📰 Recent Changelog
+    label: "Expanded OIDC support for Dependabot and code scanning (2026-05-19)"
+    url: https://github.blog/changelog/2026-05-19-expanded-oidc-support-for-dependabot-and-code-scanning
+  - group: 📰 Recent Changelog
+    label: "Cross-org Dependabot access for internal repositories (2026-05-11)"
+    url: https://github.blog/changelog/2026-05-11-cross-org-dependabot-access-for-internal-repositories
+  - group: 📰 Recent Changelog
+    label: "Dependabot alerts are now assignable to AI agents for remediation (2026-04-07)"
+    url: https://github.blog/changelog/2026-04-07-dependabot-alerts-are-now-assignable-to-ai-agents-for-remediation
+  - group: 📰 Recent Changelog
+    label: "Dependabot now detects malware in npm dependencies (2026-03-17)"
+    url: https://github.blog/changelog/2026-03-17-dependabot-now-detects-malware-in-npm-dependencies
+  - group: 📰 Recent Changelog
+    label: "Dependabot alert assignees are now generally available (2026-03-03)"
+    url: https://github.blog/changelog/2026-03-03-dependabot-alert-assignees-are-now-generally-available
 ---
 
 ## 一言で
