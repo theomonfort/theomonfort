@@ -40,7 +40,7 @@ links:
     url: https://github.blog/changelog/2026-03-03-dependabot-alert-assignees-are-now-generally-available
 ---
 
-## In one sentence
+## In a nutshell
 
 <div class="hero-quote">
   <p>

@@ -34,7 +34,7 @@ links:
     url: https://github.blog/changelog/2026-03-17-secret-scanning-in-ai-coding-agents-via-the-github-mcp-server
 ---
 
-## In one sentence
+## In a nutshell
 
 <div class="hero-quote">
   <p>

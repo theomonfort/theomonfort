@@ -34,7 +34,7 @@ links:
     url: https://github.blog/changelog/2026-03-12-actions-oidc-tokens-now-support-repository-custom-properties
 ---
 
-## In one sentence
+## In a nutshell
 
 <div class="hero-quote">
   <p>

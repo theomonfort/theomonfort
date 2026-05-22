@@ -38,7 +38,7 @@ links:
     url: https://github.blog/changelog/2026-02-25-github-copilot-cli-is-now-generally-available
 ---
 
-## In one sentence
+## In a nutshell
 
 <div class="hero-quote hero-quote-chat">
   <p>

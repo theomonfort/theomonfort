@@ -40,7 +40,7 @@ links:
     url: https://github.blog/changelog/2026-04-23-copilot-chat-improvements-for-pull-requests
 ---
 
-## In one sentence
+## In a nutshell
 
 <div class="hero-quote hero-quote-chat">
   <p>

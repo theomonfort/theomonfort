@@ -31,7 +31,7 @@ links:
     url: https://github.blog/changelog/2026-03-19-codespaces-with-data-residency-now-available-in-japan
 ---
 
-## In one sentence
+## In a nutshell
 
 <div class="hero-quote hero-quote-chat">
   <p>

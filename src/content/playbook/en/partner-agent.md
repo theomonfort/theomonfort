@@ -64,7 +64,7 @@ links:
     url: https://github.blog/changelog/2026-02-26-claude-and-codex-now-available-for-copilot-business-pro-users
 ---
 
-## In one sentence
+## In a nutshell
 
 <div class="hero-quote hero-quote-chat">
   <p>

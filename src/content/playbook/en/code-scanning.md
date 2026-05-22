@@ -46,7 +46,7 @@ links:
     url: https://github.blog/changelog/2026-03-24-faster-incremental-analysis-with-codeql-in-pull-requests
 ---
 
-## In one sentence
+## In a nutshell
 
 <div class="hero-quote">
   <p>

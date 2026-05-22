@@ -35,7 +35,7 @@ links:
     url: https://github.blog/changelog/2026-04-01-research-plan-and-code-with-copilot-cloud-agent
 ---
 
-## In one sentence
+## In a nutshell
 
 <div class="hero-quote hero-quote-chat">
   <p>

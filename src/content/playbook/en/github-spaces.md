@@ -34,7 +34,7 @@ links:
     url: https://github.blog/changelog/2026-05-18-copilot-spaces-api-now-generally-available
 ---
 
-## In one sentence
+## In a nutshell
 
 <div class="hero-quote hero-quote-chat">
   <p>

@@ -40,7 +40,7 @@ links:
     url: https://github.blog/changelog/2026-03-17-github-advanced-security-setup-made-simple
 ---
 
-## In one sentence
+## In a nutshell
 
 <div class="hero-quote">
   <p>

@@ -36,7 +36,7 @@ links:
     url: https://github.blog/changelog/2026-03-05-copilot-code-review-now-runs-on-an-agentic-architecture
 ---
 
-## In one sentence
+## In a nutshell
 
 <div class="hero-quote hero-quote-stars">
   <p>
