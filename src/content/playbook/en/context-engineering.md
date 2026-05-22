@@ -49,9 +49,11 @@ classDef dumb fill:#7a1748,stroke:#ff2e88,color:#ffe8f4
 
 > The goal of Context Engineering is not to fill the context window, but to **keep the necessary information visible**.
 
-## Context Window: Start
+## Context Window: Start (turn 1)
 
-Start is nearly ideal. Only the always-needed system/tools are loaded, leaving plenty of working space.
+Start is nearly ideal. Only the always-on **System & tools** are loaded — skill descriptions, copilot-instructions, MCP server tool schemas, default tool definitions — leaving plenty of working space. On the very first turn, those are sent fresh, so they count as **input tokens**.
+
+<p class="legend"><span style="display:inline-block;width:0.85em;height:0.85em;background:#7a1748;border:1px solid #ff2e88;vertical-align:middle;margin-right:0.3em"></span><strong>Input tokens</strong> (sent this turn) &nbsp;·&nbsp; <span style="display:inline-block;width:0.85em;height:0.85em;background:#0891b2;border:1px solid #67e8f9;vertical-align:middle;margin-right:0.3em"></span>Free space / buffer</p>
 
 ```mermaid
 treemap-beta
@@ -63,9 +65,11 @@ classDef used fill:#7a1748,stroke:#ff2e88,color:#ffe8f4
 classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
 ```
 
-## Context Window: Custom Agent
+## Context Window: Custom Agent (turn 1)
 
-Switching to a custom agent adds that agent's instruction to the context.
+Switching to a custom agent adds that agent's instruction to the context. Both system & tools and the custom agent are sent fresh — all **input tokens** on this turn.
+
+<p class="legend"><span style="display:inline-block;width:0.85em;height:0.85em;background:#7a1748;border:1px solid #ff2e88;vertical-align:middle;margin-right:0.3em"></span><strong>Input tokens</strong> (sent this turn) &nbsp;·&nbsp; <span style="display:inline-block;width:0.85em;height:0.85em;background:#0891b2;border:1px solid #67e8f9;vertical-align:middle;margin-right:0.3em"></span>Free space / buffer</p>
 
 ```mermaid
 treemap-beta
@@ -78,9 +82,11 @@ classDef used fill:#7a1748,stroke:#ff2e88,color:#ffe8f4
 classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
 ```
 
-## Context Window: Prompt
+## Context Window: Prompt (turn 1)
 
-You write a prompt. For example, asking to "add a test" may cause a relevant skill and the path instruction for tests to be loaded.
+You write a prompt. For example, asking to "add a test" may cause a relevant skill and the path instruction for tests to be loaded. Everything in the window is fresh **input tokens** on this turn.
+
+<p class="legend"><span style="display:inline-block;width:0.85em;height:0.85em;background:#7a1748;border:1px solid #ff2e88;vertical-align:middle;margin-right:0.3em"></span><strong>Input tokens</strong> (sent this turn) &nbsp;·&nbsp; <span style="display:inline-block;width:0.85em;height:0.85em;background:#0891b2;border:1px solid #67e8f9;vertical-align:middle;margin-right:0.3em"></span>Free space / buffer</p>
 
 ```mermaid
 treemap-beta
@@ -96,9 +102,11 @@ classDef used fill:#7a1748,stroke:#ff2e88,color:#ffe8f4
 classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
 ```
 
-## Context Window: Sub-agent
+## Context Window: Sub-agent (turn 1)
 
-Sub-agents for exploration, database, review, etc. can return a summary of their findings to the main agent.
+The agent might call **sub-agents** — for example to explore the codebase, query a database, or run a review — and merge their summary back into the main context. Everything in the window is fresh **input tokens** on this turn.
+
+<p class="legend"><span style="display:inline-block;width:0.85em;height:0.85em;background:#7a1748;border:1px solid #ff2e88;vertical-align:middle;margin-right:0.3em"></span><strong>Input tokens</strong> (sent this turn) &nbsp;·&nbsp; <span style="display:inline-block;width:0.85em;height:0.85em;background:#0891b2;border:1px solid #67e8f9;vertical-align:middle;margin-right:0.3em"></span>Free space / buffer</p>
 
 ```mermaid
 treemap-beta
@@ -115,9 +123,11 @@ classDef used fill:#7a1748,stroke:#ff2e88,color:#ffe8f4
 classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
 ```
 
-## Context Window: Memory
+## Context Window: Memory (turn 1)
 
-As you keep working in the repo, memories are generated and may be dynamically loaded when needed.
+As you keep working in the repo, memories are generated and may be dynamically loaded when needed. Everything in the window is still fresh **input tokens** on this turn.
+
+<p class="legend"><span style="display:inline-block;width:0.85em;height:0.85em;background:#7a1748;border:1px solid #ff2e88;vertical-align:middle;margin-right:0.3em"></span><strong>Input tokens</strong> (sent this turn) &nbsp;·&nbsp; <span style="display:inline-block;width:0.85em;height:0.85em;background:#0891b2;border:1px solid #67e8f9;vertical-align:middle;margin-right:0.3em"></span>Free space / buffer</p>
 
 ```mermaid
 treemap-beta
@@ -132,5 +142,54 @@ treemap-beta
   "Free space": 15:::free
   "Buffer": 15:::free
 classDef used fill:#7a1748,stroke:#ff2e88,color:#ffe8f4
+classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
+```
+
+## Context Window: Output (turn 1)
+
+The LLM responds. Its **Answer** is appended to the context — those are **output tokens**, charged at a different (typically higher) rate than input tokens.
+
+<p class="legend"><span style="display:inline-block;width:0.85em;height:0.85em;background:#7a1748;border:1px solid #ff2e88;vertical-align:middle;margin-right:0.3em"></span><strong>Input tokens</strong> (sent this turn) &nbsp;·&nbsp; <span style="display:inline-block;width:0.85em;height:0.85em;background:#a16207;border:1px solid #fbbf24;vertical-align:middle;margin-right:0.3em"></span><strong>Output tokens</strong> (LLM response) &nbsp;·&nbsp; <span style="display:inline-block;width:0.85em;height:0.85em;background:#0891b2;border:1px solid #67e8f9;vertical-align:middle;margin-right:0.3em"></span>Free space / buffer</p>
+
+```mermaid
+treemap-beta
+"Context window"
+  "System & tools": 10:::used
+  "Custom Agent": 10:::used
+  "Path instruction": 10:::used
+  "Skill": 10:::used
+  "Prompt": 10:::used
+  "Sub-agent data": 10:::used
+  "Memory": 10:::used
+  "Answer": 10:::output
+  "Free space": 5:::free
+  "Buffer": 15:::free
+classDef used fill:#7a1748,stroke:#ff2e88,color:#ffe8f4
+classDef output fill:#a16207,stroke:#fbbf24,color:#fef3c7
+classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
+```
+
+## Context Window: Cache input (turn 2)
+
+The user sends a new prompt to start the next turn. Everything from turn 1 — system, tools, custom agent, prompt, sub-agent data, memory, **even the LLM's answer** — is now reused from the **prompt cache** as cheaper **cache input tokens**. Only **Prompt #2** is fresh **input tokens** this turn.
+
+<p class="legend"><span style="display:inline-block;width:0.85em;height:0.85em;background:#475569;border:1px solid #cbd5e1;vertical-align:middle;margin-right:0.3em"></span><strong>Cache input tokens</strong> (not guaranteed) &nbsp;·&nbsp; <span style="display:inline-block;width:0.85em;height:0.85em;background:#7a1748;border:1px solid #ff2e88;vertical-align:middle;margin-right:0.3em"></span><strong>Input tokens</strong> (new this turn) &nbsp;·&nbsp; <span style="display:inline-block;width:0.85em;height:0.85em;background:#0891b2;border:1px solid #67e8f9;vertical-align:middle;margin-right:0.3em"></span>Free space / buffer</p>
+
+```mermaid
+treemap-beta
+"Context window"
+  "System & tools": 10:::cache
+  "Custom Agent": 10:::cache
+  "Path instruction": 10:::cache
+  "Skill": 10:::cache
+  "Prompt": 10:::cache
+  "Sub-agent data": 10:::cache
+  "Memory": 10:::cache
+  "Answer": 10:::cache
+  "Prompt #2": 10:::used
+  "Free space": 5:::free
+  "Buffer": 5:::free
+classDef used fill:#7a1748,stroke:#ff2e88,color:#ffe8f4
+classDef cache fill:#475569,stroke:#cbd5e1,color:#f1f5f9
 classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
 ```
