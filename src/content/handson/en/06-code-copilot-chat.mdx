@@ -1,0 +1,138 @@
+---
+title: "CODE: Copilot Chat"
+order: 6
+stepSlug: "code-copilot-chat"
+duration: 30
+summary: "Your PLAN-side harness (MCP, Instructions, Skills) is now in place. It's time to design the implementation in Copilot Chat's Plan mode, then let Agent mode build it all in one go."
+generated: true
+generatedFrom: "workshop-nikon.md"
+upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
+---
+{/*
+  AUTO-GENERATED FILE — do not edit by hand.
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ 6af362ccc165cae5c61ffc58550a5ebe9fe58b77
+  Regenerate via: node scripts/import-handson.mjs --force
+*/}
+
+import Aside from '../../../components/handson/Aside.astro';
+
+<Aside type="reference">
+
+**📖 Reference**: See [Playbook / Copilot Chat](https://theomonfort.github.io/theomonfort/en/playbook/copilot-chat/) for how Plan and Agent modes differ and when to use each.
+
+</Aside>
+
+Your PLAN-side harness (MCP, Instructions, Skills) is now in place. It's time to design the implementation in **Copilot Chat's Plan mode**, then let Agent mode build it all in one go.
+
+### 6.1 — Switch the model to Claude Opus 4.6
+
+Click the model selector at the bottom of the Copilot Chat panel and pick **Claude Opus 4.6**.
+
+<Aside type="positive">
+
+**💡 Tip**: Opus-class models shine on complex design tasks and long-context conversations. For day-to-day editing and completion, other models are plenty, but for "scaffold the whole site in one shot" work like this section, Opus 4.6 gives more consistent quality.
+
+</Aside>
+
+### 6.2 — Switch to Plan mode
+
+In Copilot Chat's mode switcher, select **"Plan"**.
+
+<Aside type="positive">
+
+**💡 Tip**: In Plan mode, Copilot focuses on **design and questions** rather than immediately editing files. It will push back on anything ambiguous in the requirements. Keep iterating with it until you're happy with the plan.
+
+</Aside>
+
+### 6.3 — Ask for an implementation plan
+
+Copy the following prompt as-is and paste it into Copilot Chat:
+
+````
+Build a small Astro site (English only). Work on a new branch (e.g. feature/playbook-site).
+
+- Create a **grid-style index page** that lists every entry in `src/content/playbook/*.md` as a tile (icon + title + short summary).
+- Clicking a tile navigates to a detail page for that entry (the full markdown content, scrollable). The detail page uses the entry's frontmatter `color` as its theme color.
+- Render any ` ```mermaid ` code blocks inside the markdown **as Mermaid diagrams** (client-side is fine).
+
+Once `pnpm dev` confirms it works, commit and push your changes and open a pull request titled **"Playbook site foundations"**.
+````
+
+Copilot may ask you a few questions (package manager, UI framework, deployment target, etc.). It should have read `copilot-instructions.md` and default to Astro / Tailwind / pnpm, but answer any gaps as they come up.
+
+⏱ About 3 minutes
+
+<Aside type="positive">
+
+**Why it matters**: The Stack rule you wrote in 4.1 and the frontend design tokens from 4.2 pay off here — the plan should come back proposing Astro + Tailwind with the colors you specified.
+
+</Aside>
+
+### 6.4 — Implement with Autopilot
+
+Once you're happy with the plan, click **"Start with Autopilot"** to kick off the implementation.
+
+![Start with Autopilot](/theomonfort/handson/img/start-with-autopilot.png)
+
+⏱ About 10 minutes
+
+Copilot will automatically:
+
+- Bootstrap the Astro project (with pnpm)
+- Define the playbook collection in `src/content.config.ts`
+- Wire up the grid-style index page and detail routing
+- Apply the theme color from each entry's frontmatter `color`
+- Render Mermaid diagrams
+- Style everything in Tailwind, following your design tokens
+
+Once the implementation is done, start the dev server to check it out:
+
+```bash
+pnpm dev
+```
+
+From the port-forwarding notification, click **"Open in browser"** and try it out.
+
+<Aside type="positive">
+
+**Try this**: Click through from the grid into a few entry detail pages. Jot down anything that feels off, UI tweaks you'd like, or features you wish were there (we'll add presentation mode, progress bars, etc. in the next step).
+
+</Aside>
+
+### 6.5 — File the improvements as Issues
+
+Here's the key move — **instead of asking Copilot Chat to "fix this right now", file each improvement as a GitHub Issue**. In Part 12 (CODE: CLI) we'll have Copilot CLI implement all of these **in parallel, in one batch**.
+
+Send the prompt below to Copilot Chat to file **8** Issues at once (the `github-issues` skill will structure them automatically):
+
+```
+Use the github-issues skill to create the following improvements as individual Issues in this repository.
+
+1. Title: Add a presentation mode to the detail page
+   Details: On the detail page, pressing `P` should toggle a **presentation mode**. Split the content into one slide per `##` heading, use `←` / `→` to move between slides within the same entry, and `Esc` to return to the normal view. While presenting, show a left sidebar with a table of contents of all entries and highlight the current one.
+
+2. Title: Turn the slide-mode left sidebar into a categorized table of contents
+   Details: The current sidebar just lists entries as a flat list. Group them by the frontmatter `category` (introduction / plan / develop / review / secure / operate), each group with a pixel-font header (color depending on category). Each entry shows as "number + icon + titleEn", with the currently displayed entry highlighted.
+
+3. Title: Break the grid index page into category sections
+   Details: Right now every entry sits in a single flat grid. Split them by `category`, with a heading and 1–2 lines of description per section (e.g. PLAN = set up the harness before you build, DEVELOP = write code with the AI, and so on).
+
+4. Title: Add a "links" slide at the end of each entry
+   Details: The frontmatter `links` (already grouped) should appear as the last slide of each entry, displayed grouped by their group, each with a subheading. Easy to reference while presenting.
+
+5. Title: Center slide text both vertically and horizontally
+   Details: Content currently bunches up in the top-left, leaving whitespace at the bottom-right. Use flex/grid inside the slide area to align the heading and body visually toward the center — title slightly above center, body near the middle.
+
+6. Title: Add a progress bar at the top of the slides
+   Details: Show a thin neon-cyan progress bar at the very top of the screen indicating overall position. Add dividers at section boundaries so progress within the current section is also visible.
+
+7. Title: Add an Octocat "in one line" summary slide at the start of each entry
+   Details: As the very first slide of each entry, place an Octocat (Mona) character image on the left and a bordered dialog on the right summarizing the frontmatter `summary`. Add a small pixel-font label "in one line" in the top-left of the slide.
+
+8. Title: Keep presentation mode when switching entries
+   Details: Currently, navigating to another entry from the left sidebar drops presentation mode and returns to the normal view. While presenting, switching entries should **stay in presentation mode** and resume from the first slide of the new entry (only `Esc` returns to the normal view).
+```
+
+You can find the resulting Issues in the [Issues tab of your repository](#). We'll have Cloud Agent / Copilot CLI implement them in the next sections.
+
+⏱ About 3 minutes

@@ -17,10 +17,10 @@ const entries = (await getCollection('philosophy')).sort(
 
 const items = entries.map((e) => ({
   slug: e.id,
-  question: e.data.question,
-  short: e.data.short,
-  body: e.body ?? '',
-  link: e.data.link,
+  question: locale === 'en' ? (e.data.questionEn || e.data.question) : e.data.question,
+  short: locale === 'en' ? (e.data.shortEn || e.data.short) : e.data.short,
+  body: locale === 'en' ? (e.data.bodyEn || e.body || '') : (e.body ?? ''),
+  link: locale === 'en' ? (e.data.linkEn || e.data.link) : e.data.link,
 }));
 ---
 
@@ -33,11 +33,6 @@ const items = entries.map((e) => ({
       <p class="font-body text-sm text-phosphor/80 mt-4">
         {t.philosophy.intro}
       </p>
-      {locale === 'en' && (
-        <p class="mt-4 p-3 border-2 border-crt-amber/60 bg-shadow-ink/70 font-body text-sm text-crt-amber">
-          {t.common.translationPending} {t.philosophy.contentNotice}
-        </p>
-      )}
     </header>
 
     <ol class="space-y-8">

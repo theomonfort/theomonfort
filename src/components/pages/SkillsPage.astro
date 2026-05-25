@@ -14,6 +14,9 @@ const t = siteCopy[locale];
 const all = (await getCollection('equipment'))
   .sort((a, b) => a.data.order - b.data.order);
 
+const pickDesc = (e: (typeof all)[number]) =>
+  locale === 'en' ? (e.data.descriptionEn || e.data.description) : e.data.description;
+
 const bySection = (id: string) => all.filter((e) => e.data.section === id);
 
 const skillEntries: SkillEntry[] = bySection('skills').map((e) => ({
@@ -21,7 +24,7 @@ const skillEntries: SkillEntry[] = bySection('skills').map((e) => ({
   name: e.data.name,
   icon: e.data.icon,
   group: e.data.group,
-  description: e.data.description,
+  description: pickDesc(e),
   url: e.data.url ?? '',
 }));
 
@@ -31,7 +34,7 @@ const mcpEntries: McpEntry[] = bySection('mcp-servers')
     slug: e.id.split('--')[1] ?? e.id,
     name: e.data.name,
     icon: e.data.icon,
-    description: e.data.description,
+    description: pickDesc(e),
     install: e.data.install!,
     url: e.data.url,
   }));
@@ -46,11 +49,6 @@ const mcpEntries: McpEntry[] = bySection('mcp-servers')
       <p class="font-body text-sm text-phosphor/80 mt-4 max-w-2xl">
         {t.skills.intro}
       </p>
-      {locale === 'en' && (
-        <p class="mt-4 p-3 border-2 border-crt-amber/60 bg-shadow-ink/70 font-body text-sm text-crt-amber">
-          {t.common.translationPending} {t.skills.contentNotice}
-        </p>
-      )}
     </header>
 
     <section id="skills" class="scroll-mt-32 mb-16">

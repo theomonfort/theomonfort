@@ -1,0 +1,150 @@
+---
+title: "PLAN: Hooks"
+order: 12
+stepSlug: "plan-hooks"
+duration: 10
+summary: "Set up Hooks as a guardrail so Copilot (Chat / CLI / Cloud Agent, etc.) won't rewrite files you don't want it touching — like the `.github/` configs, `.env`, or `pnpm-lock.yaml`. We're about to run multiple agents in parallel via the CLI in the next chapter, so having a safety net in place beforehand is…"
+generated: true
+generatedFrom: "workshop-nikon.md"
+upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
+---
+{/*
+  AUTO-GENERATED FILE — do not edit by hand.
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ 6af362ccc165cae5c61ffc58550a5ebe9fe58b77
+  Regenerate via: node scripts/import-handson.mjs --force
+*/}
+
+import Aside from '../../../components/handson/Aside.astro';
+
+Let's set up **Hooks** as a guardrail so Copilot (Chat / CLI / Cloud Agent, etc.) won't rewrite files you don't want it touching — like the `.github/` configs, `.env`, or `pnpm-lock.yaml`. We're about to run multiple agents in parallel via the CLI in the next chapter, so having a safety net in place beforehand is ideal.
+
+**Hooks** let you inject arbitrary scripts before and after an agent invokes a tool (`PreToolUse` / `PostToolUse`). Returning `permissionDecision: deny` from `PreToolUse` lets you **physically stop** the agent in its tracks.
+
+<Aside type="reference">
+
+**📖 Reference**: See [Playbook / Hooks](https://theomonfort.github.io/theomonfort/en/playbook/hooks/) for how Hooks work and the available event types.
+
+</Aside>
+
+### N.1 — Create `.github/hooks/hooks.json`
+
+Create a new file `.github/hooks/hooks.json` at the repository root and paste the following as-is:
+
+```json
+{
+  "version": 1,
+  "hooks": {
+    "PreToolUse": [
+      {
+        "type": "command",
+        "matcher": ".*(edit|create|write|delete|remove|rename|move|patch|replace|insert|update|bash|shell|terminal|command|run|execute|apply).*",
+        "bash": "node ./scripts/block.mjs",
+        "cwd": ".github/hooks",
+        "timeoutSec": 5
+      }
+    ]
+  }
+}
+```
+
+Key points:
+
+- The `matcher` limits the hook to **mutating tools** only — file-modifying and shell-executing ones — so reads and searches aren't blocked.
+- `bash` is executed relative to `cwd`. We'll create the script in the next step.
+
+### N.2 — Create the blocking script
+
+Create a new file `.github/hooks/scripts/block.mjs` and paste the following:
+
+```javascript
+import { stdin, stdout } from 'node:process';
+
+const rawPayload = await readStdin();
+const payload = parseJson(rawPayload);
+if (!payload) process.exit(0);
+
+const toolName = String(payload.tool_name ?? payload.toolName ?? 'requested');
+const toolInput = payload.tool_input ?? payload.toolArgs ?? {};
+
+const normalizedInput = JSON.stringify(toolInput).replaceAll('\\\\', '/');
+const protectedPath = findProtectedPath(normalizedInput);
+if (!protectedPath) {
+  process.exit(0);
+}
+
+deny(`Repository policy: agent writes to .github/, .env, or pnpm-lock.yaml are blocked. The ${toolName} tool referenced ${protectedPath}, which is one of these protected paths.`);
+
+async function readStdin() {
+  const chunks = [];
+  for await (const chunk of stdin) chunks.push(chunk);
+  return Buffer.concat(chunks).toString('utf8').trim();
+}
+
+function parseJson(raw) {
+  if (!raw) return null;
+  try { return JSON.parse(raw); } catch { return null; }
+}
+
+function findProtectedPath(value) {
+  const protectedPaths = [
+    { label: '.github/', pattern: /(^|[\/\s"'`=:([{])(?:\.\/)?\.github(?:\/|$)/i },
+    { label: '.env', pattern: /(^|[\/\s"'`=:([{])(?:\.\/)?\.env(?:$|[\/\s"'`),}\]])/i },
+    { label: 'pnpm-lock.yaml', pattern: /(^|[\/\s"'`=:([{])pnpm-lock\.yaml(?:$|[\/\s"'`),}\]])/i },
+  ];
+  return protectedPaths.find(({ pattern }) => pattern.test(value))?.label;
+}
+
+function deny(reason) {
+  const additionalContext = 'Protected paths in this repository: .github/ (Copilot config, hooks, workflows), .env (secrets), pnpm-lock.yaml (deterministic deps). The agent must NOT create, edit, write, delete, rename, move, or run shell commands that touch these paths. If the user explicitly needs such a change, instruct them to make it manually.';
+  stdout.write(JSON.stringify({
+    permissionDecision: 'deny',
+    permissionDecisionReason: reason,
+    additionalContext,
+    hookSpecificOutput: {
+      hookEventName: 'PreToolUse',
+      permissionDecision: 'deny',
+      permissionDecisionReason: reason,
+      additionalContext,
+    },
+  }));
+}
+```
+
+Key points:
+
+- The protected targets are just three: `.github/`, `.env`, and `pnpm-lock.yaml`.
+- `permissionDecisionReason` and `additionalContext` **return the list of protected paths and the reason back to the agent**, so the agent can self-correct on its next turn (it's explicitly told "where it must not touch").
+- The output covers both the **Copilot CLI format** (`permissionDecision`) and the **VS Code format** (`hookSpecificOutput`), so it works in either environment.
+
+### N.3 — Restart Copilot Chat
+
+To load the Hook configuration, **close your current Copilot Chat session and open a fresh one** (click the 💬 icon → "+" for a new chat).
+
+### N.4 — Try the agent (and watch it get blocked)
+
+In the new chat, enter the following:
+
+```
+Create a new file called `.github/test.md` with the contents "hello hooks".
+```
+
+Expected behavior:
+
+- The agent attempts to invoke the `create` / `write` tool.
+- The Hook fires → detects a path under `.github/` → returns **`permissionDecision: deny`**.
+- A rejection message like "Repository policy: agents must not modify `.github/`" appears in the chat.
+- The file is not created.
+
+<Aside type="negative">
+
+**Did it get blocked as expected?** If not, check that the path to `.github/hooks/hooks.json` is correct, that you re-opened Copilot Chat in a fresh session, and that `node` is available (`node --version`).
+
+</Aside>
+
+⏱ ~10 minutes
+
+<Aside type="positive">
+
+**Now you can safely move on to the CLI.** In the next chapter we'll launch Copilot CLI and run **multiple agents in parallel**, but you no longer have to worry about anyone touching `.github/` behind your back.
+
+</Aside>

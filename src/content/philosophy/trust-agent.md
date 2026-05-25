@@ -1,6 +1,19 @@
 ---
 question: エージェントを信頼していい？
 short: 検証可能な harness を作れば。盲信ではなく、計測。
+questionEn: Can I trust the agent?
+shortEn: Only if you build a verifiable harness. Don't blind-faith — measure.
+bodyEn: |
+  It's not "trust" — it's **verification**.
+
+  - Are there **automated tests** for the output?
+  - Can you **roll back via git** for the blast radius?
+  - Are you **observing** logs and cost?
+  - Is there a clear **boundary** for "from here, human takes over"?
+
+  If those are in place, you don't need to *trust* the agent. **The system guarantees the trust for you.**
+
+  > "Don't trust the agent. Trust your harness."
 order: 5
 ---
 

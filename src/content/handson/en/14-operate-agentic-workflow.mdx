@@ -1,0 +1,156 @@
+---
+title: "OPERATE: Agentic Workflow"
+order: 14
+stepSlug: "operate-agentic-workflow"
+duration: 15
+summary: "Combine GitHub Actions with Copilot (AI) to experience an Agentic Workflow that detects code changes and runs autonomous tasks on its own."
+generated: true
+generatedFrom: "workshop-nikon.md"
+upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
+---
+{/*
+  AUTO-GENERATED FILE — do not edit by hand.
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ 6af362ccc165cae5c61ffc58550a5ebe9fe58b77
+  Regenerate via: node scripts/import-handson.mjs --force
+*/}
+
+import Aside from '../../../components/handson/Aside.astro';
+
+<Aside type="reference">
+
+**📖 Reference**: See [Playbook / Agentic Workflow](https://theomonfort.github.io/theomonfort/en/playbook/agentic-workflow) for the concepts behind Agentic Workflow and the integration patterns between GitHub Actions and Copilot.
+
+</Aside>
+
+By combining GitHub Actions with Copilot (AI), let's experience an **Agentic Workflow** that detects code changes and runs autonomous tasks on its own.
+
+**What is an Agentic Workflow?**: A mechanism that leverages Copilot inside GitHub Actions workflows to execute autonomous tasks (report generation, documentation updates, code fixes, etc.) in response to repository changes.
+
+#### Installing gh aw
+
+First, install the CLI tool for Agentic Workflow.
+
+For a local environment:
+
+```bash
+gh extension install github/gh-aw
+```
+
+For Codespaces or environments with network restrictions (since it's pre-GA):
+
+```bash
+curl -sL https://raw.githubusercontent.com/github/gh-aw/main/install-gh-aw.sh | bash
+```
+
+### 6.1 — Create a Personal Access Token (PAT)
+
+Create a PAT so Agentic Workflow can leverage Copilot.
+
+1. Go to [https://github.com/settings/personal-access-tokens/new](https://github.com/settings/personal-access-tokens/new)
+2. Settings:
+   - **Token name**: `copilot-workshop-agent`
+   - **Resource owner**: The Organization where you created the repository (or your personal account)
+   - **Repository access**: Only select repositories → Select the repository you created
+   - **Permissions**:
+     - **Actions**: Read and write
+     - **Contents**: Read-only
+     - **Issues**: Read and write
+     - **Metadata**: Read-only (automatically granted)
+     - **Pull requests**: Read and write
+
+![PAT Permissions](/theomonfort/handson/img/pat-permissions.png)
+3\. Copy the PAT you created
+
+<Aside type="negative">
+
+**Note**: The PAT is shown only once at creation time. Make sure to copy it and store it in a safe place — it cannot be displayed again.
+
+</Aside>
+
+#### Configure the repository secret
+
+1. In the repository, go to **Settings** → **Secrets and variables** → **Actions**
+2. Click **New repository secret**
+3. Name: `COPILOT_GITHUB_TOKEN`, Value: the PAT you created
+
+#### Verify Workflow permissions
+
+1. **Settings** → **Actions** → **General**
+2. Check **Allow GitHub Actions to create and approve pull requests**
+
+### 6.2 — Create a Daily Repo Status workflow
+
+Let's create an Agentic Workflow that automatically reports today's repository activity.
+
+In agent mode, run the following:
+
+```
+Please create the following Agentic Workflow.
+
+File: .github/workflows/daily-repo-status.md
+
+Purpose: Analyze the repository activity (Issues, PRs, code changes) and
+automatically create a daily status report as an Issue.
+
+Format:
+- Define the configuration in YAML front matter (on, permissions, tools, safe-outputs)
+- Describe the workflow instructions in the Markdown body
+
+Configuration:
+- Trigger: schedule: daily and workflow_dispatch
+- permissions: contents: read, issues: read, pull-requests: read
+- tools: github (lockdown: false, min-integrity: none)
+- safe-outputs: create-issue with title-prefix "[repo-status] ",
+  labels: [report, daily-status], close-older-issues: true
+
+Workflow instructions:
+1. Collect recent repository activity (Issues, PRs, code changes)
+2. Analyze progress and highlights
+3. Create the result as a GitHub Issue
+
+Reference: https://github.com/githubnext/agentics/blob/main/workflows/daily-repo-status.md
+
+When done, run `gh aw compile` to compile the workflow, then commit
+the changes and create a PR.
+```
+
+<Aside type="positive">
+
+**Tip**: `gh aw compile` generates a `.lock.yml` file from the `.md` file that GitHub Actions can execute. Without compiling, the workflow won't run.
+
+</Aside>
+
+After merging the PR, manually run the workflow from the **Actions** tab:
+
+1. Open the **Actions** tab of your repository
+2. Select **Daily Repo Status** from the left menu
+3. Click **Run workflow** → **Run workflow**
+
+![Manually run from Actions](/theomonfort/handson/img/actions-run-workflow.png)
+
+After execution completes (⏱ about 2 minutes), an Issue prefixed with `[repo-status]` is automatically created in the repository's **Issues** tab, showing a summary of today's PRs, Issues, and code change activity.
+
+<Aside type="positive">
+
+**Tip**: Unlike regular GitHub Actions, an Agentic Workflow is run with the `gh aw run` command. Scheduled execution (e.g., daily) can also be configured.
+
+</Aside>
+
+### 6.3 — (Bonus) Create a workflow to auto-update test coverage
+
+If you have time, try creating a workflow that automatically updates the test coverage report.
+
+In agent mode, run the following:
+
+```
+Please create the following Agentic Workflow.
+Reference: https://github.com/github/gh-aw/blob/main/create.md
+
+Workflow purpose:
+- Trigger on push to the main branch
+- Run tests and generate a coverage report
+- Automatically update the coverage result as a badge in README.md
+- If there are changes, automatically create a PR
+
+Place the workflow file at .github/workflows/coverage-update.md.
+```

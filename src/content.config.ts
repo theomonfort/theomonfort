@@ -29,8 +29,14 @@ const philosophy = defineCollection({
   schema: z.object({
     question: z.string(),
     short: z.string(),
+    questionEn: z.string().optional(),
+    shortEn: z.string().optional(),
+    bodyEn: z.string().optional(),
     order: z.number().default(0),
     link: z
+      .object({ label: z.string(), url: z.string().url() })
+      .optional(),
+    linkEn: z
       .object({ label: z.string(), url: z.string().url() })
       .optional(),
   }),
@@ -51,6 +57,7 @@ const equipment = defineCollection({
     name: z.string(),
     icon: z.string(),
     description: z.string(),
+    descriptionEn: z.string().optional(),
     badge: z.string().optional(),
     group: z.string().optional(),
     url: z.string().url().optional(),

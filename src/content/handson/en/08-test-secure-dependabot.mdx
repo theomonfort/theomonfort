@@ -1,0 +1,54 @@
+---
+title: "TEST & SECURE: Dependabot"
+order: 8
+stepSlug: "test-secure-dependabot"
+duration: 3
+summary: "Turn on Dependabot to scan your dependencies for vulnerabilities. Setup takes just a few clicks."
+generated: true
+generatedFrom: "workshop-nikon.md"
+upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
+---
+{/*
+  AUTO-GENERATED FILE — do not edit by hand.
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ 6af362ccc165cae5c61ffc58550a5ebe9fe58b77
+  Regenerate via: node scripts/import-handson.mjs --force
+*/}
+
+import Aside from '../../../components/handson/Aside.astro';
+
+<Aside type="reference">
+
+**📖 Reference**: See [Playbook / Dependabot](http://127.0.0.1:4321/theomonfort/en/playbook/dependabot) for how Dependabot works and how to configure it.
+
+</Aside>
+
+Turn on Dependabot to scan your dependencies for vulnerabilities. Setup takes just a few clicks.
+
+### 8.1 — Enable Dependabot
+
+1. Repository **Settings** → **Security and quality** → **Advanced Security**
+2. **Dependabot** section:
+   - Enable **Dependabot security updates**
+   - Enable **Dependabot version updates** → an editor opens with a `.github/dependabot.yml` template
+3. Change `package-ecosystem: ""` in the template to **`"npm"`** (this repo uses the pnpm / npm ecosystem):
+   ```yaml
+   version: 2
+   updates:
+     - package-ecosystem: "npm"
+       directory: "/"
+       schedule:
+         interval: "weekly"
+   ```
+4. **Commit changes…** → choose **"Create a new branch and start a pull request"** → open the PR and merge it
+
+<Aside type="negative">
+
+**Heads up**: If `package-ecosystem` is left empty, the **Commit changes** button stays greyed out. Set it to a valid value like `"npm"` before committing. Also, the Ruleset you configured in Section 7.2 blocks direct commits to `main`, so the change has to go through a PR.
+
+</Aside>
+
+<Aside type="positive">
+
+**Why it matters**: Dependabot checks your dependencies weekly and automatically opens a PR whenever it finds a vulnerability.
+
+</Aside>

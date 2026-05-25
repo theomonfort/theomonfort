@@ -1,0 +1,36 @@
+---
+title: "TEST & SECURE: CodeQL"
+order: 9
+stepSlug: "test-secure-codeql"
+duration: 2
+summary: "Turn on CodeQL to scan your code for security vulnerabilities with static analysis."
+generated: true
+generatedFrom: "workshop-nikon.md"
+upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
+---
+{/*
+  AUTO-GENERATED FILE — do not edit by hand.
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ 6af362ccc165cae5c61ffc58550a5ebe9fe58b77
+  Regenerate via: node scripts/import-handson.mjs --force
+*/}
+
+import Aside from '../../../components/handson/Aside.astro';
+
+Turn on **CodeQL** to scan your code for security vulnerabilities using static analysis.
+
+### 9.1 — Enable CodeQL
+
+1. Repository **Settings** → **Security and quality** → **Advanced Security**
+2. **Tools** → **CodeQL analysis** → **Set up** → **Default** → **Enable CodeQL**
+
+<Aside type="negative">
+
+**Heads up**: CodeQL only scans languages that exist on the default branch. If you enable CodeQL **after** merging your first Astro PR, automatic TypeScript / JavaScript scans will run on subsequent pushes and PRs.
+
+</Aside>
+
+<Aside type="positive">
+
+**Why it matters**: CodeQL uses static analysis to find security issues like XSS and SQL injection.
+
+</Aside>

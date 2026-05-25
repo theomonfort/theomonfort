@@ -1,6 +1,16 @@
 ---
 question: 今いちばん大事なことは何？
 short: 明確なビジョンと、自分の "好み" を翻訳した要件。
+questionEn: What matters most right now?
+shortEn: A clear vision, and requirements that translate your own *taste*.
+bodyEn: |
+  Before AI, **the people who could build** won.
+  After AI, **the people who know what to build** win.
+
+  A clear vision. Tangible requirements. Aesthetics you refuse to compromise.
+  In an era where anyone can build anything, the products chosen are the ones from people with *good taste*.
+
+  > Your taste is your competitive advantage.
 order: 2
 ---
 

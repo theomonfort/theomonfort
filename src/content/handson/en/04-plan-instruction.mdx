@@ -1,0 +1,159 @@
+---
+title: "PLAN: Instruction"
+order: 4
+stepSlug: "plan-instruction"
+duration: 15
+summary: "An instruction file gives Copilot **always-on rules** at the repository or file level — it's the playbook that keeps every teammate's Copilot following the same conventions."
+generated: true
+generatedFrom: "workshop-nikon.md"
+upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
+---
+{/*
+  AUTO-GENERATED FILE — do not edit by hand.
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ 6af362ccc165cae5c61ffc58550a5ebe9fe58b77
+  Regenerate via: node scripts/import-handson.mjs --force
+*/}
+
+import Aside from '../../../components/handson/Aside.astro';
+
+<Aside type="reference">
+
+**📖 Reference**: See [Playbook / Instructions](https://theomonfort.github.io/theomonfort/en/playbook/instructions) for the role, scope, and trade-offs of instruction files.
+
+</Aside>
+
+An instruction file gives Copilot **always-on rules** at the repository or file level — it's the playbook that keeps every teammate's Copilot following the same conventions.
+
+In this step you'll create two kinds of instruction file:
+
+- **`.github/copilot-instructions.md`** — applied everywhere in the repo (language, stack, conventions)
+- **`.github/instructions/frontend.instructions.md`** — a **path instruction** that only applies to frontend files (design tokens)
+
+### 4.1 — Create the repo-wide instruction file
+
+Paste the following prompt into Copilot Chat:
+
+```
+Create `.github/copilot-instructions.md`. Write all content in English.
+The content should be exactly as follows:
+
+# Copilot Instructions
+
+## Language
+
+- Write all responses, comments, commit messages, and PR descriptions in **English**.
+
+## Stack
+
+- **Astro** only. Do not use Next.js, React Router, or SvelteKit.
+- Use Astro components (.astro) for pages and layouts.
+- Use Astro **content collections** (src/content/) for markdown content.
+- Style with Tailwind CSS. Add scoped <style> blocks when needed.
+- Use TypeScript everywhere (.ts files and .astro frontmatter).
+
+## Conventions
+
+- Pages live in src/pages/.
+- Reusable UI lives in src/components/.
+- Markdown lives in src/content/<collection>/*.md. Schemas are defined in src/content.config.ts.
+- The package manager is **pnpm**.
+
+## Code review
+
+- Run a **self-review** before submitting changes; align with existing files' conventions, naming, and templates.
+- PR descriptions must always cover **what / why / how to verify** (the three points).
+- For breaking changes (frontmatter schema, routing, build config), explicitly document the reasoning and impact.
+- Split large changes into smaller PRs to reduce review load.
+
+## Documentation lookups (must follow)
+
+Before writing any **Astro** code, you **must call the following Context7 MCP tools first**:
+
+1. Resolve the library ID with `resolve-library-id`.
+2. Fetch the latest docs with `get-library-docs`.
+3. Implement based on the docs you just fetched.
+
+**Prohibited**:
+- Do not skip Context7 just because you think you "already know it." Always check the docs, even for familiar technologies.
+```
+
+⏱ ~2 min
+
+<Aside type="positive">
+
+**Key point**: From here on, Copilot's responses switch to English and the stack constraints are enforced automatically.
+
+</Aside>
+
+### 4.2 — Create a frontend-only path instruction
+
+Now create a **path instruction** that only applies to specific file patterns. VS Code only hands this rule to Copilot when you touch files that match the `applyTo` glob.
+
+Paste the following prompt into Copilot Chat:
+
+```
+Create `.github/instructions/frontend.instructions.md`.
+Write all content in English. The YAML frontmatter at the top should be exactly:
+
+---
+applyTo: "**/*.{astro,css,tsx,jsx,ts,js,html}"
+description: "Frontend design tokens (retro JRPG theme)"
+---
+
+The body should include the following content in English:
+
+# Frontend Design Rules
+
+When working on styles, components, or layouts, always apply the tokens below.
+
+## Theme
+
+A retro JRPG / cyberpunk arcade. A radial background of deep purple → midnight → pitch black, with neon accents and pixel-style typography.
+
+## Colors
+
+| Role                       | Hex       | Tailwind            |
+| -------------------------- | --------- | ------------------- |
+| Pitch black (base)         | `#05060f` | `bg-shadow-ink`     |
+| Midnight (panels)          | `#0a0e27` | `bg-midnight`       |
+| Deep purple (top of bg)    | `#1a0b2e` | `bg-deep-purple`    |
+| Neon magenta               | `#ff2e88` | `text-neon-magenta` |
+| Neon cyan                  | `#00f0ff` | `text-neon-cyan`    |
+| Amber                      | `#ffb000` | `text-crt-amber`    |
+| Phosphor green             | `#9bbc0f` | `text-gb-green`     |
+| Body text                  | `#e8f4ff` | `text-phosphor`     |
+
+Build the `body` background as a radial gradient from deep purple → midnight → pitch black.
+
+## Fonts
+
+| Usage                            | Font                 | Tailwind        |
+| -------------------------------- | -------------------- | --------------- |
+| Latin headings (pixel)           | `'Press Start 2P'`   | `font-pixel`    |
+| Japanese headings (pixel)        | `'DotGothic16'`      | `font-pixel-jp` |
+| Body (JA + EN, default for body) | `'Noto Sans JP'`     | `font-body`     |
+| Code                             | `'IBM Plex Mono'`    | `font-mono`     |
+| CRT-style (numbers, accents)     | `'VT323'`            | `font-terminal` |
+
+Always fall back to `monospace` / `sans-serif`.
+
+## Effects
+
+- Subtle CRT scanlines (`.crt-lines`) as a full-screen overlay.
+- Neon glow: `shadow-neon-magenta` / `-cyan` / `-amber` / `-green` (= `0 0 8px <color>, 0 0 24px <rgba>`).
+- Borders: `1px dashed` or `2px solid` in a neon color. Keep contrast high — no soft pastel gradients.
+
+## Do not
+
+- Use bright / white backgrounds.
+- Use pill shapes or border-radius greater than 4px.
+- Use soft gray drop shadows (use glows only).
+```
+
+⏱ ~2 min
+
+<Aside type="positive">
+
+**Key point**: These design tokens are only handed to Copilot when you edit a `.astro` or `.css` file. They won't bleed into unrelated tasks like `/init` or docs editing — less noise, more focus.
+
+</Aside>

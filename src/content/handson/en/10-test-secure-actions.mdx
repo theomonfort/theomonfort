@@ -1,0 +1,81 @@
+---
+title: "TEST & SECURE: Actions"
+order: 10
+stepSlug: "test-secure-actions"
+duration: 15
+summary: "Write Playwright E2E tests so the Presentation site's keyboard navigation doesn't break, and set up a GitHub Actions workflow that runs them automatically on every PR."
+generated: true
+generatedFrom: "workshop-nikon.md"
+upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
+---
+{/*
+  AUTO-GENERATED FILE — do not edit by hand.
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ 6af362ccc165cae5c61ffc58550a5ebe9fe58b77
+  Regenerate via: node scripts/import-handson.mjs --force
+*/}
+
+import Aside from '../../../components/handson/Aside.astro';
+
+<Aside type="reference">
+
+**📖 Reference**: See [Playbook / GitHub Actions](https://theomonfort.github.io/theomonfort/en/playbook/github-actions/?present=1) for an overview of Actions workflow structure and triggers.
+
+</Aside>
+
+Let's write Playwright E2E tests so the Presentation site's **keyboard navigation** doesn't break, and set up a GitHub Actions workflow that runs them automatically on every PR.
+
+### 10.1 — Create tests for Presentation mode
+
+In Copilot Chat (Agent mode), enter the following:
+
+```
+Create a new branch `test-creation` and do your work on that branch.
+
+Create Playwright E2E tests that verify the Presentation site's keyboard navigation.
+
+Assumptions:
+- src/content/playbook/ contains at least 2 entries.
+- Opening the site displays Presentation mode by default.
+
+Test cases:
+1. Pressing `←` / `→` moves to the previous / next slide within the same section (one slide per `##` heading).
+2. Pressing `↓` / `↑` moves to the next / previous section (md file).
+3. The left sidebar shows all sections as a table of contents, with the current section highlighted.
+4. When switching between sections that have different frontmatter `color` values, the theme color (background, title, sidebar accent) changes accordingly.
+
+File layout:
+- Place the tests in tests/e2e/presentation.spec.ts.
+- Update playwright.config.ts if needed (baseURL, webServer configured to launch `pnpm dev`).
+
+Once the tests are written, run `pnpm exec playwright test` locally and make sure they all pass.
+```
+
+⏱ ~5 minutes
+
+### 10.2 — Create an Actions workflow that runs automatically on PRs
+
+Next, enter the following in Copilot Chat:
+
+```
+Continue working on the same `test-creation` branch.
+
+Create .github/workflows/test.yml.
+Trigger it on PR open / update, and have it perform the following steps:
+
+1. Set up Node.js 22
+2. Set up pnpm
+3. Install dependencies
+4. Install the Playwright browsers (`npx playwright install --with-deps chromium`)
+5. Run `pnpm exec playwright test`
+6. On test failure, upload the Playwright report as an artifact
+```
+
+⏱ ~2 minutes
+
+Re-create the PR and you'll see `test.yml` running in the Actions tab. Whenever you change Presentation mode behavior, this workflow will catch any regressions early.
+
+<Aside type="positive">
+
+**Key point**: By writing tests and running them continuously through Actions, you get a safety net that catches regressions — even as the Cloud Agent and the upcoming Agentic Workflow start opening PRs automatically.
+
+</Aside>

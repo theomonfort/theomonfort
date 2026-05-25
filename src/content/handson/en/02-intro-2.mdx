@@ -1,0 +1,69 @@
+---
+title: "INTRO: Setup"
+order: 2
+stepSlug: "intro-2"
+duration: 15
+summary: "This workshop uses the following GitHub repository:"
+generated: true
+generatedFrom: "workshop-nikon.md"
+upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
+---
+{/*
+  AUTO-GENERATED FILE — do not edit by hand.
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ 6af362ccc165cae5c61ffc58550a5ebe9fe58b77
+  Regenerate via: node scripts/import-handson.mjs --force
+*/}
+
+import Aside from '../../../components/handson/Aside.astro';
+
+This workshop uses the following GitHub repository:
+
+**Project URL**: [https://github.com/theomonfort/Github-copilot-workshop](https://github.com/theomonfort/Github-copilot-workshop)
+
+### Step 1: Create a repository from the template
+
+1. Open the project URL in your browser
+2. Click the **Use this template** button in the top right and select **Create a new repository**
+
+![Use this template → Create a new repository](/theomonfort/handson/img/use-this-template-dropdown.png)
+
+3. On the repository creation screen, configure the following:
+
+- For Owner, select an **Organization with Copilot / Actions / GHAS / Codespaces enabled**
+- For Visibility, select **Public**
+
+#### Repository name
+
+- Enter any name you like (e.g., `hands-on-yourname`)
+
+4. Click **Create repository**
+
+![Click the Create repository button](/theomonfort/handson/img/create-repository-form.png)
+
+### Step 2: Launch your dev environment with Codespaces
+
+1. On your newly created repository's page, click the green **Code** button
+2. Select the **Codespaces** tab
+3. Click **Create codespace on main**
+
+<Aside type="positive">
+
+**⏳ Note**: Starting a Codespace can take a few minutes. Please wait for the DevContainer build to finish.
+
+</Aside>
+
+The DevContainer automatically sets up a Node.js 22 environment, with the following pre-installed:
+
+- GitHub Copilot & Copilot Chat extensions
+- GitHub CLI (`gh`)
+- GitHub MCP Server (`.vscode/mcp.json`, auto-discovery enabled)
+- Copilot CLI (`@github/copilot`)
+- pnpm (package manager)
+- gh-aw (Agentic Workflow CLI)
+- Playwright (Chromium browser pre-installed)
+
+### Step 3: Review the source content
+
+Markdown files are placed in `src/content/playbook/`. These are the material for today's site.
+
+In VS Code's explorer, open `src/content/playbook/` and take a peek at a few of the files. Later, you'll have Copilot turn them into a site that can be browsed as a "grid + detail + presentation mode" experience.

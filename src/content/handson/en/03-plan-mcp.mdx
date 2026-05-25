@@ -1,0 +1,94 @@
+---
+title: "PLAN: MCP Servers"
+order: 3
+stepSlug: "plan-mcp"
+duration: 10
+summary: "In this step, you'll review and add MCP (Model Context Protocol) Servers that give Copilot access to external tools. Once MCP is wired up, Copilot can directly do things like create Issues and look up the latest documentation."
+generated: true
+generatedFrom: "workshop-nikon.md"
+upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
+---
+{/*
+  AUTO-GENERATED FILE — do not edit by hand.
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ 6af362ccc165cae5c61ffc58550a5ebe9fe58b77
+  Regenerate via: node scripts/import-handson.mjs --force
+*/}
+
+import Aside from '../../../components/handson/Aside.astro';
+
+<Aside type="reference">
+
+**📖 Reference**: See [Playbook / MCP Server](https://theomonfort.github.io/theomonfort/en/playbook/mcp/) for how MCP works, its transports (stdio / HTTP), and how to configure it in VS Code.
+
+</Aside>
+
+In this step, you'll review and add **MCP (Model Context Protocol) Servers** that give Copilot access to external tools. Once MCP is wired up, Copilot can directly do things like create Issues and look up the latest documentation.
+
+### 3.1 — Verify the GitHub MCP Server
+
+This repository already has the GitHub MCP Server configured in `.vscode/mcp.json`. When the Codespace starts, VS Code will automatically check the connection.
+
+Open `.vscode/mcp.json` and confirm that the following configuration is present:
+
+```json
+{
+  "servers": {
+    "github-mcp-server": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/"
+    }
+  }
+}
+```
+
+Click the **🔧 tools button** in the Copilot Chat input area (to the right of the model picker) and confirm that the `github-mcp-server` tools (Issues / PRs / code search, etc.) appear in the list.
+
+⏱ About 1 minute
+
+<Aside type="positive">
+
+**Tip**: The GitHub MCP Server is officially provided by GitHub. It feels like running `gh` commands — Copilot can directly operate Issues / PRs / Actions / Code search.
+
+</Aside>
+
+### 3.2 — Add the Context7 MCP Server
+
+**Context7** is an MCP Server that pulls **the latest official documentation** for libraries and frameworks into Copilot. It's essential for this workshop, where we use fast-moving frameworks like Astro / Tailwind / TypeScript.
+
+1. Open the command palette with **Cmd+Shift+P** (or **Ctrl+Shift+P** on Windows/Linux)
+2. Type and select **"MCP: Add Server…"**
+3. For the transport, select **"HTTP"**
+4. Paste `https://mcp.context7.com/mcp` as the URL
+5. When prompted for the **Server ID**, change the default `my-mcp-server-xxxxxxxx` to **`context7`** (important: this makes it easier to identify in Copilot Chat's `#` completion and tool list)
+6. For the save location, select **"Workspace"**
+
+After installation, confirm that `context7` has been added to `.vscode/mcp.json`:
+
+```json
+{
+  "servers": {
+    "github-mcp-server": { "type": "http", "url": "https://api.githubcopilot.com/mcp/" },
+    "context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp"
+    }
+  }
+}
+```
+
+When you open `.vscode/mcp.json`, a small status indicator like **`Running | N tools`** appears above each server. If you see **`2 tools`** next to `context7` (`resolve-library-id` and `get-library-docs`), the connection succeeded. If not, click **Start**.
+
+To verify it works, try the following in Copilot Chat:
+
+```
+Use Context7 to summarize the latest documentation for Astro content collections.
+```
+
+⏱ About 2 minutes
+
+<Aside type="positive">
+
+**Tip**: Adding the HTTP version directly means you don't need `npx` to download a package, so startup completes instantly. If you go through **"Browse MCP Servers"** on the Marketplace, the stdio (npx-based) `io.github.upstash/context7` is selected instead, and the package download on first launch can take time or even get stuck. The HTTP version avoids that wait entirely.
+From now on, just ask "What's the latest Astro API?" or "What's the new syntax in Tailwind v4?" and Copilot will pull the official docs via Context7. You no longer need to worry about training data cut-offs.
+
+</Aside>

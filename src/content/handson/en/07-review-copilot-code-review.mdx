@@ -1,0 +1,103 @@
+---
+title: "REVIEW: Copilot Code Review"
+order: 7
+stepSlug: "review-copilot-code-review"
+duration: 15
+summary: "Once the implementation runs, plug Copilot Code Review into your harness before opening a PR. The rules from copilot-instructions.md (language, stack, review focus) automatically flow into the review."
+generated: true
+generatedFrom: "workshop-nikon.md"
+upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
+---
+{/*
+  AUTO-GENERATED FILE — do not edit by hand.
+  Source: 2026-Github-Copilot-Workshop/workshop-nikon.md @ 6af362ccc165cae5c61ffc58550a5ebe9fe58b77
+  Regenerate via: node scripts/import-handson.mjs --force
+*/}
+
+import Aside from '../../../components/handson/Aside.astro';
+
+<Aside type="reference">
+
+**📖 Reference**: See [Playbook / Copilot Code Review](https://theomonfort.github.io/theomonfort/en/playbook/copilot-code-review/?present=1) for how Code Review automation works and how Custom Instructions feed into it.
+
+</Aside>
+
+Once the implementation runs, plug **Copilot Code Review** into your harness before opening a PR. The rules in `copilot-instructions.md` (language, stack, review focus) automatically flow into the review.
+
+### 7.1 — Enable Copilot Code Review settings
+
+First, check the Copilot Code Review settings.
+
+1. Repository **Settings** → **Copilot** → **Code review**
+2. Enable the following:
+   - **Use custom instructions when reviewing pull requests** → On
+
+<Aside type="positive">
+
+**Why it matters**: Enabling custom instructions makes `copilot-instructions.md` apply to code reviews as well.
+
+</Aside>
+
+### 7.2 — Create a Ruleset for automatic review
+
+Configure Copilot to automatically review pull requests when they're opened. Creating the Ruleset **directly from the Code review settings page** is the fastest path.
+
+1. On the **Settings** → **Copilot** → **Code review** page, find the **Automatic code review** section
+2. Click **Add a ruleset** (or **Create ruleset**) → the Ruleset creation page opens with **Automatically request Copilot code review** already enabled
+
+<Aside type="positive">
+
+**Why it matters**: While you're on the Ruleset screen, it's a good idea to also enable:
+
+- **Review new pushes** — automatically re-reviews on every push
+- **Require a pull request before merging** — disallow direct pushes
+- Add **Repository admin** to the **Bypass list** — so you don't get blocked waiting for reviews during the workshop
+
+</Aside>
+
+### 7.3 — Open a PR and check the results
+
+Push the site you built in Section 6 to the remote and open a PR. The Ruleset from 7.2 will trigger Copilot Code Review automatically. Let Copilot Chat's Agent mode handle this for you:
+
+> ```
+> Commit and push the changes on the current branch, then open a PR against main. Write the title and body in English, summarizing what changed.
+> ```
+
+When the PR opens, Copilot Code Review fires automatically (⏱ about 5 minutes):
+
+- ✅ **Pull Request Overview** — a summary comment for the whole PR
+- ✅ **Code suggestions** — concrete change proposals on individual files
+
+<Aside type="positive">
+
+**Why it matters**: You can transparently follow what Copilot is doing during the review via the **"View session"** link on the PR, or by opening the matching workflow run from the **Actions** tab. You can see which files it read and how it reasoned.
+
+</Aside>
+
+### 7.4 — Apply the review suggestions
+
+There are two ways to apply Copilot's review suggestions:
+
+1. **Commit suggestion** — commit individual suggestions one at a time
+2. **Fix batch with Copilot** — fix all suggestions in one go (recommended)
+
+Clicking **Fix batch with Copilot** automatically opens a **new PR** with the fixes (⏱ about 15 minutes).
+
+1. First, merge the **new PR with the fixes**
+2. Then, merge the **original PR**
+
+<Aside type="negative">
+
+**Heads up**: In some cases, no new PR is created and the fixes are committed directly to the original PR. If that happens, just merge the original PR as-is.
+
+</Aside>
+
+<Aside type="positive">
+
+**Why it matters**:
+
+- Copilot Code Review sessions are visible in the **Actions** tab — the review process is fully transparent.
+- The review comments come back in English because of the language setting in `copilot-instructions.md`!
+- You can customize the review focus (e.g. security-first, performance-first) by adding review guidelines to `copilot-instructions.md`.
+
+</Aside>
