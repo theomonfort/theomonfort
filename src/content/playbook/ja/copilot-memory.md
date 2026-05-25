@@ -22,7 +22,7 @@ links:
 
 ## 一言で
 
-<div class="hero-quote">
+<div class="hero-quote hero-quote-team">
   <p>
     <strong>Copilot Memory</strong> は <strong>Code Review / Cloud Agent / CLI</strong> がリポジトリで学んだ知識を <strong>記憶し再利用</strong> する仕組み。
   </p>
@@ -35,9 +35,9 @@ links:
 
 ### スコープ
 
-- 📦 **リポジトリ単位** — 記憶はリポジトリに紐づき、そのリポジトリ内でのみ使用される
-- 👥 **全ユーザー共有** — リポジトリにアクセスできる全ユーザーの Copilot 操作で利用可能
-- 🔀 **クロスフィーチャー** — Cloud Agent が学んだ知識を Code Review が活用（逆も同様）
+- 📦 **リポジトリ単位** — 記憶はリポジトリに紐づき、アクセスできる **全ユーザーで共有** される
+- 👤 **ユーザー単位**（Pro / Pro+、Early Access） — 個人の好みが **全リポジトリ・全 Copilot エージェント** に追従し、**他のユーザーには影響しない**。例：コミットスタイル、PR の構成、トーン。管理は<a href="https://github.com/settings/copilot/memory" target="_blank" rel="noopener noreferrer">個人の Copilot Memory 設定 ↗</a>から
+- 🔀 **クロスフィーチャー** — Cloud Agent が学んだ知識を Code Review・CLI も活用（逆も同様）
 
 ### 仕組み
 

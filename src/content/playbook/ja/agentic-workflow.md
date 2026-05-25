@@ -23,7 +23,7 @@ links:
 
 ## 一言で
 
-<div class="hero-quote">
+<div class="hero-quote hero-quote-team">
   <p>
     <strong>Agentic Workflow</strong> は <strong>GitHub Actions の上で AI エージェント</strong> が作業を自動化する仕組み。
   </p>

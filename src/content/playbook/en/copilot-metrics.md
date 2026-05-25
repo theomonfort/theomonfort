@@ -28,7 +28,7 @@ links:
 
 ## In a nutshell
 
-<div class="hero-quote">
+<div class="hero-quote hero-quote-team">
   <p>
     <strong>Copilot Metrics</strong>
   </p>

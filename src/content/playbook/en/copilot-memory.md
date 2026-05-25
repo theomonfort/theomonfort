@@ -22,7 +22,7 @@ links:
 
 ## In a nutshell
 
-<div class="hero-quote">
+<div class="hero-quote hero-quote-team">
   <p>
     <strong>Copilot Memory</strong> is a mechanism for <strong>Code Review / Cloud Agent / CLI</strong> to <strong>remember and reuse</strong> knowledge learned in a repository.
   </p>
@@ -35,9 +35,9 @@ links:
 
 ### Scope
 
-- 📦 **Per repository** — memories are tied to a repository and used only within it
-- 👥 **Shared across users** — available in Copilot sessions for all users who have access to the repository
-- 🔀 **Cross-feature** — knowledge learned by Cloud Agent is available to Code Review, and vice versa
+- 📦 **Per repository** — memories tied to a repo, **shared across users** who have access
+- 👤 **Per user** (Pro / Pro+, early access) — personal preferences that follow **you** across all repos and Copilot agents, **without affecting others**. Examples: preferred commit style, PR structure, tone. Manage them in your <a href="https://github.com/settings/copilot/memory" target="_blank" rel="noopener noreferrer">personal Copilot Memory settings ↗</a>
+- 🔀 **Cross-feature** — knowledge learned by Cloud Agent is available to Code Review, CLI, and vice versa
 
 ### How it works
 

@@ -23,7 +23,7 @@ links:
 
 ## In a nutshell
 
-<div class="hero-quote">
+<div class="hero-quote hero-quote-team">
   <p>
     <strong>Agentic Workflow</strong> is a mechanism where <strong>AI agents automate work on top of GitHub Actions</strong>.
   </p>

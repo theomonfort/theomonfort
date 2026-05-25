@@ -533,11 +533,11 @@ a.retro-link:hover::after {
   transform: translateY(-50%);
   width: 170px;
   height: 170px;
-  background: url('/theomonfort/octocat-mascot.png') center / contain no-repeat;
+  background: url('/theomonfort/octocat-full-green.png') center / contain no-repeat;
   filter: drop-shadow(2px 4px 0 #05060f);
 }
 .handson-article .hero-quote.hero-quote-mona::before {
-  background-image: url('/theomonfort/octocat-mona.png');
+  background-image: url('/theomonfort/octocat-full-mona.png');
 }
 .handson-article .hero-quote::after {
   content: '';
@@ -679,7 +679,7 @@ a.retro-link:hover::after {
   transform: translateY(-50%);
   width: 130px;
   height: 130px;
-  background: var(--aside-mascot, url('/theomonfort/octocat-green.png')) center / contain no-repeat;
+  background: var(--aside-mascot, url('/theomonfort/octocat-profile-green.png')) center / contain no-repeat;
   filter: drop-shadow(2px 4px 0 #05060f);
 }
 .handson-aside.aside-reference::after {

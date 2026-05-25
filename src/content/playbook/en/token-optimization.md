@@ -286,7 +286,7 @@ Wrong tier = up to **~24× cost difference** for the same task. Defaulting to a 
 
 <style>.advice6-models td:first-child,.advice6-models th:first-child{min-width:200px;white-space:nowrap;}</style>
 
-<div class="advice6-models" style="border-top:2px solid #9bbc0f;padding-top:1em;">
+<div class="advice6-models">
 
 | Tier | Models | Use for |
 | --- | --- | --- |

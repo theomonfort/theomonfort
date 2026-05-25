@@ -97,11 +97,11 @@ export interface HandsonCategoryStyle {
 }
 
 const CATEGORY_STYLES: Record<HandsonCategory, HandsonCategoryStyle> = {
-  introduction: { accent: '#ffb000', mascot: '/theomonfort/octocat-green.png' },
-  plan:         { accent: '#9bbc0f', mascot: '/theomonfort/octocat-green.png' },
-  develop:      { accent: '#ff2e88', mascot: '/theomonfort/octocat-red.png' },
-  review:       { accent: '#ffb000', mascot: '/theomonfort/octocat-yellow.png' },
-  secure:       { accent: '#00f0ff', mascot: '/theomonfort/octocat-blue.png' },
+  introduction: { accent: '#ffb000', mascot: '/theomonfort/octocat-profile-green.png' },
+  plan:         { accent: '#9bbc0f', mascot: '/theomonfort/octocat-profile-green.png' },
+  develop:      { accent: '#ff2e88', mascot: '/theomonfort/octocat-profile-red.png' },
+  review:       { accent: '#ffb000', mascot: '/theomonfort/octocat-profile-yellow.png' },
+  secure:       { accent: '#00f0ff', mascot: '/theomonfort/octocat-profile-blue.png' },
   operate:      { accent: '#9bbc0f', mascot: '/theomonfort/octocat-team.png' },
 };
 

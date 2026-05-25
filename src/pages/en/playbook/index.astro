@@ -26,6 +26,15 @@ const grouped = categories.map((cat) => ({
         {t.playbook.intro}
       </p>
 
+      <div class="mt-5 max-w-2xl border-2 border-crt-amber/60 bg-crt-amber/5 p-3 flex items-start gap-3">
+        <span class="text-xl shrink-0" aria-hidden="true">⚠️</span>
+        <p class="font-body text-xs text-phosphor/85 leading-relaxed">
+          <span class="font-pixel text-[10px] text-crt-amber tracking-[0.2em] uppercase">For learning</span>
+          — this playbook is a personal learning resource. Some details may be outdated. For the source of truth, always refer to the
+          <a href="https://docs.github.com/en/copilot" target="_blank" rel="noopener noreferrer" class="text-neon-cyan hover:text-neon-magenta underline">latest GitHub documentation ↗</a>.
+        </p>
+      </div>
+
       <nav class="mt-8 flex flex-wrap md:flex-nowrap items-center gap-2 md:gap-3">
         {grouped.filter((g) => g.items.length > 0 && g.id !== 'introduction').map((g, i, arr) => {
           const c = accentClasses[g.color];

@@ -188,6 +188,12 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 
     <div class="present-overlay-hint font-pixel text-[10px]" aria-hidden="true">
       <span><span class="key">◀</span> <span class="key">▶</span> {t.playbook.slides}</span>
+      <a
+        class="present-lang-toggle"
+        href={`${localizedPath('en', `/playbook/${item.slug}`)}?present=1`}
+        data-other-locale-base={localizedPath('en', `/playbook/${item.slug}`)}
+        aria-label="Switch to English"
+      ><span class="key">EN</span></a>
       <span><span class="key">Esc</span> {t.playbook.exit}</span>
     </div>
 
@@ -450,6 +456,19 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       btn.addEventListener('click', () =>
         setPresent(!document.body.classList.contains('present-mode'))
       );
+    }
+    const langToggle = document.querySelector<HTMLAnchorElement>('.present-lang-toggle');
+    if (langToggle && !langToggle.dataset.bound) {
+      langToggle.dataset.bound = '1';
+      langToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        const base = langToggle.dataset.otherLocaleBase || langToggle.getAttribute('href') || '';
+        const cleanBase = base.split('?')[0];
+        const params = new URLSearchParams();
+        params.set('present', '1');
+        if (current > 0) params.set('slide', String(current));
+        navigateSmooth(`${cleanBase}?${params.toString()}`);
+      });
     }
   }
 
@@ -750,11 +769,11 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     transform: translateY(-50%);
     width: 130px;
     height: 130px;
-    background: url('/octocat-mascot.png') center / contain no-repeat;
+    background: url('/octocat-full-green.png') center / contain no-repeat;
     filter: drop-shadow(2px 4px 0 #05060f);
   }
   .prose-akq .hero-quote.hero-quote-chat::before {
-    background-image: url('/octocat-chat.png');
+    background-image: url('/octocat-full-red.png');
   }
   .prose-akq .hero-quote.hero-quote-theo::before {
     background-image: url('/theomonfort.png');
@@ -763,19 +782,19 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     clip-path: circle(50% at 50% 50%);
   }
   .prose-akq .hero-quote.hero-quote-soon::before {
-    background-image: url('/octocat-monocle.png');
+    background-image: url('/octocat-full-blue.png');
   }
   .prose-akq .hero-quote.hero-quote-green::before {
-    background-image: url('/octocat-green.png');
+    background-image: url('/octocat-profile-green.png');
   }
   .prose-akq .hero-quote.hero-quote-stars::before {
-    background-image: url('/octocat-stars.png');
+    background-image: url('/octocat-full-yellow.png');
   }
   .prose-akq .hero-quote.hero-quote-red::before {
-    background-image: url('/octocat-red.png');
+    background-image: url('/octocat-profile-red.png');
   }
   .prose-akq .hero-quote.hero-quote-mona::before {
-    background-image: url('/octocat-mona.png');
+    background-image: url('/octocat-full-mona.png');
   }
   .prose-akq .hero-quote.hero-quote-team::before {
     background-image: url('/octocat-team.png');
@@ -787,7 +806,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   body.present-mode .prose-akq .hero-quote.hero-quote-plain { margin-left: 0; }
   /* TEST & SECURE category → full-body blue octocat by default (overridable per-entry) */
   [data-category="secure"].prose-akq .hero-quote::before {
-    background-image: url('/octocat-monocle.png');
+    background-image: url('/octocat-full-blue.png');
   }
   [data-category="secure"].prose-akq .hero-quote.hero-quote-plain::before { background-image: none; }
   /* Speech bubble pointer (notch on the left side, in accent color) */
@@ -1489,6 +1508,17 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     border: 1px solid #00f0ff;
     margin: 0 2px;
   }
+  .present-overlay-hint .present-lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: color 0.15s, transform 0.15s;
+  }
+  .present-overlay-hint .present-lang-toggle:hover { color: #ff2e88; transform: translate(-1px, -1px); }
+  .present-overlay-hint .present-lang-toggle:hover .key { background: rgba(255, 46, 136, 0.15); border-color: #ff2e88; }
 
   /* ── Presentation mode ── */
   body.present-mode { background: #05060f !important; overflow: hidden; }
