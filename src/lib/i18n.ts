@@ -59,7 +59,7 @@ export const siteCopy = {
     localeCode: 'ja_JP',
     siteTitle: 'AI KUDŌ KAIHATSU QUEST — AI駆動開発クエスト',
     siteDescription:
-      'AI駆動開発の伝説的な道場。プロンプト・コンテキスト・ハーネス・MCP・エージェントスキルの全てを、レトロJRPGの世界で学ぼう。',
+      'GitHub Copilot で AI 駆動開発を SDLC 全体（Plan → Code → Review → Secure → Operate）にわたって学ぶ、レトロ JRPG 風の道場。',
     brandAria: 'AI 駆動開発 QUEST — ホームへ',
     brandMiddle: '駆動開発',
     nav: {
@@ -269,7 +269,7 @@ export const siteCopy = {
     localeCode: 'en_US',
     siteTitle: 'AI-Driven Development Quest',
     siteDescription:
-      'A retro JRPG dojo for learning AI-driven development with GitHub Copilot, prompts, context, MCP, harnesses, and agent skills.',
+      'A retro JRPG-style dojo for learning AI-driven development across the SDLC with GitHub Copilot — Plan, Code, Review, Secure, Operate.',
     brandAria: 'AI-Driven Development Quest — home',
     brandMiddle: 'DRIVEN DEV',
     nav: {
