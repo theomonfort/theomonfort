@@ -142,7 +142,7 @@ Drop in [`actions/dependency-review-action`](https://github.com/actions/dependen
 
 ## AI triage: assign alerts to an agent
 
-Every Dependabot alert now has an **"Assign to agent"** button — hand the alert to Copilot / Claude / Codex and the agent reads the advisory + your repo to **triage and remediate**. This is GitHub's answer to deep static analysis: instead of a noisy upfront scan, the agent does the deeper work **on demand, per alert**.
+Every Dependabot alert has an **"Assign to agent"** button — hand it to Copilot / Claude / Codex and the agent reads the advisory + your repo to **triage and remediate** on demand, per alert.
 
 - 🔍 **What the agent typically does** — reachability check ("is the vulnerable function actually called from my code path?"), exploitability assessment in your context, then a **draft fix PR** that handles breaking changes, downgrades, and refactors
 - 🏁 **Race multiple agents** on the same alert and compare the resulting PRs

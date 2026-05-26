@@ -142,7 +142,7 @@ updates:
 
 ## AI triage: alert を agent に渡す
 
-各 Dependabot alert に **「Assign to agent」** ボタンがあり、Copilot / Claude / Codex に alert を渡すと、agent が advisory とリポジトリを読んで **triage と修正** を行う。これが GitHub の深い静的解析への回答 — 重いスキャンを前段で走らせる代わりに、**alert ごとに on-demand** で agent が深掘りする。
+各 Dependabot alert に **「Assign to agent」** ボタンがあり、Copilot / Claude / Codex に渡すと、agent が advisory とリポジトリを読んで **alert ごとに on-demand で triage と修正** を行う。
 
 - 🔍 **agent が typically やること** — reachability チェック(「脆弱関数が実際に自分のコードパスから呼ばれているか？」)、自分のコンテキストでの exploitability 判定、そして breaking change / downgrade / refactor まで含む **draft 修正 PR** の作成
 - 🏁 同じ alert に **複数 agent を競わせて** PR を比較できる
