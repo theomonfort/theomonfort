@@ -140,15 +140,16 @@ Drop in [`actions/dependency-review-action`](https://github.com/actions/dependen
 
 > ⚠️ **PR-time gate — not a continuous watcher.** Always pair it with **Dependabot alerts**, which catch CVEs published *after* merge.
 
-## No reachability analysis — by design
+## AI triage: assign alerts to an agent
 
-GitHub **does not ship deep reachability analysis** (i.e. "is this vulnerable function actually called from my code?"). Tools like Snyk do — but reachability is **noisy**, and a wrong "unreachable" verdict silently buries a real risk. GitHub's bet is the opposite: **alert on every match, then make triage cheap**.
+Every Dependabot alert now has an **"Assign to agent"** button — hand the alert to Copilot / Claude / Codex and the agent reads the advisory + your repo to **triage and remediate**. This is GitHub's answer to deep static analysis (Snyk-style reachability checks): instead of a noisy upfront scan, the agent does the deeper work **on demand, per alert**.
 
-- 🤖 **Assign to agent** *(on every Dependabot alert)* — hand the alert to Copilot / Claude / Codex; the agent reads the advisory + your repo and opens a **draft fix PR** (handles breaking changes, downgrades, refactors). You can even race multiple agents on the same alert.
-- 🧹 **Auto-triage rules** — auto-dismiss or snooze low-impact alerts by **severity, ecosystem, dependency scope (runtime vs dev)**. Cuts noise without hiding production risk.
-- 👀 Treat AI fixes as **first-pass**: human review + tests are still required before merge.
+- 🔍 **What the agent typically does** — reachability check ("is the vulnerable function actually called from my code path?"), exploitability assessment in your context, then a **draft fix PR** that handles breaking changes, downgrades, and refactors
+- 🏁 **Race multiple agents** on the same alert and compare the resulting PRs
+- 🧹 **Auto-triage rules** — separately, auto-dismiss / snooze low-impact alerts by **severity, ecosystem, dependency scope (runtime vs dev)** so the agents only see alerts worth looking at
+- 👀 Treat agent fixes as **first-pass**: human review + tests still required before merge
 
-> 🎯 The mental model isn't "trust the scanner less" — it's **"keep the recall high, let an AI close the alerts that matter"**. Alert → *Assign to agent* → draft PR → human review → merge.
+> 🎯 Alert → *Assign to agent* → reachability + fix → draft PR → human review → merge. The bottleneck shifts from patch synthesis to approval.
 
 > 💰 Free for public repos. Private repos need **GitHub Code Security** (or the legacy Advanced Security bundle).
 

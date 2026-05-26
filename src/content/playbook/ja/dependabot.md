@@ -140,15 +140,16 @@ updates:
 
 > ⚠️ **PR タイムのゲートであり常時監視ではない**。マージ後に公開された CVE を拾うのは Dependabot alerts の役目 — **必ず両方を併用** する。
 
-## Reachability analysis を持たない — それは意図的な選択
+## AI triage: alert を agent に渡す
 
-GitHub は **深い reachability analysis(脆弱関数が実際に呼ばれているかの解析)を提供していない**。Snyk などは持っているが、reachability は **誤判定(false positive / false negative)が多く**、「呼ばれていない」という誤った判定が本当のリスクを隠してしまう。GitHub は逆に賭ける: **すべての一致を alert として上げ、triage を安く済ませる**。
+各 Dependabot alert に **「Assign to agent」** ボタンがあり、Copilot / Claude / Codex に alert を渡すと、agent が advisory とリポジトリを読んで **triage と修正** を行う。これが GitHub の深い静的解析(Snyk 式 reachability)への回答 — 重いスキャンを前段で走らせる代わりに、**alert ごとに on-demand** で agent が深掘りする。
 
-- 🤖 **Assign to agent**（各 Dependabot alert 上のボタン）— alert を Copilot / Claude / Codex に渡すと、agent が advisory とリポジトリを読み **draft の修正 PR を作る**(breaking change, downgrade, refactor 対応)。同じ alert に複数 agent を競わせることも可能。
-- 🧹 **Auto-triage rules** — **severity / ecosystem / dependency scope(runtime か dev か)** で低リスクの alert を自動 dismiss / snooze。本番リスクを隠さずにノイズを削る。
-- 👀 AI の修正は **first-pass** として扱う。マージ前のレビューとテストは依然として人間の仕事。
+- 🔍 **agent が typically やること** — reachability チェック(「脆弱関数が実際に自分のコードパスから呼ばれているか？」)、自分のコンテキストでの exploitability 判定、そして breaking change / downgrade / refactor まで含む **draft 修正 PR** の作成
+- 🏁 同じ alert に **複数 agent を競わせて** PR を比較できる
+- 🧹 **Auto-triage rules** — 別軸として、**severity / ecosystem / dependency scope(runtime か dev か)** で低リスク alert を自動 dismiss / snooze。agent が見る alert を本物だけに絞れる
+- 👀 agent の修正は **first-pass** として扱う。マージ前の人間レビュー + テストは依然として必須
 
-> 🎯 メンタルモデルは「scanner を信用しない」ではなく **「recall(検出率)は高いまま、AI で重要な alert を閉じる」**。Alert → *Assign to agent* → draft PR → 人間レビュー → merge。
+> 🎯 Alert → *Assign to agent* → reachability + fix → draft PR → 人間レビュー → merge。ボトルネックは「パッチ合成」から「承認」へ移る。
 
 > 💰 Public repo は無料。Private repo は **GitHub Code Security**(旧 Advanced Security バンドル)が必要。
 
