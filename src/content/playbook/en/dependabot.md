@@ -35,6 +35,9 @@ links:
   - group: 📖 Official Documentation
     label: About Dependabot auto-triage rules
     url: https://docs.github.com/en/code-security/dependabot/dependabot-auto-triage-rules/about-dependabot-auto-triage-rules
+  - group: 📖 Official Documentation
+    label: Malware alerts for Dependabot
+    url: https://gh.io/dependabot-malware
   - group: 📰 Recent Changelog
     label: "Expanded OIDC support for Dependabot and code scanning (2026-05-19)"
     url: https://github.blog/changelog/2026-05-19-expanded-oidc-support-for-dependabot-and-code-scanning
@@ -70,10 +73,13 @@ Dependabot has **3 distinct features**. They're often confused, but they serve d
 | Feature | What does it do? | Trigger | Output |
 | --- | --- | --- | --- |
 | 🚨 **Security alerts** | Notifies you of vulnerabilities in existing dependencies | When a new CVE is added to the GitHub Advisory Database | Security tab + email |
+| 🦠 **Malware alerts** | Flags npm packages with known malicious versions | New malware advisory in GHAD matching your deps | Security tab (separate subcategory) |
 | 🔧 **Security updates** | Automatically opens a PR to fix the vulnerability | When an alert fires (automatically) | PR (bumps vulnerable dep to fixed version) |
 | ⏰ **Version updates** | Opens PRs to keep up with new versions regardless of vulnerability | Schedule defined in config file (daily / weekly) | PR (old → latest) |
 
 > 🔑 **Alerts** = detection only; **Updates** = creates fix PRs. Security updates are layered on top of Alerts — they won't run without Alerts enabled.
+
+> 🦠 **Malware alerting is opt-in** (`Settings → Code security → Dependabot → Malware alerts`) and **npm-only today** (more ecosystems coming via OpenSSF Malware Streams). Re-launched in 2026 with a separate subcategory + auto-triage rules to keep noise low.
 
 ## The role of the dependency graph
 
