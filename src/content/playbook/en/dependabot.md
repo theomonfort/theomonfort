@@ -23,6 +23,15 @@ links:
   - group: 📖 Official Documentation
     label: Configuring Dependabot security updates
     url: https://docs.github.com/en/code-security/dependabot/dependabot-security-updates/configuring-dependabot-security-updates
+  - group: 📖 Official Documentation
+    label: About dependency review
+    url: https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/about-dependency-review
+  - group: 📖 Official Documentation
+    label: Configuring the dependency review action
+    url: https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/configuring-the-dependency-review-action
+  - group: 📖 Official Documentation
+    label: actions/dependency-review-action (GitHub)
+    url: https://github.com/actions/dependency-review-action
   - group: 📰 Recent Changelog
     label: "Expanded OIDC support for Dependabot and code scanning (2026-05-19)"
     url: https://github.blog/changelog/2026-05-19-expanded-oidc-support-for-dependabot-and-code-scanning
@@ -109,6 +118,55 @@ updates:
 **Step 3 — Enable for the whole Org / Enterprise**
 
 From `Org → Settings → Code security`, use **default settings** to apply to all repositories at once.
+
+## Companion: Dependency Review
+
+**Dependency Review** is the **PR-time** companion to Dependabot. While Dependabot continuously watches your default branch for newly-published CVEs, Dependency Review shows a **rich diff of dependency changes on every pull request — on any base branch** — so a vulnerable or non-compliant dependency never gets merged in the first place.
+
+| | Dependency Review | Dependabot alerts |
+| --- | --- | --- |
+| **When it runs** | On every PR (any base branch) | Continuously, as new CVEs land |
+| **What it checks** | The dependency diff of the PR | Current state of the default branch |
+| **Stops the merge?** | ✅ Yes (when set as a required check) | ❌ No (informational only) |
+| **License compliance** | ✅ Allow / deny lists | ❌ N/A |
+
+### What it catches
+
+- 🚨 **Vulnerable packages** introduced or upgraded in the PR — configurable severity threshold (`fail-on-severity`)
+- 📜 **License compliance** — allow / deny lists (e.g. block GPL-3.0 in a proprietary repo)
+- 📦 **What changed** — added, removed, updated dependencies, including transitive ones resolved from lockfiles
+- 🕰️ **Package age** and how many projects depend on it
+
+### How to enable it
+
+**Step 1 — Surface the PR diff** — Dependency Review activates automatically once the dependency graph is on (which Dependabot already requires). Open any PR that touches a manifest / lockfile → **Files changed** tab → expand the dependency diff.
+
+**Step 2 — Enforce it via `actions/dependency-review-action`**
+
+```yaml
+# .github/workflows/dependency-review.yml
+name: Dependency Review
+on: [pull_request]
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high
+          deny-licenses: GPL-3.0, AGPL-3.0
+          comment-summary-in-pr: always
+```
+
+Make it a **required status check** on protected branches so the PR can't merge until it passes. Org owners can enforce it across all repos via repository rulesets.
+
+> ⚠️ **It's a PR-time gate, not a continuous watcher.** A dependency that was clean when it was merged can have a CVE published the next day — that's why you still need **Dependabot alerts + security updates** running underneath. Dependency Review prevents new problems from entering; Dependabot fixes the ones that emerge later.
+
+> 💰 Free for public repos. Private repos need **GitHub Code Security** (or the legacy Advanced Security bundle).
 
 ## Eligibility and pricing
 

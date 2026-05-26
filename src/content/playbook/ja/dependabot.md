@@ -23,6 +23,15 @@ links:
   - group: 📖 公式ドキュメント
     label: Configuring Dependabot security updates
     url: https://docs.github.com/en/code-security/dependabot/dependabot-security-updates/configuring-dependabot-security-updates
+  - group: 📖 公式ドキュメント
+    label: About dependency review
+    url: https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/about-dependency-review
+  - group: 📖 公式ドキュメント
+    label: Configuring the dependency review action
+    url: https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/configuring-the-dependency-review-action
+  - group: 📖 公式ドキュメント
+    label: actions/dependency-review-action (GitHub)
+    url: https://github.com/actions/dependency-review-action
   - group: 📰 Recent Changelog
     label: "Expanded OIDC support for Dependabot and code scanning (2026-05-19)"
     url: https://github.blog/changelog/2026-05-19-expanded-oidc-support-for-dependabot-and-code-scanning
@@ -109,6 +118,55 @@ updates:
 **Step 3 — Org / Enterprise で一括 ON にしたい場合**
 
 `Org → Settings → Code security` から **default settings** で全リポジトリに適用できる。
+
+## 補完機能: Dependency Review
+
+**Dependency Review** は Dependabot の **PR タイム版**。Dependabot が default branch を継続的に監視して新しい CVE を拾うのに対し、Dependency Review は **すべての PR（base branch 問わず）で依存関係の差分を rich diff として表示** する。脆弱なパッケージやライセンス違反を **マージ前に止める** ためのゲート。
+
+| | Dependency Review | Dependabot alerts |
+| --- | --- | --- |
+| **動くタイミング** | PR ごと（任意の base branch） | 常時(新しい CVE が公開された時) |
+| **チェック対象** | PR の依存差分 | default branch の現状 |
+| **マージを止められる？** | ✅ Yes(required check にすれば) | ❌ No(通知のみ) |
+| **ライセンスチェック** | ✅ allow / deny list | ❌ 非対応 |
+
+### 何を検出するか
+
+- 🚨 **脆弱なパッケージ** が PR で追加 / 更新された場合(`fail-on-severity` で重大度の閾値設定可)
+- 📜 **ライセンス遵守** — allow / deny list(例: プロプライエタリリポジトリで GPL-3.0 を拒否)
+- 📦 **依存差分** — 追加・削除・更新された依存(lockfile から解決された推移的依存を含む)
+- 🕰️ **パッケージの年齢** と利用プロジェクト数
+
+### 有効化の方法
+
+**Step 1 — PR の差分を表示** — Dependency graph を ON にした時点で(Dependabot が前提とする条件)、Dependency Review は自動で有効になる。マニフェスト / lockfile を変更した PR を開き → **Files changed** タブ → 依存差分を展開。
+
+**Step 2 — `actions/dependency-review-action` でゲート化**
+
+```yaml
+# .github/workflows/dependency-review.yml
+name: Dependency Review
+on: [pull_request]
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high
+          deny-licenses: GPL-3.0, AGPL-3.0
+          comment-summary-in-pr: always
+```
+
+保護されたブランチで **required status check** にすれば、ゲートをパスするまで PR はマージできない。Org owner は repository ruleset で組織横断に強制できる。
+
+> ⚠️ **PR タイムのゲートであり、常時監視ではない**。マージ時点では問題なかった依存も、翌日 CVE が出れば脆弱になる。だから **Dependabot alerts + security updates** を裏で常時走らせておく必要がある。Dependency Review は新しい問題を入れない、Dependabot は後から出てきた問題を直す——役割が違う。
+
+> 💰 Public repo は無料。Private repo は **GitHub Code Security**(旧 Advanced Security バンドル)が必要。
 
 ## 利用条件と料金
 
