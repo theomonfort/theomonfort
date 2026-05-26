@@ -32,6 +32,9 @@ links:
   - group: 📖 Official Documentation
     label: actions/dependency-review-action (GitHub)
     url: https://github.com/actions/dependency-review-action
+  - group: 📖 Official Documentation
+    label: About Dependabot auto-triage rules
+    url: https://docs.github.com/en/code-security/dependabot/dependabot-auto-triage-rules/about-dependabot-auto-triage-rules
   - group: 📰 Recent Changelog
     label: "Expanded OIDC support for Dependabot and code scanning (2026-05-19)"
     url: https://github.blog/changelog/2026-05-19-expanded-oidc-support-for-dependabot-and-code-scanning
@@ -121,50 +124,31 @@ From `Org → Settings → Code security`, use **default settings** to apply to 
 
 ## Companion: Dependency Review
 
-**Dependency Review** is the **PR-time** companion to Dependabot. While Dependabot continuously watches your default branch for newly-published CVEs, Dependency Review shows a **rich diff of dependency changes on every pull request — on any base branch** — so a vulnerable or non-compliant dependency never gets merged in the first place.
+**Dependency Review** is the **PR-time** counterpart to Dependabot — it blocks merges before bad dependencies get in. Runs on every PR, **on any base branch** (not just `main`).
 
 | | Dependency Review | Dependabot alerts |
 | --- | --- | --- |
-| **When it runs** | On every PR (any base branch) | Continuously, as new CVEs land |
-| **What it checks** | The dependency diff of the PR | Current state of the default branch |
-| **Stops the merge?** | ✅ Yes (when set as a required check) | ❌ No (informational only) |
-| **License compliance** | ✅ Allow / deny lists | ❌ N/A |
+| **When** | Every PR (any branch) | Continuously, as CVEs land |
+| **Stops the merge?** | ✅ Yes (required check) | ❌ Informational only |
+| **License check** | ✅ allow / deny lists | ❌ N/A |
 
-### What it catches
+- 🚨 **Vulnerable packages** added or upgraded by the PR — configurable `fail-on-severity`
+- 📜 **License compliance** — allow / deny lists (e.g. deny `GPL-3.0` in a proprietary repo)
+- 📦 **Full dep diff** incl. transitive deps resolved from lockfiles
 
-- 🚨 **Vulnerable packages** introduced or upgraded in the PR — configurable severity threshold (`fail-on-severity`)
-- 📜 **License compliance** — allow / deny lists (e.g. block GPL-3.0 in a proprietary repo)
-- 📦 **What changed** — added, removed, updated dependencies, including transitive ones resolved from lockfiles
-- 🕰️ **Package age** and how many projects depend on it
+Drop in [`actions/dependency-review-action`](https://github.com/actions/dependency-review-action) and make it a **required status check**; org owners can enforce it across all repos via repository rulesets.
 
-### How to enable it
+> ⚠️ **PR-time gate — not a continuous watcher.** Always pair it with **Dependabot alerts**, which catch CVEs published *after* merge.
 
-**Step 1 — Surface the PR diff** — Dependency Review activates automatically once the dependency graph is on (which Dependabot already requires). Open any PR that touches a manifest / lockfile → **Files changed** tab → expand the dependency diff.
+## No reachability analysis — by design
 
-**Step 2 — Enforce it via `actions/dependency-review-action`**
+GitHub **does not ship deep reachability analysis** (i.e. "is this vulnerable function actually called from my code?"). Tools like Snyk do — but reachability is **noisy**, and a wrong "unreachable" verdict silently buries a real risk. GitHub's bet is the opposite: **alert on every match, then make triage cheap**.
 
-```yaml
-# .github/workflows/dependency-review.yml
-name: Dependency Review
-on: [pull_request]
-permissions:
-  contents: read
-  pull-requests: write
-jobs:
-  review:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/dependency-review-action@v4
-        with:
-          fail-on-severity: high
-          deny-licenses: GPL-3.0, AGPL-3.0
-          comment-summary-in-pr: always
-```
+- 🤖 **Assign to agent** *(on every Dependabot alert)* — hand the alert to Copilot / Claude / Codex; the agent reads the advisory + your repo and opens a **draft fix PR** (handles breaking changes, downgrades, refactors). You can even race multiple agents on the same alert.
+- 🧹 **Auto-triage rules** — auto-dismiss or snooze low-impact alerts by **severity, ecosystem, dependency scope (runtime vs dev)**. Cuts noise without hiding production risk.
+- 👀 Treat AI fixes as **first-pass**: human review + tests are still required before merge.
 
-Make it a **required status check** on protected branches so the PR can't merge until it passes. Org owners can enforce it across all repos via repository rulesets.
-
-> ⚠️ **It's a PR-time gate, not a continuous watcher.** A dependency that was clean when it was merged can have a CVE published the next day — that's why you still need **Dependabot alerts + security updates** running underneath. Dependency Review prevents new problems from entering; Dependabot fixes the ones that emerge later.
+> 🎯 The mental model isn't "trust the scanner less" — it's **"keep the recall high, let an AI close the alerts that matter"**. Alert → *Assign to agent* → draft PR → human review → merge.
 
 > 💰 Free for public repos. Private repos need **GitHub Code Security** (or the legacy Advanced Security bundle).
 

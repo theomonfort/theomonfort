@@ -32,6 +32,9 @@ links:
   - group: 📖 公式ドキュメント
     label: actions/dependency-review-action (GitHub)
     url: https://github.com/actions/dependency-review-action
+  - group: 📖 公式ドキュメント
+    label: About Dependabot auto-triage rules
+    url: https://docs.github.com/en/code-security/dependabot/dependabot-auto-triage-rules/about-dependabot-auto-triage-rules
   - group: 📰 Recent Changelog
     label: "Expanded OIDC support for Dependabot and code scanning (2026-05-19)"
     url: https://github.blog/changelog/2026-05-19-expanded-oidc-support-for-dependabot-and-code-scanning
@@ -121,50 +124,31 @@ updates:
 
 ## 補完機能: Dependency Review
 
-**Dependency Review** は Dependabot の **PR タイム版**。Dependabot が default branch を継続的に監視して新しい CVE を拾うのに対し、Dependency Review は **すべての PR（base branch 問わず）で依存関係の差分を rich diff として表示** する。脆弱なパッケージやライセンス違反を **マージ前に止める** ためのゲート。
+**Dependency Review** は Dependabot の **PR タイム版**。脆弱な依存や違反ライセンスをマージ前に止めるゲートで、**default branch だけでなく任意の base branch** で動く。
 
 | | Dependency Review | Dependabot alerts |
 | --- | --- | --- |
-| **動くタイミング** | PR ごと（任意の base branch） | 常時(新しい CVE が公開された時) |
-| **チェック対象** | PR の依存差分 | default branch の現状 |
-| **マージを止められる？** | ✅ Yes(required check にすれば) | ❌ No(通知のみ) |
+| **タイミング** | PR ごと(任意の branch) | 常時(新しい CVE 発生時) |
+| **マージを止める？** | ✅ Yes(required check 化すれば) | ❌ 通知のみ |
 | **ライセンスチェック** | ✅ allow / deny list | ❌ 非対応 |
 
-### 何を検出するか
+- 🚨 **脆弱なパッケージ** が PR で追加 / 更新された時 — `fail-on-severity` で閾値設定
+- 📜 **ライセンス遵守** — allow / deny list(例: proprietary repo で `GPL-3.0` を拒否)
+- 📦 **依存差分** — lockfile から解決した推移的依存も含めて全部
 
-- 🚨 **脆弱なパッケージ** が PR で追加 / 更新された場合(`fail-on-severity` で重大度の閾値設定可)
-- 📜 **ライセンス遵守** — allow / deny list(例: プロプライエタリリポジトリで GPL-3.0 を拒否)
-- 📦 **依存差分** — 追加・削除・更新された依存(lockfile から解決された推移的依存を含む)
-- 🕰️ **パッケージの年齢** と利用プロジェクト数
+[`actions/dependency-review-action`](https://github.com/actions/dependency-review-action) を入れて **required status check** にすればゲート化完了。Org owner は repository ruleset で組織横断に強制可。
 
-### 有効化の方法
+> ⚠️ **PR タイムのゲートであり常時監視ではない**。マージ後に公開された CVE を拾うのは Dependabot alerts の役目 — **必ず両方を併用** する。
 
-**Step 1 — PR の差分を表示** — Dependency graph を ON にした時点で(Dependabot が前提とする条件)、Dependency Review は自動で有効になる。マニフェスト / lockfile を変更した PR を開き → **Files changed** タブ → 依存差分を展開。
+## Reachability analysis を持たない — それは意図的な選択
 
-**Step 2 — `actions/dependency-review-action` でゲート化**
+GitHub は **深い reachability analysis(脆弱関数が実際に呼ばれているかの解析)を提供していない**。Snyk などは持っているが、reachability は **誤判定(false positive / false negative)が多く**、「呼ばれていない」という誤った判定が本当のリスクを隠してしまう。GitHub は逆に賭ける: **すべての一致を alert として上げ、triage を安く済ませる**。
 
-```yaml
-# .github/workflows/dependency-review.yml
-name: Dependency Review
-on: [pull_request]
-permissions:
-  contents: read
-  pull-requests: write
-jobs:
-  review:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/dependency-review-action@v4
-        with:
-          fail-on-severity: high
-          deny-licenses: GPL-3.0, AGPL-3.0
-          comment-summary-in-pr: always
-```
+- 🤖 **Assign to agent**（各 Dependabot alert 上のボタン）— alert を Copilot / Claude / Codex に渡すと、agent が advisory とリポジトリを読み **draft の修正 PR を作る**(breaking change, downgrade, refactor 対応)。同じ alert に複数 agent を競わせることも可能。
+- 🧹 **Auto-triage rules** — **severity / ecosystem / dependency scope(runtime か dev か)** で低リスクの alert を自動 dismiss / snooze。本番リスクを隠さずにノイズを削る。
+- 👀 AI の修正は **first-pass** として扱う。マージ前のレビューとテストは依然として人間の仕事。
 
-保護されたブランチで **required status check** にすれば、ゲートをパスするまで PR はマージできない。Org owner は repository ruleset で組織横断に強制できる。
-
-> ⚠️ **PR タイムのゲートであり、常時監視ではない**。マージ時点では問題なかった依存も、翌日 CVE が出れば脆弱になる。だから **Dependabot alerts + security updates** を裏で常時走らせておく必要がある。Dependency Review は新しい問題を入れない、Dependabot は後から出てきた問題を直す——役割が違う。
+> 🎯 メンタルモデルは「scanner を信用しない」ではなく **「recall(検出率)は高いまま、AI で重要な alert を閉じる」**。Alert → *Assign to agent* → draft PR → 人間レビュー → merge。
 
 > 💰 Public repo は無料。Private repo は **GitHub Code Security**(旧 Advanced Security バンドル)が必要。
 
