@@ -69,7 +69,7 @@ Rather than putting every skill's full content in context from the start, only l
 ## Example
 
 You can write skills yourself or install community-built ones as-is.  
-GitHub-hosted skills are added to the current repository's skill directory (e.g. `.github/skills/` or `.copilot/skills/`) via `gh skill install` (GitHub CLI v2.90.0+).
+GitHub-hosted skills are added to the current repository's skill directory (e.g. `.agents/skills/`) via `gh skill install` (GitHub CLI v2.90.0+).
 
 ### [github/awesome-copilot](https://awesome-copilot.github.com/skills)
 
