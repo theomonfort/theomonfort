@@ -4,14 +4,15 @@ export type CategoryId =
   | 'develop'
   | 'review'
   | 'secure'
-  | 'operate';
+  | 'operate'
+  | 'administration';
 
 export interface Category {
   id: CategoryId;
   labelJa: string;
   labelEn: string;
   icon: string;
-  color: 'magenta' | 'cyan' | 'amber' | 'green';
+  color: 'magenta' | 'cyan' | 'amber' | 'green' | 'red';
   actor?: string;
   actorEn?: string;
   avatar?: string;
@@ -91,6 +92,18 @@ export const categories: Category[] = [
     avatar: '/theomonfort/octocat-team.png',
     description: '<strong class="text-gb-green">Agentic Workflow</strong> で運用自動化。<strong class="text-gb-green">Copilot Metrics</strong> で AI 利用状況を可視化、<strong class="text-gb-green">Memory</strong> で知識を蓄積。',
     descriptionEn: 'Automate operations with <strong class="text-gb-green">agentic workflows</strong>, visualize AI usage with <strong class="text-gb-green">Copilot Metrics</strong>, and accumulate knowledge through <strong class="text-gb-green">Memory</strong>.',
+  },
+  {
+    id: 'administration',
+    labelJa: '管理',
+    labelEn: 'Administration',
+    icon: '🏛️',
+    color: 'red',
+    actor: 'エンタープライズ管理者',
+    actorEn: 'Enterprise Admin',
+    avatar: '/theomonfort/octocat-full-red.png',
+    description: '<strong class="text-neon-red">ライセンス</strong>・<strong class="text-neon-red">ポリシー</strong>・<strong class="text-neon-red">課金</strong> を Enterprise / Organization レベルで統括。誰が何を使えるかを安全に管理。',
+    descriptionEn: 'Govern <strong class="text-neon-red">licenses</strong>, <strong class="text-neon-red">policies</strong>, and <strong class="text-neon-red">billing</strong> at the Enterprise and Organization level. Decide safely who gets access to what.',
   },
 ];
 

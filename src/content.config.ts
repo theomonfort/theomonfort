@@ -8,7 +8,7 @@ const playbook = defineCollection({
     titleEn: z.string().optional(),
     summary: z.string(),
     icon: z.string().default('▶'),
-    color: z.enum(['magenta', 'cyan', 'amber', 'green']).default('cyan'),
+    color: z.enum(['magenta', 'cyan', 'amber', 'green', 'red']).default('cyan'),
     related: z.array(z.string()).default([]),
     links: z
       .array(z.object({
@@ -19,7 +19,7 @@ const playbook = defineCollection({
       .default([]),
     order: z.number().default(0),
     category: z
-      .enum(['introduction', 'plan', 'develop', 'review', 'secure', 'operate'])
+      .enum(['introduction', 'plan', 'develop', 'review', 'secure', 'operate', 'administration'])
       .default('introduction'),
   }),
 });
