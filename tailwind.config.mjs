@@ -10,7 +10,6 @@ export default {
         'neon-cyan': '#00f0ff',
         'crt-amber': '#ffb000',
         'gb-green': '#9bbc0f',
-        'neon-red': '#ff3030',
         phosphor: '#e8f4ff',
         'shadow-ink': '#05060f',
       },
@@ -28,7 +27,6 @@ export default {
         'neon-cyan': '0 0 8px #00f0ff, 0 0 24px rgba(0,240,255,.4)',
         'neon-amber': '0 0 8px #ffb000, 0 0 24px rgba(255,176,0,.4)',
         'neon-green': '0 0 8px #9bbc0f, 0 0 24px rgba(155,188,15,.4)',
-        'neon-red': '0 0 8px #ff3030, 0 0 24px rgba(255,48,48,.4)',
       },
       animation: {
         flicker: 'flicker 6s infinite',

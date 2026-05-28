@@ -12,7 +12,7 @@ export interface Category {
   labelJa: string;
   labelEn: string;
   icon: string;
-  color: 'magenta' | 'cyan' | 'amber' | 'green' | 'red';
+  color: 'magenta' | 'cyan' | 'amber' | 'green';
   actor?: string;
   actorEn?: string;
   avatar?: string;
@@ -98,12 +98,12 @@ export const categories: Category[] = [
     labelJa: '管理',
     labelEn: 'Administration',
     icon: '🏛️',
-    color: 'red',
+    color: 'magenta',
     actor: 'エンタープライズ管理者',
     actorEn: 'Enterprise Admin',
     avatar: '/theomonfort/octocat-full-red.png',
-    description: '<strong class="text-neon-red">ライセンス</strong>・<strong class="text-neon-red">ポリシー</strong>・<strong class="text-neon-red">課金</strong> を Enterprise / Organization レベルで統括。誰が何を使えるかを安全に管理。',
-    descriptionEn: 'Govern <strong class="text-neon-red">licenses</strong>, <strong class="text-neon-red">policies</strong>, and <strong class="text-neon-red">billing</strong> at the Enterprise and Organization level. Decide safely who gets access to what.',
+    description: '<strong class="text-neon-magenta">ライセンス</strong>・<strong class="text-neon-magenta">ポリシー</strong>・<strong class="text-neon-magenta">課金</strong> を Enterprise / Organization レベルで統括。誰が何を使えるかを安全に管理。',
+    descriptionEn: 'Govern <strong class="text-neon-magenta">licenses</strong>, <strong class="text-neon-magenta">policies</strong>, and <strong class="text-neon-magenta">billing</strong> at the Enterprise and Organization level. Decide safely who gets access to what.',
   },
 ];
 

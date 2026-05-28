@@ -3,7 +3,7 @@ title: License Management
 titleEn: License Management
 summary: How GitHub Copilot is billed at the Enterprise level, assigned at the Org level, and how policies / billing behave when a user belongs to multiple organizations — including outside collaborators and EMU guest collaborators.
 icon: 🪪
-color: red
+color: magenta
 order: 30
 category: administration
 related: ['github-copilot', 'copilot-metrics']

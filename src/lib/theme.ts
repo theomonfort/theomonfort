@@ -1,11 +1,10 @@
-export type AccentColor = 'magenta' | 'cyan' | 'amber' | 'green' | 'red';
+export type AccentColor = 'magenta' | 'cyan' | 'amber' | 'green';
 
 export const accentColorValues = {
   magenta: '#ff2e88',
   cyan: '#00f0ff',
   amber: '#ffb000',
   green: '#9bbc0f',
-  red: '#ff3030',
 } as const satisfies Record<AccentColor, string>;
 
 export const accentClasses = {
@@ -29,11 +28,6 @@ export const accentClasses = {
     text: 'text-gb-green',
     glow: 'hover:shadow-neon-amber',
   },
-  red: {
-    border: 'border-neon-red',
-    text: 'text-neon-red',
-    glow: 'hover:shadow-neon-red',
-  },
 } as const satisfies Record<
   AccentColor,
   { border: string; text: string; glow: string }
@@ -44,5 +38,4 @@ export const accentGlowClasses = {
   cyan: 'shadow-neon-cyan',
   amber: 'shadow-neon-amber',
   green: 'shadow-neon-amber',
-  red: 'shadow-neon-red',
 } as const satisfies Record<AccentColor, string>;
