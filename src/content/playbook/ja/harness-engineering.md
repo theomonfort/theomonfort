@@ -71,7 +71,7 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-  Project[あなた + プロジェクト] -->|プロンプト / 指示書 / スキル / MCP| Agent[エージェント<br/>別名：ハーネス<br/><br/>Copilot Chat<br/>Copilot CLI<br/>Cloud Agent<br/>Claude Code<br/>Codex]
+  Project[ユーザー] -->|プロンプト / 指示書 / スキル / MCP| Agent[エージェント<br/>別名：ハーネス<br/><br/>Copilot Chat<br/>Copilot CLI<br/>Cloud Agent<br/>Claude Code<br/>Codex]
   Agent -->|回答 / PR / 編集| Project
   Agent -->|コンテキスト| LLM[LLM]
   LLM -->|次の一手| Agent
