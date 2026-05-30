@@ -50,12 +50,12 @@ links:
 
 ## 古き良き時代（2021 〜 2024）
 
-昔の LLM chat はシンプルだった。You が prompt を投げ、LLM が answer を返す。
+昔の LLM chat はシンプルだった。ユーザーがプロンプトを投げ、LLM が回答を返す。
 
 ```mermaid
 flowchart LR
-  You[You] -->|Prompt| LLM[The LLM]
-  LLM -->|Answer| You
+  You[ユーザー] -->|プロンプト| LLM[LLM]
+  LLM -->|回答| You
 
   classDef human fill:#102033,stroke:#00f0ff,color:#e8f4ff,stroke-width:2px;
   classDef llm fill:#302500,stroke:#ffb000,color:#fff4d6,stroke-width:2px;
@@ -63,7 +63,7 @@ flowchart LR
   class LLM llm;
 ```
 
-> この世界では、context はほぼ **prompt の中に人間が手で詰めるもの** だった。
+> この世界では、context はほぼ **プロンプトの中に人間が手で詰めるもの** だった。
 
 ## 現在（2025 〜）
 
