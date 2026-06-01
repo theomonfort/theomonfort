@@ -147,4 +147,4 @@ The moment you push, execution logs appear in the **Actions tab**. Failures show
 
 ## Cloud Agent / Copilot Code Review also run here
 
-> 🤖 When **Copilot Cloud Agent** implements a task, or when **Copilot Code Review** reads a PR — both run as **GitHub Actions workflows** under the hood. They consume Actions free-tier minutes and appear as Actions logs. See <a class="retro-link" href="/theomonfort/playbook/cloud-agent/">Cloud Agent</a> and <a class="retro-link" href="/theomonfort/playbook/copilot-code-review/">Copilot Code Review</a> for details.
+> 🤖 When **Copilot Cloud Agent** implements a task, or when **Copilot Code Review** reads a PR — both run as **GitHub Actions workflows** under the hood. They consume Actions free-tier minutes and appear as Actions logs. See <a class="retro-link" href="/theomonfort/en/playbook/cloud-agent/">Cloud Agent</a> and <a class="retro-link" href="/theomonfort/en/playbook/copilot-code-review/">Copilot Code Review</a> for details.

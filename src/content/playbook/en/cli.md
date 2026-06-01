@@ -166,7 +166,7 @@ echo "Explain this file: ./complex.ts" | copilot
 | `--share-gist` | Upload the session to a Gist (not available for EMU / data residency orgs) |
 
 > 🔒 **Minimize permissions**. When running in CI, always use `--allow-tool` with a whitelist. Never use `--allow-all`.
-> 💰 1 call = 1 Copilot premium request consumed. When making hundreds of batch calls, keep an eye on consumption via <a class="retro-link" href="/theomonfort/playbook/copilot-metrics">Copilot Metrics ↗</a>.
+> 💰 1 call = 1 Copilot premium request consumed. When making hundreds of batch calls, keep an eye on consumption via <a class="retro-link" href="/theomonfort/en/playbook/copilot-metrics">Copilot Metrics ↗</a>.
 
 ### Practical Automation Examples
 

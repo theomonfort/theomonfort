@@ -191,7 +191,7 @@ Use `Org → Settings → Code security → default settings` to apply to new an
 - 🚀 How to run — `Org → Security → Assessments → Run code security risk assessment`
 - 🆓 No license required, no Actions minutes charged — perfect for evaluating Code Security before purchase
 
-> 📊 Pair this with Secret Risk Assessment (see <a class="retro-link" href="/theomonfort/playbook/secret-scanning">Secret Scanning ↗</a>) to get a complete picture of your organization's security posture in a single day. Use the results to decide whether to adopt **Code Security**.
+> 📊 Pair this with Secret Risk Assessment (see <a class="retro-link" href="/theomonfort/en/playbook/secret-scanning">Secret Scanning ↗</a>) to get a complete picture of your organization's security posture in a single day. Use the results to decide whether to adopt **Code Security**.
 
 📘 Details:
 - <a class="retro-link" href="https://github.blog/changelog/2026-04-08-code-security-risk-assessment-available-for-organizations/" target="_blank" rel="noopener noreferrer">Code Security Risk Assessment GA (2026/04) ↗</a>

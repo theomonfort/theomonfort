@@ -52,14 +52,14 @@ links:
 </div>
 
 > 🌐 Public repos continue to get everything for free. A GHAS / Secret Protection / Code Security license is only required when you want to enable features on **private / internal repos**.
-> 🤖 **Dependabot itself** (alerts / security updates / version updates / dependency graph) is <strong>completely free on every plan</strong> — no GHAS required. See <a class="retro-link" href="/theomonfort/playbook/dependabot">Dependabot ↗</a>.
+> 🤖 **Dependabot itself** (alerts / security updates / version updates / dependency graph) is <strong>completely free on every plan</strong> — no GHAS required. See <a class="retro-link" href="/theomonfort/en/playbook/dependabot">Dependabot ↗</a>.
 
 ## What's included?
 
 | Product | Key features | Details |
 | --- | --- | --- |
-| 🔑 **Secret Protection** | Secret scanning · Push protection (org/repo level) · Custom patterns · AI detection · Validity checks | <a class="retro-link" href="/theomonfort/playbook/secret-scanning">Secret Scanning ↗</a> |
-| 🔍 **Code Security** | Code scanning (CodeQL) · Copilot Autofix · Security campaigns · Dependency review (PR enforcement) · Security overview | <a class="retro-link" href="/theomonfort/playbook/code-scanning">Code Scanning ↗</a> |
+| 🔑 **Secret Protection** | Secret scanning · Push protection (org/repo level) · Custom patterns · AI detection · Validity checks | <a class="retro-link" href="/theomonfort/en/playbook/secret-scanning">Secret Scanning ↗</a> |
+| 🔍 **Code Security** | Code scanning (CodeQL) · Copilot Autofix · Security campaigns · Dependency review (PR enforcement) · Security overview | <a class="retro-link" href="/theomonfort/en/playbook/code-scanning">Code Scanning ↗</a> |
 
 ## Pricing (from April 2025)
 
@@ -98,8 +98,8 @@ links:
 
 | Assessment | What it shows | Scope | Frequency | Details |
 | --- | --- | --- | :---: | --- |
-| 🔑 **Secret Risk Assessment** | Types and count of secrets hiding in org repos | **All repos** (public / private / internal / archived) | Once | <a class="retro-link" href="/theomonfort/playbook/secret-scanning">Secret Scanning ↗</a> |
-| 🔍 **Code Security Risk Assessment** | Code vulnerabilities detected by CodeQL (severity / language / Autofix-eligible count) | **Up to 20 most active repos** | Once every 90 days | <a class="retro-link" href="/theomonfort/playbook/code-scanning">Code Scanning ↗</a> |
+| 🔑 **Secret Risk Assessment** | Types and count of secrets hiding in org repos | **All repos** (public / private / internal / archived) | Once | <a class="retro-link" href="/theomonfort/en/playbook/secret-scanning">Secret Scanning ↗</a> |
+| 🔍 **Code Security Risk Assessment** | Code vulnerabilities detected by CodeQL (severity / language / Autofix-eligible count) | **Up to 20 most active repos** | Once every 90 days | <a class="retro-link" href="/theomonfort/en/playbook/code-scanning">Code Scanning ↗</a> |
 
 - 🆓 **Completely free** — no GHAS / Secret Protection / Code Security license required
 - 🛂 **Permissions** — only Organization owners or security managers can run them
