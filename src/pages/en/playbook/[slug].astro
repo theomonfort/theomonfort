@@ -186,13 +186,13 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 
     <div class="present-overlay-hint font-pixel text-[10px]" aria-hidden="true">
       <span><span class="key">◀</span> <span class="key">▶</span> {t.playbook.slides}</span>
+      <span><span class="key">Esc</span> {t.playbook.exit}</span>
       <a
         class="present-lang-toggle"
         href={`${localizedPath('ja', `/playbook/${item.slug}`)}?present=1`}
         data-other-locale-base={localizedPath('ja', `/playbook/${item.slug}`)}
         aria-label="日本語に切り替え"
       ><span class="key">日本語</span></a>
-      <span><span class="key">Esc</span> {t.playbook.exit}</span>
     </div>
 
     <div class="slide-progress" aria-hidden="true"></div>

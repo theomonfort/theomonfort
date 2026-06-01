@@ -188,13 +188,13 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 
     <div class="present-overlay-hint font-pixel text-[10px]" aria-hidden="true">
       <span><span class="key">◀</span> <span class="key">▶</span> {t.playbook.slides}</span>
+      <span><span class="key">Esc</span> {t.playbook.exit}</span>
       <a
         class="present-lang-toggle"
         href={`${localizedPath('en', `/playbook/${item.slug}`)}?present=1`}
         data-other-locale-base={localizedPath('en', `/playbook/${item.slug}`)}
         aria-label="Switch to English"
-      ><span class="key">EN</span></a>
-      <span><span class="key">Esc</span> {t.playbook.exit}</span>
+      ><span class="key">Eng</span></a>
     </div>
 
     <div class="slide-progress" aria-hidden="true"></div>
