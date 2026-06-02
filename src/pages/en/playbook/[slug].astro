@@ -238,6 +238,9 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   let restoreFns: Array<() => void> = [];
   let slideRefreshToken = 0;
   const SLIDE_PREPARING_CLASS = 'slide-preparing';
+  // Set true when Esc fires inside present mode to short-circuit the
+  // present→article paint and propagate "no present" onto the destination doc.
+  let escapingFromPresent = false;
 
   function setSlidePreparing(on: boolean) {
     document.documentElement.classList.toggle(SLIDE_PREPARING_CLASS, on);
@@ -483,12 +486,16 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       return;
     }
     if (e.key === 'Escape') {
+      // Escape always returns to the playbook grid — bypass the intermediate
+      // article view. Keep present-mode + slide-preparing on while the SPA
+      // navigation runs so the article doesn't flash into view; clean up
+      // <html>'s persistent classes in the after-swap handler below.
+      const index = section.dataset.index || '/en/playbook';
       if (present) {
-        setPresent(false);
-      } else {
-        const index = section.dataset.index || '/en/playbook';
-        navigateSmooth(index);
+        escapingFromPresent = true;
+        setSlidePreparing(true);
       }
+      navigateSmooth(index);
       return;
     }
     if (!present) return;
@@ -548,6 +555,12 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 
   document.addEventListener('keydown', onKey);
   function preparePresentNavigation(event?: Event) {
+    if (escapingFromPresent) {
+      // Escape-to-index: don't carry present-mode onto the destination doc.
+      // The current page's classes stay put so the article view doesn't flash;
+      // the after-swap handler strips them from <html> once the swap lands.
+      return;
+    }
     const currentPresent = document.body.classList.contains('present-mode') || document.documentElement.classList.contains('present-mode');
     const targetPresent = new URLSearchParams(location.search).get('present') === '1';
     if (!currentPresent && !targetPresent) return;
@@ -561,13 +574,23 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     nextDocument?.documentElement.classList.add('present-mode', SLIDE_PREPARING_CLASS);
     nextDocument?.body?.classList.add('present-mode', SLIDE_PREPARING_CLASS);
   }
+  function clearPresentAfterEscape() {
+    if (!escapingFromPresent) return;
+    escapingFromPresent = false;
+    // <html> persists across View Transitions, so its present-mode +
+    // slide-preparing classes must be cleared manually once the index lands.
+    document.documentElement.classList.remove('present-mode', SLIDE_PREPARING_CLASS);
+    document.body.classList.remove('present-mode', SLIDE_PREPARING_CLASS);
+  }
   document.addEventListener('astro:before-preparation', preparePresentNavigation);
   document.addEventListener('astro:before-swap', preparePresentNavigation);
+  document.addEventListener('astro:after-swap', clearPresentAfterEscape);
   document.addEventListener('astro:page-load', initGlossaryInteractions);
   win.__akqGlossaryCleanup = () => {
     document.removeEventListener('keydown', onKey);
     document.removeEventListener('astro:before-preparation', preparePresentNavigation);
     document.removeEventListener('astro:before-swap', preparePresentNavigation);
+    document.removeEventListener('astro:after-swap', clearPresentAfterEscape);
     document.removeEventListener('astro:page-load', initGlossaryInteractions);
   };
 
@@ -821,7 +844,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     border-right: 14px solid var(--entry-accent, #00f0ff);
   }
   .prose-akq .hero-quote > p { margin: 0; }
-  body.present-mode .prose-akq .hero-quote { font-size: 1.55em; padding: 1.5em 1.7em 1.6em 2em; margin-left: 200px; }
+  body.present-mode .prose-akq .hero-quote { font-size: 1.25em; padding: 1.4em 1.6em 1.5em 1.8em; margin-left: 200px; }
   body.present-mode .prose-akq .hero-quote::before { left: -200px; width: 175px; height: 175px; }
   @media (max-width: 640px) {
     .prose-akq .hero-quote { margin-left: 0; padding-top: 110px; }
@@ -1522,7 +1545,6 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   body.present-mode { background: #05060f !important; overflow: hidden; }
   body.present-mode nav,
   body.present-mode footer,
-  body.present-mode .xp-hud,
   body.present-mode .bgm-player,
   body.present-mode .crt-overlay { display: none !important; }
   body.present-mode .present-hint { display: none; }

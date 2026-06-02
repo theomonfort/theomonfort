@@ -1,5 +1,6 @@
 ---
 import { localizedPath, siteCopy, type Locale } from '../../lib/i18n';
+import { getHandsonSteps } from '../../lib/handson';
 
 // 90s Japanese teen bedroom — but in deep space.
 // Background = AI-generated pixel art (Gemini "Nano Banana").
@@ -15,6 +16,10 @@ interface Props {
 }
 const { immersive = true, src = '/theomonfort/room/bedroom-v2.png', locale = 'ja' } = Astro.props;
 const t = siteCopy[locale].room;
+// Resolve the first hands-on step at build time so the window hotspot links
+// directly into the content instead of bouncing through the index redirect.
+const handsonSteps = await getHandsonSteps(locale);
+const handsonHref = `/handson/${handsonSteps[0]?.slug ?? 'intro'}`;
 const wrapClass = [
   'pixelroom-wrap relative w-full mx-auto select-none',
   immersive ? 'is-immersive max-w-7xl' : 'max-w-5xl',
@@ -38,9 +43,9 @@ const wrapClass = [
        style="left:10%;top:25%;width:27%;height:37%"
        aria-label={t.aria.playbook}></a>
 
-    <a href={localizedPath(locale, '/links')} class="hotspot" data-target="window"
+    <a href={localizedPath(locale, handsonHref)} class="hotspot" data-target="window"
        style="left:37%;top:12%;width:38%;height:40%"
-       aria-label={t.aria.links}></a>
+       aria-label={t.aria.handson}></a>
 
     <a href={localizedPath(locale, '/manifesto')} class="hotspot easter-hotspot" data-target="desk"
        style="left:46%;top:64%;width:5%;height:5%"
@@ -62,7 +67,7 @@ const wrapClass = [
     <div class="pixelroom-labels">
       <div class="pr-label" data-target="bookshelf"><span class="pr-en">PLAYBOOK</span><span class="pr-jp">{t.labels.playbook}</span></div>
       <div class="pr-label" data-target="wardrobe"><span class="pr-en">EQUIPMENT</span><span class="pr-jp">{t.labels.equipment}</span></div>
-      <div class="pr-label" data-target="window"><span class="pr-en">LINKS</span><span class="pr-jp">{t.labels.links}</span></div>
+      <div class="pr-label" data-target="window"><span class="pr-en">HANDS-ON</span><span class="pr-jp">{t.labels.handson}</span></div>
       <div class="pr-label" data-target="desk"><span class="pr-en">???</span><span class="pr-jp">{t.labels.manifesto}</span></div>
       <div class="pr-label" data-target="tv"><span class="pr-en">PHILOSOPHY</span><span class="pr-jp">{t.labels.philosophy}</span></div>
       <div class="pr-label" data-target="cat"><span class="pr-en">???</span><span class="pr-jp">{t.labels.secret}</span></div>

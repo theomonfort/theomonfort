@@ -23,7 +23,7 @@ const colorMap: Record<string, { hex: string; tw: string; bg: string; chipBg: st
 
 type CatId = (typeof categories)[number]['id'];
 const grouped: Record<CatId, typeof allEntries> = {
-  introduction: [], plan: [], develop: [], review: [], secure: [], operate: [],
+  introduction: [], plan: [], develop: [], review: [], secure: [], operate: [], administration: [],
 };
 for (const e of allEntries) grouped[e.entry.data.category as CatId].push(e);
 

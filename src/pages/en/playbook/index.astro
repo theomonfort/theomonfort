@@ -19,24 +19,15 @@ const grouped = categories.map((cat) => ({
 <Layout locale={locale} currentPath="/playbook" title={t.playbook.title}>
   <section class="max-w-5xl mx-auto px-4 py-12">
     <header class="mb-10">
-      <p class="font-pixel text-[10px] text-crt-amber tracking-[0.3em] mb-2">{t.playbook.chapter}</p>
       <h1 class="font-pixel text-2xl md:text-4xl text-neon-magenta mb-3">{t.playbook.heading}</h1>
       <p class="font-pixel-jp text-lg text-neon-cyan">{t.playbook.subtitle}</p>
       <p class="font-body text-sm text-phosphor/80 mt-4 max-w-2xl">
-        {t.playbook.intro}
+        {t.playbook.intro}{' '}
+        Note: this is a personal learning resource and some details may be outdated — always refer to the <a href="https://docs.github.com/en/copilot" target="_blank" rel="noopener noreferrer" class="text-neon-cyan hover:text-neon-magenta underline">latest GitHub documentation ↗</a> for the source of truth.
       </p>
 
-      <div class="mt-5 max-w-2xl border-2 border-crt-amber/60 bg-crt-amber/5 p-3 flex items-start gap-3">
-        <span class="text-xl shrink-0" aria-hidden="true">⚠️</span>
-        <p class="font-body text-xs text-phosphor/85 leading-relaxed">
-          <span class="font-pixel text-[10px] text-crt-amber tracking-[0.2em] uppercase">For learning</span>
-          — this playbook is a personal learning resource. Some details may be outdated. For the source of truth, always refer to the
-          <a href="https://docs.github.com/en/copilot" target="_blank" rel="noopener noreferrer" class="text-neon-cyan hover:text-neon-magenta underline">latest GitHub documentation ↗</a>.
-        </p>
-      </div>
-
       <nav class="mt-8 flex flex-wrap md:flex-nowrap items-center gap-2 md:gap-3">
-        {grouped.filter((g) => g.items.length > 0 && g.id !== 'introduction').map((g, i, arr) => {
+        {grouped.filter((g) => g.items.length > 0 && g.id !== 'introduction' && g.id !== 'administration').map((g, i, arr) => {
           const c = accentClasses[g.color];
           return (
             <>
@@ -101,6 +92,7 @@ const grouped = categories.map((cat) => ({
                 <li class="h-full">
                   <a
                     href={localizedPath(locale, `/playbook/${item.slug}`)}
+                    data-playbook-tile
                     class={`flex h-full bg-shadow-ink/80 border-2 ${ec.border} ${ec.glow} p-5 transition-all duration-200 hover:-translate-y-1 group`}
                   >
                     <div class="flex items-start gap-3 w-full">
@@ -136,3 +128,19 @@ const grouped = categories.map((cat) => ({
     </div>
   </section>
 </Layout>
+
+<script>
+  // On desktop (≥768px) — wide enough for the present-mode TOC sidebar — open
+  // each playbook tile directly in presentation mode. Mobile keeps the plain
+  // article view because present mode has no on-screen slide navigation.
+  function upgradePlaybookTiles() {
+    if (!window.matchMedia('(min-width: 768px)').matches) return;
+    document.querySelectorAll<HTMLAnchorElement>('a[data-playbook-tile]').forEach((a) => {
+      const href = a.getAttribute('href');
+      if (!href || /[?&]present=1\b/.test(href)) return;
+      a.setAttribute('href', href + (href.includes('?') ? '&' : '?') + 'present=1');
+    });
+  }
+  upgradePlaybookTiles();
+  document.addEventListener('astro:page-load', upgradePlaybookTiles);
+</script>

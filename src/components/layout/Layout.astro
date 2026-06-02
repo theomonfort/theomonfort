@@ -4,7 +4,6 @@ import { ClientRouter } from 'astro:transitions';
 import CRTOverlay from '../retro/CRTOverlay.tsx';
 import BGMPlayer from '../interactive/BGMPlayer.tsx';
 import KonamiListener from '../interactive/KonamiListener.tsx';
-import XPHud from '../interactive/XPHud.tsx';
 import BootSequence from '../interactive/BootSequence.tsx';
 import Footer from './Footer.astro';
 import Nav from './Nav.astro';
@@ -13,7 +12,6 @@ import { localizedPath, otherLocale, siteCopy, type Locale } from '../../lib/i18
 interface Props {
   title?: string;
   description?: string;
-  hud?: boolean;
   locale?: Locale;
   currentPath?: string;
 }
@@ -22,7 +20,6 @@ const {
   currentPath = '/',
   title,
   description,
-  hud = true,
 } = Astro.props;
 const copy = siteCopy[locale];
 const pageTitle = title ?? copy.siteTitle;
@@ -57,7 +54,6 @@ const enUrl = localizedPath('en', currentPath);
   <body class="bg-stars min-h-screen relative">
     <BootSequence client:load transition:persist locale={locale} copy={{ brandMiddle: copy.brandMiddle }} />
     <CRTOverlay client:load transition:persist />
-    {hud && <XPHud client:load transition:persist />}
     <BGMPlayer client:load transition:persist />
     <KonamiListener client:load transition:persist secretPath={localizedPath(locale, '/secret')} />
 
