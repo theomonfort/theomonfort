@@ -31,12 +31,9 @@ In this step you'll create two kinds of instruction file:
 
 ### 4.1 — Create the repo-wide instruction file
 
-Paste the following prompt into Copilot Chat:
+Create a new file at `.github/copilot-instructions.md` at the root of the repository, and paste the following content as-is (create the `.github` folder first if it doesn't exist):
 
 ```
-Create `.github/copilot-instructions.md`. Write all content in English.
-The content should be exactly as follows:
-
 # Copilot Instructions
 
 ## Language
@@ -56,7 +53,7 @@ The content should be exactly as follows:
 - Pages live in src/pages/.
 - Reusable UI lives in src/components/.
 - Markdown lives in src/content/<collection>/*.md. Schemas are defined in src/content.config.ts.
-- The package manager is **pnpm**.
+- The package manager is **npm**.
 
 ## Code review
 
@@ -89,18 +86,13 @@ Before writing any **Astro** code, you **must call the following Context7 MCP to
 
 Now create a **path instruction** that only applies to specific file patterns. VS Code only hands this rule to Copilot when you touch files that match the `applyTo` glob.
 
-Paste the following prompt into Copilot Chat:
+Create a new file at `.github/instructions/frontend.instructions.md`, and paste the following content as-is (create the `.github/instructions/` folder first if it doesn't exist):
 
 ```
-Create `.github/instructions/frontend.instructions.md`.
-Write all content in English. The YAML frontmatter at the top should be exactly:
-
 ---
 applyTo: "**/*.{astro,css,tsx,jsx,ts,js,html}"
 description: "Frontend design tokens (retro JRPG theme)"
 ---
-
-The body should include the following content in English:
 
 # Frontend Design Rules
 

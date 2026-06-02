@@ -124,16 +124,6 @@ Define review standards in **`.github/copilot-instructions.md`** — that's all 
 - ...
 ```
 
-To scope rules by file type, combine with **`NAME.instructions.md`**:
-
-```yaml
----
-applyTo: "**/*.test.ts"
----
-## <Testing Conventions>
-- ...
-```
-
 ## Limits and the human role
 
 Copilot Code Review is **powerful but not omniscient**. Humans still own these areas:

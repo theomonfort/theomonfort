@@ -52,13 +52,19 @@ Copy the following prompt as-is and paste it into Copilot Chat:
 Build a small Astro site (English only). Work on a new branch (e.g. feature/playbook-site).
 
 - Create a **grid-style index page** that lists every entry in `src/content/playbook/*.md` as a tile (icon + title + short summary).
-- Clicking a tile navigates to a detail page for that entry (the full markdown content, scrollable). The detail page uses the entry's frontmatter `color` as its theme color.
+- Clicking a tile opens that entry directly in **presentation mode** (full-screen slide deck) — no intermediate detail page.
+- **Presentation-mode behavior**:
+  - Each `##` heading in the markdown becomes a new slide. The title slide is auto-generated from the frontmatter (`title`, `summary`, `icon`).
+  - Keyboard: `←` / `→` (or `Space`) to move between slides, `Esc` to return to the index.
+  - A thin progress bar at the top of the screen shows the current slide; each segment is **clickable to jump directly to that slide**.
+  - The current slide index is reflected in the URL (e.g. `?slide=3`) so reload / sharing preserves position.
+  - Use each entry's frontmatter `color` as the deck's accent color (slide border, progress bar, headings).
 - Render any ` ```mermaid ` code blocks inside the markdown **as Mermaid diagrams** (client-side is fine).
 
-Once `pnpm dev` confirms it works, commit and push your changes and open a pull request titled **"Playbook site foundations"**.
+Once `npm run dev` confirms it works, commit and push your changes and open a pull request titled **"Playbook site foundations"**.
 ````
 
-Copilot may ask you a few questions (package manager, UI framework, deployment target, etc.). It should have read `copilot-instructions.md` and default to Astro / Tailwind / pnpm, but answer any gaps as they come up.
+Copilot may ask you a few questions (package manager, UI framework, deployment target, etc.). It should have read `copilot-instructions.md` and default to Astro / Tailwind / npm, but answer any gaps as they come up.
 
 ⏱ About 3 minutes
 
@@ -78,24 +84,25 @@ Once you're happy with the plan, click **"Start with Autopilot"** to kick off th
 
 Copilot will automatically:
 
-- Bootstrap the Astro project (with pnpm)
+- Bootstrap the Astro project (with npm)
 - Define the playbook collection in `src/content.config.ts`
-- Wire up the grid-style index page and detail routing
-- Apply the theme color from each entry's frontmatter `color`
-- Render Mermaid diagrams
+- Build the grid-style index page (tile = icon + title + summary)
+- Build presentation mode itself (`##` slide splitting, `←` / `→` / `Space` / `Esc`, clickable progress bar, `?slide=N` URL sync)
+- Apply each entry's frontmatter `color` as the accent color
+- Render Mermaid diagrams client-side
 - Style everything in Tailwind, following your design tokens
 
 Once the implementation is done, start the dev server to check it out:
 
 ```bash
-pnpm dev
+npm run dev
 ```
 
 From the port-forwarding notification, click **"Open in browser"** and try it out.
 
 <Aside type="positive">
 
-**Try this**: Click through from the grid into a few entry detail pages. Jot down anything that feels off, UI tweaks you'd like, or features you wish were there (we'll add presentation mode, progress bars, etc. in the next step).
+**Try this**: Click through a few tiles on the grid and try out presentation mode. Move between slides with `←` / `→`, jump around by clicking the progress bar, and `Esc` returns to the index. Jot down anything that feels off, UI tweaks you'd like, or features you wish were there (we'll file them as Issues in the next step).
 
 </Aside>
 
@@ -108,29 +115,29 @@ Send the prompt below to Copilot Chat to file **8** Issues at once (the `github-
 ```
 Use the github-issues skill to create the following improvements as individual Issues in this repository.
 
-1. Title: Add a presentation mode to the detail page
-   Details: On the detail page, pressing `P` should toggle a **presentation mode**. Split the content into one slide per `##` heading, use `←` / `→` to move between slides within the same entry, and `Esc` to return to the normal view. While presenting, show a left sidebar with a table of contents of all entries and highlight the current one.
+1. Title: Add a left sidebar table of contents inside presentation mode
+   Details: While presenting, pressing `T` should toggle a collapsible left sidebar listing every entry in the repository. The currently displayed entry is highlighted. Clicking another entry switches its presentation, staying in presentation mode and jumping to slide 1 of the new entry.
 
-2. Title: Turn the slide-mode left sidebar into a categorized table of contents
-   Details: The current sidebar just lists entries as a flat list. Group them by the frontmatter `category` (introduction / plan / develop / review / secure / operate), each group with a pixel-font header (color depending on category). Each entry shows as "number + icon + titleEn", with the currently displayed entry highlighted.
+2. Title: Group the sidebar TOC by category
+   Details: Build on Issue 1. Instead of a flat list, group entries by frontmatter `category` (introduction / plan / develop / review / secure / operate). Each group gets a pixel-font header with a category-specific color. Each entry shows as "number + icon + titleEn".
 
-3. Title: Break the grid index page into category sections
+3. Title: Break the index page into category sections
    Details: Right now every entry sits in a single flat grid. Split them by `category`, with a heading and 1–2 lines of description per section (e.g. PLAN = set up the harness before you build, DEVELOP = write code with the AI, and so on).
 
 4. Title: Add a "links" slide at the end of each entry
    Details: The frontmatter `links` (already grouped) should appear as the last slide of each entry, displayed grouped by their group, each with a subheading. Easy to reference while presenting.
 
-5. Title: Center slide text both vertically and horizontally
-   Details: Content currently bunches up in the top-left, leaving whitespace at the bottom-right. Use flex/grid inside the slide area to align the heading and body visually toward the center — title slightly above center, body near the middle.
+5. Title: Replace the auto-generated title slide with an Octocat "in one line" hero slide
+   Details: Replace the plain auto-generated title slide with a more visual hero. Put an Octocat (Mona) image on the left and a bordered dialog on the right showing frontmatter `summary` as the speech. Add a small pixel-font label "in one line" in the top-left of the slide.
 
-6. Title: Add a progress bar at the top of the slides
-   Details: Show a thin neon-cyan progress bar at the very top of the screen indicating overall position. Add dividers at section boundaries so progress within the current section is also visible.
+6. Title: [Bug] Mermaid diagrams on non-initial slides aren't rendered
+   Details: Putting a ` ```mermaid ` block on any slide past slide 1 leaves a blank area. Mermaid only runs once at mount; we need to re-run `mermaid.run()` against the active slide's container whenever the visible slide changes.
 
-7. Title: Add an Octocat "in one line" summary slide at the start of each entry
-   Details: As the very first slide of each entry, place an Octocat (Mona) character image on the left and a bordered dialog on the right summarizing the frontmatter `summary`. Add a small pixel-font label "in one line" in the top-left of the slide.
+7. Title: [Bug] Slide content bunches up in the top-left, leaving empty space at bottom-right
+   Details: Slide content currently anchors to the top-left, with a lot of whitespace at the bottom-right. Use flex/grid in the slide area to center horizontally and vertically — heading slightly above center, body near the middle.
 
-8. Title: Keep presentation mode when switching entries
-   Details: Currently, navigating to another entry from the left sidebar drops presentation mode and returns to the normal view. While presenting, switching entries should **stay in presentation mode** and resume from the first slide of the new entry (only `Esc` returns to the normal view).
+8. Title: [Bug] Slide layout breaks and keyboard nav is unusable on mobile widths
+   Details: Below `max-width: 768px`, keyboard navigation is unavailable and slides overflow the viewport. On narrow widths, disable presentation mode and fall back to a single vertical scroll view that renders the whole entry as a long-form page.
 ```
 
 You can find the resulting Issues in the [Issues tab of your repository](#). We'll have Cloud Agent / Copilot CLI implement them in the next sections.

@@ -76,6 +76,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   </script>
   <section
     class="max-w-5xl mx-auto px-4 py-12 playbook-detail"
+    style={`--entry-accent:${accent}`}
     data-prev={prev ? localizedPath(locale, `/playbook/${prev.slug}`) : ''}
     data-next={next ? localizedPath(locale, `/playbook/${next.slug}`) : ''}
     data-index={localizedPath(locale, '/playbook')}
@@ -197,7 +198,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       ><span class="key">Eng</span></a>
     </div>
 
-    <div class="slide-progress" aria-hidden="true"></div>
+    <div class="slide-progress" role="tablist" aria-label="Slides"></div>
     <div class="slide-counter font-pixel text-[10px]" aria-hidden="true"></div>
     <div class="slide-title-tag" aria-hidden="true"></div>
     <nav class="present-toc" aria-label={t.playbook.tocLabel} data-current-id={item.slug} transition:persist="present-toc">
@@ -278,6 +279,124 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     return groups;
   }
 
+  // ── Hero-quote typewriter reveal ─────────────────────────────
+  type HeroReveal = {
+    textNodes: Text[];
+    originals: string[];
+    total: number;
+    timer: ReturnType<typeof setTimeout> | null;
+  };
+  const heroReveals = new Map<HTMLElement, HeroReveal>();
+  const HERO_REVEAL_SPEED_MS = 18;
+  const HERO_REVEAL_DELAY_MS = 140;
+
+  function captureHero(el: HTMLElement): HeroReveal {
+    const cached = heroReveals.get(el);
+    if (cached) return cached;
+    const textNodes: Text[] = [];
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    let n: Node | null = walker.nextNode();
+    while (n) {
+      textNodes.push(n as Text);
+      n = walker.nextNode();
+    }
+    const originals = textNodes.map((t) => t.nodeValue ?? '');
+    const total = originals.reduce((sum, s) => sum + s.length, 0);
+    const data: HeroReveal = { textNodes, originals, total, timer: null };
+    heroReveals.set(el, data);
+    return data;
+  }
+
+  function applyHeroShown(data: HeroReveal, shown: number) {
+    let remaining = shown;
+    for (let i = 0; i < data.textNodes.length; i++) {
+      const full = data.originals[i];
+      if (remaining <= 0) {
+        data.textNodes[i].nodeValue = '';
+        continue;
+      }
+      const take = Math.min(full.length, remaining);
+      data.textNodes[i].nodeValue = full.slice(0, take);
+      remaining -= take;
+    }
+  }
+
+  function finishHero(el: HTMLElement) {
+    const data = heroReveals.get(el);
+    if (!data) return;
+    if (data.timer) {
+      clearTimeout(data.timer);
+      data.timer = null;
+    }
+    applyHeroShown(data, data.total);
+    el.style.minHeight = '';
+    el.classList.remove('akq-typing');
+  }
+
+  function startHeroReveal(el: HTMLElement) {
+    const data = captureHero(el);
+    if (data.timer) {
+      clearTimeout(data.timer);
+      data.timer = null;
+    }
+    if (data.total === 0) {
+      el.classList.remove('akq-typing');
+      return;
+    }
+    const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+      applyHeroShown(data, data.total);
+      el.classList.remove('akq-typing');
+      return;
+    }
+    // Snapshot rendered height with full text so the bubble doesn't collapse during reveal
+    applyHeroShown(data, data.total);
+    const h = el.getBoundingClientRect().height;
+    if (h > 0) el.style.minHeight = h + 'px';
+    applyHeroShown(data, 0);
+    el.classList.add('akq-typing');
+    let i = 0;
+    const tick = () => {
+      i += 1;
+      applyHeroShown(data, i);
+      if (i < data.total) {
+        data.timer = setTimeout(tick, HERO_REVEAL_SPEED_MS);
+      } else {
+        data.timer = null;
+        el.style.minHeight = '';
+        el.classList.remove('akq-typing');
+      }
+    };
+    data.timer = setTimeout(tick, HERO_REVEAL_DELAY_MS);
+  }
+
+  function syncHeroReveals() {
+    const all = document.querySelectorAll<HTMLElement>('.prose-akq .hero-quote');
+    all.forEach((el) => {
+      const slideEl = el.closest('.akq-slide-el');
+      const isActive = slideEl?.classList.contains('akq-slide-active');
+      if (isActive) startHeroReveal(el);
+      else finishHero(el);
+    });
+  }
+
+  function finishAllHeroReveals() {
+    heroReveals.forEach((_, el) => finishHero(el));
+  }
+
+  // Delegated click-to-skip on hero-quotes
+  if (!(window as any).__akqHeroSkipBound) {
+    (window as any).__akqHeroSkipBound = true;
+    document.addEventListener('click', (e) => {
+      if (!document.body.classList.contains('present-mode')) return;
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+      if (target.closest('a')) return;
+      const bubble = target.closest<HTMLElement>('.prose-akq .hero-quote');
+      if (bubble) finishHero(bubble);
+    });
+  }
+
   function showSlide(i: number) {
     if (!slides.length) return;
     current = Math.max(0, Math.min(slides.length - 1, i));
@@ -289,6 +408,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       });
     });
     updateChrome();
+    syncHeroReveals();
   }
 
   function updateChrome() {
@@ -298,8 +418,19 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     if (prog) {
       prog.innerHTML = '';
       for (let i = 0; i < slides.length; i++) {
-        const bar = document.createElement('span');
+        const bar = document.createElement('button');
+        bar.type = 'button';
         bar.className = 'slide-progress-bar' + (i <= current ? ' active' : '');
+        bar.dataset.slideIndex = String(i);
+        bar.setAttribute('role', 'tab');
+        bar.setAttribute('aria-label', `Slide ${i + 1}`);
+        bar.setAttribute('aria-selected', i === current ? 'true' : 'false');
+        bar.addEventListener('click', () => {
+          showSlide(i);
+          const url = new URL(window.location.href);
+          url.searchParams.set('slide', String(i));
+          history.replaceState(null, '', url.pathname + url.search);
+        });
         prog.appendChild(bar);
       }
     }
@@ -370,6 +501,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
 
   function exitSlideMode() {
+    finishAllHeroReveals();
     restoreFns.forEach((fn) => fn());
     restoreFns = [];
     document
@@ -1514,7 +1646,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     right: 16px;
     display: none;
     gap: 16px;
-    color: #00f0ff;
+    color: var(--entry-accent, #00f0ff);
     z-index: 60;
     opacity: 0.6;
   }
@@ -1522,13 +1654,13 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 22px;
-    height: 22px;
-    padding: 0 6px;
-    font-size: 14px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    font-size: 11px;
     line-height: 1;
-    background: rgba(0, 240, 255, 0.15);
-    border: 1px solid #00f0ff;
+    background: color-mix(in srgb, var(--entry-accent, #00f0ff) 15%, transparent);
+    border: 1px solid var(--entry-accent, #00f0ff);
     margin: 0 2px;
   }
   .present-overlay-hint .present-lang-toggle {
@@ -1737,18 +1869,42 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     display: none;
     position: fixed;
     top: 0; left: 0; right: 0;
-    padding: 12px 16px;
+    padding: 4px 16px;
     gap: 4px;
     z-index: 60;
+    background: #05060f;
+    border-bottom: 1px dashed rgba(0, 240, 255, 0.15);
   }
   body.present-mode .slide-progress { display: flex; }
   .slide-progress-bar {
     flex: 1;
-    height: 4px;
-    background: rgba(0, 240, 255, 0.15);
-    transition: background 0.2s;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    padding: 6px 0;
+    position: relative;
+    appearance: none;
+    -webkit-appearance: none;
   }
-  .slide-progress-bar.active { background: #00f0ff; box-shadow: 0 0 6px #00f0ff; }
+  .slide-progress-bar::before {
+    content: '';
+    display: block;
+    height: 3px;
+    background: color-mix(in srgb, var(--entry-accent, #00f0ff) 15%, transparent);
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .slide-progress-bar.active::before {
+    background: var(--entry-accent, #00f0ff);
+    box-shadow: 0 0 6px var(--entry-accent, #00f0ff);
+  }
+  .slide-progress-bar:hover::before {
+    background: color-mix(in srgb, var(--entry-accent, #00f0ff) 55%, transparent);
+  }
+  .slide-progress-bar:focus-visible { outline: none; }
+  .slide-progress-bar:focus-visible::before {
+    background: var(--entry-accent, #00f0ff);
+    box-shadow: 0 0 8px var(--entry-accent, #00f0ff);
+  }
 
   /* ── Slide counter (bottom right) ── */
   .slide-counter {
@@ -1756,11 +1912,11 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     position: fixed;
     bottom: 16px;
     right: 16px;
-    color: #00f0ff;
+    color: var(--entry-accent, #00f0ff);
     z-index: 60;
     padding: 6px 10px;
     background: rgba(10, 14, 39, 0.8);
-    border: 1px solid rgba(0, 240, 255, 0.4);
+    border: 1px solid color-mix(in srgb, var(--entry-accent, #00f0ff) 40%, transparent);
   }
   body.present-mode .slide-counter { display: block; }
 
@@ -1768,7 +1924,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .slide-title-tag {
     display: none;
     position: fixed;
-    top: 28px;
+    top: 32px;
     left: 28px;
     z-index: 60;
     padding: 10px 18px;
@@ -1800,26 +1956,26 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 
   /* ── Match the overlay-hint style to the title tag ── */
   body.present-mode .present-overlay-hint {
-    top: 28px;
+    top: 32px;
     right: 22px;
-    padding: 10px 16px;
+    padding: 6px 12px;
     background: rgba(10, 14, 39, 0.85);
-    border: 2px solid rgba(0, 240, 255, 0.55);
-    box-shadow: 4px 4px 0 #05060f, 0 0 14px rgba(0, 240, 255, 0.25);
+    border: 2px solid color-mix(in srgb, var(--entry-accent, #00f0ff) 55%, transparent);
+    box-shadow: 4px 4px 0 #05060f, 0 0 14px color-mix(in srgb, var(--entry-accent, #00f0ff) 25%, transparent);
     opacity: 0.95;
-    font-size: 12px;
-    gap: 14px;
+    font-size: 10px;
+    gap: 10px;
   }
 
   /* Counter: same retro card style */
   body.present-mode .slide-counter {
     bottom: 18px;
     right: 22px;
-    padding: 8px 14px;
+    padding: 5px 10px;
     background: rgba(10, 14, 39, 0.85);
-    border: 2px solid rgba(0, 240, 255, 0.55);
-    box-shadow: 4px 4px 0 #05060f, 0 0 14px rgba(0, 240, 255, 0.25);
-    color: #00f0ff;
-    font-size: 12px;
+    border: 2px solid color-mix(in srgb, var(--entry-accent, #00f0ff) 55%, transparent);
+    box-shadow: 4px 4px 0 #05060f, 0 0 14px color-mix(in srgb, var(--entry-accent, #00f0ff) 25%, transparent);
+    color: var(--entry-accent, #00f0ff);
+    font-size: 10px;
   }
 </style>
