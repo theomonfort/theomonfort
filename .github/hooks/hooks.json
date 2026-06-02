@@ -5,7 +5,7 @@
       {
         "type": "command",
         "matcher": ".*(bash|shell|terminal|command).*",
-        "bash": "node ./scripts/stop",
+        "bash": "node ./scripts/block-protected-paths.mjs",
         "cwd": ".github/hooks",
         "timeoutSec": 5
       }
