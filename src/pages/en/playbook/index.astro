@@ -133,12 +133,23 @@ const grouped = categories.map((cat) => ({
   // On desktop (≥768px) — wide enough for the present-mode TOC sidebar — open
   // each playbook tile directly in presentation mode. Mobile keeps the plain
   // article view because present mode has no on-screen slide navigation.
+  const TOC_HIDDEN_KEY = 'akq:present:toc-hidden';
   function upgradePlaybookTiles() {
     if (!window.matchMedia('(min-width: 768px)').matches) return;
     document.querySelectorAll<HTMLAnchorElement>('a[data-playbook-tile]').forEach((a) => {
       const href = a.getAttribute('href');
-      if (!href || /[?&]present=1\b/.test(href)) return;
-      a.setAttribute('href', href + (href.includes('?') ? '&' : '?') + 'present=1');
+      if (href && !/[?&]present=1\b/.test(href)) {
+        a.setAttribute('href', href + (href.includes('?') ? '&' : '?') + 'present=1');
+      }
+      if (a.dataset.tileClickBound === '1') return;
+      a.dataset.tileClickBound = '1';
+      // Clear any sticky "TOC hidden" preference so entering a playbook
+      // from the index always starts with the TOC visible. Subsequent
+      // in-mode navigation (arrow keys between slides) still respects the
+      // user's toggle.
+      a.addEventListener('click', () => {
+        try { localStorage.removeItem(TOC_HIDDEN_KEY); } catch {}
+      });
     });
   }
   upgradePlaybookTiles();
