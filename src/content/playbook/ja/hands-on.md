@@ -15,7 +15,7 @@ links:
     label: ワークショップ(ハンズオン)を開く
     url: https://theomonfort.github.io/theomonfort/handson/
   - group: 📖 関連リソース
-    label: GitHub Codespaces
+    label: Codespaces
     url: https://github.com/features/codespaces
   - group: 📖 関連リソース
     label: Google Codelabs (claat)

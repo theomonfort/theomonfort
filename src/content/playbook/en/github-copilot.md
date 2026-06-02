@@ -30,7 +30,12 @@ links:
 
 ## At a Glance
 
-GitHub Copilot is the world's most widely used AI development tool. It is the orchestrator that lets you **freely combine major AI models with a variety of surfaces**.
+<div class="hero-quote hero-quote-mona">
+  <p>GitHub Copilot is the world's most widely adopted <strong>AI developer tool</strong>.</p>
+  <p>It accelerates your <strong>flow</strong> across every surface — <strong>editor, terminal, and GitHub</strong>.</p>
+</div>
+
+## AI Models & Surfaces
 
 Available AI models: OpenAI / Anthropic / Google Gemini / xAI Grok, plus support for custom models.
 

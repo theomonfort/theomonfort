@@ -15,7 +15,7 @@ links:
     label: Open the hands-on workshop
     url: https://theomonfort.github.io/theomonfort/en/handson/
   - group: 📖 Related
-    label: GitHub Codespaces
+    label: Codespaces
     url: https://github.com/features/codespaces
   - group: 📖 Related
     label: Google Codelabs (claat)

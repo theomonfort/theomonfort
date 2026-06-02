@@ -119,15 +119,14 @@ description: "フロントエンドのデザイントークン（レトロ JRPG 
 
 ## フォント
 
-| 用途                       | フォント            | Tailwind        |
-| -------------------------- | ------------------- | --------------- |
-| ラテン見出し (ピクセル)    | `'Press Start 2P'`  | `font-pixel`    |
-| 日本語見出し (ピクセル)    | `'DotGothic16'`     | `font-pixel-jp` |
-| 本文 (日 + 英、body 既定)  | `'Noto Sans JP'`    | `font-body`     |
-| コード                     | `'IBM Plex Mono'`   | `font-mono`     |
-| CRT 風 (数字・装飾)        | `'VT323'`           | `font-terminal` |
+| 用途                                    | フォント            | Tailwind        |
+| --------------------------------------- | ------------------- | --------------- |
+| ブランド見出し (H1・ロゴ・大型ラベル)   | `'Press Start 2P'`  | `font-pixel`    |
+| 本文・見出し (日 + 英、既定)            | `'DotGothic16'`     | `font-pixel-jp` |
+| プレゼンモードの装飾 (slide counter 等) | `'VT323'`           | `font-terminal` |
+| コードブロック                          | `'IBM Plex Mono'`   | `font-mono`     |
 
-すべて `monospace` / `sans-serif` を fallback に。
+`'Press Start 2P'` は小文字グリフを持たない（全部大文字になる）ので、ブランドロゴと最上位の見出しに限定。本文・節見出し・TOC・リンク・カードの説明など、**プロースは原則すべて `font-pixel-jp` (DotGothic16)** を使う — 日本語とラテン文字を一つのピクセルグリッドで揃えられる。すべて `monospace` / `sans-serif` を fallback に。
 
 ## エフェクト
 

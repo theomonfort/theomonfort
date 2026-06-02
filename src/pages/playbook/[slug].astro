@@ -77,6 +77,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   <section
     class="max-w-5xl mx-auto px-4 py-12 playbook-detail"
     style={`--entry-accent:${accent}`}
+    data-category={entry.data.category}
     data-prev={prev ? localizedPath(locale, `/playbook/${prev.slug}`) : ''}
     data-next={next ? localizedPath(locale, `/playbook/${next.slug}`) : ''}
     data-index={localizedPath(locale, '/playbook')}
@@ -111,7 +112,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 
     {entry.data.links.length > 0 && (
       <aside class="links-aside mt-10 p-2">
-        <h2 class="font-pixel text-base md:text-lg mb-6" style={`color:${accent}`}>{t.playbook.officialLinks}</h2>
+        <h2 class="font-pixel-jp text-base md:text-lg mb-6" style={`color:${accent}`}>{t.playbook.officialLinks}</h2>
         {hasGroups ? (
           <div class="space-y-7">
             {linkGroups.map((g) => (
@@ -123,7 +124,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
                 )}
                 <ul class="space-y-3">
                   {g.items.map((l) => (
-                    <li class="font-mono text-base md:text-lg leading-relaxed">
+                    <li class="font-pixel-jp text-base md:text-lg leading-relaxed">
                       <MenuArrow /> <a href={l.url} target="_blank" rel="noopener noreferrer" class="retro-link">{l.label}</a>
                     </li>
                   ))}
@@ -134,7 +135,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
         ) : (
           <ul class="space-y-3">
             {entry.data.links.map((l) => (
-              <li class="font-mono text-base md:text-lg leading-relaxed">
+              <li class="font-pixel-jp text-base md:text-lg leading-relaxed">
                 <MenuArrow /> <a href={l.url} target="_blank" rel="noopener noreferrer" class="retro-link">{l.label}</a>
               </li>
             ))}
@@ -181,15 +182,18 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     <button
       type="button"
       id="present-toggle"
-      class="present-hint font-pixel text-[10px]"
+      class="present-hint font-pixel-jp text-[10px]"
       aria-label="Toggle presentation mode"
     >
       <span class="key">P</span> {t.playbook.presentationMode}
     </button>
 
-    <div class="present-overlay-hint font-pixel text-[10px]" aria-hidden="true">
+    <div class="present-overlay-hint font-pixel-jp text-[10px]" aria-hidden="true">
       <span><span class="key">◀</span> <span class="key">▶</span> {t.playbook.slides}</span>
       <span><span class="key">Esc</span> {t.playbook.exit}</span>
+      <button type="button" class="present-toc-toggle" aria-label="目次の表示切り替え" data-toc-toggle>
+        <span class="key">T</span> 目次
+      </button>
       <a
         class="present-lang-toggle"
         href={`${localizedPath('en', `/playbook/${item.slug}`)}?present=1`}
@@ -549,6 +553,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     const wasOn = document.body.classList.contains('present-mode');
     document.body.classList.toggle('present-mode', on);
     document.documentElement.classList.toggle('present-mode', on);
+    if (on) restoreTocPref();
     const url = new URL(window.location.href);
     if (on) url.searchParams.set('present', '1');
     else { url.searchParams.delete('present'); url.searchParams.delete('slide'); }
@@ -656,6 +661,40 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       }
       return;
     }
+    if (e.key === 't' || e.key === 'T') {
+      e.preventDefault();
+      toggleToc();
+      return;
+    }
+  }
+
+  const TOC_HIDDEN_KEY = 'akq:present:toc-hidden';
+  function applyTocHidden(hidden: boolean) {
+    document.body.classList.toggle('akq-toc-hidden', hidden);
+    document
+      .querySelectorAll<HTMLButtonElement>('[data-toc-toggle]')
+      .forEach((btn) => btn.setAttribute('aria-pressed', hidden ? 'true' : 'false'));
+  }
+  function toggleToc(force?: boolean) {
+    const next = typeof force === 'boolean' ? force : !document.body.classList.contains('akq-toc-hidden');
+    applyTocHidden(next);
+    try {
+      localStorage.setItem(TOC_HIDDEN_KEY, next ? '1' : '0');
+    } catch {}
+  }
+  function restoreTocPref() {
+    let hidden = false;
+    try {
+      hidden = localStorage.getItem(TOC_HIDDEN_KEY) === '1';
+    } catch {}
+    applyTocHidden(hidden);
+  }
+  function onTocToggleClick(e: MouseEvent) {
+    const target = e.target as HTMLElement | null;
+    const btn = target?.closest<HTMLElement>('[data-toc-toggle]');
+    if (!btn) return;
+    e.preventDefault();
+    toggleToc();
   }
 
   async function navigateSmooth(href: string) {
@@ -688,6 +727,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
 
   document.addEventListener('keydown', onKey);
+  document.addEventListener('click', onTocToggleClick);
   function preparePresentNavigation(event?: Event) {
     if (escapingFromPresent) {
       // Escape-to-index: don't carry present-mode onto the destination doc.
@@ -707,6 +747,9 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     const nextDocument = astroEvent.newDocument ?? astroEvent.detail?.newDocument;
     nextDocument?.documentElement.classList.add('present-mode', SLIDE_PREPARING_CLASS);
     nextDocument?.body?.classList.add('present-mode', SLIDE_PREPARING_CLASS);
+    if (document.body.classList.contains('akq-toc-hidden')) {
+      nextDocument?.body?.classList.add('akq-toc-hidden');
+    }
   }
   function clearPresentAfterEscape() {
     if (!escapingFromPresent) return;
@@ -722,6 +765,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   document.addEventListener('astro:page-load', initGlossaryInteractions);
   win.__akqGlossaryCleanup = () => {
     document.removeEventListener('keydown', onKey);
+    document.removeEventListener('click', onTocToggleClick);
     document.removeEventListener('astro:before-preparation', preparePresentNavigation);
     document.removeEventListener('astro:before-swap', preparePresentNavigation);
     document.removeEventListener('astro:after-swap', clearPresentAfterEscape);
@@ -910,7 +954,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       rgba(5, 6, 15, 0.85);
     border: 2px solid var(--entry-accent, #00f0ff);
     box-shadow: 4px 4px 0 #05060f;
-    font-family: 'DotGothic16', 'Courier New', monospace;
+    font-family: 'DotGothic16', monospace;
     font-size: 1.15em;
     line-height: 1.7;
     margin-left: 150px;
@@ -1360,6 +1404,10 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     border-top: 1px dashed rgba(0, 240, 255, 0.15);
   }
   .prose-akq table td:last-child { border-right: none; }
+  .prose-akq table th:first-child,
+  .prose-akq table td:first-child {
+    white-space: nowrap;
+  }
   .prose-akq table tbody tr:hover { background: rgba(0, 240, 255, 0.04); }
   .prose-akq table code {
     color: #9bbc0f;
@@ -1677,6 +1725,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 
   /* ── Presentation mode ── */
   body.present-mode { background: #05060f !important; overflow: hidden; }
+  body.present-mode header.sticky,
   body.present-mode nav,
   body.present-mode footer,
   body.present-mode .bgm-player,
@@ -1750,17 +1799,46 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       top: 0;
       left: 0;
       bottom: 0;
-      width: 240px;
+      width: 300px;
       padding: 2.5rem 1rem 2rem;
       gap: 0.15rem;
       overflow-y: auto;
       background: #0a0e27;
       border-right: 1px solid rgba(255,46,136,0.2);
       z-index: 40;
+      transition: transform 0.25s ease;
     }
     body.present-mode .playbook-detail {
-      padding-left: 260px;
+      padding-left: 320px;
+      transition: padding-left 0.25s ease, background 0.4s ease;
     }
+    body.present-mode.akq-toc-hidden .present-toc {
+      transform: translateX(-100%);
+    }
+    body.present-mode.akq-toc-hidden .playbook-detail {
+      padding-left: 2.5rem;
+    }
+  }
+  /* TOC toggle chip in the help overlay */
+  .present-toc-toggle {
+    display: inline-flex;
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    pointer-events: auto;
+    padding: 0;
+    transition: color 0.15s, transform 0.15s;
+  }
+  .present-toc-toggle:hover { color: #ff2e88; transform: translate(-1px, -1px); }
+  .present-toc-toggle:hover .key { background: rgba(255, 46, 136, 0.15); border-color: #ff2e88; }
+  .present-toc-toggle[aria-pressed="true"] .key {
+    background: color-mix(in srgb, var(--entry-accent, #00f0ff) 40%, transparent);
+  }
+  @media (max-width: 767px) {
+    .present-toc-toggle { display: none; }
   }
   .present-toc .toc-item {
     display: flex !important;
@@ -1773,7 +1851,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     border: none;
     border-left: 2px solid transparent;
     color: #e8f4ff;
-    font-family: 'DotGothic16', 'Noto Sans JP', sans-serif;
+    font-family: 'DotGothic16', monospace;
     font-size: 0.9rem;
     line-height: 1.35;
     cursor: pointer;
@@ -1795,8 +1873,8 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     font-weight: 700;
   }
   .present-toc .toc-section {
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 0.7rem;
+    font-family: 'DotGothic16', 'Noto Sans JP', monospace;
+    font-size: 0.72rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     padding: 0.85rem 0.6rem 0.35rem;
@@ -1808,8 +1886,8 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     margin-top: 0;
   }
   .present-toc .toc-num {
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 0.72rem;
+    font-family: 'DotGothic16', 'Noto Sans JP', monospace;
+    font-size: 0.78rem;
     color: var(--cat-color, #ffb000);
     flex-shrink: 0;
     min-width: 1.6rem;
@@ -1836,7 +1914,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
   }
   body.present-mode .playbook-detail {
-    transition: background 0.4s ease;
+    transition: background 0.4s ease, padding-left 0.25s ease;
   }
 
   /* Boost typography in slide mode */
@@ -1873,7 +1951,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     gap: 4px;
     z-index: 60;
     background: #05060f;
-    border-bottom: 1px dashed rgba(0, 240, 255, 0.15);
+    border-bottom: 1px dashed color-mix(in srgb, var(--entry-accent, #00f0ff) 25%, transparent);
   }
   body.present-mode .slide-progress { display: flex; }
   .slide-progress-bar {
@@ -1963,7 +2041,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     border: 2px solid color-mix(in srgb, var(--entry-accent, #00f0ff) 55%, transparent);
     box-shadow: 4px 4px 0 #05060f, 0 0 14px color-mix(in srgb, var(--entry-accent, #00f0ff) 25%, transparent);
     opacity: 0.95;
-    font-size: 10px;
+    font-size: 18px;
     gap: 10px;
   }
 
@@ -1971,11 +2049,36 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   body.present-mode .slide-counter {
     bottom: 18px;
     right: 22px;
-    padding: 5px 10px;
+    padding: 6px 14px;
     background: rgba(10, 14, 39, 0.85);
     border: 2px solid color-mix(in srgb, var(--entry-accent, #00f0ff) 55%, transparent);
     box-shadow: 4px 4px 0 #05060f, 0 0 14px color-mix(in srgb, var(--entry-accent, #00f0ff) 25%, transparent);
     color: var(--entry-accent, #00f0ff);
-    font-size: 10px;
+    font-size: 24px;
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     Combo A — CRT terminal (site-wide playbook default)
+     Headings: Orbitron · Body + TOC: Share Tech Mono · Chrome: VT323
+     JP fallback for headings: DotGothic16 (Orbitron has no JP glyphs)
+     ───────────────────────────────────────────────────────────── */
+  .playbook-detail .prose-akq {
+    font-family: 'DotGothic16', monospace;
+  }
+  .playbook-detail .prose-akq h2,
+  .playbook-detail .prose-akq h3 {
+    font-family: 'DotGothic16', monospace;
+  }
+  body.present-mode .playbook-detail .present-overlay-hint,
+  body.present-mode .playbook-detail .present-hint,
+  body.present-mode .playbook-detail .slide-counter {
+    font-family: 'VT323', 'Noto Sans JP', monospace !important;
+    letter-spacing: 0.02em;
+  }
+  body.present-mode .playbook-detail .present-overlay-hint {
+    font-size: 18px;
+  }
+  body.present-mode .playbook-detail .slide-counter {
+    font-size: 24px;
   }
 </style>

@@ -119,15 +119,14 @@ Build the `body` background as a radial gradient from deep purple → midnight �
 
 ## Fonts
 
-| Usage                            | Font                 | Tailwind        |
-| -------------------------------- | -------------------- | --------------- |
-| Latin headings (pixel)           | `'Press Start 2P'`   | `font-pixel`    |
-| Japanese headings (pixel)        | `'DotGothic16'`      | `font-pixel-jp` |
-| Body (JA + EN, default for body) | `'Noto Sans JP'`     | `font-body`     |
-| Code                             | `'IBM Plex Mono'`    | `font-mono`     |
-| CRT-style (numbers, accents)     | `'VT323'`            | `font-terminal` |
+| Usage                                      | Font                | Tailwind        |
+| ------------------------------------------ | ------------------- | --------------- |
+| Brand headings (H1, logo, top-level label) | `'Press Start 2P'`  | `font-pixel`    |
+| Body + headings (JA + EN, default prose)   | `'DotGothic16'`     | `font-pixel-jp` |
+| Presentation chrome (slide counter, etc.)  | `'VT323'`           | `font-terminal` |
+| Code blocks                                | `'IBM Plex Mono'`   | `font-mono`     |
 
-Always fall back to `monospace` / `sans-serif`.
+`'Press Start 2P'` has no lowercase glyphs (everything renders uppercase), so reserve it for brand logos and top-level titles only. Use **`font-pixel-jp` (DotGothic16) for all prose** — body, section headings, TOC, link lists, card descriptions — it covers JA and Latin on a single pixel grid. Always fall back to `monospace` / `sans-serif`.
 
 ## Effects
 

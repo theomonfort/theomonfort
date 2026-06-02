@@ -56,9 +56,9 @@ Build a small Astro site (English only). Work on a new branch (e.g. feature/play
 - **Presentation-mode behavior**:
   - Each `##` heading in the markdown becomes a new slide. The title slide is auto-generated from the frontmatter (`title`, `summary`, `icon`).
   - Keyboard: `←` / `→` (or `Space`) to move between slides, `Esc` to return to the index.
-  - A thin progress bar at the top of the screen shows the current slide; each segment is **clickable to jump directly to that slide**.
-  - The current slide index is reflected in the URL (e.g. `?slide=3`) so reload / sharing preserves position.
-  - Use each entry's frontmatter `color` as the deck's accent color (slide border, progress bar, headings).
+  - A vertical **section menu** on the left of the screen lists every section so the user can jump between them.
+  - Each slide is **well centered** on the screen, both vertically and horizontally.
+  - Use each entry's frontmatter `color` as the deck's accent color (slide border, headings).
 - Render any ` ```mermaid ` code blocks inside the markdown **as Mermaid diagrams** (client-side is fine).
 
 Once `npm run dev` confirms it works, commit and push your changes and open a pull request titled **"Playbook site foundations"**.
@@ -87,7 +87,7 @@ Copilot will automatically:
 - Bootstrap the Astro project (with npm)
 - Define the playbook collection in `src/content.config.ts`
 - Build the grid-style index page (tile = icon + title + summary)
-- Build presentation mode itself (`##` slide splitting, `←` / `→` / `Space` / `Esc`, clickable progress bar, `?slide=N` URL sync)
+- Build presentation mode itself (`##` slide splitting, `←` / `→` / `Space` / `Esc`, left-side section menu, well-centered slide layout)
 - Apply each entry's frontmatter `color` as the accent color
 - Render Mermaid diagrams client-side
 - Style everything in Tailwind, following your design tokens

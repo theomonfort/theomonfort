@@ -24,24 +24,6 @@ const playbook = defineCollection({
   }),
 });
 
-const philosophy = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/philosophy' }),
-  schema: z.object({
-    question: z.string(),
-    short: z.string(),
-    questionEn: z.string().optional(),
-    shortEn: z.string().optional(),
-    bodyEn: z.string().optional(),
-    order: z.number().default(0),
-    link: z
-      .object({ label: z.string(), url: z.string().url() })
-      .optional(),
-    linkEn: z
-      .object({ label: z.string(), url: z.string().url() })
-      .optional(),
-  }),
-});
-
 const equipment = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/equipment' }),
   schema: z.object({
@@ -80,4 +62,4 @@ const handson = defineCollection({
   }),
 });
 
-export const collections = { playbook, philosophy, equipment, handson };
+export const collections = { playbook, equipment, handson };

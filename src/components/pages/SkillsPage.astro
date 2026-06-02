@@ -45,7 +45,7 @@ const mcpEntries: McpEntry[] = bySection('mcp-servers')
     <header class="mb-8">
       <h1 class="font-pixel text-2xl md:text-4xl text-neon-magenta mb-3">{t.skills.heading}</h1>
       <p class="font-pixel-jp text-lg text-neon-cyan">{t.skills.subtitle}</p>
-      <p class="font-body text-sm text-phosphor/80 mt-4 max-w-2xl">
+      <p class="font-pixel-jp text-sm text-phosphor/80 mt-4 max-w-2xl">
         {t.skills.intro}
       </p>
     </header>
@@ -55,7 +55,7 @@ const mcpEntries: McpEntry[] = bySection('mcp-servers')
         <h2 class="font-pixel-jp text-2xl text-neon-cyan">{t.skills.sections.skills.heading}</h2>
         <span class="font-mono text-[10px] text-phosphor/50 ml-auto">{skillEntries.length}{t.skills.sections.skills.count}</span>
       </div>
-      <p class="font-body text-sm text-phosphor/80 mb-6">
+      <p class="font-pixel-jp text-sm text-phosphor/80 mb-6">
         {t.skills.sections.skills.body}
       </p>
       <SkillGallery client:load skills={skillEntries} copy={t.skillGallery} />
@@ -66,13 +66,13 @@ const mcpEntries: McpEntry[] = bySection('mcp-servers')
         <h2 class="font-pixel-jp text-2xl text-gb-green">{t.skills.sections.mcp.heading}</h2>
         <span class="font-mono text-[10px] text-phosphor/50 ml-auto">{mcpEntries.length}{t.skills.sections.mcp.count}</span>
       </div>
-      <p class="font-body text-sm text-phosphor/80 mb-6">{t.skills.sections.mcp.body}</p>
+      <p class="font-pixel-jp text-sm text-phosphor/80 mb-6">{t.skills.sections.mcp.body}</p>
       <McpGallery client:load servers={mcpEntries} copy={t.mcpGallery} />
     </section>
 
     <div class="mt-12 p-5 bg-shadow-ink/70 border-2 border-dashed border-phosphor/30">
       <h2 class="font-pixel text-xs text-crt-amber mb-2">{t.skills.tipsTitle}</h2>
-      <ul class="font-body text-sm text-phosphor/85 space-y-1 list-disc list-inside">
+      <ul class="font-pixel-jp text-sm text-phosphor/85 space-y-1 list-disc list-inside">
         {t.skills.tips.map((tip) => <li>{tip}</li>)}
       </ul>
     </div>

@@ -1,6 +1,6 @@
 ---
-title: GitHub Codespaces
-titleEn: GitHub Codespaces
+title: Codespaces
+titleEn: Codespaces
 summary: Customizable remote development environments hosted in the cloud. The ideal AI-driven development playground for safely sandboxing AI experiments and work.
 icon: /theomonfort/github-vscode-mark.png
 color: cyan
@@ -9,7 +9,7 @@ category: develop
 related: ['cloud-agent', 'agentic-workflow', 'cli']
 links:
   - group: GitHub Docs
-    label: GitHub Codespaces (overview)
+    label: Codespaces (overview)
     url: https://github.com/features/codespaces
   - group: GitHub Docs
     label: Codespaces documentation

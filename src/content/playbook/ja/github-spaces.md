@@ -1,6 +1,6 @@
 ---
-title: GitHub Copilot Spaces
-titleEn: GitHub Copilot Spaces
+title: Spaces
+titleEn: Spaces
 summary: "Copilot に渡したい文脈を、チームで整理・共有できる場所。コード、Issue、PR、ドキュメント、メモ、画像、指示をまとめて、質問への回答をその文脈に grounding する。"
 icon: 🪐
 color: magenta
@@ -9,13 +9,13 @@ category: develop
 related: ['context-engineering', 'copilot-chat', 'mcp', 'codespaces']
 links:
   - group: 📖 公式ドキュメント
-    label: About GitHub Copilot Spaces
+    label: About Spaces
     url: https://docs.github.com/en/copilot/concepts/spaces
   - group: 📖 公式ドキュメント
-    label: Creating GitHub Copilot Spaces
+    label: Creating Spaces
     url: https://docs.github.com/en/copilot/how-tos/provide-context/use-copilot-spaces/create-copilot-spaces
   - group: 📖 公式ドキュメント
-    label: Using GitHub Copilot Spaces
+    label: Using Spaces
     url: https://docs.github.com/en/copilot/how-tos/provide-context/use-copilot-spaces/use-copilot-spaces
   - group: 🎓 ユースケース
     label: Speeding up development work with Spaces
@@ -38,7 +38,7 @@ links:
 
 <div class="hero-quote hero-quote-chat">
   <p>
-    <strong>GitHub Copilot Spaces</strong> は、Copilot に見てほしい文脈を <strong>1 つの部屋</strong> にまとめる仕組み。
+    <strong>Spaces</strong> は、Copilot に見てほしい文脈を <strong>1 つの部屋</strong> にまとめる仕組み。
   </p>
   <p>
     repo、file、Issue、PR、メモ、画像、アップロード資料、instructions を集めて、Copilot Chat の回答をその文脈に grounding する。

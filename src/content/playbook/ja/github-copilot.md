@@ -30,7 +30,12 @@ links:
 
 ## 一言で
 
-GitHub Copilot は世界で最もご活用いただいている AI 開発ツール。**主要 AI モデルと多様な利用サーフェスを自由に組み合わせられる** オーケストレーターです。
+<div class="hero-quote hero-quote-mona">
+  <p>GitHub Copilot は世界で最もご活用いただいている <strong>AI 開発ツール</strong>。</p>
+  <p>エディタ・ターミナル・GitHub の<strong>あらゆる場面</strong>で、開発者の<strong>フロー</strong>を加速します。</p>
+</div>
+
+## AI モデルと利用サーフェス
 
 選べる AI モデル：OpenAI / Anthropic / Google Gemini / xAI Grok、さらにカスタムモデルにも対応。
 

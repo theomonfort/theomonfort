@@ -1,6 +1,6 @@
 ---
-title: GitHub Copilot Spaces
-titleEn: GitHub Copilot Spaces
+title: Spaces
+titleEn: Spaces
 summary: "A shared place to organize the context you want Copilot to use: code, issues, pull requests, docs, notes, images, uploads, and instructions that ground Copilot's answers."
 icon: 🪐
 color: magenta
@@ -9,13 +9,13 @@ category: develop
 related: ['context-engineering', 'copilot-chat', 'mcp', 'codespaces']
 links:
   - group: 📖 Official docs
-    label: About GitHub Copilot Spaces
+    label: About Spaces
     url: https://docs.github.com/en/copilot/concepts/spaces
   - group: 📖 Official docs
-    label: Creating GitHub Copilot Spaces
+    label: Creating Spaces
     url: https://docs.github.com/en/copilot/how-tos/provide-context/use-copilot-spaces/create-copilot-spaces
   - group: 📖 Official docs
-    label: Using GitHub Copilot Spaces
+    label: Using Spaces
     url: https://docs.github.com/en/copilot/how-tos/provide-context/use-copilot-spaces/use-copilot-spaces
   - group: 🎓 Use cases
     label: Speeding up development work with Spaces
@@ -38,7 +38,7 @@ links:
 
 <div class="hero-quote hero-quote-chat">
   <p>
-    <strong>GitHub Copilot Spaces</strong> gives Copilot a <strong>curated context room</strong> for a task, system, or team.
+    <strong>Spaces</strong> gives Copilot a <strong>curated context room</strong> for a task, system, or team.
   </p>
   <p>
     Collect repos, files, issues, pull requests, notes, images, uploaded documents, and instructions, then ask Copilot questions grounded in that context.
