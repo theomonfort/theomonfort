@@ -30,9 +30,6 @@ links:
     label: GitHub YouTube
     url: https://www.youtube.com/@GitHub
   - group: 🇯🇵 日本コミュニティ
-    label: GitHub Japan YouTube
-    url: https://www.youtube.com/@GitHubJapan
-  - group: 🇯🇵 日本コミュニティ
     label: GitHub Japan X (Twitter)
     url: https://x.com/GitHubJapan
 ---

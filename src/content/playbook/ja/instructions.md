@@ -26,9 +26,6 @@ links:
   - group: 📚 もっと学ぶ
     label: GitHub Docs — Customize Copilot responses with custom instructions
     url: https://docs.github.com/copilot/customizing-copilot/about-customizing-github-copilot-chat-responses
-  - group: 📚 もっと学ぶ
-    label: GitHub Blog — Tips & best practices for Copilot
-    url: https://github.blog/ai-and-ml/github-copilot/5-tips-and-tricks-when-using-github-copilot/
   - group: 📰 Recent Changelog
     label: "Organization custom instructions are now generally available (2026-04-02)"
     url: https://github.blog/changelog/2026-04-02-copilot-organization-custom-instructions-are-generally-available
