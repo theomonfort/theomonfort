@@ -43,8 +43,6 @@ The goal isn't a contrived demo app — it's **this very site you're looking at*
 
 ## Workshop Flow
 
-You build a **simplified version of this playbook site** through 5 phases that exercise the core features end-to-end.
-
 <div class="workshop-flow-vertical">
 
 ```mermaid
@@ -68,8 +66,6 @@ flowchart TB
 ```
 
 </div>
-
-> 📝 This is a **simplified workshop flow** — real SDLC phases overlap and loop. The goal is to build intuition for *which feature fits which moment*.
 
 ## Getting Started
 
