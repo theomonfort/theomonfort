@@ -588,13 +588,6 @@ a.retro-link:hover::after {
   background: rgba(5, 6, 15, 0.6);
   box-shadow: 4px 4px 0 rgba(0, 240, 255, 0.18);
 }
-/* Typewriter reveal: hide the bubble's text until JS has captured it; the
-   script then types characters in once the bubble scrolls into view.
-   Fallback if JS is disabled — the [data-akq-typewriter] attribute is
-   never set, so the text stays fully visible. */
-.handson-article .hero-quote[data-akq-typewriter]:not([data-akq-ready]) .hero-quote-text {
-  visibility: hidden;
-}
 @media (max-width: 1023px) {
   .handson-article .hero-quote {
     margin-left: 0;
