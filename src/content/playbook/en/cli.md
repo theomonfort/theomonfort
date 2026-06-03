@@ -133,105 +133,32 @@ The CLI lets you instantly check models, sharing, experimental features, and env
 
 ## Non-interactive Mode (Programmatic Execution) ★
 
-<div class="hero-quote hero-quote-plain">
-  <p>
-    Copilot CLI can be run <strong>with a single command without opening an interactive session</strong>. Pass a prompt with <code>copilot -p "..."</code> and it executes one turn and exits.
-  </p>
-  <p>
-    Since it can be called from shell scripts, cron, <strong>batch files</strong>, and <strong>GitHub Actions</strong>, you can delegate routine work — PR auto-review and similar tasks that don't need a human — to Copilot.
-  </p>
-</div>
+Copilot CLI can be run with a single command using `copilot -p "..."`. It executes one turn and exits without opening an interactive session, so it can be called from shell scripts, cron, **batch files**, and **GitHub Actions**. Delegate routine work — PR auto-review, lint fixes, release notes — to Copilot whenever a human doesn't need to be in the loop.
 
-> 🎯 If you find yourself asking the same thing in the interactive UI every day, that's a **signal to script it**. Put it on `cron` with `-p` and let it run while you sleep.
+### Key flags
 
-### Basic Usage
+- `-p "..."` / `--prompt "..."` — Pass a prompt and exit after one turn
+- `-s` (silent) — Output response text only to stdout (ideal for variable assignment or piping)
+- `--no-ask-user` — Skip clarifying questions; make decisions autonomously
+- `--allow-tool='shell(npm:*), write'` — Allow only the necessary tools (`--allow-all` is for sandboxes only)
+- `--model gpt-5.5` — Pin the model to reduce variance
+- `--share='./session.md'` — Save the entire session as Markdown
 
-```bash
-# Pass the prompt directly
-copilot -p "Explain this file: ./complex.ts"
+### Common use cases
 
-# Pipe it in
-echo "Explain this file: ./complex.ts" | copilot
-```
+- 📝 Commit message generation / 📰 Release note drafting
+- 🐛 Bulk lint error fixes / 🧪 Tests for untested modules
+- 🔍 AI PR review (script `/review`) / 🔐 Dependency vulnerability audit
+- 📚 Bulk README & JSDoc generation / 🌏 Document translation
 
-| Common flags | What they do |
-| --- | --- |
-| `-p "..."` / `--prompt "..."` | Pass a prompt and exit after one turn |
-| `-s` (silent) | Suppress metadata and output **response text only** to stdout (ideal for variable assignment or piping) |
-| `--no-ask-user` | Skip clarifying questions; make decisions autonomously when uncertain |
-| `--allow-tool='shell(npm:*), write'` | Allow **only the necessary tools** (this is the default rule; `--allow-all` is for sandboxes only) |
-| `--allow-url=...` | Restrict which URLs are allowed to be fetched |
-| `--model gpt-5.5` | Pin the model to reduce variance in results |
-| `--share='./report.md'` | Save the entire session as Markdown |
-| `--share-gist` | Upload the session to a Gist (not available for EMU / data residency orgs) |
+### Operational tips
 
-> 🔒 **Minimize permissions**. When running in CI, always use `--allow-tool` with a whitelist. Never use `--allow-all`.
-> 💰 1 call = 1 Copilot premium request consumed. When making hundreds of batch calls, keep an eye on consumption via <a class="retro-link" href="/theomonfort/en/playbook/copilot-metrics">Copilot Metrics ↗</a>.
-
-### Practical Automation Examples
-
-| Use case | Command |
-| --- | --- |
-| 📝 **Commit message generation** | `copilot -p 'Write a commit message for the staged changes' -s --allow-tool='shell(git:*)'` |
-| 📚 **Bulk README / JSDoc generation** | `copilot -p 'Generate JSDoc for all exported fns in src/api/' --allow-tool=write` |
-| 🐛 **Bulk lint error fixes** | `copilot -p 'Fix all ESLint errors' --allow-tool='write, shell(npm:*), shell(npx:*)'` |
-| 🧪 **Write tests for untested modules** | `copilot -p 'Write unit tests for src/utils/validators.ts' --allow-tool='write, shell(npm:*)'` |
-| 🔍 **AI PR review** | `copilot -p '/review changes vs main. Focus on bugs & security' -s --allow-tool='shell(git:*)'` |
-| 🔐 **Dependency vulnerability audit** | `copilot -p "Audit this project's deps for vulnerabilities" --allow-tool='shell(npm:*)' --share='./audit.md'` |
-| 📰 **Release note generation** | `copilot -p 'Summarize commits since v1.2.0 as release notes' -s --allow-tool='shell(git:*)'` |
-| 🌏 **Document translation** | `for f in docs/en/*.md; do copilot -p "Translate $f to Japanese, preserve markdown" -s > "docs/ja/$(basename $f)"; done` |
-
-### Common Shell Script Patterns
-
-**Capture into a variable**
-
-```bash
-node_version=$(copilot -p 'What Node.js version does this project require? Number only.' -s)
-echo "Required: $node_version"
-```
-
-**Use in a conditional**
-
-```bash
-if copilot -p 'Does this project have TypeScript errors? Reply only YES or NO.' -s | grep -qi "no"; then
-  echo "✅ Clean"
-else
-  echo "❌ Type errors detected" && exit 1
-fi
-```
-
-**Process multiple files sequentially**
-
-```bash
-for file in src/api/*.ts; do
-  echo "--- Reviewing $file ---" | tee -a review.md
-  copilot -p "Review $file for error handling issues" -s \
-    --allow-tool='shell(git:*)' | tee -a review.md
-done
-```
-
-### Using with GitHub Actions
-
-```yaml
-- name: Generate test coverage report
-  env:
-    COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_PAT }}
-  run: |
-    copilot -p "Run the test suite and produce a coverage summary" \
-      -s --allow-tool='shell(npm:*), write' --no-ask-user
-```
-
-- 🔑 **Pass authentication via environment variable**. Priority order: `COPILOT_GITHUB_TOKEN` → `GH_TOKEN` → `GITHUB_TOKEN`
-- 🧾 **Use fine-grained PAT (v2)** with the **"Copilot Requests" permission** (old `ghp_` format is not supported)
-- 📦 Can be called from cron / Jenkins / GitLab CI the same way (just pass auth via environment variables)
-
-### Design Tips
-
-- 🎯 **Be specific with prompts** — Spell out file names, function names, and expected output format. Specifying the **output format** (e.g., "Number only." or "Reply YES or NO.") makes downstream parsing easier.
-- 🛡️ **Allow only necessary tools** — Narrow the scope with `--allow-tool='shell(git:*), write'`
-- 🔁 **Think about idempotency** — When running in Actions, limit to operations that are safe to run multiple times with the same input (have a human review commits/pushes)
-- 📊 **Keep logs** — Save the entire session with `--share='./session.md'` so you can trace the reasoning behind results later
-- 🧩 **Build in interactive mode, then port to `-p`** — The fastest path is to iterate in interactive mode until the prompt is solid, then script it with `-p`
+- 🔑 Pass auth via env vars: `COPILOT_GITHUB_TOKEN` → `GH_TOKEN` → `GITHUB_TOKEN`
+- 🧾 Use **fine-grained PAT (v2)** with the "Copilot Requests" permission (old `ghp_` format isn't supported)
+- 🛡️ `--allow-tool` with a whitelist is the rule. Never use `--allow-all` outside a sandbox
+- 🎯 Be specific in prompts — pinning the output format ("Number only.", "YES/NO") makes parsing easy
+- 📊 Save sessions with `--share` so you can trace the reasoning behind results later
+- 🧩 Iterate the prompt in interactive mode first, then port it to `-p` once it's solid
 
 📘 Details:
 - <a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/copilot-cli/automate-copilot-cli/run-cli-programmatically" target="_blank" rel="noopener noreferrer">Running GitHub Copilot CLI programmatically ↗</a>
