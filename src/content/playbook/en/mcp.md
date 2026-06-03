@@ -99,8 +99,6 @@ flowchart LR
   class SL,JR,FS,PW,API tool
 ```
 
-The **AI Host** (VS Code, Copilot CLI, etc.) contains **multiple MCP Clients** internally, each maintaining a **1 Client ⇄ 1 Server** one-to-one connection. A Client/Server pair is added for each external tool you want to use. Because the protocol is fixed, adding a new Server is all it takes for every editor and agent to gain new capabilities.
-
 ## Why does it matter?
 
 Three values MCP brings:

@@ -35,7 +35,7 @@ links:
 
 <div class="hero-quote">
   <p>
-    <strong>Instructions</strong> are rule files you give Copilot in advance to define development rules it should always follow.
+    <strong>Instructions</strong> are rule files you give Copilot in advance to define development rules it should follow.
   </p>
   <p>
     They are loaded at the Repository / Organization / Personal scope, applying team conventions automatically without writing them into every prompt.
@@ -51,7 +51,7 @@ links:
 | 📦 **Repository** | `.github/copilot-instructions.md` (single file)<br/>or `.github/instructions/*.instructions.md` (with `applyTo`) | Project conventions, framework-specific rules, "always use library X" |
 | 🏢 **Org / Enterprise** | GitHub.com → Organization Settings → Copilot → Custom instructions | Compliance, security requirements, company-wide policies |
 
-> 🎯 **Merge order**: Org → Repository → Personal, stacked in that order. **Org rules are strongest** and cannot be overridden by users.
+> 🎯 **Precedence**: Personal → Repository → Organization, in that priority order. **Personal instructions take the highest priority**, so user settings override organization policy (see the <a href="https://docs.github.com/en/copilot/concepts/prompting/response-customization" target="_blank" rel="noopener noreferrer" class="retro-link">official docs</a> for details).
 
 ## 📦 Repository Level
 
@@ -91,3 +91,74 @@ This file uses pytest functional tests.
 - One assert per function
 - Always mock LLM calls
 ```
+
+## What happens inside the harness?
+
+At session start, the harness loads the **always-on instructions** (`.github/copilot-instructions.md`) into context. When the user then asks to edit a file at a specific path, the harness loads any **path-specific instructions** whose `applyTo` glob matches that path.
+
+<figure class="rpi-pipeline" style="margin:2em 0;">
+<svg viewBox="0 0 1080 490" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
+  <defs>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ffb000"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow-pink" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ff2e88"/>
+    </marker>
+  </defs>
+  <path d="M 260 50 L 720 50" fill="none" stroke="#ffb000" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <path d="M 140 85 L 140 400 L 255 400 L 255 420" fill="none" stroke="#ffb000" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <path d="M 410 290 L 410 400 L 380 400 L 380 420" fill="none" stroke="#ff2e88" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-pink)"/>
+  <path d="M 515 420 L 515 378" fill="none" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <path d="M 540 375 L 540 400 L 680 400 L 680 420" fill="none" stroke="#ffb000" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <path d="M 660 340 L 690 340 L 690 195 L 720 195" fill="none" stroke="#ffb000" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <rect x="20" y="15" width="240" height="70" rx="12" fill="#0a0e27" stroke="#ffb000" stroke-width="2"/>
+  <text x="35" y="36" fill="#ffb000" font-size="11" font-weight="bold" letter-spacing="1">HARNESS</text>
+  <text x="35" y="58" fill="#e8f4ff" font-size="12" font-weight="bold">PUT ALWAYS-ON</text>
+  <text x="35" y="74" fill="#e8f4ff" font-size="12" font-weight="bold">INSTRUCTIONS IN CONTEXT</text>
+  <rect x="720" y="15" width="340" height="215" rx="6" fill="#0a0e27" stroke="#1e2a4a" stroke-width="1"/>
+  <text x="735" y="40" font-size="10" fill="#cfe9ff">
+    <tspan x="735" dy="0" fill="#888">.github/copilot-instructions.md</tspan>
+    <tspan x="735" dy="14" fill="#555">---</tspan>
+    <tspan x="735" dy="14" fill="#00f0ff" font-weight="bold"># Coding rules</tspan>
+    <tspan x="735" dy="14">- Use TypeScript</tspan>
+    <tspan x="735" dy="14">- Use pnpm</tspan>
+    <tspan x="735" dy="14">- Write tests</tspan>
+    <tspan x="735" dy="22" fill="#888">.github/instructions/db.instructions.md</tspan>
+    <tspan x="735" dy="14" fill="#555">---</tspan>
+    <tspan x="735" dy="14"><tspan fill="#ffb000">applyTo:</tspan> src/db/**</tspan>
+    <tspan x="735" dy="14" fill="#555">---</tspan>
+    <tspan x="735" dy="22" fill="#00f0ff" font-weight="bold"># DB guidelines</tspan>
+    <tspan x="735" dy="14">- Use prepared statements</tspan>
+  </text>
+  <rect x="370" y="230" width="80" height="60" rx="10" fill="#0a0e27" stroke="#ff2e88" stroke-width="2"/>
+  <text x="410" y="252" fill="#ff2e88" font-size="10" font-weight="bold" letter-spacing="1" text-anchor="middle">USER</text>
+  <text x="410" y="271" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">"TOUCH</text>
+  <text x="410" y="284" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">THE DB"</text>
+  <rect x="420" y="305" width="240" height="70" rx="12" fill="#0a0e27" stroke="#ffb000" stroke-width="2"/>
+  <text x="435" y="326" fill="#ffb000" font-size="11" font-weight="bold" letter-spacing="1">HARNESS</text>
+  <text x="435" y="348" fill="#e8f4ff" font-size="12" font-weight="bold">LOADS MATCHING PATH</text>
+  <text x="435" y="364" fill="#e8f4ff" font-size="12" font-weight="bold">INSTRUCTION INTO CONTEXT</text>
+  <text x="550" y="390" fill="#3b82f6" font-size="10" font-weight="bold">edit src/db/users.ts</text>
+  <text x="20" y="445" fill="#e8f4ff" font-size="11" font-weight="bold">MODEL</text>
+  <text x="20" y="461" fill="#e8f4ff" font-size="11" font-weight="bold">CONTEXT</text>
+  <rect x="60" y="420" width="110" height="55" rx="10" fill="#9bbc0f"/>
+  <text x="115" y="444" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
+  <text x="115" y="460" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
+  <rect x="200" y="420" width="110" height="55" rx="10" fill="#00f0ff"/>
+  <text x="255" y="453" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
+  <rect x="340" y="420" width="80" height="55" rx="10" fill="#ff2e88"/>
+  <text x="380" y="453" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
+  <rect x="450" y="420" width="130" height="55" rx="10" fill="#00f0ff"/>
+  <text x="515" y="444" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">FILE EDIT</text>
+  <text x="515" y="460" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">REQUEST</text>
+  <rect x="610" y="420" width="140" height="55" rx="10" fill="#ffb000"/>
+  <text x="680" y="444" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">PATH</text>
+  <text x="680" y="460" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTION</text>
+</svg>
+</figure>
+
+> 💡 **Why split them**: keep `copilot-instructions.md` short and move area-specific rules (DB / frontend / tests / …) into separate files with `applyTo`. That way every session only spends context tokens on the rules actually relevant to what you're editing.

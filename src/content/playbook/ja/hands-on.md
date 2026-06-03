@@ -26,7 +26,7 @@ links:
 
 <div class="hero-quote hero-quote-mona">
   <p>
-    題材は <strong>このプレイブックサイトの簡略版</strong>。あなたが今読んでいるこのサイトを、<strong>Copilot と一緒にゼロから作り直します</strong>。
+    題材は <strong>このプレイブックサイトの簡略版</strong>。今読んでいるこのサイトを、<strong>Copilot と一緒にゼロから作り直します</strong>。
   </p>
   <p>
     リポジトリを <strong>Codespaces</strong> で開けば、環境構築なしでブラウザからすぐに始められます。
@@ -35,11 +35,11 @@ links:
 
 ## 何を作るのか
 
-ハンズオンのゴールは、特別なデモアプリではなく **今あなたが見ているこのサイトそのもの**（の簡略版）です。
+ハンズオンのゴールは、特別なデモアプリではなく **今見ているこのサイトそのもの**（の簡略版）です。
+
+Playbook で **「なぜ」** を学んだら、ハンズオンで **その知識を実践に落とし込みます** ── 題材は他でもないこのプレイブック自身。読んだ機能をそのまま使って、自分の手で再構築できます。
 
 <img src="/theomonfort/handson/img/intro-context-window.png" alt="今日作る Copilot Playbook サイトのプレビュー（Context Engineering ページ）" class="build-preview" />
-
-> 🎯 完成像がすでに目の前にあるので、各ステップで「次に作るのはどの部分か」が一目で分かります。
 
 ## ワークショップで体験する流れ
 

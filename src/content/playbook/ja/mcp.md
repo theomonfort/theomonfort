@@ -99,8 +99,6 @@ flowchart LR
   class SL,JR,FS,PW,API tool
 ```
 
-**AI Host** (VS Code、Copilot CLI など) は内部に **複数の MCP Client** を持ち、**1 Client ⇄ 1 Server** の 1:1 接続を維持する。利用したい外部ツールごとに Client / Server のペアが追加される。プロトコルが固定なので、新しい Server を追加するだけで全エディタ・全エージェントが新しい能力を獲得する。
-
 ## なぜ重要?
 
 MCP がもたらす 3 つの価値：

@@ -37,7 +37,7 @@ links:
 
 ## AI Models & Surfaces
 
-Available AI models: OpenAI / Anthropic / Google Gemini / xAI Grok, plus support for custom models.
+Available AI models: OpenAI / Anthropic / Google Gemini / xAI Grok, plus support for **custom models** and **BYOK (Bring Your Own Key)**.
 
 Available surfaces:
 
@@ -106,6 +106,8 @@ flowchart LR
 
 ## Secure & Compliant Architecture
 
+🔗 See the <a href="https://resources.github.com/ja/copilot-trust-center/" target="_blank" rel="noopener noreferrer" class="retro-link">Copilot Trust Center</a> for full details.
+
 All code input passes through **Copilot Proxy** — designed for safe enterprise use.
 
 ```mermaid
@@ -136,12 +138,10 @@ flowchart LR
   class Dev dev
 ```
 
-**What Copilot Proxy does:**
+What Copilot Proxy does:
 
 - 🔒 Removes **PII (Personally Identifiable Information)** from context
 - 🚫 Filters **inappropriate content** from context
 - 🛡️ Checks context for **common security vulnerabilities**
 - ⚖️ Passes suggestions through an **IP (Intellectual Property) filter**
 - 🔐 All data is **encrypted in transit**
-
-> 🔗 See <a href="https://resources.github.com/ja/copilot-trust-center/" target="_blank" rel="noopener noreferrer" class="retro-link">Copilot Trust Center</a> for details.

@@ -37,7 +37,7 @@ links:
 
 ## AI モデルと利用サーフェス
 
-選べる AI モデル：OpenAI / Anthropic / Google Gemini / xAI Grok、さらにカスタムモデルにも対応。
+選べる AI モデル：OpenAI / Anthropic / Google Gemini / xAI Grok。さらに **カスタムモデル**・**BYOK（Bring Your Own Key）** にも対応。
 
 選べる利用サーフェス：
 
@@ -106,6 +106,8 @@ flowchart LR
 
 ## セキュアでコンプライアントなアーキテクチャ
 
+🔗 詳細は <a href="https://resources.github.com/ja/copilot-trust-center/" target="_blank" rel="noopener noreferrer" class="retro-link">Copilot Trust Center</a> を参照。
+
 入力されたコードは **Copilot Proxy** を経由し、安心してエンタープライズで使える設計。
 
 ```mermaid
@@ -136,12 +138,10 @@ flowchart LR
   class Dev dev
 ```
 
-**Copilot Proxy で行われる処理：**
+Copilot Proxy で行われる処理：
 
 - 🔒 文脈から **PII（個人識別情報）** を除去
 - 🚫 文脈から **不適切な表現** をフィルタリング
 - 🛡️ 文脈の **一般的なセキュリティ脆弱性** をチェック
 - ⚖️ 生成提案を **IP（知的財産）フィルター** に通す
 - 🔐 すべてのデータは **転送中に暗号化**
-
-> 🔗 詳細は <a href="https://resources.github.com/ja/copilot-trust-center/" target="_blank" rel="noopener noreferrer" class="retro-link">Copilot Trust Center</a> を参照。

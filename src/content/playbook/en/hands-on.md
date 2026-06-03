@@ -26,7 +26,7 @@ links:
 
 <div class="hero-quote hero-quote-mona">
   <p>
-    The project you'll build is <strong>a simplified version of this very playbook site</strong>. You'll rebuild the site you're reading right now — <strong>from scratch, together with Copilot</strong>.
+    The project you'll build is <strong>a simplified version of this very playbook site</strong>. You'll rebuild the site you're reading — <strong>from scratch, together with Copilot</strong>.
   </p>
   <p>
     Open the repo in <strong>Codespaces</strong> and you're coding in the browser, no local setup.
@@ -35,11 +35,11 @@ links:
 
 ## What You'll Build
 
-The goal isn't a contrived demo app — it's **this very site you're looking at** (a simplified version of it).
+The goal isn't a contrived demo app — it's **this very site** (a simplified version of it).
+
+Once you've learned the **why** in the Playbook, the hands-on workshop lets you **apply that knowledge** — by rebuilding this Playbook itself, using the very features you just read about.
 
 <img src="/theomonfort/handson/img/intro-context-window.png" alt="Preview of the Copilot Playbook site you'll build today (Context Engineering page)" class="build-preview" />
-
-> 🎯 The finished product is already right in front of you, so at every step you can see *exactly which part you're about to build next*.
 
 ## Workshop Flow
 

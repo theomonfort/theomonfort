@@ -51,17 +51,18 @@ Copy the following prompt as-is and paste it into Copilot Chat:
 ````
 Build a small Astro site (English only). Work on a new branch (e.g. feature/playbook-site).
 
-- Create a **grid-style index page** that lists every entry in `src/content/playbook/*.md` as a tile (icon + title + short summary).
-- Clicking a tile opens that entry directly in **presentation mode** (full-screen slide deck) — no intermediate detail page.
-- **Presentation-mode behavior**:
+- Create a grid-style index page that lists every entry in `src/content/playbook/*.md` as a tile (icon + title + short summary).
+- Clicking a tile opens that entry directly in presentation mode (full-screen slide deck) — no intermediate detail page.
+- Presentation-mode behavior:
   - Each `##` heading in the markdown becomes a new slide. The title slide is auto-generated from the frontmatter (`title`, `summary`, `icon`).
-  - Keyboard: `←` / `→` (or `Space`) to move between slides, `Esc` to return to the index.
-  - A vertical **section menu** on the left of the screen lists every section so the user can jump between them.
-  - Each slide is **well centered** on the screen, both vertically and horizontally.
+  - Keyboard: `←` / `→` to move between slides, `Esc` to return to the index.
+  - A vertical section menu on the left of the screen lists every section (GitHub, GitHub Copilot, Agent Skills, etc.) so the user can jump between them.
+  - Each slide is well centered on the screen, both vertically and horizontally.
+  - Show a progress bar when moving between slides.
   - Use each entry's frontmatter `color` as the deck's accent color (slide border, headings).
-- Render any ` ```mermaid ` code blocks inside the markdown **as Mermaid diagrams** (client-side is fine).
+- Render any ` ```mermaid ` code blocks inside the markdown as Mermaid diagrams (client-side is fine).
 
-Once `npm run dev` confirms it works, commit and push your changes and open a pull request titled **"Playbook site foundations"**.
+Once `npm run dev` confirms it works, commit and push your changes and open a pull request titled "Playbook site foundations".
 ````
 
 Copilot may ask you a few questions (package manager, UI framework, deployment target, etc.). It should have read `copilot-instructions.md` and default to Astro / Tailwind / npm, but answer any gaps as they come up.
@@ -87,7 +88,7 @@ Copilot will automatically:
 - Bootstrap the Astro project (with npm)
 - Define the playbook collection in `src/content.config.ts`
 - Build the grid-style index page (tile = icon + title + summary)
-- Build presentation mode itself (`##` slide splitting, `←` / `→` / `Space` / `Esc`, left-side section menu, well-centered slide layout)
+- Build presentation mode itself (`##` slide splitting, `←` / `→` / `Esc`, left-side section menu, well-centered slide layout, progress bar)
 - Apply each entry's frontmatter `color` as the accent color
 - Render Mermaid diagrams client-side
 - Style everything in Tailwind, following your design tokens
