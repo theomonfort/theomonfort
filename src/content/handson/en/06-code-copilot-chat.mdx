@@ -55,6 +55,7 @@ Build a small Astro site (English only). Work on a new branch (e.g. feature/play
 - Clicking a tile opens that entry directly in presentation mode (full-screen slide deck) — no intermediate detail page.
 - Presentation-mode behavior:
   - Each `##` heading in the markdown becomes a new slide. The title slide is auto-generated from the frontmatter (`title`, `summary`, `icon`).
+  - Each slide has its own unique URL (e.g. `/playbook/[slug]/[index]`). 1 URL = 1 slide — do not render every slide on the same page.
   - Keyboard: `←` / `→` to move between slides, `Esc` to return to the index.
   - A vertical section menu on the left of the screen lists every section (GitHub, GitHub Copilot, Agent Skills, etc.) so the user can jump between them.
   - Each slide is well centered on the screen, both vertically and horizontally.
@@ -88,7 +89,7 @@ Copilot will automatically:
 - Bootstrap the Astro project (with npm)
 - Define the playbook collection in `src/content.config.ts`
 - Build the grid-style index page (tile = icon + title + summary)
-- Build presentation mode itself (`##` slide splitting, `←` / `→` / `Esc`, left-side section menu, well-centered slide layout, progress bar)
+- Build presentation mode itself (`##` slide splitting, one URL per slide (`/playbook/[slug]/[index]`), `←` / `→` / `Esc`, left-side section menu, well-centered slide layout, progress bar)
 - Apply each entry's frontmatter `color` as the accent color
 - Render Mermaid diagrams client-side
 - Style everything in Tailwind, following your design tokens
