@@ -121,7 +121,7 @@ Custom Agents are the mechanism for **extending this to your own team**.
 When a user invokes a Custom Agent, the harness fetches its `.agent.md`, narrows the available tools, injects the agent definition, and appends the prompt. The model ends up with a four-layer context: **SYSTEM & TOOLS / INSTRUCTIONS / CUSTOM AGENT / PROMPT**.
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 0 1080 470" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'JetBrains Mono','Courier New',monospace;">
+<svg viewBox="0 0 1080 470" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
   <text x="20" y="50" fill="#e8f4ff" font-size="13" font-weight="bold">USER</text>
   <rect x="110" y="25" width="340" height="50" rx="10" fill="#0a0e27" stroke="#ff2e88" stroke-width="2"/>
   <text x="280" y="56" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">"/TDD-RED ADD API ENDPOINT"</text>
@@ -129,7 +129,7 @@ When a user invokes a Custom Agent, the harness fetches its `.agent.md`, narrows
   <rect x="510" y="25" width="150" height="50" rx="12" fill="#ffb000"/>
   <text x="585" y="56" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">CUSTOM AGENT</text>
   <rect x="665" y="25" width="110" height="50" rx="12" fill="#ff2e88"/>
-  <text x="720" y="56" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
+  <text x="720" y="56" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
   <path d="M 585 75 L 585 115" fill="none" stroke="#ffb000" stroke-width="2"/>
   <circle cx="585" cy="115" r="4" fill="#ffb000"/>
   <rect x="380" y="115" width="400" height="65" rx="12" fill="#0a0e27" stroke="#ffb000" stroke-width="2"/>
@@ -161,12 +161,12 @@ When a user invokes a Custom Agent, the harness fetches its `.agent.md`, narrows
   <rect x="155" y="395" width="180" height="55" rx="12" fill="#9bbc0f"/>
   <text x="245" y="420" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
   <text x="245" y="436" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
-  <rect x="345" y="395" width="170" height="55" rx="12" fill="#3b82f6"/>
-  <text x="430" y="428" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
+  <rect x="345" y="395" width="170" height="55" rx="12" fill="#00f0ff"/>
+  <text x="430" y="428" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
   <rect x="525" y="395" width="190" height="55" rx="12" fill="#ffb000"/>
   <text x="620" y="428" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">CUSTOM AGENT</text>
   <rect x="725" y="395" width="180" height="55" rx="12" fill="#ff2e88"/>
-  <text x="815" y="428" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
+  <text x="815" y="428" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
 </svg>
 </figure>
 
@@ -177,51 +177,49 @@ When a user invokes a Custom Agent, the harness fetches its `.agent.md`, narrows
 When you need a deep dive, have the harness spin up a **subagent**. It does the heavy reading in its own context window and returns **only a summary** to the main session.
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 0 1080 460" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'JetBrains Mono','Courier New',monospace;">
+<svg viewBox="0 0 1080 460" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
   <rect x="385" y="15" width="240" height="48" rx="10" fill="#0a0e27" stroke="#ff2e88" stroke-width="2"/>
-  <text x="505" y="45" fill="#e8f4ff" font-size="13" font-weight="bold" text-anchor="middle">"FIND MY FEATURE"</text>
+  <text x="505" y="45" fill="#e8f4ff" font-size="14" font-weight="bold" text-anchor="middle">"FIND MY FEATURE"</text>
   <path d="M 505 63 L 505 93" fill="none" stroke="#ff2e88" stroke-width="2"/>
   <circle cx="505" cy="93" r="4" fill="#ff2e88"/>
-  <text x="20" y="123" fill="#e8f4ff" font-size="13" font-weight="bold">MAIN</text>
-  <text x="20" y="141" fill="#e8f4ff" font-size="13" font-weight="bold">SESSION</text>
+  <text x="20" y="122" fill="#e8f4ff" font-size="14" font-weight="bold">MAIN</text>
+  <text x="20" y="142" fill="#e8f4ff" font-size="14" font-weight="bold">SESSION</text>
   <rect x="160" y="98" width="135" height="55" rx="12" fill="#9bbc0f"/>
-  <text x="227" y="123" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
-  <text x="227" y="139" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
-  <rect x="300" y="98" width="135" height="55" rx="12" fill="#3b82f6"/>
-  <text x="367" y="131" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
+  <text x="227" y="121" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">SYSTEM</text>
+  <text x="227" y="141" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
+  <rect x="300" y="98" width="135" height="55" rx="12" fill="#00f0ff"/>
+  <text x="367" y="132" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
   <rect x="440" y="98" width="130" height="55" rx="12" fill="#ff2e88"/>
-  <text x="505" y="131" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
-  <rect x="575" y="98" width="135" height="55" rx="12" fill="#dc2626"/>
-  <text x="642" y="131" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">SUMMARY</text>
+  <text x="505" y="132" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">PROMPT</text>
+  <rect x="575" y="98" width="135" height="55" rx="12" fill="#6b7280"/>
+  <text x="642" y="132" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">SUMMARY</text>
   <path d="M 505 153 L 505 183" fill="none" stroke="#ff2e88" stroke-width="2"/>
   <circle cx="505" cy="183" r="4" fill="#ff2e88"/>
   <rect x="305" y="183" width="400" height="60" rx="12" fill="#0a0e27" stroke="#ffb000" stroke-width="2"/>
-  <text x="505" y="205" fill="#ffb000" font-size="11" font-weight="bold" text-anchor="middle" letter-spacing="1">LLM → HARNESS</text>
-  <text x="505" y="228" fill="#e8f4ff" font-size="13" font-weight="bold" text-anchor="middle">"CREATE SUBAGENT"</text>
+  <text x="505" y="205" fill="#ffb000" font-size="13" font-weight="bold" text-anchor="middle" letter-spacing="1">LLM → HARNESS</text>
+  <text x="505" y="229" fill="#e8f4ff" font-size="14" font-weight="bold" text-anchor="middle">"CREATE SUBAGENT"</text>
   <path d="M 505 243 L 505 273" fill="none" stroke="#ffb000" stroke-width="2"/>
   <circle cx="505" cy="273" r="4" fill="#ffb000"/>
-  <text x="20" y="303" fill="#e8f4ff" font-size="13" font-weight="bold">SUBAGENT</text>
+  <text x="20" y="312" fill="#e8f4ff" font-size="14" font-weight="bold">SUBAGENT</text>
   <rect x="160" y="278" width="115" height="55" rx="12" fill="#9bbc0f"/>
-  <text x="217" y="303" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
-  <text x="217" y="319" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
-  <rect x="280" y="278" width="125" height="55" rx="12" fill="#3b82f6"/>
-  <text x="342" y="311" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
+  <text x="217" y="301" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">SYSTEM</text>
+  <text x="217" y="321" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
+  <rect x="280" y="278" width="125" height="55" rx="12" fill="#00f0ff"/>
+  <text x="342" y="312" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
   <rect x="410" y="278" width="100" height="55" rx="12" fill="#ff2e88"/>
-  <text x="460" y="311" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
+  <text x="460" y="312" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">PROMPT</text>
   <rect x="515" y="278" width="85" height="55" rx="12" fill="#ffb000"/>
-  <text x="557" y="311" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">DOC 1</text>
+  <text x="557" y="312" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">FILE 1</text>
   <rect x="605" y="278" width="85" height="55" rx="12" fill="#ffb000"/>
-  <text x="647" y="311" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">DOC 2</text>
+  <text x="647" y="312" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">FILE 2</text>
   <rect x="695" y="278" width="85" height="55" rx="12" fill="#ffb000"/>
-  <text x="737" y="311" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">DOC 3</text>
-  <rect x="785" y="278" width="115" height="55" rx="12" fill="#dc2626"/>
-  <text x="842" y="311" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">SUMMARY</text>
-  <path d="M 900 305 L 985 305 L 985 125 L 720 125" fill="none" stroke="#dc2626" stroke-width="2.5"/>
-  <polygon points="710,125 720,120 720,130" fill="#dc2626"/>
-  <text x="1060" y="200" fill="#dc2626" font-size="11" font-weight="bold" text-anchor="end" letter-spacing="1">HARNESS</text>
-  <text x="1060" y="218" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="end">PUTS SUMMARY</text>
-  <text x="1060" y="234" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="end">BACK INTO MAIN</text>
+  <text x="737" y="312" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">FILE 3</text>
+  <rect x="785" y="278" width="115" height="55" rx="12" fill="#6b7280"/>
+  <text x="842" y="312" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">SUMMARY</text>
+  <path d="M 900 305 L 985 305 L 985 125 L 720 125" fill="none" stroke="#6b7280" stroke-width="2.5"/>
+  <polygon points="710,125 720,120 720,130" fill="#6b7280"/>
+  <text x="1060" y="198" fill="#9ca3af" font-size="13" font-weight="bold" text-anchor="end" letter-spacing="1">HARNESS</text>
+  <text x="1060" y="218" fill="#e8f4ff" font-size="13" font-weight="bold" text-anchor="end">PUTS SUMMARY</text>
+  <text x="1060" y="236" fill="#e8f4ff" font-size="13" font-weight="bold" text-anchor="end">BACK INTO MAIN</text>
 </svg>
 </figure>
-
-> 💡 Tear through massive documents without poisoning the main session's context budget. The <a class="retro-link" href="/theomonfort/en/playbook/token-optimization">Token Optimization ↗</a> entry uses the same idea with `/research` → `/plan` → `/fleet`.

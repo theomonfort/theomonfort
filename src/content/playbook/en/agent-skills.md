@@ -71,7 +71,7 @@ Rather than putting every skill's full content in context from the start, only l
 When a user makes a request, the harness first loads only the **metadata for every skill** into context. When the LLM decides it needs a specific skill, the harness **expands the full body (SKILL.md)** and adds it to the context.
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 0 1080 540" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'JetBrains Mono','Courier New',monospace;">
+<svg viewBox="0 0 1080 540" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
   <path d="M 260 50 L 720 50" fill="none" stroke="#ffb000" stroke-width="2"/>
   <circle cx="720" cy="50" r="4" fill="#ffb000"/>
   <path d="M 140 85 L 140 450 L 365 450 L 365 470" fill="none" stroke="#ffb000" stroke-width="2"/>
@@ -124,16 +124,16 @@ When a user makes a request, the harness first loads only the **metadata for eve
   <rect x="60" y="470" width="110" height="55" rx="10" fill="#9bbc0f"/>
   <text x="115" y="494" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
   <text x="115" y="510" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
-  <rect x="180" y="470" width="110" height="55" rx="10" fill="#3b82f6"/>
-  <text x="235" y="503" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
+  <rect x="180" y="470" width="110" height="55" rx="10" fill="#00f0ff"/>
+  <text x="235" y="503" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
   <rect x="300" y="470" width="130" height="55" rx="10" fill="#ffb000"/>
   <text x="365" y="494" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SKILLS</text>
   <text x="365" y="510" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">DESCRIPTION</text>
   <rect x="440" y="470" width="80" height="55" rx="10" fill="#ff2e88"/>
-  <text x="480" y="503" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
-  <rect x="530" y="470" width="110" height="55" rx="10" fill="#3b82f6"/>
-  <text x="585" y="494" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">SKILL</text>
-  <text x="585" y="510" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">REQUEST</text>
+  <text x="480" y="503" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
+  <rect x="530" y="470" width="110" height="55" rx="10" fill="#00f0ff"/>
+  <text x="585" y="494" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SKILL</text>
+  <text x="585" y="510" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">REQUEST</text>
   <rect x="650" y="470" width="130" height="55" rx="10" fill="#ffb000"/>
   <text x="715" y="494" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SKILL</text>
   <text x="715" y="510" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">DOCUMENT</text>

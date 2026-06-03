@@ -54,22 +54,70 @@ links:
 
 Looking back at GitHub's journey reveals where we are today ──
 
-- **2008 · Pull Request** established the industry standard for sharing and collaboration
-- **2012 · GitHub Enterprise** addressed management and security for large enterprises
-- **2019 · Actions / GHAS** integrated CI/CD and DevSecOps directly into workflows
-- **2021 · GitHub Copilot** delivered the world's first AI coding assistant
-- **2025 · Agent HQ** ushers in an era where AI autonomously supports development ── this is our main focus today
+<figure class="rpi-pipeline" style="margin:2em 0;">
+<svg viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
+  <defs>
+    <marker id="ghTimelineArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#00f0ff"/>
+    </marker>
+    <filter id="ghTimelineGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="4.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect x="0" y="0" width="1100" height="480" fill="#05060f"/>
+  <path d="M 80 430 C 260 440, 380 410, 530 330 C 680 250, 820 160, 1050 30" stroke="#0a0e27" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <path d="M 80 430 C 260 440, 380 410, 530 330 C 680 250, 820 160, 1050 30" stroke="#00f0ff" stroke-width="2.5" fill="none" stroke-linecap="round" marker-end="url(#ghTimelineArrow)"/>
+  <g>
+    <line x1="80" y1="422" x2="80" y2="404" stroke="#00f0ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
+    <circle cx="80" cy="430" r="7" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
+    <rect x="40" y="372" width="80" height="32" rx="16" fill="#0a0e27" stroke="#00f0ff" stroke-width="1.5"/>
+    <text x="80" y="394" text-anchor="middle" fill="#00f0ff" font-size="16" font-weight="bold">2008</text>
+    <text x="80" y="340" text-anchor="middle" fill="#e8f4ff" font-size="18" font-weight="bold">Pull Request</text>
+    <text x="80" y="358" text-anchor="middle" fill="#e8f4ff" font-size="11">Industry standard for collab</text>
+  </g>
+  <g>
+    <line x1="316" y1="406" x2="316" y2="390" stroke="#00f0ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
+    <circle cx="316" cy="414" r="7" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
+    <rect x="244" y="358" width="144" height="32" rx="16" fill="#0a0e27" stroke="#00f0ff" stroke-width="1.5"/>
+    <text x="316" y="380" text-anchor="middle" fill="#00f0ff" font-size="16" font-weight="bold">2012</text>
+    <text x="316" y="325" text-anchor="middle" fill="#e8f4ff" font-size="18" font-weight="bold">GitHub Enterprise</text>
+    <text x="316" y="345" text-anchor="middle" fill="#e8f4ff" font-size="11">Management &amp; security at scale</text>
+  </g>
+  <g>
+    <line x1="530" y1="322" x2="530" y2="302" stroke="#00f0ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
+    <circle cx="530" cy="330" r="7" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
+    <rect x="450" y="270" width="160" height="32" rx="16" fill="#0a0e27" stroke="#00f0ff" stroke-width="1.5"/>
+    <text x="530" y="292" text-anchor="middle" fill="#00f0ff" font-size="16" font-weight="bold">2019</text>
+    <text x="530" y="237" text-anchor="middle" fill="#e8f4ff" font-size="18" font-weight="bold">Actions / GHAS</text>
+    <text x="530" y="257" text-anchor="middle" fill="#e8f4ff" font-size="11">CI/CD &amp; DevSecOps in your workflow</text>
+  </g>
+  <g>
+    <line x1="760" y1="207" x2="760" y2="240" stroke="#00f0ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
+    <circle cx="760" cy="199" r="7" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
+    <rect x="688" y="240" width="144" height="32" rx="16" fill="#0a0e27" stroke="#00f0ff" stroke-width="1.5"/>
+    <text x="760" y="262" text-anchor="middle" fill="#00f0ff" font-size="16" font-weight="bold">2021</text>
+    <text x="760" y="290" text-anchor="middle" fill="#e8f4ff" font-size="18" font-weight="bold">GitHub Copilot</text>
+    <text x="760" y="308" text-anchor="middle" fill="#e8f4ff" font-size="11">World's first AI coding assistant</text>
+  </g>
+  <g>
+    <line x1="984" y1="80" x2="984" y2="118" stroke="#00f0ff" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.85"/>
+    <g filter="url(#ghTimelineGlow)">
+      <circle cx="984" cy="68" r="11" fill="#00f0ff"/>
+      <circle cx="984" cy="68" r="4" fill="#05060f"/>
+    </g>
+    <rect x="924" y="118" width="120" height="38" rx="19" fill="#00f0ff" stroke="#00f0ff" stroke-width="2"/>
+    <text x="984" y="144" text-anchor="middle" fill="#05060f" font-size="18" font-weight="bold">2025</text>
+    <text x="984" y="176" text-anchor="middle" fill="#00f0ff" font-size="20" font-weight="bold">Agent HQ</text>
+    <text x="984" y="196" text-anchor="middle" fill="#e8f4ff" font-size="11">AI autonomously powers dev</text>
+    <text x="984" y="216" text-anchor="middle" fill="#e8f4ff" font-size="11">★ Today's main focus</text>
+  </g>
+</svg>
+</figure>
 
-```mermaid
-%%{init: {"theme":"base","timeline":{"disableMulticolor":true},"themeVariables":{"cScale0":"#0a0e27","cScale1":"#0a0e27","cScale2":"#0a0e27","cScaleLabel0":"#00f0ff","cScaleLabel1":"#00f0ff","cScaleLabel2":"#00f0ff","primaryTextColor":"#00f0ff","textColor":"#00f0ff","fontSize":"25px"}}}%%
-timeline
-  title GitHub Evolution
-  2008 : Pull Request
-  2012 : GitHub Enterprise
-  2019 : Actions / GHAS
-  2021 : GitHub Copilot
-  2025 : Agent HQ
-```
 
 ## AI Developer Platform
 

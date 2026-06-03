@@ -121,20 +121,20 @@ Custom Agent は、この考え方を **自分のチーム用に増やす仕組�
 ユーザーが Custom Agent を呼ぶと、ハーネスは `.agent.md` を取得し、利用可能なツールを絞り込み、エージェント定義を差し込み、最後にプロンプトを追加する。最終的にモデルに渡るコンテキストは **SYSTEM & TOOLS / INSTRUCTIONS / CUSTOM AGENT / PROMPT** の 4 層。
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 0 1080 470" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'JetBrains Mono','Courier New',monospace;">
+<svg viewBox="0 0 1080 470" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
   <text x="20" y="50" fill="#e8f4ff" font-size="13" font-weight="bold">USER</text>
   <rect x="110" y="25" width="340" height="50" rx="10" fill="#0a0e27" stroke="#ff2e88" stroke-width="2"/>
-  <text x="280" y="56" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">"/TDD-RED ADD API ENDPOINT"</text>
+  <text x="280" y="56" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">「/TDD-RED API エンドポイントを追加して」</text>
   <path d="M 450 50 L 510 50" fill="none" stroke="#ff2e88" stroke-width="2"/>
   <rect x="510" y="25" width="150" height="50" rx="12" fill="#ffb000"/>
-  <text x="585" y="56" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">CUSTOM AGENT</text>
+  <text x="585" y="56" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">カスタムエージェント</text>
   <rect x="665" y="25" width="110" height="50" rx="12" fill="#ff2e88"/>
-  <text x="720" y="56" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
+  <text x="720" y="56" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">プロンプト</text>
   <path d="M 585 75 L 585 115" fill="none" stroke="#ffb000" stroke-width="2"/>
   <circle cx="585" cy="115" r="4" fill="#ffb000"/>
   <rect x="380" y="115" width="400" height="65" rx="12" fill="#0a0e27" stroke="#ffb000" stroke-width="2"/>
   <text x="580" y="139" fill="#ffb000" font-size="11" font-weight="bold" text-anchor="middle" letter-spacing="1">HARNESS</text>
-  <text x="580" y="162" fill="#e8f4ff" font-size="13" font-weight="bold" text-anchor="middle">RETRIEVES .agent.md FILE</text>
+  <text x="580" y="162" fill="#e8f4ff" font-size="13" font-weight="bold" text-anchor="middle">.agent.md ファイルを取得</text>
   <path d="M 580 180 L 580 215 L 245 215 L 245 245" fill="none" stroke="#ffb000" stroke-width="2"/>
   <path d="M 580 215 L 580 245" fill="none" stroke="#ffb000" stroke-width="2"/>
   <path d="M 580 215 L 815 215 L 815 245" fill="none" stroke="#ffb000" stroke-width="2"/>
@@ -143,16 +143,16 @@ Custom Agent は、この考え方を **自分のチーム用に増やす仕組�
   <circle cx="815" cy="245" r="4" fill="#ff2e88"/>
   <rect x="155" y="245" width="180" height="80" rx="12" fill="#0a0e27" stroke="#9bbc0f" stroke-width="2"/>
   <text x="245" y="268" fill="#9bbc0f" font-size="10" font-weight="bold" text-anchor="middle" letter-spacing="1">HARNESS</text>
-  <text x="245" y="290" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">ADJUSTS</text>
-  <text x="245" y="308" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">AVAILABLE TOOLS</text>
+  <text x="245" y="290" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">使えるツールを</text>
+  <text x="245" y="308" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">絞り込む</text>
   <rect x="490" y="245" width="180" height="80" rx="12" fill="#0a0e27" stroke="#ffb000" stroke-width="2"/>
   <text x="580" y="268" fill="#ffb000" font-size="10" font-weight="bold" text-anchor="middle" letter-spacing="1">HARNESS</text>
-  <text x="580" y="290" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">INJECTS AGENT</text>
-  <text x="580" y="308" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">DEFINITION</text>
+  <text x="580" y="290" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">エージェント定義を</text>
+  <text x="580" y="308" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">差し込む</text>
   <rect x="725" y="245" width="180" height="80" rx="12" fill="#0a0e27" stroke="#ff2e88" stroke-width="2"/>
   <text x="815" y="268" fill="#ff2e88" font-size="10" font-weight="bold" text-anchor="middle" letter-spacing="1">HARNESS</text>
-  <text x="815" y="290" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">APPENDS</text>
-  <text x="815" y="308" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">PROMPT</text>
+  <text x="815" y="290" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">プロンプトを</text>
+  <text x="815" y="308" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">追加する</text>
   <path d="M 245 325 L 245 395" fill="none" stroke="#9bbc0f" stroke-width="2" stroke-dasharray="4 4"/>
   <path d="M 580 325 L 580 395 L 620 395" fill="none" stroke="#ffb000" stroke-width="2" stroke-dasharray="4 4"/>
   <path d="M 815 325 L 815 395" fill="none" stroke="#ff2e88" stroke-width="2" stroke-dasharray="4 4"/>
@@ -161,67 +161,68 @@ Custom Agent は、この考え方を **自分のチーム用に増やす仕組�
   <rect x="155" y="395" width="180" height="55" rx="12" fill="#9bbc0f"/>
   <text x="245" y="420" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
   <text x="245" y="436" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
-  <rect x="345" y="395" width="170" height="55" rx="12" fill="#3b82f6"/>
-  <text x="430" y="428" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
+  <rect x="345" y="395" width="170" height="55" rx="12" fill="#00f0ff"/>
+  <text x="430" y="428" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
   <rect x="525" y="395" width="190" height="55" rx="12" fill="#ffb000"/>
-  <text x="620" y="428" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">CUSTOM AGENT</text>
+  <text x="620" y="428" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">カスタムエージェント</text>
   <rect x="725" y="395" width="180" height="55" rx="12" fill="#ff2e88"/>
-  <text x="815" y="428" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
+  <text x="815" y="428" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">プロンプト</text>
 </svg>
 </figure>
 
 > 💡 INSTRUCTIONS は元から常に入っている層。Custom Agent が増やすのは **TOOLS の絞り込み・AGENT 定義・PROMPT** の 3 つだけ。
 
-## サブエージェント — タスク用コンテキストを切り出す
+## サブエージェント
 
-調査が必要なときは、ハーネスに **サブエージェント** を作らせる。サブエージェントは別の context window で重い読み込みをこなし、**サマリだけ** をメインに返す。
+例えば調査が必要なときは、**メインエージェント** が **サブエージェント** を作ることがあります。サブエージェントは別の **コンテキストウインドウ** で重い読み込みをこなし、**サマリだけ** を **メインエージェント** に返す。
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 0 1080 460" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'JetBrains Mono','Courier New',monospace;">
+<svg viewBox="0 0 1080 460" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
   <rect x="385" y="15" width="240" height="48" rx="10" fill="#0a0e27" stroke="#ff2e88" stroke-width="2"/>
-  <text x="505" y="45" fill="#e8f4ff" font-size="13" font-weight="bold" text-anchor="middle">"FIND MY FEATURE"</text>
+  <text x="505" y="45" fill="#e8f4ff" font-size="14" font-weight="bold" text-anchor="middle">「コードベースでこの機能を探して」</text>
   <path d="M 505 63 L 505 93" fill="none" stroke="#ff2e88" stroke-width="2"/>
   <circle cx="505" cy="93" r="4" fill="#ff2e88"/>
-  <text x="20" y="123" fill="#e8f4ff" font-size="13" font-weight="bold">MAIN</text>
-  <text x="20" y="141" fill="#e8f4ff" font-size="13" font-weight="bold">SESSION</text>
+  <text x="20" y="122" fill="#e8f4ff" font-size="14" font-weight="bold">MAIN SESSION</text>
+  <text x="20" y="142" fill="#e8f4ff" font-size="14" font-weight="bold">CONTEXT</text>
+  <text x="20" y="162" fill="#ffb000" font-size="12" font-weight="bold">(LLM)</text>
   <rect x="160" y="98" width="135" height="55" rx="12" fill="#9bbc0f"/>
-  <text x="227" y="123" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
-  <text x="227" y="139" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
-  <rect x="300" y="98" width="135" height="55" rx="12" fill="#3b82f6"/>
-  <text x="367" y="131" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
+  <text x="227" y="121" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">SYSTEM</text>
+  <text x="227" y="141" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
+  <rect x="300" y="98" width="135" height="55" rx="12" fill="#00f0ff"/>
+  <text x="367" y="132" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
   <rect x="440" y="98" width="130" height="55" rx="12" fill="#ff2e88"/>
-  <text x="505" y="131" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
-  <rect x="575" y="98" width="135" height="55" rx="12" fill="#dc2626"/>
-  <text x="642" y="131" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">SUMMARY</text>
+  <text x="505" y="132" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">プロンプト</text>
+  <rect x="575" y="98" width="135" height="55" rx="12" fill="#6b7280"/>
+  <text x="642" y="132" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">サマリ</text>
   <path d="M 505 153 L 505 183" fill="none" stroke="#ff2e88" stroke-width="2"/>
   <circle cx="505" cy="183" r="4" fill="#ff2e88"/>
   <rect x="305" y="183" width="400" height="60" rx="12" fill="#0a0e27" stroke="#ffb000" stroke-width="2"/>
-  <text x="505" y="205" fill="#ffb000" font-size="11" font-weight="bold" text-anchor="middle" letter-spacing="1">LLM → HARNESS</text>
-  <text x="505" y="228" fill="#e8f4ff" font-size="13" font-weight="bold" text-anchor="middle">"CREATE SUBAGENT"</text>
+  <text x="505" y="205" fill="#ffb000" font-size="13" font-weight="bold" text-anchor="middle" letter-spacing="1">LLM → HARNESS</text>
+  <text x="505" y="229" fill="#e8f4ff" font-size="14" font-weight="bold" text-anchor="middle">「サブエージェントを作って」</text>
   <path d="M 505 243 L 505 273" fill="none" stroke="#ffb000" stroke-width="2"/>
   <circle cx="505" cy="273" r="4" fill="#ffb000"/>
-  <text x="20" y="303" fill="#e8f4ff" font-size="13" font-weight="bold">SUBAGENT</text>
+  <text x="20" y="302" fill="#e8f4ff" font-size="14" font-weight="bold">SUBAGENT</text>
+  <text x="20" y="322" fill="#e8f4ff" font-size="14" font-weight="bold">CONTEXT</text>
+  <text x="20" y="342" fill="#ffb000" font-size="12" font-weight="bold">(LLM)</text>
   <rect x="160" y="278" width="115" height="55" rx="12" fill="#9bbc0f"/>
-  <text x="217" y="303" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
-  <text x="217" y="319" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
-  <rect x="280" y="278" width="125" height="55" rx="12" fill="#3b82f6"/>
-  <text x="342" y="311" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
+  <text x="217" y="301" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">SYSTEM</text>
+  <text x="217" y="321" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
+  <rect x="280" y="278" width="125" height="55" rx="12" fill="#00f0ff"/>
+  <text x="342" y="312" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
   <rect x="410" y="278" width="100" height="55" rx="12" fill="#ff2e88"/>
-  <text x="460" y="311" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
+  <text x="460" y="312" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">プロンプト</text>
   <rect x="515" y="278" width="85" height="55" rx="12" fill="#ffb000"/>
-  <text x="557" y="311" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">DOC 1</text>
+  <text x="557" y="312" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">ファイル1</text>
   <rect x="605" y="278" width="85" height="55" rx="12" fill="#ffb000"/>
-  <text x="647" y="311" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">DOC 2</text>
+  <text x="647" y="312" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">ファイル2</text>
   <rect x="695" y="278" width="85" height="55" rx="12" fill="#ffb000"/>
-  <text x="737" y="311" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">DOC 3</text>
-  <rect x="785" y="278" width="115" height="55" rx="12" fill="#dc2626"/>
-  <text x="842" y="311" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">SUMMARY</text>
-  <path d="M 900 305 L 985 305 L 985 125 L 720 125" fill="none" stroke="#dc2626" stroke-width="2.5"/>
-  <polygon points="710,125 720,120 720,130" fill="#dc2626"/>
-  <text x="1060" y="200" fill="#dc2626" font-size="11" font-weight="bold" text-anchor="end" letter-spacing="1">HARNESS</text>
-  <text x="1060" y="218" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="end">PUTS SUMMARY</text>
-  <text x="1060" y="234" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="end">BACK INTO MAIN</text>
+  <text x="737" y="312" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">ファイル3</text>
+  <rect x="785" y="278" width="115" height="55" rx="12" fill="#6b7280"/>
+  <text x="842" y="312" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">サマリ</text>
+  <path d="M 900 305 L 985 305 L 985 125 L 720 125" fill="none" stroke="#6b7280" stroke-width="2.5"/>
+  <polygon points="710,125 720,120 720,130" fill="#6b7280"/>
+  <text x="1060" y="198" fill="#9ca3af" font-size="13" font-weight="bold" text-anchor="end" letter-spacing="1">HARNESS</text>
+  <text x="1060" y="218" fill="#e8f4ff" font-size="13" font-weight="bold" text-anchor="end">サマリを</text>
+  <text x="1060" y="236" fill="#e8f4ff" font-size="13" font-weight="bold" text-anchor="end">メインに戻す</text>
 </svg>
 </figure>
-
-> 💡 メインの context budget を汚さずに巨大なドキュメント群を読み解ける。<a class="retro-link" href="/theomonfort/playbook/token-optimization">Token Optimization ↗</a> でも `/research` → `/plan` → `/fleet` の分割が同じ考え方。
