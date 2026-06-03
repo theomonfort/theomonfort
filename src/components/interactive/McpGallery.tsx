@@ -127,7 +127,15 @@ export default function McpGallery({ servers, copy = defaultCopy }: Props) {
                 </button>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xl">{s.icon}</span>
+                    {s.icon.startsWith('px:') ? (
+                      <span
+                        className="px-icon text-gb-green shrink-0"
+                        style={{ ['--px' as string]: `url(/theomonfort/icons/${s.icon.slice(3)}.svg)` }}
+                        aria-hidden="true"
+                      />
+                    ) : (
+                      <span className="text-xl">{s.icon}</span>
+                    )}
                     <h3 className="font-pixel text-sm text-gb-green truncate">
                       {s.name}
                     </h3>

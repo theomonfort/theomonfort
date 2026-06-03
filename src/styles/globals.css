@@ -758,3 +758,19 @@ a.retro-link:hover::after {
   box-shadow: none;
   pointer-events: none;
 }
+
+/* =====================================================================
+   PX-ICON — recolorable pixel-art icons (pixelarticons, MIT) used for
+   skill + MCP entries. The SVG drives an alpha mask; color = currentColor.
+   ===================================================================== */
+.px-icon {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background-color: currentColor;
+  -webkit-mask: var(--px) center / contain no-repeat;
+  mask: var(--px) center / contain no-repeat;
+  image-rendering: pixelated;
+  vertical-align: middle;
+  filter: drop-shadow(0 0 4px currentColor);
+}
