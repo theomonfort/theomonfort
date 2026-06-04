@@ -2,7 +2,7 @@
 title: Copilot Chat
 titleEn: Copilot Chat
 summary: The synchronous conversation surface for Copilot. Available across IDE, GitHub.com, and Mobile, with the deepest harness on the IDE side.
-icon: 💬
+icon: /theomonfort/icons/copilot-chat.png
 color: cyan
 order: 3.5
 category: develop

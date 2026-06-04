@@ -2,7 +2,7 @@
 title: パートナーエージェント
 titleEn: Partner agents
 summary: Claude や Codex など、Copilot 以外の coding agent を、VS Code・GitHub 上で Copilot と同じ操作感で起動できる仕組み。
-icon: 🧬
+icon: /theomonfort/icons/partner-agent.png
 color: magenta
 order: 15.5
 category: develop

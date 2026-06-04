@@ -2,7 +2,7 @@
 title: ハーネスエンジニアリング
 titleEn: Harness Engineering
 summary: エージェントが安全かつ効果的に動ける足場の設計。ツール群、制約、権限、外部接続の設計術。
-icon: 🛡️
+icon: /theomonfort/icons/harness-engineering.png
 color: green
 order: 8
 category: plan

@@ -2,7 +2,7 @@
 title: Cloud Agent
 titleEn: Cloud Agent
 summary: A "doppelganger" that works through the night even when you leave the IDE. Assign an Issue and it implements, verifies, and returns with a PR from a GitHub Actions runner.
-icon: ☁️
+icon: /theomonfort/icons/cloud-agent.png
 color: amber
 order: 15
 category: develop

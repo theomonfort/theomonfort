@@ -2,7 +2,7 @@
 title: Copilot Memory（エージェント記憶）
 titleEn: Copilot Memory
 summary: Copilotがリポジトリで作業しながら学んだ知識を記憶し、未来の自分・チーム全員に引き継ぐ仕組み。使うほど賢くなる。
-icon: 🧠
+icon: /theomonfort/icons/copilot-memory.png
 color: magenta
 order: 19
 category: operate

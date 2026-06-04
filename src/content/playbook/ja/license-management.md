@@ -2,7 +2,7 @@
 title: ライセンス管理
 titleEn: License Management
 summary: GitHub Copilot は Enterprise レベルで課金され、Organization レベルで割り当てられる。複数 org に所属するユーザーの請求・ポリシーの扱い、Outside collaborator / EMU の Guest collaborator まで一通り整理。
-icon: 🪪
+icon: /theomonfort/icons/license-crown.png
 color: magenta
 order: 30
 category: administration

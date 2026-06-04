@@ -2,7 +2,7 @@
 title: Token Optimization
 titleEn: Token Optimization
 summary: Tokens get cheaper by raising agent quality, not by shaving prompts. Use model choice, context engineering, deterministic guardrails, and the right agent configs to make every token count.
-icon: 🎯
+icon: /theomonfort/icons/token-opt.png
 color: green
 order: 16.5
 category: operate

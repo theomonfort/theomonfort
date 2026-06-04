@@ -2,7 +2,7 @@
 title: Spaces
 titleEn: Spaces
 summary: "Copilot に渡したい文脈を、チームで整理・共有できる場所。コード、Issue、PR、ドキュメント、メモ、画像、指示をまとめて、質問への回答をその文脈に grounding する。"
-icon: 🪐
+icon: /theomonfort/icons/github-spaces.png
 color: magenta
 order: 17.5
 category: develop

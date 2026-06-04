@@ -127,7 +127,9 @@ export default function McpGallery({ servers, copy = defaultCopy }: Props) {
                 </button>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xl">{s.icon}</span>
+                    {/\.(svg|png|jpg|jpeg|webp|gif)$/i.test(s.icon)
+                      ? <img src={s.icon} alt="" className="h-6 w-6 object-contain shrink-0" />
+                      : <span className="text-xl">{s.icon}</span>}
                     <h3 className="font-pixel text-sm text-gb-green truncate">
                       {s.name}
                     </h3>

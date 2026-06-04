@@ -2,7 +2,7 @@
 title: GitHub Advanced Security
 titleEn: GHAS
 summary: GitHub's paid security product suite. Split into GitHub Secret Protection ($19) and GitHub Code Security ($30) in April 2025, billed per active committer. Public repos remain free.
-icon: /theomonfort/github-white-icon.svg
+icon: /theomonfort/icons/ghas.png
 color: amber
 order: 19.8
 category: secure

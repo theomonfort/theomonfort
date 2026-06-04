@@ -2,7 +2,7 @@
 title: Copilot CLI
 titleEn: Copilot CLI
 summary: Copilot living in the terminal. An IDE-agnostic "colleague in the terminal" that lets you move between planning → implementation → review with just Shift+Tab.
-icon: 💻
+icon: /theomonfort/icons/cli.png
 color: cyan
 order: 14
 category: develop

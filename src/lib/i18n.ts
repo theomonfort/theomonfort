@@ -78,6 +78,8 @@ export const siteCopy = {
       languageLabel: 'LANGUAGE',
       switchTo: 'English',
       konami: '↑↑↓↓←→←→BA で何かが起こる？',
+      attribution: 'Pixel-art icons by',
+      attributionSource: 'Flaticon',
     },
     common: {
       backHome: '◀ 道場に戻る',
@@ -259,6 +261,8 @@ export const siteCopy = {
       languageLabel: 'LANGUAGE',
       switchTo: '日本語',
       konami: 'Something may happen with ↑↑↓↓←→←→BA.',
+      attribution: 'Pixel-art icons by',
+      attributionSource: 'Flaticon',
     },
     common: {
       backHome: '◀ Back to the dojo',

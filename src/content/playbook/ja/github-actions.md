@@ -2,7 +2,7 @@
 title: GitHub Actions
 titleEn: GitHub Actions
 summary: GitHub にネイティブ統合された CI/CD・自動化プラットフォーム。.github/workflows/*.yml に書いた手順を push / PR / schedule で自動実行する。public は無料、private は無料枠 + 従量課金。Cloud Agent や Copilot Code Review もこの上で動く。
-icon: ⚙️
+icon: /theomonfort/icons/github-actions.svg
 color: amber
 order: 19.2
 category: secure
