@@ -2,7 +2,7 @@
 title: Code Scanning
 titleEn: Code Scanning
 summary: CodeQL statically analyzes source code for vulnerabilities, and Copilot Autofix generates fix PRs automatically. Default setup requires no config file — just one click. Free for public repos; private repos need GHAS / Code Security.
-icon: 🔍
+icon: /theomonfort/icons/pb-code-scanning.png
 color: amber
 order: 19.4
 category: secure

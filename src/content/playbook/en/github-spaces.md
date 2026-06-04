@@ -2,7 +2,7 @@
 title: Spaces
 titleEn: Spaces
 summary: "A shared place to organize the context you want Copilot to use: code, issues, pull requests, docs, notes, images, uploads, and instructions that ground Copilot's answers."
-icon: 🪐
+icon: /theomonfort/icons/pb-github-spaces.png
 color: magenta
 order: 17.5
 category: develop

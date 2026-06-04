@@ -1,0 +1,11 @@
+Playbook pixel icons
+====================
+plan-*.png and pb-*.png are derived from Kenney "Pixel Shmup" (CC0 1.0 Universal).
+Source: https://kenney.nl/assets/pixel-shmup
+Tiles/Ships upscaled with nearest-neighbour. No rights reserved (public domain).
+
+Earlier monochrome glyph SVGs (bug/info-box/fire/teach/book-open/monitor) derive
+from pixelarticons (MIT) https://github.com/halfmage/pixelarticons
+
+pb-dependabot.png and pb-cli.png are from Flaticon (https://www.flaticon.com/free-icons/pixel-art).
+Flaticon free license requires attribution to the icon authors / Flaticon.

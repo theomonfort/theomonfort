@@ -2,7 +2,7 @@
 title: ハンズオン
 titleEn: Hands-on
 summary: このプレイブックで紹介している概念を、実際に手を動かしながら学べるワークショップ。題材は「このプレイブックサイトの簡略版」を Copilot と一緒にゼロから作ること。MCP / Instructions / Agent Skill / Plan モード / Cloud Agent / Code Review / Agentic Workflow をひと通り使い切る構成。
-icon: 🎮
+icon: /theomonfort/icons/pb-hands-on.png
 color: cyan
 order: 3
 category: introduction

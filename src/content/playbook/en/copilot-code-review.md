@@ -2,7 +2,7 @@
 title: Copilot Code Review
 titleEn: Copilot Code Review
 summary: Copilot can be assigned as a reviewer — manually or automatically — to read code intent and return inline comments, PR summaries, and fix suggestions. Goes from pre-review noise reduction all the way to full automation.
-icon: 🔍
+icon: /theomonfort/icons/pb-copilot-code-review.png
 color: green
 order: 9
 category: review

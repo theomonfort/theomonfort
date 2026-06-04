@@ -2,7 +2,7 @@
 title: Code Scanning
 titleEn: Code Scanning
 summary: コードの中の脆弱性を CodeQL が静的解析で見つけ、Copilot Autofix が PR で直してくれる GitHub のセキュリティ機能。Default setup なら設定ファイル不要で 1 クリック。public は無料、private は GHAS / Code Security が必要。
-icon: 🔍
+icon: /theomonfort/icons/pb-code-scanning.png
 color: amber
 order: 19.4
 category: secure

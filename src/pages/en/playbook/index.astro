@@ -97,7 +97,7 @@ const grouped = categories.map((cat) => ({
                   >
                     <div class="flex items-start gap-3 w-full">
                       {e.data.icon && /\.(svg|png|jpg|jpeg|webp|gif)$/i.test(e.data.icon)
-                        ? <img src={e.data.icon} alt="" class="h-8 w-8 object-contain shrink-0" />
+                        ? <img src={e.data.icon} alt="" class="h-8 w-8 object-contain shrink-0" style="image-rendering:pixelated" />
                         : <span class="text-3xl">{e.data.icon}</span>}
                       <div class="flex-1 min-w-0">
                         <div class="flex items-baseline gap-2 mb-1">

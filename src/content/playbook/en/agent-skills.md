@@ -2,7 +2,7 @@
 title: Agent Skills
 titleEn: Agent Skills
 summary: Reusable instruction packs that teach Copilot agents how to handle specialized tasks — loaded automatically when the request matches, no re-explaining required.
-icon: 🎴
+icon: /theomonfort/icons/plan-agent-skills.png
 color: magenta
 order: 6
 category: plan

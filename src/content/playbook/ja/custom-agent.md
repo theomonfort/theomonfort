@@ -2,7 +2,7 @@
 title: カスタムエージェント
 titleEn: Custom Agent
 summary: 役割・モデル・ツール・指示・スキルを束ねた専用エージェント。"フロントエンド職人"や"レビュー番長"を作れる。
-icon: 🥷
+icon: /theomonfort/icons/plan-custom-agent.png
 color: green
 order: 7
 category: plan

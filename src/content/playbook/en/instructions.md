@@ -2,7 +2,7 @@
 title: Instructions
 titleEn: Instructions
 summary: Persistent rule files that give AI standing development guidelines at the repository or file level, so every teammate's Copilot follows the same conventions.
-icon: 📜
+icon: /theomonfort/icons/plan-instructions.png
 color: amber
 order: 5
 category: plan

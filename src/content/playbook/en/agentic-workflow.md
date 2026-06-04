@@ -2,7 +2,7 @@
 title: Agentic Workflow
 titleEn: Agentic Workflow
 summary: A new kind of automation that runs AI agents on top of GitHub Actions. Write what you want done in natural language Markdown and get workflows that can reason and act.
-icon: 🔄
+icon: /theomonfort/icons/pb-agentic-workflow.png
 color: green
 order: 16
 category: operate

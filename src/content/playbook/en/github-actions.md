@@ -2,7 +2,7 @@
 title: GitHub Actions
 titleEn: GitHub Actions
 summary: GitHub's native CI/CD and automation platform. Steps written in .github/workflows/*.yml run automatically on push / PR / schedule. Public repos are free; private repos get a free tier plus pay-as-you-go. Cloud Agent and Copilot Code Review also run on top of this.
-icon: ⚙️
+icon: /theomonfort/icons/pb-github-actions.png
 color: amber
 order: 19.2
 category: secure

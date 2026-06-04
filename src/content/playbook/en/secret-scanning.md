@@ -2,7 +2,7 @@
 title: Secret Scanning
 titleEn: Secret Scanning
 summary: GitHub's secret detection feature that automatically finds API keys and tokens mixed into commits, issues, PRs, and history. Push protection can block commits before they land. Free for public repos; push protection is also free for private repos on a per-user opt-in basis.
-icon: 🔑
+icon: /theomonfort/icons/pb-secret-scanning.png
 color: amber
 order: 19.6
 category: secure

@@ -92,7 +92,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       </div>
       <h1 class="font-pixel text-base md:text-2xl mb-3 leading-tight flex items-center gap-3" style={`color:${accent}`}>
         {entry.data.icon && /\.(svg|png|jpg|jpeg|webp|gif)$/i.test(entry.data.icon)
-          ? <img src={entry.data.icon} alt="" class="h-[1.2em] w-auto shrink-0" />
+          ? <img src={entry.data.icon} alt="" class="h-[1.6em] w-auto shrink-0" style="image-rendering:pixelated" />
           : <span class="text-[1.2em] leading-none shrink-0">{entry.data.icon}</span>}
         <span>{item.entry.data.titleEn || playbookEntryTitle(item)}</span>
       </h1>
@@ -157,7 +157,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
                 class="font-pixel-jp text-xs px-3 py-1 border border-phosphor/30 hover:border-neon-cyan hover:text-neon-cyan transition-colors"
               >
                 {r.entry.data.icon && /\.(svg|png|jpg|jpeg|webp|gif)$/i.test(r.entry.data.icon)
-                  ? <img src={r.entry.data.icon} alt="" class="inline h-[1em] w-auto align-middle mr-1" />
+                  ? <img src={r.entry.data.icon} alt="" class="inline h-[1.3em] w-auto align-middle mr-1" style="image-rendering:pixelated" />
                   : <span>{r.entry.data.icon} </span>}{playbookEntryTitle(r)}
               </a>
             );
@@ -223,10 +223,11 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
                 style={`--cat-color:${g.color}`}
               >
                 <span class="toc-num">{String(num).padStart(2, '0')}</span>
+                {t.icon && /\.(svg|png|jpg|jpeg|webp|gif)$/i.test(t.icon) && (
+                  <img src={t.icon} alt="" class="toc-icon" style="image-rendering:pixelated" />
+                )}
                 <span class="toc-text">
-                  {t.icon && /\.(svg|png|jpg|jpeg|webp|gif)$/i.test(t.icon)
-                    ? <img src={t.icon} alt="" class="inline h-[1em] w-auto align-middle mr-3" />
-                    : <span>{t.icon} </span>}{t.title}
+                  {t.icon && !/\.(svg|png|jpg|jpeg|webp|gif)$/i.test(t.icon) && <span>{t.icon} </span>}{t.title}
                 </span>
               </a>
             );
@@ -1842,7 +1843,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
   .present-toc .toc-item {
     display: flex !important;
-    align-items: baseline;
+    align-items: center;
     gap: 0.55rem;
     width: 100%;
     padding: 0.5rem 0.6rem;
@@ -1891,6 +1892,12 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     color: var(--cat-color, #ffb000);
     flex-shrink: 0;
     min-width: 1.6rem;
+  }
+  .present-toc .toc-icon {
+    height: 1.7em;
+    width: auto;
+    flex-shrink: 0;
+    object-fit: contain;
   }
   .present-toc .toc-text {
     flex: 1;

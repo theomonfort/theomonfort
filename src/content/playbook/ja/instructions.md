@@ -2,7 +2,7 @@
 title: インストラクション（Instructions）
 titleEn: Instructions
 summary: リポジトリやファイル単位でAIに常駐のルールを与える"指示書"。チーム全員のCopilotが同じ規約に従うようになる。
-icon: 📜
+icon: /theomonfort/icons/plan-instructions.png
 color: amber
 order: 5
 category: plan

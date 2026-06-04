@@ -2,7 +2,7 @@
 title: Custom Agent
 titleEn: Custom Agent
 summary: A specialist profile that bundles role, tools, and behavior together for Copilot. Switch between Planner, Reviewer, and Tester personas with their own permissions.
-icon: 🥷
+icon: /theomonfort/icons/plan-custom-agent.png
 color: green
 order: 7
 category: plan

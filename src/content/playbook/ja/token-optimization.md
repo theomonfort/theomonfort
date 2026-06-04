@@ -2,7 +2,7 @@
 title: トークン最適化
 titleEn: Token Optimization
 summary: トークンは「削る」ではなく「質を上げる」ことで結果的に減る。モデル選び・コンテキスト設計・決定的なガードレール・適切な Agent Config で、1 トークンずつを意味のあるものにする。
-icon: 🎯
+icon: /theomonfort/icons/pb-token-optimization.png
 color: green
 order: 16.5
 category: operate

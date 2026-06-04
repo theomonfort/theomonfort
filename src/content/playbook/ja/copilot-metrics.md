@@ -2,7 +2,7 @@
 title: Copilot Metrics
 titleEn: Copilot Metrics
 summary: GitHub Copilot の利用状況・効果を可視化するメトリクス API とダッシュボード。詳細は coming soon。
-icon: 📊
+icon: /theomonfort/icons/pb-copilot-metrics.png
 color: green
 order: 18
 category: operate
