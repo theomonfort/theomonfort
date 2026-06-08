@@ -3,7 +3,7 @@ title: "PLAN: MCP サーバー"
 order: 3
 stepSlug: "plan-mcp"
 duration: 10
-summary: "このステップでは、Copilot に外部ツールへのアクセスを与える MCP（Model Context Protocol）Server を確認・追加します。MCP を整えると、Copilot が Issue 作成・最新ドキュメント参照などを直接実行できるようになります。"
+summary: "このステップでは、Copilot に外部ツールへのアクセスを与える MCP（Model Context Protocol）Server を確認・追加します。"
 generated: true
 generatedFrom: "workshop-nikon.md"
 upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
@@ -18,11 +18,11 @@ import Aside from '../../../components/handson/Aside.astro';
 
 <Aside type="reference">
 
-**📖 参考**: [プレイブック / MCP Server](https://theomonfort.github.io/theomonfort/playbook/mcp/) で MCP の仕組み・接続方式 (stdio / HTTP)・VS Code での設定方法を確認できます。
+**📖 参考**: [プレイブック / MCP Server](https://theomonfort.github.io/theomonfort/playbook/mcp/?present=1) で MCP の仕組み・接続方式 (stdio / HTTP)・VS Code での設定方法を確認できます。
 
 </Aside>
 
-このステップでは、Copilot に外部ツールへのアクセスを与える **MCP（Model Context Protocol）Server** を確認・追加します。MCP を整えると、Copilot が Issue 作成・最新ドキュメント参照などを直接実行できるようになります。
+このステップでは、Copilot に外部ツールへのアクセスを与える **MCP（Model Context Protocol）Server** を確認・追加します。
 
 ### 3.1 — GitHub MCP Server を確認する
 
@@ -41,7 +41,7 @@ import Aside from '../../../components/handson/Aside.astro';
 }
 ```
 
-Copilot Chat の入力欄にある **🔧 ツールボタン**（モデル選択の右側）をクリックして、`github-mcp-server` のツール（Issues / PRs / code search など）が一覧に表示されていることを確認しましょう。
+Copilot Chat の入力欄にある **ツールボタン**（モデル選択の右側）をクリックして、`github-mcp-server` のツール（Issues / PRs / code search など）が一覧に表示されていることを確認しましょう。
 
 ⏱ 約1分
 
@@ -53,7 +53,7 @@ Copilot Chat の入力欄にある **🔧 ツールボタン**（モデル選択
 
 ### 3.2 — Context7 MCP Server を追加する
 
-**Context7** は、ライブラリやフレームワークの **最新の公式ドキュメント** を Copilot に取り込める MCP Server です。Astro / Tailwind / TypeScript など、進化の速いフレームワークを使う本ワークショップでは欠かせません。
+**Context7** は、ライブラリやフレームワークの **最新の公式ドキュメント** を Copilot に取り込める MCP Server です。Astro / Tailwind / TypeScript など、進化の速いフレームワークを使う場合におすすめです。
 
 1. **Cmd+Shift+P** (Windows/Linux は **Ctrl+Shift+P**) でコマンドパレットを開く
 2. **「MCP: Add Server…」** を入力して選択

@@ -14,7 +14,6 @@ upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
   Regenerate via: node scripts/import-handson.mjs --force
 */}
 
-import Aside from '../../../components/handson/Aside.astro';
 import MonaDialog from '../../../components/handson/MonaDialog.astro';
 
 <MonaDialog
@@ -26,32 +25,23 @@ Hi, I'm Mona 🐙 Welcome to the GitHub Copilot workshop!
 
 Today, we're going to build a simplified version of the **[Copilot Playbook](https://theomonfort.github.io/theomonfort/en/playbook/) site open in the other tab**, from scratch, together with Copilot.
 
-The finished product is right in front of you — whenever you get stuck, come back to this screen.
-
 </MonaDialog>
 
-In this workshop, you'll get hands-on with the simple concepts introduced in the [**Copilot Playbook**](https://theomonfort.github.io/theomonfort/en/playbook/github/?present=1). Following the **PLAN → CODE → REVIEW → TEST & SECURE → OPERATE** phases, you'll use GitHub Copilot to ultimately build a simplified version of the Playbook (a site for cleanly browsing Markdown content) together with Copilot.
+In this workshop, you'll get hands-on with the simple concepts introduced in the [**Copilot Playbook**](https://theomonfort.github.io/theomonfort/en/playbook/github/?present=1). Following the **PLAN → CODE → REVIEW → TEST & SECURE → OPERATE** phases, you'll use GitHub Copilot to ultimately build a simplified version of the Playbook together with Copilot.
 
 ### Today's goals
 
 - **PLAN**: Equip Copilot with "context", "rules", and "shape" via MCP, Instructions, and Skills
-- **CODE**: Design and implement the site using Copilot Chat (Plan / Agent)
+- **CODE**: Design and implement the site with Copilot Chat (Plan / Agent), and add extra features with Copilot Agent
 - **REVIEW**: Automatically review PRs with Copilot Code Review
 - **TEST & SECURE**: Guarantee quality and safety with Dependabot, CodeQL (GHAS), and GitHub Actions (Playwright)
-- **OPERATE**: Build AI into daily operations with Cloud Agent, Copilot CLI, and Agentic Workflows
-
-<Aside type="positive">
-
-**📖 Reference**: Each step links to the corresponding page in the [Copilot Playbook](https://theomonfort.github.io/theomonfort/en/playbook/). Feel free to reuse them as reference material when rolling this out internally.
-
-</Aside>
+- **OPERATE**: Build AI into daily operations with Agentic Workflow
 
 ### Prerequisites
 
 Please prepare the following environment:
 
-- A private Organization with the following features enabled:
-  - GitHub Actions
-  - GitHub Copilot (Pro+ / Business / Enterprise)
-  - GitHub Advanced Security (GHAS)
+- GitHub Copilot (Pro+ / Business / Enterprise)
+- GitHub Advanced Security (GHAS) — if GHAS is not available, Step 9 (CodeQL) can be skipped
+- An Organization with Cloud Agent, Partner Agent, GHAS, Copilot CLI, and Agentic Workflow enabled
 - Permission to create repositories within that Organization

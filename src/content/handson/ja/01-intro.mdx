@@ -14,7 +14,6 @@ upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
   Regenerate via: node scripts/import-handson.mjs --force
 */}
 
-import Aside from '../../../components/handson/Aside.astro';
 import MonaDialog from '../../../components/handson/MonaDialog.astro';
 
 <MonaDialog
@@ -26,32 +25,23 @@ import MonaDialog from '../../../components/handson/MonaDialog.astro';
 
 今日は、**となりのタブで開いている [Copilot Playbook](https://theomonfort.github.io/theomonfort/playbook/) サイト**（の簡易版）を、Copilot と一緒にゼロから作ります。
 
-完成像はもう目の前 ── 迷ったら、いつでもこの画面に戻ってきてください。
-
 </MonaDialog>
 
-この勉強会では、[**Copilot Playbook**](https://theomonfort.github.io/theomonfort/playbook/github/?present=1) で紹介されているシンプルな概念を実際に手を動かして体験します。**PLAN → CODE → REVIEW → TEST & SECURE → OPERATE** のフェーズに沿って GitHub Copilot を使い、最終的には Playbook の簡易版（Markdown を綺麗に閲覧できるサイト）を Copilot と一緒に作り上げます。
+この勉強会では、[**Copilot Playbook**](https://theomonfort.github.io/theomonfort/playbook/github/?present=1) で紹介されているシンプルな概念を実際に手を動かして体験します。**PLAN → CODE → REVIEW → TEST & SECURE → OPERATE** のフェーズに沿って GitHub Copilot を使い、最終的には Playbook の簡易版を Copilot と一緒に作り上げます。
 
 ### 本日のゴール
 
 - **PLAN**: MCP・Instruction・Skill で Copilot に「文脈」「ルール」「型」を仕込む
-- **CODE**: Copilot Chat（Plan / Agent）でサイトを設計・実装する
+- **CODE**: Copilot Chat（Plan / Agent）でサイトを設計・実装、Copilot Agent で追加フィーチャーを実装
 - **REVIEW**: Copilot Code Review で PR を自動レビューする
 - **TEST & SECURE**: Dependabot・CodeQL（GHAS）と GitHub Actions（Playwright）で品質と安全性を担保する
-- **OPERATE**: Cloud Agent・Copilot CLI・Agentic Workflow で日常運用に AI を組み込む
-
-<Aside type="positive">
-
-**📖 リファレンス**: 各ステップに対応する [Copilot Playbook](https://theomonfort.github.io/theomonfort/playbook/) のページを併記しています。社内展開時の参考資料としても活用してください。
-
-</Aside>
+- **OPERATE**: Agentic Workflow で日常運用に AI を組み込む
 
 ### 前提条件
 
 以下の環境をご用意ください：
 
-- 以下の機能が有効化されたプライベート Organization を持っていること：
-  - GitHub Actions
-  - GitHub Copilot（Pro+ / Business / Enterprise）
-  - GitHub Advanced Security (GHAS)
-- Organization 内でリポジトリを作成できる権限があること
+- GitHub Copilot（Pro+ / Business / Enterprise）
+- GitHub Advanced Security (GHAS) ※ GHAS が無い場合は Step 9（CodeQL）はスキップ可能
+- Cloud Agent / Partner Agent / GHAS / Copilot CLI / Agentic Workflow が有効化された Organization
+- その Organization 内でリポジトリを作成できる権限

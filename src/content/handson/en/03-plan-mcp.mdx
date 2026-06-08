@@ -3,7 +3,7 @@ title: "PLAN: MCP Servers"
 order: 3
 stepSlug: "plan-mcp"
 duration: 10
-summary: "In this step, you'll review and add MCP (Model Context Protocol) Servers that give Copilot access to external tools. Once MCP is wired up, Copilot can directly do things like create Issues and look up the latest documentation."
+summary: "In this step, you'll review and add MCP (Model Context Protocol) Servers that give Copilot access to external tools."
 generated: true
 generatedFrom: "workshop-nikon.md"
 upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
@@ -18,11 +18,11 @@ import Aside from '../../../components/handson/Aside.astro';
 
 <Aside type="reference">
 
-**📖 Reference**: See [Playbook / MCP Server](https://theomonfort.github.io/theomonfort/en/playbook/mcp/) for how MCP works, its transports (stdio / HTTP), and how to configure it in VS Code.
+**📖 Reference**: See [Playbook / MCP Server](https://theomonfort.github.io/theomonfort/en/playbook/mcp/?present=1) for how MCP works, its transports (stdio / HTTP), and how to configure it in VS Code.
 
 </Aside>
 
-In this step, you'll review and add **MCP (Model Context Protocol) Servers** that give Copilot access to external tools. Once MCP is wired up, Copilot can directly do things like create Issues and look up the latest documentation.
+In this step, you'll review and add **MCP (Model Context Protocol) Servers** that give Copilot access to external tools.
 
 ### 3.1 — Verify the GitHub MCP Server
 
@@ -41,7 +41,7 @@ Open `.vscode/mcp.json` and confirm that the following configuration is present:
 }
 ```
 
-Click the **🔧 tools button** in the Copilot Chat input area (to the right of the model picker) and confirm that the `github-mcp-server` tools (Issues / PRs / code search, etc.) appear in the list.
+Click the **tools button** in the Copilot Chat input area (to the right of the model picker) and confirm that the `github-mcp-server` tools (Issues / PRs / code search, etc.) appear in the list.
 
 ⏱ About 1 minute
 
@@ -53,7 +53,7 @@ Click the **🔧 tools button** in the Copilot Chat input area (to the right of 
 
 ### 3.2 — Add the Context7 MCP Server
 
-**Context7** is an MCP Server that pulls **the latest official documentation** for libraries and frameworks into Copilot. It's essential for this workshop, where we use fast-moving frameworks like Astro / Tailwind / TypeScript.
+**Context7** is an MCP Server that pulls **the latest official documentation** for libraries and frameworks into Copilot. Recommended when working with fast-moving frameworks like Astro / Tailwind / TypeScript.
 
 1. Open the command palette with **Cmd+Shift+P** (or **Ctrl+Shift+P** on Windows/Linux)
 2. Type and select **"MCP: Add Server…"**

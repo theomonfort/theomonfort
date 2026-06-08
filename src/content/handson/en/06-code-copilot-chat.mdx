@@ -18,19 +18,19 @@ import Aside from '../../../components/handson/Aside.astro';
 
 <Aside type="reference">
 
-**📖 Reference**: See [Playbook / Copilot Chat](https://theomonfort.github.io/theomonfort/en/playbook/copilot-chat/) for how Plan and Agent modes differ and when to use each.
+**📖 Reference**: See [Playbook / Copilot Chat](https://theomonfort.github.io/theomonfort/en/playbook/copilot-chat/?present=1) for how Plan and Agent modes differ and when to use each.
 
 </Aside>
 
 Your PLAN-side harness (MCP, Instructions, Skills) is now in place. It's time to design the implementation in **Copilot Chat's Plan mode**, then let Agent mode build it all in one go.
 
-### 6.1 — Switch the model to Claude Opus 4.6
+### 6.1 — Switch the model to Claude Opus 4.8
 
-Click the model selector at the bottom of the Copilot Chat panel and pick **Claude Opus 4.6**.
+Click the model selector at the bottom of the Copilot Chat panel and pick **Claude Opus 4.8**.
 
 <Aside type="positive">
 
-**💡 Tip**: Opus-class models shine on complex design tasks and long-context conversations. For day-to-day editing and completion, other models are plenty, but for "scaffold the whole site in one shot" work like this section, Opus 4.6 gives more consistent quality.
+**💡 Tip**: Opus-class models shine on complex design tasks and long-context conversations. For day-to-day editing and completion, other models are plenty, but for "scaffold the whole site in one shot" work like this section, Opus 4.8 gives more consistent quality.
 
 </Aside>
 
@@ -57,7 +57,7 @@ Build a small Astro site (English only). Work on a new branch (e.g. feature/play
   - Each `##` heading in the markdown becomes a new slide. The title slide is auto-generated from the frontmatter (`title`, `summary`, `icon`).
   - Each slide has its own unique URL (e.g. `/playbook/[slug]/[index]`). 1 URL = 1 slide — do not render every slide on the same page.
   - Keyboard: `←` / `→` to move between slides, `Esc` to return to the index.
-  - A vertical section menu on the left of the screen lists every section (GitHub, GitHub Copilot, Agent Skills, etc.) so the user can jump between them.
+  - A vertical navigation menu on the left of the screen. **This is NOT a slide list for the current entry — it lists the other playbook entries (the other `.md` files under `src/content/playbook/` such as GitHub, GitHub Copilot, Agent Skills, etc.) so the user can jump between entries.** Clicking an entry navigates to that entry's first slide while staying in presentation mode. Highlight the currently-open entry.
   - Each slide is well centered on the screen, both vertically and horizontally.
   - Show a progress bar when moving between slides.
   - Use each entry's frontmatter `color` as the deck's accent color (slide border, headings).
@@ -82,17 +82,7 @@ Once you're happy with the plan, click **"Start with Autopilot"** to kick off th
 
 ![Start with Autopilot](/theomonfort/handson/img/start-with-autopilot.png)
 
-⏱ About 10 minutes
-
-Copilot will automatically:
-
-- Bootstrap the Astro project (with npm)
-- Define the playbook collection in `src/content.config.ts`
-- Build the grid-style index page (tile = icon + title + summary)
-- Build presentation mode itself (`##` slide splitting, one URL per slide (`/playbook/[slug]/[index]`), `←` / `→` / `Esc`, left-side section menu, well-centered slide layout, progress bar)
-- Apply each entry's frontmatter `color` as the accent color
-- Render Mermaid diagrams client-side
-- Style everything in Tailwind, following your design tokens
+⏱ About 15 minutes
 
 Once the implementation is done, start the dev server to check it out:
 
@@ -110,7 +100,7 @@ From the port-forwarding notification, click **"Open in browser"** and try it ou
 
 ### 6.5 — File the improvements as Issues
 
-Here's the key move — **instead of asking Copilot Chat to "fix this right now", file each improvement as a GitHub Issue**. In Part 12 (CODE: CLI) we'll have Copilot CLI implement all of these **in parallel, in one batch**.
+Here's the key move — **instead of asking Copilot Chat to "fix this right now", file each improvement as a GitHub Issue**. In Step 11 (CODE: Cloud Agent) we'll have Cloud Agent implement all of these **in parallel, in one batch**.
 
 Send the prompt below to Copilot Chat to file **8** Issues at once (the `github-issues` skill will structure them automatically):
 
@@ -142,6 +132,6 @@ Use the github-issues skill to create the following improvements as individual I
    Details: Below `max-width: 768px`, keyboard navigation is unavailable and slides overflow the viewport. On narrow widths, disable presentation mode and fall back to a single vertical scroll view that renders the whole entry as a long-form page.
 ```
 
-You can find the resulting Issues in the [Issues tab of your repository](#). We'll have Cloud Agent / Copilot CLI implement them in the next sections.
+You can find the resulting Issues in the Issues tab of your repository. We'll have Cloud Agent / Copilot CLI implement them in the next sections.
 
 ⏱ About 3 minutes
