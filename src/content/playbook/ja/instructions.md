@@ -110,11 +110,11 @@ applyTo: "server/tests/test_*.py"
     </marker>
   </defs>
   <path d="M 260 50 L 720 50" fill="none" stroke="#ffb000" stroke-width="2" marker-end="url(#arrow-orange)"/>
-  <path d="M 140 85 L 140 400 L 255 400 L 255 420" fill="none" stroke="#ffb000" stroke-width="2" marker-end="url(#arrow-orange)"/>
-  <path d="M 410 290 L 410 400 L 380 400 L 380 420" fill="none" stroke="#ff2e88" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-pink)"/>
-  <path d="M 515 420 L 515 378" fill="none" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)"/>
-  <path d="M 540 375 L 540 400 L 680 400 L 680 420" fill="none" stroke="#ffb000" stroke-width="2" marker-end="url(#arrow-orange)"/>
-  <path d="M 660 340 L 690 340 L 690 195 L 720 195" fill="none" stroke="#ffb000" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <path d="M 140 85 L 140 415 L 350 415 L 350 420" fill="none" stroke="#ffb000" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <path d="M 475 240 L 475 420" fill="none" stroke="#ff2e88" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-pink)"/>
+  <path d="M 610 420 L 610 338" fill="none" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <path d="M 660 335 L 660 400 L 775 400 L 775 420" fill="none" stroke="#ffb000" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <path d="M 705 290 L 712 290 L 712 195 L 720 195" fill="none" stroke="#ffb000" stroke-width="2" marker-end="url(#arrow-orange)"/>
   <rect x="20" y="15" width="240" height="70" rx="12" fill="#0a0e27" stroke="#ffb000" stroke-width="2"/>
   <text x="35" y="36" fill="#ffb000" font-size="11" font-weight="bold" letter-spacing="1">ハーネス</text>
   <text x="35" y="58" fill="#e8f4ff" font-size="12" font-weight="bold">INSTRUCTIONS を</text>
@@ -134,31 +134,28 @@ applyTo: "server/tests/test_*.py"
     <tspan x="735" dy="22" fill="#00f0ff" font-weight="bold"># DB ガイドライン</tspan>
     <tspan x="735" dy="14">- prepared statement を使う</tspan>
   </text>
-  <rect x="370" y="230" width="80" height="60" rx="10" fill="#0a0e27" stroke="#ff2e88" stroke-width="2"/>
-  <text x="410" y="252" fill="#ff2e88" font-size="10" font-weight="bold" letter-spacing="1" text-anchor="middle">ユーザー</text>
-  <text x="410" y="271" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">「DB を</text>
-  <text x="410" y="284" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">触って」</text>
-  <rect x="420" y="305" width="240" height="70" rx="12" fill="#0a0e27" stroke="#ffb000" stroke-width="2"/>
-  <text x="435" y="326" fill="#ffb000" font-size="11" font-weight="bold" letter-spacing="1">ハーネス</text>
-  <text x="435" y="348" fill="#e8f4ff" font-size="12" font-weight="bold">path に一致する</text>
-  <text x="435" y="364" fill="#e8f4ff" font-size="12" font-weight="bold">INSTRUCTION を読込</text>
-  <text x="550" y="390" fill="#3b82f6" font-size="10" font-weight="bold">src/db/users.tsを編集する</text>
-  <text x="20" y="445" fill="#e8f4ff" font-size="11" font-weight="bold">モデル</text>
-  <text x="20" y="461" fill="#e8f4ff" font-size="11" font-weight="bold">コンテキスト</text>
-  <rect x="60" y="420" width="110" height="55" rx="10" fill="#9bbc0f"/>
-  <text x="115" y="444" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
-  <text x="115" y="460" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
-  <rect x="200" y="420" width="110" height="55" rx="10" fill="#00f0ff"/>
-  <text x="255" y="453" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
-  <rect x="340" y="420" width="80" height="55" rx="10" fill="#ff2e88"/>
-  <text x="380" y="453" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
-  <rect x="450" y="420" width="130" height="55" rx="10" fill="#00f0ff"/>
-  <text x="515" y="444" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">FILE EDIT</text>
-  <text x="515" y="460" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">REQUEST</text>
-  <rect x="610" y="420" width="140" height="55" rx="10" fill="#ffb000"/>
-  <text x="680" y="444" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">PATH</text>
-  <text x="680" y="460" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTION</text>
+  <rect x="415" y="160" width="120" height="80" rx="12" fill="#0a0e27" stroke="#ff2e88" stroke-width="2"/>
+  <text x="475" y="185" fill="#ff2e88" font-size="12" font-weight="bold" letter-spacing="1" text-anchor="middle">ユーザー</text>
+  <text x="475" y="212" fill="#e8f4ff" font-size="14" font-weight="bold" text-anchor="middle">「DB を</text>
+  <text x="475" y="230" fill="#e8f4ff" font-size="14" font-weight="bold" text-anchor="middle">触って」</text>
+  <rect x="485" y="265" width="220" height="70" rx="12" fill="#0a0e27" stroke="#ffb000" stroke-width="2"/>
+  <text x="500" y="286" fill="#ffb000" font-size="11" font-weight="bold" letter-spacing="1">ハーネス</text>
+  <text x="500" y="308" fill="#e8f4ff" font-size="12" font-weight="bold">path に一致する</text>
+  <text x="500" y="324" fill="#e8f4ff" font-size="12" font-weight="bold">INSTRUCTION を読込</text>
+  <text x="605" y="375" fill="#3b82f6" font-size="10" font-weight="bold" text-anchor="end"><tspan x="605" dy="0">src/db/users.ts</tspan><tspan x="605" dy="12">を編集する</tspan></text>
+  <text x="80" y="441" fill="#e8f4ff" font-size="11" font-weight="bold" letter-spacing="1"><tspan x="80" dy="0">モデル</tspan><tspan x="80" dy="13">コンテキスト</tspan></text>
+  <rect x="155" y="420" width="110" height="55" rx="10" fill="#9bbc0f"/>
+  <text x="210" y="444" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
+  <text x="210" y="460" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
+  <rect x="295" y="420" width="110" height="55" rx="10" fill="#00f0ff"/>
+  <text x="350" y="453" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
+  <rect x="435" y="420" width="80" height="55" rx="10" fill="#ff2e88"/>
+  <text x="475" y="453" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
+  <rect x="545" y="420" width="130" height="55" rx="10" fill="#00f0ff"/>
+  <text x="610" y="444" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">FILE EDIT</text>
+  <text x="610" y="460" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">REQUEST</text>
+  <rect x="705" y="420" width="140" height="55" rx="10" fill="#ffb000"/>
+  <text x="775" y="444" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">PATH</text>
+  <text x="775" y="460" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTION</text>
 </svg>
 </figure>
-
-> 💡 **小さく分割するメリット**：`copilot-instructions.md` は短く保ち、領域固有のルール（DB / フロント / テストなど）は `applyTo` 付きの個別ファイルに分けると、毎回のコンテキスト消費を最小に抑えられる。

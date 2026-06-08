@@ -996,6 +996,18 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .prose-akq .hero-quote.hero-quote-team::before {
     background-image: url('/octocat-team.png');
   }
+  .prose-akq .hero-quote.hero-quote-admin::before {
+    background-image: url('/octocat-full-admin.png');
+  }
+  /* Inline play-bullet icon used as a list marker in lieu of ✅ */
+  .prose-akq .play-bullet {
+    display: inline-block;
+    height: 1em;
+    width: auto;
+    vertical-align: -0.1em;
+    margin-right: 0.35em;
+    filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.55));
+  }
   /* Plain hero-quote — no mascot, no speech bubble notch, normal width */
   .prose-akq .hero-quote.hero-quote-plain { margin-left: 0; }
   .prose-akq .hero-quote.hero-quote-plain::before,

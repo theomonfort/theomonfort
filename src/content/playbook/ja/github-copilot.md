@@ -32,7 +32,7 @@ links:
 
 <div class="hero-quote hero-quote-mona">
   <p>GitHub Copilot は世界で最もご活用いただいている <strong>AI 開発ツール</strong>。</p>
-  <p>エディタ・ターミナル・GitHub の<strong>あらゆる場面</strong>で、開発者の<strong>フロー</strong>を加速します。</p>
+  <p>IDE、ターミナル、GitHub.com の<strong>あらゆる場面</strong>で、開発者の<strong>フロー</strong>を加速します。</p>
 </div>
 
 ## AI モデルと利用サーフェス
@@ -51,7 +51,7 @@ links:
 ## 開発者へのインパクト
 
 GitHub Copilot がもたらす開発者へのインパクト  
-Accenture 社の開発者 450 名を対象にした 6 か月間の調査結果
+Accenture 社の開発者 450 名を対象にした 6 か月間の調査結果（2025）
 
 | 活動 | 生産性 | 効率性 | 満足度 |
 |---:|---:|---:|---:|
@@ -60,7 +60,7 @@ Accenture 社の開発者 450 名を対象にした 6 か月間の調査結果
 
 ## ひとつのサブスクで Codex・Claude も使える
 
-GitHub Copilot のサブスクリプションには、Codex や Claude を動かすための **ハーネス**(IDE 拡張・Cloud エージェント基盤)が含まれている。Codex / Claude のフル機能をすべて手に入れるわけではないが、Copilot の **プレミアムリクエスト枠** の範囲で、IDE でもクラウドでも追加契約なしに切り替えて使える。
+GitHub Copilot のサブスクリプションがあれば、**Codex** と **Claude** の **エージェント（ハーネス）** を、**IDE** でも **Cloud Agent** としても使える。利用分は **Copilot AI クレジット** から直接支払われるので、追加契約は不要。
 
 <div class="copilot-flow-small">
 
@@ -98,17 +98,16 @@ flowchart LR
 
 ## なぜ企業は Copilot を選ぶのか
 
-- ✅ **オーケストレーション**<br/>　コーディングだけでなく、SDLC 全体にわたる AI
-- ✅ **モデル・エージェント・サーフェス全体での選択の自由**<br/>　あらゆるワークフローに最適なモデルとインターフェース。ベンダーロックインなし
-- ✅ **エンタープライズコントロール**<br/>　一元化されたガバナンス、可視性、セキュリティ
-- ✅ **コンプライアンス**<br/>　Copilot Proxy、ポリシー制御、公開コードフィルタ、対象利用に対する Microsoft の IP 保護
-- ✅ **最高のコストパフォーマンス**<br/>　プール型使用量、充実した組み込みエンタイトルメント、ACD による価格優位性の最大化
+- <img src="/theomonfort/icons/play-cyan.svg" alt="" width="14" height="20" class="play-bullet" /> **オーケストレーション**<br/>　コーディングだけでなく、SDLC 全体にわたる AI
+- <img src="/theomonfort/icons/play-cyan.svg" alt="" width="14" height="20" class="play-bullet" /> **モデル・エージェント・サーフェス全体での選択の自由**<br/>　あらゆるワークフローに最適なモデルとインターフェース。ベンダーロックインなし
+- <img src="/theomonfort/icons/play-cyan.svg" alt="" width="14" height="20" class="play-bullet" /> **エンタープライズコントロール**<br/>　一元化されたガバナンス、可視性、セキュリティ
+- <img src="/theomonfort/icons/play-cyan.svg" alt="" width="14" height="20" class="play-bullet" /> **コンプライアンス**<br/>　Copilot Proxy、ポリシー制御、公開コードフィルタ、対象利用に対する Microsoft の IP 保護
+- <img src="/theomonfort/icons/play-cyan.svg" alt="" width="14" height="20" class="play-bullet" /> **最高のコストパフォーマンス**<br/>　プール型使用量、充実した組み込みエンタイトルメント、ACD による価格優位性の最大化
 
 ## セキュアでコンプライアントなアーキテクチャ
 
+プロンプトや生成されたコードは **Copilot Proxy** を経由し、安心してエンタープライズで使える設計。<br/>
 🔗 詳細は <a href="https://resources.github.com/ja/copilot-trust-center/" target="_blank" rel="noopener noreferrer" class="retro-link">Copilot Trust Center</a> を参照。
-
-入力されたコードは **Copilot Proxy** を経由し、安心してエンタープライズで使える設計。
 
 ```mermaid
 ---

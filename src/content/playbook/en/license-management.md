@@ -23,7 +23,7 @@ links:
 
 ## In a nutshell
 
-<div class="hero-quote hero-quote-team">
+<div class="hero-quote hero-quote-admin">
   <p>
     GitHub Copilot is <strong>billed at the Enterprise level</strong> and <strong>assigned at the Organization level</strong>.
   </p>

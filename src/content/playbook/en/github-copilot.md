@@ -32,7 +32,7 @@ links:
 
 <div class="hero-quote hero-quote-mona">
   <p>GitHub Copilot is the world's most widely adopted <strong>AI developer tool</strong>.</p>
-  <p>It accelerates your <strong>flow</strong> across every surface — <strong>editor, terminal, and GitHub</strong>.</p>
+  <p>It accelerates your <strong>flow</strong> across every surface — <strong>IDE, terminal, and GitHub.com</strong>.</p>
 </div>
 
 ## AI Models & Surfaces
@@ -51,7 +51,7 @@ Available surfaces:
 ## Developer Impact
 
 The impact GitHub Copilot has on developers  
-Results from a 6-month study of 450 Accenture developers
+Results from a 6-month study of 450 Accenture developers (2025)
 
 | Activity | Productivity | Efficiency | Satisfaction |
 |---:|---:|---:|---:|
@@ -60,7 +60,7 @@ Results from a 6-month study of 450 Accenture developers
 
 ## Use Codex & Claude with a Single Subscription
 
-A GitHub Copilot subscription includes the **harness** (IDE extension + Cloud agent foundation) needed to run Codex and Claude. You don't get every feature of Codex / Claude, but within Copilot's **premium request quota** you can switch between them in the IDE or in the cloud — no extra contract needed.
+With a GitHub Copilot subscription, you can use the **Codex** and **Claude** **agents (harness)** — both in the **IDE** and as a **Cloud Agent**. Usage is paid directly through **Copilot AI credits**, so no extra contract is needed.
 
 <div class="copilot-flow-small">
 
@@ -98,17 +98,16 @@ flowchart LR
 
 ## Why Enterprises Choose Copilot
 
-- ✅ **Orchestration**<br/>　AI that spans the entire SDLC, not just coding
-- ✅ **Freedom of choice across models, agents, and surfaces**<br/>　The best model and interface for every workflow. No vendor lock-in
-- ✅ **Enterprise controls**<br/>　Centralized governance, visibility, and security
-- ✅ **Compliance**<br/>　Copilot Proxy, policy controls, public-code filtering, and Microsoft IP protection for eligible use
-- ✅ **Best cost-performance**<br/>　Pooled usage, rich built-in entitlements, and maximum price advantage via ACD
+- <img src="/theomonfort/icons/play-cyan.svg" alt="" width="14" height="20" class="play-bullet" /> **Orchestration**<br/>　AI that spans the entire SDLC, not just coding
+- <img src="/theomonfort/icons/play-cyan.svg" alt="" width="14" height="20" class="play-bullet" /> **Freedom of choice across models, agents, and surfaces**<br/>　The best model and interface for every workflow. No vendor lock-in
+- <img src="/theomonfort/icons/play-cyan.svg" alt="" width="14" height="20" class="play-bullet" /> **Enterprise controls**<br/>　Centralized governance, visibility, and security
+- <img src="/theomonfort/icons/play-cyan.svg" alt="" width="14" height="20" class="play-bullet" /> **Compliance**<br/>　Copilot Proxy, policy controls, public-code filtering, and Microsoft IP protection for eligible use
+- <img src="/theomonfort/icons/play-cyan.svg" alt="" width="14" height="20" class="play-bullet" /> **Best cost-performance**<br/>　Pooled usage, rich built-in entitlements, and maximum price advantage via ACD
 
 ## Secure & Compliant Architecture
 
-🔗 See the <a href="https://resources.github.com/ja/copilot-trust-center/" target="_blank" rel="noopener noreferrer" class="retro-link">Copilot Trust Center</a> for full details.
-
-All code input passes through **Copilot Proxy** — designed for safe enterprise use.
+**Prompts and generated code** pass through **Copilot Proxy** — designed for safe enterprise use.<br/>
+🔗 See the <a href="https://resources.github.com/en/copilot-trust-center/" target="_blank" rel="noopener noreferrer" class="retro-link">Copilot Trust Center</a> for full details.
 
 ```mermaid
 ---

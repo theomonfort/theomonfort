@@ -81,10 +81,10 @@ Agent Skills は **段階的開示** で読み込まれる。
     </marker>
   </defs>
   <path d="M 260 50 L 720 50" fill="none" stroke="#ffb000" stroke-width="2" marker-end="url(#arrow-orange)"/>
-  <path d="M 140 85 L 140 400 L 365 400 L 365 420" fill="none" stroke="#ffb000" stroke-width="2" marker-end="url(#arrow-orange)"/>
-  <path d="M 410 290 L 410 400 L 480 400 L 480 420" fill="none" stroke="#ff2e88" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-pink)"/>
-  <path d="M 585 420 L 585 376" fill="none" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)"/>
-  <path d="M 660 375 L 715 375 L 715 420" fill="none" stroke="#ffb000" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <path d="M 140 85 L 140 400 L 400 400 L 400 420" fill="none" stroke="#ffb000" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <path d="M 410 290 L 410 400 L 515 400 L 515 420" fill="none" stroke="#ff2e88" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-pink)"/>
+  <path d="M 620 420 L 620 376" fill="none" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <path d="M 660 375 L 750 375 L 750 420" fill="none" stroke="#ffb000" stroke-width="2" marker-end="url(#arrow-orange)"/>
   <path d="M 660 340 L 690 340 L 690 200 L 720 200" fill="none" stroke="#ffb000" stroke-width="2" marker-end="url(#arrow-orange)"/>
   <rect x="20" y="15" width="240" height="70" rx="12" fill="#0a0e27" stroke="#ffb000" stroke-width="2"/>
   <text x="35" y="36" fill="#ffb000" font-size="11" font-weight="bold" letter-spacing="1">ハーネス</text>
@@ -113,30 +113,28 @@ Agent Skills は **段階的開示** で読み込まれる。
   <text x="435" y="326" fill="#ffb000" font-size="11" font-weight="bold" letter-spacing="1">ハーネス</text>
   <text x="435" y="348" fill="#e8f4ff" font-size="12" font-weight="bold">スキル本体を</text>
   <text x="435" y="364" fill="#e8f4ff" font-size="12" font-weight="bold">Context に読み込む</text>
-  <text x="600" y="389" fill="#3b82f6" font-size="10" font-weight="bold">API スキルが</text>
-  <text x="600" y="402" fill="#3b82f6" font-size="10" font-weight="bold">必要</text>
+  <text x="635" y="389" fill="#3b82f6" font-size="10" font-weight="bold">API スキルが</text>
+  <text x="635" y="402" fill="#3b82f6" font-size="10" font-weight="bold">必要</text>
   <text x="20" y="445" fill="#e8f4ff" font-size="11" font-weight="bold">モデル</text>
   <text x="20" y="461" fill="#e8f4ff" font-size="11" font-weight="bold">コンテキスト</text>
-  <rect x="60" y="420" width="110" height="55" rx="10" fill="#9bbc0f"/>
-  <text x="115" y="444" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
-  <text x="115" y="460" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
-  <rect x="180" y="420" width="110" height="55" rx="10" fill="#00f0ff"/>
-  <text x="235" y="453" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
-  <rect x="300" y="420" width="130" height="55" rx="10" fill="#ffb000"/>
-  <text x="365" y="444" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SKILLS</text>
-  <text x="365" y="460" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">DESCRIPTION</text>
-  <rect x="440" y="420" width="80" height="55" rx="10" fill="#ff2e88"/>
-  <text x="480" y="453" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
-  <rect x="530" y="420" width="110" height="55" rx="10" fill="#00f0ff"/>
-  <text x="585" y="444" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SKILL</text>
-  <text x="585" y="460" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">REQUEST</text>
-  <rect x="650" y="420" width="130" height="55" rx="10" fill="#ffb000"/>
-  <text x="715" y="444" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SKILL</text>
-  <text x="715" y="460" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">DOCUMENT</text>
+  <rect x="95" y="420" width="110" height="55" rx="10" fill="#9bbc0f"/>
+  <text x="150" y="444" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
+  <text x="150" y="460" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
+  <rect x="215" y="420" width="110" height="55" rx="10" fill="#00f0ff"/>
+  <text x="270" y="453" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
+  <rect x="335" y="420" width="130" height="55" rx="10" fill="#ffb000"/>
+  <text x="400" y="444" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SKILLS</text>
+  <text x="400" y="460" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">DESCRIPTION</text>
+  <rect x="475" y="420" width="80" height="55" rx="10" fill="#ff2e88"/>
+  <text x="515" y="453" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
+  <rect x="565" y="420" width="110" height="55" rx="10" fill="#00f0ff"/>
+  <text x="620" y="444" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SKILL</text>
+  <text x="620" y="460" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">REQUEST</text>
+  <rect x="685" y="420" width="130" height="55" rx="10" fill="#ffb000"/>
+  <text x="750" y="444" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SKILL</text>
+  <text x="750" y="460" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">DOCUMENT</text>
 </svg>
 </figure>
-
-> 💡 **段階的開示** のおかげで、何百個のスキルがあっても起動時のコストは **メタデータ分だけ**。実際に使うスキルだけが本体ごと読み込まれる。
 
 ## Example
 

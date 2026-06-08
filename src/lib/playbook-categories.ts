@@ -101,7 +101,7 @@ export const categories: Category[] = [
     color: 'magenta',
     actor: 'エンタープライズ管理者',
     actorEn: 'Enterprise Admin',
-    avatar: '/theomonfort/octocat-full-red.png',
+    avatar: '/theomonfort/octocat-profile-admin.png',
     description: '<strong class="text-neon-magenta">ライセンス</strong>・<strong class="text-neon-magenta">ポリシー</strong>・<strong class="text-neon-magenta">課金</strong> を Enterprise / Organization レベルで統括。誰が何を使えるかを安全に管理。',
     descriptionEn: 'Govern <strong class="text-neon-magenta">licenses</strong>, <strong class="text-neon-magenta">policies</strong>, and <strong class="text-neon-magenta">billing</strong> at the Enterprise and Organization level. Decide safely who gets access to what.',
   },

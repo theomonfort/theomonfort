@@ -23,7 +23,7 @@ links:
 
 ## 一言で
 
-<div class="hero-quote hero-quote-team">
+<div class="hero-quote hero-quote-admin">
   <p>
     GitHub Copilot は <strong>Enterprise レベルで課金</strong>され、<strong>Organization レベルで割り当て</strong>られる。
   </p>
