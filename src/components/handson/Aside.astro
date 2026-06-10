@@ -1,12 +1,18 @@
 ---
 interface Props {
   type?: 'positive' | 'negative' | 'reference';
+  mascot?: string;
+  accent?: string;
 }
-const { type = 'positive' } = Astro.props;
+const { type = 'positive', mascot, accent } = Astro.props;
 const marker = type === 'negative' ? '⚠️ NOTE' : type === 'reference' ? null : '💡 TIP';
+const styleParts = [];
+if (mascot) styleParts.push(`--aside-mascot: url('${mascot}')`);
+if (accent) styleParts.push(`--aside-accent: ${accent}`);
+const style = styleParts.length ? `${styleParts.join('; ')};` : undefined;
 ---
 
-<aside class={`handson-aside aside-${type}`} data-aside={type}>
+<aside class={`handson-aside aside-${type}`} data-aside={type} style={style}>
   {marker && <span class="aside-marker font-pixel text-[10px]" aria-hidden="true">{marker}</span>}
   <div class="aside-body">
     <slot />

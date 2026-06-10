@@ -453,7 +453,8 @@ a.retro-link:hover::after {
 }
 /* Preview screenshot of what we'll build — bordered (it IS a UI screenshot), centered, and sized to match the hands-on tab's MonaDialog framing rather than full-bleed. */
 .handson-article img.handson-build-preview,
-.prose-akq img.build-preview {
+.prose-akq img.build-preview,
+.handson-article img[src$="cloud-agent-assignees.png"] {
   display: block;
   margin: 1.5em auto 2em;
   width: 70%;
