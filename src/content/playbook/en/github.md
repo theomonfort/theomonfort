@@ -68,7 +68,7 @@ Looking back at GitHub's journey reveals where we are today ──
       </feMerge>
     </filter>
   </defs>
-  <rect x="0" y="0" width="1100" height="480" fill="#05060f"/>
+  <rect x="0" y="0" width="1100" height="480" fill="none"/>
   <path d="M 80 430 C 260 440, 380 410, 530 330 C 680 250, 820 160, 1050 30" stroke="#0a0e27" stroke-width="14" fill="none" stroke-linecap="round"/>
   <path d="M 80 430 C 260 440, 380 410, 530 330 C 680 250, 820 160, 1050 30" stroke="#00f0ff" stroke-width="2.5" fill="none" stroke-linecap="round" marker-end="url(#ghTimelineArrow)"/>
   <g>
@@ -127,7 +127,7 @@ From **Plan → Code → Review → Test & Security → Operate**, AI on GitHub 
 <svg viewBox="0 0 1080 510" xmlns="http://www.w3.org/2000/svg"
      shape-rendering="crispEdges"
      style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
-  <rect x="0" y="0" width="1080" height="510" fill="#05060f"/>
+  <rect x="0" y="0" width="1080" height="510" fill="none"/>
 
   <!-- ── Card 1: PLAN ── magenta ─────────────────────────────────── -->
   <g>

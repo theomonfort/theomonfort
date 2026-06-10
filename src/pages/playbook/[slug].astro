@@ -72,7 +72,25 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       document.documentElement.classList.add('slide-preparing');
       document.body.classList.add('present-mode');
       document.body.classList.add('slide-preparing');
+      const _initSlide = parseInt(new URLSearchParams(location.search).get('slide') || '0', 10) || 0;
+      if (_initSlide === 0) document.body.classList.add('slide-cover');
     }
+  </script>
+  <script is:inline define:vars={{ BASE: import.meta.env.BASE_URL }}>
+    // Warm the HTTP cache for every category backdrop so present-mode TOC
+    // navigation never flashes a black background while the next webp loads.
+    // `new Image()` requests are low-priority by default so this does not
+    // compete with first paint, but starts immediately rather than waiting
+    // for browser idle (which can delay if the user clicks quickly).
+    (function preloadBackdrops() {
+      var cats = ['introduction', 'plan', 'develop', 'review', 'secure', 'operate', 'administration'];
+      var base = BASE.charAt(BASE.length - 1) === '/' ? BASE : BASE + '/';
+      cats.forEach(function (cat) {
+        var img = new Image();
+        img.decoding = 'async';
+        img.src = base + 'slide-bg-' + cat + '.webp';
+      });
+    })();
   </script>
   <section
     class="max-w-5xl mx-auto px-4 py-12 playbook-detail"
@@ -445,6 +463,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       tag.innerHTML = current === 0 ? '' : `<span class="tag-main">${titleHtml}</span>`;
       tag.classList.toggle('visible', current > 0);
     }
+    document.body.classList.toggle('slide-cover', current === 0);
     // Update active item in left TOC (now playbook-entry-based, handled by syncToc)
   }
 
@@ -502,6 +521,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       tag.innerHTML = '';
       tag.classList.remove('visible');
     }
+    document.body.classList.remove('slide-cover');
   }
 
   function exitSlideMode() {
@@ -1744,6 +1764,109 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   body.present-mode .crt-overlay { display: none !important; }
   body.present-mode .present-hint { display: none; }
   body.present-mode .present-overlay-hint { display: flex; }
+
+  /* Per-category pixel-art backdrops for present mode.
+     Shared positioning rule + per-category background-image overrides.
+     Cover slide (body.slide-cover) uses a lighter overlay so the artwork breathes.
+     NOTE: do NOT use background-attachment: fixed — the slide-in @keyframes
+     uses filter: blur(...) which creates a containing block and intermittently
+     breaks fixed backgrounds (per CSS spec). */
+  body.present-mode .playbook-detail[data-category="introduction"],
+  body.present-mode .playbook-detail[data-category="plan"],
+  body.present-mode .playbook-detail[data-category="develop"],
+  body.present-mode .playbook-detail[data-category="review"],
+  body.present-mode .playbook-detail[data-category="secure"],
+  body.present-mode .playbook-detail[data-category="operate"],
+  body.present-mode .playbook-detail[data-category="administration"] {
+    background-color: #05060f;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  /* INTRODUCTION → spaceport with category-planets */
+  body.present-mode .playbook-detail[data-category="introduction"] {
+    background-image:
+      linear-gradient(180deg, rgba(5, 6, 15, 0.86) 0%, rgba(5, 6, 15, 0.90) 55%, rgba(5, 6, 15, 0.94) 100%),
+      url('/slide-bg-introduction.webp');
+  }
+  body.present-mode.slide-cover .playbook-detail[data-category="introduction"] {
+    background-image:
+      linear-gradient(180deg, rgba(5, 6, 15, 0.55) 0%, rgba(5, 6, 15, 0.68) 55%, rgba(5, 6, 15, 0.82) 100%),
+      url('/slide-bg-introduction.webp');
+  }
+
+  /* PLAN → greenhouse with architect/planner */
+  body.present-mode .playbook-detail[data-category="plan"] {
+    background-image:
+      linear-gradient(180deg, rgba(5, 6, 15, 0.86) 0%, rgba(5, 6, 15, 0.90) 55%, rgba(5, 6, 15, 0.94) 100%),
+      url('/slide-bg-plan.webp');
+  }
+  body.present-mode.slide-cover .playbook-detail[data-category="plan"] {
+    background-image:
+      linear-gradient(180deg, rgba(5, 6, 15, 0.55) 0%, rgba(5, 6, 15, 0.68) 55%, rgba(5, 6, 15, 0.82) 100%),
+      url('/slide-bg-plan.webp');
+  }
+
+  /* DEVELOP → volcanic forge */
+  body.present-mode .playbook-detail[data-category="develop"] {
+    background-image:
+      linear-gradient(180deg, rgba(5, 6, 15, 0.86) 0%, rgba(5, 6, 15, 0.90) 55%, rgba(5, 6, 15, 0.94) 100%),
+      url('/slide-bg-develop.webp');
+  }
+  body.present-mode.slide-cover .playbook-detail[data-category="develop"] {
+    background-image:
+      linear-gradient(180deg, rgba(5, 6, 15, 0.55) 0%, rgba(5, 6, 15, 0.68) 55%, rgba(5, 6, 15, 0.82) 100%),
+      url('/slide-bg-develop.webp');
+  }
+
+  /* REVIEW → desert oasis watchtower */
+  body.present-mode .playbook-detail[data-category="review"] {
+    background-image:
+      linear-gradient(180deg, rgba(5, 6, 15, 0.86) 0%, rgba(5, 6, 15, 0.90) 55%, rgba(5, 6, 15, 0.94) 100%),
+      url('/slide-bg-review.webp');
+  }
+  body.present-mode.slide-cover .playbook-detail[data-category="review"] {
+    background-image:
+      linear-gradient(180deg, rgba(5, 6, 15, 0.55) 0%, rgba(5, 6, 15, 0.68) 55%, rgba(5, 6, 15, 0.82) 100%),
+      url('/slide-bg-review.webp');
+  }
+
+  /* SECURE → frozen castle */
+  body.present-mode .playbook-detail[data-category="secure"] {
+    background-image:
+      linear-gradient(180deg, rgba(5, 6, 15, 0.86) 0%, rgba(5, 6, 15, 0.90) 55%, rgba(5, 6, 15, 0.94) 100%),
+      url('/slide-bg-secure.webp');
+  }
+  body.present-mode.slide-cover .playbook-detail[data-category="secure"] {
+    background-image:
+      linear-gradient(180deg, rgba(5, 6, 15, 0.55) 0%, rgba(5, 6, 15, 0.68) 55%, rgba(5, 6, 15, 0.82) 100%),
+      url('/slide-bg-secure.webp');
+  }
+
+  /* OPERATE → Yggdrasil world-tree */
+  body.present-mode .playbook-detail[data-category="operate"] {
+    background-image:
+      linear-gradient(180deg, rgba(5, 6, 15, 0.86) 0%, rgba(5, 6, 15, 0.90) 55%, rgba(5, 6, 15, 0.94) 100%),
+      url('/slide-bg-operate.webp');
+  }
+  body.present-mode.slide-cover .playbook-detail[data-category="operate"] {
+    background-image:
+      linear-gradient(180deg, rgba(5, 6, 15, 0.55) 0%, rgba(5, 6, 15, 0.68) 55%, rgba(5, 6, 15, 0.82) 100%),
+      url('/slide-bg-operate.webp');
+  }
+
+  /* ADMINISTRATION → grand library / archive */
+  body.present-mode .playbook-detail[data-category="administration"] {
+    background-image:
+      linear-gradient(180deg, rgba(5, 6, 15, 0.86) 0%, rgba(5, 6, 15, 0.90) 55%, rgba(5, 6, 15, 0.94) 100%),
+      url('/slide-bg-administration.webp');
+  }
+  body.present-mode.slide-cover .playbook-detail[data-category="administration"] {
+    background-image:
+      linear-gradient(180deg, rgba(5, 6, 15, 0.55) 0%, rgba(5, 6, 15, 0.68) 55%, rgba(5, 6, 15, 0.82) 100%),
+      url('/slide-bg-administration.webp');
+  }
 
   body.present-mode .playbook-detail {
     max-width: none !important;
