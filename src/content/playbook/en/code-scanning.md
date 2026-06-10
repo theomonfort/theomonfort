@@ -79,10 +79,10 @@ There are two ways to enable CodeQL. **Default setup is enough to start.**
 CodeQL **converts code into "queryable data"** before analyzing it, so it understands semantics rather than just matching patterns like grep-based SAST.
 
 - 🐛 **Injection** — SQL injection / Command injection / Path traversal / XSS / SSRF
-- 🔓 Auth & authorization — Hardcoded credentials, weak cryptographic algorithms, weak random
-- 💣 Memory safety (C/C++) — Buffer overflow / use after free / null dereference
+- 🔓 **Auth & authorization** — Broken access control, weak cryptographic algorithms (MD5/SHA1), insecure randomness
+- 💣 **Memory safety (C/C++)** — Buffer overflow / use after free / null dereference
 - 🧩 **Data flow tracking** — Tracks whether user input (taint source) reaches a dangerous function (sink)
-- 🌐 Supported languages — C/C++, C#, Go, Java/Kotlin, JavaScript/TypeScript, Python, Ruby, Swift
+- 🌐 **Supported languages** — C/C++, C#, Go, Java/Kotlin, JavaScript/TypeScript, Python, Ruby, Swift
 
 > 🔬 CodeQL queries are open-sourced at [github/codeql](https://github.com/github/codeql). You can write and extend with your own custom queries.
 
@@ -90,15 +90,58 @@ CodeQL **converts code into "queryable data"** before analyzing it, so it unders
 
 The killer feature of Code Scanning. When CodeQL raises an alert, **AI generates a fix** that you can commit directly to the PR.
 
-- 🤖 How it works — The alert is passed to an LLM (GPT-4 family), which generates a diff based on the relevant code + surrounding context + CodeQL's description
-- 💬 Shown in the PR — "Generate fix" button → review the proposed patch → commit as-is
+- 🤖 **How it works** — The alert is passed to an LLM (GPT-4 family), which generates a diff based on the relevant code + surrounding context + CodeQL's description
+- 💬 **Where it shows** — On the alert page **and** inline in the PR; commit options: **Commit to existing branch** or **Commit to new branch**
 - ⚡ **Reduces MTTR** — GitHub internal data shows fix time is 3–4× faster
-- 🌐 Coverage — JavaScript/TypeScript, Python, Java/Kotlin, C#, and other CodeQL-supported languages
+- 🌐 **Coverage** — JavaScript/TypeScript, Python, Java/Kotlin, C#, and other CodeQL-supported languages
 - 🆓 **Free for OSS** — Copilot Autofix on public repos has been completely free since 2024 (no Copilot subscription required)
 
 > 💡 Not just "find vulnerabilities" — **"let AI fix them too"** is the new standard. Review burden drops dramatically.
 
 📘 Details: <a class="retro-link" href="https://docs.github.com/en/code-security/code-scanning/managing-code-scanning-alerts/about-autofix-for-codeql-code-scanning" target="_blank" rel="noopener noreferrer">About Copilot Autofix ↗</a>
+
+## Assign to Copilot — delegate the fix to the agent (Public Preview)
+
+**What it does** — Assign a Code Scanning alert directly to **Copilot Coding Agent**. Copilot analyzes the vulnerability, plans the fix, and opens a **draft Pull Request** for you to review.
+
+- 🎯 **Two ways to assign** — **bulk** (select multiple alerts in a Security Campaign → "Assign Copilot" → 1 consolidated PR) or **single** (assignee picker on the alert page)
+- 🤖 **What Copilot does** — analyzes the vulnerability → drafts a fix plan → opens a draft PR; iterate via `@copilot` comments on the PR
+- 📦 **Output** — multi-file, repository-wide changes (vs Autofix's inline single-file patch)
+- 🛂 **Requirements** — GitHub Code Security or GHAS **+** Copilot Coding Agent (GHEC); the alert must already have an Autofix suggestion (Autofix-supported queries only)
+- 📅 **Status** — Public Preview (2025-10-28)
+
+📘 Details: <a class="retro-link" href="https://github.blog/changelog/2025-10-28-assign-code-scanning-alerts-to-copilot-for-automated-fixes-in-public-preview/" target="_blank" rel="noopener noreferrer">Assign code scanning alerts to Copilot (changelog) ↗</a>
+
+## Autofix vs Assign to Copilot
+
+| Aspect | 🔧 **Autofix (suggestion)** | 🤖 **Assign to Copilot** |
+| --- | --- | --- |
+| **Output** | Inline patch — commit to **existing branch** or **new branch** | Draft Pull Request opened by Copilot bot |
+| **Fix scope** | Single file, minimal local fix | Multi-file; repository-wide context |
+| **Granularity** | Per-alert only (Generate fix one by one) | Per-alert **or** bulk (Security Campaign → 1 PR for many alerts) |
+| **Validation** | None at suggestion time (post-merge re-scan) | Sandboxed analysis; CodeQL / CI run on the PR before merge |
+| **Iteration** | One-shot, no regenerate; discard if you dislike it | Comment `@copilot` on the PR to refine / re-fix |
+| **Speed** | Seconds (synchronous) | Minutes (async background) |
+| **License & cost** | Free with GHAS / GitHub Code Security — no extra license | Requires Copilot Coding Agent license; consumes premium requests |
+| **Prerequisite** | CodeQL query must support Autofix (otherwise no "Generate fix" button) | An Autofix suggestion must already exist on the alert |
+
+> 🔑 **Rule of thumb** — start with **Autofix** for quick local fixes; escalate to **Assign to Copilot** when the fix spans multiple files, needs refactoring, or warrants a full PR conversation.
+
+## Security Campaigns — drive remediation at scale
+
+**What it is** — A **time-boxed, org-wide remediation initiative**. Curate alerts, assign owners, set a deadline, track progress on a dashboard.
+
+- 🎯 **Use case** — "Fix all critical SQLi in product X by Q2" / clear `security-extended` backlog / chase a CVE post-incident
+- 🧭 **Targeting** — filter by severity, CWE, query, language, repo, team, age (with preview)
+- 👥 **Ownership** — routed to CODEOWNERS / teams; per-team progress
+- ⏰ **Deadline & dashboard** — due date + open / fixed / overdue tracker
+- 🤖 **Pairs with Assign to Copilot** — bulk-assign Autofix-eligible alerts → 1 PR per repo
+- 🛂 **Permissions** — **security managers / org owners** at org level
+
+**How to create one**
+- `Org → Security and quality → Campaigns → New campaign` — pick **From template**, **From code scanning filters**, or **From secret scanning filters**
+
+📘 Details: <a class="retro-link" href="https://docs.github.com/en/code-security/securing-your-organization/fixing-security-alerts-at-scale/about-security-campaigns" target="_blank" rel="noopener noreferrer">About security campaigns (GitHub Docs) ↗</a>
 
 ## Getting started (fastest path)
 
@@ -175,21 +218,14 @@ Use `Org → Settings → Code security → default settings` to apply to new an
 
 ## Code Security Risk Assessment (free inventory scan)
 
-<div class="hero-quote">
-  <p>
-    <strong>Code Security Risk Assessment</strong> scans the <strong>up to 20 most active repositories</strong> in your org with a single click using CodeQL, making visible "what code vulnerabilities are hiding and where" (GA April 2026).
-  </p>
-  <p>
-    <strong>No GHAS / Code Security license required — completely free</strong>. Available to all Team and Enterprise Cloud orgs, and the Actions minutes used don't count against your Actions quota.
-  </p>
-</div>
+**What it does** — scans the **up to 20 most active repositories** in your org with a single click using CodeQL, surfacing where vulnerabilities are hiding. **No GHAS / Code Security license required — completely free** (GA April 2026).
 
-- 🔎 Scope — selects **up to 20 repos with the most recent active commits** in the org (you can re-select each time)
-- 📊 Output — aggregated report of vulnerabilities by **severity, language, and rule type**, including **how many are fixable by Copilot Autofix**
-- 🕒 Frequency — can be re-run **once every 90 days** (point-in-time inventory)
-- 🛂 Permissions — only Organization owners / security managers can run it
-- 🚀 How to run — `Org → Security → Assessments → Run code security risk assessment`
-- 🆓 No license required, no Actions minutes charged — perfect for evaluating Code Security before purchase
+- 🔎 **Scope** — up to 20 repos with the most recent active commits (re-selectable each run)
+- 📊 **Output** — aggregated report by **severity, language, rule type**, including **how many are fixable by Copilot Autofix**
+- 🕒 **Frequency** — re-runnable **once every 90 days** (point-in-time inventory)
+- 🛂 **Permissions** — Organization owners / security managers only
+- 🚀 **How to run** — `Org → Security → Assessments → Run code security risk assessment`
+- 🆓 **Cost** — no license, no Actions minutes charged — perfect for evaluating Code Security before purchase
 
 > 📊 Pair this with Secret Risk Assessment (see <a class="retro-link" href="/theomonfort/en/playbook/secret-scanning">Secret Scanning ↗</a>) to get a complete picture of your organization's security posture in a single day. Use the results to decide whether to adopt **Code Security**.
 

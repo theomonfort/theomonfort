@@ -9,7 +9,7 @@ category: plan
 related: ['harness-engineering', 'custom-agent', 'instructions']
 links:
   - group: 📖 Official documentation
-    label: About hooks (Cloud Agent concepts)
+    label: About hooks
     url: https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-hooks
   - group: 📖 Official documentation
     label: Using hooks with GitHub Copilot CLI
@@ -23,6 +23,9 @@ links:
   - group: 📖 Official documentation
     label: Hooks configuration reference
     url: https://docs.github.com/en/copilot/reference/hooks-configuration
+  - group: 📖 Official documentation
+    label: Agent hooks in Visual Studio Code
+    url: https://code.visualstudio.com/docs/agent-customization/hooks
   - group: 🎓 Tutorial
     label: Using hooks with Copilot CLI for predictable, policy-compliant execution
     url: https://docs.github.com/en/copilot/tutorials/copilot-cli-hooks
