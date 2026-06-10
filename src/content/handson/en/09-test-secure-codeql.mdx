@@ -16,6 +16,12 @@ upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
 
 import Aside from '../../../components/handson/Aside.astro';
 
+<Aside type="reference" mascot="/theomonfort/octocat-profile-blue.png" accent="#00f0ff">
+
+**📖 Reference**: For how CodeQL works and how to author custom queries, see [Playbook / Code Scanning](https://theomonfort.github.io/theomonfort/en/playbook/code-scanning?present=1).
+
+</Aside>
+
 Turn on **CodeQL** to scan your code for security vulnerabilities using static analysis.
 
 ### 9.1 — Enable CodeQL
@@ -31,6 +37,10 @@ Turn on **CodeQL** to scan your code for security vulnerabilities using static a
 
 <Aside type="positive">
 
-**Why it matters**: CodeQL uses static analysis to find security issues like XSS and SQL injection.
+**Why it matters**:
+
+- **What it finds**: CodeQL uses static analysis to detect security issues like XSS and SQL injection.
+- **When it runs**: A full scan of the default branch runs the moment you enable it, then on every push to the default branch, every PR, and on a weekly schedule (not just on PRs).
+- **Where to see results**: All alerts show up in the repository's **Security** tab → **Code scanning**. On PRs, findings appear inline as comments on the affected lines.
 
 </Aside>

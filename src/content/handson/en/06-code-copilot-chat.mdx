@@ -28,6 +28,8 @@ Your PLAN-side harness (MCP, Instructions, Skills) is now in place. It's time to
 
 Click the model selector at the bottom of the Copilot Chat panel and pick **Claude Opus 4.8**.
 
+While you're there, also switch **"Default Approvals"** at the bottom of the panel to **"Bypass Approvals"**. Since we're working inside a Codespace sandbox, skipping the per-tool approval prompts is much faster.
+
 <Aside type="positive">
 
 **💡 Tip**: Opus-class models shine on complex design tasks and long-context conversations. For day-to-day editing and completion, other models are plenty, but for "scaffold the whole site in one shot" work like this section, Opus 4.8 gives more consistent quality.
@@ -58,8 +60,6 @@ Build a small Astro site (English only). Work on a new branch (e.g. feature/play
   - Each slide has its own unique URL (e.g. `/playbook/[slug]/[index]`). 1 URL = 1 slide — do not render every slide on the same page.
   - Keyboard: `←` / `→` to move between slides, `Esc` to return to the index.
   - A vertical navigation menu on the left of the screen. **This is NOT a slide list for the current entry — it lists the other playbook entries (the other `.md` files under `src/content/playbook/` such as GitHub, GitHub Copilot, Agent Skills, etc.) so the user can jump between entries.** Clicking an entry navigates to that entry's first slide while staying in presentation mode. Highlight the currently-open entry.
-  - Each slide is well centered on the screen, both vertically and horizontally.
-  - Show a progress bar when moving between slides.
   - Use each entry's frontmatter `color` as the deck's accent color (slide border, headings).
 - Render any ` ```mermaid ` code blocks inside the markdown as Mermaid diagrams (client-side is fine).
 
@@ -84,6 +84,12 @@ Once you're happy with the plan, click **"Start with Autopilot"** to kick off th
 
 ⏱ About 15 minutes
 
+<Aside type="positive">
+
+**💡 Work in parallel**: While Copilot is implementing, you've got time on your hands — hop over to [Step 7 (REVIEW: Copilot Code Review)](../review-copilot-code-review/) and enable **Automatic Copilot Code Review** now. That way, the moment Copilot opens the PR it's working on, the review fires automatically.
+
+</Aside>
+
 Once the implementation is done, start the dev server to check it out:
 
 ```bash
@@ -100,9 +106,13 @@ From the port-forwarding notification, click **"Open in browser"** and try it ou
 
 ### 6.5 — File the improvements as Issues
 
-Here's the key move — **instead of asking Copilot Chat to "fix this right now", file each improvement as a GitHub Issue**. In Step 11 (CODE: Cloud Agent) we'll have Cloud Agent implement all of these **in parallel, in one batch**.
+Here's the key move — **instead of asking Copilot Chat to "fix this right now", file each improvement as a GitHub Issue**. In Step 11 (CODE: Cloud Agent) we'll have Cloud Agent implement some of them **in parallel, in one batch**, and in Step 13 (CODE: Copilot CLI) we'll knock out the remaining ones in parallel with `/fleet`.
 
 Send the prompt below to Copilot Chat to file **8** Issues at once (the `github-issues` skill will structure them automatically):
+
+<Aside type="reference">
+The Issues below are **just one example** of the improvements you might want, based on how Copilot built the site. Depending on what Copilot actually shipped, some of them may not apply — skip those, and **feel free to swap in your own improvements** that make the site better the way you want.
+</Aside>
 
 ```
 Use the github-issues skill to create the following improvements as individual Issues in this repository.

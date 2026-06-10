@@ -3,7 +3,7 @@ title: "PLAN: Hooks"
 order: 12
 stepSlug: "plan-hooks"
 duration: 10
-summary: "Copilot（Chat / CLI / Cloud Agent など）が .github/ の設定ファイルや .env、pnpm-lock.yaml のような 触ってほしくないファイル を勝手に書き換えないよう、Hooks でガードレールを張りましょう。特に次の章では CLI で複数のエージェントを並列に走らせるので、その前に安全網を用意しておくのが…"
+summary: "Copilot（Chat / CLI / Cloud Agent など）が .github/ の設定ファイルや package-lock.json のような 触ってほしくないファイル を勝手に書き換えないよう、Hooks でガードレールを張りましょう。特に次の章では CLI で複数のエージェントを並列に走らせるので、その前に安全網を用意しておくのが…"
 generated: true
 generatedFrom: "workshop-nikon.md"
 upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
@@ -16,15 +16,15 @@ upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
 
 import Aside from '../../../components/handson/Aside.astro';
 
-Copilot（Chat / CLI / Cloud Agent など）が `.github/` の設定ファイルや `.env`、`pnpm-lock.yaml` のような **触ってほしくないファイル** を勝手に書き換えないよう、**Hooks** でガードレールを張りましょう。特に次の章では CLI で複数のエージェントを並列に走らせるので、その前に安全網を用意しておくのが理想的です。
-
-**Hooks** は、エージェントがツールを呼び出す前後（`PreToolUse` / `PostToolUse`）に任意のスクリプトを差し込める仕組みです。`PreToolUse` で `permissionDecision: deny` を返せば、エージェントの動作を **物理的に止める** ことができます。
-
 <Aside type="reference">
 
 **📖 参考**: [プレイブック / Hooks](https://theomonfort.github.io/theomonfort/playbook/hooks/?present=1) で Hook の仕組みとイベント種別を確認できます。
 
 </Aside>
+
+Copilot（Chat / CLI / Cloud Agent など）が `.github/` の設定ファイルや `package-lock.json` のような **触ってほしくないファイル** を勝手に書き換えないよう、**Hooks** でガードレールを張りましょう。特に次の章では CLI で複数のエージェントを並列に走らせるので、その前に安全網を用意しておくのが理想的です。
+
+**Hooks** は、エージェントがツールを呼び出す前後（`PreToolUse` / `PostToolUse`）に任意のスクリプトを差し込める仕組みです。`PreToolUse` で `permissionDecision: deny` を返せば、エージェントの動作を **止める** ことができます。
 
 ### N.1 — `.github/hooks/hooks.json` を作成する
 
@@ -37,7 +37,7 @@ Copilot（Chat / CLI / Cloud Agent など）が `.github/` の設定ファイル
     "PreToolUse": [
       {
         "type": "command",
-        "matcher": ".*(edit|create|write|delete|remove|rename|move|patch|replace|insert|update|bash|shell|terminal|command|run|execute|apply).*",
+        "matcher": "^(create|edit)$",
         "bash": "node ./scripts/block.mjs",
         "cwd": ".github/hooks",
         "timeoutSec": 5
@@ -49,7 +49,9 @@ Copilot（Chat / CLI / Cloud Agent など）が `.github/` の設定ファイル
 
 ポイント：
 
-- `matcher` でファイル変更系・シェル実行系の **mutating tools** だけにフックを限定（読み込みや検索はブロックしない）。
+- `matcher` は **Copilot CLI / Cloud Agent** のみで効きます — `create` / `edit` の 2 つの書き込み系ツール名にマッチ（[公式 hooks リファレンス](https://docs.github.com/en/copilot/reference/hooks-reference#tool-names-for-hook-matching)）。
+- **VS Code Copilot 拡張は `matcher` を無視** し、すべてのツール呼び出しでフックが発火します（[VS Code 公式ドキュメント FAQ](https://code.visualstudio.com/docs/agent-customization/hooks) 参照）。つまり VS Code ではスクリプト側のパスチェックだけがゲートになります。
+- matcher 正規表現は自動的に `^(?:...)$` で囲まれて **完全一致** で評価されます。
 - `bash` は `cwd` から相対実行されます。スクリプトは次のステップで作成。
 
 ### N.2 — ブロック用スクリプトを作成する
@@ -72,7 +74,7 @@ if (!protectedPath) {
   process.exit(0);
 }
 
-deny(`Repository policy: agent writes to .github/, .env, or pnpm-lock.yaml are blocked. The ${toolName} tool referenced ${protectedPath}, which is one of these protected paths.`);
+deny(`Repository policy: agent writes to .github/ or package-lock.json are blocked. The ${toolName} tool referenced ${protectedPath}, which is one of these protected paths.`);
 
 async function readStdin() {
   const chunks = [];
@@ -88,14 +90,13 @@ function parseJson(raw) {
 function findProtectedPath(value) {
   const protectedPaths = [
     { label: '.github/', pattern: /(^|[\/\s"'`=:([{])(?:\.\/)?\.github(?:\/|$)/i },
-    { label: '.env', pattern: /(^|[\/\s"'`=:([{])(?:\.\/)?\.env(?:$|[\/\s"'`),}\]])/i },
-    { label: 'pnpm-lock.yaml', pattern: /(^|[\/\s"'`=:([{])pnpm-lock\.yaml(?:$|[\/\s"'`),}\]])/i },
+    { label: 'package-lock.json', pattern: /(^|[\/\s"'`=:([{])package-lock\.json(?:$|[\/\s"'`),}\]])/i },
   ];
   return protectedPaths.find(({ pattern }) => pattern.test(value))?.label;
 }
 
 function deny(reason) {
-  const additionalContext = 'Protected paths in this repository: .github/ (Copilot config, hooks, workflows), .env (secrets), pnpm-lock.yaml (deterministic deps). The agent must NOT create, edit, write, delete, rename, move, or run shell commands that touch these paths. If the user explicitly needs such a change, instruct them to make it manually.';
+  const additionalContext = 'Protected paths in this repository: .github/ (Copilot config, hooks, workflows) and package-lock.json (deterministic deps). The agent must NOT create, edit, write, delete, rename, or move files that touch these paths. If the user explicitly needs such a change, instruct them to make it manually.';
   stdout.write(JSON.stringify({
     permissionDecision: 'deny',
     permissionDecisionReason: reason,
@@ -112,7 +113,7 @@ function deny(reason) {
 
 ポイント：
 
-- 保護対象は `.github/`、`.env`、`pnpm-lock.yaml` の 3 つ。
+- 保護対象は `.github/` と `package-lock.json` の 2 つ。
 - `permissionDecisionReason` と `additionalContext` で **保護パスの一覧と理由をエージェントに返す** ので、エージェントは次のターンで自分で軌道修正できる（"どこに触ってはいけないか" を知らされる）。
 - 出力は **Copilot CLI 形式**（`permissionDecision`）と **VS Code 形式**（`hookSpecificOutput`）の両方を返すので、どちらの環境でも動きます。
 

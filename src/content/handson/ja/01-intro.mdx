@@ -37,11 +37,67 @@ import MonaDialog from '../../../components/handson/MonaDialog.astro';
 - **TEST & SECURE**: Dependabot・CodeQL（GHAS）と GitHub Actions（Playwright）で品質と安全性を担保する
 - **OPERATE**: Agentic Workflow で日常運用に AI を組み込む
 
-### 前提条件
+### 管理者向け
 
-以下の環境をご用意ください：
+本セクションは Enterprise 管理者の方向けのご案内です。受講者の皆様がハンズオンを問題なく一通り実施できるよう、Enterprise / Organization 側で事前に有効化いただきたい設定を以下にまとめております。
 
-- GitHub Copilot（Pro+ / Business / Enterprise）
-- GitHub Advanced Security (GHAS) ※ GHAS が無い場合は Step 9（CodeQL）はスキップ可能
-- Cloud Agent / Partner Agent / GHAS / Copilot CLI / Agentic Workflow が有効化された Organization
-- その Organization 内でリポジトリを作成できる権限
+**【必須】**
+- テスト用 Organization が 1 つ必要です。受講者の皆様がハンズオン用のテストリポジトリを自由に作成できる場所として使用します。
+
+**【Enterprise レベルで有効化いただきたい機能（できる範囲で結構です）】**
+
+※ 下記が Enterprise 側で許可されていないと、Org 側で有効化できません。
+
+1. **Codespaces**
+   - 設定箇所：Your Enterprise → Policies → Codespaces → Enable for all organizations
+   - 私と同じ環境で進めるためです。ローカル PC でも代替可能ですが、Codespaces を推奨いたします。
+
+2. **Actions**
+   - 設定箇所：Your Enterprise → Policies → Actions → Enable for all organizations →「Allow all actions and reusable workflows」
+
+3. **Copilot Code Review**
+   - 設定箇所：Your Enterprise → AI Controls → Agents → Available Agents → Copilot Code Review → Enabled
+
+4. **Copilot Cloud Agent**
+   - 設定箇所：Your Enterprise → AI Controls → Agents → Available Agents → Copilot Cloud Agent → Enabled
+
+5. **Copilot CLI / Chat / Agent Mode**
+   - 設定箇所：Your Enterprise → AI Controls → Copilot
+     - Copilot CLI → Enable everywhere
+     - Copilot Agent Mode in IDE Chat → Enable everywhere
+     - Auto-Approval in Copilot Agent Mode → Enable everywhere
+
+6. **Partner Agents**
+   - 設定箇所：Your Enterprise → AI Controls → Agents → Partner Agents (Preview)
+     - Anthropic Claude → Allowed
+     - OpenAI Codex → Allowed
+
+7. **MCP**
+   - 設定箇所：Your Enterprise → AI Controls → MCP
+     - MCP servers in Copilot → Enable everywhere
+
+**【テスト用 Organization で有効化いただきたい機能（できる範囲で結構です）】**
+
+1. **GitHub Codespaces**
+   - 設定箇所：Org Settings → Codespaces → General → User permissions →「All members」を選択
+   - 私と同じ環境で進めるためです。ローカル PC でも代替可能ですが、Codespaces を推奨いたします。
+
+2. **GitHub Actions**
+   - 設定箇所：Org Settings → Actions → General →「Allow all actions and reusable workflows」
+   - Workflow の実行および後述の Copilot Code Review / Cloud Agent / Agentic Workflow の動作に必要です。
+
+3. **Copilot Code Review**
+   - 設定箇所：Org Settings → Copilot → Policies → Features →「Copilot code review」→ Enabled
+
+4. **Copilot Cloud Agent**
+   - 設定箇所：Org Settings → Copilot → Policies → Features →「Copilot cloud agent」→ Enabled
+
+5. **Copilot CLI**
+   - 設定箇所：Org Settings → Copilot → Policies → Features →「Copilot CLI」→ Enabled
+
+6. **レポジトリを作成する権限**
+   - 設定箇所：Org Settings → Member privileges → Repository creation → ☑ Private（Members will be able to create private repositories）
+
+**【スキップ可能】**
+
+- セキュリティ関連のパート（GHAS）はスキップしても問題なく進められます。

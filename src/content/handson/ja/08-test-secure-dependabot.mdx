@@ -28,17 +28,20 @@ import Aside from '../../../components/handson/Aside.astro';
 
 1. リポジトリの **Settings** → **Security and quality** → **Advanced Security**
 2. **Dependabot** セクション：
+   - **Dependency graph** を有効化（Dependabot の前提条件）
    - **Dependabot security updates** を有効化
    - **Dependabot version updates** を有効化 → エディタが開き `.github/dependabot.yml` のテンプレートが表示されます
-3. テンプレートの `package-ecosystem: ""` を **`"npm"`** に変更（本リポジトリは pnpm / npm エコシステム）：
-   ```yaml
-   version: 2
-   updates:
-     - package-ecosystem: "npm"
-       directory: "/"
-       schedule:
-         interval: "weekly"
-   ```
+3. テンプレートの `package-ecosystem: ""` を **`"npm"`** に変更（本リポジトリは pnpm / npm エコシステム）。最終的に以下のような内容になります：
+
+```yaml
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+```
+
 4. **Commit changes…** → **「Create a new branch and start a pull request」** を選択 → PR を作成してマージ
 
 <Aside type="negative">
@@ -49,6 +52,11 @@ import Aside from '../../../components/handson/Aside.astro';
 
 <Aside type="positive">
 
-**ポイント**: Dependabot は週次で依存関係をチェックし、脆弱性が見つかれば自動的に PR を作成してくれます。
+**ポイント**: 2 種類のアップデートは役割が違います：
+
+- **Security updates** — GitHub Advisory Database に脆弱性が登録された瞬間に PR を自動生成（リアクティブ）
+- **Version updates** — `.github/dependabot.yml` のスケジュール（例: weekly）に従って、脆弱性の有無に関係なく最新バージョンへの PR を生成（プロアクティブ）
+
+両方有効化することで、脆弱性対応と最新化の両方をカバーできます。
 
 </Aside>

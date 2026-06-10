@@ -37,11 +37,67 @@ In this workshop, you'll get hands-on with the simple concepts introduced in the
 - **TEST & SECURE**: Guarantee quality and safety with Dependabot, CodeQL (GHAS), and GitHub Actions (Playwright)
 - **OPERATE**: Build AI into daily operations with Agentic Workflow
 
-### Prerequisites
+### For administrators
 
-Please prepare the following environment:
+This section is for Enterprise administrators. Below is a summary of the Enterprise / Organization settings to enable in advance, so participants can complete the entire hands-on without issues.
 
-- GitHub Copilot (Pro+ / Business / Enterprise)
-- GitHub Advanced Security (GHAS) — if GHAS is not available, Step 9 (CodeQL) can be skipped
-- An Organization with Cloud Agent, Partner Agent, GHAS, Copilot CLI, and Agentic Workflow enabled
-- Permission to create repositories within that Organization
+**【Required】**
+- One test Organization is required. Participants will use it to freely create test repositories for the hands-on.
+
+**【Features to enable at the Enterprise level (best effort)】**
+
+※ If the items below are not allowed at the Enterprise level, they cannot be enabled at the Org level.
+
+1. **Codespaces**
+   - Path: Your Enterprise → Policies → Codespaces → Enable for all organizations
+   - This is so participants use the same environment as I do. Local PC is possible as a fallback, but Codespaces is recommended.
+
+2. **Actions**
+   - Path: Your Enterprise → Policies → Actions → Enable for all organizations → "Allow all actions and reusable workflows"
+
+3. **Copilot Code Review**
+   - Path: Your Enterprise → AI Controls → Agents → Available Agents → Copilot Code Review → Enabled
+
+4. **Copilot Cloud Agent**
+   - Path: Your Enterprise → AI Controls → Agents → Available Agents → Copilot Cloud Agent → Enabled
+
+5. **Copilot CLI / Chat / Agent Mode**
+   - Path: Your Enterprise → AI Controls → Copilot
+     - Copilot CLI → Enable everywhere
+     - Copilot Agent Mode in IDE Chat → Enable everywhere
+     - Auto-Approval in Copilot Agent Mode → Enable everywhere
+
+6. **Partner Agents**
+   - Path: Your Enterprise → AI Controls → Agents → Partner Agents (Preview)
+     - Anthropic Claude → Allowed
+     - OpenAI Codex → Allowed
+
+7. **MCP**
+   - Path: Your Enterprise → AI Controls → MCP
+     - MCP servers in Copilot → Enable everywhere
+
+**【Features to enable in the test Organization (best effort)】**
+
+1. **GitHub Codespaces**
+   - Path: Org Settings → Codespaces → General → User permissions → "All members"
+   - This is so participants use the same environment as I do. Local PC is possible as a fallback, but Codespaces is recommended.
+
+2. **GitHub Actions**
+   - Path: Org Settings → Actions → General → "Allow all actions and reusable workflows"
+   - Required for Workflow execution and for the Copilot Code Review / Cloud Agent / Agentic Workflow features below.
+
+3. **Copilot Code Review**
+   - Path: Org Settings → Copilot → Policies → Features → "Copilot code review" → Enabled
+
+4. **Copilot Cloud Agent**
+   - Path: Org Settings → Copilot → Policies → Features → "Copilot cloud agent" → Enabled
+
+5. **Copilot CLI**
+   - Path: Org Settings → Copilot → Policies → Features → "Copilot CLI" → Enabled
+
+6. **Permission to create repositories**
+   - Path: Org Settings → Member privileges → Repository creation → ☑ Private (Members will be able to create private repositories)
+
+**【Skippable】**
+
+- The security-related part (GHAS) can be skipped with no impact on the rest of the hands-on.

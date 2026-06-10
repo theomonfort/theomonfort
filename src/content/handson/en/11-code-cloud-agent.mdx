@@ -3,7 +3,7 @@ title: "CODE: Cloud Agent"
 order: 11
 stepSlug: "code-cloud-agent"
 duration: 20
-summary: "Before using the Cloud Agent, double-check the settings below:"
+summary: "Assign the Issues from Step 6 to Cloud Agent and have it implement multiple improvements in parallel."
 generated: true
 generatedFrom: "workshop-nikon.md"
 upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
@@ -22,20 +22,15 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-### 5.1 — Check your Copilot settings
+### 5.1 — Assign an existing Issue to the Cloud Agent
 
-Before using the Cloud Agent, double-check the settings below:
+Pick one of the Issues you created in Step 6.5 and let Cloud Agent implement it.
 
-1. Click your profile icon at the top right of GitHub → **Copilot settings**.
-2. Confirm that **Copilot Cloud Agent** is enabled.
-
-### 5.2 — Assign an existing Issue to the Cloud Agent
-
-Open one of the Issues you created in Step 1.4 — pick the one you want the Cloud Agent to implement.
-
-1. Open the Issue.
-2. Click **Assignees** in the right sidebar.
-3. Choose one of **Copilot** (GitHub), **Claude** (Anthropic), or **Codex** (OpenAI) and assign it.
+1. On github.com, open your repository.
+2. Click the **Issues** tab at the top.
+3. From the list, open one of the Issues you want Cloud Agent to work on.
+4. In the right sidebar, click **Assignees**.
+5. Pick one of **Copilot** (GitHub), **Claude** (Anthropic), or **Codex** (OpenAI) from the list and assign it.
 
 ![Cloud Agent assignment screen](/theomonfort/handson/img/cloud-agent-assignees.png)
 
@@ -51,7 +46,13 @@ When you assign, you can customize:
 
 </Aside>
 
-### 5.3 — Review and merge the PR
+<Aside type="reference">
+
+**Leave a few Issues for the Part 13 CLI session**: in Part 13 we'll use Copilot CLI's `/fleet` to implement the remaining open Issues in parallel. **Don't assign every Issue from Step 6.5 here — leave 2–3 of them unassigned** so the CLI has something to chew on later.
+
+</Aside>
+
+### 5.2 — Review and merge the PR
 
 The PR the Cloud Agent creates is opened as a **Draft**.
 
@@ -68,12 +69,12 @@ The PR the Cloud Agent creates is opened as a **Draft**.
 
 ![Resolving conflicts with Fix with Copilot](/theomonfort/handson/img/fix-conflicts-copilot.png)
 
-### 5.4 — Pull the latest code and try it out
+### 5.3 — Pull the latest code and try it out
 
 Once the Cloud Agent's PR is merged, pull the latest code into your Codespace and check the site.
 
 ```bash
-git checkout main && git pull && pnpm install && pnpm dev
+git checkout main && git pull && npm install && npm run dev
 ```
 
 When the port forwarding notification pops up, click **"Open in Browser"** to try out the new feature the Cloud Agent shipped.

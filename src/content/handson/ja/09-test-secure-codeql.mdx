@@ -16,6 +16,12 @@ upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
 
 import Aside from '../../../components/handson/Aside.astro';
 
+<Aside type="reference" mascot="/theomonfort/octocat-profile-blue.png" accent="#00f0ff">
+
+**📖 参考**: CodeQL の仕組みやカスタムクエリについては [プレイブック / Code Scanning](https://theomonfort.github.io/theomonfort/playbook/code-scanning?present=1) を参照してください。
+
+</Aside>
+
 コードに潜むセキュリティ脆弱性を静的解析でスキャンする **CodeQL** を有効化します。
 
 ### 9.1 — CodeQL を有効化する
@@ -31,6 +37,10 @@ import Aside from '../../../components/handson/Aside.astro';
 
 <Aside type="positive">
 
-**ポイント**: CodeQL は静的解析でセキュリティ上の問題（XSS / SQL Injection 等）を検出します。
+**ポイント**:
+
+- **検出内容**: CodeQL は静的解析で XSS / SQL Injection などのセキュリティ脆弱性を検出します。
+- **実行タイミング**: 有効化直後にデフォルトブランチ全体を初回スキャン → その後はデフォルトブランチへの push、PR、週次スケジュールで自動実行されます（PR のときだけではありません）。
+- **結果の確認場所**: リポジトリの **Security** タブ → **Code scanning** から全アラートを確認できます。PR では該当行に直接コメントが付きます。
 
 </Aside>

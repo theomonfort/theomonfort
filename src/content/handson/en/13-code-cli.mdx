@@ -30,11 +30,15 @@ Here we'll take the **Issues you created at the end of Part 6** and have the CLI
 
 | Command       | Description                                            |
 | ------------- | ------------------------------------------------------ |
+| `/help`       | List available interactive commands                    |
 | `/model`      | Pick the AI model (Claude / GPT, etc.)                 |
-| `/mode`       | Switch mode (plan / agent)                             |
+| `Shift+Tab`   | Switch mode (plan / agent)                             |
+| `/ide`        | Connect to an IDE workspace                            |
 | `/allow-all`  | Allow tool execution without confirmation (Autopilot)  |
 | `/fleet`      | Run multiple agents in parallel                        |
 | `/tasks`      | Check the status of running fleet tasks                |
+| `/context`    | Show context window token usage                        |
+| `/compact`    | Summarize conversation history to free context         |
 | `/chronicle`  | Analyze session history and usage                      |
 | `/resume`     | Resume the previous session                            |
 
@@ -53,12 +57,6 @@ Then launch Copilot CLI from the VS Code terminal:
 copilot
 ```
 
-<Aside type="negative">
-
-**First launch**: If you're prompted with "Install GitHub Copilot CLI?", type `y` to install it. On Codespaces it's already pre-installed via `postCreateCommand`.
-
-</Aside>
-
 ### 12.2 — Pick a model and enable Autopilot
 
 Inside the CLI, run:
@@ -73,11 +71,9 @@ Inside the CLI, run:
 
 Pick the most capable model available (e.g., Claude Opus 4.6).
 
-Then press **Shift+Tab** to switch into **Agent (Autopilot) mode**.
-
 ### 12.3 — Implement Issues in parallel with `/fleet`
 
-Have the CLI implement the 3–5 Issues you created in Part 6 in parallel. The prompt also includes an instruction to run a rubber-duck review with a different model (Codex family) at the end.
+Have the CLI implement the 3–5 Issues you created in Part 6 in parallel. The prompt also asks for a rubber-duck review on each implementation at the end.
 
 ```
 /fleet Take every open Issue in this repository labeled `bug` or `enhancement` and
@@ -89,17 +85,12 @@ Each agent should follow this flow:
 3. Verify it runs with `pnpm dev`
 4. Commit and open a PR (include `Closes #<number>` in the body)
 
-Once all PRs are open, switch to the **GPT-5 Codex** model at the end
-(a different model from Claude, to avoid blind spots inherited from the implementer)
-and read the diffs of every PR, reviewing them from a rubber-duck perspective.
-Focus on: design-level blind spots and logic bugs, missed Issue requirements,
-consistency with existing code, and missing tests / error handling.
-Ignore style and trivial nits — list only the truly important issues, concisely, PR by PR.
+Once all PRs are open, run a rubber-duck review on each implementation.
 ```
 
 ⏱ ~10–15 minutes
 
-The CLI spawns multiple fleet agents, each working on its own branch through implementation and PR creation autonomously. Progress streams in your terminal, and the rubber-duck review by the alternate model is printed at the end.
+The CLI spawns multiple fleet agents, each working on its own branch through implementation and PR creation autonomously. Progress streams in your terminal, and the rubber-duck review is printed at the end.
 
 To check progress during and after execution:
 
@@ -111,7 +102,7 @@ This lists the status of each fleet agent (running / done / failed) along with t
 
 <Aside type="positive">
 
-**Key point**: Having a different model (Codex) review what another model (Claude) implemented helps you avoid same-model bias and surface blind spots.
+**Key point**: Having a different model (Codex) review what another model (Claude) implemented helps you avoid same-model bias and surface blind spots. Copilot CLI ships with a built-in **rubber-duck subagent** that reviews the work critically using a different model (e.g. GPT) from the main session agent (e.g. Claude) — adding "after implementation, do a rubber-duck review with a different model" to your prompt invokes it automatically. See [About the rubber duck agent](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/rubber-duck) and [About custom agents](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-custom-agents) for details.
 
 </Aside>
 

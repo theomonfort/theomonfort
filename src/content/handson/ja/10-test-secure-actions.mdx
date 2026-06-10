@@ -39,15 +39,13 @@ Presentation サイトのキーボードナビゲーションを検証する Pla
 
 テストケース：
 1. `←` / `→` を押すと同じセクション内のスライドが前後に移動する（## 見出しごとに 1 スライド）。
-2. `↓` / `↑` を押すと次 / 前のセクション（md ファイル）に移動する。
-3. 左サイドバーに全セクションが目次として表示され、現在のセクションがハイライトされている。
-4. frontmatter の `color` が異なるセクションを切り替えると、テーマカラー（背景・タイトル・サイドバーアクセント）が変わる。
+2. 左サイドバーから別のセクションをクリックすると、そのセクションの 1 枚目に切り替わる。
 
 ファイル配置:
 - テストは tests/e2e/presentation.spec.ts に配置。
-- 必要なら playwright.config.ts も更新してください（baseURL、webServer に pnpm dev を起動する設定）。
+- 必要なら playwright.config.ts も更新してください（baseURL、webServer に npm run dev を起動する設定）。
 
-テストを書き終えたらローカルで `pnpm exec playwright test` を実行して全部 pass することを確認してください。
+テストを書き終えたらローカルで `npx playwright test` を実行して全部 pass することを確認してください。
 ```
 
 ⏱ 約5分
@@ -63,11 +61,10 @@ Presentation サイトのキーボードナビゲーションを検証する Pla
 PR の作成・更新時にトリガーし、以下を実行してください：
 
 1. Node.js 22 をセットアップ
-2. pnpm をセットアップ
-3. 依存関係をインストール
-4. Playwright のブラウザをインストール（npx playwright install --with-deps chromium）
-5. `pnpm exec playwright test` を実行
-6. テスト失敗時は Playwright のレポートを artifact としてアップロード
+2. 依存関係をインストール（`npm ci`）
+3. Playwright のブラウザをインストール（npx playwright install --with-deps chromium）
+4. `npx playwright test` を実行
+5. テスト失敗時は Playwright のレポートを artifact としてアップロード
 ```
 
 ⏱ 約2分

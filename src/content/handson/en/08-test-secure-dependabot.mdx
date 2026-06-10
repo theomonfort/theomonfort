@@ -28,17 +28,20 @@ Turn on Dependabot to scan your dependencies for vulnerabilities. Setup takes ju
 
 1. Repository **Settings** → **Security and quality** → **Advanced Security**
 2. **Dependabot** section:
+   - Enable **Dependency graph** (prerequisite for Dependabot)
    - Enable **Dependabot security updates**
    - Enable **Dependabot version updates** → an editor opens with a `.github/dependabot.yml` template
-3. Change `package-ecosystem: ""` in the template to **`"npm"`** (this repo uses the pnpm / npm ecosystem):
-   ```yaml
-   version: 2
-   updates:
-     - package-ecosystem: "npm"
-       directory: "/"
-       schedule:
-         interval: "weekly"
-   ```
+3. Change `package-ecosystem: ""` in the template to **`"npm"`** (this repo uses the pnpm / npm ecosystem). The final file should look like this:
+
+```yaml
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+```
+
 4. **Commit changes…** → choose **"Create a new branch and start a pull request"** → open the PR and merge it
 
 <Aside type="negative">
@@ -49,6 +52,11 @@ Turn on Dependabot to scan your dependencies for vulnerabilities. Setup takes ju
 
 <Aside type="positive">
 
-**Why it matters**: Dependabot checks your dependencies weekly and automatically opens a PR whenever it finds a vulnerability.
+**Why it matters**: The two update types have different roles:
+
+- **Security updates** — opens a PR the moment a vulnerability is added to the GitHub Advisory Database (reactive)
+- **Version updates** — opens PRs to bump to the latest version on a schedule (e.g. weekly) defined in `.github/dependabot.yml`, regardless of vulnerabilities (proactive)
+
+Enabling both covers vulnerability response *and* keeping dependencies up to date.
 
 </Aside>

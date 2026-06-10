@@ -39,15 +39,13 @@ Assumptions:
 
 Test cases:
 1. Pressing `←` / `→` moves to the previous / next slide within the same section (one slide per `##` heading).
-2. Pressing `↓` / `↑` moves to the next / previous section (md file).
-3. The left sidebar shows all sections as a table of contents, with the current section highlighted.
-4. When switching between sections that have different frontmatter `color` values, the theme color (background, title, sidebar accent) changes accordingly.
+2. Clicking a different section in the left sidebar switches to that section's first slide.
 
 File layout:
 - Place the tests in tests/e2e/presentation.spec.ts.
-- Update playwright.config.ts if needed (baseURL, webServer configured to launch `pnpm dev`).
+- Update playwright.config.ts if needed (baseURL, webServer configured to launch `npm run dev`).
 
-Once the tests are written, run `pnpm exec playwright test` locally and make sure they all pass.
+Once the tests are written, run `npx playwright test` locally and make sure they all pass.
 ```
 
 ⏱ ~5 minutes
@@ -63,11 +61,10 @@ Create .github/workflows/test.yml.
 Trigger it on PR open / update, and have it perform the following steps:
 
 1. Set up Node.js 22
-2. Set up pnpm
-3. Install dependencies
-4. Install the Playwright browsers (`npx playwright install --with-deps chromium`)
-5. Run `pnpm exec playwright test`
-6. On test failure, upload the Playwright report as an artifact
+2. Install dependencies (`npm ci`)
+3. Install the Playwright browsers (`npx playwright install --with-deps chromium`)
+4. Run `npx playwright test`
+5. On test failure, upload the Playwright report as an artifact
 ```
 
 ⏱ ~2 minutes

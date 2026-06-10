@@ -22,25 +22,7 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-By combining GitHub Actions with Copilot (AI), let's experience an **Agentic Workflow** that detects code changes and runs autonomous tasks on its own.
-
 **What is an Agentic Workflow?**: A mechanism that leverages Copilot inside GitHub Actions workflows to execute autonomous tasks (report generation, documentation updates, code fixes, etc.) in response to repository changes.
-
-#### Installing gh aw
-
-First, install the CLI tool for Agentic Workflow.
-
-For a local environment:
-
-```bash
-gh extension install github/gh-aw
-```
-
-For Codespaces or environments with network restrictions (since it's pre-GA):
-
-```bash
-curl -sL https://raw.githubusercontent.com/github/gh-aw/main/install-gh-aw.sh | bash
-```
 
 ### 6.1 — Create a Personal Access Token (PAT)
 
@@ -132,25 +114,6 @@ After execution completes (⏱ about 2 minutes), an Issue prefixed with `[repo-s
 
 <Aside type="positive">
 
-**Tip**: Unlike regular GitHub Actions, an Agentic Workflow is run with the `gh aw run` command. Scheduled execution (e.g., daily) can also be configured.
+**📚 Want to build more?**: There are ready-made Agentic Workflow template collections to draw from — [githubnext/agentics](https://github.com/githubnext/agentics) (copy-pasteable samples) and [Peli's Agent Factory](https://github.github.com/gh-aw/blog/2026-01-12-welcome-to-pelis-agent-factory/) (real-world examples blog).
 
 </Aside>
-
-### 6.3 — (Bonus) Create a workflow to auto-update test coverage
-
-If you have time, try creating a workflow that automatically updates the test coverage report.
-
-In agent mode, run the following:
-
-```
-Please create the following Agentic Workflow.
-Reference: https://github.com/github/gh-aw/blob/main/create.md
-
-Workflow purpose:
-- Trigger on push to the main branch
-- Run tests and generate a coverage report
-- Automatically update the coverage result as a badge in README.md
-- If there are changes, automatically create a PR
-
-Place the workflow file at .github/workflows/coverage-update.md.
-```

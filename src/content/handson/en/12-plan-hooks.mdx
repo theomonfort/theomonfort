@@ -3,7 +3,7 @@ title: "PLAN: Hooks"
 order: 12
 stepSlug: "plan-hooks"
 duration: 10
-summary: "Set up Hooks as a guardrail so Copilot (Chat / CLI / Cloud Agent, etc.) won't rewrite files you don't want it touching — like the `.github/` configs, `.env`, or `pnpm-lock.yaml`. We're about to run multiple agents in parallel via the CLI in the next chapter, so having a safety net in place beforehand is…"
+summary: "Set up Hooks as a guardrail so Copilot (Chat / CLI / Cloud Agent, etc.) won't rewrite files you don't want it touching — like the `.github/` configs or `package-lock.json`. We're about to run multiple agents in parallel via the CLI in the next chapter, so having a safety net in place beforehand is…"
 generated: true
 generatedFrom: "workshop-nikon.md"
 upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
@@ -16,15 +16,15 @@ upstreamSha: "6af362ccc165cae5c61ffc58550a5ebe9fe58b77"
 
 import Aside from '../../../components/handson/Aside.astro';
 
-Let's set up **Hooks** as a guardrail so Copilot (Chat / CLI / Cloud Agent, etc.) won't rewrite files you don't want it touching — like the `.github/` configs, `.env`, or `pnpm-lock.yaml`. We're about to run multiple agents in parallel via the CLI in the next chapter, so having a safety net in place beforehand is ideal.
-
-**Hooks** let you inject arbitrary scripts before and after an agent invokes a tool (`PreToolUse` / `PostToolUse`). Returning `permissionDecision: deny` from `PreToolUse` lets you **physically stop** the agent in its tracks.
-
 <Aside type="reference">
 
 **📖 Reference**: See [Playbook / Hooks](https://theomonfort.github.io/theomonfort/en/playbook/hooks/?present=1) for how Hooks work and the available event types.
 
 </Aside>
+
+Let's set up **Hooks** as a guardrail so Copilot (Chat / CLI / Cloud Agent, etc.) won't rewrite files you don't want it touching — like the `.github/` configs or `package-lock.json`. We're about to run multiple agents in parallel via the CLI in the next chapter, so having a safety net in place beforehand is ideal.
+
+**Hooks** let you inject arbitrary scripts before and after an agent invokes a tool (`PreToolUse` / `PostToolUse`). Returning `permissionDecision: deny` from `PreToolUse` lets you **stop** the agent in its tracks.
 
 ### N.1 — Create `.github/hooks/hooks.json`
 
@@ -37,7 +37,7 @@ Create a new file `.github/hooks/hooks.json` at the repository root and paste th
     "PreToolUse": [
       {
         "type": "command",
-        "matcher": ".*(edit|create|write|delete|remove|rename|move|patch|replace|insert|update|bash|shell|terminal|command|run|execute|apply).*",
+        "matcher": "^(create|edit)$",
         "bash": "node ./scripts/block.mjs",
         "cwd": ".github/hooks",
         "timeoutSec": 5
@@ -49,7 +49,9 @@ Create a new file `.github/hooks/hooks.json` at the repository root and paste th
 
 Key points:
 
-- The `matcher` limits the hook to **mutating tools** only — file-modifying and shell-executing ones — so reads and searches aren't blocked.
+- `matcher` only works on **Copilot CLI / Cloud Agent** — it matches the two write-side tool names `create` / `edit` (see the [official hooks reference](https://docs.github.com/en/copilot/reference/hooks-reference#tool-names-for-hook-matching)).
+- **The VS Code Copilot extension ignores `matcher`** and fires the hook on every tool invocation (see the [official VS Code docs FAQ](https://code.visualstudio.com/docs/agent-customization/hooks)). On VS Code the path check inside the script is the only gate.
+- The matcher regex is auto-wrapped as `^(?:...)$` and evaluated as a **full match**.
 - `bash` is executed relative to `cwd`. We'll create the script in the next step.
 
 ### N.2 — Create the blocking script
@@ -72,7 +74,7 @@ if (!protectedPath) {
   process.exit(0);
 }
 
-deny(`Repository policy: agent writes to .github/, .env, or pnpm-lock.yaml are blocked. The ${toolName} tool referenced ${protectedPath}, which is one of these protected paths.`);
+deny(`Repository policy: agent writes to .github/ or package-lock.json are blocked. The ${toolName} tool referenced ${protectedPath}, which is one of these protected paths.`);
 
 async function readStdin() {
   const chunks = [];
@@ -88,14 +90,13 @@ function parseJson(raw) {
 function findProtectedPath(value) {
   const protectedPaths = [
     { label: '.github/', pattern: /(^|[\/\s"'`=:([{])(?:\.\/)?\.github(?:\/|$)/i },
-    { label: '.env', pattern: /(^|[\/\s"'`=:([{])(?:\.\/)?\.env(?:$|[\/\s"'`),}\]])/i },
-    { label: 'pnpm-lock.yaml', pattern: /(^|[\/\s"'`=:([{])pnpm-lock\.yaml(?:$|[\/\s"'`),}\]])/i },
+    { label: 'package-lock.json', pattern: /(^|[\/\s"'`=:([{])package-lock\.json(?:$|[\/\s"'`),}\]])/i },
   ];
   return protectedPaths.find(({ pattern }) => pattern.test(value))?.label;
 }
 
 function deny(reason) {
-  const additionalContext = 'Protected paths in this repository: .github/ (Copilot config, hooks, workflows), .env (secrets), pnpm-lock.yaml (deterministic deps). The agent must NOT create, edit, write, delete, rename, move, or run shell commands that touch these paths. If the user explicitly needs such a change, instruct them to make it manually.';
+  const additionalContext = 'Protected paths in this repository: .github/ (Copilot config, hooks, workflows) and package-lock.json (deterministic deps). The agent must NOT create, edit, write, delete, rename, or move files that touch these paths. If the user explicitly needs such a change, instruct them to make it manually.';
   stdout.write(JSON.stringify({
     permissionDecision: 'deny',
     permissionDecisionReason: reason,
@@ -112,7 +113,7 @@ function deny(reason) {
 
 Key points:
 
-- The protected targets are just three: `.github/`, `.env`, and `pnpm-lock.yaml`.
+- The protected targets are just two: `.github/` and `package-lock.json`.
 - `permissionDecisionReason` and `additionalContext` **return the list of protected paths and the reason back to the agent**, so the agent can self-correct on its next turn (it's explicitly told "where it must not touch").
 - The output covers both the **Copilot CLI format** (`permissionDecision`) and the **VS Code format** (`hookSpecificOutput`), so it works in either environment.
 
