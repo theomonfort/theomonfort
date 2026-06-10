@@ -49,8 +49,6 @@ links:
   </p>
 </div>
 
-> Not Copilot used without leaving your IDE, but Copilot that operates within the **shell's working context**.
-
 ## Key Features
 
 A full-stack AI environment packed into a single terminal.

@@ -22,7 +22,7 @@ links:
     url: https://github.com/jsturtevant/copilot-codeact-plugin
 ---
 
-## Why agent quality matters now
+## In a nutshell
 
 <div class="hero-quote hero-quote-team">
   <p>

@@ -22,7 +22,7 @@ links:
     url: https://github.com/jsturtevant/copilot-codeact-plugin
 ---
 
-## なぜ今「エージェントの質」が効くのか
+## 一言で
 
 <div class="hero-quote hero-quote-team">
   <p>
