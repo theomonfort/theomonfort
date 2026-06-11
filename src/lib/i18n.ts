@@ -182,7 +182,7 @@ export const siteCopy = {
       body: '個人的な意見だけど、最終的に AI があっても、コードに違いを生むのは\n君がそこに注ぐ愛と努力、そして君のセンスだと思うよ。',
       stat: '▶ HP +∞ / EXP +999 / 装備: PASSION',
       recommendationsHeading: '▼ おまけ：俺のオススメ ▼',
-      interviewLabel: 'アイデアを整理したいときに何度も見返したインタビュー',
+      interviewLabel: '何度も見返したインタビュー',
       interviewUrl: 'https://www.youtube.com/watch?v=rDqQcmVqAm4',
       albumLabel: '歴代最高のアルバム（フランス人デュオが作曲）',
       albumUrl: 'https://www.youtube.com/watch?v=wIMSU8otS-g&list=RDwIMSU8otS-g&start_radio=1',
