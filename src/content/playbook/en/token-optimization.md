@@ -325,8 +325,6 @@ Keep specs, knowledge bases, and reference tables in **Markdown / CSV / plain te
 | 🌐 Web pages | **Markdown extraction** (e.g. `r.jina.ai/<url>`) |
 | 🖼️ Images of text | **OCR → Markdown** |
 
-> 💡 **"Convert once, query many times"** — if the source updates often, automate the transform in a GitHub Action or pre-commit hook.
-
 ## Advanced — power-user tips
 
 These are conditional and come with trade-offs. Reach for them once the basics above are in place.
