@@ -759,3 +759,13 @@ a.retro-link:hover::after {
   box-shadow: none;
   pointer-events: none;
 }
+.step-nav-card.feedback {
+  border-color: rgba(255, 176, 0, 0.55);
+  background: rgba(255, 176, 0, 0.06);
+}
+.step-nav-card.feedback:hover {
+  border-color: #ffb000;
+  background: rgba(255, 176, 0, 0.12);
+  box-shadow: 4px 4px 0 rgba(255, 176, 0, 0.25), 0 0 16px rgba(255, 176, 0, 0.45);
+  transform: translateX(4px);
+}
