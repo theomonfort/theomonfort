@@ -771,39 +771,21 @@ a.retro-link:hover::after {
 }
 
 .handson-toc-feedback {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-top: 0.9rem;
-  padding: 0.55rem 0.65rem;
-  border: 2px solid rgba(255, 176, 0, 0.5);
-  background: rgba(255, 176, 0, 0.06);
-  color: #ffb000;
+  display: inline-block;
+  margin-top: 1.8rem;
+  margin-left: 0.5rem;
+  padding: 0.25rem 0;
+  color: #ff2e88;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   text-decoration: none;
-  transition: all 0.18s ease;
+  text-shadow: 0 0 10px rgba(255, 46, 136, 0.55);
+  transition: color 0.18s ease, text-shadow 0.18s ease, transform 0.18s ease;
 }
 .handson-toc-feedback:hover {
-  background: rgba(255, 176, 0, 0.14);
-  border-color: #ffb000;
-  box-shadow: 0 0 14px rgba(255, 176, 0, 0.4);
+  color: #ff7ab0;
+  text-shadow: 0 0 14px rgba(255, 46, 136, 0.9);
   transform: translateX(2px);
-}
-.handson-toc-feedback .toc-feedback-icon {
-  font-size: 1.1rem;
-  line-height: 1;
-}
-.handson-toc-feedback .toc-feedback-body {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  min-width: 0;
-}
-.handson-toc-feedback .toc-feedback-label {
-  font-size: 0.85rem;
-  line-height: 1.2;
-  color: #ffb000;
-}
-.handson-toc-feedback .toc-feedback-hint {
-  color: rgba(255, 176, 0, 0.7);
-  letter-spacing: 0.05em;
 }
