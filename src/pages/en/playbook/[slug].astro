@@ -219,7 +219,17 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     </div>
 
     <div class="slide-progress" role="tablist" aria-label="Slides"></div>
-    <div class="slide-counter font-pixel text-[10px]" aria-hidden="true"></div>
+    <a
+      class="slide-counter font-pixel text-[10px]"
+      href={t.handson.feedbackUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Open feedback form (new tab)"
+      title="Feedback"
+    >
+      <span class="slide-counter-bug" aria-hidden="true"></span>
+      <span class="slide-counter-text"></span>
+    </a>
     <div class="slide-title-tag" aria-hidden="true"></div>
     <nav class="present-toc" aria-label={t.playbook.tocLabel} data-current-id={item.slug} transition:persist="present-toc">
       {tocGroups.map((g) => (
@@ -433,7 +443,10 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 
   function updateChrome() {
     const counter = document.querySelector<HTMLElement>('.slide-counter');
-    if (counter) counter.textContent = `${current + 1} / ${slides.length}`;
+    if (counter) {
+      const text = counter.querySelector<HTMLElement>('.slide-counter-text');
+      if (text) text.textContent = `${current + 1} / ${slides.length}`;
+    }
     const prog = document.querySelector<HTMLElement>('.slide-progress');
     if (prog) {
       prog.innerHTML = '';
@@ -511,7 +524,10 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 
   function resetChrome() {
     const counter = document.querySelector<HTMLElement>('.slide-counter');
-    if (counter) counter.textContent = '';
+    if (counter) {
+      const text = counter.querySelector<HTMLElement>('.slide-counter-text');
+      if (text) text.textContent = '';
+    }
     const prog = document.querySelector<HTMLElement>('.slide-progress');
     if (prog) prog.innerHTML = '';
     const tag = document.querySelector<HTMLElement>('.slide-title-tag');
@@ -2214,4 +2230,35 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   body.present-mode .playbook-detail .slide-counter {
     font-size: 24px;
   }
+  /* ── Bug-icon link inside the slide counter (links to feedback form) ── */
+  .slide-counter {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: filter 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  body.present-mode .slide-counter { display: inline-flex; }
+  .slide-counter:hover {
+    filter: brightness(1.15);
+    transform: translateY(-1px);
+  }
+  .slide-counter-bug {
+    display: inline-block;
+    width: 1.1em;
+    height: 1.1em;
+    background-color: var(--entry-accent, #00f0ff);
+    -webkit-mask-image: url('/icons/bug.svg');
+            mask-image: url('/icons/bug.svg');
+    -webkit-mask-size: contain;
+            mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+            mask-position: center;
+    filter: drop-shadow(0 0 4px color-mix(in srgb, var(--entry-accent, #00f0ff) 60%, transparent));
+    transition: transform 0.18s ease;
+  }
+  .slide-counter:hover .slide-counter-bug { transform: scale(1.08) rotate(-4deg); }
 </style>
