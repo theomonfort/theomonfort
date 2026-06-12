@@ -771,10 +771,10 @@ a.retro-link:hover::after {
 }
 
 .handson-toc-feedback {
-  display: inline-block;
+  display: block;
   margin-top: 1.8rem;
-  margin-left: 0.5rem;
   padding: 0.25rem 0;
+  text-align: center;
   color: #ff2e88;
   font-weight: 700;
   font-size: 0.8rem;
@@ -787,5 +787,5 @@ a.retro-link:hover::after {
 .handson-toc-feedback:hover {
   color: #ff7ab0;
   text-shadow: 0 0 14px rgba(255, 46, 136, 0.9);
-  transform: translateX(2px);
+  transform: translateY(-1px);
 }
