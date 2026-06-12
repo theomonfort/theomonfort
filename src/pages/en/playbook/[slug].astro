@@ -2230,24 +2230,22 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   body.present-mode .playbook-detail .slide-counter {
     font-size: 24px;
   }
-  /* ── Bug-icon link inside the slide counter (links to feedback form) ── */
+  /* ── Bug-icon link wrapping the slide counter (links to feedback form) ── */
   .slide-counter {
-    display: none;
-    align-items: center;
-    gap: 10px;
     text-decoration: none;
     cursor: pointer;
     transition: filter 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
   }
-  body.present-mode .slide-counter { display: inline-flex; }
   .slide-counter:hover {
     filter: brightness(1.15);
     transform: translateY(-1px);
   }
   .slide-counter-bug {
-    display: inline-block;
-    width: 1.1em;
-    height: 1.1em;
+    position: absolute;
+    right: calc(100% + 14px);
+    top: 50%;
+    width: 1.6em;
+    height: 1.6em;
     background-color: var(--entry-accent, #00f0ff);
     -webkit-mask-image: url('/icons/bug.svg');
             mask-image: url('/icons/bug.svg');
@@ -2257,8 +2255,13 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
             mask-repeat: no-repeat;
     -webkit-mask-position: center;
             mask-position: center;
-    filter: drop-shadow(0 0 4px color-mix(in srgb, var(--entry-accent, #00f0ff) 60%, transparent));
-    transition: transform 0.18s ease;
+    filter: drop-shadow(0 0 6px color-mix(in srgb, var(--entry-accent, #00f0ff) 65%, transparent));
+    transform: translateY(-50%);
+    transition: transform 0.18s ease, filter 0.18s ease;
+    pointer-events: auto;
   }
-  .slide-counter:hover .slide-counter-bug { transform: scale(1.08) rotate(-4deg); }
+  .slide-counter:hover .slide-counter-bug {
+    transform: translateY(-50%) scale(1.12) rotate(-6deg);
+    filter: drop-shadow(0 0 10px color-mix(in srgb, var(--entry-accent, #00f0ff) 85%, transparent));
+  }
 </style>
