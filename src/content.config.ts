@@ -56,9 +56,6 @@ const handson = defineCollection({
     stepSlug: z.string(),
     duration: z.number().optional(),
     summary: z.string().optional(),
-    generated: z.boolean().optional(),
-    generatedFrom: z.string().optional(),
-    upstreamSha: z.string().optional(),
   }),
 });
 
