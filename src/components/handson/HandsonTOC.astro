@@ -8,9 +8,12 @@ interface Props {
   locale: Locale;
   tocLabel: string;
   tocHeading: string;
+  feedbackUrl?: string;
+  feedbackLabel?: string;
+  feedbackHint?: string;
 }
 
-const { steps, currentSlug, locale, tocLabel, tocHeading } = Astro.props;
+const { steps, currentSlug, locale, tocLabel, tocHeading, feedbackUrl, feedbackLabel, feedbackHint } = Astro.props;
 ---
 
 <nav class="handson-toc" aria-label={tocLabel} data-handson-toc>
@@ -37,4 +40,20 @@ const { steps, currentSlug, locale, tocLabel, tocHeading } = Astro.props;
       );
     })}
   </ol>
+  {feedbackUrl && feedbackLabel && (
+    <a
+      href={feedbackUrl}
+      class="handson-toc-feedback"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span class="toc-feedback-icon" aria-hidden="true">📝</span>
+      <span class="toc-feedback-body">
+        <span class="font-pixel-jp toc-feedback-label">{feedbackLabel}</span>
+        {feedbackHint && (
+          <span class="font-pixel text-[8px] toc-feedback-hint">{feedbackHint} ↗</span>
+        )}
+      </span>
+    </a>
+  )}
 </nav>

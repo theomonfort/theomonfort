@@ -8,11 +8,8 @@ interface Props {
   locale: Locale;
   prevLabel: string;
   nextLabel: string;
-  feedbackUrl?: string;
-  feedbackLabel?: string;
-  feedbackHint?: string;
 }
-const { prev, next, locale, prevLabel, nextLabel, feedbackUrl, feedbackLabel, feedbackHint } = Astro.props;
+const { prev, next, locale, prevLabel, nextLabel } = Astro.props;
 ---
 
 <nav class="handson-step-nav" aria-label="Step navigation">
@@ -39,18 +36,6 @@ const { prev, next, locale, prevLabel, nextLabel, feedbackUrl, feedbackLabel, fe
       <span class="font-pixel text-[10px] text-phosphor/60 text-right block">{nextLabel} ▶</span>
       <span class="font-pixel-jp text-sm md:text-base text-neon-magenta mt-1 block text-right">
         {String(next.entry.data.order).padStart(2, '0')} · {handsonStepTitle(next)}
-      </span>
-    </a>
-  ) : feedbackUrl && feedbackLabel ? (
-    <a
-      href={feedbackUrl}
-      class="step-nav-card feedback"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <span class="font-pixel text-[10px] text-crt-amber/80 text-right block">{feedbackHint ?? feedbackLabel} ↗</span>
-      <span class="font-pixel-jp text-sm md:text-base text-crt-amber mt-1 block text-right">
-        📝 {feedbackLabel}
       </span>
     </a>
   ) : <span class="step-nav-card placeholder" aria-hidden="true"></span>}

@@ -769,3 +769,41 @@ a.retro-link:hover::after {
   box-shadow: 4px 4px 0 rgba(255, 176, 0, 0.25), 0 0 16px rgba(255, 176, 0, 0.45);
   transform: translateX(4px);
 }
+
+.handson-toc-feedback {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.9rem;
+  padding: 0.55rem 0.65rem;
+  border: 2px solid rgba(255, 176, 0, 0.5);
+  background: rgba(255, 176, 0, 0.06);
+  color: #ffb000;
+  text-decoration: none;
+  transition: all 0.18s ease;
+}
+.handson-toc-feedback:hover {
+  background: rgba(255, 176, 0, 0.14);
+  border-color: #ffb000;
+  box-shadow: 0 0 14px rgba(255, 176, 0, 0.4);
+  transform: translateX(2px);
+}
+.handson-toc-feedback .toc-feedback-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+.handson-toc-feedback .toc-feedback-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+.handson-toc-feedback .toc-feedback-label {
+  font-size: 0.85rem;
+  line-height: 1.2;
+  color: #ffb000;
+}
+.handson-toc-feedback .toc-feedback-hint {
+  color: rgba(255, 176, 0, 0.7);
+  letter-spacing: 0.05em;
+}
