@@ -311,6 +311,22 @@ The same sentence costs roughly **2~3× more tokens** in Japanese than in Englis
 > 🔬 **Verify it yourself:** <a class="retro-link" href="https://tiktokenizer.vercel.app/" target="_blank" rel="noopener">tiktokenizer.vercel.app ↗</a> or <a class="retro-link" href="https://platform.openai.com/tokenizer" target="_blank" rel="noopener">platform.openai.com/tokenizer ↗</a>. Paste the same instruction in both languages and compare.
 
 
+## Advice 8 — Store knowledge in an agent-friendly format
+
+Keep your data in formats the **agent can read directly**. Every time you hand it an `.xlsx`, `.docx`, or `.pdf`, the agent is forced into a **3-step detour**: write a parsing script → run it → load the noisy output back into context. Each step is an extra tool call, and the parsed text typically runs **3–10× longer** than the equivalent Markdown because layout metadata (cell borders, fonts, page breaks) leaks through as noise.
+
+Treat your knowledge base, specs, and reference tables as **artifacts both humans and agents read** — keep the source in Markdown, CSV, or plain text. Leave the binary originals as "archival" copies and let the agent consume the **derived text version** instead.
+
+| Source format | Agent-friendly target | Why |
+| --- | --- | --- |
+| 📊 `.xlsx` / Google Sheets | **CSV** or Markdown table | Comma-separated = a handful of tokens per cell |
+| 📝 `.docx` / `.pptx` | **`.md`** | Headings, lists, and code blocks become the structure |
+| 📄 `.pdf` | **`.md` or `.txt`** (via `pandoc` / `pdftotext`) | Layout metadata gets stripped — only the data survives |
+| 🌐 Web pages | **Markdown extraction** (e.g. `r.jina.ai/<url>`) | Ads, nav, scripts all drop away |
+| 🖼️ Images of text | **OCR → Markdown** | Images carry a fixed OCR tool-call cost |
+
+> 💡 **"Convert once, query many times"** — if the source updates often, automate the conversion in a GitHub Action or pre-commit hook. Split the tree (`docs-source/*.xlsx` → `docs-agent/*.md`) so the agent-facing context is a **deterministic build artifact**.
+
 ## Advanced — power-user tips
 
 These are conditional and come with trade-offs. Reach for them once the basics above are in place.
@@ -328,7 +344,7 @@ These are conditional and come with trade-offs. Reach for them once the basics a
 - 🏛️ **Apply good architecture.** Domain-Driven Design, Hexagonal, CQRS, Event-Driven — clean boundaries give agents stronger guard rails and prevent them from putting code in the wrong place. Debates about 5-line functions matter less than ever; architecture matters more.
 - 🔧 **Iterate on prompts & configs.** You're a context engineer now. Treat agent misses like incidents, keep configs fresh, and use `/chronicle` to spot patterns.
 
-## 7 things to start doing today
+## 8 things to start doing today
 
 1. ✅ **Provide as little context as possible.** Trim your instruction files, skills, and custom agents — and write them manually.
 2. ✅ **But provide as much as required.** Give it the spec, examples, and constraints it needs to one-shot the task.
@@ -337,3 +353,4 @@ These are conditional and come with trade-offs. Reach for them once the basics a
 5. ✅ **Provide deterministic controls.** Tests, linters, type checkers, and security scans catch errors **on the same loop they were introduced**.
 6. ✅ **Pick the right model — or let Auto pick.** Reasoning for planning, Mid for implementation, Low for chores.
 7. ✅ **Write your harness in English when the team can read it.** Tokenizers still cost **~2–3× more on Japanese**.
+8. ✅ **Store data in Markdown for agents.** Binary formats (xlsx, docx, pdf) waste 3–10× the tokens on parsing-tool calls every time the agent reads them.
