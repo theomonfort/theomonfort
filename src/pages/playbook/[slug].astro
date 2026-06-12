@@ -206,9 +206,34 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       <span class="key">P</span> {t.playbook.presentationMode}
     </button>
 
-    <div class="present-overlay-hint font-pixel-jp text-[10px]" aria-hidden="true">
-      <span><span class="key">◀</span> <span class="key">▶</span> {t.playbook.slides}</span>
-      <span><span class="key">Esc</span> {t.playbook.exit}</span>
+    <div class="present-overlay-hint font-pixel-jp text-[10px]">
+      <span>
+        <button
+          type="button"
+          class="key key-button"
+          data-slide-action="prev"
+          aria-label="前のスライド"
+          title="前のスライド (←)"
+        >◀</button>
+        <button
+          type="button"
+          class="key key-button"
+          data-slide-action="next"
+          aria-label="次のスライド"
+          title="次のスライド (→ / Space)"
+        >▶</button>
+        {t.playbook.slides}
+      </span>
+      <span>
+        <button
+          type="button"
+          class="key key-button"
+          data-slide-action="exit"
+          aria-label="プレゼンテーションを終了"
+          title="終了 (Esc)"
+        >Esc</button>
+        {t.playbook.exit}
+      </span>
       <button type="button" class="present-toc-toggle" aria-label="目次の表示切り替え" data-toc-toggle>
         <span class="key">T</span> 目次
       </button>
@@ -646,6 +671,20 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
         navigateSmooth(`${cleanBase}?${params.toString()}`);
       });
     }
+    document.querySelectorAll<HTMLButtonElement>('[data-slide-action]').forEach((b) => {
+      if (b.dataset.bound) return;
+      b.dataset.bound = '1';
+      b.addEventListener('click', (e) => {
+        e.preventDefault();
+        b.blur();
+        const action = b.dataset.slideAction;
+        const keyMap: Record<string, string> = { prev: 'ArrowLeft', next: 'ArrowRight', exit: 'Escape' };
+        const key = keyMap[action || ''];
+        if (key) {
+          document.body.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
+        }
+      });
+    });
   }
 
   function onKey(e: KeyboardEvent) {
@@ -1759,6 +1798,24 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     border: 1px solid var(--entry-accent, #00f0ff);
     margin: 0 2px;
   }
+  .present-overlay-hint button.key-button {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  }
+  .present-overlay-hint button.key-button:hover {
+    background: rgba(255, 46, 136, 0.2);
+    border-color: #ff2e88;
+    color: #ff2e88;
+    transform: translate(-1px, -1px);
+  }
+  .present-overlay-hint button.key-button:focus-visible {
+    outline: 2px solid #ff2e88;
+    outline-offset: 2px;
+  }
+  .present-overlay-hint button.key-button:active { transform: translate(0, 0); }
   .present-overlay-hint .present-lang-toggle {
     display: inline-flex;
     align-items: center;
