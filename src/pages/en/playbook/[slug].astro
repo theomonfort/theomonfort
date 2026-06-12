@@ -222,16 +222,15 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
         >▶</button>
         {t.playbook.slides}
       </span>
-      <span>
-        <button
-          type="button"
-          class="key key-button"
-          data-slide-action="exit"
-          aria-label="Exit presentation"
-          title="Exit (Esc)"
-        >Esc</button>
-        {t.playbook.exit}
-      </span>
+      <button
+        type="button"
+        class="present-action-btn"
+        data-slide-action="exit"
+        aria-label="Exit presentation"
+        title="Exit (Esc)"
+      >
+        <span class="key">Esc</span> {t.playbook.exit}
+      </button>
       <button type="button" class="present-toc-toggle" aria-label="Toggle TOC" data-toc-toggle>
         <span class="key">T</span> TOC
       </button>
@@ -1797,7 +1796,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     margin: 0 2px;
   }
   .present-overlay-hint button.key-button {
-    font: inherit;
+    font-family: inherit;
     color: inherit;
     cursor: pointer;
     pointer-events: auto;
@@ -1814,6 +1813,25 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     outline-offset: 2px;
   }
   .present-overlay-hint button.key-button:active { transform: translate(0, 0); }
+
+  .present-overlay-hint .present-action-btn {
+    display: inline-flex;
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    pointer-events: auto;
+    padding: 0;
+    transition: color 0.15s, transform 0.15s;
+  }
+  .present-overlay-hint .present-action-btn:hover { color: #ff2e88; transform: translate(-1px, -1px); }
+  .present-overlay-hint .present-action-btn:hover .key { background: rgba(255, 46, 136, 0.15); border-color: #ff2e88; color: #ff2e88; }
+  .present-overlay-hint .present-action-btn:focus-visible {
+    outline: 2px solid #ff2e88;
+    outline-offset: 2px;
+  }
   .present-overlay-hint .present-lang-toggle {
     display: inline-flex;
     align-items: center;
