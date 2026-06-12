@@ -313,19 +313,19 @@ The same sentence costs roughly **2~3× more tokens** in Japanese than in Englis
 
 ## Advice 8 — Store knowledge in an agent-friendly format
 
-Keep your data in formats the **agent can read directly**. Every time you hand it an `.xlsx`, `.docx`, or `.pdf`, the agent is forced into a **3-step detour**: write a parsing script → run it → load the noisy output back into context. Each step is an extra tool call, and the parsed text typically runs **3–10× longer** than the equivalent Markdown because layout metadata (cell borders, fonts, page breaks) leaks through as noise.
+Every `.xlsx` / `.docx` / `.pdf` you hand the agent triggers a **3-step detour**: write a parser → run it → load the noisy output back into context. The parsed text typically runs **3–10× longer** than the equivalent Markdown because layout metadata leaks through as noise.
 
-Treat your knowledge base, specs, and reference tables as **artifacts both humans and agents read** — keep the source in Markdown, CSV, or plain text. Leave the binary originals as "archival" copies and let the agent consume the **derived text version** instead.
+Keep specs, knowledge bases, and reference tables in **Markdown / CSV / plain text**.
 
-| Source format | Agent-friendly target | Why |
-| --- | --- | --- |
-| 📊 `.xlsx` / Google Sheets | **CSV** or Markdown table | Comma-separated = a handful of tokens per cell |
-| 📝 `.docx` / `.pptx` | **`.md`** | Headings, lists, and code blocks become the structure |
-| 📄 `.pdf` | **`.md` or `.txt`** (via `pandoc` / `pdftotext`) | Layout metadata gets stripped — only the data survives |
-| 🌐 Web pages | **Markdown extraction** (e.g. `r.jina.ai/<url>`) | Ads, nav, scripts all drop away |
-| 🖼️ Images of text | **OCR → Markdown** | Images carry a fixed OCR tool-call cost |
+| Source format | Agent-friendly target |
+| --- | --- |
+| 📊 `.xlsx` / Google Sheets | **CSV** or Markdown table |
+| 📝 `.docx` / `.pptx` | **`.md`** |
+| 📄 `.pdf` | **`.md` / `.txt`** (`pandoc`, `pdftotext`) |
+| 🌐 Web pages | **Markdown extraction** (e.g. `r.jina.ai/<url>`) |
+| 🖼️ Images of text | **OCR → Markdown** |
 
-> 💡 **"Convert once, query many times"** — if the source updates often, automate the conversion in a GitHub Action or pre-commit hook. Split the tree (`docs-source/*.xlsx` → `docs-agent/*.md`) so the agent-facing context is a **deterministic build artifact**.
+> 💡 **"Convert once, query many times"** — if the source updates often, automate the transform in a GitHub Action or pre-commit hook.
 
 ## Advanced — power-user tips
 
