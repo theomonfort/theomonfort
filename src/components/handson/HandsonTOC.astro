@@ -1,6 +1,11 @@
 ---
 import { localizedPath, type Locale } from '../../lib/i18n';
-import { type LocalizedHandsonEntry, handsonStepTitle } from '../../lib/handson';
+import {
+  type LocalizedHandsonEntry,
+  handsonCategoryForSlug,
+  handsonCategoryMeta,
+  handsonStepTitle,
+} from '../../lib/handson';
 
 interface Props {
   steps: LocalizedHandsonEntry[];
@@ -13,29 +18,45 @@ interface Props {
 }
 
 const { steps, currentSlug, locale, tocLabel, tocHeading, feedbackUrl, feedbackLabel } = Astro.props;
+const currentOrder = steps.find((step) => step.slug === currentSlug)?.entry.data.order ?? 0;
 ---
 
 <nav class="handson-toc" aria-label={tocLabel} data-handson-toc>
-  <div class="handson-toc-head font-pixel text-[10px] text-neon-cyan">{tocHeading}</div>
   <ol class="handson-toc-list">
-    {steps.map((step) => {
+    {steps.map((step, index) => {
       const active = step.slug === currentSlug;
       const order = step.entry.data.order;
+      const complete = currentOrder > 0 && order < currentOrder;
+      const category = handsonCategoryForSlug(step.slug);
+      const previousCategory = index > 0 ? handsonCategoryForSlug(steps[index - 1].slug) : null;
+      const startsCategory = category !== previousCategory;
+      const meta = handsonCategoryMeta(category, locale);
+      const style = `--toc-accent:${meta.accent};`;
       return (
-        <li>
-          <a
-            href={localizedPath(locale, `/handson/${step.slug}`)}
-            class={`handson-toc-item ${active ? 'is-active' : ''}`}
-            data-active={active ? 'true' : 'false'}
-            data-slug={step.slug}
-          >
-            <span class="toc-num font-pixel text-[10px]">{String(order).padStart(2, '0')}</span>
-            <span class="toc-text font-pixel-jp">{handsonStepTitle(step)}</span>
-            {step.entry.data.duration != null && (
-              <span class="toc-duration font-pixel text-[8px]">{step.entry.data.duration}m</span>
-            )}
-          </a>
-        </li>
+        <>
+          {startsCategory && (
+            <li class="handson-toc-phase" style={style}>
+              <span class="font-pixel">{meta.labelEn}</span>
+              {meta.label !== meta.labelEn && <small class="font-pixel-jp">{meta.label}</small>}
+            </li>
+          )}
+          <li>
+            <a
+              href={localizedPath(locale, `/handson/${step.slug}`)}
+              class={`handson-toc-item ${active ? 'is-active' : ''} ${complete ? 'is-complete' : ''}`}
+              data-active={active ? 'true' : 'false'}
+              data-slug={step.slug}
+              style={style}
+            >
+              <span class="toc-status font-pixel" aria-hidden="true">{active ? '▶' : complete ? '◆' : '◇'}</span>
+              <span class="toc-num font-pixel">{String(order).padStart(2, '0')}</span>
+              <span class="toc-text font-pixel-jp">{handsonStepTitle(step)}</span>
+              {step.entry.data.duration != null && (
+                <span class="toc-duration font-pixel">{step.entry.data.duration}m</span>
+              )}
+            </a>
+          </li>
+        </>
       );
     })}
   </ol>

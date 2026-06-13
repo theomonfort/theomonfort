@@ -207,26 +207,6 @@ a.retro-link:hover::after {
 }
 
 /* ---------- HANDS-ON WORKSHOP ---------- */
-.handson-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: rgba(255, 46, 136, 0.15);
-  z-index: 60;
-  pointer-events: none;
-}
-.handson-progress::after {
-  content: '';
-  display: block;
-  height: 100%;
-  width: var(--handson-progress, 0%);
-  background: linear-gradient(90deg, #00f0ff, #ff2e88);
-  box-shadow: 0 0 12px rgba(0, 240, 255, 0.7), 0 0 18px rgba(255, 46, 136, 0.5);
-  transition: width 0.45s ease;
-}
-
 /* Layout: TOC always-visible drawer (fixed) on desktop, collapsible on mobile.
    The top site nav is sticky (~56px); we offset the TOC below it. */
 .handson-shell {
@@ -788,4 +768,599 @@ a.retro-link:hover::after {
   color: #ff7ab0;
   text-shadow: 0 0 14px rgba(255, 46, 136, 0.9);
   transform: translateY(-1px);
+}
+
+/* ---------- HANDS-ON WORKSHOP / RETRO SPACE RPG REDESIGN ---------- */
+.handson-shell {
+  --entry-accent: #00f0ff;
+  position: relative;
+  max-width: 1200px;
+  min-height: calc(100vh - 64px);
+  padding: 2rem 1rem 4rem;
+  isolation: isolate;
+}
+.handson-shell::before,
+.handson-shell::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+}
+.handson-shell::before {
+  inset: 0 -8vw auto;
+  height: 38rem;
+  background:
+    radial-gradient(circle at 72% 4%, color-mix(in srgb, var(--entry-accent), transparent 78%), transparent 22rem),
+    radial-gradient(circle at 12% 18%, rgba(255, 46, 136, 0.12), transparent 24rem),
+    linear-gradient(135deg, transparent 0 47%, rgba(0, 240, 255, 0.08) 47.2% 47.6%, transparent 47.8%);
+  opacity: 0.9;
+}
+.handson-shell::after {
+  top: 4rem;
+  right: -8rem;
+  width: min(36rem, 52vw);
+  height: min(36rem, 52vw);
+  background: var(--entry-planet) center / contain no-repeat;
+  opacity: 0.18;
+  filter:
+    drop-shadow(0 18px 26px rgba(0, 0, 0, 0.58))
+    drop-shadow(0 0 30px color-mix(in srgb, var(--entry-accent), transparent 58%));
+  animation: handson-planet-drift 9s ease-in-out infinite;
+}
+@media (min-width: 900px) {
+  .handson-shell {
+    padding-left: calc(280px + 2rem);
+  }
+}
+
+.handson-toc-wrap { position: relative; }
+@media (min-width: 900px) {
+  .handson-toc-wrap {
+    position: fixed;
+    top: 64px;
+    left: max(1rem, calc((100vw - 1200px) / 2 + 1rem));
+    width: 280px;
+    height: calc(100vh - 64px);
+    overflow-y: auto;
+    padding: 0.9rem 0.75rem 1.1rem 0;
+    z-index: 20;
+    scrollbar-width: none;
+  }
+  .handson-toc-wrap::-webkit-scrollbar { display: none; }
+}
+
+.handson-toc {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(0, 240, 255, 0.42);
+  background:
+    linear-gradient(145deg, rgba(5, 6, 15, 0.94), rgba(10, 14, 39, 0.82)),
+    repeating-linear-gradient(90deg, rgba(0, 240, 255, 0.05) 0 1px, transparent 1px 24px);
+  padding: 0.75rem;
+  box-shadow:
+    5px 5px 0 rgba(5, 6, 15, 0.9),
+    inset 0 0 22px rgba(0, 240, 255, 0.08);
+}
+.handson-toc-list {
+  gap: 0.22rem;
+}
+.handson-toc-phase {
+  --toc-accent: #00f0ff;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0.62rem 0 0.25rem;
+  padding-top: 0.42rem;
+  color: var(--toc-accent);
+  border-top: 1px solid color-mix(in srgb, var(--toc-accent), transparent 54%);
+  text-shadow: 0 0 10px color-mix(in srgb, var(--toc-accent), transparent 44%);
+}
+.handson-toc-phase:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+.handson-toc-phase .font-pixel {
+  font-size: 8px;
+  letter-spacing: 0.12em;
+}
+.handson-toc-phase small {
+  min-width: 0;
+  color: rgba(232, 244, 255, 0.58);
+  font-size: 0.66rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.handson-toc-item {
+  --toc-accent: #00f0ff;
+  grid-template-columns: auto auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.36rem 0.48rem;
+  border: 1px solid rgba(232, 244, 255, 0.1);
+  border-left: 3px solid transparent;
+  background: rgba(5, 6, 15, 0.42);
+  color: rgba(232, 244, 255, 0.68);
+  font-size: 0.73rem;
+  line-height: 1.18;
+}
+.handson-toc-item:hover {
+  color: #e8f4ff;
+  background: color-mix(in srgb, var(--toc-accent), transparent 91%);
+  border-color: color-mix(in srgb, var(--toc-accent), transparent 58%);
+  border-left-color: var(--toc-accent);
+  transform: translateX(3px);
+}
+.handson-toc-item.is-complete {
+  color: rgba(232, 244, 255, 0.5);
+}
+.handson-toc-item.is-complete .toc-status,
+.handson-toc-item.is-complete .toc-num {
+  color: color-mix(in srgb, var(--toc-accent), transparent 18%);
+}
+.handson-toc-item.is-active {
+  color: #e8f4ff;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--toc-accent), transparent 82%), rgba(5, 6, 15, 0.7));
+  border-color: color-mix(in srgb, var(--toc-accent), transparent 24%);
+  border-left-color: var(--toc-accent);
+  box-shadow:
+    inset 0 0 16px color-mix(in srgb, var(--toc-accent), transparent 84%),
+    0 0 14px color-mix(in srgb, var(--toc-accent), transparent 70%);
+}
+.handson-toc-item.is-active .toc-status,
+.handson-toc-item.is-active .toc-num {
+  color: color-mix(in srgb, var(--toc-accent), transparent 8%);
+}
+.handson-toc-item .toc-status,
+.handson-toc-item .toc-num {
+  color: color-mix(in srgb, var(--toc-accent), transparent 18%);
+  font-size: 8px;
+}
+.handson-toc-item .toc-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.handson-toc-item .toc-duration {
+  color: rgba(255, 176, 0, 0.72);
+  font-size: 7px;
+}
+
+.handson-toc-toggle {
+  border-color: color-mix(in srgb, var(--entry-accent, #00f0ff), transparent 35%);
+  color: var(--entry-accent, #00f0ff);
+  background:
+    linear-gradient(135deg, rgba(5, 6, 15, 0.9), rgba(10, 14, 39, 0.78));
+  box-shadow: 3px 3px 0 rgba(5, 6, 15, 0.9);
+}
+.handson-toc-toggle:hover {
+  color: #05060f;
+  background: var(--entry-accent, #00f0ff);
+}
+@media (min-width: 900px) {
+  .handson-toc-toggle { display: none; }
+  .handson-toc { display: block; }
+}
+@media (max-width: 899px) {
+  .handson-toc { display: none; }
+  .handson-toc.is-open {
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.handson-main {
+  position: relative;
+  min-width: 0;
+}
+.handson-step-header {
+  position: relative;
+  overflow: visible;
+  border: 2px solid color-mix(in srgb, var(--entry-accent), transparent 34%);
+  background:
+    linear-gradient(130deg, rgba(5, 6, 15, 0.94), rgba(10, 14, 39, 0.82)),
+    repeating-linear-gradient(90deg, rgba(0, 240, 255, 0.05) 0 1px, transparent 1px 36px);
+  padding: clamp(1rem, 3vw, 1.65rem);
+  margin-bottom: 1.4rem;
+  box-shadow:
+    7px 7px 0 rgba(5, 6, 15, 0.88),
+    inset 0 0 28px color-mix(in srgb, var(--entry-accent), transparent 90%);
+}
+.handson-step-header::before {
+  content: '';
+  position: absolute;
+  inset: 0.85rem;
+  border: 1px dashed color-mix(in srgb, var(--entry-accent), transparent 66%);
+  pointer-events: none;
+}
+.handson-step-header::after {
+  content: 'QUEST LOG';
+  position: absolute;
+  left: 1rem;
+  top: -0.65rem;
+  padding: 0 0.6rem;
+  color: rgba(255, 176, 0, 0.82);
+  background: #05060f;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  z-index: 2;
+}
+.handson-index-link {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  margin-bottom: 1rem;
+  color: rgba(232, 244, 255, 0.64);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+}
+.handson-index-link:hover {
+  color: var(--entry-accent);
+  text-shadow: 0 0 10px color-mix(in srgb, var(--entry-accent), transparent 38%);
+}
+.handson-step-header-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(8rem, 11rem);
+  gap: clamp(1rem, 3vw, 2rem);
+  align-items: center;
+}
+.handson-step-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 1rem;
+}
+.handson-step-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.42rem 0.55rem;
+  color: rgba(232, 244, 255, 0.78);
+  border: 1px solid rgba(232, 244, 255, 0.14);
+  background: rgba(5, 6, 15, 0.58);
+  font-size: 9px;
+  line-height: 1.3;
+  box-shadow: 2px 2px 0 rgba(5, 6, 15, 0.82);
+}
+.handson-step-chip.is-area {
+  color: #05060f;
+  background: var(--entry-accent);
+  border-color: var(--entry-accent);
+}
+.handson-step-header h1 {
+  max-width: 48rem;
+  color: var(--entry-accent);
+  font-size: clamp(1.9rem, 5vw, 3.65rem);
+  line-height: 1.08;
+  text-shadow: 0 0 20px color-mix(in srgb, var(--entry-accent), transparent 48%);
+}
+.handson-step-summary {
+  max-width: 46rem;
+  margin-top: 1rem;
+  color: rgba(232, 244, 255, 0.78);
+  font-size: 0.98rem;
+  line-height: 1.75;
+}
+.handson-step-meter {
+  position: relative;
+  height: 0.8rem;
+  margin-top: 1.35rem;
+  border: 1px solid color-mix(in srgb, var(--entry-accent), transparent 34%);
+  background:
+    repeating-linear-gradient(90deg, rgba(232, 244, 255, 0.12) 0 1px, transparent 1px 18px),
+    rgba(5, 6, 15, 0.72);
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.6);
+}
+.handson-step-meter span {
+  display: block;
+  width: var(--handson-progress, 0%);
+  height: 100%;
+  background: linear-gradient(90deg, var(--entry-accent), var(--entry-accent-secondary, #ff2e88));
+  box-shadow: 0 0 14px color-mix(in srgb, var(--entry-accent), transparent 28%);
+}
+.handson-shell[data-handson-category='develop'],
+.handson-shell[data-handson-category='final'] {
+  --entry-accent-secondary: #ffb000;
+}
+.handson-step-planet {
+  position: relative;
+  min-height: 10rem;
+}
+.handson-step-planet::before {
+  content: '';
+  position: absolute;
+  inset: 50%;
+  width: 13rem;
+  height: 5rem;
+  border: 1px solid color-mix(in srgb, var(--entry-accent), transparent 52%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(-14deg);
+}
+.handson-shell:not([data-handson-category='introduction']):not([data-handson-category='final']) .handson-step-planet::before {
+  display: none;
+}
+.handson-step-planet img {
+  position: relative;
+  width: min(11rem, 100%);
+  margin-left: auto;
+  display: block;
+  filter:
+    drop-shadow(0 12px 18px rgba(0, 0, 0, 0.55))
+    drop-shadow(0 0 24px color-mix(in srgb, var(--entry-accent), transparent 54%));
+  animation: handson-planet-drift 7s ease-in-out infinite;
+}
+
+.handson-article {
+  position: relative;
+  max-width: none;
+  color: #e8f4ff;
+  font-family: 'DotGothic16', monospace;
+  line-height: 1.9;
+  padding: clamp(1.2rem, 3vw, 2rem);
+  border: 2px solid rgba(0, 240, 255, 0.22);
+  background:
+    linear-gradient(180deg, rgba(5, 6, 15, 0.78), rgba(10, 14, 39, 0.55)),
+    radial-gradient(circle at 100% 0, color-mix(in srgb, var(--entry-accent), transparent 88%), transparent 22rem);
+  box-shadow: 6px 6px 0 rgba(5, 6, 15, 0.8);
+}
+.handson-article::before {
+  content: 'MISSION NOTES';
+  position: absolute;
+  top: -0.65rem;
+  left: 1rem;
+  padding: 0 0.6rem;
+  color: rgba(255, 176, 0, 0.82);
+  background: #05060f;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+}
+.handson-article > *:first-child {
+  margin-top: 0;
+}
+.handson-article h2,
+.handson-article h3,
+.handson-article h4 {
+  color: var(--entry-accent);
+  text-shadow: 0 0 12px color-mix(in srgb, var(--entry-accent), transparent 58%);
+}
+.handson-article h2 {
+  margin-top: 2.1em;
+  padding-bottom: 0.45em;
+  border-bottom: 2px solid color-mix(in srgb, var(--entry-accent), transparent 48%);
+  font-size: 1.8em;
+}
+.handson-article h3 {
+  position: relative;
+  margin-top: 2em;
+  margin-bottom: 0.75em;
+  padding: 0.55em 0.8em 0.55em 2.05em;
+  border: 1px solid color-mix(in srgb, var(--entry-accent), transparent 54%);
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--entry-accent), transparent 88%), rgba(5, 6, 15, 0.42));
+  font-size: 1.25em;
+}
+.handson-article h3::before {
+  content: '▶';
+  position: absolute;
+  left: 0.75em;
+  color: #ffb000;
+}
+.handson-article h4 {
+  color: #ffb000;
+}
+.handson-article a {
+  color: var(--entry-accent);
+  text-decoration-style: dotted;
+  text-decoration-color: color-mix(in srgb, var(--entry-accent), transparent 44%);
+}
+.handson-article a:hover {
+  color: #ff2e88;
+  text-decoration-color: #ff2e88;
+}
+.handson-article strong {
+  color: #ffb000;
+}
+.handson-article ul,
+.handson-article ol {
+  padding-left: 1.35em;
+}
+.handson-article li {
+  margin: 0.52em 0;
+}
+.handson-article ul > li::marker {
+  color: var(--entry-accent);
+}
+.handson-article ol > li::marker {
+  color: #ffb000;
+  font-weight: 700;
+}
+.handson-article code {
+  color: #9bbc0f;
+  background: rgba(155, 188, 15, 0.09);
+  border-color: rgba(155, 188, 15, 0.34);
+}
+.handson-article pre {
+  border-color: color-mix(in srgb, var(--entry-accent), transparent 18%);
+  background:
+    linear-gradient(180deg, rgba(5, 6, 15, 0.96), rgba(5, 6, 15, 0.88)),
+    repeating-linear-gradient(0deg, rgba(0, 240, 255, 0.06) 0 1px, transparent 1px 22px);
+  box-shadow:
+    5px 5px 0 rgba(5, 6, 15, 0.9),
+    0 0 18px color-mix(in srgb, var(--entry-accent), transparent 68%);
+}
+.handson-copy-btn {
+  color: var(--entry-accent);
+  border-color: color-mix(in srgb, var(--entry-accent), transparent 35%);
+}
+.handson-copy-btn:hover,
+.handson-copy-btn:focus-visible {
+  color: #05060f;
+  background: var(--entry-accent);
+  border-color: var(--entry-accent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--entry-accent), transparent 35%);
+}
+.handson-article blockquote,
+.handson-article details,
+.handson-article table,
+.handson-article img {
+  border-color: color-mix(in srgb, var(--entry-accent), transparent 45%);
+  box-shadow: 5px 5px 0 color-mix(in srgb, var(--entry-accent), transparent 84%);
+}
+.handson-article th {
+  background: color-mix(in srgb, var(--entry-accent), transparent 88%);
+  color: var(--entry-accent);
+}
+
+.handson-article .hero-quote {
+  border-color: var(--entry-accent);
+  background:
+    linear-gradient(var(--entry-accent), var(--entry-accent)) top left / 10px 10px no-repeat,
+    linear-gradient(var(--entry-accent), var(--entry-accent)) top right / 10px 10px no-repeat,
+    linear-gradient(var(--entry-accent), var(--entry-accent)) bottom left / 10px 10px no-repeat,
+    linear-gradient(var(--entry-accent), var(--entry-accent)) bottom right / 10px 10px no-repeat,
+    rgba(5, 6, 15, 0.9);
+  box-shadow:
+    5px 5px 0 rgba(5, 6, 15, 0.9),
+    0 0 18px color-mix(in srgb, var(--entry-accent), transparent 68%);
+}
+.handson-article .hero-quote::after {
+  border-right-color: var(--entry-accent);
+}
+
+.handson-aside.aside-positive,
+.handson-aside.aside-negative {
+  border-color: var(--aside-accent, #00f0ff);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--aside-accent, #00f0ff), transparent 90%), rgba(5, 6, 15, 0.7));
+  box-shadow:
+    5px 5px 0 rgba(5, 6, 15, 0.82),
+    inset 0 0 18px color-mix(in srgb, var(--aside-accent, #00f0ff), transparent 90%);
+}
+.handson-aside.aside-negative {
+  --aside-accent: #ffb000;
+}
+.handson-aside .aside-marker {
+  color: var(--aside-accent, #00f0ff);
+}
+.handson-aside.aside-reference {
+  border-color: var(--aside-accent, #ffb000);
+  box-shadow:
+    5px 5px 0 rgba(5, 6, 15, 0.9),
+    0 0 16px color-mix(in srgb, var(--aside-accent, #ffb000), transparent 72%);
+}
+
+.handson-step-nav {
+  max-width: 880px;
+  margin-top: 2rem;
+}
+.step-nav-card {
+  --nav-accent: var(--entry-accent, #00f0ff);
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(232, 244, 255, 0.14);
+  background:
+    linear-gradient(135deg, rgba(5, 6, 15, 0.88), rgba(10, 14, 39, 0.66));
+  box-shadow: 5px 5px 0 rgba(5, 6, 15, 0.82);
+}
+.step-nav-title {
+  color: var(--nav-accent);
+}
+.step-nav-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--nav-accent), transparent 86%), transparent 62%);
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+.step-nav-card:hover::before {
+  opacity: 1;
+}
+.step-nav-card.prev:hover,
+.step-nav-card.next:hover {
+  border-color: var(--nav-accent);
+  box-shadow:
+    5px 5px 0 rgba(5, 6, 15, 0.82),
+    0 0 18px color-mix(in srgb, var(--nav-accent), transparent 58%);
+}
+.step-nav-card.prev:hover {
+  transform: translateX(-4px);
+}
+.step-nav-card.next:hover {
+  transform: translateX(4px);
+}
+.step-nav-card > span {
+  position: relative;
+  z-index: 1;
+}
+.step-nav-card.placeholder {
+  background: rgba(5, 6, 15, 0.24);
+}
+
+.handson-toc-feedback {
+  margin-top: 1rem;
+  padding: 0.75rem 0.8rem;
+  color: #ffb000;
+  border: 1px solid rgba(255, 176, 0, 0.34);
+  background: rgba(255, 176, 0, 0.06);
+}
+.handson-toc-feedback:hover {
+  color: #05060f;
+  background: #ffb000;
+  text-shadow: none;
+}
+
+@keyframes handson-planet-drift {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(0.8deg); }
+}
+
+@media (max-width: 900px) {
+  .handson-step-header-grid {
+    grid-template-columns: 1fr;
+  }
+  .handson-step-planet {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .handson-shell {
+    padding-inline: 0.75rem;
+  }
+  .handson-shell::after {
+    display: none;
+  }
+  .handson-step-header,
+  .handson-article {
+    box-shadow: 4px 4px 0 rgba(5, 6, 15, 0.82);
+  }
+  .handson-step-header::after {
+    display: none;
+  }
+  .handson-step-meta {
+    align-items: stretch;
+  }
+  .handson-step-chip {
+    font-size: 8px;
+  }
+  .handson-step-nav {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .handson-shell::after,
+  .handson-step-planet img {
+    animation: none;
+  }
 }

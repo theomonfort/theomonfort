@@ -1,6 +1,11 @@
 ---
 import { localizedPath, type Locale } from '../../lib/i18n';
-import { type LocalizedHandsonEntry, handsonStepTitle } from '../../lib/handson';
+import {
+  type LocalizedHandsonEntry,
+  handsonCategoryForSlug,
+  handsonCategoryMeta,
+  handsonStepTitle,
+} from '../../lib/handson';
 
 interface Props {
   prev: LocalizedHandsonEntry | null;
@@ -10,6 +15,9 @@ interface Props {
   nextLabel: string;
 }
 const { prev, next, locale, prevLabel, nextLabel } = Astro.props;
+
+const prevAccent = prev ? handsonCategoryMeta(handsonCategoryForSlug(prev.slug), locale).accent : undefined;
+const nextAccent = next ? handsonCategoryMeta(handsonCategoryForSlug(next.slug), locale).accent : undefined;
 ---
 
 <nav class="handson-step-nav" aria-label="Step navigation">
@@ -19,9 +27,10 @@ const { prev, next, locale, prevLabel, nextLabel } = Astro.props;
       class="step-nav-card prev"
       rel="prev"
       data-handson-prev
+      style={`--nav-accent:${prevAccent}`}
     >
       <span class="font-pixel text-[10px] text-phosphor/60">◀ {prevLabel}</span>
-      <span class="font-pixel-jp text-sm md:text-base text-neon-cyan mt-1 block">
+      <span class="step-nav-title font-pixel-jp text-sm md:text-base mt-1 block">
         {String(prev.entry.data.order).padStart(2, '0')} · {handsonStepTitle(prev)}
       </span>
     </a>
@@ -32,9 +41,10 @@ const { prev, next, locale, prevLabel, nextLabel } = Astro.props;
       class="step-nav-card next"
       rel="next"
       data-handson-next
+      style={`--nav-accent:${nextAccent}`}
     >
       <span class="font-pixel text-[10px] text-phosphor/60 text-right block">{nextLabel} ▶</span>
-      <span class="font-pixel-jp text-sm md:text-base text-neon-magenta mt-1 block text-right">
+      <span class="step-nav-title font-pixel-jp text-sm md:text-base mt-1 block text-right">
         {String(next.entry.data.order).padStart(2, '0')} · {handsonStepTitle(next)}
       </span>
     </a>

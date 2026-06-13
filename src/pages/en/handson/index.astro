@@ -7,6 +7,7 @@ const steps = await getHandsonSteps(locale);
 const target = localizedPath(locale, `/handson/${steps[0]?.slug ?? 'intro'}`);
 Astro.response.headers.set('Refresh', `0;url=${target}`);
 ---
+
 <!doctype html>
 <html lang="en">
   <head>

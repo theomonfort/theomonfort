@@ -8,10 +8,6 @@ interface Props {
 }
 const { locale = 'ja', currentPath = '/' } = Astro.props;
 const t = siteCopy[locale];
-
-// Resolve the first hands-on step at build time so the HANDS-ON tab links directly
-// into the content. This avoids the index redirect page (which forces a full reload
-// and breaks the View Transitions smooth navigation).
 const handsonSteps = await getHandsonSteps(locale);
 const handsonHref = `/handson/${handsonSteps[0]?.slug ?? 'intro'}`;
 

@@ -14,8 +14,6 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-Copilot（Chat / CLI / Cloud Agent など）が `.github/` の設定ファイルや `package-lock.json` のような **触ってほしくないファイル** を勝手に書き換えないよう、**Hooks** でガードレールを張りましょう。特に次の章では CLI で複数のエージェントを並列に走らせるので、その前に安全網を用意しておくのが理想的です。
-
 **Hooks** は、エージェントがツールを呼び出す前後（`PreToolUse` / `PostToolUse`）に任意のスクリプトを差し込める仕組みです。`PreToolUse` で `permissionDecision: deny` を返せば、エージェントの動作を **止める** ことができます。
 
 ### N.1 — `.github/hooks/hooks.json` を作成する
