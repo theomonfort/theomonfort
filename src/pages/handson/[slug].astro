@@ -4,7 +4,7 @@ import { render } from 'astro:content';
 import HandsonTOC from '../../components/handson/HandsonTOC.astro';
 import HandsonStepNav from '../../components/handson/HandsonStepNav.astro';
 import { localizedPath, siteCopy } from '../../lib/i18n';
-import { getHandsonSteps, handsonStepTitle, handsonCategoryForSlug, handsonCategoryStyle } from '../../lib/handson';
+import { getHandsonSteps, handsonStepTitle, handsonCategoryForSlug, handsonCategoryMeta } from '../../lib/handson';
 
 const locale = 'ja';
 const t = siteCopy[locale];
@@ -28,19 +28,15 @@ const next = idx < all.length - 1 ? all[idx + 1] : null;
 const progress = Math.round(((idx + 1) / all.length) * 100);
 
 const category = handsonCategoryForSlug(item.slug);
-const { accent: asideAccent, mascot: asideMascot } = handsonCategoryStyle(category);
-const articleStyle = `--entry-accent:#00f0ff;--aside-accent:${asideAccent};--aside-mascot:url('${asideMascot}')`;
+const categoryMeta = handsonCategoryMeta(category, locale);
+const shellStyle = `--handson-progress:${progress}%;--entry-accent:${categoryMeta.accent};--aside-accent:${categoryMeta.accent};--aside-mascot:url('${categoryMeta.mascot}');--entry-planet:url('${categoryMeta.planet}')`;
 ---
 
 <Layout locale={locale} currentPath={`/handson/${item.slug}`} title={`${handsonStepTitle(item)} — ${t.handson.heading}`}>
-  <div
-    class="handson-progress"
-    style={`--handson-progress:${progress}%`}
-    aria-hidden="true"
-  ></div>
-
   <section
     class="handson-shell"
+    data-handson-category={category}
+    style={shellStyle}
     data-prev={prev ? localizedPath(locale, `/handson/${prev.slug}`) : ''}
     data-next={next ? localizedPath(locale, `/handson/${next.slug}`) : ''}
     data-index={localizedPath(locale, '/handson')}
@@ -68,19 +64,49 @@ const articleStyle = `--entry-accent:#00f0ff;--aside-accent:${asideAccent};--asi
       </button>
 
       <header class="handson-step-header">
-        <div class="flex items-baseline gap-3 flex-wrap mb-3">
-          <span class="font-pixel text-[10px] text-crt-amber tracking-[0.3em]">
-            ▮ {t.handson.stepLabel} {String(entry.data.order).padStart(2, '0')} / {String(all.length).padStart(2, '0')} ▮
-          </span>
-          {entry.data.duration != null && (
-            <span class="font-pixel text-[10px] text-neon-cyan border border-neon-cyan/60 px-2 py-1">
-              ⏱ {entry.data.duration}{t.handson.durationSuffix}
-            </span>
-          )}
+        <a href={localizedPath(locale, '/handson')} class="handson-index-link font-pixel">
+          {t.handson.backToIndex}
+        </a>
+
+        <div class="handson-step-header-grid">
+          <div class="handson-step-copy">
+            <div class="handson-step-meta">
+              <span class="handson-step-chip is-area font-pixel">
+                {categoryMeta.icon} {categoryMeta.labelEn}
+              </span>
+              {categoryMeta.label !== categoryMeta.labelEn && (
+                <span class="handson-step-chip font-pixel-jp">{categoryMeta.label}</span>
+              )}
+              <span class="handson-step-chip font-pixel">
+                {t.handson.stepLabel} {String(entry.data.order).padStart(2, '0')} / {String(all.length).padStart(2, '0')}
+              </span>
+              {entry.data.duration != null && (
+                <span class="handson-step-chip font-pixel">
+                  ⏱ {entry.data.duration}{t.handson.durationSuffix}
+                </span>
+              )}
+            </div>
+
+            <h1 class="font-pixel-jp">{handsonStepTitle(item)}</h1>
+            <p class="handson-step-summary font-pixel-jp">{entry.data.summary}</p>
+
+            <div
+              class="handson-step-meter"
+              role="progressbar"
+              aria-label={t.handson.tocLabel}
+              aria-valuemin="1"
+              aria-valuemax={all.length}
+              aria-valuenow={idx + 1}
+            >
+              <span></span>
+            </div>
+          </div>
+
+          <div class="handson-step-planet" aria-hidden="true">
+            <img src={categoryMeta.planet} alt="" />
+          </div>
         </div>
-        <h1 class="font-pixel-jp text-2xl md:text-4xl text-neon-cyan leading-tight">
-          {handsonStepTitle(item)}
-        </h1>
+
         {item.isFallback && (
           <p class="mt-4 p-3 border-2 border-crt-amber/60 bg-shadow-ink/70 font-pixel-jp text-sm text-crt-amber">
             {t.common.translationPending}
@@ -94,7 +120,6 @@ const articleStyle = `--entry-accent:#00f0ff;--aside-accent:${asideAccent};--asi
         data-copy-label={t.handson.copy}
         data-copied-label={t.handson.copied}
         data-copy-aria={`${t.handson.copy} — ${t.handson.tocLabel}`}
-        style={articleStyle}
       >
         <Content />
       </article>

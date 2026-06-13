@@ -80,7 +80,18 @@ export type HandsonCategory =
   | 'develop'
   | 'review'
   | 'secure'
-  | 'operate';
+  | 'operate'
+  | 'final';
+
+export const HANDSON_CATEGORY_ORDER: HandsonCategory[] = [
+  'introduction',
+  'plan',
+  'develop',
+  'review',
+  'secure',
+  'operate',
+  'final',
+];
 
 export function handsonCategoryForSlug(slug: string): HandsonCategory {
   if (slug.startsWith('plan-')) return 'plan';
@@ -88,6 +99,7 @@ export function handsonCategoryForSlug(slug: string): HandsonCategory {
   if (slug.startsWith('review-')) return 'review';
   if (slug.startsWith('test-secure-') || slug.startsWith('test-')) return 'secure';
   if (slug.startsWith('operate-')) return 'operate';
+  if (slug === 'congratulations') return 'final';
   return 'introduction';
 }
 
@@ -96,15 +108,90 @@ export interface HandsonCategoryStyle {
   mascot: string;
 }
 
-const CATEGORY_STYLES: Record<HandsonCategory, HandsonCategoryStyle> = {
-  introduction: { accent: '#ffb000', mascot: '/theomonfort/octocat-profile-green.png' },
-  plan:         { accent: '#9bbc0f', mascot: '/theomonfort/octocat-profile-green.png' },
-  develop:      { accent: '#ff2e88', mascot: '/theomonfort/octocat-profile-red.png' },
-  review:       { accent: '#ffb000', mascot: '/theomonfort/octocat-profile-yellow.png' },
-  secure:       { accent: '#00f0ff', mascot: '/theomonfort/octocat-profile-blue.png' },
-  operate:      { accent: '#9bbc0f', mascot: '/theomonfort/octocat-team.png' },
+export interface HandsonCategoryMeta extends HandsonCategoryStyle {
+  labelJa: string;
+  labelEn: string;
+  icon: string;
+  color: 'magenta' | 'cyan' | 'amber' | 'green';
+  planet: string;
+}
+
+const CATEGORY_META: Record<HandsonCategory, HandsonCategoryMeta> = {
+  introduction: {
+    labelJa: 'はじめに',
+    labelEn: 'Introduction',
+    icon: '📘',
+    color: 'cyan',
+    accent: '#00f0ff',
+    mascot: '/theomonfort/octocat-profile-mona.png',
+    planet: '/theomonfort/planet-introduction.webp',
+  },
+  plan: {
+    labelJa: '企画',
+    labelEn: 'Plan',
+    icon: '📋',
+    color: 'green',
+    accent: '#9bbc0f',
+    mascot: '/theomonfort/octocat-profile-green.png',
+    planet: '/theomonfort/planet-plan.webp',
+  },
+  develop: {
+    labelJa: '開発',
+    labelEn: 'Develop',
+    icon: '💻',
+    color: 'magenta',
+    accent: '#ff2e88',
+    mascot: '/theomonfort/octocat-profile-red.png',
+    planet: '/theomonfort/planet-develop.webp',
+  },
+  review: {
+    labelJa: 'レビュー',
+    labelEn: 'Review',
+    icon: '🔍',
+    color: 'amber',
+    accent: '#ffb000',
+    mascot: '/theomonfort/octocat-profile-yellow.png',
+    planet: '/theomonfort/planet-review.webp',
+  },
+  secure: {
+    labelJa: 'テスト & 品質保証',
+    labelEn: 'Test & Secure',
+    icon: '🛡️',
+    color: 'cyan',
+    accent: '#00f0ff',
+    mascot: '/theomonfort/octocat-profile-blue.png',
+    planet: '/theomonfort/planet-secure.webp',
+  },
+  operate: {
+    labelJa: '運用',
+    labelEn: 'Operate',
+    icon: '📊',
+    color: 'green',
+    accent: '#9bbc0f',
+    mascot: '/theomonfort/octocat-team.png',
+    planet: '/theomonfort/planet-operate.webp',
+  },
+  final: {
+    labelJa: 'クリア',
+    labelEn: 'Quest Clear',
+    icon: '🏆',
+    color: 'magenta',
+    accent: '#ff2e88',
+    mascot: '/theomonfort/octocat-full-mona.png',
+    planet: '/theomonfort/planet-introduction.webp',
+  },
 };
 
 export function handsonCategoryStyle(category: HandsonCategory): HandsonCategoryStyle {
-  return CATEGORY_STYLES[category];
+  const { accent, mascot } = CATEGORY_META[category];
+  return { accent, mascot };
+}
+
+export function handsonCategoryMeta(category: HandsonCategory, locale: Locale) {
+  const meta = CATEGORY_META[category];
+  return {
+    ...meta,
+    label: locale === 'ja' ? meta.labelJa : meta.labelEn,
+    secondaryLabel: locale === 'ja' ? meta.labelEn : meta.labelJa,
+  };
 }

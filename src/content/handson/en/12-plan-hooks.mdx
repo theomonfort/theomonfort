@@ -14,8 +14,6 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-Let's set up **Hooks** as a guardrail so Copilot (Chat / CLI / Cloud Agent, etc.) won't rewrite files you don't want it touching — like the `.github/` configs or `package-lock.json`. We're about to run multiple agents in parallel via the CLI in the next chapter, so having a safety net in place beforehand is ideal.
-
 **Hooks** let you inject arbitrary scripts before and after an agent invokes a tool (`PreToolUse` / `PostToolUse`). Returning `permissionDecision: deny` from `PreToolUse` lets you **stop** the agent in its tracks.
 
 ### N.1 — Create `.github/hooks/hooks.json`

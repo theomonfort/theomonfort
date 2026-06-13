@@ -16,8 +16,6 @@ interface Props {
 }
 const { immersive = true, src = '/theomonfort/room/bedroom-v2.png', locale = 'ja' } = Astro.props;
 const t = siteCopy[locale].room;
-// Resolve the first hands-on step at build time so the window hotspot links
-// directly into the content instead of bouncing through the index redirect.
 const handsonSteps = await getHandsonSteps(locale);
 const handsonHref = `/handson/${handsonSteps[0]?.slug ?? 'intro'}`;
 const wrapClass = [
