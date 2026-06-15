@@ -14,6 +14,8 @@ links:
     url: https://wellarchitected.github.com/
   - label: githubnext/agentics（サンプル Agentic Workflow）
     url: https://github.com/githubnext/agentics
+  - label: Token-optimizer — AI ワークロードのトークンコスト計算ツール
+    url: https://ashy-dune-0b4215a0f.7.azurestaticapps.net/detailed/index.html#/playbook
   - group: 🛠️ パワーユーザー向けツール
     label: rtk-ai/rtk — シェル出力をエージェント向けに圧縮
     url: https://github.com/rtk-ai/rtk
