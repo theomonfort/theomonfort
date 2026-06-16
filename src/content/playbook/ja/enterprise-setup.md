@@ -24,7 +24,11 @@ links:
 
 ## 一言で
 
-Enterprise Managed Users (EMU) は IdP が唯一のユーザーソース。Enterprise を作成 → 管理者アカウントでログイン → Entra ID にアプリを登録 → SSO + SCIM を有効化すれば、チームメンバーが IdP 経由でログインできるようになる。
+<div class="hero-quote hero-quote-admin">
+  <p>
+    Enterprise は <strong>30 日間の無料トライアル（50 ライセンス）</strong>から開始。トライアル中に SSO・SCIM・チーム構成を完了させてから、有料プランに切り替える。
+  </p>
+</div>
 
 ## Enterprise の作成（30日間トライアル）
 

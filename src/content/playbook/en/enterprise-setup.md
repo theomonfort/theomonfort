@@ -24,7 +24,11 @@ links:
 
 ## In a nutshell
 
-Enterprise Managed Users (EMU) makes your IdP the single source of truth for user accounts. Create an Enterprise → log in with the admin account → register the app in Entra ID → enable SSO + SCIM, and your team can start logging in through the IdP.
+<div class="hero-quote hero-quote-admin">
+  <p>
+    Start with a <strong>30-day free trial (50 licenses)</strong>. Complete SSO, SCIM, and team configuration during the trial, then switch to a paid plan.
+  </p>
+</div>
 
 ## Create an Enterprise (30-day trial)
 
