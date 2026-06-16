@@ -88,3 +88,18 @@ GitHub の **Identity provider** 設定画面で以下を入力します。Entra
 | **Sign on URL** | Login URL |
 | **Issuer** | Microsoft Entra Identifier |
 | **Public certificate** | Certificate (Base64) — ファイルの中身テキストを貼り付け |
+
+## SCIM プロビジョニングの設定
+
+SSO の設定が完了したら、次に **Provisioning**（自動プロビジョニング）を構成します。
+
+Entra ID の **Enterprise Application → Manage → Provisioning** で以下を入力します：
+
+- **Tenant URL**: `https://api.github.com/scim/v2/enterprises/<enterprise-slug>`
+- **Secret Token**: GitHub のセットアップユーザー（`shortname_admin`）で作成した **Personal Access Token (PAT)**
+
+![Provisioning 設定画面](/theomonfort/playbook/img/entra-provisioning-config.png)
+
+> PAT は GitHub の **Settings → Developer settings → Personal access tokens** から、`admin:enterprise` スコープ付きで作成してください。
+
+設定後、Entra ID アプリの **Users and groups** にセキュリティグループまたはユーザーを追加すると、**約 40 分ごと**に自動プロビジョニングが実行され、GitHub Enterprise にユーザーが同期されます。

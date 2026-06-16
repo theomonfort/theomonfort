@@ -88,3 +88,18 @@ In GitHub's **Identity provider** settings, fill in the following. The Entra ID 
 | **Sign on URL** | Login URL |
 | **Issuer** | Microsoft Entra Identifier |
 | **Public certificate** | Certificate (Base64) — paste the text content from the file |
+
+## SCIM Provisioning configuration
+
+Once SSO is configured, set up **Provisioning** (automatic user sync).
+
+In Entra ID under **Enterprise Application → Manage → Provisioning**, fill in:
+
+- **Tenant URL**: `https://api.github.com/scim/v2/enterprises/<enterprise-slug>`
+- **Secret Token**: A **Personal Access Token (PAT)** created with the GitHub setup user (`shortname_admin`)
+
+![Provisioning configuration](/theomonfort/playbook/img/entra-provisioning-config.png)
+
+> Create the PAT in GitHub under **Settings → Developer settings → Personal access tokens** with the `admin:enterprise` scope.
+
+Once configured, add security groups or users to the app under **Users and groups**. Entra ID automatically provisions them to GitHub Enterprise **every ~40 minutes**.
