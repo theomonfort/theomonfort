@@ -83,3 +83,85 @@ You can extend Copilot to people who aren't members of your org — useful for v
 - 💵 A Guest collaborator with a Copilot seat is also billed as **1 license**.
 
 > 📘 Setup guides: <a href="https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-outside-collaborators/adding-outside-collaborators-to-repositories-in-your-organization" target="_blank" rel="noopener noreferrer" class="retro-link">Adding outside collaborators</a> · <a href="https://docs.github.com/en/enterprise-cloud@latest/admin/managing-accounts-and-repositories/managing-users-in-your-enterprise/enabling-guest-collaborators" target="_blank" rel="noopener noreferrer" class="retro-link">Enabling guest collaborators (EMU)</a>
+
+## GitHub License & Service Procurement
+
+<div style="font-size:0.85em;">
+
+Overview of how GitHub services are licensed and billed.
+
+<div style="display:flex;gap:2rem;align-items:flex-start;margin-top:1rem;">
+<div style="flex:3;">
+
+<table style="width:100%;border-collapse:collapse;font-size:0.9em;">
+<thead>
+<tr style="background:var(--entry-accent,#1f6feb);color:#fff;">
+<th style="padding:6px 10px;text-align:left;width:120px;"></th>
+<th colspan="2" style="padding:6px 10px;text-align:center;">Licenses for GitHub Enterprise usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:8px 10px;font-weight:bold;border:1px solid #444;">User<br/>License</td>
+<td style="padding:8px 10px;border:1px solid #444;"><strong>Visual Studio with GitHub</strong><br/>・For users who need Visual Studio with MSDN</td>
+<td style="padding:8px 10px;border:1px solid #444;"><strong>GitHub Enterprise</strong><br/>・Users who don't need VS with MSDN<br/>・Developers / Infra / DevOps / Designers<br/>・Project managers / Stakeholders</td>
+</tr>
+</tbody>
+</table>
+
+<table style="width:100%;border-collapse:collapse;font-size:0.9em;margin-top:0.5rem;">
+<thead>
+<tr style="background:var(--entry-accent,#1f6feb);color:#fff;">
+<th style="padding:6px 10px;width:120px;"></th>
+<th style="padding:6px 10px;text-align:center;">License for DevSecOps on GitHub</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:8px 10px;font-weight:bold;border:1px solid #444;">Committer<br/>License</td>
+<td style="padding:8px 10px;border:1px solid #444;"><strong>GitHub Advanced Security</strong><br/>・Users who commit/merge code</td>
+</tr>
+</tbody>
+</table>
+
+<table style="width:100%;border-collapse:collapse;font-size:0.9em;margin-top:0.5rem;">
+<thead>
+<tr style="background:var(--entry-accent,#1f6feb);color:#fff;">
+<th style="padding:6px 10px;width:120px;"></th>
+<th colspan="5" style="padding:6px 10px;text-align:center;">Usage-based add-on services</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:8px 10px;font-weight:bold;border:1px solid #444;">Metered</td>
+<td style="padding:8px 10px;border:1px solid #444;text-align:center;"><strong>Copilot</strong><br/>AI-powered code<br/>suggestions</td>
+<td style="padding:8px 10px;border:1px solid #444;text-align:center;"><strong>Actions</strong><br/>CI/CD workflow<br/>automation</td>
+<td style="padding:8px 10px;border:1px solid #444;text-align:center;"><strong>Codespaces</strong><br/>Cloud dev<br/>environments</td>
+<td style="padding:8px 10px;border:1px solid #444;text-align:center;"><strong>Packages</strong><br/>Package<br/>registry</td>
+<td style="padding:8px 10px;border:1px solid #444;text-align:center;"><strong>LFS</strong><br/>Large file<br/>storage</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div style="flex:1;text-align:center;">
+<div style="font-weight:bold;margin-bottom:0.5rem;">Procurement</div>
+<div style="display:flex;gap:4px;justify-content:center;align-items:flex-end;height:160px;">
+<div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+<span style="font-size:0.7em;font-weight:bold;">❶</span>
+<div style="writing-mode:vertical-rl;background:#1f3d73;color:#fff;padding:8px 6px;border-radius:4px;height:140px;display:flex;align-items:center;justify-content:center;font-size:0.75em;font-weight:bold;">Subscription<br/>License</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+<span style="font-size:0.7em;font-weight:bold;">❷</span>
+<div style="writing-mode:vertical-rl;background:#2a5298;color:#fff;padding:8px 6px;border-radius:4px;height:110px;display:flex;align-items:center;justify-content:center;font-size:0.75em;font-weight:bold;">Subscription<br/>+ Metered</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+<span style="font-size:0.7em;font-weight:bold;">❸</span>
+<div style="writing-mode:vertical-rl;background:#3a6cc9;color:#fff;padding:8px 6px;border-radius:4px;height:80px;display:flex;align-items:center;justify-content:center;font-size:0.75em;font-weight:bold;">Metered<br/>Only</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
