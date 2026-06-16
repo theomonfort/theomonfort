@@ -69,16 +69,12 @@ SSO を有効化する際に **OIDC** または **SAML** を選択します。
 
 SSO を構成するには **Entra ID** で Enterprise Application を追加します。
 
-| SSO 方式 | 追加するアプリ |
-|---|---|
-| **OIDC** | GitHub Enterprise Managed User (OIDC) |
-| **SAML** | GitHub Enterprise Managed User |
+| SSO 方式 | 追加するアプリ | チュートリアル |
+|---|---|---|
+| **OIDC** | GitHub Enterprise Managed User (OIDC) | [設定ガイド](https://learn.microsoft.com/en-gb/entra/identity/saas-apps/github-enterprise-managed-user-oidc-provisioning-tutorial#step-5-configure-automatic-user-provisioning-to-github-enterprise-managed-user-oidc) |
+| **SAML** | GitHub Enterprise Managed User | [設定ガイド](https://learn.microsoft.com/en-us/entra/identity/saas-apps/github-enterprise-managed-user-tutorial) |
 
-![GitHub Enterprise Managed User (OIDC)](/theomonfort/playbook/img/entra-app-emu-oidc.png)
-
-![GitHub Enterprise Managed User](/theomonfort/playbook/img/entra-app-emu-saml.png)
-
-アプリを追加したら、Microsoft のチュートリアルに沿って設定を完了してください：
-
-- **OIDC**: [プロビジョニング設定チュートリアル](https://learn.microsoft.com/en-gb/entra/identity/saas-apps/github-enterprise-managed-user-oidc-provisioning-tutorial#step-5-configure-automatic-user-provisioning-to-github-enterprise-managed-user-oidc)
-- **SAML**: [SAML SSO 設定チュートリアル](https://learn.microsoft.com/en-us/entra/identity/saas-apps/github-enterprise-managed-user-tutorial)
+<div style="display:flex;gap:1rem;justify-content:center;">
+<img src="/theomonfort/playbook/img/entra-app-emu-oidc.png" alt="GitHub Enterprise Managed User (OIDC)" style="max-width:48%;" />
+<img src="/theomonfort/playbook/img/entra-app-emu-saml.png" alt="GitHub Enterprise Managed User" style="max-width:48%;" />
+</div>
