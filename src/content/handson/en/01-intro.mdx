@@ -46,6 +46,20 @@ If you chose EMU, a **dedicated admin account** (`shortname_admin`) is automatic
 
 > ⚠️ This admin account is only for configuring SSO and SCIM provisioning. For day-to-day development, use the user accounts provisioned through your IdP.
 
+### EMU SSO method: OIDC vs SAML
+
+When enabling SSO, you choose between **OIDC** or **SAML**.
+
+> **Important**: OIDC can only be configured on **one Enterprise per IdP tenant**. If you need multiple Enterprises on the same IdP tenant, the additional ones must use SAML.
+
+| | **OIDC** | **SAML** |
+|---|---|---|
+| **Conditional Access Policy (CAP)** | ✅ IdP conditional access policies enforced in real time | ❌ No CAP support |
+| **Session revocation** | ✅ Immediately revoked when IdP session ends | ⚠️ Token may persist until expiry |
+| **Enterprises per IdP tenant** | ❌ Only 1 | ✅ Multiple |
+| **Supported IdPs** | Entra ID (Azure AD) · Okta | Entra ID · Okta · PingFederate etc. |
+| **Recommended for** | Primary Enterprise (strict security requirements) | Additional Enterprises, or when CAP is not needed |
+
 ### Today's goals
 
 - **PLAN**: Equip Copilot with "context", "rules", and "shape" via MCP, Instructions, and Skills
