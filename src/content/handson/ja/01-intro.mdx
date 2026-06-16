@@ -34,6 +34,18 @@ import MonaDialog from '../../../components/handson/MonaDialog.astro';
 
 ![Data hosting 選択画面 — Host on GitHub.com without data residency / Europe / Australia / United States / Japan](/theomonfort/handson/img/enterprise-data-hosting.png)
 
+### EMU の場合：管理者アカウントでの初期設定
+
+EMU を選択した場合、Enterprise 作成後に **専用の管理者アカウント**（`shortname_admin`）が自動生成されます。
+
+1. パスワード設定用のメールが届きます — メール内のリンクからパスワードを設定してください
+2. 管理者アカウントでログインすると、**Overview** タブにセットアップ手順が表示されます
+3. 表示されるステップに沿って SSO とプロビジョニングを構成してください
+
+![EMU 管理者の Overview 画面 — Generate SCIM token / Enable single sign-on / Configure provisioning](/theomonfort/handson/img/enterprise-emu-admin-overview.png)
+
+> ⚠️ この管理者アカウントは SSO・SCIM の構成専用です。日常的な開発には IdP からプロビジョニングされたユーザーアカウントを使用してください。
+
 ### 本日のゴール
 
 - **PLAN**: MCP・Instruction・Skill で Copilot に「文脈」「ルール」「型」を仕込む
