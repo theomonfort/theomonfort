@@ -81,7 +81,7 @@ To configure SSO, add an **Enterprise Application** in **Entra ID**.
 
 ### SAML: GitHub ↔ Entra ID field mapping
 
-In GitHub's **Identity provider** settings, fill in the following:
+In GitHub's **Identity provider** settings, fill in the following. The Entra ID values can be found under **Enterprise Application → Manage → Single sign-on**.
 
 | GitHub field | Entra ID value |
 |---|---|
