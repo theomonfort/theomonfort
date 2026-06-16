@@ -103,3 +103,17 @@ Entra ID の **Enterprise Application → Manage → Provisioning** で以下を
 > PAT は GitHub の **Settings → Developer settings → Personal access tokens** から、`admin:enterprise` スコープ付きで作成してください。
 
 設定後、Entra ID アプリの **Users and groups** にセキュリティグループまたはユーザーを追加すると、**約 40 分ごと**に自動プロビジョニングが実行され、GitHub Enterprise にユーザーが同期されます。
+
+## IdP グループとチームの同期
+
+プロビジョニングされたユーザーは、デフォルトでは **Unaffiliated（未所属）** の状態で追加されます。Organization やチームへの所属は IdP グループを同期することで自動化できます。
+
+| 設定 | 結果 |
+|---|---|
+| **何もしない** | ユーザーは Enterprise に追加されるが Organization/Team には未所属 |
+| **Enterprise Team に IdP グループを紐付け** | IdP グループのメンバーが自動的に Enterprise Team に同期 |
+| **Organization Team に IdP グループを紐付け** | IdP グループのメンバーが自動的に Organization Team に同期（Org にも自動参加） |
+
+GitHub の Team 設定画面 → **Identity Provider Group** で、対応する IdP グループを選択します。
+
+![IdP グループの同期設定](/theomonfort/playbook/img/enterprise-idp-group-sync.png)

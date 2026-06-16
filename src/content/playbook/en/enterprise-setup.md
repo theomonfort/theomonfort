@@ -103,3 +103,17 @@ In Entra ID under **Enterprise Application → Manage → Provisioning**, fill i
 > Create the PAT in GitHub under **Settings → Developer settings → Personal access tokens** with the `admin:enterprise` scope.
 
 Once configured, add security groups or users to the app under **Users and groups**. Entra ID automatically provisions them to GitHub Enterprise **every ~40 minutes**.
+
+## IdP Group and Team sync
+
+By default, provisioned users are added as **Unaffiliated** — they belong to the Enterprise but are not assigned to any Organization or Team. You can automate team membership by syncing IdP groups.
+
+| Configuration | Result |
+|---|---|
+| **Do nothing** | Users are added to the Enterprise but not affiliated to any Org/Team |
+| **Link an IdP group to an Enterprise Team** | IdP group members are automatically synced to the Enterprise Team |
+| **Link an IdP group to an Organization Team** | IdP group members are automatically synced to the Org Team (and auto-join the Org) |
+
+In GitHub, go to the Team settings → **Identity Provider Group** and select the corresponding IdP group.
+
+![IdP Group sync](/theomonfort/playbook/img/enterprise-idp-group-sync.png)
