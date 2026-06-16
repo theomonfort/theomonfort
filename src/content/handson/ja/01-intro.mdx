@@ -21,6 +21,19 @@ import MonaDialog from '../../../components/handson/MonaDialog.astro';
 
 この勉強会では、[**Copilot Playbook**](https://theomonfort.github.io/theomonfort/playbook/github/?present=1) で紹介されているシンプルな概念を実際に手を動かして体験します。**PLAN → CODE → REVIEW → TEST & SECURE → OPERATE** のフェーズに沿って GitHub Copilot を使い、最終的には Playbook の簡易版を Copilot と一緒に作り上げます。
 
+### 前提条件：Enterprise アカウントの作成
+
+このハンズオンを実施するには **GitHub Enterprise Cloud** のアカウントが必要です。まだお持ちでない場合は、**30 日間の無料トライアル**で Enterprise を作成してください。
+
+| 種類 | リンク |
+|------|--------|
+| **Enterprise Managed Users (EMU)** | [Enterprise を作成する](https://github.com/account/enterprises/new?users_type=enterprise_managed) |
+| **個人アカウント（非 EMU）** | [Enterprise を作成する](https://github.com/account/enterprises/new) |
+
+作成時に **Data hosting** オプションで、**GitHub Enterprise Cloud**（github.com）または **Data Residency**（GHE.com のリージョン別サブドメイン）を選択できます。
+
+![Data hosting 選択画面 — Host on GitHub.com without data residency / Europe / Australia / United States / Japan](/theomonfort/handson/img/enterprise-data-hosting.png)
+
 ### 本日のゴール
 
 - **PLAN**: MCP・Instruction・Skill で Copilot に「文脈」「ルール」「型」を仕込む
