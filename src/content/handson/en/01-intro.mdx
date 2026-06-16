@@ -60,6 +60,24 @@ When enabling SSO, you choose between **OIDC** or **SAML**.
 | **Supported IdPs** | Entra ID (Azure AD) · Okta | Entra ID · Okta · PingFederate etc. |
 | **Recommended for** | Primary Enterprise (strict security requirements) | Additional Enterprises, or when CAP is not needed |
 
+### Register the application in Entra ID
+
+To configure SSO, you need to create an **Enterprise Application** in **Entra ID (Azure AD)**. Add the application that matches your chosen SSO method:
+
+| SSO method | Application to add in Entra ID |
+|---|---|
+| **OIDC** | GitHub Enterprise Managed User (OIDC) |
+| **SAML** | GitHub Enterprise Managed User |
+
+![GitHub Enterprise Managed User (OIDC) — Entra ID app catalog](/theomonfort/handson/img/entra-app-emu-oidc.png)
+
+![GitHub Enterprise Managed User — Entra ID app catalog](/theomonfort/handson/img/entra-app-emu-saml.png)
+
+Once the app is added, follow the Microsoft tutorial to complete the setup:
+
+- **For OIDC**: [GitHub EMU (OIDC) — provisioning tutorial](https://learn.microsoft.com/en-gb/entra/identity/saas-apps/github-enterprise-managed-user-oidc-provisioning-tutorial#step-5-configure-automatic-user-provisioning-to-github-enterprise-managed-user-oidc)
+- **For SAML**: [GitHub EMU — SAML SSO tutorial](https://learn.microsoft.com/en-us/entra/identity/saas-apps/github-enterprise-managed-user-tutorial)
+
 ### Today's goals
 
 - **PLAN**: Equip Copilot with "context", "rules", and "shape" via MCP, Instructions, and Skills

@@ -60,6 +60,24 @@ SSO を有効化する際に **OIDC** または **SAML** を選択します。
 | **対応 IdP** | Entra ID (Azure AD)・Okta | Entra ID・Okta・PingFederate 等 |
 | **推奨ケース** | メインの Enterprise（セキュリティ要件が厳しい場合） | 2 つ目以降の Enterprise、または CAP 不要な環境 |
 
+### Entra ID でのアプリケーション登録
+
+SSO を構成するには、**Entra ID（Azure AD）** で Enterprise Application を作成する必要があります。選択した SSO 方式に応じて、対応するアプリを追加してください。
+
+| SSO 方式 | Entra ID で追加するアプリ |
+|---|---|
+| **OIDC** | GitHub Enterprise Managed User (OIDC) |
+| **SAML** | GitHub Enterprise Managed User |
+
+![GitHub Enterprise Managed User (OIDC) — Entra ID のアプリカタログ](/theomonfort/handson/img/entra-app-emu-oidc.png)
+
+![GitHub Enterprise Managed User — Entra ID のアプリカタログ](/theomonfort/handson/img/entra-app-emu-saml.png)
+
+アプリを追加したら、Microsoft のチュートリアルに沿って設定を進めてください：
+
+- **OIDC の場合**: [GitHub EMU (OIDC) — プロビジョニング設定チュートリアル](https://learn.microsoft.com/en-gb/entra/identity/saas-apps/github-enterprise-managed-user-oidc-provisioning-tutorial#step-5-configure-automatic-user-provisioning-to-github-enterprise-managed-user-oidc)
+- **SAML の場合**: [GitHub EMU — SAML SSO 設定チュートリアル](https://learn.microsoft.com/en-us/entra/identity/saas-apps/github-enterprise-managed-user-tutorial)
+
 ### 本日のゴール
 
 - **PLAN**: MCP・Instruction・Skill で Copilot に「文脈」「ルール」「型」を仕込む
