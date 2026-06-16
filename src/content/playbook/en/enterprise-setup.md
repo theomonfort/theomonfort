@@ -78,3 +78,13 @@ To configure SSO, add an **Enterprise Application** in **Entra ID**.
 <img src="/theomonfort/playbook/img/entra-app-emu-oidc.png" alt="GitHub Enterprise Managed User (OIDC)" style="max-width:48%;" />
 <img src="/theomonfort/playbook/img/entra-app-emu-saml.png" alt="GitHub Enterprise Managed User" style="max-width:48%;" />
 </div>
+
+### SAML: GitHub ↔ Entra ID field mapping
+
+In GitHub's **Identity provider** settings, fill in the following:
+
+| GitHub field | Entra ID value |
+|---|---|
+| **Sign on URL** | Login URL |
+| **Issuer** | Microsoft Entra Identifier |
+| **Public certificate** | Certificate (Base64) — paste the text content from the file |
