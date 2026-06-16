@@ -1,6 +1,6 @@
 ---
-title: Enterprise Setup (EMU)
-titleEn: Enterprise Setup (EMU)
+title: Enterprise Setup
+titleEn: Enterprise Setup
 summary: From creating a GitHub Enterprise Cloud (EMU) account to configuring SSO — spin up a 30-day free trial, set up OIDC or SAML via Entra ID, and get your team ready to log in.
 icon: /theomonfort/icons/license-crown.png
 color: magenta
