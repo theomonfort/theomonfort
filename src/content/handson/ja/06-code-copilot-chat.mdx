@@ -117,29 +117,29 @@ Copilot Chat に以下のプロンプトを投げて、改善点を **8 件** Is
 ```
 github-issues skill を使って、以下の改善点をこのリポジトリの Issue として個別に作成してください。
 
-1. タイトル: Playbook landing page に category description と actor を追加する
-   詳細: `src/lib/playbook-categories.ts` を使い、各カテゴリの actor avatar、actor name、description をカード一覧の上に表示する。
+1. タイトル: 現在の Playbook landing page を土台に presentation mode を追加する
+   詳細: 既存の `/playbook` landing page と Markdown 詳細ページは残したまま、各カードから presentation mode に入れる導線を追加する（例: `?present=1`）。presentation mode では Markdown の各 `##` 見出しを 1 スライドにし、frontmatter から title / cover slide を生成する。`←` / `→` で移動、`Esc` で `/playbook` に戻る。現在の entry と slide が URL で分かるようにする。
 
-2. タイトル: planet の配置とサイズを調整する
-   詳細: 各 `planet-*.webp` を大きな装飾背景として見せる。テキストを隠したりクリックを邪魔したりしないように、desktop / mobile の両方で調整する。
+2. タイトル: presentation mode に美しい category grouped TOC sidebar を追加する
+   詳細: presentation mode では左側に固定サイドバーを表示し、全 Playbook entry を category ごとに分類して一覧表示する。category の label、color、icon、表示順は `src/lib/playbook-categories.ts` を使う。現在の entry をハイライトする。別 entry をクリックすると presentation mode を維持したまま切り替わる。クリックしても TOC のスクロール位置が勝手に動かないようにする。
 
-3. タイトル: SDLC navigation chain に active styling を追加する
-   詳細: 上部の Plan → Develop → Review → Test & Secure → Operate ボタンにカテゴリカラーの hover / focus state を付ける。可能なら現在表示中のカテゴリをハイライトする。
+3. タイトル: Octocat の「In a nutshell / 一言で」ヒーロースライドを追加する
+   詳細: 各 entry の最初の “In a nutshell” / “一言で” セクションをヒーロースライドとして表示する。`src/lib/playbook-categories.ts` の category actor / avatar（例: Introduction は Mona）を使い、本文をレトロな吹き出しとして表示する。そのセクションが無い場合は frontmatter `summary` を使う。
 
-4. タイトル: Playbook detail page の typography を改善する
-   詳細: 詳細ページで見出し、テーブル、リスト、コードブロック、blockquote、リンクが landing page と同じレトロテーマで読みやすく表示されるようにする。
+4. タイトル: presentation mode に category background image を追加する
+   詳細: 各 presentation deck に category ごとの背景画像を適用する。使用する asset は `slide-bg-introduction.webp`、`slide-bg-plan.webp`、`slide-bg-develop.webp`、`slide-bg-review.webp`、`slide-bg-secure.webp`、`slide-bg-operate.webp`、`slide-bg-administration.webp`。文字が読めるように暗い overlay を入れる。cover / hero slide では背景を少し強めに見せ、本文スライドでは控えめにする。
 
-5. タイトル: 詳細ページで Mermaid 図をレンダリングする
-   詳細: Markdown 詳細ページに ` ```mermaid ` ブロックがある場合、通常のコードブロックではなく Mermaid 図として表示する。
+5. タイトル: 各 presentation deck の最後に links slide を追加する
+   詳細: Playbook entry の frontmatter に `links` がある場合、最後のスライドとして group ごとにリンク一覧を表示する。各 group に小見出しを付け、クリック可能なリンクとして表示する。links が無い entry ではこのスライドを省略する。
 
-6. タイトル: 【バグ】`/theomonfort/` base path で public asset が読み込めない
-   詳細: icons、planets、images が `/` 直下だけでなく `/theomonfort/` 配下で配信された場合も正しく読み込めるようにする。
+6. タイトル: presentation slide 内で Mermaid 図をレンダリングする
+   詳細: スライド内に ` ```mermaid ` コードブロックがある場合、通常のコードブロックではなく Mermaid 図として描画する。1 枚目以外のスライドでも、スライド移動時に正しく描画されるようにする。
 
-7. タイトル: 【バグ】モバイルで planet が重なる / card が窮屈になる
-   詳細: 狭い画面ではカードを 1 カラムにし、planet を縮小または背景側に逃がして、本文の読みやすさを保つ。
+7. タイトル: presentation slide の layout と typography を改善する
+   詳細: スライド本文が左上に寄らないよう、中央寄せで意図のあるレイアウトにする。retro theme token、category color、読みやすい table / code style、適切な余白を使う。table や長い code block は viewport からはみ出さず、スライド内でスクロールできるようにする。
 
-8. タイトル: Playbook card の簡易検索 / フィルターを追加する
-   詳細: タイトルと summary でカードを絞り込める client-side search box を追加する。category grouping は分かりやすく維持する。
+8. タイトル: presentation mode の mobile fallback を追加する
+   詳細: 狭い画面で presentation mode が崩れないようにする。mobile では presentation mode を無効化して通常の Markdown 詳細ページに戻す、またはシンプルな縦スクロールの slide list として表示する。カードと詳細ページは mobile でも操作できること。
 ```
 
 作成された Issue のリストはリポジトリの Issues タブで確認できます。次の章以降で Cloud Agent / Copilot CLI に実装させます。

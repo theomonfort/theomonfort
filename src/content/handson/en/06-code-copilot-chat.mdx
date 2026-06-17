@@ -117,29 +117,29 @@ The Issues below are **just one example** of the improvements you might want, ba
 ```
 Use the github-issues skill to create the following improvements as individual Issues in this repository.
 
-1. Title: Add category descriptions and actors to the Playbook landing page
-   Details: Use `src/lib/playbook-categories.ts` to show each category's actor avatar, actor name, and description above that category's cards.
+1. Title: Add Playbook presentation mode on top of the current landing page
+   Details: Keep the existing `/playbook` landing page and Markdown detail pages. Add a presentation mode entry point from each card (for example `?present=1`). In presentation mode, each `##` heading in the Markdown becomes a slide, with a generated title/cover slide from frontmatter. Add keyboard controls (`←` / `→` to move, `Esc` to return to `/playbook`) and keep a unique URL for the current entry and slide.
 
-2. Title: Tune planet placement and sizing
-   Details: Make each `planet-*.webp` feel like a large decorative background element. It should be visible, but not cover text or block clicks. Check desktop and mobile separately.
+2. Title: Add a beautiful category-grouped TOC sidebar for presentation mode
+   Details: In presentation mode, show a fixed left sidebar listing all Playbook entries grouped by category using `src/lib/playbook-categories.ts`. Use category labels, colors, icons, and ordering from that file. Highlight the current entry. Clicking another entry should switch to that entry while staying in presentation mode. The TOC scroll position should not jump when clicking entries.
 
-3. Title: Add active styling to the SDLC navigation chain
-   Details: The top Plan → Develop → Review → Test & Secure → Operate buttons should use matching category colors and have hover/focus states. If possible, highlight the category currently in view.
+3. Title: Add Octocat “In a nutshell” hero slides
+   Details: For each entry, turn the first “In a nutshell” / “一言で” section into a hero slide. Use the category actor/avatar from `src/lib/playbook-categories.ts` (for example Mona for Introduction) and render the text as a retro speech bubble. If the entry does not have that section, fall back to frontmatter `summary`.
 
-4. Title: Improve Playbook detail page typography
-   Details: The detail page should render headings, tables, lists, code blocks, blockquotes, and links with the same retro theme as the landing page.
+4. Title: Add category background images to presentation mode
+   Details: Give each presentation deck a category-specific background image using the supplied assets: `slide-bg-introduction.webp`, `slide-bg-plan.webp`, `slide-bg-develop.webp`, `slide-bg-review.webp`, `slide-bg-secure.webp`, `slide-bg-operate.webp`, and `slide-bg-administration.webp`. Add a dark overlay so text stays readable. The cover / hero slide can show more of the background; content slides should be more subdued.
 
-5. Title: Render Mermaid diagrams in detail pages
-   Details: If a Markdown detail page contains a ` ```mermaid ` block, render it as a Mermaid diagram instead of plain code.
+5. Title: Add a links slide at the end of each presentation deck
+   Details: If the Playbook entry frontmatter has `links`, render them as a final slide grouped by `group`. Each group should have a small heading and clickable links. If an entry has no links, skip this slide.
 
-6. Title: [Bug] Public asset paths fail under the `/theomonfort/` base path
-   Details: Icons, planets, and images should load correctly when the site is served from `/theomonfort/`, not only from `/`.
+6. Title: Render Mermaid diagrams inside presentation slides
+   Details: If a slide contains a ` ```mermaid ` code block, render it as a Mermaid diagram instead of plain code. Make sure diagrams on slides after slide 1 render correctly when navigating between slides.
 
-7. Title: [Bug] Mobile layout has overlapping planets or cramped cards
-   Details: On narrow screens, cards should be one column, planets should shrink or move behind sections, and text should remain readable.
+7. Title: Improve presentation slide layout and typography
+   Details: Make slide content feel centered and intentional, not stuck in the top-left. Use the retro theme tokens, category colors, readable table/code styles, and balanced spacing. Tables and long code blocks should scroll inside the slide rather than overflowing the viewport.
 
-8. Title: Add a simple search or filter for Playbook cards
-   Details: Add a small client-side search box that filters cards by title and summary while keeping category grouping understandable.
+8. Title: Add mobile fallback for presentation mode
+   Details: On narrow screens, presentation mode should not break. Either disable presentation mode and fall back to the normal Markdown detail page, or provide a simple vertical slide list. Cards and detail pages should remain usable on mobile.
 ```
 
 You can find the resulting Issues in the Issues tab of your repository. We'll have Cloud Agent / Copilot CLI implement them in the next sections.
