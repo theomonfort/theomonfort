@@ -73,8 +73,8 @@ export const siteCopy = {
       handsonShort: 'ハンズオン',
     },
     footer: {
-      end: '▮ END OF DEMO',
-      tagline: ['このサイトは AI駆動開発 への愛で作られた。', 'コードは詩、AI は楽器、君の "好み" が世界を変える。'],
+      end: '▮ QUEST CONTINUES',
+      tagline: ['このサイトは AI駆動開発 への愛で作られた。', 'コードは詩、AI は楽器、君の "センス" が世界を変える。'],
       languageLabel: 'LANGUAGE',
       switchTo: 'English',
       konami: '↑↑↓↓←→←→BA で何かが起こる？',
@@ -91,8 +91,7 @@ export const siteCopy = {
       title: 'AI 駆動開発 QUEST — レトロ道場へようこそ',
       insertCoin: '▮ INSERT COIN ▮',
       subtitle: '— with GitHub Copilot —',
-      hint: ['▶ 家具をクリック', '用語を学び、スキルを装備し、自分の "好み" で世界を作れ'],
-      navHint: '家具をクリック / Tabキーで移動',
+      hint: ['画像上の要素をクリックしてサイトを移動', '用語を学び、スキルを装備し、自分の "センス" で世界を作れ'],
     },
     playbook: {
       title: 'プレイブック — AI 開発 QUEST',
@@ -168,7 +167,7 @@ export const siteCopy = {
       lines: [
         '一、コードは詩である。',
         'AI は楽器だ。\n下手に弾けば騒音、心を込めれば音楽になる。',
-        '僕たちは、何を作るかを知っている人間でありたい。\n速さに溺れず、流行に飲まれず、\n自分の "好み" を世界に翻訳する者でありたい。',
+        '僕たちは、何を作るかを知っている人間でありたい。\n速さに溺れず、流行に飲まれず、\n自分の "センス" を世界に翻訳する者でありたい。',
         'AI は道具だ。だが、道具を選ぶのも、振り下ろすのも、責任を負うのも——\nぜんぶ、君だ。',
         'だから、夢を持て。\n細部に宿る品質を愛せ。\n小さな勝ちを毎日積み上げろ。',
         '— 君の手の中に、世界を変える鍵がある。',
@@ -199,7 +198,7 @@ export const siteCopy = {
       playbook: 'プレイブックを開く ▶',
     },
     room: {
-      alt: '宇宙船の中の90年代日本のティーンの部屋。家具をクリックして探索できる。',
+      alt: '宇宙船の中の90年代日本のティーンの部屋。画像上の要素をクリックして探索できる。',
       labels: {
         playbook: '▶ プレイブック',
         equipment: '▶ 装備所',
@@ -262,7 +261,7 @@ export const siteCopy = {
       handsonShort: 'Hands',
     },
     footer: {
-      end: '▮ END OF DEMO',
+      end: '▮ QUEST CONTINUES',
       tagline: ['This site was built with love for AI-driven development.', 'Code is poetry, AI is an instrument, and your taste changes the world.'],
       languageLabel: 'LANGUAGE',
       switchTo: '日本語',
@@ -280,8 +279,7 @@ export const siteCopy = {
       title: 'AI-Driven Development Quest — Welcome to the retro dojo',
       insertCoin: '▮ INSERT COIN ▮',
       subtitle: '— with GitHub Copilot —',
-      hint: ['▶ Click the furniture', 'Learn the playbook, equip skills, and build the world with your own taste.'],
-      navHint: 'Click furniture / Use Tab to move',
+      hint: ['Click elements on the image to navigate the website', 'Learn the playbook, equip skills, and build the world with your own taste.'],
     },
     playbook: {
       title: 'Playbook — AI Dev Quest',
@@ -388,7 +386,7 @@ export const siteCopy = {
       playbook: 'Open the Playbook ▶',
     },
     room: {
-      alt: 'A 1990s Japanese teen bedroom inside a spaceship. Click furniture to explore.',
+      alt: 'A 1990s Japanese teen bedroom inside a spaceship. Click elements on the image to explore.',
       labels: {
         playbook: '▶ Playbook',
         equipment: '▶ Equipment',
