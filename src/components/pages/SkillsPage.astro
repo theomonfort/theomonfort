@@ -38,40 +38,92 @@ const mcpEntries: McpEntry[] = bySection('mcp-servers')
     install: e.data.install!,
     url: e.data.url,
   }));
+
+const loadoutSlots = [
+  {
+    href: '#skills',
+    code: 'SLOT 01',
+    icon: '🎴',
+    tone: 'cyan',
+    title: locale === 'ja' ? 'スキル装備' : 'Skill loadout',
+    label: t.skills.sections.skills.heading,
+    count: `${skillEntries.length}${t.skills.sections.skills.count}`,
+  },
+  {
+    href: '#mcp',
+    code: 'SLOT 02',
+    icon: '🔌',
+    tone: 'green',
+    title: locale === 'ja' ? 'MCP 接続' : 'MCP connectors',
+    label: t.skills.sections.mcp.heading,
+    count: `${mcpEntries.length}${t.skills.sections.mcp.count}`,
+  },
+  {
+    href: '#save-point',
+    code: 'SAVE',
+    icon: '💾',
+    tone: 'amber',
+    title: locale === 'ja' ? 'セーブポイント' : 'Save point',
+    label: t.skills.tipsTitle,
+    count: locale === 'ja' ? '一括コピー' : 'batch copy',
+  },
+];
 ---
 
 <Layout locale={locale} currentPath="/skills" title={t.skills.title}>
-  <section class="max-w-5xl mx-auto px-4 py-12">
-    <header class="mb-8">
-      <h1 class="font-pixel text-2xl md:text-4xl text-neon-magenta mb-3">{t.skills.heading}</h1>
-      <p class="font-pixel-jp text-lg text-neon-cyan">{t.skills.subtitle}</p>
-      <p class="font-pixel-jp text-sm text-phosphor/80 mt-4 max-w-2xl">
+  <section class="equipment-shell max-w-6xl mx-auto px-4 py-12">
+    <header class="equipment-hero mb-8">
+      <div class="font-pixel text-[10px] text-crt-amber tracking-[0.3em] mb-3">{t.skills.chapter}</div>
+      <h1 class="font-pixel text-2xl md:text-5xl text-neon-magenta mb-3">{t.skills.heading}</h1>
+      <p class="font-pixel-jp text-lg md:text-xl text-neon-cyan">{t.skills.subtitle}</p>
+      <p class="font-pixel-jp text-sm text-phosphor/80 mt-4 max-w-3xl">
         {t.skills.intro}
       </p>
     </header>
 
-    <section id="skills" class="scroll-mt-32 mb-16">
-      <div class="flex items-baseline gap-3 mb-6 pb-3 border-b-2 border-neon-cyan">
-        <h2 class="font-pixel-jp text-2xl text-neon-cyan">{t.skills.sections.skills.heading}</h2>
-        <span class="font-mono text-[10px] text-phosphor/50 ml-auto">{skillEntries.length}{t.skills.sections.skills.count}</span>
+    <nav class="loadout-grid mb-12" aria-label="Equipment loadout">
+      {loadoutSlots.map((slot) => (
+        <a href={slot.href} class={`loadout-slot slot-${slot.tone}`}>
+          <span class="slot-code">{slot.code}</span>
+          <span class="slot-icon" aria-hidden="true">{slot.icon}</span>
+          <span class="slot-title">{slot.title}</span>
+          <span class="slot-label">{slot.label}</span>
+          <span class="slot-count">{slot.count}</span>
+        </a>
+      ))}
+    </nav>
+
+    <section id="skills" class="inventory-section inventory-skills scroll-mt-32 mb-16">
+      <div class="inventory-heading">
+        <div>
+          <span class="inventory-kicker">LOADOUT / SKILLS</span>
+          <h2 class="font-pixel-jp text-2xl text-neon-cyan">{t.skills.sections.skills.heading}</h2>
+        </div>
+        <span class="inventory-count">{skillEntries.length}{t.skills.sections.skills.count}</span>
       </div>
-      <p class="font-pixel-jp text-sm text-phosphor/80 mb-6">
+      <p class="font-pixel-jp text-sm text-phosphor/80 mb-7">
         {t.skills.sections.skills.body}
       </p>
       <SkillGallery client:load skills={skillEntries} copy={t.skillGallery} />
     </section>
 
-    <section id="mcp" class="scroll-mt-32 mb-16">
-      <div class="flex items-baseline gap-3 mb-6 pb-3 border-b-2 border-gb-green">
-        <h2 class="font-pixel-jp text-2xl text-gb-green">{t.skills.sections.mcp.heading}</h2>
-        <span class="font-mono text-[10px] text-phosphor/50 ml-auto">{mcpEntries.length}{t.skills.sections.mcp.count}</span>
+    <section id="mcp" class="inventory-section inventory-mcp scroll-mt-32 mb-16">
+      <div class="inventory-heading">
+        <div>
+          <span class="inventory-kicker">LOADOUT / MCP</span>
+          <h2 class="font-pixel-jp text-2xl text-gb-green">{t.skills.sections.mcp.heading}</h2>
+        </div>
+        <span class="inventory-count">{mcpEntries.length}{t.skills.sections.mcp.count}</span>
       </div>
-      <p class="font-pixel-jp text-sm text-phosphor/80 mb-6">{t.skills.sections.mcp.body}</p>
+      <p class="font-pixel-jp text-sm text-phosphor/80 mb-7">{t.skills.sections.mcp.body}</p>
       <McpGallery client:load servers={mcpEntries} copy={t.mcpGallery} />
     </section>
 
-    <div class="mt-12 p-5 bg-shadow-ink/70 border-2 border-dashed border-phosphor/30">
-      <h2 class="font-pixel text-xs text-crt-amber mb-2">{t.skills.tipsTitle}</h2>
+    <div id="save-point" class="save-point scroll-mt-32 mt-12 p-5">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="save-icon" aria-hidden="true">💾</span>
+        <h2 class="font-pixel text-xs text-crt-amber">{t.skills.tipsTitle}</h2>
+      </div>
       <ul class="font-pixel-jp text-sm text-phosphor/85 space-y-1 list-disc list-inside">
         {t.skills.tips.map((tip) => <li>{tip}</li>)}
       </ul>
@@ -82,3 +134,160 @@ const mcpEntries: McpEntry[] = bySection('mcp-servers')
     </div>
   </section>
 </Layout>
+
+<style>
+  .equipment-shell {
+    position: relative;
+  }
+
+  .equipment-shell::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 420px;
+    pointer-events: none;
+    background:
+      linear-gradient(to right, rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 46, 136, 0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+    z-index: -1;
+  }
+
+  .equipment-hero {
+    border: 2px solid rgba(255, 46, 136, 0.34);
+    background:
+      linear-gradient(135deg, rgba(255,46,136,0.12), transparent 36%),
+      rgba(5, 6, 15, 0.64);
+    box-shadow: 6px 6px 0 rgba(5, 6, 15, 0.8), 0 0 24px rgba(255, 46, 136, 0.16);
+    padding: 1.5rem;
+  }
+
+  .loadout-grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .loadout-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .loadout-slot {
+    position: relative;
+    min-height: 150px;
+    border: 2px solid var(--slot-color);
+    background: rgba(5, 6, 15, 0.78);
+    box-shadow: 4px 4px 0 #05060f, 0 0 16px color-mix(in srgb, var(--slot-color) 28%, transparent);
+    color: #e8f4ff;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 0.35rem 0.9rem;
+    padding: 1rem;
+    text-decoration: none;
+    transition: transform 140ms ease, background-color 140ms ease, box-shadow 140ms ease;
+  }
+
+  .loadout-slot:hover {
+    transform: translate(-2px, -2px);
+    background: color-mix(in srgb, var(--slot-color) 9%, #05060f);
+  }
+
+  .slot-cyan { --slot-color: #00f0ff; }
+  .slot-green { --slot-color: #9bbc0f; }
+  .slot-amber { --slot-color: #ffb000; }
+
+  .slot-code {
+    grid-column: 1 / -1;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.62rem;
+    color: var(--slot-color);
+    letter-spacing: 0.12em;
+  }
+
+  .slot-icon {
+    align-self: center;
+    font-size: 2rem;
+    filter: drop-shadow(0 0 8px color-mix(in srgb, var(--slot-color) 60%, transparent));
+  }
+
+  .slot-title {
+    align-self: center;
+    font-family: 'DotGothic16', 'Noto Sans JP', sans-serif;
+    font-size: 1.25rem;
+    color: var(--slot-color);
+  }
+
+  .slot-label {
+    grid-column: 1 / -1;
+    font-family: 'DotGothic16', 'Noto Sans JP', sans-serif;
+    color: rgba(232,244,255,0.78);
+  }
+
+  .slot-count {
+    grid-column: 1 / -1;
+    justify-self: start;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: rgba(232,244,255,0.55);
+    border-top: 1px dashed color-mix(in srgb, var(--slot-color) 35%, transparent);
+    width: 100%;
+    padding-top: 0.5rem;
+  }
+
+  .inventory-section {
+    border: 2px solid rgba(232,244,255,0.14);
+    background:
+      linear-gradient(180deg, rgba(10,14,39,0.86), rgba(5,6,15,0.76)),
+      radial-gradient(circle at top right, rgba(0,240,255,0.12), transparent 34%);
+    box-shadow: 6px 6px 0 rgba(5, 6, 15, 0.88);
+    padding: 1.25rem;
+  }
+
+  .inventory-skills { border-color: rgba(0, 240, 255, 0.42); }
+  .inventory-mcp { border-color: rgba(155, 188, 15, 0.42); }
+
+  .inventory-heading {
+    display: flex;
+    align-items: end;
+    gap: 1rem;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 2px dashed rgba(232,244,255,0.18);
+  }
+
+  .inventory-kicker,
+  .inventory-count {
+    display: block;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    color: rgba(232,244,255,0.45);
+  }
+
+  .inventory-count {
+    white-space: nowrap;
+    color: rgba(255,176,0,0.75);
+  }
+
+  .save-point {
+    border: 2px dashed rgba(255,176,0,0.62);
+    background:
+      linear-gradient(90deg, rgba(255,176,0,0.10), transparent 40%),
+      rgba(5, 6, 15, 0.76);
+    box-shadow: 4px 4px 0 rgba(5,6,15,0.85), 0 0 18px rgba(255,176,0,0.12);
+  }
+
+  .save-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid #ffb000;
+    background: rgba(255,176,0,0.08);
+  }
+</style>

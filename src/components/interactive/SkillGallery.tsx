@@ -111,7 +111,7 @@ brew upgrade gh`}</code></pre>
         </div>
       </details>
 
-      <div className="flex flex-wrap items-center justify-between gap-4 font-pixel text-[10px]">
+      <div className="flex flex-wrap items-center justify-between gap-4 font-pixel text-[10px] bg-shadow-ink/70 border-2 border-phosphor/15 p-3">
         <div className="flex gap-2">
           <button
             type="button"
@@ -121,7 +121,7 @@ brew upgrade gh`}</code></pre>
             }}
             className={`px-3 py-2 border-2 transition-colors ${
               scope === 'project'
-                ? 'border-neon-cyan text-neon-cyan shadow-neon-cyan'
+                ? 'border-neon-cyan text-neon-cyan shadow-neon-cyan bg-neon-cyan/10'
                 : 'border-phosphor/30 text-phosphor/50'
             }`}
           >
@@ -135,7 +135,7 @@ brew upgrade gh`}</code></pre>
             }}
             className={`px-3 py-2 border-2 transition-colors ${
               scope === 'global'
-                ? 'border-neon-cyan text-neon-cyan shadow-neon-cyan'
+                ? 'border-neon-cyan text-neon-cyan shadow-neon-cyan bg-neon-cyan/10'
                 : 'border-phosphor/30 text-phosphor/50'
             }`}
           >
@@ -165,18 +165,21 @@ brew upgrade gh`}</code></pre>
           return (
             <li
               key={s.slug}
-              className={`relative bg-shadow-ink/80 border-2 p-4 transition-all duration-150 ${
+              className={`relative overflow-hidden bg-shadow-ink/85 border-2 p-4 transition-all duration-150 ${
                 isSelected
-                  ? 'border-neon-magenta shadow-neon-magenta'
-                  : 'border-phosphor/20 hover:border-neon-cyan'
+                  ? 'border-neon-magenta shadow-neon-magenta bg-neon-magenta/5'
+                  : 'border-phosphor/20 hover:border-neon-cyan hover:bg-neon-cyan/5'
               }`}
               onMouseEnter={() => play('hover')}
             >
+              <div className="absolute top-0 right-0 font-pixel text-[8px] px-2 py-1 border-l border-b border-phosphor/15 text-phosphor/35 bg-shadow-ink">
+                {s.group || 'SKILL'}
+              </div>
               <div className="flex items-start gap-3">
                 <button
                   type="button"
                   onClick={() => toggle(s.slug)}
-                  className="font-pixel text-base shrink-0 w-8 h-8 border-2 border-current flex items-center justify-center"
+                  className="font-pixel text-base shrink-0 w-8 h-8 border-2 border-current flex items-center justify-center bg-shadow-ink/80"
                   style={{ color: isSelected ? '#ff2e88' : '#e8f4ff' }}
                   aria-pressed={isSelected}
                   aria-label={`${copy.selectAria} ${s.name}`}
@@ -188,7 +191,7 @@ brew upgrade gh`}</code></pre>
                     {/\.(svg|png|jpg|jpeg|webp|gif)$/i.test(s.icon)
                       ? <img src={s.icon} alt="" className="h-6 w-6 object-contain shrink-0" />
                       : <span className="text-xl">{s.icon}</span>}
-                    <h3 className="font-pixel text-sm text-neon-cyan truncate">
+                    <h3 className="font-pixel text-sm text-neon-cyan truncate pr-16">
                       {s.name}
                     </h3>
                   </div>
@@ -198,9 +201,9 @@ brew upgrade gh`}</code></pre>
                   <button
                     type="button"
                     onClick={() => copyOne(s)}
-                    className="font-mono text-[10px] text-crt-amber hover:text-neon-magenta transition-colors underline-offset-4 hover:underline"
+                    className="inline-flex items-center gap-1 font-pixel text-[9px] text-crt-amber hover:text-neon-magenta transition-colors underline-offset-4 hover:underline"
                   >
-                    {isCopied ? copy.copiedOne : copy.copyOne}
+                    <span aria-hidden="true">▶</span> {isCopied ? copy.copiedOne : copy.copyOne}
                   </button>
                 </div>
               </div>
