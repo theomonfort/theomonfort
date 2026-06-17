@@ -1,41 +1,60 @@
 export type AccentColor = 'magenta' | 'cyan' | 'amber' | 'green';
 
-export const accentColorValues = {
-  magenta: '#ff2e88',
-  cyan: '#00f0ff',
-  amber: '#ffb000',
-  green: '#9bbc0f',
-} as const satisfies Record<AccentColor, string>;
+export interface AccentToken {
+  text: string;
+  border: string;
+  glow: string;
+  shadow: string;
+  hex: string;
+}
 
-export const accentClasses = {
+export const accentTokens = {
   magenta: {
-    border: 'border-neon-magenta',
     text: 'text-neon-magenta',
+    border: 'border-neon-magenta',
     glow: 'hover:shadow-neon-magenta',
+    shadow: 'shadow-neon-magenta',
+    hex: '#ff2e88',
   },
   cyan: {
-    border: 'border-neon-cyan',
     text: 'text-neon-cyan',
+    border: 'border-neon-cyan',
     glow: 'hover:shadow-neon-cyan',
+    shadow: 'shadow-neon-cyan',
+    hex: '#00f0ff',
   },
   amber: {
-    border: 'border-crt-amber',
     text: 'text-crt-amber',
+    border: 'border-crt-amber',
     glow: 'hover:shadow-neon-amber',
+    shadow: 'shadow-neon-amber',
+    hex: '#ffb000',
   },
   green: {
-    border: 'border-gb-green',
     text: 'text-gb-green',
-    glow: 'hover:shadow-neon-amber',
+    border: 'border-gb-green',
+    glow: 'hover:shadow-neon-green',
+    shadow: 'shadow-neon-green',
+    hex: '#9bbc0f',
   },
-} as const satisfies Record<
-  AccentColor,
-  { border: string; text: string; glow: string }
->;
+} as const satisfies Record<AccentColor, AccentToken>;
+
+export const accentColorValues = Object.fromEntries(
+  Object.entries(accentTokens).map(([key, value]) => [key, value.hex])
+) as Record<AccentColor, string>;
+
+export const accentClasses = accentTokens;
 
 export const accentGlowClasses = {
-  magenta: 'shadow-neon-magenta',
-  cyan: 'shadow-neon-cyan',
-  amber: 'shadow-neon-amber',
-  green: 'shadow-neon-amber',
+  magenta: accentTokens.magenta.shadow,
+  cyan: accentTokens.cyan.shadow,
+  amber: accentTokens.amber.shadow,
+  green: accentTokens.green.shadow,
 } as const satisfies Record<AccentColor, string>;
+
+export function resolveAccent(color: AccentColor, accent?: Partial<AccentToken>): AccentToken {
+  return {
+    ...accentTokens[color],
+    ...accent,
+  };
+}

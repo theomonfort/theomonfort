@@ -4,6 +4,12 @@ titleEn: GitHub Actions
 summary: GitHub's native CI/CD and automation platform. Steps written in .github/workflows/*.yml run automatically on push / PR / schedule. Public repos are free; private repos get a free tier plus pay-as-you-go. Cloud Agent and Copilot Code Review also run on top of this.
 icon: /theomonfort/icons/github-actions.svg
 color: amber
+accent:
+  text: text-crt-amber
+  border: border-crt-amber
+  glow: hover:shadow-neon-amber
+  shadow: shadow-neon-amber
+  hex: "#ffb000"
 order: 19.2
 category: secure
 related: ['cloud-agent', 'copilot-code-review', 'agentic-workflow', 'dependabot']

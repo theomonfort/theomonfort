@@ -4,6 +4,12 @@ titleEn: Cloud Agent
 summary: IDEを離れても夜通し働く"分身"。Issue を投げれば GitHub Actions ランナー上で実装し、検証まで終えた PR を持って帰ってくる。
 icon: /theomonfort/icons/cloud-agent.png
 color: amber
+accent:
+  text: text-crt-amber
+  border: border-crt-amber
+  glow: hover:shadow-neon-amber
+  shadow: shadow-neon-amber
+  hex: "#ffb000"
 order: 15
 category: develop
 related: ['partner-agent', 'copilot-code-review', 'instructions', 'mcp']

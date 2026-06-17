@@ -4,6 +4,12 @@ titleEn: Instructions
 summary: リポジトリやファイル単位でAIに常駐のルールを与える"指示書"。チーム全員のCopilotが同じ規約に従うようになる。
 icon: /theomonfort/icons/instructions.png
 color: amber
+accent:
+  text: text-crt-amber
+  border: border-crt-amber
+  glow: hover:shadow-neon-amber
+  shadow: shadow-neon-amber
+  hex: "#ffb000"
 order: 5
 category: plan
 related: ['agent-skills']

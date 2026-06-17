@@ -4,6 +4,12 @@ titleEn: GitHub Copilot
 summary: 世界で最も活用されている AI 開発ツール。SDLC 全体を AI で支える開発者プラットフォーム。
 icon: /theomonfort/github-copilot-white-icon.png
 color: cyan
+accent:
+  text: text-neon-cyan
+  border: border-neon-cyan
+  glow: hover:shadow-neon-cyan
+  shadow: shadow-neon-cyan
+  hex: "#00f0ff"
 order: 2
 category: introduction
 related: ['github', 'copilot-chat', 'cloud-agent']

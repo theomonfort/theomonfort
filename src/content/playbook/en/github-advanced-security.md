@@ -4,6 +4,12 @@ titleEn: GHAS
 summary: GitHub's paid security product suite. Split into GitHub Secret Protection ($19) and GitHub Code Security ($30) in April 2025, billed per active committer. Public repos remain free.
 icon: /theomonfort/icons/ghas.png
 color: amber
+accent:
+  text: text-crt-amber
+  border: border-crt-amber
+  glow: hover:shadow-neon-amber
+  shadow: shadow-neon-amber
+  hex: "#ffb000"
 order: 19.8
 category: secure
 related: ['secret-scanning', 'code-scanning', 'dependabot']

@@ -4,6 +4,12 @@ titleEn: Codespaces
 summary: Customizable remote development environments hosted in the cloud. The ideal AI-driven development playground for safely sandboxing AI experiments and work.
 icon: /theomonfort/github-vscode-mark.png
 color: cyan
+accent:
+  text: text-neon-cyan
+  border: border-neon-cyan
+  glow: hover:shadow-neon-cyan
+  shadow: shadow-neon-cyan
+  hex: "#00f0ff"
 order: 17
 category: develop
 related: ['cloud-agent', 'agentic-workflow', 'cli']

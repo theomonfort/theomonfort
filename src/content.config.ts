@@ -9,6 +9,13 @@ const playbook = defineCollection({
     summary: z.string(),
     icon: z.string().default('▶'),
     color: z.enum(['magenta', 'cyan', 'amber', 'green']).default('cyan'),
+    accent: z.object({
+      text: z.string(),
+      border: z.string(),
+      glow: z.string(),
+      shadow: z.string(),
+      hex: z.string(),
+    }).optional(),
     related: z.array(z.string()).default([]),
     links: z
       .array(z.object({

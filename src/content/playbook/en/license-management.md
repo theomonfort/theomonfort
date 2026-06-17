@@ -4,6 +4,12 @@ titleEn: Copilot Licence
 summary: How GitHub Copilot is billed at the Enterprise level, assigned at the Enterprise or Org level, and how policies / billing behave when a user belongs to multiple organizations — including outside collaborators and EMU guest collaborators.
 icon: /theomonfort/icons/license-crown.png
 color: magenta
+accent:
+  text: text-neon-magenta
+  border: border-neon-magenta
+  glow: hover:shadow-neon-magenta
+  shadow: shadow-neon-magenta
+  hex: "#ff2e88"
 order: 30
 category: administration
 related: ['github-copilot', 'copilot-metrics']

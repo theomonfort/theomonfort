@@ -4,6 +4,12 @@ titleEn: Token Optimization
 summary: トークンは「削る」ではなく「質を上げる」ことで結果的に減る。モデル選び・コンテキスト設計・決定的なガードレール・適切な Agent Config で、1 トークンずつを意味のあるものにする。
 icon: /theomonfort/icons/token-opt.png
 color: green
+accent:
+  text: text-gb-green
+  border: border-gb-green
+  glow: hover:shadow-neon-green
+  shadow: shadow-neon-green
+  hex: "#9bbc0f"
 order: 16.5
 category: operate
 related: ['context-engineering', 'agentic-workflow', 'instructions', 'custom-agent', 'agent-skills', 'cli', 'copilot-memory']

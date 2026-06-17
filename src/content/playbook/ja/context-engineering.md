@@ -4,6 +4,12 @@ titleEn: Context Engineering
 summary: AI に渡す文脈を設計する技術。少なすぎず、多すぎず、タスク達成に必要な情報だけを届ける。
 icon: /theomonfort/icons/context-engineering.png
 color: green
+accent:
+  text: text-gb-green
+  border: border-gb-green
+  glow: hover:shadow-neon-green
+  shadow: shadow-neon-green
+  hex: "#9bbc0f"
 order: 8.5
 category: plan
 related: ['harness-engineering', 'instructions', 'agent-skills', 'mcp']

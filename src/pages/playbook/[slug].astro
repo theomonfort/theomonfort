@@ -2,7 +2,7 @@
 import Layout from '../../components/layout/Layout.astro';
 import { render } from 'astro:content';
 import MenuArrow from '../../components/retro/MenuArrow.astro';
-import { accentColorValues } from '../../lib/theme';
+import { accentColorValues, resolveAccent } from '../../lib/theme';
 import { categories, localizedCategory } from '../../lib/playbook-categories';
 import { localizedPath, siteCopy } from '../../lib/i18n';
 import { getPlaybookEntries, playbookEntryKicker, playbookEntryTitle } from '../../lib/playbook';
@@ -47,8 +47,8 @@ const tocGroups = categories
 let _tocIdx = 0;
 
 const category = categories.find((c) => c.id === entry.data.category);
-const accentColor = category?.color ?? entry.data.color;
-const accent = accentColorValues[accentColor];
+const accentToken = resolveAccent(entry.data.color, entry.data.accent);
+const accent = accentToken.hex;
 
 // Group links by `group` field; preserve original order; treat ungrouped as "" (rendered without heading)
 const linkGroups: { name: string; items: typeof entry.data.links }[] = [];

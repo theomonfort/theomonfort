@@ -4,6 +4,12 @@ titleEn: MCP Server
 summary: MCP は AI モデルに対して追加の文脈を提供する方法である。
 icon: /theomonfort/mcp.png
 color: cyan
+accent:
+  text: text-neon-cyan
+  border: border-neon-cyan
+  glow: hover:shadow-neon-cyan
+  shadow: shadow-neon-cyan
+  hex: "#00f0ff"
 order: 4
 category: plan
 related: ['agent-skills']

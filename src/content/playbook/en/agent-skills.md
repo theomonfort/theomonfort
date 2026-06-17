@@ -4,6 +4,12 @@ titleEn: Agent Skills
 summary: Reusable instruction packs that teach Copilot agents how to handle specialized tasks — loaded automatically when the request matches, no re-explaining required.
 icon: /theomonfort/icons/agent-skills.png
 color: magenta
+accent:
+  text: text-neon-magenta
+  border: border-neon-magenta
+  glow: hover:shadow-neon-magenta
+  shadow: shadow-neon-magenta
+  hex: "#ff2e88"
 order: 6
 category: plan
 related: ['mcp', 'instructions', 'custom-agent', 'cli']

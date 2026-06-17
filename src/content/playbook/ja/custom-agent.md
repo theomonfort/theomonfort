@@ -4,6 +4,12 @@ titleEn: Custom Agent
 summary: 役割・モデル・ツール・指示・スキルを束ねた専用エージェント。"フロントエンド職人"や"レビュー番長"を作れる。
 icon: /theomonfort/icons/custom-agent.png
 color: green
+accent:
+  text: text-gb-green
+  border: border-gb-green
+  glow: hover:shadow-neon-green
+  shadow: shadow-neon-green
+  hex: "#9bbc0f"
 order: 7
 category: plan
 related: ['agent-skills', 'cli']

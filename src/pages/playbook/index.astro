@@ -1,7 +1,7 @@
 ---
 import Layout from '../../components/layout/Layout.astro';
 import MenuArrow from '../../components/retro/MenuArrow.astro';
-import { accentClasses } from '../../lib/theme';
+import { accentClasses, resolveAccent } from '../../lib/theme';
 import { categories, localizedCategory } from '../../lib/playbook-categories';
 import { localizedPath, siteCopy } from '../../lib/i18n';
 import { getPlaybookEntries, playbookEntryTitle } from '../../lib/playbook';
@@ -36,7 +36,7 @@ const CATEGORIES_WITH_PLANETS = new Set<string>(['plan', 'operate', 'review', 'd
             <>
               <a
                 href={`#cat-${g.id}`}
-                class={`font-pixel text-[10px] md:text-xs px-3 py-2 border-2 whitespace-nowrap ${c.border} ${c.text} hover:${c.glow} transition`}
+                class={`font-pixel text-[10px] md:text-xs px-3 py-2 border-2 whitespace-nowrap ${c.border} ${c.text} ${c.glow} transition`}
               >
                 {g.icon} {g.labelEn}
               </a>
@@ -88,7 +88,7 @@ const CATEGORIES_WITH_PLANETS = new Set<string>(['plan', 'operate', 'review', 'd
           <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 auto-rows-fr relative z-10">
             {g.items.map((item) => {
               const e = item.entry;
-              const ec = c;
+              const ec = resolveAccent(e.data.color, e.data.accent);
               const cardTitle = e.data.titleEn || playbookEntryTitle(item);
               const cardSubtitle = e.data.title !== cardTitle ? e.data.title : undefined;
               return (

@@ -4,6 +4,12 @@ titleEn: Dependabot
 summary: 依存関係の脆弱性を自動検出して PR で直す GitHub の bot。Dependency graph をベースに Security alerts / Security updates / Version updates の 3 段で動く。public / private 共に無料。
 icon: /theomonfort/icons/dependabot.png
 color: amber
+accent:
+  text: text-crt-amber
+  border: border-crt-amber
+  glow: hover:shadow-neon-amber
+  shadow: shadow-neon-amber
+  hex: "#ffb000"
 order: 19.3
 category: secure
 related: ['github-advanced-security', 'github-actions']
