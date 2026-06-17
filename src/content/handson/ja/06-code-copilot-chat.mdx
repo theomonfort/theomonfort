@@ -78,7 +78,23 @@ Copilot がいくつか質問してくる場合があります（例：パッケ
 
 ### 6.4 — Autopilot で実装する
 
-Plan に納得したら **「Start with Autopilot」** をクリックして実装を開始します。
+エージェントを動かし始める前に、ここまで作った土台をいったん保存しておきます：
+
+```bash
+git add .
+git commit -m "setup primitives"
+git push
+```
+
+これで、Copilot がプロジェクトを編集し始める前の安全なチェックポイントを作れます。
+
+<Aside type="positive">
+
+**💡 ターミナルのヒント**: VS Code のターミナルでは **Ctrl+I** を押すと、コマンドラインや現在のプロジェクトについて Copilot に軽く質問できます。これは **Agent モードではありません**。既定のモデルも **Auto** なので、小さな質問をしても複数のエージェントセッションを立ち上げてしまう心配はありません。
+
+</Aside>
+
+Plan に納得し、チェックポイントを push できたら **「Start with Autopilot」** をクリックして実装を開始します。
 
 ![Start with Autopilot](/theomonfort/handson/img/start-with-autopilot.png)
 

@@ -78,7 +78,23 @@ Copilot may ask you a few questions (package manager, UI framework, deployment t
 
 ### 6.4 — Implement with Autopilot
 
-Once you're happy with the plan, click **"Start with Autopilot"** to kick off the implementation.
+Before starting the agent, save the primitives you've created so far:
+
+```bash
+git add .
+git commit -m "setup primitives"
+git push
+```
+
+This gives you a clean checkpoint before Copilot starts editing the project.
+
+<Aside type="positive">
+
+**💡 Terminal tip**: In the VS Code terminal, press **Ctrl+I** to ask Copilot a quick question about the command line or current project. This is **not Agent mode**, and the default model is **Auto**, so don't worry about starting several agent sessions just by asking small terminal questions.
+
+</Aside>
+
+Once you're happy with the plan and your checkpoint is pushed, click **"Start with Autopilot"** to kick off the implementation.
 
 ![Start with Autopilot](/theomonfort/handson/img/start-with-autopilot.png)
 
