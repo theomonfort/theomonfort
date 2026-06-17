@@ -2,7 +2,7 @@
 title: フック（Hooks）
 titleEn: Hooks
 summary: エージェントの実行ライフサイクル(セッション開始・プロンプト送信・ツール実行前後・エラー・セッション終了)に独自スクリプトを差し込む仕組み。`.github/hooks/hooks.json` で設定。一番強力なのは PreToolUse で、特定コマンド(rm -rf / sudo / production への push など)を deny して agent をブロックできる。Copilot CLI と Cloud Agent の両方で使える。
-icon: /theomonfort/icons/fence.png
+icon: 🪝
 color: green
 accent:
   text: text-gb-green

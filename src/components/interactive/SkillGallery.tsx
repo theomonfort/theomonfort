@@ -41,10 +41,6 @@ function buildBatchCommand(skills: SkillEntry[], scope: 'project' | 'global'): s
   return skills.map((s) => buildCommand(s, scope)).join(' && \\\n');
 }
 
-function buildSkillRepoUrl(s: SkillEntry): string {
-  return `https://github.com/theomonfort/skills/blob/main/skills/${s.slug}/SKILL.md`;
-}
-
 const defaultCopy: Required<Props>['copy'] = {
   setupSummary: '▶ 初回セットアップ（gh skill 拡張のインストール）',
   setupIntro: '"gh skill" は GitHub CLI の拡張です。一度だけ実行:',
@@ -176,15 +172,6 @@ brew upgrade gh`}</code></pre>
               }`}
               onMouseEnter={() => play('hover')}
             >
-              <a
-                href={buildSkillRepoUrl(s)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute right-2 top-2 z-10 font-mono text-[10px] text-phosphor/50 hover:text-neon-cyan transition-colors"
-                aria-label={`Open ${s.name} skill in repository`}
-              >
-                repo ↗
-              </a>
               <div className="flex items-start gap-3">
                 <button
                   type="button"
@@ -197,7 +184,7 @@ brew upgrade gh`}</code></pre>
                   {isSelected ? '✓' : ''}
                 </button>
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-2 pr-14">
+                  <div className="flex items-center gap-2 mb-2">
                     {/\.(svg|png|jpg|jpeg|webp|gif)$/i.test(s.icon)
                       ? <img src={s.icon} alt="" className="h-6 w-6 object-contain shrink-0" />
                       : <span className="text-xl">{s.icon}</span>}
