@@ -41,22 +41,32 @@ In Copilot Chat's mode switcher, select **"Plan"**.
 Copy the following prompt as-is and paste it into Copilot Chat:
 
 ````
-Build a small Astro site (English only). Work on a new branch (e.g. feature/playbook-site).
+Build the Playbook landing page in Japanese only (work on a new branch: `feature/playbook-landing-page`).
 
-- Create a grid-style index page that lists every entry in `src/content/playbook/*.md` as a tile (icon + title + short summary).
-- Clicking a tile opens that entry directly in presentation mode (full-screen slide deck) — no intermediate detail page.
-- Presentation-mode behavior:
-  - Each `##` heading in the markdown becomes a new slide. The title slide is auto-generated from the frontmatter (`title`, `summary`, `icon`).
-  - Each slide has its own unique URL (e.g. `/playbook/[slug]/[index]`). 1 URL = 1 slide — do not render every slide on the same page.
-  - Keyboard: `←` / `→` to move between slides, `Esc` to return to the index.
-  - A vertical navigation menu on the left of the screen. **This is NOT a slide list for the current entry — it lists the other playbook entries (the other `.md` files under `src/content/playbook/` such as GitHub, GitHub Copilot, Agent Skills, etc.) so the user can jump between entries.** Clicking an entry navigates to that entry's first slide while staying in presentation mode. Highlight the currently-open entry.
-  - Use each entry's frontmatter `color` as the deck's accent color (slide border, headings).
-- Render any ` ```mermaid ` code blocks inside the markdown as Mermaid diagrams (client-side is fine).
+Requirements:
+* Use `src/content/playbook/ja/*.md` as the source.
+* Create `/playbook` with cards grouped by `category` (2 columns of cards).
+* Use `src/lib/playbook-categories.ts` for category labels, actor names, avatars, descriptions, colors etc.
+* Each card shows icon, title, summary, and uses the `accent` frontmatter for colors.
+* Add decorative floating assets near the matching SDLC category (about 450px wide):
+    * introduction → `public/planet-introduction.webp`
+    * plan → `public/planet-plan.webp`
+    * develop → `public/planet-develop.webp`
+    * review → `public/planet-review.webp`
+    * secure → `public/planet-secure.webp`
+    * operate → `public/planet-operate.webp`
+    * administration → `public/planet-administration.webp`
+* Clicking a card opens a detail page that renders the full Markdown.
+* Detail page has a “Back to Playbook” button.
+
+Add a top “SDLC navigation chain” above the introduction section:
+  Plan → Develop → Review → Test & Secure → Operate
+  Each item should be a bordered pixel button using the matching category color, with arrows between items, and should link to the category anchor.
 
 Once `npm run dev` confirms it works, commit and push your changes and open a pull request titled "Playbook site foundations".
 ````
 
-Copilot may ask you a few questions (package manager, UI framework, deployment target, etc.). It should have read `copilot-instructions.md` and default to Astro / Tailwind / npm, but answer any gaps as they come up.
+Copilot may ask you a few questions (package manager, UI framework, deployment target, etc.). It should have read `copilot-instructions.md` and default to Astro / Tailwind / pnpm, but answer any gaps as they come up.
 
 ⏱ About 3 minutes
 
@@ -90,7 +100,7 @@ From the port-forwarding notification, click **"Open in browser"** and try it ou
 
 <Aside type="positive">
 
-**Try this**: Click through a few tiles on the grid and try out presentation mode. Move between slides with `←` / `→`, jump around by clicking the progress bar, and `Esc` returns to the index. Jot down anything that feels off, UI tweaks you'd like, or features you wish were there (we'll file them as Issues in the next step).
+**Try this**: Open `/playbook`, check that the category sections use the right colors, the cards are in two columns on desktop, and the planet assets feel large enough. Click a few tiles, confirm the detail pages render the full Markdown, and use the Back to Playbook button. Jot down anything that feels off, UI tweaks you'd like, or features you wish were there (we'll file them as Issues in the next step).
 
 </Aside>
 
@@ -107,29 +117,29 @@ The Issues below are **just one example** of the improvements you might want, ba
 ```
 Use the github-issues skill to create the following improvements as individual Issues in this repository.
 
-1. Title: Add a left sidebar table of contents inside presentation mode
-   Details: While presenting, pressing `T` should toggle a collapsible left sidebar listing every entry in the repository. The currently displayed entry is highlighted. Clicking another entry switches its presentation, staying in presentation mode and jumping to slide 1 of the new entry.
+1. Title: Add category descriptions and actors to the Playbook landing page
+   Details: Use `src/lib/playbook-categories.ts` to show each category's actor avatar, actor name, and description above that category's cards.
 
-2. Title: Group the sidebar TOC by category
-   Details: Build on Issue 1. Instead of a flat list, group entries by frontmatter `category` (introduction / plan / develop / review / secure / operate). Each group gets a pixel-font header with a category-specific color. Each entry shows as "number + icon + titleEn".
+2. Title: Tune planet placement and sizing
+   Details: Make each `planet-*.webp` feel like a large decorative background element. It should be visible, but not cover text or block clicks. Check desktop and mobile separately.
 
-3. Title: Break the index page into category sections
-   Details: Right now every entry sits in a single flat grid. Split them by `category`, with a heading and 1–2 lines of description per section (e.g. PLAN = set up the harness before you build, DEVELOP = write code with the AI, and so on).
+3. Title: Add active styling to the SDLC navigation chain
+   Details: The top Plan → Develop → Review → Test & Secure → Operate buttons should use matching category colors and have hover/focus states. If possible, highlight the category currently in view.
 
-4. Title: Add a "links" slide at the end of each entry
-   Details: The frontmatter `links` (already grouped) should appear as the last slide of each entry, displayed grouped by their group, each with a subheading. Easy to reference while presenting.
+4. Title: Improve Playbook detail page typography
+   Details: The detail page should render headings, tables, lists, code blocks, blockquotes, and links with the same retro theme as the landing page.
 
-5. Title: Replace the auto-generated title slide with an Octocat "in one line" hero slide
-   Details: Replace the plain auto-generated title slide with a more visual hero. Put an Octocat (Mona) image on the left and a bordered dialog on the right showing frontmatter `summary` as the speech. Add a small pixel-font label "in one line" in the top-left of the slide.
+5. Title: Render Mermaid diagrams in detail pages
+   Details: If a Markdown detail page contains a ` ```mermaid ` block, render it as a Mermaid diagram instead of plain code.
 
-6. Title: [Bug] Mermaid diagrams on non-initial slides aren't rendered
-   Details: Putting a ` ```mermaid ` block on any slide past slide 1 leaves a blank area. Mermaid only runs once at mount; we need to re-run `mermaid.run()` against the active slide's container whenever the visible slide changes.
+6. Title: [Bug] Public asset paths fail under the `/theomonfort/` base path
+   Details: Icons, planets, and images should load correctly when the site is served from `/theomonfort/`, not only from `/`.
 
-7. Title: [Bug] Slide content bunches up in the top-left, leaving empty space at bottom-right
-   Details: Slide content currently anchors to the top-left, with a lot of whitespace at the bottom-right. Use flex/grid in the slide area to center horizontally and vertically — heading slightly above center, body near the middle.
+7. Title: [Bug] Mobile layout has overlapping planets or cramped cards
+   Details: On narrow screens, cards should be one column, planets should shrink or move behind sections, and text should remain readable.
 
-8. Title: [Bug] Slide layout breaks and keyboard nav is unusable on mobile widths
-   Details: Below `max-width: 768px`, keyboard navigation is unavailable and slides overflow the viewport. On narrow widths, disable presentation mode and fall back to a single vertical scroll view that renders the whole entry as a long-form page.
+8. Title: Add a simple search or filter for Playbook cards
+   Details: Add a small client-side search box that filters cards by title and summary while keeping category grouping understandable.
 ```
 
 You can find the resulting Issues in the Issues tab of your repository. We'll have Cloud Agent / Copilot CLI implement them in the next sections.

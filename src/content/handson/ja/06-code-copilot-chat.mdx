@@ -41,22 +41,32 @@ Copilot Chat のモード切替えから **「Plan」** を選択してくださ
 以下のプロンプトをそのままコピーして Copilot Chat に貼り付けてください：
 
 ````
-小さな Astro サイトを作ってください（日本語のみ）。新しいブランチ（例：feature/playbook-site）で作業してください。
+Build the Playbook landing page in Japanese only (work on a new branch: `feature/playbook-landing-page`).
 
-- `src/content/playbook/*.md` の全エントリを グリッド形式のインデックスページ にタイル（アイコン + タイトル + 短いサマリー）として一覧表示する。
-- タイルをクリックすると、そのエントリが直接 プレゼンテーションモード（フルスクリーンのスライドデッキ）で開く ── 中間の詳細ページは無し。
-- プレゼンテーションモードの挙動：
-  - Markdown 内の各 `##` 見出しが 1 スライドになる。タイトルスライドは frontmatter（`title`、`summary`、`icon`）から自動生成。
-  - 各スライドはそれぞれ固有の URL を持つ（例：`/playbook/[slug]/[index]`）。1 URL = 1 スライドで、全スライドを 1 ページにまとめてはいけない。
-  - キーボード操作：`←` / `→` でスライド送り、`Esc` でインデックスに戻る。
-  - 画面左側に縦型のナビゲーションメニューを表示する。**これは現在表示中のエントリー内のスライド一覧ではなく、他のプレイブックエントリー（`src/content/playbook/` 配下の他の `.md` ファイル ── GitHub、GitHub Copilot、Agent Skills など）への切替メニュー** とする。クリックするとそのエントリーのスライド 1 枚目に遷移し、プレゼンテーションモードは維持。現在開いているエントリーはハイライトする。
-  - frontmatter の `color` をデッキのアクセントカラー（スライド枠線、見出し）として使う。
-- Markdown 内の ` ```mermaid ` コードブロックは Mermaid 図 としてレンダリングする（クライアントサイドで可）。
+Requirements:
+* Use `src/content/playbook/ja/*.md` as the source.
+* Create `/playbook` with cards grouped by `category` (2 columns of cards).
+* Use `src/lib/playbook-categories.ts` for category labels, actor names, avatars, descriptions, colors etc.
+* Each card shows icon, title, summary, and uses the `accent` frontmatter for colors.
+* Add decorative floating assets near the matching SDLC category (about 450px wide):
+    * introduction → `public/planet-introduction.webp`
+    * plan → `public/planet-plan.webp`
+    * develop → `public/planet-develop.webp`
+    * review → `public/planet-review.webp`
+    * secure → `public/planet-secure.webp`
+    * operate → `public/planet-operate.webp`
+    * administration → `public/planet-administration.webp`
+* Clicking a card opens a detail page that renders the full Markdown.
+* Detail page has a “Back to Playbook” button.
 
-`npm run dev` で動作確認できたら、変更をコミット & プッシュし、"Playbook site foundations" というタイトルでプルリクエストを作成してください。
+Add a top “SDLC navigation chain” above the introduction section:
+  Plan → Develop → Review → Test & Secure → Operate
+  Each item should be a bordered pixel button using the matching category color, with arrows between items, and should link to the category anchor.
+
+Once `npm run dev` confirms it works, commit and push your changes and open a pull request titled "Playbook site foundations".
 ````
 
-Copilot がいくつか質問してくる場合があります（例：パッケージマネージャー、UI フレームワーク、デプロイ先など）。`copilot-instructions.md` を読んでいるはずなので Astro / Tailwind / npm を前提に答えてくれるはずですが、不足があれば回答してあげましょう。
+Copilot がいくつか質問してくる場合があります（例：パッケージマネージャー、UI フレームワーク、デプロイ先など）。`copilot-instructions.md` を読んでいるはずなので Astro / Tailwind / pnpm を前提に答えてくれるはずですが、不足があれば回答してあげましょう。
 
 ⏱ 約3分
 
@@ -90,7 +100,7 @@ npm run dev
 
 <Aside type="positive">
 
-**やってみよう**: グリッドからいくつかタイルをクリックして、プレゼンテーションモードを試してみてください。`←` / `→` でスライド送り、進捗バーのセグメントをクリックでジャンプ、`Esc` でインデックスに戻ります。挙動がおかしい箇所、UI の改善点、追加したい機能などをメモしておきましょう（次のステップでまとめて Issue 化します）。
+**やってみよう**: `/playbook` を開き、カテゴリごとの色、デスクトップでカードが 2 カラムになっていること、planet assets が十分大きく見えることを確認します。いくつかタイルをクリックし、詳細ページで Markdown 全文が表示されること、Back to Playbook ボタンで戻れることも確認しましょう。挙動がおかしい箇所、UI の改善点、追加したい機能などをメモしておきましょう（次のステップでまとめて Issue 化します）。
 
 </Aside>
 
@@ -107,29 +117,29 @@ Copilot Chat に以下のプロンプトを投げて、改善点を **8 件** Is
 ```
 github-issues skill を使って、以下の改善点をこのリポジトリの Issue として個別に作成してください。
 
-1. タイトル: プレゼンテーションモードに左サイドバーの目次を追加する
-   詳細: プレゼン中に `T` キーで左側に折りたためる目次サイドバーを表示する。リポジトリ内の全エントリを一覧表示し、現在表示中のエントリをハイライトする。クリックで別エントリのプレゼンに切り替えられ、その際もプレゼンテーションモードを維持したまま新エントリの 1 枚目に遷移する。
+1. タイトル: Playbook landing page に category description と actor を追加する
+   詳細: `src/lib/playbook-categories.ts` を使い、各カテゴリの actor avatar、actor name、description をカード一覧の上に表示する。
 
-2. タイトル: 目次サイドバーをカテゴリーで分類する
-   詳細: 1 で追加した目次をフラット一覧ではなく frontmatter の `category`（introduction / plan / develop / review / secure / operate）ごとにグループ化する。各グループに pixel フォントの見出しを付け、カテゴリー別の色を使う。各エントリは「番号 + icon + titleEn」のフォーマットで表示する。
+2. タイトル: planet の配置とサイズを調整する
+   詳細: 各 `planet-*.webp` を大きな装飾背景として見せる。テキストを隠したりクリックを邪魔したりしないように、desktop / mobile の両方で調整する。
 
-3. タイトル: インデックスページをカテゴリーセクションに分割する
-   詳細: 現状は全エントリが 1 つのフラットなグリッドに並んでいる。`category` ごとにセクションを分け、各セクションに見出し + 1〜2 行の説明文を付ける（例：PLAN = 実装前のハーネスを整える、DEVELOP = AI と一緒にコードを書く など）。
+3. タイトル: SDLC navigation chain に active styling を追加する
+   詳細: 上部の Plan → Develop → Review → Test & Secure → Operate ボタンにカテゴリカラーの hover / focus state を付ける。可能なら現在表示中のカテゴリをハイライトする。
 
-4. タイトル: 各エントリの末尾に「リンク集」スライドを追加する
-   詳細: frontmatter の `links`（group ごとにまとまっている）を、各エントリ最後のスライドとして group ごとに小見出しを付けて一覧表示する。プレゼン中に参考資料へ素早くアクセスできるようにする。
+4. タイトル: Playbook detail page の typography を改善する
+   詳細: 詳細ページで見出し、テーブル、リスト、コードブロック、blockquote、リンクが landing page と同じレトロテーマで読みやすく表示されるようにする。
 
-5. タイトル: 自動生成のタイトルスライドを Octocat「一言で」ヒーロースライドに置き換える
-   詳細: 現状の素朴な自動生成タイトルスライドを、よりビジュアルなヒーロースライドに置き換える。左に Octocat（Mona）キャラクター画像、右に枠付きのダイアログを配置し、frontmatter の `summary` をセリフとして表示する。スライド左上には pixel フォントで小さく「一言で」のラベルを置く。
+5. タイトル: 詳細ページで Mermaid 図をレンダリングする
+   詳細: Markdown 詳細ページに ` ```mermaid ` ブロックがある場合、通常のコードブロックではなく Mermaid 図として表示する。
 
-6. タイトル: 【バグ】2 枚目以降のスライドの Mermaid 図が描画されない
-   詳細: 1 枚目以外のスライドに ` ```mermaid ` ブロックを置くと空白のまま描画されない。Mermaid は初回マウント時しか実行されないため、スライド切り替え時に該当領域に対して `mermaid.run()` を再実行する必要がある。スライドが表示状態になった瞬間に再レンダリングするように修正する。
+6. タイトル: 【バグ】`/theomonfort/` base path で public asset が読み込めない
+   詳細: icons、planets、images が `/` 直下だけでなく `/theomonfort/` 配下で配信された場合も正しく読み込めるようにする。
 
-7. タイトル: 【バグ】スライド本文が左上に偏って右下に大きな空白ができる
-   詳細: 現状コンテンツが左上に寄り、右下に大きな空白ができてしまう。スライド領域内で flex/grid を使い、見出しと本文を縦横ともに中央へ揃える。タイトルはやや上、本文は中央付近に配置する。
+7. タイトル: 【バグ】モバイルで planet が重なる / card が窮屈になる
+   詳細: 狭い画面ではカードを 1 カラムにし、planet を縮小または背景側に逃がして、本文の読みやすさを保つ。
 
-8. タイトル: 【バグ】モバイル幅でスライドが崩れキーボード操作も使えない
-   詳細: `max-width: 768px` 以下ではキーボードナビゲーションが使えず、スライド本体も画面からはみ出してしまう。狭い画面ではプレゼンテーションモードを無効化し、エントリ全体を 1 枚の縦長ページとしてスクロール表示できるフォールバックを追加する。
+8. タイトル: Playbook card の簡易検索 / フィルターを追加する
+   詳細: タイトルと summary でカードを絞り込める client-side search box を追加する。category grouping は分かりやすく維持する。
 ```
 
 作成された Issue のリストはリポジトリの Issues タブで確認できます。次の章以降で Cloud Agent / Copilot CLI に実装させます。
