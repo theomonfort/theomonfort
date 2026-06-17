@@ -14,7 +14,25 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-### 6.1 — モデルを Claude Opus 4.8 に切り替える
+### 6.1 — 実装前に instruction setup を保存する
+
+実装プロンプトを送る前に、ここまで作った土台をいったん保存しておきます。これにより、Copilot が instruction file とフロントエンドルールをリポジトリ内の前提として確実に参照できます：
+
+```bash
+git add .
+git commit -m "setup primitives"
+git push
+```
+
+これで、Copilot が計画や編集を始める前の安全なチェックポイントを作れます。
+
+<Aside type="positive">
+
+**💡 ターミナルのヒント**: VS Code のターミナルでは **Ctrl+I** を押すと、コマンドラインや現在のプロジェクトについて Copilot に軽く質問できます。これは **Agent モードではありません**。既定のモデルも **Auto** なので、小さな質問をしても複数のエージェントセッションを立ち上げてしまう心配はありません。
+
+</Aside>
+
+### 6.2 — モデルを Claude Opus 4.8 に切り替える
 
 Copilot Chat 画面下部のモデルセレクターをクリックし、**Claude Opus 4.8** を選択します。
 
@@ -26,7 +44,7 @@ Copilot Chat 画面下部のモデルセレクターをクリックし、**Claud
 
 </Aside>
 
-### 6.2 — Plan モードに切り替える
+### 6.3 — Plan モードに切り替える
 
 Copilot Chat のモード切替えから **「Plan」** を選択してください。
 
@@ -36,7 +54,7 @@ Copilot Chat のモード切替えから **「Plan」** を選択してくださ
 
 </Aside>
 
-### 6.3 — 実装計画を依頼する
+### 6.4 — 実装計画を依頼する
 
 以下のプロンプトをそのままコピーして Copilot Chat に貼り付けてください：
 
@@ -76,25 +94,9 @@ Copilot がいくつか質問してくる場合があります（例：パッケ
 
 </Aside>
 
-### 6.4 — Autopilot で実装する
+### 6.5 — Autopilot で実装する
 
-エージェントを動かし始める前に、ここまで作った土台をいったん保存しておきます：
-
-```bash
-git add .
-git commit -m "setup primitives"
-git push
-```
-
-これで、Copilot がプロジェクトを編集し始める前の安全なチェックポイントを作れます。
-
-<Aside type="positive">
-
-**💡 ターミナルのヒント**: VS Code のターミナルでは **Ctrl+I** を押すと、コマンドラインや現在のプロジェクトについて Copilot に軽く質問できます。これは **Agent モードではありません**。既定のモデルも **Auto** なので、小さな質問をしても複数のエージェントセッションを立ち上げてしまう心配はありません。
-
-</Aside>
-
-Plan に納得し、チェックポイントを push できたら **「Start with Autopilot」** をクリックして実装を開始します。
+Plan に納得したら **「Start with Autopilot」** をクリックして実装を開始します。
 
 ![Start with Autopilot](/theomonfort/handson/img/start-with-autopilot.png)
 
@@ -120,7 +122,7 @@ npm run dev
 
 </Aside>
 
-### 6.5 — 改善点を Issue 化する
+### 6.6 — 改善点を Issue 化する
 
 ここで重要なポイント — **Copilot Chat に直接「ここを直して」と頼むのではなく、それぞれを GitHub Issue として登録します**。Step 11（CODE: Cloud Agent）で一部の Issue を Cloud Agent に **まとめて並列に** 実装してもらい、残りは Step 13（CODE: Copilot CLI）で `/fleet` を使って並列実装するためです。
 
