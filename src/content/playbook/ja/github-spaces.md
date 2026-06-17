@@ -4,6 +4,12 @@ titleEn: Spaces
 summary: "Copilot に渡したい文脈を、チームで整理・共有できる場所。コード、Issue、PR、ドキュメント、メモ、画像、指示をまとめて、質問への回答をその文脈に grounding する。"
 icon: /theomonfort/icons/github-spaces.png
 color: magenta
+accent:
+  text: text-neon-magenta
+  border: border-neon-magenta
+  glow: hover:shadow-neon-magenta
+  shadow: shadow-neon-magenta
+  hex: "#ff2e88"
 order: 17.5
 category: develop
 related: ['context-engineering', 'copilot-chat', 'mcp', 'codespaces']

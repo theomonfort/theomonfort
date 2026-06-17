@@ -4,6 +4,12 @@ titleEn: Spaces
 summary: "A shared place to organize the context you want Copilot to use: code, issues, pull requests, docs, notes, images, uploads, and instructions that ground Copilot's answers."
 icon: /theomonfort/icons/github-spaces.png
 color: magenta
+accent:
+  text: text-neon-magenta
+  border: border-neon-magenta
+  glow: hover:shadow-neon-magenta
+  shadow: shadow-neon-magenta
+  hex: "#ff2e88"
 order: 17.5
 category: develop
 related: ['context-engineering', 'copilot-chat', 'mcp', 'codespaces']

@@ -4,6 +4,12 @@ titleEn: Hooks
 summary: A mechanism for injecting custom scripts into the agent execution lifecycle (session start, prompt submission, pre/post tool execution, error, session end). Configured via `.github/hooks/hooks.json`. The most powerful hook is PreToolUse, which can deny specific commands (rm -rf, sudo, pushes to production, etc.) to block the agent. Works with both Copilot CLI and Cloud Agent.
 icon: 🪝
 color: green
+accent:
+  text: text-gb-green
+  border: border-gb-green
+  glow: hover:shadow-neon-green
+  shadow: shadow-neon-green
+  hex: "#9bbc0f"
 order: 7.5
 category: plan
 related: ['harness-engineering', 'custom-agent', 'instructions']

@@ -70,13 +70,6 @@ const mcpEntries: McpEntry[] = bySection('mcp-servers')
       <McpGallery client:load servers={mcpEntries} copy={t.mcpGallery} />
     </section>
 
-    <div class="mt-12 p-5 bg-shadow-ink/70 border-2 border-dashed border-phosphor/30">
-      <h2 class="font-pixel text-xs text-crt-amber mb-2">{t.skills.tipsTitle}</h2>
-      <ul class="font-pixel-jp text-sm text-phosphor/85 space-y-1 list-disc list-inside">
-        {t.skills.tips.map((tip) => <li>{tip}</li>)}
-      </ul>
-    </div>
-
     <div class="mt-16 text-center">
       <a href={localizedPath(locale, '/')} class="font-pixel text-[10px] text-phosphor/60 hover:text-neon-magenta">{t.common.backHome}</a>
     </div>

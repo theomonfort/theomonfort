@@ -4,6 +4,12 @@ titleEn: Hands-on
 summary: A workshop where you get hands-on with the concepts in this playbook by rebuilding a simplified version of this very playbook site from scratch — together with Copilot. Touches MCP / Instructions / Agent Skills / Plan mode / Cloud Agent / Code Review / Agentic Workflow end-to-end.
 icon: /theomonfort/icons/handson.png
 color: cyan
+accent:
+  text: text-neon-cyan
+  border: border-neon-cyan
+  glow: hover:shadow-neon-cyan
+  shadow: shadow-neon-cyan
+  hex: "#00f0ff"
 order: 3
 category: introduction
 related: ['github-copilot', 'codespaces', 'mcp']

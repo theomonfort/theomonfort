@@ -4,6 +4,12 @@ titleEn: Partner agents
 summary: A mechanism to launch coding agents other than Copilot — such as Claude or Codex — from VS Code and GitHub with the same feel as Copilot.
 icon: /theomonfort/icons/partner-agent.png
 color: magenta
+accent:
+  text: text-neon-magenta
+  border: border-neon-magenta
+  glow: hover:shadow-neon-magenta
+  shadow: shadow-neon-magenta
+  hex: "#ff2e88"
 order: 15.5
 category: develop
 related: ['cloud-agent', 'copilot-chat', 'github-copilot']

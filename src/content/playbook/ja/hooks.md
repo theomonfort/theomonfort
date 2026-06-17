@@ -4,6 +4,12 @@ titleEn: Hooks
 summary: エージェントの実行ライフサイクル(セッション開始・プロンプト送信・ツール実行前後・エラー・セッション終了)に独自スクリプトを差し込む仕組み。`.github/hooks/hooks.json` で設定。一番強力なのは PreToolUse で、特定コマンド(rm -rf / sudo / production への push など)を deny して agent をブロックできる。Copilot CLI と Cloud Agent の両方で使える。
 icon: 🪝
 color: green
+accent:
+  text: text-gb-green
+  border: border-gb-green
+  glow: hover:shadow-neon-green
+  shadow: shadow-neon-green
+  hex: "#9bbc0f"
 order: 7.5
 category: plan
 related: ['harness-engineering', 'custom-agent', 'instructions']

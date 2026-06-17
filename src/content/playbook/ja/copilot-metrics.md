@@ -4,6 +4,12 @@ titleEn: Copilot Metrics
 summary: GitHub Copilot の利用状況・効果を可視化するメトリクス API とダッシュボード。詳細は coming soon。
 icon: /theomonfort/icons/copilot-metrics.png
 color: green
+accent:
+  text: text-gb-green
+  border: border-gb-green
+  glow: hover:shadow-neon-green
+  shadow: shadow-neon-green
+  hex: "#9bbc0f"
 order: 18
 category: operate
 related: ['agentic-workflow', 'copilot-memory']

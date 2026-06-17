@@ -4,6 +4,12 @@ titleEn: Context Engineering
 summary: The art of designing the context you pass to AI — not too little, not too much, just the information needed to complete the task.
 icon: /theomonfort/icons/context-engineering.png
 color: green
+accent:
+  text: text-gb-green
+  border: border-gb-green
+  glow: hover:shadow-neon-green
+  shadow: shadow-neon-green
+  hex: "#9bbc0f"
 order: 8.5
 category: plan
 related: ['harness-engineering', 'instructions', 'agent-skills', 'mcp']

@@ -36,7 +36,7 @@ const CATEGORIES_WITH_PLANETS = new Set<string>(['plan', 'operate', 'review', 'd
             <>
               <a
                 href={`#cat-${g.id}`}
-                class={`font-pixel text-[10px] md:text-xs px-3 py-2 border-2 whitespace-nowrap ${c.border} ${c.text} hover:${c.glow} transition`}
+                class={`font-pixel text-[10px] md:text-xs px-3 py-2 border-2 whitespace-nowrap ${c.border} ${c.text} ${c.glow} transition`}
               >
                 {g.icon} {g.labelEn}
               </a>

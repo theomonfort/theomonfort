@@ -4,6 +4,12 @@ titleEn: Harness Engineering
 summary: エージェントが安全かつ効果的に動ける足場の設計。ツール群、制約、権限、外部接続の設計術。
 icon: /theomonfort/icons/harness-engineering.png
 color: green
+accent:
+  text: text-gb-green
+  border: border-gb-green
+  glow: hover:shadow-neon-green
+  shadow: shadow-neon-green
+  hex: "#9bbc0f"
 order: 8
 category: plan
 related: ['agentic-workflow', 'agent-skills', 'mcp']

@@ -4,6 +4,12 @@ titleEn: Copilot CLI
 summary: Copilot living in the terminal. An IDE-agnostic "colleague in the terminal" that lets you move between planning → implementation → review with just Shift+Tab.
 icon: /theomonfort/icons/cli.png
 color: cyan
+accent:
+  text: text-neon-cyan
+  border: border-neon-cyan
+  glow: hover:shadow-neon-cyan
+  shadow: shadow-neon-cyan
+  hex: "#00f0ff"
 order: 14
 category: develop
 related: ['agent-skills', 'mcp', 'custom-agent', 'cloud-agent']

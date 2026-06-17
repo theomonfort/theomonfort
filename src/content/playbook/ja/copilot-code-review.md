@@ -4,6 +4,12 @@ titleEn: Copilot Code Review
 summary: Copilot をレビュアーとして手動・自動でアサインできる機能。コードの意図を読み、コメント・概要・修正提案を返す ── 人間レビューの前段ノイズ取りから自動化まで。
 icon: /theomonfort/icons/copilot-code-review.png
 color: green
+accent:
+  text: text-gb-green
+  border: border-gb-green
+  glow: hover:shadow-neon-green
+  shadow: shadow-neon-green
+  hex: "#9bbc0f"
 order: 9
 category: review
 related: ['cloud-agent', 'instructions', 'agentic-workflow']

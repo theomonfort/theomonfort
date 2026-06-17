@@ -4,6 +4,12 @@ titleEn: GitHub Copilot
 summary: The world's most widely used AI development tool. An orchestrator that lets you freely combine major AI models with a variety of surfaces.
 icon: /theomonfort/github-copilot-white-icon.png
 color: cyan
+accent:
+  text: text-neon-cyan
+  border: border-neon-cyan
+  glow: hover:shadow-neon-cyan
+  shadow: shadow-neon-cyan
+  hex: "#00f0ff"
 order: 2
 category: introduction
 related: ['github', 'copilot-chat', 'cloud-agent']

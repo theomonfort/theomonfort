@@ -4,6 +4,12 @@ titleEn: Copilot Chat
 summary: The synchronous conversation surface for Copilot. Available across IDE, GitHub.com, and Mobile, with the deepest harness on the IDE side.
 icon: /theomonfort/icons/copilot-chat.png
 color: cyan
+accent:
+  text: text-neon-cyan
+  border: border-neon-cyan
+  glow: hover:shadow-neon-cyan
+  shadow: shadow-neon-cyan
+  hex: "#00f0ff"
 order: 3.5
 category: develop
 related: ['mcp', 'instructions', 'cli', 'cloud-agent']
