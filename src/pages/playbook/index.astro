@@ -1,7 +1,7 @@
 ---
 import Layout from '../../components/layout/Layout.astro';
 import MenuArrow from '../../components/retro/MenuArrow.astro';
-import { accentClasses, resolveAccent } from '../../lib/theme';
+import { accentClasses } from '../../lib/theme';
 import { categories, localizedCategory } from '../../lib/playbook-categories';
 import { localizedPath, siteCopy } from '../../lib/i18n';
 import { getPlaybookEntries, playbookEntryTitle } from '../../lib/playbook';
@@ -88,7 +88,7 @@ const CATEGORIES_WITH_PLANETS = new Set<string>(['plan', 'operate', 'review', 'd
           <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 auto-rows-fr relative z-10">
             {g.items.map((item) => {
               const e = item.entry;
-              const ec = resolveAccent(e.data.color, e.data.accent);
+              const ec = c;
               const cardTitle = e.data.titleEn || playbookEntryTitle(item);
               const cardSubtitle = e.data.title !== cardTitle ? e.data.title : undefined;
               return (
