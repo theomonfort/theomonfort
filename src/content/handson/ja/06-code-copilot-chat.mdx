@@ -65,7 +65,7 @@ Copilot Chat のモード切替えから **「Plan」** を選択してくださ
 * `src/content/playbook/ja/*.md` をソースとして使う。
 * `/playbook` を作成し、カードを `category` ごとにグループ化する（カードは 2 カラム）。
 * カテゴリのラベル、担当者名、アバター、説明、色などは `src/lib/playbook-categories.ts` を使う。
-* 各カードには `icon`、`title`、`summary` を表示し、色には frontmatter の `accent` を使う。
+* 各カードには `icon`、`title`、`summary` を表示し、色には frontmatter の `color` を使う（`cyan`、`magenta`、`amber`、`green`）。
 * 対応する SDLC カテゴリの近くに装飾用の惑星画像を配置する（幅は約 450px）:
     * introduction → `public/planet-introduction.webp`
     * plan → `public/planet-plan.webp`
