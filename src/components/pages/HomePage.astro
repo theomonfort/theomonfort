@@ -14,7 +14,7 @@ const t = siteCopy[locale];
 <Layout locale={locale} currentPath="/" title={t.home.title}>
   <section class="hero-room relative min-h-[calc(100vh-72px)] overflow-hidden">
     <div class="absolute inset-0 flex items-center justify-center">
-      <PixelRoom immersive={true} locale={locale} />
+      <PixelRoom immersive={true} locale={locale} src="/theomonfort/room/equipment-room.png" />
     </div>
 
     <div class="relative z-10 flex flex-col items-center justify-between min-h-[calc(100vh-72px)] pt-2 md:pt-3 pb-8 md:pb-12 px-4 pointer-events-none">
@@ -30,10 +30,11 @@ const t = siteCopy[locale];
 
       <div class="text-center font-pixel text-[10px] text-phosphor/80 space-y-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
         <p class="font-body text-sm md:text-base text-phosphor/90 mb-3 max-w-xl mx-auto leading-relaxed">
-          <span class="text-crt-amber">{t.home.hint[0].replace(/^▶\s*/, '▶ ')}</span><br />
+          <span class="inline-flex items-center justify-center gap-2 text-crt-amber">
+            <MenuArrow color="text-crt-amber" /> <span>{t.home.hint[0]}</span>
+          </span><br />
           {t.home.hint[1]}
         </p>
-        <p><MenuArrow color="text-crt-amber" /> {t.home.navHint}</p>
       </div>
     </div>
   </section>
