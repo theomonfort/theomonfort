@@ -81,8 +81,9 @@ export default function McpGallery({ servers, copy = defaultCopy }: Props) {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-4 font-pixel text-[10px] bg-shadow-ink/70 border-2 border-phosphor/15 p-3">
-        <span className="text-phosphor/45">{copy.intro}</span>
+      <p className="font-body text-sm text-phosphor/80">{copy.intro}</p>
+
+      <div className="flex flex-wrap items-center justify-end gap-4 font-pixel text-[10px]">
         <button
           type="button"
           onClick={copyBatch}
@@ -106,21 +107,18 @@ export default function McpGallery({ servers, copy = defaultCopy }: Props) {
           return (
             <li
               key={s.slug}
-              className={`relative overflow-hidden bg-shadow-ink/85 border-2 p-4 transition-all duration-150 ${
+              className={`relative bg-shadow-ink/80 border-2 p-4 transition-all duration-150 ${
                 isSelected
-                  ? 'border-gb-green shadow-neon-green bg-gb-green/5'
-                  : 'border-phosphor/20 hover:border-gb-green hover:bg-gb-green/5'
+                  ? 'border-gb-green shadow-neon-green'
+                  : 'border-phosphor/20 hover:border-gb-green'
               }`}
               onMouseEnter={() => play('hover')}
             >
-              <div className="absolute top-0 right-0 font-pixel text-[8px] px-2 py-1 border-l border-b border-phosphor/15 text-gb-green/70 bg-shadow-ink">
-                MCP
-              </div>
               <div className="flex items-start gap-3">
                 <button
                   type="button"
                   onClick={() => toggle(s.slug)}
-                  className="font-pixel text-base shrink-0 w-8 h-8 border-2 border-current flex items-center justify-center bg-shadow-ink/80"
+                  className="font-pixel text-base shrink-0 w-8 h-8 border-2 border-current flex items-center justify-center"
                   style={{ color: isSelected ? '#7bd97b' : '#e8f4ff' }}
                   aria-pressed={isSelected}
                   aria-label={`${copy.selectAria} ${s.name}`}
@@ -132,7 +130,7 @@ export default function McpGallery({ servers, copy = defaultCopy }: Props) {
                     {/\.(svg|png|jpg|jpeg|webp|gif)$/i.test(s.icon)
                       ? <img src={s.icon} alt="" className="h-6 w-6 object-contain shrink-0" />
                       : <span className="text-xl">{s.icon}</span>}
-                    <h3 className="font-pixel text-sm text-gb-green truncate pr-12">
+                    <h3 className="font-pixel text-sm text-gb-green truncate">
                       {s.name}
                     </h3>
                   </div>
@@ -143,9 +141,9 @@ export default function McpGallery({ servers, copy = defaultCopy }: Props) {
                     <button
                       type="button"
                       onClick={() => copyOne(s)}
-                      className="inline-flex items-center gap-1 font-pixel text-[9px] text-crt-amber hover:text-neon-magenta transition-colors underline-offset-4 hover:underline"
+                      className="font-mono text-[10px] text-crt-amber hover:text-neon-magenta transition-colors underline-offset-4 hover:underline"
                     >
-                      <span aria-hidden="true">▶</span> {isCopied ? copy.copiedOne : copy.copyOne}
+                      {isCopied ? copy.copiedOne : copy.copyOne}
                     </button>
                     {s.url && (
                       <a
