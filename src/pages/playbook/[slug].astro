@@ -296,6 +296,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   let current = 0;
   let restoreFns: Array<() => void> = [];
   let slideRefreshToken = 0;
+  let preservedTocScrollTop: number | null = null;
   const SLIDE_PREPARING_CLASS = 'slide-preparing';
   // Set true when Esc fires inside present mode to short-circuit the
   // present→article paint and propagate "no present" onto the destination doc.
@@ -505,9 +506,28 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
 
   // ── TOC across playbook entries ──────────────────────────────
+  function rememberTocScroll() {
+    const toc = document.querySelector<HTMLElement>('.present-toc');
+    if (toc) preservedTocScrollTop = toc.scrollTop;
+  }
+
+  function restoreTocScroll(toc: HTMLElement) {
+    if (preservedTocScrollTop === null) return;
+    const top = preservedTocScrollTop;
+    toc.scrollTop = top;
+    requestAnimationFrame(() => {
+      toc.scrollTop = top;
+      requestAnimationFrame(() => {
+        toc.scrollTop = top;
+        if (preservedTocScrollTop === top) preservedTocScrollTop = null;
+      });
+    });
+  }
+
   function syncToc() {
     const toc = document.querySelector<HTMLElement>('.present-toc');
     if (!toc) return;
+    const currentScrollTop = preservedTocScrollTop ?? toc.scrollTop;
     const currentId = (location.pathname.match(/\/(?:en\/)?playbook\/([^/]+)/)?.[1]) || toc.dataset.currentId || '';
     const items = Array.from(toc.querySelectorAll<HTMLElement>('.toc-item'));
     items.forEach((el) => {
@@ -522,6 +542,8 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       }
     });
     // Do not auto-scroll the TOC: keep the user's current sidebar position stable.
+    toc.scrollTop = currentScrollTop;
+    restoreTocScroll(toc);
   }
 
   function enterSlideMode(startSlide?: number) {
@@ -763,6 +785,12 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
   function onTocToggleClick(e: MouseEvent) {
     const target = e.target as HTMLElement | null;
+    const tocItem = target?.closest<HTMLElement>('.present-toc .toc-item');
+    if (tocItem) {
+      rememberTocScroll();
+      tocItem.blur();
+      return;
+    }
     const btn = target?.closest<HTMLElement>('[data-toc-toggle]');
     if (!btn) return;
     e.preventDefault();
@@ -801,6 +829,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   document.addEventListener('keydown', onKey);
   document.addEventListener('click', onTocToggleClick);
   function preparePresentNavigation(event?: Event) {
+    rememberTocScroll();
     if (escapingFromPresent) {
       // Escape-to-index: don't carry present-mode onto the destination doc.
       // The current page's classes stay put so the article view doesn't flash;
