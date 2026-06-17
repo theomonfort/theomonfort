@@ -521,9 +521,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
         el.setAttribute('href', u.pathname + (u.search ? u.search : ''));
       }
     });
-    // Auto-scroll active item into view
-    const active = toc.querySelector<HTMLElement>('.toc-item.active');
-    if (active) active.scrollIntoView({ block: 'nearest' });
+    // Do not auto-scroll the TOC: keep the user's current sidebar position stable.
   }
 
   function enterSlideMode(startSlide?: number) {
