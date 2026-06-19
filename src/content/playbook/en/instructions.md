@@ -26,6 +26,9 @@ links:
   - group: 📦 Repository Instructions
     label: GitHub Docs — Add repository custom instructions
     url: https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions
+  - group: 📦 Repository Instructions
+    label: VS Code — Use custom instructions in VS Code
+    url: https://code.visualstudio.com/docs/agent-customization/custom-instructions
   - group: 🏢 Organization Instructions
     label: GitHub Docs — Add organization custom instructions
     url: https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/configure-custom-instructions/add-organization-instructions

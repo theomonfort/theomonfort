@@ -3,7 +3,7 @@ title: "PLAN: Skills"
 order: 5
 stepSlug: "plan-skills"
 duration: 5
-summary: "Agent Skill は、Copilot に「特定のタスクのこなし方」を仕込む再利用可能な指示セットです。プロンプトに合致したときに自動で召喚され、毎回テンプレを説明し直す必要がなくなります。"
+summary: "このステップでは、ワークショップで使う Agent Skill をインストールします。Skill は「特定のタスクのこなし方」を仕込む指示セットで、プロンプトに合致すると自動で召喚されます。"
 ---
 
 import Aside from '../../../components/handson/Aside.astro';
@@ -14,9 +14,11 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
+では、2 つの Skill を [`theomonfort/skills`](https://github.com/theomonfort/skills) からまとめてインストールします。
+
 ### 5.1 — Skill を 2 つインストール
 
-このワークショップで使う 2 つの Skill を [`theomonfort/skills`](https://github.com/theomonfort/skills) からまとめてインストールします。
+インストールするのは次の 2 つの Skill です：
 
 - **github-issues** — bug report / feature request / task など複数のテンプレを持ち、ラベル・優先度・依存関係まで含めた構造化された Issue を書ける。後ほど Issue 作成で使います。
 - **hands-on-helper** — このハンズオン参加者向けに、リポジトリ・手順書・Playbook の案内とトラブル解消をしてくれるガイド役。

@@ -16,7 +16,7 @@ import Aside from '../../../components/handson/Aside.astro';
 
 **Agentic Workflow とは**: GitHub Actions のワークフロー内で Copilot を活用し、リポジトリの変更に応じた自律的なタスク（レポート生成、ドキュメント更新、コード修正など）を実行する仕組みです。
 
-### 6.1 — Personal Access Token (PAT) を作成する
+### 14.1 — Personal Access Token (PAT) を作成する
 
 Agentic Workflow で Copilot を活用するために PAT を作成します。
 
@@ -52,7 +52,21 @@ Agentic Workflow で Copilot を活用するために PAT を作成します。
 1. **Settings** → **Actions** → **General**
 2. **Allow GitHub Actions to create and approve pull requests** にチェック
 
-### 6.2 — Daily Repo Status ワークフローを作成する
+### 14.2 — （Codespace を使っていない場合）gh-aw 拡張をインストールする
+
+Agentic Workflow をコンパイルする `gh aw` コマンドは、GitHub CLI の拡張機能 **gh-aw** で提供されます。ワークショップ用の Codespace には **プリインストール済み** なので、この手順はスキップして構いません。ローカル環境で作業していてまだ入っていない場合だけ、以下を実行します：
+
+```bash
+gh extension install github/gh-aw
+```
+
+<Aside type="positive">
+
+**💡 TIP**: 詳しくは [gh-aw 公式ドキュメント](https://github.github.io/gh-aw/introduction/overview/) を参照してください。
+
+</Aside>
+
+### 14.3 — Daily Repo Status ワークフローを作成する
 
 今日のリポジトリ活動を自動レポートする Agentic Workflow を作成しましょう。
 

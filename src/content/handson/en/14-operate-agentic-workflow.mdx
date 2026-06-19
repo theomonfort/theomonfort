@@ -16,7 +16,7 @@ import Aside from '../../../components/handson/Aside.astro';
 
 **What is an Agentic Workflow?**: A mechanism that leverages Copilot inside GitHub Actions workflows to execute autonomous tasks (report generation, documentation updates, code fixes, etc.) in response to repository changes.
 
-### 6.1 — Create a Personal Access Token (PAT)
+### 14.1 — Create a Personal Access Token (PAT)
 
 Create a PAT so Agentic Workflow can leverage Copilot.
 
@@ -52,7 +52,21 @@ Create a PAT so Agentic Workflow can leverage Copilot.
 1. **Settings** → **Actions** → **General**
 2. Check **Allow GitHub Actions to create and approve pull requests**
 
-### 6.2 — Create a Daily Repo Status workflow
+### 14.2 — (If you're not on a Codespace) Install the gh-aw extension
+
+The `gh aw` command that compiles Agentic Workflows is provided by the GitHub CLI extension **gh-aw**. The workshop Codespace already has it **pre-installed**, so you can skip this step. Only if you're working locally and don't have it yet, run:
+
+```bash
+gh extension install github/gh-aw
+```
+
+<Aside type="positive">
+
+**💡 TIP**: For more information, please refer to the [official gh-aw documentation](https://github.github.io/gh-aw/introduction/overview/).
+
+</Aside>
+
+### 14.3 — Create a Daily Repo Status workflow
 
 Let's create an Agentic Workflow that automatically reports today's repository activity.
 

@@ -54,7 +54,7 @@ const enUrl = localizedPath('en', currentPath);
   <body class="bg-stars min-h-screen relative">
     <BootSequence client:load transition:persist locale={locale} copy={{ brandMiddle: copy.brandMiddle }} />
     <CRTOverlay client:load transition:persist />
-    <BGMPlayer client:load transition:persist />
+    <BGMPlayer client:load transition:persist feedbackUrl={copy.handson.feedbackUrl} />
     <KonamiListener client:load transition:persist secretPath={localizedPath(locale, '/secret')} />
 
     <!-- Page-transition wipe overlay (CRT scanline sweep) -->

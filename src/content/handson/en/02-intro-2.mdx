@@ -3,7 +3,7 @@ title: "INTRO: Setup"
 order: 2
 stepSlug: "intro-2"
 duration: 15
-summary: "This workshop uses the following GitHub repository:"
+summary: "In this section you'll copy the hands-on repository from a template and open it in a Codespace to start working (or work locally if you can't use Codespaces)."
 ---
 
 import Aside from '../../../components/handson/Aside.astro';
@@ -14,11 +14,11 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-This workshop uses the following GitHub repository:
+In this section you'll copy the following template repository to create your hands-on repository, then open it in a **Codespace** to start working. If you can't use Codespaces, clone it locally and work there instead.
 
 **Project URL**: [https://github.com/theomonfort/Github-copilot-workshop](https://github.com/theomonfort/Github-copilot-workshop)
 
-### Step 1: Create a repository from the template
+### 2.1 — Create a repository from the template
 
 1. Open the project URL in your browser
 2. Click the **Use this template** button in the top right and select **Create a new repository**
@@ -29,7 +29,7 @@ This workshop uses the following GitHub repository:
 
 #### Owner
 
-- Select an **Organization where you can freely create test repositories**
+- Select an **Organization** where you can freely create test repositories
 - Requirements: an Organization with Copilot / Actions / GHAS / Codespaces enabled
 
 #### Repository name
@@ -44,15 +44,15 @@ This workshop uses the following GitHub repository:
 
 ![Click the Create repository button](/theomonfort/handson/img/create-repository-form.png)
 
-### Step 2: Launch your dev environment with Codespaces
+### 2.2 — Launch your dev environment with Codespaces
 
 1. On your newly created repository's page, click the green **Code** button
 2. Select the **Codespaces** tab
 3. Click **Create codespace on main**
 
-<Aside type="positive">
+<Aside type="negative">
 
-**⏳ Note**: Starting a Codespace can take a few minutes. Please wait for the DevContainer build to finish.
+Starting a Codespace can take a few minutes. Please wait for the DevContainer build to finish.
 
 </Aside>
 
@@ -64,8 +64,6 @@ The DevContainer automatically sets up a Node.js 22 environment, with the follow
 - Copilot CLI (`@github/copilot`)
 - gh-aw (Agentic Workflow CLI)
 
-### Step 3: Review the source content
+### 2.3 — Review the source content
 
-Markdown files are placed in `src/content/playbook/`. These are the material for today's site.
-
-In VS Code's explorer, open `src/content/playbook/` and take a peek at a few of the files. Later, you'll have Copilot turn them into a site that can be browsed as a "grid + detail + presentation mode" experience.
+`src/content/playbook/` contains several Markdown files about GitHub and Copilot — the material for today's site. Each file's frontmatter defines `title` / `summary` / `icon` / `color` and an SDLC `category` (introduction / plan / develop / review / secure / operate, etc.). Assets you can use to build the site — icons and images (such as planet artwork) — are also provided under `public/`.

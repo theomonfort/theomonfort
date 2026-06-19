@@ -56,7 +56,7 @@ function startSynthLoop(ctx: AudioContext): { stop: () => void; gain: GainNode }
   };
 }
 
-export default function BGMPlayer() {
+export default function BGMPlayer({ feedbackUrl }: { feedbackUrl?: string }) {
   const [playing, setPlaying] = useState(false);
   const ctxRef = useRef<AudioContext | null>(null);
   const handleRef = useRef<{ stop: () => void } | null>(null);
@@ -87,20 +87,32 @@ export default function BGMPlayer() {
   };
 
   return (
-    <button
-      type="button"
-      onClick={toggle}
-      className="bgm-player fixed bottom-4 right-4 z-[60] font-pixel text-[10px] px-3 py-2 border-2 bg-shadow-ink/80 hover:bg-neon-magenta/20 transition-colors flex items-center gap-2"
-      style={{
-        borderColor: playing ? '#ff2e88' : '#444',
-        color: playing ? '#ff2e88' : '#888',
-        boxShadow: playing ? '0 0 8px #ff2e88' : 'none',
-      }}
-      aria-pressed={playing}
-      aria-label="BGM toggle"
-    >
-      <span aria-hidden="true">{playing ? '♪♪' : '🎵'}</span>
-      BGM: {playing ? 'ON' : 'OFF'}
-    </button>
+    <div className="fixed bottom-4 right-4 z-[60] flex items-center gap-2">
+      {feedbackUrl && (
+        <a
+          href={feedbackUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bgm-bug-report"
+          aria-label="Report a bug / open feedback form (new tab)"
+          title="Report a bug"
+        />
+      )}
+      <button
+        type="button"
+        onClick={toggle}
+        className="bgm-player font-pixel text-[10px] px-3 py-2 border-2 bg-shadow-ink/80 hover:bg-neon-magenta/20 transition-colors flex items-center gap-2"
+        style={{
+          borderColor: playing ? '#ff2e88' : '#444',
+          color: playing ? '#ff2e88' : '#888',
+          boxShadow: playing ? '0 0 8px #ff2e88' : 'none',
+        }}
+        aria-pressed={playing}
+        aria-label="BGM toggle"
+      >
+        <span aria-hidden="true">{playing ? '♪♪' : '🎵'}</span>
+        BGM: {playing ? 'ON' : 'OFF'}
+      </button>
+    </div>
   );
 }

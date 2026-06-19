@@ -75,26 +75,29 @@ links:
 
 ## The compound-error problem
 
-LLMs are non-deterministic. Small per-step error rates **compound** if you don't catch them. The fastest way to save tokens is to **spot small mistakes early and stop retries before they start**.
+Even at **99%** accuracy per step, a **50-step** workflow degrades to roughly **60%** final accuracy. LLMs are non-deterministic, so small per-step errors **compound** if you don't catch them. The fastest way to save tokens is to **spot small mistakes early and stop retries before they start**.
 
-<p class="legend"><span style="display:inline-block;width:0.85em;height:0.85em;background:#9bbc0f;border:1px solid #9bbc0f;vertical-align:middle;margin-right:0.3em"></span><strong>99%</strong> per-step accuracy &nbsp;·&nbsp; <span style="display:inline-block;width:0.85em;height:0.85em;background:#ffb000;border:1px solid #ffb000;vertical-align:middle;margin-right:0.3em"></span><strong>95%</strong> per-step accuracy &nbsp;·&nbsp; <span style="display:inline-block;width:0.85em;height:0.85em;background:#ff2e88;border:1px solid #ff2e88;vertical-align:middle;margin-right:0.3em"></span><strong>90%</strong> per-step accuracy</p>
-
-<div style="max-width:70%;margin:1.5em auto;">
-
-```mermaid
-%%{init: {"themeVariables": {"xyChart": {"plotColorPalette": "#9bbc0f, #ffb000, #ff2e88"}}}}%%
-xychart-beta
-    title "Success rate after N agent steps"
-    x-axis "Number of steps" [1, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
-    y-axis "Success rate (%)" 0 --> 100
-    line [99, 95, 90, 86, 82, 78, 74, 70, 67, 64, 60]
-    line [95, 77, 60, 46, 36, 28, 21, 17, 13, 10, 8]
-    line [90, 59, 35, 21, 12, 7, 4, 3, 1, 1, 0]
-```
-
+<div style="max-width:80%;margin:1.5em auto;">
+<svg viewBox="0 0 560 344" role="img" aria-label="Success rate after N agent steps" style="width:100%;height:auto;font-family:inherit;overflow:visible">
+<line x1="150" y1="22" x2="178" y2="22" stroke="#ff2e88" stroke-width="3"/><circle cx="164" cy="22" r="3" fill="#ff2e88"/>
+<text x="186" y="27" fill="#ff2e88" font-size="14" font-weight="700">95% per step</text>
+<line x1="320" y1="22" x2="348" y2="22" stroke="#9bbc0f" stroke-width="3"/><circle cx="334" cy="22" r="3" fill="#9bbc0f"/>
+<text x="356" y="27" fill="#9bbc0f" font-size="14" font-weight="700">99% per step</text>
+<line x1="64" y1="300" x2="516" y2="300" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="64" y1="248" x2="516" y2="248" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="64" y1="196" x2="516" y2="196" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="64" y1="144" x2="516" y2="144" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="64" y1="92" x2="516" y2="92" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="64" y1="40" x2="516" y2="40" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+<line x1="64" y1="300" x2="516" y2="300" stroke="#9fb3c8" stroke-width="1.2"/>
+<text x="54" y="304" text-anchor="end" fill="#9fb3c8" font-size="13">0%</text><text x="54" y="252" text-anchor="end" fill="#9fb3c8" font-size="13">20%</text><text x="54" y="200" text-anchor="end" fill="#9fb3c8" font-size="13">40%</text><text x="54" y="148" text-anchor="end" fill="#9fb3c8" font-size="13">60%</text><text x="54" y="96" text-anchor="end" fill="#9fb3c8" font-size="13">80%</text><text x="54" y="44" text-anchor="end" fill="#9fb3c8" font-size="13">100%</text>
+<text x="64" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">1</text><text x="100.9" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">5</text><text x="147" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">10</text><text x="193.1" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">15</text><text x="239.3" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">20</text><text x="331.5" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">30</text><text x="423.8" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">40</text><text x="516" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">50</text>
+<text x="290" y="340" text-anchor="middle" fill="#9fb3c8" font-size="13" font-weight="700">Steps</text>
+<polyline points="64,42.6 100.9,53 147,66 193.1,76.4 239.3,86.8 285.4,97.2 331.5,107.6 377.6,118 423.8,125.8 469.9,133.6 516,144" fill="none" stroke="#9bbc0f" stroke-width="2.6" stroke-linejoin="round"/><circle cx="64" cy="42.6" r="2.6" fill="#9bbc0f"/><circle cx="100.9" cy="53" r="2.6" fill="#9bbc0f"/><circle cx="147" cy="66" r="2.6" fill="#9bbc0f"/><circle cx="193.1" cy="76.4" r="2.6" fill="#9bbc0f"/><circle cx="239.3" cy="86.8" r="2.6" fill="#9bbc0f"/><circle cx="285.4" cy="97.2" r="2.6" fill="#9bbc0f"/><circle cx="331.5" cy="107.6" r="2.6" fill="#9bbc0f"/><circle cx="377.6" cy="118" r="2.6" fill="#9bbc0f"/><circle cx="423.8" cy="125.8" r="2.6" fill="#9bbc0f"/><circle cx="469.9" cy="133.6" r="2.6" fill="#9bbc0f"/><circle cx="516" cy="144" r="2.6" fill="#9bbc0f"/>
+<polyline points="64,53 100.9,99.8 147,144 193.1,180.4 239.3,206.4 285.4,227.2 331.5,245.4 377.6,255.8 423.8,266.2 469.9,274 516,279.2" fill="none" stroke="#ff2e88" stroke-width="2.6" stroke-linejoin="round"/><circle cx="64" cy="53" r="2.6" fill="#ff2e88"/><circle cx="100.9" cy="99.8" r="2.6" fill="#ff2e88"/><circle cx="147" cy="144" r="2.6" fill="#ff2e88"/><circle cx="193.1" cy="180.4" r="2.6" fill="#ff2e88"/><circle cx="239.3" cy="206.4" r="2.6" fill="#ff2e88"/><circle cx="285.4" cy="227.2" r="2.6" fill="#ff2e88"/><circle cx="331.5" cy="245.4" r="2.6" fill="#ff2e88"/><circle cx="377.6" cy="255.8" r="2.6" fill="#ff2e88"/><circle cx="423.8" cy="266.2" r="2.6" fill="#ff2e88"/><circle cx="469.9" cy="274" r="2.6" fill="#ff2e88"/><circle cx="516" cy="279.2" r="2.6" fill="#ff2e88"/>
+<text x="70" y="34.6" fill="#9bbc0f" font-size="14" font-weight="700">99%</text>
+<text x="235.3" y="77.8" text-anchor="middle" fill="#9bbc0f" font-size="14" font-weight="700">82%</text>
+<text x="524" y="148" fill="#9bbc0f" font-size="14" font-weight="700">60%</text>
+<text x="70" y="71" fill="#ff2e88" font-size="14" font-weight="700">95%</text>
+<text x="235.3" y="226.4" text-anchor="middle" fill="#ff2e88" font-size="14" font-weight="700">36%</text>
+<text x="524" y="283.2" fill="#ff2e88" font-size="14" font-weight="700">8%</text>
+</svg>
 </div>
-
-> 🔢 **Anchors**: at **10 steps** → 90% / 60% / 35%. At **50 steps** → **60% / 8% / 0.5%**. The 90% line is effectively dead by step 30.
 
 ## Advice 1 — Provide as little context as possible…
 
@@ -337,12 +340,13 @@ Keep specs, knowledge bases, and reference tables in **Markdown / CSV / plain te
 
 These are conditional and come with trade-offs. Reach for them once the basics above are in place.
 
-- 🧮 **Think in code** — for big API responses or long files, write a script that filters first, then hand the result to the agent.
+- 🧮 **Think in code** — files like Word or Excel are hard to pass as-is: have the agent run a script first to extract the data and **convert it to Markdown** before handing it over — better accuracy and fewer tokens. Do the same for big API responses or long files: filter with a script first.
 - 🖥️ **CLI vs MCP** — leaning on `gh`, `kubectl`, `npm` etc. is often leaner than the equivalent MCP because the model already knows these tools.
 - ✂️ **Trim shell output** — tools like <a href="https://github.com/rtk-ai/rtk" target="_blank" rel="noopener noreferrer" class="retro-link">rtk-ai/rtk</a> reduce LLM token consumption by **60–90%** on common dev commands.
 - 📊 **Run `/chronicle tip` regularly** — analyze your Copilot CLI sessions to surface concrete improvement areas.
 - 🔁 **Collapse tool calls** — <a href="https://github.com/jsturtevant/copilot-codeact-plugin" target="_blank" rel="noopener noreferrer" class="retro-link">copilot-codeact-plugin</a> batches multiple tool calls into one round-trip.
 - 🎚️ **Model-specific tuning** — possible, but models change fast; only worthwhile at very high scale.
+- ⌨️ **Ctrl+I in the VS Code terminal** — a one-off question on the command line is **~10–30× cheaper** than a normal session on the same Auto model, because almost no context is loaded. Ideal for quick checks.
 
 ## The long-term mindset
 

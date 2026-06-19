@@ -75,26 +75,29 @@ links:
 
 ## 複利でエラーが効いてくる（Compound Error Problem）
 
-LLM は非決定的です。1 ステップの小さな誤差率は、対処しないと **複利で効いてきます**。最速のトークン削減策は、**小さなミスを早めに見つけて、「リトライを起こさせない」** ことです。
+1 ステップあたり **99%** の精度でも、**50 ステップ** のワークフローでは最終精度は **約 60%** まで低下します。LLM は非決定的なので、小さな誤差は対処しないと **複利で効いてきます**。最速のトークン削減策は、**小さなミスを早めに見つけて「リトライを起こさせない」** ことです。
 
-<p class="legend"><span style="display:inline-block;width:0.85em;height:0.85em;background:#9bbc0f;border:1px solid #9bbc0f;vertical-align:middle;margin-right:0.3em"></span><strong>99%</strong> 1 ステップ精度 &nbsp;·&nbsp; <span style="display:inline-block;width:0.85em;height:0.85em;background:#ffb000;border:1px solid #ffb000;vertical-align:middle;margin-right:0.3em"></span><strong>95%</strong> 1 ステップ精度 &nbsp;·&nbsp; <span style="display:inline-block;width:0.85em;height:0.85em;background:#ff2e88;border:1px solid #ff2e88;vertical-align:middle;margin-right:0.3em"></span><strong>90%</strong> 1 ステップ精度</p>
-
-<div style="max-width:70%;margin:1.5em auto;">
-
-```mermaid
-%%{init: {"themeVariables": {"xyChart": {"plotColorPalette": "#9bbc0f, #ffb000, #ff2e88"}}}}%%
-xychart-beta
-    title "N ステップ後の成功率"
-    x-axis "ステップ数" [1, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
-    y-axis "成功率（%）" 0 --> 100
-    line [99, 95, 90, 86, 82, 78, 74, 70, 67, 64, 60]
-    line [95, 77, 60, 46, 36, 28, 21, 17, 13, 10, 8]
-    line [90, 59, 35, 21, 12, 7, 4, 3, 1, 1, 0]
-```
-
+<div style="max-width:80%;margin:1.5em auto;">
+<svg viewBox="0 0 560 344" role="img" aria-label="N ステップ後の成功率" style="width:100%;height:auto;font-family:inherit;overflow:visible">
+<line x1="150" y1="22" x2="178" y2="22" stroke="#ff2e88" stroke-width="3"/><circle cx="164" cy="22" r="3" fill="#ff2e88"/>
+<text x="186" y="27" fill="#ff2e88" font-size="14" font-weight="700">95% / ステップ</text>
+<line x1="320" y1="22" x2="348" y2="22" stroke="#9bbc0f" stroke-width="3"/><circle cx="334" cy="22" r="3" fill="#9bbc0f"/>
+<text x="356" y="27" fill="#9bbc0f" font-size="14" font-weight="700">99% / ステップ</text>
+<line x1="64" y1="300" x2="516" y2="300" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="64" y1="248" x2="516" y2="248" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="64" y1="196" x2="516" y2="196" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="64" y1="144" x2="516" y2="144" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="64" y1="92" x2="516" y2="92" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="64" y1="40" x2="516" y2="40" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+<line x1="64" y1="300" x2="516" y2="300" stroke="#9fb3c8" stroke-width="1.2"/>
+<text x="54" y="304" text-anchor="end" fill="#9fb3c8" font-size="13">0%</text><text x="54" y="252" text-anchor="end" fill="#9fb3c8" font-size="13">20%</text><text x="54" y="200" text-anchor="end" fill="#9fb3c8" font-size="13">40%</text><text x="54" y="148" text-anchor="end" fill="#9fb3c8" font-size="13">60%</text><text x="54" y="96" text-anchor="end" fill="#9fb3c8" font-size="13">80%</text><text x="54" y="44" text-anchor="end" fill="#9fb3c8" font-size="13">100%</text>
+<text x="64" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">1</text><text x="100.9" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">5</text><text x="147" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">10</text><text x="193.1" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">15</text><text x="239.3" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">20</text><text x="331.5" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">30</text><text x="423.8" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">40</text><text x="516" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">50</text>
+<text x="290" y="340" text-anchor="middle" fill="#9fb3c8" font-size="13" font-weight="700">ステップ数</text>
+<polyline points="64,42.6 100.9,53 147,66 193.1,76.4 239.3,86.8 285.4,97.2 331.5,107.6 377.6,118 423.8,125.8 469.9,133.6 516,144" fill="none" stroke="#9bbc0f" stroke-width="2.6" stroke-linejoin="round"/><circle cx="64" cy="42.6" r="2.6" fill="#9bbc0f"/><circle cx="100.9" cy="53" r="2.6" fill="#9bbc0f"/><circle cx="147" cy="66" r="2.6" fill="#9bbc0f"/><circle cx="193.1" cy="76.4" r="2.6" fill="#9bbc0f"/><circle cx="239.3" cy="86.8" r="2.6" fill="#9bbc0f"/><circle cx="285.4" cy="97.2" r="2.6" fill="#9bbc0f"/><circle cx="331.5" cy="107.6" r="2.6" fill="#9bbc0f"/><circle cx="377.6" cy="118" r="2.6" fill="#9bbc0f"/><circle cx="423.8" cy="125.8" r="2.6" fill="#9bbc0f"/><circle cx="469.9" cy="133.6" r="2.6" fill="#9bbc0f"/><circle cx="516" cy="144" r="2.6" fill="#9bbc0f"/>
+<polyline points="64,53 100.9,99.8 147,144 193.1,180.4 239.3,206.4 285.4,227.2 331.5,245.4 377.6,255.8 423.8,266.2 469.9,274 516,279.2" fill="none" stroke="#ff2e88" stroke-width="2.6" stroke-linejoin="round"/><circle cx="64" cy="53" r="2.6" fill="#ff2e88"/><circle cx="100.9" cy="99.8" r="2.6" fill="#ff2e88"/><circle cx="147" cy="144" r="2.6" fill="#ff2e88"/><circle cx="193.1" cy="180.4" r="2.6" fill="#ff2e88"/><circle cx="239.3" cy="206.4" r="2.6" fill="#ff2e88"/><circle cx="285.4" cy="227.2" r="2.6" fill="#ff2e88"/><circle cx="331.5" cy="245.4" r="2.6" fill="#ff2e88"/><circle cx="377.6" cy="255.8" r="2.6" fill="#ff2e88"/><circle cx="423.8" cy="266.2" r="2.6" fill="#ff2e88"/><circle cx="469.9" cy="274" r="2.6" fill="#ff2e88"/><circle cx="516" cy="279.2" r="2.6" fill="#ff2e88"/>
+<text x="70" y="34.6" fill="#9bbc0f" font-size="14" font-weight="700">99%</text>
+<text x="235.3" y="77.8" text-anchor="middle" fill="#9bbc0f" font-size="14" font-weight="700">82%</text>
+<text x="524" y="148" fill="#9bbc0f" font-size="14" font-weight="700">60%</text>
+<text x="70" y="71" fill="#ff2e88" font-size="14" font-weight="700">95%</text>
+<text x="235.3" y="226.4" text-anchor="middle" fill="#ff2e88" font-size="14" font-weight="700">36%</text>
+<text x="524" y="283.2" fill="#ff2e88" font-size="14" font-weight="700">8%</text>
+</svg>
 </div>
-
-> 🔢 **目安**：**10 ステップ後** → 90% / 60% / 35%、**50 ステップ後** → **60% / 8% / 0.5%**。90% ラインは 30 ステップ前後で実質壊死。
 
 ## Advice 1 — context は「必要最小限」を渡す…
 
@@ -336,12 +339,13 @@ xychart-beta
 
 ここから先は条件付き＆トレードオフあり。上の基本を入れ終えてから手を出す。
 
-- 🧮 **コードで考える** — 巨大な API レスポンスや長いファイルは、まずスクリプトでフィルタしてからエージェントに渡す。
+- 🧮 **コードで考える** — Word や Excel などのファイルはそのまま渡すと扱いにくい。まずスクリプトでデータを取り出し、**Markdown に変換してから**エージェントに渡すと精度もトークン効率も上がる。巨大な API レスポンスや長いファイルも、同様にスクリプトでフィルタしてから渡す。
 - 🖥️ **CLI vs MCP** — `gh` / `kubectl` / `npm` などの CLI に頼る方が、同等の MCP より軽いことが多い（モデルが既に知っているから）。
 - ✂️ **シェル出力をトリム** — <a href="https://github.com/rtk-ai/rtk" target="_blank" rel="noopener noreferrer" class="retro-link">rtk-ai/rtk</a> のようなツールは、よく使う開発コマンドで LLM のトークン消費を **60〜90% 削減** します。
 - 📊 **`/chronicle tip` を定期的に** — Copilot CLI のセッションを分析し、改善点を具体的に教えてくれる。
 - 🔁 **ツール呼び出しをまとめる** — <a href="https://github.com/jsturtevant/copilot-codeact-plugin" target="_blank" rel="noopener noreferrer" class="retro-link">copilot-codeact-plugin</a> は複数のツール呼び出しを 1 ラウンドトリップに畳む。
 - 🎚️ **モデル別の細かいチューニング** — 可能だがモデルの進化が速いので、超大規模運用のみ価値あり。
+- ⌨️ **VS Code ターミナルの Ctrl+I** — コマンドラインへの単発の質問は、同じ Auto モードでも通常のセッションより **約 10〜30 倍** 安い。コンテキストをほとんど読み込まないため、軽い確認に最適。
 
 ## 長期的なマインドセット
 
