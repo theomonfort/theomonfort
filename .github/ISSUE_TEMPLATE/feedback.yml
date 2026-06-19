@@ -9,6 +9,8 @@ body:
         Thanks for taking the time to help improve the site!
         サイト改善にご協力いただきありがとうございます！
 
+        > **For EMU users**: please give me feedback here: https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbRxfrxixxnh1AkgHlZ0RLul1UQ0dZSUM1V1Y0Vks2RUNEVElHUU9ZVjMySC4u
+
   - type: dropdown
     id: category
     attributes:

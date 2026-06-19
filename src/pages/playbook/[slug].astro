@@ -247,11 +247,11 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     <div class="slide-progress" role="tablist" aria-label="Slides"></div>
     <a
       class="slide-counter font-pixel text-[10px]"
-      href={t.handson.feedbackUrl}
+      href={t.handson.bugReportUrl}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Open feedback form (new tab)"
-      title="Feedback"
+      aria-label="Report a bug (new tab)"
+      title="Report a bug"
     >
       <span class="slide-counter-bug" aria-hidden="true"></span>
       <span class="slide-counter-text"></span>
@@ -1879,6 +1879,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   body.present-mode nav,
   body.present-mode footer,
   body.present-mode .bgm-player,
+  body.present-mode .bgm-bug-report,
   body.present-mode .crt-overlay { display: none !important; }
   body.present-mode .present-hint { display: none; }
   body.present-mode .present-overlay-hint { display: flex; }
