@@ -1,0 +1,50 @@
+name: "💬 Feedback / フィードバック"
+description: "Report a bug or share feedback about the website / ウェブサイトの不具合・フィードバックを送る"
+title: "[Feedback] "
+labels: ["feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to help improve the site!
+        サイト改善にご協力いただきありがとうございます！
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: "Category / カテゴリ"
+      description: "What kind of feedback is this? / どの種類のフィードバックですか？"
+      options:
+        - "🐛 Bug / 不具合"
+        - "💡 Feedback / Suggestion ・ フィードバック・提案"
+        - "❓ Question / 質問"
+        - "✦ Other / その他"
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: "Details / 詳細"
+      description: "Describe the bug or share your feedback. For bugs, include what you expected and what happened. / 不具合の内容やフィードバックを記入してください。不具合の場合は期待した動作と実際の動作を含めてください。"
+      placeholder: "..."
+    validations:
+      required: true
+
+  - type: input
+    id: page-url
+    attributes:
+      label: "Page URL / 該当ページ"
+      description: "Which page is this about? (optional) / どのページに関するものですか？（任意）"
+      placeholder: "https://theomonfort.github.io/theomonfort/..."
+    validations:
+      required: false
+
+  - type: input
+    id: environment
+    attributes:
+      label: "Browser / device / ブラウザ・端末"
+      description: "Helps reproduce bugs (optional) / 不具合の再現に役立ちます（任意）"
+      placeholder: "e.g. Chrome on macOS / iPhone Safari"
+    validations:
+      required: false
