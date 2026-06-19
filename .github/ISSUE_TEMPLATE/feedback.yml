@@ -16,7 +16,7 @@ body:
       description: "What kind of feedback is this? / どの種類のフィードバックですか？"
       options:
         - "🐛 Bug / 不具合"
-        - "💡 Feedback / Suggestion ・ フィードバック・提案"
+        - "💡 Feedback / フィードバック"
         - "❓ Question / 質問"
         - "✦ Other / その他"
     validations:
