@@ -54,17 +54,7 @@ Click the **tools button** in the Copilot Chat input area (to the right of the m
 
 After installation, confirm that `context7` has been added to `.vscode/mcp.json`:
 
-```json
-{
-  "servers": {
-    "github-mcp-server": { "type": "http", "url": "https://api.githubcopilot.com/mcp/" },
-    "context7": {
-      "type": "http",
-      "url": "https://mcp.context7.com/mcp"
-    }
-  }
-}
-```
+![.vscode/mcp.json after adding context7](/theomonfort/handson/img/mcp-json-context7-tools.png)
 
 When you open `.vscode/mcp.json`, a small status indicator like **`Running | N tools`** appears above each server. If you see **`2 tools`** next to `context7` (`resolve-library-id` and `get-library-docs`), the connection succeeded. If not, click **Start**.
 

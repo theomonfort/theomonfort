@@ -3,7 +3,7 @@ title: "PLAN: Instruction"
 order: 4
 stepSlug: "plan-instruction"
 duration: 15
-summary: "An instruction file gives Copilot **always-on rules** at the repository or file level — it's the playbook that keeps every teammate's Copilot following the same conventions."
+summary: "In this step you'll create Copilot instruction files — the playbook of rules Copilot must follow."
 ---
 
 import Aside from '../../../components/handson/Aside.astro';
@@ -14,7 +14,7 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-In this step you'll create two kinds of instruction file:
+Let's create two kinds of instruction file:
 
 - **`.github/copilot-instructions.md`** — applied everywhere in the repo (language, stack, conventions)
 - **`.github/instructions/frontend.instructions.md`** — a **path instruction** that only applies to frontend files (design tokens)
@@ -66,7 +66,7 @@ Before writing any **Astro** code, you **must call the following Context7 MCP to
 
 <Aside type="positive">
 
-**Key point**: From here on, Copilot's responses switch to English and the stack constraints are enforced automatically.
+**Key point**: As soon as you **save** the file (no commit needed), VS Code loads it into every new Copilot Chat request. From here on, Copilot's responses switch to English and the stack constraints are enforced automatically. See [VS Code: Use custom instructions](https://code.visualstudio.com/docs/agent-customization/custom-instructions) for details.
 
 </Aside>
 

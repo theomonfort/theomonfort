@@ -116,7 +116,7 @@ Once configured, add security groups or users to the app under **Users and group
 
 ## IdP Group and Team sync
 
-By default, provisioned users are added as **Unaffiliated** — they belong to the Enterprise but are not assigned to any Organization or Team. You can automate team membership by syncing IdP groups.
+By default, provisioned users are added as **Unaffiliated** — they belong to the Enterprise but are not assigned to any Organization or Team. You can automate team membership by syncing IdP groups (**a security group in the case of Entra ID**).
 
 | Configuration | Result |
 |---|---|
@@ -125,5 +125,7 @@ By default, provisioned users are added as **Unaffiliated** — they belong to t
 | **Link an IdP group to an Organization Team** | IdP group members are automatically synced to the Org Team (and auto-join the Org) |
 
 In GitHub, go to the Team settings → **Identity Provider Group** and select the corresponding IdP group.
+
+> **For Entra ID**: you can only connect a team to a **security group**. Microsoft 365 groups and nested (parent/child) groups or teams are not supported.
 
 ![IdP Group sync](/theomonfort/playbook/img/enterprise-idp-group-sync.png)

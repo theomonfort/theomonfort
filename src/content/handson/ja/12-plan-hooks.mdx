@@ -16,7 +16,7 @@ import Aside from '../../../components/handson/Aside.astro';
 
 **Hooks** は、エージェントがツールを呼び出す前後（`PreToolUse` / `PostToolUse`）に任意のスクリプトを差し込める仕組みです。`PreToolUse` で `permissionDecision: deny` を返せば、エージェントの動作を **止める** ことができます。
 
-### N.1 — `.github/hooks/hooks.json` を作成する
+### 12.1 — `.github/hooks/hooks.json` を作成する
 
 リポジトリのルートに `.github/hooks/hooks.json` を新規作成し、以下をそのまま貼り付けてください：
 
@@ -44,7 +44,7 @@ import Aside from '../../../components/handson/Aside.astro';
 - matcher 正規表現は自動的に `^(?:...)$` で囲まれて **完全一致** で評価されます。
 - `bash` は `cwd` から相対実行されます。スクリプトは次のステップで作成。
 
-### N.2 — ブロック用スクリプトを作成する
+### 12.2 — ブロック用スクリプトを作成する
 
 `.github/hooks/scripts/block.mjs` を新規作成し、以下を貼り付けてください：
 
@@ -107,11 +107,11 @@ function deny(reason) {
 - `permissionDecisionReason` と `additionalContext` で **保護パスの一覧と理由をエージェントに返す** ので、エージェントは次のターンで自分で軌道修正できる（"どこに触ってはいけないか" を知らされる）。
 - 出力は **Copilot CLI 形式**（`permissionDecision`）と **VS Code 形式**（`hookSpecificOutput`）の両方を返すので、どちらの環境でも動きます。
 
-### N.3 — Copilot Chat を再起動する
+### 12.3 — Copilot Chat を再起動する
 
 Hook の設定を読み込ませるため、**Copilot Chat のセッションを一度閉じて、新しいチャットを開いてください**（💬 アイコン → 「+」で新規チャット）。
 
-### N.4 — エージェントを試す（わざとブロックさせる）
+### 12.4 — エージェントを試す（わざとブロックさせる）
 
 新しいチャットで以下を入力してください：
 

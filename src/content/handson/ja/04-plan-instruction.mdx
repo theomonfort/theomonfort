@@ -3,7 +3,7 @@ title: "PLAN: Instruction"
 order: 4
 stepSlug: "plan-instruction"
 duration: 15
-summary: "Instruction ファイルは、リポジトリやファイル単位で Copilot に 常駐ルール を与える「指示書」です。チーム全員の Copilot が同じ規約に従うようになります。"
+summary: "このステップでは、Copilot 用の Instruction ファイル（Copilot に守らせるルールを書いた指示書）を作成します。"
 ---
 
 import Aside from '../../../components/handson/Aside.astro';
@@ -14,7 +14,7 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-このステップでは、2 種類の Instruction ファイルを作成します：
+では、2 種類の Instruction ファイルを作成しましょう：
 
 - **`.github/copilot-instructions.md`** — リポジトリ全体に常時適用 (言語・Stack・規約)
 - **`.github/instructions/frontend.instructions.md`** — フロントエンド系ファイルにのみ適用される **Path Instruction**（デザイントークン）
@@ -66,7 +66,7 @@ import Aside from '../../../components/handson/Aside.astro';
 
 <Aside type="positive">
 
-**ポイント**: 以後 Copilot の応答が日本語に切り替わります。Stack 制約も自動で守られるようになります。
+**ポイント**: ファイルを**保存**すれば（コミットは不要）、以後の Copilot Chat の各リクエストに自動的に読み込まれます。応答が日本語に切り替わり、Stack 制約も自動で守られるようになります。詳しくは [VS Code: Use custom instructions](https://code.visualstudio.com/docs/agent-customization/custom-instructions) を参照。
 
 </Aside>
 

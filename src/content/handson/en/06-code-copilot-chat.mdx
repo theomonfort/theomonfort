@@ -28,21 +28,15 @@ This gives you a clean checkpoint before Copilot starts planning and editing the
 
 <Aside type="positive">
 
-**💡 Terminal tip**: In the VS Code terminal, press **Ctrl+I** to ask Copilot a quick question about the command line or current project. This is **not Agent mode**, and the default model is **Auto**, so don't worry about starting several agent sessions just by asking small terminal questions.
+**💡 Terminal tip**: In the VS Code terminal, press **Ctrl+I** to ask Copilot a quick question about the command line or current project. This is **not Agent mode**, and the default model is **Auto**, so don't worry about starting several agent sessions just by asking small terminal questions. Almost nothing is loaded into the context window, so it's far cheaper than any normal session you open in VS Code or the CLI. See [Playbook / Token optimization](https://theomonfort.github.io/theomonfort/en/playbook/token-optimization?present=1&slide=11) for details.
 
 </Aside>
 
-### 6.2 — Switch the model to Claude Opus 4.8
+### 6.2 — Switch the model to Claude Opus 4.6 or newer
 
-Click the model selector at the bottom of the Copilot Chat panel and pick **Claude Opus 4.8**.
+Click the model selector at the bottom of the Copilot Chat panel and pick **Claude Opus 4.6 or newer** (e.g. Opus 4.6 / 4.8). For complex "scaffold the whole site in one shot" work like this section, a higher-end Opus model keeps quality consistent.
 
 While you're there, also switch **"Default Approvals"** at the bottom of the panel to **"Bypass Approvals"**. Since we're working inside a Codespace sandbox, skipping the per-tool approval prompts is much faster.
-
-<Aside type="positive">
-
-**💡 Tip**: Opus-class models shine on complex design tasks and long-context conversations. For day-to-day editing and completion, other models are plenty, but for "scaffold the whole site in one shot" work like this section, Opus 4.8 gives more consistent quality.
-
-</Aside>
 
 ### 6.3 — Switch to Plan mode
 
@@ -85,7 +79,7 @@ Add a top “SDLC navigation chain” above the introduction section:
 Once `npm run dev` confirms it works, commit and push your changes and open a pull request titled "Playbook site foundations".
 ````
 
-Copilot may ask you a few questions (package manager, UI framework, deployment target, etc.). It should have read `copilot-instructions.md` and default to Astro / Tailwind / pnpm, but answer any gaps as they come up.
+Copilot may ask you a few questions (package manager, UI framework, deployment target, etc.). It should have read `copilot-instructions.md` and default to Astro / Tailwind / npm, but answer any gaps as they come up.
 
 ⏱ About 3 minutes
 
@@ -127,37 +121,34 @@ From the port-forwarding notification, click **"Open in browser"** and try it ou
 
 Here's the key move — **instead of asking Copilot Chat to "fix this right now", file each improvement as a GitHub Issue**. In Step 11 (CODE: Cloud Agent) we'll have Cloud Agent implement some of them **in parallel, in one batch**, and in Step 13 (CODE: Copilot CLI) we'll knock out the remaining ones in parallel with `/fleet`.
 
-Send the prompt below to Copilot Chat to file **8** Issues at once (the `github-issues` skill will structure them automatically):
+Send the prompt below to Copilot Chat to file **7** Issues at once (the `github-issues` skill will structure them automatically):
 
-<Aside type="reference">
+<Aside type="negative">
 The Issues below are **just one example** of the improvements you might want, based on how Copilot built the site. Depending on what Copilot actually shipped, some of them may not apply — skip those, and **feel free to swap in your own improvements** that make the site better the way you want.
 </Aside>
 
 ```
 Use the github-issues skill to create the following improvements as individual Issues in this repository.
 
-1. Title: Add Playbook presentation mode on top of the current landing page
-   Details: Keep the existing `/playbook` landing page and Markdown detail pages. Add a presentation mode entry point from each card (for example `?present=1`). In presentation mode, each `##` heading in the Markdown becomes a slide, with a generated title/cover slide from frontmatter. Add keyboard controls (`←` / `→` to move, `Esc` to return to `/playbook`) and keep a unique URL for the current entry and slide.
+1. Title: Add a presentation mode with a category-grouped TOC sidebar on top of the current landing page
+   Details: Keep the existing `/playbook` landing page and Markdown detail pages. Add a presentation mode entry point from each card (for example `?present=1`). In presentation mode, each `##` heading in the Markdown becomes a slide, with a generated title/cover slide from frontmatter. Add keyboard controls (`←` / `→` to move, `Esc` to return to `/playbook`) and keep a unique URL for the current entry and slide. Also show a fixed left sidebar (TOC) listing all Playbook entries grouped by category using `src/lib/playbook-categories.ts` (labels, colors, icons, and ordering from that file). Highlight the current entry; clicking another entry switches to it while staying in presentation mode, and the TOC scroll position should not jump when clicking. Slide text should use a large font size so it stays readable when projected on a screen.
 
-2. Title: Add a beautiful category-grouped TOC sidebar for presentation mode
-   Details: In presentation mode, show a fixed left sidebar listing all Playbook entries grouped by category using `src/lib/playbook-categories.ts`. Use category labels, colors, icons, and ordering from that file. Highlight the current entry. Clicking another entry should switch to that entry while staying in presentation mode. The TOC scroll position should not jump when clicking entries.
-
-3. Title: Add Octocat “In a nutshell” hero slides
+2. Title: Add Octocat “In a nutshell” hero slides
    Details: For each entry, turn the first “In a nutshell” / “一言で” section into a hero slide. Use the category actor/avatar from `src/lib/playbook-categories.ts` (for example Mona for Introduction) and render the text as a retro speech bubble. If the entry does not have that section, fall back to frontmatter `summary`.
 
-4. Title: Add category background images to presentation mode
+3. Title: Add category background images to presentation mode
    Details: Give each presentation deck a category-specific background image using the supplied assets: `slide-bg-introduction.webp`, `slide-bg-plan.webp`, `slide-bg-develop.webp`, `slide-bg-review.webp`, `slide-bg-secure.webp`, `slide-bg-operate.webp`, and `slide-bg-administration.webp`. Add a dark overlay so text stays readable. The cover / hero slide can show more of the background; content slides should be more subdued.
 
-5. Title: Add a links slide at the end of each presentation deck
+4. Title: Add a links slide at the end of each presentation deck
    Details: If the Playbook entry frontmatter has `links`, render them as a final slide grouped by `group`. Each group should have a small heading and clickable links. If an entry has no links, skip this slide.
 
-6. Title: Render Mermaid diagrams inside presentation slides
+5. Title: Render Mermaid diagrams inside presentation slides
    Details: If a slide contains a ` ```mermaid ` code block, render it as a Mermaid diagram instead of plain code. Make sure diagrams on slides after slide 1 render correctly when navigating between slides.
 
-7. Title: Improve presentation slide layout and typography
+6. Title: Improve presentation slide layout and typography
    Details: Make slide content feel centered and intentional, not stuck in the top-left. Use the retro theme tokens, category colors, readable table/code styles, and balanced spacing. Tables and long code blocks should scroll inside the slide rather than overflowing the viewport.
 
-8. Title: Add mobile fallback for presentation mode
+7. Title: Add mobile fallback for presentation mode
    Details: On narrow screens, presentation mode should not break. Either disable presentation mode and fall back to the normal Markdown detail page, or provide a simple vertical slide list. Cards and detail pages should remain usable on mobile.
 ```
 

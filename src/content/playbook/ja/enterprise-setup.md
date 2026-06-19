@@ -116,7 +116,7 @@ Entra ID の **Enterprise Application → Manage → Provisioning** で以下を
 
 ## IdP グループとチームの同期
 
-プロビジョニングされたユーザーは、デフォルトでは **Unaffiliated（未所属）** の状態で追加されます。Organization やチームへの所属は IdP グループを同期することで自動化できます。
+プロビジョニングされたユーザーは、デフォルトでは **Unaffiliated（未所属）** の状態で追加されます。Organization やチームへの所属は IdP グループ（**Entra ID の場合はセキュリティグループ**）を同期することで自動化できます。
 
 | 設定 | 結果 |
 |---|---|
@@ -125,5 +125,7 @@ Entra ID の **Enterprise Application → Manage → Provisioning** で以下を
 | **Organization Team に IdP グループを紐付け** | IdP グループのメンバーが自動的に Organization Team に同期（Org にも自動参加） |
 
 GitHub の Team 設定画面 → **Identity Provider Group** で、対応する IdP グループを選択します。
+
+> **Entra ID の場合**：紐付けできるのは **セキュリティグループ** のみです。Microsoft 365 グループや、ネストされた（親子関係を持つ）グループ・チームは同期できません。
 
 ![IdP グループの同期設定](/theomonfort/playbook/img/enterprise-idp-group-sync.png)

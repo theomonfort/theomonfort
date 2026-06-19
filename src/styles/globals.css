@@ -1035,6 +1035,12 @@ a.retro-link:hover::after {
   background: var(--entry-accent);
   border-color: var(--entry-accent);
 }
+.handson-step-chip.is-remaining {
+  color: #ffcf4a;
+  border-color: color-mix(in srgb, #ffcf4a, transparent 45%);
+  background: rgba(255, 207, 74, 0.12);
+  box-shadow: 2px 2px 0 rgba(5, 6, 15, 0.82), 0 0 10px rgba(255, 207, 74, 0.25);
+}
 .handson-step-header h1 {
   max-width: 48rem;
   color: var(--entry-accent);
@@ -1363,4 +1369,27 @@ a.retro-link:hover::after {
   .handson-step-planet img {
     animation: none;
   }
+}
+
+/* ── Bug-report icon shown to the left of the global BGM button ── */
+.bgm-bug-report {
+  flex: 0 0 auto;
+  width: 1.9rem;
+  height: 1.9rem;
+  background-color: #00f0ff;
+  -webkit-mask-image: url('/theomonfort/icons/bug.svg');
+          mask-image: url('/theomonfort/icons/bug.svg');
+  -webkit-mask-size: contain;
+          mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+          mask-position: center;
+  filter: drop-shadow(0 0 6px color-mix(in srgb, #00f0ff 65%, transparent));
+  cursor: pointer;
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+.bgm-bug-report:hover {
+  transform: translateY(-2px) scale(1.08);
+  filter: drop-shadow(0 0 10px #00f0ff);
 }

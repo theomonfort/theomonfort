@@ -29,6 +29,7 @@ const progress = Math.round(((idx + 1) / all.length) * 100);
 
 const category = handsonCategoryForSlug(item.slug);
 const categoryMeta = handsonCategoryMeta(category, locale);
+const remainingMin = all.slice(idx).reduce((sum, e) => sum + (e.entry.data.duration ?? 0), 0);
 const shellStyle = `--handson-progress:${progress}%;--entry-accent:${categoryMeta.accent};--aside-accent:${categoryMeta.accent};--aside-mascot:url('${categoryMeta.mascot}');--entry-planet:url('${categoryMeta.planet}')`;
 ---
 
@@ -74,15 +75,17 @@ const shellStyle = `--handson-progress:${progress}%;--entry-accent:${categoryMet
               <span class="handson-step-chip is-area font-pixel">
                 {categoryMeta.icon} {categoryMeta.labelEn}
               </span>
-              {categoryMeta.label !== categoryMeta.labelEn && (
-                <span class="handson-step-chip font-pixel-jp">{categoryMeta.label}</span>
-              )}
               <span class="handson-step-chip font-pixel">
                 {t.handson.stepLabel} {String(entry.data.order).padStart(2, '0')} / {String(all.length).padStart(2, '0')}
               </span>
               {entry.data.duration != null && (
                 <span class="handson-step-chip font-pixel">
                   ⏱ {entry.data.duration}{t.handson.durationSuffix}
+                </span>
+              )}
+              {remainingMin > 0 && (
+                <span class="handson-step-chip is-remaining font-pixel">
+                  ⏳ {t.handson.remainingPrefix}{remainingMin}{t.handson.remainingSuffix}
                 </span>
               )}
             </div>

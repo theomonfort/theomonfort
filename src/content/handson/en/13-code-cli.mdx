@@ -3,7 +3,7 @@ title: "CODE: CLI"
 order: 13
 stepSlug: "code-cli"
 duration: 30
-summary: "Copilot CLI is an interactive AI assistant that runs in your terminal. Without ever opening VS Code, it can autonomously generate, review, and refactor code."
+summary: "In this step you'll implement the Issues created in Part 6 in parallel using Copilot CLI's `/fleet`. Copilot CLI is an interactive AI assistant that runs in your terminal without ever opening VS Code."
 ---
 
 import Aside from '../../../components/handson/Aside.astro';
@@ -15,6 +15,27 @@ import Aside from '../../../components/handson/Aside.astro';
 </Aside>
 
 Here we'll take the **Issues you created at the end of Part 6** and have the CLI implement them **in parallel** via `/fleet`.
+
+### 13.0 — (If you're not on a Codespace) Install Copilot CLI
+
+The workshop Codespace already has Copilot CLI **pre-installed**, so you can skip this step. Only if you're working locally and don't have it yet, install it with one of the following:
+
+```bash
+# npm (all platforms / requires Node.js 22+)
+npm install -g @github/copilot
+
+# Homebrew (macOS / Linux)
+brew install copilot-cli
+
+# Install script (macOS / Linux)
+curl -fsSL https://gh.io/copilot-install | bash
+```
+
+<Aside type="positive">
+
+**💡 TIP**: For more information, please refer to the [official installation documentation](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli).
+
+</Aside>
 
 ### Key commands
 
@@ -32,7 +53,7 @@ Here we'll take the **Issues you created at the end of Part 6** and have the CLI
 | `/chronicle`  | Analyze session history and usage                      |
 | `/resume`     | Resume the previous session                            |
 
-### 12.1 — Launch Copilot CLI
+### 13.1 — Launch Copilot CLI
 
 First, grab the latest code. The Cloud Agent and Code Review should have merged PRs by now, so update your local branch too:
 
@@ -47,7 +68,7 @@ Then launch Copilot CLI from the VS Code terminal:
 copilot
 ```
 
-### 12.2 — Pick a model and enable Autopilot
+### 13.2 — Pick a model and enable Autopilot
 
 Inside the CLI, run:
 
@@ -61,7 +82,7 @@ Inside the CLI, run:
 
 Pick the most capable model available (e.g., Claude Opus 4.6).
 
-### 12.3 — Implement Issues in parallel with `/fleet`
+### 13.3 — Implement Issues in parallel with `/fleet`
 
 Have the CLI implement the 3–5 Issues you created in Part 6 in parallel. The prompt also asks for a rubber-duck review on each implementation at the end.
 
@@ -96,7 +117,7 @@ This lists the status of each fleet agent (running / done / failed) along with t
 
 </Aside>
 
-### 12.4 — Analyze your usage with Chronicle
+### 13.4 — Analyze your usage with Chronicle
 
 Finally, look back on your Copilot CLI usage during the workshop with Chronicle:
 

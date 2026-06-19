@@ -14,7 +14,7 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-### 5.1 — Assign an existing Issue to the Cloud Agent
+### 11.1 — Assign an existing Issue to the Cloud Agent
 
 Pick one of the Issues you created in Step 6.5 and let Cloud Agent implement it.
 
@@ -44,14 +44,13 @@ When you assign, you can customize:
 
 </Aside>
 
-### 5.2 — Review and merge the PR
+### 11.2 — Review the PR
 
 The PR the Cloud Agent creates is opened as a **Draft**.
 
 1. Open the PR and review the changes.
 2. Click **Ready for review** to lift the draft state.
 3. Copilot Code Review kicks off automatically.
-4. Once the review is done, merge the PR.
 
 <Aside type="negative">
 
@@ -61,12 +60,12 @@ The PR the Cloud Agent creates is opened as a **Draft**.
 
 ![Resolving conflicts with Fix with Copilot](/theomonfort/handson/img/fix-conflicts-copilot.png)
 
-### 5.3 — Pull the latest code and try it out
+### 11.3 — Try it in your Codespace before merging
 
-Once the Cloud Agent's PR is merged, pull the latest code into your Codespace and check the site.
+Before you merge, it's smarter to actually run the Cloud Agent's PR in your Codespace and check it. Check out the PR branch with the `gh` CLI (replace `<PR-number>` with the real PR number).
 
 ```bash
-git checkout main && git pull && npm install && npm run dev
+gh pr checkout <PR-number> && npm install && npm run dev
 ```
 
-When the port forwarding notification pops up, click **"Open in Browser"** to try out the new feature the Cloud Agent shipped.
+When the port forwarding notification pops up, click **"Open in Browser"** to try out the new feature the Cloud Agent shipped. If it looks good, merge the PR; if something's off, leave a comment on the PR and let the Cloud Agent fix it.

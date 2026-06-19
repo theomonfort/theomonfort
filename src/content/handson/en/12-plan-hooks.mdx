@@ -16,7 +16,7 @@ import Aside from '../../../components/handson/Aside.astro';
 
 **Hooks** let you inject arbitrary scripts before and after an agent invokes a tool (`PreToolUse` / `PostToolUse`). Returning `permissionDecision: deny` from `PreToolUse` lets you **stop** the agent in its tracks.
 
-### N.1 — Create `.github/hooks/hooks.json`
+### 12.1 — Create `.github/hooks/hooks.json`
 
 Create a new file `.github/hooks/hooks.json` at the repository root and paste the following as-is:
 
@@ -44,7 +44,7 @@ Key points:
 - The matcher regex is auto-wrapped as `^(?:...)$` and evaluated as a **full match**.
 - `bash` is executed relative to `cwd`. We'll create the script in the next step.
 
-### N.2 — Create the blocking script
+### 12.2 — Create the blocking script
 
 Create a new file `.github/hooks/scripts/block.mjs` and paste the following:
 
@@ -107,11 +107,11 @@ Key points:
 - `permissionDecisionReason` and `additionalContext` **return the list of protected paths and the reason back to the agent**, so the agent can self-correct on its next turn (it's explicitly told "where it must not touch").
 - The output covers both the **Copilot CLI format** (`permissionDecision`) and the **VS Code format** (`hookSpecificOutput`), so it works in either environment.
 
-### N.3 — Restart Copilot Chat
+### 12.3 — Restart Copilot Chat
 
 To load the Hook configuration, **close your current Copilot Chat session and open a fresh one** (click the 💬 icon → "+" for a new chat).
 
-### N.4 — Try the agent (and watch it get blocked)
+### 12.4 — Try the agent (and watch it get blocked)
 
 In the new chat, enter the following:
 
