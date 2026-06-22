@@ -45,6 +45,7 @@ tools:
     - "date:*"
     - "curl:*"
     - "head:*"
+    - "grep:*"
   cache-memory: true
 
 safe-outputs:
@@ -91,8 +92,24 @@ For each entry, parse the frontmatter and capture:
 
 Load cache memory and read `last_run` (ISO date). If absent, default to **8 days ago**.
 
-Fetch GitHub-side news published since `last_run`:
+Gather "what's new" from two complementary sources:
 
+**A. GitHub MCP tools (primary, always reliable).** `api.github.com` is always
+reachable. Use the `github` tools to pull authoritative recent activity:
+
+- `list_releases` / `get_latest_release` on fast-moving repos like
+  `github/github-mcp-server`.
+- `search_commits` / `list_commits` on `github/docs` filtered to
+  `path: content/copilot` and `committer-date:>=<last_run>` to catch GA
+  flips, renames, and deprecations.
+- `search_issues` / changelog labels where useful.
+
+**B. `curl` for the public Changelog / Blog (supplementary).** Retrieve each URL
+with a simple command — the runner firewall already allows `github.blog` and
+`docs.github.com`:
+
+- `curl -sSL --max-time 30 "<url>"` (optionally trim with
+  `| head -c 60000` or `| grep -E '<pattern>'`).
 - Changelog index: `https://github.blog/changelog/` (and label-filtered pages
   for `copilot`, `actions`, `code-security`, `codespaces`, `mcp`).
 - Blog topic pages: `https://github.blog/ai-and-ml/github-copilot/`,
@@ -100,12 +117,9 @@ Fetch GitHub-side news published since `last_run`:
 - Docs: only fetch a docs page if a playbook entry's `links:` already points at
   it (you're verifying the content the playbook claims is current).
 
-Use **`curl`** to retrieve each URL, e.g. `curl -sSL --max-time 30 "<url>"`.
-The runner's network firewall already allows `github.blog`, `docs.github.com`
-and the rest of the GitHub ecosystem, so `curl` works while the engine's
-built-in `web-fetch` tool is unavailable in this sandbox. For large pages, pipe
-through `head -c 60000` to cap the payload (`curl -sSL "<url>" | head -c 60000`).
-Be conservative — at most ~25 fetches per run.
+Be conservative — at most ~25 fetches per run. If `curl` to the blog is
+unavailable, rely on source A; do not treat a blocked blog fetch as a scan
+failure.
 
 ## Step 3 — Match news ↔ playbook entries
 
