@@ -43,9 +43,6 @@ tools:
     - "cat src/content/playbook/*"
     - "find src/content/playbook *"
     - "date:*"
-    - "curl:*"
-    - "head:*"
-    - "grep:*"
   cache-memory: true
 
 safe-outputs:
@@ -92,40 +89,23 @@ For each entry, parse the frontmatter and capture:
 
 Load cache memory and read `last_run` (ISO date). If absent, default to **8 days ago**.
 
-Gather "what's new" from two complementary sources:
-
-**A. GitHub MCP tools (primary, always reliable).** `api.github.com` is always
-reachable. Use the `github` tools to pull authoritative recent activity:
+Gather "what's new" using the **GitHub MCP tools** (`api.github.com` is always
+reachable from the sandbox; the agent's built-in `web-fetch` and outbound
+`curl`/HTML scraping are blocked here, so do not rely on them). The `github`
+tools give authoritative, structured recent activity:
 
 - `list_releases` / `get_latest_release` on fast-moving repos like
-  `github/github-mcp-server`.
+  `github/github-mcp-server`, `github/gh-aw`, and `cli/cli` — release notes are
+  the canonical record of shipped capabilities.
 - `search_commits` / `list_commits` on `github/docs` filtered to
-  `path: content/copilot` and `committer-date:>=<last_run>` to catch GA
-  flips, renames, and deprecations.
-- `search_issues` / changelog labels where useful.
+  `path: content/copilot` and `committer-date:>=<last_run>` to catch GA flips,
+  renames, deprecations, and new feature pages.
+- `get_file_contents` on a specific `github/docs` page when an entry's `links:`
+  points at docs you need to verify.
+- `search_issues` / `search_code` where useful.
 
-**B. `curl` for the public Changelog / Blog (supplementary).** Retrieve each URL
-with a **single, simple command** — the runner firewall already allows
-`github.blog` and `docs.github.com`.
-
-> ⚠️ This sandbox denies any *piped or compound* shell command (`|`, `&&`,
-> `||`, redirects) even when each part is allow-listed. Never chain commands.
-> Fetch to a file, then inspect it with a separate command:
->
-> 1. `curl -sSL --max-time 30 "<url>" -o /tmp/gh-aw/agent/page.html`
-> 2. `grep -nE '<pattern>' /tmp/gh-aw/agent/page.html`  (or
->    `head -c 60000 /tmp/gh-aw/agent/page.html`)
-
-- Changelog index: `https://github.blog/changelog/` (and label-filtered pages
-  for `copilot`, `actions`, `code-security`, `codespaces`, `mcp`).
-- Blog topic pages: `https://github.blog/ai-and-ml/github-copilot/`,
-  `https://github.blog/category/engineering/`.
-- Docs: only fetch a docs page if a playbook entry's `links:` already points at
-  it (you're verifying the content the playbook claims is current).
-
-Be conservative — at most ~25 fetches per run. If `curl` to the blog is
-unavailable, rely on source A; do not treat a blocked blog fetch as a scan
-failure.
+These sources cover what the public Changelog/Blog announce, without depending
+on HTML scraping. Be conservative — a focused handful of MCP queries per run.
 
 ## Step 3 — Match news ↔ playbook entries
 
@@ -191,8 +171,8 @@ Set `last_run` to today's date so next week's run picks up where this one ended.
 - Read-only on everything outside `src/content/playbook/`.
 - Never @-mention users.
 - Stay within the network allowlist — do not fetch arbitrary domains.
-- If a `curl` fetch consistently fails for a source, note it in the issue body
-  and continue; do not retry in a loop.
+- If a needed MCP query returns nothing for a source, note it briefly and
+  continue; do not retry in a loop.
 - Japanese is the playbook's writing voice. When you propose wording in the
   issue, write the suggestion in Japanese (matching the entry) but keep the
   meta-commentary ("Why", "Evidence", "Suggested edit") in English.
