@@ -16,9 +16,9 @@
     "@astrojs/mdx": "^5.0.3",
     "@astrojs/react": "^5.0.3",
     "@astrojs/tailwind": "^6.0.2",
-    "astro": "^6.1.10",
+    "astro": "^6.4.8",
     "gsap": "^3.15.0",
-    "mermaid": "^11.14.0",
+    "mermaid": "^11.15.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "tailwindcss": "^3.4.19"
@@ -32,5 +32,14 @@
     "remark-stringify": "^11.0.0",
     "unified": "^11.0.5"
   },
-  "type": "module"
+  "type": "module",
+  "pnpm": {
+    "overrides": {
+      "vite": "^7.3.5",
+      "devalue": "^5.8.1",
+      "js-yaml": "^4.2.0",
+      "esbuild": "^0.28.1",
+      "@babel/core": "^7.29.6"
+    }
+  }
 }
