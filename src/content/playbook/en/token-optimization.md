@@ -340,7 +340,6 @@ Keep specs, knowledge bases, and reference tables in **Markdown / CSV / plain te
 
 These are conditional and come with trade-offs. Reach for them once the basics above are in place.
 
-- 🧮 **Think in code** — files like Word or Excel are hard to pass as-is: have the agent run a script first to extract the data and **convert it to Markdown** before handing it over — better accuracy and fewer tokens. Do the same for big API responses or long files: filter with a script first.
 - 🖥️ **CLI vs MCP** — leaning on `gh`, `kubectl`, `npm` etc. is often leaner than the equivalent MCP because the model already knows these tools.
 - ✂️ **Trim shell output** — tools like <a href="https://github.com/rtk-ai/rtk" target="_blank" rel="noopener noreferrer" class="retro-link">rtk-ai/rtk</a> reduce LLM token consumption by **60–90%** on common dev commands.
 - 📊 **Run `/chronicle tip` regularly** — analyze your Copilot CLI sessions to surface concrete improvement areas.
