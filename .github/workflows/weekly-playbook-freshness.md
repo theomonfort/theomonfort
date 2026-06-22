@@ -37,13 +37,14 @@ timeout-minutes: 30
 tools:
   github:
     toolsets: [default]
-  web-fetch:
   edit:
   bash:
     - "ls src/content/playbook *"
     - "cat src/content/playbook/*"
     - "find src/content/playbook *"
     - "date:*"
+    - "curl:*"
+    - "head:*"
   cache-memory: true
 
 safe-outputs:
@@ -99,7 +100,12 @@ Fetch GitHub-side news published since `last_run`:
 - Docs: only fetch a docs page if a playbook entry's `links:` already points at
   it (you're verifying the content the playbook claims is current).
 
-Use `web-fetch` for each URL. Be conservative — at most ~25 fetches per run.
+Use **`curl`** to retrieve each URL, e.g. `curl -sSL --max-time 30 "<url>"`.
+The runner's network firewall already allows `github.blog`, `docs.github.com`
+and the rest of the GitHub ecosystem, so `curl` works while the engine's
+built-in `web-fetch` tool is unavailable in this sandbox. For large pages, pipe
+through `head -c 60000` to cap the payload (`curl -sSL "<url>" | head -c 60000`).
+Be conservative — at most ~25 fetches per run.
 
 ## Step 3 — Match news ↔ playbook entries
 
@@ -165,8 +171,8 @@ Set `last_run` to today's date so next week's run picks up where this one ended.
 - Read-only on everything outside `src/content/playbook/`.
 - Never @-mention users.
 - Stay within the network allowlist — do not fetch arbitrary domains.
-- If `web-fetch` consistently fails for a source, note it in the issue body and
-  continue; do not retry in a loop.
+- If a `curl` fetch consistently fails for a source, note it in the issue body
+  and continue; do not retry in a loop.
 - Japanese is the playbook's writing voice. When you propose wording in the
   issue, write the suggestion in Japanese (matching the entry) but keep the
   meta-commentary ("Why", "Evidence", "Suggested edit") in English.
