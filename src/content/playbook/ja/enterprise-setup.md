@@ -2,7 +2,7 @@
 title: Enterprise セットアップ
 titleEn: Enterprise Setup
 summary: GitHub Enterprise Cloud (EMU) の作成から SSO 構成まで。30 日間無料トライアルで Enterprise を作成し、Entra ID で OIDC/SAML を設定してチームを迎える準備を整える。
-icon: /theomonfort/icons/license-crown.png
+icon: /theomonfort/icons/enterprise-bank.png
 color: magenta
 accent:
   text: text-neon-magenta
@@ -10,7 +10,7 @@ accent:
   glow: hover:shadow-neon-magenta
   shadow: shadow-neon-magenta
   hex: "#ff2e88"
-order: 31
+order: 29.5
 category: administration
 related: ['license-management']
 links:
