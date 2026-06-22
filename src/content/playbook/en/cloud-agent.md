@@ -15,9 +15,9 @@ category: develop
 related: ['partner-agent', 'copilot-code-review', 'instructions', 'mcp']
 links:
   - label: Customize the agent environment
-    url: https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/use-copilot-agents/cloud-agent/customize-the-agent-environment
-  - label: Extend Cloud Agent with MCP
-    url: https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/extend-cloud-agent-with-mcp
+    url: https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/customize-the-agent-environment
+  - label: Use Cloud Agent with MCP
+    url: https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent/use-cloud-agent-with-mcp
   - label: Validation tools — docs
     url: https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent/configuring-agent-settings#enabling-or-disabling-built-in-code-quality-and-security-validation-tools
   - label: Claude & Codex on Cloud Agent (changelog)
@@ -125,7 +125,7 @@ Cloud Agent has a **dedicated MCP server configuration**, managed separately fro
 - 🛠️ **`tools: ["*"]`** — Allows all tools exposed by that server. Can be whitelisted to specific tools if needed
 - 🔐 Servers requiring authentication pass API tokens via `headers` (reference GitHub Actions Secrets with `${{ secrets.* }}`)
 
-> 💡 For details, see <a href="https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/extend-cloud-agent-with-mcp" target="_blank" rel="noopener noreferrer" class="retro-link">Extend Cloud Agent with MCP</a>.
+> 💡 For details, see <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent/use-cloud-agent-with-mcp" target="_blank" rel="noopener noreferrer" class="retro-link">Use Cloud Agent with MCP</a>.
 
 ## Validation Tools (ON by default)
 
