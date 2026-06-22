@@ -1,5 +1,6 @@
 ---
 import { localizedPath, otherLocale, siteCopy, type Locale } from '../../lib/i18n';
+import MenuArrow from '../retro/MenuArrow.astro';
 
 interface Props {
   locale?: Locale;
@@ -31,19 +32,19 @@ const targetLocale = otherLocale(locale);
       <li>
         <a href="https://github.com/theomonfort" target="_blank" rel="noopener noreferrer"
            class="retro-link inline-flex items-center gap-1.5">
-          <span aria-hidden="true">▶</span> GitHub profile: @theomonfort
+          <MenuArrow color="text-neon-cyan" /> GitHub profile: @theomonfort
         </a>
       </li>
       <li>
         <a href="https://github.com/theomonfort/theomonfort" target="_blank" rel="noopener noreferrer"
            class="retro-link inline-flex items-center gap-1.5">
-          <span aria-hidden="true">▶</span> {t.footer.repository}
+          <MenuArrow color="text-neon-cyan" /> {t.footer.repository}
         </a>
       </li>
       <li>
         <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbRxfrxixxnh1AkgHlZ0RLul1UQ0dZSUM1V1Y0Vks2RUNEVElHUU9ZVjMySC4u" target="_blank" rel="noopener noreferrer"
            class="retro-link inline-flex items-center gap-1.5">
-          <span aria-hidden="true">▶</span> {t.footer.feedback}
+          <MenuArrow color="text-neon-cyan" /> {t.footer.feedback}
         </a>
       </li>
     </ul>

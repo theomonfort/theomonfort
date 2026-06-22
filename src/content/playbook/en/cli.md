@@ -90,6 +90,8 @@ Copilot CLI includes standard agents for common tasks.
 | **Research** | Conducts deep research across the codebase, related repositories, and the web, producing detailed reports with citations. |
 | **Rubber duck** | Returns constructive critical feedback for complex tasks. Used automatically by Copilot CLI. |
 
+> 💡 You can inspect these built-in agents' definitions in your local CLI install at `definitions/*.agent.yaml` (e.g. `~/.copilot/pkg/darwin-arm64/<version>/definitions/*.agent.yaml`).
+
 ## Rubber Duck — Cross-model Review
 
 > 🦆 **Experimental**: A **different model family** from the main model provides a "second opinion" as a constructive critic, independently reviewing each phase of planning, implementation, and testing.
