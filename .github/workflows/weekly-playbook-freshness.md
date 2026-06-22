@@ -105,11 +105,17 @@ reachable. Use the `github` tools to pull authoritative recent activity:
 - `search_issues` / changelog labels where useful.
 
 **B. `curl` for the public Changelog / Blog (supplementary).** Retrieve each URL
-with a simple command — the runner firewall already allows `github.blog` and
-`docs.github.com`:
+with a **single, simple command** — the runner firewall already allows
+`github.blog` and `docs.github.com`.
 
-- `curl -sSL --max-time 30 "<url>"` (optionally trim with
-  `| head -c 60000` or `| grep -E '<pattern>'`).
+> ⚠️ This sandbox denies any *piped or compound* shell command (`|`, `&&`,
+> `||`, redirects) even when each part is allow-listed. Never chain commands.
+> Fetch to a file, then inspect it with a separate command:
+>
+> 1. `curl -sSL --max-time 30 "<url>" -o /tmp/gh-aw/agent/page.html`
+> 2. `grep -nE '<pattern>' /tmp/gh-aw/agent/page.html`  (or
+>    `head -c 60000 /tmp/gh-aw/agent/page.html`)
+
 - Changelog index: `https://github.blog/changelog/` (and label-filtered pages
   for `copilot`, `actions`, `code-security`, `codespaces`, `mcp`).
 - Blog topic pages: `https://github.blog/ai-and-ml/github-copilot/`,
