@@ -29,6 +29,9 @@ links:
   - group: 🌟 Community Skills
     label: skills.sh — Open Agent Skills Registry
     url: https://skills.sh/
+  - group: 🌟 Community Skills
+    label: GitHub Agent Finder — discover skills/MCP/agents
+    url: https://github.com/agentfinder
   - group: 🛠️ Reference Implementation
     label: theomonfort skills
     url: https://theomonfort.github.io/theomonfort/skills/
@@ -162,4 +165,12 @@ A cross-ecosystem open registry. Browse and add GitHub-hosted skills.
 
 ```bash
 gh skills install <owner>/<repo> <skill-name>
+```
+
+### [GitHub Agent Finder](https://github.com/agentfinder)
+
+A discovery service that searches across **MCP servers, tools, skills, and agents** for a task. Install the `agentfinder` skill, then run `/agentfinder <what you want>` to list matches.
+
+```bash
+gh skills install theomonfort/skills agentfinder
 ```

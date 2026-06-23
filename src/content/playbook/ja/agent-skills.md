@@ -29,6 +29,9 @@ links:
   - group: 🌟 コミュニティ製スキル
     label: skills.sh — オープン Agent Skills レジストリ
     url: https://skills.sh/
+  - group: 🌟 コミュニティ製スキル
+    label: GitHub Agent Finder — スキル/MCP/エージェント探索
+    url: https://github.com/agentfinder
   - group: 🛠️ 参考実装
     label: theomonfort skills
     url: https://theomonfort.github.io/theomonfort/skills/
@@ -162,4 +165,12 @@ gh skills install github/awesome-copilot <skill-name>
 
 ```bash
 gh skills install <owner>/<repo> <skill-name>
+```
+
+### [GitHub Agent Finder](https://github.com/agentfinder)
+
+タスクに合う **MCP サーバー・ツール・スキル・エージェント** を横断検索する発見サービス。`agentfinder` スキルを入れれば `/agentfinder <やりたいこと>` で候補を一覧できる。
+
+```bash
+gh skills install theomonfort/skills agentfinder
 ```
