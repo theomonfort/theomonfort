@@ -2,7 +2,7 @@
 title: トークン最適化
 titleEn: Token Optimization
 summary: トークンは「削る」ではなく「質を上げる」ことで結果的に減る。モデル選び・コンテキスト設計・決定的なガードレール・適切な Agent Config で、1 トークンずつを意味のあるものにする。
-icon: /theomonfort/icons/token-opt.png
+icon: /theomonfort/icons/token-investment.png
 color: green
 accent:
   text: text-gb-green
@@ -339,7 +339,6 @@ links:
 
 ここから先は条件付き＆トレードオフあり。上の基本を入れ終えてから手を出す。
 
-- 🧮 **コードで考える** — Word や Excel などのファイルはそのまま渡すと扱いにくい。まずスクリプトでデータを取り出し、**Markdown に変換してから**エージェントに渡すと精度もトークン効率も上がる。巨大な API レスポンスや長いファイルも、同様にスクリプトでフィルタしてから渡す。
 - 🖥️ **CLI vs MCP** — `gh` / `kubectl` / `npm` などの CLI に頼る方が、同等の MCP より軽いことが多い（モデルが既に知っているから）。
 - ✂️ **シェル出力をトリム** — <a href="https://github.com/rtk-ai/rtk" target="_blank" rel="noopener noreferrer" class="retro-link">rtk-ai/rtk</a> のようなツールは、よく使う開発コマンドで LLM のトークン消費を **60〜90% 削減** します。
 - 📊 **`/chronicle tip` を定期的に** — Copilot CLI のセッションを分析し、改善点を具体的に教えてくれる。
