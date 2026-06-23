@@ -22,20 +22,33 @@ links:
     url: https://code.visualstudio.com/docs/copilot/customization/mcp-servers
   - label: GitHub 公式 MCP server
     url: https://github.com/github/github-mcp-server
-  - label: MCP Registry
-    url: https://registry.modelcontextprotocol.io/
-  - label: MCP Registry repo
-    url: https://github.com/modelcontextprotocol/registry
   - label: GitHub Docs — Configure MCP server access (org/enterprise)
     url: https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-mcp-usage/configure-mcp-server-access
-  - label: GitHub Docs — Configure MCP registry (org/enterprise)
-    url: https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-mcp-usage/configure-mcp-registry
   - label: GitHub Docs — MCP server usage in your company
     url: https://docs.github.com/en/copilot/concepts/mcp-management
-  - label: GitHub Blog — Find, install, manage MCP servers via the GitHub MCP Registry
-    url: https://github.blog/ai-and-ml/generative-ai/how-to-find-install-and-manage-mcp-servers-with-the-github-mcp-registry/
   - label: GitHub Docs — MCP and the cloud agent
     url: https://docs.github.com/en/copilot/concepts/agents/cloud-agent/mcp-and-cloud-agent
+  - group: 🗂️ MCP Registry
+    label: MCP Registry（registry.modelcontextprotocol.io）
+    url: https://registry.modelcontextprotocol.io/
+  - group: 🗂️ MCP Registry
+    label: MCP Registry repo
+    url: https://github.com/modelcontextprotocol/registry
+  - group: 🗂️ MCP Registry
+    label: GitHub MCP Registry（github.com/mcp）
+    url: https://github.com/mcp
+  - group: 🗂️ MCP Registry
+    label: GitHub Docs — Configure MCP registry (org/enterprise)
+    url: https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-mcp-usage/configure-mcp-registry
+  - group: 🗂️ MCP Registry
+    label: GitHub Docs — MCP allowlist enforcement
+    url: https://docs.github.com/en/copilot/reference/mcp-allowlist-enforcement
+  - group: 🗂️ MCP Registry
+    label: GitHub Blog — Find, install, manage MCP servers via the GitHub MCP Registry
+    url: https://github.blog/ai-and-ml/generative-ai/how-to-find-install-and-manage-mcp-servers-with-the-github-mcp-registry/
+  - group: 🗂️ MCP Registry
+    label: Azure API Center — Register & discover MCP servers
+    url: https://learn.microsoft.com/en-us/azure/api-center/register-discover-mcp-server
   - group: 📰 Recent Changelog
     label: "Secret scanning with GitHub MCP Server is now GA (2026-05-05)"
     url: https://github.blog/changelog/2026-05-05-secret-scanning-with-github-mcp-server-is-now-generally-available
@@ -178,3 +191,57 @@ copilot mcp list
 GitHub 公式 MCP server は最初から接続済み。`gh` コマンドを叩く感覚で、AI が Issues / PRs / Actions / Code search を操作できる。
 
 `modelcontextprotocol/registry` には公式 + コミュニティ製の server が多数（filesystem / postgres / slack / puppeteer / playwright / Figma…）。
+
+## MCP Registry とは
+
+**MCP Registry** は、エコシステム全体の MCP サーバーを一覧できる **オープンなレジストリ**。自前のレジストリを立てることもできる。
+
+| 項目 | 🌐 MCP Registry | 🐙 GitHub MCP Registry |
+| --- | --- | --- |
+| 管理者 | **MCP Working Group** | **GitHub** |
+| 内容 | 公式 + コミュニティの **全 server**（約 13,238／2026-06-23 時点） | GitHub が **厳選した一覧**（約 100） |
+| 既定で使われる場所 | — | <a class="retro-link" href="https://code.visualstudio.com/docs/enterprise/ai-settings#_configure-a-custom-mcp-registry" target="_blank" rel="noopener noreferrer">VS Code ↗</a> など |
+| URL | <a class="retro-link" href="https://registry.modelcontextprotocol.io/" target="_blank" rel="noopener noreferrer">registry.modelcontextprotocol.io ↗</a> | <a class="retro-link" href="https://github.com/mcp" target="_blank" rel="noopener noreferrer">github.com/mcp ↗</a> |
+
+> 🛠️ **自前のレジストリ** を作り、許可する server を **拡張** したり **絞り込ん** だりできる。
+> 🛡️ 作ったレジストリは **Organization / Enterprise レベルで強制** できる（allowlist enforcement）。
+
+## 自前の MCP Registry を作る
+
+ホスティングは **2 通り**。どちらも VS Code / Org / Enterprise から参照・強制できる。
+
+<div class="setup-cards">
+  <div class="setup-card">
+    <div class="setup-card-head">
+      <code>Self-hosted</code>
+      <span class="setup-card-tag tag-cyan">▸ フルコントロール</span>
+    </div>
+    <p>OSS の <a class="retro-link" href="https://github.com/modelcontextprotocol/registry" target="_blank" rel="noopener noreferrer">modelcontextprotocol/registry ↗</a>（Go 製サービス）を自前のインフラにデプロイ。MCP Working Group が公式メンテ。</p>
+  </div>
+  <div class="setup-card">
+    <div class="setup-card-head">
+      <code>Azure API Center</code>
+      <span class="setup-card-tag tag-magenta">▸ マネージド</span>
+    </div>
+    <p>Azure の <a class="retro-link" href="https://learn.microsoft.com/en-us/azure/api-center/register-discover-mcp-server" target="_blank" rel="noopener noreferrer">API Center ↗</a> に MCP server を登録・公開。インフラ管理は不要。</p>
+  </div>
+</div>
+
+### クライアント側の設定
+
+- **GitHub Org / Enterprise**：<a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-mcp-usage/configure-mcp-registry" target="_blank" rel="noopener noreferrer">レジストリを設定 ↗</a> し、<a class="retro-link" href="https://docs.github.com/en/copilot/reference/mcp-allowlist-enforcement" target="_blank" rel="noopener noreferrer">allowlist で強制 ↗</a>
+
+## MCP Registry をローカルで試す
+
+> 🧪 **これは手順書ではなく個人メモ。** 私が実際に試して動いた流れを AI がまとめたもの。ざっくりイメージを掴むためのもので、環境により変わる。
+
+ローカルに registry を立て、HTTPS で公開し、自分の Org に接続して GitHub MCP Registry から seed するまでの流れ。
+
+1. **Fork & clone** — `gh repo fork modelcontextprotocol/registry --clone`
+2. **Docker で起動** — `docker compose up` → API は `localhost:8080`（初期 DB は demo seed のみ）
+3. **HTTPS トンネル** — `cloudflared tunnel --url http://localhost:8080` → `https://<random>.trycloudflare.com`
+4. **接続** — トンネル URL を **MCP Registry URL** に設定（`/v0.1/servers` は付けない。Copilot が自動付与）。**Org** は Settings → Copilot → **Policies** → MCP、**Enterprise** は **AI controls** → MCP
+5. **VS Code をリロード & 確認** — Developer: Reload Window → `@mcp` で自分の registry の server だけが表示される。`Cmd + ,`（設定）で MCP 設定が **「managed by your organization」** バッジ付き（＝ Org ポリシーが効いている）か確認
+6. **GitHub Registry から seed** — `go run scripts/mirror_data/fetch_production_data.go` + `load_production_data.go`（source: `https://api.mcp.github.com/v0.1/servers`）
+
+> ⚠️ VS Code が **この Org の Copilot ライセンス** を使っているか確認（別アカウント/個人プランだと Org のポリシーが効かない）。`mirror_data` スクリプトは as-is なので、許可したい server に合わせて絞り込む。

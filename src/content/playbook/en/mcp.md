@@ -22,20 +22,33 @@ links:
     url: https://code.visualstudio.com/docs/copilot/customization/mcp-servers
   - label: GitHub official MCP server
     url: https://github.com/github/github-mcp-server
-  - label: MCP Registry
-    url: https://registry.modelcontextprotocol.io/
-  - label: MCP Registry repo
-    url: https://github.com/modelcontextprotocol/registry
   - label: GitHub Docs — Configure MCP server access (org/enterprise)
     url: https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-mcp-usage/configure-mcp-server-access
-  - label: GitHub Docs — Configure MCP registry (org/enterprise)
-    url: https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-mcp-usage/configure-mcp-registry
   - label: GitHub Docs — MCP server usage in your company
     url: https://docs.github.com/en/copilot/concepts/mcp-management
-  - label: GitHub Blog — Find, install, manage MCP servers via the GitHub MCP Registry
-    url: https://github.blog/ai-and-ml/generative-ai/how-to-find-install-and-manage-mcp-servers-with-the-github-mcp-registry/
   - label: GitHub Docs — MCP and the cloud agent
     url: https://docs.github.com/en/copilot/concepts/agents/cloud-agent/mcp-and-cloud-agent
+  - group: 🗂️ MCP Registry
+    label: MCP Registry (registry.modelcontextprotocol.io)
+    url: https://registry.modelcontextprotocol.io/
+  - group: 🗂️ MCP Registry
+    label: MCP Registry repo
+    url: https://github.com/modelcontextprotocol/registry
+  - group: 🗂️ MCP Registry
+    label: GitHub MCP Registry (github.com/mcp)
+    url: https://github.com/mcp
+  - group: 🗂️ MCP Registry
+    label: GitHub Docs — Configure MCP registry (org/enterprise)
+    url: https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-mcp-usage/configure-mcp-registry
+  - group: 🗂️ MCP Registry
+    label: GitHub Docs — MCP allowlist enforcement
+    url: https://docs.github.com/en/copilot/reference/mcp-allowlist-enforcement
+  - group: 🗂️ MCP Registry
+    label: GitHub Blog — Find, install, manage MCP servers via the GitHub MCP Registry
+    url: https://github.blog/ai-and-ml/generative-ai/how-to-find-install-and-manage-mcp-servers-with-the-github-mcp-registry/
+  - group: 🗂️ MCP Registry
+    label: Azure API Center — Register & discover MCP servers
+    url: https://learn.microsoft.com/en-us/azure/api-center/register-discover-mcp-server
   - group: 📰 Recent Changelog
     label: "Secret scanning with GitHub MCP Server is now GA (2026-05-05)"
     url: https://github.blog/changelog/2026-05-05-secret-scanning-with-github-mcp-server-is-now-generally-available
@@ -178,3 +191,57 @@ copilot mcp list
 The GitHub official MCP server is connected out of the box. AI can operate Issues, PRs, Actions, and Code search just like running `gh` commands.
 
 `modelcontextprotocol/registry` hosts many official and community-built servers (filesystem / postgres / slack / puppeteer / playwright / Figma…).
+
+## What is the MCP Registry
+
+The **MCP Registry** is an **open registry** that lists MCP servers from across the ecosystem — and you can stand up **your own** registry too.
+
+| Aspect | 🌐 MCP Registry | 🐙 GitHub MCP Registry |
+| --- | --- | --- |
+| Maintainer | **MCP Working Group** | **GitHub** |
+| Contents | **All** official + community servers (~13,238 as of 2026-06-23) | A **curated list** (~100) |
+| Default in | — | <a class="retro-link" href="https://code.visualstudio.com/docs/enterprise/ai-settings#_configure-a-custom-mcp-registry" target="_blank" rel="noopener noreferrer">VS Code ↗</a> & more |
+| URL | <a class="retro-link" href="https://registry.modelcontextprotocol.io/" target="_blank" rel="noopener noreferrer">registry.modelcontextprotocol.io ↗</a> | <a class="retro-link" href="https://github.com/mcp" target="_blank" rel="noopener noreferrer">github.com/mcp ↗</a> |
+
+> 🛠️ Build **your own registry** to **extend** or **narrow** the list of allowed servers.
+> 🛡️ Enforce it at the **organization / enterprise** level (allowlist enforcement).
+
+## Build your own MCP Registry
+
+Two hosting options — both can be consumed and enforced from VS Code / Org / Enterprise.
+
+<div class="setup-cards">
+  <div class="setup-card">
+    <div class="setup-card-head">
+      <code>Self-hosted</code>
+      <span class="setup-card-tag tag-cyan">▸ Full control</span>
+    </div>
+    <p>Deploy the OSS <a class="retro-link" href="https://github.com/modelcontextprotocol/registry" target="_blank" rel="noopener noreferrer">modelcontextprotocol/registry ↗</a> (a Go service) on your own infra. Officially maintained by the MCP Working Group.</p>
+  </div>
+  <div class="setup-card">
+    <div class="setup-card-head">
+      <code>Azure API Center</code>
+      <span class="setup-card-tag tag-magenta">▸ Managed</span>
+    </div>
+    <p>Register & publish MCP servers in Azure <a class="retro-link" href="https://learn.microsoft.com/en-us/azure/api-center/register-discover-mcp-server" target="_blank" rel="noopener noreferrer">API Center ↗</a> — no infra to manage.</p>
+  </div>
+</div>
+
+### Point clients at it
+
+- **GitHub Org / Enterprise**: <a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-mcp-usage/configure-mcp-registry" target="_blank" rel="noopener noreferrer">configure the registry ↗</a> and <a class="retro-link" href="https://docs.github.com/en/copilot/reference/mcp-allowlist-enforcement" target="_blank" rel="noopener noreferrer">enforce via allowlist ↗</a>
+
+## Trying an MCP Registry locally
+
+> 🧪 **These are personal notes, not a manual.** An AI summary of the flow that actually worked for me — just to give a rough idea. Your mileage will vary.
+
+The flow to stand up a registry locally, expose it over HTTPS, connect it to my Org, and seed it from the GitHub MCP Registry.
+
+1. **Fork & clone** — `gh repo fork modelcontextprotocol/registry --clone`
+2. **Run in Docker** — `docker compose up` → API on `localhost:8080` (initial DB has only the demo seed)
+3. **HTTPS tunnel** — `cloudflared tunnel --url http://localhost:8080` → `https://<random>.trycloudflare.com`
+4. **Connect** — set the tunnel URL as **MCP Registry URL** (no `/v0.1/servers` suffix — Copilot appends it). **Org**: Settings → Copilot → **Policies** → MCP; **Enterprise**: **AI controls** → MCP
+5. **Reload VS Code & verify** — Developer: Reload Window → `@mcp` shows only the servers from my registry. Open `Cmd + ,` (Settings) and confirm the MCP settings carry a **“managed by your organization”** badge (= the Org policy is applied)
+6. **Seed from the GitHub Registry** — `go run scripts/mirror_data/fetch_production_data.go` + `load_production_data.go` (source: `https://api.mcp.github.com/v0.1/servers`)
+
+> ⚠️ Make sure VS Code uses **this Org's Copilot license** (a different account / personal plan won't get the Org policy). The `mirror_data` scripts are as-is — filter them down to the servers you actually want to allow.
