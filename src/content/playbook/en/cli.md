@@ -20,8 +20,8 @@ links:
     url: https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/overview
   - label: Rubber Duck — cross-model second opinion
     url: https://github.blog/ai-and-ml/github-copilot/github-copilot-cli-combines-model-families-for-a-second-opinion/
-  - label: Remote control CLI sessions (Public Preview)
-    url: https://github.blog/changelog/2026-04-13-remote-control-cli-sessions-on-web-and-mobile-in-public-preview/
+  - label: Remote control CLI sessions (now GA)
+    url: https://github.blog/changelog/2026-05-18-remote-control-for-copilot-cli-sessions-now-generally-available-on-mobile-web-and-vs-code
   - label: BYOK & Local models support
     url: https://github.blog/changelog/2026-04-07-copilot-cli-now-supports-byok-and-local-models/
   - group: 🤖 Non-interactive mode
