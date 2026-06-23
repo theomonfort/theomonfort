@@ -111,6 +111,8 @@ export const siteCopy = {
       slides: 'スライド',
       exit: '終了',
       tocLabel: 'プレゼン目次',
+      updated: '更新',
+      newBadge: 'New!',
     },
     handson: {
       title: 'ハンズオン — AI 開発 QUEST',
@@ -287,6 +289,8 @@ export const siteCopy = {
       slides: 'Slides',
       exit: 'Exit',
       tocLabel: 'Presentation table of contents',
+      updated: 'Updated',
+      newBadge: 'New!',
     },
     handson: {
       title: 'Hands-on — AI Dev Quest',
