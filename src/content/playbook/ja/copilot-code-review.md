@@ -29,6 +29,12 @@ links:
   - label: Blog — 60M Copilot code reviews
     url: https://github.blog/ai-and-ml/github-copilot/60-million-copilot-code-reviews-and-counting/
   - group: 📰 Recent Changelog
+    label: "AGENTS.md 対応・UI 改善 (2026-06-18)"
+    url: https://github.blog/changelog/2026-06-18-copilot-code-review-agents-md-support-and-ui-improvements
+  - group: 📰 Recent Changelog
+    label: "新しい設定・制御オプション (2026-06-12)"
+    url: https://github.blog/changelog/2026-06-12-copilot-code-review-new-configurations-and-controls
+  - group: 📰 Recent Changelog
     label: "Apply review feedback via Cloud Agent (2026-05-19)"
     url: https://github.blog/changelog/2026-05-19-easily-apply-copilot-code-review-feedback-with-copilot-cloud-agent
   - group: 📰 Recent Changelog
@@ -59,9 +65,10 @@ links:
 
 - 🧠 **文脈を理解** — コードの意図を把握し、インラインコメント・**PR 概要**・修正提案を返す
 - ⚙️ **自動化** — Repo / Org / Enterprise レベルで自動実行
-- 📜 **カスタマイズ** — `copilot-instructions.md` でレビュー基準を定義
+- 📜 **カスタマイズ** — `copilot-instructions.md` / `AGENTS.md` でレビュー基準を定義
 - 🔧 **修正** — 指摘を 1 件ずつ、またはまとめて一括修正
 - 🖥️ **快適な UI** — VS Code / GitHub.com 上で提案された変更を **diff ビュー** でスムーズに確認・適用
+- 🛡️ **コンテンツ除外を尊重** — Repo / Org / Enterprise の Copilot コンテンツ除外パスに従い、機微・無関係なファイルをレビュー対象から除外
 - 🔎 **透明性** — Actions のログ・エージェントセッションですべて追跡可能
 
 ## 実績データ
@@ -98,7 +105,7 @@ links:
 
 | 場所 | トリガー | 何が起きる |
 | --- | --- | --- |
-| **GitHub.com 手動レビュー** | PR の **Reviewers** に `Copilot` を追加 | 数分後にインラインコメント + PR Overview が返ってくる |
+| **GitHub.com 手動レビュー** | PR の **Reviewers** に `Copilot` を追加 | 数分後にインラインコメント + PR Overview が返ってくる（**Draft PR** でも Copilot 横の **Request** ボタンから即リクエスト可） |
 | **GitHub.com 自動レビュー** | Repo / Org / Enterprise 設定で「PR 作成時に自動レビュー」を ON | すべての新規 PR が自動でレビューされる（3 ステップで Org 全体に展開可） |
 | **VS Code** | `Copilot: Review uncomitted changes` を Source Control パネルから実行 | コミット前の変更にその場でレビュー → push 前にセルフチェック完了 |
 | **GitHub CLI** | ターミナルで `/review` を実行 | 現在の作業ツリー / ブランチ差分をその場でレビュー — エディタを開かずに確認可能 |
@@ -118,17 +125,28 @@ links:
 
 ## カスタマイズ
 
-レビュー基準は **`.github/copilot-instructions.md`** に書くだけ。
+レビュー基準は **リポジトリ内のファイルに書くだけ**。Copilot Code Review が自動で読み込む。
 
-```markdown
-# コードレビュー基準
-## <セキュリティ>
-- ...
-## <命名規則>
-- ...
-## <ライブラリ方針>
-- ...
-```
+| ソース | 場所 | 用途 |
+| --- | --- | --- |
+| **`copilot-instructions.md`** | `.github/copilot-instructions.md` | レビュー全体に効く基準（**4000 文字の上限は撤廃**、長文の詳細指示も全文反映） |
+| **`NAME.instructions.md`** | `.github/instructions/` 配下 | `applyTo` で指定したパス・言語にだけ効く追加指示 |
+| **`AGENTS.md`** | リポジトリ **ルート** | 既存の `AGENTS.md` があれば自動で文脈として利用 — Cloud Agent / CLI と同じ規約を共有 |
+
+> 💡 **ポイント**：既に `AGENTS.md` で運用しているなら、追加設定なしでレビューにも同じ規約が効く。文字数上限がなくなったので、基準を妥協せず細かく書ける。
+>
+> 📘 公式手順：<a href="https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/add-custom-instructions/add-repository-instructions" target="_blank" rel="noopener noreferrer" class="retro-link">Adding repository custom instructions for GitHub Copilot</a> — 3 種類のファイルと対応機能の一覧
+
+## ガバナンスとランナー制御
+
+Copilot Code Review は **エージェント型アーキテクチャ**で動作し、実体は **GitHub Actions ランナー**上で実行される（2026-06-01 以降 Actions 分を消費）。Org 管理者は実行環境を一元的に統制できる。
+
+| 制御 | 設定パス | できること |
+| --- | --- | --- |
+| **ランナータイプ（Org）** | Org → **Copilot** → **Runner type** → *Runner type configuration* | 全リポジトリ既定のランナー（標準 / 大型 / セルフホスト）を一括設定。**ロック**すれば個別リポジトリ設定を上書き。Code Review と Cloud Agent の両方に適用 |
+| **コンテンツ除外** | Repo / Org / Enterprise 設定（パスベースのルール） | 機微・無関係なファイル／ディレクトリをレビュー文脈から除外 |
+
+> 🔧 **ランナー環境の作り込み**：サイズ拡張 / self-hosted / Windows への切替は `copilot-setup-steps.yml` で制御する。詳細は <a class="retro-link" href="/theomonfort/playbook/cloud-agent/">Cloud Agent ↗</a>（Code Review と同じ仕組み）。
 
 ## 限界と人間の役割
 
