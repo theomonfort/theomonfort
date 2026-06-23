@@ -71,7 +71,7 @@ links:
 </svg>
 </figure>
 
-> 🚀 *Imagine NASA aiming 20 rockets roughly at the moon and hoping one lands. That's how a lot of agent usage looks today. When tokens were cheap, gambling was fine. Now it isn't.*
+> 🚀 *There are two ways to send a rocket to the moon: fire off many cheap ones and hope one lands, or carefully build a single high-quality rocket that hits on the first try. When tokens were cheap, spray-and-pray was fine — now, landing it in one shot is what actually costs less.*
 
 ## The compound-error problem
 
