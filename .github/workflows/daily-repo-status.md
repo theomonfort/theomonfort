@@ -71,6 +71,14 @@ If a category is empty for the day, **skip it** instead of writing "nothing happ
 
 > One-line summary of the day in 80 chars or fewer.
 
+## 📊 Summary
+
+A short 2–4 sentence recap that leads with **how much** was done, then **what**
+was done. Open with the headline numbers for the day — e.g. "**3 commits**,
+**2 PRs merged**, **1 issue closed**, **2 playbook entries updated**" — then a
+sentence or two narrating the most important accomplishments and their impact.
+If the day was quiet, say so briefly in one sentence.
+
 ## 🛠 Commits
 - `<sha7>` — <message> (<author>)
 
@@ -104,6 +112,8 @@ If a category is empty for the day, **skip it** instead of writing "nothing happ
 
 1. Compute the 24h window (UTC now → 24h ago) and JST date for the title.
 2. Query commits, PRs, issues, runs.
-3. Summarize per the template above, dropping empty sections.
-4. Emit a single `create-issue` safe output. Older `[daily-status]` issues will be
+3. Tally the headline counts (commits, PRs merged, issues closed, playbook
+   entries touched) and write the **📊 Summary** section first.
+4. Summarize the rest per the template above, dropping empty sections.
+5. Emit a single `create-issue` safe output. Older `[daily-status]` issues will be
    auto-closed.
