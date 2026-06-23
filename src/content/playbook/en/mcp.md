@@ -227,6 +227,8 @@ Two hosting options — both can be consumed and enforced from VS Code / Org / E
   </div>
 </div>
 
+> 🔒 **Visibility ≠ access:** anything listed in Azure API Center is **visible to anyone** who can reach the catalog — but the catalog only exposes **metadata**. The actual **download / connection is gated separately**: for an internal server, publish a stdio server to a **private package registry** (GitHub Packages, GHCR, Azure Artifacts…) or keep an HTTP server **inside your network / VPN**, so only authenticated employees can pull or connect.
+
 ### Point clients at it
 
 - **GitHub Org / Enterprise**: <a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-mcp-usage/configure-mcp-registry" target="_blank" rel="noopener noreferrer">configure the registry ↗</a> and <a class="retro-link" href="https://docs.github.com/en/copilot/reference/mcp-allowlist-enforcement" target="_blank" rel="noopener noreferrer">enforce via allowlist ↗</a>
