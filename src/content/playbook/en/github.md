@@ -190,6 +190,81 @@ Looking back at GitHub's journey reveals where we are today ──
 </svg>
 </figure>
 
+## Development Output Is Doubling Too
+
+<span style="display:inline-block;padding:2px 10px;border:2px solid #9bbc0f;color:#9bbc0f;font-family:'DotGothic16',monospace;font-size:0.8em;letter-spacing:0.1em;">▮ MORE NUMBERS</span> ── Pull request merges and repo creation are surging in the AI era too.
+
+Source: [GitHub Octoverse 2025](https://octoverse.github.com) (monthly average; 2026 is a run-rate projection)
+
+<figure class="rpi-pipeline" style="margin:2em 0;">
+<svg viewBox="0 0 1080 470" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
+  <defs>
+    <marker id="poArrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#9bbc0f"/>
+    </marker>
+    <marker id="poArrowA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#ffb000"/>
+    </marker>
+    <filter id="poGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- ── Panel A: PULL REQUESTS MERGED ───────────────────────────── -->
+  <g>
+    <rect x="10" y="20" width="512" height="430" fill="#0a0e27" stroke="#9bbc0f" stroke-width="3"/>
+    <path d="M 16 26 h 12 M 16 26 v 12 M 516 26 h -12 M 516 26 v 12 M 16 444 h 12 M 16 444 v -12 M 516 444 h -12 M 516 444 v -12" stroke="#9bbc0f" stroke-width="2" fill="none"/>
+    <rect x="34" y="2" width="360" height="40" fill="#05060f" stroke="#9bbc0f" stroke-width="3"/>
+    <text x="214" y="29" text-anchor="middle" fill="#9bbc0f" font-size="15" font-weight="bold">▮ PULL REQUESTS MERGED / MO</text>
+    <line x1="60" y1="380" x2="500" y2="380" stroke="#2a3050" stroke-width="2"/>
+    <!-- growth curve 28M -> 43M -> 90M -->
+    <path d="M 90 360 C 180 352, 240 334, 300 300 C 378 262, 436 184, 478 116" fill="none" stroke="#9bbc0f" stroke-width="3" marker-end="url(#poArrowG)"/>
+    <!-- point 2023 -->
+    <circle cx="90" cy="360" r="6" fill="#0a0e27" stroke="#9bbc0f" stroke-width="2.5"/>
+    <text x="90" y="404" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">28M</text>
+    <text x="90" y="422" text-anchor="middle" fill="#9bbc0f" font-size="12">2023</text>
+    <!-- point 2025 -->
+    <circle cx="300" cy="300" r="6" fill="#0a0e27" stroke="#9bbc0f" stroke-width="2.5"/>
+    <text x="300" y="344" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">43M</text>
+    <text x="300" y="422" text-anchor="middle" fill="#9bbc0f" font-size="12">2025</text>
+    <!-- peak 2026 pace -->
+    <g filter="url(#poGlow)">
+      <circle cx="478" cy="110" r="10" fill="#9bbc0f"/>
+      <circle cx="478" cy="110" r="4" fill="#05060f"/>
+    </g>
+    <text x="478" y="84" text-anchor="middle" fill="#9bbc0f" font-size="26" font-weight="bold">90M</text>
+    <text x="478" y="422" text-anchor="middle" fill="#9bbc0f" font-size="12" font-weight="bold">2026 pace</text>
+    <text x="280" y="442" text-anchor="middle" fill="#e8f4ff" font-size="12.5"><tspan fill="#9bbc0f" font-weight="bold">~2x</tspan> into 2026 ── AI ships more PRs</text>
+  </g>
+  <!-- ── Panel B: NEW REPOS / MONTH ──────────────────────────────── -->
+  <g>
+    <rect x="558" y="20" width="512" height="430" fill="#0a0e27" stroke="#ffb000" stroke-width="3"/>
+    <path d="M 564 26 h 12 M 564 26 v 12 M 1064 26 h -12 M 1064 26 v 12 M 564 444 h 12 M 564 444 v -12 M 1064 444 h -12 M 1064 444 v -12" stroke="#ffb000" stroke-width="2" fill="none"/>
+    <rect x="582" y="2" width="320" height="40" fill="#05060f" stroke="#ffb000" stroke-width="3"/>
+    <text x="742" y="29" text-anchor="middle" fill="#ffb000" font-size="15" font-weight="bold">▮ NEW REPOS / MONTH</text>
+    <line x1="600" y1="380" x2="1040" y2="380" stroke="#2a3050" stroke-width="2"/>
+    <!-- growth curve 7M -> 10M -> 20M -->
+    <path d="M 620 360 C 720 352, 760 332, 820 312 C 900 286, 960 200, 1018 116" fill="none" stroke="#ffb000" stroke-width="3" marker-end="url(#poArrowA)"/>
+    <!-- point 2023 -->
+    <circle cx="620" cy="360" r="6" fill="#0a0e27" stroke="#ffb000" stroke-width="2.5"/>
+    <text x="620" y="404" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">7M</text>
+    <text x="620" y="422" text-anchor="middle" fill="#ffb000" font-size="12">2023</text>
+    <!-- point 2025 -->
+    <circle cx="820" cy="312" r="6" fill="#0a0e27" stroke="#ffb000" stroke-width="2.5"/>
+    <text x="820" y="356" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">10M</text>
+    <text x="820" y="422" text-anchor="middle" fill="#ffb000" font-size="12">2025</text>
+    <!-- peak 2026 pace -->
+    <g filter="url(#poGlow)">
+      <circle cx="1018" cy="110" r="10" fill="#ffb000"/>
+      <circle cx="1018" cy="110" r="4" fill="#05060f"/>
+    </g>
+    <text x="1018" y="84" text-anchor="middle" fill="#ffb000" font-size="26" font-weight="bold">20M</text>
+    <text x="1018" y="422" text-anchor="middle" fill="#ffb000" font-size="12" font-weight="bold">2026 pace</text>
+    <text x="816" y="442" text-anchor="middle" fill="#e8f4ff" font-size="12.5"><tspan fill="#ffb000" font-weight="bold">~2x</tspan> into 2026 ── new projects exploding</text>
+  </g>
+</svg>
+</figure>
+
 ## AI Developer Platform
 
 From **Plan → Code → Review → Test & Security → Operate**, AI on GitHub supports the entire SDLC end-to-end.
