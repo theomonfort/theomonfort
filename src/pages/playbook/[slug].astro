@@ -6,7 +6,7 @@ import { accentColorValues } from '../../lib/theme';
 import { categories, localizedCategory } from '../../lib/playbook-categories';
 import { localizedPath, siteCopy } from '../../lib/i18n';
 import { getPlaybookEntries, playbookEntryKicker, playbookEntryTitle } from '../../lib/playbook';
-import { formatPlaybookUpdated, isNewPlaybookEntry, playbookUpdatedISO } from '../../lib/playbook-meta';
+import { formatPlaybookUpdated, isNewPlaybookEntry, navHintSlides, playbookUpdatedISO } from '../../lib/playbook-meta';
 
 const locale = 'ja';
 const t = siteCopy[locale];
@@ -40,6 +40,7 @@ const tocEntries = all.map((e) => ({
 
 const updatedLabel = formatPlaybookUpdated(playbookUpdatedISO(item), locale);
 const newBadgeLabel = t.playbook.newBadge;
+const navHintSlideNumbers = navHintSlides(item.slug);
 
 const tocGroups = categories
   .map((cat) => ({
@@ -256,7 +257,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       ><span class="key">Eng</span></a>
     </div>
 
-    <div class="slide-progress" role="tablist" aria-label="Slides"></div>
+    <div class="slide-progress" role="tablist" aria-label="Slides" data-hint-slides={navHintSlideNumbers.join(',')} data-new-label={newBadgeLabel}></div>
     <a
       class="slide-counter font-pixel text-[10px]"
       href={t.handson.bugReportUrl}
@@ -514,7 +515,42 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       tag.classList.toggle('visible', current > 0);
     }
     document.body.classList.toggle('slide-cover', current === 0);
+    placeNewMarkers();
     // Update active item in left TOC (now playbook-entry-based, handled by syncToc)
+  }
+
+  // Pin an always-visible "New!" marker above each flagged slide's progress-bar segment.
+  function placeNewMarkers() {
+    document.querySelectorAll('.slide-new-marker').forEach((e) => e.remove());
+    const prog = document.querySelector<HTMLElement>('.slide-progress');
+    if (!prog) return;
+    const raw = prog.dataset.hintSlides || '';
+    const label = prog.dataset.newLabel || 'New!';
+    const idxs = raw
+      .split(',')
+      .map((s) => parseInt(s.trim(), 10))
+      .filter((n) => !Number.isNaN(n));
+    if (!idxs.length) return;
+    const bars = prog.querySelectorAll<HTMLElement>('.slide-progress-bar');
+    const progRect = prog.getBoundingClientRect();
+    idxs.forEach((idx) => {
+      const bar = bars[idx];
+      if (!bar) return;
+      const r = bar.getBoundingClientRect();
+      const marker = document.createElement('div');
+      marker.className = 'slide-new-marker';
+      marker.setAttribute('aria-hidden', 'true');
+      marker.innerHTML =
+        '<svg class="slide-new-arrow" viewBox="0 0 44 40" fill="none">' +
+        '<path d="M36 34 C 25 31, 15 25, 10 10" stroke="#ffe14d" stroke-width="3.4" stroke-linecap="round" />' +
+        '<path d="M4 21 L9 7 L22 12" stroke="#ffe14d" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" />' +
+        '</svg><span class="slide-new-text"></span>';
+      const textEl = marker.querySelector<HTMLElement>('.slide-new-text');
+      if (textEl) textEl.textContent = label;
+      marker.style.left = `${r.left + r.width / 2}px`;
+      marker.style.top = `${progRect.bottom}px`;
+      document.body.appendChild(marker);
+    });
   }
 
   // ── TOC across playbook entries ──────────────────────────────
@@ -876,6 +912,10 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   document.addEventListener('astro:before-swap', preparePresentNavigation);
   document.addEventListener('astro:after-swap', clearPresentAfterEscape);
   document.addEventListener('astro:page-load', initGlossaryInteractions);
+  const onResizeMarkers = () => {
+    if (document.body.classList.contains('present-mode')) placeNewMarkers();
+  };
+  window.addEventListener('resize', onResizeMarkers);
   win.__akqGlossaryCleanup = () => {
     document.removeEventListener('keydown', onKey);
     document.removeEventListener('click', onTocToggleClick);
@@ -883,6 +923,8 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     document.removeEventListener('astro:before-swap', preparePresentNavigation);
     document.removeEventListener('astro:after-swap', clearPresentAfterEscape);
     document.removeEventListener('astro:page-load', initGlossaryInteractions);
+    window.removeEventListener('resize', onResizeMarkers);
+    document.querySelectorAll('.slide-new-marker').forEach((e) => e.remove());
   };
 
   initGlossaryInteractions();
@@ -2248,6 +2290,32 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     border-bottom: 1px dashed color-mix(in srgb, var(--entry-accent, #00f0ff) 25%, transparent);
   }
   body.present-mode .slide-progress { display: flex; }
+  /* ── "New" markers pinned above flagged nav-bar segments ── */
+  .slide-new-marker {
+    display: none;
+    position: fixed;
+    z-index: 61;
+    flex-direction: row;
+    align-items: center;
+    gap: 3px;
+    transform: translate(-50%, -8px) rotate(-3deg);
+    pointer-events: none;
+  }
+  body.present-mode .slide-new-marker { display: flex; }
+  .slide-new-arrow {
+    width: 18px;
+    height: 16px;
+    filter: drop-shadow(0 0 6px rgba(255, 209, 0, 0.5));
+  }
+  .slide-new-text {
+    font-family: 'Caveat', 'Comic Sans MS', cursive;
+    font-weight: 700;
+    font-size: 1.15rem;
+    line-height: 1;
+    color: #ffe14d;
+    text-shadow: 0 0 8px rgba(255, 209, 0, 0.55);
+    white-space: nowrap;
+  }
   .slide-progress-bar {
     flex: 1;
     border: 0;
