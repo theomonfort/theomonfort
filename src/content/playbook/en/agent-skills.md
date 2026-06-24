@@ -169,8 +169,8 @@ gh skills install <owner>/<repo> <skill-name>
 
 ### [GitHub Agent Finder](https://github.com/agentfinder)
 
-A discovery service that searches across **MCP servers, tools, skills, and agents** for a task. Install the `agentfinder` skill, then run `/agentfinder <what you want>` to list matches.
+A discovery service that searches across **MCP servers, tools, skills, and agents** for a task. Install the `agentfinder` skill, then run `/agentfinder <what you want>` to list matches. See the [SKILL.md](https://github.com/ards-project/connectors/blob/main/skills/github-copilot/SKILL.md) definition.
 
 ```bash
-gh skills install theomonfort/skills agentfinder
+gh skills install ards-project/connectors skills/github-copilot
 ```

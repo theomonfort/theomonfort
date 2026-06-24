@@ -169,8 +169,8 @@ gh skills install <owner>/<repo> <skill-name>
 
 ### [GitHub Agent Finder](https://github.com/agentfinder)
 
-タスクに合う **MCP サーバー・ツール・スキル・エージェント** を横断検索する発見サービス。`agentfinder` スキルを入れれば `/agentfinder <やりたいこと>` で候補を一覧できる。
+タスクに合う **MCP サーバー・ツール・スキル・エージェント** を横断検索する発見サービス。`agentfinder` スキルを入れれば `/agentfinder <やりたいこと>` で候補を一覧できる。スキル定義は [SKILL.md](https://github.com/ards-project/connectors/blob/main/skills/github-copilot/SKILL.md) を参照。
 
 ```bash
-gh skills install theomonfort/skills agentfinder
+gh skills install ards-project/connectors skills/github-copilot
 ```
