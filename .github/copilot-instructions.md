@@ -10,6 +10,10 @@ This is an Astro/Tailwind static site for a bilingual GitHub/Copilot playbook. U
 - Presentation mode splits slides on every `##` heading. Do not add body-level `#` headings; the title slide is generated from frontmatter. Keep each H2 section slide-sized.
 - Use official, fully-qualified URLs in `links`. Link groups usually start with an emoji prefix, e.g. `📖 公式ドキュメント`.
 
+## Frontend design
+
+- Styling, components, and layout follow the retro JRPG design tokens in `.github/instructions/frontend.instructions.md` (path-scoped). Apply those color, font, and effect tokens for any `src/**/*.{astro,css,tsx,jsx,ts,js,html}` change.
+
 ## UI and presentation mode
 
 - The main playbook renderer is duplicated in `src/pages/playbook/[slug].astro` and `src/pages/en/playbook/[slug].astro`; keep behavior in sync.
