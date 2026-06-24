@@ -47,15 +47,6 @@ links:
   <p>今日お話しする <strong>GitHub</strong> は、<strong>1.8 億人以上</strong>の開発者が集う世界最大の AI ネイティブ開発者プラットフォームです。</p>
 </div>
 
-## 数字で見る GitHub
-
-- GitHub 開発者：世界で **1.8 億人以上**（[2025](https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/)）
-- GitHub Copilot 登録ユーザー：**2,000 万人以上**（[2025](https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx)）
-- GitHub Copilot 有料サブスクリプション：**470 万人以上**（[2026](https://www.getpanto.ai/blog/github-copilot-statistics)）
-- エンタープライズ顧客：**77,000 社以上**（[2024](https://www.microsoft.com/investor/reports/ar24/)）
-- Fortune 100 の **約 90%** が Copilot を採用（[2025](https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx)）
-- 有料 AI コーディングツール市場シェア **約 42%**（[2025](https://www.secondtalent.com/resources/github-copilot-statistics/)）
-
 ## 進化の歴史
 
 GitHub の歩みを振り返れば、現在地が見えてくる ──
@@ -125,6 +116,14 @@ GitHub の歩みを振り返れば、現在地が見えてくる ──
 </figure>
 
 
+## 数字で見る GitHub
+
+- GitHub 開発者：世界で **2.4 億人以上**（社内指標 / 2026）
+- GitHub Copilot 有料ユーザー：**4,900 万人以上**（社内指標 / 2026）
+- エンタープライズ顧客：**77,000 社以上**（[2024](https://www.microsoft.com/investor/reports/ar24/)）
+- Fortune 100 の **約 90%** が Copilot を採用（[2025](https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx)）
+- 有料 AI コーディングツール市場シェア **約 42%**（[2025](https://www.secondtalent.com/resources/github-copilot-statistics/)）
+
 ## AI 開発者プラットフォーム
 
 SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ → 運用** を、すべて GitHub 上の AI が一気通貫で支える。
@@ -135,42 +134,42 @@ SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ
      style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
   <rect x="0" y="0" width="1080" height="510" fill="none"/>
 
-  <!-- ── Card 1: PLAN ── magenta ─────────────────────────────────── -->
+  <!-- ── Card 1: PLAN ── green ─────────────────────────────────── -->
   <g>
-    <rect x="16" y="64" width="200" height="400" fill="#1a0610"/>
-    <rect x="12" y="60" width="200" height="400" fill="#0a0e27" stroke="#ff2e88" stroke-width="3"/>
-    <path d="M 18 66 h 12 M 18 66 v 12 M 206 66 h -12 M 206 66 v 12 M 18 454 h 12 M 18 454 v -12 M 206 454 h -12 M 206 454 v -12" stroke="#ff2e88" stroke-width="2" fill="none"/>
-    <rect x="32" y="38" width="160" height="44" fill="#05060f" stroke="#ff2e88" stroke-width="3"/>
-    <text x="112" y="67" text-anchor="middle" fill="#ff2e88" font-size="18" font-weight="bold">▮ PLAN</text>
-    <line x1="22" y1="100" x2="202" y2="100" stroke="#ff2e88" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
+    <rect x="16" y="64" width="200" height="400" fill="#0f1604"/>
+    <rect x="12" y="60" width="200" height="400" fill="#0a0e27" stroke="#9bbc0f" stroke-width="3"/>
+    <path d="M 18 66 h 12 M 18 66 v 12 M 206 66 h -12 M 206 66 v 12 M 18 454 h 12 M 18 454 v -12 M 206 454 h -12 M 206 454 v -12" stroke="#9bbc0f" stroke-width="2" fill="none"/>
+    <rect x="32" y="38" width="160" height="44" fill="#05060f" stroke="#9bbc0f" stroke-width="3"/>
+    <text x="112" y="67" text-anchor="middle" fill="#9bbc0f" font-size="18" font-weight="bold">▮ PLAN</text>
+    <line x1="22" y1="100" x2="202" y2="100" stroke="#9bbc0f" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
     <g>
-      <rect x="22" y="118" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
+      <rect x="22" y="118" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
       <text x="112" y="146" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ GitHub Projects</text>
-      <rect x="22" y="178" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
+      <rect x="22" y="178" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
       <text x="112" y="206" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Issues/Discussions</text>
-      <rect x="22" y="238" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
+      <rect x="22" y="238" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
       <text x="112" y="266" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Plan mode</text>
-      <rect x="22" y="298" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
+      <rect x="22" y="298" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
       <text x="112" y="326" text-anchor="middle" fill="#e8f4ff" font-size="12">▶ Skills/Instructions ...</text>
     </g>
   </g>
 
-  <!-- ── Card 2: CODE ── cyan ────────────────────────────────────── -->
+  <!-- ── Card 2: CODE ── magenta ────────────────────────────────────── -->
   <g>
-    <rect x="230" y="64" width="200" height="400" fill="#02181c"/>
-    <rect x="226" y="60" width="200" height="400" fill="#0a0e27" stroke="#00f0ff" stroke-width="3"/>
-    <path d="M 232 66 h 12 M 232 66 v 12 M 420 66 h -12 M 420 66 v 12 M 232 454 h 12 M 232 454 v -12 M 420 454 h -12 M 420 454 v -12" stroke="#00f0ff" stroke-width="2" fill="none"/>
-    <rect x="246" y="38" width="160" height="44" fill="#05060f" stroke="#00f0ff" stroke-width="3"/>
-    <text x="326" y="67" text-anchor="middle" fill="#00f0ff" font-size="18" font-weight="bold">▮ CODE</text>
-    <line x1="236" y1="100" x2="416" y2="100" stroke="#00f0ff" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
+    <rect x="230" y="64" width="200" height="400" fill="#1a0610"/>
+    <rect x="226" y="60" width="200" height="400" fill="#0a0e27" stroke="#ff2e88" stroke-width="3"/>
+    <path d="M 232 66 h 12 M 232 66 v 12 M 420 66 h -12 M 420 66 v 12 M 232 454 h 12 M 232 454 v -12 M 420 454 h -12 M 420 454 v -12" stroke="#ff2e88" stroke-width="2" fill="none"/>
+    <rect x="246" y="38" width="160" height="44" fill="#05060f" stroke="#ff2e88" stroke-width="3"/>
+    <text x="326" y="67" text-anchor="middle" fill="#ff2e88" font-size="18" font-weight="bold">▮ CODE</text>
+    <line x1="236" y1="100" x2="416" y2="100" stroke="#ff2e88" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
     <g>
-      <rect x="236" y="118" width="180" height="44" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
+      <rect x="236" y="118" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
       <text x="326" y="146" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Copilot Chat</text>
-      <rect x="236" y="178" width="180" height="44" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
+      <rect x="236" y="178" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
       <text x="326" y="206" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Cloud Agent</text>
-      <rect x="236" y="238" width="180" height="44" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
+      <rect x="236" y="238" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
       <text x="326" y="266" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ CLI</text>
-      <rect x="236" y="298" width="180" height="44" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
+      <rect x="236" y="298" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
       <text x="326" y="326" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Codespaces</text>
     </g>
   </g>
@@ -195,42 +194,42 @@ SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ
     </g>
   </g>
 
-  <!-- ── Card 4: TEST &amp; SECURE ── green ──────────────────────── -->
+  <!-- ── Card 4: TEST &amp; SECURE ── cyan ──────────────────────── -->
   <g>
-    <rect x="658" y="64" width="200" height="400" fill="#0f1604"/>
-    <rect x="654" y="60" width="200" height="400" fill="#0a0e27" stroke="#9bbc0f" stroke-width="3"/>
-    <path d="M 660 66 h 12 M 660 66 v 12 M 848 66 h -12 M 848 66 v 12 M 660 454 h 12 M 660 454 v -12 M 848 454 h -12 M 848 454 v -12" stroke="#9bbc0f" stroke-width="2" fill="none"/>
-    <rect x="668" y="38" width="172" height="44" fill="#05060f" stroke="#9bbc0f" stroke-width="3"/>
-    <text x="754" y="67" text-anchor="middle" fill="#9bbc0f" font-size="15" font-weight="bold">▮ TEST &amp; SECURE</text>
-    <line x1="664" y1="100" x2="844" y2="100" stroke="#9bbc0f" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
+    <rect x="658" y="64" width="200" height="400" fill="#02181c"/>
+    <rect x="654" y="60" width="200" height="400" fill="#0a0e27" stroke="#00f0ff" stroke-width="3"/>
+    <path d="M 660 66 h 12 M 660 66 v 12 M 848 66 h -12 M 848 66 v 12 M 660 454 h 12 M 660 454 v -12 M 848 454 h -12 M 848 454 v -12" stroke="#00f0ff" stroke-width="2" fill="none"/>
+    <rect x="668" y="38" width="172" height="44" fill="#05060f" stroke="#00f0ff" stroke-width="3"/>
+    <text x="754" y="67" text-anchor="middle" fill="#00f0ff" font-size="15" font-weight="bold">▮ TEST &amp; SECURE</text>
+    <line x1="664" y1="100" x2="844" y2="100" stroke="#00f0ff" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
     <g>
-      <rect x="664" y="118" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+      <rect x="664" y="118" width="180" height="44" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
       <text x="754" y="146" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Actions</text>
-      <rect x="664" y="178" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+      <rect x="664" y="178" width="180" height="44" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
       <text x="754" y="206" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Autofix</text>
-      <rect x="664" y="238" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+      <rect x="664" y="238" width="180" height="44" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
       <text x="754" y="266" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Code Quality</text>
-      <rect x="664" y="298" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+      <rect x="664" y="298" width="180" height="44" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
       <text x="754" y="326" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Agentic Workflows</text>
     </g>
   </g>
 
-  <!-- ── Card 5: OPERATE ── magenta ──────────────────────────────── -->
+  <!-- ── Card 5: OPERATE ── green ──────────────────────────────── -->
   <g>
-    <rect x="872" y="64" width="200" height="400" fill="#1a0610"/>
-    <rect x="868" y="60" width="200" height="400" fill="#0a0e27" stroke="#ff2e88" stroke-width="3"/>
-    <path d="M 874 66 h 12 M 874 66 v 12 M 1062 66 h -12 M 1062 66 v 12 M 874 454 h 12 M 874 454 v -12 M 1062 454 h -12 M 1062 454 v -12" stroke="#ff2e88" stroke-width="2" fill="none"/>
-    <rect x="888" y="38" width="160" height="44" fill="#05060f" stroke="#ff2e88" stroke-width="3"/>
-    <text x="968" y="67" text-anchor="middle" fill="#ff2e88" font-size="18" font-weight="bold">▮ OPERATE</text>
-    <line x1="878" y1="100" x2="1058" y2="100" stroke="#ff2e88" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
+    <rect x="872" y="64" width="200" height="400" fill="#0f1604"/>
+    <rect x="868" y="60" width="200" height="400" fill="#0a0e27" stroke="#9bbc0f" stroke-width="3"/>
+    <path d="M 874 66 h 12 M 874 66 v 12 M 1062 66 h -12 M 1062 66 v 12 M 874 454 h 12 M 874 454 v -12 M 1062 454 h -12 M 1062 454 v -12" stroke="#9bbc0f" stroke-width="2" fill="none"/>
+    <rect x="888" y="38" width="160" height="44" fill="#05060f" stroke="#9bbc0f" stroke-width="3"/>
+    <text x="968" y="67" text-anchor="middle" fill="#9bbc0f" font-size="18" font-weight="bold">▮ OPERATE</text>
+    <line x1="878" y1="100" x2="1058" y2="100" stroke="#9bbc0f" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
     <g>
-      <rect x="878" y="118" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
+      <rect x="878" y="118" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
       <text x="968" y="146" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Metrics</text>
-      <rect x="878" y="178" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
+      <rect x="878" y="178" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
       <text x="968" y="206" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Copilot Memory</text>
-      <rect x="878" y="238" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
+      <rect x="878" y="238" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
       <text x="968" y="266" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Agentic Workflows</text>
-      <rect x="878" y="298" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
+      <rect x="878" y="298" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
       <text x="968" y="326" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Copilot Metrics</text>
     </g>
   </g>
@@ -253,34 +252,32 @@ SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ
 第三者機関からの評価でも、GitHub は **AI コーディング領域のリーダー** として認められている。
 
 - **IDC**：AI コーディングとソフトウェアエンジニアリングテクノロジーで **リーダー** に選出
-- **Gartner**：マジック・クアドラント、**AI コーディングアシスタント** で **リーダー** に選出
+- **Gartner**：[2026 マジック・クアドラント](https://github.com/resources/whitepapers/gartner-magic-quadrant-for-enterprise-ai-coding-agents?locale=ja)、**エンタープライズ AI コーディングエージェント** 部門で **3 年連続リーダー**に選出。実行能力（Ability to Execute）で **最高位**（[Gartner レポート](https://www.gartner.com/doc/reprints?id=1-2NEACZCW&ct=260520&st=sb)）
 
 <div class="quadrant-small">
 
 ```mermaid
 %%{init: {"theme":"base","themeVariables":{"quadrant1Fill":"#0a1a2e","quadrant2Fill":"#1a0e1f","quadrant3Fill":"#0f0a1f","quadrant4Fill":"#0a1f1a","quadrant1TextFill":"#00f0ff","quadrant2TextFill":"#ff7ab2","quadrant3TextFill":"#c9a5ff","quadrant4TextFill":"#9bbc0f","quadrantTitleFill":"#e8f4ff","quadrantPointFill":"#ffb000","quadrantPointTextFill":"#e8f4ff","quadrantXAxisTextFill":"#e8f4ff","quadrantYAxisTextFill":"#e8f4ff","quadrantInternalBorderStrokeFill":"#2a3050","quadrantExternalBorderStrokeFill":"#00f0ff"}}}%%
 quadrantChart
-    title Magic Quadrant for AI Code Assistants (Aug 2025)
+    title Magic Quadrant for Enterprise AI Coding Agents (2026)
     x-axis Low Vision --> Completeness of Vision
     y-axis Low Execution --> Ability to Execute
     quadrant-1 Leaders
     quadrant-2 Challengers
     quadrant-3 Niche Players
     quadrant-4 Visionaries
-    GitHub: [0.81, 0.82]
-    Amazon: [0.72, 0.75]
-    Cognition: [0.74, 0.70]
-    GitLab: [0.68, 0.57]
-    Google Cloud: [0.63, 0.54]
-    Harness: [0.62, 0.49]
-    Qodo: [0.59, 0.45]
-    Tabnine: [0.54, 0.41]
-    Augment Code: [0.51, 0.36]
-    Anysphere: [0.45, 0.66]
-    Alibaba Cloud: [0.39, 0.61]
-    Tencent Cloud: [0.26, 0.43]
-    IBM: [0.37, 0.40]
-    JetBrains: [0.32, 0.24]
+    GitHub: [0.65, 0.77]
+    Cursor: [0.71, 0.75]
+    Anthropic: [0.66, 0.73]
+    OpenAI: [0.71, 0.71]
+    Cognition: [0.47, 0.61]
+    Google: [0.42, 0.58]
+    Amazon Web Services: [0.48, 0.55]
+    Alibaba Cloud: [0.45, 0.54]
+    Atlassian: [0.45, 0.45]
+    Tabnine: [0.51, 0.42]
+    BytePlus: [0.18, 0.32]
+    JetBrains: [0.21, 0.27]
 ```
 
 </div>
