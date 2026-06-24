@@ -16,36 +16,24 @@ import Aside from '../../../components/handson/Aside.astro';
 
 **What is an Agentic Workflow?**: A mechanism that leverages Copilot inside GitHub Actions workflows to execute autonomous tasks (report generation, documentation updates, code fixes, etc.) in response to repository changes.
 
-### 14.1 — Create a Personal Access Token (PAT)
+### 14.1 — Verify the Copilot policy and Workflow permissions
 
-Create a PAT so Agentic Workflow can leverage Copilot.
+Previously you had to create and store a Personal Access Token (PAT) to use Copilot, but it now runs on the built-in GitHub Actions `GITHUB_TOKEN`, so a **PAT is no longer needed**. This eliminates the operational and security risks of managing long-lived PATs.
 
-1. Go to [https://github.com/settings/personal-access-tokens/new](https://github.com/settings/personal-access-tokens/new)
-2. Settings:
-   - **Token name**: `copilot-workshop-agent`
-   - **Resource owner**: The Organization where you created the repository (or your personal account)
-   - **Repository access**: Only select repositories → Select the repository you created
-   - **Permissions**:
-     - **Actions**: Read and write
-     - **Contents**: Read-only
-     - **Issues**: Read and write
-     - **Metadata**: Read-only (automatically granted)
-     - **Pull requests**: Read and write
+When you run in an organization-owned repository, the AI credits consumed are billed directly to the organization. To use this, verify the following.
 
-![PAT Permissions](/theomonfort/handson/img/pat-permissions.png)
-3\. Copy the PAT you created
+#### Verify the Copilot policy
 
-<Aside type="negative">
+1. In your Organization, go to **Settings** → **Copilot** → **Policies**
+2. Confirm **Allow use of Copilot CLI billed to the organization** is enabled (it's on by default if the existing **Copilot CLI** policy is enabled)
 
-**Note**: The PAT is shown only once at creation time. Make sure to copy it and store it in a safe place — it cannot be displayed again.
+To enable billing to the organization, add `copilot-requests: write` to the `permissions` section in your workflow's front matter (it's included in the prompt in 14.3).
+
+<Aside type="positive">
+
+**💡 TIP**: To use this feature, make sure the Agentic Workflows CLI is up to date. Upgrade with `gh extension upgrade aw`.
 
 </Aside>
-
-#### Configure the repository secret
-
-1. In the repository, go to **Settings** → **Secrets and variables** → **Actions**
-2. Click **New repository secret**
-3. Name: `COPILOT_GITHUB_TOKEN`, Value: the PAT you created
 
 #### Verify Workflow permissions
 
@@ -86,7 +74,8 @@ Format:
 
 Configuration:
 - Trigger: schedule: daily and workflow_dispatch
-- permissions: contents: read, issues: read, pull-requests: read
+- permissions: contents: read, issues: read, pull-requests: read,
+  copilot-requests: write (to enable organization billing)
 - tools: github (lockdown: false, min-integrity: none)
 - safe-outputs: create-issue with title-prefix "[repo-status] ",
   labels: [report, daily-status], close-older-issues: true
