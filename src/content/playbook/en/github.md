@@ -124,6 +124,72 @@ Looking back at GitHub's journey reveals where we are today ──
 - **~90%** of the Fortune 100 have adopted Copilot ([2025](https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx))
 - **~42%** market share in paid AI coding tools ([2025](https://www.secondtalent.com/resources/github-copilot-statistics/))
 
+## Platform Activity Is Surging
+
+<span style="display:inline-block;padding:2px 10px;border:2px solid #9bbc0f;color:#9bbc0f;font-family:'DotGothic16',monospace;font-size:0.8em;letter-spacing:0.1em;">▮ CURRENT SCENARIO</span> ── Development activity on GitHub is accelerating at an unprecedented pace.
+
+<figure class="rpi-pipeline" style="margin:2em 0;">
+<svg viewBox="0 0 1080 470" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
+  <defs>
+    <linearGradient id="paCommitBar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9bbc0f"/>
+      <stop offset="100%" stop-color="#0a0e27"/>
+    </linearGradient>
+    <marker id="paArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#9bbc0f"/>
+    </marker>
+    <filter id="paGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- ── Panel A: COMMITS ────────────────────────────────────────── -->
+  <g>
+    <rect x="10" y="20" width="512" height="430" fill="#0a0e27" stroke="#9bbc0f" stroke-width="3"/>
+    <path d="M 16 26 h 12 M 16 26 v 12 M 516 26 h -12 M 516 26 v 12 M 16 444 h 12 M 16 444 v -12 M 516 444 h -12 M 516 444 v -12" stroke="#9bbc0f" stroke-width="2" fill="none"/>
+    <rect x="34" y="2" width="160" height="40" fill="#05060f" stroke="#9bbc0f" stroke-width="3"/>
+    <text x="114" y="29" text-anchor="middle" fill="#9bbc0f" font-size="17" font-weight="bold">▮ COMMITS</text>
+    <line x1="60" y1="370" x2="500" y2="370" stroke="#2a3050" stroke-width="2"/>
+    <!-- 2025 bar (1B) -->
+    <rect x="92" y="332" width="96" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+    <text x="140" y="320" text-anchor="middle" fill="#e8f4ff" font-size="20" font-weight="bold">1B</text>
+    <text x="140" y="392" text-anchor="middle" fill="#9bbc0f" font-size="13">2025 actual</text>
+    <!-- projected bar (14B) -->
+    <rect x="332" y="96" width="96" height="274" fill="url(#paCommitBar)" stroke="#9bbc0f" stroke-width="2"/>
+    <text x="380" y="84" text-anchor="middle" fill="#9bbc0f" font-size="26" font-weight="bold" filter="url(#paGlow)">14B</text>
+    <text x="380" y="392" text-anchor="middle" fill="#9bbc0f" font-size="13">2026 pace</text>
+    <text x="265" y="424" text-anchor="middle" fill="#e8f4ff" font-size="13">Now <tspan fill="#9bbc0f" font-weight="bold">275M commits/week</tspan> ── if growth stays linear</text>
+    <text x="265" y="442" text-anchor="middle" fill="#ff2e88" font-size="12" font-weight="bold">※ SPOILER: IT WON'T (it'll go higher)</text>
+  </g>
+  <!-- ── Panel B: ACTIONS minutes ───────────────────────────────── -->
+  <g>
+    <rect x="558" y="20" width="512" height="430" fill="#0a0e27" stroke="#00f0ff" stroke-width="3"/>
+    <path d="M 564 26 h 12 M 564 26 v 12 M 1064 26 h -12 M 1064 26 v 12 M 564 444 h 12 M 564 444 v -12 M 1064 444 h -12 M 1064 444 v -12" stroke="#00f0ff" stroke-width="2" fill="none"/>
+    <rect x="582" y="2" width="340" height="40" fill="#05060f" stroke="#00f0ff" stroke-width="3"/>
+    <text x="752" y="29" text-anchor="middle" fill="#00f0ff" font-size="15" font-weight="bold">▮ ACTIONS MINUTES / WEEK</text>
+    <line x1="600" y1="380" x2="1040" y2="380" stroke="#2a3050" stroke-width="2"/>
+    <!-- growth curve 500M -> 1B -> 2.1B -->
+    <path d="M 620 360 C 720 352, 760 332, 820 312 C 900 286, 960 200, 1018 110" fill="none" stroke="#00f0ff" stroke-width="3" marker-end="url(#paArrow)"/>
+    <!-- point 2023 -->
+    <circle cx="620" cy="360" r="6" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
+    <text x="620" y="404" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">500M</text>
+    <text x="620" y="422" text-anchor="middle" fill="#00f0ff" font-size="12">2023</text>
+    <!-- point 2025 -->
+    <circle cx="820" cy="312" r="6" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
+    <text x="820" y="356" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">1B</text>
+    <text x="820" y="422" text-anchor="middle" fill="#00f0ff" font-size="12">2025</text>
+    <!-- point now 2.1B -->
+    <g filter="url(#paGlow)">
+      <circle cx="1018" cy="110" r="10" fill="#00f0ff"/>
+      <circle cx="1018" cy="110" r="4" fill="#05060f"/>
+    </g>
+    <text x="1018" y="84" text-anchor="middle" fill="#00f0ff" font-size="26" font-weight="bold">2.1B</text>
+    <text x="1018" y="422" text-anchor="middle" fill="#00f0ff" font-size="12" font-weight="bold">★ this week</text>
+    <text x="816" y="442" text-anchor="middle" fill="#e8f4ff" font-size="12.5">Over <tspan fill="#00f0ff" font-weight="bold">4x in two years</tspan> ── and still climbing</text>
+  </g>
+</svg>
+</figure>
+
 ## AI Developer Platform
 
 From **Plan → Code → Review → Test & Security → Operate**, AI on GitHub supports the entire SDLC end-to-end.
@@ -133,7 +199,6 @@ From **Plan → Code → Review → Test & Security → Operate**, AI on GitHub 
      shape-rendering="crispEdges"
      style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
   <rect x="0" y="0" width="1080" height="510" fill="none"/>
-
   <!-- ── Card 1: PLAN ── green ─────────────────────────────────── -->
   <g>
     <rect x="16" y="64" width="200" height="400" fill="#0f1604"/>
@@ -153,7 +218,6 @@ From **Plan → Code → Review → Test & Security → Operate**, AI on GitHub 
       <text x="112" y="326" text-anchor="middle" fill="#e8f4ff" font-size="12">▶ Skills/Instructions ...</text>
     </g>
   </g>
-
   <!-- ── Card 2: CODE ── magenta ────────────────────────────────────── -->
   <g>
     <rect x="230" y="64" width="200" height="400" fill="#1a0610"/>
@@ -173,7 +237,6 @@ From **Plan → Code → Review → Test & Security → Operate**, AI on GitHub 
       <text x="326" y="326" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Codespaces</text>
     </g>
   </g>
-
   <!-- ── Card 3: REVIEW ── amber ─────────────────────────────────── -->
   <g>
     <rect x="444" y="64" width="200" height="400" fill="#1f1404"/>
@@ -193,7 +256,6 @@ From **Plan → Code → Review → Test & Security → Operate**, AI on GitHub 
       <text x="540" y="326" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Rubber Duck</text>
     </g>
   </g>
-
   <!-- ── Card 4: TEST &amp; SECURE ── cyan ──────────────────────── -->
   <g>
     <rect x="658" y="64" width="200" height="400" fill="#02181c"/>
@@ -213,7 +275,6 @@ From **Plan → Code → Review → Test & Security → Operate**, AI on GitHub 
       <text x="754" y="326" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Agentic Workflows</text>
     </g>
   </g>
-
   <!-- ── Card 5: OPERATE ── green ──────────────────────────────── -->
   <g>
     <rect x="872" y="64" width="200" height="400" fill="#0f1604"/>
@@ -233,7 +294,6 @@ From **Plan → Code → Review → Test & Security → Operate**, AI on GitHub 
       <text x="968" y="326" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Copilot Metrics</text>
     </g>
   </g>
-
   <!-- ── scanline overlay (subtle CRT vibe) ──────────────────────── -->
   <g opacity="0.08">
     <line x1="0" y1="80"  x2="1080" y2="80"  stroke="#e8f4ff" stroke-width="1"/>
