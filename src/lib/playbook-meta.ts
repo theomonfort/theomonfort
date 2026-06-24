@@ -6,10 +6,24 @@ import type { LocalizedPlaybookEntry } from './playbook';
 export const NEW_PLAYBOOK_SLUGS = new Set([
   'usage-based-billing',
   'token-optimization',
+  'agent-skills',
+  'copilot-code-review',
 ]);
 
 export function isNewPlaybookEntry(slug: string): boolean {
   return NEW_PLAYBOOK_SLUGS.has(slug);
+}
+
+// Per-entry slide indexes that show the "New" marker pinned above the
+// clickable presentation nav bar. Numbers are 0-based progress-bar segment
+// positions, i.e. visual slide N maps to index N - 1.
+export const NAV_HINT_SLIDES: Record<string, number[]> = {
+  'copilot-code-review': [5, 6],
+  'agent-skills': [4],
+};
+
+export function navHintSlides(slug: string): number[] {
+  return NAV_HINT_SLIDES[slug] ?? [];
 }
 
 const dateCache = new Map<string, string | null>();
