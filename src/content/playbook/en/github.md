@@ -184,7 +184,7 @@ Looking back at GitHub's journey reveals where we are today ──
       <circle cx="1018" cy="110" r="4" fill="#05060f"/>
     </g>
     <text x="1018" y="84" text-anchor="middle" fill="#00f0ff" font-size="26" font-weight="bold">2.1B</text>
-    <text x="1018" y="422" text-anchor="middle" fill="#00f0ff" font-size="12" font-weight="bold">★ this week</text>
+    <text x="1018" y="422" text-anchor="middle" fill="#00f0ff" font-size="12" font-weight="bold">★ 2026/06/24</text>
     <text x="816" y="442" text-anchor="middle" fill="#e8f4ff" font-size="12.5">Over <tspan fill="#00f0ff" font-weight="bold">4x in two years</tspan> ── and still climbing</text>
   </g>
 </svg>

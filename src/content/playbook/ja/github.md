@@ -184,7 +184,7 @@ GitHub の歩みを振り返れば、現在地が見えてくる ──
       <circle cx="1018" cy="110" r="4" fill="#05060f"/>
     </g>
     <text x="1018" y="84" text-anchor="middle" fill="#00f0ff" font-size="26" font-weight="bold">21 億</text>
-    <text x="1018" y="422" text-anchor="middle" fill="#00f0ff" font-size="12" font-weight="bold">★ 今週</text>
+    <text x="1018" y="422" text-anchor="middle" fill="#00f0ff" font-size="12" font-weight="bold">★ 2026/06/24</text>
     <text x="816" y="442" text-anchor="middle" fill="#e8f4ff" font-size="12.5">2 年で <tspan fill="#00f0ff" font-weight="bold">4 倍以上</tspan> ── 加速はまだ止まらない</text>
   </g>
 </svg>
