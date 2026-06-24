@@ -1,6 +1,6 @@
 ---
 name: md-slides-creator
-description: Author a Markdown file that doubles as both a long-form reference doc AND a clean slide deck when rendered with an "H2 = new slide" engine (the kind used on theomonfort.github.io/theomonfort/playbook/). Use this skill when the user asks to "create a playbook entry", "draft slides on …", "write a deck about …", "add a new playbook md", "explain X as slides", or any time the deliverable is a single Markdown file that must read top-to-bottom AND look right when split slide-by-slide on every H2. Produces frontmatter + body that respect the splitter, plus retro-themed visual blocks (hero-quote, comparison tables, emoji-prefixed callouts, code blocks, link group).
+description: Author a single Markdown file that works as both a scrollable reference doc AND a clean slide deck under an "H2 = new slide" engine (as used on theomonfort.github.io/theomonfort/playbook/). Use when the user wants to create or update a playbook entry, draft or write slides / a deck about a topic, add an md under src/content/playbook/ja|en/, explain something "as slides like the others", or produce any single .md that must read top-to-bottom AND split slide-by-slide on every "## H2". Produces schema-correct frontmatter plus retro visual blocks (hero-quote, comparison tables, emoji callouts, code blocks, grouped links), and flags new or release-updated entries via src/lib/playbook-meta.ts. Do NOT use for plain prose such as a blog post or README.
 license: MIT
 ---
 
@@ -14,21 +14,6 @@ Helps you author a single `.md` file that is **simultaneously**:
 This is the exact format used by the playbook on https://theomonfort.github.io/theomonfort/playbook/ (Astro content collection rendered by `src/pages/playbook/[slug].astro`). The skill captures the conventions so anyone — including an agent — can produce a new entry that fits in without manual fixup.
 
 > 🎯 **One rule above all**: a slide is everything between two `##` headings. Plan the deck slide-by-slide before you write prose.
-
----
-
-## When to use
-
-Trigger this skill when the user says any of:
-
-- "create a new playbook entry on X"
-- "draft slides about X"
-- "add an md file in `src/content/playbook/...`"
-- "write a deck on X like the others"
-- "explain X as a slide deck"
-- "I need a md that breaks into slides on every H2"
-
-If the user only wants prose (a blog post, a README), do **not** use this skill — pick a more general writing helper.
 
 ---
 
@@ -66,12 +51,14 @@ A typical playbook entry has 6–8 slides:
 | # | Slide title pattern | Body |
 |---|---|---|
 | 1 | (auto from frontmatter) | title + icon + summary |
-| 2 | `## 一言で` / `## In one line` | `hero-quote` + 1–2 callout `>` lines |
+| 2 | `## 一言で` / `## In one line` | **octocat `hero-quote`** + 1–2 callout `>` lines |
 | 3 | `## 何ができる?` / `## What it does` | comparison table or 3–5 bullets |
 | 4 | `## 設定方法` / `## Setup` | code fence + 4 bullets max |
 | 5 | `## ★ 使いどころ` / `## ★ Killer use case` | the one thing the reader must remember |
 | 6 | `## トラブルシュート` / `## Troubleshooting` | bullet list with ❌ and ✅ |
 | 7 | (auto from frontmatter `links`) | grouped link list |
+
+> 💬 **Slide 2 is not optional.** The `## 一言で` / `## In one line` slide must lead with the default **octocat-with-speech-bubble** `hero-quote` (see 4a) — it's the playbook's signature opener.
 
 Adjust freely — but keep ≤ 1 H2 per "concept", and don't let a single slide exceed ~150 words.
 
@@ -131,7 +118,9 @@ These are the recurring patterns the deck uses. Use them — they're styled, acc
 
 ### 4a. Hero-quote (the "speech bubble" lead block)
 
-Use **one per slide max**, typically on the first content slide (`## 一言で`) and occasionally as a section divider mid-deck.
+**Every entry MUST open its first content slide (`## 一言で` / `## In one line`) with a `hero-quote` showing the default octocat-with-speech-bubble** (the talking-character look) — *not* `hero-quote-plain`. This is the playbook's signature lead block; a section that opens without it looks off-brand.
+
+Use **one per slide max**. After the mandatory first-slide hero-quote, you may reuse it sparingly as a mid-deck section divider (often with `hero-quote-plain` for a quieter, mascot-free box).
 
 ```html
 <div class="hero-quote">
@@ -156,7 +145,7 @@ Use **one per slide max**, typically on the first content slide (`## 一言で`)
 | `hero-quote-stars` | starry octocat | celebratory / launch |
 | `hero-quote-plain` | **none** (no mascot, no speech bubble notch) | mid-deck section header — when you want the styled box without the talking-character framing |
 
-> 💡 The **secure** category auto-applies the blue monocle octocat. Use `hero-quote-plain` to opt out per-slide.
+> 💡 The **secure** category auto-applies the blue monocle octocat. The first-slide rule still holds — just let the auto-mascot show; don't override it with `hero-quote-plain` on slide 2.
 
 ### 4b. Comparison tables
 
@@ -225,7 +214,7 @@ Link to another playbook entry by slug:
 6. **Mirror to the other locale** (ja ↔ en). Keep the slide count and frontmatter shape identical; only the prose changes.
 7. **Build & preview**:
    ```bash
-   pnpm build              # 32 pages should build with 0 errors
+   pnpm build              # builds all pages with 0 errors (page count grows as entries are added)
    pnpm dev --host 127.0.0.1   # open http://127.0.0.1:4321/theomonfort/playbook/<slug>/
    ```
    Press `P` to enter present mode and arrow through slides — confirm:
@@ -236,7 +225,55 @@ Link to another playbook entry by slug:
 
 ---
 
-## Step 6 — Final checklist
+## Step 6 — Flag what's New (when applicable)
+
+When you **add a new entry** — or **update an existing slide with content tied to a new release** (a changelog announcement, a newly shipped feature, a pricing change) — surface it with the playbook's **"New!"** markers so readers spot fresh content at a glance.
+
+These markers are **not frontmatter**. They live in one config file: `src/lib/playbook-meta.ts`. There are two visible markers plus an automatic date.
+
+### 6a. TOC "New" badge — whole entry
+
+Add the entry's `<slug>` to `NEW_PLAYBOOK_SLUGS`:
+
+```ts
+// src/lib/playbook-meta.ts
+export const NEW_PLAYBOOK_SLUGS = new Set([
+  'usage-based-billing',
+  'token-optimization',
+  'your-new-slug',   // ← add here
+]);
+```
+
+Shows a handwritten **"New!"** badge next to the section title in the table of contents. Helper: `isNewPlaybookEntry(slug)`.
+
+### 6b. Present-mode nav-bar markers — specific slides
+
+To pin an always-on **"New!"** marker above specific slides in presentation mode (e.g. the exact slides you changed for a release), add to `NAV_HINT_SLIDES`:
+
+```ts
+// src/lib/playbook-meta.ts
+export const NAV_HINT_SLIDES: Record<string, number[]> = {
+  'copilot-code-review': [5, 6],
+  'your-new-slug': [2, 3],   // ← progress-bar segment indexes
+};
+```
+
+> ⚠️ **Indexes are 0-based.** Visual slide **N** maps to index **N − 1** — so to mark visual slides 3 and 4, use `[2, 3]`. Slide 1 is the auto title slide (index 0). Helper: `navHintSlides(slug)`.
+
+### 6c. "Last updated" date — automatic
+
+Each entry's first slide shows a **last-updated date** derived from the source file's last git commit (`playbookUpdatedISO` / `formatPlaybookUpdated`). You don't set this — just commit your content change normally and the date follows.
+
+### When to apply / remove
+
+- ✅ **Apply** for: a brand-new entry, or a slide rewritten for a newly shipped feature / changelog item / pricing change.
+- 🎯 Point `NAV_HINT_SLIDES` at the **specific** slides you touched — not the whole deck — so "New!" stays meaningful.
+- 🧹 **Curate**: as entries age, remove their slugs from `NEW_PLAYBOOK_SLUGS` / `NAV_HINT_SLIDES` so the markers keep signalling genuinely recent changes.
+- ℹ️ Only `src/lib/playbook-meta.ts` changes — no edits to the renderer or the slide `.md` files needed.
+
+---
+
+## Step 7 — Final checklist
 
 Before declaring done, verify EVERY item:
 
@@ -245,12 +282,14 @@ Before declaring done, verify EVERY item:
 - [ ] `order` doesn't collide with an existing entry (check `src/content/playbook/ja/*.md`).
 - [ ] All `links[].url` are fully-qualified URLs.
 - [ ] Slide count is 5–9.
-- [ ] At least one `hero-quote` block (typically the first content slide).
+- [ ] First content slide (`## 一言で` / `## In one line`) opens with the default octocat-with-speech-bubble `hero-quote` (or the category's auto-mascot) — **not** `hero-quote-plain`.
+- [ ] Any further `hero-quote` blocks are used sparingly (≤ 1 per slide).
 - [ ] Each slide stands on its own — no orphan H2 with no body, no body before the first H2.
 - [ ] Tables ≤ 5 cols, ≤ 8 rows.
 - [ ] Code blocks fit one slide each.
 - [ ] No `# H1` in body (frontmatter handles the title).
 - [ ] Both `ja/<slug>.md` and `en/<slug>.md` exist with matching structure.
+- [ ] If the entry is new — or a slide was updated for a new release / changelog item — it's flagged in `src/lib/playbook-meta.ts` (`NEW_PLAYBOOK_SLUGS` and/or `NAV_HINT_SLIDES`, remembering indexes are 0-based).
 - [ ] `pnpm build` passes.
 
 ---
