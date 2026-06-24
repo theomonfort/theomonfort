@@ -41,6 +41,42 @@ links:
   <p>IDE、ターミナル、GitHub.com の<strong>あらゆる場面</strong>で、開発者の<strong>フロー</strong>を加速します。</p>
 </div>
 
+## GitHub Copilot の歴史
+
+<div class="copilot-history">
+  <div class="ch-era" style="grid-column: 1 / 4">「副操縦士」(copilot) の時代</div>
+  <div class="ch-era" style="grid-column: 4 / 5">Agent の台頭</div>
+  <div class="ch-era" style="grid-column: 5 / 6">IDE 以外への展開</div>
+
+  <div class="ch-arrow"></div>
+
+  <div class="ch-card" data-tone="amber">
+    <div class="ch-card-title">LLM による<br/>コード補完</div>
+    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.png" alt="" />
+  </div>
+  <div class="ch-card" data-tone="green">
+    <div class="ch-card-title">Copilot Chat<br/>Ask Mode</div>
+    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.png" alt="" />
+  </div>
+  <div class="ch-card" data-tone="green">
+    <div class="ch-card-title">Copilot Chat<br/>Edit Mode</div>
+    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.png" alt="" />
+  </div>
+  <div class="ch-card" data-tone="magenta">
+    <div class="ch-card-title">GitHub Copilot<br/>Agent Mode</div>
+    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.png" alt="" />
+  </div>
+  <div class="ch-card" data-tone="cyan">
+    <div class="ch-card-title">IDE 以外での<br/>GitHub Copilot</div>
+    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.png" alt="" />
+  </div>
+
+  <div class="ch-tag" data-tone="amber" style="grid-column: 1 / 2">コード補完だけ</div>
+  <div class="ch-tag" data-tone="green" style="grid-column: 2 / 4">言われたことに応答する</div>
+  <div class="ch-tag" data-tone="magenta" style="grid-column: 4 / 5">自律的に動く</div>
+  <div class="ch-tag" data-tone="cyan" style="grid-column: 5 / 6">IDE 外でも利用可能</div>
+</div>
+
 ## AI モデルと利用サーフェス
 
 選べる AI モデル：OpenAI / Anthropic / Google Gemini / xAI Grok。さらに **カスタムモデル**・**BYOK（Bring Your Own Key）** にも対応。

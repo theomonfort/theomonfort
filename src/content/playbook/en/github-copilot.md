@@ -41,6 +41,42 @@ links:
   <p>It accelerates your <strong>flow</strong> across every surface — <strong>IDE, terminal, and GitHub.com</strong>.</p>
 </div>
 
+## The History of GitHub Copilot
+
+<div class="copilot-history">
+  <div class="ch-era" style="grid-column: 1 / 4">The "Copilot" (Co-pilot) Era</div>
+  <div class="ch-era" style="grid-column: 4 / 5">Rise of Agents</div>
+  <div class="ch-era" style="grid-column: 5 / 6">Beyond the IDE</div>
+
+  <div class="ch-arrow"></div>
+
+  <div class="ch-card" data-tone="amber">
+    <div class="ch-card-title">LLM Code<br/>Completion</div>
+    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.png" alt="" />
+  </div>
+  <div class="ch-card" data-tone="green">
+    <div class="ch-card-title">Copilot Chat<br/>Ask Mode</div>
+    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.png" alt="" />
+  </div>
+  <div class="ch-card" data-tone="green">
+    <div class="ch-card-title">Copilot Chat<br/>Edit Mode</div>
+    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.png" alt="" />
+  </div>
+  <div class="ch-card" data-tone="magenta">
+    <div class="ch-card-title">GitHub Copilot<br/>Agent Mode</div>
+    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.png" alt="" />
+  </div>
+  <div class="ch-card" data-tone="cyan">
+    <div class="ch-card-title">GitHub Copilot<br/>Beyond the IDE</div>
+    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.png" alt="" />
+  </div>
+
+  <div class="ch-tag" data-tone="amber" style="grid-column: 1 / 2">Code completion only</div>
+  <div class="ch-tag" data-tone="green" style="grid-column: 2 / 4">Responds to what you ask</div>
+  <div class="ch-tag" data-tone="magenta" style="grid-column: 4 / 5">Acts autonomously</div>
+  <div class="ch-tag" data-tone="cyan" style="grid-column: 5 / 6">Usable outside the IDE</div>
+</div>
+
 ## AI Models & Surfaces
 
 Available AI models: OpenAI / Anthropic / Google Gemini / xAI Grok, plus support for **custom models** and **BYOK (Bring Your Own Key)**.

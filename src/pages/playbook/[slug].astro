@@ -1796,6 +1796,130 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .prose-akq .quadrant-small .mermaid-wrap { padding: 0.5em 1.5em; margin: 0; overflow: visible; }
   .prose-akq .quadrant-small .mermaid-wrap svg { max-width: 100% !important; width: 100% !important; height: auto !important; }
   body.present-mode .prose-akq .quadrant-small { max-width: 640px; }
+  /* ── Copilot history timeline ─────────────────────────────────────────── */
+  .prose-akq .copilot-history {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: 0.6rem;
+    row-gap: 0.55rem;
+    margin: 1.6em 0;
+    align-items: stretch;
+  }
+  .prose-akq .ch-era {
+    grid-row: 1;
+    align-self: end;
+    text-align: center;
+    font-family: 'DotGothic16', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #e8f4ff;
+    padding: 0 0.4em 0.45em;
+    line-height: 1.3;
+  }
+  .prose-akq .ch-era::before {
+    content: '\25C6';
+    color: #00f0ff;
+    margin-right: 0.4em;
+    font-size: 0.7em;
+    vertical-align: middle;
+    opacity: 0.85;
+  }
+  .prose-akq .ch-arrow {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    position: relative;
+    height: 16px;
+  }
+  .prose-akq .ch-arrow::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 3px;
+    background: linear-gradient(90deg, #ffb000, #9bbc0f 42%, #ff2e88 76%, #00f0ff);
+    box-shadow: 0 0 8px rgba(0, 240, 255, 0.35);
+  }
+  .prose-akq .ch-arrow::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    border-left: 14px solid #00f0ff;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.5));
+  }
+  .prose-akq .ch-card {
+    grid-row: 3;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6em;
+    padding: 1.2em 0.7em 1.1em;
+    background: rgba(5, 6, 15, 0.85);
+    border: 2px solid var(--ch-color, #00f0ff);
+    box-shadow: 4px 4px 0 #05060f;
+    text-align: center;
+    font-family: 'DotGothic16', monospace;
+  }
+  .prose-akq .ch-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--ch-bg, transparent);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .prose-akq .ch-card > * { position: relative; z-index: 1; }
+  .prose-akq .ch-card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ch-color, #00f0ff);
+    line-height: 1.35;
+    letter-spacing: 0.02em;
+  }
+  .prose-akq .ch-mona {
+    width: 46px;
+    height: auto;
+    margin-top: auto;
+    opacity: 0.92;
+    filter: drop-shadow(0 0 6px var(--ch-glow, rgba(0, 240, 255, 0.4)));
+  }
+  .prose-akq .ch-tag {
+    grid-row: 4;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'DotGothic16', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #05060f;
+    background: var(--ch-color, #00f0ff);
+    border: 2px solid #05060f;
+    box-shadow: 3px 3px 0 #05060f;
+    padding: 0.5em 0.4em;
+    line-height: 1.3;
+  }
+  .prose-akq .copilot-history [data-tone="amber"]   { --ch-color: #ffb000; --ch-bg: rgba(255, 176, 0, 0.08); --ch-glow: rgba(255, 176, 0, 0.45); }
+  .prose-akq .copilot-history [data-tone="green"]   { --ch-color: #9bbc0f; --ch-bg: rgba(155, 188, 15, 0.08); --ch-glow: rgba(155, 188, 15, 0.45); }
+  .prose-akq .copilot-history [data-tone="magenta"] { --ch-color: #ff2e88; --ch-bg: rgba(255, 46, 136, 0.1); --ch-glow: rgba(255, 46, 136, 0.5); }
+  .prose-akq .copilot-history [data-tone="cyan"]    { --ch-color: #00f0ff; --ch-bg: rgba(0, 240, 255, 0.08); --ch-glow: rgba(0, 240, 255, 0.45); }
+  @media (max-width: 760px) {
+    .prose-akq .copilot-history { grid-template-columns: 1fr 1fr; }
+    .prose-akq .ch-era, .prose-akq .ch-arrow { display: none; }
+    .prose-akq .ch-card, .prose-akq .ch-tag { grid-row: auto !important; grid-column: auto !important; }
+  }
+  body.present-mode .prose-akq .ch-era { font-size: 1.2rem; }
+  body.present-mode .prose-akq .ch-card-title { font-size: 1.35rem; }
+  body.present-mode .prose-akq .ch-mona { width: 58px; }
+  body.present-mode .prose-akq .ch-tag { font-size: 1.2rem; }
+
   .prose-akq .copilot-flow-small { max-width: 1100px; margin: 1.2em auto 0; }
   .prose-akq .copilot-flow-small .mermaid-wrap { padding: 0.4em 1em; margin: 0; overflow: visible; }
   .prose-akq .copilot-flow-small .mermaid-wrap svg { max-width: 100% !important; width: 100% !important; height: auto !important; min-height: 380px; }
