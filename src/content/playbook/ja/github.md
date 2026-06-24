@@ -124,6 +124,147 @@ GitHub の歩みを振り返れば、現在地が見えてくる ──
 - Fortune 100 の **約 90%** が Copilot を採用（[2025](https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx)）
 - 有料 AI コーディングツール市場シェア **約 42%**（[2025](https://www.secondtalent.com/resources/github-copilot-statistics/)）
 
+## プラットフォームの活動が急増中
+
+<span style="display:inline-block;padding:2px 10px;border:2px solid #9bbc0f;color:#9bbc0f;font-family:'DotGothic16',monospace;font-size:0.8em;letter-spacing:0.1em;">▮ CURRENT SCENARIO</span> ── GitHub 上の開発活動は、いまかつてないペースで加速している。
+
+<figure class="rpi-pipeline" style="margin:2em 0;">
+<svg viewBox="0 0 1080 470" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
+  <defs>
+    <linearGradient id="paCommitBar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9bbc0f"/>
+      <stop offset="100%" stop-color="#0a0e27"/>
+    </linearGradient>
+    <marker id="paArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#9bbc0f"/>
+    </marker>
+    <filter id="paGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- ── Panel A: COMMITS ────────────────────────────────────────── -->
+  <g>
+    <rect x="10" y="20" width="512" height="430" fill="#0a0e27" stroke="#9bbc0f" stroke-width="3"/>
+    <path d="M 16 26 h 12 M 16 26 v 12 M 516 26 h -12 M 516 26 v 12 M 16 444 h 12 M 16 444 v -12 M 516 444 h -12 M 516 444 v -12" stroke="#9bbc0f" stroke-width="2" fill="none"/>
+    <rect x="34" y="2" width="180" height="40" fill="#05060f" stroke="#9bbc0f" stroke-width="3"/>
+    <text x="124" y="29" text-anchor="middle" fill="#9bbc0f" font-size="17" font-weight="bold">▮ コミット数</text>
+    <line x1="60" y1="370" x2="500" y2="370" stroke="#2a3050" stroke-width="2"/>
+    <!-- 2025 bar (1B) -->
+    <rect x="92" y="332" width="96" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+    <text x="140" y="320" text-anchor="middle" fill="#e8f4ff" font-size="20" font-weight="bold">10 億</text>
+    <text x="140" y="392" text-anchor="middle" fill="#9bbc0f" font-size="13">2025 実績</text>
+    <!-- projected bar (14B) -->
+    <rect x="332" y="96" width="96" height="274" fill="url(#paCommitBar)" stroke="#9bbc0f" stroke-width="2"/>
+    <text x="380" y="84" text-anchor="middle" fill="#9bbc0f" font-size="26" font-weight="bold" filter="url(#paGlow)">140 億</text>
+    <text x="380" y="392" text-anchor="middle" fill="#9bbc0f" font-size="13">2026 予測ペース</text>
+    <text x="265" y="424" text-anchor="middle" fill="#e8f4ff" font-size="13">現在 <tspan fill="#9bbc0f" font-weight="bold">週 2.75 億コミット</tspan> ── 線形成長ならの話</text>
+    <text x="265" y="442" text-anchor="middle" fill="#ff2e88" font-size="12" font-weight="bold">※ SPOILER: そうはならない（さらに上振れ）</text>
+  </g>
+  <!-- ── Panel B: ACTIONS minutes ───────────────────────────────── -->
+  <g>
+    <rect x="558" y="20" width="512" height="430" fill="#0a0e27" stroke="#00f0ff" stroke-width="3"/>
+    <path d="M 564 26 h 12 M 564 26 v 12 M 1064 26 h -12 M 1064 26 v 12 M 564 444 h 12 M 564 444 v -12 M 1064 444 h -12 M 1064 444 v -12" stroke="#00f0ff" stroke-width="2" fill="none"/>
+    <rect x="582" y="2" width="320" height="40" fill="#05060f" stroke="#00f0ff" stroke-width="3"/>
+    <text x="742" y="29" text-anchor="middle" fill="#00f0ff" font-size="16" font-weight="bold">▮ Actions 実行時間 / 週</text>
+    <line x1="600" y1="380" x2="1040" y2="380" stroke="#2a3050" stroke-width="2"/>
+    <!-- growth curve 500M -> 1B -> 2.1B -->
+    <path d="M 620 360 C 720 352, 760 332, 820 312 C 900 286, 960 200, 1018 110" fill="none" stroke="#00f0ff" stroke-width="3" marker-end="url(#paArrow)"/>
+    <!-- point 2023 -->
+    <circle cx="620" cy="360" r="6" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
+    <text x="620" y="404" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">5 億</text>
+    <text x="620" y="422" text-anchor="middle" fill="#00f0ff" font-size="12">2023</text>
+    <!-- point 2025 -->
+    <circle cx="820" cy="312" r="6" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
+    <text x="820" y="356" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">10 億</text>
+    <text x="820" y="422" text-anchor="middle" fill="#00f0ff" font-size="12">2025</text>
+    <!-- point now 2.1B -->
+    <g filter="url(#paGlow)">
+      <circle cx="1018" cy="110" r="10" fill="#00f0ff"/>
+      <circle cx="1018" cy="110" r="4" fill="#05060f"/>
+    </g>
+    <text x="1018" y="84" text-anchor="middle" fill="#00f0ff" font-size="26" font-weight="bold">21 億</text>
+    <text x="1018" y="422" text-anchor="middle" fill="#00f0ff" font-size="12" font-weight="bold">★ 2026/06/24</text>
+    <text x="816" y="442" text-anchor="middle" fill="#e8f4ff" font-size="12.5">2 年で <tspan fill="#00f0ff" font-weight="bold">4 倍以上</tspan> ── 加速はまだ止まらない</text>
+  </g>
+</svg>
+</figure>
+
+## 開発アウトプットも倍増中
+
+<span style="display:inline-block;padding:2px 10px;border:2px solid #9bbc0f;color:#9bbc0f;font-family:'DotGothic16',monospace;font-size:0.8em;letter-spacing:0.1em;">▮ MORE NUMBERS</span> ── PR マージとリポジトリ作成も、AI 時代に入って一気に伸びている。
+
+データ出典: [GitHub Octoverse 2025](https://octoverse.github.com)（月間平均、2026 はペース換算）
+
+<figure class="rpi-pipeline" style="margin:2em 0;">
+<svg viewBox="0 0 1080 470" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
+  <defs>
+    <marker id="poArrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#9bbc0f"/>
+    </marker>
+    <marker id="poArrowA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#ffb000"/>
+    </marker>
+    <filter id="poGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- ── Panel A: PULL REQUESTS MERGED ───────────────────────────── -->
+  <g>
+    <rect x="10" y="20" width="512" height="430" fill="#0a0e27" stroke="#9bbc0f" stroke-width="3"/>
+    <path d="M 16 26 h 12 M 16 26 v 12 M 516 26 h -12 M 516 26 v 12 M 16 444 h 12 M 16 444 v -12 M 516 444 h -12 M 516 444 v -12" stroke="#9bbc0f" stroke-width="2" fill="none"/>
+    <rect x="34" y="2" width="320" height="40" fill="#05060f" stroke="#9bbc0f" stroke-width="3"/>
+    <text x="194" y="29" text-anchor="middle" fill="#9bbc0f" font-size="16" font-weight="bold">▮ マージされた PR / 月</text>
+    <line x1="60" y1="380" x2="500" y2="380" stroke="#2a3050" stroke-width="2"/>
+    <!-- growth curve 2800万 -> 4300万 -> 9000万 -->
+    <path d="M 90 360 C 180 352, 240 334, 300 300 C 378 262, 436 184, 478 116" fill="none" stroke="#9bbc0f" stroke-width="3" marker-end="url(#poArrowG)"/>
+    <!-- point 2023 -->
+    <circle cx="90" cy="360" r="6" fill="#0a0e27" stroke="#9bbc0f" stroke-width="2.5"/>
+    <text x="90" y="404" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">2,800万</text>
+    <text x="90" y="422" text-anchor="middle" fill="#9bbc0f" font-size="12">2023</text>
+    <!-- point 2025 -->
+    <circle cx="300" cy="300" r="6" fill="#0a0e27" stroke="#9bbc0f" stroke-width="2.5"/>
+    <text x="300" y="344" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">4,300万</text>
+    <text x="300" y="422" text-anchor="middle" fill="#9bbc0f" font-size="12">2025</text>
+    <!-- peak 2026 pace -->
+    <g filter="url(#poGlow)">
+      <circle cx="478" cy="110" r="10" fill="#9bbc0f"/>
+      <circle cx="478" cy="110" r="4" fill="#05060f"/>
+    </g>
+    <text x="478" y="84" text-anchor="middle" fill="#9bbc0f" font-size="26" font-weight="bold">9,000万</text>
+    <text x="478" y="422" text-anchor="middle" fill="#9bbc0f" font-size="12" font-weight="bold">2026 ペース</text>
+    <text x="280" y="442" text-anchor="middle" fill="#e8f4ff" font-size="12.5">2025→2026 で <tspan fill="#9bbc0f" font-weight="bold">約 2 倍</tspan> ── AI が PR を量産</text>
+  </g>
+  <!-- ── Panel B: NEW REPOS / MONTH ──────────────────────────────── -->
+  <g>
+    <rect x="558" y="20" width="512" height="430" fill="#0a0e27" stroke="#ffb000" stroke-width="3"/>
+    <path d="M 564 26 h 12 M 564 26 v 12 M 1064 26 h -12 M 1064 26 v 12 M 564 444 h 12 M 564 444 v -12 M 1064 444 h -12 M 1064 444 v -12" stroke="#ffb000" stroke-width="2" fill="none"/>
+    <rect x="582" y="2" width="330" height="40" fill="#05060f" stroke="#ffb000" stroke-width="3"/>
+    <text x="747" y="29" text-anchor="middle" fill="#ffb000" font-size="16" font-weight="bold">▮ 新規リポジトリ / 月</text>
+    <line x1="600" y1="380" x2="1040" y2="380" stroke="#2a3050" stroke-width="2"/>
+    <!-- growth curve 700万 -> 1000万 -> 2000万 -->
+    <path d="M 620 360 C 720 352, 760 332, 820 312 C 900 286, 960 200, 1018 116" fill="none" stroke="#ffb000" stroke-width="3" marker-end="url(#poArrowA)"/>
+    <!-- point 2023 -->
+    <circle cx="620" cy="360" r="6" fill="#0a0e27" stroke="#ffb000" stroke-width="2.5"/>
+    <text x="620" y="404" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">700万</text>
+    <text x="620" y="422" text-anchor="middle" fill="#ffb000" font-size="12">2023</text>
+    <!-- point 2025 -->
+    <circle cx="820" cy="312" r="6" fill="#0a0e27" stroke="#ffb000" stroke-width="2.5"/>
+    <text x="820" y="356" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">1,000万</text>
+    <text x="820" y="422" text-anchor="middle" fill="#ffb000" font-size="12">2025</text>
+    <!-- peak 2026 pace -->
+    <g filter="url(#poGlow)">
+      <circle cx="1018" cy="110" r="10" fill="#ffb000"/>
+      <circle cx="1018" cy="110" r="4" fill="#05060f"/>
+    </g>
+    <text x="1018" y="84" text-anchor="middle" fill="#ffb000" font-size="26" font-weight="bold">2,000万</text>
+    <text x="1018" y="422" text-anchor="middle" fill="#ffb000" font-size="12" font-weight="bold">2026 ペース</text>
+    <text x="816" y="442" text-anchor="middle" fill="#e8f4ff" font-size="12.5">2025→2026 で <tspan fill="#ffb000" font-weight="bold">約 2 倍</tspan> ── 新規作成が加速</text>
+  </g>
+</svg>
+</figure>
+
 ## AI 開発者プラットフォーム
 
 SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ → 運用** を、すべて GitHub 上の AI が一気通貫で支える。
@@ -133,7 +274,6 @@ SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ
      shape-rendering="crispEdges"
      style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
   <rect x="0" y="0" width="1080" height="510" fill="none"/>
-
   <!-- ── Card 1: PLAN ── green ─────────────────────────────────── -->
   <g>
     <rect x="16" y="64" width="200" height="400" fill="#0f1604"/>
@@ -153,7 +293,6 @@ SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ
       <text x="112" y="326" text-anchor="middle" fill="#e8f4ff" font-size="12">▶ Skills/Instructions ...</text>
     </g>
   </g>
-
   <!-- ── Card 2: CODE ── magenta ────────────────────────────────────── -->
   <g>
     <rect x="230" y="64" width="200" height="400" fill="#1a0610"/>
@@ -173,7 +312,6 @@ SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ
       <text x="326" y="326" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Codespaces</text>
     </g>
   </g>
-
   <!-- ── Card 3: REVIEW ── amber ─────────────────────────────────── -->
   <g>
     <rect x="444" y="64" width="200" height="400" fill="#1f1404"/>
@@ -193,7 +331,6 @@ SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ
       <text x="540" y="326" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Rubber Duck</text>
     </g>
   </g>
-
   <!-- ── Card 4: TEST &amp; SECURE ── cyan ──────────────────────── -->
   <g>
     <rect x="658" y="64" width="200" height="400" fill="#02181c"/>
@@ -213,7 +350,6 @@ SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ
       <text x="754" y="326" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Agentic Workflows</text>
     </g>
   </g>
-
   <!-- ── Card 5: OPERATE ── green ──────────────────────────────── -->
   <g>
     <rect x="872" y="64" width="200" height="400" fill="#0f1604"/>
@@ -233,7 +369,6 @@ SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ
       <text x="968" y="326" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Copilot Metrics</text>
     </g>
   </g>
-
   <!-- ── scanline overlay (subtle CRT vibe) ──────────────────────── -->
   <g opacity="0.08">
     <line x1="0" y1="80"  x2="1080" y2="80"  stroke="#e8f4ff" stroke-width="1"/>
