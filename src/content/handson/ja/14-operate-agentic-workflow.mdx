@@ -16,36 +16,24 @@ import Aside from '../../../components/handson/Aside.astro';
 
 **Agentic Workflow とは**: GitHub Actions のワークフロー内で Copilot を活用し、リポジトリの変更に応じた自律的なタスク（レポート生成、ドキュメント更新、コード修正など）を実行する仕組みです。
 
-### 14.1 — Personal Access Token (PAT) を作成する
+### 14.1 — Copilot ポリシーと Workflow permissions を確認する
 
-Agentic Workflow で Copilot を活用するために PAT を作成します。
+以前は Copilot を使うために PAT（Personal Access Token）の作成・保管が必要でしたが、現在は GitHub Actions 組み込みの `GITHUB_TOKEN` で動作するため **PAT は不要** になりました。長期間有効な PAT を管理する運用・セキュリティ上のリスクがなくなります。
 
-1. [https://github.com/settings/personal-access-tokens/new](https://github.com/settings/personal-access-tokens/new) にアクセス
-2. 設定内容：
-   - **Token name**: `copilot-workshop-agent`
-   - **Resource owner**: リポジトリを作成した Organization（または個人アカウント）
-   - **Repository access**: Only select repositories → 作成したリポジトリを選択
-   - **Permissions**:
-     - **Actions**: Read and write
-     - **Contents**: Read-only
-     - **Issues**: Read and write
-     - **Metadata**: Read-only（自動付与）
-     - **Pull requests**: Read and write
+組織が所有するリポジトリで実行すると、消費した AI クレジットは組織に直接請求されます。これを使うために、以下を確認します。
 
-![PAT Permissions](/theomonfort/handson/img/pat-permissions.png)
-3\. 作成した PAT をコピー
+#### Copilot ポリシーの確認
 
-<Aside type="negative">
+1. Organization の **Settings** → **Copilot** → **Policies**
+2. **Allow use of Copilot CLI billed to the organization** が有効になっていることを確認（既存の **Copilot CLI** ポリシーが有効であれば既定で有効）
 
-**注意**: PAT は作成時に一度だけ表示されます。必ずコピーして安全な場所に保存してください。再表示はできません。
+組織への課金を有効にするには、ワークフローの front matter の `permissions` に `copilot-requests: write` を追加します（14.3 のプロンプトに含まれています）。
+
+<Aside type="positive">
+
+**💡 TIP**: この機能を使うには Agentic Workflows CLI を最新版にしてください。`gh extension upgrade aw` でアップグレードできます。
 
 </Aside>
-
-#### リポジトリシークレットに設定
-
-1. リポジトリの **Settings** → **Secrets and variables** → **Actions**
-2. **New repository secret** をクリック
-3. Name: `COPILOT_GITHUB_TOKEN`、Value: 作成した PAT
 
 #### Workflow permissions の確認
 
@@ -86,7 +74,8 @@ gh extension install github/gh-aw
 
 設定:
 - トリガー: schedule: daily と workflow_dispatch
-- permissions: contents: read, issues: read, pull-requests: read
+- permissions: contents: read, issues: read, pull-requests: read,
+  copilot-requests: write（組織課金を有効にするため）
 - tools: github（lockdown: false, min-integrity: none）
 - safe-outputs: create-issue で title-prefix "[repo-status] "、
   labels: [report, daily-status]、close-older-issues: true
