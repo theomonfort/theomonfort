@@ -133,7 +133,7 @@ Define review standards by **just adding files to your repo** — Copilot code r
 | **`NAME.instructions.md`** | under `.github/instructions/` | Extra instructions scoped via `applyTo` to specific paths or languages |
 | **`AGENTS.md`** | repository **root** | If an `AGENTS.md` already exists, it's used as context automatically — share the same conventions across Cloud Agent / CLI |
 
-> 💡 **Key point**: If you already run on `AGENTS.md`, the same conventions apply to reviews with zero extra setup. And with the character limit gone, you can write standards in full detail without trimming.
+> 💡 **Key point**: If you already run on `AGENTS.md`, the same conventions apply to reviews with zero extra setup. <a class="retro-link" href="/theomonfort/en/playbook/harness-engineering/?present=1&amp;slide=5">What is AGENTS.md? ↗</a>
 >
 > 📘 Official guide: <a href="https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/add-custom-instructions/add-repository-instructions" target="_blank" rel="noopener noreferrer" class="retro-link">Adding repository custom instructions for GitHub Copilot</a> — covers all three file types and which features support them
 

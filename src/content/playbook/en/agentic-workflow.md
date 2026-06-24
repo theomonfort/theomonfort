@@ -23,6 +23,12 @@ links:
   - label: githubnext/agentics (sample collection)
     url: https://github.com/githubnext/agentics
   - group: 📰 Recent Changelog
+    label: "GitHub Agentic Workflows is now in public preview (2026-06-11)"
+    url: https://github.blog/changelog/2026-06-11-github-agentic-workflows-is-now-in-public-preview/
+  - group: 📰 Recent Changelog
+    label: "Agentic workflows no longer need a personal access token (2026-06-11)"
+    url: https://github.blog/changelog/2026-06-11-agentic-workflows-no-longer-need-a-personal-access-token/
+  - group: 📰 Recent Changelog
     label: "View Agentic Workflow configs in the Actions run summary (2026-03-26)"
     url: https://github.blog/changelog/2026-03-26-view-agentic-workflow-configs-in-the-actions-run-summary
 ---
@@ -42,7 +48,8 @@ links:
 
 ### Overview
 - **AI agents** automate work on top of GitHub Actions
-- Currently in <a href="https://github.blog/changelog/2026-02-13-github-agentic-workflows-are-now-in-technical-preview/" target="_blank" rel="noopener noreferrer" class="retro-link">technical preview</a> (announced February 13, 2026)
+- Now in <a href="https://github.blog/changelog/2026-06-11-github-agentic-workflows-is-now-in-public-preview/" target="_blank" rel="noopener noreferrer" class="retro-link">public preview</a> (announced June 11, 2026)
+- No longer needs a <a href="https://github.blog/changelog/2026-06-11-agentic-workflows-no-longer-need-a-personal-access-token/" target="_blank" rel="noopener noreferrer" class="retro-link">PAT</a> — runs with the built-in `GITHUB_TOKEN`
 
 ### Components
 
