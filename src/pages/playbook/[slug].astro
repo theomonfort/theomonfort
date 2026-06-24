@@ -510,8 +510,14 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     const tag = document.querySelector<HTMLElement>('.slide-title-tag');
     if (tag) {
       const titleEl = document.querySelector<HTMLElement>('.playbook-detail header h1');
-      const titleHtml = titleEl?.innerHTML ?? '';
-      tag.innerHTML = current === 0 ? '' : `<span class="tag-main">${titleHtml}</span>`;
+      const titleText = titleEl?.textContent ?? '';
+      tag.replaceChildren();
+      if (current !== 0) {
+        const titleSpan = document.createElement('span');
+        titleSpan.className = 'tag-main';
+        titleSpan.textContent = titleText;
+        tag.appendChild(titleSpan);
+      }
       tag.classList.toggle('visible', current > 0);
     }
     document.body.classList.toggle('slide-cover', current === 0);
@@ -540,13 +546,26 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       const marker = document.createElement('div');
       marker.className = 'slide-new-marker';
       marker.setAttribute('aria-hidden', 'true');
-      marker.innerHTML =
-        '<svg class="slide-new-arrow" viewBox="0 0 44 40" fill="none">' +
-        '<path d="M36 34 C 25 31, 15 25, 10 10" stroke="#ffe14d" stroke-width="3.4" stroke-linecap="round" />' +
-        '<path d="M4 21 L9 7 L22 12" stroke="#ffe14d" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" />' +
-        '</svg><span class="slide-new-text"></span>';
-      const textEl = marker.querySelector<HTMLElement>('.slide-new-text');
-      if (textEl) textEl.textContent = label;
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.classList.add('slide-new-arrow');
+      svg.setAttribute('viewBox', '0 0 44 40');
+      svg.setAttribute('fill', 'none');
+      const arrowPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      arrowPath.setAttribute('d', 'M36 34 C 25 31, 15 25, 10 10');
+      arrowPath.setAttribute('stroke', '#ffe14d');
+      arrowPath.setAttribute('stroke-width', '3.4');
+      arrowPath.setAttribute('stroke-linecap', 'round');
+      const headPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      headPath.setAttribute('d', 'M4 21 L9 7 L22 12');
+      headPath.setAttribute('stroke', '#ffe14d');
+      headPath.setAttribute('stroke-width', '3.4');
+      headPath.setAttribute('stroke-linecap', 'round');
+      headPath.setAttribute('stroke-linejoin', 'round');
+      svg.append(arrowPath, headPath);
+      const textEl = document.createElement('span');
+      textEl.className = 'slide-new-text';
+      textEl.textContent = label;
+      marker.append(svg, textEl);
       marker.style.left = `${r.left + r.width / 2}px`;
       marker.style.top = `${progRect.bottom}px`;
       document.body.appendChild(marker);
