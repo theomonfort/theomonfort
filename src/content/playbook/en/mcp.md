@@ -208,7 +208,7 @@ The **MCP Registry** is an **open registry** that lists MCP servers from across 
 
 ## Build your own MCP Registry
 
-Two hosting options — both can be consumed and enforced from VS Code / Org / Enterprise.
+Two hosting options — both can be consumed and enforced from VS Code / Org / Enterprise (⚠️ note: enforcement applies only to the user's **active (currently used) license**).
 
 <div class="setup-cards">
   <div class="setup-card">
