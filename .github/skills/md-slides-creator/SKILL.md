@@ -176,6 +176,8 @@ Use sparingly — 1 to 3 short lines per slide. Always lead with an emoji to set
 
 Common emojis: 🎯 takeaway · 🔑 key · ⚠️ warning · 💡 tip · 📝 note · 🤖 automation · 🔧 config · 🌐 public · 🆓 free · 💰 paid · 📦 module · ✅ do · ❌ don't.
 
+> ⚠️ **A callout must never be the first element of a slide.** A `>` blockquote renders as a boxed "note" panel, so leading a slide with one makes the opening line look like a footnote pinned to the top. Open every slide with **normal prose** (a plain paragraph, table, or `###` sub-heading) and reserve callouts for **emphasis lower down — ideally the bottom** of the slide, as a closing takeaway/warning. The only blockquote-style block allowed at the very top is the mandatory first-slide `hero-quote` (4a), which is a styled `<div>`, not a `>` blockquote.
+
 ### 4d. Code blocks
 
 Use fenced code with a language hint (`bash`, `json`, `yaml`, `js`, `ts`, `python`). Each code block must fit on one slide — if it doesn't, split into two slides with `### Step 1` / `### Step 2` headings.
@@ -284,6 +286,7 @@ Before declaring done, verify EVERY item:
 - [ ] Slide count is 5–9.
 - [ ] First content slide (`## 一言で` / `## In one line`) opens with the default octocat-with-speech-bubble `hero-quote` (or the category's auto-mascot) — **not** `hero-quote-plain`.
 - [ ] Any further `hero-quote` blocks are used sparingly (≤ 1 per slide).
+- [ ] No slide (other than the first, with its `hero-quote`) starts with a `>` callout — every slide opens with normal prose; callouts sit lower / at the bottom.
 - [ ] Each slide stands on its own — no orphan H2 with no body, no body before the first H2.
 - [ ] Tables ≤ 5 cols, ≤ 8 rows.
 - [ ] Code blocks fit one slide each.
