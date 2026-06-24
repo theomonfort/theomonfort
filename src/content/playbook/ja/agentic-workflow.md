@@ -23,6 +23,12 @@ links:
   - label: githubnext/agentics（サンプル集）
     url: https://github.com/githubnext/agentics
   - group: 📰 Recent Changelog
+    label: "GitHub Agentic Workflows is now in public preview (2026-06-11)"
+    url: https://github.blog/changelog/2026-06-11-github-agentic-workflows-is-now-in-public-preview/
+  - group: 📰 Recent Changelog
+    label: "Agentic workflows no longer need a personal access token (2026-06-11)"
+    url: https://github.blog/changelog/2026-06-11-agentic-workflows-no-longer-need-a-personal-access-token/
+  - group: 📰 Recent Changelog
     label: "View Agentic Workflow configs in the Actions run summary (2026-03-26)"
     url: https://github.blog/changelog/2026-03-26-view-agentic-workflow-configs-in-the-actions-run-summary
 ---
@@ -42,7 +48,8 @@ links:
 
 ### 概要
 - GitHub Actions 上で **AI エージェント** が作業を自動化
-- 現在 <a href="https://github.blog/changelog/2026-02-13-github-agentic-workflows-are-now-in-technical-preview/" target="_blank" rel="noopener noreferrer" class="retro-link">テクニカルプレビュー中</a>（2026 年 2 月 13 日発表）
+- 現在 <a href="https://github.blog/changelog/2026-06-11-github-agentic-workflows-is-now-in-public-preview/" target="_blank" rel="noopener noreferrer" class="retro-link">パブリックプレビュー中</a>（2026 年 6 月 11 日発表）
+- もう <a href="https://github.blog/changelog/2026-06-11-agentic-workflows-no-longer-need-a-personal-access-token/" target="_blank" rel="noopener noreferrer" class="retro-link">PAT</a> は不要 — Actions 組み込みの `GITHUB_TOKEN` で動作
 
 ### 構成要素
 
