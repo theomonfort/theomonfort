@@ -22,6 +22,11 @@ This is an Astro/Tailwind static site for a bilingual GitHub/Copilot playbook. U
 - The protected-path hook blocks agent edits that reference `.github/`, `.env`, or `pnpm-lock.yaml`.
 - Hook syntax differs slightly by environment: VS Code uses keys like `timeout` and payload fields such as `tool_name` / `tool_input`; Copilot CLI and Cloud Agent use `timeoutSec`, `toolName` / `toolArgs`, and top-level `permissionDecision`.
 
+## Branching and PRs
+
+- When I ask for a change on a topic, ideally create a new branch for that topic rather than committing directly to the default branch.
+- Land the change by opening a pull request and merging it, instead of pushing straight to `main`.
+
 ## Change hygiene
 
 - Keep edits surgical and update both localized files when changing shared content.
