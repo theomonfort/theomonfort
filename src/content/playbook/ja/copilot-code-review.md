@@ -133,7 +133,7 @@ links:
 | **`NAME.instructions.md`** | `.github/instructions/` 配下 | `applyTo` で指定したパス・言語にだけ効く追加指示 |
 | **`AGENTS.md`** | リポジトリ **ルート** | 既存の `AGENTS.md` があれば自動で文脈として利用 — Cloud Agent / CLI と同じ規約を共有 |
 
-> 💡 **ポイント**：既に `AGENTS.md` で運用しているなら、追加設定なしでレビューにも同じ規約が効く。<a class="retro-link" href="/theomonfort/playbook/harness-engineering/?present=1&amp;slide=5">AGENTS.md とは？ ↗</a>
+> 💡 **ポイント**：既に `AGENTS.md` で運用しているなら、追加設定なしでレビューにも同じ規約が効く。<a class="retro-link" href="/theomonfort/playbook/harness-engineering/?present=1&amp;slide=6">AGENTS.md とは？ ↗</a>
 >
 > 📘 公式手順：<a href="https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/add-custom-instructions/add-repository-instructions" target="_blank" rel="noopener noreferrer" class="retro-link">Adding repository custom instructions for GitHub Copilot</a> — 3 種類のファイルと対応機能の一覧
 

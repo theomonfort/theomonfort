@@ -78,8 +78,8 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       document.documentElement.classList.add('slide-preparing');
       document.body.classList.add('present-mode');
       document.body.classList.add('slide-preparing');
-      const _initSlide = parseInt(new URLSearchParams(location.search).get('slide') || '0', 10) || 0;
-      if (_initSlide === 0) document.body.classList.add('slide-cover');
+      const _initSlide = parseInt(new URLSearchParams(location.search).get('slide') || '1', 10) || 1;
+      if (_initSlide <= 1) document.body.classList.add('slide-cover');
     }
   </script>
   <script is:inline define:vars={{ BASE: import.meta.env.BASE_URL }}>
@@ -501,7 +501,8 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
         bar.addEventListener('click', () => {
           showSlide(i);
           const url = new URL(window.location.href);
-          url.searchParams.set('slide', String(i));
+          if (i > 0) url.searchParams.set('slide', String(i + 1));
+          else url.searchParams.delete('slide');
           history.replaceState(null, '', url.pathname + url.search);
         });
         prog.appendChild(bar);
@@ -629,9 +630,10 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 
     syncToc();
 
-    // start at slide param or 0
+    // start at slide param (1-indexed in the URL) or the cover slide
     const params = new URLSearchParams(window.location.search);
-    const s = startSlide ?? parseInt(params.get('slide') || '0', 10);
+    const raw = params.get('slide');
+    const s = startSlide ?? (raw === null ? 0 : parseInt(raw, 10) - 1);
     showSlide(isNaN(s) ? 0 : s);
   }
 
@@ -726,7 +728,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 
   function syncSlideUrl() {
     const url = new URL(window.location.href);
-    if (current > 0) url.searchParams.set('slide', String(current));
+    if (current > 0) url.searchParams.set('slide', String(current + 1));
     else url.searchParams.delete('slide');
     const nextUrl = url.pathname + (url.search || '') + url.hash;
     if (nextUrl !== window.location.pathname + window.location.search + window.location.hash) {
@@ -753,7 +755,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
         const cleanBase = base.split('?')[0];
         const params = new URLSearchParams();
         params.set('present', '1');
-        if (current > 0) params.set('slide', String(current));
+        if (current > 0) params.set('slide', String(current + 1));
         navigateSmooth(`${cleanBase}?${params.toString()}`);
       });
     }
