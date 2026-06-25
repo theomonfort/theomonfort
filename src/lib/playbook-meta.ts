@@ -11,6 +11,7 @@ export const NEW_PLAYBOOK_SLUGS = new Set([
   'github',
   'cli',
   'agentic-workflow',
+  'copilot-app',
 ]);
 
 export function isNewPlaybookEntry(slug: string): boolean {
