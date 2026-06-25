@@ -121,14 +121,14 @@ From the port-forwarding notification, click **"Open in browser"** and try it ou
 
 Here's the key move — **instead of asking Copilot Chat to "fix this right now", file each improvement as a GitHub Issue**. In Step 11 (CODE: Cloud Agent) we'll have Cloud Agent implement some of them **in parallel, in one batch**, and in Step 13 (CODE: Copilot CLI) we'll knock out the remaining ones in parallel with `/fleet`.
 
-Send the prompt below to Copilot Chat to file **6** Issues at once (the `github-issues` skill will structure them automatically):
+Send the prompt below to Copilot Chat to file **8** Issues at once (the `github-issues` skill will structure them automatically):
 
 <Aside type="negative">
 The Issues below are **just one example** of the improvements you might want, based on how Copilot built the site. Depending on what Copilot actually shipped, some of them may not apply — skip those, and **feel free to swap in your own improvements** that make the site better the way you want.
 </Aside>
 
 ```
-Use the github-issues skill to create the following improvements as individual Issues in this repository.
+Use the github-issues skill to create the following improvements as individual Issues in this repository. For Issues that specify a Type (e.g. Bug), set the GitHub Issue type accordingly (untyped ones are Features).
 
 1. Title: Add a presentation mode with a category-grouped TOC sidebar and category background images on top of the current landing page
    Details: Keep the existing `/playbook` landing page and Markdown detail pages. Add a presentation mode entry point from each card (for example `?present=1`). In presentation mode, each `##` heading in the Markdown becomes a slide, with a generated title/cover slide from frontmatter. Add keyboard controls (`←` / `→` to move, `Esc` to return to `/playbook`) and keep a unique URL for the current entry and slide. Also show a fixed left sidebar (TOC) listing all Playbook entries grouped by category using `src/lib/playbook-categories.ts` (labels, colors, icons, and ordering from that file). Highlight the current entry; clicking another entry switches to it while staying in presentation mode, and the TOC scroll position should not jump when clicking. Slide text should use a large font size so it stays readable when projected on a screen. Additionally, give each presentation deck a category-specific background image using the supplied assets: `slide-bg-introduction.webp`, `slide-bg-plan.webp`, `slide-bg-develop.webp`, `slide-bg-review.webp`, `slide-bg-secure.webp`, `slide-bg-operate.webp`, and `slide-bg-administration.webp`. Add a dark overlay so text stays readable. The cover / hero slide can show more of the background; content slides should be more subdued.
@@ -141,12 +141,20 @@ Use the github-issues skill to create the following improvements as individual I
 
 4. Title: Render Mermaid diagrams inside presentation slides
    Details: If a slide contains a ` ```mermaid ` code block, render it as a Mermaid diagram instead of plain code. Make sure diagrams on slides after slide 1 render correctly when navigating between slides.
+   Type: Bug
 
 5. Title: Improve presentation slide layout and typography
    Details: Make slide content feel centered and intentional, not stuck in the top-left. Use the retro theme tokens, category colors, readable table/code styles, and balanced spacing. Tables and long code blocks should scroll inside the slide rather than overflowing the viewport.
 
 6. Title: Add mobile fallback for presentation mode
    Details: On narrow screens, presentation mode should not break. Either disable presentation mode and fall back to the normal Markdown detail page, or provide a simple vertical slide list. Cards and detail pages should remain usable on mobile.
+
+7. Title: Prototype 10 design options for the table-of-contents (TOC) sidebar in a single HTML file
+   Details: Building on the existing retro JRPG theme (neon palette, pixel fonts, CRT glow, per `frontend.instructions.md`), create 10 design variations of the presentation-mode TOC sidebar. Put them all in one self-contained HTML file at `public/toc-prototypes.html` so they can be opened in a browser and compared side by side. Within each section (Plan, Develop, etc.) keep the accent color solid and uniform, and preserve the 2-digit number, icon, title, New badge, and current-item highlight.
+
+8. Title: Fix the flash of the non-presentation page when switching entries in presentation mode
+   Details: While in presentation mode, clicking another entry in the TOC sidebar briefly shows the normal Markdown detail page for an instant before presentation mode is re-applied. Keep presentation mode active across entry switches so the non-present content never flashes.
+   Type: Bug
 ```
 
 You can find the resulting Issues in the Issues tab of your repository. We'll have Cloud Agent / Copilot CLI implement them in the next sections.
