@@ -10,7 +10,7 @@ accent:
   glow: hover:shadow-neon-green
   shadow: shadow-neon-green
   hex: "#9bbc0f"
-order: 8
+order: 3.5
 category: plan
 related: ['agentic-workflow', 'agent-skills', 'mcp']
 links:
