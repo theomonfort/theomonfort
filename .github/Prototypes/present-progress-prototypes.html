@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>プレゼン進捗バー デザイン案 10 種 — Retro JRPG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&family=VT323&family=Caveat:wght@700&display=swap"
+    />
+    <style>
+      /* ──────────────────────────────────────────────────────────
+         Design tokens (frontend.instructions.md / retro JRPG theme)
+         ────────────────────────────────────────────────────────── */
+      :root {
+        --shadow-ink: #05060f;
+        --midnight: #0a0e27;
+        --deep-purple: #1a0b2e;
+        --neon-magenta: #ff2e88;
+        --neon-cyan: #00f0ff;
+        --crt-amber: #ffb000;
+        --gb-green: #9bbc0f;
+        --phosphor: #e8f4ff;
+
+        --font-pixel: 'Press Start 2P', monospace;
+        --font-pixel-jp: 'DotGothic16', monospace;
+        --font-terminal: 'VT323', monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        color: var(--phosphor);
+        font-family: var(--font-pixel-jp);
+        background:
+          radial-gradient(circle at 50% 0%, var(--deep-purple) 0%, var(--midnight) 45%, var(--shadow-ink) 100%);
+        background-attachment: fixed;
+        padding: 2.5rem clamp(1rem, 4vw, 3rem) 5rem;
+      }
+
+      /* Faint CRT scanlines overlay */
+      body::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 999;
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0) 0px,
+          rgba(0, 0, 0, 0) 2px,
+          rgba(0, 0, 0, 0.12) 3px,
+          rgba(0, 0, 0, 0.12) 4px
+        );
+        opacity: 0.5;
+      }
+
+      .page-head {
+        max-width: 1500px;
+        margin: 0 auto 2.5rem;
+      }
+
+      .page-head h1 {
+        font-family: var(--font-pixel);
+        font-size: clamp(0.9rem, 2.4vw, 1.4rem);
+        line-height: 1.6;
+        color: var(--neon-cyan);
+        text-shadow: 0 0 8px var(--neon-cyan), 0 0 24px rgba(0, 240, 255, 0.4);
+        margin: 0 0 1rem;
+      }
+
+      .page-head p {
+        font-size: 1rem;
+        line-height: 1.7;
+        max-width: 78ch;
+        opacity: 0.85;
+        margin: 0.4rem 0;
+      }
+
+      .page-head .legend {
+        margin-top: 1rem;
+        font-family: var(--font-terminal);
+        font-size: 1.25rem;
+        color: var(--crt-amber);
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+        gap: 2.5rem 2rem;
+        max-width: 1500px;
+        margin: 0 auto;
+        align-items: start;
+      }
+
+      .proto {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .proto-label {
+        font-family: var(--font-pixel);
+        font-size: 0.6rem;
+        line-height: 1.5;
+        color: var(--neon-magenta);
+        text-shadow: 0 0 6px rgba(255, 46, 136, 0.5);
+        margin-bottom: 0.35rem;
+      }
+
+      .proto-desc {
+        font-size: 0.82rem;
+        line-height: 1.5;
+        opacity: 0.7;
+        margin-bottom: 0.9rem;
+        min-height: 3.7em;
+      }
+
+      /* The progress shell (mimics fixed present-mode viewport top) */
+      .progress-stage {
+        --entry-accent: var(--gb-green);
+        --marker-left: 65%;
+        position: relative;
+        width: 100%;
+        height: 170px;
+        overflow: hidden;
+        background:
+          linear-gradient(180deg, rgba(26, 11, 46, 0.78), rgba(5, 6, 15, 0.92)),
+          repeating-linear-gradient(90deg, rgba(0, 240, 255, 0.05) 0 1px, transparent 1px 24px);
+        border: 2px solid color-mix(in srgb, var(--neon-cyan) 28%, transparent);
+      }
+
+      .progress-stage::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(232, 244, 255, 0.035) 0 1px,
+          transparent 1px 5px
+        );
+        opacity: 0.5;
+      }
+
+      .stage-readout {
+        position: absolute;
+        left: 1rem;
+        right: 1rem;
+        bottom: 0.85rem;
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 0.75rem;
+        z-index: 2;
+      }
+
+      .stage-kicker {
+        font-family: var(--font-terminal);
+        font-size: 1.05rem;
+        line-height: 1;
+        color: color-mix(in srgb, var(--phosphor) 70%, transparent);
+        letter-spacing: 0.08em;
+      }
+
+      .stage-title {
+        display: block;
+        margin-top: 0.35rem;
+        color: var(--phosphor);
+        font-size: 0.86rem;
+      }
+
+      .slide-counter {
+        flex-shrink: 0;
+        font-family: var(--font-terminal);
+        font-size: 1.45rem;
+        line-height: 1;
+        color: var(--crt-amber);
+        text-shadow: 0 0 8px rgba(255, 176, 0, 0.55);
+      }
+
+      .slide-progress {
+        display: flex;
+        position: absolute;
+        top: 3rem;
+        left: 0;
+        right: 0;
+        padding: 4px 16px;
+        gap: 4px;
+        z-index: 4;
+        background: #05060f;
+        border-bottom: 1px dashed color-mix(in srgb, var(--entry-accent) 25%, transparent);
+      }
+
+      .slide-progress-bar {
+        flex: 1;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        padding: 6px 0;
+        position: relative;
+        appearance: none;
+        -webkit-appearance: none;
+        color: inherit;
+      }
+
+      .slide-progress-bar::before {
+        content: '';
+        display: block;
+        height: 3px;
+        background: color-mix(in srgb, var(--entry-accent) 15%, transparent);
+        transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+      }
+
+      .slide-progress-bar.active::before {
+        background: var(--entry-accent);
+        box-shadow: 0 0 6px var(--entry-accent);
+      }
+
+      .slide-progress-bar:hover::before,
+      .slide-progress-bar:focus-visible::before {
+        background: color-mix(in srgb, var(--entry-accent) 65%, transparent);
+      }
+
+      .slide-progress-bar:focus-visible {
+        outline: 2px solid var(--neon-cyan);
+        outline-offset: 2px;
+      }
+
+      .bar-caption {
+        display: none;
+      }
+
+      .slide-new-marker {
+        display: flex;
+        position: absolute;
+        z-index: 6;
+        left: var(--marker-left);
+        top: 0.6rem;
+        flex-direction: row;
+        align-items: center;
+        gap: 3px;
+        transform: translateX(-50%) rotate(-3deg);
+        pointer-events: none;
+      }
+
+      .slide-new-arrow {
+        width: 18px;
+        height: 16px;
+        filter: drop-shadow(0 0 6px rgba(255, 209, 0, 0.5));
+      }
+
+      .slide-new-text {
+        font-family: var(--font-terminal);
+        font-size: 1.25rem;
+        line-height: 1;
+        color: #ffe14d;
+        text-shadow: 0 0 8px rgba(255, 209, 0, 0.55);
+        white-space: nowrap;
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V1 — Classic Segments (real component baseline, brighter)
+         ────────────────────────────────────────────────────────── */
+      .v1 .slide-progress {
+        --entry-accent: var(--gb-green);
+        top: 2.9rem;
+        gap: 4px;
+        border-bottom-color: color-mix(in srgb, var(--gb-green) 35%, transparent);
+      }
+      .v1 .slide-progress-bar::before {
+        height: 4px;
+        border: 1px solid color-mix(in srgb, var(--gb-green) 18%, transparent);
+      }
+      .v1 .slide-progress-bar[aria-selected='true']::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 2px;
+        background: var(--crt-amber);
+        box-shadow: 0 0 8px var(--crt-amber);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V2 — Tick Tape (continuous rail + equal slide cuts)
+         ────────────────────────────────────────────────────────── */
+      .v2 .slide-progress {
+        --entry-accent: var(--neon-cyan);
+        top: 3.05rem;
+        padding-block: 8px;
+        gap: 0;
+        border-top: 1px solid color-mix(in srgb, var(--neon-cyan) 28%, transparent);
+        border-bottom: 1px solid color-mix(in srgb, var(--neon-cyan) 28%, transparent);
+      }
+      .v2 .slide-progress::before {
+        content: '';
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        width: calc((100% - 32px) * 0.4);
+        height: 6px;
+        transform: translateY(-50%);
+        background: var(--neon-cyan);
+        box-shadow: 0 0 8px var(--neon-cyan), 0 0 18px rgba(0, 240, 255, 0.4);
+      }
+      .v2 .slide-progress-bar {
+        z-index: 1;
+        padding: 8px 0;
+        border-right: 1px dashed color-mix(in srgb, var(--neon-cyan) 30%, transparent);
+      }
+      .v2 .slide-progress-bar:last-child {
+        border-right: 0;
+      }
+      .v2 .slide-progress-bar::before {
+        height: 6px;
+        background: color-mix(in srgb, var(--neon-cyan) 12%, transparent);
+      }
+      .v2 .slide-progress-bar.active::before {
+        background: transparent;
+        box-shadow: none;
+      }
+      .v2 .slide-progress-bar[aria-selected='true']::after {
+        content: '◆';
+        position: absolute;
+        left: 50%;
+        bottom: -0.55rem;
+        transform: translateX(-50%);
+        color: var(--crt-amber);
+        font-size: 0.65rem;
+        text-shadow: 0 0 8px var(--crt-amber);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V3 — Pixel HP Bar (chunky cartridge gauge)
+         ────────────────────────────────────────────────────────── */
+      .v3 .slide-progress {
+        --entry-accent: var(--gb-green);
+        top: 2.85rem;
+        padding: 6px 12px;
+        gap: 3px;
+        background: #02030a;
+        border: 2px solid var(--crt-amber);
+        box-shadow: 0 0 8px rgba(255, 176, 0, 0.45), inset 0 0 12px rgba(255, 176, 0, 0.08);
+      }
+      .v3 .slide-progress::after {
+        content: 'HP';
+        position: absolute;
+        left: 0.35rem;
+        top: -1.5rem;
+        font-family: var(--font-terminal);
+        font-size: 1.25rem;
+        color: var(--crt-amber);
+        text-shadow: 0 0 8px rgba(255, 176, 0, 0.55);
+      }
+      .v3 .slide-progress-bar {
+        padding: 7px 0;
+      }
+      .v3 .slide-progress-bar::before {
+        height: 12px;
+        background: rgba(155, 188, 15, 0.12);
+        border: 1px solid rgba(155, 188, 15, 0.24);
+        box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.35);
+      }
+      .v3 .slide-progress-bar.active::before {
+        background: var(--gb-green);
+        border-color: var(--gb-green);
+        box-shadow: 0 0 8px var(--gb-green), inset 0 -4px 0 rgba(5, 6, 15, 0.25);
+      }
+      .v3 .slide-progress-bar[aria-selected='true']::after {
+        content: 'LV04';
+        position: absolute;
+        top: -1.25rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: var(--font-terminal);
+        font-size: 1rem;
+        color: var(--gb-green);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V4 — Dotted Pulse (dashed neon cartridge cells)
+         ────────────────────────────────────────────────────────── */
+      .v4 .slide-progress {
+        --entry-accent: var(--crt-amber);
+        top: 3rem;
+        gap: 6px;
+        padding-block: 7px;
+        background: rgba(5, 6, 15, 0.95);
+        border-bottom: 1px dashed color-mix(in srgb, var(--crt-amber) 45%, transparent);
+      }
+      .v4 .slide-progress-bar::before {
+        height: 8px;
+        background: repeating-linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--crt-amber) 18%, transparent) 0 4px,
+          transparent 4px 7px
+        );
+        border: 1px dashed color-mix(in srgb, var(--crt-amber) 28%, transparent);
+      }
+      .v4 .slide-progress-bar.active::before {
+        background: repeating-linear-gradient(90deg, var(--crt-amber) 0 4px, transparent 4px 7px);
+        border-color: var(--crt-amber);
+        box-shadow: 0 0 8px rgba(255, 176, 0, 0.65);
+      }
+      .v4 .slide-progress-bar[aria-selected='true']::before {
+        animation: pulseAmber 0.9s steps(2) infinite;
+      }
+      @keyframes pulseAmber {
+        50% {
+          filter: brightness(1.45);
+        }
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V5 — Comet Edge (glowing leading slide)
+         ────────────────────────────────────────────────────────── */
+      .v5 .slide-progress {
+        --entry-accent: var(--neon-cyan);
+        top: 2.95rem;
+        gap: 2px;
+        background: rgba(5, 6, 15, 0.96);
+        border-bottom: 1px solid color-mix(in srgb, var(--neon-cyan) 34%, transparent);
+      }
+      .v5 .slide-progress-bar {
+        padding: 8px 0;
+      }
+      .v5 .slide-progress-bar::before {
+        height: 5px;
+        background: color-mix(in srgb, var(--neon-cyan) 10%, transparent);
+      }
+      .v5 .slide-progress-bar.active::before {
+        background: var(--neon-cyan);
+        box-shadow: 0 0 8px var(--neon-cyan), 0 0 18px rgba(0, 240, 255, 0.45);
+      }
+      .v5 .slide-progress-bar[aria-selected='true']::after {
+        content: '';
+        position: absolute;
+        right: -7px;
+        top: 50%;
+        width: 14px;
+        height: 14px;
+        transform: translateY(-50%) rotate(45deg);
+        background: var(--phosphor);
+        border: 2px solid var(--neon-cyan);
+        box-shadow: 0 0 8px var(--neon-cyan), 0 0 20px rgba(0, 240, 255, 0.55);
+      }
+      .v5 .slide-new-text {
+        color: var(--neon-cyan);
+        text-shadow: 0 0 8px var(--neon-cyan);
+      }
+      .v5 .slide-new-arrow path {
+        stroke: var(--neon-cyan);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V6 — Stage Select Nodes (numbered checkpoints)
+         ────────────────────────────────────────────────────────── */
+      .v6 .slide-progress {
+        --entry-accent: var(--neon-magenta);
+        top: 2.25rem;
+        padding: 12px 14px 10px;
+        gap: 0;
+        background: rgba(5, 6, 15, 0.94);
+        border: 1px dashed color-mix(in srgb, var(--neon-magenta) 42%, transparent);
+      }
+      .v6 .slide-progress::before {
+        content: '';
+        position: absolute;
+        left: 24px;
+        right: 24px;
+        top: 50%;
+        height: 2px;
+        background: color-mix(in srgb, var(--neon-magenta) 30%, transparent);
+      }
+      .v6 .slide-progress-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        min-height: 38px;
+        z-index: 1;
+      }
+      .v6 .slide-progress-bar::before {
+        width: 22px;
+        height: 22px;
+        background: var(--shadow-ink);
+        border: 2px solid color-mix(in srgb, var(--neon-magenta) 50%, transparent);
+      }
+      .v6 .slide-progress-bar.active::before {
+        background: var(--neon-magenta);
+        border-color: var(--neon-magenta);
+        box-shadow: 0 0 8px var(--neon-magenta), 0 0 18px rgba(255, 46, 136, 0.45);
+      }
+      .v6 .bar-caption {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: var(--font-terminal);
+        font-size: 1.02rem;
+        line-height: 1;
+        color: var(--phosphor);
+      }
+      .v6 .slide-progress-bar.active .bar-caption {
+        color: var(--shadow-ink);
+      }
+      .v6 .slide-progress-bar[aria-selected='true']::after {
+        content: '';
+        position: absolute;
+        inset: 4px;
+        border: 2px solid var(--crt-amber);
+        box-shadow: 0 0 8px var(--crt-amber);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V7 — CRT Scanline Loader (arcade boot bar)
+         ────────────────────────────────────────────────────────── */
+      .v7 .slide-progress {
+        --entry-accent: var(--gb-green);
+        top: 3rem;
+        padding-block: 8px;
+        gap: 3px;
+        background: #02030a;
+        border-top: 1px solid rgba(155, 188, 15, 0.35);
+        border-bottom: 1px solid rgba(155, 188, 15, 0.35);
+        box-shadow: inset 0 0 14px rgba(155, 188, 15, 0.08);
+      }
+      .v7 .slide-progress-bar::before {
+        height: 9px;
+        background:
+          repeating-linear-gradient(to bottom, rgba(232, 244, 255, 0.06) 0 1px, transparent 1px 3px),
+          rgba(155, 188, 15, 0.12);
+        border: 1px solid rgba(155, 188, 15, 0.25);
+      }
+      .v7 .slide-progress-bar.active::before {
+        background:
+          repeating-linear-gradient(to bottom, rgba(232, 244, 255, 0.16) 0 1px, transparent 1px 3px),
+          var(--gb-green);
+        border-color: var(--gb-green);
+        box-shadow: 0 0 8px rgba(155, 188, 15, 0.8);
+      }
+      .v7 .slide-progress-bar[aria-selected='true']::after {
+        content: 'LOAD';
+        position: absolute;
+        left: 50%;
+        bottom: -1.1rem;
+        transform: translateX(-50%);
+        font-family: var(--font-terminal);
+        font-size: 0.9rem;
+        color: var(--gb-green);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V8 — Thin Top Rail (cursor-first minimal HUD)
+         ────────────────────────────────────────────────────────── */
+      .v8 .slide-progress {
+        --entry-accent: var(--neon-magenta);
+        top: 2.95rem;
+        padding: 11px 16px;
+        gap: 5px;
+        background: transparent;
+        border-top: 1px solid color-mix(in srgb, var(--neon-magenta) 18%, transparent);
+        border-bottom: 1px dashed color-mix(in srgb, var(--neon-magenta) 28%, transparent);
+      }
+      .v8 .slide-progress-bar {
+        padding: 4px 0;
+      }
+      .v8 .slide-progress-bar::before {
+        height: 2px;
+        background: color-mix(in srgb, var(--neon-magenta) 18%, transparent);
+      }
+      .v8 .slide-progress-bar.active::before {
+        background: var(--neon-magenta);
+        box-shadow: 0 0 7px rgba(255, 46, 136, 0.75);
+      }
+      .v8 .slide-progress-bar[aria-selected='true']::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: -8px;
+        width: 6px;
+        height: 22px;
+        transform: translateX(-50%);
+        background: var(--crt-amber);
+        box-shadow: 0 0 8px var(--crt-amber);
+      }
+      .v8 .slide-new-marker {
+        top: 0.7rem;
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V9 — Chevron Checkpoints (hard angled quest path)
+         ────────────────────────────────────────────────────────── */
+      .v9 .slide-progress {
+        --entry-accent: var(--crt-amber);
+        top: 2.85rem;
+        gap: 3px;
+        padding: 7px 14px;
+        background: rgba(5, 6, 15, 0.94);
+        border-bottom: 1px solid color-mix(in srgb, var(--crt-amber) 35%, transparent);
+      }
+      .v9 .slide-progress-bar {
+        padding: 5px 0;
+      }
+      .v9 .slide-progress-bar::before {
+        height: 14px;
+        clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 50%, calc(100% - 8px) 100%, 0 100%, 8px 50%);
+        background: color-mix(in srgb, var(--crt-amber) 12%, transparent);
+        border: 0;
+      }
+      .v9 .slide-progress-bar.active::before {
+        background: var(--crt-amber);
+        box-shadow: 0 0 8px rgba(255, 176, 0, 0.75);
+      }
+      .v9 .slide-progress-bar[aria-selected='true']::after {
+        content: '▶';
+        position: absolute;
+        left: 50%;
+        top: -1.05rem;
+        transform: translateX(-50%);
+        color: var(--crt-amber);
+        text-shadow: 0 0 8px var(--crt-amber);
+        font-size: 0.7rem;
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V10 — Equalizer Ticks (vertical rhythm meter)
+         ────────────────────────────────────────────────────────── */
+      .v10 .slide-progress {
+        --entry-accent: var(--neon-cyan);
+        top: 2.6rem;
+        align-items: end;
+        min-height: 58px;
+        padding: 8px 14px;
+        gap: 4px;
+        background: rgba(5, 6, 15, 0.94);
+        border: 1px dashed color-mix(in srgb, var(--neon-cyan) 35%, transparent);
+      }
+      .v10 .slide-progress-bar {
+        display: flex;
+        align-items: end;
+        justify-content: center;
+        height: 42px;
+        padding: 0;
+      }
+      .v10 .slide-progress-bar::before {
+        width: 100%;
+        height: calc(var(--level) * 1px);
+        min-height: 9px;
+        background: color-mix(in srgb, var(--neon-cyan) 13%, transparent);
+        border: 1px solid color-mix(in srgb, var(--neon-cyan) 22%, transparent);
+      }
+      .v10 .slide-progress-bar.active::before {
+        background: var(--neon-cyan);
+        border-color: var(--neon-cyan);
+        box-shadow: 0 0 8px rgba(0, 240, 255, 0.75);
+      }
+      .v10 .slide-progress-bar[aria-selected='true']::before {
+        background: var(--crt-amber);
+        border-color: var(--crt-amber);
+        box-shadow: 0 0 8px var(--crt-amber), 0 0 16px rgba(255, 176, 0, 0.45);
+      }
+      .v10 .slide-progress-bar[aria-selected='true']::after {
+        content: '04';
+        position: absolute;
+        top: -1.15rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: var(--font-terminal);
+        font-size: 1.05rem;
+        color: var(--crt-amber);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="page-head">
+      <h1>プレゼン進捗バー デザイン案 10 種</h1>
+      <p>
+        プレゼンモード最上部の slide-progress / slide-progress-bar 用デザイン案。実装へ移植しやすいように、実コンポーネントのクラス名・active 状態・New! マーカーを維持した自己完結 HTML。
+      </p>
+      <p>
+        サンプル状態は 10 スライド中 4 枚目まで完了、7 枚目に New! マーカー。各案はネオン単色アクセント、ピクセルグリッド、CRT グローの範囲で方向性を変えています。
+      </p>
+      <p class="legend">▶ Current = 04 / 10　◆ New marker = Slide 07</p>
+    </header>
+
+    <main class="gallery" id="gallery"></main>
+
+    <script>
+      // ── Shared sample slide progress data (mirrors playbook presentation mode) ──
+      const SLIDES = [
+        'Cover',
+        'Context',
+        'Map',
+        'Demo',
+        'Patterns',
+        'Hands-on',
+        'New Flow',
+        'Review',
+        'Metrics',
+        'Next',
+      ];
+
+      const CURRENT_INDEX = 3;
+      const NEW_INDEX = 6;
+      const LEVELS = [14, 22, 30, 38, 18, 28, 34, 20, 26, 16];
+
+      const VARIANTS = [
+        { cls: 'v1', name: 'V1 — Classic Segments', desc: '現行の薄い分割バーを磨いた基準案。フォスファ緑の完了区間とアンバーの現在位置。' },
+        { cls: 'v2', name: 'V2 — Tick Tape', desc: '連続したシアンのテープにスライド区切りを重ねる、計測器の目盛り風 HUD。' },
+        { cls: 'v3', name: 'V3 — Pixel HP Bar', desc: 'JRPG の HP ゲージ風。厚みのあるカートリッジ枠と内側の硬いシェーディング。' },
+        { cls: 'v4', name: 'V4 — Dotted Pulse', desc: 'アンバーの点線セルを積むローディング表現。現在スライドだけ軽く点滅。' },
+        { cls: 'v5', name: 'V5 — Comet Edge', desc: '完了済みシアンバーの先端に白いコメットを置き、進行方向を強く示す。' },
+        { cls: 'v6', name: 'V6 — Stage Select', desc: 'ステージ選択画面のノード列。番号入りスクエアとマゼンタの接続線。' },
+        { cls: 'v7', name: 'V7 — CRT Loader', desc: '古い筐体の起動画面風。スキャンライン入りのフォスファ緑ゲージ。' },
+        { cls: 'v8', name: 'V8 — Thin Top Rail', desc: '最小限のマゼンタトップレール。現在位置は縦長カーソルで切り込む。' },
+        { cls: 'v9', name: 'V9 — Chevron Quest', desc: 'クエスト進行を示すアンバーのシェブロンチェックポイント。硬い斜線形状。' },
+        { cls: 'v10', name: 'V10 — Equalizer Ticks', desc: '縦ティックのイコライザー型。進捗とリズムを同時に見せるアーケード HUD。' },
+      ];
+
+      function markerHTML(leftPercent) {
+        return (
+          `<div class="slide-new-marker" aria-hidden="true" style="--marker-left:${leftPercent}%">` +
+          `<svg class="slide-new-arrow" viewBox="0 0 44 40" fill="none" aria-hidden="true">` +
+          `<path d="M36 34 C 25 31, 15 25, 10 10" stroke="#ffe14d" stroke-width="3.4" stroke-linecap="round"/>` +
+          `<path d="M4 21 L9 7 L22 12" stroke="#ffe14d" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>` +
+          `</svg>` +
+          `<span class="slide-new-text">New!</span>` +
+          `</div>`
+        );
+      }
+
+      function progressHTML(variant) {
+        const markerLeft = ((NEW_INDEX + 0.5) / SLIDES.length) * 100;
+        let html =
+          `<div class="progress-stage ${variant}">` +
+          markerHTML(markerLeft) +
+          `<div class="slide-progress" role="tablist" aria-label="Slides" data-hint-slides="${NEW_INDEX}" data-new-label="New!">`;
+
+        for (let i = 0; i < SLIDES.length; i++) {
+          const activeCls = i <= CURRENT_INDEX ? ' active' : '';
+          const num = String(i + 1).padStart(2, '0');
+          html +=
+            `<button type="button" class="slide-progress-bar${activeCls}" ` +
+            `data-slide-index="${i}" data-slide-label="${num}" role="tab" ` +
+            `aria-label="Slide ${i + 1}: ${SLIDES[i]}" aria-selected="${i === CURRENT_INDEX ? 'true' : 'false'}" ` +
+            `style="--level:${LEVELS[i]}">` +
+            `<span class="bar-caption">${num}</span>` +
+            `</button>`;
+        }
+
+        html +=
+          `</div>` +
+          `<div class="stage-readout">` +
+          `<div><span class="stage-kicker">PRESENT MODE // TOP RAIL</span><span class="stage-title">${SLIDES[CURRENT_INDEX]} — slide ${CURRENT_INDEX + 1} active</span></div>` +
+          `<div class="slide-counter" aria-label="Slide counter"><span class="slide-counter-text">04 / 10</span></div>` +
+          `</div>` +
+          `</div>`;
+        return html;
+      }
+
+      const gallery = document.getElementById('gallery');
+      gallery.innerHTML = VARIANTS.map(
+        (v) =>
+          `<section class="proto ${v.cls}">` +
+          `<div class="proto-label">${v.name}</div>` +
+          `<div class="proto-desc">${v.desc}</div>` +
+          progressHTML(v.cls) +
+          `</section>`
+      ).join('');
+
+      // Prevent the demo buttons from behaving like real navigation controls.
+      gallery.addEventListener('click', (e) => {
+        const btn = e.target.closest('button.slide-progress-bar');
+        if (btn) e.preventDefault();
+      });
+    </script>
+  </body>
+</html>

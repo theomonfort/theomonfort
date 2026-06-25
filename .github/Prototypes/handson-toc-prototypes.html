@@ -1,0 +1,975 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hands-on TOC サイドバー デザイン案 10 種 — Retro JRPG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&family=VT323&family=Caveat:wght@700&display=swap"
+    />
+    <style>
+      /* ──────────────────────────────────────────────────────────
+         Design tokens (frontend.instructions.md / retro JRPG theme)
+         ────────────────────────────────────────────────────────── */
+      :root {
+        --shadow-ink: #05060f;
+        --midnight: #0a0e27;
+        --deep-purple: #1a0b2e;
+        --neon-magenta: #ff2e88;
+        --neon-cyan: #00f0ff;
+        --crt-amber: #ffb000;
+        --gb-green: #9bbc0f;
+        --phosphor: #e8f4ff;
+
+        --font-pixel: 'Press Start 2P', monospace;
+        --font-pixel-jp: 'DotGothic16', monospace;
+        --font-terminal: 'VT323', monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        color: var(--phosphor);
+        font-family: var(--font-pixel-jp);
+        background:
+          radial-gradient(circle at 50% 0%, var(--deep-purple) 0%, var(--midnight) 45%, var(--shadow-ink) 100%);
+        background-attachment: fixed;
+        padding: 2.5rem clamp(1rem, 4vw, 3rem) 5rem;
+      }
+
+      body::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 999;
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0) 0px,
+          rgba(0, 0, 0, 0) 2px,
+          rgba(0, 0, 0, 0.12) 3px,
+          rgba(0, 0, 0, 0.12) 4px
+        );
+        opacity: 0.5;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .page-head {
+        max-width: 1480px;
+        margin: 0 auto 2.5rem;
+      }
+
+      .page-head h1 {
+        margin: 0 0 1rem;
+        color: var(--neon-cyan);
+        font-family: var(--font-pixel);
+        font-size: clamp(0.86rem, 2.2vw, 1.35rem);
+        line-height: 1.65;
+        text-shadow: 0 0 8px var(--neon-cyan), 0 0 24px rgba(0, 240, 255, 0.4);
+      }
+
+      .page-head p {
+        max-width: 78ch;
+        margin: 0.4rem 0;
+        font-size: 1rem;
+        line-height: 1.75;
+        opacity: 0.86;
+      }
+
+      .page-head .legend {
+        margin-top: 1rem;
+        color: var(--crt-amber);
+        font-family: var(--font-terminal);
+        font-size: 1.35rem;
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+        gap: 2.5rem 2rem;
+        max-width: 1480px;
+        margin: 0 auto;
+        align-items: start;
+      }
+
+      .proto {
+        min-width: 0;
+      }
+
+      .proto-label {
+        margin-bottom: 0.35rem;
+        color: var(--neon-magenta);
+        font-family: var(--font-pixel);
+        font-size: 0.58rem;
+        line-height: 1.55;
+        text-shadow: 0 0 6px rgba(255, 46, 136, 0.55);
+      }
+
+      .proto-desc {
+        min-height: 3.8em;
+        margin-bottom: 0.9rem;
+        font-size: 0.84rem;
+        line-height: 1.5;
+        opacity: 0.72;
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         Shared handson TOC markup / base styling
+         ────────────────────────────────────────────────────────── */
+      .handson-toc {
+        --toc-accent: var(--neon-cyan);
+        position: relative;
+        width: 100%;
+        height: 640px;
+        overflow-y: auto;
+        padding: 0.8rem;
+        color: var(--phosphor);
+        background:
+          linear-gradient(145deg, rgba(5, 6, 15, 0.95), rgba(10, 14, 39, 0.84)),
+          repeating-linear-gradient(90deg, rgba(0, 240, 255, 0.045) 0 1px, transparent 1px 24px);
+        border: 2px solid rgba(0, 240, 255, 0.42);
+        box-shadow: inset 0 0 22px rgba(0, 240, 255, 0.08), 0 0 18px rgba(0, 240, 255, 0.1);
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 46, 136, 0.5) transparent;
+      }
+
+      .handson-toc::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .handson-toc::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .handson-toc::-webkit-scrollbar-thumb {
+        background: rgba(255, 46, 136, 0.5);
+      }
+
+      .handson-toc-list {
+        display: grid;
+        gap: 0.25rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .handson-toc-phase {
+        --toc-accent: var(--neon-cyan);
+        display: flex;
+        align-items: baseline;
+        gap: 0.45rem;
+        min-width: 0;
+        margin: 0.72rem 0 0.18rem;
+        padding: 0.42rem 0.25rem 0.18rem;
+        color: var(--toc-accent);
+        border-top: 1px solid color-mix(in srgb, var(--toc-accent), transparent 54%);
+        text-shadow: 0 0 10px color-mix(in srgb, var(--toc-accent), transparent 44%);
+      }
+
+      .handson-toc-phase:first-child {
+        margin-top: 0;
+        padding-top: 0;
+        border-top: 0;
+      }
+
+      .phase-en {
+        font-size: 0.82rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .handson-toc-phase small {
+        min-width: 0;
+        color: rgba(232, 244, 255, 0.62);
+        font-size: 0.68rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .handson-toc-list > li:not(.handson-toc-phase) {
+        min-width: 0;
+      }
+
+      .handson-toc-item {
+        --toc-accent: var(--neon-cyan);
+        position: relative;
+        display: grid;
+        grid-template-columns: auto auto minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 0.43rem;
+        min-width: 0;
+        padding: 0.38rem 0.48rem;
+        color: rgba(232, 244, 255, 0.72);
+        background: rgba(5, 6, 15, 0.46);
+        border: 1px solid rgba(232, 244, 255, 0.1);
+        border-left: 3px solid transparent;
+        font-family: var(--font-pixel-jp);
+        font-size: 0.76rem;
+        line-height: 1.16;
+        text-decoration: none;
+        transition: color 0.16s ease, background 0.16s ease, border-color 0.16s ease, transform 0.16s ease;
+      }
+
+      .handson-toc-item:hover {
+        color: #e8f4ff;
+        background: color-mix(in srgb, var(--toc-accent), transparent 91%);
+        border-color: color-mix(in srgb, var(--toc-accent), transparent 58%);
+        border-left-color: var(--toc-accent);
+      }
+
+      .handson-toc-item.is-active {
+        color: #e8f4ff;
+        background: color-mix(in srgb, var(--toc-accent), transparent 86%);
+        border-color: color-mix(in srgb, var(--toc-accent), transparent 26%);
+        border-left-color: var(--toc-accent);
+        box-shadow: inset 0 0 16px color-mix(in srgb, var(--toc-accent), transparent 84%), 0 0 14px color-mix(in srgb, var(--toc-accent), transparent 70%);
+      }
+
+      .toc-status,
+      .toc-num {
+        color: color-mix(in srgb, var(--toc-accent), transparent 16%);
+        font-size: 0.62rem;
+      }
+
+      .toc-status {
+        min-width: 0.72rem;
+      }
+
+      .toc-num {
+        min-width: 1.25rem;
+        text-align: right;
+      }
+
+      .toc-text {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .toc-duration {
+        justify-self: end;
+        min-width: 2.2rem;
+        padding: 0.05rem 0.28rem 0.1rem;
+        color: var(--crt-amber);
+        background: rgba(255, 176, 0, 0.08);
+        border: 1px solid rgba(255, 176, 0, 0.38);
+        font-family: var(--font-terminal);
+        font-size: 1rem;
+        line-height: 0.85;
+        text-align: center;
+      }
+
+      .toc-deco {
+        display: none;
+        pointer-events: none;
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V1 — Quest Log
+         ────────────────────────────────────────────────────────── */
+      .v1 .handson-toc {
+        padding: 1rem 0.85rem;
+      }
+
+      .v1 .handson-toc-phase {
+        border-top-style: dashed;
+      }
+
+      .v1 .phase-en::before {
+        content: '◆ ';
+      }
+
+      .v1 .handson-toc-item {
+        border: 1px dashed rgba(232, 244, 255, 0.14);
+        border-left: 0;
+        padding-left: 0.5rem;
+      }
+
+      .v1 .handson-toc-item.is-active {
+        border-style: solid;
+        outline: 1px solid var(--toc-accent);
+        outline-offset: -4px;
+        text-shadow: 0 0 8px color-mix(in srgb, var(--toc-accent), transparent 35%);
+      }
+
+      .v1 .handson-toc-item:not(.is-active) .toc-status {
+        opacity: 0.35;
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V2 — Vertical Stepper
+         ────────────────────────────────────────────────────────── */
+      .v2 .handson-toc-list {
+        gap: 0;
+      }
+
+      .v2 .handson-toc-phase {
+        margin-bottom: 0.1rem;
+        border-top: 0;
+        border-left: 2px solid var(--toc-accent);
+        padding-left: 0.48rem;
+        background: color-mix(in srgb, var(--toc-accent), transparent 92%);
+      }
+
+      .v2 .handson-toc-item {
+        margin-left: 0.55rem;
+        padding-left: 1.35rem;
+        border: 0;
+        border-left: 2px solid color-mix(in srgb, var(--toc-accent), transparent 58%);
+        background: transparent;
+      }
+
+      .v2 .handson-toc-item::before {
+        content: '';
+        position: absolute;
+        left: -6px;
+        top: 50%;
+        width: 10px;
+        height: 10px;
+        transform: translateY(-50%);
+        background: var(--midnight);
+        border: 2px solid var(--toc-accent);
+      }
+
+      .v2 .toc-status {
+        display: none;
+      }
+
+      .v2 .handson-toc-item.is-active::before {
+        background: var(--toc-accent);
+        box-shadow: 0 0 8px var(--toc-accent), 0 0 18px color-mix(in srgb, var(--toc-accent), transparent 45%);
+      }
+
+      .v2 .handson-toc-item.is-active {
+        border: 1px solid var(--toc-accent);
+        border-left: 2px solid var(--toc-accent);
+        background: color-mix(in srgb, var(--toc-accent), transparent 90%);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V3 — Accordion Windows
+         ────────────────────────────────────────────────────────── */
+      .v3 .handson-toc-list {
+        gap: 0.18rem;
+      }
+
+      .v3 .handson-toc-phase {
+        margin: 0.78rem 0 0;
+        padding: 0.42rem 0.55rem;
+        border: 2px solid var(--toc-accent);
+        background: rgba(5, 6, 15, 0.72);
+        box-shadow: 0 0 10px color-mix(in srgb, var(--toc-accent), transparent 72%);
+      }
+
+      .v3 .handson-toc-phase::before {
+        content: '▾';
+        color: var(--toc-accent);
+      }
+
+      .v3 .handson-toc-item {
+        margin-left: 0.55rem;
+        border: 1px solid color-mix(in srgb, var(--toc-accent), transparent 76%);
+        border-top: 0;
+        background: rgba(5, 6, 15, 0.54);
+      }
+
+      .v3 .handson-toc-item.is-active::after {
+        content: '';
+        position: absolute;
+        inset: 4px;
+        border: 1px dashed var(--toc-accent);
+      }
+
+      .v3 .toc-duration {
+        border-color: var(--toc-accent);
+        color: var(--toc-accent);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V4 — Stage Select Chips
+         ────────────────────────────────────────────────────────── */
+      .v4 .handson-toc-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.34rem;
+      }
+
+      .v4 .handson-toc-phase {
+        grid-column: 1 / -1;
+        justify-content: space-between;
+        margin: 0.65rem 0 0.08rem;
+        padding: 0.35rem 0.48rem;
+        border: 1px solid var(--toc-accent);
+        background: color-mix(in srgb, var(--toc-accent), transparent 91%);
+      }
+
+      .v4 .handson-toc-list > li:not(.handson-toc-phase) {
+        min-height: 5.2rem;
+      }
+
+      .v4 .handson-toc-item {
+        height: 100%;
+        grid-template-columns: auto minmax(0, 1fr);
+        grid-template-areas:
+          'status duration'
+          'num num'
+          'text text';
+        align-content: start;
+        gap: 0.24rem 0.35rem;
+        padding: 0.48rem;
+        border: 2px solid color-mix(in srgb, var(--toc-accent), transparent 55%);
+        background: rgba(5, 6, 15, 0.68);
+      }
+
+      .v4 .toc-status { grid-area: status; }
+      .v4 .toc-num {
+        grid-area: num;
+        min-width: 0;
+        color: var(--toc-accent);
+        font-family: var(--font-terminal);
+        font-size: 1.85rem;
+        line-height: 0.8;
+        text-align: left;
+      }
+      .v4 .toc-text {
+        grid-area: text;
+        white-space: normal;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+      .v4 .toc-duration { grid-area: duration; }
+
+      .v4 .handson-toc-item.is-active {
+        transform: translate(-2px, -2px);
+        background: var(--toc-accent);
+        color: var(--shadow-ink);
+        box-shadow: 0 0 10px var(--toc-accent), 0 0 22px color-mix(in srgb, var(--toc-accent), transparent 42%);
+      }
+
+      .v4 .handson-toc-item.is-active .toc-num,
+      .v4 .handson-toc-item.is-active .toc-status,
+      .v4 .handson-toc-item.is-active .toc-duration {
+        color: var(--shadow-ink);
+        border-color: var(--shadow-ink);
+      }
+
+      .v4 .handson-toc-item.is-active .toc-duration {
+        background: transparent;
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V5 — Section Tabs
+         ────────────────────────────────────────────────────────── */
+      .v5 .handson-toc {
+        padding-top: 0.95rem;
+      }
+
+      .v5 .handson-toc-phase {
+        width: max-content;
+        max-width: 100%;
+        margin: 0.78rem 0 0;
+        padding: 0.32rem 0.58rem 0.22rem;
+        border: 2px solid var(--toc-accent);
+        border-bottom: 0;
+        background: var(--midnight);
+      }
+
+      .v5 .handson-toc-phase::after {
+        content: 'TAB';
+        margin-left: auto;
+        color: rgba(232, 244, 255, 0.48);
+        font-family: var(--font-terminal);
+        font-size: 1rem;
+      }
+
+      .v5 .handson-toc-item {
+        border-left-color: color-mix(in srgb, var(--toc-accent), transparent 34%);
+        border-top: 1px solid color-mix(in srgb, var(--toc-accent), transparent 72%);
+        background: rgba(10, 14, 39, 0.72);
+      }
+
+      .v5 .handson-toc-item:hover,
+      .v5 .handson-toc-item.is-active {
+        transform: translateX(3px);
+      }
+
+      .v5 .handson-toc-item.is-active .toc-status {
+        animation: tabPulse 0.9s steps(2) infinite;
+      }
+
+      @keyframes tabPulse {
+        50% { opacity: 0.35; }
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V6 — Compact Dense List
+         ────────────────────────────────────────────────────────── */
+      .v6 .handson-toc {
+        height: 520px;
+        padding: 0.58rem;
+      }
+
+      .v6 .handson-toc-list {
+        gap: 0.08rem;
+      }
+
+      .v6 .handson-toc-phase {
+        margin: 0.45rem 0 0.08rem;
+        padding: 0.16rem 0.22rem;
+        border-top: 1px dashed var(--toc-accent);
+      }
+
+      .v6 .phase-en {
+        font-size: 0.7rem;
+      }
+
+      .v6 .handson-toc-phase small {
+        font-size: 0.58rem;
+      }
+
+      .v6 .handson-toc-item {
+        padding: 0.22rem 0.3rem;
+        gap: 0.32rem;
+        border: 0;
+        border-left: 2px solid transparent;
+        background: transparent;
+        font-size: 0.68rem;
+      }
+
+      .v6 .toc-duration {
+        min-width: 1.65rem;
+        padding: 0;
+        background: transparent;
+        border: 0;
+        font-size: 0.94rem;
+      }
+
+      .v6 .handson-toc-item.is-active {
+        color: var(--shadow-ink);
+        background: var(--toc-accent);
+        box-shadow: 0 0 9px var(--toc-accent);
+      }
+
+      .v6 .handson-toc-item.is-active .toc-status,
+      .v6 .handson-toc-item.is-active .toc-num,
+      .v6 .handson-toc-item.is-active .toc-duration {
+        color: var(--shadow-ink);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V7 — Left Rail Bars
+         ────────────────────────────────────────────────────────── */
+      .v7 .handson-toc {
+        padding-left: 1.05rem;
+      }
+
+      .v7 .handson-toc-list {
+        gap: 0.18rem;
+      }
+
+      .v7 .handson-toc-phase {
+        position: relative;
+        margin-left: 0.65rem;
+        border-top: 0;
+      }
+
+      .v7 .handson-toc-phase::before {
+        content: '';
+        position: absolute;
+        left: -0.7rem;
+        top: 0.28rem;
+        bottom: 0.18rem;
+        width: 4px;
+        background: var(--toc-accent);
+        box-shadow: 0 0 8px var(--toc-accent);
+      }
+
+      .v7 .handson-toc-item {
+        margin-left: 0.65rem;
+        border-left: 4px solid var(--toc-accent);
+        background: linear-gradient(90deg, color-mix(in srgb, var(--toc-accent), transparent 92%), rgba(5, 6, 15, 0.42));
+      }
+
+      .v7 .handson-toc-item::before {
+        content: '';
+        position: absolute;
+        left: -0.68rem;
+        top: 50%;
+        width: 0.66rem;
+        height: 2px;
+        transform: translateY(-50%);
+        background: var(--toc-accent);
+      }
+
+      .v7 .handson-toc-item.is-active {
+        outline: 2px solid var(--toc-accent);
+        outline-offset: 2px;
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V8 — Ticket / Receipt
+         ────────────────────────────────────────────────────────── */
+      .v8 .handson-toc {
+        background:
+          repeating-linear-gradient(to bottom, rgba(0, 240, 255, 0.06) 0 1px, transparent 1px 18px),
+          rgba(5, 6, 15, 0.94);
+        border-color: var(--crt-amber);
+        box-shadow: inset 0 0 18px rgba(255, 176, 0, 0.09), 0 0 16px rgba(255, 176, 0, 0.16);
+      }
+
+      .v8 .handson-toc-phase {
+        justify-content: center;
+        margin: 0.8rem 0 0.22rem;
+        padding: 0.36rem 0.45rem;
+        border: 1px dashed var(--toc-accent);
+        text-align: center;
+      }
+
+      .v8 .handson-toc-item {
+        border: 1px dashed color-mix(in srgb, var(--toc-accent), transparent 54%);
+        background: rgba(10, 14, 39, 0.46);
+      }
+
+      .v8 .handson-toc-item::before,
+      .v8 .handson-toc-item::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: 5px;
+        height: 10px;
+        transform: translateY(-50%);
+        background: var(--shadow-ink);
+        border: 1px solid color-mix(in srgb, var(--toc-accent), transparent 54%);
+      }
+
+      .v8 .handson-toc-item::before {
+        left: -1px;
+        border-left: 0;
+      }
+
+      .v8 .handson-toc-item::after {
+        right: -1px;
+        border-right: 0;
+      }
+
+      .v8 .toc-duration {
+        background: transparent;
+        border-style: dashed;
+      }
+
+      .v8 .handson-toc-item.is-active {
+        border-style: solid;
+        background: color-mix(in srgb, var(--toc-accent), transparent 88%);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V9 — HP Bar Rows
+         ────────────────────────────────────────────────────────── */
+      .v9 .handson-toc-item {
+        overflow: hidden;
+        grid-template-columns: auto auto minmax(0, 1fr) auto;
+        border-left: 0;
+        background: rgba(5, 6, 15, 0.62);
+      }
+
+      .v9 .handson-toc-item::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: var(--hp, 18%);
+        background: color-mix(in srgb, var(--toc-accent), transparent 87%);
+        border-right: 1px solid color-mix(in srgb, var(--toc-accent), transparent 42%);
+      }
+
+      .v9 .handson-toc-item > span {
+        position: relative;
+        z-index: 1;
+      }
+
+      .v9 .handson-toc-item:hover::before {
+        width: calc(var(--hp, 18%) + 12%);
+      }
+
+      .v9 .handson-toc-item.is-active::before {
+        width: 100%;
+        background: color-mix(in srgb, var(--toc-accent), transparent 76%);
+        box-shadow: inset 0 0 18px color-mix(in srgb, var(--toc-accent), transparent 72%);
+      }
+
+      .v9 .handson-toc-phase {
+        border-top: 0;
+      }
+
+      .v9 .handson-toc-phase::after {
+        content: 'HP';
+        margin-left: auto;
+        color: var(--toc-accent);
+        font-family: var(--font-terminal);
+        font-size: 1.15rem;
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V10 — Bracketed Terminal
+         ────────────────────────────────────────────────────────── */
+      .v10 .handson-toc {
+        background: #02030a;
+        border-color: rgba(155, 188, 15, 0.6);
+        box-shadow: inset 0 0 24px rgba(155, 188, 15, 0.08), 0 0 15px rgba(155, 188, 15, 0.16);
+      }
+
+      .v10 .handson-toc-phase {
+        font-family: var(--font-terminal);
+        font-size: 1.22rem;
+        border-top: 1px solid currentColor;
+      }
+
+      .v10 .handson-toc-phase::before {
+        content: '//';
+        opacity: 0.65;
+      }
+
+      .v10 .handson-toc-item {
+        grid-template-columns: auto auto minmax(0, 1fr) auto;
+        padding-left: 1rem;
+        border: 0;
+        background: transparent;
+        font-family: var(--font-terminal);
+        font-size: 1.18rem;
+        line-height: 0.95;
+      }
+
+      .v10 .toc-status,
+      .v10 .toc-num,
+      .v10 .toc-duration {
+        font-family: var(--font-terminal);
+        font-size: 1.1rem;
+      }
+
+      .v10 .toc-num::before { content: '['; }
+      .v10 .toc-num::after { content: ']'; }
+
+      .v10 .toc-text::after {
+        content: ' ................................';
+        color: color-mix(in srgb, var(--toc-accent), transparent 62%);
+      }
+
+      .v10 .toc-duration {
+        background: transparent;
+        border: 0;
+      }
+
+      .v10 .handson-toc-item:hover,
+      .v10 .handson-toc-item.is-active {
+        color: var(--toc-accent);
+        text-shadow: 0 0 8px color-mix(in srgb, var(--toc-accent), transparent 22%);
+      }
+
+      .v10 .handson-toc-item.is-active .toc-text::before {
+        content: 'RUN: ';
+        color: var(--crt-amber);
+      }
+
+      .v10 .handson-toc-item.is-active::after {
+        content: '_';
+        position: absolute;
+        right: 0.35rem;
+        bottom: 0.18rem;
+        color: var(--toc-accent);
+        animation: cursorBlink 1s steps(1) infinite;
+      }
+
+      @keyframes cursorBlink {
+        50% { opacity: 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="page-head">
+      <h1>Hands-on TOC サイドバー デザイン案 10 種</h1>
+      <p>
+        ハンズオン左サイドバーの比較用プロトタイプ。実コンポーネントの class / 構造（handson-toc、phase、item、status、num、text、duration）に合わせ、セクション色・2 桁番号・タイトル・時間バッジ・現在地ハイライトを全案で保持しています。
+      </p>
+      <p>
+        セクションのアクセントは実データと同じ単色指定: Introduction / Test & Secure = cyan、Plan / Operate = green、Develop / Quest Clear = magenta、Review = amber。
+      </p>
+      <p class="legend">▶ 現在地 = Step 01「INTRO：勉強会について」</p>
+    </header>
+
+    <main class="gallery" id="gallery"></main>
+
+    <script>
+      // ── Shared sample data mirrors src/lib/handson.ts and src/content/handson/ja/*.mdx ──
+      const ACCENT = {
+        cyan: '#00f0ff',
+        green: '#9bbc0f',
+        magenta: '#ff2e88',
+        amber: '#ffb000',
+      };
+
+      const STEPS = [
+        {
+          category: 'introduction',
+          labelEn: 'Introduction',
+          labelJa: 'はじめに',
+          accent: ACCENT.cyan,
+          items: [
+            { order: 1, slug: 'intro', title: 'INTRO：勉強会について', duration: 5, active: true },
+            { order: 2, slug: 'intro-2', title: 'INTRO：セットアップ', duration: 15 },
+          ],
+        },
+        {
+          category: 'plan',
+          labelEn: 'Plan',
+          labelJa: '企画',
+          accent: ACCENT.green,
+          items: [
+            { order: 3, slug: 'plan-mcp', title: 'PLAN: MCP サーバー', duration: 10 },
+            { order: 4, slug: 'plan-instruction', title: 'PLAN: Instruction', duration: 15 },
+            { order: 5, slug: 'plan-skills', title: 'PLAN: Skills', duration: 5 },
+          ],
+        },
+        {
+          category: 'develop',
+          labelEn: 'Develop',
+          labelJa: '開発',
+          accent: ACCENT.magenta,
+          items: [{ order: 6, slug: 'code-copilot-chat', title: 'CODE: Copilot Chat', duration: 30 }],
+        },
+        {
+          category: 'review',
+          labelEn: 'Review',
+          labelJa: 'レビュー',
+          accent: ACCENT.amber,
+          items: [{ order: 7, slug: 'review-copilot-code-review', title: 'REVIEW: Copilot Code Review', duration: 15 }],
+        },
+        {
+          category: 'secure',
+          labelEn: 'Test & Secure',
+          labelJa: 'テスト & 品質保証',
+          accent: ACCENT.cyan,
+          items: [
+            { order: 8, slug: 'test-secure-dependabot', title: 'TEST & SECURE: Dependabot', duration: 3 },
+            { order: 9, slug: 'test-secure-codeql', title: 'TEST & SECURE: CodeQL', duration: 2 },
+            { order: 10, slug: 'test-secure-actions', title: 'TEST & SECURE: Actions', duration: 15 },
+          ],
+        },
+        {
+          category: 'develop',
+          labelEn: 'Develop',
+          labelJa: '開発',
+          accent: ACCENT.magenta,
+          items: [{ order: 11, slug: 'code-cloud-agent', title: 'CODE: Cloud Agent', duration: 20 }],
+        },
+        {
+          category: 'plan',
+          labelEn: 'Plan',
+          labelJa: '企画',
+          accent: ACCENT.green,
+          items: [{ order: 12, slug: 'plan-hooks', title: 'PLAN: Hooks', duration: 10 }],
+        },
+        {
+          category: 'develop',
+          labelEn: 'Develop',
+          labelJa: '開発',
+          accent: ACCENT.magenta,
+          items: [{ order: 13, slug: 'code-cli', title: 'CODE: CLI', duration: 30 }],
+        },
+        {
+          category: 'operate',
+          labelEn: 'Operate',
+          labelJa: '運用',
+          accent: ACCENT.green,
+          items: [{ order: 14, slug: 'operate-agentic-workflow', title: 'OPERATE: Agentic Workflow', duration: 15 }],
+        },
+        {
+          category: 'final',
+          labelEn: 'Quest Clear',
+          labelJa: 'クリア',
+          accent: ACCENT.magenta,
+          items: [{ order: 15, slug: 'congratulations', title: 'おめでとうございます', duration: 5 }],
+        },
+      ];
+
+      const VARIANTS = [
+        { cls: 'v1', name: 'V1 — Quest Log', desc: 'RPG のクエストログ。破線行と ▶ ポインターで現在地を明確化。' },
+        { cls: 'v2', name: 'V2 — Vertical Stepper', desc: 'ノードと縦ラインで手順をつなぐ、ワークショップ進行表。' },
+        { cls: 'v3', name: 'V3 — Accordion Windows', desc: '各セクションを開いた JRPG メニュー窓として見せる案。' },
+        { cls: 'v4', name: 'V4 — Stage Select Chips', desc: '2 列のステージ選択チップ。番号を大きくして探索感を強める。' },
+        { cls: 'v5', name: 'V5 — Section Tabs', desc: 'セクション見出しをタブ化し、下のリストをタブパネル風に接続。' },
+        { cls: 'v6', name: 'V6 — Compact Dense', desc: '短時間で全体を見渡せる高密度版。講師用にも向く。' },
+        { cls: 'v7', name: 'V7 — Left Rail Bars', desc: '左レールに色を集約。セクションごとの固有色が一目で分かる。' },
+        { cls: 'v8', name: 'V8 — Ticket Receipt', desc: 'チケット控え・レシート風。破線とノッチでハンズオン感を出す。' },
+        { cls: 'v9', name: 'V9 — HP Bar Rows', desc: '各行を HP バー化。現在地はゲージ満タンのアクティブ状態。' },
+        { cls: 'v10', name: 'V10 — Bracketed Terminal', desc: '角括弧番号と RUN 表示の CRT 端末リスト。' },
+      ];
+
+      function itemHTML(item, sectionColor) {
+        const num = String(item.order).padStart(2, '0');
+        const activeCls = item.active ? ' is-active' : '';
+        const status = item.active ? '▶' : '◇';
+        const hp = `${Math.min(88, 14 + item.order * 4)}%`;
+        return (
+          `<li>` +
+          `<a href="#${item.slug}" class="handson-toc-item${activeCls}" data-active="${item.active ? 'true' : 'false'}" data-slug="${item.slug}" style="--toc-accent:${sectionColor}; --hp:${hp};">` +
+          `<span class="toc-status" aria-hidden="true">${status}</span>` +
+          `<span class="toc-num">${num}</span>` +
+          `<span class="toc-text">${item.title}</span>` +
+          `<span class="toc-duration">${item.duration}m</span>` +
+          `</a>` +
+          `</li>`
+        );
+      }
+
+      function tocHTML(variant) {
+        let html = `<nav class="handson-toc ${variant}" aria-label="ハンズオン目次" data-handson-toc>`;
+        html += '<ol class="handson-toc-list">';
+        for (const section of STEPS) {
+          html +=
+            `<li class="handson-toc-phase" style="--toc-accent:${section.accent};">` +
+            `<span class="phase-en">${section.labelEn}</span>` +
+            `<small>${section.labelJa}</small>` +
+            `</li>`;
+          for (const item of section.items) {
+            html += itemHTML(item, section.accent);
+          }
+        }
+        html += '</ol></nav>';
+        return html;
+      }
+
+      const gallery = document.getElementById('gallery');
+      gallery.innerHTML = VARIANTS.map(
+        (v) =>
+          `<section class="proto">` +
+          `<div class="proto-label">${v.name}</div>` +
+          `<div class="proto-desc">${v.desc}</div>` +
+          tocHTML(v.cls) +
+          `</section>`
+      ).join('');
+
+      gallery.addEventListener('click', (e) => {
+        const a = e.target.closest('a.handson-toc-item');
+        if (a) e.preventDefault();
+      });
+    </script>
+  </body>
+</html>

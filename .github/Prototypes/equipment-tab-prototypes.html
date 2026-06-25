@@ -1,0 +1,1008 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Equipment タブ + カードグリッド デザイン案 10 種 — Retro JRPG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&family=VT323&family=Caveat:wght@700&display=swap"
+    />
+    <style>
+      /* ──────────────────────────────────────────────────────────
+         Design tokens (frontend.instructions.md / retro JRPG theme)
+         ────────────────────────────────────────────────────────── */
+      :root {
+        --shadow-ink: #05060f;
+        --midnight: #0a0e27;
+        --deep-purple: #1a0b2e;
+        --neon-magenta: #ff2e88;
+        --neon-cyan: #00f0ff;
+        --crt-amber: #ffb000;
+        --gb-green: #9bbc0f;
+        --phosphor: #e8f4ff;
+
+        --font-pixel: 'Press Start 2P', monospace;
+        --font-pixel-jp: 'DotGothic16', monospace;
+        --font-terminal: 'VT323', monospace;
+        --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        color: var(--phosphor);
+        font-family: var(--font-pixel-jp);
+        background: radial-gradient(circle at 50% 0%, var(--deep-purple) 0%, var(--midnight) 45%, var(--shadow-ink) 100%);
+        background-attachment: fixed;
+        padding: 2.5rem clamp(1rem, 4vw, 3rem) 5rem;
+      }
+
+      body::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 999;
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0) 0px,
+          rgba(0, 0, 0, 0) 2px,
+          rgba(0, 0, 0, 0.12) 3px,
+          rgba(0, 0, 0, 0.12) 4px
+        );
+        opacity: 0.5;
+      }
+
+      .page-head {
+        max-width: 1680px;
+        margin: 0 auto 2.5rem;
+      }
+
+      .page-head h1 {
+        font-family: var(--font-pixel);
+        font-size: clamp(0.9rem, 2vw, 1.35rem);
+        line-height: 1.65;
+        color: var(--neon-cyan);
+        text-shadow: 0 0 8px var(--neon-cyan), 0 0 24px rgba(0, 240, 255, 0.42);
+        margin: 0 0 1rem;
+      }
+
+      .page-head p {
+        max-width: 82ch;
+        margin: 0.4rem 0;
+        font-size: 1rem;
+        line-height: 1.75;
+        color: rgba(232, 244, 255, 0.84);
+      }
+
+      .page-head .legend {
+        margin-top: 1rem;
+        font-family: var(--font-terminal);
+        font-size: 1.35rem;
+        color: var(--crt-amber);
+        text-shadow: 0 0 8px rgba(255, 176, 0, 0.45);
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+        gap: 2.5rem 2rem;
+        max-width: 1680px;
+        margin: 0 auto;
+        align-items: start;
+      }
+
+      .proto {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .proto-label {
+        font-size: 1.1rem;
+        line-height: 1.45;
+        letter-spacing: 0.06em;
+        color: var(--neon-magenta);
+        text-shadow: 0 0 6px rgba(255, 46, 136, 0.5);
+        margin-bottom: 0.35rem;
+      }
+
+      .proto-desc {
+        min-height: 2.7em;
+        margin-bottom: 0.9rem;
+        font-size: 0.86rem;
+        line-height: 1.55;
+        color: rgba(232, 244, 255, 0.72);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         Shared component structure (mirrors SkillGallery.tsx)
+         ────────────────────────────────────────────────────────── */
+      .equipment-demo {
+        --panel-accent: var(--neon-cyan);
+        --card-accent: var(--neon-magenta);
+        --card-secondary: var(--gb-green);
+        position: relative;
+        min-height: 610px;
+        padding: 1rem;
+        background: rgba(5, 6, 15, 0.76);
+        border: 2px solid rgba(232, 244, 255, 0.14);
+        overflow: hidden;
+      }
+
+      .equipment-demo::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+          linear-gradient(180deg, rgba(255, 46, 136, 0.035) 1px, transparent 1px);
+        background-size: 24px 24px;
+        opacity: 0.4;
+      }
+
+      .equipment-demo > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .tab-switcher {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.85rem;
+        margin-bottom: 1rem;
+      }
+
+      .scope-tabs {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+      }
+
+      .scope-tab,
+      .copy-all,
+      .select-button,
+      .copy-one {
+        font-family: var(--font-pixel-jp);
+      }
+
+      .scope-tab,
+      .copy-all {
+        border: 2px solid rgba(232, 244, 255, 0.28);
+        border-radius: 0;
+        background: rgba(10, 14, 39, 0.72);
+        color: rgba(232, 244, 255, 0.54);
+        cursor: pointer;
+        transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+      }
+
+      .scope-tab {
+        padding: 0.55rem 0.75rem;
+        font-size: 0.77rem;
+        line-height: 1.2;
+        letter-spacing: 0.02em;
+      }
+
+      .scope-tab.active {
+        color: var(--neon-cyan);
+        border-color: var(--neon-cyan);
+        background: rgba(0, 240, 255, 0.08);
+        box-shadow: 0 0 8px var(--neon-cyan), 0 0 24px rgba(0, 240, 255, 0.32);
+      }
+
+      .copy-all {
+        padding: 0.56rem 0.85rem;
+        font-size: 0.78rem;
+        color: var(--crt-amber);
+        border-color: var(--crt-amber);
+        background: rgba(5, 6, 15, 0.86);
+        box-shadow: 0 0 8px rgba(255, 176, 0, 0.65), 0 0 20px rgba(255, 176, 0, 0.24);
+        white-space: nowrap;
+      }
+
+      .copy-all:hover,
+      .scope-tab:hover {
+        transform: translateY(-1px);
+      }
+
+      .copy-all .save-icon {
+        color: var(--crt-amber);
+        margin-right: 0.25rem;
+      }
+
+      .copied-all {
+        display: none;
+        margin: 0 0 1rem;
+        padding: 0.65rem 0.75rem;
+        border: 2px solid var(--gb-green);
+        color: var(--gb-green);
+        background: rgba(5, 6, 15, 0.86);
+        font-size: 0.84rem;
+        line-height: 1.35;
+        text-shadow: 0 0 8px rgba(155, 188, 15, 0.48);
+      }
+
+      .equipment-demo.show-copied .copied-all {
+        display: block;
+      }
+
+      .equipment-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.8rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .equipment-card {
+        position: relative;
+        min-width: 0;
+        padding: 0.88rem;
+        background: rgba(5, 6, 15, 0.84);
+        border: 2px solid rgba(232, 244, 255, 0.2);
+        transition: border-color 0.15s ease, color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      }
+
+      .equipment-card.selected {
+        border-color: var(--neon-magenta);
+        box-shadow: 0 0 8px var(--neon-magenta), 0 0 24px rgba(255, 46, 136, 0.22);
+      }
+
+      .repo-link {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.55rem;
+        z-index: 2;
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        color: rgba(232, 244, 255, 0.58);
+        text-decoration: none;
+      }
+
+      .repo-link:hover {
+        color: var(--neon-cyan);
+        text-shadow: 0 0 8px rgba(0, 240, 255, 0.7);
+      }
+
+      .card-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.72rem;
+      }
+
+      .select-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+        width: 1.85rem;
+        height: 1.85rem;
+        padding: 0;
+        border: 2px solid currentColor;
+        border-radius: 0;
+        background: rgba(10, 14, 39, 0.55);
+        color: rgba(232, 244, 255, 0.72);
+        font-size: 0.9rem;
+        line-height: 1;
+        cursor: pointer;
+      }
+
+      .equipment-card.selected .select-button {
+        color: var(--neon-magenta);
+        background: rgba(255, 46, 136, 0.08);
+        box-shadow: 0 0 8px rgba(255, 46, 136, 0.5);
+      }
+
+      .card-body {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .card-title {
+        display: flex;
+        align-items: center;
+        gap: 0.48rem;
+        margin: 0 4rem 0.45rem 0;
+        min-width: 0;
+      }
+
+      .card-icon {
+        flex: 0 0 auto;
+        font-size: 1.25rem;
+        line-height: 1;
+      }
+
+      .equipment-name {
+        display: block;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        font-weight: 700;
+        line-height: 1.25;
+        color: var(--neon-cyan);
+        text-shadow: 0 0 8px rgba(0, 240, 255, 0.42);
+      }
+
+      .equipment-description {
+        display: -webkit-box;
+        min-height: 3.4em;
+        margin: 0 0 0.68rem;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        color: rgba(232, 244, 255, 0.8);
+        font-size: 0.86rem;
+        line-height: 1.65;
+      }
+
+      .copy-one {
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: var(--crt-amber);
+        font-family: var(--font-mono);
+        font-size: 0.66rem;
+        line-height: 1.35;
+        text-align: left;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .copy-one:hover {
+        color: var(--neon-magenta);
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+
+      .equipment-meta,
+      .slot-deco,
+      .tab-led,
+      .card-gauge {
+        display: none;
+      }
+
+      @media (max-width: 640px) {
+        .gallery {
+          grid-template-columns: 1fr;
+        }
+        .equipment-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V1 — Folder Tabs / Inventory Windows
+         ────────────────────────────────────────────────────────── */
+      .v1 .equipment-demo {
+        border-color: rgba(0, 240, 255, 0.28);
+      }
+      .v1 .scope-tabs {
+        align-items: flex-end;
+      }
+      .v1 .scope-tab {
+        border-bottom-color: transparent;
+        transform: translateY(2px);
+      }
+      .v1 .scope-tab.active {
+        background: var(--midnight);
+        transform: translateY(0);
+      }
+      .v1 .equipment-grid {
+        padding-top: 0.5rem;
+        border-top: 2px solid var(--neon-cyan);
+      }
+      .v1 .equipment-card:hover {
+        border-color: var(--neon-cyan);
+        box-shadow: 0 0 8px rgba(0, 240, 255, 0.45);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V2 — Neon Underline / Scanline Cards
+         ────────────────────────────────────────────────────────── */
+      .v2 .equipment-demo {
+        background: rgba(5, 6, 15, 0.66);
+        border: 1px dashed rgba(0, 240, 255, 0.35);
+      }
+      .v2 .scope-tab {
+        border-color: transparent;
+        border-bottom: 2px solid rgba(232, 244, 255, 0.24);
+        background: transparent;
+        padding-inline: 0.35rem;
+      }
+      .v2 .scope-tab.active {
+        border-color: transparent;
+        border-bottom-color: var(--neon-cyan);
+        background: transparent;
+        box-shadow: 0 8px 12px -8px var(--neon-cyan);
+      }
+      .v2 .equipment-card {
+        border: 1px solid rgba(232, 244, 255, 0.18);
+        background:
+          repeating-linear-gradient(180deg, rgba(0, 240, 255, 0.05) 0 1px, transparent 1px 7px),
+          rgba(5, 6, 15, 0.84);
+      }
+      .v2 .equipment-card:hover,
+      .v2 .equipment-card.selected {
+        border-color: var(--neon-cyan);
+        box-shadow: inset 0 0 18px rgba(0, 240, 255, 0.08), 0 0 8px rgba(0, 240, 255, 0.45);
+      }
+      .v2 .equipment-card.selected .select-button {
+        color: var(--neon-cyan);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V3 — Segmented Console / Compact Slots
+         ────────────────────────────────────────────────────────── */
+      .v3 .tab-switcher {
+        padding: 0.35rem;
+        background: rgba(10, 14, 39, 0.82);
+        border: 2px solid rgba(232, 244, 255, 0.18);
+      }
+      .v3 .scope-tabs {
+        gap: 0;
+      }
+      .v3 .scope-tab {
+        border-width: 1px 1px 1px 0;
+        min-width: 9.4rem;
+      }
+      .v3 .scope-tab:first-child {
+        border-left-width: 1px;
+      }
+      .v3 .scope-tab.active {
+        color: var(--shadow-ink);
+        background: var(--neon-cyan);
+        border-color: var(--neon-cyan);
+        box-shadow: 0 0 8px rgba(0, 240, 255, 0.75);
+      }
+      .v3 .equipment-grid {
+        gap: 0.55rem;
+      }
+      .v3 .equipment-card {
+        padding: 0.72rem;
+        border-width: 1px;
+      }
+      .v3 .equipment-description {
+        font-size: 0.8rem;
+      }
+      .v3 .equipment-name {
+        font-size: 0.72rem;
+      }
+      .v3 .select-button {
+        width: 1.6rem;
+        height: 1.6rem;
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V4 — Side Rail Tabs / Quest Cards
+         ────────────────────────────────────────────────────────── */
+      .v4 .equipment-demo {
+        display: grid;
+        grid-template-columns: 10.7rem minmax(0, 1fr);
+        gap: 1rem;
+      }
+      .v4 .tab-switcher {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        margin-bottom: 0;
+      }
+      .v4 .scope-tabs {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .v4 .scope-tab,
+      .v4 .copy-all {
+        width: 100%;
+        text-align: left;
+      }
+      .v4 .scope-tab.active::before {
+        content: '▶ ';
+      }
+      .v4 .equipment-grid {
+        grid-template-columns: 1fr;
+        gap: 0.55rem;
+      }
+      .v4 .equipment-card {
+        padding: 0.68rem 0.75rem;
+        border-left: 4px solid rgba(232, 244, 255, 0.25);
+      }
+      .v4 .equipment-card.selected,
+      .v4 .equipment-card:hover {
+        border-left-color: var(--neon-magenta);
+      }
+      .v4 .equipment-description {
+        min-height: auto;
+        margin-bottom: 0.45rem;
+      }
+      @media (max-width: 620px) {
+        .v4 .equipment-demo {
+          display: block;
+        }
+        .v4 .tab-switcher {
+          margin-bottom: 1rem;
+        }
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V5 — Terminal Brackets / Command Rows
+         ────────────────────────────────────────────────────────── */
+      .v5 .equipment-demo {
+        background: #02030a;
+        border-color: rgba(155, 188, 15, 0.42);
+      }
+      .v5 .scope-tab,
+      .v5 .copy-all,
+      .v5 .repo-link,
+      .v5 .copy-one {
+        font-family: var(--font-terminal);
+        font-size: 1.05rem;
+      }
+      .v5 .scope-tab {
+        border-color: transparent;
+        background: transparent;
+        padding: 0.35rem 0.3rem;
+      }
+      .v5 .scope-tab::before {
+        content: '[';
+        color: rgba(232, 244, 255, 0.4);
+      }
+      .v5 .scope-tab::after {
+        content: ']';
+        color: rgba(232, 244, 255, 0.4);
+      }
+      .v5 .scope-tab.active {
+        border-color: transparent;
+        color: var(--neon-cyan);
+        text-shadow: 0 0 8px var(--neon-cyan);
+        box-shadow: none;
+      }
+      .v5 .scope-tab.active::before,
+      .v5 .scope-tab.active::after {
+        color: var(--neon-cyan);
+      }
+      .v5 .equipment-grid {
+        grid-template-columns: 1fr;
+        gap: 0.35rem;
+      }
+      .v5 .equipment-card {
+        border: 0;
+        border-bottom: 1px dashed rgba(155, 188, 15, 0.35);
+        background: transparent;
+        padding: 0.55rem 0.2rem;
+      }
+      .v5 .equipment-card::before {
+        content: '>';
+        position: absolute;
+        top: 0.72rem;
+        left: 0.15rem;
+        color: var(--gb-green);
+        opacity: 0.7;
+      }
+      .v5 .card-row {
+        padding-left: 1rem;
+      }
+      .v5 .equipment-card.selected {
+        box-shadow: none;
+        color: var(--gb-green);
+      }
+      .v5 .equipment-name {
+        color: var(--gb-green);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V6 — Cartridge Slot / Chunky Inventory
+         ────────────────────────────────────────────────────────── */
+      .v6 .tab-switcher {
+        border: 2px solid rgba(0, 240, 255, 0.26);
+        padding: 0.5rem;
+        background: linear-gradient(180deg, rgba(0, 240, 255, 0.08), rgba(5, 6, 15, 0.2));
+      }
+      .v6 .scope-tab {
+        position: relative;
+        border-color: rgba(232, 244, 255, 0.25);
+        box-shadow: 3px 3px 0 rgba(0, 240, 255, 0.16);
+      }
+      .v6 .scope-tab.active {
+        transform: translate(-2px, -2px);
+        box-shadow: 5px 5px 0 rgba(0, 240, 255, 0.62), 0 0 8px var(--neon-cyan);
+      }
+      .v6 .equipment-card {
+        border-color: rgba(0, 240, 255, 0.25);
+        box-shadow: 4px 4px 0 rgba(255, 46, 136, 0.18);
+      }
+      .v6 .equipment-card:hover,
+      .v6 .equipment-card.selected {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0 rgba(255, 46, 136, 0.64), 0 0 8px rgba(255, 46, 136, 0.45);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V7 — Battle Menu / Status Cards
+         ────────────────────────────────────────────────────────── */
+      .v7 .scope-tabs {
+        gap: 0.75rem;
+      }
+      .v7 .scope-tab {
+        position: relative;
+        padding-left: 1.55rem;
+        border-color: transparent;
+        background: transparent;
+      }
+      .v7 .scope-tab.active {
+        border-color: var(--neon-cyan);
+        background: rgba(0, 240, 255, 0.06);
+      }
+      .v7 .scope-tab.active::before {
+        content: '▶';
+        position: absolute;
+        transform: translateX(-1rem);
+      }
+      .v7 .equipment-card {
+        padding-bottom: 1.08rem;
+      }
+      .v7 .card-gauge {
+        display: block;
+        position: absolute;
+        left: 0.88rem;
+        right: 0.88rem;
+        bottom: 0.55rem;
+        height: 4px;
+        border: 1px solid rgba(155, 188, 15, 0.42);
+        background: rgba(155, 188, 15, 0.08);
+      }
+      .v7 .card-gauge::after {
+        content: '';
+        display: block;
+        width: var(--power, 66%);
+        height: 100%;
+        background: var(--gb-green);
+        box-shadow: 0 0 8px rgba(155, 188, 15, 0.5);
+      }
+      .v7 .equipment-card.selected {
+        border-color: var(--gb-green);
+        box-shadow: 0 0 8px rgba(155, 188, 15, 0.7), 0 0 24px rgba(155, 188, 15, 0.18);
+      }
+      .v7 .equipment-card.selected .select-button {
+        color: var(--gb-green);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V8 — Blueprint Grid / Circuit Cards
+         ────────────────────────────────────────────────────────── */
+      .v8 .equipment-demo {
+        border-color: rgba(0, 240, 255, 0.36);
+        background:
+          linear-gradient(90deg, rgba(0, 240, 255, 0.08) 1px, transparent 1px),
+          linear-gradient(180deg, rgba(0, 240, 255, 0.08) 1px, transparent 1px),
+          rgba(5, 6, 15, 0.78);
+        background-size: 18px 18px;
+      }
+      .v8 .scope-tab {
+        border: 1px solid rgba(0, 240, 255, 0.34);
+        background: rgba(0, 240, 255, 0.04);
+      }
+      .v8 .scope-tab.active {
+        border-width: 2px;
+      }
+      .v8 .equipment-card {
+        border: 1px solid rgba(0, 240, 255, 0.3);
+        background: rgba(5, 6, 15, 0.72);
+      }
+      .v8 .equipment-card::after {
+        content: '';
+        position: absolute;
+        right: -1px;
+        bottom: -1px;
+        width: 18px;
+        height: 18px;
+        border-left: 2px solid var(--neon-cyan);
+        border-top: 2px solid var(--neon-cyan);
+        opacity: 0.65;
+      }
+      .v8 .equipment-card.selected {
+        border-color: var(--neon-cyan);
+        box-shadow: 0 0 8px rgba(0, 240, 255, 0.56);
+      }
+      .v8 .equipment-card.selected .select-button {
+        color: var(--neon-cyan);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V9 — Save Data Slots / File Cards
+         ────────────────────────────────────────────────────────── */
+      .v9 .scope-tabs {
+        gap: 0.3rem;
+      }
+      .v9 .scope-tab {
+        min-width: 8.8rem;
+        padding-top: 0.75rem;
+        border-color: rgba(255, 176, 0, 0.34);
+        background: rgba(255, 176, 0, 0.04);
+      }
+      .v9 .scope-tab .tab-led {
+        display: inline-block;
+        width: 0.5rem;
+        height: 0.5rem;
+        margin-right: 0.35rem;
+        border: 1px solid currentColor;
+        vertical-align: 0.05rem;
+      }
+      .v9 .scope-tab.active {
+        border-color: var(--neon-cyan);
+        background: rgba(0, 240, 255, 0.08);
+      }
+      .v9 .scope-tab.active .tab-led {
+        background: var(--neon-cyan);
+        box-shadow: 0 0 8px var(--neon-cyan);
+      }
+      .v9 .equipment-grid {
+        grid-template-columns: 1fr;
+        gap: 0.55rem;
+      }
+      .v9 .equipment-card {
+        padding: 0.72rem 0.8rem;
+        border-color: rgba(255, 176, 0, 0.25);
+      }
+      .v9 .equipment-meta {
+        display: block;
+        margin-top: 0.35rem;
+        font-family: var(--font-terminal);
+        font-size: 0.95rem;
+        color: rgba(255, 176, 0, 0.78);
+      }
+      .v9 .equipment-card.selected,
+      .v9 .equipment-card:hover {
+        border-color: var(--crt-amber);
+        box-shadow: 0 0 8px rgba(255, 176, 0, 0.46);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V10 — Neon Marquee / Dense Grid
+         ────────────────────────────────────────────────────────── */
+      .v10 .equipment-demo {
+        border-color: var(--neon-magenta);
+        box-shadow: 0 0 8px rgba(255, 46, 136, 0.5), inset 0 0 16px rgba(255, 46, 136, 0.06);
+      }
+      .v10 .tab-switcher {
+        padding: 0.5rem;
+        border: 2px solid rgba(255, 46, 136, 0.34);
+      }
+      .v10 .scope-tab {
+        border-color: rgba(255, 46, 136, 0.35);
+        background: rgba(255, 46, 136, 0.05);
+      }
+      .v10 .scope-tab.active {
+        border-color: var(--neon-cyan);
+        color: var(--neon-cyan);
+      }
+      .v10 .copy-all {
+        background: var(--crt-amber);
+        color: var(--shadow-ink);
+        text-shadow: none;
+      }
+      .v10 .copy-all .save-icon {
+        color: var(--shadow-ink);
+      }
+      .v10 .equipment-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.55rem;
+      }
+      .v10 .equipment-card {
+        padding: 0.65rem;
+      }
+      .v10 .card-row {
+        gap: 0.5rem;
+      }
+      .v10 .select-button {
+        width: 1.45rem;
+        height: 1.45rem;
+        font-size: 0.75rem;
+      }
+      .v10 .card-title {
+        margin-right: 3.1rem;
+      }
+      .v10 .equipment-name {
+        font-size: 0.68rem;
+      }
+      .v10 .equipment-description {
+        font-size: 0.76rem;
+        min-height: 3.1em;
+        margin-bottom: 0.45rem;
+      }
+      .v10 .copy-one,
+      .v10 .repo-link {
+        font-size: 0.56rem;
+      }
+      @media (max-width: 760px) {
+        .v10 .equipment-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="page-head">
+      <h1>Equipment タブ + カードグリッド デザイン案 10 種</h1>
+      <p>
+        skills/equipment ページの「プロジェクト .github/ / ユーザー ~/」タブスイッチャーと装備カードグリッドだけを切り出した比較用プロトタイプ。
+      </p>
+      <p>
+        実コンポーネントの機能要素（アクティブタブ、全装備コピー、チェックボックス、repo リンク、説明、インストールコマンドコピー）を全案で維持しています。
+      </p>
+      <p class="legend">▶ Active scope = プロジェクト .github/ / Selected cards = github-issues + grill-me</p>
+    </header>
+
+    <main class="gallery" id="gallery"></main>
+
+    <script>
+      const EQUIPMENT = [
+        {
+          slug: 'github-issues',
+          name: 'github-issues',
+          icon: '🐙',
+          selected: true,
+          group: 'github',
+          repo: 'https://github.com/theomonfort/skills/blob/main/skills/github-issues/SKILL.md',
+          description: 'MCPで GitHub Issue を作成・更新・整理。バグ報告／機能要望／タスクをラベル・担当者・優先度つきで構造化。',
+        },
+        {
+          slug: 'github-support',
+          name: 'github-support',
+          icon: '🛟',
+          selected: false,
+          group: 'github',
+          repo: 'https://github.com/theomonfort/skills/blob/main/skills/github-support/SKILL.md',
+          description: 'GitHub の製品・課金・セキュリティ・Copilot を公開ソースだけで根拠付きに回答。引用と URL で裏取り。',
+        },
+        {
+          slug: 'grill-me',
+          name: 'grill-me',
+          icon: '🔥',
+          selected: true,
+          group: 'plan',
+          repo: 'https://github.com/theomonfort/skills/blob/main/skills/grill-me/SKILL.md',
+          description: '計画や設計を執拗に問いただし、決定木を一つずつ解消するインタビュアー。実装前のストレステストに。',
+        },
+        {
+          slug: 'hands-on-helper',
+          name: 'hands-on-helper',
+          icon: '🧭',
+          selected: false,
+          group: 'workshop',
+          repo: 'https://github.com/theomonfort/skills/blob/main/skills/hands-on-helper/SKILL.md',
+          description: 'GitHub Copilot ハンズオン勉強会の参加者を案内。リポジトリ・手順書・Playbook・トラブル解消の道しるべ。',
+        },
+        {
+          slug: 'agentfinder',
+          name: 'agentfinder',
+          icon: '🔎',
+          selected: false,
+          group: 'discovery',
+          repo: 'https://github.com/ards-project/connectors/blob/main/skills/github-copilot/SKILL.md',
+          description: 'GitHub の Agent Finder を検索して、タスクに合う MCP サーバー・ツール・スキル・エージェントを発見。',
+        },
+      ];
+
+      const TABS = [
+        { id: 'project', label: 'プロジェクト .github/', active: true },
+        { id: 'global', label: 'ユーザー ~/', active: false },
+      ];
+
+      const VARIANTS = [
+        { cls: 'v1', name: 'V1 — Folder Tabs', desc: 'タブをフォルダ見出しとして立て、下のカードをインベントリウィンドウにまとめる正統 JRPG 案。' },
+        { cls: 'v2', name: 'V2 — Neon Underline', desc: '軽量な下線タブとスキャンラインカード。現行 UI に近く、情報密度を保ちやすい案。' },
+        { cls: 'v3', name: 'V3 — Segmented Console', desc: '設定画面のセグメント切替。カードはコンパクトな装備スロットとして詰める案。' },
+        { cls: 'v4', name: 'V4 — Side Rail Quest', desc: 'タブを左レールへ移動し、装備をクエスト行のように縦へ読む案。狭いカードでも説明が見やすい。' },
+        { cls: 'v5', name: 'V5 — Terminal Brackets', desc: '角括弧タブとコマンド行カード。CLI の「装備をコピーする」文脈が最も強い案。' },
+        { cls: 'v6', name: 'V6 — Cartridge Slot', desc: 'カートリッジを差し込むようなタブと、硬いピクセル影のカード。押せる物感を強調。' },
+        { cls: 'v7', name: 'V7 — Battle Menu', desc: '戦闘メニューのカーソルとステータスゲージ付きカード。選択状態がゲーム的に分かりやすい。' },
+        { cls: 'v8', name: 'V8 — Blueprint Grid', desc: 'サイバー設計図のグリッド上に装備カードを配置。シアン統一で技術感を強める案。' },
+        { cls: 'v9', name: 'V9 — Save Data Slots', desc: '保存先を選ぶセーブスロット風タブ。カードはファイル一覧に近く、運用感がある案。' },
+        { cls: 'v10', name: 'V10 — Neon Marquee', desc: 'マゼンタ外枠と密な 3 カラムで一覧性を最優先。小さな画面でも装備数を把握しやすい案。' },
+      ];
+
+      function tabHTML(tab) {
+        const active = tab.active ? ' active' : '';
+        const pressed = tab.active ? 'true' : 'false';
+        return `<button type="button" class="scope-tab${active}" aria-pressed="${pressed}"><span class="tab-led" aria-hidden="true"></span>${tab.label}</button>`;
+      }
+
+      function cardHTML(item, index) {
+        const selected = item.selected ? ' selected' : '';
+        const check = item.selected ? '✓' : '';
+        const power = `${58 + index * 7}%`;
+        return `
+          <li class="equipment-card relative bg-shadow-ink/80 border-2 p-4${selected}" style="--power:${power}">
+            <a class="repo-link" href="${item.repo}" target="_blank" rel="noopener noreferrer">repo ↗</a>
+            <div class="card-row">
+              <button type="button" class="select-button font-pixel" aria-pressed="${item.selected}" aria-label="${item.name} を選択">${check}</button>
+              <div class="card-body">
+                <div class="card-title">
+                  <span class="card-icon" aria-hidden="true">${item.icon}</span>
+                  <h3 class="equipment-name font-mono text-neon-cyan">${item.name}</h3>
+                </div>
+                <p class="equipment-description">${item.description}</p>
+                <button type="button" class="copy-one font-mono">▶ インストール・コマンドをコピー</button>
+                <span class="equipment-meta">GROUP:${item.group.toUpperCase()} / SLOT:${String(index + 1).padStart(2, '0')}</span>
+              </div>
+            </div>
+            <span class="card-gauge" aria-hidden="true"></span>
+          </li>`;
+      }
+
+      function equipmentHTML(variant) {
+        return `
+          <div class="equipment-demo skill-gallery space-y-6 ${variant}" data-variant="${variant}">
+            <div class="tab-switcher flex flex-wrap items-center justify-between gap-4 font-pixel text-[10px]">
+              <div class="scope-tabs flex gap-2">${TABS.map(tabHTML).join('')}</div>
+              <button type="button" class="copy-all px-4 py-2 border-2 border-crt-amber text-crt-amber bg-shadow-ink shadow-neon-amber">
+                <span class="save-icon">💾</span>全装備を コピー
+              </button>
+            </div>
+            <div class="copied-all">▶ コマンドをコピーしました！ターミナルに貼り付けてEnter。</div>
+            <ul class="equipment-grid grid grid-cols-1 md:grid-cols-2 gap-4">${EQUIPMENT.map(cardHTML).join('')}</ul>
+          </div>`;
+      }
+
+      const gallery = document.getElementById('gallery');
+      gallery.innerHTML = VARIANTS.map(
+        (v) =>
+          `<section class="proto">` +
+          `<div class="proto-label">${v.name}</div>` +
+          `<div class="proto-desc">${v.desc}</div>` +
+          equipmentHTML(v.cls) +
+          `</section>`
+      ).join('');
+
+      gallery.addEventListener('click', (event) => {
+        const cardButton = event.target.closest('.select-button');
+        if (cardButton) {
+          const card = cardButton.closest('.equipment-card');
+          const next = !card.classList.contains('selected');
+          card.classList.toggle('selected', next);
+          cardButton.setAttribute('aria-pressed', String(next));
+          cardButton.textContent = next ? '✓' : '';
+          return;
+        }
+
+        const tab = event.target.closest('.scope-tab');
+        if (tab) {
+          const tabs = tab.closest('.scope-tabs').querySelectorAll('.scope-tab');
+          tabs.forEach((t) => {
+            t.classList.toggle('active', t === tab);
+            t.setAttribute('aria-pressed', String(t === tab));
+          });
+          return;
+        }
+
+        const copyAll = event.target.closest('.copy-all');
+        if (copyAll) {
+          const demo = copyAll.closest('.equipment-demo');
+          demo.classList.add('show-copied');
+          window.clearTimeout(demo._copiedTimer);
+          demo._copiedTimer = window.setTimeout(() => demo.classList.remove('show-copied'), 1400);
+        }
+      });
+    </script>
+  </body>
+</html>
