@@ -32,12 +32,6 @@ When you assign, you can customize:
 - **Model selection** — pick from Copilot / Claude / Codex.
 - **Base branch** — the branch the work starts from.
 
-<Aside type="reference">
-
-**Recommended demo flow**: start by assigning **Issue 1 (the presentation mode itself)** and **Issue 4 (the Mermaid bug)** at the same time. They touch nearby code, so a **merge conflict usually appears** — a perfect chance to try the **Fix with Copilot** conflict resolution shown below. **Issue 7 (the TOC design prototypes)** is a great next pick: prototyping first, then comparing and adopting lets you refine each component properly. If you have the time, repeat this "prototype → compare → adopt" loop for several components to get amazing results.
-
-</Aside>
-
 <Aside type="positive">
 
 **Key point**: The Cloud Agent will implement the code autonomously and open a PR (⏱ ~15 min per Issue). If the Validation Tools you set up in Step 4.1 (CodeQL, Code Review, Secret Scanning) are enabled, the Agent will verify its own implementation before submitting the PR. You can assign multiple Issues at once and they'll be worked on in parallel.
@@ -46,7 +40,11 @@ When you assign, you can customize:
 
 <Aside type="reference">
 
-**Leave a few Issues for the Part 13 CLI session**: in Part 13 we'll use Copilot CLI's `/fleet` to implement the remaining open Issues in parallel. **Don't assign every Issue from Step 6.5 here — leave 2–3 of them unassigned** so the CLI has something to chew on later.
+**Recommended approach**:
+
+- **Assign Issue 1 and 4 together** — they touch nearby code, so a **merge conflict usually appears** — a chance to try the **Fix with Copilot** resolution shown below.
+- **Issue 7 (the TOC design prototypes)** — prototype first, then compare and adopt to refine each component properly.
+- **Leave a few Issues for the CLI** — keep 2–3 unassigned for Part 13 (Copilot CLI).
 
 </Aside>
 
