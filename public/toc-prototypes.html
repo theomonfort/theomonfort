@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TOC サイドバー デザイン案 10 種 — Retro JRPG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&family=VT323&family=Caveat:wght@700&display=swap"
+    />
+    <style>
+      /* ──────────────────────────────────────────────────────────
+         Design tokens (frontend.instructions.md / retro JRPG theme)
+         ────────────────────────────────────────────────────────── */
+      :root {
+        --shadow-ink: #05060f;
+        --midnight: #0a0e27;
+        --deep-purple: #1a0b2e;
+        --neon-magenta: #ff2e88;
+        --neon-cyan: #00f0ff;
+        --crt-amber: #ffb000;
+        --gb-green: #9bbc0f;
+        --phosphor: #e8f4ff;
+
+        --font-pixel: 'Press Start 2P', monospace;
+        --font-pixel-jp: 'DotGothic16', monospace;
+        --font-terminal: 'VT323', monospace;
+        --font-hand: 'Caveat', cursive;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        color: var(--phosphor);
+        font-family: var(--font-pixel-jp);
+        background:
+          radial-gradient(circle at 50% 0%, var(--deep-purple) 0%, var(--midnight) 45%, var(--shadow-ink) 100%);
+        background-attachment: fixed;
+        padding: 2.5rem clamp(1rem, 4vw, 3rem) 5rem;
+      }
+
+      /* Faint CRT scanlines overlay */
+      body::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 999;
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0) 0px,
+          rgba(0, 0, 0, 0) 2px,
+          rgba(0, 0, 0, 0.12) 3px,
+          rgba(0, 0, 0, 0.12) 4px
+        );
+        opacity: 0.5;
+      }
+
+      .page-head {
+        max-width: 1400px;
+        margin: 0 auto 2.5rem;
+      }
+
+      .page-head h1 {
+        font-family: var(--font-pixel);
+        font-size: clamp(0.9rem, 2.4vw, 1.4rem);
+        line-height: 1.6;
+        color: var(--neon-cyan);
+        text-shadow: 0 0 8px var(--neon-cyan), 0 0 24px rgba(0, 240, 255, 0.4);
+        margin: 0 0 1rem;
+      }
+
+      .page-head p {
+        font-size: 1rem;
+        line-height: 1.7;
+        max-width: 70ch;
+        opacity: 0.85;
+        margin: 0.4rem 0;
+      }
+
+      .page-head .legend {
+        margin-top: 1rem;
+        font-family: var(--font-terminal);
+        font-size: 1.25rem;
+        color: var(--crt-amber);
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+        gap: 2.5rem 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+        align-items: start;
+      }
+
+      .proto {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .proto-label {
+        font-family: var(--font-pixel);
+        font-size: 0.6rem;
+        line-height: 1.5;
+        color: var(--neon-magenta);
+        text-shadow: 0 0 6px rgba(255, 46, 136, 0.5);
+        margin-bottom: 0.35rem;
+      }
+
+      .proto-desc {
+        font-size: 0.82rem;
+        line-height: 1.5;
+        opacity: 0.7;
+        margin-bottom: 0.9rem;
+        min-height: 2.5em;
+      }
+
+      /* The sidebar shell (mimics fixed present-toc panel) */
+      .toc {
+        --cat-color: var(--neon-cyan);
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+        width: 100%;
+        height: 560px;
+        overflow-y: auto;
+        padding: 1.5rem 1rem 1.5rem;
+        background: var(--midnight);
+        border-right: 1px solid rgba(255, 46, 136, 0.2);
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 46, 136, 0.4) transparent;
+      }
+
+      .toc::-webkit-scrollbar {
+        width: 8px;
+      }
+      .toc::-webkit-scrollbar-thumb {
+        background: rgba(255, 46, 136, 0.4);
+      }
+
+      .toc-section {
+        font-family: var(--font-pixel-jp);
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.85rem 0.6rem 0.35rem;
+        margin-top: 0.4rem;
+        border-bottom: 1px solid currentColor;
+        opacity: 0.85;
+        color: var(--cat-color);
+      }
+      .toc-section:first-child {
+        margin-top: 0;
+      }
+
+      .toc-item {
+        --cat-color: var(--neon-cyan);
+        display: flex;
+        align-items: baseline;
+        gap: 0.55rem;
+        width: 100%;
+        padding: 0.5rem 0.6rem;
+        position: relative;
+        background: transparent;
+        border: none;
+        border-left: 2px solid transparent;
+        color: var(--phosphor);
+        font-family: var(--font-pixel-jp);
+        font-size: 0.9rem;
+        line-height: 1.35;
+        cursor: pointer;
+        text-decoration: none;
+        transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+      }
+
+      .toc-num {
+        font-family: var(--font-pixel-jp);
+        font-size: 0.78rem;
+        color: var(--cat-color);
+        flex-shrink: 0;
+        min-width: 1.6rem;
+      }
+
+      .toc-text {
+        flex: 1;
+        position: relative;
+      }
+
+      .toc-title-text {
+        position: relative;
+      }
+
+      .toc-new-badge {
+        position: absolute;
+        left: 100%;
+        bottom: 1em;
+        margin-left: -0.4rem;
+        font-family: var(--font-hand);
+        font-weight: 700;
+        font-size: 0.85rem;
+        line-height: 1;
+        color: #ffe14d;
+        transform: rotate(20deg);
+        text-shadow: 0 0 8px rgba(255, 209, 0, 0.55);
+        pointer-events: none;
+        white-space: nowrap;
+      }
+
+      /* Decorative helpers reused across variants (hidden by default) */
+      .toc-deco {
+        display: none;
+        flex-shrink: 0;
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V1 — Classic Refined (baseline present-toc, polished)
+         ────────────────────────────────────────────────────────── */
+      .v1 .toc-item:hover {
+        color: var(--cat-color);
+        background: color-mix(in srgb, var(--cat-color) 10%, transparent);
+        border-left-color: color-mix(in srgb, var(--cat-color) 50%, transparent);
+      }
+      .v1 .toc-item.active {
+        color: var(--cat-color);
+        border-left-color: var(--cat-color);
+        background: color-mix(in srgb, var(--cat-color) 15%, transparent);
+        font-weight: 700;
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V2 — Quest Log (RPG ▶ pointer + dashed rows)
+         ────────────────────────────────────────────────────────── */
+      .v2 .toc {
+        gap: 0;
+      }
+      .v2 .toc-item {
+        border-left: none;
+        border-bottom: 1px dashed rgba(232, 244, 255, 0.12);
+        padding-left: 1.5rem;
+      }
+      .v2 .toc-item::before {
+        content: '▶';
+        position: absolute;
+        left: 0.3rem;
+        top: 0.5rem;
+        font-size: 0.7rem;
+        color: var(--cat-color);
+        opacity: 0;
+        transform: translateX(-4px);
+        transition: opacity 0.15s ease, transform 0.15s ease;
+      }
+      .v2 .toc-item:hover::before,
+      .v2 .toc-item.active::before {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .v2 .toc-item:hover {
+        color: var(--cat-color);
+      }
+      .v2 .toc-item.active {
+        color: var(--cat-color);
+        font-weight: 700;
+        text-shadow: 0 0 8px color-mix(in srgb, var(--cat-color) 60%, transparent);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V3 — Window Frame (JRPG menu window w/ corner brackets)
+         ────────────────────────────────────────────────────────── */
+      .v3 .toc {
+        gap: 0.3rem;
+        padding-top: 1rem;
+      }
+      .v3 .toc-section {
+        border: none;
+        text-align: center;
+        margin-top: 0.8rem;
+      }
+      .v3 .toc-item {
+        border: 2px solid color-mix(in srgb, var(--cat-color) 35%, transparent);
+        margin-bottom: 0.1rem;
+        background: rgba(5, 6, 15, 0.5);
+      }
+      .v3 .toc-item:hover {
+        border-color: var(--cat-color);
+        color: var(--cat-color);
+        box-shadow: 0 0 8px color-mix(in srgb, var(--cat-color) 45%, transparent);
+      }
+      .v3 .toc-item.active {
+        border-color: var(--cat-color);
+        color: var(--cat-color);
+        font-weight: 700;
+        box-shadow: 0 0 8px var(--cat-color), inset 0 0 12px color-mix(in srgb, var(--cat-color) 18%, transparent);
+      }
+      .v3 .toc-item.active::before,
+      .v3 .toc-item.active::after {
+        content: '';
+        position: absolute;
+        width: 7px;
+        height: 7px;
+        border: 2px solid var(--cat-color);
+      }
+      .v3 .toc-item.active::before {
+        top: -2px;
+        left: -2px;
+        border-right: none;
+        border-bottom: none;
+      }
+      .v3 .toc-item.active::after {
+        bottom: -2px;
+        right: -2px;
+        border-left: none;
+        border-top: none;
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V4 — Terminal / CRT (VT323 + > prompt + blinking cursor)
+         ────────────────────────────────────────────────────────── */
+      .v4 .toc {
+        font-family: var(--font-terminal);
+        background: #02030a;
+      }
+      .v4 .toc-section {
+        font-family: var(--font-terminal);
+        font-size: 1.05rem;
+        border-bottom: 1px solid currentColor;
+      }
+      .v4 .toc-section::before {
+        content: '// ';
+        opacity: 0.6;
+      }
+      .v4 .toc-item {
+        border-left: none;
+        font-family: var(--font-terminal);
+        font-size: 1.15rem;
+        padding-left: 1.4rem;
+        line-height: 1.1;
+      }
+      .v4 .toc-num {
+        font-family: var(--font-terminal);
+        font-size: 1.05rem;
+      }
+      .v4 .toc-item::before {
+        content: '>';
+        position: absolute;
+        left: 0.35rem;
+        color: var(--cat-color);
+        opacity: 0.45;
+      }
+      .v4 .toc-item:hover {
+        color: var(--cat-color);
+        background: color-mix(in srgb, var(--cat-color) 8%, transparent);
+      }
+      .v4 .toc-item.active {
+        color: var(--cat-color);
+        text-shadow: 0 0 8px var(--cat-color);
+      }
+      .v4 .toc-item.active::before {
+        opacity: 1;
+      }
+      .v4 .toc-item.active .toc-text::after {
+        content: '_';
+        margin-left: 0.15rem;
+        animation: blink 1s steps(1) infinite;
+      }
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V5 — Health Bar / Gauge (HP-bar fill per row)
+         ────────────────────────────────────────────────────────── */
+      .v5 .toc {
+        gap: 0.25rem;
+      }
+      .v5 .toc-item {
+        border-left: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.3rem;
+        padding-bottom: 0.7rem;
+      }
+      .v5 .toc-row {
+        display: flex;
+        align-items: baseline;
+        gap: 0.55rem;
+      }
+      .v5 .toc-deco.toc-gauge {
+        display: block;
+        height: 5px;
+        width: 100%;
+        background: rgba(232, 244, 255, 0.1);
+        border: 1px solid color-mix(in srgb, var(--cat-color) 30%, transparent);
+        position: relative;
+        overflow: hidden;
+      }
+      .v5 .toc-deco.toc-gauge::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        width: 20%;
+        background: var(--cat-color);
+        transition: width 0.25s ease;
+      }
+      .v5 .toc-item:hover .toc-gauge::after {
+        width: 55%;
+      }
+      .v5 .toc-item.active {
+        color: var(--cat-color);
+        font-weight: 700;
+      }
+      .v5 .toc-item.active .toc-gauge::after {
+        width: 100%;
+        box-shadow: 0 0 8px var(--cat-color);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V6 — Pixel Cards (chunky hard-offset shadow, no blur)
+         ────────────────────────────────────────────────────────── */
+      .v6 .toc {
+        gap: 0.5rem;
+        padding-left: 0.75rem;
+      }
+      .v6 .toc-item {
+        border: 2px solid color-mix(in srgb, var(--cat-color) 40%, transparent);
+        background: var(--shadow-ink);
+        box-shadow: 4px 4px 0 0 color-mix(in srgb, var(--cat-color) 25%, transparent);
+      }
+      .v6 .toc-item:hover {
+        color: var(--cat-color);
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0 0 color-mix(in srgb, var(--cat-color) 45%, transparent);
+      }
+      .v6 .toc-item.active {
+        color: var(--cat-color);
+        font-weight: 700;
+        border-color: var(--cat-color);
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0 0 var(--cat-color);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V7 — Stepper / Skill Tree (connecting line + node dots)
+         ────────────────────────────────────────────────────────── */
+      .v7 .toc {
+        gap: 0;
+      }
+      .v7 .toc-item {
+        border-left: none;
+        padding-left: 1.9rem;
+      }
+      .v7 .toc-deco.toc-node {
+        display: block;
+        position: absolute;
+        left: 0.55rem;
+        top: 0.65rem;
+        width: 10px;
+        height: 10px;
+        border: 2px solid var(--cat-color);
+        background: var(--midnight);
+        z-index: 1;
+      }
+      .v7 .toc-item::before {
+        content: '';
+        position: absolute;
+        left: calc(0.55rem + 4px);
+        top: -0.2rem;
+        bottom: -0.2rem;
+        width: 2px;
+        background: color-mix(in srgb, var(--cat-color) 35%, transparent);
+      }
+      .v7 .toc-item:hover {
+        color: var(--cat-color);
+      }
+      .v7 .toc-item:hover .toc-node {
+        background: color-mix(in srgb, var(--cat-color) 50%, transparent);
+      }
+      .v7 .toc-item.active {
+        color: var(--cat-color);
+        font-weight: 700;
+      }
+      .v7 .toc-item.active .toc-node {
+        background: var(--cat-color);
+        box-shadow: 0 0 8px var(--cat-color), 0 0 16px color-mix(in srgb, var(--cat-color) 50%, transparent);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V8 — Square Number Badges (arcade scoreboard chips)
+         ────────────────────────────────────────────────────────── */
+      .v8 .toc {
+        gap: 0.2rem;
+      }
+      .v8 .toc-item {
+        border-left: none;
+        align-items: center;
+        gap: 0.7rem;
+      }
+      .v8 .toc-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.7rem;
+        height: 1.7rem;
+        min-width: 1.7rem;
+        font-family: var(--font-terminal);
+        font-size: 1.1rem;
+        color: var(--cat-color);
+        border: 2px solid color-mix(in srgb, var(--cat-color) 45%, transparent);
+        background: var(--shadow-ink);
+      }
+      .v8 .toc-item:hover {
+        color: var(--cat-color);
+      }
+      .v8 .toc-item:hover .toc-num {
+        border-color: var(--cat-color);
+      }
+      .v8 .toc-item.active {
+        color: var(--cat-color);
+        font-weight: 700;
+      }
+      .v8 .toc-item.active .toc-num {
+        color: var(--shadow-ink);
+        background: var(--cat-color);
+        border-color: var(--cat-color);
+        box-shadow: 0 0 8px var(--cat-color);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V9 — Neon Underline (minimal, glow underline on active)
+         ────────────────────────────────────────────────────────── */
+      .v9 .toc {
+        gap: 0.1rem;
+      }
+      .v9 .toc-item {
+        border-left: none;
+      }
+      .v9 .toc-text::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        height: 2px;
+        width: 0;
+        background: var(--cat-color);
+        transition: width 0.2s ease;
+      }
+      .v9 .toc-item:hover {
+        color: var(--cat-color);
+      }
+      .v9 .toc-item:hover .toc-text::after {
+        width: 100%;
+      }
+      .v9 .toc-item.active {
+        color: var(--cat-color);
+        font-weight: 700;
+      }
+      .v9 .toc-item.active .toc-text::after {
+        width: 100%;
+        box-shadow: 0 0 8px var(--cat-color), 0 0 16px color-mix(in srgb, var(--cat-color) 50%, transparent);
+      }
+
+      /* ──────────────────────────────────────────────────────────
+         V10 — Selector Bar (full-width neon highlight bar + ◆)
+         ────────────────────────────────────────────────────────── */
+      .v10 .toc {
+        gap: 0.05rem;
+      }
+      .v10 .toc-item {
+        border-left: none;
+        padding-left: 1.6rem;
+      }
+      .v10 .toc-item::before {
+        content: '◆';
+        position: absolute;
+        left: 0.45rem;
+        font-size: 0.6rem;
+        color: var(--cat-color);
+        opacity: 0;
+        transition: opacity 0.15s ease;
+      }
+      .v10 .toc-item:hover {
+        color: var(--cat-color);
+        background: linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--cat-color) 22%, transparent) 0%,
+          transparent 90%
+        );
+      }
+      .v10 .toc-item.active {
+        color: var(--shadow-ink);
+        font-weight: 700;
+        background: linear-gradient(
+          90deg,
+          var(--cat-color) 0%,
+          color-mix(in srgb, var(--cat-color) 55%, transparent) 100%
+        );
+        box-shadow: 0 0 10px color-mix(in srgb, var(--cat-color) 55%, transparent);
+      }
+      .v10 .toc-item.active .toc-num {
+        color: var(--shadow-ink);
+      }
+      .v10 .toc-item.active::before {
+        opacity: 1;
+        color: var(--shadow-ink);
+      }
+      .v10 .toc-item.active .toc-new-badge {
+        color: var(--shadow-ink);
+        text-shadow: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="page-head">
+      <h1>TOC サイドバー デザイン案 10 種</h1>
+      <p>
+        プレゼンモードの目次サイドバーの新デザイン案。レトロ JRPG テーマ（ネオン配色・ピクセルフォント・CRT
+        グロー）を踏まえ、10 種類を並べて比較できる自己完結 HTML。
+      </p>
+      <p>
+        各セクション（はじめに / 企画 / 開発 …）内はアクセントカラーを単色で統一。番号・アイコン・タイトル・New
+        バッジ・現在地ハイライトはすべて維持しています。
+      </p>
+      <p class="legend">▶ 現在地 = 「06 Agent Mode」 でハイライト中。</p>
+    </header>
+
+    <main class="gallery" id="gallery"></main>
+
+    <script>
+      // ── Shared sample TOC data (mirrors playbook category structure) ──
+      const ACCENT = {
+        cyan: '#00f0ff',
+        green: '#9bbc0f',
+        magenta: '#ff2e88',
+        amber: '#ffb000',
+      };
+
+      const SECTIONS = [
+        {
+          label: 'Introduction',
+          color: ACCENT.cyan,
+          items: [{ icon: '📘', title: 'GitHub & Copilot' }],
+        },
+        {
+          label: 'Plan',
+          color: ACCENT.green,
+          items: [
+            { icon: '📋', title: 'Issues & Projects' },
+            { icon: '🔌', title: 'MCP Servers', isNew: true },
+            { icon: '📝', title: 'Instruction Files' },
+          ],
+        },
+        {
+          label: 'Develop',
+          color: ACCENT.magenta,
+          items: [
+            { icon: '💻', title: 'Codespaces' },
+            { icon: '🤖', title: 'Agent Mode', isNew: true, active: true },
+            { icon: '☁️', title: 'Cloud Agent' },
+          ],
+        },
+        {
+          label: 'Review',
+          color: ACCENT.amber,
+          items: [{ icon: '🔍', title: 'Code Review' }],
+        },
+        {
+          label: 'Test & Secure',
+          color: ACCENT.cyan,
+          items: [
+            { icon: '🛡️', title: 'Actions CI' },
+            { icon: '🔒', title: 'Code Scanning' },
+          ],
+        },
+        {
+          label: 'Operate',
+          color: ACCENT.green,
+          items: [
+            { icon: '📊', title: 'Copilot Metrics' },
+            { icon: '🧠', title: 'Memory', isNew: true },
+          ],
+        },
+        {
+          label: 'Administration',
+          color: ACCENT.magenta,
+          items: [{ icon: '🏛️', title: 'Licenses & Policy' }],
+        },
+      ];
+
+      const VARIANTS = [
+        { cls: 'v1', name: 'V1 — Classic Refined', desc: '既存スタイルの正統進化。左アクセントボーダー＋淡い塗りで現在地を示す。' },
+        { cls: 'v2', name: 'V2 — Quest Log', desc: 'RPG のクエストログ風。▶ ポインターと破線で行を区切る。' },
+        { cls: 'v3', name: 'V3 — Window Frame', desc: 'JRPG メニューウィンドウ。各項目を枠で囲み、現在地に角ブラケット。' },
+        { cls: 'v4', name: 'V4 — Terminal / CRT', desc: 'VT323 のターミナル風。> プロンプトと点滅カーソルで現在地。' },
+        { cls: 'v5', name: 'V5 — Health Bar', desc: 'HP ゲージ風の進捗バー。現在地はバーがフル＋グロー。' },
+        { cls: 'v6', name: 'V6 — Pixel Cards', desc: 'ピクセルカード。ハードな影オフセット（ぼかし無し）で立体感。' },
+        { cls: 'v7', name: 'V7 — Skill Tree', desc: 'スキルツリー風ステッパー。ノードと縦ラインで連結。' },
+        { cls: 'v8', name: 'V8 — Score Badges', desc: 'アーケードのスコアチップ風。四角い番号バッジを反転で点灯。' },
+        { cls: 'v9', name: 'V9 — Neon Underline', desc: 'ミニマル。ネオンの下線グローだけで現在地を表現。' },
+        { cls: 'v10', name: 'V10 — Selector Bar', desc: '全幅セレクターバー。現在地はネオン塗りつぶし＋◆マーカー。' },
+      ];
+
+      function itemHTML(globalNum, item, sectionColor, variant) {
+        const num = String(globalNum).padStart(2, '0');
+        const badge = item.isNew ? '<span class="toc-new-badge">New</span>' : '';
+        const activeCls = item.active ? ' active' : '';
+        const numEl = `<span class="toc-num">${num}</span>`;
+        const textEl =
+          `<span class="toc-text"><span class="toc-title-text">${item.icon} ${item.title}${badge}</span></span>`;
+
+        // Variant-specific decorative elements (CSS shows/hides per variant).
+        let deco = '';
+        if (variant === 'v5') {
+          // gauge sits below the row
+          return (
+            `<a href="#" class="toc-item${activeCls}" style="--cat-color:${sectionColor}">` +
+            `<span class="toc-row">${numEl}${textEl}</span>` +
+            `<span class="toc-deco toc-gauge" aria-hidden="true"></span>` +
+            `</a>`
+          );
+        }
+        if (variant === 'v7') {
+          deco = '<span class="toc-deco toc-node" aria-hidden="true"></span>';
+        }
+        return (
+          `<a href="#" class="toc-item${activeCls}" style="--cat-color:${sectionColor}">` +
+          `${deco}${numEl}${textEl}` +
+          `</a>`
+        );
+      }
+
+      function tocHTML(variant) {
+        let html = `<nav class="toc ${variant}" aria-label="目次">`;
+        let n = 0;
+        for (const section of SECTIONS) {
+          html += `<div class="toc-section" style="--cat-color:${section.color}">${section.label}</div>`;
+          for (const item of section.items) {
+            n += 1;
+            html += itemHTML(n, item, section.color, variant);
+          }
+        }
+        html += '</nav>';
+        return html;
+      }
+
+      const gallery = document.getElementById('gallery');
+      gallery.innerHTML = VARIANTS.map(
+        (v) =>
+          `<section class="proto">` +
+          `<div class="proto-label">${v.name}</div>` +
+          `<div class="proto-desc">${v.desc}</div>` +
+          tocHTML(v.cls) +
+          `</section>`
+      ).join('');
+
+      // Prevent the demo anchors from jumping the page.
+      gallery.addEventListener('click', (e) => {
+        const a = e.target.closest('a.toc-item');
+        if (a) e.preventDefault();
+      });
+    </script>
+  </body>
+</html>
