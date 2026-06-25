@@ -268,7 +268,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       <span class="slide-counter-text"></span>
     </a>
     <div class="slide-title-tag" aria-hidden="true"></div>
-    <nav class="present-toc" aria-label={t.playbook.tocLabel} data-current-id={item.slug} transition:persist="present-toc">
+    <nav class="present-toc" aria-label={t.playbook.tocLabel} data-current-id={item.slug} transition:persist={`present-toc-${locale}`}>
       {tocGroups.map((g) => (
         <>
           <div class="toc-section" style={`color:${g.color}; border-color:${g.color}`}>
