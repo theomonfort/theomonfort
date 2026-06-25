@@ -121,7 +121,7 @@ From the port-forwarding notification, click **"Open in browser"** and try it ou
 
 Here's the key move — **instead of asking Copilot Chat to "fix this right now", file each improvement as a GitHub Issue**. In Step 11 (CODE: Cloud Agent) we'll have Cloud Agent implement some of them **in parallel, in one batch**, and in Step 13 (CODE: Copilot CLI) we'll knock out the remaining ones in parallel with `/fleet`.
 
-Send the prompt below to Copilot Chat to file **7** Issues at once (the `github-issues` skill will structure them automatically):
+Send the prompt below to Copilot Chat to file **6** Issues at once (the `github-issues` skill will structure them automatically):
 
 <Aside type="negative">
 The Issues below are **just one example** of the improvements you might want, based on how Copilot built the site. Depending on what Copilot actually shipped, some of them may not apply — skip those, and **feel free to swap in your own improvements** that make the site better the way you want.
@@ -130,25 +130,22 @@ The Issues below are **just one example** of the improvements you might want, ba
 ```
 Use the github-issues skill to create the following improvements as individual Issues in this repository.
 
-1. Title: Add a presentation mode with a category-grouped TOC sidebar on top of the current landing page
-   Details: Keep the existing `/playbook` landing page and Markdown detail pages. Add a presentation mode entry point from each card (for example `?present=1`). In presentation mode, each `##` heading in the Markdown becomes a slide, with a generated title/cover slide from frontmatter. Add keyboard controls (`←` / `→` to move, `Esc` to return to `/playbook`) and keep a unique URL for the current entry and slide. Also show a fixed left sidebar (TOC) listing all Playbook entries grouped by category using `src/lib/playbook-categories.ts` (labels, colors, icons, and ordering from that file). Highlight the current entry; clicking another entry switches to it while staying in presentation mode, and the TOC scroll position should not jump when clicking. Slide text should use a large font size so it stays readable when projected on a screen.
+1. Title: Add a presentation mode with a category-grouped TOC sidebar and category background images on top of the current landing page
+   Details: Keep the existing `/playbook` landing page and Markdown detail pages. Add a presentation mode entry point from each card (for example `?present=1`). In presentation mode, each `##` heading in the Markdown becomes a slide, with a generated title/cover slide from frontmatter. Add keyboard controls (`←` / `→` to move, `Esc` to return to `/playbook`) and keep a unique URL for the current entry and slide. Also show a fixed left sidebar (TOC) listing all Playbook entries grouped by category using `src/lib/playbook-categories.ts` (labels, colors, icons, and ordering from that file). Highlight the current entry; clicking another entry switches to it while staying in presentation mode, and the TOC scroll position should not jump when clicking. Slide text should use a large font size so it stays readable when projected on a screen. Additionally, give each presentation deck a category-specific background image using the supplied assets: `slide-bg-introduction.webp`, `slide-bg-plan.webp`, `slide-bg-develop.webp`, `slide-bg-review.webp`, `slide-bg-secure.webp`, `slide-bg-operate.webp`, and `slide-bg-administration.webp`. Add a dark overlay so text stays readable. The cover / hero slide can show more of the background; content slides should be more subdued.
 
 2. Title: Add Octocat “In a nutshell” hero slides
    Details: For each entry, turn the first “In a nutshell” / “一言で” section into a hero slide. Use the category actor/avatar from `src/lib/playbook-categories.ts` (for example Mona for Introduction) and render the text as a retro speech bubble. If the entry does not have that section, fall back to frontmatter `summary`.
 
-3. Title: Add category background images to presentation mode
-   Details: Give each presentation deck a category-specific background image using the supplied assets: `slide-bg-introduction.webp`, `slide-bg-plan.webp`, `slide-bg-develop.webp`, `slide-bg-review.webp`, `slide-bg-secure.webp`, `slide-bg-operate.webp`, and `slide-bg-administration.webp`. Add a dark overlay so text stays readable. The cover / hero slide can show more of the background; content slides should be more subdued.
-
-4. Title: Add a links slide at the end of each presentation deck
+3. Title: Add a links slide at the end of each presentation deck
    Details: If the Playbook entry frontmatter has `links`, render them as a final slide grouped by `group`. Each group should have a small heading and clickable links. If an entry has no links, skip this slide.
 
-5. Title: Render Mermaid diagrams inside presentation slides
+4. Title: Render Mermaid diagrams inside presentation slides
    Details: If a slide contains a ` ```mermaid ` code block, render it as a Mermaid diagram instead of plain code. Make sure diagrams on slides after slide 1 render correctly when navigating between slides.
 
-6. Title: Improve presentation slide layout and typography
+5. Title: Improve presentation slide layout and typography
    Details: Make slide content feel centered and intentional, not stuck in the top-left. Use the retro theme tokens, category colors, readable table/code styles, and balanced spacing. Tables and long code blocks should scroll inside the slide rather than overflowing the viewport.
 
-7. Title: Add mobile fallback for presentation mode
+6. Title: Add mobile fallback for presentation mode
    Details: On narrow screens, presentation mode should not break. Either disable presentation mode and fall back to the normal Markdown detail page, or provide a simple vertical slide list. Cards and detail pages should remain usable on mobile.
 ```
 
