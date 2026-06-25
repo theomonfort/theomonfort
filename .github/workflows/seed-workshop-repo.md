@@ -1,16 +1,16 @@
 ---
 description: |
-  Seed the GitHub Copilot Workshop repo. Mirrors the latest Markdown content
-  (playbook + hands-on) and the images they reference from this repository into
+  Seed the GitHub Copilot Workshop repo. Mirrors the latest playbook Markdown
+  content and the images it references from this repository into
   theomonfort/Github-copilot-workshop, then opens a pull request there with the
   changes. Inspired by the cross-repository "hub-and-spoke" gh-aw pattern.
 
 on:
-  # Re-seed whenever content or images change on main.
+  # Re-seed whenever playbook content or images change on main.
   push:
     branches: [main]
     paths:
-      - "src/content/**"
+      - "src/content/playbook/**"
       - "public/**"
   # Weekly safety net (Tuesday 00:00 UTC / 09:00 JST) plus manual runs.
   schedule:
@@ -69,32 +69,46 @@ repository (`${{ github.repository }}`).
 
 Two repositories are checked out in the workspace:
 
-- **Source** (this repo) — at the **workspace root**. Content lives in
-  `src/content/` and images in `public/`.
-- **Target** (the workshop) — at **`workshop-repo/`**. This is where you write
-  changes; a pull request is opened against it automatically.
+- **Source** (this repo) — at the **workspace root**. Playbook content lives in
+  `src/content/playbook/` and images in `public/`.
+- **Target** (the workshop) — at **`workshop-repo/`**. The workshop is a
+  **playbook-only** site: its content lives in `src/content/playbook/` and its
+  assets in `public/`. This is where you write changes; a pull request is opened
+  against it automatically.
 
-## Step 1 — Mirror the Markdown content
+## Step 1 — Mirror the playbook Markdown content
 
-Copy every Markdown file under `src/content/` (playbook + hands-on, both `ja`
-and `en` locales, `.md` and `.mdx`) into the workshop repo under `content/`,
-preserving the directory structure. Use `rsync` so the mirror is exact and stale
+Copy every playbook Markdown file under `src/content/playbook/` (both `ja` and
+`en` locales, `.md`) into the workshop repo under `src/content/playbook/`,
+preserving the directory structure. **Only the playbook is mirrored** — hands-on
+(`.mdx`) and equipment content are intentionally excluded, because the workshop
+is a playbook-only site. Use `rsync` so the mirror is exact and stale playbook
 files are removed:
 
 ```bash
-mkdir -p workshop-repo/content
-rsync -a --delete --include='*/' --include='*.md' --include='*.mdx' --exclude='*' src/content/ workshop-repo/content/
+mkdir -p workshop-repo/src/content/playbook
+rsync -a --delete --include='*/' --include='*.md' --exclude='*' src/content/playbook/ workshop-repo/src/content/playbook/
 ```
 
 ## Step 2 — Mirror the images
 
-Copy the images and other static assets from `public/` (icons, screenshots,
-diagrams referenced by the content) into the workshop repo under `public/`,
-preserving structure:
+Copy the images and other static assets from `public/` (icons, planet/slide
+backgrounds, diagrams referenced by the playbook) into the workshop repo under
+`public/`, preserving structure. Exclude the hands-on screenshots
+(`public/handson/`) and the room art (`public/room/`) that the playbook site
+does not use — with the single exception of
+`handson/img/intro-context-window.png`, which the `hands-on` playbook entry
+references:
 
 ```bash
 mkdir -p workshop-repo/public
-rsync -a --delete public/ workshop-repo/public/
+rsync -a --delete \
+  --include='/handson/' \
+  --include='/handson/img/' \
+  --include='/handson/img/intro-context-window.png' \
+  --exclude='/handson/**' \
+  --exclude='/room/' \
+  public/ workshop-repo/public/
 ```
 
 ## Step 3 — Review what changed
@@ -116,18 +130,20 @@ workflow is configured to ignore empty diffs.
 Write the PR with:
 
 - **Title:** `Sync latest content and images (<YYYY-MM-DD>)`
-- **Body:** a short summary that leads with the counts — how many Markdown files
-  and how many image/asset files were added, updated, or removed — followed by a
-  brief `git diff --stat` style list of the most significant changes. Include
-  the run URL `${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`
+- **Body:** a short summary that leads with the counts — how many playbook
+  Markdown files and how many image/asset files were added, updated, or removed
+  — followed by a brief `git diff --stat` style list of the most significant
+  changes. Include the run URL `${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`
   so the sync is auditable.
 
 ## Guardrails
 
-- **Never** delete or edit anything outside `workshop-repo/content/` and
-  `workshop-repo/public/`. Files the workshop maintainers added elsewhere
-  (README, exercises, scaffolding) must be left untouched.
-- Only mirror Markdown content and images/assets — do not copy source code,
-  build output, or configuration from this repository.
+- **Never** delete or edit anything outside `workshop-repo/src/content/playbook/`
+  and `workshop-repo/public/`. Files the workshop maintainers added elsewhere
+  (README, `src/lib/`, components, exercises, scaffolding) must be left
+  untouched.
+- Only mirror **playbook** Markdown content and the images/assets it uses — do
+  not copy hands-on/equipment content, source code, build output, or
+  configuration from this repository.
 - Never @-mention users.
 - Stay within the configured network allowlist.
