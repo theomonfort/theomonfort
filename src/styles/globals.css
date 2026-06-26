@@ -1393,3 +1393,20 @@ a.retro-link:hover::after {
   transform: translateY(-2px) scale(1.08);
   filter: drop-shadow(0 0 10px #00f0ff);
 }
+
+/* ── Blinking terminal cursor on the active present-mode TOC item ──
+   Defined globally (not in the per-page <style is:global>) so the rule and
+   its @keyframes survive Astro view-transition navigations on the persisted
+   TOC (transition:persist). --cat-color is set inline per .toc-item. ── */
+.present-toc .toc-item.active .toc-title-text::after {
+  content: '_';
+  margin-left: 0.15rem;
+  color: var(--cat-color, #ff2e88);
+  animation: toc-blink 1s steps(1) infinite;
+}
+@keyframes toc-blink {
+  50% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .present-toc .toc-item.active .toc-title-text::after { animation: none; }
+}
