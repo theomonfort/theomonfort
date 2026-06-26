@@ -300,6 +300,21 @@ let counter = 0;
   .ws-copy-icon { font-size: 11px; line-height: 1; }
   details[open] > .ws-summary .ws-chevron { transform: rotate(90deg); }
 
+  /* Terminal blinking cursor on the open (current) section — from the V4 CRT prototype */
+  details[open] > .ws-summary h2::after {
+    content: '_';
+    margin-left: 0.25rem;
+    color: var(--c);
+    font-weight: 700;
+    animation: ws-blink 1s steps(1) infinite;
+  }
+  @keyframes ws-blink {
+    50% { opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    details[open] > .ws-summary h2::after { animation: none; }
+  }
+
   /* V7 — Roadmap Spine */
   .ws-secs {
     position: relative;
