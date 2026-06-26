@@ -1,0 +1,119 @@
+# Seed the GitHub Copilot Workshop repo.
+#
+# Mirrors the latest playbook Markdown content and the images it references from
+# this repository into theomonfort/Github-copilot-workshop, then opens a pull
+# request there with the changes.
+#
+# This is a plain GitHub Action (no AI / agentic engine): the work is fully
+# deterministic (rsync + git), so it runs cheaply and predictably.
+#
+# Requires the GH_AW_SIDE_REPO_PAT secret: a token with `contents: write` and
+# `pull-requests: write` on theomonfort/Github-copilot-workshop.
+name: Seed the Copilot Workshop Repository
+
+on:
+  # Weekly safety net (Tuesday 00:00 UTC / 09:00 JST) plus manual runs.
+  schedule:
+    - cron: "0 0 * * 2"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: seed-workshop-repo
+  cancel-in-progress: false
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout source (this repo)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Checkout workshop repo
+        uses: actions/checkout@v4
+        with:
+          repository: theomonfort/Github-copilot-workshop
+          path: workshop-repo
+          fetch-depth: 1
+          token: ${{ secrets.GH_AW_SIDE_REPO_PAT }}
+
+      - name: Mirror playbook Markdown content
+        run: |
+          set -euo pipefail
+          mkdir -p workshop-repo/src/content/playbook
+          # Only .md playbook files (both locales); hands-on/.mdx is excluded.
+          rsync -a --delete \
+            --include='*/' --include='*.md' --exclude='*' \
+            src/content/playbook/ workshop-repo/src/content/playbook/
+
+      - name: Mirror images and assets
+        run: |
+          set -euo pipefail
+          mkdir -p workshop-repo/public
+          # Mirror public/ except /room/ and hands-on screenshots, keeping the
+          # single hands-on image the playbook references.
+          rsync -a --delete \
+            --include='/handson/' \
+            --include='/handson/img/' \
+            --include='/handson/img/intro-context-window.png' \
+            --exclude='/handson/**' \
+            --exclude='/room/' \
+            public/ workshop-repo/public/
+
+      - name: Build pull request body
+        id: body
+        run: |
+          set -euo pipefail
+          git -C workshop-repo add -A
+
+          DATE=$(date -u +%Y-%m-%d)
+          ns=$(git -C workshop-repo diff --cached --no-renames --name-status || true)
+          stat=$(git -C workshop-repo diff --cached --stat | head -n 80 || true)
+
+          classify() {
+            printf '%s\n' "$ns" | awk -v s="$1" -v re="$2" \
+              'BEGIN{c=0} $1==s && $2 ~ re {c++} END{print c}'
+          }
+          MD='^src/content/playbook/.*\.md$'
+          ASSET='^public/'
+
+          md_add=$(classify A "$MD"); md_mod=$(classify M "$MD"); md_del=$(classify D "$MD")
+          as_add=$(classify A "$ASSET"); as_mod=$(classify M "$ASSET"); as_del=$(classify D "$ASSET")
+
+          {
+            echo "date=$DATE"
+            echo "pr_body<<__BODY__"
+            echo "Automated sync of playbook content and images from \`${GITHUB_REPOSITORY}\`."
+            echo
+            echo "**Playbook Markdown:** ${md_add} added, ${md_mod} updated, ${md_del} removed"
+            echo "**Images / assets:** ${as_add} added, ${as_mod} updated, ${as_del} removed"
+            echo
+            echo '<details><summary>Changed files</summary>'
+            echo
+            echo '```'
+            echo "$stat"
+            echo '```'
+            echo '</details>'
+            echo
+            echo "Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+            echo "__BODY__"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          path: workshop-repo
+          token: ${{ secrets.GH_AW_SIDE_REPO_PAT }}
+          branch: content-sync/seed-workshop
+          delete-branch: true
+          title: "[content-sync] Sync latest content and images (${{ steps.body.outputs.date }})"
+          body: ${{ steps.body.outputs.pr_body }}
+          commit-message: "[content-sync] Sync latest content and images (${{ steps.body.outputs.date }})"
+          labels: |
+            content-sync
+            automation
