@@ -85,7 +85,7 @@ A full-stack AI environment packed into a single terminal.
 
 ## Powerful Built-in Agents
 
-Copilot CLI includes standard agents for common tasks.
+Copilot CLI includes <a href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-custom-agents#built-in-agents" target="_blank" rel="noopener noreferrer" class="retro-link">built-in agents</a> for common tasks.
 
 | Agent | Description |
 |---|---|
@@ -95,8 +95,6 @@ Copilot CLI includes standard agents for common tasks.
 | **Code review** | Reviews code changes focusing solely on issues that genuinely matter, minimizing noise. |
 | **Research** | Conducts deep research across the codebase, related repositories, and the web, producing detailed reports with citations. |
 | **Rubber duck** | Returns constructive critical feedback for complex tasks. Used automatically by Copilot CLI. |
-
-> 📖 For the up-to-date list and descriptions of the built-in agents, see the official docs: <a href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-custom-agents#built-in-agents" target="_blank" rel="noopener noreferrer" class="retro-link">Copilot CLI — Built-in agents</a>.
 
 > 💡 You can inspect these built-in agents' definitions in your local CLI install at `definitions/*.agent.yaml` (e.g. `~/.copilot/pkg/darwin-arm64/<version>/definitions/*.agent.yaml`).
 
