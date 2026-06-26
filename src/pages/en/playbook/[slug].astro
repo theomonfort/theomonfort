@@ -2341,18 +2341,6 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     font-weight: 700;
     text-shadow: 0 0 8px color-mix(in srgb, var(--cat-color, #ff2e88) 60%, transparent);
   }
-  .present-toc .toc-item.active .toc-title-text::after {
-    content: '_';
-    margin-left: 0.15rem;
-    color: var(--cat-color, #ff2e88);
-    animation: toc-blink 1s steps(1) infinite;
-  }
-  @keyframes toc-blink {
-    50% { opacity: 0; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .present-toc .toc-item.active .toc-title-text::after { animation: none; }
-  }
   .present-toc .toc-section {
     font-family: 'DotGothic16', 'Noto Sans JP', monospace;
     font-size: 0.72rem;
