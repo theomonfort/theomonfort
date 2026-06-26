@@ -112,13 +112,16 @@ Custom Agents are the mechanism for **extending this to your own team**.
 
 | Surface | Agent | What does it do? |
 | --- | --- | --- |
-| Copilot Chat / VS Code | Agent | Autonomously plans, edits, executes commands, and calls tools for complex coding tasks |
-| Copilot Chat / VS Code | Plan | Creates a structured step-by-step implementation plan before writing code |
-| Copilot Chat / VS Code | Ask | Answers questions about the codebase, coding concepts, and VS Code without modifying files |
+| Copilot Chat / VS Code | Ask | Answers questions without making changes |
+| Copilot Chat / VS Code | Explore | Fast read-only codebase exploration and Q&A subagent |
+| Copilot Chat / VS Code | Plan | Researches and outlines multi-step plans |
 | Copilot CLI | Explore | Quick codebase analysis. Ask questions about the code without adding to the main context |
 | Copilot CLI | Task | Runs commands such as tests and builds, returning a brief summary on success and full output on failure |
 | Copilot CLI | General-purpose | Handles complex multi-step tasks requiring the full toolset and high-quality reasoning in a separate context |
+| Copilot CLI | Rubber-duck | Gives high-signal feedback on plans and implementations, catching bugs, logic errors, and design flaws (never edits code) |
 | Copilot CLI | Code-review | Reviews changes and surfaces only genuinely important issues with low noise |
+| Copilot CLI | Research | A subagent that runs thorough searches: digs through GitHub repos, fetches files, and reports findings with citations |
+| Copilot CLI | Security-review | Reviews changes for high-confidence security vulnerabilities (11 categories) with severity and confidence scores |
 
 > Display names may appear shortened depending on the UI preview, but the official CLI names are `General-purpose` and `Code-review`. For how to create custom agents in the CLI, see <a href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-custom-agents" target="_blank" rel="noopener noreferrer" class="retro-link">About Copilot CLI custom agents</a> and <a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/create-custom-agents-for-cli" target="_blank" rel="noopener noreferrer" class="retro-link">Create custom agents for CLI</a>.
 
