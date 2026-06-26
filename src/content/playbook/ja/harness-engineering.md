@@ -199,3 +199,34 @@ flowchart LR
 ```
 
 > 🚀 数クリックで試せるように Codespace 対応のリポジトリを用意しました： [theomonfort/ultralight-template](https://github.com/theomonfort/ultralight-template)
+
+## このサイトを作るハーネス
+
+この playbook サイト自体も、同じ考え方のハーネスで作っている。Orchestrator（Theo）が指示書とプロンプトで全体を束ね、フェーズごとに CLI built-in agent・custom agent・skill・MCP を使い分ける。
+
+```mermaid
+flowchart LR
+  Theo[Orchestrator：Theo<br/>+ 指示書 / プロンプト] --> Plan[planner<br/>Custom agent · Local]
+  Theo --> Code[Coding<br/>CLI Built-in Agents]
+  Code --> Review[Review<br/>CLI Built-in · Rubber Duck]
+
+  Plan --> Explore[Explore / Research<br/>CLI Built-in Agents]
+  Plan --> Grill[Grill-me<br/>Skill · Local]
+
+  Code --> Ctx[MCP Context7<br/>Local]
+  Code --> Slide[Slide Creator<br/>Skill · Repo]
+  Code --> Proto[Prototyper<br/>Skill · Repo]
+  Code --> Test[Tester<br/>Custom agent · Local]
+  Test --> Play[Playwright<br/>ツール · Local]
+
+  classDef host fill:#102033,stroke:#00f0ff,color:#e8f4ff,stroke-width:2px;
+  classDef builtin fill:#20242a,stroke:#8b949e,color:#d0d7de,stroke-width:2px;
+  classDef mcp fill:#132812,stroke:#9bbc0f,color:#f4ffd8,stroke-width:2px;
+  classDef skill fill:#2a1020,stroke:#ff2e88,color:#ffe8f4,stroke-width:2px;
+  class Theo,Plan,Test host;
+  class Explore,Code,Review builtin;
+  class Ctx mcp;
+  class Grill,Slide,Proto,Play skill;
+```
+
+> 🟦 Orchestrator / Custom agent ・ ⬜ CLI Built-in ・ 🟩 MCP ・ 🟥 Skill / ツール。`Local` は手元の設定、`Repo` はこのリポジトリ内に置いたもの。

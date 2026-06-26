@@ -948,8 +948,6 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     document.querySelectorAll('.slide-new-marker').forEach((e) => e.remove());
   };
 
-  initGlossaryInteractions();
-
   // ── Mermaid (loaded async, won't block keyboard) ───────────────
   let mermaidRenderPromise: Promise<void> | null = null;
 
@@ -1064,6 +1062,11 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     });
   }
 
+  // Initial kick-off, after every binding above is initialized so present mode
+  // and Mermaid set up on the first paint. Running this earlier hit a temporal
+  // dead zone on mermaidRenderPromise, making present mode fail once and flash
+  // the article view before astro:page-load re-ran it.
+  initGlossaryInteractions();
 </script>
 
 <style is:global>
