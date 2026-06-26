@@ -1954,6 +1954,11 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .prose-akq .workshop-flow-vertical .mermaid-wrap svg { max-width: 100% !important; width: 100% !important; height: auto !important; }
   body.present-mode .prose-akq .workshop-flow-vertical { max-width: 960px; }
   body.present-mode .prose-akq .workshop-flow-vertical .mermaid-wrap svg { max-height: 82vh; }
+
+  /* ── Harness map (inline SVG flow; replaces the orchestrator mermaid) ── */
+  .prose-akq .harness-map { max-width: 1000px; margin: 1.4em auto 0; }
+  .prose-akq .harness-map svg { display: block; width: 100%; height: auto; }
+  body.present-mode .prose-akq .harness-map { max-width: 1080px; }
   .prose-akq .big-stat {
     display: inline-block;
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
