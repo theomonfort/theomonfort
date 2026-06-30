@@ -105,7 +105,7 @@ jobs:
 
 ## Adding External Tools with MCP Servers
 
-The **GitHub MCP server and Playwright MCP server are enabled by default** — no setup needed. To go further, Cloud Agent has a **dedicated MCP server configuration**, managed separately from local MCP settings. Just paste JSON at `Settings → Copilot → Coding agent → MCP servers` in the browser. Configured servers are automatically connected to every Cloud Agent session launched under that Org / account.
+The **GitHub MCP server and Playwright MCP server are enabled by default** — no setup needed. To go further, Cloud Agent has a **dedicated MCP server configuration**, managed separately from local MCP settings. Just paste JSON at `Settings → Code & automation → Copilot → MCP servers` in the browser. Configured servers are automatically connected to every Cloud Agent session launched under that Org / account.
 
 **Example: Adding Context7 alongside the defaults**
 

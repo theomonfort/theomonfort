@@ -105,7 +105,7 @@ jobs:
 
 ## MCP サーバーで外部ツールを追加
 
-**GitHub MCP サーバーと Playwright MCP サーバーはデフォルトで有効** — 設定不要ですぐ使える。さらに拡張したい場合、Cloud Agent には **専用の MCP サーバー設定** がある。ローカルの MCP 設定とは別管理で、ブラウザ上の `Settings → Copilot → Coding agent → MCP servers` から JSON を貼るだけ。設定したサーバーは、その Org / アカウントで起動するすべての Cloud Agent セッションに自動で接続される。
+**GitHub MCP サーバーと Playwright MCP サーバーはデフォルトで有効** — 設定不要ですぐ使える。さらに拡張したい場合、Cloud Agent には **専用の MCP サーバー設定** がある。ローカルの MCP 設定とは別管理で、ブラウザ上の `Settings → Code & automation → Copilot → MCP servers` から JSON を貼るだけ。設定したサーバーは、その Org / アカウントで起動するすべての Cloud Agent セッションに自動で接続される。
 
 **例：デフォルトに加えて Context7 を追加**
 

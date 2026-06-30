@@ -56,7 +56,7 @@ const sections: Section[] = [
       { label: 'START THE CODESPACE in advance and ZOOM IN' },
       { label: 'Send a message in Copilot Chat to be able to choose a model' },
       { label: 'Open a new terminal in CODESPACES' },
-      { label: 'Check that Code scanning, Secret Scanning, Code Review ruleset are activate' },
+      { label: 'Check that Code scanning, Secret Scanning, Code Review ruleset are activated' },
       { label: 'Activate Code Quality, Dependabot Security Update' },
       { label: 'Have the AGENDA (This one) / PLAYBOOK / REPOSITORY / CODESPACES open in the browser' },
       { label: 'Have the HANDS-ON tab open on ANOTHER SCREEN' },
@@ -184,9 +184,9 @@ let counter = 0;
 <Layout locale={locale} currentPath="/ws" title="Workshop Presenter Notes">
   <section class="max-w-3xl mx-auto px-4 py-12 md:py-16">
     <div class="ws-switch flex items-center justify-center gap-2 mb-4" role="tablist" aria-label="Workshop">
-      <button type="button" class="ws-tab is-active" data-ws="copilot" aria-selected="true">COPILOT</button>
-      <button type="button" class="ws-tab" data-ws="github" aria-selected="false">GITHUB</button>
-      <button type="button" class="ws-tab" data-ws="ghas" aria-selected="false">GHAS</button>
+      <button type="button" role="tab" class="ws-tab is-active" data-ws="copilot" aria-selected="true" aria-controls="ws-notes">COPILOT</button>
+      <button type="button" role="tab" class="ws-tab" data-ws="github" aria-selected="false" aria-controls="ws-construction">GITHUB</button>
+      <button type="button" role="tab" class="ws-tab" data-ws="ghas" aria-selected="false" aria-controls="ws-construction">GHAS</button>
     </div>
 
     <header class="mb-8 text-center">
@@ -196,13 +196,13 @@ let counter = 0;
       </h1>
     </header>
 
-    <div id="ws-construction" class="ws-construction" hidden>
+    <div id="ws-construction" class="ws-construction" role="tabpanel" hidden>
       <img src={ucIcon} alt="" width="160" height="160" class="ws-uc-icon" />
       <p class="ws-uc-title font-pixel">{ucTitle}</p>
       <p class="ws-uc-body font-pixel-jp">{ucBody}</p>
     </div>
 
-    <div id="ws-notes">
+    <div id="ws-notes" role="tabpanel">
     <details class="ws-objectives mb-8" open>
       <summary class="ws-obj-summary flex items-center gap-2 cursor-pointer select-none px-3 py-2">
         <span class="ws-chevron font-pixel text-[10px] text-crt-amber transition-transform duration-200">▶</span>
