@@ -160,7 +160,7 @@ let counter = 0;
     <header class="mb-8 text-center">
       <p class="font-pixel text-[10px] text-crt-amber mb-3 tracking-[0.4em]">PRESENTER ONLY</p>
       <h1 class="font-pixel text-2xl md:text-4xl text-neon-magenta drop-shadow-[0_0_12px_rgba(255,46,136,0.7)]">
-        WORKSHOP NOTES
+        COPILOT WORKSHOP
       </h1>
     </header>
 
@@ -390,6 +390,23 @@ let counter = 0;
     color: inherit;
     opacity: 1;
   }
+
+  /* Completed section: all items checked -> grey it out */
+  .ws-section.is-complete > .ws-summary {
+    opacity: 0.45;
+    filter: grayscale(0.85);
+    transition: opacity 0.3s ease, filter 0.3s ease;
+  }
+  .ws-section.is-complete > .ws-summary:hover {
+    opacity: 0.75;
+  }
+  .ws-section.is-complete > .ws-summary .ws-node {
+    background: #6b7280;
+    box-shadow: none;
+  }
+  .ws-section.is-complete > .ws-summary h2::after {
+    display: none;
+  }
 </style>
 
 <script>
@@ -428,6 +445,7 @@ let counter = 0;
       const done = boxes.filter((b) => b.checked).length;
       const label = section.querySelector('.ws-section-count');
       if (label) label.textContent = `${done} / ${boxes.length}`;
+      section.classList.toggle('is-complete', boxes.length > 0 && done === boxes.length);
     };
 
     const refreshGlobal = () => {
