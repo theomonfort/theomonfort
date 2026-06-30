@@ -116,6 +116,123 @@ Looking back at GitHub's journey reveals where we are today ──
 </figure>
 
 
+## AI Developer Platform
+
+From **Plan → Code → Review → Test & Security → Operate**, AI on GitHub supports the entire SDLC end-to-end.
+
+<figure class="rpi-pipeline" style="margin:2em 0;">
+<svg viewBox="0 0 1080 510" xmlns="http://www.w3.org/2000/svg"
+     shape-rendering="crispEdges"
+     style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
+  <rect x="0" y="0" width="1080" height="510" fill="none"/>
+  <!-- ── Card 1: PLAN ── green ─────────────────────────────────── -->
+  <g>
+    <rect x="16" y="64" width="200" height="400" fill="#0f1604"/>
+    <rect x="12" y="60" width="200" height="400" fill="#0a0e27" stroke="#9bbc0f" stroke-width="3"/>
+    <path d="M 18 66 h 12 M 18 66 v 12 M 206 66 h -12 M 206 66 v 12 M 18 454 h 12 M 18 454 v -12 M 206 454 h -12 M 206 454 v -12" stroke="#9bbc0f" stroke-width="2" fill="none"/>
+    <rect x="32" y="38" width="160" height="44" fill="#05060f" stroke="#9bbc0f" stroke-width="3"/>
+    <text x="112" y="67" text-anchor="middle" fill="#9bbc0f" font-size="18" font-weight="bold">▮ PLAN</text>
+    <line x1="22" y1="100" x2="202" y2="100" stroke="#9bbc0f" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
+    <g>
+      <rect x="22" y="118" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+      <text x="112" y="146" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ GitHub Projects</text>
+      <rect x="22" y="178" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+      <text x="112" y="206" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Issues/Discussions</text>
+      <rect x="22" y="238" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+      <text x="112" y="266" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Plan mode</text>
+      <rect x="22" y="298" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+      <text x="112" y="326" text-anchor="middle" fill="#e8f4ff" font-size="12">▶ Skills/Instructions ...</text>
+    </g>
+  </g>
+  <!-- ── Card 2: CODE ── magenta ────────────────────────────────────── -->
+  <g>
+    <rect x="230" y="64" width="200" height="400" fill="#1a0610"/>
+    <rect x="226" y="60" width="200" height="400" fill="#0a0e27" stroke="#ff2e88" stroke-width="3"/>
+    <path d="M 232 66 h 12 M 232 66 v 12 M 420 66 h -12 M 420 66 v 12 M 232 454 h 12 M 232 454 v -12 M 420 454 h -12 M 420 454 v -12" stroke="#ff2e88" stroke-width="2" fill="none"/>
+    <rect x="246" y="38" width="160" height="44" fill="#05060f" stroke="#ff2e88" stroke-width="3"/>
+    <text x="326" y="67" text-anchor="middle" fill="#ff2e88" font-size="18" font-weight="bold">▮ CODE</text>
+    <line x1="236" y1="100" x2="416" y2="100" stroke="#ff2e88" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
+    <g>
+      <rect x="236" y="118" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
+      <text x="326" y="146" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Copilot Chat</text>
+      <rect x="236" y="178" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
+      <text x="326" y="206" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Cloud Agent</text>
+      <rect x="236" y="238" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
+      <text x="326" y="266" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ CLI</text>
+      <rect x="236" y="298" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
+      <text x="326" y="326" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Codespaces</text>
+    </g>
+  </g>
+  <!-- ── Card 3: REVIEW ── amber ─────────────────────────────────── -->
+  <g>
+    <rect x="444" y="64" width="200" height="400" fill="#1f1404"/>
+    <rect x="440" y="60" width="200" height="400" fill="#0a0e27" stroke="#ffb000" stroke-width="3"/>
+    <path d="M 446 66 h 12 M 446 66 v 12 M 634 66 h -12 M 634 66 v 12 M 446 454 h 12 M 446 454 v -12 M 634 454 h -12 M 634 454 v -12" stroke="#ffb000" stroke-width="2" fill="none"/>
+    <rect x="460" y="38" width="160" height="44" fill="#05060f" stroke="#ffb000" stroke-width="3"/>
+    <text x="540" y="67" text-anchor="middle" fill="#ffb000" font-size="18" font-weight="bold">▮ REVIEW</text>
+    <line x1="450" y1="100" x2="630" y2="100" stroke="#ffb000" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
+    <g>
+      <rect x="450" y="118" width="180" height="44" fill="#0e1430" stroke="#ffb000" stroke-width="2"/>
+      <text x="540" y="146" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Pull Requests</text>
+      <rect x="450" y="178" width="180" height="44" fill="#0e1430" stroke="#ffb000" stroke-width="2"/>
+      <text x="540" y="206" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Code Review</text>
+      <rect x="450" y="238" width="180" height="44" fill="#0e1430" stroke="#ffb000" stroke-width="2"/>
+      <text x="540" y="266" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Playwright</text>
+      <rect x="450" y="298" width="180" height="44" fill="#0e1430" stroke="#ffb000" stroke-width="2"/>
+      <text x="540" y="326" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Rubber Duck</text>
+    </g>
+  </g>
+  <!-- ── Card 4: TEST &amp; SECURE ── cyan ──────────────────────── -->
+  <g>
+    <rect x="658" y="64" width="200" height="400" fill="#02181c"/>
+    <rect x="654" y="60" width="200" height="400" fill="#0a0e27" stroke="#00f0ff" stroke-width="3"/>
+    <path d="M 660 66 h 12 M 660 66 v 12 M 848 66 h -12 M 848 66 v 12 M 660 454 h 12 M 660 454 v -12 M 848 454 h -12 M 848 454 v -12" stroke="#00f0ff" stroke-width="2" fill="none"/>
+    <rect x="668" y="38" width="172" height="44" fill="#05060f" stroke="#00f0ff" stroke-width="3"/>
+    <text x="754" y="67" text-anchor="middle" fill="#00f0ff" font-size="15" font-weight="bold">▮ TEST &amp; SECURE</text>
+    <line x1="664" y1="100" x2="844" y2="100" stroke="#00f0ff" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
+    <g>
+      <rect x="664" y="118" width="180" height="44" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
+      <text x="754" y="146" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Actions</text>
+      <rect x="664" y="178" width="180" height="44" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
+      <text x="754" y="206" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Autofix</text>
+      <rect x="664" y="238" width="180" height="44" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
+      <text x="754" y="266" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Code Quality</text>
+      <rect x="664" y="298" width="180" height="44" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
+      <text x="754" y="326" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Agentic Workflows</text>
+    </g>
+  </g>
+  <!-- ── Card 5: OPERATE ── green ──────────────────────────────── -->
+  <g>
+    <rect x="872" y="64" width="200" height="400" fill="#0f1604"/>
+    <rect x="868" y="60" width="200" height="400" fill="#0a0e27" stroke="#9bbc0f" stroke-width="3"/>
+    <path d="M 874 66 h 12 M 874 66 v 12 M 1062 66 h -12 M 1062 66 v 12 M 874 454 h 12 M 874 454 v -12 M 1062 454 h -12 M 1062 454 v -12" stroke="#9bbc0f" stroke-width="2" fill="none"/>
+    <rect x="888" y="38" width="160" height="44" fill="#05060f" stroke="#9bbc0f" stroke-width="3"/>
+    <text x="968" y="67" text-anchor="middle" fill="#9bbc0f" font-size="18" font-weight="bold">▮ OPERATE</text>
+    <line x1="878" y1="100" x2="1058" y2="100" stroke="#9bbc0f" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
+    <g>
+      <rect x="878" y="118" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+      <text x="968" y="146" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Metrics</text>
+      <rect x="878" y="178" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+      <text x="968" y="206" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Copilot Memory</text>
+      <rect x="878" y="238" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+      <text x="968" y="266" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Agentic Workflows</text>
+      <rect x="878" y="298" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+      <text x="968" y="326" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Copilot Metrics</text>
+    </g>
+  </g>
+  <!-- ── scanline overlay (subtle CRT vibe) ──────────────────────── -->
+  <g opacity="0.08">
+    <line x1="0" y1="80"  x2="1080" y2="80"  stroke="#e8f4ff" stroke-width="1"/>
+    <line x1="0" y1="140" x2="1080" y2="140" stroke="#e8f4ff" stroke-width="1"/>
+    <line x1="0" y1="200" x2="1080" y2="200" stroke="#e8f4ff" stroke-width="1"/>
+    <line x1="0" y1="260" x2="1080" y2="260" stroke="#e8f4ff" stroke-width="1"/>
+    <line x1="0" y1="320" x2="1080" y2="320" stroke="#e8f4ff" stroke-width="1"/>
+    <line x1="0" y1="380" x2="1080" y2="380" stroke="#e8f4ff" stroke-width="1"/>
+    <line x1="0" y1="440" x2="1080" y2="440" stroke="#e8f4ff" stroke-width="1"/>
+  </g>
+</svg>
+</figure>
+
 ## GitHub by the Numbers
 
 - GitHub developers: **240 million+** worldwide (internal metric / 2026)
@@ -261,123 +378,6 @@ Source: [GitHub Octoverse 2025](https://octoverse.github.com) (monthly average; 
     <text x="1018" y="84" text-anchor="middle" fill="#ffb000" font-size="26" font-weight="bold">20M</text>
     <text x="1018" y="422" text-anchor="middle" fill="#ffb000" font-size="12" font-weight="bold">2026 pace</text>
     <text x="816" y="442" text-anchor="middle" fill="#e8f4ff" font-size="12.5"><tspan fill="#ffb000" font-weight="bold">~2x</tspan> into 2026 ── new projects exploding</text>
-  </g>
-</svg>
-</figure>
-
-## AI Developer Platform
-
-From **Plan → Code → Review → Test & Security → Operate**, AI on GitHub supports the entire SDLC end-to-end.
-
-<figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 0 1080 510" xmlns="http://www.w3.org/2000/svg"
-     shape-rendering="crispEdges"
-     style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
-  <rect x="0" y="0" width="1080" height="510" fill="none"/>
-  <!-- ── Card 1: PLAN ── green ─────────────────────────────────── -->
-  <g>
-    <rect x="16" y="64" width="200" height="400" fill="#0f1604"/>
-    <rect x="12" y="60" width="200" height="400" fill="#0a0e27" stroke="#9bbc0f" stroke-width="3"/>
-    <path d="M 18 66 h 12 M 18 66 v 12 M 206 66 h -12 M 206 66 v 12 M 18 454 h 12 M 18 454 v -12 M 206 454 h -12 M 206 454 v -12" stroke="#9bbc0f" stroke-width="2" fill="none"/>
-    <rect x="32" y="38" width="160" height="44" fill="#05060f" stroke="#9bbc0f" stroke-width="3"/>
-    <text x="112" y="67" text-anchor="middle" fill="#9bbc0f" font-size="18" font-weight="bold">▮ PLAN</text>
-    <line x1="22" y1="100" x2="202" y2="100" stroke="#9bbc0f" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
-    <g>
-      <rect x="22" y="118" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="112" y="146" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ GitHub Projects</text>
-      <rect x="22" y="178" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="112" y="206" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Issues/Discussions</text>
-      <rect x="22" y="238" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="112" y="266" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Plan mode</text>
-      <rect x="22" y="298" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="112" y="326" text-anchor="middle" fill="#e8f4ff" font-size="12">▶ Skills/Instructions ...</text>
-    </g>
-  </g>
-  <!-- ── Card 2: CODE ── magenta ────────────────────────────────────── -->
-  <g>
-    <rect x="230" y="64" width="200" height="400" fill="#1a0610"/>
-    <rect x="226" y="60" width="200" height="400" fill="#0a0e27" stroke="#ff2e88" stroke-width="3"/>
-    <path d="M 232 66 h 12 M 232 66 v 12 M 420 66 h -12 M 420 66 v 12 M 232 454 h 12 M 232 454 v -12 M 420 454 h -12 M 420 454 v -12" stroke="#ff2e88" stroke-width="2" fill="none"/>
-    <rect x="246" y="38" width="160" height="44" fill="#05060f" stroke="#ff2e88" stroke-width="3"/>
-    <text x="326" y="67" text-anchor="middle" fill="#ff2e88" font-size="18" font-weight="bold">▮ CODE</text>
-    <line x1="236" y1="100" x2="416" y2="100" stroke="#ff2e88" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
-    <g>
-      <rect x="236" y="118" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
-      <text x="326" y="146" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Copilot Chat</text>
-      <rect x="236" y="178" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
-      <text x="326" y="206" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Cloud Agent</text>
-      <rect x="236" y="238" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
-      <text x="326" y="266" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ CLI</text>
-      <rect x="236" y="298" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
-      <text x="326" y="326" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Codespaces</text>
-    </g>
-  </g>
-  <!-- ── Card 3: REVIEW ── amber ─────────────────────────────────── -->
-  <g>
-    <rect x="444" y="64" width="200" height="400" fill="#1f1404"/>
-    <rect x="440" y="60" width="200" height="400" fill="#0a0e27" stroke="#ffb000" stroke-width="3"/>
-    <path d="M 446 66 h 12 M 446 66 v 12 M 634 66 h -12 M 634 66 v 12 M 446 454 h 12 M 446 454 v -12 M 634 454 h -12 M 634 454 v -12" stroke="#ffb000" stroke-width="2" fill="none"/>
-    <rect x="460" y="38" width="160" height="44" fill="#05060f" stroke="#ffb000" stroke-width="3"/>
-    <text x="540" y="67" text-anchor="middle" fill="#ffb000" font-size="18" font-weight="bold">▮ REVIEW</text>
-    <line x1="450" y1="100" x2="630" y2="100" stroke="#ffb000" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
-    <g>
-      <rect x="450" y="118" width="180" height="44" fill="#0e1430" stroke="#ffb000" stroke-width="2"/>
-      <text x="540" y="146" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Pull Requests</text>
-      <rect x="450" y="178" width="180" height="44" fill="#0e1430" stroke="#ffb000" stroke-width="2"/>
-      <text x="540" y="206" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Code Review</text>
-      <rect x="450" y="238" width="180" height="44" fill="#0e1430" stroke="#ffb000" stroke-width="2"/>
-      <text x="540" y="266" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Playwright</text>
-      <rect x="450" y="298" width="180" height="44" fill="#0e1430" stroke="#ffb000" stroke-width="2"/>
-      <text x="540" y="326" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Rubber Duck</text>
-    </g>
-  </g>
-  <!-- ── Card 4: TEST &amp; SECURE ── cyan ──────────────────────── -->
-  <g>
-    <rect x="658" y="64" width="200" height="400" fill="#02181c"/>
-    <rect x="654" y="60" width="200" height="400" fill="#0a0e27" stroke="#00f0ff" stroke-width="3"/>
-    <path d="M 660 66 h 12 M 660 66 v 12 M 848 66 h -12 M 848 66 v 12 M 660 454 h 12 M 660 454 v -12 M 848 454 h -12 M 848 454 v -12" stroke="#00f0ff" stroke-width="2" fill="none"/>
-    <rect x="668" y="38" width="172" height="44" fill="#05060f" stroke="#00f0ff" stroke-width="3"/>
-    <text x="754" y="67" text-anchor="middle" fill="#00f0ff" font-size="15" font-weight="bold">▮ TEST &amp; SECURE</text>
-    <line x1="664" y1="100" x2="844" y2="100" stroke="#00f0ff" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
-    <g>
-      <rect x="664" y="118" width="180" height="44" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
-      <text x="754" y="146" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Actions</text>
-      <rect x="664" y="178" width="180" height="44" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
-      <text x="754" y="206" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Autofix</text>
-      <rect x="664" y="238" width="180" height="44" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
-      <text x="754" y="266" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Code Quality</text>
-      <rect x="664" y="298" width="180" height="44" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
-      <text x="754" y="326" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Agentic Workflows</text>
-    </g>
-  </g>
-  <!-- ── Card 5: OPERATE ── green ──────────────────────────────── -->
-  <g>
-    <rect x="872" y="64" width="200" height="400" fill="#0f1604"/>
-    <rect x="868" y="60" width="200" height="400" fill="#0a0e27" stroke="#9bbc0f" stroke-width="3"/>
-    <path d="M 874 66 h 12 M 874 66 v 12 M 1062 66 h -12 M 1062 66 v 12 M 874 454 h 12 M 874 454 v -12 M 1062 454 h -12 M 1062 454 v -12" stroke="#9bbc0f" stroke-width="2" fill="none"/>
-    <rect x="888" y="38" width="160" height="44" fill="#05060f" stroke="#9bbc0f" stroke-width="3"/>
-    <text x="968" y="67" text-anchor="middle" fill="#9bbc0f" font-size="18" font-weight="bold">▮ OPERATE</text>
-    <line x1="878" y1="100" x2="1058" y2="100" stroke="#9bbc0f" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
-    <g>
-      <rect x="878" y="118" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="968" y="146" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Metrics</text>
-      <rect x="878" y="178" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="968" y="206" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Copilot Memory</text>
-      <rect x="878" y="238" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="968" y="266" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Agentic Workflows</text>
-      <rect x="878" y="298" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="968" y="326" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Copilot Metrics</text>
-    </g>
-  </g>
-  <!-- ── scanline overlay (subtle CRT vibe) ──────────────────────── -->
-  <g opacity="0.08">
-    <line x1="0" y1="80"  x2="1080" y2="80"  stroke="#e8f4ff" stroke-width="1"/>
-    <line x1="0" y1="140" x2="1080" y2="140" stroke="#e8f4ff" stroke-width="1"/>
-    <line x1="0" y1="200" x2="1080" y2="200" stroke="#e8f4ff" stroke-width="1"/>
-    <line x1="0" y1="260" x2="1080" y2="260" stroke="#e8f4ff" stroke-width="1"/>
-    <line x1="0" y1="320" x2="1080" y2="320" stroke="#e8f4ff" stroke-width="1"/>
-    <line x1="0" y1="380" x2="1080" y2="380" stroke="#e8f4ff" stroke-width="1"/>
-    <line x1="0" y1="440" x2="1080" y2="440" stroke="#e8f4ff" stroke-width="1"/>
   </g>
 </svg>
 </figure>

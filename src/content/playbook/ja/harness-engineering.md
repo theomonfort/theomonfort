@@ -127,8 +127,8 @@ AI を強くする技術ツールは 1 つではない。**常に読ませるも
 
 | 技術ツール | 置き場所 / 設定 | 使いどころ |
 | --- | --- | --- |
-| Repository-wide custom instructions | `.github/copilot-instructions.md` | リポジトリ全体の規約・禁止事項・検証コマンド |
-| Path-specific custom instructions | `.github/instructions/*.instructions.md` + `applyTo` | `tests/**`、`api/**` など領域別ルール |
+| リポジトリ全体（Repository-wide）の custom instructions | `.github/copilot-instructions.md` | リポジトリ全体の規約・禁止事項・検証コマンド |
+| パス別（Path-specific）の custom instructions | `.github/instructions/*.instructions.md` + `applyTo` | `tests/**`、`api/**` など領域別ルール |
 | Agent skills | `.github/skills/*/SKILL.md` / `~/.copilot/skills/` | PR description、frontend design など専門手順 |
 | Custom agents | `.github/agents/*.agent.md` / `~/.copilot/agents/` | 役割・モデル・使えるツールを切り替える |
 | Hooks | `.github/hooks/*.json` | ツール実行前後に script を差し込み、deny / log / notify する |

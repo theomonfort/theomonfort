@@ -37,6 +37,7 @@ const sections: Section[] = [
       { label: 'Duplicate the workshop repo in your Organization' },
       { label: 'START THE CODESPACE in advance and ZOOM IN' },
       { label: 'Send a message in Copilot Chat to be able to choose a model' },
+      { label: 'Open a new terminal in CODESPACES' },
       { label: 'Activate Code scanning, Dependabot in Advanced Security' },
       { label: 'Have the AGENDA (This one) / PLAYBOOK / REPOSITORY / CODESPACES open in the browser' },
       { label: 'Have the HANDS-ON tab open on ANOTHER SCREEN' },
@@ -64,11 +65,12 @@ const sections: Section[] = [
   },
   {
     title: 'PLAN',
-    subtitle: 'MCP・スキル・カスタムエージェント',
+    subtitle: 'ハーネスを組む（MCP・Skills・Instructions）',
     color: 'green',
     items: [
       { label: 'Explain CODESPACES : Pre-set, Share environment, Secure (cloud)' },
       { label: 'Explain REPO: Markdown file + assets only' },
+      { label: 'Explain Copilot Chat + Quick demo' },
       { label: 'Explain HARNESS ENGINEERING (SLIDE)' },
       { label: 'Explain MCP (SLIDE) + DEMO (SET UP + VERIFICATION)' },
       { label: 'Explain INSTRUCTIONS (SLIDE) + DEMO 2 INSTRUCTIONS FILES' },
@@ -163,6 +165,16 @@ let counter = 0;
         COPILOT WORKSHOP
       </h1>
     </header>
+
+    <details class="ws-objectives mb-8" open>
+      <summary class="ws-obj-summary flex items-center gap-2 cursor-pointer select-none px-3 py-2">
+        <span class="ws-chevron font-pixel text-[10px] text-crt-amber transition-transform duration-200">▶</span>
+        <span class="font-pixel text-[11px] text-crt-amber tracking-[0.25em]">OBJECTIVES</span>
+      </summary>
+      <p class="ws-obj-body font-pixel-jp text-sm md:text-[15px] text-phosphor/90 leading-relaxed px-4 pb-3 pt-1">
+        Give participants a feel for AI-driven development across the full SDLC, and the various tools available to do it. By the end of the workshop, participants will have a clearer idea of the tools available to code with Copilot and can start applying them to their own work.
+      </p>
+    </details>
 
     <div
       id="ws-progress"
@@ -266,6 +278,15 @@ let counter = 0;
 
   .ws-summary::-webkit-details-marker { display: none; }
   .ws-summary { list-style: none; }
+
+  /* Collapsible objectives panel */
+  .ws-objectives {
+    border: 2px solid rgba(255, 176, 0, 0.5);
+    background: rgba(10, 14, 39, 0.6);
+  }
+  .ws-obj-summary { list-style: none; }
+  .ws-obj-summary::-webkit-details-marker { display: none; }
+  .ws-objectives[open] > .ws-obj-summary .ws-chevron { transform: rotate(90deg); }
   .ws-subtitle {
     font-weight: 400;
     text-transform: none;

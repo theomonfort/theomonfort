@@ -24,7 +24,7 @@ export function isNewPlaybookEntry(slug: string): boolean {
 export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'copilot-code-review': [5, 6],
   'agent-skills': [4],
-  'github': [2, 3, 4, 6],
+  'github': [3, 4, 5, 6],
   'cli': [6, 7],
   'agentic-workflow': [1],
 };

@@ -41,10 +41,10 @@ links:
 
 <div class="hero-quote hero-quote-chat">
   <p>
-    <strong>Codespaces</strong> is a <strong>disposable development environment</strong> hosted in the cloud by GitHub.
+    <strong>Codespaces</strong> is a <strong>ready-to-use, configurable VS Code development environment</strong> hosted in the cloud by GitHub.
   </p>
   <p>
-    Open a browser and a <strong>full development environment with VS Code</strong> spins up in seconds. The first choice when you want to let AI try something out.
+    Open a browser and a <strong>full development environment</strong> spins up in seconds. Ideal for giving <strong>everyone the exact same environment</strong> on repos with many collaborators, or as a <strong>sandbox</strong> to try AI safely.
   </p>
 </div>
 
