@@ -78,19 +78,37 @@ jobs:
           const { join } = require('node:path');
           const ROOT = 'workshop-repo/src/content/playbook';
           // Strip a path-leading /theomonfort/ (asset paths, internal links)
-          // but never the host in github.com/theomonfort/... self-links.
-          const stripBase = (s) => s.replace(/(?<![A-Za-z0-9.\-])\/theomonfort\//g, '/');
+          // but never the host in github.com/theomonfort/... self-links. The
+          // captured boundary char (quote, paren, space, newline, ...) is
+          // re-emitted so only a true path-leading base is removed.
+          const stripBase = (s) => s.replace(/(^|[^A-Za-z0-9.\-])\/theomonfort\//g, '$1/');
+          // Within the YAML frontmatter only, drop any links: entry whose
+          // block references the live site, regardless of field order.
           const dropSiteLinks = (s) => {
-            const lines = s.split('\n');
+            const m = s.match(/^(---\n[\s\S]*?\n---\n)([\s\S]*)$/);
+            if (!m) return s;
+            const fmLines = m[1].split('\n');
+            const body = m[2];
             const out = [];
-            for (let i = 0; i < lines.length; i++) {
-              if (/^\s*-\s*group:/.test(lines[i]) && /theomonfort\.github\.io/.test(lines[i + 2] || '')) {
-                i += 2; // skip the group / label / url lines of this link
-                continue;
+            for (let i = 0; i < fmLines.length; i++) {
+              const line = fmLines[i];
+              if (/^\s*-\s/.test(line)) {
+                const indent = line.match(/^\s*/)[0].length;
+                let j = i + 1;
+                while (
+                  j < fmLines.length &&
+                  fmLines[j].trim() !== '' &&
+                  fmLines[j].match(/^\s*/)[0].length > indent
+                ) j++;
+                const block = fmLines.slice(i, j).join('\n');
+                if (/theomonfort\.github\.io/.test(block)) { i = j - 1; continue; }
+                for (let k = i; k < j; k++) out.push(fmLines[k]);
+                i = j - 1;
+              } else {
+                out.push(line);
               }
-              out.push(lines[i]);
             }
-            return out.join('\n');
+            return out.join('\n') + body;
           };
           const walk = (dir) => {
             for (const e of readdirSync(dir)) {
