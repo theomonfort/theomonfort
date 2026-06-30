@@ -44,6 +44,12 @@ links:
   - group: 📰 Recent Changelog
     label: "Copilot Chat improvements for pull requests (2026-04-23)"
     url: https://github.blog/changelog/2026-04-23-copilot-chat-improvements-for-pull-requests
+  - group: 🤖 Models
+    label: Supported AI models in GitHub Copilot
+    url: https://docs.github.com/copilot/reference/ai-models/supported-models
+  - group: 🤖 Models
+    label: Hosting of models for GitHub Copilot
+    url: https://docs.github.com/copilot/reference/ai-models/model-hosting
 ---
 
 ## In a nutshell
@@ -95,3 +101,18 @@ VS Code's Copilot Chat has built-in skills, prompts, instructions, hooks, MCP se
 | Check tools | Configure Tools button | Choose built-in tools, MCP tools, and extension tools available to the Agent |
 
 > Instructions / Skills / MCP / verification policies created in the PLAN phase are passed here as context and tools to Chat / Agent.
+
+## Models and hosting
+
+In Chat / Agent you can pick from several models. The key point: the **provider that built the model** and **where it actually runs (the host)** are not the same thing. GitHub has agreements with each host so your data is not used for training.
+
+| Model family | Provider (built it) | Where it actually runs (host) |
+| --- | --- | --- |
+| GPT-5.5 / 5.4 / 5.3-Codex / mini / nano | OpenAI | OpenAI and GitHub's Azure |
+| Raptor mini (GPT-5 mini fine-tuned by Microsoft) | OpenAI × Microsoft | GitHub-managed Azure OpenAI tenant |
+| Claude Opus / Sonnet / Haiku | Anthropic | AWS Bedrock / Anthropic PBC / Google Cloud |
+| Gemini 3.1 Pro / 3.5 Flash / 2.5 Pro | Google | Google Cloud Platform (GCP) |
+| MAI-Code-1-Flash | Microsoft (first-party) | Azure (GitHub's tenant) |
+| DeepSeek-V4 / Kimi-K2.6 (open-weight, public preview — rolling out) | DeepSeek / Moonshot AI | Azure AI Foundry / AOAI (via CAPI) |
+
+> Open-weight models appear in the picker under their original names, but they run on **Microsoft Azure AI Foundry**, not the model maker's own infrastructure. They are rolling out in public preview and are default-off for Business / Enterprise (admin enablement required), so they may not yet show in your org's enable list (they arrive first in VS Code and the Copilot CLI). "Whose model it is" and "where it runs" don't always match.

@@ -127,8 +127,8 @@ AI を強くする技術ツールは 1 つではない。**常に読ませるも
 
 | 技術ツール | 置き場所 / 設定 | 使いどころ |
 | --- | --- | --- |
-| Repository-wide custom instructions | `.github/copilot-instructions.md` | リポジトリ全体の規約・禁止事項・検証コマンド |
-| Path-specific custom instructions | `.github/instructions/*.instructions.md` + `applyTo` | `tests/**`、`api/**` など領域別ルール |
+| リポジトリ全体の custom instructions | `.github/copilot-instructions.md` | リポジトリ全体の規約・禁止事項・検証コマンド |
+| パス別の custom instructions | `.github/instructions/*.instructions.md` + `applyTo` | `tests/**`、`api/**` など領域別ルール |
 | Agent skills | `.github/skills/*/SKILL.md` / `~/.copilot/skills/` | PR description、frontend design など専門手順 |
 | Custom agents | `.github/agents/*.agent.md` / `~/.copilot/agents/` | 役割・モデル・使えるツールを切り替える |
 | Hooks | `.github/hooks/*.json` | ツール実行前後に script を差し込み、deny / log / notify する |
@@ -254,7 +254,8 @@ flowchart LR
     <text x="920" y="104" text-anchor="end" font-family="'DotGothic16', monospace" font-size="11.5" letter-spacing="1" fill="#9bbc0f">LOCAL</text>
     <rect x="692" y="166" width="240" height="66" rx="2" fill="#05060f"/>
     <rect x="688" y="162" width="240" height="66" rx="2" fill="#0a0e1f" stroke="#9bbc0f" stroke-width="2"/>
-    <text x="808" y="201" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="19" font-weight="700" fill="#9bbc0f">MCP Context7</text>
+    <text x="808" y="189" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="19" font-weight="700" fill="#9bbc0f">MCP Context7</text>
+    <text x="808" y="211" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="13" fill="#aeb6c2">MCP server</text>
     <text x="920" y="219" text-anchor="end" font-family="'DotGothic16', monospace" font-size="11.5" letter-spacing="1" fill="#9bbc0f">LOCAL</text>
     <rect x="692" y="261" width="240" height="66" rx="2" fill="#05060f"/>
     <rect x="688" y="257" width="240" height="66" rx="2" fill="#0a0e1f" stroke="#ff2e88" stroke-width="2"/>
@@ -267,11 +268,11 @@ flowchart LR
     <text x="808" y="406" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="13" fill="#aeb6c2">Skill</text>
     <text x="920" y="414" text-anchor="end" font-family="'DotGothic16', monospace" font-size="11.5" letter-spacing="1" fill="#ffb000">REPO</text>
     <rect x="692" y="476" width="240" height="66" rx="2" fill="#05060f"/>
-    <rect x="688" y="472" width="240" height="66" rx="2" fill="#0a0e1f" stroke="#ff2e88" stroke-width="2"/>
-    <text x="808" y="499" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="19" font-weight="700" fill="#ff2e88">Playwright</text>
-    <text x="808" y="521" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="13" fill="#aeb6c2">ツール</text>
+    <rect x="688" y="472" width="240" height="66" rx="2" fill="#0a0e1f" stroke="#9bbc0f" stroke-width="2"/>
+    <text x="808" y="499" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="19" font-weight="700" fill="#9bbc0f">MCP Playwright</text>
+    <text x="808" y="521" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="13" fill="#aeb6c2">MCP server</text>
     <text x="920" y="529" text-anchor="end" font-family="'DotGothic16', monospace" font-size="11.5" letter-spacing="1" fill="#9bbc0f">LOCAL</text>
   </svg>
 </div>
 
-> 🟦 Orchestrator / Custom agent ・ ⬜ CLI Built-in ・ 🟩 MCP ・ 🟥 Skill / ツール。`Local` は手元の設定、`Repo` はこのリポジトリ内に置いたもの。
+> 🟦 Orchestrator / Custom agent ・ ⬜ CLI Built-in ・ 🟩 MCP ・ 🟥 Skill。`Local` は手元の設定、`Repo` はこのリポジトリ内に置いたもの。

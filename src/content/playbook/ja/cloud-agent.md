@@ -105,9 +105,9 @@ jobs:
 
 ## MCP サーバーで外部ツールを追加
 
-Cloud Agent には **専用の MCP サーバー設定** がある。ローカルの MCP 設定とは別管理で、ブラウザ上の `Settings → Copilot → Coding agent → MCP servers` から JSON を貼るだけ。設定したサーバーは、その Org / アカウントで起動するすべての Cloud Agent セッションに自動で接続される。
+**GitHub MCP サーバーと Playwright MCP サーバーはデフォルトで有効** — 設定不要ですぐ使える。さらに拡張したい場合、Cloud Agent には **専用の MCP サーバー設定** がある。ローカルの MCP 設定とは別管理で、ブラウザ上の `Settings → Code & automation → Copilot → MCP servers` から JSON を貼るだけ。設定したサーバーは、その Org / アカウントで起動するすべての Cloud Agent セッションに自動で接続される。
 
-**例：Context7 を MCP サーバーとして追加**
+**例：デフォルトに加えて Context7 を追加**
 
 ```json
 {
@@ -120,10 +120,6 @@ Cloud Agent には **専用の MCP サーバー設定** がある。ローカル
   }
 }
 ```
-
-- 🌐 **`type: "http"`** — リモート MCP サーバーに HTTP / SSE で接続(stdio はサンドボックス制約上ローカル子プロセスで起動するもののみ)
-- 🛠️ **`tools: ["*"]`** — そのサーバーが公開する全ツールを許可。特定ツールだけを使いたい場合はホワイトリスト指定可
-- 🔐 認証が必要なサーバーは `headers` で API トークンを渡す(GitHub Actions Secrets を `${{ secrets.* }}` で参照)
 
 > 💡 詳細は <a href="https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/extend-cloud-agent-with-mcp" target="_blank" rel="noopener noreferrer" class="retro-link">Extend Cloud Agent with MCP</a> を参照。
 

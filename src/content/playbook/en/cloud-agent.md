@@ -105,9 +105,9 @@ jobs:
 
 ## Adding External Tools with MCP Servers
 
-Cloud Agent has a **dedicated MCP server configuration**, managed separately from local MCP settings. Just paste JSON at `Settings → Copilot → Coding agent → MCP servers` in the browser. Configured servers are automatically connected to every Cloud Agent session launched under that Org / account.
+The **GitHub MCP server and Playwright MCP server are enabled by default** — no setup needed. To go further, Cloud Agent has a **dedicated MCP server configuration**, managed separately from local MCP settings. Just paste JSON at `Settings → Code & automation → Copilot → MCP servers` in the browser. Configured servers are automatically connected to every Cloud Agent session launched under that Org / account.
 
-**Example: Adding Context7 as an MCP server**
+**Example: Adding Context7 alongside the defaults**
 
 ```json
 {
@@ -120,10 +120,6 @@ Cloud Agent has a **dedicated MCP server configuration**, managed separately fro
   }
 }
 ```
-
-- 🌐 **`type: "http"`** — Connects to a remote MCP server via HTTP / SSE (stdio is only for local child processes launched within the sandbox)
-- 🛠️ **`tools: ["*"]`** — Allows all tools exposed by that server. Can be whitelisted to specific tools if needed
-- 🔐 Servers requiring authentication pass API tokens via `headers` (reference GitHub Actions Secrets with `${{ secrets.* }}`)
 
 > 💡 For details, see <a href="https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/extend-cloud-agent-with-mcp" target="_blank" rel="noopener noreferrer" class="retro-link">Extend Cloud Agent with MCP</a>.
 

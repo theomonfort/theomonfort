@@ -44,6 +44,12 @@ links:
   - group: 📰 Recent Changelog
     label: "Copilot Chat improvements for pull requests (2026-04-23)"
     url: https://github.blog/changelog/2026-04-23-copilot-chat-improvements-for-pull-requests
+  - group: 🤖 Models
+    label: Supported AI models in GitHub Copilot
+    url: https://docs.github.com/copilot/reference/ai-models/supported-models
+  - group: 🤖 Models
+    label: Hosting of models for GitHub Copilot
+    url: https://docs.github.com/copilot/reference/ai-models/model-hosting
 ---
 
 ## 一言で
@@ -95,3 +101,18 @@ VS Code の Copilot Chat には、built-in skills、prompts、instructions、hoo
 | tools を確認 | Configure Tools button | Agent が使える built-in tools、MCP tools、extension tools を選ぶ |
 
 > PLAN パートで作った Instructions / Skills / MCP / 検証方針は、ここで context や tools として Chat / Agent に渡して使う。
+
+## モデルとホスティング
+
+Chat / Agent では複数のモデルを選べる。ポイントは「**作ったプロバイダー**」と「**実際に動く場所（ホスト）**」は別だということ。GitHub は各ホストとデータを学習に使わない契約を結んでいる。
+
+| モデル系統 | 作ったプロバイダー | 実際に動く場所（ホスト） |
+| --- | --- | --- |
+| GPT-5.5 / 5.4 / 5.3-Codex / mini / nano | OpenAI | OpenAI と GitHub の Azure |
+| Raptor mini（GPT-5 mini を Microsoft が fine-tune） | OpenAI × Microsoft | GitHub 管理の Azure OpenAI テナント |
+| Claude Opus / Sonnet / Haiku | Anthropic | AWS Bedrock / Anthropic PBC / Google Cloud |
+| Gemini 3.1 Pro / 3.5 Flash / 2.5 Pro | Google | Google Cloud Platform (GCP) |
+| MAI-Code-1-Flash | Microsoft（自社モデル） | Azure（GitHub テナント） |
+| DeepSeek-V4 / Kimi-K2.6（オープンウェイト, Public Preview・順次提供） | DeepSeek / Moonshot AI | Azure AI Foundry / AOAI（CAPI 経由） |
+
+> オープンウェイトモデルはモデルピッカーに「元の名前のまま」選択肢として登場するが、動くのは提供元ではなく **Microsoft Azure AI Foundry**。Public Preview として順次提供中で、Business / Enterprise では既定でオフ・管理者の有効化が必要なため、組織によってはまだ有効化リストに出ないこともある（まずは VS Code と Copilot CLI から）。「どこの会社のモデルか」と「どこで動くか」は必ずしも一致しない。

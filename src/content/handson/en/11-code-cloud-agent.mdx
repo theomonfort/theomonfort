@@ -14,7 +14,29 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-### 11.1 — Assign an existing Issue to the Cloud Agent
+### 11.1 — Set up the Context7 MCP server for the Cloud Agent
+
+The MCP you set up in Part 3 was **for VS Code**. For the Cloud Agent to use MCP, you need a separate repository-level setting (shared by the Cloud Agent and Copilot Code Review).
+
+1. On github.com, open your repository and click the **Settings** tab.
+2. In the sidebar, go to **Code & automation** → **Copilot** → **MCP servers**.
+3. Paste the following JSON into the **MCP configuration** field and click **Save MCP configuration**.
+
+```json
+{
+  "mcpServers": {
+    "context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp",
+      "tools": ["resolve-library-id", "get-library-docs"]
+    }
+  }
+}
+```
+
+⏱ ~2 min
+
+### 11.2 — Assign an existing Issue to the Cloud Agent
 
 Pick one of the Issues you created in Step 6.5 and let Cloud Agent implement it.
 
@@ -42,13 +64,13 @@ When you assign, you can customize:
 
 **Recommended approach**:
 
-- **Assign Issue 1 and 4 together** — they touch nearby code, so a **merge conflict usually appears** — a chance to try the **Fix with Copilot** resolution shown below.
+- **Assign Issue 1 and 2 together** — they touch nearby code, so a **merge conflict usually appears** — a chance to try the **Fix with Copilot** resolution shown below.
 - **Issue 7 (the TOC design prototypes)** — prototype first, then compare and adopt to refine each component properly.
 - **Leave a few Issues for the CLI** — keep 2–3 unassigned for Part 13 (Copilot CLI).
 
 </Aside>
 
-### 11.2 — Review the PR
+### 11.3 — Review the PR
 
 The PR the Cloud Agent creates is opened as a **Draft**.
 
@@ -64,7 +86,7 @@ The PR the Cloud Agent creates is opened as a **Draft**.
 
 ![Resolving conflicts with Fix with Copilot](/theomonfort/handson/img/fix-conflicts-copilot.png)
 
-### 11.3 — Try it in your Codespace before merging
+### 11.4 — Try it in your Codespace before merging
 
 Before you merge, it's smarter to actually run the Cloud Agent's PR in your Codespace and check it. Check out the PR branch with the `gh` CLI (replace `<PR-number>` with the real PR number).
 

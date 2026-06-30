@@ -41,10 +41,10 @@ links:
 
 <div class="hero-quote hero-quote-chat">
   <p>
-    <strong>Codespaces</strong> は、GitHub がクラウドでホストする <strong>使い捨て可能な開発環境</strong>。
+    <strong>Codespaces</strong> は、GitHub がクラウドでホストする <strong>すぐ使える・設定可能な VS Code 開発環境</strong>。
   </p>
   <p>
-    ブラウザを開けば、数秒で <strong>VS Code 付きのフル開発環境</strong> が立ち上がる。AI に何かを試させたいときの第一選択肢。
+    ブラウザを開けば、数秒で <strong>フル開発環境</strong> が立ち上がる。協働者の多いリポジトリで <strong>全員にまったく同じ環境</strong> を配りたいとき、あるいは AI を安全に試す <strong>サンドボックス</strong> として最適。
   </p>
 </div>
 
