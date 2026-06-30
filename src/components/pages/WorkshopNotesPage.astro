@@ -1,0 +1,562 @@
+---
+import Layout from '../layout/Layout.astro';
+import { type Locale } from '../../lib/i18n';
+
+interface Props {
+  locale?: Locale;
+}
+const { locale = 'ja' } = Astro.props;
+
+const objectivesText =
+  locale === 'en'
+    ? 'Give participants a feel for AI-driven development across the full SDLC, and the various tools available to do it. By the end of the workshop, participants will have a clearer idea of the tools available to code with Copilot and can start applying them to their own work.'
+    : 'このワークショップの狙いは、計画 → 実装 → レビュー → テスト・セキュリティ → 運用という SDLC 全体を通して、AI 駆動開発の感覚と、それを支えるさまざまなツールを体験してもらうこと。終わったあとには、Copilot でコーディングするために使えるツールの全体像がつかめ、自分の仕事に取り入れ始められる状態を目指す。';
+
+type SectionColor = 'magenta' | 'cyan' | 'amber' | 'green';
+
+interface TeamsLink {
+  label: string;
+  url: string;
+}
+interface Item {
+  label: string;
+  teams?: TeamsLink[];
+}
+interface Section {
+  title: string;
+  subtitle?: string;
+  color: SectionColor;
+  items: Item[];
+}
+
+// Section colors mirror the playbook category logic:
+// cyan = Introduction / Test & Secure, green = Plan / Operate,
+// magenta = Develop (Code), amber = Review (and the yellow bookends).
+const COLORS: Record<SectionColor, { text: string; accent: string; hex: string }> = {
+  magenta: { text: 'text-neon-magenta', accent: 'accent-neon-magenta', hex: '#ff2e88' },
+  cyan: { text: 'text-neon-cyan', accent: 'accent-neon-cyan', hex: '#00f0ff' },
+  amber: { text: 'text-crt-amber', accent: 'accent-crt-amber', hex: '#ffb000' },
+  green: { text: 'text-gb-green', accent: 'accent-gb-green', hex: '#9bbc0f' },
+};
+
+const sections: Section[] = [
+  {
+    title: 'PREPARATION',
+    subtitle: '登壇準備',
+    color: 'amber',
+    items: [
+      { label: 'Duplicate the workshop repo in your Organization' },
+      { label: 'START THE CODESPACE in advance and ZOOM IN' },
+      { label: 'Send a message in Copilot Chat to be able to choose a model' },
+      { label: 'Open a new terminal in CODESPACES' },
+      { label: 'Activate Code scanning, Dependabot in Advanced Security' },
+      { label: 'Have the AGENDA (This one) / PLAYBOOK / REPOSITORY / CODESPACES open in the browser' },
+      { label: 'Have the HANDS-ON tab open on ANOTHER SCREEN' },
+      { label: 'TEAM : HIDE the presenter bar, open the chat on ANOTHER SCREEN' },
+    ],
+  },
+  {
+    title: 'INTRODUCTION',
+    subtitle: 'GitHub と Copilot',
+    color: 'cyan',
+    items: [
+      { label: 'Self-introduction' },
+      {
+        label: 'Send following message in Teams',
+        teams: [
+          { label: '本日扱う技術用語と、使用するスライド資料', url: 'https://theomonfort.github.io/theomonfort/playbook/' },
+          { label: 'ハンズオン資料', url: 'https://theomonfort.github.io/theomonfort/handson/intro/' },
+          { label: 'アンケート', url: 'https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbRxfrxixxnh1AkgHlZ0RLul1UNUNIN0tHWlhCSTkxUlJLVVdGM1lPNFJCVi4u' },
+        ],
+      },
+      { label: 'Explain GITHUB (SLIDE)' },
+      { label: 'Explain COPILOT (SLIDE)' },
+      { label: 'Explain HANDS-ON (SLIDE)' },
+    ],
+  },
+  {
+    title: 'PLAN',
+    subtitle: 'ハーネスを組む（MCP・Skills・Instructions）',
+    color: 'green',
+    items: [
+      { label: 'Explain CODESPACES : Pre-set, Share environment, Secure (cloud)' },
+      { label: 'Explain REPO: Markdown file + assets only' },
+      { label: 'Explain Copilot Chat + Quick demo' },
+      { label: 'Explain HARNESS ENGINEERING (SLIDE)' },
+      { label: 'Explain MCP (SLIDE) + DEMO (SET UP + VERIFICATION)' },
+      { label: 'Explain INSTRUCTIONS (SLIDE) + DEMO (SET UP + VERIFICATION IN SETTINGS)' },
+      { label: 'Explain SKILLS + DEMO (SET UP + VERIFICATION)' },
+      { label: 'SUMMARIZE' },
+    ],
+  },
+  {
+    title: 'CODE',
+    subtitle: 'Copilot と同期でコーディング',
+    color: 'magenta',
+    items: [
+      { label: 'Setup AUTOAPPROVE + Opus 4.7' },
+      { label: 'Send PLAN' },
+      { label: 'Explain PROMPT' },
+      { label: 'Explain MODES + tools' },
+      { label: 'Explain HARNESS SETTINGS' },
+      { label: 'TIPS : INLINE REQUEST' },
+      { label: 'Start IMPLEMENT' },
+      { label: 'EXPLAIN CUSTOM AGENT (SLIDES) -> DEMO (SETTING CHECK + SEND PROMPT) + Grill-me (BONUS)' },
+      { label: 'EXPLAIN CONTEXT WINDOWS (SLIDES)' },
+      { label: 'Show Result (20 min later after TEST & SECURE)' },
+      { label: 'SUMMARIZE' },
+    ],
+  },
+  {
+    title: 'CODE REVIEW',
+    subtitle: '自動レビューを設定',
+    color: 'amber',
+    items: [
+      { label: 'Setup automatic CODE REVIEW' },
+      { label: 'Explain CODE REVIEW (SLIDES)' },
+      { label: 'Show CODE REVIEW (in a different repo) (SESSION + ACTION)' },
+    ],
+  },
+  {
+    title: 'TEST & SECURE',
+    subtitle: '脆弱性チェックを設定',
+    color: 'cyan',
+    items: [
+      { label: 'Show CodeQL running' },
+      { label: 'Explain GHAS (SLIDES)' },
+      { label: 'Explain TESTS' },
+    ],
+  },
+  {
+    title: 'CODE',
+    subtitle: 'Copilot と非同期でコーディング',
+    color: 'magenta',
+    items: [
+      { label: 'Create ISSUES' },
+      { label: 'Explain CLOUD AGENT (SLIDES)' },
+      { label: 'Assign COPILOT + CLAUDE' },
+      { label: 'Explain PARTNER AGENT (SLIDES)' },
+      { label: 'Check results' },
+      { label: 'Resolve conflict between PRs' },
+      { label: 'Merge' },
+    ],
+  },
+  {
+    title: 'OPERATE',
+    subtitle: '保守をエージェントワークフローに委任',
+    color: 'green',
+    items: [
+      { label: 'Send AGENTIC WORKFLOW PROMPT' },
+      { label: 'Explain AGENTIC WORKFLOW (SLIDES)' },
+      { label: 'Merge PR + Manually launch it' },
+      { label: 'Check result (In another repo)' },
+      { label: 'Explain TOKEN OPTIMIZATION (SLIDES)' },
+    ],
+  },
+  {
+    title: 'BONUS',
+    subtitle: 'CLI と Copilot アプリ',
+    color: 'amber',
+    items: [
+      { label: 'CLI VS Visual Studio Code' },
+      { label: 'GitHub Copilot App' },
+    ],
+  },
+];
+
+const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
+let counter = 0;
+---
+
+<Layout locale={locale} currentPath="/ws" title="Workshop Presenter Notes">
+  <section class="max-w-3xl mx-auto px-4 py-12 md:py-16">
+    <header class="mb-8 text-center">
+      <p class="font-pixel text-[10px] text-crt-amber mb-3 tracking-[0.4em]">PRESENTER ONLY</p>
+      <h1 class="font-pixel text-2xl md:text-4xl text-neon-magenta drop-shadow-[0_0_12px_rgba(255,46,136,0.7)]">
+        COPILOT WORKSHOP
+      </h1>
+    </header>
+
+    <details class="ws-objectives mb-8" open>
+      <summary class="ws-obj-summary flex items-center gap-2 cursor-pointer select-none px-3 py-2">
+        <span class="ws-chevron font-pixel text-[10px] text-crt-amber transition-transform duration-200">▶</span>
+        <span class="font-pixel text-[11px] text-crt-amber tracking-[0.25em]">OBJECTIVES</span>
+      </summary>
+      <p class="ws-obj-body font-pixel-jp text-sm md:text-[15px] text-phosphor/90 leading-relaxed px-4 pb-3 pt-1">
+        {objectivesText}
+      </p>
+    </details>
+
+    <div
+      id="ws-progress"
+      class="sticky top-2 z-20 mb-8 bg-shadow-ink/95 border-2 border-neon-cyan p-4 shadow-neon-cyan backdrop-blur"
+    >
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
+        <span class="font-pixel text-[10px] text-neon-cyan tracking-[0.2em]">PROGRESS</span>
+        <div class="flex items-center gap-2">
+          <span id="ws-count" class="font-pixel text-[10px] text-gb-green mr-1">0 / {totalItems}</span>
+          <button
+            id="ws-expand"
+            type="button"
+            class="font-pixel text-[8px] text-neon-cyan border border-neon-cyan/60 px-2 py-1 hover:bg-neon-cyan hover:text-shadow-ink transition-colors"
+          >
+            EXPAND
+          </button>
+          <button
+            id="ws-collapse"
+            type="button"
+            class="font-pixel text-[8px] text-neon-cyan border border-neon-cyan/60 px-2 py-1 hover:bg-neon-cyan hover:text-shadow-ink transition-colors"
+          >
+            COLLAPSE
+          </button>
+          <button
+            id="ws-reset"
+            type="button"
+            class="font-pixel text-[8px] text-crt-amber border border-crt-amber/60 px-2 py-1 hover:bg-crt-amber hover:text-shadow-ink transition-colors"
+          >
+            RESET
+          </button>
+        </div>
+      </div>
+      <div class="ws-track">
+        <div id="ws-bar" class="ws-bar-fill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="ws-secs" data-total={totalItems}>
+      {sections.map((section, si) => {
+        const c = COLORS[section.color];
+        return (
+          <details class="ws-section" data-section={si} style={`--c:${c.hex}`} open>
+            <summary class={`ws-summary flex items-center gap-3 cursor-pointer select-none px-2 py-2 ${c.text}`}>
+              <span class="ws-node shrink-0" aria-hidden="true"></span>
+              <span class="ws-chevron font-pixel text-[10px] transition-transform duration-200">▶</span>
+              <h2 class="font-pixel-jp text-base md:text-lg font-bold tracking-[0.12em] leading-tight flex-1">
+                <span class="uppercase">{section.title}</span>
+                {section.subtitle && <span class="ws-subtitle"> : {section.subtitle}</span>}
+              </h2>
+              <span class="ws-section-count font-terminal text-base opacity-90">0 / {section.items.length}</span>
+            </summary>
+            <ul class="ws-list ml-[6px] pl-5 py-1 space-y-0.5">
+              {section.items.map((item) => {
+                const id = `ws-${counter++}`;
+                const teamsText = item.teams
+                  ? item.teams.map((t) => `${t.label}\n${t.url}`).join('\n\n')
+                  : '';
+                return (
+                  <li>
+                    <label
+                      class="ws-row group flex items-start gap-3 cursor-pointer px-2 py-2 border border-transparent hover:border-neon-cyan/30 hover:bg-midnight/40 transition-colors"
+                      for={id}
+                    >
+                      <input type="checkbox" id={id} class={`ws-check mt-0.5 h-4 w-4 shrink-0 ${c.accent} cursor-pointer`} />
+                      <span class="ws-label font-pixel-jp text-sm md:text-[15px] text-phosphor/95 leading-snug">
+                        {item.label}
+                      </span>
+                      {item.teams && (
+                        <button type="button" class="ws-copy shrink-0" data-clip={teamsText} aria-label="Copy Teams message">
+                          <span class="ws-copy-icon" aria-hidden="true">📋</span>
+                          <span class="ws-copy-text">Copy</span>
+                        </button>
+                      )}
+                    </label>
+                  </li>
+                );
+              })}
+            </ul>
+          </details>
+        );
+      })}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Progress bar (scoped, robust against Tailwind purge) */
+  .ws-track {
+    height: 8px;
+    background: #0a0e27;
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    overflow: hidden;
+  }
+  .ws-bar-fill {
+    height: 100%;
+    width: 0;
+    background: #9bbc0f;
+    box-shadow: 0 0 8px #9bbc0f, 0 0 24px rgba(155, 188, 15, 0.4);
+    transition: width 0.3s ease;
+  }
+
+  .ws-summary::-webkit-details-marker { display: none; }
+  .ws-summary { list-style: none; }
+
+  /* Collapsible objectives panel */
+  .ws-objectives {
+    border: 2px solid rgba(255, 176, 0, 0.5);
+    background: rgba(10, 14, 39, 0.6);
+  }
+  .ws-obj-summary { list-style: none; }
+  .ws-obj-summary::-webkit-details-marker { display: none; }
+  .ws-objectives[open] > .ws-obj-summary .ws-chevron { transform: rotate(90deg); }
+  .ws-subtitle {
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    opacity: 0.92;
+  }
+
+  /* Copy-to-clipboard button (Teams message) */
+  .ws-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.05rem 0.4rem;
+    font-family: 'DotGothic16', sans-serif;
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--c);
+    background: transparent;
+    border: 1px solid var(--c);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .ws-copy:hover {
+    background: var(--c);
+    color: #05060f;
+    box-shadow: 0 0 8px var(--c), 0 0 24px color-mix(in srgb, var(--c) 40%, transparent);
+  }
+  .ws-copy.is-copied {
+    background: var(--c);
+    color: #05060f;
+  }
+  .ws-copy-icon { font-size: 11px; line-height: 1; }
+  details[open] > .ws-summary .ws-chevron { transform: rotate(90deg); }
+
+  /* Terminal blinking cursor on the open (current) section — from the V4 CRT prototype */
+  details[open] > .ws-summary h2::after {
+    content: '_';
+    margin-left: 0.25rem;
+    color: var(--c);
+    font-weight: 700;
+    animation: ws-blink 1s steps(1) infinite;
+  }
+  @keyframes ws-blink {
+    50% { opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    details[open] > .ws-summary h2::after { animation: none; }
+  }
+
+  /* V7 — Roadmap Spine */
+  .ws-secs {
+    position: relative;
+    padding-left: 1.5rem;
+  }
+  .ws-secs::before {
+    content: '';
+    position: absolute;
+    left: 0.55rem;
+    top: 0.7rem;
+    bottom: 0.7rem;
+    width: 2px;
+    background: linear-gradient(#00f0ff, #ff2e88);
+    opacity: 0.5;
+  }
+  .ws-section {
+    position: relative;
+    margin-bottom: 0.35rem;
+  }
+  .ws-node {
+    position: absolute;
+    left: -1.3rem;
+    top: 1.1rem;
+    width: 14px;
+    height: 14px;
+    background: var(--c);
+    box-shadow: 0 0 8px var(--c);
+    border: 2px solid #05060f;
+  }
+  .ws-list {
+    border-left: 1px dashed color-mix(in srgb, var(--c) 40%, transparent);
+  }
+  .ws-list .ws-label::before {
+    content: '– ';
+    color: var(--c);
+    opacity: 0.7;
+  }
+
+  /* Custom checkbox: fills with the section color when checked */
+  .ws-check {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--c);
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+  }
+  .ws-check:checked {
+    background: var(--c);
+    box-shadow: 0 0 8px var(--c);
+  }
+  .ws-check:checked::after {
+    content: '✓';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    line-height: 1;
+    color: #05060f;
+  }
+
+  /* Checked label dims to gray with a strike-through */
+  .ws-check:checked + .ws-label {
+    color: rgba(232, 244, 255, 0.4);
+    text-decoration: line-through;
+    text-decoration-color: rgba(232, 244, 255, 0.4);
+  }
+  .ws-check:checked + .ws-label::before {
+    color: inherit;
+    opacity: 1;
+  }
+
+  /* Completed section: all items checked -> grey it out */
+  .ws-section.is-complete > .ws-summary {
+    opacity: 0.45;
+    filter: grayscale(0.85);
+    transition: opacity 0.3s ease, filter 0.3s ease;
+  }
+  .ws-section.is-complete > .ws-summary:hover {
+    opacity: 0.75;
+  }
+  .ws-section.is-complete > .ws-summary .ws-node {
+    background: #6b7280;
+    box-shadow: none;
+  }
+  .ws-section.is-complete > .ws-summary h2::after {
+    display: none;
+  }
+</style>
+
+<script>
+  const CHECK_KEY = 'ws-presenter-notes-v1';
+  const OPEN_KEY = 'ws-presenter-open-v1';
+
+  function readJSON(key: string): Record<string, boolean> {
+    try {
+      return JSON.parse(localStorage.getItem(key) || '{}');
+    } catch {
+      return {};
+    }
+  }
+
+  function initWorkshopChecklist() {
+    const container = document.querySelector<HTMLElement>('[data-total]');
+    if (!container) return;
+
+    const checks = Array.from(document.querySelectorAll<HTMLInputElement>('.ws-check'));
+    const sectionEls = Array.from(document.querySelectorAll<HTMLDetailsElement>('.ws-section'));
+    const total = checks.length;
+    const countEl = document.getElementById('ws-count');
+    const barEl = document.getElementById('ws-bar');
+    const resetBtn = document.getElementById('ws-reset');
+    const expandBtn = document.getElementById('ws-expand');
+    const collapseBtn = document.getElementById('ws-collapse');
+
+    let checkState = readJSON(CHECK_KEY);
+    let openState = readJSON(OPEN_KEY);
+
+    const saveChecks = () => localStorage.setItem(CHECK_KEY, JSON.stringify(checkState));
+    const saveOpen = () => localStorage.setItem(OPEN_KEY, JSON.stringify(openState));
+
+    const refreshSection = (section: HTMLDetailsElement) => {
+      const boxes = Array.from(section.querySelectorAll<HTMLInputElement>('.ws-check'));
+      const done = boxes.filter((b) => b.checked).length;
+      const label = section.querySelector('.ws-section-count');
+      if (label) label.textContent = `${done} / ${boxes.length}`;
+      section.classList.toggle('is-complete', boxes.length > 0 && done === boxes.length);
+    };
+
+    const refreshGlobal = () => {
+      const done = checks.filter((c) => c.checked).length;
+      if (countEl) countEl.textContent = `${done} / ${total}`;
+      if (barEl) barEl.style.width = total ? `${(done / total) * 100}%` : '0%';
+    };
+
+    checks.forEach((c) => {
+      c.checked = !!checkState[c.id];
+      c.addEventListener('change', () => {
+        checkState[c.id] = c.checked;
+        saveChecks();
+        const section = c.closest<HTMLDetailsElement>('.ws-section');
+        if (section) refreshSection(section);
+        refreshGlobal();
+      });
+    });
+
+    sectionEls.forEach((section) => {
+      const key = section.dataset.section || '';
+      if (key in openState) section.open = !!openState[key];
+      section.addEventListener('toggle', () => {
+        openState[key] = section.open;
+        saveOpen();
+      });
+      refreshSection(section);
+    });
+
+    resetBtn?.addEventListener('click', () => {
+      checkState = {};
+      saveChecks();
+      checks.forEach((c) => (c.checked = false));
+      sectionEls.forEach(refreshSection);
+      refreshGlobal();
+    });
+
+    const setAll = (open: boolean) => {
+      sectionEls.forEach((section) => {
+        section.open = open;
+        openState[section.dataset.section || ''] = open;
+      });
+      saveOpen();
+    };
+    expandBtn?.addEventListener('click', () => setAll(true));
+    collapseBtn?.addEventListener('click', () => setAll(false));
+
+    const copyBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('.ws-copy'));
+    copyBtns.forEach((btn) => {
+      const original = btn.querySelector('.ws-copy-text')?.textContent || '';
+      btn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const text = btn.dataset.clip || '';
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand('copy'); } catch {}
+          document.body.removeChild(ta);
+        }
+        const labelEl = btn.querySelector('.ws-copy-text');
+        btn.classList.add('is-copied');
+        if (labelEl) labelEl.textContent = 'Copied ✓';
+        window.setTimeout(() => {
+          btn.classList.remove('is-copied');
+          if (labelEl) labelEl.textContent = original;
+        }, 1500);
+      });
+    });
+
+    refreshGlobal();
+  }
+
+  initWorkshopChecklist();
+  document.addEventListener('astro:page-load', initWorkshopChecklist);
+</script>
