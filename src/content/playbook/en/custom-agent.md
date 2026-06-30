@@ -53,11 +53,13 @@ A Custom Agent locks in not just a prompt, but the entire "working style" of an 
 | --- | --- | --- |
 | Identity | What persona to adopt | `Planner`, `Security Reviewer`, `Test Specialist` |
 | Description | When to invoke it | "When creating a plan before implementation" |
-| Tools | Which tools to use | `read`, `search`, `edit`, `github/*` |
+| Tools | Which tools to use | `read`, `search`, `edit`, `agent`, `github/*` |
 | Model | Which model to run on | Strong model for design, fast model for exploration |
 | Target | Which runtime to target | `github-copilot`, `vscode` |
 | MCP | Dedicated external tools | Jira, Figma, Playwright, internal API |
 | Prompt | Decision criteria & output format | Success criteria, restrictions, review focus |
+
+> Add `agent` (aliases `Task` / `custom-agent`) to Tools and the agent can **invoke another Custom Agent** to hand off a task. In other words, an agent can call an agent.
 
 ## Two scopes
 
