@@ -65,6 +65,43 @@ jobs:
             --exclude='/room/' \
             public/ workshop-repo/public/
 
+      - name: Sanitize copied content
+        run: |
+          set -euo pipefail
+          # Strip this repo's /theomonfort deploy base and drop links to the
+          # live playbook site, so the workshop repo gets clean, base-agnostic
+          # content. Only path-leading /theomonfort/ is stripped, so the
+          # workshop self-link (github.com/theomonfort/Github-copilot-workshop)
+          # is preserved.
+          node - <<'NODE'
+          const { readdirSync, readFileSync, writeFileSync, statSync } = require('node:fs');
+          const { join } = require('node:path');
+          const ROOT = 'workshop-repo/src/content/playbook';
+          // Strip a path-leading /theomonfort/ (asset paths, internal links)
+          // but never the host in github.com/theomonfort/... self-links.
+          const stripBase = (s) => s.replace(/(?<![A-Za-z0-9.\-])\/theomonfort\//g, '/');
+          const dropSiteLinks = (s) => {
+            const lines = s.split('\n');
+            const out = [];
+            for (let i = 0; i < lines.length; i++) {
+              if (/^\s*-\s*group:/.test(lines[i]) && /theomonfort\.github\.io/.test(lines[i + 2] || '')) {
+                i += 2; // skip the group / label / url lines of this link
+                continue;
+              }
+              out.push(lines[i]);
+            }
+            return out.join('\n');
+          };
+          const walk = (dir) => {
+            for (const e of readdirSync(dir)) {
+              const p = join(dir, e);
+              if (statSync(p).isDirectory()) walk(p);
+              else if (p.endsWith('.md')) writeFileSync(p, stripBase(dropSiteLinks(readFileSync(p, 'utf8'))));
+            }
+          };
+          walk(ROOT);
+          NODE
+
       - name: Build pull request body
         id: body
         run: |
