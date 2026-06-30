@@ -16,11 +16,11 @@ import Aside from '../../../components/handson/Aside.astro';
 
 ### 11.1 — Set up the Context7 MCP server for the Cloud Agent
 
-Before you assign an Issue, add **Context7** to your repository's MCP configuration so the Cloud Agent can pull in **up-to-date official docs**. This MCP configuration is **repository-level** and is shared by the Cloud Agent and Copilot Code Review (it's separate from the VS Code `.vscode/mcp.json` you set up in Part 3).
+The MCP you set up in Part 3 was **for VS Code**. For the Cloud Agent to use MCP, you need a separate repository-level setting (shared by the Cloud Agent and Copilot Code Review).
 
 1. On github.com, open your repository and click the **Settings** tab.
 2. In the sidebar, go to **Code & automation** → **Copilot** → **MCP servers**.
-3. Paste the following JSON into the **MCP configuration** field:
+3. Paste the following JSON into the **MCP configuration** field and click **Save MCP configuration**.
 
 ```json
 {
@@ -33,14 +33,6 @@ Before you assign an Issue, add **Context7** to your repository's MCP configurat
   }
 }
 ```
-
-4. Click **Save MCP configuration** — your syntax will be validated.
-
-<Aside type="positive">
-
-**Key point**: The GitHub MCP server and Playwright MCP server are enabled by default. Adding Context7 lets the Cloud Agent implement against the latest docs for Astro / Tailwind / TypeScript and more. Context7's HTTP endpoint works without an API key (for MCP servers that need auth, add an Agents secret whose name starts with `COPILOT_MCP_`).
-
-</Aside>
 
 ⏱ ~2 min
 
