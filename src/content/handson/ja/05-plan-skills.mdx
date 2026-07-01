@@ -53,6 +53,12 @@ gh skill install theomonfort/skills hands-on-helper
 
 **⚠️ 重要**: Skill をインストールした後は **Copilot Chat の新しいセッションを開いてください**（`+ New Chat`）。既存セッションには Skill が読み込まれず、後続ステップでうまく召喚されません。
 
+**Copilot Chat のバージョンによっては Skill が読み込まれないことがあります。** その場合は、次の 3 つを順番に試してください：
+
+1. **新しいセッションを開く**（`+ New Chat`）
+2. **ウィンドウを再読み込み**（コマンドパレット → **Developer: Reload Window**）
+3. それでも読み込まれない場合は、**Skill フォルダを `.github/skills/` 配下に移動**すると確実に認識されます（例：`.agents/skills/hands-on-helper/` → `.github/skills/hands-on-helper/`）。
+
 </Aside>
 
 ### 5.2 — hands-on-helper を試す
