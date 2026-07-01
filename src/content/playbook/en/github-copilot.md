@@ -149,7 +149,7 @@ flowchart LR
 ## Secure & Compliant Architecture
 
 **Prompts and generated code** pass through **Copilot Proxy** — designed for safe enterprise use.<br/>
-🔗 See the <a href="https://resources.github.com/en/copilot-trust-center/" target="_blank" rel="noopener noreferrer" class="retro-link">Copilot Trust Center</a> for full details.
+🔗 See the <a href="https://resources.github.com/copilot-trust-center/" target="_blank" rel="noopener noreferrer" class="retro-link">Copilot Trust Center</a> for full details.
 
 ```mermaid
 ---

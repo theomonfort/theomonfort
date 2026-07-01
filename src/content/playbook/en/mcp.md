@@ -244,6 +244,6 @@ The flow to stand up a registry locally, expose it over HTTPS, connect it to my 
 3. **HTTPS tunnel** — `cloudflared tunnel --url http://localhost:8080` → `https://<random>.trycloudflare.com`
 4. **Connect** — set the tunnel URL as **MCP Registry URL** (no `/v0.1/servers` suffix — Copilot appends it). **Org**: Settings → Copilot → **Policies** → MCP; **Enterprise**: **AI controls** → MCP
 5. **Reload VS Code & verify** — Developer: Reload Window → `@mcp` shows only the servers from my registry. Open `Cmd + ,` (Settings) and confirm the MCP settings carry a **“managed by your organization”** badge (= the Org policy is applied)
-6. **Seed from the GitHub Registry** — `go run scripts/mirror_data/fetch_production_data.go` + `load_production_data.go` (source: `https://api.mcp.github.com/v0.1/servers`)
+6. **Seed from the GitHub Registry** — `go run scripts/mirror_data/fetch_production_data.go` + `load_production_data.go` (source: `https://registry.modelcontextprotocol.io/v0/servers`)
 
 > ⚠️ Make sure VS Code uses **this Org's Copilot license** (a different account / personal plan won't get the Org policy). The `mirror_data` scripts are as-is — filter them down to the servers you actually want to allow.
