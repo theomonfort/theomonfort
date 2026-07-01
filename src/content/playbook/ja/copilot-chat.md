@@ -3,13 +3,13 @@ title: Copilot Chat
 titleEn: Copilot Chat
 summary: Copilot と同期的に会話する入口。IDE、GitHub.com、Mobile で使えるが、最も深い harness は IDE 側にある。
 icon: /theomonfort/icons/copilot-chat.png
-color: cyan
+color: magenta
 accent:
-  text: text-neon-cyan
-  border: border-neon-cyan
-  glow: hover:shadow-neon-cyan
-  shadow: shadow-neon-cyan
-  hex: "#00f0ff"
+  text: text-neon-magenta
+  border: border-neon-magenta
+  glow: hover:shadow-neon-magenta
+  shadow: shadow-neon-magenta
+  hex: "#ff2e88"
 order: 3.5
 category: develop
 related: ['mcp', 'instructions', 'cli', 'cloud-agent']

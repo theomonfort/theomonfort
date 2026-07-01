@@ -3,13 +3,13 @@ title: GitHub
 titleEn: GitHub
 summary: The AI-native developer platform used by more than 180 million developers. From Pull Requests to GitHub Copilot, GitHub continues to shape the history of software development.
 icon: /theomonfort/github-white-icon.svg
-color: magenta
+color: cyan
 accent:
-  text: text-neon-magenta
-  border: border-neon-magenta
-  glow: hover:shadow-neon-magenta
-  shadow: shadow-neon-magenta
-  hex: "#ff2e88"
+  text: text-neon-cyan
+  border: border-neon-cyan
+  glow: hover:shadow-neon-cyan
+  shadow: shadow-neon-cyan
+  hex: "#00f0ff"
 order: 1
 category: introduction
 related: ['copilot-chat', 'cloud-agent']

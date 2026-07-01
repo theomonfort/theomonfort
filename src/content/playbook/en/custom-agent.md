@@ -54,12 +54,11 @@ A Custom Agent locks in not just a prompt, but the entire "working style" of an 
 | Identity | What persona to adopt | `Planner`, `Security Reviewer`, `Test Specialist` |
 | Description | When to invoke it | "When creating a plan before implementation" |
 | Tools | Which tools to use | `read`, `search`, `edit`, `agent`, `github/*` |
+| Agents | Which subagents it can delegate to (requires `agent` in `tools`) | `Explore`, `*` |
 | Model | Which model to run on | Strong model for design, fast model for exploration |
 | Target | Which runtime to target | `github-copilot`, `vscode` |
 | MCP | Dedicated external tools | Jira, Figma, Playwright, internal API |
 | Prompt | Decision criteria & output format | Success criteria, restrictions, review focus |
-
-> Add `agent` (aliases `Task` / `custom-agent`) to Tools and the agent can **invoke another Custom Agent** to hand off a task. In other words, an agent can call an agent.
 
 ## Two scopes
 
@@ -234,3 +233,42 @@ When you need a deep dive, have the harness spin up a **subagent**. It does the 
   <text x="1060" y="236" fill="#e8f4ff" font-size="13" font-weight="bold" text-anchor="end">BACK INTO MAIN</text>
 </svg>
 </figure>
+
+## Use the Right LLM for Each Job with Custom Agents
+
+AI models are trained on different data with different architectures. **No single model is best at everything.**
+
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.2em;margin:1.8em 0;">
+<div style="padding:1.4em 1.2em;border:1px solid rgba(155,188,15,0.35);background:rgba(5,6,15,0.5);"><div style="font-size:1.15em;font-weight:bold;color:#e8f4ff;margin-bottom:0.5em;line-height:1.3;">📚 Different Training Data</div><div style="color:rgba(232,244,255,0.65);font-size:0.95em;line-height:1.55;">Models trained on different corpora have different knowledge gaps and strengths.</div></div>
+<div style="padding:1.4em 1.2em;border:1px solid rgba(0,240,255,0.35);background:rgba(5,6,15,0.5);"><div style="font-size:1.15em;font-weight:bold;color:#e8f4ff;margin-bottom:0.5em;line-height:1.3;">⚙️ Different Architectures</div><div style="color:rgba(232,244,255,0.65);font-size:0.95em;line-height:1.55;">Reasoning vs speed vs context window; each model excels at different task types.</div></div>
+<div style="padding:1.4em 1.2em;border:1px solid rgba(255,46,136,0.35);background:rgba(5,6,15,0.5);"><div style="font-size:1.15em;font-weight:bold;color:#e8f4ff;margin-bottom:0.5em;line-height:1.3;">✅ Cross-Validation</div><div style="color:rgba(232,244,255,0.65);font-size:0.95em;line-height:1.55;">Running multiple models on the same task catches bugs one model alone would miss.</div></div>
+<div style="padding:1.4em 1.2em;border:1px solid rgba(255,176,0,0.35);background:rgba(5,6,15,0.5);"><div style="font-size:1.15em;font-weight:bold;color:#e8f4ff;margin-bottom:0.5em;line-height:1.3;">🎯 Cost Optimization</div><div style="color:rgba(232,244,255,0.65);font-size:0.95em;line-height:1.55;">The right model per task won't just be about quality, it'll be about budget.</div></div>
+</div>
+
+> Only Copilot lets enterprises run Claude + Gemini + Codex + Microsoft in one governed, auditable platform.
+
+## What Is the Best Model? ❌
+
+- "What is the best model?" ➡️ **Wrong question**
+- "What is the best model for this job?" ➡️ **Good question**
+
+<table class="compact-table">
+<thead><tr><th>Dev Task</th><th>Best Model Cost/Performance (Example)</th></tr></thead>
+<tbody>
+<tr><td>Writing Requirements</td><td><span style="color:#ffb000">Claude Opus 4.8</span></td></tr>
+<tr><td>Architecture &amp; Design</td><td><span style="color:#ff2e88">Gemini 3.1 Pro</span></td></tr>
+<tr><td>Code Planning</td><td><span style="color:#ffb000">Claude Opus 4.8</span></td></tr>
+<tr><td>Code Generation</td><td><span style="color:#ffb000">Claude Sonnet 4.6</span></td></tr>
+<tr><td>Test Creation</td><td><span style="color:#ffb000">Claude Sonnet 4.6</span></td></tr>
+<tr><td>Code Review</td><td><span style="color:#00f0ff">GPT-5.5 Codex</span></td></tr>
+<tr><td>CI/CD &amp; Automation</td><td><span style="color:#00f0ff">GPT-5.4 Codex</span></td></tr>
+<tr><td>Documentation</td><td><span style="color:#ff2e88">Gemini 3.1 Pro</span></td></tr>
+<tr><td>High Volume &amp; Cost</td><td><span style="color:#9bbc0f">MAI-Code-1-Flash</span></td></tr>
+</tbody>
+</table>
+
+<div style="font-size:0.85em;margin-top:0.6em;letter-spacing:0.05em;">
+<span style="color:#ffb000;font-weight:bold;">● Anthropic</span>&nbsp;&nbsp;<span style="color:#00f0ff;font-weight:bold;">● OpenAI</span>&nbsp;&nbsp;<span style="color:#ff2e88;font-weight:bold;">● Google</span>&nbsp;&nbsp;<span style="color:#9bbc0f;font-weight:bold;">● Microsoft</span>
+</div>
+
+> Sources (benchmarks): <a href="https://www.swebench.com/" target="_blank" rel="noopener noreferrer" class="retro-link">SWE-bench Verified ↗</a> · <a href="https://www.tbench.ai/" target="_blank" rel="noopener noreferrer" class="retro-link">Terminal-Bench ↗</a> · <a href="https://aider.chat/docs/leaderboards/" target="_blank" rel="noopener noreferrer" class="retro-link">Aider Polyglot ↗</a> · <a href="https://lmarena.ai/" target="_blank" rel="noopener noreferrer" class="retro-link">LMArena ↗</a>. Models are examples only and vary by task and preference.

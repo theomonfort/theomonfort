@@ -3,13 +3,13 @@ title: Secret Scanning
 titleEn: Secret Scanning
 summary: コミット・Issue・PR・履歴に紛れ込んだ API キーやトークンを自動検出する GitHub のシークレット検知機能。Push protection でコミット前にブロックも可能。public は無料、push protection は private でも無料。
 icon: /theomonfort/icons/secret-scanning.png
-color: amber
+color: cyan
 accent:
-  text: text-crt-amber
-  border: border-crt-amber
-  glow: hover:shadow-neon-amber
-  shadow: shadow-neon-amber
-  hex: "#ffb000"
+  text: text-neon-cyan
+  border: border-neon-cyan
+  glow: hover:shadow-neon-cyan
+  shadow: shadow-neon-cyan
+  hex: "#00f0ff"
 order: 19.6
 category: secure
 related: ['dependabot', 'github-advanced-security']

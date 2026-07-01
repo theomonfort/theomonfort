@@ -3,13 +3,13 @@ title: Copilot Memory
 titleEn: Copilot Memory
 summary: A mechanism for Copilot to remember and reuse knowledge learned while working in a repository, passing it on to future selves and the whole team. Gets smarter the more you use it.
 icon: /theomonfort/icons/copilot-memory.png
-color: magenta
+color: green
 accent:
-  text: text-neon-magenta
-  border: border-neon-magenta
-  glow: hover:shadow-neon-magenta
-  shadow: shadow-neon-magenta
-  hex: "#ff2e88"
+  text: text-gb-green
+  border: border-gb-green
+  glow: hover:shadow-neon-green
+  shadow: shadow-neon-green
+  hex: "#9bbc0f"
 order: 19
 category: operate
 related: ['cloud-agent', 'copilot-code-review', 'cli', 'instructions']

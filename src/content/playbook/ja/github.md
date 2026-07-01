@@ -3,13 +3,13 @@ title: ギットハブ
 titleEn: GitHub
 summary: 1.8 億人以上の開発者が利用する AI ネイティブの開発者プラットフォーム。Pull Request から GitHub Copilot まで、ソフトウェア開発の歴史を作り続ける。
 icon: /theomonfort/github-white-icon.svg
-color: magenta
+color: cyan
 accent:
-  text: text-neon-magenta
-  border: border-neon-magenta
-  glow: hover:shadow-neon-magenta
-  shadow: shadow-neon-magenta
-  hex: "#ff2e88"
+  text: text-neon-cyan
+  border: border-neon-cyan
+  glow: hover:shadow-neon-cyan
+  shadow: shadow-neon-cyan
+  hex: "#00f0ff"
 order: 1
 category: introduction
 related: ['copilot-chat', 'cloud-agent']
