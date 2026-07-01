@@ -77,7 +77,7 @@ Today, an **agent / harness** with project context and tools stands in front of 
 
 ```mermaid
 flowchart LR
-  Project[You + Project] -->|prompts / instructions / skills / MCP| Agent[The Agent<br/>aka Harness<br/><br/>Copilot Chat<br/>Copilot CLI<br/>Cloud Agent<br/>Claude Code<br/>Codex]
+  Project[You + Project] -->|prompts / instructions / skills / MCP| Agent[The Agent<br/>aka Harness<br/><br/>Copilot Chat<br/>Copilot CLI<br/>Claude Code<br/>Codex]
   Agent -->|answer / PR / edit| Project
   Agent -->|context| LLM[The LLM]
   LLM -->|next step| Agent
