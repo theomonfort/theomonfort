@@ -3,13 +3,13 @@ title: Copilot App
 titleEn: Copilot App
 summary: A purpose-built desktop app for agent-driven development. Run multiple agents in parallel and handle issue triage, implementation, review, and merge in one place—without bouncing between IDE, terminal, and browser.
 icon: /theomonfort/github-copilot-white-icon.png
-color: cyan
+color: magenta
 accent:
-  text: text-neon-cyan
-  border: border-neon-cyan
-  glow: hover:shadow-neon-cyan
-  shadow: shadow-neon-cyan
-  hex: "#00f0ff"
+  text: text-neon-magenta
+  border: border-neon-magenta
+  glow: hover:shadow-neon-magenta
+  shadow: shadow-neon-magenta
+  hex: "#ff2e88"
 order: 16.7
 category: develop
 related: ['cloud-agent', 'cli', 'partner-agent', 'agentic-workflow']

@@ -3,13 +3,13 @@ title: Instructions
 titleEn: Instructions
 summary: Persistent rule files that give AI standing development guidelines at the repository or file level, so every teammate's Copilot follows the same conventions.
 icon: /theomonfort/icons/instructions.png
-color: amber
+color: green
 accent:
-  text: text-crt-amber
-  border: border-crt-amber
-  glow: hover:shadow-neon-amber
-  shadow: shadow-neon-amber
-  hex: "#ffb000"
+  text: text-gb-green
+  border: border-gb-green
+  glow: hover:shadow-neon-green
+  shadow: shadow-neon-green
+  hex: "#9bbc0f"
 order: 5
 category: plan
 related: ['agent-skills']

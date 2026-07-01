@@ -3,13 +3,13 @@ title: Copilot App
 titleEn: Copilot App
 summary: エージェント駆動開発のための専用デスクトップアプリ。複数のエージェントを並列で走らせ、Issue 探索から実装・レビュー・マージまでを IDE / ターミナル / ブラウザを行き来せず 1 か所で回す"司令塔"。
 icon: /theomonfort/github-copilot-white-icon.png
-color: cyan
+color: magenta
 accent:
-  text: text-neon-cyan
-  border: border-neon-cyan
-  glow: hover:shadow-neon-cyan
-  shadow: shadow-neon-cyan
-  hex: "#00f0ff"
+  text: text-neon-magenta
+  border: border-neon-magenta
+  glow: hover:shadow-neon-magenta
+  shadow: shadow-neon-magenta
+  hex: "#ff2e88"
 order: 16.7
 category: develop
 related: ['cloud-agent', 'cli', 'partner-agent', 'agentic-workflow']

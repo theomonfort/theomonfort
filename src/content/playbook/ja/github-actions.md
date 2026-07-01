@@ -3,13 +3,13 @@ title: GitHub Actions
 titleEn: GitHub Actions
 summary: GitHub にネイティブ統合された CI/CD・自動化プラットフォーム。.github/workflows/*.yml に書いた手順を push / PR / schedule で自動実行する。public は無料、private は無料枠 + 従量課金。Cloud Agent や Copilot Code Review もこの上で動く。
 icon: /theomonfort/icons/github-actions.svg
-color: amber
+color: cyan
 accent:
-  text: text-crt-amber
-  border: border-crt-amber
-  glow: hover:shadow-neon-amber
-  shadow: shadow-neon-amber
-  hex: "#ffb000"
+  text: text-neon-cyan
+  border: border-neon-cyan
+  glow: hover:shadow-neon-cyan
+  shadow: shadow-neon-cyan
+  hex: "#00f0ff"
 order: 19.2
 category: secure
 related: ['cloud-agent', 'copilot-code-review', 'agentic-workflow', 'dependabot']

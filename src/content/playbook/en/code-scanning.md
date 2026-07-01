@@ -3,13 +3,13 @@ title: Code Scanning
 titleEn: Code Scanning
 summary: CodeQL statically analyzes source code for vulnerabilities, and Copilot Autofix generates fix PRs automatically. Default setup requires no config file — just one click. Free for public repos; private repos need GHAS / Code Security.
 icon: /theomonfort/icons/code-scanning.png
-color: amber
+color: cyan
 accent:
-  text: text-crt-amber
-  border: border-crt-amber
-  glow: hover:shadow-neon-amber
-  shadow: shadow-neon-amber
-  hex: "#ffb000"
+  text: text-neon-cyan
+  border: border-neon-cyan
+  glow: hover:shadow-neon-cyan
+  shadow: shadow-neon-cyan
+  hex: "#00f0ff"
 order: 19.4
 category: secure
 related: ['github-advanced-security', 'dependabot', 'secret-scanning']

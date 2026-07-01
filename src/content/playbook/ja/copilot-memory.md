@@ -3,13 +3,13 @@ title: Copilot Memory（エージェント記憶）
 titleEn: Copilot Memory
 summary: Copilotがリポジトリで作業しながら学んだ知識を記憶し、未来の自分・チーム全員に引き継ぐ仕組み。使うほど賢くなる。
 icon: /theomonfort/icons/copilot-memory.png
-color: magenta
+color: green
 accent:
-  text: text-neon-magenta
-  border: border-neon-magenta
-  glow: hover:shadow-neon-magenta
-  shadow: shadow-neon-magenta
-  hex: "#ff2e88"
+  text: text-gb-green
+  border: border-gb-green
+  glow: hover:shadow-neon-green
+  shadow: shadow-neon-green
+  hex: "#9bbc0f"
 order: 19
 category: operate
 related: ['cloud-agent', 'copilot-code-review', 'cli', 'instructions']

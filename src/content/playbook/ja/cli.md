@@ -3,13 +3,13 @@ title: Copilot CLI
 titleEn: Copilot CLI
 summary: ターミナルに住むCopilot。IDEを選ばず、計画→実装→レビューを Shift+Tab だけで往復する"端末の中の同僚"。
 icon: /theomonfort/icons/cli.png
-color: cyan
+color: magenta
 accent:
-  text: text-neon-cyan
-  border: border-neon-cyan
-  glow: hover:shadow-neon-cyan
-  shadow: shadow-neon-cyan
-  hex: "#00f0ff"
+  text: text-neon-magenta
+  border: border-neon-magenta
+  glow: hover:shadow-neon-magenta
+  shadow: shadow-neon-magenta
+  hex: "#ff2e88"
 order: 14
 category: develop
 related: ['agent-skills', 'mcp', 'custom-agent', 'cloud-agent']
