@@ -244,19 +244,23 @@ flowchart LR
     <text x="499" y="169" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="19" font-weight="700" fill="#00f0ff">planner</text>
     <text x="499" y="191" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="13" fill="#aeb6c2">Custom agent</text>
     <text x="616" y="201" text-anchor="end" font-family="'DotGothic16', monospace" font-size="11.5" letter-spacing="1" fill="#9bbc0f">LOCAL</text>
+    <text x="382" y="201" text-anchor="start" font-family="'DotGothic16', monospace" font-size="11.5" letter-spacing="0.5" fill="#ffb000">Opus 4.8</text>
     <rect x="378" y="259" width="250" height="70" rx="2" fill="#05060f"/>
     <rect x="374" y="255" width="250" height="70" rx="2" fill="#0a0e1f" stroke="#8b949e" stroke-width="2"/>
     <text x="499" y="284" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="19" font-weight="700" fill="#d0d7de">Coding</text>
     <text x="499" y="306" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="13" fill="#aeb6c2">CLI Built-in Agents</text>
+    <text x="382" y="316" text-anchor="start" font-family="'DotGothic16', monospace" font-size="11.5" letter-spacing="0.5" fill="#ffb000">Opus 4.8</text>
     <rect x="378" y="374" width="250" height="70" rx="2" fill="#05060f"/>
     <rect x="374" y="370" width="250" height="70" rx="2" fill="#0a0e1f" stroke="#00f0ff" stroke-width="2"/>
     <text x="499" y="399" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="19" font-weight="700" fill="#00f0ff">Tester</text>
     <text x="499" y="421" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="13" fill="#aeb6c2">Custom agent</text>
     <text x="616" y="431" text-anchor="end" font-family="'DotGothic16', monospace" font-size="11.5" letter-spacing="1" fill="#9bbc0f">LOCAL</text>
+    <text x="382" y="431" text-anchor="start" font-family="'DotGothic16', monospace" font-size="11.5" letter-spacing="0.5" fill="#ffb000">GPT-5.5</text>
     <rect x="378" y="489" width="250" height="70" rx="2" fill="#05060f"/>
     <rect x="374" y="485" width="250" height="70" rx="2" fill="#0a0e1f" stroke="#8b949e" stroke-width="2"/>
     <text x="499" y="514" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="19" font-weight="700" fill="#d0d7de">Review</text>
     <text x="499" y="536" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="13" fill="#aeb6c2">CLI Built-in · Rubber Duck</text>
+    <text x="382" y="546" text-anchor="start" font-family="'DotGothic16', monospace" font-size="11.5" letter-spacing="0.5" fill="#ffb000">GPT系</text>
     <rect x="692" y="51" width="240" height="66" rx="2" fill="#05060f"/>
     <rect x="688" y="47" width="240" height="66" rx="2" fill="#0a0e1f" stroke="#ff2e88" stroke-width="2"/>
     <text x="808" y="74" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="19" font-weight="700" fill="#ff2e88">Grill-me</text>
