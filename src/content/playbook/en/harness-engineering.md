@@ -89,7 +89,7 @@ config:
 flowchart LR
   Project[You + Project] -->|prompts / instructions / skills / MCP| Agent[The Agent<br/>aka Harness<br/><br/>Copilot Chat<br/>Copilot CLI<br/>Claude Code<br/>Codex]
   Agent -->|answer / PR / edit| Project
-  Agent -->|context| LLM["<b>LLM</b><div class='llm-row'><img src='/theomonfort/llm-openai.png'/><img src='/theomonfort/llm-anthropic.svg'/><img src='/theomonfort/llm-gemini.png'/><img src='/theomonfort/llm-grok.png'/><img class='ms-ico' src='/theomonfort/llm-microsoft.svg'/></div>"]
+  Agent -->|context| LLM["<b>LLM</b><div class='llm-row'><img src='/theomonfort/llm-openai.png' alt=''/><img src='/theomonfort/llm-anthropic.svg' alt=''/><img src='/theomonfort/llm-gemini.png' alt=''/><img src='/theomonfort/llm-grok.png' alt=''/><img class='ms-ico' src='/theomonfort/llm-microsoft.svg' alt=''/></div>"]
   LLM -->|next step| Agent
   Agent -->|tool call| Tools[Tools<br/>read / edit / run]
   Tools -->|result| Agent

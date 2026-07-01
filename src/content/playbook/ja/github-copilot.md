@@ -165,8 +165,8 @@ config:
 ---
 flowchart LR
   Dev["👤 開発者"]
-  Proxy["<img class='proxy-ico' src='/theomonfort/github-copilot-white-icon.png'/><b>Copilot Proxy</b>"]
-  LLM["<b>LLM プロバイダー</b><div class='llm-row'><img src='/theomonfort/llm-openai.png'/><img src='/theomonfort/llm-anthropic.svg'/><img src='/theomonfort/llm-gemini.png'/><img src='/theomonfort/llm-grok.png'/><img class='ms-ico' src='/theomonfort/llm-microsoft.svg'/></div>"]
+  Proxy["<img class='proxy-ico' src='/theomonfort/github-copilot-white-icon.png' alt=''/><b>Copilot Proxy</b>"]
+  LLM["<b>LLM プロバイダー</b><div class='llm-row'><img src='/theomonfort/llm-openai.png' alt=''/><img src='/theomonfort/llm-anthropic.svg' alt=''/><img src='/theomonfort/llm-gemini.png' alt=''/><img src='/theomonfort/llm-grok.png' alt=''/><img class='ms-ico' src='/theomonfort/llm-microsoft.svg' alt=''/></div>"]
 
   Dev -->|"文脈"| Proxy
   Proxy -->|"生成提案"| Dev

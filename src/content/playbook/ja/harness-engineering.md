@@ -89,7 +89,7 @@ config:
 flowchart LR
   Project[ユーザー] -->|プロンプト / 指示書 / スキル / MCP| Agent[エージェント<br/>別名：ハーネス<br/><br/>Copilot Chat<br/>Copilot CLI<br/>Claude Code<br/>Codex]
   Agent -->|回答 / PR / 編集| Project
-  Agent -->|コンテキスト| LLM["<b>LLM</b><div class='llm-row'><img src='/theomonfort/llm-openai.png'/><img src='/theomonfort/llm-anthropic.svg'/><img src='/theomonfort/llm-gemini.png'/><img src='/theomonfort/llm-grok.png'/><img class='ms-ico' src='/theomonfort/llm-microsoft.svg'/></div>"]
+  Agent -->|コンテキスト| LLM["<b>LLM</b><div class='llm-row'><img src='/theomonfort/llm-openai.png' alt=''/><img src='/theomonfort/llm-anthropic.svg' alt=''/><img src='/theomonfort/llm-gemini.png' alt=''/><img src='/theomonfort/llm-grok.png' alt=''/><img class='ms-ico' src='/theomonfort/llm-microsoft.svg' alt=''/></div>"]
   LLM -->|次の一手| Agent
   Agent -->|ツール呼び出し| Tools[ツール群<br/>読む / 編集 / 実行]
   Tools -->|結果| Agent
