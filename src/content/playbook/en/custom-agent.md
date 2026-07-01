@@ -238,7 +238,7 @@ When you need a deep dive, have the harness spin up a **subagent**. It does the 
 
 AI models are trained on different data with different architectures. **No single model is best at everything.**
 
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2em;margin:1.8em 0;">
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.2em;margin:1.8em 0;">
 <div style="padding:1.4em 1.2em;border:1px solid rgba(155,188,15,0.35);background:rgba(5,6,15,0.5);"><div style="font-size:1.15em;font-weight:bold;color:#e8f4ff;margin-bottom:0.5em;line-height:1.3;">📚 Different Training Data</div><div style="color:rgba(232,244,255,0.65);font-size:0.95em;line-height:1.55;">Models trained on different corpora have different knowledge gaps and strengths.</div></div>
 <div style="padding:1.4em 1.2em;border:1px solid rgba(0,240,255,0.35);background:rgba(5,6,15,0.5);"><div style="font-size:1.15em;font-weight:bold;color:#e8f4ff;margin-bottom:0.5em;line-height:1.3;">⚙️ Different Architectures</div><div style="color:rgba(232,244,255,0.65);font-size:0.95em;line-height:1.55;">Reasoning vs speed vs context window; each model excels at different task types.</div></div>
 <div style="padding:1.4em 1.2em;border:1px solid rgba(255,46,136,0.35);background:rgba(5,6,15,0.5);"><div style="font-size:1.15em;font-weight:bold;color:#e8f4ff;margin-bottom:0.5em;line-height:1.3;">✅ Cross-Validation</div><div style="color:rgba(232,244,255,0.65);font-size:0.95em;line-height:1.55;">Running multiple models on the same task catches bugs one model alone would miss.</div></div>
