@@ -233,3 +233,19 @@ When you need a deep dive, have the harness spin up a **subagent**. It does the 
   <text x="1060" y="236" fill="#e8f4ff" font-size="13" font-weight="bold" text-anchor="end">BACK INTO MAIN</text>
 </svg>
 </figure>
+
+## Use the Right LLM for Each Job with Custom Agents
+
+AI models are trained on different data with different architectures. **No single model is best at everything.**
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2em;margin:1.8em 0;">
+<div style="padding:1.4em 1.2em;border:1px solid rgba(155,188,15,0.35);background:rgba(5,6,15,0.5);"><div style="font-size:1.15em;font-weight:bold;color:#e8f4ff;margin-bottom:0.5em;line-height:1.3;">📚 Different Training Data</div><div style="color:rgba(232,244,255,0.65);font-size:0.95em;line-height:1.55;">Models trained on different corpora have different knowledge gaps and strengths.</div></div>
+<div style="padding:1.4em 1.2em;border:1px solid rgba(0,240,255,0.35);background:rgba(5,6,15,0.5);"><div style="font-size:1.15em;font-weight:bold;color:#e8f4ff;margin-bottom:0.5em;line-height:1.3;">⚙️ Different Architectures</div><div style="color:rgba(232,244,255,0.65);font-size:0.95em;line-height:1.55;">Reasoning vs speed vs context window; each model excels at different task types.</div></div>
+<div style="padding:1.4em 1.2em;border:1px solid rgba(255,46,136,0.35);background:rgba(5,6,15,0.5);"><div style="font-size:1.15em;font-weight:bold;color:#e8f4ff;margin-bottom:0.5em;line-height:1.3;">✅ Cross-Validation</div><div style="color:rgba(232,244,255,0.65);font-size:0.95em;line-height:1.55;">Running multiple models on the same task catches bugs one model alone would miss.</div></div>
+<div style="padding:1.4em 1.2em;border:1px solid rgba(255,176,0,0.35);background:rgba(5,6,15,0.5);"><div style="font-size:1.15em;font-weight:bold;color:#e8f4ff;margin-bottom:0.5em;line-height:1.3;">🎯 Cost Optimization</div><div style="color:rgba(232,244,255,0.65);font-size:0.95em;line-height:1.55;">The right model per task won't just be about quality, it'll be about budget.</div></div>
+</div>
+
+<div style="margin:1.6em 0 0.5em;padding:1.2em 1.4em;border:2px solid #9bbc0f;background:rgba(155,188,15,0.06);box-shadow:0 0 16px rgba(155,188,15,0.3);text-align:center;">
+<div style="font-size:1.25em;font-weight:bold;color:#9bbc0f;margin-bottom:0.35em;">GitHub Copilot = The Orchestration Layer</div>
+<div style="color:rgba(232,244,255,0.8);font-size:0.95em;line-height:1.5;">Only Copilot lets enterprises run Claude + Gemini + Codex + Microsoft in one governed, auditable platform.</div>
+</div>
