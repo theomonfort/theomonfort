@@ -121,6 +121,19 @@ GitHub の歩みを振り返れば、現在地が見えてくる ──
 SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ → 運用** を、すべて GitHub 上の AI が一気通貫で支える。
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
+<div class="plat-toggle">
+  <button type="button" data-f="all" class="on">すべて</button>
+  <button type="button" data-f="cop">🤖 Copilot</button>
+  <button type="button" data-f="nat">その他</button>
+</div>
+<style>
+.plat-toggle{display:flex;gap:.6em;justify-content:center;margin-bottom:1em;flex-wrap:wrap}
+.plat-toggle button{font-family:'DotGothic16',monospace;background:#0a0e27;color:#e8f4ff;border:2px solid #2a3050;padding:.35em 1em;cursor:pointer;font-size:.95em}
+.plat-toggle button.on{border-color:#9bbc0f;color:#9bbc0f;box-shadow:0 0 8px #9bbc0f}
+.rpi-pipeline .plat-item{transition:opacity .25s}
+.rpi-pipeline.f-cop .plat-item[data-cop="0"]{opacity:.1}
+.rpi-pipeline.f-nat .plat-item[data-cop="1"]{opacity:.1}
+</style>
 <svg viewBox="0 0 1080 510" xmlns="http://www.w3.org/2000/svg"
      shape-rendering="crispEdges"
      style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
@@ -134,14 +147,16 @@ SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ
     <text x="112" y="67" text-anchor="middle" fill="#9bbc0f" font-size="18" font-weight="bold">▮ PLAN</text>
     <line x1="22" y1="100" x2="202" y2="100" stroke="#9bbc0f" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
     <g>
-      <rect x="22" y="118" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="112" y="146" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ GitHub Projects</text>
-      <rect x="22" y="178" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="112" y="206" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Issues/Discussions</text>
-      <rect x="22" y="238" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="112" y="266" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Plan mode</text>
-      <rect x="22" y="298" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="112" y="326" text-anchor="middle" fill="#e8f4ff" font-size="12">▶ Skills/Instructions ...</text>
+      <g class="plat-item" data-cop="0"><rect x="22" y="118" width="180" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+      <text x="112" y="143" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ GitHub Projects</text></g>
+      <g class="plat-item" data-cop="0"><rect x="22" y="166" width="180" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+      <text x="112" y="191" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Issues/Discussions</text></g>
+      <g class="plat-item" data-cop="1"><rect x="22" y="214" width="180" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+      <text x="112" y="239" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Plan mode</text></g>
+      <g class="plat-item" data-cop="1"><rect x="22" y="262" width="180" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+      <text x="112" y="287" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ MCP</text></g>
+      <g class="plat-item" data-cop="1"><rect x="22" y="310" width="180" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+      <text x="112" y="335" text-anchor="middle" fill="#e8f4ff" font-size="12">▶ Skills/Instructions ...</text></g>
     </g>
   </g>
   <!-- ── Card 2: CODE ── magenta ────────────────────────────────────── -->
@@ -153,14 +168,16 @@ SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ
     <text x="326" y="67" text-anchor="middle" fill="#ff2e88" font-size="18" font-weight="bold">▮ CODE</text>
     <line x1="236" y1="100" x2="416" y2="100" stroke="#ff2e88" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
     <g>
-      <rect x="236" y="118" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
-      <text x="326" y="146" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Copilot Chat</text>
-      <rect x="236" y="178" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
-      <text x="326" y="206" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Cloud Agent</text>
-      <rect x="236" y="238" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
-      <text x="326" y="266" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ CLI</text>
-      <rect x="236" y="298" width="180" height="44" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
-      <text x="326" y="326" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Codespaces</text>
+      <g class="plat-item" data-cop="1"><rect x="236" y="118" width="180" height="38" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
+      <text x="326" y="143" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Copilot Chat</text></g>
+      <g class="plat-item" data-cop="1"><rect x="236" y="166" width="180" height="38" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
+      <text x="326" y="191" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Cloud Agent</text></g>
+      <g class="plat-item" data-cop="1"><rect x="236" y="214" width="180" height="38" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
+      <text x="326" y="239" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ CLI</text></g>
+      <g class="plat-item" data-cop="1"><rect x="236" y="262" width="180" height="38" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
+      <text x="326" y="287" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Copilot App</text></g>
+      <g class="plat-item" data-cop="0"><rect x="236" y="310" width="180" height="38" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
+      <text x="326" y="335" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Codespaces</text></g>
     </g>
   </g>
   <!-- ── Card 3: REVIEW ── amber ─────────────────────────────────── -->
@@ -172,14 +189,14 @@ SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ
     <text x="540" y="67" text-anchor="middle" fill="#ffb000" font-size="18" font-weight="bold">▮ REVIEW</text>
     <line x1="450" y1="100" x2="630" y2="100" stroke="#ffb000" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
     <g>
-      <rect x="450" y="118" width="180" height="44" fill="#0e1430" stroke="#ffb000" stroke-width="2"/>
-      <text x="540" y="146" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Pull Requests</text>
-      <rect x="450" y="178" width="180" height="44" fill="#0e1430" stroke="#ffb000" stroke-width="2"/>
-      <text x="540" y="206" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Code Review</text>
-      <rect x="450" y="238" width="180" height="44" fill="#0e1430" stroke="#ffb000" stroke-width="2"/>
-      <text x="540" y="266" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Playwright</text>
-      <rect x="450" y="298" width="180" height="44" fill="#0e1430" stroke="#ffb000" stroke-width="2"/>
-      <text x="540" y="326" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Rubber Duck</text>
+      <g class="plat-item" data-cop="0"><rect x="450" y="118" width="180" height="44" fill="#0e1430" stroke="#ffb000" stroke-width="2"/>
+      <text x="540" y="146" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Pull Requests</text></g>
+      <g class="plat-item" data-cop="1"><rect x="450" y="178" width="180" height="44" fill="#0e1430" stroke="#ffb000" stroke-width="2"/>
+      <text x="540" y="206" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Code Review</text></g>
+      <g class="plat-item" data-cop="1"><rect x="450" y="238" width="180" height="44" fill="#0e1430" stroke="#ffb000" stroke-width="2"/>
+      <text x="540" y="266" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Playwright</text></g>
+      <g class="plat-item" data-cop="1"><rect x="450" y="298" width="180" height="44" fill="#0e1430" stroke="#ffb000" stroke-width="2"/>
+      <text x="540" y="326" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Rubber Duck</text></g>
     </g>
   </g>
   <!-- ── Card 4: TEST &amp; SECURE ── cyan ──────────────────────── -->
@@ -191,14 +208,16 @@ SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ
     <text x="754" y="67" text-anchor="middle" fill="#00f0ff" font-size="15" font-weight="bold">▮ TEST &amp; SECURE</text>
     <line x1="664" y1="100" x2="844" y2="100" stroke="#00f0ff" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
     <g>
-      <rect x="664" y="118" width="180" height="44" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
-      <text x="754" y="146" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Actions</text>
-      <rect x="664" y="178" width="180" height="44" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
-      <text x="754" y="206" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Autofix</text>
-      <rect x="664" y="238" width="180" height="44" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
-      <text x="754" y="266" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Code Quality</text>
-      <rect x="664" y="298" width="180" height="44" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
-      <text x="754" y="326" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Agentic Workflows</text>
+      <g class="plat-item" data-cop="0"><rect x="664" y="118" width="180" height="38" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
+      <text x="754" y="143" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Actions</text></g>
+      <g class="plat-item" data-cop="1"><rect x="664" y="166" width="180" height="38" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
+      <text x="754" y="191" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Autofix</text></g>
+      <g class="plat-item" data-cop="0"><rect x="664" y="214" width="180" height="38" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
+      <text x="754" y="239" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Code Quality</text></g>
+      <g class="plat-item" data-cop="0"><rect x="664" y="262" width="180" height="38" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
+      <text x="754" y="287" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Code Scanning</text></g>
+      <g class="plat-item" data-cop="0"><rect x="664" y="310" width="180" height="38" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
+      <text x="754" y="335" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Secret Scanning</text></g>
     </g>
   </g>
   <!-- ── Card 5: OPERATE ── green ──────────────────────────────── -->
@@ -210,14 +229,16 @@ SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ
     <text x="968" y="67" text-anchor="middle" fill="#9bbc0f" font-size="18" font-weight="bold">▮ OPERATE</text>
     <line x1="878" y1="100" x2="1058" y2="100" stroke="#9bbc0f" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
     <g>
-      <rect x="878" y="118" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="968" y="146" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Metrics</text>
-      <rect x="878" y="178" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="968" y="206" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Copilot Memory</text>
-      <rect x="878" y="238" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="968" y="266" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Agentic Workflows</text>
-      <rect x="878" y="298" width="180" height="44" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="968" y="326" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Copilot Metrics</text>
+      <g class="plat-item" data-cop="1"><rect x="878" y="118" width="180" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+      <text x="968" y="143" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Agentic Workflows</text></g>
+      <g class="plat-item" data-cop="1"><rect x="878" y="166" width="180" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+      <text x="968" y="191" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Copilot Memory</text></g>
+      <g class="plat-item" data-cop="1"><rect x="878" y="214" width="180" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+      <text x="968" y="239" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Copilot Metrics</text></g>
+      <g class="plat-item" data-cop="0"><rect x="878" y="262" width="180" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+      <text x="968" y="287" text-anchor="middle" fill="#e8f4ff" font-size="12">▶ REST/GraphQL API</text></g>
+      <g class="plat-item" data-cop="0"><rect x="878" y="310" width="180" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
+      <text x="968" y="335" text-anchor="middle" fill="#e8f4ff" font-size="11">▶ Packages/Registry</text></g>
     </g>
   </g>
   <!-- ── scanline overlay (subtle CRT vibe) ──────────────────────── -->
@@ -232,6 +253,21 @@ SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ
   </g>
 </svg>
 </figure>
+<script>
+(function(){
+  var fig=document.currentScript.previousElementSibling;
+  while(fig&&!fig.classList.contains('rpi-pipeline'))fig=fig.previousElementSibling;
+  if(!fig)return;
+  var btns=fig.querySelectorAll('.plat-toggle button');
+  btns.forEach(function(b){b.addEventListener('click',function(){
+    fig.classList.remove('f-cop','f-nat');
+    if(b.dataset.f==='cop')fig.classList.add('f-cop');
+    if(b.dataset.f==='nat')fig.classList.add('f-nat');
+    btns.forEach(function(x){x.classList.remove('on');});
+    b.classList.add('on');
+  });});
+})();
+</script>
 
 ## 数字で見る GitHub
 
