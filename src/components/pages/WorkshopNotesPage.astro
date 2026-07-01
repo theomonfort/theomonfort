@@ -263,6 +263,11 @@ let counter = 0;
                 const teamsText = item.teams
                   ? item.teams.map((t) => `${t.label}\n${t.url}`).join('\n\n')
                   : '';
+                const stepKind = /^explain\b/i.test(item.label)
+                  ? 'explain'
+                  : /^demo\b/i.test(item.label)
+                    ? 'demo'
+                    : '';
                 return (
                   <li>
                     <label
@@ -271,6 +276,8 @@ let counter = 0;
                     >
                       <input type="checkbox" id={id} class={`ws-check mt-0.5 h-4 w-4 shrink-0 ${c.accent} cursor-pointer`} />
                       <span class="ws-label font-pixel-jp text-sm md:text-[15px] text-phosphor/95 leading-snug">
+                        {stepKind === 'explain' && <span class="ws-step-ico" aria-hidden="true">💬</span>}
+                        {stepKind === 'demo' && <img class="ws-step-ico ws-step-demo" src="/theomonfort/icons/arcade-machine.png" alt="" />}
                         {item.label}
                       </span>
                       {item.teams && (
@@ -465,6 +472,17 @@ let counter = 0;
     content: '– ';
     color: var(--c);
     opacity: 0.7;
+  }
+  .ws-step-ico {
+    display: inline-block;
+    margin-right: 0.35em;
+    vertical-align: -0.18em;
+    line-height: 1;
+  }
+  .ws-step-ico.ws-step-demo {
+    width: 1.3em;
+    height: 1.3em;
+    object-fit: contain;
   }
 
   /* Custom checkbox: fills with the section color when checked */
