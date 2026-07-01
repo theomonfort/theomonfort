@@ -252,20 +252,23 @@ AI models are trained on different data with different architectures. **No singl
 - "What is the best model?" ➡️ **Wrong question**
 - "What is the best model for this job?" ➡️ **Good question**
 
-| Dev Task | Best Model (example) |
-| --- | --- |
-| Writing Requirements | <span style="color:#ffb000">Claude Opus 4.8</span> |
-| Architecture & Design | <span style="color:#ff2e88">Gemini 3.1 Pro</span> |
-| Code Planning | <span style="color:#ffb000">Claude Opus 4.8</span> |
-| Code Generation | <span style="color:#ffb000">Claude Sonnet 4.6</span> |
-| Test Creation | <span style="color:#ffb000">Claude Sonnet 4.6</span> |
-| Code Review | <span style="color:#00f0ff">GPT-5.5 Codex</span> |
-| CI/CD & Automation | <span style="color:#00f0ff">GPT-5.4 Codex</span> |
-| Documentation | <span style="color:#ff2e88">Gemini 3.1 Pro</span> |
-| High Volume & Cost | <span style="color:#9bbc0f">MAI-Code-1-Flash</span> |
+<table class="compact-table">
+<thead><tr><th>Dev Task</th><th>Best Model Cost/Performance (Example)</th></tr></thead>
+<tbody>
+<tr><td>Writing Requirements</td><td><span style="color:#ffb000">Claude Opus 4.8</span></td></tr>
+<tr><td>Architecture &amp; Design</td><td><span style="color:#ff2e88">Gemini 3.1 Pro</span></td></tr>
+<tr><td>Code Planning</td><td><span style="color:#ffb000">Claude Opus 4.8</span></td></tr>
+<tr><td>Code Generation</td><td><span style="color:#ffb000">Claude Sonnet 4.6</span></td></tr>
+<tr><td>Test Creation</td><td><span style="color:#ffb000">Claude Sonnet 4.6</span></td></tr>
+<tr><td>Code Review</td><td><span style="color:#00f0ff">GPT-5.5 Codex</span></td></tr>
+<tr><td>CI/CD &amp; Automation</td><td><span style="color:#00f0ff">GPT-5.4 Codex</span></td></tr>
+<tr><td>Documentation</td><td><span style="color:#ff2e88">Gemini 3.1 Pro</span></td></tr>
+<tr><td>High Volume &amp; Cost</td><td><span style="color:#9bbc0f">MAI-Code-1-Flash</span></td></tr>
+</tbody>
+</table>
 
 <div style="font-size:0.85em;margin-top:0.6em;letter-spacing:0.05em;">
 <span style="color:#ffb000;font-weight:bold;">● Anthropic</span>&nbsp;&nbsp;<span style="color:#00f0ff;font-weight:bold;">● OpenAI</span>&nbsp;&nbsp;<span style="color:#ff2e88;font-weight:bold;">● Google</span>&nbsp;&nbsp;<span style="color:#9bbc0f;font-weight:bold;">● Microsoft</span>
 </div>
 
-> Sources: SWE-bench Verified + Terminal-Bench + various community analysis. Models are examples only and vary by task and preference.
+> Sources (benchmarks): <a href="https://www.swebench.com/" target="_blank" rel="noopener noreferrer" class="retro-link">SWE-bench Verified ↗</a> · <a href="https://www.tbench.ai/" target="_blank" rel="noopener noreferrer" class="retro-link">Terminal-Bench ↗</a> · <a href="https://aider.chat/docs/leaderboards/" target="_blank" rel="noopener noreferrer" class="retro-link">Aider Polyglot ↗</a> · <a href="https://lmarena.ai/" target="_blank" rel="noopener noreferrer" class="retro-link">LMArena ↗</a>. Models are examples only and vary by task and preference.
