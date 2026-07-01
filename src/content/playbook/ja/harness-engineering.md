@@ -76,10 +76,20 @@ flowchart LR
 現在は、**プロジェクトのコンテキスト** と **ツール群** を備えた **エージェント／ハーネス** が LLM の前に立つ。
 
 ```mermaid
+---
+config:
+  flowchart:
+    htmlLabels: true
+  themeCSS: |
+    .nodeLabel { text-align: center !important; }
+    .nodeLabel .llm-row { display: flex !important; flex-direction: row !important; justify-content: center !important; align-items: center !important; gap: 6px !important; margin-top: 4px !important; }
+    .nodeLabel .llm-row img { width: 22px !important; height: 22px !important; object-fit: contain !important; }
+    .nodeLabel .llm-row img.ms-ico { width: 17px !important; height: 17px !important; }
+---
 flowchart LR
   Project[ユーザー] -->|プロンプト / 指示書 / スキル / MCP| Agent[エージェント<br/>別名：ハーネス<br/><br/>Copilot Chat<br/>Copilot CLI<br/>Claude Code<br/>Codex]
   Agent -->|回答 / PR / 編集| Project
-  Agent -->|コンテキスト| LLM[LLM]
+  Agent -->|コンテキスト| LLM["<b>LLM</b><div class='llm-row'><img src='/theomonfort/llm-openai.png'/><img src='/theomonfort/llm-anthropic.svg'/><img src='/theomonfort/llm-gemini.png'/><img src='/theomonfort/llm-grok.png'/><img class='ms-ico' src='/theomonfort/llm-microsoft.svg'/></div>"]
   LLM -->|次の一手| Agent
   Agent -->|ツール呼び出し| Tools[ツール群<br/>読む / 編集 / 実行]
   Tools -->|結果| Agent
@@ -87,11 +97,11 @@ flowchart LR
   classDef human fill:#102033,stroke:#00f0ff,color:#e8f4ff,stroke-width:2px;
   classDef llm fill:#302500,stroke:#ffb000,color:#fff4d6,stroke-width:2px;
   classDef agent fill:#132812,stroke:#9bbc0f,color:#f4ffd8,stroke-width:2px;
-  classDef context fill:#20242a,stroke:#8b949e,color:#d0d7de,stroke-width:2px;
+  classDef tools fill:#2a0f1a,stroke:#ff2e88,color:#ffd6e7,stroke-width:2px;
   class Project human;
   class LLM llm;
   class Agent agent;
-  class Tools context;
+  class Tools tools;
 ```
 
 > 魔法ではない。エージェントは LLM を直接呼ぶ代わりに、**何を読ませるか・どのツールを使わせるか・結果をどう戻すか** を管理するレイヤー。

@@ -76,10 +76,20 @@ flowchart LR
 Today, an **agent / harness** with project context and tools stands in front of the LLM.
 
 ```mermaid
+---
+config:
+  flowchart:
+    htmlLabels: true
+  themeCSS: |
+    .nodeLabel { text-align: center !important; }
+    .nodeLabel .llm-row { display: flex !important; flex-direction: row !important; justify-content: center !important; align-items: center !important; gap: 6px !important; margin-top: 4px !important; }
+    .nodeLabel .llm-row img { width: 22px !important; height: 22px !important; object-fit: contain !important; }
+    .nodeLabel .llm-row img.ms-ico { width: 17px !important; height: 17px !important; }
+---
 flowchart LR
   Project[You + Project] -->|prompts / instructions / skills / MCP| Agent[The Agent<br/>aka Harness<br/><br/>Copilot Chat<br/>Copilot CLI<br/>Claude Code<br/>Codex]
   Agent -->|answer / PR / edit| Project
-  Agent -->|context| LLM[The LLM]
+  Agent -->|context| LLM["<b>LLM</b><div class='llm-row'><img src='/theomonfort/llm-openai.png'/><img src='/theomonfort/llm-anthropic.svg'/><img src='/theomonfort/llm-gemini.png'/><img src='/theomonfort/llm-grok.png'/><img class='ms-ico' src='/theomonfort/llm-microsoft.svg'/></div>"]
   LLM -->|next step| Agent
   Agent -->|tool call| Tools[Tools<br/>read / edit / run]
   Tools -->|result| Agent
@@ -87,11 +97,11 @@ flowchart LR
   classDef human fill:#102033,stroke:#00f0ff,color:#e8f4ff,stroke-width:2px;
   classDef llm fill:#302500,stroke:#ffb000,color:#fff4d6,stroke-width:2px;
   classDef agent fill:#132812,stroke:#9bbc0f,color:#f4ffd8,stroke-width:2px;
-  classDef context fill:#20242a,stroke:#8b949e,color:#d0d7de,stroke-width:2px;
+  classDef tools fill:#2a0f1a,stroke:#ff2e88,color:#ffd6e7,stroke-width:2px;
   class Project human;
   class LLM llm;
   class Agent agent;
-  class Tools context;
+  class Tools tools;
 ```
 
 > No magic. The agent is a layer that manages **what to read, which tools to use, and how to return the result** — instead of calling the LLM directly.
