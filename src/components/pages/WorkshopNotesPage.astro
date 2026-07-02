@@ -183,8 +183,7 @@ let counter = 0;
       <button type="button" role="tab" class="ws-tab" data-ws="ghas" aria-selected="false" aria-controls="ws-construction">GHAS</button>
     </div>
 
-    <header class="mb-8 text-center">
-      <p class="font-pixel text-[10px] text-crt-amber mb-3 tracking-[0.4em]">PRESENTER ONLY</p>
+    <header class="mb-6 text-center">
       <h1 id="ws-title" class="font-pixel text-2xl md:text-4xl text-neon-magenta drop-shadow-[0_0_12px_rgba(255,46,136,0.7)]">
         COPILOT WORKSHOP
       </h1>
@@ -197,49 +196,31 @@ let counter = 0;
     </div>
 
     <div id="ws-notes" role="tabpanel">
-    <details class="ws-objectives mb-8" open>
-      <summary class="ws-obj-summary flex items-center gap-2 cursor-pointer select-none px-3 py-2">
-        <span class="ws-chevron font-pixel text-[10px] text-crt-amber transition-transform duration-200">▶</span>
-        <span class="font-pixel text-[11px] text-crt-amber tracking-[0.25em]">OBJECTIVES</span>
+    <details class="ws-objectives mb-6" open>
+      <summary class="ws-obj-summary flex items-center gap-2 cursor-pointer select-none">
+        <span class="ws-chevron font-pixel text-[9px] text-crt-amber transition-transform duration-200">▶</span>
+        <span class="font-pixel text-[10px] text-crt-amber tracking-[0.25em]">OBJECTIVES</span>
       </summary>
-      <p class="ws-obj-body font-pixel-jp text-sm md:text-[15px] text-phosphor/90 leading-relaxed px-4 pb-3 pt-1">
+      <p class="ws-obj-body font-pixel-jp text-sm md:text-[15px] text-phosphor/90 leading-relaxed">
         {objectivesText}
       </p>
     </details>
 
-    <div
-      id="ws-progress"
-      class="sticky top-2 z-20 mb-8 bg-shadow-ink/95 border-2 border-neon-cyan p-4 shadow-neon-cyan backdrop-blur"
-    >
-      <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
-        <span class="font-pixel text-[10px] text-neon-cyan tracking-[0.2em]">PROGRESS</span>
-        <div class="flex items-center gap-2">
-          <span id="ws-count" class="font-pixel text-[10px] text-gb-green mr-1">0 / {totalItems}</span>
-          <button
-            id="ws-expand"
-            type="button"
-            class="font-pixel text-[8px] text-neon-cyan border border-neon-cyan/60 px-2 py-1 hover:bg-neon-cyan hover:text-shadow-ink transition-colors"
-          >
-            EXPAND
-          </button>
-          <button
-            id="ws-collapse"
-            type="button"
-            class="font-pixel text-[8px] text-neon-cyan border border-neon-cyan/60 px-2 py-1 hover:bg-neon-cyan hover:text-shadow-ink transition-colors"
-          >
-            COLLAPSE
-          </button>
-          <button
-            id="ws-reset"
-            type="button"
-            class="font-pixel text-[8px] text-crt-amber border border-crt-amber/60 px-2 py-1 hover:bg-crt-amber hover:text-shadow-ink transition-colors"
-          >
-            RESET
-          </button>
+    <div id="ws-progress" class="sticky top-2 z-20 mb-8">
+      <div class="ws-exp">
+        <span class="ws-exp-tag">EXP</span>
+        <div class="ws-track">
+          <div id="ws-bar" class="ws-bar-fill" style="width:0%"></div>
+          <div class="ws-exp-ticks" aria-hidden="true">
+            {Array.from({ length: 12 }).map(() => <span></span>)}
+          </div>
         </div>
+        <span id="ws-count" class="ws-exp-count">0 / {totalItems}</span>
       </div>
-      <div class="ws-track">
-        <div id="ws-bar" class="ws-bar-fill" style="width:0%"></div>
+      <div class="ws-exp-ctrls">
+        <button id="ws-expand" type="button" class="ws-exp-btn">EXPAND</button>
+        <button id="ws-collapse" type="button" class="ws-exp-btn">COLLAPSE</button>
+        <button id="ws-reset" type="button" class="ws-exp-btn reset">RESET</button>
       </div>
     </div>
 
@@ -300,32 +281,70 @@ let counter = 0;
 </Layout>
 
 <style>
-  /* Progress bar (scoped, robust against Tailwind purge) */
+  /* EXP progress bar (sticky, clean) */
+  #ws-progress {
+    background: rgba(5, 6, 15, 0.92);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(155, 188, 15, 0.25);
+    padding: 0.7rem 0.9rem;
+  }
+  .ws-exp { display: flex; align-items: center; gap: 0.7rem; }
+  .ws-exp-tag {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: #9bbc0f;
+  }
   .ws-track {
-    height: 8px;
-    background: #0a0e27;
-    border: 1px solid rgba(0, 240, 255, 0.4);
+    flex: 1;
+    height: 16px;
+    background: #05060f;
+    border: 2px solid #9bbc0f;
+    padding: 2px;
+    position: relative;
     overflow: hidden;
   }
   .ws-bar-fill {
     height: 100%;
     width: 0;
-    background: #9bbc0f;
-    box-shadow: 0 0 8px #9bbc0f, 0 0 24px rgba(155, 188, 15, 0.4);
+    background: linear-gradient(180deg, #c3e84f, #9bbc0f);
+    box-shadow: 0 0 8px #9bbc0f;
     transition: width 0.3s ease;
   }
+  .ws-exp-ticks { position: absolute; inset: 2px; display: flex; pointer-events: none; }
+  .ws-exp-ticks span { flex: 1; border-right: 1px solid rgba(5, 6, 15, 0.6); }
+  .ws-exp-ticks span:last-child { border-right: none; }
+  .ws-exp-count { font-family: 'VT323', monospace; font-size: 1.3rem; color: #9bbc0f; white-space: nowrap; }
+  .ws-exp-ctrls { display: flex; justify-content: center; gap: 0.4rem; margin-top: 0.6rem; }
+  .ws-exp-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    color: #00f0ff;
+    background: transparent;
+    border: 1px solid rgba(0, 240, 255, 0.6);
+    padding: 0.5em 0.65em;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .ws-exp-btn:hover { background: #00f0ff; color: #05060f; }
+  .ws-exp-btn.reset { color: #ffb000; border-color: rgba(255, 176, 0, 0.6); }
+  .ws-exp-btn.reset:hover { background: #ffb000; color: #05060f; }
 
   .ws-summary::-webkit-details-marker { display: none; }
   .ws-summary { list-style: none; }
 
-  /* Collapsible objectives panel */
-  .ws-objectives {
-    border: 2px solid rgba(255, 176, 0, 0.5);
-    background: rgba(10, 14, 39, 0.6);
-  }
-  .ws-obj-summary { list-style: none; }
+  /* OBJECTIVES: discreet when collapsed, magenta left-accent when open */
+  .ws-obj-summary { list-style: none; opacity: 0.7; transition: opacity 0.15s ease; }
   .ws-obj-summary::-webkit-details-marker { display: none; }
+  .ws-obj-summary:hover { opacity: 1; }
+  .ws-objectives[open] {
+    border-left: 3px solid #ff2e88;
+    padding-left: 0.85rem;
+  }
+  .ws-objectives[open] > .ws-obj-summary { opacity: 1; margin-bottom: 0.4rem; }
   .ws-objectives[open] > .ws-obj-summary .ws-chevron { transform: rotate(90deg); }
+  .ws-obj-body { padding-top: 0.15rem; }
 
   /* Workshop selector tabs */
   .ws-tab {

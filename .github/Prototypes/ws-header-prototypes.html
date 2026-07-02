@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>/ws トップエリア（EXP バー案）— Retro JRPG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&family=VT323&family=IBM+Plex+Mono:wght@400;600&display=swap"
+    />
+    <style>
+      :root {
+        --shadow-ink: #05060f; --midnight: #0a0e27; --deep-purple: #1a0b2e;
+        --neon-magenta: #ff2e88; --neon-cyan: #00f0ff; --crt-amber: #ffb000;
+        --gb-green: #9bbc0f; --phosphor: #e8f4ff;
+        --font-pixel: 'Press Start 2P', monospace; --font-pixel-jp: 'DotGothic16', monospace;
+        --font-terminal: 'VT323', monospace; --font-mono: 'IBM Plex Mono', monospace;
+      }
+      * { box-sizing: border-box; } html, body { margin: 0; padding: 0; }
+      body {
+        min-height: 100vh; color: var(--phosphor); font-family: var(--font-pixel-jp);
+        background: radial-gradient(circle at 50% 0%, var(--deep-purple) 0%, var(--midnight) 45%, var(--shadow-ink) 100%);
+        background-attachment: fixed; padding: 2.5rem clamp(1rem, 4vw, 3rem) 6rem;
+      }
+      body::after {
+        content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 999;
+        background: repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0, rgba(0,0,0,0) 2px, rgba(0,0,0,0.12) 3px, rgba(0,0,0,0.12) 4px);
+        opacity: 0.45;
+      }
+      .page-head { max-width: 1400px; margin: 0 auto 2.5rem; }
+      .page-head h1 {
+        font-family: var(--font-pixel); font-size: clamp(0.85rem, 2.2vw, 1.2rem); line-height: 1.6;
+        color: var(--neon-cyan); text-shadow: 0 0 8px var(--neon-cyan), 0 0 24px rgba(0,240,255,0.4); margin: 0 0 1rem;
+      }
+      .page-head p { font-size: 1rem; line-height: 1.7; max-width: 82ch; opacity: 0.85; margin: 0.4rem 0; }
+      .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); gap: 2.6rem 2rem; max-width: 1500px; margin: 0 auto; align-items: start; }
+      .proto { display: flex; flex-direction: column; }
+      .proto-label { font-family: var(--font-pixel); font-size: 0.6rem; line-height: 1.6; color: var(--neon-magenta); text-shadow: 0 0 6px rgba(255,46,136,0.5); margin-bottom: 0.55rem; }
+      .proto-note { font-size: 0.85rem; opacity: 0.6; margin: 0 0 0.6rem; }
+      .stage { border: 1px dashed rgba(255,255,255,0.12); background: rgba(5,6,15,0.35); padding: 1.6rem 1.5rem; }
+
+      /* shared atoms */
+      .pk-title { font-family: var(--font-pixel); color: var(--neon-magenta); text-shadow: 0 0 12px rgba(255,46,136,0.7); line-height: 1.1; }
+      .pk-tab { font-family: var(--font-pixel); font-size: 0.5rem; letter-spacing: 0.12em; color: rgba(0,240,255,0.55); background: transparent; border: 2px solid rgba(0,240,255,0.3); padding: 0.5em 0.7em; cursor: pointer; transition: all 0.15s ease; }
+      .pk-tab:hover { color: var(--neon-cyan); border-color: rgba(0,240,255,0.6); }
+      .pk-tab.is-active { color: var(--neon-cyan); border-color: var(--neon-cyan); background: rgba(0,240,255,0.08); box-shadow: 0 0 8px rgba(0,240,255,0.5); }
+      .pk-ctrl { font-family: var(--font-pixel); font-size: 0.42rem; letter-spacing: 0.1em; color: var(--neon-cyan); background: transparent; border: 1px solid rgba(0,240,255,0.6); padding: 0.5em 0.6em; cursor: pointer; transition: all 0.15s ease; }
+      .pk-ctrl:hover { background: var(--neon-cyan); color: var(--shadow-ink); }
+      .pk-ctrl.reset { color: var(--crt-amber); border-color: rgba(255,176,0,0.6); }
+      .pk-ctrl.reset:hover { background: var(--crt-amber); color: var(--shadow-ink); }
+      .pk-count { font-family: var(--font-terminal); font-size: 1.35rem; color: var(--gb-green); white-space: nowrap; }
+
+      /* EXP bar (shared) */
+      .exp { display: flex; align-items: center; gap: 0.6rem; }
+      .exp-tag { font-family: var(--font-pixel); font-size: 0.5rem; color: var(--gb-green); }
+      .exp-track { flex: 1; height: 18px; background: #05060f; border: 2px solid var(--gb-green); padding: 2px; position: relative; overflow: hidden; }
+      .exp-fill { height: 100%; background: linear-gradient(180deg, #c3e84f, var(--gb-green)); box-shadow: 0 0 10px var(--gb-green); }
+      .exp-fill.pulse { animation: exppulse 2.2s ease-in-out infinite; }
+      @keyframes exppulse { 50% { filter: brightness(1.25); } }
+      .exp-ticks { position: absolute; inset: 2px; display: flex; pointer-events: none; }
+      .exp-ticks span { flex: 1; border-right: 1px solid rgba(5,6,15,0.6); }
+      .exp-ticks span:last-child { border-right: none; }
+
+      /* OBJECTIVES / summary (shared) */
+      .obj { border: 1px solid rgba(255,176,0,0.5); background: rgba(255,176,0,0.04); }
+      .obj-head { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.8rem; }
+      .obj-chev { font-family: var(--font-pixel); font-size: 0.5rem; color: var(--crt-amber); }
+      .obj-h { font-family: var(--font-pixel); font-size: 0.55rem; letter-spacing: 0.25em; color: var(--crt-amber); }
+      .obj-body { font-size: 0.92rem; line-height: 1.6; color: rgba(232,244,255,0.85); padding: 0 0.9rem 0.75rem; }
+
+      /* layout helpers per variant */
+      .ctr { text-align: center; }
+      .switch-c { display: flex; justify-content: center; gap: 0.45rem; margin-bottom: 1rem; }
+      .ctrls-c { display: flex; justify-content: center; gap: 0.4rem; margin-top: 0.9rem; }
+
+      /* V1 faithful */
+      .v1 .pk-title { font-size: 1.35rem; margin: 0.2rem 0 1.1rem; }
+      .v1 .obj { margin-bottom: 1.1rem; }
+
+      /* V2 console */
+      .v2-console { border: 2px solid var(--neon-cyan); box-shadow: 0 0 8px rgba(0,240,255,0.4), inset 0 0 24px rgba(0,240,255,0.06); background: rgba(10,14,39,0.6); }
+      .v2-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.9rem 1.1rem; border-bottom: 2px solid rgba(0,240,255,0.35); flex-wrap: wrap; }
+      .v2-top .pk-title { font-size: 1.1rem; }
+      .v2-tabs { display: flex; gap: 0.4rem; }
+      .v2-body { padding: 1rem 1.1rem; }
+      .v2-body .obj { margin-bottom: 1rem; }
+      .v2-foot { display: flex; align-items: center; gap: 0.7rem; margin-top: 0.9rem; }
+
+      /* V3 quest briefing */
+      .v3-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+      .v3-top .pk-title { font-size: 1.15rem; }
+      .v3-tabs { display: flex; gap: 0.35rem; }
+      .v3-quest { border-left: 3px solid var(--crt-amber); padding-left: 0.9rem; margin-bottom: 1.1rem; }
+      .v3-quest .obj-h { display: block; margin-bottom: 0.35rem; }
+      .v3-quest .obj-body { padding: 0; }
+
+      /* V4 sticky demo */
+      .v4-full { border: 2px solid var(--neon-cyan); box-shadow: 0 0 8px rgba(0,240,255,0.3); background: rgba(10,14,39,0.6); padding: 1rem 1.1rem; margin-bottom: 1.4rem; }
+      .v4-full .switch-c { margin-bottom: 0.8rem; }
+      .v4-full .pk-title { font-size: 1.2rem; }
+      .v4-sticky { border: 2px solid var(--neon-cyan); box-shadow: 0 0 10px rgba(0,240,255,0.5); background: rgba(5,6,15,0.92); padding: 0.55rem 0.8rem; display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; }
+      .v4-sticky .mini-title { font-family: var(--font-pixel); font-size: 0.6rem; color: var(--neon-magenta); text-shadow: 0 0 8px rgba(255,46,136,0.6); white-space: nowrap; }
+      .v4-sticky .exp-track { height: 12px; }
+      .v4-sticky .pk-count { font-size: 1rem; }
+      .v4-menu { font-family: var(--font-pixel); font-size: 0.5rem; color: var(--neon-cyan); border: 1px solid rgba(0,240,255,0.5); padding: 0.5em 0.55em; cursor: pointer; }
+      .v4-cap { font-size: 0.78rem; opacity: 0.55; margin: 0 0 0.4rem; font-family: var(--font-terminal); font-size: 1rem; color: var(--crt-amber); }
+
+      /* V5 split 2-col */
+      .v5-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.1rem; align-items: stretch; }
+      .v5-left .pk-title { font-size: 1rem; margin-bottom: 0.8rem; }
+      .v5-left .switch-c { justify-content: flex-start; margin-bottom: 0.9rem; }
+      .v5-right { border: 2px solid var(--gb-green); box-shadow: 0 0 8px rgba(155,188,15,0.3); padding: 0.9rem; display: flex; flex-direction: column; justify-content: center; gap: 0.7rem; }
+      .v5-right .exp { flex-direction: column; align-items: stretch; gap: 0.5rem; }
+      .v5-right .exp-track { height: 22px; }
+      .v5-right .toprow { display: flex; justify-content: space-between; align-items: baseline; }
+
+      /* V6 minimal */
+      .v6-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.9rem; }
+      .v6-head .pk-title { font-size: 0.95rem; }
+      .v6-tabs { display: flex; gap: 0.35rem; }
+      .v6-tabs .pk-tab { font-size: 0.42rem; padding: 0.45em 0.55em; }
+      .v6 .obj { margin-bottom: 0.9rem; }
+      .v6-row { display: flex; align-items: center; gap: 0.6rem; }
+      .v6-row .exp-track { height: 12px; }
+      .v6-row .pk-count { font-size: 1rem; }
+      .v6-ctrls { display: flex; gap: 0.35rem; }
+    </style>
+  </head>
+  <body>
+    <div class="page-head">
+      <h1>/ws トップエリア — EXP バー案（V10 派生）</h1>
+      <p>選ばれた「Boss バー」方向を、要望どおり調整：<strong>HP → EXP</strong>、<strong>PRESENTER ONLY を削除</strong>、そして忘れていた <strong>OBJECTIVES（サマリ）</strong> を各案に追加。切替（COPILOT/GITHUB/GHAS）・タイトル・EXP 進捗（12/52）・EXPAND/COLLAPSE/RESET は全案が保持。配置違いを 6 案。</p>
+    </div>
+    <div class="gallery" id="gallery"></div>
+
+    <script>
+      const S = {
+        workshops: [
+          { id: 'copilot', label: 'COPILOT' },
+          { id: 'github', label: 'GITHUB' },
+          { id: 'ghas', label: 'GHAS' },
+        ],
+        active: 'copilot',
+        title: 'COPILOT WORKSHOP',
+        done: 12,
+        total: 52,
+        controls: ['EXPAND', 'COLLAPSE', 'RESET'],
+        objective:
+          'このワークショップの狙いは、計画 → 実装 → レビュー → テスト・セキュリティ → 運用という SDLC 全体を通して、AI 駆動開発の感覚と、それを支えるツール群を体験してもらうこと。',
+      };
+      const PCT = Math.round((S.done / S.total) * 100);
+      const tabs = () =>
+        S.workshops.map((w) => `<button class="pk-tab ${w.id === S.active ? 'is-active' : ''}">${w.label}</button>`).join('');
+      const ctrls = () =>
+        S.controls.map((c) => `<button class="pk-ctrl ${c === 'RESET' ? 'reset' : ''}">${c}</button>`).join('');
+      const expBar = (opts = {}) => {
+        const ticks = opts.ticks ?? 12;
+        return `
+          <div class="exp">
+            <span class="exp-tag">EXP</span>
+            <div class="exp-track">
+              <div class="exp-fill ${opts.pulse ? 'pulse' : ''}" style="width:${PCT}%"></div>
+              <div class="exp-ticks">${Array.from({ length: ticks }, () => '<span></span>').join('')}</div>
+            </div>
+            <span class="pk-count">${S.done}/${S.total}</span>
+          </div>`;
+      };
+      const obj = () => `
+        <div class="obj">
+          <div class="obj-head"><span class="obj-chev">▼</span><span class="obj-h">OBJECTIVES</span></div>
+          <div class="obj-body">${S.objective}</div>
+        </div>`;
+
+      const V = [
+        {
+          label: 'V1 — Boss EXP (faithful)',
+          note: 'The take you liked, refined: centered switcher + title, OBJECTIVES panel, then the segmented EXP bar with controls centered below.',
+          html: `
+            <div class="v1 ctr">
+              <div class="switch-c">${tabs()}</div>
+              <div class="pk-title">${S.title}</div>
+              ${obj()}
+              ${expBar({ pulse: true })}
+              <div class="ctrls-c">${ctrls()}</div>
+            </div>`,
+        },
+        {
+          label: 'V2 — Command Console + EXP',
+          note: 'One cyan console frame: title + switcher in the header; OBJECTIVES + EXP bar + controls in the body.',
+          html: `
+            <div class="v2-console">
+              <div class="v2-top">
+                <div class="pk-title">${S.title}</div>
+                <div class="v2-tabs">${tabs()}</div>
+              </div>
+              <div class="v2-body">
+                ${obj()}
+                ${expBar()}
+                <div class="v2-foot" style="justify-content:flex-end">${ctrls()}</div>
+              </div>
+            </div>`,
+        },
+        {
+          label: 'V3 — Quest Briefing',
+          note: 'Title + switcher on top; OBJECTIVES styled as an amber quest-briefing block; EXP gauge + controls below.',
+          html: `
+            <div>
+              <div class="v3-top">
+                <div class="pk-title">${S.title}</div>
+                <div class="v3-tabs">${tabs()}</div>
+              </div>
+              <div class="v3-quest">
+                <span class="obj-h">▼ OBJECTIVES</span>
+                <div class="obj-body">${S.objective}</div>
+              </div>
+              ${expBar({ pulse: true })}
+              <div class="ctrls-c" style="justify-content:flex-start">${ctrls()}</div>
+            </div>`,
+        },
+        {
+          label: 'V4 — Full + Sticky Rail',
+          note: 'Shows both states: the full header (top) and the compact one-line EXP rail it collapses to when scrolling — fixes the ugly sticky bar.',
+          html: `
+            <div>
+              <p class="v4-cap">▼ full (top of page)</p>
+              <div class="v4-full ctr">
+                <div class="switch-c">${tabs()}</div>
+                <div class="pk-title">${S.title}</div>
+                <div style="margin-top:1rem">${obj()}</div>
+              </div>
+              <p class="v4-cap">▼ sticky (while scrolling)</p>
+              <div class="v4-sticky">
+                <span class="mini-title">${S.title}</span>
+                <div class="exp-track"><div class="exp-fill" style="width:${PCT}%"></div><div class="exp-ticks">${Array.from({ length: 12 }, () => '<span></span>').join('')}</div></div>
+                <span class="pk-count">${S.done}/${S.total}</span>
+                <button class="v4-menu">⚙</button>
+              </div>
+            </div>`,
+        },
+        {
+          label: 'V5 — Split (title | EXP panel)',
+          note: 'Two columns: title + switcher + OBJECTIVES on the left; a bold framed EXP panel with controls on the right.',
+          html: `
+            <div class="v5-grid">
+              <div class="v5-left">
+                <div class="switch-c">${tabs()}</div>
+                <div class="pk-title">${S.title}</div>
+                ${obj()}
+              </div>
+              <div class="v5-right">
+                <div class="exp">
+                  <div style="width:100%">
+                    <div class="toprow"><span class="exp-tag">EXP</span><span class="pk-count">${S.done}/${S.total}</span></div>
+                    <div class="exp-track" style="margin-top:0.5rem"><div class="exp-fill pulse" style="width:${PCT}%"></div><div class="exp-ticks">${Array.from({ length: 12 }, () => '<span></span>').join('')}</div></div>
+                  </div>
+                </div>
+                <div style="display:flex;gap:0.4rem;flex-wrap:wrap;justify-content:center">${ctrls()}</div>
+              </div>
+            </div>`,
+        },
+        {
+          label: 'V6 — Minimal (airy)',
+          note: 'Title + switcher on one line, OBJECTIVES collapsible, then a slim EXP row with inline count + controls. Least chrome.',
+          html: `
+            <div class="v6">
+              <div class="v6-head">
+                <div class="pk-title">${S.title}</div>
+                <div class="v6-tabs">${tabs()}</div>
+              </div>
+              ${obj()}
+              <div class="v6-row">
+                <span class="exp-tag">EXP</span>
+                <div class="exp-track"><div class="exp-fill" style="width:${PCT}%"></div><div class="exp-ticks">${Array.from({ length: 12 }, () => '<span></span>').join('')}</div></div>
+                <span class="pk-count">${S.done}/${S.total}</span>
+                <div class="v6-ctrls">${ctrls()}</div>
+              </div>
+            </div>`,
+        },
+      ];
+
+      const gallery = document.getElementById('gallery');
+      gallery.innerHTML = V.map(
+        (v) => `
+          <div class="proto">
+            <div class="proto-label">${v.label}</div>
+            <p class="proto-note">${v.note}</p>
+            <div class="stage">${v.html}</div>
+          </div>`,
+      ).join('');
+
+      gallery.addEventListener('click', (e) => {
+        const btn = e.target.closest('button.pk-tab');
+        if (!btn) return;
+        const group = btn.parentElement;
+        [...group.children].forEach((c) => c.classList.remove('is-active'));
+        btn.classList.add('is-active');
+      });
+    </script>
+  </body>
+</html>
