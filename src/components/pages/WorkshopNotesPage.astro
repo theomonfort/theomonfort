@@ -13,6 +13,7 @@ const objectivesText =
     : 'このワークショップの狙いは、計画 → 実装 → レビュー → テスト・セキュリティ → 運用という SDLC 全体を通して、AI 駆動開発の感覚と、それを支えるさまざまなツールを体験してもらうこと。終わったあとには、Copilot でコーディングするために使えるツールの全体像がつかめ、自分の仕事に取り入れ始められる状態を目指す。';
 
 const ucIcon = '/theomonfort/icons/under-construction.png';
+const timeText = locale === 'en' ? '~3 hours' : '約3時間';
 const ucTitle = locale === 'en' ? 'UNDER CONSTRUCTION' : '準備中';
 const ucBody =
   locale === 'en'
@@ -175,6 +176,7 @@ let counter = 0;
 <Layout locale={locale} currentPath="/ws" title="Workshop Presenter Notes">
   <section class="max-w-3xl mx-auto px-4 py-12 md:py-16">
     <section class="ws-quest">
+      <span class="ws-quest-time font-pixel">⏱ {timeText}</span>
       <div class="ws-quest-grid">
         <div class="ws-quest-copy">
           <div class="ws-switch flex items-center gap-2 mb-3" role="tablist" aria-label="Workshop">
@@ -356,6 +358,17 @@ let counter = 0;
     font-family: 'Press Start 2P', monospace;
     font-size: 9px;
     letter-spacing: 0.18em;
+    z-index: 2;
+  }
+  .ws-quest-time {
+    position: absolute;
+    right: 1rem;
+    top: -0.65rem;
+    padding: 0 0.6rem;
+    color: rgba(0, 240, 255, 0.82);
+    background: #05060f;
+    font-size: 9px;
+    letter-spacing: 0.14em;
     z-index: 2;
   }
   .ws-quest-grid {
