@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>/ws トップ — QUEST LOG スタイル案 — Retro JRPG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&family=VT323&family=IBM+Plex+Mono:wght@400;600&display=swap"
+    />
+    <style>
+      :root {
+        --shadow-ink: #05060f; --midnight: #0a0e27; --deep-purple: #1a0b2e;
+        --neon-magenta: #ff2e88; --neon-cyan: #00f0ff; --crt-amber: #ffb000;
+        --gb-green: #9bbc0f; --phosphor: #e8f4ff;
+        --font-pixel: 'Press Start 2P', monospace; --font-pixel-jp: 'DotGothic16', monospace;
+        --font-terminal: 'VT323', monospace;
+      }
+      * { box-sizing: border-box; } html, body { margin: 0; padding: 0; }
+      body {
+        min-height: 100vh; color: var(--phosphor); font-family: var(--font-pixel-jp);
+        background: radial-gradient(circle at 50% 0%, var(--deep-purple) 0%, var(--midnight) 45%, var(--shadow-ink) 100%);
+        background-attachment: fixed; padding: 2.5rem clamp(1rem, 4vw, 3rem) 6rem;
+      }
+      body::after {
+        content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 999;
+        background: repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0, rgba(0,0,0,0) 2px, rgba(0,0,0,0.12) 3px, rgba(0,0,0,0.12) 4px);
+        opacity: 0.45;
+      }
+      .page-head { max-width: 1400px; margin: 0 auto 2.5rem; }
+      .page-head h1 { font-family: var(--font-pixel); font-size: clamp(0.85rem, 2.2vw, 1.2rem); line-height: 1.6; color: var(--neon-cyan); text-shadow: 0 0 8px var(--neon-cyan), 0 0 24px rgba(0,240,255,0.4); margin: 0 0 1rem; }
+      .page-head p { font-size: 1rem; line-height: 1.7; max-width: 84ch; opacity: 0.85; margin: 0.4rem 0; }
+      .gallery { display: grid; grid-template-columns: 1fr; gap: 2.6rem; max-width: 1080px; margin: 0 auto; }
+      .proto { display: flex; flex-direction: column; }
+      .proto-label { font-family: var(--font-pixel); font-size: 0.6rem; line-height: 1.6; color: var(--neon-magenta); text-shadow: 0 0 6px rgba(255,46,136,0.5); margin-bottom: 0.55rem; }
+      .proto-note { font-size: 0.85rem; opacity: 0.6; margin: 0 0 0.7rem; }
+
+      /* ===== QUEST LOG frame (from handson-step-header) ===== */
+      .q { position: relative; overflow: visible; border: 2px solid rgba(0,240,255,0.66); padding: clamp(1rem, 3vw, 1.65rem); margin-top: 0.7rem;
+        background: linear-gradient(130deg, rgba(5,6,15,0.94), rgba(10,14,39,0.82)), repeating-linear-gradient(90deg, rgba(0,240,255,0.05) 0 1px, transparent 1px 36px);
+        box-shadow: 7px 7px 0 rgba(5,6,15,0.88), inset 0 0 28px rgba(0,240,255,0.10); }
+      .q::before { content: ''; position: absolute; inset: 0.85rem; border: 1px dashed rgba(0,240,255,0.34); pointer-events: none; }
+      .q::after { content: 'WORKSHOP LOG'; position: absolute; left: 1rem; top: -0.65rem; padding: 0 0.6rem; color: rgba(255,176,0,0.82); background: #05060f; font-family: var(--font-pixel); font-size: 9px; letter-spacing: 0.18em; z-index: 2; }
+      .q-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0,1fr) minmax(8rem,11rem); gap: clamp(1rem,3vw,2rem); align-items: center; }
+      .q-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.55rem; margin-bottom: 1rem; }
+      .q-chip { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.42rem 0.55rem; color: rgba(232,244,255,0.78); border: 1px solid rgba(232,244,255,0.14); background: rgba(5,6,15,0.58); font-family: var(--font-pixel); font-size: 9px; line-height: 1.3; box-shadow: 2px 2px 0 rgba(5,6,15,0.82); cursor: pointer; }
+      .q-chip.is-active { color: #05060f; background: var(--neon-cyan); border-color: var(--neon-cyan); }
+      .q-chip.is-count { color: var(--gb-green); border-color: rgba(155,188,15,0.5); }
+      .q-chip.is-remaining { color: #ffcf4a; border-color: rgba(255,207,74,0.55); background: rgba(255,207,74,0.12); box-shadow: 2px 2px 0 rgba(5,6,15,0.82), 0 0 10px rgba(255,207,74,0.25); }
+      .q-title { max-width: 48rem; color: var(--neon-magenta); font-family: var(--font-pixel); font-size: clamp(1.5rem, 4.4vw, 2.9rem); line-height: 1.1; text-shadow: 0 0 20px rgba(255,46,136,0.55); margin: 0; }
+      .q-sum { max-width: 46rem; margin-top: 1rem; color: rgba(232,244,255,0.78); font-size: 0.98rem; line-height: 1.7; }
+      .q-meter { position: relative; height: 0.85rem; margin-top: 1.35rem; border: 1px solid rgba(0,240,255,0.5); background: repeating-linear-gradient(90deg, rgba(232,244,255,0.12) 0 1px, transparent 1px 18px), rgba(5,6,15,0.72); box-shadow: inset 0 0 12px rgba(0,0,0,0.6); }
+      .q-meter > span { display: block; height: 100%; background: linear-gradient(90deg, var(--gb-green), var(--neon-magenta)); box-shadow: 0 0 14px rgba(0,240,255,0.4); }
+      /* segmented green EXP meter variant */
+      .q-exp { position: relative; height: 1.05rem; margin-top: 1.35rem; border: 2px solid var(--gb-green); padding: 2px; background: #05060f; display: flex; gap: 2px; }
+      .q-exp i { flex: 1; background: rgba(155,188,15,0.13); }
+      .q-exp i.on { background: linear-gradient(180deg,#c3e84f,var(--gb-green)); box-shadow: 0 0 6px var(--gb-green); }
+      .q-ctrls { display: flex; gap: 0.4rem; margin-top: 0.9rem; flex-wrap: wrap; }
+      .q-ctrl { font-family: var(--font-pixel); font-size: 8px; letter-spacing: 0.1em; color: var(--neon-cyan); background: transparent; border: 1px solid rgba(0,240,255,0.6); padding: 0.5em 0.6em; cursor: pointer; }
+      .q-ctrl:hover { background: var(--neon-cyan); color: #05060f; }
+      .q-ctrl.reset { color: var(--crt-amber); border-color: rgba(255,176,0,0.6); }
+      .q-count-r { font-family: var(--font-terminal); font-size: 1.3rem; color: var(--gb-green); white-space: nowrap; }
+
+      /* planet */
+      .planet { position: relative; min-height: 9rem; display: flex; align-items: center; justify-content: center; }
+      .planet .ball { width: 8.5rem; height: 8.5rem; border-radius: 50%;
+        background: radial-gradient(circle at 34% 30%, #d7ff7a 0%, #9bbc0f 34%, #3d5406 74%, #16210a 100%);
+        box-shadow: 0 12px 18px rgba(0,0,0,0.55), 0 0 30px rgba(155,188,15,0.45), inset -10px -12px 26px rgba(0,0,0,0.55);
+        animation: drift 7s ease-in-out infinite; }
+      .planet .ring { position: absolute; width: 12rem; height: 4.4rem; border: 2px solid rgba(0,240,255,0.5); border-radius: 50%; transform: rotate(-16deg); box-shadow: 0 0 12px rgba(0,240,255,0.3); }
+      @keyframes drift { 50% { transform: translateY(-8px); } }
+      @media (prefers-reduced-motion: reduce) { .planet .ball { animation: none; } }
+
+      /* toggle chevron (title-as-summary variants) */
+      .q-toggle { display: inline-flex; align-items: center; gap: 0.7rem; cursor: pointer; }
+      .q-chev { font-family: var(--font-pixel); font-size: 0.9rem; color: var(--crt-amber); }
+
+      /* sticky rail */
+      .q-rail { position: relative; border: 2px solid rgba(0,240,255,0.66); background: rgba(5,6,15,0.92); box-shadow: 0 0 12px rgba(0,240,255,0.4); padding: 0.55rem 0.9rem; display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; margin-top: 0.7rem; }
+      .q-rail::after { content: 'WORKSHOP LOG'; position: absolute; left: 0.9rem; top: -0.6rem; padding: 0 0.5rem; color: rgba(255,176,0,0.82); background: #05060f; font-family: var(--font-pixel); font-size: 8px; letter-spacing: 0.18em; }
+      .q-rail .mini { font-family: var(--font-pixel); font-size: 0.62rem; color: var(--neon-magenta); text-shadow: 0 0 8px rgba(255,46,136,0.6); white-space: nowrap; }
+      .q-rail .q-meter { flex: 1; min-width: 100px; margin: 0; height: 0.7rem; }
+      .q-rail .q-count-r { font-size: 1.05rem; }
+
+      @media (max-width: 640px) { .q-grid { grid-template-columns: 1fr; } .planet { display: none; } }
+    </style>
+  </head>
+  <body>
+    <div class="page-head">
+      <h1>/ws トップ — QUEST LOG スタイル案</h1>
+      <p>ハンズオンの「QUEST LOG」ステップヘッダ（枠＋チップ列＋大タイトル＋説明＋メーター＋惑星）を /ws のトップに移植した案。全案で「切替（COPILOT/GITHUB/GHAS）・タイトル・OBJECTIVES・進捗 12/52・EXPAND/COLLAPSE/RESET」を保持。惑星は CSS 描画のプレースホルダ。</p>
+    </div>
+    <div class="gallery" id="gallery"></div>
+
+    <script>
+      const S = {
+        workshops: [
+          { id: 'copilot', label: 'COPILOT' },
+          { id: 'github', label: 'GITHUB' },
+          { id: 'ghas', label: 'GHAS' },
+        ],
+        active: 'copilot',
+        title: 'COPILOT WORKSHOP',
+        done: 12,
+        total: 52,
+        controls: ['EXPAND', 'COLLAPSE', 'RESET'],
+        objective:
+          'このワークショップの狙いは、計画 → 実装 → レビュー → テスト・セキュリティ → 運用という SDLC 全体を通して、AI 駆動開発の感覚と、それを支えるツール群を体験してもらうこと。',
+      };
+      const PCT = Math.round((S.done / S.total) * 100);
+      const REMAIN = S.total - S.done;
+      const switchChips = () =>
+        S.workshops.map((w) => `<button class="q-chip ${w.id === S.active ? 'is-active' : ''}">${w.label}</button>`).join('');
+      const ctrls = () => S.controls.map((c) => `<button class="q-ctrl ${c === 'RESET' ? 'reset' : ''}">${c}</button>`).join('');
+      const meterGrad = () => `<div class="q-meter"><span style="width:${PCT}%"></span></div>`;
+      const meterExp = () => {
+        const on = Math.round((PCT / 100) * 22);
+        return `<div class="q-exp">${Array.from({ length: 22 }, (_, i) => `<i class="${i < on ? 'on' : ''}"></i>`).join('')}</div>`;
+      };
+      const planet = () => `<div class="planet"><span class="ring"></span><span class="ball"></span></div>`;
+
+      const V = [
+        {
+          label: 'V1 — Quest Faithful',
+          note: 'The handson QUEST LOG frame, 1:1. Chip row = workshop switcher + progress + remaining; title; OBJECTIVES as the summary; gradient meter; planet; controls below.',
+          html: `
+            <div class="q"><div class="q-grid">
+              <div>
+                <div class="q-meta">
+                  ${switchChips()}
+                  <span class="q-chip is-count">✓ ${S.done} / ${S.total}</span>
+                  <span class="q-chip is-remaining">⏳ 残り ${REMAIN}</span>
+                </div>
+                <h1 class="q-title">${S.title}</h1>
+                <p class="q-sum">${S.objective}</p>
+                ${meterGrad()}
+                <div class="q-ctrls">${ctrls()}</div>
+              </div>
+              ${planet()}
+            </div></div>`,
+        },
+        {
+          label: 'V2 — Quest + title toggle',
+          note: 'Same frame, but the title is the OBJECTIVES toggle (▼ COPILOT WORKSHOP) — summary collapses to keep it discreet. Controls sit in the chip row.',
+          html: `
+            <div class="q"><div class="q-grid">
+              <div>
+                <div class="q-meta">
+                  ${switchChips()}
+                  <span class="q-chip is-count">✓ ${S.done} / ${S.total}</span>
+                  <span style="margin-left:auto;display:flex;gap:0.4rem">${ctrls()}</span>
+                </div>
+                <div class="q-toggle"><span class="q-chev">▼</span><h1 class="q-title">${S.title}</h1></div>
+                <p class="q-sum">${S.objective}</p>
+                ${meterGrad()}
+              </div>
+              ${planet()}
+            </div></div>`,
+        },
+        {
+          label: 'V3 — Quest + EXP gauge',
+          note: 'QUEST frame with the segmented green EXP meter (matches the current /ws direction) instead of the gradient bar.',
+          html: `
+            <div class="q"><div class="q-grid">
+              <div>
+                <div class="q-meta">
+                  ${switchChips()}
+                  <span class="q-chip is-remaining">⏳ 残り ${REMAIN}</span>
+                </div>
+                <h1 class="q-title">${S.title}</h1>
+                <p class="q-sum">${S.objective}</p>
+                <div style="display:flex;align-items:center;gap:0.7rem">
+                  <span class="q-chip is-count" style="cursor:default">EXP</span>
+                  <div style="flex:1">${meterExp()}</div>
+                  <span class="q-count-r">${S.done}/${S.total}</span>
+                </div>
+                <div class="q-ctrls">${ctrls()}</div>
+              </div>
+              ${planet()}
+            </div></div>`,
+        },
+        {
+          label: 'V4 — Quest, no planet (dense)',
+          note: 'Full-width copy, no planet — tighter. Controls right-aligned in the chip row; good if vertical space is tight.',
+          html: `
+            <div class="q">
+              <div class="q-meta">
+                ${switchChips()}
+                <span class="q-chip is-count">✓ ${S.done} / ${S.total}</span>
+                <span class="q-chip is-remaining">⏳ 残り ${REMAIN}</span>
+                <span style="margin-left:auto;display:flex;gap:0.4rem">${ctrls()}</span>
+              </div>
+              <h1 class="q-title">${S.title}</h1>
+              <p class="q-sum">${S.objective}</p>
+              ${meterGrad()}
+            </div>`,
+        },
+        {
+          label: 'V5 — Quest, switcher-forward',
+          note: 'The workshop switcher is the hero (bigger mode chips on their own row), then title + meter + planet. Emphasizes choosing the workshop.',
+          html: `
+            <div class="q"><div class="q-grid">
+              <div>
+                <div class="q-meta" style="gap:0.5rem;margin-bottom:1.2rem">
+                  ${S.workshops.map((w) => `<button class="q-chip ${w.id === S.active ? 'is-active' : ''}" style="font-size:11px;padding:0.6rem 0.9rem">${w.label}</button>`).join('')}
+                </div>
+                <h1 class="q-title">${S.title}</h1>
+                <p class="q-sum">${S.objective}</p>
+                ${meterGrad()}
+                <div class="q-ctrls">
+                  <span class="q-chip is-count" style="cursor:default">✓ ${S.done} / ${S.total}</span>
+                  ${ctrls()}
+                </div>
+              </div>
+              ${planet()}
+            </div></div>`,
+        },
+        {
+          label: 'V6 — Quest sticky rail',
+          note: 'The collapsed / sticky state of the QUEST frame: a slim WORKSHOP LOG rail with title + meter + count + menu, for while you scroll the checklist.',
+          html: `
+            <div>
+              <div class="q-rail">
+                <span class="mini">${S.title}</span>
+                <div class="q-meter"><span style="width:${PCT}%"></span></div>
+                <span class="q-count-r">${S.done}/${S.total}</span>
+                <button class="q-ctrl">⚙ MENU</button>
+              </div>
+            </div>`,
+        },
+      ];
+
+      const gallery = document.getElementById('gallery');
+      gallery.innerHTML = V.map(
+        (v) => `
+          <div class="proto">
+            <div class="proto-label">${v.label}</div>
+            <p class="proto-note">${v.note}</p>
+            ${v.html}
+          </div>`,
+      ).join('');
+
+      gallery.addEventListener('click', (e) => {
+        const btn = e.target.closest('button.q-chip');
+        if (!btn || btn.classList.contains('is-count') || btn.classList.contains('is-remaining')) return;
+        const grp = btn.parentElement;
+        [...grp.querySelectorAll('.q-chip')].forEach((c) => {
+          if (!c.classList.contains('is-count') && !c.classList.contains('is-remaining')) c.classList.remove('is-active');
+        });
+        btn.classList.add('is-active');
+      });
+    </script>
+  </body>
+</html>

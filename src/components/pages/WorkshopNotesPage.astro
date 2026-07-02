@@ -174,23 +174,41 @@ let counter = 0;
 
 <Layout locale={locale} currentPath="/ws" title="Workshop Presenter Notes">
   <section class="max-w-3xl mx-auto px-4 py-12 md:py-16">
-    <div class="ws-switch flex items-center justify-center gap-2 mb-4" role="tablist" aria-label="Workshop">
-      <button type="button" role="tab" class="ws-tab is-active" data-ws="copilot" aria-selected="true" aria-controls="ws-notes">COPILOT</button>
-      <button type="button" role="tab" class="ws-tab" data-ws="github" aria-selected="false" aria-controls="ws-construction">GITHUB</button>
-      <button type="button" role="tab" class="ws-tab" data-ws="ghas" aria-selected="false" aria-controls="ws-construction">GHAS</button>
-    </div>
-
-    <details class="ws-objectives mb-8" open>
-      <summary class="ws-obj-summary flex items-center justify-center gap-3 cursor-pointer select-none text-center">
-        <span class="ws-chevron font-pixel text-sm md:text-base text-crt-amber transition-transform duration-200">▶</span>
-        <h1 id="ws-title" class="font-pixel text-2xl md:text-4xl text-neon-magenta drop-shadow-[0_0_12px_rgba(255,46,136,0.7)]">
-          COPILOT WORKSHOP
-        </h1>
-      </summary>
-      <p class="ws-obj-body font-pixel-jp text-sm md:text-[15px] text-phosphor/90 leading-relaxed text-center">
-        {objectivesText}
-      </p>
-    </details>
+    <section class="ws-quest">
+      <div class="ws-quest-grid">
+        <div class="ws-quest-copy">
+          <div class="ws-switch flex items-center gap-2 mb-3" role="tablist" aria-label="Workshop">
+            <button type="button" role="tab" class="ws-tab" data-ws="github" aria-selected="false" aria-controls="ws-construction">GITHUB</button>
+            <button type="button" role="tab" class="ws-tab is-active" data-ws="copilot" aria-selected="true" aria-controls="ws-notes">COPILOT</button>
+            <button type="button" role="tab" class="ws-tab" data-ws="ghas" aria-selected="false" aria-controls="ws-construction">GHAS</button>
+          </div>
+          <h1 id="ws-title" class="ws-quest-title font-pixel">COPILOT WORKSHOP</h1>
+          <div id="ws-quest-body">
+            <p class="ws-quest-sum font-pixel-jp">{objectivesText}</p>
+            <div id="ws-progress" class="ws-quest-progress">
+              <div class="ws-exp">
+                <span class="ws-exp-tag">EXP</span>
+                <div class="ws-track">
+                  <div id="ws-bar" class="ws-bar-fill" style="width:0%"></div>
+                  <div class="ws-exp-ticks" aria-hidden="true">
+                    {Array.from({ length: 12 }).map(() => <span></span>)}
+                  </div>
+                </div>
+                <span id="ws-count" class="ws-exp-count">0 / {totalItems}</span>
+              </div>
+              <div class="ws-exp-ctrls">
+                <button id="ws-expand" type="button" class="ws-exp-btn">EXPAND</button>
+                <button id="ws-collapse" type="button" class="ws-exp-btn">COLLAPSE</button>
+                <button id="ws-reset" type="button" class="ws-exp-btn reset">RESET</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ws-quest-mascot" aria-hidden="true">
+          <img src="/theomonfort/favicon.svg" alt="" width="160" height="160" />
+        </div>
+      </div>
+    </section>
 
     <div id="ws-construction" class="ws-construction" role="tabpanel" hidden>
       <img src={ucIcon} alt="" width="160" height="160" class="ws-uc-icon" />
@@ -199,24 +217,6 @@ let counter = 0;
     </div>
 
     <div id="ws-notes" role="tabpanel">
-
-    <div id="ws-progress" class="sticky top-2 z-20 mb-8">
-      <div class="ws-exp">
-        <span class="ws-exp-tag">EXP</span>
-        <div class="ws-track">
-          <div id="ws-bar" class="ws-bar-fill" style="width:0%"></div>
-          <div class="ws-exp-ticks" aria-hidden="true">
-            {Array.from({ length: 12 }).map(() => <span></span>)}
-          </div>
-        </div>
-        <span id="ws-count" class="ws-exp-count">0 / {totalItems}</span>
-      </div>
-      <div class="ws-exp-ctrls">
-        <button id="ws-expand" type="button" class="ws-exp-btn">EXPAND</button>
-        <button id="ws-collapse" type="button" class="ws-exp-btn">COLLAPSE</button>
-        <button id="ws-reset" type="button" class="ws-exp-btn reset">RESET</button>
-      </div>
-    </div>
 
     <div class="ws-secs" data-total={totalItems}>
       {sections.map((section, si) => {
@@ -279,13 +279,7 @@ let counter = 0;
 </Layout>
 
 <style>
-  /* EXP progress bar (sticky, clean) */
-  #ws-progress {
-    background: rgba(5, 6, 15, 0.92);
-    backdrop-filter: blur(4px);
-    border: 1px solid rgba(155, 188, 15, 0.25);
-    padding: 0.7rem 0.9rem;
-  }
+  /* EXP progress bar (inside the QUEST frame) */
   .ws-exp { display: flex; align-items: center; gap: 0.7rem; }
   .ws-exp-tag {
     font-family: 'Press Start 2P', monospace;
@@ -313,7 +307,7 @@ let counter = 0;
   .ws-exp-ticks span { flex: 1; border-right: 1px solid rgba(5, 6, 15, 0.6); }
   .ws-exp-ticks span:last-child { border-right: none; }
   .ws-exp-count { font-family: 'VT323', monospace; font-size: 1.3rem; color: #9bbc0f; white-space: nowrap; }
-  .ws-exp-ctrls { display: flex; justify-content: center; gap: 0.4rem; margin-top: 0.6rem; }
+  .ws-exp-ctrls { display: flex; justify-content: flex-start; gap: 0.4rem; margin-top: 0.9rem; }
   .ws-exp-btn {
     font-family: 'Press Start 2P', monospace;
     font-size: 8px;
@@ -332,11 +326,75 @@ let counter = 0;
   .ws-summary::-webkit-details-marker { display: none; }
   .ws-summary { list-style: none; }
 
-  /* OBJECTIVES toggle merged into the title (chevron on the left) */
-  .ws-obj-summary { list-style: none; }
-  .ws-obj-summary::-webkit-details-marker { display: none; }
-  .ws-objectives[open] > .ws-obj-summary .ws-chevron { transform: rotate(90deg); }
-  .ws-obj-body { max-width: 70ch; margin: 0.7rem auto 0; }
+  /* QUEST LOG frame for the /ws top */
+  .ws-quest {
+    position: relative;
+    overflow: visible;
+    border: 2px solid rgba(0, 240, 255, 0.66);
+    padding: clamp(1rem, 3vw, 1.65rem);
+    margin-bottom: 2rem;
+    background:
+      linear-gradient(130deg, rgba(5, 6, 15, 0.94), rgba(10, 14, 39, 0.82)),
+      repeating-linear-gradient(90deg, rgba(0, 240, 255, 0.05) 0 1px, transparent 1px 36px);
+    box-shadow: 7px 7px 0 rgba(5, 6, 15, 0.88), inset 0 0 28px rgba(0, 240, 255, 0.1);
+  }
+  .ws-quest::before {
+    content: '';
+    position: absolute;
+    inset: 0.85rem;
+    border: 1px dashed rgba(0, 240, 255, 0.34);
+    pointer-events: none;
+  }
+  .ws-quest::after {
+    content: 'WORKSHOP LOG';
+    position: absolute;
+    left: 1rem;
+    top: -0.65rem;
+    padding: 0 0.6rem;
+    color: rgba(255, 176, 0, 0.82);
+    background: #05060f;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    z-index: 2;
+  }
+  .ws-quest-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(7rem, 10rem);
+    gap: clamp(1rem, 3vw, 2rem);
+    align-items: center;
+  }
+  .ws-quest-title {
+    color: #00f0ff;
+    font-size: clamp(1.6rem, 5vw, 3rem);
+    line-height: 1.1;
+    text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+    margin: 0.4rem 0 0;
+  }
+  .ws-quest-sum {
+    max-width: 46rem;
+    margin-top: 1rem;
+    color: rgba(232, 244, 255, 0.8);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+  .ws-quest-progress { margin-top: 1.35rem; }
+  #ws-quest-body[hidden] { display: none; }
+  .ws-quest-mascot { display: flex; align-items: center; justify-content: center; min-height: 8rem; }
+  .ws-quest-mascot img {
+    width: min(9rem, 100%);
+    height: auto;
+    filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 24px rgba(0, 240, 255, 0.45));
+    animation: ws-mascot-drift 7s ease-in-out infinite;
+  }
+  @keyframes ws-mascot-drift { 50% { transform: translateY(-10px); } }
+  @media (prefers-reduced-motion: reduce) { .ws-quest-mascot img { animation: none; } }
+  @media (max-width: 640px) {
+    .ws-quest-grid { grid-template-columns: 1fr; }
+    .ws-quest-mascot { display: none; }
+  }
 
   /* Workshop selector tabs */
   .ws-tab {
@@ -675,12 +733,14 @@ let counter = 0;
     const titleEl = document.getElementById('ws-title');
     const notesEl = document.getElementById('ws-notes');
     const constructionEl = document.getElementById('ws-construction');
+    const questBody = document.getElementById('ws-quest-body');
 
     const selectWorkshop = (id: string) => {
       const active = WS_NAMES[id] ? id : 'copilot';
       const isCopilot = active === 'copilot';
       if (titleEl) titleEl.textContent = WS_NAMES[active];
       if (notesEl) notesEl.hidden = !isCopilot;
+      if (questBody) questBody.hidden = !isCopilot;
       if (constructionEl) constructionEl.hidden = isCopilot;
       tabs.forEach((t) => {
         const on = t.dataset.ws === active;
