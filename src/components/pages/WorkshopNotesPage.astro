@@ -183,11 +183,17 @@ let counter = 0;
       <button type="button" role="tab" class="ws-tab" data-ws="ghas" aria-selected="false" aria-controls="ws-construction">GHAS</button>
     </div>
 
-    <header class="mb-6 text-center">
-      <h1 id="ws-title" class="font-pixel text-2xl md:text-4xl text-neon-magenta drop-shadow-[0_0_12px_rgba(255,46,136,0.7)]">
-        COPILOT WORKSHOP
-      </h1>
-    </header>
+    <details class="ws-objectives mb-8" open>
+      <summary class="ws-obj-summary flex items-center justify-center gap-3 cursor-pointer select-none text-center">
+        <span class="ws-chevron font-pixel text-sm md:text-base text-crt-amber transition-transform duration-200">▶</span>
+        <h1 id="ws-title" class="font-pixel text-2xl md:text-4xl text-neon-magenta drop-shadow-[0_0_12px_rgba(255,46,136,0.7)]">
+          COPILOT WORKSHOP
+        </h1>
+      </summary>
+      <p class="ws-obj-body font-pixel-jp text-sm md:text-[15px] text-phosphor/90 leading-relaxed text-center">
+        {objectivesText}
+      </p>
+    </details>
 
     <div id="ws-construction" class="ws-construction" role="tabpanel" hidden>
       <img src={ucIcon} alt="" width="160" height="160" class="ws-uc-icon" />
@@ -196,15 +202,6 @@ let counter = 0;
     </div>
 
     <div id="ws-notes" role="tabpanel">
-    <details class="ws-objectives mb-6" open>
-      <summary class="ws-obj-summary flex items-center gap-2 cursor-pointer select-none">
-        <span class="ws-chevron font-pixel text-[9px] text-crt-amber transition-transform duration-200">▶</span>
-        <span class="font-pixel text-[10px] text-crt-amber tracking-[0.25em]">OBJECTIVES</span>
-      </summary>
-      <p class="ws-obj-body font-pixel-jp text-sm md:text-[15px] text-phosphor/90 leading-relaxed">
-        {objectivesText}
-      </p>
-    </details>
 
     <div id="ws-progress" class="sticky top-2 z-20 mb-8">
       <div class="ws-exp">
@@ -334,17 +331,11 @@ let counter = 0;
   .ws-summary::-webkit-details-marker { display: none; }
   .ws-summary { list-style: none; }
 
-  /* OBJECTIVES: discreet when collapsed, magenta left-accent when open */
-  .ws-obj-summary { list-style: none; opacity: 0.7; transition: opacity 0.15s ease; }
+  /* OBJECTIVES toggle merged into the title (chevron on the left) */
+  .ws-obj-summary { list-style: none; }
   .ws-obj-summary::-webkit-details-marker { display: none; }
-  .ws-obj-summary:hover { opacity: 1; }
-  .ws-objectives[open] {
-    border-left: 3px solid #ff2e88;
-    padding-left: 0.85rem;
-  }
-  .ws-objectives[open] > .ws-obj-summary { opacity: 1; margin-bottom: 0.4rem; }
   .ws-objectives[open] > .ws-obj-summary .ws-chevron { transform: rotate(90deg); }
-  .ws-obj-body { padding-top: 0.15rem; }
+  .ws-obj-body { max-width: 70ch; margin: 0.7rem auto 0; }
 
   /* Workshop selector tabs */
   .ws-tab {
