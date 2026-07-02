@@ -255,17 +255,23 @@ SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ
 </figure>
 <script>
 (function(){
-  var fig=document.currentScript.previousElementSibling;
-  while(fig&&!fig.classList.contains('rpi-pipeline'))fig=fig.previousElementSibling;
-  if(!fig)return;
-  var btns=fig.querySelectorAll('.plat-toggle button');
-  btns.forEach(function(b){b.addEventListener('click',function(){
-    fig.classList.remove('f-cop','f-nat');
-    if(b.dataset.f==='cop')fig.classList.add('f-cop');
-    if(b.dataset.f==='nat')fig.classList.add('f-nat');
-    btns.forEach(function(x){x.classList.remove('on');});
-    b.classList.add('on');
-  });});
+  function initPlatToggles(){
+    document.querySelectorAll('.rpi-pipeline').forEach(function(fig){
+      var toggle=fig.querySelector('.plat-toggle');
+      if(!toggle||fig.dataset.platBound==='1')return;
+      fig.dataset.platBound='1';
+      var btns=toggle.querySelectorAll('button');
+      btns.forEach(function(b){b.addEventListener('click',function(){
+        fig.classList.remove('f-cop','f-nat');
+        if(b.dataset.f==='cop')fig.classList.add('f-cop');
+        if(b.dataset.f==='nat')fig.classList.add('f-nat');
+        btns.forEach(function(x){x.classList.remove('on');});
+        b.classList.add('on');
+      });});
+    });
+  }
+  initPlatToggles();
+  document.addEventListener('astro:page-load',initPlatToggles);
 })();
 </script>
 
