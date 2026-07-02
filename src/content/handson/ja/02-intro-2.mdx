@@ -34,7 +34,11 @@ import Aside from '../../../components/handson/Aside.astro';
 
 ![Create repository ボタンをクリック](/theomonfort/handson/img/create-repository-form.png)
 
-### 2.2 — Codespaces で開発環境を起動する
+### 2.2 — リポジトリを開く
+
+作成したリポジトリを開発環境で開きます。**オプション 1（Codespaces）** を推奨しますが、使えない場合は **オプション 2（ローカル）** でも進められます。
+
+#### オプション 1：Codespaces（推奨）
 
 1. 作成したリポジトリのページで、緑色の **Code** ボタンをクリック
 2. **Codespaces** タブを選択
@@ -46,7 +50,32 @@ Codespace の起動には数分かかる場合があります。DevContainer の
 
 </Aside>
 
-DevContainer が自動的に Node.js 22 環境をセットアップし、以下が事前にインストールされます：
+#### オプション 2：ローカル
+
+1. VS Code で **ターミナル** を開く（メニュー **Terminal → New Terminal**、または `` Ctrl+` ``）
+2. リポジトリページの緑色の **Code** ボタン → **Local** タブ → **GitHub CLI** タブを開き、コピー用のクローンコマンドをコピーする
+
+   ![Code → Local → GitHub CLI のクローンコマンドをコピー](/theomonfort/handson/img/clone-github-cli.png)
+
+3. ターミナルに貼り付けてローカルにクローンする：
+
+   ```bash
+   gh repo clone <owner>/<repo-name>
+   ```
+
+4. クローンしたフォルダを VS Code で開く：
+
+   ```bash
+   code -r <repo-name>
+   ```
+
+<Aside type="negative">
+
+ローカルで作業する場合は、Node.js 22 / GitHub CLI（`gh`）/ Copilot CLI（`@github/copilot`）/ gh-aw など、DevContainer に含まれるツールをご自身の環境に用意する必要があります。
+
+</Aside>
+
+いずれのオプションでも、DevContainer が Node.js 22 環境をセットアップし、以下が事前にインストールされます（ローカルの場合は DevContainer 対応の拡張機能を使うか、手動でご用意ください）：
 
 - GitHub Copilot & Copilot Chat 拡張機能
 - GitHub CLI（`gh`）

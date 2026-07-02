@@ -34,7 +34,11 @@ In this section you'll copy the following template repository to create your han
 
 ![Click the Create repository button](/theomonfort/handson/img/create-repository-form.png)
 
-### 2.2 — Launch your dev environment with Codespaces
+### 2.2 — Open the repository
+
+Open your newly created repository in a dev environment. **Option 1 (Codespaces)** is recommended, but if you can't use it, **Option 2 (Local)** works too.
+
+#### Option 1: Codespaces (recommended)
 
 1. On your newly created repository's page, click the green **Code** button
 2. Select the **Codespaces** tab
@@ -46,7 +50,32 @@ Starting a Codespace can take a few minutes. Please wait for the DevContainer bu
 
 </Aside>
 
-The DevContainer automatically sets up a Node.js 22 environment, with the following pre-installed:
+#### Option 2: Local
+
+1. Open a **terminal** in VS Code (menu **Terminal → New Terminal**, or `` Ctrl+` ``)
+2. On the repository page, open the green **Code** button → **Local** tab → **GitHub CLI** tab, and copy the clone command
+
+   ![Copy the clone command from Code → Local → GitHub CLI](/theomonfort/handson/img/clone-github-cli.png)
+
+3. Paste it into the terminal to clone the repo locally:
+
+   ```bash
+   gh repo clone <owner>/<repo-name>
+   ```
+
+4. Open the cloned folder in VS Code:
+
+   ```bash
+   code -r <repo-name>
+   ```
+
+<Aside type="negative">
+
+Working locally means you'll need to provide the tools bundled in the DevContainer yourself — Node.js 22, GitHub CLI (`gh`), Copilot CLI (`@github/copilot`), gh-aw, and so on.
+
+</Aside>
+
+Either way, the DevContainer sets up a Node.js 22 environment with the following pre-installed (locally, use a DevContainer-aware setup or install them manually):
 
 - GitHub Copilot & Copilot Chat extensions
 - GitHub CLI (`gh`)
