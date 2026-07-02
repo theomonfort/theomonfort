@@ -285,13 +285,13 @@ let counter = 0;
     font-family: 'Press Start 2P', monospace;
     font-size: 9px;
     letter-spacing: 0.1em;
-    color: #9bbc0f;
+    color: #00f0ff;
   }
   .ws-track {
     flex: 1;
     height: 16px;
     background: #05060f;
-    border: 2px solid #9bbc0f;
+    border: 2px solid rgba(0, 240, 255, 0.7);
     padding: 2px;
     position: relative;
     overflow: hidden;
@@ -299,14 +299,14 @@ let counter = 0;
   .ws-bar-fill {
     height: 100%;
     width: 0;
-    background: linear-gradient(180deg, #c3e84f, #9bbc0f);
-    box-shadow: 0 0 8px #9bbc0f;
+    background: linear-gradient(90deg, #00f0ff, #ff2e88);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
     transition: width 0.3s ease;
   }
   .ws-exp-ticks { position: absolute; inset: 2px; display: flex; pointer-events: none; }
-  .ws-exp-ticks span { flex: 1; border-right: 1px solid rgba(5, 6, 15, 0.6); }
+  .ws-exp-ticks span { flex: 1; border-right: 1px solid rgba(0, 240, 255, 0.22); }
   .ws-exp-ticks span:last-child { border-right: none; }
-  .ws-exp-count { font-family: 'VT323', monospace; font-size: 1.3rem; color: #9bbc0f; white-space: nowrap; }
+  .ws-exp-count { font-family: 'VT323', monospace; font-size: 1.3rem; color: #00f0ff; white-space: nowrap; }
   .ws-exp-ctrls { display: flex; justify-content: flex-start; gap: 0.4rem; margin-top: 0.9rem; }
   .ws-exp-btn {
     font-family: 'Press Start 2P', monospace;
