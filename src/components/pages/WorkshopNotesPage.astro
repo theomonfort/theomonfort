@@ -247,7 +247,9 @@ let counter = 0;
                       ? 'explain'
                       : /^demo\b/i.test(item.label)
                         ? 'demo'
-                        : '';
+                        : section.title === 'INTRODUCTION'
+                          ? 'explain'
+                          : '';
                 return (
                   <li>
                     <label
