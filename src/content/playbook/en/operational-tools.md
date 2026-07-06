@@ -1,7 +1,7 @@
 ---
 title: Operational Tools
 titleEn: Operational Tools
-summary: GitHub's toolbox for putting collaboration into operation. A quick tour of private Packages and the container registry, Integrations (GitHub Apps), permissions (per-repo roles), and policies (repo/org/enterprise).
+summary: GitHub's toolbox for putting collaboration into operation. A quick tour of private Packages and the container registry, and Integrations (GitHub Apps).
 icon: 🛠️
 color: green
 accent:
@@ -23,15 +23,6 @@ links:
   - group: 📖 Official docs
     label: About GitHub Apps
     url: https://docs.github.com/en/apps/overview
-  - group: 📖 Official docs
-    label: Repository roles
-    url: https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization
-  - group: 📖 Official docs
-    label: Organization policies
-    url: https://docs.github.com/en/organizations/managing-organization-settings
-  - group: 📖 Official docs
-    label: Enterprise policies
-    url: https://docs.github.com/en/enterprise-cloud@latest/admin/enforcing-policies
 ---
 
 ## In a nutshell
@@ -41,7 +32,7 @@ links:
     Beyond the day-to-day flow, GitHub gives you <strong>more tools to run and scale</strong> your work.
   </p>
   <p>
-    Let's take a quick tour of what else is at your disposal: <strong>Packages, the container registry, Apps, permissions, and policies</strong>.
+    Let's take a quick tour of what else is at your disposal: <strong>Packages, the container registry, and Apps</strong>.
   </p>
 </div>
 
@@ -69,28 +60,3 @@ GitHub Apps extend functionality with least-privilege, the official way to integ
 - 🧩 Many ready-made apps on the Marketplace (e.g. Slack, Jira, Sentry, SonarCloud)
 
 > 🎯 Lean on **Apps**, not PATs, for automation and external integrations.
-
-## Permissions
-
-Assign roles per repository to control who can do what.
-
-| Role | Main rights |
-| --- | --- |
-| 👀 Read | View, clone |
-| 🔺 Triage | Manage Issues/PRs |
-| ✍️ Write | Push, merge |
-| 🛠️ Maintain | Some settings |
-| 👑 Admin | Full control |
-
-> 💡 Grant roles to teams and swap members in/out for easy upkeep.
-
-## Policies
-
-Apply governance across the repo → org → enterprise hierarchy; the higher the level, the wider the reach.
-
-- 🗂️ **Repo**: branch protection, required reviews
-- 🏢 **Org**: creation limits, visibility, mandatory 2FA
-- 🏛️ **Enterprise**: rules across all orgs
-- 🔁 Higher settings inherit down
-
-> 🎯 Don't tweak repos one by one. Top-down policy is the winning ops play.

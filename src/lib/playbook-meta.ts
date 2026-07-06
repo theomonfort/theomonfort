@@ -13,6 +13,7 @@ export const NEW_PLAYBOOK_SLUGS = new Set([
   'agentic-workflow',
   'copilot-app',
   'collaboration-tools',
+  'governance',
 ]);
 
 export function isNewPlaybookEntry(slug: string): boolean {
@@ -30,6 +31,7 @@ export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'agentic-workflow': [1],
   'collaboration-tools': [2],
   'usage-based-billing': [9],
+  'governance': [3],
 };
 
 export function navHintSlides(slug: string): number[] {
