@@ -21,6 +21,9 @@ links:
     label: About rulesets
     url: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets
   - group: 📖 Official docs
+    label: GitHub flow
+    url: https://docs.github.com/en/get-started/using-github/github-flow
+  - group: 📖 Official docs
     label: About PR reviews
     url: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews
   - group: 🎓 Tutorials
@@ -55,6 +58,19 @@ A PR gathers conversation, checks, and automated analysis right on the diff. It'
 
 > 🔑 `Closes #123` in a PR → the Issue auto-closes on merge.
 
+## Branching strategies
+
+How a team organizes branches around PRs. Pick the model that matches your release cadence.
+
+| Strategy | How it works | Best for |
+| --- | --- | --- |
+| 🌿 GitHub Flow | One `main` + short-lived feature branches; PR → merge → deploy from `main` | Continuous delivery, most teams |
+| 🌳 Git Flow | `main` + long-lived `develop`, plus `feature` / `release` / `hotfix` branches | Scheduled, versioned releases |
+| 🏭 GitLab Flow | Feature branches promoted through `staging` / `production` (environment) branches | Staged, environment-based deploys |
+| 🚀 Trunk-Based | Commit to `main` via tiny branches behind feature flags | High-velocity CI/CD, large teams |
+
+> 💡 Default to **GitHub Flow / trunk-based** for speed; reach for **Git Flow** only when you ship versioned releases.
+
 ## Rulesets
 
 Manage the repo to fit your needs. Enforce merge conditions as rules and automate the quality gate.
@@ -75,7 +91,3 @@ With AI shipping PRs en masse, some ask "are PRs still needed?" But to keep a re
 - 👀 Humans approve, AI does the prep
 
 > 💡 Guard the PR and go faster = Rulesets × Copilot.
-
-📘 More:
-- <a class="retro-link" href="https://docs.github.com/en/pull-requests" target="_blank" rel="noopener noreferrer">Pull requests ↗</a>
-- <a class="retro-link" href="https://github.com/microsoft/vscode/pulls" target="_blank" rel="noopener noreferrer">VS Code PRs ↗</a>
