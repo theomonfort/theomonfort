@@ -45,9 +45,6 @@ links:
   </p>
 </div>
 
-> 🎯 成果物の配布から組織統制まで、コードと同じ場所で管理できる。
-> 💡 まず Packages で配布、次に App で連携、最後に権限とポリシーで締める。
-
 ## Packages & Container Registry
 
 成果物を GitHub 上のプライベートレジストリで配布。npm・Maven・NuGet などに加え、コンテナは GHCR (`ghcr.io`)。

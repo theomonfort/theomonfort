@@ -45,9 +45,6 @@ links:
   </p>
 </div>
 
-> 🎯 From shipping artifacts to org-wide governance, manage it where the code lives.
-> 💡 Distribute with Packages, connect with Apps, then lock down with roles and policies.
-
 ## Packages & Container Registry
 
 Distribute artifacts via private registries on GitHub: npm, Maven, NuGet, and containers via GHCR (`ghcr.io`).
