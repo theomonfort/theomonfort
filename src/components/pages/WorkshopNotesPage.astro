@@ -743,19 +743,22 @@ let counter = 0;
         saveOpen();
       });
       const allBtn = section.querySelector<HTMLButtonElement>('.ws-check-all');
-      allBtn?.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const boxes = Array.from(section.querySelectorAll<HTMLInputElement>('.ws-check'));
-        const target = boxes.some((b) => !b.checked);
-        boxes.forEach((b) => {
-          b.checked = target;
-          checkState[b.id] = target;
+      if (allBtn && !allBtn.dataset.wired) {
+        allBtn.dataset.wired = '1';
+        allBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const boxes = Array.from(section.querySelectorAll<HTMLInputElement>('.ws-check'));
+          const target = boxes.some((b) => !b.checked);
+          boxes.forEach((b) => {
+            b.checked = target;
+            checkState[b.id] = target;
+          });
+          saveChecks();
+          refreshSection(section);
+          refreshGlobal();
         });
-        saveChecks();
-        refreshSection(section);
-        refreshGlobal();
-      });
+      }
       refreshSection(section);
     });
 
