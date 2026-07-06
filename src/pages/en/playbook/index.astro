@@ -264,10 +264,13 @@ const CATEGORIES_WITH_PLANETS = new Set<string>(['plan', 'operate', 'review', 'd
   }
 
   .category-planet[data-planet='plan'] {
-    right: -3rem;
-    bottom: -7rem;
-    width: calc(50% + 2rem);
-    z-index: 20;
+    right: -15rem;
+    left: auto;
+    bottom: -4rem;
+    width: 38rem;
+    max-width: 75%;
+    align-items: flex-end;
+    z-index: 0;
   }
   .category-planet[data-planet='plan'] img {
     max-height: 520px;
@@ -287,9 +290,9 @@ const CATEGORIES_WITH_PLANETS = new Set<string>(['plan', 'operate', 'review', 'd
   }
 
   .category-planet[data-planet='review'] {
-    bottom: -4rem;
+    bottom: 5rem;
     right: -3rem;
-    z-index: 20;
+    z-index: 0;
   }
   .category-planet[data-planet='review'] img {
     max-height: 380px;
