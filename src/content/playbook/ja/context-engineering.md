@@ -55,6 +55,20 @@ classDef dumb fill:#7a1748,stroke:#ff2e88,color:#ffe8f4
 
 > Context Engineering の目的は、context window を埋めることではなく、**必要な情報が目立つ状態を保つこと**。
 
+## Input・Cached input・Output トークン
+
+各ターンで context window の中身は **3 種類のトークン** として課金される。これを知ると、長いセッションのコストの理由が分かる。
+
+| 種類 | 中身 | 相対コスト |
+| --- | --- | --- |
+| 🟥 Input | このターンで新規送信 — prompt・ファイル・ツール結果 | 標準 |
+| 🟦 Cached input | 前ターンから再送され、キャッシュから供給される文脈 | 最安（大幅割引） |
+| 🟩 Output | モデルが生成して返すテキスト | 最も高い |
+
+長い会話では window の大半が **cached input**（履歴が毎ターン再送される）なので、キャッシュがコストを抑える鍵。節約は **output** と追加する **input** を削ることで効く。
+
+> 💡 続くターン別スライドは、各ブロックをこのトークン種別で色分けしている。
+
 ## コンテキストウィンドウ：Start（turn 1）
 
 Start はほぼ理想状態。常時必要な **System/tools**（skills descriptions / copilot-instructions / MCP servers）だけが入り、作業用の余白が大きい。最初のターンでは初めて送られるので、これらは **Input トークン** として課金される。
