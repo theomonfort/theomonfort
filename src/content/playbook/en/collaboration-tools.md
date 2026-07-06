@@ -22,7 +22,7 @@ links:
     url: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/adding-sub-issues
   - group: 📖 Official docs
     label: Managing issue fields in an organization
-    url: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-an-organization
+    url: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-your-organization
   - group: 📰 Announcement
     label: "Issue fields are now generally available (2026-07-02)"
     url: https://github.blog/changelog/2026-07-02-issue-fields-are-now-generally-available/
@@ -83,7 +83,7 @@ Structured, **typed metadata** on issues. **Generally available** as of 2026-07-
 - 🤖 **MCP integration** — Copilot can read and set field values when creating or updating issues
 - 🌏 Field names support **non-English characters** (parity with issue types)
 
-> ⚙️ Setup: org admins add, customize, and choose which fields appear per issue type from **Settings › Planning › Issue fields**. <a class="retro-link" href="https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-an-organization" target="_blank" rel="noopener noreferrer">Managing issue fields ↗</a>
+> ⚙️ Setup: org admins add, customize, and choose which fields appear per issue type from **Settings › Planning › Issue fields**. <a class="retro-link" href="https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-your-organization" target="_blank" rel="noopener noreferrer">Managing issue fields ↗</a>
 
 ## Discussions
 
