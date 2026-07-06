@@ -47,15 +47,17 @@ links:
 
 ## Packages & Container Registry
 
-成果物を GitHub 上のプライベートレジストリで配布。npm・Maven・NuGet などに加え、コンテナは GHCR (`ghcr.io`)。
+**パッケージレジストリ** とは、ビルドした成果物 (ライブラリや Docker イメージ) を保管・共有する場所。GitHub なら **コードの隣** に、公開/非公開を同じ権限で置ける。
 
-| 種別 | レジストリ | ここがいい |
+| 種別 | レジストリ | 例 |
 | --- | --- | --- |
-| 📦 npm/Maven/NuGet | GitHub Packages | リポジトリ権限と連動 |
-| 🐳 コンテナ | GHCR (`ghcr.io`) | Actions と直結・無料枠あり |
-| 🔒 プライベート | どちらも可 | 公開/非公開を細かく制御 |
+| 📦 ライブラリ | GitHub Packages (npm, Maven, NuGet…) | 社内 SDK を複数 repo で共有 |
+| 🐳 Docker イメージ | Container registry `ghcr.io` | `docker pull ghcr.io/org/app:1.2` |
+| 🔒 アクセス | どちらも | repo/org の権限を継承 |
 
-> 💡 Actions の `GITHUB_TOKEN` でそのまま push でき、CI/CD が楽。
+CI は組み込みの `GITHUB_TOKEN` で公開でき、追加の secret 管理が不要。
+
+📘 <a class="retro-link" href="https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages" target="_blank" rel="noopener noreferrer">Introduction to GitHub Packages ↗</a>
 
 ## Integrations (GitHub Apps)
 

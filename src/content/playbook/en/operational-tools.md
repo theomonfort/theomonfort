@@ -47,15 +47,17 @@ links:
 
 ## Packages & Container Registry
 
-Distribute artifacts via private registries on GitHub: npm, Maven, NuGet, and containers via GHCR (`ghcr.io`).
+A **package registry** is where you store and share what you build: libraries and Docker images. GitHub hosts them **next to your code**, public or private, with the same permissions.
 
-| Type | Registry | Why it's good |
+| Type | Registry | Example |
 | --- | --- | --- |
-| 📦 npm/Maven/NuGet | GitHub Packages | Tied to repo permissions |
-| 🐳 Containers | GHCR (`ghcr.io`) | Native to Actions, free tier |
-| 🔒 Private | Either | Fine public/private control |
+| 📦 Libraries | GitHub Packages (npm, Maven, NuGet…) | Share an internal SDK across repos |
+| 🐳 Docker images | Container registry `ghcr.io` | `docker pull ghcr.io/org/app:1.2` |
+| 🔒 Access | Both | Inherit repo/org permissions |
 
-> 💡 Push straight with the Actions `GITHUB_TOKEN` for painless CI/CD.
+CI publishes with the built-in `GITHUB_TOKEN`, so no extra secrets to manage.
+
+📘 <a class="retro-link" href="https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages" target="_blank" rel="noopener noreferrer">Introduction to GitHub Packages ↗</a>
 
 ## Integrations (GitHub Apps)
 
