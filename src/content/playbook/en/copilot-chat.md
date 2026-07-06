@@ -113,6 +113,3 @@ In Chat / Agent you can pick from several models. The key point: the **provider 
 | Claude Opus / Sonnet / Haiku | Anthropic | AWS Bedrock / Anthropic PBC / Google Cloud |
 | Gemini 3.1 Pro / 3.5 Flash / 2.5 Pro | Google | Google Cloud Platform (GCP) |
 | MAI-Code-1-Flash | Microsoft (first-party) | Azure (GitHub's tenant) |
-| DeepSeek-V4 / Kimi-K2.6 (open-weight, public preview — rolling out) | DeepSeek / Moonshot AI | Azure AI Foundry / AOAI (via CAPI) |
-
-> Open-weight models appear in the picker under their original names, but they run on **Microsoft Azure AI Foundry**, not the model maker's own infrastructure. They are rolling out in public preview and are default-off for Business / Enterprise (admin enablement required), so they may not yet show in your org's enable list (they arrive first in VS Code and the Copilot CLI). "Whose model it is" and "where it runs" don't always match.
