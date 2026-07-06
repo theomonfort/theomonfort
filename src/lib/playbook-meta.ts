@@ -28,6 +28,7 @@ export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'github': [3, 4, 5, 6],
   'cli': [6, 7],
   'agentic-workflow': [1],
+  'collaboration-tools': [2],
   'copilot-chat': [4],
 };
 
