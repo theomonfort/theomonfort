@@ -21,6 +21,12 @@ links:
     label: About sub-issues
     url: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/adding-sub-issues
   - group: 📖 Official docs
+    label: Managing issue fields in an organization
+    url: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-your-organization
+  - group: 📰 Announcement
+    label: "Issue fields are now generally available (2026-07-02)"
+    url: https://github.blog/changelog/2026-07-02-issue-fields-are-now-generally-available/
+  - group: 📖 Official docs
     label: GitHub Discussions
     url: https://docs.github.com/en/discussions
   - group: 📖 Official docs
@@ -58,6 +64,26 @@ Issues are the unit for tracking bugs, tasks, and requests one at a time. Sub-is
 | 🤖 Assign Copilot | Hand an Issue to the agent | Opens a PR for you |
 
 > 💡 Real examples: <a class="retro-link" href="https://github.com/microsoft/vscode/issues" target="_blank" rel="noopener noreferrer">VS Code ↗</a> · <a class="retro-link" href="https://github.com/rust-lang/rust/issues" target="_blank" rel="noopener noreferrer">Rust ↗</a> · <a class="retro-link" href="https://github.com/vercel/next.js/issues" target="_blank" rel="noopener noreferrer">Next.js ↗</a> · <a class="retro-link" href="https://github.com/github/docs/issues" target="_blank" rel="noopener noreferrer">GitHub Docs ↗</a>
+
+## Issue Fields (NEW)
+
+Structured, **typed metadata** on issues. **Generally available** as of 2026-07-02. Every organization gets four default fields out of the box (`Priority`, `Effort`, `Start date`, `Target date`), so priority, effort, and dates stay **searchable, reportable, and consistent** across every repository.
+
+| Field | Type | Use |
+| --- | --- | --- |
+| 🔺 Priority | Single select | Track priority in one shared vocabulary |
+| ⏱️ Effort | Number / select | Record estimates and effort |
+| 📅 Start / Target date | Date | Track start and deadline |
+| 🛠️ Custom | Any | Add org-specific values |
+
+**What's new since public preview:**
+
+- 📋 **Field values on the issues list** — scan priority and effort without opening each issue
+- 🌐 **Public project support** — visibility controls per field; logged-out users can see public fields
+- 🤖 **MCP integration** — Copilot can read and set field values when creating or updating issues
+- 🌏 Field names support **non-English characters** (parity with issue types)
+
+> ⚙️ Setup: org admins add, customize, and choose which fields appear per issue type from **Settings › Planning › Issue fields**. <a class="retro-link" href="https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-your-organization" target="_blank" rel="noopener noreferrer">Managing issue fields ↗</a>
 
 ## Discussions
 
