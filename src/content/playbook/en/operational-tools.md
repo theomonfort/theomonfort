@@ -94,8 +94,3 @@ Apply governance across the repo → org → enterprise hierarchy; the higher th
 - 🔁 Higher settings inherit down
 
 > 🎯 Don't tweak repos one by one. Top-down policy is the winning ops play.
-
-📘 More:
-- <a class="retro-link" href="https://docs.github.com/en/packages" target="_blank" rel="noopener noreferrer">Packages ↗</a>
-- <a class="retro-link" href="https://docs.github.com/en/apps" target="_blank" rel="noopener noreferrer">GitHub Apps ↗</a>
-- <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/enforcing-policies" target="_blank" rel="noopener noreferrer">Enterprise policies ↗</a>
