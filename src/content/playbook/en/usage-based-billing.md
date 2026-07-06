@@ -257,7 +257,7 @@ Controls the **total AI credits** a user can consume during a billing cycle (cov
 </div>
 </div>
 
-<div style="background:rgba(255,176,0,0.08);border:1px solid rgba(255,176,0,0.4);padding:0.6em 0.9em;font-size:0.8em;color:rgba(232,244,255,0.9);line-height:1.6;margin-top:1.1em;"><strong style="color:#ffb000;">[New Jul 2026] AI credit pool cap:</strong> Limits how much of the shared <strong>included</strong> credit pool a cost center can draw, up to what its assigned licenses fund (cap auto-calculated). It is a <strong>separate control</strong> from the budget (which caps overage); on reaching the cap you can <strong>block</strong> or <strong>continue as additional spend</strong>. Currently <strong>REST API only</strong> (UI coming soon).</div>
+<div style="background:rgba(255,176,0,0.08);border:1px solid rgba(255,176,0,0.4);padding:0.6em 0.9em;font-size:0.8em;color:rgba(232,244,255,0.9);line-height:1.6;margin-top:1.1em;"><strong style="color:#ffb000;">[New Jul 2026] AI credit pool cap:</strong> Limits how much of the shared <strong>included</strong> credit pool a cost center can draw, up to what its assigned licenses fund (cap auto-calculated). It is a <strong>separate control</strong> from the budget (which caps overage); on reaching the cap you can <strong>block</strong> or <strong>continue as additional spend</strong>. Currently <strong>REST API only</strong> (UI coming soon). <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/rest/billing/cost-centers" target="_blank" rel="noopener noreferrer">REST API: Cost centers (<code>ai_credit_pool_enabled</code>) ↗</a></div>
 
 ## Budget hierarchy
 
