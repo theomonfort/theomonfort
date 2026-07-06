@@ -20,6 +20,9 @@ links:
   - group: 📰 Announcement
     label: GitHub Copilot is moving to usage-based billing
     url: https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/
+  - group: 📰 Announcement
+    label: "Cost centers now support included usage caps (2026-07-02)"
+    url: https://github.blog/changelog/2026-07-02-cost-centers-now-support-included-usage-caps/
   - group: 📖 Official docs
     label: Usage-based billing for organizations and enterprises
     url: https://docs.github.com/en/copilot/concepts/billing/usage-based-billing-for-organizations-and-enterprises
@@ -221,10 +224,10 @@ Controls the **total AI credits** a user can consume during a billing cycle (cov
 <div style="display:flex;flex-direction:column;border:1px solid rgba(255, 46, 136,0.4);background:rgba(5,6,15,0.85);">
 <div style="display:flex;align-items:center;justify-content:center;text-align:center;min-height:3.6em;padding:0.5em 0.6em;line-height:1.25;background:rgba(255, 46, 136,0.14);color:#ff2e88;font-weight:bold;border-bottom:1px solid rgba(255, 46, 136,0.3);">Cost center-level budget</div>
 <div style="padding:0.7em 0.6em;display:flex;flex-direction:column;flex:1;">
-<div style="color:#e8f4ff;font-size:0.92em;height:2.8em;margin-bottom:1.1em;">Caps the cost center's total overage</div>
+<div style="color:#e8f4ff;font-size:0.92em;height:2.8em;margin-bottom:1.1em;line-height:1.3;">Overage (budget) + <strong style="color:#ffb000;">[New] shared-pool cap</strong></div>
 <div style="height:200px;display:flex;flex-direction:column;">
-<div style="flex:1.4;background:#ff2e88;color:#05060f;font-weight:bold;display:flex;align-items:center;justify-content:center;">Overage only</div>
-<div style="flex:1;"></div>
+<div style="flex:1.4;background:#ff2e88;color:#05060f;font-weight:bold;display:flex;align-items:center;justify-content:center;">Overage</div>
+<div style="flex:1;background:rgba(255,176,0,0.28);border-top:2px solid #ffb000;color:#e8f4ff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1.2;">Shared pool<br/><span style="font-size:0.78em;color:#ffb000;font-weight:bold;">[New] can cap</span></div>
 </div>
 </div>
 </div>
@@ -253,6 +256,8 @@ Controls the **total AI credits** a user can consume during a billing cycle (cov
 <div style="position:absolute;left:0;right:0;bottom:0;text-align:center;color:#ff2e88;font-weight:bold;font-size:0.95em;">Cost center usage can be excluded</div>
 </div>
 </div>
+
+<div style="background:rgba(255,176,0,0.08);border:1px solid rgba(255,176,0,0.4);padding:0.6em 0.9em;font-size:0.8em;color:rgba(232,244,255,0.9);line-height:1.6;margin-top:1.1em;"><strong style="color:#ffb000;">[New Jul 2026] AI credit pool cap:</strong> Limits how much of the shared <strong>included</strong> credit pool a cost center can draw, up to what its assigned licenses fund (cap auto-calculated). It is a <strong>separate control</strong> from the budget (which caps overage); on reaching the cap you can <strong>block</strong> or <strong>continue as additional spend</strong>. Currently <strong>REST API only</strong> (UI coming soon). <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/rest/billing/cost-centers" target="_blank" rel="noopener noreferrer">REST API: Cost centers (<code>ai_credit_pool_enabled</code>) ↗</a></div>
 
 ## Budget hierarchy
 

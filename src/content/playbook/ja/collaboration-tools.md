@@ -21,6 +21,12 @@ links:
     label: About sub-issues
     url: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/adding-sub-issues
   - group: 📖 公式ドキュメント
+    label: Managing issue fields in an organization
+    url: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-your-organization
+  - group: 📰 発表
+    label: "Issue fields are now generally available (2026-07-02)"
+    url: https://github.blog/changelog/2026-07-02-issue-fields-are-now-generally-available/
+  - group: 📖 公式ドキュメント
     label: GitHub Discussions
     url: https://docs.github.com/en/discussions
   - group: 📖 公式ドキュメント
@@ -58,6 +64,26 @@ Issues はバグ・タスク・要望を 1 件ずつ追跡する基本単位。S
 | 🤖 Copilot 割当 | Issue を担当に指定 | 自動で PR を起票 |
 
 > 💡 実例: <a class="retro-link" href="https://github.com/microsoft/vscode/issues" target="_blank" rel="noopener noreferrer">VS Code ↗</a> · <a class="retro-link" href="https://github.com/rust-lang/rust/issues" target="_blank" rel="noopener noreferrer">Rust ↗</a> · <a class="retro-link" href="https://github.com/vercel/next.js/issues" target="_blank" rel="noopener noreferrer">Next.js ↗</a> · <a class="retro-link" href="https://github.com/github/docs/issues" target="_blank" rel="noopener noreferrer">GitHub Docs ↗</a>
+
+## Issue Fields（NEW）
+
+Issue に **構造化された型付きメタデータ** を付与する仕組み。2026-07-02 に **一般提供（GA）**。全 Organization に既定で 4 フィールド（`Priority`・`Effort`・`Start date`・`Target date`）が用意され、Repository 横断で優先度・工数・期日を **一貫して検索・集計** できる。
+
+| フィールド | 型 | 用途 |
+| --- | --- | --- |
+| 🔺 Priority | 単一選択 | 優先度を統一表記で管理 |
+| ⏱️ Effort | 数値 / 選択 | 見積・工数を記録 |
+| 📅 Start / Target date | 日付 | 開始・期限を追跡 |
+| 🛠️ カスタム | 任意 | 組織独自の値を追加 |
+
+**Public Preview からの進化:**
+
+- 📋 Issues 一覧に **フィールド値を直接表示** — 開かずに優先度・工数を一覧で確認
+- 🌐 **Public Project 対応** — 可視性を制御しつつ、ログアウト中でも公開フィールドを閲覧可
+- 🤖 **MCP 連携** — Copilot が Issue の作成・更新時にフィールド値を読み書き
+- 🌏 フィールド名が **非英語文字** に対応（Issue types と同等）
+
+> ⚙️ 設定: 組織管理者は **Settings › Planning › Issue fields** からフィールドの追加・カスタマイズ、Issue type ごとの表示設定が可能。<a class="retro-link" href="https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-your-organization" target="_blank" rel="noopener noreferrer">Managing issue fields ↗</a>
 
 ## Discussions
 
