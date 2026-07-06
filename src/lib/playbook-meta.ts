@@ -12,7 +12,6 @@ export const NEW_PLAYBOOK_SLUGS = new Set([
   'cli',
   'agentic-workflow',
   'copilot-app',
-  'copilot-chat',
   'collaboration-tools',
 ]);
 
@@ -30,7 +29,6 @@ export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'cli': [6, 7],
   'agentic-workflow': [1],
   'collaboration-tools': [2],
-  'copilot-chat': [4],
   'usage-based-billing': [9],
 };
 
