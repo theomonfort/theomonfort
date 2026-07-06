@@ -29,6 +29,7 @@ export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'cli': [6, 7],
   'agentic-workflow': [1],
   'copilot-chat': [4],
+  'usage-based-billing': [9],
 };
 
 export function navHintSlides(slug: string): number[] {
