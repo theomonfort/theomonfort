@@ -51,14 +51,14 @@ A typical playbook entry has 6–8 slides:
 | # | Slide title pattern | Body |
 |---|---|---|
 | 1 | (auto from frontmatter) | title + icon + summary |
-| 2 | `## 一言で` / `## In one line` | **octocat `hero-quote`** + 1–2 callout `>` lines |
+| 2 | `## 一言で` / `## In a nutshell` | **octocat `hero-quote`** + 1–2 callout `>` lines |
 | 3 | `## 何ができる?` / `## What it does` | comparison table or 3–5 bullets |
 | 4 | `## 設定方法` / `## Setup` | code fence + 4 bullets max |
 | 5 | `## ★ 使いどころ` / `## ★ Killer use case` | the one thing the reader must remember |
 | 6 | `## トラブルシュート` / `## Troubleshooting` | bullet list with ❌ and ✅ |
 | 7 | (auto from frontmatter `links`) | grouped link list |
 
-> 💬 **Slide 2 is not optional.** The `## 一言で` / `## In one line` slide must lead with the default **octocat-with-speech-bubble** `hero-quote` (see 4a) — it's the playbook's signature opener.
+> 💬 **Slide 2 is not optional.** The `## 一言で` / `## In a nutshell` slide must lead with the default **octocat-with-speech-bubble** `hero-quote` (see 4a) — it's the playbook's signature opener.
 
 Adjust freely — but keep ≤ 1 H2 per "concept", and don't let a single slide exceed ~150 words.
 
@@ -118,7 +118,7 @@ These are the recurring patterns the deck uses. Use them — they're styled, acc
 
 ### 4a. Hero-quote (the "speech bubble" lead block)
 
-**Every entry MUST open its first content slide (`## 一言で` / `## In one line`) with a `hero-quote` showing the default octocat-with-speech-bubble** (the talking-character look) — *not* `hero-quote-plain`. This is the playbook's signature lead block; a section that opens without it looks off-brand.
+**Every entry MUST open its first content slide (`## 一言で` / `## In a nutshell`) with a `hero-quote` showing the default octocat-with-speech-bubble** (the talking-character look) — *not* `hero-quote-plain`. This is the playbook's signature lead block; a section that opens without it looks off-brand.
 
 Use **one per slide max**. After the mandatory first-slide hero-quote, you may reuse it sparingly as a mid-deck section divider (often with `hero-quote-plain` for a quieter, mascot-free box).
 
@@ -284,7 +284,7 @@ Before declaring done, verify EVERY item:
 - [ ] `order` doesn't collide with an existing entry (check `src/content/playbook/ja/*.md`).
 - [ ] All `links[].url` are fully-qualified URLs.
 - [ ] Slide count is 5–9.
-- [ ] First content slide (`## 一言で` / `## In one line`) opens with the default octocat-with-speech-bubble `hero-quote` (or the category's auto-mascot) — **not** `hero-quote-plain`.
+- [ ] First content slide (`## 一言で` / `## In a nutshell`) opens with the default octocat-with-speech-bubble `hero-quote` (or the category's auto-mascot) — **not** `hero-quote-plain`.
 - [ ] Any further `hero-quote` blocks are used sparingly (≤ 1 per slide).
 - [ ] No slide (other than the first, with its `hero-quote`) starts with a `>` callout — every slide opens with normal prose; callouts sit lower / at the bottom.
 - [ ] Each slide stands on its own — no orphan H2 with no body, no body before the first H2.

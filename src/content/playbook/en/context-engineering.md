@@ -55,6 +55,20 @@ classDef dumb fill:#7a1748,stroke:#ff2e88,color:#ffe8f4
 
 > The goal of Context Engineering is not to fill the context window, but to **keep the necessary information visible**.
 
+## Input, Cached Input & Output Tokens
+
+Every turn, what sits in the context window is billed as **three kinds of tokens**. Knowing them explains why long sessions cost what they do.
+
+| Token type | What it is | Relative cost |
+| --- | --- | --- |
+| 🟥 Input | New text sent this turn — prompt, files, tool results | Standard |
+| 🟦 Cached input | Context resent from earlier turns, served from cache | Cheapest (big discount) |
+| 🟩 Output | Text the model generates back to you | Most expensive |
+
+Across a long chat, most of the window is **cached input** (the history is re-sent every turn), so caching is what keeps cost sane. You save most by trimming **output** and the **input** you add.
+
+> 💡 The turn-by-turn slides that follow color each block by these token types.
+
 ## Context Window: Start (turn 1)
 
 Start is nearly ideal. Only the always-on **System & tools** are loaded — skill descriptions, copilot-instructions, MCP server tool schemas, default tool definitions — leaving plenty of working space. On the very first turn, those are sent fresh, so they count as **input tokens**.
