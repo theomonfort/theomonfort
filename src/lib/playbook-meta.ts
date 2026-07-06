@@ -13,6 +13,7 @@ export const NEW_PLAYBOOK_SLUGS = new Set([
   'agentic-workflow',
   'copilot-app',
   'copilot-chat',
+  'collaboration-tools',
 ]);
 
 export function isNewPlaybookEntry(slug: string): boolean {
