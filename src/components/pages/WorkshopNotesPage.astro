@@ -232,6 +232,7 @@ let counter = 0;
                 <span class="uppercase">{section.title}</span>
                 {section.subtitle && <span class="ws-subtitle"> : {section.subtitle}</span>}
               </h2>
+              <button type="button" class="ws-check-all font-pixel" aria-label="Toggle all items in this section">✓ ALL</button>
               <span class="ws-section-count font-terminal text-base opacity-90">0 / {section.items.length}</span>
             </summary>
             <ul class="ws-list ml-[6px] pl-5 py-1 space-y-0.5">
@@ -639,6 +640,35 @@ let counter = 0;
   .ws-section.is-complete > .ws-summary h2::after {
     display: none;
   }
+
+  /* Per-section "check all / clear" button */
+  .ws-check-all {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    color: var(--c);
+    background: transparent;
+    border: 1px solid var(--c);
+    padding: 0.4em 0.6em;
+    cursor: pointer;
+    opacity: 0.4;
+    white-space: nowrap;
+    transition: opacity 0.15s ease, background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .ws-summary:hover .ws-check-all,
+  .ws-check-all:focus-visible {
+    opacity: 1;
+  }
+  .ws-check-all:hover {
+    background: var(--c);
+    color: #05060f;
+    box-shadow: 0 0 8px var(--c);
+  }
+  .ws-check-all.is-all {
+    opacity: 1;
+    background: var(--c);
+    color: #05060f;
+  }
 </style>
 
 <script>
@@ -656,6 +686,8 @@ let counter = 0;
   function initWorkshopChecklist() {
     const container = document.querySelector<HTMLElement>('[data-total]');
     if (!container) return;
+    if (container.dataset.wsInit === '1') return;
+    container.dataset.wsInit = '1';
 
     const checks = Array.from(document.querySelectorAll<HTMLInputElement>('.ws-check'));
     const sectionEls = Array.from(document.querySelectorAll<HTMLDetailsElement>('.ws-section'));
@@ -677,7 +709,13 @@ let counter = 0;
       const done = boxes.filter((b) => b.checked).length;
       const label = section.querySelector('.ws-section-count');
       if (label) label.textContent = `${done} / ${boxes.length}`;
-      section.classList.toggle('is-complete', boxes.length > 0 && done === boxes.length);
+      const allDone = boxes.length > 0 && done === boxes.length;
+      section.classList.toggle('is-complete', allDone);
+      const allBtn = section.querySelector<HTMLButtonElement>('.ws-check-all');
+      if (allBtn) {
+        allBtn.classList.toggle('is-all', allDone);
+        allBtn.textContent = allDone ? '✓ CLEAR' : '✓ ALL';
+      }
     };
 
     const refreshGlobal = () => {
@@ -703,6 +741,20 @@ let counter = 0;
       section.addEventListener('toggle', () => {
         openState[key] = section.open;
         saveOpen();
+      });
+      const allBtn = section.querySelector<HTMLButtonElement>('.ws-check-all');
+      allBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const boxes = Array.from(section.querySelectorAll<HTMLInputElement>('.ws-check'));
+        const target = boxes.some((b) => !b.checked);
+        boxes.forEach((b) => {
+          b.checked = target;
+          checkState[b.id] = target;
+        });
+        saveChecks();
+        refreshSection(section);
+        refreshGlobal();
       });
       refreshSection(section);
     });
