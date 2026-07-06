@@ -686,6 +686,8 @@ let counter = 0;
   function initWorkshopChecklist() {
     const container = document.querySelector<HTMLElement>('[data-total]');
     if (!container) return;
+    if (container.dataset.wsInit === '1') return;
+    container.dataset.wsInit = '1';
 
     const checks = Array.from(document.querySelectorAll<HTMLInputElement>('.ws-check'));
     const sectionEls = Array.from(document.querySelectorAll<HTMLDetailsElement>('.ws-section'));
