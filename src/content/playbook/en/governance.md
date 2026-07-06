@@ -58,7 +58,7 @@ Assign roles per repository to control who can do what.
 | 🛠️ Maintain | Some settings |
 | 👑 Admin | Full control |
 
-> 💡 Grant roles to teams and swap members in/out for easy upkeep.
+> 💡 Grant roles to teams and swap members in/out for easy upkeep. <a class="retro-link" href="https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization" target="_blank" rel="noopener noreferrer">Repository roles ↗</a>
 
 ## Policies
 
@@ -69,7 +69,7 @@ Apply governance across the repo → org → enterprise hierarchy; the higher th
 - 🏛️ **Enterprise**: rules across all orgs
 - 🔁 Higher settings inherit down
 
-> 🎯 Don't tweak repos one by one. Top-down policy is the winning ops play.
+> 🎯 Don't tweak repos one by one. Top-down policy is the winning ops play. <a class="retro-link" href="https://docs.github.com/en/organizations/managing-organization-settings" target="_blank" rel="noopener noreferrer">Organization policies ↗</a> · <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/enforcing-policies" target="_blank" rel="noopener noreferrer">Enterprise policies ↗</a>
 
 ## Copilot managed settings (NEW)
 
