@@ -76,6 +76,8 @@ Structured, **typed metadata** on issues. **Generally available** as of 2026-07-
 | 📅 Start / Target date | Date | Track start and deadline |
 | 🛠️ Custom | Any | Add org-specific values |
 
+> 📌 Defaults are **pinned per issue type**: Priority (all types), Effort (Bug / Task / Feature), Start / Target date (Feature only).
+
 **What's new since public preview:**
 
 - 📋 **Field values on the issues list** — scan priority and effort without opening each issue
