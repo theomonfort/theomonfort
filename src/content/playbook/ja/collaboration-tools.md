@@ -69,14 +69,12 @@ Issues はバグ・タスク・要望を 1 件ずつ追跡する基本単位。S
 
 Issue に **構造化された型付きメタデータ** を付与する仕組み。2026-07-02 に **一般提供（GA）**。全 Organization に既定で 4 フィールド（`Priority`・`Effort`・`Start date`・`Target date`）が用意され、Repository 横断で優先度・工数・期日を **一貫して検索・集計** できる。
 
-| フィールド | 型 | 用途 |
-| --- | --- | --- |
-| 🔺 Priority | 単一選択 | 優先度を統一表記で管理 |
-| ⏱️ Effort | 数値 / 選択 | 見積・工数を記録 |
-| 📅 Start / Target date | 日付 | 開始・期限を追跡 |
-| 🛠️ カスタム | 任意 | 組織独自の値を追加 |
-
-> 📌 既定フィールドは **Issue type ごとにピン留めが異なる**: Priority（全 type）、Effort（Bug / Task / Feature）、Start / Target date（Feature のみ）。
+| フィールド | 型 | 既定で付く type | 用途 |
+| --- | --- | --- | --- |
+| 🔺 Priority | 単一選択 | 全 type | 優先度を統一表記 |
+| ⏱️ Effort | 数値 / 選択 | Bug / Task / Feature | 見積・工数 |
+| 📅 Start / Target date | 日付 | Feature のみ | 開始・期限 |
+| 🛠️ カスタム | 任意 | — | 組織独自の値 |
 
 > ⚙️ 設定: 組織管理者は **Settings › Planning › Issue fields** からフィールドの追加・カスタマイズ、Issue type ごとの表示設定が可能。<a class="retro-link" href="https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-your-organization" target="_blank" rel="noopener noreferrer">Managing issue fields ↗</a>
 

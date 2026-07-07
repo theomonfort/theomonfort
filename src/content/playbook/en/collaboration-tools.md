@@ -69,14 +69,12 @@ Issues are the unit for tracking bugs, tasks, and requests one at a time. Sub-is
 
 Structured, **typed metadata** on issues. **Generally available** as of 2026-07-02. Every organization gets four default fields out of the box (`Priority`, `Effort`, `Start date`, `Target date`), so priority, effort, and dates stay **searchable, reportable, and consistent** across every repository.
 
-| Field | Type | Use |
-| --- | --- | --- |
-| 🔺 Priority | Single select | Track priority in one shared vocabulary |
-| ⏱️ Effort | Number / select | Record estimates and effort |
-| 📅 Start / Target date | Date | Track start and deadline |
-| 🛠️ Custom | Any | Add org-specific values |
-
-> 📌 Defaults are **pinned per issue type**: Priority (all types), Effort (Bug / Task / Feature), Start / Target date (Feature only).
+| Field | Type | Default on | Use |
+| --- | --- | --- | --- |
+| 🔺 Priority | Single select | All types | Shared priority vocabulary |
+| ⏱️ Effort | Number / select | Bug / Task / Feature | Estimates & effort |
+| 📅 Start / Target date | Date | Feature only | Start & deadline |
+| 🛠️ Custom | Any | — | Org-specific values |
 
 > ⚙️ Setup: org admins add, customize, and choose which fields appear per issue type from **Settings › Planning › Issue fields**. <a class="retro-link" href="https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-your-organization" target="_blank" rel="noopener noreferrer">Managing issue fields ↗</a>
 
