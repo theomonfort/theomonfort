@@ -29,6 +29,12 @@ links:
   - group: 📖 Official Documentation
     label: Enabling secret scanning for your repo
     url: https://docs.github.com/en/code-security/secret-scanning/enabling-secret-scanning-features/enabling-secret-scanning-for-your-repository
+  - group: 📖 Official Documentation
+    label: Public monitoring
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring
+  - group: 📰 Recent Changelog
+    label: "Secret scanning public monitoring for enterprises (2026-07-01)"
+    url: https://github.blog/changelog/2026-07-01-secret-scanning-public-monitoring-for-enterprises/
   - group: 📰 Recent Changelog
     label: "Secret scanning with GitHub MCP Server is now GA (2026-05-05)"
     url: https://github.blog/changelog/2026-05-05-secret-scanning-with-github-mcp-server-is-now-generally-available
@@ -136,6 +142,23 @@ Use **default settings** in `Org → Settings → Code security` to apply to new
 - <a class="retro-link" href="https://github.blog/changelog/2024-02-29-push-protection-is-enabled-for-free-users-on-github/" target="_blank" rel="noopener noreferrer">Push protection enabled for free users (2024 Feb) ↗</a>
 - <a class="retro-link" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">Introducing GitHub Secret Protection & Code Security (2025 Mar) ↗</a>
 - <a class="retro-link" href="https://docs.github.com/en/get-started/learning-about-github/githubs-plans" target="_blank" rel="noopener noreferrer">GitHub plans pricing ↗</a>
+
+## Public monitoring (NEW)
+
+GitHub **monitors the entire public surface of github.com in real time** and attributes leaked secrets back to your enterprise. It catches secrets leaked *outside* your own repos — personal forks, open source projects, tokens pasted into public issues / PRs / discussions.
+
+- 🌐 Scans **public content only** (git, PR comments, issues, discussions); it **never scans private repos**
+- ⚡ Real-time (not a nightly crawl), with native platform metadata for attribution (not a commit-email guess)
+- 🧩 Works out of the box — just enable it and see past leaks too
+
+**Two attribution methods:**
+
+| Method | What it checks | Catches |
+| --- | --- | --- |
+| 👤 Member-based | Committer's account is an enterprise member | Leaks from managed accounts & known members |
+| 🌐 Verified domain match | Committer's email is on a verified domain | Leaks from personal accounts using a work email (even if unlinked / email private) |
+
+> ⚙️ Enable: enterprise owners / security managers from the **Security tab**. GHEC with Secret Protection or Advanced Security (public preview, no extra cost; data residency coming soon). <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Public monitoring ↗</a>
 
 ## Secret Risk Assessment (free inventory scan)
 
