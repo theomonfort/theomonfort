@@ -78,13 +78,6 @@ Structured, **typed metadata** on issues. **Generally available** as of 2026-07-
 
 > 📌 Defaults are **pinned per issue type**: Priority (all types), Effort (Bug / Task / Feature), Start / Target date (Feature only).
 
-**What's new since public preview:**
-
-- 📋 **Field values on the issues list** — scan priority and effort without opening each issue
-- 🌐 **Public project support** — visibility controls per field; logged-out users can see public fields
-- 🤖 **MCP integration** — Copilot can read and set field values when creating or updating issues
-- 🌏 Field names support **non-English characters** (parity with issue types)
-
 > ⚙️ Setup: org admins add, customize, and choose which fields appear per issue type from **Settings › Planning › Issue fields**. <a class="retro-link" href="https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-your-organization" target="_blank" rel="noopener noreferrer">Managing issue fields ↗</a>
 
 ## Discussions
