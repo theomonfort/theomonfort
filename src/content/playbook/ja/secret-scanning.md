@@ -29,6 +29,12 @@ links:
   - group: 📖 公式ドキュメント
     label: Enabling secret scanning for your repo
     url: https://docs.github.com/en/code-security/secret-scanning/enabling-secret-scanning-features/enabling-secret-scanning-for-your-repository
+  - group: 📖 公式ドキュメント
+    label: Public monitoring
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring
+  - group: 📰 Recent Changelog
+    label: "Secret scanning public monitoring for enterprises (2026-07-01)"
+    url: https://github.blog/changelog/2026-07-01-secret-scanning-public-monitoring-for-enterprises/
   - group: 📰 Recent Changelog
     label: "Secret scanning with GitHub MCP Server is now GA (2026-05-05)"
     url: https://github.blog/changelog/2026-05-05-secret-scanning-with-github-mcp-server-is-now-generally-available
@@ -136,6 +142,23 @@ Repo or Org → Settings → Code security → Secret scanning → Custom patter
 - <a class="retro-link" href="https://github.blog/changelog/2024-02-29-push-protection-is-enabled-for-free-users-on-github/" target="_blank" rel="noopener noreferrer">Push protection enabled for free users(2024 Feb)↗</a>
 - <a class="retro-link" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">Introducing GitHub Secret Protection & Code Security(2025 Mar)↗</a>
 - <a class="retro-link" href="https://docs.github.com/en/get-started/learning-about-github/githubs-plans" target="_blank" rel="noopener noreferrer">GitHub plans pricing ↗</a>
+
+## Public monitoring（NEW）
+
+GitHub が **github.com の公開領域全体をリアルタイム監視** し、漏洩した secret を「あなたのエンタープライズ」に帰属させる仕組み。自分の repo の外 — 個人フォーク・OSS・公開 issue / PR / discussion に貼られたトークン — で漏れた secret も検出する。
+
+- 🌐 対象は **公開コンテンツのみ**（git・PR コメント・issue・discussion）。**private repo は絶対にスキャンしない**
+- ⚡ リアルタイム（夜間クロールではない）＋ プラットフォーム metadata で正確に帰属（commit email の推測ではない）
+- 🧩 設定不要（out of the box）。有効化するだけで過去の漏洩も表示
+
+**帰属（attribution）の 2 方式:**
+
+| 方式 | 判定 | 捕捉できる漏洩 |
+| --- | --- | --- |
+| 👤 メンバー帰属 | committer の GitHub アカウントがエンタープライズのメンバー | 管理アカウント・既知メンバーからの漏洩 |
+| 🌐 検証済みドメイン照合 | committer の email が検証済みドメイン | 仕事用 email を使う個人アカウント（未リンク・email 非公開でも） |
+
+> ⚙️ 有効化: Enterprise owner / security manager が **Security タブ** から。GHEC の Secret Protection / Advanced Security 対象（Public preview・追加費用なし、data residency は近日）。<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Public monitoring ↗</a>
 
 ## Secret Risk Assessment(無料の棚卸しスキャン)
 
