@@ -75,12 +75,26 @@ Apply governance across the repo → org → enterprise hierarchy; the higher th
 
 How an enterprise **centrally controls** Copilot clients (CLI / VS Code). A `copilot/managed-settings.json` file in the source organization's `.github-private` repository is distributed automatically to every user on the enterprise's Copilot plan.
 
-| Key | What it controls |
-| --- | --- |
-| 🧠 `permissions.model` | Default model for new conversations. `"auto"` makes auto selection the default (users can still switch) |
-| 🚫 `permissions.disableBypassPermissionsMode` | `"disable"` blocks YOLO / bypass mode (CLI `--yolo`/`/yolo`, VS Code auto-approve) |
-| 🏪 `extraKnownMarketplaces` / `strictKnownMarketplaces` | Add / restrict available plugin marketplaces |
-| 🧩 `enabledPlugins` | Plugins auto-installed for every user |
+```json
+{
+  "extraKnownMarketplaces": {
+    "NAME": { "source": { "source": "github", "repo": "OWNER/REPO" } }
+  },
+  "strictKnownMarketplaces": [
+    { "source": "github", "repo": "OWNER/REPO" }
+  ],
+  "enabledPlugins": { "PLUGIN@MARKETPLACE": true },
+  "permissions": {
+    "model": "auto",
+    "disableBypassPermissionsMode": "disable"
+  }
+}
+```
+
+- 🧠 `permissions.model` — default model for new conversations; `"auto"` makes auto selection the default (users can still switch)
+- 🚫 `permissions.disableBypassPermissionsMode` — `"disable"` blocks YOLO / bypass mode (CLI `--yolo`/`/yolo`, VS Code auto-approve)
+- 🏪 `extraKnownMarketplaces` / `strictKnownMarketplaces` (top-level) — add / restrict available plugin marketplaces
+- 🧩 `enabledPlugins` (top-level) — plugins auto-installed for every user
 
 > ⚙️ Resolution: there is **one source organization per enterprise** (set under AI controls › Agents). Whichever org grants your license, you get this single source's settings. managed-settings **overrides users' own client config** and clients pull it **once per hour**. <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-agents/configure-enterprise-managed-settings" target="_blank" rel="noopener noreferrer">Configuring enterprise managed settings ↗</a>
 
