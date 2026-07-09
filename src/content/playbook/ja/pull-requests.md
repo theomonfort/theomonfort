@@ -75,26 +75,36 @@ PR を中心にブランチをどう構成するか。リリース頻度に合�
 
 **長命なブランチは `main` 1 本、feature ブランチは短命。** `main` から枝を切り、PR を出してレビュー・マージし、そのままデプロイ。シンプルで速く、頻繁にデプロイする Web アプリや小規模チームに最適。
 
-<svg viewBox="0 0 920 260" role="img" aria-label="GitHub Flow branch diagram" style="width:100%;height:auto;max-width:840px;display:block;margin:1.4em auto;font-family:'DotGothic16',monospace;">
-  <line x1="30" y1="200" x2="890" y2="200" stroke="#ffb000" stroke-width="4"/>
-  <text x="30" y="234" fill="#ffb000" font-size="20" font-weight="bold">main</text>
-  <circle cx="90" cy="200" r="8" fill="#ffb000"/>
-  <circle cx="445" cy="200" r="8" fill="#ffb000"/>
-  <path d="M170 200 C 210 108, 320 108, 360 200" fill="none" stroke="#00f0ff" stroke-width="3"/>
-  <circle cx="232" cy="130" r="7" fill="#00f0ff"/>
-  <circle cx="300" cy="130" r="7" fill="#00f0ff"/>
-  <text x="212" y="94" fill="#00f0ff" font-size="17">feature</text>
-  <circle cx="360" cy="200" r="9" fill="#9bbc0f"/>
-  <text x="300" y="250" fill="#9bbc0f" font-size="15">PR → merge</text>
-  <path d="M530 200 C 570 108, 680 108, 720 200" fill="none" stroke="#00f0ff" stroke-width="3"/>
-  <circle cx="592" cy="130" r="7" fill="#00f0ff"/>
-  <circle cx="660" cy="130" r="7" fill="#00f0ff"/>
-  <text x="572" y="94" fill="#00f0ff" font-size="17">feature</text>
-  <circle cx="720" cy="200" r="9" fill="#9bbc0f"/>
-  <text x="660" y="250" fill="#9bbc0f" font-size="15">PR → merge</text>
-  <line x1="800" y1="200" x2="875" y2="200" stroke="#ff2e88" stroke-width="3" stroke-dasharray="4 4"/>
-  <path d="M868 194 L882 200 L868 206 Z" fill="#ff2e88"/>
-  <text x="792" y="176" fill="#ff2e88" font-size="15">deploy</text>
+<svg viewBox="0 0 700 380" role="img" aria-label="GitHub Flow: main branch with several short-lived change branches merging in" style="width:100%;height:auto;max-width:760px;display:block;margin:1.4em auto;font-family:'DotGothic16',monospace;">
+  <defs>
+    <marker id="ghf-arrow" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
+    </marker>
+  </defs>
+  <rect x="16" y="49" width="118" height="34" rx="7" fill="#2fbf76"/><text x="75" y="71" text-anchor="middle" fill="#05060f" font-size="16" font-weight="bold">change</text>
+  <rect x="16" y="135" width="118" height="34" rx="7" fill="#4ec3ff"/><text x="75" y="157" text-anchor="middle" fill="#05060f" font-size="16" font-weight="bold">main</text>
+  <rect x="16" y="223" width="118" height="34" rx="7" fill="#17d8e0"/><text x="75" y="245" text-anchor="middle" fill="#05060f" font-size="16" font-weight="bold">change</text>
+  <rect x="16" y="309" width="118" height="34" rx="7" fill="#ff5b6b"/><text x="75" y="331" text-anchor="middle" fill="#05060f" font-size="16" font-weight="bold">change</text>
+  <g stroke="#7d8595" stroke-width="2.6" fill="none">
+    <line x1="249" y1="152" x2="336" y2="152" marker-end="url(#ghf-arrow)"/>
+    <line x1="374" y1="152" x2="471" y2="152" marker-end="url(#ghf-arrow)"/>
+    <line x1="509" y1="152" x2="596" y2="152" marker-end="url(#ghf-arrow)"/>
+    <line x1="241" y1="166" x2="286" y2="225" marker-end="url(#ghf-arrow)"/>
+    <line x1="315" y1="225" x2="343" y2="167" marker-end="url(#ghf-arrow)"/>
+    <line x1="367" y1="138" x2="414" y2="82" marker-end="url(#ghf-arrow)"/>
+    <line x1="449" y1="66" x2="526" y2="66" marker-end="url(#ghf-arrow)"/>
+    <line x1="561" y1="80" x2="604" y2="138" marker-end="url(#ghf-arrow)"/>
+    <line x1="367" y1="166" x2="426" y2="312" marker-end="url(#ghf-arrow)"/>
+    <line x1="455" y1="312" x2="481" y2="168" marker-end="url(#ghf-arrow)"/>
+  </g>
+  <circle cx="230" cy="152" r="19" fill="#4ec3ff"/>
+  <circle cx="355" cy="152" r="19" fill="#4ec3ff"/>
+  <circle cx="490" cy="152" r="19" fill="#4ec3ff"/>
+  <circle cx="615" cy="152" r="19" fill="#4ec3ff"/>
+  <circle cx="430" cy="66" r="19" fill="#2fbf76"/>
+  <circle cx="545" cy="66" r="19" fill="#2fbf76"/>
+  <circle cx="300" cy="240" r="19" fill="#17d8e0"/>
+  <circle cx="440" cy="326" r="19" fill="#ff5b6b"/>
 </svg>
 
 - 🌿 変更ごとに `main` から枝を切る（feature / fix）
