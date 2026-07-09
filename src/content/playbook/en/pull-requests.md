@@ -66,7 +66,6 @@ How a team organizes branches around PRs. Pick the model that matches your relea
 | --- | --- | --- |
 | 🌿 GitHub Flow | One `main` + short-lived feature branches; PR → merge → deploy from `main` | Continuous delivery, most teams |
 | 🌳 Git Flow | `main` + long-lived `develop`, plus `feature` / `release` / `hotfix` branches | Scheduled, versioned releases |
-| 🏭 GitLab Flow | Feature branches promoted through `staging` / `production` (environment) branches | Staged, environment-based deploys |
 | 🚀 Trunk-Based | Commit to `main` via tiny branches behind feature flags | High-velocity CI/CD, large teams |
 
 > 💡 Default to **GitHub Flow / trunk-based** for speed; reach for **Git Flow** only when you ship versioned releases.
