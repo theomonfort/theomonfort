@@ -169,8 +169,69 @@ const sections: Section[] = [
   },
 ];
 
+const githubSections: Section[] = [
+  {
+    title: 'PREPARATION',
+    subtitle: '登壇準備',
+    color: 'amber',
+    items: [
+      { label: 'Duplicate the workshop repo in your Organization' },
+      { label: 'Check Code Scanning, Secret Scanning, Dependabot, Code Review ruleset are activated' },
+      { label: 'Have the AGENDA (This one) / PLAYBOOK / REPOSITORY open in the browser' },
+      { label: 'Open the workshop repo in VS Code and GitHub' },
+    ],
+  },
+  {
+    title: 'INTRODUCTION',
+    subtitle: 'GitHub と Copilot',
+    color: 'cyan',
+    items: [
+      { label: 'Self-introduction' },
+      { label: 'Explain GITHUB (SLIDE)' },
+      { label: 'Explain COPILOT (SLIDE)' },
+    ],
+  },
+  {
+    title: 'COLLABORATION TOOLS',
+    subtitle: 'Issues・Projects・Discussions',
+    color: 'green',
+    items: [
+      { label: 'Explain Collaboration tools' },
+    ],
+  },
+  {
+    title: 'REVIEW TOOL',
+    subtitle: 'PR とブランチ戦略',
+    color: 'amber',
+    items: [
+      { label: 'Explain PR' },
+      { label: 'Explain Branching strategies' },
+    ],
+  },
+  {
+    title: 'TEST & SECURE',
+    subtitle: 'GitHub Actions と GHAS',
+    color: 'cyan',
+    items: [
+      { label: 'Explain GitHub Actions' },
+      { label: 'Explain Dependabot' },
+      { label: 'Explain Code Scanning' },
+      { label: 'Explain Secret Scanning' },
+    ],
+  },
+];
+
+const objectivesGithub =
+  locale === 'en'
+    ? 'This GitHub workshop tours the GitHub platform basics — collaboration tools, pull requests and branching, GitHub Actions, and GHAS (Dependabot, Code Scanning, Secret Scanning) — to build a solid foundation for team development and security.'
+    : 'この GitHub ワークショップでは、GitHub プラットフォームの基本 ── コラボレーションツール、Pull Request とブランチ戦略、GitHub Actions、そして GHAS（Dependabot・Code Scanning・Secret Scanning）── を一巡りして、チーム開発とセキュリティの土台を固める。';
+
+const workshops: { id: string; sections: Section[]; objectives: string }[] = [
+  { id: 'copilot', sections, objectives: objectivesText },
+  { id: 'github', sections: githubSections, objectives: objectivesGithub },
+];
+
 const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
-let counter = 0;
 ---
 
 <Layout locale={locale} currentPath="/ws" title="Workshop Presenter Notes">
@@ -180,13 +241,13 @@ let counter = 0;
       <div class="ws-quest-grid">
         <div class="ws-quest-copy">
           <div class="ws-switch flex items-center gap-2 mb-3" role="tablist" aria-label="Workshop">
-            <button type="button" role="tab" class="ws-tab" data-ws="github" aria-selected="false" aria-controls="ws-construction">GITHUB</button>
+            <button type="button" role="tab" class="ws-tab" data-ws="github" aria-selected="false" aria-controls="ws-notes-github">GITHUB</button>
             <button type="button" role="tab" class="ws-tab is-active" data-ws="copilot" aria-selected="true" aria-controls="ws-notes">COPILOT</button>
             <button type="button" role="tab" class="ws-tab" data-ws="ghas" aria-selected="false" aria-controls="ws-construction">GHAS</button>
           </div>
           <h1 id="ws-title" class="ws-quest-title font-pixel">COPILOT WORKSHOP</h1>
           <div id="ws-quest-body">
-            <p class="ws-quest-sum font-pixel-jp">{objectivesText}</p>
+            <p id="ws-objectives" class="ws-quest-sum font-pixel-jp">{objectivesText}</p>
             <div id="ws-progress" class="ws-quest-progress">
               <div class="ws-exp">
                 <span class="ws-exp-tag">EXP</span>
@@ -218,13 +279,18 @@ let counter = 0;
       <p class="ws-uc-body font-pixel-jp">{ucBody}</p>
     </div>
 
-    <div id="ws-notes" role="tabpanel">
+    {workshops.map((w) => {
+      let counter = 0;
+      const wTotal = w.sections.reduce((n, s) => n + s.items.length, 0);
+      const panelId = w.id === 'copilot' ? 'ws-notes' : `ws-notes-${w.id}`;
+      return (
+      <div id={panelId} class="ws-panel" role="tabpanel" data-workshop={w.id} data-objectives={w.objectives} hidden={w.id !== 'copilot'}>
 
-    <div class="ws-secs" data-total={totalItems}>
-      {sections.map((section, si) => {
+    <div class="ws-secs" data-total={wTotal} data-workshop={w.id}>
+      {w.sections.map((section, si) => {
         const c = COLORS[section.color];
         return (
-          <details class="ws-section" data-section={si} style={`--c:${c.hex}`} open>
+          <details class="ws-section" data-section={`${w.id}-${si}`} style={`--c:${c.hex}`} open>
             <summary class={`ws-summary flex items-center gap-3 cursor-pointer select-none px-2 py-2 ${c.text}`}>
               <span class="ws-node shrink-0" aria-hidden="true"></span>
               <span class="ws-chevron font-pixel text-[10px] transition-transform duration-200">▶</span>
@@ -237,7 +303,7 @@ let counter = 0;
             </summary>
             <ul class="ws-list ml-[6px] pl-5 py-1 space-y-0.5">
               {section.items.map((item) => {
-                const id = `ws-${counter++}`;
+                const id = `ws-${w.id}-${counter++}`;
                 const teamsText = item.teams
                   ? item.teams.map((t) => `${t.label}\n${t.url}`).join('\n\n')
                   : '';
@@ -280,6 +346,8 @@ let counter = 0;
       })}
     </div>
     </div>
+      );
+    })}
   </section>
 </Layout>
 
@@ -684,14 +752,17 @@ let counter = 0;
   }
 
   function initWorkshopChecklist() {
-    const container = document.querySelector<HTMLElement>('[data-total]');
-    if (!container) return;
-    if (container.dataset.wsInit === '1') return;
-    container.dataset.wsInit = '1';
+    const containers = Array.from(document.querySelectorAll<HTMLElement>('.ws-secs'));
+    if (!containers.length) return;
+    const root = document.querySelector<HTMLElement>('.ws-quest');
+    if (!root || root.dataset.wsInit === '1') return;
+    root.dataset.wsInit = '1';
 
     const checks = Array.from(document.querySelectorAll<HTMLInputElement>('.ws-check'));
     const sectionEls = Array.from(document.querySelectorAll<HTMLDetailsElement>('.ws-section'));
-    const total = checks.length;
+    let activeWs = 'copilot';
+    const activeContainer = () =>
+      document.querySelector<HTMLElement>(`.ws-secs[data-workshop="${activeWs}"]`);
     const countEl = document.getElementById('ws-count');
     const barEl = document.getElementById('ws-bar');
     const resetBtn = document.getElementById('ws-reset');
@@ -719,7 +790,10 @@ let counter = 0;
     };
 
     const refreshGlobal = () => {
-      const done = checks.filter((c) => c.checked).length;
+      const cont = activeContainer();
+      const boxes = cont ? Array.from(cont.querySelectorAll<HTMLInputElement>('.ws-check')) : [];
+      const done = boxes.filter((c) => c.checked).length;
+      const total = boxes.length;
       if (countEl) countEl.textContent = `${done} / ${total}`;
       if (barEl) barEl.style.width = total ? `${(done / total) * 100}%` : '0%';
     };
@@ -760,15 +834,22 @@ let counter = 0;
     });
 
     resetBtn?.addEventListener('click', () => {
-      checkState = {};
+      const cont = activeContainer();
+      if (!cont) return;
+      const boxes = Array.from(cont.querySelectorAll<HTMLInputElement>('.ws-check'));
+      boxes.forEach((c) => {
+        c.checked = false;
+        checkState[c.id] = false;
+      });
       saveChecks();
-      checks.forEach((c) => (c.checked = false));
-      sectionEls.forEach(refreshSection);
+      Array.from(cont.querySelectorAll<HTMLDetailsElement>('.ws-section')).forEach(refreshSection);
       refreshGlobal();
     });
 
     const setAll = (open: boolean) => {
-      sectionEls.forEach((section) => {
+      const cont = activeContainer();
+      if (!cont) return;
+      Array.from(cont.querySelectorAll<HTMLDetailsElement>('.ws-section')).forEach((section) => {
         section.open = open;
         openState[section.dataset.section || ''] = open;
       });
@@ -812,19 +893,29 @@ let counter = 0;
       ghas: 'GHAS WORKSHOP',
     };
     const WS_KEY = 'ws-active-workshop-v1';
+    const REAL = new Set(['copilot', 'github']);
     const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.ws-tab'));
     const titleEl = document.getElementById('ws-title');
-    const notesEl = document.getElementById('ws-notes');
+    const panels = Array.from(document.querySelectorAll<HTMLElement>('.ws-panel'));
     const constructionEl = document.getElementById('ws-construction');
     const questBody = document.getElementById('ws-quest-body');
+    const objectivesEl = document.getElementById('ws-objectives');
 
     const selectWorkshop = (id: string) => {
       const active = WS_NAMES[id] ? id : 'copilot';
-      const isCopilot = active === 'copilot';
+      const isReal = REAL.has(active);
       if (titleEl) titleEl.textContent = WS_NAMES[active];
-      if (notesEl) notesEl.hidden = !isCopilot;
-      if (questBody) questBody.hidden = !isCopilot;
-      if (constructionEl) constructionEl.hidden = isCopilot;
+      panels.forEach((p) => { p.hidden = p.dataset.workshop !== active; });
+      if (questBody) questBody.hidden = !isReal;
+      if (constructionEl) constructionEl.hidden = isReal;
+      if (isReal) {
+        activeWs = active;
+        const panel = panels.find((p) => p.dataset.workshop === active);
+        if (objectivesEl && panel?.dataset.objectives) {
+          objectivesEl.textContent = panel.dataset.objectives;
+        }
+        refreshGlobal();
+      }
       tabs.forEach((t) => {
         const on = t.dataset.ws === active;
         t.classList.toggle('is-active', on);
@@ -839,8 +930,6 @@ let counter = 0;
     let savedWs = 'copilot';
     try { savedWs = localStorage.getItem(WS_KEY) || 'copilot'; } catch {}
     selectWorkshop(savedWs);
-
-    refreshGlobal();
   }
 
   initWorkshopChecklist();
