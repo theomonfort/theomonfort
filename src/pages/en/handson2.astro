@@ -1,0 +1,342 @@
+---
+import Layout from '../../components/layout/Layout.astro';
+import Aside from '../../components/handson/Aside.astro';
+
+const locale = 'en';
+const repo = 'theomonfort-org/Github-introduction-workshop';
+const repoUrl = `https://github.com/${repo}`;
+const accent = '#9bbc0f';
+const shellStyle = `--entry-accent:${accent};--aside-accent:${accent}`;
+---
+
+<Layout locale={locale} currentPath="/handson2" title="Hands-on 2 — GitHub Core Capabilities">
+  <style>
+    /* Solo variant: no fixed TOC column, so drop the reserved left gutter. */
+    .handson-shell--solo { max-width: 900px; }
+    @media (min-width: 1024px) {
+      .handson-shell--solo { padding-left: 1rem; }
+    }
+  </style>
+  <section class="handson-shell handson-shell--solo" style={shellStyle}>
+    <main class="handson-main">
+      <header class="handson-step-header">
+        <div class="handson-step-meta">
+          <span class="handson-step-chip is-area font-pixel">🧭 GitHub Basics</span>
+          <span class="handson-step-chip font-pixel">HANDS-ON 02</span>
+          <span class="handson-step-chip font-pixel">⏱ ~45 min</span>
+        </div>
+        <h1 class="font-pixel-jp">Hands-on 2 — GitHub Core Capabilities</h1>
+        <p class="handson-step-summary font-pixel-jp">
+          Take a tiny Pomodoro app from repo to merged pull request while touching every
+          core GitHub capability: Issues, Projects, Discussions, rulesets, Actions,
+          secret scanning, CodeQL, and the review-and-merge flow.
+        </p>
+      </header>
+
+      <article
+        class="prose-akq handson-article"
+        data-copy-label="COPY"
+        data-copied-label="COPIED ✓"
+        data-copy-aria="Copy code"
+      >
+        <Aside type="reference" accent={accent}>
+          <p><strong>📦 Workshop repository</strong>: <a href={repoUrl}>{repo}</a></p>
+          <p>
+            A no-build Pomodoro timer written in plain HTML, CSS, and JavaScript. It ships
+            with unit tests, a CI workflow, deliberately planted secrets and
+            vulnerabilities, and a ready-to-merge feature branch
+            (<code>feature/task-label</code>).
+          </p>
+        </Aside>
+
+        <h2>0 — Get set up</h2>
+        <p>Clone the repo and run the app and its tests locally:</p>
+        <pre><code>git clone {repoUrl}.git
+cd Github-introduction-workshop
+npm install
+npm test        # Vitest — 11 passing on main
+npm run dev     # open http://localhost:8080</code></pre>
+        <p>
+          The app logic lives in <code>src/timer.js</code> (pure, testable functions) and
+          <code>src/app.js</code> (DOM wiring). Tests are in <code>test/timer.test.js</code>
+          and run automatically on every pull request via
+          <code>.github/workflows/test.yml</code>.
+        </p>
+
+        <Aside type="positive" accent={accent}>
+          <p><strong>Why it matters</strong>: keeping logic pure (no DOM) is what makes the
+          timer unit-testable. The CI workflow runs those exact tests on every PR so a
+          regression can never silently reach <code>main</code>.</p>
+        </Aside>
+
+        <h2>1 — ISSUES: capture the work</h2>
+        <p>Issues are the unit of work on GitHub. Create three feature ideas for the app.</p>
+
+        <h3>1.1 — From the UI</h3>
+        <ol>
+          <li>Open the repo → <strong>Issues</strong> tab → <strong>New issue</strong>.</li>
+          <li>Give it a clear title and an <strong>Acceptance criteria</strong> checklist in the body.</li>
+          <li>Repeat for all three features.</li>
+        </ol>
+
+        <h3>1.2 — From the CLI</h3>
+        <pre><code>gh issue create -R {repo} \
+  --title "Customizable session durations" \
+  --body "Let users configure work / short / long break lengths."
+
+gh issue create -R {repo} \
+  --title "Play a sound when a session ends" \
+  --body "Audible chime + optional browser notification on every transition."
+
+gh issue create -R {repo} \
+  --title "Daily focus statistics" \
+  --body "Show pomodoros completed today and over the last 7 days."</code></pre>
+
+        <Aside type="positive" accent={accent}>
+          <p><strong>Tip</strong>: write acceptance criteria as a task list
+          (<code>- [ ] ...</code>). GitHub renders live checkboxes and shows a progress bar,
+          and the same issue can later be dragged onto a project board.</p>
+        </Aside>
+
+        <h2>2 — PROJECTS: plan on a board and a timeline</h2>
+        <p>
+          A <strong>Project</strong> (Projects v2) turns a pile of issues into a plan you can
+          see as a Kanban board <em>and</em> a roadmap.
+        </p>
+
+        <h3>2.1 — Create the project</h3>
+        <pre><code>gh project create --owner theomonfort-org --title "Pomodoro Feature Roadmap"</code></pre>
+        <p>Then add the three issues as items:</p>
+        <pre><code>gh project item-add &lt;number&gt; --owner theomonfort-org \
+  --url {repoUrl}/issues/1
+# repeat for issues 2 and 3</code></pre>
+
+        <h3>2.2 — Add the views</h3>
+        <ol>
+          <li><strong>Board</strong>: on the project, <strong>+ New view</strong> →
+            <strong>Board</strong>, grouped by <strong>Status</strong>
+            (Todo / In Progress / Done). Drag issues between columns.</li>
+          <li><strong>Roadmap</strong>: <strong>+ New view</strong> →
+            <strong>Roadmap</strong>. Add a <strong>Date</strong> field
+            (e.g. <em>Target date</em>) so items lay out on a timeline:</li>
+        </ol>
+        <pre><code>gh project field-create &lt;number&gt; --owner theomonfort-org \
+  --name "Target date" --data-type DATE</code></pre>
+
+        <Aside type="negative">
+          <p><strong>Heads up</strong>: <code>gh project</code> can create the project, items,
+          and fields, but the Board / Roadmap <em>view layouts</em> are added in the web UI.
+          Everything is stored on the same project, so the CLI and UI stay in sync.</p>
+        </Aside>
+
+        <h2>3 — DISCUSSIONS: brainstorm before you build</h2>
+        <p>Discussions are threaded, forum-style conversations, ideal for open-ended ideas
+        that aren't yet concrete work items.</p>
+        <ol>
+          <li>Enable them: repo <strong>Settings</strong> → <strong>General</strong> →
+            <strong>Features</strong> → check <strong>Discussions</strong>.</li>
+          <li>Open the <strong>Discussions</strong> tab → <strong>New discussion</strong> →
+            category <strong>Ideas</strong> → post a brainstorming prompt.</li>
+        </ol>
+        <p>From the CLI:</p>
+        <pre><code>gh api -X PATCH repos/{repo} -F has_discussions=true</code></pre>
+
+        <Aside type="positive" accent={accent}>
+          <p><strong>Issues vs Discussions</strong>: use an <strong>Issue</strong> for a
+          concrete, actionable task with a clear "done". Use a <strong>Discussion</strong>
+          for questions, ideas, and voting. Great discussions often graduate into issues.</p>
+        </Aside>
+
+        <h2>4 — RULESET: protect <code>main</code></h2>
+        <p>
+          A branch <strong>ruleset</strong> enforces how code reaches <code>main</code>. We
+          require a pull request, a review, a passing test check, and clean code scanning.
+        </p>
+        <ol>
+          <li>Repo <strong>Settings</strong> → <strong>Rules</strong> →
+            <strong>Rulesets</strong> → <strong>New branch ruleset</strong>.</li>
+          <li>Target the <strong>default branch</strong>, enforcement <strong>Active</strong>.</li>
+          <li>Enable:
+            <ul>
+              <li><strong>Require a pull request before merging</strong> → 1 approval.</li>
+              <li><strong>Require status checks to pass</strong> → add the
+                <code>test</code> check.</li>
+              <li><strong>Require code scanning results</strong> → CodeQL, alerts:
+                <em>errors</em>, security alerts: <em>high or higher</em>.</li>
+              <li><strong>Block force pushes</strong> and <strong>deletion</strong>.</li>
+            </ul>
+          </li>
+          <li>(Optional) Turn on <strong>automatic Copilot code review</strong> so every PR is
+            reviewed by Copilot the moment it opens.</li>
+        </ol>
+
+        <Aside type="negative">
+          <p><strong>Now direct pushes to <code>main</code> are blocked</strong> — even for
+          admins. From here on, all changes must go through a pull request. That is exactly
+          the point of a ruleset.</p>
+        </Aside>
+
+        <h2>5 — ADVANCED SECURITY: turn on code scanning</h2>
+        <p>
+          <strong>Secret scanning</strong> and <strong>CodeQL code scanning</strong> are free
+          on public repos. Enable them from <strong>Settings</strong> →
+          <strong>Advanced Security</strong>:
+        </p>
+        <ul>
+          <li><strong>Secret scanning</strong> + <strong>Push protection</strong> → catches
+            committed credentials and blocks new ones at push time.</li>
+          <li><strong>CodeQL analysis</strong> → <strong>Set up</strong> →
+            <strong>Default</strong> → <strong>Enable</strong>.</li>
+        </ul>
+        <p>What they find in this repo:</p>
+        <ul>
+          <li><strong>Secret scanning</strong>: the fake Google API key in
+            <code>src/config.js</code> → an alert under <strong>Security → Secret scanning</strong>.</li>
+          <li><strong>CodeQL</strong>: a DOM-based XSS in <code>src/app.js</code>
+            (a URL parameter written with <code>innerHTML</code>) → a high-severity alert
+            under <strong>Security → Code scanning</strong>.</li>
+        </ul>
+
+        <Aside type="negative">
+          <p><strong>Push protection is real</strong>: try committing a fake Slack webhook or
+          AWS key and pushing. GitHub rejects the push before the secret ever reaches the
+          remote. The Google-key alert above exists only because that pattern isn't
+          push-blocked — a nice illustration of the two layers working together.</p>
+        </Aside>
+
+        <h2>6 — PULL REQUEST: review, fix, merge</h2>
+        <p>
+          The branch <code>feature/task-label</code> adds a "current task" label and a
+          "pomodoros until a long break" countdown. Open it as a PR into <code>main</code>:
+        </p>
+        <pre><code>gh pr create -R {repo} \
+  --base main --head feature/task-label \
+  --title "Add current-task label and long-break countdown"</code></pre>
+
+        <h3>6.1 — Watch the checks fail (on purpose)</h3>
+        <ul>
+          <li>❌ <strong>Test</strong> — the CI workflow runs Vitest and fails: a bug in
+            <code>pomodorosUntilLongBreak()</code> returns the wrong number.</li>
+          <li>❌ <strong>CodeQL</strong> — the new task label is rendered with
+            <code>innerHTML</code>, introducing a fresh XSS the scan flags on the PR.</li>
+          <li>💬 <strong>Copilot code review</strong> comments automatically (if enabled in
+            the ruleset).</li>
+        </ul>
+        <p>The ruleset keeps the <strong>Merge</strong> button disabled while either check is red.</p>
+
+        <h3>6.2 — Fix the test bug</h3>
+        <p>In <code>src/timer.js</code>, the countdown should return how many pomodoros
+        <em>remain</em> before the next long break:</p>
+        <pre><code>// Before (buggy)
+export function pomodorosUntilLongBreak(completed, every = DEFAULTS.longBreakEvery) &#123;
+  return completed % every;
+&#125;
+
+// After (fixed)
+export function pomodorosUntilLongBreak(completed, every = DEFAULTS.longBreakEvery) &#123;
+  return every - (completed % every);
+&#125;</code></pre>
+
+        <h3>6.3 — Fix the XSS</h3>
+        <p>In <code>src/app.js</code>, render user text as text, not HTML:</p>
+        <pre><code>// Before (vulnerable)
+els.taskLabel.innerHTML = value ? `🎯 Working on: $&#123;value&#125;` : '';
+
+// After (safe)
+els.taskLabel.textContent = value ? `🎯 Working on: $&#123;value&#125;` : '';</code></pre>
+
+        <Aside type="positive" accent={accent}>
+          <p><strong>Why <code>textContent</code></strong>: it writes the value as literal
+          text, so a task name like <code>&lt;img src=x onerror=alert(1)&gt;</code> shows up
+          as characters instead of executing. CodeQL stops flagging the line because the
+          untrusted data no longer reaches an HTML sink.</p>
+        </Aside>
+
+        <h3>6.4 — Commit, verify, merge</h3>
+        <pre><code>git commit -am "Fix long-break countdown and render task label safely"
+git push</code></pre>
+        <ul>
+          <li>✅ The <strong>Test</strong> check goes green (13 passing).</li>
+          <li>✅ <strong>CodeQL</strong> re-runs and finds no new alerts.</li>
+          <li>Get the required approval, then <strong>Merge pull request</strong>. 🎉</li>
+        </ul>
+
+        <hr />
+        <h2>🏆 Quest clear</h2>
+        <p>You created issues, planned them on a board and a timeline, opened a discussion,
+        protected <code>main</code> with a ruleset, enabled Advanced Security, and drove a
+        pull request through automated tests, CodeQL, and review all the way to merge — the
+        complete GitHub core loop, start to finish.</p>
+      </article>
+    </main>
+  </section>
+
+  <script>
+    (() => {
+      // Open external links in a new tab (keep in-page anchors in place).
+      const enhanceLinks = () => {
+        document.querySelectorAll<HTMLAnchorElement>('.handson-article a[href]').forEach((a) => {
+          const href = a.getAttribute('href') ?? '';
+          if (!href || href.startsWith('#')) return;
+          a.setAttribute('target', '_blank');
+          a.setAttribute('rel', 'noopener noreferrer');
+        });
+      };
+
+      // Inject a copy button into every code block.
+      const enhanceCopyButtons = () => {
+        const article = document.querySelector('.handson-article') as HTMLElement | null;
+        if (!article) return;
+        const copyLabel = article.dataset.copyLabel ?? 'COPY';
+        const copiedLabel = article.dataset.copiedLabel ?? 'COPIED ✓';
+        article.querySelectorAll<HTMLPreElement>('pre').forEach((pre) => {
+          if (pre.dataset.copyEnhanced === '1') return;
+          pre.dataset.copyEnhanced = '1';
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'handson-copy-btn';
+          btn.textContent = copyLabel;
+          btn.setAttribute('aria-label', article.dataset.copyAria ?? copyLabel);
+          let resetTimer: number | undefined;
+          btn.addEventListener('click', async (event) => {
+            event.preventDefault();
+            const codeEl = pre.querySelector('code');
+            const text = (codeEl?.textContent ?? pre.textContent ?? '').replace(/\s+$/, '');
+            try {
+              if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(text);
+              } else {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.setAttribute('readonly', '');
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+              }
+              btn.textContent = copiedLabel;
+              btn.classList.add('is-copied');
+              if (resetTimer) window.clearTimeout(resetTimer);
+              resetTimer = window.setTimeout(() => {
+                btn.textContent = copyLabel;
+                btn.classList.remove('is-copied');
+              }, 1800);
+            } catch {
+              /* user can still copy manually */
+            }
+          });
+          pre.appendChild(btn);
+        });
+      };
+
+      const run = () => {
+        enhanceLinks();
+        enhanceCopyButtons();
+      };
+      run();
+      document.addEventListener('astro:page-load', run);
+    })();
+  </script>
+</Layout>
