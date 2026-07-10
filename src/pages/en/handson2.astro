@@ -71,31 +71,20 @@ npm run dev     # open http://localhost:8080</code></pre>
 
         <h2>1 — ISSUES: capture the work</h2>
         <p>Issues are the unit of work on GitHub. Create three feature ideas for the app.</p>
-
-        <h3>1.1 — From the UI</h3>
         <ol>
           <li>Open the repo → <strong>Issues</strong> tab → <strong>New issue</strong>.</li>
-          <li>Give it a clear title and an <strong>Acceptance criteria</strong> checklist in the body.</li>
-          <li>Repeat for all three features.</li>
+          <li>Pick a template — <strong>✨ New Feature</strong>, <strong>🐛 Bug</strong>, or
+            <strong>💬 Feedback</strong> — and fill in the form.</li>
+          <li>For the three features, use <strong>✨ New Feature</strong>, give each a clear
+            title and an <strong>Acceptance criteria</strong> checklist, then submit.</li>
         </ol>
 
-        <h3>1.2 — From the CLI</h3>
-        <pre><code>gh issue create -R {repo} \
-  --title "Customizable session durations" \
-  --body "Let users configure work / short / long break lengths."
-
-gh issue create -R {repo} \
-  --title "Play a sound when a session ends" \
-  --body "Audible chime + optional browser notification on every transition."
-
-gh issue create -R {repo} \
-  --title "Daily focus statistics" \
-  --body "Show pomodoros completed today and over the last 7 days."</code></pre>
-
         <Aside type="positive" accent={accent}>
-          <p><strong>Tip</strong>: write acceptance criteria as a task list
-          (<code>- [ ] ...</code>). GitHub renders live checkboxes and shows a progress bar,
-          and the same issue can later be dragged onto a project board.</p>
+          <p><strong>Tip</strong>: issue <strong>templates</strong> live in
+          <code>.github/ISSUE_TEMPLATE/</code>. They turn a blank box into a guided form so
+          every report has the fields you need. Write acceptance criteria as a task list
+          (<code>- [ ] ...</code>): GitHub renders live checkboxes with a progress bar, and
+          the same issue can later be dragged onto a project board.</p>
         </Aside>
 
         <h2>2 — PROJECTS: plan on a board and a timeline</h2>
