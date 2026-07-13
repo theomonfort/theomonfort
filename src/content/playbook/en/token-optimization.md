@@ -34,7 +34,7 @@ links:
 
 <div class="hero-quote hero-quote-team">
   <p>
-    AI costs keep climbing — not because tokens got pricier, but because agents take <strong>more steps</strong>. The two main levers: <strong>higher-quality agents</strong> and <strong>the right agent for the right job</strong>.
+    AI costs keep climbing. Models keep getting more capable and more expensive, and agentic mode piles on more steps and sub-agents, so the bill grows on both fronts. Your biggest lever is <strong>harness engineering</strong>: raise the quality of your agents, pick the <strong>right agent for the job</strong>, and set up a <strong>good environment</strong> for it to work in.
   </p>
 </div>
 
