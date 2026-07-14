@@ -231,7 +231,43 @@ Two hosting options — both can be consumed and enforced from VS Code / Org / E
 
 - **GitHub Org / Enterprise**: <a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-mcp-usage/configure-mcp-registry" target="_blank" rel="noopener noreferrer">configure the registry ↗</a> and <a class="retro-link" href="https://docs.github.com/en/copilot/reference/mcp-allowlist-enforcement" target="_blank" rel="noopener noreferrer">enforce via allowlist ↗</a>
 
-> 🔒 **Visibility ≠ access:** anything listed in Azure API Center is **visible to anyone** who can reach the catalog — but the catalog only exposes **metadata**. The actual **download / connection is gated separately**: for an internal server, publish a stdio server to a **private package registry** (GitHub Packages, GHCR, Azure Artifacts…) or keep an HTTP server **inside your network / VPN**, so only authenticated employees can pull or connect.
+## Keeping internal servers private
+
+**The catalog is public** — what you protect is the **source (distribution)**. A server registered in Azure API Center is visible to anyone who can reach the catalog, but only its **metadata** is exposed. The actual **download / connection is gated separately**.
+
+```mermaid
+flowchart LR
+  DEV["👤 Developer<br/>VS Code / Copilot<br/>opens @mcp"]
+  AC["🌐 Azure API Center<br/>catalog = public<br/>metadata only (no code)"]
+  STDIO["◆ stdio → 🔒 private registry<br/>GitHub Packages / GHCR / Azure Artifacts<br/>auth token required"]
+  HTTP["◆ HTTP → 🏢 internal net / VPN<br/>unreachable from public internet<br/>SSO / network auth in front"]
+  EMP1["✅ Employee pulls"]
+  OUT1["⛔ Outsider → 401"]
+  EMP2["✅ Employee connects"]
+  OUT2["⛔ Outsider → blocked"]
+  DEV --> AC
+  AC -->|package ref| STDIO
+  AC -->|remote URL| HTTP
+  STDIO --> EMP1
+  STDIO --> OUT1
+  HTTP --> EMP2
+  HTTP --> OUT2
+
+  classDef dev fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
+  classDef cat fill:#1a0a2e,stroke:#ffb000,color:#ffb000,stroke-width:2px
+  classDef stdio fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
+  classDef http fill:#1a0a2e,stroke:#ff2e97,color:#ff2e97,stroke-width:2px
+  classDef ok fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
+  classDef deny fill:#2a0a0a,stroke:#ff5555,color:#ff5555,stroke-width:2px
+  class DEV dev
+  class AC cat
+  class STDIO stdio
+  class HTTP http
+  class EMP1,EMP2 ok
+  class OUT1,OUT2 deny
+```
+
+> ✅ The catalog **only points to the source**. **Protect the source → only authenticated employees can run it**.
 
 ## Trying an MCP Registry locally
 
