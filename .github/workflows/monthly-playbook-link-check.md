@@ -135,13 +135,13 @@ tools:
 safe-outputs:
   create-pull-request:
     title-prefix: "[playbook-link-check] "
-    labels: [documentation, automation, playbook]
+    labels: [documentation, automation, playbook, agentic-workflows]
     draft: false
     protected-files: fallback-to-issue
     if-no-changes: "ignore"
   create-issue:
     title-prefix: "[playbook-link-check] "
-    labels: [documentation, automation, playbook]
+    labels: [documentation, automation, playbook, agentic-workflows]
   noop:
 ---
 

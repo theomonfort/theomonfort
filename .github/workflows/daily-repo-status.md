@@ -36,7 +36,7 @@ safe-outputs:
   allowed-github-references: []
   create-issue:
     title-prefix: "[daily-status] "
-    labels: [report, daily-status]
+    labels: [report, daily-status, agentic-workflows]
     close-older-issues: true
 ---
 

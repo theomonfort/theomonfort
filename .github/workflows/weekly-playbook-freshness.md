@@ -49,11 +49,11 @@ safe-outputs:
   mentions: false
   create-issue:
     title-prefix: "[playbook-freshness] "
-    labels: [documentation, playbook, freshness]
+    labels: [documentation, playbook, freshness, agentic-workflows]
     close-older-issues: true
   create-pull-request:
     title-prefix: "[playbook-freshness] "
-    labels: [documentation, playbook, automation]
+    labels: [documentation, playbook, automation, agentic-workflows]
     draft: true
     protected-files: fallback-to-issue
     if-no-changes: "ignore"
