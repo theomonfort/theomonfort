@@ -47,14 +47,16 @@ links:
 
 ## Inside a review
 
-A PR gathers conversation, checks, and automated analysis right on the diff. It's where quality is secured before merge.
+Today a PR can be opened by a **human**, a **cloud agent**, **Dependabot**, or an **agentic workflow**. On the diff, conversation, checks, and automated analysis converge: the place where quality is secured before merge.
 
 | Element | Role |
 | --- | --- |
 | 🔀 Propose diff | Compare branches, request merge |
 | 💬 Review | Line comments, approve/reject |
-| 🔎 Auto checks | Code Scanning & code quality |
-| 📦 Dependabot | Opens dependency-update PRs |
+| 🤖 Copilot code review | AI auto-reviews every PR |
+| ✅ Tests / CI | Required status checks must pass |
+| 🛡️ Code Scanning (GHAS · Code Security) | CodeQL finds security vulnerabilities |
+| 📊 Code Quality (standalone product) | Maintainability & reliability analysis (billed separately) |
 
 > 🔑 `Closes #123` in a PR → the Issue auto-closes on merge.
 
@@ -66,9 +68,8 @@ How a team organizes branches around PRs. Pick the model that matches your relea
 | --- | --- | --- |
 | 🌿 GitHub Flow | One `main` + short-lived feature branches; PR → merge → deploy from `main` | Continuous delivery, most teams |
 | 🌳 Git Flow | `main` + long-lived `develop`, plus `feature` / `release` / `hotfix` branches | Scheduled, versioned releases |
-| 🚀 Trunk-Based | Commit to `main` via tiny branches behind feature flags | High-velocity CI/CD, large teams |
 
-> 💡 Default to **GitHub Flow / trunk-based** for speed; reach for **Git Flow** only when you ship versioned releases.
+> 💡 Default to **GitHub Flow** for speed; reach for **Git Flow** only when you ship versioned releases.
 
 ## GitHub Flow
 
@@ -139,7 +140,8 @@ How a team organizes branches around PRs. Pick the model that matches your relea
     <line x1="237" y1="234" x2="283" y2="234" marker-end="url(#gf-arrow)"/>
     <line x1="317" y1="234" x2="353" y2="234" marker-end="url(#gf-arrow)"/>
     <line x1="387" y1="234" x2="458" y2="234" marker-end="url(#gf-arrow)"/>
-    <line x1="492" y1="234" x2="638" y2="234" marker-end="url(#gf-arrow)"/>
+    <line x1="492" y1="234" x2="543" y2="234" marker-end="url(#gf-arrow)"/>
+    <line x1="577" y1="234" x2="638" y2="234" marker-end="url(#gf-arrow)"/>
     <line x1="308" y1="249" x2="362" y2="281" marker-end="url(#gf-arrow)"/>
     <line x1="388" y1="296" x2="417" y2="296" marker-end="url(#gf-arrow)"/>
     <line x1="450" y1="289" x2="470" y2="250" marker-end="url(#gf-arrow)"/>
@@ -147,7 +149,7 @@ How a team organizes branches around PRs. Pick the model that matches your relea
     <line x1="297" y1="358" x2="328" y2="358" marker-end="url(#gf-arrow)"/>
     <line x1="362" y1="358" x2="393" y2="358" marker-end="url(#gf-arrow)"/>
     <line x1="427" y1="358" x2="458" y2="358" marker-end="url(#gf-arrow)"/>
-    <line x1="477" y1="342" x2="476" y2="252" marker-end="url(#gf-arrow)"/>
+    <line x1="484" y1="345" x2="550" y2="248" marker-end="url(#gf-arrow)"/>
     <line x1="488" y1="221" x2="531" y2="181" marker-end="url(#gf-arrow)"/>
     <line x1="562" y1="172" x2="593" y2="172" marker-end="url(#gf-arrow)"/>
     <line x1="622" y1="159" x2="652" y2="61" marker-end="url(#gf-arrow)"/>
@@ -163,6 +165,7 @@ How a team organizes branches around PRs. Pick the model that matches your relea
   <circle cx="300" cy="234" r="17" fill="#a56cff"/>
   <circle cx="370" cy="234" r="17" fill="#a56cff"/>
   <circle cx="475" cy="234" r="17" fill="#a56cff"/>
+  <circle cx="560" cy="234" r="17" fill="#a56cff"/>
   <circle cx="655" cy="234" r="17" fill="#a56cff"/>
   <circle cx="370" cy="296" r="16" fill="#2fbf76"/>
   <circle cx="435" cy="296" r="16" fill="#2fbf76"/>
@@ -181,12 +184,16 @@ How a team organizes branches around PRs. Pick the model that matches your relea
 
 ## Rulesets
 
-Manage the repo to fit your needs. Enforce merge conditions as rules and automate the quality gate.
+Rulesets enforce **merge conditions as rules**, a quality gate on your branches. Configure them at the **organization** or **repository** level, and apply them top-down across many repos.
 
-- ✅ Required reviews and approvers
-- 🛡️ CI must pass
-- 🔒 Block direct pushes to main
-- 🏢 Apply across org/enterprise
+**Minimal recommended setup:**
+
+| Rule | Recommended setting | Why |
+| --- | --- | --- |
+| 🔀 Require a pull request before merging | ON + **Required approvals: 1** | Block direct pushes; every change gets at least one review |
+| 🛡️ Require status checks to pass | Require **tests + CodeQL** + **Require branches to be up to date before merging** | Merge only when CI and security scanning are green and validated against the latest main |
+| 🔒 Block force pushes | ON | Prevent destructive history rewrites |
+| 🤖 Automatically request Copilot code review | ON | Copilot pre-reviews every PR automatically |
 
 > 🎯 Stop manual gatekeeping; let rulesets enforce top-down.
 

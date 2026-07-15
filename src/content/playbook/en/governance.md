@@ -48,7 +48,7 @@ links:
 
 ## Permissions
 
-Assign roles per repository to control who can do what. Roles are **cumulative**: each higher role includes everything below it, plus more.
+Assign roles per repository to control who can do what. Roles are **cumulative**: each higher role includes everything below it, plus more. Not sure of your own role in a repo? Run `gh api repos/OWNER/REPO --jq .permissions`.
 
 | Role | What you can do (lower role + extra) |
 | --- | --- |
@@ -93,14 +93,14 @@ flowchart LR
 
 ## Policies
 
-Apply governance across the repo → org → enterprise hierarchy; the higher the level, the wider the reach.
+Policies live at the **organization** and **enterprise** levels, not the repository. A repo only **inherits** what's allowed above: feature access (Codespaces machines, Copilot, Actions, runners) is granted from org / enterprise, and the repo has **no policy control** of its own.
 
-- 🗂️ **Repo**: branch protection, required reviews
-- 🏢 **Org**: creation limits, visibility, mandatory 2FA
-- 🏛️ **Enterprise**: rules across all orgs
-- 🔁 Higher settings inherit down
+- 🏛️ **Enterprise**: guardrails across all orgs, SSO/SCIM, allowed features, base policies
+- 🏢 **Org**: member privileges, repo creation & visibility, 2FA, Copilot / Codespaces / Actions access
+- 📦 **Repo**: inherits only, consumes the features enabled above, sets no policy
+- 🔁 Enterprise → Org → Repo: settings flow down (an org can tighten, not loosen, enterprise rules)
 
-> 🎯 Don't tweak repos one by one. Top-down policy is the winning ops play. <a class="retro-link" href="https://docs.github.com/en/organizations/managing-organization-settings" target="_blank" rel="noopener noreferrer">Organization policies ↗</a> · <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/enforcing-policies" target="_blank" rel="noopener noreferrer">Enterprise policies ↗</a>
+> 🎯 Don't tweak repos one by one. Set guardrails top-down at org / enterprise. <a class="retro-link" href="https://docs.github.com/en/organizations/managing-organization-settings" target="_blank" rel="noopener noreferrer">Organization policies ↗</a> · <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/enforcing-policies" target="_blank" rel="noopener noreferrer">Enterprise policies ↗</a>
 
 ## Copilot managed settings (NEW)
 
@@ -122,7 +122,7 @@ Governance is about controlling "who does what" **in layers**.
 | Layer | Scope | Examples |
 | --- | --- | --- |
 | 👤 Permission roles | Repository | Read / Write / Admin |
-| 🏢 Policies | repo → org → enterprise | Mandatory 2FA, visibility, branch protection |
+| 🏢 Policies | org → enterprise | Mandatory 2FA, visibility, feature access |
 | 🤖 Managed settings | Copilot clients | Default model, bypass lock, plugins |
 
 > 🎯 Don't wear yourself out per-repo. Enforcing top-down is the winning play.
