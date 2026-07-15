@@ -48,17 +48,48 @@ links:
 
 ## Permissions
 
-Assign roles per repository to control who can do what.
+Assign roles per repository to control who can do what. Roles are **cumulative**: each higher role includes everything below it, plus more.
 
-| Role | Main rights |
+| Role | What you can do (lower role + extra) |
 | --- | --- |
-| 👀 Read | View, clone |
-| 🔺 Triage | Manage Issues/PRs |
-| ✍️ Write | Push, merge |
-| 🛠️ Maintain | Some settings |
-| 👑 Admin | Full control |
+| 👀 Read | View, clone, open issues |
+| 🔺 Triage | **Read +** manage Issues/PRs (label, assign, close/reopen) |
+| ✍️ Write | **Triage +** push, merge |
+| 🛠️ Maintain | **Write +** manage some repo settings (non-destructive) |
+| 👑 Admin | **Maintain +** full control (access mgmt, deletion, visibility) |
 
-> 💡 Grant roles to teams and swap members in/out for easy upkeep. <a class="retro-link" href="https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization" target="_blank" rel="noopener noreferrer">Repository roles ↗</a>
+> 🧩 If the 5 built-in roles don't fit, create a **custom repository role at the organization level**: pick any base role (Read–Maintain) and **add or remove** just the fine-grained permissions you need. <a class="retro-link" href="https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/managing-custom-repository-roles-for-an-organization" target="_blank" rel="noopener noreferrer">Custom repository roles ↗</a>
+
+## Recommended access flow
+
+Don't grant to individuals. Make **your IdP (Okta) the single source**, provision both Enterprise and Org teams, and assign teams to repos.
+
+```mermaid
+flowchart LR
+  IDP["🪪 IdP (Okta)<br/>single source"]
+  ENT["🏛️ Enterprise Team<br/>Admin / Security · across all orgs"]
+  ORG["🏢 Org Team<br/>this org only · mirror of org chart"]
+  REPO["📦 Repository"]
+  IDP -->|SCIM / Team sync| ENT
+  IDP -->|SCIM / Team sync| ORG
+  ORG -->|Write etc.| REPO
+  ENT -->|Admin| REPO
+
+  classDef idp fill:#1a0a2e,stroke:#ffb000,color:#ffb000,stroke-width:2px
+  classDef ent fill:#2a0a0a,stroke:#ff5555,color:#ff5555,stroke-width:2px
+  classDef org fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
+  classDef repo fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
+  class IDP idp
+  class ENT ent
+  class ORG org
+  class REPO repo
+```
+
+- 🏛️ **Enterprise Team** — Admin / Security roles that span **all orgs**; defined once at the enterprise
+- 🏢 **Org Team** — specific to this org; mirrors the org chart and is assigned to repos
+- 🪪 Both **provisioned from Okta** (<a class="retro-link" href="/theomonfort/playbook/enterprise-setup">Enterprise Setup ↗</a>)
+
+> 🎯 **Keep it minimal:** ① single source = IdP　② grant repo access **via teams**　③ elevate via an **extra team**　④ **least privilege**
 
 ## Policies
 

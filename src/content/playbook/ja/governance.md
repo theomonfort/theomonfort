@@ -48,17 +48,48 @@ links:
 
 ## Permissions
 
-リポジトリ別にロールを割り当て、誰が何をできるかを制御。
+リポジトリ別にロールを割り当て、誰が何をできるかを制御。ロールは **積み上げ式**で、上位は下位のすべて ＋ α を含む。
 
-| ロール | 主な権限 |
+| ロール | できること（下位ロール ＋ 追加分） |
 | --- | --- |
-| 👀 Read | 閲覧・clone |
-| 🔺 Triage | Issue/PR 整理 |
-| ✍️ Write | push・マージ |
-| 🛠️ Maintain | 設定の一部管理 |
-| 👑 Admin | 全権限 |
+| 👀 Read | 閲覧・clone・Issue 作成 |
+| 🔺 Triage | **Read ＋** Issue/PR の整理（ラベル・アサイン・close/reopen） |
+| ✍️ Write | **Triage ＋** push・マージ |
+| 🛠️ Maintain | **Write ＋** リポジトリ設定の一部管理（非破壊） |
+| 👑 Admin | **Maintain ＋** 全権限（アクセス管理・削除・可視性変更） |
 
-> 💡 Team に権限を付けて個人を入れ替えるとメンテが楽。<a class="retro-link" href="https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization" target="_blank" rel="noopener noreferrer">Repository roles ↗</a>
+> 🧩 既定の 5 ロールが合わなければ、**Organization レベルでカスタムリポジトリロール**を作成できる。任意の base role（Read〜Maintain）に、必要な細粒度権限だけを **足し引き** して独自ロールを定義。<a class="retro-link" href="https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/managing-custom-repository-roles-for-an-organization" target="_blank" rel="noopener noreferrer">Custom repository roles ↗</a>
+
+## 権限の付け方（推奨フロー）
+
+個人に直接付与しない。**IdP（Okta）を単一のソース**にして Enterprise Team と Org Team を provision し、Team を repo に割り当てる。
+
+```mermaid
+flowchart LR
+  IDP["🪪 IdP (Okta)<br/>単一のソース"]
+  ENT["🏛️ Enterprise Team<br/>Admin / Security・全 org 横断"]
+  ORG["🏢 Org Team<br/>この org 専用・組織図のミラー"]
+  REPO["📦 Repository"]
+  IDP -->|SCIM / Team sync| ENT
+  IDP -->|SCIM / Team sync| ORG
+  ORG -->|Write など| REPO
+  ENT -->|Admin| REPO
+
+  classDef idp fill:#1a0a2e,stroke:#ffb000,color:#ffb000,stroke-width:2px
+  classDef ent fill:#2a0a0a,stroke:#ff5555,color:#ff5555,stroke-width:2px
+  classDef org fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
+  classDef repo fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
+  class IDP idp
+  class ENT ent
+  class ORG org
+  class REPO repo
+```
+
+- 🏛️ **Enterprise Team** — Admin / Security など **全 org 横断**の役割。Enterprise レベルで一度定義
+- 🏢 **Org Team** — その org 専用。組織図をミラーし repo に割り当て
+- 🪪 どちらも **Okta から provision**（<a class="retro-link" href="/theomonfort/playbook/enterprise-setup">Enterprise Setup ↗</a>）
+
+> 🎯 **最小限の原則:** ① 単一のソース ＝ IdP　② repo アクセスは **Team 経由**　③ 昇格は **追加 Team**　④ **最小権限**
 
 ## Policies
 
