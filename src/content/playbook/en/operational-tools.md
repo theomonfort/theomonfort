@@ -27,7 +27,7 @@ links:
 
 ## In a nutshell
 
-<div class="hero-quote hero-quote-green">
+<div class="hero-quote">
   <p>
     Beyond the day-to-day flow, GitHub gives you <strong>more tools to run and scale</strong> your work.
   </p>

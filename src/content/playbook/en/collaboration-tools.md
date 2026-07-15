@@ -42,7 +42,7 @@ links:
 
 ## In one line
 
-<div class="hero-quote hero-quote-green">
+<div class="hero-quote">
   <p>
     GitHub introduced <strong>Issues</strong> in 2009, putting work tracking right next to the code.
   </p>

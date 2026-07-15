@@ -42,7 +42,7 @@ links:
 
 ## 一言で
 
-<div class="hero-quote hero-quote-green">
+<div class="hero-quote">
   <p>
     GitHub は 2009 年に <strong>Issues</strong> を導入し、作業の追跡をコードの隣に置いた。
   </p>
