@@ -38,27 +38,12 @@ links:
 
 <div class="hero-quote">
   <p>
-    GitHub created the <strong>Pull Request</strong> in 2008 and changed how developers collaborate.
+    When you write code, there are several ways to <strong>branch and merge</strong>. This chapter tours the main ones.
   </p>
   <p>
-    The <strong>propose → discuss → review → merge</strong> flow is still the heart of teamwork.
+    Whichever you pick, everyone goes through a <strong>Pull Request</strong> to merge. We'll break down what a PR contains, and how all of this can be enforced with <strong>Rulesets</strong>.
   </p>
 </div>
-
-## Inside a review
-
-Today a PR can be opened by a **human**, a **cloud agent**, **Dependabot**, or an **agentic workflow**. On the diff, conversation, checks, and automated analysis converge: the place where quality is secured before merge.
-
-| Element | Role |
-| --- | --- |
-| 🔀 Propose diff | Compare branches, request merge |
-| 💬 Review | Line comments, approve/reject |
-| 🤖 Copilot code review | AI auto-reviews every PR |
-| ✅ Tests / CI | Required status checks must pass |
-| 🛡️ Code Scanning (GHAS · Code Security) | CodeQL finds security vulnerabilities |
-| 📊 Code Quality (standalone product) | Maintainability & reliability analysis (billed separately) |
-
-> 🔑 `Closes #123` in a PR → the Issue auto-closes on merge.
 
 ## Branching strategies
 
@@ -182,6 +167,21 @@ How a team organizes branches around PRs. Pick the model that matches your relea
 
 > 🎯 More ceremony, more control. Reach for it when you ship **versioned releases**, not continuous deploys.
 
+## Inside a review
+
+Today a PR can be opened by a **human**, a **cloud agent**, **Dependabot**, or an **agentic workflow**. On the diff, conversation, checks, and automated analysis converge: the place where quality is secured before merge.
+
+| Element | Role |
+| --- | --- |
+| 🔀 Propose diff | Compare branches, request merge |
+| 💬 Review | Line comments, approve/reject |
+| 🤖 Copilot code review | AI auto-reviews every PR |
+| ✅ Tests / CI | Required status checks must pass |
+| 🛡️ Code Scanning (GHAS · Code Security) | CodeQL finds security vulnerabilities |
+| 📊 Code Quality (standalone product) | Maintainability & reliability analysis (billed separately) |
+
+> 🔑 `Closes #123` in a PR → the Issue auto-closes on merge.
+
 ## Rulesets
 
 Rulesets enforce **merge conditions as rules**, a quality gate on your branches. Configure them at the **organization** or **repository** level, and apply them top-down across many repos.
@@ -191,7 +191,8 @@ Rulesets enforce **merge conditions as rules**, a quality gate on your branches.
 | Rule | Recommended setting | Why |
 | --- | --- | --- |
 | 🔀 Require a pull request before merging | ON + **Required approvals: 1** | Block direct pushes; every change gets at least one review |
-| 🛡️ Require status checks to pass | Require **tests + CodeQL** + **Require branches to be up to date before merging** | Merge only when CI and security scanning are green and validated against the latest main |
+| 🛡️ Require status checks to pass | Require **tests** + **Require branches to be up to date before merging** | Merge only when CI is green and validated against the latest main |
+| 🔍 Require code scanning results | Require CodeQL results (block by severity) | Stop merges while unresolved security alerts remain |
 | 🔒 Block force pushes | ON | Prevent destructive history rewrites |
 | 🤖 Automatically request Copilot code review | ON | Copilot pre-reviews every PR automatically |
 

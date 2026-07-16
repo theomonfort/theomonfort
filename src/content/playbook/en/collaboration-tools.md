@@ -98,7 +98,7 @@ Projects is a planning tool: spreadsheet, board, and roadmap views over Issues a
 - 🤖 Workflows auto-update status
 - 📊 Insights chart your progress
 
-> 💡 Real example: <a class="retro-link" href="https://github.com/orgs/github/projects/4247" target="_blank" rel="noopener noreferrer">GitHub Public Roadmap ↗</a> — a public Project running the roadmap.
+> 💡 Real example: <a class="retro-link" href="https://github.com/orgs/vitejs/projects/1" target="_blank" rel="noopener noreferrer">Vite Team Board ↗</a> (an OSS project managing work in a public Project).
 
 ## ★ Killer use case
 
