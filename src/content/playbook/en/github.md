@@ -116,6 +116,83 @@ Looking back at GitHub's journey reveals where we are today ──
 </figure>
 
 
+## The GitHub experience
+
+GitHub brings the entire software lifecycle onto one platform ──
+
+<figure class="rpi-pipeline" style="margin:2em 0;">
+<svg viewBox="0 0 1080 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
+  <defs>
+    <marker id="ghxDot" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+      <circle cx="5" cy="5" r="4" fill="#00f0ff"/>
+    </marker>
+    <filter id="ghxGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="0" y="0" width="1080" height="520" fill="none"/>
+
+  <!-- connectors -->
+  <g fill="none" stroke-width="2" opacity="0.85">
+    <path d="M 475 240 Q 400 180 342 118" stroke="#00f0ff" marker-end="url(#ghxDot)"/>
+    <path d="M 475 288 Q 400 360 342 404" stroke="#ff2e88" marker-end="url(#ghxDot)"/>
+    <path d="M 605 240 Q 680 180 738 118" stroke="#ffb000" marker-end="url(#ghxDot)"/>
+    <path d="M 605 288 Q 680 360 738 404" stroke="#9bbc0f" marker-end="url(#ghxDot)"/>
+  </g>
+
+  <!-- central platform stack -->
+  <g filter="url(#ghxGlow)">
+    <path d="M 540 296 L 636 264 L 540 232 L 444 264 Z" fill="#0a1330" stroke="#00f0ff" stroke-width="2"/>
+    <path d="M 540 274 L 636 242 L 540 210 L 444 242 Z" fill="#0c1738" stroke="#00f0ff" stroke-width="2"/>
+    <path d="M 540 252 L 636 220 L 540 188 L 444 220 Z" fill="#0e1a40" stroke="#00f0ff" stroke-width="2.5"/>
+    <circle cx="540" cy="204" r="15" fill="none" stroke="#00f0ff" stroke-width="3"/>
+    <path d="M 540 197 q -7 0 -7 7 q 0 5 5 6 q -1 3 -4 4 q 4 1 6 -3 q 5 -1 5 -7 q 0 -7 -5 -7 z" fill="#00f0ff"/>
+  </g>
+  <rect x="472" y="322" width="136" height="40" rx="20" fill="#05060f" stroke="#00f0ff" stroke-width="2.5"/>
+  <text x="540" y="348" text-anchor="middle" fill="#00f0ff" font-size="20" font-weight="bold">GitHub</text>
+
+  <!-- Node: integrated platform (cyan, top-left) -->
+  <g>
+    <rect x="40" y="70" width="302" height="94" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
+    <g stroke="#00f0ff" fill="#0e1a40" stroke-width="2">
+      <rect x="72" y="100" width="34" height="9"/><rect x="72" y="113" width="34" height="9"/><rect x="72" y="126" width="34" height="9"/>
+    </g>
+    <text x="128" y="106" fill="#00f0ff" font-size="17" font-weight="bold">Integrated platform</text>
+    <text x="128" y="132" fill="#e8f4ff" font-size="13">One enterprise-grade platform</text>
+  </g>
+
+  <!-- Node: developer collaboration (magenta, bottom-left) -->
+  <g>
+    <rect x="40" y="360" width="302" height="94" fill="#0a0e27" stroke="#ff2e88" stroke-width="2.5"/>
+    <g stroke="#ff2e88" stroke-width="2.5" fill="#0a0e27">
+      <circle cx="80" cy="396" r="5"/><circle cx="80" cy="424" r="5"/><circle cx="104" cy="396" r="5"/>
+      <path d="M 80 401 V 419 M 104 401 V 410 q 0 4 -4 4" fill="none"/>
+    </g>
+    <text x="128" y="398" fill="#ff2e88" font-size="17" font-weight="bold">Developer collaboration</text>
+    <text x="128" y="424" fill="#e8f4ff" font-size="13">Best-in-class experience</text>
+  </g>
+
+  <!-- Node: security (amber, top-right) -->
+  <g>
+    <rect x="738" y="70" width="302" height="94" fill="#0a0e27" stroke="#ffb000" stroke-width="2.5"/>
+    <path d="M 790 96 L 806 102 V 116 Q 806 130 790 137 Q 774 130 774 116 V 102 Z" fill="#0e1a40" stroke="#ffb000" stroke-width="2.5"/>
+    <path d="M 783 116 l 5 5 l 9 -11" fill="none" stroke="#ffb000" stroke-width="2.5"/>
+    <text x="826" y="106" fill="#ffb000" font-size="17" font-weight="bold">Security everywhere</text>
+    <text x="826" y="132" fill="#e8f4ff" font-size="13">Protected at every stage</text>
+  </g>
+
+  <!-- Node: AI (green, bottom-right) -->
+  <g>
+    <rect x="738" y="360" width="302" height="94" fill="#0a0e27" stroke="#9bbc0f" stroke-width="2.5"/>
+    <path d="M 790 384 L 794 402 L 810 407 L 794 412 L 790 430 L 786 412 L 770 407 L 786 402 Z" fill="#9bbc0f"/>
+    <text x="826" y="398" fill="#9bbc0f" font-size="17" font-weight="bold">AI everywhere</text>
+    <text x="826" y="424" fill="#e8f4ff" font-size="13">Copilot across the SDLC</text>
+  </g>
+</svg>
+</figure>
+
+
 ## AI Developer Platform
 
 From **Plan → Code → Review → Test & Security → Operate**, AI on GitHub supports the entire SDLC end-to-end.

@@ -98,7 +98,7 @@ Projects はスプレッドシート/ボード/ロードマップで Issues・PR
 - 🤖 ワークフローで自動でステータス更新
 - 📊 Insights で進捗をグラフ化
 
-> 💡 実例: <a class="retro-link" href="https://github.com/orgs/github/projects/4247" target="_blank" rel="noopener noreferrer">GitHub Public Roadmap ↗</a> — 公開 Project でロードマップを運用。
+> 💡 実例: <a class="retro-link" href="https://github.com/orgs/vitejs/projects/1" target="_blank" rel="noopener noreferrer">Vite Team Board ↗</a>（OSS が公開 Project でタスクを管理）。
 
 ## ★ 使いどころ
 

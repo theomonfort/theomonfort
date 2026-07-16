@@ -34,6 +34,7 @@ interface Section {
   title: string;
   subtitle?: string;
   color: SectionColor;
+  duration?: string;
   items: Item[];
 }
 
@@ -183,40 +184,65 @@ const githubSections: Section[] = [
   },
   {
     title: 'INTRODUCTION',
-    subtitle: 'GitHub と Copilot',
+    subtitle: 'GitHub',
     color: 'cyan',
+    duration: '10分',
     items: [
       { label: 'Self-introduction' },
       { label: 'Explain GITHUB (SLIDE)' },
-      { label: 'Explain COPILOT (SLIDE)' },
     ],
   },
   {
-    title: 'COLLABORATION TOOLS',
-    subtitle: 'Issues・Projects・Discussions',
-    color: 'green',
+    title: 'ADMINISTRATION',
+    subtitle: 'ガバナンス',
+    color: 'magenta',
+    duration: '30分',
     items: [
-      { label: 'Explain Collaboration tools' },
+      { label: 'Explain Repository Permissions' },
+      { label: 'Explain Policies' },
+      { label: 'Explain Copilot managed settings' },
+      { label: 'Demo : Role + Policies' },
+      { label: 'Explain Ricoh usecase' },
     ],
   },
   {
     title: 'REVIEW TOOL',
-    subtitle: 'PR とブランチ戦略',
+    subtitle: 'PR とブランチ戦略とRuleset',
     color: 'amber',
+    duration: '15分',
     items: [
       { label: 'Explain PR' },
       { label: 'Explain Branching strategies' },
     ],
   },
   {
+    title: 'COLLABORATION TOOLS',
+    subtitle: 'Issues・Projects・Discussions',
+    color: 'green',
+    duration: '15分',
+    items: [
+      { label: 'Explain Collaboration tools' },
+    ],
+  },
+  {
     title: 'TEST & SECURE',
     subtitle: 'GitHub Actions と GHAS',
     color: 'cyan',
+    duration: '15分',
     items: [
       { label: 'Explain GitHub Actions' },
       { label: 'Explain Dependabot' },
       { label: 'Explain Code Scanning' },
       { label: 'Explain Secret Scanning' },
+    ],
+  },
+  {
+    title: 'Q&A',
+    subtitle: '質疑応答',
+    color: 'amber',
+    duration: '1時間30分',
+    items: [
+      { label: 'Open Q&A' },
     ],
   },
 ];
@@ -295,6 +321,7 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
               <span class="ws-node shrink-0" aria-hidden="true"></span>
               <span class="ws-chevron font-pixel text-[10px] transition-transform duration-200">▶</span>
               <h2 class="font-pixel-jp text-base md:text-lg font-bold tracking-[0.12em] leading-tight flex-1">
+                {section.duration && <span class="ws-duration font-terminal normal-case opacity-90">（~{section.duration}）</span>}
                 <span class="uppercase">{section.title}</span>
                 {section.subtitle && <span class="ws-subtitle"> : {section.subtitle}</span>}
               </h2>

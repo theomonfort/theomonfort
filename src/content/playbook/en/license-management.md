@@ -157,8 +157,9 @@ You can extend Copilot to people who aren't members of your org — useful for v
 
 ### Standard orgs — Outside collaborators
 
-- 🔐 **Enable at the org level first** — *Org Settings → Copilot → Access → Allow outside collaborators*.
+- 🎫 **Just assign a seat** — the dedicated Copilot toggle is gone; to give an outside collaborator Copilot, assign them a **seat** like any other member.
 - 📦 **Invite per repository** — outside collaborators don't see the rest of the org; they only get the repos you grant them.
+- 🚫 **To restrict them** — *Org → Settings → Member privileges → uncheck "Allow members to invite outside collaborators"*.
 - 💵 **Each seated outside collaborator counts as 1 license** on the enterprise invoice.
 
 ### EMU enterprises — Guest collaborators
