@@ -49,7 +49,7 @@ links:
 </div>
 
 > 🎯 **Generally available (GA)** since 2026-06-17. Supports macOS / Windows / Linux.
-> 🆓 Available on **all paid Copilot plans** (Pro / Pro+ / Business / Enterprise).
+> 🆓 Available on **all paid Copilot plans** (Pro / Pro+ / Business / Enterprise). **Free and Student users** can also use it by configuring **BYOK** (Bring Your Own Key).
 
 ## What it can do
 

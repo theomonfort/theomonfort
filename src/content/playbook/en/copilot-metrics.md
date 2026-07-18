@@ -1,7 +1,7 @@
 ---
 title: Copilot Metrics
 titleEn: Copilot Metrics
-summary: Metrics API and dashboard for visualizing GitHub Copilot usage and impact. Details coming soon.
+summary: Metrics API and dashboard for visualizing GitHub Copilot usage and impact. Aggregate and review data at the Organization and Enterprise level.
 icon: /theomonfort/icons/copilot-metrics.png
 color: green
 accent:
@@ -28,6 +28,9 @@ links:
     label: "Plan mode is now included in Copilot metrics (2026-03-02)"
     url: https://github.blog/changelog/2026-03-02-copilot-metrics-now-includes-plan-mode
   - group: 📰 Recent Changelog
+    label: "Improved accuracy and coverage in Copilot usage metrics reports [GA] (2026-07-06)"
+    url: https://github.blog/changelog/2026-07-06-improved-accuracy-and-coverage-in-copilot-usage-metrics-reports
+  - group: 📰 Recent Changelog
     label: "Copilot metrics is now generally available (2026-02-27)"
     url: https://github.blog/changelog/2026-02-27-copilot-metrics-is-now-generally-available
 ---
@@ -36,9 +39,18 @@ links:
 
 <div class="hero-quote hero-quote-team">
   <p>
-    <strong>Copilot Metrics</strong>
+    <strong>Copilot Metrics</strong> visualizes GitHub Copilot usage and impact.
   </p>
   <p>
-    coming soon
+    Aggregate and review usage data at the Organization and Enterprise level, via both a dashboard and API endpoints.
   </p>
 </div>
+
+## Overview
+
+Copilot Metrics is GA with improved accuracy and coverage in usage reports, available at the Organization and Enterprise level.
+
+- **Dashboard**: View usage trends as charts on GitHub.com.
+- **REST API**: Fetch and analyze data programmatically via the <a class="retro-link" href="https://docs.github.com/en/rest/copilot/copilot-metrics" target="_blank" rel="noopener noreferrer">Copilot Metrics API ↗</a>.
+- **Team-level support**: Retrieve metrics per team, not just org-wide.
+- **Cloud Agent support**: Cloud Agent usage is included in metrics fields.

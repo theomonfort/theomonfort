@@ -141,7 +141,12 @@ The CLI lets you instantly check models, sharing, experimental features, and env
 | `/chronicle` | Review the session history and work log. |
 | `/task` | Check agents and tasks running in the background. |
 | `/ask` | Consult Copilot as a question before proceeding. |
+| `/settings` | View and change CLI user settings. |
 | `/env` | Check the environment information visible to the CLI. |
+
+## CLI Extensions
+
+Like `gh` CLI extensions, Copilot CLI supports third-party extensions to add new capabilities. See the <a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/copilot-cli/cli-extensions" target="_blank" rel="noopener noreferrer">official how-to ↗</a> for details.
 
 ## 🖥️ TUI (Terminal UI)
 
