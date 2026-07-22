@@ -1,7 +1,7 @@
 ---
 title: Copilot Metrics
 titleEn: Copilot Metrics
-summary: GitHub Copilot の利用状況・効果を可視化するメトリクス API とダッシュボード。詳細は coming soon。
+summary: GitHub Copilot の利用状況・効果を可視化するメトリクス API とダッシュボード。Organization / Enterprise レベルで集計・確認できる。
 icon: /theomonfort/icons/copilot-metrics.png
 color: green
 accent:
@@ -28,6 +28,9 @@ links:
     label: "Plan mode is now included in Copilot metrics (2026-03-02)"
     url: https://github.blog/changelog/2026-03-02-copilot-metrics-now-includes-plan-mode
   - group: 📰 Recent Changelog
+    label: "利用状況メトリクスの精度・カバレッジ改善 [GA] (2026-07-06)"
+    url: https://github.blog/changelog/2026-07-06-improved-accuracy-and-coverage-in-copilot-usage-metrics-reports
+  - group: 📰 Recent Changelog
     label: "Copilot metrics is now generally available (2026-02-27)"
     url: https://github.blog/changelog/2026-02-27-copilot-metrics-is-now-generally-available
 ---
@@ -36,9 +39,18 @@ links:
 
 <div class="hero-quote hero-quote-team">
   <p>
-    <strong>Copilot Metrics</strong>
+    <strong>Copilot Metrics</strong> は、GitHub Copilot の利用状況と効果を可視化する仕組み。
   </p>
   <p>
-    coming soon
+    Organization / Enterprise レベルで利用データを集計・確認でき、API エンドポイントとダッシュボードの両方で閲覧できる。
   </p>
 </div>
+
+## 概要
+
+Copilot Metrics は GA 済み。精度・カバレッジが改善された利用状況レポートが提供されており、Organization / Enterprise レベルで集計・確認できる。
+
+- **ダッシュボード**：GitHub.com 上で利用状況の傾向をグラフで確認。
+- **REST API**：<a class="retro-link" href="https://docs.github.com/en/rest/copilot/copilot-metrics" target="_blank" rel="noopener noreferrer">Copilot Metrics API ↗</a> で、プログラムからデータを取得・分析。
+- **チームレベル対応**：Organization 全体だけでなく、チーム単位でもメトリクスを取得可能。
+- **Cloud Agent 対応**：Cloud Agent の利用状況も metrics フィールドに含まれる。

@@ -49,7 +49,7 @@ links:
 </div>
 
 > 🎯 2026-06-17 に **一般提供（GA）** 開始。macOS / Windows / Linux 対応。
-> 🆓 **すべての有料 Copilot プラン**（Pro / Pro+ / Business / Enterprise）で利用可能。
+> 🆓 **すべての有料 Copilot プラン**（Pro / Pro+ / Business / Enterprise）で利用可能。また **Free / Student プランのユーザーも BYOK（自前 API キー）を設定すれば利用可能**。
 
 ## できること
 
