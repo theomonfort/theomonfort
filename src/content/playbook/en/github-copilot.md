@@ -79,7 +79,7 @@ links:
 
 ## AI Models & Surfaces
 
-Available AI models: OpenAI / Anthropic / Google Gemini / xAI Grok, plus support for **custom models** and **BYOK (Bring Your Own Key)**.
+Available AI models: OpenAI / Anthropic / Google Gemini / xAI Grok / Microsoft (MAI) / Moonshot AI (Kimi), plus support for **custom models** and **BYOK (Bring Your Own Key)**.
 
 Available surfaces:
 
