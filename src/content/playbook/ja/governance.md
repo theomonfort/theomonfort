@@ -32,6 +32,9 @@ links:
   - group: 📰 発表
     label: "Enterprises can default to auto model selection (2026-07-01)"
     url: https://github.blog/changelog/2026-07-01-enterprises-can-default-to-auto-model-selection/
+  - group: 📰 発表
+    label: "Enterprise managed settings now apply to the GitHub Copilot app (2026-07-27)"
+    url: https://github.blog/changelog/2026-07-27-enterprise-managed-settings-now-apply-to-the-github-copilot-app/
 ---
 
 
@@ -104,16 +107,17 @@ flowchart LR
 
 ## Copilot managed settings（NEW）
 
-Enterprise が Copilot クライアント（CLI / VS Code）の設定を **一元統制** する仕組み。source organization の `.github-private` リポジトリに置いた `copilot/managed-settings.json` を、エンタープライズの Copilot ライセンスを持つ全ユーザーへ自動配布する。
+Enterprise が **GitHub Copilot app / CLI / VS Code / Copilot cloud agent** を横断して **一元統制** する仕組み。source organization の `.github-private` リポジトリに置いた `copilot/managed-settings.json` で、エンタープライズの Copilot プラン全体に共通のガードレールを定義する。
 
 **統制できること:**
 
+- 🌐 **対応範囲** — Copilot CLI / VS Code に加え、Copilot app と cloud agent にも適用
 - 🧠 **既定モデル** — 新規会話の既定モデルを指定（例: Auto model selection）。個別会話では変更可
-- 🚫 **バイパスモードの禁止** — YOLO / auto-approve を無効化し、エージェントの各操作を人がレビュー
-- 🏪 **プラグイン marketplace** — 追加、またはエンタープライズ承認済みのみに限定
+- 🚫 **承認プロンプト** — app / CLI / VS Code の対話型クライアントでバイパスモードを禁止
+- 🏪 **プラグイン marketplace** — cloud agent のタスクを含め、承認済みの提供元だけに制限
 - 🧩 **既定プラグイン** — 全ユーザーに自動インストール
 
-> ⚙️ 解決順: source organization は **エンタープライズにつき 1 つ**（AI controls › Agents で指定）。どの org からライセンスを受けても、適用されるのはこの単一ソースの設定。managed-settings は **クライアント側のユーザー設定より優先** され、クライアントは **1 時間ごと** に取得。<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-agents/configure-enterprise-managed-settings" target="_blank" rel="noopener noreferrer">Configuring enterprise managed settings ↗</a>
+> ⚙️ 既存の CLI / VS Code 向け設定は移行不要。Copilot app はサインインまたは再起動後、cloud agent は次のタスクから変更を適用する。managed settings はローカル設定より優先。<a class="retro-link" href="https://github.blog/changelog/2026-07-27-enterprise-managed-settings-now-apply-to-the-github-copilot-app/" target="_blank" rel="noopener noreferrer">2026 年 7 月のリリース ↗</a>
 
 ## ★ 使いどころ
 

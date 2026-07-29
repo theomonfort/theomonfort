@@ -32,6 +32,9 @@ links:
   - group: 📰 Announcement
     label: "Enterprises can default to auto model selection (2026-07-01)"
     url: https://github.blog/changelog/2026-07-01-enterprises-can-default-to-auto-model-selection/
+  - group: 📰 Announcement
+    label: "Enterprise managed settings now apply to the GitHub Copilot app (2026-07-27)"
+    url: https://github.blog/changelog/2026-07-27-enterprise-managed-settings-now-apply-to-the-github-copilot-app/
 ---
 
 
@@ -104,16 +107,17 @@ Policies live at the **organization** and **enterprise** levels, not the reposit
 
 ## Copilot managed settings (NEW)
 
-How an enterprise **centrally controls** Copilot clients (CLI / VS Code). A `copilot/managed-settings.json` file in the source organization's `.github-private` repository is distributed automatically to every user on the enterprise's Copilot plan.
+How an enterprise **centrally controls** Copilot across the **GitHub Copilot app, CLI, VS Code, and Copilot cloud agent**. A `copilot/managed-settings.json` file in the source organization's `.github-private` repository defines one set of guardrails for everyone on the enterprise's Copilot plan.
 
 **What you can enforce:**
 
+- 🌐 **Supported surfaces** — the Copilot app and cloud agent now join Copilot CLI and VS Code
 - 🧠 **Default model** — start new conversations with a chosen default (e.g. Auto model selection); users can still switch per-conversation
-- 🚫 **Block bypass mode** — turn off YOLO / auto-approve so a human reviews each agent action
-- 🏪 **Plugin marketplaces** — add extra marketplaces, or restrict users to only enterprise-approved ones
+- 🚫 **Approval prompts** — block bypass mode in interactive clients: the app, CLI, and VS Code
+- 🏪 **Plugin marketplaces** — restrict all supported surfaces, including cloud agent tasks, to enterprise-approved sources
 - 🧩 **Default plugins** — auto-install a set of plugins for everyone
 
-> ⚙️ Resolution: there is **one source organization per enterprise** (set under AI controls › Agents). Whichever org grants your license, you get this single source's settings. managed-settings **overrides users' own client config** and clients pull it **once per hour**. <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-agents/configure-enterprise-managed-settings" target="_blank" rel="noopener noreferrer">Configuring enterprise managed settings ↗</a>
+> ⚙️ Existing CLI / VS Code configurations need no migration. The Copilot app picks them up after sign-in or restart; cloud agent applies changes on the next task. Managed values override local settings. <a class="retro-link" href="https://github.blog/changelog/2026-07-27-enterprise-managed-settings-now-apply-to-the-github-copilot-app/" target="_blank" rel="noopener noreferrer">July 2026 release ↗</a>
 
 ## ★ Where it fits
 
