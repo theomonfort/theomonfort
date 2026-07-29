@@ -5,8 +5,6 @@ import type { LocalizedPlaybookEntry } from './playbook';
 // Slugs flagged as recently added; surfaced with a "New" badge in the TOC.
 export const NEW_PLAYBOOK_SLUGS = new Set([
   'usage-based-billing',
-  'token-optimization',
-  'agent-skills',
   'copilot-code-review',
   'github',
   'cli',
@@ -27,7 +25,6 @@ export function isNewPlaybookEntry(slug: string): boolean {
 // positions, i.e. visual slide N maps to index N - 1.
 export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'copilot-code-review': [5, 6],
-  'agent-skills': [4],
   'github': [3, 4, 5, 6],
   'cli': [6, 7],
   'agentic-workflow': [1],
