@@ -89,18 +89,16 @@ GET /orgs/{org}/copilot/metrics/reports/organization-1-day?day=YYYY-MM-DD
 
 ## ★ Copilot Impact Dashboard
 
-**2026 年 7 月 22 日**にリリース。導入の深さと Pull Request の成果を結び付け、次に行う Enablement を提案する。
+Enterprise 管理者と Organization Owner が、4 つの問いに答えるための Dashboard。
 
-| Cohort | 意味 |
+| Dashboard セクション | ひと目で分かること |
 | --- | --- |
-| Passive | フェーズ判定の基準に未到達 |
-| Phase 1: Code first | Completion または IDE Agent mode |
-| Phase 2: Agent first | GitHub ベースの Agent を 1 種類利用 |
-| Phase 3: Multi-agent | 複数 Agent または Copilot app を利用 |
+| 👥 **Adoption cohorts** | Passive、Code-first、Agent-first、Multi-agent の分布。人数、割合、PR/User/Month、マージ速度、LoC/Day を表示。 |
+| ✖️ **Adoption multiplier** | Engaged User の平均スループットと速度が Passive Cohort と比べてどう違うか。 |
+| 📈 **Trends** | Cohort の成長と Pull Request throughput が過去 **6 か月**でどう変化したか。 |
+| 🎯 **Recommended next steps** | より深い導入フェーズへ進めるために、次に実行すべき具体的な Enablement。 |
 
-- フェーズ割合、1 人あたり PR マージ数、マージ速度、LoC、**6 か月の推移**
-- Engaged と Passive を比較する **adoption multiplier** と次の Enablement
-- 過去 **28 日** を基にフェーズを毎日再計算
+> 🎯 「誰が Active か」だけでなく、**どこまで深く導入されたか**と**次にどこを支援すべきか**を説明する。
 
 ## 数字を正しく読む
 

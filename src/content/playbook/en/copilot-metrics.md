@@ -89,18 +89,16 @@ GET /orgs/{org}/copilot/metrics/reports/organization-1-day?day=YYYY-MM-DD
 
 ## ★ Copilot Impact Dashboard
 
-Released on **July 22, 2026**, the dashboard connects adoption depth to pull request output and recommends the next enablement action.
+The dashboard answers four questions for enterprise administrators and organization owners.
 
-| Cohort | Meaning |
+| Dashboard section | Quick read |
 | --- | --- |
-| Passive | The user has not reached a phase threshold |
-| Phase 1: Code first | Completions and/or IDE agent mode |
-| Phase 2: Agent first | One GitHub-based agent surface |
-| Phase 3: Multi-agent | Multiple agent surfaces or the Copilot app |
+| 👥 **Adoption cohorts** | Who is Passive, Code-first, Agent-first, or Multi-agent? Cards show users, share, PRs/user/month, merge velocity, and LoC/day. |
+| ✖️ **Adoption multiplier** | How do the average throughput and speed of engaged users compare with the Passive cohort? |
+| 📈 **Trends** | Are cohort growth and pull request throughput changing over the last **six months**? |
+| 🎯 **Recommended next steps** | Which concrete enablement action can move more users into deeper-adoption cohorts? |
 
-- Shows phase share, merged PRs per user, merge velocity, LoC, and **six-month trends**
-- Calculates an **adoption multiplier** and recommends the next enablement action
-- Recalculates phases daily from a trailing **28-day** window
+> 🎯 Move beyond “who is active?” to explain **how deeply Copilot is adopted** and **where enablement should focus next**.
 
 ## Read the numbers carefully
 
