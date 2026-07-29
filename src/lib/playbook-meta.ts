@@ -29,7 +29,7 @@ export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'cli': [6, 7],
   'agentic-workflow': [1],
   'collaboration-tools': [2],
-  'usage-based-billing': [9],
+  'usage-based-billing': [9, 10],
   'governance': [4],
   'secret-scanning': [6],
   'copilot-metrics': [4],

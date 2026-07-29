@@ -21,8 +21,8 @@ links:
     label: GitHub Copilot is moving to usage-based billing
     url: https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/
   - group: 📰 発表
-    label: "Cost centers now support included usage caps (2026-07-02)"
-    url: https://github.blog/changelog/2026-07-02-cost-centers-now-support-included-usage-caps/
+    label: "AI credit pools for cost centers in the billing UI (2026-07-20)"
+    url: https://github.blog/changelog/2026-07-20-ai-credit-pools-for-cost-centers-in-the-billing-ui/
   - group: 📖 公式ドキュメント
     label: Usage-based billing for organizations and enterprises
     url: https://docs.github.com/en/copilot/concepts/billing/usage-based-billing-for-organizations-and-enterprises
@@ -257,7 +257,7 @@ GitHub Copilot がより高度な AI ワークフローをサポートするに�
 </div>
 </div>
 
-<div style="background:rgba(255,176,0,0.08);border:1px solid rgba(255,176,0,0.4);padding:0.6em 0.9em;font-size:0.8em;color:rgba(232,244,255,0.9);line-height:1.6;margin-top:1.1em;"><strong style="color:#ffb000;">【新 2026-07】AI クレジットプール上限:</strong> コストセンターが共有プールから引ける <strong>付帯クレジット</strong> を、割り当てられたライセンス分までに制限（上限は自動計算）。Budget（超過支出の制御）とは <strong>別の制御</strong> で、上限到達時は <strong>ブロック</strong> または <strong>追加支出として継続</strong> を選択可能。<strong>エンタープライズチームまたはユーザーを含むコストセンターでのみ有効</strong>（組織のみのコストセンターでは利用不可）。現時点では <strong>REST API のみ</strong>（UI は近日）。<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/rest/billing/cost-centers" target="_blank" rel="noopener noreferrer">REST API: Cost centers（<code>ai_credit_pool_enabled</code>）↗</a></div>
+<div style="background:rgba(255,176,0,0.08);border:1px solid rgba(255,176,0,0.4);padding:0.6em 0.9em;font-size:0.8em;color:rgba(232,244,255,0.9);line-height:1.6;margin-top:1.1em;"><strong style="color:#ffb000;">【新 2026-07】AI クレジットプール上限:</strong> コストセンターが共有プールから引ける <strong>付帯クレジット</strong> を、割り当てられたライセンス分までに制限（上限は自動計算）。Budget（超過支出の制御）とは <strong>別の制御</strong> で、上限到達時は <strong>ブロック</strong> または <strong>追加支出として継続</strong> を選択可能。<strong>ユーザーまたはエンタープライズチームを含むコストセンターでのみ有効</strong>で、組織とリポジトリには対応していません。現在は <strong>Billing and licensing → Cost centers</strong> の UI、または <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/rest/billing/cost-centers" target="_blank" rel="noopener noreferrer">REST API ↗</a> から設定できます。<a class="retro-link" href="https://github.blog/changelog/2026-07-20-ai-credit-pools-for-cost-centers-in-the-billing-ui/" target="_blank" rel="noopener noreferrer">UI 対応の発表 ↗</a></div>
 
 ## Budget 階層
 
