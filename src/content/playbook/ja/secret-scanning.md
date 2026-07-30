@@ -148,7 +148,7 @@ Repo or Org → Settings → Code security → Secret scanning → Custom patter
 GitHub が **github.com の公開領域全体をリアルタイム監視** し、漏洩した secret を「あなたのエンタープライズ」に帰属させる仕組み。自分の repo の外 — 個人フォーク・OSS・公開 issue / PR / discussion に貼られたトークン — で漏れた secret も検出する。
 
 - 🌐 対象は **公開コンテンツのみ**（git・PR コメント・issue・discussion）。**private repo は絶対にスキャンしない**
-- ⚡ リアルタイム（夜間クロールではない）＋ プラットフォーム metadata で正確に帰属（commit email の推測ではない）
+- ⚡ リアルタイム監視。プラットフォーム metadata を使って正確に帰属
 - 🧩 設定不要（out of the box）。有効化するだけで過去の漏洩も表示
 
 **帰属（attribution）の 2 方式:**

@@ -148,7 +148,7 @@ Use **default settings** in `Org → Settings → Code security` to apply to new
 GitHub **monitors the entire public surface of github.com in real time** and attributes leaked secrets back to your enterprise. It catches secrets leaked *outside* your own repos — personal forks, open source projects, tokens pasted into public issues / PRs / discussions.
 
 - 🌐 Scans **public content only** (git, PR comments, issues, discussions); it **never scans private repos**
-- ⚡ Real-time (not a nightly crawl), with native platform metadata for attribution (not a commit-email guess)
+- ⚡ Real-time monitoring, with native platform metadata for accurate attribution
 - 🧩 Works out of the box — just enable it and see past leaks too
 
 **Two attribution methods:**
