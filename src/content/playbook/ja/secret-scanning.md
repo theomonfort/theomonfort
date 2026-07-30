@@ -1,7 +1,7 @@
 ---
 title: Secret Scanning
 titleEn: Secret Scanning
-summary: コミット・Issue・PR・履歴に紛れ込んだ API キーやトークンを自動検出する GitHub のシークレット検知機能。Push protection でコミット前にブロックも可能。public は無料、push protection は private でも無料。
+summary: コミット・Issue・PR・履歴に紛れ込んだ API キーやトークンを自動検出する GitHub のシークレット検知機能。Public repo の基本機能は無料、private / internal repo は Secret Protection が必要。
 icon: /theomonfort/icons/secret-scanning.png
 color: cyan
 accent:
@@ -32,6 +32,9 @@ links:
   - group: 📖 公式ドキュメント
     label: Public monitoring
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring
+  - group: 📖 公式ドキュメント
+    label: About GitHub Advanced Security products
+    url: https://docs.github.com/en/enterprise-cloud@latest/get-started/learning-about-github/about-github-advanced-security
   - group: 📰 Recent Changelog
     label: "Secret scanning public monitoring for enterprises (2026-07-01)"
     url: https://github.blog/changelog/2026-07-01-secret-scanning-public-monitoring-for-enterprises/
@@ -59,7 +62,7 @@ links:
 
 ## Detection と Push protection の違い
 
-Secret Scanning は **2 つのモード** で動く。やるべきは両方 ON。
+Secret Scanning の中核は **検知** と **Push protection**。Validity checks は検知後の優先順位付けを支援する。
 
 | 機能 | いつ動く？ | 何をする？ | 対象範囲 |
 | --- | --- | --- | --- |
@@ -74,8 +77,9 @@ Secret Scanning は **2 つのモード** で動く。やるべきは両方 ON�
 ## 何を検出するのか
 
 - 🏷️ **Provider patterns** — AWS、Azure、GCP、Stripe、Slack、OpenAI、GitHub PAT など 200+ パートナーが登録した正規表現で検知。誤検知が極めて少ない
-- 🧪 Generic / non-provider patterns — `password = "..."` や HTTP basic auth、汎用 API キー風の文字列。AI による検出(Copilot Secret Scanning)も対象に追加可能
-- 🛠️ **Custom patterns** — 自社独自トークン用に正規表現を自分で定義(GHAS が必要)
+- 🧪 **Generic patterns** — private key、接続文字列、HTTP basic auth などの汎用パターン。Secret Protection / GHAS が必要
+- 🤖 **AI-detected secrets** — パスワードなどの非構造化 secret を AI で検出。Secret Protection / GHAS が必要
+- 🛠️ **Custom patterns** — 自社独自トークン用に正規表現を定義。Public repo を含め Secret Protection / GHAS が必要
 - 📚 対象 — コードだけでなく Issue・PR・コミットメッセージ・description・Wiki・gist まで
 
 > 🤖 Generic secrets と AI detection は誤検知が増えがち。**Push protection** とセットで使うと "通そうとした瞬間に止まる" ので運用しやすい。
@@ -101,7 +105,7 @@ Repo → Settings → Code security
   ✅ Push protection
 ```
 
-Public repo は **デフォルト ON** で完全無料。Private repo のリポレベル push protection は Secret Protection / GHAS が必要だが、ユーザー個人の opt-in なら全プラン無料(`User → Settings → Code security and analysis`)。
+Public repo のリポレベル push protection は **デフォルト ON** で無料。Private / internal repo では Secret Protection / GHAS が必要。ユーザー個人の push protection も無料だが、保護対象は public repo への push のみ。
 
 **Step 2 — 既存の漏洩をスキャン**
 
@@ -113,7 +117,7 @@ ON にすると過去のコミット履歴も自動でスキャンされる。Se
 Repo or Org → Settings → Code security → Secret scanning → Custom patterns
 ```
 
-正規表現で自社独自のトークン形式を登録。Public repo は無料、private repo は GHAS / Secret Protection が必要。Dry run で誤検知をチェックしてから本番投入する。
+正規表現で自社独自のトークン形式を登録。Custom patterns は public / private を問わず Secret Protection / GHAS が必要。Dry run で誤検知をチェックしてから本番投入する。
 
 **Step 4 — Org / Enterprise で一括 ON**
 
@@ -121,27 +125,33 @@ Repo or Org → Settings → Code security → Secret scanning → Custom patter
 
 📘 詳細: <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/enabling-secret-scanning-features/enabling-secret-scanning-for-your-repository" target="_blank" rel="noopener noreferrer">Enabling secret scanning for your repo ↗</a>
 
-## 利用条件と料金
+## 利用条件と製品
 
-| 機能 | Public repo | Private repo（Non GHAS / Secret Protection） | Private repo（With GHAS / Secret Protection） |
-| --- | :---: | :---: | :---: |
-| Push protection（ユーザー個人 opt-in） | ✅ 無料 | ✅ 無料(2024〜) | ✅ |
-| Push protection（リポ / 組織レベル） | ✅ 無料 | ❌ | ✅ |
-| Secret scanning alerts | ✅ 無料 | ❌ | ✅ |
-| Partner secret invalidation | ✅ 自動 | ❌ | ✅ 自動 |
-| Validity checks | ✅ 無料 | ❌ | ✅ |
-| Custom patterns | ✅ 無料 | ❌ | ✅ |
-| AI detection (generic) | ✅ 無料 | ❌ | ✅ |
+<table class="availability-table">
+<thead>
+<tr>
+<th>機能</th>
+<th>Public repo</th>
+<th>Private / internal<br>製品なし</th>
+<th>Secret Protection / GHAS</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Secret scanning alerts</td><td>✅ 無料</td><td>❌</td><td>✅ 含む</td></tr>
+<tr><td>Push protection（リポ / 組織）</td><td>✅ 無料</td><td>❌</td><td>✅ 含む</td></tr>
+<tr><td>Validity checks</td><td>❌</td><td>❌</td><td>✅ 対応 provider</td></tr>
+<tr><td>Generic patterns</td><td>❌</td><td>❌</td><td>✅ 含む</td></tr>
+<tr><td>Custom patterns</td><td>❌</td><td>❌</td><td>✅ 含む</td></tr>
+<tr><td>AI-detected secrets</td><td>❌</td><td>❌</td><td>✅ 含む</td></tr>
+<tr><td>Public monitoring</td><td>❌</td><td>❌</td><td>✅ GHEC Enterprise</td></tr>
+</tbody>
+</table>
 
-> 💰 2025 年に **GHAS が分割** され、secret scanning だけなら **Secret Protection**($19/月/active committer)で OK(GHAS フル契約は不要)。Code scanning も欲しければ GitHub Code Security と組み合わせる。  
-> 🆓 個人でも `Settings → Code security` から **ユーザー push protection** を ON にすると、private repo でも secret push を警告してくれる。まずはこれを全社員に勧めるのが最短の事故防止。  
-> 🛡️ Push protection(リポ / 組織レベル)は public repo は完全無料・default ON。private / internal repo で組織全体に強制したい場合のみ Secret Protection / GHAS のライセンスが必要。詳細は <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/introduction/about-push-protection" target="_blank" rel="noopener noreferrer">About push protection ↗</a>。
+> 🆓 **ユーザー push protection** は全プランで無料・デフォルト ON だが、public repo への push のみが対象。**Partner alerts** も public repo / public npm package の漏洩だけを provider に通知する。
+>
+> 💰 Generic / Custom / AI detection、Validity checks、private / internal repo の保護には **Secret Protection または従来の GHAS** が必要。**Public monitoring** は GHEC Enterprise 向けの enterprise-wide 機能。
 
-📘 詳細:
-- <a class="retro-link" href="https://github.blog/news-insights/product-news/push-protection-is-generally-available-and-free-for-all-public-repositories/" target="_blank" rel="noopener noreferrer">Push protection is GA & free for all public repos(GitHub Blog)↗</a>
-- <a class="retro-link" href="https://github.blog/changelog/2024-02-29-push-protection-is-enabled-for-free-users-on-github/" target="_blank" rel="noopener noreferrer">Push protection enabled for free users(2024 Feb)↗</a>
-- <a class="retro-link" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">Introducing GitHub Secret Protection & Code Security(2025 Mar)↗</a>
-- <a class="retro-link" href="https://docs.github.com/en/get-started/learning-about-github/githubs-plans" target="_blank" rel="noopener noreferrer">GitHub plans pricing ↗</a>
+📘 詳細: <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/get-started/learning-about-github/about-github-advanced-security" target="_blank" rel="noopener noreferrer">Advanced Security products ↗</a> / <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Public monitoring ↗</a>
 
 ## Public monitoring（NEW）
 
@@ -149,7 +159,7 @@ GitHub が **github.com の公開領域全体をリアルタイム監視** し�
 
 - 🌐 対象は **公開コンテンツのみ**（git・PR コメント・issue・discussion）。**private repo は絶対にスキャンしない**
 - ⚡ リアルタイム監視。プラットフォーム metadata を使って正確に帰属
-- 🧩 設定不要（out of the box）。有効化するだけで過去の漏洩も表示
+- 🧩 追加設定不要（out of the box）。有効化すると直近の既存 finding と今後の漏洩を表示
 
 **帰属（attribution）の 2 方式:**
 

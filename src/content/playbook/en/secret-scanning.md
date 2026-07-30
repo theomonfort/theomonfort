@@ -1,7 +1,7 @@
 ---
 title: Secret Scanning
 titleEn: Secret Scanning
-summary: GitHub's secret detection feature that automatically finds API keys and tokens mixed into commits, issues, PRs, and history. Push protection can block commits before they land. Free for public repos; push protection is also free for private repos on a per-user opt-in basis.
+summary: GitHub's secret detection feature that automatically finds API keys and tokens in commits, issues, PRs, and history. Core coverage is free for public repositories; private and internal repositories require Secret Protection.
 icon: /theomonfort/icons/secret-scanning.png
 color: cyan
 accent:
@@ -32,6 +32,9 @@ links:
   - group: 📖 Official Documentation
     label: Public monitoring
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring
+  - group: 📖 Official Documentation
+    label: About GitHub Advanced Security products
+    url: https://docs.github.com/en/enterprise-cloud@latest/get-started/learning-about-github/about-github-advanced-security
   - group: 📰 Recent Changelog
     label: "Secret scanning public monitoring for enterprises (2026-07-01)"
     url: https://github.blog/changelog/2026-07-01-secret-scanning-public-monitoring-for-enterprises/
@@ -59,7 +62,7 @@ links:
 
 ## Detection vs Push protection — what's the difference?
 
-Secret Scanning operates in **two modes**. You should enable both.
+Secret Scanning has two core controls: **detection** and **Push protection**. Validity checks help prioritize detected leaks.
 
 | Feature | When does it run? | What does it do? | Scope |
 | --- | --- | --- | --- |
@@ -74,8 +77,9 @@ Secret Scanning operates in **two modes**. You should enable both.
 ## What gets detected
 
 - 🏷️ **Provider patterns** — Regex patterns registered by 200+ partners including AWS, Azure, GCP, Stripe, Slack, OpenAI, and GitHub PATs. Extremely low false-positive rate
-- 🧪 Generic / non-provider patterns — `password = "..."`, HTTP basic auth, generic API key-like strings. AI-based detection (Copilot Secret Scanning) can also be enabled
-- 🛠️ **Custom patterns** — Define your own regex for proprietary token formats (requires GHAS)
+- 🧪 **Generic patterns** — Private keys, connection strings, HTTP basic auth, and other generic formats. Requires Secret Protection / GHAS
+- 🤖 **AI-detected secrets** — Uses AI to detect unstructured secrets such as passwords. Requires Secret Protection / GHAS
+- 🛠️ **Custom patterns** — Define regexes for proprietary token formats. Requires Secret Protection / GHAS, including for public repositories
 - 📚 Scope — Not just code: Issues, PRs, commit messages, descriptions, Wikis, and Gists are all scanned
 
 > 🤖 Generic secrets and AI detection tend to produce more false positives. Pairing them with **Push protection** means things get stopped at the moment someone tries to commit them — much easier to operate.
@@ -101,7 +105,7 @@ Repo → Settings → Code security
   ✅ Push protection
 ```
 
-Public repos have this **on by default and completely free**. Repo-level push protection for private repos requires Secret Protection / GHAS — but individual user opt-in is free on all plans (`User → Settings → Code security and analysis`).
+Repo-level push protection is **on by default and free for public repositories**. Private and internal repositories require Secret Protection / GHAS. User-level push protection is also free, but it only protects pushes to public repositories.
 
 **Step 2 — Scan for existing leaks**
 
@@ -113,7 +117,7 @@ Once enabled, past commit history is automatically scanned. Alerts will appear i
 Repo or Org → Settings → Code security → Secret scanning → Custom patterns
 ```
 
-Register your own token format with a regex. Free for public repos; private repos require GHAS / Secret Protection. Use the dry-run feature to check for false positives before going live.
+Register your own token format with a regex. Custom patterns require Secret Protection / GHAS for both public and private repositories. Use the dry-run feature to check for false positives before going live.
 
 **Step 4 — Enable org-wide / enterprise-wide**
 
@@ -121,27 +125,33 @@ Use **default settings** in `Org → Settings → Code security` to apply to new
 
 📘 Details: <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/enabling-secret-scanning-features/enabling-secret-scanning-for-your-repository" target="_blank" rel="noopener noreferrer">Enabling secret scanning for your repo ↗</a>
 
-## Eligibility and pricing
+## Availability by product
 
-| Feature | Public repo | Private repo (No GHAS / Secret Protection) | Private repo (With GHAS / Secret Protection) |
-| --- | :---: | :---: | :---: |
-| Push protection (user personal opt-in) | ✅ Free | ✅ Free (since 2024) | ✅ |
-| Push protection (repo / org level) | ✅ Free | ❌ | ✅ |
-| Secret scanning alerts | ✅ Free | ❌ | ✅ |
-| Partner secret invalidation | ✅ Automatic | ❌ | ✅ Automatic |
-| Validity checks | ✅ Free | ❌ | ✅ |
-| Custom patterns | ✅ Free | ❌ | ✅ |
-| AI detection (generic) | ✅ Free | ❌ | ✅ |
+<table class="availability-table">
+<thead>
+<tr>
+<th>Feature</th>
+<th>Public repo</th>
+<th>Private / internal<br>without product</th>
+<th>Secret Protection / GHAS</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Secret scanning alerts</td><td>✅ Free</td><td>❌</td><td>✅ Included</td></tr>
+<tr><td>Push protection (repo / org)</td><td>✅ Free</td><td>❌</td><td>✅ Included</td></tr>
+<tr><td>Validity checks</td><td>❌</td><td>❌</td><td>✅ Supported providers</td></tr>
+<tr><td>Generic patterns</td><td>❌</td><td>❌</td><td>✅ Included</td></tr>
+<tr><td>Custom patterns</td><td>❌</td><td>❌</td><td>✅ Included</td></tr>
+<tr><td>AI-detected secrets</td><td>❌</td><td>❌</td><td>✅ Included</td></tr>
+<tr><td>Public monitoring</td><td>❌</td><td>❌</td><td>✅ GHEC Enterprise</td></tr>
+</tbody>
+</table>
 
-> 💰 In 2025, **GHAS was split** — if you only need secret scanning, **Secret Protection** ($19/month/active committer) is enough (no full GHAS contract required). Combine with GitHub Code Security if you also want CodeQL.  
-> 🆓 Individuals can enable **user push protection** via `Settings → Code security` — this warns even on private repos without any license. Recommending this to all employees is the fastest way to prevent accidents.  
-> 🛡️ Push protection at the repo/org level is completely free and on by default for public repos. A Secret Protection / GHAS license is only needed when you want to enforce it org-wide on private / internal repos. See <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/introduction/about-push-protection" target="_blank" rel="noopener noreferrer">About push protection ↗</a>.
+> 🆓 **User push protection** is free and enabled by default on all plans, but only covers pushes to public repositories. **Partner alerts** also notify providers only about leaks in public repositories and public npm packages.
+>
+> 💰 Generic, custom, and AI detection, validity checks, and private / internal repository coverage require **Secret Protection or a legacy GHAS license**. **Public monitoring** is an enterprise-wide feature for GHEC Enterprise.
 
-📘 Details:
-- <a class="retro-link" href="https://github.blog/news-insights/product-news/push-protection-is-generally-available-and-free-for-all-public-repositories/" target="_blank" rel="noopener noreferrer">Push protection is GA & free for all public repos (GitHub Blog) ↗</a>
-- <a class="retro-link" href="https://github.blog/changelog/2024-02-29-push-protection-is-enabled-for-free-users-on-github/" target="_blank" rel="noopener noreferrer">Push protection enabled for free users (2024 Feb) ↗</a>
-- <a class="retro-link" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">Introducing GitHub Secret Protection & Code Security (2025 Mar) ↗</a>
-- <a class="retro-link" href="https://docs.github.com/en/get-started/learning-about-github/githubs-plans" target="_blank" rel="noopener noreferrer">GitHub plans pricing ↗</a>
+📘 Details: <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/get-started/learning-about-github/about-github-advanced-security" target="_blank" rel="noopener noreferrer">Advanced Security products ↗</a> / <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Public monitoring ↗</a>
 
 ## Public monitoring (NEW)
 
@@ -149,7 +159,7 @@ GitHub **monitors the entire public surface of github.com in real time** and att
 
 - 🌐 Scans **public content only** (git, PR comments, issues, discussions); it **never scans private repos**
 - ⚡ Real-time monitoring, with native platform metadata for accurate attribution
-- 🧩 Works out of the box — just enable it and see past leaks too
+- 🧩 Works out of the box — enable it to see recent existing findings and future leaks
 
 **Two attribution methods:**
 
