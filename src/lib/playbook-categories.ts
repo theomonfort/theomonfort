@@ -78,8 +78,8 @@ export const categories: Category[] = [
     actor: 'DevSecOps エンジニア',
     actorEn: 'DevSecOps Engineer',
     avatar: '/theomonfort/octocat-profile-blue.png',
-    description: '<strong class="text-neon-cyan">GitHub Actions</strong> でテストを自動化。<strong class="text-neon-cyan">Code Scanning</strong>・<strong class="text-neon-cyan">Secret Scanning</strong>・<strong class="text-neon-cyan">Dependabot</strong> を有効化してセキュリティを担保。',
-    descriptionEn: 'Automate tests with <strong class="text-neon-cyan">GitHub Actions</strong>, and protect quality with <strong class="text-neon-cyan">Code Scanning</strong>, <strong class="text-neon-cyan">Secret Scanning</strong>, and <strong class="text-neon-cyan">Dependabot</strong>.',
+    description: '<strong class="text-neon-cyan">GitHub Actions</strong> でテストを自動化。<strong class="text-neon-cyan">Code Quality</strong> で品質を維持し、<strong class="text-neon-cyan">Code Scanning</strong>・<strong class="text-neon-cyan">Secret Scanning</strong>・<strong class="text-neon-cyan">Dependabot</strong> でセキュリティを担保。',
+    descriptionEn: 'Automate tests with <strong class="text-neon-cyan">GitHub Actions</strong>, maintain quality with <strong class="text-neon-cyan">Code Quality</strong>, and secure code with <strong class="text-neon-cyan">Code Scanning</strong>, <strong class="text-neon-cyan">Secret Scanning</strong>, and <strong class="text-neon-cyan">Dependabot</strong>.',
   },
   {
     id: 'operate',

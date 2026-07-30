@@ -12,7 +12,7 @@ accent:
   hex: "#00f0ff"
 order: 19.4
 category: secure
-related: ['github-advanced-security', 'dependabot', 'secret-scanning']
+related: ['code-quality', 'github-advanced-security', 'dependabot', 'secret-scanning']
 links:
   - group: 📖 Official Documentation
     label: About code scanning
