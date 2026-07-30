@@ -25,7 +25,7 @@ export function isNewPlaybookEntry(slug: string): boolean {
 // positions, i.e. visual slide N maps to index N - 1.
 export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'copilot-code-review': [5, 6],
-  'github': [3, 4, 5, 6],
+  'github': [3, 4, 5],
   'cli': [6, 7],
   'agentic-workflow': [1],
   'collaboration-tools': [2],
