@@ -1,7 +1,7 @@
 ---
 title: GitHub
 titleEn: GitHub
-summary: The AI-native developer platform used by more than 180 million developers. From Pull Requests to GitHub Copilot, GitHub continues to shape the history of software development.
+summary: The AI-native developer platform used by more than 240 million developers. From Pull Requests to GitHub Copilot, GitHub continues to shape the history of software development.
 icon: /theomonfort/github-white-icon.svg
 color: cyan
 accent:
@@ -44,7 +44,7 @@ links:
 
 <div class="hero-quote hero-quote-mona">
   <p>Hi, I'm <strong>Mona</strong> — the face of <strong>GitHub</strong>, watching over developers worldwide.</p>
-  <p>Today's topic, <strong>GitHub</strong>, is the world's largest AI-native developer platform — home to <strong>180 million+</strong> developers.</p>
+  <p>Today's topic, <strong>GitHub</strong>, is the world's largest AI-native developer platform — home to <strong>240 million+</strong> developers.</p>
 </div>
 
 ## The Evolution of GitHub
