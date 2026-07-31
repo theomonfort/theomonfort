@@ -28,7 +28,13 @@ links:
     url: https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/create-custom-agents-for-cli
   - group: 🆚 VS Code
     label: VS Code Docs — Custom agents
-    url: https://code.visualstudio.com/docs/copilot/customization/custom-agents
+    url: https://code.visualstudio.com/docs/agent-customization/custom-agents
+  - group: 🆚 VS Code
+    label: VS Code Docs — Subagents
+    url: https://code.visualstudio.com/docs/agents/subagents
+  - group: 📰 Announcement
+    label: "Built-in Explore subagent (VS Code 1.110)"
+    url: https://github.blog/changelog/2026-03-06-github-copilot-in-visual-studio-code-v1-110-february-release
   - group: 🌟 Community examples
     label: github/awesome-copilot — Custom agents
     url: https://github.com/github/awesome-copilot/tree/main/agents
@@ -54,7 +60,7 @@ A Custom Agent locks in not just a prompt, but the entire "working style" of an 
 | Identity | What persona to adopt | `Planner`, `Security Reviewer`, `Test Specialist` |
 | Description | When to invoke it | "When creating a plan before implementation" |
 | Tools | Which tools to use | `read`, `search`, `edit`, `agent`, `github/*` |
-| Agents | Which subagents it can delegate to (requires `agent` in `tools`) | `Explore`, `*` |
+| Agents | Which subagents it can delegate to (requires `agent` in `tools`) | `Research`, `Reviewer`, `*` |
 | Model | Which model to run on | Strong model for design, fast model for exploration |
 | Target | Which runtime to target | `github-copilot`, `vscode` |
 | MCP | Dedicated external tools | Jira, Figma, Playwright, internal API |
@@ -106,25 +112,30 @@ Compare Figma specifications against Pull Request diffs and review only visual d
 
 > A good Custom Agent is defined not by "who" it is, but by **which decisions to delegate** to it.
 
-## Built-in agent examples
+## Agents vs. internal subagents
 
-Copilot Chat and CLI come with purpose-built agents out of the box.  
-Custom Agents are the mechanism for **extending this to your own team**.
+VS Code exposes **Agent, Plan, and Ask** to users. Internal helpers such as `searchSubagent` are tools invoked by another agent, not selectable `.agent.md` profiles.
 
-| Surface | Agent | What does it do? |
+| Surface | Agent / tool | What does it do? |
 | --- | --- | --- |
-| Copilot Chat / VS Code | Ask | Answers questions without making changes |
-| Copilot Chat / VS Code | Explore | Fast read-only codebase exploration and Q&A subagent |
+| Copilot Chat / VS Code | Agent | Implements complex tasks with editing and tool access |
+| Copilot Chat / VS Code | Ask | Answers questions and researches without making changes |
 | Copilot Chat / VS Code | Plan | Researches and outlines multi-step plans |
-| Copilot CLI | Explore | Quick codebase analysis. Ask questions about the code without adding to the main context |
-| Copilot CLI | Task | Runs commands such as tests and builds, returning a brief summary on success and full output on failure |
-| Copilot CLI | General-purpose | Handles complex multi-step tasks requiring the full toolset and high-quality reasoning in a separate context |
-| Copilot CLI | Rubber-duck | Gives high-signal feedback on plans and implementations, catching bugs, logic errors, and design flaws (never edits code) |
-| Copilot CLI | Code-review | Reviews changes and surfaces only genuinely important issues with low noise |
-| Copilot CLI | Research | A subagent that runs thorough searches: digs through GitHub repos, fetches files, and reports findings with citations |
-| Copilot CLI | Security-review | Reviews changes for high-confidence security vulnerabilities (11 categories) with severity and confidence scores |
+| VS Code internal | `searchSubagent` | Runs isolated, parallel codebase research and returns a summary |
 
-> Display names may appear shortened depending on the UI preview, but the official CLI names are `General-purpose` and `Code-review`. For how to create custom agents in the CLI, see <a href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-custom-agents" target="_blank" rel="noopener noreferrer" class="retro-link">About Copilot CLI custom agents</a> and <a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/create-custom-agents-for-cli" target="_blank" rel="noopener noreferrer" class="retro-link">Create custom agents for CLI</a>.
+> 🔑 VS Code's former Explore behavior now appears through `searchSubagent`. Its prompt and tool are implemented in TypeScript/TSX, so there is no editable Explore `.agent.md`.
+
+## Copilot CLI built-in subagents
+
+| Agent | Best for |
+| --- | --- |
+| Explore | Fast, read-only codebase research |
+| Task | Running tests, builds, and verbose commands |
+| General-purpose | Complex multi-step work with the full toolset |
+| Rubber-duck | Finding flaws in a plan or implementation |
+| Code-review | High-confidence review of a diff |
+| Research | Thorough GitHub and web research with citations |
+| Security-review | High-confidence vulnerability review |
 
 ## What happens inside the harness?
 

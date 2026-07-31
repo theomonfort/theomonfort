@@ -28,7 +28,13 @@ links:
     url: https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/create-custom-agents-for-cli
   - group: 🆚 VS Code
     label: VS Code Docs — Custom agents
-    url: https://code.visualstudio.com/docs/copilot/customization/custom-agents
+    url: https://code.visualstudio.com/docs/agent-customization/custom-agents
+  - group: 🆚 VS Code
+    label: VS Code Docs — Subagents
+    url: https://code.visualstudio.com/docs/agents/subagents
+  - group: 📰 発表
+    label: "Built-in Explore subagent (VS Code 1.110)"
+    url: https://github.blog/changelog/2026-03-06-github-copilot-in-visual-studio-code-v1-110-february-release
   - group: 🌟 コミュニティ例
     label: github/awesome-copilot — Custom agents
     url: https://github.com/github/awesome-copilot/tree/main/agents
@@ -54,7 +60,7 @@ Custom Agent は **プロンプトだけ** ではなく、エージェントの�
 | Identity | 何者として振る舞うか | `Planner`, `Security Reviewer`, `Test Specialist` |
 | Description | いつ呼ぶべきか | 「実装前に計画を作る時」 |
 | Tools | どの道具を使えるか | `read`, `search`, `edit`, `agent`, `github/*` |
-| Agents | どのサブエージェントに委任できるか（`tools` に `agent` が必要） | `Explore`, `*` |
+| Agents | どのサブエージェントに委任できるか（`tools` に `agent` が必要） | `Research`, `Reviewer`, `*` |
 | Model | どのモデルで動くか | 設計は強いモデル、探索は速いモデル |
 | Target | どの実行環境で使うか | `github-copilot`, `vscode` |
 | MCP | 専用の外部ツール | Jira, Figma, Playwright, internal API |
@@ -106,25 +112,30 @@ Figma の仕様と Pull Request の差分を比較し、見た目・余白・色
 
 > 良い Custom Agent は「誰か」ではなく、**どの判断を任せるか** が明確。
 
-## 組み込みエージェント例
+## Agent と内部 Subagent
 
-Copilot Chat や CLI にも、最初から目的別の agent が入っている。  
-Custom Agent は、この考え方を **自分のチーム用に増やす仕組み**。
+VS Code でユーザーが選べるのは **Agent、Plan、Ask**。`searchSubagent` のような内部 helper は、別の Agent が呼び出す tool であり、選択可能な `.agent.md` profile ではない。
 
-| Surface | Agent | 何をする？ |
+| Surface | Agent / tool | 何をする？ |
 | --- | --- | --- |
-| Copilot Chat / VS Code | Ask | 変更を加えずに質問に答える |
-| Copilot Chat / VS Code | Explore | 高速な read-only のコードベース探索と Q&A subagent |
+| Copilot Chat / VS Code | Agent | 編集と tool を使って複雑な task を実装する |
+| Copilot Chat / VS Code | Ask | 変更せずに質問へ回答し、必要な調査を行う |
 | Copilot Chat / VS Code | Plan | 調査して、複数ステップの計画を組み立てる |
-| Copilot CLI | Explore | Quick codebase analysis。main context に追加せず、コードについて質問できる |
-| Copilot CLI | Task | tests / builds などのコマンドを実行し、成功時は短い要約、失敗時は full output を返す |
-| Copilot CLI | General-purpose | Full toolset と高品質 reasoning が必要な complex multi-step task を別 context で処理する |
-| Copilot CLI | Rubber-duck | 計画や実装に高シグナルなフィードバックを返し、bug・logic error・設計の不備を指摘する（コードは変更しない） |
-| Copilot CLI | Code-review | 変更をレビューし、本当に重要な issue だけを低ノイズで指摘する |
-| Copilot CLI | Research | 指示に基づき徹底的に検索する subagent。GitHub repo を調べ、ファイルを取得し、根拠を citation 付きで報告する |
-| Copilot CLI | Security-review | 変更を security 観点でレビューし、確度の高い脆弱性（11 カテゴリ）を severity・confidence 付きで指摘する |
+| VS Code internal | `searchSubagent` | 独立した context で並列に codebase を調査し、summary を返す |
 
-> 画面上では preview / UI によって表示名が短く見えることがあるが、CLI docs の正式名は `General-purpose` と `Code-review`。CLI で独自エージェントを作る方法は <a href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-custom-agents" target="_blank" rel="noopener noreferrer" class="retro-link">About Copilot CLI custom agents</a> ／ <a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/create-custom-agents-for-cli" target="_blank" rel="noopener noreferrer" class="retro-link">Create custom agents for CLI</a> を参照。
+> 🔑 VS Code の旧 Explore 相当の動作は `searchSubagent` に移った。Prompt と tool は TypeScript/TSX で実装され、編集可能な Explore `.agent.md` は存在しない。
+
+## Copilot CLI の組み込み Subagent
+
+| Agent | 得意な task |
+| --- | --- |
+| Explore | 高速で read-only の codebase 調査 |
+| Task | Tests、builds、出力の多い command の実行 |
+| General-purpose | Full toolset を使う複雑な multi-step task |
+| Rubber-duck | 計画や実装の問題点を発見 |
+| Code-review | Diff の確度が高い review |
+| Research | Citation 付きの GitHub と Web の徹底調査 |
+| Security-review | 確度が高い脆弱性 review |
 
 ## ハーネスの中で何が起きる？
 
