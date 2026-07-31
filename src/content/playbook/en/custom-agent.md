@@ -132,10 +132,12 @@ VS Code exposes **Agent, Plan, and Ask** to users. Internal helpers such as `sea
 | Explore | Fast, read-only codebase research |
 | Task | Running tests, builds, and verbose commands |
 | General-purpose | Complex multi-step work with the full toolset |
-| Rubber-duck | Finding flaws in a plan or implementation |
+| Rubber-duck | Independently reviews plans and implementations. Assign it a different model with `/subagents` to test work from a perspective other than the model that created it |
 | Code-review | High-confidence review of a diff |
 | Research | Thorough GitHub and web research with citations |
 | Security-review | High-confidence vulnerability review |
+
+> 🦆 Rubber-duck's strength is **cross-model review**. Instead of asking a model to evaluate its own work, use another model to critique the plan or implementation and expose blind spots or reasoning biases.
 
 ## What happens inside the harness?
 

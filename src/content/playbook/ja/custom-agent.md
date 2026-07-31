@@ -132,10 +132,12 @@ VS Code でユーザーが選べるのは **Agent、Plan、Ask**。`searchSubage
 | Explore | 高速で read-only の codebase 調査 |
 | Task | Tests、builds、出力の多い command の実行 |
 | General-purpose | Full toolset を使う複雑な multi-step task |
-| Rubber-duck | 計画や実装の問題点を発見 |
+| Rubber-duck | 計画や実装を独立レビュー。`/subagents` で別の model を割り当て、作成に使った model とは異なる視点で test できる |
 | Code-review | Diff の確度が高い review |
 | Research | Citation 付きの GitHub と Web の徹底調査 |
 | Security-review | 確度が高い脆弱性 review |
+
+> 🦆 Rubber-duck の強みは **cross-model review**。同じ model に自己評価させるのではなく、別の model に計画や実装を批判させることで、見落としや思考の偏りを発見しやすくなる。
 
 ## ハーネスの中で何が起きる？
 
