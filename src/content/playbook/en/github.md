@@ -49,7 +49,7 @@ links:
 
 ## The Evolution of GitHub
 
-Looking back at GitHub's journey reveals where we are today ──
+Looking back at GitHub's journey reveals where we are today.
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
 <svg viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">

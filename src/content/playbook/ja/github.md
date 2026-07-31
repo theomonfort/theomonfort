@@ -49,7 +49,7 @@ links:
 
 ## 進化の歴史
 
-GitHub の歩みを振り返れば、現在地が見えてくる ──
+GitHub の歩みを振り返れば、現在地が見えてくる。
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
 <svg viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
