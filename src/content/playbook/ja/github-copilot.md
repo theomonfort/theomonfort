@@ -79,7 +79,7 @@ links:
 
 ## AI モデルと利用サーフェス
 
-選べる AI モデル：OpenAI / Anthropic / Google Gemini / xAI Grok / Microsoft（MAI）/ Moonshot AI（Kimi）。さらに **カスタムモデル**・**BYOK（Bring Your Own Key）** にも対応。
+選べる AI モデル：GPT 系 / Claude 系 / Gemini 系 / Grok 系 / MAI 系 / Kimi 系。さらに **カスタムモデル**・**BYOK（Bring Your Own Key）** にも対応。
 
 選べる利用サーフェス：
 
