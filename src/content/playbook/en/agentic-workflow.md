@@ -22,6 +22,8 @@ links:
     url: https://github.github.com/gh-aw/blog/2026-01-12-welcome-to-pelis-agent-factory/
   - label: githubnext/agentics (sample collection)
     url: https://github.com/githubnext/agentics
+  - label: gh-aw Wizard (workflow generator)
+    url: https://githubnext.github.io/gh-aw-wizard/
   - group: 📰 Recent Changelog
     label: "GitHub Agentic Workflows is now in public preview (2026-06-11)"
     url: https://github.blog/changelog/2026-06-11-github-agentic-workflows-is-now-in-public-preview/

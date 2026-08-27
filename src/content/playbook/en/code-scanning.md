@@ -94,9 +94,9 @@ CodeQL **converts code into "queryable data"** before analyzing it, so it unders
 
 ## Copilot Autofix — AI fixes it for you ★
 
-The killer feature of Code Scanning. When CodeQL raises an alert, **AI generates a fix** that you can commit directly to the PR.
+One of Code Scanning's most impactful capabilities. When CodeQL raises an alert, **AI generates a fix** that you can commit directly to the PR.
 
-- 🤖 **How it works** — The alert is passed to an LLM (GPT-4 family), which generates a diff based on the relevant code + surrounding context + CodeQL's description
+- 🤖 **How it works** — The alert is passed to Copilot, which generates a diff based on the relevant code + surrounding context + CodeQL's description
 - 💬 **Where it shows** — On the alert page **and** inline in the PR; commit options: **Commit to existing branch** or **Commit to new branch**
 - ⚡ **Reduces MTTR** — GitHub internal data shows fix time is 3–4× faster
 - 🌐 **Coverage** — JavaScript/TypeScript, Python, Java/Kotlin, C#, and other CodeQL-supported languages
