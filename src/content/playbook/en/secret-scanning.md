@@ -60,6 +60,27 @@ links:
   </p>
 </div>
 
+## Why secrets matter even in private repos
+
+<div class="hero-quote hero-quote-plain">
+  <p>
+    <strong>"Private" is a visibility setting, not a security control.</strong> Here are 8 reasons you must never store plaintext secrets, even in a private repo.
+  </p>
+</div>
+
+| # | Risk | Why it's dangerous |
+| :---: | --- | --- |
+| 1 | 🌐 **Access is wider than you think** | Every Org member with read access (often tens to hundreds, including contractors and unrelated teams) can view the secret. Internal forks, GitHub Apps, OAuth Apps, CI/CD, and runners inherit that access. There's no log of who read a file |
+| 2 | 🔓 **One click from public** | A misclick, repo transfer, Org misconfiguration, or policy change flips it public. Attacker scanners detect new public repos within seconds; leaked tokens have been abused within 60 seconds |
+| 3 | ♾️ **Git history is forever** | Deleting it in a later commit doesn't remove it. It stays in history, every local clone, forks, backups, and CI caches. The only fix is **rotation**, not file deletion |
+| 4 | 💻 **Dev machines become the weak point** | Every `git clone` copies secrets onto unmanaged laptops. One piece of malware, one stolen device, or one compromised account is enough. Blast radius is N developers, not one server |
+| 5 | 🎣 **Account compromise = instant access** | One phished developer exposes every secret in every repo they can read. The secrets themselves have no extra protection (no MFA, no self-managed encryption at rest, no expiry) |
+| 6 | 🔗 **Software supply chain** | The #1 attack vector today. Secrets in private repos enable lateral movement to production, artifact registries, and cloud. See Uber, CircleCI, Codecov, and the Internet Archive |
+| 7 | 📋 **Compliance and audit** | ISO 27001, SOC 2, PCI-DSS, and ISMAP require central management, rotation, and access tracking. Plaintext secrets in Git fail all three, and audit findings are guaranteed |
+| 8 | 💸 **The real cost of an incident** | Emergency rotation, production outage, forensics, customer notification. Compare that to the 30 minutes it takes to set up a secret manager |
+
+> 🔐 **Bottom line** — keep secrets out of code, manage them with env vars / a secret manager, and close the door with **Push protection**. "It's private, so it's fine" simply doesn't hold.
+
 ## Detection vs Push protection — what's the difference?
 
 Secret Scanning has two core controls: **detection** and **Push protection**. Validity checks help prioritize detected leaks.
