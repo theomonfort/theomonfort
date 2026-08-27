@@ -26,6 +26,9 @@ links:
   - group: 🛠️ Entra ID Tutorials
     label: GitHub EMU — SAML SSO tutorial
     url: https://learn.microsoft.com/en-us/entra/identity/saas-apps/github-enterprise-managed-user-tutorial
+  - group: 🎥 Presentation
+    label: This presentation (LiveSend)
+    url: https://livesend.github.com/i/LK1bg1omD___W7epJeoQmuxhLDowsdqBPBvsRIyHVXSdVmAdyZ8bVZaOEvt2j5YU3AeMOe0RtD5pq2BVmbJKgBCNe2JmKglgmHvW0EWiaf2WWDOWxihLOJL2vk1exRp5G2
 ---
 
 ## In a nutshell
