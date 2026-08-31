@@ -47,7 +47,7 @@ links:
     The <strong>Agents window</strong> is a dedicated VS Code window where <strong>chat is the primary interface</strong>, not the editor.
   </p>
   <p>
-    It works across <strong>all your workspaces from one window</strong>, so you assign high-level tasks and track many agents at once.
+    It works across <strong>all your workspaces from one window</strong>, so you can assign high-level tasks and track many agents at once.
   </p>
 </div>
 
