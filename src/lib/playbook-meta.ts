@@ -34,6 +34,7 @@ export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'governance': [4],
   'secret-scanning': [6],
   'copilot-metrics': [4],
+  'custom-agent': [2],
 };
 
 export function navHintSlides(slug: string): number[] {
