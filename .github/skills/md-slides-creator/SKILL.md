@@ -9,7 +9,7 @@ license: MIT
 Helps you author a single `.md` file that is **simultaneously**:
 
 1. A linear reference doc you can scroll top-to-bottom.
-2. A clean slide deck — every `## H2` becomes one slide, and the frontmatter auto-generates the title slide and a final "links" slide.
+2. A clean slide deck — every `## H2` becomes one slide. The frontmatter title/icon/summary header renders on top of the **first** H2 slide (it is not a slide of its own), and the frontmatter `links` become a final auto-generated slide.
 
 This is the exact format used by the playbook on https://theomonfort.github.io/theomonfort/playbook/ (Astro content collection rendered by `src/pages/playbook/[slug].astro`). The skill captures the conventions so anyone — including an agent — can produce a new entry that fits in without manual fixup.
 
@@ -50,15 +50,14 @@ A typical playbook entry has 6–8 slides:
 
 | # | Slide title pattern | Body |
 |---|---|---|
-| 1 | (auto from frontmatter) | title + icon + summary |
-| 2 | `## 一言で` / `## In a nutshell` | **octocat `hero-quote`** + 1–2 callout `>` lines |
-| 3 | `## 何ができる?` / `## What it does` | comparison table or 3–5 bullets |
-| 4 | `## 設定方法` / `## Setup` | code fence + 4 bullets max |
-| 5 | `## ★ 使いどころ` / `## ★ Killer use case` | the one thing the reader must remember |
-| 6 | `## トラブルシュート` / `## Troubleshooting` | bullet list with ❌ and ✅ |
-| 7 | (auto from frontmatter `links`) | grouped link list |
+| 1 | `## 一言で` / `## In a nutshell` | **octocat `hero-quote`** + 1–2 callout `>` lines (the frontmatter title/icon/summary header renders on top of this slide, not on one of its own) |
+| 2 | `## 何ができる?` / `## What it does` | comparison table or 3–5 bullets |
+| 3 | `## 設定方法` / `## Setup` | code fence + 4 bullets max |
+| 4 | `## ★ 使いどころ` / `## ★ Killer use case` | the one thing the reader must remember |
+| 5 | `## トラブルシュート` / `## Troubleshooting` | bullet list with ❌ and ✅ |
+| 6 | (auto from frontmatter `links`) | grouped link list |
 
-> 💬 **Slide 2 is not optional.** The `## 一言で` / `## In a nutshell` slide must lead with the default **octocat-with-speech-bubble** `hero-quote` (see 4a) — it's the playbook's signature opener. It is also the **only** slide allowed to contain a `hero-quote`.
+> 💬 **The first content slide is not optional.** The `## 一言で` / `## In a nutshell` slide must lead with the default **octocat-with-speech-bubble** `hero-quote` (see 4a) — it's the playbook's signature opener. It is also the **only** slide allowed to contain a `hero-quote`.
 
 Adjust freely — but keep ≤ 1 H2 per "concept", and don't let a single slide exceed ~150 words.
 
@@ -104,7 +103,7 @@ The renderer literally does `for child in <article>: if child.tagName === 'H2': 
 |---|---|
 | `## …` | starts a new slide |
 | `### …` | stays inside the current slide (use for sub-sections) |
-| `# …` | **never use** — frontmatter generates the title slide; an extra `#` makes a duplicate |
+| `# …` | **never use** — the frontmatter renders the title header; an extra `#` makes a duplicate |
 | `<hr>` / `---` in body | does NOT split slides — only `## H2` does |
 | `<aside class="links-aside">` | auto-injected at end from frontmatter — don't write it manually |
 
@@ -145,7 +144,7 @@ These are the recurring patterns the deck uses. Use them — they're styled, acc
 | `hero-quote-stars` | starry octocat | celebratory / launch |
 | `hero-quote-plain` | **none** (no mascot, no speech bubble notch) | rare: an entry whose *first content slide* should carry no mascot — **not** a licence to add a second box later in the deck |
 
-> 💡 The **secure** category auto-applies the blue monocle octocat. The first-slide rule still holds — just let the auto-mascot show; don't override it with `hero-quote-plain` on slide 2.
+> 💡 The **secure** category auto-applies the blue monocle octocat. The first-slide rule still holds — just let the auto-mascot show; don't override it with `hero-quote-plain` on the first content slide.
 
 ### 4b. Comparison tables
 
@@ -220,7 +219,7 @@ Link to another playbook entry by slug:
    pnpm dev --host 127.0.0.1   # open http://127.0.0.1:4321/theomonfort/playbook/<slug>/
    ```
    Press `P` to enter present mode and arrow through slides — confirm:
-   - First slide is the title (auto)
+   - Slide 1 shows the frontmatter title header **plus** the first `## H2` section
    - Each `##` becomes its own slide
    - No slide overflows the viewport
    - The final auto-slide shows the grouped links
@@ -260,7 +259,9 @@ export const NAV_HINT_SLIDES: Record<string, number[]> = {
 };
 ```
 
-> ⚠️ **Indexes are 0-based.** Visual slide **N** maps to index **N − 1** — so to mark visual slides 3 and 4, use `[2, 3]`. Slide 1 is the auto title slide (index 0). Helper: `navHintSlides(slug)`.
+> ⚠️ **Indexes are 0-based, and there is NO standalone title slide.** The renderer merges the frontmatter title header into the **first `## H2` group**, so index N is simply the Nth `## H2` in the body: index 0 is the first H2 (`## 一言で` / `## In a nutshell`), index 1 is the second H2, and so on. The auto-generated links slide is the final index. To mark the 3rd and 4th H2 sections, use `[2, 3]`. Helper: `navHintSlides(slug)`.
+>
+> ✅ **Verify before you commit**: `grep -n '^## ' src/content/playbook/en/<slug>.md` and count from 0. Do not derive the index from the `N / M` counter shown in present mode, and do not assume slide 1 is a title slide.
 
 ### 6c. "Last updated" date — automatic
 
