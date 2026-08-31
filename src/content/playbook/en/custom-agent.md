@@ -17,6 +17,12 @@ links:
   - group: 📖 Reference (common)
     label: GitHub Docs — Custom agents configuration
     url: https://docs.github.com/en/copilot/reference/custom-agents-configuration
+  - group: 🏛️ Organization / Enterprise
+    label: GitHub Docs — Preparing to use custom agents in your organization
+    url: https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-organization/prepare-for-custom-agents
+  - group: 🏛️ Organization / Enterprise
+    label: GitHub Docs — Preparing to use custom agents in your enterprise
+    url: https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-agents/prepare-for-custom-agents
   - group: ☁️ Cloud Agent
     label: GitHub Docs — Creating custom agents for Copilot cloud agent
     url: https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/create-custom-agents
@@ -66,14 +72,19 @@ A Custom Agent locks in not just a prompt, but the entire "working style" of an 
 | MCP | Dedicated external tools | Jira, Figma, Playwright, internal API |
 | Prompt | Decision criteria & output format | Success criteria, restrictions, review focus |
 
-## Two scopes
+## Four scopes
 
-|  | 👥 Team shared | 👤 Personal |
-| --- | --- | --- |
-| 📁 Location | `.github/agents/*.agent.md` | `~/.copilot/agents/` |
-| 🎯 Scope | That repository / workspace | All your workspaces |
-| 🤝 Sharing | Managed in Git, shared with team | Local only |
-| 💡 Use case | Team-standard Planner / Reviewer / Tester | Personal work style & preferences |
+The same `.agent.md` can be published at four levels. The wider the reach, the more governance it needs.
+
+|  | 🏢 Enterprise | 🏛️ Organization | 👥 Repository | 👤 Personal |
+| --- | --- | --- | --- | --- |
+| 📁 Location | Designated org's `.github-private` → `/agents/` | Org's `.github` or `.github-private` → `/agents/` | `.github/agents/` | `~/.copilot/agents/` |
+| 🎯 Scope | Every repository in the enterprise | Every member of the organization | That repository / workspace | All your workspaces |
+| 🤝 Managed by | Enterprise owners / AI managers | Organization owners | The repo's team, via Git | You only |
+| 💡 Use case | Company-wide standards & compliance | Division-standard Planner / Reviewer | Project-specific Tester / Reviewer | Personal work style & preferences |
+
+> 🆕 Organization and enterprise scopes are in public preview. Members receive the agents even without access to the source repository itself.
+> 🛡️ Enterprise owners can protect agent files with a ruleset — but scope it to the designated organization, otherwise it also blocks org owners from editing organization-level agents.
 
 ## Inside `.agent.md`
 

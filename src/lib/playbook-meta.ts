@@ -38,6 +38,7 @@ export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'secret-scanning': [7],
   'copilot-metrics': [4],
   'pull-requests': [6],
+  'custom-agent': [2],
 };
 
 export function navHintSlides(slug: string): number[] {

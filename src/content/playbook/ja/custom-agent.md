@@ -17,6 +17,12 @@ links:
   - group: 📖 リファレンス（共通）
     label: GitHub Docs — Custom agents configuration
     url: https://docs.github.com/en/copilot/reference/custom-agents-configuration
+  - group: 🏛️ Organization / Enterprise
+    label: GitHub Docs — Preparing to use custom agents in your organization
+    url: https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-organization/prepare-for-custom-agents
+  - group: 🏛️ Organization / Enterprise
+    label: GitHub Docs — Preparing to use custom agents in your enterprise
+    url: https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-agents/prepare-for-custom-agents
   - group: ☁️ Cloud Agent
     label: GitHub Docs — Creating custom agents for Copilot cloud agent
     url: https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/create-custom-agents
@@ -66,14 +72,19 @@ Custom Agent は **プロンプトだけ** ではなく、エージェントの�
 | MCP | 専用の外部ツール | Jira, Figma, Playwright, internal API |
 | Prompt | 判断基準・出力形式 | 成功条件、禁止事項、レビュー観点 |
 
-## 2 つのスコープ
+## 4 つのスコープ
 
-|  | 👥 チーム共有 | 👤 個人用 |
-| --- | --- | --- |
-| 📁 場所 | `.github/agents/*.agent.md` | `~/.copilot/agents/` |
-| 🎯 適用範囲 | その repository / workspace | 自分の全 workspace |
-| 🤝 共有性 | Git 管理してチームで共有 | ローカル専用 |
-| 💡 用途 | チーム標準の Planner / Reviewer / Tester | 個人の作業スタイル・好み |
+同じ `.agent.md` を 4 つのレベルで配布できる。適用範囲が広いほどガバナンスが重要になる。
+
+|  | 🏢 Enterprise | 🏛️ Organization | 👥 Repository | 👤 個人用 |
+| --- | --- | --- | --- | --- |
+| 📁 場所 | 指定した org の `.github-private` → `/agents/` | org の `.github` または `.github-private` → `/agents/` | `.github/agents/` | `~/.copilot/agents/` |
+| 🎯 適用範囲 | enterprise 内の全 repository | organization のメンバー全員 | その repository / workspace | 自分の全 workspace |
+| 🤝 管理者 | enterprise owner / AI manager | organization owner | repository のチーム（Git 管理） | 自分だけ |
+| 💡 用途 | 全社標準・コンプライアンス | 部門標準の Planner / Reviewer | プロジェクト固有の Tester / Reviewer | 個人の作業スタイル・好み |
+
+> 🆕 Organization / Enterprise スコープは public preview。配布元リポジトリへのアクセス権がないメンバーにも agent が届く。
+> 🛡️ Enterprise owner は ruleset で agent ファイルを保護できる。対象を指定した organization に絞らないと、org owner による organization レベル agent の編集までブロックされる。
 
 ## `.agent.md` の中身
 
