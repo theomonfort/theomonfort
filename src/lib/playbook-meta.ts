@@ -25,14 +25,13 @@ export function isNewPlaybookEntry(slug: string): boolean {
 // clickable presentation nav bar. Numbers are 0-based progress-bar segment
 // positions, i.e. visual slide N maps to index N - 1.
 export const NAV_HINT_SLIDES: Record<string, number[]> = {
-  'copilot-code-review': [5, 6],
+  'copilot-code-review': [5],
   'github': [3, 4, 5],
-  'cli': [6, 7],
-  'agentic-workflow': [1],
+  'cli': [7],
   'collaboration-tools': [2],
   'usage-based-billing': [9, 10],
   'governance': [4, 5],
-  'secret-scanning': [6],
+  'secret-scanning': [7],
   'copilot-metrics': [4],
   'custom-agent': [2],
 };

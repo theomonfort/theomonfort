@@ -24,6 +24,18 @@ links:
     url: https://github.blog/changelog/2026-05-18-remote-control-for-copilot-cli-sessions-now-generally-available-on-mobile-web-and-vs-code
   - label: BYOK & Local models 対応
     url: https://github.blog/changelog/2026-04-07-copilot-cli-now-supports-byok-and-local-models/
+  - group: 🖥️ TUI
+    label: Browsing issues, pull requests, and gists from Copilot CLI
+    url: https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/browse-issues-prs-gists
+  - group: 🖥️ TUI
+    label: CLI command reference (/experimental, /theme)
+    url: https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference
+  - group: 🛡️ Sandbox
+    label: About cloud and local sandboxes
+    url: https://docs.github.com/en/copilot/concepts/about-cloud-and-local-sandboxes
+  - group: 🛡️ Sandbox
+    label: Using local sandboxing
+    url: https://docs.github.com/en/copilot/how-tos/cloud-and-local-sandboxes/using-local-sandboxing
   - group: 🤖 非対話モード
     label: Running Copilot CLI programmatically
     url: https://docs.github.com/en/copilot/how-tos/copilot-cli/automate-copilot-cli/run-cli-programmatically
