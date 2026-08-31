@@ -15,6 +15,7 @@ export const NEW_PLAYBOOK_SLUGS = new Set([
   'governance',
   'secret-scanning',
   'copilot-metrics',
+  'vscode-agents-window',
 ]);
 
 export function isNewPlaybookEntry(slug: string): boolean {
