@@ -62,11 +62,7 @@ links:
 
 ## Why secrets matter even in private repos
 
-<div class="hero-quote hero-quote-plain">
-  <p>
-    <strong>"Private" is a visibility setting, not a security control.</strong> Here are 8 reasons you must never store plaintext secrets, even in a private repo.
-  </p>
-</div>
+**"Private" is a visibility setting, not a security control.** Here are 8 reasons you must never store plaintext secrets, even in a private repo.
 
 | # | Risk | Why it's dangerous |
 | :---: | --- | --- |
@@ -193,14 +189,7 @@ GitHub **monitors the entire public surface of github.com in real time** and att
 
 ## Secret Risk Assessment (free inventory scan)
 
-<div class="hero-quote">
-  <p>
-    <strong>Secret Risk Assessment</strong> performs a one-time scan of every repository in your org (public, private, internal, and archived) to make visible "what secrets are hiding and where."
-  </p>
-  <p>
-    <strong>No GHAS / Secret Protection required — completely free</strong> (since 2025), available to all Team and Enterprise orgs. Perfect for a pre-purchase inventory or an executive security report.
-  </p>
-</div>
+**Secret Risk Assessment** performs a one-time scan of every repository in your org (public, private, internal, and archived) to make visible "what secrets are hiding and where." **No GHAS / Secret Protection required — completely free** (since 2025), available to all Team and Enterprise orgs. Perfect for a pre-purchase inventory or an executive security report.
 
 - 🔎 Scope — all repos in the org (any visibility), including archived repos
 - 📊 Output — aggregated report showing secret type, count, and how many are in each repo (individual secret values are not exposed)
