@@ -20,6 +20,9 @@ links:
   - group: 📖 公式ドキュメント
     label: Agent Skills 仕様（オープン標準）
     url: https://agentskills.io/specification
+  - group: 📖 公式ドキュメント
+    label: Agent Plugins 1.0 — プラグインの作り方
+    url: https://agent-plugins.org/plugin-authors/build-an-agent-plugin
   - group: 🌟 コミュニティ製スキル
     label: github/awesome-copilot — Skills 一覧
     url: https://github.com/github/awesome-copilot/blob/main/docs/README.skills.md
@@ -35,9 +38,15 @@ links:
   - group: 🛠️ 参考実装
     label: theomonfort skills
     url: https://theomonfort.github.io/theomonfort/skills/
+  - group: 🛠️ 参考実装
+    label: agent-plugins-example — サンプルと移行ガイド
+    url: https://github.com/agentplugins/agent-plugins-example
   - group: 📰 Recent Changelog
     label: "Manage agent skills with the GitHub CLI (2026-04-16)"
     url: https://github.blog/changelog/2026-04-16-manage-agent-skills-with-github-cli
+  - group: 📰 Recent Changelog
+    label: "Agent Plugins 1.0 in VS Code, Copilot CLI, and the Copilot app (2026-08-12)"
+    url: https://github.blog/changelog/2026-08-12-agent-plugins-1-0-in-vs-code-copilot-cli-and-the-copilot-app/
 ---
 
 ## 一言で
@@ -174,3 +183,19 @@ gh skills install <owner>/<repo> <skill-name>
 ```bash
 gh skills install ards-project/connectors skills/github-copilot
 ```
+
+## Agent Plugins 1.0
+
+**Agent Plugins 1.0** は、**Agent Skills と MCP サーバーを 1 つのインストール可能なプラグインにまとめる**ベンダー中立のオープン標準。
+
+| パス | 中身 | 可搬性 |
+| --- | --- | --- |
+| 📦 `plugin.json` | マニフェスト。`$schema` で 1.0 を指定 | ✅ 全クライアント |
+| 🧠 `skills/` | スキル 1 つにつき 1 フォルダ + `SKILL.md` | ✅ 全クライアント |
+| 🔌 `mcp.json` | MCP サーバー設定（ローカル / リモート） | ✅ 全クライアント |
+| 🐙 `com.github.copilot/` | カスタムエージェント、コマンド、フック等 | ⬜ Copilot 専用 |
+
+最後の行がキモ。標準化されるのはスキルと MCP だけなので、Copilot 固有の機能は他クライアントが読み飛ばす名前空間付きフォルダに収まる。
+
+> 🌐 一度作れば VS Code / Copilot CLI / SDK / Copilot アプリで動く。全プランで GA。
+> 🏢 **Enterprise**: 許可するプラグインとマーケットプレイスは従来どおり `managed-settings.json` で統制できる。

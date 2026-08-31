@@ -20,6 +20,9 @@ links:
   - group: 📖 Official Documentation
     label: Agent Skills Spec (Open Standard)
     url: https://agentskills.io/specification
+  - group: 📖 Official Documentation
+    label: Agent Plugins 1.0 — Build an Agent Plugin
+    url: https://agent-plugins.org/plugin-authors/build-an-agent-plugin
   - group: 🌟 Community Skills
     label: github/awesome-copilot — Skills List
     url: https://github.com/github/awesome-copilot/blob/main/docs/README.skills.md
@@ -35,9 +38,15 @@ links:
   - group: 🛠️ Reference Implementation
     label: theomonfort skills
     url: https://theomonfort.github.io/theomonfort/skills/
+  - group: 🛠️ Reference Implementation
+    label: agent-plugins-example — example plugin & migration guide
+    url: https://github.com/agentplugins/agent-plugins-example
   - group: 📰 Recent Changelog
     label: "Manage agent skills with the GitHub CLI (2026-04-16)"
     url: https://github.blog/changelog/2026-04-16-manage-agent-skills-with-github-cli
+  - group: 📰 Recent Changelog
+    label: "Agent Plugins 1.0 in VS Code, Copilot CLI, and the Copilot app (2026-08-12)"
+    url: https://github.blog/changelog/2026-08-12-agent-plugins-1-0-in-vs-code-copilot-cli-and-the-copilot-app/
 ---
 
 ## At a Glance
@@ -174,3 +183,19 @@ A discovery service that searches across **MCP servers, tools, skills, and agent
 ```bash
 gh skills install ards-project/connectors skills/github-copilot
 ```
+
+## Agent Plugins 1.0
+
+**Agent Plugins 1.0** is a vendor-neutral open standard that packages **Agent Skills and MCP servers into a single installable plugin**.
+
+| Path | Contents | Portable? |
+| --- | --- | --- |
+| 📦 `plugin.json` | Manifest — `$schema` targets the 1.0 spec | ✅ All clients |
+| 🧠 `skills/` | One folder per skill, each with `SKILL.md` | ✅ All clients |
+| 🔌 `mcp.json` | Local and remote MCP server config | ✅ All clients |
+| 🐙 `com.github.copilot/` | Custom agents, commands, rules, hooks, canvases | ⬜ Copilot only |
+
+That last row is the trick: only skills and MCP are standardized, so everything Copilot-specific stays in a namespaced folder that other clients simply skip.
+
+> 🌐 Build once, run it in VS Code, Copilot CLI, the SDK, and the Copilot app — GA on all plans.
+> 🏢 **Enterprise**: `managed-settings.json` still governs which plugins and marketplaces are allowed.
