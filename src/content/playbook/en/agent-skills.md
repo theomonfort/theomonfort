@@ -20,6 +20,12 @@ links:
   - group: 📖 Official Documentation
     label: Agent Skills Spec (Open Standard)
     url: https://agentskills.io/specification
+  - group: 📖 Official Documentation
+    label: Agent Plugins 1.0 — Build an Agent Plugin
+    url: https://agent-plugins.org/plugin-authors/build-an-agent-plugin
+  - group: 📖 Official Documentation
+    label: GitHub Docs — About plugins
+    url: https://docs.github.com/en/copilot/concepts/agents/about-plugins
   - group: 🌟 Community Skills
     label: github/awesome-copilot — Skills List
     url: https://github.com/github/awesome-copilot/blob/main/docs/README.skills.md
@@ -35,9 +41,15 @@ links:
   - group: 🛠️ Reference Implementation
     label: theomonfort skills
     url: https://theomonfort.github.io/theomonfort/skills/
+  - group: 🛠️ Reference Implementation
+    label: agent-plugins-example — example plugin & migration guide
+    url: https://github.com/agentplugins/agent-plugins-example
   - group: 📰 Recent Changelog
     label: "Manage agent skills with the GitHub CLI (2026-04-16)"
     url: https://github.blog/changelog/2026-04-16-manage-agent-skills-with-github-cli
+  - group: 📰 Recent Changelog
+    label: "Agent Plugins 1.0 in VS Code, Copilot CLI, and the Copilot app (2026-08-12)"
+    url: https://github.blog/changelog/2026-08-12-agent-plugins-1-0-in-vs-code-copilot-cli-and-the-copilot-app/
 ---
 
 ## At a Glance
@@ -174,3 +186,34 @@ A discovery service that searches across **MCP servers, tools, skills, and agent
 ```bash
 gh skills install ards-project/connectors skills/github-copilot
 ```
+
+## Agent Plugins 1.0
+
+**Agent Plugins 1.0** is a vendor-neutral open standard that packages **Agent Skills and MCP servers into a single installable plugin**.
+
+| Path | Contents | Portable? |
+| --- | --- | --- |
+| 📦 `plugin.json` | Manifest — `$schema` targets the 1.0 spec | ✅ All clients |
+| 🧠 `skills/` | One folder per skill, each with `SKILL.md` | ✅ All clients |
+| 🔌 `mcp.json` | Local and remote MCP server config | ✅ All clients |
+| 🐙 `com.github.copilot/` | Custom agents, commands, rules, hooks, canvases | ⬜ Copilot only |
+
+That last row is the trick: only skills and MCP are standardized, so everything Copilot-specific stays in a namespaced folder that other clients simply skip.
+
+> 🌐 Build once, run it in VS Code, Copilot CLI, the SDK, and the Copilot app — GA on all plans.
+> 🏢 **Enterprise**: `managed-settings.json` still governs which plugins and marketplaces are allowed.
+
+## Install and use a plugin
+
+Two marketplaces ship built in: **`copilot-plugins`** (GitHub's own) and **`awesome-copilot`** (community).
+
+| Command | What it does |
+| --- | --- |
+| 🔍 `copilot plugin marketplace browse awesome-copilot` | See what's available |
+| 📥 `copilot plugin install <name>@awesome-copilot` | Install from a marketplace |
+| 📋 `copilot plugin list` | Show installed plugins and their state |
+| 🗑️ `copilot plugin uninstall <name>` | Remove it |
+
+You can also install from `owner/repo`, `owner/repo:path`, or a git URL. `copilot --plugin-dir ./my-plugin` loads one straight from disk without installing it.
+
+> ⚠️ Installs are **user-level, not per-repo** — they land in `~/.copilot/installed-plugins/` and apply to every project.
