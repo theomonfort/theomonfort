@@ -105,19 +105,47 @@ flowchart LR
 
 > 🎯 個別設定で消耗しない。ガードレールは org / enterprise から「上から」効かせる。<a class="retro-link" href="https://docs.github.com/en/organizations/managing-organization-settings" target="_blank" rel="noopener noreferrer">Organization policies ↗</a> · <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/enforcing-policies" target="_blank" rel="noopener noreferrer">Enterprise policies ↗</a>
 
+## `.github-private` & source org（NEW）
+
+GitHub は Copilot の統制を **自分たちが所有しレビューする 1 つのリポジトリ** に集約する。ガードレールは **バージョン管理・レビュー・監査** の対象のまま保てる。**Enterprise → AI controls → Agents → Configuration source** で **source organization** を指定すると、その org の `.github-private` リポジトリが、エージェントとクライアントポリシーの唯一の情報源になる。
+
+```text
+.github-private/
+├── agents/                     # エンタープライズ全体に公開する custom agent
+├── .github/agents/             # ステージング — 公開前に検証できる
+└── copilot/
+    ├── managed-settings.json   # エンタープライズの基準値
+    ├── team-mappings.json      # 設定ファイル → enterprise team のスラッグ
+    └── teams/*.json            # チーム単位の特殊化
+```
+
+- 🏢 **選ぶのは org であって repo ではない** — `.github-private` という名前と `copilot/managed-settings.json` というパスは固定
+- 🔒 **repo へのアクセス可否に関わらず**、エンタープライズの Copilot プラン利用者 **全員に適用**
+- 🚀 **エージェントの公開** は `.github/agents/` から `agents/` へファイルを移動するだけ
+- 🛡️ CODEOWNERS と `copilot/**` · `agents/**` を対象にした ruleset で **保護** する
+
+> 🎯 repo を **internal** にすれば、誰でも PR で変更を提案できる。統制を開きつつ、マージの権限は握ったままにできる。
+
 ## Copilot managed settings（NEW）
 
-Enterprise が **GitHub Copilot app / CLI / VS Code / Copilot cloud agent** を横断して **一元統制** する仕組み。source organization の `.github-private` リポジトリに置いた `copilot/managed-settings.json` で、エンタープライズの Copilot プラン全体に共通のガードレールを定義する。
+`copilot/managed-settings.json` が共通のガードレールを定義し、対応クライアントが自動的に適用する。managed の値は開発者のローカル設定を **上書き** する。対象は **Copilot CLI / VS Code / JetBrains / Copilot app / Copilot cloud agent**（キーごとに対応状況は異なる）。
 
-**統制できること:**
+| キー | 統制できること | 提供時期 |
+| --- | --- | --- |
+| `model` | 既定モデルを Auto model selection に | 2026-07-01 |
+| `permissions.*` | バイパス / YOLO の禁止、危険な操作の拒否・承認必須化 | 2026-06-17 |
+| `enabledPlugins` · marketplace 系 | 承認済みプラグインと提供元、`autoUpdate` 対応 | 2026-08-26 |
+| `allowedMcpServers` · `deniedMcpServers` | MCP 許可リスト。fail-closed、URL / コマンドで照合 | 2026-08-06 |
+| `telemetry` | 自社の collector への OpenTelemetry エクスポート | 2026-07-08 |
+| `teams/` + `team-mappings.json` | `overridable` キーのチーム単位の特殊化 | 2026-08-03 |
 
-- 🌐 **対応範囲** — Copilot CLI / VS Code に加え、Copilot app と cloud agent にも適用
-- 🧠 **既定モデル** — 新規会話の既定モデルを指定（例: Auto model selection）。個別会話では変更可
-- 🚫 **承認プロンプト** — app / CLI / VS Code の対話型クライアントでバイパスモードを禁止
-- 🏪 **プラグイン marketplace** — cloud agent のタスクを含め、承認済みの提供元だけに制限
-- 🧩 **既定プラグイン** — 全ユーザーに自動インストール
+配布方法は server-managed（このリポジトリ）、**MDM**（Intune / Jamf / グループポリシー）、端末上のファイルの 3 通り。優先順位は **MDM → server-managed → ファイル → ユーザー設定**。
 
-> ⚙️ 既存の CLI / VS Code 向け設定は移行不要。Copilot app はサインインまたは再起動後、cloud agent は次のタスクから変更を適用する。managed settings はローカル設定より優先。<a class="retro-link" href="https://github.blog/changelog/2026-07-27-enterprise-managed-settings-now-apply-to-the-github-copilot-app/" target="_blank" rel="noopener noreferrer">2026 年 7 月のリリース ↗</a>
+### もっと詳しく
+
+- 📖 <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">設定リファレンス（全キー） ↗</a> · <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-agents/configure-enterprise-managed-settings" target="_blank" rel="noopener noreferrer">構成ガイド ↗</a>
+- 📰 <a class="retro-link" href="https://github.blog/changelog/2026-07-01-enterprise-managed-settings-json-is-generally-available/" target="_blank" rel="noopener noreferrer">GA（2026-07-01） ↗</a> · <a class="retro-link" href="https://github.blog/changelog/2026-07-08-deploy-managed-copilot-settings-via-mdm-in-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">MDM（2026-07-08） ↗</a> · <a class="retro-link" href="https://github.blog/changelog/2026-07-08-enterprise-managed-opentelemetry-export-for-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">OpenTelemetry（2026-07-08） ↗</a>
+- 📰 <a class="retro-link" href="https://github.blog/changelog/2026-08-03-enterprise-team-specialization-for-managed-settings/" target="_blank" rel="noopener noreferrer">チーム特殊化（2026-08-03） ↗</a> · <a class="retro-link" href="https://github.blog/changelog/2026-08-06-mcp-allowlists-in-enterprise-managed-settings/" target="_blank" rel="noopener noreferrer">MCP 許可リスト（2026-08-06） ↗</a> · <a class="retro-link" href="https://github.blog/changelog/2026-08-18-enterprise-managed-settings-in-github-copilot-for-jetbrains/" target="_blank" rel="noopener noreferrer">JetBrains（2026-08-18） ↗</a>
 
 ## ★ 使いどころ
 
