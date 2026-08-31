@@ -15,6 +15,7 @@ export const NEW_PLAYBOOK_SLUGS = new Set([
   'governance',
   'secret-scanning',
   'copilot-metrics',
+  'pull-requests',
 ]);
 
 export function isNewPlaybookEntry(slug: string): boolean {
@@ -34,6 +35,7 @@ export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'governance': [4, 5],
   'secret-scanning': [6],
   'copilot-metrics': [4],
+  'pull-requests': [7],
 };
 
 export function navHintSlides(slug: string): number[] {
