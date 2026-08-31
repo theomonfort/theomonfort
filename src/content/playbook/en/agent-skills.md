@@ -23,6 +23,9 @@ links:
   - group: 📖 Official Documentation
     label: Agent Plugins 1.0 — Build an Agent Plugin
     url: https://agent-plugins.org/plugin-authors/build-an-agent-plugin
+  - group: 📖 Official Documentation
+    label: GitHub Docs — About plugins
+    url: https://docs.github.com/en/copilot/concepts/agents/about-plugins
   - group: 🌟 Community Skills
     label: github/awesome-copilot — Skills List
     url: https://github.com/github/awesome-copilot/blob/main/docs/README.skills.md
@@ -198,5 +201,19 @@ gh skills install ards-project/connectors skills/github-copilot
 That last row is the trick: only skills and MCP are standardized, so everything Copilot-specific stays in a namespaced folder that other clients simply skip.
 
 > 🌐 Build once, run it in VS Code, Copilot CLI, the SDK, and the Copilot app — GA on all plans.
-> 📥 Install with `copilot plugin install <name>@awesome-copilot` — user-level, not per-repo.
 > 🏢 **Enterprise**: `managed-settings.json` still governs which plugins and marketplaces are allowed.
+
+## Install and use a plugin
+
+Two marketplaces ship built in: **`copilot-plugins`** (GitHub's own) and **`awesome-copilot`** (community).
+
+| Command | What it does |
+| --- | --- |
+| 🔍 `copilot plugin marketplace browse awesome-copilot` | See what's available |
+| 📥 `copilot plugin install <name>@awesome-copilot` | Install from a marketplace |
+| 📋 `copilot plugin list` | Show installed plugins and their state |
+| 🗑️ `copilot plugin uninstall <name>` | Remove it |
+
+You can also install from `owner/repo`, `owner/repo:path`, or a git URL. `copilot --plugin-dir ./my-plugin` loads one straight from disk without installing it.
+
+> ⚠️ Installs are **user-level, not per-repo** — they land in `~/.copilot/installed-plugins/` and apply to every project.

@@ -23,6 +23,9 @@ links:
   - group: 📖 公式ドキュメント
     label: Agent Plugins 1.0 — プラグインの作り方
     url: https://agent-plugins.org/plugin-authors/build-an-agent-plugin
+  - group: 📖 公式ドキュメント
+    label: GitHub Docs — プラグインについて
+    url: https://docs.github.com/en/copilot/concepts/agents/about-plugins
   - group: 🌟 コミュニティ製スキル
     label: github/awesome-copilot — Skills 一覧
     url: https://github.com/github/awesome-copilot/blob/main/docs/README.skills.md
@@ -198,5 +201,19 @@ gh skills install ards-project/connectors skills/github-copilot
 最後の行がキモ。標準化されるのはスキルと MCP だけなので、Copilot 固有の機能は他クライアントが読み飛ばす名前空間付きフォルダに収まる。
 
 > 🌐 一度作れば VS Code / Copilot CLI / SDK / Copilot アプリで動く。全プランで GA。
-> 📥 導入は `copilot plugin install <name>@awesome-copilot`。リポジトリ単位ではなくユーザー単位。
 > 🏢 **Enterprise**: 許可するプラグインとマーケットプレイスは従来どおり `managed-settings.json` で統制できる。
+
+## プラグインの導入と利用
+
+マーケットプレイスは 2 つが標準で使える。**`copilot-plugins`**（GitHub 公式）と **`awesome-copilot`**（コミュニティ）。
+
+| コマンド | 用途 |
+| --- | --- |
+| 🔍 `copilot plugin marketplace browse awesome-copilot` | 一覧を見る |
+| 📥 `copilot plugin install <name>@awesome-copilot` | マーケットプレイスから導入 |
+| 📋 `copilot plugin list` | 導入済みと有効状態を確認 |
+| 🗑️ `copilot plugin uninstall <name>` | 削除する |
+
+`owner/repo`、`owner/repo:path`、Git URL からも導入できる。`copilot --plugin-dir ./my-plugin` なら導入せずローカルから読み込める。
+
+> ⚠️ 導入は**リポジトリ単位ではなくユーザー単位**。`~/.copilot/installed-plugins/` に入り、全プロジェクトに適用される。
