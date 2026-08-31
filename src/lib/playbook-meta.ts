@@ -4,7 +4,6 @@ import type { LocalizedPlaybookEntry } from './playbook';
 
 // Slugs flagged as recently added; surfaced with a "New" badge in the TOC.
 export const NEW_PLAYBOOK_SLUGS = new Set([
-  'code-quality',
   'usage-based-billing',
   'github',
   'governance',
