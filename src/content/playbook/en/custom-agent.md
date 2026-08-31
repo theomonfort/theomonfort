@@ -17,10 +17,10 @@ links:
   - group: 📖 Reference (common)
     label: GitHub Docs — Custom agents configuration
     url: https://docs.github.com/en/copilot/reference/custom-agents-configuration
-  - group: 🏛️ Organization & Enterprise
+  - group: 🏛️ Organization / Enterprise
     label: GitHub Docs — Preparing to use custom agents in your organization
     url: https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-organization/prepare-for-custom-agents
-  - group: 🏛️ Organization & Enterprise
+  - group: 🏛️ Organization / Enterprise
     label: GitHub Docs — Preparing to use custom agents in your enterprise
     url: https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-agents/prepare-for-custom-agents
   - group: ☁️ Cloud Agent
