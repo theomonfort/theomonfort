@@ -32,7 +32,7 @@ Quick lookup for the playbook slide style. Use this as a reference when filling 
 | `hero-quote-green` | octocat-green | plan / operate intro |
 | `hero-quote-red` | octocat-red | warning / dangerous topic |
 | `hero-quote-stars` | octocat-stars | celebration / launch |
-| `hero-quote-plain` | **none** | mid-deck section header (no character framing) |
+| `hero-quote-plain` | **none** | rare: first content slide with no mascot — never on a later slide |
 
 > 🛡️ The `secure` category auto-applies the monocle octocat to every `hero-quote`. Add `hero-quote-plain` to opt out per-slide.
 

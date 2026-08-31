@@ -107,16 +107,7 @@ flowchart LR
 
 ## `.github-private` & source org（NEW）
 
-<div class="hero-quote hero-quote-plain">
-  <p>
-    GitHub は Copilot の統制を <strong>自分たちが所有しレビューする 1 つのリポジトリ</strong> に集約する。
-  </p>
-  <p>
-    ガードレールは <strong>バージョン管理・レビュー・監査</strong> の対象になる。設定画面のチェックボックスではなく、Pull Request で動かす。
-  </p>
-</div>
-
-**Enterprise → AI controls → Agents → Configuration source** で **source organization** を指定する。その org の `.github-private` リポジトリが、エージェントとクライアントポリシーの唯一の情報源になる。
+GitHub は Copilot の統制を **自分たちが所有しレビューする 1 つのリポジトリ** に集約する。ガードレールは **バージョン管理・レビュー・監査** の対象のまま保てる。**Enterprise → AI controls → Agents → Configuration source** で **source organization** を指定すると、その org の `.github-private` リポジトリが、エージェントとクライアントポリシーの唯一の情報源になる。
 
 ```text
 .github-private/

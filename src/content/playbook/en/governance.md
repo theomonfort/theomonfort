@@ -107,16 +107,7 @@ Policies live at the **organization** and **enterprise** levels, not the reposit
 
 ## `.github-private` & source org (NEW)
 
-<div class="hero-quote hero-quote-plain">
-  <p>
-    GitHub centralizes Copilot governance in <strong>one repository you own and review</strong>.
-  </p>
-  <p>
-    Guardrails become <strong>versioned, reviewable, auditable</strong> — a pull request, not a checkbox buried in a settings page.
-  </p>
-</div>
-
-You designate a **source organization** in **Enterprise → AI controls → Agents → Configuration source**. Its `.github-private` repository becomes the single source of truth for agents *and* client policy.
+GitHub centralizes Copilot governance in **one repository you own and review**, so guardrails stay **versioned, reviewable, and auditable**. You designate a **source organization** in **Enterprise → AI controls → Agents → Configuration source**. Its `.github-private` repository becomes the single source of truth for agents *and* client policy.
 
 ```text
 .github-private/
