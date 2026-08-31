@@ -198,4 +198,5 @@ gh skills install ards-project/connectors skills/github-copilot
 That last row is the trick: only skills and MCP are standardized, so everything Copilot-specific stays in a namespaced folder that other clients simply skip.
 
 > 🌐 Build once, run it in VS Code, Copilot CLI, the SDK, and the Copilot app — GA on all plans.
+> 📥 Install with `copilot plugin install <name>@awesome-copilot` — user-level, not per-repo.
 > 🏢 **Enterprise**: `managed-settings.json` still governs which plugins and marketplaces are allowed.

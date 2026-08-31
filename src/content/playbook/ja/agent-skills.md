@@ -198,4 +198,5 @@ gh skills install ards-project/connectors skills/github-copilot
 最後の行がキモ。標準化されるのはスキルと MCP だけなので、Copilot 固有の機能は他クライアントが読み飛ばす名前空間付きフォルダに収まる。
 
 > 🌐 一度作れば VS Code / Copilot CLI / SDK / Copilot アプリで動く。全プランで GA。
+> 📥 導入は `copilot plugin install <name>@awesome-copilot`。リポジトリ単位ではなくユーザー単位。
 > 🏢 **Enterprise**: 許可するプラグインとマーケットプレイスは従来どおり `managed-settings.json` で統制できる。
