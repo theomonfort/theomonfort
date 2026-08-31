@@ -93,14 +93,7 @@ links:
 
 ## Pre-purchase inventory — Risk Assessments
 
-<div class="hero-quote hero-quote-plain">
-  <p>
-    GitHub provides two <strong>Risk Assessments</strong> to visualize your organization's security posture — <strong>no license required, completely free</strong>.
-  </p>
-  <p>
-    Both can be triggered with a single click from <strong>Org → Security → Assessments</strong>, and you can review the results before deciding to purchase Secret Protection / Code Security.
-  </p>
-</div>
+GitHub provides two **Risk Assessments** to visualize your organization's security posture — **no license required, completely free**. Both can be triggered with a single click from **Org → Security → Assessments**, and you can review the results before deciding to purchase Secret Protection / Code Security.
 
 | Assessment | What it shows | Scope | Frequency | Details |
 | --- | --- | --- | :---: | --- |

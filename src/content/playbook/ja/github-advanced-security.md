@@ -93,14 +93,7 @@ links:
 
 ## 購入前の棚卸し — Risk Assessments
 
-<div class="hero-quote hero-quote-plain">
-  <p>
-    GitHub には <strong>ライセンス不要・完全無料</strong> で組織のセキュリティ姿勢を可視化できる 2 つの <strong>Risk Assessment</strong> が用意されている。
-  </p>
-  <p>
-    どちらも <strong>Org → Security → Assessments</strong> から 1 クリックで実行でき、結果を見てから Secret Protection / Code Security の購入を判断できる。
-  </p>
-</div>
+GitHub には **ライセンス不要・完全無料** で組織のセキュリティ姿勢を可視化できる 2 つの **Risk Assessment** が用意されている。どちらも **Org → Security → Assessments** から 1 クリックで実行でき、結果を見てから Secret Protection / Code Security の購入を判断できる。
 
 | 棚卸し | 何を見る? | 対象 | 頻度 | 詳細 |
 | --- | --- | --- | :---: | --- |

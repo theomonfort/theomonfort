@@ -105,19 +105,47 @@ Policies live at the **organization** and **enterprise** levels, not the reposit
 
 > 🎯 Don't tweak repos one by one. Set guardrails top-down at org / enterprise. <a class="retro-link" href="https://docs.github.com/en/organizations/managing-organization-settings" target="_blank" rel="noopener noreferrer">Organization policies ↗</a> · <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/enforcing-policies" target="_blank" rel="noopener noreferrer">Enterprise policies ↗</a>
 
+## `.github-private` & source org (NEW)
+
+GitHub centralizes Copilot governance in **one repository you own and review**, so guardrails stay **versioned, reviewable, and auditable**. You designate a **source organization** in **Enterprise → AI controls → Agents → Configuration source**. Its `.github-private` repository becomes the single source of truth for agents *and* client policy.
+
+```text
+.github-private/
+├── agents/                     # custom agents published enterprise-wide
+├── .github/agents/             # staging — test before you publish
+└── copilot/
+    ├── managed-settings.json   # enterprise baseline
+    ├── team-mappings.json      # settings file → enterprise team slugs
+    └── teams/*.json            # per-team specialization
+```
+
+- 🏢 **You pick the org, not the repo** — the name `.github-private` and the path `copilot/managed-settings.json` are fixed
+- 🔒 **Applies to everyone** on the enterprise's Copilot plan, whether or not they can access the repo
+- 🚀 **Publish an agent** by moving its file from `.github/agents/` to `agents/`
+- 🛡️ **Protect it** with CODEOWNERS and a ruleset targeting `copilot/**` and `agents/**`
+
+> 🎯 Set the repo to **internal** so any member can propose a change by PR — governance stays open to contribution while merge stays controlled.
+
 ## Copilot managed settings (NEW)
 
-How an enterprise **centrally controls** Copilot across the **GitHub Copilot app, CLI, VS Code, and Copilot cloud agent**. A `copilot/managed-settings.json` file in the source organization's `.github-private` repository defines one set of guardrails for everyone on the enterprise's Copilot plan.
+`copilot/managed-settings.json` defines one set of guardrails that supported clients enforce automatically, and a managed value **overrides** whatever a developer sets locally. Coverage spans **Copilot CLI, VS Code, JetBrains, the Copilot app, and Copilot cloud agent** — support varies per key.
 
-**What you can enforce:**
+| Key | Controls | Since |
+| --- | --- | --- |
+| `model` | Auto model selection as the default | 2026-07-01 |
+| `permissions.*` | Block bypass / YOLO mode, deny or gate sensitive operations | 2026-06-17 |
+| `enabledPlugins` · marketplaces | Approved plugins and sources, with `autoUpdate` | 2026-08-26 |
+| `allowedMcpServers` · `deniedMcpServers` | MCP allowlist — fail-closed, matched by URL or command | 2026-08-06 |
+| `telemetry` | OpenTelemetry export to your own collector | 2026-07-08 |
+| `teams/` + `team-mappings.json` | Per-team specialization of `overridable` keys | 2026-08-03 |
 
-- 🌐 **Supported surfaces** — the Copilot app and cloud agent now join Copilot CLI and VS Code
-- 🧠 **Default model** — start new conversations with a chosen default (e.g. Auto model selection); users can still switch per-conversation
-- 🚫 **Approval prompts** — block bypass mode in interactive clients: the app, CLI, and VS Code
-- 🏪 **Plugin marketplaces** — restrict all supported surfaces, including cloud agent tasks, to enterprise-approved sources
-- 🧩 **Default plugins** — auto-install a set of plugins for everyone
+Deploy it server-managed (this repo), through **MDM** (Intune, Jamf, Group Policy), or as a device file. Precedence: **MDM → server-managed → file → user settings**.
 
-> ⚙️ Existing CLI / VS Code configurations need no migration. The Copilot app picks them up after sign-in or restart; cloud agent applies changes on the next task. Managed values override local settings. <a class="retro-link" href="https://github.blog/changelog/2026-07-27-enterprise-managed-settings-now-apply-to-the-github-copilot-app/" target="_blank" rel="noopener noreferrer">July 2026 release ↗</a>
+### Learn more
+
+- 📖 <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">Settings reference (all keys) ↗</a> · <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-agents/configure-enterprise-managed-settings" target="_blank" rel="noopener noreferrer">Configuration guide ↗</a>
+- 📰 <a class="retro-link" href="https://github.blog/changelog/2026-07-01-enterprise-managed-settings-json-is-generally-available/" target="_blank" rel="noopener noreferrer">GA (2026-07-01) ↗</a> · <a class="retro-link" href="https://github.blog/changelog/2026-07-08-deploy-managed-copilot-settings-via-mdm-in-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">MDM (2026-07-08) ↗</a> · <a class="retro-link" href="https://github.blog/changelog/2026-07-08-enterprise-managed-opentelemetry-export-for-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">OpenTelemetry (2026-07-08) ↗</a>
+- 📰 <a class="retro-link" href="https://github.blog/changelog/2026-08-03-enterprise-team-specialization-for-managed-settings/" target="_blank" rel="noopener noreferrer">Team specialization (2026-08-03) ↗</a> · <a class="retro-link" href="https://github.blog/changelog/2026-08-06-mcp-allowlists-in-enterprise-managed-settings/" target="_blank" rel="noopener noreferrer">MCP allowlists (2026-08-06) ↗</a> · <a class="retro-link" href="https://github.blog/changelog/2026-08-18-enterprise-managed-settings-in-github-copilot-for-jetbrains/" target="_blank" rel="noopener noreferrer">JetBrains (2026-08-18) ↗</a>
 
 ## ★ Where it fits
 

@@ -62,11 +62,7 @@ links:
 
 ## なぜ private repo でも secret はダメなのか
 
-<div class="hero-quote hero-quote-plain">
-  <p>
-    <strong>「Private」はセキュリティ対策ではなく、可視性の設定にすぎない。</strong>private repo でも secret を平文で置いてはいけない理由は 8 つある。
-  </p>
-</div>
+**「Private」はセキュリティ対策ではなく、可視性の設定にすぎない。**private repo でも secret を平文で置いてはいけない理由は 8 つある。
 
 | # | リスク | なぜ危険か |
 | :---: | --- | --- |
@@ -193,14 +189,7 @@ GitHub が **github.com の公開領域全体をリアルタイム監視** し�
 
 ## Secret Risk Assessment(無料の棚卸しスキャン)
 
-<div class="hero-quote">
-  <p>
-    <strong>Secret Risk Assessment</strong> は、Org 内のすべてのリポジトリ(public・private・internal・archived)を 1 回だけスキャンして「どこにどんな secret が眠っているか」を可視化する機能。
-  </p>
-  <p>
-    <strong>GHAS / Secret Protection 不要・完全無料</strong>(2025〜)で、Team・Enterprise の全 Org が使える。購入前の棚卸しや経営報告にちょうどいい。
-  </p>
-</div>
+**Secret Risk Assessment** は、Org 内のすべてのリポジトリ(public・private・internal・archived)を 1 回だけスキャンして「どこにどんな secret が眠っているか」を可視化する機能。**GHAS / Secret Protection 不要・完全無料**(2025〜)で、Team・Enterprise の全 Org が使える。購入前の棚卸しや経営報告にちょうどいい。
 
 - 🔎 対象 — Org に属するすべてのリポ(visibility 問わず)。アーカイブ済みも含む
 - 📊 出力 — secret の種類・件数・どの repo に何件あるか、を集計レポートで表示(個別 secret の中身は出さない)
