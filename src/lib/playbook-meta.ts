@@ -15,6 +15,7 @@ export const NEW_PLAYBOOK_SLUGS = new Set([
   'governance',
   'secret-scanning',
   'copilot-metrics',
+  'pull-requests',
 ]);
 
 export function isNewPlaybookEntry(slug: string): boolean {
@@ -23,17 +24,20 @@ export function isNewPlaybookEntry(slug: string): boolean {
 
 // Per-entry slide indexes that show the "New" marker pinned above the
 // clickable presentation nav bar. Numbers are 0-based progress-bar segment
-// positions, i.e. visual slide N maps to index N - 1.
+// positions. The renderer merges the title header into the FIRST H2 group, so
+// there is no standalone title slide: index N is simply the Nth `## H2` in the
+// body (0-based). The auto-generated links slide is the final index.
 export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'copilot-code-review': [5, 6],
   'github': [3, 4, 5],
   'cli': [6, 7],
   'agentic-workflow': [1],
   'collaboration-tools': [2],
-  'usage-based-billing': [9, 10],
+  'usage-based-billing': [8, 9],
   'governance': [4, 5],
-  'secret-scanning': [6],
+  'secret-scanning': [7],
   'copilot-metrics': [4],
+  'pull-requests': [6],
   'custom-agent': [2],
 };
 

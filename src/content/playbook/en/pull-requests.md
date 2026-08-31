@@ -26,9 +26,18 @@ links:
   - group: 📖 Official docs
     label: About PR reviews
     url: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews
+  - group: 📖 Official docs
+    label: About stacked pull requests
+    url: https://docs.github.com/en/pull-requests/get-started/about-stacked-prs
+  - group: 📖 Official docs
+    label: Agent merge in the Copilot app
+    url: https://docs.github.com/en/copilot/how-tos/github-copilot-app/managing-issues-and-pull-requests
   - group: 🎓 Tutorials
     label: Linking a PR to an issue
     url: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue
+  - group: 📰 Announcements
+    label: Stacked pull requests are now in public preview
+    url: https://github.blog/changelog/2026-07-30-stacked-pull-requests-are-now-in-public-preview
   - group: 🧪 Examples
     label: VS Code Pull Requests
     url: https://github.com/microsoft/vscode/pulls
@@ -197,6 +206,23 @@ Rulesets enforce **merge conditions as rules**, a quality gate on your branches.
 | 🤖 Automatically request Copilot code review | ON | Copilot pre-reviews every PR automatically |
 
 > 🎯 Stop manual gatekeeping; let rulesets enforce top-down.
+
+## Stacked PRs & agent merge (NEW)
+
+### Stacked pull requests — public preview, 2026-07-30
+
+An ordered chain where each PR targets the branch of the one below it, so reviewers get one small layer at a time instead of a giant diff.
+
+- 🧱 Branch protections and CI run on **every layer**, not just the bottom one
+- 🔄 GitHub **rebases for you** — merge a lower layer and the ones above retarget automatically
+- ☝️ **Merge one, some, or all**: merging the top PR lands the whole stack, always bottom-up
+- 🛠️ github.com, Mobile, REST / GraphQL / webhooks, and `gh extension install github/gh-stack`
+
+### Agent merge — GitHub Copilot app
+
+Toggle it at the top of a pull request: the workspace's Copilot session reads the PR, fixes what is blocking it (review comments, failing checks, conflicts), then merges as soon as GitHub allows. It runs in the background, survives app restarts, and turns itself off once the PR is merged.
+
+> ⚠️ Neither one bypasses your gates — required approvals and required checks still decide what reaches `main`.
 
 ## ★ PRs in the AI era
 

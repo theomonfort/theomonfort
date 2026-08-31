@@ -26,9 +26,18 @@ links:
   - group: 📖 公式ドキュメント
     label: About PR reviews
     url: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews
+  - group: 📖 公式ドキュメント
+    label: About stacked pull requests
+    url: https://docs.github.com/en/pull-requests/get-started/about-stacked-prs
+  - group: 📖 公式ドキュメント
+    label: Agent merge in the Copilot app
+    url: https://docs.github.com/en/copilot/how-tos/github-copilot-app/managing-issues-and-pull-requests
   - group: 🎓 チュートリアル
     label: Linking a PR to an issue
     url: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue
+  - group: 📰 発表
+    label: Stacked pull requests are now in public preview
+    url: https://github.blog/changelog/2026-07-30-stacked-pull-requests-are-now-in-public-preview
   - group: 🧪 実例
     label: VS Code Pull Requests
     url: https://github.com/microsoft/vscode/pulls
@@ -197,6 +206,23 @@ Ruleset は、ブランチへのマージ条件を **ルールとして強制** 
 | 🤖 Automatically request Copilot code review | ON | PR ごとに Copilot が自動で先行レビュー |
 
 > 🎯 個別の手運用をやめ、Ruleset で「上から一括」ゲート。
+
+## Stacked PRs & agent merge（NEW）
+
+### Stacked pull requests — public preview, 2026-07-30
+
+各 PR が 1 つ下の PR のブランチを base にする、順序付きのチェーン。レビュアーは巨大な差分ではなく、小さなレイヤーを 1 枚ずつ見ればよくなる。
+
+- 🧱 ブランチ保護と CI は **すべてのレイヤー** で動く。一番下の PR だけではない
+- 🔄 **rebase は GitHub 任せ** — 下のレイヤーをマージすると、上の PR は自動で base を張り替える
+- ☝️ **1 つ・一部・全部** から選べる。一番上の PR をマージすればスタック全体が下から順に入る
+- 🛠️ github.com / Mobile / REST・GraphQL・webhook、そして `gh extension install github/gh-stack`
+
+### Agent merge — GitHub Copilot app
+
+PR の上部でトグルを ON にすると、そのワークスペースの Copilot セッションが PR を読み、マージを塞いでいるもの（レビューコメント、失敗した check、コンフリクト）を直し、GitHub が許可した時点でマージする。バックグラウンドで動き、アプリを再起動しても継続し、マージが終わると自動で OFF になる。
+
+> ⚠️ どちらもゲートを迂回しない。`main` に入るものを決めるのは、これまで通り required approvals と required checks。
 
 ## ★ AI 時代の PR
 
