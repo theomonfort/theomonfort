@@ -21,6 +21,9 @@ links:
     label: Getting started with the Copilot app
     url: https://docs.github.com/en/copilot/how-tos/github-copilot-app/getting-started
   - group: 📖 Official docs
+    label: Working with agent sessions
+    url: https://docs.github.com/en/copilot/how-tos/github-copilot-app/agent-sessions
+  - group: 📖 Official docs
     label: Cloud and local sandboxes
     url: https://docs.github.com/en/copilot/concepts/about-cloud-and-local-sandboxes
   - group: 🎓 Efficiency
@@ -82,7 +85,7 @@ Each session runs in an **isolated git worktree**, so files and context never co
 - ☁️ **Cloud sandboxes** (public preview): Run in GitHub-hosted environments—no need to keep your machine awake.
 - 🖥️ **Local sandboxes**: Isolated execution on your own machine.
 
-> 📝 See <a class="retro-link" href="https://docs.github.com/en/copilot/concepts/about-cloud-and-local-sandboxes" target="_blank" rel="noopener noreferrer">Cloud and local sandboxes ↗</a> for details.
+> 📝 See <a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/github-copilot-app/agent-sessions" target="_blank" rel="noopener noreferrer">Working with agent sessions ↗</a> for starting and switching sessions, and <a class="retro-link" href="https://docs.github.com/en/copilot/concepts/about-cloud-and-local-sandboxes" target="_blank" rel="noopener noreferrer">Cloud and local sandboxes ↗</a> for details.
 
 ## Automations & customization
 

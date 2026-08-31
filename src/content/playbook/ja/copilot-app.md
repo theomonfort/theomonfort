@@ -21,6 +21,9 @@ links:
     label: Getting started with the Copilot app
     url: https://docs.github.com/en/copilot/how-tos/github-copilot-app/getting-started
   - group: 📖 公式ドキュメント
+    label: Working with agent sessions
+    url: https://docs.github.com/en/copilot/how-tos/github-copilot-app/agent-sessions
+  - group: 📖 公式ドキュメント
     label: Cloud and local sandboxes
     url: https://docs.github.com/en/copilot/concepts/about-cloud-and-local-sandboxes
   - group: 🎓 効率化
@@ -82,7 +85,7 @@ Copilot CLI の上に構築され、リポジトリ・ブランチ・Issue・PR 
 - ☁️ **クラウドサンドボックス**（public preview）：GitHub ホストの環境で実行。手元のマシンを起動したままにする必要がない。
 - 🖥️ **ローカルサンドボックス**：自分のマシン上で隔離実行。
 
-> 📝 サンドボックスの詳細は <a class="retro-link" href="https://docs.github.com/en/copilot/concepts/about-cloud-and-local-sandboxes" target="_blank" rel="noopener noreferrer">Cloud and local sandboxes ↗</a> を参照。
+> 📝 セッションの開始・切り替えは <a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/github-copilot-app/agent-sessions" target="_blank" rel="noopener noreferrer">Working with agent sessions ↗</a>、サンドボックスの詳細は <a class="retro-link" href="https://docs.github.com/en/copilot/concepts/about-cloud-and-local-sandboxes" target="_blank" rel="noopener noreferrer">Cloud and local sandboxes ↗</a> を参照。
 
 ## 自動化とカスタマイズ
 
