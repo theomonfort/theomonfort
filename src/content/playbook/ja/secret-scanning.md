@@ -15,38 +15,47 @@ category: secure
 related: ['dependabot', 'github-advanced-security']
 links:
   - group: 📖 公式ドキュメント
-    label: About secret scanning
-    url: https://docs.github.com/en/code-security/secret-scanning/introduction/about-secret-scanning
+    label: Secret scanning — core concepts
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/secret-scanning
   - group: 📖 公式ドキュメント
-    label: About push protection
-    url: https://docs.github.com/en/code-security/secret-scanning/introduction/about-push-protection
+    label: Push protection — core concepts
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/push-protection
   - group: 📖 公式ドキュメント
-    label: Supported secrets (provider patterns)
-    url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+    label: Full list of supported patterns (provider + generic)
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/reference/secret-security/supported-secret-scanning-patterns
   - group: 📖 公式ドキュメント
-    label: Defining custom patterns
-    url: https://docs.github.com/en/code-security/secret-scanning/using-advanced-secret-scanning-and-push-protection-features/custom-patterns/defining-custom-patterns-for-secret-scanning
+    label: Validity checks
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/validity-checks
   - group: 📖 公式ドキュメント
-    label: Enabling secret scanning for your repo
-    url: https://docs.github.com/en/code-security/secret-scanning/enabling-secret-scanning-features/enabling-secret-scanning-for-your-repository
+    label: Custom patterns
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/custom-patterns
+  - group: 📖 公式ドキュメント
+    label: Secret scanning partner program
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/tutorials/secret-scanning-partner-program
   - group: 📖 公式ドキュメント
     label: Public monitoring
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring
   - group: 📖 公式ドキュメント
     label: About GitHub Advanced Security products
     url: https://docs.github.com/en/enterprise-cloud@latest/get-started/learning-about-github/about-github-advanced-security
+  - group: 🔧 手順ガイド
+    label: Enable secret scanning on a repository
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/detect-secret-leaks/enable-secret-scanning
+  - group: 🔧 手順ガイド
+    label: Define custom patterns
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/customize-leak-detection/define-custom-patterns
   - group: 📰 Recent Changelog
     label: "Secret scanning public monitoring for enterprises (2026-07-01)"
     url: https://github.blog/changelog/2026-07-01-secret-scanning-public-monitoring-for-enterprises/
   - group: 📰 Recent Changelog
     label: "Secret scanning with GitHub MCP Server is now GA (2026-05-05)"
-    url: https://github.blog/changelog/2026-05-05-secret-scanning-with-github-mcp-server-is-now-generally-available
+    url: https://github.blog/changelog/2026-05-05-secret-scanning-with-github-mcp-server-is-now-generally-available/
   - group: 📰 Recent Changelog
     label: "Secret scanning pattern updates and product improvements (2026-04-14)"
-    url: https://github.blog/changelog/2026-04-14-secret-scanning-pattern-updates-and-product-improvements
+    url: https://github.blog/changelog/2026-04-14-secret-scanning-pattern-updates-and-product-improvements/
   - group: 📰 Recent Changelog
     label: "Secret scanning in AI coding agents via the GitHub MCP Server (2026-03-17)"
-    url: https://github.blog/changelog/2026-03-17-secret-scanning-in-ai-coding-agents-via-the-github-mcp-server
+    url: https://github.blog/changelog/2026-03-17-secret-scanning-in-ai-coding-agents-via-the-github-mcp-server/
 ---
 
 ## 一言で
@@ -56,7 +65,7 @@ links:
     <strong>Secret Scanning</strong> は、リポジトリに紛れ込んだ API キー・トークン・接続文字列を自動で見つけてくれる GitHub の検知機能。
   </p>
   <p>
-    既にコミット済みのものは <strong>アラート</strong>、これからコミットされるものは <strong>Push protection</strong> で git push の時点でブロック。漏洩前に止めるのが基本戦略。
+    既にコミット済みのものは <strong>アラート</strong>、これから push されるものは <strong>Push protection</strong> で <code>git push</code> の時点でブロック。漏洩前に止めるのが基本戦略。
   </p>
 </div>
 
@@ -110,7 +119,7 @@ Secret Scanning の中核は **検知** と **Push protection**。Validity check
 
 | 機能 | いつ動く？ | 何をする？ | 対象範囲 |
 | --- | --- | --- | --- |
-| 🔍 **Secret scanning alerts** | コミット後(履歴も含めて常時) | 検出された secret を Security タブに通知 | コミット履歴・Issue・PR・description・Wiki |
+| 🔍 **Secret scanning alerts** | コミット後(履歴も含めて常時) | 検出された secret を Security and quality タブに通知 | 全ブランチの Git 履歴全体・Issue・PR・GitHub Discussions・Wiki・secret gists |
 | 🛡️ **Push protection** | `git push` の直前 | secret を含む push を拒否(bypass 可) | これから入る変更のみ |
 | ✅ **Validity checks** | アラート発生時 | secret がまだ有効かをプロバイダー API に問い合わせ | 一部対応プロバイダー(AWS、GitHub、Slack ほか) |
 
@@ -124,9 +133,9 @@ Secret Scanning の中核は **検知** と **Push protection**。Validity check
 - 🧪 **Generic patterns** — private key、接続文字列、HTTP basic auth などの汎用パターン。Secret Protection / GHAS が必要
 - 🤖 **AI-detected secrets** — パスワードなどの非構造化 secret を AI で検出。Secret Protection / GHAS が必要
 - 🛠️ **Custom patterns** — 自社独自トークン用に正規表現を定義。Public repo を含め Secret Protection / GHAS が必要
-- 📚 対象 — コードだけでなく Issue・PR・コミットメッセージ・description・Wiki・gist まで
+- 📚 対象 — コードだけでなく **全ブランチの Git 履歴全体**、Issue(クローズ済みの過去分も含む)・PR・**GitHub Discussions**・Wiki・secret gists まで。新しい secret type が追加されると定期的に再スキャンされる
 
-> 🤖 Generic secrets と AI detection は誤検知が増えがち。**Push protection** とセットで使うと "通そうとした瞬間に止まる" ので運用しやすい。
+> 🤖 Generic secrets と AI detection は誤検知が増えがち。**Push protection** とセットで使うと "push しようとした瞬間に止まる" ので運用しやすい。
 
 📘 詳細: <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns" target="_blank" rel="noopener noreferrer">Supported secrets (provider patterns) ↗</a> ・ <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/using-advanced-secret-scanning-and-push-protection-features/custom-patterns/defining-custom-patterns-for-secret-scanning" target="_blank" rel="noopener noreferrer">Defining custom patterns ↗</a>
 
@@ -135,7 +144,7 @@ Secret Scanning の中核は **検知** と **Push protection**。Validity check
 Secret が見つかった時にやることは **検知より修復が大事**。
 
 1. 🚨 **即座に rotate / revoke** — リポジトリから消すだけでは不十分(履歴と他人の clone に残る)
-2. 📣 GitHub から通知される — パートナープログラムに参加しているプロバイダーは secret を自動で無効化する場合あり(AWS、GitHub PAT など)
+2. 📣 Partner secret は provider 側で処理される — **public repo** でパートナーの secret が漏れると、GitHub が provider(AWS、Stripe ほか)に直接通報し、provider が revoke / 再発行する。この通報は **自分のリポジトリのアラート一覧には出ない**
 3. 🧹 アラートを close — `Revoked` / `False positive` / `Used in tests` のいずれかでクローズ
 4. 🛡️ Push protection を ON にして再発防止
 
@@ -144,28 +153,31 @@ Secret が見つかった時にやることは **検知より修復が大事**�
 **Step 1 — Push protection を ON(これが最優先)**
 
 ```
-Repo → Settings → Code security
-  ✅ Secret scanning
-  ✅ Push protection
+Repo → Settings → Advanced Security
+  ✅ Secret Protection   → Enable
+  ✅ Push protection     → Enable
 ```
 
 Public repo のリポレベル push protection は **デフォルト ON** で無料。Private / internal repo では Secret Protection / GHAS が必要。ユーザー個人の push protection も無料だが、保護対象は public repo への push のみ。
 
 **Step 2 — 既存の漏洩をスキャン**
 
-ON にすると過去のコミット履歴も自動でスキャンされる。Security タブにアラートが並ぶので、上から rotate していく。
+ON にすると過去のコミット履歴も自動でスキャンされる。Security and quality タブにアラートが並ぶので、上から rotate していく。
 
 **Step 3 — Custom pattern を追加**
 
 ```
-Repo or Org → Settings → Code security → Secret scanning → Custom patterns
+Repo → Settings → Advanced Security → Secret Protection → Custom patterns → New pattern
+Org  → Settings → Advanced Security → Global settings   → Custom patterns → New pattern
 ```
 
-正規表現で自社独自のトークン形式を登録。Custom patterns は public / private を問わず Secret Protection / GHAS が必要。Dry run で誤検知をチェックしてから本番投入する。
+正規表現で自社独自のトークン形式を登録。Custom patterns は public / private を問わず Secret Protection / GHAS が必要。**Save and dry run** で誤検知をチェックしてから **Publish pattern**、その後そのパターン単位で push protection を ON にできる。
 
 **Step 4 — Org / Enterprise で一括 ON**
 
-`Org → Settings → Code security` の **default settings** から、新規 / 既存リポジトリにまとめて適用できる。
+**security configuration**(`Org → Settings → Advanced Security → Configurations`)を使うと、secret scanning・push protection・generic patterns を新規 / 既存リポジトリにまとめて適用できる。Enterprise owner は enterprise 全体にカスタム構成を作成できる。
+
+> ⚠️ 旧来の Org REST API フィールド(`secret_scanning_enabled_for_new_repositories`、`secret_scanning_push_protection_enabled_for_new_repositories`、`secret_scanning_validity_checks_enabled` など)は **2026-04-21 に削除済み**。今後は security configurations API を使う。
 
 📘 詳細: <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/enabling-secret-scanning-features/enabling-secret-scanning-for-your-repository" target="_blank" rel="noopener noreferrer">Enabling secret scanning for your repo ↗</a>
 
@@ -193,6 +205,8 @@ Repo or Org → Settings → Code security → Secret scanning → Custom patter
 
 > 🆓 **ユーザー push protection** は全プランで無料・デフォルト ON だが、public repo への push のみが対象。**Partner alerts** も public repo / public npm package の漏洩だけを provider に通知する。
 >
+> 👤 **ユーザー所有リポジトリ** は例外扱い。アラートには GHEC の **Enterprise Managed Users**、または Secret Protection を有効にした GHES が必要。Org 所有の private / internal repo なら Team / GHEC で Secret Protection があれば良い。
+>
 > 💰 Generic / Custom / AI detection、Validity checks、private / internal repo の保護には **Secret Protection または従来の GHAS** が必要。**Public monitoring** は GHEC Enterprise 向けの enterprise-wide 機能。
 
 📘 詳細: <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/get-started/learning-about-github/about-github-advanced-security" target="_blank" rel="noopener noreferrer">Advanced Security products ↗</a> / <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Public monitoring ↗</a>
@@ -212,17 +226,17 @@ GitHub が **github.com の公開領域全体をリアルタイム監視** し�
 | 👤 メンバー帰属 | committer の GitHub アカウントがエンタープライズのメンバー | 管理アカウント・既知メンバーからの漏洩 |
 | 🌐 検証済みドメイン照合 | committer の email が検証済みドメイン | 仕事用 email を使う個人アカウント（未リンク・email 非公開でも） |
 
-> ⚙️ 有効化: Enterprise owner / security manager が **Security タブ** から。GHEC の Secret Protection / Advanced Security 対象（Public preview・追加費用なし、data residency は近日）。<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Public monitoring ↗</a>
+> ⚙️ 有効化: Enterprise owner / security manager が enterprise レベルの **Security and quality タブ** から。GHEC の Secret Protection / Advanced Security 対象（Public preview・追加費用なし、data residency は近日）。<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Public monitoring ↗</a>
 
 ## Secret Risk Assessment(無料の棚卸しスキャン)
 
-**Secret Risk Assessment** は、Org 内のすべてのリポジトリ(public・private・internal・archived)を 1 回だけスキャンして「どこにどんな secret が眠っているか」を可視化する機能。**GHAS / Secret Protection 不要・完全無料**(2025〜)で、Team・Enterprise の全 Org が使える。購入前の棚卸しや経営報告にちょうどいい。
+**Secret Risk Assessment** は、Org 内のすべてのリポジトリ(public・private・internal・archived)をスキャンして「どこにどんな secret が眠っているか」を可視化する機能。**GHAS / Secret Protection 不要・完全無料**(2025〜)で、Team・Enterprise の全 Org が使える。購入前の棚卸しや経営報告にちょうどいい。
 
 - 🔎 対象 — Org に属するすべてのリポ(visibility 問わず)。アーカイブ済みも含む
 - 📊 出力 — secret の種類・件数・どの repo に何件あるか、を集計レポートで表示(個別 secret の中身は出さない)
-- 🕒 頻度 — **point-in-time の一回スキャン**。継続的な監視ではない(継続したいなら Secret Protection を購入)
+- 🕒 頻度 — point-in-time スキャンだが **90 日ごとに `Rerun scan` で再実行可能**。継続的な監視ではない(それが必要なら Secret Protection)
 - 🔐 プライバシー — 検出された secret の値は GitHub に保存されない。統計データのみが Org 管理者に見える
-- 🚀 動かし方 — `Org → Settings → Code security → Secret risk assessment → Run assessment`
+- 🚀 動かし方 — `Org → Security and quality タブ → Assessments → Scan your organization`。初回実行では無料の **code security risk assessment** も同時に走る
 
 > 📊 「とりあえず社内に何件 secret が漏れてるか知りたい」「予算稟議のために数字が欲しい」というケースで真っ先に使う。結果を見て **Secret Protection 導入の是非** を判断すれば良い。
 
