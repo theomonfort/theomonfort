@@ -56,7 +56,7 @@ links:
     <strong>Secret Scanning</strong> is GitHub's detection feature that automatically finds API keys, tokens, and connection strings lurking in your repository.
   </p>
   <p>
-    Secrets already committed get an <strong>alert</strong>; secrets about to be pushed are blocked at `git push` time by <strong>Push protection</strong>. Stopping leaks before they happen is the core strategy.
+    Secrets already committed get an <strong>alert</strong>; secrets about to be pushed are blocked at <code>git push</code> time by <strong>Push protection</strong>. Stopping leaks before they happen is the core strategy.
   </p>
 </div>
 

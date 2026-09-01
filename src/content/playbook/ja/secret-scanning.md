@@ -56,7 +56,7 @@ links:
     <strong>Secret Scanning</strong> は、リポジトリに紛れ込んだ API キー・トークン・接続文字列を自動で見つけてくれる GitHub の検知機能。
   </p>
   <p>
-    既にコミット済みのものは <strong>アラート</strong>、これから push されるものは <strong>Push protection</strong> で git push の時点でブロック。漏洩前に止めるのが基本戦略。
+    既にコミット済みのものは <strong>アラート</strong>、これから push されるものは <strong>Push protection</strong> で <code>git push</code> の時点でブロック。漏洩前に止めるのが基本戦略。
   </p>
 </div>
 
@@ -83,7 +83,7 @@ Secret Scanning の中核は **検知** と **Push protection**。Validity check
 
 | 機能 | いつ動く？ | 何をする？ | 対象範囲 |
 | --- | --- | --- | --- |
-| 🔍 **Secret scanning alerts** | コミット後(履歴も含めて常時) | 検出された secret を Security and quality タブに通知 | 全ブランチの Git 履歴全体・Issue・PR・GitHub Discussions・Wiki・secret gist |
+| 🔍 **Secret scanning alerts** | コミット後(履歴も含めて常時) | 検出された secret を Security and quality タブに通知 | 全ブランチの Git 履歴全体・Issue・PR・GitHub Discussions・Wiki・secret gists |
 | 🛡️ **Push protection** | `git push` の直前 | secret を含む push を拒否(bypass 可) | これから入る変更のみ |
 | ✅ **Validity checks** | アラート発生時 | secret がまだ有効かをプロバイダー API に問い合わせ | 一部対応プロバイダー(AWS、GitHub、Slack ほか) |
 
@@ -97,7 +97,7 @@ Secret Scanning の中核は **検知** と **Push protection**。Validity check
 - 🧪 **Generic patterns** — private key、接続文字列、HTTP basic auth などの汎用パターン。Secret Protection / GHAS が必要
 - 🤖 **AI-detected secrets** — パスワードなどの非構造化 secret を AI で検出。Secret Protection / GHAS が必要
 - 🛠️ **Custom patterns** — 自社独自トークン用に正規表現を定義。Public repo を含め Secret Protection / GHAS が必要
-- 📚 対象 — コードだけでなく **全ブランチの Git 履歴全体**、Issue(クローズ済みの過去分も含む)・PR・**GitHub Discussions**・Wiki・secret gist まで。新しい secret type が追加されると定期的に再スキャンされる
+- 📚 対象 — コードだけでなく **全ブランチの Git 履歴全体**、Issue(クローズ済みの過去分も含む)・PR・**GitHub Discussions**・Wiki・secret gists まで。新しい secret type が追加されると定期的に再スキャンされる
 
 > 🤖 Generic secrets と AI detection は誤検知が増えがち。**Push protection** とセットで使うと "push しようとした瞬間に止まる" ので運用しやすい。
 
