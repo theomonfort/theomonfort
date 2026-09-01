@@ -56,7 +56,7 @@ links:
     <strong>Secret Scanning</strong> は、リポジトリに紛れ込んだ API キー・トークン・接続文字列を自動で見つけてくれる GitHub の検知機能。
   </p>
   <p>
-    既にコミット済みのものは <strong>アラート</strong>、これからコミットされるものは <strong>Push protection</strong> で git push の時点でブロック。漏洩前に止めるのが基本戦略。
+    既にコミット済みのものは <strong>アラート</strong>、これから push されるものは <strong>Push protection</strong> で git push の時点でブロック。漏洩前に止めるのが基本戦略。
   </p>
 </div>
 
@@ -99,7 +99,7 @@ Secret Scanning の中核は **検知** と **Push protection**。Validity check
 - 🛠️ **Custom patterns** — 自社独自トークン用に正規表現を定義。Public repo を含め Secret Protection / GHAS が必要
 - 📚 対象 — コードだけでなく **全ブランチの Git 履歴全体**、Issue(クローズ済みの過去分も含む)・PR・**GitHub Discussions**・Wiki・secret gist まで。新しい secret type が追加されると定期的に再スキャンされる
 
-> 🤖 Generic secrets と AI detection は誤検知が増えがち。**Push protection** とセットで使うと "通そうとした瞬間に止まる" ので運用しやすい。
+> 🤖 Generic secrets と AI detection は誤検知が増えがち。**Push protection** とセットで使うと "push しようとした瞬間に止まる" ので運用しやすい。
 
 📘 詳細: <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns" target="_blank" rel="noopener noreferrer">Supported secrets (provider patterns) ↗</a> ・ <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/using-advanced-secret-scanning-and-push-protection-features/custom-patterns/defining-custom-patterns-for-secret-scanning" target="_blank" rel="noopener noreferrer">Defining custom patterns ↗</a>
 

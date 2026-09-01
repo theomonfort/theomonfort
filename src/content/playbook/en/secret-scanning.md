@@ -56,7 +56,7 @@ links:
     <strong>Secret Scanning</strong> is GitHub's detection feature that automatically finds API keys, tokens, and connection strings lurking in your repository.
   </p>
   <p>
-    Secrets already committed get an <strong>alert</strong>; secrets about to be committed are blocked at `git push` time by <strong>Push protection</strong>. Stopping leaks before they happen is the core strategy.
+    Secrets already committed get an <strong>alert</strong>; secrets about to be pushed are blocked at `git push` time by <strong>Push protection</strong>. Stopping leaks before they happen is the core strategy.
   </p>
 </div>
 
@@ -99,7 +99,7 @@ Secret Scanning has two core controls: **detection** and **Push protection**. Va
 - 🛠️ **Custom patterns** — Define regexes for proprietary token formats. Requires Secret Protection / GHAS, including for public repositories
 - 📚 Scope — Not just code: the **full Git history on all branches**, plus Issues (including closed historical ones), PRs, **GitHub Discussions**, Wikis, and secret gists. GitHub also rescans periodically as new secret types ship
 
-> 🤖 Generic secrets and AI detection tend to produce more false positives. Pairing them with **Push protection** means things get stopped at the moment someone tries to commit them — much easier to operate.
+> 🤖 Generic secrets and AI detection tend to produce more false positives. Pairing them with **Push protection** means things get stopped at the moment someone tries to push them — much easier to operate.
 
 📘 Details: <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns" target="_blank" rel="noopener noreferrer">Supported secrets (provider patterns) ↗</a> · <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/using-advanced-secret-scanning-and-push-protection-features/custom-patterns/defining-custom-patterns-for-secret-scanning" target="_blank" rel="noopener noreferrer">Defining custom patterns ↗</a>
 
