@@ -15,38 +15,47 @@ category: secure
 related: ['dependabot', 'github-advanced-security']
 links:
   - group: 📖 公式ドキュメント
-    label: About secret scanning
-    url: https://docs.github.com/en/code-security/secret-scanning/introduction/about-secret-scanning
+    label: Secret scanning — core concepts
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/secret-scanning
   - group: 📖 公式ドキュメント
-    label: About push protection
-    url: https://docs.github.com/en/code-security/secret-scanning/introduction/about-push-protection
+    label: Push protection — core concepts
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/push-protection
   - group: 📖 公式ドキュメント
-    label: Supported secrets (provider patterns)
-    url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+    label: Full list of supported patterns (provider + generic)
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/reference/secret-security/supported-secret-scanning-patterns
   - group: 📖 公式ドキュメント
-    label: Defining custom patterns
-    url: https://docs.github.com/en/code-security/secret-scanning/using-advanced-secret-scanning-and-push-protection-features/custom-patterns/defining-custom-patterns-for-secret-scanning
+    label: Validity checks
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/validity-checks
   - group: 📖 公式ドキュメント
-    label: Enabling secret scanning for your repo
-    url: https://docs.github.com/en/code-security/secret-scanning/enabling-secret-scanning-features/enabling-secret-scanning-for-your-repository
+    label: Custom patterns
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/custom-patterns
+  - group: 📖 公式ドキュメント
+    label: Secret scanning partner program
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/tutorials/secret-scanning-partner-program
   - group: 📖 公式ドキュメント
     label: Public monitoring
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring
   - group: 📖 公式ドキュメント
     label: About GitHub Advanced Security products
     url: https://docs.github.com/en/enterprise-cloud@latest/get-started/learning-about-github/about-github-advanced-security
+  - group: 🔧 手順ガイド
+    label: Enable secret scanning on a repository
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/detect-secret-leaks/enable-secret-scanning
+  - group: 🔧 手順ガイド
+    label: Define custom patterns
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/customize-leak-detection/define-custom-patterns
   - group: 📰 Recent Changelog
     label: "Secret scanning public monitoring for enterprises (2026-07-01)"
     url: https://github.blog/changelog/2026-07-01-secret-scanning-public-monitoring-for-enterprises/
   - group: 📰 Recent Changelog
     label: "Secret scanning with GitHub MCP Server is now GA (2026-05-05)"
-    url: https://github.blog/changelog/2026-05-05-secret-scanning-with-github-mcp-server-is-now-generally-available
+    url: https://github.blog/changelog/2026-05-05-secret-scanning-with-github-mcp-server-is-now-generally-available/
   - group: 📰 Recent Changelog
     label: "Secret scanning pattern updates and product improvements (2026-04-14)"
-    url: https://github.blog/changelog/2026-04-14-secret-scanning-pattern-updates-and-product-improvements
+    url: https://github.blog/changelog/2026-04-14-secret-scanning-pattern-updates-and-product-improvements/
   - group: 📰 Recent Changelog
     label: "Secret scanning in AI coding agents via the GitHub MCP Server (2026-03-17)"
-    url: https://github.blog/changelog/2026-03-17-secret-scanning-in-ai-coding-agents-via-the-github-mcp-server
+    url: https://github.blog/changelog/2026-03-17-secret-scanning-in-ai-coding-agents-via-the-github-mcp-server/
 ---
 
 ## 一言で
