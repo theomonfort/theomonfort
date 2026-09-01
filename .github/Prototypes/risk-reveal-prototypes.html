@@ -1,0 +1,1078 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Risk Reveal デザイン案 10 種 — Retro JRPG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&family=VT323&family=IBM+Plex+Mono:wght@400;600&display=swap"
+    />
+    <style>
+      /* ──────────────────────────────────────────────────────────
+         Design tokens (frontend.instructions.md / retro JRPG theme)
+         ────────────────────────────────────────────────────────── */
+      :root {
+        --shadow-ink: #05060f;
+        --midnight: #0a0e27;
+        --deep-purple: #1a0b2e;
+        --neon-magenta: #ff2e88;
+        --neon-cyan: #00f0ff;
+        --crt-amber: #ffb000;
+        --gb-green: #9bbc0f;
+        --phosphor: #e8f4ff;
+
+        --font-pixel: 'Press Start 2P', monospace;
+        --font-pixel-jp: 'DotGothic16', monospace;
+        --font-terminal: 'VT323', monospace;
+        --font-mono: 'IBM Plex Mono', monospace;
+
+        /* the secret-scanning entry accent */
+        --accent: #ff2e88;
+      }
+
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+
+      body {
+        min-height: 100vh;
+        color: var(--phosphor);
+        font-family: var(--font-pixel-jp);
+        background: radial-gradient(circle at 50% 0%, var(--deep-purple) 0%, var(--midnight) 45%, var(--shadow-ink) 100%);
+        background-attachment: fixed;
+        padding: 2.5rem clamp(1rem, 3vw, 2.5rem) 5rem;
+      }
+
+      /* Faint CRT scanlines overlay */
+      body::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 999;
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0) 0px,
+          rgba(0, 0, 0, 0) 2px,
+          rgba(0, 0, 0, 0.12) 3px,
+          rgba(0, 0, 0, 0.12) 4px
+        );
+        opacity: 0.5;
+      }
+
+      .page-head { max-width: 1500px; margin: 0 auto 2rem; }
+      .page-head h1 {
+        font-family: var(--font-pixel);
+        font-size: clamp(0.85rem, 2.2vw, 1.3rem);
+        line-height: 1.6;
+        color: var(--neon-cyan);
+        text-shadow: 0 0 8px var(--neon-cyan), 0 0 24px rgba(0, 240, 255, 0.4);
+        margin: 0 0 1rem;
+      }
+      .page-head p { font-size: 1rem; line-height: 1.7; max-width: 78ch; opacity: 0.85; margin: 0.4rem 0; }
+      .page-head .legend { margin-top: 0.9rem; font-family: var(--font-terminal); font-size: 1.3rem; color: var(--crt-amber); }
+
+      .controls { display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap; margin-top: 1.1rem; }
+      .ctl {
+        font-family: var(--font-terminal);
+        font-size: 1.15rem;
+        letter-spacing: 0.06em;
+        color: var(--neon-cyan);
+        background: rgba(0, 240, 255, 0.06);
+        border: 2px solid rgba(0, 240, 255, 0.5);
+        padding: 0.25rem 0.9rem;
+        cursor: pointer;
+        border-radius: 0;
+      }
+      .ctl:hover { background: rgba(0, 240, 255, 0.16); box-shadow: 0 0 8px var(--neon-cyan), 0 0 24px rgba(0, 240, 255, 0.35); }
+      .ctl.on { background: var(--neon-cyan); color: var(--shadow-ink); box-shadow: 0 0 8px var(--neon-cyan), 0 0 24px rgba(0, 240, 255, 0.45); }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.5rem 2rem;
+        max-width: 1500px;
+        margin: 0 auto;
+        align-items: start;
+      }
+      @media (max-width: 1080px) { .gallery { grid-template-columns: minmax(0, 1fr); } }
+
+      .proto { display: flex; flex-direction: column; min-width: 0; }
+      .proto.wide { grid-column: 1 / -1; }
+      @media (max-width: 1080px) { .proto.wide { grid-column: auto; } }
+
+      .proto-label {
+        font-family: var(--font-pixel);
+        font-size: 0.6rem;
+        line-height: 1.5;
+        color: var(--neon-magenta);
+        text-shadow: 0 0 6px rgba(255, 46, 136, 0.5);
+        margin-bottom: 0.35rem;
+      }
+      .proto-desc { font-size: 0.85rem; line-height: 1.55; opacity: 0.72; margin-bottom: 0.8rem; min-height: 2.6em; }
+
+      /* ── True-to-life slide frame ──────────────────────────────
+         Measured on the live site (present mode):
+           content column 1152px · base font 24px · usable height ~880px
+         The frame is authored at 768x587 logical px with a 16px root,
+         which is exactly 1152x880 / 1.5 — so every relative type size
+         here matches the real slide 1:1. It is then scaled to fit
+         whatever column width the gallery gives it.
+         ────────────────────────────────────────────────────────── */
+      .slide-stage {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        border: 2px solid rgba(0, 240, 255, 0.28);
+        background: rgba(5, 6, 15, 0.6);
+        box-shadow: 4px 4px 0 var(--shadow-ink), 0 0 14px rgba(0, 240, 255, 0.12);
+      }
+      .slide-frame {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 768px;
+        height: 587px;
+        transform-origin: top left;
+        padding: 1.15rem 1.4rem 1.3rem;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      /* red hairline appears when the design would overflow a real slide */
+      .slide-stage.overflowing { border-color: var(--neon-magenta); }
+      .slide-stage.overflowing::after {
+        content: 'OVERFLOWS';
+        position: absolute;
+        right: 0; bottom: 0;
+        font-family: var(--font-pixel);
+        font-size: 0.5rem;
+        letter-spacing: 0.1em;
+        color: var(--shadow-ink);
+        background: var(--neon-magenta);
+        padding: 4px 7px;
+      }
+      .slide-h2 {
+        font-family: var(--font-pixel-jp);
+        font-size: 1.6rem;
+        line-height: 1.25;
+        color: var(--phosphor);
+        margin: 0 0 0.55rem;
+        border-left: 5px solid var(--accent);
+        padding-left: 0.6rem;
+        text-shadow: 0 0 10px rgba(255, 46, 136, 0.35);
+      }
+      .risk-intro { font-size: 0.82rem; line-height: 1.55; opacity: 0.8; margin: 0 0 0.8rem; }
+      .risk-intro b { color: var(--crt-amber); }
+      .risk-foot {
+        margin-top: auto;
+        padding-top: 0.7rem;
+        font-size: 0.78rem;
+        line-height: 1.5;
+        color: rgba(232, 244, 255, 0.75);
+        border-top: 1px dashed rgba(0, 240, 255, 0.25);
+      }
+      .risk-foot b { color: var(--crt-amber); }
+
+      .risk-widget { min-width: 0; }
+
+      /* ══════════════════════════════════════════════════════════
+         SHARED ACCORDION SKELETON (V1 V2 V3 V4 V6 V9)
+         ══════════════════════════════════════════════════════════ */
+      .risk-list { display: flex; flex-direction: column; gap: 0.28rem; }
+      .risk-item { min-width: 0; }
+      .risk-btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font: inherit;
+        font-size: 0.95rem;
+        text-align: left;
+        color: var(--phosphor);
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        padding: 0.34rem 0.5rem;
+        cursor: pointer;
+        transition: background 0.15s ease, color 0.15s ease;
+      }
+      .risk-num {
+        font-family: var(--font-terminal);
+        font-size: 1.1rem;
+        line-height: 1;
+        color: var(--neon-cyan);
+        flex: none;
+        min-width: 1.6em;
+      }
+      .risk-icon { flex: none; font-size: 1rem; line-height: 1; }
+      .risk-label { flex: 1 1 auto; min-width: 0; }
+      .risk-toggle {
+        flex: none;
+        font-family: var(--font-terminal);
+        font-size: 1.2rem;
+        line-height: 1;
+        color: var(--crt-amber);
+        transition: transform 0.2s ease, color 0.15s ease;
+      }
+      .risk-item.open .risk-toggle { color: var(--neon-magenta); transform: rotate(45deg); }
+      .risk-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.28s ease; }
+      .risk-item.open .risk-body { grid-template-rows: 1fr; }
+      .risk-body-inner { overflow: hidden; min-height: 0; }
+      .risk-why {
+        font-size: 0.88rem;
+        line-height: 1.6;
+        color: rgba(232, 244, 255, 0.88);
+        margin: 0;
+        padding: 0.45rem 0.6rem 0.65rem 2.7rem;
+      }
+      .risk-why b { color: var(--crt-amber); }
+
+      /* ── V1 — Codex Rows (anchor) ── */
+      .v1 .risk-list { gap: 0; }
+      .v1 .risk-item { border-bottom: 1px dashed rgba(0, 240, 255, 0.2); }
+      .v1 .risk-item:first-child { border-top: 1px dashed rgba(0, 240, 255, 0.2); }
+      .v1 .risk-btn { border-left: 3px solid transparent; padding-left: 0.7rem; }
+      .v1 .risk-btn:hover { background: rgba(0, 240, 255, 0.07); }
+      .v1 .risk-item.open .risk-btn { border-left-color: var(--neon-magenta); background: rgba(255, 46, 136, 0.1); color: #fff; }
+      .v1 .risk-item.open .risk-num { color: var(--neon-magenta); }
+      .v1 .risk-toggle::before { content: '[+]'; }
+      .v1 .risk-item.open .risk-toggle { transform: none; }
+      .v1 .risk-item.open .risk-toggle::before { content: '[-]'; }
+      .v1 .risk-why { border-left: 3px solid rgba(255, 46, 136, 0.4); margin-left: 0.7rem; padding-left: 2rem; }
+
+      /* ── V2 — Window Frame (anchor) ── */
+      .v2 .risk-list { gap: 0.2rem; }
+      .v2 .risk-item { border: 1px dashed rgba(0, 240, 255, 0.3); background: rgba(10, 14, 39, 0.55); position: relative; }
+      .v2 .risk-item.open { border: 2px solid var(--neon-magenta); box-shadow: 0 0 8px var(--neon-magenta), 0 0 24px rgba(255, 46, 136, 0.3); background: rgba(255, 46, 136, 0.08); }
+      .v2 .risk-item.open::before,
+      .v2 .risk-item.open::after {
+        content: '';
+        position: absolute;
+        width: 9px; height: 9px;
+        border: 2px solid var(--crt-amber);
+      }
+      .v2 .risk-item.open::before { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+      .v2 .risk-item.open::after { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+      .v2 .risk-btn:hover { background: rgba(0, 240, 255, 0.08); }
+      .v2 .risk-btn { padding: 0.28rem 0.5rem; }
+      .v2 .risk-item.open .risk-num { color: var(--crt-amber); }
+      .v2 .risk-toggle::before { content: '+'; }
+      .v2 .risk-item.open .risk-toggle::before { content: '+'; }
+      .v2 .risk-why { padding-top: 0; border-top: 1px dashed rgba(255, 46, 136, 0.35); padding-top: 0.5rem; margin: 0 0.6rem; }
+
+      /* ── V3 — Threat Terminal (re-frame) ── */
+      .v3 { font-family: var(--font-mono); }
+      .v3 .risk-widget-inner { border: 2px solid rgba(155, 188, 15, 0.5); background: rgba(5, 6, 15, 0.8); padding: 0.5rem 0.6rem; }
+      .v3 .risk-list { gap: 0; }
+      .v3 .risk-btn { font-family: var(--font-mono); font-size: 0.78rem; padding: 0.2rem 0.3rem; color: var(--gb-green); gap: 0.4rem; }
+      .v3 .risk-btn:hover { background: rgba(155, 188, 15, 0.12); }
+      .v3 .risk-num { font-family: var(--font-mono); font-size: 0.78rem; color: rgba(155, 188, 15, 0.6); min-width: auto; }
+      .v3 .risk-num::before { content: '$ '; }
+      .v3 .risk-icon { display: none; }
+      .v3 .risk-toggle { font-family: var(--font-mono); font-size: 0.72rem; color: rgba(155, 188, 15, 0.55); transform: none !important; }
+      .v3 .risk-toggle::before { content: '--explain'; }
+      .v3 .risk-item.open .risk-btn { color: var(--crt-amber); text-shadow: 0 0 8px rgba(255, 176, 0, 0.5); }
+      .v3 .risk-item.open .risk-toggle { color: var(--crt-amber); }
+      .v3 .risk-why {
+        font-family: var(--font-mono);
+        font-size: 0.74rem;
+        line-height: 1.65;
+        color: rgba(155, 188, 15, 0.95);
+        padding: 0.35rem 0.3rem 0.6rem 1.1rem;
+        border-left: 2px solid rgba(155, 188, 15, 0.4);
+        margin-left: 0.3rem;
+      }
+      .v3 .risk-item.open .risk-why::after {
+        content: '▊';
+        margin-left: 0.2em;
+        animation: blink 1s steps(1) infinite;
+      }
+      @keyframes blink { 50% { opacity: 0; } }
+
+      /* ── V4 — Bestiary (re-frame) ── */
+      .v4 .risk-list { gap: 0.22rem; }
+      .v4 .risk-item { background: rgba(10, 14, 39, 0.5); border-left: 3px solid rgba(255, 46, 136, 0.35); }
+      .v4 .risk-btn { padding: 0.3rem 0.5rem; }
+      .v4 .risk-btn:hover { background: rgba(255, 46, 136, 0.1); }
+      .v4 .risk-item.open { border-left-color: var(--neon-magenta); background: rgba(255, 46, 136, 0.1); }
+      .v4 .risk-gauge {
+        flex: none;
+        display: inline-flex;
+        gap: 2px;
+        margin-left: auto;
+        padding-right: 0.4rem;
+      }
+      .v4 .risk-gauge i,
+      .vx .risk-gauge i { width: 7px; height: 12px; background: rgba(232, 244, 255, 0.14); display: block; }
+      .v4 .risk-gauge i.on,
+      .vx .risk-gauge i.on { background: var(--neon-magenta); box-shadow: 0 0 6px var(--neon-magenta); }
+      .v4 .risk-label { flex: 0 1 auto; }
+      .v4 .risk-toggle::before { content: '▸'; }
+      .v4 .risk-item.open .risk-toggle { transform: rotate(90deg); }
+      .v4 .risk-why { padding-left: 2.9rem; }
+      .risk-gauge { display: none; }
+      .v4 .risk-gauge { display: inline-flex; }
+
+      /* ══════════════════════════════════════════════════════════
+         VX — FINAL MIX : V2 window frame
+                        + V4 danger gauge
+                        + V3 blinking cursor
+                        + V6 CLASSIFIED stamp
+         ══════════════════════════════════════════════════════════ */
+      .vx .risk-gauge {
+        display: inline-flex;
+        gap: 2px;
+        flex: none;
+        margin-left: auto;
+        padding-right: 0.55rem;
+      }
+      .vx .risk-label { flex: 0 1 auto; }
+      .vx .risk-toggle { font-size: 1.45rem; }
+      .vx .risk-list { gap: 0.14rem; }
+      .vx .risk-btn { padding: 0.24rem 0.5rem; }
+      .vx .risk-why { position: relative; padding-bottom: 1.3rem; }
+      .vx .risk-item.open .risk-why::after {
+        content: '▊';
+        margin-left: 0.15em;
+        color: var(--crt-amber);
+        animation: blink 1s steps(1) infinite;
+      }
+      .vx .risk-item.open .risk-why::before {
+        content: 'CLASSIFIED';
+        position: absolute;
+        right: 0.3rem;
+        bottom: 0.2rem;
+        font-family: var(--font-pixel);
+        font-size: 0.44rem;
+        letter-spacing: 0.12em;
+        color: var(--neon-magenta);
+        border: 2px solid var(--neon-magenta);
+        padding: 3px 5px;
+        transform: rotate(-8deg);
+        opacity: 0.55;
+      }
+
+      /* ── V6 — Case File (re-frame) ── */
+      .v6 .risk-list { gap: 0.26rem; }
+      .v6 .risk-item {
+        background: rgba(255, 176, 0, 0.05);
+        border: 1px dashed rgba(255, 176, 0, 0.4);
+        border-left: 4px solid rgba(255, 176, 0, 0.55);
+      }
+      .v6 .risk-btn { padding: 0.3rem 0.55rem; }
+      .v6 .risk-btn:hover { background: rgba(255, 176, 0, 0.1); }
+      .v6 .risk-num { color: var(--crt-amber); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; }
+      .v6 .risk-num::before { content: 'CASE-'; opacity: 0.6; }
+      .v6 .risk-item.open { border-color: var(--crt-amber); border-left-color: var(--crt-amber); background: rgba(255, 176, 0, 0.1); box-shadow: 0 0 8px rgba(255, 176, 0, 0.4); }
+      .v6 .risk-toggle::before { content: '+'; }
+      .v6 .risk-why {
+        padding-left: 1rem;
+        margin: 0 0.55rem;
+        border-top: 1px dashed rgba(255, 176, 0, 0.4);
+        padding-top: 0.5rem;
+        position: relative;
+      }
+      .v6 .risk-item.open .risk-why::before {
+        content: 'CLASSIFIED';
+        position: absolute;
+        right: 0.2rem;
+        bottom: 0.3rem;
+        font-family: var(--font-pixel);
+        font-size: 0.42rem;
+        letter-spacing: 0.12em;
+        color: var(--neon-magenta);
+        border: 2px solid var(--neon-magenta);
+        padding: 3px 5px;
+        transform: rotate(-8deg);
+        opacity: 0.55;
+      }
+
+      /* ── V9 — Alarm Console (wildcard) ── */
+      .v9 .risk-widget-inner {
+        border: 2px solid rgba(255, 46, 136, 0.45);
+        background: repeating-linear-gradient(135deg, rgba(255, 46, 136, 0.05) 0 8px, rgba(5, 6, 15, 0.4) 8px 16px);
+        padding: 0.5rem;
+      }
+      .v9 .risk-list { gap: 0.18rem; }
+      .v9 .risk-item { background: rgba(5, 6, 15, 0.75); border: 1px solid rgba(255, 46, 136, 0.25); }
+      .v9 .risk-btn { padding: 0.26rem 0.45rem; gap: 0.5rem; }
+      .v9 .risk-lamp {
+        flex: none;
+        width: 11px; height: 11px;
+        border: 1px solid rgba(255, 46, 136, 0.7);
+        background: rgba(255, 46, 136, 0.18);
+        animation: pulse 1.6s ease-in-out infinite;
+      }
+      .risk-lamp { display: none; }
+      .v9 .risk-lamp { display: block; }
+      @keyframes pulse { 50% { background: rgba(255, 46, 136, 0.65); box-shadow: 0 0 8px var(--neon-magenta); } }
+      .v9 .risk-item.open .risk-lamp { animation: none; background: var(--gb-green); border-color: var(--gb-green); box-shadow: 0 0 8px var(--gb-green), 0 0 24px rgba(155, 188, 15, 0.4); }
+      .v9 .risk-num { font-family: var(--font-mono); font-size: 0.68rem; color: rgba(255, 46, 136, 0.7); }
+      .v9 .risk-btn:hover { background: rgba(255, 46, 136, 0.12); }
+      .v9 .risk-item.open { border-color: var(--gb-green); }
+      .v9 .risk-item.open .risk-btn { background: rgba(155, 188, 15, 0.08); }
+      .v9 .risk-toggle::before { content: 'ACK'; font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.08em; }
+      .v9 .risk-item.open .risk-toggle { transform: none; color: var(--gb-green); }
+      .v9 .risk-item.open .risk-toggle::before { content: 'OK'; }
+      .v9 .risk-why { padding-left: 2.4rem; font-size: 0.76rem; }
+
+      /* ══════════════════════════════════════════════════════════
+         V5 — Inventory Slots (master / detail)
+         ══════════════════════════════════════════════════════════ */
+      .md-wrap { display: grid; grid-template-columns: minmax(150px, 190px) minmax(0, 1fr); gap: 0.9rem; flex: 1 1 auto; min-height: 0; }
+      .v5 .slot-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.35rem; align-content: start; }
+      .v5 .slot {
+        aspect-ratio: 1 / 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.15rem;
+        background: rgba(10, 14, 39, 0.7);
+        border: 2px solid rgba(0, 240, 255, 0.3);
+        color: var(--phosphor);
+        font: inherit;
+        cursor: pointer;
+        border-radius: 0;
+        padding: 0.2rem;
+        transition: all 0.15s ease;
+      }
+      .v5 .slot:hover { border-color: var(--neon-cyan); background: rgba(0, 240, 255, 0.1); }
+      .v5 .slot .s-icon { font-size: 1.25rem; line-height: 1; }
+      .v5 .slot .s-num { font-family: var(--font-terminal); font-size: 0.9rem; line-height: 1; color: rgba(0, 240, 255, 0.7); }
+      .v5 .slot .s-label { font-size: 0.6rem; line-height: 1.2; text-align: center; opacity: 0.8; }
+      .v5 .slot.sel {
+        border-color: var(--neon-magenta);
+        background: rgba(255, 46, 136, 0.18);
+        box-shadow: 0 0 8px var(--neon-magenta), 0 0 24px rgba(255, 46, 136, 0.35);
+      }
+      .v5 .slot.sel .s-num { color: var(--crt-amber); }
+      .v5 .detail {
+        border: 2px solid rgba(255, 46, 136, 0.45);
+        background: rgba(255, 46, 136, 0.07);
+        padding: 0.75rem 0.9rem;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+      .v5 .detail .d-title { font-size: 1rem; color: var(--crt-amber); margin: 0 0 0.45rem; line-height: 1.3; }
+      .v5 .detail .d-why { font-size: 0.82rem; line-height: 1.65; margin: 0; color: rgba(232, 244, 255, 0.9); }
+      .v5 .detail .d-empty { font-family: var(--font-terminal); font-size: 1.15rem; color: rgba(0, 240, 255, 0.55); margin: auto; text-align: center; }
+
+      /* ══════════════════════════════════════════════════════════
+         V7 — Stage Select Trail (re-shape)
+         ══════════════════════════════════════════════════════════ */
+      .v7 .trail { position: relative; display: flex; justify-content: space-between; align-items: flex-start; margin: 0.5rem 0 0.9rem; padding: 0 0.2rem; }
+      .v7 .trail::before {
+        content: '';
+        position: absolute;
+        top: 17px; left: 2%; right: 2%;
+        height: 2px;
+        background: repeating-linear-gradient(to right, rgba(0, 240, 255, 0.45) 0 6px, transparent 6px 12px);
+      }
+      .v7 .node {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.3rem;
+        background: none;
+        border: none;
+        font: inherit;
+        color: var(--phosphor);
+        cursor: pointer;
+        padding: 0;
+        width: 11%;
+        border-radius: 0;
+      }
+      .v7 .node .n-dot {
+        width: 36px; height: 36px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.05rem;
+        background: var(--midnight);
+        border: 2px solid rgba(0, 240, 255, 0.45);
+        transition: all 0.16s ease;
+      }
+      .v7 .node:hover .n-dot { border-color: var(--neon-cyan); box-shadow: 0 0 8px var(--neon-cyan); }
+      .v7 .node .n-label {
+        font-size: 0.66rem;
+        line-height: 1.25;
+        text-align: center;
+        opacity: 0.65;
+      }
+      .v7 .node.sel .n-dot {
+        border-color: var(--neon-magenta);
+        background: rgba(255, 46, 136, 0.28);
+        box-shadow: 0 0 8px var(--neon-magenta), 0 0 24px rgba(255, 46, 136, 0.4);
+        transform: scale(1.15);
+      }
+      .v7 .node.sel .n-label { opacity: 1; color: var(--crt-amber); }
+      .v7 .node.done .n-dot { border-color: var(--gb-green); }
+      .v7 .stage-panel {
+        border: 2px solid rgba(255, 46, 136, 0.45);
+        background: rgba(10, 14, 39, 0.72);
+        padding: 0.8rem 1rem;
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+      .v7 .stage-panel .p-head { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 0.4rem; }
+      .v7 .stage-panel .p-num { font-family: var(--font-terminal); font-size: 1.25rem; color: var(--neon-magenta); }
+      .v7 .stage-panel .p-title { font-size: 1rem; color: var(--crt-amber); line-height: 1.3; }
+      .v7 .stage-panel .p-why { font-size: 0.84rem; line-height: 1.65; margin: 0; }
+      .v7 .stage-panel .p-empty { font-family: var(--font-terminal); font-size: 1.2rem; color: rgba(0, 240, 255, 0.55); margin: auto; }
+
+      /* ══════════════════════════════════════════════════════════
+         V8 — Split Deck (re-shape)
+         ══════════════════════════════════════════════════════════ */
+      .v8 .md-wrap { grid-template-columns: minmax(200px, 300px) minmax(0, 1fr); }
+      .v8 .pick-list { display: flex; flex-direction: column; gap: 1px; border-left: 2px solid rgba(0, 240, 255, 0.35); }
+      .v8 .pick {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font: inherit;
+        font-size: 0.82rem;
+        text-align: left;
+        color: rgba(232, 244, 255, 0.8);
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        padding: 0.3rem 0.5rem;
+        cursor: pointer;
+        transition: all 0.14s ease;
+      }
+      .v8 .pick .p-n { font-family: var(--font-terminal); font-size: 1rem; color: rgba(0, 240, 255, 0.7); min-width: 1.4em; }
+      .v8 .pick:hover { background: rgba(0, 240, 255, 0.08); color: #fff; }
+      .v8 .pick.sel {
+        background: var(--neon-magenta);
+        color: var(--shadow-ink);
+        box-shadow: 0 0 8px var(--neon-magenta), 0 0 24px rgba(255, 46, 136, 0.35);
+      }
+      .v8 .pick.sel .p-n { color: var(--shadow-ink); }
+      .v8 .pick.sel::after { content: '◀'; margin-left: auto; font-size: 0.7rem; }
+      .v8 .pane {
+        border: 2px solid rgba(255, 46, 136, 0.4);
+        background: rgba(255, 46, 136, 0.06);
+        padding: 1rem 1.1rem;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+      .v8 .pane .x-icon { font-size: 2rem; line-height: 1; margin-bottom: 0.4rem; }
+      .v8 .pane .x-title { font-size: 1.15rem; color: var(--crt-amber); margin: 0 0 0.5rem; line-height: 1.3; }
+      .v8 .pane .x-why { font-size: 0.88rem; line-height: 1.7; margin: 0; }
+      .v8 .pane .x-empty { font-family: var(--font-terminal); font-size: 1.25rem; color: rgba(0, 240, 255, 0.55); margin: auto; text-align: center; }
+
+      /* ══════════════════════════════════════════════════════════
+         V10 — Card Flip (wildcard)
+         ══════════════════════════════════════════════════════════ */
+      .v10 .card-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.55rem; flex: 1 1 auto; align-content: center; }
+      .v10 .card {
+        position: relative;
+        aspect-ratio: 1 / 1;
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        perspective: 800px;
+        font: inherit;
+        color: inherit;
+        border-radius: 0;
+      }
+      .v10 .card-inner {
+        position: relative;
+        width: 100%; height: 100%;
+        transform-style: preserve-3d;
+        transition: transform 0.5s cubic-bezier(0.4, 0.1, 0.2, 1);
+      }
+      .v10 .card.flip .card-inner { transform: rotateY(180deg); }
+      .v10 .face {
+        position: absolute;
+        inset: 0;
+        backface-visibility: hidden;
+        display: flex;
+        flex-direction: column;
+        padding: 0.4rem;
+        overflow: hidden;
+      }
+      .v10 .face-front {
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
+        background: linear-gradient(160deg, rgba(26, 11, 46, 0.95), rgba(10, 14, 39, 0.95));
+        border: 2px solid rgba(0, 240, 255, 0.45);
+      }
+      .v10 .card:hover .face-front { border-color: var(--neon-cyan); box-shadow: 0 0 8px var(--neon-cyan), 0 0 24px rgba(0, 240, 255, 0.3); }
+      .v10 .face-front .c-icon { font-size: 1.5rem; line-height: 1; }
+      .v10 .face-front .c-num { font-family: var(--font-terminal); font-size: 1.05rem; color: var(--neon-cyan); line-height: 1; }
+      .v10 .face-front .c-label { font-size: 0.63rem; line-height: 1.25; text-align: center; opacity: 0.85; }
+      .v10 .face-back {
+        transform: rotateY(180deg);
+        background: rgba(255, 46, 136, 0.12);
+        border: 2px solid var(--neon-magenta);
+        box-shadow: inset 0 0 18px rgba(255, 46, 136, 0.25);
+        justify-content: flex-start;
+      }
+      .v10 .face-back .b-num { font-family: var(--font-terminal); font-size: 0.85rem; color: var(--crt-amber); line-height: 1; margin-bottom: 0.2rem; }
+      .v10 .face-back .b-why { font-size: 0.56rem; line-height: 1.42; margin: 0; color: rgba(232, 244, 255, 0.95); }
+
+      .hint {
+        font-family: var(--font-terminal);
+        font-size: 1.05rem;
+        color: var(--crt-amber);
+        margin: 0 0 0.5rem;
+        letter-spacing: 0.04em;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="page-head">
+      <h1>RISK REVEAL — 10 PROTOTYPES</h1>
+      <p>
+        secret-scanning スライド「Why secrets matter even in private repos」の
+        8 リスクを<b>折りたたみ</b>で見せるコンポーネント案。
+        既定はリスク名だけ、<b>+</b> を押すと理由が 1 つずつ順番に開く（同時に開くのは 1 つ）。
+      </p>
+      <p>各案は <b>16:9 のスライド枠</b>に入れてある。枠内に収まっていれば本番でも 1 スライドに収まる。</p>
+      <div class="legend">V1-V2 Anchor / V3-V6 Re-frame / V7-V8 Re-shape / V9-V10 Wildcard</div>
+      <div class="controls">
+        <button class="ctl on" id="lang-en" data-lang="en">EN</button>
+        <button class="ctl" id="lang-ja" data-lang="ja">日本語</button>
+        <button class="ctl" id="reset">RESET ALL</button>
+      </div>
+    </header>
+
+    <main class="gallery" id="gallery"></main>
+
+    <script>
+      // ── Real content from src/content/playbook/{en,ja}/secret-scanning.md ──
+      const DATA = {
+        en: {
+          h2: 'Why secrets matter even in private repos',
+          intro:
+            '<b>"Private" is a visibility setting, not a security control.</b> 8 reasons you must never store plaintext secrets.',
+          foot:
+            '🔐 <b>Bottom line</b> — keep secrets out of code, manage them with a secret manager, and close the door with <b>Push protection</b>.',
+          hint: '▸ CLICK + TO REVEAL',
+          empty: 'SELECT A RISK ▸',
+          items: [
+            {
+              icon: '🌐',
+              label: 'Access is wider than you think',
+              short: 'Access scope',
+              danger: 4,
+              why: 'Every Org member with read access (often tens to hundreds, including contractors and unrelated teams) can view the secret. Internal forks, GitHub Apps, OAuth Apps, CI/CD, and runners inherit that access. There is <b>no log of who read a file</b>.',
+            },
+            {
+              icon: '🔓',
+              label: 'One click from public',
+              short: 'One click public',
+              danger: 5,
+              why: 'A misclick, repo transfer, Org misconfiguration, or policy change flips it public. Attacker scanners detect new public repos <b>within seconds</b>; leaked tokens have been abused within 60 seconds.',
+            },
+            {
+              icon: '♾️',
+              label: 'Git history is forever',
+              short: 'Git history',
+              danger: 5,
+              why: 'Deleting it in a later commit does not remove it. It stays in history, every local clone, forks, backups, and CI caches. The only fix is <b>rotation</b>, not file deletion.',
+            },
+            {
+              icon: '💻',
+              label: 'Dev machines become the weak point',
+              short: 'Dev machines',
+              danger: 4,
+              why: 'Every <b>git clone</b> copies secrets onto unmanaged laptops. One piece of malware, one stolen device, or one compromised account is enough. Blast radius is N developers, not one server.',
+            },
+            {
+              icon: '🎣',
+              label: 'Account compromise = instant access',
+              short: 'Account takeover',
+              danger: 5,
+              why: 'One phished developer exposes every secret in every repo they can read. The secrets themselves have <b>no extra protection</b> (no MFA, no self-managed encryption at rest, no expiry).',
+            },
+            {
+              icon: '🔗',
+              label: 'Software supply chain',
+              short: 'Supply chain',
+              danger: 5,
+              why: 'The <b>#1 attack vector</b> today. Secrets in private repos enable lateral movement to production, artifact registries, and cloud. See Uber, CircleCI, Codecov, and the Internet Archive.',
+            },
+            {
+              icon: '📋',
+              label: 'Compliance and audit',
+              short: 'Compliance',
+              danger: 3,
+              why: 'ISO 27001, SOC 2, PCI-DSS, and ISMAP require central management, rotation, and access tracking. Plaintext secrets in Git fail all three, and <b>audit findings are guaranteed</b>.',
+            },
+            {
+              icon: '💸',
+              label: 'The real cost of an incident',
+              short: 'Incident cost',
+              danger: 4,
+              why: 'Emergency rotation, production outage, forensics, customer notification. Compare that to the <b>30 minutes</b> it takes to set up a secret manager.',
+            },
+          ],
+        },
+        ja: {
+          h2: 'なぜ private repo でも secret はダメなのか',
+          intro:
+            '<b>「Private」はセキュリティ対策ではなく、可視性の設定にすぎない。</b>secret を平文で置いてはいけない理由は 8 つ。',
+          foot:
+            '🔐 <b>結論</b> — secret はコードに置かず、シークレットマネージャーで管理し、<b>Push protection</b> で入口を塞ぐ。',
+          hint: '▸ + をクリックして表示',
+          empty: 'リスクヲ センタク ▸',
+          items: [
+            {
+              icon: '🌐',
+              label: 'アクセス範囲は想像以上に広い',
+              short: 'アクセス範囲',
+              danger: 4,
+              why: '読み取り権限を持つ Org メンバー全員（数十〜数百人、協力会社や無関係なチーム含む）が閲覧可能。内部フォーク・GitHub App・OAuth App・CI/CD・ランナーが権限を継承。<b>誰が読んだかのログは残らない</b>。',
+            },
+            {
+              icon: '🔓',
+              label: 'ワンクリックで public 化',
+              short: 'public 化',
+              danger: 5,
+              why: '操作ミス・リポ移管・Org 設定ミス・ポリシー変更で公開に。攻撃者の自動スキャンは新規 public repo を<b>数秒で検知</b>、漏洩トークンが 60 秒以内に悪用された例も。',
+            },
+            {
+              icon: '♾️',
+              label: 'Git 履歴は永久に残る',
+              short: 'Git 履歴',
+              danger: 5,
+              why: '後続コミットで削除しても消えない。履歴・全 clone・フォーク・バックアップ・CI キャッシュに残存。唯一の対処は <b>rotate</b> でありファイル削除ではない。',
+            },
+            {
+              icon: '💻',
+              label: '開発端末が弱点になる',
+              short: '開発端末',
+              danger: 4,
+              why: '<b>git clone</b> のたびに未管理のラップトップへコピー。マルウェア 1 件・盗難 1 台・アカウント侵害 1 件で十分。被害はサーバー 1 台でなく開発者 N 人分。',
+            },
+            {
+              icon: '🎣',
+              label: 'アカウント侵害 = 即アクセス',
+              short: 'アカウント侵害',
+              danger: 5,
+              why: '開発者 1 人のフィッシングで、その人が読める全リポの全 secret が流出。secret 自体に <b>MFA・保存時暗号化・有効期限などの追加保護はない</b>。',
+            },
+            {
+              icon: '🔗',
+              label: 'ソフトウェアサプライチェーン',
+              short: 'サプライチェーン',
+              danger: 5,
+              why: '現在の<b>攻撃ベクトル第 1 位</b>。private repo の secret から本番・レジストリ・クラウドへラテラルムーブメント。Uber・CircleCI・Codecov・Internet Archive が該当例。',
+            },
+            {
+              icon: '📋',
+              label: 'コンプライアンスと監査',
+              short: '監査',
+              danger: 3,
+              why: 'ISO 27001・SOC 2・PCI-DSS・ISMAP は集中管理・rotate・アクセス追跡を要求。Git に平文の secret は 3 点すべて不適合で<b>監査指摘は確実</b>。',
+            },
+            {
+              icon: '💸',
+              label: 'インシデントの実コスト',
+              short: '実コスト',
+              danger: 4,
+              why: '緊急 rotate・本番停止・フォレンジック調査・顧客通知。シークレットマネージャー設定に必要な <b>30 分</b>と比べてほしい。',
+            },
+          ],
+        },
+      };
+
+      const VARIANTS = [
+        { cls: 'v2 vx', kind: 'accordion', name: '★ FINAL MIX — V2 + V4 gauge + V3 cursor + V6 stamp', wide: true,
+          desc: 'V2 のウィンドウ枠をベースに、V4 の危険度ゲージ、V3 の点滅カーソル、V6 の CLASSIFIED スタンプを合成。' },
+        { cls: 'v1', kind: 'accordion', name: 'V1 — Codex Rows', wide: false,
+          desc: 'Anchor。既存の表を素直に畳んだ形。破線区切り + [+]/[-]、開いた行に左マゼンタバー。' },
+        { cls: 'v2', kind: 'accordion', name: 'V2 — Window Frame', wide: false,
+          desc: 'Anchor。JRPG のメニューウィンドウ。各行が枠、開くと 2px ネオン枠 + アンバーの角ブラケット。' },
+        { cls: 'v3', kind: 'accordion', name: 'V3 — Threat Terminal', wide: false,
+          desc: 'Re-frame。CLI メタファー。$ risk_01 --explain で緑のフォスファ出力、点滅カーソル付き。' },
+        { cls: 'v4', kind: 'accordion', name: 'V4 — Bestiary', wide: false,
+          desc: 'Re-frame。魔物図鑑。危険度を HP ゲージのセグメントで表示、▸ を押すと解説が開く。' },
+        { cls: 'v5', kind: 'inventory', name: 'V5 — Inventory Slots', wide: true,
+          desc: 'Re-frame。RPG の所持品グリッド + 説明ペイン。左 8 スロット、右に選択中の解説。縦に伸びない。' },
+        { cls: 'v6', kind: 'accordion', name: 'V6 — Case File', wide: false,
+          desc: 'Re-frame。捜査ファイル。CASE-01 番号、アンバーの書類枠、開くと CLASSIFIED スタンプ。' },
+        { cls: 'v7', kind: 'trail', name: 'V7 — Stage Select', wide: true,
+          desc: 'Re-shape。横一列のステージ選択マップ。ノードを押すと下のパネルに解説。既読ノードは緑枠。' },
+        { cls: 'v8', kind: 'split', name: 'V8 — Split Deck', wide: true,
+          desc: 'Re-shape。左に密なリスト一覧、右に大きな解説ペイン。選択行はネオン反転。高さ完全固定。' },
+        { cls: 'v9', kind: 'accordion', name: 'V9 — Alarm Console', wide: false,
+          desc: 'Wildcard。警報パネル。未確認は赤ランプが明滅、ACK すると緑固定に。ハザードストライプ地。' },
+        { cls: 'v10', kind: 'cards', name: 'V10 — Card Flip', wide: true,
+          desc: 'Wildcard。カードを裏返す。4x2 のグリッドで表はリスク名、クリックで 3D フリップして裏に理由。' },
+      ];
+
+      let LANG = 'en';
+
+      const esc = (s) => s;
+      const pad = (n) => String(n).padStart(2, '0');
+
+      // ── Builders ───────────────────────────────────────────────
+      function accordionHTML(v, d) {
+        const rows = d.items
+          .map((it, i) => {
+            const gauge =
+              '<span class="risk-gauge" aria-hidden="true">' +
+              Array.from({ length: 5 }, (_, k) => `<i class="${k < it.danger ? 'on' : ''}"></i>`).join('') +
+              '</span>';
+            return (
+              `<div class="risk-item" data-i="${i}">` +
+              `<button class="risk-btn" type="button" aria-expanded="false">` +
+              `<span class="risk-lamp" aria-hidden="true"></span>` +
+              `<span class="risk-num">${pad(i + 1)}</span>` +
+              `<span class="risk-icon" aria-hidden="true">${it.icon}</span>` +
+              `<span class="risk-label">${esc(it.label)}</span>` +
+              gauge +
+              `<span class="risk-toggle" aria-hidden="true"></span>` +
+              `</button>` +
+              `<div class="risk-body"><div class="risk-body-inner">` +
+              `<p class="risk-why">${it.why}</p>` +
+              `</div></div>` +
+              `</div>`
+            );
+          })
+          .join('');
+        return (
+          `<div class="risk-widget ${v.cls}">` +
+          `<p class="risk-intro">${d.intro}</p>` +
+          `<div class="risk-widget-inner"><div class="risk-list">${rows}</div></div>` +
+          `</div>`
+        );
+      }
+
+      function inventoryHTML(v, d) {
+        const slots = d.items
+          .map(
+            (it, i) =>
+              `<button class="slot" type="button" data-i="${i}">` +
+              `<span class="s-icon" aria-hidden="true">${it.icon}</span>` +
+              `<span class="s-num">${pad(i + 1)}</span>` +
+              `<span class="s-label">${esc(it.short)}</span>` +
+              `</button>`
+          )
+          .join('');
+        return (
+          `<div class="risk-widget ${v.cls}" style="display:flex;flex-direction:column;flex:1 1 auto;min-height:0">` +
+          `<p class="risk-intro">${d.intro}</p>` +
+          `<div class="md-wrap">` +
+          `<div class="slot-grid">${slots}</div>` +
+          `<div class="detail"><p class="d-empty">${d.empty}</p></div>` +
+          `</div></div>`
+        );
+      }
+
+      function trailHTML(v, d) {
+        const nodes = d.items
+          .map(
+            (it, i) =>
+              `<button class="node" type="button" data-i="${i}">` +
+              `<span class="n-dot" aria-hidden="true">${it.icon}</span>` +
+              `<span class="n-label">${esc(it.short)}</span>` +
+              `</button>`
+          )
+          .join('');
+        return (
+          `<div class="risk-widget ${v.cls}" style="display:flex;flex-direction:column;flex:1 1 auto;min-height:0">` +
+          `<p class="risk-intro">${d.intro}</p>` +
+          `<div class="trail">${nodes}</div>` +
+          `<div class="stage-panel"><p class="p-empty">${d.empty}</p></div>` +
+          `</div>`
+        );
+      }
+
+      function splitHTML(v, d) {
+        const picks = d.items
+          .map(
+            (it, i) =>
+              `<button class="pick" type="button" data-i="${i}">` +
+              `<span class="p-n">${pad(i + 1)}</span>` +
+              `<span aria-hidden="true">${it.icon}</span>` +
+              `<span>${esc(it.label)}</span>` +
+              `</button>`
+          )
+          .join('');
+        return (
+          `<div class="risk-widget ${v.cls}" style="display:flex;flex-direction:column;flex:1 1 auto;min-height:0">` +
+          `<p class="risk-intro">${d.intro}</p>` +
+          `<div class="md-wrap">` +
+          `<div class="pick-list">${picks}</div>` +
+          `<div class="pane"><p class="x-empty">${d.empty}</p></div>` +
+          `</div></div>`
+        );
+      }
+
+      function cardsHTML(v, d) {
+        const cards = d.items
+          .map(
+            (it, i) =>
+              `<button class="card" type="button" data-i="${i}"><span class="card-inner">` +
+              `<span class="face face-front">` +
+              `<span class="c-icon" aria-hidden="true">${it.icon}</span>` +
+              `<span class="c-num">${pad(i + 1)}</span>` +
+              `<span class="c-label">${esc(it.short)}</span>` +
+              `</span>` +
+              `<span class="face face-back">` +
+              `<span class="b-num">${pad(i + 1)}</span>` +
+              `<span class="b-why">${it.why}</span>` +
+              `</span>` +
+              `</span></button>`
+          )
+          .join('');
+        return (
+          `<div class="risk-widget ${v.cls}" style="display:flex;flex-direction:column;flex:1 1 auto;min-height:0">` +
+          `<p class="risk-intro">${d.intro}</p>` +
+          `<div class="card-grid">${cards}</div>` +
+          `</div>`
+        );
+      }
+
+      const BUILDERS = {
+        accordion: accordionHTML,
+        inventory: inventoryHTML,
+        trail: trailHTML,
+        split: splitHTML,
+        cards: cardsHTML,
+      };
+
+      function render() {
+        const d = DATA[LANG];
+        const gallery = document.getElementById('gallery');
+        gallery.innerHTML = VARIANTS.map(
+          (v) =>
+            `<section class="proto${v.wide ? ' wide' : ''}" data-variant="${v.cls}" data-kind="${v.kind}">` +
+            `<div class="proto-label">${v.name}</div>` +
+            `<div class="proto-desc">${v.desc}</div>` +
+            `<div class="slide-stage"><div class="slide-frame">` +
+            `<h2 class="slide-h2">${d.h2}</h2>` +
+            `<p class="hint">${d.hint}</p>` +
+            BUILDERS[v.kind](v, d) +
+            `<p class="risk-foot">${d.foot}</p>` +
+            `</div></div></section>`
+        ).join('');
+        fitStages();
+      }
+
+      // Scale each 768x587 logical slide to its column, and flag overflow.
+      function fitStages() {
+        document.querySelectorAll('.slide-stage').forEach((stage) => {
+          const frame = stage.querySelector('.slide-frame');
+          const s = stage.clientWidth / 768;
+          frame.style.transform = `scale(${s})`;
+          stage.style.height = 587 * s + 'px';
+        });
+        checkOverflow();
+      }
+
+      function checkOverflow() {
+        document.querySelectorAll('.slide-frame').forEach((frame) => {
+          const over = frame.scrollHeight - frame.clientHeight > 2;
+          frame.parentElement.classList.toggle('overflowing', over);
+        });
+      }
+
+      window.addEventListener('resize', fitStages);
+
+      // ── Interaction: one open at a time, revealed in order ──────
+      document.getElementById('gallery').addEventListener('click', (e) => {
+        const proto = e.target.closest('.proto');
+        if (!proto) return;
+        const d = DATA[LANG];
+
+        // Accordion variants
+        const btn = e.target.closest('.risk-btn');
+        if (btn) {
+          const item = btn.closest('.risk-item');
+          const list = item.parentElement;
+          const wasOpen = item.classList.contains('open');
+          list.querySelectorAll('.risk-item.open').forEach((el) => {
+            el.classList.remove('open');
+            el.querySelector('.risk-btn').setAttribute('aria-expanded', 'false');
+          });
+          if (!wasOpen) {
+            item.classList.add('open');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+          setTimeout(checkOverflow, 320);
+          return;
+        }
+
+        // V5 inventory
+        const slot = e.target.closest('.slot');
+        if (slot) {
+          const w = proto.querySelector('.risk-widget');
+          w.querySelectorAll('.slot').forEach((s) => s.classList.remove('sel'));
+          slot.classList.add('sel');
+          const it = d.items[+slot.dataset.i];
+          w.querySelector('.detail').innerHTML =
+            `<h3 class="d-title">${it.icon} ${it.label}</h3><p class="d-why">${it.why}</p>`;
+          checkOverflow();
+          return;
+        }
+
+        // V7 trail
+        const node = e.target.closest('.node');
+        if (node) {
+          const w = proto.querySelector('.risk-widget');
+          w.querySelectorAll('.node').forEach((n) => n.classList.remove('sel'));
+          node.classList.add('sel', 'done');
+          const i = +node.dataset.i;
+          const it = d.items[i];
+          w.querySelector('.stage-panel').innerHTML =
+            `<div class="p-head"><span class="p-num">${pad(i + 1)}</span>` +
+            `<span class="p-title">${it.icon} ${it.label}</span></div>` +
+            `<p class="p-why">${it.why}</p>`;
+          checkOverflow();
+          return;
+        }
+
+        // V8 split deck
+        const pick = e.target.closest('.pick');
+        if (pick) {
+          const w = proto.querySelector('.risk-widget');
+          w.querySelectorAll('.pick').forEach((p) => p.classList.remove('sel'));
+          pick.classList.add('sel');
+          const it = d.items[+pick.dataset.i];
+          w.querySelector('.pane').innerHTML =
+            `<div class="x-icon" aria-hidden="true">${it.icon}</div>` +
+            `<h3 class="x-title">${it.label}</h3><p class="x-why">${it.why}</p>`;
+          checkOverflow();
+          return;
+        }
+
+        // V10 cards
+        const card = e.target.closest('.card');
+        if (card) {
+          const w = proto.querySelector('.risk-widget');
+          const wasFlipped = card.classList.contains('flip');
+          w.querySelectorAll('.card.flip').forEach((c) => c.classList.remove('flip'));
+          if (!wasFlipped) card.classList.add('flip');
+          checkOverflow();
+        }
+      });
+
+      // ── Controls ───────────────────────────────────────────────
+      document.querySelectorAll('.ctl[data-lang]').forEach((b) => {
+        b.addEventListener('click', () => {
+          LANG = b.dataset.lang;
+          document.querySelectorAll('.ctl[data-lang]').forEach((x) => x.classList.toggle('on', x === b));
+          render();
+        });
+      });
+      document.getElementById('reset').addEventListener('click', render);
+
+      render();
+    </script>
+  </body>
+</html>

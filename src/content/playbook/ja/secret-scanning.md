@@ -62,18 +62,45 @@ links:
 
 ## なぜ private repo でも secret はダメなのか
 
-**「Private」はセキュリティ対策ではなく、可視性の設定にすぎない。**private repo でも secret を平文で置いてはいけない理由は 8 つある。
+<strong>「Private」はセキュリティ対策ではなく、可視性の設定にすぎない。</strong>private repo でも secret を平文で置いてはいけない理由は 8 つある。
 
-| # | リスク | なぜ危険か |
-| :---: | --- | --- |
-| 1 | 🌐 **アクセス範囲は想像以上に広い** | 読み取り権限を持つ Org メンバー全員（数十〜数百人、協力会社や無関係なチーム含む）が閲覧可能。内部フォーク・GitHub App・OAuth App・CI/CD・ランナーが権限を継承。誰が読んだかのログは残らない |
-| 2 | 🔓 **ワンクリックで public 化** | 操作ミス・リポ移管・Org 設定ミス・ポリシー変更で公開に。攻撃者の自動スキャンは新規 public repo を数秒で検知、漏洩トークンが 60 秒以内に悪用された例も |
-| 3 | ♾️ **Git 履歴は永久に残る** | 後続コミットで削除しても消えない。履歴・全 clone・フォーク・バックアップ・CI キャッシュに残存。唯一の対処は **rotate** でありファイル削除ではない |
-| 4 | 💻 **開発端末が弱点になる** | `git clone` のたびに未管理のラップトップへコピー。マルウェア 1 件・盗難 1 台・アカウント侵害 1 件で十分。被害はサーバー 1 台でなく開発者 N 人分 |
-| 5 | 🎣 **アカウント侵害 = 即アクセス** | 開発者 1 人のフィッシングで、その人が読める全リポの全 secret が流出。secret 自体に MFA・保存時暗号化・有効期限などの追加保護はない |
-| 6 | 🔗 **ソフトウェアサプライチェーン** | 現在の攻撃ベクトル第 1 位。private repo の secret から本番・レジストリ・クラウドへラテラルムーブメント。Uber・CircleCI・Codecov・Internet Archive が該当例 |
-| 7 | 📋 **コンプライアンスと監査** | ISO 27001・SOC 2・PCI-DSS・ISMAP は集中管理・rotate・アクセス追跡を要求。Git に平文の secret は 3 点すべて不適合で監査指摘は確実 |
-| 8 | 💸 **インシデントの実コスト** | 緊急 rotate・本番停止・フォレンジック調査・顧客通知。シークレットマネージャー設定に必要な 30 分と比べてほしい |
+<div class="risk-widget">
+<p class="risk-hint">▸ + をクリックして表示</p>
+<div class="risk-list">
+<details class="risk-item" name="risk-private">
+<summary class="risk-btn"><span class="risk-num">01</span><span class="risk-icon" aria-hidden="true">🌐</span><span class="risk-label">アクセス範囲は想像以上に広い</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<p class="risk-why">読み取り権限を持つ Org メンバー全員（数十〜数百人、協力会社や無関係なチーム含む）が閲覧可能。内部フォーク・GitHub App・OAuth App・CI/CD・ランナーが権限を継承。<b>誰が読んだかのログは残らない</b>。</p>
+</details>
+<details class="risk-item" name="risk-private">
+<summary class="risk-btn"><span class="risk-num">02</span><span class="risk-icon" aria-hidden="true">🔓</span><span class="risk-label">ワンクリックで public 化</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<p class="risk-why">操作ミス・リポ移管・Org 設定ミス・ポリシー変更で公開に。攻撃者の自動スキャンは新規 public repo を<b>数秒で検知</b>、漏洩トークンが 60 秒以内に悪用された例も。</p>
+</details>
+<details class="risk-item" name="risk-private">
+<summary class="risk-btn"><span class="risk-num">03</span><span class="risk-icon" aria-hidden="true">♾️</span><span class="risk-label">Git 履歴は永久に残る</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<p class="risk-why">後続コミットで削除しても消えない。履歴・全 clone・フォーク・バックアップ・CI キャッシュに残存。唯一の対処は <b>rotate</b> でありファイル削除ではない。</p>
+</details>
+<details class="risk-item" name="risk-private">
+<summary class="risk-btn"><span class="risk-num">04</span><span class="risk-icon" aria-hidden="true">💻</span><span class="risk-label">開発端末が弱点になる</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<p class="risk-why"><b>git clone</b> のたびに未管理のラップトップへコピー。マルウェア 1 件・盗難 1 台・アカウント侵害 1 件で十分。被害はサーバー 1 台でなく開発者 N 人分。</p>
+</details>
+<details class="risk-item" name="risk-private">
+<summary class="risk-btn"><span class="risk-num">05</span><span class="risk-icon" aria-hidden="true">🎣</span><span class="risk-label">アカウント侵害 = 即アクセス</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<p class="risk-why">開発者 1 人のフィッシングで、その人が読める全リポの全 secret が流出。secret 自体に <b>MFA・保存時暗号化・有効期限などの追加保護はない</b>。</p>
+</details>
+<details class="risk-item" name="risk-private">
+<summary class="risk-btn"><span class="risk-num">06</span><span class="risk-icon" aria-hidden="true">🔗</span><span class="risk-label">ソフトウェアサプライチェーン</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<p class="risk-why">現在の<b>攻撃ベクトル第 1 位</b>。private repo の secret から本番・レジストリ・クラウドへラテラルムーブメント。Uber・CircleCI・Codecov・Internet Archive が該当例。</p>
+</details>
+<details class="risk-item" name="risk-private">
+<summary class="risk-btn"><span class="risk-num">07</span><span class="risk-icon" aria-hidden="true">📋</span><span class="risk-label">コンプライアンスと監査</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<p class="risk-why">ISO 27001・SOC 2・PCI-DSS・ISMAP は集中管理・rotate・アクセス追跡を要求。Git に平文の secret は 3 点すべて不適合で<b>監査指摘は確実</b>。</p>
+</details>
+<details class="risk-item" name="risk-private">
+<summary class="risk-btn"><span class="risk-num">08</span><span class="risk-icon" aria-hidden="true">💸</span><span class="risk-label">インシデントの実コスト</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<p class="risk-why">緊急 rotate・本番停止・フォレンジック調査・顧客通知。シークレットマネージャー設定に必要な <b>30 分</b>と比べてほしい。</p>
+</details>
+</div>
+</div>
 
 > 🔐 **結論** — secret はコードに置かず、環境変数 / シークレットマネージャーで管理し、**Push protection** で入口を塞ぐ。「private だから大丈夫」は成り立たない。
 

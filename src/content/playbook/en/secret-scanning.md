@@ -64,16 +64,43 @@ links:
 
 **"Private" is a visibility setting, not a security control.** Here are 8 reasons you must never store plaintext secrets, even in a private repo.
 
-| # | Risk | Why it's dangerous |
-| :---: | --- | --- |
-| 1 | 🌐 **Access is wider than you think** | Every Org member with read access (often tens to hundreds, including contractors and unrelated teams) can view the secret. Internal forks, GitHub Apps, OAuth Apps, CI/CD, and runners inherit that access. There's no log of who read a file |
-| 2 | 🔓 **One click from public** | A misclick, repo transfer, Org misconfiguration, or policy change flips it public. Attacker scanners detect new public repos within seconds; leaked tokens have been abused within 60 seconds |
-| 3 | ♾️ **Git history is forever** | Deleting it in a later commit doesn't remove it. It stays in history, every local clone, forks, backups, and CI caches. The only fix is **rotation**, not file deletion |
-| 4 | 💻 **Dev machines become the weak point** | Every `git clone` copies secrets onto unmanaged laptops. One piece of malware, one stolen device, or one compromised account is enough. Blast radius is N developers, not one server |
-| 5 | 🎣 **Account compromise = instant access** | One phished developer exposes every secret in every repo they can read. The secrets themselves have no extra protection (no MFA, no self-managed encryption at rest, no expiry) |
-| 6 | 🔗 **Software supply chain** | The #1 attack vector today. Secrets in private repos enable lateral movement to production, artifact registries, and cloud. See Uber, CircleCI, Codecov, and the Internet Archive |
-| 7 | 📋 **Compliance and audit** | ISO 27001, SOC 2, PCI-DSS, and ISMAP require central management, rotation, and access tracking. Plaintext secrets in Git fail all three, and audit findings are guaranteed |
-| 8 | 💸 **The real cost of an incident** | Emergency rotation, production outage, forensics, customer notification. Compare that to the 30 minutes it takes to set up a secret manager |
+<div class="risk-widget">
+<p class="risk-hint">▸ CLICK + TO REVEAL</p>
+<div class="risk-list">
+<details class="risk-item" name="risk-private">
+<summary class="risk-btn"><span class="risk-num">01</span><span class="risk-icon" aria-hidden="true">🌐</span><span class="risk-label">Access is wider than you think</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<p class="risk-why">Every Org member with read access (often tens to hundreds, including contractors and unrelated teams) can view the secret. Internal forks, GitHub Apps, OAuth Apps, CI/CD, and runners inherit that access. There is <b>no log of who read a file</b>.</p>
+</details>
+<details class="risk-item" name="risk-private">
+<summary class="risk-btn"><span class="risk-num">02</span><span class="risk-icon" aria-hidden="true">🔓</span><span class="risk-label">One click from public</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<p class="risk-why">A misclick, repo transfer, Org misconfiguration, or policy change flips it public. Attacker scanners detect new public repos <b>within seconds</b>; leaked tokens have been abused within 60 seconds.</p>
+</details>
+<details class="risk-item" name="risk-private">
+<summary class="risk-btn"><span class="risk-num">03</span><span class="risk-icon" aria-hidden="true">♾️</span><span class="risk-label">Git history is forever</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<p class="risk-why">Deleting it in a later commit does not remove it. It stays in history, every local clone, forks, backups, and CI caches. The only fix is <b>rotation</b>, not file deletion.</p>
+</details>
+<details class="risk-item" name="risk-private">
+<summary class="risk-btn"><span class="risk-num">04</span><span class="risk-icon" aria-hidden="true">💻</span><span class="risk-label">Dev machines become the weak point</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<p class="risk-why">Every <b>git clone</b> copies secrets onto unmanaged laptops. One piece of malware, one stolen device, or one compromised account is enough. Blast radius is N developers, not one server.</p>
+</details>
+<details class="risk-item" name="risk-private">
+<summary class="risk-btn"><span class="risk-num">05</span><span class="risk-icon" aria-hidden="true">🎣</span><span class="risk-label">Account compromise = instant access</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<p class="risk-why">One phished developer exposes every secret in every repo they can read. The secrets themselves have <b>no extra protection</b> (no MFA, no self-managed encryption at rest, no expiry).</p>
+</details>
+<details class="risk-item" name="risk-private">
+<summary class="risk-btn"><span class="risk-num">06</span><span class="risk-icon" aria-hidden="true">🔗</span><span class="risk-label">Software supply chain</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<p class="risk-why">The <b>#1 attack vector</b> today. Secrets in private repos enable lateral movement to production, artifact registries, and cloud. See Uber, CircleCI, Codecov, and the Internet Archive.</p>
+</details>
+<details class="risk-item" name="risk-private">
+<summary class="risk-btn"><span class="risk-num">07</span><span class="risk-icon" aria-hidden="true">📋</span><span class="risk-label">Compliance and audit</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<p class="risk-why">ISO 27001, SOC 2, PCI-DSS, and ISMAP require central management, rotation, and access tracking. Plaintext secrets in Git fail all three, and <b>audit findings are guaranteed</b>.</p>
+</details>
+<details class="risk-item" name="risk-private">
+<summary class="risk-btn"><span class="risk-num">08</span><span class="risk-icon" aria-hidden="true">💸</span><span class="risk-label">The real cost of an incident</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<p class="risk-why">Emergency rotation, production outage, forensics, customer notification. Compare that to the <b>30 minutes</b> it takes to set up a secret manager.</p>
+</details>
+</div>
+</div>
 
 > 🔐 **Bottom line** — keep secrets out of code, manage them with env vars / a secret manager, and close the door with **Push protection**. "It's private, so it's fine" simply doesn't hold.
 

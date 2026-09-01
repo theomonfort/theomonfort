@@ -2690,4 +2690,162 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     transform: translateY(-50%) scale(1.12) rotate(-6deg);
     filter: drop-shadow(0 0 10px color-mix(in srgb, var(--entry-accent, #00f0ff) 85%, transparent));
   }
+
+  /* ─────────────────────────────────────────────────────────────
+     Risk reveal — progressive-disclosure accordion
+     Window frame + danger gauge + blinking cursor + CLASSIFIED stamp.
+     Native <details name> gives exclusive open with no JS, so it works
+     identically in document mode and in presentation mode.
+     ───────────────────────────────────────────────────────────── */
+  .prose-akq .risk-widget { margin: 1.2em 0; }
+  .prose-akq .risk-hint {
+    margin: 0 0 0.5em;
+    font-family: 'VT323', monospace;
+    font-size: 1.05em;
+    letter-spacing: 0.12em;
+    color: #ffb000;
+    text-shadow: 0 0 8px rgba(255, 176, 0, 0.5);
+  }
+  .prose-akq .risk-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1em;
+  }
+  .prose-akq .risk-item {
+    position: relative;
+    min-width: 0;
+    border: 1px dashed rgba(0, 240, 255, 0.3);
+    background: rgba(10, 14, 39, 0.55);
+  }
+  .prose-akq .risk-item[open] {
+    border: 2px solid #ff2e88;
+    background: rgba(255, 46, 136, 0.08);
+    box-shadow: 0 0 8px #ff2e88, 0 0 24px rgba(255, 46, 136, 0.3);
+  }
+  .prose-akq .risk-item[open]::before,
+  .prose-akq .risk-item[open]::after {
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border: 2px solid #ffb000;
+    pointer-events: none;
+  }
+  .prose-akq .risk-item[open]::before {
+    top: -2px;
+    left: -2px;
+    border-right: none;
+    border-bottom: none;
+  }
+  .prose-akq .risk-item[open]::after {
+    right: -2px;
+    bottom: -2px;
+    border-top: none;
+    border-left: none;
+  }
+  .prose-akq .risk-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    padding: 0.15em 0.5em;
+    font-size: 0.95em;
+    line-height: 1.4;
+    color: #e8f4ff;
+    cursor: pointer;
+    list-style: none;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .prose-akq .risk-btn::-webkit-details-marker { display: none; }
+  .prose-akq .risk-btn:hover { background: rgba(0, 240, 255, 0.08); }
+  .prose-akq .risk-btn:focus-visible { outline: 2px solid #ffb000; outline-offset: 2px; }
+  .prose-akq .risk-num {
+    flex: none;
+    min-width: 1.6em;
+    font-family: 'VT323', monospace;
+    font-size: 1.1em;
+    line-height: 1;
+    color: #00f0ff;
+  }
+  .prose-akq .risk-item[open] .risk-num { color: #ffb000; }
+  .prose-akq .risk-icon { flex: none; font-size: 1em; line-height: 1; }
+  .prose-akq .risk-label { flex: 0 1 auto; min-width: 0; }
+  .prose-akq .risk-gauge {
+    flex: none;
+    display: inline-flex;
+    gap: 2px;
+    margin-left: auto;
+    padding-right: 0.55em;
+  }
+  .prose-akq .risk-gauge i {
+    display: block;
+    width: 7px;
+    height: 12px;
+    background: rgba(232, 244, 255, 0.14);
+  }
+  .prose-akq .risk-gauge i.on { background: #ff2e88; box-shadow: 0 0 6px #ff2e88; }
+  .prose-akq .risk-toggle {
+    flex: none;
+    font-family: 'VT323', monospace;
+    font-size: 1.45em;
+    line-height: 1;
+    color: #ffb000;
+    transition: transform 0.2s ease, color 0.15s ease;
+  }
+  .prose-akq .risk-toggle::before { content: '+'; }
+  .prose-akq .risk-item[open] .risk-toggle { color: #ff2e88; transform: rotate(45deg); }
+  .prose-akq .risk-why {
+    position: relative;
+    margin: 0 0.6em;
+    padding: 0.45em 0.6em 1.15em 2.7em;
+    border-top: 1px dashed rgba(255, 46, 136, 0.35);
+    font-size: 0.88em;
+    line-height: 1.6;
+    color: rgba(232, 244, 255, 0.88);
+  }
+  .prose-akq .risk-why b,
+  .prose-akq .risk-why strong { color: #ffb000; font-weight: normal; }
+  .prose-akq .risk-item[open] .risk-why::after {
+    content: '▊';
+    margin-left: 0.15em;
+    color: #ffb000;
+    animation: akq-risk-blink 1s steps(1) infinite;
+  }
+  .prose-akq .risk-item[open] .risk-why::before {
+    content: 'CLASSIFIED';
+    position: absolute;
+    right: 0.3em;
+    bottom: 0.2em;
+    padding: 3px 5px;
+    border: 2px solid #ff2e88;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.44em;
+    letter-spacing: 0.12em;
+    color: #ff2e88;
+    opacity: 0.55;
+    transform: rotate(-8deg);
+    pointer-events: none;
+  }
+  @keyframes akq-risk-blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+  /* Smooth open/close where the engine supports it; instant elsewhere. */
+  @supports (interpolate-size: allow-keywords) {
+    .prose-akq .risk-widget { interpolate-size: allow-keywords; }
+    .prose-akq .risk-item::details-content {
+      block-size: 0;
+      overflow: hidden;
+      content-visibility: hidden;
+      transition: block-size 0.28s ease, content-visibility 0.28s allow-discrete;
+    }
+    .prose-akq .risk-item[open]::details-content {
+      block-size: auto;
+      content-visibility: visible;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .prose-akq .risk-item[open] .risk-why::after { animation: none; }
+    .prose-akq .risk-item::details-content { transition: none; }
+    .prose-akq .risk-toggle { transition: none; }
+  }
 </style>
