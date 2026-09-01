@@ -83,7 +83,7 @@ Secret Scanning has two core controls: **detection** and **Push protection**. Va
 
 | Feature | When does it run? | What does it do? | Scope |
 | --- | --- | --- | --- |
-| 🔍 **Secret scanning alerts** | After commit (including history, continuously) | Notifies you of detected secrets in the Security and quality tab | Full Git history on all branches, Issues, PRs, Discussions, Wikis, secret gists |
+| 🔍 **Secret scanning alerts** | After commit (including history, continuously) | Notifies you of detected secrets in the Security and quality tab | Full Git history on all branches, Issues, PRs, GitHub Discussions, Wikis, secret gists |
 | 🛡️ **Push protection** | Right before `git push` | Rejects pushes containing secrets (bypass is possible) | Incoming changes only |
 | ✅ **Validity checks** | When an alert fires | Asks the provider API whether the secret is still active | Select supported providers (AWS, GitHub, Slack, and others) |
 
@@ -126,7 +126,7 @@ Repo-level push protection is **on by default and free for public repositories**
 
 **Step 2 — Scan for existing leaks**
 
-Once enabled, past commit history is automatically scanned. Alerts will appear in the Security tab — work through them from the top, rotating each secret.
+Once enabled, past commit history is automatically scanned. Alerts will appear in the Security and quality tab — work through them from the top, rotating each secret.
 
 **Step 3 — Add custom patterns**
 

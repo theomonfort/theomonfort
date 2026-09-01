@@ -83,7 +83,7 @@ Secret Scanning の中核は **検知** と **Push protection**。Validity check
 
 | 機能 | いつ動く？ | 何をする？ | 対象範囲 |
 | --- | --- | --- | --- |
-| 🔍 **Secret scanning alerts** | コミット後(履歴も含めて常時) | 検出された secret を Security and quality タブに通知 | 全ブランチの Git 履歴全体・Issue・PR・Discussions・Wiki・secret gist |
+| 🔍 **Secret scanning alerts** | コミット後(履歴も含めて常時) | 検出された secret を Security and quality タブに通知 | 全ブランチの Git 履歴全体・Issue・PR・GitHub Discussions・Wiki・secret gist |
 | 🛡️ **Push protection** | `git push` の直前 | secret を含む push を拒否(bypass 可) | これから入る変更のみ |
 | ✅ **Validity checks** | アラート発生時 | secret がまだ有効かをプロバイダー API に問い合わせ | 一部対応プロバイダー(AWS、GitHub、Slack ほか) |
 
@@ -126,7 +126,7 @@ Public repo のリポレベル push protection は **デフォルト ON** で無
 
 **Step 2 — 既存の漏洩をスキャン**
 
-ON にすると過去のコミット履歴も自動でスキャンされる。Security タブにアラートが並ぶので、上から rotate していく。
+ON にすると過去のコミット履歴も自動でスキャンされる。Security and quality タブにアラートが並ぶので、上から rotate していく。
 
 **Step 3 — Custom pattern を追加**
 
