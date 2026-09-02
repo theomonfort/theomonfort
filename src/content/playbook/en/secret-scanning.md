@@ -195,6 +195,7 @@ Use a **security configuration** (`Org → Settings → Advanced Security → Co
 <tbody>
 <tr><td>Secret scanning alerts</td><td>✅ Free</td><td>❌</td><td>✅ Included</td></tr>
 <tr><td>Push protection (repo / org)</td><td>✅ Free</td><td>❌</td><td>✅ Included</td></tr>
+<tr><td>Partner program alerts (sent to the provider)</td><td>✅ Free, always on</td><td>❌</td><td>❌ Public repos only</td></tr>
 <tr><td>Validity checks</td><td>❌</td><td>❌</td><td>✅ Supported providers</td></tr>
 <tr><td>Generic patterns</td><td>❌</td><td>❌</td><td>✅ Included</td></tr>
 <tr><td>Custom patterns</td><td>❌</td><td>❌</td><td>✅ Included</td></tr>
@@ -203,13 +204,13 @@ Use a **security configuration** (`Org → Settings → Advanced Security → Co
 </tbody>
 </table>
 
-> 🆓 **User push protection** is free and enabled by default on all plans, but only covers pushes to public repositories. **Partner alerts** also notify providers only about leaks in public repositories and public npm packages.
+> 🆓 **User push protection** is free and enabled by default on all plans, but only covers pushes to public repositories. **Partner alerts** also notify providers only about leaks in public repositories and public npm packages — always on, and not configurable.
 >
 > 👤 **User-owned repositories** are a special case: alerts require GHEC with **Enterprise Managed Users**, or GHES with Secret Protection enabled on the enterprise. Org-owned private / internal repos only need Secret Protection on Team or GHEC.
 >
 > 💰 Generic, custom, and AI detection, validity checks, and private / internal repository coverage require **Secret Protection or a legacy GHAS license**. **Public monitoring** is an enterprise-wide feature for GHEC Enterprise.
 
-📘 Details: <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/get-started/learning-about-github/about-github-advanced-security" target="_blank" rel="noopener noreferrer">Advanced Security products ↗</a> / <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Public monitoring ↗</a>
+📘 Details: <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/get-started/learning-about-github/about-github-advanced-security" target="_blank" rel="noopener noreferrer">Advanced Security products ↗</a> / <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/tutorials/secret-scanning-partner-program" target="_blank" rel="noopener noreferrer">Partner program ↗</a> / <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Public monitoring ↗</a>
 
 ## Public monitoring (NEW)
 

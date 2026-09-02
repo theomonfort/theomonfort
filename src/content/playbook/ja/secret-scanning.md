@@ -195,6 +195,7 @@ Org  → Settings → Advanced Security → Global settings   → Custom pattern
 <tbody>
 <tr><td>Secret scanning alerts</td><td>✅ 無料</td><td>❌</td><td>✅ 含む</td></tr>
 <tr><td>Push protection（リポ / 組織）</td><td>✅ 無料</td><td>❌</td><td>✅ 含む</td></tr>
+<tr><td>Partner program alerts（provider に通知）</td><td>✅ 無料・常時 ON</td><td>❌</td><td>❌ public repo のみ</td></tr>
 <tr><td>Validity checks</td><td>❌</td><td>❌</td><td>✅ 対応 provider</td></tr>
 <tr><td>Generic patterns</td><td>❌</td><td>❌</td><td>✅ 含む</td></tr>
 <tr><td>Custom patterns</td><td>❌</td><td>❌</td><td>✅ 含む</td></tr>
@@ -203,13 +204,13 @@ Org  → Settings → Advanced Security → Global settings   → Custom pattern
 </tbody>
 </table>
 
-> 🆓 **ユーザー push protection** は全プランで無料・デフォルト ON だが、public repo への push のみが対象。**Partner alerts** も public repo / public npm package の漏洩だけを provider に通知する。
+> 🆓 **ユーザー push protection** は全プランで無料・デフォルト ON だが、public repo への push のみが対象。**Partner alerts** も public repo / public npm package の漏洩だけを provider に通知する(常時 ON、設定変更は不可)。
 >
 > 👤 **ユーザー所有リポジトリ** は例外扱い。アラートには GHEC の **Enterprise Managed Users**、または Secret Protection を有効にした GHES が必要。Org 所有の private / internal repo なら Team / GHEC で Secret Protection があれば良い。
 >
 > 💰 Generic / Custom / AI detection、Validity checks、private / internal repo の保護には **Secret Protection または従来の GHAS** が必要。**Public monitoring** は GHEC Enterprise 向けの enterprise-wide 機能。
 
-📘 詳細: <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/get-started/learning-about-github/about-github-advanced-security" target="_blank" rel="noopener noreferrer">Advanced Security products ↗</a> / <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Public monitoring ↗</a>
+📘 詳細: <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/get-started/learning-about-github/about-github-advanced-security" target="_blank" rel="noopener noreferrer">Advanced Security products ↗</a> / <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/tutorials/secret-scanning-partner-program" target="_blank" rel="noopener noreferrer">Partner program ↗</a> / <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Public monitoring ↗</a>
 
 ## Public monitoring（NEW）
 
