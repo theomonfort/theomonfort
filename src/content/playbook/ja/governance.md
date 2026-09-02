@@ -114,27 +114,6 @@ flowchart LR
 
 > 🎯 個別設定で消耗しない。ガードレールは org / enterprise から「上から」効かせる。<a class="retro-link" href="https://docs.github.com/en/organizations/managing-organization-settings" target="_blank" rel="noopener noreferrer">Organization policies ↗</a> · <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/enforcing-policies" target="_blank" rel="noopener noreferrer">Enterprise policies ↗</a>
 
-## `.github-private` & source org（NEW）
-
-GitHub は Copilot の統制を **自分たちが所有しレビューする 1 つのリポジトリ** に集約する。ガードレールは **バージョン管理・レビュー・監査** の対象のまま保てる。**Enterprise → AI controls → Agents → Configuration source** で **source organization** を指定すると、その org の `.github-private` リポジトリが、エージェントとクライアントポリシーの唯一の情報源になる。
-
-```text
-.github-private/
-├── agents/                     # エンタープライズ全体に公開する custom agent
-├── .github/agents/             # ステージング — 公開前に検証できる
-└── copilot/
-    ├── managed-settings.json   # エンタープライズの基準値
-    ├── team-mappings.json      # 設定ファイル → enterprise team のスラッグ
-    └── teams/*.json            # チーム単位の特殊化
-```
-
-- 🏢 **選ぶのは org であって repo ではない** — `.github-private` という名前と `copilot/managed-settings.json` というパスは固定
-- 🔒 **repo へのアクセス可否に関わらず**、エンタープライズの Copilot プラン利用者 **全員に適用**
-- 🚀 **エージェントの公開** は `.github/agents/` から `agents/` へファイルを移動するだけ
-- 🛡️ CODEOWNERS と `copilot/**` · `agents/**` を対象にした ruleset で **保護** する
-
-> 🎯 repo を **internal** にすれば、誰でも PR で変更を提案できる。統制を開きつつ、マージの権限は握ったままにできる。
-
 ## Copilot managed settings（NEW）
 
 `copilot/managed-settings.json` が共通のガードレールを定義し、対応クライアントが自動的に適用する。managed の値は開発者のローカル設定を **上書き** する。対象は **Copilot CLI / VS Code / JetBrains / Copilot app / Copilot cloud agent**（キーごとに対応状況は異なる）。
@@ -169,7 +148,28 @@ GitHub は Copilot の統制を **自分たちが所有しレビューする 1 �
 </div>
 </div>
 
-> 🎯 配布は server-managed（このリポジトリ）、**<a class="retro-link" href="https://github.blog/changelog/2026-07-08-deploy-managed-copilot-settings-via-mdm-in-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">MDM ↗</a>**（Intune / Jamf / グループポリシー）、端末上のファイルの 3 通り。優先順位は **MDM → server-managed → ファイル → ユーザー設定**。<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">全キーのリファレンス ↗</a>
+> 🎯 配布は server-managed（次の `.github-private`）、**<a class="retro-link" href="https://github.blog/changelog/2026-07-08-deploy-managed-copilot-settings-via-mdm-in-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">MDM ↗</a>**（Intune / Jamf / グループポリシー）、端末上のファイルの 3 通り。優先順位は **MDM → server-managed → ファイル → ユーザー設定**。<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">全キーのリファレンス ↗</a>
+
+## `.github-private` & source org
+
+GitHub は Copilot の統制を **自分たちが所有しレビューする 1 つのリポジトリ** に集約する。ガードレールは **バージョン管理・レビュー・監査** の対象のまま保てる。**Enterprise → AI controls → Agents → Configuration source** で **source organization** を指定すると、その org の `.github-private` リポジトリが、エージェントとクライアントポリシーの唯一の情報源になる。
+
+```text
+.github-private/
+├── agents/                     # エンタープライズ全体に公開する custom agent
+├── .github/agents/             # ステージング — 公開前に検証できる
+└── copilot/
+    ├── managed-settings.json   # エンタープライズの基準値
+    ├── team-mappings.json      # 設定ファイル → enterprise team のスラッグ
+    └── teams/*.json            # チーム単位の特殊化
+```
+
+- 🏢 **選ぶのは org であって repo ではない** — `.github-private` という名前と `copilot/managed-settings.json` というパスは固定
+- 🔒 **repo へのアクセス可否に関わらず**、エンタープライズの Copilot プラン利用者 **全員に適用**
+- 🚀 **エージェントの公開** は `.github/agents/` から `agents/` へファイルを移動するだけ
+- 🛡️ CODEOWNERS と `copilot/**` · `agents/**` を対象にした ruleset で **保護** する
+
+> 🎯 repo を **internal** にすれば、誰でも PR で変更を提案できる。統制を開きつつ、マージの権限は握ったままにできる。
 
 ## ★ 使いどころ
 

@@ -207,22 +207,194 @@ Rulesets enforce **merge conditions as rules**, a quality gate on your branches.
 
 > 🎯 Stop manual gatekeeping; let rulesets enforce top-down.
 
-## Stacked PRs & agent merge (NEW)
+## Stacked pull requests (NEW) <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/pull-requests/reference/stacked-pull-requests" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-### Stacked pull requests — public preview, 2026-07-30
+An ordered chain where each PR targets the branch of the one below it, so reviewers get one small layer at a time instead of a giant diff. Public preview since **2026-07-30**.
 
-An ordered chain where each PR targets the branch of the one below it, so reviewers get one small layer at a time instead of a giant diff.
+Merging a stack is **one atomic operation**. What lands on `main` depends on the merge method:
+
+<div class="figtabs">
+<input class="figtabs-radio" type="radio" name="stack-merge-method" id="smm-1" checked>
+<input class="figtabs-radio" type="radio" name="stack-merge-method" id="smm-2">
+<input class="figtabs-radio" type="radio" name="stack-merge-method" id="smm-3">
+<div class="figtabs-bar">
+<label class="figtabs-tab" for="smm-1">Create a merge commit</label>
+<label class="figtabs-tab" for="smm-2">Squash and merge</label>
+<label class="figtabs-tab" for="smm-3">Rebase and merge</label>
+</div>
+<div class="figtabs-panel" data-idx="1">
+<svg viewBox="0 0 900 372" role="img" aria-label="Create a merge commit: every branch keeps its own commits, and the whole stack lands on main through a single merge commit" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family:'DotGothic16',monospace;">
+  <defs>
+    <marker id="stk-mc" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
+    </marker>
+  </defs>
+  <rect x="16" y="31" width="118" height="34" rx="4" fill="#a56cff"/><text x="75" y="53" text-anchor="middle" fill="#05060f" font-size="16" font-weight="bold">feat-c</text>
+  <rect x="16" y="121" width="118" height="34" rx="4" fill="#17d8e0"/><text x="75" y="143" text-anchor="middle" fill="#05060f" font-size="16" font-weight="bold">feat-b</text>
+  <rect x="16" y="211" width="118" height="34" rx="4" fill="#2fbf76"/><text x="75" y="233" text-anchor="middle" fill="#05060f" font-size="16" font-weight="bold">feat-a</text>
+  <rect x="16" y="301" width="118" height="34" rx="4" fill="#4ec3ff"/><text x="75" y="323" text-anchor="middle" fill="#05060f" font-size="16" font-weight="bold">main</text>
+  <g font-size="13" font-weight="bold" text-anchor="middle">
+    <rect x="144" y="33" width="124" height="30" rx="4" fill="#131a2b" stroke="#a56cff" stroke-width="2"/><text x="206" y="53" fill="#a56cff">base: feat-b</text>
+    <rect x="144" y="123" width="124" height="30" rx="4" fill="#131a2b" stroke="#17d8e0" stroke-width="2"/><text x="206" y="143" fill="#17d8e0">base: feat-a</text>
+    <rect x="144" y="213" width="124" height="30" rx="4" fill="#131a2b" stroke="#2fbf76" stroke-width="2"/><text x="206" y="233" fill="#2fbf76">base: main</text>
+  </g>
+  <g stroke="#7d8595" stroke-width="2.6" fill="none">
+    <line x1="217" y1="318" x2="752" y2="318" marker-end="url(#stk-mc)"/>
+  </g>
+  <g stroke="#7d8595" stroke-width="2.6" fill="none">
+    <line x1="313" y1="228" x2="326" y2="228" marker-end="url(#stk-mc)"/>
+    <line x1="413" y1="138" x2="426" y2="138" marker-end="url(#stk-mc)"/>
+    <line x1="513" y1="48" x2="526" y2="48" marker-end="url(#stk-mc)"/>
+    <line x1="213" y1="304" x2="287" y2="240" marker-end="url(#stk-mc)"/>
+    <line x1="357" y1="217" x2="390" y2="150" marker-end="url(#stk-mc)"/>
+    <line x1="457" y1="127" x2="490" y2="60" marker-end="url(#stk-mc)"/>
+  </g>
+  <circle cx="300" cy="228" r="13" fill="#2fbf76"/>
+  <circle cx="346" cy="228" r="13" fill="#2fbf76"/>
+  <circle cx="400" cy="138" r="13" fill="#17d8e0"/>
+  <circle cx="446" cy="138" r="13" fill="#17d8e0"/>
+  <circle cx="500" cy="48" r="13" fill="#a56cff"/>
+  <circle cx="546" cy="48" r="13" fill="#a56cff"/>
+  <g stroke="#7d8595" stroke-width="2.6" fill="none">
+    <line x1="557" y1="57" x2="761" y2="303" marker-end="url(#stk-mc)"/>
+  </g>
+  <circle cx="200" cy="318" r="17" fill="#4ec3ff"/>
+  <circle cx="780" cy="318" r="17" fill="#4ec3ff"/>
+  <g font-size="13" font-weight="bold" text-anchor="middle">
+    <text x="780" y="362" fill="#4ec3ff">1 merge commit (PR #1-3)</text>
+  </g>
+</svg>
+<p class="figtabs-cap">Branch commits are kept as-is and the <b>whole stack lands through one merge commit</b>. Fullest history.</p>
+</div>
+<div class="figtabs-panel" data-idx="2">
+<svg viewBox="0 0 900 372" role="img" aria-label="Squash and merge: each pull request collapses into a single commit on main" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family:'DotGothic16',monospace;">
+  <defs>
+    <marker id="stk-sq" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
+    </marker>
+  </defs>
+  <rect x="16" y="31" width="118" height="34" rx="4" fill="#a56cff"/><text x="75" y="53" text-anchor="middle" fill="#05060f" font-size="16" font-weight="bold">feat-c</text>
+  <rect x="16" y="121" width="118" height="34" rx="4" fill="#17d8e0"/><text x="75" y="143" text-anchor="middle" fill="#05060f" font-size="16" font-weight="bold">feat-b</text>
+  <rect x="16" y="211" width="118" height="34" rx="4" fill="#2fbf76"/><text x="75" y="233" text-anchor="middle" fill="#05060f" font-size="16" font-weight="bold">feat-a</text>
+  <rect x="16" y="301" width="118" height="34" rx="4" fill="#4ec3ff"/><text x="75" y="323" text-anchor="middle" fill="#05060f" font-size="16" font-weight="bold">main</text>
+  <g font-size="13" font-weight="bold" text-anchor="middle">
+    <rect x="144" y="33" width="124" height="30" rx="4" fill="#131a2b" stroke="#a56cff" stroke-width="2"/><text x="206" y="53" fill="#a56cff">base: feat-b</text>
+    <rect x="144" y="123" width="124" height="30" rx="4" fill="#131a2b" stroke="#17d8e0" stroke-width="2"/><text x="206" y="143" fill="#17d8e0">base: feat-a</text>
+    <rect x="144" y="213" width="124" height="30" rx="4" fill="#131a2b" stroke="#2fbf76" stroke-width="2"/><text x="206" y="233" fill="#2fbf76">base: main</text>
+  </g>
+  <g stroke="#7d8595" stroke-width="2.6" fill="none">
+    <line x1="217" y1="318" x2="625" y2="318" marker-end="url(#stk-sq)"/>
+    <line x1="675" y1="318" x2="737" y2="318" marker-end="url(#stk-sq)"/>
+    <line x1="787" y1="318" x2="849" y2="318" marker-end="url(#stk-sq)"/>
+  </g>
+  <g stroke="#7d8595" stroke-width="2.6" fill="none">
+    <line x1="313" y1="228" x2="326" y2="228" marker-end="url(#stk-sq)" opacity=".32"/>
+    <line x1="413" y1="138" x2="426" y2="138" marker-end="url(#stk-sq)" opacity=".32"/>
+    <line x1="513" y1="48" x2="526" y2="48" marker-end="url(#stk-sq)" opacity=".32"/>
+    <line x1="213" y1="304" x2="287" y2="240" marker-end="url(#stk-sq)"/>
+    <line x1="357" y1="217" x2="390" y2="150" marker-end="url(#stk-sq)"/>
+    <line x1="457" y1="127" x2="490" y2="60" marker-end="url(#stk-sq)"/>
+  </g>
+  <circle cx="300" cy="228" r="13" fill="#2fbf76" opacity=".32"/>
+  <circle cx="346" cy="228" r="13" fill="#2fbf76" opacity=".32"/>
+  <circle cx="400" cy="138" r="13" fill="#17d8e0" opacity=".32"/>
+  <circle cx="446" cy="138" r="13" fill="#17d8e0" opacity=".32"/>
+  <circle cx="500" cy="48" r="13" fill="#a56cff" opacity=".32"/>
+  <circle cx="546" cy="48" r="13" fill="#a56cff" opacity=".32"/>
+  <g stroke="#7d8595" stroke-width="2.6" fill="none">
+    <line x1="359" y1="232" x2="627" y2="311" marker-end="url(#stk-sq)"/>
+    <line x1="458" y1="145" x2="741" y2="306" marker-end="url(#stk-sq)"/>
+    <line x1="557" y1="57" x2="855" y2="303" marker-end="url(#stk-sq)"/>
+  </g>
+  <circle cx="200" cy="318" r="17" fill="#4ec3ff"/>
+  <rect x="633" y="301" width="34" height="34" rx="4" fill="#2fbf76"/>
+  <rect x="745" y="301" width="34" height="34" rx="4" fill="#17d8e0"/>
+  <rect x="857" y="301" width="34" height="34" rx="4" fill="#a56cff"/>
+  <g font-size="13" font-weight="bold" text-anchor="middle">
+    <text x="650" y="362" fill="#2fbf76">PR #1</text>
+    <text x="762" y="362" fill="#17d8e0">PR #2</text>
+    <text x="874" y="362" fill="#a56cff">PR #3</text>
+  </g>
+</svg>
+<p class="figtabs-cap">Each PR collapses into <b>a single commit</b> on <code>main</code>. Cleanest log, but the individual commits (faded) are lost.</p>
+</div>
+<div class="figtabs-panel" data-idx="3">
+<svg viewBox="0 0 900 372" role="img" aria-label="Rebase and merge: every branch commit is replayed onto main in order, with no merge commit" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family:'DotGothic16',monospace;">
+  <defs>
+    <marker id="stk-rb" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
+    </marker>
+  </defs>
+  <rect x="16" y="31" width="118" height="34" rx="4" fill="#a56cff"/><text x="75" y="53" text-anchor="middle" fill="#05060f" font-size="16" font-weight="bold">feat-c</text>
+  <rect x="16" y="121" width="118" height="34" rx="4" fill="#17d8e0"/><text x="75" y="143" text-anchor="middle" fill="#05060f" font-size="16" font-weight="bold">feat-b</text>
+  <rect x="16" y="211" width="118" height="34" rx="4" fill="#2fbf76"/><text x="75" y="233" text-anchor="middle" fill="#05060f" font-size="16" font-weight="bold">feat-a</text>
+  <rect x="16" y="301" width="118" height="34" rx="4" fill="#4ec3ff"/><text x="75" y="323" text-anchor="middle" fill="#05060f" font-size="16" font-weight="bold">main</text>
+  <g font-size="13" font-weight="bold" text-anchor="middle">
+    <rect x="144" y="33" width="124" height="30" rx="4" fill="#131a2b" stroke="#a56cff" stroke-width="2"/><text x="206" y="53" fill="#a56cff">base: feat-b</text>
+    <rect x="144" y="123" width="124" height="30" rx="4" fill="#131a2b" stroke="#17d8e0" stroke-width="2"/><text x="206" y="143" fill="#17d8e0">base: feat-a</text>
+    <rect x="144" y="213" width="124" height="30" rx="4" fill="#131a2b" stroke="#2fbf76" stroke-width="2"/><text x="206" y="233" fill="#2fbf76">base: main</text>
+  </g>
+  <g stroke="#7d8595" stroke-width="2.6" fill="none">
+    <line x1="217" y1="318" x2="596" y2="318" marker-end="url(#stk-rb)"/>
+    <line x1="663" y1="318" x2="708" y2="318" marker-end="url(#stk-rb)"/>
+    <line x1="775" y1="318" x2="820" y2="318" marker-end="url(#stk-rb)"/>
+  </g>
+  <g stroke="#7d8595" stroke-width="2.6" fill="none">
+    <line x1="313" y1="228" x2="326" y2="228" marker-end="url(#stk-rb)" opacity=".32"/>
+    <line x1="413" y1="138" x2="426" y2="138" marker-end="url(#stk-rb)" opacity=".32"/>
+    <line x1="513" y1="48" x2="526" y2="48" marker-end="url(#stk-rb)" opacity=".32"/>
+    <line x1="213" y1="304" x2="287" y2="240" marker-end="url(#stk-rb)"/>
+    <line x1="357" y1="217" x2="390" y2="150" marker-end="url(#stk-rb)"/>
+    <line x1="457" y1="127" x2="490" y2="60" marker-end="url(#stk-rb)"/>
+  </g>
+  <circle cx="300" cy="228" r="13" fill="#2fbf76" opacity=".32"/>
+  <circle cx="346" cy="228" r="13" fill="#2fbf76" opacity=".32"/>
+  <circle cx="400" cy="138" r="13" fill="#17d8e0" opacity=".32"/>
+  <circle cx="446" cy="138" r="13" fill="#17d8e0" opacity=".32"/>
+  <circle cx="500" cy="48" r="13" fill="#a56cff" opacity=".32"/>
+  <circle cx="546" cy="48" r="13" fill="#a56cff" opacity=".32"/>
+  <g stroke="#7d8595" stroke-width="2.6" fill="none">
+    <line x1="359" y1="232" x2="593" y2="310" marker-end="url(#stk-rb)"/>
+    <line x1="458" y1="146" x2="708" y2="305" marker-end="url(#stk-rb)"/>
+    <line x1="556" y1="57" x2="822" y2="302" marker-end="url(#stk-rb)"/>
+  </g>
+  <circle cx="200" cy="318" r="17" fill="#4ec3ff"/>
+  <g stroke="#7d8595" stroke-width="2.6">
+    <line x1="629" y1="318" x2="637" y2="318"/>
+    <line x1="741" y1="318" x2="749" y2="318"/>
+    <line x1="853" y1="318" x2="861" y2="318"/>
+  </g>
+  <circle cx="616" cy="318" r="13" fill="#2fbf76"/>
+  <circle cx="650" cy="318" r="13" fill="#2fbf76"/>
+  <circle cx="728" cy="318" r="13" fill="#17d8e0"/>
+  <circle cx="762" cy="318" r="13" fill="#17d8e0"/>
+  <circle cx="840" cy="318" r="13" fill="#a56cff"/>
+  <circle cx="874" cy="318" r="13" fill="#a56cff"/>
+  <g font-size="13" font-weight="bold" text-anchor="middle">
+    <text x="633" y="362" fill="#2fbf76">PR #1</text>
+    <text x="745" y="362" fill="#17d8e0">PR #2</text>
+    <text x="857" y="362" fill="#a56cff">PR #3</text>
+  </g>
+</svg>
+<p class="figtabs-cap">Every commit is replayed onto <code>main</code> in order. <b>Linear history, no merge commit.</b> The originals (faded) are rewritten.</p>
+</div>
+</div>
 
 - 🧱 Branch protections and CI run on **every layer**, not just the bottom one
 - 🔄 GitHub **rebases for you** — merge a lower layer and the ones above retarget automatically
 - ☝️ **Merge one, some, or all**: merging the top PR lands the whole stack, always bottom-up
 - 🛠️ github.com, Mobile, REST / GraphQL / webhooks, and `gh extension install github/gh-stack`
 
-### Agent merge — GitHub Copilot app
+## Agent merge (NEW)
 
-Toggle it at the top of a pull request: the workspace's Copilot session reads the PR, fixes what is blocking it (review comments, failing checks, conflicts), then merges as soon as GitHub allows. It runs in the background, survives app restarts, and turns itself off once the PR is merged.
+In the **GitHub Copilot app**, hand a pull request's last mile to the agent: it clears what is blocking the merge, then merges as soon as GitHub allows.
 
-> ⚠️ Neither one bypasses your gates — required approvals and required checks still decide what reaches `main`.
+- 🔀 **Toggle it at the top of a PR** — the workspace's Copilot session picks it up
+- 🩹 **Fixes what blocks it**: review comments, failing checks, conflicts
+- 🌙 **Runs in the background** and survives app restarts
+- ✅ **Turns itself off** once the PR is merged
+
+> ⚠️ It doesn't bypass your gates — required approvals and required checks still decide what reaches `main`.
 
 ## ★ PRs in the AI era
 

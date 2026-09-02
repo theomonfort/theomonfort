@@ -114,27 +114,6 @@ Policies live at the **organization** and **enterprise** levels, not the reposit
 
 > 🎯 Don't tweak repos one by one. Set guardrails top-down at org / enterprise. <a class="retro-link" href="https://docs.github.com/en/organizations/managing-organization-settings" target="_blank" rel="noopener noreferrer">Organization policies ↗</a> · <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/enforcing-policies" target="_blank" rel="noopener noreferrer">Enterprise policies ↗</a>
 
-## `.github-private` & source org (NEW)
-
-GitHub centralizes Copilot governance in **one repository you own and review**, so guardrails stay **versioned, reviewable, and auditable**. You designate a **source organization** in **Enterprise → AI controls → Agents → Configuration source**. Its `.github-private` repository becomes the single source of truth for agents *and* client policy.
-
-```text
-.github-private/
-├── agents/                     # custom agents published enterprise-wide
-├── .github/agents/             # staging — test before you publish
-└── copilot/
-    ├── managed-settings.json   # enterprise baseline
-    ├── team-mappings.json      # settings file → enterprise team slugs
-    └── teams/*.json            # per-team specialization
-```
-
-- 🏢 **You pick the org, not the repo** — the name `.github-private` and the path `copilot/managed-settings.json` are fixed
-- 🔒 **Applies to everyone** on the enterprise's Copilot plan, whether or not they can access the repo
-- 🚀 **Publish an agent** by moving its file from `.github/agents/` to `agents/`
-- 🛡️ **Protect it** with CODEOWNERS and a ruleset targeting `copilot/**` and `agents/**`
-
-> 🎯 Set the repo to **internal** so any member can propose a change by PR — governance stays open to contribution while merge stays controlled.
-
 ## Copilot managed settings (NEW)
 
 `copilot/managed-settings.json` defines one set of guardrails that supported clients enforce automatically, and a managed value **overrides** whatever a developer sets locally. Coverage spans **Copilot CLI, VS Code, JetBrains, the Copilot app, and Copilot cloud agent** — support varies per key.
@@ -169,7 +148,28 @@ GitHub centralizes Copilot governance in **one repository you own and review**, 
 </div>
 </div>
 
-> 🎯 Deploy it server-managed (this repo), via **<a class="retro-link" href="https://github.blog/changelog/2026-07-08-deploy-managed-copilot-settings-via-mdm-in-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">MDM ↗</a>** (Intune, Jamf, Group Policy), or as a device file. Precedence: **MDM → server-managed → file → user settings**. <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">All keys ↗</a>
+> 🎯 Deploy it server-managed (from `.github-private`, next), via **<a class="retro-link" href="https://github.blog/changelog/2026-07-08-deploy-managed-copilot-settings-via-mdm-in-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">MDM ↗</a>** (Intune, Jamf, Group Policy), or as a device file. Precedence: **MDM → server-managed → file → user settings**. <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">All keys ↗</a>
+
+## `.github-private` & source org
+
+GitHub centralizes Copilot governance in **one repository you own and review**, so guardrails stay **versioned, reviewable, and auditable**. You designate a **source organization** in **Enterprise → AI controls → Agents → Configuration source**. Its `.github-private` repository becomes the single source of truth for agents *and* client policy.
+
+```text
+.github-private/
+├── agents/                     # custom agents published enterprise-wide
+├── .github/agents/             # staging — test before you publish
+└── copilot/
+    ├── managed-settings.json   # enterprise baseline
+    ├── team-mappings.json      # settings file → enterprise team slugs
+    └── teams/*.json            # per-team specialization
+```
+
+- 🏢 **You pick the org, not the repo** — the name `.github-private` and the path `copilot/managed-settings.json` are fixed
+- 🔒 **Applies to everyone** on the enterprise's Copilot plan, whether or not they can access the repo
+- 🚀 **Publish an agent** by moving its file from `.github/agents/` to `agents/`
+- 🛡️ **Protect it** with CODEOWNERS and a ruleset targeting `copilot/**` and `agents/**`
+
+> 🎯 Set the repo to **internal** so any member can propose a change by PR — governance stays open to contribution while merge stays controlled.
 
 ## ★ Where it fits
 

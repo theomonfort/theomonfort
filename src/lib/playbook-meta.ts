@@ -25,10 +25,10 @@ export function isNewPlaybookEntry(slug: string): boolean {
 export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'github': [3, 4, 5],
   'usage-based-billing': [8, 9],
-  'governance': [4, 5],
+  'governance': [4],
   'secret-scanning': [7],
   'copilot-metrics': [4],
-  'pull-requests': [6],
+  'pull-requests': [6, 7],
   'custom-agent': [2],
   'agent-skills': [5, 6],
 };
