@@ -147,11 +147,11 @@ GitHub は Copilot の統制を **自分たちが所有しレビューする 1 �
 <p class="spec-what">既定モデルを <b>Auto model selection</b> に固定。開発者が自分でモデルを選ばなくても、常にルーティング済みのモデルから始まる。</p>
 </details>
 <details class="spec-item" name="managed-settings">
-<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🚧</span><span class="spec-key"><code>permissions.*</code></span><a class="spec-since" href="https://github.blog/changelog/2026-06-17-enterprise-managed-settings-now-support-bypass-permission-controls" target="_blank" rel="noopener noreferrer">2026-06-17</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🚧</span><span class="spec-key"><code>permissions.*</code></span><a class="spec-since" href="https://github.blog/changelog/2026-06-17-enterprise-managed-settings-now-support-bypass-permission-controls/" target="_blank" rel="noopener noreferrer">2026-06-17</a><span class="spec-toggle" aria-hidden="true"></span></summary>
 <p class="spec-what"><b>バイパス / YOLO モード</b>を禁止し、危険な操作を拒否または承認必須にする。</p>
 </details>
 <details class="spec-item" name="managed-settings">
-<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧩</span><span class="spec-key"><code>enabledPlugins</code> · marketplace 系</span><a class="spec-since" href="https://github.blog/changelog/2026-08-26-enterprise-managed-settings-now-support-autoupdate-for-plugin-marketplaces" target="_blank" rel="noopener noreferrer">2026-08-26</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧩</span><span class="spec-key"><code>enabledPlugins</code> · marketplace 系</span><a class="spec-since" href="https://github.blog/changelog/2026-08-26-enterprise-managed-settings-now-support-autoupdate-for-plugin-marketplaces/" target="_blank" rel="noopener noreferrer">2026-08-26</a><span class="spec-toggle" aria-hidden="true"></span></summary>
 <p class="spec-what">動かしてよいプラグインと、その提供元 marketplace を承認制に。<b>autoUpdate</b> で最新に保てる。</p>
 </details>
 <details class="spec-item" name="managed-settings">
