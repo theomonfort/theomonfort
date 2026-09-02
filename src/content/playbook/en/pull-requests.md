@@ -263,9 +263,9 @@ How the stack lands on `main` depends on the merge method you pick:
     <line x1="557" y1="57" x2="855" y2="303" marker-end="url(#stk-mc)"/>
   </g>
   <circle cx="200" cy="318" r="17" fill="#4ec3ff"/>
-  <circle cx="650" cy="318" r="17" fill="#2fbf76"/><circle cx="650" cy="318" r="21" fill="none" stroke="#ffb000" stroke-width="2.4"/>
-  <circle cx="762" cy="318" r="17" fill="#17d8e0"/><circle cx="762" cy="318" r="21" fill="none" stroke="#ffb000" stroke-width="2.4"/>
-  <circle cx="874" cy="318" r="17" fill="#a56cff"/><circle cx="874" cy="318" r="21" fill="none" stroke="#ffb000" stroke-width="2.4"/>
+  <circle cx="650" cy="318" r="17" fill="#2fbf76"/>
+  <circle cx="762" cy="318" r="17" fill="#17d8e0"/>
+  <circle cx="874" cy="318" r="17" fill="#a56cff"/>
   <g font-size="13" font-weight="bold" text-anchor="middle">
     <text x="650" y="362" fill="#2fbf76">PR #1</text>
     <text x="762" y="362" fill="#17d8e0">PR #2</text>
@@ -296,19 +296,19 @@ How the stack lands on `main` depends on the merge method you pick:
     <line x1="787" y1="318" x2="849" y2="318" marker-end="url(#stk-sq)"/>
   </g>
   <g stroke="#7d8595" stroke-width="2.6" fill="none">
-    <line x1="313" y1="228" x2="326" y2="228" marker-end="url(#stk-sq)"/>
-    <line x1="413" y1="138" x2="426" y2="138" marker-end="url(#stk-sq)"/>
-    <line x1="513" y1="48" x2="526" y2="48" marker-end="url(#stk-sq)"/>
+    <line x1="313" y1="228" x2="326" y2="228" marker-end="url(#stk-sq)" opacity=".32"/>
+    <line x1="413" y1="138" x2="426" y2="138" marker-end="url(#stk-sq)" opacity=".32"/>
+    <line x1="513" y1="48" x2="526" y2="48" marker-end="url(#stk-sq)" opacity=".32"/>
     <line x1="213" y1="304" x2="287" y2="240" marker-end="url(#stk-sq)"/>
     <line x1="357" y1="217" x2="390" y2="150" marker-end="url(#stk-sq)"/>
     <line x1="457" y1="127" x2="490" y2="60" marker-end="url(#stk-sq)"/>
   </g>
-  <circle cx="300" cy="228" r="13" fill="#2fbf76"/>
-  <circle cx="346" cy="228" r="13" fill="#2fbf76"/>
-  <circle cx="400" cy="138" r="13" fill="#17d8e0"/>
-  <circle cx="446" cy="138" r="13" fill="#17d8e0"/>
-  <circle cx="500" cy="48" r="13" fill="#a56cff"/>
-  <circle cx="546" cy="48" r="13" fill="#a56cff"/>
+  <circle cx="300" cy="228" r="13" fill="#2fbf76" opacity=".32"/>
+  <circle cx="346" cy="228" r="13" fill="#2fbf76" opacity=".32"/>
+  <circle cx="400" cy="138" r="13" fill="#17d8e0" opacity=".32"/>
+  <circle cx="446" cy="138" r="13" fill="#17d8e0" opacity=".32"/>
+  <circle cx="500" cy="48" r="13" fill="#a56cff" opacity=".32"/>
+  <circle cx="546" cy="48" r="13" fill="#a56cff" opacity=".32"/>
   <g stroke="#7d8595" stroke-width="2.6" fill="none">
     <line x1="359" y1="232" x2="627" y2="311" marker-end="url(#stk-sq)"/>
     <line x1="458" y1="145" x2="741" y2="306" marker-end="url(#stk-sq)"/>
@@ -324,7 +324,7 @@ How the stack lands on `main` depends on the merge method you pick:
     <text x="874" y="362" fill="#a56cff">PR #3</text>
   </g>
 </svg>
-<p class="figtabs-cap">Each PR collapses into <b>a single commit</b> on <code>main</code>. Cleanest log, individual commits are lost.</p>
+<p class="figtabs-cap">Each PR collapses into <b>a single commit</b> on <code>main</code>. Cleanest log, but the individual commits (faded) are lost.</p>
 </div>
 <div class="figtabs-panel" data-idx="3">
 <svg viewBox="0 0 900 372" role="img" aria-label="Rebase and merge: every branch commit is replayed onto main in order, with no merge commit" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family:'DotGothic16',monospace;">
@@ -348,19 +348,19 @@ How the stack lands on `main` depends on the merge method you pick:
     <line x1="775" y1="318" x2="820" y2="318" marker-end="url(#stk-rb)"/>
   </g>
   <g stroke="#7d8595" stroke-width="2.6" fill="none">
-    <line x1="313" y1="228" x2="326" y2="228" marker-end="url(#stk-rb)"/>
-    <line x1="413" y1="138" x2="426" y2="138" marker-end="url(#stk-rb)"/>
-    <line x1="513" y1="48" x2="526" y2="48" marker-end="url(#stk-rb)"/>
+    <line x1="313" y1="228" x2="326" y2="228" marker-end="url(#stk-rb)" opacity=".32"/>
+    <line x1="413" y1="138" x2="426" y2="138" marker-end="url(#stk-rb)" opacity=".32"/>
+    <line x1="513" y1="48" x2="526" y2="48" marker-end="url(#stk-rb)" opacity=".32"/>
     <line x1="213" y1="304" x2="287" y2="240" marker-end="url(#stk-rb)"/>
     <line x1="357" y1="217" x2="390" y2="150" marker-end="url(#stk-rb)"/>
     <line x1="457" y1="127" x2="490" y2="60" marker-end="url(#stk-rb)"/>
   </g>
-  <circle cx="300" cy="228" r="13" fill="#2fbf76"/>
-  <circle cx="346" cy="228" r="13" fill="#2fbf76"/>
-  <circle cx="400" cy="138" r="13" fill="#17d8e0"/>
-  <circle cx="446" cy="138" r="13" fill="#17d8e0"/>
-  <circle cx="500" cy="48" r="13" fill="#a56cff"/>
-  <circle cx="546" cy="48" r="13" fill="#a56cff"/>
+  <circle cx="300" cy="228" r="13" fill="#2fbf76" opacity=".32"/>
+  <circle cx="346" cy="228" r="13" fill="#2fbf76" opacity=".32"/>
+  <circle cx="400" cy="138" r="13" fill="#17d8e0" opacity=".32"/>
+  <circle cx="446" cy="138" r="13" fill="#17d8e0" opacity=".32"/>
+  <circle cx="500" cy="48" r="13" fill="#a56cff" opacity=".32"/>
+  <circle cx="546" cy="48" r="13" fill="#a56cff" opacity=".32"/>
   <g stroke="#7d8595" stroke-width="2.6" fill="none">
     <line x1="359" y1="232" x2="593" y2="310" marker-end="url(#stk-rb)"/>
     <line x1="458" y1="146" x2="708" y2="305" marker-end="url(#stk-rb)"/>
@@ -384,7 +384,7 @@ How the stack lands on `main` depends on the merge method you pick:
     <text x="857" y="362" fill="#a56cff">PR #3</text>
   </g>
 </svg>
-<p class="figtabs-cap">Every commit is replayed onto <code>main</code> in order. <b>Linear history, no merge commit.</b></p>
+<p class="figtabs-cap">Every commit is replayed onto <code>main</code> in order. <b>Linear history, no merge commit.</b> The originals (faded) are rewritten.</p>
 </div>
 </div>
 
