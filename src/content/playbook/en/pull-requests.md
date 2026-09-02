@@ -207,22 +207,57 @@ Rulesets enforce **merge conditions as rules**, a quality gate on your branches.
 
 > 🎯 Stop manual gatekeeping; let rulesets enforce top-down.
 
-## Stacked PRs & agent merge (NEW)
+## Stacked pull requests (NEW)
 
-### Stacked pull requests — public preview, 2026-07-30
+An ordered chain where each PR targets the branch of the one below it, so reviewers get one small layer at a time instead of a giant diff. Public preview since **2026-07-30**.
 
-An ordered chain where each PR targets the branch of the one below it, so reviewers get one small layer at a time instead of a giant diff.
+<svg viewBox="0 0 780 330" role="img" aria-label="Stacked pull requests: feat-a branches off main and targets it, feat-b branches off feat-a and targets it, feat-c branches off feat-b and targets it, so the stack merges bottom-up" style="width:100%;height:auto;max-width:760px;display:block;margin:1.4em auto;font-family:'DotGothic16',monospace;">
+  <defs>
+    <marker id="stack-arrow" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
+    </marker>
+  </defs>
+  <rect x="16" y="31" width="118" height="34" rx="7" fill="#a56cff"/><text x="75" y="53" text-anchor="middle" fill="#05060f" font-size="16" font-weight="bold">feat-c</text>
+  <rect x="16" y="121" width="118" height="34" rx="7" fill="#17d8e0"/><text x="75" y="143" text-anchor="middle" fill="#05060f" font-size="16" font-weight="bold">feat-b</text>
+  <rect x="16" y="211" width="118" height="34" rx="7" fill="#2fbf76"/><text x="75" y="233" text-anchor="middle" fill="#05060f" font-size="16" font-weight="bold">feat-a</text>
+  <rect x="16" y="301" width="118" height="34" rx="7" fill="#4ec3ff"/><text x="75" y="323" text-anchor="middle" fill="#05060f" font-size="16" font-weight="bold">main</text>
+  <g stroke="#7d8595" stroke-width="2.6" fill="none">
+    <line x1="208" y1="318" x2="681" y2="318" marker-end="url(#stack-arrow)"/>
+    <line x1="203" y1="304" x2="250" y2="245" marker-end="url(#stack-arrow)"/>
+    <line x1="288" y1="228" x2="322" y2="228" marker-end="url(#stack-arrow)"/>
+    <line x1="355" y1="214" x2="390" y2="155" marker-end="url(#stack-arrow)"/>
+    <line x1="428" y1="138" x2="462" y2="138" marker-end="url(#stack-arrow)"/>
+    <line x1="495" y1="124" x2="531" y2="65" marker-end="url(#stack-arrow)"/>
+  </g>
+  <circle cx="190" cy="318" r="18" fill="#4ec3ff"/>
+  <circle cx="700" cy="318" r="18" fill="#4ec3ff"/>
+  <circle cx="270" cy="228" r="18" fill="#2fbf76"/>
+  <circle cx="340" cy="228" r="18" fill="#2fbf76"/>
+  <circle cx="410" cy="138" r="18" fill="#17d8e0"/>
+  <circle cx="480" cy="138" r="18" fill="#17d8e0"/>
+  <circle cx="550" cy="48" r="18" fill="#a56cff"/>
+  <g font-size="14" font-weight="bold" text-anchor="middle">
+    <rect x="580" y="32" width="178" height="32" rx="6" fill="#131a2b" stroke="#a56cff" stroke-width="2"/><text x="669" y="53" fill="#a56cff">PR #3 · base: feat-b</text>
+    <rect x="510" y="122" width="178" height="32" rx="6" fill="#131a2b" stroke="#17d8e0" stroke-width="2"/><text x="599" y="143" fill="#17d8e0">PR #2 · base: feat-a</text>
+    <rect x="370" y="212" width="178" height="32" rx="6" fill="#131a2b" stroke="#2fbf76" stroke-width="2"/><text x="459" y="233" fill="#2fbf76">PR #1 · base: main</text>
+  </g>
+</svg>
 
 - 🧱 Branch protections and CI run on **every layer**, not just the bottom one
 - 🔄 GitHub **rebases for you** — merge a lower layer and the ones above retarget automatically
 - ☝️ **Merge one, some, or all**: merging the top PR lands the whole stack, always bottom-up
 - 🛠️ github.com, Mobile, REST / GraphQL / webhooks, and `gh extension install github/gh-stack`
 
-### Agent merge — GitHub Copilot app
+## Agent merge (NEW)
 
-Toggle it at the top of a pull request: the workspace's Copilot session reads the PR, fixes what is blocking it (review comments, failing checks, conflicts), then merges as soon as GitHub allows. It runs in the background, survives app restarts, and turns itself off once the PR is merged.
+In the **GitHub Copilot app**, hand a pull request's last mile to the agent: it clears what is blocking the merge, then merges as soon as GitHub allows.
 
-> ⚠️ Neither one bypasses your gates — required approvals and required checks still decide what reaches `main`.
+- 🔀 **Toggle it at the top of a PR** — the workspace's Copilot session picks it up
+- 🩹 **Fixes what blocks it**: review comments, failing checks, conflicts
+- 🌙 **Runs in the background** and survives app restarts
+- ✅ **Turns itself off** once the PR is merged
+
+> ⚠️ It doesn't bypass your gates — required approvals and required checks still decide what reaches `main`.
 
 ## ★ PRs in the AI era
 
