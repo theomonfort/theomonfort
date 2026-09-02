@@ -27,7 +27,7 @@ links:
 
 ## 一言で
 
-<div class="hero-quote">
+<div class="hero-quote hero-quote-team">
   <p>
     日々の開発フローの外にも、GitHub には <strong>運用や規模拡大を助ける道具</strong> がそろっている。
   </p>

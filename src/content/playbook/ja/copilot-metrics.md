@@ -39,7 +39,7 @@ links:
 
 ## 一言で
 
-<div class="hero-quote hero-quote-green">
+<div class="hero-quote hero-quote-team">
   <p>
     <strong>Copilot Metrics</strong> は、製品テレメトリと Pull Request の活動を導入状況と開発効果のストーリーに変える。
   </p>

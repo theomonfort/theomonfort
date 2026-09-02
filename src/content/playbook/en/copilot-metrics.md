@@ -39,7 +39,7 @@ links:
 
 ## In a nutshell
 
-<div class="hero-quote hero-quote-green">
+<div class="hero-quote hero-quote-team">
   <p>
     <strong>Copilot Metrics</strong> turns product telemetry and pull request activity into an adoption and delivery story.
   </p>
