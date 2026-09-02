@@ -1083,6 +1083,31 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
   .prose-akq h2 { font-size: 2.2em; line-height: 1.25; }
   .prose-akq h3 { color: var(--entry-accent, #ff2e88); font-size: 1.4em; }
+  /* Compact reference link sitting to the right of a section title. */
+  .prose-akq h2 .h2-doc {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    vertical-align: middle;
+    margin-left: 0.75rem;
+    padding: 0.25em 0.6em;
+    font-size: 0.36em;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    color: currentColor;
+    border: 1px solid currentColor;
+    text-decoration: none;
+    opacity: 0.55;
+    transition: opacity 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  }
+  .prose-akq h2 .h2-doc:hover,
+  .prose-akq h2 .h2-doc:focus-visible {
+    color: currentColor;
+    opacity: 1;
+    box-shadow: 0 0 8px currentColor;
+    transform: translateY(-1px);
+  }
   .prose-akq p { margin: 1em 0; }
   .prose-akq strong { color: #ffb000; }
   .prose-akq code {

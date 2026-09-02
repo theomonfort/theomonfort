@@ -207,7 +207,7 @@ Ruleset は、ブランチへのマージ条件を **ルールとして強制** 
 
 > 🎯 個別の手運用をやめ、Ruleset で「上から一括」ゲート。
 
-## Stacked pull requests（NEW）
+## Stacked pull requests（NEW） <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/pull-requests/reference/stacked-pull-requests" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 各 PR が 1 つ下の PR のブランチを base にする、順序付きのチェーン。レビュアーは巨大な差分ではなく、小さなレイヤーを 1 枚ずつ見ればよくなる。public preview は **2026-07-30** から。
 

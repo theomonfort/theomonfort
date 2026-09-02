@@ -207,7 +207,7 @@ Rulesets enforce **merge conditions as rules**, a quality gate on your branches.
 
 > 🎯 Stop manual gatekeeping; let rulesets enforce top-down.
 
-## Stacked pull requests (NEW)
+## Stacked pull requests (NEW) <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/pull-requests/reference/stacked-pull-requests" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 An ordered chain where each PR targets the branch of the one below it, so reviewers get one small layer at a time instead of a giant diff. Public preview since **2026-07-30**.
 
