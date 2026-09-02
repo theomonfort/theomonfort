@@ -211,7 +211,7 @@ Ruleset は、ブランチへのマージ条件を **ルールとして強制** 
 
 各 PR が 1 つ下の PR のブランチを base にする、順序付きのチェーン。レビュアーは巨大な差分ではなく、小さなレイヤーを 1 枚ずつ見ればよくなる。public preview は **2026-07-30** から。
 
-スタックが `main` に入る形は、選んだマージ方法で変わる:
+スタックのマージは**不可分な 1 回の操作**。`main` に何が入るかはマージ方法で変わる:
 
 <div class="figtabs">
 <input class="figtabs-radio" type="radio" name="stack-merge-method" id="smm-1" checked>
@@ -223,7 +223,7 @@ Ruleset は、ブランチへのマージ条件を **ルールとして強制** 
 <label class="figtabs-tab" for="smm-3">リベースしてマージ</label>
 </div>
 <div class="figtabs-panel" data-idx="1">
-<svg viewBox="0 0 900 372" role="img" aria-label="マージコミットを作成: 各ブランチのコミットはそのまま残り、main には PR ごとにマージコミットが 1 つ増える" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family:'DotGothic16',monospace;">
+<svg viewBox="0 0 900 372" role="img" aria-label="マージコミットを作成: 各ブランチのコミットはそのまま残り、スタック全体が 1 つのマージコミットで main に入る" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family:'DotGothic16',monospace;">
   <defs>
     <marker id="stk-mc" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
@@ -239,9 +239,7 @@ Ruleset は、ブランチへのマージ条件を **ルールとして強制** 
     <rect x="144" y="213" width="124" height="30" rx="4" fill="#131a2b" stroke="#2fbf76" stroke-width="2"/><text x="206" y="233" fill="#2fbf76">base: main</text>
   </g>
   <g stroke="#7d8595" stroke-width="2.6" fill="none">
-    <line x1="217" y1="318" x2="622" y2="318" marker-end="url(#stk-mc)"/>
-    <line x1="678" y1="318" x2="734" y2="318" marker-end="url(#stk-mc)"/>
-    <line x1="790" y1="318" x2="846" y2="318" marker-end="url(#stk-mc)"/>
+    <line x1="217" y1="318" x2="752" y2="318" marker-end="url(#stk-mc)"/>
   </g>
   <g stroke="#7d8595" stroke-width="2.6" fill="none">
     <line x1="313" y1="228" x2="326" y2="228" marker-end="url(#stk-mc)"/>
@@ -258,21 +256,15 @@ Ruleset は、ブランチへのマージ条件を **ルールとして強制** 
   <circle cx="500" cy="48" r="13" fill="#a56cff"/>
   <circle cx="546" cy="48" r="13" fill="#a56cff"/>
   <g stroke="#7d8595" stroke-width="2.6" fill="none">
-    <line x1="359" y1="232" x2="627" y2="311" marker-end="url(#stk-mc)"/>
-    <line x1="458" y1="145" x2="741" y2="306" marker-end="url(#stk-mc)"/>
-    <line x1="557" y1="57" x2="855" y2="303" marker-end="url(#stk-mc)"/>
+    <line x1="557" y1="57" x2="761" y2="303" marker-end="url(#stk-mc)"/>
   </g>
   <circle cx="200" cy="318" r="17" fill="#4ec3ff"/>
-  <circle cx="650" cy="318" r="17" fill="#2fbf76"/>
-  <circle cx="762" cy="318" r="17" fill="#17d8e0"/>
-  <circle cx="874" cy="318" r="17" fill="#a56cff"/>
+  <circle cx="780" cy="318" r="17" fill="#4ec3ff"/>
   <g font-size="13" font-weight="bold" text-anchor="middle">
-    <text x="650" y="362" fill="#2fbf76">PR #1</text>
-    <text x="762" y="362" fill="#17d8e0">PR #2</text>
-    <text x="874" y="362" fill="#a56cff">PR #3</text>
+    <text x="780" y="362" fill="#4ec3ff">マージコミット 1 つ (PR #1-3)</text>
   </g>
 </svg>
-<p class="figtabs-cap">ブランチのコミットはそのまま残り、<code>main</code> に <b>PR ごとのマージコミットが 1 つ</b>増える。履歴は最も詳しい。</p>
+<p class="figtabs-cap">ブランチのコミットはそのまま残り、<b>スタック全体が 1 つのマージコミット</b>で入る。履歴は最も詳しい。</p>
 </div>
 <div class="figtabs-panel" data-idx="2">
 <svg viewBox="0 0 900 372" role="img" aria-label="スカッシュしてマージ: 各 PR は main 上で 1 つのコミットにまとまる" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family:'DotGothic16',monospace;">
