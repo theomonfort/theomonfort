@@ -2850,4 +2850,181 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     .prose-akq .risk-item::details-content { transition: none; }
     .prose-akq .risk-toggle { transition: none; }
   }
+
+  /* ─────────────────────────────────────────────────────────────
+     Spec reveal — key / since accordion
+     A collapsed row shows only the setting key and its ship date,
+     and the date itself is the link to that changelog entry. What
+     the key controls is revealed on demand, so a long reference
+     table stays slide-sized. Native <details name> gives exclusive
+     open with no JS, so it behaves the same in document mode and
+     in presentation mode.
+     ───────────────────────────────────────────────────────────── */
+  .prose-akq .spec-widget { margin: 1.2em 0; }
+  .prose-akq .spec-hint {
+    margin: 0 0 0.5em;
+    font-family: 'VT323', monospace;
+    font-size: 1.05em;
+    letter-spacing: 0.12em;
+    color: #ffb000;
+    text-shadow: 0 0 8px rgba(255, 176, 0, 0.5);
+  }
+  .prose-akq .spec-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1em;
+  }
+  .prose-akq .spec-item {
+    position: relative;
+    min-width: 0;
+    border: 1px dashed rgba(0, 240, 255, 0.3);
+    background: rgba(10, 14, 39, 0.55);
+  }
+  .prose-akq .spec-item[open] {
+    border: 2px solid var(--entry-accent, #00f0ff);
+    background: color-mix(in srgb, var(--entry-accent, #00f0ff) 8%, transparent);
+    box-shadow:
+      0 0 8px var(--entry-accent, #00f0ff),
+      0 0 24px color-mix(in srgb, var(--entry-accent, #00f0ff) 30%, transparent);
+  }
+  .prose-akq .spec-item[open]::before,
+  .prose-akq .spec-item[open]::after {
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border: 2px solid #ffb000;
+    pointer-events: none;
+  }
+  .prose-akq .spec-item[open]::before {
+    top: -2px;
+    left: -2px;
+    border-right: none;
+    border-bottom: none;
+  }
+  .prose-akq .spec-item[open]::after {
+    right: -2px;
+    bottom: -2px;
+    border-top: none;
+    border-left: none;
+  }
+  .prose-akq .spec-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.55em;
+    padding: 0.2em 0.5em;
+    font-size: 0.95em;
+    line-height: 1.4;
+    color: #e8f4ff;
+    cursor: pointer;
+    list-style: none;
+    transition: background 0.15s ease;
+  }
+  .prose-akq .spec-btn::-webkit-details-marker { display: none; }
+  .prose-akq .spec-btn:hover { background: rgba(0, 240, 255, 0.08); }
+  .prose-akq .spec-btn:focus-visible { outline: 2px solid #ffb000; outline-offset: 2px; }
+  .prose-akq .spec-icon { flex: none; font-size: 1em; line-height: 1; }
+  .prose-akq .spec-key {
+    display: flex;
+    flex: 0 1 auto;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.3em;
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+  .prose-akq .spec-key code { font-size: 0.86em; }
+  .prose-akq .spec-since {
+    flex: none;
+    margin-left: auto;
+    font-family: 'VT323', monospace;
+    font-size: 1.1em;
+    line-height: 1;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    color: #ffb000;
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(255, 176, 0, 0.55);
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+  .prose-akq .spec-since::after { content: ' ↗'; }
+  .prose-akq .spec-since:hover,
+  .prose-akq .spec-since:focus-visible {
+    color: #05060f;
+    background: #ffb000;
+    border-bottom-color: #ffb000;
+    box-shadow: 0 0 8px rgba(255, 176, 0, 0.6);
+  }
+  .prose-akq .spec-toggle {
+    flex: none;
+    font-family: 'VT323', monospace;
+    font-size: 1.45em;
+    line-height: 1;
+    color: #ffb000;
+    transition: transform 0.2s ease, color 0.15s ease;
+  }
+  .prose-akq .spec-toggle::before { content: '+'; }
+  .prose-akq .spec-item[open] .spec-toggle {
+    color: var(--entry-accent, #00f0ff);
+    transform: rotate(45deg);
+  }
+  .prose-akq .spec-what {
+    margin: 0 0.6em;
+    padding: 0.45em 0.6em 0.55em 2.15em;
+    border-top: 1px dashed color-mix(in srgb, var(--entry-accent, #00f0ff) 35%, transparent);
+    font-size: 0.88em;
+    line-height: 1.6;
+    color: rgba(232, 244, 255, 0.88);
+  }
+  .prose-akq .spec-what b,
+  .prose-akq .spec-what strong { color: #ffb000; font-weight: normal; }
+  .prose-akq .spec-item[open] .spec-what::after {
+    content: '▊';
+    margin-left: 0.15em;
+    color: #ffb000;
+    animation: akq-risk-blink 1s steps(1) infinite;
+  }
+  /* Narrow screens: an explicit 2-row grid so the key keeps a full-width
+     column and the date sits under it, instead of flex-wrapping every
+     child onto its own line. */
+  @media (max-width: 640px) {
+    .prose-akq .spec-btn {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      grid-template-areas:
+        "icon key toggle"
+        "icon since toggle";
+      align-items: center;
+      column-gap: 0.5em;
+      row-gap: 0.1em;
+      font-size: 0.85em;
+    }
+    .prose-akq .spec-icon { grid-area: icon; align-self: start; }
+    .prose-akq .spec-key { grid-area: key; }
+    .prose-akq .spec-since {
+      grid-area: since;
+      justify-self: start;
+      margin-left: 0;
+    }
+    .prose-akq .spec-toggle { grid-area: toggle; align-self: start; }
+    .prose-akq .spec-what { padding-left: 1.6em; }
+  }
+  @supports (interpolate-size: allow-keywords) {
+    .prose-akq .spec-widget { interpolate-size: allow-keywords; }
+    .prose-akq .spec-item::details-content {
+      block-size: 0;
+      overflow: hidden;
+      content-visibility: hidden;
+      transition: block-size 0.28s ease, content-visibility 0.28s allow-discrete;
+    }
+    .prose-akq .spec-item[open]::details-content {
+      block-size: auto;
+      content-visibility: visible;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .prose-akq .spec-item[open] .spec-what::after { animation: none; }
+    .prose-akq .spec-item::details-content { transition: none; }
+    .prose-akq .spec-toggle { transition: none; }
+  }
 </style>

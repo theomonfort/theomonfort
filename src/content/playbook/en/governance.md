@@ -27,14 +27,23 @@ links:
     label: Configuring enterprise managed settings
     url: https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-agents/configure-enterprise-managed-settings
   - group: 📖 Official docs
+    label: Enterprise managed settings reference (all keys)
+    url: https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings
+  - group: 📖 Official docs
     label: About Copilot auto model selection
     url: https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/auto-model-selection
+  - group: 📰 Announcement
+    label: "managed-settings.json is generally available (2026-07-01)"
+    url: https://github.blog/changelog/2026-07-01-enterprise-managed-settings-json-is-generally-available/
   - group: 📰 Announcement
     label: "Enterprises can default to auto model selection (2026-07-01)"
     url: https://github.blog/changelog/2026-07-01-enterprises-can-default-to-auto-model-selection/
   - group: 📰 Announcement
     label: "Enterprise managed settings now apply to the GitHub Copilot app (2026-07-27)"
     url: https://github.blog/changelog/2026-07-27-enterprise-managed-settings-now-apply-to-the-github-copilot-app/
+  - group: 📰 Announcement
+    label: "Enterprise managed settings in GitHub Copilot for JetBrains (2026-08-18)"
+    url: https://github.blog/changelog/2026-08-18-enterprise-managed-settings-in-github-copilot-for-jetbrains/
 ---
 
 
@@ -130,22 +139,37 @@ GitHub centralizes Copilot governance in **one repository you own and review**, 
 
 `copilot/managed-settings.json` defines one set of guardrails that supported clients enforce automatically, and a managed value **overrides** whatever a developer sets locally. Coverage spans **Copilot CLI, VS Code, JetBrains, the Copilot app, and Copilot cloud agent** — support varies per key.
 
-| Key | Controls | Since |
-| --- | --- | --- |
-| `model` | Auto model selection as the default | 2026-07-01 |
-| `permissions.*` | Block bypass / YOLO mode, deny or gate sensitive operations | 2026-06-17 |
-| `enabledPlugins` · marketplaces | Approved plugins and sources, with `autoUpdate` | 2026-08-26 |
-| `allowedMcpServers` · `deniedMcpServers` | MCP allowlist — fail-closed, matched by URL or command | 2026-08-06 |
-| `telemetry` | OpenTelemetry export to your own collector | 2026-07-08 |
-| `teams/` + `team-mappings.json` | Per-team specialization of `overridable` keys | 2026-08-03 |
+<div class="spec-widget">
+<p class="spec-hint">▸ + reveals what the key controls · the date opens its changelog</p>
+<div class="spec-list">
+<details class="spec-item" name="managed-settings">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧠</span><span class="spec-key"><code>model</code></span><a class="spec-since" href="https://github.blog/changelog/2026-07-01-enterprises-can-default-to-auto-model-selection/" target="_blank" rel="noopener noreferrer">2026-07-01</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">Make <b>auto model selection</b> the default, so everyone starts on the routed model instead of picking one by hand.</p>
+</details>
+<details class="spec-item" name="managed-settings">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🚧</span><span class="spec-key"><code>permissions.*</code></span><a class="spec-since" href="https://github.blog/changelog/2026-06-17-enterprise-managed-settings-now-support-bypass-permission-controls" target="_blank" rel="noopener noreferrer">2026-06-17</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">Block <b>bypass / YOLO mode</b>, and deny or gate sensitive operations behind an explicit approval.</p>
+</details>
+<details class="spec-item" name="managed-settings">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧩</span><span class="spec-key"><code>enabledPlugins</code> · marketplaces</span><a class="spec-since" href="https://github.blog/changelog/2026-08-26-enterprise-managed-settings-now-support-autoupdate-for-plugin-marketplaces" target="_blank" rel="noopener noreferrer">2026-08-26</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">Approve which plugins run and which marketplaces they come from, and keep them current with <b>autoUpdate</b>.</p>
+</details>
+<details class="spec-item" name="managed-settings">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔌</span><span class="spec-key"><code>allowedMcpServers</code> · <code>deniedMcpServers</code></span><a class="spec-since" href="https://github.blog/changelog/2026-08-06-mcp-allowlists-in-enterprise-managed-settings/" target="_blank" rel="noopener noreferrer">2026-08-06</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">MCP allowlist matched by URL or command. <b>Fail-closed</b>: anything that isn't on the list doesn't run.</p>
+</details>
+<details class="spec-item" name="managed-settings">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📡</span><span class="spec-key"><code>telemetry</code></span><a class="spec-since" href="https://github.blog/changelog/2026-07-08-enterprise-managed-opentelemetry-export-for-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">2026-07-08</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what"><b>OpenTelemetry</b> export to your own collector, so usage lands in the observability stack you already run.</p>
+</details>
+<details class="spec-item" name="managed-settings">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">👥</span><span class="spec-key"><code>teams/</code> + <code>team-mappings.json</code></span><a class="spec-since" href="https://github.blog/changelog/2026-08-03-enterprise-team-specialization-for-managed-settings/" target="_blank" rel="noopener noreferrer">2026-08-03</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">Per-team specialization of the keys you marked <b>overridable</b>: one baseline, plus a variation per enterprise team.</p>
+</details>
+</div>
+</div>
 
-Deploy it server-managed (this repo), through **MDM** (Intune, Jamf, Group Policy), or as a device file. Precedence: **MDM → server-managed → file → user settings**.
-
-### Learn more
-
-- 📖 <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">Settings reference (all keys) ↗</a> · <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-agents/configure-enterprise-managed-settings" target="_blank" rel="noopener noreferrer">Configuration guide ↗</a>
-- 📰 <a class="retro-link" href="https://github.blog/changelog/2026-07-01-enterprise-managed-settings-json-is-generally-available/" target="_blank" rel="noopener noreferrer">GA (2026-07-01) ↗</a> · <a class="retro-link" href="https://github.blog/changelog/2026-07-08-deploy-managed-copilot-settings-via-mdm-in-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">MDM (2026-07-08) ↗</a> · <a class="retro-link" href="https://github.blog/changelog/2026-07-08-enterprise-managed-opentelemetry-export-for-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">OpenTelemetry (2026-07-08) ↗</a>
-- 📰 <a class="retro-link" href="https://github.blog/changelog/2026-08-03-enterprise-team-specialization-for-managed-settings/" target="_blank" rel="noopener noreferrer">Team specialization (2026-08-03) ↗</a> · <a class="retro-link" href="https://github.blog/changelog/2026-08-06-mcp-allowlists-in-enterprise-managed-settings/" target="_blank" rel="noopener noreferrer">MCP allowlists (2026-08-06) ↗</a> · <a class="retro-link" href="https://github.blog/changelog/2026-08-18-enterprise-managed-settings-in-github-copilot-for-jetbrains/" target="_blank" rel="noopener noreferrer">JetBrains (2026-08-18) ↗</a>
+> 🎯 Deploy it server-managed (this repo), via **<a class="retro-link" href="https://github.blog/changelog/2026-07-08-deploy-managed-copilot-settings-via-mdm-in-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">MDM ↗</a>** (Intune, Jamf, Group Policy), or as a device file. Precedence: **MDM → server-managed → file → user settings**. <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">All keys ↗</a>
 
 ## ★ Where it fits
 
