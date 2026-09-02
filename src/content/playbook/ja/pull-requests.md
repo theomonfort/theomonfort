@@ -211,7 +211,7 @@ Ruleset は、ブランチへのマージ条件を **ルールとして強制** 
 
 各 PR が 1 つ下の PR のブランチを base にする、順序付きのチェーン。レビュアーは巨大な差分ではなく、小さなレイヤーを 1 枚ずつ見ればよくなる。public preview は **2026-07-30** から。
 
-<svg viewBox="0 0 780 330" role="img" aria-label="Stacked pull requests: feat-a は main から分岐して main を base にし、feat-b は feat-a、feat-c は feat-b を base にする。マージは下から順に進む" style="width:100%;height:auto;max-width:760px;display:block;margin:1.4em auto;font-family:'DotGothic16',monospace;">
+<svg viewBox="0 0 900 344" role="img" aria-label="Stacked pull requests: feat-a は main から、feat-b は feat-a から、feat-c は feat-b から分岐する。マージは下から順に進み、PR #1 が最初に main に入り、次に PR #2、PR #3 と続く" style="width:100%;height:auto;max-width:820px;display:block;margin:1.4em auto;font-family:'DotGothic16',monospace;">
   <defs>
     <marker id="stack-arrow" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
@@ -221,25 +221,31 @@ Ruleset は、ブランチへのマージ条件を **ルールとして強制** 
   <rect x="16" y="121" width="118" height="34" rx="7" fill="#17d8e0"/><text x="75" y="143" text-anchor="middle" fill="#05060f" font-size="16" font-weight="bold">feat-b</text>
   <rect x="16" y="211" width="118" height="34" rx="7" fill="#2fbf76"/><text x="75" y="233" text-anchor="middle" fill="#05060f" font-size="16" font-weight="bold">feat-a</text>
   <rect x="16" y="301" width="118" height="34" rx="7" fill="#4ec3ff"/><text x="75" y="323" text-anchor="middle" fill="#05060f" font-size="16" font-weight="bold">main</text>
-  <g stroke="#7d8595" stroke-width="2.6" fill="none">
-    <line x1="208" y1="318" x2="681" y2="318" marker-end="url(#stack-arrow)"/>
-    <line x1="203" y1="304" x2="250" y2="245" marker-end="url(#stack-arrow)"/>
-    <line x1="288" y1="228" x2="322" y2="228" marker-end="url(#stack-arrow)"/>
-    <line x1="355" y1="214" x2="390" y2="155" marker-end="url(#stack-arrow)"/>
-    <line x1="428" y1="138" x2="462" y2="138" marker-end="url(#stack-arrow)"/>
-    <line x1="495" y1="124" x2="531" y2="65" marker-end="url(#stack-arrow)"/>
-  </g>
-  <circle cx="190" cy="318" r="18" fill="#4ec3ff"/>
-  <circle cx="700" cy="318" r="18" fill="#4ec3ff"/>
-  <circle cx="270" cy="228" r="18" fill="#2fbf76"/>
-  <circle cx="340" cy="228" r="18" fill="#2fbf76"/>
-  <circle cx="410" cy="138" r="18" fill="#17d8e0"/>
-  <circle cx="480" cy="138" r="18" fill="#17d8e0"/>
-  <circle cx="550" cy="48" r="18" fill="#a56cff"/>
   <g font-size="14" font-weight="bold" text-anchor="middle">
-    <rect x="580" y="32" width="178" height="32" rx="6" fill="#131a2b" stroke="#a56cff" stroke-width="2"/><text x="669" y="53" fill="#a56cff">PR #3 · base: feat-b</text>
-    <rect x="510" y="122" width="178" height="32" rx="6" fill="#131a2b" stroke="#17d8e0" stroke-width="2"/><text x="599" y="143" fill="#17d8e0">PR #2 · base: feat-a</text>
-    <rect x="370" y="212" width="178" height="32" rx="6" fill="#131a2b" stroke="#2fbf76" stroke-width="2"/><text x="459" y="233" fill="#2fbf76">PR #1 · base: main</text>
+    <rect x="144" y="32" width="178" height="32" rx="6" fill="#131a2b" stroke="#a56cff" stroke-width="2"/><text x="233" y="53" fill="#a56cff">PR #3 &#183; base: feat-b</text>
+    <rect x="144" y="122" width="178" height="32" rx="6" fill="#131a2b" stroke="#17d8e0" stroke-width="2"/><text x="233" y="143" fill="#17d8e0">PR #2 &#183; base: feat-a</text>
+    <rect x="144" y="212" width="178" height="32" rx="6" fill="#131a2b" stroke="#2fbf76" stroke-width="2"/><text x="233" y="233" fill="#2fbf76">PR #1 &#183; base: main</text>
+  </g>
+  <g stroke="#7d8595" stroke-width="2.6" fill="none">
+    <line x1="218" y1="318" x2="591" y2="318" marker-end="url(#stack-arrow)"/>
+    <line x1="628" y1="318" x2="701" y2="318" marker-end="url(#stack-arrow)"/>
+    <line x1="738" y1="318" x2="811" y2="318" marker-end="url(#stack-arrow)"/>
+    <line x1="848" y1="318" x2="890" y2="318" marker-end="url(#stack-arrow)"/>
+    <line x1="214" y1="304" x2="330" y2="247" marker-end="url(#stack-arrow)"/>
+    <line x1="364" y1="214" x2="420" y2="157" marker-end="url(#stack-arrow)"/>
+    <line x1="454" y1="124" x2="510" y2="67" marker-end="url(#stack-arrow)"/>
+    <line x1="368" y1="243" x2="590" y2="303" marker-end="url(#stack-arrow)"/>
+    <line x1="458" y1="155" x2="700" y2="302" marker-end="url(#stack-arrow)"/>
+    <line x1="548" y1="64" x2="810" y2="300" marker-end="url(#stack-arrow)"/>
+  </g>
+  <circle cx="200" cy="318" r="18" fill="#4ec3ff"/>
+  <circle cx="350" cy="228" r="18" fill="#2fbf76"/>
+  <circle cx="440" cy="138" r="18" fill="#17d8e0"/>
+  <circle cx="530" cy="48" r="18" fill="#a56cff"/>
+  <g text-anchor="middle" font-size="15" font-weight="bold" fill="#05060f">
+    <circle cx="610" cy="318" r="18" fill="#2fbf76"/><text x="610" y="324">1</text>
+    <circle cx="720" cy="318" r="18" fill="#17d8e0"/><text x="720" y="324">2</text>
+    <circle cx="830" cy="318" r="18" fill="#a56cff"/><text x="830" y="324">3</text>
   </g>
 </svg>
 
