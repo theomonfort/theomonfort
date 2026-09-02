@@ -27,14 +27,23 @@ links:
     label: Configuring enterprise managed settings
     url: https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-agents/configure-enterprise-managed-settings
   - group: 📖 公式ドキュメント
+    label: Enterprise managed settings reference (全キー)
+    url: https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings
+  - group: 📖 公式ドキュメント
     label: About Copilot auto model selection
     url: https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/auto-model-selection
+  - group: 📰 発表
+    label: "managed-settings.json is generally available (2026-07-01)"
+    url: https://github.blog/changelog/2026-07-01-enterprise-managed-settings-json-is-generally-available/
   - group: 📰 発表
     label: "Enterprises can default to auto model selection (2026-07-01)"
     url: https://github.blog/changelog/2026-07-01-enterprises-can-default-to-auto-model-selection/
   - group: 📰 発表
     label: "Enterprise managed settings now apply to the GitHub Copilot app (2026-07-27)"
     url: https://github.blog/changelog/2026-07-27-enterprise-managed-settings-now-apply-to-the-github-copilot-app/
+  - group: 📰 発表
+    label: "Enterprise managed settings in GitHub Copilot for JetBrains (2026-08-18)"
+    url: https://github.blog/changelog/2026-08-18-enterprise-managed-settings-in-github-copilot-for-jetbrains/
 ---
 
 
@@ -130,22 +139,37 @@ GitHub は Copilot の統制を **自分たちが所有しレビューする 1 �
 
 `copilot/managed-settings.json` が共通のガードレールを定義し、対応クライアントが自動的に適用する。managed の値は開発者のローカル設定を **上書き** する。対象は **Copilot CLI / VS Code / JetBrains / Copilot app / Copilot cloud agent**（キーごとに対応状況は異なる）。
 
-| キー | 統制できること | 提供時期 |
-| --- | --- | --- |
-| `model` | 既定モデルを Auto model selection に | 2026-07-01 |
-| `permissions.*` | バイパス / YOLO の禁止、危険な操作の拒否・承認必須化 | 2026-06-17 |
-| `enabledPlugins` · marketplace 系 | 承認済みプラグインと提供元、`autoUpdate` 対応 | 2026-08-26 |
-| `allowedMcpServers` · `deniedMcpServers` | MCP 許可リスト。fail-closed、URL / コマンドで照合 | 2026-08-06 |
-| `telemetry` | 自社の collector への OpenTelemetry エクスポート | 2026-07-08 |
-| `teams/` + `team-mappings.json` | `overridable` キーのチーム単位の特殊化 | 2026-08-03 |
+<div class="spec-widget">
+<p class="spec-hint">▸ + で統制できることを表示、日付は changelog へ</p>
+<div class="spec-list">
+<details class="spec-item" name="managed-settings">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧠</span><span class="spec-key"><code>model</code></span><a class="spec-since" href="https://github.blog/changelog/2026-07-01-enterprises-can-default-to-auto-model-selection/" target="_blank" rel="noopener noreferrer">2026-07-01</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">既定モデルを <b>Auto model selection</b> に固定。開発者が自分でモデルを選ばなくても、常にルーティング済みのモデルから始まる。</p>
+</details>
+<details class="spec-item" name="managed-settings">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🚧</span><span class="spec-key"><code>permissions.*</code></span><a class="spec-since" href="https://github.blog/changelog/2026-06-17-enterprise-managed-settings-now-support-bypass-permission-controls/" target="_blank" rel="noopener noreferrer">2026-06-17</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what"><b>バイパス / YOLO モード</b>を禁止し、危険な操作を拒否または承認必須にする。</p>
+</details>
+<details class="spec-item" name="managed-settings">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧩</span><span class="spec-key"><code>enabledPlugins</code> · marketplace 系</span><a class="spec-since" href="https://github.blog/changelog/2026-08-26-enterprise-managed-settings-now-support-autoupdate-for-plugin-marketplaces/" target="_blank" rel="noopener noreferrer">2026-08-26</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">動かしてよいプラグインと、その提供元 marketplace を承認制に。<b>autoUpdate</b> で最新に保てる。</p>
+</details>
+<details class="spec-item" name="managed-settings">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔌</span><span class="spec-key"><code>allowedMcpServers</code> · <code>deniedMcpServers</code></span><a class="spec-since" href="https://github.blog/changelog/2026-08-06-mcp-allowlists-in-enterprise-managed-settings/" target="_blank" rel="noopener noreferrer">2026-08-06</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">URL / コマンドで照合する MCP 許可リスト。<b>fail-closed</b> なので、リストにないものは動かない。</p>
+</details>
+<details class="spec-item" name="managed-settings">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📡</span><span class="spec-key"><code>telemetry</code></span><a class="spec-since" href="https://github.blog/changelog/2026-07-08-enterprise-managed-opentelemetry-export-for-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">2026-07-08</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">自社の collector への <b>OpenTelemetry</b> エクスポート。利用状況を既に運用している基盤にそのまま集約できる。</p>
+</details>
+<details class="spec-item" name="managed-settings">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">👥</span><span class="spec-key"><code>teams/</code> + <code>team-mappings.json</code></span><a class="spec-since" href="https://github.blog/changelog/2026-08-03-enterprise-team-specialization-for-managed-settings/" target="_blank" rel="noopener noreferrer">2026-08-03</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what"><b>overridable</b> にしたキーをチーム単位で特殊化。共通のベースライン + Enterprise チームごとの差分という構成にできる。</p>
+</details>
+</div>
+</div>
 
-配布方法は server-managed（このリポジトリ）、**MDM**（Intune / Jamf / グループポリシー）、端末上のファイルの 3 通り。優先順位は **MDM → server-managed → ファイル → ユーザー設定**。
-
-### もっと詳しく
-
-- 📖 <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">設定リファレンス（全キー） ↗</a> · <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-agents/configure-enterprise-managed-settings" target="_blank" rel="noopener noreferrer">構成ガイド ↗</a>
-- 📰 <a class="retro-link" href="https://github.blog/changelog/2026-07-01-enterprise-managed-settings-json-is-generally-available/" target="_blank" rel="noopener noreferrer">GA（2026-07-01） ↗</a> · <a class="retro-link" href="https://github.blog/changelog/2026-07-08-deploy-managed-copilot-settings-via-mdm-in-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">MDM（2026-07-08） ↗</a> · <a class="retro-link" href="https://github.blog/changelog/2026-07-08-enterprise-managed-opentelemetry-export-for-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">OpenTelemetry（2026-07-08） ↗</a>
-- 📰 <a class="retro-link" href="https://github.blog/changelog/2026-08-03-enterprise-team-specialization-for-managed-settings/" target="_blank" rel="noopener noreferrer">チーム特殊化（2026-08-03） ↗</a> · <a class="retro-link" href="https://github.blog/changelog/2026-08-06-mcp-allowlists-in-enterprise-managed-settings/" target="_blank" rel="noopener noreferrer">MCP 許可リスト（2026-08-06） ↗</a> · <a class="retro-link" href="https://github.blog/changelog/2026-08-18-enterprise-managed-settings-in-github-copilot-for-jetbrains/" target="_blank" rel="noopener noreferrer">JetBrains（2026-08-18） ↗</a>
+> 🎯 配布は server-managed（このリポジトリ）、**<a class="retro-link" href="https://github.blog/changelog/2026-07-08-deploy-managed-copilot-settings-via-mdm-in-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">MDM ↗</a>**（Intune / Jamf / グループポリシー）、端末上のファイルの 3 通り。優先順位は **MDM → server-managed → ファイル → ユーザー設定**。<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">全キーのリファレンス ↗</a>
 
 ## ★ 使いどころ
 
