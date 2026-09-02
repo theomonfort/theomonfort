@@ -3025,4 +3025,73 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     .prose-akq .spec-item::details-content { transition: none; }
     .prose-akq .spec-toggle { transition: none; }
   }
+
+  /* ── Figure tabs: CSS-only switcher between alternative diagrams ──
+     Radios must precede .figtabs-bar and the panels so the sibling
+     combinator can drive both the active tab and the visible panel. */
+  .prose-akq .figtabs { margin: 1.2em 0; }
+  .prose-akq .figtabs-radio {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .prose-akq .figtabs-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4em;
+    justify-content: center;
+  }
+  .prose-akq .figtabs-tab {
+    padding: 0.22em 0.7em;
+    font-size: 0.86em;
+    line-height: 1.45;
+    color: color-mix(in srgb, #e8f4ff 60%, transparent);
+    border: 2px solid color-mix(in srgb, var(--entry-accent, #00f0ff) 22%, transparent);
+    background: rgba(10, 14, 39, 0.55);
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  }
+  .prose-akq .figtabs-tab:hover {
+    color: #e8f4ff;
+    background: rgba(0, 240, 255, 0.08);
+  }
+  .prose-akq .figtabs-radio:nth-of-type(1):checked ~ .figtabs-bar > .figtabs-tab:nth-child(1),
+  .prose-akq .figtabs-radio:nth-of-type(2):checked ~ .figtabs-bar > .figtabs-tab:nth-child(2),
+  .prose-akq .figtabs-radio:nth-of-type(3):checked ~ .figtabs-bar > .figtabs-tab:nth-child(3) {
+    color: #05060f;
+    background: var(--entry-accent, #00f0ff);
+    border-color: var(--entry-accent, #00f0ff);
+    box-shadow:
+      0 0 8px var(--entry-accent, #00f0ff),
+      0 0 24px color-mix(in srgb, var(--entry-accent, #00f0ff) 30%, transparent);
+  }
+  .prose-akq .figtabs-radio:nth-of-type(1):focus-visible ~ .figtabs-bar > .figtabs-tab:nth-child(1),
+  .prose-akq .figtabs-radio:nth-of-type(2):focus-visible ~ .figtabs-bar > .figtabs-tab:nth-child(2),
+  .prose-akq .figtabs-radio:nth-of-type(3):focus-visible ~ .figtabs-bar > .figtabs-tab:nth-child(3) {
+    outline: 2px solid #ffb000;
+    outline-offset: 2px;
+  }
+  .prose-akq .figtabs-panel { display: none; }
+  .prose-akq .figtabs-radio:nth-of-type(1):checked ~ .figtabs-panel[data-idx="1"],
+  .prose-akq .figtabs-radio:nth-of-type(2):checked ~ .figtabs-panel[data-idx="2"],
+  .prose-akq .figtabs-radio:nth-of-type(3):checked ~ .figtabs-panel[data-idx="3"] { display: block; }
+  .prose-akq .figtabs-cap {
+    margin: 0.1em 0 0;
+    font-size: 0.86em;
+    line-height: 1.6;
+    text-align: center;
+    color: color-mix(in srgb, #e8f4ff 76%, transparent);
+  }
+  .prose-akq .figtabs-cap b,
+  .prose-akq .figtabs-cap strong { color: #ffb000; font-weight: normal; }
+  .prose-akq .figtabs-cap code { font-size: 0.9em; }
+  @media (prefers-reduced-motion: reduce) {
+    .prose-akq .figtabs-tab { transition: none; }
+  }
 </style>
