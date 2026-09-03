@@ -133,7 +133,7 @@ links:
 <p>同じブランチをもう一度 push する。</p>
 <code class="demo-cmd">git push origin HEAD</code>
 <p><b>Security → Secret scanning</b> のクローズ済みアラートを開き、<b>誰が・どの理由で</b> bypass したかを見せる。</p>
-<p>bypass を野放しにしない設定：<code class="demo-path">Settings → Advanced Security → Push protection → Delegated bypass</code></p>
+<p>bypass を野放しにしない設定：<code class="demo-path">Settings → Advanced Security → Push protection</code> で <b>Who can bypass push protection</b> を <b>Specific roles or teams</b> に（= Delegated bypass）。</p>
 </li>
 <li>
 <p class="demo-step-title">VALIDITY CHECK</p>

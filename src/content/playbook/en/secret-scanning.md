@@ -133,7 +133,7 @@ links:
 <p>Push the same branch again.</p>
 <code class="demo-cmd">git push origin HEAD</code>
 <p>Open the closed alert under <b>Security → Secret scanning</b> and show <b>who</b> bypassed it and <b>why</b>.</p>
-<p>To keep bypasses under control: <code class="demo-path">Settings → Advanced Security → Push protection → Delegated bypass</code></p>
+<p>To keep bypasses under control: <code class="demo-path">Settings → Advanced Security → Push protection</code>, set <b>Who can bypass push protection</b> to <b>Specific roles or teams</b> (= Delegated bypass).</p>
 </li>
 <li>
 <p class="demo-step-title">VALIDITY CHECK</p>
