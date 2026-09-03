@@ -911,10 +911,11 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     syncToc();
   }
 
-  // Clicking a DEMO label focuses its hidden checkbox, which would otherwise
-  // swallow Space/arrow keys. Hand keyboard control back to the deck.
+  // Toggling DEMO focuses its hidden checkbox, which would otherwise swallow
+  // Space/arrow keys. Keyboard activation fires a click whose target is the
+  // checkbox itself, so match that too. Hand keyboard control back to the deck.
   function onDemoToggleClick(e: MouseEvent) {
-    const hit = (e.target as HTMLElement | null)?.closest?.('.h2-demo, .demo-close, .demo-scrim');
+    const hit = (e.target as HTMLElement | null)?.closest?.('.h2-demo, .demo-close, .demo-scrim, .demo-toggle');
     if (!hit) return;
     requestAnimationFrame(() => {
       document.querySelectorAll<HTMLInputElement>('.demo-toggle').forEach((el) => el.blur());
