@@ -38,6 +38,15 @@ links:
   - group: 🆓 無料の棚卸し (Risk Assessment)
     label: Code Security Risk Assessment GA (2026/04)
     url: https://github.blog/changelog/2026-04-08-code-security-risk-assessment-available-for-organizations/
+  - group: 🏢 全社展開 (Rollout)
+    label: Creating a custom security configuration for your enterprise
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/create-custom-configuration
+  - group: 🏢 全社展開 (Rollout)
+    label: Applying a custom security configuration to your enterprise
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/apply-custom-configuration
+  - group: 🏢 全社展開 (Rollout)
+    label: Code scanning merge protection
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/merge-protection
   - group: 📰 Recent Changelog
     label: "Start a GitHub Advanced Security trial from a risk assessment (2026-05-19)"
     url: https://github.blog/changelog/2026-05-19-start-a-github-advanced-security-trial-from-a-risk-assessment
@@ -112,6 +121,78 @@ GitHub には **ライセンス不要・完全無料** で組織のセキュリ�
 - <a class="retro-link" href="https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk" target="_blank" rel="noopener noreferrer">Enabling Secret Risk Assessment ↗</a>
 - <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment" target="_blank" rel="noopener noreferrer">Code security risk assessment(GitHub Docs)↗</a>
 - <a class="retro-link" href="https://github.blog/changelog/2026-04-08-code-security-risk-assessment-available-for-organizations/" target="_blank" rel="noopener noreferrer">Code Security Risk Assessment GA(2026/04)↗</a>
+
+## エンタープライズ全体へのロールアウト手順
+
+<div class="hero-quote hero-quote-plain">
+  <p>
+    ライセンス購入後、<strong>Enterprise → Settings → Advanced Security → Code security</strong> で <strong>security configuration</strong> を 1 つ作れば、配下のすべての Organization / リポジトリに同じ設定を配れる。
+  </p>
+  <p>
+    <strong>New configuration</strong> を押すと初期値は <strong>GitHub recommended</strong> の内容が入っている。まずはこれをベースにコピーして使うのが安全。
+  </p>
+</div>
+
+### ⚠️ 事前に押さえておく 3 つの注意点
+
+**1. Push protection が ON になり、secret を含む push が止まる**
+
+| 止まるもの | 止まらないもの |
+| --- | --- |
+| `git push` · GitHub UI 上のコミット · ファイルアップロード · REST API 経由のリクエスト | `git pull` · `git clone` · `git fetch` |
+
+> ⚠️ 「secret scanning に引っかかって pull できなくなる」という誤解が多いが、push protection が止めるのは **push だけ**。取得系の操作には一切影響しない。
+
+**2. Code scanning が 3 つのタイミングで走る**
+
+- 📤 default branch / protected branch への **push のたび**
+- 🔀 default branch / protected branch 宛ての **PR の作成・コミットのたび**(fork からの PR は除く)
+- 📅 **週 1 回**のスケジュール実行
+
+つまり **GitHub Actions の実行時間を消費する**。これが全社展開でいちばん効いてくるコスト要因。
+
+> 💡 CodeQL 対応言語を含まないリポジトリでは、default setup を有効にしてもスキャンは走らず Actions 分も消費しない。
+> 🚧 code scanning 自体は **merge をブロックしない**。ブロックしたい場合は別途 ruleset が必要(下記)。
+
+**3. デフォルトでは write 権限を持つ全員が push protection を bypass できる**
+
+- 🛂 開発者を信頼できるならこのままで OK。bypass するたびに **アラート + 監査ログ + owner へのメール** が残るので、抑止力としては十分機能する
+- 🔐 厳しくしたい場合は configuration の **Bypass privileges** を **Specific actors** に変更(= delegated bypass)。指定外の人は申請 → 承認フローになる(申請は **7 日**で失効)
+
+### 🚧 merge をブロックしたいなら ruleset
+
+Code scanning のアラートで PR の merge を止めたい場合は、**Enterprise → Policies → Repository → Rulesets** で **Require code scanning results** ルールを追加する。
+
+ブロックされる条件は 3 つ:
+
+- 指定したツールが、ruleset で定義した severity のアラートを検出した
+- 指定したツールの解析がまだ実行中
+- **指定したツールがそのリポジトリで設定されていない**
+
+> ⚠️ 3 つ目が要注意。CodeQL が有効になっていないリポジトリに ruleset を当てると、**アラートが 1 件もなくても全 PR がブロックされる**。必ず「configuration 適用 → CodeQL が回っているのを確認 → ruleset」の順番で。
+> 🧪 まずは enforcement status を **Evaluate** にしておくと、実際にはブロックせずに「何件ブロックされたはずか」を Rule Insights で確認できる。
+
+### 📋 展開の手順
+
+| # | やること | 場所 |
+| :---: | --- | --- |
+| 1 | **New configuration** で GitHub recommended をベースにコピーを作る | Enterprise → Settings → Advanced Security → Code security |
+| 2 | Code scanning は **Enabled with advanced setup allowed** を選ぶ(既存の CodeQL workflow を壊さない) | 同上 |
+| 3 | **Policy → Use as default for newly created repositories** を設定 | 同上 |
+| 4 | **Enforcement** は **Not enforced** のまま | 同上 |
+| 5 | 既存リポジトリには **Apply to → All repositories without configurations** | Configurations 一覧 |
+
+- ⚠️ **3 と 5 は別物**。Policy の設定は新規リポジトリにしか効かない。既存リポジトリには手順 5 の Apply to を別途実行する必要がある
+- 🏢 **All repositories without configurations** は enterprise レベルでのみ選べる選択肢。既に config が当たっている org を壊さずに、未設定のリポジトリだけを一括でカバーできる
+- 🗄️ **archived リポジトリにも適用される**(secret scanning は archived でも動くため)
+
+> 🔓 **Not enforced にしておく理由** — enforce すると repo owner が設定を変更できなくなる。まずは緩く配って様子を見て、運用が固まってから enforce に切り替えるのが安全。
+> 🎚️ 個別の設定を **Not set** にしておけば、その項目だけリポジトリ側の現状値を維持できる(enforce しても対象外)。段階展開のときに使える。
+
+📘 ロールアウト関連:
+- <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/create-custom-configuration" target="_blank" rel="noopener noreferrer">Creating a custom security configuration for your enterprise ↗</a>
+- <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/apply-custom-configuration" target="_blank" rel="noopener noreferrer">Applying a custom security configuration to your enterprise ↗</a>
+- <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/merge-protection" target="_blank" rel="noopener noreferrer">Code scanning merge protection ↗</a>
 
 📘 GHAS 全般:
 - <a class="retro-link" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">Introducing GitHub Secret Protection & Code Security (GitHub Blog) ↗</a>

@@ -38,6 +38,15 @@ links:
   - group: 🆓 Free inventory (Risk Assessment)
     label: Code Security Risk Assessment GA (2026/04)
     url: https://github.blog/changelog/2026-04-08-code-security-risk-assessment-available-for-organizations/
+  - group: 🏢 Enterprise rollout
+    label: Creating a custom security configuration for your enterprise
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/create-custom-configuration
+  - group: 🏢 Enterprise rollout
+    label: Applying a custom security configuration to your enterprise
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/apply-custom-configuration
+  - group: 🏢 Enterprise rollout
+    label: Code scanning merge protection
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/merge-protection
   - group: 📰 Recent Changelog
     label: "Start a GitHub Advanced Security trial from a risk assessment (2026-05-19)"
     url: https://github.blog/changelog/2026-05-19-start-a-github-advanced-security-trial-from-a-risk-assessment
@@ -112,6 +121,78 @@ GitHub provides two **Risk Assessments** to visualize your organization's securi
 - <a class="retro-link" href="https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk" target="_blank" rel="noopener noreferrer">Enabling Secret Risk Assessment ↗</a>
 - <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment" target="_blank" rel="noopener noreferrer">Code security risk assessment (GitHub Docs) ↗</a>
 - <a class="retro-link" href="https://github.blog/changelog/2026-04-08-code-security-risk-assessment-available-for-organizations/" target="_blank" rel="noopener noreferrer">Code Security Risk Assessment GA (2026/04) ↗</a>
+
+## Rolling out across the enterprise
+
+<div class="hero-quote hero-quote-plain">
+  <p>
+    Once the licenses are bought, a single <strong>security configuration</strong> created under <strong>Enterprise → Settings → Advanced Security → Code security</strong> pushes the same settings to every Organization and repository beneath it.
+  </p>
+  <p>
+    Hitting <strong>New configuration</strong> pre-fills the form with the <strong>GitHub recommended</strong> values. Copying that as your baseline is the safe way to start.
+  </p>
+</div>
+
+### ⚠️ Three things to know first
+
+**1. Push protection turns on, and pushes containing secrets get blocked**
+
+| Blocked | Not blocked |
+| --- | --- |
+| `git push` · commits made in the GitHub UI · file uploads · REST API requests | `git pull` · `git clone` · `git fetch` |
+
+> ⚠️ People often assume "secret scanning will stop me from pulling." Push protection only blocks **pushes** — read operations are completely unaffected.
+
+**2. Code scanning runs at three different times**
+
+- 📤 On **every push** to the default branch or any protected branch
+- 🔀 On **every pull request creation and commit** targeting the default branch or any protected branch (excluding PRs from forks)
+- 📅 On a **weekly schedule**
+
+Which means it **consumes GitHub Actions minutes** — the cost factor that bites hardest in an enterprise-wide rollout.
+
+> 💡 On repositories with no CodeQL-supported languages, enabling default setup runs no scans and uses no Actions minutes.
+> 🚧 Code scanning by itself **does not block merges**. If you want that, you need a separate ruleset (below).
+
+**3. By default, anyone with write access can bypass push protection**
+
+- 🛂 If you trust your developers, leaving it as-is is fine — every bypass leaves an **alert + audit log entry + email to the owners**, which works well enough as a deterrent
+- 🔐 To tighten it, change **Bypass privileges** in the configuration to **Specific actors** (= delegated bypass). Everyone else goes through a request → approval flow (requests expire after **7 days**)
+
+### 🚧 Blocking merges needs a ruleset
+
+To stop a PR from merging when code scanning finds alerts, add a **Require code scanning results** rule under **Enterprise → Policies → Repository → Rulesets**.
+
+Three conditions cause a block:
+
+- A required tool finds an alert of a severity defined in the ruleset
+- A required tool's analysis is still in progress
+- **A required tool is not configured for that repository**
+
+> ⚠️ The third one is the trap. Apply the ruleset to repositories where CodeQL isn't enabled and **every PR gets blocked even with zero alerts**. Always go in this order: apply the configuration → confirm CodeQL is running → then the ruleset.
+> 🧪 Set the enforcement status to **Evaluate** first — nothing is actually blocked, and Rule Insights shows how many merges *would* have been blocked.
+
+### 📋 Rollout sequence
+
+| # | What to do | Where |
+| :---: | --- | --- |
+| 1 | Create a copy based on GitHub recommended via **New configuration** | Enterprise → Settings → Advanced Security → Code security |
+| 2 | For code scanning, pick **Enabled with advanced setup allowed** (won't break existing CodeQL workflows) | Same |
+| 3 | Set **Policy → Use as default for newly created repositories** | Same |
+| 4 | Leave **Enforcement** at **Not enforced** | Same |
+| 5 | For existing repositories, use **Apply to → All repositories without configurations** | Configurations list |
+
+- ⚠️ **Steps 3 and 5 are different things.** The policy only affects newly created repositories; existing repositories need the Apply to action in step 5
+- 🏢 **All repositories without configurations** is only selectable at the enterprise level — it covers every unconfigured repository in one shot without disturbing orgs that already have a configuration applied
+- 🗄️ It **also applies to archived repositories** (some features, secret scanning in particular, still run on archived repos)
+
+> 🔓 **Why leave it Not enforced** — enforcing blocks repository owners from changing the settings. Roll it out loosely first, watch how it lands, and switch to enforced once your operating model has settled.
+> 🎚️ Leaving an individual setting as **Not set** keeps whatever the repository already has for that one feature (it stays excluded even when the configuration is enforced) — handy for a phased rollout.
+
+📘 Rollout references:
+- <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/create-custom-configuration" target="_blank" rel="noopener noreferrer">Creating a custom security configuration for your enterprise ↗</a>
+- <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/apply-custom-configuration" target="_blank" rel="noopener noreferrer">Applying a custom security configuration to your enterprise ↗</a>
+- <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/merge-protection" target="_blank" rel="noopener noreferrer">Code scanning merge protection ↗</a>
 
 📘 GHAS general:
 - <a class="retro-link" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">Introducing GitHub Secret Protection & Code Security (GitHub Blog) ↗</a>
