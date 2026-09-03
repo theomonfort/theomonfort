@@ -82,6 +82,27 @@ Label stays `📖 Docs` in both locales. Max one per slide. Everything else goes
 | ❌ | don't do this |
 | ★ | featured / killer feature |
 
+## Collapsible widgets
+
+All four are native `<details name="...">` — exclusive open, no JavaScript. Full markup in `SKILL.md` §4h.
+
+| Widget | Row classes | Use for |
+| --- | --- | --- |
+| `risk-widget` | `risk-hint` `risk-list` `risk-item` `risk-btn` `risk-num` `risk-icon` `risk-label` `risk-gauge` `risk-toggle` `risk-why` | ranked risks — number + severity gauge |
+| `spec-widget` | `spec-hint` `spec-list` `spec-item` `spec-btn` `spec-icon` `spec-key` `spec-since` `spec-toggle` `spec-what` | spec / setting keys with a dated changelog link |
+| `ctl-widget` | `ctl-hint` `ctl-list` `ctl-item` `ctl-btn` `ctl-icon` `ctl-name` `ctl-when` `ctl-doc` `ctl-toggle` `ctl-body` `ctl-row` `ctl-k` `ctl-v` | feature list, each row handing off to docs |
+| `det-widget` | `det-hint` `det-split` `det-list` `det-pick` `det-btn` `det-icon` `det-name` `det-dot` `det-screen` `det-empty` `det-pane` `det-head` `det-title` `det-tier` `det-why` `det-scope` `det-scope-k` `det-scope-v` | long descriptions — fixed-height reading pane, slide can't grow |
+
+Tier variants on `det-dot` / `det-tier`: `is-free` (gb-green) · `is-paid` (crt-amber).
+
+> ⚠️ `det-title` and `det-tier` use `VT323`, which has **no Japanese glyphs**. Keep them Latin in both locales.
+
+## `DEMO` overlay
+
+Presenter run-book pinned to an H2. Classes: `demo-toggle` (the `<input>`) · `h2-demo` (the button label) · `demo-panel` `demo-scrim` `demo-window` `demo-head` `demo-tag` `demo-name` `demo-close` `demo-steps` `demo-step-title` `demo-cmd` `demo-path` `demo-out`.
+
+The `id` must be unique per page (`demo-<slug>`). `Esc` closes it; `←` / `→` still change slides. Full markup in `SKILL.md` §4i.
+
 ## Common slide skeleton
 
 ```markdown

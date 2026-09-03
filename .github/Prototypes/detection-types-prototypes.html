@@ -1,0 +1,1008 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Detection Types デザイン案 10 種 — Retro JRPG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&family=VT323&family=IBM+Plex+Mono:wght@400;600&display=swap"
+    />
+    <style>
+      /* ──────────────────────────────────────────────────────────
+         Design tokens (frontend.instructions.md / retro JRPG theme)
+         ────────────────────────────────────────────────────────── */
+      :root {
+        --shadow-ink: #05060f;
+        --midnight: #0a0e27;
+        --deep-purple: #1a0b2e;
+        --neon-magenta: #ff2e88;
+        --neon-cyan: #00f0ff;
+        --crt-amber: #ffb000;
+        --gb-green: #9bbc0f;
+        --phosphor: #e8f4ff;
+
+        --font-pixel: 'Press Start 2P', monospace;
+        --font-pixel-jp: 'DotGothic16', monospace;
+        --font-terminal: 'VT323', monospace;
+        --font-mono: 'IBM Plex Mono', monospace;
+
+        /* the secret-scanning entry accent */
+        --accent: #00f0ff;
+      }
+
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+
+      body {
+        min-height: 100vh;
+        color: var(--phosphor);
+        font-family: var(--font-pixel-jp);
+        background: radial-gradient(circle at 50% 0%, var(--deep-purple) 0%, var(--midnight) 45%, var(--shadow-ink) 100%);
+        background-attachment: fixed;
+        padding: 2.5rem clamp(1rem, 3vw, 2.5rem) 5rem;
+      }
+
+      /* Faint CRT scanlines overlay */
+      body::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 999;
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0) 0px,
+          rgba(0, 0, 0, 0) 2px,
+          rgba(0, 0, 0, 0.12) 3px,
+          rgba(0, 0, 0, 0.12) 4px
+        );
+        opacity: 0.5;
+      }
+
+      .page-head { max-width: 1500px; margin: 0 auto 2rem; }
+      .page-head h1 {
+        font-family: var(--font-pixel);
+        font-size: clamp(0.85rem, 2.2vw, 1.3rem);
+        line-height: 1.6;
+        color: var(--neon-cyan);
+        text-shadow: 0 0 8px var(--neon-cyan), 0 0 24px rgba(0, 240, 255, 0.4);
+        margin: 0 0 1rem;
+      }
+      .page-head p { font-size: 1rem; line-height: 1.7; max-width: 78ch; opacity: 0.85; margin: 0.4rem 0; }
+      .page-head .legend { margin-top: 0.9rem; font-family: var(--font-terminal); font-size: 1.3rem; color: var(--crt-amber); }
+
+      .controls { display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap; margin-top: 1.1rem; }
+      .ctl {
+        font-family: var(--font-terminal);
+        font-size: 1.15rem;
+        letter-spacing: 0.06em;
+        color: var(--neon-cyan);
+        background: rgba(0, 240, 255, 0.06);
+        border: 2px solid rgba(0, 240, 255, 0.5);
+        padding: 0.25rem 0.9rem;
+        cursor: pointer;
+        border-radius: 0;
+      }
+      .ctl:hover { background: rgba(0, 240, 255, 0.16); box-shadow: 0 0 8px var(--neon-cyan), 0 0 24px rgba(0, 240, 255, 0.35); }
+      .ctl.on { background: var(--neon-cyan); color: var(--shadow-ink); box-shadow: 0 0 8px var(--neon-cyan), 0 0 24px rgba(0, 240, 255, 0.45); }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.5rem 2rem;
+        max-width: 1500px;
+        margin: 0 auto;
+        align-items: start;
+      }
+      @media (max-width: 1080px) { .gallery { grid-template-columns: minmax(0, 1fr); } }
+
+      .proto { display: flex; flex-direction: column; min-width: 0; }
+      .proto.wide { grid-column: 1 / -1; }
+      @media (max-width: 1080px) { .proto.wide { grid-column: auto; } }
+
+      .proto-label {
+        font-family: var(--font-pixel);
+        font-size: 0.6rem;
+        line-height: 1.5;
+        color: var(--neon-magenta);
+        text-shadow: 0 0 6px rgba(255, 46, 136, 0.5);
+        margin-bottom: 0.35rem;
+      }
+      .proto-desc { font-size: 0.85rem; line-height: 1.55; opacity: 0.72; margin-bottom: 0.8rem; min-height: 2.6em; }
+
+      /* ── True-to-life slide frame ──────────────────────────────
+         Measured on the live site (present mode):
+           content column 1152px · base font 24px · usable height ~880px
+         The frame is authored at 768x587 logical px with a 16px root,
+         which is exactly 1152x880 / 1.5 — so every relative type size
+         here matches the real slide 1:1. It is then scaled to fit
+         whatever column width the gallery gives it.
+         ────────────────────────────────────────────────────────── */
+      .slide-stage {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        border: 2px solid rgba(0, 240, 255, 0.28);
+        background: rgba(5, 6, 15, 0.6);
+        box-shadow: 4px 4px 0 var(--shadow-ink), 0 0 14px rgba(0, 240, 255, 0.12);
+      }
+      .slide-frame {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 768px;
+        height: 587px;
+        transform-origin: top left;
+        padding: 1.15rem 1.4rem 1.3rem;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      /* red hairline appears when the design would overflow a real slide */
+      .slide-stage.overflowing { border-color: var(--neon-magenta); }
+      .slide-stage.overflowing::after {
+        content: 'OVERFLOWS';
+        position: absolute;
+        right: 0; bottom: 0;
+        font-family: var(--font-pixel);
+        font-size: 0.5rem;
+        letter-spacing: 0.1em;
+        color: var(--shadow-ink);
+        background: var(--neon-magenta);
+        padding: 4px 7px;
+      }
+      .slide-h2 {
+        font-family: var(--font-pixel-jp);
+        font-size: 1.6rem;
+        line-height: 1.25;
+        color: var(--phosphor);
+        margin: 0 0 0.55rem;
+        border-left: 5px solid var(--accent);
+        padding-left: 0.6rem;
+        text-shadow: 0 0 10px rgba(0, 240, 255, 0.35);
+      }
+      .det-intro { font-size: 0.82rem; line-height: 1.55; opacity: 0.8; margin: 0 0 0.7rem; }
+      .det-intro b { color: var(--crt-amber); }
+      .det-foot {
+        margin-top: auto;
+        padding-top: 0.6rem;
+        font-size: 0.76rem;
+        line-height: 1.5;
+        color: rgba(232, 244, 255, 0.72);
+        border-top: 1px dashed rgba(0, 240, 255, 0.25);
+      }
+      .det-foot b { color: var(--crt-amber); }
+      .hint {
+        font-family: var(--font-terminal);
+        font-size: 1.05rem;
+        color: var(--crt-amber);
+        margin: 0 0 0.5rem;
+        letter-spacing: 0.04em;
+      }
+      .det-widget { min-width: 0; display: flex; flex-direction: column; min-height: 0; }
+
+      /* ══════════════════════════════════════════════════════════
+         SHARED — licence badge (the payload this slide was missing)
+         ══════════════════════════════════════════════════════════ */
+      .tier {
+        flex: none;
+        font-family: var(--font-terminal);
+        font-size: 0.92rem;
+        line-height: 1.25;
+        letter-spacing: 0.08em;
+        padding: 0 0.4em;
+        white-space: nowrap;
+        border: 1px solid currentColor;
+      }
+      .tier.free { color: var(--gb-green); background: rgba(155, 188, 15, 0.12); }
+      .tier.paid { color: var(--crt-amber); background: rgba(255, 176, 0, 0.12); }
+
+      /* every "fixed detail pane" variant shares this header row */
+      .pane-head { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem; }
+
+      /* ══════════════════════════════════════════════════════════
+         V1 — Cartridge Slots  (Anchor)
+         2-col grid of game cartridges. Notched top-left corner,
+         label plate, licence badge. Open card spans both columns.
+         ══════════════════════════════════════════════════════════ */
+      .v1 .cart-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.45rem; align-content: start; }
+      .v1 .cart {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        font: inherit;
+        color: var(--phosphor);
+        background: rgba(10, 14, 39, 0.7);
+        border: 1px dashed rgba(0, 240, 255, 0.38);
+        border-radius: 0;
+        padding: 0.42rem 0.55rem 0.45rem;
+        cursor: pointer;
+        min-width: 0;
+        /* the cartridge notch */
+        clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+      }
+      .v1 .cart:hover { background: rgba(0, 240, 255, 0.09); }
+      .v1 .cart.open {
+        grid-column: 1 / -1;
+        border: 2px solid var(--accent);
+        background: rgba(0, 240, 255, 0.08);
+        box-shadow: 0 0 8px var(--accent), 0 0 24px rgba(0, 240, 255, 0.3);
+      }
+      .v1 .c-head { display: flex; align-items: center; gap: 0.4rem; min-width: 0; }
+      .v1 .c-icon { flex: none; font-size: 1rem; line-height: 1; }
+      .v1 .c-name { flex: 1 1 auto; min-width: 0; font-size: 0.92rem; line-height: 1.3; }
+      .v1 .cart.open .c-name { color: var(--accent); }
+      .v1 .c-tag {
+        font-family: var(--font-terminal);
+        font-size: 0.95rem;
+        line-height: 1.3;
+        color: rgba(232, 244, 255, 0.6);
+        margin-top: 0.12rem;
+      }
+      .v1 .c-why { display: none; font-size: 0.8rem; line-height: 1.6; margin: 0.4rem 0 0; padding-top: 0.4rem; border-top: 1px dashed rgba(0, 240, 255, 0.35); }
+      .v1 .cart.open .c-why { display: block; }
+      .v1 .c-why b { color: var(--crt-amber); }
+      .v1 .det-scope {
+        margin-top: 0.5rem;
+        display: flex;
+        gap: 0.45rem;
+        align-items: baseline;
+        padding: 0.35rem 0.5rem;
+        font-size: 0.76rem;
+        line-height: 1.5;
+        color: rgba(232, 244, 255, 0.78);
+        background: rgba(5, 6, 15, 0.7);
+        border-top: 2px solid rgba(255, 176, 0, 0.5);
+      }
+      .v1 .det-scope .s-k { flex: none; font-family: var(--font-pixel-jp); font-size: 1rem; color: var(--crt-amber); letter-spacing: 0.08em; }
+      .v1 .det-scope b { color: var(--crt-amber); }
+
+      /* ══════════════════════════════════════════════════════════
+         V2 — Signal Cards  (Anchor)
+         Tidy 2x2 card grid. Badge is a corner plate. Cards expand
+         in place inside their own column — grid never reflows wide.
+         ══════════════════════════════════════════════════════════ */
+      .v2 .card-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; align-items: start; }
+      .v2 .sig {
+        position: relative;
+        display: block;
+        text-align: left;
+        font: inherit;
+        color: var(--phosphor);
+        background: rgba(10, 14, 39, 0.65);
+        border: 1px dashed rgba(0, 240, 255, 0.35);
+        border-radius: 0;
+        padding: 0.5rem 0.55rem 0.5rem;
+        cursor: pointer;
+        min-width: 0;
+      }
+      .v2 .sig:hover { background: rgba(0, 240, 255, 0.08); }
+      .v2 .sig.open { border: 2px solid var(--accent); box-shadow: 0 0 8px var(--accent), 0 0 24px rgba(0, 240, 255, 0.28); background: rgba(0, 240, 255, 0.07); }
+      .v2 .s-corner { position: absolute; top: -1px; right: -1px; }
+      .v2 .s-icon { font-size: 1.5rem; line-height: 1; display: block; margin-bottom: 0.25rem; }
+      .v2 .s-name { display: block; font-size: 0.92rem; line-height: 1.3; padding-right: 3.4rem; }
+      .v2 .sig.open .s-name { color: var(--accent); }
+      .v2 .s-tag { display: block; font-family: var(--font-terminal); font-size: 0.95rem; color: rgba(232, 244, 255, 0.58); margin-top: 0.1rem; }
+      .v2 .s-why { display: none; font-size: 0.78rem; line-height: 1.55; margin: 0.4rem 0 0; padding-top: 0.35rem; border-top: 1px dashed rgba(0, 240, 255, 0.3); }
+      .v2 .sig.open .s-why { display: block; }
+      .v2 .s-why b { color: var(--crt-amber); }
+      .v2 .det-scope {
+        margin-top: 0.55rem; padding: 0.4rem 0.55rem;
+        font-size: 0.76rem; line-height: 1.5; color: rgba(232, 244, 255, 0.76);
+        border: 1px dashed rgba(255, 176, 0, 0.4); background: rgba(255, 176, 0, 0.05);
+      }
+      .v2 .det-scope .s-k { font-family: var(--font-pixel-jp); font-size: 1rem; color: var(--crt-amber); letter-spacing: 0.08em; margin-right: 0.45rem; }
+      .v2 .det-scope b { color: var(--crt-amber); }
+
+      /* ══════════════════════════════════════════════════════════
+         V3 — Pattern Engine  (Re-frame: CLI console)
+         Detection engines listed as processes with ON / LOCKED
+         state. Expanding prints the man-page body in phosphor green.
+         ══════════════════════════════════════════════════════════ */
+      .v3 .eng-wrap { border: 2px solid rgba(155, 188, 15, 0.5); background: rgba(5, 6, 15, 0.85); padding: 0.45rem 0.6rem 0.55rem; }
+      .v3 .eng-bar { font-family: var(--font-mono); font-size: 0.7rem; color: rgba(155, 188, 15, 0.55); border-bottom: 1px dashed rgba(155, 188, 15, 0.3); padding-bottom: 0.25rem; margin-bottom: 0.3rem; letter-spacing: 0.04em; }
+      .v3 .eng {
+        display: flex; align-items: baseline; gap: 0.5rem; width: 100%;
+        font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.7;
+        text-align: left; color: var(--gb-green); background: transparent;
+        border: none; border-radius: 0; padding: 0.05rem 0.2rem; cursor: pointer;
+      }
+      .v3 .eng:hover { background: rgba(155, 188, 15, 0.12); }
+      .v3 .e-id { flex: none; color: rgba(155, 188, 15, 0.55); }
+      .v3 .e-id::before { content: '$ '; }
+      .v3 .e-name { flex: 1 1 auto; min-width: 0; }
+      .v3 .e-state { flex: none; font-size: 0.72rem; letter-spacing: 0.06em; }
+      .v3 .e-state.free { color: var(--gb-green); }
+      .v3 .e-state.paid { color: var(--crt-amber); }
+      .v3 .eng.open { color: var(--crt-amber); text-shadow: 0 0 8px rgba(255, 176, 0, 0.5); }
+      .v3 .e-why { display: none; font-family: var(--font-mono); font-size: 0.73rem; line-height: 1.7; color: rgba(155, 188, 15, 0.95); margin: 0.1rem 0 0.35rem; padding: 0 0 0 1.4rem; border-left: 2px solid rgba(155, 188, 15, 0.4); margin-left: 0.5rem; }
+      .v3 .e-item.open .e-why { display: block; }
+      .v3 .e-why b { color: var(--crt-amber); }
+      .v3 .e-item.open .e-why::after { content: '▊'; margin-left: 0.2em; animation: blink 1s steps(1) infinite; }
+      @keyframes blink { 50% { opacity: 0; } }
+      .v3 .det-scope { margin-top: 0.4rem; font-family: var(--font-mono); font-size: 0.7rem; line-height: 1.65; color: rgba(232, 244, 255, 0.62); border-top: 1px dashed rgba(155, 188, 15, 0.3); padding-top: 0.35rem; }
+      .v3 .det-scope .s-k { color: var(--crt-amber); }
+      .v3 .det-scope .s-k::before { content: '# '; }
+      .v3 .det-scope b { color: var(--crt-amber); }
+
+      /* ══════════════════════════════════════════════════════════
+         V4 — Equipment Slots  (Re-frame: RPG equip screen)
+         Square icon tiles in one row. GHAS tiles carry a LOCK.
+         Selecting a tile fills the fixed detail plate below —
+         the panel height never changes.
+         ══════════════════════════════════════════════════════════ */
+      .v4 .eq-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.5rem; }
+      .v4 .eq {
+        position: relative; display: flex; flex-direction: column; align-items: center; gap: 0.2rem;
+        font: inherit; color: var(--phosphor); background: rgba(10, 14, 39, 0.75);
+        border: 2px solid rgba(0, 240, 255, 0.3); border-radius: 0;
+        padding: 0.45rem 0.3rem 0.4rem; cursor: pointer; min-width: 0;
+      }
+      .v4 .eq:hover { border-color: rgba(0, 240, 255, 0.7); background: rgba(0, 240, 255, 0.08); }
+      .v4 .eq.sel { border-color: var(--accent); background: rgba(0, 240, 255, 0.14); box-shadow: 0 0 8px var(--accent), 0 0 24px rgba(0, 240, 255, 0.3); }
+      .v4 .q-icon { font-size: 1.5rem; line-height: 1; }
+      .v4 .q-name { font-size: 0.76rem; line-height: 1.3; text-align: center; }
+      .v4 .q-lock {
+        position: absolute; top: -2px; right: -2px;
+        font-family: var(--font-terminal); font-size: 0.85rem; line-height: 1.1;
+        padding: 0 0.25em; letter-spacing: 0.06em;
+      }
+      .v4 .q-lock.free { color: var(--shadow-ink); background: var(--gb-green); }
+      .v4 .q-lock.paid { color: var(--shadow-ink); background: var(--crt-amber); }
+      .v4 .eq-plate {
+        margin-top: 0.5rem; min-height: 6.2rem;
+        border: 1px dashed rgba(0, 240, 255, 0.35); background: rgba(5, 6, 15, 0.65);
+        padding: 0.5rem 0.6rem;
+      }
+      .v4 .p-title { font-family: var(--font-terminal); font-size: 1.25rem; letter-spacing: 0.1em; color: var(--accent); margin: 0 0 0.2rem; }
+      .v4 .p-why { font-size: 0.8rem; line-height: 1.6; margin: 0; color: rgba(232, 244, 255, 0.9); }
+      .v4 .p-why b { color: var(--crt-amber); }
+      .v4 .p-empty { font-family: var(--font-pixel-jp); font-size: 1.2rem; letter-spacing: 0.12em; color: rgba(232, 244, 255, 0.45); margin: 0; }
+      .v4 .det-scope { margin-top: 0.45rem; font-size: 0.75rem; line-height: 1.5; color: rgba(232, 244, 255, 0.72); }
+      .v4 .det-scope .s-k { font-family: var(--font-pixel-jp); font-size: 1rem; color: var(--crt-amber); letter-spacing: 0.08em; margin-right: 0.4rem; }
+      .v4 .det-scope b { color: var(--crt-amber); }
+
+      /* ══════════════════════════════════════════════════════════
+         V5 — Dossier Tabs  (Re-frame: folder tabs)
+         Four file tabs along the top, one body sheet beneath.
+         Zero vertical growth — the sheet is a fixed window.
+         ══════════════════════════════════════════════════════════ */
+      .v5 .tab-row { display: flex; gap: 0.2rem; align-items: flex-end; }
+      .v5 .tab {
+        flex: 1 1 0; min-width: 0;
+        display: flex; align-items: center; justify-content: center; gap: 0.3rem;
+        font: inherit; font-size: 0.78rem; line-height: 1.3;
+        color: rgba(232, 244, 255, 0.7);
+        background: rgba(10, 14, 39, 0.8);
+        border: 1px dashed rgba(0, 240, 255, 0.3); border-bottom: none; border-radius: 0;
+        padding: 0.34rem 0.3rem; cursor: pointer;
+        clip-path: polygon(6px 0, 100% 0, 100% 100%, 0 100%);
+      }
+      .v5 .tab:hover { color: var(--phosphor); background: rgba(0, 240, 255, 0.09); }
+      .v5 .tab.sel {
+        color: var(--shadow-ink); background: var(--accent);
+        border: 2px solid var(--accent); border-bottom: none;
+        box-shadow: 0 -4px 12px rgba(0, 240, 255, 0.35);
+      }
+      .v5 .t-dot { flex: none; width: 7px; height: 7px; }
+      .v5 .t-dot.free { background: var(--gb-green); }
+      .v5 .t-dot.paid { background: var(--crt-amber); }
+      .v5 .tab.sel .t-dot { outline: 1px solid var(--shadow-ink); }
+      .v5 .sheet {
+        border: 2px solid var(--accent); background: rgba(5, 6, 15, 0.8);
+        padding: 0.55rem 0.7rem 0.6rem; min-height: 7.4rem;
+      }
+      .v5 .sh-head { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem; }
+      .v5 .sh-title { font-family: var(--font-terminal); font-size: 1.3rem; letter-spacing: 0.1em; color: var(--accent); }
+      .v5 .sh-why { font-size: 0.82rem; line-height: 1.65; margin: 0; color: rgba(232, 244, 255, 0.92); }
+      .v5 .sh-why b { color: var(--crt-amber); }
+      .v5 .sh-empty { font-family: var(--font-pixel-jp); font-size: 1.2rem; color: rgba(232, 244, 255, 0.45); letter-spacing: 0.12em; margin: 0; }
+      .v5 .det-scope { margin-top: 0.45rem; font-size: 0.75rem; line-height: 1.5; color: rgba(232, 244, 255, 0.72); border-left: 3px solid rgba(255, 176, 0, 0.55); padding-left: 0.5rem; }
+      .v5 .det-scope .s-k { font-family: var(--font-pixel-jp); font-size: 1rem; color: var(--crt-amber); letter-spacing: 0.08em; margin-right: 0.4rem; }
+      .v5 .det-scope b { color: var(--crt-amber); }
+
+      /* ══════════════════════════════════════════════════════════
+         V6 — Scan Bands  (Re-frame: radar sweep)
+         Each detector is a horizontal band with a sweeping line;
+         the active band widens into a readout. Motion sells it.
+         ══════════════════════════════════════════════════════════ */
+      .v6 .bands { display: flex; flex-direction: column; gap: 0.3rem; }
+      .v6 .band {
+        position: relative; overflow: hidden;
+        display: block; width: 100%; text-align: left; font: inherit;
+        color: var(--phosphor); background: rgba(10, 14, 39, 0.7);
+        border: 1px solid rgba(0, 240, 255, 0.25); border-left: 3px solid rgba(0, 240, 255, 0.45);
+        border-radius: 0; padding: 0.36rem 0.55rem; cursor: pointer;
+      }
+      .v6 .band::before {
+        content: ''; position: absolute; top: 0; bottom: 0; width: 34%;
+        background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.16), transparent);
+        animation: sweep 3.4s linear infinite; pointer-events: none;
+      }
+      @keyframes sweep { from { left: -34%; } to { left: 100%; } }
+      .v6 .band.open { border-color: var(--accent); border-left-color: var(--accent); background: rgba(0, 240, 255, 0.09); box-shadow: 0 0 8px var(--accent), 0 0 24px rgba(0, 240, 255, 0.25); }
+      .v6 .band.open::before { animation-duration: 1.3s; background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.3), transparent); }
+      .v6 .b-head { display: flex; align-items: center; gap: 0.45rem; min-width: 0; position: relative; }
+      .v6 .b-icon { flex: none; font-size: 0.95rem; line-height: 1; }
+      .v6 .b-name { flex: 1 1 auto; min-width: 0; font-size: 0.9rem; line-height: 1.35; }
+      .v6 .b-why { display: none; position: relative; font-size: 0.78rem; line-height: 1.6; margin: 0.3rem 0 0; padding-top: 0.3rem; border-top: 1px dashed rgba(0, 240, 255, 0.3); }
+      .v6 .band.open .b-why { display: block; }
+      .v6 .b-why b { color: var(--crt-amber); }
+      .v6 .det-scope { margin-top: 0.5rem; font-size: 0.75rem; line-height: 1.5; color: rgba(232, 244, 255, 0.72); border-top: 1px dashed rgba(255, 176, 0, 0.4); padding-top: 0.4rem; }
+      .v6 .det-scope .s-k { font-family: var(--font-pixel-jp); font-size: 1rem; color: var(--crt-amber); letter-spacing: 0.08em; margin-right: 0.4rem; }
+      .v6 .det-scope b { color: var(--crt-amber); }
+
+      /* ══════════════════════════════════════════════════════════
+         V7 — Channel Strip  (Re-shape: 4 vertical channels)
+         Mixer/EQ columns. Each channel is tall and narrow with a
+         level meter; the selected channel prints into a drawer.
+         ══════════════════════════════════════════════════════════ */
+      .v7 .chan-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.4rem; }
+      .v7 .chan {
+        display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
+        font: inherit; color: var(--phosphor);
+        background: linear-gradient(180deg, rgba(26, 11, 46, 0.8), rgba(10, 14, 39, 0.9));
+        border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 0;
+        padding: 0.45rem 0.25rem 0.4rem; cursor: pointer; min-width: 0;
+      }
+      .v7 .chan:hover { border-color: var(--accent); }
+      .v7 .chan.sel { border: 2px solid var(--accent); box-shadow: 0 0 8px var(--accent), 0 0 24px rgba(0, 240, 255, 0.3); }
+      .v7 .ch-icon { font-size: 1.35rem; line-height: 1; }
+      .v7 .ch-name { font-size: 0.74rem; line-height: 1.25; text-align: center; }
+      .v7 .ch-meter { display: flex; flex-direction: column-reverse; gap: 2px; width: 100%; padding: 0 0.6rem; }
+      .v7 .ch-meter i { display: block; height: 4px; background: rgba(232, 244, 255, 0.13); }
+      .v7 .ch-meter i.on { background: var(--gb-green); box-shadow: 0 0 5px rgba(155, 188, 15, 0.7); }
+      .v7 .chan.sel .ch-meter i.on { background: var(--accent); box-shadow: 0 0 5px var(--accent); }
+      .v7 .ch-tier { font-family: var(--font-terminal); font-size: 0.88rem; letter-spacing: 0.06em; line-height: 1.2; padding: 0 0.3em; }
+      .v7 .ch-tier.free { color: var(--shadow-ink); background: var(--gb-green); }
+      .v7 .ch-tier.paid { color: var(--shadow-ink); background: var(--crt-amber); }
+      .v7 .drawer { margin-top: 0.45rem; min-height: 5.6rem; border: 1px dashed rgba(0, 240, 255, 0.35); background: rgba(5, 6, 15, 0.7); padding: 0.5rem 0.6rem; }
+      .v7 .dr-title { font-family: var(--font-terminal); font-size: 1.25rem; letter-spacing: 0.1em; color: var(--accent); margin: 0 0 0.2rem; }
+      .v7 .dr-why { font-size: 0.8rem; line-height: 1.6; margin: 0; }
+      .v7 .dr-why b { color: var(--crt-amber); }
+      .v7 .dr-empty { font-family: var(--font-pixel-jp); font-size: 1.2rem; letter-spacing: 0.12em; color: rgba(232, 244, 255, 0.45); margin: 0; }
+      .v7 .det-scope { margin-top: 0.45rem; font-size: 0.75rem; line-height: 1.5; color: rgba(232, 244, 255, 0.72); }
+      .v7 .det-scope .s-k { font-family: var(--font-pixel-jp); font-size: 1rem; color: var(--crt-amber); letter-spacing: 0.08em; margin-right: 0.4rem; }
+      .v7 .det-scope b { color: var(--crt-amber); }
+
+      /* ══════════════════════════════════════════════════════════
+         V8 — Split Deck  (Re-shape: two panes)
+         Dense list on the left, big fixed reading pane on the
+         right. The tallest text can never push the slide over.
+         ══════════════════════════════════════════════════════════ */
+      .v8 .split { display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: 0.55rem; align-items: stretch; }
+      .v8 .pick-list { display: flex; flex-direction: column; gap: 0.25rem; }
+      .v8 .pick {
+        display: flex; align-items: center; gap: 0.4rem; width: 100%;
+        font: inherit; font-size: 0.84rem; line-height: 1.35; text-align: left;
+        color: rgba(232, 244, 255, 0.85); background: rgba(10, 14, 39, 0.7);
+        border: 1px dashed rgba(0, 240, 255, 0.28); border-radius: 0;
+        padding: 0.34rem 0.45rem; cursor: pointer; min-width: 0;
+      }
+      .v8 .pick:hover { background: rgba(0, 240, 255, 0.1); }
+      .v8 .pick.sel { color: var(--shadow-ink); background: var(--accent); border: 2px solid var(--accent); box-shadow: 0 0 8px var(--accent), 0 0 24px rgba(0, 240, 255, 0.3); }
+      .v8 .k-icon { flex: none; font-size: 0.95rem; line-height: 1; }
+      .v8 .k-name { flex: 1 1 auto; min-width: 0; }
+      .v8 .k-dot { flex: none; width: 8px; height: 8px; }
+      .v8 .k-dot.free { background: var(--gb-green); }
+      .v8 .k-dot.paid { background: var(--crt-amber); }
+      .v8 .pane { border: 2px solid rgba(0, 240, 255, 0.45); background: rgba(5, 6, 15, 0.75); padding: 0.55rem 0.7rem; min-height: 9rem; }
+      .v8 .pn-head { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem; }
+      .v8 .pn-title { font-family: var(--font-terminal); font-size: 1.35rem; letter-spacing: 0.1em; color: var(--accent); }
+      .v8 .pn-why { font-size: 0.84rem; line-height: 1.7; margin: 0; }
+      .v8 .pn-why b { color: var(--crt-amber); }
+      .v8 .pn-empty { font-family: var(--font-pixel-jp); font-size: 1.25rem; letter-spacing: 0.12em; color: rgba(232, 244, 255, 0.45); margin: 0; }
+      .v8 .det-scope { margin-top: 0.5rem; font-size: 0.75rem; line-height: 1.5; color: rgba(232, 244, 255, 0.72); border-top: 1px dashed rgba(255, 176, 0, 0.4); padding-top: 0.4rem; }
+      .v8 .det-scope .s-k { font-family: var(--font-pixel-jp); font-size: 1rem; color: var(--crt-amber); letter-spacing: 0.08em; margin-right: 0.4rem; }
+      .v8 .det-scope b { color: var(--crt-amber); }
+
+      /* ══════════════════════════════════════════════════════════
+         V9 — Coin-Op  (Wildcard: arcade cabinet)
+         FREE detector is credited and playable; the GHAS ones show
+         INSERT COIN until you open them. Hazard-stripe locked bar.
+         ══════════════════════════════════════════════════════════ */
+      .v9 .cab-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.45rem; align-content: start; }
+      .v9 .cab {
+        position: relative; display: block; text-align: left; font: inherit;
+        color: var(--phosphor); background: rgba(10, 14, 39, 0.8);
+        border: 2px solid rgba(232, 244, 255, 0.18); border-radius: 0;
+        padding: 0.45rem 0.55rem 0.5rem; cursor: pointer; min-width: 0;
+      }
+      .v9 .cab:hover { border-color: var(--neon-magenta); }
+      .v9 .cab.open { grid-column: 1 / -1; border-color: var(--neon-magenta); background: rgba(255, 46, 136, 0.09); box-shadow: 0 0 8px var(--neon-magenta), 0 0 24px rgba(255, 46, 136, 0.3); }
+      .v9 .k-marq {
+        display: flex; align-items: center; gap: 0.4rem;
+        font-family: var(--font-terminal); font-size: 1.15rem; letter-spacing: 0.1em; line-height: 1.2;
+        color: var(--crt-amber); margin-bottom: 0.2rem;
+      }
+      .v9 .cab.open .k-marq { color: var(--neon-magenta); }
+      .v9 .k-title { font-size: 0.88rem; line-height: 1.3; display: block; }
+      .v9 .k-credit {
+        display: inline-block; margin-top: 0.25rem;
+        font-family: var(--font-terminal); font-size: 0.95rem; letter-spacing: 0.1em; line-height: 1.25;
+        padding: 0 0.35em;
+      }
+      .v9 .k-credit.free { color: var(--shadow-ink); background: var(--gb-green); }
+      .v9 .k-credit.paid {
+        color: var(--shadow-ink);
+        background: repeating-linear-gradient(45deg, var(--crt-amber) 0 6px, #05060f 6px 10px, var(--crt-amber) 10px 16px);
+        text-shadow: 0 0 3px var(--crt-amber);
+      }
+      .v9 .k-why { display: none; font-size: 0.79rem; line-height: 1.6; margin: 0.4rem 0 0; padding-top: 0.35rem; border-top: 1px dashed rgba(255, 46, 136, 0.4); }
+      .v9 .cab.open .k-why { display: block; }
+      .v9 .k-why b { color: var(--crt-amber); }
+      .v9 .det-scope { margin-top: 0.5rem; font-size: 0.75rem; line-height: 1.5; color: rgba(232, 244, 255, 0.72); border-top: 2px solid rgba(255, 46, 136, 0.45); padding-top: 0.4rem; }
+      .v9 .det-scope .s-k { font-family: var(--font-pixel-jp); font-size: 1rem; color: var(--neon-magenta); letter-spacing: 0.08em; margin-right: 0.4rem; }
+      .v9 .det-scope b { color: var(--crt-amber); }
+
+      /* ══════════════════════════════════════════════════════════
+         V10 — Detection Matrix  (Wildcard: chunky pixel tiles)
+         Big blocky tiles on a grid substrate, like a level-select
+         board. Selecting lights the tile and prints a wide readout.
+         ══════════════════════════════════════════════════════════ */
+      .v10 .mx-board {
+        display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px;
+        padding: 4px; background:
+          repeating-linear-gradient(0deg, rgba(0, 240, 255, 0.1) 0 1px, transparent 1px 12px),
+          repeating-linear-gradient(90deg, rgba(0, 240, 255, 0.1) 0 1px, transparent 1px 12px),
+          rgba(5, 6, 15, 0.85);
+        border: 2px solid rgba(0, 240, 255, 0.35);
+      }
+      .v10 .mx {
+        position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.15rem;
+        font: inherit; color: var(--phosphor); background: rgba(10, 14, 39, 0.9);
+        border: none; border-radius: 0; padding: 0.6rem 0.3rem 0.5rem; cursor: pointer; min-width: 0;
+        box-shadow: inset 0 0 0 2px rgba(232, 244, 255, 0.12);
+      }
+      .v10 .mx:hover { background: rgba(0, 240, 255, 0.12); }
+      .v10 .mx.sel { background: var(--accent); color: var(--shadow-ink); box-shadow: inset 0 0 0 2px var(--shadow-ink), 0 0 10px var(--accent), 0 0 26px rgba(0, 240, 255, 0.4); }
+      .v10 .m-icon { font-size: 1.6rem; line-height: 1; }
+      .v10 .m-name { font-size: 0.74rem; line-height: 1.25; text-align: center; }
+      .v10 .m-tier { position: absolute; top: 3px; right: 3px; width: 8px; height: 8px; }
+      .v10 .m-tier.free { background: var(--gb-green); box-shadow: 0 0 6px var(--gb-green); }
+      .v10 .m-tier.paid { background: var(--crt-amber); box-shadow: 0 0 6px var(--crt-amber); }
+      .v10 .mx.sel .m-tier { outline: 2px solid var(--shadow-ink); }
+      .v10 .readout {
+        margin-top: 0.5rem; min-height: 5.4rem;
+        border-left: 4px solid var(--accent); background: rgba(0, 240, 255, 0.05);
+        padding: 0.45rem 0.65rem;
+      }
+      .v10 .r-title { font-family: var(--font-terminal); font-size: 1.3rem; letter-spacing: 0.1em; color: var(--accent); margin: 0 0 0.2rem; }
+      .v10 .r-why { font-size: 0.82rem; line-height: 1.65; margin: 0; }
+      .v10 .r-why b { color: var(--crt-amber); }
+      .v10 .r-empty { font-family: var(--font-pixel-jp); font-size: 1.2rem; letter-spacing: 0.12em; color: rgba(232, 244, 255, 0.45); margin: 0; }
+      .v10 .det-scope { margin-top: 0.45rem; font-size: 0.75rem; line-height: 1.5; color: rgba(232, 244, 255, 0.72); }
+      .v10 .det-scope .s-k { font-family: var(--font-pixel-jp); font-size: 1rem; color: var(--crt-amber); letter-spacing: 0.08em; margin-right: 0.4rem; }
+      .v10 .det-scope b { color: var(--crt-amber); }
+    </style>
+  </head>
+  <body>
+    <header class="page-head">
+      <h1>DETECTION TYPES — 10 PROTOTYPES</h1>
+      <p>
+        secret-scanning スライド「何を検出するのか / What gets detected」の
+        <b>4 つの検出タイプ</b>を折りたたみで見せるコンポーネント案。
+        既存の 3 種（<b>risk-widget</b> / <b>spec-widget</b> / <b>ctl-widget</b>）は
+        すべて全幅の積み上げ行なので、ここでは<b>意図的に別のジオメトリ</b>を探っている。
+      </p>
+      <p>
+        どの案も <b>ライセンスバッジ</b>（Provider = 無料 / それ以外は Secret Protection・GHAS 必須）を
+        前面に出している。5 つめの <b>📚 対象</b> は検出タイプではないので、
+        並列カードではなく<b>フッター行</b>として扱う。
+      </p>
+      <p>各案は <b>16:9 のスライド枠</b>に入れてある。枠内に収まっていれば本番でも 1 スライドに収まる。</p>
+      <div class="legend">V1-V2 Anchor / V3-V6 Re-frame / V7-V8 Re-shape / V9-V10 Wildcard</div>
+      <div class="controls">
+        <button class="ctl on" id="lang-ja" data-lang="ja">日本語</button>
+        <button class="ctl" id="lang-en" data-lang="en">EN</button>
+        <button class="ctl" id="reset">RESET ALL</button>
+      </div>
+    </header>
+
+    <main class="gallery" id="gallery"></main>
+
+    <script>
+      // ── Real content from src/content/playbook/{ja,en}/secret-scanning.md ──
+      const DATA = {
+        ja: {
+          h2: '何を検出するのか',
+          intro: '検出エンジンは <b>4 種類</b>。Provider patterns だけが無料で、残りは <b>Secret Protection / GHAS</b> が必要。',
+          hint: '▸ クリックして詳細を表示',
+          empty: 'タイプヲ センタク ▸',
+          foot: '🤖 Generic secrets と AI detection は誤検知が増えがち。<b>Push protection</b> とセットで使うと "push しようとした瞬間に止まる" ので運用しやすい。',
+          scopeKey: '📚 対象',
+          scope: 'コードだけでなく<b>全ブランチの Git 履歴全体</b>、Issue(クローズ済み含む)・PR・<b>GitHub Discussions</b>・Wiki・secret gists まで。新しい secret type が追加されると定期的に再スキャンされる。',
+          items: [
+            {
+              icon: '🏷️', name: 'Provider patterns', short: 'Provider', tier: 'free', tierLabel: 'FREE', code: 'provider', level: 5,
+              tag: '200+ パートナー',
+              why: 'AWS、Azure、GCP、Stripe、Slack、OpenAI、GitHub PAT など <b>200+ パートナー</b>が登録した正規表現で検知。誤検知が極めて少ない。',
+            },
+            {
+              icon: '🧪', name: 'Generic patterns', short: 'Generic', tier: 'paid', tierLabel: 'GHAS', code: 'generic', level: 3,
+              tag: '汎用パターン',
+              why: 'private key、接続文字列、HTTP basic auth などの汎用パターン。<b>Secret Protection / GHAS が必要</b>。',
+            },
+            {
+              icon: '🤖', name: 'AI-detected secrets', short: 'AI 検出', tier: 'paid', tierLabel: 'GHAS', code: 'ai', level: 3,
+              tag: '非構造化 secret',
+              why: 'パスワードなどの<b>非構造化 secret</b> を AI で検出。<b>Secret Protection / GHAS が必要</b>。',
+            },
+            {
+              icon: '🛠️', name: 'Custom patterns', short: 'Custom', tier: 'paid', tierLabel: 'GHAS', code: 'custom', level: 4,
+              tag: '独自の正規表現',
+              why: '自社独自トークン用に正規表現を定義。<b>Public repo を含め Secret Protection / GHAS が必要</b>。',
+            },
+          ],
+        },
+        en: {
+          h2: 'What gets detected',
+          intro: 'There are <b>four</b> detection engines. Only provider patterns are free — the rest need <b>Secret Protection / GHAS</b>.',
+          hint: '▸ CLICK TO REVEAL',
+          empty: 'SELECT A TYPE ▸',
+          foot: '🤖 Generic secrets and AI detection tend to produce more false positives. Pairing them with <b>Push protection</b> means things get stopped at the moment someone tries to push them.',
+          scopeKey: '📚 SCOPE',
+          scope: 'Not just code: the <b>full Git history on all branches</b>, plus Issues (including closed historical ones), PRs, <b>GitHub Discussions</b>, Wikis, and secret gists. GitHub also rescans periodically as new secret types ship.',
+          items: [
+            {
+              icon: '🏷️', name: 'Provider patterns', short: 'Provider', tier: 'free', tierLabel: 'FREE', code: 'provider', level: 5,
+              tag: '200+ partners',
+              why: 'Regex patterns registered by <b>200+ partners</b> including AWS, Azure, GCP, Stripe, Slack, OpenAI, and GitHub PATs. Extremely low false-positive rate.',
+            },
+            {
+              icon: '🧪', name: 'Generic patterns', short: 'Generic', tier: 'paid', tierLabel: 'GHAS', code: 'generic', level: 3,
+              tag: 'Keys & conn strings',
+              why: 'Private keys, connection strings, HTTP basic auth, and other generic formats. <b>Requires Secret Protection / GHAS</b>.',
+            },
+            {
+              icon: '🤖', name: 'AI-detected secrets', short: 'AI-detected', tier: 'paid', tierLabel: 'GHAS', code: 'ai', level: 3,
+              tag: 'Unstructured',
+              why: 'Uses AI to detect <b>unstructured secrets</b> such as passwords. <b>Requires Secret Protection / GHAS</b>.',
+            },
+            {
+              icon: '🛠️', name: 'Custom patterns', short: 'Custom', tier: 'paid', tierLabel: 'GHAS', code: 'custom', level: 4,
+              tag: 'Your own regex',
+              why: 'Define regexes for proprietary token formats. <b>Requires Secret Protection / GHAS, including for public repositories</b>.',
+            },
+          ],
+        },
+      };
+
+      const VARIANTS = [
+        { cls: 'v1', kind: 'cart', name: 'V1 — Cartridge Slots', wide: false,
+          desc: 'Anchor。2 列のカートリッジ。右上に切り欠き、ライセンスバッジ付き。開くと 2 列ぶち抜きに広がる。' },
+        { cls: 'v2', kind: 'sig', name: 'V2 — Signal Cards', wide: false,
+          desc: 'Anchor。2x2 の整然としたカード。バッジは角のプレート。開いても自分の列の中だけで伸びる。' },
+        { cls: 'v3', kind: 'engine', name: 'V3 — Pattern Engine', wide: false,
+          desc: 'Re-frame。CLI コンソール。検出エンジンをプロセス一覧として ON / LOCKED 表示、開くと緑の man ページ。' },
+        { cls: 'v4', kind: 'equip', name: 'V4 — Equipment Slots', wide: false,
+          desc: 'Re-frame。RPG の装備画面。正方形タイル 4 つ + 下の固定プレートに解説。高さが一切変わらない。' },
+        { cls: 'v5', kind: 'tabs', name: 'V5 — Dossier Tabs', wide: false,
+          desc: 'Re-frame。書類のフォルダタブ。上に 4 タブ、下に 1 枚のシート。縦に伸びないので安全。' },
+        { cls: 'v6', kind: 'band', name: 'V6 — Scan Bands', wide: false,
+          desc: 'Re-frame。レーダーのスイープ。各検出器が走査線の走る帯。開くと走査が速くなり読み出しが出る。' },
+        { cls: 'v7', kind: 'chan', name: 'V7 — Channel Strip', wide: false,
+          desc: 'Re-shape。ミキサーの縦チャンネル 4 本 + 下の引き出し。レベルメーターで検出強度を示す。' },
+        { cls: 'v8', kind: 'split', name: 'V8 — Split Deck', wide: false,
+          desc: 'Re-shape。左に密なリスト、右に大きな固定ペイン。長文でもスライドが絶対に溢れない。' },
+        { cls: 'v9', kind: 'coin', name: 'V9 — Coin-Op', wide: false,
+          desc: 'Wildcard。アーケード筐体。無料の Provider は CREDIT、GHAS 必須はハザード柄の INSERT COIN。' },
+        { cls: 'v10', kind: 'matrix', name: 'V10 — Detection Matrix', wide: false,
+          desc: 'Wildcard。方眼基板の上に太いピクセルタイル 4 枚。選ぶとタイルが点灯し、横長の読み出しが出る。' },
+      ];
+
+      let LANG = 'ja';
+      const pad = (n) => String(n).padStart(2, '0');
+
+      function scopeHTML(d) {
+        return `<p class="det-scope"><span class="s-k">${d.scopeKey}</span><span class="s-v">${d.scope}</span></p>`;
+      }
+      function shell(v, d, inner) {
+        return `<div class="det-widget ${v.cls}"><p class="det-intro">${d.intro}</p>${inner}${scopeHTML(d)}</div>`;
+      }
+
+      // ── Builders ───────────────────────────────────────────────
+      function cartHTML(v, d) {
+        const cells = d.items
+          .map(
+            (it, i) =>
+              `<button class="cart" type="button" data-i="${i}">` +
+              `<span class="c-head"><span class="c-icon" aria-hidden="true">${it.icon}</span>` +
+              `<span class="c-name">${it.name}</span>` +
+              `<span class="tier ${it.tier}">${it.tierLabel}</span></span>` +
+              `<span class="c-tag">${it.tag}</span>` +
+              `<span class="c-why">${it.why}</span>` +
+              `</button>`
+          )
+          .join('');
+        return shell(v, d, `<div class="cart-grid">${cells}</div>`);
+      }
+
+      function sigHTML(v, d) {
+        const cells = d.items
+          .map(
+            (it, i) =>
+              `<button class="sig" type="button" data-i="${i}">` +
+              `<span class="s-corner tier ${it.tier}">${it.tierLabel}</span>` +
+              `<span class="s-icon" aria-hidden="true">${it.icon}</span>` +
+              `<span class="s-name">${it.name}</span>` +
+              `<span class="s-tag">${it.tag}</span>` +
+              `<span class="s-why">${it.why}</span>` +
+              `</button>`
+          )
+          .join('');
+        return shell(v, d, `<div class="card-grid">${cells}</div>`);
+      }
+
+      function engineHTML(v, d) {
+        const rows = d.items
+          .map(
+            (it, i) =>
+              `<div class="e-item" data-i="${i}">` +
+              `<button class="eng" type="button">` +
+              `<span class="e-id">${it.code}</span>` +
+              `<span class="e-name">${it.name}</span>` +
+              `<span class="e-state ${it.tier}">[${it.tier === 'free' ? 'ON' : 'LOCKED'}]</span>` +
+              `</button>` +
+              `<p class="e-why">${it.why}</p>` +
+              `</div>`
+          )
+          .join('');
+        return shell(
+          v,
+          d,
+          `<div class="eng-wrap"><div class="eng-bar">secret-scanning --engines</div>${rows}</div>`
+        );
+      }
+
+      function equipHTML(v, d) {
+        const tiles = d.items
+          .map(
+            (it, i) =>
+              `<button class="eq" type="button" data-i="${i}">` +
+              `<span class="q-lock ${it.tier}">${it.tier === 'free' ? '★' : '🔒'}</span>` +
+              `<span class="q-icon" aria-hidden="true">${it.icon}</span>` +
+              `<span class="q-name">${it.short}</span>` +
+              `<span class="tier ${it.tier}">${it.tierLabel}</span>` +
+              `</button>`
+          )
+          .join('');
+        return shell(
+          v,
+          d,
+          `<div class="eq-row">${tiles}</div>` +
+            `<div class="eq-plate detail-out" data-empty="${d.empty}"><p class="p-empty">${d.empty}</p></div>`
+        );
+      }
+
+      function tabsHTML(v, d) {
+        const tabs = d.items
+          .map(
+            (it, i) =>
+              `<button class="tab" type="button" data-i="${i}">` +
+              `<span class="t-dot ${it.tier}" aria-hidden="true"></span>` +
+              `<span>${it.short}</span></button>`
+          )
+          .join('');
+        return shell(
+          v,
+          d,
+          `<div class="tab-row">${tabs}</div>` +
+            `<div class="sheet detail-out" data-empty="${d.empty}"><p class="sh-empty">${d.empty}</p></div>`
+        );
+      }
+
+      function bandHTML(v, d) {
+        const bands = d.items
+          .map(
+            (it, i) =>
+              `<button class="band" type="button" data-i="${i}">` +
+              `<span class="b-head"><span class="b-icon" aria-hidden="true">${it.icon}</span>` +
+              `<span class="b-name">${it.name}</span>` +
+              `<span class="tier ${it.tier}">${it.tierLabel}</span></span>` +
+              `<span class="b-why">${it.why}</span>` +
+              `</button>`
+          )
+          .join('');
+        return shell(v, d, `<div class="bands">${bands}</div>`);
+      }
+
+      function chanHTML(v, d) {
+        const chans = d.items
+          .map((it, i) => {
+            const meter =
+              '<span class="ch-meter" aria-hidden="true">' +
+              Array.from({ length: 5 }, (_, k) => `<i class="${k < it.level ? 'on' : ''}"></i>`).join('') +
+              '</span>';
+            return (
+              `<button class="chan" type="button" data-i="${i}">` +
+              `<span class="ch-icon" aria-hidden="true">${it.icon}</span>` +
+              `<span class="ch-name">${it.short}</span>` +
+              meter +
+              `<span class="ch-tier ${it.tier}">${it.tierLabel}</span>` +
+              `</button>`
+            );
+          })
+          .join('');
+        return shell(
+          v,
+          d,
+          `<div class="chan-row">${chans}</div>` +
+            `<div class="drawer detail-out" data-empty="${d.empty}"><p class="dr-empty">${d.empty}</p></div>`
+        );
+      }
+
+      function splitHTML(v, d) {
+        const picks = d.items
+          .map(
+            (it, i) =>
+              `<button class="pick" type="button" data-i="${i}">` +
+              `<span class="k-icon" aria-hidden="true">${it.icon}</span>` +
+              `<span class="k-name">${it.name}</span>` +
+              `<span class="k-dot ${it.tier}" aria-hidden="true"></span>` +
+              `</button>`
+          )
+          .join('');
+        return shell(
+          v,
+          d,
+          `<div class="split"><div class="pick-list">${picks}</div>` +
+            `<div class="pane detail-out" data-empty="${d.empty}"><p class="pn-empty">${d.empty}</p></div></div>`
+        );
+      }
+
+      function coinHTML(v, d) {
+        const cabs = d.items
+          .map(
+            (it, i) =>
+              `<button class="cab" type="button" data-i="${i}">` +
+              `<span class="k-marq"><span aria-hidden="true">${it.icon}</span><span>${pad(i + 1)}</span></span>` +
+              `<span class="k-title">${it.name}</span>` +
+              `<span class="k-credit ${it.tier}">${it.tier === 'free' ? 'CREDIT 1' : 'INSERT COIN'}</span>` +
+              `<span class="k-why">${it.why}</span>` +
+              `</button>`
+          )
+          .join('');
+        return shell(v, d, `<div class="cab-grid">${cabs}</div>`);
+      }
+
+      function matrixHTML(v, d) {
+        const tiles = d.items
+          .map(
+            (it, i) =>
+              `<button class="mx" type="button" data-i="${i}">` +
+              `<span class="m-tier ${it.tier}" aria-hidden="true"></span>` +
+              `<span class="m-icon" aria-hidden="true">${it.icon}</span>` +
+              `<span class="m-name">${it.short}</span>` +
+              `</button>`
+          )
+          .join('');
+        return shell(
+          v,
+          d,
+          `<div class="mx-board">${tiles}</div>` +
+            `<div class="readout detail-out" data-empty="${d.empty}"><p class="r-empty">${d.empty}</p></div>`
+        );
+      }
+
+      const BUILDERS = {
+        cart: cartHTML,
+        sig: sigHTML,
+        engine: engineHTML,
+        equip: equipHTML,
+        tabs: tabsHTML,
+        band: bandHTML,
+        chan: chanHTML,
+        split: splitHTML,
+        coin: coinHTML,
+        matrix: matrixHTML,
+      };
+
+      // Which title/body class names each "detail pane" variant expects.
+      const PANE_CLASS = {
+        equip: ['p-title', 'p-why'],
+        tabs: ['sh-title', 'sh-why'],
+        chan: ['dr-title', 'dr-why'],
+        split: ['pn-title', 'pn-why'],
+        matrix: ['r-title', 'r-why'],
+      };
+
+      function render() {
+        const d = DATA[LANG];
+        const gallery = document.getElementById('gallery');
+        gallery.innerHTML = VARIANTS.map(
+          (v) =>
+            `<section class="proto${v.wide ? ' wide' : ''}" data-variant="${v.cls}" data-kind="${v.kind}">` +
+            `<div class="proto-label">${v.name}</div>` +
+            `<div class="proto-desc">${v.desc}</div>` +
+            `<div class="slide-stage"><div class="slide-frame">` +
+            `<h2 class="slide-h2">${d.h2}</h2>` +
+            `<p class="hint">${d.hint}</p>` +
+            BUILDERS[v.kind](v, d) +
+            `<p class="det-foot">${d.foot}</p>` +
+            `</div></div></section>`
+        ).join('');
+        fitStages();
+      }
+
+      // Scale each 768x587 logical slide to its column, and flag overflow.
+      function fitStages() {
+        document.querySelectorAll('.slide-stage').forEach((stage) => {
+          const frame = stage.querySelector('.slide-frame');
+          const s = stage.clientWidth / 768;
+          frame.style.transform = `scale(${s})`;
+          stage.style.height = 587 * s + 'px';
+        });
+        checkOverflow();
+      }
+
+      function checkOverflow() {
+        document.querySelectorAll('.slide-frame').forEach((frame) => {
+          const over = frame.scrollHeight - frame.clientHeight > 2;
+          frame.parentElement.classList.toggle('overflowing', over);
+        });
+      }
+
+      window.addEventListener('resize', fitStages);
+
+      // ── Interaction ────────────────────────────────────────────
+      // Two families: "open in place" (toggles .open, exclusive) and
+      // "select + fill a fixed pane" (toggles .sel, exclusive).
+      const OPEN_SEL = '.cart, .sig, .eng, .band, .cab';
+      const PICK_SEL = '.eq, .tab, .chan, .pick, .mx';
+
+      document.getElementById('gallery').addEventListener('click', (e) => {
+        const proto = e.target.closest('.proto');
+        if (!proto) return;
+        const d = DATA[LANG];
+
+        const opener = e.target.closest(OPEN_SEL);
+        if (opener) {
+          // .eng lives inside a wrapper that carries the state
+          const target = opener.matches('.eng') ? opener.closest('.e-item') : opener;
+          const wasOpen = target.classList.contains('open');
+          proto.querySelectorAll('.open').forEach((el) => el.classList.remove('open'));
+          if (!wasOpen) target.classList.add('open');
+          checkOverflow();
+          return;
+        }
+
+        const picker = e.target.closest(PICK_SEL);
+        if (picker) {
+          const kind = proto.dataset.kind;
+          const wasSel = picker.classList.contains('sel');
+          proto.querySelectorAll('.sel').forEach((el) => el.classList.remove('sel'));
+          const out = proto.querySelector('.detail-out');
+          if (wasSel) {
+            out.innerHTML = `<p class="${PANE_CLASS[kind][1].replace('-why', '-empty')}">${out.dataset.empty}</p>`;
+          } else {
+            picker.classList.add('sel');
+            const it = d.items[Number(picker.dataset.i)];
+            const [tc, wc] = PANE_CLASS[kind];
+            out.innerHTML =
+              `<div class="pane-head">` +
+              `<span class="${tc}">${it.icon} ${it.name}</span>` +
+              `<span class="tier ${it.tier}">${it.tierLabel}</span></div>` +
+              `<p class="${wc}">${it.why}</p>`;
+          }
+          checkOverflow();
+        }
+      });
+
+      document.querySelectorAll('.ctl[data-lang]').forEach((b) => {
+        b.addEventListener('click', () => {
+          LANG = b.dataset.lang;
+          document.querySelectorAll('.ctl[data-lang]').forEach((x) => x.classList.toggle('on', x === b));
+          render();
+        });
+      });
+      document.getElementById('reset').addEventListener('click', render);
+
+      render();
+    </script>
+  </body>
+</html>

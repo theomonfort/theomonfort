@@ -189,13 +189,48 @@ Secret Scanning は 5 つの機能で構成される。入口を塞ぐ **Push pr
 
 ## 何を検出するのか
 
-- 🏷️ **Provider patterns** — AWS、Azure、GCP、Stripe、Slack、OpenAI、GitHub PAT など 200+ パートナーが登録した正規表現で検知。誤検知が極めて少ない
-- 🧪 **Generic patterns** — private key、接続文字列、HTTP basic auth などの汎用パターン。Secret Protection / GHAS が必要
-- 🤖 **AI-detected secrets** — パスワードなどの非構造化 secret を AI で検出。Secret Protection / GHAS が必要
-- 🛠️ **Custom patterns** — 自社独自トークン用に正規表現を定義。Public repo を含め Secret Protection / GHAS が必要
-- 📚 対象 — コードだけでなく **全ブランチの Git 履歴全体**、Issue(クローズ済みの過去分も含む)・PR・**GitHub Discussions**・Wiki・secret gists まで。新しい secret type が追加されると定期的に再スキャンされる
+検出エンジンは **4 種類**。無料は Provider patterns のみ。
 
-> 🤖 Generic secrets と AI detection は誤検知が増えがち。**Push protection** とセットで使うと "push しようとした瞬間に止まる" ので運用しやすい。
+<div class="det-widget">
+<p class="det-hint">▸ クリックして詳細を表示</p>
+<div class="det-split">
+<div class="det-list">
+<details class="det-pick" name="ss-detect">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🏷️</span><span class="det-name">Provider patterns</span><span class="det-dot is-free" aria-hidden="true"></span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">🏷️</span><span class="det-title">Provider patterns</span><span class="det-tier is-free">FREE</span></p>
+<p class="det-why">AWS、Azure、GCP、Stripe、Slack、OpenAI、GitHub PAT など <b>200+ パートナー</b>が登録した正規表現で検知。誤検知が極めて少ない。</p>
+</div>
+</details>
+<details class="det-pick" name="ss-detect">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🧪</span><span class="det-name">Generic patterns</span><span class="det-dot is-paid" aria-hidden="true"></span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">🧪</span><span class="det-title">Generic patterns</span><span class="det-tier is-paid">GHAS</span></p>
+<p class="det-why">private key、接続文字列、HTTP basic auth などの汎用パターン。<b>Secret Protection / GHAS が必要</b>。</p>
+</div>
+</details>
+<details class="det-pick" name="ss-detect">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI-detected secrets</span><span class="det-dot is-paid" aria-hidden="true"></span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">AI-detected secrets</span><span class="det-tier is-paid">GHAS</span></p>
+<p class="det-why">パスワードなどの<b>非構造化 secret</b> を AI で検出。<b>Secret Protection / GHAS が必要</b>。</p>
+</div>
+</details>
+<details class="det-pick" name="ss-detect">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🛠️</span><span class="det-name">Custom patterns</span><span class="det-dot is-paid" aria-hidden="true"></span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">🛠️</span><span class="det-title">Custom patterns</span><span class="det-tier is-paid">GHAS</span></p>
+<p class="det-why">自社独自トークン用に正規表現を定義。<b>Public repo を含め Secret Protection / GHAS が必要</b>。</p>
+</div>
+</details>
+</div>
+<div class="det-screen"><p class="det-empty">タイプを選択 ▸</p></div>
+</div>
+<p class="det-scope"><span class="det-scope-k">📚 対象</span><span class="det-scope-v">コードだけでなく<b>全ブランチの Git 履歴全体</b>、Issue・PR・<b>GitHub Discussions</b>・Wiki・secret gists まで。新しい secret type の追加時に再スキャンされる。</span></p>
+</div>
+
+
+> 🤖 誤検知が増えがちな 2 つ。Generic は **Push protection** で入口を塞げるが、**AI-detected（password）は push protection も validity check も非対応**。トリアージ前提で運用する。
 
 📘 詳細: <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns" target="_blank" rel="noopener noreferrer">Supported secrets (provider patterns) ↗</a> ・ <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/using-advanced-secret-scanning-and-push-protection-features/custom-patterns/defining-custom-patterns-for-secret-scanning" target="_blank" rel="noopener noreferrer">Defining custom patterns ↗</a>
 
