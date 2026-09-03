@@ -477,6 +477,11 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
         el.classList.toggle('akq-slide-active', active);
       });
     });
+    // A DEMO overlay belongs to the slide that opened it — never let it
+    // re-appear when the presenter comes back to that slide later.
+    document
+      .querySelectorAll<HTMLInputElement>('.demo-toggle:checked')
+      .forEach((el) => { el.checked = false; });
     updateChrome();
     syncHeroReveals();
   }
@@ -777,6 +782,17 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 
   function onKey(e: KeyboardEvent) {
     const t = e.target as HTMLElement | null;
+    // The DEMO overlay is a CSS-only checkbox, so Escape has to close it here
+    // before the global handler reads Escape as "leave presentation mode".
+    if (e.key === 'Escape') {
+      const openDemo = document.querySelector<HTMLInputElement>('.demo-toggle:checked');
+      if (openDemo) {
+        e.preventDefault();
+        openDemo.checked = false;
+        openDemo.blur();
+        return;
+      }
+    }
     if (t && t.matches('input,textarea,select')) return;
     const section = document.querySelector<HTMLElement>('.playbook-detail');
     if (!section) return;
@@ -895,8 +911,20 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     syncToc();
   }
 
+  // Toggling DEMO focuses its hidden checkbox, which would otherwise swallow
+  // Space/arrow keys. Keyboard activation fires a click whose target is the
+  // checkbox itself, so match that too. Hand keyboard control back to the deck.
+  function onDemoToggleClick(e: MouseEvent) {
+    const hit = (e.target as HTMLElement | null)?.closest?.('.h2-demo, .demo-close, .demo-scrim, .demo-toggle');
+    if (!hit) return;
+    requestAnimationFrame(() => {
+      document.querySelectorAll<HTMLInputElement>('.demo-toggle').forEach((el) => el.blur());
+    });
+  }
+
   document.addEventListener('keydown', onKey);
   document.addEventListener('click', onTocToggleClick);
+  document.addEventListener('click', onDemoToggleClick);
   function preparePresentNavigation(event?: Event) {
     rememberTocScroll();
     if (escapingFromPresent) {
@@ -1108,6 +1136,216 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     box-shadow: 0 0 8px currentColor;
     transform: translateY(-1px);
   }
+
+  /* ─────────────────────────────────────────────
+     DEMO reveal — a presenter run-book hidden
+     behind a button next to a section title.
+     Pure CSS (checkbox toggle) so it behaves the
+     same in document and presentation mode.
+     ───────────────────────────────────────────── */
+  .prose-akq h2 .demo-toggle {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .prose-akq h2 .h2-demo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    vertical-align: middle;
+    margin-left: 0.75rem;
+    padding: 0.2em 0.7em;
+    font-family: 'VT323', 'IBM Plex Mono', monospace;
+    font-size: 0.46em;
+    line-height: 1.4;
+    letter-spacing: 0.14em;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    color: #ffb000;
+    background: rgba(255, 176, 0, 0.08);
+    border: 1px solid #ffb000;
+    transition: color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  }
+  .prose-akq h2 .h2-demo:hover,
+  .prose-akq h2 .demo-toggle:focus-visible + .h2-demo {
+    color: #05060f;
+    background: #ffb000;
+    box-shadow: 0 0 12px rgba(255, 176, 0, 0.7);
+    transform: translateY(-1px);
+  }
+
+  /* Overlay is closed by default and revealed by the checkbox. */
+  .demo-panel { display: none; }
+  .prose-akq h2:has(.demo-toggle:checked) + .demo-panel { display: block; }
+  /* Never let the slide-in transform turn this into a containing block. */
+  body.present-mode .demo-panel.akq-slide-active { animation: none; }
+
+  /* The sticky site header uses backdrop-filter, which paints above the
+     overlay no matter how high we push z-index. Fade it out instead of
+     hiding it, so the page below keeps its layout. */
+  body:has(.demo-toggle:checked) .site-nav {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .demo-panel .demo-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: block;
+    cursor: pointer;
+    background: rgba(5, 6, 15, 0.86);
+  }
+  .demo-panel .demo-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 201;
+    transform: translate(-50%, -50%);
+    width: min(60rem, 92vw);
+    max-height: 84vh;
+    overflow-y: auto;
+    background: #0a0e27;
+    border: 2px solid #ffb000;
+    box-shadow: 0 0 0 1px #05060f, 0 0 24px rgba(255, 176, 0, 0.4), 0 0 90px rgba(5, 6, 15, 0.95);
+  }
+  .demo-panel .demo-head {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 0.9rem;
+    color: #05060f;
+    background: #ffb000;
+  }
+  .demo-panel .demo-tag {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+  }
+  .demo-panel .demo-name {
+    font-family: 'VT323', 'IBM Plex Mono', monospace;
+    font-size: 1.15rem;
+    letter-spacing: 0.08em;
+    opacity: 0.72;
+  }
+  .demo-panel .demo-close {
+    margin-left: auto;
+    padding: 0 0.45em;
+    font-family: 'VT323', 'IBM Plex Mono', monospace;
+    font-size: 1.3rem;
+    line-height: 1.35;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid rgba(5, 6, 15, 0.5);
+  }
+  .demo-panel .demo-close:hover {
+    color: #ffb000;
+    background: #05060f;
+  }
+
+  .demo-panel .demo-steps {
+    counter-reset: demo-step;
+    margin: 0;
+    padding: 1.1rem 1.15rem 1.3rem;
+    list-style: none;
+  }
+  .demo-panel .demo-steps > li {
+    counter-increment: demo-step;
+    position: relative;
+    margin: 0 0 1rem;
+    padding: 0.75rem 0.95rem 0.85rem 3.1rem;
+    background: rgba(232, 244, 255, 0.02);
+    border-left: 2px solid rgba(255, 176, 0, 0.45);
+  }
+  .demo-panel .demo-steps > li:last-child { margin-bottom: 0; }
+  .demo-panel .demo-steps > li::before {
+    content: counter(demo-step);
+    position: absolute;
+    top: 0.7rem;
+    left: 0.75rem;
+    display: grid;
+    place-items: center;
+    width: 1.7rem;
+    height: 1.7rem;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.6rem;
+    color: #05060f;
+    background: #ffb000;
+  }
+  .demo-panel .demo-step-title {
+    margin: 0 0 0.4rem;
+    font-family: 'VT323', 'IBM Plex Mono', monospace;
+    font-size: 1.3rem;
+    line-height: 1.2;
+    letter-spacing: 0.14em;
+    color: #ffb000;
+  }
+  .demo-panel .demo-steps p {
+    margin: 0.3rem 0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #e8f4ff;
+  }
+  .demo-panel .demo-steps b { color: #ff2e88; }
+  .demo-panel .demo-cmd {
+    display: block;
+    margin: 0.45rem 0;
+    padding: 0.45rem 0.7rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: #9bbc0f;
+    background: rgba(155, 188, 15, 0.08);
+    border: 1px solid rgba(155, 188, 15, 0.32);
+    white-space: pre;
+    overflow-x: auto;
+  }
+  .demo-panel .demo-cmd::before {
+    content: '$ ';
+    opacity: 0.45;
+  }
+  .demo-panel .demo-path {
+    display: inline-block;
+    padding: 0.05em 0.45em;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85em;
+    color: #00f0ff;
+    background: rgba(0, 240, 255, 0.08);
+    border: 1px solid rgba(0, 240, 255, 0.28);
+  }
+  .demo-panel .demo-out {
+    margin: 0.35rem 0 0;
+    font-size: 0.88rem;
+    color: rgba(232, 244, 255, 0.6);
+  }
+  .demo-panel .demo-out::before {
+    content: '\2192\00a0';
+    color: #ffb000;
+  }
+
+  @media (max-width: 640px) {
+    .prose-akq h2 .h2-demo {
+      margin-left: 0.5rem;
+      font-size: 0.6em;
+    }
+    .demo-panel .demo-window { width: 94vw; max-height: 88vh; }
+    .demo-panel .demo-steps { padding: 0.85rem 0.7rem 1rem; }
+    .demo-panel .demo-steps > li { padding: 0.7rem 0.7rem 0.75rem 2.7rem; }
+    .demo-panel .demo-steps > li::before { left: 0.5rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .prose-akq h2 .h2-demo { transition: none; }
+    .prose-akq h2 .h2-demo:hover { transform: none; }
+  }
+
   .prose-akq p { margin: 1em 0; }
   .prose-akq strong { color: #ffb000; }
   .prose-akq code {
@@ -3051,6 +3289,208 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     .prose-akq .spec-item[open] .spec-what::after { animation: none; }
     .prose-akq .spec-item::details-content { transition: none; }
     .prose-akq .spec-toggle { transition: none; }
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     Control reveal — feature / trigger accordion
+     A 4-column comparison table eats a whole slide, so a control
+     collapses to its name plus when it fires, and the detail rows
+     (what it does, what it covers) open on demand. Native
+     <details name> gives exclusive open with no JS, so document
+     mode and presentation mode behave identically.
+     ───────────────────────────────────────────────────────────── */
+  .prose-akq .ctl-widget { margin: 1.2em 0; }
+  .prose-akq .ctl-hint {
+    margin: 0 0 0.5em;
+    font-size: 0.9em;
+    letter-spacing: 0.08em;
+    color: #ffb000;
+    text-shadow: 0 0 8px rgba(255, 176, 0, 0.5);
+  }
+  .prose-akq .ctl-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1em;
+  }
+  .prose-akq .ctl-item {
+    position: relative;
+    min-width: 0;
+    border: 1px dashed color-mix(in srgb, var(--entry-accent, #00f0ff) 35%, transparent);
+    background: rgba(10, 14, 39, 0.55);
+  }
+  .prose-akq .ctl-item[open] {
+    border: 2px solid var(--entry-accent, #00f0ff);
+    background: color-mix(in srgb, var(--entry-accent, #00f0ff) 8%, transparent);
+    box-shadow:
+      0 0 8px var(--entry-accent, #00f0ff),
+      0 0 24px color-mix(in srgb, var(--entry-accent, #00f0ff) 30%, transparent);
+  }
+  .prose-akq .ctl-item[open]::before,
+  .prose-akq .ctl-item[open]::after {
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border: 2px solid #ffb000;
+    pointer-events: none;
+  }
+  .prose-akq .ctl-item[open]::before {
+    top: -2px;
+    left: -2px;
+    border-right: none;
+    border-bottom: none;
+  }
+  .prose-akq .ctl-item[open]::after {
+    right: -2px;
+    bottom: -2px;
+    border-top: none;
+    border-left: none;
+  }
+  .prose-akq .ctl-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.55em;
+    padding: 0.25em 0.5em;
+    font-size: 0.95em;
+    line-height: 1.4;
+    color: #e8f4ff;
+    cursor: pointer;
+    list-style: none;
+    transition: background 0.15s ease;
+  }
+  .prose-akq .ctl-btn::-webkit-details-marker { display: none; }
+  .prose-akq .ctl-btn:hover { background: rgba(0, 240, 255, 0.08); }
+  .prose-akq .ctl-btn:focus-visible { outline: 2px solid #ffb000; outline-offset: 2px; }
+  .prose-akq .ctl-icon { flex: none; font-size: 1em; line-height: 1; }
+  .prose-akq .ctl-name { flex: 0 1 auto; min-width: 0; overflow-wrap: break-word; }
+  .prose-akq .ctl-when {
+    flex: none;
+    margin-left: auto;
+    padding: 0.05em 0.5em;
+    border: 1px dashed rgba(232, 244, 255, 0.28);
+    font-size: 0.78em;
+    line-height: 1.55;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    color: rgba(232, 244, 255, 0.7);
+  }
+  .prose-akq .ctl-when code {
+    padding: 0 2px;
+    border: none;
+    background: none;
+    color: inherit;
+    font-size: 0.95em;
+  }
+  .prose-akq .ctl-item[open] .ctl-when {
+    border-style: solid;
+    border-color: color-mix(in srgb, var(--entry-accent, #00f0ff) 60%, transparent);
+    background: color-mix(in srgb, var(--entry-accent, #00f0ff) 12%, transparent);
+    color: var(--entry-accent, #00f0ff);
+  }
+  .prose-akq .ctl-doc {
+    flex: none;
+    font-family: 'VT323', monospace;
+    font-size: 1.1em;
+    line-height: 1;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    color: #ffb000;
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(255, 176, 0, 0.55);
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+  .prose-akq .ctl-doc::after { content: ' ↗'; }
+  .prose-akq .ctl-doc:hover,
+  .prose-akq .ctl-doc:focus-visible {
+    color: #05060f;
+    background: #ffb000;
+    border-bottom-color: #ffb000;
+    box-shadow: 0 0 8px rgba(255, 176, 0, 0.6);
+  }
+  .prose-akq .ctl-toggle {
+    flex: none;
+    font-family: 'VT323', monospace;
+    font-size: 1.45em;
+    line-height: 1;
+    color: #ffb000;
+    transition: transform 0.2s ease, color 0.15s ease;
+  }
+  .prose-akq .ctl-toggle::before { content: '+'; }
+  .prose-akq .ctl-item[open] .ctl-toggle {
+    color: var(--entry-accent, #00f0ff);
+    transform: rotate(45deg);
+  }
+  .prose-akq .ctl-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+    margin: 0 0.6em;
+    padding: 0.5em 0.6em 0.6em 2.15em;
+    border-top: 1px dashed color-mix(in srgb, var(--entry-accent, #00f0ff) 35%, transparent);
+  }
+  .prose-akq .ctl-row {
+    display: grid;
+    grid-template-columns: 8.5em minmax(0, 1fr);
+    gap: 0.2em 0.7em;
+    margin: 0;
+    font-size: 0.88em;
+    line-height: 1.6;
+    color: rgba(232, 244, 255, 0.88);
+  }
+  .prose-akq .ctl-k {
+    letter-spacing: 0.06em;
+    color: var(--entry-accent, #00f0ff);
+  }
+  .prose-akq .ctl-k::before { content: '▸ '; }
+  .prose-akq .ctl-v { min-width: 0; }
+  .prose-akq .ctl-v b,
+  .prose-akq .ctl-v strong { color: #ffb000; font-weight: normal; }
+  .prose-akq .ctl-item[open] .ctl-row:last-child .ctl-v::after {
+    content: '▊';
+    margin-left: 0.15em;
+    color: #ffb000;
+    animation: akq-risk-blink 1s steps(1) infinite;
+  }
+  /* Narrow screens: stack the trigger tag under the control name, and
+     drop the detail rows to label-over-value so nothing gets squeezed. */
+  @media (max-width: 640px) {
+    .prose-akq .ctl-btn {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      grid-template-areas:
+        "icon name toggle"
+        "icon when toggle"
+        "icon doc  toggle";
+      align-items: center;
+      column-gap: 0.5em;
+      row-gap: 0.2em;
+      font-size: 0.85em;
+    }
+    .prose-akq .ctl-icon { grid-area: icon; align-self: start; }
+    .prose-akq .ctl-name { grid-area: name; }
+    .prose-akq .ctl-when { grid-area: when; justify-self: start; margin-left: 0; }
+    .prose-akq .ctl-doc { grid-area: doc; justify-self: start; }
+    .prose-akq .ctl-toggle { grid-area: toggle; align-self: start; }
+    .prose-akq .ctl-body { padding-left: 1.6em; }
+    .prose-akq .ctl-row { grid-template-columns: minmax(0, 1fr); }
+  }
+  @supports (interpolate-size: allow-keywords) {
+    .prose-akq .ctl-widget { interpolate-size: allow-keywords; }
+    .prose-akq .ctl-item::details-content {
+      block-size: 0;
+      overflow: hidden;
+      content-visibility: hidden;
+      transition: block-size 0.28s ease, content-visibility 0.28s allow-discrete;
+    }
+    .prose-akq .ctl-item[open]::details-content {
+      block-size: auto;
+      content-visibility: visible;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .prose-akq .ctl-item[open] .ctl-row:last-child .ctl-v::after { animation: none; }
+    .prose-akq .ctl-item::details-content { transition: none; }
+    .prose-akq .ctl-toggle { transition: none; }
   }
 
   /* ── Figure tabs: CSS-only switcher between alternative diagrams ──

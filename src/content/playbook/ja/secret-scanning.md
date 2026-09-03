@@ -113,19 +113,79 @@ links:
 
 > 🔐 **結論** — secret はコードに置かず、環境変数 / シークレットマネージャーで管理し、**Push protection** で入口を塞ぐ。「private だから大丈夫」は成り立たない。
 
-## Detection と Push protection の違い
+## 主な機能 <input type="checkbox" id="demo-secret-scanning" class="demo-toggle" /><label class="h2-demo" for="demo-secret-scanning">&#9658; DEMO</label>
 
-Secret Scanning の中核は **検知** と **Push protection**。Validity checks は検知後の優先順位付けを支援する。
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-secret-scanning" aria-label="デモ手順を閉じる"></label>
+<div class="demo-window" role="group" aria-label="デモ手順">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Secret Scanning</span><label class="demo-close" for="demo-secret-scanning" aria-label="閉じる">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">PUSH PROTECTION</p>
+<p><code class="demo-path">ghas-test-1</code> で、生成した secret を push する。</p>
+<code class="demo-cmd">./demo/secret-scanning/01-push-protection.sh</code>
+<p class="demo-out">push が<b>ブロック</b>され、ターミナルに解除用の URL が表示される。</p>
+</li>
+<li>
+<p class="demo-step-title">BYPASS PUSH PROTECTION</p>
+<p>ブロックメッセージ内の <code class="demo-path">unblock-secret</code> URL をブラウザで開き、理由を選んで bypass する。</p>
+<p class="demo-out">「secret can now be pushed」と表示される。</p>
+<p>同じブランチをもう一度 push する。</p>
+<code class="demo-cmd">git push origin HEAD</code>
+<p><b>Security → Secret scanning</b> のクローズ済みアラートを開き、<b>誰が・どの理由で</b> bypass したかを見せる。</p>
+<p>bypass を野放しにしない設定：<code class="demo-path">Settings → Advanced Security → Push protection</code> で <b>Who can bypass push protection</b> を <b>Specific roles or teams</b> に（= Delegated bypass）。</p>
+</li>
+<li>
+<p class="demo-step-title">VALIDITY CHECK</p>
+<p><b>Security → Secret scanning</b> の default ビューで <b>Validity フィルター</b>を使う。</p>
+<p class="demo-out">「今も有効な secret」から優先的に対応でき、実リスク順にトリアージできる。</p>
+</li>
+</ol>
+</div>
+</div>
 
-| 機能 | いつ動く？ | 何をする？ | 対象範囲 |
-| --- | --- | --- | --- |
-| 🔍 **Secret scanning alerts** | コミット後(履歴も含めて常時) | 検出された secret を Security and quality タブに通知 | 全ブランチの Git 履歴全体・Issue・PR・GitHub Discussions・Wiki・secret gists |
-| 🛡️ **Push protection** | `git push` の直前 | secret を含む push を拒否(bypass 可) | これから入る変更のみ |
-| ✅ **Validity checks** | アラート発生時 | secret がまだ有効かをプロバイダー API に問い合わせ | 一部対応プロバイダー(AWS、GitHub、Slack ほか) |
+Secret Scanning は 5 つの機能で構成される。入口を塞ぐ **Push protection** が最優先で、残りは検知・対応・provider 連携を支える。
 
-> 🔑 **Alerts** = 既に入った secret を見つける、**Push protection** = そもそも入れない。Push protection が一番効く(履歴改変が要らない)。
-
-📘 詳細: <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/introduction/about-secret-scanning" target="_blank" rel="noopener noreferrer">About secret scanning ↗</a> ・ <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/introduction/about-push-protection" target="_blank" rel="noopener noreferrer">About push protection ↗</a>
+<div class="ctl-widget">
+<p class="ctl-hint">▸ + をクリックして詳細を表示</p>
+<div class="ctl-list">
+<details class="ctl-item" name="ss-controls">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛡️</span><span class="ctl-name">Push protection</span><span class="ctl-when"><code>git push</code> の直前</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/push-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">secret を含む push を<b>その場で拒否</b>。bypass は可能だが理由の記録が残る</span></p>
+<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">これから入る変更のみ</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ss-controls">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔍</span><span class="ctl-name">Secret scanning alerts</span><span class="ctl-when">コミット後・常時</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/secret-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">検出された secret を <b>Security and quality</b> タブに通知</span></p>
+<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">全ブランチの Git 履歴全体・Issue・PR・GitHub Discussions・Wiki・secret gists</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ss-controls">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">✅</span><span class="ctl-name">Validity checks</span><span class="ctl-when">アラート発生時</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/validity-checks" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">secret が<b>まだ有効か</b>をプロバイダー API に問い合わせ、対応の優先順位を判断できる</span></p>
+<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">一部対応プロバイダー(AWS、GitHub、Slack ほか)</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ss-controls">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🤝</span><span class="ctl-name">Partner program</span><span class="ctl-when">public repo で常時 ON</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/tutorials/secret-scanning-partner-program" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">200+ パートナーの secret が漏れると GitHub が <b>provider に直接通報</b>。provider 側で revoke / 再発行される</span></p>
+<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">public repo・public npm package のみ。<b>自分のアラート一覧には出ない</b>(無料・設定変更不可)</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ss-controls">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🌐</span><span class="ctl-name">Public monitoring</span><span class="ctl-when">github.com 全体をリアルタイム</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">自分の repo の外(個人フォーク・OSS・公開 issue / PR)で漏れた secret を <b>エンタープライズに帰属</b>させて通知</span></p>
+<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">公開コンテンツのみ。<b>private repo は絶対にスキャンしない</b>。GHEC Enterprise 向け</span></p>
+</div>
+</details>
+</div>
+</div>
 
 ## 何を検出するのか
 

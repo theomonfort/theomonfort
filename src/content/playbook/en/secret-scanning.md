@@ -113,19 +113,79 @@ links:
 
 > 🔐 **Bottom line** — keep secrets out of code, manage them with env vars / a secret manager, and close the door with **Push protection**. "It's private, so it's fine" simply doesn't hold.
 
-## Detection vs Push protection — what's the difference?
+## Main capabilities <input type="checkbox" id="demo-secret-scanning" class="demo-toggle" /><label class="h2-demo" for="demo-secret-scanning">&#9658; DEMO</label>
 
-Secret Scanning has two core controls: **detection** and **Push protection**. Validity checks help prioritize detected leaks.
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-secret-scanning" aria-label="Close demo steps"></label>
+<div class="demo-window" role="group" aria-label="Demo steps">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Secret Scanning</span><label class="demo-close" for="demo-secret-scanning" aria-label="Close">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">PUSH PROTECTION</p>
+<p>In <code class="demo-path">ghas-test-1</code>, push a generated secret.</p>
+<code class="demo-cmd">./demo/secret-scanning/01-push-protection.sh</code>
+<p class="demo-out">The push is <b>blocked</b> and the terminal prints an unblock URL.</p>
+</li>
+<li>
+<p class="demo-step-title">BYPASS PUSH PROTECTION</p>
+<p>Open the <code class="demo-path">unblock-secret</code> URL from the block message in your browser, pick a reason and bypass.</p>
+<p class="demo-out">You get “secret can now be pushed”.</p>
+<p>Push the same branch again.</p>
+<code class="demo-cmd">git push origin HEAD</code>
+<p>Open the closed alert under <b>Security → Secret scanning</b> and show <b>who</b> bypassed it and <b>why</b>.</p>
+<p>To keep bypasses under control: <code class="demo-path">Settings → Advanced Security → Push protection</code>, set <b>Who can bypass push protection</b> to <b>Specific roles or teams</b> (= Delegated bypass).</p>
+</li>
+<li>
+<p class="demo-step-title">VALIDITY CHECK</p>
+<p>In the default view under <b>Security → Secret scanning</b>, use the <b>Validity filter</b>.</p>
+<p class="demo-out">Triage by real risk: start with the secrets that are still live.</p>
+</li>
+</ol>
+</div>
+</div>
 
-| Feature | When does it run? | What does it do? | Scope |
-| --- | --- | --- | --- |
-| 🔍 **Secret scanning alerts** | After commit (including history, continuously) | Notifies you of detected secrets in the Security and quality tab | Full Git history on all branches, Issues, PRs, GitHub Discussions, Wikis, secret gists |
-| 🛡️ **Push protection** | Right before `git push` | Rejects pushes containing secrets (bypass is possible) | Incoming changes only |
-| ✅ **Validity checks** | When an alert fires | Asks the provider API whether the secret is still active | Select supported providers (AWS, GitHub, Slack, and others) |
+Secret Scanning is made up of five capabilities. **Push protection** closes the door and comes first; the rest cover detection, triage, and provider-side revocation.
 
-> 🔑 **Alerts** = find secrets already in the repo; **Push protection** = prevent them from getting in at all. Push protection is the most effective measure (no history rewriting needed).
-
-📘 Details: <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/introduction/about-secret-scanning" target="_blank" rel="noopener noreferrer">About secret scanning ↗</a> · <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/introduction/about-push-protection" target="_blank" rel="noopener noreferrer">About push protection ↗</a>
+<div class="ctl-widget">
+<p class="ctl-hint">▸ CLICK + FOR DETAILS</p>
+<div class="ctl-list">
+<details class="ctl-item" name="ss-controls">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛡️</span><span class="ctl-name">Push protection</span><span class="ctl-when">Right before <code>git push</code></span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/push-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v"><b>Rejects the push on the spot</b> when it contains a secret. Bypass is possible, but the reason is recorded</span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Incoming changes only</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ss-controls">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔍</span><span class="ctl-name">Secret scanning alerts</span><span class="ctl-when">After commit, continuous</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/secret-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">Notifies you of detected secrets in the <b>Security and quality</b> tab</span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Full Git history on all branches, Issues, PRs, GitHub Discussions, Wikis, secret gists</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ss-controls">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">✅</span><span class="ctl-name">Validity checks</span><span class="ctl-when">When an alert fires</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/validity-checks" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">Asks the provider API whether the secret is <b>still active</b>, so you can triage by real risk</span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Select supported providers (AWS, GitHub, Slack, and others)</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ss-controls">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🤝</span><span class="ctl-name">Partner program</span><span class="ctl-when">Always on, public repos</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/tutorials/secret-scanning-partner-program" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">When a partner secret leaks, GitHub <b>reports it straight to the provider</b>, who revokes or reissues it</span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Public repos and public npm packages only. Reports <b>never appear in your alert list</b> (free, not configurable)</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ss-controls">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🌐</span><span class="ctl-name">Public monitoring</span><span class="ctl-when">Real-time across github.com</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">Detects secrets leaked <b>outside your own repos</b> (personal forks, OSS, public issues and PRs) and attributes them to your enterprise</span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Public content only, and it <b>never scans private repos</b>. GHEC Enterprise</span></p>
+</div>
+</details>
+</div>
+</div>
 
 ## What gets detected
 
