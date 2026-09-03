@@ -21,6 +21,9 @@ links:
     label: About CodeQL
     url: https://docs.github.com/en/code-security/code-scanning/introduction-to-code-scanning/about-code-scanning-with-codeql
   - group: 📖 Official Documentation
+    label: Code scanning setup types
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/setup-types
+  - group: 📖 Official Documentation
     label: Configuring default setup
     url: https://docs.github.com/en/code-security/code-scanning/enabling-code-scanning/configuring-default-setup-for-code-scanning
   - group: 📖 Official Documentation
