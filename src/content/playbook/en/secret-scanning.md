@@ -117,11 +117,32 @@ links:
 
 Secret Scanning has two core controls: **detection** and **Push protection**. Validity checks help prioritize detected leaks.
 
-| Feature | When does it run? | What does it do? | Scope |
-| --- | --- | --- | --- |
-| 🔍 **Secret scanning alerts** | After commit (including history, continuously) | Notifies you of detected secrets in the Security and quality tab | Full Git history on all branches, Issues, PRs, GitHub Discussions, Wikis, secret gists |
-| 🛡️ **Push protection** | Right before `git push` | Rejects pushes containing secrets (bypass is possible) | Incoming changes only |
-| ✅ **Validity checks** | When an alert fires | Asks the provider API whether the secret is still active | Select supported providers (AWS, GitHub, Slack, and others) |
+<div class="ctl-widget">
+<p class="ctl-hint">▸ CLICK + FOR DETAILS</p>
+<div class="ctl-list">
+<details class="ctl-item" name="ss-controls">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛡️</span><span class="ctl-name">Push protection</span><span class="ctl-when">Right before <code>git push</code></span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v"><b>Rejects the push on the spot</b> when it contains a secret. Bypass is possible, but the reason is recorded</span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Incoming changes only</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ss-controls">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔍</span><span class="ctl-name">Secret scanning alerts</span><span class="ctl-when">After commit, continuous</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">Notifies you of detected secrets in the <b>Security and quality</b> tab</span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Full Git history on all branches, Issues, PRs, GitHub Discussions, Wikis, secret gists</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ss-controls">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">✅</span><span class="ctl-name">Validity checks</span><span class="ctl-when">When an alert fires</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">Asks the provider API whether the secret is <b>still active</b>, so you can triage by real risk</span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Select supported providers (AWS, GitHub, Slack, and others)</span></p>
+</div>
+</details>
+</div>
+</div>
 
 > 🔑 **Alerts** = find secrets already in the repo; **Push protection** = prevent them from getting in at all. Push protection is the most effective measure (no history rewriting needed).
 
