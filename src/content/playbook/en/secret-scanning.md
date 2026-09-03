@@ -230,7 +230,7 @@ Secret Scanning is made up of five capabilities. **Push protection** closes the 
 </div>
 
 
-> 🤖 Generic secrets and AI detection produce more false positives. Pair them with **Push protection** so leaks get stopped at push time.
+> 🤖 The noisy two. Generic can be gated with **Push protection**; **AI-detected passwords support neither push protection nor validity checks**. Triage them as alerts.
 
 📘 Details: <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns" target="_blank" rel="noopener noreferrer">Supported secrets (provider patterns) ↗</a> · <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/using-advanced-secret-scanning-and-push-protection-features/custom-patterns/defining-custom-patterns-for-secret-scanning" target="_blank" rel="noopener noreferrer">Defining custom patterns ↗</a>
 

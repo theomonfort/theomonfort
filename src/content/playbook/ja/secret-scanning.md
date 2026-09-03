@@ -230,7 +230,7 @@ Secret Scanning は 5 つの機能で構成される。入口を塞ぐ **Push pr
 </div>
 
 
-> 🤖 Generic secrets と AI detection は誤検知が増えがち。**Push protection** とセットで使うと "push しようとした瞬間に止まる" ので運用しやすい。
+> 🤖 誤検知が増えがちな 2 つ。Generic は **Push protection** で入口を塞げるが、**AI-detected（password）は push protection も validity check も非対応**。トリアージ前提で運用する。
 
 📘 詳細: <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns" target="_blank" rel="noopener noreferrer">Supported secrets (provider patterns) ↗</a> ・ <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/using-advanced-secret-scanning-and-push-protection-features/custom-patterns/defining-custom-patterns-for-secret-scanning" target="_blank" rel="noopener noreferrer">Defining custom patterns ↗</a>
 
