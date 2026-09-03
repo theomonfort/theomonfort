@@ -113,7 +113,36 @@ links:
 
 > 🔐 **結論** — secret はコードに置かず、環境変数 / シークレットマネージャーで管理し、**Push protection** で入口を塞ぐ。「private だから大丈夫」は成り立たない。
 
-## 主な機能
+## 主な機能 <input type="checkbox" id="demo-secret-scanning" class="demo-toggle" /><label class="h2-demo" for="demo-secret-scanning">&#9658; DEMO</label>
+
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-secret-scanning" aria-label="デモ手順を閉じる"></label>
+<div class="demo-window" role="group" aria-label="デモ手順">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Secret Scanning</span><label class="demo-close" for="demo-secret-scanning" aria-label="閉じる">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">PUSH PROTECTION</p>
+<p><code class="demo-path">ghas-test-1</code> で、生成した secret を push する。</p>
+<code class="demo-cmd">./demo/secret-scanning/01-push-protection.sh</code>
+<p class="demo-out">push が<b>ブロック</b>され、ターミナルに解除用の URL が表示される。</p>
+</li>
+<li>
+<p class="demo-step-title">BYPASS PUSH PROTECTION</p>
+<p>ブロックメッセージ内の <code class="demo-path">unblock-secret</code> URL をブラウザで開き、理由を選んで bypass する。</p>
+<p class="demo-out">「secret can now be pushed」と表示される。</p>
+<p>同じブランチをもう一度 push する。</p>
+<code class="demo-cmd">git push origin HEAD</code>
+<p><b>Security → Secret scanning</b> のクローズ済みアラートを開き、<b>誰が・どの理由で</b> bypass したかを見せる。</p>
+<p>bypass を野放しにしない設定：<code class="demo-path">Settings → Advanced Security → Push protection → Delegated bypass</code></p>
+</li>
+<li>
+<p class="demo-step-title">VALIDITY CHECK</p>
+<p><b>Security → Secret scanning</b> の default ビューで <b>Validity フィルター</b>を使う。</p>
+<p class="demo-out">「今も有効な secret」から優先的に対応でき、実リスク順にトリアージできる。</p>
+</li>
+</ol>
+</div>
+</div>
 
 Secret Scanning は 5 つの機能で構成される。入口を塞ぐ **Push protection** が最優先で、残りは検知・対応・provider 連携を支える。
 

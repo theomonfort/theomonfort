@@ -477,6 +477,11 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
         el.classList.toggle('akq-slide-active', active);
       });
     });
+    // A DEMO overlay belongs to the slide that opened it — never let it
+    // re-appear when the presenter comes back to that slide later.
+    document
+      .querySelectorAll<HTMLInputElement>('.demo-toggle:checked')
+      .forEach((el) => { el.checked = false; });
     updateChrome();
     syncHeroReveals();
   }
@@ -777,6 +782,17 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 
   function onKey(e: KeyboardEvent) {
     const t = e.target as HTMLElement | null;
+    // The DEMO overlay is a CSS-only checkbox, so Escape has to close it here
+    // before the global handler reads Escape as "leave presentation mode".
+    if (e.key === 'Escape') {
+      const openDemo = document.querySelector<HTMLInputElement>('.demo-toggle:checked');
+      if (openDemo) {
+        e.preventDefault();
+        openDemo.checked = false;
+        openDemo.blur();
+        return;
+      }
+    }
     if (t && t.matches('input,textarea,select')) return;
     const section = document.querySelector<HTMLElement>('.playbook-detail');
     if (!section) return;
@@ -895,8 +911,19 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     syncToc();
   }
 
+  // Clicking a DEMO label focuses its hidden checkbox, which would otherwise
+  // swallow Space/arrow keys. Hand keyboard control back to the deck.
+  function onDemoToggleClick(e: MouseEvent) {
+    const hit = (e.target as HTMLElement | null)?.closest?.('.h2-demo, .demo-close, .demo-scrim');
+    if (!hit) return;
+    requestAnimationFrame(() => {
+      document.querySelectorAll<HTMLInputElement>('.demo-toggle').forEach((el) => el.blur());
+    });
+  }
+
   document.addEventListener('keydown', onKey);
   document.addEventListener('click', onTocToggleClick);
+  document.addEventListener('click', onDemoToggleClick);
   function preparePresentNavigation(event?: Event) {
     rememberTocScroll();
     if (escapingFromPresent) {
@@ -1108,6 +1135,216 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     box-shadow: 0 0 8px currentColor;
     transform: translateY(-1px);
   }
+
+  /* ─────────────────────────────────────────────
+     DEMO reveal — a presenter run-book hidden
+     behind a button next to a section title.
+     Pure CSS (checkbox toggle) so it behaves the
+     same in document and presentation mode.
+     ───────────────────────────────────────────── */
+  .prose-akq h2 .demo-toggle {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .prose-akq h2 .h2-demo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    vertical-align: middle;
+    margin-left: 0.75rem;
+    padding: 0.2em 0.7em;
+    font-family: 'VT323', 'IBM Plex Mono', monospace;
+    font-size: 0.46em;
+    line-height: 1.4;
+    letter-spacing: 0.14em;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    color: #ffb000;
+    background: rgba(255, 176, 0, 0.08);
+    border: 1px solid #ffb000;
+    transition: color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  }
+  .prose-akq h2 .h2-demo:hover,
+  .prose-akq h2 .demo-toggle:focus-visible + .h2-demo {
+    color: #05060f;
+    background: #ffb000;
+    box-shadow: 0 0 12px rgba(255, 176, 0, 0.7);
+    transform: translateY(-1px);
+  }
+
+  /* Overlay is closed by default and revealed by the checkbox. */
+  .demo-panel { display: none; }
+  .prose-akq h2:has(.demo-toggle:checked) + .demo-panel { display: block; }
+  /* Never let the slide-in transform turn this into a containing block. */
+  body.present-mode .demo-panel.akq-slide-active { animation: none; }
+
+  /* The sticky site header uses backdrop-filter, which paints above the
+     overlay no matter how high we push z-index. Fade it out instead of
+     hiding it, so the page below keeps its layout. */
+  body:has(.demo-toggle:checked) .site-nav {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .demo-panel .demo-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: block;
+    cursor: pointer;
+    background: rgba(5, 6, 15, 0.86);
+  }
+  .demo-panel .demo-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 201;
+    transform: translate(-50%, -50%);
+    width: min(60rem, 92vw);
+    max-height: 84vh;
+    overflow-y: auto;
+    background: #0a0e27;
+    border: 2px solid #ffb000;
+    box-shadow: 0 0 0 1px #05060f, 0 0 24px rgba(255, 176, 0, 0.4), 0 0 90px rgba(5, 6, 15, 0.95);
+  }
+  .demo-panel .demo-head {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 0.9rem;
+    color: #05060f;
+    background: #ffb000;
+  }
+  .demo-panel .demo-tag {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+  }
+  .demo-panel .demo-name {
+    font-family: 'VT323', 'IBM Plex Mono', monospace;
+    font-size: 1.15rem;
+    letter-spacing: 0.08em;
+    opacity: 0.72;
+  }
+  .demo-panel .demo-close {
+    margin-left: auto;
+    padding: 0 0.45em;
+    font-family: 'VT323', 'IBM Plex Mono', monospace;
+    font-size: 1.3rem;
+    line-height: 1.35;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid rgba(5, 6, 15, 0.5);
+  }
+  .demo-panel .demo-close:hover {
+    color: #ffb000;
+    background: #05060f;
+  }
+
+  .demo-panel .demo-steps {
+    counter-reset: demo-step;
+    margin: 0;
+    padding: 1.1rem 1.15rem 1.3rem;
+    list-style: none;
+  }
+  .demo-panel .demo-steps > li {
+    counter-increment: demo-step;
+    position: relative;
+    margin: 0 0 1rem;
+    padding: 0.75rem 0.95rem 0.85rem 3.1rem;
+    background: rgba(232, 244, 255, 0.02);
+    border-left: 2px solid rgba(255, 176, 0, 0.45);
+  }
+  .demo-panel .demo-steps > li:last-child { margin-bottom: 0; }
+  .demo-panel .demo-steps > li::before {
+    content: counter(demo-step);
+    position: absolute;
+    top: 0.7rem;
+    left: 0.75rem;
+    display: grid;
+    place-items: center;
+    width: 1.7rem;
+    height: 1.7rem;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.6rem;
+    color: #05060f;
+    background: #ffb000;
+  }
+  .demo-panel .demo-step-title {
+    margin: 0 0 0.4rem;
+    font-family: 'VT323', 'IBM Plex Mono', monospace;
+    font-size: 1.3rem;
+    line-height: 1.2;
+    letter-spacing: 0.14em;
+    color: #ffb000;
+  }
+  .demo-panel .demo-steps p {
+    margin: 0.3rem 0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #e8f4ff;
+  }
+  .demo-panel .demo-steps b { color: #ff2e88; }
+  .demo-panel .demo-cmd {
+    display: block;
+    margin: 0.45rem 0;
+    padding: 0.45rem 0.7rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: #9bbc0f;
+    background: rgba(155, 188, 15, 0.08);
+    border: 1px solid rgba(155, 188, 15, 0.32);
+    white-space: pre;
+    overflow-x: auto;
+  }
+  .demo-panel .demo-cmd::before {
+    content: '$ ';
+    opacity: 0.45;
+  }
+  .demo-panel .demo-path {
+    display: inline-block;
+    padding: 0.05em 0.45em;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85em;
+    color: #00f0ff;
+    background: rgba(0, 240, 255, 0.08);
+    border: 1px solid rgba(0, 240, 255, 0.28);
+  }
+  .demo-panel .demo-out {
+    margin: 0.35rem 0 0;
+    font-size: 0.88rem;
+    color: rgba(232, 244, 255, 0.6);
+  }
+  .demo-panel .demo-out::before {
+    content: '\2192\00a0';
+    color: #ffb000;
+  }
+
+  @media (max-width: 640px) {
+    .prose-akq h2 .h2-demo {
+      margin-left: 0.5rem;
+      font-size: 0.6em;
+    }
+    .demo-panel .demo-window { width: 94vw; max-height: 88vh; }
+    .demo-panel .demo-steps { padding: 0.85rem 0.7rem 1rem; }
+    .demo-panel .demo-steps > li { padding: 0.7rem 0.7rem 0.75rem 2.7rem; }
+    .demo-panel .demo-steps > li::before { left: 0.5rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .prose-akq h2 .h2-demo { transition: none; }
+    .prose-akq h2 .h2-demo:hover { transform: none; }
+  }
+
   .prose-akq p { margin: 1em 0; }
   .prose-akq strong { color: #ffb000; }
   .prose-akq code {

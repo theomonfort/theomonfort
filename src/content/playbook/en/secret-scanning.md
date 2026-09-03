@@ -113,7 +113,36 @@ links:
 
 > 🔐 **Bottom line** — keep secrets out of code, manage them with env vars / a secret manager, and close the door with **Push protection**. "It's private, so it's fine" simply doesn't hold.
 
-## Main capabilities
+## Main capabilities <input type="checkbox" id="demo-secret-scanning" class="demo-toggle" /><label class="h2-demo" for="demo-secret-scanning">&#9658; DEMO</label>
+
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-secret-scanning" aria-label="Close demo steps"></label>
+<div class="demo-window" role="group" aria-label="Demo steps">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Secret Scanning</span><label class="demo-close" for="demo-secret-scanning" aria-label="Close">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">PUSH PROTECTION</p>
+<p>In <code class="demo-path">ghas-test-1</code>, push a generated secret.</p>
+<code class="demo-cmd">./demo/secret-scanning/01-push-protection.sh</code>
+<p class="demo-out">The push is <b>blocked</b> and the terminal prints an unblock URL.</p>
+</li>
+<li>
+<p class="demo-step-title">BYPASS PUSH PROTECTION</p>
+<p>Open the <code class="demo-path">unblock-secret</code> URL from the block message in your browser, pick a reason and bypass.</p>
+<p class="demo-out">You get “secret can now be pushed”.</p>
+<p>Push the same branch again.</p>
+<code class="demo-cmd">git push origin HEAD</code>
+<p>Open the closed alert under <b>Security → Secret scanning</b> and show <b>who</b> bypassed it and <b>why</b>.</p>
+<p>To keep bypasses under control: <code class="demo-path">Settings → Advanced Security → Push protection → Delegated bypass</code></p>
+</li>
+<li>
+<p class="demo-step-title">VALIDITY CHECK</p>
+<p>In the default view under <b>Security → Secret scanning</b>, use the <b>Validity filter</b>.</p>
+<p class="demo-out">Triage by real risk: start with the secrets that are still live.</p>
+</li>
+</ol>
+</div>
+</div>
 
 Secret Scanning is made up of five capabilities. **Push protection** closes the door and comes first; the rest cover detection, triage, and provider-side revocation.
 
