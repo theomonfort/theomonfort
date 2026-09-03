@@ -192,7 +192,7 @@ Secret Scanning is made up of five capabilities. **Push protection** closes the 
 **Four** detection engines. Only provider patterns are free.
 
 <div class="det-widget">
-<p class="det-hint">▸ Click to reveal the detail</p>
+<p class="det-hint">▸ CLICK FOR DETAILS</p>
 <div class="det-split">
 <div class="det-list">
 <details class="det-pick" name="ss-detect">

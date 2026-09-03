@@ -273,7 +273,7 @@ And `det-widget`, when the detail text is too long for an inline row:
 
 **Rules**
 
-- The widget must be a **direct sibling after the `##`**, or it lands on the previous slide.
+- The widget must sit **between its `##` and the next `##`**. An intro line before it is fine; the canonical example has one. Put it *above* the `##` and it lands on the previous slide.
 - `.det-title` and `.det-tier` render in `VT323`, which has **no Japanese glyphs** — keep them Latin in both locales (product names, `FREE` / `GHAS`).
 - `is-free` / `is-paid` on `.det-dot` and `.det-tier` are the only tier variants; green means free, amber means licensed.
 - `.det-scope` is a full-width footer plate for a summary line — don't use it for a fifth peer item.
@@ -308,7 +308,7 @@ A `► DEMO` button pinned next to an H2 — the same inline slot as the `h2-doc
 **Rules**
 
 - The `id` must be **unique across the whole page** (`demo-<slug>` is the convention) — the `<label for=...>` pairs bind to it, and a duplicate makes both buttons drive the same panel.
-- The `<input>` and `<label>` go **inline on the `##` line**; the `.demo-panel` is the **next sibling**, so it belongs to that slide.
+- The `<input>` and `<label>` go **inline on the `##` line**; the `.demo-panel` follows it under the same `##`, so it belongs to that slide.
 - `Escape` closes the panel without leaving presentation mode, and `←` / `→` still change slides — the panel closes itself on a slide change.
 - One `DEMO` per slide. Keep it to 3–6 steps; it scrolls, but a presenter won't.
 
