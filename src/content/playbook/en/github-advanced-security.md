@@ -122,79 +122,80 @@ GitHub provides two **Risk Assessments** to visualize your organization's securi
 - <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment" target="_blank" rel="noopener noreferrer">Code security risk assessment (GitHub Docs) ↗</a>
 - <a class="retro-link" href="https://github.blog/changelog/2026-04-08-code-security-risk-assessment-available-for-organizations/" target="_blank" rel="noopener noreferrer">Code Security Risk Assessment GA (2026/04) ↗</a>
 
-## Rolling out across the enterprise
-
-<div class="hero-quote hero-quote-plain">
-  <p>
-    Once the licenses are bought, a single <strong>security configuration</strong> created under <strong>Enterprise → Settings → Advanced Security → Code security</strong> pushes the same settings to every Organization and repository beneath it.
-  </p>
-  <p>
-    Hitting <strong>New configuration</strong> pre-fills the form with the <strong>GitHub recommended</strong> values. Copying that as your baseline is the safe way to start.
-  </p>
-</div>
-
-### ⚠️ Three things to know first
-
-**1. Push protection turns on, and pushes containing secrets get blocked**
-
-| Blocked | Not blocked |
-| --- | --- |
-| `git push` · commits made in the GitHub UI · file uploads · REST API requests | `git pull` · `git clone` · `git fetch` |
-
-> ⚠️ People often assume "secret scanning will stop me from pulling." Push protection only blocks **pushes** — read operations are completely unaffected.
-
-**2. Code scanning runs at three different times**
-
-- 📤 On **every push** to the default branch or any protected branch
-- 🔀 On **every pull request creation and commit** targeting the default branch or any protected branch (excluding PRs from forks)
-- 📅 On a **weekly schedule**
-
-Which means it **consumes GitHub Actions minutes** — the cost factor that bites hardest in an enterprise-wide rollout.
-
-> 💡 On repositories with no CodeQL-supported languages, enabling default setup runs no scans and uses no Actions minutes.
-> 🚧 Code scanning by itself **does not block merges**. If you want that, you need a separate ruleset (below).
-
-**3. By default, anyone with write access can bypass push protection**
-
-- 🛂 If you trust your developers, leaving it as-is is fine — every bypass leaves an **alert + audit log entry + email to the owners**, which works well enough as a deterrent
-- 🔐 To tighten it, change **Bypass privileges** in the configuration to **Specific actors** (= delegated bypass). Everyone else goes through a request → approval flow (requests expire after **7 days**)
-
-### 🚧 Blocking merges needs a ruleset
-
-To stop a PR from merging when code scanning finds alerts, add a **Require code scanning results** rule under **Enterprise → Policies → Repository → Rulesets**.
-
-Three conditions cause a block:
-
-- A required tool finds an alert of a severity defined in the ruleset
-- A required tool's analysis is still in progress
-- **A required tool is not configured for that repository**
-
-> ⚠️ The third one is the trap. Apply the ruleset to repositories where CodeQL isn't enabled and **every PR gets blocked even with zero alerts**. Always go in this order: apply the configuration → confirm CodeQL is running → then the ruleset.
-> 🧪 Set the enforcement status to **Evaluate** first — nothing is actually blocked, and Rule Insights shows how many merges *would* have been blocked.
-
-### 📋 Rollout sequence
-
-| # | What to do | Where |
-| :---: | --- | --- |
-| 1 | Create a copy based on GitHub recommended via **New configuration** | Enterprise → Settings → Advanced Security → Code security |
-| 2 | For code scanning, pick **Enabled with advanced setup allowed** (won't break existing CodeQL workflows) | Same |
-| 3 | Set **Policy → Use as default for newly created repositories** | Same |
-| 4 | Leave **Enforcement** at **Not enforced** | Same |
-| 5 | For existing repositories, use **Apply to → All repositories without configurations** | Configurations list |
-
-- ⚠️ **Steps 3 and 5 are different things.** The policy only affects newly created repositories; existing repositories need the Apply to action in step 5
-- 🏢 **All repositories without configurations** is only selectable at the enterprise level — it covers every unconfigured repository in one shot without disturbing orgs that already have a configuration applied
-- 🗄️ It **also applies to archived repositories** (some features, secret scanning in particular, still run on archived repos)
-
-> 🔓 **Why leave it Not enforced** — enforcing blocks repository owners from changing the settings. Roll it out loosely first, watch how it lands, and switch to enforced once your operating model has settled.
-> 🎚️ Leaving an individual setting as **Not set** keeps whatever the repository already has for that one feature (it stays excluded even when the configuration is enforced) — handy for a phased rollout.
-
-📘 Rollout references:
-- <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/create-custom-configuration" target="_blank" rel="noopener noreferrer">Creating a custom security configuration for your enterprise ↗</a>
-- <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/apply-custom-configuration" target="_blank" rel="noopener noreferrer">Applying a custom security configuration to your enterprise ↗</a>
-- <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/merge-protection" target="_blank" rel="noopener noreferrer">Code scanning merge protection ↗</a>
-
 📘 GHAS general:
 - <a class="retro-link" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">Introducing GitHub Secret Protection & Code Security (GitHub Blog) ↗</a>
 - <a class="retro-link" href="https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security" target="_blank" rel="noopener noreferrer">About billing for GitHub Advanced Security ↗</a>
 - <a class="retro-link" href="https://github.com/security/advanced-security" target="_blank" rel="noopener noreferrer">GitHub Advanced Security product page ↗</a>
+
+## Rolling out across the enterprise
+
+One configuration at **Enterprise → Settings → Advanced Security → Code security** rolls out to every org and repo. **New configuration** opens pre-filled with **GitHub recommended**.
+
+<div class="ctl-widget">
+<div class="ctl-list">
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#ffb000">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🚫</span><span class="ctl-name">Block orgs that should not have it</span><span class="ctl-when">Do this first</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/admin/enforcing-policies/enforcing-policies-for-your-enterprise/enforcing-policies-for-code-security-and-analysis-for-your-enterprise" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Do this</span><span class="ctl-v">Enterprise → Policies → <b>Advanced Security</b> → <b>Policies</b> tab → set the dropdown to <b>Allow for selected organizations</b> and keep only the orgs you want</span></p>
+<p class="ctl-row"><span class="ctl-k">Why first</span><span class="ctl-v">Disallowing does <b>not</b> disable repos where it is <b>already enabled</b>. It only blocks <b>additional</b> repositories, so after rollout it is too late</span></p>
+<p class="ctl-row"><span class="ctl-k">Who it binds</span><span class="ctl-v"><b>Repository administrators only</b>. Org owners and security managers can always enable it regardless of the policy</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#ff4d4d">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛡️</span><span class="ctl-name">Push protection turns on</span><span class="ctl-when">blocks <code>push</code> only</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/push-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Blocked</span><span class="ctl-v"><code>git push</code>, commits made in the GitHub UI, file uploads, REST API requests</span></p>
+<p class="ctl-row"><span class="ctl-k">Not blocked</span><span class="ctl-v"><code>git pull</code>, <code>git clone</code>, <code>git fetch</code>. <b>"Secret scanning will stop us pulling" is a misconception</b></span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#ff4d4d">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛂</span><span class="ctl-name">Bypass is open to anyone with write</span><span class="ctl-when">default behavior</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/delegated-bypass" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Default</span><span class="ctl-v"><b>anyone</b> with write access can bypass by picking a reason. Every bypass still leaves <b>an alert, an audit log entry, and an email to owners</b></span></p>
+<p class="ctl-row"><span class="ctl-k">To restrict</span><span class="ctl-v">set <b>Bypass privileges</b> to <b>Specific actors</b> in the configuration (delegated bypass). Everyone else goes through a request and approval flow (requests expire after 7 days)</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#00f0ff">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔍</span><span class="ctl-name">Code scanning runs on three triggers</span><span class="ctl-when">consumes Actions minutes</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/setup-types" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">When</span><span class="ctl-v">every push to the default or a protected branch, every PR creation and commit against those branches (fork PRs excluded), and a <b>weekly schedule</b></span></p>
+<p class="ctl-row"><span class="ctl-k">Cost</span><span class="ctl-v">the dominant factor in an enterprise-wide rollout. Repos with no CodeQL-supported language use <b>zero scans and zero minutes</b></span></p>
+<p class="ctl-row"><span class="ctl-k">Note</span><span class="ctl-v">code scanning on its own <b>never blocks a merge</b></span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#00f0ff">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🚧</span><span class="ctl-name">Blocking merges needs a ruleset</span><span class="ctl-when">Enterprise → Policies → Rulesets</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/merge-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Where</span><span class="ctl-v">Policies → Repository → Rulesets → <b>Require code scanning results</b></span></p>
+<p class="ctl-row"><span class="ctl-k">Blocks when</span><span class="ctl-v">an alert at the configured severity, analysis running, or <b>tool not configured</b></span></p>
+<p class="ctl-row"><span class="ctl-k">Trap</span><span class="ctl-v">point it at repos without CodeQL and <b>every PR is blocked even with zero alerts</b></span></p>
+<p class="ctl-row"><span class="ctl-k">What Evaluate is</span><span class="ctl-v">a <b>dry run that records instead of blocking</b>. <b>Rule Insights</b> shows what Active would have rejected. The others are Active and Disabled</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#9bbc0f">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🆕</span><span class="ctl-name">Cover new repositories</span><span class="ctl-when">set via Policy</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/create-custom-configuration" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Do this</span><span class="ctl-v">Policy → <b>Use as default for newly created repositories</b>. Pick <b>Enabled with advanced setup allowed</b> for code scanning so existing CodeQL workflows survive</span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v"><b>new repositories only</b>. It does nothing to repositories that already exist</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#9bbc0f">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🗂️</span><span class="ctl-name">Cover existing repositories</span><span class="ctl-when">separate Apply to action</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/apply-custom-configuration" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Do this</span><span class="ctl-v">from the configurations list, <b>Apply to</b> → <b>All repositories without configurations</b></span></p>
+<p class="ctl-row"><span class="ctl-k">Enterprise only</span><span class="ctl-v">appears <b>only at the enterprise level</b>. Covers unconfigured repos without disturbing orgs that already have one</span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">archived repos are included too, since secret scanning still runs on them</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#9bbc0f">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🎯</span><span class="ctl-name">Pick specific repositories</span><span class="ctl-when">organization configuration only</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/apply-custom-configuration" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Per repo</span><span class="ctl-v">enterprise <b>Apply to</b> offers only <b>All repositories</b> or <b>All repositories without configurations</b>. <b>Choosing which repos get it is organization-level only</b></span></p>
+<p class="ctl-row"><span class="ctl-k">How</span><span class="ctl-v">Organization → Settings → Advanced Security → Configurations → <b>Repositories</b> tab → filter, select, <b>Apply configuration</b></span></p>
+<p class="ctl-row"><span class="ctl-k">Who wins</span><span class="ctl-v">if an enterprise change conflicts with the org configuration the repo flips to <code>removed_by_enterprise</code> and the org config detaches. <b>Enterprise wins</b></span></p>
+</div>
+</details>
+</div>
+</div>
+
+> 🔓 **Ship it as Not enforced.** Enforcing locks repository owners out of changing the settings. Leaving an individual setting as **Not set** keeps the repository's current value for that item.

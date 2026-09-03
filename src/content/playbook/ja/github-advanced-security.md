@@ -122,79 +122,80 @@ GitHub には **ライセンス不要・完全無料** で組織のセキュリ�
 - <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment" target="_blank" rel="noopener noreferrer">Code security risk assessment(GitHub Docs)↗</a>
 - <a class="retro-link" href="https://github.blog/changelog/2026-04-08-code-security-risk-assessment-available-for-organizations/" target="_blank" rel="noopener noreferrer">Code Security Risk Assessment GA(2026/04)↗</a>
 
-## エンタープライズ全体へのロールアウト手順
-
-<div class="hero-quote hero-quote-plain">
-  <p>
-    ライセンス購入後、<strong>Enterprise → Settings → Advanced Security → Code security</strong> で <strong>security configuration</strong> を 1 つ作れば、配下のすべての Organization / リポジトリに同じ設定を配れる。
-  </p>
-  <p>
-    <strong>New configuration</strong> を押すと初期値は <strong>GitHub recommended</strong> の内容が入っている。まずはこれをベースにコピーして使うのが安全。
-  </p>
-</div>
-
-### ⚠️ 事前に押さえておく 3 つの注意点
-
-**1. Push protection が ON になり、secret を含む push が止まる**
-
-| 止まるもの | 止まらないもの |
-| --- | --- |
-| `git push` · GitHub UI 上のコミット · ファイルアップロード · REST API 経由のリクエスト | `git pull` · `git clone` · `git fetch` |
-
-> ⚠️ 「secret scanning に引っかかって pull できなくなる」という誤解が多いが、push protection が止めるのは **push だけ**。取得系の操作には一切影響しない。
-
-**2. Code scanning が 3 つのタイミングで走る**
-
-- 📤 default branch / protected branch への **push のたび**
-- 🔀 default branch / protected branch 宛ての **PR の作成・コミットのたび**(fork からの PR は除く)
-- 📅 **週 1 回**のスケジュール実行
-
-つまり **GitHub Actions の実行時間を消費する**。これが全社展開でいちばん効いてくるコスト要因。
-
-> 💡 CodeQL 対応言語を含まないリポジトリでは、default setup を有効にしてもスキャンは走らず Actions 分も消費しない。
-> 🚧 code scanning 自体は **merge をブロックしない**。ブロックしたい場合は別途 ruleset が必要(下記)。
-
-**3. デフォルトでは write 権限を持つ全員が push protection を bypass できる**
-
-- 🛂 開発者を信頼できるならこのままで OK。bypass するたびに **アラート + 監査ログ + owner へのメール** が残るので、抑止力としては十分機能する
-- 🔐 厳しくしたい場合は configuration の **Bypass privileges** を **Specific actors** に変更(= delegated bypass)。指定外の人は申請 → 承認フローになる(申請は **7 日**で失効)
-
-### 🚧 merge をブロックしたいなら ruleset
-
-Code scanning のアラートで PR の merge を止めたい場合は、**Enterprise → Policies → Repository → Rulesets** で **Require code scanning results** ルールを追加する。
-
-ブロックされる条件は 3 つ:
-
-- 指定したツールが、ruleset で定義した severity のアラートを検出した
-- 指定したツールの解析がまだ実行中
-- **指定したツールがそのリポジトリで設定されていない**
-
-> ⚠️ 3 つ目が要注意。CodeQL が有効になっていないリポジトリに ruleset を当てると、**アラートが 1 件もなくても全 PR がブロックされる**。必ず「configuration 適用 → CodeQL が回っているのを確認 → ruleset」の順番で。
-> 🧪 まずは enforcement status を **Evaluate** にしておくと、実際にはブロックせずに「何件ブロックされたはずか」を Rule Insights で確認できる。
-
-### 📋 展開の手順
-
-| # | やること | 場所 |
-| :---: | --- | --- |
-| 1 | **New configuration** で GitHub recommended をベースにコピーを作る | Enterprise → Settings → Advanced Security → Code security |
-| 2 | Code scanning は **Enabled with advanced setup allowed** を選ぶ(既存の CodeQL workflow を壊さない) | 同上 |
-| 3 | **Policy → Use as default for newly created repositories** を設定 | 同上 |
-| 4 | **Enforcement** は **Not enforced** のまま | 同上 |
-| 5 | 既存リポジトリには **Apply to → All repositories without configurations** | Configurations 一覧 |
-
-- ⚠️ **3 と 5 は別物**。Policy の設定は新規リポジトリにしか効かない。既存リポジトリには手順 5 の Apply to を別途実行する必要がある
-- 🏢 **All repositories without configurations** は enterprise レベルでのみ選べる選択肢。既に config が当たっている org を壊さずに、未設定のリポジトリだけを一括でカバーできる
-- 🗄️ **archived リポジトリにも適用される**(secret scanning は archived でも動くため)
-
-> 🔓 **Not enforced にしておく理由** — enforce すると repo owner が設定を変更できなくなる。まずは緩く配って様子を見て、運用が固まってから enforce に切り替えるのが安全。
-> 🎚️ 個別の設定を **Not set** にしておけば、その項目だけリポジトリ側の現状値を維持できる(enforce しても対象外)。段階展開のときに使える。
-
-📘 ロールアウト関連:
-- <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/create-custom-configuration" target="_blank" rel="noopener noreferrer">Creating a custom security configuration for your enterprise ↗</a>
-- <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/apply-custom-configuration" target="_blank" rel="noopener noreferrer">Applying a custom security configuration to your enterprise ↗</a>
-- <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/merge-protection" target="_blank" rel="noopener noreferrer">Code scanning merge protection ↗</a>
-
 📘 GHAS 全般:
 - <a class="retro-link" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">Introducing GitHub Secret Protection & Code Security (GitHub Blog) ↗</a>
 - <a class="retro-link" href="https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security" target="_blank" rel="noopener noreferrer">About billing for GitHub Advanced Security ↗</a>
 - <a class="retro-link" href="https://github.com/security/advanced-security" target="_blank" rel="noopener noreferrer">GitHub Advanced Security 製品ページ ↗</a>
+
+## エンタープライズ全体へのロールアウト手順
+
+**Enterprise → Settings → Advanced Security → Code security** で configuration を 1 つ作れば配下の全 org / repo に配れる。**New configuration** は最初から **GitHub recommended**。
+
+<div class="ctl-widget">
+<div class="ctl-list">
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#ffb000">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🚫</span><span class="ctl-name">使わせない org は先に止める</span><span class="ctl-when">配る前にやる</span><a class="ctl-doc" href="https://docs.github.com/ja/enterprise-cloud@latest/admin/enforcing-policies/enforcing-policies-for-your-enterprise/enforcing-policies-for-code-security-and-analysis-for-your-enterprise" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">やること</span><span class="ctl-v">Enterprise → Policies → <b>Advanced Security</b> → <b>Policies</b> タブ → dropdown を <b>Allow for selected organizations</b> にして許可する org だけ残す</span></p>
+<p class="ctl-row"><span class="ctl-k">なぜ先に</span><span class="ctl-v">禁止しても<b>既に有効な repo は無効化されない</b>。止められるのは<b>追加のリポジトリ</b>だけなので、配った後では手遅れ</span></p>
+<p class="ctl-row"><span class="ctl-k">効く相手</span><span class="ctl-v"><b>repository administrator だけ</b>。org owner と security manager はポリシーに関係なく有効化できる</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#ff4d4d">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛡️</span><span class="ctl-name">Push protection が ON になる</span><span class="ctl-when">止まるのは <code>push</code> だけ</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/push-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">止まる</span><span class="ctl-v"><code>git push</code>・GitHub UI 上のコミット・ファイルアップロード・REST API 経由のリクエスト</span></p>
+<p class="ctl-row"><span class="ctl-k">止まらない</span><span class="ctl-v"><code>git pull</code>・<code>git clone</code>・<code>git fetch</code>。<b>「secret に引っかかって pull できなくなる」は誤解</b></span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#ff4d4d">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛂</span><span class="ctl-name">bypass は write 権限者に開放</span><span class="ctl-when">デフォルト設定</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/delegated-bypass" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">デフォルト</span><span class="ctl-v">write 権限を持つ<b>全員</b>が理由を選んで bypass 可能。ただし<b>アラート + 監査ログ + owner へのメール</b>が必ず残る</span></p>
+<p class="ctl-row"><span class="ctl-k">絞るには</span><span class="ctl-v">configuration の <b>Bypass privileges</b> を <b>Specific actors</b> に(= delegated bypass)。指定外の人は申請 → 承認フロー(申請は 7 日で失効)</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#00f0ff">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔍</span><span class="ctl-name">Code scanning が 3 タイミングで走る</span><span class="ctl-when">Actions 分を消費</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/setup-types" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">いつ走る</span><span class="ctl-v">default / protected branch への push のたび・同ブランチ宛て PR の作成とコミットのたび(fork からの PR は除く)・<b>週 1 回</b>のスケジュール</span></p>
+<p class="ctl-row"><span class="ctl-k">コスト</span><span class="ctl-v">全社展開でいちばん効いてくる要因。CodeQL 対応言語を含まない repo は<b>スキャンも Actions 分も 0</b></span></p>
+<p class="ctl-row"><span class="ctl-k">注意</span><span class="ctl-v">code scanning 自体は <b>merge をブロックしない</b></span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#00f0ff">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🚧</span><span class="ctl-name">merge を止めたいなら ruleset</span><span class="ctl-when">Enterprise → Policies → Rulesets</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/merge-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">設定場所</span><span class="ctl-v">Policies → Repository → Rulesets → <b>Require code scanning results</b></span></p>
+<p class="ctl-row"><span class="ctl-k">ブロック条件</span><span class="ctl-v">指定 severity のアラート検出・解析が実行中・<b>ツールがそのリポジトリで未設定</b></span></p>
+<p class="ctl-row"><span class="ctl-k">落とし穴</span><span class="ctl-v">CodeQL 未設定の repo に当てると<b>アラート 0 件でも全 PR がブロック</b></span></p>
+<p class="ctl-row"><span class="ctl-k">Evaluate とは</span><span class="ctl-v"><b>ブロックせず記録だけ取るお試しモード</b>。<b>Rule Insights</b> ページで「Active だったら何が弾かれたか」を確認できる。残りは Active(即適用)と Disabled(無効)</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#9bbc0f">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🆕</span><span class="ctl-name">新規リポジトリに配る</span><span class="ctl-when">Policy で設定</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/create-custom-configuration" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">やること</span><span class="ctl-v">Policy → <b>Use as default for newly created repositories</b> を設定。Code scanning は <b>Enabled with advanced setup allowed</b> を選ぶと既存の CodeQL workflow を壊さない</span></p>
+<p class="ctl-row"><span class="ctl-k">効く範囲</span><span class="ctl-v"><b>新規リポジトリのみ</b>。既存リポジトリには一切効かない</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#9bbc0f">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🗂️</span><span class="ctl-name">既存リポジトリに配る</span><span class="ctl-when">Apply to で別途実行</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/apply-custom-configuration" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">やること</span><span class="ctl-v">Configurations 一覧 → <b>Apply to</b> → <b>All repositories without configurations</b></span></p>
+<p class="ctl-row"><span class="ctl-k">enterprise 限定</span><span class="ctl-v">この選択肢は <b>enterprise レベルでのみ</b>表示。既に config が当たっている org を壊さず、未設定の repo だけカバーできる</span></p>
+<p class="ctl-row"><span class="ctl-k">対象</span><span class="ctl-v">archived リポジトリにも適用される(secret scanning は archived でも動くため)</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#9bbc0f">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🎯</span><span class="ctl-name">リポジトリを選んで配る</span><span class="ctl-when">org configuration のみ</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/apply-custom-configuration" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">repo 単位</span><span class="ctl-v">enterprise の <b>Apply to</b> は <b>All repositories</b> か <b>All repositories without configurations</b> のみ。<b>repo を選べるのは org configuration だけ</b></span></p>
+<p class="ctl-row"><span class="ctl-k">やり方</span><span class="ctl-v">Organization → Settings → Advanced Security → Configurations → <b>Repositories</b> タブで絞り込んで選択 → <b>Apply configuration</b></span></p>
+<p class="ctl-row"><span class="ctl-k">どちらが優先</span><span class="ctl-v">enterprise 側の変更が org configuration と衝突すると repo は <code>removed_by_enterprise</code> になり org config が外れる。<b>enterprise が優先</b></span></p>
+</div>
+</details>
+</div>
+</div>
+
+> 🔓 **Enforcement は Not enforced のまま配る。** enforce すると repo owner が設定を変更できなくなる。個別項目を **Not set** にしておけば、その項目だけリポジトリ側の現状値を維持できる。
