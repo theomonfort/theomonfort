@@ -48,8 +48,6 @@ links:
   </p>
 </div>
 
-> 🎯 Code Scanning は「脆弱性があるか」、Code Quality は「信頼して保守できるコードか」を確認する。
-
 ## 2 層の解析
 
 Code Quality は、再現性の高いルールと、幅広い AI の推論を組み合わせる。

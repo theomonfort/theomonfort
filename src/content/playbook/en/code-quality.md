@@ -48,8 +48,6 @@ links:
   </p>
 </div>
 
-> 🎯 Code Scanning asks, “Is this code vulnerable?” Code Quality asks, “Can we trust and maintain this code?”
-
 ## Two analysis layers
 
 Code Quality combines predictable rules with broader AI reasoning.
