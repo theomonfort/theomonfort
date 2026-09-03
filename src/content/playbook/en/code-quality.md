@@ -48,8 +48,6 @@ links:
   </p>
 </div>
 
-> 🎯 Code Scanning asks, “Is this code vulnerable?” Code Quality asks, “Can we trust and maintain this code?”
-
 ## Two analysis layers
 
 Code Quality combines predictable rules with broader AI reasoning.
@@ -106,7 +104,7 @@ GA adds organization-level visibility and enforceable standards.
 
 > 🎯 Dashboards tell you where quality debt lives; rulesets stop teams from adding more.
 
-## Enable and roll out
+## Enable and roll out <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/maintain-quality-code/enable-code-quality" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 Start small, tune thresholds, then expand through organization policy.
 
