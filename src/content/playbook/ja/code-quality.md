@@ -104,7 +104,7 @@ GA では、組織横断の可視化と、強制可能な品質基準が追加�
 
 > 🎯 Dashboard で品質負債の場所を把握し、ruleset で新たな負債の追加を止める。
 
-## 有効化と展開
+## 有効化と展開 <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/maintain-quality-code/enable-code-quality" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 小さく始め、しきい値を調整してから Organization 全体へ展開する。
 

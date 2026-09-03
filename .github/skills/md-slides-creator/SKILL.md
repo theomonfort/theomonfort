@@ -203,6 +203,24 @@ Link to another playbook entry by slug:
 <a class="retro-link" href="/theomonfort/playbook/dependabot">Dependabot ↗</a>
 ```
 
+### 4g. Section-title doc badge (`h2-doc`)
+
+To point one slide at its canonical doc page, append a compact badge **inline on the `## H2` line**. It renders as a small outlined pill to the right of the title, inheriting the entry accent colour, dimmed until hover.
+
+```markdown
+## Enable and roll out <a class="h2-doc" href="https://docs.github.com/..." target="_blank" rel="noopener noreferrer">📖 Docs</a>
+```
+
+Rules:
+
+- Keep it on the **same line as the `##`** — a line break makes it a separate paragraph and breaks the layout.
+- Label is always `📖 Docs` (both locales). Don't translate it, don't lengthen it; the badge is `white-space: nowrap` and a long label crowds the title.
+- **At most one per slide**, and only on slides where a single doc page really is *the* reference. If a slide needs several sources, leave them to the frontmatter `links[]` slide.
+- Use the fully-qualified official URL, same as `links[]`. Duplicating a URL that also appears in `links[]` is fine and expected.
+- Mirror it onto the matching `## H2` in the other locale.
+
+Styling lives in `.prose-akq h2 .h2-doc` in both `src/pages/playbook/[slug].astro` and `src/pages/en/playbook/[slug].astro`.
+
 ---
 
 ## Step 5 — Authoring workflow (recommended order)
@@ -292,6 +310,7 @@ Before declaring done, verify EVERY item:
 - [ ] Tables ≤ 5 cols, ≤ 8 rows.
 - [ ] Code blocks fit one slide each.
 - [ ] No `# H1` in body (frontmatter handles the title).
+- [ ] Any `h2-doc` badge sits on the same line as its `##`, uses the `📖 Docs` label, and exists in both locales.
 - [ ] Both `ja/<slug>.md` and `en/<slug>.md` exist with matching structure.
 - [ ] If the entry is new — or a slide was updated for a new release / changelog item — it's flagged in `src/lib/playbook-meta.ts` (`NEW_PLAYBOOK_SLUGS` and/or `NAV_HINT_SLIDES`, remembering indexes are 0-based).
 - [ ] `pnpm build` passes.

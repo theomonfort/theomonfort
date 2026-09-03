@@ -53,6 +53,16 @@ Use the same string across links to bucket them on the final slide. Conventions 
 
 (In English entries use the same emoji + an English label, e.g. `📖 Official docs`.)
 
+## Section-title doc badge
+
+One canonical doc link per slide, inline on the `##` line:
+
+```markdown
+## 有効化と展開 <a class="h2-doc" href="https://docs.github.com/..." target="_blank" rel="noopener noreferrer">📖 Docs</a>
+```
+
+Label stays `📖 Docs` in both locales. Max one per slide. Everything else goes in frontmatter `links[]`.
+
 ## Callout emoji palette
 
 | emoji | meaning |
