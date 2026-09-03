@@ -3127,23 +3127,45 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     flex: none;
     margin-left: auto;
     padding: 0.05em 0.5em;
-    border: 1px dashed rgba(255, 176, 0, 0.5);
+    border: 1px dashed rgba(232, 244, 255, 0.28);
     font-size: 0.78em;
     line-height: 1.55;
     letter-spacing: 0.04em;
     white-space: nowrap;
-    color: #ffb000;
+    color: rgba(232, 244, 255, 0.7);
   }
   .prose-akq .ctl-when code {
     padding: 0 2px;
     border: none;
     background: none;
+    color: inherit;
     font-size: 0.95em;
   }
   .prose-akq .ctl-item[open] .ctl-when {
     border-style: solid;
-    border-color: #ffb000;
-    background: rgba(255, 176, 0, 0.12);
+    border-color: color-mix(in srgb, var(--entry-accent, #00f0ff) 60%, transparent);
+    background: color-mix(in srgb, var(--entry-accent, #00f0ff) 12%, transparent);
+    color: var(--entry-accent, #00f0ff);
+  }
+  .prose-akq .ctl-doc {
+    flex: none;
+    font-family: 'VT323', monospace;
+    font-size: 1.1em;
+    line-height: 1;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    color: #ffb000;
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(255, 176, 0, 0.55);
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+  .prose-akq .ctl-doc::after { content: ' ↗'; }
+  .prose-akq .ctl-doc:hover,
+  .prose-akq .ctl-doc:focus-visible {
+    color: #05060f;
+    background: #ffb000;
+    border-bottom-color: #ffb000;
+    box-shadow: 0 0 8px rgba(255, 176, 0, 0.6);
   }
   .prose-akq .ctl-toggle {
     flex: none;
@@ -3197,7 +3219,8 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       grid-template-columns: auto minmax(0, 1fr) auto;
       grid-template-areas:
         "icon name toggle"
-        "icon when toggle";
+        "icon when toggle"
+        "icon doc  toggle";
       align-items: center;
       column-gap: 0.5em;
       row-gap: 0.2em;
@@ -3206,6 +3229,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     .prose-akq .ctl-icon { grid-area: icon; align-self: start; }
     .prose-akq .ctl-name { grid-area: name; }
     .prose-akq .ctl-when { grid-area: when; justify-self: start; margin-left: 0; }
+    .prose-akq .ctl-doc { grid-area: doc; justify-self: start; }
     .prose-akq .ctl-toggle { grid-area: toggle; align-self: start; }
     .prose-akq .ctl-body { padding-left: 1.6em; }
     .prose-akq .ctl-row { grid-template-columns: minmax(0, 1fr); }
