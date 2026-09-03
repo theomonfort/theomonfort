@@ -3491,6 +3491,194 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     .prose-akq .ctl-toggle { transition: none; }
   }
 
+  /* ─────────────────────────────────────────────────────────────
+     Detection split deck — pick on the left, read on the right
+     The four detection engines each carry a licence tier, and their
+     descriptions are long enough that a stacked accordion would push
+     the slide over the fold. A two-pane layout pins the height: the
+     picker never moves and the reading pane is the same size whichever
+     engine is open, so the slide cannot grow. Native <details name>
+     again, so exclusive open costs no JS and document mode and
+     presentation mode behave identically. Under 640px the pane
+     un-positions and the whole thing degrades to a stacked accordion.
+     ───────────────────────────────────────────────────────────── */
+  .prose-akq .det-widget { margin: 1.2em 0; }
+  .prose-akq .det-hint {
+    margin: 0 0 0.5em;
+    font-size: 0.9em;
+    letter-spacing: 0.08em;
+    color: #ffb000;
+    text-shadow: 0 0 8px rgba(255, 176, 0, 0.5);
+  }
+  .prose-akq .det-split {
+    --det-col: 12em;
+    --det-gap: 0.6em;
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--det-col) minmax(0, 1fr);
+    gap: var(--det-gap);
+    align-items: stretch;
+  }
+  .prose-akq .det-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+    min-width: 0;
+  }
+
+  /* Left column — the picker. Selected row inverts to solid accent. */
+  .prose-akq .det-pick { min-width: 0; }
+  .prose-akq .det-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    padding: 0.3em 0.45em;
+    font-size: 0.88em;
+    line-height: 1.4;
+    color: rgba(232, 244, 255, 0.85);
+    background: rgba(10, 14, 39, 0.7);
+    border: 1px dashed color-mix(in srgb, var(--entry-accent, #00f0ff) 35%, transparent);
+    cursor: pointer;
+    list-style: none;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .prose-akq .det-btn::-webkit-details-marker { display: none; }
+  .prose-akq .det-btn:hover {
+    color: #e8f4ff;
+    background: color-mix(in srgb, var(--entry-accent, #00f0ff) 12%, transparent);
+  }
+  .prose-akq .det-btn:focus-visible { outline: 2px solid #ffb000; outline-offset: 2px; }
+  .prose-akq .det-pick[open] .det-btn {
+    color: #05060f;
+    background: var(--entry-accent, #00f0ff);
+    border: 1px solid var(--entry-accent, #00f0ff);
+    box-shadow:
+      0 0 8px var(--entry-accent, #00f0ff),
+      0 0 24px color-mix(in srgb, var(--entry-accent, #00f0ff) 30%, transparent);
+  }
+  .prose-akq .det-icon { flex: none; font-size: 1em; line-height: 1; }
+  .prose-akq .det-name { flex: 1 1 auto; min-width: 0; overflow-wrap: break-word; }
+  /* Licence tier as a lamp in the list, spelled out in the pane. */
+  .prose-akq .det-dot { flex: none; width: 0.5em; height: 0.5em; }
+  .prose-akq .det-dot.is-free { background: #9bbc0f; box-shadow: 0 0 6px rgba(155, 188, 15, 0.7); }
+  .prose-akq .det-dot.is-paid { background: #ffb000; box-shadow: 0 0 6px rgba(255, 176, 0, 0.7); }
+  .prose-akq .det-pick[open] .det-dot { outline: 1px solid #05060f; box-shadow: none; }
+
+  /* Right column — a screen that is always there, so the layout does
+     not jump between "nothing selected" and "something selected". */
+  .prose-akq .det-screen {
+    display: grid;
+    place-items: center;
+    min-height: 8em;
+    padding: 0.5em;
+    border: 1px dashed color-mix(in srgb, var(--entry-accent, #00f0ff) 30%, transparent);
+    background: rgba(5, 6, 15, 0.55);
+  }
+  .prose-akq .det-empty {
+    margin: 0;
+    font-size: 0.95em;
+    letter-spacing: 0.14em;
+    color: rgba(232, 244, 255, 0.4);
+  }
+  .prose-akq .det-pane {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: calc(var(--det-col) + var(--det-gap));
+    overflow-y: auto;
+    padding: 0.6em 0.75em 0.7em;
+    background: #05060f;
+    border: 2px solid var(--entry-accent, #00f0ff);
+    box-shadow:
+      0 0 8px color-mix(in srgb, var(--entry-accent, #00f0ff) 55%, transparent),
+      0 0 24px color-mix(in srgb, var(--entry-accent, #00f0ff) 25%, transparent);
+    animation: akq-det-in 0.2s ease;
+  }
+  @keyframes akq-det-in {
+    from { opacity: 0; transform: translateX(0.4em); }
+    to { opacity: 1; transform: none; }
+  }
+  .prose-akq .det-head {
+    display: flex;
+    align-items: center;
+    gap: 0.45em;
+    margin: 0 0 0.4em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px dashed color-mix(in srgb, var(--entry-accent, #00f0ff) 35%, transparent);
+  }
+  .prose-akq .det-title {
+    font-family: 'VT323', monospace;
+    font-size: 1.35em;
+    line-height: 1.15;
+    letter-spacing: 0.08em;
+    color: var(--entry-accent, #00f0ff);
+  }
+  .prose-akq .det-tier {
+    flex: none;
+    margin-left: auto;
+    padding: 0 0.4em;
+    font-family: 'VT323', monospace;
+    font-size: 1em;
+    line-height: 1.35;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    border: 1px solid currentColor;
+  }
+  .prose-akq .det-tier.is-free { color: #9bbc0f; background: rgba(155, 188, 15, 0.12); }
+  .prose-akq .det-tier.is-paid { color: #ffb000; background: rgba(255, 176, 0, 0.12); }
+  .prose-akq .det-why {
+    margin: 0;
+    font-size: 0.86em;
+    line-height: 1.7;
+    color: rgba(232, 244, 255, 0.9);
+  }
+  .prose-akq .det-why b,
+  .prose-akq .det-why strong { color: #ffb000; font-weight: normal; }
+  .prose-akq .det-pick[open] .det-why::after {
+    content: '▊';
+    margin-left: 0.15em;
+    color: #ffb000;
+    animation: akq-risk-blink 1s steps(1) infinite;
+  }
+
+  /* The scope line summarises where scanning reaches — it is not a
+     fifth engine, so it sits under the deck as a full-width plate. */
+  .prose-akq .det-scope {
+    display: flex;
+    gap: 0.5em;
+    align-items: baseline;
+    margin: 0.55em 0 0;
+    padding: 0.35em 0.5em;
+    font-size: 0.8em;
+    line-height: 1.65;
+    color: rgba(232, 244, 255, 0.78);
+    background: rgba(5, 6, 15, 0.6);
+    border-top: 2px solid rgba(255, 176, 0, 0.5);
+  }
+  .prose-akq .det-scope-k { flex: none; letter-spacing: 0.08em; color: #ffb000; }
+  .prose-akq .det-scope-v { min-width: 0; }
+  .prose-akq .det-scope b,
+  .prose-akq .det-scope strong { color: #ffb000; font-weight: normal; }
+
+  /* Narrow screens: two panes side by side would squeeze both, so drop
+     the screen and let each pane open under its own row instead. */
+  @media (max-width: 640px) {
+    .prose-akq .det-split { display: block; }
+    .prose-akq .det-screen { display: none; }
+    .prose-akq .det-btn { font-size: 0.85em; }
+    .prose-akq .det-pane {
+      position: static;
+      margin: 0.2em 0 0.45em;
+      animation: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .prose-akq .det-btn { transition: none; }
+    .prose-akq .det-pane { animation: none; }
+    .prose-akq .det-pick[open] .det-why::after { animation: none; }
+  }
+
   /* ── Figure tabs: CSS-only switcher between alternative diagrams ──
      Radios must precede .figtabs-bar and the panels so the sibling
      combinator can drive both the active tab and the visible panel. */

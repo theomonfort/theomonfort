@@ -221,9 +221,98 @@ Rules:
 
 Styling lives in `.prose-akq h2 .h2-doc` in both `src/pages/playbook/[slug].astro` and `src/pages/en/playbook/[slug].astro`.
 
----
+### 4h. Collapsible widgets (when a table would eat the whole slide)
 
-## Step 5 — Authoring workflow (recommended order)
+Reach for one of these when a slide has **4–6 items that each need a sentence or two of explanation**. As a table that's 6 rows of wrapped prose — it fills the screen and nobody reads it. As a collapsible list the audience sees the shortlist first, and you open one row at a time as you talk.
+
+All four are native `<details>` with a shared `name="..."`, so opening one closes the others and **no JavaScript is involved**. Keep the `name` unique per slide.
+
+| Widget | Shape | Reach for it when |
+| --- | --- | --- |
+| `risk-widget` | numbered rows, magenta when open, severity gauge | ranked risks / threats — the number and gauge imply severity |
+| `spec-widget` | accent rows with a dated changelog link in the summary | settings or spec keys where "since when" matters |
+| `ctl-widget` | thin rows with a trailing `Docs` link | a feature list where each row should hand off to docs |
+| `det-widget` | picker on the left, fixed reading pane on the right | items with a **long** description — the pane is the same height whichever row is open, so the slide can't grow |
+
+`ctl-widget` is the workhorse; here is its skeleton:
+
+```html
+<div class="ctl-widget">
+<p class="ctl-hint">▸ + で詳細を表示</p>
+<div class="ctl-list">
+<details class="ctl-item" name="unique-per-slide">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛡️</span><span class="ctl-name">Push protection</span><span class="ctl-when">commit 前に阻止</span><a class="ctl-doc" href="https://docs.github.com/..." target="_blank" rel="noopener noreferrer">Docs ↗</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">対象</span><span class="ctl-v">全リポジトリ</span></p>
+</div>
+</details>
+</div>
+</div>
+```
+
+And `det-widget`, when the detail text is too long for an inline row:
+
+```html
+<div class="det-widget">
+<p class="det-hint">▸ クリックして詳細を表示</p>
+<div class="det-split">
+<div class="det-list">
+<details class="det-pick" name="unique-per-slide">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🏷️</span><span class="det-name">Provider patterns</span><span class="det-dot is-free" aria-hidden="true"></span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">🏷️</span><span class="det-title">Provider patterns</span><span class="det-tier is-free">FREE</span></p>
+<p class="det-why">200+ パートナーが登録した正規表現で検知。</p>
+</div>
+</details>
+</div>
+<div class="det-screen"><p class="det-empty">タイプを選択 ▸</p></div>
+</div>
+<p class="det-scope"><span class="det-scope-k">📚 対象</span><span class="det-scope-v">まとめの一行。</span></p>
+</div>
+```
+
+**Rules**
+
+- The widget must be a **direct sibling after the `##`**, or it lands on the previous slide.
+- `.det-title` and `.det-tier` render in `VT323`, which has **no Japanese glyphs** — keep them Latin in both locales (product names, `FREE` / `GHAS`).
+- `is-free` / `is-paid` on `.det-dot` and `.det-tier` are the only tier variants; green means free, amber means licensed.
+- `.det-scope` is a full-width footer plate for a summary line — don't use it for a fifth peer item.
+- Below 640px `det-widget` drops the right pane and becomes a plain stacked accordion. Nothing to do; just don't fight it.
+
+📎 Canonical live examples: `src/content/playbook/ja/secret-scanning.md` (`risk-widget`, `ctl-widget`, `det-widget`) and `src/content/playbook/ja/governance.md` (`spec-widget`).
+
+### 4i. `DEMO` overlay (presenter run-book, off-slide)
+
+A `► DEMO` button pinned next to an H2 — the same inline slot as the `h2-doc` badge (4g), and the two can share a title. Clicking it opens a full-screen panel with the click-by-click script for a live demo. Use it for **the steps you need while presenting but must not put on the slide** — paths, shell commands, expected output. Without it those details either bloat the slide or live in a doc you can't reach mid-talk.
+
+```html
+## 主な機能 <input type="checkbox" id="demo-secret-scanning" class="demo-toggle" /><label class="h2-demo" for="demo-secret-scanning">&#9658; DEMO</label>
+
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-secret-scanning" aria-label="デモ手順を閉じる"></label>
+<div class="demo-window" role="group" aria-label="デモ手順">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Secret Scanning</span><label class="demo-close" for="demo-secret-scanning" aria-label="閉じる">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">PUSH PROTECTION</p>
+<p><code class="demo-path">ghas-test-1</code> で secret を push する。</p>
+<code class="demo-cmd">./demo/secret-scanning/01-push-protection.sh</code>
+<p class="demo-out">push が<b>ブロック</b>される。</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+```
+
+**Rules**
+
+- The `id` must be **unique across the whole page** (`demo-<slug>` is the convention) — the `<label for=...>` pairs bind to it, and a duplicate makes both buttons drive the same panel.
+- The `<input>` and `<label>` go **inline on the `##` line**; the `.demo-panel` is the **next sibling**, so it belongs to that slide.
+- `Escape` closes the panel without leaving presentation mode, and `←` / `→` still change slides — the panel closes itself on a slide change.
+- One `DEMO` per slide. Keep it to 3–6 steps; it scrolls, but a presenter won't.
+
+---
 
 1. **Confirm metadata with the user** (title, category, color, order, summary). Use a single `ask_user` form if anything is ambiguous.
 2. **Write the slide outline** as a numbered list of H2 titles. Get user buy-in.

@@ -189,13 +189,48 @@ Secret Scanning is made up of five capabilities. **Push protection** closes the 
 
 ## What gets detected
 
-- 🏷️ **Provider patterns** — Regex patterns registered by 200+ partners including AWS, Azure, GCP, Stripe, Slack, OpenAI, and GitHub PATs. Extremely low false-positive rate
-- 🧪 **Generic patterns** — Private keys, connection strings, HTTP basic auth, and other generic formats. Requires Secret Protection / GHAS
-- 🤖 **AI-detected secrets** — Uses AI to detect unstructured secrets such as passwords. Requires Secret Protection / GHAS
-- 🛠️ **Custom patterns** — Define regexes for proprietary token formats. Requires Secret Protection / GHAS, including for public repositories
-- 📚 Scope — Not just code: the **full Git history on all branches**, plus Issues (including closed historical ones), PRs, **GitHub Discussions**, Wikis, and secret gists. GitHub also rescans periodically as new secret types ship
+**Four** detection engines. Only provider patterns are free.
 
-> 🤖 Generic secrets and AI detection tend to produce more false positives. Pairing them with **Push protection** means things get stopped at the moment someone tries to push them — much easier to operate.
+<div class="det-widget">
+<p class="det-hint">▸ Click to reveal the detail</p>
+<div class="det-split">
+<div class="det-list">
+<details class="det-pick" name="ss-detect">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🏷️</span><span class="det-name">Provider patterns</span><span class="det-dot is-free" aria-hidden="true"></span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">🏷️</span><span class="det-title">Provider patterns</span><span class="det-tier is-free">FREE</span></p>
+<p class="det-why">Regex patterns registered by <b>200+ partners</b> including AWS, Azure, GCP, Stripe, Slack, OpenAI, and GitHub PATs. Extremely low false-positive rate.</p>
+</div>
+</details>
+<details class="det-pick" name="ss-detect">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🧪</span><span class="det-name">Generic patterns</span><span class="det-dot is-paid" aria-hidden="true"></span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">🧪</span><span class="det-title">Generic patterns</span><span class="det-tier is-paid">GHAS</span></p>
+<p class="det-why">Private keys, connection strings, HTTP basic auth, and other generic formats. <b>Requires Secret Protection / GHAS</b>.</p>
+</div>
+</details>
+<details class="det-pick" name="ss-detect">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI-detected secrets</span><span class="det-dot is-paid" aria-hidden="true"></span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">AI-detected secrets</span><span class="det-tier is-paid">GHAS</span></p>
+<p class="det-why">Uses AI to detect <b>unstructured secrets</b> such as passwords. <b>Requires Secret Protection / GHAS</b>.</p>
+</div>
+</details>
+<details class="det-pick" name="ss-detect">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🛠️</span><span class="det-name">Custom patterns</span><span class="det-dot is-paid" aria-hidden="true"></span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">🛠️</span><span class="det-title">Custom patterns</span><span class="det-tier is-paid">GHAS</span></p>
+<p class="det-why">Define regexes for proprietary token formats. <b>Requires Secret Protection / GHAS, including for public repositories</b>.</p>
+</div>
+</details>
+</div>
+<div class="det-screen"><p class="det-empty">SELECT A TYPE ▸</p></div>
+</div>
+<p class="det-scope"><span class="det-scope-k">📚 Scope</span><span class="det-scope-v">Not just code: the <b>full Git history on all branches</b>, plus Issues, PRs, <b>GitHub Discussions</b>, Wikis, and secret gists. Rescanned periodically as new secret types ship.</span></p>
+</div>
+
+
+> 🤖 Generic secrets and AI detection produce more false positives. Pair them with **Push protection** so leaks get stopped at push time.
 
 📘 Details: <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns" target="_blank" rel="noopener noreferrer">Supported secrets (provider patterns) ↗</a> · <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/using-advanced-secret-scanning-and-push-protection-features/custom-patterns/defining-custom-patterns-for-secret-scanning" target="_blank" rel="noopener noreferrer">Defining custom patterns ↗</a>
 
