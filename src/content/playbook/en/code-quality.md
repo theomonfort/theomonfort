@@ -63,18 +63,72 @@ Code Quality combines predictable rules with broader AI reasoning.
 
 > 💡 AI findings complement deterministic rules. They do not replace them and do not block a PR by themselves.
 
-## Code Quality vs Code Scanning
+## What Code Quality covers
 
-They share CodeQL and Autofix, but solve different problems.
+Six dimensions define the product. Pick one to see what Code Quality does about it.
 
-| | 🩺 **Code Quality** | 🛡️ **Code Scanning** |
-| --- | --- | --- |
-| Primary goal | Reliability, maintainability, efficiency, coverage | Security vulnerabilities and coding errors |
-| Typical finding | Useless condition, risky design, query in a loop | SQL injection, XSS, path traversal, unsafe data flow |
-| Analysis | CodeQL quality rules + AI-assisted detection | CodeQL security queries or third-party SARIF tools |
-| Reporting | Quality scores, coverage, PR findings, backlog | Security alerts, severity, CWE, Security overview |
-| Merge control | Quality and coverage thresholds in rulesets | Code scanning checks and security merge protection |
-| Product model | Standalone paid product | Public repos free; private repos require Code Security |
+<div class="vsx-widget">
+<input class="vsx-radio" type="radio" name="cq-vs-product" id="cqvs-quality" checked />
+<input class="vsx-radio" type="radio" name="cq-vs-product" id="cqvs-scanning" />
+<p class="vsx-hint">▸ PICK A TOPIC. THE SECOND TAB IS CODE SCANNING, FOR REFERENCE</p>
+<div class="vsx-bar">
+<label class="vsx-tab" for="cqvs-quality"><span class="vsx-icon" aria-hidden="true">🩺</span>Code Quality</label>
+<label class="vsx-tab" for="cqvs-scanning"><span class="vsx-icon" aria-hidden="true">🛡️</span>Code Scanning<span class="vsx-tab-ref">REF</span></label>
+</div>
+<div class="vsx-split">
+<div class="vsx-list">
+<details class="vsx-pick" name="cq-vs-topic">
+<summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">🎯</span><span class="vsx-name">Primary goal</span></summary>
+<div class="vsx-pane">
+<p class="vsx-head"><span class="vsx-icon" aria-hidden="true">🎯</span><span class="vsx-title">Primary goal</span><span class="vsx-badge"></span></p>
+<p class="vsx-why" data-side="cq">Keep the codebase <b>reliable, maintainable, and efficient</b>, and keep test coverage from sliding, so that today's shortcut never becomes next quarter's outage or rewrite.</p>
+<p class="vsx-why" data-side="cs">Catch <b>security vulnerabilities and coding errors</b> before release, so that an attacker cannot reach production through your own code.</p>
+</div>
+</details>
+<details class="vsx-pick" name="cq-vs-topic">
+<summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">🐛</span><span class="vsx-name">Typical finding</span></summary>
+<div class="vsx-pane">
+<p class="vsx-head"><span class="vsx-icon" aria-hidden="true">🐛</span><span class="vsx-title">Typical finding</span><span class="vsx-badge"></span></p>
+<p class="vsx-why" data-side="cq">A <b>useless condition</b>, a risky design, a database query inside a loop.</p>
+<p class="vsx-why" data-side="cs"><b>SQL injection</b>, XSS, path traversal, unsafe data flow.</p>
+</div>
+</details>
+<details class="vsx-pick" name="cq-vs-topic">
+<summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">🔬</span><span class="vsx-name">Analysis engine</span></summary>
+<div class="vsx-pane">
+<p class="vsx-head"><span class="vsx-icon" aria-hidden="true">🔬</span><span class="vsx-title">Analysis engine</span><span class="vsx-badge"></span></p>
+<p class="vsx-why" data-side="cq"><b>CodeQL quality rules</b>, plus AI-assisted detection for patterns no fixed rule covers.</p>
+<p class="vsx-why" data-side="cs"><b>CodeQL security queries</b>, or any third-party tool that uploads SARIF.</p>
+</div>
+</details>
+<details class="vsx-pick" name="cq-vs-topic">
+<summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">📊</span><span class="vsx-name">Reporting</span></summary>
+<div class="vsx-pane">
+<p class="vsx-head"><span class="vsx-icon" aria-hidden="true">📊</span><span class="vsx-title">Reporting</span><span class="vsx-badge"></span></p>
+<p class="vsx-why" data-side="cq">Every finding is graded <b>Error / Warning / Note</b>, and rolls up into quality scores and coverage trends per repository and organization, PR findings, and a default-branch backlog.</p>
+<p class="vsx-why" data-side="cs">Alerts are graded by <b>severity and CWE</b>, and aggregated in Security overview.</p>
+</div>
+</details>
+<details class="vsx-pick" name="cq-vs-topic">
+<summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">🚧</span><span class="vsx-name">Merge control</span></summary>
+<div class="vsx-pane">
+<p class="vsx-head"><span class="vsx-icon" aria-hidden="true">🚧</span><span class="vsx-title">Merge control</span><span class="vsx-badge"></span></p>
+<p class="vsx-why" data-side="cq"><b>Quality and coverage thresholds</b> in rulesets, with an evaluate mode to measure the impact before enforcing.</p>
+<p class="vsx-why" data-side="cs">Code scanning checks and <b>security merge protection</b>.</p>
+</div>
+</details>
+<details class="vsx-pick" name="cq-vs-topic">
+<summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">💰</span><span class="vsx-name">Product model</span></summary>
+<div class="vsx-pane">
+<p class="vsx-head"><span class="vsx-icon" aria-hidden="true">💰</span><span class="vsx-title">Product model</span><span class="vsx-badge"></span></p>
+<p class="vsx-why" data-side="cq">Standalone paid product: <b>$10 per active committer / month</b>.</p>
+<p class="vsx-why" data-side="cs"><b>Free for public repos</b>; private repos require Code Security.</p>
+</div>
+</details>
+</div>
+<div class="vsx-screen"><p class="vsx-empty">SELECT A TOPIC ▸</p></div>
+</div>
+</div>
 
 > 🔑 Use both: Code Scanning protects against exploitable risk; Code Quality protects long-term code health.
 
