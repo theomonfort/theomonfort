@@ -197,5 +197,3 @@ One configuration at **Enterprise → Settings → Advanced Security → Code se
 </details>
 </div>
 </div>
-
-> 🔓 **Ship it as Not enforced.** Enforcing locks repository owners out of changing the settings. Leaving an individual setting as **Not set** keeps the repository's current value for that item.

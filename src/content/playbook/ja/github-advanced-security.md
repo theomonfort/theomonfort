@@ -197,5 +197,3 @@ GitHub には **ライセンス不要・完全無料** で組織のセキュリ�
 </details>
 </div>
 </div>
-
-> 🔓 **Enforcement は Not enforced のまま配る。** enforce すると repo owner が設定を変更できなくなる。個別項目を **Not set** にしておけば、その項目だけリポジトリ側の現状値を維持できる。
