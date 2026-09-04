@@ -120,7 +120,16 @@ Repository: Settings → Code quality → Enable code quality
 - Configure rulesets in evaluate mode before switching to merge blocking
 - Use GitHub-hosted or labeled self-hosted runners
 
-> 💡 Pilot with representative repositories first, especially before enabling organization-wide billing and gates.
+> 🏢 **Rollout can only be checked per organization.** The Code Quality dashboard and the "Repository access" setting are organization-scoped; the enterprise level only shows the policy allow-list and consumed licenses.
+
+<a class="dl-script" href="/theomonfort/scripts/gh-code-quality-inventory.sh" download>
+  <span class="dl-script-ico">▼</span>
+  <span class="dl-script-text">
+    <strong>gh-code-quality-inventory.sh</strong>
+    <em>Give it an enterprise slug: it walks every organization and reports which repositories have Code Quality enabled</em>
+  </span>
+  <span class="dl-script-cmd">./gh-code-quality-inventory.sh &lt;enterprise&gt;</span>
+</a>
 
 ## GA availability and billing
 
