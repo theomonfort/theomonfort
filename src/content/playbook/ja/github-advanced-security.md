@@ -47,6 +47,9 @@ links:
   - group: 🏢 全社展開 (Rollout)
     label: Code scanning merge protection
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/merge-protection
+  - group: 🏢 全社展開 (Rollout)
+    label: Code security configurations REST API
+    url: https://docs.github.com/en/enterprise-cloud@latest/rest/code-security/configurations
   - group: 📰 Recent Changelog
     label: "Start a GitHub Advanced Security trial from a risk assessment (2026-05-19)"
     url: https://github.blog/changelog/2026-05-19-start-a-github-advanced-security-trial-from-a-risk-assessment
@@ -193,6 +196,15 @@ GitHub には **ライセンス不要・完全無料** で組織のセキュリ�
 <p class="ctl-row"><span class="ctl-k">repo 単位</span><span class="ctl-v">enterprise の <b>Apply to</b> は <b>All repositories</b> か <b>All repositories without configurations</b> のみ。<b>repo を選べるのは org configuration だけ</b></span></p>
 <p class="ctl-row"><span class="ctl-k">やり方</span><span class="ctl-v">Organization → Settings → Advanced Security → Configurations → <b>Repositories</b> タブで絞り込んで選択 → <b>Apply configuration</b></span></p>
 <p class="ctl-row"><span class="ctl-k">どちらが優先</span><span class="ctl-v">enterprise 側の変更が org configuration と衝突すると repo は <code>removed_by_enterprise</code> になり org config が外れる。<b>enterprise が優先</b></span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#ff2e88">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🤖</span><span class="ctl-name">API で自動化できる</span><span class="ctl-when">UI と同じことが全部できる</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/rest/code-security/configurations" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">できること</span><span class="ctl-v">configuration の <b>作成 → 適用 → デフォルト化</b> がすべて <b>Code security configurations API</b>(REST)で完結する。UI を一度も開かずに全社展開できる</span></p>
+<p class="ctl-row"><span class="ctl-k">enterprise</span><span class="ctl-v"><code>POST /enterprises/{enterprise}/code-security/configurations</code> → <code>POST .../{id}/attach</code>(<code>scope</code> は <code>all</code> か <code>all_without_configurations</code>)→ <code>PUT .../{id}/defaults</code>。必要な権限は <b>admin:enterprise</b></span></p>
+<p class="ctl-row"><span class="ctl-k">org</span><span class="ctl-v">同じ 3 本を <code>/orgs/{org}/...</code> で。org 側だけ <code>scope: selected</code> + <code>selected_repository_ids</code> で <b>repo を選んで配れる</b>。必要な権限は <b>write:org</b>(org owner / security manager)</span></p>
+<p class="ctl-row"><span class="ctl-k">落とし穴</span><span class="ctl-v">attach は<b>非同期(202 が返るだけ)</b>。<code>GET .../{id}/repositories?status=failed</code> で結果を確認する。ライセンスが足りないと<b>エラーにならず無料機能だけが有効化される</b></span></p>
 </div>
 </details>
 </div>
