@@ -81,8 +81,8 @@ Code Quality は、再現性の高いルールと、幅広い AI の推論を組
 <summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">🎯</span><span class="vsx-name">主目的</span></summary>
 <div class="vsx-pane">
 <p class="vsx-head"><span class="vsx-icon" aria-hidden="true">🎯</span><span class="vsx-title">主目的</span><span class="vsx-badge"></span></p>
-<p class="vsx-why" data-side="cq">コードベースを<b>信頼性・保守性・効率</b>の面で健全に保ち、テストカバレッジの低下も防ぐ。今日の近道が来期の障害や作り直しにならないようにするため。</p>
-<p class="vsx-why" data-side="cs">リリース前に<b>セキュリティ脆弱性とコーディングエラー</b>を検出する。自社コード経由で本番に到達されないようにするため。</p>
+<p class="vsx-why" data-side="cq">コードを<b>信頼できて直しやすい</b>状態に保つ。リファクタが安全になり、保守コストが下がり、コードベースが整う。</p>
+<p class="vsx-why" data-side="cs"><b>セキュリティ脆弱性とコーディングエラー</b>を本番に届く前に検出する。</p>
 </div>
 </details>
 <details class="vsx-pick" name="cq-vs-topic">

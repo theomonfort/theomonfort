@@ -81,8 +81,8 @@ Six dimensions define the product. Pick one to see what Code Quality does about 
 <summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">🎯</span><span class="vsx-name">Primary goal</span></summary>
 <div class="vsx-pane">
 <p class="vsx-head"><span class="vsx-icon" aria-hidden="true">🎯</span><span class="vsx-title">Primary goal</span><span class="vsx-badge"></span></p>
-<p class="vsx-why" data-side="cq">Keep the codebase <b>reliable, maintainable, and efficient</b>, and keep test coverage from sliding, so that today's shortcut never becomes next quarter's outage or rewrite.</p>
-<p class="vsx-why" data-side="cs">Catch <b>security vulnerabilities and coding errors</b> before release, so that an attacker cannot reach production through your own code.</p>
+<p class="vsx-why" data-side="cq">Keep the code <b>reliable and maintainable</b>: safer refactors, lower maintenance cost, a cleaner codebase.</p>
+<p class="vsx-why" data-side="cs">Catch <b>security vulnerabilities and coding errors</b> before they reach production.</p>
 </div>
 </details>
 <details class="vsx-pick" name="cq-vs-topic">
