@@ -120,7 +120,16 @@ Repository: Settings → Code quality → Enable code quality
 - ruleset は Evaluate mode で確認してからマージブロックへ移行
 - GitHub-hosted runner または label 付き self-hosted runner を利用可能
 
-> 💡 全 Organization へ展開して課金とゲートを有効にする前に、代表的な repo で試す。
+> 🏢 **展開状況は Organization 単位でしか確認できない。** Code Quality dashboard と「Repository access」設定は Organization スコープで、Enterprise レベルではポリシーの許可リストと消費ライセンスしか見えない。
+
+<a class="dl-script" href="/theomonfort/scripts/gh-code-quality-inventory.sh" download>
+  <span class="dl-script-ico">▼</span>
+  <span class="dl-script-text">
+    <strong>gh-code-quality-inventory.sh</strong>
+    <em>Enterprise slug を渡すだけで全 Organization を巡回し、Code Quality が有効なリポジトリを一覧化</em>
+  </span>
+  <span class="dl-script-cmd">./gh-code-quality-inventory.sh &lt;enterprise&gt;</span>
+</a>
 
 ## GA の利用条件と料金
 

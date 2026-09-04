@@ -2294,6 +2294,63 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     text-decoration: none !important;
   }
 
+  /* ── Downloadable script card ── */
+  .prose-akq a.dl-script {
+    display: flex;
+    align-items: center;
+    gap: 0.9em;
+    margin: 1.1em 0;
+    padding: 0.8em 1.1em;
+    color: #e8f4ff;
+    text-decoration: none !important;
+    background: rgba(5, 6, 15, 0.85);
+    border: 2px solid var(--entry-accent, #00f0ff);
+    box-shadow: 4px 4px 0 #05060f;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .prose-akq a.dl-script:hover {
+    color: #e8f4ff;
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 #05060f, 0 0 12px var(--entry-accent, #00f0ff);
+  }
+  .prose-akq .dl-script-ico {
+    flex: none;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1.1em;
+    line-height: 1;
+    color: var(--entry-accent, #00f0ff);
+    text-shadow: 0 0 8px currentColor;
+  }
+  .prose-akq .dl-script-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+    min-width: 0;
+  }
+  .prose-akq .dl-script-text strong {
+    font-family: 'DotGothic16', monospace;
+    color: var(--entry-accent, #00f0ff);
+  }
+  .prose-akq .dl-script-text em {
+    font-style: normal;
+    font-size: 0.85em;
+    color: rgba(232, 244, 255, 0.72);
+  }
+  .prose-akq .dl-script-cmd {
+    flex: none;
+    margin-left: auto;
+    padding: 0.35em 0.7em;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78em;
+    color: #9bbc0f;
+    border: 1px dashed rgba(155, 188, 15, 0.55);
+    white-space: nowrap;
+  }
+  body.present-mode .prose-akq a.dl-script { font-size: 1.2rem; }
+  @media (max-width: 720px) {
+    .prose-akq .dl-script-cmd { display: none; }
+  }
+
   /* ── Presentation-mode toggle button (subtle hint) ── */
   .present-hint {
     position: fixed;
