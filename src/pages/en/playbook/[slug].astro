@@ -3747,4 +3747,225 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   @media (prefers-reduced-motion: reduce) {
     .prose-akq .figtabs-tab { transition: none; }
   }
+
+  /* ── Versus explorer: a comparison table split into two axes ─────
+     A 2x6 comparison grid is unreadable from the back of a room. This
+     turns it into one cell at a time: tabs on top pick the product,
+     the left column picks the topic, and the right screen shows the
+     single sentence for that pair. Radios carry the product (so the
+     choice survives topic changes) and native <details name> carries
+     the topic, so it stays CSS-only and identical in document and
+     presentation mode. Geometry mirrors .det-split, so the pane
+     overlays a fixed-size screen and the slide height never jumps.
+     ───────────────────────────────────────────────────────────── */
+  .prose-akq .vsx-widget { margin: 1.2em 0; }
+  .prose-akq .vsx-radio {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .prose-akq .vsx-hint {
+    margin: 0 0 0.5em;
+    font-size: 0.9em;
+    letter-spacing: 0.08em;
+    color: #ffb000;
+    text-shadow: 0 0 8px rgba(255, 176, 0, 0.5);
+  }
+
+  /* Product axis. Each tab owns its own hue so the switch is legible
+     at a glance, and the active hue then drives the whole widget. */
+  .prose-akq .vsx-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4em;
+    margin: 0 0 0.5em;
+  }
+  .prose-akq .vsx-tab {
+    display: flex;
+    align-items: center;
+    gap: 0.35em;
+    padding: 0.22em 0.8em;
+    font-size: 0.88em;
+    line-height: 1.45;
+    color: color-mix(in srgb, #e8f4ff 60%, transparent);
+    background: rgba(10, 14, 39, 0.55);
+    border: 2px solid color-mix(in srgb, var(--vsx-tab, #00f0ff) 25%, transparent);
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  }
+  .prose-akq .vsx-bar > .vsx-tab:nth-child(1) { --vsx-tab: #00f0ff; }
+  .prose-akq .vsx-bar > .vsx-tab:nth-child(2) { --vsx-tab: #ff2e88; }
+  .prose-akq .vsx-tab:hover {
+    color: #e8f4ff;
+    background: color-mix(in srgb, var(--vsx-tab, #00f0ff) 12%, transparent);
+  }
+  .prose-akq .vsx-radio:nth-of-type(1):checked ~ .vsx-bar > .vsx-tab:nth-child(1),
+  .prose-akq .vsx-radio:nth-of-type(2):checked ~ .vsx-bar > .vsx-tab:nth-child(2) {
+    color: #05060f;
+    background: var(--vsx-tab);
+    border-color: var(--vsx-tab);
+    box-shadow:
+      0 0 8px var(--vsx-tab),
+      0 0 24px color-mix(in srgb, var(--vsx-tab) 30%, transparent);
+  }
+  .prose-akq .vsx-radio:nth-of-type(1):focus-visible ~ .vsx-bar > .vsx-tab:nth-child(1),
+  .prose-akq .vsx-radio:nth-of-type(2):focus-visible ~ .vsx-bar > .vsx-tab:nth-child(2) {
+    outline: 2px solid #ffb000;
+    outline-offset: 2px;
+  }
+
+  /* Topic axis. --vsx-accent is set here by the checked product radio
+     and inherits down to every child, so one declaration recolours the
+     picker, the screen, and the pane together. */
+  .prose-akq .vsx-split {
+    --vsx-col: 13em;
+    --vsx-gap: 0.6em;
+    --vsx-accent: #00f0ff;
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--vsx-col) minmax(0, 1fr);
+    gap: var(--vsx-gap);
+    align-items: stretch;
+  }
+  .prose-akq .vsx-radio:nth-of-type(2):checked ~ .vsx-split { --vsx-accent: #ff2e88; }
+  .prose-akq .vsx-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+    min-width: 0;
+  }
+  .prose-akq .vsx-pick { min-width: 0; }
+  .prose-akq .vsx-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    padding: 0.3em 0.45em;
+    font-size: 0.88em;
+    line-height: 1.4;
+    color: rgba(232, 244, 255, 0.85);
+    background: rgba(10, 14, 39, 0.7);
+    border: 1px dashed color-mix(in srgb, var(--vsx-accent) 35%, transparent);
+    cursor: pointer;
+    list-style: none;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .prose-akq .vsx-btn::-webkit-details-marker { display: none; }
+  .prose-akq .vsx-btn:hover {
+    color: #e8f4ff;
+    background: color-mix(in srgb, var(--vsx-accent) 12%, transparent);
+  }
+  .prose-akq .vsx-btn:focus-visible { outline: 2px solid #ffb000; outline-offset: 2px; }
+  .prose-akq .vsx-pick[open] .vsx-btn {
+    color: #05060f;
+    background: var(--vsx-accent);
+    border: 1px solid var(--vsx-accent);
+    box-shadow:
+      0 0 8px var(--vsx-accent),
+      0 0 24px color-mix(in srgb, var(--vsx-accent) 30%, transparent);
+  }
+  .prose-akq .vsx-icon { flex: none; font-size: 1em; line-height: 1; }
+  .prose-akq .vsx-name { flex: 1 1 auto; min-width: 0; overflow-wrap: break-word; }
+
+  .prose-akq .vsx-screen {
+    display: grid;
+    place-items: center;
+    min-height: 9em;
+    padding: 0.5em;
+    border: 1px dashed color-mix(in srgb, var(--vsx-accent) 30%, transparent);
+    background: rgba(5, 6, 15, 0.55);
+  }
+  .prose-akq .vsx-empty {
+    margin: 0;
+    font-size: 0.95em;
+    letter-spacing: 0.14em;
+    color: rgba(232, 244, 255, 0.4);
+  }
+  .prose-akq .vsx-pane {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: calc(var(--vsx-col) + var(--vsx-gap));
+    overflow-y: auto;
+    padding: 0.6em 0.75em 0.7em;
+    background: #05060f;
+    border: 2px solid var(--vsx-accent);
+    box-shadow:
+      0 0 8px color-mix(in srgb, var(--vsx-accent) 55%, transparent),
+      0 0 24px color-mix(in srgb, var(--vsx-accent) 25%, transparent);
+    animation: akq-det-in 0.2s ease;
+  }
+  .prose-akq .vsx-head {
+    display: flex;
+    align-items: center;
+    gap: 0.45em;
+    margin: 0 0 0.4em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px dashed color-mix(in srgb, var(--vsx-accent) 35%, transparent);
+  }
+  .prose-akq .vsx-title {
+    font-family: 'VT323', monospace;
+    font-size: 1.35em;
+    line-height: 1.15;
+    letter-spacing: 0.08em;
+    color: var(--vsx-accent);
+  }
+  /* The badge restates which product is on screen, so a screenshot of
+     the pane alone is still unambiguous. */
+  .prose-akq .vsx-badge {
+    flex: none;
+    margin-left: auto;
+    padding: 0 0.4em;
+    font-family: 'VT323', monospace;
+    font-size: 1em;
+    line-height: 1.35;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    color: var(--vsx-accent);
+    background: color-mix(in srgb, var(--vsx-accent) 12%, transparent);
+    border: 1px solid currentColor;
+  }
+  .prose-akq .vsx-badge::after { content: 'CODE QUALITY'; }
+  .prose-akq .vsx-radio:nth-of-type(2):checked ~ .vsx-split .vsx-badge::after { content: 'CODE SCANNING'; }
+
+  /* Both answers ship in the markup; the product tab hides one. */
+  .prose-akq .vsx-why {
+    margin: 0;
+    font-size: 1.02em;
+    line-height: 1.8;
+    color: rgba(232, 244, 255, 0.92);
+  }
+  .prose-akq .vsx-why b,
+  .prose-akq .vsx-why strong { color: #ffb000; font-weight: normal; }
+  .prose-akq .vsx-radio:nth-of-type(1):checked ~ .vsx-split .vsx-why[data-side='cs'],
+  .prose-akq .vsx-radio:nth-of-type(2):checked ~ .vsx-split .vsx-why[data-side='cq'] { display: none; }
+  .prose-akq .vsx-pick[open] .vsx-why::after {
+    content: '▊';
+    margin-left: 0.15em;
+    color: #ffb000;
+    animation: akq-risk-blink 1s steps(1) infinite;
+  }
+
+  @media (max-width: 640px) {
+    .prose-akq .vsx-split { display: block; }
+    .prose-akq .vsx-screen { display: none; }
+    .prose-akq .vsx-btn { font-size: 0.85em; }
+    .prose-akq .vsx-pane {
+      position: static;
+      margin: 0.2em 0 0.45em;
+      animation: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .prose-akq .vsx-tab,
+    .prose-akq .vsx-btn { transition: none; }
+    .prose-akq .vsx-pane { animation: none; }
+    .prose-akq .vsx-pick[open] .vsx-why::after { animation: none; }
+  }
 </style>

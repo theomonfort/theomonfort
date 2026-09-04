@@ -67,14 +67,68 @@ Code Quality は、再現性の高いルールと、幅広い AI の推論を組
 
 どちらも CodeQL と Autofix を使うが、解決する課題が異なる。
 
-| | 🩺 **Code Quality** | 🛡️ **Code Scanning** |
-| --- | --- | --- |
-| 主目的 | 信頼性・保守性・効率・カバレッジ | セキュリティ脆弱性・コーディングエラー |
-| 代表例 | 無意味な条件、危険な設計、ループ内 DB クエリ | SQL injection、XSS、path traversal、危険な data flow |
-| 解析 | CodeQL 品質ルール + AI 検出 | CodeQL セキュリティクエリ、または SARIF 対応ツール |
-| 可視化 | 品質スコア、カバレッジ、PR finding、バックログ | セキュリティアラート、severity、CWE、Security overview |
-| マージ制御 | ruleset の品質・カバレッジしきい値 | code scanning check とセキュリティのマージ保護 |
-| 製品モデル | 独立した有料製品 | public repo は無料、private repo は Code Security が必要 |
+<div class="vsx-widget">
+<input class="vsx-radio" type="radio" name="cq-vs-product" id="cqvs-quality" checked />
+<input class="vsx-radio" type="radio" name="cq-vs-product" id="cqvs-scanning" />
+<p class="vsx-hint">▸ 製品を切り替えて、項目を選ぶ</p>
+<div class="vsx-bar">
+<label class="vsx-tab" for="cqvs-quality"><span class="vsx-icon" aria-hidden="true">🩺</span>Code Quality</label>
+<label class="vsx-tab" for="cqvs-scanning"><span class="vsx-icon" aria-hidden="true">🛡️</span>Code Scanning</label>
+</div>
+<div class="vsx-split">
+<div class="vsx-list">
+<details class="vsx-pick" name="cq-vs-topic">
+<summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">🎯</span><span class="vsx-name">主目的</span></summary>
+<div class="vsx-pane">
+<p class="vsx-head"><span class="vsx-icon" aria-hidden="true">🎯</span><span class="vsx-title">主目的</span><span class="vsx-badge"></span></p>
+<p class="vsx-why" data-side="cq">コードベースを<b>信頼性・保守性・効率</b>の面で健全に保ち、テストカバレッジの低下も防ぐ。</p>
+<p class="vsx-why" data-side="cs">攻撃者に悪用されうる<b>セキュリティ脆弱性とコーディングエラー</b>を検出する。</p>
+</div>
+</details>
+<details class="vsx-pick" name="cq-vs-topic">
+<summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">🐛</span><span class="vsx-name">代表的な finding</span></summary>
+<div class="vsx-pane">
+<p class="vsx-head"><span class="vsx-icon" aria-hidden="true">🐛</span><span class="vsx-title">代表的な finding</span><span class="vsx-badge"></span></p>
+<p class="vsx-why" data-side="cq"><b>無意味な条件</b>、危険な設計、ループ内の DB クエリ。</p>
+<p class="vsx-why" data-side="cs"><b>SQL injection</b>、XSS、path traversal、危険な data flow。</p>
+</div>
+</details>
+<details class="vsx-pick" name="cq-vs-topic">
+<summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">🔬</span><span class="vsx-name">解析エンジン</span></summary>
+<div class="vsx-pane">
+<p class="vsx-head"><span class="vsx-icon" aria-hidden="true">🔬</span><span class="vsx-title">解析エンジン</span><span class="vsx-badge"></span></p>
+<p class="vsx-why" data-side="cq"><b>CodeQL の品質ルール</b>と、固定ルールでは拾えないパターンを見る AI 解析。</p>
+<p class="vsx-why" data-side="cs"><b>CodeQL のセキュリティクエリ</b>、または SARIF をアップロードするサードパーティツール。</p>
+</div>
+</details>
+<details class="vsx-pick" name="cq-vs-topic">
+<summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">📊</span><span class="vsx-name">可視化</span></summary>
+<div class="vsx-pane">
+<p class="vsx-head"><span class="vsx-icon" aria-hidden="true">📊</span><span class="vsx-title">可視化</span><span class="vsx-badge"></span></p>
+<p class="vsx-why" data-side="cq">リポジトリ・Organization 単位の<b>品質スコア</b>とカバレッジの推移、PR の finding、default branch のバックログ。</p>
+<p class="vsx-why" data-side="cs"><b>severity と CWE</b> 付きのセキュリティアラート。Security overview に集約される。</p>
+</div>
+</details>
+<details class="vsx-pick" name="cq-vs-topic">
+<summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">🚧</span><span class="vsx-name">マージ制御</span></summary>
+<div class="vsx-pane">
+<p class="vsx-head"><span class="vsx-icon" aria-hidden="true">🚧</span><span class="vsx-title">マージ制御</span><span class="vsx-badge"></span></p>
+<p class="vsx-why" data-side="cq">ruleset の<b>品質・カバレッジしきい値</b>。強制する前に evaluate モードで影響を測れる。</p>
+<p class="vsx-why" data-side="cs">code scanning check と<b>セキュリティのマージ保護</b>。</p>
+</div>
+</details>
+<details class="vsx-pick" name="cq-vs-topic">
+<summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">💰</span><span class="vsx-name">製品モデル</span></summary>
+<div class="vsx-pane">
+<p class="vsx-head"><span class="vsx-icon" aria-hidden="true">💰</span><span class="vsx-title">製品モデル</span><span class="vsx-badge"></span></p>
+<p class="vsx-why" data-side="cq">独立した有料製品。<b>アクティブコミッター 1 人あたり月 $10</b>。</p>
+<p class="vsx-why" data-side="cs"><b>public repo は無料</b>。private repo は Code Security が必要。</p>
+</div>
+</details>
+</div>
+<div class="vsx-screen"><p class="vsx-empty">項目を選択 ▸</p></div>
+</div>
+</div>
 
 > 🔑 両方使う。Code Scanning は悪用可能なリスク、Code Quality は長期的なコードの健全性を守る。
 
