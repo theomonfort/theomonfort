@@ -47,6 +47,9 @@ links:
   - group: 🏢 Enterprise rollout
     label: Code scanning merge protection
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/merge-protection
+  - group: 🏢 Enterprise rollout
+    label: Code security configurations REST API
+    url: https://docs.github.com/en/enterprise-cloud@latest/rest/code-security/configurations
   - group: 📰 Recent Changelog
     label: "Start a GitHub Advanced Security trial from a risk assessment (2026-05-19)"
     url: https://github.blog/changelog/2026-05-19-start-a-github-advanced-security-trial-from-a-risk-assessment
@@ -193,6 +196,15 @@ One configuration at **Enterprise → Settings → Advanced Security → Code se
 <p class="ctl-row"><span class="ctl-k">Per repo</span><span class="ctl-v">enterprise <b>Apply to</b> offers only <b>All repositories</b> or <b>All repositories without configurations</b>. <b>Choosing which repos get it is organization-level only</b></span></p>
 <p class="ctl-row"><span class="ctl-k">How</span><span class="ctl-v">Organization → Settings → Advanced Security → Configurations → <b>Repositories</b> tab → filter, select, <b>Apply configuration</b></span></p>
 <p class="ctl-row"><span class="ctl-k">Who wins</span><span class="ctl-v">if an enterprise change conflicts with the org configuration the repo flips to <code>removed_by_enterprise</code> and the org config detaches. <b>Enterprise wins</b></span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#ff2e88">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🤖</span><span class="ctl-name">Automate the rollout with the API</span><span class="ctl-when">everything the UI does</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/rest/code-security/configurations" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">What you get</span><span class="ctl-v"><b>create → apply → set as default</b> is fully scriptable through the <b>Code security configurations API</b> (REST). A whole enterprise rollout without opening the UI once</span></p>
+<p class="ctl-row"><span class="ctl-k">Enterprise</span><span class="ctl-v"><code>POST /enterprises/{enterprise}/code-security/configurations</code> → <code>POST .../{id}/attach</code> (<code>scope</code> is <code>all</code> or <code>all_without_configurations</code>) → <code>PUT .../{id}/defaults</code>. Needs <b>admin:enterprise</b></span></p>
+<p class="ctl-row"><span class="ctl-k">Organization</span><span class="ctl-v">the same three calls under <code>/orgs/{org}/...</code>. Only the org level accepts <code>scope: selected</code> with <code>selected_repository_ids</code> to <b>pick specific repos</b>. Needs <b>write:org</b> (org owner / security manager)</span></p>
+<p class="ctl-row"><span class="ctl-k">Traps</span><span class="ctl-v">attach is <b>asynchronous (it just returns 202)</b>. Poll <code>GET .../{id}/repositories?status=failed</code> to confirm. If licenses run short it <b>does not error, it silently enables free features only</b></span></p>
 </div>
 </details>
 </div>
