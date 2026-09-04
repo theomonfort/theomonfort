@@ -189,38 +189,38 @@ Secret Scanning は 5 つの機能で構成される。入口を塞ぐ **Push pr
 
 ## 何を検出するのか
 
-検出エンジンは **4 種類**。無料は Provider patterns のみ。
+検出エンジンは **4 種類**。パートナー固有の厳密な形式から、AI しか拾えない非構造化 secret まで多層でカバーする。
 
 <div class="det-widget">
 <p class="det-hint">▸ クリックして詳細を表示</p>
 <div class="det-split">
 <div class="det-list">
 <details class="det-pick" name="ss-detect">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🏷️</span><span class="det-name">Provider patterns</span><span class="det-dot is-free" aria-hidden="true"></span></summary>
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🏷️</span><span class="det-name">Provider patterns</span></summary>
 <div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🏷️</span><span class="det-title">Provider patterns</span><span class="det-tier is-free">FREE</span></p>
+<p class="det-head"><span class="det-icon" aria-hidden="true">🏷️</span><span class="det-title">Provider patterns</span></p>
 <p class="det-why">AWS、Azure、GCP、Stripe、Slack、OpenAI、GitHub PAT など <b>200+ パートナー</b>が登録した正規表現で検知。誤検知が極めて少ない。</p>
 </div>
 </details>
 <details class="det-pick" name="ss-detect">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🧪</span><span class="det-name">Generic patterns</span><span class="det-dot is-paid" aria-hidden="true"></span></summary>
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🧪</span><span class="det-name">Generic patterns</span></summary>
 <div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🧪</span><span class="det-title">Generic patterns</span><span class="det-tier is-paid">GHAS</span></p>
-<p class="det-why">private key、接続文字列、HTTP basic auth などの汎用パターン。<b>Secret Protection / GHAS が必要</b>。</p>
+<p class="det-head"><span class="det-icon" aria-hidden="true">🧪</span><span class="det-title">Generic patterns</span></p>
+<p class="det-why">private key、接続文字列、HTTP basic auth などの汎用パターン。網が広い分、provider patterns よりトリアージ前提で運用する。</p>
 </div>
 </details>
 <details class="det-pick" name="ss-detect">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI-detected secrets</span><span class="det-dot is-paid" aria-hidden="true"></span></summary>
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI-detected secrets</span></summary>
 <div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">AI-detected secrets</span><span class="det-tier is-paid">GHAS</span></p>
-<p class="det-why">パスワードなどの<b>非構造化 secret</b> を AI で検出。<b>Secret Protection / GHAS が必要</b>。</p>
+<p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">AI-detected secrets</span></p>
+<p class="det-why">パスワードなどの<b>非構造化 secret</b> を AI で検出。正規表現では届かない領域をカバーする。</p>
 </div>
 </details>
 <details class="det-pick" name="ss-detect">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🛠️</span><span class="det-name">Custom patterns</span><span class="det-dot is-paid" aria-hidden="true"></span></summary>
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🛠️</span><span class="det-name">Custom patterns</span></summary>
 <div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🛠️</span><span class="det-title">Custom patterns</span><span class="det-tier is-paid">GHAS</span></p>
-<p class="det-why">自社独自トークン用に正規表現を定義。<b>Public repo を含め Secret Protection / GHAS が必要</b>。</p>
+<p class="det-head"><span class="det-icon" aria-hidden="true">🛠️</span><span class="det-title">Custom patterns</span></p>
+<p class="det-why"><b>自社独自のトークン形式</b>に正規表現を定義。社内サービスのトークンやレガシーな認証情報など、パートナーが登録しないものを拾う。</p>
 </div>
 </details>
 </div>
