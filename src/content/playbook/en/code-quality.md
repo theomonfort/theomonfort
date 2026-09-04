@@ -81,15 +81,15 @@ Six dimensions define the product. Pick one to see what Code Quality does about 
 <summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">🎯</span><span class="vsx-name">Primary goal</span></summary>
 <div class="vsx-pane">
 <p class="vsx-head"><span class="vsx-icon" aria-hidden="true">🎯</span><span class="vsx-title">Primary goal</span><span class="vsx-badge"></span></p>
-<p class="vsx-why" data-side="cq">Keep the codebase <b>reliable, maintainable, and efficient</b>, and keep test coverage from sliding, so that today's shortcut never becomes next quarter's outage or rewrite.</p>
-<p class="vsx-why" data-side="cs">Catch <b>security vulnerabilities and coding errors</b> before release, so that an attacker cannot reach production through your own code.</p>
+<p class="vsx-why" data-side="cq">Keep the code <b>reliable and maintainable</b>: safer refactors, lower maintenance cost, a cleaner codebase.</p>
+<p class="vsx-why" data-side="cs">Catch <b>security vulnerabilities and coding errors</b> before they reach production.</p>
 </div>
 </details>
 <details class="vsx-pick" name="cq-vs-topic">
 <summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">🐛</span><span class="vsx-name">Typical finding</span></summary>
 <div class="vsx-pane">
 <p class="vsx-head"><span class="vsx-icon" aria-hidden="true">🐛</span><span class="vsx-title">Typical finding</span><span class="vsx-badge"></span></p>
-<p class="vsx-why" data-side="cq">A <b>useless condition</b>, a risky design, a database query inside a loop.</p>
+<p class="vsx-why" data-side="cq">Two families. <b>Reliability</b>: duplicate if condition, unreachable statement, off-by-one against length, missing error check, uninitialized variable. <b>Maintainability</b>: useless assignment, expression with no effect, database query in a loop.</p>
 <p class="vsx-why" data-side="cs"><b>SQL injection</b>, XSS, path traversal, unsafe data flow.</p>
 </div>
 </details>
@@ -105,7 +105,7 @@ Six dimensions define the product. Pick one to see what Code Quality does about 
 <summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">📊</span><span class="vsx-name">Reporting</span></summary>
 <div class="vsx-pane">
 <p class="vsx-head"><span class="vsx-icon" aria-hidden="true">📊</span><span class="vsx-title">Reporting</span><span class="vsx-badge"></span></p>
-<p class="vsx-why" data-side="cq">Every finding is graded <b>Error / Warning / Note</b>, and rolls up into quality scores and coverage trends per repository and organization, PR findings, and a default-branch backlog.</p>
+<p class="vsx-why" data-side="cq">Findings land in two places: <b>bot comments on the pull request</b>, and the repository <b>Security tab</b> for the default branch. Each one is graded <b>Error / Warning / Note</b>, and those grades drive the quality score.</p>
 <p class="vsx-why" data-side="cs">Alerts are graded by <b>severity and CWE</b>, and aggregated in Security overview.</p>
 </div>
 </details>
@@ -118,11 +118,11 @@ Six dimensions define the product. Pick one to see what Code Quality does about 
 </div>
 </details>
 <details class="vsx-pick" name="cq-vs-topic">
-<summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">💰</span><span class="vsx-name">Product model</span></summary>
+<summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">🔢</span><span class="vsx-name">Query coverage</span></summary>
 <div class="vsx-pane">
-<p class="vsx-head"><span class="vsx-icon" aria-hidden="true">💰</span><span class="vsx-title">Product model</span><span class="vsx-badge"></span></p>
-<p class="vsx-why" data-side="cq">Standalone paid product: <b>$10 per active committer / month</b>.</p>
-<p class="vsx-why" data-side="cs"><b>Free for public repos</b>; private repos require Code Security.</p>
+<p class="vsx-head"><span class="vsx-icon" aria-hidden="true">🔢</span><span class="vsx-title">Query coverage</span><span class="vsx-badge"></span></p>
+<p class="vsx-why" data-side="cq">Standard queries: C# 69, Go 22, Java/Kotlin 89, JS/TS 98, Python 101, Ruby 3, Rust 1. <b>383 in total</b>. C/C++, Swift and Actions are not covered yet.</p>
+<p class="vsx-why" data-side="cs">Default queries: Actions 18, C/C++ 61, C# 59, Go 36, Java/Kotlin 80, JS/TS 89, Python 45, Ruby 44, Rust 36, Swift 29. <b>497 in total</b>, of which 413 raise alerts.</p>
 </div>
 </details>
 </div>

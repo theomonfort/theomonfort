@@ -81,15 +81,15 @@ Code Quality は、再現性の高いルールと、幅広い AI の推論を組
 <summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">🎯</span><span class="vsx-name">主目的</span></summary>
 <div class="vsx-pane">
 <p class="vsx-head"><span class="vsx-icon" aria-hidden="true">🎯</span><span class="vsx-title">主目的</span><span class="vsx-badge"></span></p>
-<p class="vsx-why" data-side="cq">コードベースを<b>信頼性・保守性・効率</b>の面で健全に保ち、テストカバレッジの低下も防ぐ。今日の近道が来期の障害や作り直しにならないようにするため。</p>
-<p class="vsx-why" data-side="cs">リリース前に<b>セキュリティ脆弱性とコーディングエラー</b>を検出する。自社コード経由で本番に到達されないようにするため。</p>
+<p class="vsx-why" data-side="cq">コードを<b>信頼できて直しやすい</b>状態に保つ。リファクタが安全になり、保守コストが下がり、コードベースが整う。</p>
+<p class="vsx-why" data-side="cs"><b>セキュリティ脆弱性とコーディングエラー</b>を本番に届く前に検出する。</p>
 </div>
 </details>
 <details class="vsx-pick" name="cq-vs-topic">
 <summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">🐛</span><span class="vsx-name">代表的な finding</span></summary>
 <div class="vsx-pane">
 <p class="vsx-head"><span class="vsx-icon" aria-hidden="true">🐛</span><span class="vsx-title">代表的な finding</span><span class="vsx-badge"></span></p>
-<p class="vsx-why" data-side="cq"><b>無意味な条件</b>、危険な設計、ループ内の DB クエリ。</p>
+<p class="vsx-why" data-side="cq">2 系統ある。<b>Reliability</b>: 重複した if 条件、到達しないコード、長さとの off-by-one 比較、エラーチェック漏れ、未初期化の変数。<b>Maintainability</b>: 無意味な代入、効果のない式、ループ内の DB クエリ。</p>
 <p class="vsx-why" data-side="cs"><b>SQL injection</b>、XSS、path traversal、危険な data flow。</p>
 </div>
 </details>
@@ -105,7 +105,7 @@ Code Quality は、再現性の高いルールと、幅広い AI の推論を組
 <summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">📊</span><span class="vsx-name">可視化</span></summary>
 <div class="vsx-pane">
 <p class="vsx-head"><span class="vsx-icon" aria-hidden="true">📊</span><span class="vsx-title">可視化</span><span class="vsx-badge"></span></p>
-<p class="vsx-why" data-side="cq">finding は <b>Error / Warning / Note</b> で格付けされ、リポジトリ・Organization 単位の品質スコアとカバレッジの推移、PR の finding、default branch のバックログに集約される。</p>
+<p class="vsx-why" data-side="cq">finding は 2 か所に出る。<b>PR 上の bot コメント</b>と、default branch を対象としたリポジトリの <b>Security タブ</b>。それぞれ <b>Error / Warning / Note</b> で格付けされ、その格付けが品質スコアに反映される。</p>
 <p class="vsx-why" data-side="cs">アラートは <b>severity と CWE</b> で格付けされ、Security overview に集約される。</p>
 </div>
 </details>
@@ -118,11 +118,11 @@ Code Quality は、再現性の高いルールと、幅広い AI の推論を組
 </div>
 </details>
 <details class="vsx-pick" name="cq-vs-topic">
-<summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">💰</span><span class="vsx-name">製品モデル</span></summary>
+<summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">🔢</span><span class="vsx-name">クエリ本数</span></summary>
 <div class="vsx-pane">
-<p class="vsx-head"><span class="vsx-icon" aria-hidden="true">💰</span><span class="vsx-title">製品モデル</span><span class="vsx-badge"></span></p>
-<p class="vsx-why" data-side="cq">独立した有料製品。<b>アクティブコミッター 1 人あたり月 $10</b>。</p>
-<p class="vsx-why" data-side="cs"><b>public repo は無料</b>。private repo は Code Security が必要。</p>
+<p class="vsx-head"><span class="vsx-icon" aria-hidden="true">🔢</span><span class="vsx-title">クエリ本数</span><span class="vsx-badge"></span></p>
+<p class="vsx-why" data-side="cq">standard のクエリ数: C# 69、Go 22、Java/Kotlin 89、JS/TS 98、Python 101、Ruby 3、Rust 1。<b>合計 383 本</b>。C/C++、Swift、Actions は未対応。</p>
+<p class="vsx-why" data-side="cs">default のクエリ数: Actions 18、C/C++ 61、C# 59、Go 36、Java/Kotlin 80、JS/TS 89、Python 45、Ruby 44、Rust 36、Swift 29。<b>合計 497 本</b>、うち 413 本がアラートを出す。</p>
 </div>
 </details>
 </div>
