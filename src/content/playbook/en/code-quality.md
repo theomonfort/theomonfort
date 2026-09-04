@@ -48,24 +48,9 @@ links:
   </p>
 </div>
 
-## Two analysis layers
-
-Code Quality combines predictable rules with broader AI reasoning.
-
-| Layer | What it finds | Where it appears |
-| --- | --- | --- |
-| 🔬 **CodeQL rules** | Known reliability and maintainability anti-patterns | PR comments from `github-code-quality[bot]` + default-branch findings |
-| 🤖 **AI-assisted analysis** | Design, naming, best-practice, and contextual issues outside fixed rules | Copilot comments on changed code |
-
-- Rules-based findings use **Error / Warning / Note** severity and include an autofix when available
-- AI analysis can cover languages and patterns not yet represented by CodeQL quality queries
-- Default-branch scans expose existing quality debt; PR scans prevent new debt
-
-> 💡 AI findings complement deterministic rules. They do not replace them and do not block a PR by themselves.
-
 ## What Code Quality covers
 
-Six dimensions define the product. Pick one to see what Code Quality does about it.
+Generally available since **July 20, 2026**. Its job is to keep code reliable, maintainable, and covered by tests as it ages. It is a **standalone product that sits next to GitHub Advanced Security**, not a feature bundled inside it.
 
 <div class="vsx-widget">
 <input class="vsx-radio" type="radio" name="cq-vs-product" id="cqvs-quality" checked />
@@ -134,47 +119,32 @@ Six dimensions define the product. Pick one to see what Code Quality does about 
 
 ## Catch issues before merge
 
-The best time to fix quality debt is while the pull request context is still fresh.
+The best time to fix quality debt is while the pull request context is still fresh. In GitHub's engineering organization, teams resolve **67.3% of Code Quality findings before merge**.
 
-1. A PR triggers rules-based and AI-assisted analysis.
-2. Findings appear inline with an explanation and suggested change.
-3. Apply the autofix, dismiss with a reason, or delegate broader remediation to Copilot.
-4. Configured quality gates keep the PR blocked until required findings are resolved.
-
-In GitHub's engineering organization, teams resolve **67.3% of Code Quality findings before merge**.
+1. **Set the bar first** — configure a ruleset quality gate so changes below your standard cannot be merged.
+2. **Open a PR** — it triggers rules-based and AI-assisted analysis, and findings land inline with an explanation and a suggested change.
+3. **Resolve** — apply the autofix, dismiss with a reason, or delegate broader remediation to Copilot.
+4. **The gate holds** — the PR stays blocked until the required findings are resolved.
+5. 🎁 **Bonus** — fix an alert straight from the Security tab, or open a campaign to work through the backlog in an organized way.
 
 > ⚡ Fixing findings in the PR prevents a second remediation PR and keeps the default-branch backlog clean.
 
-## Measure and enforce quality
-
-GA adds organization-level visibility and enforceable standards.
-
-- 📊 **Repository and organization dashboards** — reliability and maintainability scores across repositories
-- 🧪 **Coverage on pull requests** — render existing Cobertura XML reports and show whether coverage improves or drops
-- 🚧 **Ruleset quality gates** — block merges by finding severity or coverage threshold
-- 🧭 **Evaluate mode** — observe the impact of a gate before enforcing it
-- 🤖 **Backlog remediation** — apply autofixes or assign larger fixes to Copilot cloud agent
-- 🔌 **APIs** — manage repository enablement and retrieve findings
-
-> 🎯 Dashboards tell you where quality debt lives; rulesets stop teams from adding more.
-
 ## Enable and roll out <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/maintain-quality-code/enable-code-quality" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-Start small, tune thresholds, then expand through organization policy.
+**Enablement is a three-level cascade**
 
-```text
-Enterprise: allow Code Quality
-Organization: Settings → Code quality → Repository access
-Repository: Settings → Code quality → Enable code quality
-```
+- 🏛️ **Enterprise** — `Policies → Code quality` allows organizations to use it
+- 🏢 **Organization** — `Settings → Code quality → Repository access` picks the repositories in scope
+- 📦 **Repository** — `Settings → Code quality → Enable code quality` turns the scans on
 
-- GitHub Actions must be enabled because deterministic CodeQL scans run as Actions workflows
-- Enable selected repositories or use dynamic filters for a controlled pilot
-- Upload Cobertura XML from your existing test workflow to add coverage reporting
-- Configure rulesets in evaluate mode before switching to merge blocking
-- Use GitHub-hosted or labeled self-hosted runners
+**Before you switch it on**
 
-> 🏢 **Rollout can only be checked per organization.** The Code Quality dashboard and the "Repository access" setting are organization-scoped; the enterprise level only shows the policy allow-list and consumed licenses.
+- ⚙️ **GitHub Actions** — deterministic CodeQL scans run as Actions workflows
+- 🏃 **Runners** — GitHub-hosted, or self-hosted with the expected label
+- 🧪 **Coverage** — upload Cobertura XML from your existing test workflow
+- 🧭 **Gates** — start rulesets in evaluate mode, then switch to merge blocking
+
+> 🏢 **Rollout can only be checked per organization.** The dashboard and "Repository access" are organization-scoped; the enterprise level only shows the policy allow-list and consumed licenses.
 
 <a class="dl-script" href="/theomonfort/scripts/gh-code-quality-inventory.sh" download>
   <span class="dl-script-ico">▼</span>
@@ -187,18 +157,71 @@ Repository: Settings → Code quality → Enable code quality
 
 ## GA availability and billing
 
-Code Quality became generally available on **July 20, 2026**.
+Available on **GitHub Enterprise Cloud** and **GitHub Team**.
 
-| Cost | How it is measured |
-| --- | --- |
-| 💺 Base license | **$10 per active committer / month**; activity means a commit was pushed to an enabled repository in the last 90 days |
-| 🤖 AI-powered work | AI-assisted detection and Copilot-powered features consume **GitHub AI credits** |
-| ⚙️ Deterministic scans | CodeQL workflows consume **GitHub Actions minutes** unless self-hosted runners are used |
+<p class="spec-hint">▸ + UNFOLDS THE DETAIL FOR THAT COST LINE</p>
 
-- Available on **GitHub Enterprise Cloud and GitHub Team**
-- Standalone product, complementary to GitHub Advanced Security rather than bundled with it
-- A committer is counted once across the organization, regardless of enabled repository count; GitHub App bots are excluded
-- A Copilot subscription is not required for AI-assisted detection or Autofix; optional delegation to Copilot requires a Copilot license
-- Not available on GitHub Enterprise Server at GA
+<div class="spec-widget">
+<table style="table-layout:fixed">
+<colgroup><col style="width:22%" /><col style="width:40%" /><col style="width:38%" /></colgroup>
+<thead>
+<tr><th style="white-space:normal">Cost</th><th>How it is measured</th><th>Good to know</th></tr>
+</thead>
+<tbody>
+<tr>
+<td style="white-space:normal">💺 Base license</td>
+<td><b>$10 per active committer / month</b>. Active means a commit was pushed to an enabled repository in the last 90 days.</td>
+<td>
+<div class="spec-list">
+<details class="spec-item" name="cq-billing">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📦</span><span class="spec-key">Product model</span><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">Standalone product, <b>complementary to GitHub Advanced Security</b> rather than bundled with it. Not available on <b>GitHub Enterprise Server</b> at GA.</p>
+</details>
+<details class="spec-item" name="cq-billing">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">👤</span><span class="spec-key">Who counts</span><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">A committer is counted <b>once across the organization</b>, regardless of how many repositories are enabled. GitHub App bots are excluded.</p>
+</details>
+</div>
+</td>
+</tr>
+<tr>
+<td style="white-space:normal">🤖 AI-powered work</td>
+<td>AI-assisted detection and Copilot-powered features consume <b>GitHub AI credits</b>.</td>
+<td>
+<div class="spec-list">
+<details class="spec-item" name="cq-billing">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🪪</span><span class="spec-key">Copilot license</span><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what"><b>Not required</b> for AI-assisted detection or Autofix. Only the optional delegation of remediation to Copilot needs a Copilot license.</p>
+</details>
+<details class="spec-item" name="cq-billing">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">💳</span><span class="spec-key">Cap the spend</span><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">Set a SKU-level budget: <b>Enterprise → Budget → SKU = Code Quality AI credits</b>.</p>
+</details>
+</div>
+</td>
+</tr>
+<tr>
+<td style="white-space:normal">⚙️ Deterministic scans</td>
+<td>CodeQL workflows consume <b>GitHub Actions minutes</b>, unless self-hosted runners are used.</td>
+<td>
+<div class="spec-list">
+<details class="spec-item" name="cq-billing">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">💳</span><span class="spec-key">Cap the spend</span><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">Set a <b>GitHub Actions budget</b>, or move the scans onto self-hosted runners.</p>
+</details>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 
-> 💰 Review repository scope before enabling broadly: billing starts when Code Quality is enabled and used.
+## Measure quality over time
+
+Pull-request enforcement stops new debt. Dashboards and APIs tell you where the existing debt already lives.
+
+- 📊 **Repository and organization dashboards** — reliability and maintainability scores across repositories, so you can see which ones carry the most debt
+- 🧪 **Coverage on pull requests** — render existing Cobertura XML reports and show whether coverage improves or drops
+- 🔌 **APIs** — manage repository enablement and retrieve findings for your own reporting
+
+> 🎯 Dashboards tell you where quality debt lives; rulesets stop teams from adding more.

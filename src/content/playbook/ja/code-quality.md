@@ -48,24 +48,9 @@ links:
   </p>
 </div>
 
-## 2 層の解析
-
-Code Quality は、再現性の高いルールと、幅広い AI の推論を組み合わせる。
-
-| 解析 | 検出するもの | 表示場所 |
-| --- | --- | --- |
-| 🔬 **CodeQL ルール** | 既知の信頼性・保守性アンチパターン | `github-code-quality[bot]` の PR コメント + default branch の finding |
-| 🤖 **AI 解析** | 固定ルール外の設計・命名・ベストプラクティス・文脈上の問題 | 変更コードに対する Copilot コメント |
-
-- ルールベースの finding は **Error / Warning / Note** で分類され、可能な場合は Autofix が付く
-- AI 解析は、CodeQL の品質クエリがまだ対応していない言語やパターンも対象にできる
-- default branch では既存の品質負債、PR では新しい品質負債を検出
-
-> 💡 AI finding は決定論的ルールを補完するもの。単独では PR をブロックしない。
-
 ## Code Quality がカバーする範囲
 
-この 6 つの観点で製品の輪郭が決まる。項目を選ぶと Code Quality の答えが出る。
+**2026 年 7 月 20 日** に GA。役割は、コードが古くなっても信頼性・保守性・テストカバレッジを保つこと。GitHub Advanced Security に組み込まれた機能ではなく、その**隣に並ぶ独立製品**。
 
 <div class="vsx-widget">
 <input class="vsx-radio" type="radio" name="cq-vs-product" id="cqvs-quality" checked />
@@ -134,47 +119,32 @@ Code Quality は、再現性の高いルールと、幅広い AI の推論を組
 
 ## マージ前に修正
 
-品質負債を直す最適なタイミングは、PR の文脈がまだ新鮮な間。
+品質負債を直す最適なタイミングは、PR の文脈がまだ新鮮な間。GitHub 社内では、Code Quality finding の **67.3% を PR のマージ前に解消** している。
 
-1. PR でルールベース解析と AI 解析を実行。
-2. 説明と修正提案付きの finding をインライン表示。
-3. Autofix の適用、理由付き dismiss、または Copilot への修正委任を選択。
-4. 品質ゲートを設定している場合、必要な finding が解消されるまでマージをブロック。
-
-GitHub 社内では、Code Quality finding の **67.3% を PR のマージ前に解消** している。
+1. **先に基準を決める** — ruleset の品質ゲートを設定し、基準を下回る変更をマージできないようにする。
+2. **PR を開く** — ルールベース解析と AI 解析が走り、説明と修正提案付きの finding がインラインに表示される。
+3. **解消する** — Autofix の適用、理由付き dismiss、または Copilot への修正委任を選択。
+4. **ゲートが効く** — 必要な finding が解消されるまで PR はブロックされたまま。
+5. 🎁 **おまけ** — Security タブから直接アラートを修正、または campaign を作ってバックログを整理された形で消化。
 
 > ⚡ PR 内で解消すれば、後日修正専用の PR を作らずに済み、default branch のバックログも増えない。
 
-## 品質を測定・強制
-
-GA では、組織横断の可視化と、強制可能な品質基準が追加された。
-
-- 📊 **Repository / Organization dashboard** — リポジトリ横断で reliability と maintainability score を確認
-- 🧪 **PR のカバレッジ** — 既存の Cobertura XML を表示し、カバレッジの増減を確認
-- 🚧 **Ruleset の品質ゲート** — finding severity やカバレッジしきい値でマージをブロック
-- 🧭 **Evaluate mode** — 強制前に品質ゲートの影響を確認
-- 🤖 **バックログ修正** — Autofix を適用、または大きな修正を Copilot cloud agent に委任
-- 🔌 **API** — リポジトリの有効化と finding の取得を自動化
-
-> 🎯 Dashboard で品質負債の場所を把握し、ruleset で新たな負債の追加を止める。
-
 ## 有効化と展開 <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/maintain-quality-code/enable-code-quality" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-小さく始め、しきい値を調整してから Organization 全体へ展開する。
+**有効化は 3 階層のカスケード**
 
-```text
-Enterprise: Code Quality の利用を許可
-Organization: Settings → Code quality → Repository access
-Repository: Settings → Code quality → Enable code quality
-```
+- 🏛️ **Enterprise** — `Policies → Code quality` で Organization の利用を許可
+- 🏢 **Organization** — `Settings → Code quality → Repository access` で対象リポジトリを指定
+- 📦 **Repository** — `Settings → Code quality → Enable code quality` で scan を有効化
 
-- 決定論的な CodeQL scan は Actions workflow で動くため、GitHub Actions が必要
-- 選択した repo、または動的 filter で対象を絞って pilot を実施
-- 既存テストの Cobertura XML を upload してカバレッジを表示
-- ruleset は Evaluate mode で確認してからマージブロックへ移行
-- GitHub-hosted runner または label 付き self-hosted runner を利用可能
+**有効化する前に**
 
-> 🏢 **展開状況は Organization 単位でしか確認できない。** Code Quality dashboard と「Repository access」設定は Organization スコープで、Enterprise レベルではポリシーの許可リストと消費ライセンスしか見えない。
+- ⚙️ **GitHub Actions** — 決定論的な CodeQL scan は Actions workflow で動く
+- 🏃 **Runner** — GitHub-hosted、または想定 label 付きの self-hosted
+- 🧪 **カバレッジ** — 既存テストの Cobertura XML を upload
+- 🧭 **品質ゲート** — ruleset は Evaluate mode で始めてからマージブロックへ
+
+> 🏢 **展開状況は Organization 単位でしか確認できない。** dashboard と「Repository access」は Organization スコープで、Enterprise レベルではポリシーの許可リストと消費ライセンスしか見えない。
 
 <a class="dl-script" href="/theomonfort/scripts/gh-code-quality-inventory.sh" download>
   <span class="dl-script-ico">▼</span>
@@ -187,18 +157,71 @@ Repository: Settings → Code quality → Enable code quality
 
 ## GA の利用条件と料金
 
-Code Quality は **2026 年 7 月 20 日** に GA となった。
+**GitHub Enterprise Cloud** と **GitHub Team** で利用可能。
 
-| コスト | 計測方法 |
-| --- | --- |
-| 💺 基本ライセンス | **active committer 1 人あたり月額 $10**。有効化された repo に直近 90 日以内に commit が push されると active |
-| 🤖 AI 機能 | AI 検出と Copilot-powered 機能は **GitHub AI credits** を消費 |
-| ⚙️ 決定論的 scan | self-hosted runner を使わない場合、CodeQL workflow が **GitHub Actions minutes** を消費 |
+<p class="spec-hint">▸ + でその項目の詳細を展開</p>
 
-- **GitHub Enterprise Cloud と GitHub Team** で利用可能
-- GitHub Advanced Security に含まれない、補完関係にある独立製品
-- 複数 repo に貢献しても Organization 全体で 1 人として計上。GitHub App bot は対象外
-- AI 検出と Autofix に Copilot 契約は不要。Copilot への修正委任は Copilot ライセンスが必要
-- GA 時点では GitHub Enterprise Server は対象外
+<div class="spec-widget">
+<table style="table-layout:fixed">
+<colgroup><col style="width:22%" /><col style="width:40%" /><col style="width:38%" /></colgroup>
+<thead>
+<tr><th style="white-space:normal">コスト</th><th>計測方法</th><th>補足</th></tr>
+</thead>
+<tbody>
+<tr>
+<td style="white-space:normal">💺 基本ライセンス</td>
+<td><b>active committer 1 人あたり月額 $10</b>。有効化された repo に直近 90 日以内に commit が push されると active。</td>
+<td>
+<div class="spec-list">
+<details class="spec-item" name="cq-billing">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📦</span><span class="spec-key">製品モデル</span><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">GitHub Advanced Security に含まれない、<b>補完関係にある独立製品</b>。GA 時点では <b>GitHub Enterprise Server</b> は対象外。</p>
+</details>
+<details class="spec-item" name="cq-billing">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">👤</span><span class="spec-key">カウント方法</span><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">有効化した repo 数に関係なく、<b>Organization 全体で 1 人</b>として計上。GitHub App bot は対象外。</p>
+</details>
+</div>
+</td>
+</tr>
+<tr>
+<td style="white-space:normal">🤖 AI 機能</td>
+<td>AI 検出と Copilot-powered 機能は <b>GitHub AI credits</b> を消費。</td>
+<td>
+<div class="spec-list">
+<details class="spec-item" name="cq-billing">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🪪</span><span class="spec-key">Copilot ライセンス</span><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">AI 検出と Autofix には<b>不要</b>。Copilot への修正委任を使う場合のみ Copilot ライセンスが必要。</p>
+</details>
+<details class="spec-item" name="cq-billing">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">💳</span><span class="spec-key">上限を設定</span><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">SKU 単位の予算を設定: <b>Enterprise → Budget → SKU = Code Quality AI credits</b>。</p>
+</details>
+</div>
+</td>
+</tr>
+<tr>
+<td style="white-space:normal">⚙️ 決定論的 scan</td>
+<td>self-hosted runner を使わない場合、CodeQL workflow が <b>GitHub Actions minutes</b> を消費。</td>
+<td>
+<div class="spec-list">
+<details class="spec-item" name="cq-billing">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">💳</span><span class="spec-key">上限を設定</span><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what"><b>GitHub Actions の予算</b>を設定するか、scan を self-hosted runner に寄せる。</p>
+</details>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 
-> 💰 広範囲に有効化する前に対象 repo を確認する。Code Quality を有効化して利用すると課金が発生する。
+## 品質を継続的に測定
+
+PR での強制は新しい負債を止める。既存の負債がどこにあるかは dashboard と API でわかる。
+
+- 📊 **Repository / Organization dashboard** — リポジトリ横断で reliability と maintainability score を確認し、負債が集中している場所を特定
+- 🧪 **PR のカバレッジ** — 既存の Cobertura XML を表示し、カバレッジの増減を確認
+- 🔌 **API** — リポジトリの有効化と finding の取得を自動化し、独自のレポートに活用
+
+> 🎯 Dashboard で品質負債の場所を把握し、ruleset で新たな負債の追加を止める。
