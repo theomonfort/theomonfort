@@ -200,6 +200,7 @@ Secret Scanning is made up of five capabilities. **Push protection** closes the 
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🏷️</span><span class="det-title">Provider patterns</span></p>
 <p class="det-why">Regex patterns registered by <b>200+ partners</b> including AWS, Azure, GCP, Stripe, Slack, OpenAI, and GitHub PATs. Extremely low false-positive rate.</p>
+<p class="det-doc"><a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns" target="_blank" rel="noopener noreferrer">📘 Supported secrets ↗</a></p>
 </div>
 </details>
 <details class="det-pick" name="ss-detect">
@@ -221,6 +222,7 @@ Secret Scanning is made up of five capabilities. **Push protection** closes the 
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🛠️</span><span class="det-title">Custom patterns</span></p>
 <p class="det-why">Define regexes for <b>your own token formats</b>: internal service tokens, legacy credentials, anything a partner will never register.</p>
+<p class="det-doc"><a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/using-advanced-secret-scanning-and-push-protection-features/custom-patterns/defining-custom-patterns-for-secret-scanning" target="_blank" rel="noopener noreferrer">📘 Defining custom patterns ↗</a></p>
 </div>
 </details>
 </div>
@@ -231,8 +233,6 @@ Secret Scanning is made up of five capabilities. **Push protection** closes the 
 
 
 > 🤖 The noisy two. Generic can be gated with **Push protection**; **AI-detected passwords support neither push protection nor validity checks**. Triage them as alerts.
-
-📘 Details: <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns" target="_blank" rel="noopener noreferrer">Supported secrets (provider patterns) ↗</a> · <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/using-advanced-secret-scanning-and-push-protection-features/custom-patterns/defining-custom-patterns-for-secret-scanning" target="_blank" rel="noopener noreferrer">Defining custom patterns ↗</a>
 
 ## Response flow when a secret is exposed
 

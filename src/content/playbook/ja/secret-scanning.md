@@ -200,6 +200,7 @@ Secret Scanning は 5 つの機能で構成される。入口を塞ぐ **Push pr
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🏷️</span><span class="det-title">Provider patterns</span></p>
 <p class="det-why">AWS、Azure、GCP、Stripe、Slack、OpenAI、GitHub PAT など <b>200+ パートナー</b>が登録した正規表現で検知。誤検知が極めて少ない。</p>
+<p class="det-doc"><a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns" target="_blank" rel="noopener noreferrer">📘 Supported secrets ↗</a></p>
 </div>
 </details>
 <details class="det-pick" name="ss-detect">
@@ -221,6 +222,7 @@ Secret Scanning は 5 つの機能で構成される。入口を塞ぐ **Push pr
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🛠️</span><span class="det-title">Custom patterns</span></p>
 <p class="det-why"><b>自社独自のトークン形式</b>に正規表現を定義。社内サービスのトークンやレガシーな認証情報など、パートナーが登録しないものを拾う。</p>
+<p class="det-doc"><a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/using-advanced-secret-scanning-and-push-protection-features/custom-patterns/defining-custom-patterns-for-secret-scanning" target="_blank" rel="noopener noreferrer">📘 Defining custom patterns ↗</a></p>
 </div>
 </details>
 </div>
@@ -231,8 +233,6 @@ Secret Scanning は 5 つの機能で構成される。入口を塞ぐ **Push pr
 
 
 > 🤖 誤検知が増えがちな 2 つ。Generic は **Push protection** で入口を塞げるが、**AI-detected（password）は push protection も validity check も非対応**。トリアージ前提で運用する。
-
-📘 詳細: <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns" target="_blank" rel="noopener noreferrer">Supported secrets (provider patterns) ↗</a> ・ <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/using-advanced-secret-scanning-and-push-protection-features/custom-patterns/defining-custom-patterns-for-secret-scanning" target="_blank" rel="noopener noreferrer">Defining custom patterns ↗</a>
 
 ## 漏洩した時の対応フロー
 

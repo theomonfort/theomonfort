@@ -3626,7 +3626,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .prose-akq .det-screen {
     display: grid;
     place-items: center;
-    min-height: 8em;
+    min-height: 11em;
     padding: 0.5em;
     border: 1px dashed color-mix(in srgb, var(--entry-accent, #00f0ff) 30%, transparent);
     background: rgba(5, 6, 15, 0.55);
@@ -3698,6 +3698,17 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     color: #ffb000;
     animation: akq-risk-blink 1s steps(1) infinite;
   }
+  /* Doc link pinned under the pane copy, so each engine carries its
+     own reference instead of a shared footnote below the widget. */
+  .prose-akq .det-doc {
+    margin: 0.6em 0 0;
+    padding-top: 0.45em;
+    font-size: 0.82em;
+    line-height: 1.5;
+    border-top: 1px dashed color-mix(in srgb, var(--entry-accent, #00f0ff) 35%, transparent);
+  }
+  .prose-akq .det-doc a { color: #ffb000; }
+  .prose-akq .det-doc a:hover { color: #ff2e88; }
 
   /* The scope line summarises where scanning reaches — it is not a
      fifth engine, so it sits under the deck as a full-width plate. */
