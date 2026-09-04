@@ -189,38 +189,38 @@ Secret Scanning is made up of five capabilities. **Push protection** closes the 
 
 ## What gets detected
 
-**Four** detection engines. Only provider patterns are free.
+**Four** detection engines, layered from exact partner formats to unstructured secrets that only AI can catch.
 
 <div class="det-widget">
 <p class="det-hint">▸ CLICK FOR DETAILS</p>
 <div class="det-split">
 <div class="det-list">
 <details class="det-pick" name="ss-detect">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🏷️</span><span class="det-name">Provider patterns</span><span class="det-dot is-free" aria-hidden="true"></span></summary>
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🏷️</span><span class="det-name">Provider patterns</span></summary>
 <div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🏷️</span><span class="det-title">Provider patterns</span><span class="det-tier is-free">FREE</span></p>
+<p class="det-head"><span class="det-icon" aria-hidden="true">🏷️</span><span class="det-title">Provider patterns</span></p>
 <p class="det-why">Regex patterns registered by <b>200+ partners</b> including AWS, Azure, GCP, Stripe, Slack, OpenAI, and GitHub PATs. Extremely low false-positive rate.</p>
 </div>
 </details>
 <details class="det-pick" name="ss-detect">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🧪</span><span class="det-name">Generic patterns</span><span class="det-dot is-paid" aria-hidden="true"></span></summary>
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🧪</span><span class="det-name">Generic patterns</span></summary>
 <div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🧪</span><span class="det-title">Generic patterns</span><span class="det-tier is-paid">GHAS</span></p>
-<p class="det-why">Private keys, connection strings, HTTP basic auth, and other generic formats. <b>Requires Secret Protection / GHAS</b>.</p>
+<p class="det-head"><span class="det-icon" aria-hidden="true">🧪</span><span class="det-title">Generic patterns</span></p>
+<p class="det-why">Private keys, connection strings, HTTP basic auth, and other generic formats. A wider net by design, so expect more triage than provider patterns.</p>
 </div>
 </details>
 <details class="det-pick" name="ss-detect">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI-detected secrets</span><span class="det-dot is-paid" aria-hidden="true"></span></summary>
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI-detected secrets</span></summary>
 <div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">AI-detected secrets</span><span class="det-tier is-paid">GHAS</span></p>
-<p class="det-why">Uses AI to detect <b>unstructured secrets</b> such as passwords. <b>Requires Secret Protection / GHAS</b>.</p>
+<p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">AI-detected secrets</span></p>
+<p class="det-why">Uses AI to detect <b>unstructured secrets</b> such as passwords, covering the ground no regex can reach.</p>
 </div>
 </details>
 <details class="det-pick" name="ss-detect">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🛠️</span><span class="det-name">Custom patterns</span><span class="det-dot is-paid" aria-hidden="true"></span></summary>
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🛠️</span><span class="det-name">Custom patterns</span></summary>
 <div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🛠️</span><span class="det-title">Custom patterns</span><span class="det-tier is-paid">GHAS</span></p>
-<p class="det-why">Define regexes for proprietary token formats. <b>Requires Secret Protection / GHAS, including for public repositories</b>.</p>
+<p class="det-head"><span class="det-icon" aria-hidden="true">🛠️</span><span class="det-title">Custom patterns</span></p>
+<p class="det-why">Define regexes for <b>your own token formats</b>: internal service tokens, legacy credentials, anything a partner will never register.</p>
 </div>
 </details>
 </div>
