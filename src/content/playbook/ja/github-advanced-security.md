@@ -47,6 +47,21 @@ links:
   - group: 🏢 全社展開 (Rollout)
     label: Code scanning merge protection
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/merge-protection
+  - group: 📊 可視化 (Security overview)
+    label: Security overview
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/security-at-scale/security-overview
+  - group: 📊 可視化 (Security overview)
+    label: Assessing adoption of security features (Coverage)
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/view-and-interpret-data/analyze-organization-data/assessing-adoption-code-security
+  - group: 📊 可視化 (Security overview)
+    label: Exporting data from security overview (CSV)
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/view-and-interpret-data/analyze-organization-data/export-data
+  - group: 📊 可視化 (Security overview)
+    label: Public monitoring for secret scanning
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring
+  - group: 📰 Recent Changelog
+    label: "Secret scanning public monitoring for enterprises (2026-07-01)"
+    url: https://github.blog/changelog/2026-07-01-secret-scanning-public-monitoring-for-enterprises
   - group: 📰 Recent Changelog
     label: "Start a GitHub Advanced Security trial from a risk assessment (2026-05-19)"
     url: https://github.blog/changelog/2026-05-19-start-a-github-advanced-security-trial-from-a-risk-assessment
@@ -197,3 +212,20 @@ GitHub には **ライセンス不要・完全無料** で組織のセキュリ�
 </details>
 </div>
 </div>
+
+## カバレッジの可視化 <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/security-at-scale/security-overview" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+配り終わったら次の関心事は「実際どこまで守れているか」。**Security and quality** タブが **Enterprise / Organization** の両レベルで答えてくれる。
+
+| ビュー | わかること | レベル |
+| --- | --- | :---: |
+| 📊 **Overview** | 検知 / 修復 / 予防のトレンド推移 | Ent + Org |
+| 📈 **Coverage** | どの repo でどの機能が有効か | Ent + Org |
+| 🛡️ **Risk** | アラートが多いのはどの repo か | Ent + Org |
+| 🌐 **Public monitoring** | メンバーが **GitHub 上の public repo に漏らした** secret | **Ent のみ** |
+
+- 🏢 **Org レベルの Coverage** が現場の日常ビュー。enterprise 側は自分が owner / security manager になっている org しか集計されない
+- 🌐 **Public monitoring** (public preview・Secret Protection 必須) は enterprise メンバーと verified domain で漏洩を紐付ける。**Enterprise → Settings → Advanced Security → Code security** で ON
+- 📤 **Export CSV** は Overview / Coverage / Risk で使え、**適用中のフィルタがそのまま反映**される
+
+> 💡 標準ビューで足りなくても機能要望を待つ必要はない。CSV を Copilot に渡せば、org / team / custom repository property で切り直した「上が見たいダッシュボード」がすぐ作れる。

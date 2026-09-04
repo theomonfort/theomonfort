@@ -47,6 +47,21 @@ links:
   - group: 🏢 Enterprise rollout
     label: Code scanning merge protection
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/merge-protection
+  - group: 📊 Visibility (Security overview)
+    label: Security overview
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/security-at-scale/security-overview
+  - group: 📊 Visibility (Security overview)
+    label: Assessing adoption of security features (Coverage)
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/view-and-interpret-data/analyze-organization-data/assessing-adoption-code-security
+  - group: 📊 Visibility (Security overview)
+    label: Exporting data from security overview (CSV)
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/view-and-interpret-data/analyze-organization-data/export-data
+  - group: 📊 Visibility (Security overview)
+    label: Public monitoring for secret scanning
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring
+  - group: 📰 Recent Changelog
+    label: "Secret scanning public monitoring for enterprises (2026-07-01)"
+    url: https://github.blog/changelog/2026-07-01-secret-scanning-public-monitoring-for-enterprises
   - group: 📰 Recent Changelog
     label: "Start a GitHub Advanced Security trial from a risk assessment (2026-05-19)"
     url: https://github.blog/changelog/2026-05-19-start-a-github-advanced-security-trial-from-a-risk-assessment
@@ -197,3 +212,20 @@ One configuration at **Enterprise → Settings → Advanced Security → Code se
 </details>
 </div>
 </div>
+
+## Visualizing coverage <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/security-at-scale/security-overview" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+Once the configuration is out, the question becomes "how far are we actually covered?" The **Security and quality** tab answers it at both **Enterprise** and **Organization** level.
+
+| View | What it answers | Level |
+| --- | --- | :---: |
+| 📊 **Overview** | Detection / remediation / prevention trends | Ent + Org |
+| 📈 **Coverage** | Which repos have which feature enabled | Ent + Org |
+| 🛡️ **Risk** | Which repos carry the most alerts | Ent + Org |
+| 🌐 **Public monitoring** | Secrets your members leaked in **public repos across GitHub** | **Ent only** |
+
+- 🏢 **Org-level Coverage** is the day-to-day view — enterprise views only aggregate orgs where you are an owner or security manager
+- 🌐 **Public monitoring** (public preview, needs Secret Protection) attributes leaks by enterprise membership and verified domain. Turn it on at **Enterprise → Settings → Advanced Security → Code security**
+- 📤 **Export CSV** on Overview / Coverage / Risk keeps the filters you already applied
+
+> 💡 Not enough? Don't wait for a feature request — hand the CSV to Copilot and get the dashboard management actually asks for, pivoted by org, team, or custom repository property.
