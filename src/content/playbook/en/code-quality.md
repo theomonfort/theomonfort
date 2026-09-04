@@ -63,17 +63,17 @@ Code Quality combines predictable rules with broader AI reasoning.
 
 > 💡 AI findings complement deterministic rules. They do not replace them and do not block a PR by themselves.
 
-## Code Quality vs Code Scanning
+## What Code Quality covers
 
-They share CodeQL and Autofix, but solve different problems.
+Six dimensions define the product. Pick one to see what Code Quality does about it.
 
 <div class="vsx-widget">
 <input class="vsx-radio" type="radio" name="cq-vs-product" id="cqvs-quality" checked />
 <input class="vsx-radio" type="radio" name="cq-vs-product" id="cqvs-scanning" />
-<p class="vsx-hint">▸ SWITCH THE PRODUCT, THEN PICK A TOPIC</p>
+<p class="vsx-hint">▸ PICK A TOPIC. THE SECOND TAB IS CODE SCANNING, FOR REFERENCE</p>
 <div class="vsx-bar">
 <label class="vsx-tab" for="cqvs-quality"><span class="vsx-icon" aria-hidden="true">🩺</span>Code Quality</label>
-<label class="vsx-tab" for="cqvs-scanning"><span class="vsx-icon" aria-hidden="true">🛡️</span>Code Scanning</label>
+<label class="vsx-tab" for="cqvs-scanning"><span class="vsx-icon" aria-hidden="true">🛡️</span>Code Scanning<span class="vsx-tab-ref">REF</span></label>
 </div>
 <div class="vsx-split">
 <div class="vsx-list">
@@ -81,8 +81,8 @@ They share CodeQL and Autofix, but solve different problems.
 <summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">🎯</span><span class="vsx-name">Primary goal</span></summary>
 <div class="vsx-pane">
 <p class="vsx-head"><span class="vsx-icon" aria-hidden="true">🎯</span><span class="vsx-title">Primary goal</span><span class="vsx-badge"></span></p>
-<p class="vsx-why" data-side="cq">Keep the codebase <b>reliable, maintainable, and efficient</b>, and stop test coverage from sliding.</p>
-<p class="vsx-why" data-side="cs">Catch <b>security vulnerabilities and coding errors</b> an attacker could exploit.</p>
+<p class="vsx-why" data-side="cq">Keep the codebase <b>reliable, maintainable, and efficient</b>, and keep test coverage from sliding, so that today's shortcut never becomes next quarter's outage or rewrite.</p>
+<p class="vsx-why" data-side="cs">Catch <b>security vulnerabilities and coding errors</b> before release, so that an attacker cannot reach production through your own code.</p>
 </div>
 </details>
 <details class="vsx-pick" name="cq-vs-topic">
@@ -105,8 +105,8 @@ They share CodeQL and Autofix, but solve different problems.
 <summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">📊</span><span class="vsx-name">Reporting</span></summary>
 <div class="vsx-pane">
 <p class="vsx-head"><span class="vsx-icon" aria-hidden="true">📊</span><span class="vsx-title">Reporting</span><span class="vsx-badge"></span></p>
-<p class="vsx-why" data-side="cq"><b>Quality scores</b> and coverage trends per repository and organization, PR findings, and a default-branch backlog.</p>
-<p class="vsx-why" data-side="cs">Security alerts with <b>severity and CWE</b>, aggregated in Security overview.</p>
+<p class="vsx-why" data-side="cq">Every finding is graded <b>Error / Warning / Note</b>, and rolls up into quality scores and coverage trends per repository and organization, PR findings, and a default-branch backlog.</p>
+<p class="vsx-why" data-side="cs">Alerts are graded by <b>severity and CWE</b>, and aggregated in Security overview.</p>
 </div>
 </details>
 <details class="vsx-pick" name="cq-vs-topic">

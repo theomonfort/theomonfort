@@ -63,17 +63,17 @@ Code Quality は、再現性の高いルールと、幅広い AI の推論を組
 
 > 💡 AI finding は決定論的ルールを補完するもの。単独では PR をブロックしない。
 
-## Code Quality と Code Scanning の違い
+## Code Quality がカバーする範囲
 
-どちらも CodeQL と Autofix を使うが、解決する課題が異なる。
+この 6 つの観点で製品の輪郭が決まる。項目を選ぶと Code Quality の答えが出る。
 
 <div class="vsx-widget">
 <input class="vsx-radio" type="radio" name="cq-vs-product" id="cqvs-quality" checked />
 <input class="vsx-radio" type="radio" name="cq-vs-product" id="cqvs-scanning" />
-<p class="vsx-hint">▸ 製品を切り替えて、項目を選ぶ</p>
+<p class="vsx-hint">▸ 項目を選ぶ。2 つ目のタブは参考として Code Scanning</p>
 <div class="vsx-bar">
 <label class="vsx-tab" for="cqvs-quality"><span class="vsx-icon" aria-hidden="true">🩺</span>Code Quality</label>
-<label class="vsx-tab" for="cqvs-scanning"><span class="vsx-icon" aria-hidden="true">🛡️</span>Code Scanning</label>
+<label class="vsx-tab" for="cqvs-scanning"><span class="vsx-icon" aria-hidden="true">🛡️</span>Code Scanning<span class="vsx-tab-ref">REF</span></label>
 </div>
 <div class="vsx-split">
 <div class="vsx-list">
@@ -81,8 +81,8 @@ Code Quality は、再現性の高いルールと、幅広い AI の推論を組
 <summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">🎯</span><span class="vsx-name">主目的</span></summary>
 <div class="vsx-pane">
 <p class="vsx-head"><span class="vsx-icon" aria-hidden="true">🎯</span><span class="vsx-title">主目的</span><span class="vsx-badge"></span></p>
-<p class="vsx-why" data-side="cq">コードベースを<b>信頼性・保守性・効率</b>の面で健全に保ち、テストカバレッジの低下も防ぐ。</p>
-<p class="vsx-why" data-side="cs">攻撃者に悪用されうる<b>セキュリティ脆弱性とコーディングエラー</b>を検出する。</p>
+<p class="vsx-why" data-side="cq">コードベースを<b>信頼性・保守性・効率</b>の面で健全に保ち、テストカバレッジの低下も防ぐ。今日の近道が来期の障害や作り直しにならないようにするため。</p>
+<p class="vsx-why" data-side="cs">リリース前に<b>セキュリティ脆弱性とコーディングエラー</b>を検出する。自社コード経由で本番に到達されないようにするため。</p>
 </div>
 </details>
 <details class="vsx-pick" name="cq-vs-topic">
@@ -105,8 +105,8 @@ Code Quality は、再現性の高いルールと、幅広い AI の推論を組
 <summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">📊</span><span class="vsx-name">可視化</span></summary>
 <div class="vsx-pane">
 <p class="vsx-head"><span class="vsx-icon" aria-hidden="true">📊</span><span class="vsx-title">可視化</span><span class="vsx-badge"></span></p>
-<p class="vsx-why" data-side="cq">リポジトリ・Organization 単位の<b>品質スコア</b>とカバレッジの推移、PR の finding、default branch のバックログ。</p>
-<p class="vsx-why" data-side="cs"><b>severity と CWE</b> 付きのセキュリティアラート。Security overview に集約される。</p>
+<p class="vsx-why" data-side="cq">finding は <b>Error / Warning / Note</b> で格付けされ、リポジトリ・Organization 単位の品質スコアとカバレッジの推移、PR の finding、default branch のバックログに集約される。</p>
+<p class="vsx-why" data-side="cs">アラートは <b>severity と CWE</b> で格付けされ、Security overview に集約される。</p>
 </div>
 </details>
 <details class="vsx-pick" name="cq-vs-topic">

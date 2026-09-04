@@ -3814,6 +3814,18 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       0 0 8px var(--vsx-tab),
       0 0 24px color-mix(in srgb, var(--vsx-tab) 30%, transparent);
   }
+  /* The second tab is a reference point, not a peer, so it carries a
+     marker instead of competing for equal weight with the subject. */
+  .prose-akq .vsx-tab-ref {
+    flex: none;
+    padding: 0 0.3em;
+    font-family: 'VT323', monospace;
+    font-size: 0.95em;
+    line-height: 1.3;
+    letter-spacing: 0.08em;
+    border: 1px solid currentColor;
+    opacity: 0.7;
+  }
   .prose-akq .vsx-radio:nth-of-type(1):focus-visible ~ .vsx-bar > .vsx-tab:nth-child(1),
   .prose-akq .vsx-radio:nth-of-type(2):focus-visible ~ .vsx-bar > .vsx-tab:nth-child(2) {
     outline: 2px solid #ffb000;
