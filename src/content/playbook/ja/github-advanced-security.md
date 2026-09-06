@@ -201,10 +201,10 @@ GitHub には **ライセンス不要・完全無料** で組織のセキュリ�
 <details class="ctl-item" name="ghas-rollout" style="--entry-accent:#ff2e88">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🤖</span><span class="ctl-name">API で自動化できる</span><span class="ctl-when">UI と同じことが全部できる</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/rest/code-security/configurations" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">できること</span><span class="ctl-v">configuration の <b>作成 → 適用 → デフォルト化</b> がすべて <b>Code security configurations API</b>(REST)で完結する。UI を一度も開かずに全社展開できる</span></p>
-<p class="ctl-row"><span class="ctl-k">enterprise</span><span class="ctl-v"><code>POST /enterprises/{enterprise}/code-security/configurations</code> → <code>POST .../{id}/attach</code>(<code>scope</code> は <code>all</code> か <code>all_without_configurations</code>)→ <code>PUT .../{id}/defaults</code>。必要な権限は <b>admin:enterprise</b></span></p>
+<p class="ctl-row"><span class="ctl-k">できること</span><span class="ctl-v">configuration の <b>作成 → 適用 → デフォルト化</b> がすべて <b>Code security configurations API</b> (REST) で完結する。UI を一度も開かずに全社展開できる</span></p>
+<p class="ctl-row"><span class="ctl-k">enterprise</span><span class="ctl-v"><code>POST /enterprises/{enterprise}/code-security/configurations</code> → <code>POST .../{id}/attach</code> (<code>scope</code> は <code>all</code> か <code>all_without_configurations</code>) → <code>PUT .../{id}/defaults</code>。必要な権限は <b>admin:enterprise</b></span></p>
 <p class="ctl-row"><span class="ctl-k">org</span><span class="ctl-v">同じ 3 本を <code>/orgs/{org}/...</code> で。org 側だけ <code>scope: selected</code> + <code>selected_repository_ids</code> で <b>repo を選んで配れる</b>。必要な権限は <b>write:org</b>(org owner / security manager)</span></p>
-<p class="ctl-row"><span class="ctl-k">落とし穴</span><span class="ctl-v">attach は<b>非同期(202 が返るだけ)</b>。<code>GET .../{id}/repositories?status=failed</code> で結果を確認する。ライセンスが足りないと<b>エラーにならず無料機能だけが有効化される</b></span></p>
+<p class="ctl-row"><span class="ctl-k">落とし穴</span><span class="ctl-v">attach は<b>非同期(202 が返るだけ)</b>。<code>GET .../{id}/repositories?status=attaching</code> と <code>GET .../{id}/repositories?status=failed</code> を見て進行状況と結果を確認する。ライセンスが足りないと<b>エラーにならず無料機能だけが有効化される</b></span></p>
 </div>
 </details>
 </div>

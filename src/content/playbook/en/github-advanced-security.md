@@ -204,7 +204,7 @@ One configuration at **Enterprise → Settings → Advanced Security → Code se
 <p class="ctl-row"><span class="ctl-k">What you get</span><span class="ctl-v"><b>create → apply → set as default</b> is fully scriptable through the <b>Code security configurations API</b> (REST). A whole enterprise rollout without opening the UI once</span></p>
 <p class="ctl-row"><span class="ctl-k">Enterprise</span><span class="ctl-v"><code>POST /enterprises/{enterprise}/code-security/configurations</code> → <code>POST .../{id}/attach</code> (<code>scope</code> is <code>all</code> or <code>all_without_configurations</code>) → <code>PUT .../{id}/defaults</code>. Needs <b>admin:enterprise</b></span></p>
 <p class="ctl-row"><span class="ctl-k">Organization</span><span class="ctl-v">the same three calls under <code>/orgs/{org}/...</code>. Only the org level accepts <code>scope: selected</code> with <code>selected_repository_ids</code> to <b>pick specific repos</b>. Needs <b>write:org</b> (org owner / security manager)</span></p>
-<p class="ctl-row"><span class="ctl-k">Traps</span><span class="ctl-v">attach is <b>asynchronous (it just returns 202)</b>. Poll <code>GET .../{id}/repositories?status=failed</code> to confirm. If licenses run short it <b>does not error, it silently enables free features only</b></span></p>
+<p class="ctl-row"><span class="ctl-k">Traps</span><span class="ctl-v">attach is <b>asynchronous (it just returns 202)</b>. Poll <code>GET .../{id}/repositories?status=attaching</code> and <code>GET .../{id}/repositories?status=failed</code> to confirm progress and outcome. If licenses run short it <b>does not error, it silently enables free features only</b></span></p>
 </div>
 </details>
 </div>
