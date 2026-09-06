@@ -67,8 +67,11 @@ steps:
         grep -oE 'https?://[^"<>[:space:])]+' "$file" >> "$ALL" 2>/dev/null || true
       done
 
-      # Strip trailing punctuation and dedupe
-      sed -E 's/[\.,);!?\]]+$//' "$ALL" | sort -u > "$UNIQ"
+      # Strip trailing punctuation and dedupe.
+      # Alternation (not a bracket class) so multi-byte CJK punctuation is
+      # matched reliably regardless of the runner locale.
+      sed -E 's/(`|"|\*|\.|,|;|:|!|\?|\)|\]|>|）|。|、|」|｣|＞|］|：|”)+$//' "$ALL" \
+        | sort -u > "$UNIQ"
       LINK_COUNT=$(wc -l < "$UNIQ" | tr -d ' ')
       echo "Found **${LINK_COUNT}** unique HTTP(S) URLs." >> "$RESULTS"
       echo "" >> "$RESULTS"
