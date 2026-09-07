@@ -71,7 +71,7 @@ links:
 
 ## なぜ private repo でも secret はダメなのか
 
-<strong>「Private」はセキュリティ対策ではなく、可視性の設定にすぎない。</strong>private repo でも secret を平文で置いてはいけない理由は 8 つある。
+<strong>「Private」はセキュリティ対策ではなく、可視性の設定にすぎない。</strong>secret はコードに置かずシークレットマネージャーで管理し、**Push protection** で入口を塞ぐ。private repo でも平文で置いてはいけない理由は 8 つある。
 
 <div class="risk-widget">
 <p class="risk-hint">▸ + をクリックして表示</p>
@@ -110,8 +110,6 @@ links:
 </details>
 </div>
 </div>
-
-> 🔐 **結論** — secret はコードに置かず、環境変数 / シークレットマネージャーで管理し、**Push protection** で入口を塞ぐ。「private だから大丈夫」は成り立たない。
 
 ## 主な機能 <input type="checkbox" id="demo-secret-scanning" class="demo-toggle" /><label class="h2-demo" for="demo-secret-scanning">&#9658; DEMO</label>
 
