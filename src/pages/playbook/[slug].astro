@@ -1235,6 +1235,21 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     letter-spacing: 0.08em;
     opacity: 0.72;
   }
+  .demo-panel .demo-note {
+    margin-left: auto;
+    padding: 0.1rem 0.5rem;
+    font-family: 'DotGothic16', 'VT323', monospace;
+    font-size: 0.72rem;
+    line-height: 1.5;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    color: #ffb000;
+    background: #05060f;
+    border: 1px solid rgba(5, 6, 15, 0.6);
+  }
+  .demo-panel .demo-note + .demo-close {
+    margin-left: 0;
+  }
   .demo-panel .demo-close {
     margin-left: auto;
     padding: 0 0.45em;
@@ -1336,6 +1351,8 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       font-size: 0.6em;
     }
     .demo-panel .demo-window { width: 94vw; max-height: 88vh; }
+    .demo-panel .demo-name { display: none; }
+    .demo-panel .demo-note { font-size: 0.65rem; letter-spacing: 0.06em; }
     .demo-panel .demo-steps { padding: 0.85rem 0.7rem 1rem; }
     .demo-panel .demo-steps > li { padding: 0.7rem 0.7rem 0.75rem 2.7rem; }
     .demo-panel .demo-steps > li::before { left: 0.5rem; }
