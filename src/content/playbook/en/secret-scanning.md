@@ -126,7 +126,7 @@ links:
 <code class="demo-cmd">./demo/secret-scanning/01-push-protection.sh</code>
 <p class="demo-out">The push is <b>blocked</b> and the terminal prints an unblock URL.</p>
 <p>Show <b>which</b> patterns are push-protected, enterprise-wide: <a href="https://github.com/enterprises/octodemo/settings/security_analysis/pattern_configurations" target="_blank" rel="noopener noreferrer">octodemo → Pattern configurations ↗</a>. Flip a pattern in the <b>Enterprise setting</b> column; the <b>Alert total</b>, <b>False positives</b>, and <b>Bypass rate</b> columns back the noise-vs-risk call with real data.</p>
-<p class="demo-out">Note the list is <b>flat</b>: provider and generic patterns are not separated and there is no filter. The generic ones are the private keys and connection strings (<code class="demo-path">rsa_private_key</code>, <code class="demo-path">postgres_connection_string</code>, and similar), and they all show <b>Disabled</b> under <b>GitHub default</b>.</p>
+<p class="demo-out">Same page is revisited on the <b>What gets detected</b> slide, to dig out the generic patterns.</p>
 </li>
 <li>
 <p class="demo-step-title">BYPASS PUSH PROTECTION</p>
@@ -189,7 +189,34 @@ Secret Scanning is made up of five capabilities. **Push protection** closes the 
 </div>
 </div>
 
-## What gets detected
+## What gets detected <input type="checkbox" id="demo-secret-detect" class="demo-toggle" /><label class="h2-demo" for="demo-secret-detect">&#9658; DEMO</label>
+
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-secret-detect" aria-label="Close demo steps"></label>
+<div class="demo-window" role="group" aria-label="Demo steps">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Detection types</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-secret-detect" aria-label="Close">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">WHERE THE GENERIC PATTERNS HIDE</p>
+<p>Open <a href="https://github.com/enterprises/octodemo/settings/security_analysis/pattern_configurations" target="_blank" rel="noopener noreferrer">octodemo → Pattern configurations ↗</a> and scroll the default patterns tab.</p>
+<p class="demo-out">It is one <b>flat list</b>: no category column, no provider / generic split, no filter. The generic patterns are in there, just never labelled as generic.</p>
+<p>Point them out by name — these ten are the entire set:</p>
+<p><code class="demo-path">rsa_private_key</code> <code class="demo-path">openssh_private_key</code> <code class="demo-path">ec_private_key</code> <code class="demo-path">pgp_private_key</code> <code class="demo-path">generic_private_key</code> <code class="demo-path">mongodb_connection_string</code> <code class="demo-path">mysql_connection_url</code> <code class="demo-path">postgres_connection_string</code> <code class="demo-path">http_basic_authentication_header</code> <code class="demo-path">http_bearer_authentication_header</code></p>
+<p class="demo-out">Every one reads <b>Disabled</b> under <b>GitHub default</b>: detection is on, push protection is not. Flip one in the <b>Enterprise setting</b> column to opt it in.</p>
+</li>
+<li>
+<p class="demo-step-title">CUSTOM PATTERN + DRY RUN</p>
+<p><code class="demo-path">Settings → Advanced Security → Custom patterns → New pattern</code></p>
+<p>Matching secrets are already planted in the demo repo, so you only need to create the pattern:</p>
+<p><b>Pattern name</b> — <code class="demo-path">Octodemo internal service token</code></p>
+<p><b>Secret format</b> — <code class="demo-path">octodemo_(live|test)_[A-Za-z0-9]{32}</code></p>
+<p><b>Test string</b> — <code class="demo-path">octodemo_live_L1QNGy4DLxQJ8C85kfwP0lmvCHLDuVxJ</code></p>
+<p>The test string has to go green before the form will save. Then use <b>Save and dry run</b>.</p>
+<p class="demo-out">The dry run reports the planted secrets <b>without creating alerts</b>. Review the hits, then <b>Publish pattern</b> and optionally turn push protection on for it.</p>
+</li>
+</ol>
+</div>
+</div>
 
 **Four** detection engines, layered from exact partner formats to unstructured secrets that only AI can catch.
 
@@ -209,14 +236,14 @@ Secret Scanning is made up of five capabilities. **Push protection** closes the 
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🧪</span><span class="det-name">Generic patterns</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🧪</span><span class="det-title">Generic patterns</span></p>
-<p class="det-why">Private keys, connection strings, HTTP basic auth, and other generic formats. A wider net by design, so expect more triage than provider patterns.</p>
+<p class="det-why">Private keys, connection strings, HTTP basic auth, and other generic formats. A wider net by design, so expect more triage than provider patterns. <b>Not push-protected by default</b> — opt each pattern in under Pattern configurations.</p>
 </div>
 </details>
 <details class="det-pick" name="ss-detect">
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI-detected secrets</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">AI-detected secrets</span></p>
-<p class="det-why">Uses AI to detect <b>unstructured secrets</b> such as passwords, covering the ground no regex can reach.</p>
+<p class="det-why">Uses AI to detect <b>unstructured secrets</b> such as passwords, covering the ground no regex can reach. Supports <b>neither push protection nor validity checks</b>, at any setting — triage these as alerts.</p>
 </div>
 </details>
 <details class="det-pick" name="ss-detect">
@@ -232,9 +259,6 @@ Secret Scanning is made up of five capabilities. **Push protection** closes the 
 </div>
 <p class="det-scope"><span class="det-scope-k">📚 Scope</span><span class="det-scope-v">Not just code: the <b>full Git history on all branches</b>, plus Issues, PRs, <b>GitHub Discussions</b>, Wikis, and secret gists. Rescanned periodically as new secret types ship.</span></p>
 </div>
-
-
-> 🤖 The noisy two. Generic is **not push-protected by default** — opt it in at the org/enterprise level via `Settings → Advanced Security → Global settings → Pattern configurations`. **AI-detected passwords support neither push protection nor validity checks**, at any setting. Triage them as alerts.
 
 ## Response flow when a secret is exposed
 
