@@ -153,7 +153,7 @@ Secret Scanning is made up of five capabilities. **Push protection** closes the 
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛡️</span><span class="ctl-name">Push protection</span><span class="ctl-when">Right before <code>git push</code></span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/push-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v"><b>Rejects the push on the spot</b> when it contains a secret. Bypass is possible, but the reason is recorded</span></p>
-<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Incoming changes only</span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Incoming changes only. <b>AI-detected passwords are not covered</b> (too noisy to block)</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
@@ -167,7 +167,7 @@ Secret Scanning is made up of five capabilities. **Push protection** closes the 
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">✅</span><span class="ctl-name">Validity checks</span><span class="ctl-when">When an alert fires</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/validity-checks" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">Asks the provider API whether the secret is <b>still active</b>, so you can triage by real risk</span></p>
-<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Select supported providers (AWS, GitHub, Slack, and others)</span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Select supported providers (AWS, GitHub, Slack, and others). <b>AI-detected passwords are not covered</b> (no provider to ask)</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">

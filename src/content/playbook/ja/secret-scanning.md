@@ -153,7 +153,7 @@ Secret Scanning は 5 つの機能で構成される。入口を塞ぐ **Push pr
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛡️</span><span class="ctl-name">Push protection</span><span class="ctl-when"><code>git push</code> の直前</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/push-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">secret を含む push を<b>その場で拒否</b>。bypass は可能だが理由の記録が残る</span></p>
-<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">これから入る変更のみ</span></p>
+<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">これから入る変更のみ。<b>AI 検出パスワードは対象外</b>(ノイズが多くブロックできない)</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
@@ -167,7 +167,7 @@ Secret Scanning は 5 つの機能で構成される。入口を塞ぐ **Push pr
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">✅</span><span class="ctl-name">Validity checks</span><span class="ctl-when">アラート発生時</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/validity-checks" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">secret が<b>まだ有効か</b>をプロバイダー API に問い合わせ、対応の優先順位を判断できる</span></p>
-<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">一部対応プロバイダー(AWS、GitHub、Slack ほか)</span></p>
+<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">一部対応プロバイダー(AWS、GitHub、Slack ほか)。<b>AI 検出パスワードは対象外</b>(問い合わせ先のプロバイダーがない)</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
