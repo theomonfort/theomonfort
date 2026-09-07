@@ -3602,10 +3602,17 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     min-width: 0;
   }
 
-  /* Left column — the picker. Selected row inverts to solid accent. */
-  .prose-akq .det-pick { min-width: 0; }
+  /* Left column — the picker. Selected row inverts to solid accent.
+     Tiles grow to fill the row so the column ends level with the pane. */
+  .prose-akq .det-pick {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+    min-width: 0;
+  }
   .prose-akq .det-btn {
     display: flex;
+    flex: 1 0 auto;
     align-items: center;
     gap: 0.4em;
     padding: 0.3em 0.45em;
