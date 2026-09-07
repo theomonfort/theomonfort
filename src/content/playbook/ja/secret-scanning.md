@@ -247,36 +247,38 @@ Secret が見つかった時にやることは **検知より修復が大事**�
 
 ## 始め方（最短ルート）
 
-**Step 1 — Push protection を ON(これが最優先)**
+<div class="setup-cards">
+  <div class="setup-card">
+    <div class="setup-card-head">
+      <code>Settings → Advanced Security</code>
+      <span class="setup-card-tag tag-cyan">▸ STEP 1 · PUSH PROTECTION</span>
+    </div>
+    <p><strong>これから</strong>入る secret を push 時にブロック。</p>
+  </div>
+  <div class="setup-card">
+    <div class="setup-card-head">
+      <code>Security → Secret scanning</code>
+      <span class="setup-card-tag tag-magenta">▸ STEP 2 · 既存の漏洩</span>
+    </div>
+    <p><strong>過去の履歴</strong>も自動スキャン。上から rotate。</p>
+  </div>
+  <div class="setup-card">
+    <div class="setup-card-head">
+      <code>… → Custom patterns</code>
+      <span class="setup-card-tag tag-cyan">▸ STEP 3 · CUSTOM PATTERNS</span>
+    </div>
+    <p>自社独自のトークン形式を正規表現で登録。</p>
+  </div>
+  <div class="setup-card">
+    <div class="setup-card-head">
+      <code>Org → … → Configurations</code>
+      <span class="setup-card-tag tag-magenta">▸ STEP 4 · 全体展開</span>
+    </div>
+    <p>設定 1 つで Org / Enterprise 全体に一括適用。</p>
+  </div>
+</div>
 
-```
-Repo → Settings → Advanced Security
-  ✅ Secret Protection   → Enable
-  ✅ Push protection     → Enable
-```
-
-Public repo のリポレベル push protection は **デフォルト ON** で無料。Private / internal repo では Secret Protection / GHAS が必要。ユーザー個人の push protection も無料だが、保護対象は public repo への push のみ。
-
-**Step 2 — 既存の漏洩をスキャン**
-
-ON にすると過去のコミット履歴も自動でスキャンされる。Security and quality タブにアラートが並ぶので、上から rotate していく。
-
-**Step 3 — Custom pattern を追加**
-
-```
-Repo → Settings → Advanced Security → Secret Protection → Custom patterns → New pattern
-Org  → Settings → Advanced Security → Global settings   → Custom patterns → New pattern
-```
-
-正規表現で自社独自のトークン形式を登録。Custom patterns は public / private を問わず Secret Protection / GHAS が必要。**Save and dry run** で誤検知をチェックしてから **Publish pattern**、その後そのパターン単位で push protection を ON にできる。
-
-**Step 4 — Org / Enterprise で一括 ON**
-
-**security configuration**(`Org → Settings → Advanced Security → Configurations`)を使うと、secret scanning・push protection・generic patterns を新規 / 既存リポジトリにまとめて適用できる。Enterprise owner は enterprise 全体にカスタム構成を作成できる。
-
-> ⚠️ 旧来の Org REST API フィールド(`secret_scanning_enabled_for_new_repositories`、`secret_scanning_push_protection_enabled_for_new_repositories`、`secret_scanning_validity_checks_enabled` など)は **2026-04-21 に削除済み**。今後は security configurations API を使う。
-
-📘 詳細: <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/enabling-secret-scanning-features/enabling-secret-scanning-for-your-repository" target="_blank" rel="noopener noreferrer">Enabling secret scanning for your repo ↗</a>
+> ⚠️ 旧来の Org REST API フィールドは **2026-04-21 に削除済み**。security configurations API を使う。
 
 ## 利用条件と製品
 
