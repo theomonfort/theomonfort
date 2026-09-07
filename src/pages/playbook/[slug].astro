@@ -3785,6 +3785,159 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     .prose-akq .det-pick[open] .det-why::after { animation: none; }
   }
 
+  /* ── Remediation flow: equipment-slot tiles for an ordered process ──
+     Four square tiles in one row, arrows in the gaps to carry the
+     sequence. The detail plate overlays a fixed-height screen below,
+     so picking a step never changes the slide height. ────────────── */
+  .prose-akq .rem-widget { margin: 1.1em 0; }
+  .prose-akq .rem-hint {
+    margin: 0 0 0.45em;
+    font-size: 0.9em;
+    letter-spacing: 0.08em;
+    color: #ffb000;
+    text-shadow: 0 0 8px rgba(255, 176, 0, 0.5);
+  }
+  .prose-akq .rem-flow {
+    --rem-tile: 4.6em;
+    --rem-gap: 1.6em;
+    --rem-split: 0.55em;
+    position: relative;
+  }
+  .prose-akq .rem-row {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--rem-gap);
+    height: var(--rem-tile);
+  }
+  .prose-akq .rem-slot { min-width: 0; }
+  .prose-akq .rem-btn {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.15em;
+    height: 100%;
+    padding: 0.3em 0.25em;
+    text-align: center;
+    color: rgba(232, 244, 255, 0.85);
+    background: rgba(10, 14, 39, 0.75);
+    border: 2px solid color-mix(in srgb, var(--entry-accent, #00f0ff) 30%, transparent);
+    cursor: pointer;
+    list-style: none;
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+  .prose-akq .rem-btn::-webkit-details-marker { display: none; }
+  .prose-akq .rem-btn:hover {
+    border-color: color-mix(in srgb, var(--entry-accent, #00f0ff) 70%, transparent);
+    background: color-mix(in srgb, var(--entry-accent, #00f0ff) 8%, transparent);
+  }
+  .prose-akq .rem-btn:focus-visible { outline: 2px solid #ffb000; outline-offset: 2px; }
+  .prose-akq .rem-slot[open] .rem-btn {
+    border-color: var(--entry-accent, #00f0ff);
+    background: color-mix(in srgb, var(--entry-accent, #00f0ff) 14%, transparent);
+    box-shadow:
+      0 0 8px var(--entry-accent, #00f0ff),
+      0 0 24px color-mix(in srgb, var(--entry-accent, #00f0ff) 30%, transparent);
+  }
+  .prose-akq .rem-icon { font-size: 1.45em; line-height: 1; }
+  .prose-akq .rem-name {
+    font-size: 0.78em;
+    line-height: 1.25;
+    letter-spacing: 0.04em;
+    overflow-wrap: break-word;
+  }
+  /* Arrow sits in the gap before every tile but the first. */
+  .prose-akq .rem-slot + .rem-slot .rem-btn::before {
+    content: '\25B6';
+    position: absolute;
+    top: 50%;
+    left: calc(var(--rem-gap) / -2);
+    transform: translate(-50%, -50%);
+    font-size: 0.8em;
+    line-height: 1;
+    color: color-mix(in srgb, var(--entry-accent, #00f0ff) 55%, transparent);
+    pointer-events: none;
+  }
+  .prose-akq .rem-screen {
+    display: grid;
+    place-items: center;
+    margin-top: var(--rem-split);
+    min-height: 9.8em;
+    padding: 0.5em;
+    background: rgba(5, 6, 15, 0.6);
+    border: 1px dashed color-mix(in srgb, var(--entry-accent, #00f0ff) 30%, transparent);
+  }
+  .prose-akq .rem-empty {
+    margin: 0;
+    font-size: 0.95em;
+    letter-spacing: 0.14em;
+    color: rgba(232, 244, 255, 0.4);
+  }
+  .prose-akq .rem-plate {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    top: calc(var(--rem-tile) + var(--rem-split));
+    overflow-y: auto;
+    padding: 0.55em 0.75em 0.6em;
+    background: #05060f;
+    border: 2px solid var(--entry-accent, #00f0ff);
+    box-shadow:
+      0 0 8px color-mix(in srgb, var(--entry-accent, #00f0ff) 55%, transparent),
+      0 0 24px color-mix(in srgb, var(--entry-accent, #00f0ff) 25%, transparent);
+    animation: akq-det-in 0.2s ease;
+  }
+  .prose-akq .rem-title {
+    margin: 0 0 0.25em;
+    font-family: 'VT323', 'IBM Plex Mono', monospace;
+    font-size: 1.25em;
+    letter-spacing: 0.1em;
+    color: var(--entry-accent, #00f0ff);
+  }
+  .prose-akq .rem-why {
+    margin: 0;
+    font-size: 0.82em;
+    line-height: 1.6;
+    color: rgba(232, 244, 255, 0.9);
+  }
+  .prose-akq .rem-why + .rem-why { margin-top: 0.3em; }
+  .prose-akq .rem-why b,
+  .prose-akq .rem-why strong { color: #ffb000; font-weight: normal; }
+  .prose-akq .rem-why code {
+    font-size: 0.95em;
+    color: #9bbc0f;
+    background: rgba(155, 188, 15, 0.1);
+    border: 1px solid rgba(155, 188, 15, 0.3);
+    padding: 0 0.25em;
+  }
+
+  /* Narrow screens: one tile per row, plate opens under its own tile. */
+  @media (max-width: 640px) {
+    .prose-akq .rem-row { display: block; height: auto; }
+    .prose-akq .rem-slot + .rem-slot { margin-top: 0.3em; }
+    .prose-akq .rem-slot + .rem-slot .rem-btn::before { display: none; }
+    .prose-akq .rem-btn {
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 0.5em;
+      padding: 0.35em 0.5em;
+      text-align: left;
+    }
+    .prose-akq .rem-icon { font-size: 1.1em; }
+    .prose-akq .rem-screen { display: none; }
+    .prose-akq .rem-plate {
+      position: static;
+      margin: 0.25em 0 0.45em;
+      animation: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .prose-akq .rem-btn { transition: none; }
+    .prose-akq .rem-plate { animation: none; }
+  }
+
   /* ── Figure tabs: CSS-only switcher between alternative diagrams ──
      Radios must precede .figtabs-bar and the panels so the sibling
      combinator can drive both the active tab and the visible panel. */
