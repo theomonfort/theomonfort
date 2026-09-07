@@ -232,7 +232,7 @@ Secret Scanning は 5 つの機能で構成される。入口を塞ぐ **Push pr
 </div>
 
 
-> 🤖 誤検知が増えがちな 2 つ。Generic は **Push protection** で入口を塞げるが、**AI-detected（password）は push protection も validity check も非対応**。トリアージ前提で運用する。
+> 🤖 誤検知が増えがちな 2 つ。Generic は **デフォルトでは push protection の対象外** — Organization / Enterprise の `Settings → Advanced Security → Global settings → Pattern configurations`（public preview）で明示的に対象に加える必要がある。**AI-detected（password）はどう設定しても push protection も validity check も非対応**。トリアージ前提で運用する。
 
 ## 漏洩した時の対応フロー
 

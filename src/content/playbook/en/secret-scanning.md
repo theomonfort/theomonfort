@@ -232,7 +232,7 @@ Secret Scanning is made up of five capabilities. **Push protection** closes the 
 </div>
 
 
-> 🤖 The noisy two. Generic can be gated with **Push protection**; **AI-detected passwords support neither push protection nor validity checks**. Triage them as alerts.
+> 🤖 The noisy two. Generic is **not push-protected by default** — opt it in at the org/enterprise level via `Settings → Advanced Security → Global settings → Pattern configurations` (public preview). **AI-detected passwords support neither push protection nor validity checks**, at any setting. Triage them as alerts.
 
 ## Response flow when a secret is exposed
 
