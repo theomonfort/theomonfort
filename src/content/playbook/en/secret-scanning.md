@@ -71,7 +71,7 @@ links:
 
 ## Why secrets matter even in private repos
 
-**"Private" is a visibility setting, not a security control.** Here are 8 reasons you must never store plaintext secrets, even in a private repo.
+**"Private" is a visibility setting, not a security control.** Secrets belong in a secret manager, never in code, and **Push protection** is what keeps them out. Here are 8 reasons why, even in a private repo.
 
 <div class="risk-widget">
 <p class="risk-hint">▸ CLICK + TO REVEAL</p>
@@ -110,8 +110,6 @@ links:
 </details>
 </div>
 </div>
-
-> 🔐 **Bottom line** — keep secrets out of code, manage them with env vars / a secret manager, and close the door with **Push protection**. "It's private, so it's fine" simply doesn't hold.
 
 ## Main capabilities <input type="checkbox" id="demo-secret-scanning" class="demo-toggle" /><label class="h2-demo" for="demo-secret-scanning">&#9658; DEMO</label>
 
