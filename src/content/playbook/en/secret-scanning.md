@@ -258,14 +258,76 @@ Secret Scanning is made up of five capabilities. **Push protection** closes the 
 <p class="det-scope"><span class="det-scope-k">📚 Scope</span><span class="det-scope-v">Not just code: the <b>full Git history on all branches</b>, plus Issues, PRs, <b>GitHub Discussions</b>, Wikis, and secret gists. Rescanned periodically as new secret types ship.</span></p>
 </div>
 
-## Response flow when a secret is exposed
+## How to manage exposed secrets <input type="checkbox" id="demo-secret-campaign" class="demo-toggle" /><label class="h2-demo" for="demo-secret-campaign">&#9658; DEMO</label>
 
-When a secret is found, **remediation matters more than detection**.
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-secret-campaign" aria-label="Close demo steps"></label>
+<div class="demo-window" role="group" aria-label="Demo steps">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Security campaigns</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-secret-campaign" aria-label="Close">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">THE CAMPAIGNS TAB</p>
+<p>Open <a href="https://github.com/orgs/theomonfort-org/security/campaigns" target="_blank" rel="noopener noreferrer">theomonfort-org → Campaigns ↗</a>.</p>
+<p class="demo-out">The tracking view: each campaign with its <b>due date</b>, <b>manager</b>, and a burn-down of open vs closed alerts. The point to land: <b>alerts get an owner and a deadline here, not in a spreadsheet</b>.</p>
+</li>
+<li>
+<p class="demo-step-title">CREATE ONE FROM SECRET SCANNING FILTERS</p>
+<p><code class="demo-path">Create campaign → From secret scanning filters</code></p>
+<p>Build the filter live so they see the triage logic. Start from <code class="demo-path">is:open</code>, narrow to the repos that matter, then set <b>Validity</b> to <b>Active</b> and <b>Unknown</b>.</p>
+<p class="demo-out">Watch the alert count drop with each filter. That is the whole argument: <b>a finishable list instead of a backlog</b>. Must be <b>1000 alerts or fewer</b> to save.</p>
+</li>
+<li>
+<p class="demo-step-title">NAME IT, DATE IT, SHIP IT</p>
+<p><b>Save as → Draft campaign</b>, then fill in the name, description, <b>due date</b>, and <b>campaign manager</b>.</p>
+<p>Note the manager picker only offers <b>org owners and security managers</b>.</p>
+<p class="demo-out"><b>Review and publish</b> notifies everyone who can see the alerts, and the campaign shows up in each repo's Security tab. Mention secret campaigns are in <b>public preview</b>.</p>
+</li>
+</ol>
+</div>
+</div>
 
-1. 🚨 **Rotate / revoke immediately** — removing it from the repository is not enough (it remains in history and in other people's clones)
-2. 📣 Partner secrets are handled provider-side — when a partner secret leaks in a **public** repo, GitHub reports it straight to the provider (AWS, Stripe, and others), who revokes or reissues it. These reports **do not show up in your repository alert list**
-3. 🧹 Close the alert — mark it as `Revoked`, `False positive`, or `Used in tests`
-4. 🛡️ Enable Push protection to prevent recurrence
+When a secret is found, **remediation matters more than detection**. At scale, don't work the raw alert list, run it as a **security campaign**.
+
+<div class="rem-widget">
+<p class="rem-hint">▸ CLICK A STEP FOR DETAILS</p>
+<div class="rem-flow">
+<div class="rem-row">
+<details class="rem-slot" name="ss-remediate">
+<summary class="rem-btn"><span class="rem-icon" aria-hidden="true">🎯</span><span class="rem-name">SCOPE</span></summary>
+<div class="rem-plate">
+<p class="rem-title">🎯 SCOPE — critical repos first</p>
+<p class="rem-why"><code>Org → Security and quality → Campaigns → Create campaign → From secret scanning filters</code></p>
+<p class="rem-why">Not the whole org. Target the repos that matter, for example with a repository custom property (<code>props.BusinessPriority:Urgent</code>). Cap it at <b>1000 alerts</b>, which is also the hard limit.</p>
+</div>
+</details>
+<details class="rem-slot" name="ss-remediate">
+<summary class="rem-btn"><span class="rem-icon" aria-hidden="true">⚡</span><span class="rem-name">TRIAGE</span></summary>
+<div class="rem-plate">
+<p class="rem-title">⚡ TRIAGE — by real risk</p>
+<p class="rem-why">Filter validity to <b>Active</b> and <b>Unknown</b>. <b>Active</b> is a live key someone can use right now. <b>Unknown</b> means nobody could confirm it is dead, so treat it as live.</p>
+<p class="rem-why"><b>Inactive</b> can wait. This is what turns a backlog into a list worth someone's week.</p>
+</div>
+</details>
+<details class="rem-slot" name="ss-remediate">
+<summary class="rem-btn"><span class="rem-icon" aria-hidden="true">👤</span><span class="rem-name">OWN</span></summary>
+<div class="rem-plate">
+<p class="rem-title">👤 OWN — a name and a date</p>
+<p class="rem-why">Every campaign gets a <b>due date</b> and a <b>campaign manager</b>. The picker only offers <b>org owners and security managers</b>.</p>
+<p class="rem-why">Without both, nothing gets rotated. Publishing notifies everyone who can see the alerts, and the campaign appears in each repo's Security tab.</p>
+</div>
+</details>
+<details class="rem-slot" name="ss-remediate">
+<summary class="rem-btn"><span class="rem-icon" aria-hidden="true">🚨</span><span class="rem-name">ROTATE</span></summary>
+<div class="rem-plate">
+<p class="rem-title">🚨 ROTATE — then close it out</p>
+<p class="rem-why"><b>Revoke at the provider.</b> Deleting it from the repo is not enough: it stays in the history and in everyone's clones.</p>
+<p class="rem-why">Partner secrets leaked in <b>public</b> repos are revoked provider-side and <b>never reach your alert list</b>. Then close each alert as <code>Revoked</code>, <code>False positive</code>, or <code>Used in tests</code> so the campaign burns down.</p>
+</div>
+</details>
+</div>
+<div class="rem-screen"><p class="rem-empty">SELECT A STEP ▸</p></div>
+</div>
+</div>
 
 ## Getting started (fastest path)
 

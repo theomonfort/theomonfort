@@ -258,14 +258,76 @@ Secret Scanning は 5 つの機能で構成される。入口を塞ぐ **Push pr
 <p class="det-scope"><span class="det-scope-k">📚 対象</span><span class="det-scope-v">コードだけでなく<b>全ブランチの Git 履歴全体</b>、Issue・PR・<b>GitHub Discussions</b>・Wiki・secret gists まで。新しい secret type の追加時に再スキャンされる。</span></p>
 </div>
 
-## 漏洩した時の対応フロー
+## 漏洩した secret の対応方法 <input type="checkbox" id="demo-secret-campaign" class="demo-toggle" /><label class="h2-demo" for="demo-secret-campaign">&#9658; DEMO</label>
 
-Secret が見つかった時にやることは **検知より修復が大事**。
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-secret-campaign" aria-label="デモ手順を閉じる"></label>
+<div class="demo-window" role="group" aria-label="デモ手順">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Security campaigns</span><span class="demo-note">発表者専用</span><label class="demo-close" for="demo-secret-campaign" aria-label="閉じる">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">CAMPAIGNS タブ</p>
+<p><a href="https://github.com/orgs/theomonfort-org/security/campaigns" target="_blank" rel="noopener noreferrer">theomonfort-org → Campaigns ↗</a> を開く。</p>
+<p class="demo-out">トラッキング画面。各 campaign の <b>期限</b>・<b>担当者</b>・未対応 / 対応済みの消化状況が並ぶ。伝えたいのは <b>アラートに担当者と期限が付く場所がここ</b>（スプレッドシートではない）ということ。</p>
+</li>
+<li>
+<p class="demo-step-title">SECRET SCANNING フィルターから作成</p>
+<p><code class="demo-path">Create campaign → From secret scanning filters</code></p>
+<p>その場でフィルターを組み立てて絞り込みの考え方を見せる。<code class="demo-path">is:open</code> から始め、対象リポジトリを絞り、<b>Validity</b> で <b>Active</b> と <b>Unknown</b> を選ぶ。</p>
+<p class="demo-out">フィルターを足すたびに件数が減るのを見せる。これが要点で、<b>バックログではなく終われるリスト</b>になる。保存できるのは <b>1000 alerts まで</b>。</p>
+</li>
+<li>
+<p class="demo-step-title">名前・期限・公開</p>
+<p><b>Save as → Draft campaign</b> で下書きし、名前・説明・<b>期限</b>・<b>campaign manager</b> を入力。</p>
+<p>manager の候補に <b>org owner と security manager しか出ない</b>ことに触れる。</p>
+<p class="demo-out"><b>Review and publish</b> でアラートを見られる人全員に通知が飛び、各リポジトリの Security タブに campaign が出る。secret campaign が <b>public preview</b> であることも一言添える。</p>
+</li>
+</ol>
+</div>
+</div>
 
-1. 🚨 **即座に rotate / revoke** — リポジトリから消すだけでは不十分(履歴と他人の clone に残る)
-2. 📣 Partner secret は provider 側で処理される — **public repo** でパートナーの secret が漏れると、GitHub が provider(AWS、Stripe ほか)に直接通報し、provider が revoke / 再発行する。この通報は **自分のリポジトリのアラート一覧には出ない**
-3. 🧹 アラートを close — `Revoked` / `False positive` / `Used in tests` のいずれかでクローズ
-4. 🛡️ Push protection を ON にして再発防止
+Secret が見つかった時にやることは **検知より修復が大事**。規模が大きいときは生のアラート一覧を追わず、**security campaign** として回す。
+
+<div class="rem-widget">
+<p class="rem-hint">▸ ステップをクリックして詳細を表示</p>
+<div class="rem-flow">
+<div class="rem-row">
+<details class="rem-slot" name="ss-remediate">
+<summary class="rem-btn"><span class="rem-icon" aria-hidden="true">🎯</span><span class="rem-name">対象を絞る</span></summary>
+<div class="rem-plate">
+<p class="rem-title">🎯 SCOPE — 重要リポジトリから</p>
+<p class="rem-why"><code>Org → Security and quality → Campaigns → Create campaign → From secret scanning filters</code></p>
+<p class="rem-why">組織全体ではなく重要なリポジトリに絞る。リポジトリのカスタムプロパティ(<code>props.BusinessPriority:Urgent</code>)が使いやすい。<b>1000 alerts</b> が上限であり、目安でもある。</p>
+</div>
+</details>
+<details class="rem-slot" name="ss-remediate">
+<summary class="rem-btn"><span class="rem-icon" aria-hidden="true">⚡</span><span class="rem-name">優先度をつける</span></summary>
+<div class="rem-plate">
+<p class="rem-title">⚡ TRIAGE — 実リスク順に</p>
+<p class="rem-why">validity を <b>Active</b> と <b>Unknown</b> に絞る。<b>Active</b> は今すぐ悪用できる生きた鍵。<b>Unknown</b> は無効と確認できていないので、生きている前提で扱う。</p>
+<p class="rem-why"><b>Inactive</b> は後回しでよい。これでバックログが「片付ける価値のあるリスト」になる。</p>
+</div>
+</details>
+<details class="rem-slot" name="ss-remediate">
+<summary class="rem-btn"><span class="rem-icon" aria-hidden="true">👤</span><span class="rem-name">担当と期限</span></summary>
+<div class="rem-plate">
+<p class="rem-title">👤 OWN — 担当者と期限を決める</p>
+<p class="rem-why">campaign には必ず <b>期限</b> と <b>campaign manager</b> を設定する。manager に指定できるのは <b>org owner と security manager</b> のみ。</p>
+<p class="rem-why">どちらか欠けると rotate は進まない。公開するとアラートを見られる人全員に通知が飛び、各リポジトリの Security タブに campaign が出る。</p>
+</div>
+</details>
+<details class="rem-slot" name="ss-remediate">
+<summary class="rem-btn"><span class="rem-icon" aria-hidden="true">🚨</span><span class="rem-name">rotate して close</span></summary>
+<div class="rem-plate">
+<p class="rem-title">🚨 ROTATE — 無効化してクローズ</p>
+<p class="rem-why"><b>provider 側で revoke する。</b>リポジトリから消すだけでは不十分で、履歴と他人の clone に残り続ける。</p>
+<p class="rem-why"><b>public repo</b> で漏れた partner secret は provider 側で revoke され、<b>自分のアラート一覧には出ない</b>。最後に <code>Revoked</code> / <code>False positive</code> / <code>Used in tests</code> で close し、campaign を消化する。</p>
+</div>
+</details>
+</div>
+<div class="rem-screen"><p class="rem-empty">ステップを選択 ▸</p></div>
+</div>
+</div>
 
 ## 始め方（最短ルート）
 
