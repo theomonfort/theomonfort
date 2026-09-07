@@ -160,7 +160,7 @@ Secret Scanning is made up of five capabilities. **Push protection** closes the 
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔍</span><span class="ctl-name">Secret scanning alerts</span><span class="ctl-when">After commit, continuous</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/secret-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">Notifies you of detected secrets in the <b>Security and quality</b> tab</span></p>
-<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Full Git history on all branches, Issues, PRs, GitHub Discussions, Wikis, secret gists</span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Full Git history on all branches, Issues, PRs, GitHub Discussions, Wikis, secret gists. <b>Rescanned</b> as new secret types ship</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
@@ -255,7 +255,6 @@ Secret Scanning is made up of five capabilities. **Push protection** closes the 
 </div>
 <div class="det-screen"><p class="det-empty">SELECT A TYPE ▸</p></div>
 </div>
-<p class="det-scope"><span class="det-scope-k">📚 Scope</span><span class="det-scope-v">Not just code: the <b>full Git history on all branches</b>, plus Issues, PRs, <b>GitHub Discussions</b>, Wikis, and secret gists. Rescanned periodically as new secret types ship.</span></p>
 </div>
 
 ## Response flow when a secret is exposed
