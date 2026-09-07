@@ -125,6 +125,8 @@ links:
 <p><code class="demo-path">ghas-test-1</code> で、生成した secret を push する。</p>
 <code class="demo-cmd">./demo/secret-scanning/01-push-protection.sh</code>
 <p class="demo-out">push が<b>ブロック</b>され、ターミナルに解除用の URL が表示される。</p>
+<p>どのパターンを push protection の対象にするかは Enterprise 単位で制御する：<a href="https://github.com/enterprises/octodemo/settings/security_analysis/pattern_configurations" target="_blank" rel="noopener noreferrer">octodemo → Pattern configurations ↗</a>。<b>Enterprise setting</b> 列でパターンごとに ON / OFF を切り替える。<b>Alert total</b>・<b>False positives</b>・<b>Bypass rate</b> が並ぶので、ノイズと risk のバランスを実データで説明できる。</p>
+<p class="demo-out">一覧は<b>フラット</b>で、provider と generic の区別も絞り込みもない点に注意。generic は private key と接続文字列（<code class="demo-path">rsa_private_key</code>、<code class="demo-path">postgres_connection_string</code> など）で、<b>GitHub default</b> はいずれも Disabled。</p>
 </li>
 <li>
 <p class="demo-step-title">BYPASS PUSH PROTECTION</p>
@@ -232,7 +234,7 @@ Secret Scanning は 5 つの機能で構成される。入口を塞ぐ **Push pr
 </div>
 
 
-> 🤖 誤検知が増えがちな 2 つ。Generic は **デフォルトでは push protection の対象外** — Organization / Enterprise の `Settings → Advanced Security → Global settings → Pattern configurations`（public preview）で明示的に対象に加える必要がある。**AI-detected（password）はどう設定しても push protection も validity check も非対応**。トリアージ前提で運用する。
+> 🤖 誤検知が増えがちな 2 つ。Generic は **デフォルトでは push protection の対象外** — Organization / Enterprise の `Settings → Advanced Security → Global settings → Pattern configurations` で明示的に対象に加える必要がある。**AI-detected（password）はどう設定しても push protection も validity check も非対応**。トリアージ前提で運用する。
 
 ## 漏洩した時の対応フロー
 

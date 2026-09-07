@@ -125,6 +125,8 @@ links:
 <p>In <code class="demo-path">ghas-test-1</code>, push a generated secret.</p>
 <code class="demo-cmd">./demo/secret-scanning/01-push-protection.sh</code>
 <p class="demo-out">The push is <b>blocked</b> and the terminal prints an unblock URL.</p>
+<p>Show <b>which</b> patterns are push-protected, enterprise-wide: <a href="https://github.com/enterprises/octodemo/settings/security_analysis/pattern_configurations" target="_blank" rel="noopener noreferrer">octodemo → Pattern configurations ↗</a>. Flip a pattern in the <b>Enterprise setting</b> column; the <b>Alert total</b>, <b>False positives</b>, and <b>Bypass rate</b> columns back the noise-vs-risk call with real data.</p>
+<p class="demo-out">Note the list is <b>flat</b>: provider and generic patterns are not separated and there is no filter. The generic ones are the private keys and connection strings (<code class="demo-path">rsa_private_key</code>, <code class="demo-path">postgres_connection_string</code>, and similar), and they all show <b>Disabled</b> under <b>GitHub default</b>.</p>
 </li>
 <li>
 <p class="demo-step-title">BYPASS PUSH PROTECTION</p>
@@ -232,7 +234,7 @@ Secret Scanning is made up of five capabilities. **Push protection** closes the 
 </div>
 
 
-> 🤖 The noisy two. Generic is **not push-protected by default** — opt it in at the org/enterprise level via `Settings → Advanced Security → Global settings → Pattern configurations` (public preview). **AI-detected passwords support neither push protection nor validity checks**, at any setting. Triage them as alerts.
+> 🤖 The noisy two. Generic is **not push-protected by default** — opt it in at the org/enterprise level via `Settings → Advanced Security → Global settings → Pattern configurations`. **AI-detected passwords support neither push protection nor validity checks**, at any setting. Triage them as alerts.
 
 ## Response flow when a secret is exposed
 
