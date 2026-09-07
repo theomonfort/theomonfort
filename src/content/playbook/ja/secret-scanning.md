@@ -118,7 +118,7 @@ links:
 <div class="demo-panel">
 <label class="demo-scrim" for="demo-secret-scanning" aria-label="デモ手順を閉じる"></label>
 <div class="demo-window" role="group" aria-label="デモ手順">
-<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Secret Scanning</span><label class="demo-close" for="demo-secret-scanning" aria-label="閉じる">&#10005;</label></div>
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Secret Scanning</span><span class="demo-note">発表者専用</span><label class="demo-close" for="demo-secret-scanning" aria-label="閉じる">&#10005;</label></div>
 <ol class="demo-steps">
 <li>
 <p class="demo-step-title">PUSH PROTECTION</p>
