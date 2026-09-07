@@ -126,7 +126,7 @@ links:
 <code class="demo-cmd">./demo/secret-scanning/01-push-protection.sh</code>
 <p class="demo-out">push が<b>ブロック</b>され、ターミナルに解除用の URL が表示される。</p>
 <p>どのパターンを push protection の対象にするかは Enterprise 単位で制御する：<a href="https://github.com/enterprises/octodemo/settings/security_analysis/pattern_configurations" target="_blank" rel="noopener noreferrer">octodemo → Pattern configurations ↗</a>。<b>Enterprise setting</b> 列でパターンごとに ON / OFF を切り替える。<b>Alert total</b>・<b>False positives</b>・<b>Bypass rate</b> が並ぶので、ノイズと risk のバランスを実データで説明できる。</p>
-<p class="demo-out">一覧は<b>フラット</b>で、provider と generic の区別も絞り込みもない点に注意。generic は private key と接続文字列（<code class="demo-path">rsa_private_key</code>、<code class="demo-path">postgres_connection_string</code> など）で、<b>GitHub default</b> はいずれも Disabled。</p>
+<p class="demo-out">同じページは <b>何を検出するのか</b> のスライドでも扱う（generic patterns を掘り出す）。</p>
 </li>
 <li>
 <p class="demo-step-title">BYPASS PUSH PROTECTION</p>
@@ -189,7 +189,34 @@ Secret Scanning は 5 つの機能で構成される。入口を塞ぐ **Push pr
 </div>
 </div>
 
-## 何を検出するのか
+## 何を検出するのか <input type="checkbox" id="demo-secret-detect" class="demo-toggle" /><label class="h2-demo" for="demo-secret-detect">&#9658; DEMO</label>
+
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-secret-detect" aria-label="Close demo steps"></label>
+<div class="demo-window" role="group" aria-label="Demo steps">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">検出タイプ</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-secret-detect" aria-label="Close">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">GENERIC PATTERNS はどこに隠れているか</p>
+<p><a href="https://github.com/enterprises/octodemo/settings/security_analysis/pattern_configurations" target="_blank" rel="noopener noreferrer">octodemo → Pattern configurations ↗</a> を開き、default patterns タブをスクロールする。</p>
+<p class="demo-out">一覧は<b>フラット</b>。カテゴリ列も provider / generic の区別も絞り込みもない。generic patterns は確かに存在するが、generic とは表示されない。</p>
+<p>名前で指し示す。この 10 個が generic patterns のすべて：</p>
+<p><code class="demo-path">rsa_private_key</code> <code class="demo-path">openssh_private_key</code> <code class="demo-path">ec_private_key</code> <code class="demo-path">pgp_private_key</code> <code class="demo-path">generic_private_key</code> <code class="demo-path">mongodb_connection_string</code> <code class="demo-path">mysql_connection_url</code> <code class="demo-path">postgres_connection_string</code> <code class="demo-path">http_basic_authentication_header</code> <code class="demo-path">http_bearer_authentication_header</code></p>
+<p class="demo-out">いずれも <b>GitHub default</b> は <b>Disabled</b>。検知は動くが push protection は効かない。<b>Enterprise setting</b> 列で ON にして初めて対象になる。</p>
+</li>
+<li>
+<p class="demo-step-title">CUSTOM PATTERN と DRY RUN</p>
+<p><code class="demo-path">Settings → Advanced Security → Custom patterns → New pattern</code></p>
+<p>該当する secret はデモリポジトリに仕込み済みなので、パターンを作るだけでよい：</p>
+<p><b>Pattern name</b> — <code class="demo-path">Octodemo internal service token</code></p>
+<p><b>Secret format</b> — <code class="demo-path">octodemo_(live|test)_[A-Za-z0-9]{32}</code></p>
+<p><b>Test string</b> — <code class="demo-path">octodemo_live_L1QNGy4DLxQJ8C85kfwP0lmvCHLDuVxJ</code></p>
+<p>Test string が緑にならないと保存できない。緑になったら <b>Save and dry run</b>。</p>
+<p class="demo-out">dry run は<b>アラートを作らずに</b>仕込んだ secret を検出する。結果を確認してから <b>Publish pattern</b>、必要なら push protection も ON にする。</p>
+</li>
+</ol>
+</div>
+</div>
 
 検出エンジンは **4 種類**。パートナー固有の厳密な形式から、AI しか拾えない非構造化 secret まで多層でカバーする。
 
@@ -209,14 +236,14 @@ Secret Scanning は 5 つの機能で構成される。入口を塞ぐ **Push pr
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🧪</span><span class="det-name">Generic patterns</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🧪</span><span class="det-title">Generic patterns</span></p>
-<p class="det-why">private key、接続文字列、HTTP basic auth などの汎用パターン。網が広い分、provider patterns よりトリアージ前提で運用する。</p>
+<p class="det-why">private key、接続文字列、HTTP basic auth などの汎用パターン。網が広い分、provider patterns よりトリアージ前提で運用する。<b>デフォルトでは push protection の対象外</b>で、Pattern configurations でパターンごとに ON にする必要がある。</p>
 </div>
 </details>
 <details class="det-pick" name="ss-detect">
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI-detected secrets</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">AI-detected secrets</span></p>
-<p class="det-why">パスワードなどの<b>非構造化 secret</b> を AI で検出。正規表現では届かない領域をカバーする。</p>
+<p class="det-why">パスワードなどの<b>非構造化 secret</b> を AI で検出。正規表現では届かない領域をカバーする。どう設定しても <b>push protection も validity check も非対応</b>で、アラートとしてトリアージする。</p>
 </div>
 </details>
 <details class="det-pick" name="ss-detect">
@@ -232,9 +259,6 @@ Secret Scanning は 5 つの機能で構成される。入口を塞ぐ **Push pr
 </div>
 <p class="det-scope"><span class="det-scope-k">📚 対象</span><span class="det-scope-v">コードだけでなく<b>全ブランチの Git 履歴全体</b>、Issue・PR・<b>GitHub Discussions</b>・Wiki・secret gists まで。新しい secret type の追加時に再スキャンされる。</span></p>
 </div>
-
-
-> 🤖 誤検知が増えがちな 2 つ。Generic は **デフォルトでは push protection の対象外** — Organization / Enterprise の `Settings → Advanced Security → Global settings → Pattern configurations` で明示的に対象に加える必要がある。**AI-detected（password）はどう設定しても push protection も validity check も非対応**。トリアージ前提で運用する。
 
 ## 漏洩した時の対応フロー
 
