@@ -247,36 +247,38 @@ When a secret is found, **remediation matters more than detection**.
 
 ## Getting started (fastest path)
 
-**Step 1 — Enable Push protection (highest priority first)**
+<div class="setup-cards">
+  <div class="setup-card">
+    <div class="setup-card-head">
+      <code>Settings → Advanced Security</code>
+      <span class="setup-card-tag tag-cyan">▸ STEP 1 · PUSH PROTECTION</span>
+    </div>
+    <p>Blocks <strong>new</strong> secrets at push time.</p>
+  </div>
+  <div class="setup-card">
+    <div class="setup-card-head">
+      <code>Security → Secret scanning</code>
+      <span class="setup-card-tag tag-magenta">▸ STEP 2 · EXISTING LEAKS</span>
+    </div>
+    <p>Scans <strong>past history</strong> too. Rotate down the list.</p>
+  </div>
+  <div class="setup-card">
+    <div class="setup-card-head">
+      <code>… → Custom patterns</code>
+      <span class="setup-card-tag tag-cyan">▸ STEP 3 · CUSTOM PATTERNS</span>
+    </div>
+    <p>Your own token formats, by regex.</p>
+  </div>
+  <div class="setup-card">
+    <div class="setup-card-head">
+      <code>Org → … → Configurations</code>
+      <span class="setup-card-tag tag-magenta">▸ STEP 4 · ROLL OUT</span>
+    </div>
+    <p>One config applies all of it, org-wide.</p>
+  </div>
+</div>
 
-```
-Repo → Settings → Advanced Security
-  ✅ Secret Protection   → Enable
-  ✅ Push protection     → Enable
-```
-
-Repo-level push protection is **on by default and free for public repositories**. Private and internal repositories require Secret Protection / GHAS. User-level push protection is also free, but it only protects pushes to public repositories.
-
-**Step 2 — Scan for existing leaks**
-
-Once enabled, past commit history is automatically scanned. Alerts will appear in the Security and quality tab — work through them from the top, rotating each secret.
-
-**Step 3 — Add custom patterns**
-
-```
-Repo → Settings → Advanced Security → Secret Protection → Custom patterns → New pattern
-Org  → Settings → Advanced Security → Global settings   → Custom patterns → New pattern
-```
-
-Register your own token format with a regex. Custom patterns require Secret Protection / GHAS for both public and private repositories. Use **Save and dry run** to check for false positives before you **Publish pattern**, then optionally turn on push protection for that pattern.
-
-**Step 4 — Enable org-wide / enterprise-wide**
-
-Use a **security configuration** (`Org → Settings → Advanced Security → Configurations`) to apply secret scanning, push protection, and generic patterns to new and existing repositories at once. Enterprise owners can create a custom configuration enterprise-wide.
-
-> ⚠️ The legacy org REST API fields (`secret_scanning_enabled_for_new_repositories`, `secret_scanning_push_protection_enabled_for_new_repositories`, `secret_scanning_validity_checks_enabled`, and others) were **removed on 2026-04-21**. Use the security configurations API instead.
-
-📘 Details: <a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/enabling-secret-scanning-features/enabling-secret-scanning-for-your-repository" target="_blank" rel="noopener noreferrer">Enabling secret scanning for your repo ↗</a>
+> ⚠️ Legacy org REST API fields were removed **2026-04-21**. Use the security configurations API.
 
 ## Availability by product
 
