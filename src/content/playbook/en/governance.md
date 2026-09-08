@@ -67,8 +67,7 @@ First decision: how many orgs? Each model changes what everyone can see by defau
 </div>
 </details>
 <details class="det-pick" name="gov-org-model">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-name">2 · Red / green</span></summary>
-<div class="det-pane">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-name">2 · Red / Green / SB</span></summary><div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-title">Red-green-sandbox</span></p>
 <p class="det-why">You run <b>three orgs</b>. <b>🟢 Green</b> is the default home, ~90% of repos: <b>everyone reads and pushes from day one</b>, so InnerSource happens (<b>base permission = Write</b>). <b>🔴 Red</b> is confidential, <b>invite-only</b> (<b>base permission = None</b>). <b>🟡 Sandbox</b> is for experiments, and takes personal repos if you block them (<b>base permission = Write</b>).</p>
 </div>

@@ -67,8 +67,7 @@ links:
 </div>
 </details>
 <details class="det-pick" name="gov-org-model">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-name">2 · Red / green</span></summary>
-<div class="det-pane">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-name">2 · Red / Green / SB</span></summary><div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-title">Red-green-sandbox</span></p>
 <p class="det-why">org を <b>3 つ</b>持つ。<b>🟢 Green</b> は既定の置き場で、repo の約 9 割。<b>全社員が最初から読めて push もできる</b>ため InnerSource が回る（<b>base permission = Write</b>）。<b>🔴 Red</b> は機密用で、<b>招待された人しか中が見えない</b>（<b>base permission = None</b>）。<b>🟡 Sandbox</b> は実験場。個人 repo を禁止するならその受け皿になる（<b>base permission = Write</b>）。</p>
 </div>
