@@ -79,7 +79,11 @@ First decision: how many orgs? Each model sets a different base permission.
 </div>
 </details>
 </div>
-<div class="det-screen"><p class="det-empty">SELECT A MODEL ▸</p></div>
+<div class="det-screen det-has-case"><div class="det-case">
+<p class="det-case-k">🏢 FIELD CASE — RICOH</p>
+<p class="det-case-v">One org per department meant <b>100+ orgs</b> and no way to find code. Now <b>one shared org</b> everyone can join hosts InnerSource and <b>publishes the enterprise settings as Markdown</b>.</p>
+<p class="det-case-src"><a href="https://octonihon.github.io/events/2026-03-24-GitHub-OctoNihon-Forum/20260324_OctoNihon_Ricoh.pdf" target="_blank" rel="noopener noreferrer">OctoNihon Forum 2026-03 · Ricoh talk (PDF, Japanese) ↗</a></p>
+</div></div>
 </div>
 <p class="det-scope"><span class="det-scope-k">📚 Choosing</span><span class="det-scope-v">Follow <b>collaboration boundaries</b>, not the org chart. One org per team is the classic mistake. Org names are unique across all of GitHub.com, so agree naming first.</span></p>
 </div>

@@ -3691,6 +3691,29 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     letter-spacing: 0.14em;
     color: rgba(232, 244, 255, 0.4);
   }
+
+  /* Field case parked in the readout's resting state. Any opened pane
+     covers it, so it costs no height and fills space that was idle. */
+  .prose-akq .det-case {
+    align-self: stretch;
+    width: 100%;
+    margin: 0;
+    padding: 0.15em 0.6em;
+    font-size: 0.78em;
+    line-height: 1.55;
+    color: rgba(232, 244, 255, 0.72);
+  }
+  .prose-akq .det-case-k {
+    margin: 0 0 0.3em;
+    letter-spacing: 0.08em;
+    color: #ffb000;
+  }
+  .prose-akq .det-case-v { margin: 0; }
+  .prose-akq .det-case-v b,
+  .prose-akq .det-case-v strong { color: #9bbc0f; font-weight: normal; }
+  .prose-akq .det-case-src { margin: 0.35em 0 0; font-size: 0.92em; }
+  .prose-akq .det-case-src a { color: #ffb000; }
+  .prose-akq .det-case-src a:hover { color: #ff2e88; }
   .prose-akq .det-pane {
     position: absolute;
     top: 0;
@@ -3802,6 +3825,16 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   @media (max-width: 640px) {
     .prose-akq .det-split { display: block; }
     .prose-akq .det-screen { display: none; }
+    /* A screen holding a case still has to render: it is the only place
+       that carries the link, and there is no pane to overlay it here. */
+    .prose-akq .det-screen.det-has-case {
+      display: block;
+      min-height: 0;
+      padding: 0;
+      border: none;
+      background: none;
+    }
+    .prose-akq .det-case { padding: 0.15em 0; }
     .prose-akq .det-btn { font-size: 0.85em; }
     .prose-akq .det-pane {
       position: static;
