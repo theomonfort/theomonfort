@@ -27,9 +27,6 @@ links:
     label: Configuring enterprise managed settings
     url: https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-agents/configure-enterprise-managed-settings
   - group: 📖 Official docs
-    label: Enterprise managed settings reference (all keys)
-    url: https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings
-  - group: 📖 Official docs
     label: About Copilot auto model selection
     url: https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/auto-model-selection
   - group: 📰 Announcement
@@ -38,52 +35,66 @@ links:
   - group: 📰 Announcement
     label: "Enterprises can default to auto model selection (2026-07-01)"
     url: https://github.blog/changelog/2026-07-01-enterprises-can-default-to-auto-model-selection/
-  - group: 📰 Announcement
-    label: "Enterprise managed settings now apply to the GitHub Copilot app (2026-07-27)"
-    url: https://github.blog/changelog/2026-07-27-enterprise-managed-settings-now-apply-to-the-github-copilot-app/
-  - group: 📰 Announcement
-    label: "Enterprise managed settings in GitHub Copilot for JetBrains (2026-08-18)"
-    url: https://github.blog/changelog/2026-08-18-enterprise-managed-settings-in-github-copilot-for-jetbrains/
 ---
-
 
 ## In one line
 
 <div class="hero-quote">
   <p>
-    Governance is about controlling <strong>"who can do what"</strong> in layers.
+    Governance is deciding <strong>who can do what</strong>, in layers.
   </p>
   <p>
-    Cover repository <strong>permission roles</strong>, the repo → org → enterprise <strong>policy</strong> hierarchy, and <strong>managed settings</strong> that centrally govern Copilot.
+    Set it in this order: <strong>orgs</strong> → <strong>access</strong> → <strong>policies</strong> → <strong>repo roles</strong>.
   </p>
 </div>
 
-## Permissions
+## Three org models <a class="h2-doc" href="https://learn.github.com/well-architected/governance/recommendations/governance-administration-essentials" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-Assign roles per repository to control who can do what. Roles are **cumulative**: each higher role includes everything below it, plus more. Not sure of your own role in a repo? Run `gh api repos/OWNER/REPO --jq .permissions`.
+Start here: how many organizations do you run? Each shape has its own base permission.
 
-| Role | What you can do (lower role + extra) |
-| --- | --- |
-| 👀 Read | View, clone, open issues |
-| 🔺 Triage | **Read +** manage Issues/PRs (label, assign, close/reopen) |
-| ✍️ Write | **Triage +** push, merge |
-| 🛠️ Maintain | **Write +** manage some repo settings (non-destructive) |
-| 👑 Admin | **Maintain +** full control (access mgmt, deletion, visibility) |
+<div class="det-widget det-compact">
+<p class="det-hint">▸ Click a model</p>
+<div class="det-split">
+<div class="det-list">
+<details class="det-pick" name="gov-org-model">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🏛️</span><span class="det-name">1 · Single org</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">🏛️</span><span class="det-title">Single organization</span></p>
+<p class="det-why">Everything in one org; teams and repo permissions do the rest. Base <code>none</code> is safe but silos people. Fix that with an <b>all-members team added to repos by default</b>.</p>
+</div>
+</details>
+<details class="det-pick" name="gov-org-model">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-name">2 · Red / green</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-title">Red-green-sandbox</span></p>
+<p class="det-why"><b>Green</b> holds ~90% of repos, base <code>write</code>, innersource on. <b>Red</b> is need-to-know, base <code>none</code>. <b>Sandbox</b> is for experiments — required if you block personal repos.</p>
+</div>
+</details>
+<details class="det-pick" name="gov-org-model">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🧩</span><span class="det-name">3 · Portfolio</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">🧩</span><span class="det-title">Portfolio company</span></p>
+<p class="det-why">One org per <b>top-level division</b> (one below the CEO). Reorgs happen inside a division, so those survive. Orgs move between enterprises, which helps with M&amp;A.</p>
+</div>
+</details>
+</div>
+<div class="det-screen"><p class="det-empty">SELECT A MODEL ▸</p></div>
+</div>
+<p class="det-scope"><span class="det-scope-k">📚 Choosing</span><span class="det-scope-v">Follow <b>collaboration boundaries</b>, not the org chart. One org per team is the classic mistake. Org names are unique across all of GitHub.com, so agree naming first.</span></p>
+</div>
 
-> 🧩 If the 5 built-in roles don't fit, create a **custom repository role at the organization level**: pick any base role (Read–Maintain) and **add or remove** just the fine-grained permissions you need. <a class="retro-link" href="https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/managing-custom-repository-roles-for-an-organization" target="_blank" rel="noopener noreferrer">Custom repository roles ↗</a>
+## Granting access
 
-## Recommended access flow
-
-Don't grant to individuals. Make **your IdP (Okta) the single source**, provision both Enterprise and Org teams, and assign teams to repos.
+Now let people in: **IdP → teams → repos**. Never individuals.
 
 ```mermaid
 flowchart LR
   IDP["🪪 IdP (Okta)<br/>single source"]
-  ENT["🏛️ Enterprise Team<br/>Admin / Security · across all orgs"]
-  ORG["🏢 Org Team<br/>this org only · mirror of org chart"]
+  ENT["🏛️ Enterprise Team<br/>Admin · all orgs"]
+  ORG["🏢 Org Team<br/>this org · from org chart"]
   REPO["📦 Repository"]
-  IDP -->|SCIM / Team sync| ENT
-  IDP -->|SCIM / Team sync| ORG
+  IDP -->|SCIM| ENT
+  IDP -->|SCIM| ORG
   ORG -->|Write etc.| REPO
   ENT -->|Admin| REPO
 
@@ -97,88 +108,356 @@ flowchart LR
   class REPO repo
 ```
 
-- 🏛️ **Enterprise Team** — Admin / Security roles that span **all orgs**; defined once at the enterprise
-- 🏢 **Org Team** — specific to this org; mirrors the org chart and is assigned to repos
-- 🪪 Both **provisioned from Okta** (<a class="retro-link" href="/theomonfort/playbook/enterprise-setup">Enterprise Setup ↗</a>)
-
-> 🎯 **Keep it minimal:** ① single source = IdP　② grant repo access **via teams**　③ elevate via an **extra team**　④ **least privilege**
-
 ## Policies
 
-Policies live at the **organization** and **enterprise** levels, not the repository. A repo only **inherits** what's allowed above: feature access (Codespaces machines, Copilot, Actions, runners) is granted from org / enterprise, and the repo has **no policy control** of its own.
+People are in. Policies decide what they may do — set at org and enterprise, never at the repo.
 
-- 🏛️ **Enterprise**: guardrails across all orgs, SSO/SCIM, allowed features, base policies
-- 🏢 **Org**: member privileges, repo creation & visibility, 2FA, Copilot / Codespaces / Actions access
-- 📦 **Repo**: inherits only, consumes the features enabled above, sets no policy
-- 🔁 Enterprise → Org → Repo: settings flow down (an org can tighten, not loosen, enterprise rules)
+- 🏛️ **Enterprise** — SSO / SCIM, allowed features, base policy for every org
+- 🏢 **Org** — member privileges, repo creation, 2FA, Copilot and Actions access
+- 📦 **Repo** — inherits only. It consumes features, it sets no policy.
+- 🔁 Rules flow **down**. An org can tighten enterprise rules, never loosen them.
 
-> 🎯 Don't tweak repos one by one. Set guardrails top-down at org / enterprise. <a class="retro-link" href="https://docs.github.com/en/organizations/managing-organization-settings" target="_blank" rel="noopener noreferrer">Organization policies ↗</a> · <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/enforcing-policies" target="_blank" rel="noopener noreferrer">Enterprise policies ↗</a>
+> 🎯 Set guardrails top-down. Never repo by repo. <a class="retro-link" href="https://docs.github.com/en/organizations/managing-organization-settings" target="_blank" rel="noopener noreferrer">Org policies ↗</a> · <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/enforcing-policies" target="_blank" rel="noopener noreferrer">Enterprise policies ↗</a>
+
+## Repository roles
+
+Policy sets what is possible; repo roles set who does it. Roles are cumulative.
+
+<div class="tbl-compact">
+
+| Role | Adds to the role below |
+| --- | --- |
+| 👀 Read | View, clone, open issues |
+| 🔺 Triage | Manage issues and PRs — label, assign, close |
+| ✍️ Write | Push and merge |
+| 🛠️ Maintain | Non-destructive repo settings |
+| 👑 Admin | Full control — access, visibility, deletion |
+
+</div>
+
+> 🧩 If none fit, build a **custom role** at org level from any base role. <a class="retro-link" href="https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/managing-custom-repository-roles-for-an-organization" target="_blank" rel="noopener noreferrer">Custom roles ↗</a>
+
+## 12 anti-patterns
+
+That is the structure. Here is what breaks it. **01, 02 and 11 are the hard ones to undo.**
+
+<div class="grd-widget grd-compact">
+<p class="grd-hint">▸ Click a number — the damage, then the fix</p>
+<div class="grd-split">
+<div class="grd-board">
+<details class="grd-pick" name="gov-anti">
+<summary class="grd-btn"><span class="grd-num">01</span><span class="grd-name">Org per team</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">01</span><span class="grd-title">One org per team or project</span></p>
+<p class="grd-row"><span class="grd-k">❌ Result</span><span class="grd-v">Collaboration fragments, admin work multiplies, innersource stops working.</span></p>
+<p class="grd-row"><span class="grd-k">✅ Instead</span><span class="grd-v">Draw the boundary with <b>teams and repo permissions</b> inside one org.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-anti">
+<summary class="grd-btn"><span class="grd-num">02</span><span class="grd-name">Orgs = org chart</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">02</span><span class="grd-title">Orgs mapped to the management hierarchy</span></p>
+<p class="grd-row"><span class="grd-k">❌ Result</span><span class="grd-v">Every reorg forces a matching GitHub restructure.</span></p>
+<p class="grd-row"><span class="grd-k">✅ Instead</span><span class="grd-v">Map only to the <b>highest, static divisions</b> — or not at all.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-anti">
+<summary class="grd-btn"><span class="grd-num">03</span><span class="grd-name">Admin as base</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">03</span><span class="grd-title">Admin granted as the base permission</span></p>
+<p class="grd-row"><span class="grd-k">❌ Result</span><span class="grd-v">Every member gets destructive rights on every repo.</span></p>
+<p class="grd-row"><span class="grd-k">✅ Instead</span><span class="grd-v">Base <b>Read or Write</b>, then elevate through teams.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-anti">
+<summary class="grd-btn"><span class="grd-num">04</span><span class="grd-name">Allow all Actions</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">04</span><span class="grd-title">"Allow all actions" with no review</span></p>
+<p class="grd-row"><span class="grd-k">❌ Result</span><span class="grd-v">Unvetted third-party actions become a supply-chain path into your builds.</span></p>
+<p class="grd-row"><span class="grd-k">✅ Instead</span><span class="grd-v">Keep an <b>allow list</b> and pin actions by <b>commit SHA</b>.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-anti">
+<summary class="grd-btn"><span class="grd-num">05</span><span class="grd-name">Unlimited spending</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">05</span><span class="grd-title">Spending limits left unlimited</span></p>
+<p class="grd-row"><span class="grd-k">❌ Result</span><span class="grd-v">Invoiced accounts default to unlimited, so overspend is silent.</span></p>
+<p class="grd-row"><span class="grd-k">✅ Instead</span><span class="grd-v">Set explicit limits and track them with <b>cost centers</b>.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-anti">
+<summary class="grd-btn"><span class="grd-num">06</span><span class="grd-name">Manual provisioning</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">06</span><span class="grd-title">Manual user provisioning only</span></p>
+<p class="grd-row"><span class="grd-k">❌ Result</span><span class="grd-v">Leavers keep their access, because nothing revokes it.</span></p>
+<p class="grd-row"><span class="grd-k">✅ Instead</span><span class="grd-v"><b>SCIM</b> provisioning and deprovisioning from the IdP.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-anti">
+<summary class="grd-btn"><span class="grd-num">07</span><span class="grd-name">API polling</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">07</span><span class="grd-title">Polling the API instead of using webhooks</span></p>
+<p class="grd-row"><span class="grd-k">❌ Result</span><span class="grd-v">Burns the rate limit and adds load for no new information.</span></p>
+<p class="grd-row"><span class="grd-k">✅ Instead</span><span class="grd-v">Event-driven <b>webhooks</b>.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-anti">
+<summary class="grd-btn"><span class="grd-num">08</span><span class="grd-name">Log retention</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">08</span><span class="grd-title">Ignoring audit log retention</span></p>
+<p class="grd-row"><span class="grd-k">❌ Result</span><span class="grd-v">Default retention is short, so evidence is gone when you need it.</span></p>
+<p class="grd-row"><span class="grd-k">✅ Instead</span><span class="grd-v">Configure <b>audit log streaming</b> or export.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-anti">
+<summary class="grd-btn"><span class="grd-num">09</span><span class="grd-name">App per org</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">09</span><span class="grd-title">Enterprise-wide apps installed org by org</span></p>
+<p class="grd-row"><span class="grd-k">❌ Result</span><span class="grd-v">Admin work multiplies, approvals scatter, configuration drifts.</span></p>
+<p class="grd-row"><span class="grd-k">✅ Instead</span><span class="grd-v"><b>Enterprise-level</b> GitHub App installation.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-anti">
+<summary class="grd-btn"><span class="grd-num">10</span><span class="grd-name">Owner for everything</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">10</span><span class="grd-title">Owner where a custom role would do</span></p>
+<p class="grd-row"><span class="grd-k">❌ Result</span><span class="grd-v">Enterprise and Org Owner are far broader than the actual need.</span></p>
+<p class="grd-row"><span class="grd-k">✅ Instead</span><span class="grd-v"><b>Custom roles</b> scoped to one capability.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-anti">
+<summary class="grd-btn"><span class="grd-num">11</span><span class="grd-name">Late model switch</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">11</span><span class="grd-title">Changing the user access model after rollout</span></p>
+<p class="grd-row"><span class="grd-k">❌ Result</span><span class="grd-v">Standard ↔ EMU is a migration, not a setting you flip.</span></p>
+<p class="grd-row"><span class="grd-k">✅ Instead</span><span class="grd-v">Choose it <b>when the enterprise is created</b>.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-anti">
+<summary class="grd-btn"><span class="grd-num">12</span><span class="grd-name">No offboarding</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">12</span><span class="grd-title">No offboarding path</span></p>
+<p class="grd-row"><span class="grd-k">❌ Result</span><span class="grd-v">Dormant accounts keep access and keep consuming licences.</span></p>
+<p class="grd-row"><span class="grd-k">✅ Instead</span><span class="grd-v"><b>Unaffiliated users policy</b> plus SCIM deprovisioning.</span></p>
+</div>
+</details>
+</div>
+<div class="grd-screen"><p class="grd-empty">SELECT A NUMBER ▸</p></div>
+</div>
+</div>
+
+## The 18 guardrails <a class="h2-doc" href="https://learn.github.com/well-architected/governance/recommendations/governance-policies-best-practices" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+Now the values to set, and who sets them. **Short on time? 03, 15, 18.**
+
+<div class="grd-widget grd-compact">
+<p class="grd-hint">▸ Click a number · ENT / ORG / REPO = where you set it</p>
+<div class="grd-split">
+<div class="grd-board">
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">01</span><span class="grd-name">Actions scope</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">01</span><span class="grd-title">Actions execution scope</span><span class="grd-lvl">ORG</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ Set to</span><span class="grd-v">Restrict Actions to <b>specific repositories</b>, not all of them.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">02</span><span class="grd-name">Allowed actions</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">02</span><span class="grd-title">Which actions may run</span><span class="grd-lvl">ENT</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ Set to</span><span class="grd-v"><b>GitHub-created and Verified Creator</b> only.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">03</span><span class="grd-name">Workflow token</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">03</span><span class="grd-title">Default workflow token permission</span><span class="grd-lvl">ENT / ORG</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ Set to</span><span class="grd-v"><b>read-only</b>. It ships as read/write.</span></p>
+<p class="grd-row"><span class="grd-k">💡 Why</span><span class="grd-v">A stolen token can otherwise write through Actions.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">04</span><span class="grd-name">PR auto-approval</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">04</span><span class="grd-title">Automatic approval of pull requests</span><span class="grd-lvl">ENT / ORG</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ Set to</span><span class="grd-v"><b>Disabled</b>. It is on by default.</span></p>
+<p class="grd-row"><span class="grd-k">💡 Why</span><span class="grd-v">Otherwise a PR can be merged around code review.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">05</span><span class="grd-name">Forking</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">05</span><span class="grd-title">Repository forking</span><span class="grd-lvl">ENT / ORG</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ Set to</span><span class="grd-v"><b>Off</b> unless a repo clearly needs it.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">06</span><span class="grd-name">Visibility change</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">06</span><span class="grd-title">Changing repository visibility</span><span class="grd-lvl">ENT / ORG</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ Set to</span><span class="grd-v">Restrict <b>who</b> can flip a repo's visibility.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">07</span><span class="grd-name">Fine-grained PATs</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">07</span><span class="grd-title">Fine-grained personal access tokens</span><span class="grd-lvl">ENT / ORG</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ Set to</span><span class="grd-v">Require an <b>approval flow</b>.</span></p>
+<p class="grd-row"><span class="grd-k">💡 Why</span><span class="grd-v">You get a review of who reaches what, with which permission.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">08</span><span class="grd-name">Outside collabs</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">08</span><span class="grd-title">Inviting outside collaborators</span><span class="grd-lvl">ENT</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ Set to</span><span class="grd-v"><b>Owners only</b>. It ships as "No policy", so any member can invite.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">09</span><span class="grd-name">Public repos</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">09</span><span class="grd-title">Creating public repositories</span><span class="grd-lvl">ENT</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ Set to</span><span class="grd-v"><b>Blocked</b>, unless open source is governed separately.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">10</span><span class="grd-name">Webhook secret</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">10</span><span class="grd-title">Webhook secret</span><span class="grd-lvl">ORG / REPO</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ Set to</span><span class="grd-v"><b>Always set</b>, so the receiver can verify the signature.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">11</span><span class="grd-name">Webhook SSL</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">11</span><span class="grd-title">Webhook transport</span><span class="grd-lvl">ORG / REPO</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ Set to</span><span class="grd-v"><b>SSL</b> on every endpoint.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">12</span><span class="grd-name">Rulesets</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">12</span><span class="grd-title">Repository rulesets</span><span class="grd-lvl">ENT / ORG / REPO</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ Set to</span><span class="grd-v">Use rulesets for reviews, checks and protected branches.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">13</span><span class="grd-name">CODEOWNERS</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">13</span><span class="grd-title">CODEOWNERS</span><span class="grd-lvl">REPO</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ Set to</span><span class="grd-v">Define it under <code>.github/</code>, with an explicit owner per path.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">14</span><span class="grd-name">Commit signing</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">14</span><span class="grd-title">Commit signing</span><span class="grd-lvl">REPO</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ Set to</span><span class="grd-v"><b>Required</b> wherever possible.</span></p>
+<p class="grd-row"><span class="grd-k">💡 Why</span><span class="grd-v">Blocks commit injection. Copilot cloud agent commits are already signed.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">15</span><span class="grd-name">Ruleset bypass</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">15</span><span class="grd-title">Bypassing rulesets</span><span class="grd-lvl">REPO</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ Set to</span><span class="grd-v"><b>Not allowed</b>. A ruleset with a bypass list is a suggestion.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">16</span><span class="grd-name">Runner groups</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">16</span><span class="grd-title">Runner groups</span><span class="grd-lvl">ENT / ORG</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ Set to</span><span class="grd-v">Assign each group to a <b>limited set of repos</b>.</span></p>
+<p class="grd-row"><span class="grd-k">💡 Why</span><span class="grd-v">A group open to every repo exposes self-hosted runners.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">17</span><span class="grd-name">Push protection</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">17</span><span class="grd-title">Bypassing push protection</span><span class="grd-lvl">ORG</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ Set to</span><span class="grd-v">Limit to <b>named roles and teams</b>. By default anyone with write can bypass.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">18</span><span class="grd-name">Audit log stream</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">18</span><span class="grd-title">Audit log streaming</span><span class="grd-lvl">ENT</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ Set to</span><span class="grd-v"><b>Configured</b>, to your SIEM or object store.</span></p>
+<p class="grd-row"><span class="grd-k">💡 Why</span><span class="grd-v">The most forgotten item, and the best source for spotting abuse.</span></p>
+</div>
+</details>
+</div>
+<div class="grd-screen"><p class="grd-empty">SELECT A NUMBER ▸</p></div>
+</div>
+</div>
 
 ## Copilot managed settings (NEW)
 
-`copilot/managed-settings.json` defines one set of guardrails that supported clients enforce automatically, and a managed value **overrides** whatever a developer sets locally. Coverage spans **Copilot CLI, VS Code, JetBrains, the Copilot app, and Copilot cloud agent** — support varies per key.
+Same idea for Copilot clients: `copilot/managed-settings.json` overrides local settings. Order: **MDM → server-managed → file → user**. <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">All keys ↗</a>
 
-<div class="spec-widget">
+<div class="spec-widget spec-compact">
 <p class="spec-hint">▸ + reveals what the key controls · the date opens its changelog</p>
 <div class="spec-list">
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧠</span><span class="spec-key"><code>model</code></span><a class="spec-since" href="https://github.blog/changelog/2026-07-01-enterprises-can-default-to-auto-model-selection/" target="_blank" rel="noopener noreferrer">2026-07-01</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">Make <b>auto model selection</b> the default, so everyone starts on the routed model instead of picking one by hand.</p>
+<p class="spec-what">Make <b>auto model selection</b> the default, so nobody picks a model by hand.</p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🚧</span><span class="spec-key"><code>permissions.*</code></span><a class="spec-since" href="https://github.blog/changelog/2026-06-17-enterprise-managed-settings-now-support-bypass-permission-controls" target="_blank" rel="noopener noreferrer">2026-06-17</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">Block <b>bypass / YOLO mode</b>, and deny or gate sensitive operations behind an explicit approval.</p>
+<p class="spec-what">Block <b>bypass / YOLO mode</b>, and gate sensitive operations behind approval.</p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧩</span><span class="spec-key"><code>enabledPlugins</code> · marketplaces</span><a class="spec-since" href="https://github.blog/changelog/2026-08-26-enterprise-managed-settings-now-support-autoupdate-for-plugin-marketplaces" target="_blank" rel="noopener noreferrer">2026-08-26</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">Approve which plugins run and which marketplaces they come from, and keep them current with <b>autoUpdate</b>.</p>
+<p class="spec-what">Approve which plugins run and where they come from, with <b>autoUpdate</b>.</p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔌</span><span class="spec-key"><code>allowedMcpServers</code> · <code>deniedMcpServers</code></span><a class="spec-since" href="https://github.blog/changelog/2026-08-06-mcp-allowlists-in-enterprise-managed-settings/" target="_blank" rel="noopener noreferrer">2026-08-06</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">MCP allowlist matched by URL or command. <b>Fail-closed</b>: anything that isn't on the list doesn't run.</p>
+<p class="spec-what">MCP allowlist by URL or command. <b>Fail-closed</b>: off the list, it does not run.</p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📡</span><span class="spec-key"><code>telemetry</code></span><a class="spec-since" href="https://github.blog/changelog/2026-07-08-enterprise-managed-opentelemetry-export-for-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">2026-07-08</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what"><b>OpenTelemetry</b> export to your own collector, so usage lands in the observability stack you already run.</p>
+<p class="spec-what"><b>OpenTelemetry</b> export to your own collector.</p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">👥</span><span class="spec-key"><code>teams/</code> + <code>team-mappings.json</code></span><a class="spec-since" href="https://github.blog/changelog/2026-08-03-enterprise-team-specialization-for-managed-settings/" target="_blank" rel="noopener noreferrer">2026-08-03</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">Per-team specialization of the keys you marked <b>overridable</b>: one baseline, plus a variation per enterprise team.</p>
+<p class="spec-what">One baseline, plus a variation per enterprise team on <b>overridable</b> keys.</p>
 </details>
 </div>
 </div>
 
-> 🎯 Deploy it server-managed (from `.github-private`, next), via **<a class="retro-link" href="https://github.blog/changelog/2026-07-08-deploy-managed-copilot-settings-via-mdm-in-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">MDM ↗</a>** (Intune, Jamf, Group Policy), or as a device file. Precedence: **MDM → server-managed → file → user settings**. <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">All keys ↗</a>
-
 ## `.github-private` & source org
 
-GitHub centralizes Copilot governance in **one repository you own and review**, so guardrails stay **versioned, reviewable, and auditable**. You designate a **source organization** in **Enterprise → AI controls → Agents → Configuration source**. Its `.github-private` repository becomes the single source of truth for agents *and* client policy.
+They live in one repo you own, set in **Enterprise → AI controls → Agents**.
+
+<div class="pre-compact">
 
 ```text
 .github-private/
-├── agents/                     # custom agents published enterprise-wide
-├── .github/agents/             # staging — test before you publish
+├── agents/                    # published enterprise-wide
+├── .github/agents/            # staging, test before publishing
 └── copilot/
-    ├── managed-settings.json   # enterprise baseline
-    ├── team-mappings.json      # settings file → enterprise team slugs
-    └── teams/*.json            # per-team specialization
+    ├── managed-settings.json  # the baseline
+    ├── team-mappings.json     # file → enterprise team
+    └── teams/*.json           # per-team override
 ```
 
-- 🏢 **You pick the org, not the repo** — the name `.github-private` and the path `copilot/managed-settings.json` are fixed
-- 🔒 **Applies to everyone** on the enterprise's Copilot plan, whether or not they can access the repo
-- 🚀 **Publish an agent** by moving its file from `.github/agents/` to `agents/`
-- 🛡️ **Protect it** with CODEOWNERS and a ruleset targeting `copilot/**` and `agents/**`
+</div>
 
-> 🎯 Set the repo to **internal** so any member can propose a change by PR — governance stays open to contribution while merge stays controlled.
+- 🏢 You pick the **org**. The repo name and `copilot/` paths are fixed.
+- 🔒 Applies to **everyone** on the plan, repo access or not. Keep it **internal** and guard `copilot/**` with CODEOWNERS.
 
 ## ★ Where it fits
 
-Governance is about controlling "who does what" **in layers**.
+Three layers, one rule: set them from the top.
+
+<div class="tbl-compact">
 
 | Layer | Scope | Examples |
 | --- | --- | --- |
+| 🏢 Policies | org → enterprise | 2FA, visibility, feature access |
 | 👤 Permission roles | Repository | Read / Write / Admin |
-| 🏢 Policies | org → enterprise | Mandatory 2FA, visibility, feature access |
 | 🤖 Managed settings | Copilot clients | Default model, bypass lock, plugins |
 
-> 🎯 Don't wear yourself out per-repo. Enforcing top-down is the winning play.
+</div>
+
+> 🎯 Top-down wins. Per-repo does not scale.

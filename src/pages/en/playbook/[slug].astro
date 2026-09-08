@@ -3936,6 +3936,215 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     .prose-akq .rem-plate { animation: none; }
   }
 
+  /* ─────────────────────────────────────────────────────────────
+     Guardrail board — numbered chips with a pinned readout
+     The other reveal widgets top out around six full-width rows. A
+     twelve or eighteen item checklist laid out that way runs several
+     screens, and the audience loses the shape of the list. Compact
+     numbered chips keep the whole set on screen at once, and the
+     readout below is a fixed track (--grd-h, shared by the pane) so
+     opening a chip never moves the board. Native <details name>
+     gives exclusive open with no JS, so document mode and
+     presentation mode behave identically. Under 640px the board
+     folds to one column and the readout drops, leaving a plain
+     accordion.
+     ───────────────────────────────────────────────────────────── */
+  .prose-akq .grd-widget { margin: 1.2em 0; }
+  .prose-akq .grd-hint {
+    margin: 0 0 0.5em;
+    font-size: 0.9em;
+    letter-spacing: 0.08em;
+    color: #ffb000;
+    text-shadow: 0 0 8px rgba(255, 176, 0, 0.5);
+  }
+  .prose-akq .grd-split {
+    --grd-h: 8.25em;
+    position: relative;
+    display: grid;
+    grid-template-rows: auto var(--grd-h);
+    gap: 0.5em;
+  }
+  .prose-akq .grd-board {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-content: start;
+    gap: 0.25em;
+  }
+  .prose-akq .grd-pick { min-width: 0; }
+  .prose-akq .grd-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    padding: 0.25em 0.4em;
+    font-size: 0.78em;
+    line-height: 1.35;
+    color: rgba(232, 244, 255, 0.85);
+    background: rgba(10, 14, 39, 0.7);
+    border: 1px dashed color-mix(in srgb, var(--entry-accent, #00f0ff) 35%, transparent);
+    cursor: pointer;
+    list-style: none;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .prose-akq .grd-btn::-webkit-details-marker { display: none; }
+  .prose-akq .grd-btn:hover {
+    color: #e8f4ff;
+    background: color-mix(in srgb, var(--entry-accent, #00f0ff) 12%, transparent);
+  }
+  .prose-akq .grd-btn:focus-visible { outline: 2px solid #ffb000; outline-offset: 2px; }
+  .prose-akq .grd-pick[open] .grd-btn {
+    color: #05060f;
+    background: var(--entry-accent, #00f0ff);
+    border: 1px solid var(--entry-accent, #00f0ff);
+    box-shadow:
+      0 0 8px var(--entry-accent, #00f0ff),
+      0 0 24px color-mix(in srgb, var(--entry-accent, #00f0ff) 30%, transparent);
+  }
+  .prose-akq .grd-num {
+    flex: none;
+    font-family: 'VT323', monospace;
+    font-size: 1.25em;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    color: #ffb000;
+  }
+  .prose-akq .grd-pick[open] .grd-btn .grd-num { color: #05060f; }
+  .prose-akq .grd-name { flex: 1 1 auto; min-width: 0; overflow-wrap: break-word; }
+
+  /* The readout is drawn whether or not a chip is open, so the slide
+     keeps one height for the whole walkthrough. */
+  .prose-akq .grd-screen {
+    display: grid;
+    place-items: center;
+    padding: 0.5em;
+    border: 1px dashed color-mix(in srgb, var(--entry-accent, #00f0ff) 30%, transparent);
+    background: rgba(5, 6, 15, 0.55);
+  }
+  .prose-akq .grd-empty {
+    margin: 0;
+    font-size: 0.95em;
+    letter-spacing: 0.14em;
+    color: rgba(232, 244, 255, 0.4);
+  }
+  .prose-akq .grd-pane {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: var(--grd-h);
+    overflow-y: auto;
+    padding: 0.55em 0.7em 0.65em;
+    background: #05060f;
+    border: 2px solid var(--entry-accent, #00f0ff);
+    box-shadow:
+      0 0 8px color-mix(in srgb, var(--entry-accent, #00f0ff) 55%, transparent),
+      0 0 24px color-mix(in srgb, var(--entry-accent, #00f0ff) 25%, transparent);
+    animation: akq-grd-in 0.2s ease;
+  }
+  @keyframes akq-grd-in {
+    from { opacity: 0; transform: translateY(0.4em); }
+    to { opacity: 1; transform: none; }
+  }
+  .prose-akq .grd-head {
+    display: flex;
+    align-items: center;
+    gap: 0.45em;
+    margin: 0 0 0.4em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px dashed color-mix(in srgb, var(--entry-accent, #00f0ff) 35%, transparent);
+  }
+  .prose-akq .grd-head .grd-num { font-size: 1.55em; }
+  /* Not VT323 here: an entry title has to render Japanese too. */
+  .prose-akq .grd-title {
+    min-width: 0;
+    font-size: 0.95em;
+    line-height: 1.3;
+    letter-spacing: 0.04em;
+    color: var(--entry-accent, #00f0ff);
+  }
+  .prose-akq .grd-lvl {
+    flex: none;
+    margin-left: auto;
+    padding: 0 0.4em;
+    font-family: 'VT323', monospace;
+    font-size: 1em;
+    line-height: 1.35;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    color: #ffb000;
+    background: rgba(255, 176, 0, 0.12);
+    border: 1px solid currentColor;
+  }
+  .prose-akq .grd-row {
+    display: flex;
+    gap: 0.5em;
+    align-items: baseline;
+    margin: 0 0 0.3em;
+    font-size: 0.84em;
+    line-height: 1.6;
+    color: rgba(232, 244, 255, 0.9);
+  }
+  .prose-akq .grd-row:last-child { margin-bottom: 0; }
+  .prose-akq .grd-k {
+    flex: none;
+    width: 5.5em;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    color: #ffb000;
+  }
+  .prose-akq .grd-v { min-width: 0; }
+  .prose-akq .grd-v b,
+  .prose-akq .grd-v strong { color: #ffb000; font-weight: normal; }
+  .prose-akq .grd-pick[open] .grd-row:last-child .grd-v::after {
+    content: '▊';
+    margin-left: 0.15em;
+    color: #ffb000;
+    animation: akq-risk-blink 1s steps(1) infinite;
+  }
+
+  /* Narrow screens: three columns would shred the labels, so fold to
+     one column and let each pane open under its own chip. */
+  @media (max-width: 640px) {
+    .prose-akq .grd-split { display: block; }
+    .prose-akq .grd-screen { display: none; }
+    .prose-akq .grd-board { grid-template-columns: minmax(0, 1fr); }
+    .prose-akq .grd-btn { font-size: 0.85em; }
+    .prose-akq .grd-pane {
+      position: static;
+      height: auto;
+      margin: 0.2em 0 0.45em;
+      animation: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .prose-akq .grd-btn { transition: none; }
+    .prose-akq .grd-pane { animation: none; }
+    .prose-akq .grd-pick[open] .grd-row:last-child .grd-v::after { animation: none; }
+  }
+
+  /* Compact variant: shorter readout for slides that must fit a laptop viewport. */
+  .prose-akq .det-widget.det-compact .det-screen { min-height: 8.25em; }
+  .prose-akq .grd-widget.grd-compact .grd-split { --grd-h: 5.85em; }
+  .prose-akq .grd-widget.grd-compact .grd-hint { margin-bottom: 0.3em; }
+  .prose-akq .grd-widget.grd-compact .grd-pane { padding: 0.3em 0.7em 0.35em; }
+  .prose-akq .grd-widget.grd-compact .grd-head { margin-bottom: 0.25em; padding-bottom: 0.2em; }
+  .prose-akq .grd-widget.grd-compact .grd-row { margin-bottom: 0.2em; line-height: 1.45; }
+  .prose-akq .grd-widget.grd-compact .grd-btn { padding: 0.1em 0.35em; }
+  .prose-akq .grd-widget.grd-compact .grd-board {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.15em;
+  }
+  @media (max-width: 900px) {
+    .prose-akq .grd-widget.grd-compact .grd-board { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  /* Compact table: same look, tighter rows so a 5-row table clears a laptop viewport. */
+  .prose-akq .tbl-compact table { margin: 0.6em 0; }
+  .prose-akq .tbl-compact th,
+  .prose-akq .tbl-compact td { padding-top: 0.1em; padding-bottom: 0.1em; }
+  .prose-akq .spec-widget.spec-compact .spec-hint { margin-bottom: 0.3em; }
+  .prose-akq .spec-widget.spec-compact .spec-btn { padding-top: 0.16em; padding-bottom: 0.16em; }
+  .prose-akq .pre-compact pre { padding: 0.45em 0.9em; line-height: 1.25; margin: 0.5em 0; }
+  body.present-mode .prose-akq .pre-compact pre { padding: 0.9em 1.2em; margin: 0.6em 0; }
+
   /* ── Figure tabs: CSS-only switcher between alternative diagrams ──
      Radios must precede .figtabs-bar and the panels so the sibling
      combinator can drive both the active tab and the visible panel. */
