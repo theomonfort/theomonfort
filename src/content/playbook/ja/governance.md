@@ -50,10 +50,9 @@ links:
 
 ## Organization の 3 モデル <a class="h2-doc" href="https://learn.github.com/well-architected/governance/recommendations/governance-administration-essentials" target="_blank" rel="noopener noreferrer">📖 Docs</a> <a class="h2-doc" href="https://octonihon.github.io/events/2026-03-24-GitHub-OctoNihon-Forum/20260324_OctoNihon_Ricoh.pdf" target="_blank" rel="noopener noreferrer">🏢 リコー事例</a>
 
-まず org をいくつ作るか。モデルごとに base permission の置き方が変わる。
+まず org をいくつ作るか。モデルごとに、全社員が最初から何を見られるかが変わる。
 
 <div class="det-widget det-compact">
-<p class="det-scope det-scope-lead"><span class="det-scope-k">🔑 base permission</span><span class="det-scope-v">org の<b>全メンバー</b>が、その org の<b>全 repo</b> に最初から持つ権限。<code>none</code> = 招待された repo しか見えない、<code>read</code> = 全 repo を読める、<code>write</code> = 全 repo に push できる。team と repo の権限は、この上に<b>足される</b>だけ。下げられない。</span></p>
 <p class="det-hint">▸ モデルをクリック</p>
 <div class="det-split">
 <div class="det-list">
@@ -61,14 +60,14 @@ links:
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🏛️</span><span class="det-name">1 · 単一 org</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🏛️</span><span class="det-title">Single organization</span></p>
-<p class="det-why">すべてを 1 つの org に置き、team と repo 権限で分ける。base <code>none</code> は安全だがサイロ化するので、<b>全員 team を既定で repo に追加</b>して補う。</p>
+<p class="det-why">すべてを 1 つの org に置き、team と repo の権限で分ける。既定では<b>招待された repo しか見えない</b>ので安全だが、そのままだとサイロ化する。<b>全員 team を既定で repo に追加</b>して補う。</p>
 </div>
 </details>
 <details class="det-pick" name="gov-org-model">
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-name">2 · Red / green</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-title">Red-green-sandbox</span></p>
-<p class="det-why"><b>Green</b> に約 90% の repo、base <code>write</code>、innersource 有効。<b>Red</b> は need-to-know で base <code>none</code>。<b>Sandbox</b> は実験用で、個人 repo を禁止するなら必須。</p>
+<p class="det-why">org を <b>3 つ</b>持つ。<b>🟢 Green</b> は既定の置き場で、repo の約 9 割。<b>全社員が最初から読めて push もできる</b>ので InnerSource が回る。<b>🔴 Red</b> は機密用で、<b>招待された人しか中が見えない</b>。<b>🟡 Sandbox</b> は実験場。壊しても困らない場所で、個人 repo を禁止するならその受け皿になる。</p>
 </div>
 </details>
 <details class="det-pick" name="gov-org-model">
@@ -84,7 +83,6 @@ links:
 <p class="det-case-v">部門ごとに org を作る運用で <b>100 以上の org</b> に分裂し、コードが見つからなくなった。全社員が入れる<b>共有 org を 1 つ</b>開いて InnerSource の置き場にし、<b>enterprise の設定とポリシーも Markdown で同じ org に公開</b>した。</p>
 </div></div>
 </div>
-<p class="det-scope"><span class="det-scope-k">📚 選び方</span><span class="det-scope-v"><b>コラボレーションの境界</b>で切る。組織図ではない。org 名は GitHub.com 全体で一意なので、命名を先に決める。</span></p>
 </div>
 
 ## アクセスの付け方

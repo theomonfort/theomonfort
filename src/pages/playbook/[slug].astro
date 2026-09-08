@@ -3784,39 +3784,6 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .prose-akq .det-doc a { color: #ffb000; }
   .prose-akq .det-doc a:hover { color: #ff2e88; }
 
-  /* The scope line summarises where scanning reaches — it is not a
-     fifth engine, so it sits under the deck as a full-width plate. */
-  .prose-akq .det-scope {
-    display: flex;
-    gap: 0.5em;
-    align-items: baseline;
-    margin: 0.55em 0 0;
-    padding: 0.35em 0.5em;
-    font-size: 0.8em;
-    line-height: 1.65;
-    color: rgba(232, 244, 255, 0.78);
-    background: rgba(5, 6, 15, 0.6);
-    border-top: 2px solid rgba(255, 176, 0, 0.5);
-  }
-  .prose-akq .det-scope-k { flex: none; letter-spacing: 0.08em; color: #ffb000; }
-  .prose-akq .det-scope-v { min-width: 0; }
-  .prose-akq .det-scope b,
-  .prose-akq .det-scope strong { color: #ffb000; font-weight: normal; }
-
-  /* Lead variant: the same plate used to define a term before the deck,
-     so the rule sits under the text rather than above it. */
-  .prose-akq .det-scope-lead {
-    margin: 0 0 0.5em;
-    border-top: none;
-    border-bottom: 2px solid rgba(255, 176, 0, 0.5);
-  }
-  .prose-akq .det-scope-lead code {
-    padding: 0 0.25em;
-    font-size: 0.95em;
-    color: #9bbc0f;
-    background: rgba(155, 188, 15, 0.12);
-  }
-
   /* Narrow screens: two panes side by side would squeeze both, so drop
      the screen and let each pane open under its own row instead. */
   @media (max-width: 640px) {
@@ -4184,7 +4151,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
 
   /* Compact variant: shorter readout for slides that must fit a laptop viewport. */
-  .prose-akq .det-widget.det-compact .det-screen { min-height: 8.25em; }
+  .prose-akq .det-widget.det-compact .det-screen { min-height: 10.5em; }
   .prose-akq .grd-widget.grd-compact .grd-split { --grd-h: 5.85em; }
   .prose-akq .grd-widget.grd-compact .grd-hint { margin-bottom: 0.3em; }
   .prose-akq .grd-widget.grd-compact .grd-pane { padding: 0.3em 0.7em 0.35em; }

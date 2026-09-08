@@ -50,10 +50,9 @@ links:
 
 ## Three org models <a class="h2-doc" href="https://learn.github.com/well-architected/governance/recommendations/governance-administration-essentials" target="_blank" rel="noopener noreferrer">📖 Docs</a> <a class="h2-doc" href="https://octonihon.github.io/events/2026-03-24-GitHub-OctoNihon-Forum/20260324_OctoNihon_Ricoh.pdf" target="_blank" rel="noopener noreferrer">🏢 Ricoh case</a>
 
-First decision: how many orgs? Each model sets a different base permission.
+First decision: how many orgs? Each model changes what everyone can see by default.
 
 <div class="det-widget det-compact">
-<p class="det-scope det-scope-lead"><span class="det-scope-k">🔑 base permission</span><span class="det-scope-v">What <b>every member</b> of an org already has on <b>every repo</b> in it. <code>none</code> = only the repos you're added to, <code>read</code> = read them all, <code>write</code> = push to them all. Team and repo grants add on top; nothing takes it away.</span></p>
 <p class="det-hint">▸ Click a model</p>
 <div class="det-split">
 <div class="det-list">
@@ -61,14 +60,14 @@ First decision: how many orgs? Each model sets a different base permission.
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🏛️</span><span class="det-name">1 · Single org</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🏛️</span><span class="det-title">Single organization</span></p>
-<p class="det-why">Everything in one org; teams and repo permissions do the rest. Base <code>none</code> is safe but silos people. Fix that with an <b>all-members team added to repos by default</b>.</p>
+<p class="det-why">Everything in one org; teams and repo permissions do the rest. By default <b>you only see the repos you're added to</b> — safe, but it silos people. Fix that with an <b>all-members team added to repos by default</b>.</p>
 </div>
 </details>
 <details class="det-pick" name="gov-org-model">
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-name">2 · Red / green</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-title">Red-green-sandbox</span></p>
-<p class="det-why"><b>Green</b> holds ~90% of repos, base <code>write</code>, innersource on. <b>Red</b> is need-to-know, base <code>none</code>. <b>Sandbox</b> is for experiments — required if you block personal repos.</p>
+<p class="det-why">You run <b>three orgs</b>. <b>🟢 Green</b> is the default home, ~90% of repos: <b>everyone can read and push from day one</b>, so InnerSource happens. <b>🔴 Red</b> is confidential — <b>you only see what you're invited to</b>. <b>🟡 Sandbox</b> is for experiments, and where personal repos go if you block them.</p>
 </div>
 </details>
 <details class="det-pick" name="gov-org-model">
@@ -84,7 +83,6 @@ First decision: how many orgs? Each model sets a different base permission.
 <p class="det-case-v">One org per department meant <b>100+ orgs</b> and no way to find code. Now <b>one shared org</b> everyone can join hosts InnerSource and <b>publishes the enterprise settings as Markdown</b>.</p>
 </div></div>
 </div>
-<p class="det-scope"><span class="det-scope-k">📚 Choosing</span><span class="det-scope-v">Follow <b>collaboration boundaries</b>, not the org chart. One org per team is the classic mistake. Org names are unique across all of GitHub.com, so agree naming first.</span></p>
 </div>
 
 ## Granting access
