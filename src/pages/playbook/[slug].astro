@@ -2005,6 +2005,22 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
   .mermaid-wrap svg { max-width: 100%; height: auto; margin: 0 auto; }
   .mermaid-wrap + .mermaid-wrap { margin-top: -0.5em; }
+
+  /* Nodes carrying a mermaid `click` directive read as links, not decoration. */
+  .mermaid-wrap svg g.node.clickable { cursor: pointer; }
+  .mermaid-wrap svg g.node.clickable rect,
+  .mermaid-wrap svg g.node.clickable polygon,
+  .mermaid-wrap svg g.node.clickable circle,
+  .mermaid-wrap svg g.node.clickable path { transition: filter 0.15s ease; }
+  .mermaid-wrap svg g.node.clickable:hover rect,
+  .mermaid-wrap svg g.node.clickable:hover polygon,
+  .mermaid-wrap svg g.node.clickable:hover circle,
+  .mermaid-wrap svg g.node.clickable:hover path { filter: brightness(1.45); }
+  .mermaid-wrap svg g.node.clickable:hover .nodeLabel {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .mermaid-wrap svg g.node.clickable:focus-visible { outline: 2px solid #ffb000; outline-offset: 3px; }
   .prose-akq ul, .prose-akq ol { padding-left: 1.5em; margin: 1em 0; }
   .prose-akq li { margin: 0.4em 0; }
 
@@ -3675,6 +3691,26 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     letter-spacing: 0.14em;
     color: rgba(232, 244, 255, 0.4);
   }
+
+  /* Field case parked in the readout's resting state. Any opened pane
+     covers it, so it costs no height and fills space that was idle. */
+  .prose-akq .det-case {
+    align-self: stretch;
+    width: 100%;
+    margin: 0;
+    padding: 0.15em 0.6em;
+    font-size: 0.78em;
+    line-height: 1.55;
+    color: rgba(232, 244, 255, 0.72);
+  }
+  .prose-akq .det-case-k {
+    margin: 0 0 0.3em;
+    letter-spacing: 0.08em;
+    color: #ffb000;
+  }
+  .prose-akq .det-case-v { margin: 0; }
+  .prose-akq .det-case-v b,
+  .prose-akq .det-case-v strong { color: #9bbc0f; font-weight: normal; }
   .prose-akq .det-pane {
     position: absolute;
     top: 0;
@@ -3748,30 +3784,21 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .prose-akq .det-doc a { color: #ffb000; }
   .prose-akq .det-doc a:hover { color: #ff2e88; }
 
-  /* The scope line summarises where scanning reaches — it is not a
-     fifth engine, so it sits under the deck as a full-width plate. */
-  .prose-akq .det-scope {
-    display: flex;
-    gap: 0.5em;
-    align-items: baseline;
-    margin: 0.55em 0 0;
-    padding: 0.35em 0.5em;
-    font-size: 0.8em;
-    line-height: 1.65;
-    color: rgba(232, 244, 255, 0.78);
-    background: rgba(5, 6, 15, 0.6);
-    border-top: 2px solid rgba(255, 176, 0, 0.5);
-  }
-  .prose-akq .det-scope-k { flex: none; letter-spacing: 0.08em; color: #ffb000; }
-  .prose-akq .det-scope-v { min-width: 0; }
-  .prose-akq .det-scope b,
-  .prose-akq .det-scope strong { color: #ffb000; font-weight: normal; }
-
   /* Narrow screens: two panes side by side would squeeze both, so drop
      the screen and let each pane open under its own row instead. */
   @media (max-width: 640px) {
     .prose-akq .det-split { display: block; }
     .prose-akq .det-screen { display: none; }
+    /* A screen holding a case still has to render: it is the only place
+       that carries the link, and there is no pane to overlay it here. */
+    .prose-akq .det-screen.det-has-case {
+      display: block;
+      min-height: 0;
+      padding: 0;
+      border: none;
+      background: none;
+    }
+    .prose-akq .det-case { padding: 0.15em 0; }
     .prose-akq .det-btn { font-size: 0.85em; }
     .prose-akq .det-pane {
       position: static;
@@ -4124,7 +4151,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
 
   /* Compact variant: shorter readout for slides that must fit a laptop viewport. */
-  .prose-akq .det-widget.det-compact .det-screen { min-height: 8.25em; }
+  .prose-akq .det-widget.det-compact .det-screen { min-height: 10.5em; }
   .prose-akq .grd-widget.grd-compact .grd-split { --grd-h: 5.85em; }
   .prose-akq .grd-widget.grd-compact .grd-hint { margin-bottom: 0.3em; }
   .prose-akq .grd-widget.grd-compact .grd-pane { padding: 0.3em 0.7em 0.35em; }

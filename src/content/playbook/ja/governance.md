@@ -48,9 +48,9 @@ links:
   </p>
 </div>
 
-## Organization の 3 モデル <a class="h2-doc" href="https://learn.github.com/well-architected/governance/recommendations/governance-administration-essentials" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## Organization の 3 モデル <a class="h2-doc" href="https://learn.github.com/well-architected/governance/recommendations/governance-administration-essentials" target="_blank" rel="noopener noreferrer">📖 Docs</a> <a class="h2-doc" href="https://octonihon.github.io/events/2026-03-24-GitHub-OctoNihon-Forum/20260324_OctoNihon_Ricoh.pdf" target="_blank" rel="noopener noreferrer">🏢 リコー事例</a>
 
-まず org の数を決める。形ごとに base permission が変わる。
+まず org をいくつ作るか。モデルごとに、全社員が最初から何を見られるかが変わる。
 
 <div class="det-widget det-compact">
 <p class="det-hint">▸ モデルをクリック</p>
@@ -60,14 +60,14 @@ links:
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🏛️</span><span class="det-name">1 · 単一 org</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🏛️</span><span class="det-title">Single organization</span></p>
-<p class="det-why">すべてを 1 つの org に置き、team と repo 権限で分ける。base <code>none</code> は安全だがサイロ化するので、<b>全員 team を既定で repo に追加</b>して補う。</p>
+<p class="det-why">すべてを 1 つの org に置き、team と repo の権限で分ける。既定では<b>招待された repo しか見えない</b>ので安全だが、そのままだとサイロ化する。<b>全員 team を既定で repo に追加</b>して補う。</p>
 </div>
 </details>
 <details class="det-pick" name="gov-org-model">
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-name">2 · Red / green</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-title">Red-green-sandbox</span></p>
-<p class="det-why"><b>Green</b> に約 90% の repo、base <code>write</code>、innersource 有効。<b>Red</b> は need-to-know で base <code>none</code>。<b>Sandbox</b> は実験用で、個人 repo を禁止するなら必須。</p>
+<p class="det-why">org を <b>3 つ</b>持つ。<b>🟢 Green</b> は既定の置き場で、repo の約 9 割。<b>全社員が最初から読めて push もできる</b>ので InnerSource が回る。<b>🔴 Red</b> は機密用で、<b>招待された人しか中が見えない</b>。<b>🟡 Sandbox</b> は実験場。壊しても困らない場所で、個人 repo を禁止するならその受け皿になる。</p>
 </div>
 </details>
 <details class="det-pick" name="gov-org-model">
@@ -78,9 +78,11 @@ links:
 </div>
 </details>
 </div>
-<div class="det-screen"><p class="det-empty">SELECT A MODEL ▸</p></div>
+<div class="det-screen det-has-case"><div class="det-case">
+<p class="det-case-k">🏢 事例 — リコー</p>
+<p class="det-case-v">部門ごとに org を作る運用で <b>100 以上の org</b> に分裂し、コードが見つからなくなった。全社員が入れる<b>共有 org を 1 つ</b>開いて InnerSource の置き場にし、<b>enterprise の設定とポリシーも Markdown で同じ org に公開</b>した。</p>
+</div></div>
 </div>
-<p class="det-scope"><span class="det-scope-k">📚 選び方</span><span class="det-scope-v"><b>コラボレーションの境界</b>で切る。組織図ではない。org 名は GitHub.com 全体で一意なので、命名を先に決める。</span></p>
 </div>
 
 ## アクセスの付け方
@@ -90,8 +92,8 @@ links:
 ```mermaid
 flowchart LR
   IDP["🪪 IdP (Okta)<br/>唯一の情報源"]
-  ENT["🏛️ Enterprise Team<br/>Admin · 全 org"]
-  ORG["🏢 Org Team<br/>この org · 組織図ベース"]
+  ENT["🏛️ Enterprise Team 📖<br/>Admin · 全 org"]
+  ORG["🏢 Org Team 📖<br/>この org · 組織図ベース"]
   REPO["📦 Repository"]
   IDP -->|SCIM| ENT
   IDP -->|SCIM| ORG
@@ -106,6 +108,9 @@ flowchart LR
   class ENT ent
   class ORG org
   class REPO repo
+
+  click ENT href "https://docs.github.com/en/enterprise-cloud@latest/admin/managing-accounts-and-repositories/managing-users-in-your-enterprise/create-enterprise-teams" "Enterprise teams のドキュメント" _blank
+  click ORG href "https://docs.github.com/en/organizations/organizing-members-into-teams/about-teams" "Organization teams のドキュメント" _blank
 ```
 
 ## Policies

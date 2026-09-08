@@ -48,9 +48,9 @@ links:
   </p>
 </div>
 
-## Three org models <a class="h2-doc" href="https://learn.github.com/well-architected/governance/recommendations/governance-administration-essentials" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## Three org models <a class="h2-doc" href="https://learn.github.com/well-architected/governance/recommendations/governance-administration-essentials" target="_blank" rel="noopener noreferrer">📖 Docs</a> <a class="h2-doc" href="https://octonihon.github.io/events/2026-03-24-GitHub-OctoNihon-Forum/20260324_OctoNihon_Ricoh.pdf" target="_blank" rel="noopener noreferrer">🏢 Ricoh case</a>
 
-Start here: how many organizations do you run? Each shape has its own base permission.
+First decision: how many orgs? Each model changes what everyone can see by default.
 
 <div class="det-widget det-compact">
 <p class="det-hint">▸ Click a model</p>
@@ -60,14 +60,14 @@ Start here: how many organizations do you run? Each shape has its own base permi
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🏛️</span><span class="det-name">1 · Single org</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🏛️</span><span class="det-title">Single organization</span></p>
-<p class="det-why">Everything in one org; teams and repo permissions do the rest. Base <code>none</code> is safe but silos people. Fix that with an <b>all-members team added to repos by default</b>.</p>
+<p class="det-why">Everything in one org; teams and repo permissions do the rest. By default <b>you only see the repos you're added to</b> — safe, but it silos people. Fix that with an <b>all-members team added to repos by default</b>.</p>
 </div>
 </details>
 <details class="det-pick" name="gov-org-model">
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-name">2 · Red / green</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-title">Red-green-sandbox</span></p>
-<p class="det-why"><b>Green</b> holds ~90% of repos, base <code>write</code>, innersource on. <b>Red</b> is need-to-know, base <code>none</code>. <b>Sandbox</b> is for experiments — required if you block personal repos.</p>
+<p class="det-why">You run <b>three orgs</b>. <b>🟢 Green</b> is the default home, ~90% of repos: <b>everyone can read and push from day one</b>, so InnerSource happens. <b>🔴 Red</b> is confidential — <b>you only see what you're invited to</b>. <b>🟡 Sandbox</b> is for experiments, and where personal repos go if you block them.</p>
 </div>
 </details>
 <details class="det-pick" name="gov-org-model">
@@ -78,9 +78,11 @@ Start here: how many organizations do you run? Each shape has its own base permi
 </div>
 </details>
 </div>
-<div class="det-screen"><p class="det-empty">SELECT A MODEL ▸</p></div>
+<div class="det-screen det-has-case"><div class="det-case">
+<p class="det-case-k">🏢 FIELD CASE — RICOH</p>
+<p class="det-case-v">One org per department meant <b>100+ orgs</b> and no way to find code. Now <b>one shared org</b> everyone can join hosts InnerSource and <b>publishes the enterprise settings as Markdown</b>.</p>
+</div></div>
 </div>
-<p class="det-scope"><span class="det-scope-k">📚 Choosing</span><span class="det-scope-v">Follow <b>collaboration boundaries</b>, not the org chart. One org per team is the classic mistake. Org names are unique across all of GitHub.com, so agree naming first.</span></p>
 </div>
 
 ## Granting access
@@ -90,8 +92,8 @@ Now let people in: **IdP → teams → repos**. Never individuals.
 ```mermaid
 flowchart LR
   IDP["🪪 IdP (Okta)<br/>single source"]
-  ENT["🏛️ Enterprise Team<br/>Admin · all orgs"]
-  ORG["🏢 Org Team<br/>this org · from org chart"]
+  ENT["🏛️ Enterprise Team 📖<br/>Admin · all orgs"]
+  ORG["🏢 Org Team 📖<br/>this org · from org chart"]
   REPO["📦 Repository"]
   IDP -->|SCIM| ENT
   IDP -->|SCIM| ORG
@@ -106,6 +108,9 @@ flowchart LR
   class ENT ent
   class ORG org
   class REPO repo
+
+  click ENT href "https://docs.github.com/en/enterprise-cloud@latest/admin/managing-accounts-and-repositories/managing-users-in-your-enterprise/create-enterprise-teams" "Enterprise teams docs" _blank
+  click ORG href "https://docs.github.com/en/organizations/organizing-members-into-teams/about-teams" "Organization teams docs" _blank
 ```
 
 ## Policies
