@@ -88,7 +88,7 @@ links:
 </div>
 </div>
 
-## アクセスの付け方
+## アクセスの付け方 <a class="h2-doc" href="https://learn.github.com/product-guides/github-enterprise/get-started/decide-on-your-organization-team-structure" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 次はアクセス。**IdP → team → repo** の順で、個人に直接付けない。
 

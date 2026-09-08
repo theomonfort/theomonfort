@@ -88,7 +88,7 @@ First decision: how many orgs? Each model changes what everyone can see by defau
 </div>
 </div>
 
-## Granting access
+## Granting access <a class="h2-doc" href="https://learn.github.com/product-guides/github-enterprise/get-started/decide-on-your-organization-team-structure" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 Now let people in: **IdP → teams → repos**. Never individuals.
 
