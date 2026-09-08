@@ -126,9 +126,20 @@ flowchart LR
 
 > 🎯 ガードレールは上から。repo ごとに設定しない。 <a class="retro-link" href="https://docs.github.com/en/organizations/managing-organization-settings" target="_blank" rel="noopener noreferrer">Org policies ↗</a> · <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/enforcing-policies" target="_blank" rel="noopener noreferrer">Enterprise policies ↗</a>
 
+## 管理者ロール <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/admin/managing-accounts-and-repositories/managing-roles-in-your-enterprise/abilities-of-roles" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+ポリシーは決まった。次は、その設定を**誰が触れるか**。repo のロールとは別の話。
+
+- 🏛️ **Enterprise Owner** — 全設定とポリシー。ただし **org の設定と中身は既定で見えない**
+- 🏢 **Org Owner** — その org の全権。**絞る。ただし 2 名を下回らない**
+- 🛡️ **Security Manager** — 全 repo の Read とアラート管理。セキュリティ班に Owner は要らない
+- 🧩 **カスタム組織ロール** — 「監査ログの閲覧だけ」など、必要な権限だけを束ねる（GHEC）
+
+> 🎯 Owner は肩書きではなく鍵。配る前に、足りる小さいロールを探す。 <a class="retro-link" href="https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/roles-in-an-organization" target="_blank" rel="noopener noreferrer">Org roles ↗</a> · <a class="retro-link" href="https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/about-custom-organization-roles" target="_blank" rel="noopener noreferrer">Custom org roles ↗</a>
+
 ## リポジトリ権限ロール
 
-ポリシーが「できること」、repo ロールが「誰がやるか」。ロールは積み上げ式。
+ここからは repo の中。誰が何をするか。ロールは積み上げ式。
 
 <div class="tbl-compact">
 
@@ -142,7 +153,7 @@ flowchart LR
 
 </div>
 
-> 🧩 合うものがなければ、org レベルで**カスタムロール**を作る。 <a class="retro-link" href="https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/managing-custom-repository-roles-for-an-organization" target="_blank" rel="noopener noreferrer">Custom roles ↗</a>
+> 🧩 合うものがなければ、org レベルで**カスタムリポジトリロール**を作る。 <a class="retro-link" href="https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/managing-custom-repository-roles-for-an-organization" target="_blank" rel="noopener noreferrer">Custom roles ↗</a>
 
 ## Rulesets <a class="h2-doc" href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
@@ -466,13 +477,14 @@ Copilot クライアントも同じ。`copilot/managed-settings.json` がロー�
 
 ## ★ 使いどころ
 
-4 つの層、ルールは 1 つ。上から設定する。
+5 つの層、ルールは 1 つ。上から設定する。
 
 <div class="tbl-compact">
 
 | 層 | 範囲 | 例 |
 | --- | --- | --- |
 | 🏢 ポリシー | org → enterprise | 2FA、公開範囲、機能の可否 |
+| 🔑 管理ロール | org → enterprise | Owner、Security manager、カスタム |
 | 👤 権限ロール | リポジトリ | Read / Write / Admin |
 | 🛡️ ruleset | ブランチとタグ | レビュー必須、必須チェック、署名 |
 | 🤖 managed settings | Copilot クライアント | 既定モデル、bypass 禁止、プラグイン |

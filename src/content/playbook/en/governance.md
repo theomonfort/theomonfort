@@ -126,9 +126,20 @@ People are in. Policies decide what they may do — set at org and enterprise, n
 
 > 🎯 Set guardrails top-down. Never repo by repo. <a class="retro-link" href="https://docs.github.com/en/organizations/managing-organization-settings" target="_blank" rel="noopener noreferrer">Org policies ↗</a> · <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/enforcing-policies" target="_blank" rel="noopener noreferrer">Enterprise policies ↗</a>
 
+## Admin roles <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/admin/managing-accounts-and-repositories/managing-roles-in-your-enterprise/abilities-of-roles" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+Policies are set. Now, who may change them? That is not a repo role.
+
+- 🏛️ **Enterprise owner** — every setting and policy, yet **no org settings or content by default**
+- 🏢 **Org owner** — full control of one org. **Keep it small, never below two.**
+- 🛡️ **Security manager** — read on every repo plus alert management. Security teams need no Owner
+- 🧩 **Custom org roles** — bundle only what is needed, e.g. "view the audit log" (GHEC)
+
+> 🎯 Owner is a key, not a job title. Look for a smaller role first. <a class="retro-link" href="https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/roles-in-an-organization" target="_blank" rel="noopener noreferrer">Org roles ↗</a> · <a class="retro-link" href="https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/about-custom-organization-roles" target="_blank" rel="noopener noreferrer">Custom org roles ↗</a>
+
 ## Repository roles
 
-Policy sets what is possible; repo roles set who does it. Roles are cumulative.
+Now inside the repo: who does what. Roles are cumulative.
 
 <div class="tbl-compact">
 
@@ -142,7 +153,7 @@ Policy sets what is possible; repo roles set who does it. Roles are cumulative.
 
 </div>
 
-> 🧩 If none fit, build a **custom role** at org level from any base role. <a class="retro-link" href="https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/managing-custom-repository-roles-for-an-organization" target="_blank" rel="noopener noreferrer">Custom roles ↗</a>
+> 🧩 If none fit, build a **custom repository role** at org level from any base role. <a class="retro-link" href="https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/managing-custom-repository-roles-for-an-organization" target="_blank" rel="noopener noreferrer">Custom roles ↗</a>
 
 ## Rulesets <a class="h2-doc" href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
@@ -466,13 +477,14 @@ They live in one repo you own, set in **Enterprise → AI controls → Agents**.
 
 ## ★ Where it fits
 
-Four layers, one rule: set them from the top.
+Five layers, one rule: set them from the top.
 
 <div class="tbl-compact">
 
 | Layer | Scope | Examples |
 | --- | --- | --- |
 | 🏢 Policies | org → enterprise | 2FA, visibility, feature access |
+| 🔑 Admin roles | org → enterprise | Owner, Security manager, custom |
 | 👤 Permission roles | Repository | Read / Write / Admin |
 | 🛡️ Rulesets | Branches and tags | Required reviews, required checks, signing |
 | 🤖 Managed settings | Copilot clients | Default model, bypass lock, plugins |
