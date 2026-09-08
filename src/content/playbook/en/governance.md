@@ -67,8 +67,7 @@ First decision: how many orgs? Each model changes what everyone can see by defau
 </div>
 </details>
 <details class="det-pick" name="gov-org-model">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-name">2 · Red / green</span></summary>
-<div class="det-pane">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-name">2 · Red / Green / SB</span></summary><div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-title">Red-green-sandbox</span></p>
 <p class="det-why">You run <b>three orgs</b>. <b>🟢 Green</b> is the default home, ~90% of repos: <b>everyone reads and pushes from day one</b>, so InnerSource happens (<b>base permission = Write</b>). <b>🔴 Red</b> is confidential, <b>invite-only</b> (<b>base permission = None</b>). <b>🟡 Sandbox</b> is for experiments, and takes personal repos if you block them (<b>base permission = Write</b>).</p>
 </div>
@@ -88,7 +87,7 @@ First decision: how many orgs? Each model changes what everyone can see by defau
 </div>
 </div>
 
-## Granting access
+## Granting access <a class="h2-doc" href="https://learn.github.com/product-guides/github-enterprise/get-started/decide-on-your-organization-team-structure" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 Now let people in: **IdP → teams → repos**. Never individuals.
 
@@ -122,7 +121,7 @@ People are in. Policies decide what they may do — set at org and enterprise, n
 
 - 🏛️ **Enterprise** — SSO / SCIM, allowed features, base policy for every org
 - 🏢 **Org** — member privileges, repo creation, 2FA, Copilot and Actions access
-- 📦 **Repo** — inherits only. It consumes features, it sets no policy.
+- 📦 **Repo** — holds no policy, only inherits. The one thing a repo adds is a ruleset.
 - 🔁 Rules flow **down**. An org can tighten enterprise rules, never loosen them.
 
 > 🎯 Set guardrails top-down. Never repo by repo. <a class="retro-link" href="https://docs.github.com/en/organizations/managing-organization-settings" target="_blank" rel="noopener noreferrer">Org policies ↗</a> · <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/enforcing-policies" target="_blank" rel="noopener noreferrer">Enterprise policies ↗</a>
@@ -144,6 +143,17 @@ Policy sets what is possible; repo roles set who does it. Roles are cumulative.
 </div>
 
 > 🧩 If none fit, build a **custom role** at org level from any base role. <a class="retro-link" href="https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/managing-custom-repository-roles-for-an-organization" target="_blank" rel="noopener noreferrer">Custom roles ↗</a>
+
+## Rulesets <a class="h2-doc" href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+Policies say what is allowed, roles say who acts. Rulesets say **what the code must pass**.
+
+- 🛡️ **Branch protection's successor** — reviews, checks, signing, force-push bans, in one object
+- 🏛️ **Defined at ENT / ORG / REPO** — set it high and every repo below inherits it
+- 🔁 **They stack** — when several apply, **the strictest wins**. No loosening below
+- 🧪 **Evaluate mode** — measure impact without enforcing. Start here on existing repos
+
+> 🎯 Don't grant bypass. A ruleset with bypass is a request, not a rule. <a class="retro-link" href="https://docs.github.com/en/organizations/managing-organization-settings/creating-rulesets-for-repositories-in-your-organization" target="_blank" rel="noopener noreferrer">Org rulesets ↗</a>
 
 ## 12 anti-patterns
 
@@ -456,7 +466,7 @@ They live in one repo you own, set in **Enterprise → AI controls → Agents**.
 
 ## ★ Where it fits
 
-Three layers, one rule: set them from the top.
+Four layers, one rule: set them from the top.
 
 <div class="tbl-compact">
 
@@ -464,6 +474,7 @@ Three layers, one rule: set them from the top.
 | --- | --- | --- |
 | 🏢 Policies | org → enterprise | 2FA, visibility, feature access |
 | 👤 Permission roles | Repository | Read / Write / Admin |
+| 🛡️ Rulesets | Branches and tags | Required reviews, required checks, signing |
 | 🤖 Managed settings | Copilot clients | Default model, bypass lock, plugins |
 
 </div>

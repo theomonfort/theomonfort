@@ -67,8 +67,7 @@ links:
 </div>
 </details>
 <details class="det-pick" name="gov-org-model">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-name">2 · Red / green</span></summary>
-<div class="det-pane">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-name">2 · Red / Green / SB</span></summary><div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-title">Red-green-sandbox</span></p>
 <p class="det-why">org を <b>3 つ</b>持つ。<b>🟢 Green</b> は既定の置き場で、repo の約 9 割。<b>全社員が最初から読めて push もできる</b>ため InnerSource が回る（<b>base permission = Write</b>）。<b>🔴 Red</b> は機密用で、<b>招待された人しか中が見えない</b>（<b>base permission = None</b>）。<b>🟡 Sandbox</b> は実験場。個人 repo を禁止するならその受け皿になる（<b>base permission = Write</b>）。</p>
 </div>
@@ -88,7 +87,7 @@ links:
 </div>
 </div>
 
-## アクセスの付け方
+## アクセスの付け方 <a class="h2-doc" href="https://learn.github.com/product-guides/github-enterprise/get-started/decide-on-your-organization-team-structure" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 次はアクセス。**IdP → team → repo** の順で、個人に直接付けない。
 
@@ -122,7 +121,7 @@ flowchart LR
 
 - 🏛️ **Enterprise** — SSO / SCIM、使える機能、全 org の基準
 - 🏢 **Org** — メンバー権限、repo 作成、2FA、Copilot と Actions
-- 📦 **Repo** — 継承するだけ。機能を使う側で、ポリシーは持たない。
+- 📦 **Repo** — ポリシーは持たず継承するだけ。repo で足せるのは ruleset。
 - 🔁 ルールは**下**に流れる。org は厳しくできるが、緩められない。
 
 > 🎯 ガードレールは上から。repo ごとに設定しない。 <a class="retro-link" href="https://docs.github.com/en/organizations/managing-organization-settings" target="_blank" rel="noopener noreferrer">Org policies ↗</a> · <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/enforcing-policies" target="_blank" rel="noopener noreferrer">Enterprise policies ↗</a>
@@ -144,6 +143,17 @@ flowchart LR
 </div>
 
 > 🧩 合うものがなければ、org レベルで**カスタムロール**を作る。 <a class="retro-link" href="https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/managing-custom-repository-roles-for-an-organization" target="_blank" rel="noopener noreferrer">Custom roles ↗</a>
+
+## Rulesets <a class="h2-doc" href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+ポリシーが「できること」、ロールが「誰が」。ruleset は**コードに何を求めるか**。
+
+- 🛡️ **branch protection の後継** — レビュー必須、必須チェック、署名、force push 禁止をひとまとめに
+- 🏛️ **ENT / ORG / REPO で定義** — 上位で決めれば、配下の repo すべてに効く
+- 🔁 **重ねて効く** — 複数当たれば**最も厳しいものが勝つ**。下位で緩められない
+- 🧪 **Evaluate モード** — 強制せずに影響だけ測る。既存 repo にはここから入れる
+
+> 🎯 bypass は既定で付けない。付けた ruleset は強制ではなく「お願い」。 <a class="retro-link" href="https://docs.github.com/en/organizations/managing-organization-settings/creating-rulesets-for-repositories-in-your-organization" target="_blank" rel="noopener noreferrer">Org rulesets ↗</a>
 
 ## 12 のアンチパターン
 
@@ -456,7 +466,7 @@ Copilot クライアントも同じ。`copilot/managed-settings.json` がロー�
 
 ## ★ 使いどころ
 
-3 つの層、ルールは 1 つ。上から設定する。
+4 つの層、ルールは 1 つ。上から設定する。
 
 <div class="tbl-compact">
 
@@ -464,6 +474,7 @@ Copilot クライアントも同じ。`copilot/managed-settings.json` がロー�
 | --- | --- | --- |
 | 🏢 ポリシー | org → enterprise | 2FA、公開範囲、機能の可否 |
 | 👤 権限ロール | リポジトリ | Read / Write / Admin |
+| 🛡️ ruleset | ブランチとタグ | レビュー必須、必須チェック、署名 |
 | 🤖 managed settings | Copilot クライアント | 既定モデル、bypass 禁止、プラグイン |
 
 </div>
