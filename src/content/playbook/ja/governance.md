@@ -44,7 +44,7 @@ links:
     ガバナンスは <strong>誰が何をできるか</strong> を決めること。
   </p>
   <p>
-    決める順は <strong>org → アクセス → ポリシー → repo</strong>。
+    まず <strong>org</strong>。<strong>team</strong>、<strong>ポリシー</strong>、<strong>ruleset</strong> で形にする。
   </p>
   <p>
     ルールは<strong>上から下へ</strong>流れる。repo も Copilot も同じ。

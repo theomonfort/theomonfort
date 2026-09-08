@@ -44,7 +44,7 @@ links:
     Governance is deciding <strong>who can do what</strong>.
   </p>
   <p>
-    Set it in this order: <strong>orgs</strong> → <strong>access</strong> → <strong>policies</strong> → <strong>repo roles</strong>.
+    Start with your <strong>orgs</strong>. Then shape them with <strong>teams</strong>, <strong>policies</strong> and <strong>rulesets</strong>.
   </p>
   <p>
     Rules flow <strong>downward</strong>, to repos and to Copilot.
