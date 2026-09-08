@@ -50,9 +50,10 @@ links:
 
 ## Organization の 3 モデル <a class="h2-doc" href="https://learn.github.com/well-architected/governance/recommendations/governance-administration-essentials" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-まず org の数を決める。形ごとに base permission が変わる。
+まず org をいくつ作るか。モデルごとに base permission の置き方が変わる。
 
 <div class="det-widget det-compact">
+<p class="det-scope det-scope-lead"><span class="det-scope-k">🔑 base permission</span><span class="det-scope-v">org の<b>全メンバー</b>が、その org の<b>全 repo</b> に最初から持つ権限。<code>none</code> = 招待された repo しか見えない、<code>read</code> = 全 repo を読める、<code>write</code> = 全 repo に push できる。team と repo の権限は、この上に<b>足される</b>だけ。下げられない。</span></p>
 <p class="det-hint">▸ モデルをクリック</p>
 <div class="det-split">
 <div class="det-list">

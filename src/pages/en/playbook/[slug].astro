@@ -3781,6 +3781,20 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .prose-akq .det-scope b,
   .prose-akq .det-scope strong { color: #ffb000; font-weight: normal; }
 
+  /* Lead variant: the same plate used to define a term before the deck,
+     so the rule sits under the text rather than above it. */
+  .prose-akq .det-scope-lead {
+    margin: 0 0 0.5em;
+    border-top: none;
+    border-bottom: 2px solid rgba(255, 176, 0, 0.5);
+  }
+  .prose-akq .det-scope-lead code {
+    padding: 0 0.25em;
+    font-size: 0.95em;
+    color: #9bbc0f;
+    background: rgba(155, 188, 15, 0.12);
+  }
+
   /* Narrow screens: two panes side by side would squeeze both, so drop
      the screen and let each pane open under its own row instead. */
   @media (max-width: 640px) {

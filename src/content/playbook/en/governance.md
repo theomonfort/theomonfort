@@ -50,9 +50,10 @@ links:
 
 ## Three org models <a class="h2-doc" href="https://learn.github.com/well-architected/governance/recommendations/governance-administration-essentials" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-Start here: how many organizations do you run? Each shape has its own base permission.
+First decision: how many orgs? Each model sets a different base permission.
 
 <div class="det-widget det-compact">
+<p class="det-scope det-scope-lead"><span class="det-scope-k">🔑 base permission</span><span class="det-scope-v">What <b>every member</b> of an org already has on <b>every repo</b> in it. <code>none</code> = only the repos you're added to, <code>read</code> = read them all, <code>write</code> = push to them all. Team and repo grants add on top; nothing takes it away.</span></p>
 <p class="det-hint">▸ Click a model</p>
 <div class="det-split">
 <div class="det-list">
