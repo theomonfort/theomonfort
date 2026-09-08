@@ -90,8 +90,8 @@ Now let people in: **IdP → teams → repos**. Never individuals.
 ```mermaid
 flowchart LR
   IDP["🪪 IdP (Okta)<br/>single source"]
-  ENT["🏛️ Enterprise Team<br/>Admin · all orgs"]
-  ORG["🏢 Org Team<br/>this org · from org chart"]
+  ENT["🏛️ Enterprise Team 📖<br/>Admin · all orgs"]
+  ORG["🏢 Org Team 📖<br/>this org · from org chart"]
   REPO["📦 Repository"]
   IDP -->|SCIM| ENT
   IDP -->|SCIM| ORG
@@ -106,6 +106,9 @@ flowchart LR
   class ENT ent
   class ORG org
   class REPO repo
+
+  click ENT href "https://docs.github.com/en/enterprise-cloud@latest/admin/managing-accounts-and-repositories/managing-users-in-your-enterprise/create-enterprise-teams" "Enterprise teams docs" _blank
+  click ORG href "https://docs.github.com/en/organizations/organizing-members-into-teams/about-teams" "Organization teams docs" _blank
 ```
 
 ## Policies

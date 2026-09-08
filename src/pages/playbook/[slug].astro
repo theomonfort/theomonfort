@@ -2005,6 +2005,22 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
   .mermaid-wrap svg { max-width: 100%; height: auto; margin: 0 auto; }
   .mermaid-wrap + .mermaid-wrap { margin-top: -0.5em; }
+
+  /* Nodes carrying a mermaid `click` directive read as links, not decoration. */
+  .mermaid-wrap svg g.node.clickable { cursor: pointer; }
+  .mermaid-wrap svg g.node.clickable rect,
+  .mermaid-wrap svg g.node.clickable polygon,
+  .mermaid-wrap svg g.node.clickable circle,
+  .mermaid-wrap svg g.node.clickable path { transition: filter 0.15s ease; }
+  .mermaid-wrap svg g.node.clickable:hover rect,
+  .mermaid-wrap svg g.node.clickable:hover polygon,
+  .mermaid-wrap svg g.node.clickable:hover circle,
+  .mermaid-wrap svg g.node.clickable:hover path { filter: brightness(1.45); }
+  .mermaid-wrap svg g.node.clickable:hover .nodeLabel {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .mermaid-wrap svg g.node.clickable:focus-visible { outline: 2px solid #ffb000; outline-offset: 3px; }
   .prose-akq ul, .prose-akq ol { padding-left: 1.5em; margin: 1em 0; }
   .prose-akq li { margin: 0.4em 0; }
 

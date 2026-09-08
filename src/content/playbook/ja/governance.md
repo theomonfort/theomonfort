@@ -90,8 +90,8 @@ links:
 ```mermaid
 flowchart LR
   IDP["🪪 IdP (Okta)<br/>唯一の情報源"]
-  ENT["🏛️ Enterprise Team<br/>Admin · 全 org"]
-  ORG["🏢 Org Team<br/>この org · 組織図ベース"]
+  ENT["🏛️ Enterprise Team 📖<br/>Admin · 全 org"]
+  ORG["🏢 Org Team 📖<br/>この org · 組織図ベース"]
   REPO["📦 Repository"]
   IDP -->|SCIM| ENT
   IDP -->|SCIM| ORG
@@ -106,6 +106,9 @@ flowchart LR
   class ENT ent
   class ORG org
   class REPO repo
+
+  click ENT href "https://docs.github.com/en/enterprise-cloud@latest/admin/managing-accounts-and-repositories/managing-users-in-your-enterprise/create-enterprise-teams" "Enterprise teams のドキュメント" _blank
+  click ORG href "https://docs.github.com/en/organizations/organizing-members-into-teams/about-teams" "Organization teams のドキュメント" _blank
 ```
 
 ## Policies
