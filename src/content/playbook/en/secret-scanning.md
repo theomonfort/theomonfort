@@ -319,7 +319,7 @@ When a secret is found, **remediation matters more than detection**. At scale, d
 <summary class="rem-btn"><span class="rem-icon" aria-hidden="true">🚨</span><span class="rem-name">ROTATE</span></summary>
 <div class="rem-plate">
 <p class="rem-title">🚨 ROTATE — then close it out</p>
-<p class="rem-why"><b>Revoke at the provider.</b> Deleting it from the repo is not enough: it stays in the history and in everyone's clones.</p>
+<p class="rem-why">Deleting it from the repo is not enough: it stays in the history and in everyone's clones.</p>
 <p class="rem-why">Partner secrets leaked in <b>public</b> repos are revoked provider-side and <b>never reach your alert list</b>. Then close each alert as <code>Revoked</code>, <code>False positive</code>, or <code>Used in tests</code> so the campaign burns down.</p>
 </div>
 </details>
@@ -394,33 +394,38 @@ When a secret is found, **remediation matters more than detection**. At scale, d
 
 📘 Details: <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/get-started/learning-about-github/about-github-advanced-security" target="_blank" rel="noopener noreferrer">Advanced Security products ↗</a> / <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/tutorials/secret-scanning-partner-program" target="_blank" rel="noopener noreferrer">Partner program ↗</a> / <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Public monitoring ↗</a>
 
-## Public monitoring (NEW)
+## Public monitoring (NEW) <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-GitHub **monitors the entire public surface of github.com in real time** and attributes leaked secrets back to your enterprise. It catches secrets leaked *outside* your own repos — personal forks, open source projects, tokens pasted into public issues / PRs / discussions.
+- 🌐 **Public only** — git, PR comments, issues, discussions. Never your private repos.
+- ⚡ Real time. Needs Secret Protection or GHAS. Public preview, no extra cost.
+- 🧩 **No setup** — enable it and existing findings appear straight away.
 
-- 🌐 Scans **public content only** (git, PR comments, issues, discussions); it **never scans private repos**
-- ⚡ Real-time monitoring, with native platform metadata for accurate attribution
-- 🧩 Works out of the box — enable it to see recent existing findings and future leaks
+<div class="tbl-compact">
 
-**Two attribution methods:**
-
-| Method | What it checks | Catches |
+| Attributed by | What it checks | Catches |
 | --- | --- | --- |
-| 👤 Member-based | Committer's account is an enterprise member | Leaks from managed accounts & known members |
-| 🌐 Verified domain match | Committer's email is on a verified domain | Leaks from personal accounts using a work email (even if unlinked / email private) |
+| 👤 Member | Committer is a member | Managed and known accounts |
+| 🌐 Verified domain | Email on your domain | Personal account, work email |
 
-> ⚙️ Enable: enterprise owners / security managers, from the enterprise-level **Security and quality** tab. GHEC with Secret Protection or Advanced Security (public preview, no extra cost; data residency coming soon). <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Public monitoring ↗</a>
+</div>
 
-## Secret Risk Assessment (free inventory scan)
+<div class="cal-compact">
 
-**Secret Risk Assessment** scans every repository in your org (public, private, internal, and archived) to make visible "what secrets are hiding and where." **No GHAS / Secret Protection required — completely free** (since 2025), available to all Team and Enterprise orgs. Perfect for a pre-purchase inventory or an executive security report.
+> ⚙️ Turned on under **Security and quality**, by an enterprise owner or security manager.
 
-- 🔎 Scope — all repos in the org (any visibility), including archived repos
-- 📊 Output — aggregated report showing secret type, count, and how many are in each repo (individual secret values are not exposed)
-- 🕒 Frequency — point-in-time, **rerunnable every 90 days** via `Rerun scan`. Still not continuous monitoring, that's what Secret Protection is for
-- 🔐 Privacy — detected secret values are not stored by GitHub. Only statistics are visible to org admins
-- 🚀 How to run — `Org → Security and quality tab → Assessments → Scan your organization`. The first run also kicks off the free **code security risk assessment**
+</div>
 
-> 📊 Use this first when you want to "just know how many secrets are leaking across the org" or "need numbers for a budget proposal." Review the results to decide whether to adopt **Secret Protection**.
+## Secret Risk Assessment <a class="h2-doc" href="https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-📘 Details: <a class="retro-link" href="https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk" target="_blank" rel="noopener noreferrer">Enabling Secret Risk Assessment ↗</a>
+Scans every org repo to show what secrets sit where. **Free for Team and Enterprise orgs.**
+
+- 🔎 **Scope** — every repo, any visibility, archived included
+- 📊 **Output** — secret types and counts per repo. Values are never stored or shown.
+- 🕒 **Frequency** — point-in-time, rerunnable every 90 days. Not continuous monitoring.
+- 🚀 **Run it** — `Org → Security and quality → Assessments → Scan your organization`. The first run also starts the free code security assessment.
+
+<div class="cal-compact">
+
+> 📊 Answers "how many secrets are leaking?" and gives you the numbers for a budget case.
+
+</div>

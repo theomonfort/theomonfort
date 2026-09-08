@@ -319,7 +319,7 @@ Secret が見つかった時にやることは **検知より修復が大事**�
 <summary class="rem-btn"><span class="rem-icon" aria-hidden="true">🚨</span><span class="rem-name">rotate して close</span></summary>
 <div class="rem-plate">
 <p class="rem-title">🚨 ROTATE — 無効化してクローズ</p>
-<p class="rem-why"><b>provider 側で revoke する。</b>リポジトリから消すだけでは不十分で、履歴と他人の clone に残り続ける。</p>
+<p class="rem-why">リポジトリから消すだけでは不十分で、履歴と他人の clone に残り続ける。</p>
 <p class="rem-why"><b>public repo</b> で漏れた partner secret は provider 側で revoke され、<b>自分のアラート一覧には出ない</b>。最後に <code>Revoked</code> / <code>False positive</code> / <code>Used in tests</code> で close し、campaign を消化する。</p>
 </div>
 </details>
@@ -394,33 +394,38 @@ Secret が見つかった時にやることは **検知より修復が大事**�
 
 📘 詳細: <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/get-started/learning-about-github/about-github-advanced-security" target="_blank" rel="noopener noreferrer">Advanced Security products ↗</a> / <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/tutorials/secret-scanning-partner-program" target="_blank" rel="noopener noreferrer">Partner program ↗</a> / <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Public monitoring ↗</a>
 
-## Public monitoring（NEW）
+## Public monitoring（NEW） <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-GitHub が **github.com の公開領域全体をリアルタイム監視** し、漏洩した secret を「あなたのエンタープライズ」に帰属させる仕組み。自分の repo の外 — 個人フォーク・OSS・公開 issue / PR / discussion に貼られたトークン — で漏れた secret も検出する。
+- 🌐 **公開コンテンツのみ**（git・PR・issue・discussion）。自分の repo の外の漏洩を拾う
+- ⚡ リアルタイム監視。Secret Protection / GHAS 対象、追加費用なし
+- 🧩 設定不要。有効化した時点で既存の finding も出る
 
-- 🌐 対象は **公開コンテンツのみ**（git・PR コメント・issue・discussion）。**private repo は絶対にスキャンしない**
-- ⚡ リアルタイム監視。プラットフォーム metadata を使って正確に帰属
-- 🧩 追加設定不要（out of the box）。有効化すると直近の既存 finding と今後の漏洩を表示
+<div class="tbl-compact">
 
-**帰属（attribution）の 2 方式:**
-
-| 方式 | 判定 | 捕捉できる漏洩 |
+| 帰属の方式 | 判定 | 捕捉できる漏洩 |
 | --- | --- | --- |
-| 👤 メンバー帰属 | committer の GitHub アカウントがエンタープライズのメンバー | 管理アカウント・既知メンバーからの漏洩 |
-| 🌐 検証済みドメイン照合 | committer の email が検証済みドメイン | 仕事用 email を使う個人アカウント（未リンク・email 非公開でも） |
+| 👤 メンバー帰属 | committer がメンバー | 管理・既知アカウント |
+| 🌐 検証済みドメイン | 自社ドメインの email | 仕事用 email の個人 |
 
-> ⚙️ 有効化: Enterprise owner / security manager が enterprise レベルの **Security and quality タブ** から。GHEC の Secret Protection / Advanced Security 対象（Public preview・追加費用なし、data residency は近日）。<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Public monitoring ↗</a>
+</div>
 
-## Secret Risk Assessment(無料の棚卸しスキャン)
+<div class="cal-compact">
 
-**Secret Risk Assessment** は、Org 内のすべてのリポジトリ(public・private・internal・archived)をスキャンして「どこにどんな secret が眠っているか」を可視化する機能。**GHAS / Secret Protection 不要・完全無料**(2025〜)で、Team・Enterprise の全 Org が使える。購入前の棚卸しや経営報告にちょうどいい。
+> ⚙️ **Security and quality** から enterprise owner / security manager が有効化する。
 
-- 🔎 対象 — Org に属するすべてのリポ(visibility 問わず)。アーカイブ済みも含む
-- 📊 出力 — secret の種類・件数・どの repo に何件あるか、を集計レポートで表示(個別 secret の中身は出さない)
-- 🕒 頻度 — point-in-time スキャンだが **90 日ごとに `Rerun scan` で再実行可能**。継続的な監視ではない(それが必要なら Secret Protection)
-- 🔐 プライバシー — 検出された secret の値は GitHub に保存されない。統計データのみが Org 管理者に見える
-- 🚀 動かし方 — `Org → Security and quality タブ → Assessments → Scan your organization`。初回実行では無料の **code security risk assessment** も同時に走る
+</div>
 
-> 📊 「とりあえず社内に何件 secret が漏れてるか知りたい」「予算稟議のために数字が欲しい」というケースで真っ先に使う。結果を見て **Secret Protection 導入の是非** を判断すれば良い。
+## Secret Risk Assessment <a class="h2-doc" href="https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-📘 詳細: <a class="retro-link" href="https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk" target="_blank" rel="noopener noreferrer">Enabling Secret Risk Assessment ↗</a>
+Org 全体をスキャンし、secret の在りかを可視化。**Team / Enterprise は無料**。
+
+- 🔎 **対象** — Org の全リポジトリ。visibility 問わず、アーカイブ済みも含む
+- 📊 **出力** — secret の種類と件数を repo ごとに集計。値は保存も表示もされない
+- 🕒 **頻度** — point-in-time。`Rerun scan` で 90 日ごとに再実行。継続監視ではない
+- 🚀 **実行** — `Org → Security and quality → Assessments → Scan your organization`。初回は無料の code security assessment も走る
+
+<div class="cal-compact">
+
+> 📊 「社内に何件漏れているか」を知る用途と、予算稟議の数字づくりに使う。
+
+</div>
