@@ -48,7 +48,7 @@ links:
   </p>
 </div>
 
-## Organization の 3 モデル <a class="h2-doc" href="https://learn.github.com/well-architected/governance/recommendations/governance-administration-essentials" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## Organization の 3 モデル <a class="h2-doc" href="https://learn.github.com/well-architected/governance/recommendations/governance-administration-essentials" target="_blank" rel="noopener noreferrer">📖 Docs</a> <a class="h2-doc" href="https://octonihon.github.io/events/2026-03-24-GitHub-OctoNihon-Forum/20260324_OctoNihon_Ricoh.pdf" target="_blank" rel="noopener noreferrer">🏢 リコー事例</a>
 
 まず org をいくつ作るか。モデルごとに base permission の置き方が変わる。
 
@@ -82,7 +82,6 @@ links:
 <div class="det-screen det-has-case"><div class="det-case">
 <p class="det-case-k">🏢 事例 — リコー</p>
 <p class="det-case-v">部門ごとに org を作る運用で <b>100 以上の org</b> に分裂し、コードが見つからなくなった。全社員が入れる<b>共有 org を 1 つ</b>開いて InnerSource の置き場にし、<b>enterprise の設定とポリシーも Markdown で同じ org に公開</b>した。</p>
-<p class="det-case-src"><a href="https://octonihon.github.io/events/2026-03-24-GitHub-OctoNihon-Forum/20260324_OctoNihon_Ricoh.pdf" target="_blank" rel="noopener noreferrer">OctoNihon Forum 2026-03 · リコー 登壇資料 (PDF) ↗</a></p>
 </div></div>
 </div>
 <p class="det-scope"><span class="det-scope-k">📚 選び方</span><span class="det-scope-v"><b>コラボレーションの境界</b>で切る。組織図ではない。org 名は GitHub.com 全体で一意なので、命名を先に決める。</span></p>
