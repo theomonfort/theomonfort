@@ -41,10 +41,13 @@ links:
 
 <div class="hero-quote">
   <p>
-    Governance is deciding <strong>who can do what</strong>, in layers.
+    Governance is deciding <strong>who can do what</strong>.
   </p>
   <p>
     Set it in this order: <strong>orgs</strong> → <strong>access</strong> → <strong>policies</strong> → <strong>repo roles</strong>.
+  </p>
+  <p>
+    Rules flow <strong>downward</strong>, to repos and to Copilot.
   </p>
 </div>
 
@@ -60,14 +63,14 @@ First decision: how many orgs? Each model changes what everyone can see by defau
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🏛️</span><span class="det-name">1 · Single org</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🏛️</span><span class="det-title">Single organization</span></p>
-<p class="det-why">Everything in one org; teams and repo permissions do the rest. By default <b>you only see the repos you're added to</b> — safe, but it silos people. Fix that with an <b>all-members team added to repos by default</b>.</p>
+<p class="det-why">Everything in one org; teams and repo permissions do the rest. By default <b>you only see the repos you're added to</b> (<b>Org base permission = None</b>). Left there it silos people, so add an <b>all-members team to shared repos by default</b>.</p>
 </div>
 </details>
 <details class="det-pick" name="gov-org-model">
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-name">2 · Red / green</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-title">Red-green-sandbox</span></p>
-<p class="det-why">You run <b>three orgs</b>. <b>🟢 Green</b> is the default home, ~90% of repos: <b>everyone can read and push from day one</b>, so InnerSource happens. <b>🔴 Red</b> is confidential — <b>you only see what you're invited to</b>. <b>🟡 Sandbox</b> is for experiments, and where personal repos go if you block them.</p>
+<p class="det-why">You run <b>three orgs</b>. <b>🟢 Green</b> is the default home, ~90% of repos: <b>everyone reads and pushes from day one</b>, so InnerSource happens (<b>base permission = Write</b>). <b>🔴 Red</b> is confidential, <b>invite-only</b> (<b>base permission = None</b>). <b>🟡 Sandbox</b> is for experiments, and takes personal repos if you block them (<b>base permission = Write</b>).</p>
 </div>
 </details>
 <details class="det-pick" name="gov-org-model">

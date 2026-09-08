@@ -46,6 +46,9 @@ links:
   <p>
     決める順は <strong>org → アクセス → ポリシー → repo</strong>。
   </p>
+  <p>
+    ルールは<strong>上から下へ</strong>流れる。repo も Copilot も同じ。
+  </p>
 </div>
 
 ## Organization の 3 モデル <a class="h2-doc" href="https://learn.github.com/well-architected/governance/recommendations/governance-administration-essentials" target="_blank" rel="noopener noreferrer">📖 Docs</a> <a class="h2-doc" href="https://octonihon.github.io/events/2026-03-24-GitHub-OctoNihon-Forum/20260324_OctoNihon_Ricoh.pdf" target="_blank" rel="noopener noreferrer">🏢 リコー事例</a>
@@ -60,14 +63,14 @@ links:
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🏛️</span><span class="det-name">1 · 単一 org</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🏛️</span><span class="det-title">Single organization</span></p>
-<p class="det-why">すべてを 1 つの org に置き、team と repo の権限で分ける。既定では<b>招待された repo しか見えない</b>ので安全だが、そのままだとサイロ化する。<b>全員 team を既定で repo に追加</b>して補う。</p>
+<p class="det-why">すべてを 1 つの org に置き、team と repo の権限で分ける。既定では<b>招待された repo しか見えない</b>（<b>Org base permission = None</b>）。閉じたままではサイロ化するため、<b>全社員 team を共有 repo に既定で追加</b>して可視性を確保する。</p>
 </div>
 </details>
 <details class="det-pick" name="gov-org-model">
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-name">2 · Red / green</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🚦</span><span class="det-title">Red-green-sandbox</span></p>
-<p class="det-why">org を <b>3 つ</b>持つ。<b>🟢 Green</b> は既定の置き場で、repo の約 9 割。<b>全社員が最初から読めて push もできる</b>ので InnerSource が回る。<b>🔴 Red</b> は機密用で、<b>招待された人しか中が見えない</b>。<b>🟡 Sandbox</b> は実験場。壊しても困らない場所で、個人 repo を禁止するならその受け皿になる。</p>
+<p class="det-why">org を <b>3 つ</b>持つ。<b>🟢 Green</b> は既定の置き場で、repo の約 9 割。<b>全社員が最初から読めて push もできる</b>ため InnerSource が回る（<b>base permission = Write</b>）。<b>🔴 Red</b> は機密用で、<b>招待された人しか中が見えない</b>（<b>base permission = None</b>）。<b>🟡 Sandbox</b> は実験場。個人 repo を禁止するならその受け皿になる（<b>base permission = Write</b>）。</p>
 </div>
 </details>
 <details class="det-pick" name="gov-org-model">
