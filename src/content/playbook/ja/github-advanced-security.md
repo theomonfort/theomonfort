@@ -23,6 +23,9 @@ links:
   - group: 📖 公式ドキュメント
     label: GitHub plans pricing
     url: https://docs.github.com/en/get-started/learning-about-github/githubs-plans
+  - group: 📖 公式ドキュメント
+    label: GHAS トライアルの計画 (Planning a trial of GHAS)
+    url: https://docs.github.com/ja/code-security/tutorials/trialing-github-advanced-security/planning-a-trial-of-ghas
   - group: 📰 発表
     label: Introducing Secret Protection & Code Security (2025/03)
     url: https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/
@@ -108,12 +111,15 @@ GitHub には **ライセンス不要・完全無料** で組織のセキュリ�
 
 > 💡 「予算稟議のために数字が欲しい」「導入前に効果を見たい」というケースで真っ先に使う。両方を同じ日に走らせれば 1 日で組織全体のセキュリティ姿勢が可視化できる。
 
+> 🧪 棚卸しの次はトライアル。Risk Assessment の結果画面からそのまま GHAS トライアルを開始でき、目的設定・メンバー選定・評価軸の決め方は <a class="retro-link" href="https://docs.github.com/ja/code-security/tutorials/trialing-github-advanced-security/planning-a-trial-of-ghas" target="_blank" rel="noopener noreferrer">GHAS トライアルの計画 ↗</a> にまとまっている。
+
 📘 Risk Assessment 関連:
 - <a class="retro-link" href="https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk" target="_blank" rel="noopener noreferrer">Enabling Secret Risk Assessment ↗</a>
 - <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment" target="_blank" rel="noopener noreferrer">Code security risk assessment(GitHub Docs)↗</a>
 - <a class="retro-link" href="https://github.blog/changelog/2026-04-08-code-security-risk-assessment-available-for-organizations/" target="_blank" rel="noopener noreferrer">Code Security Risk Assessment GA(2026/04)↗</a>
 
 📘 GHAS 全般:
+- <a class="retro-link" href="https://docs.github.com/ja/code-security/tutorials/trialing-github-advanced-security/planning-a-trial-of-ghas" target="_blank" rel="noopener noreferrer">GHAS トライアルの計画(GitHub Docs)↗</a>
 - <a class="retro-link" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">Introducing GitHub Secret Protection & Code Security (GitHub Blog) ↗</a>
 - <a class="retro-link" href="https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security" target="_blank" rel="noopener noreferrer">About billing for GitHub Advanced Security ↗</a>
 - <a class="retro-link" href="https://github.com/security/advanced-security" target="_blank" rel="noopener noreferrer">GitHub Advanced Security 製品ページ ↗</a>
