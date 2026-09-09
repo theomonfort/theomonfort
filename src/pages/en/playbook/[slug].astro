@@ -2113,6 +2113,142 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     line-height: 1.5;
   }
 
+  /* Two-panel figure row: two charts side by side on one slide */
+  .prose-akq .duo-fig {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    margin: 1.2em 0 1em;
+  }
+  @media (min-width: 900px) {
+    .prose-akq .duo-fig { grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+  }
+  .prose-akq .duo-panel {
+    display: flex;
+    flex-direction: column;
+    background: rgba(10, 14, 39, 0.55);
+    border: 2px solid rgba(0, 240, 255, 0.28);
+    box-shadow: 4px 4px 0 #05060f;
+    padding: 0.9em 1.1em 0.8em;
+  }
+  .prose-akq .duo-panel.is-alert { border-color: rgba(255, 46, 136, 0.38); }
+  .prose-akq .duo-panel .duo-foot { margin-top: auto; }
+  .prose-akq .tte { flex: 1; display: flex; align-items: center; }
+  .prose-akq .duo-cap {
+    margin: 0;
+    color: #e8f4ff;
+    font-weight: 700;
+    font-size: 1.02em;
+    line-height: 1.35;
+  }
+  .prose-akq .duo-sub {
+    margin: 0.3em 0 0;
+    color: rgba(232, 244, 255, 0.58);
+    font-size: 0.8em;
+    line-height: 1.45;
+  }
+  .prose-akq .duo-foot {
+    margin: 0.9em 0 0;
+    padding-top: 0.2em;
+    color: rgba(232, 244, 255, 0.45);
+    font-size: 0.72em;
+    line-height: 1.45;
+  }
+  .prose-akq .duo-foot strong { color: rgba(232, 244, 255, 0.7); }
+
+  /* Quarterly column chart inside a duo-panel */
+  .prose-akq .qbars {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.45em;
+    height: 150px;
+    margin: 1.9em 0 0;
+  }
+  .prose-akq .qbar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+  }
+  .prose-akq .qbar-fill {
+    position: relative;
+    width: 100%;
+    min-height: 4px;
+    border-radius: 3px 3px 0 0;
+    background: rgba(0, 240, 255, 0.32);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+  }
+  .prose-akq .qbar.is-peak .qbar-fill {
+    background: #ff2e88;
+    box-shadow: 0 0 16px rgba(255, 46, 136, 0.55);
+  }
+  .prose-akq .qbar-val {
+    position: absolute;
+    top: -1.5em;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.78em;
+    color: rgba(232, 244, 255, 0.7);
+    white-space: nowrap;
+  }
+  .prose-akq .qbar.is-peak .qbar-val { color: #ff7ab2; font-weight: 700; }
+  .prose-akq .qbar-lab {
+    margin-top: 0.45em;
+    text-align: center;
+    font-size: 0.72em;
+    color: rgba(232, 244, 255, 0.5);
+    white-space: nowrap;
+  }
+  .prose-akq .qbar.is-peak .qbar-lab { color: #e8f4ff; }
+
+  /* Time-to-exploitation line chart */
+  .prose-akq .tte { margin: 1.1em 0 0; }
+  .prose-akq .tte svg { display: block; width: 100%; height: auto; }
+
+  body.present-mode .prose-akq .qbars { height: 200px; }
+  body.present-mode .prose-akq .duo-cap { font-size: 1.15em; }
+  body.present-mode .prose-akq .duo-sub { font-size: 0.86em; }
+  body.present-mode .prose-akq .duo-foot { font-size: 0.76em; }
+  body.present-mode .prose-akq .qbar-val { font-size: 0.86em; }
+  body.present-mode .prose-akq .qbar-lab { font-size: 0.8em; }
+
+  /* Two-column statement layout */
+  .prose-akq .imp2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+    margin: 1.6em 0;
+  }
+  @media (min-width: 800px) {
+    .prose-akq .imp2 { grid-template-columns: 1fr 1fr; gap: 2.6rem; }
+  }
+  .prose-akq .imp2-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    border-left: 2px solid #ff2e88;
+    padding-left: 1.1rem;
+  }
+  .prose-akq .imp2-k {
+    margin: 0;
+    color: #ff7ab2;
+    font-weight: 700;
+    font-size: 1.08rem;
+    line-height: 1.35;
+    letter-spacing: 0.02em;
+  }
+  .prose-akq .imp2-v {
+    margin: 0;
+    color: rgba(232, 244, 255, 0.85);
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+  body.present-mode .prose-akq .imp2 { gap: 3rem; margin: 2em 0; }
+  body.present-mode .prose-akq .imp2-col { gap: 1rem; padding-left: 1.5rem; }
+  body.present-mode .prose-akq .imp2-k { font-size: 1.5rem; }
+  body.present-mode .prose-akq .imp2-v { font-size: 1.2rem; }
+
   /* Smaller radar chart wrapper */
   .prose-akq .radar-small { max-width: 720px; margin: 1em auto 0; }
   .prose-akq .radar-intro { max-width: 720px; margin: 1.2em auto 0.4em; text-align: center; }

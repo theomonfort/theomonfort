@@ -86,32 +86,86 @@ links:
 
 ## Why now
 
-AI writes code faster than any review process was designed to absorb, and the dependency graph shows it. These are Dependabot alerts created across GitHub, per quarter.
+AI writes code faster than any review process was designed to absorb — and attackers reach the same models defenders do. Two curves moving in opposite directions.
 
-| Quarter | Dependabot alerts created |
-| --- | ---: |
-| Q3 2025 | 77 M |
-| Q4 2025 | 82 M |
-| **Q1 2026** | **357 M** |
-| **Q2 2026** | **313 M** |
+<div class="duo-fig">
+<div class="duo-panel is-alert">
+<p class="duo-cap">4x+ increase in Dependabot alerts</p>
+<p class="duo-sub">New alerts created across GitHub, per quarter.</p>
+<div class="qbars">
+<div class="qbar"><div class="qbar-fill" style="height:14.6%"><span class="qbar-val">52M</span></div><p class="qbar-lab">Q1 25</p></div>
+<div class="qbar"><div class="qbar-fill" style="height:19.7%"><span class="qbar-val">70M</span></div><p class="qbar-lab">Q2 25</p></div>
+<div class="qbar"><div class="qbar-fill" style="height:21.6%"><span class="qbar-val">77M</span></div><p class="qbar-lab">Q3 25</p></div>
+<div class="qbar"><div class="qbar-fill" style="height:23.1%"><span class="qbar-val">82M</span></div><p class="qbar-lab">Q4 25</p></div>
+<div class="qbar is-peak"><div class="qbar-fill" style="height:100.0%"><span class="qbar-val">357M</span></div><p class="qbar-lab">Q1 26</p></div>
+<div class="qbar is-peak"><div class="qbar-fill" style="height:87.7%"><span class="qbar-val">313M</span></div><p class="qbar-lab">Q2 26</p></div>
+</div>
+<p class="duo-foot">The 2025 baseline sat steadily around <strong>70–80M</strong>, then jumped. CVE alerts platform-wide are up <strong>6x</strong> since February 2026.</p>
+</div>
+<div class="duo-panel">
+<p class="duo-cap">From vulnerability to exploitation</p>
+<p class="duo-sub">Mean gap between CVE public disclosure and first confirmed in-the-wild exploitation.</p>
+<div class="tte">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 292" role="img" aria-label="Mean time from CVE disclosure to first confirmed exploitation, 2018 to 2026">
+<line x1="52.0" y1="70.6" x2="574.0" y2="70.6" stroke="rgba(0,240,255,0.13)" stroke-width="1.2"/>
+<text x="42.0" y="76.6" text-anchor="end" font-size="17" fill="rgba(232,244,255,0.4)">1y</text>
+<line x1="52.0" y1="146.6" x2="574.0" y2="146.6" stroke="rgba(0,240,255,0.13)" stroke-width="1.2"/>
+<text x="42.0" y="152.6" text-anchor="end" font-size="17" fill="rgba(232,244,255,0.4)">1mo</text>
+<line x1="52.0" y1="190.8" x2="574.0" y2="190.8" stroke="rgba(0,240,255,0.13)" stroke-width="1.2"/>
+<text x="42.0" y="196.8" text-anchor="end" font-size="17" fill="rgba(232,244,255,0.4)">7d</text>
+<line x1="52.0" y1="250.0" x2="574.0" y2="250.0" stroke="rgba(0,240,255,0.13)" stroke-width="1.2"/>
+<text x="42.0" y="256.0" text-anchor="end" font-size="17" fill="rgba(232,244,255,0.4)">1d</text>
+<polyline points="52.0,45.3 117.2,54.5 182.5,62.6 247.8,76.2 313.0,80.7 378.2,102.5 443.5,129.3 508.8,156.7 574.0,250.0" fill="none" stroke="#00f0ff" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" opacity="0.25"/>
+<polyline points="52.0,45.3 117.2,54.5 182.5,62.6 247.8,76.2 313.0,80.7 378.2,102.5 443.5,129.3 508.8,156.7 574.0,250.0" fill="none" stroke="#00f0ff" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="52.0" cy="45.3" r="4.6" fill="#e8f4ff"/>
+<text x="52.0" y="31.3" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">2.3y</text>
+<circle cx="117.2" cy="54.5" r="4.6" fill="#e8f4ff"/>
+<text x="117.2" y="40.5" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">1.7y</text>
+<circle cx="182.5" cy="62.6" r="4.6" fill="#e8f4ff"/>
+<text x="182.5" y="48.6" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">1.3y</text>
+<circle cx="247.8" cy="76.2" r="4.6" fill="#e8f4ff"/>
+<text x="247.8" y="62.2" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">10mo</text>
+<circle cx="313.0" cy="80.7" r="4.6" fill="#e8f4ff"/>
+<text x="313.0" y="66.7" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">8.6mo</text>
+<circle cx="378.2" cy="102.5" r="4.6" fill="#e8f4ff"/>
+<text x="378.2" y="88.5" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">4.2mo</text>
+<circle cx="443.5" cy="129.3" r="4.6" fill="#e8f4ff"/>
+<text x="443.5" y="115.3" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">53d</text>
+<circle cx="508.8" cy="156.7" r="4.6" fill="#e8f4ff"/>
+<text x="508.8" y="142.7" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">21.5d</text>
+<circle cx="574.0" cy="250.0" r="6.5" fill="#ff2e88"/>
+<text x="559.0" y="257.0" text-anchor="end" font-size="20" font-weight="700" fill="#ff7ab2">24h</text>
+<text x="52.0" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2018</text>
+<text x="117.2" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2019</text>
+<text x="182.5" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2020</text>
+<text x="247.8" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2021</text>
+<text x="313.0" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2022</text>
+<text x="378.2" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2023</text>
+<text x="443.5" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2024</text>
+<text x="508.8" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2025</text>
+<text x="574.0" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2026</text>
+</svg>
+</div>
+<p class="duo-foot">Based on 3,500+ confirmed-exploited CVEs (CISA KEV + VulnCheck KEV) · zerodayclock.com</p>
+</div>
+</div>
 
-- 📈 **4x+ in a single quarter** — the 2025 baseline sat steadily around 70–80 M, then jumped
-- 🦠 **6x more CVE alerts** platform-wide since February 2026
-- 🌊 This is not a detection-tuning artifact. It is the volume of code, and therefore the volume of dependencies, going up
-
-> 🎯 The backlog is now growing faster than any team can triage by hand.
+> 🎯 More findings arriving every quarter, and less time to act on each one.
 
 ## What it means for AppSec
 
 "Shift left" used to mean the IDE. Now the IDE, the CLI, the app, and the pull request blend into one continuous surface that agents move across freely. That has two consequences.
 
-| Implication | What it means |
-| --- | --- |
-| 🌊 **Traditional security can't keep up** | The volume of new, AI-generated code outpaces what any traditional review process can inspect — and it arrives across many new surfaces at once |
-| ⚡ **Exploitation is faster than ever** | Attackers reach the same frontier models, and cost is no object. They find and weaponize risk faster than defenders can triage it |
-
-- 🚪 Gating at the pull request is **too late** once an agent has already propagated a change across repos
-- 🔗 Supply chain attacks and personal agents both move faster than a human review cycle
+<div class="imp2">
+<div class="imp2-col">
+<p class="imp2-k">🌊 Traditional security can't keep up</p>
+<p class="imp2-v">The volume of new, AI-generated code outpaces what any traditional review process can inspect, and it arrives across many new surfaces at once. Gating at the pull request is already too late once an agent has propagated a change across repos.</p>
+</div>
+<div class="imp2-col">
+<p class="imp2-k">⚡ Exploitation is faster than ever</p>
+<p class="imp2-v">Attackers reach the same frontier models, and cost is no object. They find and weaponize risk faster than defenders can triage it, and supply chain attacks move faster than any human review cycle.</p>
+</div>
+</div>
 
 > 🎯 Protection has to live everywhere work happens, not only at the merge gate.
 

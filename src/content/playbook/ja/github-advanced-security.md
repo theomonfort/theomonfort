@@ -86,32 +86,86 @@ links:
 
 ## なぜ今なのか
 
-AI はどんなレビュープロセスが想定していたよりも速くコードを書く。そしてそれは dependency graph に現れている。以下は GitHub 全体で作成された Dependabot アラートの四半期推移。
+AI はレビュープロセスが想定していた速度を超えてコードを書き、攻撃側も防御側と同じモデルを手にしている。逆方向に動く 2 つの曲線がそれを示す。
 
-| 四半期 | 作成された Dependabot アラート |
-| --- | ---: |
-| Q3 2025 | 77 M |
-| Q4 2025 | 82 M |
-| **Q1 2026** | **357 M** |
-| **Q2 2026** | **313 M** |
+<div class="duo-fig">
+<div class="duo-panel is-alert">
+<p class="duo-cap">Dependabot アラートが 4 倍超に</p>
+<p class="duo-sub">GitHub 全体で新規作成されたアラート数（四半期ごと）。</p>
+<div class="qbars">
+<div class="qbar"><div class="qbar-fill" style="height:14.6%"><span class="qbar-val">52M</span></div><p class="qbar-lab">Q1 25</p></div>
+<div class="qbar"><div class="qbar-fill" style="height:19.7%"><span class="qbar-val">70M</span></div><p class="qbar-lab">Q2 25</p></div>
+<div class="qbar"><div class="qbar-fill" style="height:21.6%"><span class="qbar-val">77M</span></div><p class="qbar-lab">Q3 25</p></div>
+<div class="qbar"><div class="qbar-fill" style="height:23.1%"><span class="qbar-val">82M</span></div><p class="qbar-lab">Q4 25</p></div>
+<div class="qbar is-peak"><div class="qbar-fill" style="height:100.0%"><span class="qbar-val">357M</span></div><p class="qbar-lab">Q1 26</p></div>
+<div class="qbar is-peak"><div class="qbar-fill" style="height:87.7%"><span class="qbar-val">313M</span></div><p class="qbar-lab">Q2 26</p></div>
+</div>
+<p class="duo-foot">2025 年は <strong>7,000〜8,000 万</strong>で安定していたが、そこから跳ね上がった。CVE アラートも 2026 年 2 月以降、全体で <strong>6 倍</strong>。</p>
+</div>
+<div class="duo-panel">
+<p class="duo-cap">脆弱性から悪用までの時間</p>
+<p class="duo-sub">CVE の公開から、実環境での悪用が最初に確認されるまでの平均日数。</p>
+<div class="tte">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 292" role="img" aria-label="Mean time from CVE disclosure to first confirmed exploitation, 2018 to 2026">
+<line x1="52.0" y1="70.6" x2="574.0" y2="70.6" stroke="rgba(0,240,255,0.13)" stroke-width="1.2"/>
+<text x="42.0" y="76.6" text-anchor="end" font-size="17" fill="rgba(232,244,255,0.4)">1y</text>
+<line x1="52.0" y1="146.6" x2="574.0" y2="146.6" stroke="rgba(0,240,255,0.13)" stroke-width="1.2"/>
+<text x="42.0" y="152.6" text-anchor="end" font-size="17" fill="rgba(232,244,255,0.4)">1mo</text>
+<line x1="52.0" y1="190.8" x2="574.0" y2="190.8" stroke="rgba(0,240,255,0.13)" stroke-width="1.2"/>
+<text x="42.0" y="196.8" text-anchor="end" font-size="17" fill="rgba(232,244,255,0.4)">7d</text>
+<line x1="52.0" y1="250.0" x2="574.0" y2="250.0" stroke="rgba(0,240,255,0.13)" stroke-width="1.2"/>
+<text x="42.0" y="256.0" text-anchor="end" font-size="17" fill="rgba(232,244,255,0.4)">1d</text>
+<polyline points="52.0,45.3 117.2,54.5 182.5,62.6 247.8,76.2 313.0,80.7 378.2,102.5 443.5,129.3 508.8,156.7 574.0,250.0" fill="none" stroke="#00f0ff" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" opacity="0.25"/>
+<polyline points="52.0,45.3 117.2,54.5 182.5,62.6 247.8,76.2 313.0,80.7 378.2,102.5 443.5,129.3 508.8,156.7 574.0,250.0" fill="none" stroke="#00f0ff" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="52.0" cy="45.3" r="4.6" fill="#e8f4ff"/>
+<text x="52.0" y="31.3" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">2.3y</text>
+<circle cx="117.2" cy="54.5" r="4.6" fill="#e8f4ff"/>
+<text x="117.2" y="40.5" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">1.7y</text>
+<circle cx="182.5" cy="62.6" r="4.6" fill="#e8f4ff"/>
+<text x="182.5" y="48.6" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">1.3y</text>
+<circle cx="247.8" cy="76.2" r="4.6" fill="#e8f4ff"/>
+<text x="247.8" y="62.2" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">10mo</text>
+<circle cx="313.0" cy="80.7" r="4.6" fill="#e8f4ff"/>
+<text x="313.0" y="66.7" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">8.6mo</text>
+<circle cx="378.2" cy="102.5" r="4.6" fill="#e8f4ff"/>
+<text x="378.2" y="88.5" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">4.2mo</text>
+<circle cx="443.5" cy="129.3" r="4.6" fill="#e8f4ff"/>
+<text x="443.5" y="115.3" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">53d</text>
+<circle cx="508.8" cy="156.7" r="4.6" fill="#e8f4ff"/>
+<text x="508.8" y="142.7" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">21.5d</text>
+<circle cx="574.0" cy="250.0" r="6.5" fill="#ff2e88"/>
+<text x="559.0" y="257.0" text-anchor="end" font-size="20" font-weight="700" fill="#ff7ab2">24h</text>
+<text x="52.0" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2018</text>
+<text x="117.2" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2019</text>
+<text x="182.5" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2020</text>
+<text x="247.8" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2021</text>
+<text x="313.0" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2022</text>
+<text x="378.2" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2023</text>
+<text x="443.5" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2024</text>
+<text x="508.8" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2025</text>
+<text x="574.0" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2026</text>
+</svg>
+</div>
+<p class="duo-foot">悪用が確認された 3,500 件超の CVE に基づく（CISA KEV + VulnCheck KEV）· zerodayclock.com</p>
+</div>
+</div>
 
-- 📈 **1 四半期で 4 倍超** — 2025 年は 70〜80 M で安定していたところから跳ね上がった
-- 🦠 2026 年 2 月以降、プラットフォーム全体で **CVE アラートが 6 倍**
-- 🌊 これは検知チューニングの副作用ではない。コード量、ひいては依存関係の量そのものが増えている
-
-> 🎯 バックログは、もはや人手でトリアージできる速度を超えて増え続けている。
+> 🎯 四半期ごとに検出は増え続け、1 件あたりに使える時間は減り続けている。
 
 ## AppSec への 2 つの影響
 
-かつて「shift left」は IDE を意味していた。いまは IDE ・ CLI ・ アプリ ・ PR が 1 つの連続した面になり、エージェントがその上を自由に行き来する。ここから 2 つの帰結が生まれる。
+かつて「shift left」は IDE を意味していた。いまは IDE・CLI・アプリ・PR が 1 つの連続した面になり、エージェントがその上を自由に行き来する。ここから 2 つの帰結が生まれる。
 
-| 影響 | 内容 |
-| --- | --- |
-| 🌊 **従来のセキュリティが追いつかない** | AI が生成する新規コードの量は、従来のレビュープロセスが検査できる範囲を超える。しかもそれが一度に多数の新しい面から流れ込む |
-| ⚡ **悪用がかつてなく速い** | 攻撃者も同じ最新モデルを使えて、コストは障害にならない。防御側がトリアージするより速くリスクを見つけて武器化する |
-
-- 🚪 エージェントが既に変更を複数リポジトリへ波及させた後では、PR でのゲートは**手遅れ**
-- 🔗 サプライチェーン攻撃も個人のエージェントも、人間のレビューサイクルより速く動く
+<div class="imp2">
+<div class="imp2-col">
+<p class="imp2-k">🌊 従来のセキュリティが追いつかない</p>
+<p class="imp2-v">AI が生成する新規コードの量は従来のレビュープロセスが検査できる範囲を超え、しかも一度に多数の新しい面から流れ込む。エージェントが変更を複数リポジトリへ波及させた後では、PR でのゲートはすでに手遅れ。</p>
+</div>
+<div class="imp2-col">
+<p class="imp2-k">⚡ 悪用がかつてなく速い</p>
+<p class="imp2-v">攻撃者も同じ最新モデルを使えて、コストは障害にならない。防御側がトリアージするより速くリスクを見つけて武器化し、サプライチェーン攻撃も人間のレビューサイクルより速く動く。</p>
+</div>
+</div>
 
 > 🎯 防御はマージゲートだけでなく、作業が発生するすべての場所に置く必要がある。
 
