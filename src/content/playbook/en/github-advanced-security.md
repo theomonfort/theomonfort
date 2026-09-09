@@ -23,6 +23,9 @@ links:
   - group: 📖 Official Documentation
     label: GitHub plans pricing
     url: https://docs.github.com/en/get-started/learning-about-github/githubs-plans
+  - group: 📖 Official Documentation
+    label: Planning a trial of GHAS
+    url: https://docs.github.com/en/code-security/tutorials/trialing-github-advanced-security/planning-a-trial-of-ghas
   - group: 📰 Announcement
     label: Introducing Secret Protection & Code Security (2025/03)
     url: https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/
@@ -132,12 +135,15 @@ GitHub provides two **Risk Assessments** to visualize your organization's securi
 
 > 💡 Use these first when you "need numbers for a budget proposal" or "want to see the impact before buying." Running both on the same day gives you a complete view of your organization's security posture in hours.
 
+> 🧪 A trial is the natural next step after the inventory. You can start a GHAS trial straight from the Risk Assessment results, and <a class="retro-link" href="https://docs.github.com/en/code-security/tutorials/trialing-github-advanced-security/planning-a-trial-of-ghas" target="_blank" rel="noopener noreferrer">Planning a trial of GHAS ↗</a> covers how to set goals, pick participants, and define success criteria.
+
 📘 Risk Assessment references:
 - <a class="retro-link" href="https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk" target="_blank" rel="noopener noreferrer">Enabling Secret Risk Assessment ↗</a>
 - <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment" target="_blank" rel="noopener noreferrer">Code security risk assessment (GitHub Docs) ↗</a>
 - <a class="retro-link" href="https://github.blog/changelog/2026-04-08-code-security-risk-assessment-available-for-organizations/" target="_blank" rel="noopener noreferrer">Code Security Risk Assessment GA (2026/04) ↗</a>
 
 📘 GHAS general:
+- <a class="retro-link" href="https://docs.github.com/en/code-security/tutorials/trialing-github-advanced-security/planning-a-trial-of-ghas" target="_blank" rel="noopener noreferrer">Planning a trial of GHAS (GitHub Docs) ↗</a>
 - <a class="retro-link" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">Introducing GitHub Secret Protection & Code Security (GitHub Blog) ↗</a>
 - <a class="retro-link" href="https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security" target="_blank" rel="noopener noreferrer">About billing for GitHub Advanced Security ↗</a>
 - <a class="retro-link" href="https://github.com/security/advanced-security" target="_blank" rel="noopener noreferrer">GitHub Advanced Security product page ↗</a>
