@@ -31,7 +31,7 @@ export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'pull-requests': [6, 7],
   'custom-agent': [2],
   'agent-skills': [5, 6],
-  'github-advanced-security': [6],
+  'github-advanced-security': [7],
 };
 
 export function navHintSlides(slug: string): number[] {

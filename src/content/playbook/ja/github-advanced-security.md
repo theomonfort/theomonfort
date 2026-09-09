@@ -1,7 +1,7 @@
 ---
 title: GitHub Advanced Security
 titleEn: GHAS
-summary: GitHub のセキュリティ機能をまとめた有料製品。2025 年 4 月に GitHub Secret Protection ($19) と GitHub Code Security ($30) の 2 つに分割され、active committer 単位で課金される。Public repo は引き続き無料。
+summary: GitHub のセキュリティ製品スイート。Secret Protection ($19) がクレデンシャルの漏洩を防ぎ、Code Security ($30) がコード自体の脆弱性を検出する 2 製品構成。active committer 単位の課金で、public repo は無料。
 icon: /theomonfort/icons/ghas.png
 color: cyan
 accent:
@@ -77,24 +77,86 @@ links:
 
 <div class="hero-quote">
   <p>
-    <strong>GitHub Advanced Security (GHAS)</strong> は、GitHub のセキュリティ機能をまとめた有料アドオン。Code scanning と Secret scanning を private repo でも有効化するためのライセンスだった。
+    <strong>GitHub Advanced Security (GHAS)</strong> は GitHub のセキュリティ製品スイート。開発者がうっかり混入させてしまう 2 つのもの、<strong>クレデンシャル</strong> と <strong>脆弱なコード</strong> をリポジトリからスキャンして検出する。
   </p>
   <p>
-    <strong>2025 年 4 月</strong> に <strong>GitHub Secret Protection</strong> と <strong>GitHub Code Security</strong> の 2 つに分割され、欲しい機能だけを選んで購入できるようになった。
+    製品は <strong>Secret Protection</strong> と <strong>Code Security</strong> の 2 つで、それぞれ単体で購入できる。
   </p>
 </div>
 
-> 🌐 Public repo はすべて引き続き無料。GHAS / Secret Protection / Code Security のライセンスが必要になるのは **private / internal repo** で機能を有効化したい場合だけ。
-> 🤖 **Dependabot 本体** (alerts / security updates / version updates / dependency graph) は <strong>どのプランでも完全無料</strong>・GHAS 不要。詳細は <a class="retro-link" href="/theomonfort/playbook/dependabot">Dependabot ↗</a>。
+> 🌐 Public repo はすべて無料。ライセンスが必要になるのは **private / internal repo** で機能を有効化する場合だけ。
+> 🤖 **Dependabot** (alerts / security updates / version updates / dependency graph) は <strong>どのプランでも無料</strong>・GHAS 不要。詳細は <a class="retro-link" href="/theomonfort/playbook/dependabot">Dependabot ↗</a>。
+
+## 何のためにあるのか
+
+スキャンツールは通常プラットフォームの外にある。専用のコンソール、専用のバックログ、そしてコードを書いてから数日後にようやく開発者へ届く検出結果。GHAS はこの 4 ステップを、コードが既に置かれている場所の中で完結させる。
+
+- 🔎 **見つける** — default branch に既に眠っている secret や脆弱性を、どのチームにも作業を依頼せずに全リポジトリ横断で洗い出す
+- 🚧 **防ぐ** — push protection が secret を commit になる前にブロック。ruleset を使えば code scanning がクリーンになるまで PR をマージさせないこともできる
+- 🔧 **直す** — アラートは PR 上の注釈として届き、Copilot Autofix がチケットではなく実際の差分を提案する
+- 📊 **示す** — Enterprise 全体で 1 つの設定、1 つのダッシュボードで「どのリポジトリが保護されていて、どれが漏れているか」が分かる
+
+> 🎯 価値は「スキャナーがもう 1 つ増えること」ではない。検出・防止・修正・レポートがコードと同じプラットフォーム上にあるので、エクスポートも突き合わせも催促も要らなくなること。
 
 ## 何が入っている?
 
-| 製品 | 主な機能 | 詳細エントリー |
-| --- | --- | --- |
-| 🔑 **Secret Protection** | Secret scanning · Push protection (org/repo lvl) · Custom patterns · AI detection · Validity checks | <a class="retro-link" href="/theomonfort/playbook/secret-scanning">Secret Scanning ↗</a> |
-| 🔍 **Code Security** | Code scanning (CodeQL) · Copilot Autofix · Security campaigns · Dependency review (PR enforcement) · Security overview | <a class="retro-link" href="/theomonfort/playbook/code-scanning">Code Scanning ↗</a> |
+**🔑 Secret Protection** はクレデンシャルをリポジトリの外に締め出す。**🔍 Code Security** はコード自体に書き込まれた脆弱性を見つける。それぞれの中身は次のとおり。
 
-## 料金 (2025 年 4 月以降)
+<div class="det-widget">
+<p class="det-hint">▸ クリックして詳細を表示</p>
+<div class="det-split">
+<div class="det-list">
+<details class="det-pick" name="ghas-inside">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🔑</span><span class="det-name">Secret scanning</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">🔑</span><span class="det-title">Secret scanning</span></p>
+<p class="det-why"><b>git 履歴全体</b>と新規 push を、<b>200 以上のプロバイダー</b>が登録したパターンで照合する。汎用フォーマットや、非構造な secret を拾う AI 検知も含む。検出結果はファイル・commit・作者付きのアラートになる。</p>
+</div>
+</details>
+<details class="det-pick" name="ghas-inside">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🛡️</span><span class="det-name">Push protection</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">🛡️</span><span class="det-title">Push protection</span></p>
+<p class="det-why">secret を含む push 自体を拒否するので、リモートに到達せず、ローテーションも不要になる。開発者は自分のターミナル上でそれを知る。<b>Org 全体</b>で強制でき、バイパスを特定のユーザーだけに絞ることもできる。</p>
+</div>
+</details>
+<details class="det-pick" name="ghas-inside">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">✅</span><span class="det-name">Validity & custom patterns</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">✅</span><span class="det-title">Validity &amp; custom patterns</span></p>
+<p class="det-why"><b>Validity check</b> は漏洩したトークンがまだ有効かどうかをプロバイダーに問い合わせる。本当に悪用可能なものから対処できる。<b>Custom pattern</b> はパートナーが登録しない独自形式 (社内サービス、レガシー認証情報) をカバーする。</p>
+</div>
+</details>
+<details class="det-pick" name="ghas-inside">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🔍</span><span class="det-name">Code scanning (CodeQL)</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">🔍</span><span class="det-title">Code scanning (CodeQL)</span></p>
+<p class="det-why">コードベースを<b>クエリ可能なデータベース</b>に変換し、信頼できない入力から危険な処理までのデータフローを追跡する (injection、path traversal、deserialization など)。push・PR・週次スケジュールで実行され、結果は PR の注釈として出る。</p>
+</div>
+</details>
+<details class="det-pick" name="ghas-inside">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">Copilot Autofix</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">Copilot Autofix</span></p>
+<p class="det-why">アラートを、PR 上の<b>説明付き修正差分</b>に変える。開発者は脆弱性クラスを調べるところから始めるのではなく、レビューして commit するだけで済む。修正率の数字が実際に動くのはここ。</p>
+</div>
+</details>
+<details class="det-pick" name="ghas-inside">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">📣</span><span class="det-name">Security campaigns</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">📣</span><span class="det-title">Security campaigns</span></p>
+<p class="det-why">既存のアラートのバックログを、担当者と期限が付いた<b>終わらせられるリスト</b>に切り出し、コードを持つチームと直接進める。加えて PR での <b>dependency review</b> と <b>Security overview</b> のダッシュボードも含まれる。</p>
+</div>
+</details>
+</div>
+<div class="det-screen det-has-case"><div class="det-case">
+<p class="det-case-k">📚 詳細エントリー</p>
+<p class="det-case-v"><a class="retro-link" href="/theomonfort/playbook/secret-scanning">Secret Scanning ↗</a> — 検出・push protection・トリアージの詳細。<br /><a class="retro-link" href="/theomonfort/playbook/code-scanning">Code Scanning ↗</a> — CodeQL の設定・Autofix・campaigns の詳細。</p>
+</div></div>
+</div>
+</div>
+
+## 料金
 
 | 製品 | 価格 | 課金単位 |
 | --- | :---: | --- |
@@ -104,10 +166,10 @@ links:
 
 - 👥 **active committer** = 過去 90 日間に、機能が ON になっているリポジトリへ push したユニークなコミッター。同じ人は何リポジトリに push しても 1 人とカウント
 - 💳 **従量課金 (metered)** モデル。月初にライセンス本数を予約する必要はなく、実際に push した人数だけ請求される
-- 🏷️ **GitHub Team プラン** からも購入可能 (以前は Enterprise 限定だった)
+- 🏷️ **GitHub Team** と **GitHub Enterprise** で購入可能
 - 🆓 **Public repo は完全無料**。Open source プロジェクトはライセンス不要
 
-> 💡 Secret scanning だけ欲しいなら **Secret Protection 単体 ($19)** で OK。CodeQL も使いたくなったら **Code Security ($30)** を追加、という段階的な購入ができるのが分割後の利点。
+> 💡 2 製品は独立して購入できる。Secret scanning だけ欲しいなら **Secret Protection 単体 ($19)** で OK。CodeQL も使いたくなったら **Code Security ($30)** を追加すればいい。
 
 ## ライセンスを考えるときの順番
 
@@ -233,5 +295,3 @@ GitHub には **ライセンス不要・完全無料** で組織のセキュリ�
 - 🏢 **Org レベルの Coverage** が現場の日常ビュー。enterprise 側は自分が owner / security manager になっている org しか集計されない
 - 🌐 **Public monitoring** (public preview・Secret Protection 必須) は enterprise メンバーと verified domain で漏洩を紐付ける。**Enterprise → Settings → Advanced Security → Code security** で ON
 - 📤 **Export CSV** は Overview / Coverage / Risk で使え、**適用中のフィルタがそのまま反映**される
-
-> 💡 標準ビューで足りなくても機能要望を待つ必要はない。CSV を Copilot に渡せば、org / team / custom repository property で切り直した「上が見たいダッシュボード」がすぐ作れる。

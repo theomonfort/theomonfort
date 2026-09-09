@@ -3715,6 +3715,9 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     right: 0;
     bottom: 0;
     left: calc(var(--det-col) + var(--det-gap));
+    /* Links inside .det-case are position:relative and sit later in the DOM,
+       so the pane needs an explicit layer to stay on top of the screen. */
+    z-index: 1;
     overflow-y: auto;
     padding: 0.6em 0.75em 0.7em;
     background: #05060f;

@@ -1,7 +1,7 @@
 ---
 title: GitHub Advanced Security
 titleEn: GHAS
-summary: GitHub's paid security product suite. Split into GitHub Secret Protection ($19) and GitHub Code Security ($30) in April 2025, billed per active committer. Public repos remain free.
+summary: GitHub's paid security suite, sold as two products. Secret Protection ($19) keeps credentials out of the repo, Code Security ($30) finds vulnerabilities in the code. Billed per active committer. Public repos are free.
 icon: /theomonfort/icons/ghas.png
 color: cyan
 accent:
@@ -77,24 +77,86 @@ links:
 
 <div class="hero-quote">
   <p>
-    <strong>GitHub Advanced Security (GHAS)</strong> is GitHub's paid add-on that bundles security features. It was the license needed to enable code scanning and secret scanning on private repos.
+    <strong>GitHub Advanced Security (GHAS)</strong> is GitHub's paid security suite. It scans your repositories for two things developers leak by accident: <strong>credentials</strong> and <strong>vulnerable code</strong>.
   </p>
   <p>
-    In <strong>April 2025</strong>, it was split into <strong>GitHub Secret Protection</strong> and <strong>GitHub Code Security</strong> — you can now buy only the features you need.
+    It comes as two products you buy separately — <strong>Secret Protection</strong> and <strong>Code Security</strong>.
   </p>
 </div>
 
-> 🌐 Public repos continue to get everything for free. A GHAS / Secret Protection / Code Security license is only required when you want to enable features on **private / internal repos**.
-> 🤖 **Dependabot itself** (alerts / security updates / version updates / dependency graph) is <strong>completely free on every plan</strong> — no GHAS required. See <a class="retro-link" href="/theomonfort/en/playbook/dependabot">Dependabot ↗</a>.
+> 🌐 Public repos get everything for free. A license is only required to turn these features on for **private / internal repos**.
+> 🤖 **Dependabot** (alerts / security updates / version updates / dependency graph) is <strong>free on every plan</strong> — no GHAS required. See <a class="retro-link" href="/theomonfort/en/playbook/dependabot">Dependabot ↗</a>.
 
-## What's included?
+## Why it exists
 
-| Product | Key features | Details |
-| --- | --- | --- |
-| 🔑 **Secret Protection** | Secret scanning · Push protection (org/repo level) · Custom patterns · AI detection · Validity checks | <a class="retro-link" href="/theomonfort/en/playbook/secret-scanning">Secret Scanning ↗</a> |
-| 🔍 **Code Security** | Code scanning (CodeQL) · Copilot Autofix · Security campaigns · Dependency review (PR enforcement) · Security overview | <a class="retro-link" href="/theomonfort/en/playbook/code-scanning">Code Scanning ↗</a> |
+Scanning tools normally live outside the platform: a separate console, a separate backlog, and findings that reach the developer days after the code was written. GHAS puts all four steps in the place that already holds the code.
 
-## Pricing (from April 2025)
+- 🔎 **Find** — surface the secrets and vulnerabilities already sitting in the default branch, across every repo, without asking a single team to run anything
+- 🚧 **Prevent** — push protection blocks a secret before it becomes a commit; a ruleset can hold a pull request until code scanning comes back clean
+- 🔧 **Fix** — alerts land as annotations on the pull request, and Copilot Autofix proposes an actual diff instead of a ticket
+- 📊 **Prove** — one configuration for the whole enterprise, one dashboard showing which repos are covered and which are not
+
+> 🎯 The value isn't "another scanner". It's that detection, prevention, remediation, and reporting share the platform with the code, so nothing has to be exported, reconciled, or chased.
+
+## What's inside
+
+**🔑 Secret Protection** keeps credentials out of the repository. **🔍 Code Security** finds the vulnerabilities written into the code itself. Here's what each one actually gives you.
+
+<div class="det-widget">
+<p class="det-hint">▸ CLICK FOR DETAILS</p>
+<div class="det-split">
+<div class="det-list">
+<details class="det-pick" name="ghas-inside">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🔑</span><span class="det-name">Secret scanning</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">🔑</span><span class="det-title">Secret scanning</span></p>
+<p class="det-why">Scans the <b>entire git history</b> and every new push against patterns registered by <b>200+ providers</b>, plus generic formats and AI detection for unstructured secrets. Each match becomes an alert carrying the file, the commit, and the author.</p>
+</div>
+</details>
+<details class="det-pick" name="ghas-inside">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🛡️</span><span class="det-name">Push protection</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">🛡️</span><span class="det-title">Push protection</span></p>
+<p class="det-why">Rejects the push that contains a secret, so it never reaches the remote and never needs rotating. The developer sees it in their own terminal. Enforced <b>org-wide</b>, with bypass restricted to named actors if you want it.</p>
+</div>
+</details>
+<details class="det-pick" name="ghas-inside">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">✅</span><span class="det-name">Validity & custom patterns</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">✅</span><span class="det-title">Validity &amp; custom patterns</span></p>
+<p class="det-why"><b>Validity checks</b> ask the provider whether a leaked token is still live, so you triage what is genuinely exploitable first. <b>Custom patterns</b> cover the token formats no partner will ever register: internal services, legacy credentials, your own conventions.</p>
+</div>
+</details>
+<details class="det-pick" name="ghas-inside">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🔍</span><span class="det-name">Code scanning (CodeQL)</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">🔍</span><span class="det-title">Code scanning (CodeQL)</span></p>
+<p class="det-why">Compiles the codebase into a <b>queryable database</b> and follows data flow from untrusted input to dangerous sink — injection, path traversal, deserialization. Runs on push, on pull requests, and on a weekly schedule; results appear as PR annotations.</p>
+</div>
+</details>
+<details class="det-pick" name="ghas-inside">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">Copilot Autofix</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">Copilot Autofix</span></p>
+<p class="det-why">Turns an alert into a <b>suggested diff with an explanation</b>, right on the pull request. The developer reviews and commits instead of researching the vulnerability class first, which is what actually moves the remediation numbers.</p>
+</div>
+</details>
+<details class="det-pick" name="ghas-inside">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">📣</span><span class="det-name">Security campaigns</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">📣</span><span class="det-title">Security campaigns</span></p>
+<p class="det-why">Slices the existing alert backlog into a <b>finishable list</b> with an owner and a due date, and opens the work directly with the teams that own the code. Plus <b>dependency review</b> on pull requests and the <b>Security overview</b> dashboards.</p>
+</div>
+</details>
+</div>
+<div class="det-screen det-has-case"><div class="det-case">
+<p class="det-case-k">📚 FULL ENTRIES</p>
+<p class="det-case-v"><a class="retro-link" href="/theomonfort/en/playbook/secret-scanning">Secret Scanning ↗</a> — detection, push protection, and triage in depth.<br /><a class="retro-link" href="/theomonfort/en/playbook/code-scanning">Code Scanning ↗</a> — CodeQL setup, Autofix, and campaigns in depth.</p>
+</div></div>
+</div>
+</div>
+
+## Pricing
 
 | Product | Price | Billing unit |
 | --- | :---: | --- |
@@ -104,10 +166,10 @@ links:
 
 - 👥 **Active committer** = a unique committer who pushed to a repository with the feature enabled during the past 90 days. The same person counts as one across any number of repositories
 - 💳 **Metered (pay-as-you-go)** model — no need to reserve license seats upfront; you're billed only for the people who actually push
-- 🏷️ Available on **GitHub Team** plan too (previously Enterprise-only)
+- 🏷️ Available on **GitHub Team** and **GitHub Enterprise**
 - 🆓 **Public repos are completely free** — open source projects need no license
 
-> 💡 If you only need secret scanning, **Secret Protection alone ($19)** is enough. Add **Code Security ($30)** when you also want CodeQL — the split model lets you adopt incrementally.
+> 💡 The two products are bought independently. If you only need secret scanning, **Secret Protection alone ($19)** is enough; add **Code Security ($30)** when you also want CodeQL.
 
 ## How to think about licensing
 
@@ -233,5 +295,3 @@ Once the configuration is out, the question becomes "how far are we actually cov
 - 🏢 **Org-level Coverage** is the day-to-day view — enterprise views only aggregate orgs where you are an owner or security manager
 - 🌐 **Public monitoring** (public preview, needs Secret Protection) attributes leaks by enterprise membership and verified domain. Turn it on at **Enterprise → Settings → Advanced Security → Code security**
 - 📤 **Export CSV** on Overview / Coverage / Risk keeps the filters you already applied
-
-> 💡 Not enough? Don't wait for a feature request — hand the CSV to Copilot and get the dashboard management actually asks for, pivoted by org, team, or custom repository property.
