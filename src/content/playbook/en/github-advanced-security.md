@@ -84,7 +84,38 @@ links:
   </p>
 </div>
 
-## Why it exists
+## Why now
+
+AI writes code faster than any review process was designed to absorb, and the dependency graph shows it. These are Dependabot alerts created across GitHub, per quarter.
+
+| Quarter | Dependabot alerts created |
+| --- | ---: |
+| Q3 2025 | 77 M |
+| Q4 2025 | 82 M |
+| **Q1 2026** | **357 M** |
+| **Q2 2026** | **313 M** |
+
+- 📈 **4x+ in a single quarter** — the 2025 baseline sat steadily around 70–80 M, then jumped
+- 🦠 **6x more CVE alerts** platform-wide since February 2026
+- 🌊 This is not a detection-tuning artifact. It is the volume of code, and therefore the volume of dependencies, going up
+
+> 🎯 The backlog is now growing faster than any team can triage by hand.
+
+## What it means for AppSec
+
+"Shift left" used to mean the IDE. Now the IDE, the CLI, the app, and the pull request blend into one continuous surface that agents move across freely. That has two consequences.
+
+| Implication | What it means |
+| --- | --- |
+| 🌊 **Traditional security can't keep up** | The volume of new, AI-generated code outpaces what any traditional review process can inspect — and it arrives across many new surfaces at once |
+| ⚡ **Exploitation is faster than ever** | Attackers reach the same frontier models, and cost is no object. They find and weaponize risk faster than defenders can triage it |
+
+- 🚪 Gating at the pull request is **too late** once an agent has already propagated a change across repos
+- 🔗 Supply chain attacks and personal agents both move faster than a human review cycle
+
+> 🎯 Protection has to live everywhere work happens, not only at the merge gate.
+
+## How GHAS answers it
 
 Scanning tools normally live outside the platform: a separate console, a separate backlog, and findings that reach the developer days after the code was written. GHAS puts all four steps in the place that already holds the code.
 
