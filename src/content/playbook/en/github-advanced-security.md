@@ -84,9 +84,6 @@ links:
   </p>
 </div>
 
-> 🌐 Public repos get everything for free. A license is only required to turn these features on for **private / internal repos**.
-> 🤖 **Dependabot** (alerts / security updates / version updates / dependency graph) is <strong>free on every plan</strong> — no GHAS required. See <a class="retro-link" href="/theomonfort/en/playbook/dependabot">Dependabot ↗</a>.
-
 ## Why it exists
 
 Scanning tools normally live outside the platform: a separate console, a separate backlog, and findings that reach the developer days after the code was written. GHAS puts all four steps in the place that already holds the code.

@@ -84,9 +84,6 @@ links:
   </p>
 </div>
 
-> 🌐 Public repo はすべて無料。ライセンスが必要になるのは **private / internal repo** で機能を有効化する場合だけ。
-> 🤖 **Dependabot** (alerts / security updates / version updates / dependency graph) は <strong>どのプランでも無料</strong>・GHAS 不要。詳細は <a class="retro-link" href="/theomonfort/playbook/dependabot">Dependabot ↗</a>。
-
 ## 何のためにあるのか
 
 スキャンツールは通常プラットフォームの外にある。専用のコンソール、専用のバックログ、そしてコードを書いてから数日後にようやく開発者へ届く検出結果。GHAS はこの 4 ステップを、コードが既に置かれている場所の中で完結させる。
