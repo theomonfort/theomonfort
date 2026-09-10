@@ -202,25 +202,25 @@ AI はレビュープロセスが想定していた速度を超えてコード�
 <div class="trio-panels">
 
 <div class="trio-panel">
-<div class="trio-row"><p class="trio-k">Secret scanning<span class="trio-chip is-free">PUBLIC は無料</span></p><p class="trio-v"><b>git 履歴全体</b>と新規 push を <b>200 以上のプロバイダーパターン</b>と汎用パターンで走査。<b>Validity check</b> は漏れたトークンがまだ生きているかを問い合わせる。</p></div>
-<div class="trio-row"><p class="trio-k">Push protection<span class="trio-chip is-free">PUBLIC は無料</span></p><p class="trio-v">secret を含む push 自体を拒否する。リモートに到達しないのでローテーションも不要。</p></div>
-<div class="trio-row"><p class="trio-k">AI-detected secrets<span class="trio-chip is-paid">ライセンス</span></p><p class="trio-v">正規表現で表現できない<b>非構造の</b>認証情報を検出。設定ファイル内のパスワードや文章中の secret など。</p></div>
-<div class="trio-row"><p class="trio-k">Custom patterns<span class="trio-chip is-paid">ライセンス</span></p><p class="trio-v">自社独自のトークン形式。社内サービス、レガシー認証情報、パートナーが登録しない命名規則。</p></div>
-<div class="trio-row"><p class="trio-k">Delegated bypass<span class="trio-chip is-paid">ライセンス</span></p><p class="trio-v">push protection のバイパスを、指定レビュアーグループへの承認申請に変える。</p></div>
+<div class="trio-row"><p class="trio-k">Secret scanning</p><p class="trio-v"><b>git 履歴全体</b>と新規 push を <b>200 以上のプロバイダーパターン</b>で走査。<b>Validity check</b> で漏れたトークンの生死を判定。</p><p class="trio-t"><span class="trio-chip is-free">PUBLIC は無料</span></p></div>
+<div class="trio-row"><p class="trio-k">Push protection</p><p class="trio-v">secret を含む push 自体を拒否する。リモートに到達しないのでローテーションも不要。</p><p class="trio-t"><span class="trio-chip is-free">PUBLIC は無料</span></p></div>
+<div class="trio-row"><p class="trio-k">AI-detected secrets</p><p class="trio-v">正規表現で表現できない<b>非構造の</b>認証情報を検出。設定ファイル内のパスワードや文章中の secret など。</p><p class="trio-t"><span class="trio-chip is-paid">ライセンスのみ</span></p></div>
+<div class="trio-row"><p class="trio-k">Custom patterns</p><p class="trio-v">自社独自のトークン形式。社内サービス、レガシー認証情報、パートナーが登録しない命名規則。</p><p class="trio-t"><span class="trio-chip is-paid">ライセンスのみ</span></p></div>
+<div class="trio-row"><p class="trio-k">Delegated bypass</p><p class="trio-v">push protection のバイパスを、指定レビュアーグループへの承認申請に変える。</p><p class="trio-t"><span class="trio-chip is-paid">ライセンスのみ</span></p></div>
 </div>
 
 <div class="trio-panel">
-<div class="trio-row"><p class="trio-k">Code scanning (CodeQL)<span class="trio-chip is-free">PUBLIC は無料</span></p><p class="trio-v">コードベースを<b>クエリ可能な DB</b> にコンパイルし、信頼できない入力から危険なシンクまでのデータフローを追う。インジェクション、パストラバーサルなど。</p></div>
-<div class="trio-row"><p class="trio-k">Copilot Autofix<span class="trio-chip is-free">PUBLIC は無料</span></p><p class="trio-v">アラートを PR 上の<b>説明付き修正差分</b>に変える。修正率が実際に動くのはここ。</p></div>
-<div class="trio-row"><p class="trio-k">AI-powered detections<span class="trio-chip is-paid">ライセンス</span></p><p class="trio-v">CodeQL のクエリが無い言語やフレームワークをカバーする AI エンジン。PR レビュー時に動く。</p></div>
-<div class="trio-row"><p class="trio-k">Third-party SARIF<span class="trio-chip is-free">PUBLIC は無料</span></p><p class="trio-v">SARIF を出力するスキャナーなら同じアラート一覧に取り込める。バックログもダッシュボードも 1 つ。</p></div>
-<div class="trio-row"><p class="trio-k">Security campaigns<span class="trio-chip is-paid">ライセンス</span></p><p class="trio-v">バックログを、担当者と期限が付いた<b>終わらせられるリスト</b>に切り出し、コードを持つチームと直接進める。</p></div>
+<div class="trio-row"><p class="trio-k">Code scanning (CodeQL)</p><p class="trio-v">コードを<b>クエリ可能な DB</b> にコンパイルし、危険なシンクへのデータフローを追跡。インジェクション、パストラバーサルなど。</p><p class="trio-t"><span class="trio-chip is-free">PUBLIC は無料</span></p></div>
+<div class="trio-row"><p class="trio-k">Copilot Autofix</p><p class="trio-v">アラートを PR 上の<b>説明付き修正差分</b>に変える。修正率が実際に動くのはここ。</p><p class="trio-t"><span class="trio-chip is-free">PUBLIC は無料</span></p></div>
+<div class="trio-row"><p class="trio-k">AI-powered detections</p><p class="trio-v">CodeQL のクエリが無い言語やフレームワークをカバーする AI エンジン。PR レビュー時に動く。</p><p class="trio-t"><span class="trio-chip is-paid">ライセンスのみ</span></p></div>
+<div class="trio-row"><p class="trio-k">Third-party SARIF</p><p class="trio-v">SARIF を出力するスキャナーなら同じアラート一覧に取り込める。バックログもダッシュボードも 1 つ。</p><p class="trio-t"><span class="trio-chip is-free">PUBLIC は無料</span></p></div>
+<div class="trio-row"><p class="trio-k">Security campaigns</p><p class="trio-v">バックログを、担当者と期限が付いた<b>終わらせられるリスト</b>に切り出し、コードを持つチームと直接進める。</p><p class="trio-t"><span class="trio-chip is-paid">ライセンスのみ</span></p></div>
 </div>
 
 <div class="trio-panel">
-<div class="trio-row"><p class="trio-k">Dependency review<span class="trio-chip is-paid">PRIVATE はライセンス</span></p><p class="trio-v">その変更がどの依存関係を追加・削除・更新するかを PR 上で表示し、既知の脆弱性ならマージをブロック。public repo では無料。</p></div>
-<div class="trio-row"><p class="trio-k">カスタム auto-triage ルール<span class="trio-chip is-paid">PRIVATE はライセンス</span></p><p class="trio-v">Dependabot アラートを自社ルールで一括自動クローズ・再オープン。実リスクだけがバックログに残る。public repo では無料。</p></div>
-<div class="trio-row"><p class="trio-k">Security overview<span class="trio-chip is-paid">ライセンス</span></p><p class="trio-v">サプライチェーンのリスクとカバレッジを組織全体で集約。どのリポジトリ種別でも無料にはならない。</p></div>
+<div class="trio-row"><p class="trio-k">Dependency review</p><p class="trio-v">その変更がどの依存関係を追加・削除・更新するかを PR 上で表示し、既知の脆弱性ならマージをブロック。</p><p class="trio-t"><span class="trio-chip is-free">PUBLIC は無料</span></p></div>
+<div class="trio-row"><p class="trio-k">カスタム auto-triage ルール</p><p class="trio-v">Dependabot アラートを自社ルールで一括自動クローズ・再オープン。実リスクだけがバックログに残る。</p><p class="trio-t"><span class="trio-chip is-free">PUBLIC は無料</span></p></div>
+<div class="trio-row"><p class="trio-k">Security overview</p><p class="trio-v">サプライチェーンのリスクとカバレッジを、全リポジトリ横断で組織全体に集約。</p><p class="trio-t"><span class="trio-chip is-paid">ライセンスのみ</span></p></div>
 </div>
 
 </div>

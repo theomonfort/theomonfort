@@ -202,25 +202,25 @@ Three scanning engines across the two products. Chips mark free versus licensed.
 <div class="trio-panels">
 
 <div class="trio-panel">
-<div class="trio-row"><p class="trio-k">Secret scanning<span class="trio-chip is-free">FREE ON PUBLIC</span></p><p class="trio-v">Scans the <b>entire git history</b> and every new push against <b>200+ provider patterns</b> plus generic ones. <b>Validity checks</b> ask the provider whether a leaked token is still live.</p></div>
-<div class="trio-row"><p class="trio-k">Push protection<span class="trio-chip is-free">FREE ON PUBLIC</span></p><p class="trio-v">Rejects the push carrying the secret, so it never reaches the remote and never needs rotating.</p></div>
-<div class="trio-row"><p class="trio-k">AI-detected secrets<span class="trio-chip is-paid">LICENSED</span></p><p class="trio-v">Catches <b>unstructured</b> credentials no regex describes: passwords in config, secrets in prose.</p></div>
-<div class="trio-row"><p class="trio-k">Custom patterns<span class="trio-chip is-paid">LICENSED</span></p><p class="trio-v">Your own token formats: internal services, legacy credentials, conventions no partner registers.</p></div>
-<div class="trio-row"><p class="trio-k">Delegated bypass<span class="trio-chip is-paid">LICENSED</span></p><p class="trio-v">Turns bypassing push protection into an approval request routed to a named reviewer group.</p></div>
+<div class="trio-row"><p class="trio-k">Secret scanning</p><p class="trio-v">Scans the <b>entire git history</b> and every push against <b>200+ provider patterns</b>. <b>Validity checks</b> confirm whether a leaked token is still live.</p><p class="trio-t"><span class="trio-chip is-free">FREE ON PUBLIC</span></p></div>
+<div class="trio-row"><p class="trio-k">Push protection</p><p class="trio-v">Rejects the push carrying the secret, so it never reaches the remote and never needs rotating.</p><p class="trio-t"><span class="trio-chip is-free">FREE ON PUBLIC</span></p></div>
+<div class="trio-row"><p class="trio-k">AI-detected secrets</p><p class="trio-v">Catches <b>unstructured</b> credentials no regex describes: passwords in config, secrets in prose.</p><p class="trio-t"><span class="trio-chip is-paid">LICENSED ONLY</span></p></div>
+<div class="trio-row"><p class="trio-k">Custom patterns</p><p class="trio-v">Your own token formats: internal services, legacy credentials, conventions no partner registers.</p><p class="trio-t"><span class="trio-chip is-paid">LICENSED ONLY</span></p></div>
+<div class="trio-row"><p class="trio-k">Delegated bypass</p><p class="trio-v">Turns bypassing push protection into an approval request routed to a named reviewer group.</p><p class="trio-t"><span class="trio-chip is-paid">LICENSED ONLY</span></p></div>
 </div>
 
 <div class="trio-panel">
-<div class="trio-row"><p class="trio-k">Code scanning (CodeQL)<span class="trio-chip is-free">FREE ON PUBLIC</span></p><p class="trio-v">Compiles the code into a <b>queryable database</b> and follows data flow from untrusted input to dangerous sink: injection, path traversal, deserialization.</p></div>
-<div class="trio-row"><p class="trio-k">Copilot Autofix<span class="trio-chip is-free">FREE ON PUBLIC</span></p><p class="trio-v">Turns an alert into a <b>suggested diff with an explanation</b> on the pull request. This is what moves remediation rates.</p></div>
-<div class="trio-row"><p class="trio-k">AI-powered detections<span class="trio-chip is-paid">LICENSED</span></p><p class="trio-v">An AI engine covering languages and frameworks CodeQL has no queries for, during pull request review.</p></div>
-<div class="trio-row"><p class="trio-k">Third-party SARIF<span class="trio-chip is-free">FREE ON PUBLIC</span></p><p class="trio-v">Any scanner emitting SARIF uploads into the same alert list: one backlog, one dashboard.</p></div>
-<div class="trio-row"><p class="trio-k">Security campaigns<span class="trio-chip is-paid">LICENSED</span></p><p class="trio-v">Slices the backlog into a <b>finishable list</b> with an owner and a due date, opened with the teams that own the code.</p></div>
+<div class="trio-row"><p class="trio-k">Code scanning (CodeQL)</p><p class="trio-v">Compiles the code into a <b>queryable database</b> and traces data flow into dangerous sinks: injection, path traversal, deserialization.</p><p class="trio-t"><span class="trio-chip is-free">FREE ON PUBLIC</span></p></div>
+<div class="trio-row"><p class="trio-k">Copilot Autofix</p><p class="trio-v">Turns an alert into a <b>suggested diff with an explanation</b> on the pull request. This is what moves remediation rates.</p><p class="trio-t"><span class="trio-chip is-free">FREE ON PUBLIC</span></p></div>
+<div class="trio-row"><p class="trio-k">AI-powered detections</p><p class="trio-v">An AI engine covering languages and frameworks CodeQL has no queries for, during pull request review.</p><p class="trio-t"><span class="trio-chip is-paid">LICENSED ONLY</span></p></div>
+<div class="trio-row"><p class="trio-k">Third-party SARIF</p><p class="trio-v">Any scanner emitting SARIF uploads into the same alert list: one backlog, one dashboard.</p><p class="trio-t"><span class="trio-chip is-free">FREE ON PUBLIC</span></p></div>
+<div class="trio-row"><p class="trio-k">Security campaigns</p><p class="trio-v">Slices the backlog into a <b>finishable list</b> with an owner and a due date, opened with the teams that own the code.</p><p class="trio-t"><span class="trio-chip is-paid">LICENSED ONLY</span></p></div>
 </div>
 
 <div class="trio-panel">
-<div class="trio-row"><p class="trio-k">Dependency review<span class="trio-chip is-paid">LICENSED ON PRIVATE</span></p><p class="trio-v">A pull request check showing which dependencies the change adds, removes, or upgrades, blocking the merge on a known vulnerability. Free on public repos.</p></div>
-<div class="trio-row"><p class="trio-k">Custom auto-triage rules<span class="trio-chip is-paid">LICENSED ON PRIVATE</span></p><p class="trio-v">Your own rules to auto-dismiss or reopen Dependabot alerts at scale, so the backlog reflects real risk. Free on public repos.</p></div>
-<div class="trio-row"><p class="trio-k">Security overview<span class="trio-chip is-paid">LICENSED</span></p><p class="trio-v">Org-wide aggregation of supply chain risk and coverage. Not free on any repo type.</p></div>
+<div class="trio-row"><p class="trio-k">Dependency review</p><p class="trio-v">A pull request check showing which dependencies the change adds, removes, or upgrades, blocking the merge on a known vulnerability.</p><p class="trio-t"><span class="trio-chip is-free">FREE ON PUBLIC</span></p></div>
+<div class="trio-row"><p class="trio-k">Custom auto-triage rules</p><p class="trio-v">Your own rules to auto-dismiss or reopen Dependabot alerts at scale, so the backlog reflects real risk.</p><p class="trio-t"><span class="trio-chip is-free">FREE ON PUBLIC</span></p></div>
+<div class="trio-row"><p class="trio-k">Security overview</p><p class="trio-v">Org-wide aggregation of supply chain risk and coverage, across every repository.</p><p class="trio-t"><span class="trio-chip is-paid">LICENSED ONLY</span></p></div>
 </div>
 
 </div>
