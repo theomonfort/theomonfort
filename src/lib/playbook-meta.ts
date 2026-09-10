@@ -32,7 +32,6 @@ export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'pull-requests': [6, 7],
   'custom-agent': [2],
   'agent-skills': [5, 6],
-  'github-advanced-security': [7],
   'code-scanning': [1, 2, 3, 4, 13],
 };
 

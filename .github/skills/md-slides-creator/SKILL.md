@@ -165,17 +165,24 @@ GFM tables render with retro styling. Use them for: feature comparisons, pricing
 
 ### 4c. Callouts (`>` blockquotes)
 
-Use sparingly — 1 to 3 short lines per slide. Always lead with an emoji to set the tone:
+**Default to zero callouts on a slide.** A `>` blockquote renders as a boxed panel, and a deck where every slide ends in one reads like a stack of footnotes — the boxes stop meaning anything and just eat vertical space. Most slides should end on their last real content block (the table, the widget, the bullets) with nothing after it.
+
+Add a callout **only when it carries information the slide would be wrong without**: a genuine gotcha, a constraint, a prerequisite, a decision rule. Never add one to restate the slide, to summarise what the reader just read, or to supply a closing "takeaway" the content already made obvious.
 
 ```markdown
-> 🎯 **要点**: PreToolUse だけが agent の動きを止められる。
-> 🔑 認証は `COPILOT_GITHUB_TOKEN` が最優先。
 > ⚠️ classic PAT (`ghp_…`) は使えない。
+> 🔑 認証は `COPILOT_GITHUB_TOKEN` が最優先。
 ```
 
-Common emojis: 🎯 takeaway · 🔑 key · ⚠️ warning · 💡 tip · 📝 note · 🤖 automation · 🔧 config · 🌐 public · 🆓 free · 💰 paid · 📦 module · ✅ do · ❌ don't.
+| ✅ Worth a callout | ❌ Delete it |
+|---|---|
+| A constraint that breaks the reader's setup | "🎯 In short, X makes Y easier." |
+| A prerequisite that isn't obvious | A one-line summary of the table above it |
+| A gotcha that costs an hour to discover | A motivational closer |
 
-> ⚠️ **A callout must never be the first element of a slide.** A `>` blockquote renders as a boxed "note" panel, so leading a slide with one makes the opening line look like a footnote pinned to the top. Open every slide with **normal prose** (a plain paragraph, table, or `###` sub-heading) and reserve callouts for **emphasis lower down — ideally the bottom** of the slide, as a closing takeaway/warning. The only blockquote-style block allowed at the very top is the mandatory first-slide `hero-quote` (4a), which is a styled `<div>`, not a `>` blockquote.
+Common emojis: 🔑 key · ⚠️ warning · 💡 tip · 📝 note · 🤖 automation · 🔧 config · 🌐 public · 🆓 free · 💰 paid · 📦 module · ✅ do · ❌ don't.
+
+> ⚠️ **A callout must never be the first element of a slide.** Leading with one makes the opening line look like a footnote pinned to the top. Open every slide with **normal prose** (a plain paragraph, table, or `###` sub-heading). The only blockquote-style block allowed at the very top is the mandatory first-slide `hero-quote` (4a), which is a styled `<div>`, not a `>` blockquote.
 
 ### 4d. Code blocks
 
@@ -205,17 +212,19 @@ Link to another playbook entry by slug:
 
 ### 4g. Section-title doc badge (`h2-doc`)
 
-To point one slide at its canonical doc page, append a compact badge **inline on the `## H2` line**. It renders as a small outlined pill to the right of the title, inheriting the entry accent colour, dimmed until hover.
+**Whenever a slide's content is backed by one official doc page, put that link on the title line.** This is the default way to source a slide — not an optional flourish. The badge renders as a small outlined pill to the right of the title, inheriting the entry accent colour, dimmed until hover, so it adds a citation without spending a line of slide body.
 
 ```markdown
 ## Enable and roll out <a class="h2-doc" href="https://docs.github.com/..." target="_blank" rel="noopener noreferrer">📖 Docs</a>
 ```
 
+Reach for it on any slide that describes a product's features, pricing, limits, setup steps, or availability — anywhere the reader's obvious next question is "where does this come from?". Prefer it over a `📘 References:` link list in the slide body; that pattern burns half a slide and belongs in the frontmatter `links[]` instead.
+
 Rules:
 
 - Keep it on the **same line as the `##`** — a line break makes it a separate paragraph and breaks the layout.
 - Label is always `📖 Docs` (both locales). Don't translate it, don't lengthen it; the badge is `white-space: nowrap` and a long label crowds the title.
-- **At most one per slide**, and only on slides where a single doc page really is *the* reference. If a slide needs several sources, leave them to the frontmatter `links[]` slide.
+- **At most one per slide.** If a slide genuinely needs several sources, pick the single best entry point for the badge and leave the rest to `links[]`.
 - Use the fully-qualified official URL, same as `links[]`. Duplicating a URL that also appears in `links[]` is fine and expected.
 - Mirror it onto the matching `## H2` in the other locale.
 
@@ -333,9 +342,11 @@ A `► DEMO` button pinned next to an H2 — the same inline slot as the `h2-doc
 
 ---
 
-## Step 6 — Flag what's New (when applicable)
+## Step 6 — Flag what's New (rarely)
 
-When you **add a new entry** — or **update an existing slide with content tied to a new release** (a changelog announcement, a newly shipped feature, a pricing change) — surface it with the playbook's **"New!"** markers so readers spot fresh content at a glance.
+When a slide documents something **GitHub actually released** — a changelog announcement, a newly shipped feature, a GA, a pricing change — surface it with the playbook's **"New!"** markers so readers spot the product news at a glance.
+
+This is a narrow case. Authoring or improving a slide is **not** grounds for a marker; see [When to apply / remove](#when-to-apply--remove) below before adding one.
 
 These markers are **not frontmatter**. They live in one config file: `src/lib/playbook-meta.ts`. There are two visible markers plus an automatic date.
 
@@ -376,10 +387,15 @@ Each entry's first slide shows a **last-updated date** derived from the source f
 
 ### When to apply / remove
 
-- ✅ **Apply** for: a brand-new entry, or a slide rewritten for a newly shipped feature / changelog item / pricing change.
-- 🎯 Point `NAV_HINT_SLIDES` at the **specific** slides you touched — not the whole deck — so "New!" stays meaningful.
-- 🧹 **Curate**: as entries age, remove their slugs from `NEW_PLAYBOOK_SLUGS` / `NAV_HINT_SLIDES` so the markers keep signalling genuinely recent changes.
+**"New!" means "GitHub shipped something new", not "I wrote something new."** The marker exists so a returning reader can spot *product* changes since their last visit. Writing, restructuring, or improving a slide is invisible to them — it is not news.
+
+- ✅ **Apply** only when the slide documents a **externally verifiable release**: a github.blog changelog entry, a GA/public-preview announcement, a pricing or packaging change, a newly shipped feature. Ideally you can point at the changelog URL that justifies it.
+- ❌ **Never apply** for: adding a slide, rewriting or reordering slides, improving a layout, fixing wording, splitting one slide into two, or adding a widget. A brand-new *slide* covering a years-old feature gets **no** marker.
+- 🎯 Point `NAV_HINT_SLIDES` at the **specific** slides carrying the new feature — not the whole deck.
+- 🧹 **Curate**: as releases age, remove their slugs from `NEW_PLAYBOOK_SLUGS` / `NAV_HINT_SLIDES`. A marker that outlives its release trains readers to ignore all of them.
 - ℹ️ Only `src/lib/playbook-meta.ts` changes — no edits to the renderer or the slide `.md` files needed.
+
+> 🎯 The test: *"could I link a changelog entry from the last few months that this slide is about?"* If no, don't add the marker.
 
 ---
 
@@ -399,9 +415,11 @@ Before declaring done, verify EVERY item:
 - [ ] Tables ≤ 5 cols, ≤ 8 rows.
 - [ ] Code blocks fit one slide each.
 - [ ] No `# H1` in body (frontmatter handles the title).
+- [ ] Slides that document a product's features, pricing, limits, or setup carry an `h2-doc` badge linking their canonical doc page.
 - [ ] Any `h2-doc` badge sits on the same line as its `##`, uses the `📖 Docs` label, and exists in both locales.
+- [ ] No slide ends in a callout that merely restates it — callouts only survive if they carry a real constraint, gotcha, or prerequisite.
 - [ ] Both `ja/<slug>.md` and `en/<slug>.md` exist with matching structure.
-- [ ] If the entry is new — or a slide was updated for a new release / changelog item — it's flagged in `src/lib/playbook-meta.ts` (`NEW_PLAYBOOK_SLUGS` and/or `NAV_HINT_SLIDES`, remembering indexes are 0-based).
+- [ ] "New!" markers in `src/lib/playbook-meta.ts` point only at slides tied to an actual GitHub release you could link a changelog for — never at slides that are merely newly written.
 - [ ] `pnpm build` passes.
 
 ---
