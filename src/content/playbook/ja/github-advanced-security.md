@@ -188,7 +188,7 @@ AI はレビュープロセスが想定していた速度を超えてコード�
 
 ## 何が入っている? <a class="h2-doc" href="https://docs.github.com/en/code-security/getting-started/github-security-features" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-3 つのスキャンエンジンが 2 製品に分かれている。チップは無料かライセンス必要かを示す。
+機能名をクリックすると説明が開く。チップは無料かライセンス必要かを示す。
 
 <div class="trio-widget">
 <input class="trio-radio" type="radio" name="ghas-inside" id="gi-secret" checked />
@@ -202,29 +202,30 @@ AI はレビュープロセスが想定していた速度を超えてコード�
 <div class="trio-panels">
 
 <div class="trio-panel">
-<div class="trio-row"><p class="trio-k">Secret scanning</p><p class="trio-v"><b>git 履歴全体</b>と新規 push を <b>200 以上のプロバイダーパターン</b>で走査。<b>Validity check</b> で漏れたトークンの生死を判定。</p><p class="trio-t"><span class="trio-chip is-free">PUBLIC は無料</span></p></div>
-<div class="trio-row"><p class="trio-k">Push protection</p><p class="trio-v">secret を含む push 自体を拒否する。リモートに到達しないのでローテーションも不要。</p><p class="trio-t"><span class="trio-chip is-free">PUBLIC は無料</span></p></div>
-<div class="trio-row"><p class="trio-k">AI-detected secrets</p><p class="trio-v">正規表現で表現できない<b>非構造の</b>認証情報を検出。設定ファイル内のパスワードや文章中の secret など。</p><p class="trio-t"><span class="trio-chip is-paid">ライセンスのみ</span></p></div>
-<div class="trio-row"><p class="trio-k">Custom patterns</p><p class="trio-v">自社独自のトークン形式。社内サービス、レガシー認証情報、パートナーが登録しない命名規則。</p><p class="trio-t"><span class="trio-chip is-paid">ライセンスのみ</span></p></div>
-<div class="trio-row"><p class="trio-k">Delegated bypass</p><p class="trio-v">push protection のバイパスを、指定レビュアーグループへの承認申請に変える。</p><p class="trio-t"><span class="trio-chip is-paid">ライセンスのみ</span></p></div>
+<details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Secret scanning</span><span class="trio-chip is-free">PUBLIC は無料</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v"><b>git 履歴全体</b>と新規 push を <b>200 以上のプロバイダーパターン</b>で走査。<b>Validity check</b> で漏れたトークンの生死を判定。</p></details>
+<details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Push protection</span><span class="trio-chip is-free">PUBLIC は無料</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">secret を含む push 自体を拒否する。リモートに到達しないのでローテーションも不要。</p></details>
+<details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">AI-detected secrets</span><span class="trio-chip is-paid">ライセンスのみ</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">正規表現で表現できない<b>非構造の</b>認証情報を検出。設定ファイル内のパスワードや文章中の secret など。</p></details>
+<details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Custom patterns</span><span class="trio-chip is-paid">ライセンスのみ</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">自社独自のトークン形式。社内サービス、レガシー認証情報、パートナーが登録しない命名規則。</p></details>
+<details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Delegated bypass</span><span class="trio-chip is-paid">ライセンスのみ</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">push protection のバイパスを、指定レビュアーグループへの承認申請に変える。</p></details>
+<details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Public monitoring</span><span class="trio-chip is-paid">ライセンスのみ</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v"><b>Enterprise 向け、Public preview。</b>自社所有でない repo も含め、GitHub 全体の Public repo に漏れた secret を検出する。<b>Enterprise のメンバーシップまたは検証済みドメイン</b>で自社との関連を判定。Secret Protection または GHAS が必要。<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Docs ↗</a></p></details>
 </div>
 
 <div class="trio-panel">
-<div class="trio-row"><p class="trio-k">Code scanning (CodeQL)</p><p class="trio-v">コードを<b>クエリ可能な DB</b> にコンパイルし、危険なシンクへのデータフローを追跡。インジェクション、パストラバーサルなど。</p><p class="trio-t"><span class="trio-chip is-free">PUBLIC は無料</span></p></div>
-<div class="trio-row"><p class="trio-k">Copilot Autofix</p><p class="trio-v">アラートを PR 上の<b>説明付き修正差分</b>に変える。修正率が実際に動くのはここ。</p><p class="trio-t"><span class="trio-chip is-free">PUBLIC は無料</span></p></div>
-<div class="trio-row"><p class="trio-k">AI-powered detections</p><p class="trio-v">CodeQL のクエリが無い言語やフレームワークをカバーする AI エンジン。PR レビュー時に動く。</p><p class="trio-t"><span class="trio-chip is-paid">ライセンスのみ</span></p></div>
-<div class="trio-row"><p class="trio-k">Third-party SARIF</p><p class="trio-v">SARIF を出力するスキャナーなら同じアラート一覧に取り込める。バックログもダッシュボードも 1 つ。</p><p class="trio-t"><span class="trio-chip is-free">PUBLIC は無料</span></p></div>
-<div class="trio-row"><p class="trio-k">Security campaigns</p><p class="trio-v">バックログを、担当者と期限が付いた<b>終わらせられるリスト</b>に切り出し、コードを持つチームと直接進める。</p><p class="trio-t"><span class="trio-chip is-paid">ライセンスのみ</span></p></div>
+<details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Code scanning (CodeQL)</span><span class="trio-chip is-free">PUBLIC は無料</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">コードを<b>クエリ可能な DB</b> にコンパイルし、危険なシンクへのデータフローを追跡。インジェクション、パストラバーサルなど。</p></details>
+<details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Copilot Autofix</span><span class="trio-chip is-free">PUBLIC は無料</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">アラートを PR 上の<b>説明付き修正差分</b>に変える。修正率が実際に動くのはここ。</p></details>
+<details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">AI-powered detections</span><span class="trio-chip is-paid">ライセンスのみ</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">CodeQL のクエリが無い言語やフレームワークをカバーする AI エンジン。PR レビュー時に動く。</p></details>
+<details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Third-party SARIF</span><span class="trio-chip is-free">PUBLIC は無料</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">SARIF を出力するスキャナーなら同じアラート一覧に取り込める。バックログもダッシュボードも 1 つ。</p></details>
+<details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Security campaigns</span><span class="trio-chip is-paid">ライセンスのみ</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">バックログを、担当者と期限が付いた<b>終わらせられるリスト</b>に切り出し、コードを持つチームと直接進める。</p></details>
 </div>
 
 <div class="trio-panel">
-<div class="trio-row"><p class="trio-k">Dependency review</p><p class="trio-v">その変更がどの依存関係を追加・削除・更新するかを PR 上で表示し、既知の脆弱性ならマージをブロック。</p><p class="trio-t"><span class="trio-chip is-free">PUBLIC は無料</span></p></div>
-<div class="trio-row"><p class="trio-k">カスタム auto-triage ルール</p><p class="trio-v">Dependabot アラートを自社ルールで一括自動クローズ・再オープン。実リスクだけがバックログに残る。</p><p class="trio-t"><span class="trio-chip is-free">PUBLIC は無料</span></p></div>
-<div class="trio-row"><p class="trio-k">Security overview</p><p class="trio-v">サプライチェーンのリスクとカバレッジを、全リポジトリ横断で組織全体に集約。</p><p class="trio-t"><span class="trio-chip is-paid">ライセンスのみ</span></p></div>
+<details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Dependency review</span><span class="trio-chip is-free">PUBLIC は無料</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">その変更がどの依存関係を追加・削除・更新するかを PR 上で表示し、既知の脆弱性ならマージをブロック。</p></details>
+<details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">カスタム auto-triage ルール</span><span class="trio-chip is-free">PUBLIC は無料</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">Dependabot アラートを自社ルールで一括自動クローズ・再オープン。実リスクだけがバックログに残る。</p></details>
+<details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Security overview</span><span class="trio-chip is-paid">ライセンスのみ</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">サプライチェーンのリスクとカバレッジを、全リポジトリ横断で組織全体に集約。</p></details>
 </div>
 
 </div>
-<p class="trio-foot">🆓 これ以外のサプライチェーン機能は<b>全プランで無料</b>: dependency graph、Dependabot alerts、security / version updates、マルウェアアラート、プリセット auto-triage ルール、SBOM エクスポート。</p>
+<details class="trio-row trio-foot" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">その他のサプライチェーン機能</span><span class="trio-chip is-free">全プランで無料</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">Dependency graph、Dependabot alerts、security / version updates、マルウェアアラート、プリセット auto-triage ルール、SBOM エクスポートは <b>全プランで無料</b>。</p></details>
 </div>
 
 ## 料金 <a class="h2-doc" href="https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security" target="_blank" rel="noopener noreferrer">📖 Docs</a>
