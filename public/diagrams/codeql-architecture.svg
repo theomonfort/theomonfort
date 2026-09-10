@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 475" role="img" aria-labelledby="title description">
+  <title id="title">CodeQL: database creation and query execution</title>
+  <desc id="description">Source code is extracted directly or while monitoring a build. Build artifacts are separate from the CodeQL database. The database schema, query and libraries feed the QL compiler. The evaluator runs the compiled, optimized query against the database and produces query results, which can be interpreted as SARIF alerts.</desc>
+  <defs>
+    <marker id="code-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10" fill="#00f0ff"/></marker>
+    <marker id="data-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10" fill="#ffb000"/></marker>
+    <marker id="query-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10" fill="#9bbc0f"/></marker>
+  </defs>
+  <rect width="1100" height="475" fill="#05060f" fill-opacity=".9"/>
+  <g font-family="'DotGothic16', monospace" fill="#e8f4ff">
+    <text x="20" y="30" font-size="19" fill="#00f0ff">01 / CREATE THE DATABASE</text>
+    <text x="675" y="30" font-size="19" fill="#9bbc0f">02 / RUN THE QUERY</text>
+    <path d="M635 48V454" stroke="#ffb000" stroke-dasharray="3 7" opacity=".55"/>
+
+    <g fill="none" stroke="#00f0ff" stroke-width="2" marker-end="url(#code-arrow)">
+      <path d="M100 128V205"/>
+      <path d="M100 270V365"/>
+      <path d="M175 99H295V205" stroke-dasharray="4 5"/>
+      <path d="M175 237H220" stroke-dasharray="4 5"/>
+      <path d="M370 237H393V344H415"/>
+    </g>
+    <g fill="none" stroke="#ffb000" stroke-width="2" marker-end="url(#data-arrow)">
+      <path d="M510 199V295" stroke-dasharray="4 5"/>
+      <path d="M605 172H800"/>
+      <path d="M605 344H800"/>
+    </g>
+    <g fill="none" stroke="#9bbc0f" stroke-width="2" marker-end="url(#query-arrow)">
+      <path d="M757 107V124H870V145"/>
+      <path d="M980 107V124H940V145"/>
+      <path d="M905 199V233"/>
+      <path d="M905 283V317"/>
+      <path d="M905 371V405"/>
+    </g>
+
+    <g stroke="#00f0ff" stroke-width="2" fill="#0a0e27">
+      <rect x="25" y="70" width="150" height="58"/>
+      <rect x="25" y="205" width="150" height="65"/>
+      <rect x="220" y="205" width="150" height="65"/>
+      <rect x="800" y="145" width="210" height="54"/>
+      <rect x="800" y="317" width="210" height="54"/>
+    </g>
+    <g font-size="18" text-anchor="middle">
+      <text x="100" y="105">Codebase</text>
+      <text x="100" y="232">Build system</text>
+      <text x="295" y="232">Extractor</text>
+      <text x="905" y="179">QL compiler</text>
+      <text x="905" y="351">QL evaluator</text>
+    </g>
+    <g font-size="13" text-anchor="middle">
+      <text x="100" y="253">if build-enabled</text>
+      <text x="295" y="253">code to data</text>
+      <text x="235" y="89" fill="#00f0ff">source</text>
+      <text x="288" y="297" fill="#00f0ff">monitors the build</text>
+    </g>
+
+    <rect x="25" y="365" width="150" height="52" fill="#05060f" stroke="#e8f4ff" stroke-dasharray="4 5"/>
+    <text x="100" y="397" font-size="16" text-anchor="middle">Build artifacts</text>
+    <text x="25" y="447" font-size="13" fill="#e8f4ff">Artifacts are not the analysis database.</text>
+
+    <g fill="#1a0b2e" stroke="#ffb000" stroke-width="2">
+      <rect x="415" y="145" width="190" height="54" stroke-dasharray="4 4"/>
+      <rect x="415" y="295" width="190" height="98"/>
+      <path d="M415 330H605" fill="none"/>
+    </g>
+    <g text-anchor="middle" fill="#ffb000">
+      <text x="510" y="168" font-size="18">Database schema</text>
+      <text x="510" y="187" font-size="13">describes the data</text>
+      <text x="510" y="318" font-size="18">CodeQL database</text>
+      <text x="510" y="354" font-size="16">exprs / stmts</text>
+      <text x="510" y="378" font-size="16">types / ...</text>
+    </g>
+
+    <g fill="#0a0e27" stroke="#9bbc0f" stroke-width="2">
+      <rect x="680" y="55" width="155" height="52"/>
+      <rect x="895" y="55" width="170" height="52"/>
+      <path d="M812 233H1022L998 283H788Z"/>
+      <path d="M812 405H1022L998 449H788Z"/>
+    </g>
+    <g text-anchor="middle" fill="#9bbc0f">
+      <text x="757" y="78" font-size="18">Query</text>
+      <text x="757" y="96" font-size="13">what to find</text>
+      <text x="980" y="78" font-size="18">Libraries</text>
+      <text x="980" y="96" font-size="13">model code concepts</text>
+      <text x="905" y="254" font-size="16">Compiled and</text>
+      <text x="905" y="274" font-size="16">optimized query</text>
+      <text x="905" y="432" font-size="18">Query results</text>
+    </g>
+    <text x="905" y="467" font-size="13" text-anchor="middle">Interpret results as SARIF alerts</text>
+  </g>
+</svg>

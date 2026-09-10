@@ -1,7 +1,7 @@
 ---
 title: Code Scanning
 titleEn: Code Scanning
-summary: ソースコードを実行せずに解析（SAST）して脆弱性を見つける GitHub の機能。エンジンの CodeQL はコードをデータベース化してデータフローを追跡するので、grep 系の静的解析より深く読む。見つかった脆弱性は Copilot Autofix が修正コードごと提案。public は無料、private は Code Security($30) + Actions 分 + AI クレジット。
+summary: CodeQL による静的解析（SAST）でコードの脆弱性を検出する GitHub の機能。対応するアラートには Copilot Autofix が修正を提案でき、Copilot に修正を依頼することも可能。
 icon: /theomonfort/icons/code-scanning.png
 color: cyan
 accent:
@@ -65,10 +65,10 @@ links:
 
 <div class="hero-quote">
   <p>
-    <strong>Code Scanning</strong> は、リポジトリのソースコードを <strong>実行せずに</strong> 解析（<strong>SAST</strong>）して脆弱性を見つける GitHub の機能。
+    <strong>Code Scanning</strong> は、コードを <strong>実行せずに</strong> 静的解析（<strong>SAST</strong>）して脆弱性を見つける機能。
   </p>
   <p>
-    既定エンジンの <strong>CodeQL</strong> は、コードを <strong>クエリ可能なデータベース</strong> に変換してから解析する。だから正規表現ベースの SAST と違い「ユーザー入力がどの経路で危険な関数に届くか」まで追える。見つかった脆弱性は <strong>Copilot Autofix</strong> が修正コード付きで提案し、そのまま PR にコミットできる。
+    <strong>CodeQL</strong> はコードを <strong>クエリ可能なデータベース</strong> に変換する。対応するアラートには <strong>Copilot Autofix</strong> が修正を提案でき、<strong>Copilot</strong> に修正を依頼することも可能。
   </p>
 </div>
 
@@ -156,37 +156,15 @@ links:
 
 > 🔑 **CodeQL なしで Code Scanning は使えるし、Code Scanning なしで CodeQL も使える**。「Code Scanning = CodeQL」ではない。
 
-## CodeQL の仕組み
+## CodeQL の仕組み <a class="h2-doc" href="https://codeql.github.com/docs/codeql-overview/about-codeql/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-CodeQL の肝は **「コードをデータベースにしてしまう」** こと。テキストを正規表現で引っかけるのではなく、**SQL のようにコードへ問い合わせる**。
+処理は 2 段階。**コードを抽出してデータベース化**し、**クエリをコンパイルして評価**する。
 
-```mermaid
-flowchart LR
-  SRC["📁 codebase<br/>ソースコード"]
-  BLD["🏗️ build system<br/>コンパイル言語のみ"]
-  EXT["🔧 extractor<br/>コード → データ"]
-  DB["🗄️ CodeQL database<br/>exprs / stmts / types<br/>control flow / data flow"]
-  EVAL["⚙️ QL evaluator"]
-  RES["📊 results<br/>SARIF → アラート"]
-  QRY["📝 query + libraries<br/>「何を探すか」"]
-  CMP["🧮 QL compiler"]
+<figure class="harness-map split-figure">
+<img src="/theomonfort/diagrams/codeql-architecture.svg" width="1100" height="475" style="max-height:min(440px, 46vh);object-fit:contain" alt="CodeQL の構成: ソースコードとビルドの監視から Extractor がデータベースを作成。Schema、Query、Libraries が QL compiler に入り、Evaluator がコンパイル済みクエリとデータベースから結果を生成する。ビルド成果物は別系統。" />
+</figure>
 
-  SRC --> BLD --> EXT --> DB --> EVAL --> RES
-  QRY --> CMP --> EVAL
-
-  classDef code fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
-  classDef data fill:#1a0a2e,stroke:#ffb000,color:#ffb000,stroke-width:2px
-  classDef qry fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
-  class SRC,BLD,EXT code
-  class DB,EVAL,RES data
-  class QRY,CMP qry
-```
-
-- 🔧 **extractor** — C/C++・Java・C# は **ビルドを監視して実際にコンパイルされたコードだけ**を、Python・JS/TS・Ruby は直接パースして取り込む
-- 🗄️ **database** — 式、文、型、制御フロー、データフローがテーブルとして入った **不変のスナップショット**
-- 🧮 **compiler + evaluator** — クエリを schema に合わせて最適化し、全ヒットを **SARIF** で出力 → アラートになる
-
-> 💡 データベース化されているからこそ「**ユーザー入力（source）が、どんな経路をたどってでも危険な関数（sink）に届くか**」を問い合わせられる。これが **taint tracking**で、"それっぽい文字列" ではなく実際に到達する脆弱性だけを出せる理由。
+**Schema** はデータ構造を記述し、**database** はデータを保存する。言語と <a class="retro-link" href="https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/manage-your-configuration/codeql-for-compiled-languages" target="_blank" rel="noopener noreferrer">build mode ↗</a> に応じて、ソースコードを直接抽出するか、ビルドを監視する。
 
 ## CodeQL クエリの読み方
 
@@ -555,19 +533,24 @@ jobs:
 
 > 🆓 **public repo は 3 つとも実質ゼロ** — CodeQL も Copilot Autofix も無料で、標準 GitHub-hosted runner の Actions 分も無料（larger runner は除く）。
 
-## repo 種別ごとの利用条件
+## repo 種別ごとの利用条件 <a class="h2-doc" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-| 機能 | Public repo | Private repo（Code Security なし） | Private repo（Code Security あり） |
-| --- | :---: | :---: | :---: |
-| **Code Scanning 本体**<br><span style="opacity:.72;font-size:.86em;">CodeQL（default + advanced）、Third-party SARIF upload、Copilot Autofix、PR インラインコメント、Custom クエリ、Security overview</span> | ✅ 無料 | ❌ | ✅ |
-| **Security campaigns** | ❌ | ❌ | ✅ |
-| **Actions 分** | ✅ 無料<sup>※</sup> | — | 💰 別途課金 |
+<table class="availability-table">
+<thead>
+<tr><th scope="col">機能</th><th scope="col">Public repo</th><th scope="col">Private repo<br>Code Security なし</th><th scope="col">Private repo<br>Code Security あり</th></tr>
+</thead>
+<tbody>
+<tr><td>Code Scanning 本体</td><td>✅ 無料</td><td>❌</td><td>✅ 含まれる</td></tr>
+<tr><td>Security campaigns</td><td>❌</td><td>❌</td><td>✅ 含まれる</td></tr>
+<tr><td>Actions 分</td><td>無料※</td><td>対象外</td><td>別途使用量に応じる※</td></tr>
+</tbody>
+</table>
 
-<p style="font-size:0.82em;opacity:0.75;margin-top:-0.4em;">※ 標準 GitHub-hosted runner のみ。larger runner は public repo でも課金される。</p>
-
-> ⚠️ **public → private に変更すると、Code Security を購入していない限り機能は無効化される**。OSS を社内に取り込むときの落とし穴。
-
-📘 詳細: <a class="retro-link" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">Introducing GitHub Secret Protection & Code Security（2025 Mar）↗</a>
+> 📦 **本体**: CodeQL、カスタムクエリ、SARIF アップロード、対応する Autofix 提案、PR 注釈、Security overview。
+>
+> 💰 **Actions※**: Public の標準 hosted runner は無料。Private は付属の無料枠を消費し、超過分が課金される。Larger runner は常に課金。
+>
+> ⚠️ **Public → private**: Code Scanning を継続するには Code Security が必要。
 
 ## Code Security Risk Assessment(無料の棚卸しスキャン)
 

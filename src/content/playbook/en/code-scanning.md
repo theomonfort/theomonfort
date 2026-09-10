@@ -1,7 +1,7 @@
 ---
 title: Code Scanning
 titleEn: Code Scanning
-summary: Static analysis (SAST) that finds vulnerabilities without running your code. The engine, CodeQL, turns code into a queryable database and traces data flow, so it reads deeper than grep-style SAST. Copilot Autofix then writes the fix. Free on public repos; private repos cost Code Security ($30) + Actions minutes + AI credits.
+summary: Code scanning finds vulnerabilities with CodeQL static analysis (SAST). Eligible findings can receive Copilot Autofix suggestions or be assigned to Copilot for remediation.
 icon: /theomonfort/icons/code-scanning.png
 color: cyan
 accent:
@@ -65,10 +65,10 @@ links:
 
 <div class="hero-quote">
   <p>
-    <strong>Code Scanning</strong> finds vulnerabilities in your repository by analysing the source <strong>without running it</strong> — that is <strong>SAST</strong>.
+    <strong>Code Scanning</strong> finds vulnerabilities through static analysis (<strong>SAST</strong>), <strong>without running your code</strong>.
   </p>
   <p>
-    The default engine, <strong>CodeQL</strong>, turns your code into a <strong>queryable database</strong> first, so unlike regex-based SAST it can answer "does user input reach this dangerous call, through any path?" Every finding then gets a <strong>Copilot Autofix</strong> suggestion you can commit straight to the PR.
+    <strong>CodeQL</strong> turns code into a <strong>queryable database</strong>. Eligible findings can get <strong>Copilot Autofix</strong> suggestions or be assigned to <strong>Copilot</strong> for a fix.
   </p>
 </div>
 
@@ -156,37 +156,15 @@ Conflating these two makes every "we also want to run another SAST tool" convers
 
 > 🔑 **You can use code scanning without CodeQL, and CodeQL without code scanning.** "Code scanning = CodeQL" is not true.
 
-## How CodeQL works
+## How CodeQL works <a class="h2-doc" href="https://codeql.github.com/docs/codeql-overview/about-codeql/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-The core idea is that CodeQL **turns your code into a database**. Instead of matching text with regular expressions, you **query the code the way you query SQL**.
+**Extract code into a database**, then **compile and evaluate queries** against it.
 
-```mermaid
-flowchart LR
-  SRC["📁 codebase<br/>source files"]
-  BLD["🏗️ build system<br/>compiled languages only"]
-  EXT["🔧 extractor<br/>code → data"]
-  DB["🗄️ CodeQL database<br/>exprs / stmts / types<br/>control flow / data flow"]
-  EVAL["⚙️ QL evaluator"]
-  RES["📊 results<br/>SARIF → alerts"]
-  QRY["📝 query + libraries<br/>what to look for"]
-  CMP["🧮 QL compiler"]
+<figure class="harness-map split-figure">
+<img src="/theomonfort/diagrams/codeql-architecture.svg" width="1100" height="475" style="max-height:min(440px, 46vh);object-fit:contain" alt="CodeQL architecture: source code and build monitoring feed the extractor and database. The schema, query and libraries feed the QL compiler. The evaluator combines the compiled query with the database to produce results. Build artifacts are separate." />
+</figure>
 
-  SRC --> BLD --> EXT --> DB --> EVAL --> RES
-  QRY --> CMP --> EVAL
-
-  classDef code fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
-  classDef data fill:#1a0a2e,stroke:#ffb000,color:#ffb000,stroke-width:2px
-  classDef qry fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
-  class SRC,BLD,EXT code
-  class DB,EVAL,RES data
-  class QRY,CMP qry
-```
-
-- 🔧 **extractor** — for C/C++, Java, C# it **watches the build and captures only what actually compiled**; Python, JS/TS, Ruby are parsed directly
-- 🗄️ **database** — an **immutable snapshot**: expressions, statements, types, control flow, data flow, all as tables
-- 🧮 **compiler + evaluator** — optimizes your query against that schema, returns every match, emits **SARIF** → alerts
-
-> 💡 Because it is a database, you can ask "**does user input (a source) reach a dangerous function (a sink), through any path?**" That is **taint tracking**, and it is why CodeQL reports vulnerabilities that actually connect rather than strings that merely look suspicious.
+The **schema** describes the data; the **database** stores it. Extraction reads source directly or monitors a build, depending on the language and <a class="retro-link" href="https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/manage-your-configuration/codeql-for-compiled-languages" target="_blank" rel="noopener noreferrer">build mode ↗</a>.
 
 ## Reading a CodeQL query
 
@@ -555,19 +533,24 @@ jobs:
 
 > 🆓 **On public repos all three are effectively zero** — CodeQL and Autofix are free, and standard runner minutes are free too (larger runners excepted).
 
-## Eligibility by repository type
+## Eligibility by repository type <a class="h2-doc" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-| Feature | Public repo | Private repo (no Code Security) | Private repo (with Code Security) |
-| --- | :---: | :---: | :---: |
-| **Core code scanning**<br><span style="opacity:.72;font-size:.86em;">CodeQL (default + advanced), third-party SARIF upload, Copilot Autofix, PR inline comments, custom queries, security overview</span> | ✅ Free | ❌ | ✅ |
-| **Security campaigns** | ❌ | ❌ | ✅ |
-| **Actions minutes** | ✅ Free<sup>*</sup> | — | 💰 Billed separately |
+<table class="availability-table">
+<thead>
+<tr><th scope="col">Feature</th><th scope="col">Public repo</th><th scope="col">Private repo<br>without Code Security</th><th scope="col">Private repo<br>with Code Security</th></tr>
+</thead>
+<tbody>
+<tr><td>Core code scanning</td><td>✅ Free</td><td>❌</td><td>✅ Included</td></tr>
+<tr><td>Security campaigns</td><td>❌</td><td>❌</td><td>✅ Included</td></tr>
+<tr><td>Actions minutes</td><td>Free*</td><td>Not applicable</td><td>Separate usage*</td></tr>
+</tbody>
+</table>
 
-<p style="font-size:0.82em;opacity:0.75;margin-top:-0.4em;">* Standard GitHub-hosted runners only. Larger runners are charged even on public repos.</p>
-
-> ⚠️ **Flip a public repo to private and the features are disabled** unless you have bought Code Security. Worth knowing before you internalize an OSS project.
-
-📘 Details: <a class="retro-link" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">Introducing GitHub Secret Protection & Code Security (2025 Mar) ↗</a>
+> 📦 **Core**: CodeQL, custom queries, SARIF uploads, eligible Autofix suggestions, PR annotations and Security overview.
+>
+> 💰 **Actions***: standard hosted runners are free for public repos. Private repos consume included minutes, then bill overages. Larger runners are always billed.
+>
+> ⚠️ **Public → private**: Code Security is required to keep code scanning enabled.
 
 ## Code Security Risk Assessment (free inventory scan)
 
