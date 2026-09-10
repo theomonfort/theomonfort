@@ -18,8 +18,11 @@ links:
     label: About code scanning
     url: https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning
   - group: 📖 公式ドキュメント
-    label: About CodeQL
-    url: https://docs.github.com/en/code-security/code-scanning/introduction-to-code-scanning/about-code-scanning-with-codeql
+    label: AI-powered security detections in pull requests
+    url: https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections
+  - group: 📖 公式ドキュメント
+    label: Resolving code scanning alerts
+    url: https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts
   - group: 📖 公式ドキュメント
     label: Configuring default setup
     url: https://docs.github.com/en/code-security/code-scanning/enabling-code-scanning/configuring-default-setup-for-code-scanning
@@ -56,9 +59,6 @@ links:
   - group: 📰 Recent Changelog
     label: "Agentic autofix for code scanning alerts (2026-07-10)"
     url: https://github.blog/changelog/2026-07-10-agentic-autofix-for-code-scanning-alerts-in-public-preview
-  - group: 📰 Recent Changelog
-    label: "Link code scanning alerts to GitHub Issues (2026-04-14)"
-    url: https://github.blog/changelog/2026-04-14-link-code-scanning-alerts-to-github-issues
 ---
 
 ## 一言で
@@ -119,9 +119,9 @@ links:
 
 > 🔑 覚え方 — **SAST は「自分が書いたコード」のバグ、SCA は「他人が書いたコード」のバグ**。守備範囲が違うので、どちらか一方では埋まらない。
 
-## Code Scanning と CodeQL は別物
+## Code Scanning と CodeQL は別物 <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-ここを混同すると「他社の SAST も併用したい」という話が通じなくなる。**Code Scanning は受け皿（機能）**、**CodeQL は解析エンジン**で、両者は分離している。
+**Code Scanning は GitHub の機能、CodeQL は解析エンジンの 1 つ**。PR では AI findings が補完し、他社ツールの結果も SARIF で取り込める。
 
 <div class="det-widget det-compact">
 <p class="det-hint">▸ クリックで詳細</p>
@@ -142,6 +142,14 @@ links:
 </div>
 </details>
 <details class="det-pick" name="cs-vs-codeql">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI findings（PR のみ）</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">AI security detections</span></p>
+<p class="det-why">PHP、Bash、HCL、Dockerfile など、未対応の言語やフレームワークを対象に <b>CodeQL を補完</b>。<b>PR のみ</b>で、全体スキャンやバックログのアラートはない。助言扱いでマージをブロックしない。オプトインと <b>CodeQL default setup</b> が必要で、<b>AI クレジット</b>を消費する。</p>
+<p class="det-doc">Public preview: GHAS + Copilot ライセンス。<a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">📘 Docs ↗</a></p>
+</div>
+</details>
+<details class="det-pick" name="cs-vs-codeql">
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">📄</span><span class="det-name">SARIF（接続規格）</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">📄</span><span class="det-title">SARIF — 二つをつなぐ標準フォーマット</span></p>
@@ -154,7 +162,6 @@ links:
 </div>
 </div>
 
-> 🔑 **CodeQL なしで Code Scanning は使えるし、Code Scanning なしで CodeQL も使える**。「Code Scanning = CodeQL」ではない。
 
 ## CodeQL の仕組み <a class="h2-doc" href="https://codeql.github.com/docs/codeql-overview/about-codeql/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
@@ -276,33 +283,27 @@ CodeQL の有効化方法は 2 つ。**まず Default で十分**。
 
 📘 詳細: <a class="retro-link" href="https://docs.github.com/en/code-security/code-scanning/enabling-code-scanning/configuring-default-setup-for-code-scanning" target="_blank" rel="noopener noreferrer">Configuring default setup ↗</a>
 
-## Copilot Autofix で AI が直す ★
+## Copilot Autofix: 修正提案 <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-Code Scanning 最大のキラー機能。CodeQL のアラートに対して **AI が修正コードを生成** し、PR にそのままコミットできる。
+Copilot Autofix は **対応するアラートに修正パッチを提案**する。レビューとテストをしてから適用するもので、修正の成功が保証されるわけではない。
 
-- 🤖 **どう動く** — アラートを Copilot に渡し、該当コード + 周辺コンテキスト + CodeQL の説明とデータフロー経路を元に diff を生成
-- 💬 **どこに表示** — アラート画面 **および** PR にインライン表示。コミット先は **既存ブランチ** または **新規ブランチ** から選択
-- ⚡ **MTTR 短縮** — GitHub の社内データで修正時間が 3〜4 倍速に
-- 🆓 **追加コストゼロ** — **Copilot ライセンス不要**、**AI クレジットも消費しない**。Code Security があれば追加費用なしで使える（public repo は無条件で無料）
-- 🔌 **有効化** — CodeQL で Code Scanning を有効にすれば自動的に付いてくる。default / advanced のどちらでも同じ
+- 🤖 **入力**: アラートの詳細、周辺コード、CodeQL のデータフロー経路を使って修正を提案。
+- 💬 **PR 上**: 対応するアラートにインラインの修正提案が自動表示される。
+- 🛠️ **クラウドエージェントが使えないバックログ**: **Generate fix → Create PR with fix**。
+- 🆓 **料金**: 従来の Autofix は Copilot ライセンス不要で AI クレジットも消費しない。Code Security に含まれ、Public repo は無料。
+- 🔌 **有効化**: 管理者が無効にしない限り、CodeQL で既定で利用可能。
 
-> 💡 「脆弱性を見つける」だけでなく「**直すところまで AI に任せる**」が新しい標準。レビューの負担が大幅に下がる。
+## Agentic Autofix（Public Preview） <a class="h2-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-📘 詳細: <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">Autofix for code scanning ↗</a>
+クラウドエージェントが利用可能な場合、個別アラートの **Generate fix は Assign to Copilot に置き換わる**。
 
-## Agentic Autofix — 修正をエージェントに任せる（Public Preview）
+- 🎯 **依頼**: 個別アラート、またはリポジトリのバックログやキャンペーンから **1〜25 件**を選択。
+- 🔁 **セッション**: コードベースを探索 → 修正生成 → 検証と反復 → **ドラフト PR**。
+- 🛂 **前提**: クラウドエージェントと Autofix の両方が利用可能なこと。**事前の Autofix 提案生成は不要**。
+- 💸 **料金**: **AI クレジット + Actions 分**。クラウドエージェントが使えなければ、対応するアラートでは従来の **Generate fix** を利用できる。
+- ⚠️ **検証はベストエフォート**: カスタムクエリ、`security-extended`、他社ツールのアラートは検証が保証されない。
 
-**何ができる** — Code Scanning のアラートを **Copilot クラウドエージェント** にアサインすると、Copilot が脆弱性を解析 → 修正計画を立案 → **ドラフト PR を自動作成** してくれる。
-
-- 🎯 **2 つのアサイン方法** — **一括**:Security Campaign で複数アラートを選択 → 「Assign Copilot」で 1 つの PR にまとめて修正 / **個別**:アラート詳細ページの assignee picker から Copilot を選択
-- 📦 **出力** — リポジトリ全体を踏まえた **複数ファイルの変更**（Autofix のインライン単一ファイル修正とは異なる）
-- 🔁 **反復可能** — PR 上で `@copilot` にコメントすれば修正をやり直せる。サンドボックスで CodeQL / CI も回る
-- 🛂 **利用条件** — GitHub Code Security または GHAS **＋** Copilot 有料プラン（クラウドエージェント有効）。事前に Autofix の修正提案が生成済みであること
-- 💸 **課金** — クラウドエージェントのセッションとして **AI クレジット + Actions 分** の両方を消費する（Autofix と違って無料ではない）
-
-📘 詳細: <a class="retro-link" href="https://github.blog/changelog/2026-07-10-agentic-autofix-for-code-scanning-alerts-in-public-preview" target="_blank" rel="noopener noreferrer">Agentic autofix for code scanning alerts（changelog）↗</a>
-
-## Autofix と Agentic Autofix の使い分け
+## Autofix と Agentic Autofix の使い分け <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 <div class="ctl-widget">
 <p class="ctl-hint">▸ ＋ をクリックすると両者の違いが開きます</p>
@@ -310,29 +311,29 @@ Code Scanning 最大のキラー機能。CodeQL のアラートに対して **AI
 <details class="ctl-item" name="cs-fix-vs">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📤</span><span class="ctl-name">出力の形</span><span class="ctl-when">パッチ vs PR</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v">インライン修正パッチ。<b>既存ブランチ</b> または <b>新規ブランチ</b> に直接コミットできる</span></p>
+<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v">レビューして適用する修正提案。バックログでは <b>Create PR with fix</b> で提案からドラフト PR を作成できる</span></p>
 <p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v">Copilot が作成する <b>ドラフト Pull Request</b>。レビューして取り込む</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-fix-vs">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📐</span><span class="ctl-name">修正範囲</span><span class="ctl-when">1 ファイル vs 複数</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📐</span><span class="ctl-name">修正範囲</span><span class="ctl-when">提案 vs 探索</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v"><b>単一ファイル</b>・最小限の局所修正。エスケープ関数を挟む、API を安全なものに差し替える、など</span></p>
+<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v">アラートと渡されたコードのコンテキストを基にした <b>対象を絞った修正提案</b></span></p>
 <p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v"><b>複数ファイル</b>。リポジトリ全体を踏まえたリファクタや共通処理の追加まで踏み込める</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-fix-vs">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📚</span><span class="ctl-name">対応単位</span><span class="ctl-when">個別 vs 一括</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v">アラートごとに「Generate fix」を <b>1 件ずつ</b>。PR 上での一括適用（batch apply）は可能</span></p>
-<p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v">Security Campaign で <b>複数アラートを選択して 1 PR</b> にまとめて依頼できる</span></p>
+<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v"><b>クラウドエージェントが使えない</b>場合、対応するバックログのアラートで <b>Generate fix</b>。PR 上の提案は一括適用できる</span></p>
+<p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v">リポジトリのバックログやキャンペーンから <b>1〜25 件</b>を選び、修正 PR を依頼できる</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-fix-vs">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔁</span><span class="ctl-name">検証と反復</span><span class="ctl-when">一発 vs 対話</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v">提案時点では検証なし・再生成不可。気に入らなければ破棄してマージ後の再スキャンで確認</span></p>
-<p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v">サンドボックスで解析し、PR 上で CodeQL / CI が自動実行される。<code>@copilot</code> にコメントして <b>反復修正</b> できる</span></p>
+<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v">1 回の修正提案。<b>マージ前に PR 上でレビューとテスト</b>を行う</span></p>
+<p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v"><b>ベストエフォート</b>で検証と反復を行う。セッションログを確認し、<code>@copilot</code> コメントで追加修正を依頼できる</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-fix-vs">
@@ -352,7 +353,7 @@ Code Scanning 最大のキラー機能。CodeQL のアラートに対して **AI
 </div>
 </div>
 
-> 🔑 **使い分けの目安** — まず **Autofix** で素早く局所修正（無料）。複数ファイルや大きめのリファクタが必要なものだけ **Agentic Autofix** にエスカレーションする。
+> 🔑 個別アラートのボタンは **リポジトリでの利用可否**で決まる。クラウドエージェントが使えれば Assign to Copilot、使えなければ対応するアラートに Generate fix。PR のインライン Autofix 提案は別の機能として残る。
 
 ## Security Campaigns — 組織横断で計画的に修正
 
@@ -390,7 +391,7 @@ Code Scanning 最大のキラー機能。CodeQL のアラートに対して **AI
 <summary class="rem-btn"><span class="rem-icon" aria-hidden="true">🤖</span><span class="rem-name">一括修正</span></summary>
 <div class="rem-plate">
 <p class="rem-title">🤖 一括修正 — Copilot にまとめて渡す</p>
-<p class="rem-why">Autofix 対応アラートを一括選択 → <b>Assign Copilot</b> で repo ごとに 1 つの PR を自動生成できる（Agentic Autofix、AI クレジットを消費）。</p>
+<p class="rem-why"><b>1〜25 件</b>のアラートを選び Copilot に依頼する。クラウドエージェントが利用可能なら Agentic Autofix が動き、<b>AI クレジット + Actions 分</b>を消費する。</p>
 <p class="rem-why">残りは Autofix の提案を <b>batch apply</b> で PR にまとめて適用。ダッシュボードで open / fixed / overdue が burn down していく。</p>
 </div>
 </details>
@@ -413,10 +414,10 @@ Code Scanning 最大のキラー機能。CodeQL のアラートに対して **AI
   </div>
   <div class="setup-card">
     <div class="setup-card-head">
-      <code>… → Copilot Autofix</code>
+      <code>Alert → Fix</code>
       <span class="setup-card-tag tag-magenta">▸ STEP 2 · AUTOFIX</span>
     </div>
-    <p>アラート画面に <strong>Generate fix</strong> が出る。<strong>追加費用なし</strong>。</p>
+    <p>クラウドエージェントが使えれば <strong>Assign to Copilot</strong>（従量）。使えなければ対応アラートに <strong>Generate fix</strong>（AI クレジット不要）。</p>
   </div>
   <div class="setup-card">
     <div class="setup-card-head">
@@ -434,9 +435,7 @@ Code Scanning 最大のキラー機能。CodeQL のアラートに対して **AI
   </div>
 </div>
 
-結果は **Security タブ** と PR の **Files changed** タブに出る。まず 1 リポで Default setup を試し、アラートの出方を見てから Org 展開するのが安全。
-
-> ⚠️ 展開前に **Actions 分の見積り**を。repo 数 × 対応言語数 × (push + PR + 週次) が実行回数になる。
+結果は **Security タブ** と PR の **Files changed** タブに出る。まず 1 リポで試し、**Actions 使用量**を見積もってから展開する。
 
 ## Advanced setup と SARIF 連携
 
@@ -468,12 +467,12 @@ jobs:
 
 > 💡 `runs-on` を **self-hosted runner** にすれば Actions 分の課金は発生しない。大規模展開でコストが問題になる場合の第一手。
 
-## 料金 — 3 つのメーターで課金される
+## 料金: 3 つのメーター <a class="h2-doc" href="https://github.com/security/plans" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 <p class="spec-hint">▸ ＋ をクリックすると詳細が開きます</p>
 
 <div class="spec-widget">
-<table style="table-layout:fixed">
+<table class="compact-table" style="table-layout:fixed">
 <colgroup><col style="width:22%" /><col style="width:40%" /><col style="width:38%" /></colgroup>
 <thead>
 <tr><th style="white-space:normal">コスト</th><th>どう測られるか</th><th>知っておくこと</th></tr>
@@ -481,7 +480,7 @@ jobs:
 <tbody>
 <tr>
 <td style="white-space:normal">💺 ライセンス</td>
-<td><b>GitHub Code Security $30 / active committer / 月</b>。active = 直近 <b>90 日</b> に、有効な repo へ push された commit の作者。</td>
+<td><b>$30 / active committer / 月</b><br>GitHub Code Security</td>
 <td>
 <div class="spec-list">
 <details class="spec-item" name="cs-billing">
@@ -490,19 +489,19 @@ jobs:
 </details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">👤</span><span class="spec-key">数え方</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">何リポ・何 Org に関わっても <b>1 人 1 ライセンス</b>。bot は対象外、退職後も <b>90 日</b> は消費し続ける。2025 年の分割以降は <b>GHAS フル契約なしで単体購入できる</b>。</p>
+<p class="spec-what">直近 <b>90 日</b> に有効な repo へコミットが push された作者が active committer。Enterprise 内の対象 repo や Org をまたいでも <b>1 人 1 ライセンス</b>。GitHub App の bot は対象外。Code Security は <b>単体購入できる</b>。</p>
 </details>
 </div>
 </td>
 </tr>
 <tr>
 <td style="white-space:normal">⚙️ Actions 分</td>
-<td>CodeQL は <b>Actions の workflow として動く</b>。private repo ではスキャンのたび <b>Actions 分を消費し課金される</b>。</td>
+<td>CodeQL は <b>Actions で実行</b>。Private のスキャンは実行分を消費し、超過分が課金される。</td>
 <td>
 <div class="spec-list">
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔁</span><span class="spec-key">いつ回るか</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">default / protected branch への push、その branch への PR、<b>週次スケジュール</b>。<b>repo 数 × 言語数 × 頻度</b> がそのまま分数になる。CodeQL 対応言語がない repo は 0 分。</p>
+<p class="spec-what">Default setup は default / protected branch への push、そこへの PR、<b>週次スケジュール</b>で動く。実行分は <b>各実行の時間、repo 数、言語数、頻度</b>で決まる。</p>
 </details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">💳</span><span class="spec-key">抑え方</span><span class="spec-toggle" aria-hidden="true"></span></summary>
@@ -513,12 +512,16 @@ jobs:
 </tr>
 <tr>
 <td style="white-space:normal">🤖 AI クレジット</td>
-<td>Copilot に <b>修正まで任せた場合だけ</b> 発生する。<b>Autofix（提案）は無料</b>、<b>Agentic Autofix（エージェント）は従量</b>。</td>
+<td><b>AI findings</b> と <b>Agentic Autofix</b> は AI クレジットを消費する。従来の Autofix 提案は無料。</td>
 <td>
 <div class="spec-list">
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🆓</span><span class="spec-key">Copilot Autofix</span><span class="spec-toggle" aria-hidden="true"></span></summary>
 <p class="spec-what">Copilot ライセンス <b>不要</b>、AI クレジットも <b>消費しない</b>。Code Security があれば追加費用ゼロで使える。</p>
+</details>
+<details class="spec-item" name="cs-billing">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔎</span><span class="spec-key">AI findings</span><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">オプトインの <b>PR 向け AI セキュリティ検出</b>は、修正を依頼しなくても AI クレジットを消費する。Public preview では <b>GHAS + Copilot ライセンス</b>と CodeQL default setup が必要。</p>
 </details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">💸</span><span class="spec-key">Agentic Autofix</span><span class="spec-toggle" aria-hidden="true"></span></summary>
@@ -530,8 +533,6 @@ jobs:
 </tbody>
 </table>
 </div>
-
-> 🆓 **public repo は 3 つとも実質ゼロ** — CodeQL も Copilot Autofix も無料で、標準 GitHub-hosted runner の Actions 分も無料（larger runner は除く）。
 
 ## repo 種別ごとの利用条件 <a class="h2-doc" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 

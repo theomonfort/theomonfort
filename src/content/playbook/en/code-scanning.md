@@ -18,8 +18,11 @@ links:
     label: About code scanning
     url: https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning
   - group: 📖 Official Documentation
-    label: About CodeQL
-    url: https://docs.github.com/en/code-security/code-scanning/introduction-to-code-scanning/about-code-scanning-with-codeql
+    label: AI-powered security detections in pull requests
+    url: https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections
+  - group: 📖 Official Documentation
+    label: Resolving code scanning alerts
+    url: https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts
   - group: 📖 Official Documentation
     label: Configuring default setup
     url: https://docs.github.com/en/code-security/code-scanning/enabling-code-scanning/configuring-default-setup-for-code-scanning
@@ -56,9 +59,6 @@ links:
   - group: 📰 Recent Changelog
     label: "Agentic autofix for code scanning alerts (2026-07-10)"
     url: https://github.blog/changelog/2026-07-10-agentic-autofix-for-code-scanning-alerts-in-public-preview
-  - group: 📰 Recent Changelog
-    label: "Link code scanning alerts to GitHub Issues (2026-04-14)"
-    url: https://github.blog/changelog/2026-04-14-link-code-scanning-alerts-to-github-issues
 ---
 
 ## In a nutshell
@@ -119,9 +119,9 @@ Application security testing splits into four families. Code Scanning owns **SAS
 
 > 🔑 Rule of thumb — **SAST finds bugs in the code you wrote, SCA finds bugs in the code someone else wrote.** Different territory, so neither one covers the other.
 
-## Code scanning is not CodeQL
+## Code scanning is not CodeQL <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-Conflating these two makes every "we also want to run another SAST tool" conversation fall apart. **Code scanning is the surface (a GitHub feature); CodeQL is the analysis engine.** They are separable.
+**Code scanning is the GitHub feature; CodeQL is one analysis engine.** AI findings complement it on pull requests, and third-party tools can supply SARIF results.
 
 <div class="det-widget det-compact">
 <p class="det-hint">▸ CLICK FOR DETAILS</p>
@@ -142,6 +142,14 @@ Conflating these two makes every "we also want to run another SAST tool" convers
 </div>
 </details>
 <details class="det-pick" name="cs-vs-codeql">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI findings (PR only)</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">AI security detections</span></p>
+<p class="det-why"><b>Complement CodeQL</b> for uncovered languages and frameworks, such as PHP, Bash, HCL and Dockerfiles. <b>Pull requests only</b>: no full-repo scan or backlog alerts. Advisory, not a merge gate. Requires opt-in and <b>CodeQL default setup</b>; consumes <b>AI credits</b>.</p>
+<p class="det-doc">Public preview: GHAS + Copilot licenses. <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">📘 Docs ↗</a></p>
+</div>
+</details>
+<details class="det-pick" name="cs-vs-codeql">
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">📄</span><span class="det-name">SARIF (the contract)</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">📄</span><span class="det-title">SARIF — the format that joins them</span></p>
@@ -154,7 +162,6 @@ Conflating these two makes every "we also want to run another SAST tool" convers
 </div>
 </div>
 
-> 🔑 **You can use code scanning without CodeQL, and CodeQL without code scanning.** "Code scanning = CodeQL" is not true.
 
 ## How CodeQL works <a class="h2-doc" href="https://codeql.github.com/docs/codeql-overview/about-codeql/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
@@ -276,33 +283,27 @@ There are two ways to enable CodeQL. **Default setup is enough to start.**
 
 📘 Details: <a class="retro-link" href="https://docs.github.com/en/code-security/code-scanning/enabling-code-scanning/configuring-default-setup-for-code-scanning" target="_blank" rel="noopener noreferrer">Configuring default setup ↗</a>
 
-## Copilot Autofix — AI fixes it for you ★
+## Copilot Autofix: suggested fixes <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-Code Scanning's most impactful capability. When CodeQL raises an alert, **AI generates a fix** you can commit straight to the PR.
+Copilot Autofix can generate a **suggested patch for an eligible alert**. You review, test and apply it; a successful fix is not guaranteed.
 
-- 🤖 **How it works** — the alert goes to Copilot, which generates a diff from the offending code, its surrounding context, CodeQL's description and the data-flow path
-- 💬 **Where it shows** — on the alert page **and** inline in the PR; commit to **an existing branch** or **a new branch**
-- ⚡ **Reduces MTTR** — GitHub internal data shows fix time is 3–4× faster
-- 🆓 **No extra cost** — **no Copilot license required** and **it does not consume AI credits**. Included with Code Security (and unconditionally free on public repos)
-- 🔌 **Enablement** — comes with code scanning via CodeQL; nothing else to turn on, default or advanced setup
+- 🤖 **Input**: alert details, surrounding code and CodeQL's data-flow path inform the suggestion.
+- 💬 **On pull requests**: supported alerts can receive inline suggestions automatically.
+- 🛠️ **On backlog alerts without cloud agent**: **Generate fix → Create PR with fix**.
+- 🆓 **Cost**: no Copilot license or AI credits for classic Autofix. Included with Code Security; free on public repositories.
+- 🔌 **Enablement**: allowed by default with CodeQL unless an administrator disables it.
 
-> 💡 Not just "find vulnerabilities" — **"let AI fix them too"** is the new standard. Review burden drops dramatically.
+## Agentic Autofix (Public Preview) <a class="h2-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-📘 Details: <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">Autofix for code scanning ↗</a>
+When cloud agent is available, **Assign to Copilot replaces Generate fix** on individual code scanning alerts.
 
-## Agentic Autofix — delegate the fix to the agent (Public Preview)
+- 🎯 **Assign**: one alert, or **1–25 alerts** from a repository backlog or security campaign.
+- 🔁 **Agent session**: explore the codebase → generate a fix → validate and iterate → open a **draft PR**.
+- 🛂 **Requirements**: cloud agent and Autofix must both be available. **No pre-generated Autofix suggestion is required.**
+- 💸 **Cost**: **AI credits + Actions minutes**. Without cloud agent, the classic **Generate fix** flow remains available for eligible alerts.
+- ⚠️ **Validation is best-effort**: custom queries, `security-extended` and third-party alerts are not guaranteed to be validated.
 
-**What it does** — assign a Code Scanning alert to the **Copilot cloud agent**. Copilot analyzes the vulnerability, plans the fix, and opens a **draft Pull Request** for you to review.
-
-- 🎯 **Two ways to assign** — **bulk** (select multiple alerts in a Security Campaign → "Assign Copilot" → one consolidated PR) or **single** (assignee picker on the alert page)
-- 📦 **Output** — multi-file, repository-wide changes (vs Autofix's inline single-file patch)
-- 🔁 **Iterate** — comment `@copilot` on the PR to refine; CodeQL and CI run on the PR before merge
-- 🛂 **Requirements** — GitHub Code Security or GHAS **+** a paid Copilot plan with cloud agent enabled; the alert must already have an Autofix suggestion
-- 💸 **Billing** — billed as a cloud agent session, consuming **AI credits and Actions minutes** (unlike Autofix, this is not free)
-
-📘 Details: <a class="retro-link" href="https://github.blog/changelog/2026-07-10-agentic-autofix-for-code-scanning-alerts-in-public-preview" target="_blank" rel="noopener noreferrer">Agentic autofix for code scanning alerts (changelog) ↗</a>
-
-## Autofix vs Agentic Autofix
+## Autofix vs Agentic Autofix <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 <div class="ctl-widget">
 <p class="ctl-hint">▸ CLICK + TO OPEN THE COMPARISON</p>
@@ -310,29 +311,29 @@ Code Scanning's most impactful capability. When CodeQL raises an alert, **AI gen
 <details class="ctl-item" name="cs-fix-vs">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📤</span><span class="ctl-name">Output</span><span class="ctl-when">patch vs PR</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v">An inline patch, committed to <b>an existing branch</b> or <b>a new branch</b></span></p>
+<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v">A suggested patch to review and apply. For backlog alerts, <b>Create PR with fix</b> opens a draft PR from the suggestion</span></p>
 <p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v">A <b>draft Pull Request</b> opened by the Copilot bot, reviewed like any other</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-fix-vs">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📐</span><span class="ctl-name">Fix scope</span><span class="ctl-when">one file vs many</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📐</span><span class="ctl-name">Fix scope</span><span class="ctl-when">suggestion vs exploration</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v"><b>Single file</b>, minimal local fix: insert an escape, swap in a safe API</span></p>
+<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v">A <b>targeted suggestion</b> based on the alert and supplied code context</span></p>
 <p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v"><b>Multiple files</b>, with repository-wide context — refactors and shared helpers included</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-fix-vs">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📚</span><span class="ctl-name">Granularity</span><span class="ctl-when">per-alert vs bulk</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v"><b>One alert at a time</b> via "Generate fix", though suggestions can be batch-applied on a PR</span></p>
-<p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v">Select <b>many alerts in a Security Campaign</b> and get one PR per repo</span></p>
+<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v"><b>Generate fix</b> on eligible backlog alerts <b>without cloud agent</b>; PR suggestions can be batch-applied</span></p>
+<p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v">Assign <b>1–25 alerts</b> from a repository backlog or campaign to get a fix PR</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-fix-vs">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔁</span><span class="ctl-name">Validation & iteration</span><span class="ctl-when">one-shot vs dialogue</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v">No validation at suggestion time and no regenerate. Discard it, or merge and re-scan</span></p>
-<p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v">Sandboxed analysis; CodeQL and CI run on the PR, and <code>@copilot</code> comments drive <b>re-fixes</b></span></p>
+<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v">A one-step suggestion: <b>review and test it on a PR before merging</b></span></p>
+<p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v">Validates and iterates on a <b>best-effort</b> basis. Read the session log; use <code>@copilot</code> comments for further changes</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-fix-vs">
@@ -352,7 +353,7 @@ Code Scanning's most impactful capability. When CodeQL raises an alert, **AI gen
 </div>
 </div>
 
-> 🔑 **Rule of thumb** — start with **Autofix** for quick local fixes (it costs nothing); escalate to **Agentic Autofix** only when the fix spans multiple files or needs a real refactor.
+> 🔑 On individual alert pages, **repository availability determines the button**: cloud agent available → Assign to Copilot; otherwise → Generate fix for eligible alerts. PR inline Autofix suggestions remain a separate experience.
 
 ## Security Campaigns — drive remediation at scale
 
@@ -390,7 +391,7 @@ Detection is the easy half; **what happens after the alert** is the real work. A
 <summary class="rem-btn"><span class="rem-icon" aria-hidden="true">🤖</span><span class="rem-name">FIX</span></summary>
 <div class="rem-plate">
 <p class="rem-title">🤖 FIX — hand the batch to Copilot</p>
-<p class="rem-why">Bulk-select Autofix-eligible alerts and hit <b>Assign Copilot</b> to get one PR per repo (Agentic Autofix — this consumes AI credits).</p>
+<p class="rem-why">Select <b>1–25 alerts</b> and assign them to Copilot. With cloud agent available, it starts Agentic Autofix and consumes <b>AI credits + Actions minutes</b>.</p>
 <p class="rem-why">For the rest, <b>batch apply</b> the Autofix suggestions on the PR. The dashboard burns down open / fixed / overdue as you go.</p>
 </div>
 </details>
@@ -413,10 +414,10 @@ Detection is the easy half; **what happens after the alert** is the real work. A
   </div>
   <div class="setup-card">
     <div class="setup-card-head">
-      <code>… → Copilot Autofix</code>
+      <code>Alert → Fix</code>
       <span class="setup-card-tag tag-magenta">▸ STEP 2 · AUTOFIX</span>
     </div>
-    <p>A <strong>Generate fix</strong> button appears on alerts. <strong>No extra cost.</strong></p>
+    <p>Cloud agent available: <strong>Assign to Copilot</strong> (metered). Otherwise: <strong>Generate fix</strong> for eligible alerts (no AI credits).</p>
   </div>
   <div class="setup-card">
     <div class="setup-card-head">
@@ -434,9 +435,7 @@ Detection is the easy half; **what happens after the alert** is the real work. A
   </div>
 </div>
 
-Results appear in the **Security tab** and as inline comments on the PR's **Files changed** tab. Enable it on one repo first, then roll out org-wide.
-
-> ⚠️ Estimate **Actions minutes** before you roll out: repos × supported languages × (push + PR + weekly).
+Results appear in the **Security tab** and the PR's **Files changed** tab. Start with one repo and estimate **Actions usage** before rolling out.
 
 ## Advanced setup and SARIF
 
@@ -468,12 +467,12 @@ jobs:
 
 > 💡 Point `runs-on` at a **self-hosted runner** and the Actions minutes are not billed — the first lever when scan cost bites at scale.
 
-## Pricing — three meters, not one
+## Pricing: three meters <a class="h2-doc" href="https://github.com/security/plans" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 <p class="spec-hint">▸ + UNFOLDS THE DETAIL</p>
 
 <div class="spec-widget">
-<table style="table-layout:fixed">
+<table class="compact-table" style="table-layout:fixed">
 <colgroup><col style="width:22%" /><col style="width:40%" /><col style="width:38%" /></colgroup>
 <thead>
 <tr><th style="white-space:normal">Cost</th><th>How it is measured</th><th>Good to know</th></tr>
@@ -481,7 +480,7 @@ jobs:
 <tbody>
 <tr>
 <td style="white-space:normal">💺 License</td>
-<td><b>GitHub Code Security, $30 per active committer / month.</b> Active = a commit of theirs was pushed to an enabled repo in the last <b>90 days</b>.</td>
+<td><b>$30 / active committer / month</b><br>GitHub Code Security</td>
 <td>
 <div class="spec-list">
 <details class="spec-item" name="cs-billing">
@@ -490,19 +489,19 @@ jobs:
 </details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">👤</span><span class="spec-key">Who counts</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what"><b>One license per person</b>, however many repos or orgs they touch. Bots are excluded; a leaver keeps consuming a license for <b>90 days</b>. Sold <b>standalone</b> since the 2025 split — no full GHAS needed.</p>
+<p class="spec-what">Active committers have a commit pushed to an enabled repo in the last <b>90 days</b>. <b>One license per person</b> across enabled repos and orgs in the enterprise; GitHub App bots are excluded. Code Security is sold <b>standalone</b>.</p>
 </details>
 </div>
 </td>
 </tr>
 <tr>
 <td style="white-space:normal">⚙️ Actions minutes</td>
-<td>CodeQL <b>runs as an Actions workflow</b>. On private repos every scan consumes Actions minutes, <b>billed as normal</b>.</td>
+<td>CodeQL <b>runs on Actions</b>. Private scans consume minutes; overages are billed.</td>
 <td>
 <div class="spec-list">
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔁</span><span class="spec-key">When it runs</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">Push to the default or a protected branch, PRs against them, and a <b>weekly schedule</b>. <b>Repos × languages × frequency</b> is your minute count. A repo with no supported language costs zero.</p>
+<p class="spec-what">Default setup runs on pushes to the default or protected branches, PRs against them and a <b>weekly schedule</b>. Minutes depend on <b>run duration, repository count, languages and frequency</b>.</p>
 </details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">💳</span><span class="spec-key">Cap the spend</span><span class="spec-toggle" aria-hidden="true"></span></summary>
@@ -513,12 +512,16 @@ jobs:
 </tr>
 <tr>
 <td style="white-space:normal">🤖 AI credits</td>
-<td>Only if you ask <b>Copilot to do the fixing</b>. Autofix is free; <b>Agentic Autofix is metered</b>.</td>
+<td><b>AI findings</b> and <b>Agentic Autofix</b> consume AI credits. Classic Autofix suggestions remain free.</td>
 <td>
 <div class="spec-list">
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🆓</span><span class="spec-key">Copilot Autofix</span><span class="spec-toggle" aria-hidden="true"></span></summary>
 <p class="spec-what">No Copilot license needed and it <b>does not consume AI credits</b>. Included with Code Security at no additional cost.</p>
+</details>
+<details class="spec-item" name="cs-billing">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔎</span><span class="spec-key">AI findings</span><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">Opt-in <b>AI-powered security detections on PRs</b> consume AI credits even when you do not request a fix. During public preview, they require <b>GHAS + Copilot licenses</b> and CodeQL default setup.</p>
 </details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">💸</span><span class="spec-key">Agentic Autofix</span><span class="spec-toggle" aria-hidden="true"></span></summary>
@@ -530,8 +533,6 @@ jobs:
 </tbody>
 </table>
 </div>
-
-> 🆓 **On public repos all three are effectively zero** — CodeQL and Autofix are free, and standard runner minutes are free too (larger runners excepted).
 
 ## Eligibility by repository type <a class="h2-doc" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
