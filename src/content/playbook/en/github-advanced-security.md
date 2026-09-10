@@ -21,31 +21,22 @@ links:
     label: About GitHub Advanced Security
     url: https://docs.github.com/en/get-started/learning-about-github/about-github-advanced-security
   - group: 📖 Official Documentation
-    label: GitHub plans pricing
-    url: https://docs.github.com/en/get-started/learning-about-github/githubs-plans
-  - group: 📖 Official Documentation
-    label: Planning a trial of GHAS
-    url: https://docs.github.com/en/code-security/tutorials/trialing-github-advanced-security/planning-a-trial-of-ghas
-  - group: 📰 Announcement
-    label: Introducing Secret Protection & Code Security (2025/03)
-    url: https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/
-  - group: 💰 Billing
+    label: GitHub security features (free vs licensed)
+    url: https://docs.github.com/en/code-security/getting-started/github-security-features
+  - group: 💰 Billing & free inventory
     label: About billing for GitHub Advanced Security
     url: https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security
-  - group: 🆓 Free inventory (Risk Assessment)
-    label: Secret Risk Assessment (Docs)
+  - group: 💰 Billing & free inventory
+    label: Secret Risk Assessment
     url: https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk
-  - group: 🆓 Free inventory (Risk Assessment)
-    label: Code Security Risk Assessment (Docs)
+  - group: 💰 Billing & free inventory
+    label: Code Security Risk Assessment
     url: https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment
-  - group: 🆓 Free inventory (Risk Assessment)
-    label: Code Security Risk Assessment GA (2026/04)
-    url: https://github.blog/changelog/2026-04-08-code-security-risk-assessment-available-for-organizations/
   - group: 🏢 Enterprise rollout
-    label: Creating a custom security configuration for your enterprise
+    label: Creating a custom security configuration
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/create-custom-configuration
   - group: 🏢 Enterprise rollout
-    label: Applying a custom security configuration to your enterprise
+    label: Applying a custom security configuration
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/apply-custom-configuration
   - group: 🏢 Enterprise rollout
     label: Code scanning merge protection
@@ -54,23 +45,8 @@ links:
     label: Security overview
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/security-at-scale/security-overview
   - group: 📊 Visibility (Security overview)
-    label: Assessing adoption of security features (Coverage)
-    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/view-and-interpret-data/analyze-organization-data/assessing-adoption-code-security
-  - group: 📊 Visibility (Security overview)
     label: Exporting data from security overview (CSV)
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/view-and-interpret-data/analyze-organization-data/export-data
-  - group: 📊 Visibility (Security overview)
-    label: Public monitoring for secret scanning
-    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring
-  - group: 📰 Recent Changelog
-    label: "Secret scanning public monitoring for enterprises (2026-07-01)"
-    url: https://github.blog/changelog/2026-07-01-secret-scanning-public-monitoring-for-enterprises
-  - group: 📰 Recent Changelog
-    label: "Start a GitHub Advanced Security trial from a risk assessment (2026-05-19)"
-    url: https://github.blog/changelog/2026-05-19-start-a-github-advanced-security-trial-from-a-risk-assessment
-  - group: 📰 Recent Changelog
-    label: "GitHub Advanced Security setup made simple (2026-03-17)"
-    url: https://github.blog/changelog/2026-03-17-github-advanced-security-setup-made-simple
 ---
 
 ## In a nutshell
@@ -150,8 +126,6 @@ AI writes code faster than any review process was designed to absorb — and att
 </div>
 </div>
 
-> 🎯 More findings arriving every quarter, and less time to act on each one.
-
 ## What it means for AppSec
 
 "Shift left" used to mean the IDE. Now the IDE, the CLI, the app, and the pull request blend into one continuous surface that agents move across freely. That has two consequences.
@@ -167,78 +141,93 @@ AI writes code faster than any review process was designed to absorb — and att
 </div>
 </div>
 
-> 🎯 Protection has to live everywhere work happens, not only at the merge gate.
-
 ## How GHAS answers it
 
-Scanning tools normally live outside the platform: a separate console, a separate backlog, and findings that reach the developer days after the code was written. GHAS puts all four steps in the place that already holds the code.
+Scanning tools normally live outside the platform: a separate console, a separate backlog, and findings that reach the developer days after the code was written. GHAS puts all four steps where the code already is.
 
-- 🔎 **Find** — surface the secrets and vulnerabilities already sitting in the default branch, across every repo, without asking a single team to run anything
-- 🚧 **Prevent** — push protection blocks a secret before it becomes a commit; a ruleset can hold a pull request until code scanning comes back clean
-- 🔧 **Fix** — alerts land as annotations on the pull request, and Copilot Autofix proposes an actual diff instead of a ticket
-- 📊 **Prove** — one configuration for the whole enterprise, one dashboard showing which repos are covered and which are not
-
-> 🎯 The value isn't "another scanner". It's that detection, prevention, remediation, and reporting share the platform with the code, so nothing has to be exported, reconciled, or chased.
-
-## What's inside
-
-**🔑 Secret Protection** keeps credentials out of the repository. **🔍 Code Security** finds the vulnerabilities written into the code itself. Here's what each one actually gives you.
-
-<div class="det-widget">
-<p class="det-hint">▸ CLICK FOR DETAILS</p>
-<div class="det-split">
-<div class="det-list">
-<details class="det-pick" name="ghas-inside">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🔑</span><span class="det-name">Secret scanning</span></summary>
-<div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🔑</span><span class="det-title">Secret scanning</span></p>
-<p class="det-why">Scans the <b>entire git history</b> and every new push against patterns registered by <b>200+ providers</b>, plus generic formats and AI detection for unstructured secrets. Each match becomes an alert carrying the file, the commit, and the author.</p>
+<div class="rem-widget">
+<p class="rem-hint">▸ CLICK A STEP FOR DETAILS</p>
+<div class="rem-flow">
+<div class="rem-row">
+<details class="rem-slot" name="ghas-answer">
+<summary class="rem-btn"><span class="rem-icon" aria-hidden="true">🔎</span><span class="rem-name">FIND</span></summary>
+<div class="rem-plate">
+<p class="rem-title">🔎 FIND — what is already there</p>
+<p class="rem-why">Scans the <b>full git history</b> and every branch for leaked credentials, and builds a queryable database of the code to trace vulnerable data flows.</p>
+<p class="rem-why">Runs across every repository in the org without asking a single team to install or configure anything.</p>
 </div>
 </details>
-<details class="det-pick" name="ghas-inside">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🛡️</span><span class="det-name">Push protection</span></summary>
-<div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🛡️</span><span class="det-title">Push protection</span></p>
-<p class="det-why">Rejects the push that contains a secret, so it never reaches the remote and never needs rotating. The developer sees it in their own terminal. Enforced <b>org-wide</b>, with bypass restricted to named actors if you want it.</p>
+<details class="rem-slot" name="ghas-answer">
+<summary class="rem-btn"><span class="rem-icon" aria-hidden="true">🚧</span><span class="rem-name">PREVENT</span></summary>
+<div class="rem-plate">
+<p class="rem-title">🚧 PREVENT — before it lands</p>
+<p class="rem-why"><b>Push protection</b> rejects the push carrying a secret, so it never reaches the remote and never needs rotating.</p>
+<p class="rem-why">A <b>ruleset</b> can hold a pull request until code scanning comes back clean, so the gate is a repository rule rather than a reviewer remembering.</p>
 </div>
 </details>
-<details class="det-pick" name="ghas-inside">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">✅</span><span class="det-name">Validity & custom patterns</span></summary>
-<div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">✅</span><span class="det-title">Validity &amp; custom patterns</span></p>
-<p class="det-why"><b>Validity checks</b> ask the provider whether a leaked token is still live, so you triage what is genuinely exploitable first. <b>Custom patterns</b> cover the token formats no partner will ever register: internal services, legacy credentials, your own conventions.</p>
+<details class="rem-slot" name="ghas-answer">
+<summary class="rem-btn"><span class="rem-icon" aria-hidden="true">🔧</span><span class="rem-name">FIX</span></summary>
+<div class="rem-plate">
+<p class="rem-title">🔧 FIX — in the pull request</p>
+<p class="rem-why">Alerts arrive as <b>annotations on the diff</b>, not as tickets in another tool the developer has to go open.</p>
+<p class="rem-why"><b>Copilot Autofix</b> proposes an actual patch with an explanation, so the developer reviews a change instead of first researching the vulnerability class.</p>
 </div>
 </details>
-<details class="det-pick" name="ghas-inside">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🔍</span><span class="det-name">Code scanning (CodeQL)</span></summary>
-<div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🔍</span><span class="det-title">Code scanning (CodeQL)</span></p>
-<p class="det-why">Compiles the codebase into a <b>queryable database</b> and follows data flow from untrusted input to dangerous sink — injection, path traversal, deserialization. Runs on push, on pull requests, and on a weekly schedule; results appear as PR annotations.</p>
-</div>
-</details>
-<details class="det-pick" name="ghas-inside">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">Copilot Autofix</span></summary>
-<div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">Copilot Autofix</span></p>
-<p class="det-why">Turns an alert into a <b>suggested diff with an explanation</b>, right on the pull request. The developer reviews and commits instead of researching the vulnerability class first, which is what actually moves the remediation numbers.</p>
-</div>
-</details>
-<details class="det-pick" name="ghas-inside">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">📣</span><span class="det-name">Security campaigns</span></summary>
-<div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">📣</span><span class="det-title">Security campaigns</span></p>
-<p class="det-why">Slices the existing alert backlog into a <b>finishable list</b> with an owner and a due date, and opens the work directly with the teams that own the code. Plus <b>dependency review</b> on pull requests and the <b>Security overview</b> dashboards.</p>
+<details class="rem-slot" name="ghas-answer">
+<summary class="rem-btn"><span class="rem-icon" aria-hidden="true">📊</span><span class="rem-name">PROVE</span></summary>
+<div class="rem-plate">
+<p class="rem-title">📊 PROVE — across the enterprise</p>
+<p class="rem-why">One <b>security configuration</b> applies to every org and repo, including ones created tomorrow.</p>
+<p class="rem-why"><b>Security overview</b> reports which repos are covered, which are not, and how the backlog is trending, so coverage is a number rather than an assumption.</p>
 </div>
 </details>
 </div>
-<div class="det-screen det-has-case"><div class="det-case">
-<p class="det-case-k">📚 FULL ENTRIES</p>
-<p class="det-case-v"><a class="retro-link" href="/theomonfort/en/playbook/secret-scanning">Secret Scanning ↗</a> — detection, push protection, and triage in depth.<br /><a class="retro-link" href="/theomonfort/en/playbook/code-scanning">Code Scanning ↗</a> — CodeQL setup, Autofix, and campaigns in depth.</p>
-</div></div>
+<div class="rem-screen"><p class="rem-empty">SELECT A STEP ▸</p></div>
 </div>
 </div>
 
-## Pricing
+## What's inside <a class="h2-doc" href="https://docs.github.com/en/code-security/getting-started/github-security-features" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+Three scanning engines across the two products. Chips mark free versus licensed.
+
+<div class="trio-widget">
+<input class="trio-radio" type="radio" name="ghas-inside" id="gi-secret" checked />
+<input class="trio-radio" type="radio" name="ghas-inside" id="gi-code" />
+<input class="trio-radio" type="radio" name="ghas-inside" id="gi-dep" />
+<div class="trio-bar">
+<label class="trio-tab" for="gi-secret"><span class="trio-name"><span class="trio-icon" aria-hidden="true">🔑</span>Secret scanning</span><span class="trio-prod">SECRET PROTECTION · $19</span></label>
+<label class="trio-tab" for="gi-code"><span class="trio-name"><span class="trio-icon" aria-hidden="true">🔍</span>Code scanning</span><span class="trio-prod">CODE SECURITY · $30</span></label>
+<label class="trio-tab" for="gi-dep"><span class="trio-name"><span class="trio-icon" aria-hidden="true">📦</span>Dependabot</span><span class="trio-prod">CODE SECURITY · $30</span></label>
+</div>
+<div class="trio-panels">
+
+<div class="trio-panel">
+<div class="trio-row"><p class="trio-k">Secret scanning<span class="trio-chip is-free">FREE ON PUBLIC</span></p><p class="trio-v">Scans the <b>entire git history</b> and every new push against <b>200+ provider patterns</b> plus generic ones. <b>Validity checks</b> ask the provider whether a leaked token is still live.</p></div>
+<div class="trio-row"><p class="trio-k">Push protection<span class="trio-chip is-free">FREE ON PUBLIC</span></p><p class="trio-v">Rejects the push carrying the secret, so it never reaches the remote and never needs rotating.</p></div>
+<div class="trio-row"><p class="trio-k">AI-detected secrets<span class="trio-chip is-paid">LICENSED</span></p><p class="trio-v">Catches <b>unstructured</b> credentials no regex describes: passwords in config, secrets in prose.</p></div>
+<div class="trio-row"><p class="trio-k">Custom patterns<span class="trio-chip is-paid">LICENSED</span></p><p class="trio-v">Your own token formats: internal services, legacy credentials, conventions no partner registers.</p></div>
+<div class="trio-row"><p class="trio-k">Delegated bypass<span class="trio-chip is-paid">LICENSED</span></p><p class="trio-v">Turns bypassing push protection into an approval request routed to a named reviewer group.</p></div>
+</div>
+
+<div class="trio-panel">
+<div class="trio-row"><p class="trio-k">Code scanning (CodeQL)<span class="trio-chip is-free">FREE ON PUBLIC</span></p><p class="trio-v">Compiles the code into a <b>queryable database</b> and follows data flow from untrusted input to dangerous sink: injection, path traversal, deserialization.</p></div>
+<div class="trio-row"><p class="trio-k">Copilot Autofix<span class="trio-chip is-free">FREE ON PUBLIC</span></p><p class="trio-v">Turns an alert into a <b>suggested diff with an explanation</b> on the pull request. This is what moves remediation rates.</p></div>
+<div class="trio-row"><p class="trio-k">AI-powered detections<span class="trio-chip is-paid">LICENSED</span></p><p class="trio-v">An AI engine covering languages and frameworks CodeQL has no queries for, during pull request review.</p></div>
+<div class="trio-row"><p class="trio-k">Third-party SARIF<span class="trio-chip is-free">FREE ON PUBLIC</span></p><p class="trio-v">Any scanner emitting SARIF uploads into the same alert list: one backlog, one dashboard.</p></div>
+<div class="trio-row"><p class="trio-k">Security campaigns<span class="trio-chip is-paid">LICENSED</span></p><p class="trio-v">Slices the backlog into a <b>finishable list</b> with an owner and a due date, opened with the teams that own the code.</p></div>
+</div>
+
+<div class="trio-panel">
+<div class="trio-row"><p class="trio-k">Dependency review<span class="trio-chip is-paid">LICENSED ON PRIVATE</span></p><p class="trio-v">A pull request check showing which dependencies the change adds, removes, or upgrades, blocking the merge on a known vulnerability. Free on public repos.</p></div>
+<div class="trio-row"><p class="trio-k">Custom auto-triage rules<span class="trio-chip is-paid">LICENSED ON PRIVATE</span></p><p class="trio-v">Your own rules to auto-dismiss or reopen Dependabot alerts at scale, so the backlog reflects real risk. Free on public repos.</p></div>
+<div class="trio-row"><p class="trio-k">Security overview<span class="trio-chip is-paid">LICENSED</span></p><p class="trio-v">Org-wide aggregation of supply chain risk and coverage. Not free on any repo type.</p></div>
+</div>
+
+</div>
+<p class="trio-foot">🆓 The rest of the supply chain is <b>free on every plan</b>: dependency graph, Dependabot alerts, security and version updates, malware alerts, preset auto-triage rules, SBOM export.</p>
+</div>
+
+## Pricing <a class="h2-doc" href="https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 | Product | Price | Billing unit |
 | --- | :---: | --- |
@@ -246,51 +235,40 @@ Scanning tools normally live outside the platform: a separate console, a separat
 | 🔍 **GitHub Code Security** | **$30** / month | active committer |
 | 📦 Both together | $49 / month | active committer |
 
-- 👥 **Active committer** = a unique committer who pushed to a repository with the feature enabled during the past 90 days. The same person counts as one across any number of repositories
-- 💳 **Metered (pay-as-you-go)** model — no need to reserve license seats upfront; you're billed only for the people who actually push
-- 🏷️ Available on **GitHub Team** and **GitHub Enterprise**
-- 🆓 **Public repos are completely free** — open source projects need no license
+- 👥 **Active committer** = someone who pushed to a repo with the feature on in the past 90 days. Counted once across every repo and org; GitHub App bots don't count
+- 🏷️ Sold on **GitHub Team** and **GitHub Enterprise**. On **Enterprise Server** and **GHE.com** every repository needs a licence
+- 🌐 **Public repos get most features free, not all** — custom patterns, delegated bypass, AI-detected secrets, campaigns and Security overview still need a licence (<a class="retro-link" href="https://docs.github.com/en/code-security/getting-started/github-security-features" target="_blank" rel="noopener noreferrer">exact split ↗</a>)
 
 > 💡 The two products are bought independently. If you only need secret scanning, **Secret Protection alone ($19)** is enough; add **Code Security ($30)** when you also want CodeQL.
 
-## How to think about licensing
+## Pre-purchase inventory — Risk Assessments <a class="h2-doc" href="https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-1. 🌐 **Public repos only? Do nothing** — everything is free
-2. 🆓 **Enable free features for private repos first** — Dependabot (alerts / updates), user-level push protection, and Secret Risk Assessment (one-time inventory)
-3. 🔑 **Want org-level enforcement against secret leaks?** → Buy **Secret Protection**
-4. 🔍 **Want code vulnerability scanning (CodeQL) and Autofix too?** → Add **Code Security**
+Two free assessments run from **Org → Security → Assessments** and show what is already hiding in your repos. No licence, no trial, and you see the numbers before deciding to buy.
 
-> 🎯 Start with a Risk Assessment (below) to visualize how many secrets and vulnerabilities are hiding in your org — then evaluate the cost-effectiveness of Secret Protection / Code Security.
+<div class="assess">
+<div class="assess-card">
+<p class="assess-name">🔑 Secret Risk Assessment</p>
+<p class="assess-what">Types and count of secrets sitting in your org's repositories, aggregated by category.</p>
+<dl class="assess-meta">
+<div class="assess-line"><dt>SCOPE</dt><dd>All repos — public, private, internal, archived</dd></div>
+<div class="assess-line"><dt>RUNS</dt><dd>Once</dd></div>
+<div class="assess-line"><dt>OUTPUT</dt><dd>Counts only; secret values are never stored</dd></div>
+</dl>
+</div>
+<div class="assess-card is-code">
+<p class="assess-name">🔍 Code Security Risk Assessment</p>
+<p class="assess-what">Code vulnerabilities found by CodeQL, broken down by severity, language, and how many Copilot Autofix can fix.</p>
+<dl class="assess-meta">
+<div class="assess-line"><dt>SCOPE</dt><dd>Up to the 20 most active repos</dd></div>
+<div class="assess-line"><dt>RUNS</dt><dd>Once every 90 days</dd></div>
+<div class="assess-line"><dt>OUTPUT</dt><dd>Aggregated report; no Actions minutes consumed</dd></div>
+</dl>
+</div>
+</div>
 
-## Pre-purchase inventory — Risk Assessments
-
-GitHub provides two **Risk Assessments** to visualize your organization's security posture — **no license required, completely free**. Both can be triggered with a single click from **Org → Security → Assessments**, and you can review the results before deciding to purchase Secret Protection / Code Security.
-
-| Assessment | What it shows | Scope | Frequency | Details |
-| --- | --- | --- | :---: | --- |
-| 🔑 **Secret Risk Assessment** | Types and count of secrets hiding in org repos | **All repos** (public / private / internal / archived) | Once | <a class="retro-link" href="https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk" target="_blank" rel="noopener noreferrer">Secret Risk Assessment ↗</a> |
-| 🔍 **Code Security Risk Assessment** | Code vulnerabilities detected by CodeQL (severity / language / Autofix-eligible count) | **Up to 20 most active repos** | Once every 90 days | <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/risk-assessment" target="_blank" rel="noopener noreferrer">Code Security Risk Assessment ↗</a> |
-
-- 🆓 **Completely free** — no GHAS / Secret Protection / Code Security license required
-- 🛂 **Permissions** — only Organization owners or security managers can run them
-- 📊 **Output** — aggregated reports (individual secret values and code are not stored on GitHub servers)
-- 🏷️ **Eligible plans** — GitHub Team and GitHub Enterprise Cloud (Server support expected in 3.22)
-- ⚙️ **Actions minutes** — Code Security Risk Assessment does not consume your regular Actions quota
-
-> 💡 Use these first when you "need numbers for a budget proposal" or "want to see the impact before buying." Running both on the same day gives you a complete view of your organization's security posture in hours.
-
-> 🧪 A trial is the natural next step after the inventory. You can start a GHAS trial straight from the Risk Assessment results, and <a class="retro-link" href="https://docs.github.com/en/code-security/tutorials/trialing-github-advanced-security/planning-a-trial-of-ghas" target="_blank" rel="noopener noreferrer">Planning a trial of GHAS ↗</a> covers how to set goals, pick participants, and define success criteria.
-
-📘 Risk Assessment references:
-- <a class="retro-link" href="https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk" target="_blank" rel="noopener noreferrer">Enabling Secret Risk Assessment ↗</a>
-- <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment" target="_blank" rel="noopener noreferrer">Code security risk assessment (GitHub Docs) ↗</a>
-- <a class="retro-link" href="https://github.blog/changelog/2026-04-08-code-security-risk-assessment-available-for-organizations/" target="_blank" rel="noopener noreferrer">Code Security Risk Assessment GA (2026/04) ↗</a>
-
-📘 GHAS general:
-- <a class="retro-link" href="https://docs.github.com/en/code-security/tutorials/trialing-github-advanced-security/planning-a-trial-of-ghas" target="_blank" rel="noopener noreferrer">Planning a trial of GHAS (GitHub Docs) ↗</a>
-- <a class="retro-link" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">Introducing GitHub Secret Protection & Code Security (GitHub Blog) ↗</a>
-- <a class="retro-link" href="https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security" target="_blank" rel="noopener noreferrer">About billing for GitHub Advanced Security ↗</a>
-- <a class="retro-link" href="https://github.com/security/advanced-security" target="_blank" rel="noopener noreferrer">GitHub Advanced Security product page ↗</a>
+- 🛂 Only **organization owners** and **security managers** can run them
+- 🏷️ **GitHub Team** and **GitHub Enterprise Cloud** (Server support expected in 3.22)
+- 🧪 You can start a **GHAS trial directly from the results**, which is the natural next step once you have the numbers
 
 ## Rolling out across the enterprise
 
