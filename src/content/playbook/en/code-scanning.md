@@ -508,6 +508,10 @@ jobs:
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">💳</span><span class="spec-key">Cap the spend</span><span class="spec-toggle" aria-hidden="true"></span></summary>
 <p class="spec-what"><b>Self-hosted runners are not billed</b>, or set an Actions budget. Minutes are <b>not</b> included in the Code Security license. Trap: <b>larger runners are charged even on public repos</b>.</p>
 </details>
+<details class="spec-item" name="cs-billing">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📊</span><span class="spec-key">Measure it</span><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">Filter Actions usage metrics <b>by workflow name</b> to isolate what CodeQL alone costs, so the conversation runs on real numbers instead of estimates.<br /><code>github.com/orgs/&lt;org&gt;/actions/metrics/usage?filters=codeql.yml</code></p>
+</details>
 </div>
 </td>
 </tr>

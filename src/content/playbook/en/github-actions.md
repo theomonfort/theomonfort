@@ -26,6 +26,15 @@ links:
   - group: 📖 Official Documentation
     label: Actions runner pricing
     url: https://docs.github.com/en/billing/reference/actions-runner-pricing
+  - group: 💰 Billing
+    label: Set up budgets and alerts
+    url: https://docs.github.com/en/billing/how-tos/set-up-budgets
+  - group: 💰 Billing
+    label: Using soft budgets to monitor without blocking
+    url: https://docs.github.com/en/billing/tutorials/soft-budgets
+  - group: 💰 Billing
+    label: Actions usage metrics
+    url: https://docs.github.com/en/actions/concepts/metrics
   - group: 🛒 Marketplace
     label: GitHub Marketplace · Actions
     url: https://github.com/marketplace?type=actions
@@ -197,6 +206,26 @@ The moment you push, execution logs appear in the **Actions tab**. Failures show
 > 🛠️ **Self-hosted runners incur no GitHub billing** (as of now). Running on your own server / k8s means execution time is free — you just pay for your own infrastructure and electricity.  
 > 🌍 Billing is **usage-time-based, not per active committer**. Even a solo developer who runs CI heavily will see charges.
 
-## Cloud Agent / Copilot Code Review also run here
+## Your CI is not the only thing burning minutes <a class="h2-doc" href="https://docs.github.com/en/billing/tutorials/soft-budgets" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-> 🤖 When **Copilot Cloud Agent** implements a task, or when **Copilot Code Review** reads a PR — both run as **GitHub Actions workflows** under the hood. They consume Actions free-tier minutes and appear as Actions logs. See <a class="retro-link" href="/theomonfort/en/playbook/cloud-agent/">Cloud Agent</a> and <a class="retro-link" href="/theomonfort/en/playbook/copilot-code-review/">Copilot Code Review</a> for details.
+Alongside the CI/CD you wrote yourself, the headline Copilot and GHAS features run on **the same GitHub-hosted runners** and turn **the same Actions meter**.
+
+<div class="tbl-compact">
+
+| What spends Actions minutes | How it is billed |
+| --- | --- |
+| 🤖 <a class="retro-link" href="/theomonfort/en/playbook/cloud-agent/">Cloud Agent</a> | Every task it implements |
+| 👀 <a class="retro-link" href="/theomonfort/en/playbook/copilot-code-review/">Copilot Code Review</a> | Every review on a private repo |
+| 🔍 <a class="retro-link" href="/theomonfort/en/playbook/code-scanning/">Code Scanning (CodeQL)</a> | Every push, PR and weekly scan |
+| 🩺 <a class="retro-link" href="/theomonfort/en/playbook/code-quality/">Code Quality</a> | Every scan it runs |
+| ⚙️ Your own CI/CD | Whatever your workflows do |
+
+</div>
+
+### A hard budget stops all of it at once
+
+Exhaust a budget that has **Stop usage when budget limit is reached** ticked and **every GitHub-hosted runner halts**. It is not just CI going red: CodeQL scanning and Copilot stop in the same instant.
+
+- ✅ **Prefer alert-only** — leave the box unticked for a "soft budget". Owners and billing managers are emailed at **75 / 90 / 100%** and nothing is blocked
+- 📊 **Measure before you cap** — <code>github.com/enterprises/&lt;enterprise slug&gt;/actions/metrics/usage</code> breaks minutes down by workflow, repo and OS
+- 🛠️ **Self-hosted runners are not billed** — the problem never arises there

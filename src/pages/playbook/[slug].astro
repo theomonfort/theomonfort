@@ -3613,6 +3613,11 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
   .prose-akq .spec-what b,
   .prose-akq .spec-what strong { color: #ffb000; font-weight: normal; }
+  /* A bare URL has no break opportunity and would blow out the cell. */
+  .prose-akq .spec-what code {
+    font-size: 0.92em;
+    overflow-wrap: anywhere;
+  }
   .prose-akq .spec-item[open] .spec-what::after {
     content: '▊';
     margin-left: 0.15em;

@@ -508,6 +508,10 @@ jobs:
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">💳</span><span class="spec-key">抑え方</span><span class="spec-toggle" aria-hidden="true"></span></summary>
 <p class="spec-what"><b>self-hosted runner なら Actions 課金なし</b>。または Actions の予算を設定する。<b>Code Security ライセンスに Actions 分は含まれない</b> — 別メーターだと理解しておく。</p>
 </details>
+<details class="spec-item" name="cs-billing">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📊</span><span class="spec-key">実測する</span><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">Actions usage metrics を <b>workflow 名で絞れば</b>、CodeQL だけの消費分が出る。見積もりではなく実測値で議論できる。<br /><code>github.com/orgs/&lt;org&gt;/actions/metrics/usage?filters=codeql.yml</code></p>
+</details>
 </div>
 </td>
 </tr>
