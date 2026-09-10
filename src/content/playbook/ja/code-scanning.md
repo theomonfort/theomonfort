@@ -472,7 +472,7 @@ jobs:
 
 <p class="spec-hint">▸ ＋ をクリックすると詳細が開きます</p>
 
-<div class="spec-widget">
+<div class="spec-widget spec-compact">
 <table style="table-layout:fixed">
 <colgroup><col style="width:22%" /><col style="width:40%" /><col style="width:38%" /></colgroup>
 <thead>
@@ -513,16 +513,20 @@ jobs:
 </tr>
 <tr>
 <td style="white-space:normal">🤖 AI クレジット</td>
-<td>Copilot に <b>修正まで任せた場合だけ</b> 発生する。<b>Autofix（提案）は無料</b>、<b>Agentic Autofix（エージェント）は従量</b>。</td>
+<td>クレジットを使うのは <b>検知</b> と <b>修正</b> の 2 か所。<b>Autofix（提案）は無料</b>、<b>AI findings</b> と <b>Agentic Autofix</b> は従量。</td>
 <td>
 <div class="spec-list">
+<details class="spec-item" name="cs-billing">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔎</span><span class="spec-key">AI findings</span><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what"><b>Public preview。CodeQL 非対応言語</b>（PHP / Shell / Terraform / Dockerfile）を AI が <b>PR 上でだけ</b> 検査。<b>CodeQL default setup</b> と Code Security + Copilot ライセンスが前提。<a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">Docs ↗</a></p>
+</details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🆓</span><span class="spec-key">Copilot Autofix</span><span class="spec-toggle" aria-hidden="true"></span></summary>
 <p class="spec-what">Copilot ライセンス <b>不要</b>、AI クレジットも <b>消費しない</b>。Code Security があれば追加費用ゼロで使える。</p>
 </details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">💸</span><span class="spec-key">Agentic Autofix</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">クラウドエージェントのセッションとして課金され、<b>AI クレジット + Actions 分</b> の両方を消費する。単価は <b>モデルと処理トークン量で変動</b>（1 AI クレジット = $0.01）。ユーザー単位の予算は必ず停止するが、Org 予算はプール消費後にしか効かない。</p>
+<p class="spec-what">クラウドエージェントのセッションとして課金され、<b>AI クレジット + Actions 分</b> を消費する（1 クレジット = $0.01、モデルとトークン量で変動）。ユーザー予算は必ず停止するが、Org 予算はプール消費後にしか効かない。</p>
 </details>
 </div>
 </td>
@@ -531,7 +535,6 @@ jobs:
 </table>
 </div>
 
-> 🆓 **public repo は 3 つとも実質ゼロ** — CodeQL も Copilot Autofix も無料で、標準 GitHub-hosted runner の Actions 分も無料（larger runner は除く）。
 
 ## repo 種別ごとの利用条件 <a class="h2-doc" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 

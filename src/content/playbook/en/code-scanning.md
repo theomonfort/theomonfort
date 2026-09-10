@@ -472,7 +472,7 @@ jobs:
 
 <p class="spec-hint">▸ + UNFOLDS THE DETAIL</p>
 
-<div class="spec-widget">
+<div class="spec-widget spec-compact">
 <table style="table-layout:fixed">
 <colgroup><col style="width:22%" /><col style="width:40%" /><col style="width:38%" /></colgroup>
 <thead>
@@ -513,16 +513,20 @@ jobs:
 </tr>
 <tr>
 <td style="white-space:normal">🤖 AI credits</td>
-<td>Only if you ask <b>Copilot to do the fixing</b>. Autofix is free; <b>Agentic Autofix is metered</b>.</td>
+<td>Credits burn in two places now: <b>finding</b> and <b>fixing</b>. Autofix is free; <b>AI findings</b> and <b>Agentic Autofix</b> are metered.</td>
 <td>
 <div class="spec-list">
+<details class="spec-item" name="cs-billing">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔎</span><span class="spec-key">AI findings</span><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what"><b>Public preview.</b> AI reviews <b>non-CodeQL languages</b> (PHP, Shell, Terraform, Dockerfile) on <b>pull requests only</b>. Needs <b>CodeQL default setup</b> plus Code Security and Copilot licenses. <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">Docs ↗</a></p>
+</details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🆓</span><span class="spec-key">Copilot Autofix</span><span class="spec-toggle" aria-hidden="true"></span></summary>
 <p class="spec-what">No Copilot license needed and it <b>does not consume AI credits</b>. Included with Code Security at no additional cost.</p>
 </details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">💸</span><span class="spec-key">Agentic Autofix</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">Billed as a Copilot cloud agent session, drawing down <b>AI credits and Actions minutes</b>. Cost <b>varies with model and tokens</b> (1 AI credit = $0.01). User-level credit budgets hard-stop; org budgets only cap after the shared pool runs out.</p>
+<p class="spec-what">Billed as a cloud agent session, drawing down <b>AI credits and Actions minutes</b> (1 credit = $0.01, <b>varying with model and tokens</b>). User budgets hard-stop; org budgets only cap once the pool is spent.</p>
 </details>
 </div>
 </td>
@@ -531,7 +535,6 @@ jobs:
 </table>
 </div>
 
-> 🆓 **On public repos all three are effectively zero** — CodeQL and Autofix are free, and standard runner minutes are free too (larger runners excepted).
 
 ## Eligibility by repository type <a class="h2-doc" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
