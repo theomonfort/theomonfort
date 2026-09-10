@@ -239,7 +239,6 @@ AI はレビュープロセスが想定していた速度を超えてコード�
 - 🏷️ **GitHub Team** と **GitHub Enterprise** で購入可能。**Enterprise Server** と **GHE.com** では全リポジトリにライセンスが必要
 - 🌐 **public repo は「ほとんど」無料だが「全部」ではない** — custom patterns、delegated bypass、AI-detected secrets、campaigns、Security overview はライセンスが必要 (<a class="retro-link" href="https://docs.github.com/en/code-security/getting-started/github-security-features" target="_blank" rel="noopener noreferrer">正確な線引き ↗</a>)
 
-> 💡 2 製品は独立して購入できる。Secret scanning だけ欲しいなら **Secret Protection 単体 ($19)** で OK。CodeQL も使いたくなったら **Code Security ($30)** を追加すればいい。
 
 ## 購入前の棚卸し — Risk Assessments <a class="h2-doc" href="https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
@@ -268,7 +267,7 @@ AI はレビュープロセスが想定していた速度を超えてコード�
 
 - 🛂 実行できるのは **Organization owner** と **security manager** のみ
 - 🏷️ **GitHub Team** と **GitHub Enterprise Cloud** (Server は 3.22 で対応予定)
-- 🧪 結果画面からそのまま **GHAS トライアル**を開始できる。数字が出た後の次の一手はこれ
+- 🧪 結果画面からそのまま <a class="retro-link" href="https://docs.github.com/en/code-security/tutorials/trialing-github-advanced-security/planning-a-trial-of-ghas" target="_blank" rel="noopener noreferrer">GHAS トライアル ↗</a> を開始できる。数字が出た後の次の一手はこれ
 
 ## エンタープライズ全体へのロールアウト手順
 
