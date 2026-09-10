@@ -10,7 +10,7 @@ accent:
   glow: hover:shadow-neon-cyan
   shadow: shadow-neon-cyan
   hex: "#00f0ff"
-order: 19.8
+order: 19.3
 category: secure
 related: ['secret-scanning', 'code-scanning', 'dependabot']
 links:
@@ -239,7 +239,6 @@ Three scanning engines across the two products. Chips mark free versus licensed.
 - 🏷️ Sold on **GitHub Team** and **GitHub Enterprise**. On **Enterprise Server** and **GHE.com** every repository needs a licence
 - 🌐 **Public repos get most features free, not all** — custom patterns, delegated bypass, AI-detected secrets, campaigns and Security overview still need a licence (<a class="retro-link" href="https://docs.github.com/en/code-security/getting-started/github-security-features" target="_blank" rel="noopener noreferrer">exact split ↗</a>)
 
-> 💡 The two products are bought independently. If you only need secret scanning, **Secret Protection alone ($19)** is enough; add **Code Security ($30)** when you also want CodeQL.
 
 ## Pre-purchase inventory — Risk Assessments <a class="h2-doc" href="https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
@@ -268,7 +267,7 @@ Two free assessments run from **Org → Security → Assessments** and show what
 
 - 🛂 Only **organization owners** and **security managers** can run them
 - 🏷️ **GitHub Team** and **GitHub Enterprise Cloud** (Server support expected in 3.22)
-- 🧪 You can start a **GHAS trial directly from the results**, which is the natural next step once you have the numbers
+- 🧪 You can start a <a class="retro-link" href="https://docs.github.com/en/code-security/tutorials/trialing-github-advanced-security/planning-a-trial-of-ghas" target="_blank" rel="noopener noreferrer">GHAS trial directly from the results ↗</a>, which is the natural next step once you have the numbers
 
 ## Rolling out across the enterprise
 

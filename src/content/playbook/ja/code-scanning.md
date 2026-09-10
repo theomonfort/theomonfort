@@ -10,7 +10,7 @@ accent:
   glow: hover:shadow-neon-cyan
   shadow: shadow-neon-cyan
   hex: "#00f0ff"
-order: 19.4
+order: 19.5
 category: secure
 related: ['code-quality', 'github-advanced-security', 'dependabot', 'secret-scanning']
 links:
@@ -471,7 +471,7 @@ jobs:
 
 <p class="spec-hint">▸ ＋ をクリックすると詳細が開きます</p>
 
-<div class="spec-widget">
+<div class="spec-widget spec-compact">
 <table class="compact-table" style="table-layout:fixed">
 <colgroup><col style="width:22%" /><col style="width:40%" /><col style="width:38%" /></colgroup>
 <thead>
@@ -507,25 +507,29 @@ jobs:
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">💳</span><span class="spec-key">抑え方</span><span class="spec-toggle" aria-hidden="true"></span></summary>
 <p class="spec-what"><b>self-hosted runner なら Actions 課金なし</b>。または Actions の予算を設定する。<b>Code Security ライセンスに Actions 分は含まれない</b> — 別メーターだと理解しておく。</p>
 </details>
+<details class="spec-item" name="cs-billing">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📊</span><span class="spec-key">実測する</span><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">Actions usage metrics を <b>workflow 名で絞れば</b>、CodeQL だけの消費分が出る。見積もりではなく実測値で議論できる。<br /><code>github.com/orgs/&lt;org&gt;/actions/metrics/usage?filters=codeql.yml</code></p>
+</details>
 </div>
 </td>
 </tr>
 <tr>
 <td style="white-space:normal">🤖 AI クレジット</td>
-<td><b>AI findings</b> と <b>Agentic Autofix</b> は AI クレジットを消費する。従来の Autofix 提案は無料。</td>
+<td><b>AI findings</b>（検知）と <b>Agentic Autofix</b>（修正）は従量課金。従来の Autofix 提案は無料。</td>
 <td>
 <div class="spec-list">
+<details class="spec-item" name="cs-billing">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔎</span><span class="spec-key">AI findings</span><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">オプトインで <b>CodeQL 非対応言語</b>（PHP / Shell / Terraform / Dockerfile）を <b>PR 上のみ</b>で AI 検査。修正を依頼しなくても AI クレジットを消費する。Public preview では <b>GHAS + Copilot ライセンス</b>と CodeQL default setup が必要。<a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">Docs ↗</a></p>
+</details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🆓</span><span class="spec-key">Copilot Autofix</span><span class="spec-toggle" aria-hidden="true"></span></summary>
 <p class="spec-what">Copilot ライセンス <b>不要</b>、AI クレジットも <b>消費しない</b>。Code Security があれば追加費用ゼロで使える。</p>
 </details>
 <details class="spec-item" name="cs-billing">
-<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔎</span><span class="spec-key">AI findings</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">オプトインの <b>PR 向け AI セキュリティ検出</b>は、修正を依頼しなくても AI クレジットを消費する。Public preview では <b>GHAS + Copilot ライセンス</b>と CodeQL default setup が必要。</p>
-</details>
-<details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">💸</span><span class="spec-key">Agentic Autofix</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">クラウドエージェントのセッションとして課金され、<b>AI クレジット + Actions 分</b> の両方を消費する。単価は <b>モデルと処理トークン量で変動</b>（1 AI クレジット = $0.01）。ユーザー単位の予算は必ず停止するが、Org 予算はプール消費後にしか効かない。</p>
+<p class="spec-what">クラウドエージェントのセッションとして課金され、<b>AI クレジット + Actions 分</b> を消費する（1 クレジット = $0.01、モデルとトークン量で変動）。ユーザー予算は必ず停止するが、Org 予算はプール消費後にしか効かない。</p>
 </details>
 </div>
 </td>

@@ -10,7 +10,7 @@ accent:
   glow: hover:shadow-neon-cyan
   shadow: shadow-neon-cyan
   hex: "#00f0ff"
-order: 19.3
+order: 19.7
 category: secure
 related: ['github-advanced-security', 'github-actions']
 links:

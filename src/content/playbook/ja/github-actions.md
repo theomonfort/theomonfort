@@ -26,6 +26,15 @@ links:
   - group: 📖 公式ドキュメント
     label: Actions runner pricing
     url: https://docs.github.com/en/billing/reference/actions-runner-pricing
+  - group: 💰 課金
+    label: Set up budgets and alerts
+    url: https://docs.github.com/en/billing/how-tos/set-up-budgets
+  - group: 💰 課金
+    label: Using soft budgets to monitor without blocking
+    url: https://docs.github.com/en/billing/tutorials/soft-budgets
+  - group: 💰 課金
+    label: Actions usage metrics
+    url: https://docs.github.com/en/actions/concepts/metrics
   - group: 🛒 Marketplace
     label: GitHub Marketplace · Actions
     url: https://github.com/marketplace?type=actions
@@ -197,7 +206,27 @@ push した瞬間から **Actions タブ** で実行ログが見える。失敗�
 > 🛠️ **Self-hosted runner は GitHub 課金なし**(現時点)。自前サーバー / k8s に建てれば実行時間は無料、ただしメンテと電気代は自分持ち。  
 > 🌍 課金は **active committer ベースではなく実行時間ベース**。1 人開発でも CI を回しまくれば請求が来る。
 
-## Cloud Agent / Copilot Code Review もここで動く
+## Actions 分を使うのは CI だけではない <a class="h2-doc" href="https://docs.github.com/en/billing/tutorials/soft-budgets" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-> 🤖 **Copilot Cloud Agent** がタスクを実装する時、**Copilot Code Review** が PR を読みに行く時 — どちらも裏側では **GitHub Actions の workflow** として動いている。Actions の無料枠を消費し、Actions のログとして表示される。詳細は <a class="retro-link" href="/theomonfort/playbook/cloud-agent/">Cloud Agent</a> ・ <a class="retro-link" href="/theomonfort/playbook/copilot-code-review/">Copilot Code Review</a> 参照。
+自作の CI/CD に加えて、Copilot と GHAS の主要機能が **同じ GitHub-hosted runner** の上で動き、**同じ Actions メーター** を回している。
+
+<div class="tbl-compact">
+
+| 何が Actions 分を使うか | 課金のされ方 |
+| --- | --- |
+| 🤖 <a class="retro-link" href="/theomonfort/playbook/cloud-agent/">Cloud Agent</a> | タスクを実装するたびに消費 |
+| 👀 <a class="retro-link" href="/theomonfort/playbook/copilot-code-review/">Copilot Code Review</a> | private repo のレビューで消費 |
+| 🔍 <a class="retro-link" href="/theomonfort/playbook/code-scanning/">Code Scanning (CodeQL)</a> | push / PR / 週次スキャンで消費 |
+| 🩺 <a class="retro-link" href="/theomonfort/playbook/code-quality/">Code Quality</a> | スキャンのたびに消費 |
+| ⚙️ 自作の CI/CD | workflow の定義どおり |
+
+</div>
+
+### hard budget は全部まとめて止める
+
+**Stop usage when budget limit is reached** を付けた予算を使い切ると、**GitHub-hosted runner が一斉に止まる**。CI が落ちるだけでなく、CodeQL のスキャンも Copilot も同時に止まる。
+
+- ✅ **推奨は alert only** — チェックを外せば「soft budget」。**75 / 90 / 100%** で owner と billing manager に通知が飛び、実行は止まらない
+- 📊 **止める前に実測** — <code>github.com/enterprises/&lt;enterprise slug&gt;/actions/metrics/usage</code> で workflow / repo / OS 別の内訳が見える
+- 🛠️ **self-hosted runner は課金対象外** — そもそもこの問題が起きない
 
