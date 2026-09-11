@@ -69,16 +69,16 @@ links:
   </p>
 </div>
 
-## Why secrets matter even in private repos
+## Why secrets matter in private / internal repos
 
-**"Private" is a visibility setting, not a security control.** Secrets belong in a secret manager, never in code, and **Push protection** is what keeps them out. Here are 8 reasons why, even in a private repo.
+**Private does not mean the breach stays contained.** An attacker who compromises one developer account or runner can use internally exposed secrets to expand the attack. Keep secrets in a secret manager and block leaks with **Push protection**. Here are 8 reasons why.
 
 <div class="risk-widget">
 <p class="risk-hint">▸ CLICK + TO REVEAL</p>
 <div class="risk-list">
 <details class="risk-item" name="risk-private">
-<summary class="risk-btn"><span class="risk-num">01</span><span class="risk-icon" aria-hidden="true">🌐</span><span class="risk-label">Access is wider than you think</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
-<p class="risk-why">Every Org member with read access (often tens to hundreds, including contractors and unrelated teams) can view the secret. Internal forks, GitHub Apps, OAuth Apps, CI/CD, and runners inherit that access. There is <b>no log of who read a file</b>.</p>
+<summary class="risk-btn"><span class="risk-num">01</span><span class="risk-icon" aria-hidden="true">🌐</span><span class="risk-label">Internal repos, external developers</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<p class="risk-why"><b>An internal repo does not mean an internal-only workforce.</b> Employees, contractors, systems integrators, and subcontractors with read access can all read committed secrets. Outsourcing extends access beyond your own employees and the devices you manage.</p>
 </details>
 <details class="risk-item" name="risk-private">
 <summary class="risk-btn"><span class="risk-num">02</span><span class="risk-icon" aria-hidden="true">🔓</span><span class="risk-label">One click from public</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
@@ -89,16 +89,16 @@ links:
 <p class="risk-why">Deleting it in a later commit does not remove it. It stays in history, every local clone, forks, backups, and CI caches. The only fix is <b>rotation</b>, not file deletion.</p>
 </details>
 <details class="risk-item" name="risk-private">
-<summary class="risk-btn"><span class="risk-num">04</span><span class="risk-icon" aria-hidden="true">💻</span><span class="risk-label">Dev machines become the weak point</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
-<p class="risk-why">Every <b>git clone</b> copies secrets onto unmanaged laptops. One piece of malware, one stolen device, or one compromised account is enough. Blast radius is N developers, not one server.</p>
+<summary class="risk-btn"><span class="risk-num">04</span><span class="risk-icon" aria-hidden="true">💻</span><span class="risk-label">Git distributes your secrets, too</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<p class="risk-why">Git is a <b>distributed version control system</b>. A normal <code>git clone</code> copies code and history, including committed secrets, onto each developer's workstation, whether employee or contractor. Protecting the server is not enough. <b>Revoking repo access when a contract ends does not erase those local copies.</b></p>
 </details>
 <details class="risk-item" name="risk-private">
 <summary class="risk-btn"><span class="risk-num">05</span><span class="risk-icon" aria-hidden="true">🎣</span><span class="risk-label">Account compromise = instant access</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
 <p class="risk-why">One phished developer exposes every secret in every repo they can read. The secrets themselves have <b>no extra protection</b> (no MFA, no self-managed encryption at rest, no expiry).</p>
 </details>
 <details class="risk-item" name="risk-private">
-<summary class="risk-btn"><span class="risk-num">06</span><span class="risk-icon" aria-hidden="true">🔗</span><span class="risk-label">Software supply chain</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
-<p class="risk-why">The <b>#1 attack vector</b> today. Secrets in private repos enable lateral movement to production, artifact registries, and cloud. See Uber, CircleCI, Codecov, and the Internet Archive.</p>
+<summary class="risk-btn"><span class="risk-num">06</span><span class="risk-icon" aria-hidden="true">🔗</span><span class="risk-label">Privilege escalation and lateral movement</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<p class="risk-why">Once inside your network, attackers can steal secrets from private / internal repos to gain higher privileges and move into production, cloud, or artifact registries. <b>One compromised account can become an organization-wide breach, without any repo ever going public.</b> <a class="retro-link" href="https://attack.mitre.org/techniques/T1078/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK ↗</a></p>
 </details>
 <details class="risk-item" name="risk-private">
 <summary class="risk-btn"><span class="risk-num">07</span><span class="risk-icon" aria-hidden="true">📋</span><span class="risk-label">Compliance and audit</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>

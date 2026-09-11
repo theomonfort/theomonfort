@@ -69,16 +69,16 @@ links:
   </p>
 </div>
 
-## なぜ private repo でも secret はダメなのか
+## なぜ private / internal repo でも secret はダメなのか
 
-<strong>「Private」はセキュリティ対策ではなく、可視性の設定にすぎない。</strong>secret はコードに置かずシークレットマネージャーで管理し、**Push protection** で入口を塞ぐ。private repo でも平文で置いてはいけない理由は 8 つある。
+<strong>非公開でも、侵害の被害はリポジトリ内で止まらない。</strong>開発者アカウントやランナーを侵害した攻撃者は、社内に露出した secret を足掛かりに攻撃を拡大できる。secret はシークレットマネージャーで管理し、**Push protection** で流入を防ぐ。理由は 8 つある。
 
 <div class="risk-widget">
 <p class="risk-hint">▸ + をクリックして表示</p>
 <div class="risk-list">
 <details class="risk-item" name="risk-private">
-<summary class="risk-btn"><span class="risk-num">01</span><span class="risk-icon" aria-hidden="true">🌐</span><span class="risk-label">アクセス範囲は想像以上に広い</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
-<p class="risk-why">読み取り権限を持つ Org メンバー全員（数十〜数百人、協力会社や無関係なチーム含む）が閲覧可能。内部フォーク・GitHub App・OAuth App・CI/CD・ランナーが権限を継承。<b>誰が読んだかのログは残らない</b>。</p>
+<summary class="risk-btn"><span class="risk-num">01</span><span class="risk-icon" aria-hidden="true">🌐</span><span class="risk-label">リポジトリは社内用、開発者は社外にも</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<p class="risk-why"><b>「Internal repo」は「自社社員しか触らない」を意味しない。</b>読み取り権限があれば、社員だけでなく、業務委託先、SIer、再委託先の開発者もコミット済みの secret を読める。外部委託によって、アクセス範囲は自社の人員や管理端末の外へ広がる。</p>
 </details>
 <details class="risk-item" name="risk-private">
 <summary class="risk-btn"><span class="risk-num">02</span><span class="risk-icon" aria-hidden="true">🔓</span><span class="risk-label">ワンクリックで public 化</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
@@ -89,16 +89,16 @@ links:
 <p class="risk-why">後続コミットで削除しても消えない。履歴・全 clone・フォーク・バックアップ・CI キャッシュに残存。唯一の対処は <b>rotate</b> でありファイル削除ではない。</p>
 </details>
 <details class="risk-item" name="risk-private">
-<summary class="risk-btn"><span class="risk-num">04</span><span class="risk-icon" aria-hidden="true">💻</span><span class="risk-label">開発端末が弱点になる</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
-<p class="risk-why"><b>git clone</b> のたびに未管理のラップトップへコピー。マルウェア 1 件・盗難 1 台・アカウント侵害 1 件で十分。被害はサーバー 1 台でなく開発者 N 人分。</p>
+<summary class="risk-btn"><span class="risk-num">04</span><span class="risk-icon" aria-hidden="true">💻</span><span class="risk-label">Git は secret も各開発端末に複製する</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<p class="risk-why">Git は<b>分散型バージョン管理システム</b>。通常の <code>git clone</code> は、コードと履歴に含まれる secret ごと、社員や外部委託先の各開発端末へコピーする。サーバーだけを守っても不十分。<b>契約終了時に repo のアクセス権を削除しても、端末のコピーは消えない。</b></p>
 </details>
 <details class="risk-item" name="risk-private">
 <summary class="risk-btn"><span class="risk-num">05</span><span class="risk-icon" aria-hidden="true">🎣</span><span class="risk-label">アカウント侵害 = 即アクセス</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
 <p class="risk-why">開発者 1 人のフィッシングで、その人が読める全リポの全 secret が流出。secret 自体に <b>MFA・保存時暗号化・有効期限などの追加保護はない</b>。</p>
 </details>
 <details class="risk-item" name="risk-private">
-<summary class="risk-btn"><span class="risk-num">06</span><span class="risk-icon" aria-hidden="true">🔗</span><span class="risk-label">ソフトウェアサプライチェーン</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
-<p class="risk-why">現在の<b>攻撃ベクトル第 1 位</b>。private repo の secret から本番・レジストリ・クラウドへラテラルムーブメント。Uber・CircleCI・Codecov・Internet Archive が該当例。</p>
+<summary class="risk-btn"><span class="risk-num">06</span><span class="risk-icon" aria-hidden="true">🔗</span><span class="risk-label">権限昇格とラテラルムーブメント</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<p class="risk-why">社内ネットワークへの侵入後、攻撃者は private / internal repo の secret を盗み、より強い権限を獲得し、本番環境、クラウド、レジストリへ横展開できる。<b>リポジトリを一度も公開しなくても、1 アカウントの侵害が組織全体の被害に発展し得る。</b> <a class="retro-link" href="https://attack.mitre.org/techniques/T1078/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK ↗</a></p>
 </details>
 <details class="risk-item" name="risk-private">
 <summary class="risk-btn"><span class="risk-num">07</span><span class="risk-icon" aria-hidden="true">📋</span><span class="risk-label">コンプライアンスと監査</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
