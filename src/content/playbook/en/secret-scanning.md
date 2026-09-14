@@ -196,11 +196,11 @@ Secret Scanning is made up of five capabilities. **Push protection** closes the 
 <ol class="demo-steps">
 <li>
 <p class="demo-step-title">WHERE THE GENERIC PATTERNS HIDE</p>
-<p>Open <a href="https://github.com/enterprises/octodemo/settings/security_analysis/pattern_configurations" target="_blank" rel="noopener noreferrer">octodemo → Pattern configurations ↗</a> and scroll the default patterns tab.</p>
+<p>Open <a href="https://github.com/enterprises/octodemo/settings/security_analysis/pattern_configurations?query=&amp;page=0&amp;tab=native" target="_blank" rel="noopener noreferrer">octodemo → Pattern configurations ↗</a> and scroll the default patterns tab.</p>
 <p class="demo-out">It is one <b>flat list</b>: no category column, no provider / generic split, no filter. The generic patterns are in there, just never labelled as generic.</p>
 <p>Point them out by name — these ten are the entire set:</p>
 <p><code class="demo-path">rsa_private_key</code> <code class="demo-path">openssh_private_key</code> <code class="demo-path">ec_private_key</code> <code class="demo-path">pgp_private_key</code> <code class="demo-path">generic_private_key</code> <code class="demo-path">mongodb_connection_string</code> <code class="demo-path">mysql_connection_url</code> <code class="demo-path">postgres_connection_string</code> <code class="demo-path">http_basic_authentication_header</code> <code class="demo-path">http_bearer_authentication_header</code></p>
-<p class="demo-out">Every one reads <b>Disabled</b> under <b>GitHub default</b>: detection is on, push protection is not. Flip one in the <b>Enterprise setting</b> column to opt it in.</p>
+<p class="demo-out">Every one reads <b>Disabled</b> under <b>GitHub default</b>: detection is on, but push protection is off by default.</p>
 </li>
 <li>
 <p class="demo-step-title">CUSTOM PATTERN + DRY RUN</p>
@@ -210,7 +210,14 @@ Secret Scanning is made up of five capabilities. **Push protection** closes the 
 <p><b>Secret format</b> — <code class="demo-path">octodemo_(live|test)_[A-Za-z0-9]{32}</code></p>
 <p><b>Test string</b> — <code class="demo-path">octodemo_live_L1QNGy4DLxQJ8C85kfwP0lmvCHLDuVxJ</code></p>
 <p>The test string has to go green before the form will save. Then use <b>Save and dry run</b>.</p>
-<p class="demo-out">The dry run reports the planted secrets <b>without creating alerts</b>. Review the hits, then <b>Publish pattern</b> and optionally turn push protection on for it.</p>
+<p class="demo-out">The dry run reports the planted secrets <b>without creating alerts</b>. Review the hits, then <b>Publish pattern</b>.</p>
+</li>
+<li>
+<p class="demo-step-title">ENABLE GENERIC / CUSTOM PATTERNS</p>
+<p>Open <a href="https://github.com/enterprises/octodemo/settings/security_analysis/pattern_configurations?query=&amp;page=0&amp;tab=native" target="_blank" rel="noopener noreferrer">octodemo → Pattern configurations ↗</a>.</p>
+<p><b>Generic:</b> In <b>Default patterns</b>, find a pattern such as <code class="demo-path">rsa_private_key</code> and set <b>Enterprise setting</b> to <b>Enabled</b>.</p>
+<p><b>Custom:</b> Switch to <b>Custom patterns</b>, choose a published enterprise pattern, and set <b>Enterprise setting</b> to <b>Enabled</b>. For the repository-scoped pattern created above, use <b>Push protection → Enable</b> in that repository's custom pattern settings instead.</p>
+<p class="demo-out">This enables <b>push protection</b>, not detection. New pushes containing a matching secret are blocked when the demo repository also has push protection enabled and no organization override disables the pattern.</p>
 </li>
 </ol>
 </div>

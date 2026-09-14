@@ -242,7 +242,33 @@ The whole language is that shape: **`where` is the definition of "what the bug l
 
 > 🌐 **Supported languages** — C/C++, C#, Go, Java/Kotlin, JavaScript/TypeScript, Python, Ruby, Rust, Swift, GitHub Actions. A repo with no CodeQL-supported language **runs no scans and burns no Actions minutes**.
 
-## Default setup vs Advanced setup
+## Default setup vs Advanced setup <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configuring-advanced-setup-for-code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-codeql-setup" class="demo-toggle" /><label class="h2-demo" for="demo-codeql-setup">&#9658; DEMO</label>
+
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-codeql-setup" aria-label="Close demo steps"></label>
+<div class="demo-window" role="group" aria-label="Demo steps">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">CodeQL Advanced setup</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-codeql-setup" aria-label="Close">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">OPEN REPOSITORY SETTINGS</p>
+<p>Open <a href="https://github.com/theomonfort-org/ghas-test-1/settings/security_analysis" target="_blank" rel="noopener noreferrer">ghas-test-1 → Advanced Security ↗</a> and show <b>Code scanning → CodeQL analysis</b>.</p>
+<p>For an unconfigured repository, the entry point is <b>Set up → Advanced</b>. This demo repository already has a workflow, so open the existing file without switching setup types.</p>
+</li>
+<li>
+<p class="demo-step-title">WALK THROUGH ADVANCED SETUP</p>
+<p>Open <a href="https://github.com/theomonfort-org/ghas-test-1/blob/main/.github/workflows/codeql.yml" target="_blank" rel="noopener noreferrer">codeql.yml ↗</a>. Show push / PR / schedule under <code class="demo-path">on</code>, the language <code class="demo-path">matrix</code>, and the runner under <code class="demo-path">runs-on</code>.</p>
+<p>C/C++ uses <b>build-mode: manual</b> with <code class="demo-path">make -C src/c</code> / <code class="demo-path">make -C src/cpp</code>; the other languages use <b>none</b>. Point out <b>queries: security-and-quality</b> and the C/C++ <b>CERT / MISRA packs</b>.</p>
+<p class="demo-out">Advanced setup controls the build and execution conditions through a <b>versioned Actions workflow</b>.</p>
+</li>
+<li>
+<p class="demo-step-title">FROM CONFIGURATION TO RESULTS</p>
+<p>Open an existing run under <a href="https://github.com/theomonfort-org/ghas-test-1/actions/workflows/codeql.yml" target="_blank" rel="noopener noreferrer">Actions → CodeQL ↗</a>. Show the per-language <b>Analyze</b> jobs and their initialization, build, and analysis logs.</p>
+<p>Finish at <a href="https://github.com/theomonfort-org/ghas-test-1/security/code-scanning" target="_blank" rel="noopener noreferrer">Security → Code scanning ↗</a> to see the alerts.</p>
+<p class="demo-out">No workflow edits or commits are needed for this walkthrough. Leave the existing scans enabled.</p>
+</li>
+</ol>
+</div>
+</div>
 
 There are two ways to enable CodeQL. **Default setup is enough to start.**
 
@@ -293,7 +319,32 @@ Copilot Autofix can generate a **suggested patch for an eligible alert**. You re
 - 🆓 **Cost**: no Copilot license or AI credits for classic Autofix. Included with Code Security; free on public repositories.
 - 🔌 **Enablement**: allowed by default with CodeQL unless an administrator disables it.
 
-## Agentic Autofix (Public Preview) <a class="h2-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## Agentic Autofix (Public Preview) <a class="h2-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-code-scanning-pr" class="demo-toggle" /><label class="h2-demo" for="demo-code-scanning-pr">&#9658; DEMO</label>
+
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-code-scanning-pr" aria-label="Close demo steps"></label>
+<div class="demo-window" role="group" aria-label="Demo steps">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Security bot on a PR</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-code-scanning-pr" aria-label="Close">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">THE SECURITY BOT ON A PR</p>
+<p>Open <a href="https://github.com/octodemo/octocat_supply-automatic-octo-funicular/pull/57" target="_blank" rel="noopener noreferrer">octodemo/octocat_supply-automatic-octo-funicular#57 ↗</a>. In <b>Files changed</b>, show the comments from <code class="demo-path">github-advanced-security[bot]</code>.</p>
+<p class="demo-out">These findings are separate from Copilot code review. Keep this deliberately vulnerable demo PR unmerged.</p>
+</li>
+<li>
+<p class="demo-step-title">TELL CODEQL AND AI FINDINGS APART</p>
+<p>The <a href="https://github.com/octodemo/octocat_supply-automatic-octo-funicular/pull/57#discussion_r3976259388" target="_blank" rel="noopener noreferrer">CodeQL XSS comment ↗</a> is on <code class="demo-path">api/src/routes/cart.ts</code>. Show the rule title and follow <b>Show more details</b> to the Security alert.</p>
+<p>For <code class="demo-path">CartShareController.php</code>, show the risk explanation and fix advice in the <a href="https://github.com/octodemo/octocat_supply-automatic-octo-funicular/pull/57#discussion_r3976270848" target="_blank" rel="noopener noreferrer">AI SQL injection comment ↗</a> and <a href="https://github.com/octodemo/octocat_supply-automatic-octo-funicular/pull/57#discussion_r3976270856" target="_blank" rel="noopener noreferrer">command injection comment ↗</a>.</p>
+<p class="demo-out">The author is the same bot, but AI findings are <b>PR-only</b> and do not become backlog alerts in Security.</p>
+</li>
+<li>
+<p class="demo-step-title">FROM FINDING TO AGENTIC AUTOFIX</p>
+<p>Open the <a href="https://github.com/octodemo/octocat_supply-automatic-octo-funicular/security/code-scanning/33" target="_blank" rel="noopener noreferrer">CodeQL XSS alert ↗</a> and show <b>Assign to Copilot</b> when available. Without cloud agent, eligible alerts show <b>Generate fix</b> instead.</p>
+<p class="demo-out">A bot finding is not a remediation session. Invoking <b>Assign to Copilot</b> starts the agent's repair work and produces a <b>separate draft PR</b>. You can show the entry point without starting a session.</p>
+</li>
+</ol>
+</div>
+</div>
 
 When cloud agent is available, **Assign to Copilot replaces Generate fix** on individual code scanning alerts.
 

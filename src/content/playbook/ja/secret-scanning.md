@@ -196,11 +196,11 @@ Secret Scanning は 5 つの機能で構成される。入口を塞ぐ **Push pr
 <ol class="demo-steps">
 <li>
 <p class="demo-step-title">GENERIC PATTERNS はどこに隠れているか</p>
-<p><a href="https://github.com/enterprises/octodemo/settings/security_analysis/pattern_configurations" target="_blank" rel="noopener noreferrer">octodemo → Pattern configurations ↗</a> を開き、default patterns タブをスクロールする。</p>
+<p><a href="https://github.com/enterprises/octodemo/settings/security_analysis/pattern_configurations?query=&amp;page=0&amp;tab=native" target="_blank" rel="noopener noreferrer">octodemo → Pattern configurations ↗</a> を開き、default patterns タブをスクロールする。</p>
 <p class="demo-out">一覧は<b>フラット</b>。カテゴリ列も provider / generic の区別も絞り込みもない。generic patterns は確かに存在するが、generic とは表示されない。</p>
 <p>名前で指し示す。この 10 個が generic patterns のすべて：</p>
 <p><code class="demo-path">rsa_private_key</code> <code class="demo-path">openssh_private_key</code> <code class="demo-path">ec_private_key</code> <code class="demo-path">pgp_private_key</code> <code class="demo-path">generic_private_key</code> <code class="demo-path">mongodb_connection_string</code> <code class="demo-path">mysql_connection_url</code> <code class="demo-path">postgres_connection_string</code> <code class="demo-path">http_basic_authentication_header</code> <code class="demo-path">http_bearer_authentication_header</code></p>
-<p class="demo-out">いずれも <b>GitHub default</b> は <b>Disabled</b>。検知は動くが push protection は効かない。<b>Enterprise setting</b> 列で ON にして初めて対象になる。</p>
+<p class="demo-out">いずれも <b>GitHub default</b> は <b>Disabled</b>。検知は動くが、デフォルトでは push protection の対象外。</p>
 </li>
 <li>
 <p class="demo-step-title">CUSTOM PATTERN と DRY RUN</p>
@@ -210,7 +210,14 @@ Secret Scanning は 5 つの機能で構成される。入口を塞ぐ **Push pr
 <p><b>Secret format</b> — <code class="demo-path">octodemo_(live|test)_[A-Za-z0-9]{32}</code></p>
 <p><b>Test string</b> — <code class="demo-path">octodemo_live_L1QNGy4DLxQJ8C85kfwP0lmvCHLDuVxJ</code></p>
 <p>Test string が緑にならないと保存できない。緑になったら <b>Save and dry run</b>。</p>
-<p class="demo-out">dry run は<b>アラートを作らずに</b>仕込んだ secret を検出する。結果を確認してから <b>Publish pattern</b>、必要なら push protection も ON にする。</p>
+<p class="demo-out">dry run は<b>アラートを作らずに</b>仕込んだ secret を検出する。結果を確認してから <b>Publish pattern</b>。</p>
+</li>
+<li>
+<p class="demo-step-title">GENERIC / CUSTOM PATTERNS を有効化</p>
+<p><a href="https://github.com/enterprises/octodemo/settings/security_analysis/pattern_configurations?query=&amp;page=0&amp;tab=native" target="_blank" rel="noopener noreferrer">octodemo → Pattern configurations ↗</a> を開く。</p>
+<p><b>Generic:</b> <b>Default patterns</b> タブで <code class="demo-path">rsa_private_key</code> などを探し、<b>Enterprise setting</b> を <b>Enabled</b> にする。</p>
+<p><b>Custom:</b> <b>Custom patterns</b> タブで公開済みの Enterprise パターンを選び、<b>Enterprise setting</b> を <b>Enabled</b> にする。前の手順で作ったリポジトリ単位のパターンは、そのリポジトリの Custom patterns 設定で <b>Push protection → Enable</b> を選ぶ。</p>
+<p class="demo-out">有効にするのは検知ではなく <b>push protection</b>。デモリポジトリでも push protection が ON で、Org 側に無効化する上書き設定がなければ、該当する secret を含む新しい push がブロックされる。</p>
 </li>
 </ol>
 </div>

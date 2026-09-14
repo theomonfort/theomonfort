@@ -242,7 +242,33 @@ select ifstmt, "This if-statement is redundant."  // ④ 何をどう報告す�
 
 > 🌐 **対応言語** — C/C++、C#、Go、Java/Kotlin、JavaScript/TypeScript、Python、Ruby、Rust、Swift、GitHub Actions。CodeQL 対応言語が 1 つもない repo は **スキャンが走らない = Actions 分も消費しない**。
 
-## Default setup と Advanced setup の違い
+## Default setup と Advanced setup の違い <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configuring-advanced-setup-for-code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-codeql-setup" class="demo-toggle" /><label class="h2-demo" for="demo-codeql-setup">&#9658; DEMO</label>
+
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-codeql-setup" aria-label="デモ手順を閉じる"></label>
+<div class="demo-window" role="group" aria-label="デモ手順">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">CodeQL Advanced setup</span><span class="demo-note">発表者専用</span><label class="demo-close" for="demo-codeql-setup" aria-label="閉じる">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">リポジトリの設定を開く</p>
+<p><a href="https://github.com/theomonfort-org/ghas-test-1/settings/security_analysis" target="_blank" rel="noopener noreferrer">ghas-test-1 → Advanced Security ↗</a> を開き、<b>Code scanning → CodeQL analysis</b> を見せる。</p>
+<p>未設定なら <b>Set up → Advanced</b> が入口。このデモリポジトリには既に workflow があるので、設定を切り替えず既存ファイルを開く。</p>
+</li>
+<li>
+<p class="demo-step-title">ADVANCED SETUP の中身</p>
+<p><a href="https://github.com/theomonfort-org/ghas-test-1/blob/main/.github/workflows/codeql.yml" target="_blank" rel="noopener noreferrer">codeql.yml ↗</a> で、<code class="demo-path">on</code> の push / PR / schedule、言語の <code class="demo-path">matrix</code>、ランナーの <code class="demo-path">runs-on</code> を順に見せる。</p>
+<p>C/C++ は <b>build-mode: manual</b> と <code class="demo-path">make -C src/c</code> / <code class="demo-path">make -C src/cpp</code>。他の言語は <b>none</b>。<b>queries: security-and-quality</b> と C/C++ の <b>CERT / MISRA packs</b> も指し示す。</p>
+<p class="demo-out">Advanced setup では、ビルド方法や実行条件まで<b>バージョン管理された Actions workflow</b>で制御する。</p>
+</li>
+<li>
+<p class="demo-step-title">設定から実行結果へ</p>
+<p><a href="https://github.com/theomonfort-org/ghas-test-1/actions/workflows/codeql.yml" target="_blank" rel="noopener noreferrer">Actions → CodeQL ↗</a> の既存 run を開き、言語別の <b>Analyze</b> job と初期化、ビルド、解析のログを見せる。</p>
+<p>最後に <a href="https://github.com/theomonfort-org/ghas-test-1/security/code-scanning" target="_blank" rel="noopener noreferrer">Security → Code scanning ↗</a> でアラートへ戻る。</p>
+<p class="demo-out">画面説明だけなら workflow の変更やコミットは不要。既存のスキャンを止めずに見せる。</p>
+</li>
+</ol>
+</div>
+</div>
 
 CodeQL の有効化方法は 2 つ。**まず Default で十分**。
 
@@ -293,7 +319,32 @@ Copilot Autofix は **対応するアラートに修正パッチを提案**す�
 - 🆓 **料金**: 従来の Autofix は Copilot ライセンス不要で AI クレジットも消費しない。Code Security に含まれ、Public repo は無料。
 - 🔌 **有効化**: 管理者が無効にしない限り、CodeQL で既定で利用可能。
 
-## Agentic Autofix（Public Preview） <a class="h2-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## Agentic Autofix（Public Preview） <a class="h2-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-code-scanning-pr" class="demo-toggle" /><label class="h2-demo" for="demo-code-scanning-pr">&#9658; DEMO</label>
+
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-code-scanning-pr" aria-label="デモ手順を閉じる"></label>
+<div class="demo-window" role="group" aria-label="デモ手順">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Security bot on a PR</span><span class="demo-note">発表者専用</span><label class="demo-close" for="demo-code-scanning-pr" aria-label="閉じる">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">PR の SECURITY BOT</p>
+<p><a href="https://github.com/octodemo/octocat_supply-automatic-octo-funicular/pull/57" target="_blank" rel="noopener noreferrer">octodemo/octocat_supply-automatic-octo-funicular#57 ↗</a> を開き、<b>Files changed</b> で <code class="demo-path">github-advanced-security[bot]</code> のコメントを見せる。</p>
+<p class="demo-out">Copilot code review とは別の検出結果。意図的に脆弱性を含むデモ PR なので、マージしない。</p>
+</li>
+<li>
+<p class="demo-step-title">CODEQL と AI 検出を見分ける</p>
+<p><a href="https://github.com/octodemo/octocat_supply-automatic-octo-funicular/pull/57#discussion_r3976259388" target="_blank" rel="noopener noreferrer">CodeQL の XSS 指摘 ↗</a> は <code class="demo-path">api/src/routes/cart.ts</code>。ルール名と <b>Show more details</b> から Security のアラートへ進める。</p>
+<p><code class="demo-path">CartShareController.php</code> の <a href="https://github.com/octodemo/octocat_supply-automatic-octo-funicular/pull/57#discussion_r3976270848" target="_blank" rel="noopener noreferrer">AI の SQL injection 指摘 ↗</a> と <a href="https://github.com/octodemo/octocat_supply-automatic-octo-funicular/pull/57#discussion_r3976270856" target="_blank" rel="noopener noreferrer">command injection 指摘 ↗</a> では、リスクの説明と修正案を見せる。</p>
+<p class="demo-out">投稿者は同じ bot でも、AI 検出は <b>PR 上のみ</b>。Security のバックログアラートにはならない。</p>
+</li>
+<li>
+<p class="demo-step-title">検出から AGENTIC AUTOFIX へ</p>
+<p><a href="https://github.com/octodemo/octocat_supply-automatic-octo-funicular/security/code-scanning/33" target="_blank" rel="noopener noreferrer">CodeQL の XSS アラート ↗</a> を開き、利用可能なら <b>Assign to Copilot</b> を見せる。クラウドエージェントが使えなければ、対応するアラートには <b>Generate fix</b> が表示される。</p>
+<p class="demo-out">bot の指摘と修正セッションは別物。<b>Assign to Copilot</b> を実行すると、エージェントが修正を進めて<b>別のドラフト PR</b>を作る。ボタンの紹介だけならセッション開始は不要。</p>
+</li>
+</ol>
+</div>
+</div>
 
 クラウドエージェントが利用可能な場合、個別アラートの **Generate fix は Assign to Copilot に置き換わる**。
 
