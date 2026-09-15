@@ -45,6 +45,9 @@ links:
     label: Define custom patterns
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/customize-leak-detection/define-custom-patterns
   - group: 📰 Recent Changelog
+    label: "Block pull requests with exposed secrets from merging (2026-09-09)"
+    url: https://github.blog/changelog/2026-09-09-block-pull-requests-with-exposed-secrets-from-merging/
+  - group: 📰 Recent Changelog
     label: "Secret scanning public monitoring for enterprises (2026-07-01)"
     url: https://github.blog/changelog/2026-07-01-secret-scanning-public-monitoring-for-enterprises/
   - group: 📰 Recent Changelog
@@ -144,7 +147,7 @@ links:
 </div>
 </div>
 
-Secret Scanning is made up of five capabilities. **Push protection** closes the door and comes first; the rest cover detection, triage, and provider-side revocation.
+**Push protection** checks the push; **Merge protection** checks the PR.
 
 <div class="ctl-widget">
 <p class="ctl-hint">▸ CLICK + FOR DETAILS</p>
@@ -154,6 +157,14 @@ Secret Scanning is made up of five capabilities. **Push protection** closes the 
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v"><b>Rejects the push on the spot</b> when it contains a secret. Bypass is possible, but the reason is recorded</span></p>
 <p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Incoming changes only. <b>AI-detected passwords are not covered</b> (too noisy to block)</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ss-controls">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🚧</span><span class="ctl-name">Merge protection</span><span class="ctl-when">Before PR merge</span><a class="ctl-doc" href="https://github.blog/changelog/2026-09-09-block-pull-requests-with-exposed-secrets-from-merging/" target="_blank" rel="noopener noreferrer">Changelog</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Setup</span><span class="ctl-v">Add <b>Rulesets → Require secret scanning alerts are resolved</b> (Repo / Org / Enterprise)</span></p>
+<p class="ctl-row"><span class="ctl-k">Merge gate</span><span class="ctl-v">Head scan complete, <b>no open PR-introduced alerts</b>. Public preview, Secret Protection / GHAS. Ruleset bypass applies</span></p>
+<p class="ctl-row"><span class="ctl-k">Use case</span><span class="ctl-v"><b>Exclude generic patterns from push protection, but include them in this ruleset</b>: allow the push, require alert resolution before merge</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
