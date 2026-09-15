@@ -24,6 +24,9 @@ links:
     label: Preventing code quality issues before merge
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/tutorials/improve-code-quality/catch-issues-before-merge
   - group: 📖 Official Documentation
+    label: Exploring the Code Quality backlog
+    url: https://docs.github.com/en/code-security/how-tos/maintain-quality-code/interpret-results
+  - group: 📖 Official Documentation
     label: Enabling GitHub Code Quality
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/maintain-quality-code/enable-code-quality
   - group: 📖 Official Documentation
@@ -32,6 +35,9 @@ links:
   - group: 💰 Billing
     label: GitHub Code Quality billing
     url: https://docs.github.com/en/enterprise-cloud@latest/billing/concepts/product-billing/github-code-quality
+  - group: 📰 Announcement
+    label: "Remediate Code Quality findings with agentic autofix (2026-09-09)"
+    url: https://github.blog/changelog/2026-09-09-remediate-code-quality-findings-with-agentic-autofix/
   - group: 📰 Announcement
     label: "GitHub Code Quality is now generally available (2026-07-20)"
     url: https://github.blog/changelog/2026-07-20-github-code-quality-is-now-generally-available/
@@ -128,6 +134,23 @@ The best time to fix quality debt is while the pull request context is still fre
 5. 🎁 **Bonus** — fix an alert straight from the Security tab, or open a campaign to work through the backlog in an organized way.
 
 > ⚡ Fixing findings in the PR prevents a second remediation PR and keeps the default-branch backlog clean.
+
+## Agentic Autofix <a class="h2-doc" href="https://github.blog/changelog/2026-09-09-remediate-code-quality-findings-with-agentic-autofix/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+**A fix PR for your backlog**, not just a suggested patch.
+
+<div class="tbl-compact">
+
+| Step | What happens |
+| --- | --- |
+| 🎯 Select | **Security and quality → Code quality → Standard findings**. Select **1–25 findings on one page**: CodeQL findings on the default branch. |
+| 🤖 Delegate | **Assign to Copilot**: cloud agent edits a branch, validates changes, and opens a PR. Replaces **Generate fix**, even for one finding. |
+| 👀 Review | Review the proposed fixes and CI results, then merge. The agent does not replace human review. |
+
+</div>
+
+- 🛂 **Access**: Code Quality enabled on **Team / Enterprise Cloud** (data residency included). Existing enterprise policy; no separate bulk setting.
+- 💳 **Cost**: **AI credits** + a **Copilot license** for delegation.
 
 ## Enable and roll out <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/maintain-quality-code/enable-code-quality" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
