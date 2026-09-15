@@ -45,6 +45,9 @@ links:
     label: Define custom patterns
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/customize-leak-detection/define-custom-patterns
   - group: 📰 Recent Changelog
+    label: "Block pull requests with exposed secrets from merging (2026-09-09)"
+    url: https://github.blog/changelog/2026-09-09-block-pull-requests-with-exposed-secrets-from-merging/
+  - group: 📰 Recent Changelog
     label: "Secret scanning public monitoring for enterprises (2026-07-01)"
     url: https://github.blog/changelog/2026-07-01-secret-scanning-public-monitoring-for-enterprises/
   - group: 📰 Recent Changelog
@@ -144,7 +147,7 @@ links:
 </div>
 </div>
 
-Secret Scanning は 5 つの機能で構成される。入口を塞ぐ **Push protection** が最優先で、残りは検知・対応・provider 連携を支える。
+**Push protection** は push 前、**Merge protection** は PR のマージ前のチェック。
 
 <div class="ctl-widget">
 <p class="ctl-hint">▸ + をクリックして詳細を表示</p>
@@ -154,6 +157,14 @@ Secret Scanning は 5 つの機能で構成される。入口を塞ぐ **Push pr
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">secret を含む push を<b>その場で拒否</b>。bypass は可能だが理由の記録が残る</span></p>
 <p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">これから入る変更のみ。<b>AI 検出パスワードは対象外</b>(ノイズが多くブロックできない)</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ss-controls">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🚧</span><span class="ctl-name">Merge protection</span><span class="ctl-when">PR のマージ前</span><a class="ctl-doc" href="https://github.blog/changelog/2026-09-09-block-pull-requests-with-exposed-secrets-from-merging/" target="_blank" rel="noopener noreferrer">Changelog</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">設定方法</span><span class="ctl-v"><b>Rulesets → Require secret scanning alerts are resolved</b> を追加（Repo / Org / Enterprise）</span></p>
+<p class="ctl-row"><span class="ctl-k">マージ条件</span><span class="ctl-v">最新コミットのスキャン完了 + <b>PR が持ち込む未解決アラートなし</b>。Secret Protection / GHAS 向け public preview。ruleset の bypass は有効</span></p>
+<p class="ctl-row"><span class="ctl-k">使い分け</span><span class="ctl-v"><b>generic patterns は push protection ではブロックせず、ruleset の対象に追加</b>。push は許可し、PR のマージ前にアラート解消を必須にできる</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
