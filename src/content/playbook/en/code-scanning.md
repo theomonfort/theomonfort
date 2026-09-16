@@ -21,6 +21,9 @@ links:
     label: AI-powered security detections in pull requests
     url: https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections
   - group: 📖 Official Documentation
+    label: "Changelog: AI Scan for pull request APIs (public preview)"
+    url: https://github.blog/changelog/2026-09-10-ai-scan-for-pull-request-apis-in-public-preview/
+  - group: 📖 Official Documentation
     label: Resolving code scanning alerts
     url: https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts
   - group: 📖 Official Documentation
@@ -145,8 +148,8 @@ Application security testing splits into four families. Code Scanning owns **SAS
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI findings (PR only)</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">AI security detections</span></p>
-<p class="det-why"><b>Complement CodeQL</b> for uncovered languages and frameworks, such as PHP, Bash, HCL and Dockerfiles. <b>Pull requests only</b>: no full-repo scan or backlog alerts. Advisory, not a merge gate. Requires opt-in and <b>CodeQL default setup</b>; consumes <b>AI credits</b>.</p>
-<p class="det-doc">Public preview: GHAS + Copilot licenses. <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">📘 Docs ↗</a></p>
+<p class="det-why"><b>Complement CodeQL</b> for uncovered languages and frameworks, such as PHP, Bash, HCL and Dockerfiles. <b>Pull requests only</b>: no full-repo scan or backlog alerts. Advisory, not a merge gate. Requires opt-in and <b>CodeQL default setup</b>; consumes <b>AI credits</b>. Enablement can now be toggled at the org/repo level via <b>new REST APIs</b> (public preview), not just the UI.</p>
+<p class="det-doc">Public preview: GHAS + Copilot licenses. <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">📘 Docs ↗</a> · <a class="retro-link" href="https://github.blog/changelog/2026-09-10-ai-scan-for-pull-request-apis-in-public-preview/" target="_blank" rel="noopener noreferrer">📘 API changelog ↗</a></p>
 </div>
 </details>
 <details class="det-pick" name="cs-vs-codeql">

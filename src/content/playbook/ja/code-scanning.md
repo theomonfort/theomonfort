@@ -21,6 +21,9 @@ links:
     label: AI-powered security detections in pull requests
     url: https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections
   - group: 📖 公式ドキュメント
+    label: "Changelog: AI Scan for pull request APIs (public preview)"
+    url: https://github.blog/changelog/2026-09-10-ai-scan-for-pull-request-apis-in-public-preview/
+  - group: 📖 公式ドキュメント
     label: Resolving code scanning alerts
     url: https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts
   - group: 📖 公式ドキュメント
@@ -145,8 +148,8 @@ links:
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI findings（PR のみ）</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">AI security detections</span></p>
-<p class="det-why">PHP、Bash、HCL、Dockerfile など、未対応の言語やフレームワークを対象に <b>CodeQL を補完</b>。<b>PR のみ</b>で、全体スキャンやバックログのアラートはない。助言扱いでマージをブロックしない。オプトインと <b>CodeQL default setup</b> が必要で、<b>AI クレジット</b>を消費する。</p>
-<p class="det-doc">Public preview: GHAS + Copilot ライセンス。<a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">📘 Docs ↗</a></p>
+<p class="det-why">PHP、Bash、HCL、Dockerfile など、未対応の言語やフレームワークを対象に <b>CodeQL を補完</b>。<b>PR のみ</b>で、全体スキャンやバックログのアラートはない。助言扱いでマージをブロックしない。オプトインと <b>CodeQL default setup</b> が必要で、<b>AI クレジット</b>を消費する。有効化は UI だけでなく <b>新しい REST API</b>（Public preview）で org/repo 単位に切り替え可能に。</p>
+<p class="det-doc">Public preview: GHAS + Copilot ライセンス。<a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">📘 Docs ↗</a> · <a class="retro-link" href="https://github.blog/changelog/2026-09-10-ai-scan-for-pull-request-apis-in-public-preview/" target="_blank" rel="noopener noreferrer">📘 API changelog ↗</a></p>
 </div>
 </details>
 <details class="det-pick" name="cs-vs-codeql">
