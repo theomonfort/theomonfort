@@ -24,6 +24,9 @@ links:
     label: Preventing code quality issues before merge
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/tutorials/improve-code-quality/catch-issues-before-merge
   - group: 📖 公式ドキュメント
+    label: Exploring the Code Quality backlog
+    url: https://docs.github.com/en/code-security/how-tos/maintain-quality-code/interpret-results
+  - group: 📖 公式ドキュメント
     label: Enabling GitHub Code Quality
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/maintain-quality-code/enable-code-quality
   - group: 📖 公式ドキュメント
@@ -32,6 +35,9 @@ links:
   - group: 💰 料金
     label: GitHub Code Quality billing
     url: https://docs.github.com/en/enterprise-cloud@latest/billing/concepts/product-billing/github-code-quality
+  - group: 📰 発表
+    label: "Remediate Code Quality findings with agentic autofix (2026-09-09)"
+    url: https://github.blog/changelog/2026-09-09-remediate-code-quality-findings-with-agentic-autofix/
   - group: 📰 発表
     label: "GitHub Code Quality is now generally available (2026-07-20)"
     url: https://github.blog/changelog/2026-07-20-github-code-quality-is-now-generally-available/
@@ -128,6 +134,23 @@ links:
 5. 🎁 **おまけ** — Security タブから直接アラートを修正、または campaign を作ってバックログを整理された形で消化。
 
 > ⚡ PR 内で解消すれば、後日修正専用の PR を作らずに済み、default branch のバックログも増えない。
+
+## Agentic Autofix <a class="h2-doc" href="https://github.blog/changelog/2026-09-09-remediate-code-quality-findings-with-agentic-autofix/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+修正案の提示だけでなく、**既存の品質負債を修正 PR に変える**。
+
+<div class="tbl-compact">
+
+| ステップ | 何が起きるか |
+| --- | --- |
+| 🎯 選択 | **Security and quality → Code quality → Standard findings**。同じページから **1〜25 件**を選択。対象は default branch の CodeQL finding。 |
+| 🤖 委任 | **Assign to Copilot** で cloud agent がブランチ上で修正し、検証して PR を作成。1 件の場合も **Generate fix** に代わる共通フロー。 |
+| 👀 レビュー | 修正内容と CI の結果を確認してマージ。人によるレビューは引き続き必要。 |
+
+</div>
+
+- 🛂 **利用条件**: Code Quality を有効化した **Team / Enterprise Cloud**（data residency を含む）。既存の enterprise ポリシーを継承し、一括修正専用の設定は不要。
+- 💳 **コスト**: **AI credits** を消費。委任には **Copilot ライセンス**も必要。
 
 ## 有効化と展開 <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/maintain-quality-code/enable-code-quality" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
