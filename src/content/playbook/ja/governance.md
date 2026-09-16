@@ -155,7 +155,49 @@ flowchart LR
 
 > 🧩 合うものがなければ、org レベルで**カスタムリポジトリロール**を作る。 <a class="retro-link" href="https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/managing-custom-repository-roles-for-an-organization" target="_blank" rel="noopener noreferrer">Custom roles ↗</a>
 
-## Rulesets <a class="h2-doc" href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## Rulesets <a class="h2-doc" href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-governance-rulesets" class="demo-toggle" /><label class="h2-demo" for="demo-governance-rulesets">&#9658; DEMO</label>
+
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-governance-rulesets" aria-label="デモ手順を閉じる"></label>
+<div class="demo-window" role="group" aria-label="デモ手順">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Critical services</span><span class="demo-note">発表者専用</span><label class="demo-close" for="demo-governance-rulesets" aria-label="閉じる">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">CUSTOM PROPERTY を作成</p>
+<p>前提：デモ専用 repo、Org owner、GitHub Team / Enterprise、承認用に Write 権限を持つ同僚 1 人。</p>
+<p><a href="https://github.com/organizations/theomonfort-org/settings/custom-properties" target="_blank" rel="noopener noreferrer">theomonfort-org → Custom properties ↗</a></p>
+<p>Organization settings → Repository → Custom properties → <b>New property</b></p>
+<p><b>Name:</b> <code class="demo-path">business_criticality</code><br /><b>Description:</b> <code class="demo-path">Business impact of service disruption</code></p>
+<p><b>Type:</b> Single select<br /><b>Values:</b> <code class="demo-path">critical</code>, <code class="demo-path">standard</code>, <code class="demo-path">experimental</code></p>
+<p><b>Allow repository actors to set this property:</b> OFF（中央管理で repo 側の対象外化を防ぐ）<br /><b>Require this property for all repositories:</b> OFF<br /><b>Default:</b> なし → <b>Save property</b></p>
+</li>
+<li>
+<p class="demo-step-title">REPO に値を設定</p>
+<p>同じ Custom properties ページ → <b>Set values</b> → 既存のデモ repo を選択 → <b>Edit properties</b></p>
+<p><code class="demo-path">business_criticality</code> = <code class="demo-path">critical</code> → <b>Save changes</b></p>
+<p>別のデモ repo は同じ手順で <code class="demo-path">experimental</code> にする。</p>
+<p>名前の例のみ：payments-api / order-service = critical、recommendations-lab = experimental。実際のデモ repo に置き換える。</p>
+</li>
+<li>
+<p class="demo-step-title">ORG RULESET を 1 つ作成</p>
+<p><a href="https://github.com/organizations/theomonfort-org/settings/rules" target="_blank" rel="noopener noreferrer">theomonfort-org → Rulesets ↗</a></p>
+<p>Organization settings → Repository → Rulesets → <b>New ruleset → New branch ruleset</b></p>
+<p><b>Ruleset name:</b> <code class="demo-path">Critical services: reviewed changes</code><br /><b>Enforcement status:</b> Active<br /><b>Bypass list:</b> 空のまま</p>
+<p><b>Target repositories:</b> Repositories matching a filter<br /><b>Filter:</b> <code class="demo-path">props.business_criticality:critical</code></p>
+<p><b>Target branches:</b> Add a target → Default branch</p>
+<p><b>Require a pull request before merging:</b> ON<br /><b>Required approvals:</b> 1<br /><b>Dismiss stale pull request approvals when new commits are pushed:</b> ON<br /><b>Require conversation resolution before merging:</b> ON</p>
+<p><b>Block force pushes:</b> ON<br /><b>Restrict deletions:</b> ON</p>
+<p><b>Restrict updates:</b> OFF<br /><b>Require status checks to pass before merging:</b> OFF<br /><b>Require signed commits:</b> OFF → <b>Create</b></p>
+</li>
+<li>
+<p class="demo-step-title">適用を確認</p>
+<p>critical repo のデフォルトブランチに新しい変更を通常 push → <b>拒否</b>。作業ブランチから PR を作成 → <b>別の人の承認が 1 件必要</b>。</p>
+<p>Custom properties → Set values → experimental のデモ repo を選択 → Edit properties → <code class="demo-path">business_criticality</code> = <code class="demo-path">critical</code> → <b>Save changes</b></p>
+<p class="demo-out">その repo の <b>Settings → Rules → Rulesets</b> で同じ Org ruleset の適用を確認。<b>分類を変えるだけ。ruleset の編集は不要。</b></p>
+</li>
+</ol>
+</div>
+</div>
 
 ポリシーが「できること」、ロールが「誰が」。ruleset は**コードに何を求めるか**。
 

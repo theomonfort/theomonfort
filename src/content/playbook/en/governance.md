@@ -155,7 +155,49 @@ Now inside the repo: who does what. Roles are cumulative.
 
 > 🧩 If none fit, build a **custom repository role** at org level from any base role. <a class="retro-link" href="https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/managing-custom-repository-roles-for-an-organization" target="_blank" rel="noopener noreferrer">Custom roles ↗</a>
 
-## Rulesets <a class="h2-doc" href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## Rulesets <a class="h2-doc" href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-governance-rulesets" class="demo-toggle" /><label class="h2-demo" for="demo-governance-rulesets">&#9658; DEMO</label>
+
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-governance-rulesets" aria-label="Close demo steps"></label>
+<div class="demo-window" role="group" aria-label="Demo steps">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Critical services</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-governance-rulesets" aria-label="Close">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">CREATE CUSTOM PROPERTY</p>
+<p>Prerequisites: dedicated demo repos, org owner, GitHub Team / Enterprise, one colleague with Write access for approval.</p>
+<p><a href="https://github.com/organizations/theomonfort-org/settings/custom-properties" target="_blank" rel="noopener noreferrer">theomonfort-org → Custom properties ↗</a></p>
+<p>Organization settings → Repository → Custom properties → <b>New property</b></p>
+<p><b>Name:</b> <code class="demo-path">business_criticality</code><br /><b>Description:</b> <code class="demo-path">Business impact of service disruption</code></p>
+<p><b>Type:</b> Single select<br /><b>Values:</b> <code class="demo-path">critical</code>, <code class="demo-path">standard</code>, <code class="demo-path">experimental</code></p>
+<p><b>Allow repository actors to set this property:</b> OFF (central control prevents repo-level opt-out)<br /><b>Require this property for all repositories:</b> OFF<br /><b>Default:</b> none → <b>Save property</b></p>
+</li>
+<li>
+<p class="demo-step-title">ASSIGN REPO VALUES</p>
+<p>Same Custom properties page → <b>Set values</b> → select existing demo repos → <b>Edit properties</b></p>
+<p><code class="demo-path">business_criticality</code> = <code class="demo-path">critical</code> → <b>Save changes</b></p>
+<p>Repeat for another demo repo, setting it to <code class="demo-path">experimental</code>.</p>
+<p>Example names only: payments-api / order-service = critical; recommendations-lab = experimental. Substitute your actual demo repos.</p>
+</li>
+<li>
+<p class="demo-step-title">CREATE ONE ORG RULESET</p>
+<p><a href="https://github.com/organizations/theomonfort-org/settings/rules" target="_blank" rel="noopener noreferrer">theomonfort-org → Rulesets ↗</a></p>
+<p>Organization settings → Repository → Rulesets → <b>New ruleset → New branch ruleset</b></p>
+<p><b>Ruleset name:</b> <code class="demo-path">Critical services: reviewed changes</code><br /><b>Enforcement status:</b> Active<br /><b>Bypass list:</b> leave empty</p>
+<p><b>Target repositories:</b> Repositories matching a filter<br /><b>Filter:</b> <code class="demo-path">props.business_criticality:critical</code></p>
+<p><b>Target branches:</b> Add a target → Default branch</p>
+<p><b>Require a pull request before merging:</b> ON<br /><b>Required approvals:</b> 1<br /><b>Dismiss stale pull request approvals when new commits are pushed:</b> ON<br /><b>Require conversation resolution before merging:</b> ON</p>
+<p><b>Block force pushes:</b> ON<br /><b>Restrict deletions:</b> ON</p>
+<p><b>Restrict updates:</b> OFF<br /><b>Require status checks to pass before merging:</b> OFF<br /><b>Require signed commits:</b> OFF → <b>Create</b></p>
+</li>
+<li>
+<p class="demo-step-title">VERIFY THE PAYOFF</p>
+<p>Push a new change directly to a critical repo's default branch → <b>rejected</b>. Open a PR from a working branch → <b>one other person's approval required</b>.</p>
+<p>Custom properties → Set values → select the experimental demo repo → Edit properties → <code class="demo-path">business_criticality</code> = <code class="demo-path">critical</code> → <b>Save changes</b></p>
+<p class="demo-out">In that repo's <b>Settings → Rules → Rulesets</b>, show the same org ruleset applies. <b>Change the classification, not the ruleset.</b></p>
+</li>
+</ol>
+</div>
+</div>
 
 Policies say what is allowed, roles say who acts. Rulesets say **what the code must pass**.
 
