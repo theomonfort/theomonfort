@@ -46,6 +46,12 @@ links:
   - group: 📰 Recent Changelog
     label: "Code review now runs on an agentic architecture (2026-03-05)"
     url: https://github.blog/changelog/2026-03-05-copilot-code-review-now-runs-on-an-agentic-architecture
+  - group: 📰 Recent Changelog
+    label: "自動解決と分析の更新 (2026-09-11)"
+    url: https://github.blog/changelog/2026-09-11-auto-resolution-and-analysis-updates-in-copilot-code-review/
+  - group: 💰 課金の仕組み
+    label: "Code review の推定消費量"
+    url: https://docs.github.com/en/copilot/concepts/agents/code-review#estimated-consumption
 ---
 
 ## 一言で
@@ -147,6 +153,19 @@ Copilot Code Review は **エージェント型アーキテクチャ**で動作�
 | **コンテンツ除外** | Repo / Org / Enterprise 設定（パスベースのルール） | 機微・無関係なファイル／ディレクトリをレビュー文脈から除外 |
 
 > 🔧 **ランナー環境の作り込み**：サイズ拡張 / self-hosted / Windows への切替は `copilot-setup-steps.yml` で制御する。詳細は <a class="retro-link" href="/theomonfort/playbook/cloud-agent/">Cloud Agent ↗</a>（Code Review と同じ仕組み）。
+
+## レビューの深さ・費用・エージェント <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/agents/code-review#estimated-consumption" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+レビューの深さは自動レビューの既定値として設定できる。PR サイズやリポジトリのカスタム指示が増えるほど、AI クレジットの消費量も増える。
+
+| レベル | 推定 AI クレジット / レビュー | 分析方法 |
+| --- | --- | --- |
+| **Lite** | **$0.05 〜 $1 USD** | 複数エージェントが別々の観点で確認し、結果を 1 つのレビューに統合 |
+| **Balanced** | **$0.25 〜 $5 USD** | より深い分析が必要な PR 向け |
+
+2026 年 9 月から Lite は 1 エージェントではなく**エージェント群**でレビューする。実験では、高重要度コメントの対応数が平均 47% 増え、レビュー費用は約 8% 減少した。
+
+> 💰 この推定額に **GitHub Actions 分**は含まれない。Actions が使えない場合でもレビューは生成されるが、プロジェクト全体の文脈収集などのエージェント機能は利用できない。
 
 ## 限界と人間の役割
 

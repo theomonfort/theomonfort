@@ -46,6 +46,12 @@ links:
   - group: 📰 Recent Changelog
     label: "Code review now runs on an agentic architecture (2026-03-05)"
     url: https://github.blog/changelog/2026-03-05-copilot-code-review-now-runs-on-an-agentic-architecture
+  - group: 📰 Recent Changelog
+    label: "Auto-resolution and analysis updates (2026-09-11)"
+    url: https://github.blog/changelog/2026-09-11-auto-resolution-and-analysis-updates-in-copilot-code-review/
+  - group: 💰 Billing
+    label: "Estimated code review consumption"
+    url: https://docs.github.com/en/copilot/concepts/agents/code-review#estimated-consumption
 ---
 
 ## In a nutshell
@@ -147,6 +153,19 @@ Copilot code review runs on an **agentic architecture**, executing on **GitHub A
 | **Content exclusion** | Repo / Org / Enterprise settings (path-based rules) | Exclude sensitive or irrelevant files/directories from review context |
 
 > 🔧 **Shaping the runner environment**: Control runner size / self-hosted / Windows switching via `copilot-setup-steps.yml`. See <a class="retro-link" href="/theomonfort/playbook/cloud-agent/">Cloud Agent ↗</a> (same mechanism as Code Review).
+
+## Review depth, cost, and agents <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/agents/code-review#estimated-consumption" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+Choose the default review effort for automatic reviews. AI-credit consumption generally rises with pull request size and repository custom instructions.
+
+| Effort | Estimated AI credits per review | Analysis approach |
+| --- | --- | --- |
+| **Lite** | **$0.05 to $1 USD** | An ensemble of agents checks the change from separate perspectives, then combines the findings into one review |
+| **Balanced** | **$0.25 to $5 USD** | For pull requests that need deeper analysis |
+
+Since September 2026, Lite uses an **ensemble of agents** rather than a single reviewer. In experiments, this raised addressed high-severity comments by 47% on average while reducing review cost by about 8%.
+
+> 💰 These estimates **exclude GitHub Actions minutes**. Reviews still run when Actions is unavailable, but agentic features such as full-project context gathering are unavailable.
 
 ## Limits and the human role
 
