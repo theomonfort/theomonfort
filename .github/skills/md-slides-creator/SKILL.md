@@ -292,34 +292,49 @@ And `det-widget`, when the detail text is too long for an inline row:
 
 ### 4i. `DEMO` overlay (presenter run-book, off-slide)
 
-A `► DEMO` button pinned next to an H2 — the same inline slot as the `h2-doc` badge (4g), and the two can share a title. Clicking it opens a full-screen panel with the click-by-click script for a live demo. Use it for **the steps you need while presenting but must not put on the slide** — paths, shell commands, expected output. Without it those details either bloat the slide or live in a doc you can't reach mid-talk.
+A `► DEMO` label next to an existing H2 opens a presenter runbook in an overlay. It can share the title with an `h2-doc` badge (4g). Keep click-by-click steps off the slide: exact fields, settings, links, filters, and expected results.
+
+This is the existing checkbox/label markup, not a new component or API. The shared CSS and keyboard handlers live in `src/pages/playbook/[slug].astro` and `src/pages/en/playbook/[slug].astro`; **reuse them without adding per-entry CSS or JavaScript**. The same overlay works in document and presentation modes.
+
+Copy this minimal skeleton, replacing the title, identifier, and placeholder content. Repeat `<li>` for each step:
 
 ```html
-## 主な機能 <input type="checkbox" id="demo-secret-scanning" class="demo-toggle" /><label class="h2-demo" for="demo-secret-scanning">&#9658; DEMO</label>
+## Existing slide title <input type="checkbox" id="demo-example" class="demo-toggle" /><label class="h2-demo" for="demo-example">&#9658; DEMO</label>
 
 <div class="demo-panel">
-<label class="demo-scrim" for="demo-secret-scanning" aria-label="デモ手順を閉じる"></label>
-<div class="demo-window" role="group" aria-label="デモ手順">
-<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Secret Scanning</span><label class="demo-close" for="demo-secret-scanning" aria-label="閉じる">&#10005;</label></div>
+<label class="demo-scrim" for="demo-example" aria-label="Close demo steps"></label>
+<div class="demo-window" role="group" aria-label="Demo steps">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Feature demo</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-example" aria-label="Close">&#10005;</label></div>
 <ol class="demo-steps">
 <li>
-<p class="demo-step-title">PUSH PROTECTION</p>
-<p><code class="demo-path">ghas-test-1</code> で secret を push する。</p>
-<code class="demo-cmd">./demo/secret-scanning/01-push-protection.sh</code>
-<p class="demo-out">push が<b>ブロック</b>される。</p>
+<p class="demo-step-title">CONFIGURE THE FEATURE</p>
+<p><b>Exact field label:</b> <code class="demo-path">exact value</code></p>
+<p class="demo-out">Expected visible result.</p>
 </li>
 </ol>
-</div>
 </div>
 </div>
 ```
 
 **Rules**
 
-- The `id` must be **unique across the whole page** (`demo-<slug>` is the convention) — the `<label for=...>` pairs bind to it, and a duplicate makes both buttons drive the same panel.
-- The `<input>` and `<label>` go **inline on the `##` line**; the `.demo-panel` follows it under the same `##`, so it belongs to that slide.
-- `Escape` closes the panel without leaving presentation mode, and `←` / `→` still change slides — the panel closes itself on a slide change.
-- One `DEMO` per slide. Keep it to 3–6 steps; it scrolls, but a presenter won't.
+- Use one `DEMO` per slide and a page-unique checkbox `id`, such as `demo-<slug>` or `demo-<slug>-<topic>`. All three labels (open, scrim, close) must use that exact `for` value.
+- Keep the input and opening label **inline on the existing `##` line**. The `.demo-panel` must be the **immediate next sibling of that H2**, before any slide prose; the CSS uses `h2:has(.demo-toggle:checked) + .demo-panel`. Do not wrap the H2 or insert a paragraph between it and the panel.
+- Preserve existing heading text, count, order, and slide content. Do not add, split, or reorder a slide just to attach a demo. URL `?present=1&slide=N` is **1-based**: the seventh H2 is `slide=7`, with the title header included in the first H2 group. Verify existing slide deep links rather than assuming internal 0-based indexes match the URL.
+- Mirror the structure and slide placement in `ja/<slug>.md` and `en/<slug>.md`. Translate prose and accessible labels; keep field names, literal values, and filters exact. For Japanese, use `発表者専用`, `デモ手順`, `デモ手順を閉じる`, and `閉じる` for the corresponding note and labels.
+- Write 3–6 short executable steps: navigation path, exact field/value or ON/OFF setting, save action, then a visible result. Include necessary intermediate assignments and only brief prerequisites. Avoid lectures, release-history digressions, and command-heavy setup.
+- Use real fully-qualified links with `target="_blank" rel="noopener noreferrer"`. Never invent repository URLs or imply example repositories exist. Mark illustrative names explicitly and let the presenter select existing demo repositories.
+- Use `demo-path` for field values, paths, and copyable filters. Use `demo-cmd` only for executable shell commands that actually exist in the demo environment; its styling adds a `$` prefix, so it is not for filters or settings.
+- `Escape`, the close label, and the scrim close the overlay. In presentation mode, Escape with an open demo stays on that slide; arrow navigation closes it, and returning to the slide leaves it closed. Browser-history restoration is separate and is not guaranteed by this pattern.
+
+**Checks**
+
+1. Run `pnpm build` after changing playbook content. Open the intended `?present=1&slide=N` in each locale; confirm the title, slide count, and Demo placement.
+2. Open the demo, check rendered links/values/filters, then close via X, scrim, and Escape. Escape must not leave presentation mode while the demo is open.
+3. Reopen, move to the next or previous slide, and return. Confirm the overlay closes and stays closed on return; exercise both arrow keys and slide buttons.
+4. Check document-mode open/close and language switching at the same slide. At desktop and narrow widths, confirm readable content, no horizontal overflow, and a reachable close control after scrolling.
+
+Canonical markup: `src/content/playbook/ja/secret-scanning.md` and `src/content/playbook/ja/governance.md`, with matching files under `en/`.
 
 ---
 
