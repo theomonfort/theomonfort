@@ -53,7 +53,7 @@ const enUrl = localizedPath('en', currentPath);
   </head>
   <body class="bg-stars min-h-screen relative">
     <BootSequence client:load transition:persist locale={locale} copy={{ brandMiddle: copy.brandMiddle }} />
-    <CRTOverlay client:load transition:persist />
+    <CRTOverlay client:load transition:persist locale={locale} currentPath={currentPath} />
     <BGMPlayer client:load transition:persist feedbackUrl={copy.handson.bugReportUrl} />
     <KonamiListener client:load transition:persist secretPath={localizedPath(locale, '/secret')} />
 
