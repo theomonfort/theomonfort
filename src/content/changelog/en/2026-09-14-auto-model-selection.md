@@ -15,12 +15,20 @@ source: "https://github.blog/changelog/2026-09-14-configure-cost-and-quality-in-
 
 ### Not three separate model pools
 
-**All three tiers use the same available models.** The selection priorities differ. Even Intelligence may choose a small, efficient model for a simple request such as adding a docstring.
+**All three tiers use the same model pool**, with different selection priorities.
 
 Rolling out in VS Code, Copilot CLI, and GitHub Copilot app. Billing is based on the model Auto actually selects, not the chosen tier. Paid subscribers retain the 10% discount on usage billed through Auto.
 
-### Do not confuse it with HydraFusion
+### Hydra and HydraFusion
 
-This feature sets **model-selection priorities**. HydraFusion selects **models and execution patterns together**. Rather than claiming one is universally better, compare quality, cost, and time on the same task.
+**Auto uses HyDRA for model routing.** HydraFusion extends this approach to workflow selection: a single model, escalation to a stronger model, or review by another model. It is available as an experimental research preview in Copilot CLI.
+
+### When models switch
+
+Previously, Auto reevaluated at session start and after compaction to preserve the cache. **CLI and Copilot App now periodically reassess the model during a conversation**, using the latest prompt and recent context, rather than on every turn.
 
 [Auto model selection (official documentation)](https://docs.github.com/copilot/concepts/models/auto-model-selection)
+
+[HydraFusion: from model selection to workflow orchestration (official blog)](https://github.blog/ai-and-ml/github-copilot/project-hydrafusion-frontier-quality-via-multi-model-orchestration/)
+
+[Playbook: model choice and Auto mode (slide 9)](https://theomonfort.github.io/theomonfort/en/playbook/token-optimization/?present=1&slide=9)

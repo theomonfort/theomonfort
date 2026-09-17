@@ -19,8 +19,10 @@ demo:
 
 ### Auto との違い
 
-Auto が主に「どのモデルに任せるか」を選ぶのに対し、HydraFusion は **どのモデルを、どの流れで組み合わせるか** まで選びます。常に複数モデルを使うわけではありません。
+HydraFusion は **Auto のモデル選択をさらに発展させたもの**です。Auto がタスクに合うモデルを選ぶのに対し、HydraFusion は上位モデルへの引き継ぎや別モデルによるレビューなど、処理の流れまで選びます。現在は独立したリサーチプレビューであり、Auto の置き換えが発表されたわけではありません。常に複数モデルを使うわけでもありません。
 
 週次リリースの中から HydraFusion に絞ったピックアップです。品質やコストの公開評価は、特定条件でのオフライン実験の結果であり、実際のタスクで同じ効果を保証するものではありません。機能や名称も今後変わる可能性があります。
 
 [HydraFusion の仕組みと評価結果（公式ブログ）](https://github.blog/ai-and-ml/github-copilot/project-hydrafusion-frontier-quality-via-multi-model-orchestration/)
+
+[Playbook：モデル選びと Auto モード（スライド 9）](https://theomonfort.github.io/theomonfort/playbook/token-optimization/?present=1&slide=9)
