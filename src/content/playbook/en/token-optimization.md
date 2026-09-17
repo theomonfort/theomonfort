@@ -14,6 +14,9 @@ order: 16.5
 category: operate
 related: ['context-engineering', 'agentic-workflow', 'instructions', 'custom-agent', 'agent-skills', 'cli', 'copilot-memory']
 links:
+  - group: 📰 Announcements
+    label: Auto tiers, Efficiency / Balance / Intelligence (September 14, 2026)
+    url: https://github.blog/changelog/2026-09-14-configure-cost-and-quality-in-copilot-auto-model-selection/
   - label: Context Rot — Product Talk
     url: https://www.producttalk.org/context-rot
   - label: GitHub Well-Architected
@@ -291,9 +294,9 @@ Tests, linters, type checkers, and security scans aren't just for humans — the
 
 > 📊 **Evidence:** the Copilot CLI team's own codebase is **over half tests**.
 
-## Advice 6 — Model choice & Auto mode
+## Advice 6 — Model choice & Auto mode <a class="h2-doc" href="https://docs.github.com/copilot/concepts/models/auto-model-selection" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-Wrong tier = up to **~24× cost difference** for the same task. Defaulting to a reasoning model for typo fixes is the most common waste. Pick deliberately — or let Auto pick for you.
+Match the model to the task: do not pay reasoning-model prices for typo fixes.
 
 <style>.advice6-models td:first-child,.advice6-models th:first-child{min-width:200px;white-space:nowrap;}</style>
 
@@ -301,12 +304,14 @@ Wrong tier = up to **~24× cost difference** for the same task. Defaulting to a 
 
 | Tier | Models | Use for |
 | --- | --- | --- |
-| 🤖 **Auto Mode** | _The lazy default_ | Picks the model based on **task intent** — **10% discount** on the premium-request multiplier (<a class="retro-link" href="https://github.blog/changelog/2026-05-20-auto-model-selection-now-routes-based-on-your-task-in-vs-code/" target="_blank" rel="noopener">May 2026 changelog ↗</a>) |
-| 🧠 **Reasoning** | `Opus 4.7` · `GPT-5.5` | Sync planning, architecture, debugging, hard reviews. ⚠️ Avoid for implementation — they second-guess the spec |
-| ⚡ **Mid-tier** | `Sonnet` · `GPT-5.4` | Async implementation — most Cloud Agent tasks land here |
-| 🪶 **Low-tier** | `Haiku` · `GPT-mini` | Small refactors, repetitive edits, doc updates |
+| 🤖 **Auto Mode** | _Task-aware_ | Efficiency / Balance / Intelligence. **10% off** model costs on paid plans. <a class="retro-link" href="https://github.blog/changelog/2026-09-14-configure-cost-and-quality-in-copilot-auto-model-selection/" target="_blank" rel="noopener noreferrer">September 14 changelog ↗</a> |
+| 🧠 **Reasoning** | `Opus 4.7` · `GPT-5.5` | Planning, architecture, hard debugging and reviews |
+| ⚡ **Mid-tier** | `Sonnet` · `GPT-5.4` | Implementation and Cloud Agent tasks |
+| 🪶 **Low-tier** | `Haiku` · `GPT-mini` | Small refactors and doc updates |
 
 </div>
+
+> ⚠️ **Not an instant switch on every prompt:** routing respects cache boundaries. But CLI is no longer compaction-only: <a class="retro-link" href="https://github.com/github/copilot-cli/releases/tag/v1.0.81" target="_blank" rel="noopener noreferrer">v1.0.81 adds mid-conversation adaptation ↗</a>.
 
 ## Advice 7 — Tokenization is not language-neutral
 

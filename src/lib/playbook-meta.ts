@@ -5,6 +5,7 @@ import type { LocalizedPlaybookEntry } from './playbook';
 // Slugs flagged as recently added; surfaced with a "New" badge in the TOC.
 export const NEW_PLAYBOOK_SLUGS = new Set([
   'usage-based-billing',
+  'token-optimization',
   'github',
   'governance',
   'secret-scanning',
@@ -28,6 +29,7 @@ export function isNewPlaybookEntry(slug: string): boolean {
 export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'github': [3, 4, 5],
   'usage-based-billing': [8, 9],
+  'token-optimization': [8],
   'governance': [9],
   'secret-scanning': [2, 7],
   'github-advanced-security': [7],

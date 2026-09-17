@@ -14,6 +14,9 @@ order: 16.5
 category: operate
 related: ['context-engineering', 'agentic-workflow', 'instructions', 'custom-agent', 'agent-skills', 'cli', 'copilot-memory']
 links:
+  - group: 📰 発表
+    label: Auto のティア、Efficiency / Balance / Intelligence（2026 年 9 月 14 日）
+    url: https://github.blog/changelog/2026-09-14-configure-cost-and-quality-in-copilot-auto-model-selection/
   - label: Context Rot — Product Talk
     url: https://www.producttalk.org/context-rot
   - label: GitHub Well-Architected
@@ -291,9 +294,9 @@ links:
 
 > 📊 **証拠**: Copilot CLI チームのコードベースは **半分以上がテスト** で構成されています。
 
-## Advice 6 — モデル選びと Auto モード
+## Advice 6 — モデル選びと Auto モード <a class="h2-doc" href="https://docs.github.com/copilot/concepts/models/auto-model-selection" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-ティア選びを間違えると、同じタスクでも **約 24 倍のコスト差** が出ます。typo 修正に Reasoning モデルを使ってしまうのが一番ありがちなムダです。意図的に選ぶ ── または Auto に任せましょう。
+タスクに合うモデルを選びましょう。typo 修正に Reasoning モデルの料金を払う必要はありません。
 
 <style>.advice6-models td:first-child,.advice6-models th:first-child{min-width:200px;white-space:nowrap;}</style>
 
@@ -301,12 +304,14 @@ links:
 
 | ティア | モデル | 用途 |
 | --- | --- | --- |
-| 🤖 **Auto モード** | _ものぐさのデフォルト_ | **タスクの意図** に応じてモデルを自動選択 ── プレミアムリクエストに **10% の割引** （<a class="retro-link" href="https://github.blog/changelog/2026-05-20-auto-model-selection-now-routes-based-on-your-task-in-vs-code/" target="_blank" rel="noopener">2026 年 5 月の Changelog ↗</a>） |
-| 🧠 **Reasoning** | `Opus 4.7` · `GPT-5.5` | 同期の設計・アーキテクチャ・デバッグ・難しいレビュー。⚠️ 実装には使わない ── 仕様を再考しがち |
-| ⚡ **Mid-tier** | `Sonnet` · `GPT-5.4` | 非同期の実装。Cloud Agent タスクの大半はここ |
-| 🪶 **Low-tier** | `Haiku` · `GPT-mini` | 小さなリファクタ、繰り返し作業、ドキュメント更新 |
+| 🤖 **Auto モード** | _タスクに応じて選択_ | Efficiency / Balance / Intelligence。有料プランのモデル利用料金は **10% 割引**。<a class="retro-link" href="https://github.blog/changelog/2026-09-14-configure-cost-and-quality-in-copilot-auto-model-selection/" target="_blank" rel="noopener noreferrer">9 月 14 日の Changelog ↗</a> |
+| 🧠 **Reasoning** | `Opus 4.7` · `GPT-5.5` | 計画、設計、難しいデバッグやレビュー |
+| ⚡ **Mid-tier** | `Sonnet` · `GPT-5.4` | 実装、Cloud Agent タスク |
+| 🪶 **Low-tier** | `Haiku` · `GPT-mini` | 小さなリファクタ、ドキュメント更新 |
 
 </div>
+
+> ⚠️ **毎プロンプトで即座に切り替わるとは限りません。** キャッシュの区切りで選択します。ただし CLI はコンパクション時だけではありません。<a class="retro-link" href="https://github.com/github/copilot-cli/releases/tag/v1.0.81" target="_blank" rel="noopener noreferrer">v1.0.81 で会話中の適応を追加 ↗</a>。
 
 ## Advice 7 — トークナイズは言語中立ではない
 

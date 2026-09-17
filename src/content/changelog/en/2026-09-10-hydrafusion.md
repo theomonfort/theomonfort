@@ -19,8 +19,10 @@ demo:
 
 ### How it differs from Auto
 
-Auto primarily chooses **which model** should handle a prompt. HydraFusion also chooses **how models work together** to solve it. Not every request uses multiple models.
+HydraFusion is an **evolution beyond Auto's model selection**: Auto chooses a model for the task; HydraFusion also chooses the workflow, including escalation or a second model's review. It is a separate research preview today, not an announced replacement for Auto. Not every request uses multiple models.
 
 This pick focuses on HydraFusion from the weekly release roundup. Published quality and cost results come from controlled offline evaluations, not a guarantee for real-world tasks. Features and naming may change during the research preview.
 
 [Architecture and evaluation results (official HydraFusion blog)](https://github.blog/ai-and-ml/github-copilot/project-hydrafusion-frontier-quality-via-multi-model-orchestration/)
+
+[Playbook: model choice and Auto mode (slide 9)](https://theomonfort.github.io/theomonfort/en/playbook/token-optimization/?present=1&slide=9)

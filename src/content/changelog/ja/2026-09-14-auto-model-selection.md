@@ -15,12 +15,20 @@ source: "https://github.blog/changelog/2026-09-14-configure-cost-and-quality-in-
 
 ### 3 つのモデルセットではない
 
-**候補となるモデルは 3 つとも同じ。** 違うのは選択時の優先度です。Intelligence でも、docstring の追加などの単純な依頼には小さく効率的なモデルが選ばれる場合があります。
+**候補となるモデルは 3 つとも同じ**で、選択時の優先度が異なります。
 
 VS Code、Copilot CLI、GitHub Copilot app に順次展開中。料金は選んだ優先度ではなく、Auto が実際に選択したモデルに基づきます。有料サブスクライバー向けの Auto 利用分の 10% 割引は継続します。
 
-### HydraFusion と混同しない
+### Hydra と HydraFusion
 
-こちらは **モデル選択の優先度**、HydraFusion は **モデルと実行パターンの組み合わせ** を選ぶ仕組みです。単純に「どちらが上」とするより、同じタスクで品質、コスト、時間を比較したいところです。
+**Auto はモデルのルーティングに HyDRA を使用します。** HydraFusion はこの仕組みを発展させ、単独実行、上位モデルへの引き継ぎ、別モデルによるレビューといった処理の流れも選びます。Copilot CLI で実験的なリサーチプレビューとして利用できます。
+
+### モデルが切り替わるタイミング
+
+以前はキャッシュを維持するため、セッション開始時とコンパクション後に再評価していました。現在の **CLI と Copilot App は、会話中もモデルを定期的に再評価**します。毎ターンではなく、最新のプロンプトと直近の会話を基に判断します。
 
 [Auto model selection（公式ドキュメント）](https://docs.github.com/copilot/concepts/models/auto-model-selection)
+
+[HydraFusion：モデル選択から処理の流れの自動選択へ（公式ブログ）](https://github.blog/ai-and-ml/github-copilot/project-hydrafusion-frontier-quality-via-multi-model-orchestration/)
+
+[Playbook：モデル選びと Auto モード（スライド 9）](https://theomonfort.github.io/theomonfort/playbook/token-optimization/?present=1&slide=9)
