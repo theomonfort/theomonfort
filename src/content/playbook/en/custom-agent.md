@@ -155,7 +155,7 @@ VS Code exposes **Agent, Plan, and Ask** to users. Internal helpers such as `sea
 When a user invokes a Custom Agent, the harness fetches its `.agent.md`, narrows the available tools, injects the agent definition, and appends the prompt. The model ends up with a four-layer context: **SYSTEM & TOOLS / INSTRUCTIONS / CUSTOM AGENT / PROMPT**.
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 0 1080 470" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
+<svg viewBox="0 0 1080 470" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
   <text x="20" y="50" fill="#e8f4ff" font-size="13" font-weight="bold">USER</text>
   <rect x="110" y="25" width="340" height="50" rx="10" fill="#0a0e27" stroke="#ff2e88" stroke-width="2"/>
   <text x="280" y="56" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">"/TDD-RED ADD API ENDPOINT"</text>
@@ -211,7 +211,7 @@ When a user invokes a Custom Agent, the harness fetches its `.agent.md`, narrows
 When you need a deep dive, have the harness spin up a **subagent**. It does the heavy reading in its own context window and returns **only a summary** to the main session.
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 0 1080 460" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
+<svg viewBox="0 0 1080 460" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
   <rect x="385" y="15" width="240" height="48" rx="10" fill="#0a0e27" stroke="#ff2e88" stroke-width="2"/>
   <text x="505" y="45" fill="#e8f4ff" font-size="14" font-weight="bold" text-anchor="middle">"FIND MY FEATURE"</text>
   <path d="M 505 63 L 505 93" fill="none" stroke="#ff2e88" stroke-width="2"/>

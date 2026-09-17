@@ -52,7 +52,7 @@ links:
 Looking back at GitHub's journey reveals where we are today.
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
+<svg viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
   <defs>
     <marker id="ghTimelineArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto">
       <path d="M 0 0 L 10 5 L 0 10 Z" fill="#00f0ff"/>
@@ -128,7 +128,7 @@ From **Plan → Code → Review → Test & Security → Operate**, AI on GitHub 
 </div>
 <style>
 .plat-toggle{display:flex;gap:.6em;justify-content:center;margin-bottom:1em;flex-wrap:wrap}
-.plat-toggle button{font-family:'DotGothic16',monospace;background:#0a0e27;color:#e8f4ff;border:2px solid #2a3050;padding:.35em 1em;cursor:pointer;font-size:.95em}
+.plat-toggle button{font-family: 'Noto Sans JP', sans-serif;background:#0a0e27;color:#e8f4ff;border:2px solid #2a3050;padding:.35em 1em;cursor:pointer;font-size:.95em}
 .plat-toggle button.on{border-color:#9bbc0f;color:#9bbc0f;box-shadow:0 0 8px #9bbc0f}
 .rpi-pipeline .plat-item{transition:opacity .25s}
 .rpi-pipeline.f-cop .plat-item[data-cop="0"]{opacity:.1}
@@ -136,7 +136,7 @@ From **Plan → Code → Review → Test & Security → Operate**, AI on GitHub 
 </style>
 <svg viewBox="0 0 1080 510" xmlns="http://www.w3.org/2000/svg"
      shape-rendering="crispEdges"
-     style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
+     style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
   <rect x="0" y="0" width="1080" height="510" fill="none"/>
   <!-- ── Card 1: PLAN ── green ─────────────────────────────────── -->
   <g>
@@ -285,10 +285,10 @@ From **Plan → Code → Review → Test & Security → Operate**, AI on GitHub 
 
 ## Platform Activity Is Surging
 
-<span style="display:inline-block;padding:2px 10px;border:2px solid #9bbc0f;color:#9bbc0f;font-family:'DotGothic16',monospace;font-size:0.8em;letter-spacing:0.1em;">▮ CURRENT SCENARIO</span> ── Development activity on GitHub is accelerating at an unprecedented pace.
+<span style="display:inline-block;padding:2px 10px;border:2px solid #9bbc0f;color:#9bbc0f;font-family: 'Noto Sans JP', sans-serif;font-size:0.8em;letter-spacing:0.1em;">▮ CURRENT SCENARIO</span> ── Development activity on GitHub is accelerating at an unprecedented pace.
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 0 1080 470" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
+<svg viewBox="0 0 1080 470" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
   <defs>
     <linearGradient id="paCommitBar" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#9bbc0f"/>
@@ -351,12 +351,12 @@ From **Plan → Code → Review → Test & Security → Operate**, AI on GitHub 
 
 ## Development Output Is Doubling Too
 
-<span style="display:inline-block;padding:2px 10px;border:2px solid #9bbc0f;color:#9bbc0f;font-family:'DotGothic16',monospace;font-size:0.8em;letter-spacing:0.1em;">▮ MORE NUMBERS</span> ── Pull request merges and repo creation are surging in the AI era too.
+<span style="display:inline-block;padding:2px 10px;border:2px solid #9bbc0f;color:#9bbc0f;font-family: 'Noto Sans JP', sans-serif;font-size:0.8em;letter-spacing:0.1em;">▮ MORE NUMBERS</span> ── Pull request merges and repo creation are surging in the AI era too.
 
 Source: [GitHub Octoverse 2025](https://octoverse.github.com) (monthly average; 2026 is a run-rate projection)
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 0 1080 470" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
+<svg viewBox="0 0 1080 470" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
   <defs>
     <marker id="poArrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
       <path d="M 0 0 L 10 5 L 0 10 Z" fill="#9bbc0f"/>

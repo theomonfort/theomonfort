@@ -1,0 +1,172 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../layout/Layout.astro';
+import { type Locale } from '../../lib/i18n';
+
+interface Props {
+  locale?: Locale;
+}
+const { locale = 'ja' } = Astro.props;
+const copy = locale === 'ja'
+  ? {
+      title: 'Changelog | AI 駆動開発 QUEST',
+      description: '気になった GitHub の更新をピックアップ。押さえておきたいポイントと、現場で役立つ補足を日本語で。',
+      eyebrow: '気になる更新、覚えておきたいこと。',
+      order: '新しい順',
+      count: '件のピックアップ',
+      source: '公式の更新情報を読む',
+      demo: 'デモで試すこと',
+      categories: { review: 'コードレビュー', security: 'セキュリティ' },
+    }
+  : {
+      title: 'Changelog | AI-Driven Development Quest',
+      description: 'A handpicked shortlist of GitHub updates, with key takeaways and practical context.',
+      eyebrow: 'Not every update. Just the ones worth remembering.',
+      order: 'Newest first',
+      count: 'selected updates',
+      source: 'Read the official announcement',
+      demo: 'Things to try in a demo',
+      categories: { review: 'Code review', security: 'Security' },
+    };
+
+const entries = (await getCollection('changelog', ({ id }) => id.startsWith(`${locale}/`)))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime() || a.id.localeCompare(b.id));
+const updates = await Promise.all(entries.map(async (entry) => ({
+  ...entry,
+  slug: entry.id.slice(locale.length + 1),
+  Content: (await render(entry)).Content,
+})));
+---
+
+<Layout locale={locale} currentPath="/changelog" title={copy.title} description={copy.description}>
+  <div class="changelog max-w-5xl mx-auto px-4 md:px-8 pt-12 md:pt-20 font-body">
+    <header class="changelog-header">
+      <p class="text-crt-amber text-sm mb-5">{copy.eyebrow}</p>
+      <h1 class="font-pixel text-xl sm:text-3xl lg:text-4xl text-neon-cyan">CHANGELOG</h1>
+      <p class="intro">{copy.description}</p>
+      <div class="index-line">
+        <span>{String(entries.length).padStart(2, '0')} {copy.count}</span>
+        <span>↓ {copy.order}</span>
+      </div>
+    </header>
+
+    <ol class="update-list">
+      {updates.map(({ data, slug, Content }) => {
+        const date = data.date.toISOString().slice(0, 10);
+        return (
+          <li class="update" id={slug}>
+            <div class="date-rail">
+              <time datetime={date}>
+                <span class="year">{date.slice(0, 4)}</span>
+                <span class="day">{date.slice(5).replace('-', '.')}</span>
+              </time>
+            </div>
+            <article class:list={['entry', data.category]} aria-labelledby={`${slug}-title`}>
+              <details class="entry-disclosure">
+                <summary class="entry-toggle">
+                  <h2>
+                    <span class="entry-meta">
+                      <span class="category">{copy.categories[data.category]}</span>
+                      {data.status && <span class="status">{data.status}</span>}
+                    </span>
+                    <span class="entry-title" id={`${slug}-title`}>{data.title}</span>
+                    <span class="toggle-marker" aria-hidden="true"></span>
+                  </h2>
+                </summary>
+                <div class="entry-content">
+                  <p class="summary">{data.summary}</p>
+                  <div class="entry-body"><Content /></div>
+                  {data.demo.length > 0 && (
+                    <details class="demo">
+                      <summary>{copy.demo}</summary>
+                      <ol>{data.demo.map((step) => <li>{step}</li>)}</ol>
+                    </details>
+                  )}
+                  <a class="source" href={data.source} target="_blank" rel="noopener noreferrer">
+                    {copy.source} <span aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </details>
+            </article>
+          </li>
+        );
+      })}
+    </ol>
+  </div>
+</Layout>
+
+<style>
+  .changelog { letter-spacing: 0.01em; }
+  .changelog-header { margin-bottom: 2.5rem; }
+  .intro { max-width: 42rem; margin-top: 1.5rem; line-height: 1.9; color: var(--c-phosphor); }
+  .index-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding: 1rem 0;
+    border-top: 1px dashed var(--c-neon-cyan);
+    color: var(--c-neon-cyan);
+    font-size: 0.875rem;
+  }
+  .update-list { list-style: none; padding: 0; }
+  .update { display: grid; grid-template-columns: 6rem minmax(0, 1fr); scroll-margin-top: 9rem; }
+  .date-rail { border-right: 1px dashed var(--c-neon-cyan); padding-top: 1.5rem; position: relative; }
+  .date-rail::after {
+    content: '';
+    position: absolute;
+    top: 2rem;
+    right: -5px;
+    width: 9px;
+    height: 9px;
+    background: var(--c-neon-cyan);
+    box-shadow: 0 0 8px var(--c-neon-cyan);
+  }
+  time { display: flex; flex-direction: column; gap: 0.25rem; }
+  .year { font-size: 0.875rem; color: var(--c-phosphor); }
+  .day { font-family: 'VT323', monospace; font-size: 2rem; color: var(--c-neon-cyan); line-height: 1; }
+  .entry {
+    --entry-accent: var(--c-crt-amber);
+    min-width: 0;
+    margin: 0 0 2rem 2rem;
+    padding: 1.75rem;
+    background: var(--c-midnight);
+    border: 1px solid color-mix(in srgb, var(--entry-accent) 35%, transparent);
+    border-top: 3px solid var(--entry-accent);
+  }
+  .entry.security { --entry-accent: var(--c-neon-cyan); }
+  .entry-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; font-size: 0.75rem; font-weight: 400; }
+  .category { color: var(--entry-accent); }
+  .status { border: 1px dashed currentColor; padding: 0.15rem 0.5rem; color: var(--c-phosphor); }
+  h2 { margin: 0; font-size: clamp(1.25rem, 2.5vw, 1.65rem); font-weight: 700; line-height: 1.6; }
+  .entry-toggle { position: relative; padding-right: 2rem; cursor: pointer; list-style: none; }
+  .entry-toggle::-webkit-details-marker { display: none; }
+  .entry-title { display: block; margin-top: 1rem; }
+  .entry-toggle:hover .entry-title { color: var(--entry-accent); }
+  .toggle-marker { position: absolute; top: 0; right: 0; color: var(--entry-accent); font-family: 'IBM Plex Mono', monospace; }
+  .toggle-marker::before { content: '+'; }
+  .entry-disclosure[open] > .entry-toggle .toggle-marker::before { content: '-'; }
+  .entry-content { margin-top: 1rem; }
+  .summary { line-height: 1.85; }
+  .entry-body { margin-top: 1.5rem; line-height: 1.9; font-size: 1rem; }
+  .entry-body :global(h3) { margin: 1.5rem 0 0.6rem; color: var(--entry-accent); font-size: 1rem; font-weight: 700; }
+  .entry-body :global(ul) { list-style: square; padding-left: 1.3rem; }
+  .entry-body :global(li + li) { margin-top: 0.65rem; }
+  .entry-body :global(p + p) { margin-top: 0.75rem; }
+  .entry-body :global(strong) { color: var(--entry-accent); font-weight: 700; }
+  .entry-body :global(code) { font-family: 'IBM Plex Mono', monospace; color: var(--c-neon-cyan); font-size: 0.9em; }
+  .demo { margin-top: 1.5rem; border-top: 1px dashed var(--entry-accent); border-bottom: 1px dashed var(--entry-accent); }
+  .demo summary { cursor: pointer; padding: 0.9rem 0; color: var(--entry-accent); }
+  .demo ol { list-style: decimal; padding: 0 0 1rem 1.5rem; font-size: 0.9375rem; line-height: 1.85; }
+  .demo li + li { margin-top: 0.5rem; }
+  .source { display: inline-block; margin-top: 1.5rem; font-size: 0.875rem; color: var(--c-neon-cyan); text-decoration: underline; text-underline-offset: 4px; }
+  .source:hover { color: var(--c-neon-magenta); }
+  a:focus-visible, summary:focus-visible { outline: 2px solid var(--c-neon-cyan); outline-offset: 5px; }
+  @media (max-width: 639px) {
+    .update { grid-template-columns: minmax(0, 1fr); }
+    .date-rail { border-right: 0; padding: 0 0 0.75rem; }
+    .date-rail::after { display: none; }
+    time { flex-direction: row; align-items: baseline; gap: 0.5rem; }
+    .entry { margin-left: 0; padding: 1.25rem; }
+  }
+</style>

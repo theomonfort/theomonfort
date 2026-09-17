@@ -16,11 +16,12 @@ const items = [
   { path: '/playbook', label: t.nav.playbook, short: t.nav.playbookShort },
   { path: '/handson', href: handsonHref, label: t.nav.handson, short: t.nav.handsonShort },
   { path: '/skills', label: t.nav.equipment, short: t.nav.equipmentShort },
+  { path: '/changelog', label: t.nav.changelog, short: t.nav.changelogShort },
 ];
 ---
 
 <header class="site-nav sticky top-0 z-40 backdrop-blur bg-midnight/70 border-b-2 border-neon-magenta/40">
-  <nav class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+  <nav class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
     <a
       href={localizedPath(locale, '/')}
       class="group inline-flex items-center gap-2.5 text-neon-magenta hover:text-neon-cyan transition-colors leading-none"
@@ -36,21 +37,22 @@ const items = [
       <span class="font-pixel-jp text-base md:text-lg leading-none -mt-0.5">{t.brandMiddle}</span>
       <span class="font-pixel text-[11px] md:text-[13px] tracking-[0.1em]">QUEST</span>
     </a>
-    <ul class="flex items-center gap-1 md:gap-2 flex-wrap text-[10px] md:text-xs font-pixel">
+    <ul class="flex items-center gap-1 md:gap-2 flex-wrap text-xs md:text-sm font-body font-bold">
       {items.slice(1).map((item) => {
         const active = currentPath === item.path || currentPath.startsWith(item.path + '/');
         return (
           <li>
             <a
               href={localizedPath(locale, item.href ?? item.path)}
-              class={`px-2 md:px-3 py-2 border-2 transition-colors ${
+              aria-current={active ? 'page' : undefined}
+              class={`inline-block px-2 lg:px-3 py-2 border-2 transition-colors ${
                 active
                   ? 'border-neon-cyan text-neon-cyan shadow-neon-cyan'
                   : 'border-transparent text-phosphor/70 hover:text-neon-cyan hover:border-neon-cyan/40'
               }`}
             >
-              <span class="hidden md:inline">{item.label}</span>
-              <span class="md:hidden font-pixel-jp">{item.short}</span>
+              <span class="hidden lg:inline">{item.label}</span>
+              <span class="lg:hidden">{item.short}</span>
             </a>
           </li>
         );
