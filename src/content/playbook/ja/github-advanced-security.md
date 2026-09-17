@@ -274,6 +274,8 @@ AI はレビュープロセスが想定していた速度を超えてコード�
 
 **Enterprise → Settings → Advanced Security → Code security** で configuration を 1 つ作れば配下の全 org / repo に配れる。**New configuration** は最初から **GitHub recommended**。
 
+**Enterprise の security configuration を強制適用**し、org / repo 管理者によるポリシーの上書きを防げるようになった。<a class="retro-link" href="https://github.blog/changelog/2026-09-15-enforce-github-advanced-security-configurations/" target="_blank" rel="noopener noreferrer">9 月 15 日の発表 ↗</a>
+
 <div class="ctl-widget">
 <div class="ctl-list">
 <details class="ctl-item" name="ghas-rollout" style="--entry-accent:#ffb000">

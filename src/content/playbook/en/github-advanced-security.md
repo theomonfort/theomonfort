@@ -274,6 +274,8 @@ Two free assessments run from **Org → Security → Assessments** and show what
 
 One configuration at **Enterprise → Settings → Advanced Security → Code security** rolls out to every org and repo. **New configuration** opens pre-filled with **GitHub recommended**.
 
+You can now **enforce enterprise security configurations**, preventing organization and repository admins from overriding those policies. <a class="retro-link" href="https://github.blog/changelog/2026-09-15-enforce-github-advanced-security-configurations/" target="_blank" rel="noopener noreferrer">September 15 announcement ↗</a>
+
 <div class="ctl-widget">
 <div class="ctl-list">
 <details class="ctl-item" name="ghas-rollout" style="--entry-accent:#ffb000">
