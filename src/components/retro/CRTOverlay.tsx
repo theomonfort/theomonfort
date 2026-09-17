@@ -1,8 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
+import { localizedPath, otherLocale, type Locale } from '../../lib/i18n';
 
 const STORAGE_KEY = 'akq-crt-on';
 
-export default function CRTOverlay() {
+interface Props {
+  locale: Locale;
+  currentPath: string;
+}
+
+export default function CRTOverlay({ locale, currentPath }: Props) {
+  const targetLocale = otherLocale(locale);
+  const languageLabel = targetLocale === 'en' ? 'English' : '日本語';
   const [enabled, setEnabled] = useState(true);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const rafRef = useRef<number | null>(null);
@@ -86,19 +94,30 @@ export default function CRTOverlay() {
           />
         </>
       )}
-      <button
-        type="button"
-        onClick={() => setEnabled((v) => !v)}
-        className="crt-overlay fixed bottom-4 left-4 z-[60] font-pixel text-[10px] px-3 py-2 border-2 bg-shadow-ink/80 hover:bg-neon-cyan/20 transition-colors"
-        style={{
-          borderColor: enabled ? '#00f0ff' : '#444',
-          color: enabled ? '#00f0ff' : '#888',
-          boxShadow: enabled ? '0 0 8px #00f0ff' : 'none',
-        }}
-        aria-pressed={enabled}
-      >
-        CRT: {enabled ? 'ON' : 'OFF'}
-      </button>
+      <div className="crt-overlay fixed bottom-4 left-4 z-[60] flex items-stretch gap-2">
+        <button
+          type="button"
+          onClick={() => setEnabled((v) => !v)}
+          className="font-pixel text-[10px] px-3 py-2 border-2 bg-shadow-ink/80 hover:bg-neon-cyan/20 transition-colors"
+          style={{
+            borderColor: enabled ? '#00f0ff' : '#444',
+            color: enabled ? '#00f0ff' : '#888',
+            boxShadow: enabled ? '0 0 8px #00f0ff' : 'none',
+          }}
+          aria-pressed={enabled}
+        >
+          CRT: {enabled ? 'ON' : 'OFF'}
+        </button>
+        <a
+          href={localizedPath(targetLocale, currentPath)}
+          hrefLang={targetLocale}
+          lang={targetLocale}
+          aria-label={targetLocale === 'en' ? 'Switch to English' : '日本語に切り替える'}
+          className="inline-flex items-center font-pixel-jp text-sm px-3 py-2 border-2 border-neon-cyan text-neon-cyan bg-shadow-ink/80 hover:bg-neon-cyan/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neon-cyan transition-colors"
+        >
+          {languageLabel}
+        </a>
+      </div>
     </>
   );
 }
