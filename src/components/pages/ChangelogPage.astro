@@ -16,7 +16,7 @@ const copy = locale === 'ja'
       count: '件のピックアップ',
       source: '公式の更新情報を読む',
       demo: 'デモで試すこと',
-      categories: { review: 'コードレビュー', security: 'セキュリティ' },
+      categories: { review: 'コードレビュー', security: 'セキュリティ', copilot: 'Copilot', actions: 'Actions', administration: '管理' },
     }
   : {
       title: 'Changelog | AI-Driven Development Quest',
@@ -26,7 +26,7 @@ const copy = locale === 'ja'
       count: 'selected updates',
       source: 'Read the official announcement',
       demo: 'Things to try in a demo',
-      categories: { review: 'Code review', security: 'Security' },
+      categories: { review: 'Code review', security: 'Security', copilot: 'Copilot', actions: 'Actions', administration: 'Administration' },
     };
 
 const entries = (await getCollection('changelog', ({ id }) => id.startsWith(`${locale}/`)))
@@ -135,6 +135,8 @@ const updates = await Promise.all(entries.map(async (entry) => ({
     border-top: 3px solid var(--entry-accent);
   }
   .entry.security { --entry-accent: var(--c-neon-cyan); }
+  .entry.copilot { --entry-accent: var(--c-neon-magenta); }
+  .entry.actions { --entry-accent: var(--c-gb-green); }
   .entry-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; font-size: 0.75rem; font-weight: 400; }
   .category { color: var(--entry-accent); }
   .status { border: 1px dashed currentColor; padding: 0.15rem 0.5rem; color: var(--c-phosphor); }
@@ -146,7 +148,7 @@ const updates = await Promise.all(entries.map(async (entry) => ({
   .toggle-marker { position: absolute; top: 0; right: 0; color: var(--entry-accent); font-family: 'IBM Plex Mono', monospace; }
   .toggle-marker::before { content: '+'; }
   .entry-disclosure[open] > .entry-toggle .toggle-marker::before { content: '-'; }
-  .entry-content { margin-top: 1rem; }
+  .entry-content { margin-top: 1rem; overflow-wrap: anywhere; }
   .summary { line-height: 1.85; }
   .entry-body { margin-top: 1.5rem; line-height: 1.9; font-size: 1rem; }
   .entry-body :global(h3) { margin: 1.5rem 0 0.6rem; color: var(--entry-accent); font-size: 1rem; font-weight: 700; }
@@ -155,6 +157,9 @@ const updates = await Promise.all(entries.map(async (entry) => ({
   .entry-body :global(p + p) { margin-top: 0.75rem; }
   .entry-body :global(strong) { color: var(--entry-accent); font-weight: 700; }
   .entry-body :global(code) { font-family: 'IBM Plex Mono', monospace; color: var(--c-neon-cyan); font-size: 0.9em; }
+  .entry-body :global(a) { color: var(--c-neon-cyan); text-decoration: underline; text-underline-offset: 4px; }
+  .entry-body :global(a:hover) { color: var(--c-neon-magenta); }
+  .entry-body :global(a:focus-visible) { outline: 2px solid var(--c-neon-cyan); outline-offset: 5px; }
   .demo { margin-top: 1.5rem; border-top: 1px dashed var(--entry-accent); border-bottom: 1px dashed var(--entry-accent); }
   .demo summary { cursor: pointer; padding: 0.9rem 0; color: var(--entry-accent); }
   .demo ol { list-style: decimal; padding: 0 0 1rem 1.5rem; font-size: 0.9375rem; line-height: 1.85; }
