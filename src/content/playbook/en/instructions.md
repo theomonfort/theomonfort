@@ -106,7 +106,7 @@ This file uses pytest functional tests.
 At session start, the harness loads the **always-on instructions** (`.github/copilot-instructions.md`) into context. When the user then asks to edit a file at a specific path, the harness loads any **path-specific instructions** whose `applyTo` glob matches that path.
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 0 1080 490" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
+<svg viewBox="0 0 1080 490" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
   <defs>
     <marker id="arrow-orange" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#ffb000"/>

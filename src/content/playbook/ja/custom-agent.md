@@ -155,7 +155,7 @@ VS Code でユーザーが選べるのは **Agent、Plan、Ask**。`searchSubage
 ユーザーが Custom Agent を呼ぶと、ハーネスは `.agent.md` を取得し、利用可能なツールを絞り込み、エージェント定義を差し込み、最後にプロンプトを追加する。最終的にモデルに渡るコンテキストは **SYSTEM & TOOLS / INSTRUCTIONS / CUSTOM AGENT / PROMPT** の 4 層。
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 0 1080 470" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
+<svg viewBox="0 0 1080 470" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
   <text x="20" y="50" fill="#e8f4ff" font-size="13" font-weight="bold">USER</text>
   <rect x="110" y="25" width="340" height="50" rx="10" fill="#0a0e27" stroke="#ff2e88" stroke-width="2"/>
   <text x="280" y="56" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">「/TDD-RED API エンドポイントを追加して」</text>
@@ -211,7 +211,7 @@ VS Code でユーザーが選べるのは **Agent、Plan、Ask**。`searchSubage
 例えば調査が必要なときは、**メインエージェント** が **サブエージェント** を作ることがあります。サブエージェントは別の **コンテキストウインドウ** で重い読み込みをこなし、**サマリだけ** を **メインエージェント** に返す。
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 0 1080 460" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
+<svg viewBox="0 0 1080 460" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
   <rect x="385" y="15" width="240" height="48" rx="10" fill="#0a0e27" stroke="#ff2e88" stroke-width="2"/>
   <text x="505" y="45" fill="#e8f4ff" font-size="14" font-weight="bold" text-anchor="middle">「コードベースでこの機能を探して」</text>
   <path d="M 505 63 L 505 93" fill="none" stroke="#ff2e88" stroke-width="2"/>

@@ -66,4 +66,17 @@ const handson = defineCollection({
   }),
 });
 
-export const collections = { playbook, equipment, handson };
+const changelog = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/changelog' }),
+  schema: z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+    summary: z.string(),
+    category: z.enum(['review', 'security']),
+    source: z.string().url(),
+    status: z.string().optional(),
+    demo: z.array(z.string()).default([]),
+  }),
+});
+
+export const collections = { playbook, equipment, handson, changelog };

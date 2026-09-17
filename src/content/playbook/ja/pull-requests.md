@@ -69,7 +69,7 @@ PR を中心にブランチをどう構成するか。リリース頻度に合�
 
 **長命なブランチは `main` 1 本、feature ブランチは短命。** `main` から枝を切り、PR を出してレビュー・マージし、そのままデプロイ。シンプルで速く、頻繁にデプロイする Web アプリや小規模チームに最適。
 
-<svg viewBox="0 0 700 380" role="img" aria-label="GitHub Flow: main branch with several short-lived change branches merging in" style="width:100%;height:auto;max-width:760px;display:block;margin:1.4em auto;font-family:'DotGothic16',monospace;">
+<svg viewBox="0 0 700 380" role="img" aria-label="GitHub Flow: main branch with several short-lived change branches merging in" style="width:100%;height:auto;max-width:760px;display:block;margin:1.4em auto;font-family: 'Noto Sans JP', sans-serif;">
   <defs>
     <marker id="ghf-arrow" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
@@ -112,7 +112,7 @@ PR を中心にブランチをどう構成するか。リリース頻度に合�
 
 **長命なブランチは `main` + `develop` の 2 本、加えて補助ブランチ。** 作業は `develop` に統合し、`release` ブランチでバージョンを安定させてから `main` へマージしてタグ付け。定期的なバージョンリリースや大規模チーム向けの構造化フロー。
 
-<svg viewBox="0 0 740 400" role="img" aria-label="Git Flow branch model: main, hotfix, release, develop, and two feature lanes" style="width:100%;height:auto;max-width:820px;display:block;margin:1.4em auto;font-family:'DotGothic16',monospace;">
+<svg viewBox="0 0 740 400" role="img" aria-label="Git Flow branch model: main, hotfix, release, develop, and two feature lanes" style="width:100%;height:auto;max-width:820px;display:block;margin:1.4em auto;font-family: 'Noto Sans JP', sans-serif;">
   <defs>
     <marker id="gf-arrow" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
@@ -223,7 +223,7 @@ Ruleset は、ブランチへのマージ条件を **ルールとして強制** 
 <label class="figtabs-tab" for="smm-3">リベースしてマージ</label>
 </div>
 <div class="figtabs-panel" data-idx="1">
-<svg viewBox="0 0 900 372" role="img" aria-label="マージコミットを作成: 各ブランチのコミットはそのまま残り、スタック全体が 1 つのマージコミットで main に入る" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family:'DotGothic16',monospace;">
+<svg viewBox="0 0 900 372" role="img" aria-label="マージコミットを作成: 各ブランチのコミットはそのまま残り、スタック全体が 1 つのマージコミットで main に入る" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family: 'Noto Sans JP', sans-serif;">
   <defs>
     <marker id="stk-mc" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
@@ -267,7 +267,7 @@ Ruleset は、ブランチへのマージ条件を **ルールとして強制** 
 <p class="figtabs-cap">ブランチのコミットはそのまま残り、<b>スタック全体が 1 つのマージコミット</b>で入る。履歴は最も詳しい。</p>
 </div>
 <div class="figtabs-panel" data-idx="2">
-<svg viewBox="0 0 900 372" role="img" aria-label="スカッシュしてマージ: 各 PR は main 上で 1 つのコミットにまとまる" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family:'DotGothic16',monospace;">
+<svg viewBox="0 0 900 372" role="img" aria-label="スカッシュしてマージ: 各 PR は main 上で 1 つのコミットにまとまる" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family: 'Noto Sans JP', sans-serif;">
   <defs>
     <marker id="stk-sq" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
@@ -319,7 +319,7 @@ Ruleset は、ブランチへのマージ条件を **ルールとして強制** 
 <p class="figtabs-cap">PR ごとに <b>1 コミット</b>へまとめて <code>main</code> に載せる。ログは最もきれいだが、個々のコミット（淡色）は失われる。</p>
 </div>
 <div class="figtabs-panel" data-idx="3">
-<svg viewBox="0 0 900 372" role="img" aria-label="リベースしてマージ: ブランチのコミットが順に main へ載せ直され、マージコミットは作られない" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family:'DotGothic16',monospace;">
+<svg viewBox="0 0 900 372" role="img" aria-label="リベースしてマージ: ブランチのコミットが順に main へ載せ直され、マージコミットは作られない" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family: 'Noto Sans JP', sans-serif;">
   <defs>
     <marker id="stk-rb" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>

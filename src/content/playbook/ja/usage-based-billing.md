@@ -74,9 +74,9 @@ GitHub Copilot がより高度な AI ワークフローをサポートするに�
 トークンは **AI 処理の単位** です（入力・出力・コンテキスト）。
 
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2em;margin:1.6em 0;">
-<div style="padding:1.3em 1.2em;border:1px solid rgba(155,188,15,0.4);background:rgba(5,6,15,0.5);"><div style="font-family:'DotGothic16','Courier New',monospace;font-size:0.78em;letter-spacing:0.15em;color:#9bbc0f;text-transform:uppercase;margin-bottom:0.6em;">👤 入力トークン</div><div style="color:rgba(232,244,255,0.7);font-style:italic;font-size:0.95em;margin-bottom:0.6em;">送信するもの：</div><ul style="margin:0;padding-left:1.1em;color:#e8f4ff;font-size:0.95em;line-height:1.55;"><li>プロンプトと新しいコンテキスト</li><li>大きなファイルやコードベースに応じて増加</li></ul></div>
-<div style="padding:1.3em 1.2em;border:1px solid rgba(0,240,255,0.4);background:rgba(5,6,15,0.5);"><div style="font-family:'DotGothic16','Courier New',monospace;font-size:0.78em;letter-spacing:0.15em;color:#00f0ff;text-transform:uppercase;margin-bottom:0.6em;">🤖 出力トークン</div><div style="color:rgba(232,244,255,0.7);font-style:italic;font-size:0.95em;margin-bottom:0.6em;">受け取るもの：</div><ul style="margin:0;padding-left:1.1em;color:#e8f4ff;font-size:0.95em;line-height:1.55;"><li>AI が生成する応答</li><li>通常、最もコンピューティングコストが高い</li></ul></div>
-<div style="padding:1.3em 1.2em;border:1px solid rgba(255,176,0,0.4);background:rgba(5,6,15,0.5);"><div style="font-family:'DotGothic16','Courier New',monospace;font-size:0.78em;letter-spacing:0.15em;color:#ffb000;text-transform:uppercase;margin-bottom:0.6em;">🔄 キャッシュトークン</div><div style="color:rgba(232,244,255,0.7);font-style:italic;font-size:0.95em;margin-bottom:0.6em;">再利用されるもの：</div><ul style="margin:0;padding-left:1.1em;color:#e8f4ff;font-size:0.95em;line-height:1.55;"><li>過去のインタラクションからのコンテキスト</li><li>速度と効率を向上</li></ul></div>
+<div style="padding:1.3em 1.2em;border:1px solid rgba(155,188,15,0.4);background:rgba(5,6,15,0.5);"><div style="font-family: 'Noto Sans JP', sans-serif;font-size:0.78em;letter-spacing:0.15em;color:#9bbc0f;text-transform:uppercase;margin-bottom:0.6em;">👤 入力トークン</div><div style="color:rgba(232,244,255,0.7);font-style:italic;font-size:0.95em;margin-bottom:0.6em;">送信するもの：</div><ul style="margin:0;padding-left:1.1em;color:#e8f4ff;font-size:0.95em;line-height:1.55;"><li>プロンプトと新しいコンテキスト</li><li>大きなファイルやコードベースに応じて増加</li></ul></div>
+<div style="padding:1.3em 1.2em;border:1px solid rgba(0,240,255,0.4);background:rgba(5,6,15,0.5);"><div style="font-family: 'Noto Sans JP', sans-serif;font-size:0.78em;letter-spacing:0.15em;color:#00f0ff;text-transform:uppercase;margin-bottom:0.6em;">🤖 出力トークン</div><div style="color:rgba(232,244,255,0.7);font-style:italic;font-size:0.95em;margin-bottom:0.6em;">受け取るもの：</div><ul style="margin:0;padding-left:1.1em;color:#e8f4ff;font-size:0.95em;line-height:1.55;"><li>AI が生成する応答</li><li>通常、最もコンピューティングコストが高い</li></ul></div>
+<div style="padding:1.3em 1.2em;border:1px solid rgba(255,176,0,0.4);background:rgba(5,6,15,0.5);"><div style="font-family: 'Noto Sans JP', sans-serif;font-size:0.78em;letter-spacing:0.15em;color:#ffb000;text-transform:uppercase;margin-bottom:0.6em;">🔄 キャッシュトークン</div><div style="color:rgba(232,244,255,0.7);font-style:italic;font-size:0.95em;margin-bottom:0.6em;">再利用されるもの：</div><ul style="margin:0;padding-left:1.1em;color:#e8f4ff;font-size:0.95em;line-height:1.55;"><li>過去のインタラクションからのコンテキスト</li><li>速度と効率を向上</li></ul></div>
 </div>
 
 > 🎯 **ポイント**: すべてのインタラクションは、**入力・出力・コンテキスト** に基づいてトークンを消費します。
@@ -156,11 +156,11 @@ GitHub Copilot がより高度な AI ワークフローをサポートするに�
 
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2em;margin:1.6em 0;">
 <div style="padding:1.3em 1.2em;border:1px solid rgba(0,240,255,0.4);background:rgba(5,6,15,0.5);">
-<div style="font-family:'DotGothic16','Courier New',monospace;font-size:0.85em;letter-spacing:0.12em;color:#00f0ff;text-transform:uppercase;margin-bottom:0.8em;">PRU モデル（旧）</div>
+<div style="font-family: 'Noto Sans JP', sans-serif;font-size:0.85em;letter-spacing:0.12em;color:#00f0ff;text-transform:uppercase;margin-bottom:0.8em;">PRU モデル（旧）</div>
 <div style="color:#e8f4ff;line-height:1.6;font-size:0.95em;"><strong>✅ メリット</strong><br/>あるユーザーが他ユーザーの使用量を使い切ることがない<br/><br/><strong>⚠️ デメリット</strong><br/>他ユーザーに残量があっても、超過使用が発生する可能性</div>
 </div>
 <div style="padding:1.3em 1.2em;border:1px solid rgba(155,188,15,0.45);background:rgba(5,6,15,0.5);">
-<div style="font-family:'DotGothic16','Courier New',monospace;font-size:0.85em;letter-spacing:0.12em;color:#9bbc0f;text-transform:uppercase;margin-bottom:0.8em;">AI クレジットモデル（共有プール）</div>
+<div style="font-family: 'Noto Sans JP', sans-serif;font-size:0.85em;letter-spacing:0.12em;color:#9bbc0f;text-transform:uppercase;margin-bottom:0.8em;">AI クレジットモデル（共有プール）</div>
 <div style="color:#e8f4ff;line-height:1.6;font-size:0.95em;"><strong>✅ メリット</strong><br/>無駄が少ない<br/><br/><strong>⚠️ デメリット</strong><br/>ユーザーごとに消費量が偏る可能性</div>
 </div>
 </div>

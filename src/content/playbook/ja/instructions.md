@@ -106,7 +106,7 @@ applyTo: "server/tests/test_*.py"
 セッション開始時、ハーネスはまず **常時ロードの Instructions**（`.github/copilot-instructions.md`）をコンテキストに入れる。その後、ユーザーが特定パスのファイルを編集しようとすると、ハーネスは `applyTo` グロブが一致する **path-specific Instructions** だけを追加でコンテキストに読み込む。
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 0 1080 490" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
+<svg viewBox="0 0 1080 490" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
   <defs>
     <marker id="arrow-orange" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#ffb000"/>

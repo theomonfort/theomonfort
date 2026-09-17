@@ -106,7 +106,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     data-next={next ? localizedPath(locale, `/playbook/${next.slug}`) : ''}
     data-index={localizedPath(locale, '/playbook')}
   >
-    <a href={localizedPath(locale, '/playbook')} class="font-pixel text-[10px] text-phosphor/60 hover:text-neon-magenta">{t.playbook.backToList}</a>
+    <a href={localizedPath(locale, '/playbook')} class="font-body text-sm text-phosphor/70 hover:text-neon-magenta">{t.playbook.backToList}</a>
 
     <header class="mt-6 mb-8 pb-6 border-b-2 border-dashed" style={`border-color:${accent}`}>
       <div class="flex items-center gap-2 mb-2">
@@ -122,10 +122,10 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       </h1>
       <div class="flex items-baseline flex-wrap gap-x-4 gap-y-1 mb-3">
         {item.entry.data.titleEn && item.entry.data.titleEn !== item.entry.data.title && (
-          <p class="font-pixel-jp text-sm md:text-base text-phosphor/50">{item.entry.data.title}</p>
+          <p class="font-body text-sm md:text-base text-phosphor/50">{item.entry.data.title}</p>
         )}
         {updatedLabel && (
-          <span class="font-pixel text-[10px] text-phosphor/50">
+          <span class="font-body text-xs text-phosphor/70">
             {t.playbook.updated}: {updatedLabel}
           </span>
         )}
@@ -143,19 +143,19 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 
     {entry.data.links.length > 0 && (
       <aside class="links-aside mt-10 p-2">
-        <h2 class="font-pixel-jp text-base md:text-lg mb-6" style={`color:${accent}`}>{t.playbook.officialLinks}</h2>
+        <h2 class="font-body text-base md:text-lg mb-6" style={`color:${accent}`}>{t.playbook.officialLinks}</h2>
         {hasGroups ? (
           <div class="space-y-7">
             {linkGroups.map((g) => (
               <div>
                 {g.name && (
-                  <h3 class="font-pixel-jp text-base md:text-lg mb-3 pb-2 border-b border-dashed" style={`color:${accent}; border-color:${accent}66`}>
+                  <h3 class="font-body text-base md:text-lg mb-3 pb-2 border-b border-dashed" style={`color:${accent}; border-color:${accent}66`}>
                     {g.name}
                   </h3>
                 )}
                 <ul class="space-y-3">
                   {g.items.map((l) => (
-                    <li class="font-pixel-jp text-base md:text-lg leading-relaxed">
+                    <li class="font-body text-base md:text-lg leading-relaxed">
                       <MenuArrow /> <a href={l.url} target="_blank" rel="noopener noreferrer" class="retro-link">{l.label}</a>
                     </li>
                   ))}
@@ -166,7 +166,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
         ) : (
           <ul class="space-y-3">
             {entry.data.links.map((l) => (
-              <li class="font-pixel-jp text-base md:text-lg leading-relaxed">
+              <li class="font-body text-base md:text-lg leading-relaxed">
                 <MenuArrow /> <a href={l.url} target="_blank" rel="noopener noreferrer" class="retro-link">{l.label}</a>
               </li>
             ))}
@@ -177,7 +177,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 
     {entry.data.related.length > 0 && (
       <aside class="mt-6">
-        <h2 class="font-pixel text-[10px] text-phosphor/60 mb-2">{t.playbook.related}</h2>
+        <h2 class="font-body font-bold text-sm text-phosphor/70 mb-2">{t.playbook.related}</h2>
         <div class="flex flex-wrap gap-2">
           {entry.data.related.map((slug) => {
             const r = all.find((e) => e.slug === slug);
@@ -185,7 +185,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
             return (
               <a
                 href={localizedPath(locale, `/playbook/${r.slug}`)}
-                class="font-pixel-jp text-xs px-3 py-1 border border-phosphor/30 hover:border-neon-cyan hover:text-neon-cyan transition-colors"
+                class="font-body text-xs px-3 py-1 border border-phosphor/30 hover:border-neon-cyan hover:text-neon-cyan transition-colors"
               >
                 {r.entry.data.icon && /\.(svg|png|jpg|jpeg|webp|gif)$/i.test(r.entry.data.icon)
                   ? <img src={r.entry.data.icon} alt="" class="inline h-[1em] w-auto align-middle mr-1" />
@@ -197,7 +197,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       </aside>
     )}
 
-    <nav class="mt-12 grid grid-cols-2 gap-4 font-pixel text-[10px]">
+    <nav class="mt-12 grid grid-cols-2 gap-4 font-body text-sm leading-relaxed">
       {prev ? (
         <a href={localizedPath(locale, `/playbook/${prev.slug}`)} class="block p-3 border-2 border-phosphor/30 hover:border-neon-cyan hover:text-neon-cyan transition-colors">
           ◀ {playbookEntryTitle(prev)}
@@ -213,13 +213,13 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     <button
       type="button"
       id="present-toggle"
-      class="present-hint font-pixel-jp text-[10px]"
+      class="present-hint font-body text-sm"
       aria-label="Toggle presentation mode"
     >
       <span class="key">P</span> {t.playbook.presentationMode}
     </button>
 
-    <div class="present-overlay-hint font-pixel-jp text-[10px]">
+    <div class="present-overlay-hint font-body text-[10px]">
       <span>
         <button
           type="button"
@@ -1002,10 +1002,12 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       }
 
       const { default: mermaid } = await import('mermaid');
+      await document.fonts.ready;
       mermaid.initialize({
         startOnLoad: false,
         theme: 'dark',
         themeVariables: {
+          fontFamily: '"Noto Sans JP", sans-serif',
           background: '#0a0e27',
           primaryColor: '#0a0e27',
           primaryTextColor: '#e8f4ff',
@@ -1101,16 +1103,19 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 <style is:global>
   .prose-akq {
     color: #e8f4ff;
-    font-family: 'Noto Sans JP', sans-serif;
-    line-height: 1.85;
+    font-family: 'DotGothic16 Latin', 'Noto Sans JP', sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.9;
+    letter-spacing: 0.01em;
   }
   .prose-akq h2, .prose-akq h3 {
-    font-family: 'DotGothic16', monospace;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
     color: var(--entry-accent, #00f0ff);
     margin-top: 2em;
     margin-bottom: 0.6em;
   }
-  .prose-akq h2 { font-size: 2.2em; line-height: 1.25; }
+  .prose-akq h2 { font-size: 1.85em; line-height: 1.45; }
   .prose-akq h3 { color: var(--entry-accent, #ff2e88); font-size: 1.4em; }
   /* Compact reference link sitting to the right of a section title. */
   .prose-akq h2 .h2-doc {
@@ -1231,15 +1236,15 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     letter-spacing: 0.1em;
   }
   .demo-panel .demo-name {
-    font-family: 'VT323', 'IBM Plex Mono', monospace;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 1.15rem;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.02em;
     opacity: 0.72;
   }
   .demo-panel .demo-note {
     margin-left: auto;
     padding: 0.1rem 0.5rem;
-    font-family: 'DotGothic16', 'VT323', monospace;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 0.72rem;
     line-height: 1.5;
     letter-spacing: 0.1em;
@@ -1297,10 +1302,10 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
   .demo-panel .demo-step-title {
     margin: 0 0 0.4rem;
-    font-family: 'VT323', 'IBM Plex Mono', monospace;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 1.3rem;
     line-height: 1.2;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.02em;
     color: #ffb000;
   }
   .demo-panel .demo-steps p {
@@ -1414,7 +1419,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       rgba(5, 6, 15, 0.85);
     border: 2px solid var(--entry-accent, #00f0ff);
     box-shadow: 4px 4px 0 #05060f;
-    font-family: 'DotGothic16', monospace;
+    font-family: 'DotGothic16 Latin', 'Noto Sans JP', sans-serif;
     font-size: 1.15em;
     line-height: 1.7;
     margin-left: 150px;
@@ -1637,7 +1642,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     max-width: 100%;
   }
   .prose-akq .setup-card-tag {
-    font-family: 'DotGothic16', sans-serif;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 0.85em;
     letter-spacing: 0.05em;
   }
@@ -1698,7 +1703,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     box-shadow: 4px 4px 0 #05060f;
     text-align: center;
     color: #e8f4ff;
-    font-family: 'DotGothic16', monospace;
+    font-family: 'Noto Sans JP', sans-serif;
   }
   .prose-akq .pd-stage[data-tone="green"]   { --pd-color: #9bbc0f; --pd-bg: rgba(155, 188, 15, 0.08); }
   .prose-akq .pd-stage[data-tone="amber"]   { --pd-color: #ffb000; --pd-bg: rgba(255, 176, 0, 0.08); }
@@ -1771,7 +1776,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
   .prose-akq .pd-arrow-label {
     font-size: 0.8rem;
-    font-family: 'DotGothic16', monospace;
+    font-family: 'Noto Sans JP', sans-serif;
     color: rgba(255,255,255,0.7);
     background: rgba(0, 240, 255, 0.08);
     border: 1px solid rgba(0, 240, 255, 0.4);
@@ -1826,7 +1831,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     box-shadow: 6px 6px 0 #05060f, 0 0 18px rgba(255, 46, 136, 0.3);
   }
   .prose-akq .link-card-tag {
-    font-family: 'DotGothic16', sans-serif;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 0.8em;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -1836,7 +1841,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .prose-akq .link-card-tag.tag-green { color: #9bbc0f; }
   .prose-akq .link-card-tag.tag-amber { color: #ffb000; }
   .prose-akq .link-card-title {
-    font-family: 'Press Start 2P', monospace;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 0.85em;
     line-height: 1.5;
     color: #f5f7fa;
@@ -1872,7 +1877,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     text-align: left;
     padding: 0.85em 1em;
     color: #00f0ff;
-    font-family: 'DotGothic16', sans-serif;
+    font-family: 'Noto Sans JP', sans-serif;
     font-weight: normal;
     font-size: 0.95em;
     letter-spacing: 0.04em;
@@ -1979,7 +1984,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     margin-top: 0.7em;
     padding-top: 0.7em;
     border-top: 1px dashed rgba(0, 240, 255, 0.25);
-    font-family: 'DotGothic16', sans-serif;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 0.85em;
     line-height: 1.6;
     color: rgba(220, 230, 240, 0.85);
@@ -2049,7 +2054,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .prose-akq .impact-card[data-color="amber"]   { border-color: rgba(255,176,0,0.5); }
   .prose-akq .impact-card[data-color="magenta"] { border-color: rgba(255,46,136,0.5); }
   .prose-akq .impact-head {
-    font-family: 'DotGothic16', 'Noto Sans JP', sans-serif;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 0.95rem;
     background: rgba(255,255,255,0.95);
     color: #0a0e27;
@@ -2060,7 +2065,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
   .prose-akq .impact-stat { display: flex; flex-direction: column; gap: 0.25rem; }
   .prose-akq .impact-num {
-    font-family: 'DotGothic16', sans-serif;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 2.4rem;
     line-height: 1;
     color: #e8f4ff;
@@ -2095,7 +2100,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     }
   }
   .prose-akq .why-title {
-    font-family: 'DotGothic16', 'Noto Sans JP', sans-serif;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 1.8rem;
     line-height: 1.35;
     color: #e8f4ff;
@@ -2280,7 +2285,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .prose-akq .trio-name { font-weight: 700; font-size: 1em; line-height: 1.3; }
   .prose-akq .trio-icon { margin-right: 0.4em; }
   .prose-akq .trio-prod {
-    font-family: 'VT323', monospace;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 0.9em;
     letter-spacing: 0.06em;
     opacity: 0.62;
@@ -2329,7 +2334,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .prose-akq .trio-chip {
     display: inline-block;
     padding: 0 0.35em;
-    font-family: 'VT323', monospace;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 0.78em;
     letter-spacing: 0.04em;
     vertical-align: 2px;
@@ -2468,7 +2473,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     grid-row: 1;
     align-self: end;
     text-align: center;
-    font-family: 'DotGothic16', monospace;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 1rem;
     font-weight: 700;
     color: #e8f4ff;
@@ -2523,7 +2528,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     border: 2px solid var(--ch-color, #00f0ff);
     box-shadow: 4px 4px 0 #05060f;
     text-align: center;
-    font-family: 'DotGothic16', monospace;
+    font-family: 'Noto Sans JP', sans-serif;
   }
   .prose-akq .ch-card::before {
     content: '';
@@ -2555,7 +2560,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-family: 'DotGothic16', monospace;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 1rem;
     font-weight: 700;
     color: #05060f;
@@ -2652,7 +2657,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     min-width: 0;
   }
   .prose-akq .dl-script-text strong {
-    font-family: 'DotGothic16', monospace;
+    font-family: 'Noto Sans JP', sans-serif;
     color: var(--entry-accent, #00f0ff);
   }
   .prose-akq .dl-script-text em {
@@ -3038,7 +3043,6 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .present-toc .toc-item.active {
     color: var(--cat-color, #ff2e88) !important;
     font-weight: 700;
-    text-shadow: 0 0 8px color-mix(in srgb, var(--cat-color, #ff2e88) 60%, transparent);
   }
   .present-toc .toc-section {
     font-family: 'DotGothic16', 'Noto Sans JP', monospace;
@@ -3116,8 +3120,27 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   body.present-mode .playbook-detail header { margin-bottom: 1.5rem; }
   body.present-mode .playbook-detail header h1 { font-size: 3rem !important; }
   body.present-mode .playbook-detail header > p:nth-of-type(2) { font-size: 1.5rem !important; }
-  body.present-mode .prose-akq { font-size: 1.5rem; line-height: 1.7; max-width: 72rem; width: 100%; margin: 0 auto; }
+  body.present-mode .prose-akq { font-size: 1.6rem; line-height: 1.8; max-width: 72rem; width: 100%; margin: 0 auto; }
   body.present-mode .prose-akq h2 { font-size: 2.4rem; margin-top: 0.5em; margin-bottom: 0.7em; }
+  body.present-mode .prose-akq > h2 {
+    position: relative;
+    padding-left: 0.85em;
+    font-family: 'DotGothic16 Latin', 'M PLUS 1 Code', 'Noto Sans JP', sans-serif;
+    color: var(--entry-accent, #00f0ff);
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+    text-wrap: balance;
+  }
+  body.present-mode .prose-akq > h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.52em;
+    width: 0.32em;
+    height: 0.46em;
+    background: var(--entry-accent, #00f0ff);
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+  }
   body.present-mode .prose-akq h3 { font-size: 1.7rem; }
   body.present-mode .prose-akq pre,
   body.present-mode .mermaid-wrap {
@@ -3251,7 +3274,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .slide-title-tag .tag-main { color: #ff2e88; display: inline-flex; align-items: center; gap: 8px; }
   .slide-title-tag .tag-main span { font-size: 1.1em; }
   .slide-title-tag .tag-sep { color: #00f0ff; opacity: 0.7; font-size: 0.9em; }
-  .slide-title-tag .tag-sub { color: #00f0ff; font-family: 'DotGothic16', sans-serif; font-size: 0.95em; }
+  .slide-title-tag .tag-sub { color: #00f0ff; font-family: 'Noto Sans JP', sans-serif; font-size: 0.95em; }
 
   /* ── Match the overlay-hint style to the title tag ── */
   body.present-mode .present-overlay-hint {
@@ -3278,28 +3301,17 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     font-size: 24px;
   }
 
-  /* ─────────────────────────────────────────────────────────────
-     Combo A — CRT terminal (site-wide playbook default)
-     Headings: Orbitron · Body + TOC: Share Tech Mono · Chrome: VT323
-     JP fallback for headings: DotGothic16 (Orbitron has no JP glyphs)
-     ───────────────────────────────────────────────────────────── */
-  .playbook-detail .prose-akq {
-    font-family: 'DotGothic16', monospace;
-  }
-  .playbook-detail .prose-akq h2,
-  .playbook-detail .prose-akq h3 {
-    font-family: 'DotGothic16', monospace;
-  }
+  /* Keep terminal typography for the slide counter, not reading controls. */
   body.present-mode .playbook-detail .present-overlay-hint,
-  body.present-mode .playbook-detail .present-hint,
-  body.present-mode .playbook-detail .slide-counter {
-    font-family: 'VT323', 'Noto Sans JP', monospace !important;
-    letter-spacing: 0.02em;
+  body.present-mode .playbook-detail .present-hint {
+    font-family: 'Noto Sans JP', sans-serif;
+    letter-spacing: 0.01em;
   }
   body.present-mode .playbook-detail .present-overlay-hint {
     font-size: 18px;
   }
   body.present-mode .playbook-detail .slide-counter {
+    font-family: 'VT323', monospace;
     font-size: 24px;
   }
   /* ── Bug-icon link wrapping the slide counter (links to feedback form) ── */
@@ -3346,11 +3358,11 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .prose-akq .risk-widget { margin: 1.2em 0; }
   .prose-akq .risk-hint {
     margin: 0 0 0.5em;
-    font-family: 'VT323', 'DotGothic16', monospace;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 1.05em;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.02em;
     color: #ffb000;
-    text-shadow: 0 0 8px rgba(255, 176, 0, 0.5);
+    text-shadow: none;
   }
   .prose-akq .risk-list {
     display: flex;
@@ -3507,11 +3519,11 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .prose-akq .spec-widget { margin: 1.2em 0; }
   .prose-akq .spec-hint {
     margin: 0 0 0.5em;
-    font-family: 'VT323', monospace;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 1.05em;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.02em;
     color: #ffb000;
-    text-shadow: 0 0 8px rgba(255, 176, 0, 0.5);
+    text-shadow: none;
   }
   .prose-akq .spec-list {
     display: flex;
@@ -3581,7 +3593,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .prose-akq .spec-since {
     flex: none;
     margin-left: auto;
-    font-family: 'VT323', monospace;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 1.1em;
     line-height: 1;
     letter-spacing: 0.06em;
@@ -3691,7 +3703,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     font-size: 0.9em;
     letter-spacing: 0.08em;
     color: #ffb000;
-    text-shadow: 0 0 8px rgba(255, 176, 0, 0.5);
+    text-shadow: none;
   }
   .prose-akq .ctl-list {
     display: flex;
@@ -3775,7 +3787,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
   .prose-akq .ctl-doc {
     flex: none;
-    font-family: 'VT323', monospace;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 1.1em;
     line-height: 1;
     letter-spacing: 0.06em;
@@ -3896,7 +3908,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     font-size: 0.9em;
     letter-spacing: 0.08em;
     color: #ffb000;
-    text-shadow: 0 0 8px rgba(255, 176, 0, 0.5);
+    text-shadow: none;
   }
   .prose-akq .det-split {
     --det-col: 12em;
@@ -4026,17 +4038,17 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     border-bottom: 1px dashed color-mix(in srgb, var(--entry-accent, #00f0ff) 35%, transparent);
   }
   .prose-akq .det-title {
-    font-family: 'VT323', monospace;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 1.35em;
     line-height: 1.15;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.02em;
     color: var(--entry-accent, #00f0ff);
   }
   .prose-akq .det-tier {
     flex: none;
     margin-left: auto;
     padding: 0 0.4em;
-    font-family: 'VT323', monospace;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 1em;
     line-height: 1.35;
     letter-spacing: 0.1em;
@@ -4205,9 +4217,9 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
   .prose-akq .rem-title {
     margin: 0 0 0.25em;
-    font-family: 'VT323', 'IBM Plex Mono', monospace;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 1.25em;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.02em;
     color: var(--entry-accent, #00f0ff);
   }
   .prose-akq .rem-why {
@@ -4271,7 +4283,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     font-size: 0.9em;
     letter-spacing: 0.08em;
     color: #ffb000;
-    text-shadow: 0 0 8px rgba(255, 176, 0, 0.5);
+    text-shadow: none;
   }
   .prose-akq .grd-split {
     --grd-h: 8.25em;
@@ -4381,7 +4393,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     flex: none;
     margin-left: auto;
     padding: 0 0.4em;
-    font-family: 'VT323', monospace;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 1em;
     line-height: 1.35;
     letter-spacing: 0.1em;
@@ -4560,7 +4572,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     font-size: 0.9em;
     letter-spacing: 0.08em;
     color: #ffb000;
-    text-shadow: 0 0 8px rgba(255, 176, 0, 0.5);
+    text-shadow: none;
   }
 
   /* Product axis. Each tab owns its own hue so the switch is legible
@@ -4708,10 +4720,10 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     border-bottom: 1px dashed color-mix(in srgb, var(--vsx-accent) 35%, transparent);
   }
   .prose-akq .vsx-title {
-    font-family: 'VT323', monospace;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 1.35em;
     line-height: 1.15;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.02em;
     color: var(--vsx-accent);
   }
   /* The badge restates which product is on screen, so a screenshot of
@@ -4720,7 +4732,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     flex: none;
     margin-left: auto;
     padding: 0 0.4em;
-    font-family: 'VT323', monospace;
+    font-family: 'Noto Sans JP', sans-serif;
     font-size: 1em;
     line-height: 1.35;
     letter-spacing: 0.1em;

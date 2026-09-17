@@ -69,7 +69,7 @@ How a team organizes branches around PRs. Pick the model that matches your relea
 
 **One long-lived branch (`main`), short-lived feature branches.** Branch off `main`, open a PR, review, merge, and deploy — continuously. Simple and fast; ideal for web apps and small teams shipping many times a day.
 
-<svg viewBox="0 0 700 380" role="img" aria-label="GitHub Flow: main branch with several short-lived change branches merging in" style="width:100%;height:auto;max-width:760px;display:block;margin:1.4em auto;font-family:'DotGothic16',monospace;">
+<svg viewBox="0 0 700 380" role="img" aria-label="GitHub Flow: main branch with several short-lived change branches merging in" style="width:100%;height:auto;max-width:760px;display:block;margin:1.4em auto;font-family: 'Noto Sans JP', sans-serif;">
   <defs>
     <marker id="ghf-arrow" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
@@ -112,7 +112,7 @@ How a team organizes branches around PRs. Pick the model that matches your relea
 
 **Two long-lived branches (`main` + `develop`) plus supporting branches.** Work integrates on `develop`; a `release` branch stabilizes a version, then merges to `main` and gets tagged. Structured for scheduled, versioned releases and larger teams.
 
-<svg viewBox="0 0 740 400" role="img" aria-label="Git Flow branch model: main, hotfix, release, develop, and two feature lanes" style="width:100%;height:auto;max-width:820px;display:block;margin:1.4em auto;font-family:'DotGothic16',monospace;">
+<svg viewBox="0 0 740 400" role="img" aria-label="Git Flow branch model: main, hotfix, release, develop, and two feature lanes" style="width:100%;height:auto;max-width:820px;display:block;margin:1.4em auto;font-family: 'Noto Sans JP', sans-serif;">
   <defs>
     <marker id="gf-arrow" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
@@ -223,7 +223,7 @@ Merging a stack is **one atomic operation**. What lands on `main` depends on the
 <label class="figtabs-tab" for="smm-3">Rebase and merge</label>
 </div>
 <div class="figtabs-panel" data-idx="1">
-<svg viewBox="0 0 900 372" role="img" aria-label="Create a merge commit: every branch keeps its own commits, and the whole stack lands on main through a single merge commit" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family:'DotGothic16',monospace;">
+<svg viewBox="0 0 900 372" role="img" aria-label="Create a merge commit: every branch keeps its own commits, and the whole stack lands on main through a single merge commit" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family: 'Noto Sans JP', sans-serif;">
   <defs>
     <marker id="stk-mc" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
@@ -267,7 +267,7 @@ Merging a stack is **one atomic operation**. What lands on `main` depends on the
 <p class="figtabs-cap">Branch commits are kept as-is and the <b>whole stack lands through one merge commit</b>. Fullest history.</p>
 </div>
 <div class="figtabs-panel" data-idx="2">
-<svg viewBox="0 0 900 372" role="img" aria-label="Squash and merge: each pull request collapses into a single commit on main" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family:'DotGothic16',monospace;">
+<svg viewBox="0 0 900 372" role="img" aria-label="Squash and merge: each pull request collapses into a single commit on main" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family: 'Noto Sans JP', sans-serif;">
   <defs>
     <marker id="stk-sq" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
@@ -319,7 +319,7 @@ Merging a stack is **one atomic operation**. What lands on `main` depends on the
 <p class="figtabs-cap">Each PR collapses into <b>a single commit</b> on <code>main</code>. Cleanest log, but the individual commits (faded) are lost.</p>
 </div>
 <div class="figtabs-panel" data-idx="3">
-<svg viewBox="0 0 900 372" role="img" aria-label="Rebase and merge: every branch commit is replayed onto main in order, with no merge commit" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family:'DotGothic16',monospace;">
+<svg viewBox="0 0 900 372" role="img" aria-label="Rebase and merge: every branch commit is replayed onto main in order, with no merge commit" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family: 'Noto Sans JP', sans-serif;">
   <defs>
     <marker id="stk-rb" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>

@@ -4,6 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Use the TOC font for Latin playbook text without changing Japanese glyphs. */
+@font-face {
+  font-family: 'DotGothic16 Latin';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/dotgothic16/v21/v6-QGYjBJFKgyw5nSoDAGH7M6X96P0rS.woff2') format('woff2');
+  unicode-range: U+0020-00FF;
+}
+
 /* Pixel-perfect rendering for retro feel */
 * {
   image-rendering: pixelated;

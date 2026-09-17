@@ -71,6 +71,8 @@ export const siteCopy = {
       playbookShort: 'プレイブック',
       equipmentShort: '装備所',
       handsonShort: 'ハンズオン',
+      changelog: 'CHANGELOG',
+      changelogShort: '更新情報',
     },
     footer: {
       end: '▮ QUEST CONTINUES',
@@ -249,6 +251,8 @@ export const siteCopy = {
       playbookShort: 'Book',
       equipmentShort: 'Gear',
       handsonShort: 'Hands',
+      changelog: 'CHANGELOG',
+      changelogShort: 'Changelog',
     },
     footer: {
       end: '▮ QUEST CONTINUES',

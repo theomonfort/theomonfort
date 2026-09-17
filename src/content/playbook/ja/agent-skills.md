@@ -89,7 +89,7 @@ Agent Skills は **段階的開示** で読み込まれる。
 ユーザーが依頼をすると、ハーネスはまず全スキルの **メタデータだけ** をコンテキストに載せる。LLM が「このスキルが必要」と判断したら、ハーネスがその **本体（SKILL.md）を完全展開** してコンテキストに追加する。
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 0 1080 490" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:'DotGothic16','Courier New',monospace;">
+<svg viewBox="0 0 1080 490" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
   <defs>
     <marker id="arrow-orange" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#ffb000"/>
