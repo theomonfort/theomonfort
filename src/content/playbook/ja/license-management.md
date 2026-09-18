@@ -1,7 +1,7 @@
 ---
-title: Copilot Licence
-titleEn: Copilot Licence
-summary: GitHub Copilot は Enterprise レベルで課金され、Enterprise または Organization レベルで割り当てられる。複数 org に所属するユーザーの請求・ポリシーの扱い、Outside collaborator / EMU の Guest collaborator まで一通り整理。
+title: GHE と Copilot のライセンス
+titleEn: GHE & Copilot Licences
+summary: Copilot の課金、割り当て、複数 org のポリシー、外部コラボレーターを整理。GHE Cloud のライセンス消費、未所属ユーザー、Visual Studio バンドル、予算アラートも解説。
 icon: /theomonfort/icons/license-crown.png
 color: magenta
 accent:
@@ -14,6 +14,18 @@ order: 30
 category: administration
 related: ['github-copilot', 'copilot-metrics']
 links:
+  - group: 📖 GHE ライセンス
+    label: GitHub ライセンスを消費するユーザー
+    url: https://docs.github.com/ja/billing/reference/github-license-users
+  - group: 📖 GHE ライセンス
+    label: Enterprise ユーザーへの Copilot の直接割り当て
+    url: https://docs.github.com/ja/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-access/grant-access
+  - group: 📖 GHE ライセンス
+    label: GitHub Enterprise を含む Visual Studio サブスクリプションの設定
+    url: https://docs.github.com/ja/enterprise-cloud@latest/billing/how-tos/set-up-payment/set-up-vs-subscription
+  - group: 📖 GHE ライセンス
+    label: 予算とアラート
+    url: https://docs.github.com/ja/billing/concepts/budgets-and-alerts
   - label: ドキュメント — GitHub Copilot のプラン
     url: https://docs.github.com/ja/copilot/about-github-copilot/plans-for-github-copilot
   - label: ドキュメント — ポリシー競合時の挙動（複数組織の優先順位）
@@ -169,3 +181,37 @@ org のメンバーではない人（ベンダー・契約者・短期パート�
 - 💵 seat を割り当てた Guest collaborator も **1 ライセンス分** が課金される。
 
 > 📘 セットアップ: <a href="https://docs.github.com/ja/organizations/managing-user-access-to-your-organizations-repositories/managing-outside-collaborators/adding-outside-collaborators-to-repositories-in-your-organization" target="_blank" rel="noopener noreferrer" class="retro-link">Outside collaborator の追加</a> · <a href="https://docs.github.com/ja/enterprise-cloud@latest/admin/managing-accounts-and-repositories/managing-users-in-your-enterprise/enabling-guest-collaborators" target="_blank" rel="noopener noreferrer" class="retro-link">Guest collaborator の有効化（EMU）</a>
+
+## GHE ライセンス管理 <a class="h2-doc" href="https://docs.github.com/ja/billing/reference/github-license-users" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+GitHub Enterprise Cloud（EMU を含む）が対象です。
+
+<div class="ctl-widget">
+<p class="ctl-hint">▸ + で詳細を開閉</p>
+<div class="ctl-list">
+<details class="ctl-item" name="ghe-licensing">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔑</span><span class="ctl-name">GHE ライセンス</span><span class="ctl-when">Org / repo へのアクセス</span><a class="ctl-doc" href="https://docs.github.com/ja/billing/reference/github-license-users" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p><strong>Organization に参加</strong>するか、<strong>private / internal リポジトリ</strong>（fork を除く）のコラボレーターとしてアクセスを付与されると、自動的に消費されます。</p>
+</div>
+</details>
+<details class="ctl-item" name="ghe-licensing">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">👤</span><span class="ctl-name">未所属ユーザー</span><span class="ctl-when">Copilot Business のみ</span><a class="ctl-doc" href="https://docs.github.com/ja/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-access/grant-access" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p>Organization に所属せず、リポジトリアクセスも持たない<strong>未所属（unaffiliated）ユーザー</strong>に、<strong>Enterprise レベルで Copilot Business を直接割り当てる</strong>と、通常の GHE ライセンスを消費せずに利用できます。</p>
+</div>
+</details>
+<details class="ctl-item" name="ghe-licensing">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📦</span><span class="ctl-name">Visual Studio バンドル</span><span class="ctl-when">アカウントを照合</span><a class="ctl-doc" href="https://docs.github.com/ja/enterprise-cloud@latest/billing/how-tos/set-up-payment/set-up-vs-subscription" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p>GitHub アカウントを、<strong>GitHub Enterprise を含む</strong> Visual Studio サブスクリプションに照合します。単体の GHE ライセンスではなく、バンドルライセンスを消費します。<strong>照合済みのユーザーは、未所属でもバンドルライセンスを消費します。</strong></p>
+</div>
+</details>
+<details class="ctl-item" name="ghe-licensing">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">💰</span><span class="ctl-name">GHE の予算</span><span class="ctl-when">アラートのみ</span><a class="ctl-doc" href="https://docs.github.com/ja/billing/concepts/budgets-and-alerts" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p><strong>従量課金の GHE ライセンス</strong>には、予算の <strong>75%、90%、100%</strong> でアラートを設定できます。予算を超えても<strong>ライセンス追加や課金は停止しません</strong>。前払いのボリュームライセンスには利用できません。</p>
+</div>
+</details>
+</div>
+</div>
