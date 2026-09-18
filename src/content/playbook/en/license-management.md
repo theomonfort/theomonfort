@@ -130,10 +130,10 @@ Overview of how GitHub services are licensed and billed.
 </div>
 </div>
 
-## Billing at the Enterprise level
+## Billing at the Enterprise level <a class="h2-doc" href="https://docs.github.com/en/billing/concepts/product-billing/github-copilot-licenses" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 - 💳 **The Enterprise account is the billing entity** — a single invoice aggregates seats across all organizations in the enterprise.
-- 📈 Seats are counted **per active user, per month**, regardless of how many orgs the user belongs to (see *Multi-org & one bill* below).
+- 📈 Copilot seats are **billed from assignment, even if unused**, with proration for mid-cycle additions. The same user is billed once across organizations **within the same enterprise** (see *Multi-org & one bill* below).
 - 🧾 **Two plans** for organizations: **Copilot Business** and **Copilot Enterprise**. Enterprise adds Chat in GitHub.com with repo-indexed knowledge, fine-tuned models, and audit logs on top of Business.
 - 🏢 **Standalone organizations** (no enterprise) are billed directly to the org and can only use **Business**.
 
