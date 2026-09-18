@@ -1,7 +1,7 @@
 ---
-title: Copilot Licence
-titleEn: Copilot Licence
-summary: How GitHub Copilot is billed at the Enterprise level, assigned at the Enterprise or Org level, and how policies / billing behave when a user belongs to multiple organizations — including outside collaborators and EMU guest collaborators.
+title: GHE & Copilot Licences
+titleEn: GHE & Copilot Licences
+summary: Copilot billing, assignment, multi-org policies, and external collaborators. GHE Cloud licence consumption, unaffiliated users, Visual Studio bundles, and budget alerts.
 icon: /theomonfort/icons/license-crown.png
 color: magenta
 accent:
@@ -14,6 +14,18 @@ order: 30
 category: administration
 related: ['github-copilot', 'copilot-metrics']
 links:
+  - group: 📖 GHE licensing
+    label: People who consume a GitHub licence
+    url: https://docs.github.com/en/billing/reference/github-license-users
+  - group: 📖 GHE licensing
+    label: Assigning Copilot directly to enterprise users
+    url: https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-access/grant-access
+  - group: 📖 GHE licensing
+    label: Setting up Visual Studio subscriptions with GitHub Enterprise
+    url: https://docs.github.com/en/enterprise-cloud@latest/billing/how-tos/set-up-payment/set-up-vs-subscription
+  - group: 📖 GHE licensing
+    label: Budgets and alerts
+    url: https://docs.github.com/en/billing/concepts/budgets-and-alerts
   - label: Docs — GitHub Copilot plans
     url: https://docs.github.com/en/copilot/about-github-copilot/plans-for-github-copilot
   - label: Docs — Policy conflicts (multi-org precedence)
@@ -169,3 +181,37 @@ You can extend Copilot to people who aren't members of your org — useful for v
 - 💵 A Guest collaborator with a Copilot seat is also billed as **1 license**.
 
 > 📘 Setup guides: <a href="https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-outside-collaborators/adding-outside-collaborators-to-repositories-in-your-organization" target="_blank" rel="noopener noreferrer" class="retro-link">Adding outside collaborators</a> · <a href="https://docs.github.com/en/enterprise-cloud@latest/admin/managing-accounts-and-repositories/managing-users-in-your-enterprise/enabling-guest-collaborators" target="_blank" rel="noopener noreferrer" class="retro-link">Enabling guest collaborators (EMU)</a>
+
+## GHE licence management <a class="h2-doc" href="https://docs.github.com/en/billing/reference/github-license-users" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+For GitHub Enterprise Cloud, including EMU.
+
+<div class="ctl-widget">
+<p class="ctl-hint">▸ CLICK + FOR DETAILS</p>
+<div class="ctl-list">
+<details class="ctl-item" name="ghe-licensing">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔑</span><span class="ctl-name">GHE licence</span><span class="ctl-when">Org / repo access</span><a class="ctl-doc" href="https://docs.github.com/en/billing/reference/github-license-users" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p>Consumed automatically when a user <strong>joins an organization</strong> or receives collaborator access to a <strong>private/internal repository</strong>, excluding forks.</p>
+</div>
+</details>
+<details class="ctl-item" name="ghe-licensing">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">👤</span><span class="ctl-name">Unaffiliated users</span><span class="ctl-when">Copilot Business only</span><a class="ctl-doc" href="https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-access/grant-access" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p>Keep the user <strong>unaffiliated</strong>, without organization membership or repository access, and assign <strong>Copilot Business directly at the enterprise level</strong> to avoid consuming a standard GHE licence.</p>
+</div>
+</details>
+<details class="ctl-item" name="ghe-licensing">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📦</span><span class="ctl-name">Visual Studio bundle</span><span class="ctl-when">Match accounts</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/billing/how-tos/set-up-payment/set-up-vs-subscription" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p>Match the GitHub account to a Visual Studio subscription that <strong>includes GitHub Enterprise</strong>. The user consumes a bundled licence instead of a standalone GHE licence, <strong>even if unaffiliated</strong>.</p>
+</div>
+</details>
+<details class="ctl-item" name="ghe-licensing">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">💰</span><span class="ctl-name">GHE budgets</span><span class="ctl-when">Alerts only</span><a class="ctl-doc" href="https://docs.github.com/en/billing/concepts/budgets-and-alerts" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p>For <strong>metered GHE licences</strong>, enable budget alerts at <strong>75%, 90%, and 100%</strong>. Budgets <strong>do not block additional licences or stop charges</strong>. They are not available for prepaid volume licences.</p>
+</div>
+</details>
+</div>
+</div>
