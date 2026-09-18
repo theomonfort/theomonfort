@@ -130,10 +130,10 @@ GitHub サービスの利用方法は下記の通りです。
 </div>
 </div>
 
-## Enterprise レベルでの課金
+## Enterprise レベルでの課金 <a class="h2-doc" href="https://docs.github.com/ja/billing/concepts/product-billing/github-copilot-licenses" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 - 💳 **課金の主体は Enterprise アカウント** — 配下の全 organization の seat が **1 通の請求書** に集約される。
-- 📈 課金単位は **アクティブユーザー × 月**。同じユーザーが複数 org に所属していても重複請求はされない（後述「複数 org と請求」を参照）。
+- 📈 Copilot の seat は **未使用でも割り当て時から課金**され、月途中の追加は日割り計算される。**同一 Enterprise 内**の複数 org から同じユーザーに割り当てても重複請求はされない（後述「複数 org と請求」を参照）。
 - 🧾 organization 向けのプランは **Copilot Business** と **Copilot Enterprise** の 2 種類。Enterprise は Business に加えて、GitHub.com 上の Chat（リポジトリ索引付き）、fine-tuned モデル、Audit log などを含む。
 - 🏢 **Enterprise に属さない単独 organization** は org に直接課金され、選べるのは **Business のみ**。
 
