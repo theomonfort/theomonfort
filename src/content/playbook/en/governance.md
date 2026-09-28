@@ -470,12 +470,16 @@ Same idea for Copilot clients: `copilot/managed-settings.json` overrides local s
 <p class="spec-hint">▸ + reveals what the key controls · the date opens its changelog</p>
 <div class="spec-list">
 <details class="spec-item" name="managed-settings">
-<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧠</span><span class="spec-key"><code>model</code></span><a class="spec-since" href="https://github.blog/changelog/2026-07-01-enterprises-can-default-to-auto-model-selection/" target="_blank" rel="noopener noreferrer">2026-07-01</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">Make <b>auto model selection</b> the default, so nobody picks a model by hand.</p>
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧠</span><span class="spec-key"><code>model</code></span><a class="spec-since" href="https://github.blog/changelog/2026-09-02-enterprise-managed-settings-support-any-default-model" target="_blank" rel="noopener noreferrer">2026-09-02</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">Set the <b>default model</b> for new conversations (auto or any other). Users can still switch.</p>
 </details>
 <details class="spec-item" name="managed-settings">
-<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🚧</span><span class="spec-key"><code>permissions.*</code></span><a class="spec-since" href="https://github.blog/changelog/2026-06-17-enterprise-managed-settings-now-support-bypass-permission-controls" target="_blank" rel="noopener noreferrer">2026-06-17</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">Block <b>bypass / YOLO mode</b>, and gate sensitive operations behind approval.</p>
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🚧</span><span class="spec-key"><code>permissions.*</code></span><a class="spec-since" href="https://github.blog/changelog/2026-09-09-enterprise-managed-permissions-for-github-copilot-agent-operations" target="_blank" rel="noopener noreferrer">2026-09-09</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">Block <b>bypass / YOLO</b>, and <code>deny</code> / <code>ask</code> / <code>allow</code> Shell, Read, Edit and Domain operations.</p>
+</details>
+<details class="spec-item" name="managed-settings">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧱</span><span class="spec-key"><code>sandbox</code></span><a class="spec-since" href="https://github.blog/changelog/2026-09-23-local-sandboxing-in-the-github-copilot-app" target="_blank" rel="noopener noreferrer">2026-09-23</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what"><b>Enforce</b> the local sandbox, with minimum limits on files, network and credentials.</p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧩</span><span class="spec-key"><code>enabledPlugins</code> · marketplaces</span><a class="spec-since" href="https://github.blog/changelog/2026-08-26-enterprise-managed-settings-now-support-autoupdate-for-plugin-marketplaces" target="_blank" rel="noopener noreferrer">2026-08-26</a><span class="spec-toggle" aria-hidden="true"></span></summary>
@@ -486,8 +490,12 @@ Same idea for Copilot clients: `copilot/managed-settings.json` overrides local s
 <p class="spec-what">MCP allowlist by URL or command. <b>Fail-closed</b>: off the list, it does not run.</p>
 </details>
 <details class="spec-item" name="managed-settings">
-<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📡</span><span class="spec-key"><code>telemetry</code></span><a class="spec-since" href="https://github.blog/changelog/2026-07-08-enterprise-managed-opentelemetry-export-for-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">2026-07-08</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what"><b>OpenTelemetry</b> export to your own collector.</p>
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📱</span><span class="spec-key"><code>remoteControl</code></span><a class="spec-since" href="https://github.blog/changelog/2026-07-30-limit-remote-control-to-managed-devices" target="_blank" rel="noopener noreferrer">2026-07-30</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">Remote control of sessions on this device: <b>require SSO</b>, or turn it off.</p>
+</details>
+<details class="spec-item" name="managed-settings">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📡</span><span class="spec-key"><code>telemetry</code></span><a class="spec-since" href="https://github.blog/changelog/2026-09-22-opentelemetry-in-the-github-copilot-app" target="_blank" rel="noopener noreferrer">2026-09-22</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what"><b>OpenTelemetry</b> export to your own collector. Now in the Copilot app too.</p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">👥</span><span class="spec-key"><code>teams/</code> + <code>team-mappings.json</code></span><a class="spec-since" href="https://github.blog/changelog/2026-08-03-enterprise-team-specialization-for-managed-settings/" target="_blank" rel="noopener noreferrer">2026-08-03</a><span class="spec-toggle" aria-hidden="true"></span></summary>
@@ -516,6 +524,7 @@ They live in one repo you own, set in **Enterprise → AI controls → Agents**.
 
 - 🏢 You pick the **org**. The repo name and `copilot/` paths are fixed.
 - 🔒 Applies to **everyone** on the plan, repo access or not. Keep it **internal** and guard `copilot/**` with CODEOWNERS.
+- ✅ Config errors show up under **Copilot settings validation**. <a class="retro-link" href="https://github.blog/changelog/2026-09-25-enterprise-managed-settings-in-product-validator" target="_blank" rel="noopener noreferrer">2026-09-25 ↗</a>
 
 ## ★ Where it fits
 

@@ -470,12 +470,16 @@ Copilot クライアントも同じ。`copilot/managed-settings.json` がロー�
 <p class="spec-hint">▸ + でキーの内容 · 日付は changelog</p>
 <div class="spec-list">
 <details class="spec-item" name="managed-settings">
-<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧠</span><span class="spec-key"><code>model</code></span><a class="spec-since" href="https://github.blog/changelog/2026-07-01-enterprises-can-default-to-auto-model-selection/" target="_blank" rel="noopener noreferrer">2026-07-01</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what"><b>auto model selection</b> を既定にし、手動でモデルを選ばせない。</p>
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧠</span><span class="spec-key"><code>model</code></span><a class="spec-since" href="https://github.blog/changelog/2026-09-02-enterprise-managed-settings-support-any-default-model" target="_blank" rel="noopener noreferrer">2026-09-02</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">新しい会話の<b>既定モデル</b>を決める（auto 以外も可）。ユーザーは後から切り替えられる。</p>
 </details>
 <details class="spec-item" name="managed-settings">
-<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🚧</span><span class="spec-key"><code>permissions.*</code></span><a class="spec-since" href="https://github.blog/changelog/2026-06-17-enterprise-managed-settings-now-support-bypass-permission-controls" target="_blank" rel="noopener noreferrer">2026-06-17</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what"><b>bypass / YOLO モード</b>を禁止し、危険な操作を承認制にする。</p>
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🚧</span><span class="spec-key"><code>permissions.*</code></span><a class="spec-since" href="https://github.blog/changelog/2026-09-09-enterprise-managed-permissions-for-github-copilot-agent-operations" target="_blank" rel="noopener noreferrer">2026-09-09</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what"><b>bypass / YOLO</b> を禁止し、Shell、Read、Edit、Domain を <code>deny</code> / <code>ask</code> / <code>allow</code> で制御する。</p>
+</details>
+<details class="spec-item" name="managed-settings">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧱</span><span class="spec-key"><code>sandbox</code></span><a class="spec-since" href="https://github.blog/changelog/2026-09-23-local-sandboxing-in-the-github-copilot-app" target="_blank" rel="noopener noreferrer">2026-09-23</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">ローカル sandbox を<b>強制</b>し、ファイル、ネットワーク、認証情報に最低限の制限をかける。</p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧩</span><span class="spec-key"><code>enabledPlugins</code> · marketplaces</span><a class="spec-since" href="https://github.blog/changelog/2026-08-26-enterprise-managed-settings-now-support-autoupdate-for-plugin-marketplaces" target="_blank" rel="noopener noreferrer">2026-08-26</a><span class="spec-toggle" aria-hidden="true"></span></summary>
@@ -486,8 +490,12 @@ Copilot クライアントも同じ。`copilot/managed-settings.json` がロー�
 <p class="spec-what">URL / コマンドで MCP を許可制に。<b>fail-closed</b> で、リスト外は動かない。</p>
 </details>
 <details class="spec-item" name="managed-settings">
-<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📡</span><span class="spec-key"><code>telemetry</code></span><a class="spec-since" href="https://github.blog/changelog/2026-07-08-enterprise-managed-opentelemetry-export-for-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">2026-07-08</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">自社のコレクタへ <b>OpenTelemetry</b> で送る。</p>
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📱</span><span class="spec-key"><code>remoteControl</code></span><a class="spec-since" href="https://github.blog/changelog/2026-07-30-limit-remote-control-to-managed-devices" target="_blank" rel="noopener noreferrer">2026-07-30</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">この端末のセッションへのリモート操作を <b>SSO 必須</b>にする、または無効にする。</p>
+</details>
+<details class="spec-item" name="managed-settings">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📡</span><span class="spec-key"><code>telemetry</code></span><a class="spec-since" href="https://github.blog/changelog/2026-09-22-opentelemetry-in-the-github-copilot-app" target="_blank" rel="noopener noreferrer">2026-09-22</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">自社のコレクタへ <b>OpenTelemetry</b> で送る。Copilot app にも対応。</p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">👥</span><span class="spec-key"><code>teams/</code> + <code>team-mappings.json</code></span><a class="spec-since" href="https://github.blog/changelog/2026-08-03-enterprise-team-specialization-for-managed-settings/" target="_blank" rel="noopener noreferrer">2026-08-03</a><span class="spec-toggle" aria-hidden="true"></span></summary>
@@ -516,6 +524,7 @@ Copilot クライアントも同じ。`copilot/managed-settings.json` がロー�
 
 - 🏢 選べるのは **org** だけ。repo 名と `copilot/` のパスは固定。
 - 🔒 repo アクセスの有無に関係なく**プラン全員**に効く。**internal** にして `copilot/**` を CODEOWNERS で守る。
+- ✅ 設定ミスは **Copilot settings validation** で確認できる。<a class="retro-link" href="https://github.blog/changelog/2026-09-25-enterprise-managed-settings-in-product-validator" target="_blank" rel="noopener noreferrer">2026-09-25 ↗</a>
 
 ## ★ 使いどころ
 
