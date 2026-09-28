@@ -479,7 +479,7 @@ Same idea for Copilot clients: `copilot/managed-settings.json` overrides local s
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧱</span><span class="spec-key"><code>sandbox</code></span><a class="spec-since" href="https://github.com/github/copilot-cli/releases/tag/v1.0.76" target="_blank" rel="noopener noreferrer">2026-07-29</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">Enforce a <b>minimum sandbox</b> on files, network and credentials. CLI and Copilot app only. <a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/understanding-local-sandboxing" target="_blank" rel="noopener noreferrer">Default permissions ↗</a></p>
+<p class="spec-what"><b>Enforce</b> the local sandbox (CLI and Copilot app only). By default:<br>✅ Read/write the working folder, run tools, git / gh, internet<br>❌ Any other file (e.g. <code>~/.ssh</code>), macOS Keychain<br>⚠️ Users can approve a command to run outside it (block with <code>allowBypass: false</code>)<br><a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/understanding-local-sandboxing" target="_blank" rel="noopener noreferrer">Default permissions ↗</a></p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧩</span><span class="spec-key"><code>enabledPlugins</code> · marketplaces</span><a class="spec-since" href="https://github.blog/changelog/2026-08-26-enterprise-managed-settings-now-support-autoupdate-for-plugin-marketplaces" target="_blank" rel="noopener noreferrer">2026-08-26</a><span class="spec-toggle" aria-hidden="true"></span></summary>
@@ -487,7 +487,7 @@ Same idea for Copilot clients: `copilot/managed-settings.json` overrides local s
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔌</span><span class="spec-key"><code>allowedMcpServers</code> · <code>deniedMcpServers</code></span><a class="spec-since" href="https://github.blog/changelog/2026-08-06-mcp-allowlists-in-enterprise-managed-settings/" target="_blank" rel="noopener noreferrer">2026-08-06</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">MCP allowlist by URL or command. <b>Fail-closed</b>: off the list, it does not run.</p>
+<p class="spec-what"><b>Allowlist</b> <code>allowedMcpServers</code>: only these run (strict). <code>[]</code> = built-ins only.<br><b>Denylist</b> <code>deniedMcpServers</code>: only these are blocked (loose), even if allowed.<br>Match by URL (<code>*</code> ok) or command. Built-ins like GitHub MCP can't be blocked.</p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📱</span><span class="spec-key"><code>remoteControl</code></span><a class="spec-since" href="https://github.blog/changelog/2026-07-30-limit-remote-control-to-managed-devices" target="_blank" rel="noopener noreferrer">2026-07-30</a><span class="spec-toggle" aria-hidden="true"></span></summary>

@@ -479,7 +479,7 @@ Copilot クライアントも同じ。`copilot/managed-settings.json` がロー�
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧱</span><span class="spec-key"><code>sandbox</code></span><a class="spec-since" href="https://github.com/github/copilot-cli/releases/tag/v1.0.76" target="_blank" rel="noopener noreferrer">2026-07-29</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">ローカル sandbox に<b>最低限の制限</b>を強制する（ファイル、ネットワーク、認証情報）。CLI と Copilot app のみ。<a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/understanding-local-sandboxing" target="_blank" rel="noopener noreferrer">既定の権限 ↗</a></p>
+<p class="spec-what">ローカル sandbox を<b>強制</b>する（CLI と Copilot app のみ）。既定では:<br>✅ 作業フォルダの読み書き、ツールや git / gh の実行、ネット接続<br>❌ それ以外のファイル（例: <code>~/.ssh</code>）、macOS Keychain<br>⚠️ コマンドは承認すれば sandbox 外でも実行できる（<code>allowBypass: false</code> で禁止）<br><a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/understanding-local-sandboxing" target="_blank" rel="noopener noreferrer">既定の権限 ↗</a></p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧩</span><span class="spec-key"><code>enabledPlugins</code> · marketplaces</span><a class="spec-since" href="https://github.blog/changelog/2026-08-26-enterprise-managed-settings-now-support-autoupdate-for-plugin-marketplaces" target="_blank" rel="noopener noreferrer">2026-08-26</a><span class="spec-toggle" aria-hidden="true"></span></summary>
@@ -487,7 +487,7 @@ Copilot クライアントも同じ。`copilot/managed-settings.json` がロー�
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔌</span><span class="spec-key"><code>allowedMcpServers</code> · <code>deniedMcpServers</code></span><a class="spec-since" href="https://github.blog/changelog/2026-08-06-mcp-allowlists-in-enterprise-managed-settings/" target="_blank" rel="noopener noreferrer">2026-08-06</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">URL / コマンドで MCP を許可制に。<b>fail-closed</b> で、リスト外は動かない。</p>
+<p class="spec-what"><b>許可リスト</b> <code>allowedMcpServers</code>: 載ったものだけ動く（厳しめ）。<code>[]</code> で組み込み以外禁止。<br><b>拒否リスト</b> <code>deniedMcpServers</code>: 載ったものだけ止める（ゆるめ）。許可リストより優先。<br>指定は URL（<code>*</code> 可）かコマンド。GitHub MCP などの組み込みは止められない。</p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📱</span><span class="spec-key"><code>remoteControl</code></span><a class="spec-since" href="https://github.blog/changelog/2026-07-30-limit-remote-control-to-managed-devices" target="_blank" rel="noopener noreferrer">2026-07-30</a><span class="spec-toggle" aria-hidden="true"></span></summary>
