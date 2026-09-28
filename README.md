@@ -28,7 +28,7 @@ Playbook の本文と引用ブロックでも、英字には DotGothic16、日�
 
 ## Changelog の追加方法
 
-`src/content/changelog/ja/` と `src/content/changelog/en/` に同名の Markdown ファイルを追加します（例: `2026-09-10-pull-requests-page.md`）。
+`src/content/changelog/ja/` と `src/content/changelog/en/` に同名の Markdown ファイルを追加します（例: `2026-09-21-pull-requests-page.md`）。
 
 Frontmatter は `title`、`date`（`"YYYY-MM-DD"`）、`summary`、`category`（`review` / `security` / `copilot` / `actions` / `administration` / `issues`）、`source`（公式の完全な URL）が必須。`status`、`demo`（デモ手順の文字列配列）、`demoUrl`（公開デモへの完全な URL）は任意です。`demoUrl` はデモ欄の「デモを開く」リンクになります。本文は要点や補足を自由に記述できます。日付の降順で自動表示されるため、並び順の手動管理は不要です。
 
