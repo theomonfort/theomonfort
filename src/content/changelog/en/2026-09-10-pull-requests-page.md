@@ -5,10 +5,11 @@ summary: "The repository Pull requests page is in public preview. Search assista
 category: review
 status: "Public preview"
 source: "https://github.blog/changelog/2026-09-10-refreshed-repository-pull-requests-page-in-public-preview/"
+demoUrl: "https://github.com/theomonfort/theomonfort/pulls"
 demo:
   - "Switch between Authored by me and Involves me in the sidebar to find PRs you created or participate in."
   - "Type is in the search box, pause, and select a filter from the Content assist suggestions."
-  - "Combine conditions with OR. AND and nested searches are also supported."
+  - "In the search box, enter: label:stacked-pr OR label:enhancement"
   - "Look for stack indicators and status check counts and results in the list."
   - "Switch to compact view and compare how many PRs fit on the page."
 ---
