@@ -464,7 +464,7 @@ flowchart LR
 
 ## Copilot managed settings（NEW）
 
-Copilot クライアントも同じ。`copilot/managed-settings.json` がローカル設定を上書きする。優先順位は **MDM → server-managed → file → user**。<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">全キー ↗</a>
+Copilot クライアントも同じ。`copilot/managed-settings.json` がローカル設定を上書きする。<a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/deploy-managed-settings#precedence-of-deployment-methods" target="_blank" rel="noopener noreferrer">優先順位</a>は **MDM → server-managed → file → user**（<a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/deploy-managed-settings" target="_blank" rel="noopener noreferrer">配布方法 ↗</a>）。<br><a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/get-started" target="_blank" rel="noopener noreferrer">導入手順 ↗</a> · <a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">全キー ↗</a>
 
 <div class="spec-widget spec-compact">
 <p class="spec-hint">▸ + でキーの内容 · 日付は changelog</p>

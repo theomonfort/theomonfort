@@ -464,7 +464,7 @@ Now the values to set, and who sets them. **Short on time? 03, 15, 18.**
 
 ## Copilot managed settings (NEW)
 
-Same idea for Copilot clients: `copilot/managed-settings.json` overrides local settings. Order: **MDM → server-managed → file → user**. <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">All keys ↗</a>
+Same idea for Copilot clients: `copilot/managed-settings.json` overrides local settings. <a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/deploy-managed-settings#precedence-of-deployment-methods" target="_blank" rel="noopener noreferrer">Order</a>: **MDM → server-managed → file → user** (<a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/deploy-managed-settings" target="_blank" rel="noopener noreferrer">deployment methods ↗</a>).<br><a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/get-started" target="_blank" rel="noopener noreferrer">Get started ↗</a> · <a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">All keys ↗</a>
 
 <div class="spec-widget spec-compact">
 <p class="spec-hint">▸ + reveals what the key controls · the date opens its changelog</p>
