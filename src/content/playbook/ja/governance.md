@@ -462,28 +462,65 @@ flowchart LR
 </div>
 </div>
 
-## Copilot managed settings（NEW）
+## Copilot managed settings（NEW） <input type="checkbox" id="demo-governance-managed-settings" class="demo-toggle" /><label class="h2-demo" for="demo-governance-managed-settings">&#9658; DEMO</label>
 
-Copilot クライアントも同じ。`copilot/managed-settings.json` がローカル設定を上書きする。優先順位は **MDM → server-managed → file → user**。<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">全キー ↗</a>
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-governance-managed-settings" aria-label="デモ手順を閉じる"></label>
+<div class="demo-window" role="group" aria-label="デモ手順">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">3 つの配布方法</span><span class="demo-note">発表者専用</span><label class="demo-close" for="demo-governance-managed-settings" aria-label="閉じる">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">SERVER-MANAGED（.github-private）</p>
+<p><a href="https://github.com/theomonfort-org/.github-private/blob/main/copilot/managed-settings.json" target="_blank" rel="noopener noreferrer">theomonfort-org/.github-private → copilot/managed-settings.json ↗</a></p>
+<p>Enterprise 全員の基準。<code class="demo-path">permissions</code>、<code class="demo-path">enabledPlugins</code>、<code class="demo-path">allowedMcpServers</code> を見せる。同じフォルダの <code class="demo-path">teams/</code> と <code class="demo-path">team-mappings.json</code> で team ごとに上書きできる。</p>
+<p class="demo-out">default branch に push すると約 1 時間で反映。クライアントの再起動か再サインインで即時反映。</p>
+</li>
+<li>
+<p class="demo-step-title">FILE-BASED（端末のファイル）</p>
+<p>Finder で <b>⌘⇧G</b> を押し、パスを貼り付ける：</p>
+<p><code class="demo-path">/Library/Application Support/GitHubCopilot/</code></p>
+<p class="demo-out"><code class="demo-path">managed-settings.json</code> が置いてある（この Mac では <code class="demo-path">telemetry</code> の設定）。</p>
+<p>中身は server-managed と同じ JSON。root 所有で group / world 書き込み不可でないと CLI は読まない。変更後はクライアントを再起動。</p>
+</li>
+<li>
+<p class="demo-step-title">MDM（managed preferences）</p>
+<p>Terminal で実行：</p>
+<code class="demo-cmd">plutil -p "/Library/Managed Preferences/com.github.copilot.plist"</code>
+<p class="demo-out">この Mac では <code class="demo-path">"remoteControl.mode" =&gt; "disabled"</code> が表示される。</p>
+<p>MDM は JSON ファイルではなく、ドット区切りのキーと文字列の値で配る（Intune など）。設定が重なると <b>MDM → server-managed → file</b> の順で優先。</p>
+</li>
+</ol>
+</div>
+</div>
+
+Copilot クライアントも同じ。`copilot/managed-settings.json` がローカル設定を上書きする。<a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/deploy-managed-settings#precedence-of-deployment-methods" target="_blank" rel="noopener noreferrer">優先順位</a>は **MDM → server-managed → file → user**（<a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/deploy-managed-settings" target="_blank" rel="noopener noreferrer">配布方法 ↗</a>）。<br><a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/get-started" target="_blank" rel="noopener noreferrer">導入手順 ↗</a> · <a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">全キー ↗</a>
 
 <div class="spec-widget spec-compact">
 <p class="spec-hint">▸ + でキーの内容 · 日付は changelog</p>
 <div class="spec-list">
 <details class="spec-item" name="managed-settings">
-<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧠</span><span class="spec-key"><code>model</code></span><a class="spec-since" href="https://github.blog/changelog/2026-07-01-enterprises-can-default-to-auto-model-selection/" target="_blank" rel="noopener noreferrer">2026-07-01</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what"><b>auto model selection</b> を既定にし、手動でモデルを選ばせない。</p>
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧠</span><span class="spec-key"><code>model</code></span><a class="spec-since" href="https://github.blog/changelog/2026-09-02-enterprise-managed-settings-support-any-default-model" target="_blank" rel="noopener noreferrer">2026-09-02</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">新しい会話の<b>既定モデル</b>を決める（auto 以外も可）。ユーザーは後から切り替えられる。</p>
 </details>
 <details class="spec-item" name="managed-settings">
-<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🚧</span><span class="spec-key"><code>permissions.*</code></span><a class="spec-since" href="https://github.blog/changelog/2026-06-17-enterprise-managed-settings-now-support-bypass-permission-controls" target="_blank" rel="noopener noreferrer">2026-06-17</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what"><b>bypass / YOLO モード</b>を禁止し、危険な操作を承認制にする。</p>
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🚧</span><span class="spec-key"><code>permissions.*</code></span><a class="spec-since" href="https://github.blog/changelog/2026-09-09-enterprise-managed-permissions-for-github-copilot-agent-operations" target="_blank" rel="noopener noreferrer">2026-09-09</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">Copilot の操作を管理者が制御する。優先順位は <code>deny</code> &gt; <code>ask</code> &gt; <code>allow</code>。<br>🚫 <code>disableBypassPermissionsMode</code>: YOLO / allow-all を禁止<br>❌ <code>deny</code>: 絶対に実行できない（例: <code>Shell(rm -rf *)</code>）<br>⚠️ <code>ask</code>: 毎回ユーザーの承認が必要。YOLO でも省略不可（例: <code>Shell(git push *)</code>）<br>✅ <code>allow</code>: 確認なしで実行（例: <code>Shell(npm test *)</code>）<br>ルールは <code>Shell()</code> / <code>Read()</code> / <code>Edit()</code> / <code>Domain()</code> 。1つでもあればリスト外は要承認</p>
+</details>
+<details class="spec-item" name="managed-settings">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧱</span><span class="spec-key"><code>sandbox</code></span><a class="spec-since" href="https://github.com/github/copilot-cli/releases/tag/v1.0.76" target="_blank" rel="noopener noreferrer">2026-07-29</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">ローカル sandbox を<b>強制</b>する（CLI と Copilot app のみ）。既定では:<br>✅ 作業フォルダの読み書き、ツールや git / gh の実行、ネット接続<br>❌ それ以外のファイル（例: <code>~/.ssh</code>）、macOS Keychain<br>⚠️ コマンドは承認すれば sandbox 外でも実行できる（<code>allowBypass: false</code> で禁止）<br><a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/understanding-local-sandboxing" target="_blank" rel="noopener noreferrer">既定の権限 ↗</a></p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧩</span><span class="spec-key"><code>enabledPlugins</code> · marketplaces</span><a class="spec-since" href="https://github.blog/changelog/2026-08-26-enterprise-managed-settings-now-support-autoupdate-for-plugin-marketplaces" target="_blank" rel="noopener noreferrer">2026-08-26</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">動かすプラグインと配布元を承認する。<b>autoUpdate</b> にも対応。</p>
+<p class="spec-what">🏪 <code>extraKnownMarketplaces</code>: 社内のプラグイン repo を全員に追加。<b>autoUpdate</b> で自動更新<br>🧩 <code>enabledPlugins</code>: プラグインを強制 ON（<code>true</code>、自動導入）/ OFF（<code>false</code>）<br>🔒 <code>strictKnownMarketplaces</code>: 登録 repo 以外からインストール不可（<code>[]</code> で全面禁止）</p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔌</span><span class="spec-key"><code>allowedMcpServers</code> · <code>deniedMcpServers</code></span><a class="spec-since" href="https://github.blog/changelog/2026-08-06-mcp-allowlists-in-enterprise-managed-settings/" target="_blank" rel="noopener noreferrer">2026-08-06</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">URL / コマンドで MCP を許可制に。<b>fail-closed</b> で、リスト外は動かない。</p>
+<p class="spec-what"><b>許可リスト</b> <code>allowedMcpServers</code>: 載ったものだけ動く（厳しめ）。<code>[]</code> で組み込み以外禁止。<br><b>拒否リスト</b> <code>deniedMcpServers</code>: 載ったものだけ止める（ゆるめ）。許可リストより優先。<br>指定は URL（<code>*</code> 可）かコマンド。GitHub MCP などの組み込みは止められない。</p>
+</details>
+<details class="spec-item" name="managed-settings">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📱</span><span class="spec-key"><code>remoteControl</code></span><a class="spec-since" href="https://github.blog/changelog/2026-07-30-limit-remote-control-to-managed-devices" target="_blank" rel="noopener noreferrer">2026-07-30</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">この端末のセッションへのリモート操作を <b>SSO 必須</b>にする、または無効にする。</p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📡</span><span class="spec-key"><code>telemetry</code></span><a class="spec-since" href="https://github.blog/changelog/2026-07-08-enterprise-managed-opentelemetry-export-for-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">2026-07-08</a><span class="spec-toggle" aria-hidden="true"></span></summary>
@@ -516,6 +553,7 @@ Copilot クライアントも同じ。`copilot/managed-settings.json` がロー�
 
 - 🏢 選べるのは **org** だけ。repo 名と `copilot/` のパスは固定。
 - 🔒 repo アクセスの有無に関係なく**プラン全員**に効く。**internal** にして `copilot/**` を CODEOWNERS で守る。
+- ✅ 設定ミスは **Copilot settings validation** で確認できる。<a class="retro-link" href="https://github.blog/changelog/2026-09-25-enterprise-managed-settings-in-product-validator" target="_blank" rel="noopener noreferrer">2026-09-25 ↗</a>
 
 ## ★ 使いどころ
 

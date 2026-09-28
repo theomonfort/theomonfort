@@ -462,28 +462,65 @@ Now the values to set, and who sets them. **Short on time? 03, 15, 18.**
 </div>
 </div>
 
-## Copilot managed settings (NEW)
+## Copilot managed settings (NEW) <input type="checkbox" id="demo-governance-managed-settings" class="demo-toggle" /><label class="h2-demo" for="demo-governance-managed-settings">&#9658; DEMO</label>
 
-Same idea for Copilot clients: `copilot/managed-settings.json` overrides local settings. Order: **MDM → server-managed → file → user**. <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">All keys ↗</a>
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-governance-managed-settings" aria-label="Close demo steps"></label>
+<div class="demo-window" role="group" aria-label="Demo steps">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">3 deployment methods</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-governance-managed-settings" aria-label="Close">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">SERVER-MANAGED (.github-private)</p>
+<p><a href="https://github.com/theomonfort-org/.github-private/blob/main/copilot/managed-settings.json" target="_blank" rel="noopener noreferrer">theomonfort-org/.github-private → copilot/managed-settings.json ↗</a></p>
+<p>The baseline for everyone in the enterprise. Show <code class="demo-path">permissions</code>, <code class="demo-path">enabledPlugins</code> and <code class="demo-path">allowedMcpServers</code>. <code class="demo-path">teams/</code> and <code class="demo-path">team-mappings.json</code> in the same folder override it per team.</p>
+<p class="demo-out">Push to the default branch: applied within about an hour. Restart the client or sign in again to apply it now.</p>
+</li>
+<li>
+<p class="demo-step-title">FILE-BASED (file on the device)</p>
+<p>In Finder, press <b>⌘⇧G</b> and paste the path:</p>
+<p><code class="demo-path">/Library/Application Support/GitHubCopilot/</code></p>
+<p class="demo-out">A <code class="demo-path">managed-settings.json</code> sits there (on this Mac: <code class="demo-path">telemetry</code> settings).</p>
+<p>Same JSON as server-managed. The CLI only reads it if it's owned by root and not group- or world-writable. Restart the client after a change.</p>
+</li>
+<li>
+<p class="demo-step-title">MDM (managed preferences)</p>
+<p>In Terminal, run:</p>
+<code class="demo-cmd">plutil -p "/Library/Managed Preferences/com.github.copilot.plist"</code>
+<p class="demo-out">On this Mac it shows <code class="demo-path">"remoteControl.mode" =&gt; "disabled"</code>.</p>
+<p>MDM doesn't deploy a JSON file: it pushes dot-separated keys with string values (Intune and similar tools). When settings overlap, <b>MDM → server-managed → file</b> win in that order.</p>
+</li>
+</ol>
+</div>
+</div>
+
+Same idea for Copilot clients: `copilot/managed-settings.json` overrides local settings. <a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/deploy-managed-settings#precedence-of-deployment-methods" target="_blank" rel="noopener noreferrer">Order</a>: **MDM → server-managed → file → user** (<a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/deploy-managed-settings" target="_blank" rel="noopener noreferrer">deployment methods ↗</a>).<br><a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/get-started" target="_blank" rel="noopener noreferrer">Get started ↗</a> · <a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">All keys ↗</a>
 
 <div class="spec-widget spec-compact">
 <p class="spec-hint">▸ + reveals what the key controls · the date opens its changelog</p>
 <div class="spec-list">
 <details class="spec-item" name="managed-settings">
-<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧠</span><span class="spec-key"><code>model</code></span><a class="spec-since" href="https://github.blog/changelog/2026-07-01-enterprises-can-default-to-auto-model-selection/" target="_blank" rel="noopener noreferrer">2026-07-01</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">Make <b>auto model selection</b> the default, so nobody picks a model by hand.</p>
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧠</span><span class="spec-key"><code>model</code></span><a class="spec-since" href="https://github.blog/changelog/2026-09-02-enterprise-managed-settings-support-any-default-model" target="_blank" rel="noopener noreferrer">2026-09-02</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">Set the <b>default model</b> for new conversations (auto or any other). Users can still switch.</p>
 </details>
 <details class="spec-item" name="managed-settings">
-<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🚧</span><span class="spec-key"><code>permissions.*</code></span><a class="spec-since" href="https://github.blog/changelog/2026-06-17-enterprise-managed-settings-now-support-bypass-permission-controls" target="_blank" rel="noopener noreferrer">2026-06-17</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">Block <b>bypass / YOLO mode</b>, and gate sensitive operations behind approval.</p>
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🚧</span><span class="spec-key"><code>permissions.*</code></span><a class="spec-since" href="https://github.blog/changelog/2026-09-09-enterprise-managed-permissions-for-github-copilot-agent-operations" target="_blank" rel="noopener noreferrer">2026-09-09</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">Admins control what Copilot can do. Priority: <code>deny</code> &gt; <code>ask</code> &gt; <code>allow</code>.<br>🚫 <code>disableBypassPermissionsMode</code>: no YOLO / allow-all<br>❌ <code>deny</code>: never runs, even if the user says yes (e.g. <code>Shell(rm -rf *)</code>)<br>⚠️ <code>ask</code>: user approval every time, even in YOLO (e.g. <code>Shell(git push *)</code>)<br>✅ <code>allow</code>: runs without a prompt (e.g. <code>Shell(npm test *)</code>)<br>Rules use <code>Shell()</code> / <code>Read()</code> / <code>Edit()</code> / <code>Domain()</code>. Unlisted ones ask first</p>
+</details>
+<details class="spec-item" name="managed-settings">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧱</span><span class="spec-key"><code>sandbox</code></span><a class="spec-since" href="https://github.com/github/copilot-cli/releases/tag/v1.0.76" target="_blank" rel="noopener noreferrer">2026-07-29</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what"><b>Enforce</b> the local sandbox (CLI and Copilot app only). By default:<br>✅ Read/write the working folder, run tools, git / gh, internet<br>❌ Any other file (e.g. <code>~/.ssh</code>), macOS Keychain<br>⚠️ Users can approve a command to run outside it (block with <code>allowBypass: false</code>)<br><a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/understanding-local-sandboxing" target="_blank" rel="noopener noreferrer">Default permissions ↗</a></p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧩</span><span class="spec-key"><code>enabledPlugins</code> · marketplaces</span><a class="spec-since" href="https://github.blog/changelog/2026-08-26-enterprise-managed-settings-now-support-autoupdate-for-plugin-marketplaces" target="_blank" rel="noopener noreferrer">2026-08-26</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">Approve which plugins run and where they come from, with <b>autoUpdate</b>.</p>
+<p class="spec-what">🏪 <code>extraKnownMarketplaces</code>: add your plugin repo, with <b>autoUpdate</b><br>🧩 <code>enabledPlugins</code>: force on (<code>true</code>, auto-install) or off (<code>false</code>)<br>🔒 <code>strictKnownMarketplaces</code>: only listed repos (<code>[]</code> blocks all)</p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔌</span><span class="spec-key"><code>allowedMcpServers</code> · <code>deniedMcpServers</code></span><a class="spec-since" href="https://github.blog/changelog/2026-08-06-mcp-allowlists-in-enterprise-managed-settings/" target="_blank" rel="noopener noreferrer">2026-08-06</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">MCP allowlist by URL or command. <b>Fail-closed</b>: off the list, it does not run.</p>
+<p class="spec-what"><b>Allowlist</b> <code>allowedMcpServers</code>: only these run (strict). <code>[]</code> = built-ins only.<br><b>Denylist</b> <code>deniedMcpServers</code>: only these are blocked (loose), even if allowed.<br>Match by URL (<code>*</code> ok) or command. Built-ins like GitHub MCP can't be blocked.</p>
+</details>
+<details class="spec-item" name="managed-settings">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📱</span><span class="spec-key"><code>remoteControl</code></span><a class="spec-since" href="https://github.blog/changelog/2026-07-30-limit-remote-control-to-managed-devices" target="_blank" rel="noopener noreferrer">2026-07-30</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">Remote control of sessions on this device: <b>require SSO</b>, or turn it off.</p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📡</span><span class="spec-key"><code>telemetry</code></span><a class="spec-since" href="https://github.blog/changelog/2026-07-08-enterprise-managed-opentelemetry-export-for-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">2026-07-08</a><span class="spec-toggle" aria-hidden="true"></span></summary>
@@ -516,6 +553,7 @@ They live in one repo you own, set in **Enterprise → AI controls → Agents**.
 
 - 🏢 You pick the **org**. The repo name and `copilot/` paths are fixed.
 - 🔒 Applies to **everyone** on the plan, repo access or not. Keep it **internal** and guard `copilot/**` with CODEOWNERS.
+- ✅ Config errors show up under **Copilot settings validation**. <a class="retro-link" href="https://github.blog/changelog/2026-09-25-enterprise-managed-settings-in-product-validator" target="_blank" rel="noopener noreferrer">2026-09-25 ↗</a>
 
 ## ★ Where it fits
 
