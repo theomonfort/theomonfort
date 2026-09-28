@@ -5,6 +5,7 @@ summary: "トークン作成、Webhook 編集、セキュリティ設定変更�
 category: security
 status: "パブリックプレビュー"
 source: "https://github.blog/changelog/2026-09-24-require-proof-of-presence-for-high-impact-actions/"
+demoUrl: "https://github.com/enterprises/octodemo/settings/security"
 ---
 
 ### 覚えておきたいこと
