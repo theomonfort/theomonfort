@@ -479,7 +479,7 @@ Copilot クライアントも同じ。`copilot/managed-settings.json` がロー�
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧱</span><span class="spec-key"><code>sandbox</code></span><a class="spec-since" href="https://github.com/github/copilot-cli/releases/tag/v1.0.76" target="_blank" rel="noopener noreferrer">2026-07-29</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">ローカル sandbox に<b>最低限の制限</b>を強制する（ファイル、ネットワーク、認証情報）。CLI と Copilot app のみ。</p>
+<p class="spec-what">ローカル sandbox に<b>最低限の制限</b>を強制する（ファイル、ネットワーク、認証情報）。CLI と Copilot app のみ。<a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/understanding-local-sandboxing" target="_blank" rel="noopener noreferrer">既定の権限 ↗</a></p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧩</span><span class="spec-key"><code>enabledPlugins</code> · marketplaces</span><a class="spec-since" href="https://github.blog/changelog/2026-08-26-enterprise-managed-settings-now-support-autoupdate-for-plugin-marketplaces" target="_blank" rel="noopener noreferrer">2026-08-26</a><span class="spec-toggle" aria-hidden="true"></span></summary>
