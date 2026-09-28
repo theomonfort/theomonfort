@@ -462,7 +462,36 @@ flowchart LR
 </div>
 </div>
 
-## Copilot managed settings（NEW）
+## Copilot managed settings（NEW） <input type="checkbox" id="demo-governance-managed-settings" class="demo-toggle" /><label class="h2-demo" for="demo-governance-managed-settings">&#9658; DEMO</label>
+
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-governance-managed-settings" aria-label="デモ手順を閉じる"></label>
+<div class="demo-window" role="group" aria-label="デモ手順">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">3 つの配布方法</span><span class="demo-note">発表者専用</span><label class="demo-close" for="demo-governance-managed-settings" aria-label="閉じる">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">SERVER-MANAGED（.github-private）</p>
+<p><a href="https://github.com/theomonfort-org/.github-private/blob/main/copilot/managed-settings.json" target="_blank" rel="noopener noreferrer">theomonfort-org/.github-private → copilot/managed-settings.json ↗</a></p>
+<p>Enterprise 全員の基準。<code class="demo-path">permissions</code>、<code class="demo-path">enabledPlugins</code>、<code class="demo-path">allowedMcpServers</code> を見せる。同じフォルダの <code class="demo-path">teams/</code> と <code class="demo-path">team-mappings.json</code> で team ごとに上書きできる。</p>
+<p class="demo-out">default branch に push すると約 1 時間で反映。クライアントの再起動か再サインインで即時反映。</p>
+</li>
+<li>
+<p class="demo-step-title">FILE-BASED（端末のファイル）</p>
+<p>Finder で <b>⌘⇧G</b> を押し、パスを貼り付ける：</p>
+<p><code class="demo-path">/Library/Application Support/GitHubCopilot/</code></p>
+<p class="demo-out"><code class="demo-path">managed-settings.json</code> が置いてある（この Mac では <code class="demo-path">telemetry</code> の設定）。</p>
+<p>中身は server-managed と同じ JSON。root 所有で group / world 書き込み不可でないと CLI は読まない。変更後はクライアントを再起動。</p>
+</li>
+<li>
+<p class="demo-step-title">MDM（managed preferences）</p>
+<p>Terminal で実行：</p>
+<code class="demo-cmd">plutil -p "/Library/Managed Preferences/com.github.copilot.plist"</code>
+<p class="demo-out">この Mac では <code class="demo-path">"remoteControl.mode" =&gt; "disabled"</code> が表示される。</p>
+<p>MDM は JSON ファイルではなく、ドット区切りのキーと文字列の値で配る（Intune など）。設定が重なると <b>MDM → server-managed → file</b> の順で優先。</p>
+</li>
+</ol>
+</div>
+</div>
 
 Copilot クライアントも同じ。`copilot/managed-settings.json` がローカル設定を上書きする。<a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/deploy-managed-settings#precedence-of-deployment-methods" target="_blank" rel="noopener noreferrer">優先順位</a>は **MDM → server-managed → file → user**（<a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/deploy-managed-settings" target="_blank" rel="noopener noreferrer">配布方法 ↗</a>）。<br><a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/get-started" target="_blank" rel="noopener noreferrer">導入手順 ↗</a> · <a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">全キー ↗</a>
 

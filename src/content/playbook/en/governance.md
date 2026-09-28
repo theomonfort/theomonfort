@@ -462,7 +462,36 @@ Now the values to set, and who sets them. **Short on time? 03, 15, 18.**
 </div>
 </div>
 
-## Copilot managed settings (NEW)
+## Copilot managed settings (NEW) <input type="checkbox" id="demo-governance-managed-settings" class="demo-toggle" /><label class="h2-demo" for="demo-governance-managed-settings">&#9658; DEMO</label>
+
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-governance-managed-settings" aria-label="Close demo steps"></label>
+<div class="demo-window" role="group" aria-label="Demo steps">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">3 deployment methods</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-governance-managed-settings" aria-label="Close">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">SERVER-MANAGED (.github-private)</p>
+<p><a href="https://github.com/theomonfort-org/.github-private/blob/main/copilot/managed-settings.json" target="_blank" rel="noopener noreferrer">theomonfort-org/.github-private → copilot/managed-settings.json ↗</a></p>
+<p>The baseline for everyone in the enterprise. Show <code class="demo-path">permissions</code>, <code class="demo-path">enabledPlugins</code> and <code class="demo-path">allowedMcpServers</code>. <code class="demo-path">teams/</code> and <code class="demo-path">team-mappings.json</code> in the same folder override it per team.</p>
+<p class="demo-out">Push to the default branch: applied within about an hour. Restart the client or sign in again to apply it now.</p>
+</li>
+<li>
+<p class="demo-step-title">FILE-BASED (file on the device)</p>
+<p>In Finder, press <b>⌘⇧G</b> and paste the path:</p>
+<p><code class="demo-path">/Library/Application Support/GitHubCopilot/</code></p>
+<p class="demo-out">A <code class="demo-path">managed-settings.json</code> sits there (on this Mac: <code class="demo-path">telemetry</code> settings).</p>
+<p>Same JSON as server-managed. The CLI only reads it if it's owned by root and not group- or world-writable. Restart the client after a change.</p>
+</li>
+<li>
+<p class="demo-step-title">MDM (managed preferences)</p>
+<p>In Terminal, run:</p>
+<code class="demo-cmd">plutil -p "/Library/Managed Preferences/com.github.copilot.plist"</code>
+<p class="demo-out">On this Mac it shows <code class="demo-path">"remoteControl.mode" =&gt; "disabled"</code>.</p>
+<p>MDM doesn't deploy a JSON file: it pushes dot-separated keys with string values (Intune and similar tools). When settings overlap, <b>MDM → server-managed → file</b> win in that order.</p>
+</li>
+</ol>
+</div>
+</div>
 
 Same idea for Copilot clients: `copilot/managed-settings.json` overrides local settings. <a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/deploy-managed-settings#precedence-of-deployment-methods" target="_blank" rel="noopener noreferrer">Order</a>: **MDM → server-managed → file → user** (<a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/deploy-managed-settings" target="_blank" rel="noopener noreferrer">deployment methods ↗</a>).<br><a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/get-started" target="_blank" rel="noopener noreferrer">Get started ↗</a> · <a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">All keys ↗</a>
 
