@@ -30,8 +30,10 @@ Playbook の本文と引用ブロックでも、英字には DotGothic16、日�
 
 `src/content/changelog/ja/` と `src/content/changelog/en/` に同名の Markdown ファイルを追加します（例: `2026-09-10-pull-requests-page.md`）。
 
-Frontmatter は `title`、`date`（`"YYYY-MM-DD"`）、`summary`、`category`（`review` / `security` / `copilot` / `actions` / `administration`）、`source`（公式の完全な URL）が必須。`status` と `demo`（デモ手順の文字列配列）は任意です。本文は要点や補足を自由に記述できます。日付の降順で自動表示されるため、並び順の手動管理は不要です。
+Frontmatter は `title`、`date`（`"YYYY-MM-DD"`）、`summary`、`category`（`review` / `security` / `copilot` / `actions` / `administration` / `issues`）、`source`（公式の完全な URL）が必須。`status`、`demo`（デモ手順の文字列配列）、`demoUrl`（公開デモへの完全な URL）は任意です。`demoUrl` はデモ欄の「デモを開く」リンクになります。本文は要点や補足を自由に記述できます。日付の降順で自動表示されるため、並び順の手動管理は不要です。
 
 `status` は機能の提供状況に使用し、未紹介、未検証、デモ失敗などの個人的な確認状況は `demo` に分けて記載します。非公開デモリポジトリの URL や実在ユーザーの利用データは掲載しません。
 
 表示先は `/theomonfort/changelog` と `/theomonfort/en/changelog`。追加後は `pnpm build` で確認します。
+
+各更新の「発表用」にチェックし、「選択した項目のみ」で紹介したい更新だけを表示できます。選択とフィルターはブラウザーの `localStorage`（`akq:changelog:selection:v1`）に保存され、日本語版と英語版で共有されます。他の端末には同期されません。未選択の更新への直接リンクを開くと、その更新が見えるようにフィルターを解除します。

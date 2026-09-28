@@ -16,17 +16,29 @@ const copy = locale === 'ja'
       count: '件のピックアップ',
       source: '公式の更新情報を読む',
       demo: 'デモで試すこと',
-      categories: { review: 'コードレビュー', security: 'セキュリティ', copilot: 'Copilot', actions: 'Actions', administration: '管理' },
+      openDemo: 'デモを開く',
+      select: '発表用',
+      selected: '件を発表用に選択',
+      selectedOnly: '選択した項目のみ',
+      emptySelection: '発表用の項目が未選択です。フィルターをオフにして、紹介したい更新にチェックを入れてください。',
+      storageError: '選択をブラウザーに保存できないか、保存済みの選択を読み込めません。再読み込みすると選択が失われる場合があります。',
+      categories: { review: 'コードレビュー', security: 'セキュリティ', copilot: 'Copilot', actions: 'Actions', administration: '管理', issues: 'Issues' },
     }
   : {
       title: 'Changelog | AI-Driven Development Quest',
       description: 'A handpicked shortlist of GitHub updates, with key takeaways and practical context.',
       eyebrow: 'Not every update. Just the ones worth remembering.',
       order: 'Newest first',
-      count: 'selected updates',
+      count: 'curated updates',
       source: 'Read the official announcement',
       demo: 'Things to try in a demo',
-      categories: { review: 'Code review', security: 'Security', copilot: 'Copilot', actions: 'Actions', administration: 'Administration' },
+      openDemo: 'Open demo',
+      select: 'Present',
+      selected: 'selected for presentation',
+      selectedOnly: 'Selected only',
+      emptySelection: 'No updates selected. Turn off the filter and check the updates you want to present.',
+      storageError: 'Your selection could not be saved to or loaded from this browser. It may be lost when you reload the page.',
+      categories: { review: 'Code review', security: 'Security', copilot: 'Copilot', actions: 'Actions', administration: 'Administration', issues: 'Issues' },
     };
 
 const entries = (await getCollection('changelog', ({ id }) => id.startsWith(`${locale}/`)))
@@ -48,9 +60,19 @@ const updates = await Promise.all(entries.map(async (entry) => ({
         <span>{String(entries.length).padStart(2, '0')} {copy.count}</span>
         <span>↓ {copy.order}</span>
       </div>
+      <div class="selection-toolbar" hidden>
+        <p class="selection-count" role="status">
+          <span data-selection-count>0</span> / {entries.length} {copy.selected}
+        </p>
+        <button type="button" class="selection-filter" aria-pressed="false" aria-controls="changelog-updates">
+          {copy.selectedOnly}
+        </button>
+      </div>
+      <p class="selection-error" role="status" hidden>{copy.storageError}</p>
     </header>
 
-    <ol class="update-list">
+    <p class="selection-empty" role="status" hidden>{copy.emptySelection}</p>
+    <ol class="update-list" id="changelog-updates">
       {updates.map(({ data, slug, Content }) => {
         const date = data.date.toISOString().slice(0, 10);
         return (
@@ -60,6 +82,10 @@ const updates = await Promise.all(entries.map(async (entry) => ({
                 <span class="year">{date.slice(0, 4)}</span>
                 <span class="day">{date.slice(5).replace('-', '.')}</span>
               </time>
+              <label class="entry-selection" hidden>
+                <input type="checkbox" value={slug} aria-labelledby={`${slug}-select-label ${slug}-title`} />
+                <span id={`${slug}-select-label`}>{copy.select}</span>
+              </label>
             </div>
             <article class:list={['entry', data.category]} aria-labelledby={`${slug}-title`}>
               <details class="entry-disclosure">
@@ -76,10 +102,15 @@ const updates = await Promise.all(entries.map(async (entry) => ({
                 <div class="entry-content">
                   <p class="summary">{data.summary}</p>
                   <div class="entry-body"><Content /></div>
-                  {data.demo.length > 0 && (
+                  {(data.demo.length > 0 || data.demoUrl) && (
                     <details class="demo">
                       <summary>{copy.demo}</summary>
-                      <ol>{data.demo.map((step) => <li>{step}</li>)}</ol>
+                      {data.demoUrl && (
+                        <a class="source" href={data.demoUrl} target="_blank" rel="noopener noreferrer">
+                          {copy.openDemo} <span aria-hidden="true">↗</span>
+                        </a>
+                      )}
+                      {data.demo.length > 0 && <ol>{data.demo.map((step) => <li>{step}</li>)}</ol>}
                     </details>
                   )}
                   <a class="source" href={data.source} target="_blank" rel="noopener noreferrer">
@@ -95,8 +126,120 @@ const updates = await Promise.all(entries.map(async (entry) => ({
   </div>
 </Layout>
 
+<script>
+  const SELECTION_KEY = 'akq:changelog:selection:v1';
+  let selected = new Set<string>();
+  let selectedOnly = false;
+  let selectionEvents: AbortController | undefined;
+
+  function initChangelogSelection() {
+    selectionEvents?.abort();
+    const root = document.querySelector<HTMLElement>('.changelog');
+    if (!root) return;
+
+    const toolbar = root.querySelector<HTMLElement>('.selection-toolbar');
+    const filter = root.querySelector<HTMLButtonElement>('.selection-filter');
+    const count = root.querySelector<HTMLElement>('[data-selection-count]');
+    const empty = root.querySelector<HTMLElement>('.selection-empty');
+    const storageError = root.querySelector<HTMLElement>('.selection-error');
+    if (!toolbar || !filter || !count || !empty || !storageError) {
+      throw new Error('Changelog selection controls are missing.');
+    }
+
+    const items = Array.from(root.querySelectorAll<HTMLElement>('.update')).map((row) => {
+      const checkbox = row.querySelector<HTMLInputElement>('.entry-selection input');
+      if (!checkbox) throw new Error(`Changelog selection checkbox is missing: ${row.id}`);
+      return { row, checkbox };
+    });
+
+    const reportStorageError = (error: unknown) => {
+      console.warn('Changelog selection storage failed.', error);
+      storageError.hidden = false;
+    };
+
+    try {
+      const stored = localStorage.getItem(SELECTION_KEY);
+      if (stored === null) {
+        selected = new Set();
+        selectedOnly = false;
+      } else {
+        const state: unknown = JSON.parse(stored);
+        if (
+          typeof state !== 'object' || state === null ||
+          !('selected' in state) || !Array.isArray(state.selected) ||
+          !state.selected.every((slug: unknown): slug is string => typeof slug === 'string') ||
+          !('selectedOnly' in state) || typeof state.selectedOnly !== 'boolean'
+        ) {
+          throw new Error('Invalid saved changelog selection.');
+        }
+        selected = new Set(state.selected);
+        selectedOnly = state.selectedOnly;
+      }
+      storageError.hidden = true;
+    } catch (error) {
+      reportStorageError(error);
+    }
+
+    const save = () => {
+      try {
+        localStorage.setItem(SELECTION_KEY, JSON.stringify({ selected: [...selected], selectedOnly }));
+        storageError.hidden = true;
+      } catch (error) {
+        reportStorageError(error);
+      }
+    };
+
+    const refresh = () => {
+      let total = 0;
+      items.forEach(({ row, checkbox }) => {
+        checkbox.checked = selected.has(checkbox.value);
+        if (checkbox.checked) total++;
+        row.hidden = selectedOnly && !checkbox.checked;
+      });
+      count.textContent = String(total);
+      filter.setAttribute('aria-pressed', String(selectedOnly));
+      empty.hidden = !selectedOnly || total > 0;
+    };
+
+    const revealLinkedEntry = () => {
+      const linked = items.find(({ row }) => `#${row.id}` === location.hash);
+      if (selectedOnly && linked && !selected.has(linked.checkbox.value)) {
+        selectedOnly = false;
+        save();
+      }
+      refresh();
+    };
+
+    selectionEvents = new AbortController();
+    const { signal } = selectionEvents;
+    items.forEach(({ row, checkbox }) => {
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked) selected.add(checkbox.value);
+        else selected.delete(checkbox.value);
+        save();
+        refresh();
+        if (row.hidden) filter.focus();
+      }, { signal });
+    });
+    filter.addEventListener('click', () => {
+      selectedOnly = !selectedOnly;
+      save();
+      refresh();
+    }, { signal });
+    window.addEventListener('hashchange', revealLinkedEntry, { signal });
+
+    revealLinkedEntry();
+    toolbar.hidden = false;
+    root.querySelectorAll<HTMLElement>('.entry-selection').forEach((label) => { label.hidden = false; });
+  }
+
+  initChangelogSelection();
+  document.addEventListener('astro:page-load', initChangelogSelection);
+</script>
+
 <style>
   .changelog { letter-spacing: 0.01em; }
+  .changelog [hidden] { display: none; }
   .changelog-header { margin-bottom: 2.5rem; }
   .intro { max-width: 42rem; margin-top: 1.5rem; line-height: 1.9; color: var(--c-phosphor); }
   .index-line {
@@ -109,6 +252,29 @@ const updates = await Promise.all(entries.map(async (entry) => ({
     color: var(--c-neon-cyan);
     font-size: 0.875rem;
   }
+  .selection-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
+    font-family: 'DotGothic16', monospace;
+    font-size: 0.875rem;
+  }
+  .selection-count { color: var(--c-phosphor); }
+  .selection-count [data-selection-count] { color: var(--c-neon-cyan); }
+  .selection-filter {
+    min-height: 44px;
+    padding: 0.5rem 0.875rem;
+    border: 1px dashed var(--c-neon-cyan);
+    color: var(--c-neon-cyan);
+    background: var(--c-midnight);
+    cursor: pointer;
+  }
+  .selection-filter:hover { border-style: solid; }
+  .selection-filter[aria-pressed="true"] { background: var(--c-neon-cyan); color: var(--c-shadow-ink, #05060f); border-style: solid; }
+  .selection-error { margin-top: 1rem; color: var(--c-crt-amber); font-size: 0.875rem; }
+  .selection-empty { padding: 1.5rem; border: 1px dashed var(--c-neon-cyan); line-height: 1.9; }
   .update-list { list-style: none; padding: 0; }
   .update { display: grid; grid-template-columns: 6rem minmax(0, 1fr); scroll-margin-top: 9rem; }
   .date-rail { border-right: 1px dashed var(--c-neon-cyan); padding-top: 1.5rem; position: relative; }
@@ -125,6 +291,20 @@ const updates = await Promise.all(entries.map(async (entry) => ({
   time { display: flex; flex-direction: column; gap: 0.25rem; }
   .year { font-size: 0.875rem; color: var(--c-phosphor); }
   .day { font-family: 'VT323', monospace; font-size: 2rem; color: var(--c-neon-cyan); line-height: 1; }
+  .entry-selection {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    width: fit-content;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    font-family: 'DotGothic16', monospace;
+    font-size: 0.75rem;
+    color: var(--c-phosphor);
+  }
+  .entry-selection input { width: 1rem; height: 1rem; flex: none; accent-color: var(--c-neon-cyan); color-scheme: dark; cursor: pointer; }
+  .entry-selection:has(input:checked) { color: var(--c-neon-cyan); }
   .entry {
     --entry-accent: var(--c-crt-amber);
     min-width: 0;
@@ -162,16 +342,18 @@ const updates = await Promise.all(entries.map(async (entry) => ({
   .entry-body :global(a:focus-visible) { outline: 2px solid var(--c-neon-cyan); outline-offset: 5px; }
   .demo { margin-top: 1.5rem; border-top: 1px dashed var(--entry-accent); border-bottom: 1px dashed var(--entry-accent); }
   .demo summary { cursor: pointer; padding: 0.9rem 0; color: var(--entry-accent); }
+  .demo .source { margin: 0 0 1rem; }
   .demo ol { list-style: decimal; padding: 0 0 1rem 1.5rem; font-size: 0.9375rem; line-height: 1.85; }
   .demo li + li { margin-top: 0.5rem; }
   .source { display: inline-block; margin-top: 1.5rem; font-size: 0.875rem; color: var(--c-neon-cyan); text-decoration: underline; text-underline-offset: 4px; }
   .source:hover { color: var(--c-neon-magenta); }
-  a:focus-visible, summary:focus-visible { outline: 2px solid var(--c-neon-cyan); outline-offset: 5px; }
+  a:focus-visible, summary:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--c-neon-cyan); outline-offset: 5px; }
   @media (max-width: 639px) {
     .update { grid-template-columns: minmax(0, 1fr); }
-    .date-rail { border-right: 0; padding: 0 0 0.75rem; }
+    .date-rail { border-right: 0; padding: 0 0 0.75rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
     .date-rail::after { display: none; }
     time { flex-direction: row; align-items: baseline; gap: 0.5rem; }
+    .entry-selection { margin-top: 0; }
     .entry { margin-left: 0; padding: 1.25rem; }
   }
 </style>

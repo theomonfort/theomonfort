@@ -72,10 +72,11 @@ const changelog = defineCollection({
     title: z.string(),
     date: z.coerce.date(),
     summary: z.string(),
-    category: z.enum(['review', 'security', 'copilot', 'actions', 'administration']),
+    category: z.enum(['review', 'security', 'copilot', 'actions', 'administration', 'issues']),
     source: z.string().url(),
     status: z.string().optional(),
     demo: z.array(z.string()).default([]),
+    demoUrl: z.string().url().optional(),
   }),
 });
 

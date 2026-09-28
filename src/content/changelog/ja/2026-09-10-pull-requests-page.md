@@ -5,10 +5,11 @@ summary: "リポジトリの Pull requests ページがパブリックプレビ�
 category: review
 status: "パブリックプレビュー"
 source: "https://github.blog/changelog/2026-09-10-refreshed-repository-pull-requests-page-in-public-preview/"
+demoUrl: "https://github.com/theomonfort/theomonfort/pulls"
 demo:
   - "サイドバーで「Authored by me」と「Involves me」を切り替え、自分が作成した PR と、自分が関わる PR を探す。"
   - "検索欄に「is」と入力して少し待ち、Content assist の候補からフィルターを選ぶ。"
-  - "OR を使って複数の条件を組み合わせる。AND や入れ子の検索にも対応。"
+  - "検索欄に入力：label:stacked-pr OR label:enhancement"
   - "一覧でスタックの表示とステータスチェックの件数や成功状況を確認する。"
   - "コンパクト表示に切り替え、表示できる PR の数を比べる。"
 ---
