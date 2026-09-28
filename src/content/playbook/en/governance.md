@@ -478,10 +478,6 @@ Same idea for Copilot clients: `copilot/managed-settings.json` overrides local s
 <p class="spec-what">Block <b>bypass / YOLO</b>, and <code>deny</code> / <code>ask</code> / <code>allow</code> Shell, Read, Edit and Domain operations.</p>
 </details>
 <details class="spec-item" name="managed-settings">
-<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧱</span><span class="spec-key"><code>sandbox</code></span><a class="spec-since" href="https://github.blog/changelog/2026-09-23-local-sandboxing-in-the-github-copilot-app" target="_blank" rel="noopener noreferrer">2026-09-23</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what"><b>Enforce</b> the local sandbox, with minimum limits on files, network and credentials.</p>
-</details>
-<details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧩</span><span class="spec-key"><code>enabledPlugins</code> · marketplaces</span><a class="spec-since" href="https://github.blog/changelog/2026-08-26-enterprise-managed-settings-now-support-autoupdate-for-plugin-marketplaces" target="_blank" rel="noopener noreferrer">2026-08-26</a><span class="spec-toggle" aria-hidden="true"></span></summary>
 <p class="spec-what">Approve which plugins run and where they come from, with <b>autoUpdate</b>.</p>
 </details>
@@ -494,8 +490,8 @@ Same idea for Copilot clients: `copilot/managed-settings.json` overrides local s
 <p class="spec-what">Remote control of sessions on this device: <b>require SSO</b>, or turn it off.</p>
 </details>
 <details class="spec-item" name="managed-settings">
-<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📡</span><span class="spec-key"><code>telemetry</code></span><a class="spec-since" href="https://github.blog/changelog/2026-09-22-opentelemetry-in-the-github-copilot-app" target="_blank" rel="noopener noreferrer">2026-09-22</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what"><b>OpenTelemetry</b> export to your own collector. Now in the Copilot app too.</p>
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📡</span><span class="spec-key"><code>telemetry</code></span><a class="spec-since" href="https://github.blog/changelog/2026-07-08-enterprise-managed-opentelemetry-export-for-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">2026-07-08</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what"><b>OpenTelemetry</b> export to your own collector.</p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">👥</span><span class="spec-key"><code>teams/</code> + <code>team-mappings.json</code></span><a class="spec-since" href="https://github.blog/changelog/2026-08-03-enterprise-team-specialization-for-managed-settings/" target="_blank" rel="noopener noreferrer">2026-08-03</a><span class="spec-toggle" aria-hidden="true"></span></summary>

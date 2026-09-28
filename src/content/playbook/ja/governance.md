@@ -478,10 +478,6 @@ Copilot クライアントも同じ。`copilot/managed-settings.json` がロー�
 <p class="spec-what"><b>bypass / YOLO</b> を禁止し、Shell、Read、Edit、Domain を <code>deny</code> / <code>ask</code> / <code>allow</code> で制御する。</p>
 </details>
 <details class="spec-item" name="managed-settings">
-<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧱</span><span class="spec-key"><code>sandbox</code></span><a class="spec-since" href="https://github.blog/changelog/2026-09-23-local-sandboxing-in-the-github-copilot-app" target="_blank" rel="noopener noreferrer">2026-09-23</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">ローカル sandbox を<b>強制</b>し、ファイル、ネットワーク、認証情報に最低限の制限をかける。</p>
-</details>
-<details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧩</span><span class="spec-key"><code>enabledPlugins</code> · marketplaces</span><a class="spec-since" href="https://github.blog/changelog/2026-08-26-enterprise-managed-settings-now-support-autoupdate-for-plugin-marketplaces" target="_blank" rel="noopener noreferrer">2026-08-26</a><span class="spec-toggle" aria-hidden="true"></span></summary>
 <p class="spec-what">動かすプラグインと配布元を承認する。<b>autoUpdate</b> にも対応。</p>
 </details>
@@ -494,8 +490,8 @@ Copilot クライアントも同じ。`copilot/managed-settings.json` がロー�
 <p class="spec-what">この端末のセッションへのリモート操作を <b>SSO 必須</b>にする、または無効にする。</p>
 </details>
 <details class="spec-item" name="managed-settings">
-<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📡</span><span class="spec-key"><code>telemetry</code></span><a class="spec-since" href="https://github.blog/changelog/2026-09-22-opentelemetry-in-the-github-copilot-app" target="_blank" rel="noopener noreferrer">2026-09-22</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">自社のコレクタへ <b>OpenTelemetry</b> で送る。Copilot app にも対応。</p>
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📡</span><span class="spec-key"><code>telemetry</code></span><a class="spec-since" href="https://github.blog/changelog/2026-07-08-enterprise-managed-opentelemetry-export-for-vs-code-and-cli/" target="_blank" rel="noopener noreferrer">2026-07-08</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">自社のコレクタへ <b>OpenTelemetry</b> で送る。</p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">👥</span><span class="spec-key"><code>teams/</code> + <code>team-mappings.json</code></span><a class="spec-since" href="https://github.blog/changelog/2026-08-03-enterprise-team-specialization-for-managed-settings/" target="_blank" rel="noopener noreferrer">2026-08-03</a><span class="spec-toggle" aria-hidden="true"></span></summary>
