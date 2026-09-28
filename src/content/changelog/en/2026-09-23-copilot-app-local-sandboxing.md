@@ -9,7 +9,9 @@ source: "https://github.blog/changelog/2026-09-23-local-sandboxing-in-the-github
 
 ### Key takeaways
 
-- **Off by default**: Settings → project → Sandbox → Sandbox new sessions enables new sessions. `/sandbox on` enables only the current session.
+- **Off by default**: in the desktop app, use `Settings → [project name] → Sandbox → Sandbox new sessions` for new local sessions. Replace `[project name]` with your project’s name. In an already-running local session, `/sandbox on` enables sandboxing for that session only.
 - **Policy changes**: filesystem, network, and credential changes apply to new or restarted sessions.
 - **No unprotected fallback**: if the OS cannot enforce the policy, the shell fails with an error.
 - **Local app sessions only**: cloud and remote-host sessions are excluded. Copilot CLI settings are separate.
+
+[Setup instructions (official documentation)](https://docs.github.com/en/copilot/how-tos/github-copilot-app/configure-local-sandboxing#enabling-local-sandboxing-in-a-project)
