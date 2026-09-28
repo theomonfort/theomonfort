@@ -189,6 +189,11 @@ const updates = await Promise.all(entries.map(async (entry) => ({
       }
     };
 
+    if (selected.delete('2026-09-10-pull-requests-page')) {
+      selected.add('2026-09-21-pull-requests-page');
+      save();
+    }
+
     const refresh = () => {
       let total = 0;
       items.forEach(({ row, checkbox }) => {
