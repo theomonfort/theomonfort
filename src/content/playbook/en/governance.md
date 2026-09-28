@@ -478,6 +478,10 @@ Same idea for Copilot clients: `copilot/managed-settings.json` overrides local s
 <p class="spec-what">Block <b>bypass / YOLO</b>, and <code>deny</code> / <code>ask</code> / <code>allow</code> Shell, Read, Edit and Domain operations.</p>
 </details>
 <details class="spec-item" name="managed-settings">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧱</span><span class="spec-key"><code>sandbox</code></span><a class="spec-since" href="https://github.com/github/copilot-cli/releases/tag/v1.0.76" target="_blank" rel="noopener noreferrer">2026-07-29</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">Enforce a <b>minimum sandbox</b> on files, network and credentials. CLI and Copilot app only.</p>
+</details>
+<details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧩</span><span class="spec-key"><code>enabledPlugins</code> · marketplaces</span><a class="spec-since" href="https://github.blog/changelog/2026-08-26-enterprise-managed-settings-now-support-autoupdate-for-plugin-marketplaces" target="_blank" rel="noopener noreferrer">2026-08-26</a><span class="spec-toggle" aria-hidden="true"></span></summary>
 <p class="spec-what">Approve which plugins run and where they come from, with <b>autoUpdate</b>.</p>
 </details>

@@ -478,6 +478,10 @@ Copilot クライアントも同じ。`copilot/managed-settings.json` がロー�
 <p class="spec-what"><b>bypass / YOLO</b> を禁止し、Shell、Read、Edit、Domain を <code>deny</code> / <code>ask</code> / <code>allow</code> で制御する。</p>
 </details>
 <details class="spec-item" name="managed-settings">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧱</span><span class="spec-key"><code>sandbox</code></span><a class="spec-since" href="https://github.com/github/copilot-cli/releases/tag/v1.0.76" target="_blank" rel="noopener noreferrer">2026-07-29</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">ローカル sandbox に<b>最低限の制限</b>を強制する（ファイル、ネットワーク、認証情報）。CLI と Copilot app のみ。</p>
+</details>
+<details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧩</span><span class="spec-key"><code>enabledPlugins</code> · marketplaces</span><a class="spec-since" href="https://github.blog/changelog/2026-08-26-enterprise-managed-settings-now-support-autoupdate-for-plugin-marketplaces" target="_blank" rel="noopener noreferrer">2026-08-26</a><span class="spec-toggle" aria-hidden="true"></span></summary>
 <p class="spec-what">動かすプラグインと配布元を承認する。<b>autoUpdate</b> にも対応。</p>
 </details>
