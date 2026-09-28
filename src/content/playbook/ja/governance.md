@@ -475,7 +475,7 @@ Copilot クライアントも同じ。`copilot/managed-settings.json` がロー�
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🚧</span><span class="spec-key"><code>permissions.*</code></span><a class="spec-since" href="https://github.blog/changelog/2026-09-09-enterprise-managed-permissions-for-github-copilot-agent-operations" target="_blank" rel="noopener noreferrer">2026-09-09</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what"><b>bypass / YOLO</b> を禁止し、Shell、Read、Edit、Domain を <code>deny</code> / <code>ask</code> / <code>allow</code> で制御する。</p>
+<p class="spec-what">Copilot の操作を管理者が制御する。優先順位は <code>deny</code> &gt; <code>ask</code> &gt; <code>allow</code>。<br>🚫 <code>disableBypassPermissionsMode</code>: YOLO / allow-all を禁止<br>❌ <code>deny</code>: 絶対に実行できない（例: <code>Shell(rm -rf *)</code>）<br>⚠️ <code>ask</code>: 毎回ユーザーの承認が必要。YOLO でも省略不可（例: <code>Shell(git push *)</code>）<br>✅ <code>allow</code>: 確認なしで実行（例: <code>Shell(npm test *)</code>）<br>ルールは <code>Shell()</code> / <code>Read()</code> / <code>Edit()</code> / <code>Domain()</code> 。1つでもあればリスト外は要承認</p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧱</span><span class="spec-key"><code>sandbox</code></span><a class="spec-since" href="https://github.com/github/copilot-cli/releases/tag/v1.0.76" target="_blank" rel="noopener noreferrer">2026-07-29</a><span class="spec-toggle" aria-hidden="true"></span></summary>
@@ -483,7 +483,7 @@ Copilot クライアントも同じ。`copilot/managed-settings.json` がロー�
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧩</span><span class="spec-key"><code>enabledPlugins</code> · marketplaces</span><a class="spec-since" href="https://github.blog/changelog/2026-08-26-enterprise-managed-settings-now-support-autoupdate-for-plugin-marketplaces" target="_blank" rel="noopener noreferrer">2026-08-26</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">動かすプラグインと配布元を承認する。<b>autoUpdate</b> にも対応。</p>
+<p class="spec-what">🏪 <code>extraKnownMarketplaces</code>: 社内のプラグイン repo を全員に追加。<b>autoUpdate</b> で自動更新<br>🧩 <code>enabledPlugins</code>: プラグインを強制 ON（<code>true</code>、自動導入）/ OFF（<code>false</code>）<br>🔒 <code>strictKnownMarketplaces</code>: 登録 repo 以外からインストール不可（<code>[]</code> で全面禁止）</p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔌</span><span class="spec-key"><code>allowedMcpServers</code> · <code>deniedMcpServers</code></span><a class="spec-since" href="https://github.blog/changelog/2026-08-06-mcp-allowlists-in-enterprise-managed-settings/" target="_blank" rel="noopener noreferrer">2026-08-06</a><span class="spec-toggle" aria-hidden="true"></span></summary>

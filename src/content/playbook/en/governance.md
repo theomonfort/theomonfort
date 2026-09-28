@@ -475,7 +475,7 @@ Same idea for Copilot clients: `copilot/managed-settings.json` overrides local s
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🚧</span><span class="spec-key"><code>permissions.*</code></span><a class="spec-since" href="https://github.blog/changelog/2026-09-09-enterprise-managed-permissions-for-github-copilot-agent-operations" target="_blank" rel="noopener noreferrer">2026-09-09</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">Block <b>bypass / YOLO</b>, and <code>deny</code> / <code>ask</code> / <code>allow</code> Shell, Read, Edit and Domain operations.</p>
+<p class="spec-what">Admins control what Copilot can do. Priority: <code>deny</code> &gt; <code>ask</code> &gt; <code>allow</code>.<br>🚫 <code>disableBypassPermissionsMode</code>: no YOLO / allow-all<br>❌ <code>deny</code>: never runs, even if the user says yes (e.g. <code>Shell(rm -rf *)</code>)<br>⚠️ <code>ask</code>: user approval every time, even in YOLO (e.g. <code>Shell(git push *)</code>)<br>✅ <code>allow</code>: runs without a prompt (e.g. <code>Shell(npm test *)</code>)<br>Rules use <code>Shell()</code> / <code>Read()</code> / <code>Edit()</code> / <code>Domain()</code>. Unlisted ones ask first</p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧱</span><span class="spec-key"><code>sandbox</code></span><a class="spec-since" href="https://github.com/github/copilot-cli/releases/tag/v1.0.76" target="_blank" rel="noopener noreferrer">2026-07-29</a><span class="spec-toggle" aria-hidden="true"></span></summary>
@@ -483,7 +483,7 @@ Same idea for Copilot clients: `copilot/managed-settings.json` overrides local s
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧩</span><span class="spec-key"><code>enabledPlugins</code> · marketplaces</span><a class="spec-since" href="https://github.blog/changelog/2026-08-26-enterprise-managed-settings-now-support-autoupdate-for-plugin-marketplaces" target="_blank" rel="noopener noreferrer">2026-08-26</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">Approve which plugins run and where they come from, with <b>autoUpdate</b>.</p>
+<p class="spec-what">🏪 <code>extraKnownMarketplaces</code>: add your plugin repo, with <b>autoUpdate</b><br>🧩 <code>enabledPlugins</code>: force on (<code>true</code>, auto-install) or off (<code>false</code>)<br>🔒 <code>strictKnownMarketplaces</code>: only listed repos (<code>[]</code> blocks all)</p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔌</span><span class="spec-key"><code>allowedMcpServers</code> · <code>deniedMcpServers</code></span><a class="spec-since" href="https://github.blog/changelog/2026-08-06-mcp-allowlists-in-enterprise-managed-settings/" target="_blank" rel="noopener noreferrer">2026-08-06</a><span class="spec-toggle" aria-hidden="true"></span></summary>
