@@ -4468,6 +4468,16 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .prose-akq .tbl-compact table { margin: 0.6em 0; }
   .prose-akq .tbl-compact th,
   .prose-akq .tbl-compact td { padding-top: 0.1em; padding-bottom: 0.1em; }
+  /* Fit table: shrink to content, one line per cell, centred value columns (small matrices). */
+  .prose-akq .tbl-fit { overflow-x: auto; padding: 0 6px 6px 0; margin: 1em 0; }
+  .prose-akq .tbl-fit table { width: auto; margin: 0; }
+  .prose-akq .tbl-fit th,
+  .prose-akq .tbl-fit td { white-space: nowrap; padding: 0.5em 1.1em; line-height: 1.4; vertical-align: middle; }
+  .prose-akq .tbl-fit th:not(:first-child),
+  .prose-akq .tbl-fit td:not(:first-child) { text-align: center; }
+  body.present-mode .prose-akq .tbl-fit table { font-size: 0.8em; }
+  body.present-mode .prose-akq .tbl-fit th,
+  body.present-mode .prose-akq .tbl-fit td { padding: 0.45em 0.9em; }
   .prose-akq .spec-widget.spec-compact .spec-hint { margin-bottom: 0.3em; }
   .prose-akq .spec-widget.spec-compact .spec-btn { padding-top: 0.16em; padding-bottom: 0.16em; }
   .prose-akq .spec-widget.spec-compact th,

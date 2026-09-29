@@ -70,12 +70,16 @@ Beyond CI/CD, GitHub Actions can automate **every stage of the SDLC**, all trigg
 
 The point of automation (CI/CD, tests, reviews) is to raise both **speed and stability**. The yardstick is the four <a class="retro-link" href="https://dora.dev/" target="_blank" rel="noopener noreferrer">DORA metrics ↗</a> — push them toward Elite.
 
+<div class="tbl-fit">
+
 | DORA metric | 🟢 Elite | 🟣 High | 🟠 Medium | 🔴 Low |
 | --- | --- | --- | --- | --- |
-| 🚀 Deployment frequency | Multiple times/day | Once/day–once/week | Once/week–once/month | Once/month–once/6 months |
-| ⏱️ Lead time for changes | < 1 day | 1 day–1 week | 1 week–1 month | 1 month–6 months |
+| 🚀 Deployment frequency | Multiple per day | Daily–weekly | Weekly–monthly | Every 1–6 months |
+| ⏱️ Lead time for changes | < 1 day | 1 day–1 week | 1 week–1 month | 1–6 months |
 | ❌ Change failure rate | 0–15% | 0–15% | 0–15% | 46–60% |
 | 🔧 Mean time to recovery | < 1 hour | < 1 day | < 1 day | 1 week–1 month |
+
+</div>
 
 > 🎯 Automation's value: raise speed (frequency, lead time) and stability (failure rate, recovery) **at the same time**.
 
