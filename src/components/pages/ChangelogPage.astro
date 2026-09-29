@@ -345,6 +345,7 @@ const updates = await Promise.all(entries.map(async (entry) => ({
   .entry-body :global(a) { color: var(--c-neon-cyan); text-decoration: underline; text-underline-offset: 4px; }
   .entry-body :global(a:hover) { color: var(--c-neon-magenta); }
   .entry-body :global(a:focus-visible) { outline: 2px solid var(--c-neon-cyan); outline-offset: 5px; }
+  .entry-body :global(img) { display: block; max-width: 100%; height: auto; margin: 1rem 0; border: 1px dashed var(--entry-accent); }
   .demo { margin-top: 1.5rem; border-top: 1px dashed var(--entry-accent); border-bottom: 1px dashed var(--entry-accent); }
   .demo summary { cursor: pointer; padding: 0.9rem 0; color: var(--entry-accent); }
   .demo .source { margin: 0 0 1rem; }

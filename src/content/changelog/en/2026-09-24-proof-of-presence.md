@@ -14,4 +14,10 @@ demoUrl: "https://github.com/enterprises/octodemo/settings/security"
 - **Valid for two hours**: after a successful check, further high-impact actions in the same browser session require no new challenge.
 - **PR merges are not covered yet**: support is coming soon.
 
+### Settings
+
+In the enterprise **Settings → Authentication security → Proof of presence**, choose the Sudo actions policy: **No policy / Re-authentication / MFA**.
+
+![Proof of presence Sudo actions policy selector](/theomonfort/changelog/img/proof-of-presence-settings.png)
+
 [Configuration (official documentation)](https://docs.github.com/enterprise-cloud@latest/admin/configuring-settings/hardening-security-for-your-enterprise/configuring-proof-of-presence)

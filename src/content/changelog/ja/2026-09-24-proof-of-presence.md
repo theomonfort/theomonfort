@@ -14,4 +14,10 @@ demoUrl: "https://github.com/enterprises/octodemo/settings/security"
 - **確認後 2 時間は再確認不要**：同じブラウザーセッションでの重要な操作に適用。
 - **PR マージはまだ対象外**：今後対応予定。
 
+### 設定画面
+
+Enterprise の **Settings → Authentication security → Proof of presence** で、Sudo actions のポリシーを **No policy / Re-authentication / MFA** から選びます。
+
+![Proof of presence の Sudo actions ポリシー選択画面](/theomonfort/changelog/img/proof-of-presence-settings.png)
+
 [設定方法（公式ドキュメント）](https://docs.github.com/enterprise-cloud@latest/admin/configuring-settings/hardening-security-for-your-enterprise/configuring-proof-of-presence)
