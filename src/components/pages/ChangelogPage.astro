@@ -22,6 +22,9 @@ const copy = locale === 'ja'
       selectedOnly: '選択した項目のみ',
       emptySelection: '発表用の項目が未選択です。フィルターをオフにして、紹介したい更新にチェックを入れてください。',
       storageError: '選択をブラウザーに保存できないか、保存済みの選択を読み込めません。再読み込みすると選択が失われる場合があります。',
+      enlargeImage: '画像を拡大',
+      imageViewer: '拡大画像',
+      closeImage: '閉じる',
       categories: { review: 'コードレビュー', security: 'セキュリティ', copilot: 'Copilot', actions: 'Actions', administration: '管理', issues: 'Issues' },
     }
   : {
@@ -38,6 +41,9 @@ const copy = locale === 'ja'
       selectedOnly: 'Selected only',
       emptySelection: 'No updates selected. Turn off the filter and check the updates you want to present.',
       storageError: 'Your selection could not be saved to or loaded from this browser. It may be lost when you reload the page.',
+      enlargeImage: 'Enlarge image',
+      imageViewer: 'Enlarged image',
+      closeImage: 'Close',
       categories: { review: 'Code review', security: 'Security', copilot: 'Copilot', actions: 'Actions', administration: 'Administration', issues: 'Issues' },
     };
 
@@ -123,6 +129,10 @@ const updates = await Promise.all(entries.map(async (entry) => ({
         );
       })}
     </ol>
+    <dialog class="image-viewer" aria-label={copy.imageViewer} data-enlarge-label={copy.enlargeImage}>
+      <button type="button" class="image-viewer-close" aria-label={copy.closeImage}>×</button>
+      <img alt="" />
+    </dialog>
   </div>
 </Layout>
 
@@ -240,6 +250,48 @@ const updates = await Promise.all(entries.map(async (entry) => ({
 
   initChangelogSelection();
   document.addEventListener('astro:page-load', initChangelogSelection);
+
+  let imageViewerEvents: AbortController | undefined;
+
+  function initImageViewer() {
+    imageViewerEvents?.abort();
+    const viewer = document.querySelector<HTMLDialogElement>('.changelog .image-viewer');
+    const viewerImage = viewer?.querySelector('img');
+    if (!viewer || !viewerImage) return;
+
+    imageViewerEvents = new AbortController();
+    const { signal } = imageViewerEvents;
+    const enlargeLabel = viewer.dataset.enlargeLabel ?? '';
+
+    document.querySelectorAll<HTMLImageElement>('.changelog .entry-body img').forEach((image) => {
+      const parentLink = image.closest('a');
+      if (parentLink && !parentLink.classList.contains('image-zoom')) return;
+
+      let link = parentLink;
+      if (!link) {
+        link = document.createElement('a');
+        link.className = 'image-zoom';
+        link.href = image.src;
+        link.setAttribute('aria-label', image.alt ? `${enlargeLabel}: ${image.alt}` : enlargeLabel);
+        image.replaceWith(link);
+        link.append(image);
+      }
+
+      link.addEventListener('click', (event) => {
+        // Keep modifier-clicks as a regular "open image in new tab".
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        viewerImage.src = image.currentSrc || image.src;
+        viewerImage.alt = image.alt;
+        viewer.showModal();
+      }, { signal });
+    });
+
+    viewer.addEventListener('click', () => viewer.close(), { signal });
+  }
+
+  initImageViewer();
+  document.addEventListener('astro:page-load', initImageViewer);
 </script>
 
 <style>
@@ -345,6 +397,36 @@ const updates = await Promise.all(entries.map(async (entry) => ({
   .entry-body :global(a) { color: var(--c-neon-cyan); text-decoration: underline; text-underline-offset: 4px; }
   .entry-body :global(a:hover) { color: var(--c-neon-magenta); }
   .entry-body :global(a:focus-visible) { outline: 2px solid var(--c-neon-cyan); outline-offset: 5px; }
+  .entry-body :global(img) { display: block; max-width: 100%; height: auto; margin: 1rem 0; border: 1px dashed var(--entry-accent); }
+  .entry-body :global(.image-zoom) { display: block; width: fit-content; max-width: 100%; margin: 1rem 0; cursor: zoom-in; }
+  .entry-body :global(.image-zoom img) { margin: 0; }
+  .entry-body :global(.image-zoom:hover img) { border-style: solid; box-shadow: 0 0 8px var(--entry-accent); }
+  .image-viewer {
+    max-width: 96vw;
+    max-height: 96vh;
+    padding: 0;
+    border: 2px solid var(--c-neon-cyan);
+    background: var(--c-shadow-ink);
+    box-shadow: 0 0 8px var(--c-neon-cyan), 0 0 24px rgba(0, 240, 255, 0.35);
+    cursor: zoom-out;
+  }
+  .image-viewer::backdrop { background: rgba(5, 6, 15, 0.88); }
+  .image-viewer img { display: block; max-width: calc(96vw - 4px); max-height: calc(96vh - 4px); width: auto; height: auto; }
+  .image-viewer-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 44px;
+    height: 44px;
+    border: 1px dashed var(--c-neon-cyan);
+    background: var(--c-midnight);
+    color: var(--c-neon-cyan);
+    font-family: 'VT323', monospace;
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .image-viewer-close:hover { border-style: solid; box-shadow: 0 0 8px var(--c-neon-cyan); }
   .demo { margin-top: 1.5rem; border-top: 1px dashed var(--entry-accent); border-bottom: 1px dashed var(--entry-accent); }
   .demo summary { cursor: pointer; padding: 0.9rem 0; color: var(--entry-accent); }
   .demo .source { margin: 0 0 1rem; }
