@@ -188,8 +188,6 @@ Scanning tools normally live outside the platform: a separate console, a separat
 
 ## What's inside <a class="h2-doc" href="https://docs.github.com/en/code-security/getting-started/github-security-features" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-Click a feature for details. Chips show free versus licensed.
-
 <div class="trio-widget">
 <input class="trio-radio" type="radio" name="ghas-inside" id="gi-secret" checked />
 <input class="trio-radio" type="radio" name="ghas-inside" id="gi-code" />
