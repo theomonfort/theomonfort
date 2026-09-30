@@ -60,6 +60,9 @@ links:
     label: Code security risk assessment (Docs)
     url: https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment
   - group: 📰 Recent Changelog
+    label: "Agentic autofix now uses Copilot Memory (2026-09-25)"
+    url: https://github.blog/changelog/2026-09-25-agentic-autofix-now-uses-copilot-memory/
+  - group: 📰 Recent Changelog
     label: "Agentic autofix for code scanning alerts (2026-07-10)"
     url: https://github.blog/changelog/2026-07-10-agentic-autofix-for-code-scanning-alerts-in-public-preview
 ---
@@ -353,6 +356,7 @@ When cloud agent is available, **Assign to Copilot replaces Generate fix** on in
 
 - 🎯 **Assign**: one alert, or **1–25 alerts** from a repository backlog or security campaign.
 - 🔁 **Agent session**: explore the codebase → generate a fix → validate and iterate → open a **draft PR**.
+- 🧠 **Copilot Memory** (when enabled): reads repository memories for context, then saves the fix pattern as a new memory. It also teaches Copilot code review and cloud agent your secure patterns. <a class="retro-link" href="https://github.blog/changelog/2026-09-25-agentic-autofix-now-uses-copilot-memory/" target="_blank" rel="noopener noreferrer">Changelog ↗</a>
 - 🛂 **Requirements**: cloud agent and Autofix must both be available. **No pre-generated Autofix suggestion is required.**
 - 💸 **Cost**: **AI credits + Actions minutes**. Without cloud agent, the classic **Generate fix** flow remains available for eligible alerts.
 - ⚠️ **Validation is best-effort**: custom queries, `security-extended` and third-party alerts are not guaranteed to be validated.

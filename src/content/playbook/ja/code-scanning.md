@@ -60,6 +60,9 @@ links:
     label: Code security risk assessment (Docs)
     url: https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment
   - group: 📰 Recent Changelog
+    label: "Agentic autofix now uses Copilot Memory (2026-09-25)"
+    url: https://github.blog/changelog/2026-09-25-agentic-autofix-now-uses-copilot-memory/
+  - group: 📰 Recent Changelog
     label: "Agentic autofix for code scanning alerts (2026-07-10)"
     url: https://github.blog/changelog/2026-07-10-agentic-autofix-for-code-scanning-alerts-in-public-preview
 ---
@@ -353,6 +356,7 @@ Copilot Autofix は **対応するアラートに修正パッチを提案**す�
 
 - 🎯 **依頼**: 個別アラート、またはリポジトリのバックログやキャンペーンから **1〜25 件**を選択。
 - 🔁 **セッション**: コードベースを探索 → 修正生成 → 検証と反復 → **ドラフト PR**。
+- 🧠 **Copilot Memory**（有効時）: 既存のメモリを参照して修正に活かし、修正パターンを新しいメモリとして保存。Copilot code review やクラウドエージェントにもリポジトリ固有のセキュアな書き方が伝わる。<a class="retro-link" href="https://github.blog/changelog/2026-09-25-agentic-autofix-now-uses-copilot-memory/" target="_blank" rel="noopener noreferrer">Changelog ↗</a>
 - 🛂 **前提**: クラウドエージェントと Autofix の両方が利用可能なこと。**事前の Autofix 提案生成は不要**。
 - 💸 **料金**: **AI クレジット + Actions 分**。クラウドエージェントが使えなければ、対応するアラートでは従来の **Generate fix** を利用できる。
 - ⚠️ **検証はベストエフォート**: カスタムクエリ、`security-extended`、他社ツールのアラートは検証が保証されない。
