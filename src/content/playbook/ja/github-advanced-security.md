@@ -168,39 +168,24 @@ links:
 
 ## FIRST の 4 つの提言
 
-CVE の総量は急増しても、実際に悪用されうるもの（CISA KEV、EPSS 10% 超）は横ばい。<a class="retro-link" href="https://www.first.org/newsroom/releases/20260615" target="_blank" rel="noopener noreferrer">FIRST ↗</a> の提言は 4 つ。
+**従来のセキュリティが追いつかない。** AI が生成する新規コードの量は従来のレビュープロセスが検査できる範囲を超え、しかも一度に多数の新しい面から流れ込む。エージェントが変更を複数リポジトリへ波及させた後では、PR でのゲートはすでに手遅れ。
 
 <div class="imp2">
-<div class="imp2-col">
-<p class="imp2-k">💰 予算はソフトウェアの増加で語る</p>
-<p class="imp2-v">負荷を生んでいるのは CVE のニュースではなく、管理するソフトウェアの多様化。</p>
-</div>
-<div class="imp2-col">
-<p class="imp2-k">🎯 悪用可能性で絞り込む</p>
-<p class="imp2-v">EPSS と CISA KEV が、大量の CVE からシグナルを切り分ける最も有効なトリアージ手段。</p>
-</div>
 <div class="imp2-col">
 <p class="imp2-k">🔧 パッチ作業の倍増に備える</p>
 <p class="imp2-v">ソフトウェアを保守する側の作業は倍増する。一方、稼働中システムへのパッチ量は 2026 年末まで比較的安定。</p>
 </div>
 <div class="imp2-col">
+<p class="imp2-k">💰 セキュリティに予算を割く</p>
+<p class="imp2-v">CVE の増加とソフトウェア資産の拡大を考えると、セキュリティ専用の予算確保は不可欠。</p>
+</div>
+<div class="imp2-col">
+<p class="imp2-k">🎯 悪用可能性で絞り込む</p>
+<p class="imp2-v">ノイズとシグナルを切り分けるツールを使う。GHAS なら Dependabot アラートに <a class="retro-link" href="https://github.blog/changelog/2025-02-19-dependabot-helps-users-focus-on-the-most-important-alerts-by-including-epss-scores-that-indicate-likelihood-of-exploitation-now-generally-available/" target="_blank" rel="noopener noreferrer">EPSS スコア ↗</a>（実際に悪用される可能性）が表示される。</p>
+</div>
+<div class="imp2-col">
 <p class="imp2-k">🤖 防御側の AI を今すぐ使う</p>
-<p class="imp2-v">CVE 急増を生んだのと同じ AI で脆弱性をより速く見つけて直し、MTTR を短縮する。</p>
-</div>
-</div>
-
-## AppSec への 2 つの影響
-
-かつて「shift left」は IDE を意味していた。いまは IDE・CLI・アプリ・PR が 1 つの連続した面になり、エージェントがその上を自由に行き来する。ここから 2 つの帰結が生まれる。
-
-<div class="imp2">
-<div class="imp2-col">
-<p class="imp2-k">🌊 従来のセキュリティが追いつかない</p>
-<p class="imp2-v">AI が生成する新規コードの量は従来のレビュープロセスが検査できる範囲を超え、しかも一度に多数の新しい面から流れ込む。エージェントが変更を複数リポジトリへ波及させた後では、PR でのゲートはすでに手遅れ。</p>
-</div>
-<div class="imp2-col">
-<p class="imp2-k">⚡ 悪用がかつてなく速い</p>
-<p class="imp2-v">攻撃者も同じ最新モデルを使えて、コストは障害にならない。防御側がトリアージするより速くリスクを見つけて武器化し、サプライチェーン攻撃も人間のレビューサイクルより速く動く。</p>
+<p class="imp2-v">悪用はかつてなく速い。攻撃者も同じ最新モデルを使えて、コストは障害にならない。防御側がトリアージするより速くリスクを見つけて武器化し、サプライチェーン攻撃も人間のレビューサイクルより速く動く。</p>
 </div>
 </div>
 

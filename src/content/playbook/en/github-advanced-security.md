@@ -168,39 +168,24 @@ links:
 
 ## FIRST's four recommendations
 
-Total CVE volume is surging, but what is actually exploitable (CISA KEV, EPSS above 10%) has stayed flat. <a class="retro-link" href="https://www.first.org/newsroom/releases/20260615" target="_blank" rel="noopener noreferrer">FIRST ↗</a> recommends four things.
+**Traditional security can't keep up.** The volume of new, AI-generated code outpaces what any traditional review process can inspect, and it arrives across many new surfaces at once. Gating at the pull request is already too late once an agent has propagated a change across repos.
 
 <div class="imp2">
-<div class="imp2-col">
-<p class="imp2-k">💰 Budget for software growth</p>
-<p class="imp2-v">The workload comes from a more diverse software estate, not from any single CVE news cycle.</p>
-</div>
-<div class="imp2-col">
-<p class="imp2-k">🎯 Triage by exploitability</p>
-<p class="imp2-v">EPSS and CISA KEV remain the most effective tools to separate signal from noise at scale.</p>
-</div>
 <div class="imp2-col">
 <p class="imp2-k">🔧 Plan for double the patching work</p>
 <p class="imp2-v">Software maintainers should expect twice the work, while live-system patching stays roughly steady through 2026.</p>
 </div>
 <div class="imp2-col">
+<p class="imp2-k">💰 Budget for security</p>
+<p class="imp2-v">With more CVEs and a growing software estate, allocating a dedicated security budget is imperative.</p>
+</div>
+<div class="imp2-col">
+<p class="imp2-k">🎯 Triage by exploitability</p>
+<p class="imp2-v">Use tools that separate signal from noise. GHAS does: Dependabot alerts show the <a class="retro-link" href="https://github.blog/changelog/2025-02-19-dependabot-helps-users-focus-on-the-most-important-alerts-by-including-epss-scores-that-indicate-likelihood-of-exploitation-now-generally-available/" target="_blank" rel="noopener noreferrer">EPSS score ↗</a>, the likelihood of real-world exploitation.</p>
+</div>
+<div class="imp2-col">
 <p class="imp2-k">🤖 Use defensive AI now</p>
-<p class="imp2-v">The same AI driving the CVE surge can find and fix vulnerabilities faster, cutting MTTR.</p>
-</div>
-</div>
-
-## What it means for AppSec
-
-"Shift left" used to mean the IDE. Now the IDE, the CLI, the app, and the pull request blend into one continuous surface that agents move across freely. That has two consequences.
-
-<div class="imp2">
-<div class="imp2-col">
-<p class="imp2-k">🌊 Traditional security can't keep up</p>
-<p class="imp2-v">The volume of new, AI-generated code outpaces what any traditional review process can inspect, and it arrives across many new surfaces at once. Gating at the pull request is already too late once an agent has propagated a change across repos.</p>
-</div>
-<div class="imp2-col">
-<p class="imp2-k">⚡ Exploitation is faster than ever</p>
-<p class="imp2-v">Attackers reach the same frontier models, and cost is no object. They find and weaponize risk faster than defenders can triage it, and supply chain attacks move faster than any human review cycle.</p>
+<p class="imp2-v">Exploitation is faster than ever. Attackers reach the same frontier models, and cost is no object. They find and weaponize risk faster than defenders can triage it, and supply chain attacks move faster than any human review cycle.</p>
 </div>
 </div>
 
