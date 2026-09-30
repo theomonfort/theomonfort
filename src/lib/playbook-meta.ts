@@ -32,7 +32,7 @@ export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'token-optimization': [8],
   'governance': [9, 10],
   'secret-scanning': [2, 7],
-  'github-advanced-security': [7],
+  'github-advanced-security': [8],
   'code-quality': [3],
   'copilot-metrics': [4],
   'pull-requests': [6, 7],
