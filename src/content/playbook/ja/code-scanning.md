@@ -60,6 +60,9 @@ links:
     label: Code security risk assessment (Docs)
     url: https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment
   - group: 📰 Recent Changelog
+    label: "Agentic autofix now uses Copilot Memory (2026-09-25)"
+    url: https://github.blog/changelog/2026-09-25-agentic-autofix-now-uses-copilot-memory/
+  - group: 📰 Recent Changelog
     label: "Agentic autofix for code scanning alerts (2026-07-10)"
     url: https://github.blog/changelog/2026-07-10-agentic-autofix-for-code-scanning-alerts-in-public-preview
 ---
@@ -351,11 +354,49 @@ Copilot Autofix は **対応するアラートに修正パッチを提案**す�
 
 クラウドエージェントが利用可能な場合、個別アラートの **Generate fix は Assign to Copilot に置き換わる**。
 
-- 🎯 **依頼**: 個別アラート、またはリポジトリのバックログやキャンペーンから **1〜25 件**を選択。
-- 🔁 **セッション**: コードベースを探索 → 修正生成 → 検証と反復 → **ドラフト PR**。
-- 🛂 **前提**: クラウドエージェントと Autofix の両方が利用可能なこと。**事前の Autofix 提案生成は不要**。
-- 💸 **料金**: **AI クレジット + Actions 分**。クラウドエージェントが使えなければ、対応するアラートでは従来の **Generate fix** を利用できる。
-- ⚠️ **検証はベストエフォート**: カスタムクエリ、`security-extended`、他社ツールのアラートは検証が保証されない。
+<div class="ctl-widget">
+<p class="ctl-hint">▸ + をクリックして詳細を表示</p>
+<div class="ctl-list">
+<details class="ctl-item" name="cs-agentic">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🎯</span><span class="ctl-name">依頼</span><span class="ctl-when">1〜25 件</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">対象</span><span class="ctl-v">個別アラート、またはリポジトリのバックログやキャンペーンから <b>1〜25 件</b>を選択</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-agentic">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔁</span><span class="ctl-name">セッション</span><span class="ctl-when">ドラフト PR</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">流れ</span><span class="ctl-v">コードベースを探索 → 修正生成 → 検証と反復 → <b>ドラフト PR</b></span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-agentic">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🧠</span><span class="ctl-name">Copilot Memory</span><span class="ctl-when">修正パターンを学習</span><a class="ctl-doc" href="https://github.blog/changelog/2026-09-25-agentic-autofix-now-uses-copilot-memory/" target="_blank" rel="noopener noreferrer">Changelog</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">参照</span><span class="ctl-v">既存のメモリを参照して修正に活かす（Copilot Memory 有効時）</span></p>
+<p class="ctl-row"><span class="ctl-k">保存</span><span class="ctl-v">修正パターンを新しいメモリとして保存。<b>Copilot code review やクラウドエージェント</b>にもリポジトリ固有のセキュアな書き方が伝わる</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-agentic">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛂</span><span class="ctl-name">前提</span><span class="ctl-when">クラウドエージェント + Autofix</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">条件</span><span class="ctl-v">両方が利用可能なこと。<b>事前の Autofix 提案生成は不要</b></span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-agentic">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">💸</span><span class="ctl-name">料金</span><span class="ctl-when">AI クレジット + Actions</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Agentic</span><span class="ctl-v"><b>AI クレジット + Actions 分</b></span></p>
+<p class="ctl-row"><span class="ctl-k">代替</span><span class="ctl-v">クラウドエージェントが使えなければ、対応するアラートでは従来の <b>Generate fix</b> を利用できる</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-agentic">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">⚠️</span><span class="ctl-name">検証</span><span class="ctl-when">ベストエフォート</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">制約</span><span class="ctl-v">カスタムクエリ、<code>security-extended</code>、他社ツールのアラートは検証が保証されない</span></p>
+</div>
+</details>
+</div>
+</div>
 
 ## Autofix と Agentic Autofix の使い分け <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 

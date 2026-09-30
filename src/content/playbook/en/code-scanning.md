@@ -60,6 +60,9 @@ links:
     label: Code security risk assessment (Docs)
     url: https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment
   - group: 📰 Recent Changelog
+    label: "Agentic autofix now uses Copilot Memory (2026-09-25)"
+    url: https://github.blog/changelog/2026-09-25-agentic-autofix-now-uses-copilot-memory/
+  - group: 📰 Recent Changelog
     label: "Agentic autofix for code scanning alerts (2026-07-10)"
     url: https://github.blog/changelog/2026-07-10-agentic-autofix-for-code-scanning-alerts-in-public-preview
 ---
@@ -351,11 +354,49 @@ Copilot Autofix can generate a **suggested patch for an eligible alert**. You re
 
 When cloud agent is available, **Assign to Copilot replaces Generate fix** on individual code scanning alerts.
 
-- 🎯 **Assign**: one alert, or **1–25 alerts** from a repository backlog or security campaign.
-- 🔁 **Agent session**: explore the codebase → generate a fix → validate and iterate → open a **draft PR**.
-- 🛂 **Requirements**: cloud agent and Autofix must both be available. **No pre-generated Autofix suggestion is required.**
-- 💸 **Cost**: **AI credits + Actions minutes**. Without cloud agent, the classic **Generate fix** flow remains available for eligible alerts.
-- ⚠️ **Validation is best-effort**: custom queries, `security-extended` and third-party alerts are not guaranteed to be validated.
+<div class="ctl-widget">
+<p class="ctl-hint">▸ CLICK + FOR DETAILS</p>
+<div class="ctl-list">
+<details class="ctl-item" name="cs-agentic">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🎯</span><span class="ctl-name">Assign</span><span class="ctl-when">1–25 alerts</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">One alert, or <b>1–25 alerts</b> from a repository backlog or security campaign</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-agentic">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔁</span><span class="ctl-name">Agent session</span><span class="ctl-when">Draft PR</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Flow</span><span class="ctl-v">Explore the codebase → generate a fix → validate and iterate → open a <b>draft PR</b></span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-agentic">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🧠</span><span class="ctl-name">Copilot Memory</span><span class="ctl-when">Learns fix patterns</span><a class="ctl-doc" href="https://github.blog/changelog/2026-09-25-agentic-autofix-now-uses-copilot-memory/" target="_blank" rel="noopener noreferrer">Changelog</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Reads</span><span class="ctl-v">Existing repository memories for context, when Copilot Memory is enabled</span></p>
+<p class="ctl-row"><span class="ctl-k">Writes</span><span class="ctl-v">Each fix pattern as a new memory. <b>Copilot code review and cloud agent</b> learn your secure patterns from it too</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-agentic">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛂</span><span class="ctl-name">Requirements</span><span class="ctl-when">Cloud agent + Autofix</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Needs</span><span class="ctl-v">Cloud agent and Autofix must both be available. <b>No pre-generated Autofix suggestion is required</b></span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-agentic">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">💸</span><span class="ctl-name">Cost</span><span class="ctl-when">AI credits + Actions</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Agentic</span><span class="ctl-v"><b>AI credits + Actions minutes</b></span></p>
+<p class="ctl-row"><span class="ctl-k">Fallback</span><span class="ctl-v">Without cloud agent, the classic <b>Generate fix</b> flow remains available for eligible alerts</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-agentic">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">⚠️</span><span class="ctl-name">Validation</span><span class="ctl-when">Best-effort</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Limits</span><span class="ctl-v">Custom queries, <code>security-extended</code> and third-party alerts are not guaranteed to be validated</span></p>
+</div>
+</details>
+</div>
+</div>
 
 ## Autofix vs Agentic Autofix <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 

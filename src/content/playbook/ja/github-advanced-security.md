@@ -60,7 +60,34 @@ links:
   </p>
 </div>
 
-## なぜ今なのか
+## なぜ今なのか <input type="checkbox" id="info-ghas-first" class="demo-toggle" /><label class="h2-demo h2-info" for="info-ghas-first">&#9432; INFO</label>
+
+<div class="demo-panel is-info">
+<label class="demo-scrim" for="info-ghas-first" aria-label="情報を閉じる"></label>
+<div class="demo-window" role="group" aria-label="FIRST とは">
+<div class="demo-head"><span class="demo-tag">INFO</span><span class="demo-name">FIRST（ファースト）とは？</span><label class="demo-close" for="info-ghas-first" aria-label="閉じる">&#10005;</label></div>
+<div class="info-body">
+<p class="info-lead">世界中のサイバーセキュリティ専門チームが集まる、国際的なネットワーク組織。</p>
+<p>1990 年に設立。世界 110 カ国以上、850 を超える企業、政府機関、大学などのセキュリティチームが加盟している。</p>
+<p class="info-h">主な活動</p>
+<ol class="info-list">
+<li><b>サイバー攻撃の情報共有</b>：世界中で起きているサイバー攻撃やシステムの欠陥（脆弱性）の情報を共有し、被害の拡大を防ぐ。</li>
+<li><b>世界共通の「危険度のモノサシ」を作る</b>
+<ul>
+<li><a class="retro-link" href="https://www.first.org/cvss/" target="_blank" rel="noopener noreferrer">CVSS ↗</a>（共通脆弱性評価システム）：バグが「どれくらい危険か」を点数で表す世界標準の基準。</li>
+<li><a class="retro-link" href="https://www.first.org/epss/" target="_blank" rel="noopener noreferrer">EPSS ↗</a>（脆弱性悪用予測システム）：そのバグが「実際に攻撃者に悪用される確率」を AI やデータで予測する仕組み。</li>
+</ul>
+</li>
+</ol>
+<p class="info-h">2026 年 6 月の発表（超要約）</p>
+<ul class="info-list">
+<li>AI のおかげでバグの発見数は過去最多ペース。ただし、実際に危険な攻撃が増えたわけではない。</li>
+<li>すべてのバグを片っ端から直すのではなく、EPSS などの指標を使って「本当に危険なバグ」から優先して直すことが大切。</li>
+</ul>
+<p class="info-sum"><b>一言で：</b>世界中で協力して、インターネットを安全に使うための情報共有やルール作りをしている組織。</p>
+</div>
+</div>
+</div>
 
 <div class="surge-steps">
 <div class="surge-step is-alert">
@@ -141,39 +168,24 @@ links:
 
 ## FIRST の 4 つの提言
 
-CVE の総量は急増しても、実際に悪用されうるもの（CISA KEV、EPSS 10% 超）は横ばい。<a class="retro-link" href="https://www.first.org/newsroom/releases/20260615" target="_blank" rel="noopener noreferrer">FIRST ↗</a> の提言は 4 つ。
+**従来のセキュリティが追いつかない。** AI が生成する新規コードの量は従来のレビュープロセスが検査できる範囲を超え、しかも一度に多数の新しい面から流れ込む。エージェントが変更を複数リポジトリへ波及させた後では、PR でのゲートはすでに手遅れ。
 
 <div class="imp2">
-<div class="imp2-col">
-<p class="imp2-k">💰 予算はソフトウェアの増加で語る</p>
-<p class="imp2-v">負荷を生んでいるのは CVE のニュースではなく、管理するソフトウェアの多様化。</p>
-</div>
-<div class="imp2-col">
-<p class="imp2-k">🎯 悪用可能性で絞り込む</p>
-<p class="imp2-v">EPSS と CISA KEV が、大量の CVE からシグナルを切り分ける最も有効なトリアージ手段。</p>
-</div>
 <div class="imp2-col">
 <p class="imp2-k">🔧 パッチ作業の倍増に備える</p>
 <p class="imp2-v">ソフトウェアを保守する側の作業は倍増する。一方、稼働中システムへのパッチ量は 2026 年末まで比較的安定。</p>
 </div>
 <div class="imp2-col">
+<p class="imp2-k">💰 セキュリティに予算を割く</p>
+<p class="imp2-v">CVE の増加とソフトウェア資産の拡大を考えると、セキュリティ専用の予算確保は不可欠。</p>
+</div>
+<div class="imp2-col">
+<p class="imp2-k">🎯 悪用可能性で絞り込む</p>
+<p class="imp2-v">ノイズとシグナルを切り分けるツールを使う。GHAS なら Dependabot アラートに <a class="retro-link" href="https://github.blog/changelog/2025-02-19-dependabot-helps-users-focus-on-the-most-important-alerts-by-including-epss-scores-that-indicate-likelihood-of-exploitation-now-generally-available/" target="_blank" rel="noopener noreferrer">EPSS スコア ↗</a>（実際に悪用される可能性）が表示される。</p>
+</div>
+<div class="imp2-col">
 <p class="imp2-k">🤖 防御側の AI を今すぐ使う</p>
-<p class="imp2-v">CVE 急増を生んだのと同じ AI で脆弱性をより速く見つけて直し、MTTR を短縮する。</p>
-</div>
-</div>
-
-## AppSec への 2 つの影響
-
-かつて「shift left」は IDE を意味していた。いまは IDE・CLI・アプリ・PR が 1 つの連続した面になり、エージェントがその上を自由に行き来する。ここから 2 つの帰結が生まれる。
-
-<div class="imp2">
-<div class="imp2-col">
-<p class="imp2-k">🌊 従来のセキュリティが追いつかない</p>
-<p class="imp2-v">AI が生成する新規コードの量は従来のレビュープロセスが検査できる範囲を超え、しかも一度に多数の新しい面から流れ込む。エージェントが変更を複数リポジトリへ波及させた後では、PR でのゲートはすでに手遅れ。</p>
-</div>
-<div class="imp2-col">
-<p class="imp2-k">⚡ 悪用がかつてなく速い</p>
-<p class="imp2-v">攻撃者も同じ最新モデルを使えて、コストは障害にならない。防御側がトリアージするより速くリスクを見つけて武器化し、サプライチェーン攻撃も人間のレビューサイクルより速く動く。</p>
+<p class="imp2-v">悪用はかつてなく速い。攻撃者も同じ最新モデルを使えて、コストは障害にならない。防御側がトリアージするより速くリスクを見つけて武器化し、サプライチェーン攻撃も人間のレビューサイクルより速く動く。</p>
 </div>
 </div>
 
