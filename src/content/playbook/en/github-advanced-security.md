@@ -60,7 +60,34 @@ links:
   </p>
 </div>
 
-## Why now
+## Why now <input type="checkbox" id="info-ghas-first" class="demo-toggle" /><label class="h2-demo h2-info" for="info-ghas-first">&#9432; INFO</label>
+
+<div class="demo-panel is-info">
+<label class="demo-scrim" for="info-ghas-first" aria-label="Close info"></label>
+<div class="demo-window" role="group" aria-label="What is FIRST">
+<div class="demo-head"><span class="demo-tag">INFO</span><span class="demo-name">What is FIRST?</span><label class="demo-close" for="info-ghas-first" aria-label="Close">&#10005;</label></div>
+<div class="info-body">
+<p class="info-lead">A global network that brings together cybersecurity teams from around the world.</p>
+<p>Founded in 1990. Security teams from more than 850 companies, government bodies, universities and other institutions across 110+ countries are members.</p>
+<p class="info-h">What it does</p>
+<ol class="info-list">
+<li><b>Shares cyber attack information</b>: members share what they see about attacks and software flaws (vulnerabilities) worldwide, to stop the damage from spreading.</li>
+<li><b>Builds the shared "danger rulers" everyone uses</b>
+<ul>
+<li><a class="retro-link" href="https://www.first.org/cvss/" target="_blank" rel="noopener noreferrer">CVSS ↗</a> (Common Vulnerability Scoring System): the global standard that scores how dangerous a bug is.</li>
+<li><a class="retro-link" href="https://www.first.org/epss/" target="_blank" rel="noopener noreferrer">EPSS ↗</a> (Exploit Prediction Scoring System): uses AI and data to predict how likely a bug is to actually be exploited by attackers.</li>
+</ul>
+</li>
+</ol>
+<p class="info-h">The June 2026 release, in short</p>
+<ul class="info-list">
+<li>Thanks to AI, bugs are being found at a record pace. But truly dangerous attacks have not gone up with them.</li>
+<li>Don't try to fix every bug one by one. Use signals like EPSS to fix the truly dangerous ones first.</li>
+</ul>
+<p class="info-sum"><b>In one line:</b> an organization where the world works together on information sharing and common rules to keep the internet safe to use.</p>
+</div>
+</div>
+</div>
 
 <div class="surge-steps">
 <div class="surge-step is-alert">
