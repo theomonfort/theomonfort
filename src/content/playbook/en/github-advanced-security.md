@@ -62,12 +62,25 @@ links:
 
 ## Why now
 
-AI writes code faster than any review process was designed to absorb — and attackers reach the same models defenders do. Two curves moving in opposite directions.
+<div class="surge-steps">
+<div class="surge-step is-alert">
+<p class="surge-k">Record CVE volume</p>
+<p class="surge-v"><a class="retro-link" href="https://www.first.org/newsroom/releases/20260615" target="_blank" rel="noopener noreferrer">FIRST ↗</a> forecasts a record <strong>~66,000 CVEs</strong> in 2026. AI-assisted discovery is a key driver.</p>
+</div>
+<div class="surge-step is-alert">
+<p class="surge-k">GHSA +449% YoY</p>
+<p class="surge-v">GitHub added curators and AI tooling. Its free <a class="retro-link" href="https://github.com/advisories" target="_blank" rel="noopener noreferrer">Advisory Database ↗</a> feeds Dependabot (left).</p>
+</div>
+<div class="surge-step">
+<p class="surge-k">AI vs AI race</p>
+<p class="surge-v">AI-built exploits against AI-built patches. Time to exploitation is already down to <strong>24 hours</strong> (right).</p>
+</div>
+</div>
 
 <div class="duo-fig">
 <div class="duo-panel is-alert">
-<p class="duo-cap">4x+ increase in Dependabot alerts</p>
-<p class="duo-sub">New alerts created across GitHub, per quarter.</p>
+<p class="duo-cap">Dependabot alerts up 4x+</p>
+<p class="duo-sub">New alerts across GitHub, per quarter.</p>
 <div class="qbars">
 <div class="qbar"><div class="qbar-fill" style="height:14.6%"><span class="qbar-val">52M</span></div><p class="qbar-lab">Q1 25</p></div>
 <div class="qbar"><div class="qbar-fill" style="height:19.7%"><span class="qbar-val">70M</span></div><p class="qbar-lab">Q2 25</p></div>
@@ -76,11 +89,11 @@ AI writes code faster than any review process was designed to absorb — and att
 <div class="qbar is-peak"><div class="qbar-fill" style="height:100.0%"><span class="qbar-val">357M</span></div><p class="qbar-lab">Q1 26</p></div>
 <div class="qbar is-peak"><div class="qbar-fill" style="height:87.7%"><span class="qbar-val">313M</span></div><p class="qbar-lab">Q2 26</p></div>
 </div>
-<p class="duo-foot">The 2025 baseline sat steadily around <strong>70–80M</strong>, then jumped. CVE alerts platform-wide are up <strong>6x</strong> since February 2026.</p>
+<p class="duo-foot">Steady at <strong>70–80M</strong> through 2025, then a jump. CVE alerts are up <strong>6x</strong> since February 2026.</p>
 </div>
 <div class="duo-panel">
-<p class="duo-cap">From vulnerability to exploitation</p>
-<p class="duo-sub">Mean gap between CVE public disclosure and first confirmed in-the-wild exploitation.</p>
+<p class="duo-cap">Time to exploitation</p>
+<p class="duo-sub">Mean time from CVE disclosure to first exploitation.</p>
 <div class="tte">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 292" role="img" aria-label="Mean time from CVE disclosure to first confirmed exploitation, 2018 to 2026">
 <line x1="52.0" y1="70.6" x2="574.0" y2="70.6" stroke="rgba(0,240,255,0.13)" stroke-width="1.2"/>
@@ -123,6 +136,29 @@ AI writes code faster than any review process was designed to absorb — and att
 </svg>
 </div>
 <p class="duo-foot">Based on 3,500+ confirmed-exploited CVEs (CISA KEV + VulnCheck KEV) · zerodayclock.com</p>
+</div>
+</div>
+
+## FIRST's four recommendations
+
+Total CVE volume is surging, but what is actually exploitable (CISA KEV, EPSS above 10%) has stayed flat. <a class="retro-link" href="https://www.first.org/newsroom/releases/20260615" target="_blank" rel="noopener noreferrer">FIRST ↗</a> recommends four things.
+
+<div class="imp2">
+<div class="imp2-col">
+<p class="imp2-k">💰 Budget for software growth</p>
+<p class="imp2-v">The workload comes from a more diverse software estate, not from any single CVE news cycle.</p>
+</div>
+<div class="imp2-col">
+<p class="imp2-k">🎯 Triage by exploitability</p>
+<p class="imp2-v">EPSS and CISA KEV remain the most effective tools to separate signal from noise at scale.</p>
+</div>
+<div class="imp2-col">
+<p class="imp2-k">🔧 Plan for double the patching work</p>
+<p class="imp2-v">Software maintainers should expect twice the work, while live-system patching stays roughly steady through 2026.</p>
+</div>
+<div class="imp2-col">
+<p class="imp2-k">🤖 Use defensive AI now</p>
+<p class="imp2-v">The same AI driving the CVE surge can find and fix vulnerabilities faster, cutting MTTR.</p>
 </div>
 </div>
 

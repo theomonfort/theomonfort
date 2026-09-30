@@ -62,12 +62,25 @@ links:
 
 ## なぜ今なのか
 
-AI はレビュープロセスが想定していた速度を超えてコードを書き、攻撃側も防御側と同じモデルを手にしている。逆方向に動く 2 つの曲線がそれを示す。
+<div class="surge-steps">
+<div class="surge-step is-alert">
+<p class="surge-k">CVE が史上最多</p>
+<p class="surge-v"><a class="retro-link" href="https://www.first.org/newsroom/releases/20260615" target="_blank" rel="noopener noreferrer">FIRST ↗</a> は 2026 年に約 <strong>66,000 件</strong>の CVE を予測。史上初めて 7 万件に迫るペースで、AI による脆弱性発見が大きな要因。</p>
+</div>
+<div class="surge-step is-alert">
+<p class="surge-k">GHSA 前年比 +449%</p>
+<p class="surge-v">GitHub はキュレーション体制を拡大し AI 支援も導入。無料公開の <a class="retro-link" href="https://github.com/advisories" target="_blank" rel="noopener noreferrer">Advisory Database ↗</a> が Dependabot アラートの元になる（左）。</p>
+</div>
+<div class="surge-step">
+<p class="surge-k">AI 対 AI のレース</p>
+<p class="surge-v">AI による exploit 生成と、AI によるパッチ生成の競争。悪用までの時間はすでに <strong>24 時間</strong>（右）。</p>
+</div>
+</div>
 
 <div class="duo-fig">
 <div class="duo-panel is-alert">
 <p class="duo-cap">Dependabot アラートが 4 倍超に</p>
-<p class="duo-sub">GitHub 全体で新規作成されたアラート数（四半期ごと）。</p>
+<p class="duo-sub">GitHub 全体の新規アラート数（四半期）。</p>
 <div class="qbars">
 <div class="qbar"><div class="qbar-fill" style="height:14.6%"><span class="qbar-val">52M</span></div><p class="qbar-lab">Q1 25</p></div>
 <div class="qbar"><div class="qbar-fill" style="height:19.7%"><span class="qbar-val">70M</span></div><p class="qbar-lab">Q2 25</p></div>
@@ -76,11 +89,11 @@ AI はレビュープロセスが想定していた速度を超えてコード�
 <div class="qbar is-peak"><div class="qbar-fill" style="height:100.0%"><span class="qbar-val">357M</span></div><p class="qbar-lab">Q1 26</p></div>
 <div class="qbar is-peak"><div class="qbar-fill" style="height:87.7%"><span class="qbar-val">313M</span></div><p class="qbar-lab">Q2 26</p></div>
 </div>
-<p class="duo-foot">2025 年は <strong>7,000〜8,000 万</strong>で安定していたが、そこから跳ね上がった。CVE アラートも 2026 年 2 月以降、全体で <strong>6 倍</strong>。</p>
+<p class="duo-foot">2025 年の <strong>7,000〜8,000 万</strong>から急増。CVE アラートも 2026 年 2 月以降、全体で <strong>6 倍</strong>。</p>
 </div>
 <div class="duo-panel">
 <p class="duo-cap">脆弱性から悪用までの時間</p>
-<p class="duo-sub">CVE の公開から、実環境での悪用が最初に確認されるまでの平均日数。</p>
+<p class="duo-sub">CVE 公開から初の実悪用までの平均日数。</p>
 <div class="tte">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 292" role="img" aria-label="Mean time from CVE disclosure to first confirmed exploitation, 2018 to 2026">
 <line x1="52.0" y1="70.6" x2="574.0" y2="70.6" stroke="rgba(0,240,255,0.13)" stroke-width="1.2"/>
@@ -123,6 +136,29 @@ AI はレビュープロセスが想定していた速度を超えてコード�
 </svg>
 </div>
 <p class="duo-foot">悪用が確認された 3,500 件超の CVE に基づく（CISA KEV + VulnCheck KEV）· zerodayclock.com</p>
+</div>
+</div>
+
+## FIRST の 4 つの提言
+
+CVE の総量は急増しても、実際に悪用されうるもの（CISA KEV、EPSS 10% 超）は横ばい。<a class="retro-link" href="https://www.first.org/newsroom/releases/20260615" target="_blank" rel="noopener noreferrer">FIRST ↗</a> の提言は 4 つ。
+
+<div class="imp2">
+<div class="imp2-col">
+<p class="imp2-k">💰 予算はソフトウェアの増加で語る</p>
+<p class="imp2-v">負荷を生んでいるのは CVE のニュースではなく、管理するソフトウェアの多様化。</p>
+</div>
+<div class="imp2-col">
+<p class="imp2-k">🎯 悪用可能性で絞り込む</p>
+<p class="imp2-v">EPSS と CISA KEV が、大量の CVE からシグナルを切り分ける最も有効なトリアージ手段。</p>
+</div>
+<div class="imp2-col">
+<p class="imp2-k">🔧 パッチ作業の倍増に備える</p>
+<p class="imp2-v">ソフトウェアを保守する側の作業は倍増する。一方、稼働中システムへのパッチ量は 2026 年末まで比較的安定。</p>
+</div>
+<div class="imp2-col">
+<p class="imp2-k">🤖 防御側の AI を今すぐ使う</p>
+<p class="imp2-v">CVE 急増を生んだのと同じ AI で脆弱性をより速く見つけて直し、MTTR を短縮する。</p>
 </div>
 </div>
 

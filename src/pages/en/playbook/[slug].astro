@@ -2162,6 +2162,40 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
   .prose-akq .duo-foot strong { color: rgba(232, 244, 255, 0.7); }
 
+  /* Three-step cause strip: one line of story per chart it explains */
+  .prose-akq .surge-steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+    margin: 0.2em 0 0;
+  }
+  @media (min-width: 900px) {
+    .prose-akq .surge-steps { grid-template-columns: repeat(3, 1fr); gap: 1.6rem; }
+  }
+  .prose-akq .surge-step {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+    border-left: 2px solid #00f0ff;
+    padding-left: 0.9em;
+  }
+  .prose-akq .surge-step.is-alert { border-left-color: #ff2e88; }
+  .prose-akq .surge-k {
+    margin: 0;
+    color: #00f0ff;
+    font-weight: 700;
+    font-size: 1.2em;
+    line-height: 1.2;
+  }
+  .prose-akq .surge-step.is-alert .surge-k { color: #ff7ab2; }
+  .prose-akq .surge-v {
+    margin: 0;
+    color: rgba(232, 244, 255, 0.82);
+    font-size: 0.8em;
+    line-height: 1.5;
+  }
+  .prose-akq .surge-v strong { color: #e8f4ff; }
+
   /* Quarterly column chart inside a duo-panel */
   .prose-akq .qbars {
     display: flex;
@@ -2212,12 +2246,13 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .prose-akq .tte { margin: 1.1em 0 0; }
   .prose-akq .tte svg { display: block; width: 100%; height: auto; }
 
-  body.present-mode .prose-akq .qbars { height: 200px; }
+  body.present-mode .prose-akq .qbars { height: 160px; }
   body.present-mode .prose-akq .duo-cap { font-size: 1.15em; }
   body.present-mode .prose-akq .duo-sub { font-size: 0.86em; }
   body.present-mode .prose-akq .duo-foot { font-size: 0.76em; }
   body.present-mode .prose-akq .qbar-val { font-size: 0.86em; }
   body.present-mode .prose-akq .qbar-lab { font-size: 0.8em; }
+  body.present-mode .prose-akq .surge-v { font-size: 0.66em; }
 
   /* Two-column statement layout */
   .prose-akq .imp2 {
