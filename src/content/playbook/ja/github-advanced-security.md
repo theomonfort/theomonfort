@@ -188,8 +188,6 @@ AI はレビュープロセスが想定していた速度を超えてコード�
 
 ## 何が入っている? <a class="h2-doc" href="https://docs.github.com/en/code-security/getting-started/github-security-features" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-機能名をクリックすると説明が開く。チップは無料かライセンス必要かを示す。
-
 <div class="trio-widget">
 <input class="trio-radio" type="radio" name="ghas-inside" id="gi-secret" checked />
 <input class="trio-radio" type="radio" name="ghas-inside" id="gi-code" />
