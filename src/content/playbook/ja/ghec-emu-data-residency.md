@@ -113,8 +113,8 @@ Enterprise の作成時に **ユーザーアカウントの種類** と **Data h
 </svg>
 </div>
 
-- ✅ 管理者が制御できるのは Enterprise 内だけ（例: Organization で public repo の作成を許可するか）
-- ⚠️ 社外 Organization への参加とそのポリシー、個人の public repo は **管理者の影響範囲外**
+- ✅ 管理者が制御できるのは Enterprise 内だけ（例: Organization で **public repo** の作成を許可するか）
+- ⚠️ **管理者の影響範囲外**: 社外 Organization とそのポリシー、個人 repo（public / private）、Gist、社外 repo への PR や Star
 
 ## EMU の全体像 <a class="h2-doc" href="https://docs.github.com/ja/enterprise-cloud@latest/admin/managing-iam/understanding-iam-for-enterprises/abilities-and-restrictions-of-managed-user-accounts" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
@@ -160,8 +160,8 @@ EMU のユーザーは Enterprise の **内側** に作られます。
 </svg>
 </div>
 
-- ✅ Enterprise 内の Organization には所属可能。個人 repo は **private のみ**（ポリシーで許可した場合）
-- ❌ Enterprise 外の Organization や他の Enterprise には所属不可。github.com の public repo は **閲覧のみ**
+- ✅ Enterprise 内の Organization には所属可能。個人 repo は **private のみ** で、ポリシーで許可または禁止
+- 🚫 public repo と Gist は作成不可、社外 Organization には所属不可。github.com の public repo は **閲覧のみ**（PR、Issue、Star 不可）
 
 ## EMU と SAML 連携の違い <a class="h2-doc" href="https://docs.github.com/ja/enterprise-cloud@latest/admin/concepts/identity-and-access-management/enterprise-managed-users" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
@@ -174,20 +174,6 @@ EMU のユーザーは Enterprise の **内側** に作られます。
 | 🔄 SCIM | 任意。Org へのアクセス管理のみ | **必須**。アカウントを作成、停止 |
 | 🚪 ログイン | GitHub の ID とパスワード + IdP | 最初から IdP でログイン |
 | 🏷️ ユーザー名 | 利用者が管理 | IdP が管理（`mona_octocorp`） |
-
-## 管理者の影響範囲
-
-個人アカウントは Enterprise の **外側** にも存在するため、管理者のポリシーが届かない領域が残ります。EMU ではアカウントごと Enterprise の **内側** に入ります。
-
-| 管理項目 | 個人アカウント | **EMU** |
-| --- | --- | --- |
-| 🏢 Enterprise 内の public repo | ✅ ポリシーで制御 | 🚫 作成不可 |
-| 🌍 社外 Org への参加とそのポリシー | ⚠️ 制御できない | 🚫 参加不可 |
-| 👤 個人の public repo | ⚠️ 制御できない | 🚫 作成不可 |
-| 🔒 個人の private repo | ⚠️ 制御できない | ✅ ポリシーで許可または禁止 |
-| 📝 Gist、社外 repo への PR や Star | ⚠️ 制御できない | 🚫 不可 |
-
-✅ 管理者が制御できる ⚠️ 管理者の影響範囲外 🚫 仕組みとして不可
 
 ## EMU の制約事項 <a class="h2-doc" href="https://docs.github.com/ja/enterprise-cloud@latest/admin/managing-iam/understanding-iam-for-enterprises/abilities-and-restrictions-of-managed-user-accounts" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 

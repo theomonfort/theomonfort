@@ -113,8 +113,8 @@ Personal accounts live **outside** the enterprise and join organizations by invi
 </svg>
 </div>
 
-- ✅ Admins only control what is inside the enterprise (e.g. whether orgs can create public repos)
-- ⚠️ Joining outside orgs, their policies, and personal public repos are **outside admin reach**
+- ✅ Admins control only what is inside the enterprise, e.g. whether orgs can create **public repos**
+- ⚠️ **Outside admin reach**: outside orgs and their policies, personal repos (public or private), gists, PRs and stars on outside repos
 
 ## EMU at a glance <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/admin/managing-iam/understanding-iam-for-enterprises/abilities-and-restrictions-of-managed-user-accounts" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
@@ -160,8 +160,8 @@ Managed users are created **inside** the enterprise.
 </svg>
 </div>
 
-- ✅ Can join any organization in the enterprise. Personal repos are **private only** (if policy allows)
-- ❌ Cannot join outside organizations or other enterprises. Public repos on github.com are **read-only**
+- ✅ Joins any org in the enterprise. Personal repos are **private only**, allowed or blocked by policy
+- 🚫 No public repos or gists, no outside orgs. Public repos on github.com are **read-only** (no PRs, issues, stars)
 
 ## EMU vs SAML-only <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/admin/concepts/identity-and-access-management/enterprise-managed-users" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
@@ -174,20 +174,6 @@ Personal accounts can still use SAML SSO. The difference is **who owns the accou
 | 🔄 SCIM | Optional, manages org access only | **Required**, creates and suspends the accounts |
 | 🚪 Sign-in | GitHub password, then IdP | IdP from the start |
 | 🏷️ Username | Managed by the user | Managed by the IdP (`mona_octocorp`) |
-
-## Admin reach
-
-Personal accounts also exist **outside** the enterprise, so some areas are beyond the admin's policies. With EMU, the account itself lives **inside** the enterprise.
-
-| What | Personal accounts | **EMU** |
-| --- | --- | --- |
-| 🏢 Public repos in the enterprise | ✅ By policy | 🚫 Blocked |
-| 🌍 Outside orgs and their policies | ⚠️ Out of reach | 🚫 Can't join |
-| 👤 Personal public repos | ⚠️ Out of reach | 🚫 Blocked |
-| 🔒 Personal private repos | ⚠️ Out of reach | ✅ Allow or block |
-| 📝 Gists, PRs or stars outside | ⚠️ Out of reach | 🚫 Blocked |
-
-✅ Admin can control ⚠️ Outside admin reach 🚫 Blocked by design
 
 ## EMU restrictions <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/admin/managing-iam/understanding-iam-for-enterprises/abilities-and-restrictions-of-managed-user-accounts" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
