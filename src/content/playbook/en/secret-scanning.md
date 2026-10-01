@@ -218,7 +218,7 @@ links:
 </li>
 <li>
 <p class="demo-step-title">CUSTOM PATTERN + DRY RUN</p>
-<p><code class="demo-path">Settings → Advanced Security → Custom patterns → New pattern</code></p>
+<p>Open <a href="https://github.com/theomonfort-org/ghas-test-1/settings/security_analysis/custom_patterns/new" target="_blank" rel="noopener noreferrer">ghas-test-1 → New pattern ↗</a> (<code class="demo-path">Settings → Advanced Security → Custom patterns → New pattern</code>).</p>
 <p>Matching secrets are already planted in the demo repo, so you only need to create the pattern:</p>
 <p><b>Pattern name</b> — <code class="demo-path">Octodemo internal service token</code></p>
 <p><b>Secret format</b> — <code class="demo-path">octodemo_(live|test)_[A-Za-z0-9]{32}</code></p>
