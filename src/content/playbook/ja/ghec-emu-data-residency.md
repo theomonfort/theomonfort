@@ -61,8 +61,8 @@ Enterprise の作成時に **ユーザーアカウントの種類** と **Data h
 | | 個人アカウント | **EMU** | **データレジデンシー** |
 | --- | --- | --- | --- |
 | 🌐 URL | github.com | github.com | `<subdomain>.ghe.com` |
-| 👤 アカウント | 利用者が自分で作成 | IdP から払い出し | IdP から払い出し（**EMU 必須**） |
-| 🔑 IdP 連携 | 任意（SAML） | 必須（SAML/OIDC + SCIM） | 必須（SAML/OIDC + SCIM） |
+| 👤 アカウント | 利用者が自分で作成 | IdP が **SCIM** で作成 | IdP が **SCIM** で作成 |
+| 🔐 認証 | GitHub のパスワード、任意で **SAML** SSO | **SAML** または **OIDC** の SSO（必須） | **SAML** または **OIDC** の SSO（必須） |
 | 📢 Public repo、Gist | ✅ | ❌ | ❌ |
 | 🤝 社外との協業 | ✅ | ❌（public は閲覧のみ） | ❌（GHE.com 内で完結） |
 | 🗾 データ保存先 | 米国 | 米国 | EU、豪州、米国、**日本** |
@@ -73,9 +73,9 @@ Enterprise の作成時に **ユーザーアカウントの種類** と **Data h
 
 | | 個人アカウント + SAML | **EMU** |
 | --- | --- | --- |
-| 👤 アカウント | 利用者が作成 | IdP が作成、変更、停止 |
-| 🔗 連携レベル | Enterprise または Org | **Enterprise のみ** |
-| 🔑 SCIM | 任意（Org 単位） | **認証と SCIM の両方が必須** |
+| 🔐 SSO プロトコル | **SAML** のみ | **SAML**、または **OIDC**（Entra ID のみ） |
+| 🔗 SSO の設定単位 | Enterprise または Org | **Enterprise のみ** |
+| 🔄 SCIM | 任意。Org へのアクセス管理のみ | **必須**。アカウントを作成、停止 |
 | 🚪 ログイン | GitHub の ID とパスワード + IdP | 最初から IdP でログイン |
 | 🏷️ ユーザー名 | 利用者が管理 | IdP が管理（`mona_octocorp`） |
 

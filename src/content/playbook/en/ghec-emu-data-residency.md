@@ -61,8 +61,8 @@ At creation you pick the **account type** and the **data hosting region**.
 | | Personal accounts | **EMU** | **Data residency** |
 | --- | --- | --- | --- |
 | 🌐 URL | github.com | github.com | `<subdomain>.ghe.com` |
-| 👤 Accounts | Self-created | From the IdP | From the IdP (**EMU**) |
-| 🔑 IdP | Optional (SAML) | SSO + SCIM | SSO + SCIM |
+| 👤 Accounts | By each user | By the IdP via **SCIM** | By the IdP via **SCIM** |
+| 🔐 Authentication | Password, optional **SAML** | **SAML** or **OIDC**, required | **SAML** or **OIDC**, required |
 | 📢 Public repos, gists | ✅ | ❌ | ❌ |
 | 🤝 Outside collaboration | ✅ | ❌ Read-only | ❌ GHE.com only |
 | 🗾 Data stored in | US | US | EU, AU, US, **Japan** |
@@ -73,9 +73,9 @@ Personal accounts can still use SAML SSO. The difference is **who owns the accou
 
 | | Personal accounts + SAML | **EMU** |
 | --- | --- | --- |
-| 👤 Accounts | Created by the user | Created, updated, suspended by the IdP |
-| 🔗 Integration level | Enterprise or org | **Enterprise only** |
-| 🔑 SCIM | Optional (per org) | **Auth and SCIM both required** |
+| 🔐 SSO protocol | **SAML** only | **SAML**, or **OIDC** (Entra ID only) |
+| 🔗 SSO scope | Enterprise or org | **Enterprise only** |
+| 🔄 SCIM | Optional, manages org access only | **Required**, creates and suspends the accounts |
 | 🚪 Sign-in | GitHub password, then IdP | IdP from the start |
 | 🏷️ Username | Managed by the user | Managed by the IdP (`mona_octocorp`) |
 
