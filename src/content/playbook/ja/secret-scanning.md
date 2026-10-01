@@ -137,6 +137,8 @@ links:
 <code class="demo-cmd">git push origin HEAD</code>
 <p><b>Security → Secret scanning</b> のクローズ済みアラートを開き、<b>誰が・どの理由で</b> bypass したかを見せる。</p>
 <p>bypass を野放しにしない設定：<code class="demo-path">Settings → Advanced Security → Push protection</code> で <b>Who can bypass push protection</b> を <b>Specific roles or teams</b> に（= Delegated bypass）。</p>
+<p>merge でも止める：<a href="https://github.com/theomonfort-org/ghas-test-1/settings/rules/new?target=branch&amp;enforcement=disabled" target="_blank" rel="noopener noreferrer">ghas-test-1 → New branch ruleset ↗</a> で <b>Require secret scanning alerts are resolved</b>（Preview）を ON にする。</p>
+<p class="demo-out"><b>I'll fix it later</b> で bypass した secret は open アラートのまま残るので、PR の merge がブロックされる。<b>It's used in tests</b> はクローズ済みアラートになるため止まらない。</p>
 </li>
 <li>
 <p class="demo-step-title">VALIDITY CHECK</p>

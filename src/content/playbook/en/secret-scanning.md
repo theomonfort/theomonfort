@@ -137,6 +137,8 @@ links:
 <code class="demo-cmd">git push origin HEAD</code>
 <p>Open the closed alert under <b>Security → Secret scanning</b> and show <b>who</b> bypassed it and <b>why</b>.</p>
 <p>To keep bypasses under control: <code class="demo-path">Settings → Advanced Security → Push protection</code>, set <b>Who can bypass push protection</b> to <b>Specific roles or teams</b> (= Delegated bypass).</p>
+<p>Gate the merge too: in <a href="https://github.com/theomonfort-org/ghas-test-1/settings/rules/new?target=branch&amp;enforcement=disabled" target="_blank" rel="noopener noreferrer">ghas-test-1 → New branch ruleset ↗</a>, turn on <b>Require secret scanning alerts are resolved</b> (Preview).</p>
+<p class="demo-out">A secret bypassed with <b>I'll fix it later</b> stays an open alert, so the PR merge is blocked. <b>It's used in tests</b> creates a closed alert, so it doesn't block.</p>
 </li>
 <li>
 <p class="demo-step-title">VALIDITY CHECK</p>
