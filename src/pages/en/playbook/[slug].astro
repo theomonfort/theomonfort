@@ -2396,10 +2396,13 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     background: rgba(0, 240, 255, 0.08);
     box-shadow: 0 0 12px rgba(0, 240, 255, 0.18);
   }
-  .prose-akq .trio-panel { display: none; }
+  /* Panels share one grid cell so the area keeps the tallest panel's height and the slide does not jump between tabs. */
+  .prose-akq .trio-panels { display: grid; grid-template-columns: minmax(0, 1fr); }
+  .prose-akq .trio-panel { grid-area: 1 / 1; align-self: start; min-width: 0; visibility: hidden; }
+  /* inherit (not visible) so present mode's slide-preparing visibility:hidden still applies. */
   .prose-akq .trio-radio:nth-of-type(1):checked ~ .trio-panels > .trio-panel:nth-child(1),
   .prose-akq .trio-radio:nth-of-type(2):checked ~ .trio-panels > .trio-panel:nth-child(2),
-  .prose-akq .trio-radio:nth-of-type(3):checked ~ .trio-panels > .trio-panel:nth-child(3) { display: block; }
+  .prose-akq .trio-radio:nth-of-type(3):checked ~ .trio-panels > .trio-panel:nth-child(3) { visibility: inherit; z-index: 1; }
   .prose-akq .trio-row {
     border-bottom: 1px dashed rgba(0, 240, 255, 0.14);
   }
@@ -2426,7 +2429,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     .prose-akq .trio-toggle { grid-column: 2; grid-row: 1 / span 2; }
   }
   .prose-akq .trio-row:last-of-type { border-bottom: 0; }
-  .prose-akq .trio-k { margin: 0; color: #e8f4ff; font-weight: 700; font-size: 0.97em; line-height: 1.4; }
+  .prose-akq .trio-k { margin: 0; color: #e8f4ff; font-weight: 400; font-size: 0.97em; line-height: 1.4; }
   .prose-akq .trio-v { margin: 0; padding: 0.1em 0.45em 0.7em; color: rgba(232, 244, 255, 0.82); font-size: 0.92em; line-height: 1.5; }
   .prose-akq .trio-chip {
     display: inline-block;
