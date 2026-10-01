@@ -262,14 +262,14 @@ links:
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI-detected secrets</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">AI-detected secrets</span></p>
-<p class="det-why">パスワードなどの<b>非構造化 secret</b> を AI で検出。正規表現では届かない領域をカバーする。<b>Push protection</b> は別トグルで <b>private preview</b>(招待された組織のみ)。<b>Validity check は非対応</b>なので、アラートとしてトリアージする。</p>
+<p class="det-why">パスワードなどの<b>非構造化 secret</b> を AI で検出。正規表現では届かない領域をカバーする。<b>Push protection</b> は別トグルで <b>private preview</b>(招待された組織のみ)。<b>Validity check は非対応</b>なので、アラートとしてトリアージする。<br>🔎 アラートは <b>Generic</b> タブに表示。</p>
 </div>
 </details>
 <details class="det-pick" name="ss-detect">
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🛠️</span><span class="det-name">Custom patterns</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🛠️</span><span class="det-title">Custom patterns</span></p>
-<p class="det-why"><b>自社独自のトークン形式</b>に正規表現を定義。社内サービスのトークンやレガシーな認証情報など、パートナーが登録しないものを拾う。</p>
+<p class="det-why"><b>自社独自のトークン形式</b>に正規表現を定義。社内サービスのトークンやレガシーな認証情報など、パートナーが登録しないものを拾う。<br>🔎 <b>Default</b> 一覧に表示。<b>Secret type</b> フィルターで絞り込む。</p>
 <p class="det-doc"><a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/using-advanced-secret-scanning-and-push-protection-features/custom-patterns/defining-custom-patterns-for-secret-scanning" target="_blank" rel="noopener noreferrer">📘 Defining custom patterns ↗</a></p>
 </div>
 </details>
