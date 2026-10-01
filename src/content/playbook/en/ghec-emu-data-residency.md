@@ -67,6 +67,53 @@ At creation you pick the **account type** and the **data hosting region**.
 | 🤝 Outside collaboration | ✅ | ❌ Read-only | ❌ GHE.com only |
 | 🗾 Data stored in | US | US | EU, AU, US, **Japan** |
 
+## EMU at a glance <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/admin/managing-iam/understanding-iam-for-enterprises/abilities-and-restrictions-of-managed-user-accounts" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+Managed users are created **inside** the enterprise.
+
+<div class="emu-map" style="margin:0.4rem auto 0.2rem;">
+<svg viewBox="0 0 1000 392" role="img" aria-label="EMU structure. Inside github.com, the managed user belongs to the Enterprise and can join its organizations, but cannot join organizations outside the Enterprise." style="width:100%;height:auto;display:block;font-family:inherit;">
+<defs>
+<marker id="emu-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#00f0ff"/></marker>
+<marker id="emu-ng" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ff2e88"/></marker>
+</defs>
+<rect x="6" y="26" width="988" height="358" rx="14" fill="rgba(5,6,15,0.55)" stroke="#e8f4ff" stroke-width="2.5"/>
+<rect x="400" y="8" width="200" height="38" rx="6" fill="#05060f" stroke="#e8f4ff" stroke-width="2"/>
+<text x="500" y="35" text-anchor="middle" font-size="24" fill="#e8f4ff">github.com</text>
+<rect x="30" y="78" width="704" height="284" rx="12" fill="rgba(155,188,15,0.07)" stroke="#9bbc0f" stroke-width="3"/>
+<rect x="48" y="62" width="150" height="32" rx="6" fill="#05060f" stroke="#9bbc0f" stroke-width="2"/>
+<text x="123" y="85" text-anchor="middle" font-size="20" fill="#9bbc0f">Enterprise</text>
+<path d="M572 158 V122 H366 V156" stroke="#00f0ff" stroke-width="3" fill="none" marker-end="url(#emu-ok)"/>
+<path d="M366 122 H142 V156" stroke="#00f0ff" stroke-width="3" fill="none" marker-end="url(#emu-ok)"/>
+<text x="466" y="112" text-anchor="middle" font-size="20" fill="#00f0ff">✅ Can join</text>
+<text x="62" y="182" font-size="21" fill="#e8f4ff">📁 Organization</text>
+<path d="M82 196 V322 M82 236 H104 M82 322 H104" stroke="#7a8aa8" stroke-width="2" fill="none"/>
+<text x="110" y="243" font-size="19" fill="#c9d6ea">🗄️ repo</text>
+<text x="162" y="290" font-size="20" fill="#7a8aa8">⋮</text>
+<text x="110" y="329" font-size="19" fill="#c9d6ea">🗄️ repo</text>
+<text x="286" y="182" font-size="21" fill="#e8f4ff">📁 Organization</text>
+<path d="M306 196 V322 M306 236 H328 M306 322 H328" stroke="#7a8aa8" stroke-width="2" fill="none"/>
+<text x="334" y="243" font-size="19" fill="#c9d6ea">🗄️ repo</text>
+<text x="386" y="290" font-size="20" fill="#7a8aa8">⋮</text>
+<text x="334" y="329" font-size="19" fill="#c9d6ea">🗄️ repo</text>
+<text x="522" y="182" font-size="21" fill="#ffb000">👤 User</text>
+<path d="M542 196 V236 H562" stroke="#7a8aa8" stroke-width="2" fill="none"/>
+<text x="568" y="243" font-size="18" fill="#c9d6ea">🔒 private repo</text>
+<path d="M608 176 H762" stroke="#ff2e88" stroke-width="3" stroke-dasharray="7 6" fill="none" marker-end="url(#emu-ng)"/>
+<circle cx="734" cy="176" r="15" fill="#05060f" stroke="#ff2e88" stroke-width="2"/>
+<text x="734" y="183" text-anchor="middle" font-size="18" fill="#ff2e88">✕</text>
+<text x="866" y="120" text-anchor="middle" font-size="19" fill="#ff2e88">❌ Can't join outside</text>
+<text x="768" y="182" font-size="21" fill="#e8f4ff">📁 Organization</text>
+<path d="M788 196 V322 M788 236 H810 M788 322 H810" stroke="#7a8aa8" stroke-width="2" fill="none"/>
+<text x="816" y="243" font-size="19" fill="#c9d6ea">🗄️ repo</text>
+<text x="868" y="290" font-size="20" fill="#7a8aa8">⋮</text>
+<text x="816" y="329" font-size="19" fill="#c9d6ea">🗄️ repo</text>
+</svg>
+</div>
+
+- ✅ Can join any organization in the enterprise. Personal repos are **private only** (if policy allows)
+- ❌ Cannot join outside organizations or other enterprises. Public repos on github.com are **read-only**
+
 ## EMU vs SAML-only <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/admin/concepts/identity-and-access-management/enterprise-managed-users" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 Personal accounts can still use SAML SSO. The difference is **who owns the account** and **how people sign in**.
