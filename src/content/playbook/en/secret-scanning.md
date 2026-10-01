@@ -218,7 +218,7 @@ links:
 </li>
 <li>
 <p class="demo-step-title">CUSTOM PATTERN + DRY RUN</p>
-<p><code class="demo-path">Settings → Advanced Security → Custom patterns → New pattern</code></p>
+<p>Open <a href="https://github.com/theomonfort-org/ghas-test-1/settings/security_analysis/custom_patterns/new" target="_blank" rel="noopener noreferrer">ghas-test-1 → New pattern ↗</a> (<code class="demo-path">Settings → Advanced Security → Custom patterns → New pattern</code>).</p>
 <p>Matching secrets are already planted in the demo repo, so you only need to create the pattern:</p>
 <p><b>Pattern name</b> — <code class="demo-path">Octodemo internal service token</code></p>
 <p><b>Secret format</b> — <code class="demo-path">octodemo_(live|test)_[A-Za-z0-9]{32}</code></p>
@@ -262,14 +262,14 @@ links:
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI-detected secrets</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">AI-detected secrets</span></p>
-<p class="det-why">Uses AI to detect <b>unstructured secrets</b> such as passwords, covering the ground no regex can reach. <b>Push protection</b> is a separate toggle in <b>private preview</b> (invited orgs only). <b>No validity checks</b>, so triage these as alerts.</p>
+<p class="det-why">Uses AI to detect <b>unstructured secrets</b> such as passwords, covering the ground no regex can reach. <b>Push protection</b> is a separate toggle in <b>private preview</b> (invited orgs only). <b>No validity checks</b>, so triage these as alerts.<br>🔎 Alerts show up in the <b>Generic</b> tab.</p>
 </div>
 </details>
 <details class="det-pick" name="ss-detect">
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🛠️</span><span class="det-name">Custom patterns</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🛠️</span><span class="det-title">Custom patterns</span></p>
-<p class="det-why">Define regexes for <b>your own token formats</b>: internal service tokens, legacy credentials, anything a partner will never register.</p>
+<p class="det-why">Define regexes for <b>your own token formats</b>: internal service tokens, legacy credentials, anything a partner will never register.<br>🔎 Listed under <b>Default</b>; filter by <b>Secret type</b>.</p>
 <p class="det-doc"><a class="retro-link" href="https://docs.github.com/en/code-security/secret-scanning/using-advanced-secret-scanning-and-push-protection-features/custom-patterns/defining-custom-patterns-for-secret-scanning" target="_blank" rel="noopener noreferrer">📘 Defining custom patterns ↗</a></p>
 </div>
 </details>
