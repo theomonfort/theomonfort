@@ -12,7 +12,7 @@ accent:
   hex: "#ff2e88"
 order: 29.2
 category: administration
-related: ['enterprise-setup', 'governance', 'license-management']
+related: ['enterprise-setup', 'migrations', 'governance', 'license-management']
 links:
   - group: 📖 Enterprise Managed Users
     label: About Enterprise Managed Users
