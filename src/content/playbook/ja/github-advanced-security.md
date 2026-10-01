@@ -65,7 +65,7 @@ links:
 <div class="demo-panel is-info">
 <label class="demo-scrim" for="info-ghas-first" aria-label="情報を閉じる"></label>
 <div class="demo-window" role="group" aria-label="FIRST とは">
-<div class="demo-head"><span class="demo-tag">INFO</span><span class="demo-name">FIRST（ファースト）とは？</span><label class="demo-close" for="info-ghas-first" aria-label="閉じる">&#10005;</label></div>
+<div class="demo-head"><span class="demo-tag">INFO</span><span class="demo-name">FIRST（Forum of Incident Response and Security Teams）とは？</span><label class="demo-close" for="info-ghas-first" aria-label="閉じる">&#10005;</label></div>
 <div class="info-body">
 <p class="info-lead">世界中のサイバーセキュリティ専門チームが集まる、国際的なネットワーク組織。</p>
 <p>1990 年に設立。世界 110 カ国以上、850 を超える企業、政府機関、大学などのセキュリティチームが加盟している。</p>

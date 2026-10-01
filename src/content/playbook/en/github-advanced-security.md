@@ -65,7 +65,7 @@ links:
 <div class="demo-panel is-info">
 <label class="demo-scrim" for="info-ghas-first" aria-label="Close info"></label>
 <div class="demo-window" role="group" aria-label="What is FIRST">
-<div class="demo-head"><span class="demo-tag">INFO</span><span class="demo-name">What is FIRST?</span><label class="demo-close" for="info-ghas-first" aria-label="Close">&#10005;</label></div>
+<div class="demo-head"><span class="demo-tag">INFO</span><span class="demo-name">What is FIRST (Forum of Incident Response and Security Teams)?</span><label class="demo-close" for="info-ghas-first" aria-label="Close">&#10005;</label></div>
 <div class="info-body">
 <p class="info-lead">A global network that brings together cybersecurity teams from around the world.</p>
 <p>Founded in 1990. Security teams from more than 850 companies, government bodies, universities and other institutions across 110+ countries are members.</p>
