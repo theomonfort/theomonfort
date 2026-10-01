@@ -159,7 +159,7 @@ links:
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛡️</span><span class="ctl-name">Push protection</span><span class="ctl-when"><code>git push</code> の直前</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/push-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">secret を含む push を<b>その場で拒否</b>。bypass は可能だが理由の記録が残る</span></p>
-<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">これから入る変更のみ。<b>AI 検出パスワードは対象外</b>(ノイズが多くブロックできない)</span></p>
+<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">これから入る変更のみ。<b>AI-detected secrets</b> は別トグルで opt-in、<b>private preview</b>(招待された組織のみ)</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
@@ -262,7 +262,7 @@ links:
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI-detected secrets</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">AI-detected secrets</span></p>
-<p class="det-why">パスワードなどの<b>非構造化 secret</b> を AI で検出。正規表現では届かない領域をカバーする。どう設定しても <b>push protection も validity check も非対応</b>で、アラートとしてトリアージする。</p>
+<p class="det-why">パスワードなどの<b>非構造化 secret</b> を AI で検出。正規表現では届かない領域をカバーする。<b>Push protection</b> は別トグルで <b>private preview</b>(招待された組織のみ)。<b>Validity check は非対応</b>なので、アラートとしてトリアージする。</p>
 </div>
 </details>
 <details class="det-pick" name="ss-detect">
