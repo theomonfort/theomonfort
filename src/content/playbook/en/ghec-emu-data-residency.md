@@ -67,6 +67,55 @@ At creation you pick the **account type** and the **data hosting region**.
 | 🤝 Outside collaboration | ✅ | ❌ Read-only | ❌ GHE.com only |
 | 🗾 Data stored in | US | US | EU, AU, US, **Japan** |
 
+## Personal accounts at a glance <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/admin/concepts/enterprise-fundamentals/choose-an-enterprise-type" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+Personal accounts live **outside** the enterprise and join organizations by invitation.
+
+<div class="pa-map" style="margin:0.4rem auto 0.2rem;">
+<svg viewBox="0 0 1000 392" role="img" aria-label="Personal accounts structure. Inside github.com the user lives outside the Enterprise and can join both its organizations and outside organizations. Outside organizations and personal repositories are beyond the admin's reach." style="width:100%;height:auto;display:block;font-family:inherit;">
+<defs>
+<marker id="pa-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#00f0ff"/></marker>
+<marker id="pa-warn" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffb000"/></marker>
+</defs>
+<rect x="6" y="26" width="988" height="358" rx="14" fill="rgba(5,6,15,0.55)" stroke="#e8f4ff" stroke-width="2.5"/>
+<rect x="400" y="8" width="200" height="38" rx="6" fill="#05060f" stroke="#e8f4ff" stroke-width="2"/>
+<text x="500" y="35" text-anchor="middle" font-size="24" fill="#e8f4ff">github.com</text>
+<rect x="30" y="78" width="498" height="284" rx="12" fill="rgba(155,188,15,0.07)" stroke="#9bbc0f" stroke-width="3"/>
+<rect x="48" y="62" width="150" height="32" rx="6" fill="#05060f" stroke="#9bbc0f" stroke-width="2"/>
+<text x="123" y="85" text-anchor="middle" font-size="20" fill="#9bbc0f">Enterprise</text>
+<rect x="548" y="78" width="436" height="284" rx="12" fill="rgba(255,176,0,0.05)" stroke="#ffb000" stroke-width="2" stroke-dasharray="8 6"/>
+<rect x="748" y="62" width="222" height="32" rx="6" fill="#05060f" stroke="#ffb000" stroke-width="2"/>
+<text x="859" y="85" text-anchor="middle" font-size="18" fill="#ffb000">⚠️ Outside admin reach</text>
+<path d="M614 158 V122 H370 V156" stroke="#00f0ff" stroke-width="3" fill="none" marker-end="url(#pa-ok)"/>
+<path d="M370 122 H138 V156" stroke="#00f0ff" stroke-width="3" fill="none" marker-end="url(#pa-ok)"/>
+<text x="380" y="112" text-anchor="middle" font-size="20" fill="#00f0ff">✅ Can join (invited)</text>
+<text x="58" y="182" font-size="21" fill="#e8f4ff">📁 Organization</text>
+<path d="M78 196 V322 M78 236 H100 M78 322 H100" stroke="#7a8aa8" stroke-width="2" fill="none"/>
+<text x="106" y="243" font-size="19" fill="#c9d6ea">🗄️ repo</text>
+<text x="158" y="290" font-size="20" fill="#7a8aa8">⋮</text>
+<text x="106" y="329" font-size="19" fill="#c9d6ea">🗄️ repo</text>
+<text x="290" y="182" font-size="21" fill="#e8f4ff">📁 Organization</text>
+<path d="M310 196 V322 M310 236 H332 M310 322 H332" stroke="#7a8aa8" stroke-width="2" fill="none"/>
+<text x="338" y="243" font-size="19" fill="#c9d6ea">🗄️ repo</text>
+<text x="390" y="290" font-size="20" fill="#7a8aa8">⋮</text>
+<text x="338" y="329" font-size="19" fill="#c9d6ea">🗄️ repo</text>
+<text x="572" y="182" font-size="21" fill="#ffb000">👤 User</text>
+<path d="M592 196 V286 M592 236 H614 M592 286 H614" stroke="#7a8aa8" stroke-width="2" fill="none"/>
+<text x="620" y="243" font-size="18" fill="#c9d6ea">🌐 public repo</text>
+<text x="620" y="293" font-size="18" fill="#c9d6ea">🔒 private repo</text>
+<path d="M652 176 H794" stroke="#ffb000" stroke-width="3" fill="none" marker-end="url(#pa-warn)"/>
+<text x="723" y="164" text-anchor="middle" font-size="16" fill="#ffb000">Can join</text>
+<text x="800" y="182" font-size="21" fill="#e8f4ff">📁 Organization</text>
+<path d="M820 196 V322 M820 236 H842 M820 322 H842" stroke="#7a8aa8" stroke-width="2" fill="none"/>
+<text x="848" y="243" font-size="19" fill="#c9d6ea">🗄️ repo</text>
+<text x="900" y="290" font-size="20" fill="#7a8aa8">⋮</text>
+<text x="848" y="329" font-size="19" fill="#c9d6ea">🗄️ repo</text>
+</svg>
+</div>
+
+- ✅ Admins only control what is inside the enterprise (e.g. whether orgs can create public repos)
+- ⚠️ Joining outside orgs, their policies, and personal public repos are **outside admin reach**
+
 ## EMU at a glance <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/admin/managing-iam/understanding-iam-for-enterprises/abilities-and-restrictions-of-managed-user-accounts" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 Managed users are created **inside** the enterprise.
