@@ -3987,6 +3987,36 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     .prose-akq .ctl-item::details-content { transition: none; }
     .prose-akq .ctl-toggle { transition: none; }
   }
+  /* Matrix fold: a control row that opens onto a compact comparison
+     table (cases as columns, one aspect per row), so a wide matrix only
+     spends slide space on the aspect being discussed. */
+  .prose-akq .ctl-body:has(> table) { padding: 0.5em 0.2em 0.6em; overflow-x: auto; }
+  .prose-akq .ctl-body > table {
+    margin: 0;
+    table-layout: fixed;
+    font-size: 0.8em;
+    border-width: 1px;
+    box-shadow: none;
+  }
+  .prose-akq .ctl-body > table th,
+  .prose-akq .ctl-body > table td {
+    padding: 0.4em 0.6em;
+    line-height: 1.45;
+    white-space: normal;
+  }
+  .prose-akq .ctl-body > table th:first-child { width: 11%; }
+  .prose-akq .ctl-body > table td:first-child { color: var(--entry-accent, #00f0ff); }
+  body.present-mode .prose-akq .ctl-widget:has(.ctl-body > table) .ctl-btn {
+    font-size: 0.82em;
+    padding-top: 0.12em;
+    padding-bottom: 0.12em;
+  }
+  body.present-mode .prose-akq .ctl-body > table { font-size: 0.62em; }
+  body.present-mode .prose-akq .ctl-body > table th,
+  body.present-mode .prose-akq .ctl-body > table td { padding: 0.3em 0.55em; line-height: 1.35; }
+  @media (max-width: 640px) {
+    .prose-akq .ctl-body > table { min-width: 38rem; }
+  }
 
   /* ─────────────────────────────────────────────────────────────
      Detection split deck — pick on the left, read on the right

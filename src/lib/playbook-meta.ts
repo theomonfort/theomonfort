@@ -16,6 +16,7 @@ export const NEW_PLAYBOOK_SLUGS = new Set([
   'vscode-agents-window',
   'copilot-code-review',
   'code-scanning',
+  'migrations',
 ]);
 
 export function isNewPlaybookEntry(slug: string): boolean {
@@ -41,6 +42,7 @@ export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'agent-skills': [5, 6],
   'copilot-code-review': [7],
   'code-scanning': [8],
+  'migrations': [3],
 };
 
 export function navHintSlides(slug: string): number[] {
