@@ -159,7 +159,7 @@ links:
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛡️</span><span class="ctl-name">Push protection</span><span class="ctl-when">Right before <code>git push</code></span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/push-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v"><b>Rejects the push on the spot</b> when it contains a secret. Bypass is possible, but the reason is recorded</span></p>
-<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Incoming changes only. <b>AI-detected passwords are not covered</b> (too noisy to block)</span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Incoming changes only. <b>AI-detected secrets</b>: separate opt-in toggle, <b>private preview</b> (invited orgs only)</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
@@ -262,7 +262,7 @@ links:
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI-detected secrets</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">AI-detected secrets</span></p>
-<p class="det-why">Uses AI to detect <b>unstructured secrets</b> such as passwords, covering the ground no regex can reach. Supports <b>neither push protection nor validity checks</b>, at any setting — triage these as alerts.</p>
+<p class="det-why">Uses AI to detect <b>unstructured secrets</b> such as passwords, covering the ground no regex can reach. <b>Push protection</b> is a separate toggle in <b>private preview</b> (invited orgs only). <b>No validity checks</b>, so triage these as alerts.</p>
 </div>
 </details>
 <details class="det-pick" name="ss-detect">
