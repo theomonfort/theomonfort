@@ -248,7 +248,7 @@ The whole language is that shape: **`where` is the definition of "what the bug l
 
 > 🌐 **Supported languages** — C/C++, C#, Go, Java/Kotlin, JavaScript/TypeScript, Python, Ruby, Rust, Swift, GitHub Actions. A repo with no CodeQL-supported language **runs no scans and burns no Actions minutes**.
 
-## Default setup vs Advanced setup <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configuring-advanced-setup-for-code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-codeql-setup" class="demo-toggle" /><label class="h2-demo" for="demo-codeql-setup">&#9658; DEMO</label>
+## Main capabilities <input type="checkbox" id="demo-codeql-setup" class="demo-toggle" /><label class="h2-demo" for="demo-codeql-setup">&#9658; DEMO</label>
 
 <div class="demo-panel">
 <label class="demo-scrim" for="demo-codeql-setup" aria-label="Close demo steps"></label>
@@ -276,44 +276,72 @@ The whole language is that shape: **`where` is the definition of "what the bug l
 </div>
 </div>
 
-There are two ways to enable CodeQL. **Default setup is enough to start.**
+**Start with Default setup**, customize it with repository properties, and reach for Advanced only when you need your own build.
 
-<div class="det-widget det-compact">
-<p class="det-hint">▸ CLICK TO COMPARE</p>
-<div class="det-split">
-<div class="det-list">
-<details class="det-pick" name="cs-setup">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🟢</span><span class="det-name">Default setup</span></summary>
-<div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🟢</span><span class="det-title">Default setup — one click</span></p>
-<p class="det-why"><b>No config file.</b> GitHub detects languages, picks the <code>default</code> suite, and wires push / PR / weekly triggers. Most languages need <b>no build step</b>, and one settings screen turns it on org-wide — the only realistic option at scale.</p>
-<p class="det-doc">Best for: <b>99% of repos, and any rollout at scale</b></p>
+<div class="ctl-widget">
+<p class="ctl-hint">▸ CLICK + FOR DETAILS</p>
+<div class="ctl-list">
+<details class="ctl-item" name="cs-capabilities">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🟢</span><span class="ctl-name">Default setup</span><span class="ctl-when">One click, org-wide</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/setup-types" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v"><b>No workflow file.</b> Detects CodeQL languages, and adds new ones automatically as they appear</span></p>
+<p class="ctl-row"><span class="ctl-k">When it runs</span><span class="ctl-v">Pushes to the default or a <b>protected branch</b>, PRs targeting them, and a <b>weekly schedule</b></span></p>
+<p class="ctl-row"><span class="ctl-k">Rollout</span><span class="ctl-v">Apply a <b>security configuration</b> to every repo in the org at once</span></p>
 </div>
 </details>
-<details class="det-pick" name="cs-setup">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🛠️</span><span class="det-name">Advanced setup</span></summary>
-<div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🛠️</span><span class="det-title">Advanced setup — your own workflow</span></p>
-<p class="det-why">You own <code>.github/workflows/codeql.yml</code>: languages, triggers, your own build command, any query suite (<code>security-extended</code>, custom packs). The price is a workflow file per repo to maintain.</p>
-<p class="det-doc">Best for: <b>monorepos, custom builds, custom queries</b></p>
+<details class="ctl-item" name="cs-capabilities">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🧩</span><span class="ctl-name">Custom queries</span><span class="ctl-when">Default setup + repo property</span><a class="ctl-doc" href="https://github.blog/changelog/2026-08-04-customize-code-scanning-default-setup-at-scale/" target="_blank" rel="noopener noreferrer">Changelog</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">Add your own queries (e.g. <b>coding standards</b>, in-house rules) <b>without switching to Advanced</b></span></p>
+<p class="ctl-row"><span class="ctl-k">How</span><span class="ctl-v"><code>github-codeql-config-file</code> merges a <b>central config file</b> (queries, paths, threat models). <code>github-codeql-extra-queries</code> only adds queries</span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Set an <b>org-wide default</b>; org owners decide whether repos may override it. GA</span></p>
 </div>
 </details>
-<details class="det-pick" name="cs-setup">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">💰</span><span class="det-name">Billing difference</span></summary>
-<div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">💰</span><span class="det-title">There is none</span></p>
-<p class="det-why">Both run as <b>Actions workflows</b> and burn minutes on private repos at the same rate, so neither choice saves money. What moves the bill is <b>scan frequency, repo size and runner type</b>.</p>
-<p class="det-doc">See the pricing slide for the three meters</p>
+<details class="ctl-item" name="cs-capabilities">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛠️</span><span class="ctl-name">Advanced setup</span><span class="ctl-when">Your own workflow</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configuring-advanced-setup-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">You own <code>.github/workflows/codeql.yml</code>: <b>your own build</b> for compiled languages, matrix builds, triggers and schedule</span></p>
+<p class="ctl-row"><span class="ctl-k">Outside Actions</span><span class="ctl-v">Run the <b>CodeQL CLI</b> in another CI, or upload third-party results as <b>SARIF</b></span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-capabilities">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🚧</span><span class="ctl-name">Merge protection</span><span class="ctl-when">Before PR merge</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/merge-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">On the PR</span><span class="ctl-v">New alerts show up as annotations in <b>Files changed</b>, posted by <code>github-advanced-security[bot]</code></span></p>
+<p class="ctl-row"><span class="ctl-k">Merge gate</span><span class="ctl-v">Ruleset <b>Require code scanning results</b> blocks the merge on alerts of a chosen severity, or while the required tool has not finished</span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Repo or Org (Enterprise plans). Without a ruleset, code scanning <b>never blocks a merge</b></span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-capabilities">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🤖</span><span class="ctl-name">AI findings</span><span class="ctl-when">PRs only, public preview</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">AI flags risks in what CodeQL does not cover: <b>PHP, Shell, Terraform, Dockerfile</b></span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v"><b>PRs only</b>: no full-repo scan, no backlog alerts, not a merge gate. Opt-in, requires <b>CodeQL default setup</b></span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-capabilities">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔧</span><span class="ctl-name">Copilot Autofix</span><span class="ctl-when">On the alert or PR</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">Suggests a patch from the alert, the surrounding code and CodeQL's <b>data-flow path</b></span></p>
+<p class="ctl-row"><span class="ctl-k">Where</span><span class="ctl-v">Inline on PRs; <b>Generate fix</b> on backlog alerts. You review and apply it</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-capabilities">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🎯</span><span class="ctl-name">Agentic Autofix</span><span class="ctl-when">1–25 backlog alerts</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v"><b>Assign to Copilot</b>: the cloud agent explores the repo, fixes, validates, then opens a <b>draft PR</b></span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">One alert, or 1–25 from a backlog or campaign. Public preview</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-capabilities">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🗺️</span><span class="ctl-name">Security campaigns</span><span class="ctl-when">Remediation at scale</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/securing-your-organization/fixing-security-alerts-at-scale/about-security-campaigns" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">A <b>time-boxed</b> set of alerts (up to 1000) with a campaign manager and a due date</span></p>
+<p class="ctl-row"><span class="ctl-k">Flow</span><span class="ctl-v">Shows up in each repo's Security tab; developers fix with Autofix or Copilot</span></p>
 </div>
 </details>
 </div>
-<div class="det-screen" style="min-height:14em"><p class="det-empty">SELECT AN OPTION ▸</p></div>
 </div>
-</div>
-
-> 🔑 Unless you have a monorepo, special build requirements, or need custom queries, **start with Default setup** — you can switch to Advanced later without losing history.
-
-📘 Details: <a class="retro-link" href="https://docs.github.com/en/code-security/code-scanning/enabling-code-scanning/configuring-default-setup-for-code-scanning" target="_blank" rel="noopener noreferrer">Configuring default setup ↗</a>
 
 ## Copilot Autofix: suggested fixes <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
@@ -534,7 +562,7 @@ Results appear in the **Security tab** and the PR's **Files changed** tab. Start
 
 ## Advanced setup and SARIF
 
-When Default is not enough (monorepo, unusual build, custom queries, another SAST tool), write the workflow yourself.
+When Default is not enough (monorepo, unusual build, another SAST tool), write the workflow yourself.
 
 ```yaml
 # .github/workflows/codeql.yml

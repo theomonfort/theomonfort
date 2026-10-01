@@ -248,7 +248,7 @@ select ifstmt, "This if-statement is redundant."  // ④ 何をどう報告す�
 
 > 🌐 **対応言語** — C/C++、C#、Go、Java/Kotlin、JavaScript/TypeScript、Python、Ruby、Rust、Swift、GitHub Actions。CodeQL 対応言語が 1 つもない repo は **スキャンが走らない = Actions 分も消費しない**。
 
-## Default setup と Advanced setup の違い <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configuring-advanced-setup-for-code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-codeql-setup" class="demo-toggle" /><label class="h2-demo" for="demo-codeql-setup">&#9658; DEMO</label>
+## 主な機能 <input type="checkbox" id="demo-codeql-setup" class="demo-toggle" /><label class="h2-demo" for="demo-codeql-setup">&#9658; DEMO</label>
 
 <div class="demo-panel">
 <label class="demo-scrim" for="demo-codeql-setup" aria-label="デモ手順を閉じる"></label>
@@ -276,44 +276,72 @@ select ifstmt, "This if-statement is redundant."  // ④ 何をどう報告す�
 </div>
 </div>
 
-CodeQL の有効化方法は 2 つ。**まず Default で十分**。
+**まず Default setup**。足りなければ repository property でカスタマイズし、独自ビルドが必要なときだけ Advanced へ。
 
-<div class="det-widget det-compact">
-<p class="det-hint">▸ クリックで比較</p>
-<div class="det-split">
-<div class="det-list">
-<details class="det-pick" name="cs-setup">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🟢</span><span class="det-name">Default setup</span></summary>
-<div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🟢</span><span class="det-title">Default setup — 1 クリック</span></p>
-<p class="det-why"><b>設定ファイル不要。</b>GitHub が言語を自動検出し、<code>default</code> クエリセットを選び、push / PR / 週次スケジュールのトリガーまで自動で組む。多くの言語で <b>ビルド不要</b>。組織の設定画面から全リポジトリに一括展開できるため、<b>大規模ロールアウトで現実的に選べる唯一の選択肢</b>。</p>
-<p class="det-doc">向いている対象: <b>ほぼ全てのリポジトリ、そして一括展開</b></p>
+<div class="ctl-widget">
+<p class="ctl-hint">▸ + をクリックして詳細を表示</p>
+<div class="ctl-list">
+<details class="ctl-item" name="cs-capabilities">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🟢</span><span class="ctl-name">Default setup</span><span class="ctl-when">1 クリック、組織全体</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/setup-types" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v"><b>workflow ファイル不要。</b>CodeQL 対応言語を自動検出し、新しい言語が増えれば自動で追加</span></p>
+<p class="ctl-row"><span class="ctl-k">実行タイミング</span><span class="ctl-v">default / <b>protected branch</b> への push、それらへの PR、<b>週次スケジュール</b></span></p>
+<p class="ctl-row"><span class="ctl-k">展開</span><span class="ctl-v"><b>security configuration</b> で組織の全リポジトリに一括適用</span></p>
 </div>
 </details>
-<details class="det-pick" name="cs-setup">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🛠️</span><span class="det-name">Advanced setup</span></summary>
-<div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🛠️</span><span class="det-title">Advanced setup — 自前の workflow</span></p>
-<p class="det-why"><code>.github/workflows/codeql.yml</code> を自分で持つ。言語、トリガー、独自ビルドコマンド、クエリスイート(<code>default</code> / <code>security-extended</code> / <code>security-and-quality</code> / カスタムパック)を全て制御できる。代償として <b>リポジトリごとに workflow ファイルの保守</b> が発生する。</p>
-<p class="det-doc">向いている対象: <b>monorepo、特殊ビルド、カスタムクエリ</b></p>
+<details class="ctl-item" name="cs-capabilities">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🧩</span><span class="ctl-name">Custom queries</span><span class="ctl-when">Default setup + repo property</span><a class="ctl-doc" href="https://github.blog/changelog/2026-08-04-customize-code-scanning-default-setup-at-scale/" target="_blank" rel="noopener noreferrer">Changelog</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">独自クエリ（例: <b>コーディング規約</b>、社内ルール）を <b>Advanced に切り替えずに</b>追加</span></p>
+<p class="ctl-row"><span class="ctl-k">方法</span><span class="ctl-v"><code>github-codeql-config-file</code> で<b>中央の設定ファイル</b>（クエリ、除外パス、threat model）をマージ。<code>github-codeql-extra-queries</code> はクエリの追加のみ</span></p>
+<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v"><b>組織全体の既定値</b>を設定し、リポジトリごとの上書きを許可するかは org owner が決める。GA</span></p>
 </div>
 </details>
-<details class="det-pick" name="cs-setup">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">💰</span><span class="det-name">課金の違い</span></summary>
-<div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">💰</span><span class="det-title">課金に差はない</span></p>
-<p class="det-why">どちらも <b>GitHub Actions の workflow</b> として動き、private リポジトリでは同じレートで Actions 分を消費する。「Default にすれば安い」も「Advanced にすれば安い」も成り立たない。実際に金額を動かすのは <b>スキャン頻度・リポジトリ規模・ランナー種別</b>。</p>
-<p class="det-doc">詳細は「料金」スライドの 3 つのメーターを参照</p>
+<details class="ctl-item" name="cs-capabilities">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛠️</span><span class="ctl-name">Advanced setup</span><span class="ctl-when">自前の workflow</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configuring-advanced-setup-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v"><code>.github/workflows/codeql.yml</code> を自分で持つ。コンパイル言語の<b>独自ビルド</b>、matrix、トリガーやスケジュールを制御</span></p>
+<p class="ctl-row"><span class="ctl-k">Actions 以外</span><span class="ctl-v">他の CI で <b>CodeQL CLI</b> を実行、または他社ツールの結果を <b>SARIF</b> でアップロード</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-capabilities">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🚧</span><span class="ctl-name">Merge protection</span><span class="ctl-when">PR のマージ前</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/merge-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">PR 上</span><span class="ctl-v">新しいアラートは <code>github-advanced-security[bot]</code> が <b>Files changed</b> に注釈として表示</span></p>
+<p class="ctl-row"><span class="ctl-k">マージ条件</span><span class="ctl-v">Ruleset の <b>Require code scanning results</b> で、指定した重大度のアラートがある間、または必須ツールの解析が終わるまでマージをブロック</span></p>
+<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">Repo / Org（Enterprise プラン）。ruleset がなければ code scanning は<b>マージを止めない</b></span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-capabilities">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🤖</span><span class="ctl-name">AI findings</span><span class="ctl-when">PR のみ、public preview</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">CodeQL が対応しない範囲を AI が検査: <b>PHP / Shell / Terraform / Dockerfile</b></span></p>
+<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v"><b>PR のみ</b>。リポジトリ全体のスキャン、バックログのアラート、マージゲートはなし。オプトインで <b>CodeQL default setup</b> が必要</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-capabilities">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔧</span><span class="ctl-name">Copilot Autofix</span><span class="ctl-when">アラート / PR 上</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">アラート、周辺コード、CodeQL の<b>データフロー経路</b>から修正パッチを提案</span></p>
+<p class="ctl-row"><span class="ctl-k">どこで？</span><span class="ctl-v">PR ではインライン、バックログのアラートでは <b>Generate fix</b>。レビューしてから適用</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-capabilities">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🎯</span><span class="ctl-name">Agentic Autofix</span><span class="ctl-when">バックログ 1〜25 件</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v"><b>Assign to Copilot</b>: クラウドエージェントがリポジトリを調べて修正、検証し、<b>draft PR</b> を作成</span></p>
+<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">1 件、またはバックログ / キャンペーンから 1〜25 件。Public preview</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-capabilities">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🗺️</span><span class="ctl-name">Security campaigns</span><span class="ctl-when">組織横断の修正</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/securing-your-organization/fixing-security-alerts-at-scale/about-security-campaigns" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">期限付きのアラート集合（最大 1000 件）。campaign manager と期日を設定</span></p>
+<p class="ctl-row"><span class="ctl-k">流れ</span><span class="ctl-v">各リポジトリの Security タブに表示され、開発者が Autofix や Copilot で修正</span></p>
 </div>
 </details>
 </div>
-<div class="det-screen" style="min-height:14em"><p class="det-empty">選択してください ▸</p></div>
 </div>
-</div>
-
-> 🔑 monorepo・特殊なビルド・カスタムクエリが要らない限り、**まず Default setup から**。履歴を失わずにあとから Advanced に切り替えられる。
-
-📘 詳細: <a class="retro-link" href="https://docs.github.com/en/code-security/code-scanning/enabling-code-scanning/configuring-default-setup-for-code-scanning" target="_blank" rel="noopener noreferrer">Configuring default setup ↗</a>
 
 ## Copilot Autofix: 修正提案 <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
@@ -534,7 +562,7 @@ Copilot Autofix は **対応するアラートに修正パッチを提案**す�
 
 ## Advanced setup と SARIF 連携
 
-Default で足りないとき（monorepo、特殊なビルド、カスタムクエリ、他社ツール併用）は workflow を自分で書く。
+Default で足りないとき（monorepo、特殊なビルド、他社ツール併用）は workflow を自分で書く。
 
 ```yaml
 # .github/workflows/codeql.yml
