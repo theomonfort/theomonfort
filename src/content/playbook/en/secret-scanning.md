@@ -132,11 +132,14 @@ links:
 <li>
 <p class="demo-step-title">BYPASS PUSH PROTECTION</p>
 <p>Open the <code class="demo-path">unblock-secret</code> URL from the block message in your browser, pick a reason and bypass.</p>
+<p>The reason decides what happens to the alert: <b>It's used in tests</b> creates a <b>closed</b> alert (resolved as "used in tests"), so nothing is left to triage. <b>I'll fix it later</b> creates an <b>open</b> alert that stays until someone revokes or rotates the secret.</p>
 <p class="demo-out">You get “secret can now be pushed”.</p>
 <p>Push the same branch again.</p>
 <code class="demo-cmd">git push origin HEAD</code>
-<p>Open the closed alert under <b>Security → Secret scanning</b> and show <b>who</b> bypassed it and <b>why</b>.</p>
+<p>Open the resulting alert under <b>Security → Secret scanning</b> and show <b>who</b> bypassed it and <b>why</b>.</p>
 <p>To keep bypasses under control: <code class="demo-path">Settings → Advanced Security → Push protection</code>, set <b>Who can bypass push protection</b> to <b>Specific roles or teams</b> (= Delegated bypass).</p>
+<p>Gate the merge too: in <a href="https://github.com/theomonfort-org/ghas-test-1/settings/rules/new?target=branch&amp;enforcement=disabled" target="_blank" rel="noopener noreferrer">ghas-test-1 → New branch ruleset ↗</a>, turn on <b>Require secret scanning alerts are resolved</b> (Preview).</p>
+<p class="demo-out">An <b>I'll fix it later</b> secret is still an open alert, so the PR merge is blocked. <b>It's used in tests</b> doesn't block.</p>
 </li>
 <li>
 <p class="demo-step-title">VALIDITY CHECK</p>

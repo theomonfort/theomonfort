@@ -100,7 +100,7 @@ links:
 <p class="risk-why">開発者 1 人のフィッシングで、その人が読める全リポの全 secret が流出。secret 自体に <b>MFA・保存時暗号化・有効期限などの追加保護はない</b>。</p>
 </details>
 <details class="risk-item" name="risk-private">
-<summary class="risk-btn"><span class="risk-num">06</span><span class="risk-icon" aria-hidden="true">🔗</span><span class="risk-label">権限昇格とラテラルムーブメント</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<summary class="risk-btn"><span class="risk-num">06</span><span class="risk-icon" aria-hidden="true">🔗</span><span class="risk-label">権限昇格とラテラルムーブメント（横展開）</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
 <p class="risk-why">社内ネットワークへの侵入後、攻撃者は private / internal repo の secret を盗み、より強い権限を獲得し、本番環境、クラウド、レジストリへ横展開できる。<b>リポジトリを一度も公開しなくても、1 アカウントの侵害が組織全体の被害に発展し得る。</b> <a class="retro-link" href="https://attack.mitre.org/techniques/T1078/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK ↗</a></p>
 </details>
 <details class="risk-item" name="risk-private">
@@ -132,11 +132,14 @@ links:
 <li>
 <p class="demo-step-title">BYPASS PUSH PROTECTION</p>
 <p>ブロックメッセージ内の <code class="demo-path">unblock-secret</code> URL をブラウザで開き、理由を選んで bypass する。</p>
+<p>理由でアラートの扱いが変わる：<b>It's used in tests</b> → アラートは<b>クローズ済み</b>（resolved as "used in tests"）で作成され、対応待ちに残らない。<b>I'll fix it later</b> → アラートは <b>open</b> のまま残り、secret の revoke / rotate が必要。</p>
 <p class="demo-out">「secret can now be pushed」と表示される。</p>
 <p>同じブランチをもう一度 push する。</p>
 <code class="demo-cmd">git push origin HEAD</code>
-<p><b>Security → Secret scanning</b> のクローズ済みアラートを開き、<b>誰が・どの理由で</b> bypass したかを見せる。</p>
+<p><b>Security → Secret scanning</b> で作成されたアラートを開き、<b>誰が・どの理由で</b> bypass したかを見せる。</p>
 <p>bypass を野放しにしない設定：<code class="demo-path">Settings → Advanced Security → Push protection</code> で <b>Who can bypass push protection</b> を <b>Specific roles or teams</b> に（= Delegated bypass）。</p>
+<p>merge でも止める：<a href="https://github.com/theomonfort-org/ghas-test-1/settings/rules/new?target=branch&amp;enforcement=disabled" target="_blank" rel="noopener noreferrer">ghas-test-1 → New branch ruleset ↗</a> で <b>Require secret scanning alerts are resolved</b>（Preview）を ON にする。</p>
+<p class="demo-out"><b>I'll fix it later</b> の secret は open アラートなので PR の merge がブロックされる。<b>It's used in tests</b> は止まらない。</p>
 </li>
 <li>
 <p class="demo-step-title">VALIDITY CHECK</p>
