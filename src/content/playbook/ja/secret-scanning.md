@@ -100,7 +100,7 @@ links:
 <p class="risk-why">開発者 1 人のフィッシングで、その人が読める全リポの全 secret が流出。secret 自体に <b>MFA・保存時暗号化・有効期限などの追加保護はない</b>。</p>
 </details>
 <details class="risk-item" name="risk-private">
-<summary class="risk-btn"><span class="risk-num">06</span><span class="risk-icon" aria-hidden="true">🔗</span><span class="risk-label">権限昇格とラテラルムーブメント</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
+<summary class="risk-btn"><span class="risk-num">06</span><span class="risk-icon" aria-hidden="true">🔗</span><span class="risk-label">権限昇格とラテラルムーブメント（横展開）</span><span class="risk-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="risk-toggle" aria-hidden="true"></span></summary>
 <p class="risk-why">社内ネットワークへの侵入後、攻撃者は private / internal repo の secret を盗み、より強い権限を獲得し、本番環境、クラウド、レジストリへ横展開できる。<b>リポジトリを一度も公開しなくても、1 アカウントの侵害が組織全体の被害に発展し得る。</b> <a class="retro-link" href="https://attack.mitre.org/techniques/T1078/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK ↗</a></p>
 </details>
 <details class="risk-item" name="risk-private">
