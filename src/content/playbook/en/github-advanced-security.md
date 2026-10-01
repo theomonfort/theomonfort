@@ -23,6 +23,12 @@ links:
   - group: 📖 Official Documentation
     label: GitHub security features (free vs licensed)
     url: https://docs.github.com/en/code-security/getting-started/github-security-features
+  - group: 🗃️ Vulnerability databases
+    label: GitHub Advisory Database
+    url: https://github.com/advisories
+  - group: 🗃️ Vulnerability databases
+    label: NVD (National Vulnerability Database)
+    url: https://nvd.nist.gov/
   - group: 💰 Billing & free inventory
     label: About billing for GitHub Advanced Security
     url: https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security
@@ -65,7 +71,7 @@ links:
 <div class="demo-panel is-info">
 <label class="demo-scrim" for="info-ghas-first" aria-label="Close info"></label>
 <div class="demo-window" role="group" aria-label="What is FIRST">
-<div class="demo-head"><span class="demo-tag">INFO</span><span class="demo-name">What is FIRST?</span><label class="demo-close" for="info-ghas-first" aria-label="Close">&#10005;</label></div>
+<div class="demo-head"><span class="demo-tag">INFO</span><span class="demo-name">What is FIRST (Forum of Incident Response and Security Teams)?</span><label class="demo-close" for="info-ghas-first" aria-label="Close">&#10005;</label></div>
 <div class="info-body">
 <p class="info-lead">A global network that brings together cybersecurity teams from around the world.</p>
 <p>Founded in 1990. Security teams from more than 850 companies, government bodies, universities and other institutions across 110+ countries are members.</p>
@@ -92,7 +98,7 @@ links:
 <div class="surge-steps">
 <div class="surge-step is-alert">
 <p class="surge-k">Record CVE volume</p>
-<p class="surge-v"><a class="retro-link" href="https://www.first.org/newsroom/releases/20260615" target="_blank" rel="noopener noreferrer">FIRST ↗</a> forecasts a record <strong>~66,000 CVEs</strong> in 2026. AI-assisted discovery is a key driver.</p>
+<p class="surge-v"><a class="retro-link" href="https://www.first.org/newsroom/releases/20260615" target="_blank" rel="noopener noreferrer">FIRST ↗</a> forecasts a record <strong>~66,000</strong> new <a class="retro-link" href="https://github.com/advisories" target="_blank" rel="noopener noreferrer">CVEs ↗</a> published in 2026 alone. AI-assisted discovery is a key driver.</p>
 </div>
 <div class="surge-step is-alert">
 <p class="surge-k">GHSA +449% YoY</p>

@@ -23,6 +23,12 @@ links:
   - group: 📖 公式ドキュメント
     label: GitHub security features (無料 / ライセンスの線引き)
     url: https://docs.github.com/en/code-security/getting-started/github-security-features
+  - group: 🗃️ 脆弱性データベース
+    label: GitHub Advisory Database
+    url: https://github.com/advisories
+  - group: 🗃️ 脆弱性データベース
+    label: NVD (National Vulnerability Database)
+    url: https://nvd.nist.gov/
   - group: 💰 課金と無料の棚卸し
     label: About billing for GitHub Advanced Security
     url: https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security
@@ -65,7 +71,7 @@ links:
 <div class="demo-panel is-info">
 <label class="demo-scrim" for="info-ghas-first" aria-label="情報を閉じる"></label>
 <div class="demo-window" role="group" aria-label="FIRST とは">
-<div class="demo-head"><span class="demo-tag">INFO</span><span class="demo-name">FIRST（ファースト）とは？</span><label class="demo-close" for="info-ghas-first" aria-label="閉じる">&#10005;</label></div>
+<div class="demo-head"><span class="demo-tag">INFO</span><span class="demo-name">FIRST（Forum of Incident Response and Security Teams）とは？</span><label class="demo-close" for="info-ghas-first" aria-label="閉じる">&#10005;</label></div>
 <div class="info-body">
 <p class="info-lead">世界中のサイバーセキュリティ専門チームが集まる、国際的なネットワーク組織。</p>
 <p>1990 年に設立。世界 110 カ国以上、850 を超える企業、政府機関、大学などのセキュリティチームが加盟している。</p>
@@ -92,7 +98,7 @@ links:
 <div class="surge-steps">
 <div class="surge-step is-alert">
 <p class="surge-k">CVE が史上最多</p>
-<p class="surge-v"><a class="retro-link" href="https://www.first.org/newsroom/releases/20260615" target="_blank" rel="noopener noreferrer">FIRST ↗</a> は 2026 年に約 <strong>66,000 件</strong>の CVE を予測。史上初めて 7 万件に迫るペースで、AI による脆弱性発見が大きな要因。</p>
+<p class="surge-v"><a class="retro-link" href="https://www.first.org/newsroom/releases/20260615" target="_blank" rel="noopener noreferrer">FIRST ↗</a> は 2026 年の 1 年間に新たに公開される <a class="retro-link" href="https://github.com/advisories" target="_blank" rel="noopener noreferrer">CVE ↗</a> を約 <strong>66,000 件</strong>と予測。史上初めて 7 万件に迫るペースで、AI による脆弱性発見が大きな要因。</p>
 </div>
 <div class="surge-step is-alert">
 <p class="surge-k">GHSA 前年比 +449%</p>

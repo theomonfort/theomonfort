@@ -8,6 +8,9 @@
   --c-phosphor: #e8f4ff;
   --c-shadow-ink: #05060f;
 
+  /* Playbook slide prose: one JA + Latin family so mixed lines read as one voice. */
+  --font-prose: 'IBM Plex Sans JP', 'Noto Sans JP', sans-serif;
+
   --grid: 8px;
   --pixel: 2px;
 }

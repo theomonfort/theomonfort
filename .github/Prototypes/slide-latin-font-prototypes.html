@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Slide typography: Latin × 日本語 — Retro JRPG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&family=VT323&family=IBM+Plex+Mono:wght@400;600&family=Noto+Sans+JP:wght@400;700&family=IBM+Plex+Sans+JP:wght@400;700&family=BIZ+UDPGothic:wght@400;700&family=M+PLUS+1:wght@400;700;800&family=Inter:wght@400;700&family=Chakra+Petch:wght@400;700&family=M+PLUS+Rounded+1c:wght@400;700;800&family=M+PLUS+1+Code:wght@400;700&display=swap"
+    />
+    <style>
+      /* Same Latin-only DotGothic16 face the site uses today (src/styles/globals.css). */
+      @font-face {
+        font-family: 'DotGothic16 Latin';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('https://fonts.gstatic.com/s/dotgothic16/v21/v6-QGYjBJFKgyw5nSoDAGH7M6X96P0rS.woff2') format('woff2');
+        unicode-range: U+0020-00FF;
+      }
+
+      :root {
+        --shadow-ink: #05060f; --midnight: #0a0e27; --deep-purple: #1a0b2e;
+        --neon-magenta: #ff2e88; --neon-cyan: #00f0ff; --crt-amber: #ffb000;
+        --gb-green: #9bbc0f; --phosphor: #e8f4ff;
+        --font-pixel: 'Press Start 2P', monospace; --font-pixel-jp: 'DotGothic16', monospace;
+        --font-terminal: 'VT323', monospace; --font-mono: 'IBM Plex Mono', monospace;
+      }
+      * { box-sizing: border-box; } html, body { margin: 0; padding: 0; }
+      body {
+        min-height: 100vh; color: var(--phosphor); font-family: var(--font-pixel-jp);
+        background: radial-gradient(circle at 50% 0%, var(--deep-purple) 0%, var(--midnight) 45%, var(--shadow-ink) 100%);
+        background-attachment: fixed; padding: 2.5rem clamp(1rem, 4vw, 3rem) 6rem;
+      }
+      body::after {
+        content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 999;
+        background: repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0, rgba(0,0,0,0) 2px, rgba(0,0,0,0.12) 3px, rgba(0,0,0,0.12) 4px);
+        opacity: 0.35;
+      }
+
+      /* ── page chrome ── */
+      .page-head { max-width: 1500px; margin: 0 auto 2rem; }
+      .page-head h1 {
+        font-family: var(--font-pixel); font-size: clamp(0.85rem, 2.2vw, 1.2rem); line-height: 1.6;
+        color: var(--neon-cyan); text-shadow: 0 0 8px var(--neon-cyan), 0 0 24px rgba(0,240,255,0.4); margin: 0 0 1rem;
+      }
+      .page-head p { font-size: 1rem; line-height: 1.7; max-width: 90ch; opacity: 0.85; margin: 0.4rem 0; }
+      .page-head strong { color: var(--crt-amber); font-weight: 400; }
+      .toolbar { display: flex; gap: 0.45rem; align-items: center; margin-top: 1.2rem; flex-wrap: wrap; }
+      .toolbar .tb-cap { font-family: var(--font-terminal); font-size: 1.25rem; color: var(--gb-green); margin-right: 0.4rem; }
+      .pk-tab { font-family: var(--font-pixel); font-size: 0.5rem; letter-spacing: 0.12em; color: rgba(0,240,255,0.55); background: transparent; border: 2px solid rgba(0,240,255,0.3); padding: 0.6em 0.8em; cursor: pointer; transition: all 0.15s ease; }
+      .pk-tab:hover { color: var(--neon-cyan); border-color: rgba(0,240,255,0.6); }
+      .pk-tab.is-active { color: var(--neon-cyan); border-color: var(--neon-cyan); background: rgba(0,240,255,0.08); box-shadow: 0 0 8px rgba(0,240,255,0.5); }
+
+      .tier { max-width: 1500px; margin: 2.8rem auto 1.1rem; font-family: var(--font-pixel); font-size: 0.6rem; letter-spacing: 0.2em; color: var(--gb-green); text-shadow: 0 0 6px rgba(155,188,15,0.5); border-bottom: 1px dashed rgba(155,188,15,0.4); padding-bottom: 0.6rem; }
+      .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(640px, 1fr)); gap: 2.4rem 2rem; max-width: 1500px; margin: 0 auto; align-items: start; }
+      @media (max-width: 720px) { .gallery { grid-template-columns: 1fr; } }
+      .proto { display: flex; flex-direction: column; }
+      .proto-label { font-family: var(--font-pixel); font-size: 0.6rem; line-height: 1.6; color: var(--neon-magenta); text-shadow: 0 0 6px rgba(255,46,136,0.5); margin-bottom: 0.5rem; }
+      .proto.is-baseline .proto-label { color: rgba(232,244,255,0.55); text-shadow: none; }
+      .proto-note { font-size: 0.9rem; line-height: 1.55; opacity: 0.7; margin: 0 0 0.6rem; }
+      .proto-meta { display: flex; flex-wrap: wrap; gap: 0.3rem 1.1rem; align-items: center; margin-bottom: 0.45rem; font-family: var(--font-terminal); font-size: 1.15rem; line-height: 1; }
+      .meter { color: rgba(232,244,255,0.6); white-space: nowrap; }
+      .meter b { font-weight: 400; letter-spacing: 0.05em; }
+      .meter.read b { color: var(--neon-cyan); }
+      .meter.merge b { color: var(--gb-green); }
+      .meter.retro b { color: var(--neon-magenta); }
+      .cost { color: var(--crt-amber); border: 1px solid rgba(255,176,0,0.5); padding: 0.15em 0.4em; }
+      .cost.free { color: var(--gb-green); border-color: rgba(155,188,15,0.5); }
+      .spec { font-family: var(--font-mono); font-size: 0.72rem; line-height: 1.5; color: rgba(232,244,255,0.55); background: rgba(5,6,15,0.6); border: 1px dashed rgba(0,240,255,0.2); padding: 0.4rem 0.6rem; margin-bottom: 0.6rem; white-space: pre-wrap; }
+      .stage { border: 1px dashed rgba(255,255,255,0.12); background: rgba(5,6,15,0.35); padding: 1.5rem 1.5rem 1.6rem; }
+      .stage + .stage { border-top: none; }
+      .stage-cap { font-family: var(--font-terminal); font-size: 1rem; color: rgba(255,176,0,0.75); margin: -0.6rem 0 0.6rem; }
+      body[data-lang="ja"] .stage.is-en,
+      body[data-lang="en"] .stage.is-ja { display: none; }
+      body:not([data-lang="both"]) .stage-cap { display: none; }
+
+      /* ── slide specimen (mirrors .prose-akq in present mode, scaled down) ──
+         Each variant only overrides these custom properties. */
+      .slide {
+        --accent: #00f0ff;
+        --f-body: 'DotGothic16 Latin', 'Noto Sans JP', sans-serif;
+        --f-h2: 'DotGothic16 Latin', 'M PLUS 1 Code', 'Noto Sans JP', sans-serif;
+        --f-strong: var(--f-body);
+        --f-k: var(--f-body);
+        --w-body: 400; --w-h2: 700; --w-strong: 700; --w-k: 700;
+        --ls: 0.01em; --lh: 1.8; --h2-ls: 0.04em;
+        --strong-glow: none;
+        font-family: var(--f-body);
+        font-weight: var(--w-body);
+        font-size: 1.08rem;
+        line-height: var(--lh);
+        letter-spacing: var(--ls);
+        font-feature-settings: 'palt';
+        color: var(--phosphor);
+      }
+      .slide .sl-h2 {
+        position: relative; margin: 0 0 0.75em; padding-left: 0.85em;
+        font-family: var(--f-h2); font-weight: var(--w-h2); font-size: 1.6em;
+        color: var(--accent); letter-spacing: var(--h2-ls); line-height: 1.45;
+      }
+      .slide .sl-h2::before {
+        content: ''; position: absolute; left: 0; top: 0.52em; width: 0.32em; height: 0.46em;
+        background: var(--accent); clip-path: polygon(0 0, 100% 50%, 0 100%);
+      }
+      .slide .sl-body { margin: 0 0 1.2em; }
+      .slide strong { font-family: var(--f-strong); font-weight: var(--w-strong); color: var(--crt-amber); text-shadow: var(--strong-glow); }
+      .slide a.retro-link { color: var(--neon-cyan); text-decoration: none; }
+      .slide .hero-quote {
+        position: relative; margin: 0 0 1.4em; padding: 1em 1.2em 1.1em 1.3em;
+        background:
+          linear-gradient(var(--accent), var(--accent)) top    left  / 9px 9px no-repeat,
+          linear-gradient(var(--accent), var(--accent)) top    right / 9px 9px no-repeat,
+          linear-gradient(var(--accent), var(--accent)) bottom left  / 9px 9px no-repeat,
+          linear-gradient(var(--accent), var(--accent)) bottom right / 9px 9px no-repeat,
+          rgba(5, 6, 15, 0.85);
+        border: 2px solid var(--accent); box-shadow: 4px 4px 0 #05060f;
+        font-size: 1.12em; line-height: 1.7;
+      }
+      .slide .hero-quote > p { margin: 0; }
+      .slide .sl-list { list-style: none; margin: 0 0 1.4em; padding-left: 0.4em; }
+      .slide .sl-list li { margin: 0.4em 0; }
+      .slide code {
+        font-family: 'IBM Plex Mono', monospace; font-size: 0.92em; letter-spacing: 0;
+        color: var(--gb-green); background: rgba(155,188,15,0.08);
+        border: 1px solid rgba(155,188,15,0.3); padding: 1px 6px;
+      }
+      .slide .surge-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+      .slide .surge-step { display: flex; flex-direction: column; gap: 0.3em; border-left: 2px solid var(--accent); padding-left: 0.8em; }
+      .slide .surge-step.is-alert { border-left-color: var(--neon-magenta); }
+      .slide .surge-k { margin: 0; color: var(--accent); font-family: var(--f-k); font-weight: var(--w-k); font-size: 1.1em; line-height: 1.25; }
+      .slide .surge-step.is-alert .surge-k { color: #ff7ab2; }
+      .slide .surge-v { margin: 0; color: rgba(232,244,255,0.82); font-size: 0.8em; line-height: 1.55; }
+      .slide .surge-v strong { color: var(--phosphor); }
+
+      /* ── variants: font stacks only ── */
+      .v1 .slide { --f-body: 'Noto Sans JP', sans-serif; --f-h2: var(--f-body); --ls: 0.02em; }
+
+      .v2 .slide { --f-body: 'IBM Plex Sans JP', sans-serif; --f-h2: var(--f-body); --ls: 0.01em; }
+
+      .v3 .slide { --f-body: 'BIZ UDPGothic', sans-serif; --f-h2: var(--f-body); --ls: 0.02em; --lh: 1.85; }
+
+      .v4 .slide { --f-body: 'M PLUS 1', sans-serif; --f-h2: var(--f-body); --w-h2: 800; --w-k: 800; --ls: 0.02em; }
+
+      .v5 .slide { --f-body: 'Inter', 'Noto Sans JP', sans-serif; --f-h2: var(--f-body); --ls: 0; --h2-ls: 0.01em; }
+
+      .v6 .slide { --f-body: 'Chakra Petch', 'Noto Sans JP', sans-serif; --f-h2: var(--f-body); --ls: 0.015em; --h2-ls: 0.06em; }
+
+      .v7 .slide {
+        --f-body: 'Noto Sans JP', sans-serif;
+        --f-pix: 'DotGothic16', sans-serif;
+        --f-h2: var(--f-pix); --f-strong: var(--f-pix); --f-k: var(--f-pix);
+        --w-h2: 400; --w-strong: 400; --w-k: 400;
+        --ls: 0.02em; --h2-ls: 0.06em;
+        --strong-glow: 0 0 8px rgba(255,176,0,0.45);
+      }
+      .v7 .slide .sl-h2 { text-shadow: 0 0 8px rgba(0,240,255,0.45); }
+
+      .v8 .slide {
+        --f-body: 'DotGothic16', sans-serif; --f-h2: var(--f-body);
+        --w-h2: 400; --w-strong: 400; --w-k: 400;
+        --ls: 0.04em; --lh: 1.9; --h2-ls: 0.06em;
+        --strong-glow: 0 0 8px rgba(255,176,0,0.45);
+      }
+      .v8 .slide .sl-h2 { text-shadow: 0 0 8px rgba(0,240,255,0.45); }
+
+      .v9 .slide { --f-body: 'M PLUS Rounded 1c', sans-serif; --f-h2: var(--f-body); --w-h2: 800; --w-k: 800; --ls: 0.02em; }
+
+      .v10 .slide { --f-body: 'M PLUS 1 Code', monospace; --f-h2: var(--f-body); --ls: 0; --h2-ls: 0.02em; }
+      .v10 .slide .sl-h2::before { content: '>'; clip-path: none; background: none; color: var(--gb-green); width: auto; height: auto; top: 0; }
+    </style>
+  </head>
+  <body data-lang="ja">
+    <div class="page-head">
+      <h1>SLIDE TYPE — LATIN × 日本語</h1>
+      <p>
+        Today the playbook prose renders Latin in pixel <strong>DotGothic16</strong> (Latin-only face) and Japanese in smooth
+        <strong>Noto Sans JP</strong>. Mixed lines like 「GitHub Advanced Security (GHAS) は…」 switch style mid-sentence, and the pixel Latin is harder to read at slide size.
+      </p>
+      <p>
+        Each card renders the same specimen (GHAS H2, body, hero-quote, the GitHub Actions bullet list, surge cards) with a different font pairing. Inline <code style="font-family:var(--font-mono);color:var(--gb-green)">code</code> stays IBM Plex Mono in every card. The big title slide H1
+        (<strong>Press Start 2P</strong>) is out of scope and unchanged. Meters are a rough guide: READ = legibility on a projector, MERGE = how seamless Latin sits inside Japanese, RETRO = how much JRPG flavor remains.
+      </p>
+      <div class="toolbar" id="lang-toggle">
+        <span class="tb-cap">SPECIMEN ▸</span>
+        <button class="pk-tab is-active" data-lang="ja">JA SLIDE</button>
+        <button class="pk-tab" data-lang="en">EN SLIDE</button>
+        <button class="pk-tab" data-lang="both">BOTH</button>
+      </div>
+    </div>
+
+    <div id="gallery-root"></div>
+
+    <script>
+      const T = {
+        ja: {
+          h2: 'GHAS はどう応えるか',
+          body: 'スキャンツールは通常プラットフォームの外側にある。別のコンソール、別のバックログ、そしてコードを書いた数日後に届く検出結果。GHAS はこの 4 ステップすべてを、コードがすでに置かれている場所で実行する。',
+          hero: [
+            '<strong>GitHub Advanced Security (GHAS)</strong> は GitHub のセキュリティ製品スイート。開発者がうっかり混入させてしまう 2 つのもの、<strong>クレデンシャル</strong> と <strong>脆弱なコード</strong> をリポジトリからスキャンして検出する。',
+            '製品は <strong>Secret Protection</strong> と <strong>Code Security</strong> の 2 つで、それぞれ単体で購入できる。',
+          ],
+          list: [
+            '📁 <strong>配置場所</strong> — <code>.github/workflows/*.yml</code>(複数ファイル可)',
+            '🖥️ <strong>実行環境</strong> — ジョブごとに新品の <strong>GitHub-hosted runner</strong>(Linux / Windows / macOS の VM)が起動',
+            '📦 <strong>リポは毎回 clone</strong> — <code>actions/checkout</code> で <code>$GITHUB_WORKSPACE</code> に full clone(状態は前回のジョブから引き継がない)',
+            '⏱️ <strong>時間制限</strong> — 1 ジョブ最大 6 時間、1 workflow 最大 35 日(matrix で並列もできる)',
+          ],
+          surge: [
+            { alert: true, k: 'CVE が史上最多', v: '<a class="retro-link">FIRST ↗</a> は 2026 年に約 <strong>66,000 件</strong>の CVE を予測。AI による脆弱性発見が大きな要因。' },
+            { alert: true, k: 'GHSA 前年比 +449%', v: '無料公開の <a class="retro-link">Advisory Database ↗</a> が Dependabot アラートの元になる。' },
+            { alert: false, k: 'AI 対 AI のレース', v: 'AI による exploit 生成と、AI によるパッチ生成の競争。悪用までの時間はすでに <strong>24 時間</strong>。' },
+          ],
+        },
+        en: {
+          h2: 'How GHAS answers it',
+          body: 'Scanning tools normally live outside the platform: a separate console, a separate backlog, and findings that reach the developer days after the code was written. GHAS puts all four steps where the code already is.',
+          hero: [
+            "<strong>GitHub Advanced Security (GHAS)</strong> is GitHub's paid security suite. It scans your repositories for two things developers leak by accident: <strong>credentials</strong> and <strong>vulnerable code</strong>.",
+            'It comes as two products you buy separately: <strong>Secret Protection</strong> and <strong>Code Security</strong>.',
+          ],
+          list: [
+            '📁 <strong>Location</strong> — <code>.github/workflows/*.yml</code> (multiple files supported)',
+            '🖥️ <strong>Execution environment</strong> — a fresh <strong>GitHub-hosted runner</strong> (Linux / Windows / macOS VM) starts up per job',
+            '📦 <strong>Repo cloned every time</strong> — <code>actions/checkout</code> full-clones into <code>$GITHUB_WORKSPACE</code> (no state carried over from previous jobs)',
+            '⏱️ <strong>Time limits</strong> — 6 hours max per job, 35 days max per workflow (matrix parallelism is supported)',
+          ],
+          surge: [
+            { alert: true, k: 'Record CVE volume', v: '<a class="retro-link">FIRST ↗</a> forecasts a record <strong>~66,000 CVEs</strong> in 2026. AI-assisted discovery is a key driver.' },
+            { alert: true, k: 'GHSA +449% YoY', v: 'Its free <a class="retro-link">Advisory Database ↗</a> feeds Dependabot alerts.' },
+            { alert: false, k: 'AI vs AI race', v: 'AI-built exploits against AI-built patches. Time to exploitation is already down to <strong>24 hours</strong>.' },
+          ],
+        },
+      };
+
+      const slide = (lang) => {
+        const t = T[lang];
+        return `
+          <div class="slide" lang="${lang}">
+            <h2 class="sl-h2">${t.h2}</h2>
+            <p class="sl-body">${t.body}</p>
+            <div class="hero-quote">${t.hero.map((p) => `<p>${p}</p>`).join('')}</div>
+            <ul class="sl-list">${t.list.map((li) => `<li>${li}</li>`).join('')}</ul>
+            <div class="surge-steps">
+              ${t.surge.map((s) => `
+                <div class="surge-step ${s.alert ? 'is-alert' : ''}">
+                  <p class="surge-k">${s.k}</p>
+                  <p class="surge-v">${s.v}</p>
+                </div>`).join('')}
+            </div>
+          </div>`;
+      };
+
+      const bar = (n) => '■'.repeat(n) + '□'.repeat(5 - n);
+
+      const TIERS = [
+        { id: 'base', label: '▼ BASELINE' },
+        { id: 'anchor', label: '▼ ANCHOR: one family, same voice for both scripts' },
+        { id: 'reframe', label: '▼ RE-FRAME: a different typographic voice' },
+        { id: 'reshape', label: '▼ RE-SHAPE: move where the pixel font lives' },
+        { id: 'wild', label: '▼ WILDCARD' },
+      ];
+
+      const V = [
+        {
+          tier: 'base', cls: 'v0', baseline: true,
+          label: 'V0 — Current (for reference)',
+          note: 'What ships today. Latin glyphs fall into pixel DotGothic16, Japanese into smooth Noto Sans JP, bold Latin is faux-bolded pixel.',
+          m: [2, 1, 4], cost: 'live',
+          spec: "body   'DotGothic16 Latin', 'Noto Sans JP'\nh2     'DotGothic16 Latin', 'M PLUS 1 Code', 'Noto Sans JP' 700",
+        },
+        {
+          tier: 'anchor', cls: 'v1',
+          label: 'V1 — Noto Unified',
+          note: 'Drop the Latin override: Noto Sans JP renders both scripts with Latin drawn to match its kana. Zero new fonts, simplest port (delete one stack entry).',
+          m: [5, 5, 1], cost: 'free',
+          spec: "body   'Noto Sans JP' 400   strong 700\nh2     'Noto Sans JP' 700",
+        },
+        {
+          tier: 'anchor', cls: 'v2',
+          label: 'V2 — Plex Sans JP',
+          note: 'IBM Plex Sans JP: one family with Plex Latin, a sibling of the IBM Plex Mono already used for code blocks. Slightly technical, very even color on the page.',
+          m: [5, 5, 2], cost: '+1',
+          spec: "body   'IBM Plex Sans JP' 400   strong 700\nh2     'IBM Plex Sans JP' 700",
+        },
+        {
+          tier: 'reframe', cls: 'v3',
+          label: 'V3 — BIZ UD (projector-proof)',
+          note: 'Morisawa universal-design gothic built for legibility. Open counters, wide Latin, unmistakable digits (66,000 / +449%). Best for big rooms and screen shares.',
+          m: [5, 5, 1], cost: '+1',
+          spec: "body   'BIZ UDPGothic' 400   strong 700\nh2     'BIZ UDPGothic' 700",
+        },
+        {
+          tier: 'reframe', cls: 'v4',
+          label: 'V4 — M PLUS 1 (HUD geometric)',
+          note: 'Geometric sans designed as one JA + Latin family. Squarer, game-HUD feel; 800 weight gives slide headings real punch without going pixel.',
+          m: [4, 5, 3], cost: '+1',
+          spec: "body   'M PLUS 1' 400   strong 700\nh2     'M PLUS 1' 800",
+        },
+        {
+          tier: 'reframe', cls: 'v5',
+          label: 'V5 — Inter × Noto',
+          note: 'Classic product-UI pairing: Inter for Latin, Noto Sans JP for kana/kanji. Crispest EN-only pages; Latin sits a touch larger than Japanese in mixed lines.',
+          m: [5, 4, 1], cost: '+1',
+          spec: "body   'Inter', 'Noto Sans JP' 400   strong 700\nh2     'Inter', 'Noto Sans JP' 700",
+        },
+        {
+          tier: 'reframe', cls: 'v6',
+          label: 'V6 — Chakra Petch × Noto (cyber)',
+          note: 'Angular sci-fi Latin with smooth Japanese. Keeps a cyberpunk edge for product names while staying readable; the style still shifts between scripts.',
+          m: [3, 3, 4], cost: '+1',
+          spec: "body   'Chakra Petch', 'Noto Sans JP' 400   strong 700\nh2     'Chakra Petch', 'Noto Sans JP' 700",
+        },
+        {
+          tier: 'reshape', cls: 'v7',
+          label: 'V7 — Pixel Accents (item names)',
+          note: 'Body is all Noto Sans JP. Pixel DotGothic16 (full JA + Latin) only for H2 and amber <strong> terms, like item names in a JRPG menu, with a soft glow instead of faux bold.',
+          m: [4, 4, 4], cost: 'free',
+          spec: "body   'Noto Sans JP' 400\nh2 / strong / card titles   'DotGothic16' 400 + glow",
+        },
+        {
+          tier: 'reshape', cls: 'v8',
+          label: 'V8 — Full Pixel (one grid)',
+          note: 'The opposite fix: Japanese also goes pixel, so both scripts share one DotGothic16 grid (what the frontend tokens file prescribes for prose). Max retro, merges perfectly, longest EN paragraphs get tiring.',
+          m: [3, 5, 5], cost: 'free',
+          spec: "body / h2 / strong   'DotGothic16' 400 (both scripts)\nletter-spacing 0.04em, line-height 1.9",
+        },
+        {
+          tier: 'wild', cls: 'v9',
+          label: 'V9 — Rounded Dialogue Box',
+          note: 'M PLUS Rounded 1c for both scripts: the soft, friendly voice of a JRPG text box. Pairs naturally with the Octocat speech bubbles.',
+          m: [4, 5, 3], cost: '+1',
+          spec: "body   'M PLUS Rounded 1c' 400   strong 700\nh2     'M PLUS Rounded 1c' 800",
+        },
+        {
+          tier: 'wild', cls: 'v10',
+          label: 'V10 — Terminal Code',
+          note: 'M PLUS 1 Code (already loaded for H2 Japanese): monospaced Latin with matching Japanese, prompt-style ">" headings. Strong CLI vibe; long EN lines get wide.',
+          m: [3, 4, 4], cost: 'free',
+          spec: "body   'M PLUS 1 Code' 400   strong 700\nh2     'M PLUS 1 Code' 700, '>' marker",
+        },
+      ];
+
+      const card = (v) => `
+        <div class="proto ${v.baseline ? 'is-baseline' : ''} ${v.cls}">
+          <div class="proto-label">${v.label}</div>
+          <p class="proto-note">${v.note.replace('<strong>', '&lt;strong&gt;')}</p>
+          <div class="proto-meta">
+            <span class="meter read">READ <b>${bar(v.m[0])}</b></span>
+            <span class="meter merge">MERGE <b>${bar(v.m[1])}</b></span>
+            <span class="meter retro">RETRO <b>${bar(v.m[2])}</b></span>
+            <span class="cost ${v.cost === 'free' ? 'free' : ''}">${v.cost === 'free' ? 'NO NEW FONT' : v.cost === 'live' ? 'LIVE NOW' : '+1 FONT'}</span>
+          </div>
+          <div class="spec">${v.spec}</div>
+          <div class="stage is-ja"><p class="stage-cap">▼ JA</p>${slide('ja')}</div>
+          <div class="stage is-en"><p class="stage-cap">▼ EN</p>${slide('en')}</div>
+        </div>`;
+
+      document.getElementById('gallery-root').innerHTML = TIERS.map((t) => {
+        const items = V.filter((v) => v.tier === t.id);
+        return `<div class="tier">${t.label}</div><div class="gallery">${items.map(card).join('')}</div>`;
+      }).join('');
+
+      document.getElementById('lang-toggle').addEventListener('click', (e) => {
+        const btn = e.target.closest('button.pk-tab');
+        if (!btn) return;
+        document.querySelectorAll('#lang-toggle .pk-tab').forEach((b) => b.classList.toggle('is-active', b === btn));
+        document.body.dataset.lang = btn.dataset.lang;
+      });
+    </script>
+  </body>
+</html>

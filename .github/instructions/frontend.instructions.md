@@ -32,10 +32,11 @@ description: "フロントエンドのデザイントークン（レトロ JRPG 
 | --------------------------------------- | ------------------- | --------------- |
 | ブランド見出し (H1・ロゴ・大型ラベル) | `'Press Start 2P'` | `font-pixel` |
 | 本文・見出し (日 + 英、既定) | `'DotGothic16'` | `font-pixel-jp` |
+| プレイブックのスライド本文 (日 + 英) | `'IBM Plex Sans JP'` | `var(--font-prose)` |
 | プレゼンモードの装飾 (slide counter 等) | `'VT323'` | `font-terminal` |
 | コードブロック | `'IBM Plex Mono'` | `font-mono` |
 
-`'Press Start 2P'` は小文字グリフを持たない（全部大文字になる）ので、ブランドロゴと最上位の見出しに限定。本文・節見出し・TOC・リンク・カードの説明など、**プロースは原則すべて `font-pixel-jp` (DotGothic16)** を使う — 日本語とラテン文字を一つのピクセルグリッドで揃えられる。すべて `monospace` / `sans-serif` を fallback に。
+`'Press Start 2P'` は小文字グリフを持たない（全部大文字になる）ので、ブランドロゴと最上位の見出しに限定。本文・節見出し・TOC・リンク・カードの説明など、**プロースは原則すべて `font-pixel-jp` (DotGothic16)** を使う — 日本語とラテン文字を一つのピクセルグリッドで揃えられる。ただしプレイブックのスライド本文（`.prose-akq` 内の本文・H2・hero-quote・カード類）は読みやすさを優先して `var(--font-prose)`（IBM Plex Sans JP）を使い、日本語とラテン文字を同じファミリーで揃える。ラテン文字だけ別フォントにしない。すべて `monospace` / `sans-serif` を fallback に。
 
 ## エフェクト
 
