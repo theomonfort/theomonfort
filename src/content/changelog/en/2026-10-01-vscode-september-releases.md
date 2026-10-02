@@ -25,7 +25,7 @@ demo:
 
 - **Attach issues and pull requests**: add them from Add Context, or paste a URL into the new-session input. No more copying descriptions or comments.
 - **Move quick chats into a project**: attach a local folder to a chat started without a workspace, keeping the conversation.
-- **HydraFusion in VS Code**: eligible users can enable preview features and select it in the model picker (research preview).
+- **HydraFusion in VS Code**: eligible users can enable preview features and select it in the model picker (research preview). See [HydraFusion on Sept 30](#2026-09-30-hydrafusion-vscode-app).
 
 These are the main agent-related highlights from VS Code 1.136 to 1.140. Preview features are rolling out gradually, so some settings may not be on by default yet.
 
