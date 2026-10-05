@@ -333,9 +333,9 @@ That is the structure. Here is what breaks it. **01, 02 and 11 are the hard ones
 </div>
 </div>
 
-## The 18 guardrails <a class="h2-doc" href="https://learn.github.com/well-architected/governance/recommendations/governance-policies-best-practices" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## The 21 guardrails <a class="h2-doc" href="https://learn.github.com/well-architected/governance/recommendations/governance-policies-best-practices" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-Now the values to set, and who sets them. **Short on time? 03, 15, 18.**
+Values to set, and where. 19 to 21 are Copilot. **Short on time? 03, 15, 18.**
 
 <div class="grd-widget grd-compact">
 <p class="grd-hint">▸ Click a number · ENT / ORG / REPO = where you set it</p>
@@ -471,6 +471,30 @@ Now the values to set, and who sets them. **Short on time? 03, 15, 18.**
 <p class="grd-head"><span class="grd-num">18</span><span class="grd-title">Audit log streaming</span><span class="grd-lvl">ENT</span></p>
 <p class="grd-row"><span class="grd-k">⚙️ Set to</span><span class="grd-v"><b>Configured</b>, to your SIEM or object store.</span></p>
 <p class="grd-row"><span class="grd-k">💡 Why</span><span class="grd-v">The most forgotten item, and the best source for spotting abuse.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">19</span><span class="grd-name">Agent permissions</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">19</span><span class="grd-title">Copilot permissions</span><span class="grd-lvl">ENT</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ Set to</span><span class="grd-v"><b>No YOLO mode</b>, via <code>disableBypassPermissionsMode</code>.</span></p>
+<p class="grd-row"><span class="grd-k">💡 Why</span><span class="grd-v">In allow-all mode the agent runs anything without asking.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">20</span><span class="grd-name">Agent sandbox</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">20</span><span class="grd-title">Copilot local sandbox</span><span class="grd-lvl">ENT</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ Set to</span><span class="grd-v"><b>Enforced</b>, with <code>enabled: true</code> and <code>allowBypass: false</code>.</span></p>
+<p class="grd-row"><span class="grd-k">💡 Why</span><span class="grd-v">The agent stays in the workspace, away from <code>~/.ssh</code> and Keychain.</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">21</span><span class="grd-name">MCP allowlist</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">21</span><span class="grd-title">MCP server allowlist</span><span class="grd-lvl">ENT</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ Set to</span><span class="grd-v"><code>allowedMcpServers</code> lists <b>only vetted servers</b>.</span></p>
+<p class="grd-row"><span class="grd-k">💡 Why</span><span class="grd-v">An unvetted MCP server can receive your code and tokens.</span></p>
 </div>
 </details>
 </div>
