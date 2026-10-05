@@ -78,53 +78,6 @@ links:
   </p>
 </div>
 
-## SAST とは何か
-
-アプリケーションセキュリティのテスト手法は主に 4 つ。Code Scanning が担当するのは **SAST（Static Application Security Testing）** で、**コードを動かさずに** ソースそのものを読んで脆弱性を探す。
-
-<div class="det-widget">
-<p class="det-hint">▸ クリックで詳細</p>
-<div class="det-split">
-<div class="det-list">
-<details class="det-pick" name="cs-appsec">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🔬</span><span class="det-name">SAST（静的解析）</span></summary>
-<div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🔬</span><span class="det-title">SAST — 静的解析</span></p>
-<p class="det-why">ソースコードを <b>実行せずに</b> 解析する。デプロイどころかビルドすら不要なので <b>コミット / PR の時点で回せる</b>（shift-left）= 修正コストが最小。到達しないコードパスも含めて全体を見られる反面、<b>実行時にしか分からない設定ミスや認証フローの穴は見えない</b>。古典的な弱点は誤検知の多さで、CodeQL がデータフロー解析で潰しにいっているのはまさにそこ。</p>
-<p class="det-doc">GitHub の担当機能: <b>Code Scanning / CodeQL</b></p>
-</div>
-</details>
-<details class="det-pick" name="cs-appsec">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🌐</span><span class="det-name">DAST（動的解析）</span></summary>
-<div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🌐</span><span class="det-title">DAST — 動的解析</span></p>
-<p class="det-why">動いているアプリに <b>外から攻撃リクエストを撃ち込む</b>。「実際に刺さるか」を確認できるのが強みだが、テストできるのは <b>デプロイ後 かつ クローラが到達できた画面だけ</b>。どの行が原因かも直接は分からない。</p>
-<p class="det-doc">GitHub 純正機能はなし。結果を <b>SARIF</b> で Code Scanning に取り込む</p>
-</div>
-</details>
-<details class="det-pick" name="cs-appsec">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">📦</span><span class="det-name">SCA（依存関係解析）</span></summary>
-<div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">📦</span><span class="det-title">SCA — 依存関係解析</span></p>
-<p class="det-why">自分が書いていない <b>ライブラリ側の既知の脆弱性（CVE）</b> を洗う。現代のアプリはコードの大半が依存パッケージなので、件数ベースでは一番のヒット源になりやすい。</p>
-<p class="det-doc">GitHub の担当機能: <b>Dependabot / Dependency review</b></p>
-</div>
-</details>
-<details class="det-pick" name="cs-appsec">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🔑</span><span class="det-name">Secret Scanning</span></summary>
-<div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🔑</span><span class="det-title">Secret Scanning — 資格情報の検出</span></p>
-<p class="det-why">脆弱性ではなく <b>コードに書いてしまった鍵やトークン</b> を探す。攻撃者からすれば一番安上がりな侵入口なので、SAST より優先度が高いことも多い。</p>
-<p class="det-doc">GitHub の担当機能: <b>Secret Protection</b></p>
-</div>
-</details>
-</div>
-<div class="det-screen" style="min-height:16.5em"><p class="det-empty">手法を選んでください ▸</p></div>
-</div>
-</div>
-
-> 🔑 覚え方 — **SAST は「自分が書いたコード」のバグ、SCA は「他人が書いたコード」のバグ**。守備範囲が違うので、どちらか一方では埋まらない。
-
 ## Code Scanning と CodeQL は別物 <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 **Code Scanning は GitHub の機能、CodeQL は解析エンジンの 1 つ**。PR では AI findings が補完し、他社ツールの結果も SARIF で取り込める。
@@ -137,7 +90,7 @@ links:
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🖥️</span><span class="det-name">Code Scanning（機能）</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🖥️</span><span class="det-title">Code Scanning — GitHub 側の受け皿</span></p>
-<p class="det-why">静的解析の結果を GitHub 上に集約して見せる <b>機能</b>。Security タブのアラート一覧、PR の Files changed へのインラインコメント、マージ保護、Security overview、REST / GraphQL API、Issue 連携。<b>エンジンが何であろうと結果はここに集まる</b>。</p>
+<p class="det-why"><b>静的解析</b>（CodeQL、他社ツール）と <b>AI による検出</b>の結果を GitHub 上に集約して見せる <b>機能</b>。Security タブのアラート一覧、PR の Files changed へのインラインコメント、マージ保護、Security overview、REST / GraphQL API、Issue 連携。<b>エンジンが何であろうと結果はここに集まる</b>。</p>
 </div>
 </details>
 <details class="det-pick" name="cs-vs-codeql">

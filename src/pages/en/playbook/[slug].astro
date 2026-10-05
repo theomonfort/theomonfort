@@ -2454,6 +2454,34 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     line-height: 1.55;
   }
   .prose-akq .trio-foot b { color: #9bbc0f; }
+  /* Primer row pinned atop each trio panel: explains the testing family (secrets / SAST / SCA) before listing features. */
+  .prose-akq .trio-intro {
+    margin-bottom: 0.4rem;
+    border: 1px dashed rgba(255, 46, 136, 0.5);
+    background: rgba(255, 46, 136, 0.04);
+  }
+  .prose-akq .trio-row.trio-intro:last-of-type { border-bottom: 1px dashed rgba(255, 46, 136, 0.5); }
+  .prose-akq .trio-intro .trio-k { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.1em 0.55em; }
+  .prose-akq .trio-intro .trio-k b,
+  .prose-akq .trio-intro .trio-toggle,
+  .prose-akq .trio-chip.is-intro { color: #ff2e88; }
+  .prose-akq .trio-row.trio-intro[open] .trio-k { color: #e8f4ff; }
+  .prose-akq .trio-intro[open] { background: rgba(255, 46, 136, 0.08); box-shadow: 0 0 12px rgba(255, 46, 136, 0.15); }
+  .prose-akq .trio-intro .trio-summary:hover { background: rgba(255, 46, 136, 0.07); }
+  .prose-akq .trio-intro .trio-summary:focus-visible { outline-color: #ff2e88; }
+  .prose-akq .trio-q {
+    display: inline-grid;
+    place-items: center;
+    align-self: center;
+    width: 1.5em;
+    height: 1.5em;
+    border: 1px solid #ff2e88;
+    color: #ff2e88;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.6em;
+    line-height: 1;
+  }
+  .prose-akq .trio-sub { color: rgba(232, 244, 255, 0.55); font-size: 0.86em; }
   body.present-mode .prose-akq .trio-name { font-size: 1.15em; }
   body.present-mode .prose-akq .trio-k { font-size: 1.08em; }
   body.present-mode .prose-akq .trio-chip { font-size: 0.72em; }

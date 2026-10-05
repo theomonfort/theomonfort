@@ -78,53 +78,6 @@ links:
   </p>
 </div>
 
-## What is SAST?
-
-Application security testing splits into four families. Code Scanning owns **SAST (Static Application Security Testing)**: reading the source itself, **without executing it**.
-
-<div class="det-widget">
-<p class="det-hint">▸ CLICK FOR DETAILS</p>
-<div class="det-split">
-<div class="det-list">
-<details class="det-pick" name="cs-appsec">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🔬</span><span class="det-name">SAST (static)</span></summary>
-<div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🔬</span><span class="det-title">SAST — static analysis</span></p>
-<p class="det-why">Reads source <b>without running it</b>, so it fires <b>at commit and PR time</b> where fixes are cheapest. It sees every code path, including ones testing never reaches, but is <b>blind to runtime-only problems</b> like misconfiguration. Its classic weakness is false positives — exactly what CodeQL's data-flow analysis attacks.</p>
-<p class="det-doc">GitHub feature: <b>Code Scanning / CodeQL</b></p>
-</div>
-</details>
-<details class="det-pick" name="cs-appsec">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🌐</span><span class="det-name">DAST (dynamic)</span></summary>
-<div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🌐</span><span class="det-title">DAST — dynamic analysis</span></p>
-<p class="det-why">Fires <b>real attack requests at a running app</b>. It proves exploitability, but only for what is <b>already deployed and crawlable</b>, and it cannot point at the offending line.</p>
-<p class="det-doc">No first-party GitHub feature. Ingest results via <b>SARIF</b></p>
-</div>
-</details>
-<details class="det-pick" name="cs-appsec">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">📦</span><span class="det-name">SCA (dependencies)</span></summary>
-<div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">📦</span><span class="det-title">SCA — software composition analysis</span></p>
-<p class="det-why">Finds <b>known CVEs in libraries you did not write</b>. Most of a modern app is dependencies, so by raw count this is usually the biggest source of findings.</p>
-<p class="det-doc">GitHub feature: <b>Dependabot / Dependency review</b></p>
-</div>
-</details>
-<details class="det-pick" name="cs-appsec">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🔑</span><span class="det-name">Secret scanning</span></summary>
-<div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🔑</span><span class="det-title">Secret scanning — leaked credentials</span></p>
-<p class="det-why">Not vulnerabilities but <b>keys and tokens committed into the repo</b>. The cheapest way in for an attacker, so it often outranks SAST on priority.</p>
-<p class="det-doc">GitHub feature: <b>Secret Protection</b></p>
-</div>
-</details>
-</div>
-<div class="det-screen" style="min-height:16.5em"><p class="det-empty">SELECT A METHOD ▸</p></div>
-</div>
-</div>
-
-> 🔑 Rule of thumb — **SAST finds bugs in the code you wrote, SCA finds bugs in the code someone else wrote.** Different territory, so neither one covers the other.
-
 ## Code scanning is not CodeQL <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 **Code scanning is the GitHub feature; CodeQL is one analysis engine.** AI findings complement it on pull requests, and third-party tools can supply SARIF results.
@@ -137,7 +90,7 @@ Application security testing splits into four families. Code Scanning owns **SAS
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🖥️</span><span class="det-name">Code scanning (the feature)</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🖥️</span><span class="det-title">Code scanning — GitHub's surface</span></p>
-<p class="det-why">The <b>feature</b> that collects static-analysis results and surfaces them: Security tab alerts, inline PR comments, merge protection, Security overview, APIs. <b>Whatever the engine, results land here.</b></p>
+<p class="det-why">The <b>feature</b> that collects results from <b>static analysis</b> (CodeQL, third-party tools) and <b>AI detections</b>, and surfaces them: Security tab alerts, inline PR comments, merge protection, Security overview, APIs. <b>Whatever the engine, results land here.</b></p>
 </div>
 </details>
 <details class="det-pick" name="cs-vs-codeql">
