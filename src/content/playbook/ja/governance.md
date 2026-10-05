@@ -51,7 +51,23 @@ links:
   </p>
 </div>
 
-## Organization の 3 モデル <a class="h2-doc" href="https://learn.github.com/well-architected/governance/recommendations/governance-administration-essentials" target="_blank" rel="noopener noreferrer">📖 Docs</a> <a class="h2-doc" href="https://octonihon.github.io/events/2026-03-24-GitHub-OctoNihon-Forum/20260324_OctoNihon_Ricoh.pdf" target="_blank" rel="noopener noreferrer">🏢 リコー事例</a>
+## Organization の 3 モデル <a class="h2-doc" href="https://learn.github.com/well-architected/governance/recommendations/governance-administration-essentials" target="_blank" rel="noopener noreferrer">📖 Docs</a> <a class="h2-doc" href="https://octonihon.github.io/events/2026-03-24-GitHub-OctoNihon-Forum/20260324_OctoNihon_Ricoh.pdf" target="_blank" rel="noopener noreferrer">🏢 リコー事例</a> <input type="checkbox" id="demo-governance-base-permission" class="demo-toggle" /><label class="h2-demo" for="demo-governance-base-permission">&#9658; DEMO</label>
+
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-governance-base-permission" aria-label="デモ手順を閉じる"></label>
+<div class="demo-window" role="group" aria-label="デモ手順">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Base permission</span><span class="demo-note">発表者専用</span><label class="demo-close" for="demo-governance-base-permission" aria-label="閉じる">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">ORG の BASE PERMISSION</p>
+<p><a href="https://github.com/organizations/theomonfort-org/settings/member_privileges" target="_blank" rel="noopener noreferrer">theomonfort-org → Member privileges ↗</a></p>
+<p>Organization settings → Access → Member privileges → <b>Base permissions</b></p>
+<p>ドロップダウンを開く：<code class="demo-path">No permission</code>、<code class="demo-path">Read</code>、<code class="demo-path">Write</code>、<code class="demo-path">Admin</code>。</p>
+<p class="demo-out"><b>No permission</b> = Single org / 🔴 Red。<b>Write</b> = 🟢 Green / 🟡 Sandbox。変更は全メンバーに即反映されるため、保存せずに見せるだけにする。</p>
+</li>
+</ol>
+</div>
+</div>
 
 まず org をいくつ作るか。モデルごとに、全社員が最初から何を見られるかが変わる。
 

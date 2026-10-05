@@ -51,7 +51,23 @@ links:
   </p>
 </div>
 
-## Three org models <a class="h2-doc" href="https://learn.github.com/well-architected/governance/recommendations/governance-administration-essentials" target="_blank" rel="noopener noreferrer">📖 Docs</a> <a class="h2-doc" href="https://octonihon.github.io/events/2026-03-24-GitHub-OctoNihon-Forum/20260324_OctoNihon_Ricoh.pdf" target="_blank" rel="noopener noreferrer">🏢 Ricoh case</a>
+## Three org models <a class="h2-doc" href="https://learn.github.com/well-architected/governance/recommendations/governance-administration-essentials" target="_blank" rel="noopener noreferrer">📖 Docs</a> <a class="h2-doc" href="https://octonihon.github.io/events/2026-03-24-GitHub-OctoNihon-Forum/20260324_OctoNihon_Ricoh.pdf" target="_blank" rel="noopener noreferrer">🏢 Ricoh case</a> <input type="checkbox" id="demo-governance-base-permission" class="demo-toggle" /><label class="h2-demo" for="demo-governance-base-permission">&#9658; DEMO</label>
+
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-governance-base-permission" aria-label="Close demo steps"></label>
+<div class="demo-window" role="group" aria-label="Demo steps">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Base permission</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-governance-base-permission" aria-label="Close">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">ORG BASE PERMISSION</p>
+<p><a href="https://github.com/organizations/theomonfort-org/settings/member_privileges" target="_blank" rel="noopener noreferrer">theomonfort-org → Member privileges ↗</a></p>
+<p>Organization settings → Access → Member privileges → <b>Base permissions</b></p>
+<p>Open the dropdown: <code class="demo-path">No permission</code>, <code class="demo-path">Read</code>, <code class="demo-path">Write</code>, <code class="demo-path">Admin</code>.</p>
+<p class="demo-out"><b>No permission</b> = Single org / 🔴 Red. <b>Write</b> = 🟢 Green / 🟡 Sandbox. Changes apply to every member at once, so show it without saving.</p>
+</li>
+</ol>
+</div>
+</div>
 
 First decision: how many orgs? Each model changes what everyone can see by default.
 
