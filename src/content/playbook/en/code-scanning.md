@@ -90,7 +90,7 @@ links:
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🖥️</span><span class="det-name">Code scanning (the feature)</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🖥️</span><span class="det-title">Code scanning — GitHub's surface</span></p>
-<p class="det-why">The <b>feature</b> that collects static-analysis results and surfaces them: Security tab alerts, inline PR comments, merge protection, Security overview, APIs. <b>Whatever the engine, results land here.</b></p>
+<p class="det-why">The <b>feature</b> that collects results from <b>static analysis</b> (CodeQL, third-party tools) and <b>AI detections</b>, and surfaces them: Security tab alerts, inline PR comments, merge protection, Security overview, APIs. <b>Whatever the engine, results land here.</b></p>
 </div>
 </details>
 <details class="det-pick" name="cs-vs-codeql">
