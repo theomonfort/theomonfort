@@ -274,10 +274,10 @@ links:
 <details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Dependency review</span><span class="trio-chip is-free">PUBLIC は無料</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">その変更がどの依存関係を追加・削除・更新するかを PR 上で表示し、既知の脆弱性ならマージをブロック。</p></details>
 <details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">カスタム auto-triage ルール</span><span class="trio-chip is-free">PUBLIC は無料</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">Dependabot アラートを自社ルールで一括自動クローズ・再オープン。実リスクだけがバックログに残る。</p></details>
 <details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Security overview</span><span class="trio-chip is-paid">ライセンスのみ</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">サプライチェーンのリスクとカバレッジを、全リポジトリ横断で組織全体に集約。</p></details>
+<details class="trio-row trio-foot" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">その他のサプライチェーン機能</span><span class="trio-chip is-free">全プランで無料</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">Dependency graph、Dependabot alerts、security / version updates、マルウェアアラート、プリセット auto-triage ルール、SBOM エクスポートは <b>全プランで無料</b>。</p></details>
 </div>
 
 </div>
-<details class="trio-row trio-foot" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">その他のサプライチェーン機能</span><span class="trio-chip is-free">全プランで無料</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">Dependency graph、Dependabot alerts、security / version updates、マルウェアアラート、プリセット auto-triage ルール、SBOM エクスポートは <b>全プランで無料</b>。</p></details>
 </div>
 
 ## 料金 <a class="h2-doc" href="https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security" target="_blank" rel="noopener noreferrer">📖 Docs</a>

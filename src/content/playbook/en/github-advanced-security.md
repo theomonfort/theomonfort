@@ -274,10 +274,10 @@ Scanning tools normally live outside the platform: a separate console, a separat
 <details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Dependency review</span><span class="trio-chip is-free">FREE ON PUBLIC</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">A pull request check showing which dependencies the change adds, removes, or upgrades, blocking the merge on a known vulnerability.</p></details>
 <details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Custom auto-triage rules</span><span class="trio-chip is-free">FREE ON PUBLIC</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">Your own rules to auto-dismiss or reopen Dependabot alerts at scale, so the backlog reflects real risk.</p></details>
 <details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Security overview</span><span class="trio-chip is-paid">LICENSED ONLY</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">Org-wide aggregation of supply chain risk and coverage, across every repository.</p></details>
+<details class="trio-row trio-foot" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Other supply-chain features</span><span class="trio-chip is-free">FREE ON ALL PLANS</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">Dependency graph, Dependabot alerts, security and version updates, malware alerts, preset auto-triage rules, and SBOM export are <b>free on every plan</b>.</p></details>
 </div>
 
 </div>
-<details class="trio-row trio-foot" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Other supply-chain features</span><span class="trio-chip is-free">FREE ON ALL PLANS</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">Dependency graph, Dependabot alerts, security and version updates, malware alerts, preset auto-triage rules, and SBOM export are <b>free on every plan</b>.</p></details>
 </div>
 
 ## Pricing <a class="h2-doc" href="https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security" target="_blank" rel="noopener noreferrer">📖 Docs</a>
