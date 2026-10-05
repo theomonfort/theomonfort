@@ -254,6 +254,7 @@ links:
 <div class="trio-panels">
 
 <div class="trio-panel">
+<details class="trio-row trio-intro" name="ghas-feature"><summary class="trio-summary"><span class="trio-k"><span class="trio-q" aria-hidden="true">?</span><b>Secret scanning</b> とは<span class="trio-sub">コードに置き忘れた鍵を探す</span></span><span class="trio-chip is-intro">基礎知識</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">脆弱性ではなく、<b>コードや git 履歴に書いてしまった API キー、トークン、パスワード</b>を探す。攻撃者にとって一番安上がりな侵入口なので、SAST より優先度が高いことも多い。<b>行を消しても履歴には残る</b>ため、漏れた secret は無効化とローテーションが必須。</p></details>
 <details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Secret scanning</span><span class="trio-chip is-free">PUBLIC は無料</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v"><b>git 履歴全体</b>と新規 push を <b>200 以上のプロバイダーパターン</b>で走査。<b>Validity check</b> で漏れたトークンの生死を判定。</p></details>
 <details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Push protection</span><span class="trio-chip is-free">PUBLIC は無料</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">secret を含む push 自体を拒否する。リモートに到達しないのでローテーションも不要。</p></details>
 <details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">AI-detected secrets</span><span class="trio-chip is-paid">ライセンスのみ</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">正規表現で表現できない<b>非構造の</b>認証情報を検出。設定ファイル内のパスワードや文章中の secret など。</p></details>
@@ -263,6 +264,7 @@ links:
 </div>
 
 <div class="trio-panel">
+<details class="trio-row trio-intro" name="ghas-feature"><summary class="trio-summary"><span class="trio-k"><span class="trio-q" aria-hidden="true">?</span><b>SAST</b> とは<span class="trio-sub">自分が書いたコードを、実行せずに読む</span></span><span class="trio-chip is-intro">基礎知識</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v"><b>Static Application Security Testing</b>。ソースコードを<b>実行せずに</b>解析するので、ビルドもデプロイも不要で <b>PR の時点で回せる</b>（shift-left）。修正コストが一番安いタイミング。反面、<b>実行時にしか分からない設定ミスや認証フローの穴は見えない</b>。そこは動いているアプリを外から叩く <b>DAST</b> の領分（GitHub 純正機能はなし、結果は SARIF で取り込める）。</p></details>
 <details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Code scanning (CodeQL)</span><span class="trio-chip is-free">PUBLIC は無料</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">コードを<b>クエリ可能な DB</b> にコンパイルし、危険なシンクへのデータフローを追跡。インジェクション、パストラバーサルなど。</p></details>
 <details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Copilot Autofix</span><span class="trio-chip is-free">PUBLIC は無料</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">アラートを PR 上の<b>説明付き修正差分</b>に変える。修正率が実際に動くのはここ。</p></details>
 <details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">AI-powered detections</span><span class="trio-chip is-paid">ライセンスのみ</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">CodeQL のクエリが無い言語やフレームワークをカバーする AI エンジン。PR レビュー時に動く。</p></details>
@@ -271,6 +273,7 @@ links:
 </div>
 
 <div class="trio-panel">
+<details class="trio-row trio-intro" name="ghas-feature"><summary class="trio-summary"><span class="trio-k"><span class="trio-q" aria-hidden="true">?</span><b>SCA</b> とは<span class="trio-sub">他人が書いたコード（依存関係）を洗う</span></span><span class="trio-chip is-intro">基礎知識</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v"><b>Software Composition Analysis</b>。マニフェストや lock ファイルから、自分が書いていない<b>ライブラリ側の既知の脆弱性（CVE）</b>を洗い出す。現代のアプリはコードの大半が依存パッケージなので、件数ベースでは一番のヒット源になりやすい。<b>SAST は自分のコード、SCA は他人のコード</b>。守備範囲が違うので、どちらか一方では埋まらない。</p></details>
 <details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Dependency review</span><span class="trio-chip is-free">PUBLIC は無料</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">その変更がどの依存関係を追加・削除・更新するかを PR 上で表示し、既知の脆弱性ならマージをブロック。</p></details>
 <details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">カスタム auto-triage ルール</span><span class="trio-chip is-free">PUBLIC は無料</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">Dependabot アラートを自社ルールで一括自動クローズ・再オープン。実リスクだけがバックログに残る。</p></details>
 <details class="trio-row" name="ghas-feature"><summary class="trio-summary"><span class="trio-k">Security overview</span><span class="trio-chip is-paid">ライセンスのみ</span><span class="trio-toggle" aria-hidden="true"></span></summary><p class="trio-v">サプライチェーンのリスクとカバレッジを、全リポジトリ横断で組織全体に集約。</p></details>
