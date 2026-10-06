@@ -29,6 +29,9 @@ links:
   - group: 📖 公式ドキュメント
     label: About Copilot auto model selection
     url: https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/auto-model-selection
+  - group: 🔗 公式リソース
+    label: "Well-Architected: GitHub Enterprise Policies & Best Practices"
+    url: https://learn.github.com/well-architected/governance/recommendations/governance-policies-best-practices
   - group: 📰 発表
     label: "managed-settings.json is generally available (2026-07-01)"
     url: https://github.blog/changelog/2026-07-01-enterprise-managed-settings-json-is-generally-available/
@@ -333,9 +336,9 @@ flowchart LR
 </div>
 </div>
 
-## 18 項目のガードレール <a class="h2-doc" href="https://learn.github.com/well-architected/governance/recommendations/governance-policies-best-practices" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## 21 項目のガードレール <a class="h2-doc" href="https://learn.github.com/well-architected/governance/recommendations/governance-policies-best-practices" target="_blank" rel="noopener noreferrer">📖 Well-Architected</a>
 
-設定する値と、設定する場所。**時間がなければ 03、15、18。**
+設定する値と場所。19〜21 は Copilot。**時間がなければ 03、15、18。**
 
 <div class="grd-widget grd-compact">
 <p class="grd-hint">▸ 数字をクリック · ENT / ORG / REPO = 設定する場所</p>
@@ -471,6 +474,30 @@ flowchart LR
 <p class="grd-head"><span class="grd-num">18</span><span class="grd-title">Audit log streaming</span><span class="grd-lvl">ENT</span></p>
 <p class="grd-row"><span class="grd-k">⚙️ 設定</span><span class="grd-v">SIEM やオブジェクトストレージへ<b>設定する</b>。</span></p>
 <p class="grd-row"><span class="grd-k">💡 理由</span><span class="grd-v">最も忘れられがちで、不正検知には最も効く。</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">19</span><span class="grd-name">Copilot 権限</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">19</span><span class="grd-title">Copilot permissions</span><span class="grd-lvl">ENT</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ 設定</span><span class="grd-v"><code>disableBypassPermissionsMode</code> で <b>YOLO を禁止</b>。</span></p>
+<p class="grd-row"><span class="grd-k">💡 理由</span><span class="grd-v">allow-all だとエージェントが確認なしで何でも実行する。</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">20</span><span class="grd-name">Copilot sandbox</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">20</span><span class="grd-title">Copilot local sandbox</span><span class="grd-lvl">ENT</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ 設定</span><span class="grd-v"><code>enabled: true</code> と <code>allowBypass: false</code> で<b>強制</b>。</span></p>
+<p class="grd-row"><span class="grd-k">💡 理由</span><span class="grd-v">作業フォルダの外（<code>~/.ssh</code>、Keychain）に触れさせない。</span></p>
+</div>
+</details>
+<details class="grd-pick" name="gov-guard">
+<summary class="grd-btn"><span class="grd-num">21</span><span class="grd-name">MCP 許可リスト</span></summary>
+<div class="grd-pane">
+<p class="grd-head"><span class="grd-num">21</span><span class="grd-title">MCP server allowlist</span><span class="grd-lvl">ENT</span></p>
+<p class="grd-row"><span class="grd-k">⚙️ 設定</span><span class="grd-v"><code>allowedMcpServers</code> で<b>審査済みのサーバーだけ</b>許可。</span></p>
+<p class="grd-row"><span class="grd-k">💡 理由</span><span class="grd-v">未審査の MCP サーバーにコードや token が渡る。</span></p>
 </div>
 </details>
 </div>
