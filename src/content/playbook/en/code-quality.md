@@ -32,6 +32,12 @@ links:
   - group: 📖 Official Documentation
     label: Code scanning
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/code-scanning
+  - group: 📚 Research
+    label: "Code for Machines, Not Just Humans: AI-friendliness and Code Health (FORGE 2026)"
+    url: https://arxiv.org/abs/2601.02200
+  - group: 📚 Research
+    label: "Code Health in LLM-Based Test Generation: Effectiveness and Token Efficiency (SCAM 2026)"
+    url: https://arxiv.org/abs/2608.18645
   - group: 💰 Billing
     label: GitHub Code Quality billing
     url: https://docs.github.com/en/enterprise-cloud@latest/billing/concepts/product-billing/github-code-quality
@@ -125,15 +131,16 @@ Generally available since **July 20, 2026**. Its job is to keep code reliable, m
 
 ## Catch issues before merge
 
-The best time to fix quality debt is while the pull request context is still fresh. In GitHub's engineering organization, teams resolve **67.3% of Code Quality findings before merge**.
+Fix quality debt while the PR context is still fresh. GitHub's own teams resolve **67.3% of Code Quality findings before merge**.
 
-1. **Set the bar first** — configure a ruleset quality gate so changes below your standard cannot be merged.
+1. **Set the bar first** — a ruleset quality gate blocks merges below your standard.
 2. **Open a PR** — it triggers rules-based and AI-assisted analysis, and findings land inline with an explanation and a suggested change.
-3. **Resolve** — apply the autofix, dismiss with a reason, or delegate broader remediation to Copilot.
-4. **The gate holds** — the PR stays blocked until the required findings are resolved.
-5. 🎁 **Bonus** — fix an alert straight from the Security tab, or open a campaign to work through the backlog in an organized way.
+3. **Resolve** — apply the autofix, dismiss with a reason, or delegate to Copilot.
 
-> ⚡ Fixing findings in the PR prevents a second remediation PR and keeps the default-branch backlog clean.
+**When AI writes most of the code, a deterministic gate is what holds the bar.** Agents focus on their task, not on the code around it, and the debt that slips through comes back to them:
+
+- 🐛 **Riskier edits**: AI refactors of unhealthy code carry **30%+ higher defect risk** (<a class="retro-link" href="https://arxiv.org/abs/2601.02200" target="_blank" rel="noopener noreferrer">FORGE 2026 ↗</a>)
+- 🪙 **Costlier reads**: lower code health means **more input tokens** for the same code (<a class="retro-link" href="https://arxiv.org/abs/2608.18645" target="_blank" rel="noopener noreferrer">SCAM 2026 ↗</a>)
 
 ## Agentic Autofix <a class="h2-doc" href="https://github.blog/changelog/2026-09-09-remediate-code-quality-findings-with-agentic-autofix/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 

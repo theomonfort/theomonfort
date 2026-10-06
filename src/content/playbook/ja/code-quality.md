@@ -32,6 +32,12 @@ links:
   - group: 📖 公式ドキュメント
     label: Code scanning
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/code-scanning
+  - group: 📚 研究
+    label: "Code for Machines, Not Just Humans: AI-friendliness and Code Health (FORGE 2026)"
+    url: https://arxiv.org/abs/2601.02200
+  - group: 📚 研究
+    label: "Code Health in LLM-Based Test Generation: Effectiveness and Token Efficiency (SCAM 2026)"
+    url: https://arxiv.org/abs/2608.18645
   - group: 💰 料金
     label: GitHub Code Quality billing
     url: https://docs.github.com/en/enterprise-cloud@latest/billing/concepts/product-billing/github-code-quality
@@ -127,13 +133,14 @@ links:
 
 品質負債を直す最適なタイミングは、PR の文脈がまだ新鮮な間。GitHub 社内では、Code Quality finding の **67.3% を PR のマージ前に解消** している。
 
-1. **先に基準を決める** — ruleset の品質ゲートを設定し、基準を下回る変更をマージできないようにする。
+1. **先に基準を決める** — ruleset の品質ゲートで、基準を下回る変更のマージを防ぐ。
 2. **PR を開く** — ルールベース解析と AI 解析が走り、説明と修正提案付きの finding がインラインに表示される。
-3. **解消する** — Autofix の適用、理由付き dismiss、または Copilot への修正委任を選択。
-4. **ゲートが効く** — 必要な finding が解消されるまで PR はブロックされたまま。
-5. 🎁 **おまけ** — Security タブから直接アラートを修正、または campaign を作ってバックログを整理された形で消化。
+3. **解消する** — Autofix の適用、理由付き dismiss、または Copilot に委任。
 
-> ⚡ PR 内で解消すれば、後日修正専用の PR を作らずに済み、default branch のバックログも増えない。
+**AI がコードの大半を書くなら、品質の基準を守るのは決定論的なゲート。** エージェントは自分のタスクに集中し、周囲のコードまでは見ない。すり抜けた負債は AI 自身に跳ね返る:
+
+- 🐛 **編集が壊れやすい**: 不健全なコードを AI がリファクタすると、欠陥リスクが **30% 以上高い**（<a class="retro-link" href="https://arxiv.org/abs/2601.02200" target="_blank" rel="noopener noreferrer">FORGE 2026 ↗</a>）
+- 🪙 **読むコストが増える**: Code Health が低いほど、同じコードでも **入力トークンが増える**（<a class="retro-link" href="https://arxiv.org/abs/2608.18645" target="_blank" rel="noopener noreferrer">SCAM 2026 ↗</a>）
 
 ## Agentic Autofix <a class="h2-doc" href="https://github.blog/changelog/2026-09-09-remediate-code-quality-findings-with-agentic-autofix/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 

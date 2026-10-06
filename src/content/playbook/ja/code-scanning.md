@@ -296,6 +296,23 @@ select ifstmt, "This if-statement is redundant."  // ④ 何をどう報告す�
 </div>
 </div>
 
+## シフトレフト: PR で直す理由
+
+脆弱性を最も安く直せるのは、それを持ち込んだ PR の中。マージされた時点でセキュリティ負債になり、負債はなかなか返済されない。
+
+<div class="tbl-compact">
+
+| | 🟢 PR の中 | 🔴 マージ後 |
+| --- | --- | --- |
+| 🧠 文脈 | 作成者の記憶がまだ新しい | 数週間後に別の誰かが読み解き直す |
+| 🔁 修正コスト | 同じレビューでコミット 1 つ | 新規チケット、PR、レビュー、デプロイ |
+| 🚀 露出 | 本番に届かない | 本番に出て、修正されるまで残る |
+
+</div>
+
+- 📉 **マージ後は放置されがち**: マージ済みコードのセキュリティ負債のうち、これまで対応されてきたのは **10%** だけ（<a class="retro-link" href="https://github.blog/security/application-security/found-means-fixed-reduce-security-debt-at-scale-with-github-security-campaigns/" target="_blank" rel="noopener noreferrer">GitHub のデータ ↗</a>）
+- ⏱️ **PR の中なら速い**: PR で検出したアラートは、Copilot Autofix で修正までの中央値 **28 分**、手動では **1.5 時間**（<a class="retro-link" href="https://github.blog/news-insights/product-news/secure-code-more-than-three-times-faster-with-copilot-autofix/" target="_blank" rel="noopener noreferrer">GitHub, 2024 ↗</a>）
+
 ## Copilot Autofix: 修正提案 <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 Copilot Autofix は **対応するアラートに修正パッチを提案**する。レビューとテストをしてから適用するもので、修正の成功が保証されるわけではない。
