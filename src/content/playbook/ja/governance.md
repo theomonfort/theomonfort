@@ -29,6 +29,9 @@ links:
   - group: 📖 公式ドキュメント
     label: About Copilot auto model selection
     url: https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/auto-model-selection
+  - group: 🔗 公式リソース
+    label: "Well-Architected: GitHub Enterprise Policies & Best Practices"
+    url: https://learn.github.com/well-architected/governance/recommendations/governance-policies-best-practices
   - group: 📰 発表
     label: "managed-settings.json is generally available (2026-07-01)"
     url: https://github.blog/changelog/2026-07-01-enterprise-managed-settings-json-is-generally-available/
@@ -333,7 +336,7 @@ flowchart LR
 </div>
 </div>
 
-## 21 項目のガードレール <a class="h2-doc" href="https://learn.github.com/well-architected/governance/recommendations/governance-policies-best-practices" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## 21 項目のガードレール <a class="h2-doc" href="https://learn.github.com/well-architected/governance/recommendations/governance-policies-best-practices" target="_blank" rel="noopener noreferrer">📖 Well-Architected</a>
 
 設定する値と場所。19〜21 は Copilot。**時間がなければ 03、15、18。**
 
