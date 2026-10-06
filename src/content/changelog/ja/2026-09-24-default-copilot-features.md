@@ -5,6 +5,7 @@ summary: "このポリシーは 10 月 22 日から適用されます。管理�
 category: administration
 status: "10 月 22 日適用"
 source: "https://github.blog/changelog/2026-09-24-default-enablement-of-copilot-features-for-copilot-business-and-enterprise/"
+demoUrl: "https://github.com/enterprises/octodemo/ai-controls/copilot/features"
 ---
 
 ### 覚えておきたいこと
