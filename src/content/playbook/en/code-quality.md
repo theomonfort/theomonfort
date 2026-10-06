@@ -131,16 +131,16 @@ Generally available since **July 20, 2026**. Its job is to keep code reliable, m
 
 ## Catch issues before merge
 
-Fix quality debt while the PR context is still fresh. GitHub's own teams resolve **67.3% of Code Quality findings before merge**.
+Fix debt while the PR is fresh: GitHub's teams resolve **67.3% of findings before merge**.
 
-1. **Set the bar first** — a ruleset quality gate blocks merges below your standard.
-2. **Open a PR** — it triggers rules-based and AI-assisted analysis, and findings land inline with an explanation and a suggested change.
-3. **Resolve** — apply the autofix, dismiss with a reason, or delegate to Copilot.
+1. **Set the bar** — a ruleset blocks merges below it.
+2. **Open a PR** — CodeQL + AI findings land inline.
+3. **Resolve** — autofix, dismiss, or delegate to Copilot.
 
-**When AI writes most of the code, a deterministic gate is what holds the bar.** Agents focus on their task, not on the code around it, and the debt that slips through comes back to them:
+**When AI writes most of the code, this gate holds the bar.** Agents focus on their task, and the debt that slips through comes back to them:
 
-- 🐛 **Riskier edits**: AI refactors of unhealthy code carry **30%+ higher defect risk** (<a class="retro-link" href="https://arxiv.org/abs/2601.02200" target="_blank" rel="noopener noreferrer">FORGE 2026 ↗</a>)
-- 🪙 **Costlier reads**: lower code health means **more input tokens** for the same code (<a class="retro-link" href="https://arxiv.org/abs/2608.18645" target="_blank" rel="noopener noreferrer">SCAM 2026 ↗</a>)
+- 🐛 AI edits on unhealthy code are <a class="retro-link" href="https://arxiv.org/abs/2601.02200" target="_blank" rel="noopener noreferrer">**30%+ riskier** ↗</a>
+- 🪙 Unhealthy code takes <a class="retro-link" href="https://arxiv.org/abs/2608.18645" target="_blank" rel="noopener noreferrer">**more tokens** to read ↗</a>
 
 ## Agentic Autofix <a class="h2-doc" href="https://github.blog/changelog/2026-09-09-remediate-code-quality-findings-with-agentic-autofix/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
