@@ -131,16 +131,20 @@ Generally available since **July 20, 2026**. Its job is to keep code reliable, m
 
 ## Catch issues before merge
 
-Fix debt while the PR is fresh: GitHub's teams resolve **67.3% of findings before merge**.
+When AI writes most of the code, a ruleset quality gate on every PR is what holds the bar. GitHub's teams fix **67.3%** of findings before merge (<a class="retro-link" href="https://github.blog/changelog/2026-07-20-github-code-quality-is-now-generally-available/" target="_blank" rel="noopener noreferrer">GitHub,&nbsp;2026&nbsp;↗</a>).
 
-1. **Set the bar** — a ruleset blocks merges below it.
-2. **Open a PR** — CodeQL + AI findings land inline.
-3. **Resolve** — autofix, dismiss, or delegate to Copilot.
+<div class="tbl-compact">
 
-**When AI writes most of the code, this gate holds the bar.** Agents focus on their task, and the debt that slips through comes back to them:
+| | 🟢 Gate on every PR | 🔴 No gate |
+| --- | --- | --- |
+| 🤖 Agent | Its blind spots get caught | Its blind spots get merged |
+| 🔧 Fix | Autofix in the same PR | Cleanup PR later, if ever |
+| 📉 Codebase | Stays at your bar | Debt hits the next agent |
 
-- 🐛 AI edits on unhealthy code are <a class="retro-link" href="https://arxiv.org/abs/2601.02200" target="_blank" rel="noopener noreferrer">**30%+ riskier** ↗</a>
-- 🪙 Unhealthy code takes <a class="retro-link" href="https://arxiv.org/abs/2608.18645" target="_blank" rel="noopener noreferrer">**more tokens** to read ↗</a>
+</div>
+
+- 🐛 **Riskier edits**: AI edits on unhealthy code carry **30%+ higher defect risk** (<a class="retro-link" href="https://arxiv.org/abs/2601.02200" target="_blank" rel="noopener noreferrer">FORGE&nbsp;2026&nbsp;↗</a>)
+- 🪙 **Costlier reads**: unhealthy code takes **more input tokens** to read (<a class="retro-link" href="https://arxiv.org/abs/2608.18645" target="_blank" rel="noopener noreferrer">SCAM&nbsp;2026&nbsp;↗</a>)
 
 ## Agentic Autofix <a class="h2-doc" href="https://github.blog/changelog/2026-09-09-remediate-code-quality-findings-with-agentic-autofix/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 

@@ -310,8 +310,8 @@ select ifstmt, "This if-statement is redundant."  // ④ 何をどう報告す�
 
 </div>
 
-- 📉 **マージ後は放置されがち**: マージ済みコードのセキュリティ負債のうち、これまで対応されてきたのは **10%** だけ（<a class="retro-link" href="https://github.blog/security/application-security/found-means-fixed-reduce-security-debt-at-scale-with-github-security-campaigns/" target="_blank" rel="noopener noreferrer">GitHub のデータ ↗</a>）
-- ⏱️ **PR の中なら速い**: PR で検出したアラートは、Copilot Autofix で修正までの中央値 **28 分**、手動では **1.5 時間**（<a class="retro-link" href="https://github.blog/news-insights/product-news/secure-code-more-than-three-times-faster-with-copilot-autofix/" target="_blank" rel="noopener noreferrer">GitHub, 2024 ↗</a>）
+- 📉 **マージ後は放置されがち**: マージ済みコードのセキュリティ負債のうち、これまで対応されてきたのは **10%** だけ（<a class="retro-link" href="https://github.blog/security/application-security/found-means-fixed-reduce-security-debt-at-scale-with-github-security-campaigns/" target="_blank" rel="noopener noreferrer">GitHub&nbsp;のデータ&nbsp;↗</a>）
+- ⏱️ **PR の中なら速い**: PR で検出したアラートは、Copilot Autofix で修正までの中央値 **28 分**、手動では **1.5 時間**（<a class="retro-link" href="https://github.blog/news-insights/product-news/secure-code-more-than-three-times-faster-with-copilot-autofix/" target="_blank" rel="noopener noreferrer">GitHub,&nbsp;2024&nbsp;↗</a>）
 
 ## Copilot Autofix: 修正提案 <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 

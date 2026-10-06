@@ -304,14 +304,14 @@ A vulnerability is cheapest to fix in the pull request that introduces it. Once 
 
 | | 🟢 In the PR | 🔴 After merge |
 | --- | --- | --- |
-| 🧠 Context | The author is still in the code | Someone rediscovers it weeks later |
-| 🔁 Fix cost | One more commit, same review | New ticket, new PR, new review, new deploy |
+| 🧠 Context | Fresh in the author's head | Rediscovered weeks later |
+| 🔁 Fix cost | One commit, same review | Ticket, PR, review, deploy |
 | 🚀 Exposure | Never reaches production | Can ship and stay live until fixed |
 
 </div>
 
-- 📉 **Merged means forgotten**: historically, only **10%** of security debt in merged code gets addressed (<a class="retro-link" href="https://github.blog/security/application-security/found-means-fixed-reduce-security-debt-at-scale-with-github-security-campaigns/" target="_blank" rel="noopener noreferrer">GitHub data ↗</a>)
-- ⏱️ **In the PR, it is fast**: with Copilot Autofix, PR-time alerts were fixed in a median **28 min** vs **1.5 h** manually (<a class="retro-link" href="https://github.blog/news-insights/product-news/secure-code-more-than-three-times-faster-with-copilot-autofix/" target="_blank" rel="noopener noreferrer">GitHub, 2024 ↗</a>)
+- 📉 **Merged means forgotten**: historically, only **10%** of security debt in merged code gets addressed (<a class="retro-link" href="https://github.blog/security/application-security/found-means-fixed-reduce-security-debt-at-scale-with-github-security-campaigns/" target="_blank" rel="noopener noreferrer">GitHub&nbsp;data&nbsp;↗</a>)
+- ⏱️ **In the PR, it is fast**: with Copilot Autofix, PR-time alerts were fixed in a median **28 min** vs **1.5 h** manually (<a class="retro-link" href="https://github.blog/news-insights/product-news/secure-code-more-than-three-times-faster-with-copilot-autofix/" target="_blank" rel="noopener noreferrer">GitHub,&nbsp;2024&nbsp;↗</a>)
 
 ## Copilot Autofix: suggested fixes <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 

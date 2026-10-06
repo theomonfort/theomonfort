@@ -131,16 +131,20 @@ links:
 
 ## マージ前に修正
 
-品質負債は PR が新鮮なうちに直す。GitHub 社内では finding の **67.3% をマージ前に解消**。
+AI がコードの大半を書くなら、品質を守るのは PR ごとの ruleset 品質ゲート。GitHub 社内では finding の **67.3%** をマージ前に解消している（<a class="retro-link" href="https://github.blog/changelog/2026-07-20-github-code-quality-is-now-generally-available/" target="_blank" rel="noopener noreferrer">GitHub,&nbsp;2026&nbsp;↗</a>）。
 
-1. **基準を決める** — ruleset で基準未満のマージを防ぐ。
-2. **PR を開く** — CodeQL と AI の finding がインライン表示。
-3. **解消する** — Autofix、dismiss、または Copilot に委任。
+<div class="tbl-compact">
 
-**AI がコードの大半を書くなら、品質を守るのはこのゲート。** エージェントはタスクに集中し、すり抜けた負債は AI 自身に跳ね返る:
+| | 🟢 PR ごとにゲート | 🔴 ゲートなし |
+| --- | --- | --- |
+| 🤖 エージェント | 見落としをゲートが検出 | 見落としがそのままマージ |
+| 🔧 修正 | 同じ PR 内で Autofix | 後で修正 PR、後回しになりがち |
+| 📉 コードベース | 基準を維持 | 負債が次のエージェントに残る |
 
-- 🐛 AI が不健全なコードを編集すると <a class="retro-link" href="https://arxiv.org/abs/2601.02200" target="_blank" rel="noopener noreferrer">**欠陥リスク 30% 以上増** ↗</a>
-- 🪙 不健全なコードほど <a class="retro-link" href="https://arxiv.org/abs/2608.18645" target="_blank" rel="noopener noreferrer">**読むトークンが増える** ↗</a>
+</div>
+
+- 🐛 **編集が壊れやすい**: 不健全なコードへの AI の編集は欠陥リスクが **30% 以上高い**（<a class="retro-link" href="https://arxiv.org/abs/2601.02200" target="_blank" rel="noopener noreferrer">FORGE&nbsp;2026&nbsp;↗</a>）
+- 🪙 **読むコストが増える**: Code Health が低いほど **入力トークンが増える**（<a class="retro-link" href="https://arxiv.org/abs/2608.18645" target="_blank" rel="noopener noreferrer">SCAM&nbsp;2026&nbsp;↗</a>）
 
 ## Agentic Autofix <a class="h2-doc" href="https://github.blog/changelog/2026-09-09-remediate-code-quality-findings-with-agentic-autofix/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
