@@ -163,7 +163,7 @@ AI がコードの大半を書くなら、品質を守るのは PR ごとの rul
 </div>
 
 - 🐛 **編集が壊れやすい**: 不健全なコードへの AI の編集は欠陥リスクが **30% 以上高い**（<a class="retro-link" href="https://arxiv.org/abs/2601.02200" target="_blank" rel="noopener noreferrer">FORGE&nbsp;2026&nbsp;↗</a>）
-- 🪙 **読むコストが増える**: Code Health が低いほど **入力トークンが増える**（<a class="retro-link" href="https://arxiv.org/abs/2608.18645" target="_blank" rel="noopener noreferrer">SCAM&nbsp;2026&nbsp;↗</a>）
+- 🪙 **読むコストが増える**: Code Health が最も低いコードは入力トークンが **約 45% 増**（Java / C++、<a class="retro-link" href="https://arxiv.org/abs/2608.18645" target="_blank" rel="noopener noreferrer">SCAM&nbsp;2026&nbsp;↗</a>）
 
 ## Agentic Autofix <a class="h2-doc" href="https://github.blog/changelog/2026-09-09-remediate-code-quality-findings-with-agentic-autofix/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
