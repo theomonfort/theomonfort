@@ -129,6 +129,25 @@ Generally available since **July 20, 2026**. Its job is to keep code reliable, m
 
 > 🔑 Use both: Code Scanning protects against exploitable risk; Code Quality protects long-term code health.
 
+## Language support <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-quality/code-quality#supported-languages" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+Rule-based CodeQL analysis covers **6 languages only: C#, Go, Java, JS/TS, Python, Ruby**. C/C++, Swift and the rest get AI analysis and coverage, nothing more.
+
+<div class="tbl-fit">
+
+| Feature | ✅ 6 CodeQL languages | ⚠️ C/C++ and others |
+| --- | --- | --- |
+| 🔍 CodeQL findings + Autofix on PRs | ✅ | ❌ |
+| 📋 Standard findings on the default branch | ✅ | ❌ |
+| 🤖 Agentic Autofix | ✅ | ❌ |
+| 🚧 Quality gate on findings | ✅ | ❌ |
+| 🧠 AI analysis (recently changed files) | ✅ | ✅ |
+| 🧪 Coverage (Cobertura XML) | ✅ | ✅ |
+
+</div>
+
+> 💡 Only CodeQL findings show up on pull requests. For C/C++ PR reviews, add <a class="retro-link" href="/theomonfort/en/playbook/copilot-code-review/">Copilot code review ↗</a> (a separate product).
+
 ## Catch issues before merge
 
 When AI writes most of the code, a ruleset quality gate on every PR is what holds the bar. GitHub's teams fix **67.3%** of findings before merge (<a class="retro-link" href="https://github.blog/changelog/2026-07-20-github-code-quality-is-now-generally-available/" target="_blank" rel="noopener noreferrer">GitHub,&nbsp;2026&nbsp;↗</a>).
