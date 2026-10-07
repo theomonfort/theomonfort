@@ -296,6 +296,23 @@ The whole language is that shape: **`where` is the definition of "what the bug l
 </div>
 </div>
 
+## Why shift left: fix it in the PR
+
+A vulnerability is cheapest to fix in the pull request that introduces it. Once merged, it becomes security debt, and debt rarely gets paid down.
+
+<div class="tbl-compact">
+
+| | 🟢 In the PR | 🔴 After merge |
+| --- | --- | --- |
+| 🧠 Context | Fresh in the author's head | Rediscovered weeks later |
+| 🔁 Fix cost | One commit, same review | Ticket, PR, review, deploy |
+| 🚀 Exposure | Never reaches production | Can ship and stay live until fixed |
+
+</div>
+
+- 📉 **Merged means forgotten**: historically, only **10%** of security debt in merged code gets addressed (<a class="retro-link" href="https://github.blog/security/application-security/found-means-fixed-reduce-security-debt-at-scale-with-github-security-campaigns/" target="_blank" rel="noopener noreferrer">GitHub&nbsp;data&nbsp;↗</a>)
+- ⏱️ **In the PR, it is fast**: with Copilot Autofix, PR-time alerts were fixed in a median **28 min** vs **1.5 h** manually (<a class="retro-link" href="https://github.blog/news-insights/product-news/secure-code-more-than-three-times-faster-with-copilot-autofix/" target="_blank" rel="noopener noreferrer">GitHub,&nbsp;2024&nbsp;↗</a>)
+
 ## Copilot Autofix: suggested fixes <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 Copilot Autofix can generate a **suggested patch for an eligible alert**. You review, test and apply it; a successful fix is not guaranteed.
