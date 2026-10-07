@@ -398,7 +398,31 @@ You can now **enforce enterprise security configurations**, preventing organizat
 </div>
 </div>
 
-## Visualizing coverage <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/security-at-scale/security-overview" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## Visualizing coverage <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/security-at-scale/security-overview" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-ghas-overview" class="demo-toggle" /><label class="h2-demo" for="demo-ghas-overview">&#9658; DEMO</label>
+
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-ghas-overview" aria-label="Close demo steps"></label>
+<div class="demo-window" role="group" aria-label="Demo steps">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Security overview</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-ghas-overview" aria-label="Close">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">ENTERPRISE LEVEL</p>
+<p>Open <a href="https://github.com/enterprises/octodemo/security/overview" target="_blank" rel="noopener noreferrer">octodemo → Security overview ↗</a> and show the detection / remediation / prevention trends. Then switch to the <b>Coverage</b> and <b>Risk</b> views.</p>
+<p class="demo-out">Only orgs where you are owner or security manager are aggregated.</p>
+</li>
+<li>
+<p class="demo-step-title">ORGANIZATION LEVEL</p>
+<p>Open <a href="https://github.com/orgs/theomonfort-org/security/overview" target="_blank" rel="noopener noreferrer">theomonfort-org → Security overview ↗</a> to show the same dashboard scoped to one org.</p>
+<p class="demo-out">This is the view teams use day to day.</p>
+</li>
+<li>
+<p class="demo-step-title">REPOSITORY LEVEL</p>
+<p>Drill down to one repository with <a href="https://github.com/theomonfort-org/ghas-test-1/security" target="_blank" rel="noopener noreferrer">ghas-test-1 → Security and quality ↗</a>.</p>
+<p class="demo-out">Enterprise → Org → Repo: the same alerts, narrowed step by step.</p>
+</li>
+</ol>
+</div>
+</div>
 
 Once the configuration is out, the question becomes "how far are we actually covered?" The **Security and quality** tab answers it at both **Enterprise** and **Organization** level.
 

@@ -398,7 +398,31 @@ links:
 </div>
 </div>
 
-## カバレッジの可視化 <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/security-at-scale/security-overview" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## カバレッジの可視化 <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/security-at-scale/security-overview" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-ghas-overview" class="demo-toggle" /><label class="h2-demo" for="demo-ghas-overview">&#9658; DEMO</label>
+
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-ghas-overview" aria-label="デモ手順を閉じる"></label>
+<div class="demo-window" role="group" aria-label="デモ手順">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Security overview</span><span class="demo-note">発表者専用</span><label class="demo-close" for="demo-ghas-overview" aria-label="閉じる">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">ENTERPRISE レベル</p>
+<p><a href="https://github.com/enterprises/octodemo/security/overview" target="_blank" rel="noopener noreferrer">octodemo → Security overview ↗</a> を開き、検知 / 修復 / 予防のトレンドを見せる。続けて <b>Coverage</b> と <b>Risk</b> ビューに切り替える。</p>
+<p class="demo-out">自分が owner / security manager の org だけが集計される。</p>
+</li>
+<li>
+<p class="demo-step-title">ORGANIZATION レベル</p>
+<p><a href="https://github.com/orgs/theomonfort-org/security/overview" target="_blank" rel="noopener noreferrer">theomonfort-org → Security overview ↗</a> で同じダッシュボードを org 単位で見せる。</p>
+<p class="demo-out">現場が日常的に見るのはこのビュー。</p>
+</li>
+<li>
+<p class="demo-step-title">REPOSITORY レベル</p>
+<p><a href="https://github.com/theomonfort-org/ghas-test-1/security" target="_blank" rel="noopener noreferrer">ghas-test-1 → Security and quality ↗</a> で 1 リポジトリのアラートまで降りる。</p>
+<p class="demo-out">Enterprise → Org → Repo と、同じアラートを段階的に絞り込む流れ。</p>
+</li>
+</ol>
+</div>
+</div>
 
 配り終わったら次の関心事は「実際どこまで守れているか」。**Security and quality** タブが **Enterprise / Organization** の両レベルで答えてくれる。
 
