@@ -163,7 +163,7 @@ When AI writes most of the code, a ruleset quality gate on every PR is what hold
 </div>
 
 - 🐛 **Riskier edits**: AI edits on unhealthy code carry **30%+ higher defect risk** (<a class="retro-link" href="https://arxiv.org/abs/2601.02200" target="_blank" rel="noopener noreferrer">FORGE&nbsp;2026&nbsp;↗</a>)
-- 🪙 **Costlier reads**: unhealthy code takes **more input tokens** to read (<a class="retro-link" href="https://arxiv.org/abs/2608.18645" target="_blank" rel="noopener noreferrer">SCAM&nbsp;2026&nbsp;↗</a>)
+- 🪙 **Costlier reads**: the least healthy code takes **~45% more input tokens** to read (Java / C++, <a class="retro-link" href="https://arxiv.org/abs/2608.18645" target="_blank" rel="noopener noreferrer">SCAM&nbsp;2026&nbsp;↗</a>)
 
 ## Agentic Autofix <a class="h2-doc" href="https://github.blog/changelog/2026-09-09-remediate-code-quality-findings-with-agentic-autofix/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
