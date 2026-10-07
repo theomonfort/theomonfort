@@ -129,6 +129,25 @@ links:
 
 > 🔑 両方使う。Code Scanning は悪用可能なリスク、Code Quality は長期的なコードの健全性を守る。
 
+## 対応言語 <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-quality/code-quality#supported-languages" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+CodeQL のルールベース解析は **C#, Go, Java, JS/TS, Python, Ruby の 6 言語のみ**。C/C++ や Swift などで使えるのは AI 解析とカバレッジだけ。
+
+<div class="tbl-fit">
+
+| 機能 | ✅ CodeQL 対応 6 言語 | ⚠️ C/C++ ほか |
+| --- | --- | --- |
+| 🔍 PR の CodeQL finding + Autofix | ✅ | ❌ |
+| 📋 default branch の Standard findings | ✅ | ❌ |
+| 🤖 Agentic Autofix | ✅ | ❌ |
+| 🚧 finding による品質ゲート | ✅ | ❌ |
+| 🧠 AI 解析（最近変更されたファイル） | ✅ | ✅ |
+| 🧪 カバレッジ（Cobertura XML） | ✅ | ✅ |
+
+</div>
+
+> 💡 PR 上に出るのは CodeQL の finding だけ。C/C++ の PR レビューは <a class="retro-link" href="/theomonfort/playbook/copilot-code-review/">Copilot code review ↗</a>（別製品）で補う。
+
 ## マージ前に修正
 
 AI がコードの大半を書くなら、品質を守るのは PR ごとの ruleset 品質ゲート。GitHub 社内では finding の **67.3%** をマージ前に解消している（<a class="retro-link" href="https://github.blog/changelog/2026-07-20-github-code-quality-is-now-generally-available/" target="_blank" rel="noopener noreferrer">GitHub,&nbsp;2026&nbsp;↗</a>）。
