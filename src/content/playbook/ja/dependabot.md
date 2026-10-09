@@ -162,14 +162,17 @@ updates:
 
 > 💰 Public repo は無料。Private repo は **GitHub Code Security**(旧 Advanced Security バンドル)が必要。
 
-## 利用条件と料金
+## 利用条件と料金 <a class="h2-doc" href="https://docs.github.com/en/get-started/learning-about-github/about-github-advanced-security" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+Dependabot 本体は **全プラン無料**。有料は Code Security の premium 機能のみ。
 
 | 機能 | Public repo | Private repo（個人 / Free） | Private repo（Team / Enterprise） |
 | --- | :---: | :---: | :---: |
-| Dependency graph | ✅ デフォルト ON | ✅ 無料(opt-in) | ✅ 無料 |
-| Dependabot alerts | ✅ 無料 | ✅ 無料 | ✅ 無料 |
+| Dependency graph | ✅ 既定 ON | ✅ 無料(opt-in) | ✅ 無料 |
+| Dependabot alerts(malware 含む) | ✅ 無料 | ✅ 無料 | ✅ 無料 |
 | Dependabot security updates | ✅ 無料 | ✅ 無料 | ✅ 無料 |
 | Dependabot version updates | ✅ 無料 | ✅ 無料 | ✅ 無料 |
+| Custom auto-triage rules | ✅ 無料 | ❌ | 💰 Code Security |
 
-> 💰 Dependabot 本体は **どのプランでも完全無料**。GitHub Advanced Security ライセンスは不要。  
-> ⚙️ Version updates の Dependabot ジョブは GitHub-hosted runner で実行され、public repo は無料、private repo は Actions の通常無料枠を消費(超過時は従量課金)。
+> ⚙️ standard / self-hosted runner なら **Actions 分数を消費しない**。課金は larger runner のみ。  
+> 🤖 Assign to agent は **Code Security** + coding agent 付き **Copilot プラン** が必要。
