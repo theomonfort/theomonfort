@@ -162,14 +162,17 @@ Every Dependabot alert has an **"Assign to agent"** button — hand it to Copilo
 
 > 💰 Free for public repos. Private repos need **GitHub Code Security** (or the legacy Advanced Security bundle).
 
-## Eligibility and pricing
+## Eligibility and pricing <a class="h2-doc" href="https://docs.github.com/en/get-started/learning-about-github/about-github-advanced-security" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+Core Dependabot is **free on every plan**. Only Code Security premium features cost extra.
 
 | Feature | Public repo | Private repo (Personal / Free) | Private repo (Team / Enterprise) |
 | --- | :---: | :---: | :---: |
 | Dependency graph | ✅ On by default | ✅ Free (opt-in) | ✅ Free |
-| Dependabot alerts | ✅ Free | ✅ Free | ✅ Free |
+| Dependabot alerts (incl. malware) | ✅ Free | ✅ Free | ✅ Free |
 | Dependabot security updates | ✅ Free | ✅ Free | ✅ Free |
 | Dependabot version updates | ✅ Free | ✅ Free | ✅ Free |
+| Custom auto-triage rules | ✅ Free | ❌ | 💰 Code Security |
 
-> 💰 Dependabot itself is **completely free on every plan**. No GitHub Advanced Security license required.  
-> ⚙️ Version update Dependabot jobs run on GitHub-hosted runners — free for public repos; private repos consume the standard Actions free tier (pay-as-you-go when exceeded).
+> ⚙️ On standard or self-hosted runners, jobs **don't use Actions minutes**. Only larger runners are billed.  
+> 🤖 Assign to agent needs **Code Security** + a **Copilot plan** with coding agent.
