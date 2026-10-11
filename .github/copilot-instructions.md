@@ -30,3 +30,22 @@ This is an Astro/Tailwind static site for a bilingual GitHub/Copilot playbook. U
 
 - Keep edits surgical and update both localized files when changing shared content.
 - Do not commit generated build output. Run `pnpm build` before finishing code, content, or presentation-mode changes.
+
+
+<!-- github-knowledge-base-start -->
+## Knowledge Base
+
+### Purpose
+
+This repository uses the Knowledge Base at [https://github.com/theomonfort/theomonfort](https://github.com/theomonfort/theomonfort) on branch `main`.
+
+### Required behavior
+
+1. Before changing code, read `docs/index.md` from that branch.
+2. Use the index to open only the knowledge files relevant to the task.
+3. If the index is unavailable, stop and report that the Knowledge Base could not be loaded.
+
+### Source of truth
+
+Generated knowledge tracks the code. When the knowledge and code disagree, trust the code.
+<!-- github-knowledge-base-end -->
