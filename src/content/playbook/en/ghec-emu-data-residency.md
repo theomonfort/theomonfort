@@ -75,7 +75,7 @@ For GHEC you pick the **account type** and **data location** at creation. **GHES
 | 👤 Accounts | Self sign-up | IdP (**SCIM**) | IdP (**SCIM**) | On the instance |
 | 🔐 Sign-in | Password (+SAML) | **SAML / OIDC** | **SAML / OIDC** | LDAP, CAS, SAML |
 | 🗾 Data location | US | US | EU, AU, US, **JP** | **Your choice** |
-| 📢 Public repos | ✅ | ❌ | ❌ | ✅ Instance-wide |
+| 📢 Public repos | ✅ | ❌ | ❌ | ⚠️ Instance only |
 | 🤝 Outside collab | ✅ | ❌ Read-only | ❌ | ❌ |
 | 🔄 Updates | Auto | Auto | Auto | **Admin-run** |
 | 🤖 Copilot | ✅ | ✅ | ✅ | ⚠️ IDE / CLI only |
