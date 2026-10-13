@@ -4,6 +4,9 @@
   "working_repos": [
     {
       "repo": "self"
+    },
+    {
+      "repo": "theomonfort/Github-copilot-workshop"
     }
   ]
 }
