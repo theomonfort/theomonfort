@@ -152,8 +152,12 @@ CLI は slash command で、モデル・共有・実験機能・環境情報な�
 | `/experimental` | 実験的な機能を確認・有効化する。 |
 | `/chronicle` | セッションの流れや作業履歴を確認する。 |
 | `/task` | background で動いている agent や task を確認する。 |
+| `/fleet [PROMPT]` | 計画をサブタスクに分け、subagent で並列実行する。<a class="retro-link" href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/fleet" target="_blank" rel="noopener noreferrer">Docs ↗</a> |
+| `/limits set max-ai-credits N` | セッションの AI Credits 上限(soft cap)を設定する。<a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/set-session-limit" target="_blank" rel="noopener noreferrer">Docs ↗</a> |
 | `/ask` | 作業を進める前に、質問として Copilot に相談する。 |
 | `/env` | CLI が見ている環境情報を確認する。 |
+
+> 💰 **エージェントは予算を把握している**：使用量・残量・上限が `<session_limits_status>` としてモデルに渡るので、寄り道を控え、最後の 1 回はツールを使わず進捗と残作業をまとめて止まる。`/fleet` の subagent も同じ上限を共有する。非対話では `--max-ai-credits N`。
 
 ## 🖥️ TUI(ターミナル UI)
 

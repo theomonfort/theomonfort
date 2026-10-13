@@ -152,8 +152,12 @@ The CLI lets you instantly check models, sharing, experimental features, and env
 | `/experimental` | Check and enable experimental features. |
 | `/chronicle` | Review the session history and work log. |
 | `/task` | Check agents and tasks running in the background. |
+| `/fleet [PROMPT]` | Split a plan across parallel subagents. <a class="retro-link" href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/fleet" target="_blank" rel="noopener noreferrer">Docs ↗</a> |
+| `/limits set max-ai-credits N` | Set a soft cap on the session's AI Credits. <a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/set-session-limit" target="_blank" rel="noopener noreferrer">Docs ↗</a> |
 | `/ask` | Consult Copilot as a question before proceeding. |
 | `/env` | Check the environment information visible to the CLI. |
+
+> 💰 **The agent knows its budget**: used, remaining, and max credits reach the model as `<session_limits_status>`, so it skips optional exploration. On its final call it uses no tools, summarizes progress and what remains, then stops. `/fleet` subagents share the same limit. Non-interactive: `--max-ai-credits N`.
 
 ## 🖥️ TUI (Terminal UI)
 
