@@ -1,7 +1,7 @@
 ---
 title: EMU とデータレジデンシー
 titleEn: EMU & Data Residency
-summary: GitHub Enterprise Cloud の 3 つの形態（個人アカウント、EMU、データレジデンシー）を比較。EMU のユーザー管理と制約、GHE.com で日本リージョンにデータを保存する仕組み、GitHub.com との違い、Copilot の扱いまで整理。
+summary: GitHub Enterprise Cloud の 3 つの形態（個人アカウント、EMU、データレジデンシー）と自社運用の GHES を比較。EMU のユーザー管理と制約、GHE.com で日本リージョンにデータを保存する仕組み、GHE.com と GHES で使えない機能、Copilot の扱いまで整理。
 icon: 🌏
 color: magenta
 accent:
@@ -38,6 +38,15 @@ links:
   - group: 🌏 データレジデンシー
     label: データレジデンシーでの GitHub Copilot
     url: https://docs.github.com/ja/enterprise-cloud@latest/admin/data-residency/github-copilot-with-data-residency
+  - group: 🏢 GitHub Enterprise Server
+    label: GitHub for enterprises について（デプロイの選択肢）
+    url: https://docs.github.com/ja/enterprise-cloud@latest/admin/overview/about-github-for-enterprises
+  - group: 🏢 GitHub Enterprise Server
+    label: GitHub Enterprise Server について
+    url: https://docs.github.com/ja/enterprise-server@latest/admin/overview/about-github-enterprise-server
+  - group: 🏢 GitHub Enterprise Server
+    label: GitHub Enterprise Server での GitHub Copilot について
+    url: https://docs.github.com/ja/enterprise-server@latest/copilot/copilot-on-ghes/about-copilot-on-ghes
   - group: 📰 発表
     label: GitHub Enterprise Cloud による日本国内でのデータレジデンシーを提供開始（2025-12-19）
     url: https://github.blog/jp/2025-12-19-github-enterprise-cloud-data-residency-in-japan/
@@ -50,22 +59,97 @@ links:
     GitHub Enterprise Cloud は <strong>誰がアカウントを管理するか</strong> と <strong>データをどこに置くか</strong> で 3 つの形態に分かれる。
   </p>
   <p>
-    <strong>EMU</strong> は会社の IdP からアカウントを払い出す方式。<strong>データレジデンシー</strong> は EMU を前提に、<strong>GHE.com</strong> の専用サブドメインで <strong>日本などの指定リージョン</strong> にコードとデータを保存する方式。
+    <strong>EMU</strong> は会社の IdP からアカウントを払い出す方式。<strong>データレジデンシー</strong> は EMU を前提に、<strong>GHE.com</strong> の専用サブドメインで <strong>日本などの指定リージョン</strong> にコードとデータを保存する方式。自社でホストしたい場合は <strong>GitHub Enterprise Server（GHES）</strong> という選択肢もある。
   </p>
 </div>
 
-## GHEC の 3 つの形態 <a class="h2-doc" href="https://docs.github.com/ja/enterprise-cloud@latest/admin/concepts/enterprise-fundamentals/choose-an-enterprise-type" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## GitHub Enterprise の 4 つの形態 <a class="h2-doc" href="https://docs.github.com/ja/enterprise-cloud@latest/admin/overview/about-github-for-enterprises" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-Enterprise の作成時に **ユーザーアカウントの種類** と **Data hosting（保存リージョン）** を選びます。
+GHEC は作成時に **アカウントの種類** と **保存先** を選ぶ。**GHES** はオンプレか自社クラウドで運用する GitHub。
 
-| | 個人アカウント | **EMU** | **データレジデンシー** |
-| --- | --- | --- | --- |
-| 🌐 URL | github.com | github.com | `<subdomain>.ghe.com` |
-| 👤 アカウント | 利用者が自分で作成 | IdP が **SCIM** で作成 | IdP が **SCIM** で作成 |
-| 🔐 認証 | GitHub のパスワード、任意で **SAML** SSO | **SAML** または **OIDC** の SSO（必須） | **SAML** または **OIDC** の SSO（必須） |
-| 📢 Public repo、Gist | ✅ | ❌ | ❌ |
-| 🤝 社外との協業 | ✅ | ❌（public は閲覧のみ） | ❌（GHE.com 内で完結） |
-| 🗾 データ保存先 | 米国 | 米国 | EU、豪州、米国、**日本** |
+<div class="tbl-fit">
+
+| | 個人アカウント | **EMU** | **データレジデンシー** | **GHES** |
+| --- | --- | --- | --- | --- |
+| 🏠 ホスト | github.com | github.com | `*.ghe.com` | **自社** |
+| 👤 アカウント | 各自で作成 | IdP（**SCIM**） | IdP（**SCIM**） | インスタンスで作成 |
+| 🔐 認証 | パスワード、SAML 任意 | **SAML / OIDC** | **SAML / OIDC** | LDAP、CAS、SAML |
+| 🗾 保存先 | 米国 | 米国 | EU、豪州、米国、**日本** | **自社で選択** |
+| 📢 Public repo、Gist | ✅ | ❌ | ❌ | ⚠️ インスタンス内のみ |
+| 🤝 社外との協業 | ✅ | ❌ 閲覧のみ | ❌ | ❌ |
+| 🔄 アップデート | 自動 | 自動 | 自動 | **管理者が実施** |
+| 🤖 Copilot | ✅ | ✅ | ✅ | ⚠️ IDE / CLI のみ |
+| ⚙️ ホストランナー | ✅ | ✅ | ⚠️ macOS なし | ❌ セルフホスト |
+
+</div>
+
+## GHE.com と GHES で使えない機能 <a class="h2-doc" href="https://docs.github.com/ja/enterprise-cloud@latest/admin/data-residency/feature-overview-for-github-enterprise-cloud-with-data-residency" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+GitHub.com の EMU と比べた差分。❌ は使えない、⚠️ は条件付き。
+
+📖 <a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/admin/data-residency/feature-overview-for-github-enterprise-cloud-with-data-residency" target="_blank" rel="noopener noreferrer">GHE.com の機能の概要 ↗</a>　📖 <a class="retro-link" href="https://docs.github.com/ja/enterprise-server@latest/admin/overview/about-github-enterprise-server" target="_blank" rel="noopener noreferrer">GHES について ↗</a>
+
+<div class="ctl-widget">
+<p class="ctl-hint">▸ + をクリックして詳細を表示</p>
+<div class="ctl-list">
+<details class="ctl-item" name="ghe-gaps">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">⚙️</span><span class="ctl-name">Actions</span><span class="ctl-when">macOS、ホストランナー</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">🌏 GHE.com</span><span class="ctl-v">❌ <a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/actions/concepts/runners/github-hosted-runners" target="_blank" rel="noopener noreferrer">macOS ランナー ↗</a><br/>❌ <a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/admin/data-residency/feature-overview-for-github-enterprise-cloud-with-data-residency" target="_blank" rel="noopener noreferrer">Marketplace ↗</a>（Action や App はソースから導入）</span></p>
+<p class="ctl-row"><span class="ctl-k">🏢 GHES</span><span class="ctl-v">❌ <a class="retro-link" href="https://docs.github.com/ja/enterprise-server@latest/actions/concepts/runners/github-hosted-runners" target="_blank" rel="noopener noreferrer">GitHub ホストランナー ↗</a>（セルフホストのみ）<br/>⚠️ <a class="retro-link" href="https://docs.github.com/ja/enterprise-server@latest/admin/managing-github-actions-for-your-enterprise/managing-access-to-actions-from-githubcom/enabling-automatic-access-to-githubcom-actions-using-github-connect" target="_blank" rel="noopener noreferrer">GitHub.com の Action ↗</a> は GitHub Connect で許可</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghe-gaps">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📦</span><span class="ctl-name">Packages</span><span class="ctl-when">Maven / Gradle</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">🌏 GHE.com</span><span class="ctl-v">❌ <a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry" target="_blank" rel="noopener noreferrer">Maven / Gradle ↗</a>（Java）</span></p>
+<p class="ctl-row"><span class="ctl-k">🏢 GHES</span><span class="ctl-v">✅ <a class="retro-link" href="https://docs.github.com/ja/enterprise-server@latest/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry" target="_blank" rel="noopener noreferrer">Maven / Gradle ↗</a> も対応（Packages は管理者が有効化）</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghe-gaps">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔗</span><span class="ctl-name">依存関係</span><span class="ctl-when">insights、Dependabot</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">🌏 GHE.com</span><span class="ctl-v">❌ Org と Enterprise の <a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/organizations/collaborating-with-groups-in-organizations/viewing-insights-for-dependencies-in-your-organization" target="_blank" rel="noopener noreferrer">dependency insights ↗</a><br/>❌ <a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/code-security/how-tos/secure-your-supply-chain/establish-provenance-and-integrity/export-dependencies-as-sbom" target="_blank" rel="noopener noreferrer">SBOM ↗</a> のライセンス情報</span></p>
+<p class="ctl-row"><span class="ctl-k">🏢 GHES</span><span class="ctl-v">⚠️ <a class="retro-link" href="https://docs.github.com/ja/enterprise-server@latest/admin/configuring-settings/configuring-github-connect/enabling-dependabot-for-your-enterprise" target="_blank" rel="noopener noreferrer">Dependabot ↗</a> は GitHub Connect とセルフホストランナーが前提</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghe-gaps">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🤖</span><span class="ctl-name">Copilot</span><span class="ctl-when">リージョン外、Web 機能</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">🌏 GHE.com</span><span class="ctl-v">⚠️ <a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/admin/data-residency/github-copilot-with-data-residency" target="_blank" rel="noopener noreferrer">データは既定でリージョン外 ↗</a>（リージョン内推論は米国と EU のみ）</span></p>
+<p class="ctl-row"><span class="ctl-k">🏢 GHES</span><span class="ctl-v">❌ <a class="retro-link" href="https://docs.github.com/ja/enterprise-server@latest/copilot/copilot-on-ghes/about-copilot-on-ghes" target="_blank" rel="noopener noreferrer">Web の Chat ↗</a>、<a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/copilot/concepts/copilot-surfaces/copilot-on-github" target="_blank" rel="noopener noreferrer">クラウドエージェント ↗</a>、<a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/copilot/concepts/agents/code-review" target="_blank" rel="noopener noreferrer">コードレビュー ↗</a>、<a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/copilot/concepts/context/spaces" target="_blank" rel="noopener noreferrer">Spaces ↗</a><br/>⚠️ ライセンスはクラウド側で付与。オフラインの CLI はプレビュー</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghe-gaps">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛡️</span><span class="ctl-name">セキュリティ</span><span class="ctl-when">AI シークレット検出</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">🌏 GHE.com</span><span class="ctl-v">— 差分なし</span></p>
+<p class="ctl-row"><span class="ctl-k">🏢 GHES</span><span class="ctl-v">❌ <a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/detect-secret-leaks/enabling-secret-scanning-for-ai-detected-secrets" target="_blank" rel="noopener noreferrer">AI による汎用シークレット検出 ↗</a></span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghe-gaps">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">💻</span><span class="ctl-name">開発環境</span><span class="ctl-when">Codespaces</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">🌏 GHE.com</span><span class="ctl-v">✅ <a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/codespaces/developing-in-a-codespace/using-github-codespaces-in-visual-studio-code" target="_blank" rel="noopener noreferrer">Codespaces ↗</a>（VS Code の設定が必要）</span></p>
+<p class="ctl-row"><span class="ctl-k">🏢 GHES</span><span class="ctl-v">❌ <a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/codespaces/quickstart" target="_blank" rel="noopener noreferrer">Codespaces ↗</a></span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghe-gaps">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">👤</span><span class="ctl-name">ID、その他</span><span class="ctl-when">EMU、Gist、Importer</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">🌏 GHE.com</span><span class="ctl-v">❌ <a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/admin/managing-iam/understanding-iam-for-enterprises/abilities-and-restrictions-of-managed-user-accounts" target="_blank" rel="noopener noreferrer">Gist、public repo ↗</a>（EMU の制約）<br/>❌ <a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/migrations/importing-source-code/using-github-importer/about-github-importer" target="_blank" rel="noopener noreferrer">GitHub Importer ↗</a>、<a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/admin/monitoring-activity-in-your-enterprise/reviewing-audit-logs-for-your-enterprise/streaming-the-audit-log-for-your-enterprise" target="_blank" rel="noopener noreferrer">S3 への OIDC 監査ログ配信 ↗</a></span></p>
+<p class="ctl-row"><span class="ctl-k">🏢 GHES</span><span class="ctl-v">❌ EMU（<a class="retro-link" href="https://docs.github.com/ja/enterprise-server@latest/admin/managing-iam/understanding-iam-for-enterprises/about-identity-and-access-management" target="_blank" rel="noopener noreferrer">ビルトイン、LDAP、CAS、SAML ↗</a> で認証）<br/>❌ <a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/sponsors/getting-started-with-github-sponsors/about-github-sponsors" target="_blank" rel="noopener noreferrer">GitHub Sponsors ↗</a></span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghe-gaps">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🆕</span><span class="ctl-name">新機能</span><span class="ctl-when">提供タイミング</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">🌏 GHE.com</span><span class="ctl-v">⚠️ 一部の <a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/admin/data-residency/feature-overview-for-github-enterprise-cloud-with-data-residency" target="_blank" rel="noopener noreferrer">プレビュー機能 ↗</a> は GA まで未提供</span></p>
+<p class="ctl-row"><span class="ctl-k">🏢 GHES</span><span class="ctl-v">⚠️ GitHub.com が先行し、<a class="retro-link" href="https://docs.github.com/ja/enterprise-server@latest/admin/overview/about-github-enterprise-server" target="_blank" rel="noopener noreferrer">feature release ↗</a> で後から届く</span></p>
+</div>
+</details>
+</div>
+</div>
 
 ## 個人アカウントの全体像 <a class="h2-doc" href="https://docs.github.com/ja/enterprise-cloud@latest/admin/concepts/enterprise-fundamentals/choose-an-enterprise-type" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 

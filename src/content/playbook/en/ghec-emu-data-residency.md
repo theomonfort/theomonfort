@@ -1,7 +1,7 @@
 ---
 title: EMU & Data Residency
 titleEn: EMU & Data Residency
-summary: Compare the three GitHub Enterprise Cloud setups (personal accounts, EMU, and data residency). Covers EMU user management and restrictions, how GHE.com keeps your data in a region such as Japan, differences from GitHub.com, and how Copilot fits in.
+summary: Compare the three GitHub Enterprise Cloud setups (personal accounts, EMU, and data residency) with self-hosted GHES. Covers EMU user management and restrictions, how GHE.com keeps your data in a region such as Japan, features unavailable on GHE.com and GHES, and how Copilot fits in.
 icon: 🌏
 color: magenta
 accent:
@@ -38,6 +38,15 @@ links:
   - group: 🌏 Data residency
     label: GitHub Copilot with data residency
     url: https://docs.github.com/en/enterprise-cloud@latest/admin/data-residency/github-copilot-with-data-residency
+  - group: 🏢 GitHub Enterprise Server
+    label: About GitHub for enterprises (deployment options)
+    url: https://docs.github.com/en/enterprise-cloud@latest/admin/overview/about-github-for-enterprises
+  - group: 🏢 GitHub Enterprise Server
+    label: About GitHub Enterprise Server
+    url: https://docs.github.com/en/enterprise-server@latest/admin/overview/about-github-enterprise-server
+  - group: 🏢 GitHub Enterprise Server
+    label: About GitHub Copilot on GitHub Enterprise Server
+    url: https://docs.github.com/en/enterprise-server@latest/copilot/copilot-on-ghes/about-copilot-on-ghes
   - group: 📰 Announcements
     label: GitHub Enterprise Cloud data residency in Japan is GA (2025-12-18)
     url: https://github.blog/changelog/2025-12-18-github-enterprise-cloud-data-residency-in-japan-is-generally-available/
@@ -50,22 +59,97 @@ links:
     GitHub Enterprise Cloud comes in three setups, depending on <strong>who manages the accounts</strong> and <strong>where the data lives</strong>.
   </p>
   <p>
-    <strong>EMU</strong> issues accounts from your company IdP. <strong>Data residency</strong> builds on EMU and hosts your enterprise on a dedicated <strong>GHE.com</strong> subdomain, storing code and data in <strong>a region of your choice, such as Japan</strong>.
+    <strong>EMU</strong> issues accounts from your company IdP. <strong>Data residency</strong> builds on EMU and hosts your enterprise on a dedicated <strong>GHE.com</strong> subdomain, storing code and data in <strong>a region of your choice, such as Japan</strong>. To host it yourself, there is also <strong>GitHub Enterprise Server (GHES)</strong>.
   </p>
 </div>
 
-## Three GHEC setups <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/admin/concepts/enterprise-fundamentals/choose-an-enterprise-type" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## Four GitHub Enterprise setups <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/admin/overview/about-github-for-enterprises" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-At creation you pick the **account type** and the **data hosting region**.
+For GHEC you pick the **account type** and **data location** at creation. **GHES** is GitHub you host yourself, on-prem or in your cloud.
 
-| | Personal accounts | **EMU** | **Data residency** |
-| --- | --- | --- | --- |
-| 🌐 URL | github.com | github.com | `<subdomain>.ghe.com` |
-| 👤 Accounts | By each user | By the IdP via **SCIM** | By the IdP via **SCIM** |
-| 🔐 Authentication | Password, optional **SAML** | **SAML** or **OIDC**, required | **SAML** or **OIDC**, required |
-| 📢 Public repos, gists | ✅ | ❌ | ❌ |
-| 🤝 Outside collaboration | ✅ | ❌ Read-only | ❌ GHE.com only |
-| 🗾 Data stored in | US | US | EU, AU, US, **Japan** |
+<div class="tbl-fit">
+
+| | Personal | **EMU** | **Data residency** | **GHES** |
+| --- | --- | --- | --- | --- |
+| 🏠 Hosted at | github.com | github.com | `*.ghe.com` | **Self-hosted** |
+| 👤 Accounts | Self sign-up | IdP (**SCIM**) | IdP (**SCIM**) | On the instance |
+| 🔐 Sign-in | Password (+SAML) | **SAML / OIDC** | **SAML / OIDC** | LDAP, CAS, SAML |
+| 🗾 Data location | US | US | EU, AU, US, **JP** | **Your choice** |
+| 📢 Public repos | ✅ | ❌ | ❌ | ⚠️ Instance only |
+| 🤝 Outside collab | ✅ | ❌ Read-only | ❌ | ❌ |
+| 🔄 Updates | Auto | Auto | Auto | **Admin-run** |
+| 🤖 Copilot | ✅ | ✅ | ✅ | ⚠️ IDE / CLI only |
+| ⚙️ Hosted runners | ✅ | ✅ | ⚠️ No macOS | ❌ Self-hosted |
+
+</div>
+
+## Features unavailable on GHE.com and GHES <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/admin/data-residency/feature-overview-for-github-enterprise-cloud-with-data-residency" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+Gaps compared with EMU on GitHub.com. ❌ unavailable, ⚠️ with conditions.
+
+📖 <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/data-residency/feature-overview-for-github-enterprise-cloud-with-data-residency" target="_blank" rel="noopener noreferrer">GHE.com feature overview ↗</a>　📖 <a class="retro-link" href="https://docs.github.com/en/enterprise-server@latest/admin/overview/about-github-enterprise-server" target="_blank" rel="noopener noreferrer">About GHES ↗</a>
+
+<div class="ctl-widget">
+<p class="ctl-hint">▸ CLICK + FOR DETAILS</p>
+<div class="ctl-list">
+<details class="ctl-item" name="ghe-gaps">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">⚙️</span><span class="ctl-name">Actions</span><span class="ctl-when">macOS, hosted runners</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">🌏 GHE.com</span><span class="ctl-v">❌ <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/actions/concepts/runners/github-hosted-runners" target="_blank" rel="noopener noreferrer">macOS runners ↗</a><br/>❌ <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/data-residency/feature-overview-for-github-enterprise-cloud-with-data-residency" target="_blank" rel="noopener noreferrer">Marketplace ↗</a> (install actions and apps from source)</span></p>
+<p class="ctl-row"><span class="ctl-k">🏢 GHES</span><span class="ctl-v">❌ <a class="retro-link" href="https://docs.github.com/en/enterprise-server@latest/actions/concepts/runners/github-hosted-runners" target="_blank" rel="noopener noreferrer">GitHub-hosted runners ↗</a> (self-hosted only)<br/>⚠️ <a class="retro-link" href="https://docs.github.com/en/enterprise-server@latest/admin/managing-github-actions-for-your-enterprise/managing-access-to-actions-from-githubcom/enabling-automatic-access-to-githubcom-actions-using-github-connect" target="_blank" rel="noopener noreferrer">GitHub.com actions ↗</a> need GitHub Connect</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghe-gaps">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📦</span><span class="ctl-name">Packages</span><span class="ctl-when">Maven / Gradle</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">🌏 GHE.com</span><span class="ctl-v">❌ <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry" target="_blank" rel="noopener noreferrer">Maven / Gradle ↗</a> (Java)</span></p>
+<p class="ctl-row"><span class="ctl-k">🏢 GHES</span><span class="ctl-v">✅ <a class="retro-link" href="https://docs.github.com/en/enterprise-server@latest/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry" target="_blank" rel="noopener noreferrer">Maven / Gradle ↗</a> supported (admin enables Packages)</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghe-gaps">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔗</span><span class="ctl-name">Dependencies</span><span class="ctl-when">Insights, Dependabot</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">🌏 GHE.com</span><span class="ctl-v">❌ Org and enterprise <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/organizations/collaborating-with-groups-in-organizations/viewing-insights-for-dependencies-in-your-organization" target="_blank" rel="noopener noreferrer">dependency insights ↗</a><br/>❌ License data in <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-supply-chain/establish-provenance-and-integrity/export-dependencies-as-sbom" target="_blank" rel="noopener noreferrer">SBOM ↗</a> exports</span></p>
+<p class="ctl-row"><span class="ctl-k">🏢 GHES</span><span class="ctl-v">⚠️ <a class="retro-link" href="https://docs.github.com/en/enterprise-server@latest/admin/configuring-settings/configuring-github-connect/enabling-dependabot-for-your-enterprise" target="_blank" rel="noopener noreferrer">Dependabot ↗</a> needs GitHub Connect and self-hosted runners</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghe-gaps">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🤖</span><span class="ctl-name">Copilot</span><span class="ctl-when">Region, web features</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">🌏 GHE.com</span><span class="ctl-v">⚠️ <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/data-residency/github-copilot-with-data-residency" target="_blank" rel="noopener noreferrer">Data leaves the region by default ↗</a> (in-region inference: US and EU only)</span></p>
+<p class="ctl-row"><span class="ctl-k">🏢 GHES</span><span class="ctl-v">❌ <a class="retro-link" href="https://docs.github.com/en/enterprise-server@latest/copilot/copilot-on-ghes/about-copilot-on-ghes" target="_blank" rel="noopener noreferrer">Chat on the web ↗</a>, <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/copilot-surfaces/copilot-on-github" target="_blank" rel="noopener noreferrer">cloud agent ↗</a>, <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/agents/code-review" target="_blank" rel="noopener noreferrer">code review ↗</a>, <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/context/spaces" target="_blank" rel="noopener noreferrer">Spaces ↗</a><br/>⚠️ License assigned in the cloud; offline CLI is in preview</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghe-gaps">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛡️</span><span class="ctl-name">Security</span><span class="ctl-when">AI secret detection</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">🌏 GHE.com</span><span class="ctl-v">— No gap</span></p>
+<p class="ctl-row"><span class="ctl-k">🏢 GHES</span><span class="ctl-v">❌ <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/detect-secret-leaks/enabling-secret-scanning-for-ai-detected-secrets" target="_blank" rel="noopener noreferrer">AI-powered generic secret detection ↗</a></span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghe-gaps">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">💻</span><span class="ctl-name">Dev environments</span><span class="ctl-when">Codespaces</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">🌏 GHE.com</span><span class="ctl-v">✅ <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/codespaces/developing-in-a-codespace/using-github-codespaces-in-visual-studio-code" target="_blank" rel="noopener noreferrer">Codespaces ↗</a> (VS Code settings required)</span></p>
+<p class="ctl-row"><span class="ctl-k">🏢 GHES</span><span class="ctl-v">❌ <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/codespaces/quickstart" target="_blank" rel="noopener noreferrer">Codespaces ↗</a></span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghe-gaps">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">👤</span><span class="ctl-name">Identity, other</span><span class="ctl-when">EMU, gists, Importer</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">🌏 GHE.com</span><span class="ctl-v">❌ <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/managing-iam/understanding-iam-for-enterprises/abilities-and-restrictions-of-managed-user-accounts" target="_blank" rel="noopener noreferrer">Gists, public repos ↗</a> (EMU limits)<br/>❌ <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/migrations/importing-source-code/using-github-importer/about-github-importer" target="_blank" rel="noopener noreferrer">GitHub Importer ↗</a>, <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/monitoring-activity-in-your-enterprise/reviewing-audit-logs-for-your-enterprise/streaming-the-audit-log-for-your-enterprise" target="_blank" rel="noopener noreferrer">audit log streaming to S3 via OIDC ↗</a></span></p>
+<p class="ctl-row"><span class="ctl-k">🏢 GHES</span><span class="ctl-v">❌ EMU (auth via <a class="retro-link" href="https://docs.github.com/en/enterprise-server@latest/admin/managing-iam/understanding-iam-for-enterprises/about-identity-and-access-management" target="_blank" rel="noopener noreferrer">built-in, LDAP, CAS, SAML ↗</a>)<br/>❌ <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/sponsors/getting-started-with-github-sponsors/about-github-sponsors" target="_blank" rel="noopener noreferrer">GitHub Sponsors ↗</a></span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghe-gaps">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🆕</span><span class="ctl-name">New features</span><span class="ctl-when">Release timing</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">🌏 GHE.com</span><span class="ctl-v">⚠️ Some <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/data-residency/feature-overview-for-github-enterprise-cloud-with-data-residency" target="_blank" rel="noopener noreferrer">preview features ↗</a> unavailable until GA</span></p>
+<p class="ctl-row"><span class="ctl-k">🏢 GHES</span><span class="ctl-v">⚠️ Ship on GitHub.com first, arrive via <a class="retro-link" href="https://docs.github.com/en/enterprise-server@latest/admin/overview/about-github-enterprise-server" target="_blank" rel="noopener noreferrer">feature releases ↗</a></span></p>
+</div>
+</details>
+</div>
+</div>
 
 ## Personal accounts at a glance <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/admin/concepts/enterprise-fundamentals/choose-an-enterprise-type" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
