@@ -87,6 +87,8 @@ For GHEC you pick the **account type** and **data location** at creation. **GHES
 
 Gaps compared with EMU on GitHub.com. ❌ unavailable, ⚠️ with conditions.
 
+📖 <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/data-residency/feature-overview-for-github-enterprise-cloud-with-data-residency" target="_blank" rel="noopener noreferrer">GHE.com feature overview ↗</a>　📖 <a class="retro-link" href="https://docs.github.com/en/enterprise-server@latest/admin/overview/about-github-enterprise-server" target="_blank" rel="noopener noreferrer">About GHES ↗</a>
+
 <div class="ctl-widget">
 <p class="ctl-hint">▸ CLICK + FOR DETAILS</p>
 <div class="ctl-list">

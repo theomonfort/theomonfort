@@ -87,6 +87,8 @@ GHEC は作成時に **アカウントの種類** と **保存先** を選ぶ。
 
 GitHub.com の EMU と比べた差分。❌ は使えない、⚠️ は条件付き。
 
+📖 <a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/admin/data-residency/feature-overview-for-github-enterprise-cloud-with-data-residency" target="_blank" rel="noopener noreferrer">GHE.com の機能の概要 ↗</a>　📖 <a class="retro-link" href="https://docs.github.com/ja/enterprise-server@latest/admin/overview/about-github-enterprise-server" target="_blank" rel="noopener noreferrer">GHES について ↗</a>
+
 <div class="ctl-widget">
 <p class="ctl-hint">▸ + をクリックして詳細を表示</p>
 <div class="ctl-list">
