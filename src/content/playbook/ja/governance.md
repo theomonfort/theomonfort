@@ -165,7 +165,23 @@ flowchart LR
 
 > ⚠️ Enterprise team を org に割り当てると、メンバーは招待なしで参加する。外部コラボレーターも enterprise メンバーになり、ライセンスを消費する。
 
-## Policies
+## Policies <input type="checkbox" id="demo-governance-ea-users" class="demo-toggle" /><label class="h2-demo" for="demo-governance-ea-users">&#9658; DEMO</label>
+
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-governance-ea-users" aria-label="デモ手順を閉じる"></label>
+<div class="demo-window" role="group" aria-label="デモ手順">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Enterprise-assigned users</span><span class="demo-note">発表者専用</span><label class="demo-close" for="demo-governance-ea-users" aria-label="閉じる">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">POLICIES FOR ENTERPRISE-ASSIGNED USERS</p>
+<p><a href="https://github.com/enterprises/octodemo/ai-controls/copilot" target="_blank" rel="noopener noreferrer">octodemo → AI controls → Copilot ↗</a></p>
+<p>Enterprise → AI controls → Copilot → <b>Policies for enterprise-assigned users</b></p>
+<p>ドロップダウンを開く：<code class="demo-path">Enabled</code>、<code class="demo-path">Disabled</code>。</p>
+<p class="demo-out"><b>Disabled</b> = 「Let organizations decide」のままのポリシーは、Enterprise から直接ライセンスを受けたユーザーには全て無効になる。保存せずに見せるだけにする。</p>
+</li>
+</ol>
+</div>
+</div>
 
 人は入った。次は何をしてよいか。org と enterprise で決め、repo では決めない。
 
@@ -174,6 +190,7 @@ flowchart LR
 - 🏢 **Org** — メンバー権限、repo 作成、2FA、Copilot と Actions
 - 📦 **Repo** — ポリシーは持たず継承するだけ。repo で足せるのは ruleset。
 - 🔁 ルールは**下**に流れる。org は厳しくできるが、緩められない。
+- 👤 **org なしの Copilot ライセンス**：「Let organizations decide」は適用されない。代わりに Enterprise の **Policies for enterprise-assigned users** 設定が決め、無効ならそれらの機能は使えない。<a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/copilot/concepts/enterprise/policies" target="_blank" rel="noopener noreferrer">Copilot ポリシー ↗</a>
 
 > 🎯 ガードレールは上から。repo ごとに設定しない。 <a class="retro-link" href="https://docs.github.com/en/organizations/managing-organization-settings" target="_blank" rel="noopener noreferrer">Org policies ↗</a> · <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/enforcing-policies" target="_blank" rel="noopener noreferrer">Enterprise policies ↗</a>
 

@@ -144,6 +144,7 @@ GitHub サービスの利用方法は下記の通りです。
 - 🏷️ **1 つの org が選べる Copilot プランは 1 種類だけ** — Business **か** Enterprise。同じ org の中で混在はできない。
 - 👥 **その org のメンバー** が seat の対象。Owner が **Org Settings → Copilot → Access** から割り当てる。
 - 🆕 **Enterprise レベルでの割り当て（Business のみ・2025‑10‑28 GA）** — 管理者は Enterprise 設定から **Copilot Business** seat を直接アサインできる。割り当てた seat は **Enterprise 配下の全 org でそのユーザーに付随する**。
+- 🔒 **org 経由ではなく Enterprise から直接ライセンスを受けたユーザー** には「Let organizations decide」が適用されない。該当ポリシーは別設定の **Policies for enterprise-assigned users** に従うため、これが無効だとそれらの機能は使えない。<a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/copilot/concepts/enterprise/policies" target="_blank" rel="noopener noreferrer">Copilot ポリシー ↗</a>
 
 | 割り当て場所 | 選べるプラン | seat を受け取る人 |
 | --- | --- | --- |
