@@ -139,23 +139,21 @@ flowchart LR
 
 ## Org team と Enterprise team <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/admin/concepts/enterprise-fundamentals/teams-in-an-enterprise" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-team は 2 種類。1 つの org で閉じるか、複数 org にまたがるかで選ぶ。
+複数 org なら Enterprise team、1 つの org なら Org team。
 
 <div class="tbl-compact">
 
 | | 🏢 Org team | 🏛️ Enterprise team |
 | --- | --- | --- |
-| 🎯 範囲 | 1 つの org、そのメンバーのみ | enterprise 全体、複数 org に割り当て |
-| 🔑 管理者 | Org owner、team maintainer | Enterprise 管理者 |
-| 🪪 IdP 同期 | SCIM（EMU）または team sync | SCIM（EMU のみ） |
-| 🎫 付与できるもの | その org の repo ロール、Copilot シート | org への参加、Copilot ライセンス、enterprise ロール |
-| 💬 メンション / レビュー | `@org/team` | `@org/ent:team` |
-| 📂 CODEOWNERS、ネスト、secret | ✅ | ❌（2026-10-14 時点） |
+| 🎯 範囲 | 1 つの org | 複数 org |
+| 🪪 IdP 同期 | SCIM、team sync | SCIM（EMU のみ） |
+| 🎫 付与 | repo ロール、Copilot | Copilot、enterprise ロール |
+| 💬 メンション | `@org/team` | `@org/ent:team` |
+| 📂 CODEOWNERS | ✅ | ❌（2026-10-14 時点） |
 
 </div>
 
-> 🎯 複数 org にまたがる用途（Copilot ライセンス、管理者、SRE やセキュリティのレビュー担当）は Enterprise team。コードオーナーや 1 つの org で閉じる用途は Org team。
-> ⚠️ Enterprise team を org に割り当てると、メンバーは招待なしで直接追加される。外部コラボレーターも enterprise メンバーになり、ライセンスを消費する。
+> ⚠️ Enterprise team を org に割り当てると、メンバーは招待なしで参加する。外部コラボレーターも enterprise メンバーになり、ライセンスを消費する。
 
 ## Policies
 
