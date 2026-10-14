@@ -144,6 +144,7 @@ Overview of how GitHub services are licensed and billed.
 - 🏷️ **An org has exactly one Copilot plan** — Business **or** Enterprise. You can't mix tiers inside the same organization.
 - 👥 **Members of that org** are eligible for a seat of that tier. Owners assign seats from **Org Settings → Copilot → Access**.
 - 🆕 **Enterprise-level assignment (Business only, GA 2025‑10‑28)** — admins can now assign **Copilot Business** seats directly from the Enterprise settings. The license then **follows the user across every org in the enterprise**.
+- 🔒 **Users licensed by the enterprise, not through an org**, skip "Let organizations decide": those policies follow the separate **Policies for enterprise-assigned users** setting, so if it is disabled, those features are off for them. <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/enterprise/policies" target="_blank" rel="noopener noreferrer">Copilot policies ↗</a>
 
 | Where you assign | Plan available | Who gets the seat |
 | --- | --- | --- |
