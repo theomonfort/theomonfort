@@ -39,11 +39,17 @@ links:
     label: "Enterprise Teams is generally available (2026-06-04)"
     url: https://github.blog/changelog/2026-06-04-enterprise-teams-is-now-generally-available/
   - group: 📰 発表
+    label: "Cost centers now support enterprise teams (2026-06-25)"
+    url: https://github.blog/changelog/2026-06-25-assign-enterprise-teams-to-cost-centers/
+  - group: 📰 発表
     label: "managed-settings.json is generally available (2026-07-01)"
     url: https://github.blog/changelog/2026-07-01-enterprise-managed-settings-json-is-generally-available/
   - group: 📰 発表
     label: "Enterprises can default to auto model selection (2026-07-01)"
     url: https://github.blog/changelog/2026-07-01-enterprises-can-default-to-auto-model-selection/
+  - group: 📰 発表
+    label: "Global model policy generally available (2026-08-26)"
+    url: https://github.blog/changelog/2026-08-26-global-model-policy-generally-available/
 ---
 
 ## 一言で
@@ -151,6 +157,7 @@ flowchart LR
 | 🎯 範囲 | 1 つの org | 複数 org |
 | 🎫 付与 | repo ロール、org ロール、Copilot | 左すべて ＋ enterprise ロール |
 | 🪪 IdP 同期 | ✅ EMU、✅ 個人アカウント | ✅ EMU、❌ 個人アカウント |
+| 💰 コストセンター | ❌ | ✅ メンバーに自動追従 |
 | 💬 メンション | `@org/team` | `@/ent:team` |
 | 📂 CODEOWNERS | ✅ | ❌（2026-10-14 時点） |
 
@@ -163,6 +170,7 @@ flowchart LR
 人は入った。次は何をしてよいか。org と enterprise で決め、repo では決めない。
 
 - 🏛️ **Enterprise** — SSO / SCIM、使える機能、全 org の基準
+- 🤖 **Copilot モデル** — **グローバルモデルポリシー**で新モデルの既定を決める。Enterprise team ごとの追加付与も可（<a class="retro-link" href="https://github.blog/changelog/2026-07-31-enterprise-teams-model-policy-targeting-in-public-preview/" target="_blank" rel="noopener noreferrer">preview ↗</a>）。
 - 🏢 **Org** — メンバー権限、repo 作成、2FA、Copilot と Actions
 - 📦 **Repo** — ポリシーは持たず継承するだけ。repo で足せるのは ruleset。
 - 🔁 ルールは**下**に流れる。org は厳しくできるが、緩められない。
