@@ -18,6 +18,9 @@ links:
     label: Repository roles
     url: https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization
   - group: 📖 Official docs
+    label: Creating enterprise teams
+    url: https://docs.github.com/en/enterprise-cloud@latest/admin/managing-accounts-and-repositories/managing-users-in-your-enterprise/create-enterprise-teams
+  - group: 📖 Official docs
     label: Organization policies
     url: https://docs.github.com/en/organizations/managing-organization-settings
   - group: 📖 Official docs
@@ -33,11 +36,20 @@ links:
     label: "Well-Architected: GitHub Enterprise Policies & Best Practices"
     url: https://learn.github.com/well-architected/governance/recommendations/governance-policies-best-practices
   - group: 📰 Announcement
+    label: "Enterprise Teams is generally available (2026-06-04)"
+    url: https://github.blog/changelog/2026-06-04-enterprise-teams-is-now-generally-available/
+  - group: 📰 Announcement
+    label: "Cost centers now support enterprise teams (2026-06-25)"
+    url: https://github.blog/changelog/2026-06-25-assign-enterprise-teams-to-cost-centers/
+  - group: 📰 Announcement
     label: "managed-settings.json is generally available (2026-07-01)"
     url: https://github.blog/changelog/2026-07-01-enterprise-managed-settings-json-is-generally-available/
   - group: 📰 Announcement
     label: "Enterprises can default to auto model selection (2026-07-01)"
     url: https://github.blog/changelog/2026-07-01-enterprises-can-default-to-auto-model-selection/
+  - group: 📰 Announcement
+    label: "Global model policy generally available (2026-08-26)"
+    url: https://github.blog/changelog/2026-08-26-global-model-policy-generally-available/
 ---
 
 ## In one line
@@ -116,8 +128,8 @@ flowchart LR
   ENT["🏛️ Enterprise Team 📖<br/>Admin · all orgs"]
   ORG["🏢 Org Team 📖<br/>this org · from org chart"]
   REPO["📦 Repository"]
-  IDP -->|SCIM| ENT
-  IDP -->|SCIM| ORG
+  IDP -->|"SCIM (EMU only)"| ENT
+  IDP -->|"SCIM / team sync"| ORG
   ORG -->|Write etc.| REPO
   ENT -->|Admin| REPO
 
@@ -134,11 +146,31 @@ flowchart LR
   click ORG href "https://docs.github.com/en/organizations/organizing-members-into-teams/about-teams" "Organization teams docs" _blank
 ```
 
+## Org vs enterprise teams <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/admin/concepts/enterprise-fundamentals/teams-in-an-enterprise" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+Many orgs → enterprise team. One org → org team.
+
+<div class="tbl-compact">
+
+| | 🏢 Org team | 🏛️ Enterprise team |
+| --- | --- | --- |
+| 🎯 Scope | One org | Many orgs |
+| 🎫 Grants | Repo roles, org roles, Copilot | All of the left + enterprise roles |
+| 🪪 IdP sync | ✅ EMU, ✅ personal accounts | ✅ EMU, ❌ personal accounts |
+| 💰 Cost center | ❌ | ✅ members follow the team |
+| 💬 @mention | `@org/team` | `@/ent:team` |
+| 📂 CODEOWNERS | ✅ | ❌ (as of 2026-10-14) |
+
+</div>
+
+> ⚠️ Assigning an enterprise team to an org adds its members with no invite. Outside collaborators become enterprise members and use a license.
+
 ## Policies
 
 People are in. Policies decide what they may do — set at org and enterprise, never at the repo.
 
 - 🏛️ **Enterprise** — SSO / SCIM, allowed features, base policy for every org
+- 🤖 **Copilot models** — the **global model policy** sets the default for new models. Enterprise teams can get extras (<a class="retro-link" href="https://github.blog/changelog/2026-07-31-enterprise-teams-model-policy-targeting-in-public-preview/" target="_blank" rel="noopener noreferrer">preview ↗</a>).
 - 🏢 **Org** — member privileges, repo creation, 2FA, Copilot and Actions access
 - 📦 **Repo** — holds no policy, only inherits. The one thing a repo adds is a ruleset.
 - 🔁 Rules flow **down**. An org can tighten enterprise rules, never loosen them.

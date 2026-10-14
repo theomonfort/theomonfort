@@ -12,4 +12,4 @@ source: "https://github.blog/changelog/2026-09-25-enterprise-managed-settings-in
 - **検証対象**：`copilot/managed-settings.json`、`copilot/team-mappings.json` と、チーム割り当てから参照される設定ファイル。
 - **修正方法**：`.github-private` リポジトリの既定ブランチに修正をコミットし、Agents ページを再読み込みして確認。
 
-[Playbook：Copilot managed settings（スライド 10）](https://theomonfort.github.io/theomonfort/playbook/governance/?present=1&slide=10)
+[Playbook：Copilot managed settings（スライド 11）](https://theomonfort.github.io/theomonfort/playbook/governance/?present=1&slide=11)
