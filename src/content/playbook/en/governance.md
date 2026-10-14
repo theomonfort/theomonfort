@@ -146,8 +146,8 @@ Many orgs → enterprise team. One org → org team.
 | | 🏢 Org team | 🏛️ Enterprise team |
 | --- | --- | --- |
 | 🎯 Scope | One org | Many orgs |
-| 🪪 IdP sync | SCIM, team sync | SCIM (EMU only) |
-| 🎫 Grants | Repo roles, Copilot | Copilot, enterprise roles |
+| 🎫 Grants | Repo roles, org roles, Copilot | All of the left + enterprise roles |
+| 🪪 IdP sync | ✅ EMU, ✅ personal accounts | ✅ EMU, ❌ personal accounts |
 | 💬 @mention | `@org/team` | `@org/ent:team` |
 | 📂 CODEOWNERS | ✅ | ❌ (as of 2026-10-14) |
 

@@ -146,8 +146,8 @@ flowchart LR
 | | 🏢 Org team | 🏛️ Enterprise team |
 | --- | --- | --- |
 | 🎯 範囲 | 1 つの org | 複数 org |
-| 🪪 IdP 同期 | SCIM、team sync | SCIM（EMU のみ） |
-| 🎫 付与 | repo ロール、Copilot | Copilot、enterprise ロール |
+| 🎫 付与 | repo ロール、org ロール、Copilot | 左すべて ＋ enterprise ロール |
+| 🪪 IdP 同期 | ✅ EMU、✅ 個人アカウント | ✅ EMU、❌ 個人アカウント |
 | 💬 メンション | `@org/team` | `@org/ent:team` |
 | 📂 CODEOWNERS | ✅ | ❌（2026-10-14 時点） |
 
