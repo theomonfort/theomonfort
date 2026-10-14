@@ -15,6 +15,6 @@ demo:
 - **適用タイミング**：MDM やファイル配布なら、初回起動時（サインイン前）から適用。サーバー管理設定（`.github-private`）なら、一度受信した後の次回起動から適用。このキーがなければ、通常のキャッシュ（約 1 時間）を使用。
 - **`sandbox` の最小バージョン**：管理設定に `sandbox` キーがある場合、古いクライアントは更新するまでブロックされます。VS Code 1.141.0、Copilot CLI 1.0.93、GitHub Copilot App 1.1.26。
 
-[Playbook：Copilot managed settings（スライド 10）](https://theomonfort.github.io/theomonfort/playbook/governance/?present=1&slide=10)
+[Playbook：Copilot managed settings（スライド 11）](https://theomonfort.github.io/theomonfort/playbook/governance/?present=1&slide=11)
 
 [起動時に最新設定を必須にする（公式ドキュメント）](https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/deploy-managed-settings#requiring-fresh-server-managed-settings-on-startup) / [forceRemoteSettingsRefresh リファレンス](https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings#forceremotesettingsrefresh) / [sandbox のクライアント最小バージョン](https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings#minimum-client-version-enforcement-for-sandbox)

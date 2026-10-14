@@ -12,4 +12,4 @@ source: "https://github.blog/changelog/2026-09-25-enterprise-managed-settings-in
 - **Files checked**: `copilot/managed-settings.json`, `copilot/team-mappings.json`, and the team settings files referenced by the mappings.
 - **How to fix**: commit corrections to the default branch of your `.github-private` repository, then reload the Agents page to check again.
 
-[Playbook: Copilot managed settings (slide 10)](https://theomonfort.github.io/theomonfort/en/playbook/governance/?present=1&slide=10)
+[Playbook: Copilot managed settings (slide 11)](https://theomonfort.github.io/theomonfort/en/playbook/governance/?present=1&slide=11)

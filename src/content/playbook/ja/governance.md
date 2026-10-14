@@ -18,6 +18,9 @@ links:
     label: Repository roles
     url: https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization
   - group: 📖 公式ドキュメント
+    label: Creating enterprise teams
+    url: https://docs.github.com/en/enterprise-cloud@latest/admin/managing-accounts-and-repositories/managing-users-in-your-enterprise/create-enterprise-teams
+  - group: 📖 公式ドキュメント
     label: Organization policies
     url: https://docs.github.com/en/organizations/managing-organization-settings
   - group: 📖 公式ドキュメント
@@ -33,11 +36,20 @@ links:
     label: "Well-Architected: GitHub Enterprise Policies & Best Practices"
     url: https://learn.github.com/well-architected/governance/recommendations/governance-policies-best-practices
   - group: 📰 発表
+    label: "Enterprise Teams is generally available (2026-06-04)"
+    url: https://github.blog/changelog/2026-06-04-enterprise-teams-is-now-generally-available/
+  - group: 📰 発表
+    label: "Cost centers now support enterprise teams (2026-06-25)"
+    url: https://github.blog/changelog/2026-06-25-assign-enterprise-teams-to-cost-centers/
+  - group: 📰 発表
     label: "managed-settings.json is generally available (2026-07-01)"
     url: https://github.blog/changelog/2026-07-01-enterprise-managed-settings-json-is-generally-available/
   - group: 📰 発表
     label: "Enterprises can default to auto model selection (2026-07-01)"
     url: https://github.blog/changelog/2026-07-01-enterprises-can-default-to-auto-model-selection/
+  - group: 📰 発表
+    label: "Global model policy generally available (2026-08-26)"
+    url: https://github.blog/changelog/2026-08-26-global-model-policy-generally-available/
 ---
 
 ## 一言で
@@ -116,8 +128,8 @@ flowchart LR
   ENT["🏛️ Enterprise Team 📖<br/>Admin · 全 org"]
   ORG["🏢 Org Team 📖<br/>この org · 組織図ベース"]
   REPO["📦 Repository"]
-  IDP -->|SCIM| ENT
-  IDP -->|SCIM| ORG
+  IDP -->|"SCIM（EMU のみ）"| ENT
+  IDP -->|"SCIM / team sync"| ORG
   ORG -->|Write など| REPO
   ENT -->|Admin| REPO
 
@@ -133,6 +145,25 @@ flowchart LR
   click ENT href "https://docs.github.com/en/enterprise-cloud@latest/admin/managing-accounts-and-repositories/managing-users-in-your-enterprise/create-enterprise-teams" "Enterprise teams のドキュメント" _blank
   click ORG href "https://docs.github.com/en/organizations/organizing-members-into-teams/about-teams" "Organization teams のドキュメント" _blank
 ```
+
+## Org team と Enterprise team <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/admin/concepts/enterprise-fundamentals/teams-in-an-enterprise" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+複数 org なら Enterprise team、1 つの org なら Org team。
+
+<div class="tbl-compact">
+
+| | 🏢 Org team | 🏛️ Enterprise team |
+| --- | --- | --- |
+| 🎯 範囲 | 1 つの org | 複数 org |
+| 🎫 付与 | repo ロール、org ロール、Copilot | 左すべて ＋ enterprise ロール |
+| 🪪 IdP 同期 | ✅ EMU、✅ 個人アカウント | ✅ EMU、❌ 個人アカウント |
+| 💰 コストセンター | ❌ | ✅ メンバーに自動追従 |
+| 💬 メンション | `@org/team` | `@/ent:team` |
+| 📂 CODEOWNERS | ✅ | ❌（2026-10-14 時点） |
+
+</div>
+
+> ⚠️ Enterprise team を org に割り当てると、メンバーは招待なしで参加する。外部コラボレーターも enterprise メンバーになり、ライセンスを消費する。
 
 ## Policies <input type="checkbox" id="demo-governance-ea-users" class="demo-toggle" /><label class="h2-demo" for="demo-governance-ea-users">&#9658; DEMO</label>
 
@@ -155,6 +186,7 @@ flowchart LR
 人は入った。次は何をしてよいか。org と enterprise で決め、repo では決めない。
 
 - 🏛️ **Enterprise** — SSO / SCIM、使える機能、全 org の基準
+- 🤖 **Copilot モデル** — **グローバルモデルポリシー**で新モデルの既定を決める。Enterprise team ごとの追加付与も可（<a class="retro-link" href="https://github.blog/changelog/2026-07-31-enterprise-teams-model-policy-targeting-in-public-preview/" target="_blank" rel="noopener noreferrer">preview ↗</a>）。
 - 🏢 **Org** — メンバー権限、repo 作成、2FA、Copilot と Actions
 - 📦 **Repo** — ポリシーは持たず継承するだけ。repo で足せるのは ruleset。
 - 🔁 ルールは**下**に流れる。org は厳しくできるが、緩められない。
