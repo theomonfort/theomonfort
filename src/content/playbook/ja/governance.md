@@ -33,6 +33,9 @@ links:
     label: "Well-Architected: GitHub Enterprise Policies & Best Practices"
     url: https://learn.github.com/well-architected/governance/recommendations/governance-policies-best-practices
   - group: 📰 発表
+    label: "Enterprise Teams is generally available (2026-06-04)"
+    url: https://github.blog/changelog/2026-06-04-enterprise-teams-is-now-generally-available/
+  - group: 📰 発表
     label: "managed-settings.json is generally available (2026-07-01)"
     url: https://github.blog/changelog/2026-07-01-enterprise-managed-settings-json-is-generally-available/
   - group: 📰 発表
@@ -133,6 +136,26 @@ flowchart LR
   click ENT href "https://docs.github.com/en/enterprise-cloud@latest/admin/managing-accounts-and-repositories/managing-users-in-your-enterprise/create-enterprise-teams" "Enterprise teams のドキュメント" _blank
   click ORG href "https://docs.github.com/en/organizations/organizing-members-into-teams/about-teams" "Organization teams のドキュメント" _blank
 ```
+
+## Org team と Enterprise team <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/admin/concepts/enterprise-fundamentals/teams-in-an-enterprise" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+team は 2 種類。1 つの org で閉じるか、複数 org にまたがるかで選ぶ。
+
+<div class="tbl-compact">
+
+| | 🏢 Org team | 🏛️ Enterprise team |
+| --- | --- | --- |
+| 🎯 範囲 | 1 つの org、そのメンバーのみ | enterprise 全体、複数 org に割り当て |
+| 🔑 管理者 | Org owner、team maintainer | Enterprise 管理者 |
+| 🪪 IdP 同期 | SCIM（EMU）または team sync | SCIM（EMU のみ） |
+| 🎫 付与できるもの | その org の repo ロール、Copilot シート | org への参加、Copilot ライセンス、enterprise ロール |
+| 💬 メンション / レビュー | `@org/team` | `@org/ent:team` |
+| 📂 CODEOWNERS、ネスト、secret | ✅ | ❌（2026-10-14 時点） |
+
+</div>
+
+> 🎯 複数 org にまたがる用途（Copilot ライセンス、管理者、SRE やセキュリティのレビュー担当）は Enterprise team。コードオーナーや 1 つの org で閉じる用途は Org team。
+> ⚠️ Enterprise team を org に割り当てると、メンバーは招待なしで直接追加される。外部コラボレーターも enterprise メンバーになり、ライセンスを消費する。
 
 ## Policies
 

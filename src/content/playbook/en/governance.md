@@ -33,6 +33,9 @@ links:
     label: "Well-Architected: GitHub Enterprise Policies & Best Practices"
     url: https://learn.github.com/well-architected/governance/recommendations/governance-policies-best-practices
   - group: 📰 Announcement
+    label: "Enterprise Teams is generally available (2026-06-04)"
+    url: https://github.blog/changelog/2026-06-04-enterprise-teams-is-now-generally-available/
+  - group: 📰 Announcement
     label: "managed-settings.json is generally available (2026-07-01)"
     url: https://github.blog/changelog/2026-07-01-enterprise-managed-settings-json-is-generally-available/
   - group: 📰 Announcement
@@ -133,6 +136,26 @@ flowchart LR
   click ENT href "https://docs.github.com/en/enterprise-cloud@latest/admin/managing-accounts-and-repositories/managing-users-in-your-enterprise/create-enterprise-teams" "Enterprise teams docs" _blank
   click ORG href "https://docs.github.com/en/organizations/organizing-members-into-teams/about-teams" "Organization teams docs" _blank
 ```
+
+## Org teams vs enterprise teams <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/admin/concepts/enterprise-fundamentals/teams-in-an-enterprise" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+Two kinds of team. Pick by scope: one org, or many.
+
+<div class="tbl-compact">
+
+| | 🏢 Org team | 🏛️ Enterprise team |
+| --- | --- | --- |
+| 🎯 Scope | One org, its members only | The enterprise, assigned to many orgs |
+| 🔑 Managed by | Org owner, team maintainer | Enterprise admin |
+| 🪪 IdP sync | SCIM (EMU) or team sync | SCIM (EMU only) |
+| 🎫 Grants | Repo roles, Copilot seats in its org | Org membership, Copilot license, enterprise roles |
+| 💬 Mention / review | `@org/team` | `@org/ent:team` |
+| 📂 CODEOWNERS, nesting, secret | ✅ | ❌ (as of 2026-10-14) |
+
+</div>
+
+> 🎯 Spans orgs (Copilot seats, admins, SRE or security reviewers) → enterprise team. Code ownership or a single org → org team.
+> ⚠️ Assigning an enterprise team to an org adds its members with no invite. Outside collaborators become enterprise members and use a license.
 
 ## Policies
 
