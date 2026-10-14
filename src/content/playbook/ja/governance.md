@@ -148,7 +148,7 @@ flowchart LR
 | 🎯 範囲 | 1 つの org | 複数 org |
 | 🎫 付与 | repo ロール、org ロール、Copilot | 左すべて ＋ enterprise ロール |
 | 🪪 IdP 同期 | ✅ EMU、✅ 個人アカウント | ✅ EMU、❌ 個人アカウント |
-| 💬 メンション | `@org/team` | `@org/ent:team` |
+| 💬 メンション | `@org/team` | `@/ent:team` |
 | 📂 CODEOWNERS | ✅ | ❌（2026-10-14 時点） |
 
 </div>
