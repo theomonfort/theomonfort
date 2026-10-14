@@ -18,6 +18,9 @@ links:
     label: Repository roles
     url: https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization
   - group: 📖 Official docs
+    label: Creating enterprise teams
+    url: https://docs.github.com/en/enterprise-cloud@latest/admin/managing-accounts-and-repositories/managing-users-in-your-enterprise/create-enterprise-teams
+  - group: 📖 Official docs
     label: Organization policies
     url: https://docs.github.com/en/organizations/managing-organization-settings
   - group: 📖 Official docs
@@ -119,8 +122,8 @@ flowchart LR
   ENT["🏛️ Enterprise Team 📖<br/>Admin · all orgs"]
   ORG["🏢 Org Team 📖<br/>this org · from org chart"]
   REPO["📦 Repository"]
-  IDP -->|SCIM| ENT
-  IDP -->|SCIM| ORG
+  IDP -->|"SCIM (EMU only)"| ENT
+  IDP -->|"SCIM / team sync"| ORG
   ORG -->|Write etc.| REPO
   ENT -->|Admin| REPO
 
