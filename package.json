@@ -16,7 +16,7 @@
     "@astrojs/mdx": "^5.0.3",
     "@astrojs/react": "^5.0.3",
     "@astrojs/tailwind": "^6.0.2",
-    "astro": "^6.4.8",
+    "astro": "^7.1.0",
     "gsap": "^3.15.0",
     "mermaid": "^11.15.0",
     "react": "^19.2.5",
