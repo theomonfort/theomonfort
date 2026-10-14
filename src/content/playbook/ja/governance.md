@@ -536,7 +536,7 @@ flowchart LR
 </div>
 </div>
 
-Copilot クライアントも同じ。`copilot/managed-settings.json` がローカル設定を上書きする。<a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/deploy-managed-settings#precedence-of-deployment-methods" target="_blank" rel="noopener noreferrer">優先順位</a>は **MDM → server-managed → file → user**（<a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/deploy-managed-settings" target="_blank" rel="noopener noreferrer">配布方法 ↗</a>）。<br><a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/get-started" target="_blank" rel="noopener noreferrer">導入手順 ↗</a> · <a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">全キー ↗</a>
+Copilot クライアントも同じ。`copilot/managed-settings.json` がローカル設定を上書きする。<a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/deploy-managed-settings#precedence-of-deployment-methods" target="_blank" rel="noopener noreferrer">優先順位</a>は **MDM → server-managed → file → user**。<a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/use-managed-settings/get-started" target="_blank" rel="noopener noreferrer">導入手順 ↗</a> · <a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/reference/enterprise-administrators/enterprise-managed-settings" target="_blank" rel="noopener noreferrer">全キー ↗</a>
 
 <div class="spec-widget spec-compact">
 <p class="spec-hint">▸ + でキーの内容 · 日付は changelog</p>
@@ -552,6 +552,10 @@ Copilot クライアントも同じ。`copilot/managed-settings.json` がロー�
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧱</span><span class="spec-key"><code>sandbox</code><span class="spec-tag is-team">OVERRIDABLE</span></span><a class="spec-since" href="https://github.com/github/copilot-cli/releases/tag/v1.0.76" target="_blank" rel="noopener noreferrer">2026-07-29</a><span class="spec-toggle" aria-hidden="true"></span></summary>
 <p class="spec-what">ローカル sandbox を<b>強制</b>する（CLI と Copilot app のみ）。既定では:<br>✅ 作業フォルダの読み書き、ツールや git / gh の実行、ネット接続<br>❌ それ以外のファイル（例: <code>~/.ssh</code>）、macOS Keychain<br>⚠️ コマンドは承認すれば sandbox 外でも実行できる（<code>allowBypass: false</code> で禁止）<br><a class="retro-link" style="white-space:nowrap" href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/understanding-local-sandboxing" target="_blank" rel="noopener noreferrer">既定の権限 ↗</a></p>
+</details>
+<details class="spec-item" name="managed-settings">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🖱️</span><span class="spec-key"><code>features.computerUse</code><span class="spec-tag is-locked">LOCKED</span></span><a class="spec-since" href="https://github.blog/changelog/2026-10-01-github-copilot-can-now-interact-with-desktop-apps/" target="_blank" rel="noopener noreferrer">2026-10-01</a><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what"><b>computer use</b>（Copilot がデスクトップアプリをクリックや入力で操作する機能、CLI と Copilot app のみ）を止める。<br>❌ <code>false</code>: 禁止。ローカル設定では戻せない<br>✅ <code>true</code> または未設定: ユーザーが決める</p>
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🧩</span><span class="spec-key"><code>enabledPlugins</code><span class="spec-tag is-add">ADDITIVE</span> · marketplaces<span class="spec-tag is-team">OVERRIDABLE</span></span><a class="spec-since" href="https://github.blog/changelog/2026-08-26-enterprise-managed-settings-now-support-autoupdate-for-plugin-marketplaces" target="_blank" rel="noopener noreferrer">2026-08-26</a><span class="spec-toggle" aria-hidden="true"></span></summary>
@@ -571,7 +575,7 @@ Copilot クライアントも同じ。`copilot/managed-settings.json` がロー�
 </details>
 <details class="spec-item" name="managed-settings">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">👥</span><span class="spec-key"><code>teams/</code> + <code>team-mappings.json</code></span><a class="spec-since" href="https://github.blog/changelog/2026-08-03-enterprise-team-specialization-for-managed-settings/" target="_blank" rel="noopener noreferrer">2026-08-03</a><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">共通の基準に加え、<b>OVERRIDABLE</b> のキーだけ team ごとに変えられる。基準側で <code style="white-space:nowrap">{ "overridable": … }</code> と包み、<code>teams/*.json</code> に普通の値を書く。書かなければ基準のまま。<code>sandbox</code> と marketplace の一覧は丸ごと置き換わる。<br>このスライド外（2026-10-14 時点）: <code>autoTier</code> は上書き可、<code>features.computerUse</code> と <code>forceRemoteSettingsRefresh</code> は上書き不可。<br>複数の team に所属する場合は、最もゆるい値が適用される。</p>
+<p class="spec-what">共通の基準に加え、<b>OVERRIDABLE</b> のキーだけ team ごとに変えられる。基準側で <code style="white-space:nowrap">{ "overridable": … }</code> と包み、<code>teams/*.json</code> に普通の値を書く。書かなければ基準のまま。<code>sandbox</code> と marketplace の一覧は丸ごと置き換わる。<br>このスライド外（2026-10-14 時点）: <code>autoTier</code> は上書き可、<code>forceRemoteSettingsRefresh</code> は上書き不可。<br>複数の team に所属する場合は、最もゆるい値が適用される。</p>
 </details>
 </div>
 </div>
