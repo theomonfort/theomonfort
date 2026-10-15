@@ -108,13 +108,22 @@ const updates = await Promise.all(entries.map(async (entry) => ({
                 <div class="entry-content">
                   <p class="summary">{data.summary}</p>
                   <div class="entry-body"><Content /></div>
-                  {(data.demo.length > 0 || data.demoUrl) && (
+                  {(data.demo.length > 0 || data.demoUrl || data.demoLinks.length > 0) && (
                     <details class="demo">
                       <summary>{copy.demo}</summary>
                       {data.demoUrl && (
                         <a class="source" href={data.demoUrl} target="_blank" rel="noopener noreferrer">
                           {copy.openDemo} <span aria-hidden="true">↗</span>
                         </a>
+                      )}
+                      {data.demoLinks.length > 0 && (
+                        <div class="demo-links">
+                          {data.demoLinks.map((link) => (
+                            <a class="source" href={link.url} target="_blank" rel="noopener noreferrer">
+                              {link.label} <span aria-hidden="true">↗</span>
+                            </a>
+                          ))}
+                        </div>
                       )}
                       {data.demo.length > 0 && <ol>{data.demo.map((step) => <li>{step}</li>)}</ol>}
                     </details>
@@ -430,6 +439,8 @@ const updates = await Promise.all(entries.map(async (entry) => ({
   .demo { margin-top: 1.5rem; border-top: 1px dashed var(--entry-accent); border-bottom: 1px dashed var(--entry-accent); }
   .demo summary { cursor: pointer; padding: 0.9rem 0; color: var(--entry-accent); }
   .demo .source { margin: 0 0 1rem; }
+  .demo-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin: 0 0 1rem; }
+  .demo .demo-links .source { margin: 0; }
   .demo ol { list-style: decimal; padding: 0 0 1rem 1.5rem; font-size: 0.9375rem; line-height: 1.85; }
   .demo li + li { margin-top: 0.5rem; }
   .source { display: inline-block; margin-top: 1.5rem; font-size: 0.875rem; color: var(--c-neon-cyan); text-decoration: underline; text-underline-offset: 4px; }

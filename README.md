@@ -30,7 +30,7 @@ Playbook の本文と引用ブロックでも、英字には DotGothic16、日�
 
 `src/content/changelog/ja/` と `src/content/changelog/en/` に同名の Markdown ファイルを追加します（例: `2026-09-21-pull-requests-page.md`）。
 
-Frontmatter は `title`、`date`（`"YYYY-MM-DD"`）、`summary`、`category`（`review` / `security` / `copilot` / `actions` / `administration` / `issues`）、`source`（公式の完全な URL）が必須。`status`、`demo`（デモ手順の文字列配列）、`demoUrl`（公開デモへの完全な URL）は任意です。`demoUrl` はデモ欄の「デモを開く」リンクになります。本文は要点や補足を自由に記述できます。日付の降順で自動表示されるため、並び順の手動管理は不要です。
+Frontmatter は `title`、`date`（`"YYYY-MM-DD"`）、`summary`、`category`（`review` / `security` / `copilot` / `actions` / `administration` / `issues`）、`source`（公式の完全な URL）が必須。`status`、`demo`（デモ手順の文字列配列）、`demoUrl`（公開デモへの完全な URL）は任意です。`demoUrl` はデモ欄の「デモを開く」リンクになります。複数のリンクを名前付きで並べたい場合は、任意の `demoLinks`（`label` と `url` を持つオブジェクトの配列）を使います。本文は要点や補足を自由に記述できます。日付の降順で自動表示されるため、並び順の手動管理は不要です。
 
 `status` は機能の提供状況に使用し、未紹介、未検証、デモ失敗などの個人的な確認状況は `demo` に分けて記載します。非公開デモリポジトリの URL や実在ユーザーの利用データは掲載しません。
 
