@@ -77,6 +77,7 @@ const changelog = defineCollection({
     status: z.string().optional(),
     demo: z.array(z.string()).default([]),
     demoUrl: z.string().url().optional(),
+    demoLinks: z.array(z.object({ label: z.string(), url: z.string().url() })).default([]),
   }),
 });
 
