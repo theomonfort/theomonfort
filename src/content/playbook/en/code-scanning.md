@@ -217,6 +217,7 @@ The whole language is that shape: **`where` is the definition of "what the bug l
 <p class="demo-step-title">WALK THROUGH ADVANCED SETUP</p>
 <p>Open <a href="https://github.com/theomonfort-org/ghas-test-1/blob/main/.github/workflows/codeql.yml" target="_blank" rel="noopener noreferrer">codeql.yml ↗</a>. Show push / PR / schedule under <code class="demo-path">on</code>, the language <code class="demo-path">matrix</code>, and the runner under <code class="demo-path">runs-on</code>.</p>
 <p>C/C++ uses <b>build-mode: manual</b> with <code class="demo-path">make -C src/c</code> / <code class="demo-path">make -C src/cpp</code>; the other languages use <b>none</b>. Point out <b>queries: security-and-quality</b> and the C/C++ <b>CERT / MISRA packs</b>.</p>
+<p>These packs come from <a href="https://github.com/github/codeql-coding-standards" target="_blank" rel="noopener noreferrer">github/codeql-coding-standards ↗</a>: an example of extra query packs you can add (AUTOSAR C++14, CERT C/C++, MISRA C/C++).</p>
 <p class="demo-out">Advanced setup controls the build and execution conditions through a <b>versioned Actions workflow</b>.</p>
 </li>
 <li>

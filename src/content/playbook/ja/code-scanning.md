@@ -217,6 +217,7 @@ select ifstmt, "This if-statement is redundant."  // ④ 何をどう報告す�
 <p class="demo-step-title">ADVANCED SETUP の中身</p>
 <p><a href="https://github.com/theomonfort-org/ghas-test-1/blob/main/.github/workflows/codeql.yml" target="_blank" rel="noopener noreferrer">codeql.yml ↗</a> で、<code class="demo-path">on</code> の push / PR / schedule、言語の <code class="demo-path">matrix</code>、ランナーの <code class="demo-path">runs-on</code> を順に見せる。</p>
 <p>C/C++ は <b>build-mode: manual</b> と <code class="demo-path">make -C src/c</code> / <code class="demo-path">make -C src/cpp</code>。他の言語は <b>none</b>。<b>queries: security-and-quality</b> と C/C++ の <b>CERT / MISRA packs</b> も指し示す。</p>
+<p>この packs は <a href="https://github.com/github/codeql-coding-standards" target="_blank" rel="noopener noreferrer">github/codeql-coding-standards ↗</a> のもの。追加できるクエリパックの例として紹介する（AUTOSAR C++14 / CERT C, C++ / MISRA C, C++）。</p>
 <p class="demo-out">Advanced setup では、ビルド方法や実行条件まで<b>バージョン管理された Actions workflow</b>で制御する。</p>
 </li>
 <li>
