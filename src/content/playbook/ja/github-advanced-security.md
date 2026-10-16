@@ -329,7 +329,7 @@ links:
 
 **Enterprise → Settings → Advanced Security → Code security** で configuration を 1 つ作れば配下の全 org / repo に配れる。**New configuration** は最初から **GitHub recommended**。
 
-**Enterprise の security configuration を強制適用**し、org / repo 管理者によるポリシーの上書きを防げるようになった。<a class="retro-link" href="https://github.blog/changelog/2026-09-15-enforce-github-advanced-security-configurations/" target="_blank" rel="noopener noreferrer">9 月 15 日の発表 ↗</a>
+**Enterprise の security configuration を強制適用**し、新規 / 既存リポジトリを問わず org / repo 管理者によるポリシーの上書きを防げるようになった。<a class="retro-link" href="https://github.blog/changelog/2026-09-15-enforce-github-advanced-security-configurations/" target="_blank" rel="noopener noreferrer">9 月 15 日の発表 ↗</a>
 
 <div class="ctl-widget">
 <div class="ctl-list">
@@ -384,6 +384,7 @@ links:
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">やること</span><span class="ctl-v">Configurations 一覧 → <b>Apply to</b> → <b>All repositories without configurations</b></span></p>
 <p class="ctl-row"><span class="ctl-k">enterprise 限定</span><span class="ctl-v">この選択肢は <b>enterprise レベルでのみ</b>表示。既に config が当たっている org を壊さず、未設定の repo だけカバーできる</span></p>
+<p class="ctl-row"><span class="ctl-k">強制適用</span><span class="ctl-v">Policy → <b>Enforce configuration</b> で <b>Enforce for repository and organization owners</b> を選ぶと、適用した既存 repo でも org / repo 管理者による上書きを防げる(全 repo に強制するなら <b>Apply to → All repositories</b>)</span></p>
 <p class="ctl-row"><span class="ctl-k">対象</span><span class="ctl-v">archived リポジトリにも適用される(secret scanning は archived でも動くため)</span></p>
 </div>
 </details>

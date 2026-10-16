@@ -329,7 +329,7 @@ Two free assessments run from **Org → Security → Assessments** and show what
 
 One configuration at **Enterprise → Settings → Advanced Security → Code security** rolls out to every org and repo. **New configuration** opens pre-filled with **GitHub recommended**.
 
-You can now **enforce enterprise security configurations**, preventing organization and repository admins from overriding those policies. <a class="retro-link" href="https://github.blog/changelog/2026-09-15-enforce-github-advanced-security-configurations/" target="_blank" rel="noopener noreferrer">September 15 announcement ↗</a>
+You can now **enforce enterprise security configurations** across both new and existing repositories, preventing organization and repository admins from overriding those policies. <a class="retro-link" href="https://github.blog/changelog/2026-09-15-enforce-github-advanced-security-configurations/" target="_blank" rel="noopener noreferrer">September 15 announcement ↗</a>
 
 <div class="ctl-widget">
 <div class="ctl-list">
@@ -384,6 +384,7 @@ You can now **enforce enterprise security configurations**, preventing organizat
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">Do this</span><span class="ctl-v">from the configurations list, <b>Apply to</b> → <b>All repositories without configurations</b></span></p>
 <p class="ctl-row"><span class="ctl-k">Enterprise only</span><span class="ctl-v">appears <b>only at the enterprise level</b>. Covers unconfigured repos without disturbing orgs that already have one</span></p>
+<p class="ctl-row"><span class="ctl-k">Enforcement</span><span class="ctl-v">set Policy → <b>Enforce configuration</b> to <b>Enforce for repository and organization owners</b> to block org and repo admins from overriding existing repos too (use <b>Apply to → All repositories</b> to enforce across all repos)</span></p>
 <p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">archived repos are included too, since secret scanning still runs on them</span></p>
 </div>
 </details>
