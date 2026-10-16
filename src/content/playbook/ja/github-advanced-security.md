@@ -45,6 +45,12 @@ links:
     label: Applying a custom security configuration
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/apply-custom-configuration
   - group: 🏢 エンタープライズ展開
+    label: Security configuration statuses
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/reference/security-at-scale/configuration-statuses
+  - group: 🏢 エンタープライズ展開
+    label: Code security configurations REST API
+    url: https://docs.github.com/en/enterprise-cloud@latest/rest/code-security/configurations
+  - group: 🏢 エンタープライズ展開
     label: Code scanning merge protection
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/merge-protection
   - group: 📊 可視化 (Security overview)
@@ -393,6 +399,15 @@ links:
 <p class="ctl-row"><span class="ctl-k">repo 単位</span><span class="ctl-v">enterprise の <b>Apply to</b> は <b>All repositories</b> か <b>All repositories without configurations</b> のみ。<b>repo を選べるのは org configuration だけ</b></span></p>
 <p class="ctl-row"><span class="ctl-k">やり方</span><span class="ctl-v">Organization → Settings → Advanced Security → Configurations → <b>Repositories</b> タブで絞り込んで選択 → <b>Apply configuration</b></span></p>
 <p class="ctl-row"><span class="ctl-k">どちらが優先</span><span class="ctl-v">enterprise 側の変更が org configuration と衝突すると repo は <code>removed_by_enterprise</code> になり org config が外れる。<b>enterprise が優先</b></span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#9bbc0f">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">⚖️</span><span class="ctl-name">どの configuration が適用されるか</span><span class="ctl-when">1 repo = 1 config（後勝ち）</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/reference/security-at-scale/configuration-statuses" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">基本ルール</span><span class="ctl-v">マージや重ね掛けはなく、<b>1 リポジトリに紐づく configuration は常に 1 つだけ</b>。別の config を当てると Detach 不要で<b>後から適用した方が上書き</b>する（<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-organization-security/manage-your-coverage/detach-security-configuration" target="_blank" rel="noopener noreferrer">Detach の仕様 ↗</a>）。なお Detach だけでは有効化済みの機能は OFF にならない</span></p>
+<p class="ctl-row"><span class="ctl-k">優先と競合</span><span class="ctl-v">既存 repo に enterprise で <b>All repositories</b> を当てると org の設定を上書きする（<b>All repositories without configurations</b> なら維持）。新規 repo のデフォルトは <b>enterprise-enforced</b> な enterprise デフォルトが org デフォルトに優先（<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/reference/security-at-scale/configuration-enforcement" target="_blank" rel="noopener noreferrer">Enforcement の仕様 ↗</a>）。競合時は <code>removed_by_enterprise</code> になる（<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/reference/security-at-scale/configuration-statuses" target="_blank" rel="noopener noreferrer">ステータス一覧 ↗</a>）</span></p>
+<p class="ctl-row"><span class="ctl-k">Org で確認</span><span class="ctl-v">Organization → Settings → Advanced Security → Configurations → <b>Repositories</b> タブで、各 repo の適用中 configuration 名とステータス（<code>Enforced</code>, <code>Removed</code>, <code>No configuration</code>）を確認し、<b>Configuration status</b> で絞り込める（<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/reference/security-at-scale/troubleshoot-security-configurations/configuration-issue-diagnosis" target="_blank" rel="noopener noreferrer">診断手順 ↗</a>）</span></p>
+<p class="ctl-row"><span class="ctl-k">API で確認</span><span class="ctl-v">1 repo の適用 config は <code>GET /repos/{owner}/{repo}/code-security-configuration</code>（<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/rest/code-security/configurations#get-the-code-security-configuration-that-manages-a-repositorys-code-security-settings" target="_blank" rel="noopener noreferrer">REST API ↗</a>）、ある config の対象 repo 一覧は <code>GET /orgs/{org}/code-security/configurations/{configuration_id}/repositories</code>（enterprise 版も同様、<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/rest/code-security/configurations#get-repositories-associated-with-a-code-security-configuration" target="_blank" rel="noopener noreferrer">REST API ↗</a>）</span></p>
 </div>
 </details>
 </div>

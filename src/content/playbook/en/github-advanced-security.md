@@ -45,6 +45,12 @@ links:
     label: Applying a custom security configuration
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/apply-custom-configuration
   - group: 🏢 Enterprise rollout
+    label: Security configuration statuses
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/reference/security-at-scale/configuration-statuses
+  - group: 🏢 Enterprise rollout
+    label: Code security configurations REST API
+    url: https://docs.github.com/en/enterprise-cloud@latest/rest/code-security/configurations
+  - group: 🏢 Enterprise rollout
     label: Code scanning merge protection
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/merge-protection
   - group: 📊 Visibility (Security overview)
@@ -393,6 +399,15 @@ You can now **enforce enterprise security configurations**, preventing organizat
 <p class="ctl-row"><span class="ctl-k">Per repo</span><span class="ctl-v">enterprise <b>Apply to</b> offers only <b>All repositories</b> or <b>All repositories without configurations</b>. <b>Choosing which repos get it is organization-level only</b></span></p>
 <p class="ctl-row"><span class="ctl-k">How</span><span class="ctl-v">Organization → Settings → Advanced Security → Configurations → <b>Repositories</b> tab → filter, select, <b>Apply configuration</b></span></p>
 <p class="ctl-row"><span class="ctl-k">Who wins</span><span class="ctl-v">if an enterprise change conflicts with the org configuration the repo flips to <code>removed_by_enterprise</code> and the org config detaches. <b>Enterprise wins</b></span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#9bbc0f">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">⚖️</span><span class="ctl-name">Which configuration is applied</span><span class="ctl-when">1 repo = 1 config (last applied wins)</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/reference/security-at-scale/configuration-statuses" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Core rule</span><span class="ctl-v">no merging and no stacking: <b>a repository has at most one configuration attached at a time</b>. Applying another configuration <b>replaces the current one</b> without detaching first (<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-organization-security/manage-your-coverage/detach-security-configuration" target="_blank" rel="noopener noreferrer">detaching docs ↗</a>). Detaching alone leaves already-enabled features on</span></p>
+<p class="ctl-row"><span class="ctl-k">Precedence</span><span class="ctl-v">on existing repos, enterprise <b>All repositories</b> overwrites org choices (<b>All repositories without configurations</b> keeps them). For new repos, an <b>enterprise-enforced</b> enterprise default beats the org default for the same visibility (<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/reference/security-at-scale/configuration-enforcement" target="_blank" rel="noopener noreferrer">enforcement docs ↗</a>). On conflict, the repo flips to <code>removed_by_enterprise</code> (<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/reference/security-at-scale/configuration-statuses" target="_blank" rel="noopener noreferrer">statuses reference ↗</a>)</span></p>
+<p class="ctl-row"><span class="ctl-k">Check in org UI</span><span class="ctl-v">Organization → Settings → Advanced Security → Configurations → <b>Repositories</b> tab shows each repo's attached configuration name and status prefix (<code>Enforced</code>, <code>Removed</code>, <code>No configuration</code>), filterable by <b>Configuration status</b> (<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/reference/security-at-scale/troubleshoot-security-configurations/configuration-issue-diagnosis" target="_blank" rel="noopener noreferrer">diagnosis guide ↗</a>)</span></p>
+<p class="ctl-row"><span class="ctl-k">Check via API</span><span class="ctl-v">get one repo's active config with <code>GET /repos/{owner}/{repo}/code-security-configuration</code> (<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/rest/code-security/configurations#get-the-code-security-configuration-that-manages-a-repositorys-code-security-settings" target="_blank" rel="noopener noreferrer">REST API ↗</a>), or list every repo on a config with <code>GET /orgs/{org}/code-security/configurations/{configuration_id}/repositories</code> (plus the enterprise equivalent, <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/rest/code-security/configurations#get-repositories-associated-with-a-code-security-configuration" target="_blank" rel="noopener noreferrer">REST API ↗</a>)</span></p>
 </div>
 </details>
 </div>
