@@ -1,0 +1,626 @@
+---
+import { categories, localizedCategory } from '../../lib/playbook-categories';
+import { localizedPath, type Locale } from '../../lib/i18n';
+import type { LocalizedPlaybookEntry } from '../../lib/playbook';
+import type { GalaxyCategory } from '../../lib/playbook-galaxy';
+import { accentColorValues } from '../../lib/theme';
+
+interface Props {
+  locale: Locale;
+  entries: LocalizedPlaybookEntry[];
+}
+const { locale, entries } = Astro.props;
+const copy = {
+  en: {
+    catalogue: '2D Catalogue', galaxy: '3D Galaxy',
+    category: 'Destination', all: 'All destinations',
+    overview: 'Galaxy overview', briefing: 'Your development universe',
+    description: 'Five worlds around one sun. Follow the development lifecycle and discover each planet’s missions in orbit.',
+    hint: 'Drag to orbit / Scroll to zoom / Right-drag to pan / Select a world or a satellite',
+    loading: 'Establishing uplink...',
+    error: 'The 3D view could not be loaded. The 2D catalogue is still available.',
+    results: 'missions', empty: 'No missions available in this destination.',
+    open: 'Open playbook', select: 'Select a satellite or a mission below to see its briefing.',
+    missions: 'Missions in orbit', fallback: 'English translation pending.',
+    left: 'Rotate left', right: 'Rotate right', closer: 'Zoom in', farther: 'Zoom out',
+    reset: 'Reset camera', back: 'All systems', station: 'Departure station', ship: 'Mothership',
+    up: 'View from above', down: 'View from below', motion: 'Motion', orbit: 'Back to planet',
+    musicOn: 'Music: ON', musicOff: 'Music: OFF', sun: 'SDLC',
+    panel: 'Missions',
+    audioError: 'Ambient audio is unavailable. Try the Music button again; the 3D map is still available.',
+  },
+  ja: {
+    catalogue: '2D カタログ', galaxy: '3D ギャラクシー',
+    category: '目的地', all: 'すべての目的地',
+    overview: '銀河の全体図', briefing: '開発の宇宙を探索しよう',
+    description: 'ひとつの太陽を囲む5つの惑星で開発ライフサイクルを巡る。惑星を選ぶと、軌道上のミッションが表示されます。',
+    hint: 'ドラッグで回転 / スクロールでズーム / 右ドラッグで移動 / 惑星や衛星を選択',
+    loading: '通信を確立中...',
+    error: '3D 表示を読み込めませんでした。2D カタログをご利用ください。',
+    results: '件のミッション', empty: 'この目的地にはミッションがありません。',
+    open: 'プレイブックを開く', select: '衛星または下のミッションを選ぶと概要が表示されます。',
+    missions: '軌道上のミッション', fallback: '英訳準備中。',
+    left: '左に回転', right: '右に回転', closer: '拡大', farther: '縮小',
+    reset: 'カメラをリセット', back: '全体図へ', station: '出発ステーション', ship: '母艦',
+    up: '上から見る', down: '下から見る', motion: '動き', orbit: '惑星に戻る',
+    musicOn: '音楽: ON', musicOff: '音楽: OFF', sun: 'SDLC',
+    panel: 'ミッション',
+    audioError: '環境音楽を再生できません。音楽ボタンで再試行できます。3D マップは引き続き利用できます。',
+  },
+}[locale];
+const systems: GalaxyCategory[] = categories.map((category) => ({
+  id: category.id,
+  name: category.labelEn,
+  label: localizedCategory(category, locale).label,
+  color: accentColorValues[category.color],
+  entries: entries.filter((item) => item.entry.data.category === category.id).map((item) => ({
+    slug: item.slug,
+    title: item.entry.data.titleEn || item.entry.data.title,
+    subtitle: item.entry.data.title,
+    summary: item.entry.data.summary,
+    icon: item.entry.data.icon,
+    href: localizedPath(locale, `/playbook/${item.slug}`),
+    fallback: item.isFallback,
+  })),
+})).filter((category) => category.entries.length > 0);
+---
+
+<playbook-explorer data-error={copy.error} data-results={copy.results} data-music-on={copy.musicOn} data-music-off={copy.musicOff} data-audio-error={copy.audioError} data-sun-label={copy.sun}>
+  <script type="application/json" data-systems set:html={JSON.stringify(systems).replace(/</g, '\\u003c')} />
+  <div class="explorer-controls" hidden>
+    <div class="explorer-heading">
+      <div class="explorer-switch" role="group" aria-label="2D / 3D">
+        <button type="button" data-mode="2d" aria-pressed="true" aria-label={copy.catalogue} title={copy.catalogue}>2D</button>
+        <button type="button" data-mode="3d" aria-pressed="false" aria-label={copy.galaxy} title={copy.galaxy}>3D</button>
+      </div>
+    </div>
+    <div class="explorer-filters" hidden>
+      <label>
+        <span>{copy.category}</span>
+        <select data-destination>
+          <option value="">{copy.all}</option>
+          {systems.map((category) => <option value={category.id}>{category.label}</option>)}
+        </select>
+      </label>
+    </div>
+    <p class="explorer-status" role="status" aria-live="polite" hidden></p>
+    <p class="explorer-error" role="alert" hidden></p>
+    <p class="explorer-audio-error" role="status" hidden></p>
+    <p class="explorer-empty" hidden>{copy.empty}</p>
+  </div>
+
+  <section class="galaxy" aria-label={copy.overview} hidden>
+    <div class="galaxy-map">
+      <div class="galaxy-map-heading">
+        <span><span class="galaxy-signal" aria-hidden="true"></span> SDLC / <span data-map-title>ALL SYSTEMS</span></span>
+        <div class="galaxy-map-actions">
+          <button type="button" data-panel-toggle aria-expanded="false" aria-controls="galaxy-mission-panel">{copy.panel}</button>
+          <button type="button" data-music aria-pressed="false">{copy.musicOff}</button>
+          <button type="button" data-camera="motion" aria-pressed="true">{copy.motion}</button>
+          <button type="button" data-overview hidden>↖ {copy.back}</button>
+        </div>
+      </div>
+      <div class="galaxy-stage" aria-label={copy.overview} aria-busy="true"></div>
+      <p class="galaxy-loading" role="status">{copy.loading}</p>
+      <div class="galaxy-camera" role="group" aria-label={copy.reset}>
+        <button type="button" data-camera="left" aria-label={copy.left} title={copy.left}>↶</button>
+        <button type="button" data-camera="right" aria-label={copy.right} title={copy.right}>↷</button>
+        <button type="button" data-camera="up" aria-label={copy.up} title={copy.up}>↑</button>
+        <button type="button" data-camera="down" aria-label={copy.down} title={copy.down}>↓</button>
+        <span aria-hidden="true"></span>
+        <button type="button" data-camera="in" aria-label={copy.closer} title={copy.closer}>+</button>
+        <button type="button" data-camera="out" aria-label={copy.farther} title={copy.farther}>−</button>
+        <button type="button" data-camera="reset" aria-label={copy.reset} title={copy.reset}>⌖</button>
+      </div>
+      <p class="galaxy-hint">{copy.hint}</p>
+    </div>
+    <aside class="galaxy-panel" id="galaxy-mission-panel" hidden>
+      <div data-briefing>
+        <p class="explorer-eyebrow">MISSION CONTROL</p>
+        <h3>{copy.briefing}</h3>
+        <p>{copy.description}</p>
+        <div class="galaxy-destinations">
+          {systems.map((category) => (
+            <button type="button" data-system={category.id} style={`--sector-color:${category.color}`}>
+              <span>{category.name}</span>
+              <small>{category.id === 'introduction' ? copy.station : category.id === 'administration' ? copy.ship : category.label}</small>
+              <span class="galaxy-count">{String(category.entries.length).padStart(2, '0')}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+      {systems.map((category) => (
+        <div data-sector={category.id} style={`--sector-color:${category.color}`} hidden>
+          <p class="explorer-eyebrow">{category.id === 'administration' ? 'COMMAND SHIP' : category.id === 'introduction' ? 'DEPARTURE STATION' : 'SECTOR / SDLC'}</p>
+          <h3>{category.name}</h3>
+          {category.name !== category.label && <p>{category.label}</p>}
+          <p data-selection-hint>{copy.select}</p>
+          {category.entries.map((entry) => (
+            <article data-detail={entry.slug} class="galaxy-detail" hidden>
+              <button type="button" data-back-orbit class="galaxy-back-orbit">↖ {copy.orbit}</button>
+              <h4>
+                {/\.(svg|png|jpg|jpeg|webp|gif)$/i.test(entry.icon)
+                  ? <img src={entry.icon} alt="" width="24" height="24" loading="lazy" />
+                  : <span aria-hidden="true">{entry.icon}</span>}
+                {entry.title}
+              </h4>
+              {entry.subtitle !== entry.title && <p>{entry.subtitle}</p>}
+              {entry.fallback && <p>{copy.fallback}</p>}
+              <p>{entry.summary}</p>
+              <a href={entry.href} data-playbook-tile>{copy.open} <span aria-hidden="true">↗</span></a>
+            </article>
+          ))}
+          <h4 class="galaxy-missions-title">{copy.missions}</h4>
+          <ol class="galaxy-missions">
+            {category.entries.map((entry, index) => (
+              <li data-mission={entry.slug}>
+                <button type="button" data-entry={entry.slug} aria-pressed="false">
+                  <span>{String(index + 1).padStart(2, '0')}</span>{entry.title}
+                </button>
+              </li>
+            ))}
+          </ol>
+        </div>
+      ))}
+    </aside>
+  </section>
+</playbook-explorer>
+
+<script>
+  import type { GalaxyCategory } from '../../lib/playbook-galaxy';
+  import type { GalaxyScene } from '../../lib/playbook-galaxy-scene';
+  import type { CategoryId } from '../../lib/playbook-categories';
+  import { setGalaxyAudioMode } from '../../lib/audio';
+  import { createGalaxyAmbience, type GalaxyAmbience, type GalaxyAudioPose } from '../../lib/playbook-galaxy-audio';
+
+  class PlaybookExplorer extends HTMLElement {
+    private systems: GalaxyCategory[] = [];
+    private scene?: GalaxyScene;
+    private mode: '2d' | '3d' = '2d';
+    private category: CategoryId | null = null;
+    private selected: string | null = null;
+    private request = 0;
+    private events?: AbortController;
+    private ambience?: GalaxyAmbience;
+    private musicEnabled = true;
+    private audioPose?: GalaxyAudioPose;
+    private background: HTMLElement[] = [];
+
+    connectedCallback() {
+      if (this.events) return;
+      this.events = new AbortController();
+      this.systems = JSON.parse(this.querySelector('[data-systems]')!.textContent!);
+      this.querySelector<HTMLElement>('.explorer-controls')!.hidden = false;
+      const params = new URLSearchParams(location.search);
+      const category = this.systems.find((system) => system.id === params.get('sector'));
+      this.category = category?.id ?? null;
+      this.querySelector<HTMLSelectElement>('[data-destination]')!.value = this.category ?? '';
+      const { signal } = this.events;
+      this.querySelector('[data-camera="motion"]')!.setAttribute('aria-pressed', String(!window.matchMedia('(prefers-reduced-motion: reduce)').matches));
+      this.addEventListener('click', (event) => {
+        if (!(event.target instanceof Element)) return;
+        const button = event.target.closest<HTMLButtonElement>('button');
+        if (!button) return;
+        if (button.hasAttribute('data-panel-toggle')) {
+          this.setPanelOpen(button.getAttribute('aria-expanded') !== 'true');
+        }
+        if (button.dataset.mode === '2d' || button.dataset.mode === '3d') void this.setMode(button.dataset.mode, event.isTrusted);
+        if (button.hasAttribute('data-music')) {
+          if (this.ambience) {
+            this.musicEnabled = false;
+            this.stopMusic();
+          } else {
+            this.musicEnabled = true;
+            this.startMusic();
+          }
+        }
+        if (button.hasAttribute('data-overview')) this.selectCategory(null);
+        if (button.hasAttribute('data-back-orbit')) this.selectCategory(this.category);
+        if (button.dataset.system) {
+          const system = this.systems.find((item) => item.id === button.dataset.system);
+          if (system) this.selectCategory(system.id);
+        }
+        if (button.dataset.entry) this.selectEntry(button.dataset.entry);
+        switch (button.dataset.camera) {
+          case 'left': this.scene?.rotate(-1); break;
+          case 'right': this.scene?.rotate(1); break;
+          case 'up': this.scene?.tilt(-1); break;
+          case 'down': this.scene?.tilt(1); break;
+          case 'in': this.scene?.zoom(-1); break;
+          case 'out': this.scene?.zoom(1); break;
+          case 'reset': this.selectCategory(this.category); break;
+          case 'motion': {
+            const enabled = button.getAttribute('aria-pressed') !== 'true';
+            button.setAttribute('aria-pressed', String(enabled));
+            this.scene?.motion(enabled);
+            break;
+          }
+        }
+      }, { signal });
+      const unlockMusic = (event: Event) => {
+        if (!event.isTrusted || !this.musicEnabled || this.mode !== '3d') return;
+        if (event.target instanceof Element && event.target.closest('[data-music]')) return;
+        this.startMusic();
+      };
+      this.querySelector('.galaxy')!.addEventListener('pointerdown', unlockMusic, { signal });
+      this.querySelector('.galaxy')!.addEventListener('keydown', (event) => {
+        if (event instanceof KeyboardEvent && (event.key === 'Enter' || event.key === ' ')) unlockMusic(event);
+      }, { signal });
+      this.querySelector('select')!.addEventListener('change', (event) => {
+        const value = (event.target as HTMLSelectElement).value;
+        this.selectCategory(this.systems.find((system) => system.id === value)?.id ?? null);
+      }, { signal });
+      this.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape' || this.mode !== '3d') return;
+        event.preventDefault();
+        if (!this.querySelector<HTMLElement>('.galaxy-panel')!.hidden) {
+          this.setPanelOpen(false);
+          this.querySelector<HTMLButtonElement>('[data-panel-toggle]')!.focus();
+        } else if (this.category) {
+          this.selectCategory(null);
+          this.querySelector<HTMLSelectElement>('select')!.focus();
+        } else {
+          void this.setMode('2d');
+          this.querySelector<HTMLButtonElement>('[data-mode="3d"]')!.focus();
+        }
+      }, { signal });
+      // Dispose before Astro swaps the DOM, including while a dynamic import is pending.
+      document.addEventListener('astro:before-swap', () => this.stopScene(), { signal });
+      void this.setMode(params.get('view') === '3d' ? '3d' : '2d');
+    }
+
+    disconnectedCallback() {
+      this.stopScene();
+      this.events?.abort();
+      this.events = undefined;
+    }
+
+    private stopScene() {
+      if (this.matches(':popover-open')) this.hidePopover();
+      this.removeAttribute('popover');
+      this.background.forEach((element) => { element.inert = false; });
+      this.background = [];
+      this.request++;
+      this.scene?.dispose();
+      this.scene = undefined;
+      this.stopMusic();
+      setGalaxyAudioMode(false);
+    }
+
+    private setPanelOpen(open: boolean) {
+      this.querySelector<HTMLElement>('.galaxy-panel')!.hidden = !open;
+      this.querySelector('[data-panel-toggle]')!.setAttribute('aria-expanded', String(open));
+    }
+
+    private syncMusic(playing: boolean) {
+      const button = this.querySelector<HTMLButtonElement>('[data-music]')!;
+      button.setAttribute('aria-pressed', String(playing));
+      button.textContent = (playing ? this.dataset.musicOn : this.dataset.musicOff)!;
+    }
+
+    private stopMusic() {
+      const ambience = this.ambience;
+      this.ambience = undefined;
+      ambience?.dispose();
+      this.syncMusic(false);
+    }
+
+    private startMusic() {
+      if (this.ambience || this.mode !== '3d' || !this.musicEnabled) return;
+      const reportError = (error: unknown) => {
+        console.error('[Playbook galaxy] Ambient audio unavailable:', error);
+        this.stopMusic();
+        this.musicEnabled = false;
+        const message = this.querySelector<HTMLElement>('.explorer-audio-error')!;
+        message.textContent = this.dataset.audioError!;
+        message.hidden = false;
+      };
+      try {
+        const ambience = createGalaxyAmbience(
+          (playing) => { if (this.ambience === ambience) this.syncMusic(playing); },
+          (error) => { if (this.ambience === ambience) reportError(error); },
+        );
+        this.ambience = ambience;
+        if (this.audioPose) ambience.setPose(this.audioPose);
+        this.querySelector<HTMLElement>('.explorer-audio-error')!.hidden = true;
+        void ambience.start().catch((error) => { if (this.ambience === ambience) reportError(error); });
+      } catch (error) {
+        reportError(error);
+      }
+    }
+
+    private async setMode(mode: '2d' | '3d', userGesture = false) {
+      this.mode = mode;
+      if (mode === '2d') {
+        this.category = null;
+        this.selected = null;
+        this.querySelector<HTMLSelectElement>('select')!.value = '';
+      }
+      this.dataset.view = mode;
+      this.closest('.playbook-cosmos')!.classList.toggle('galaxy-active', mode === '3d');
+      this.stopScene();
+      setGalaxyAudioMode(mode === '3d');
+      this.querySelector<HTMLElement>('.explorer-audio-error')!.hidden = true;
+      const request = this.request;
+      this.querySelector<HTMLElement>('.galaxy')!.hidden = mode !== '3d';
+      this.querySelector<HTMLElement>('.explorer-filters')!.hidden = mode !== '3d';
+      this.querySelector<HTMLElement>('.explorer-status')!.hidden = mode !== '3d';
+      this.querySelectorAll<HTMLButtonElement>('[data-mode]').forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset.mode === mode));
+      });
+      this.update();
+      if (mode === '2d') return;
+      this.setPanelOpen(false);
+      this.setAttribute('popover', 'manual');
+      this.showPopover();
+      // Keep the covered page out of keyboard navigation, preserving existing inert regions.
+      let branch: HTMLElement = this;
+      while (branch.parentElement && branch !== document.body) {
+        for (const sibling of branch.parentElement.children) {
+          if (sibling instanceof HTMLElement && sibling !== branch && !sibling.inert) {
+            sibling.inert = true;
+            this.background.push(sibling);
+          }
+        }
+        branch = branch.parentElement;
+      }
+      if (userGesture && this.musicEnabled) this.startMusic();
+      const loading = this.querySelector<HTMLElement>('.galaxy-loading')!;
+      const stage = this.querySelector<HTMLElement>('.galaxy-stage')!;
+      loading.hidden = false;
+      stage.setAttribute('aria-busy', 'true');
+      this.querySelector<HTMLElement>('.explorer-error')!.hidden = true;
+      try {
+        const { createGalaxyScene } = await import('../../lib/playbook-galaxy-scene');
+        if (!this.isConnected || request !== this.request) return;
+        this.scene = createGalaxyScene({
+          host: stage,
+          categories: this.systems,
+          onCategory: (id) => this.selectCategory(id),
+          onEntry: (category, slug) => {
+            if (category !== this.category) this.selectCategory(category);
+            this.selectEntry(slug);
+          },
+          onError: (error) => this.fail(error),
+          onOverview: () => this.selectCategory(null),
+          sunLabel: this.dataset.sunLabel!,
+          onCameraPose: (pose) => {
+            this.audioPose = pose;
+            this.ambience?.setPose(pose);
+          },
+        });
+        this.scene.focus(this.category);
+        this.scene.motion(this.querySelector('[data-camera="motion"]')!.getAttribute('aria-pressed') === 'true');
+        this.update();
+        loading.hidden = true;
+        stage.setAttribute('aria-busy', 'false');
+      } catch (error) {
+        if (request === this.request && this.isConnected) this.fail(error);
+      }
+    }
+
+    private fail(error: unknown) {
+      console.error('[Playbook galaxy] Unable to render 3D scene:', error);
+      const message = this.querySelector<HTMLElement>('.explorer-error')!;
+      message.textContent = this.dataset.error!;
+      message.hidden = false;
+      void this.setMode('2d');
+      this.querySelector<HTMLButtonElement>('[data-mode="2d"]')!.focus();
+    }
+
+    private selectCategory(category: CategoryId | null) {
+      this.category = category;
+      this.selected = null;
+      this.querySelector<HTMLSelectElement>('select')!.value = category ?? '';
+      this.scene?.focus(category, true);
+      this.update();
+    }
+
+    private selectEntry(slug: string) {
+      this.selected = slug;
+      this.setPanelOpen(true);
+      this.update();
+      const detail = [...this.querySelectorAll<HTMLElement>('[data-detail]')].find((item) => item.dataset.detail === slug);
+      detail?.querySelector<HTMLAnchorElement>('a')?.focus();
+    }
+
+    private update() {
+      const matches = new Set(this.systems
+        .filter((system) => this.mode === '2d' || !this.category || system.id === this.category)
+        .flatMap((system) => system.entries.map((entry) => entry.slug)));
+      if (this.selected && !matches.has(this.selected)) this.selected = null;
+      const catalogue = this.closest('.playbook-cosmos')!;
+      catalogue.querySelectorAll<HTMLElement>('[data-catalogue-entry]').forEach((card) => {
+        card.hidden = !matches.has(card.dataset.catalogueEntry!);
+      });
+      catalogue.querySelectorAll<HTMLElement>('.category-section').forEach((section) => {
+        const system = this.systems.find((item) => `cat-${item.id}` === section.id);
+        section.hidden = this.mode === '3d' || !system?.entries.some((entry) => matches.has(entry.slug));
+      });
+      const nav = catalogue.querySelector<HTMLElement>('[data-category-nav]');
+      if (nav) nav.hidden = this.mode === '3d';
+      this.querySelector<HTMLElement>('.explorer-status')!.textContent = `${matches.size} ${this.dataset.results}`;
+      this.querySelector<HTMLElement>('.explorer-empty')!.hidden = this.mode === '2d' || matches.size !== 0;
+      this.querySelector<HTMLElement>('[data-briefing]')!.hidden = this.category !== null;
+      this.querySelector<HTMLElement>('[data-overview]')!.hidden = this.category === null;
+      this.querySelector<HTMLElement>('[data-map-title]')!.textContent = this.systems.find((system) => system.id === this.category)?.name.toUpperCase() ?? 'ALL SYSTEMS';
+      this.querySelectorAll<HTMLElement>('[data-sector]').forEach((sector) => { sector.hidden = sector.dataset.sector !== this.category; });
+      this.querySelectorAll<HTMLElement>('[data-mission]').forEach((mission) => { mission.hidden = !matches.has(mission.dataset.mission!); });
+      this.querySelectorAll<HTMLElement>('[data-detail]').forEach((detail) => { detail.hidden = detail.dataset.detail !== this.selected; });
+      this.querySelectorAll<HTMLButtonElement>('[data-entry]').forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset.entry === this.selected));
+      });
+      this.querySelectorAll<HTMLElement>('[data-selection-hint]').forEach((hint) => { hint.hidden = this.selected !== null; });
+      this.querySelectorAll<HTMLButtonElement>('[data-system]').forEach((button) => {
+        const count = this.systems.find((system) => system.id === button.dataset.system)!.entries.filter((entry) => matches.has(entry.slug)).length;
+        button.querySelector('.galaxy-count')!.textContent = String(count).padStart(2, '0');
+      });
+      this.scene?.filter(matches);
+      this.scene?.select(this.selected);
+      const url = new URL(location.href);
+      url.searchParams.delete('q');
+      for (const [key, value] of [['view', this.mode === '3d' ? '3d' : ''], ['sector', this.mode === '3d' ? this.category ?? '' : '']]) {
+        if (value) url.searchParams.set(key, value);
+        else url.searchParams.delete(key);
+      }
+      if (url.href !== location.href) history.replaceState(history.state, '', url);
+    }
+  }
+
+  if (!customElements.get('playbook-explorer')) customElements.define('playbook-explorer', PlaybookExplorer);
+</script>
+
+<style is:global>
+  .playbook-title-row { display: flex; align-items: center; flex-wrap: wrap; gap: .75rem 1rem; margin-bottom: .75rem; }
+  playbook-explorer {
+    display: block;
+    max-width: 100%;
+    color: #e8f4ff;
+    font-family: 'DotGothic16', monospace;
+    --sector-color: #00f0ff;
+  }
+  playbook-explorer [hidden], .playbook-cosmos [hidden] { display: none !important; }
+  playbook-explorer button, playbook-explorer select { font: inherit; }
+  playbook-explorer button { cursor: pointer; }
+  playbook-explorer :is(button, select, a):focus-visible { outline: 2px solid #ffb000; outline-offset: 4px; }
+  .explorer-heading { display: flex; align-items: center; }
+  .explorer-eyebrow { color: #00f0ff; font-family: 'VT323', monospace; font-size: 1rem; letter-spacing: .12em; margin: 0 0 .5rem; }
+  .explorer-switch { display: flex; flex-shrink: 0; border: 1px solid #00f0ff40; background: #05060f80; }
+  .explorer-switch button { padding: .25rem .55rem; color: #b6c7db; font-size: .75rem; border-bottom: 2px solid transparent; }
+  .explorer-switch button[aria-pressed="true"] { background: #00f0ff15; color: #00f0ff; border-bottom-color: #00f0ff; }
+  .explorer-filters { display: flex; gap: 1rem; margin-top: 1.5rem; }
+  .explorer-filters label { display: grid; gap: .4rem; min-width: 0; flex: 1; }
+  .explorer-filters label > span { font-size: .8rem; color: #b6c7db; }
+  .explorer-filters select { background: #0a0e27; color: #e8f4ff; padding: .7rem .9rem; border: 1px solid #00f0ff55; border-radius: 0; width: 100%; }
+  .explorer-status { font-size: .8rem; color: #b6c7db; margin: .7rem 0; }
+  .explorer-error, .explorer-empty, .explorer-audio-error { padding: 1rem; border: 1px dashed #ffb000; color: #ffb000; margin: 1rem 0; }
+  html:has(playbook-explorer[data-view="3d"]),
+  body:has(playbook-explorer[data-view="3d"]) { overflow: hidden; }
+  playbook-explorer[data-view="3d"] {
+    --hud-top: 8rem;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    background: #05060f;
+  }
+  playbook-explorer[data-view="3d"]::backdrop { background: #05060f; }
+  [data-view="3d"] .explorer-controls {
+    position: absolute;
+    z-index: 5;
+    top: max(1rem, env(safe-area-inset-top));
+    left: max(1rem, env(safe-area-inset-left));
+    right: auto;
+    width: min(28rem, calc(100% - 2rem));
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: end;
+    gap: .5rem 1rem;
+    padding: .65rem;
+    border: 1px solid #00f0ff55;
+    background: #05060fe6;
+  }
+  [data-view="3d"] .explorer-switch button { padding: .7rem .8rem; }
+  [data-view="3d"] .explorer-filters { margin: 0; }
+  [data-view="3d"] .explorer-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  [data-view="3d"] :is(.explorer-error, .explorer-empty, .explorer-audio-error) { grid-column: 1 / -1; margin: 0; padding: .5rem; }
+  [data-view="3d"] .galaxy { position: absolute; inset: 0; display: block; border: 0; }
+  [data-view="3d"] .galaxy-map { position: absolute; inset: 0; }
+  [data-view="3d"] .galaxy-stage { height: 100%; }
+  [data-view="3d"] .galaxy-map-heading { top: var(--hud-top); align-items: start; }
+  [data-view="3d"] .galaxy-panel {
+    position: absolute;
+    z-index: 4;
+    top: calc(var(--hud-top) + 2.75rem);
+    right: max(1rem, env(safe-area-inset-right));
+    bottom: 6rem;
+    width: min(320px, calc(100% - 2rem));
+    max-height: none;
+    border: 1px solid #00f0ff65;
+    background: #0a0e27ed;
+    overscroll-behavior: contain;
+  }
+  [data-view="3d"] .galaxy-camera { bottom: max(3.5rem, env(safe-area-inset-bottom)); }
+  .galaxy { --map-height: clamp(560px, 72vh, 820px); display: grid; grid-template-columns: minmax(0, 1fr) 285px; border: 1px solid #00f0ff65; background: #05060f; }
+  .galaxy-map { position: relative; min-width: 0; background: radial-gradient(ellipse at 40% 35%, #1a0b2e 0, #0a0e27 40%, #05060f 80%); }
+  .galaxy-map-heading { position: absolute; top: 1rem; left: 1rem; right: 1rem; z-index: 2; display: flex; justify-content: space-between; gap: .5rem; font-family: 'VT323', monospace; font-size: .9rem; letter-spacing: .08em; color: #00f0ff; pointer-events: none; }
+  .galaxy-map-heading button { pointer-events: auto; background: #05060fe6; padding: .2rem .5rem; border: 1px solid #00f0ff55; }
+  .galaxy-map-actions { display: flex; gap: .5rem; flex-wrap: wrap; justify-content: end; }
+  .galaxy-map-actions button[aria-pressed="true"] { background: #00f0ff20; }
+  .galaxy-signal { display: inline-block; width: 6px; height: 6px; background: #9bbc0f; box-shadow: 0 0 8px #9bbc0f; margin-right: .4rem; }
+  .galaxy-stage { position: relative; height: var(--map-height); overflow: hidden; }
+  .galaxy-stage canvas { display: block; position: absolute; inset: 0; cursor: grab; }
+  .galaxy-stage canvas:active { cursor: grabbing; }
+  .galaxy-labels { position: absolute; inset: 0; pointer-events: none; }
+  .galaxy-labels button { position: absolute; transform: translate(-50%, -50%); pointer-events: auto; }
+  .galaxy-planet-label { color: var(--sector-color); border: 1px solid color-mix(in srgb, var(--sector-color) 50%, transparent); background: #05060fd9; padding: .35rem .5rem; text-align: center; min-width: 90px; max-width: 150px; line-height: 1.2; }
+  .galaxy-planet-label strong { display: block; font-size: .85rem; font-weight: normal; }
+  .galaxy-planet-label > span { display: block; font: .75rem 'VT323', monospace; letter-spacing: .13em; color: #b6c7db; margin-top: .25rem; }
+  .galaxy-planet-label:hover { background: #0a0e27; box-shadow: 0 0 16px color-mix(in srgb, var(--sector-color) 30%, transparent); }
+  .galaxy-satellite { display: grid; place-items: center; width: 30px; height: 30px; border: 1px solid var(--sector-color); color: var(--sector-color); background: #05060fc9; font-family: 'VT323', monospace !important; font-size: 1rem !important; }
+  .galaxy-satellite[aria-pressed="true"], .galaxy-satellite:hover { color: #05060f; background: var(--sector-color); z-index: 3; }
+  .galaxy-satellite-title { display: none; position: absolute; top: calc(100% + 7px); left: 50%; transform: translateX(-50%); width: max-content; max-width: 190px; padding: .4rem .6rem; border: 1px solid var(--sector-color); background: #05060f; color: #e8f4ff; font: .8rem 'DotGothic16', monospace; }
+  .galaxy-satellite:hover .galaxy-satellite-title, .galaxy-satellite:focus-visible .galaxy-satellite-title { display: block; }
+  .galaxy-loading { position: absolute; top: 45%; left: 0; right: 0; text-align: center; color: #00f0ff; }
+  .galaxy-camera { position: absolute; z-index: 2; left: 1rem; bottom: 3.5rem; display: flex; background: #05060fe6; border: 1px solid #00f0ff55; }
+  .galaxy-camera button { width: 36px; height: 38px; color: #00f0ff; font-size: 1.25rem; }
+  .galaxy-camera button:hover { background: #00f0ff20; }
+  .galaxy-camera > span { border-left: 1px solid #00f0ff55; }
+  .galaxy-hint { position: absolute; bottom: 1rem; left: 1rem; right: 1rem; font-size: .7rem; line-height: 1.5; color: #b6c7db; margin: 0; pointer-events: none; }
+  .galaxy-panel { border-left: 1px solid #00f0ff40; padding: 1.25rem; background: #0a0e2799; max-height: var(--map-height); overflow-y: auto; scrollbar-color: #00f0ff55 #05060f; scrollbar-width: thin; }
+  .galaxy-panel h3 { font-size: 1.25rem; color: var(--sector-color); margin: 0 0 .8rem; }
+  .galaxy-panel p:not(.explorer-eyebrow) { font-size: .8rem; line-height: 1.8; color: #b6c7db; margin: 0 0 1rem; }
+  .galaxy-destinations { display: grid; gap: .4rem; margin-top: 1rem; }
+  .galaxy-destinations button { position: relative; text-align: left; border-left: 2px solid var(--sector-color); background: #05060f80; padding: .45rem 2.25rem .45rem .65rem; }
+  .galaxy-destinations button:hover { background: #ffffff0a; }
+  .galaxy-destinations button > span:first-child { display: block; color: var(--sector-color); font-size: .9rem; }
+  .galaxy-destinations small { display: block; font-size: .65rem; color: #b6c7db; margin-top: .15rem; }
+  .galaxy-count { position: absolute; top: .65rem; right: .6rem; font: 1.2rem 'VT323', monospace; color: var(--sector-color); }
+  .galaxy-detail { border-block: 1px dashed var(--sector-color); padding: 1rem 0; margin-bottom: 1.2rem; }
+  .galaxy-back-orbit { color: var(--sector-color); font-size: .8rem !important; margin-bottom: .8rem; }
+  .galaxy-detail h4 { display: flex; align-items: center; gap: .5rem; font-size: 1rem; color: #e8f4ff; margin-bottom: .6rem; }
+  .galaxy-detail h4 img { object-fit: contain; }
+  .galaxy-detail a { display: flex; justify-content: space-between; color: var(--sector-color); border: 1px solid var(--sector-color); padding: .6rem .7rem; font-size: .85rem; }
+  .galaxy-missions-title { color: #b6c7db; font-size: .75rem; margin-bottom: .6rem; }
+  .galaxy-missions { list-style: none; padding: 0; margin: 0; display: grid; gap: .3rem; }
+  .galaxy-missions button { display: flex; gap: .65rem; align-items: baseline; width: 100%; text-align: left; padding: .5rem; font-size: .8rem; border: 1px solid transparent; }
+  .galaxy-missions button > span { color: var(--sector-color); font: 1rem 'VT323', monospace; }
+  .galaxy-missions button:hover, .galaxy-missions button[aria-pressed="true"] { border-color: var(--sector-color); background: #05060f; }
+  @media (min-width: 900px) {
+    [data-view="3d"] .galaxy-map-actions {
+      position: fixed;
+      top: max(1rem, env(safe-area-inset-top));
+      right: max(1rem, env(safe-area-inset-right));
+    }
+  }
+  @media (max-width: 767px) {
+    .explorer-heading { align-items: stretch; flex-direction: column; gap: 1rem; }
+    .explorer-switch button { flex: 1; }
+    .explorer-filters { flex-direction: column; gap: .75rem; }
+    .galaxy { grid-template-columns: 1fr; }
+    .galaxy-stage { height: 480px; }
+    .galaxy-panel { border-left: 0; border-top: 1px solid #00f0ff40; max-height: none; }
+    .galaxy-destinations { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .galaxy-planet-label { min-width: 70px; max-width: 110px; padding: .3rem; }
+    .galaxy-planet-label strong { font-size: .7rem; }
+    .galaxy-map-heading { font-size: .8rem; }
+    playbook-explorer[data-view="3d"] { --hud-top: 9rem; }
+    [data-view="3d"] .explorer-controls { grid-template-columns: minmax(0, 1fr); top: max(.5rem, env(safe-area-inset-top)); left: .5rem; right: .5rem; width: auto; padding: .5rem; }
+    [data-view="3d"] .explorer-filters { flex-direction: row; gap: .5rem; }
+    [data-view="3d"] .explorer-filters label { flex: 1; }
+    [data-view="3d"] .explorer-switch button { padding: .4rem .5rem; font-size: .8rem; }
+    [data-view="3d"] .explorer-filters select { padding: .4rem; font-size: .8rem; }
+    [data-view="3d"] .galaxy-map-heading { left: .5rem; right: .5rem; letter-spacing: 0; }
+    [data-view="3d"] .galaxy-map-heading > span { display: none; }
+    [data-view="3d"] .galaxy-map-actions { margin-left: auto; }
+    [data-view="3d"] .galaxy-panel { top: auto; right: .5rem; bottom: 4.5rem; width: calc(100% - 1rem); max-height: min(45dvh, calc(100dvh - var(--hud-top) - 7.5rem)); padding: .8rem; }
+    [data-view="3d"] .galaxy-camera { left: .5rem; bottom: max(1rem, env(safe-area-inset-bottom)); }
+    [data-view="3d"] .galaxy-hint { display: none; }
+  }
+</style>

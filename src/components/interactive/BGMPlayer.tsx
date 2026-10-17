@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { getAudioContextConstructor } from '../../lib/audio';
+import { GALAXY_AUDIO_MODE_EVENT, getAudioContextConstructor, isGalaxyAudioMode } from '../../lib/audio';
 
 const STORAGE_KEY = 'akq-bgm-on';
 
@@ -58,21 +58,38 @@ function startSynthLoop(ctx: AudioContext): { stop: () => void; gain: GainNode }
 
 export default function BGMPlayer({ feedbackUrl }: { feedbackUrl?: string }) {
   const [playing, setPlaying] = useState(false);
+  const [galaxyMode, setGalaxyMode] = useState(false);
+  const playingRef = useRef(false);
   const ctxRef = useRef<AudioContext | null>(null);
   const handleRef = useRef<{ stop: () => void } | null>(null);
 
   useEffect(() => {
+    const syncGalaxyMode = () => {
+      const active = isGalaxyAudioMode();
+      setGalaxyMode(active);
+      if (active) {
+        handleRef.current?.stop();
+        handleRef.current = null;
+      } else if (playingRef.current && ctxRef.current && !handleRef.current) {
+        handleRef.current = startSynthLoop(ctxRef.current);
+      }
+    };
+    syncGalaxyMode();
+    document.addEventListener(GALAXY_AUDIO_MODE_EVENT, syncGalaxyMode);
     return () => {
+      document.removeEventListener(GALAXY_AUDIO_MODE_EVENT, syncGalaxyMode);
       handleRef.current?.stop();
       ctxRef.current?.close();
     };
   }, []);
 
   const toggle = () => {
+    if (isGalaxyAudioMode()) return;
     if (playing) {
       handleRef.current?.stop();
       handleRef.current = null;
       setPlaying(false);
+      playingRef.current = false;
       localStorage.setItem(STORAGE_KEY, '0');
     } else {
       const Ctor = getAudioContextConstructor();
@@ -82,6 +99,7 @@ export default function BGMPlayer({ feedbackUrl }: { feedbackUrl?: string }) {
       if (ctx.state === 'suspended') void ctx.resume();
       handleRef.current = startSynthLoop(ctx);
       setPlaying(true);
+      playingRef.current = true;
       localStorage.setItem(STORAGE_KEY, '1');
     }
   };
@@ -101,17 +119,19 @@ export default function BGMPlayer({ feedbackUrl }: { feedbackUrl?: string }) {
       <button
         type="button"
         onClick={toggle}
+        disabled={galaxyMode}
+        title={galaxyMode ? 'Use the ambience button in the 3D map' : undefined}
         className="bgm-player font-pixel text-[10px] px-3 py-2 border-2 bg-shadow-ink/80 hover:bg-neon-magenta/20 transition-colors flex items-center gap-2"
         style={{
-          borderColor: playing ? '#ff2e88' : '#444',
-          color: playing ? '#ff2e88' : '#888',
-          boxShadow: playing ? '0 0 8px #ff2e88' : 'none',
+          borderColor: playing && !galaxyMode ? '#ff2e88' : '#444',
+          color: playing && !galaxyMode ? '#ff2e88' : '#888',
+          boxShadow: playing && !galaxyMode ? '0 0 8px #ff2e88' : 'none',
         }}
-        aria-pressed={playing}
+        aria-pressed={playing && !galaxyMode}
         aria-label="BGM toggle"
       >
-        <span aria-hidden="true">{playing ? '♪♪' : '🎵'}</span>
-        BGM: {playing ? 'ON' : 'OFF'}
+        <span aria-hidden="true">{playing && !galaxyMode ? '♪♪' : '🎵'}</span>
+        BGM: {galaxyMode ? '3D' : playing ? 'ON' : 'OFF'}
       </button>
     </div>
   );
