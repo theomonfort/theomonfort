@@ -1,5 +1,17 @@
 type AudioContextConstructor = typeof AudioContext;
 
+export const GALAXY_AUDIO_MODE_EVENT = 'akq:galaxy-audio-mode';
+let galaxyAudioMode = false;
+
+export function isGalaxyAudioMode(): boolean {
+  return galaxyAudioMode;
+}
+
+export function setGalaxyAudioMode(active: boolean): void {
+  galaxyAudioMode = active;
+  document.dispatchEvent(new Event(GALAXY_AUDIO_MODE_EVENT));
+}
+
 export type WebAudioWindow = Window &
   typeof globalThis & {
     webkitAudioContext?: AudioContextConstructor;

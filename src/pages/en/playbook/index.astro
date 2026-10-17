@@ -1,6 +1,7 @@
 ---
 import Layout from '../../../components/layout/Layout.astro';
 import MenuArrow from '../../../components/retro/MenuArrow.astro';
+import PlaybookExplorer from '../../../components/interactive/PlaybookExplorer.astro';
 import { accentClasses } from '../../../lib/theme';
 import { categories, localizedCategory } from '../../../lib/playbook-categories';
 import { localizedPath, siteCopy } from '../../../lib/i18n';
@@ -22,14 +23,17 @@ const CATEGORIES_WITH_PLANETS = new Set<string>(['plan', 'operate', 'review', 'd
 <Layout locale={locale} currentPath="/playbook" title={t.playbook.title}>
   <section class="max-w-5xl mx-auto px-4 py-12 relative playbook-cosmos">
     <header class="mb-10 relative z-10">
-      <h1 class="font-pixel text-2xl md:text-4xl text-neon-magenta mb-3">{t.playbook.heading}</h1>
+      <div class="playbook-title-row">
+        <h1 class="font-pixel text-2xl md:text-4xl text-neon-magenta">{t.playbook.heading}</h1>
+        <PlaybookExplorer locale={locale} entries={entries} />
+      </div>
       <p class="font-body text-lg text-neon-cyan">{t.playbook.subtitle}</p>
       <p class="font-body text-sm leading-relaxed text-phosphor/80 mt-4 max-w-2xl">
         {t.playbook.intro}{' '}
         Note: this is a personal learning resource and some details may be outdated — always refer to the <a href="https://docs.github.com/en/copilot" target="_blank" rel="noopener noreferrer" class="text-neon-cyan hover:text-neon-magenta underline">latest GitHub documentation ↗</a> for the source of truth.
       </p>
 
-      <nav class="mt-8 flex flex-wrap md:flex-nowrap items-center gap-2 md:gap-3">
+      <nav data-category-nav class="mt-8 flex flex-wrap md:flex-nowrap items-center gap-2 md:gap-3">
         {grouped.filter((g) => g.items.length > 0 && g.id !== 'introduction' && g.id !== 'administration').map((g, i, arr) => {
           const c = accentClasses[g.color];
           return (
@@ -92,7 +96,7 @@ const CATEGORIES_WITH_PLANETS = new Set<string>(['plan', 'operate', 'review', 'd
               const cardTitle = e.data.titleEn || playbookEntryTitle(item);
               const cardSubtitle = e.data.title !== cardTitle ? e.data.title : undefined;
               return (
-                <li class="h-full">
+                <li class="h-full" data-catalogue-entry={item.slug}>
                   <a
                     href={localizedPath(locale, `/playbook/${item.slug}`)}
                     data-playbook-tile
