@@ -33,6 +33,9 @@ links:
     label: About dependency review
     url: https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/about-dependency-review
   - group: 📖 公式ドキュメント
+    label: Open source license compliance
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/supply-chain-security/open-source-license-compliance
+  - group: 📖 公式ドキュメント
     label: Configuring the dependency review action
     url: https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/configuring-the-dependency-review-action
   - group: 📖 公式ドキュメント
@@ -44,6 +47,9 @@ links:
   - group: 📖 公式ドキュメント
     label: Malware alerts for Dependabot
     url: https://gh.io/dependabot-malware
+  - group: 📰 Recent Changelog
+    label: "Open source license compliance GA (2026-10-16)"
+    url: https://github.blog/changelog/2026-10-16-open-source-license-compliance-generally-available/
   - group: 📰 Recent Changelog
     label: "Expanded OIDC support for Dependabot and code scanning (2026-05-19)"
     url: https://github.blog/changelog/2026-05-19-expanded-oidc-support-for-dependabot-and-code-scanning
@@ -131,7 +137,7 @@ updates:
 
 `Org → Settings → Code security` から **default settings** で全リポジトリに適用できる。
 
-## 補完機能: Dependency Review
+## 補完機能: Dependency Review <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 **Dependency Review** は Dependabot の **PR タイム版**。脆弱な依存や違反ライセンスをマージ前に止めるゲートで、**default branch だけでなく任意の base branch** で動く。
 
@@ -148,6 +154,33 @@ updates:
 [`actions/dependency-review-action`](https://github.com/actions/dependency-review-action) を入れて **required status check** にすればゲート化完了。Org owner は repository ruleset で組織横断に強制可。
 
 > ⚠️ **PR タイムのゲートであり常時監視ではない**。マージ後に公開された CVE を拾うのは Dependabot alerts の役目 — **必ず両方を併用** する。
+
+## Open source license compliance <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/supply-chain-security/open-source-license-compliance" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+**2026-10-16 に GA。** Dependabot の補完機能として、脆弱性だけでなく依存関係のライセンスをマージ前に統制する。
+
+<div class="ctl-widget">
+<div class="ctl-list">
+<details class="ctl-item" name="license-compliance">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📜</span><span class="ctl-name">ポリシーの一元管理</span><span class="ctl-when">Action との違い</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body"><p>Dependency Review Action はライセンスの allow / deny list で制御する。License compliance は <b>Enterprise 共通ポリシー</b>をブランチルールセットで適用する。</p></div>
+</details>
+<details class="ctl-item" name="license-compliance">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">💰</span><span class="ctl-name">利用条件</span><span class="ctl-when">Enterprise + Code Security</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body"><p>Public repo も含め <b>Enterprise Cloud + Code Security</b> が必要。データ所在地にも対応。一方、Dependency Review Action は <b>Public repo なら無料</b>で、Private repo は Code Security が必要。</p></div>
+</details>
+<details class="ctl-item" name="license-compliance">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛡️</span><span class="ctl-name">段階的な適用</span><span class="ctl-when">Evaluate / Active</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body"><p><b>Active</b> は非準拠の PR をブロック。<b>Evaluate</b> は指摘のみで直接ブロックしない。ただし、会話の解決を必須にするブランチ保護があると、指摘がマージを妨げる場合がある。</p></div>
+</details>
+<details class="ctl-item" name="license-compliance">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">✅</span><span class="ctl-name">違反の解消</span><span class="ctl-when">例外の承認</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body"><p>依存関係の削除 / 置き換え、ポリシーの変更、または <b>Enterprise Open-Source License Manager</b> が承認した例外で対応する。</p></div>
+</details>
+</div>
+</div>
+
+**対象**：PR で追加 / 変更された依存関係。検出済みの推移的依存も含む。コピーされたコードやバイナリのスキャナーではない。
 
 ## AI triage: alert を agent に渡す
 
@@ -173,6 +206,8 @@ Dependabot 本体は **全プラン無料**。有料は Code Security の premiu
 | Dependabot security updates | ✅ 無料 | ✅ 無料 | ✅ 無料 |
 | Dependabot version updates | ✅ 無料 | ✅ 無料 | ✅ 無料 |
 | Custom auto-triage rules | ✅ 無料 | ❌ | 💰 Code Security |
+
+**Enterprise の License compliance は無料の Dependabot とは別**。Public repo も含め、Enterprise Cloud + Code Security が必要。
 
 > ⚙️ standard / self-hosted runner なら **Actions 分数を消費しない**。課金は larger runner のみ。  
 > 🤖 Assign to agent は **Code Security** + coding agent 付き **Copilot プラン** が必要。
