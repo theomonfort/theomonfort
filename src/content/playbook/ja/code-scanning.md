@@ -33,6 +33,12 @@ links:
     label: Autofix for code scanning
     url: https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning
   - group: 📖 公式ドキュメント
+    label: Managing access to Agentic Autofix
+    url: https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/managing-access-to-agentic-autofix-for-code-scanning
+  - group: 📖 公式ドキュメント
+    label: Managing Copilot Autofix (separate controls)
+    url: https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/disabling-copilot-autofix-for-code-scanning
+  - group: 📖 公式ドキュメント
     label: SARIF support for code scanning
     url: https://docs.github.com/en/code-security/code-scanning/integrating-with-code-scanning/sarif-support-for-code-scanning
   - group: 🔬 CodeQL を深く知る
@@ -63,8 +69,8 @@ links:
     label: "Agentic autofix now uses Copilot Memory (2026-09-25)"
     url: https://github.blog/changelog/2026-09-25-agentic-autofix-now-uses-copilot-memory/
   - group: 📰 Recent Changelog
-    label: "Agentic autofix for code scanning alerts (2026-07-10)"
-    url: https://github.blog/changelog/2026-07-10-agentic-autofix-for-code-scanning-alerts-in-public-preview
+    label: "Agentic Autofix general availability (2026-10-15)"
+    url: https://github.blog/changelog/2026-10-15-agentic-autofix-for-code-scanning-alerts-general-availability
 ---
 
 ## 一言で
@@ -284,7 +290,7 @@ select ifstmt, "This if-statement is redundant."  // ④ 何をどう報告す�
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🎯</span><span class="ctl-name">Agentic Autofix</span><span class="ctl-when">バックログ 1〜25 件</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v"><b>Assign to Copilot</b>: クラウドエージェントがリポジトリを調べて修正、検証し、<b>draft PR</b> を作成</span></p>
-<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">1 件、またはバックログ / キャンペーンから 1〜25 件。Public preview</span></p>
+<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">デフォルトブランチのバックログから 1〜25 件。キャンペーンも対象。<b>2026-10-15 に GA</b></span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-capabilities">
@@ -320,17 +326,33 @@ Copilot Autofix は **対応するアラートに修正パッチを提案**す�
 
 - 🤖 **入力**: アラートの詳細、周辺コード、CodeQL のデータフロー経路を使って修正を提案。
 - 💬 **PR 上**: 対応するアラートにインラインの修正提案が自動表示される。
-- 🛠️ **クラウドエージェントが使えないバックログ**: **Generate fix → Create PR with fix**。
+- 🛠️ **Agentic Autofix がオフのデフォルトブランチのバックログ**: Copilot Autofix が有効で対応するアラートなら **Generate fix → Create PR with fix**。
 - 🆓 **料金**: 従来の Autofix は Copilot ライセンス不要で AI クレジットも消費しない。Code Security に含まれ、Public repo は無料。
 - 🔌 **有効化**: 管理者が無効にしない限り、CodeQL で既定で利用可能。
 
-## Agentic Autofix（Public Preview） <a class="h2-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-code-scanning-pr" class="demo-toggle" /><label class="h2-demo" for="demo-code-scanning-pr">&#9658; DEMO</label>
+## Agentic Autofix（GA） <a class="h2-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-code-scanning-pr" class="demo-toggle" /><label class="h2-demo" for="demo-code-scanning-pr">&#9658; DEMO</label>
 
 <div class="demo-panel">
 <label class="demo-scrim" for="demo-code-scanning-pr" aria-label="デモ手順を閉じる"></label>
 <div class="demo-window" role="group" aria-label="デモ手順">
-<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Security bot on a PR</span><span class="demo-note">発表者専用</span><label class="demo-close" for="demo-code-scanning-pr" aria-label="閉じる">&#10005;</label></div>
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Agentic Autofix: settings to alerts</span><span class="demo-note">発表者専用</span><label class="demo-close" for="demo-code-scanning-pr" aria-label="閉じる">&#10005;</label></div>
 <ol class="demo-steps">
+<li>
+<p class="demo-step-title">1. ENTERPRISE で許可（該当する場合）</p>
+<p>Enterprise owner または security manager が <code class="demo-path">Policies → Advanced Security → Agentic Autofix</code> で <code class="demo-path">All organizations: Allowed</code> を選ぶ。Enterprise に属さない組織では省略。<a href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/managing-access-to-agentic-autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">設定ドキュメント ↗</a></p>
+<p class="demo-out">Allowed は組織での設定を許可するだけで、有効化はしない。展開前に課金方法と Code Security AI Credits の予算を確認する。</p>
+</li>
+<li>
+<p class="demo-step-title">2. 組織の 2 つの設定を見せる</p>
+<p>Organization owner または security manager として <a href="https://github.com/organizations/theomonfort-org/settings/security_analysis" target="_blank" rel="noopener noreferrer">theomonfort-org の Advanced Security 設定 ↗</a> を開く。<b>Global settings → Code scanning</b> で <b>Copilot Autofix</b> と <b>Agentic Autofix</b> を確認する。</p>
+<p><b>Copilot Autofix</b> は従来の修正提案を制御。エージェントによる修正を使うには <code class="demo-path">Agentic Autofix → On</code>。Preview 利用組織も GA 後に再有効化が必要。</p>
+<p class="demo-out">On にするとデモ repo だけでなく、組織内の対象 repo で既定で有効になる。組織全体への展開を意図しない場合、設定の紹介だけに留めて切り替えない。</p>
+</li>
+<li>
+<p class="demo-step-title">3. REPOSITORY の設定を確認</p>
+<p>選んだデモ repo で <code class="demo-path">Settings → Advanced Security → Code Security → Agentic Autofix</code> を開く。Repository admin は <b>Off</b> で除外し、上位設定で許可されていれば <b>On</b> に戻せる。従来の提案も使うなら <b>Copilot Autofix</b> はオンのままにする。</p>
+<p class="demo-out">有効化後は write 権限のあるユーザーがデフォルトブランチのバックログを Copilot に割り当てられる。Copilot ライセンスは不要。設定をオンにするだけでは修正セッションは始まらない。</p>
+</li>
 <li>
 <p class="demo-step-title">PR の SECURITY BOT</p>
 <p><a href="https://github.com/octodemo/octocat_supply-automatic-octo-funicular/pull/57" target="_blank" rel="noopener noreferrer">octodemo/octocat_supply-automatic-octo-funicular#57 ↗</a> を開き、<b>Files changed</b> で <code class="demo-path">github-advanced-security[bot]</code> のコメントを見せる。</p>
@@ -344,14 +366,15 @@ Copilot Autofix は **対応するアラートに修正パッチを提案**す�
 </li>
 <li>
 <p class="demo-step-title">検出から AGENTIC AUTOFIX へ</p>
-<p><a href="https://github.com/octodemo/octocat_supply-automatic-octo-funicular/security/code-scanning/33" target="_blank" rel="noopener noreferrer">CodeQL の XSS アラート ↗</a> を開き、利用可能なら <b>Assign to Copilot</b> を見せる。クラウドエージェントが使えなければ、対応するアラートには <b>Generate fix</b> が表示される。</p>
+<p>リンク先の PR は <b>octodemo</b> にあり、theomonfort-org の設定は適用されない。<a href="https://github.com/octodemo/octocat_supply-automatic-octo-funicular/security/code-scanning/33" target="_blank" rel="noopener noreferrer">CodeQL の XSS アラート ↗</a> は参考として開く。修正デモでは、設定済み repo に存在する<b>デフォルトブランチのバックログアラート</b>を選ぶ。PR のみにあるアラートは割り当て不可。</p>
+<p>Agentic Autofix が有効なら <b>Assign to Copilot</b> を見せる。オフの場合は、従来の Copilot Autofix が有効で対応するアラートに限り <b>Generate fix</b> が使える。</p>
 <p class="demo-out">bot の指摘と修正セッションは別物。<b>Assign to Copilot</b> を実行すると、エージェントが修正を進めて<b>別のドラフト PR</b>を作る。ボタンの紹介だけならセッション開始は不要。</p>
 </li>
 </ol>
 </div>
 </div>
 
-クラウドエージェントが利用可能な場合、個別アラートの **Generate fix は Assign to Copilot に置き換わる**。
+**2026-10-15 に GA。** Agentic Autofix が有効なら、デフォルトブランチのバックログで **Generate fix は Assign to Copilot に置き換わる**。
 
 <div class="ctl-widget">
 <p class="ctl-hint">▸ + をクリックして詳細を表示</p>
@@ -359,13 +382,13 @@ Copilot Autofix は **対応するアラートに修正パッチを提案**す�
 <details class="ctl-item" name="cs-agentic">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🎯</span><span class="ctl-name">依頼</span><span class="ctl-when">1〜25 件</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">対象</span><span class="ctl-v">個別アラート、またはリポジトリのバックログやキャンペーンから <b>1〜25 件</b>を選択</span></p>
+<p class="ctl-row"><span class="ctl-k">対象</span><span class="ctl-v"><b>デフォルトブランチのバックログ 1〜25 件</b>。キャンペーンも対象。1 回の割り当て → 1 セッション → 1 PR。<b>PR / 他ブランチのみにあるアラートは対象外</b></span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-agentic">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔁</span><span class="ctl-name">セッション</span><span class="ctl-when">ドラフト PR</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">流れ</span><span class="ctl-v">コードベースを探索 → 修正生成 → 検証と反復 → <b>ドラフト PR</b></span></p>
+<p class="ctl-row"><span class="ctl-k">流れ</span><span class="ctl-v">探索 → 修正 → CodeQL 再実行と反復 → 検証内容付きの<b>ドラフト PR</b>。セッションログを確認し、セッションや PR コメントで追加修正を依頼</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-agentic">
@@ -376,22 +399,23 @@ Copilot Autofix は **対応するアラートに修正パッチを提案**す�
 </div>
 </details>
 <details class="ctl-item" name="cs-agentic">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛂</span><span class="ctl-name">前提</span><span class="ctl-when">クラウドエージェント + Autofix</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛂</span><span class="ctl-name">前提</span><span class="ctl-when">Copilot ライセンス不要</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">条件</span><span class="ctl-v">両方が利用可能なこと。<b>事前の Autofix 提案生成は不要</b></span></p>
+<p class="ctl-row"><span class="ctl-k">提供範囲</span><span class="ctl-v">Enterprise Cloud の Code Security / GHAS 向けに GA。データレジデンシーも対象。現行 Docs は個人所有の対象 public repo も記載。Managed user の個人 repo は対象外</span></p>
+<p class="ctl-row"><span class="ctl-k">条件</span><span class="ctl-v"><b>Agentic Autofix の有効化</b>、課金方法の設定、repo の write 権限。<b>Copilot ライセンスや事前の修正提案は不要</b>。設定は次のスライド</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-agentic">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">💸</span><span class="ctl-name">料金</span><span class="ctl-when">AI クレジット + Actions</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">Agentic</span><span class="ctl-v"><b>AI クレジット + Actions 分</b></span></p>
-<p class="ctl-row"><span class="ctl-k">代替</span><span class="ctl-v">クラウドエージェントが使えなければ、対応するアラートでは従来の <b>Generate fix</b> を利用できる</span></p>
+<p class="ctl-row"><span class="ctl-k">Agentic</span><span class="ctl-v"><b>Code Security AI Credits + Actions 分</b>。Public repo も対象。課金画面の AI usage では <b>Advanced Security</b> として表示</span></p>
+<p class="ctl-row"><span class="ctl-k">予算</span><span class="ctl-v">対象の付属クレジットを先に使い、超過分は従量課金。<b>Code Security AI Credits</b> の SKU 予算を設定する</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-agentic">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">⚠️</span><span class="ctl-name">検証</span><span class="ctl-when">ベストエフォート</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">制約</span><span class="ctl-v">カスタムクエリ、<code>security-extended</code>、他社ツールのアラートは検証が保証されない</span></p>
+<p class="ctl-row"><span class="ctl-k">制約</span><span class="ctl-v">カスタムクエリ、<code>security-extended</code>、他社ツールの修正は確認できない。未検証や誤検知の疑いは PR に記載。<b>マージ前にレビューとテストが必要</b></span></p>
 </div>
 </details>
 </div>
@@ -399,55 +423,51 @@ Copilot Autofix は **対応するアラートに修正パッチを提案**す�
 
 ## Autofix と Agentic Autofix の使い分け <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
+**2 つの独立した設定**。クラウドエージェントのスイッチではない（2026-10-19 時点）。
+
 <div class="ctl-widget">
-<p class="ctl-hint">▸ ＋ をクリックすると両者の違いが開きます</p>
+<p class="ctl-hint">▸ 各レベルを開くと具体的な設定を表示</p>
 <div class="ctl-list">
 <details class="ctl-item" name="cs-fix-vs">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📤</span><span class="ctl-name">出力の形</span><span class="ctl-when">パッチ vs PR</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">⚖️</span><span class="ctl-name">比較</span><span class="ctl-when">修正提案 vs エージェント</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v">レビューして適用する修正提案。バックログでは <b>Create PR with fix</b> で提案からドラフト PR を作成できる</span></p>
-<p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v">Copilot が作成する <b>ドラフト Pull Request</b>。レビューして取り込む</span></p>
+<p class="ctl-row"><span class="ctl-k">従来型</span><span class="ctl-v">対応アラート 1 件の修正案をレビューして適用。<b>AI クレジット消費なし</b></span></p>
+<p class="ctl-row"><span class="ctl-k">Agentic</span><span class="ctl-v"><b>デフォルトブランチのバックログ 1〜25 件</b>を探索、修正、検証してドラフト PR を作成。<b>Code Security AI Credits + Actions</b>。どちらも Copilot ライセンス不要</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-fix-vs">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📐</span><span class="ctl-name">修正範囲</span><span class="ctl-when">提案 vs 探索</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🏢</span><span class="ctl-name">Enterprise</span><span class="ctl-when">許可 ≠ 有効化</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v">アラートと渡されたコードのコンテキストを基にした <b>対象を絞った修正提案</b></span></p>
-<p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v"><b>複数ファイル</b>。リポジトリ全体を踏まえたリファクタや共通処理の追加まで踏み込める</span></p>
+<p class="ctl-row"><span class="ctl-k">場所</span><span class="ctl-v"><b>Policies → Advanced Security → Agentic Autofix → All organizations: Allowed</b>。Enterprise owner または security manager が設定</span></p>
+<p class="ctl-row"><span class="ctl-k">効果</span><span class="ctl-v">組織での設定を許可するだけで、<b>repo はまだ有効にならない</b>。<b>Copilot Autofix</b> は別ポリシー。Enterprise に属さない組織ではこの段階を省略</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-fix-vs">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📚</span><span class="ctl-name">対応単位</span><span class="ctl-when">個別 vs 一括</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🏗️</span><span class="ctl-name">Organization</span><span class="ctl-when">対象 repo を有効化</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/managing-access-to-agentic-autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v"><b>クラウドエージェントが使えない</b>場合、対応するバックログのアラートで <b>Generate fix</b>。PR 上の提案は一括適用できる</span></p>
-<p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v">リポジトリのバックログやキャンペーンから <b>1〜25 件</b>を選び、修正 PR を依頼できる</span></p>
+<p class="ctl-row"><span class="ctl-k">場所</span><span class="ctl-v"><b>Settings → Advanced Security → Global settings → Code scanning → Agentic Autofix → On</b>。Organization owner または security manager が設定</span></p>
+<p class="ctl-row"><span class="ctl-k">効果</span><span class="ctl-v">対象 repo で<b>既定で有効</b>になるため、除外する repo を事前に調整。Enterprise で禁止されていれば上書き不可</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-fix-vs">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔁</span><span class="ctl-name">検証と反復</span><span class="ctl-when">一発 vs 対話</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📦</span><span class="ctl-name">Repository</span><span class="ctl-when">除外 / 再有効化</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v">1 回の修正提案。<b>マージ前に PR 上でレビューとテスト</b>を行う</span></p>
-<p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v"><b>ベストエフォート</b>で検証と反復を行う。セッションログを確認し、<code>@copilot</code> コメントで追加修正を依頼できる</span></p>
+<p class="ctl-row"><span class="ctl-k">場所</span><span class="ctl-v"><b>Settings → Advanced Security → Code Security → Agentic Autofix → On / Off</b>。Repository admin が設定</span></p>
+<p class="ctl-row"><span class="ctl-k">効果</span><span class="ctl-v">上位設定の範囲内で除外 / 再有効化できる。対象となる個人所有 public repo はここで直接設定。Managed user の個人 repo は対象外</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-fix-vs">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">⏱️</span><span class="ctl-name">所要時間</span><span class="ctl-when">秒 vs 分</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔧</span><span class="ctl-name">表示されるボタン</span><span class="ctl-when">独立した制御</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/disabling-copilot-autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v"><b>数秒</b>。同期処理なので画面を見ながら判断できる</span></p>
-<p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v"><b>数分</b>。バックグラウンドの非同期処理で、セッションは最大 59 分</span></p>
-</div>
-</details>
-<details class="ctl-item" name="cs-fix-vs">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">💰</span><span class="ctl-name">ライセンスとコスト</span><span class="ctl-when">無料 vs 従量</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v"><b>無料</b>。Copilot ライセンス不要、AI クレジットも消費しない。Code Security / GHAS があれば追加費用ゼロ</span></p>
-<p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v">Copilot 有料プラン（クラウドエージェント有効）が必要。<b>AI クレジット + Actions 分</b> を消費する</span></p>
+<p class="ctl-row"><span class="ctl-k">Agentic on</span><span class="ctl-v">デフォルトブランチのバックログで <b>Assign to Copilot</b>。有効化ではなく、割り当てが従量課金セッションを開始する</span></p>
+<p class="ctl-row"><span class="ctl-k">Agentic off</span><span class="ctl-v">Copilot Autofix がオンで対応するアラートに限り <b>Generate fix → Create PR with fix</b>。両方オフなら AI 修正の入口なし</span></p>
+<p class="ctl-row"><span class="ctl-k">従来型</span><span class="ctl-v"><b>Copilot Autofix</b> は CodeQL で既定でオン。同じ設定階層で独立して制御し、上位での禁止は下位で解除できない。PR の提案はエージェント修正とは別</span></p>
 </div>
 </details>
 </div>
 </div>
 
-> 🔑 個別アラートのボタンは **リポジトリでの利用可否**で決まる。クラウドエージェントが使えれば Assign to Copilot、使えなければ対応するアラートに Generate fix。PR のインライン Autofix 提案は別の機能として残る。
+> ⚠️ Preview 利用組織も **GA 後に Agentic Autofix の再有効化が必要**。
 
 ## Security Campaigns — 組織横断で計画的に修正
 
@@ -485,7 +505,7 @@ Copilot Autofix は **対応するアラートに修正パッチを提案**す�
 <summary class="rem-btn"><span class="rem-icon" aria-hidden="true">🤖</span><span class="rem-name">一括修正</span></summary>
 <div class="rem-plate">
 <p class="rem-title">🤖 一括修正 — Copilot にまとめて渡す</p>
-<p class="rem-why"><b>1〜25 件</b>のアラートを選び Copilot に依頼する。クラウドエージェントが利用可能なら Agentic Autofix が動き、<b>AI クレジット + Actions 分</b>を消費する。</p>
+<p class="rem-why"><b>Agentic Autofix が有効</b>なら、<b>デフォルトブランチのバックログ 1〜25 件</b>を選び Copilot に依頼する。<b>Code Security AI Credits + Actions 分</b>を消費する。</p>
 <p class="rem-why">残りは Autofix の提案を <b>batch apply</b> で PR にまとめて適用。ダッシュボードで open / fixed / overdue が burn down していく。</p>
 </div>
 </details>
@@ -511,7 +531,7 @@ Copilot Autofix は **対応するアラートに修正パッチを提案**す�
       <code>Alert → Fix</code>
       <span class="setup-card-tag tag-magenta">▸ STEP 2 · AUTOFIX</span>
     </div>
-    <p>クラウドエージェントが使えれば <strong>Assign to Copilot</strong>（従量）。使えなければ対応アラートに <strong>Generate fix</strong>（AI クレジット不要）。</p>
+    <p>デフォルトブランチのバックログで、Agentic Autofix がオンなら <strong>Assign to Copilot</strong>（従量）。オフなら、従来の Autofix が有効で対応するアラートに <strong>Generate fix</strong>（AI クレジット不要）。</p>
   </div>
   <div class="setup-card">
     <div class="setup-card-head">
@@ -623,7 +643,7 @@ jobs:
 </details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">💸</span><span class="spec-key">Agentic Autofix</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">クラウドエージェントのセッションとして課金され、<b>AI クレジット + Actions 分</b> を消費する（1 クレジット = $0.01、モデルとトークン量で変動）。ユーザー予算は必ず停止するが、Org 予算はプール消費後にしか効かない。</p>
+<p class="spec-what"><b>2026-10-19 時点</b>、<b>Code Security AI Credits + Actions 分</b>を消費。Copilot ライセンス不要。対象の付属クレジットを先に使い、超過分は public repo も従量課金。<b>Code Security AI Credits</b> の SKU 予算を設定し、付属枠の消費後はハード予算で追加の従量利用を止められる。課金画面の AI usage では <b>Advanced Security</b> として表示。</p>
 </details>
 </div>
 </td>

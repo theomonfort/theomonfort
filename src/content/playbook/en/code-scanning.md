@@ -33,6 +33,12 @@ links:
     label: Autofix for code scanning
     url: https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning
   - group: 📖 Official Documentation
+    label: Managing access to Agentic Autofix
+    url: https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/managing-access-to-agentic-autofix-for-code-scanning
+  - group: 📖 Official Documentation
+    label: Managing Copilot Autofix (separate controls)
+    url: https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/disabling-copilot-autofix-for-code-scanning
+  - group: 📖 Official Documentation
     label: SARIF support for code scanning
     url: https://docs.github.com/en/code-security/code-scanning/integrating-with-code-scanning/sarif-support-for-code-scanning
   - group: 🔬 Going deeper on CodeQL
@@ -63,8 +69,8 @@ links:
     label: "Agentic autofix now uses Copilot Memory (2026-09-25)"
     url: https://github.blog/changelog/2026-09-25-agentic-autofix-now-uses-copilot-memory/
   - group: 📰 Recent Changelog
-    label: "Agentic autofix for code scanning alerts (2026-07-10)"
-    url: https://github.blog/changelog/2026-07-10-agentic-autofix-for-code-scanning-alerts-in-public-preview
+    label: "Agentic Autofix general availability (2026-10-15)"
+    url: https://github.blog/changelog/2026-10-15-agentic-autofix-for-code-scanning-alerts-general-availability
 ---
 
 ## In a nutshell
@@ -284,7 +290,7 @@ The whole language is that shape: **`where` is the definition of "what the bug l
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🎯</span><span class="ctl-name">Agentic Autofix</span><span class="ctl-when">1–25 backlog alerts</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v"><b>Assign to Copilot</b>: the cloud agent explores the repo, fixes, validates, then opens a <b>draft PR</b></span></p>
-<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">One alert, or 1–25 from a backlog or campaign. Public preview</span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">1–25 default-branch backlog alerts, including campaigns. <b>GA since 2026-10-15</b></span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-capabilities">
@@ -320,17 +326,33 @@ Copilot Autofix can generate a **suggested patch for an eligible alert**. You re
 
 - 🤖 **Input**: alert details, surrounding code and CodeQL's data-flow path inform the suggestion.
 - 💬 **On pull requests**: supported alerts can receive inline suggestions automatically.
-- 🛠️ **On backlog alerts without cloud agent**: **Generate fix → Create PR with fix**.
+- 🛠️ **On default-branch backlog alerts with Agentic Autofix off**: **Generate fix → Create PR with fix**, if Copilot Autofix is enabled and supports the alert.
 - 🆓 **Cost**: no Copilot license or AI credits for classic Autofix. Included with Code Security; free on public repositories.
 - 🔌 **Enablement**: allowed by default with CodeQL unless an administrator disables it.
 
-## Agentic Autofix (Public Preview) <a class="h2-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-code-scanning-pr" class="demo-toggle" /><label class="h2-demo" for="demo-code-scanning-pr">&#9658; DEMO</label>
+## Agentic Autofix (GA) <a class="h2-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-code-scanning-pr" class="demo-toggle" /><label class="h2-demo" for="demo-code-scanning-pr">&#9658; DEMO</label>
 
 <div class="demo-panel">
 <label class="demo-scrim" for="demo-code-scanning-pr" aria-label="Close demo steps"></label>
 <div class="demo-window" role="group" aria-label="Demo steps">
-<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Security bot on a PR</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-code-scanning-pr" aria-label="Close">&#10005;</label></div>
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Agentic Autofix: settings to alerts</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-code-scanning-pr" aria-label="Close">&#10005;</label></div>
 <ol class="demo-steps">
+<li>
+<p class="demo-step-title">1. ALLOW AT ENTERPRISE LEVEL, IF APPLICABLE</p>
+<p>An enterprise owner or security manager opens <code class="demo-path">Policies → Advanced Security → Agentic Autofix</code> and selects <code class="demo-path">All organizations: Allowed</code>. Skip this for a standalone organization. <a href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/managing-access-to-agentic-autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">Setup docs ↗</a></p>
+<p class="demo-out">Allowed grants permission to configure the feature; it does not enable any organization. Confirm the billing method and Code Security AI Credits budget before rollout.</p>
+</li>
+<li>
+<p class="demo-step-title">2. SHOW THE TWO ORGANIZATION SETTINGS</p>
+<p>Open <a href="https://github.com/organizations/theomonfort-org/settings/security_analysis" target="_blank" rel="noopener noreferrer">theomonfort-org Advanced Security settings ↗</a> as an organization owner or security manager. In <b>Global settings → Code scanning</b>, locate <b>Copilot Autofix</b> and <b>Agentic Autofix</b>.</p>
+<p><b>Copilot Autofix</b> controls classic suggestions. To enable agent remediation, set <code class="demo-path">Agentic Autofix → On</code>. Preview users must enable it again after GA.</p>
+<p class="demo-out">Turning this on enables Agentic Autofix for eligible repositories by default, not just the demo repo. Show the control without toggling it unless an organization-wide rollout is intended.</p>
+</li>
+<li>
+<p class="demo-step-title">3. CHECK THE REPOSITORY OVERRIDE</p>
+<p>In the chosen demo repository, open <code class="demo-path">Settings → Advanced Security → Code Security → Agentic Autofix</code>. A repository administrator can set it to <b>Off</b> to opt out, or <b>On</b> if higher-level settings permit. Keep <b>Copilot Autofix</b> on if you want classic suggestions too.</p>
+<p class="demo-out">With Agentic Autofix enabled, users with write access can assign default-branch backlog alerts. No Copilot license is required. Enabling the setting alone does not start a repair session.</p>
+</li>
 <li>
 <p class="demo-step-title">THE SECURITY BOT ON A PR</p>
 <p>Open <a href="https://github.com/octodemo/octocat_supply-automatic-octo-funicular/pull/57" target="_blank" rel="noopener noreferrer">octodemo/octocat_supply-automatic-octo-funicular#57 ↗</a>. In <b>Files changed</b>, show the comments from <code class="demo-path">github-advanced-security[bot]</code>.</p>
@@ -344,14 +366,15 @@ Copilot Autofix can generate a **suggested patch for an eligible alert**. You re
 </li>
 <li>
 <p class="demo-step-title">FROM FINDING TO AGENTIC AUTOFIX</p>
-<p>Open the <a href="https://github.com/octodemo/octocat_supply-automatic-octo-funicular/security/code-scanning/33" target="_blank" rel="noopener noreferrer">CodeQL XSS alert ↗</a> and show <b>Assign to Copilot</b> when available. Without cloud agent, eligible alerts show <b>Generate fix</b> instead.</p>
+<p>The linked PR is in <b>octodemo</b>, so theomonfort-org settings do not apply to it. Open the <a href="https://github.com/octodemo/octocat_supply-automatic-octo-funicular/security/code-scanning/33" target="_blank" rel="noopener noreferrer">CodeQL XSS alert ↗</a> only as a reference. For remediation, choose an existing <b>default-branch backlog alert</b> in the configured demo repository; a PR-only alert cannot be assigned.</p>
+<p>Show <b>Assign to Copilot</b> when Agentic Autofix is enabled. With it off, <b>Generate fix</b> is available only if classic Copilot Autofix is enabled and supports the alert.</p>
 <p class="demo-out">A bot finding is not a remediation session. Invoking <b>Assign to Copilot</b> starts the agent's repair work and produces a <b>separate draft PR</b>. You can show the entry point without starting a session.</p>
 </li>
 </ol>
 </div>
 </div>
 
-When cloud agent is available, **Assign to Copilot replaces Generate fix** on individual code scanning alerts.
+**GA since 2026-10-15.** When Agentic Autofix is enabled, **Assign to Copilot replaces Generate fix** on default-branch backlog alerts.
 
 <div class="ctl-widget">
 <p class="ctl-hint">▸ CLICK + FOR DETAILS</p>
@@ -359,13 +382,13 @@ When cloud agent is available, **Assign to Copilot replaces Generate fix** on in
 <details class="ctl-item" name="cs-agentic">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🎯</span><span class="ctl-name">Assign</span><span class="ctl-when">1–25 alerts</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">One alert, or <b>1–25 alerts</b> from a repository backlog or security campaign</span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v"><b>1–25 default-branch backlog alerts</b>, including campaigns. One assignment → one session → one PR. <b>No PR-only or other-branch-only alerts</b></span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-agentic">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔁</span><span class="ctl-name">Agent session</span><span class="ctl-when">Draft PR</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">Flow</span><span class="ctl-v">Explore the codebase → generate a fix → validate and iterate → open a <b>draft PR</b></span></p>
+<p class="ctl-row"><span class="ctl-k">Flow</span><span class="ctl-v">Explore → fix → rerun CodeQL and iterate → <b>draft PR</b> with validation details. Review the session log; request changes in the session or PR comments</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-agentic">
@@ -376,22 +399,23 @@ When cloud agent is available, **Assign to Copilot replaces Generate fix** on in
 </div>
 </details>
 <details class="ctl-item" name="cs-agentic">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛂</span><span class="ctl-name">Requirements</span><span class="ctl-when">Cloud agent + Autofix</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛂</span><span class="ctl-name">Requirements</span><span class="ctl-when">No Copilot license</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">Needs</span><span class="ctl-v">Cloud agent and Autofix must both be available. <b>No pre-generated Autofix suggestion is required</b></span></p>
+<p class="ctl-row"><span class="ctl-k">Access</span><span class="ctl-v">GA for Code Security / GHAS customers on Enterprise Cloud, including data residency. Current docs also cover eligible personal public repos; managed-user personal repos are excluded</span></p>
+<p class="ctl-row"><span class="ctl-k">Needs</span><span class="ctl-v"><b>Agentic Autofix enabled</b>, a configured billing method and repository write access. <b>No Copilot license or pre-generated suggestion required</b>. Settings on the next slide</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-agentic">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">💸</span><span class="ctl-name">Cost</span><span class="ctl-when">AI credits + Actions</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">Agentic</span><span class="ctl-v"><b>AI credits + Actions minutes</b></span></p>
-<p class="ctl-row"><span class="ctl-k">Fallback</span><span class="ctl-v">Without cloud agent, the classic <b>Generate fix</b> flow remains available for eligible alerts</span></p>
+<p class="ctl-row"><span class="ctl-k">Agentic</span><span class="ctl-v"><b>Code Security AI Credits + Actions minutes</b>, including public repos. Usage appears under <b>Advanced Security</b> in billing's AI usage</span></p>
+<p class="ctl-row"><span class="ctl-k">Budget</span><span class="ctl-v">Eligible included credits are used first, then metered usage. Configure a <b>Code Security AI Credits</b> SKU budget</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-agentic">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">⚠️</span><span class="ctl-name">Validation</span><span class="ctl-when">Best-effort</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">Limits</span><span class="ctl-v">Custom queries, <code>security-extended</code> and third-party alerts are not guaranteed to be validated</span></p>
+<p class="ctl-row"><span class="ctl-k">Limits</span><span class="ctl-v">Cannot confirm fixes for custom queries, <code>security-extended</code> or third-party alerts. Unvalidated fixes or suspected false positives are noted in the PR. <b>Review and test before merging</b></span></p>
 </div>
 </details>
 </div>
@@ -399,55 +423,51 @@ When cloud agent is available, **Assign to Copilot replaces Generate fix** on in
 
 ## Autofix vs Agentic Autofix <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
+**Two independent settings**, not a cloud-agent switch (2026-10-19).
+
 <div class="ctl-widget">
-<p class="ctl-hint">▸ CLICK + TO OPEN THE COMPARISON</p>
+<p class="ctl-hint">▸ OPEN EACH LEVEL TO SEE THE EXACT SETTINGS</p>
 <div class="ctl-list">
 <details class="ctl-item" name="cs-fix-vs">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📤</span><span class="ctl-name">Output</span><span class="ctl-when">patch vs PR</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">⚖️</span><span class="ctl-name">Compare</span><span class="ctl-when">Suggestion vs agent</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v">A suggested patch to review and apply. For backlog alerts, <b>Create PR with fix</b> opens a draft PR from the suggestion</span></p>
-<p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v">A <b>draft Pull Request</b> opened by the Copilot bot, reviewed like any other</span></p>
+<p class="ctl-row"><span class="ctl-k">Classic</span><span class="ctl-v">One suggested patch for a supported alert; you review and apply it. <b>No AI credits</b></span></p>
+<p class="ctl-row"><span class="ctl-k">Agentic</span><span class="ctl-v">Investigates, fixes and validates <b>1–25 default-branch backlog alerts</b>; opens a draft PR. <b>Code Security AI Credits + Actions</b>. Neither type needs a Copilot license</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-fix-vs">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📐</span><span class="ctl-name">Fix scope</span><span class="ctl-when">suggestion vs exploration</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🏢</span><span class="ctl-name">Enterprise</span><span class="ctl-when">Allow ≠ enable</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v">A <b>targeted suggestion</b> based on the alert and supplied code context</span></p>
-<p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v"><b>Multiple files</b>, with repository-wide context — refactors and shared helpers included</span></p>
+<p class="ctl-row"><span class="ctl-k">Where</span><span class="ctl-v"><b>Policies → Advanced Security → Agentic Autofix → All organizations: Allowed</b>. Enterprise owner or security manager</span></p>
+<p class="ctl-row"><span class="ctl-k">Effect</span><span class="ctl-v">Allows organizations to configure it; enables <b>no repositories by itself</b>. <b>Copilot Autofix</b> has a separate policy. Skip this level for standalone organizations</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-fix-vs">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📚</span><span class="ctl-name">Granularity</span><span class="ctl-when">per-alert vs bulk</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🏗️</span><span class="ctl-name">Organization</span><span class="ctl-when">Enable eligible repos</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/managing-access-to-agentic-autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v"><b>Generate fix</b> on eligible backlog alerts <b>without cloud agent</b>; PR suggestions can be batch-applied</span></p>
-<p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v">Assign <b>1–25 alerts</b> from a repository backlog or campaign to get a fix PR</span></p>
+<p class="ctl-row"><span class="ctl-k">Where</span><span class="ctl-v"><b>Settings → Advanced Security → Global settings → Code scanning → Agentic Autofix → On</b>. Organization owner or security manager</span></p>
+<p class="ctl-row"><span class="ctl-k">Effect</span><span class="ctl-v">Enables eligible repositories <b>by default</b>. Coordinate opt-outs first. An enterprise block cannot be overridden here</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-fix-vs">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔁</span><span class="ctl-name">Validation & iteration</span><span class="ctl-when">one-shot vs dialogue</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📦</span><span class="ctl-name">Repository</span><span class="ctl-when">Opt out / re-enable</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v">A one-step suggestion: <b>review and test it on a PR before merging</b></span></p>
-<p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v">Validates and iterates on a <b>best-effort</b> basis. Read the session log; use <code>@copilot</code> comments for further changes</span></p>
+<p class="ctl-row"><span class="ctl-k">Where</span><span class="ctl-v"><b>Settings → Advanced Security → Code Security → Agentic Autofix → On / Off</b>. Repository administrator</span></p>
+<p class="ctl-row"><span class="ctl-k">Effect</span><span class="ctl-v">Can opt out or re-enable only when parent settings permit. Eligible personal public repos configure this directly; managed-user personal repos are excluded</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-fix-vs">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">⏱️</span><span class="ctl-name">Speed</span><span class="ctl-when">seconds vs minutes</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔧</span><span class="ctl-name">Which button?</span><span class="ctl-when">Separate controls</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/disabling-copilot-autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v"><b>Seconds</b>, synchronous — you judge it while looking at the alert</span></p>
-<p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v"><b>Minutes</b>, async in the background; a session is capped at 59 minutes</span></p>
-</div>
-</details>
-<details class="ctl-item" name="cs-fix-vs">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">💰</span><span class="ctl-name">License & cost</span><span class="ctl-when">free vs metered</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">🔧 Autofix</span><span class="ctl-v"><b>Free.</b> No Copilot license, no AI credits. Included with Code Security / GHAS</span></p>
-<p class="ctl-row"><span class="ctl-k">🤖 Agentic</span><span class="ctl-v">Needs a paid Copilot plan with cloud agent, and burns <b>AI credits + Actions minutes</b></span></p>
+<p class="ctl-row"><span class="ctl-k">Agentic on</span><span class="ctl-v"><b>Assign to Copilot</b> on default-branch backlog alerts. Assignment starts the metered session, not enablement</span></p>
+<p class="ctl-row"><span class="ctl-k">Agentic off</span><span class="ctl-v"><b>Generate fix → Create PR with fix</b> only if Copilot Autofix is on and supports the alert. Both off: no AI fix entry point</span></p>
+<p class="ctl-row"><span class="ctl-k">Classic</span><span class="ctl-v"><b>Copilot Autofix</b> is on by default with CodeQL and has its own cascading controls at the same settings levels. Its PR suggestions remain separate from agent remediation</span></p>
 </div>
 </details>
 </div>
 </div>
 
-> 🔑 On individual alert pages, **repository availability determines the button**: cloud agent available → Assign to Copilot; otherwise → Generate fix for eligible alerts. PR inline Autofix suggestions remain a separate experience.
+> ⚠️ Preview users must **enable Agentic Autofix again after GA**.
 
 ## Security Campaigns — drive remediation at scale
 
@@ -485,7 +505,7 @@ Detection is the easy half; **what happens after the alert** is the real work. A
 <summary class="rem-btn"><span class="rem-icon" aria-hidden="true">🤖</span><span class="rem-name">FIX</span></summary>
 <div class="rem-plate">
 <p class="rem-title">🤖 FIX — hand the batch to Copilot</p>
-<p class="rem-why">Select <b>1–25 alerts</b> and assign them to Copilot. With cloud agent available, it starts Agentic Autofix and consumes <b>AI credits + Actions minutes</b>.</p>
+<p class="rem-why">With <b>Agentic Autofix enabled</b>, select <b>1–25 default-branch backlog alerts</b> and assign them to Copilot. This consumes <b>Code Security AI Credits + Actions minutes</b>.</p>
 <p class="rem-why">For the rest, <b>batch apply</b> the Autofix suggestions on the PR. The dashboard burns down open / fixed / overdue as you go.</p>
 </div>
 </details>
@@ -511,7 +531,7 @@ Detection is the easy half; **what happens after the alert** is the real work. A
       <code>Alert → Fix</code>
       <span class="setup-card-tag tag-magenta">▸ STEP 2 · AUTOFIX</span>
     </div>
-    <p>Cloud agent available: <strong>Assign to Copilot</strong> (metered). Otherwise: <strong>Generate fix</strong> for eligible alerts (no AI credits).</p>
+    <p>On default-branch backlog alerts: Agentic Autofix on → <strong>Assign to Copilot</strong> (metered). Off → <strong>Generate fix</strong> if classic Autofix is enabled and supports the alert (no AI credits).</p>
   </div>
   <div class="setup-card">
     <div class="setup-card-head">
@@ -623,7 +643,7 @@ jobs:
 </details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">💸</span><span class="spec-key">Agentic Autofix</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">Billed as a cloud agent session, drawing down <b>AI credits and Actions minutes</b> (1 credit = $0.01, <b>varying with model and tokens</b>). User budgets hard-stop; org budgets only cap once the pool is spent.</p>
+<p class="spec-what">As of <b>2026-10-19</b>, consumes <b>Code Security AI Credits + Actions minutes</b>; no Copilot license required. Eligible included credits are used first, then usage is metered, including on public repos. Set a <b>Code Security AI Credits</b> SKU budget; a hard budget can block further metered usage after the allowance is exhausted. Usage appears under <b>Advanced Security</b> in billing's AI usage.</p>
 </details>
 </div>
 </td>
