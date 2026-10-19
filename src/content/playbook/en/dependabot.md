@@ -33,6 +33,9 @@ links:
     label: About dependency review
     url: https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/about-dependency-review
   - group: 📖 Official Documentation
+    label: Open source license compliance
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/supply-chain-security/open-source-license-compliance
+  - group: 📖 Official Documentation
     label: Configuring the dependency review action
     url: https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/configuring-the-dependency-review-action
   - group: 📖 Official Documentation
@@ -44,6 +47,9 @@ links:
   - group: 📖 Official Documentation
     label: Malware alerts for Dependabot
     url: https://gh.io/dependabot-malware
+  - group: 📰 Recent Changelog
+    label: "Open source license compliance GA (2026-10-16)"
+    url: https://github.blog/changelog/2026-10-16-open-source-license-compliance-generally-available/
   - group: 📰 Recent Changelog
     label: "Expanded OIDC support for Dependabot and code scanning (2026-05-19)"
     url: https://github.blog/changelog/2026-05-19-expanded-oidc-support-for-dependabot-and-code-scanning
@@ -131,7 +137,7 @@ updates:
 
 From `Org → Settings → Code security`, use **default settings** to apply to all repositories at once.
 
-## Companion: Dependency Review
+## Companion: Dependency Review <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 **Dependency Review** is the **PR-time** counterpart to Dependabot — it blocks merges before bad dependencies get in. Runs on every PR, **on any base branch** (not just `main`).
 
@@ -148,6 +154,33 @@ From `Org → Settings → Code security`, use **default settings** to apply to 
 Drop in [`actions/dependency-review-action`](https://github.com/actions/dependency-review-action) and make it a **required status check**; org owners can enforce it across all repos via repository rulesets.
 
 > ⚠️ **PR-time gate — not a continuous watcher.** Always pair it with **Dependabot alerts**, which catch CVEs published *after* merge.
+
+## Open source license compliance <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/supply-chain-security/open-source-license-compliance" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+**GA since 2026-10-16.** A companion to Dependabot: govern dependency licenses before merge, not just vulnerabilities.
+
+<div class="ctl-widget">
+<div class="ctl-list">
+<details class="ctl-item" name="license-compliance">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📜</span><span class="ctl-name">Central policy</span><span class="ctl-when">Beyond the Action</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body"><p>The Dependency Review Action uses license allow / deny lists. License compliance adds an <b>enterprise-wide policy</b> applied through branch rulesets.</p></div>
+</details>
+<details class="ctl-item" name="license-compliance">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">💰</span><span class="ctl-name">Access</span><span class="ctl-when">Enterprise + Code Security</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body"><p><b>Enterprise Cloud + Code Security</b> is required, including on public repositories. Data residency is supported. By contrast, the Dependency Review Action is <b>free on public repositories</b>; private repositories require Code Security.</p></div>
+</details>
+<details class="ctl-item" name="license-compliance">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛡️</span><span class="ctl-name">Enforcement</span><span class="ctl-when">Evaluate / Active</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body"><p><b>Active</b> blocks noncompliant PRs. <b>Evaluate</b> annotates without directly blocking, but branch protection requiring conversation resolution can still block on annotations.</p></div>
+</details>
+<details class="ctl-item" name="license-compliance">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">✅</span><span class="ctl-name">Resolve violations</span><span class="ctl-when">Approved exceptions</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body"><p>Remove or replace the dependency, amend the policy, or obtain an exception approved by an <b>Enterprise Open-Source License Manager</b>.</p></div>
+</details>
+</div>
+</div>
+
+**Scope:** new or changed PR dependencies, including detected transitive dependencies. Not a copied-code or binary scanner.
 
 ## AI triage: assign alerts to an agent
 
@@ -173,6 +206,8 @@ Core Dependabot is **free on every plan**. Only Code Security premium features c
 | Dependabot security updates | ✅ Free | ✅ Free | ✅ Free |
 | Dependabot version updates | ✅ Free | ✅ Free | ✅ Free |
 | Custom auto-triage rules | ✅ Free | ❌ | 💰 Code Security |
+
+**Enterprise license compliance is not part of free Dependabot**: it requires Enterprise Cloud + Code Security, including for public repositories.
 
 > ⚙️ On standard or self-hosted runners, jobs **don't use Actions minutes**. Only larger runners are billed.  
 > 🤖 Assign to agent needs **Code Security** + a **Copilot plan** with coding agent.
