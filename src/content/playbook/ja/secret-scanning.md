@@ -150,16 +150,16 @@ links:
 </div>
 </div>
 
-**Push protection** は push 前、**Merge protection** は PR のマージ前のチェック。
+**Push protection** は GitHub 上の全ブランチへの push 時にチェック。**ローカルのコミット時にはチェックしない**。**Merge protection** は PR のマージ前のチェック。
 
 <div class="ctl-widget">
 <p class="ctl-hint">▸ + をクリックして詳細を表示</p>
 <div class="ctl-list">
 <details class="ctl-item" name="ss-controls">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛡️</span><span class="ctl-name">Push protection</span><span class="ctl-when"><code>git push</code> の直前</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/push-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛡️</span><span class="ctl-name">Push protection</span><span class="ctl-when"><code>git push</code> 時</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/push-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">secret を含む push を<b>その場で拒否</b>。bypass は可能だが理由の記録が残る</span></p>
-<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">これから入る変更のみ。<b>AI-detected secrets</b> は別トグルで opt-in、<b>private preview</b>(招待された組織のみ)</span></p>
+<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">有効化した GitHub リポジトリの<b>全ブランチへの push</b>。未 push のローカルコミットは対象外。<b>AI-detected secrets</b> は別トグルで opt-in、<b>private preview</b>(招待された組織のみ)</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
