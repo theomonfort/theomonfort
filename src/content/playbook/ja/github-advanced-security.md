@@ -396,10 +396,10 @@ links:
 </div>
 </details>
 <details class="ctl-item" name="ghas-rollout" style="--entry-accent:#9bbc0f">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🎯</span><span class="ctl-name">リポジトリを選んで配る</span><span class="ctl-when">org configuration のみ</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/apply-custom-configuration" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🎯</span><span class="ctl-name">リポジトリを選んで配る</span><span class="ctl-when">org / enterprise config に対応</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/apply-custom-configuration" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">repo 単位</span><span class="ctl-v">enterprise の <b>Apply to</b> は <b>All repositories</b> か <b>All repositories without configurations</b> のみ。<b>repo を選べるのは org configuration だけ</b></span></p>
-<p class="ctl-row"><span class="ctl-k">やり方</span><span class="ctl-v">Organization → Settings → Advanced Security → Configurations → <b>Repositories</b> タブで絞り込んで選択 → <b>Apply configuration</b></span></p>
+<p class="ctl-row"><span class="ctl-k">repo 単位</span><span class="ctl-v">org のリポジトリ一覧から、<b>enterprise で作成した configuration も選択した repo に適用できる</b>。選択する画面が org レベルなだけで、config の作成元は <b>org に限定されない</b></span></p>
+<p class="ctl-row"><span class="ctl-k">やり方</span><span class="ctl-v">Organization → Settings → Advanced Security → Configurations → <b>Repositories</b> タブで repo を絞り込んで選択 → <b>Apply configuration</b> → org または enterprise の config を選ぶ → <b>Apply</b></span></p>
 <p class="ctl-row"><span class="ctl-k">どちらが優先</span><span class="ctl-v">enterprise 側の変更が org configuration と衝突すると repo は <code>removed_by_enterprise</code> になり org config が外れる。<b>enterprise が優先</b></span></p>
 </div>
 </details>

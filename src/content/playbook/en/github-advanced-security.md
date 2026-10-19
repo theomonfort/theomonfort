@@ -396,10 +396,10 @@ You can now **enforce enterprise security configurations** across both new and e
 </div>
 </details>
 <details class="ctl-item" name="ghas-rollout" style="--entry-accent:#9bbc0f">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🎯</span><span class="ctl-name">Pick specific repositories</span><span class="ctl-when">organization configuration only</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/apply-custom-configuration" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🎯</span><span class="ctl-name">Pick specific repositories</span><span class="ctl-when">org and enterprise configurations</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/apply-custom-configuration" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">Per repo</span><span class="ctl-v">enterprise <b>Apply to</b> offers only <b>All repositories</b> or <b>All repositories without configurations</b>. <b>Choosing which repos get it is organization-level only</b></span></p>
-<p class="ctl-row"><span class="ctl-k">How</span><span class="ctl-v">Organization → Settings → Advanced Security → Configurations → <b>Repositories</b> tab → filter, select, <b>Apply configuration</b></span></p>
+<p class="ctl-row"><span class="ctl-k">Per repo</span><span class="ctl-v"><b>Enterprise configurations can also be applied to selected repositories</b> from the organization's repository list. The selection interface is at org level; the configuration does <b>not</b> have to be created there</span></p>
+<p class="ctl-row"><span class="ctl-k">How</span><span class="ctl-v">Organization → Settings → Advanced Security → Configurations → <b>Repositories</b> tab → filter and select repos → <b>Apply configuration</b> → choose the org or enterprise configuration → <b>Apply</b></span></p>
 <p class="ctl-row"><span class="ctl-k">Who wins</span><span class="ctl-v">if an enterprise change conflicts with the org configuration the repo flips to <code>removed_by_enterprise</code> and the org config detaches. <b>Enterprise wins</b></span></p>
 </div>
 </details>
