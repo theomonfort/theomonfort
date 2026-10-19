@@ -41,7 +41,7 @@ export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'custom-agent': [2],
   'agent-skills': [5, 6],
   'copilot-code-review': [7],
-  'code-scanning': [5, 8],
+  'code-scanning': [5, 8, 9],
   'migrations': [3],
   'dependabot': [5],
   'github-advanced-security': [4],
