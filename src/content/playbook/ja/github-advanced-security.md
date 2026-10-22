@@ -178,7 +178,7 @@ links:
 </div>
 </div>
 
-## FIRST の 4 つの提言
+## FIRST の 4 つの提言 <a class="h2-doc" href="https://www.first.org/newsroom/releases/20260615" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 **従来のセキュリティが追いつかない。** AI が生成する新規コードの量は従来のレビュープロセスが検査できる範囲を超え、しかも一度に多数の新しい面から流れ込む。エージェントが変更を複数リポジトリへ波及させた後では、PR でのゲートはすでに手遅れ。
 
@@ -192,8 +192,8 @@ links:
 <p class="imp2-v">CVE の増加とソフトウェア資産の拡大を考えると、セキュリティ専用の予算確保は不可欠。</p>
 </div>
 <div class="imp2-col">
-<p class="imp2-k">🎯 悪用可能性で絞り込む</p>
-<p class="imp2-v">ノイズとシグナルを切り分けるツールを使う。GHAS なら Dependabot アラートに <a class="retro-link" href="https://github.blog/changelog/2025-02-19-dependabot-helps-users-focus-on-the-most-important-alerts-by-including-epss-scores-that-indicate-likelihood-of-exploitation-now-generally-available/" target="_blank" rel="noopener noreferrer">EPSS スコア ↗</a>（実際に悪用される可能性）が表示される。</p>
+<p class="imp2-k">🎯 深刻度と悪用可能性で絞り込む</p>
+<p class="imp2-v">FIRST は <a class="retro-link" href="https://www.first.org/cvss/v3.1/specification-document#Qualitative-Severity-Rating-Scale" target="_blank" rel="noopener noreferrer">CVSS ↗</a> を自社環境に合わせて調整し、深刻度を評価することも推奨。悪用可能性の指標も併用する。Dependabot アラートには <a class="retro-link" href="https://github.blog/changelog/2025-02-19-dependabot-helps-users-focus-on-the-most-important-alerts-by-including-epss-scores-that-indicate-likelihood-of-exploitation-now-generally-available/" target="_blank" rel="noopener noreferrer">EPSS スコア ↗</a>（実際に悪用される可能性）が表示される。</p>
 </div>
 <div class="imp2-col">
 <p class="imp2-k">🤖 防御側の AI を今すぐ使う</p>

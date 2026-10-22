@@ -178,7 +178,7 @@ links:
 </div>
 </div>
 
-## FIRST's four recommendations
+## FIRST's four recommendations <a class="h2-doc" href="https://www.first.org/newsroom/releases/20260615" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 **Traditional security can't keep up.** The volume of new, AI-generated code outpaces what any traditional review process can inspect, and it arrives across many new surfaces at once. Gating at the pull request is already too late once an agent has propagated a change across repos.
 
@@ -192,8 +192,8 @@ links:
 <p class="imp2-v">With more CVEs and a growing software estate, allocating a dedicated security budget is imperative.</p>
 </div>
 <div class="imp2-col">
-<p class="imp2-k">🎯 Triage by exploitability</p>
-<p class="imp2-v">Use tools that separate signal from noise. GHAS does: Dependabot alerts show the <a class="retro-link" href="https://github.blog/changelog/2025-02-19-dependabot-helps-users-focus-on-the-most-important-alerts-by-including-epss-scores-that-indicate-likelihood-of-exploitation-now-generally-available/" target="_blank" rel="noopener noreferrer">EPSS score ↗</a>, the likelihood of real-world exploitation.</p>
+<p class="imp2-k">🎯 Triage by severity and exploitability</p>
+<p class="imp2-v">FIRST also recommends assessing severity with <a class="retro-link" href="https://www.first.org/cvss/v3.1/specification-document#Qualitative-Severity-Rating-Scale" target="_blank" rel="noopener noreferrer">CVSS ↗</a>, adjusted to your environment. Complement this with exploitability signals: Dependabot alerts show the <a class="retro-link" href="https://github.blog/changelog/2025-02-19-dependabot-helps-users-focus-on-the-most-important-alerts-by-including-epss-scores-that-indicate-likelihood-of-exploitation-now-generally-available/" target="_blank" rel="noopener noreferrer">EPSS score ↗</a>, the likelihood of real-world exploitation.</p>
 </div>
 <div class="imp2-col">
 <p class="imp2-k">🤖 Use defensive AI now</p>
