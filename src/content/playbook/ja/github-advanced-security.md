@@ -201,6 +201,77 @@ links:
 </div>
 </div>
 
+## 日本の情報漏えい事例（2026-10-22 時点） <a class="h2-doc" href="https://docs.github.com/en/code-security/getting-started/github-security-features" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+日付は企業の公表日（参照した続報や訂正を含む）。
+
+<div class="ctl-widget">
+<div class="ctl-list">
+<details class="ctl-item" name="ghas-japan-incidents">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔑</span><span class="ctl-name">トヨタ T-Connect（2022-10-07）</span><span class="ctl-when">漏えいの可能性：296,019件</span><a class="ctl-doc" href="https://global.toyota/jp/newsroom/corporate/38095972.html" target="_blank" rel="noopener noreferrer">一次情報</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">公表内容</span><span class="ctl-v"><b>DB のアクセスキーを含むコードが GitHub 上で公開</b>。2017年12月から2022年9月まで露出。第三者のデータアクセスは未確認。</span></p>
+<p class="ctl-row"><span class="ctl-k">GitHub の対策</span><span class="ctl-v"><a class="retro-link" href="https://docs.github.com/en/code-security/concepts/secret-security/secret-scanning" target="_blank" rel="noopener noreferrer">Secret Protection ↗</a>：コードと履歴のキーを検出。<a class="retro-link" href="https://docs.github.com/en/code-security/reference/secret-security/secret-scanning-scope" target="_blank" rel="noopener noreferrer">Push protection ↗</a>：対応する secret の push をブロック。検出範囲は形式と設定に依存。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-japan-incidents">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔐</span><span class="ctl-name">マネーフォワード（2026-05-01）</span><span class="ctl-when">コード内のキーとパスワード</span><a class="ctl-doc" href="https://corp.moneyforward.com/news/info/20260501-mf-press-1/" target="_blank" rel="noopener noreferrer">一次情報</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">公表内容</span><span class="ctl-v">漏えいした GitHub 認証情報でリポジトリをコピーされた。<b>コード内の認証キーとパスワードを無効化し、再発行</b>。</span></p>
+<p class="ctl-row"><span class="ctl-k">GitHub の対策</span><span class="ctl-v"><a class="retro-link" href="https://docs.github.com/en/code-security/concepts/secret-security/secret-scanning" target="_blank" rel="noopener noreferrer">Secret Protection ↗</a>：侵害前にコード内の認証情報を検出して rotate。Push protection で対応 secret の追加を防ぐ。初期侵入ではなく<b>侵害後のアクセス拡大</b>を抑える。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-japan-incidents">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🖼️</span><span class="ctl-name">Gyazo（2026-10-21）</span><span class="ctl-when">対象範囲：約2,362万アカウント</span><a class="ctl-doc" href="https://corp.helpfeel.com/news/news-20261021" target="_blank" rel="noopener noreferrer">一次情報</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">公表内容</span><span class="ctl-v">動画変換処理の<b>コマンドインジェクション</b>。実際の送信件数は不明。</span></p>
+<p class="ctl-row"><span class="ctl-k">GitHub の対策</span><span class="ctl-v"><a class="retro-link" href="https://codeql.github.com/codeql-query-help/javascript/js-command-line-injection/" target="_blank" rel="noopener noreferrer">Code Security / CodeQL ↗</a>：対応コードで、この種の入力処理の弱点を検出。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-japan-incidents">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📧</span><span class="ctl-name">KDDI ISP メール（2026-07-21）</span><span class="ctl-when">漏えい：12,231,954人</span><a class="ctl-doc" href="https://newsroom.kddi.com/news/assets/2026/kddi_nr_s-73_4619/kddi_nr_s-73_4619_pdf_01.pdf" target="_blank" rel="noopener noreferrer">一次情報</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">公表内容</span><span class="ctl-v">メールアドレスが漏えい。第三者製ソフトの脆弱性は<b>検知時点でベンダー未把握</b>。</span></p>
+<p class="ctl-row"><span class="ctl-k">GitHub の対策</span><span class="ctl-v"><a class="retro-link" href="https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-alerts" target="_blank" rel="noopener noreferrer">Dependabot ↗</a>：対応依存関係の<b>既知の脆弱性</b>が対象。未知の脆弱性を防ぐものではない。</span></p>
+</div>
+</details>
+</div>
+</div>
+
+## 日本企業で相次ぐデータ漏洩
+
+**2026年、サイバー脅威が急拡大。** 警察庁の観測では、上半期の不審アクセスは前年同期比 **51% 増**。ランサムウェア被害報告は **123 件で半期最多**（<a class="retro-link" href="https://www.npa.go.jp/publications/statistics/cybersecurity/data/R8kami/R08_kami_cyber_jousei.pdf" target="_blank" rel="noopener noreferrer">警察庁 ↗</a>）。
+
+公表日（続報や訂正を含む）の古い順。2026-10-22 時点。
+
+<div class="imp2">
+<div class="imp2-col">
+<p class="imp2-v">
+<a class="retro-link" href="https://www.nttdata-act.com/info/detail/231017.html" target="_blank" rel="noopener noreferrer">NTT西日本（2023-10-17）</a><br />
+<a class="retro-link" href="https://www.universal-music.co.jp/press-releases/2026-05-18/" target="_blank" rel="noopener noreferrer">ユニバーサル ミュージック（2026-05-18）</a><br />
+<a class="retro-link" href="https://directcloud.jp/contents/information_leak_cases/#list-01" target="_blank" rel="noopener noreferrer">九州電力送配電（2026-07-08）</a><br />
+<a class="retro-link" href="https://japansecuritysummit.org/2026/07/14714/" target="_blank" rel="noopener noreferrer">佐川急便 通知設定ミス（2026-07-18）</a><br />
+<a class="retro-link" href="https://itpostjp.com/security/aflac-unauthorized-access-investigation-results/" target="_blank" rel="noopener noreferrer">アフラック生命保険（2026-07-31）</a><br />
+<a class="retro-link" href="https://internet.watch.impress.co.jp/docs/news/2141530.html" target="_blank" rel="noopener noreferrer">ムラウチドットコム（2026-09-15）</a><br />
+<a class="retro-link" href="https://internet.watch.impress.co.jp/docs/news/2142333.html" target="_blank" rel="noopener noreferrer">ニチレイ（2026-09-18）</a><br />
+<a class="retro-link" href="https://share.timescar.jp/news/2026/0929/1816.html" target="_blank" rel="noopener noreferrer">タイムズカー（2026-09-29）</a><br />
+<a class="retro-link" href="https://www.secoma.co.jp/info/pdf/202609290017.pdf" target="_blank" rel="noopener noreferrer">セイコーマート（2026-09-29）</a>
+</p>
+</div>
+<div class="imp2-col">
+<p class="imp2-v">
+<a class="retro-link" href="https://starts-pub.jp/info20261001" target="_blank" rel="noopener noreferrer">OZmall（2026-10-01）</a><br />
+<a class="retro-link" href="https://www.monogatari.co.jp/news/261005_news/" target="_blank" rel="noopener noreferrer">焼肉きんぐ（2026-10-05）</a><br />
+<a class="retro-link" href="https://www.asahi-kasei.co.jp/pharma/oshirase_20261006.html" target="_blank" rel="noopener noreferrer">旭化成セラピューティクス（2026-10-06）</a><br />
+<a class="retro-link" href="https://mrmax.co.jp/info/incident_20261006/" target="_blank" rel="noopener noreferrer">ミスターマックス（2026-10-06）</a><br />
+<a class="retro-link" href="https://www.his.co.jp/assets/20261007.pdf" target="_blank" rel="noopener noreferrer">HIS（2026-10-07）</a><br />
+<a class="retro-link" href="https://www2.sagawa-exp.co.jp/information/detail/426/" target="_blank" rel="noopener noreferrer">佐川急便 貨物追跡（2026-10-09）</a><br />
+<a class="retro-link" href="https://www.metpo.jp/news/Gn52e-Vm" target="_blank" rel="noopener noreferrer">東京メトロ（2026-10-15）</a><br />
+<a class="retro-link" href="https://www.yamato-hd.co.jp/important/info_260929_1.html" target="_blank" rel="noopener noreferrer">ヤマト運輸 後払い（2026-10-16）</a>
+</p>
+</div>
+</div>
+
 ## GHAS はどう応えるか
 
 スキャンツールは通常プラットフォームの外側にある。別のコンソール、別のバックログ、そしてコードを書いた数日後に届く検出結果。GHAS はこの 4 ステップすべてを、コードがすでに置かれている場所で実行する。

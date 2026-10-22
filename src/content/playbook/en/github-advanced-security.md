@@ -201,6 +201,77 @@ links:
 </div>
 </div>
 
+## Data leaks in Japan (as of 2026-10-22) <a class="h2-doc" href="https://docs.github.com/en/code-security/getting-started/github-security-features" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+Public disclosure dates, including the cited updates.
+
+<div class="ctl-widget">
+<div class="ctl-list">
+<details class="ctl-item" name="ghas-japan-incidents">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔑</span><span class="ctl-name">Toyota T-Connect (2022-10-07)</span><span class="ctl-when">Potential exposure: 296,019 records</span><a class="ctl-doc" href="https://global.toyota/jp/newsroom/corporate/38095972.html" target="_blank" rel="noopener noreferrer">Source</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Disclosure</span><span class="ctl-v">A <b>database access key in public GitHub source</b> was exposed from December 2017 to September 2022. Unauthorized data access was not confirmed.</span></p>
+<p class="ctl-row"><span class="ctl-k">GitHub protection</span><span class="ctl-v"><a class="retro-link" href="https://docs.github.com/en/code-security/concepts/secret-security/secret-scanning" target="_blank" rel="noopener noreferrer">Secret Protection ↗</a>: detect keys in code and history. <a class="retro-link" href="https://docs.github.com/en/code-security/reference/secret-security/secret-scanning-scope" target="_blank" rel="noopener noreferrer">Push protection ↗</a>: block supported secrets. Coverage depends on the secret format and configuration.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-japan-incidents">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔐</span><span class="ctl-name">Money Forward (2026-05-01)</span><span class="ctl-when">Keys + passwords in code</span><a class="ctl-doc" href="https://corp.moneyforward.com/news/info/20260501-mf-press-1/" target="_blank" rel="noopener noreferrer">Source</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Disclosure</span><span class="ctl-v">Compromised GitHub credentials enabled repository copying. The company <b>revoked and reissued keys and passwords embedded in source code</b>.</span></p>
+<p class="ctl-row"><span class="ctl-k">GitHub protection</span><span class="ctl-v"><a class="retro-link" href="https://docs.github.com/en/code-security/concepts/secret-security/secret-scanning" target="_blank" rel="noopener noreferrer">Secret Protection ↗</a>: identify embedded credentials for revocation and rotation; block new supported secrets with push protection. This limits <b>follow-on access</b>, not the initial account compromise.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-japan-incidents">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🖼️</span><span class="ctl-name">Gyazo (2026-10-21)</span><span class="ctl-when">Scope: ~23.62M accounts</span><a class="ctl-doc" href="https://corp.helpfeel.com/news/news-20261021" target="_blank" rel="noopener noreferrer">Source</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Disclosure</span><span class="ctl-v"><b>Command injection</b> in video conversion. Exact exported count unknown.</span></p>
+<p class="ctl-row"><span class="ctl-k">GitHub protection</span><span class="ctl-v"><a class="retro-link" href="https://codeql.github.com/codeql-query-help/javascript/js-command-line-injection/" target="_blank" rel="noopener noreferrer">Code Security / CodeQL ↗</a>: detect this input-handling weakness class in supported code.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ghas-japan-incidents">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📧</span><span class="ctl-name">KDDI (ISP mail, 2026-07-21)</span><span class="ctl-when">Leak: 12,231,954 people</span><a class="ctl-doc" href="https://newsroom.kddi.com/news/assets/2026/kddi_nr_s-73_4619/kddi_nr_s-73_4619_pdf_01.pdf" target="_blank" rel="noopener noreferrer">Source</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Disclosure</span><span class="ctl-v">Email addresses leaked. Third-party flaw <b>unknown to the vendor at detection</b>.</span></p>
+<p class="ctl-row"><span class="ctl-k">GitHub protection</span><span class="ctl-v"><a class="retro-link" href="https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-alerts" target="_blank" rel="noopener noreferrer">Dependabot ↗</a>: <b>known advisories</b> for supported dependencies, not a zero-day shield.</span></p>
+</div>
+</details>
+</div>
+</div>
+
+## A wave of data leaks at Japanese companies
+
+**Cyber threats surged in 2026.** In H1, suspicious accesses detected by police sensors rose **51% year over year**; reported ransomware cases hit a **half-year record of 123** (<a class="retro-link" href="https://www.npa.go.jp/publications/statistics/cybersecurity/data/R8kami/R08_kami_cyber_jousei.pdf" target="_blank" rel="noopener noreferrer">Japan NPA ↗</a>).
+
+Public disclosure dates, including updates, oldest first. As of 2026-10-22.
+
+<div class="imp2">
+<div class="imp2-col">
+<p class="imp2-v">
+<a class="retro-link" href="https://www.nttdata-act.com/info/detail/231017.html" target="_blank" rel="noopener noreferrer">NTT West (2023-10-17)</a><br />
+<a class="retro-link" href="https://www.universal-music.co.jp/press-releases/2026-05-18/" target="_blank" rel="noopener noreferrer">Universal Music Japan (2026-05-18)</a><br />
+<a class="retro-link" href="https://directcloud.jp/contents/information_leak_cases/#list-01" target="_blank" rel="noopener noreferrer">Kyushu Electric Power T&amp;D (2026-07-08)</a><br />
+<a class="retro-link" href="https://japansecuritysummit.org/2026/07/14714/" target="_blank" rel="noopener noreferrer">Sagawa Express (notification error, 2026-07-18)</a><br />
+<a class="retro-link" href="https://itpostjp.com/security/aflac-unauthorized-access-investigation-results/" target="_blank" rel="noopener noreferrer">Aflac (2026-07-31)</a><br />
+<a class="retro-link" href="https://internet.watch.impress.co.jp/docs/news/2141530.html" target="_blank" rel="noopener noreferrer">Murauchi.com (2026-09-15)</a><br />
+<a class="retro-link" href="https://internet.watch.impress.co.jp/docs/news/2142333.html" target="_blank" rel="noopener noreferrer">Nichirei (2026-09-18)</a><br />
+<a class="retro-link" href="https://share.timescar.jp/news/2026/0929/1816.html" target="_blank" rel="noopener noreferrer">Times Car (2026-09-29)</a><br />
+<a class="retro-link" href="https://www.secoma.co.jp/info/pdf/202609290017.pdf" target="_blank" rel="noopener noreferrer">Seicomart (2026-09-29)</a>
+</p>
+</div>
+<div class="imp2-col">
+<p class="imp2-v">
+<a class="retro-link" href="https://starts-pub.jp/info20261001" target="_blank" rel="noopener noreferrer">OZmall (2026-10-01)</a><br />
+<a class="retro-link" href="https://www.monogatari.co.jp/news/261005_news/" target="_blank" rel="noopener noreferrer">Yakiniku King (2026-10-05)</a><br />
+<a class="retro-link" href="https://www.asahi-kasei.co.jp/pharma/oshirase_20261006.html" target="_blank" rel="noopener noreferrer">Asahi Kasei Therapeutics (2026-10-06)</a><br />
+<a class="retro-link" href="https://mrmax.co.jp/info/incident_20261006/" target="_blank" rel="noopener noreferrer">MrMax (2026-10-06)</a><br />
+<a class="retro-link" href="https://www.his.co.jp/assets/20261007.pdf" target="_blank" rel="noopener noreferrer">HIS (2026-10-07)</a><br />
+<a class="retro-link" href="https://www2.sagawa-exp.co.jp/information/detail/426/" target="_blank" rel="noopener noreferrer">Sagawa Express (parcel tracking, 2026-10-09)</a><br />
+<a class="retro-link" href="https://www.metpo.jp/news/Gn52e-Vm" target="_blank" rel="noopener noreferrer">Tokyo Metro (2026-10-15)</a><br />
+<a class="retro-link" href="https://www.yamato-hd.co.jp/important/info_260929_1.html" target="_blank" rel="noopener noreferrer">Yamato (deferred payment, 2026-10-16)</a>
+</p>
+</div>
+</div>
+
 ## How GHAS answers it
 
 Scanning tools normally live outside the platform: a separate console, a separate backlog, and findings that reach the developer days after the code was written. GHAS puts all four steps where the code already is.
