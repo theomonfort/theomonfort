@@ -18,7 +18,7 @@ links:
     label: About code scanning
     url: https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning
   - group: 📖 Official Documentation
-    label: AI-powered security detections in pull requests
+    label: AI Scan for pull requests
     url: https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections
   - group: 📖 Official Documentation
     label: "Changelog: AI Scan for pull request APIs (public preview)"
@@ -107,11 +107,11 @@ links:
 </div>
 </details>
 <details class="det-pick" name="cs-vs-codeql">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI findings (PR only)</span></summary>
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI Scan (PR only)</span></summary>
 <div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">AI security detections</span></p>
-<p class="det-why"><b>Complement CodeQL</b> for uncovered languages and frameworks, such as PHP, Bash, HCL and Dockerfiles. <b>Pull requests only</b>: no full-repo scan or backlog alerts. Advisory, not a merge gate. Requires opt-in and <b>CodeQL default setup</b>; consumes <b>AI credits</b>. Enablement can now be toggled at the org/repo level via <b>new REST APIs</b> (public preview), not just the UI.</p>
-<p class="det-doc">Public preview: GHAS + Copilot licenses. <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">📘 Docs ↗</a> · <a class="retro-link" href="https://github.blog/changelog/2026-09-10-ai-scan-for-pull-request-apis-in-public-preview/" target="_blank" rel="noopener noreferrer">📘 API changelog ↗</a></p>
+<p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">AI Scan</span></p>
+<p class="det-why"><b>Complements CodeQL</b> for uncovered languages and frameworks, such as PHP, Bash, HCL and Dockerfiles. <b>Pull requests only</b>: no full-repo scan or backlog alerts. Advisory, not a merge gate. Requires code scanning and AI Scan enabled, <b>not CodeQL default setup</b>. Uses <b>Code Security AI Credits</b>; organization enablement and repository opt-out are available through the UI or REST API.</p>
+<p class="det-doc">As of 2026-10-22: no Copilot license required. Private/internal organization repos need Code Security or GHAS. <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">📘 Docs ↗</a> / <a class="retro-link" href="https://github.blog/changelog/2026-09-10-ai-scan-for-pull-request-apis-in-public-preview/" target="_blank" rel="noopener noreferrer">📘 API changelog ↗</a></p>
 </div>
 </details>
 <details class="det-pick" name="cs-vs-codeql">
@@ -273,10 +273,10 @@ The whole language is that shape: **`where` is the definition of "what the bug l
 </div>
 </details>
 <details class="ctl-item" name="cs-capabilities">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🤖</span><span class="ctl-name">AI findings</span><span class="ctl-when">PRs only, public preview</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🤖</span><span class="ctl-name">AI Scan</span><span class="ctl-when">PRs only</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">AI flags risks in what CodeQL does not cover: <b>PHP, Shell, Terraform, Dockerfile</b></span></p>
-<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v"><b>PRs only</b>: no full-repo scan, no backlog alerts, not a merge gate. Opt-in, requires <b>CodeQL default setup</b></span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v"><b>PRs only</b>: no full-repo scan, no backlog alerts, not a merge gate. Enable code scanning and AI Scan; <b>CodeQL default setup is not required</b></span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-capabilities">
@@ -516,40 +516,88 @@ Detection is the easy half; **what happens after the alert** is the real work. A
 
 📘 Details: <a class="retro-link" href="https://docs.github.com/en/code-security/securing-your-organization/fixing-security-alerts-at-scale/about-security-campaigns" target="_blank" rel="noopener noreferrer">About security campaigns (GitHub Docs) ↗</a>
 
-## Getting started (fastest path)
+## My recommended starting checklist <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-code-checklist" class="demo-toggle" /><label class="h2-demo" for="demo-code-checklist">&#9658; DEMO</label>
 
-<div class="setup-cards">
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>Repo → Settings → Code security</code>
-      <span class="setup-card-tag tag-cyan">▸ STEP 1 · DEFAULT SETUP</span>
-    </div>
-    <p><strong>Set up CodeQL → Default.</strong> Languages are detected for you; it runs on push and PR.</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>Alert → Fix</code>
-      <span class="setup-card-tag tag-magenta">▸ STEP 2 · AUTOFIX</span>
-    </div>
-    <p>On default-branch backlog alerts: Agentic Autofix on → <strong>Assign to Copilot</strong> (metered). Off → <strong>Generate fix</strong> if classic Autofix is enabled and supports the alert (no AI credits).</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>Org → Settings → Code security</code>
-      <span class="setup-card-tag tag-cyan">▸ STEP 3 · ROLL OUT</span>
-    </div>
-    <p>Build a <strong>security configuration</strong> and apply it to new and existing repos at once.</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>Repo → Settings → Rules</code>
-      <span class="setup-card-tag tag-magenta">▸ STEP 4 · MERGE PROTECTION</span>
-    </div>
-    <p>Code scanning alone <strong>never blocks a merge</strong>. Make it required in a ruleset.</p>
-  </div>
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-code-checklist" aria-label="Close demo steps"></label>
+<div class="demo-window" role="group" aria-label="Demo steps">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Code Scanning checklist</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-code-checklist" aria-label="Close">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">1. ENABLEMENT AND COVERAGE</p>
+<p><a href="https://github.com/theomonfort-org/ghas-test-1/settings/security_analysis" target="_blank" rel="noopener noreferrer">ghas-test-1 → Advanced Security ↗</a> / <a href="https://github.com/theomonfort-org/ghas-test-1/actions/workflows/codeql.yml" target="_blank" rel="noopener noreferrer">CodeQL runs ↗</a>: inspect the existing Advanced setup and language jobs. Do not switch this configured repository to Default setup.</p>
+</li>
+<li>
+<p class="demo-step-title">2. EXTRA QUERY PACKS</p>
+<p><a href="https://github.com/theomonfort-org/ghas-test-1/blob/main/.github/workflows/codeql.yml" target="_blank" rel="noopener noreferrer">ghas-test-1 → codeql.yml ↗</a> / <a href="https://github.com/github/codeql-coding-standards" target="_blank" rel="noopener noreferrer">MISRA / CERT / AUTOSAR packs ↗</a>: show how the workflow configures additional queries and packs.</p>
+</li>
+<li>
+<p class="demo-step-title">3. MERGE PROTECTION</p>
+<p><a href="https://github.com/theomonfort-org/ghas-test-1/settings/rules/new?target=branch&amp;enforcement=disabled" target="_blank" rel="noopener noreferrer">ghas-test-1 → New branch ruleset ↗</a>: <b>Require code scanning results → CodeQL</b>. Example: <b>Security alerts: High or higher</b>, <b>Alerts: Errors</b>, target <code class="demo-path">main</code>. Keep it disabled for a walkthrough.</p>
+</li>
+<li>
+<p class="demo-step-title">4. AI SCAN</p>
+<p><a href="https://github.com/enterprises/octodemo" target="_blank" rel="noopener noreferrer">octodemo ↗</a> → <b>Policies → Advanced Security → AI Scan</b>, then <a href="https://github.com/organizations/theomonfort-org/settings/security_analysis" target="_blank" rel="noopener noreferrer">theomonfort-org → Global settings ↗</a> → <b>AI Scan</b>.</p>
+<p class="demo-out">Confirm enterprise permission and the Code Security AI Credits budget. Organization enablement affects all eligible repositories; show the controls without toggling them.</p>
+</li>
+<li>
+<p class="demo-step-title">5. ASSISTED REMEDIATION</p>
+<p><a href="https://github.com/organizations/theomonfort-org/settings/security_analysis" target="_blank" rel="noopener noreferrer">theomonfort-org → Autofix settings ↗</a>: show the separate <b>Copilot Autofix</b> and <b>Agentic Autofix</b> controls. Check enterprise permission before enabling Agentic Autofix.</p>
+<p><a href="https://github.com/theomonfort-org/ghas-test-1/settings/security_analysis" target="_blank" rel="noopener noreferrer">ghas-test-1 → Repository override ↗</a> / <a href="https://github.com/theomonfort-org/ghas-test-1/security/code-scanning" target="_blank" rel="noopener noreferrer">Code scanning alerts ↗</a></p>
+</li>
+<li>
+<p class="demo-step-title">6. SECURITY CAMPAIGNS</p>
+<p><a href="https://github.com/orgs/theomonfort-org/security/campaigns" target="_blank" rel="noopener noreferrer">theomonfort-org → Campaigns ↗</a>: <b>Create campaign → From code scanning filters</b>. Scope to <b>ghas-test-1</b>, choose a manager and due date, then save as a draft.</p>
+</li>
+</ol>
+</div>
 </div>
 
-Results appear in the **Security tab** and the PR's **Files changed** tab. Start with one repo and estimate **Actions usage** before rolling out.
+Validate detection, protect new code, then reduce the backlog.
+
+<div class="ctl-widget">
+<p class="ctl-hint">▸ OPEN A STEP FOR SETTINGS</p>
+<div class="ctl-list">
+<details class="ctl-item" name="cs-start">
+<summary class="ctl-btn"><span class="ctl-icon">1</span><span class="ctl-name">Enable CodeQL and verify coverage</span><span class="ctl-when">ACTIVATE</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configure-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Start</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/security_analysis" target="_blank" rel="noopener noreferrer">CodeQL settings ↗</a>: start with <b>Default setup</b>. Check the first scan, languages and Actions usage before rolling out with security configurations.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-start">
+<summary class="ctl-btn"><span class="ctl-icon">2</span><span class="ctl-name">Add extra query packs if needed</span><span class="ctl-when">OPTIONAL</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/reference/code-scanning/workflow-configuration-options#specifying-codeql-query-packs" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Customize</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/security_analysis" target="_blank" rel="noopener noreferrer">CodeQL configuration ↗</a>: add <a class="retro-link" href="https://github.com/github/codeql-coding-standards" target="_blank" rel="noopener noreferrer">MISRA / CERT / AUTOSAR packs ↗</a> for C/C++, or internal queries. Adapt the configuration to your build.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-start">
+<summary class="ctl-btn"><span class="ctl-icon">3</span><span class="ctl-name">Block high-risk findings before merge</span><span class="ctl-when">RULESETS</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/manage-your-configuration/set-merge-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Example</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/rules" target="_blank" rel="noopener noreferrer">Rulesets ↗</a>: <b>Require code scanning results</b> (CodeQL). <b>Security alerts: High or higher</b>; <b>Alerts: Errors</b>. Target <code>main</code> and restrict bypass.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-start">
+<summary class="ctl-btn"><span class="ctl-icon">4</span><span class="ctl-name">Enable AI Scan for pull requests</span><span class="ctl-when">AI SCAN</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections#enabling-ai-scan" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Opt in</span><span class="ctl-v"><a class="retro-link" href="https://github.com/organizations/ORG/settings/security_analysis" target="_blank" rel="noopener noreferrer">Org settings ↗</a>: enterprise permission + <b>Code Security AI Credits</b> budget first; then enable org-wide for eligible repos. PR-only advice, no merge gate or backlog.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-start">
+<summary class="ctl-btn"><span class="ctl-icon">5</span><span class="ctl-name">Set up assisted remediation</span><span class="ctl-when">AUTOFIX</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Prepare</span><span class="ctl-v"><a class="retro-link" href="https://github.com/organizations/ORG/settings/security_analysis" target="_blank" rel="noopener noreferrer">Org settings ↗</a>: classic Autofix is on with CodeQL unless disabled. Optionally enable <b>Agentic Autofix</b> for draft PRs; budget AI credits + Actions.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-start">
+<summary class="ctl-btn"><span class="ctl-icon">6</span><span class="ctl-name">Create security campaigns</span><span class="ctl-when">CAMPAIGNS</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/remediate-alerts-at-scale/creating-managing-security-campaigns" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Remediate</span><span class="ctl-v"><a class="retro-link" href="https://github.com/orgs/ORG/security/campaigns" target="_blank" rel="noopener noreferrer">Campaigns ↗</a>: select code scanning alerts, prioritize risk, set a manager and due date. Start with a small backlog.</span></p>
+</div>
+</details>
+</div>
+</div>
+
+URL templates: replace `ORG`, `OWNER`, `REPO`.
 
 ## Advanced setup and SARIF
 
@@ -630,12 +678,12 @@ jobs:
 </tr>
 <tr>
 <td style="white-space:normal">🤖 AI credits</td>
-<td>Metered: <b>AI findings</b> (detection) and <b>Agentic Autofix</b> (fixing). Classic Autofix suggestions remain free.</td>
+<td>Metered: <b>AI Scan</b> (detection) and <b>Agentic Autofix</b> (fixing). Classic Autofix suggestions remain free.</td>
 <td>
 <div class="spec-list">
 <details class="spec-item" name="cs-billing">
-<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔎</span><span class="spec-key">AI findings</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">Opt-in AI detection for <b>non-CodeQL languages</b> (PHP, Shell, Terraform, Dockerfile), on <b>PRs only</b>. Consumes AI credits even without a fix request. Public preview requires <b>GHAS + Copilot licenses</b> and CodeQL default setup. <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">Docs ↗</a></p>
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔎</span><span class="spec-key">AI Scan</span><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">As of <b>2026-10-22</b>: opt-in detection on <b>PRs only</b>, using <b>Code Security AI Credits</b> even without a fix request. Requires code scanning enabled, <b>not CodeQL default setup or a Copilot license</b>. Private/internal organization repos need Code Security or GHAS; public repos are also eligible. Review credits and budgets before enabling. <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">Docs ↗</a></p>
 </details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🆓</span><span class="spec-key">Copilot Autofix</span><span class="spec-toggle" aria-hidden="true"></span></summary>

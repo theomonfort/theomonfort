@@ -18,7 +18,7 @@ links:
     label: About code scanning
     url: https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning
   - group: 📖 公式ドキュメント
-    label: AI-powered security detections in pull requests
+    label: AI Scan for pull requests
     url: https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections
   - group: 📖 公式ドキュメント
     label: "Changelog: AI Scan for pull request APIs (public preview)"
@@ -107,11 +107,11 @@ links:
 </div>
 </details>
 <details class="det-pick" name="cs-vs-codeql">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI findings（PR のみ）</span></summary>
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI Scan（PR のみ）</span></summary>
 <div class="det-pane">
-<p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">AI security detections</span></p>
-<p class="det-why">PHP、Bash、HCL、Dockerfile など、未対応の言語やフレームワークを対象に <b>CodeQL を補完</b>。<b>PR のみ</b>で、全体スキャンやバックログのアラートはない。助言扱いでマージをブロックしない。オプトインと <b>CodeQL default setup</b> が必要で、<b>AI クレジット</b>を消費する。有効化は UI だけでなく <b>新しい REST API</b>（Public preview）で org/repo 単位に切り替え可能に。</p>
-<p class="det-doc">Public preview: GHAS + Copilot ライセンス。<a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">📘 Docs ↗</a> · <a class="retro-link" href="https://github.blog/changelog/2026-09-10-ai-scan-for-pull-request-apis-in-public-preview/" target="_blank" rel="noopener noreferrer">📘 API changelog ↗</a></p>
+<p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">AI Scan</span></p>
+<p class="det-why">PHP、Bash、HCL、Dockerfile など、未対応の言語やフレームワークを対象に <b>CodeQL を補完</b>。<b>PR のみ</b>で、全体スキャンやバックログのアラートはない。助言扱いでマージをブロックしない。Code scanning と AI Scan の有効化が必要で、<b>CodeQL default setup は不要</b>。<b>Code Security AI Credits</b> を消費する。UI / REST API で Org 単位に有効化し、リポジトリ単位でオプトアウトできる。</p>
+<p class="det-doc">2026-10-22 時点: Copilot ライセンス不要。Org の private / internal repo は Code Security または GHAS が必要。<a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">📘 Docs ↗</a> / <a class="retro-link" href="https://github.blog/changelog/2026-09-10-ai-scan-for-pull-request-apis-in-public-preview/" target="_blank" rel="noopener noreferrer">📘 API changelog ↗</a></p>
 </div>
 </details>
 <details class="det-pick" name="cs-vs-codeql">
@@ -273,10 +273,10 @@ select ifstmt, "This if-statement is redundant."  // ④ 何をどう報告す�
 </div>
 </details>
 <details class="ctl-item" name="cs-capabilities">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🤖</span><span class="ctl-name">AI findings</span><span class="ctl-when">PR のみ、public preview</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🤖</span><span class="ctl-name">AI Scan</span><span class="ctl-when">PR のみ</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">CodeQL が対応しない範囲を AI が検査: <b>PHP / Shell / Terraform / Dockerfile</b></span></p>
-<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v"><b>PR のみ</b>。リポジトリ全体のスキャン、バックログのアラート、マージゲートはなし。オプトインで <b>CodeQL default setup</b> が必要</span></p>
+<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v"><b>PR のみ</b>。リポジトリ全体のスキャン、バックログのアラート、マージゲートはなし。Code scanning と AI Scan を有効化する。<b>CodeQL default setup は不要</b></span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-capabilities">
@@ -516,40 +516,88 @@ Copilot Autofix は **対応するアラートに修正パッチを提案**す�
 
 📘 詳細: <a class="retro-link" href="https://docs.github.com/en/code-security/securing-your-organization/fixing-security-alerts-at-scale/about-security-campaigns" target="_blank" rel="noopener noreferrer">About security campaigns（GitHub Docs）↗</a>
 
-## 始め方（最短ルート）
+## 私のおすすめ導入チェックリスト <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-code-checklist" class="demo-toggle" /><label class="h2-demo" for="demo-code-checklist">&#9658; DEMO</label>
 
-<div class="setup-cards">
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>Repo → Settings → Code security</code>
-      <span class="setup-card-tag tag-cyan">▸ STEP 1 · DEFAULT SETUP</span>
-    </div>
-    <p><strong>Set up CodeQL → Default</strong> だけ。言語は自動検出され、push と PR で自動実行される。</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>Alert → Fix</code>
-      <span class="setup-card-tag tag-magenta">▸ STEP 2 · AUTOFIX</span>
-    </div>
-    <p>デフォルトブランチのバックログで、Agentic Autofix がオンなら <strong>Assign to Copilot</strong>（従量）。オフなら、従来の Autofix が有効で対応するアラートに <strong>Generate fix</strong>（AI クレジット不要）。</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>Org → Settings → Code security</code>
-      <span class="setup-card-tag tag-cyan">▸ STEP 3 · 一括展開</span>
-    </div>
-    <p><strong>Security configuration</strong> を作って新規・既存リポに一括適用。</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>Repo → Settings → Rules</code>
-      <span class="setup-card-tag tag-magenta">▸ STEP 4 · マージ保護</span>
-    </div>
-    <p>Code Scanning は単体では <strong>マージを止めない</strong>。ruleset で明示的に required にする。</p>
-  </div>
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-code-checklist" aria-label="デモ手順を閉じる"></label>
+<div class="demo-window" role="group" aria-label="デモ手順">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Code Scanning checklist</span><span class="demo-note">発表者専用</span><label class="demo-close" for="demo-code-checklist" aria-label="閉じる">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">1. 有効化とカバレッジ</p>
+<p><a href="https://github.com/theomonfort-org/ghas-test-1/settings/security_analysis" target="_blank" rel="noopener noreferrer">ghas-test-1 → Advanced Security ↗</a> / <a href="https://github.com/theomonfort-org/ghas-test-1/actions/workflows/codeql.yml" target="_blank" rel="noopener noreferrer">CodeQL runs ↗</a>: 既存の Advanced setup と言語ごとのジョブを確認。設定済みの repo を Default setup に切り替えない。</p>
+</li>
+<li>
+<p class="demo-step-title">2. 追加のクエリパック</p>
+<p><a href="https://github.com/theomonfort-org/ghas-test-1/blob/main/.github/workflows/codeql.yml" target="_blank" rel="noopener noreferrer">ghas-test-1 → codeql.yml ↗</a> / <a href="https://github.com/github/codeql-coding-standards" target="_blank" rel="noopener noreferrer">MISRA / CERT / AUTOSAR packs ↗</a>: workflow で追加クエリやパックを設定する箇所を見せる。</p>
+</li>
+<li>
+<p class="demo-step-title">3. MERGE PROTECTION</p>
+<p><a href="https://github.com/theomonfort-org/ghas-test-1/settings/rules/new?target=branch&amp;enforcement=disabled" target="_blank" rel="noopener noreferrer">ghas-test-1 → New branch ruleset ↗</a>: <b>Require code scanning results → CodeQL</b>。例は <b>Security alerts: High or higher</b>、<b>Alerts: Errors</b>、対象は <code class="demo-path">main</code>。画面紹介では Disabled のままにする。</p>
+</li>
+<li>
+<p class="demo-step-title">4. AI SCAN</p>
+<p><a href="https://github.com/enterprises/octodemo" target="_blank" rel="noopener noreferrer">octodemo ↗</a> → <b>Policies → Advanced Security → AI Scan</b>、次に <a href="https://github.com/organizations/theomonfort-org/settings/security_analysis" target="_blank" rel="noopener noreferrer">theomonfort-org → Global settings ↗</a> → <b>AI Scan</b> を開く。</p>
+<p class="demo-out">Enterprise の許可と Code Security AI Credits 予算を確認。Org での有効化は対象 repo 全体に影響するため、画面紹介では切り替えない。</p>
+</li>
+<li>
+<p class="demo-step-title">5. AI による修正支援</p>
+<p><a href="https://github.com/organizations/theomonfort-org/settings/security_analysis" target="_blank" rel="noopener noreferrer">theomonfort-org → Autofix settings ↗</a>: <b>Copilot Autofix</b> と <b>Agentic Autofix</b> の別々の設定を見せる。Agentic Autofix の有効化前に Enterprise の許可を確認。</p>
+<p><a href="https://github.com/theomonfort-org/ghas-test-1/settings/security_analysis" target="_blank" rel="noopener noreferrer">ghas-test-1 → Repository override ↗</a> / <a href="https://github.com/theomonfort-org/ghas-test-1/security/code-scanning" target="_blank" rel="noopener noreferrer">Code scanning alerts ↗</a></p>
+</li>
+<li>
+<p class="demo-step-title">6. SECURITY CAMPAIGNS</p>
+<p><a href="https://github.com/orgs/theomonfort-org/security/campaigns" target="_blank" rel="noopener noreferrer">theomonfort-org → Campaigns ↗</a>: <b>Create campaign → From code scanning filters</b>。対象を <b>ghas-test-1</b> に絞り、担当と期限を設定して draft で保存。</p>
+</li>
+</ol>
+</div>
 </div>
 
-結果は **Security タブ** と PR の **Files changed** タブに出る。まず 1 リポで試し、**Actions 使用量**を見積もってから展開する。
+検知の確認 → 新規コードの保護 → バックログの解消。この順番で進める。
+
+<div class="ctl-widget">
+<p class="ctl-hint">▸ ステップを開くと設定リンクを表示</p>
+<div class="ctl-list">
+<details class="ctl-item" name="cs-start">
+<summary class="ctl-btn"><span class="ctl-icon">1</span><span class="ctl-name">CodeQL を有効化し、カバレッジを確認</span><span class="ctl-when">ACTIVATE</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configure-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">開始</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/security_analysis" target="_blank" rel="noopener noreferrer">CodeQL settings ↗</a>: <b>Default setup</b> から開始。初回スキャン、対象言語、Actions 使用量を確認してから security configuration で展開。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-start">
+<summary class="ctl-btn"><span class="ctl-icon">2</span><span class="ctl-name">必要に応じて追加のクエリパックを導入</span><span class="ctl-when">OPTIONAL</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/reference/code-scanning/workflow-configuration-options#specifying-codeql-query-packs" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">調整</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/security_analysis" target="_blank" rel="noopener noreferrer">CodeQL configuration ↗</a>: C/C++ 向けの <a class="retro-link" href="https://github.com/github/codeql-coding-standards" target="_blank" rel="noopener noreferrer">MISRA / CERT / AUTOSAR packs ↗</a> や社内クエリを追加。ビルドに合わせて設定する。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-start">
+<summary class="ctl-btn"><span class="ctl-icon">3</span><span class="ctl-name">重大な検出結果がある merge をブロック</span><span class="ctl-when">RULESETS</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/manage-your-configuration/set-merge-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">例</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/rules" target="_blank" rel="noopener noreferrer">Rulesets ↗</a>: <b>Require code scanning results</b>（CodeQL）。<b>Security alerts: High or higher</b>、<b>Alerts: Errors</b>。<code>main</code> を対象にし、bypass 権限も制限。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-start">
+<summary class="ctl-btn"><span class="ctl-icon">4</span><span class="ctl-name">PR 向けの AI Scan を有効化</span><span class="ctl-when">AI SCAN</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections#enabling-ai-scan" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">有効化</span><span class="ctl-v"><a class="retro-link" href="https://github.com/organizations/ORG/settings/security_analysis" target="_blank" rel="noopener noreferrer">Org settings ↗</a>: Enterprise の許可と <b>Code Security AI Credits</b> 予算を確認してから、Org 全体の対象 repo で有効化。PR 上の助言のみで、merge ブロックやバックログはなし。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-start">
+<summary class="ctl-btn"><span class="ctl-icon">5</span><span class="ctl-name">AI による修正支援を準備</span><span class="ctl-when">AUTOFIX</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">準備</span><span class="ctl-v"><a class="retro-link" href="https://github.com/organizations/ORG/settings/security_analysis" target="_blank" rel="noopener noreferrer">Org settings ↗</a>: 従来の Autofix は無効化されていなければ CodeQL と共に有効。Draft PR 作成には任意で <b>Agentic Autofix</b> を有効化し、AI credits + Actions の予算を確保。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cs-start">
+<summary class="ctl-btn"><span class="ctl-icon">6</span><span class="ctl-name">Security campaign を作成</span><span class="ctl-when">CAMPAIGNS</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/remediate-alerts-at-scale/creating-managing-security-campaigns" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">対応</span><span class="ctl-v"><a class="retro-link" href="https://github.com/orgs/ORG/security/campaigns" target="_blank" rel="noopener noreferrer">Campaigns ↗</a>: code scanning アラートを選び、リスク順に優先度をつけ、担当と期限を決める。小さなバックログから始める。</span></p>
+</div>
+</details>
+</div>
+</div>
+
+URL テンプレート内の `ORG`、`OWNER`、`REPO` を置き換えて使う。
 
 ## Advanced setup と SARIF 連携
 
@@ -630,12 +678,12 @@ jobs:
 </tr>
 <tr>
 <td style="white-space:normal">🤖 AI クレジット</td>
-<td><b>AI findings</b>（検知）と <b>Agentic Autofix</b>（修正）は従量課金。従来の Autofix 提案は無料。</td>
+<td><b>AI Scan</b>（検知）と <b>Agentic Autofix</b>（修正）は従量課金。従来の Autofix 提案は無料。</td>
 <td>
 <div class="spec-list">
 <details class="spec-item" name="cs-billing">
-<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔎</span><span class="spec-key">AI findings</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">オプトインで <b>CodeQL 非対応言語</b>（PHP / Shell / Terraform / Dockerfile）を <b>PR 上のみ</b>で AI 検査。修正を依頼しなくても AI クレジットを消費する。Public preview では <b>GHAS + Copilot ライセンス</b>と CodeQL default setup が必要。<a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">Docs ↗</a></p>
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔎</span><span class="spec-key">AI Scan</span><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what"><b>2026-10-22 時点</b>: オプトインで <b>PR 上のみ</b>を検査し、修正依頼がなくても <b>Code Security AI Credits</b> を消費。Code scanning の有効化は必要だが、<b>CodeQL default setup や Copilot ライセンスは不要</b>。Org の private / internal repo は Code Security または GHAS が必要。Public repo も対象。有効化前にクレジットと予算を確認する。<a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">Docs ↗</a></p>
 </details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🆓</span><span class="spec-key">Copilot Autofix</span><span class="spec-toggle" aria-hidden="true"></span></summary>
