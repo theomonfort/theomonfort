@@ -44,7 +44,7 @@ export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'code-scanning': [5, 8, 9],
   'migrations': [3],
   'dependabot': [5],
-  'github-advanced-security': [4],
+  'github-advanced-security': [6],
 };
 
 export function navHintSlides(slug: string): number[] {
