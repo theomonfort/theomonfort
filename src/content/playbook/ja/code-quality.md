@@ -60,7 +60,7 @@ links:
   </p>
 </div>
 
-## Code Quality がカバーする範囲
+## Code Quality がカバーする範囲 <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-quality/code-quality" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 **2026 年 7 月 20 日** に GA。役割は、コードが古くなっても信頼性・保守性・テストカバレッジを保つこと。GitHub Advanced Security に組み込まれた機能ではなく、その**隣に並ぶ独立製品**。
 
@@ -99,10 +99,18 @@ links:
 </div>
 </details>
 <details class="vsx-pick" name="cq-vs-topic">
+<summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">🧠</span><span class="vsx-name">AI findings</span></summary>
+<div class="vsx-pane">
+<p class="vsx-head"><span class="vsx-icon" aria-hidden="true">🧠</span><span class="vsx-title">AI findings</span><span class="vsx-badge"></span></p>
+<p class="vsx-why" data-side="cq">Standard findings と同じく<b>信頼性と保守性</b>が対象。固定ルールに縛られず、全言語を解析する。ただし<b>マージ後、default branch で最近変更されたファイル</b>が対象で、PR 上では実行しない。結果は <b>AI findings</b> に表示。<a class="retro-link" href="https://docs.github.com/en/code-security/how-tos/maintain-quality-code/fix-findings-in-recent-merges" target="_blank" rel="noopener noreferrer">Docs ↗</a></p>
+<p class="vsx-why" data-side="cs"><b>AI Scan</b> は<b>PR の変更のみ</b>を対象に脆弱性を検出。対応するのは <b>CodeQL がカバーしていない一部の言語とフレームワーク</b>。例: PHP、Bash、HCL、Dockerfile、JSP、Blazor。リポジトリ全体のスキャンや backlog アラートはない。<a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">Docs ↗</a></p>
+</div>
+</details>
+<details class="vsx-pick" name="cq-vs-topic">
 <summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">📊</span><span class="vsx-name">可視化</span></summary>
 <div class="vsx-pane">
 <p class="vsx-head"><span class="vsx-icon" aria-hidden="true">📊</span><span class="vsx-title">可視化</span><span class="vsx-badge"></span></p>
-<p class="vsx-why" data-side="cq">finding は 2 か所に出る。<b>PR 上の bot コメント</b>と、default branch を対象としたリポジトリの <b>Security タブ</b>。それぞれ <b>Error / Warning / Note</b> で格付けされ、その格付けが品質スコアに反映される。</p>
+<p class="vsx-why" data-side="cq">Standard findings は 2 か所に出る。<b>PR 上の bot コメント</b>と、default branch を対象としたリポジトリの <b>Security タブ</b>。それぞれ <b>Error / Warning / Note</b> で格付けされ、その格付けが品質スコアに反映される。</p>
 <p class="vsx-why" data-side="cs">アラートは <b>severity と CWE</b> で格付けされ、Security overview に集約される。</p>
 </div>
 </details>
