@@ -60,7 +60,7 @@ links:
   </p>
 </div>
 
-## What Code Quality covers
+## What Code Quality covers <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-quality/code-quality" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 Generally available since **July 20, 2026**. Its job is to keep code reliable, maintainable, and covered by tests as it ages. It is a **standalone product that sits next to GitHub Advanced Security**, not a feature bundled inside it.
 
@@ -99,10 +99,18 @@ Generally available since **July 20, 2026**. Its job is to keep code reliable, m
 </div>
 </details>
 <details class="vsx-pick" name="cq-vs-topic">
+<summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">🧠</span><span class="vsx-name">AI findings</span></summary>
+<div class="vsx-pane">
+<p class="vsx-head"><span class="vsx-icon" aria-hidden="true">🧠</span><span class="vsx-title">AI findings</span><span class="vsx-badge"></span></p>
+<p class="vsx-why" data-side="cq">Same quality goals as Standard findings: <b>reliability and maintainability</b>, without predefined rules and across all languages. Runs <b>after merge on recently changed files on the default branch</b>, not on PRs. Results appear under <b>AI findings</b>. <a class="retro-link" href="https://docs.github.com/en/code-security/how-tos/maintain-quality-code/fix-findings-in-recent-merges" target="_blank" rel="noopener noreferrer">Docs ↗</a></p>
+<p class="vsx-why" data-side="cs"><b>AI Scan</b> detects security vulnerabilities <b>on PR changes only</b>, in selected <b>languages and frameworks not covered by CodeQL</b>, such as PHP, Bash, HCL, Dockerfiles, JSP and Blazor. No full-repository scan or backlog alerts. <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">Docs ↗</a></p>
+</div>
+</details>
+<details class="vsx-pick" name="cq-vs-topic">
 <summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">📊</span><span class="vsx-name">Reporting</span></summary>
 <div class="vsx-pane">
 <p class="vsx-head"><span class="vsx-icon" aria-hidden="true">📊</span><span class="vsx-title">Reporting</span><span class="vsx-badge"></span></p>
-<p class="vsx-why" data-side="cq">Findings land in two places: <b>bot comments on the pull request</b>, and the repository <b>Security tab</b> for the default branch. Each one is graded <b>Error / Warning / Note</b>, and those grades drive the quality score.</p>
+<p class="vsx-why" data-side="cq">Standard findings land in two places: <b>bot comments on the pull request</b>, and the repository <b>Security tab</b> for the default branch. Each one is graded <b>Error / Warning / Note</b>, and those grades drive the quality score.</p>
 <p class="vsx-why" data-side="cs">Alerts are graded by <b>severity and CWE</b>, and aggregated in Security overview.</p>
 </div>
 </details>
