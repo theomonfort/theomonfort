@@ -349,40 +349,88 @@ When a secret is found, **remediation matters more than detection**. At scale, d
 </div>
 </div>
 
-## Getting started (fastest path)
+## My recommended starting checklist <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/secret-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-secret-checklist" class="demo-toggle" /><label class="h2-demo" for="demo-secret-checklist">&#9658; DEMO</label>
 
-<div class="setup-cards">
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>Settings → Advanced Security</code>
-      <span class="setup-card-tag tag-cyan">▸ STEP 1 · PUSH PROTECTION</span>
-    </div>
-    <p>Blocks <strong>new</strong> secrets at push time.</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>Security → Secret scanning</code>
-      <span class="setup-card-tag tag-magenta">▸ STEP 2 · EXISTING LEAKS</span>
-    </div>
-    <p>Scans <strong>past history</strong> too. Rotate down the list.</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>… → Custom patterns</code>
-      <span class="setup-card-tag tag-cyan">▸ STEP 3 · CUSTOM PATTERNS</span>
-    </div>
-    <p>Your own token formats, by regex.</p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head">
-      <code>Org → … → Configurations</code>
-      <span class="setup-card-tag tag-magenta">▸ STEP 4 · ROLL OUT</span>
-    </div>
-    <p>One config applies all of it, org-wide.</p>
-  </div>
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-secret-checklist" aria-label="Close demo steps"></label>
+<div class="demo-window" role="group" aria-label="Demo steps">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Secret Scanning checklist</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-secret-checklist" aria-label="Close">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">1. INTERNAL SECRET PATTERNS</p>
+<p><a href="https://github.com/theomonfort-org/ghas-test-1/settings/security_analysis/custom_patterns/new" target="_blank" rel="noopener noreferrer">ghas-test-1 → New custom pattern ↗</a>: show <b>Secret format</b>, <b>Test string</b>, then <b>Save and dry run</b> before publishing.</p>
+</li>
+<li>
+<p class="demo-step-title">2. PUSH PROTECTION PATTERNS</p>
+<p><a href="https://github.com/enterprises/octodemo/settings/security_analysis/pattern_configurations" target="_blank" rel="noopener noreferrer">octodemo → Pattern configurations ↗</a>: review <b>False positives</b>, <b>Bypass rate</b>, and the <b>Enterprise setting</b> column.</p>
+</li>
+<li>
+<p class="demo-step-title">3. DIFFERENT RULES BEFORE MERGE</p>
+<p><a href="https://github.com/theomonfort-org/ghas-test-1/settings/rules/new?target=branch&amp;enforcement=disabled" target="_blank" rel="noopener noreferrer">ghas-test-1 → New branch ruleset ↗</a>: <b>Require secret scanning alerts are resolved → Generic patterns</b>. Target <code class="demo-path">main</code>; keep the ruleset disabled for a walkthrough.</p>
+</li>
+<li>
+<p class="demo-step-title">4. PUSH PROTECTION BYPASS</p>
+<p><a href="https://github.com/enterprises/octodemo/settings/security_analysis" target="_blank" rel="noopener noreferrer">octodemo → Security configurations ↗</a>: open the intended configuration, then <b>Push protection → Bypass privileges → Specific actors</b>.</p>
+<p class="demo-out">Enterprise settings can affect other repositories. Do not save or apply changes during a read-only demo.</p>
+</li>
+<li>
+<p class="demo-step-title">5. SECRET REMEDIATION CAMPAIGN</p>
+<p><a href="https://github.com/orgs/theomonfort-org/security/campaigns" target="_blank" rel="noopener noreferrer">theomonfort-org → Campaigns ↗</a>: <b>Create campaign → From secret scanning filters</b>. Scope to <b>ghas-test-1</b> and save as a draft.</p>
+<p><a href="https://github.com/theomonfort-org/ghas-test-1/security/secret-scanning" target="_blank" rel="noopener noreferrer">ghas-test-1 → Secret scanning alerts ↗</a></p>
+</li>
+<li>
+<p class="demo-step-title">6. STORE WORKFLOW SECRETS</p>
+<p><a href="https://github.com/theomonfort-org/ghas-test-1/settings/secrets/actions" target="_blank" rel="noopener noreferrer">ghas-test-1 → Actions secrets ↗</a>: show <b>New repository secret</b>. Do not enter a real secret during screen sharing.</p>
+</li>
+</ol>
+</div>
 </div>
 
-> ⚠️ Legacy org REST API fields were removed **2026-04-21**. Use the security configurations API.
+With **Secret Protection and push protection enabled**, this is the order I recommend.
+
+<div class="ctl-widget">
+<p class="ctl-hint">▸ OPEN A STEP FOR SETTINGS</p>
+<div class="ctl-list">
+<details class="ctl-item" name="ss-start">
+<summary class="ctl-btn"><span class="ctl-icon">1</span><span class="ctl-name">Add patterns for internal secrets, if any</span><span class="ctl-when">CUSTOM PATTERNS</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/customize-leak-detection/define-custom-patterns" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Configure</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/security_analysis/custom_patterns/new" target="_blank" rel="noopener noreferrer">New custom pattern ↗</a>: dry-run your token formats, then publish.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ss-start">
+<summary class="ctl-btn"><span class="ctl-icon">2</span><span class="ctl-name">Choose what push protection blocks</span><span class="ctl-when">PATTERNS</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/configure-additional-settings#specifying-patterns-to-include-in-push-protection-for-your-enterprise" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Review</span><span class="ctl-v"><a class="retro-link" href="https://github.com/enterprises/ENTERPRISE/settings/security_analysis/pattern_configurations" target="_blank" rel="noopener noreferrer">Pattern dashboard ↗</a>: check false positives and bypass rates, then choose which patterns to block.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ss-start">
+<summary class="ctl-btn"><span class="ctl-icon">3</span><span class="ctl-name">Add different rules before merge</span><span class="ctl-when">MERGE PROTECTION</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/prevent-future-leaks/block-merges-with-secrets" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Example</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/rules" target="_blank" rel="noopener noreferrer">Rulesets ↗</a>: <b>Require secret scanning alerts are resolved → Generic patterns</b>. Allow push; resolve alerts before merge to <code>main</code>. Separate ruleset bypass. Public preview.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ss-start">
+<summary class="ctl-btn"><span class="ctl-icon">4</span><span class="ctl-name">Choose who can bypass push protection</span><span class="ctl-when">ENTERPRISE</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/manage-bypass-requests/enable-delegated-bypass#enabling-delegated-bypass-for-an-enterprise" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Restrict</span><span class="ctl-v"><a class="retro-link" href="https://github.com/enterprises/ENTERPRISE/settings/security_analysis" target="_blank" rel="noopener noreferrer">Enterprise configurations ↗</a>: <b>Bypass privileges → Specific actors</b>. Save and apply the configuration.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ss-start">
+<summary class="ctl-btn"><span class="ctl-icon">5</span><span class="ctl-name">Create a campaign for existing secrets</span><span class="ctl-when">CAMPAIGNS</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/manage-security-alerts/remediate-alerts-at-scale/creating-managing-security-campaigns" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Remediate</span><span class="ctl-v"><a class="retro-link" href="https://github.com/orgs/ORG/security/campaigns" target="_blank" rel="noopener noreferrer">Security campaigns ↗</a>: select secret scanning alerts, assign owners and a deadline, then revoke or rotate.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="ss-start">
+<summary class="ctl-btn"><span class="ctl-icon">6</span><span class="ctl-name">Store workflow secrets in GitHub, not code</span><span class="ctl-when">ACTIONS SECRETS</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets#creating-secrets-for-a-repository" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Store</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/secrets/actions" target="_blank" rel="noopener noreferrer">Actions secrets ↗</a>: Settings → Secrets and variables → Actions → <b>New repository secret</b>.</span></p>
+</div>
+</details>
+</div>
+</div>
+
+URL templates: replace `ENTERPRISE`, `ORG`, `OWNER`, `REPO`.
 
 ## Availability by product
 
