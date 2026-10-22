@@ -127,6 +127,7 @@ links:
 <code class="demo-cmd">./demo/secret-scanning/01-push-protection.sh</code>
 <p class="demo-out">The push is <b>blocked</b> and the terminal prints an unblock URL.</p>
 <p>Show <b>which</b> patterns are push-protected, enterprise-wide: <a href="https://github.com/enterprises/octodemo/settings/security_analysis/pattern_configurations" target="_blank" rel="noopener noreferrer">octodemo → Pattern configurations ↗</a>. Flip a pattern in the <b>Enterprise setting</b> column; the <b>Alert total</b>, <b>False positives</b>, and <b>Bypass rate</b> columns back the noise-vs-risk call with real data.</p>
+<p>Jump directly to <a href="https://github.com/enterprises/octodemo/settings/security_analysis/pattern_configurations?query=github-default%3Adisabled&amp;page=0" target="_blank" rel="noopener noreferrer">patterns disabled by GitHub default ↗</a>. The filter is <code class="demo-path">github-default:disabled</code>: it filters GitHub defaults, not the current enterprise setting.</p>
 <p class="demo-out">Same page is revisited on the <b>What gets detected</b> slide, to dig out the generic patterns.</p>
 </li>
 <li>
@@ -137,7 +138,10 @@ links:
 <p>Push the same branch again.</p>
 <code class="demo-cmd">git push origin HEAD</code>
 <p>Open the resulting alert under <b>Security → Secret scanning</b> and show <b>who</b> bypassed it and <b>why</b>.</p>
-<p>To keep bypasses under control: <code class="demo-path">Settings → Advanced Security → Push protection</code>, set <b>Who can bypass push protection</b> to <b>Specific roles or teams</b> (= Delegated bypass).</p>
+<p>To keep bypasses under control: open <a href="https://github.com/theomonfort-org/ghas-test-1/settings/security_analysis" target="_blank" rel="noopener noreferrer">ghas-test-1 → Advanced Security ↗</a>, then set <b>Push protection → Who can bypass push protection for secret scanning</b> to <b>Specific roles or teams</b> (= Delegated bypass).</p>
+<p>Configure it across the org: open <a href="https://github.com/organizations/theomonfort-org/settings/security_products/configurations/edit/250834" target="_blank" rel="noopener noreferrer">theomonfort-org → Security configuration ↗</a>, set <b>Push protection</b> to <b>Enabled</b> and <b>Bypass privileges</b> to <b>Specific actors</b>, then select the actors. Click <b>Save configuration</b> and apply it to the target repos. Configuring delegated bypass at the org / enterprise level disables the repo-level setting.</p>
+<p>Demo the request flow as a <b>contributor without bypass privileges</b> (org owners / security managers can always bypass). Submit a request with a justification from the block page; reviewers receive an email notification.</p>
+<p>Review requests: <a href="https://github.com/theomonfort-org/ghas-test-1/security/secret_scanning/bypass_requests" target="_blank" rel="noopener noreferrer">ghas-test-1 → Push protection bypass requests ↗</a> (<b>Security and quality → Requests → Push protection bypass</b>). Filter by <b>All statuses → Open</b>, open a request, and show <b>Approve bypass request</b> / <b>Deny bypass request</b>. After approval, the requester pushes again.</p>
 <p>Gate the merge too: in <a href="https://github.com/theomonfort-org/ghas-test-1/settings/rules/new?target=branch&amp;enforcement=disabled" target="_blank" rel="noopener noreferrer">ghas-test-1 → New branch ruleset ↗</a>, turn on <b>Require secret scanning alerts are resolved</b> (Preview).</p>
 <p class="demo-out">An <b>I'll fix it later</b> secret is still an open alert, so the PR merge is blocked. <b>It's used in tests</b> doesn't block.</p>
 </li>
@@ -210,8 +214,8 @@ links:
 <ol class="demo-steps">
 <li>
 <p class="demo-step-title">WHERE THE GENERIC PATTERNS HIDE</p>
-<p>Open <a href="https://github.com/enterprises/octodemo/settings/security_analysis/pattern_configurations?query=&amp;page=0&amp;tab=native" target="_blank" rel="noopener noreferrer">octodemo → Pattern configurations ↗</a> and scroll the default patterns tab.</p>
-<p class="demo-out">It is one <b>flat list</b>: no category column, no provider / generic split, no filter. The generic patterns are in there, just never labelled as generic.</p>
+<p>Open <a href="https://github.com/enterprises/octodemo/settings/security_analysis/pattern_configurations?query=github-default%3Adisabled&amp;page=0" target="_blank" rel="noopener noreferrer">octodemo → Patterns disabled by GitHub default ↗</a>, prefiltered with <code class="demo-path">github-default:disabled</code>.</p>
+<p class="demo-out">It is one <b>flat list</b>, with no generic label. This filter matches the <b>GitHub default</b> value; it is not a generic-only filter.</p>
 <p>Point them out by name — these ten are the entire set:</p>
 <p><code class="demo-path">rsa_private_key</code> <code class="demo-path">openssh_private_key</code> <code class="demo-path">ec_private_key</code> <code class="demo-path">pgp_private_key</code> <code class="demo-path">generic_private_key</code> <code class="demo-path">mongodb_connection_string</code> <code class="demo-path">mysql_connection_url</code> <code class="demo-path">postgres_connection_string</code> <code class="demo-path">http_basic_authentication_header</code> <code class="demo-path">http_bearer_authentication_header</code></p>
 <p class="demo-out">Every one reads <b>Disabled</b> under <b>GitHub default</b>: detection is on, but push protection is off by default.</p>

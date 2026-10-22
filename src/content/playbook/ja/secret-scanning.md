@@ -127,6 +127,7 @@ links:
 <code class="demo-cmd">./demo/secret-scanning/01-push-protection.sh</code>
 <p class="demo-out">push が<b>ブロック</b>され、ターミナルに解除用の URL が表示される。</p>
 <p>どのパターンを push protection の対象にするかは Enterprise 単位で制御する：<a href="https://github.com/enterprises/octodemo/settings/security_analysis/pattern_configurations" target="_blank" rel="noopener noreferrer">octodemo → Pattern configurations ↗</a>。<b>Enterprise setting</b> 列でパターンごとに ON / OFF を切り替える。<b>Alert total</b>・<b>False positives</b>・<b>Bypass rate</b> が並ぶので、ノイズと risk のバランスを実データで説明できる。</p>
+<p><a href="https://github.com/enterprises/octodemo/settings/security_analysis/pattern_configurations?query=github-default%3Adisabled&amp;page=0" target="_blank" rel="noopener noreferrer">GitHub default が Disabled のパターン ↗</a> に直接移動できる。フィルターは <code class="demo-path">github-default:disabled</code>。Enterprise の現在の設定ではなく、GitHub のデフォルト値で絞り込む。</p>
 <p class="demo-out">同じページは <b>何を検出するのか</b> のスライドでも扱う（generic patterns を掘り出す）。</p>
 </li>
 <li>
@@ -137,7 +138,10 @@ links:
 <p>同じブランチをもう一度 push する。</p>
 <code class="demo-cmd">git push origin HEAD</code>
 <p><b>Security → Secret scanning</b> で作成されたアラートを開き、<b>誰が・どの理由で</b> bypass したかを見せる。</p>
-<p>bypass を野放しにしない設定：<code class="demo-path">Settings → Advanced Security → Push protection</code> で <b>Who can bypass push protection</b> を <b>Specific roles or teams</b> に（= Delegated bypass）。</p>
+<p>bypass を野放しにしない設定：<a href="https://github.com/theomonfort-org/ghas-test-1/settings/security_analysis" target="_blank" rel="noopener noreferrer">ghas-test-1 → Advanced Security ↗</a> の <b>Push protection → Who can bypass push protection for secret scanning</b> を <b>Specific roles or teams</b> に（= Delegated bypass）。</p>
+<p>Org でまとめて設定：<a href="https://github.com/organizations/theomonfort-org/settings/security_products/configurations/edit/250834" target="_blank" rel="noopener noreferrer">theomonfort-org → Security configuration ↗</a> で <b>Push protection</b> を <b>Enabled</b>、<b>Bypass privileges</b> を <b>Specific actors</b> にして対象を選ぶ。<b>Save configuration</b> 後、対象 repo に適用する。Org / Enterprise 側で delegated bypass を設定すると、repo 側の設定は変更できなくなる。</p>
+<p>申請フローは <b>bypass 権限のない contributor</b> で見せる（Org owner / security manager は常に bypass 可能）。ブロック画面から理由を添えて申請すると、レビュアーにメール通知が届く。</p>
+<p>申請一覧：<a href="https://github.com/theomonfort-org/ghas-test-1/security/secret_scanning/bypass_requests" target="_blank" rel="noopener noreferrer">ghas-test-1 → Push protection bypass requests ↗</a>（<b>Security and quality → Requests → Push protection bypass</b>）。<b>All statuses → Open</b> で絞り込み、申請を開いて <b>Approve bypass request</b> / <b>Deny bypass request</b> を見せる。承認後は申請者が再度 push する。</p>
 <p>merge でも止める：<a href="https://github.com/theomonfort-org/ghas-test-1/settings/rules/new?target=branch&amp;enforcement=disabled" target="_blank" rel="noopener noreferrer">ghas-test-1 → New branch ruleset ↗</a> で <b>Require secret scanning alerts are resolved</b>（Preview）を ON にする。</p>
 <p class="demo-out"><b>I'll fix it later</b> の secret は open アラートなので PR の merge がブロックされる。<b>It's used in tests</b> は止まらない。</p>
 </li>
@@ -210,8 +214,8 @@ links:
 <ol class="demo-steps">
 <li>
 <p class="demo-step-title">GENERIC PATTERNS はどこに隠れているか</p>
-<p><a href="https://github.com/enterprises/octodemo/settings/security_analysis/pattern_configurations?query=&amp;page=0&amp;tab=native" target="_blank" rel="noopener noreferrer">octodemo → Pattern configurations ↗</a> を開き、default patterns タブをスクロールする。</p>
-<p class="demo-out">一覧は<b>フラット</b>。カテゴリ列も provider / generic の区別も絞り込みもない。generic patterns は確かに存在するが、generic とは表示されない。</p>
+<p><a href="https://github.com/enterprises/octodemo/settings/security_analysis/pattern_configurations?query=github-default%3Adisabled&amp;page=0" target="_blank" rel="noopener noreferrer">octodemo → GitHub default が Disabled のパターン ↗</a> を開く。<code class="demo-path">github-default:disabled</code> で絞り込み済み。</p>
+<p class="demo-out">一覧は<b>フラット</b>で、generic とは表示されない。このフィルターは <b>GitHub default</b> の値で絞り込むもので、generic 専用のフィルターではない。</p>
 <p>名前で指し示す。この 10 個が generic patterns のすべて：</p>
 <p><code class="demo-path">rsa_private_key</code> <code class="demo-path">openssh_private_key</code> <code class="demo-path">ec_private_key</code> <code class="demo-path">pgp_private_key</code> <code class="demo-path">generic_private_key</code> <code class="demo-path">mongodb_connection_string</code> <code class="demo-path">mysql_connection_url</code> <code class="demo-path">postgres_connection_string</code> <code class="demo-path">http_basic_authentication_header</code> <code class="demo-path">http_bearer_authentication_header</code></p>
 <p class="demo-out">いずれも <b>GitHub default</b> は <b>Disabled</b>。検知は動くが、デフォルトでは push protection の対象外。</p>
