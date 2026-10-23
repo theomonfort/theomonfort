@@ -18,6 +18,9 @@ links:
     label: Cost center allocation
     url: https://docs.github.com/en/enterprise-cloud@latest/billing/reference/cost-center-allocation
   - group: 📖 公式ドキュメント
+    label: Billing reports reference
+    url: https://docs.github.com/en/billing/reference/billing-reports
+  - group: 📖 公式ドキュメント
     label: Budgets and alerts
     url: https://docs.github.com/en/billing/concepts/budgets-and-alerts
   - group: 📖 公式ドキュメント
@@ -60,18 +63,15 @@ org を増やしたりアクセス権を変えたりせず、部門やプロジ�
 
 </div>
 
-ライセンスと AI の費用は **ユーザー → Enterprise team → Org** の順（最初に該当するコストセンター）。<br />
-**GHE/GHAS ライセンス**の org 単位の配賦では、**最も古い org** を使う。
-
 1 つのセンターに複数種類のリソースを混在させ、複数 org から集められる。**Org team は割り当て不可**。Enterprise team を使う。
 
 **Enterprise の課金機能**で、従量課金ライセンスを含む従量料金が対象。前払いのボリューム契約やサブスクリプション課金は対象外。Azure 課金なら別の Azure サブスクリプションも指定できる。
 
 ## 複数のコストセンターに所属できる？ <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/billing/reference/cost-center-allocation" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**直接割り当ては 1 リソースにつき 1 つ。** 別のセンターに追加すると**移動**する。複数の team / org に所属しても、同じ料金を分割配賦しない。
+**直接割り当ては 1 リソースにつき 1 つ。** 別のセンターに追加すると**移動**する。複数の team / org に所属しても、同じ料金を分割しない。
 
-**ユーザー単位のライセンスと Copilot の費用**は、最初に該当する配賦先が優先される。
+**ライセンスと Copilot AI の費用**は、最初に該当するコストセンターに計上する。
 
 <div class="tbl-compact">
 
@@ -79,14 +79,16 @@ org を増やしたりアクセス権を変えたりせず、部門やプロジ�
 | --- | --- |
 | 1 | ユーザーを**直接割り当てた**コストセンター |
 | 2 | Enterprise team のセンター。複数なら**最も早く作成された team** |
-| 3 | **ライセンスが課金される org** のセンター。所属する全 org ではない |
+| 3 | **課金される org のセンター**。複数 org の場合：<br />**GHE/GHAS：** 最も古い org。**Copilot：** ライセンス付与元から選ばれた 1 つの org。 |
 | 4 | Enterprise。表示は **Enterprise Only** |
 
 </div>
 
-**例：** Alice はセンター A に直接割り当てられ、B の team にも所属。Copilot の費用は **A**。B に割り当てた repo で実行する Actions の費用は **B**。Actions は人ではなく repo にひも付く。
+**確認：** <a class="retro-link" href="https://docs.github.com/en/billing/reference/billing-reports#detailed-usage-report" target="_blank" rel="noopener noreferrer">詳細利用レポート ↗</a>で `username` とライセンスの `sku` を絞り、`organization` と `cost_center_name` を確認する。
 
-再割り当ては**今後の利用**に反映され、過去の料金は変更しない。
+**例：** Alice は A に直接割り当てられ、B の team にも所属：Copilot → **A**。B の repo で動く Actions → **B**。誰が実行しても同じ。
+
+再割り当ては**今後の利用だけ**に反映され、過去の料金は変更しない。
 
 ## どんな予算を設定できる？ <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/billing/how-tos/set-up-budgets" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 

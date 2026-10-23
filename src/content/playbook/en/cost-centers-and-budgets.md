@@ -18,6 +18,9 @@ links:
     label: Cost center allocation
     url: https://docs.github.com/en/enterprise-cloud@latest/billing/reference/cost-center-allocation
   - group: 📖 Official docs
+    label: Billing reports reference
+    url: https://docs.github.com/en/billing/reference/billing-reports
+  - group: 📖 Official docs
     label: Budgets and alerts
     url: https://docs.github.com/en/billing/concepts/budgets-and-alerts
   - group: 📖 Official docs
@@ -60,18 +63,15 @@ Group spending by department or project without creating another org or changing
 
 </div>
 
-For licence and AI costs: **User → Enterprise team → Org** (first match wins).<br />
-For **GHE/GHAS licences**, org-level allocation uses the **oldest org**.
-
 One center can mix many resources, including resources from several orgs. **Org teams are not assignable**; enterprise teams are.
 
 Cost centers are an **enterprise billing** feature for metered charges, including metered licenses, not prepaid volume or subscription billing. With Azure billing, a center can use a different Azure subscription.
 
 ## Can you belong to several cost centers? <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/billing/reference/cost-center-allocation" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**One direct assignment per resource.** Adding it to another center **moves** it. Multiple team/org memberships do not split the same charge across centers.
+**One direct assignment per resource.** Adding it elsewhere **moves** it. Multiple team/org memberships do not split the same charge.
 
-For **user-based license and Copilot costs**, the first applicable destination wins:
+For **licence and Copilot AI costs**, the first matching cost center wins:
 
 <div class="tbl-compact">
 
@@ -79,14 +79,16 @@ For **user-based license and Copilot costs**, the first applicable destination w
 | --- | --- |
 | 1 | User's **directly assigned** cost center |
 | 2 | Enterprise team's center; if several qualify, the **team created first** wins |
-| 3 | Center of the **organization billed for the license**, not every org the user joins |
+| 3 | **Billed org's cost center**. Multiple orgs?<br />**GHE/GHAS:** oldest org. **Copilot:** one selected licensing org. |
 | 4 | Enterprise, shown as **Enterprise Only** |
 
 </div>
 
-**Example:** Alice is directly in center A and belongs to a team in B. Her Copilot costs go to **A**. Actions she runs in a repo assigned to B go to **B**, because Actions follows the repository, not the person.
+**Verify:** in the <a class="retro-link" href="https://docs.github.com/en/billing/reference/billing-reports#detailed-usage-report" target="_blank" rel="noopener noreferrer">detailed usage report ↗</a>, filter `username` + licence `sku`, then check `organization` and `cost_center_name`.
 
-Reassignment affects **future usage**, not historical charges.
+**Example:** Alice is directly in A and in a team in B: Copilot → **A**. Actions on a repo assigned to B → **B**, regardless of who runs them.
+
+Reassignment affects **future usage only**, not historical charges.
 
 ## Budget options <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/billing/how-tos/set-up-budgets" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
