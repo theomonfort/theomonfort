@@ -53,10 +53,10 @@ Group spending by department or project without creating another org or changing
 
 | Resource added | Costs counted in the cost center |
 | --- | --- |
-| 👤 User | Copilot licence, GHE licence, GHAS licence, AI usage |
+| 👤 User | GHE/GHAS/Copilot License + AI usage |
 | 👥 Enterprise team | Same as User, automatically updated as membership changes |
 | 📦 Repository | Actions, Codespaces, Packages, Git LFS |
-| 🏢 Organization | Repo usage + licences billed to the org + AI usage from Copilot licences granted by the org |
+| 🏢 Organization | Repo usage + GHE/GHAS/Copilot License billed to the org + AI usage from Copilot licences granted by the org |
 
 </div>
 

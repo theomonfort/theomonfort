@@ -53,10 +53,10 @@ org を増やしたりアクセス権を変えたりせず、部門やプロジ�
 
 | 追加するリソース | コストセンターに計上される費用 |
 | --- | --- |
-| 👤 ユーザー | Copilot ライセンス、GHE ライセンス、GHAS ライセンス、AI 利用 |
+| 👤 ユーザー | GHE/GHAS/Copilot ライセンス + AI 利用 |
 | 👥 Enterprise team | ユーザーと同じ。メンバーの加入と脱退に合わせて自動更新 |
 | 📦 リポジトリ | Actions、Codespaces、Packages、Git LFS |
-| 🏢 Organization | repo の利用 + org に請求されるライセンス + org が付与した Copilot ライセンスによる AI 利用 |
+| 🏢 Organization | repo の利用 + org に請求される GHE/GHAS/Copilot ライセンス + org が付与した Copilot ライセンスによる AI 利用 |
 
 </div>
 
