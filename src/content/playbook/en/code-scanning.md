@@ -103,7 +103,9 @@ links:
 <summary class="det-btn"><span class="det-icon" aria-hidden="true">🔬</span><span class="det-name">CodeQL (the engine)</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🔬</span><span class="det-title">CodeQL — the analysis engine</span></p>
-<p class="det-why">The semantic analysis engine GitHub <b>acquired from Semmle in 2019</b>. It is the default engine on GitHub, but it also <b>runs outside GitHub</b> — the CodeQL CLI works in any CI, or locally on your laptop.</p>
+<p class="det-why">GitHub's default semantic analysis engine (<b>acquired from Semmle, 2019</b>). <b>CodeQL CLI</b> also runs locally or in other CI systems.</p>
+<p class="det-why"><b>Supported languages:</b> C/C++, C#, Go, Java/Kotlin, JavaScript/TypeScript, Python, Ruby, Rust and Swift, plus <b>GitHub Actions workflows</b>.</p>
+<p class="det-doc">As of 2026-10-23. <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/codeql/codeql-code-scanning#about-codeql" target="_blank" rel="noopener noreferrer">📘 Supported languages documentation ↗</a></p>
 </div>
 </details>
 <details class="det-pick" name="cs-vs-codeql">

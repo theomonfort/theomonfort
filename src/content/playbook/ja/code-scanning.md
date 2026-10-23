@@ -104,6 +104,8 @@ links:
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🔬</span><span class="det-title">CodeQL — 解析エンジン</span></p>
 <p class="det-why">GitHub が <b>2019 年に Semmle から獲得</b> したセマンティック解析エンジン。GitHub の既定エンジンではあるが、<b>GitHub の外でも動く</b> — CodeQL CLI を使えば他社 CI でもローカルでも実行できる。</p>
+<p class="det-why"><b>対応言語:</b> C/C++、C#、Go、Java/Kotlin、JavaScript/TypeScript、Python、Ruby、Rust、Swift。<b>GitHub Actions ワークフロー</b>も解析対象。</p>
+<p class="det-doc">2026-10-23 時点。<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/codeql/codeql-code-scanning#about-codeql" target="_blank" rel="noopener noreferrer">📘 対応言語の公式ドキュメント ↗</a></p>
 </div>
 </details>
 <details class="det-pick" name="cs-vs-codeql">
