@@ -45,20 +45,22 @@ links:
   </p>
 </div>
 
-## コストセンターに何を割り当てる？ <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/billing/how-tos/products/use-cost-centers" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## コストセンターに何を割り当てる？ <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/billing/reference/cost-center-allocation" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 org を増やしたりアクセス権を変えたりせず、部門やプロジェクト別に支出をまとめる。
 
 <div class="tbl-compact">
 
-| 割り当てられるリソース | 配賦される費用 |
+| 追加するリソース | コストセンターに計上される費用 |
 | --- | --- |
-| 👤 ユーザー | 従量課金の Copilot / GHE / Advanced Security ライセンスと Copilot AI 利用 |
-| 👥 Enterprise team | メンバーのユーザー単位の費用。加入と脱退が自動反映 |
-| 📦 リポジトリ | Actions、Codespaces、Packages、Git LFS の利用 |
-| 🏢 Organization | repo 単位の利用と、その org に課金されるライセンスのフォールバック先 |
+| 👤 ユーザー | Copilot ライセンス、GHE ライセンス、GHAS ライセンス、AI 利用 |
+| 👥 Enterprise team | ユーザーと同じ。メンバーの加入と脱退に合わせて自動更新 |
+| 📦 リポジトリ | Actions、Codespaces、Packages、Git LFS |
+| 🏢 Organization | repo の利用 + org に請求されるライセンス + org が付与した Copilot ライセンスによる AI 利用 |
 
 </div>
+
+ライセンスと AI の費用は **ユーザー → Enterprise team → Org** の順。最初に該当するコストセンターに計上する。
 
 1 つのセンターに複数種類のリソースを混在させ、複数 org から集められる。**Org team は割り当て不可**。Enterprise team を使う。
 

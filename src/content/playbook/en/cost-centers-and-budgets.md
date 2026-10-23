@@ -45,20 +45,22 @@ links:
   </p>
 </div>
 
-## Cost centers: what can you assign? <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/billing/how-tos/products/use-cost-centers" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## Cost centers: what can you assign? <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/billing/reference/cost-center-allocation" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 Group spending by department or project without creating another org or changing access.
 
 <div class="tbl-compact">
 
-| Assignable resource | Spending attributed to it |
+| Resource added | Costs counted in the cost center |
 | --- | --- |
-| 👤 User | Metered Copilot / GHE / Advanced Security licenses, plus Copilot AI usage |
-| 👥 Enterprise team | Its members' user-based costs; membership updates automatically |
-| 📦 Repository | Actions, Codespaces, Packages, Git LFS usage |
-| 🏢 Organization | Repository-based usage and fallback for licenses billed to that org |
+| 👤 User | Copilot licence, GHE licence, GHAS licence, AI usage |
+| 👥 Enterprise team | Same as User, automatically updated as membership changes |
+| 📦 Repository | Actions, Codespaces, Packages, Git LFS |
+| 🏢 Organization | Repo usage + licences billed to the org + AI usage from Copilot licences granted by the org |
 
 </div>
+
+For licence and AI costs: **User → Enterprise team → Org**. The first matching cost center receives the charge.
 
 One center can mix many resources, including resources from several orgs. **Org teams are not assignable**; enterprise teams are.
 
