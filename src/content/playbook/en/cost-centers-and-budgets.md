@@ -50,7 +50,7 @@ links:
 
 ## Cost centers: what can you assign? <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/billing/reference/cost-center-allocation" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-Group spending by department or project without creating another org or changing access.
+Cost centers group **enterprise metered spending**, including metered licences, by department or project without creating orgs or changing access. Prepaid volume and subscription billing are excluded; with Azure billing, each center can use a different Azure subscription.
 
 <div class="tbl-compact">
 
@@ -62,10 +62,6 @@ Group spending by department or project without creating another org or changing
 | 🏢 Organization | Repo usage + GHE/GHAS/Copilot License billed to the org + AI usage from Copilot licences granted by the org |
 
 </div>
-
-One center can mix many resources, including resources from several orgs. **Org teams are not assignable**; enterprise teams are.
-
-Cost centers are an **enterprise billing** feature for metered charges, including metered licenses, not prepaid volume or subscription billing. With Azure billing, a center can use a different Azure subscription.
 
 ## Can you belong to several cost centers? <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/billing/reference/cost-center-allocation" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 

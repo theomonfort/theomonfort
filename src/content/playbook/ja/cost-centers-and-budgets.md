@@ -50,7 +50,7 @@ links:
 
 ## コストセンターに何を割り当てる？ <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/billing/reference/cost-center-allocation" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-org を増やしたりアクセス権を変えたりせず、部門やプロジェクト別に支出をまとめる。
+コストセンターは、org の追加やアクセス権の変更なしで、**Enterprise の従量料金**（従量課金ライセンスを含む）を部門やプロジェクト別にまとめる機能。前払いのボリューム契約やサブスクリプション課金は対象外。Azure 課金では、センターごとに別の Azure サブスクリプションも指定できる。
 
 <div class="tbl-compact">
 
@@ -62,10 +62,6 @@ org を増やしたりアクセス権を変えたりせず、部門やプロジ�
 | 🏢 Organization | repo の利用 + org に請求される GHE/GHAS/Copilot ライセンス + org が付与した Copilot ライセンスによる AI 利用 |
 
 </div>
-
-1 つのセンターに複数種類のリソースを混在させ、複数 org から集められる。**Org team は割り当て不可**。Enterprise team を使う。
-
-**Enterprise の課金機能**で、従量課金ライセンスを含む従量料金が対象。前払いのボリューム契約やサブスクリプション課金は対象外。Azure 課金なら別の Azure サブスクリプションも指定できる。
 
 ## 複数のコストセンターに所属できる？ <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/billing/reference/cost-center-allocation" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
