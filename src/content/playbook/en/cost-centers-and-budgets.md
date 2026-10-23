@@ -60,7 +60,8 @@ Group spending by department or project without creating another org or changing
 
 </div>
 
-For licence and AI costs: **User → Enterprise team → Org**. The first matching cost center receives the charge.
+For licence and AI costs: **User → Enterprise team → Org** (first match wins).<br />
+For **GHE/GHAS licences**, org-level allocation uses the **oldest org**.
 
 One center can mix many resources, including resources from several orgs. **Org teams are not assignable**; enterprise teams are.
 
