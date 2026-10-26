@@ -393,40 +393,40 @@ Secret が見つかった時にやることは **検知より修復が大事**�
 **Secret Protection と push protection を有効化したら**、この順番で進めるのがおすすめ。
 
 <div class="ctl-widget">
-<p class="ctl-hint">▸ ステップを開くと設定リンクを表示</p>
+<p class="ctl-hint">▸ 完了したステップにチェック。ステップを開くと設定リンクを表示</p>
 <div class="ctl-list">
 <details class="ctl-item" name="ss-start">
-<summary class="ctl-btn"><span class="ctl-icon">1</span><span class="ctl-name">社内独自の secret があればパターンを追加</span><span class="ctl-when">CUSTOM PATTERNS</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/customize-leak-detection/define-custom-patterns" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="ss-start-1" /><span class="ctl-icon">1</span><span class="ctl-name" id="ss-start-1">社内独自の secret があればパターンを追加</span><span class="ctl-when">CUSTOM PATTERNS</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/customize-leak-detection/define-custom-patterns" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">設定</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/security_analysis/custom_patterns/new" target="_blank" rel="noopener noreferrer">New custom pattern ↗</a>: トークン形式を dry run で確認してから公開。</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-start">
-<summary class="ctl-btn"><span class="ctl-icon">2</span><span class="ctl-name">Push protection のブロック対象を決める</span><span class="ctl-when">PATTERNS</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/configure-additional-settings#specifying-patterns-to-include-in-push-protection-for-your-enterprise" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="ss-start-2" /><span class="ctl-icon">2</span><span class="ctl-name" id="ss-start-2">Push protection のブロック対象を決める</span><span class="ctl-when">PATTERNS</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/configure-additional-settings#specifying-patterns-to-include-in-push-protection-for-your-enterprise" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">確認</span><span class="ctl-v"><a class="retro-link" href="https://github.com/enterprises/ENTERPRISE/settings/security_analysis/pattern_configurations" target="_blank" rel="noopener noreferrer">Pattern dashboard ↗</a>: 誤検知率と bypass 率を見て、ブロックするパターンを選ぶ。</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-start">
-<summary class="ctl-btn"><span class="ctl-icon">3</span><span class="ctl-name">Merge 前に別の保護ルールを追加</span><span class="ctl-when">MERGE PROTECTION</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/prevent-future-leaks/block-merges-with-secrets" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="ss-start-3" /><span class="ctl-icon">3</span><span class="ctl-name" id="ss-start-3">Merge 前に別の保護ルールを追加</span><span class="ctl-when">MERGE PROTECTION</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/prevent-future-leaks/block-merges-with-secrets" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">例</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/rules" target="_blank" rel="noopener noreferrer">Rulesets ↗</a>: <b>Require secret scanning alerts are resolved → Generic patterns</b> を選択。Push は許可し、<code>main</code> への merge 前にアラート解決を必須にする。Ruleset の bypass は別設定。Public preview。</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-start">
-<summary class="ctl-btn"><span class="ctl-icon">4</span><span class="ctl-name">Push protection の bypass 権限を決める</span><span class="ctl-when">ENTERPRISE</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/manage-bypass-requests/enable-delegated-bypass#enabling-delegated-bypass-for-an-enterprise" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="ss-start-4" /><span class="ctl-icon">4</span><span class="ctl-name" id="ss-start-4">Push protection の bypass 権限を決める</span><span class="ctl-when">ENTERPRISE</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/manage-bypass-requests/enable-delegated-bypass#enabling-delegated-bypass-for-an-enterprise" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">制限</span><span class="ctl-v"><a class="retro-link" href="https://github.com/enterprises/ENTERPRISE/settings/security_analysis" target="_blank" rel="noopener noreferrer">Enterprise configurations ↗</a>: <b>Bypass privileges → Specific actors</b> を設定し、保存して適用。</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-start">
-<summary class="ctl-btn"><span class="ctl-icon">5</span><span class="ctl-name">既存の secret に対応する campaign を作る</span><span class="ctl-when">CAMPAIGNS</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/manage-security-alerts/remediate-alerts-at-scale/creating-managing-security-campaigns" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="ss-start-5" /><span class="ctl-icon">5</span><span class="ctl-name" id="ss-start-5">既存の secret に対応する campaign を作る</span><span class="ctl-when">CAMPAIGNS</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/manage-security-alerts/remediate-alerts-at-scale/creating-managing-security-campaigns" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">対応</span><span class="ctl-v"><a class="retro-link" href="https://github.com/orgs/ORG/security/campaigns" target="_blank" rel="noopener noreferrer">Security campaigns ↗</a>: secret scanning アラートを選び、担当と期限を決めて revoke / rotate。</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-start">
-<summary class="ctl-btn"><span class="ctl-icon">6</span><span class="ctl-name">ワークフローの secret は GitHub に登録</span><span class="ctl-when">ACTIONS SECRETS</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets#creating-secrets-for-a-repository" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="ss-start-6" /><span class="ctl-icon">6</span><span class="ctl-name" id="ss-start-6">ワークフローの secret は GitHub に登録</span><span class="ctl-when">ACTIONS SECRETS</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets#creating-secrets-for-a-repository" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">保存</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/secrets/actions" target="_blank" rel="noopener noreferrer">Actions secrets ↗</a>: コードに書かず、Settings → Secrets and variables → Actions → <b>New repository secret</b> で登録。</span></p>
 </div>

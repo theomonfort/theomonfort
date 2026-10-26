@@ -793,7 +793,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
         return;
       }
     }
-    if (t && t.matches('input,textarea,select')) return;
+    if (t && t.matches('input:not(.ctl-check),textarea,select')) return;
     const section = document.querySelector<HTMLElement>('.playbook-detail');
     if (!section) return;
     const present = document.body.classList.contains('present-mode');
@@ -3905,6 +3905,23 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .prose-akq .ctl-btn:focus-visible { outline: 2px solid #ffb000; outline-offset: 2px; }
   .prose-akq .ctl-icon { flex: none; font-size: 1em; line-height: 1; }
   .prose-akq .ctl-name { flex: 0 1 auto; min-width: 0; overflow-wrap: break-word; }
+  .prose-akq .ctl-check {
+    flex: none;
+    width: 1.1em;
+    height: 1.1em;
+    min-width: 24px;
+    min-height: 24px;
+    margin: 0;
+    font: inherit;
+    accent-color: #9bbc0f;
+    color-scheme: dark;
+    cursor: pointer;
+  }
+  .prose-akq .ctl-check:focus-visible { outline: 2px solid #ffb000; outline-offset: 2px; }
+  .prose-akq .ctl-check:checked ~ .ctl-name {
+    color: #9bbc0f;
+    text-decoration: line-through;
+  }
   .prose-akq .ctl-when {
     flex: none;
     margin-left: auto;
@@ -4009,6 +4026,14 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       font-size: 0.85em;
     }
     .prose-akq .ctl-icon { grid-area: icon; align-self: start; }
+    .prose-akq .ctl-btn:has(.ctl-check) {
+      grid-template-columns: auto auto minmax(0, 1fr) auto;
+      grid-template-areas:
+        "check icon name toggle"
+        "check icon when toggle"
+        "check icon doc  toggle";
+    }
+    .prose-akq .ctl-check { grid-area: check; align-self: start; }
     .prose-akq .ctl-name { grid-area: name; }
     .prose-akq .ctl-when { grid-area: when; justify-self: start; margin-left: 0; }
     .prose-akq .ctl-doc { grid-area: doc; justify-self: start; }

@@ -558,40 +558,40 @@ Copilot Autofix は **対応するアラートに修正パッチを提案**す�
 検知の確認 → 新規コードの保護 → バックログの解消。この順番で進める。
 
 <div class="ctl-widget">
-<p class="ctl-hint">▸ ステップを開くと設定リンクを表示</p>
+<p class="ctl-hint">▸ 完了したステップにチェック。ステップを開くと設定リンクを表示</p>
 <div class="ctl-list">
 <details class="ctl-item" name="cs-start">
-<summary class="ctl-btn"><span class="ctl-icon">1</span><span class="ctl-name">CodeQL を有効化し、カバレッジを確認</span><span class="ctl-when">ACTIVATE</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configure-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-1" /><span class="ctl-icon">1</span><span class="ctl-name" id="cs-start-1">CodeQL を有効化し、カバレッジを確認</span><span class="ctl-when">ACTIVATE</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configure-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">開始</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/security_analysis" target="_blank" rel="noopener noreferrer">CodeQL settings ↗</a>: <b>Default setup</b> から開始。初回スキャン、対象言語、Actions 使用量を確認してから security configuration で展開。</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-start">
-<summary class="ctl-btn"><span class="ctl-icon">2</span><span class="ctl-name">必要に応じて追加のクエリパックを導入</span><span class="ctl-when">OPTIONAL</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/reference/code-scanning/workflow-configuration-options#specifying-codeql-query-packs" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-2" /><span class="ctl-icon">2</span><span class="ctl-name" id="cs-start-2">必要に応じて追加のクエリパックを導入</span><span class="ctl-when">OPTIONAL</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/reference/code-scanning/workflow-configuration-options#specifying-codeql-query-packs" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">調整</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/security_analysis" target="_blank" rel="noopener noreferrer">CodeQL configuration ↗</a>: C/C++ 向けの <a class="retro-link" href="https://github.com/github/codeql-coding-standards" target="_blank" rel="noopener noreferrer">MISRA / CERT / AUTOSAR packs ↗</a> や社内クエリを追加。ビルドに合わせて設定する。</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-start">
-<summary class="ctl-btn"><span class="ctl-icon">3</span><span class="ctl-name">重大な検出結果がある merge をブロック</span><span class="ctl-when">RULESETS</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/manage-your-configuration/set-merge-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-3" /><span class="ctl-icon">3</span><span class="ctl-name" id="cs-start-3">重大な検出結果がある merge をブロック</span><span class="ctl-when">RULESETS</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/manage-your-configuration/set-merge-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">例</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/rules" target="_blank" rel="noopener noreferrer">Rulesets ↗</a>: <b>Require code scanning results</b>（CodeQL）。<b>Security alerts: High or higher</b>、<b>Alerts: Errors</b>。<code>main</code> を対象にし、bypass 権限も制限。</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-start">
-<summary class="ctl-btn"><span class="ctl-icon">4</span><span class="ctl-name">PR 向けの AI Scan を有効化</span><span class="ctl-when">AI SCAN</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections#enabling-ai-scan" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-4" /><span class="ctl-icon">4</span><span class="ctl-name" id="cs-start-4">PR 向けの AI Scan を有効化</span><span class="ctl-when">AI SCAN</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections#enabling-ai-scan" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">有効化</span><span class="ctl-v"><a class="retro-link" href="https://github.com/organizations/ORG/settings/security_analysis" target="_blank" rel="noopener noreferrer">Org settings ↗</a>: Enterprise の許可と <b>Code Security AI Credits</b> 予算を確認してから、Org 全体の対象 repo で有効化。PR 上の助言のみで、merge ブロックやバックログはなし。</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-start">
-<summary class="ctl-btn"><span class="ctl-icon">5</span><span class="ctl-name">AI による修正支援を準備</span><span class="ctl-when">AUTOFIX</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-5" /><span class="ctl-icon">5</span><span class="ctl-name" id="cs-start-5">AI による修正支援を準備</span><span class="ctl-when">AUTOFIX</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">準備</span><span class="ctl-v"><a class="retro-link" href="https://github.com/organizations/ORG/settings/security_analysis" target="_blank" rel="noopener noreferrer">Org settings ↗</a>: 従来の Autofix は無効化されていなければ CodeQL と共に有効。Draft PR 作成には任意で <b>Agentic Autofix</b> を有効化し、AI credits + Actions の予算を確保。</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-start">
-<summary class="ctl-btn"><span class="ctl-icon">6</span><span class="ctl-name">Security campaign を作成</span><span class="ctl-when">CAMPAIGNS</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/remediate-alerts-at-scale/creating-managing-security-campaigns" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-6" /><span class="ctl-icon">6</span><span class="ctl-name" id="cs-start-6">Security campaign を作成</span><span class="ctl-when">CAMPAIGNS</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/remediate-alerts-at-scale/creating-managing-security-campaigns" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">対応</span><span class="ctl-v"><a class="retro-link" href="https://github.com/orgs/ORG/security/campaigns" target="_blank" rel="noopener noreferrer">Campaigns ↗</a>: code scanning アラートを選び、リスク順に優先度をつけ、担当と期限を決める。小さなバックログから始める。</span></p>
 </div>

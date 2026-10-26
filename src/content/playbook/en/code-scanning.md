@@ -558,40 +558,40 @@ Detection is the easy half; **what happens after the alert** is the real work. A
 Validate detection, protect new code, then reduce the backlog.
 
 <div class="ctl-widget">
-<p class="ctl-hint">▸ OPEN A STEP FOR SETTINGS</p>
+<p class="ctl-hint">▸ CHECK COMPLETED STEPS. OPEN A STEP FOR SETTINGS</p>
 <div class="ctl-list">
 <details class="ctl-item" name="cs-start">
-<summary class="ctl-btn"><span class="ctl-icon">1</span><span class="ctl-name">Enable CodeQL and verify coverage</span><span class="ctl-when">ACTIVATE</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configure-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-1" /><span class="ctl-icon">1</span><span class="ctl-name" id="cs-start-1">Enable CodeQL and verify coverage</span><span class="ctl-when">ACTIVATE</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configure-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">Start</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/security_analysis" target="_blank" rel="noopener noreferrer">CodeQL settings ↗</a>: start with <b>Default setup</b>. Check the first scan, languages and Actions usage before rolling out with security configurations.</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-start">
-<summary class="ctl-btn"><span class="ctl-icon">2</span><span class="ctl-name">Add extra query packs if needed</span><span class="ctl-when">OPTIONAL</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/reference/code-scanning/workflow-configuration-options#specifying-codeql-query-packs" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-2" /><span class="ctl-icon">2</span><span class="ctl-name" id="cs-start-2">Add extra query packs if needed</span><span class="ctl-when">OPTIONAL</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/reference/code-scanning/workflow-configuration-options#specifying-codeql-query-packs" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">Customize</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/security_analysis" target="_blank" rel="noopener noreferrer">CodeQL configuration ↗</a>: add <a class="retro-link" href="https://github.com/github/codeql-coding-standards" target="_blank" rel="noopener noreferrer">MISRA / CERT / AUTOSAR packs ↗</a> for C/C++, or internal queries. Adapt the configuration to your build.</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-start">
-<summary class="ctl-btn"><span class="ctl-icon">3</span><span class="ctl-name">Block high-risk findings before merge</span><span class="ctl-when">RULESETS</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/manage-your-configuration/set-merge-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-3" /><span class="ctl-icon">3</span><span class="ctl-name" id="cs-start-3">Block high-risk findings before merge</span><span class="ctl-when">RULESETS</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/manage-your-configuration/set-merge-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">Example</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/rules" target="_blank" rel="noopener noreferrer">Rulesets ↗</a>: <b>Require code scanning results</b> (CodeQL). <b>Security alerts: High or higher</b>; <b>Alerts: Errors</b>. Target <code>main</code> and restrict bypass.</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-start">
-<summary class="ctl-btn"><span class="ctl-icon">4</span><span class="ctl-name">Enable AI Scan for pull requests</span><span class="ctl-when">AI SCAN</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections#enabling-ai-scan" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-4" /><span class="ctl-icon">4</span><span class="ctl-name" id="cs-start-4">Enable AI Scan for pull requests</span><span class="ctl-when">AI SCAN</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections#enabling-ai-scan" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">Opt in</span><span class="ctl-v"><a class="retro-link" href="https://github.com/organizations/ORG/settings/security_analysis" target="_blank" rel="noopener noreferrer">Org settings ↗</a>: enterprise permission + <b>Code Security AI Credits</b> budget first; then enable org-wide for eligible repos. PR-only advice, no merge gate or backlog.</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-start">
-<summary class="ctl-btn"><span class="ctl-icon">5</span><span class="ctl-name">Set up assisted remediation</span><span class="ctl-when">AUTOFIX</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-5" /><span class="ctl-icon">5</span><span class="ctl-name" id="cs-start-5">Set up assisted remediation</span><span class="ctl-when">AUTOFIX</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">Prepare</span><span class="ctl-v"><a class="retro-link" href="https://github.com/organizations/ORG/settings/security_analysis" target="_blank" rel="noopener noreferrer">Org settings ↗</a>: classic Autofix is on with CodeQL unless disabled. Optionally enable <b>Agentic Autofix</b> for draft PRs; budget AI credits + Actions.</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-start">
-<summary class="ctl-btn"><span class="ctl-icon">6</span><span class="ctl-name">Create security campaigns</span><span class="ctl-when">CAMPAIGNS</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/remediate-alerts-at-scale/creating-managing-security-campaigns" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-6" /><span class="ctl-icon">6</span><span class="ctl-name" id="cs-start-6">Create security campaigns</span><span class="ctl-when">CAMPAIGNS</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/remediate-alerts-at-scale/creating-managing-security-campaigns" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">Remediate</span><span class="ctl-v"><a class="retro-link" href="https://github.com/orgs/ORG/security/campaigns" target="_blank" rel="noopener noreferrer">Campaigns ↗</a>: select code scanning alerts, prioritize risk, set a manager and due date. Start with a small backlog.</span></p>
 </div>
