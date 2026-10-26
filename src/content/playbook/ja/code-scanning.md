@@ -60,6 +60,12 @@ links:
     label: Billing for GitHub Advanced Security
     url: https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security
   - group: 💰 料金
+    label: Copilot AI credits（個人プラン）
+    url: https://docs.github.com/en/copilot/concepts/billing-and-usage/individuals/billing
+  - group: 💰 料金
+    label: Copilot AI credits（組織 / Enterprise の共有枠）
+    url: https://docs.github.com/en/copilot/concepts/billing-and-usage/organizations-and-enterprises/billing
+  - group: 💰 料金
     label: Billing for GitHub Actions
     url: https://docs.github.com/en/billing/concepts/product-billing/github-actions
   - group: 📖 公式ドキュメント
@@ -631,7 +637,7 @@ jobs:
 
 > 💡 `runs-on` を **self-hosted runner** にすれば Actions 分の課金は発生しない。大規模展開でコストが問題になる場合の第一手。
 
-## 料金: 3 つのメーター <a class="h2-doc" href="https://github.com/security/plans" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## 料金: 3 つのメーター <a class="h2-doc" href="https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security#how-ai-feature-usage-is-billed" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 <p class="spec-hint">▸ ＋ をクリックすると詳細が開きます</p>
 
@@ -685,15 +691,19 @@ jobs:
 <div class="spec-list">
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔎</span><span class="spec-key">AI Scan</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what"><b>2026-10-22 時点</b>: オプトインで <b>PR 上のみ</b>を検査し、修正依頼がなくても <b>Code Security AI Credits</b> を消費。Code scanning の有効化は必要だが、<b>CodeQL default setup や Copilot ライセンスは不要</b>。Org の private / internal repo は Code Security または GHAS が必要。Public repo も対象。有効化前にクレジットと予算を確認する。<a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">Docs ↗</a></p>
+<p class="spec-what"><b>2026-10-26 時点</b>: PR の自動検知は、修正依頼がなくても <b>Code Security AI Credits</b> を消費。<b>組織所有の repo</b> では、<b>PR 作成者の個人クレジットではなく</b>、組織の課金アカウント（単独の Org または Enterprise）が負担する。Copilot ライセンス不要。<a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections#billing" target="_blank" rel="noopener noreferrer">課金 Docs ↗</a></p>
 </details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🆓</span><span class="spec-key">Copilot Autofix</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">Copilot ライセンス <b>不要</b>、AI クレジットも <b>消費しない</b>。Code Security があれば追加費用ゼロで使える。</p>
+<p class="spec-what"><b>Generate fix → Create PR with fix</b> を含む従来の修正提案は、<b>AI クレジット消費なし</b>。Copilot ライセンス不要。Code Security に含まれ、public repo では無料。<a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning#choosing-an-autofix-type" target="_blank" rel="noopener noreferrer">Docs ↗</a></p>
 </details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">💸</span><span class="spec-key">Agentic Autofix</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what"><b>2026-10-19 時点</b>、<b>Code Security AI Credits + Actions 分</b>を消費。Copilot ライセンス不要。対象の付属クレジットを先に使い、超過分は public repo も従量課金。<b>Code Security AI Credits</b> の SKU 予算を設定し、付属枠の消費後はハード予算で追加の従量利用を止められる。課金画面の AI usage では <b>Advanced Security</b> として表示。</p>
+<p class="spec-what"><b>2026-10-26 時点</b>: <b>Security → Assign to Copilot</b> や campaign からの割り当ては、<b>Code Security AI Credits + Actions 分</b>を消費。<b>組織所有の repo</b> では、自分で割り当てても<b>個人クレジットではなく、Org / Enterprise の課金アカウント</b>が負担する。Copilot ライセンス不要。<b>Code Security AI Credits</b> の SKU 予算を設定できる。<a class="retro-link" href="https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security#how-ai-feature-usage-is-billed" target="_blank" rel="noopener noreferrer">課金 Docs ↗</a></p>
+</details>
+<details class="spec-item" name="cs-billing">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">👤</span><span class="spec-key">Copilot Chat / agent</span><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what"><b>Copilot Chat</b> や<b>通常のクラウドエージェントのタスク</b>で脆弱性の修正を依頼する場合は、Agentic Autofix ではなく Copilot の利用。<b>自分の Copilot プラン</b>の AI クレジットを消費し、個人プランなら個人の枠、Business / Enterprise なら <b>Org / Enterprise の共有枠</b>から差し引かれる。<a class="retro-link" href="https://docs.github.com/en/copilot/concepts/billing-and-usage/individuals/billing" target="_blank" rel="noopener noreferrer">個人プラン ↗</a> / <a class="retro-link" href="https://docs.github.com/en/copilot/concepts/billing-and-usage/organizations-and-enterprises/billing" target="_blank" rel="noopener noreferrer">組織プラン ↗</a></p>
 </details>
 </div>
 </td>

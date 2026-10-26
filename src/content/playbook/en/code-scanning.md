@@ -60,6 +60,12 @@ links:
     label: Billing for GitHub Advanced Security
     url: https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security
   - group: 💰 Pricing
+    label: Copilot AI credits (individual plans)
+    url: https://docs.github.com/en/copilot/concepts/billing-and-usage/individuals/billing
+  - group: 💰 Pricing
+    label: Copilot AI credits (organization and enterprise pool)
+    url: https://docs.github.com/en/copilot/concepts/billing-and-usage/organizations-and-enterprises/billing
+  - group: 💰 Pricing
     label: Billing for GitHub Actions
     url: https://docs.github.com/en/billing/concepts/product-billing/github-actions
   - group: 📖 Official Documentation
@@ -631,7 +637,7 @@ jobs:
 
 > 💡 Point `runs-on` at a **self-hosted runner** and the Actions minutes are not billed — the first lever when scan cost bites at scale.
 
-## Pricing: three meters <a class="h2-doc" href="https://github.com/security/plans" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## Pricing: three meters <a class="h2-doc" href="https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security#how-ai-feature-usage-is-billed" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 <p class="spec-hint">▸ + UNFOLDS THE DETAIL</p>
 
@@ -685,15 +691,19 @@ jobs:
 <div class="spec-list">
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔎</span><span class="spec-key">AI Scan</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">As of <b>2026-10-22</b>: opt-in detection on <b>PRs only</b>, using <b>Code Security AI Credits</b> even without a fix request. Requires code scanning enabled, <b>not CodeQL default setup or a Copilot license</b>. Private/internal organization repos need Code Security or GHAS; public repos are also eligible. Review credits and budgets before enabling. <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">Docs ↗</a></p>
+<p class="spec-what">As of <b>2026-10-26</b>: automatic PR detection consumes <b>Code Security AI Credits</b>, even without a fix request. On an <b>organization-owned repo</b>, the organization's billing account pays (standalone org or enterprise), <b>not the PR author's personal credits</b>. No Copilot license required. <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections#billing" target="_blank" rel="noopener noreferrer">Billing docs ↗</a></p>
 </details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🆓</span><span class="spec-key">Copilot Autofix</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">No Copilot license needed and it <b>does not consume AI credits</b>. Included with Code Security at no additional cost.</p>
+<p class="spec-what">Classic suggestions, including <b>Generate fix → Create PR with fix</b>, consume <b>no AI credits</b>. No Copilot license required; included with Code Security and free on public repos. <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning#choosing-an-autofix-type" target="_blank" rel="noopener noreferrer">Docs ↗</a></p>
 </details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">💸</span><span class="spec-key">Agentic Autofix</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">As of <b>2026-10-19</b>, consumes <b>Code Security AI Credits + Actions minutes</b>; no Copilot license required. Eligible included credits are used first, then usage is metered, including on public repos. Set a <b>Code Security AI Credits</b> SKU budget; a hard budget can block further metered usage after the allowance is exhausted. Usage appears under <b>Advanced Security</b> in billing's AI usage.</p>
+<p class="spec-what">As of <b>2026-10-26</b>: <b>Security → Assign to Copilot</b> or campaign assignment consumes <b>Code Security AI Credits + Actions minutes</b>. On an <b>organization-owned repo</b>, the org or enterprise billing account pays, <b>not your personal credits</b>, even when you assign the alert yourself. No Copilot license required. Set a <b>Code Security AI Credits</b> SKU budget. <a class="retro-link" href="https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security#how-ai-feature-usage-is-billed" target="_blank" rel="noopener noreferrer">Billing docs ↗</a></p>
+</details>
+<details class="spec-item" name="cs-billing">
+<summary class="spec-btn"><span class="spec-icon" aria-hidden="true">👤</span><span class="spec-key">Copilot Chat / agent</span><span class="spec-toggle" aria-hidden="true"></span></summary>
+<p class="spec-what">Asking <b>Copilot Chat</b> or starting a <b>regular cloud-agent task</b> to fix a vulnerability is Copilot usage, not Agentic Autofix. It consumes AI credits under <b>your Copilot plan</b>: your allowance on an individual plan, or the <b>shared org / enterprise pool</b> on Business / Enterprise. <a class="retro-link" href="https://docs.github.com/en/copilot/concepts/billing-and-usage/individuals/billing" target="_blank" rel="noopener noreferrer">Individual ↗</a> / <a class="retro-link" href="https://docs.github.com/en/copilot/concepts/billing-and-usage/organizations-and-enterprises/billing" target="_blank" rel="noopener noreferrer">Organization ↗</a></p>
 </details>
 </div>
 </td>
