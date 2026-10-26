@@ -393,40 +393,40 @@ When a secret is found, **remediation matters more than detection**. At scale, d
 With **Secret Protection and push protection enabled**, this is the order I recommend.
 
 <div class="ctl-widget">
-<p class="ctl-hint">▸ OPEN A STEP FOR SETTINGS</p>
+<p class="ctl-hint">▸ CHECK COMPLETED STEPS. OPEN A STEP FOR SETTINGS</p>
 <div class="ctl-list">
 <details class="ctl-item" name="ss-start">
-<summary class="ctl-btn"><span class="ctl-icon">1</span><span class="ctl-name">Add patterns for internal secrets, if any</span><span class="ctl-when">CUSTOM PATTERNS</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/customize-leak-detection/define-custom-patterns" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="ss-start-1" /><span class="ctl-icon">1</span><span class="ctl-name" id="ss-start-1">Add patterns for internal secrets, if any</span><span class="ctl-when">CUSTOM PATTERNS</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/customize-leak-detection/define-custom-patterns" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">Configure</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/security_analysis/custom_patterns/new" target="_blank" rel="noopener noreferrer">New custom pattern ↗</a>: dry-run your token formats, then publish.</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-start">
-<summary class="ctl-btn"><span class="ctl-icon">2</span><span class="ctl-name">Choose what push protection blocks</span><span class="ctl-when">PATTERNS</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/configure-additional-settings#specifying-patterns-to-include-in-push-protection-for-your-enterprise" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="ss-start-2" /><span class="ctl-icon">2</span><span class="ctl-name" id="ss-start-2">Choose what push protection blocks</span><span class="ctl-when">PATTERNS</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/configure-additional-settings#specifying-patterns-to-include-in-push-protection-for-your-enterprise" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">Review</span><span class="ctl-v"><a class="retro-link" href="https://github.com/enterprises/ENTERPRISE/settings/security_analysis/pattern_configurations" target="_blank" rel="noopener noreferrer">Pattern dashboard ↗</a>: check false positives and bypass rates, then choose which patterns to block.</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-start">
-<summary class="ctl-btn"><span class="ctl-icon">3</span><span class="ctl-name">Add different rules before merge</span><span class="ctl-when">MERGE PROTECTION</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/prevent-future-leaks/block-merges-with-secrets" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="ss-start-3" /><span class="ctl-icon">3</span><span class="ctl-name" id="ss-start-3">Add different rules before merge</span><span class="ctl-when">MERGE PROTECTION</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/prevent-future-leaks/block-merges-with-secrets" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">Example</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/rules" target="_blank" rel="noopener noreferrer">Rulesets ↗</a>: <b>Require secret scanning alerts are resolved → Generic patterns</b>. Allow push; resolve alerts before merge to <code>main</code>. Separate ruleset bypass. Public preview.</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-start">
-<summary class="ctl-btn"><span class="ctl-icon">4</span><span class="ctl-name">Choose who can bypass push protection</span><span class="ctl-when">ENTERPRISE</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/manage-bypass-requests/enable-delegated-bypass#enabling-delegated-bypass-for-an-enterprise" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="ss-start-4" /><span class="ctl-icon">4</span><span class="ctl-name" id="ss-start-4">Choose who can bypass push protection</span><span class="ctl-when">ENTERPRISE</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/manage-bypass-requests/enable-delegated-bypass#enabling-delegated-bypass-for-an-enterprise" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">Restrict</span><span class="ctl-v"><a class="retro-link" href="https://github.com/enterprises/ENTERPRISE/settings/security_analysis" target="_blank" rel="noopener noreferrer">Enterprise configurations ↗</a>: <b>Bypass privileges → Specific actors</b>. Save and apply the configuration.</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-start">
-<summary class="ctl-btn"><span class="ctl-icon">5</span><span class="ctl-name">Create a campaign for existing secrets</span><span class="ctl-when">CAMPAIGNS</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/manage-security-alerts/remediate-alerts-at-scale/creating-managing-security-campaigns" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="ss-start-5" /><span class="ctl-icon">5</span><span class="ctl-name" id="ss-start-5">Create a campaign for existing secrets</span><span class="ctl-when">CAMPAIGNS</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/manage-security-alerts/remediate-alerts-at-scale/creating-managing-security-campaigns" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">Remediate</span><span class="ctl-v"><a class="retro-link" href="https://github.com/orgs/ORG/security/campaigns" target="_blank" rel="noopener noreferrer">Security campaigns ↗</a>: select secret scanning alerts, assign owners and a deadline, then revoke or rotate.</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-start">
-<summary class="ctl-btn"><span class="ctl-icon">6</span><span class="ctl-name">Store workflow secrets in GitHub, not code</span><span class="ctl-when">ACTIONS SECRETS</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets#creating-secrets-for-a-repository" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="ss-start-6" /><span class="ctl-icon">6</span><span class="ctl-name" id="ss-start-6">Store workflow secrets in GitHub, not code</span><span class="ctl-when">ACTIONS SECRETS</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets#creating-secrets-for-a-repository" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">Store</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/secrets/actions" target="_blank" rel="noopener noreferrer">Actions secrets ↗</a>: Settings → Secrets and variables → Actions → <b>New repository secret</b>.</span></p>
 </div>
