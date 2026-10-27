@@ -204,7 +204,6 @@ Drop in [`actions/dependency-review-action`](https://github.com/actions/dependen
 | --- | --- | --- |
 | **New / updated dependencies** | License-compliance ruleset | **Active** blocks noncompliant merges. |
 | **Existing dependencies** | <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-supply-chain/establish-provenance-and-integrity/export-dependencies-as-sbom" target="_blank" rel="noopener noreferrer">SBOM ↗</a> → <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/rest/dependency-graph/license-compliance#check-license-compliance-for-packages" target="_blank" rel="noopener noreferrer">Package-check API ↗</a> | Explicit audit, no automatic rescan. |
-| **Copilot suggestions** | <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/copilot-surfaces/copilot-in-ides#references-to-matching-public-code" target="_blank" rel="noopener noreferrer">Public-code references ↗</a> | Matches, **not a license-policy check**. |
 | **Copied / legacy code** | <a class="retro-link" href="https://www.blackduck.com/software-composition-analysis-tools/black-duck-sca.html" target="_blank" rel="noopener noreferrer">Black Duck: snippets ↗</a><br/><a class="retro-link" href="https://scancode-toolkit.readthedocs.io/en/stable/explanation/scancode-license-detection.html" target="_blank" rel="noopener noreferrer">ScanCode: notices ↗</a> | Scan files, **new or old**. |
 
 <p><b>Demo:</b> <a class="retro-link" href="https://github.com/theomonfort-org/ghas-test-1/network/dependencies" target="_blank" rel="noopener noreferrer">ghas-test-1 → Export SBOM ↗</a></p>
@@ -220,9 +219,8 @@ Drop in [`actions/dependency-review-action`](https://github.com/actions/dependen
 </div>
 </details>
 <details class="ctl-item" name="license-check-methods">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔎</span><span class="ctl-name">Source-code coverage</span><span class="ctl-when">Matches ≠ full audit</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔎</span><span class="ctl-name">Source-code coverage</span><span class="ctl-when">Dedicated scanners</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p>Copilot checks suggestions against an index of <b>public GitHub code</b>. Depending on policy, matching suggestions are blocked or shown with sources and known licenses. It is not an arbitrary-code audit API, does not cover every new code change, and does not prove that unmatched code has no license obligations.</p>
 <p>For an existing codebase or manually copied new code, use a dedicated scanner: <b>Black Duck's snippet-scanning capability</b> identifies partial open-source matches; <b>ScanCode</b> detects license texts, notices, and copyright statements in files. These tools are separate from Code Security. Their detection methods are different, not interchangeable guarantees. Review findings and applicable obligations.</p>
 </div>
 </details>

@@ -204,7 +204,6 @@ updates:
 | --- | --- | --- |
 | **新規 / 更新された依存関係** | License compliance のルールセット | **Active** で非準拠のマージをブロック。 |
 | **既存の依存関係** | <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-supply-chain/establish-provenance-and-integrity/export-dependencies-as-sbom" target="_blank" rel="noopener noreferrer">SBOM ↗</a> → <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/rest/dependency-graph/license-compliance#check-license-compliance-for-packages" target="_blank" rel="noopener noreferrer">Package-check API ↗</a> | 明示的に監査。自動再スキャンではない。 |
-| **Copilot の提案** | <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/copilot-surfaces/copilot-in-ides#references-to-matching-public-code" target="_blank" rel="noopener noreferrer">Public code の参照 ↗</a> | コードの照合。<b>ライセンスポリシーの判定ではない。</b> |
 | **コピー済み / 既存コード** | <a class="retro-link" href="https://www.blackduck.com/software-composition-analysis-tools/black-duck-sca.html" target="_blank" rel="noopener noreferrer">Black Duck：断片照合 ↗</a><br/><a class="retro-link" href="https://scancode-toolkit.readthedocs.io/en/stable/explanation/scancode-license-detection.html" target="_blank" rel="noopener noreferrer">ScanCode：表記検出 ↗</a> | ファイルをスキャン。<b>新旧を問わない</b>。 |
 
 <p><b>Demo:</b> <a class="retro-link" href="https://github.com/theomonfort-org/ghas-test-1/network/dependencies" target="_blank" rel="noopener noreferrer">ghas-test-1 → Export SBOM ↗</a></p>
@@ -220,9 +219,8 @@ updates:
 </div>
 </details>
 <details class="ctl-item" name="license-check-methods">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔎</span><span class="ctl-name">ソースコードの対象範囲</span><span class="ctl-when">照合 ≠ 全件監査</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔎</span><span class="ctl-name">ソースコードの対象範囲</span><span class="ctl-when">専用スキャナー</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p>Copilot は提案を <b>GitHub の public code</b> のインデックスと照合する。ポリシーに応じて一致した提案をブロック、または出典と既知のライセンスを表示する。任意のコードを監査する API ではなく、すべての新規コード変更を確認するものでもない。一致がなくてもライセンス上の義務がないとは限らない。</p>
 <p>既存のコードベースや手動でコピーした新規コードには専用スキャナーを使う。<b>Black Duck の snippet scan 機能</b>は部分的な OSS コードの一致を検出し、<b>ScanCode</b> はファイル内のライセンス本文、表記、著作権表示を検出する。Code Security とは別ツールであり、検出方法も異なる。同じ保証を与えるものではないため、結果と適用される義務を確認する。</p>
 </div>
 </details>
