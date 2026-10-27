@@ -5,6 +5,9 @@ summary: "依存関係のライセンスポリシーを Enterprise 全体で定�
 category: security
 status: "GA"
 source: "https://github.blog/changelog/2026-10-16-open-source-license-compliance-generally-available/"
+demoLinks:
+  - label: "octodemo → 既定のライセンスポリシー"
+    url: "https://github.com/enterprises/octodemo/settings/advanced_security/license_policy/default"
 ---
 
 ### 何が変わる？

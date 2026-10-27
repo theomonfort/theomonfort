@@ -5,6 +5,9 @@ summary: "Define an enterprise-wide dependency license policy and enforce it bef
 category: security
 status: "GA"
 source: "https://github.blog/changelog/2026-10-16-open-source-license-compliance-generally-available/"
+demoLinks:
+  - label: "octodemo → Default license policy"
+    url: "https://github.com/enterprises/octodemo/settings/advanced_security/license_policy/default"
 ---
 
 ### What's new?
