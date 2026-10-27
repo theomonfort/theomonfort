@@ -163,24 +163,71 @@ updates:
 <div class="ctl-list">
 <details class="ctl-item" name="license-compliance">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📜</span><span class="ctl-name">ポリシーの一元管理</span><span class="ctl-when">Action との違い</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body"><p>Dependency Review Action はライセンスの allow / deny list で制御する。License compliance は <b>Enterprise 共通ポリシー</b>をブランチルールセットで適用する。</p></div>
+<div class="ctl-body">
+<p>Dependency Review Action の allow / deny list とは異なり、許可するライセンスを <b>Enterprise 共通ポリシー</b>で定義する。Enterprise、Organization、Repository のブランチルールセットで適用できる。</p>
+<p><b>Repo → Settings → License policy</b> では、継承した項目は読み取り専用。その repo だけに適用する例外を承認でき、ローカルの項目は Enterprise ポリシーを変えずに削除できる。</p>
+</div>
 </details>
 <details class="ctl-item" name="license-compliance">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">💰</span><span class="ctl-name">利用条件</span><span class="ctl-when">Enterprise + Code Security</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body"><p>Public repo も含め <b>Enterprise Cloud + Code Security</b> が必要。データ所在地にも対応。一方、Dependency Review Action は <b>Public repo なら無料</b>で、Private repo は Code Security が必要。</p></div>
+<div class="ctl-body">
+<p>Public repo も含め <b>Enterprise Cloud + Code Security</b> が必要。統合版の <b>GHAS</b> ライセンスにも Code Security が含まれる。Secret Protection だけでは利用不可。データ所在地にも対応。</p>
+<p><b>Dependency graph の有効化が必要</b>。Dependabot alerts や自動更新は前提条件ではない。依存関係のライセンス表示と SBOM エクスポートには GHAS は不要。</p>
+<p>一方、Dependency Review Action は <b>Public repo なら無料</b>で、Private repo は Code Security が必要。</p>
+</div>
 </details>
 <details class="ctl-item" name="license-compliance">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛡️</span><span class="ctl-name">段階的な適用</span><span class="ctl-when">Evaluate / Active</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body"><p><b>Active</b> は非準拠の PR をブロック。<b>Evaluate</b> は指摘のみで直接ブロックしない。ただし、会話の解決を必須にするブランチ保護があると、指摘がマージを妨げる場合がある。</p></div>
+<div class="ctl-body">
+<p>ブランチルールセットで <b>Require license compliance results before merging</b> を有効にする。<b>Active</b> は依存関係の変更がポリシーに違反すると、PR の作成ではなくマージをブロックする。</p>
+<p><b>Evaluate</b> はチェックと指摘のみで直接ブロックしない。ただし、会話の解決を必須にするブランチ保護があると、指摘がマージを妨げる場合がある。</p>
+</div>
 </details>
 <details class="ctl-item" name="license-compliance">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">✅</span><span class="ctl-name">違反の解消</span><span class="ctl-when">例外の承認</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body"><p>依存関係の削除 / 置き換え、ポリシーの変更、または <b>Enterprise Open-Source License Manager</b> が承認した例外で対応する。</p></div>
+<div class="ctl-body">
+<p>依存関係の削除 / 置き換え、ポリシーの変更、または <b>PR のライセンス違反から理由を添えて例外を申請</b>する。指摘が出ただけでは申請は作成されない。</p>
+<p><b>Enterprise Open-Source License Manager</b> が Enterprise のセキュリティ画面とメールで申請を受け、承認 / 却下する。パッケージ、ライセンス、パッケージパターンを対象に、repo または Enterprise 単位で例外を承認できる。他のマージ条件は引き続き必要。</p>
+<p><a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-supply-chain/manage-your-dependency-security/configure-license-policies" target="_blank" rel="noopener noreferrer">ポリシーと例外の設定 ↗</a></p>
+</div>
 </details>
 </div>
 </div>
 
-**対象**：PR で追加 / 変更された依存関係。検出済みの推移的依存も含む。コピーされたコードやバイナリのスキャナーではない。
+**対象**：PR で追加 / 変更された依存関係。検出済みの推移的依存も含む。コピーされたコードやバイナリのスキャナーではない。既存の依存関係は別途監査する。
+
+<p><b>Demo:</b> <a class="retro-link" href="https://github.com/enterprises/octodemo/settings/advanced_security/license_policy/default" target="_blank" rel="noopener noreferrer">octodemo → 共通ライセンスポリシー ↗</a> / <a class="retro-link" href="https://github.com/enterprises/octodemo/security/bypass-requests/license-compliance?request_status=open" target="_blank" rel="noopener noreferrer">未処理の例外申請 ↗</a></p>
+
+## ライセンス確認：既存と新規 <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/supply-chain-security/open-source-license-compliance" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+| 対象 | 確認方法 | 結果 / 制約 |
+| --- | --- | --- |
+| **新規 / 更新された依存関係** | License compliance のルールセット | **Active** で非準拠のマージをブロック。 |
+| **既存の依存関係** | <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-supply-chain/establish-provenance-and-integrity/export-dependencies-as-sbom" target="_blank" rel="noopener noreferrer">SBOM ↗</a> → <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/rest/dependency-graph/license-compliance#check-license-compliance-for-packages" target="_blank" rel="noopener noreferrer">Package-check API ↗</a> | 明示的に監査。自動再スキャンではない。 |
+| **Copilot の提案** | <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/copilot-surfaces/copilot-in-ides#references-to-matching-public-code" target="_blank" rel="noopener noreferrer">Public code の参照 ↗</a> | コードの照合。<b>ライセンスポリシーの判定ではない。</b> |
+| **コピー済み / 既存コード** | <a class="retro-link" href="https://www.blackduck.com/software-composition-analysis-tools/black-duck-sca.html" target="_blank" rel="noopener noreferrer">Black Duck：断片照合 ↗</a><br/><a class="retro-link" href="https://scancode-toolkit.readthedocs.io/en/stable/explanation/scancode-license-detection.html" target="_blank" rel="noopener noreferrer">ScanCode：表記検出 ↗</a> | ファイルをスキャン。<b>新旧を問わない</b>。 |
+
+<p><b>Demo:</b> <a class="retro-link" href="https://github.com/theomonfort-org/ghas-test-1/network/dependencies" target="_blank" rel="noopener noreferrer">ghas-test-1 → Export SBOM ↗</a></p>
+
+<div class="ctl-widget">
+<div class="ctl-list">
+<details class="ctl-item" name="license-check-methods">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📦</span><span class="ctl-name">既存の依存関係を監査</span><span class="ctl-when">SBOM → API</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p><b>Repo → Insights → Dependency graph → Export SBOM</b> を開く。SPDX JSON の <code>packages[].licenseConcluded</code> に、判明している依存関係のライセンスが入る。<code>dataLicense</code> はパッケージではなく SBOM 文書自体のライセンス。</p>
+<p><code>packages[].externalRefs</code> の <code>referenceType: "purl"</code> から Package URL（PURL）を取り出し、<code>purls</code> として <code>POST /repos/{owner}/{repo}/license-compliance/package-checks</code> に送る。repo に適用されるポリシーと例外に照らして確認する。上限は <b>1 回 40 PURL</b>（2026-10-27 時点）。ルールセットを有効にしても、既存の依存関係にこの監査が自動実行されるわけではない。</p>
+<p><code>NOASSERTION</code> やライセンス情報の欠落は<b>不明</b>を意味し、承認済み / ライセンス不要という意味ではない。この API は依存関係が対象で、コード断片は検査しない。agent がパッケージを追加する前の確認にも使える。</p>
+</div>
+</details>
+<details class="ctl-item" name="license-check-methods">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔎</span><span class="ctl-name">ソースコードの対象範囲</span><span class="ctl-when">照合 ≠ 全件監査</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p>Copilot は提案を <b>GitHub の public code</b> のインデックスと照合する。ポリシーに応じて一致した提案をブロック、または出典と既知のライセンスを表示する。任意のコードを監査する API ではなく、すべての新規コード変更を確認するものでもない。一致がなくてもライセンス上の義務がないとは限らない。</p>
+<p>既存のコードベースや手動でコピーした新規コードには専用スキャナーを使う。<b>Black Duck の snippet scan 機能</b>は部分的な OSS コードの一致を検出し、<b>ScanCode</b> はファイル内のライセンス本文、表記、著作権表示を検出する。Code Security とは別ツールであり、検出方法も異なる。同じ保証を与えるものではないため、結果と適用される義務を確認する。</p>
+</div>
+</details>
+</div>
+</div>
 
 ## AI triage: alert を agent に渡す
 

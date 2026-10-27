@@ -163,24 +163,71 @@ Drop in [`actions/dependency-review-action`](https://github.com/actions/dependen
 <div class="ctl-list">
 <details class="ctl-item" name="license-compliance">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📜</span><span class="ctl-name">Central policy</span><span class="ctl-when">Beyond the Action</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body"><p>The Dependency Review Action uses license allow / deny lists. License compliance adds an <b>enterprise-wide policy</b> applied through branch rulesets.</p></div>
+<div class="ctl-body">
+<p>Unlike the Dependency Review Action's allow / deny lists, define allowed licenses once in the <b>enterprise policy</b>. Apply it through branch rulesets at enterprise, organization, or repository scope.</p>
+<p>In <b>Repo → Settings → License policy</b>, inherited entries are read-only. Approved exceptions can apply only to that repository; local entries can be removed without changing the enterprise policy.</p>
+</div>
 </details>
 <details class="ctl-item" name="license-compliance">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">💰</span><span class="ctl-name">Access</span><span class="ctl-when">Enterprise + Code Security</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body"><p><b>Enterprise Cloud + Code Security</b> is required, including on public repositories. Data residency is supported. By contrast, the Dependency Review Action is <b>free on public repositories</b>; private repositories require Code Security.</p></div>
+<div class="ctl-body">
+<p><b>Enterprise Cloud + Code Security</b> is required, including on public repositories. The combined <b>GHAS</b> license includes Code Security; Secret Protection alone is not enough. Data residency is supported.</p>
+<p><b>Dependency graph must be enabled.</b> Dependabot alerts and automatic updates are not prerequisites. Viewing dependency licenses and exporting an SBOM do not require GHAS.</p>
+<p>By contrast, the Dependency Review Action is <b>free on public repositories</b>; private repositories require Code Security.</p>
+</div>
 </details>
 <details class="ctl-item" name="license-compliance">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛡️</span><span class="ctl-name">Enforcement</span><span class="ctl-when">Evaluate / Active</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body"><p><b>Active</b> blocks noncompliant PRs. <b>Evaluate</b> annotates without directly blocking, but branch protection requiring conversation resolution can still block on annotations.</p></div>
+<div class="ctl-body">
+<p>Enable <b>Require license compliance results before merging</b> in a branch ruleset. <b>Active</b> blocks the merge, not PR creation, when dependency changes violate policy.</p>
+<p><b>Evaluate</b> runs checks and annotates without directly blocking, but branch protection requiring conversation resolution can still block on annotations.</p>
+</div>
 </details>
 <details class="ctl-item" name="license-compliance">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">✅</span><span class="ctl-name">Resolve violations</span><span class="ctl-when">Approved exceptions</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body"><p>Remove or replace the dependency, amend the policy, or obtain an exception approved by an <b>Enterprise Open-Source License Manager</b>.</p></div>
+<div class="ctl-body">
+<p>Remove or replace the dependency, amend the policy, or <b>request an exception from the PR's license violation</b> and provide a justification. An annotation does not automatically create a request.</p>
+<p>An <b>Enterprise Open-Source License Manager</b> receives the request in enterprise security views and by email, then approves or rejects it. Approval can cover a package, license, or package pattern at repository or enterprise scope. Other merge checks still apply.</p>
+<p><a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-supply-chain/manage-your-dependency-security/configure-license-policies" target="_blank" rel="noopener noreferrer">Policy and exception setup ↗</a></p>
+</div>
 </details>
 </div>
 </div>
 
-**Scope:** new or changed PR dependencies, including detected transitive dependencies. Not a copied-code or binary scanner.
+**Scope:** new or changed PR dependencies, including detected transitive dependencies. Not a copied-code or binary scanner. Existing dependencies need a separate audit.
+
+<p><b>Demo:</b> <a class="retro-link" href="https://github.com/enterprises/octodemo/settings/advanced_security/license_policy/default" target="_blank" rel="noopener noreferrer">octodemo → Central license policy ↗</a> / <a class="retro-link" href="https://github.com/enterprises/octodemo/security/bypass-requests/license-compliance?request_status=open" target="_blank" rel="noopener noreferrer">Open exception requests ↗</a></p>
+
+## License checks: existing vs new <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/supply-chain-security/open-source-license-compliance" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+| Scope | Check | Result / limit |
+| --- | --- | --- |
+| **New / updated dependencies** | License-compliance ruleset | **Active** blocks noncompliant merges. |
+| **Existing dependencies** | <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-supply-chain/establish-provenance-and-integrity/export-dependencies-as-sbom" target="_blank" rel="noopener noreferrer">SBOM ↗</a> → <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/rest/dependency-graph/license-compliance#check-license-compliance-for-packages" target="_blank" rel="noopener noreferrer">Package-check API ↗</a> | Explicit audit, no automatic rescan. |
+| **Copilot suggestions** | <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/copilot-surfaces/copilot-in-ides#references-to-matching-public-code" target="_blank" rel="noopener noreferrer">Public-code references ↗</a> | Matches, **not a license-policy check**. |
+| **Copied / legacy code** | <a class="retro-link" href="https://www.blackduck.com/software-composition-analysis-tools/black-duck-sca.html" target="_blank" rel="noopener noreferrer">Black Duck: snippets ↗</a><br/><a class="retro-link" href="https://scancode-toolkit.readthedocs.io/en/stable/explanation/scancode-license-detection.html" target="_blank" rel="noopener noreferrer">ScanCode: notices ↗</a> | Scan files, **new or old**. |
+
+<p><b>Demo:</b> <a class="retro-link" href="https://github.com/theomonfort-org/ghas-test-1/network/dependencies" target="_blank" rel="noopener noreferrer">ghas-test-1 → Export SBOM ↗</a></p>
+
+<div class="ctl-widget">
+<div class="ctl-list">
+<details class="ctl-item" name="license-check-methods">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📦</span><span class="ctl-name">Audit existing dependencies</span><span class="ctl-when">SBOM → API</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p>Open <b>Repo → Insights → Dependency graph → Export SBOM</b>. In the SPDX JSON, dependency licenses appear in <code>packages[].licenseConcluded</code>, when known. <code>dataLicense</code> describes the SBOM document, not its packages.</p>
+<p>Extract package URLs (PURLs) from <code>packages[].externalRefs</code> entries with <code>referenceType: "purl"</code>, then send them as <code>purls</code> to <code>POST /repos/{owner}/{repo}/license-compliance/package-checks</code>. It checks the repository's effective policy, including exceptions. Limit: <b>40 PURLs per request</b> (as of 2026-10-27). Enabling a ruleset does not automatically run this audit on existing dependencies.</p>
+<p><code>NOASSERTION</code> or missing license data means <b>unknown</b>, not approved or license-free. The package API checks dependencies, not source-code snippets, and can also help agents check packages before adding them.</p>
+</div>
+</details>
+<details class="ctl-item" name="license-check-methods">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔎</span><span class="ctl-name">Source-code coverage</span><span class="ctl-when">Matches ≠ full audit</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p>Copilot checks suggestions against an index of <b>public GitHub code</b>. Depending on policy, matching suggestions are blocked or shown with sources and known licenses. It is not an arbitrary-code audit API, does not cover every new code change, and does not prove that unmatched code has no license obligations.</p>
+<p>For an existing codebase or manually copied new code, use a dedicated scanner: <b>Black Duck's snippet-scanning capability</b> identifies partial open-source matches; <b>ScanCode</b> detects license texts, notices, and copyright statements in files. These tools are separate from Code Security. Their detection methods are different, not interchangeable guarantees. Review findings and applicable obligations.</p>
+</div>
+</details>
+</div>
+</div>
 
 ## AI triage: assign alerts to an agent
 
