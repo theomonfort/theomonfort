@@ -1,7 +1,7 @@
 ---
 title: GitHub
 titleEn: GitHub
-summary: The AI-native developer platform used by more than 240 million developers. From Pull Requests to GitHub Copilot, GitHub continues to shape the history of software development.
+summary: The AI-native developer platform used by more than 225 million developers (as of September 2026). From Pull Requests to GitHub Copilot, GitHub continues to shape the history of software development.
 icon: /theomonfort/github-white-icon.svg
 color: cyan
 accent:
@@ -27,6 +27,12 @@ links:
     label: GitHub Well-Architected
     url: https://wellarchitected.github.com
   - group: 📰 News & Updates
+    label: GitHub Octoverse 2026
+    url: https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/
+  - group: 📰 News & Updates
+    label: GitHub Universe 2026
+    url: https://github.blog/news-insights/company-news/github-universe-2026-evolving-every-layer-of-the-stack/
+  - group: 📰 News & Updates
     label: GitHub Blog
     url: https://github.blog
   - group: 📰 News & Updates
@@ -44,7 +50,7 @@ links:
 
 <div class="hero-quote hero-quote-mona">
   <p>Hi, I'm <strong>Mona</strong> — the face of <strong>GitHub</strong>, watching over developers worldwide.</p>
-  <p>Today's topic, <strong>GitHub</strong>, is the world's largest AI-native developer platform — home to <strong>240 million+</strong> developers.</p>
+  <p>Today's topic, <strong>GitHub</strong>, is the world's largest AI-native developer platform, home to <strong>225 million+</strong> developers (Octoverse, September 2026).</p>
 </div>
 
 ## The Evolution of GitHub
@@ -277,152 +283,183 @@ From **Plan → Code → Review → Test & Security → Operate**, AI on GitHub 
 
 ## GitHub by the Numbers
 
-- GitHub developers: **240 million+** worldwide (internal metric / 2026)
-- GitHub Copilot paid users: **49 million+** (internal metric / 2026)
-- Enterprise customers: **77,000+** ([2024](https://www.microsoft.com/investor/reports/ar24/))
+- GitHub developers: **225 million+** worldwide (as of September 2026, <a class="retro-link" href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">Octoverse 2026 ↗</a>)
+- **More than one new developer joined every second**, on average, in 2025 (<a class="retro-link" href="https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/" target="_blank" rel="noopener noreferrer">Octoverse 2025 ↗</a>)
+- Public contributions: **2.5 billion** (October 2025 to September 2026, <a class="retro-link" href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">Octoverse 2026 ↗</a>)
 - **~90%** of the Fortune 100 have adopted Copilot ([2025](https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx))
 - **~42%** market share in paid AI coding tools ([2025](https://www.secondtalent.com/resources/github-copilot-statistics/))
 
-## Platform Activity Is Surging
+## Platform Activity Is Surging <a class="h2-doc" href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-<span style="display:inline-block;padding:2px 10px;border:2px solid #9bbc0f;color:#9bbc0f;font-family: 'Noto Sans JP', sans-serif;font-size:0.8em;letter-spacing:0.1em;">▮ CURRENT SCENARIO</span> ── Development activity on GitHub is accelerating at an unprecedented pace.
+AI is making software easier to build. **Development activity on GitHub is growing at an unprecedented pace.**
 
-<figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 0 1080 470" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
-  <defs>
-    <linearGradient id="paCommitBar" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#9bbc0f"/>
-      <stop offset="100%" stop-color="#0a0e27"/>
-    </linearGradient>
-    <marker id="paArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#9bbc0f"/>
-    </marker>
-    <filter id="paGlow" x="-80%" y="-80%" width="260%" height="260%">
-      <feGaussianBlur stdDeviation="5" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-  </defs>
-  <!-- ── Panel A: COMMITS ────────────────────────────────────────── -->
-  <g>
-    <rect x="10" y="20" width="512" height="430" fill="#0a0e27" stroke="#9bbc0f" stroke-width="3"/>
-    <path d="M 16 26 h 12 M 16 26 v 12 M 516 26 h -12 M 516 26 v 12 M 16 444 h 12 M 16 444 v -12 M 516 444 h -12 M 516 444 v -12" stroke="#9bbc0f" stroke-width="2" fill="none"/>
-    <rect x="34" y="2" width="160" height="40" fill="#05060f" stroke="#9bbc0f" stroke-width="3"/>
-    <text x="114" y="29" text-anchor="middle" fill="#9bbc0f" font-size="17" font-weight="bold">▮ COMMITS</text>
-    <line x1="60" y1="370" x2="500" y2="370" stroke="#2a3050" stroke-width="2"/>
-    <!-- 2025 bar (1B) -->
-    <rect x="92" y="332" width="96" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-    <text x="140" y="320" text-anchor="middle" fill="#e8f4ff" font-size="20" font-weight="bold">1B</text>
-    <text x="140" y="392" text-anchor="middle" fill="#9bbc0f" font-size="13">2025 actual</text>
-    <!-- projected bar (14B) -->
-    <rect x="332" y="96" width="96" height="274" fill="url(#paCommitBar)" stroke="#9bbc0f" stroke-width="2"/>
-    <text x="380" y="84" text-anchor="middle" fill="#9bbc0f" font-size="26" font-weight="bold" filter="url(#paGlow)">14B</text>
-    <text x="380" y="392" text-anchor="middle" fill="#9bbc0f" font-size="13">2026 pace</text>
-    <text x="265" y="424" text-anchor="middle" fill="#e8f4ff" font-size="13">Now <tspan fill="#9bbc0f" font-weight="bold">275M commits/week</tspan> ── if growth stays linear</text>
-    <text x="265" y="442" text-anchor="middle" fill="#ff2e88" font-size="12" font-weight="bold">※ SPOILER: IT WON'T (it'll go higher)</text>
-  </g>
-  <!-- ── Panel B: ACTIONS minutes ───────────────────────────────── -->
-  <g>
-    <rect x="558" y="20" width="512" height="430" fill="#0a0e27" stroke="#00f0ff" stroke-width="3"/>
-    <path d="M 564 26 h 12 M 564 26 v 12 M 1064 26 h -12 M 1064 26 v 12 M 564 444 h 12 M 564 444 v -12 M 1064 444 h -12 M 1064 444 v -12" stroke="#00f0ff" stroke-width="2" fill="none"/>
-    <rect x="582" y="2" width="340" height="40" fill="#05060f" stroke="#00f0ff" stroke-width="3"/>
-    <text x="752" y="29" text-anchor="middle" fill="#00f0ff" font-size="15" font-weight="bold">▮ ACTIONS MINUTES / WEEK</text>
-    <line x1="600" y1="380" x2="1040" y2="380" stroke="#2a3050" stroke-width="2"/>
-    <!-- growth curve 500M -> 1B -> 2.1B -->
-    <path d="M 620 360 C 720 352, 760 332, 820 312 C 900 286, 960 200, 1018 110" fill="none" stroke="#00f0ff" stroke-width="3" marker-end="url(#paArrow)"/>
-    <!-- point 2023 -->
-    <circle cx="620" cy="360" r="6" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
-    <text x="620" y="404" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">500M</text>
-    <text x="620" y="422" text-anchor="middle" fill="#00f0ff" font-size="12">2023</text>
-    <!-- point 2025 -->
-    <circle cx="820" cy="312" r="6" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
-    <text x="820" y="356" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">1B</text>
-    <text x="820" y="422" text-anchor="middle" fill="#00f0ff" font-size="12">2025</text>
-    <!-- point now 2.1B -->
-    <g filter="url(#paGlow)">
-      <circle cx="1018" cy="110" r="10" fill="#00f0ff"/>
-      <circle cx="1018" cy="110" r="4" fill="#05060f"/>
-    </g>
-    <text x="1018" y="84" text-anchor="middle" fill="#00f0ff" font-size="26" font-weight="bold">2.1B</text>
-    <text x="1018" y="422" text-anchor="middle" fill="#00f0ff" font-size="12" font-weight="bold">★ 2026/06/24</text>
-    <text x="816" y="442" text-anchor="middle" fill="#e8f4ff" font-size="12.5">Over <tspan fill="#00f0ff" font-weight="bold">4x in two years</tspan> ── and still climbing</text>
-  </g>
+<figure class="rpi-pipeline gh-growth">
+<style>
+.prose-akq .gh-growth{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.2em 0;font-family:var(--font-prose),sans-serif}
+.prose-akq .gh-growth svg{display:block;width:100%;height:auto;color:#9bbc0f;font-family:inherit}
+.prose-akq .gh-growth .gh-frame{fill:#0a0e27;stroke:currentColor;stroke-width:2}
+.prose-akq .gh-growth .gh-corners{fill:none;stroke:currentColor;stroke-width:2}
+.prose-akq .gh-growth .gh-grid{fill:none;stroke:#2a3050;stroke-width:1;stroke-dasharray:4 4}
+.prose-akq .gh-growth text{fill:#e8f4ff;text-anchor:middle;font-size:20px}
+.prose-akq .gh-growth .gh-axis{font-size:14px}
+.prose-akq .gh-growth .gh-label{fill:currentColor;font-size:18px;font-weight:700}
+.prose-akq .gh-growth .gh-peak{fill:currentColor;font-size:30px;font-weight:700}
+.prose-akq .gh-growth .gh-line{fill:none;stroke:currentColor;stroke-width:3}
+.prose-akq .gh-growth .gh-point{fill:#0a0e27;stroke:currentColor;stroke-width:3}
+.prose-akq .gh-growth .gh-glow{filter:drop-shadow(0 0 5px currentColor)}
+.prose-akq .gh-growth figcaption{grid-column:1/-1;font-size:.72em;line-height:1.5;color:#e8f4ff}
+@media(max-width:700px){.prose-akq .gh-growth{grid-template-columns:1fr}}
+@media(min-width:701px) and (max-height:800px){body.present-mode .prose-akq .gh-growth svg{max-height:280px}}
+</style>
+<svg viewBox="0 0 520 390" role="img" aria-labelledby="gh-commits-title gh-commits-desc">
+<title id="gh-commits-title">Annual commits on GitHub</title>
+<desc id="gh-commits-desc">2024: 10 billion. 2025: 12.9 billion. 2026: 34.3 billion. Linear scale from 0 to 40 billion.</desc>
+<defs><linearGradient id="gh-commit-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9bbc0f"/><stop offset="1" stop-color="#0a0e27"/></linearGradient></defs>
+<rect class="gh-frame" x="8" y="24" width="504" height="358"/>
+<path class="gh-corners" d="M 14 42 v -12 h 12 M 486 30 h 20 v 12 M 14 364 v 12 h 12 M 486 376 h 20 v -12"/>
+<rect x="28" y="4" width="250" height="38" fill="#05060f" stroke="currentColor" stroke-width="2"/>
+<text class="gh-label" x="153" y="30">▮ COMMITS / YEAR</text>
+<path class="gh-grid" d="M 74 70 H 470 M 74 185 H 470"/>
+<path d="M 74 300 H 470" stroke="#2a3050" stroke-width="2"/>
+<text class="gh-axis" x="44" y="75">40B</text><text class="gh-axis" x="44" y="190">20B</text><text class="gh-axis" x="44" y="305">0</text>
+<rect x="85" y="242.5" width="60" height="57.5" fill="#0e1430" stroke="currentColor" stroke-width="2"/>
+<rect x="215" y="225.825" width="60" height="74.175" fill="#0e1430" stroke="currentColor" stroke-width="2"/>
+<rect x="345" y="102.775" width="60" height="197.225" fill="url(#gh-commit-fill)" stroke="currentColor" stroke-width="2"/>
+<text x="115" y="230">10.0B</text><text x="245" y="213">12.9B</text><text class="gh-peak gh-glow" x="375" y="88">34.3B</text>
+<text class="gh-axis" x="115" y="325">2024</text><text class="gh-axis" x="245" y="325">2025</text><text class="gh-axis" x="375" y="325">2026</text>
+<text class="gh-label" x="260" y="360">3.4× the 2024 total</text>
 </svg>
+<svg viewBox="0 0 520 390" role="img" aria-labelledby="gh-actions-title gh-actions-desc" style="color:#00f0ff">
+<title id="gh-actions-title">Annual GitHub Actions jobs</title>
+<desc id="gh-actions-desc">2024: 8 billion jobs. 2025: 14 billion jobs. 2026: 45.4 billion jobs. Linear scale from 0 to 50 billion.</desc>
+<rect class="gh-frame" x="8" y="24" width="504" height="358"/>
+<path class="gh-corners" d="M 14 42 v -12 h 12 M 486 30 h 20 v 12 M 14 364 v 12 h 12 M 486 376 h 20 v -12"/>
+<rect x="28" y="4" width="310" height="38" fill="#05060f" stroke="currentColor" stroke-width="2"/>
+<text class="gh-label" x="183" y="30">▮ ACTIONS JOBS / YEAR</text>
+<path class="gh-grid" d="M 74 70 H 470 M 74 185 H 470"/>
+<path d="M 74 300 H 470" stroke="#2a3050" stroke-width="2"/>
+<text class="gh-axis" x="44" y="75">50B</text><text class="gh-axis" x="44" y="190">25B</text><text class="gh-axis" x="44" y="305">0</text>
+<path d="M 115 300 V 263.2 L 245 235.6 L 375 91.16 V 300 Z" fill="currentColor" opacity=".08"/>
+<polyline class="gh-line" points="115,263.2 245,235.6 375,91.16"/>
+<circle class="gh-point" cx="115" cy="263.2" r="6"/><circle class="gh-point" cx="245" cy="235.6" r="6"/><circle class="gh-point gh-glow" cx="375" cy="91.16" r="9"/>
+<text x="115" y="248">8.0B</text><text x="245" y="267">14.0B</text><text class="gh-peak" x="375" y="74">45.4B</text>
+<text class="gh-axis" x="115" y="325">2024</text><text class="gh-axis" x="245" y="325">2025</text><text class="gh-axis" x="375" y="325">2026</text>
+<text class="gh-label" x="260" y="360">5.7× the 2024 total</text>
+</svg>
+<figcaption>Annual totals for public and private repositories, for the 12 months ending September 30 each year.</figcaption>
 </figure>
 
-## Development Output Is Doubling Too
+## Development Output Is Accelerating <a class="h2-doc" href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-<span style="display:inline-block;padding:2px 10px;border:2px solid #9bbc0f;color:#9bbc0f;font-family: 'Noto Sans JP', sans-serif;font-size:0.8em;letter-spacing:0.1em;">▮ MORE NUMBERS</span> ── Pull request merges and repo creation are surging in the AI era too.
+**More people are building more software.** That means more repositories, more pull requests, and much more traffic on GitHub.
 
-Source: [GitHub Octoverse 2025](https://octoverse.github.com) (monthly average; 2026 is a run-rate projection)
-
-<figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 0 1080 470" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
-  <defs>
-    <marker id="poArrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#9bbc0f"/>
-    </marker>
-    <marker id="poArrowA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#ffb000"/>
-    </marker>
-    <filter id="poGlow" x="-80%" y="-80%" width="260%" height="260%">
-      <feGaussianBlur stdDeviation="5" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-  </defs>
-  <!-- ── Panel A: PULL REQUESTS MERGED ───────────────────────────── -->
-  <g>
-    <rect x="10" y="20" width="512" height="430" fill="#0a0e27" stroke="#9bbc0f" stroke-width="3"/>
-    <path d="M 16 26 h 12 M 16 26 v 12 M 516 26 h -12 M 516 26 v 12 M 16 444 h 12 M 16 444 v -12 M 516 444 h -12 M 516 444 v -12" stroke="#9bbc0f" stroke-width="2" fill="none"/>
-    <rect x="34" y="2" width="360" height="40" fill="#05060f" stroke="#9bbc0f" stroke-width="3"/>
-    <text x="214" y="29" text-anchor="middle" fill="#9bbc0f" font-size="15" font-weight="bold">▮ PULL REQUESTS MERGED / MO</text>
-    <line x1="60" y1="380" x2="500" y2="380" stroke="#2a3050" stroke-width="2"/>
-    <!-- growth curve 28M -> 43M -> 90M -->
-    <path d="M 90 360 C 180 352, 240 334, 300 300 C 378 262, 436 184, 478 116" fill="none" stroke="#9bbc0f" stroke-width="3" marker-end="url(#poArrowG)"/>
-    <!-- point 2023 -->
-    <circle cx="90" cy="360" r="6" fill="#0a0e27" stroke="#9bbc0f" stroke-width="2.5"/>
-    <text x="90" y="404" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">28M</text>
-    <text x="90" y="422" text-anchor="middle" fill="#9bbc0f" font-size="12">2023</text>
-    <!-- point 2025 -->
-    <circle cx="300" cy="300" r="6" fill="#0a0e27" stroke="#9bbc0f" stroke-width="2.5"/>
-    <text x="300" y="344" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">43M</text>
-    <text x="300" y="422" text-anchor="middle" fill="#9bbc0f" font-size="12">2025</text>
-    <!-- peak 2026 pace -->
-    <g filter="url(#poGlow)">
-      <circle cx="478" cy="110" r="10" fill="#9bbc0f"/>
-      <circle cx="478" cy="110" r="4" fill="#05060f"/>
-    </g>
-    <text x="478" y="84" text-anchor="middle" fill="#9bbc0f" font-size="26" font-weight="bold">90M</text>
-    <text x="478" y="422" text-anchor="middle" fill="#9bbc0f" font-size="12" font-weight="bold">2026 pace</text>
-    <text x="280" y="442" text-anchor="middle" fill="#e8f4ff" font-size="12.5"><tspan fill="#9bbc0f" font-weight="bold">~2x</tspan> into 2026 ── AI ships more PRs</text>
-  </g>
-  <!-- ── Panel B: NEW REPOS / MONTH ──────────────────────────────── -->
-  <g>
-    <rect x="558" y="20" width="512" height="430" fill="#0a0e27" stroke="#ffb000" stroke-width="3"/>
-    <path d="M 564 26 h 12 M 564 26 v 12 M 1064 26 h -12 M 1064 26 v 12 M 564 444 h 12 M 564 444 v -12 M 1064 444 h -12 M 1064 444 v -12" stroke="#ffb000" stroke-width="2" fill="none"/>
-    <rect x="582" y="2" width="320" height="40" fill="#05060f" stroke="#ffb000" stroke-width="3"/>
-    <text x="742" y="29" text-anchor="middle" fill="#ffb000" font-size="15" font-weight="bold">▮ NEW REPOS / MONTH</text>
-    <line x1="600" y1="380" x2="1040" y2="380" stroke="#2a3050" stroke-width="2"/>
-    <!-- growth curve 7M -> 10M -> 20M -->
-    <path d="M 620 360 C 720 352, 760 332, 820 312 C 900 286, 960 200, 1018 116" fill="none" stroke="#ffb000" stroke-width="3" marker-end="url(#poArrowA)"/>
-    <!-- point 2023 -->
-    <circle cx="620" cy="360" r="6" fill="#0a0e27" stroke="#ffb000" stroke-width="2.5"/>
-    <text x="620" y="404" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">7M</text>
-    <text x="620" y="422" text-anchor="middle" fill="#ffb000" font-size="12">2023</text>
-    <!-- point 2025 -->
-    <circle cx="820" cy="312" r="6" fill="#0a0e27" stroke="#ffb000" stroke-width="2.5"/>
-    <text x="820" y="356" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">10M</text>
-    <text x="820" y="422" text-anchor="middle" fill="#ffb000" font-size="12">2025</text>
-    <!-- peak 2026 pace -->
-    <g filter="url(#poGlow)">
-      <circle cx="1018" cy="110" r="10" fill="#ffb000"/>
-      <circle cx="1018" cy="110" r="4" fill="#05060f"/>
-    </g>
-    <text x="1018" y="84" text-anchor="middle" fill="#ffb000" font-size="26" font-weight="bold">20M</text>
-    <text x="1018" y="422" text-anchor="middle" fill="#ffb000" font-size="12" font-weight="bold">2026 pace</text>
-    <text x="816" y="442" text-anchor="middle" fill="#e8f4ff" font-size="12.5"><tspan fill="#ffb000" font-weight="bold">~2x</tspan> into 2026 ── new projects exploding</text>
-  </g>
+<figure class="rpi-pipeline gh-growth">
+<svg viewBox="0 0 520 390" role="img" aria-labelledby="gh-prs-title gh-prs-desc">
+<title id="gh-prs-title">Annual merged pull requests</title>
+<desc id="gh-prs-desc">2024: 402 million. 2025: 538 million. 2026: 1.3 billion. Linear scale from 0 to 1.5 billion.</desc>
+<rect class="gh-frame" x="8" y="24" width="504" height="358"/>
+<path class="gh-corners" d="M 14 42 v -12 h 12 M 486 30 h 20 v 12 M 14 364 v 12 h 12 M 486 376 h 20 v -12"/>
+<rect x="28" y="4" width="300" height="38" fill="#05060f" stroke="currentColor" stroke-width="2"/>
+<text class="gh-label" x="178" y="30">▮ MERGED PRs / YEAR</text>
+<path class="gh-grid" d="M 74 70 H 470 M 74 185 H 470"/>
+<path d="M 74 300 H 470" stroke="#2a3050" stroke-width="2"/>
+<text class="gh-axis" x="44" y="75">1.5B</text><text class="gh-axis" x="44" y="190">750M</text><text class="gh-axis" x="44" y="305">0</text>
+<path d="M 115 300 V 238.36 L 245 217.507 L 375 100.667 V 300 Z" fill="currentColor" opacity=".08"/>
+<polyline class="gh-line" points="115,238.36 245,217.507 375,100.667"/>
+<circle class="gh-point" cx="115" cy="238.36" r="6"/><circle class="gh-point" cx="245" cy="217.507" r="6"/><circle class="gh-point gh-glow" cx="375" cy="100.667" r="9"/>
+<text x="115" y="222">402M</text><text x="245" y="249">538M</text><text class="gh-peak" x="375" y="83">1.3B</text>
+<text class="gh-axis" x="115" y="325">2024</text><text class="gh-axis" x="245" y="325">2025</text><text class="gh-axis" x="375" y="325">2026</text>
+<text class="gh-label" x="260" y="360">3.2× the 2024 total</text>
 </svg>
+<svg viewBox="0 0 520 390" role="img" aria-labelledby="gh-pushes-title gh-pushes-desc" style="color:#ffb000">
+<title id="gh-pushes-title">Annual code pushes</title>
+<desc id="gh-pushes-desc">2024: 5.2 billion. 2025: 6.7 billion. 2026: 17.9 billion. Linear scale from 0 to 20 billion.</desc>
+<rect class="gh-frame" x="8" y="24" width="504" height="358"/>
+<path class="gh-corners" d="M 14 42 v -12 h 12 M 486 30 h 20 v 12 M 14 364 v 12 h 12 M 486 376 h 20 v -12"/>
+<rect x="28" y="4" width="300" height="38" fill="#05060f" stroke="currentColor" stroke-width="2"/>
+<text class="gh-label" x="178" y="30">▮ CODE PUSHES / YEAR</text>
+<path class="gh-grid" d="M 74 70 H 470 M 74 185 H 470"/>
+<path d="M 74 300 H 470" stroke="#2a3050" stroke-width="2"/>
+<text class="gh-axis" x="44" y="75">20B</text><text class="gh-axis" x="44" y="190">10B</text><text class="gh-axis" x="44" y="305">0</text>
+<path d="M 115 300 V 240.2 L 245 222.95 L 375 94.15 V 300 Z" fill="currentColor" opacity=".08"/>
+<polyline class="gh-line" points="115,240.2 245,222.95 375,94.15"/>
+<circle class="gh-point" cx="115" cy="240.2" r="6"/><circle class="gh-point" cx="245" cy="222.95" r="6"/><circle class="gh-point gh-glow" cx="375" cy="94.15" r="9"/>
+<text x="115" y="224">5.2B</text><text x="245" y="254">6.7B</text><text class="gh-peak" x="375" y="77">17.9B</text>
+<text class="gh-axis" x="115" y="325">2024</text><text class="gh-axis" x="245" y="325">2025</text><text class="gh-axis" x="375" y="325">2026</text>
+<text class="gh-label" x="260" y="360">3.4× the 2024 total</text>
+</svg>
+<figcaption>Annual totals for public and private repositories, for the 12 months ending September 30 each year.</figcaption>
 </figure>
+
+## Monthly Activity Is Surging
+
+More software is being built every month.
+
+<figure class="rpi-pipeline gh-growth gh-monthly">
+<style>
+.prose-akq .gh-growth.gh-monthly{grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}
+.prose-akq .gh-monthly .gh-peak{text-anchor:start;font-size:38px}
+.prose-akq .gh-monthly .gh-label{text-anchor:start;font-size:16px}
+.prose-akq .gh-monthly .gh-axis{font-size:15px}
+.prose-akq .gh-monthly .gh-scale{text-anchor:start;dominant-baseline:middle;font-size:16px}
+@media(max-width:700px){.prose-akq .gh-growth.gh-monthly{grid-template-columns:1fr}}
+</style>
+<!-- Curves visually traced from the supplied Universe keynote chart, not a reconstructed monthly dataset. -->
+<svg viewBox="0 0 420 360" role="img" aria-labelledby="gh-monthly-prs-title gh-monthly-prs-desc">
+<title id="gh-monthly-prs-title">220 million merged pull requests per month</title>
+<desc id="gh-monthly-prs-desc">Monthly growth from 2023 to 2026, reproduced from the GitHub Universe 2026 keynote chart. Merged pull requests rise sharply in 2026, reaching 220 million per month.</desc>
+<rect class="gh-frame" x="4" y="4" width="412" height="352"/>
+<text class="gh-peak" x="26" y="52">220M</text><text class="gh-label" x="26" y="82">MERGED PRs / MONTH</text>
+<path class="gh-grid" d="M 35 133.18 H 343 M 35 224.09 H 343"/><path d="M 35 315 H 343 V 105" fill="none" stroke="#2a3050" stroke-width="2"/>
+<text class="gh-scale" x="350" y="133.18">200M</text><text class="gh-scale" x="350" y="224.09">100M</text><text class="gh-scale" x="350" y="315">0</text>
+<polyline class="gh-line" points="35,289.4 42.5,288.4 50,289.2 57.5,289.7 65,290.6 72.5,289.3 80,288.3 87.5,288.0 95,289.1 102.5,289.3 110,288.0 117.5,285.9 125,285.8 132.5,286.3 140,286.2 147.5,284.4 155,281.9 162.5,281.8 170,281.8 177.5,280.5 185,278.6 192.5,275.0 200,273.7 207.5,273.3 215,272.1 222.5,268.1 230,263.6 237.5,260.5 245,259.3 252.5,257.1 260,254.0 267.5,247.1 275,244.1 282.5,231.8 290,221.6 297.5,217.9 305,205.3 312.5,190.6 320,173.9 327.5,158.0 335,115.0"/>
+<circle class="gh-point gh-glow" cx="335" cy="115" r="6"/>
+<text class="gh-axis" x="35" y="340">2023</text><text class="gh-axis" x="120" y="340">2024</text><text class="gh-axis" x="205" y="340">2025</text><text class="gh-axis" x="290" y="340">2026</text>
+</svg>
+<svg viewBox="0 0 420 360" role="img" aria-labelledby="gh-monthly-commits-title gh-monthly-commits-desc" style="color:#ff2e88">
+<title id="gh-monthly-commits-title">7.38 billion commits per month</title>
+<desc id="gh-monthly-commits-desc">Monthly growth from 2023 to 2026, reproduced from the GitHub Universe 2026 keynote chart. Commits accelerate sharply in 2026, reaching 7.38 billion per month.</desc>
+<rect class="gh-frame" x="4" y="4" width="412" height="352"/>
+<text class="gh-peak" x="26" y="52">7.38B</text><text class="gh-label" x="26" y="82">COMMITS / MONTH</text>
+<path class="gh-grid" d="M 35 152.40 H 343 M 35 206.60 H 343 M 35 260.80 H 343"/><path d="M 35 315 H 343 V 105" fill="none" stroke="#2a3050" stroke-width="2"/>
+<text class="gh-scale" x="350" y="152.40">6B</text><text class="gh-scale" x="350" y="206.60">4B</text><text class="gh-scale" x="350" y="260.80">2B</text><text class="gh-scale" x="350" y="315">0</text>
+<polyline class="gh-line" points="35,302.8 42.5,302.5 50,302.7 57.5,303.2 65,303.7 72.5,302.8 80,302.5 87.5,302.5 95,303.0 102.5,302.9 110,302.3 117.5,301.7 125,301.9 132.5,301.6 140,301.5 147.5,300.4 155,299.8 162.5,299.1 170,299.1 177.5,298.5 185,297.0 192.5,295.6 200,295.0 207.5,294.4 215,291.6 222.5,288.2 230,287.0 237.5,285.3 245,282.5 252.5,279.4 260,276.9 267.5,274.1 275,271.2 282.5,268.4 290,263.7 297.5,258.4 305,253.1 312.5,247.5 320,236.9 327.5,188.5 335,115.0"/>
+<circle class="gh-point gh-glow" cx="335" cy="115" r="6"/>
+<text class="gh-axis" x="35" y="340">2023</text><text class="gh-axis" x="120" y="340">2024</text><text class="gh-axis" x="205" y="340">2025</text><text class="gh-axis" x="290" y="340">2026</text>
+</svg>
+<svg viewBox="0 0 420 360" role="img" aria-labelledby="gh-monthly-repos-title gh-monthly-repos-desc" style="color:#ffb000">
+<title id="gh-monthly-repos-title">30.3 million new repositories per month</title>
+<desc id="gh-monthly-repos-desc">Monthly growth from 2023 to 2026, reproduced from the GitHub Universe 2026 keynote chart. New repositories rise sharply in 2026, reaching 30.3 million per month.</desc>
+<rect class="gh-frame" x="4" y="4" width="412" height="352"/>
+<text class="gh-peak" x="26" y="52">30.3M</text><text class="gh-label" x="26" y="82">NEW REPOSITORIES / MONTH</text>
+<path class="gh-grid" d="M 35 116.98 H 343 M 35 182.99 H 343 M 35 248.99 H 343"/><path d="M 35 315 H 343 V 105" fill="none" stroke="#2a3050" stroke-width="2"/>
+<text class="gh-scale" x="350" y="116.98">30M</text><text class="gh-scale" x="350" y="182.99">20M</text><text class="gh-scale" x="350" y="248.99">10M</text><text class="gh-scale" x="350" y="315">0</text>
+<polyline class="gh-line" points="35,281.7 42.5,279.6 50,281.4 57.5,284.6 65,283.8 72.5,280.0 80,278.5 87.5,280.5 95,282.5 102.5,281.2 110,277.5 117.5,275.7 125,277.4 132.5,279.0 140,276.9 147.5,272.0 155,270.2 162.5,271.3 170,272.3 177.5,270.0 185,265.6 192.5,261.4 200,261.5 207.5,262.1 215,259.8 222.5,252.9 230,246.8 237.5,245.0 245,244.9 252.5,242.8 260,235.0 267.5,226.0 275,221.1 282.5,220.0 290,217.5 297.5,209.4 305,195.9 312.5,184.2 320,172.6 327.5,164.3 335,115.0"/>
+<circle class="gh-point gh-glow" cx="335" cy="115" r="6"/>
+<text class="gh-axis" x="35" y="340">2023</text><text class="gh-axis" x="120" y="340">2024</text><text class="gh-axis" x="205" y="340">2025</text><text class="gh-axis" x="290" y="340">2026</text>
+</svg>
+<figcaption>Monthly activity, 2023 to 2026. Source: <a class="retro-link" href="https://github.com/events/universe/recap" target="_blank" rel="noopener noreferrer">GitHub Universe 2026 ↗</a></figcaption>
+</figure>
+
+## Investing in AI <a class="h2-doc" href="https://github.blog/news-insights/company-news/github-universe-2026-evolving-every-layer-of-the-stack/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+GitHub is **investing heavily** to remain the world's leading platform for AI development.
+
+<div class="tbl-fit gh-investment">
+<style>
+body.present-mode .prose-akq .tbl-fit.gh-investment th,
+body.present-mode .prose-akq .tbl-fit.gh-investment td{padding:.2em .9em;line-height:1.25}
+</style>
+
+| Infrastructure | Capacity added in 2026 |
+| --- | --- |
+| Compute | **+4 million CPU cores** |
+| High-speed storage | **+160 PB** |
+| Network capacity | **+50 Tb/s** |
+
+<p style="font-size:.75em;line-height:1.5;margin:1em 0 0">GitHub is rearchitecting its Git infrastructure. In a stress test, <strong>5,000 “angry agents” on one monorepo reached 7,200 writes/second</strong>. Work continues to push that throughput higher. <a class="retro-link" href="https://www.youtube.com/watch?v=MZfqId_rrB0" target="_blank" rel="noopener noreferrer">Universe session ↗</a></p>
+
+</div>
 
 ## Industry Recognition
 

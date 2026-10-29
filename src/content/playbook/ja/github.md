@@ -1,7 +1,7 @@
 ---
 title: ギットハブ
 titleEn: GitHub
-summary: 2.4 億人以上の開発者が利用する AI ネイティブの開発者プラットフォーム。Pull Request から GitHub Copilot まで、ソフトウェア開発の歴史を作り続ける。
+summary: 2.25 億人以上の開発者が利用する AI ネイティブの開発者プラットフォーム（2026 年 9 月時点）。Pull Request から GitHub Copilot まで、ソフトウェア開発の歴史を作り続ける。
 icon: /theomonfort/github-white-icon.svg
 color: cyan
 accent:
@@ -27,6 +27,12 @@ links:
     label: GitHub Well-Architected
     url: https://wellarchitected.github.com
   - group: 📰 ニュース・発信
+    label: GitHub Octoverse 2026
+    url: https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/
+  - group: 📰 ニュース・発信
+    label: GitHub Universe 2026
+    url: https://github.blog/news-insights/company-news/github-universe-2026-evolving-every-layer-of-the-stack/
+  - group: 📰 ニュース・発信
     label: GitHub Blog
     url: https://github.blog
   - group: 📰 ニュース・発信
@@ -44,7 +50,7 @@ links:
 
 <div class="hero-quote hero-quote-mona">
   <p>こんにちは、<strong>Mona</strong> です！<strong>GitHub</strong> の顔として世界中の開発者を見守っています。</p>
-  <p>今日お話しする <strong>GitHub</strong> は、<strong>2.4 億人以上</strong>の開発者が集う世界最大の AI ネイティブ開発者プラットフォームです。</p>
+  <p>今日お話しする <strong>GitHub</strong> は、<strong>2.25 億人以上</strong>の開発者が集う世界最大の AI ネイティブ開発者プラットフォームです（Octoverse、2026 年 9 月時点）。</p>
 </div>
 
 ## 進化の歴史
@@ -277,152 +283,183 @@ SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ
 
 ## 数字で見る GitHub
 
-- GitHub 開発者：世界で **2.4 億人以上**（社内指標 / 2026）
-- GitHub Copilot 有料ユーザー：**4,900 万人以上**（社内指標 / 2026）
-- エンタープライズ顧客：**77,000 社以上**（[2024](https://www.microsoft.com/investor/reports/ar24/)）
+- GitHub 開発者：世界で **2.25 億人以上**（2026 年 9 月時点、<a class="retro-link" href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">Octoverse 2026 ↗</a>）
+- 2025 年は平均で **毎秒 1 人超の開発者が新規参加**（<a class="retro-link" href="https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/" target="_blank" rel="noopener noreferrer">Octoverse 2025 ↗</a>）
+- 公開コントリビューション：**25 億件**（2025 年 10 月〜2026 年 9 月、<a class="retro-link" href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">Octoverse 2026 ↗</a>）
 - Fortune 100 の **約 90%** が Copilot を採用（[2025](https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx)）
 - 有料 AI コーディングツール市場シェア **約 42%**（[2025](https://www.secondtalent.com/resources/github-copilot-statistics/)）
 
-## プラットフォームの活動が急増中
+## プラットフォームの活動が急増中 <a class="h2-doc" href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-<span style="display:inline-block;padding:2px 10px;border:2px solid #9bbc0f;color:#9bbc0f;font-family: 'Noto Sans JP', sans-serif;font-size:0.8em;letter-spacing:0.1em;">▮ CURRENT SCENARIO</span> ── GitHub 上の開発活動は、いまかつてないペースで加速している。
+AI によって、ソフトウェアを作りやすくなりました。**GitHub 上の開発活動は、かつてないペースで増えています。**
 
-<figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 0 1080 470" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
-  <defs>
-    <linearGradient id="paCommitBar" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#9bbc0f"/>
-      <stop offset="100%" stop-color="#0a0e27"/>
-    </linearGradient>
-    <marker id="paArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#9bbc0f"/>
-    </marker>
-    <filter id="paGlow" x="-80%" y="-80%" width="260%" height="260%">
-      <feGaussianBlur stdDeviation="5" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-  </defs>
-  <!-- ── Panel A: COMMITS ────────────────────────────────────────── -->
-  <g>
-    <rect x="10" y="20" width="512" height="430" fill="#0a0e27" stroke="#9bbc0f" stroke-width="3"/>
-    <path d="M 16 26 h 12 M 16 26 v 12 M 516 26 h -12 M 516 26 v 12 M 16 444 h 12 M 16 444 v -12 M 516 444 h -12 M 516 444 v -12" stroke="#9bbc0f" stroke-width="2" fill="none"/>
-    <rect x="34" y="2" width="180" height="40" fill="#05060f" stroke="#9bbc0f" stroke-width="3"/>
-    <text x="124" y="29" text-anchor="middle" fill="#9bbc0f" font-size="17" font-weight="bold">▮ コミット数</text>
-    <line x1="60" y1="370" x2="500" y2="370" stroke="#2a3050" stroke-width="2"/>
-    <!-- 2025 bar (1B) -->
-    <rect x="92" y="332" width="96" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-    <text x="140" y="320" text-anchor="middle" fill="#e8f4ff" font-size="20" font-weight="bold">10 億</text>
-    <text x="140" y="392" text-anchor="middle" fill="#9bbc0f" font-size="13">2025 実績</text>
-    <!-- projected bar (14B) -->
-    <rect x="332" y="96" width="96" height="274" fill="url(#paCommitBar)" stroke="#9bbc0f" stroke-width="2"/>
-    <text x="380" y="84" text-anchor="middle" fill="#9bbc0f" font-size="26" font-weight="bold" filter="url(#paGlow)">140 億</text>
-    <text x="380" y="392" text-anchor="middle" fill="#9bbc0f" font-size="13">2026 予測ペース</text>
-    <text x="265" y="424" text-anchor="middle" fill="#e8f4ff" font-size="13">現在 <tspan fill="#9bbc0f" font-weight="bold">週 2.75 億コミット</tspan> ── 線形成長ならの話</text>
-    <text x="265" y="442" text-anchor="middle" fill="#ff2e88" font-size="12" font-weight="bold">※ SPOILER: そうはならない（さらに上振れ）</text>
-  </g>
-  <!-- ── Panel B: ACTIONS minutes ───────────────────────────────── -->
-  <g>
-    <rect x="558" y="20" width="512" height="430" fill="#0a0e27" stroke="#00f0ff" stroke-width="3"/>
-    <path d="M 564 26 h 12 M 564 26 v 12 M 1064 26 h -12 M 1064 26 v 12 M 564 444 h 12 M 564 444 v -12 M 1064 444 h -12 M 1064 444 v -12" stroke="#00f0ff" stroke-width="2" fill="none"/>
-    <rect x="582" y="2" width="320" height="40" fill="#05060f" stroke="#00f0ff" stroke-width="3"/>
-    <text x="742" y="29" text-anchor="middle" fill="#00f0ff" font-size="16" font-weight="bold">▮ Actions 実行時間 / 週</text>
-    <line x1="600" y1="380" x2="1040" y2="380" stroke="#2a3050" stroke-width="2"/>
-    <!-- growth curve 500M -> 1B -> 2.1B -->
-    <path d="M 620 360 C 720 352, 760 332, 820 312 C 900 286, 960 200, 1018 110" fill="none" stroke="#00f0ff" stroke-width="3" marker-end="url(#paArrow)"/>
-    <!-- point 2023 -->
-    <circle cx="620" cy="360" r="6" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
-    <text x="620" y="404" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">5 億</text>
-    <text x="620" y="422" text-anchor="middle" fill="#00f0ff" font-size="12">2023</text>
-    <!-- point 2025 -->
-    <circle cx="820" cy="312" r="6" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
-    <text x="820" y="356" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">10 億</text>
-    <text x="820" y="422" text-anchor="middle" fill="#00f0ff" font-size="12">2025</text>
-    <!-- point now 2.1B -->
-    <g filter="url(#paGlow)">
-      <circle cx="1018" cy="110" r="10" fill="#00f0ff"/>
-      <circle cx="1018" cy="110" r="4" fill="#05060f"/>
-    </g>
-    <text x="1018" y="84" text-anchor="middle" fill="#00f0ff" font-size="26" font-weight="bold">21 億</text>
-    <text x="1018" y="422" text-anchor="middle" fill="#00f0ff" font-size="12" font-weight="bold">★ 2026/06/24</text>
-    <text x="816" y="442" text-anchor="middle" fill="#e8f4ff" font-size="12.5">2 年で <tspan fill="#00f0ff" font-weight="bold">4 倍以上</tspan> ── 加速はまだ止まらない</text>
-  </g>
+<figure class="rpi-pipeline gh-growth">
+<style>
+.prose-akq .gh-growth{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.2em 0;font-family:var(--font-prose),sans-serif}
+.prose-akq .gh-growth svg{display:block;width:100%;height:auto;color:#9bbc0f;font-family:inherit}
+.prose-akq .gh-growth .gh-frame{fill:#0a0e27;stroke:currentColor;stroke-width:2}
+.prose-akq .gh-growth .gh-corners{fill:none;stroke:currentColor;stroke-width:2}
+.prose-akq .gh-growth .gh-grid{fill:none;stroke:#2a3050;stroke-width:1;stroke-dasharray:4 4}
+.prose-akq .gh-growth text{fill:#e8f4ff;text-anchor:middle;font-size:20px}
+.prose-akq .gh-growth .gh-axis{font-size:14px}
+.prose-akq .gh-growth .gh-label{fill:currentColor;font-size:18px;font-weight:700}
+.prose-akq .gh-growth .gh-peak{fill:currentColor;font-size:30px;font-weight:700}
+.prose-akq .gh-growth .gh-line{fill:none;stroke:currentColor;stroke-width:3}
+.prose-akq .gh-growth .gh-point{fill:#0a0e27;stroke:currentColor;stroke-width:3}
+.prose-akq .gh-growth .gh-glow{filter:drop-shadow(0 0 5px currentColor)}
+.prose-akq .gh-growth figcaption{grid-column:1/-1;font-size:.72em;line-height:1.5;color:#e8f4ff}
+@media(max-width:700px){.prose-akq .gh-growth{grid-template-columns:1fr}}
+@media(min-width:701px) and (max-height:800px){body.present-mode .prose-akq .gh-growth svg{max-height:280px}}
+</style>
+<svg viewBox="0 0 520 390" role="img" aria-labelledby="gh-commits-title gh-commits-desc">
+<title id="gh-commits-title">GitHub の年間コミット数</title>
+<desc id="gh-commits-desc">2024 年：100 億。2025 年：129 億。2026 年：343 億。縦軸は 0〜400 億の線形スケール。</desc>
+<defs><linearGradient id="gh-commit-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9bbc0f"/><stop offset="1" stop-color="#0a0e27"/></linearGradient></defs>
+<rect class="gh-frame" x="8" y="24" width="504" height="358"/>
+<path class="gh-corners" d="M 14 42 v -12 h 12 M 486 30 h 20 v 12 M 14 364 v 12 h 12 M 486 376 h 20 v -12"/>
+<rect x="28" y="4" width="250" height="38" fill="#05060f" stroke="currentColor" stroke-width="2"/>
+<text class="gh-label" x="153" y="30">▮ コミット数 / 年</text>
+<path class="gh-grid" d="M 74 70 H 470 M 74 185 H 470"/>
+<path d="M 74 300 H 470" stroke="#2a3050" stroke-width="2"/>
+<text class="gh-axis" x="44" y="75">400億</text><text class="gh-axis" x="44" y="190">200億</text><text class="gh-axis" x="44" y="305">0</text>
+<rect x="85" y="242.5" width="60" height="57.5" fill="#0e1430" stroke="currentColor" stroke-width="2"/>
+<rect x="215" y="225.825" width="60" height="74.175" fill="#0e1430" stroke="currentColor" stroke-width="2"/>
+<rect x="345" y="102.775" width="60" height="197.225" fill="url(#gh-commit-fill)" stroke="currentColor" stroke-width="2"/>
+<text x="115" y="230">100 億</text><text x="245" y="213">129 億</text><text class="gh-peak gh-glow" x="375" y="88">343 億</text>
+<text class="gh-axis" x="115" y="325">2024</text><text class="gh-axis" x="245" y="325">2025</text><text class="gh-axis" x="375" y="325">2026</text>
+<text class="gh-label" x="260" y="360">2024 年の 3.4 倍</text>
 </svg>
+<svg viewBox="0 0 520 390" role="img" aria-labelledby="gh-actions-title gh-actions-desc" style="color:#00f0ff">
+<title id="gh-actions-title">GitHub Actions の年間ジョブ数</title>
+<desc id="gh-actions-desc">2024 年：80 億ジョブ。2025 年：140 億ジョブ。2026 年：454 億ジョブ。縦軸は 0〜500 億の線形スケール。</desc>
+<rect class="gh-frame" x="8" y="24" width="504" height="358"/>
+<path class="gh-corners" d="M 14 42 v -12 h 12 M 486 30 h 20 v 12 M 14 364 v 12 h 12 M 486 376 h 20 v -12"/>
+<rect x="28" y="4" width="310" height="38" fill="#05060f" stroke="currentColor" stroke-width="2"/>
+<text class="gh-label" x="183" y="30">▮ Actions ジョブ数 / 年</text>
+<path class="gh-grid" d="M 74 70 H 470 M 74 185 H 470"/>
+<path d="M 74 300 H 470" stroke="#2a3050" stroke-width="2"/>
+<text class="gh-axis" x="44" y="75">500億</text><text class="gh-axis" x="44" y="190">250億</text><text class="gh-axis" x="44" y="305">0</text>
+<path d="M 115 300 V 263.2 L 245 235.6 L 375 91.16 V 300 Z" fill="currentColor" opacity=".08"/>
+<polyline class="gh-line" points="115,263.2 245,235.6 375,91.16"/>
+<circle class="gh-point" cx="115" cy="263.2" r="6"/><circle class="gh-point" cx="245" cy="235.6" r="6"/><circle class="gh-point gh-glow" cx="375" cy="91.16" r="9"/>
+<text x="115" y="248">80 億</text><text x="245" y="267">140 億</text><text class="gh-peak" x="375" y="74">454 億</text>
+<text class="gh-axis" x="115" y="325">2024</text><text class="gh-axis" x="245" y="325">2025</text><text class="gh-axis" x="375" y="325">2026</text>
+<text class="gh-label" x="260" y="360">2024 年の 5.7 倍</text>
+</svg>
+<figcaption>公開・非公開リポジトリの年間合計（各年 9 月 30 日までの 12 か月）。</figcaption>
 </figure>
 
-## 開発アウトプットも倍増中
+## 開発アウトプットも急増中 <a class="h2-doc" href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-<span style="display:inline-block;padding:2px 10px;border:2px solid #9bbc0f;color:#9bbc0f;font-family: 'Noto Sans JP', sans-serif;font-size:0.8em;letter-spacing:0.1em;">▮ MORE NUMBERS</span> ── PR マージとリポジトリ作成も、AI 時代に入って一気に伸びている。
+**作る人が増え、作られるソフトウェアも増えています。** リポジトリや PR が増え、GitHub のトラフィックも急増しています。
 
-データ出典: [GitHub Octoverse 2025](https://octoverse.github.com)（月間平均、2026 はペース換算）
-
-<figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 0 1080 470" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
-  <defs>
-    <marker id="poArrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#9bbc0f"/>
-    </marker>
-    <marker id="poArrowA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#ffb000"/>
-    </marker>
-    <filter id="poGlow" x="-80%" y="-80%" width="260%" height="260%">
-      <feGaussianBlur stdDeviation="5" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-  </defs>
-  <!-- ── Panel A: PULL REQUESTS MERGED ───────────────────────────── -->
-  <g>
-    <rect x="10" y="20" width="512" height="430" fill="#0a0e27" stroke="#9bbc0f" stroke-width="3"/>
-    <path d="M 16 26 h 12 M 16 26 v 12 M 516 26 h -12 M 516 26 v 12 M 16 444 h 12 M 16 444 v -12 M 516 444 h -12 M 516 444 v -12" stroke="#9bbc0f" stroke-width="2" fill="none"/>
-    <rect x="34" y="2" width="320" height="40" fill="#05060f" stroke="#9bbc0f" stroke-width="3"/>
-    <text x="194" y="29" text-anchor="middle" fill="#9bbc0f" font-size="16" font-weight="bold">▮ マージされた PR / 月</text>
-    <line x1="60" y1="380" x2="500" y2="380" stroke="#2a3050" stroke-width="2"/>
-    <!-- growth curve 2800万 -> 4300万 -> 9000万 -->
-    <path d="M 90 360 C 180 352, 240 334, 300 300 C 378 262, 436 184, 478 116" fill="none" stroke="#9bbc0f" stroke-width="3" marker-end="url(#poArrowG)"/>
-    <!-- point 2023 -->
-    <circle cx="90" cy="360" r="6" fill="#0a0e27" stroke="#9bbc0f" stroke-width="2.5"/>
-    <text x="90" y="404" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">2,800万</text>
-    <text x="90" y="422" text-anchor="middle" fill="#9bbc0f" font-size="12">2023</text>
-    <!-- point 2025 -->
-    <circle cx="300" cy="300" r="6" fill="#0a0e27" stroke="#9bbc0f" stroke-width="2.5"/>
-    <text x="300" y="344" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">4,300万</text>
-    <text x="300" y="422" text-anchor="middle" fill="#9bbc0f" font-size="12">2025</text>
-    <!-- peak 2026 pace -->
-    <g filter="url(#poGlow)">
-      <circle cx="478" cy="110" r="10" fill="#9bbc0f"/>
-      <circle cx="478" cy="110" r="4" fill="#05060f"/>
-    </g>
-    <text x="478" y="84" text-anchor="middle" fill="#9bbc0f" font-size="26" font-weight="bold">9,000万</text>
-    <text x="478" y="422" text-anchor="middle" fill="#9bbc0f" font-size="12" font-weight="bold">2026 ペース</text>
-    <text x="280" y="442" text-anchor="middle" fill="#e8f4ff" font-size="12.5">2025→2026 で <tspan fill="#9bbc0f" font-weight="bold">約 2 倍</tspan> ── AI が PR を量産</text>
-  </g>
-  <!-- ── Panel B: NEW REPOS / MONTH ──────────────────────────────── -->
-  <g>
-    <rect x="558" y="20" width="512" height="430" fill="#0a0e27" stroke="#ffb000" stroke-width="3"/>
-    <path d="M 564 26 h 12 M 564 26 v 12 M 1064 26 h -12 M 1064 26 v 12 M 564 444 h 12 M 564 444 v -12 M 1064 444 h -12 M 1064 444 v -12" stroke="#ffb000" stroke-width="2" fill="none"/>
-    <rect x="582" y="2" width="330" height="40" fill="#05060f" stroke="#ffb000" stroke-width="3"/>
-    <text x="747" y="29" text-anchor="middle" fill="#ffb000" font-size="16" font-weight="bold">▮ 新規リポジトリ / 月</text>
-    <line x1="600" y1="380" x2="1040" y2="380" stroke="#2a3050" stroke-width="2"/>
-    <!-- growth curve 700万 -> 1000万 -> 2000万 -->
-    <path d="M 620 360 C 720 352, 760 332, 820 312 C 900 286, 960 200, 1018 116" fill="none" stroke="#ffb000" stroke-width="3" marker-end="url(#poArrowA)"/>
-    <!-- point 2023 -->
-    <circle cx="620" cy="360" r="6" fill="#0a0e27" stroke="#ffb000" stroke-width="2.5"/>
-    <text x="620" y="404" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">700万</text>
-    <text x="620" y="422" text-anchor="middle" fill="#ffb000" font-size="12">2023</text>
-    <!-- point 2025 -->
-    <circle cx="820" cy="312" r="6" fill="#0a0e27" stroke="#ffb000" stroke-width="2.5"/>
-    <text x="820" y="356" text-anchor="middle" fill="#e8f4ff" font-size="14" font-weight="bold">1,000万</text>
-    <text x="820" y="422" text-anchor="middle" fill="#ffb000" font-size="12">2025</text>
-    <!-- peak 2026 pace -->
-    <g filter="url(#poGlow)">
-      <circle cx="1018" cy="110" r="10" fill="#ffb000"/>
-      <circle cx="1018" cy="110" r="4" fill="#05060f"/>
-    </g>
-    <text x="1018" y="84" text-anchor="middle" fill="#ffb000" font-size="26" font-weight="bold">2,000万</text>
-    <text x="1018" y="422" text-anchor="middle" fill="#ffb000" font-size="12" font-weight="bold">2026 ペース</text>
-    <text x="816" y="442" text-anchor="middle" fill="#e8f4ff" font-size="12.5">2025→2026 で <tspan fill="#ffb000" font-weight="bold">約 2 倍</tspan> ── 新規作成が加速</text>
-  </g>
+<figure class="rpi-pipeline gh-growth">
+<svg viewBox="0 0 520 390" role="img" aria-labelledby="gh-prs-title gh-prs-desc">
+<title id="gh-prs-title">年間のマージされたプルリクエスト数</title>
+<desc id="gh-prs-desc">2024 年：4.02 億。2025 年：5.38 億。2026 年：13 億。縦軸は 0〜15 億の線形スケール。</desc>
+<rect class="gh-frame" x="8" y="24" width="504" height="358"/>
+<path class="gh-corners" d="M 14 42 v -12 h 12 M 486 30 h 20 v 12 M 14 364 v 12 h 12 M 486 376 h 20 v -12"/>
+<rect x="28" y="4" width="300" height="38" fill="#05060f" stroke="currentColor" stroke-width="2"/>
+<text class="gh-label" x="178" y="30">▮ マージされた PR / 年</text>
+<path class="gh-grid" d="M 74 70 H 470 M 74 185 H 470"/>
+<path d="M 74 300 H 470" stroke="#2a3050" stroke-width="2"/>
+<text class="gh-axis" x="44" y="75">15億</text><text class="gh-axis" x="44" y="190">7.5億</text><text class="gh-axis" x="44" y="305">0</text>
+<path d="M 115 300 V 238.36 L 245 217.507 L 375 100.667 V 300 Z" fill="currentColor" opacity=".08"/>
+<polyline class="gh-line" points="115,238.36 245,217.507 375,100.667"/>
+<circle class="gh-point" cx="115" cy="238.36" r="6"/><circle class="gh-point" cx="245" cy="217.507" r="6"/><circle class="gh-point gh-glow" cx="375" cy="100.667" r="9"/>
+<text x="115" y="222">4.02 億</text><text x="245" y="249">5.38 億</text><text class="gh-peak" x="375" y="83">13 億</text>
+<text class="gh-axis" x="115" y="325">2024</text><text class="gh-axis" x="245" y="325">2025</text><text class="gh-axis" x="375" y="325">2026</text>
+<text class="gh-label" x="260" y="360">2024 年の 3.2 倍</text>
 </svg>
+<svg viewBox="0 0 520 390" role="img" aria-labelledby="gh-pushes-title gh-pushes-desc" style="color:#ffb000">
+<title id="gh-pushes-title">年間のコードプッシュ数</title>
+<desc id="gh-pushes-desc">2024 年：52 億。2025 年：67 億。2026 年：179 億。縦軸は 0〜200 億の線形スケール。</desc>
+<rect class="gh-frame" x="8" y="24" width="504" height="358"/>
+<path class="gh-corners" d="M 14 42 v -12 h 12 M 486 30 h 20 v 12 M 14 364 v 12 h 12 M 486 376 h 20 v -12"/>
+<rect x="28" y="4" width="300" height="38" fill="#05060f" stroke="currentColor" stroke-width="2"/>
+<text class="gh-label" x="178" y="30">▮ コードのプッシュ / 年</text>
+<path class="gh-grid" d="M 74 70 H 470 M 74 185 H 470"/>
+<path d="M 74 300 H 470" stroke="#2a3050" stroke-width="2"/>
+<text class="gh-axis" x="44" y="75">200億</text><text class="gh-axis" x="44" y="190">100億</text><text class="gh-axis" x="44" y="305">0</text>
+<path d="M 115 300 V 240.2 L 245 222.95 L 375 94.15 V 300 Z" fill="currentColor" opacity=".08"/>
+<polyline class="gh-line" points="115,240.2 245,222.95 375,94.15"/>
+<circle class="gh-point" cx="115" cy="240.2" r="6"/><circle class="gh-point" cx="245" cy="222.95" r="6"/><circle class="gh-point gh-glow" cx="375" cy="94.15" r="9"/>
+<text x="115" y="224">52 億</text><text x="245" y="254">67 億</text><text class="gh-peak" x="375" y="77">179 億</text>
+<text class="gh-axis" x="115" y="325">2024</text><text class="gh-axis" x="245" y="325">2025</text><text class="gh-axis" x="375" y="325">2026</text>
+<text class="gh-label" x="260" y="360">2024 年の 3.4 倍</text>
+</svg>
+<figcaption>公開・非公開リポジトリの年間合計（各年 9 月 30 日までの 12 か月）。</figcaption>
 </figure>
+
+## 月間の開発活動も急増
+
+毎月、さらに多くのソフトウェアが生まれています。
+
+<figure class="rpi-pipeline gh-growth gh-monthly">
+<style>
+.prose-akq .gh-growth.gh-monthly{grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}
+.prose-akq .gh-monthly .gh-peak{text-anchor:start;font-size:38px}
+.prose-akq .gh-monthly .gh-label{text-anchor:start;font-size:16px}
+.prose-akq .gh-monthly .gh-axis{font-size:15px}
+.prose-akq .gh-monthly .gh-scale{text-anchor:start;dominant-baseline:middle;font-size:16px}
+@media(max-width:700px){.prose-akq .gh-growth.gh-monthly{grid-template-columns:1fr}}
+</style>
+<!-- Curves visually traced from the supplied Universe keynote chart, not a reconstructed monthly dataset. -->
+<svg viewBox="0 0 420 360" role="img" aria-labelledby="gh-monthly-prs-title gh-monthly-prs-desc">
+<title id="gh-monthly-prs-title">月間 2.2 億件のマージされたプルリクエスト</title>
+<desc id="gh-monthly-prs-desc">GitHub Universe 2026 の基調講演のグラフをもとにした、2023〜2026 年の月間推移。2026 年に急増し、月間 2.2 億件に到達。</desc>
+<rect class="gh-frame" x="4" y="4" width="412" height="352"/>
+<text class="gh-peak" x="26" y="52">2.2 億</text><text class="gh-label" x="26" y="82">マージされた PR / 月</text>
+<path class="gh-grid" d="M 35 133.18 H 343 M 35 224.09 H 343"/><path d="M 35 315 H 343 V 105" fill="none" stroke="#2a3050" stroke-width="2"/>
+<text class="gh-scale" x="350" y="133.18">2億</text><text class="gh-scale" x="350" y="224.09">1億</text><text class="gh-scale" x="350" y="315">0</text>
+<polyline class="gh-line" points="35,289.4 42.5,288.4 50,289.2 57.5,289.7 65,290.6 72.5,289.3 80,288.3 87.5,288.0 95,289.1 102.5,289.3 110,288.0 117.5,285.9 125,285.8 132.5,286.3 140,286.2 147.5,284.4 155,281.9 162.5,281.8 170,281.8 177.5,280.5 185,278.6 192.5,275.0 200,273.7 207.5,273.3 215,272.1 222.5,268.1 230,263.6 237.5,260.5 245,259.3 252.5,257.1 260,254.0 267.5,247.1 275,244.1 282.5,231.8 290,221.6 297.5,217.9 305,205.3 312.5,190.6 320,173.9 327.5,158.0 335,115.0"/>
+<circle class="gh-point gh-glow" cx="335" cy="115" r="6"/>
+<text class="gh-axis" x="35" y="340">2023</text><text class="gh-axis" x="120" y="340">2024</text><text class="gh-axis" x="205" y="340">2025</text><text class="gh-axis" x="290" y="340">2026</text>
+</svg>
+<svg viewBox="0 0 420 360" role="img" aria-labelledby="gh-monthly-commits-title gh-monthly-commits-desc" style="color:#ff2e88">
+<title id="gh-monthly-commits-title">月間 73.8 億件のコミット</title>
+<desc id="gh-monthly-commits-desc">GitHub Universe 2026 の基調講演のグラフをもとにした、2023〜2026 年の月間推移。2026 年に急増し、月間 73.8 億件に到達。</desc>
+<rect class="gh-frame" x="4" y="4" width="412" height="352"/>
+<text class="gh-peak" x="26" y="52">73.8 億</text><text class="gh-label" x="26" y="82">コミット / 月</text>
+<path class="gh-grid" d="M 35 152.40 H 343 M 35 206.60 H 343 M 35 260.80 H 343"/><path d="M 35 315 H 343 V 105" fill="none" stroke="#2a3050" stroke-width="2"/>
+<text class="gh-scale" x="350" y="152.40">60億</text><text class="gh-scale" x="350" y="206.60">40億</text><text class="gh-scale" x="350" y="260.80">20億</text><text class="gh-scale" x="350" y="315">0</text>
+<polyline class="gh-line" points="35,302.8 42.5,302.5 50,302.7 57.5,303.2 65,303.7 72.5,302.8 80,302.5 87.5,302.5 95,303.0 102.5,302.9 110,302.3 117.5,301.7 125,301.9 132.5,301.6 140,301.5 147.5,300.4 155,299.8 162.5,299.1 170,299.1 177.5,298.5 185,297.0 192.5,295.6 200,295.0 207.5,294.4 215,291.6 222.5,288.2 230,287.0 237.5,285.3 245,282.5 252.5,279.4 260,276.9 267.5,274.1 275,271.2 282.5,268.4 290,263.7 297.5,258.4 305,253.1 312.5,247.5 320,236.9 327.5,188.5 335,115.0"/>
+<circle class="gh-point gh-glow" cx="335" cy="115" r="6"/>
+<text class="gh-axis" x="35" y="340">2023</text><text class="gh-axis" x="120" y="340">2024</text><text class="gh-axis" x="205" y="340">2025</text><text class="gh-axis" x="290" y="340">2026</text>
+</svg>
+<svg viewBox="0 0 420 360" role="img" aria-labelledby="gh-monthly-repos-title gh-monthly-repos-desc" style="color:#ffb000">
+<title id="gh-monthly-repos-title">月間 3,030 万件の新規リポジトリ</title>
+<desc id="gh-monthly-repos-desc">GitHub Universe 2026 の基調講演のグラフをもとにした、2023〜2026 年の月間推移。2026 年に急増し、月間 3,030 万件に到達。</desc>
+<rect class="gh-frame" x="4" y="4" width="412" height="352"/>
+<text class="gh-peak" x="26" y="52">3,030 万</text><text class="gh-label" x="26" y="82">新規リポジトリ / 月</text>
+<path class="gh-grid" d="M 35 116.98 H 343 M 35 182.99 H 343 M 35 248.99 H 343"/><path d="M 35 315 H 343 V 105" fill="none" stroke="#2a3050" stroke-width="2"/>
+<text class="gh-scale" x="350" y="116.98">3,000万</text><text class="gh-scale" x="350" y="182.99">2,000万</text><text class="gh-scale" x="350" y="248.99">1,000万</text><text class="gh-scale" x="350" y="315">0</text>
+<polyline class="gh-line" points="35,281.7 42.5,279.6 50,281.4 57.5,284.6 65,283.8 72.5,280.0 80,278.5 87.5,280.5 95,282.5 102.5,281.2 110,277.5 117.5,275.7 125,277.4 132.5,279.0 140,276.9 147.5,272.0 155,270.2 162.5,271.3 170,272.3 177.5,270.0 185,265.6 192.5,261.4 200,261.5 207.5,262.1 215,259.8 222.5,252.9 230,246.8 237.5,245.0 245,244.9 252.5,242.8 260,235.0 267.5,226.0 275,221.1 282.5,220.0 290,217.5 297.5,209.4 305,195.9 312.5,184.2 320,172.6 327.5,164.3 335,115.0"/>
+<circle class="gh-point gh-glow" cx="335" cy="115" r="6"/>
+<text class="gh-axis" x="35" y="340">2023</text><text class="gh-axis" x="120" y="340">2024</text><text class="gh-axis" x="205" y="340">2025</text><text class="gh-axis" x="290" y="340">2026</text>
+</svg>
+<figcaption>2023〜2026 年の月間推移。出典：<a class="retro-link" href="https://github.com/events/universe/recap" target="_blank" rel="noopener noreferrer">GitHub Universe 2026 ↗</a></figcaption>
+</figure>
+
+## AI 開発への投資 <a class="h2-doc" href="https://github.blog/news-insights/company-news/github-universe-2026-evolving-every-layer-of-the-stack/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+世界の AI 開発をリードするプラットフォームであり続けるために、GitHub は **大規模なインフラ投資**を続けています。
+
+<div class="tbl-fit gh-investment">
+<style>
+body.present-mode .prose-akq .tbl-fit.gh-investment th,
+body.present-mode .prose-akq .tbl-fit.gh-investment td{padding:.2em .9em;line-height:1.25}
+</style>
+
+| インフラ | 2026 年に追加した容量 |
+| --- | --- |
+| 計算リソース | **CPU コア +400 万** |
+| 高速ストレージ | **+160 PB** |
+| ネットワーク容量 | **+50 Tb/s** |
+
+<p style="font-size:.75em;line-height:1.5;margin:1em 0 0">Git インフラも刷新中。負荷テストでは、<strong>1 つのモノレポで 5,000 の「angry agents」が毎秒 7,200 件の書き込みを達成</strong>。さらなる処理能力の向上を進めています。<a class="retro-link" href="https://www.youtube.com/watch?v=MZfqId_rrB0" target="_blank" rel="noopener noreferrer">Universe セッション ↗</a></p>
+
+</div>
 
 ## 業界からの評価
 
