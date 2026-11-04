@@ -5,16 +5,9 @@ summary: "ワークフローが使うアクションを、.github/workflows/acti
 category: actions
 status: "パブリックプレビュー"
 source: "https://github.blog/changelog/2026-10-14-github-actions-workflow-lockfiles-in-public-preview/"
-demoLinks:
-  - label: "このサイトの actions.lock"
-    url: "https://github.com/theomonfort/theomonfort/blob/main/.github/workflows/actions.lock"
-  - label: "theomonfort-org → Actions ポリシーを作成"
-    url: "https://github.com/organizations/theomonfort-org/settings/actions/rules/new"
-demo:
-  - "このサイトの actions.lock を開き、workflows（deploy.yml が使うアクション）と dependencies（各タグが指すコミット SHA と owner_id / repo_id）の 2 つのセクションを見せる。upload-pages-artifact の下に、推移的依存の upload-artifact が記録されている点も見せる。"
-  - "deploy.yml では actions/checkout@v4 が @v4.4.0 のような完全なバージョンに書き換えられている。ターミナルで gh actions-lock --verify .github/workflows/deploy.yml を実行し、ロックファイルが最新であることを確認する。"
-  - "theomonfort-org の Settings → Actions → Policies → New policy で Require lockfile をオンにする。まず Evaluate モードで対象リポジトリとワークフローを絞り、Policy insights でブロックされる run を確認してから Active にする。"
 ---
+
+[GA の発表とデモは、10 月 28 日の Universe の記事にあります。](#2026-10-28-actions-workflow-lockfiles-ga)
 
 ### 何が変わる？
 
