@@ -82,7 +82,7 @@ const updates = await Promise.all(entries.map(async (entry) => ({
       {updates.map(({ data, slug, Content }) => {
         const date = data.date.toISOString().slice(0, 10);
         return (
-          <li class="update" id={slug}>
+          <li class:list={['update', { universe: data.event === 'universe-2026' }]} id={slug}>
             <div class="date-rail">
               <time datetime={date}>
                 <span class="year">{date.slice(0, 4)}</span>
@@ -98,6 +98,9 @@ const updates = await Promise.all(entries.map(async (entry) => ({
                 <summary class="entry-toggle">
                   <h2>
                     <span class="entry-meta">
+                      {data.event === 'universe-2026' && (
+                        <span class="event-badge"><span aria-hidden="true">✦</span> UNIVERSE 2026</span>
+                      )}
                       <span class="category">{copy.categories[data.category]}</span>
                       {data.status && <span class="status">{data.status}</span>}
                     </span>
@@ -383,6 +386,44 @@ const updates = await Promise.all(entries.map(async (entry) => ({
   .entry.security { --entry-accent: var(--c-neon-cyan); }
   .entry.copilot { --entry-accent: var(--c-neon-magenta); }
   .entry.actions { --entry-accent: var(--c-gb-green); }
+  .universe {
+    --universe-spectrum: linear-gradient(115deg,
+      var(--c-neon-cyan),
+      var(--c-phosphor) 28%,
+      var(--c-neon-magenta) 58%,
+      var(--c-crt-amber) 80%,
+      var(--c-gb-green));
+  }
+  .universe .date-rail { border-color: color-mix(in srgb, var(--c-phosphor) 45%, transparent); }
+  .universe .date-rail::after {
+    background: var(--c-phosphor);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--c-phosphor) 65%, transparent);
+    transform: rotate(45deg);
+  }
+  .universe .day { color: var(--c-phosphor); }
+  .universe .entry {
+    border: 2px solid var(--c-phosphor);
+    border-image: var(--universe-spectrum) 1;
+    background:
+      radial-gradient(circle at 90% 1.5rem, var(--c-phosphor) 1px, transparent 2px),
+      radial-gradient(circle at 80% 3rem, var(--c-neon-cyan) 1px, transparent 2px),
+      radial-gradient(ellipse at top right, color-mix(in srgb, var(--c-phosphor) 5%, transparent), transparent 65%),
+      var(--c-midnight);
+    box-shadow: 0 0 16px color-mix(in srgb, var(--c-neon-cyan) 8%, transparent);
+  }
+  .event-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--c-phosphor);
+    border-image: var(--universe-spectrum) 1;
+    background: color-mix(in srgb, var(--c-phosphor) 6%, var(--c-midnight));
+    color: var(--c-phosphor);
+    font-family: 'DotGothic16', monospace;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
   .entry-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; font-size: 0.75rem; font-weight: 400; }
   .category { color: var(--entry-accent); }
   .status { border: 1px dashed currentColor; padding: 0.15rem 0.5rem; color: var(--c-phosphor); }

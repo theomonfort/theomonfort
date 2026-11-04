@@ -74,6 +74,7 @@ const changelog = defineCollection({
     summary: z.string(),
     category: z.enum(['review', 'security', 'copilot', 'actions', 'administration', 'issues']),
     source: z.string().url(),
+    event: z.enum(['universe-2026']).optional(),
     status: z.string().optional(),
     demo: z.array(z.string()).default([]),
     demoUrl: z.string().url().optional(),
