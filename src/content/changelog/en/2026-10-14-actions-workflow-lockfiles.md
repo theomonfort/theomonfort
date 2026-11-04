@@ -5,16 +5,9 @@ summary: "Workflows can now pin the actions they use to the commits recorded in 
 category: actions
 status: "Public preview"
 source: "https://github.blog/changelog/2026-10-14-github-actions-workflow-lockfiles-in-public-preview/"
-demoLinks:
-  - label: "This site's actions.lock"
-    url: "https://github.com/theomonfort/theomonfort/blob/main/.github/workflows/actions.lock"
-  - label: "theomonfort-org → New Actions policy"
-    url: "https://github.com/organizations/theomonfort-org/settings/actions/rules/new"
-demo:
-  - "Open this site's actions.lock and show its two sections: workflows (the actions deploy.yml uses) and dependencies (the commit SHA each tag resolves to, plus owner_id / repo_id). Point out the transitive upload-artifact dependency recorded under upload-pages-artifact."
-  - "In deploy.yml, actions/checkout@v4 was rewritten to a full version such as @v4.4.0. In a terminal, run gh actions-lock --verify .github/workflows/deploy.yml to confirm the lockfile is up to date."
-  - "In theomonfort-org, open Settings → Actions → Policies → New policy and turn on Require lockfile. Start in Evaluate mode scoped to specific repositories and workflows, check blocked runs in Policy insights, then switch to Active."
 ---
+
+[The GA announcement and demo are in the October 28 Universe entry.](#2026-10-28-actions-workflow-lockfiles-ga)
 
 ### What changes
 
