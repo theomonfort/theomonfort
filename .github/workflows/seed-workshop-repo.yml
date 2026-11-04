@@ -160,7 +160,7 @@ jobs:
           } >> "$GITHUB_OUTPUT"
 
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           path: workshop-repo
           token: ${{ secrets.GH_AW_SIDE_REPO_PAT }}
