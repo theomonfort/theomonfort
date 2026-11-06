@@ -14,6 +14,7 @@ export const NEW_PLAYBOOK_SLUGS = new Set([
   'copilot-metrics',
   'pull-requests',
   'vscode-agents-window',
+  'copilot-chat',
   'copilot-code-review',
   'code-scanning',
   'migrations',
@@ -31,6 +32,7 @@ export function isNewPlaybookEntry(slug: string): boolean {
 // body (0-based). The auto-generated links slide is the final index.
 export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'github': [3, 4, 5],
+  'copilot-chat': [1, 2],
   'usage-based-billing': [8, 9],
   'token-optimization': [8],
   'governance': [3, 4, 10, 11],

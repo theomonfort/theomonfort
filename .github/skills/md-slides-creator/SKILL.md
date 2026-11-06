@@ -148,7 +148,9 @@ These are the recurring patterns the deck uses. Use them — they're styled, acc
 
 ### 4b. Comparison tables
 
-GFM tables render with retro styling. Use them for: feature comparisons, pricing, flag references, "before/after", "X vs Y".
+GFM tables render with compact retro styling by default. Use them for: feature comparisons, pricing, flag references, "before/after", "X vs Y".
+
+**Compact is the default, not an opt-in.** Keep table margins and cell padding tight, with short cell text and natural wrapping. Reduce whitespace before reducing font size; never make slide text tiny just to fit a table. Put any short introductory description above the table.
 
 ```markdown
 | 項目 | A | B |
@@ -160,6 +162,9 @@ GFM tables render with retro styling. Use them for: feature comparisons, pricing
 **Tips**
 
 - Keep ≤ 5 columns and ≤ 8 rows per slide.
+- Prefer short labels and one-line cells. Move sentence-heavy explanations into a collapsible widget instead of building tall rows.
+- Standard Markdown tables already use compact spacing in both locale renderers. For HTML tables, reuse the same defaults or the existing `compact-table` class; do not add per-entry CSS to restore roomy padding.
+- Check the rendered slide at 1440×900 and 1920×1080, and check narrow-screen wrapping. A table must not push the slide's remaining content off-screen or force long first-column labels onto one line.
 - Use emoji as row icons (🔑 / 🔍 / 🛡️) for scannability.
 - Bold the column the reader should look at first.
 
@@ -428,6 +433,7 @@ Before declaring done, verify EVERY item:
 - [ ] No slide (other than the first, with its `hero-quote`) starts with a `>` callout — every slide opens with normal prose; callouts sit lower / at the bottom.
 - [ ] Each slide stands on its own — no orphan H2 with no body, no body before the first H2.
 - [ ] Tables ≤ 5 cols, ≤ 8 rows.
+- [ ] Tables use compact spacing, short cells, and natural wrapping; introductory text is above the table, and the complete slide fits at 1440×900 and 1920×1080 without shrinking the prose font.
 - [ ] Code blocks fit one slide each.
 - [ ] No `# H1` in body (frontmatter handles the title).
 - [ ] Slides that document a product's features, pricing, limits, or setup carry an `h2-doc` badge linking their canonical doc page.

@@ -86,29 +86,111 @@ links:
 
 ## CLI と VS Code Chat の違い
 
-| | Copilot CLI | VS Code Chat |
-|---|---|---|
-| **UI** | とても軽い。ターミナル中心なので、コマンドを覚える必要があり、エディタ UI は最小限。一方で CLI をすぐ開けるので、folder、PowerPoint、Excel など手元の computer resource に対して作業しやすい。 | 画面上で選択肢・設定・ファイル移動・inline diff・debugger を扱いやすい。 |
-| **新機能の速さ** | `/chronicle`、`/fleet`、`/share`、Rubber Duck など、新しい実験が入りやすい。 | より安定志向。CLI で育った良いアイデアを取り込んでいくことが多い。 |
-| **Sub-agent** | Explore、Task、Rubber Duck、Code Review など、built-in agent を多く持ち、native に起動できる。 | 現時点では限定的だが、少しずつ追いついている。 |
-| **Session management** | `/context`、`/compact`、`/session` などで、session を細かく制御しやすい。 | 改善中だが、今は CLI ほど細かくはない。 |
-| **Partner agent** | Copilot CLI は Copilot の Harness 内で動く。Codex / Claude の Harness は使えず、使えるのはそれらの **model**。 | VS Code 内では、Copilot、Codex、Claude などの agent / extension を切り替えやすい。 |
-| **Index** | 主に `grep`、`rg`、workspace command などの terminal/search tool を使う。 | Blackbird など、エディタ側の richer index を使える。 |
+<div class="ctl-widget">
+<div class="ctl-list">
+<details class="ctl-item" name="cli-vscode-comparison">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🖥️</span><span class="ctl-name">UI</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Copilot CLI</span><span class="ctl-v">とても軽い。ターミナル中心なので、コマンドを覚える必要があり、エディタ UI は最小限。一方で CLI をすぐ開けるので、folder、PowerPoint、Excel など手元の computer resource に対して作業しやすい。</span></p>
+<p class="ctl-row"><span class="ctl-k">VS Code Chat</span><span class="ctl-v">画面上で選択肢・設定・ファイル移動・inline diff・debugger を扱いやすい。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cli-vscode-comparison">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🧪</span><span class="ctl-name">新機能の速さ</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Copilot CLI</span><span class="ctl-v"><code>/limits</code>、<code>/fleet</code>、<code>/share</code>、Rubber Duck など、新しい実験が入りやすい。</span></p>
+<p class="ctl-row"><span class="ctl-k">VS Code Chat</span><span class="ctl-v">より安定志向。CLI で育った良いアイデアを取り込んでいくことが多い。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cli-vscode-comparison">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🤖</span><span class="ctl-name">Sub-agent</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Copilot CLI</span><span class="ctl-v">Explore、Task、Rubber Duck、Code Review など、built-in agent を多く持ち、native に起動できる。</span></p>
+<p class="ctl-row"><span class="ctl-k">VS Code Chat</span><span class="ctl-v">現時点では限定的だが、少しずつ追いついている。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cli-vscode-comparison">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🧭</span><span class="ctl-name">Session management</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Copilot CLI</span><span class="ctl-v"><code>/context</code>、<code>/compact</code>、<code>/session</code> などで、session を細かく制御しやすい。</span></p>
+<p class="ctl-row"><span class="ctl-k">VS Code Chat</span><span class="ctl-v">改善中だが、今は CLI ほど細かくはない。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cli-vscode-comparison">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔀</span><span class="ctl-name">Partner agent</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Copilot CLI</span><span class="ctl-v">Copilot CLI は Copilot の Harness 内で動く。Codex / Claude の Harness は使えず、使えるのはそれらの <strong>model</strong>。</span></p>
+<p class="ctl-row"><span class="ctl-k">VS Code Chat</span><span class="ctl-v">VS Code 内では、Copilot、Codex、Claude などの agent / extension を切り替えやすい。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cli-vscode-comparison">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔎</span><span class="ctl-name">コード検索</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">CLI / app</span><span class="ctl-v">ローカルのテキスト検索と、GitHub 上でインデックス済みのリポジトリのセマンティック検索。<a class="retro-link" href="https://github.com/github/copilot-cli/blob/main/changelog.md" target="_blank" rel="noopener noreferrer">CLI リリースノート ↗</a></span></p>
+<p class="ctl-row"><span class="ctl-k">VS Code Chat</span><span class="ctl-v">Workspace のテキスト検索とセマンティック検索に加え、エディタの文脈やシンボル参照を利用。<a class="retro-link" href="https://code.visualstudio.com/docs/agents/reference/workspace-context" target="_blank" rel="noopener noreferrer">Docs ↗</a></span></p>
+<p class="ctl-row"><span class="ctl-k">Blackbird</span><span class="ctl-v">GitHub 側のコード検索エンジン。エディタ専用のインデックスではない。<a class="retro-link" href="https://github.blog/engineering/architecture-optimization/the-technology-behind-githubs-new-code-search/" target="_blank" rel="noopener noreferrer">仕組み ↗</a></span></p>
+</div>
+</details>
+</div>
+</div>
 
-## 強力なビルトインエージェント
+## 強力なビルトインエージェント <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-custom-agents#built-in-agents" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-cli-agent-definitions" class="demo-toggle" /><label class="h2-demo" for="demo-cli-agent-definitions">&#9658; DEMO</label>
 
-Copilot CLI には、よくあるタスク向けの<a href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-custom-agents#built-in-agents" target="_blank" rel="noopener noreferrer" class="retro-link">ビルトインエージェント</a>が用意されている。
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-cli-agent-definitions" aria-label="デモ手順を閉じる"></label>
+<div class="demo-window" role="group" aria-label="デモ手順">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Agent definitions</span><span class="demo-note">発表者専用</span><label class="demo-close" for="demo-cli-agent-definitions" aria-label="閉じる">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">インストール済みのバージョンを確認</p>
+<code class="demo-cmd">copilot --version</code>
+<p class="demo-out">表示された CLI のバージョンを控える。</p>
+</li>
+<li>
+<p class="demo-step-title">定義フォルダーを開く</p>
+<p>ローカルの CLI インストール先で <code class="demo-path">definitions/</code> を探す。Apple silicon 搭載 Mac の例：</p>
+<p><code class="demo-path">~/.copilot/pkg/darwin-arm64/&lt;version&gt;/definitions/</code></p>
+<p><code class="demo-path">&lt;version&gt;</code> をインストール済みのバージョンに置き換える。場所は OS やインストール方法によって異なる。</p>
+</li>
+<li>
+<p class="demo-step-title">エージェントの定義を読む</p>
+<p><code class="demo-path">explore.agent.yaml</code> などの <code class="demo-path">*.agent.yaml</code> をエディタで開く。</p>
+<p class="demo-out">インストール済みファイルは変更せず、ビルトインエージェントの定義を確認する。</p>
+</li>
+</ol>
+</div>
+</div>
 
-| エージェント | 説明 |
-|---|---|
-| **Explore** | コードをメインの文脈に追加せず、素早くコードベースを分析し、コードについて質問できるようにする。 |
-| **Task** | テストやビルドなどのコマンドを実行し、成功時は短い要約、失敗時は完全な出力を返す。 |
-| **General purpose** | すべてのツールと高度な推論が必要な複雑な複数ステップのタスクを、メイン会話とは別の文脈で処理する。 |
-| **Code review** | 本当に重要な問題だけを見つけることに集中してコード変更をレビューし、ノイズを最小化する。 |
-| **Research** | コードベース、関連リポジトリ、Web を横断して深く調査し、引用付きの詳細レポートを作成する。 |
-| **Rubber duck** | 複雑なタスクに対して建設的な批評役としてフィードバックを返す。Copilot CLI が自動的に使う。 |
+Copilot CLI には、よくあるタスク向けのビルトインエージェントがある。**`/subagents`** で確認し、使うモデルを設定できる。
 
-> 💡 これらのビルトインエージェントの定義は、ローカルにインストールされた CLI の `definitions/*.agent.yaml` で確認できる（例: `~/.copilot/pkg/darwin-arm64/<version>/definitions/*.agent.yaml`）。
+<div class="ctl-widget">
+<div class="ctl-list">
+<details class="ctl-item" name="cli-built-in-agents">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔎</span><span class="ctl-name">Explore</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body"><p class="ctl-row"><span class="ctl-k">できること</span><span class="ctl-v">コードをメインの文脈に追加せず、素早くコードベースを分析し、コードについて質問できるようにする。</span></p></div>
+</details>
+<details class="ctl-item" name="cli-built-in-agents">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛠️</span><span class="ctl-name">Task</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body"><p class="ctl-row"><span class="ctl-k">できること</span><span class="ctl-v">テストやビルドなどのコマンドを実行し、成功時は短い要約、失敗時は完全な出力を返す。</span></p></div>
+</details>
+<details class="ctl-item" name="cli-built-in-agents">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🧠</span><span class="ctl-name">General purpose</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body"><p class="ctl-row"><span class="ctl-k">できること</span><span class="ctl-v">すべてのツールと高度な推論が必要な複雑な複数ステップのタスクを、メイン会話とは別の文脈で処理する。</span></p></div>
+</details>
+<details class="ctl-item" name="cli-built-in-agents">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📝</span><span class="ctl-name">Code review</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body"><p class="ctl-row"><span class="ctl-k">できること</span><span class="ctl-v">本当に重要な問題だけを見つけることに集中してコード変更をレビューし、ノイズを最小化する。</span></p></div>
+</details>
+<details class="ctl-item" name="cli-built-in-agents">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📚</span><span class="ctl-name">Research</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body"><p class="ctl-row"><span class="ctl-k">できること</span><span class="ctl-v">コードベース、関連リポジトリ、Web を横断して深く調査し、引用付きの詳細レポートを作成する。</span></p></div>
+</details>
+<details class="ctl-item" name="cli-built-in-agents">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🦆</span><span class="ctl-name">Rubber duck</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body"><p class="ctl-row"><span class="ctl-k">できること</span><span class="ctl-v">複雑なタスクに対して建設的な批評役としてフィードバックを返す。Copilot CLI が自動的に使う。</span></p></div>
+</details>
+</div>
+</div>
 
 ## Rubber Duck — クロスモデルレビュー
 

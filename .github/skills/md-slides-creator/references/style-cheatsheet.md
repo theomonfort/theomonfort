@@ -63,6 +63,14 @@ One canonical doc link per slide, inline on the `##` line:
 
 Label stays `📖 Docs` in both locales. Max one per slide. Everything else goes in frontmatter `links[]`.
 
+## Tables
+
+- **Compact by default**: tight margins and cell padding, short labels, and natural wrapping.
+- Put a short introductory description above the table.
+- Use standard Markdown tables or the existing `compact-table` HTML class. Do not add roomy per-entry overrides.
+- Keep prose readable: reduce whitespace first, then use a collapsible widget for long explanations rather than shrinking the font.
+- Verify the entire slide at 1440×900 and 1920×1080, plus narrow-screen wrapping.
+
 ## Callout emoji palette
 
 | emoji | meaning |
