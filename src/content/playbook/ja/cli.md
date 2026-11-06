@@ -31,8 +31,11 @@ links:
     label: CLI command reference (/experimental, /theme)
     url: https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference
   - group: 🛡️ Sandbox
-    label: About cloud and local sandboxes
-    url: https://docs.github.com/en/copilot/concepts/about-cloud-and-local-sandboxes
+    label: About local sandboxing
+    url: https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/about-cloud-and-local-sandboxes
+  - group: 🛡️ Sandbox
+    label: About cloud sandboxes
+    url: https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/about-cloud-sandboxes
   - group: 🛡️ Sandbox
     label: Using local sandboxing
     url: https://docs.github.com/en/copilot/how-tos/cloud-and-local-sandboxes/using-local-sandboxing
@@ -46,8 +49,11 @@ links:
     label: Automating tasks with Copilot CLI and GitHub Actions
     url: https://docs.github.com/en/copilot/how-tos/copilot-cli/automate-copilot-cli/automate-with-actions
   - group: 📰 Recent Changelog
-    label: "Cloud & local sandboxes — public preview (2026-06-02)"
-    url: https://github.blog/changelog/2026-06-02-cloud-and-local-sandboxes-for-github-copilot-now-in-public-preview/
+    label: "Cloud sandboxes: 一般提供開始 (2026-10-28)"
+    url: https://github.blog/changelog/2026-10-28-work-from-anywhere-with-a-new-connected-copilot-cloud-experience
+  - group: 📰 Recent Changelog
+    label: "Local sandboxing: 一般提供開始 (2026-10-07)"
+    url: https://github.blog/changelog/2026-10-07-local-sandboxing-for-github-copilot-now-generally-available
   - group: 📰 Recent Changelog
     label: "Improved UI, Rubber Duck, scheduling & voice input (2026-06-02)"
     url: https://github.blog/changelog/2026-06-02-copilot-cli-improved-ui-rubber-duck-prompt-scheduling-and-voice-input/
@@ -254,52 +260,61 @@ CLI は slash command で、モデル・共有・実験機能・環境情報な�
 
 > 📝 スクリーンリーダー対応をはじめ、ほかにも多くの UI 改善が入っている。詳しくは <a class="retro-link" href="https://github.blog/changelog/2026-06-02-copilot-cli-improved-ui-rubber-duck-prompt-scheduling-and-voice-input/" target="_blank" rel="noopener noreferrer">changelog ↗</a>。
 
-## 🛡️ Sandbox — 安全な実行環境
+## 🛡️ Sandbox <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/about-cloud-and-local-sandboxes" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-Copilot が動かすシェルコマンドを **隔離環境** で実行し、filesystem / network / system への到達を制限。agentic な作業を安心して任せられる。(Public Preview)
+どちらも **一般提供済み** (2026-11-06 時点)。
 
 | | 🖥️ ローカル Sandbox | ☁️ クラウド Sandbox |
 |---|---|---|
-| **起動** | session 内で `/sandbox enable` | `copilot --cloud` |
-| **実行場所** | 自分のマシン(隔離) | GitHub ホストの ephemeral Linux |
-| **基盤** | Microsoft MXC | Azure Container Apps Sandboxes |
-| **対応** | macOS / Linux(Windows は Insiders) | どのデバイスからでも |
-| **ポリシー** | Intune / MDM で集中管理 | Cloud Agent ポリシーを継承 |
+| **GA** | 2026-10-07 | 2026-10-28 |
+| **起動** | `/sandbox enable` | `copilot --cloud` (対話専用) |
+| **実行環境** | macOS / Linux / 対応更新済みの Windows 11 | GitHub ホストの Linux。再開可能 |
 
-- 🔒 **隔離対象**:Copilot 起点のシェル実行の filesystem / network / system capability。
-- 🔁 **クラウドは状態を保持**:Active → Stopped(snapshot)→ Deleted。別デバイスから再開でき、重い処理を並列実行できる。
-- 🧩 **認証はそのまま**:Copilot CLI のサインインを使うので、別途クラウド設定は不要。
+ローカルは **デフォルト OFF**。ファイルツールのポリシー適用はベストエフォート、リモート MCP は対象外。クラウドは **Copilot 有料プラン** が必要。
 
-## 非対話モード(プログラマティック実行)★
+## 非対話モード ★ <a class="h2-doc" href="https://docs.github.com/en/copilot/how-tos/copilot-cli/automate-copilot-cli/run-cli-programmatically" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-Copilot CLI は `copilot -p "..."` で **1 コマンド実行** できる。対話セッションを開かず、1 ターンで完了して exit するので、シェルスクリプト・cron・**バッチファイル**・**GitHub Actions** から呼び出せる。定型業務の自動化や PR の自動レビューなど「人がやらなくていい作業」を Copilot に任せられる。
+1 つのプロンプトを実行して終了。**script、cron、バッチファイル、GitHub Actions** から定型作業を自動化。
 
-### 主要フラグ
-
-- `-p "..."` / `--prompt "..."` — プロンプトを渡して 1 ターンで終了
-- `-s` (silent) — メタデータを抑制し応答テキストのみを stdout に出力(変数代入・パイプ向け)
-- `--no-ask-user` — clarifying question を出さず自律的に判断
-- `--allow-tool='shell(npm:*), write'` — 必要なツールだけ許可(`--allow-all` はサンドボックスのみ)
-- `--model gpt-5.5` — モデルを固定して結果のブレを抑える
-- `--share='./session.md'` — セッション全体を Markdown で保存
-
-### よくあるユースケース
-
-- 📝 コミットメッセージの自動生成 / 📰 リリースノート作成
-- 🐛 ESLint エラーの一括修正 / 🧪 テスト未整備モジュールにテスト追加
-- 🔍 PR の AI レビュー(`/review` をスクリプト化) / 🔐 依存ライブラリの脆弱性監査
-- 📚 README・JSDoc の一括生成 / 🌏 ドキュメントの自動翻訳
-
-### 運用のコツ
-
-- 🔑 認証は環境変数で渡す:`COPILOT_GITHUB_TOKEN` → `GH_TOKEN` → `GITHUB_TOKEN`
-- 🧾 PAT は **fine-grained (v2)** で「Copilot Requests」権限を付ける(古い `ghp_` 形式は不可)
-- 🛡️ `--allow-tool` でホワイトリスト指定が鉄則。`--allow-all` は使わない
-- 🎯 プロンプトは具体的に — 出力フォーマット(「Number only.」「YES/NO」)も指定するとパースしやすい
-- 📊 `--share` でセッションログを残しておくと、結果の根拠を後で追える
-- 🧩 まず interactive で動かしてプロンプトを煮詰め、固まったら `-p` でスクリプト化が一番早い
-
-📘 詳細:
-- <a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/copilot-cli/automate-copilot-cli/run-cli-programmatically" target="_blank" rel="noopener noreferrer">Running GitHub Copilot CLI programmatically ↗</a>
-- <a class="retro-link" href="https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-programmatic-reference" target="_blank" rel="noopener noreferrer">Programmatic reference (full flag list) ↗</a>
-- <a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/copilot-cli/automate-copilot-cli/automate-with-actions" target="_blank" rel="noopener noreferrer">Automating tasks with Copilot CLI and GitHub Actions ↗</a>
+<div class="det-widget">
+<div class="det-split">
+<div class="det-list">
+<details class="det-pick" name="cli-programmatic" open>
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">▶️</span><span class="det-name">実行と出力</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Run &amp; output</span></p>
+<p class="det-why"><code>copilot -p 'README.md を要約して' -s</code><br><br><code>-p</code> / <code>--prompt</code>: 1 ターン実行して終了。<br><code>-s</code>: 応答テキストだけを出力。パイプ向け。<br><code>--no-ask-user</code>: 確認質問を省略。</p>
+</div>
+</details>
+<details class="det-pick" name="cli-programmatic">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🛡️</span><span class="det-name">ツールの権限</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Permissions</span></p>
+<p class="det-why">タスクに必要なツールだけ許可する:<br><code>--allow-tool='shell(npm:*), write'</code><br><br>Sandbox 外で <code>--allow-all</code> は使わない。<code>--no-ask-user</code> はツールの権限を付与しない。</p>
+</div>
+</details>
+<details class="det-pick" name="cli-programmatic">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🔑</span><span class="det-name">認証</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Authentication</span></p>
+<p class="det-why">優先順: <code>COPILOT_GITHUB_TOKEN</code> → <code>GH_TOKEN</code> → <code>GITHUB_TOKEN</code><br><br><b>Copilot Requests</b> 権限付きの <b>fine-grained PAT</b> を使用。classic PAT (<code>ghp_</code>) は非対応。</p>
+</div>
+</details>
+<details class="det-pick" name="cli-programmatic">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🎯</span><span class="det-name">再現性</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Repeatability</span></p>
+<p class="det-why"><code>--model MODEL</code>: モデルを固定。<br><code>--share='./session.md'</code>: 会話ログを保存。<br><b>YES/NO</b> など出力形式も固定。対話モードで試してから <code>-p</code> で自動化する。</p>
+</div>
+</details>
+<details class="det-pick" name="cli-programmatic">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">⚙️</span><span class="det-name">ユースケース</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Use cases</span></p>
+<p class="det-why">コミットメッセージとリリースノート。<br>lint 修正とテスト生成。<br><code>/review</code> による PR レビューと依存関係の監査。<br>README、JSDoc、翻訳。</p>
+</div>
+</details>
+</div>
+<div class="det-screen"><p class="det-empty">項目を選択 ▸</p></div>
+</div>
+</div>
