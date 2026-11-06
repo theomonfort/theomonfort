@@ -1,7 +1,7 @@
 ---
 title: Harness Engineering
 titleEn: Harness Engineering
-summary: The discipline of designing the scaffold that lets agents operate safely and effectively — tools, constraints, permissions, and external connections.
+summary: Set up the context, tools, guardrails, and checks that help AI agents complete tasks safely and effectively.
 icon: /theomonfort/icons/harness-engineering.png
 color: green
 accent:
@@ -47,10 +47,10 @@ links:
 
 <div class="hero-quote">
   <p>
-    <strong>Harness Engineering</strong> is the discipline of designing the scaffold that gets the best results from AI.
+    <strong>Harness Engineering</strong> means setting up the environment an AI agent works in.
   </p>
   <p>
-    It's not just about imposing restrictions — it's about defining the goal, context, roles, and verification methods so AI can move toward outcomes safely and without hesitation.
+    Define its goals and roles, provide context and tools, set guardrails, and check its results.
   </p>
 </div>
 
@@ -87,7 +87,7 @@ config:
     .nodeLabel .llm-row img.ms-ico { width: 17px !important; height: 17px !important; }
 ---
 flowchart LR
-  Project[You + Project] -->|prompts / instructions / skills / MCP| Agent[The Agent<br/>aka Harness<br/><br/>Copilot Chat<br/>Copilot CLI<br/>Claude Code<br/>Codex]
+  Project[You + Project] -->|prompts / instructions / skills / MCP| Agent[Copilot<br/>Claude Code<br/>Codex]
   Agent -->|answer / PR / edit| Project
   Agent -->|context| LLM["<b>LLM</b><div class='llm-row'><img src='/theomonfort/llm-openai.png' alt=''/><img src='/theomonfort/llm-anthropic.svg' alt=''/><img src='/theomonfort/llm-gemini.png' alt=''/><img src='/theomonfort/llm-grok.png' alt=''/><img class='ms-ico' src='/theomonfort/llm-microsoft.svg' alt=''/></div>"]
   LLM -->|next step| Agent
@@ -104,19 +104,23 @@ flowchart LR
   class Tools tools;
 ```
 
-> No magic. The agent is a layer that manages **what to read, which tools to use, and how to return the result** — instead of calling the LLM directly.
+The agent manages **what to read, which tools to use, and how to return the result**.
 
-## Under the Hood: Agent / Harness (Simplified)
+## Under the Hood: Agent / Harness (Simplified) <input type="checkbox" id="code-harness-loop" class="demo-toggle" /><label class="h2-demo h2-info" for="code-harness-loop">&lt;/&gt; CODE</label>
 
-- **Execution Loop**: The LLM decides the next move, executes a tool → returns the result to context, and repeats until `done`.
-- **Context Management**: Organizes the system prompt, available tools, user task, and tool results, passing them as context with each LLM call.
+<div class="demo-panel is-info">
+<label class="demo-scrim" for="code-harness-loop" aria-label="Close code example"></label>
+<div class="demo-window" role="group" aria-label="Simplified agent loop">
+<div class="demo-head"><span class="demo-tag">CODE</span><span class="demo-name">Simplified agent loop</span><label class="demo-close" for="code-harness-loop" aria-label="Close">&#10005;</label></div>
+<div class="info-body">
+<p>Python-style pseudocode showing context setup and the execution loop.</p>
 
 ```python
-# --- Setup ---
+# Setup
 system_prompt = "You are a helpful coding assistant..."
 available_tools = [search_web, read_file, edit_file, run_terminal]
 
-# --- Agent Loop ---
+# Agent loop
 user_task = input("How can I help you?")
 context = [system_prompt, available_tools, user_task]
 
@@ -131,21 +135,68 @@ while True:
     context.append(result)
 ```
 
+</div>
+</div>
+</div>
+
+- **Execution loop**: The LLM chooses the next step. The harness runs the tool, adds its result to the context, and repeats until `done`.
+- **Context management**: The harness supplies the system prompt, available tools, user task, and previous results with each LLM call.
+
 ## What to Harness With?
 
-There is no single technology tool that makes AI powerful. Separate **what to always load** from **what to call only when needed**.
-
-| Technology Tool | Location / Config | When to Use |
-| --- | --- | --- |
-| Repository-wide custom instructions | `.github/copilot-instructions.md` | Repo-wide conventions, prohibitions, and verification commands |
-| Path-specific custom instructions | `.github/instructions/*.instructions.md` + `applyTo` | Area-specific rules for `tests/**`, `api/**`, etc. |
-| Agent skills | `.github/skills/*/SKILL.md` / `~/.copilot/skills/` | Specialized procedures like PR descriptions, frontend design |
-| Custom agents | `.github/agents/*.agent.md` / `~/.copilot/agents/` | Switch roles, models, and available tools |
-| Hooks | `.github/hooks/*.json` | Inject scripts before/after tool execution to deny, log, or notify |
-| MCP servers | MCP config file | Connect to GitHub, Figma, Playwright, Jira, Salesforce |
-| Tool permissions | Agent host permission settings | Control read/search only, allow edits, allow command execution, etc. |
-
-> The GitHub Docs names are **Repository-wide custom instructions** and **Path-specific custom instructions**. On the VS Code side, the latter is also called **file-based instructions**.
+<div class="ctl-widget ctl-compact">
+<div class="ctl-list">
+<details class="ctl-item" name="harness-tools">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📋</span><span class="ctl-name">Repository-wide instructions</span><span class="ctl-when"><code>copilot-instructions.md</code></span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Location</span><span class="ctl-v"><code>.github/copilot-instructions.md</code></span></p>
+<p class="ctl-row"><span class="ctl-k">Use</span><span class="ctl-v">Repository-wide custom instructions define conventions, guardrails, and verification commands.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="harness-tools">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📂</span><span class="ctl-name">Path-specific instructions</span><span class="ctl-when"><code>*.instructions.md</code></span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Location</span><span class="ctl-v"><code>.github/instructions/*.instructions.md</code> + <code>applyTo</code></span></p>
+<p class="ctl-row"><span class="ctl-k">Use</span><span class="ctl-v">Path-specific custom instructions set rules for areas such as <code>tests/**</code> or <code>api/**</code>. VS Code also calls these file-based instructions.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="harness-tools">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🧩</span><span class="ctl-name">Agent skills</span><span class="ctl-when"><code>SKILL.md</code></span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Location</span><span class="ctl-v"><code>.github/skills/*/SKILL.md</code> or <code>~/.copilot/skills/</code></span></p>
+<p class="ctl-row"><span class="ctl-k">Use</span><span class="ctl-v">Load specialized procedures when needed, such as writing PR descriptions or designing a frontend.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="harness-tools">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🤖</span><span class="ctl-name">Custom agents</span><span class="ctl-when"><code>*.agent.md</code></span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Location</span><span class="ctl-v"><code>.github/agents/*.agent.md</code> or <code>~/.copilot/agents/</code></span></p>
+<p class="ctl-row"><span class="ctl-k">Use</span><span class="ctl-v">Switch roles, models, and available tools for the task.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="harness-tools">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🪝</span><span class="ctl-name">Hooks</span><span class="ctl-when"><code>*.json</code></span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Location</span><span class="ctl-v"><code>.github/hooks/*.json</code></span></p>
+<p class="ctl-row"><span class="ctl-k">Use</span><span class="ctl-v">Run scripts before or after tool execution to deny an action, log it, or send a notification.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="harness-tools">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔌</span><span class="ctl-name">MCP servers</span><span class="ctl-when">MCP config</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Location</span><span class="ctl-v">Your agent's MCP configuration file.</span></p>
+<p class="ctl-row"><span class="ctl-k">Use</span><span class="ctl-v">Connect to tools and services such as GitHub, Figma, Playwright, Jira, and Salesforce.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="harness-tools">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔐</span><span class="ctl-name">Tool permissions</span><span class="ctl-when">Host settings</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Location</span><span class="ctl-v">Your agent host's permission settings.</span></p>
+<p class="ctl-row"><span class="ctl-k">Use</span><span class="ctl-v">Control whether the agent can read and search, edit files, or run commands.</span></p>
+</div>
+</details>
+</div>
+</div>
 
 ## Ecosystem Comparison
 
