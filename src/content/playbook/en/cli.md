@@ -86,29 +86,111 @@ A full-stack AI environment packed into a single terminal.
 
 ## CLI vs VS Code Chat
 
-| | Copilot CLI | VS Code Chat |
-|---|---|---|
-| **UI** | Very lightweight. Terminal-centric, so there's a learning curve for commands and a minimal editor UI. On the other hand, since the CLI opens instantly, it's easy to work with local computer resources like folders, PowerPoint, and Excel files. | Easier to handle options, settings, file navigation, inline diffs, and the debugger on screen. |
-| **Speed of new features** | New experiments like `/chronicle`, `/fleet`, `/share`, and Rubber Duck tend to land here first. | More stability-oriented. Often adopts good ideas that matured in the CLI. |
-| **Sub-agents** | Has many built-in agents — Explore, Task, Rubber Duck, Code Review — and can launch them natively. | Currently limited, but gradually catching up. |
-| **Session management** | Fine-grained session control with `/context`, `/compact`, `/session`, etc. | Improving, but not as granular as the CLI right now. |
-| **Partner agents** | Copilot CLI runs within Copilot's harness. Codex / Claude harnesses are not available — you can use their **models**, but not their native harnesses. | Inside VS Code, it's easy to switch between Copilot, Codex, Claude, and other agents / extensions. |
-| **Index** | Primarily uses terminal/search tools like `grep`, `rg`, and workspace commands. | Can use richer editor-side indexes like Blackbird. |
+<div class="ctl-widget">
+<div class="ctl-list">
+<details class="ctl-item" name="cli-vscode-comparison">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🖥️</span><span class="ctl-name">UI</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Copilot CLI</span><span class="ctl-v">Very lightweight. Terminal-centric, so there's a learning curve for commands and a minimal editor UI. On the other hand, since the CLI opens instantly, it's easy to work with local computer resources like folders, PowerPoint, and Excel files.</span></p>
+<p class="ctl-row"><span class="ctl-k">VS Code Chat</span><span class="ctl-v">Easier to handle options, settings, file navigation, inline diffs, and the debugger on screen.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cli-vscode-comparison">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🧪</span><span class="ctl-name">Speed of new features</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Copilot CLI</span><span class="ctl-v">New experiments like <code>/limits</code>, <code>/fleet</code>, <code>/share</code>, and Rubber Duck tend to land here first.</span></p>
+<p class="ctl-row"><span class="ctl-k">VS Code Chat</span><span class="ctl-v">More stability-oriented. Often adopts good ideas that matured in the CLI.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cli-vscode-comparison">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🤖</span><span class="ctl-name">Sub-agents</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Copilot CLI</span><span class="ctl-v">Has many built-in agents — Explore, Task, Rubber Duck, Code Review — and can launch them natively.</span></p>
+<p class="ctl-row"><span class="ctl-k">VS Code Chat</span><span class="ctl-v">Currently limited, but gradually catching up.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cli-vscode-comparison">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🧭</span><span class="ctl-name">Session management</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Copilot CLI</span><span class="ctl-v">Fine-grained session control with <code>/context</code>, <code>/compact</code>, <code>/session</code>, etc.</span></p>
+<p class="ctl-row"><span class="ctl-k">VS Code Chat</span><span class="ctl-v">Improving, but not as granular as the CLI right now.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cli-vscode-comparison">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔀</span><span class="ctl-name">Partner agents</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Copilot CLI</span><span class="ctl-v">Copilot CLI runs within Copilot's harness. Codex / Claude harnesses are not available — you can use their <strong>models</strong>, but not their native harnesses.</span></p>
+<p class="ctl-row"><span class="ctl-k">VS Code Chat</span><span class="ctl-v">Inside VS Code, it's easy to switch between Copilot, Codex, Claude, and other agents / extensions.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="cli-vscode-comparison">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔎</span><span class="ctl-name">Code search</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">CLI / app</span><span class="ctl-v">Local text search and semantic search of indexed GitHub repositories. <a class="retro-link" href="https://github.com/github/copilot-cli/blob/main/changelog.md" target="_blank" rel="noopener noreferrer">CLI release notes ↗</a></span></p>
+<p class="ctl-row"><span class="ctl-k">VS Code Chat</span><span class="ctl-v">Workspace text/semantic search, plus editor context and symbol navigation. <a class="retro-link" href="https://code.visualstudio.com/docs/agents/reference/workspace-context" target="_blank" rel="noopener noreferrer">Docs ↗</a></span></p>
+<p class="ctl-row"><span class="ctl-k">Blackbird</span><span class="ctl-v">GitHub-hosted code search, not an editor-only index. <a class="retro-link" href="https://github.blog/engineering/architecture-optimization/the-technology-behind-githubs-new-code-search/" target="_blank" rel="noopener noreferrer">Architecture ↗</a></span></p>
+</div>
+</details>
+</div>
+</div>
 
-## Powerful Built-in Agents
+## Powerful Built-in Agents <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-custom-agents#built-in-agents" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-cli-agent-definitions" class="demo-toggle" /><label class="h2-demo" for="demo-cli-agent-definitions">&#9658; DEMO</label>
 
-Copilot CLI includes <a href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-custom-agents#built-in-agents" target="_blank" rel="noopener noreferrer" class="retro-link">built-in agents</a> for common tasks.
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-cli-agent-definitions" aria-label="Close demo steps"></label>
+<div class="demo-window" role="group" aria-label="Demo steps">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Agent definitions</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-cli-agent-definitions" aria-label="Close">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">CHECK THE INSTALLED VERSION</p>
+<code class="demo-cmd">copilot --version</code>
+<p class="demo-out">Note the installed CLI version.</p>
+</li>
+<li>
+<p class="demo-step-title">OPEN THE DEFINITIONS FOLDER</p>
+<p>Find <code class="demo-path">definitions/</code> in your local CLI installation. Example for macOS on Apple silicon:</p>
+<p><code class="demo-path">~/.copilot/pkg/darwin-arm64/&lt;version&gt;/definitions/</code></p>
+<p>Replace <code class="demo-path">&lt;version&gt;</code> with your installed version. The location depends on the platform and installation method.</p>
+</li>
+<li>
+<p class="demo-step-title">READ AN AGENT DEFINITION</p>
+<p>Open <code class="demo-path">explore.agent.yaml</code> or another <code class="demo-path">*.agent.yaml</code> in an editor.</p>
+<p class="demo-out">Inspect the built-in agent's definition without modifying the installed files.</p>
+</li>
+</ol>
+</div>
+</div>
 
-| Agent | Description |
-|---|---|
-| **Explore** | Quickly analyzes the codebase and lets you ask questions about it, without adding it to the main context. |
-| **Task** | Runs commands like tests and builds, returning a short summary on success or the full output on failure. |
-| **General purpose** | Handles complex multi-step tasks that require all tools and advanced reasoning, in a separate context from the main conversation. |
-| **Code review** | Reviews code changes focusing solely on issues that genuinely matter, minimizing noise. |
-| **Research** | Conducts deep research across the codebase, related repositories, and the web, producing detailed reports with citations. |
-| **Rubber duck** | Returns constructive critical feedback for complex tasks. Used automatically by Copilot CLI. |
+Copilot CLI includes built-in agents for common tasks. Check them and configure their models with **`/subagents`**.
 
-> 💡 You can inspect these built-in agents' definitions in your local CLI install at `definitions/*.agent.yaml` (e.g. `~/.copilot/pkg/darwin-arm64/<version>/definitions/*.agent.yaml`).
+<div class="ctl-widget">
+<div class="ctl-list">
+<details class="ctl-item" name="cli-built-in-agents">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔎</span><span class="ctl-name">Explore</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body"><p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">Quickly analyzes the codebase and lets you ask questions about it, without adding it to the main context.</span></p></div>
+</details>
+<details class="ctl-item" name="cli-built-in-agents">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛠️</span><span class="ctl-name">Task</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body"><p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">Runs commands like tests and builds, returning a short summary on success or the full output on failure.</span></p></div>
+</details>
+<details class="ctl-item" name="cli-built-in-agents">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🧠</span><span class="ctl-name">General purpose</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body"><p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">Handles complex multi-step tasks that require all tools and advanced reasoning, in a separate context from the main conversation.</span></p></div>
+</details>
+<details class="ctl-item" name="cli-built-in-agents">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📝</span><span class="ctl-name">Code review</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body"><p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">Reviews code changes focusing solely on issues that genuinely matter, minimizing noise.</span></p></div>
+</details>
+<details class="ctl-item" name="cli-built-in-agents">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📚</span><span class="ctl-name">Research</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body"><p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">Conducts deep research across the codebase, related repositories, and the web, producing detailed reports with citations.</span></p></div>
+</details>
+<details class="ctl-item" name="cli-built-in-agents">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🦆</span><span class="ctl-name">Rubber duck</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body"><p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">Returns constructive critical feedback for complex tasks. Used automatically by Copilot CLI.</span></p></div>
+</details>
+</div>
+</div>
 
 ## Rubber Duck — Cross-model Review
 

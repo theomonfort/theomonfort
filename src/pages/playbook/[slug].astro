@@ -1927,7 +1927,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .prose-akq table {
     width: 100%;
     border-collapse: collapse;
-    margin: 1.6em 0;
+    margin: 0.75em 0;
     font-size: 0.95em;
     background: rgba(10, 14, 39, 0.6);
     border: 2px solid rgba(0, 240, 255, 0.45);
@@ -1939,7 +1939,8 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
   .prose-akq table th {
     text-align: left;
-    padding: 0.85em 1em;
+    padding: 0.35em 0.65em;
+    line-height: 1.4;
     color: #00f0ff;
     font-family: var(--font-prose);
     font-weight: normal;
@@ -1949,17 +1950,17 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
   .prose-akq table th:last-child { border-right: none; }
   .prose-akq table td {
-    padding: 0.9em 1em;
+    padding: 0.35em 0.65em;
     vertical-align: top;
-    line-height: 1.65;
+    line-height: 1.4;
     color: rgba(220, 230, 240, 0.92);
     border-right: 1px dashed rgba(0, 240, 255, 0.15);
     border-top: 1px dashed rgba(0, 240, 255, 0.15);
   }
   .prose-akq table td:last-child { border-right: none; }
-  .prose-akq table th:first-child,
-  .prose-akq table td:first-child {
-    white-space: nowrap;
+  .prose-akq table th,
+  .prose-akq table td {
+    overflow-wrap: anywhere;
   }
   .prose-akq table.availability-table {
     table-layout: fixed;
@@ -2017,7 +2018,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
   .prose-akq table strong { color: #ff2e88; }
   .prose-akq table.compact-table th,
-  .prose-akq table.compact-table td { padding: 0.35em 1em; line-height: 1.4; }
+  .prose-akq table.compact-table td { padding: 0.35em 0.65em; line-height: 1.4; }
 
   .prose-akq .split-image {
     display: grid;
