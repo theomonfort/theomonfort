@@ -31,8 +31,11 @@ links:
     label: CLI command reference (/experimental, /theme)
     url: https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference
   - group: 🛡️ Sandbox
-    label: About cloud and local sandboxes
-    url: https://docs.github.com/en/copilot/concepts/about-cloud-and-local-sandboxes
+    label: About local sandboxing
+    url: https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/about-cloud-and-local-sandboxes
+  - group: 🛡️ Sandbox
+    label: About cloud sandboxes
+    url: https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/about-cloud-sandboxes
   - group: 🛡️ Sandbox
     label: Using local sandboxing
     url: https://docs.github.com/en/copilot/how-tos/cloud-and-local-sandboxes/using-local-sandboxing
@@ -46,8 +49,11 @@ links:
     label: Automating tasks with Copilot CLI and GitHub Actions
     url: https://docs.github.com/en/copilot/how-tos/copilot-cli/automate-copilot-cli/automate-with-actions
   - group: 📰 Recent Changelog
-    label: "Cloud & local sandboxes — public preview (2026-06-02)"
-    url: https://github.blog/changelog/2026-06-02-cloud-and-local-sandboxes-for-github-copilot-now-in-public-preview/
+    label: "Cloud sandboxes: generally available (2026-10-28)"
+    url: https://github.blog/changelog/2026-10-28-work-from-anywhere-with-a-new-connected-copilot-cloud-experience
+  - group: 📰 Recent Changelog
+    label: "Local sandboxing: generally available (2026-10-07)"
+    url: https://github.blog/changelog/2026-10-07-local-sandboxing-for-github-copilot-now-generally-available
   - group: 📰 Recent Changelog
     label: "Improved UI, Rubber Duck, scheduling & voice input (2026-06-02)"
     url: https://github.blog/changelog/2026-06-02-copilot-cli-improved-ui-rubber-duck-prompt-scheduling-and-voice-input/
@@ -254,52 +260,61 @@ Run `/experimental on` to try the redesigned terminal UI with theme-aware semant
 
 > 📝 Screen-reader support and many other UI improvements landed too — see the <a class="retro-link" href="https://github.blog/changelog/2026-06-02-copilot-cli-improved-ui-rubber-duck-prompt-scheduling-and-voice-input/" target="_blank" rel="noopener noreferrer">changelog ↗</a>.
 
-## 🛡️ Sandbox — Safe Execution Environment
+## 🛡️ Sandboxes <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/about-cloud-and-local-sandboxes" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-Copilot runs the shell commands it executes inside an **isolated environment**, restricting access to your filesystem, network, and system — so you can hand off agentic work with confidence. (Public preview)
+Both are **generally available** (as of 2026-11-06).
 
 | | 🖥️ Local sandbox | ☁️ Cloud sandbox |
 |---|---|---|
-| **Enable** | `/sandbox enable` in a session | `copilot --cloud` |
-| **Runs on** | Your machine (isolated) | GitHub-hosted ephemeral Linux |
-| **Built on** | Microsoft MXC | Azure Container Apps Sandboxes |
-| **Support** | macOS / Linux (Windows on Insiders) | Any device |
-| **Policy** | Centrally managed via Intune / MDM | Inherits Cloud Agent policies |
+| **GA** | 2026-10-07 | 2026-10-28 |
+| **Enable** | `/sandbox enable` | `copilot --cloud` (interactive only) |
+| **Runs on** | macOS / Linux / updated Windows 11 | GitHub-hosted Linux, resumable |
 
-- 🔒 **What's isolated**: filesystem / network / system capabilities for Copilot-initiated shell execution.
-- 🔁 **Cloud keeps state**: Active → Stopped (snapshot) → Deleted. Resume from another device and run heavy tasks in parallel.
-- 🧩 **Same auth**: uses your Copilot CLI sign-in — no separate cloud setup required.
+Local is **off by default**; file-tool policy checks are best-effort, remote MCP is excluded. Cloud requires a **paid Copilot plan**.
 
-## Non-interactive Mode (Programmatic Execution) ★
+## Non-interactive Mode ★ <a class="h2-doc" href="https://docs.github.com/en/copilot/how-tos/copilot-cli/automate-copilot-cli/run-cli-programmatically" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-Copilot CLI can be run with a single command using `copilot -p "..."`. It executes one turn and exits without opening an interactive session, so it can be called from shell scripts, cron, **batch files**, and **GitHub Actions**. Delegate routine work — PR auto-review, lint fixes, release notes — to Copilot whenever a human doesn't need to be in the loop.
+Run one prompt and exit. Automate routine work from **scripts, cron, batch files, or GitHub Actions**.
 
-### Key flags
-
-- `-p "..."` / `--prompt "..."` — Pass a prompt and exit after one turn
-- `-s` (silent) — Output response text only to stdout (ideal for variable assignment or piping)
-- `--no-ask-user` — Skip clarifying questions; make decisions autonomously
-- `--allow-tool='shell(npm:*), write'` — Allow only the necessary tools (`--allow-all` is for sandboxes only)
-- `--model gpt-5.5` — Pin the model to reduce variance
-- `--share='./session.md'` — Save the entire session as Markdown
-
-### Common use cases
-
-- 📝 Commit message generation / 📰 Release note drafting
-- 🐛 Bulk lint error fixes / 🧪 Tests for untested modules
-- 🔍 AI PR review (script `/review`) / 🔐 Dependency vulnerability audit
-- 📚 Bulk README & JSDoc generation / 🌏 Document translation
-
-### Operational tips
-
-- 🔑 Pass auth via env vars: `COPILOT_GITHUB_TOKEN` → `GH_TOKEN` → `GITHUB_TOKEN`
-- 🧾 Use **fine-grained PAT (v2)** with the "Copilot Requests" permission (old `ghp_` format isn't supported)
-- 🛡️ `--allow-tool` with a whitelist is the rule. Never use `--allow-all` outside a sandbox
-- 🎯 Be specific in prompts — pinning the output format ("Number only.", "YES/NO") makes parsing easy
-- 📊 Save sessions with `--share` so you can trace the reasoning behind results later
-- 🧩 Iterate the prompt in interactive mode first, then port it to `-p` once it's solid
-
-📘 Details:
-- <a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/copilot-cli/automate-copilot-cli/run-cli-programmatically" target="_blank" rel="noopener noreferrer">Running GitHub Copilot CLI programmatically ↗</a>
-- <a class="retro-link" href="https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-programmatic-reference" target="_blank" rel="noopener noreferrer">Programmatic reference (full flag list) ↗</a>
-- <a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/copilot-cli/automate-copilot-cli/automate-with-actions" target="_blank" rel="noopener noreferrer">Automating tasks with Copilot CLI and GitHub Actions ↗</a>
+<div class="det-widget">
+<div class="det-split">
+<div class="det-list">
+<details class="det-pick" name="cli-programmatic" open>
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">▶️</span><span class="det-name">Run &amp; output</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Run &amp; output</span></p>
+<p class="det-why"><code>copilot -p 'Summarize README.md' -s</code><br><br><code>-p</code> / <code>--prompt</code>: run one turn and exit.<br><code>-s</code>: response text only, ready to pipe.<br><code>--no-ask-user</code>: skip clarifying questions.</p>
+</div>
+</details>
+<details class="det-pick" name="cli-programmatic">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🛡️</span><span class="det-name">Permissions</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Permissions</span></p>
+<p class="det-why">Allow only the tools your task needs:<br><code>--allow-tool='shell(npm:*), write'</code><br><br>Never use <code>--allow-all</code> outside a sandbox. <code>--no-ask-user</code> does not grant tool permissions.</p>
+</div>
+</details>
+<details class="det-pick" name="cli-programmatic">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🔑</span><span class="det-name">Authentication</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Authentication</span></p>
+<p class="det-why">Priority: <code>COPILOT_GITHUB_TOKEN</code> → <code>GH_TOKEN</code> → <code>GITHUB_TOKEN</code><br><br><b>Fine-grained PAT</b> with <b>Copilot Requests</b> permission; no classic <code>ghp_</code> tokens.</p>
+</div>
+</details>
+<details class="det-pick" name="cli-programmatic">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🎯</span><span class="det-name">Repeatability</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Repeatability</span></p>
+<p class="det-why"><code>--model MODEL</code>: pin the model.<br><code>--share='./session.md'</code>: save the transcript.<br>Fix the output format (e.g. <b>YES/NO</b>). Test interactively, then automate with <code>-p</code>.</p>
+</div>
+</details>
+<details class="det-pick" name="cli-programmatic">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">⚙️</span><span class="det-name">Use cases</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Use cases</span></p>
+<p class="det-why">Commit messages and release notes.<br>Lint fixes and test generation.<br>PR reviews with <code>/review</code> and dependency audits.<br>README, JSDoc, and translations.</p>
+</div>
+</details>
+</div>
+<div class="det-screen"><p class="det-empty">SELECT A TOPIC ▸</p></div>
+</div>
+</div>
