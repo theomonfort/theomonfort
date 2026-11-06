@@ -1,7 +1,7 @@
 ---
 title: ハーネスエンジニアリング
 titleEn: Harness Engineering
-summary: エージェントが安全かつ効果的に動ける足場の設計。ツール群、制約、権限、外部接続の設計術。
+summary: AI エージェントが安全かつ効果的にタスクを進めるために、コンテキスト、ツール、ガードレール、検証方法を整える。
 icon: /theomonfort/icons/harness-engineering.png
 color: green
 accent:
@@ -47,10 +47,10 @@ links:
 
 <div class="hero-quote">
   <p>
-    <strong>Harness Engineering</strong> は、AI から最高の結果を引き出すための足場設計。
+    <strong>Harness Engineering</strong> は、AI エージェントが作業する環境を整えること。
   </p>
   <p>
-    ただ制限するだけではなく、目的・文脈・役割・検証方法を整えて、AI が迷わず安全に成果へ向かえる状態を作る。
+    目的と役割を決め、コンテキストとツールを用意し、ガードレールを設け、結果を検証する。
   </p>
 </div>
 
@@ -87,7 +87,7 @@ config:
     .nodeLabel .llm-row img.ms-ico { width: 17px !important; height: 17px !important; }
 ---
 flowchart LR
-  Project[ユーザー] -->|プロンプト / 指示書 / スキル / MCP| Agent[エージェント<br/>別名：ハーネス<br/><br/>Copilot Chat<br/>Copilot CLI<br/>Claude Code<br/>Codex]
+  Project[ユーザー] -->|プロンプト / 指示書 / スキル / MCP| Agent[Copilot<br/>Claude Code<br/>Codex]
   Agent -->|回答 / PR / 編集| Project
   Agent -->|コンテキスト| LLM["<b>LLM</b><div class='llm-row'><img src='/theomonfort/llm-openai.png' alt=''/><img src='/theomonfort/llm-anthropic.svg' alt=''/><img src='/theomonfort/llm-gemini.png' alt=''/><img src='/theomonfort/llm-grok.png' alt=''/><img class='ms-ico' src='/theomonfort/llm-microsoft.svg' alt=''/></div>"]
   LLM -->|次の一手| Agent
@@ -104,19 +104,23 @@ flowchart LR
   class Tools tools;
 ```
 
-> 魔法ではない。エージェントは LLM を直接呼ぶ代わりに、**何を読ませるか・どのツールを使わせるか・結果をどう戻すか** を管理するレイヤー。
+エージェントは **何を読むか、どのツールを使うか、結果をどう返すか** を管理する。
 
-## Agent / Harness の裏側（簡略版）
+## Agent / Harness の裏側（簡略版） <input type="checkbox" id="code-harness-loop" class="demo-toggle" /><label class="h2-demo h2-info" for="code-harness-loop">&lt;/&gt; CODE</label>
 
-- **実行ループ**：LLM が次の一手を決め、tool 実行 → 結果を context に戻す、を `done` まで繰り返す。
-- **コンテキスト管理**：system prompt、available tools、user task、tool results を整理し、毎回の LLM call に必要な context として渡す。
+<div class="demo-panel is-info">
+<label class="demo-scrim" for="code-harness-loop" aria-label="コード例を閉じる"></label>
+<div class="demo-window" role="group" aria-label="エージェントの実行ループ（簡略版）">
+<div class="demo-head"><span class="demo-tag">CODE</span><span class="demo-name">エージェントの実行ループ（簡略版）</span><label class="demo-close" for="code-harness-loop" aria-label="閉じる">&#10005;</label></div>
+<div class="info-body">
+<p>コンテキストの準備と実行ループを示す Python 風の疑似コード。</p>
 
 ```python
-# --- Setup ---
+# Setup
 system_prompt = "You are a helpful coding assistant..."
 available_tools = [search_web, read_file, edit_file, run_terminal]
 
-# --- Agent Loop ---
+# Agent loop
 user_task = input("How can I help you?")
 context = [system_prompt, available_tools, user_task]
 
@@ -131,21 +135,68 @@ while True:
     context.append(result)
 ```
 
+</div>
+</div>
+</div>
+
+- **実行ループ**：LLM が次の一手を決める。ハーネスがツールを実行し、結果をコンテキストに追加して、`done` まで繰り返す。
+- **コンテキスト管理**：システムプロンプト、利用可能なツール、ユーザーのタスク、これまでの結果を、毎回の LLM 呼び出しに渡す。
+
 ## 何でハーネスする？
 
-AI を強くする技術ツールは 1 つではない。**常に読ませるもの** と **必要な時だけ呼ぶもの** を分ける。
-
-| 技術ツール | 置き場所 / 設定 | 使いどころ |
-| --- | --- | --- |
-| リポジトリ全体の custom instructions | `.github/copilot-instructions.md` | リポジトリ全体の規約・禁止事項・検証コマンド |
-| パス別の custom instructions | `.github/instructions/*.instructions.md` + `applyTo` | `tests/**`、`api/**` など領域別ルール |
-| Agent skills | `.github/skills/*/SKILL.md` / `~/.copilot/skills/` | PR description、frontend design など専門手順 |
-| Custom agents | `.github/agents/*.agent.md` / `~/.copilot/agents/` | 役割・モデル・使えるツールを切り替える |
-| Hooks | `.github/hooks/*.json` | ツール実行前後に script を差し込み、deny / log / notify する |
-| MCP servers | MCP 設定ファイル | GitHub、Figma、Playwright、Jira、Salesforce へ接続 |
-| Tool permissions | agent host の権限設定 | `read/search` のみ、`edit` 可、コマンド実行可などを制御 |
-
-> GitHub Docs の名称は **Repository-wide custom instructions** と **Path-specific custom instructions**。VS Code 側では後者を **file-based instructions** とも呼ぶ。
+<div class="ctl-widget ctl-compact">
+<div class="ctl-list">
+<details class="ctl-item" name="harness-tools">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📋</span><span class="ctl-name">リポジトリ全体の指示</span><span class="ctl-when"><code>copilot-instructions.md</code></span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">置き場所</span><span class="ctl-v"><code>.github/copilot-instructions.md</code></span></p>
+<p class="ctl-row"><span class="ctl-k">用途</span><span class="ctl-v">Repository-wide custom instructions で、リポジトリ全体の規約、ガードレール、検証コマンドを定義する。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="harness-tools">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📂</span><span class="ctl-name">パス別の指示</span><span class="ctl-when"><code>*.instructions.md</code></span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">置き場所</span><span class="ctl-v"><code>.github/instructions/*.instructions.md</code> + <code>applyTo</code></span></p>
+<p class="ctl-row"><span class="ctl-k">用途</span><span class="ctl-v">Path-specific custom instructions で <code>tests/**</code> や <code>api/**</code> など領域別のルールを設定する。VS Code では file-based instructions とも呼ぶ。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="harness-tools">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🧩</span><span class="ctl-name">Agent skills</span><span class="ctl-when"><code>SKILL.md</code></span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">置き場所</span><span class="ctl-v"><code>.github/skills/*/SKILL.md</code> または <code>~/.copilot/skills/</code></span></p>
+<p class="ctl-row"><span class="ctl-k">用途</span><span class="ctl-v">PR 説明の作成やフロントエンド設計など、専門的な手順を必要な時に読み込む。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="harness-tools">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🤖</span><span class="ctl-name">Custom agents</span><span class="ctl-when"><code>*.agent.md</code></span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">置き場所</span><span class="ctl-v"><code>.github/agents/*.agent.md</code> または <code>~/.copilot/agents/</code></span></p>
+<p class="ctl-row"><span class="ctl-k">用途</span><span class="ctl-v">タスクに応じて役割、モデル、使えるツールを切り替える。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="harness-tools">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🪝</span><span class="ctl-name">Hooks</span><span class="ctl-when"><code>*.json</code></span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">置き場所</span><span class="ctl-v"><code>.github/hooks/*.json</code></span></p>
+<p class="ctl-row"><span class="ctl-k">用途</span><span class="ctl-v">ツール実行の前後にスクリプトを動かし、操作の拒否、ログ記録、通知を行う。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="harness-tools">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔌</span><span class="ctl-name">MCP servers</span><span class="ctl-when">MCP 設定</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">置き場所</span><span class="ctl-v">エージェントの MCP 設定ファイル。</span></p>
+<p class="ctl-row"><span class="ctl-k">用途</span><span class="ctl-v">GitHub、Figma、Playwright、Jira、Salesforce などのツールやサービスに接続する。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="harness-tools">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔐</span><span class="ctl-name">Tool permissions</span><span class="ctl-when">ホスト設定</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">置き場所</span><span class="ctl-v">エージェントホストの権限設定。</span></p>
+<p class="ctl-row"><span class="ctl-k">用途</span><span class="ctl-v">読み取りと検索、ファイル編集、コマンド実行のどこまで許可するかを制御する。</span></p>
+</div>
+</details>
+</div>
+</div>
 
 ## エコシステム対応表
 

@@ -3843,6 +3843,13 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
      mode and presentation mode behave identically.
      ───────────────────────────────────────────────────────────── */
   .prose-akq .ctl-widget { margin: 1.2em 0; }
+  .prose-akq .ctl-compact .ctl-v { overflow-wrap: anywhere; }
+  @media (max-height: 800px), (max-width: 640px) {
+    body.present-mode .prose-akq .ctl-widget.ctl-compact { font-size: 0.8em; }
+  }
+  @media (max-width: 640px) {
+    .prose-akq .ctl-compact .ctl-when { display: none; }
+  }
   .prose-akq .ctl-hint {
     margin: 0 0 0.5em;
     font-size: 0.9em;
