@@ -14,9 +14,9 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-Let's install the two Skills from [`theomonfort/skills`](https://github.com/theomonfort/skills) in one go.
+Start with two workshop Skills from [`theomonfort/skills`](https://github.com/theomonfort/skills). Option B also adds three Skills for slides, prototypes, and design questions.
 
-### 5.1 — Install two Skills
+### 5.1 — Install workshop Skills
 
 The two Skills we'll install are:
 
@@ -25,27 +25,40 @@ The two Skills we'll install are:
 
 #### Option A: Copy from the equipment room (recommended)
 
-1. Open the [**EQUIPMENT ROOM**](https://theomonfort.github.io/theomonfort/skills/#skills) in a new tab.
+1. Open the [**EQUIPMENT ROOM**](https://theomonfort.github.io/theomonfort/en/skills/#skills) in a new tab.
 2. Confirm that the scope toggle is set to **Project .github/** (left, the default).
 3. In the **🎴 Skills** section, check the two cards for `github-issues` and `hands-on-helper`.
 4. Click the **💾 Copy 2 selected** button in the top right.
 5. Paste into the Codespace's VS Code terminal and press Enter.
 
-#### Option B: Copy the command below directly
+#### Option B: Copy the commands and add three creative Skills
 
-If you'd rather skip the equipment room, hit the **COPY** button on the snippet below and paste straight into the terminal:
+This option installs the two workshop Skills plus these three from the same repository:
+
+| Skill | What you can do |
+| --- | --- |
+| [md-slides-creator](https://github.com/theomonfort/skills/blob/main/skills/md-slides-creator/SKILL.md) | Create a Markdown reference document that also renders as slides |
+| [prototyper](https://github.com/theomonfort/skills/blob/main/skills/prototyper/SKILL.md) | Compare 10 UI design options in one HTML prototype |
+| [grill-me](https://github.com/theomonfort/skills/blob/main/skills/grill-me/SKILL.md) | Stress-test a plan through focused questions before implementing |
+
+The slide-creator Skill is published as **`md-slides-creator`**, not `creator-slide`. Use that name when installing or invoking it.
+
+Hit **COPY** and paste into the workshop repository's terminal. These commands explicitly select **GitHub Copilot** and **project** scope, not your global environment:
 
 ```bash
-gh skill install theomonfort/skills github-issues && \
-gh skill install theomonfort/skills hands-on-helper
+gh skill install theomonfort/skills github-issues --agent github-copilot --scope project && \
+gh skill install theomonfort/skills hands-on-helper --agent github-copilot --scope project && \
+gh skill install theomonfort/skills md-slides-creator --agent github-copilot --scope project && \
+gh skill install theomonfort/skills prototyper --agent github-copilot --scope project && \
+gh skill install theomonfort/skills grill-me --agent github-copilot --scope project
 ```
 
-For each Skill, you'll be asked which **agent** and which **scope** to install it for:
+If you use Option A and the installer asks for a destination:
 
-- **Agent**: pick `copilot` (for VS Code's GitHub Copilot Chat).
+- **Agent**: pick **GitHub Copilot** (`github-copilot`).
 - **Scope**: pick `project` (installs the Skill into this repository only).
 
-Once installed, you'll see two new directories: `.agents/skills/github-issues/` and `.agents/skills/hands-on-helper/`. Open the `SKILL.md` inside each one to see when Copilot will summon the Skill and what templates it ships with.
+Each Skill creates a directory under `.agents/skills/`: `github-issues/` and `hands-on-helper/`, plus `md-slides-creator/`, `prototyper/`, and `grill-me/` with Option B. Open each `SKILL.md` to review its instructions. See the [GitHub CLI installation reference](https://cli.github.com/manual/gh_skill_install).
 
 The **Instructions** we set up earlier live under `.github/`, while the **MCP servers** are configured in root `.mcp.json`. Skills follow the **open-ecosystem convention** under `.agents/` (`.github/skills/` also works if you only target GitHub). See [Harness Engineering / Ecosystem map](/theomonfort/en/playbook/harness-engineering?present=1&slide=6) for the full layout.
 

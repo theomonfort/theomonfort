@@ -29,6 +29,12 @@ links:
   - group: 📖 公式ドキュメント
     label: Choose an agent harness
     url: https://code.visualstudio.com/docs/agents/run/agent-harnesses
+  - group: 📖 公式ドキュメント
+    label: Remote agent hosts in VS Code
+    url: https://code.visualstudio.com/docs/agents/run/remote-agent-sessions
+  - group: 📖 公式ドキュメント
+    label: Copilot CLI remote control and reconnection
+    url: https://docs.github.com/en/copilot/concepts/agent-capabilities/agent-powered-workflows-and-operations/about-remote-control
   - group: 📰 発表
     label: "Connected Copilot cloud experience (2026-10-28)"
     url: https://github.blog/changelog/2026-10-28-work-from-anywhere-with-a-new-connected-copilot-cloud-experience/
@@ -53,23 +59,6 @@ links:
     ここでは <strong>VS Code</strong> に注目。コードの横で使う <strong>Chat view</strong> と、複数プロジェクトを扱う <strong>Agents window</strong>。
   </p>
 </div>
-
-## Copilot の利用画面 <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-on-github" target="_blank" rel="noopener noreferrer">📖 Docs</a>
-
-**Copilot in the cloud** では、同じ cloud sandbox session をこれらの画面から継続できる（**2026-10-28** から）。<a class="retro-link" href="https://github.blog/changelog/2026-10-28-work-from-anywhere-with-a-new-connected-copilot-cloud-experience/" target="_blank" rel="noopener noreferrer">Changelog ↗</a>
-
-<table class="compact-table">
-<thead><tr><th>利用画面</th><th>入口</th></tr></thead>
-<tbody>
-<tr><td><strong>VS Code</strong></td><td><strong>Chat view</strong> / <strong>Agents window</strong></td></tr>
-<tr><td><strong>GitHub.com</strong></td><td><strong>Copilot</strong> / repo の <strong>Agents</strong> タブ</td></tr>
-<tr><td><strong>GitHub Mobile</strong></td><td><strong>Copilot</strong> タブ</td></tr>
-<tr><td><strong>Copilot CLI</strong></td><td>ターミナルで <code>copilot</code></td></tr>
-<tr><td><strong>GitHub Copilot app</strong></td><td>複数タスクを並行して進めるデスクトップ app</td></tr>
-</tbody>
-</table>
-
-**有料プラン向け**で、ポリシーに従う。ローカルの遠隔操作にはホストの稼働が必要。
 
 ## 既定の Copilot harness <a class="h2-doc" href="https://code.visualstudio.com/docs/agents/run/move-to-copilot" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
@@ -126,6 +115,8 @@ Copilot harness では **`@` chat participants は非推奨で非対応**。直�
 
 **モデル ≠ harness ≠ 実行場所**。Claude モデルを選んでも Copilot harness のまま。**Cloud** は実行先の選択。
 
+遠隔操作は **既存のホスト** への接続であり、session を cloud sandbox に移す機能ではない。
+
 ## モデルの選び方 <a class="h2-doc" href="https://code.visualstudio.com/docs/agent-customization/language-models" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 **おすすめは Copilot Fusion。** モデル選びと使い分けを任せる。利用可否はプラン、harness、組織ポリシーによって異なる。<a class="retro-link" href="https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion/" target="_blank" rel="noopener noreferrer">Blog ↗</a> / <a class="retro-link" href="https://github.blog/news-insights/company-news/github-universe-2026-evolving-every-layer-of-the-stack/" target="_blank" rel="noopener noreferrer">Universe 2026 ↗</a>
@@ -135,3 +126,33 @@ Copilot harness では **`@` chat participants は非推奨で非対応**。直�
 | **モデル系統** | **GPT / Codex**、**Claude**、**Gemini**、**MAI** |
 | **BYOK** | Bring Your Own Key: 自分のキーで接続。<a class="retro-link" href="https://code.visualstudio.com/docs/agent-customization/language-models#_bring-your-own-language-model-key" target="_blank" rel="noopener noreferrer">設定方法 ↗</a> |
 | **ローカルモデル** | 対応ハードウェアで Copilot の <a class="retro-link" href="https://code.visualstudio.com/docs/agent-customization/language-models#_use-on-device-models" target="_blank" rel="noopener noreferrer">on-device モデル ↗</a>、または **BYOK 経由の Ollama** |
+
+## Copilot の利用画面 <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-on-github" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+**Copilot in the cloud** では、同じ cloud sandbox session をこれらの画面から継続できる（**2026-10-28** から）。<a class="retro-link" href="https://github.blog/changelog/2026-10-28-work-from-anywhere-with-a-new-connected-copilot-cloud-experience/" target="_blank" rel="noopener noreferrer">Changelog ↗</a>
+
+<table class="compact-table">
+<thead><tr><th>利用画面</th><th>入口</th></tr></thead>
+<tbody>
+<tr><td><strong>VS Code</strong></td><td><strong>Chat view</strong> / <strong>Agents window</strong></td></tr>
+<tr><td><strong>GitHub.com</strong></td><td><strong>Copilot</strong> / repo の <strong>Agents</strong> タブ</td></tr>
+<tr><td><strong>GitHub Mobile</strong></td><td><strong>Copilot</strong> タブ</td></tr>
+<tr><td><strong>Copilot CLI</strong></td><td>ターミナルで <code>copilot</code></td></tr>
+<tr><td><strong>GitHub Copilot app</strong></td><td>複数タスクを並行して進めるデスクトップ app</td></tr>
+</tbody>
+</table>
+
+**有料プラン向け**で、ポリシーに従う。**ホストのオフライン ≠ session の失効。**
+
+<div class="ctl-widget">
+<div class="ctl-list">
+<details class="ctl-item" name="copilot-remote-lifecycle">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔌</span><span class="ctl-name">何をオンラインに保つ？</span><a class="ctl-doc" href="https://code.visualstudio.com/docs/agents/run/remote-agent-sessions" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">ホスト</span><span class="ctl-v">作業フォルダーを持つマシンと agent のプロセスを起動し、接続可能にしておく。デスクトップ VS Code がホストならアプリも起動したままにする。GitHub Actions の runner や管理型 cloud sandbox とは別。</span></p>
+<p class="ctl-row"><span class="ctl-k">オフライン</span><span class="ctl-v">スリープや通信断では遠隔操作が使えなくなるが、自動的な失効や削除ではない。元のホストへ再接続する。同期された会話履歴は実行中のプロセスでも作業フォルダーのバックアップでもない。</span></p>
+<p class="ctl-row"><span class="ctl-k">CLI の再開</span><span class="ctl-v">CLI を終了した場合、保存済み session と作業フォルダーがある元のマシンで <code>copilot --continue</code> / <code>copilot --resume</code> を使う。以前有効にした遠隔操作も再有効化される。<a class="retro-link" href="https://docs.github.com/en/copilot/concepts/agent-capabilities/agent-powered-workflows-and-operations/about-remote-control#reconnection" target="_blank" rel="noopener noreferrer">CLI docs ↗</a></span></p>
+</div>
+</details>
+</div>
+</div>

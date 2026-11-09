@@ -14,9 +14,9 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-では、2 つの Skill を [`theomonfort/skills`](https://github.com/theomonfort/skills) からまとめてインストールします。
+まず [`theomonfort/skills`](https://github.com/theomonfort/skills) からハンズオン用の 2 つの Skill をインストールします。方法 B では、スライド作成、プロトタイプ、設計の質問に使う 3 つも追加します。
 
-### 5.1 — Skill を 2 つインストール
+### 5.1 — ハンズオン用の Skill をインストール
 
 インストールするのは次の 2 つの Skill です：
 
@@ -31,21 +31,34 @@ import Aside from '../../../components/handson/Aside.astro';
 4. 右上の **💾 選択 2 を コピー** ボタンを押す
 5. Codespace の VS Code ターミナルに貼り付けて Enter
 
-#### 方法 B: 下のコマンドを直接コピー
+#### 方法 B: コマンドをコピーして制作向けの Skill も追加
 
-装備所まで行かず、下のスニペットの **COPY** ボタンを押してそのままターミナルに貼り付けても OK です：
+ハンズオン用の 2 つに加えて、同じリポジトリから次の 3 つをインストールします：
+
+| Skill | できること |
+| --- | --- |
+| [md-slides-creator](https://github.com/theomonfort/skills/blob/main/skills/md-slides-creator/SKILL.md) | 通読できる資料とスライドを兼ねた Markdown を作成 |
+| [prototyper](https://github.com/theomonfort/skills/blob/main/skills/prototyper/SKILL.md) | 1 つの HTML プロトタイプで UI の 10 案を比較 |
+| [grill-me](https://github.com/theomonfort/skills/blob/main/skills/grill-me/SKILL.md) | 実装前に質問を通じて計画や設計を検討 |
+
+スライド作成 Skill の公開名は `creator-slide` ではなく **`md-slides-creator`** です。インストールや呼び出しにはこの名前を使います。
+
+**COPY** を押し、ハンズオンのリポジトリ内のターミナルに貼り付けてください。以下は **GitHub Copilot** と **project** スコープを明示し、グローバル環境にはインストールしません：
 
 ```bash
-gh skill install theomonfort/skills github-issues && \
-gh skill install theomonfort/skills hands-on-helper
+gh skill install theomonfort/skills github-issues --agent github-copilot --scope project && \
+gh skill install theomonfort/skills hands-on-helper --agent github-copilot --scope project && \
+gh skill install theomonfort/skills md-slides-creator --agent github-copilot --scope project && \
+gh skill install theomonfort/skills prototyper --agent github-copilot --scope project && \
+gh skill install theomonfort/skills grill-me --agent github-copilot --scope project
 ```
 
-実行すると Skill ごとに **対象エージェント** と **インストール先（scope）** を聞かれます：
+方法 A でインストール先を聞かれた場合は、次のように選択します：
 
-- **Agent**: `copilot` を選択（VS Code の GitHub Copilot Chat 用）
+- **Agent**: **GitHub Copilot**（`github-copilot`）を選択
 - **Scope**: `project`（プロジェクト = このリポジトリ専用にインストール）
 
-インストールが完了すると `.agents/skills/github-issues/`, `.agents/skills/hands-on-helper/` の 2 つが追加されます。中身（`SKILL.md`）を開いて、Copilot がどんなときにこの Skill を呼ぶのか、どんなテンプレを持っているのかを確認してみてください。
+`.agents/skills/` に `github-issues/` と `hands-on-helper/` が追加されます。方法 B では `md-slides-creator/`、`prototyper/`、`grill-me/` も追加されます。各 `SKILL.md` を開いて指示を確認してください。[GitHub CLI のインストール仕様](https://cli.github.com/manual/gh_skill_install) も参照できます。
 
 先ほど作成した **Instructions** は `.github/` 配下、**MCP サーバー** の設定はルートの `.mcp.json` にあります。Skill は **オープンエコシステム標準** の `.agents/` 配下に配置されます（GitHub 専用なら `.github/skills/` も利用可能）。詳しくは [Harness Engineering / エコシステム対応表](/theomonfort/playbook/harness-engineering?present=1&slide=6) を参照してください。
 

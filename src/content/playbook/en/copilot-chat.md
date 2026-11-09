@@ -29,6 +29,12 @@ links:
   - group: 📖 Official documentation
     label: Choose an agent harness
     url: https://code.visualstudio.com/docs/agents/run/agent-harnesses
+  - group: 📖 Official documentation
+    label: Remote agent hosts in VS Code
+    url: https://code.visualstudio.com/docs/agents/run/remote-agent-sessions
+  - group: 📖 Official documentation
+    label: Copilot CLI remote control and reconnection
+    url: https://docs.github.com/en/copilot/concepts/agent-capabilities/agent-powered-workflows-and-operations/about-remote-control
   - group: 📰 Recent Changelog
     label: "Connected Copilot cloud experience (2026-10-28)"
     url: https://github.blog/changelog/2026-10-28-work-from-anywhere-with-a-new-connected-copilot-cloud-experience/
@@ -53,23 +59,6 @@ links:
     Here we focus on <strong>VS Code</strong>: the <strong>Chat view</strong> beside your code and the <strong>Agents window</strong> across projects.
   </p>
 </div>
-
-## Copilot across interfaces <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-on-github" target="_blank" rel="noopener noreferrer">📖 Docs</a>
-
-**Copilot in the cloud** connects the same cloud sandbox session across these surfaces (since **2026-10-28**). <a class="retro-link" href="https://github.blog/changelog/2026-10-28-work-from-anywhere-with-a-new-connected-copilot-cloud-experience/" target="_blank" rel="noopener noreferrer">Changelog ↗</a>
-
-<table class="compact-table">
-<thead><tr><th>Surface</th><th>Entry point</th></tr></thead>
-<tbody>
-<tr><td><strong>VS Code</strong></td><td><strong>Chat view</strong> / <strong>Agents window</strong></td></tr>
-<tr><td><strong>GitHub.com</strong></td><td><strong>Copilot</strong> / repository <strong>Agents</strong> tab</td></tr>
-<tr><td><strong>GitHub Mobile</strong></td><td><strong>Copilot</strong> tab</td></tr>
-<tr><td><strong>Copilot CLI</strong></td><td><code>copilot</code> in your terminal</td></tr>
-<tr><td><strong>GitHub Copilot app</strong></td><td>Desktop app for parallel agent tasks</td></tr>
-</tbody>
-</table>
-
-**Paid plans** and policies apply; local remote access needs an online host.
 
 ## Copilot: the default harness <a class="h2-doc" href="https://code.visualstudio.com/docs/agents/run/move-to-copilot" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
@@ -126,6 +115,8 @@ In the Copilot harness, **`@` chat participants are deprecated and unsupported**
 
 **Model ≠ harness ≠ execution location**. A Claude model does not switch the Copilot harness; **Cloud** selects where it runs.
 
+Remote access connects to an **existing host**; it does not move that session into a cloud sandbox.
+
 ## Choosing models <a class="h2-doc" href="https://code.visualstudio.com/docs/agent-customization/language-models" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 **Recommended: Copilot Fusion.** It picks models and coordinates their work. Options vary by plan, harness, and policy. <a class="retro-link" href="https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion/" target="_blank" rel="noopener noreferrer">Blog ↗</a> / <a class="retro-link" href="https://github.blog/news-insights/company-news/github-universe-2026-evolving-every-layer-of-the-stack/" target="_blank" rel="noopener noreferrer">Universe 2026 ↗</a>
@@ -135,3 +126,33 @@ In the Copilot harness, **`@` chat participants are deprecated and unsupported**
 | **Model families** | **GPT / Codex**, **Claude**, **Gemini**, **MAI** |
 | **BYOK** | Bring Your Own Key: connect your provider. <a class="retro-link" href="https://code.visualstudio.com/docs/agent-customization/language-models#_bring-your-own-language-model-key" target="_blank" rel="noopener noreferrer">Setup ↗</a> |
 | **Local models** | Copilot <a class="retro-link" href="https://code.visualstudio.com/docs/agent-customization/language-models#_use-on-device-models" target="_blank" rel="noopener noreferrer">on-device models ↗</a> on supported hardware, or **Ollama via BYOK** |
+
+## Copilot across interfaces <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-on-github" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+**Copilot in the cloud** connects the same cloud sandbox session across these surfaces (since **2026-10-28**). <a class="retro-link" href="https://github.blog/changelog/2026-10-28-work-from-anywhere-with-a-new-connected-copilot-cloud-experience/" target="_blank" rel="noopener noreferrer">Changelog ↗</a>
+
+<table class="compact-table">
+<thead><tr><th>Surface</th><th>Entry point</th></tr></thead>
+<tbody>
+<tr><td><strong>VS Code</strong></td><td><strong>Chat view</strong> / <strong>Agents window</strong></td></tr>
+<tr><td><strong>GitHub.com</strong></td><td><strong>Copilot</strong> / repository <strong>Agents</strong> tab</td></tr>
+<tr><td><strong>GitHub Mobile</strong></td><td><strong>Copilot</strong> tab</td></tr>
+<tr><td><strong>Copilot CLI</strong></td><td><code>copilot</code> in your terminal</td></tr>
+<tr><td><strong>GitHub Copilot app</strong></td><td>Desktop app for parallel agent tasks</td></tr>
+</tbody>
+</table>
+
+**Paid plans** and policies apply. **Local host offline ≠ session expired.**
+
+<div class="ctl-widget">
+<div class="ctl-list">
+<details class="ctl-item" name="copilot-remote-lifecycle">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔌</span><span class="ctl-name">What must stay online?</span><a class="ctl-doc" href="https://code.visualstudio.com/docs/agents/run/remote-agent-sessions" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Host</span><span class="ctl-v">The machine with your workspace and its agent process must be running and reachable. For a desktop VS Code host, keep VS Code running. This is not a GitHub Actions runner or a managed cloud sandbox.</span></p>
+<p class="ctl-row"><span class="ctl-k">Offline</span><span class="ctl-v">Sleep or a network outage makes remote control unavailable, not automatically expired or deleted. Reconnect to the original host; a synced transcript is not a live process or a backup of your workspace.</span></p>
+<p class="ctl-row"><span class="ctl-k">CLI resume</span><span class="ctl-v">If the CLI stopped, use <code>copilot --continue</code> or <code>copilot --resume</code> on the original machine with its saved session and workspace. Previously enabled remote control is re-enabled. <a class="retro-link" href="https://docs.github.com/en/copilot/concepts/agent-capabilities/agent-powered-workflows-and-operations/about-remote-control#reconnection" target="_blank" rel="noopener noreferrer">CLI docs ↗</a></span></p>
+</div>
+</details>
+</div>
+</div>

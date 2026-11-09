@@ -44,6 +44,18 @@ links:
   - group: 🔧 手順ガイド
     label: Define custom patterns
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/customize-leak-detection/define-custom-patterns
+  - group: 🔧 手順ガイド
+    label: Remediating a leaked secret
+    url: https://docs.github.com/en/code-security/tutorials/remediate-leaked-secrets/remediating-a-leaked-secret
+  - group: 🔎 調査と議論
+    label: "Apiiro: coding agents and saved-command secrets（一次レポート）"
+    url: https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again
+  - group: 🔎 調査と議論
+    label: "The Hacker News: Apiiro の調査に関する報道（2026-11-07）"
+    url: https://thehackernews.com/2026/11/claude-codes-dont-ask-again-file.html
+  - group: 🔎 調査と議論
+    label: Hacker News の議論と Claude Code チームの回答
+    url: https://news.ycombinator.com/item?id=50407882
   - group: 📰 Recent Changelog
     label: "Block pull requests with exposed secrets from merging (2026-09-09)"
     url: https://github.blog/changelog/2026-09-09-block-pull-requests-with-exposed-secrets-from-merging/
@@ -502,3 +514,14 @@ Org 全体をスキャンし、secret の在りかを可視化。**Team / Enterp
 > 📊 「社内に何件漏れているか」を知る用途と、予算稟議の数字づくりに使う。
 
 </div>
+
+## AI の作業でも secret はコミットされ得る <a class="h2-doc" href="https://docs.github.com/en/code-security/tutorials/remediate-leaked-secrets/remediating-a-leaked-secret" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+**コードだけでなく、agent が生成する設定もレビュー。** <a class="retro-link" href="https://thehackernews.com/2026/11/claude-codes-dont-ask-again-file.html" target="_blank" rel="noopener noreferrer">Apiiro の調査を伝える報道 ↗</a> では、<code>.claude/settings.local.json</code> に保存された承認コマンド内の secret が、公開 Git 履歴に入った事例を紹介。
+
+<a class="retro-link" href="https://news.ycombinator.com/item?id=50408126" target="_blank" rel="noopener noreferrer">Claude Code チームの HN 回答 ↗</a> は、このファイルはローカルに留めて ignore する設計だと説明。報告された作業上のリスクであり、全 agent が漏洩するという意味ではない。
+
+- **レビュー**: commit 前にステージ済みファイルと `git diff --cached` を確認。
+- **ローカルに保つ**: secret を含む設定の ignore と未追跡を確認。コマンドに認証情報を直書きせず、secret manager を使う。
+- **検知とブロック**: 利用可能な secret scanning + push protection を有効化。完全な防止は保証されない。
+- **漏洩したら**: まず revoke / rotate、その後に除去。ファイル削除だけでは Git 履歴から消えない。

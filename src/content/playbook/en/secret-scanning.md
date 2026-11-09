@@ -44,6 +44,18 @@ links:
   - group: 🔧 How-to Guides
     label: Define custom patterns
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/customize-leak-detection/define-custom-patterns
+  - group: 🔧 How-to Guides
+    label: Remediating a leaked secret
+    url: https://docs.github.com/en/code-security/tutorials/remediate-leaked-secrets/remediating-a-leaked-secret
+  - group: 🔎 Research and discussion
+    label: "Apiiro: coding agents and saved-command secrets (primary report)"
+    url: https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again
+  - group: 🔎 Research and discussion
+    label: "The Hacker News: reporting on Apiiro's findings (2026-11-07)"
+    url: https://thehackernews.com/2026/11/claude-codes-dont-ask-again-file.html
+  - group: 🔎 Research and discussion
+    label: Hacker News discussion and Claude Code team response
+    url: https://news.ycombinator.com/item?id=50407882
   - group: 📰 Recent Changelog
     label: "Block pull requests with exposed secrets from merging (2026-09-09)"
     url: https://github.blog/changelog/2026-09-09-block-pull-requests-with-exposed-secrets-from-merging/
@@ -502,3 +514,14 @@ Scans every org repo to show what secrets sit where. **Free for Team and Enterpr
 > 📊 Answers "how many secrets are leaking?" and gives you the numbers for a budget case.
 
 </div>
+
+## AI workflows can commit secrets too <a class="h2-doc" href="https://docs.github.com/en/code-security/tutorials/remediate-leaked-secrets/remediating-a-leaked-secret" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+**Review agent-generated config, not just application code.** <a class="retro-link" href="https://thehackernews.com/2026/11/claude-codes-dont-ask-again-file.html" target="_blank" rel="noopener noreferrer">Reporting on Apiiro's research ↗</a> describes secrets in saved approval commands in <code>.claude/settings.local.json</code> reaching public Git history.
+
+The <a class="retro-link" href="https://news.ycombinator.com/item?id=50408126" target="_blank" rel="noopener noreferrer">Claude Code team's HN response ↗</a> says this file is intended to stay local and ignored. This is a reported workflow risk, not proof that every agent leaks secrets.
+
+- **Review** staged files and `git diff --cached` before committing.
+- **Keep local** secret-bearing config: verify ignore rules and that the file is untracked. Use a secret manager, not literal credentials in commands.
+- **Detect / block** with secret scanning + push protection where available. Coverage is not a guarantee.
+- **If exposed**, revoke or rotate the credential first, then clean up. Deleting the file does not erase Git history.
