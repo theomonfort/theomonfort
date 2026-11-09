@@ -19,7 +19,9 @@ links:
   - label: GitHub Docs — MCP
     url: https://docs.github.com/en/copilot/concepts/context/mcp
   - label: VS Code — MCP servers
-    url: https://code.visualstudio.com/docs/copilot/customization/mcp-servers
+    url: https://code.visualstudio.com/docs/agent-customization/mcp-servers
+  - label: GitHub Docs - Copilot CLI MCP configuration
+    url: https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference#mcp-server-configuration
   - label: GitHub 公式 MCP server
     url: https://github.com/github/github-mcp-server
   - label: GitHub Docs — Configure MCP server access (org/enterprise)
@@ -150,35 +152,34 @@ MCP サーバーの実行場所は **2 種類** あります。
   </div>
 </div>
 
-## VS Code での設定
+## VS Code での設定 <a class="h2-doc" href="https://code.visualstudio.com/docs/agent-customization/mcp-servers" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-VS Code の **Marketplace から MCP サーバーをインストール** する時、2 つのスコープを選べる：
+**Copilot ハーネス** で **Customizations → MCP Servers** を開きます。
 
-- **`Install`** → **個人設定** ファイル（User Settings）に追加
-- **`Install Workspace`** → **リポジトリ設定** ファイル（`.vscode/mcp.json`）に追加
+**Workspace +**（User ではない）→ **HTTP** → サーバーの URL と ID を入力。信頼やサインインの確認に対応します。
 
 <div class="setup-cards">
   <div class="setup-card">
     <div class="setup-card-head">
-      <code>.vscode/mcp.json</code>
+      <code>.mcp.json</code>
       <span class="setup-card-tag tag-cyan">▸ リポジトリ共有</span>
     </div>
-    <p>Git に含まれるので、<strong>チーム全員</strong> で MCP を揃えられる。メンバーが repo を clone すると VS Code が <strong>「有効化しますか？」</strong> と確認してくる。</p>
+    <p><strong>Workspace</strong>：repo のルートに保存し、トップレベルの <code>mcpServers</code> に設定。Git で共有するが、認証情報は含めない。</p>
   </div>
   <div class="setup-card">
     <div class="setup-card-head">
-      <code>User Settings</code>
+      <code>User</code>
       <span class="setup-card-tag tag-magenta">▸ 自分の PC のみ</span>
     </div>
-    <p><strong>個人用</strong> / 全プロジェクト共通で使いたい時。Git には含まれない。</p>
-    <ul class="setup-card-paths">
-      <li>📁 <strong>Mac</strong>：<code>~/.config/Code/User/settings.json</code></li>
-      <li>🪟 <strong>Windows</strong>：<code>%APPDATA%\Code\User\settings.json</code></li>
-    </ul>
+    <p><strong>Global → Copilot Global</strong>：ワークスペース共通の個人設定。通常は <code>~/.copilot/mcp-config.json</code> に保存し、プロジェクトにはコミットしない。</p>
   </div>
 </div>
 
-## Copilot CLI で始める
+> ⚠️ ルートへの保存には **`chat.mcp.workspaceRootConfig.enabled`**（Experimental）を有効化。Local 互換用の `.vscode/mcp.json` は `servers` を使い、追加画面では deprecated と表示されます。
+
+## Copilot CLI で始める <a class="h2-doc" href="https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference#mcp-server-configuration" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+CLI も、フォルダーを信頼するとルートの **`.mcp.json`**（トップレベルは **`mcpServers`**）を読み込みます。`.vscode/mcp.json` から移行する場合は、ファイル名だけでなく `servers` を `mcpServers` に変更します。
 
 ```bash
 # MCP server を追加

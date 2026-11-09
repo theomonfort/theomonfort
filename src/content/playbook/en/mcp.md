@@ -19,7 +19,9 @@ links:
   - label: GitHub Docs — MCP
     url: https://docs.github.com/en/copilot/concepts/context/mcp
   - label: VS Code — MCP servers
-    url: https://code.visualstudio.com/docs/copilot/customization/mcp-servers
+    url: https://code.visualstudio.com/docs/agent-customization/mcp-servers
+  - label: GitHub Docs - Copilot CLI MCP configuration
+    url: https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference#mcp-server-configuration
   - label: GitHub official MCP server
     url: https://github.com/github/github-mcp-server
   - label: GitHub Docs — Configure MCP server access (org/enterprise)
@@ -150,35 +152,34 @@ Choose based on your use case and security requirements.
   </div>
 </div>
 
-## Configuration in VS Code
+## Configuration in VS Code <a class="h2-doc" href="https://code.visualstudio.com/docs/agent-customization/mcp-servers" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-When **installing an MCP server from the Marketplace** in VS Code, you can choose between two scopes:
+For the **Copilot harness**, open **Customizations → MCP Servers**.
 
-- **`Install`** → Added to your **personal settings** file (User Settings)
-- **`Install Workspace`** → Added to the **repository settings** file (`.vscode/mcp.json`)
+**Workspace +** (not User) → **HTTP** → server URL and ID. Review any trust or sign-in prompts.
 
 <div class="setup-cards">
   <div class="setup-card">
     <div class="setup-card-head">
-      <code>.vscode/mcp.json</code>
+      <code>.mcp.json</code>
       <span class="setup-card-tag tag-cyan">▸ Shared with repo</span>
     </div>
-    <p>Included in Git, so <strong>the whole team</strong> shares the same MCP setup. When a member clones the repo, VS Code asks <strong>"Would you like to enable it?"</strong>.</p>
+    <p><strong>Workspace</strong>: save at the repo root, with a top-level <code>mcpServers</code> object. Share via Git, never include credentials.</p>
   </div>
   <div class="setup-card">
     <div class="setup-card-head">
-      <code>User Settings</code>
+      <code>User</code>
       <span class="setup-card-tag tag-magenta">▸ Your machine only</span>
     </div>
-    <p>For <strong>personal</strong> use or when you want the same setup across all projects. Not included in Git.</p>
-    <ul class="setup-card-paths">
-      <li>📁 <strong>Mac</strong>：<code>~/.config/Code/User/settings.json</code></li>
-      <li>🪟 <strong>Windows</strong>：<code>%APPDATA%\Code\User\settings.json</code></li>
-    </ul>
+    <p><strong>Global → Copilot Global</strong>: personal setup across workspaces, normally in <code>~/.copilot/mcp-config.json</code>. Not committed to the project.</p>
   </div>
 </div>
 
-## Getting started with Copilot CLI
+> ⚠️ Root-file destination: enable **`chat.mcp.workspaceRootConfig.enabled`** (Experimental). Local compatibility: `.vscode/mcp.json` uses `servers` (labeled deprecated in the guided flow).
+
+## Getting started with Copilot CLI <a class="h2-doc" href="https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference#mcp-server-configuration" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+The CLI also reads workspace-root **`.mcp.json`** with a top-level **`mcpServers`** object after you trust the folder. Migrating from `.vscode/mcp.json` requires changing `servers` to `mcpServers`, not just renaming the file.
 
 ```bash
 # Add an MCP server

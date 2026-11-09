@@ -10,28 +10,39 @@ import Aside from '../../../components/handson/Aside.astro';
 
 <Aside type="reference">
 
-**📖 Reference**: See [Playbook / MCP Server](https://theomonfort.github.io/theomonfort/en/playbook/mcp/?present=1) for how MCP works, its transports (stdio / HTTP), and how to configure it in VS Code.
+**📖 Reference**: See [Playbook / MCP Server](https://theomonfort.github.io/theomonfort/en/playbook/mcp/?present=1) for how MCP works, its transports (stdio / HTTP), and workspace configuration.
+
+</Aside>
+
+For this step, select the **Copilot** harness in **Session Target** and use **Customizations → MCP Servers**. Enable **`chat.mcp.workspaceRootConfig.enabled`** (Experimental) in VS Code Settings so the guided flow offers workspace-root `.mcp.json`.
+
+<Aside type="negative">
+
+**Check your environment**: In Codespaces or local VS Code, confirm that these controls are available before continuing. If they are missing, check the [Copilot harness requirements](https://code.visualstudio.com/docs/agents/run/agent-harnesses#_copilot) and ask the facilitator to confirm a supported setup. The Local-harness `.vscode/mcp.json` format is still available for compatibility, but it uses `servers`, not `mcpServers`; it is not the destination used in this exercise. See [VS Code configuration destinations](https://code.visualstudio.com/docs/agent-customization/mcp-servers#_choose-a-configuration-destination).
 
 </Aside>
 
 ### 3.1 — Verify the GitHub MCP Server
 
-This repository already has the GitHub MCP Server configured in `.vscode/mcp.json`. When the Codespace starts, VS Code will automatically check the connection.
+The template already configures the GitHub MCP Server in **`.mcp.json` at the repository root**. You will add Context7 in section 3.2.
 
-Open `.vscode/mcp.json` and confirm that the following configuration is present:
+Open `.mcp.json` and confirm that the following configuration is present:
 
 ```json
 {
-  "servers": {
+  "mcpServers": {
     "github-mcp-server": {
       "type": "http",
-      "url": "https://api.githubcopilot.com/mcp/"
+      "url": "https://api.githubcopilot.com/mcp/",
+      "tools": ["*"]
     }
   }
 }
 ```
 
-Click the **tools button** in the Copilot Chat input area (to the right of the model picker) and confirm that the `github-mcp-server` tools (Issues / PRs / code search, etc.) appear in the list.
+Open **Customizations → MCP Servers → Workspace** and confirm that `github-mcp-server` is listed with **`.mcp.json`** as its source. Click **Start** if shown. Review the endpoint and requested permissions before accepting any trust or sign-in prompts. Never commit credentials.
+
+In **Customizations → Tools**, confirm that the `github-mcp-server` tools (Issues / PRs / code search, etc.) are available to the session.
 
 ⏱ About 1 minute
 
@@ -45,30 +56,48 @@ Click the **tools button** in the Copilot Chat input area (to the right of the m
 
 **Context7** is an MCP Server that pulls **the latest official documentation** for libraries and frameworks into Copilot. Recommended when working with fast-moving frameworks like Astro / Tailwind / TypeScript.
 
-1. Open the command palette with **Cmd+Shift+P** (or **Ctrl+Shift+P** on Windows/Linux)
-2. Type and select **"MCP: Add Server…"**
-3. For the transport, select **"HTTP"**
+1. Open **Customizations** and select **MCP Servers**
+2. Click **+** in the **Workspace** group, not **User**
+3. For the transport, select **HTTP (HTTP or Server-Sent Events)**
 4. Paste `https://mcp.context7.com/mcp` as the URL
-5. When prompted for the **Server ID**, change the default `my-mcp-server-xxxxxxxx` to **`context7`** (important: this makes it easier to identify in Copilot Chat's `#` completion and tool list)
-6. For the save location, select **"Workspace"**
+5. Enter **`context7`** as the **Server ID** so it is easy to identify in the tool list
+6. If prompted for a destination, choose **Workspace**, saving to root **`.mcp.json`**, not a User / Global configuration
+7. Review any trust or authentication prompts, then start the server if needed
 
-After installation, confirm that `context7` has been added to `.vscode/mcp.json`:
+After adding it, confirm that root `.mcp.json` contains **both** servers. Keep the existing GitHub entry:
 
-![.vscode/mcp.json after adding context7](/theomonfort/handson/img/mcp-json-context7-tools.png)
+```json
+{
+  "mcpServers": {
+    "github-mcp-server": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "tools": ["*"]
+    },
+    "context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp",
+      "tools": ["*"]
+    }
+  }
+}
+```
 
-When you open `.vscode/mcp.json`, a small status indicator like **`Running | N tools`** appears above each server. If you see **`2 tools`** next to `context7` (`resolve-library-id` and `get-library-docs`), the connection succeeded. If not, click **Start**.
+In **Customizations → MCP Servers → Workspace**, both `github-mcp-server` and `context7` should show **`.mcp.json`** as their source. If `context7` shows **Start**, click it.
 
 To verify it works, try the following in Copilot Chat:
 
 ```
-Use Context7 to summarize the latest documentation for Astro content collections.
+Use Context7 MCP tools to summarize the latest documentation for Astro content collections. Cite the documentation returned by the tools. Do not change files.
 ```
+
+Expand the tool call and confirm it belongs to `context7` and returned documentation without a connection error. A plausible answer alone does not verify the connection.
 
 ⏱ About 2 minutes
 
 <Aside type="positive">
 
-**Tip**: Adding the HTTP version directly means you don't need `npx` to download a package, so startup completes instantly. If you go through **"Browse MCP Servers"** on the Marketplace, the stdio (npx-based) `io.github.upstash/context7` is selected instead, and the package download on first launch can take time or even get stuck. The HTTP version avoids that wait entirely.
+**Tip**: Adding the HTTP endpoint directly avoids downloading a local package with `npx`. Network access and any required authentication still apply.
 From now on, just ask "What's the latest Astro API?" or "What's the new syntax in Tailwind v4?" and Copilot will pull the official docs via Context7. You no longer need to worry about training data cut-offs.
 
 </Aside>
