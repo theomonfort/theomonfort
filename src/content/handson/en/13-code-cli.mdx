@@ -16,6 +16,8 @@ import Aside from '../../../components/handson/Aside.astro';
 
 Here we'll take the **Issues you created at the end of Part 6** and have the CLI implement them **in parallel** via `/fleet`.
 
+Joining here? Use `./checkpoint3` for the site with presentation and tests/CI; see [checkpoint and server instructions](/theomonfort/en/handson/intro-2/#checkpoints). If you skipped Part 6, create a few improvement Issues in your own repository first.
+
 ### 13.0 — (If you're not on a Codespace) Install Copilot CLI
 
 The workshop Codespace already has Copilot CLI **pre-installed**, so you can skip this step. Only if you're working locally and don't have it yet, install it with one of the following:
@@ -55,7 +57,7 @@ curl -fsSL https://gh.io/copilot-install | bash
 
 ### 13.1 — Launch Copilot CLI
 
-First, grab the latest code. The Cloud Agent and Code Review should have merged PRs by now, so update your local branch too:
+First, review and merge the earlier exercise PRs (or your checkpoint PR) yourself. You can try the site on the prepared checkpoint branch before merging; when ready for `/fleet`, update local `main`:
 
 ```bash
 git checkout main
@@ -93,7 +95,7 @@ assign one fleet agent per Issue to implement them in parallel.
 Each agent should follow this flow:
 1. Create a branch matching the Issue number (`fix/<number>-<slug>`)
 2. Implement the fix
-3. Verify it runs with `pnpm dev`
+3. Verify it runs with `npm run dev`
 4. Commit and open a PR (include `Closes #<number>` in the body)
 
 Once all PRs are open, run a rubber-duck review on each implementation.

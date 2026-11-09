@@ -29,6 +29,7 @@ In this section you'll copy the following template repository to create your han
    - **Owner**: select an **Organization** where you can freely create test repositories (Copilot / Actions / GHAS / Codespaces enabled)
    - **Repository name**: any name you like (e.g., `hands-on-yourname`)
    - **Visibility**: select **Private**
+   - Leave **Include all branches** unchecked; a copy of `main` is enough, including for the checkpoints below.
 
 4. Click **Create repository**
 
@@ -86,3 +87,13 @@ Either way, the DevContainer sets up a Node.js 22 environment with the following
 ### 2.3 — Review the source content
 
 `src/content/playbook/` contains several Markdown files about GitHub and Copilot — the material for today's site. Each file's frontmatter defines `title` / `summary` / `icon` / `color` and an SDLC `category` (introduction / plan / develop / review / secure / operate, etc.). Assets you can use to build the site — icons and images (such as planet artwork) — are also provided under `public/`.
+
+<span id="checkpoints"></span>
+
+<Aside type="reference">
+
+**Jump to a checkpoint:** In the terminal at the root of **your generated repository**, run `./checkpoint1` (PLAN + base site, before Review/Cloud Agent), `./checkpoint2` (+ presentation, before Test & Secure), or `./checkpoint3` (+ tests/CI, before CLI/Operate). Each works independently. Save editor buffers first. The script imports the snapshot files into a new branch and PR from your remote `main`, without merging; keep any printed stash reference. Review the replacement/deletion diff. Issues and repository settings are not copied.
+
+**Run the site:** On the prepared branch, run `npm ci && npm run dev`, then open `/playbook` through the Codespaces forwarded port or the printed local URL. You can try it before merging the PR. The scripts do not install dependencies or start servers; later restarts need only `npm run dev` unless dependencies changed. Older template copies may lack these scripts; see the [checkpoint README](https://github.com/theomonfort/Github-copilot-workshop#チェックポイントから-pr-を作る--create-a-checkpoint-pr).
+
+</Aside>

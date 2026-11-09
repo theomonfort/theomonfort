@@ -1,9 +1,9 @@
 ---
 title: "CODE: Cloud Agent"
-order: 11
+order: 8
 stepSlug: "code-cloud-agent"
 duration: 20
-summary: "Step 6 で作った Issue を Cloud Agent にアサインし、複数の改善を並列で実装してもらいます。"
+summary: "Test & Secure の前に Cloud Agent でプレゼンモードを実装し、Step 6 の残りの Issue も委任します。"
 ---
 
 import Aside from '../../../components/handson/Aside.astro';
@@ -14,7 +14,11 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-### 11.1 — Cloud Agent に Context7 MCP サーバーを設定する
+レビュー済みの基本サイトから始めます。[Step 7](/theomonfort/handson/review-copilot-code-review/) の PR をマージしてから、このステップの作業をアサインしてください。
+
+<span id="111--cloud-agent-に-context7-mcp-サーバーを設定する"></span>
+
+### 8.1 — Cloud Agent に Context7 MCP サーバーを設定する
 
 Part 3 で設定した MCP は **VS Code 用** でした。Cloud Agent が MCP を使うには、リポジトリ側に別の設定が必要です（この設定は Cloud Agent と Copilot Code Review が共有します）。
 
@@ -36,13 +40,15 @@ Part 3 で設定した MCP は **VS Code 用** でした。Cloud Agent が MCP �
 
 ⏱ 約2分
 
-### 11.2 — 既存の Issue に Cloud Agent をアサインする
+<span id="112--既存の-issue-に-cloud-agent-をアサインする"></span>
 
-Step 6.5 で作成した Issue の中から、Cloud Agent に実装させたい Issue を開きます。
+### 8.2 — 既存の Issue に Cloud Agent をアサインする
+
+**最初に必須：プレゼンモード（[Step 6.6](/theomonfort/handson/code-copilot-chat/#66--改善点を-issue-化する) の Issue 1）。** 前の演習をスキップした場合は、この Issue を作成して Cloud Agent にアサインします。`/playbook` は一覧ページのまま残し、各カードから `/playbook/<slug>/?present=1` に入るリンク、矢印キー操作、セクションの目次を追加します。Test & Secure の前に、この PR をレビューして動作確認し、マージしてください。[Step 11](/theomonfort/handson/test-secure-actions/) でこれらの操作をテストします。
 
 1. github.com で自分のリポジトリを開く
 2. 上部の **Issues** タブをクリック
-3. 一覧から Cloud Agent に任せたい Issue を 1 つ選んで開く
+3. 一覧からプレゼンモードの Issue を開く
 4. 右サイドバーの **Assignees** をクリック
 5. リストから **Copilot**（GitHub）、**Claude**（Anthropic）、**Codex**（OpenAI） のいずれかを選んでアサイン
 
@@ -56,7 +62,7 @@ Step 6.5 で作成した Issue の中から、Cloud Agent に実装させたい 
 
 <Aside type="positive">
 
-**ポイント**: Cloud Agent が自律的にコードを実装し、PR を作成します（⏱ 各 Issue につき約15分）。Step 4.1 で設定した Validation Tools（CodeQL、Code Review、Secret Scanning）が有効な場合、Agent は自分の実装を検証してから PR を提出します。複数の Issue を同時にアサインすると並行して処理されます。
+**ポイント**: Cloud Agent がコードを実装して PR を作成します（⏱ 各 Issue につき約15分）。Step 4.1 の Validation Tools の指示だけでは、リポジトリのチェックは有効になりません。Code Review は Step 7 で設定済みですが、CodeQL は Step 10、Playwright / Actions は Step 11 で追加します。この最初のプレゼン PR では後続のチェックを前提にせず、自分で起動して差分を確認してください。
 
 </Aside>
 
@@ -64,13 +70,15 @@ Step 6.5 で作成した Issue の中から、Cloud Agent に実装させたい 
 
 **おすすめの進め方**:
 
-- **Issue 1 と 2 を同時にアサイン** — 近いコードに触れるため **コンフリクトが起きやすく**、後述の **Fix with Copilot** でそのまま解決を体験できます。
+- **まず Issue 1 を完了**し、その後で独立した改善を並列にアサインします。Issue 2 などのプレゼン改善は、マージ済みのプレゼン機能を土台に進められます。
 - **Issue 7（目次サイドバーのデザイン試作）** — まず試作して見比べてから採用すると、各コンポーネントの仕上がりをしっかり詰められます。
 - **一部の Issue は CLI 用に残す** — 2〜3 件は未アサインのままにして、Part 13（Copilot CLI）で実装します。
 
 </Aside>
 
-### 11.3 — PR を確認する
+<span id="113--pr-を確認する"></span>
+
+### 8.3 — PR を確認する
 
 Cloud Agent が作成した PR は **Draft（下書き）** 状態で作成されます。
 
@@ -86,12 +94,14 @@ Cloud Agent が作成した PR は **Draft（下書き）** 状態で作成さ�
 
 ![Fix with Copilot でコンフリクト解決](/theomonfort/handson/img/fix-conflicts-copilot.png)
 
-### 11.4 — マージ前に Codespace で動作確認する
+<span id="114--マージ前に-codespace-で動作確認する"></span>
+
+### 8.4 — マージ前に Codespace で動作確認する
 
 マージしてしまう前に、Cloud Agent の PR を Codespace で実際に動かして確認するのが賢い進め方です。`gh` CLI で PR のブランチをチェックアウトしましょう（`<PR番号>` は実際の PR 番号に置き換えてください）。
 
 ```bash
-gh pr checkout <PR番号> && npm install && npm run dev
+gh pr checkout <PR番号> && npm ci && npm run dev
 ```
 
-ポートフォワーディングの通知が表示されたら **「ブラウザで開く」** をクリックして、Cloud Agent が実装した新機能を確認してください。問題なければ PR をマージし、おかしな点があれば PR にコメントして Cloud Agent に修正させましょう。
+Codespaces の転送ポート（ローカルなら表示された URL）から `/playbook` を開き、カードのプレゼンリンクを選びます。`←` / `→`、目次でのセクション切り替え、`Esc` で一覧に戻る操作を確認してください。問題があれば PR にコメントして修正を依頼します。**動作するプレゼン PR をマージしてから Test & Secure に進みます。**

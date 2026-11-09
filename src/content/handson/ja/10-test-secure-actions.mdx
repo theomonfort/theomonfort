@@ -1,6 +1,6 @@
 ---
 title: "TEST & SECURE: Actions"
-order: 10
+order: 11
 stepSlug: "test-secure-actions"
 duration: 15
 summary: "Presentation サイトの キーボードナビゲーション が壊れないように、Playwright で E2E テストを書き、PR ごとに自動実行する Actions ワークフローを作ります。"
@@ -14,7 +14,11 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-### 10.1 — Presentation モードのテストを作成する
+**前提：** [Step 8](/theomonfort/handson/code-cloud-agent/) または `./checkpoint2` で動作するプレゼンモードを準備します（[チェックポイントとサーバー起動](/theomonfort/handson/intro-2/#checkpoints)）。古いローカルの `main` ではなく、その実装を含むブランチから始めてください。
+
+<span id="101--presentation-モードのテストを作成する"></span>
+
+### 11.1 — Presentation モードのテストを作成する
 
 Copilot Chat（Agent モード）で以下を入力してください：
 
@@ -25,11 +29,13 @@ Presentation サイトのキーボードナビゲーションを検証する Pla
 
 前提：
 - src/content/playbook/ に少なくとも 2 件のエントリーがあるとする。
-- サイトを開くと最初から Presentation モードが表示される。
+- `/playbook/` は一覧ページであり、プレゼンモードではない。
+- デスクトップ幅でカードのプレゼンリンク（`/playbook/<slug>/?present=1`）を開いてからキー操作をテストする。2 枚以上のスライドを持つ既存エントリを使う。
 
 テストケース：
 1. `←` / `→` を押すと同じセクション内のスライドが前後に移動する（## 見出しごとに 1 スライド）。
 2. 左サイドバーから別のセクションをクリックすると、そのセクションの 1 枚目に切り替わる。
+3. `Esc` を押すと `/playbook/` に戻る。
 
 ファイル配置:
 - テストは tests/e2e/presentation.spec.ts に配置。
@@ -40,7 +46,9 @@ Presentation サイトのキーボードナビゲーションを検証する Pla
 
 ⏱ 約5分
 
-### 10.2 — PR で自動実行する Actions ワークフローを作成する
+<span id="102--pr-で自動実行する-actions-ワークフローを作成する"></span>
+
+### 11.2 — PR で自動実行する Actions ワークフローを作成する
 
 続けて Copilot Chat に以下を入力してください：
 
@@ -59,7 +67,7 @@ PR の作成・更新時にトリガーし、以下を実行してください�
 
 ⏱ 約2分
 
-PR を作成し直すと、Actions タブで `test.yml` の実行が確認できます。Presentation モードの挙動を変更したときにこの workflow が早期に壊れを検知してくれます。
+テストと workflow をコミットして push し、`test-creation` から PR を作成すると、Actions タブで `test.yml` の実行を確認できます。未マージのチェックポイントブランチから始めた場合は、先にチェックポイント PR をレビューしてマージし、必要に応じてテスト PR を更新してください。プレゼンモードの挙動を変更したときに、この workflow が早期に回帰を検知してくれます。
 
 <Aside type="positive">
 

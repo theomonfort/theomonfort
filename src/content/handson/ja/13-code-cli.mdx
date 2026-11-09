@@ -16,6 +16,8 @@ import Aside from '../../../components/handson/Aside.astro';
 
 ここでは **Part 6 の最後で作成した Issue 群** を、CLI から `/fleet` で **並列に** 実装してもらいます。
 
+ここから参加する場合は、`./checkpoint3` でプレゼン機能とテスト / CI 付きサイトを準備できます。[チェックポイントとサーバー起動](/theomonfort/handson/intro-2/#checkpoints)を参照してください。Part 6 をスキップした場合は、自分のリポジトリに改善 Issue を数件作成します。
+
 ### 13.0 — （Codespace を使っていない場合）Copilot CLI をインストールする
 
 ワークショップ用の Codespace には Copilot CLI が **プリインストール済み** なので、この手順はスキップして構いません。ローカル環境で作業していてまだ入っていない場合だけ、以下のいずれかでインストールします：
@@ -55,7 +57,7 @@ curl -fsSL https://gh.io/copilot-install | bash
 
 ### 13.1 — Copilot CLI を起動する
 
-まず、最新のコードを取得します。Cloud Agent や Code Review から PR がマージされているはずなので、ローカルブランチも更新しておきます：
+まず、前の演習の PR（またはチェックポイント PR）を自分でレビューしてマージします。サイトは準備されたチェックポイントブランチでマージ前に試せます。`/fleet` に進む準備ができたら、ローカルの `main` を更新してください：
 
 ```bash
 git checkout main
@@ -93,7 +95,7 @@ Part 6 で作成した 3〜5 件の Issue を、CLI に並列で実装させま�
 各エージェントは以下のフローで作業すること：
 1. Issue 番号と一致するブランチ (fix/<number>-<slug>) を切る
 2. 修正を実装する
-3. pnpm dev で動作確認できる状態にする
+3. npm run dev で動作確認できる状態にする
 4. コミットして PR を出す（`Closes #<number>` を本文に入れる）
 
 すべての PR が作成されたら、各実装に対してラバーダックレビューを行ってください。

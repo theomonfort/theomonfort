@@ -99,7 +99,7 @@ Plan に納得したら **「Start with Autopilot」** をクリックして実�
 
 <Aside type="positive">
 
-**💡 並行して進めよう**: Copilot が実装している間は手が空くので、先に [Step 7（REVIEW: Copilot Code Review）](../review-copilot-code-review/) に進んで **Automatic Copilot Code Review** を有効化しておきましょう。設定しておけば、Copilot が今作成中の PR がオープンされた瞬間に自動でレビューが走ります。
+**💡 並行して進めよう**: Copilot が実装している間は手が空くので、先に [Step 7（REVIEW: Copilot Code Review）](/theomonfort/handson/review-copilot-code-review/) に進んで **Automatic Copilot Code Review** を有効化しておきましょう。設定しておけば、Copilot が今作成中の PR がオープンされた瞬間に自動でレビューが走ります。
 
 </Aside>
 
@@ -119,12 +119,12 @@ npm run dev
 
 ### 6.6 — 改善点を Issue 化する
 
-ここで重要なポイント — **Copilot Chat に直接「ここを直して」と頼むのではなく、それぞれを GitHub Issue として登録します**。Step 11（CODE: Cloud Agent）で一部の Issue を Cloud Agent に **まとめて並列に** 実装してもらい、残りは Step 13（CODE: Copilot CLI）で `/fleet` を使って並列実装するためです。
+ここで重要なのは、**Copilot Chat に直接「ここを直して」と頼むのではなく、それぞれを GitHub Issue として登録すること**です。[Step 8（CODE: Cloud Agent）](/theomonfort/handson/code-cloud-agent/) では、まずプレゼンモードを実装し、その後で独立した改善を並列に委任します。残りは Step 13（CODE: Copilot CLI）で `/fleet` を使って実装します。
 
 Copilot Chat に以下のプロンプトを投げて、改善点を **8 件** Issue 化してください（`github-issues` skill が自動で構造化してくれます）：
 
 <Aside type="negative">
-以下の Issue は、Copilot がサイトを実装した結果に合わせてあなたが感じた改善点の **一例** です。実際の出来によっては当てはまらないものもあるので、合わないものは飛ばして、**自分が良くしたいと思った点を自由に Issue に置き換えてください**。
+**Issue 1（プレゼンモード）は Step 11 の Actions / テスト演習の前に必須です。** 既に動作している場合やチェックポイント 2 を使う場合は省略できます。Issue 2〜8 は改善例なので、不要なものは飛ばすか、自分が改善したい内容に置き換えてください。
 </Aside>
 
 ```

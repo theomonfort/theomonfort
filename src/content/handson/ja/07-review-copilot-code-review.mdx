@@ -16,6 +16,8 @@ import Aside from '../../../components/handson/Aside.astro';
 
 ### 7.1 — Copilot Code Review の設定を有効化する
 
+基本サイトの実装をスキップする場合は、`./checkpoint1` で PR を準備できます。[チェックポイントとサーバー起動](/theomonfort/handson/intro-2/#checkpoints)を確認し、このページでその PR をレビューしてください。
+
 まず、github.com 上の自分のリポジトリを開いて、Copilot Code Review の設定を確認します。
 
 1. リポジトリの **Settings** → **Copilot** → **Code review**
@@ -34,11 +36,11 @@ import Aside from '../../../components/handson/Aside.astro';
 
 同じページの **Manage Copilot code review automations** セクションで、**Create ruleset for default branch** をクリックするだけです。デフォルトブランチ（`main`）に対する PR で Copilot Code Review が自動的に走るようになります。
 
-設定が終わったら [Step 6.4](../code-copilot-chat/#64) に戻って、Copilot が実装を終えるのを待ちましょう。
+設定が終わったら [Step 6.5](/theomonfort/handson/code-copilot-chat/#65--autopilot-で実装する) に戻って Copilot の実装完了を待つか、チェックポイント PR のレビューに進んでください。
 
 ### 7.3 — Copilot の PR で結果を確認する
 
-Step 6.4 で Copilot が実装を終えると、自動的に PR がオープンされます。その瞬間に 7.2 で作成した Ruleset が発火し、Copilot Code Review が走り出します（⏱ 約5分）：
+Step 6.5 で Copilot が実装を終えると、自動的に PR がオープンされます。7.2 の Ruleset により、新規 PR で Copilot Code Review が始まります（⏱ 約5分）。チェックポイント PR が既に開いていた場合は、その PR で Copilot にレビューを依頼してください。
 
 - ✅ **Pull Request Overview** — PR 全体のサマリーコメント
 - ✅ **コード提案** — 各ファイルへの具体的な改善提案

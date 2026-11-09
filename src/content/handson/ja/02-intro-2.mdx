@@ -29,6 +29,7 @@ import Aside from '../../../components/handson/Aside.astro';
    - **Owner**: テスト用リポジトリを自由に作成できる **Organization**（Copilot / Actions / GHAS / Codespaces が有効）を選択
    - **Repository name**: 任意の名前（例: `hands-on-yourname`）
    - **Visibility**: **Private** を選択
+   - **Include all branches** はオフのままにします。下記のチェックポイントも含め、`main` のコピーだけで利用できます。
 
 4. **Create repository** をクリック
 
@@ -86,3 +87,13 @@ Codespace の起動には数分かかる場合があります。DevContainer の
 ### 2.3 — 題材コンテンツを確認する
 
 `src/content/playbook/` に、GitHub / Copilot に関する複数の Markdown ファイルが配置されています。これらが今日のサイトの題材です。各ファイルの frontmatter には `title` / `summary` / `icon` / `color` と、SDLC の `category`（introduction / plan / develop / review / secure / operate など）が定義されています。さらに、サイト構築に使えるアイコンや画像（惑星画像など）のアセットも `public/` に用意されています。
+
+<span id="checkpoints"></span>
+
+<Aside type="reference">
+
+**チェックポイントから始める：** **自分で作成したリポジトリ**のルートのターミナルで、`./checkpoint1`（PLAN + 基本サイト、Review / Cloud Agent の前）、`./checkpoint2`（+ プレゼン機能、Test & Secure の前）、`./checkpoint3`（+ テスト / CI、CLI / Operate の前）のいずれかを実行します。各コマンドは単独で使えます。先にエディタの未保存内容を保存してください。スクリプトは自分のリモート `main` から新規ブランチと PR を作り、スナップショットのファイルだけを取り込みます。マージはしません。stash が表示された場合は参照を控え、置換 / 削除の差分を確認してください。Issue やリポジトリ設定はコピーされません。
+
+**サイトを起動する：** 準備されたブランチで `npm ci && npm run dev` を実行し、Codespaces の転送ポートまたは表示されたローカル URL から `/playbook` を開きます。PR のマージ前に試せます。スクリプトは依存関係のインストールやサーバー起動を行いません。依存関係が変わっていなければ、次回の起動は `npm run dev` だけで十分です。古いテンプレートのコピーにはスクリプトがない場合があります。[チェックポイントの README](https://github.com/theomonfort/Github-copilot-workshop#チェックポイントから-pr-を作る--create-a-checkpoint-pr) を参照してください。
+
+</Aside>

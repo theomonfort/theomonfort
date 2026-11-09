@@ -1,6 +1,6 @@
 ---
 title: "TEST & SECURE: Actions"
-order: 10
+order: 11
 stepSlug: "test-secure-actions"
 duration: 15
 summary: "Write Playwright E2E tests so the Presentation site's keyboard navigation doesn't break, and set up a GitHub Actions workflow that runs them automatically on every PR."
@@ -14,7 +14,11 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-### 10.1 — Create tests for Presentation mode
+**Prerequisite:** Use the working presentation mode from [Step 8](/theomonfort/en/handson/code-cloud-agent/) or `./checkpoint2` ([checkpoint and server instructions](/theomonfort/en/handson/intro-2/#checkpoints)). Start from the branch containing that implementation, not a stale local `main`.
+
+<span id="101--create-tests-for-presentation-mode"></span>
+
+### 11.1 — Create tests for Presentation mode
 
 In Copilot Chat (Agent mode), enter the following:
 
@@ -25,11 +29,13 @@ Create Playwright E2E tests that verify the Presentation site's keyboard navigat
 
 Assumptions:
 - src/content/playbook/ contains at least 2 entries.
-- Opening the site displays Presentation mode by default.
+- `/playbook/` is the landing page, not presentation mode.
+- At desktop size, open a card's presentation link (`/playbook/<slug>/?present=1`) before testing keyboard navigation. Use an existing entry with at least two slides.
 
 Test cases:
 1. Pressing `←` / `→` moves to the previous / next slide within the same section (one slide per `##` heading).
 2. Clicking a different section in the left sidebar switches to that section's first slide.
+3. Pressing `Esc` returns to `/playbook/`.
 
 File layout:
 - Place the tests in tests/e2e/presentation.spec.ts.
@@ -40,7 +46,9 @@ Once the tests are written, run `npx playwright test` locally and make sure they
 
 ⏱ ~5 minutes
 
-### 10.2 — Create an Actions workflow that runs automatically on PRs
+<span id="102--create-an-actions-workflow-that-runs-automatically-on-prs"></span>
+
+### 11.2 — Create an Actions workflow that runs automatically on PRs
 
 Next, enter the following in Copilot Chat:
 
@@ -59,7 +67,7 @@ Trigger it on PR open / update, and have it perform the following steps:
 
 ⏱ ~2 minutes
 
-Re-create the PR and you'll see `test.yml` running in the Actions tab. Whenever you change Presentation mode behavior, this workflow will catch any regressions early.
+Commit and push the tests and workflow, then open a PR from `test-creation`. You'll see `test.yml` running in the Actions tab. If you started from an unmerged checkpoint branch, review and merge that checkpoint PR first, then update the test PR as needed. Whenever you change Presentation mode behavior, this workflow will catch regressions early.
 
 <Aside type="positive">
 

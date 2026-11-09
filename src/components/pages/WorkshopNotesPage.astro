@@ -125,28 +125,37 @@ const sections: Section[] = [
     ],
   },
   {
-    title: 'TEST & SECURE',
-    subtitle: '脆弱性チェックを設定',
-    color: 'cyan',
-    items: [
-      { label: 'Demo CodeQL on PR' },
-      { label: 'Explain GHAS (SLIDES)' },
-      { label: 'Explain TESTS' },
-    ],
-  },
-  {
     title: 'CODE',
     subtitle: 'Copilot と非同期でコーディング',
     color: 'magenta',
     items: [
       { label: 'Explain CLOUD AGENT (SLIDES)' },
       { label: 'Demo MCP server for CCA' },
-      { label: 'Demo Assign Copilot + Claude (#1 + #2, Check #7)' },
+      { label: 'Demo Assign presentation Issue #1 first; merge before TEST & SECURE, then try independent improvements (#2, #7)' },
       { label: 'Demo Setting' },
       { label: 'Demo CCA Session (OTHER REPO)' },
       { label: 'Demo Conflict Resolution' },
       { label: 'Demo CCA implementation Result' },
       { label: 'SUMMARIZE' },
+    ],
+  },
+  {
+    title: 'TEST & SECURE',
+    subtitle: '脆弱性チェックを設定',
+    color: 'cyan',
+    items: [
+      { label: 'Demo CodeQL on PR' },
+      { label: 'Explain GHAS (SLIDES)' },
+      { label: 'Explain TESTS: open /playbook, enter presentation from a card, then test keyboard navigation' },
+    ],
+  },
+  {
+    title: 'CLI',
+    subtitle: 'CLI と Copilot アプリ',
+    color: 'amber',
+    items: [
+      { label: 'Explain CLI' },
+      { label: 'Demo CLI Versus Visual Studio Code' },
     ],
   },
   {
@@ -157,15 +166,6 @@ const sections: Section[] = [
       { label: 'Explain AGENTIC WORKFLOW' },
       { label: 'Demo Send Prompt' },
       { label: 'Demo results in theomonfort repo' },
-    ],
-  },
-  {
-    title: 'BONUS',
-    subtitle: 'CLI と Copilot アプリ',
-    color: 'amber',
-    items: [
-      { label: 'Explain CLI' },
-      { label: 'Demo CLI Versus Visual Studio Code' },
     ],
   },
 ];

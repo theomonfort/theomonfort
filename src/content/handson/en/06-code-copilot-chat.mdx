@@ -99,7 +99,7 @@ Once you're happy with the plan and your checkpoint is pushed, click **"Start wi
 
 <Aside type="positive">
 
-**💡 Work in parallel**: While Copilot is implementing, you've got time on your hands — hop over to [Step 7 (REVIEW: Copilot Code Review)](../review-copilot-code-review/) and enable **Automatic Copilot Code Review** now. That way, the moment Copilot opens the PR it's working on, the review fires automatically.
+**💡 Work in parallel**: While Copilot is implementing, you've got time on your hands — hop over to [Step 7 (REVIEW: Copilot Code Review)](/theomonfort/en/handson/review-copilot-code-review/) and enable **Automatic Copilot Code Review** now. That way, the moment Copilot opens the PR it's working on, the review fires automatically.
 
 </Aside>
 
@@ -119,12 +119,12 @@ From the port-forwarding notification, click **"Open in browser"** and try it ou
 
 ### 6.6 — File the improvements as Issues
 
-Here's the key move — **instead of asking Copilot Chat to "fix this right now", file each improvement as a GitHub Issue**. In Step 11 (CODE: Cloud Agent) we'll have Cloud Agent implement some of them **in parallel, in one batch**, and in Step 13 (CODE: Copilot CLI) we'll knock out the remaining ones in parallel with `/fleet`.
+Here's the key move: **instead of asking Copilot Chat to "fix this right now", file each improvement as a GitHub Issue**. In [Step 8 (CODE: Cloud Agent)](/theomonfort/en/handson/code-cloud-agent/) we'll implement presentation mode first, then delegate independent improvements in parallel. In Step 13 (CODE: Copilot CLI) we'll work on the remaining ones with `/fleet`.
 
 Send the prompt below to Copilot Chat to file **8** Issues at once (the `github-issues` skill will structure them automatically):
 
 <Aside type="negative">
-The Issues below are **just one example** of the improvements you might want, based on how Copilot built the site. Depending on what Copilot actually shipped, some of them may not apply — skip those, and **feel free to swap in your own improvements** that make the site better the way you want.
+**Issue 1 (presentation mode) is required before the Actions/testing exercise in Step 11**, unless the feature already works or you use checkpoint 2. Issues 2–8 are examples: skip those that do not apply, or replace them with your own improvements.
 </Aside>
 
 ```
