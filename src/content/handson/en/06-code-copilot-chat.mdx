@@ -125,8 +125,8 @@ Continue from the base site with **8 implementation Issues** that build toward t
 | --- | --- | --- |
 | Part 6 / checkpoint1 | Base site already built | Catalogue and Markdown details |
 | Cloud Agent (Part 8) | `presentation-core` → `presentation-content` / `mermaid-rendering` / `responsive-navigation` | checkpoint2 |
-| Test & Secure (Part 11) | `presentation-tests` | checkpoint3 |
-| CLI (Part 13) | `playbook-3d` → `galaxy-audio` | Extend to the existing 3D view |
+| Test & Secure (Part 11) | `presentation-tests` | checkpoint3 also includes 3D |
+| CLI (Part 13) | Build `playbook-3d` manually or reuse checkpoint3 → `galaxy-audio` | 3D first, then ambience |
 | Operate (Part 14) | `daily-repo-status` | Daily report |
 
 **`./checkpoint1` prepares these same Issues in Japanese.** If you ran it, reuse them in the Issues tab rather than generating duplicates. The English prompt below uses the same keys. If you jump straight to `checkpoint2` / `checkpoint3`, check which acceptance criteria are already met and work only on the remaining tasks. Repository policies and security settings still need separate setup.
@@ -136,7 +136,7 @@ Keep the `[playbook:...]` title keys and `workshop-issue` body markers so the pr
 `checkpoint1` prepares Issues before stashing or switching branches, reusing existing open or closed Issues without changing them. Even if the snapshot already matches `main`, it prepares missing Issues without another PR. If Issue preparation fails, fix the reported error and rerun `./checkpoint1`; already-created Issues are retained. Run only one import per repository at a time, including across clones. `checkpoint2` / `checkpoint3` do not prepare Issues.
 
 <Aside type="negative">
-**`presentation-core` is required before testing.** 3D is an extension absent from checkpoints 1–3, not a prerequisite for the presentation tests. Start `galaxy-audio` after merging 3D.
+**`presentation-core` is required before testing.** Checkpoints 1–2 do not include 3D; checkpoint3 already provides it. Inspect and reuse that implementation rather than rebuilding it. Ambient audio and daily reporting remain separate exercises. Previously created Issue bodies are not rewritten, so use this current checkpoint boundary when selecting remaining work.
 </Aside>
 
 On the normal Part 6 path, send this prompt to Copilot Chat to prepare the Issues. It does not start implementation.
@@ -145,7 +145,7 @@ On the normal Part 6 path, send this prompt to Copilot Chat to prepare the Issue
 Use the github-issues skill to prepare the following Issues in my current repository. Do not start implementation yet.
 Check both open and closed Issues. Reuse an Issue if its body has the matching workshop-issue marker or its title contains the matching [playbook:key]. Do not overwrite existing bodies or automatically reopen closed Issues.
 Create only missing Issues, using the titles and bodies below (including the markers). Do not require labels or Organization Issue Types to exist.
-Report tasks whose acceptance criteria are already met, and resolve dependencies by work key, not by assumed GitHub Issue numbers.
+Report tasks whose acceptance criteria are already met without automatically closing their Issues, and resolve dependencies by work key, not by assumed GitHub Issue numbers.
 
 Title: [playbook:presentation-core] Build presentation mode and TOC navigation
 Body:
@@ -216,7 +216,7 @@ Title: [playbook:playbook-3d] Recreate the existing 3D Galaxy view
 Body:
 <!-- workshop-issue:playbook-3d -->
 ## Stage
-CLI extension (Part 13), after checkpoint3. 3D is not included in checkpoints 1–3.
+Manual implementation task for CLI (Part 13). Not included in checkpoint1 / checkpoint2; already implemented in checkpoint3. If using checkpoint3, inspect the acceptance criteria and reuse its implementation instead of rebuilding it.
 
 ## Acceptance criteria
 - Recreate the existing 2D / 3D switch using Three.js: a central SDLC sun, five Plan / Develop / Review / Secure / Operate planets, an Introduction departure station and an Administration mothership. Do not invent a different design.
@@ -232,7 +232,7 @@ Title: [playbook:galaxy-audio] Add Galaxy ambience and clean resource shutdown
 Body:
 <!-- workshop-issue:galaxy-audio -->
 ## Stage
-CLI extension (Part 13), after merging `playbook-3d`. Do not implement them concurrently.
+CLI extension (Part 13), after merging either your manual `playbook-3d` PR or the checkpoint3 PR. Do not implement it concurrently with 3D. Checkpoint3 does not include ambient audio.
 
 ## Acceptance criteria
 - Follow the existing Galaxy ambience, with playback after user interaction and a Music ON / OFF control.

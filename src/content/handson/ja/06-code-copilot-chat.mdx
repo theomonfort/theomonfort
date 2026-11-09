@@ -125,8 +125,8 @@ npm run dev
 | --- | --- | --- |
 | Part 6 / checkpoint1 | 基本サイトは実装済み | 一覧と Markdown 詳細 |
 | Cloud Agent (Part 8) | `presentation-core` → `presentation-content` / `mermaid-rendering` / `responsive-navigation` | checkpoint2 |
-| Test & Secure (Part 11) | `presentation-tests` | checkpoint3 |
-| CLI (Part 13) | `playbook-3d` → `galaxy-audio` | 現在の 3D ビューに拡張 |
+| Test & Secure (Part 11) | `presentation-tests` | checkpoint3 には 3D も含む |
+| CLI (Part 13) | `playbook-3d` を手動実装、または checkpoint3 を再利用 → `galaxy-audio` | 3D の後に環境音 |
 | Operate (Part 14) | `daily-repo-status` | 日次レポート |
 
 **`./checkpoint1` は以下と同じ日本語 Issue を準備します。** 実行済みなら Issues タブで再利用し、重複作成しないでください。`checkpoint2` / `checkpoint3` から直接始めた場合は、既に満たす完了条件を確認し、未完了の作業だけ進めます。リポジトリのポリシーやセキュリティ設定は別途必要です。
@@ -136,7 +136,7 @@ npm run dev
 `checkpoint1` は stash やブランチ切り替えの前に Issue を準備し、既存の open / closed Issue は変更せず再利用します。スナップショットが `main` と同じ場合も、新しい PR を作らず不足する Issue を準備します。Issue の準備に失敗したら、表示されたエラーを解消して `./checkpoint1` を再実行してください。作成済みの Issue は保持されます。別 clone を含め、同じリポジトリで同時に複数の取り込みを実行しないでください。`checkpoint2` / `checkpoint3` は Issue を準備しません。
 
 <Aside type="negative">
-**`presentation-core` はテストの前に必須です。** 3D は checkpoint1〜3 には含まれない追加実装で、プレゼンのテストを始める条件ではありません。`galaxy-audio` は 3D のマージ後に進めます。
+**`presentation-core` はテストの前に必須です。** checkpoint1 / checkpoint2 に 3D は含まれませんが、checkpoint3 には実装済みです。作り直さず、完了条件を確認して既存実装を再利用してください。環境音と日次レポートは別の演習です。作成済みの Issue 本文は書き換わらないため、残りの作業はこの最新のチェックポイント範囲に基づいて選びます。
 </Aside>
 
 通常の Part 6 では、次のプロンプトを Copilot Chat に送って Issue を準備します。これは実装の依頼ではありません。
@@ -145,7 +145,7 @@ npm run dev
 github-issues skill を使い、自分のこのリポジトリに以下の Issue を準備してください。実装はまだ開始しないでください。
 open / closed の両方を確認し、本文の workshop-issue マーカーまたはタイトルの [playbook:キー] が一致すれば既存 Issue を再利用してください。既存の本文を書き換えたり、closed を自動で再オープンしたりしないでください。
 存在しない Issue だけを、以下のタイトルと本文（マーカーを含む）で作成してください。ラベルや Organization の Issue Type がなくても作成できるよう、それらを必須にしないでください。
-既に実装済みの作業は完了条件を確認して報告し、GitHub の Issue 番号ではなく作業キーで依存関係を判断してください。
+既に実装済みの作業は完了条件を確認して報告し、Issue を自動でクローズしないでください。GitHub の Issue 番号ではなく作業キーで依存関係を判断してください。
 
 タイトル: [playbook:presentation-core] プレゼンモードと目次ナビゲーションを作る
 本文:
@@ -216,7 +216,7 @@ Test & Secure (Part 11)。プレゼン機能をマージ後、または checkpoi
 本文:
 <!-- workshop-issue:playbook-3d -->
 ## 段階
-CLI (Part 13) の追加実装。checkpoint3 の後に取り組む。checkpoint1〜3 には 3D は含まれない。
+CLI (Part 13) で手動実装する場合の作業。checkpoint1 / checkpoint2 には含まれず、checkpoint3 には実装済み。checkpoint3 を使う場合は完了条件を確認し、作り直さず既存実装を再利用する。
 
 ## 完了条件
 - 既存サイトの 2D / 3D 切り替えを再現し、Three.js で中央の SDLC 太陽、Plan / Develop / Review / Secure / Operate の5惑星、Introduction の出発ステーション、Administration の母艦を表示する。新しい別デザインにはしない。
@@ -232,7 +232,7 @@ CLI (Part 13) の追加実装。checkpoint3 の後に取り組む。checkpoint1�
 本文:
 <!-- workshop-issue:galaxy-audio -->
 ## 段階
-CLI (Part 13) の追加実装。`playbook-3d` のマージ後に開始。同時に実装しない。
+CLI (Part 13) の追加実装。手動で実装した `playbook-3d` または checkpoint3 の PR をマージ後に開始。3D と同時に実装しない。checkpoint3 に環境音は含まれない。
 
 ## 完了条件
 - 既存ギャラクシーを参考に、ユーザー操作後に再生できる環境音と Music ON / OFF を用意する。
