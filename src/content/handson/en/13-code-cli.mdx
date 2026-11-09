@@ -3,7 +3,7 @@ title: "CODE: CLI"
 order: 13
 stepSlug: "code-cli"
 duration: 30
-summary: "In this step you'll implement the Issues created in Part 6 in parallel using Copilot CLI's `/fleet`. Copilot CLI is an interactive AI assistant that runs in your terminal without ever opening VS Code."
+summary: "Use Copilot CLI to extend the Playbook with its existing 3D Galaxy view, then ambience. Use /fleet only for independent remaining tasks."
 ---
 
 import Aside from '../../../components/handson/Aside.astro';
@@ -14,9 +14,9 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-Here we'll take the **Issues you created at the end of Part 6** and have the CLI implement them **in parallel** via `/fleet`.
+Here we'll use the **Part 6 Issue catalogue** to extend the site toward the [existing 3D Galaxy view](https://theomonfort.github.io/theomonfort/en/playbook/?view=3d). Start with `[playbook:playbook-3d]`, then add `[playbook:galaxy-audio]` after merging it.
 
-Joining here? Use `./checkpoint3` for the site with presentation and tests/CI; see [checkpoint and server instructions](/theomonfort/en/handson/intro-2/#checkpoints). If you skipped Part 6, create a few improvement Issues in your own repository first.
+Joining here? Use `./checkpoint3` for the site with presentation and tests/CI; see [checkpoint and server instructions](/theomonfort/en/handson/intro-2/#checkpoints). Reuse the catalogue seeded by checkpoint1. If you skipped it, use the [Part 6 prompt](/theomonfort/en/handson/code-copilot-chat/#66--file-the-improvements-as-issues) to create only missing Issues. Checkpoints do not include 3D.
 
 ### 13.0 — (If you're not on a Codespace) Install Copilot CLI
 
@@ -86,24 +86,28 @@ Pick the most capable model available (e.g., Claude Opus 4.6).
 
 ### 13.3 — Implement Issues in parallel with `/fleet`
 
-Have the CLI implement the 3–5 Issues you created in Part 6 in parallel. The prompt also asks for a rubber-duck review on each implementation at the end.
+Select unfinished work whose prerequisites are merged. If only `playbook-3d` is ready, use a single CLI session; do not run its dependent audio task at the same time. For multiple independent tasks, use `/fleet` with the prompt below. It also asks for a rubber-duck review.
 
 ```
-/fleet Take every open Issue in this repository labeled `bug` or `enhancement` and
-assign one fleet agent per Issue to implement them in parallel.
+/fleet Read the Part 6 Issues identified by [playbook:key] and their acceptance criteria.
+Select only unfinished tasks whose prerequisites are merged.
+Keep presentation-tests for Part 11 and daily-repo-status for Part 14.
+Implement playbook-3d before galaxy-audio; do not run dependent tasks concurrently.
+If only one task is ready, work on that one without spawning extra agents.
+Parallelize only independently scoped ready tasks, not every open Issue or label.
 
 Each agent should follow this flow:
 1. Create a branch matching the Issue number (`fix/<number>-<slug>`)
 2. Implement the fix
 3. Verify it runs with `npm run dev`
-4. Commit and open a PR (include `Closes #<number>` in the body)
+4. Commit and open a PR (include `Closes #<number>` with the actual Issue number in the body)
 
 Once all PRs are open, run a rubber-duck review on each implementation.
 ```
 
 ⏱ ~10–15 minutes
 
-The CLI spawns multiple fleet agents, each working on its own branch through implementation and PR creation autonomously. Progress streams in your terminal, and the rubber-duck review is printed at the end.
+When independent tasks are available, the CLI can run them on separate branches through implementation and PR creation. Review and merge prerequisite PRs before starting dependent tasks. Check completed acceptance criteria instead of recreating features already present in your snapshot.
 
 To check progress during and after execution:
 

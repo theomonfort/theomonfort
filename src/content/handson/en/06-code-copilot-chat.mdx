@@ -119,44 +119,138 @@ From the port-forwarding notification, click **"Open in browser"** and try it ou
 
 ### 6.6 — File the improvements as Issues
 
-Here's the key move: **instead of asking Copilot Chat to "fix this right now", file each improvement as a GitHub Issue**. In [Step 8 (CODE: Cloud Agent)](/theomonfort/en/handson/code-cloud-agent/) we'll implement presentation mode first, then delegate independent improvements in parallel. In Step 13 (CODE: Copilot CLI) we'll work on the remaining ones with `/fleet`.
+Continue from the base site with **8 implementation Issues** that build toward the current Playbook. Each `[playbook:...]` is a stable work key, not a GitHub-assigned Issue number.
 
-Send the prompt below to Copilot Chat to file **8** Issues at once (the `github-issues` skill will structure them automatically):
+| Stage | Work keys | Milestone |
+| --- | --- | --- |
+| Part 6 / checkpoint1 | Base site already built | Catalogue and Markdown details |
+| Cloud Agent (Part 8) | `presentation-core` → `presentation-content` / `mermaid-rendering` / `responsive-navigation` | checkpoint2 |
+| Test & Secure (Part 11) | `presentation-tests` | checkpoint3 |
+| CLI (Part 13) | `playbook-3d` → `galaxy-audio` | Extend to the existing 3D view |
+| Operate (Part 14) | `daily-repo-status` | Daily report |
+
+**`./checkpoint1` prepares these same Issues in Japanese.** If you ran it, reuse them in the Issues tab rather than generating duplicates. The English prompt below uses the same keys. If you jump straight to `checkpoint2` / `checkpoint3`, check which acceptance criteria are already met and work only on the remaining tasks. Repository policies and security settings still need separate setup.
 
 <Aside type="negative">
-**Issue 1 (presentation mode) is required before the Actions/testing exercise in Step 11**, unless the feature already works or you use checkpoint 2. Issues 2–8 are examples: skip those that do not apply, or replace them with your own improvements.
+**`presentation-core` is required before testing.** 3D is an extension absent from checkpoints 1–3, not a prerequisite for the presentation tests. Start `galaxy-audio` after merging 3D.
 </Aside>
 
+On the normal Part 6 path, send this prompt to Copilot Chat to prepare the Issues. It does not start implementation.
+
 ```
-Use the github-issues skill to create the following improvements as individual Issues in this repository. For Issues that specify a Type (e.g. Bug), set the GitHub Issue type accordingly (untyped ones are Features).
+Use the github-issues skill to prepare the following Issues in my current repository. Do not start implementation yet.
+Check both open and closed Issues. Reuse an Issue if its body has the matching workshop-issue marker or its title contains the matching [playbook:key]. Do not overwrite existing bodies or automatically reopen closed Issues.
+Create only missing Issues, using the titles and bodies below (including the markers). Do not require labels or Organization Issue Types to exist.
+Report tasks whose acceptance criteria are already met, and resolve dependencies by work key, not by assumed GitHub Issue numbers.
 
-1. Title: Add a presentation mode with a category-grouped TOC sidebar and category background images on top of the current landing page
-   Details: Keep the existing `/playbook` landing page and Markdown detail pages. Add a presentation mode entry point from each card (for example `?present=1`). In presentation mode, each `##` heading in the Markdown becomes a slide, with a generated title/cover slide from frontmatter. Add keyboard controls (`←` / `→` to move, `Esc` to return to `/playbook`) and keep a unique URL for the current entry and slide. Also show a fixed left sidebar (TOC) listing all Playbook entries grouped by category using `src/lib/playbook-categories.ts` (labels, colors, icons, and ordering from that file). Highlight the current entry; clicking another entry switches to it while staying in presentation mode, and the TOC scroll position should not jump when clicking. Slide text should use a large font size so it stays readable when projected on a screen. Additionally, give each presentation deck a category-specific background image using the supplied assets: `slide-bg-introduction.webp`, `slide-bg-plan.webp`, `slide-bg-develop.webp`, `slide-bg-review.webp`, `slide-bg-secure.webp`, `slide-bg-operate.webp`, and `slide-bg-administration.webp`. Add a dark overlay so text stays readable. The cover / hero slide can show more of the background; content slides should be more subdued.
+Title: [playbook:presentation-core] Build presentation mode and TOC navigation
+Body:
+<!-- workshop-issue:presentation-core -->
+## Stage
+Cloud Agent (Part 8), after reviewing and merging the base site (Part 6 / checkpoint1). Milestone: checkpoint2.
 
-2. Title: Add Octocat “In a nutshell” hero slides
-   Details: For each entry, turn the first “In a nutshell” / “一言で” section into a hero slide. Use the category actor/avatar from `src/lib/playbook-categories.ts` (for example Mona for Introduction) and render the text as a retro speech bubble. If the entry does not have that section, fall back to frontmatter `summary`.
+## Acceptance criteria
+- Keep the `/playbook` catalogue and Markdown details; cards open `/playbook/<slug>/?present=1`.
+- Turn each body H2 into a slide and show the frontmatter title at the start. Arrow keys navigate, Esc returns to the catalogue, and the URL retains the current entry and slide.
+- Use `src/lib/playbook-categories.ts` for a category-grouped TOC that highlights the current entry and switches to another entry's first slide without leaving presentation mode.
 
-3. Title: Add a links slide at the end of each presentation deck
-   Details: If the Playbook entry frontmatter has `links`, render them as a final slide grouped by `group`. Each group should have a small heading and clickable links. If an entry has no links, skip this slide.
+Reference: https://theomonfort.github.io/theomonfort/en/playbook/github/?present=1
 
-4. Title: Render Mermaid diagrams inside presentation slides
-   Details: If a slide contains a ` ```mermaid ` code block, render it as a Mermaid diagram instead of plain code. Make sure diagrams on slides after slide 1 render correctly when navigating between slides.
-   Type: Bug
+Title: [playbook:presentation-content] Finish slide content, heroes and grouped links
+Body:
+<!-- workshop-issue:presentation-content -->
+## Stage
+Cloud Agent (Part 8), after `presentation-core`. Milestone: checkpoint2.
 
-5. Title: Improve presentation slide layout and typography
-   Details: Make slide content feel centered and intentional, not stuck in the top-left. Use the retro theme tokens, category colors, readable table/code styles, and balanced spacing. Tables and long code blocks should scroll inside the slide rather than overflowing the viewport.
+## Acceptance criteria
+- Show the first “In a nutshell” section with its category Octocat and speech bubble, without adding a separate duplicate title slide.
+- Render frontmatter `links` grouped by `group` as the final slide; omit it when there are no links.
+- Use the existing category backgrounds, dark overlay and retro palette. Keep prose, tables and code readable at 1440×900, with long content scrolling inside its slide.
 
-6. Title: Add mobile fallback for presentation mode
-   Details: On narrow screens, presentation mode should not break. Either disable presentation mode and fall back to the normal Markdown detail page, or provide a simple vertical slide list. Cards and detail pages should remain usable on mobile.
+Reference: https://theomonfort.github.io/theomonfort/en/playbook/github/?present=1
 
-7. Title: Prototype 10 design options for the table-of-contents (TOC) sidebar in a single HTML file
-   Details: Building on the existing retro JRPG theme (neon palette, pixel fonts, CRT glow, per `frontend.instructions.md`), create 10 design variations of the presentation-mode TOC sidebar. Put them all in one self-contained HTML file at `public/toc-prototypes.html` so they can be opened in a browser and compared side by side. Within each section (Plan, Develop, etc.) keep the accent color solid and uniform, and preserve the 2-digit number, icon, title, New badge, and current-item highlight.
+Title: [playbook:mermaid-rendering] Render Mermaid diagrams in documents and slides
+Body:
+<!-- workshop-issue:mermaid-rendering -->
+## Stage
+Cloud Agent (Part 8), after `presentation-core`. Milestone: checkpoint2.
 
-8. Title: Fix the flash of the non-presentation page when switching entries in presentation mode
-   Details: While in presentation mode, clicking another entry in the TOC sidebar briefly shows the normal Markdown detail page for an instant before presentation mode is re-applied. Keep presentation mode active across entry switches so the non-present content never flashes.
-   Type: Bug
+## Acceptance criteria
+- Render Mermaid code blocks as diagrams in normal detail pages and presentation mode.
+- Diagrams remain visible on later slides, after switching entries, and after reloading deep links.
+- Hide incomplete diagrams while rendering; show an error on failure while keeping the text and navigation usable.
+
+Reference: https://theomonfort.github.io/theomonfort/en/playbook/cloud-agent/?present=1
+
+Title: [playbook:responsive-navigation] Stabilize mobile layouts and presentation transitions
+Body:
+<!-- workshop-issue:responsive-navigation -->
+## Stage
+Cloud Agent (Part 8), after `presentation-core`. Milestone: checkpoint2.
+
+## Acceptance criteria
+- Keep the catalogue and detail pages readable on narrow screens, with presentation falling back to normal details.
+- Switching entries in the TOC must not flash the normal page or lose the TOC scroll position.
+- Check slide deep links and reloads on desktop, and no horizontal overflow on mobile.
+
+Reference: https://theomonfort.github.io/theomonfort/en/playbook/
+
+Title: [playbook:presentation-tests] Protect presentation controls with Playwright and PR CI
+Body:
+<!-- workshop-issue:presentation-tests -->
+## Stage
+Test & Secure (Part 11), after merging presentation or starting from checkpoint2. Milestone: checkpoint3.
+
+## Acceptance criteria
+- In `tests/e2e/presentation.spec.ts`, enter presentation from a `/playbook` card and test arrow keys, TOC switching, Esc and deep links. Do not assume presentation is the default landing page.
+- Use Playwright's `webServer` to build production output and start an isolated test preview, without reusing an existing development server; pass the tests locally.
+- Add `.github/workflows/test.yml` to run `npm ci`, install Chromium and run tests on PR creation/updates, retaining failure reports.
+
+Reference: https://theomonfort.github.io/theomonfort/en/handson/test-secure-actions/
+
+Title: [playbook:playbook-3d] Recreate the existing 3D Galaxy view
+Body:
+<!-- workshop-issue:playbook-3d -->
+## Stage
+CLI extension (Part 13), after checkpoint3. 3D is not included in checkpoints 1–3.
+
+## Acceptance criteria
+- Recreate the existing 2D / 3D switch using Three.js: a central SDLC sun, five Plan / Develop / Review / Secure / Operate planets, an Introduction departure station and an Administration mothership. Do not invent a different design.
+- Share Markdown and category metadata; selecting a world reveals article satellites / missions, their summaries and links to normal detail pages.
+- Provide drag-to-orbit, zoom, pan, camera buttons and return to overview; restore selection from URLs such as `?view=3d&sector=plan`.
+- Check keyboard controls, motion pause, reduced-motion and narrow screens. Lazy-load 3D; on WebGL failure, show an error and retain a usable 2D catalogue.
+
+View: https://theomonfort.github.io/theomonfort/en/playbook/?view=3d
+Implementation reference: https://github.com/theomonfort/theomonfort/blob/main/src/components/interactive/PlaybookExplorer.astro
+Scene reference: https://github.com/theomonfort/theomonfort/blob/main/src/lib/playbook-galaxy-scene.ts
+
+Title: [playbook:galaxy-audio] Add Galaxy ambience and clean resource shutdown
+Body:
+<!-- workshop-issue:galaxy-audio -->
+## Stage
+CLI extension (Part 13), after merging `playbook-3d`. Do not implement them concurrently.
+
+## Acceptance criteria
+- Follow the existing Galaxy ambience, with playback after user interaction and a Music ON / OFF control.
+- Have ambience follow the camera; report audio errors without blocking 3D navigation.
+- Stop and release audio/rendering resources when returning to 2D or leaving the page; re-entry must not duplicate playback.
+
+Reference: https://github.com/theomonfort/theomonfort/blob/main/src/lib/playbook-galaxy-audio.ts
+
+Title: [playbook:daily-repo-status] Report daily development activity with an Agentic Workflow
+Body:
+<!-- workshop-issue:daily-repo-status -->
+## Stage
+Operate (Part 14), after its policy and permission checks. Not included in checkpoints 1–3.
+
+## Acceptance criteria
+- Define a daily schedule and manual trigger in `.github/workflows/daily-repo-status.md` to summarize Issues, PRs and code changes.
+- Use Part 14's permissions and safe-outputs to create a report Issue prefixed `[repo-status]`. Do not commit credentials.
+- Review and merge a PR including the lockfile generated by `gh aw compile`, then verify the report from a manual run.
+
+Reference: https://theomonfort.github.io/theomonfort/en/handson/operate-agentic-workflow/
 ```
 
-You can find the resulting Issues in the Issues tab of your repository. We'll have Cloud Agent / Copilot CLI implement them in the next sections.
+Check the keys and acceptance criteria in the Issues tab, then select the matching task in each workshop part. Link PRs using the actual Issue numbers assigned in your repository.
 
 ⏱ About 3 minutes

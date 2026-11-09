@@ -16,6 +16,8 @@ import Aside from '../../../components/handson/Aside.astro';
 
 **Prerequisite:** Use the working presentation mode from [Step 8](/theomonfort/en/handson/code-cloud-agent/) or `./checkpoint2` ([checkpoint and server instructions](/theomonfort/en/handson/intro-2/#checkpoints)). Start from the branch containing that implementation, not a stale local `main`.
 
+Use the existing `[playbook:presentation-tests]` Issue from Part 6 and link the test PR to its actual Issue number. If you started from checkpoint3, inspect and run its existing tests rather than generating a duplicate workflow.
+
 <span id="101--create-tests-for-presentation-mode"></span>
 
 ### 11.1 — Create tests for Presentation mode
@@ -36,10 +38,12 @@ Test cases:
 1. Pressing `←` / `→` moves to the previous / next slide within the same section (one slide per `##` heading).
 2. Clicking a different section in the left sidebar switches to that section's first slide.
 3. Pressing `Esc` returns to `/playbook/`.
+4. Opening and reloading a slide's deep link preserves the selected entry and slide.
 
 File layout:
 - Place the tests in tests/e2e/presentation.spec.ts.
-- Update playwright.config.ts if needed (baseURL, webServer configured to launch `npm run dev`).
+- Set baseURL in playwright.config.ts to http://127.0.0.1:44321.
+- Configure webServer to run `npm run build && npx astro preview --host 127.0.0.1 --port 44321`, with URL http://127.0.0.1:44321/playbook/ and reuseExistingServer: false so it does not reuse an existing development server.
 
 Once the tests are written, run `npx playwright test` locally and make sure they all pass.
 ```

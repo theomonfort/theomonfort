@@ -44,7 +44,7 @@ The MCP you set up in Part 3 was **for VS Code**. For the Cloud Agent to use MCP
 
 ### 8.2 — Assign an existing Issue to the Cloud Agent
 
-**Required first: presentation mode (Issue 1 in [Step 6.6](/theomonfort/en/handson/code-copilot-chat/#66--file-the-improvements-as-issues)).** Create that Issue if you skipped the earlier exercise, then assign it to Cloud Agent. Keep `/playbook` as the landing page and add a presentation link from each card to `/playbook/<slug>/?present=1`, with arrow-key navigation and a section TOC. Review, try, and merge this PR before Test & Secure: [Step 11](/theomonfort/en/handson/test-secure-actions/) tests these controls.
+**Required first: `[playbook:presentation-core]` from [Step 6.6](/theomonfort/en/handson/code-copilot-chat/#66--file-the-improvements-as-issues).** Reuse the Issue prepared by `./checkpoint1` or create only the missing catalogue entries. Find it by its key, not an assumed Issue number. Keep `/playbook` as the landing page and add a presentation link from each card to `/playbook/<slug>/?present=1`, with arrow-key navigation and a section TOC. Review, try, and merge this PR before Test & Secure: [Step 11](/theomonfort/en/handson/test-secure-actions/) tests these controls.
 
 1. On github.com, open your repository.
 2. Click the **Issues** tab at the top.
@@ -70,9 +70,9 @@ When you assign, you can customize:
 
 **Recommended approach**:
 
-- **Complete Issue 1 first**, then assign independent improvements in parallel. Issue 2 and other presentation enhancements can build on the merged presentation code.
-- **Issue 7 (the TOC design prototypes)** — prototype first, then compare and adopt to refine each component properly.
-- **Leave a few Issues for the CLI** — keep 2–3 unassigned for Part 13 (Copilot CLI).
+- **Merge `presentation-core` first**, then work on `presentation-content`, `mermaid-rendering` and `responsive-navigation`. Parallelize only independent changes; these tasks may touch the same renderer.
+- **Check the checkpoint2 milestone**: slide content, diagrams and navigation should work before testing.
+- **Keep `playbook-3d` and `galaxy-audio` for Part 13**, and `daily-repo-status` for Part 14. The audio task depends on the merged 3D view.
 
 </Aside>
 

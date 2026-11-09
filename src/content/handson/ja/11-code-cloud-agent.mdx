@@ -44,7 +44,7 @@ Part 3 で設定した MCP は **VS Code 用** でした。Cloud Agent が MCP �
 
 ### 8.2 — 既存の Issue に Cloud Agent をアサインする
 
-**最初に必須：プレゼンモード（[Step 6.6](/theomonfort/handson/code-copilot-chat/#66--改善点を-issue-化する) の Issue 1）。** 前の演習をスキップした場合は、この Issue を作成して Cloud Agent にアサインします。`/playbook` は一覧ページのまま残し、各カードから `/playbook/<slug>/?present=1` に入るリンク、矢印キー操作、セクションの目次を追加します。Test & Secure の前に、この PR をレビューして動作確認し、マージしてください。[Step 11](/theomonfort/handson/test-secure-actions/) でこれらの操作をテストします。
+**最初に必須：[Step 6.6](/theomonfort/handson/code-copilot-chat/#66--改善点を-issue-化する) の `[playbook:presentation-core]`。** `./checkpoint1` が準備した Issue を再利用するか、カタログにない Issue だけ作成します。番号を決めつけず、キーで探してください。`/playbook` は一覧ページのまま残し、各カードから `/playbook/<slug>/?present=1` に入るリンク、矢印キー操作、セクションの目次を追加します。Test & Secure の前に、この PR をレビューして動作確認し、マージしてください。[Step 11](/theomonfort/handson/test-secure-actions/) でこれらの操作をテストします。
 
 1. github.com で自分のリポジトリを開く
 2. 上部の **Issues** タブをクリック
@@ -70,9 +70,9 @@ Part 3 で設定した MCP は **VS Code 用** でした。Cloud Agent が MCP �
 
 **おすすめの進め方**:
 
-- **まず Issue 1 を完了**し、その後で独立した改善を並列にアサインします。Issue 2 などのプレゼン改善は、マージ済みのプレゼン機能を土台に進められます。
-- **Issue 7（目次サイドバーのデザイン試作）** — まず試作して見比べてから採用すると、各コンポーネントの仕上がりをしっかり詰められます。
-- **一部の Issue は CLI 用に残す** — 2〜3 件は未アサインのままにして、Part 13（Copilot CLI）で実装します。
+- **まず `presentation-core` をマージ**し、`presentation-content`、`mermaid-rendering`、`responsive-navigation` に進みます。同じレンダラーを変更する場合があるため、独立した作業だけを並列化します。
+- **checkpoint2 の到達点を確認**：テスト前にスライド本文、図、ナビゲーションが動作する状態にします。
+- **`playbook-3d` と `galaxy-audio` は Part 13、`daily-repo-status` は Part 14 用に残します。** 環境音は 3D ビューのマージ後に実装します。
 
 </Aside>
 

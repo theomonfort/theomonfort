@@ -3,7 +3,7 @@ title: "CODE: CLI"
 order: 13
 stepSlug: "code-cli"
 duration: 30
-summary: "このステップでは、Part 6 で作成した Issue 群を Copilot CLI の `/fleet` で並列に実装します。Copilot CLI は、VS Code を開かずにターミナル上で動く対話型 AI アシスタントです。"
+summary: "Copilot CLI で既存の 3D ギャラクシービューと環境音を追加します。/fleet は独立した未完了タスクだけに使います。"
 ---
 
 import Aside from '../../../components/handson/Aside.astro';
@@ -14,9 +14,9 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-ここでは **Part 6 の最後で作成した Issue 群** を、CLI から `/fleet` で **並列に** 実装してもらいます。
+ここでは **Part 6 の Issue カタログ**を使い、[既存の 3D ギャラクシービュー](https://theomonfort.github.io/theomonfort/playbook/?view=3d)を再現します。まず `[playbook:playbook-3d]` を実装してマージし、その後で `[playbook:galaxy-audio]` を追加します。
 
-ここから参加する場合は、`./checkpoint3` でプレゼン機能とテスト / CI 付きサイトを準備できます。[チェックポイントとサーバー起動](/theomonfort/handson/intro-2/#checkpoints)を参照してください。Part 6 をスキップした場合は、自分のリポジトリに改善 Issue を数件作成します。
+ここから参加する場合は、`./checkpoint3` でプレゼン機能とテスト / CI 付きサイトを準備できます。[チェックポイントとサーバー起動](/theomonfort/handson/intro-2/#checkpoints)を参照してください。checkpoint1 が準備したカタログを再利用し、スキップした場合は [Part 6 のプロンプト](/theomonfort/handson/code-copilot-chat/#66--改善点を-issue-化する)で不足する Issue だけ作成します。チェックポイントに 3D は含まれません。
 
 ### 13.0 — （Codespace を使っていない場合）Copilot CLI をインストールする
 
@@ -86,24 +86,28 @@ CLI 内で以下を実行：
 
 ### 13.3 — `/fleet` で Issue を並列に実装する
 
-Part 6 で作成した 3〜5 件の Issue を、CLI に並列で実装させます。プロンプトの最後に、各実装に対してラバーダックレビューを行う指示も含めます。
+前提の PR がマージ済みの未完了タスクを選びます。`playbook-3d` だけが着手可能なら、CLI の単一セッションで進め、依存する環境音は同時に実装しません。独立したタスクが複数ある場合は、以下の `/fleet` プロンプトを使います。各実装のラバーダックレビューも依頼しています。
 
 ```
-/fleet このリポジトリの open Issue のうち、label が bug または enhancement のものをすべて、
-1 Issue につき 1 つの fleet エージェントを割り当てて並列で実装してください。
+/fleet [playbook:キー] で識別される Part 6 の Issue と完了条件を読んでください。
+前提の PR がマージ済みの未完了タスクだけを選んでください。
+presentation-tests は Part 11、daily-repo-status は Part 14 用に残してください。
+playbook-3d を galaxy-audio より先に実装し、依存する作業を同時に進めないでください。
+着手可能な作業が 1 件だけなら、余分なエージェントを起動せずその作業を進めてください。
+open Issue やラベルで一括選択せず、範囲が独立した着手可能タスクだけを並列化してください。
 
 各エージェントは以下のフローで作業すること：
 1. Issue 番号と一致するブランチ (fix/<number>-<slug>) を切る
 2. 修正を実装する
 3. npm run dev で動作確認できる状態にする
-4. コミットして PR を出す（`Closes #<number>` を本文に入れる）
+4. コミットして PR を出す（実際の Issue 番号で `Closes #<number>` を本文に入れる）
 
 すべての PR が作成されたら、各実装に対してラバーダックレビューを行ってください。
 ```
 
 ⏱ 約10〜15分
 
-CLI が複数の fleet エージェントを spawn し、それぞれ別ブランチで実装 → PR 作成まで自律的に進めます。進捗はターミナルにストリーム表示され、最後にラバーダックレビューが出力されます。
+独立したタスクがある場合は、CLI が別ブランチで実装から PR 作成まで進められます。前提の PR をレビューしてマージしてから、依存する作業を始めてください。完了条件を確認し、スナップショットに含まれる機能を作り直さないようにします。
 
 実行中・実行後の進捗を確認するには：
 

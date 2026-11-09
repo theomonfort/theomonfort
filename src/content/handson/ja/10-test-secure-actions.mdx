@@ -16,6 +16,8 @@ import Aside from '../../../components/handson/Aside.astro';
 
 **前提：** [Step 8](/theomonfort/handson/code-cloud-agent/) または `./checkpoint2` で動作するプレゼンモードを準備します（[チェックポイントとサーバー起動](/theomonfort/handson/intro-2/#checkpoints)）。古いローカルの `main` ではなく、その実装を含むブランチから始めてください。
 
+Part 6 の既存の `[playbook:presentation-tests]` Issue を使い、その実際の番号でテスト PR を関連付けます。checkpoint3 から始めた場合は、workflow を重複生成せず、既存テストを確認して実行してください。
+
 <span id="101--presentation-モードのテストを作成する"></span>
 
 ### 11.1 — Presentation モードのテストを作成する
@@ -36,10 +38,12 @@ Presentation サイトのキーボードナビゲーションを検証する Pla
 1. `←` / `→` を押すと同じセクション内のスライドが前後に移動する（## 見出しごとに 1 スライド）。
 2. 左サイドバーから別のセクションをクリックすると、そのセクションの 1 枚目に切り替わる。
 3. `Esc` を押すと `/playbook/` に戻る。
+4. スライドの深いリンクを開いて再読み込みしても、選択したエントリとスライドが保持される。
 
 ファイル配置:
 - テストは tests/e2e/presentation.spec.ts に配置。
-- 必要なら playwright.config.ts も更新してください（baseURL、webServer に npm run dev を起動する設定）。
+- playwright.config.ts の baseURL を http://127.0.0.1:44321 に設定する。
+- webServer で `npm run build && npx astro preview --host 127.0.0.1 --port 44321` を起動し、URL は http://127.0.0.1:44321/playbook/ とする。reuseExistingServer: false で既存の開発サーバーを使わない。
 
 テストを書き終えたらローカルで `npx playwright test` を実行して全部 pass することを確認してください。
 ```
