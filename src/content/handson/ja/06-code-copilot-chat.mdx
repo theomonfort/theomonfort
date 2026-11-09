@@ -133,6 +133,8 @@ npm run dev
 
 プロンプトとスクリプトが既存作業を識別できるよう、タイトルの `[playbook:...]` キーと本文の `workshop-issue` マーカーを残してください。古いリポジトリのコピーでは Issue を準備しない旧スクリプトの場合があります。作成済みと決めつけず、Issues タブを確認し、不足分だけこのプロンプトで準備してください。
 
+`checkpoint1` は stash やブランチ切り替えの前に Issue を準備し、既存の open / closed Issue は変更せず再利用します。スナップショットが `main` と同じ場合も、新しい PR を作らず不足する Issue を準備します。Issue の準備に失敗したら、表示されたエラーを解消して `./checkpoint1` を再実行してください。作成済みの Issue は保持されます。別 clone を含め、同じリポジトリで同時に複数の取り込みを実行しないでください。`checkpoint2` / `checkpoint3` は Issue を準備しません。
+
 <Aside type="negative">
 **`presentation-core` はテストの前に必須です。** 3D は checkpoint1〜3 には含まれない追加実装で、プレゼンのテストを始める条件ではありません。`galaxy-audio` は 3D のマージ後に進めます。
 </Aside>

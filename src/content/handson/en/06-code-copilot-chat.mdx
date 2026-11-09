@@ -133,6 +133,8 @@ Continue from the base site with **8 implementation Issues** that build toward t
 
 Keep the `[playbook:...]` title keys and `workshop-issue` body markers so the prompt and checkpoint script can recognize existing work. Older repository copies may have a script without Issue seeding; check the Issues tab and use this prompt for missing entries rather than assuming they were created.
 
+`checkpoint1` prepares Issues before stashing or switching branches, reusing existing open or closed Issues without changing them. Even if the snapshot already matches `main`, it prepares missing Issues without another PR. If Issue preparation fails, fix the reported error and rerun `./checkpoint1`; already-created Issues are retained. Run only one import per repository at a time, including across clones. `checkpoint2` / `checkpoint3` do not prepare Issues.
+
 <Aside type="negative">
 **`presentation-core` is required before testing.** 3D is an extension absent from checkpoints 1–3, not a prerequisite for the presentation tests. Start `galaxy-audio` after merging 3D.
 </Aside>
