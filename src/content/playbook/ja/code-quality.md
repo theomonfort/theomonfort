@@ -27,6 +27,15 @@ links:
     label: Exploring the Code Quality backlog
     url: https://docs.github.com/en/code-security/how-tos/maintain-quality-code/interpret-results
   - group: 📖 公式ドキュメント
+    label: 組織の Code Quality dashboard とアクセス権
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/maintain-quality-code/explore-code-quality
+  - group: 📖 公式ドキュメント
+    label: finding の却下と Copilot への割り当て
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/maintain-quality-code/fix-backlog-findings
+  - group: 📖 公式ドキュメント
+    label: Security manager の権限
+    url: https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-peoples-access-to-your-organization-with-roles/managing-security-managers-in-your-organization
+  - group: 📖 公式ドキュメント
     label: Enabling GitHub Code Quality
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/maintain-quality-code/enable-code-quality
   - group: 📖 公式ドキュメント
@@ -189,6 +198,23 @@ AI がコードの大半を書くなら、品質を守るのは PR ごとの rul
 
 - 🛂 **利用条件**: Code Quality を有効化した **Team / Enterprise Cloud**（data residency を含む）。既存の enterprise ポリシーを継承し、一括修正専用の設定は不要。
 - 💳 **コスト**: **AI credits** を消費。委任には **Copilot ライセンス**も必要。
+
+## 誰が何をできる? <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/maintain-quality-code/explore-code-quality" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+**Org owner** は全 repo の Admin。その他のメンバーには、以下の repo 権限が必要。
+
+| 操作 | 場所 | 標準のアクセス権 |
+| --- | --- | --- |
+| finding を見る | Repo → Code quality | **Write+** |
+| org のスコア / 推移を見る | Org → Insights → Code quality | **Org owner** は全 repo。その他は **Write+** の repo |
+| finding を却下する | Repo → Standard findings | **Write+** |
+| Copilot に割り当てる | Repo → Standard findings | 対象 repo の **Write+** |
+
+org dashboard で repo を開き、**Standard findings → Assign to Copilot**。
+
+**Security manager** 単独では **Read** のみ。repo の **Write** は付かない。
+
+Code Quality 有効化済み、標準ロール（2026-11-10）。**Write+** = Write / Maintain / Admin。
 
 ## 有効化と展開 <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/maintain-quality-code/enable-code-quality" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
