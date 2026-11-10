@@ -27,6 +27,15 @@ links:
     label: Exploring the Code Quality backlog
     url: https://docs.github.com/en/code-security/how-tos/maintain-quality-code/interpret-results
   - group: 📖 Official Documentation
+    label: Organization Code Quality dashboard and access
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/maintain-quality-code/explore-code-quality
+  - group: 📖 Official Documentation
+    label: Dismissing findings and assigning them to Copilot
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/maintain-quality-code/fix-backlog-findings
+  - group: 📖 Official Documentation
+    label: Security manager permissions
+    url: https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-peoples-access-to-your-organization-with-roles/managing-security-managers-in-your-organization
+  - group: 📖 Official Documentation
     label: Enabling GitHub Code Quality
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/maintain-quality-code/enable-code-quality
   - group: 📖 Official Documentation
@@ -189,6 +198,23 @@ When AI writes most of the code, a ruleset quality gate on every PR is what hold
 
 - 🛂 **Access**: Code Quality enabled on **Team / Enterprise Cloud** (data residency included). Existing enterprise policy; no separate bulk setting.
 - 💳 **Cost**: **AI credits** + a **Copilot license** for delegation.
+
+## Who can do what? <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/maintain-quality-code/explore-code-quality" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+**Org owners:** Admin on every repo. **Other members:** permissions below.
+
+| Action | Where | Default access |
+| --- | --- | --- |
+| View findings | Repo → Code quality | **Write+** |
+| View org scores / trends | Org → Insights → Code quality | **Org owner:** all repos. **Members:** Write+ repos |
+| Dismiss a finding | Repo → Standard findings | **Write+** |
+| Assign Copilot | Repo → Standard findings | **Write+** on the target repo |
+
+**From the org dashboard:** open a repo, then **Standard findings → Assign to Copilot**.
+
+**Security manager alone grants Read, not Write.**
+
+Code Quality enabled, standard roles (2026-11-10). **Write+** = Write / Maintain / Admin.
 
 ## Enable and roll out <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/maintain-quality-code/enable-code-quality" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
