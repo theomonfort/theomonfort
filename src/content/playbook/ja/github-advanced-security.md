@@ -59,6 +59,18 @@ links:
   - group: 📊 可視化 (Security overview)
     label: Exporting data from security overview (CSV)
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/view-and-interpret-data/analyze-organization-data/export-data
+  - group: 🔐 権限
+    label: リポジトリロールとセキュリティ権限
+    url: https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization#access-requirements-for-security-features
+  - group: 🔐 権限
+    label: Security overview の権限
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/reference/permissions/security-overview
+  - group: 🔐 権限
+    label: Security manager の権限
+    url: https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-peoples-access-to-your-organization-with-roles/managing-security-managers-in-your-organization
+  - group: 🔐 権限
+    label: キャンペーンのアラートを Copilot に割り当てる
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/manage-security-alerts/remediate-alerts-at-scale/fixing-alerts-in-security-campaign#assigning-alerts-to-copilot
 ---
 
 ## 一言で
@@ -360,6 +372,23 @@ links:
 
 </div>
 </div>
+
+## 誰が何をできる? <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization#access-requirements-for-security-features" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+**Org owner / Security manager** は全アラートを閲覧、管理できる。その他の組織メンバーは以下の権限がある repo のみ。
+
+| 操作 | 場所 | Code scanning | Secret scanning |
+| --- | --- | --- | --- |
+| 一覧を見る | Repo → Security | **Write+** | **Admin**¹ |
+| org のアラートを見る | Org → Security | **Write+** | **Admin** |
+| ステータスを変更 | Repo → アラート | **Write+** | **Admin**¹ |
+| Copilot に割り当てる | Org → Campaigns → repo | **Write+** ² | 非対応 |
+
+¹ **Write / Maintain** でも**自分のコミット**の secret は閲覧、管理できる。一覧は閲覧できない。
+
+² **Agentic Autofix 有効化 + 対象 repo の Write** が必要。Security manager 単独では **Read** のみ。
+
+組織 repo の標準権限（2026-11-10）。**Write+** = Write / Maintain / Admin。
 
 ## 料金 <a class="h2-doc" href="https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
