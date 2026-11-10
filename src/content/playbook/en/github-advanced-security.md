@@ -59,6 +59,18 @@ links:
   - group: 📊 Visibility (Security overview)
     label: Exporting data from security overview (CSV)
     url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/view-and-interpret-data/analyze-organization-data/export-data
+  - group: 🔐 Permissions
+    label: Repository roles and security permissions
+    url: https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization#access-requirements-for-security-features
+  - group: 🔐 Permissions
+    label: Security overview permissions
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/reference/permissions/security-overview
+  - group: 🔐 Permissions
+    label: Security manager permissions
+    url: https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-peoples-access-to-your-organization-with-roles/managing-security-managers-in-your-organization
+  - group: 🔐 Permissions
+    label: Assigning campaign alerts to Copilot
+    url: https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/manage-security-alerts/remediate-alerts-at-scale/fixing-alerts-in-security-campaign#assigning-alerts-to-copilot
 ---
 
 ## In a nutshell
@@ -360,6 +372,23 @@ Scanning tools normally live outside the platform: a separate console, a separat
 
 </div>
 </div>
+
+## Who can do what? <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization#access-requirements-for-security-features" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+**Org owners / Security managers:** view and manage all alerts. **Other org members:** only repos with these permissions.
+
+| Action | Where | Code scanning | Secret scanning |
+| --- | --- | --- | --- |
+| View alert list | Repo → Security | **Write+** | **Admin**¹ |
+| View org alerts | Org → Security | **Write+** | **Admin** |
+| Change status | Repo → alert | **Write+** | **Admin**¹ |
+| Assign Copilot | Org → Campaigns → repo | **Write+** ² | Not supported |
+
+¹ **Write / Maintain:** view/manage secrets in **their own commits**, no alert list.
+
+² Requires **Agentic Autofix enabled + Write on the target repo**. Security manager alone grants **Read**, not Write.
+
+Org repos, default roles (2026-11-10). **Write+** = Write / Maintain / Admin.
 
 ## Pricing <a class="h2-doc" href="https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
