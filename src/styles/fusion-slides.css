@@ -33,6 +33,14 @@
   gap: var(--fusion-gap);
 }
 
+.prose-akq .fusion-offer-grid {
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+}
+
+.prose-akq .fusion-billing-notes {
+  margin-top: var(--fusion-gap);
+}
+
 .prose-akq .fusion-features {
   display: grid;
   gap: 10px;

@@ -240,19 +240,27 @@ flowchart LR
 <p class="fusion-safety">サブエージェントは起動しない。下書きの破棄でファイル編集は戻らない。</p>
 </div>
 
-## Fusion：課金と期間限定割引 <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion#billing-for-copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## <span class="fusion-title">Fusion：料金</span> <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion#billing-for-copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**2026-11-11 時点で確認した期間限定施策。** 公表されている終了日は **2026-11-30** です。
-
-| <span class="big-stat">30%</span><br/>モデル費用を割引 | 対象 | 終了日 |
-| --- | --- | --- |
-| **Copilot Fusion 経由の利用のみ** | **有料 Copilot プラン**のユーザー | **2026 年 11 月 30 日** |
-
-- **通常の課金：** 各モデルの標準料金で計算。Fusion 固有の追加料金はなし。
-- **モデル費用のみ：** サブスクリプション料金の割引ではありません。
-- **予算：** High / Max は Standard より多くのモデルと AI クレジットを使う場合があります。
-
-終了日以降も割引が続くとは限りません。最新の条件は課金ドキュメントで確認してください。
+<div class="fusion-slide fusion-billing">
+<div class="fusion-value-grid fusion-offer-grid">
+<div class="fusion-metric">
+<p class="fusion-zone-label">期間限定オファー</p>
+<strong>30%</strong><span>モデル費用を割引</span><span class="fusion-micro">Copilot Fusion 経由の利用のみ</span>
+</div>
+<section class="fusion-zone" aria-label="割引の条件">
+<p class="fusion-zone-label">対象と期限</p>
+<div class="fusion-choice-row"><strong>対象</strong><p><b>有料 Copilot プラン</b>のユーザー。</p></div>
+<div class="fusion-choice-row"><strong>終了日</strong><p><strong><time datetime="2026-11-30">2026-11-30</time></strong><small>公表されている期限</small></p></div>
+</section>
+</div>
+<p class="fusion-availability"><strong>モデル費用のみ。</strong> サブスクリプション料金の割引ではありません。</p>
+<div class="fusion-value-grid fusion-billing-notes">
+<div class="fusion-feature"><span>01</span><div><strong>通常の課金</strong><p>各モデルの標準料金で計算。Fusion 固有の追加料金はなし。</p></div></div>
+<div class="fusion-feature"><span>02</span><div><strong>労力で費用も変わる</strong><p>High / Max は Standard より多くのモデルと AI クレジットを使う場合があります。</p></div></div>
+</div>
+<p class="fusion-source">2026-11-11 時点。期限後の継続は前提にせず、最新条件は Docs で確認してください。</p>
+</div>
 
 ## なぜ企業は Copilot を選ぶのか
 

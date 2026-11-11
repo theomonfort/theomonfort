@@ -240,19 +240,27 @@ flowchart LR
 <p class="fusion-safety">No subagents launched. Discarded drafts do not undo file edits.</p>
 </div>
 
-## Fusion: Billing & the Launch Offer <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion#billing-for-copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## <span class="fusion-title">Fusion: pricing</span> <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion#billing-for-copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**Dated offer, verified 2026-11-11.** The published promotion ends **2026-11-30**.
-
-| <span class="big-stat">30%</span><br/>off model costs | Eligibility | End date |
-| --- | --- | --- |
-| **Copilot Fusion usage only** | Users on **paid Copilot plans** | **November 30, 2026** |
-
-- **Normal billing:** Per-model standard rates, with no separate Fusion charge.
-- **Model costs only:** Not a discount on the subscription price.
-- **Budget:** High / Max can use more models and AI credits than Standard.
-
-Do not assume the discount continues after this date. Check the billing docs for current terms.
+<div class="fusion-slide fusion-billing">
+<div class="fusion-value-grid fusion-offer-grid">
+<div class="fusion-metric">
+<p class="fusion-zone-label">LAUNCH OFFER</p>
+<strong>30%</strong><span>off model costs</span><span class="fusion-micro">Copilot Fusion usage only</span>
+</div>
+<section class="fusion-zone" aria-label="Offer conditions">
+<p class="fusion-zone-label">ELIGIBILITY + TIMING</p>
+<div class="fusion-choice-row"><strong>Plans</strong><p>Users on <b>paid Copilot plans</b>.</p></div>
+<div class="fusion-choice-row"><strong>Ends</strong><p><strong><time datetime="2026-11-30">2026-11-30</time></strong><small>Published end date</small></p></div>
+</section>
+</div>
+<p class="fusion-availability"><strong>Model costs only.</strong> Not a discount on the subscription price.</p>
+<div class="fusion-value-grid fusion-billing-notes">
+<div class="fusion-feature"><span>01</span><div><strong>Normal billing</strong><p>Each model's standard rates, with no separate Fusion charge.</p></div></div>
+<div class="fusion-feature"><span>02</span><div><strong>Effort affects cost</strong><p>High / Max can use more models and AI credits than Standard.</p></div></div>
+</div>
+<p class="fusion-source">Verified 2026-11-11. Check Docs before assuming any extension beyond the published end date.</p>
+</div>
 
 ## Why Enterprises Choose Copilot
 
