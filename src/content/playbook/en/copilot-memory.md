@@ -97,7 +97,7 @@ File edits need a **merged PR**. No-change runs still **use AI credits**.
 <div class="setup-cards">
   <div class="setup-card">
     <div class="setup-card-head"><strong>🧠 Memory</strong><span class="setup-card-tag tag-cyan">During everyday work</span></div>
-    <p>Save facts and preferences from conversations and code.<br />Reuse them in later tasks.</p>
+    <p>Save facts and preferences from conversations and code.<br />Reuse them in later tasks.<br /><strong>Works with Dreaming OFF.</strong></p>
   </div>
   <div class="setup-card">
     <div class="setup-card-head"><strong>🌙 Dreaming</strong><span class="setup-card-tag tag-magenta">In the background</span></div>
@@ -106,8 +106,6 @@ File edits need a **merged PR**. No-change runs still **use AI credits**.
 </div>
 
 No need to leave a chat open. It updates **context**, not the underlying model.
-
-> 💡 **Memory can still store and use memories when Dreaming is OFF.**
 
 ## Configure each scope separately <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-dreaming#availability-and-prerequisites" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 

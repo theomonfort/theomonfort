@@ -97,7 +97,7 @@ Dreaming は記憶の追加、更新、削除を **自動で行う**。
 <div class="setup-cards">
   <div class="setup-card">
     <div class="setup-card-head"><strong>🧠 Memory</strong><span class="setup-card-tag tag-cyan">普段の作業中</span></div>
-    <p>会話やコードから事実、好みを保存。<br />次の作業で関連する記憶を再利用。</p>
+    <p>会話やコードから事実、好みを保存。<br />次の作業で関連する記憶を再利用。<br /><strong>Memory が有効なら、Dreaming OFF でも使える。</strong></p>
   </div>
   <div class="setup-card">
     <div class="setup-card-head"><strong>🌙 Dreaming</strong><span class="setup-card-tag tag-magenta">バックグラウンド</span></div>
@@ -106,8 +106,6 @@ Dreaming は記憶の追加、更新、削除を **自動で行う**。
 </div>
 
 チャットを開いたままにする必要はない。更新するのは**コンテキスト**であり、モデルの学習ではない。
-
-> 💡 **Dreaming が OFF でも、Memory が有効なら記憶の保存と利用は続く。**
 
 ## 設定もスコープごとに分ける <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-dreaming#availability-and-prerequisites" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
