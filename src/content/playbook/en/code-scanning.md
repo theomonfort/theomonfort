@@ -741,6 +741,6 @@ One click, CodeQL scans the **20 most active repos** in your org and shows where
 - 🚀 **How to run** — `Org → Security → Assessments → Run code security risk assessment`
 - 🆓 **Cost** — no license, no Actions minutes — ideal for evaluating Code Security before buying
 
-> 📊 Pair this with Secret Risk Assessment (see <a class="retro-link" href="/theomonfort/en/playbook/secret-scanning">Secret Scanning ↗</a>) and you get a full posture read in a single day, then decide on **Code Security** with real numbers.
+> 📊 Pair this with Secret Risk Assessment (see <a class="retro-link" href="/theomonfort/en/playbook/secret-scanning">Secret Protection ↗</a>) and you get a full posture read in a single day, then decide on **Code Security** with real numbers.
 
 📘 Details: <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment" target="_blank" rel="noopener noreferrer">Code security risk assessment ↗</a> / <a class="retro-link" href="https://github.blog/security/application-security/how-exposed-is-your-code-find-out-in-minutes-for-free/" target="_blank" rel="noopener noreferrer">How exposed is your code? ↗</a>

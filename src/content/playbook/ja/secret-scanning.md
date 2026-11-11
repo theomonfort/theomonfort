@@ -1,7 +1,7 @@
 ---
-title: Secret Scanning
-titleEn: Secret Scanning
-summary: コミット・Issue・PR・履歴に紛れ込んだ API キーやトークンを自動検出する GitHub のシークレット検知機能。Public repo の基本機能は無料、private / internal repo は Secret Protection が必要。
+title: Secret Protection
+titleEn: Secret Protection
+summary: Secret scanning と push protection でシークレットの漏洩を検出、防止する GitHub の製品。Public repo の基本機能は無料、private / internal repo は Secret Protection のライセンスが必要。
 icon: /theomonfort/icons/secret-scanning.png
 color: cyan
 accent:
@@ -77,7 +77,7 @@ links:
 
 <div class="hero-quote">
   <p>
-    <strong>Secret Scanning</strong> は、リポジトリに紛れ込んだ API キー・トークン・接続文字列を自動で見つけてくれる GitHub の検知機能。
+    <strong>Secret Protection</strong> は、シークレットの漏洩を検出、防止する GitHub の製品。<strong>Secret scanning</strong> で、リポジトリに紛れ込んだ API キー、トークン、接続文字列を検出する。
   </p>
   <p>
     既にコミット済みのものは <strong>アラート</strong>、これから push されるものは <strong>Push protection</strong> で <code>git push</code> の時点でブロック。漏洩前に止めるのが基本戦略。
@@ -131,7 +131,7 @@ links:
 <div class="demo-panel">
 <label class="demo-scrim" for="demo-secret-scanning" aria-label="デモ手順を閉じる"></label>
 <div class="demo-window" role="group" aria-label="デモ手順">
-<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Secret Scanning</span><span class="demo-note">発表者専用</span><label class="demo-close" for="demo-secret-scanning" aria-label="閉じる">&#10005;</label></div>
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Secret Protection</span><span class="demo-note">発表者専用</span><label class="demo-close" for="demo-secret-scanning" aria-label="閉じる">&#10005;</label></div>
 <ol class="demo-steps">
 <li>
 <p class="demo-step-title">PUSH PROTECTION</p>
@@ -370,7 +370,7 @@ Secret が見つかった時にやることは **検知より修復が大事**�
 <div class="demo-panel">
 <label class="demo-scrim" for="demo-secret-checklist" aria-label="デモ手順を閉じる"></label>
 <div class="demo-window" role="group" aria-label="デモ手順">
-<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Secret Scanning checklist</span><span class="demo-note">発表者専用</span><label class="demo-close" for="demo-secret-checklist" aria-label="閉じる">&#10005;</label></div>
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Secret Protection checklist</span><span class="demo-note">発表者専用</span><label class="demo-close" for="demo-secret-checklist" aria-label="閉じる">&#10005;</label></div>
 <ol class="demo-steps">
 <li>
 <p class="demo-step-title">1. 社内独自の SECRET パターン</p>

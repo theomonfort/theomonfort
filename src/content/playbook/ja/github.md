@@ -223,7 +223,7 @@ SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ
       <g class="plat-item" data-cop="0"><rect x="664" y="262" width="180" height="38" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
       <text x="754" y="287" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Code Scanning</text></g>
       <g class="plat-item" data-cop="0"><rect x="664" y="310" width="180" height="38" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
-      <text x="754" y="335" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Secret Scanning</text></g>
+      <text x="754" y="335" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Secret Protection</text></g>
     </g>
   </g>
   <!-- ── Card 5: OPERATE ── green ──────────────────────────────── -->

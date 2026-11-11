@@ -1,7 +1,7 @@
 ---
-title: Secret Scanning
-titleEn: Secret Scanning
-summary: GitHub's secret detection feature that automatically finds API keys and tokens in commits, issues, PRs, and history. Core coverage is free for public repositories; private and internal repositories require Secret Protection.
+title: Secret Protection
+titleEn: Secret Protection
+summary: GitHub's product for detecting and preventing secret leaks with secret scanning and push protection. Core coverage is free for public repositories; private and internal repositories require a Secret Protection license.
 icon: /theomonfort/icons/secret-scanning.png
 color: cyan
 accent:
@@ -77,7 +77,7 @@ links:
 
 <div class="hero-quote">
   <p>
-    <strong>Secret Scanning</strong> is GitHub's detection feature that automatically finds API keys, tokens, and connection strings lurking in your repository.
+    <strong>Secret Protection</strong> is GitHub's product for detecting and preventing secret leaks. It includes <strong>secret scanning</strong> to find API keys, tokens, and connection strings in your repository.
   </p>
   <p>
     Secrets already committed get an <strong>alert</strong>; secrets about to be pushed are blocked at <code>git push</code> time by <strong>Push protection</strong>. Stopping leaks before they happen is the core strategy.
@@ -131,7 +131,7 @@ links:
 <div class="demo-panel">
 <label class="demo-scrim" for="demo-secret-scanning" aria-label="Close demo steps"></label>
 <div class="demo-window" role="group" aria-label="Demo steps">
-<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Secret Scanning</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-secret-scanning" aria-label="Close">&#10005;</label></div>
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Secret Protection</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-secret-scanning" aria-label="Close">&#10005;</label></div>
 <ol class="demo-steps">
 <li>
 <p class="demo-step-title">PUSH PROTECTION</p>
@@ -370,7 +370,7 @@ When a secret is found, **remediation matters more than detection**. At scale, d
 <div class="demo-panel">
 <label class="demo-scrim" for="demo-secret-checklist" aria-label="Close demo steps"></label>
 <div class="demo-window" role="group" aria-label="Demo steps">
-<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Secret Scanning checklist</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-secret-checklist" aria-label="Close">&#10005;</label></div>
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Secret Protection checklist</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-secret-checklist" aria-label="Close">&#10005;</label></div>
 <ol class="demo-steps">
 <li>
 <p class="demo-step-title">1. INTERNAL SECRET PATTERNS</p>
