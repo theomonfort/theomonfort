@@ -3035,6 +3035,10 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     overflow-y: auto;
     overscroll-behavior: contain;
   }
+  /* Keep the slide anchored while accordion rows change height. */
+  body.present-mode .playbook-detail:has(.ctl-widget.ctl-stable.akq-slide-active) {
+    justify-content: flex-start;
+  }
   body.present-mode .playbook-detail > header {
     max-width: 72rem;
     margin-left: auto;
@@ -3843,6 +3847,10 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
      mode and presentation mode behave identically.
      ───────────────────────────────────────────────────────────── */
   .prose-akq .ctl-widget { margin: 1.2em 0; }
+  body.present-mode .prose-akq .ctl-intro { margin-block: 0.6em; line-height: 1.5; }
+  body.present-mode .prose-akq .ctl-widget.ctl-tight { margin-block: 0.5em; }
+  body.present-mode .prose-akq .ctl-tight .ctl-btn { padding-block: 0.1em; }
+  body.present-mode .prose-akq .ctl-tight .ctl-body { padding-block: 0.25em; }
   .prose-akq .ctl-compact .ctl-v { overflow-wrap: anywhere; }
   @media (max-height: 800px), (max-width: 640px) {
     body.present-mode .prose-akq .ctl-widget.ctl-compact { font-size: 0.8em; }
