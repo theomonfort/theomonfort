@@ -151,67 +151,94 @@ flowchart LR
 </div>
 
 
-## Fusion: Choose Effort, Not a Model <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## <span class="fusion-title">Copilot Fusion</span> <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-Select **Copilot Fusion** and an effort level. Copilot chooses the models and how they work together, returning **one final response**.
+<div class="fusion-slide fusion-overview">
+<p class="fusion-lead"><strong>You choose effort.</strong> Fusion chooses the models.</p>
+<div class="fusion-value-grid">
+<div class="fusion-features">
+<div class="fusion-feature"><span>01</span><div><strong>Stop switching models</strong><p>Select Fusion, then Standard, High or Max.</p></div></div>
+<div class="fusion-feature"><span>02</span><div><strong>A plan for each prompt</strong><p>Match the task to models, reasoning and an execution pattern.</p></div></div>
+<div class="fusion-feature"><span>03</span><div><strong>One final response</strong><p>Extra review calls only when the task warrants them.</p></div></div>
+</div>
+<div class="fusion-metrics" aria-label="Benchmark results">
+<div class="fusion-metric"><strong>60</strong><span>Coding Agent Index</span><span class="fusion-micro">Within 2 points of baseline</span></div>
+<div class="fusion-metric"><strong>≈ ½</strong><span>API cost per task</span><span class="fusion-micro">$5.59 vs $11.42</span></div>
+<div class="fusion-metric"><strong>≈ ½</strong><span>Tokens per task</span><span class="fusion-micro">7.2M tokens on average</span></div>
+<div class="fusion-metric"><strong>≈ 40%</strong><span>Less time per task</span><span class="fusion-micro">Benchmark average</span></div>
+</div>
+</div>
+<p class="fusion-availability"><strong>GA, 2026-10-28.</strong> VS Code / Copilot CLI / Copilot App / JetBrains.</p>
+<p class="fusion-source"><a href="https://artificialanalysis.ai/articles/github-copilot-fusion-orchestrates-anthropic-and-openai-models-to-balance-performance-and-cost" target="_blank" rel="noopener noreferrer">Artificial Analysis, 2026-10-28</a>: Coding Agent Index v2.0. Fusion Max in Copilot CLI vs Claude Code / Opus 5.5 Max. Benchmark averages, not guaranteed savings.</p>
+</div>
 
-- **Automatic planning:** Uses reasoning, coding, debugging and tool-use signals to choose a pattern and per-step reasoning effort.
-- **GA since 2026-10-28:** Available in VS Code, Copilot CLI, Copilot App and JetBrains.
+## <span class="fusion-title">Fusion: choose effort</span> <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-| **60** index score | **About ½** cost and tokens | **About 40%** less time |
-| --- | --- | --- |
-| Within 2 points of the comparison configuration | Average API cost: **$5.59 vs $11.42** per task | Average time per task |
+<div class="fusion-slide fusion-choices">
+<p class="fusion-lead">Choose the trade-off, <strong>not a fixed workflow.</strong></p>
+<div class="fusion-choice-grid">
+<section class="fusion-choice" aria-label="Effort levels">
+<p class="fusion-zone-label">YOU CHOOSE THE EFFORT</p>
+<div class="fusion-choice-row"><strong>Standard</strong><p>Everyday work, one model.<small>All Copilot plans</small></p></div>
+<div class="fusion-choice-row"><strong>High</strong><p>Complex bugs and multi-file changes.</p></div>
+<div class="fusion-choice-row"><strong>Max</strong><p>Deepest reasoning and thorough analysis.</p></div>
+<p class="fusion-micro"><b>High / Max:</b> Pro+, Max, Business, Enterprise.</p>
+</section>
+<section class="fusion-choice" aria-label="Execution patterns">
+<p class="fusion-zone-label">FUSION CHOOSES THE PATTERN</p>
+<div class="fusion-choice-row"><strong>Single</strong><p>One model solves the task directly.</p></div>
+<div class="fusion-choice-row"><strong>Cascade</strong><p>Efficient draft → judge → accept or escalate.</p></div>
+<div class="fusion-choice-row"><strong>Critique</strong><p>Draft → parallel critiques → combine → revise.</p></div>
+<p class="fusion-micro">The next prompt can use a different pattern.</p>
+</section>
+</div>
+<p class="fusion-availability"><strong>Effort level ≠ per-model reasoning.</strong> Model policies still apply; disabling required models can make Max unavailable.</p>
+<p class="fusion-source"><b>Fast:</b> VS Code inline chat only, not selectable. Availability checked 2026-11-11.</p>
+</div>
 
-**Benchmark scope:** Fusion Max in Copilot CLI vs Claude Code with Opus 5.5 Max, Artificial Analysis Coding Agent Index v2.0, reported 2026-10-28. These are benchmark results, not guaranteed savings for your tasks.
+## <span class="fusion-title">Inside Fusion</span> <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="info-fusion-runtime" class="demo-toggle" /><label class="h2-demo h2-info" for="info-fusion-runtime">&#9432; INFO</label>
 
-## Fusion: Effort & Execution Patterns <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+<div class="demo-panel is-info fusion-help">
+<label class="demo-scrim" for="info-fusion-runtime" aria-label="Close Fusion details"></label>
+<div class="demo-window" role="group" aria-label="Public Fusion routing details">
+<div class="demo-head"><span class="demo-tag">INFO</span><span class="demo-name">Public routing concepts</span><label class="demo-close" for="info-fusion-runtime" aria-label="Close">&#10005;</label></div>
+<div class="info-body">
+<p><b>Policy-aware model pool:</b> Plan, administrator, data-residency and FedRAMP restrictions still apply. The model pool can change.</p>
+<p><b>Adaptive routing:</b> Fusion considers system health and availability. Routing follows natural cache boundaries and large changes in conversation complexity.</p>
+<p><b>Per-step execution:</b> Each step has its own model, reasoning effort and model context limit. You can follow step/model progress; only the final response is shown.</p>
+<p><b>Workspace safety:</b> Fusion does not start subagents. Discarding a draft does not undo its file edits. Review changes before committing.</p>
+</div>
+</div>
+</div>
 
-**You choose effort. Fusion chooses the execution pattern.**
-
-| Effort | Best for | Plans |
-| --- | --- | --- |
-| **Standard** | Everyday work, one model per task | All plans |
-| **High** | Complex bugs and multi-file changes | Pro+, Max, Business, Enterprise |
-| **Max** | Deep reasoning and thorough analysis | Pro+, Max, Business, Enterprise |
-
-| Pattern | How it works |
-| --- | --- |
-| **Single** | One model completes the task |
-| **Cascade** | Efficient draft → judge → stronger model if needed |
-| **Critique** | Draft → parallel model critiques → combined feedback → revision |
-
-As of **2026-11-11**; model policies apply. **Fast:** VS Code inline chat only, not selectable. Effort level ≠ model reasoning effort.
-
-## Fusion: From Prompt to Response <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
-
-**Public conceptual flow:** Models and reasoning effort vary per step.
-
-```mermaid
----
-config:
-  flowchart:
-    nodeSpacing: 25
-    rankSpacing: 35
----
-flowchart LR
-  Input["Your prompt<br/>+ effort level"] --> Route["Evaluate task<br/>and choose a pattern"]
-  Policy["Plan + model policies<br/>+ model availability"] --> Route
-  Route --> Single["Single<br/>One model"]
-  Route --> Cascade["Cascade<br/>Draft, judge, escalate"]
-  Route --> Critique["Critique<br/>Draft, critique, revise"]
-  Single --> Answer["One final<br/>response"]
-  Cascade --> Answer
-  Critique --> Answer
-
-  classDef input fill:#1a0b2e,stroke:#ff2e88,color:#e8f4ff,stroke-width:2px
-  classDef route fill:#0a0e27,stroke:#00f0ff,color:#e8f4ff,stroke-width:2px
-  classDef result fill:#0a0e27,stroke:#9bbc0f,color:#e8f4ff,stroke-width:2px
-  class Input input
-  class Policy,Route,Single,Cascade,Critique route
-  class Answer result
-```
-
-Fusion **does not start subagents**. Discarded drafts **do not undo file edits**: review changes before committing.
+<div class="fusion-slide fusion-system">
+<div class="fusion-system-top">
+<section class="fusion-zone fusion-input">
+<p class="fusion-zone-label">01 / YOUR WORKSPACE</p>
+<p><strong>Prompt + effort</strong></p>
+<p class="fusion-micro">Standard / High / Max</p>
+<div class="fusion-constraint">Plan + model policies</div>
+</section>
+<span class="fusion-connector" aria-hidden="true"></span>
+<section class="fusion-zone fusion-plan">
+<p class="fusion-zone-label">02 / FUSION PLANNING</p>
+<div class="fusion-signals"><span>Reasoning</span><span>Coding</span><span>Debugging</span><span>Tools</span></div>
+<p><strong>Choose pattern, models &amp; reasoning per step.</strong></p>
+<p class="fusion-micro">Respect policies, health and availability.</p>
+</section>
+</div>
+<p class="fusion-wire">↓ Execution plan</p>
+<section class="fusion-zone fusion-execution">
+<div class="fusion-zone-head"><p class="fusion-zone-label">03 / EXECUTION + REVIEW</p><span class="fusion-micro">One selected path per prompt</span></div>
+<div class="fusion-paths">
+<div class="fusion-path"><h3>Single</h3><div class="fusion-flow"><span>Model</span><b aria-hidden="true">→</b><span>Answer</span></div><p>Direct solution, no extra review calls.</p></div>
+<div class="fusion-path"><h3>Cascade</h3><div class="fusion-flow"><span>Draft</span><b aria-hidden="true">→</b><span>Judge</span></div><p><b>Accept</b> the draft, or <b>escalate</b> to a stronger model.</p></div>
+<div class="fusion-path"><h3>Critique</h3><div class="fusion-flow"><span>Draft</span><b aria-hidden="true">→</b><span>Parallel critiques</span></div><p>Combine feedback → original model revises.</p></div>
+</div>
+</section>
+<div class="fusion-output"><span>04</span><strong>One final response</strong><span>Intermediate drafts may be revised or discarded.</span></div>
+<p class="fusion-safety">No subagents launched. Discarded drafts do not undo file edits.</p>
+</div>
 
 ## Fusion: Billing & the Launch Offer <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion#billing-for-copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 

@@ -151,67 +151,94 @@ flowchart LR
 </div>
 
 
-## Fusion：モデルではなく労力を選ぶ <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## <span class="fusion-title">Copilot Fusion</span> <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**Copilot Fusion** と労力レベルを選ぶだけ。Copilot がモデルと連携方法を選び、**1 つの最終回答**を返します。
+<div class="fusion-slide fusion-overview">
+<p class="fusion-lead"><strong>人が労力を選び、</strong>Fusion がモデルを選ぶ。</p>
+<div class="fusion-value-grid">
+<div class="fusion-features">
+<div class="fusion-feature"><span>01</span><div><strong>モデルの切り替えはお任せ</strong><p>Fusion と Standard / High / Max を選ぶ。</p></div></div>
+<div class="fusion-feature"><span>02</span><div><strong>プロンプトごとに実行プラン</strong><p>タスクに合うモデル、推論、パターンを選択。</p></div></div>
+<div class="fusion-feature"><span>03</span><div><strong>最終回答は 1 つ</strong><p>追加のレビューは、必要なタスクだけ。</p></div></div>
+</div>
+<div class="fusion-metrics" aria-label="ベンチマーク結果">
+<div class="fusion-metric"><strong>60</strong><span>Coding Agent Index</span><span class="fusion-micro">比較対象との差は 2 点以内</span></div>
+<div class="fusion-metric"><strong>約 ½</strong><span>タスクあたりの API 費用</span><span class="fusion-micro">$5.59 対 $11.42</span></div>
+<div class="fusion-metric"><strong>約 ½</strong><span>トークン / タスク</span><span class="fusion-micro">平均 720 万</span></div>
+<div class="fusion-metric"><strong>約 40%</strong><span>タスクあたりの時間を短縮</span><span class="fusion-micro">ベンチマーク平均</span></div>
+</div>
+</div>
+<p class="fusion-availability"><strong>2026-10-28 に GA。</strong> VS Code / Copilot CLI / Copilot App / JetBrains。</p>
+<p class="fusion-source"><a href="https://artificialanalysis.ai/articles/github-copilot-fusion-orchestrates-anthropic-and-openai-models-to-balance-performance-and-cost" target="_blank" rel="noopener noreferrer">Artificial Analysis、2026-10-28</a>：Coding Agent Index v2.0。Copilot CLI / Fusion Max と Claude Code / Opus 5.5 Max の比較。平均値であり、実タスクでの削減は保証されません。</p>
+</div>
 
-- **自動で実行プランを決定：** 推論、コード生成、デバッグ、ツール利用の特性から、実行パターンと各ステップの推論レベルを選択。
-- **2026-10-28 に GA：** VS Code、Copilot CLI、Copilot App、JetBrains で利用可能。
+## <span class="fusion-title">Fusion：労力を選ぶ</span> <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-| **60** のスコア | 費用とトークンは **約 ½** | 所要時間は **約 40% 減** |
-| --- | --- | --- |
-| 比較対象との差は 2 ポイント以内 | 平均 API 費用：**$5.59 対 $11.42** / タスク | タスクあたりの平均時間 |
+<div class="fusion-slide fusion-choices">
+<p class="fusion-lead">人が選ぶのは優先度。<strong>実行手順は固定しない。</strong></p>
+<div class="fusion-choice-grid">
+<section class="fusion-choice" aria-label="労力レベル">
+<p class="fusion-zone-label">人が選ぶ：労力レベル</p>
+<div class="fusion-choice-row"><strong>Standard</strong><p>日常の作業を 1 モデルで。<small>すべての Copilot プラン</small></p></div>
+<div class="fusion-choice-row"><strong>High</strong><p>複雑なバグ修正、複数ファイルの変更。</p></div>
+<div class="fusion-choice-row"><strong>Max</strong><p>最も深い推論と徹底した分析。</p></div>
+<p class="fusion-micro"><b>High / Max：</b>Pro+、Max、Business、Enterprise。</p>
+</section>
+<section class="fusion-choice" aria-label="実行パターン">
+<p class="fusion-zone-label">Fusion が選ぶ：実行パターン</p>
+<div class="fusion-choice-row"><strong>Single</strong><p>1 モデルで直接タスクを解く。</p></div>
+<div class="fusion-choice-row"><strong>Cascade</strong><p>効率的に生成 → 判定 → 採用か強化。</p></div>
+<div class="fusion-choice-row"><strong>Critique</strong><p>生成 → 並列レビュー → 集約 → 修正。</p></div>
+<p class="fusion-micro">次のプロンプトでは別のパターンも選択。</p>
+</section>
+</div>
+<p class="fusion-availability"><strong>労力レベル ≠ モデルの推論レベル。</strong> モデルポリシーは適用され、必要なモデルが無効だと Max が使えない場合があります。</p>
+<p class="fusion-source"><b>Fast：</b>VS Code インラインチャット専用、手動選択不可。2026-11-11 時点。</p>
+</div>
 
-**比較条件：** Copilot CLI の Fusion Max と Claude Code の Opus 5.5 Max。Artificial Analysis Coding Agent Index v2.0、2026-10-28 公表。ベンチマーク結果であり、実際のタスクでの削減を保証するものではありません。
+## <span class="fusion-title">Fusion の仕組み</span> <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="info-fusion-runtime" class="demo-toggle" /><label class="h2-demo h2-info" for="info-fusion-runtime">&#9432; INFO</label>
 
-## Fusion：労力レベルと実行パターン <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+<div class="demo-panel is-info fusion-help">
+<label class="demo-scrim" for="info-fusion-runtime" aria-label="Fusion の詳細を閉じる"></label>
+<div class="demo-window" role="group" aria-label="公開情報に基づく Fusion のルーティング">
+<div class="demo-head"><span class="demo-tag">INFO</span><span class="demo-name">公開情報に基づく仕組み</span><label class="demo-close" for="info-fusion-runtime" aria-label="閉じる">&#10005;</label></div>
+<div class="info-body">
+<p><b>ポリシーに従うモデル候補：</b>プラン、管理者、データ所在地、FedRAMP の制限を適用。モデル候補は変わる場合があります。</p>
+<p><b>状況に応じたルーティング：</b>稼働状況と可用性を考慮。自然なキャッシュ境界や、会話の複雑さが大きく変わる場面で経路を選びます。</p>
+<p><b>ステップごとの実行：</b>モデル、推論レベル、コンテキスト上限は各ステップに依存。進行状況と使用モデルを追跡でき、提示される回答は最終版だけです。</p>
+<p><b>作業ファイルの扱い：</b>Fusion 自体はサブエージェントを起動しません。下書きの破棄でファイル編集は元に戻らないため、コミット前に確認してください。</p>
+</div>
+</div>
+</div>
 
-**人が労力を選び、Fusion が実行パターンを選びます。**
-
-| 労力レベル | 主な用途 | 対象プラン |
-| --- | --- | --- |
-| **Standard** | 日常の作業、タスクごとに 1 モデル | 全プラン |
-| **High** | 複雑なバグ修正、複数ファイルの変更 | Pro+、Max、Business、Enterprise |
-| **Max** | 深い推論と徹底した分析 | Pro+、Max、Business、Enterprise |
-
-| パターン | 処理の流れ |
-| --- | --- |
-| **Single** | 1 つのモデルでタスクを完了 |
-| **Cascade** | 効率的なモデルで生成 → 判定 → 必要なら強力なモデルへ |
-| **Critique** | 生成 → 複数モデルが並列レビュー → 指摘を集約 → 修正 |
-
-**2026-11-11 時点。** モデルポリシーに従います。**Fast：** VS Code インラインチャット専用、手動選択不可。労力レベル ≠ モデルの推論レベル。
-
-## Fusion：プロンプトから回答まで <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
-
-公開情報に基づく**概念図：** モデルと推論レベルはステップごとに選択。
-
-```mermaid
----
-config:
-  flowchart:
-    nodeSpacing: 25
-    rankSpacing: 35
----
-flowchart LR
-  Input["プロンプト<br/>+ 労力レベル"] --> Route["タスクを評価<br/>パターンを選択"]
-  Policy["プラン + モデルポリシー<br/>+ モデルの可用性"] --> Route
-  Route --> Single["Single<br/>1 モデル"]
-  Route --> Cascade["Cascade<br/>生成、判定、強化"]
-  Route --> Critique["Critique<br/>生成、レビュー、修正"]
-  Single --> Answer["1 つの<br/>最終回答"]
-  Cascade --> Answer
-  Critique --> Answer
-
-  classDef input fill:#1a0b2e,stroke:#ff2e88,color:#e8f4ff,stroke-width:2px
-  classDef route fill:#0a0e27,stroke:#00f0ff,color:#e8f4ff,stroke-width:2px
-  classDef result fill:#0a0e27,stroke:#9bbc0f,color:#e8f4ff,stroke-width:2px
-  class Input input
-  class Policy,Route,Single,Cascade,Critique route
-  class Answer result
-```
-
-Fusion 自体は**サブエージェントを起動しません**。下書きが破棄されても**ファイル変更は元に戻らない**ため、コミット前に確認してください。
+<div class="fusion-slide fusion-system">
+<div class="fusion-system-top">
+<section class="fusion-zone fusion-input">
+<p class="fusion-zone-label">01 / 利用者の作業環境</p>
+<p><strong>プロンプト + 労力</strong></p>
+<p class="fusion-micro">Standard / High / Max</p>
+<div class="fusion-constraint">プラン + モデルポリシー</div>
+</section>
+<span class="fusion-connector" aria-hidden="true"></span>
+<section class="fusion-zone fusion-plan">
+<p class="fusion-zone-label">02 / FUSION が計画</p>
+<div class="fusion-signals"><span>推論</span><span>コード</span><span>デバッグ</span><span>ツール</span></div>
+<p><strong>パターンと、各段階のモデル、推論を選択。</strong></p>
+<p class="fusion-micro">ポリシー、稼働状況、可用性を考慮。</p>
+</section>
+</div>
+<p class="fusion-wire">↓ 実行プラン</p>
+<section class="fusion-zone fusion-execution">
+<div class="fusion-zone-head"><p class="fusion-zone-label">03 / 実行とレビュー</p><span class="fusion-micro">プロンプトごとに 1 つの経路</span></div>
+<div class="fusion-paths">
+<div class="fusion-path"><h3>Single</h3><div class="fusion-flow"><span>モデル</span><b aria-hidden="true">→</b><span>回答</span></div><p>直接解決。追加レビューは不要。</p></div>
+<div class="fusion-path"><h3>Cascade</h3><div class="fusion-flow"><span>生成</span><b aria-hidden="true">→</b><span>判定</span></div><p>下書きを<b>採用</b>、または<b>強力なモデル</b>で解き直す。</p></div>
+<div class="fusion-path"><h3>Critique</h3><div class="fusion-flow"><span>生成</span><b aria-hidden="true">→</b><span>並列レビュー</span></div><p>指摘を集約 → 元のモデルが修正。</p></div>
+</div>
+</section>
+<div class="fusion-output"><span>04</span><strong>1 つの最終回答</strong><span>途中の下書きは修正、破棄される場合も。</span></div>
+<p class="fusion-safety">サブエージェントは起動しない。下書きの破棄でファイル編集は戻らない。</p>
+</div>
 
 ## Fusion：課金と期間限定割引 <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion#billing-for-copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
