@@ -80,6 +80,18 @@ Business / Enterprise：個人記憶は**請求元ごとに分離**。管理者�
 
 > ⚠️ Memory は規則の遵守を保証しない。継続的に渡したい指示は **Custom instructions** に書く。
 
+## Copilot Dreaming（NEW） <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-dreaming#how-changes-are-applied" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+Dreaming は記憶の追加、更新、削除を **自動で行う**。
+
+| 対象 | 更新対象 | 変更の反映方法 |
+| --- | --- | --- |
+| **📦 Repo** | repo の記憶 | Instructions / Skills の変更を **PR で提案** |
+| **👤 Personal** | 個人の記憶 | 個人の Instructions / Skills ファイルは **変更しない** |
+| **🔍 Code review** | マージ済み PR のフィードバックと現コードに基づく内部ガイダンス | 内部ガイダンスを更新し、**PR は作らない** |
+
+ファイルは **PR マージ後**に変更。変更なしでも **AI credits を消費**。
+
 ## Memory ≠ Dreaming <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-dreaming" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 <div class="setup-cards">
@@ -96,19 +108,6 @@ Business / Enterprise：個人記憶は**請求元ごとに分離**。管理者�
 チャットを開いたままにする必要はない。更新するのは**コンテキスト**であり、モデルの学習ではない。
 
 > 💡 **Dreaming が OFF でも、Memory が有効なら記憶の保存と利用は続く。**
-
-## Dreaming が変えるもの <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-dreaming#how-changes-are-applied" target="_blank" rel="noopener noreferrer">📖 Docs</a>
-
-**記憶は自動で追加、更新、削除。ファイル変更は PR で確認。**
-
-| 対象 | 記憶 / ガイダンス | ファイルへの変更 |
-| --- | --- | --- |
-| **📦 Repo** | repo の記憶 | Instructions / Skills を **PR で提案** |
-| **👤 Personal** | 個人の記憶 | 個人の Instructions / Skills は**変更しない** |
-| **🔍 Code review** | マージ済み PR のフィードバックと現コードから内部ガイダンスを更新 | **PR は作らない** |
-
-記憶の変更は承認不要。ファイルは **PR のマージ後**に反映。<br />
-変更がない実行も **AI credits を消費**する。
 
 ## 設定もスコープごとに分ける <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-dreaming#availability-and-prerequisites" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 

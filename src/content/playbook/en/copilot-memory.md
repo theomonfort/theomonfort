@@ -80,6 +80,18 @@ Default: **90 days**. **Upvotes reset expiry; reads do not.** Repo retention: 7�
 
 > ⚠️ Memory cannot guarantee compliance. Use **custom instructions** for consistent guidance.
 
+## Copilot Dreaming (NEW) <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-dreaming#how-changes-are-applied" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+Dreaming adds, updates, or deletes memories **automatically**.
+
+| Scope | What it updates | How changes are applied |
+| --- | --- | --- |
+| **📦 Repo** | Repository memories | Proposes instruction and skill edits in a **PR** |
+| **👤 Personal** | Personal memories | **Does not change** personal instruction or skill files |
+| **🔍 Code review** | Internal guidance from merged PR feedback and current code | Updates guidance **without creating a PR** |
+
+File edits need a **merged PR**. No-change runs still **use AI credits**.
+
 ## Memory ≠ Dreaming <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-dreaming" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 <div class="setup-cards">
@@ -96,19 +108,6 @@ Default: **90 days**. **Upvotes reset expiry; reads do not.** Repo retention: 7�
 No need to leave a chat open. It updates **context**, not the underlying model.
 
 > 💡 **Memory can still store and use memories when Dreaming is OFF.**
-
-## What Dreaming changes <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-dreaming#how-changes-are-applied" target="_blank" rel="noopener noreferrer">📖 Docs</a>
-
-**Memories: automatic add / update / delete. Files: PR review.**
-
-| Scope | Context updated | File changes |
-| --- | --- | --- |
-| **📦 Repo** | Repo memories | Instructions / skills proposed in a **PR** |
-| **👤 Personal** | Personal memories | **No personal** instruction / skill changes |
-| **🔍 Code review** | Internal guidance from merged PR feedback + current code | **No PR** |
-
-Memories need no approval; files change **after merge**.<br />
-Runs may change nothing and still **consume AI credits**.
 
 ## Configure each scope separately <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-dreaming#availability-and-prerequisites" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
