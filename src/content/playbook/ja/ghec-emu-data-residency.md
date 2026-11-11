@@ -376,10 +376,14 @@ flowchart LR
 
 ## GitHub.com → EMU / GHE.com (GEI) <a class="h2-doc" href="https://docs.github.com/ja/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/migrating-organizations-from-githubcom-to-github-enterprise-cloud" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**GEI が移行先 Org を新規作成してデータを移行。** アカウントは IdP から払い出します。
-
-<div class="ctl-widget">
+<div class="ctl-widget ctl-stable ctl-tight">
 <div class="ctl-list">
+<details class="ctl-item" name="emu-org-migration">
+<summary class="ctl-btn"><span class="ctl-name">一言で</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-intro"><strong>GEI が移行先 Org を作成し、データ（repo、Team、一部の設定など）を移行。</strong> IdP で払い出したアカウントを Mannequin に対応付け、Issue / PR などの履歴を帰属させます。対象外のデータは手動で移行または再設定します。</p>
+</div>
+</details>
 <details class="ctl-item" name="emu-org-migration">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">1.</span><span class="ctl-name">移行対象を棚卸しする</span><span class="ctl-when">含まれるもの / 対象外</span><a class="ctl-doc" href="https://docs.github.com/ja/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/about-migrations-between-github-products#data-that-is-migrated-from-githubcom" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
@@ -399,7 +403,7 @@ flowchart LR
 <details class="ctl-item" name="emu-org-migration">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">3.</span><span class="ctl-name">Organization 全体でリハーサル</span><span class="ctl-when">検証用の別 Org</span><a class="ctl-doc" href="https://docs.github.com/ja/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/overview-of-a-migration-between-github-products#running-your-migrations" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">試行</span><span class="ctl-v">GEI 実行時に検証用 Org 名を指定。<b>全 repo</b> を含む Org が作成されます。<b>Org は事前作成しません。</b></span></p>
+<p class="ctl-row"><span class="ctl-k">試行</span><span class="ctl-v">CLI で検証用の Org 名を指定して移行を実行します。</span></p>
 <p class="ctl-row"><span class="ctl-k">確認</span><span class="ctl-v">時間、ログ、警告を確認し、ステップ 5 と 6 も試行。利用者がデータ、アクセス、CI/CD を検証します。</span></p>
 <p class="ctl-row"><span class="ctl-k">本番</span><span class="ctl-v">問題解消後に<b>新たな全体移行</b>を実行。検証用 Org への差分同期ではありません。</span></p>
 </div>

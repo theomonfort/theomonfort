@@ -376,10 +376,14 @@ flowchart LR
 
 ## GitHub.com → EMU / GHE.com (GEI) <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/migrating-organizations-from-githubcom-to-github-enterprise-cloud" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**GEI creates the target org and migrates the data.** The IdP provisions user accounts.
-
-<div class="ctl-widget">
+<div class="ctl-widget ctl-stable ctl-tight">
 <div class="ctl-list">
+<details class="ctl-item" name="emu-org-migration">
+<summary class="ctl-btn"><span class="ctl-name">In a nutshell</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-intro"><strong>GEI creates the target org and migrates the data (repos, teams, some settings, etc.).</strong> The IdP provisions user accounts, which must be matched to mannequins to reattribute issues, PRs, etc. Unsupported data must be migrated or reconfigured manually.</p>
+</div>
+</details>
 <details class="ctl-item" name="emu-org-migration">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">1.</span><span class="ctl-name">Inventory the migration</span><span class="ctl-when">Included / excluded</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/about-migrations-between-github-products#data-that-is-migrated-from-githubcom" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
@@ -399,7 +403,7 @@ flowchart LR
 <details class="ctl-item" name="emu-org-migration">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">3.</span><span class="ctl-name">Rehearse the full migration</span><span class="ctl-when">Separate test org</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/overview-of-a-migration-between-github-products#running-your-migrations" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">Trial</span><span class="ctl-v">Give GEI a test org name. It creates the org with <b>every repo</b>; <b>do not pre-create it</b>.</span></p>
+<p class="ctl-row"><span class="ctl-k">Trial</span><span class="ctl-v">Run a migration via the CLI, specifying a test org name.</span></p>
 <p class="ctl-row"><span class="ctl-k">Validate</span><span class="ctl-v">Measure duration, review warnings, rehearse steps 5 and 6. Users check data, access and CI/CD.</span></p>
 <p class="ctl-row"><span class="ctl-k">Production</span><span class="ctl-v">Fix problems first. Production is a <b>fresh full migration</b>, not a test-org sync.</span></p>
 </div>
