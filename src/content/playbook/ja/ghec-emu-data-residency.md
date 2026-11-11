@@ -23,6 +23,9 @@ links:
   - group: 📖 Enterprise Managed Users
     label: マネージドユーザーアカウントの機能と制限
     url: https://docs.github.com/ja/enterprise-cloud@latest/admin/managing-iam/understanding-iam-for-enterprises/abilities-and-restrictions-of-managed-user-accounts
+  - group: 📦 移行
+    label: GitHub Enterprise Importer で Organization を移行する
+    url: https://docs.github.com/ja/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/migrating-organizations-from-githubcom-to-github-enterprise-cloud
   - group: 🌏 データレジデンシー
     label: データレジデンシーを使用した GitHub Enterprise Cloud について
     url: https://docs.github.com/ja/enterprise-cloud@latest/admin/data-residency/about-github-enterprise-cloud-with-data-residency
@@ -370,3 +373,60 @@ flowchart LR
 ```
 
 > ⚠️ 作成後に形態は切り替えられない。既存の個人アカウント Enterprise から EMU や GHE.com へ移るには、新しい Enterprise を作って移行（GitHub Enterprise Importer など）する。
+
+## GitHub.com → EMU / GHE.com (GEI) <a class="h2-doc" href="https://docs.github.com/ja/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/migrating-organizations-from-githubcom-to-github-enterprise-cloud" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+**GEI が移行先 Org を新規作成してデータを移行。** アカウントは IdP から払い出します。
+
+<div class="ctl-widget">
+<div class="ctl-list">
+<details class="ctl-item" name="emu-org-migration">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">1.</span><span class="ctl-name">移行対象を棚卸しする</span><span class="ctl-when">含まれるもの / 対象外</span><a class="ctl-doc" href="https://docs.github.com/ja/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/about-migrations-between-github-products#data-that-is-migrated-from-githubcom" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">含まれるもの</span><span class="ctl-v"><b>Repo：</b>Git 履歴、PR、Issue、コメント、Release、workflow ファイル。<br/><b>Team：</b>Team 自体と repo へのアクセス権。<br/><b>設定：</b>対応する repo / Org 設定。</span></p>
+<p class="ctl-row"><span class="ctl-k">対象外</span><span class="ctl-v"><b>アクセス：</b>Team 所属、ユーザー個別の権限、SSH キー、PAT。<br/><b>自動化：</b>Actions 設定と実行履歴、Apps。<br/><b>その他：</b>Packages、Projects、LFS オブジェクト、ruleset。全項目は Docs。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="emu-org-migration">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">2.</span><span class="ctl-name">EMU Enterprise を準備する</span><span class="ctl-when">構築 / GEI 権限</span><a class="ctl-doc" href="https://docs.github.com/ja/enterprise-cloud@latest/admin/managing-iam/understanding-iam-for-enterprises/getting-started-with-enterprise-managed-users" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Enterprise</span><span class="ctl-v"><a class="retro-link" href="https://livesend.github.com/i/PLUSSIGNmO___ceUsv7m___o6AFPLUSSIGNv8g8ZvMEsSwHipZ7T6fVpuWzDHhbTXlPNmIPLUSSIGN28yn1oCfM___wSnn9wVegCrDYY0K___MXh5FIxYr3sBkD8PLUSSIGN4S3StnoRPLUSSIGNkZY9KE1NCUgm9DhLFRbBjkV" target="_blank" rel="noopener noreferrer">EMU Enterprise の作成 ↗</a></span></p>
+<p class="ctl-row"><span class="ctl-k">必要なロール</span><span class="ctl-v">元は <b>Org owner / migrator</b>、先は <b>Enterprise owner</b>。</span></p>
+<p class="ctl-row"><span class="ctl-k">PAT</span><span class="ctl-v">GEI が移行に使う <a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/managing-access-for-a-migration-between-github-products#creating-a-personal-access-token-for-github-enterprise-importer" target="_blank" rel="noopener noreferrer">classic PAT ↗</a> を必要な scope で作成。必要に応じて <a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/authentication/authenticating-with-single-sign-on/authorizing-a-personal-access-token-for-use-with-single-sign-on" target="_blank" rel="noopener noreferrer">SSO 認可 ↗</a>を行う。</span></p>
+<p class="ctl-row"><span class="ctl-k">IP</span><span class="ctl-v"><a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/managing-access-for-a-migration-between-github-products#configuring-ip-allow-lists-for-migrations" target="_blank" rel="noopener noreferrer">IP 制限 ↗</a>で GEI が遮断されないことを確認。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="emu-org-migration">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">3.</span><span class="ctl-name">Organization 全体でリハーサル</span><span class="ctl-when">検証用の別 Org</span><a class="ctl-doc" href="https://docs.github.com/ja/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/overview-of-a-migration-between-github-products#running-your-migrations" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">試行</span><span class="ctl-v">GEI 実行時に検証用 Org 名を指定。<b>全 repo</b> を含む Org が作成されます。<b>Org は事前作成しません。</b></span></p>
+<p class="ctl-row"><span class="ctl-k">確認</span><span class="ctl-v">時間、ログ、警告を確認し、ステップ 5 と 6 も試行。利用者がデータ、アクセス、CI/CD を検証します。</span></p>
+<p class="ctl-row"><span class="ctl-k">本番</span><span class="ctl-v">問題解消後に<b>新たな全体移行</b>を実行。検証用 Org への差分同期ではありません。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="emu-org-migration">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">4.</span><span class="ctl-name">書き込みを止めて本番移行</span><span class="ctl-when">差分同期なし</span><a class="ctl-doc" href="https://docs.github.com/ja/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/migrating-organizations-from-githubcom-to-github-enterprise-cloud" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">凍結</span><span class="ctl-v">元の Org 全体で push、PR / Issue 更新、bot を停止。<b>差分移行なし</b>のため、その後の変更は自動で取り込まれません。</span></p>
+<p class="ctl-row"><span class="ctl-k">実行</span><span class="ctl-v"><code>gh gei migrate-org</code> に本番 Org 名を指定。<a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/about-migrations-between-github-products#limitations-of-github-enterprise-importer" target="_blank" rel="noopener noreferrer">ruleset ↗</a> が妨げる場合は <a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/migrations/troubleshooting/setting-ruleset-bypasses-for-repository-migrations" target="_blank" rel="noopener noreferrer"><b>Repository migrations → Exempt ↗</b></a> の bypass を設定。</span></p>
+<p class="ctl-row"><span class="ctl-k">結果</span><span class="ctl-v">Org の状態と全 repo のログを確認。<b>成功でも未移行データの警告</b>が残ることがあります。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="emu-org-migration">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">5.</span><span class="ctl-name">メンバーと履歴の帰属を復元</span><span class="ctl-when">Mannequin</span><a class="ctl-doc" href="https://docs.github.com/ja/enterprise-cloud@latest/migrations/using-github-enterprise-importer/completing-your-migration-with-github-enterprise-importer/reclaiming-mannequins-for-github-enterprise-importer" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">メンバー</span><span class="ctl-v">委託先も IdP で払い出し、Org に追加。IdP グループで <a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/overview-of-a-migration-between-github-products#recreating-teams-for-organization-migrations" target="_blank" rel="noopener noreferrer">Team 所属を復元 ↗</a>。</span></p>
+<p class="ctl-row"><span class="ctl-k">Mannequin</span><span class="ctl-v">PR / Issue / コメントの<b>仮の投稿者</b>。Org owner が <a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/migrations/using-github-enterprise-importer/completing-your-migration-with-github-enterprise-importer/reclaiming-mannequins-for-github-enterprise-importer#reclaiming-mannequins-with-the-gei-extension" target="_blank" rel="noopener noreferrer"><code>gh gei generate-mannequin-csv</code> ↗</a> → CSV で既存 EMU Org メンバーに対応付け → <code>gh gei reclaim-mannequin</code>。</span></p>
+<p class="ctl-row"><span class="ctl-k">対象外</span><span class="ctl-v"><a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/migrations/using-github-enterprise-importer/completing-your-migration-with-github-enterprise-importer/reclaiming-mannequins-for-github-enterprise-importer#reclaiming-mannequins" target="_blank" rel="noopener noreferrer"><b>権限は付与されません ↗</b></a>。<a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/migrations/overview/mannequins-and-user-activity#what-are-mannequins" target="_blank" rel="noopener noreferrer"><b>Git commit の帰属は変わりません ↗</b></a>。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="emu-org-migration">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">6.</span><span class="ctl-name">連携を復元して切り替える</span><span class="ctl-when">再開前に検証</span><a class="ctl-doc" href="https://docs.github.com/ja/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/overview-of-a-migration-between-github-products#completing-follow-up-tasks" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">連携</span><span class="ctl-v">Actions の secrets / variables / environments / runner、Apps、対象外データを復元。<b>webhook は secret を戻して再有効化。</b></span></p>
+<p class="ctl-row"><span class="ctl-k">確認</span><span class="ctl-v">remote / <b>CODEOWNERS</b> / Team 参照を修正し、ブランチ保護の未移行項目を確認。全 repo は <b>private</b> で到着。EMU は public 不可。</span></p>
+<p class="ctl-row"><span class="ctl-k">利用再開</span><span class="ctl-v">データ、権限、CI/CD を検証して再開。受け入れ完了まで<b>移行元を凍結して保持</b>。</span></p>
+</div>
+</details>
+</div>
+</div>

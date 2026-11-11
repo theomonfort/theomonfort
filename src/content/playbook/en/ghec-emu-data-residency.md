@@ -23,6 +23,9 @@ links:
   - group: 📖 Enterprise Managed Users
     label: Abilities and restrictions of managed user accounts
     url: https://docs.github.com/en/enterprise-cloud@latest/admin/managing-iam/understanding-iam-for-enterprises/abilities-and-restrictions-of-managed-user-accounts
+  - group: 📦 Migration
+    label: Migrate an organization with GitHub Enterprise Importer
+    url: https://docs.github.com/en/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/migrating-organizations-from-githubcom-to-github-enterprise-cloud
   - group: 🌏 Data residency
     label: About GitHub Enterprise Cloud with data residency
     url: https://docs.github.com/en/enterprise-cloud@latest/admin/data-residency/about-github-enterprise-cloud-with-data-residency
@@ -370,3 +373,60 @@ flowchart LR
 ```
 
 > ⚠️ You cannot switch types after creation. Moving from a personal-account enterprise to EMU or GHE.com means creating a new enterprise and migrating (for example with GitHub Enterprise Importer).
+
+## GitHub.com → EMU / GHE.com (GEI) <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/migrating-organizations-from-githubcom-to-github-enterprise-cloud" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+**GEI creates the target org and migrates the data.** The IdP provisions user accounts.
+
+<div class="ctl-widget">
+<div class="ctl-list">
+<details class="ctl-item" name="emu-org-migration">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">1.</span><span class="ctl-name">Inventory the migration</span><span class="ctl-when">Included / excluded</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/about-migrations-between-github-products#data-that-is-migrated-from-githubcom" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Included</span><span class="ctl-v"><b>Repos:</b> Git history, PRs, issues, comments, releases, workflow files.<br/><b>Teams:</b> team definitions and repo permissions.<br/><b>Settings:</b> supported repo/org settings.</span></p>
+<p class="ctl-row"><span class="ctl-k">Not included</span><span class="ctl-v"><b>Access:</b> team membership, direct user access, SSH keys, PATs.<br/><b>Automation:</b> Actions config/run history, Apps.<br/><b>Other:</b> Packages, Projects, LFS objects, rulesets. Full list: Docs.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="emu-org-migration">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">2.</span><span class="ctl-name">Prepare the EMU enterprise</span><span class="ctl-when">Setup / GEI access</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/admin/managing-iam/understanding-iam-for-enterprises/getting-started-with-enterprise-managed-users" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Enterprise</span><span class="ctl-v"><a class="retro-link" href="https://livesend.github.com/i/PLUSSIGNmO___ceUsv7m___o6AFPLUSSIGNv8g8ZvMEsSwHipZ7T6fVpuWzDHhbTXlPNmIPLUSSIGN28yn1oCfM___wSnn9wVegCrDYY0K___MXh5FIxYr3sBkD8PLUSSIGN4S3StnoRPLUSSIGNkZY9KE1NCUgm9DhLFRbBjkV" target="_blank" rel="noopener noreferrer">Create an EMU enterprise ↗</a></span></p>
+<p class="ctl-row"><span class="ctl-k">Required role</span><span class="ctl-v">Source: <b>org owner / migrator</b>. Target: <b>enterprise owner</b>.</span></p>
+<p class="ctl-row"><span class="ctl-k">PAT</span><span class="ctl-v">Set up the <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/managing-access-for-a-migration-between-github-products#creating-a-personal-access-token-for-github-enterprise-importer" target="_blank" rel="noopener noreferrer">classic PATs ↗</a> that GEI will use for the migration, with the required scopes and <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-single-sign-on/authorizing-a-personal-access-token-for-use-with-single-sign-on" target="_blank" rel="noopener noreferrer">SSO authorization ↗</a> if needed.</span></p>
+<p class="ctl-row"><span class="ctl-k">IP</span><span class="ctl-v">Check that <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/managing-access-for-a-migration-between-github-products#configuring-ip-allow-lists-for-migrations" target="_blank" rel="noopener noreferrer">IP restrictions ↗</a> do not block GEI.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="emu-org-migration">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">3.</span><span class="ctl-name">Rehearse the full migration</span><span class="ctl-when">Separate test org</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/overview-of-a-migration-between-github-products#running-your-migrations" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Trial</span><span class="ctl-v">Give GEI a test org name. It creates the org with <b>every repo</b>; <b>do not pre-create it</b>.</span></p>
+<p class="ctl-row"><span class="ctl-k">Validate</span><span class="ctl-v">Measure duration, review warnings, rehearse steps 5 and 6. Users check data, access and CI/CD.</span></p>
+<p class="ctl-row"><span class="ctl-k">Production</span><span class="ctl-v">Fix problems first. Production is a <b>fresh full migration</b>, not a test-org sync.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="emu-org-migration">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">4.</span><span class="ctl-name">Freeze writes and migrate</span><span class="ctl-when">No delta sync</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/migrating-organizations-from-githubcom-to-github-enterprise-cloud" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Freeze</span><span class="ctl-v">Stop pushes, PR/issue updates and bots across the source org. <b>No delta migration</b>: later changes are not picked up automatically.</span></p>
+<p class="ctl-row"><span class="ctl-k">Run</span><span class="ctl-v">Run <code>gh gei migrate-org</code> with the production org name. For blocking <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/about-migrations-between-github-products#limitations-of-github-enterprise-importer" target="_blank" rel="noopener noreferrer">rulesets ↗</a>, use <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/migrations/troubleshooting/setting-ruleset-bypasses-for-repository-migrations" target="_blank" rel="noopener noreferrer"><b>Repository migrations → Exempt ↗</b></a>.</span></p>
+<p class="ctl-row"><span class="ctl-k">Check</span><span class="ctl-v">Review org status and every repo log. <b>Success can include warnings</b> about missing data.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="emu-org-migration">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">5.</span><span class="ctl-name">Restore members and attribution</span><span class="ctl-when">Mannequins</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/migrations/using-github-enterprise-importer/completing-your-migration-with-github-enterprise-importer/reclaiming-mannequins-for-github-enterprise-importer" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Members</span><span class="ctl-v">Provision staff/contractors via IdP; add to the org and <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/overview-of-a-migration-between-github-products#recreating-teams-for-organization-migrations" target="_blank" rel="noopener noreferrer">restore team membership ↗</a> via IdP groups.</span></p>
+<p class="ctl-row"><span class="ctl-k">Mannequins</span><span class="ctl-v"><b>Placeholder authors of PRs/issues/comments.</b> Org owner: <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/migrations/using-github-enterprise-importer/completing-your-migration-with-github-enterprise-importer/reclaiming-mannequins-for-github-enterprise-importer#reclaiming-mannequins-with-the-gei-extension" target="_blank" rel="noopener noreferrer"><code>gh gei generate-mannequin-csv</code> ↗</a> → map the CSV to existing EMU org members → <code>gh gei reclaim-mannequin</code>.</span></p>
+<p class="ctl-row"><span class="ctl-k">Limits</span><span class="ctl-v"><a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/migrations/using-github-enterprise-importer/completing-your-migration-with-github-enterprise-importer/reclaiming-mannequins-for-github-enterprise-importer#reclaiming-mannequins" target="_blank" rel="noopener noreferrer"><b>No access grants ↗</b></a>; <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/migrations/overview/mannequins-and-user-activity#what-are-mannequins" target="_blank" rel="noopener noreferrer"><b>Git commit attribution is unchanged ↗</b></a>.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="emu-org-migration">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">6.</span><span class="ctl-name">Restore services and cut over</span><span class="ctl-when">Validate before reopening</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/overview-of-a-migration-between-github-products#completing-follow-up-tasks" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Services</span><span class="ctl-v">Restore Actions secrets/variables/environments/runners, Apps and excluded data. <b>Re-enable webhooks with secrets.</b></span></p>
+<p class="ctl-row"><span class="ctl-k">Checks</span><span class="ctl-v">Fix remotes/<b>CODEOWNERS</b>/team references; check partial branch protections. Repos arrive <b>private</b>; EMU forbids public.</span></p>
+<p class="ctl-row"><span class="ctl-k">Go live</span><span class="ctl-v">Validate data, access and CI/CD. Reopen target; <b>keep source frozen</b> until acceptance.</span></p>
+</div>
+</details>
+</div>
+</div>
