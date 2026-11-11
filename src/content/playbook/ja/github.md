@@ -106,7 +106,7 @@ links:
     <text x="760" y="290" text-anchor="middle" fill="#e8f4ff" font-size="18" font-weight="bold">GitHub Copilot</text>
     <text x="760" y="312" text-anchor="middle" fill="#e8f4ff" font-size="11">AI と一緒にコードを書く。</text>
   </g>
-  <g>
+  <g transform="translate(-40 22)">
     <line x1="875" y1="124" x2="875" y2="104" stroke="#00f0ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
     <circle cx="875" cy="132" r="7" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
     <rect x="815" y="72" width="120" height="32" rx="16" fill="#0a0e27" stroke="#00f0ff" stroke-width="1.5"/>
