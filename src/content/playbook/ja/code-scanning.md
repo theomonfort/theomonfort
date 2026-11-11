@@ -18,11 +18,23 @@ links:
     label: About code scanning
     url: https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning
   - group: 📖 公式ドキュメント
+    label: About AI Scan
+    url: https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan
+  - group: 📖 公式ドキュメント
     label: AI Scan for pull requests
     url: https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections
   - group: 📖 公式ドキュメント
+    label: AI Scan for repositories
+    url: https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan-for-repositories
+  - group: 📖 公式ドキュメント
+    label: AI applications scanning for pull requests
+    url: https://docs.github.com/en/code-security/concepts/code-scanning/ai-applications-scanning-for-pull-requests
+  - group: 📰 Recent Changelog
     label: "Changelog: AI Scan for pull request APIs (public preview)"
     url: https://github.blog/changelog/2026-09-10-ai-scan-for-pull-request-apis-in-public-preview/
+  - group: 📰 Recent Changelog
+    label: "AI Scan for repositories public preview (2026-10-28)"
+    url: https://github.blog/changelog/2026-10-28-ai-scan-for-repositories-in-public-preview
   - group: 📖 公式ドキュメント
     label: Resolving code scanning alerts
     url: https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts
@@ -92,7 +104,7 @@ links:
 
 ## Code Scanning と CodeQL は別物 <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**Code Scanning は GitHub の機能、CodeQL は解析エンジンの 1 つ**。PR では AI findings が補完し、他社ツールの結果も SARIF で取り込める。
+**Code Scanning は GitHub の機能、CodeQL は解析エンジンの 1 つ**。AI Scan が PR とデフォルトブランチを補完し、他社ツールの結果も SARIF で取り込める。
 
 <div class="det-widget det-compact">
 <p class="det-hint">▸ クリックで詳細</p>
@@ -115,11 +127,15 @@ links:
 </div>
 </details>
 <details class="det-pick" name="cs-vs-codeql">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI Scan（PR のみ）</span></summary>
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI Scan</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">AI Scan</span></p>
-<p class="det-why">PHP、Bash、HCL、Dockerfile など、未対応の言語やフレームワークを対象に <b>CodeQL を補完</b>。<b>PR のみ</b>で、全体スキャンやバックログのアラートはない。助言扱いでマージをブロックしない。Code scanning と AI Scan の有効化が必要で、<b>CodeQL default setup は不要</b>。<b>Code Security AI Credits</b> を消費する。UI / REST API で Org 単位に有効化し、リポジトリ単位でオプトアウトできる。</p>
-<p class="det-doc">2026-10-22 時点: Copilot ライセンス不要。Org の private / internal repo は Code Security または GHAS が必要。<a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">📘 Docs ↗</a> / <a class="retro-link" href="https://github.blog/changelog/2026-09-10-ai-scan-for-pull-request-apis-in-public-preview/" target="_blank" rel="noopener noreferrer">📘 API changelog ↗</a></p>
+<ul class="list-disc text-[0.86em] leading-[1.7] !my-0">
+<li><b>PR（GA）:</b> CodeQL 未対応の変更を自動検査。PR 上の助言。</li>
+<li><b>リポジトリ（preview）:</b> デフォルトブランチの全言語を手動スキャン。バックログアラートを作成。</li>
+<li><b>AI アプリ / エージェント（preview）:</b> PR の間接的プロンプトインジェクションを検出。</li>
+</ul>
+<p class="det-doc">2026-11-11 時点。<a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan" target="_blank" rel="noopener noreferrer">📘 対象範囲と利用条件 ↗</a></p>
 </div>
 </details>
 <details class="det-pick" name="cs-vs-codeql">
@@ -281,10 +297,13 @@ select ifstmt, "This if-statement is redundant."  // ④ 何をどう報告す�
 </div>
 </details>
 <details class="ctl-item" name="cs-capabilities">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🤖</span><span class="ctl-name">AI Scan</span><span class="ctl-when">PR のみ</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🤖</span><span class="ctl-name">AI Scan</span><span class="ctl-when">PR / リポジトリ / AI アプリ</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">CodeQL が対応しない範囲を AI が検査: <b>PHP / Shell / Terraform / Dockerfile</b></span></p>
-<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v"><b>PR のみ</b>。リポジトリ全体のスキャン、バックログのアラート、マージゲートはなし。Code scanning と AI Scan を有効化する。<b>CodeQL default setup は不要</b></span></p>
+<ul class="list-disc text-[0.88em] leading-[1.6] !my-0">
+<li><b>PR（GA）:</b> CodeQL 未対応の変更を自動検査。PR 上の助言。</li>
+<li><b>リポジトリ（preview）:</b> デフォルトブランチの全言語を手動スキャン。バックログアラートを作成。</li>
+<li><b>AI アプリ / エージェント（preview）:</b> PR の間接的プロンプトインジェクションを検出。</li>
+</ul>
 </div>
 </details>
 <details class="ctl-item" name="cs-capabilities">
@@ -370,7 +389,7 @@ Copilot Autofix は **対応するアラートに修正パッチを提案**す�
 <p class="demo-step-title">CODEQL と AI 検出を見分ける</p>
 <p><a href="https://github.com/octodemo/octocat_supply-automatic-octo-funicular/pull/57#discussion_r3976259388" target="_blank" rel="noopener noreferrer">CodeQL の XSS 指摘 ↗</a> は <code class="demo-path">api/src/routes/cart.ts</code>。ルール名と <b>Show more details</b> から Security のアラートへ進める。</p>
 <p><code class="demo-path">CartShareController.php</code> の <a href="https://github.com/octodemo/octocat_supply-automatic-octo-funicular/pull/57#discussion_r3976270848" target="_blank" rel="noopener noreferrer">AI の SQL injection 指摘 ↗</a> と <a href="https://github.com/octodemo/octocat_supply-automatic-octo-funicular/pull/57#discussion_r3976270856" target="_blank" rel="noopener noreferrer">command injection 指摘 ↗</a> では、リスクの説明と修正案を見せる。</p>
-<p class="demo-out">投稿者は同じ bot でも、AI 検出は <b>PR 上のみ</b>。Security のバックログアラートにはならない。</p>
+<p class="demo-out">この <b>AI Scan for pull requests</b> の検出結果は PR 上に残る。別機能の <b>AI Scan for repositories</b> は Security にバックログアラートを作成する。</p>
 </li>
 <li>
 <p class="demo-step-title">検出から AGENTIC AUTOFIX へ</p>
@@ -545,8 +564,9 @@ Copilot Autofix は **対応するアラートに修正パッチを提案**す�
 </li>
 <li>
 <p class="demo-step-title">4. AI SCAN</p>
-<p><a href="https://github.com/enterprises/octodemo" target="_blank" rel="noopener noreferrer">octodemo ↗</a> → <b>Policies → Advanced Security → AI Scan</b>、次に <a href="https://github.com/organizations/theomonfort-org/settings/security_analysis" target="_blank" rel="noopener noreferrer">theomonfort-org → Global settings ↗</a> → <b>AI Scan</b> を開く。</p>
-<p class="demo-out">Enterprise の許可と Code Security AI Credits 予算を確認。Org での有効化は対象 repo 全体に影響するため、画面紹介では切り替えない。</p>
+<p><a href="https://github.com/enterprises/octodemo" target="_blank" rel="noopener noreferrer">octodemo ↗</a> → <b>Policies → Advanced Security → AI Scan</b>、次に <a href="https://github.com/organizations/theomonfort-org/settings/security_analysis" target="_blank" rel="noopener noreferrer">theomonfort-org → Global settings ↗</a>。別々の設定である <b>AI Scan for pull requests</b>、<b>AI Scan for repositories</b>、<b>Scan for AI applications</b> を見せる。</p>
+<p>リポジトリスキャンは <a href="https://github.com/theomonfort-org/ghas-test-1/security/code-scanning" target="_blank" rel="noopener noreferrer">Security and quality → Code scanning ↗</a> → 右上の <b>AI Scan → Standard scan</b>。検出結果はこの一覧に表示され、ツールを <b>AI Scan</b> で絞り込める。</p>
+<p class="demo-out">Enterprise の許可と Code Security AI Credits 予算を確認。Org の設定は対象 repo 全体に影響する。画面紹介では設定を切り替えず、有料スキャンも開始しない。</p>
 </li>
 <li>
 <p class="demo-step-title">5. AI による修正支援</p>
@@ -585,9 +605,10 @@ Copilot Autofix は **対応するアラートに修正パッチを提案**す�
 </div>
 </details>
 <details class="ctl-item" name="cs-start">
-<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-4" /><span class="ctl-icon">4</span><span class="ctl-name" id="cs-start-4">PR 向けの AI Scan を有効化</span><span class="ctl-when">AI SCAN</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections#enabling-ai-scan" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-4" /><span class="ctl-icon">4</span><span class="ctl-name" id="cs-start-4">AI Scan の対象範囲を選ぶ</span><span class="ctl-when">AI SCAN</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan#managing-ai-scan" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">有効化</span><span class="ctl-v"><a class="retro-link" href="https://github.com/organizations/ORG/settings/security_analysis" target="_blank" rel="noopener noreferrer">Org settings ↗</a>: Enterprise の許可と <b>Code Security AI Credits</b> 予算を確認してから、Org 全体の対象 repo で有効化。PR 上の助言のみで、merge ブロックやバックログはなし。</span></p>
+<p class="ctl-row"><span class="ctl-k">有効化</span><span class="ctl-v"><a class="retro-link" href="https://github.com/organizations/ORG/settings/security_analysis" target="_blank" rel="noopener noreferrer">Org settings ↗</a>: Enterprise の許可、各機能の利用条件、<b>AI credits</b> 予算を確認。<b>PR スキャン</b>、<b>リポジトリスキャン</b>、<b>Scan for AI applications</b> は個別に有効化し、repo ごとにオプトアウトできる。</span></p>
+<p class="ctl-row"><span class="ctl-k">実行</span><span class="ctl-v">PR 検出器は自動実行され、結果は助言扱い。リポジトリスキャンは <b>Code scanning → AI Scan</b> から手動実行し、CodeQL 対応言語も含むデフォルトブランチの全言語を対象にする。一定の予算内でコードを選んで調べるため、全ファイルを網羅するものではない。AI Scan に <b>CodeQL default setup は不要</b>。</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-start">
@@ -691,7 +712,7 @@ jobs:
 <div class="spec-list">
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔎</span><span class="spec-key">AI Scan</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what"><b>2026-10-26 時点</b>: PR の自動検知は、修正依頼がなくても <b>Code Security AI Credits</b> を消費。<b>組織所有の repo</b> では、<b>PR 作成者の個人クレジットではなく</b>、組織の課金アカウント（単独の Org または Enterprise）が負担する。Copilot ライセンス不要。<a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections#billing" target="_blank" rel="noopener noreferrer">課金 Docs ↗</a></p>
+<p class="spec-what"><b>2026-11-11 時点</b>: PR の自動スキャンとリポジトリの手動スキャンは、修正依頼がなくても <b>Code Security AI Credits</b> を消費。<b>組織所有の repo</b> では、<b>実行のきっかけとなったユーザーの個人クレジットではなく</b>、組織の課金アカウント（単独の Org または Enterprise）が負担する。どちらも Copilot ライセンス不要。<a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan-for-repositories#billing" target="_blank" rel="noopener noreferrer">リポジトリスキャンの課金 ↗</a>。別機能の <b>AI アプリ検出器</b>には独自の<a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-applications-scanning-for-pull-requests#billing" target="_blank" rel="noopener noreferrer">ライセンスと AI credits の条件 ↗</a>がある。</p>
 </details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🆓</span><span class="spec-key">Copilot Autofix</span><span class="spec-toggle" aria-hidden="true"></span></summary>

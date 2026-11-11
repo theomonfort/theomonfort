@@ -18,11 +18,23 @@ links:
     label: About code scanning
     url: https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning
   - group: 📖 Official Documentation
+    label: About AI Scan
+    url: https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan
+  - group: 📖 Official Documentation
     label: AI Scan for pull requests
     url: https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections
   - group: 📖 Official Documentation
+    label: AI Scan for repositories
+    url: https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan-for-repositories
+  - group: 📖 Official Documentation
+    label: AI applications scanning for pull requests
+    url: https://docs.github.com/en/code-security/concepts/code-scanning/ai-applications-scanning-for-pull-requests
+  - group: 📰 Recent Changelog
     label: "Changelog: AI Scan for pull request APIs (public preview)"
     url: https://github.blog/changelog/2026-09-10-ai-scan-for-pull-request-apis-in-public-preview/
+  - group: 📰 Recent Changelog
+    label: "AI Scan for repositories public preview (2026-10-28)"
+    url: https://github.blog/changelog/2026-10-28-ai-scan-for-repositories-in-public-preview
   - group: 📖 Official Documentation
     label: Resolving code scanning alerts
     url: https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts
@@ -92,7 +104,7 @@ links:
 
 ## Code scanning is not CodeQL <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**Code scanning is the GitHub feature; CodeQL is one analysis engine.** AI findings complement it on pull requests, and third-party tools can supply SARIF results.
+**Code scanning is the GitHub feature; CodeQL is one analysis engine.** AI Scan complements it on pull requests and the default branch, and third-party tools can supply SARIF results.
 
 <div class="det-widget det-compact">
 <p class="det-hint">▸ CLICK FOR DETAILS</p>
@@ -115,11 +127,15 @@ links:
 </div>
 </details>
 <details class="det-pick" name="cs-vs-codeql">
-<summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI Scan (PR only)</span></summary>
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI Scan</span></summary>
 <div class="det-pane">
 <p class="det-head"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-title">AI Scan</span></p>
-<p class="det-why"><b>Complements CodeQL</b> for uncovered languages and frameworks, such as PHP, Bash, HCL and Dockerfiles. <b>Pull requests only</b>: no full-repo scan or backlog alerts. Advisory, not a merge gate. Requires code scanning and AI Scan enabled, <b>not CodeQL default setup</b>. Uses <b>Code Security AI Credits</b>; organization enablement and repository opt-out are available through the UI or REST API.</p>
-<p class="det-doc">As of 2026-10-22: no Copilot license required. Private/internal organization repos need Code Security or GHAS. <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">📘 Docs ↗</a> / <a class="retro-link" href="https://github.blog/changelog/2026-09-10-ai-scan-for-pull-request-apis-in-public-preview/" target="_blank" rel="noopener noreferrer">📘 API changelog ↗</a></p>
+<ul class="list-disc text-[0.86em] leading-[1.7] !my-0">
+<li><b>PRs (GA):</b> Changes outside CodeQL coverage; automatic, advisory.</li>
+<li><b>Repositories (preview):</b> Any language on the default branch; on demand, backlog alerts.</li>
+<li><b>AI apps / agents (preview):</b> Indirect prompt injection in PRs.</li>
+</ul>
+<p class="det-doc">As of 2026-11-11. <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan" target="_blank" rel="noopener noreferrer">📘 Coverage and requirements ↗</a></p>
 </div>
 </details>
 <details class="det-pick" name="cs-vs-codeql">
@@ -281,10 +297,13 @@ The whole language is that shape: **`where` is the definition of "what the bug l
 </div>
 </details>
 <details class="ctl-item" name="cs-capabilities">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🤖</span><span class="ctl-name">AI Scan</span><span class="ctl-when">PRs only</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🤖</span><span class="ctl-name">AI Scan</span><span class="ctl-when">PRs / repositories / AI apps</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">AI flags risks in what CodeQL does not cover: <b>PHP, Shell, Terraform, Dockerfile</b></span></p>
-<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v"><b>PRs only</b>: no full-repo scan, no backlog alerts, not a merge gate. Enable code scanning and AI Scan; <b>CodeQL default setup is not required</b></span></p>
+<ul class="list-disc text-[0.88em] leading-[1.6] !my-0">
+<li><b>PRs (GA):</b> Changes outside CodeQL coverage; automatic, advisory.</li>
+<li><b>Repositories (preview):</b> Any language on the default branch; on demand, backlog alerts.</li>
+<li><b>AI apps / agents (preview):</b> Indirect prompt injection in PRs.</li>
+</ul>
 </div>
 </details>
 <details class="ctl-item" name="cs-capabilities">
@@ -370,7 +389,7 @@ Copilot Autofix can generate a **suggested patch for an eligible alert**. You re
 <p class="demo-step-title">TELL CODEQL AND AI FINDINGS APART</p>
 <p>The <a href="https://github.com/octodemo/octocat_supply-automatic-octo-funicular/pull/57#discussion_r3976259388" target="_blank" rel="noopener noreferrer">CodeQL XSS comment ↗</a> is on <code class="demo-path">api/src/routes/cart.ts</code>. Show the rule title and follow <b>Show more details</b> to the Security alert.</p>
 <p>For <code class="demo-path">CartShareController.php</code>, show the risk explanation and fix advice in the <a href="https://github.com/octodemo/octocat_supply-automatic-octo-funicular/pull/57#discussion_r3976270848" target="_blank" rel="noopener noreferrer">AI SQL injection comment ↗</a> and <a href="https://github.com/octodemo/octocat_supply-automatic-octo-funicular/pull/57#discussion_r3976270856" target="_blank" rel="noopener noreferrer">command injection comment ↗</a>.</p>
-<p class="demo-out">The author is the same bot, but AI findings are <b>PR-only</b> and do not become backlog alerts in Security.</p>
+<p class="demo-out">These <b>AI Scan for pull requests</b> findings stay on the PR. The separate <b>AI Scan for repositories</b> creates backlog alerts in Security.</p>
 </li>
 <li>
 <p class="demo-step-title">FROM FINDING TO AGENTIC AUTOFIX</p>
@@ -545,8 +564,9 @@ Detection is the easy half; **what happens after the alert** is the real work. A
 </li>
 <li>
 <p class="demo-step-title">4. AI SCAN</p>
-<p><a href="https://github.com/enterprises/octodemo" target="_blank" rel="noopener noreferrer">octodemo ↗</a> → <b>Policies → Advanced Security → AI Scan</b>, then <a href="https://github.com/organizations/theomonfort-org/settings/security_analysis" target="_blank" rel="noopener noreferrer">theomonfort-org → Global settings ↗</a> → <b>AI Scan</b>.</p>
-<p class="demo-out">Confirm enterprise permission and the Code Security AI Credits budget. Organization enablement affects all eligible repositories; show the controls without toggling them.</p>
+<p><a href="https://github.com/enterprises/octodemo" target="_blank" rel="noopener noreferrer">octodemo ↗</a> → <b>Policies → Advanced Security → AI Scan</b>, then <a href="https://github.com/organizations/theomonfort-org/settings/security_analysis" target="_blank" rel="noopener noreferrer">theomonfort-org → Global settings ↗</a>. Show the separate controls: <b>AI Scan for pull requests</b>, <b>AI Scan for repositories</b>, and <b>Scan for AI applications</b>.</p>
+<p>For repository scans, open <a href="https://github.com/theomonfort-org/ghas-test-1/security/code-scanning" target="_blank" rel="noopener noreferrer">Security and quality → Code scanning ↗</a> → <b>AI Scan</b> (top right) → <b>Standard scan</b>. Findings appear in this alert list; filter by the <b>AI Scan</b> tool.</p>
+<p class="demo-out">Confirm enterprise permission and the Code Security AI Credits budget. Organization controls affect all eligible repositories. Show the controls and scan menu without toggling settings or starting a paid scan.</p>
 </li>
 <li>
 <p class="demo-step-title">5. ASSISTED REMEDIATION</p>
@@ -585,9 +605,10 @@ Validate detection, protect new code, then reduce the backlog.
 </div>
 </details>
 <details class="ctl-item" name="cs-start">
-<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-4" /><span class="ctl-icon">4</span><span class="ctl-name" id="cs-start-4">Enable AI Scan for pull requests</span><span class="ctl-when">AI SCAN</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections#enabling-ai-scan" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-4" /><span class="ctl-icon">4</span><span class="ctl-name" id="cs-start-4">Choose your AI Scan coverage</span><span class="ctl-when">AI SCAN</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan#managing-ai-scan" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">Opt in</span><span class="ctl-v"><a class="retro-link" href="https://github.com/organizations/ORG/settings/security_analysis" target="_blank" rel="noopener noreferrer">Org settings ↗</a>: enterprise permission + <b>Code Security AI Credits</b> budget first; then enable org-wide for eligible repos. PR-only advice, no merge gate or backlog.</span></p>
+<p class="ctl-row"><span class="ctl-k">Opt in</span><span class="ctl-v"><a class="retro-link" href="https://github.com/organizations/ORG/settings/security_analysis" target="_blank" rel="noopener noreferrer">Org settings ↗</a>: check enterprise permission, each feature's eligibility and <b>AI credits</b> budget. Enable <b>PR scanning</b>, <b>repository scanning</b>, and <b>Scan for AI applications</b> separately; repositories can opt out.</span></p>
+<p class="ctl-row"><span class="ctl-k">Run</span><span class="ctl-v">PR detectors run automatically and are advisory. Repository scans run on demand from <b>Code scanning → AI Scan</b>, across all languages on the default branch, including CodeQL-supported ones. They select code within a fixed budget, not every file. <b>CodeQL default setup is not required</b> for AI Scan.</span></p>
 </div>
 </details>
 <details class="ctl-item" name="cs-start">
@@ -691,7 +712,7 @@ jobs:
 <div class="spec-list">
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔎</span><span class="spec-key">AI Scan</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what">As of <b>2026-10-26</b>: automatic PR detection consumes <b>Code Security AI Credits</b>, even without a fix request. On an <b>organization-owned repo</b>, the organization's billing account pays (standalone org or enterprise), <b>not the PR author's personal credits</b>. No Copilot license required. <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections#billing" target="_blank" rel="noopener noreferrer">Billing docs ↗</a></p>
+<p class="spec-what">As of <b>2026-11-11</b>: automatic PR scans and on-demand repository scans consume <b>Code Security AI Credits</b>, even without a fix request. On an <b>organization-owned repo</b>, the organization's billing account pays (standalone org or enterprise), <b>not the initiating user's personal credits</b>. Neither requires a Copilot license. <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan-for-repositories#billing" target="_blank" rel="noopener noreferrer">Repository scan billing ↗</a>. The separate <b>AI applications</b> detector has its own <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-applications-scanning-for-pull-requests#billing" target="_blank" rel="noopener noreferrer">licensing and AI credit requirements ↗</a>.</p>
 </details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🆓</span><span class="spec-key">Copilot Autofix</span><span class="spec-toggle" aria-hidden="true"></span></summary>
