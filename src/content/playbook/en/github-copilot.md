@@ -12,17 +12,29 @@ accent:
   hex: "#00f0ff"
 order: 2
 category: introduction
-related: ['github', 'copilot-chat', 'cloud-agent']
+related: ['github', 'copilot-chat', 'copilot-app', 'cloud-agent']
 links:
-  - label: GitHub Copilot
+  - group: 📖 Official Documentation
+    label: GitHub Copilot
     url: https://github.com/features/copilot
-  - label: Copilot Trust Center
+  - group: 📖 Official Documentation
+    label: Copilot Trust Center
     url: https://resources.github.com/copilot-trust-center/
-  - label: Copilot Docs
+  - group: 📖 Official Documentation
+    label: Copilot Docs
     url: https://docs.github.com/copilot
+  - group: 📖 Official Documentation
+    label: GitHub Copilot app
+    url: https://docs.github.com/en/copilot/concepts/copilot-surfaces/github-copilot-app
+  - group: 📖 Official Documentation
+    label: Copilot Fusion, effort levels and billing
+    url: https://docs.github.com/en/copilot/concepts/models/copilot-fusion
   - group: 📰 Recent Changelog
-    label: "GitHub Copilot app is now available in technical preview (2026-05-14)"
-    url: https://github.blog/changelog/2026-05-14-github-copilot-app-is-now-available-in-technical-preview
+    label: "Copilot Fusion generally available (2026-10-28)"
+    url: https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion
+  - group: 📊 Benchmarks
+    label: "Artificial Analysis: Copilot Fusion Max (2026-10-28)"
+    url: https://artificialanalysis.ai/articles/github-copilot-fusion-orchestrates-anthropic-and-openai-models-to-balance-performance-and-cost
   - group: 📰 Recent Changelog
     label: "GPT-5.5 is generally available for GitHub Copilot (2026-04-24)"
     url: https://github.blog/changelog/2026-04-24-gpt-5-5-is-generally-available-for-github-copilot
@@ -77,18 +89,19 @@ links:
   <div class="ch-tag" data-tone="cyan" style="grid-column: 5 / 6">Usable outside the IDE</div>
 </div>
 
-## AI Models & Surfaces
+## AI Models & Surfaces <a class="h2-doc" href="https://docs.github.com/en/copilot/reference/ai-models/supported-models" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-Available AI models: GPT / Claude / Gemini / Grok / MAI / Kimi, plus support for **custom models** and **BYOK (Bring Your Own Key)**.
+**Models:** GPT / Claude / Gemini / Grok / MAI / Kimi. Custom models and **BYOK** on supported clients; availability depends on plan, client and policy.
 
-Available surfaces:
-
-- **IDE**: VS Code / Visual Studio / JetBrains / Xcode / Eclipse / Neovim
-- **Terminal**: Interact from the shell with Copilot CLI
-- **SDK**: Embed Copilot directly into your own applications
-- **Cloud**: Autonomous execution from the browser via Cloud Agent · Automatic PR review with Copilot Code Review
-- **Automation**: Codify workflows with Agentic Workflow
-- **Web / Mobile**: Chat from GitHub.com and GitHub Mobile · Remote CLI control · Launch Cloud Agents
+| Work from | What you can do |
+| --- | --- |
+| **IDE** | Code in VS Code, Visual Studio, JetBrains, Xcode, Eclipse or Neovim |
+| <a class="retro-link" href="/theomonfort/en/playbook/copilot-app">Copilot App ↗</a> | Direct parallel agents, triage issues and manage PRs |
+| <a class="retro-link" href="/theomonfort/en/playbook/cli">Terminal ↗</a> | Work from your shell with Copilot CLI |
+| <a class="retro-link" href="/theomonfort/en/playbook/cloud-agent">Cloud Agent ↗</a> / <a class="retro-link" href="/theomonfort/en/playbook/copilot-code-review">Code Review ↗</a> | Delegate implementation / review PRs |
+| <a class="retro-link" href="https://github.com/github/copilot-sdk" target="_blank" rel="noopener noreferrer">SDK ↗</a> | Embed Copilot in your own applications |
+| <a class="retro-link" href="/theomonfort/en/playbook/agentic-workflow">Automation ↗</a> | Turn repository tasks into agentic workflows |
+| **Web / Mobile** | Chat, steer remote sessions and launch cloud work |
 
 ## Developer Impact
 
@@ -137,6 +150,82 @@ flowchart LR
 
 </div>
 
+
+## Fusion: Choose Effort, Not a Model <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+Select **Copilot Fusion** and an effort level. Copilot chooses the models and how they work together, returning **one final response**.
+
+- **Automatic planning:** Uses reasoning, coding, debugging and tool-use signals to choose a pattern and per-step reasoning effort.
+- **GA since 2026-10-28:** Available in VS Code, Copilot CLI, Copilot App and JetBrains.
+
+| **60** index score | **About ½** cost and tokens | **About 40%** less time |
+| --- | --- | --- |
+| Within 2 points of the comparison configuration | Average API cost: **$5.59 vs $11.42** per task | Average time per task |
+
+**Benchmark scope:** Fusion Max in Copilot CLI vs Claude Code with Opus 5.5 Max, Artificial Analysis Coding Agent Index v2.0, reported 2026-10-28. These are benchmark results, not guaranteed savings for your tasks.
+
+## Fusion: Effort & Execution Patterns <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+**You choose effort. Fusion chooses the execution pattern.**
+
+| Effort | Best for | Plans |
+| --- | --- | --- |
+| **Standard** | Everyday work, one model per task | All plans |
+| **High** | Complex bugs and multi-file changes | Pro+, Max, Business, Enterprise |
+| **Max** | Deep reasoning and thorough analysis | Pro+, Max, Business, Enterprise |
+
+| Pattern | How it works |
+| --- | --- |
+| **Single** | One model completes the task |
+| **Cascade** | Efficient draft → judge → stronger model if needed |
+| **Critique** | Draft → parallel model critiques → combined feedback → revision |
+
+As of **2026-11-11**; model policies apply. **Fast:** VS Code inline chat only, not selectable. Effort level ≠ model reasoning effort.
+
+## Fusion: From Prompt to Response <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+**Public conceptual flow:** Models and reasoning effort vary per step.
+
+```mermaid
+---
+config:
+  flowchart:
+    nodeSpacing: 25
+    rankSpacing: 35
+---
+flowchart LR
+  Input["Your prompt<br/>+ effort level"] --> Route["Evaluate task<br/>and choose a pattern"]
+  Policy["Plan + model policies<br/>+ model availability"] --> Route
+  Route --> Single["Single<br/>One model"]
+  Route --> Cascade["Cascade<br/>Draft, judge, escalate"]
+  Route --> Critique["Critique<br/>Draft, critique, revise"]
+  Single --> Answer["One final<br/>response"]
+  Cascade --> Answer
+  Critique --> Answer
+
+  classDef input fill:#1a0b2e,stroke:#ff2e88,color:#e8f4ff,stroke-width:2px
+  classDef route fill:#0a0e27,stroke:#00f0ff,color:#e8f4ff,stroke-width:2px
+  classDef result fill:#0a0e27,stroke:#9bbc0f,color:#e8f4ff,stroke-width:2px
+  class Input input
+  class Policy,Route,Single,Cascade,Critique route
+  class Answer result
+```
+
+Fusion **does not start subagents**. Discarded drafts **do not undo file edits**: review changes before committing.
+
+## Fusion: Billing & the Launch Offer <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion#billing-for-copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+**Dated offer, verified 2026-11-11.** The published promotion ends **2026-11-30**.
+
+| <span class="big-stat">30%</span><br/>off model costs | Eligibility | End date |
+| --- | --- | --- |
+| **Copilot Fusion usage only** | Users on **paid Copilot plans** | **November 30, 2026** |
+
+- **Normal billing:** Per-model standard rates, with no separate Fusion charge.
+- **Model costs only:** Not a discount on the subscription price.
+- **Budget:** High / Max can use more models and AI credits than Standard.
+
+Do not assume the discount continues after this date. Check the billing docs for current terms.
 
 ## Why Enterprises Choose Copilot
 

@@ -53,72 +53,31 @@ links:
   <p>今日お話しする <strong>GitHub</strong> は、<strong>2.25 億人以上</strong>の開発者が集う世界最大の AI ネイティブ開発者プラットフォームです（Octoverse、2026 年 9 月時点）。</p>
 </div>
 
-## 進化の歴史
+## 進化の歴史 <a class="h2-doc" href="https://github.blog/news-insights/company-news/github-universe-2026-evolving-every-layer-of-the-stack/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-GitHub の歩みを振り返れば、現在地が見えてくる。
+コードの共同開発から、複数のエージェントによる協働へ。
 
-<figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
-  <defs>
-    <marker id="ghTimelineArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#00f0ff"/>
-    </marker>
-    <filter id="ghTimelineGlow" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur stdDeviation="4.5" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-  </defs>
-  <rect x="0" y="0" width="1100" height="480" fill="none"/>
-  <path d="M 80 430 C 260 440, 380 410, 530 330 C 680 250, 820 160, 1050 30" stroke="#0a0e27" stroke-width="14" fill="none" stroke-linecap="round"/>
-  <path d="M 80 430 C 260 440, 380 410, 530 330 C 680 250, 820 160, 1050 30" stroke="#00f0ff" stroke-width="2.5" fill="none" stroke-linecap="round" marker-end="url(#ghTimelineArrow)"/>
-  <g>
-    <line x1="80" y1="422" x2="80" y2="404" stroke="#00f0ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
-    <circle cx="80" cy="430" r="7" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
-    <rect x="40" y="372" width="80" height="32" rx="16" fill="#0a0e27" stroke="#00f0ff" stroke-width="1.5"/>
-    <text x="80" y="394" text-anchor="middle" fill="#00f0ff" font-size="16" font-weight="bold">2008</text>
-    <text x="80" y="340" text-anchor="middle" fill="#e8f4ff" font-size="18" font-weight="bold">Pull Request</text>
-    <text x="80" y="358" text-anchor="middle" fill="#e8f4ff" font-size="11">共有とコラボの業界標準</text>
-  </g>
-  <g>
-    <line x1="316" y1="406" x2="316" y2="390" stroke="#00f0ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
-    <circle cx="316" cy="414" r="7" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
-    <rect x="244" y="358" width="144" height="32" rx="16" fill="#0a0e27" stroke="#00f0ff" stroke-width="1.5"/>
-    <text x="316" y="380" text-anchor="middle" fill="#00f0ff" font-size="16" font-weight="bold">2012</text>
-    <text x="316" y="325" text-anchor="middle" fill="#e8f4ff" font-size="18" font-weight="bold">GitHub Enterprise</text>
-    <text x="316" y="345" text-anchor="middle" fill="#e8f4ff" font-size="11">大企業の管理・セキュリティ</text>
-  </g>
-  <g>
-    <line x1="530" y1="322" x2="530" y2="302" stroke="#00f0ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
-    <circle cx="530" cy="330" r="7" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
-    <rect x="450" y="270" width="160" height="32" rx="16" fill="#0a0e27" stroke="#00f0ff" stroke-width="1.5"/>
-    <text x="530" y="292" text-anchor="middle" fill="#00f0ff" font-size="16" font-weight="bold">2019</text>
-    <text x="530" y="237" text-anchor="middle" fill="#e8f4ff" font-size="18" font-weight="bold">Actions / GHAS</text>
-    <text x="530" y="257" text-anchor="middle" fill="#e8f4ff" font-size="11">CI/CD と DevSecOps をワークフローに統合</text>
-  </g>
-  <g>
-    <line x1="760" y1="207" x2="760" y2="240" stroke="#00f0ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
-    <circle cx="760" cy="199" r="7" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
-    <rect x="688" y="240" width="144" height="32" rx="16" fill="#0a0e27" stroke="#00f0ff" stroke-width="1.5"/>
-    <text x="760" y="262" text-anchor="middle" fill="#00f0ff" font-size="16" font-weight="bold">2021</text>
-    <text x="760" y="290" text-anchor="middle" fill="#e8f4ff" font-size="18" font-weight="bold">GitHub Copilot</text>
-    <text x="760" y="308" text-anchor="middle" fill="#e8f4ff" font-size="11">世界初の AI コーディングアシスタント</text>
-  </g>
-  <g>
-    <line x1="984" y1="80" x2="984" y2="118" stroke="#00f0ff" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.85"/>
-    <g filter="url(#ghTimelineGlow)">
-      <circle cx="984" cy="68" r="11" fill="#00f0ff"/>
-      <circle cx="984" cy="68" r="4" fill="#05060f"/>
-    </g>
-    <rect x="924" y="118" width="120" height="38" rx="19" fill="#00f0ff" stroke="#00f0ff" stroke-width="2"/>
-    <text x="984" y="144" text-anchor="middle" fill="#05060f" font-size="18" font-weight="bold">2025</text>
-    <text x="984" y="176" text-anchor="middle" fill="#00f0ff" font-size="20" font-weight="bold">Agent HQ</text>
-    <text x="984" y="196" text-anchor="middle" fill="#e8f4ff" font-size="11">AI が自律的に開発を支える時代へ</text>
-    <text x="984" y="216" text-anchor="middle" fill="#e8f4ff" font-size="11">★ 本日はここを中心に</text>
-  </g>
-</svg>
+<figure class="gh-timeline">
+<style>
+.prose-akq .gh-timeline{margin:0;font-family:var(--font-prose),sans-serif;font-size:clamp(17px,1.35vw,21px)}
+.prose-akq .gh-timeline ol{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8em;margin:0;padding:0;list-style:none}
+.prose-akq .gh-timeline li{position:relative;margin:0;padding:.85em 1em;border:1px solid #00f0ff55;background:#0a0e27;line-height:1.45}
+.prose-akq .gh-timeline time{display:block;color:#00f0ff;font-size:1.6em;font-weight:700;line-height:1.1;margin-bottom:.3em}
+.prose-akq .gh-timeline strong{display:block;color:#e8f4ff;font-size:1.05em}
+.prose-akq .gh-timeline span{display:block;color:#a8bed2;font-size:.8em;margin-top:.3em}
+.prose-akq .gh-timeline .gh-timeline-now{border:2px solid #ff2e88;box-shadow:0 0 15px #ff2e8822}
+.prose-akq .gh-timeline-now time{color:#ff2e88}
+@media(max-width:700px){.prose-akq .gh-timeline ol{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:420px){.prose-akq .gh-timeline ol{grid-template-columns:1fr}}
+</style>
+<ol>
+<li><time>2008</time><strong>Pull Request</strong><span>共同開発を当たり前に。</span></li>
+<li><time>2012</time><strong>GitHub Enterprise</strong><span>チームの開発に管理と統制を。</span></li>
+<li><time>2019</time><strong>Actions / GHAS</strong><span>デリバリーとセキュリティを自動化。</span></li>
+<li><time>2021</time><strong>GitHub Copilot</strong><span>AI と一緒にコードを書く。</span></li>
+<li><time>2025</time><strong>Agent HQ</strong><span>タスクを任せ、セッションを管理。</span></li>
+<li class="gh-timeline-now"><time>2026</time><strong>Project / Agent 群</strong><span>目標と文脈を共有し、並列に進める。</span></li>
+</ol>
 </figure>
 
 
@@ -289,12 +248,38 @@ SDLC の **計画 → 実装 → レビュー → テスト・セキュリティ
 - Fortune 100 の **約 90%** が Copilot を採用（[2025](https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx)）
 - 有料 AI コーディングツール市場シェア **約 42%**（[2025](https://www.secondtalent.com/resources/github-copilot-statistics/)）
 
-## プラットフォームの活動が急増中 <a class="h2-doc" href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## 数字で見るエージェント時代 <a class="h2-doc" href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-AI によって、ソフトウェアを作りやすくなりました。**GitHub 上の開発活動は、かつてないペースで増えています。**
-
-<figure class="rpi-pipeline gh-growth">
+<figure class="gh-octoverse">
 <style>
+.prose-akq .gh-octoverse{margin:0;font-family:var(--font-prose),sans-serif;font-size:clamp(16px,1.35vw,20px);line-height:1.45;color:#e8f4ff}
+.prose-akq .gh-octoverse p{margin:0}
+.prose-akq .gh-octo-top{display:flex;justify-content:space-between;gap:1em;padding-bottom:.6em;color:#00f0ff;font-size:.75em;letter-spacing:.1em}
+.prose-akq .gh-octo-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:2px solid #00f0ff;background:#0a0e27}
+.prose-akq .gh-octo-metric{padding:.75em 1.15em}
+.prose-akq .gh-octo-metric+.gh-octo-metric{border-left:1px dashed #00f0ff55}
+.prose-akq .gh-octo-number{display:block;color:#00f0ff;font-size:3.3em;font-weight:700;letter-spacing:-.06em;line-height:1.1;font-variant-numeric:tabular-nums}
+.prose-akq .gh-octo-label{display:block;margin-top:.35em;font-size:.92em}
+.prose-akq .gh-octo-period{display:block;color:#a8bed2;font-size:.76em;margin-top:.2em}
+.prose-akq .gh-octo-body{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:1.7em;padding:1em 0}
+.prose-akq .gh-octo-chart-title{display:flex;justify-content:space-between;gap:1em;font-size:.8em;margin-bottom:.6em}
+.prose-akq .gh-octo-chart-title span{color:#a8bed2}
+.prose-akq .gh-octo-row{display:grid;grid-template-columns:8em minmax(0,1fr) 4em;align-items:center;gap:.65em;margin:.55em 0;font-size:.85em}
+.prose-akq .gh-octo-track{position:relative;height:1.4em;background:#e8f4ff09}
+.prose-akq .gh-octo-track::after{content:"";position:absolute;inset:0 auto 0 28.5714%;border-left:1px dashed #e8f4ff99}
+.prose-akq .gh-octo-bar{display:flex;align-items:center;justify-content:flex-end;height:100%;width:var(--bar);background:var(--bar-color);color:#05060f;padding-right:.3em;font-size:.85em;font-weight:700}
+.prose-akq .gh-octo-total{text-align:right;font-size:1.15em;font-weight:700;font-variant-numeric:tabular-nums}
+.prose-akq .gh-octo-baseline{font-size:.7em;color:#a8bed2}
+.prose-akq .gh-octo-signals{display:grid;align-content:center;gap:1em;padding-left:1.4em;border-left:1px dashed #e8f4ff40}
+.prose-akq .gh-octo-signal{display:grid;grid-template-columns:6em minmax(0,1fr);align-items:center;gap:.6em}
+.prose-akq .gh-octo-signal strong{font-size:1.65em;line-height:1.15;color:#ffb000}
+.prose-akq .gh-octo-signal span{font-size:.78em}
+.prose-akq .gh-octo-signal small{display:block;color:#a8bed2;font-size:.9em;margin-top:.2em}
+.prose-akq .gh-octo-takeaway{display:flex;gap:1em;align-items:center;border-top:1px solid #ffb000;padding:.75em 0 .45em}
+.prose-akq .gh-octo-takeaway span{color:#ffb000;font-size:.65em;letter-spacing:.08em}
+.prose-akq .gh-octo-takeaway strong{font-size:1.05em;line-height:1.4}
+.prose-akq .gh-octoverse figcaption{font-size:.66em;line-height:1.5;color:#a8bed2;margin-top:.5em}
+@media(max-width:700px){.prose-akq .gh-octo-metric{padding:.75em .5em}.prose-akq .gh-octo-number{font-size:2.4em}.prose-akq .gh-octo-body{grid-template-columns:1fr;gap:1em}.prose-akq .gh-octo-signals{padding:1em 0 0;border-left:0;border-top:1px dashed #e8f4ff40;grid-template-columns:1fr 1fr}.prose-akq .gh-octo-signal{grid-template-columns:1fr;gap:.3em}.prose-akq .gh-octo-top{letter-spacing:0}.prose-akq .gh-octo-takeaway{align-items:flex-start}}
 .prose-akq .gh-growth{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.2em 0;font-family:var(--font-prose),sans-serif}
 .prose-akq .gh-growth svg{display:block;width:100%;height:auto;color:#9bbc0f;font-family:inherit}
 .prose-akq .gh-growth .gh-frame{fill:#0a0e27;stroke:currentColor;stroke-width:2}
@@ -311,84 +296,28 @@ AI によって、ソフトウェアを作りやすくなりました。**GitHub
 @media(max-width:700px){.prose-akq .gh-growth{grid-template-columns:1fr}}
 @media(min-width:701px) and (max-height:800px){body.present-mode .prose-akq .gh-growth svg{max-height:280px}}
 </style>
-<svg viewBox="0 0 520 390" role="img" aria-labelledby="gh-commits-title gh-commits-desc">
-<title id="gh-commits-title">GitHub の年間コミット数</title>
-<desc id="gh-commits-desc">2024 年：100 億。2025 年：129 億。2026 年：343 億。縦軸は 0〜400 億の線形スケール。</desc>
-<defs><linearGradient id="gh-commit-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9bbc0f"/><stop offset="1" stop-color="#0a0e27"/></linearGradient></defs>
-<rect class="gh-frame" x="8" y="24" width="504" height="358"/>
-<path class="gh-corners" d="M 14 42 v -12 h 12 M 486 30 h 20 v 12 M 14 364 v 12 h 12 M 486 376 h 20 v -12"/>
-<rect x="28" y="4" width="250" height="38" fill="#05060f" stroke="currentColor" stroke-width="2"/>
-<text class="gh-label" x="153" y="30">▮ コミット数 / 年</text>
-<path class="gh-grid" d="M 74 70 H 470 M 74 185 H 470"/>
-<path d="M 74 300 H 470" stroke="#2a3050" stroke-width="2"/>
-<text class="gh-axis" x="44" y="75">400億</text><text class="gh-axis" x="44" y="190">200億</text><text class="gh-axis" x="44" y="305">0</text>
-<rect x="85" y="242.5" width="60" height="57.5" fill="#0e1430" stroke="currentColor" stroke-width="2"/>
-<rect x="215" y="225.825" width="60" height="74.175" fill="#0e1430" stroke="currentColor" stroke-width="2"/>
-<rect x="345" y="102.775" width="60" height="197.225" fill="url(#gh-commit-fill)" stroke="currentColor" stroke-width="2"/>
-<text x="115" y="230">100 億</text><text x="245" y="213">129 億</text><text class="gh-peak gh-glow" x="375" y="88">343 億</text>
-<text class="gh-axis" x="115" y="325">2024</text><text class="gh-axis" x="245" y="325">2025</text><text class="gh-axis" x="375" y="325">2026</text>
-<text class="gh-label" x="260" y="360">2024 年の 3.4 倍</text>
-</svg>
-<svg viewBox="0 0 520 390" role="img" aria-labelledby="gh-actions-title gh-actions-desc" style="color:#00f0ff">
-<title id="gh-actions-title">GitHub Actions の年間ジョブ数</title>
-<desc id="gh-actions-desc">2024 年：80 億ジョブ。2025 年：140 億ジョブ。2026 年：454 億ジョブ。縦軸は 0〜500 億の線形スケール。</desc>
-<rect class="gh-frame" x="8" y="24" width="504" height="358"/>
-<path class="gh-corners" d="M 14 42 v -12 h 12 M 486 30 h 20 v 12 M 14 364 v 12 h 12 M 486 376 h 20 v -12"/>
-<rect x="28" y="4" width="310" height="38" fill="#05060f" stroke="currentColor" stroke-width="2"/>
-<text class="gh-label" x="183" y="30">▮ Actions ジョブ数 / 年</text>
-<path class="gh-grid" d="M 74 70 H 470 M 74 185 H 470"/>
-<path d="M 74 300 H 470" stroke="#2a3050" stroke-width="2"/>
-<text class="gh-axis" x="44" y="75">500億</text><text class="gh-axis" x="44" y="190">250億</text><text class="gh-axis" x="44" y="305">0</text>
-<path d="M 115 300 V 263.2 L 245 235.6 L 375 91.16 V 300 Z" fill="currentColor" opacity=".08"/>
-<polyline class="gh-line" points="115,263.2 245,235.6 375,91.16"/>
-<circle class="gh-point" cx="115" cy="263.2" r="6"/><circle class="gh-point" cx="245" cy="235.6" r="6"/><circle class="gh-point gh-glow" cx="375" cy="91.16" r="9"/>
-<text x="115" y="248">80 億</text><text x="245" y="267">140 億</text><text class="gh-peak" x="375" y="74">454 億</text>
-<text class="gh-axis" x="115" y="325">2024</text><text class="gh-axis" x="245" y="325">2025</text><text class="gh-axis" x="375" y="325">2026</text>
-<text class="gh-label" x="260" y="360">2024 年の 5.7 倍</text>
-</svg>
-<figcaption>公開・非公開リポジトリの年間合計（各年 9 月 30 日までの 12 か月）。</figcaption>
-</figure>
-
-## 開発アウトプットも急増中 <a class="h2-doc" href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
-
-**作る人が増え、作られるソフトウェアも増えています。** リポジトリや PR が増え、GitHub のトラフィックも急増しています。
-
-<figure class="rpi-pipeline gh-growth">
-<svg viewBox="0 0 520 390" role="img" aria-labelledby="gh-prs-title gh-prs-desc">
-<title id="gh-prs-title">年間のマージされたプルリクエスト数</title>
-<desc id="gh-prs-desc">2024 年：4.02 億。2025 年：5.38 億。2026 年：13 億。縦軸は 0〜15 億の線形スケール。</desc>
-<rect class="gh-frame" x="8" y="24" width="504" height="358"/>
-<path class="gh-corners" d="M 14 42 v -12 h 12 M 486 30 h 20 v 12 M 14 364 v 12 h 12 M 486 376 h 20 v -12"/>
-<rect x="28" y="4" width="300" height="38" fill="#05060f" stroke="currentColor" stroke-width="2"/>
-<text class="gh-label" x="178" y="30">▮ マージされた PR / 年</text>
-<path class="gh-grid" d="M 74 70 H 470 M 74 185 H 470"/>
-<path d="M 74 300 H 470" stroke="#2a3050" stroke-width="2"/>
-<text class="gh-axis" x="44" y="75">15億</text><text class="gh-axis" x="44" y="190">7.5億</text><text class="gh-axis" x="44" y="305">0</text>
-<path d="M 115 300 V 238.36 L 245 217.507 L 375 100.667 V 300 Z" fill="currentColor" opacity=".08"/>
-<polyline class="gh-line" points="115,238.36 245,217.507 375,100.667"/>
-<circle class="gh-point" cx="115" cy="238.36" r="6"/><circle class="gh-point" cx="245" cy="217.507" r="6"/><circle class="gh-point gh-glow" cx="375" cy="100.667" r="9"/>
-<text x="115" y="222">4.02 億</text><text x="245" y="249">5.38 億</text><text class="gh-peak" x="375" y="83">13 億</text>
-<text class="gh-axis" x="115" y="325">2024</text><text class="gh-axis" x="245" y="325">2025</text><text class="gh-axis" x="375" y="325">2026</text>
-<text class="gh-label" x="260" y="360">2024 年の 3.2 倍</text>
-</svg>
-<svg viewBox="0 0 520 390" role="img" aria-labelledby="gh-pushes-title gh-pushes-desc" style="color:#ffb000">
-<title id="gh-pushes-title">年間のコードプッシュ数</title>
-<desc id="gh-pushes-desc">2024 年：52 億。2025 年：67 億。2026 年：179 億。縦軸は 0〜200 億の線形スケール。</desc>
-<rect class="gh-frame" x="8" y="24" width="504" height="358"/>
-<path class="gh-corners" d="M 14 42 v -12 h 12 M 486 30 h 20 v 12 M 14 364 v 12 h 12 M 486 376 h 20 v -12"/>
-<rect x="28" y="4" width="300" height="38" fill="#05060f" stroke="currentColor" stroke-width="2"/>
-<text class="gh-label" x="178" y="30">▮ コードのプッシュ / 年</text>
-<path class="gh-grid" d="M 74 70 H 470 M 74 185 H 470"/>
-<path d="M 74 300 H 470" stroke="#2a3050" stroke-width="2"/>
-<text class="gh-axis" x="44" y="75">200億</text><text class="gh-axis" x="44" y="190">100億</text><text class="gh-axis" x="44" y="305">0</text>
-<path d="M 115 300 V 240.2 L 245 222.95 L 375 94.15 V 300 Z" fill="currentColor" opacity=".08"/>
-<polyline class="gh-line" points="115,240.2 245,222.95 375,94.15"/>
-<circle class="gh-point" cx="115" cy="240.2" r="6"/><circle class="gh-point" cx="245" cy="222.95" r="6"/><circle class="gh-point gh-glow" cx="375" cy="94.15" r="9"/>
-<text x="115" y="224">52 億</text><text x="245" y="254">67 億</text><text class="gh-peak" x="375" y="77">179 億</text>
-<text class="gh-axis" x="115" y="325">2024</text><text class="gh-axis" x="245" y="325">2025</text><text class="gh-axis" x="375" y="325">2026</text>
-<text class="gh-label" x="260" y="360">2024 年の 3.4 倍</text>
-</svg>
-<figcaption>公開・非公開リポジトリの年間合計（各年 9 月 30 日までの 12 か月）。</figcaption>
+<div class="gh-octo-top"><span>OCTOVERSE 2026</span><span>最初の一手は、エージェントへ</span></div>
+<div class="gh-octo-metrics">
+<div class="gh-octo-metric"><strong class="gh-octo-number">&gt;40%</strong><span class="gh-octo-label">の PR がエージェントから始まる</span><span class="gh-octo-period">2026 年 9 月</span></div>
+<div class="gh-octo-metric"><strong class="gh-octo-number">1.1億</strong><span class="gh-octo-label">エージェントが作成した PR</span><span class="gh-octo-period">2026 年 9 月の 1 か月間</span></div>
+<div class="gh-octo-metric"><strong class="gh-octo-number">約6倍</strong><span class="gh-octo-label">エージェント起点の PR 件数</span><span class="gh-octo-period">2026 年 3 月 → 9 月</span></div>
+</div>
+<div class="gh-octo-body">
+<div>
+<div class="gh-octo-chart-title"><strong>年間の開発活動</strong><span>2026 年の合計 / 前年比</span></div>
+<div class="gh-octo-row"><span>プッシュ</span><div class="gh-octo-track"><span class="gh-octo-bar" style="--bar:76.33%;--bar-color:#ffb000">2.7倍</span></div><strong class="gh-octo-total">179億</strong></div>
+<div class="gh-octo-row"><span>コミット</span><div class="gh-octo-track"><span class="gh-octo-bar" style="--bar:75.97%;--bar-color:#ff2e88">2.7倍</span></div><strong class="gh-octo-total">343億</strong></div>
+<div class="gh-octo-row"><span>Actions ジョブ</span><div class="gh-octo-track"><span class="gh-octo-bar" style="--bar:92.65%;--bar-color:#00f0ff">3.2倍</span></div><strong class="gh-octo-total">454億</strong></div>
+<div class="gh-octo-row"><span>マージ済み PR</span><div class="gh-octo-track"><span class="gh-octo-bar" style="--bar:69.04%;--bar-color:#9bbc0f">2.4倍</span></div><strong class="gh-octo-total">13億</strong></div>
+<p class="gh-octo-baseline">破線：2025 年 = 1 倍。全行共通の目盛り：0〜3.5 倍。</p>
+</div>
+<div class="gh-octo-signals">
+<div class="gh-octo-signal"><strong>&gt;90%</strong><span>AI コードレビューと GitHub Advanced Security、いずれも利用が前年比 90% 超増加</span></div>
+<div class="gh-octo-signal"><strong>715万</strong><span>日本の開発者数<small>世界 5 位 / 2026 年 9 月</small></span></div>
+</div>
+</div>
+<div class="gh-octo-takeaway"><span>示唆</span><strong>エージェントが書くほど、レビュー、検証、統制がボトルネックに。</strong></div>
+<figcaption>出典：Octoverse 2026。公開 + 非公開リポジトリ。年間合計：2025 年 10 月〜2026 年 9 月、比較対象：2024 年 10 月〜2025 年 9 月。倍率は公表値から算出。示唆は本資料の解釈。</figcaption>
 </figure>
 
 ## 月間の開発活動も急増
@@ -443,22 +372,29 @@ AI によって、ソフトウェアを作りやすくなりました。**GitHub
 
 ## AI 開発への投資 <a class="h2-doc" href="https://github.blog/news-insights/company-news/github-universe-2026-evolving-every-layer-of-the-stack/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-世界の AI 開発をリードするプラットフォームであり続けるために、GitHub は **大規模なインフラ投資**を続けています。
-
-<div class="tbl-fit gh-investment">
+<div class="gh-investment">
 <style>
-body.present-mode .prose-akq .tbl-fit.gh-investment th,
-body.present-mode .prose-akq .tbl-fit.gh-investment td{padding:.2em .9em;line-height:1.25}
+.prose-akq .gh-investment{max-width:60rem;margin:0 auto;text-align:center;font-family:var(--font-prose),sans-serif}
+.prose-akq h2:has(+ .gh-investment){width:fit-content;margin-inline:auto;text-align:center}
+.prose-akq .gh-investment .gh-invest-lead{margin:0 auto 1.4em;max-width:38em;text-wrap:balance}
+.prose-akq .gh-invest-kicker{color:#a8bed2;font-size:.65em;letter-spacing:.12em;margin:0 0 .6em}
+.prose-akq .gh-invest-resources{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:1.1em 0;border-block:1px solid #00f0ff;background:#0a0e2799}
+.prose-akq .gh-invest-resource{padding:.35em .6em}
+.prose-akq .gh-invest-resource+.gh-invest-resource{border-left:1px dashed #00f0ff55}
+.prose-akq .gh-invest-resource strong{display:block;color:#00f0ff;font-size:clamp(1.7rem,3.8vw,3.6rem);line-height:1.2;letter-spacing:-.04em;white-space:nowrap}
+.prose-akq .gh-invest-resource span{display:block;margin-top:.5em;font-size:.8em}
+.prose-akq .gh-investment .gh-invest-test{margin:1.5em auto 0;max-width:44em;font-size:.75em;line-height:1.65;text-wrap:balance}
+.prose-akq .gh-invest-test strong{color:#ffb000}
+@media(max-width:600px){.prose-akq .gh-invest-resources{grid-template-columns:1fr;padding:0 1em}.prose-akq .gh-invest-resource{padding:1em 0}.prose-akq .gh-invest-resource+.gh-invest-resource{border-left:0;border-top:1px dashed #00f0ff55}}
 </style>
-
-| インフラ | 2026 年に追加した容量 |
-| --- | --- |
-| 計算リソース | **CPU コア +400 万** |
-| 高速ストレージ | **+160 PB** |
-| ネットワーク容量 | **+50 Tb/s** |
-
-<p style="font-size:.75em;line-height:1.5;margin:1em 0 0">Git インフラも刷新中。負荷テストでは、<strong>1 つのモノレポで 5,000 の「angry agents」が毎秒 7,200 件の書き込みを達成</strong>。さらなる処理能力の向上を進めています。<a class="retro-link" href="https://www.youtube.com/watch?v=MZfqId_rrB0" target="_blank" rel="noopener noreferrer">Universe セッション ↗</a></p>
-
+<p class="gh-invest-lead">AI 開発を支えるために、GitHub は<strong>大規模なインフラ投資</strong>を続けています。</p>
+<p class="gh-invest-kicker">2026 年に追加した容量</p>
+<div class="gh-invest-resources">
+<div class="gh-invest-resource"><strong>+400万</strong><span>CPU コア</span></div>
+<div class="gh-invest-resource"><strong>+160 PB</strong><span>高速ストレージ</span></div>
+<div class="gh-invest-resource"><strong>+50 Tb/s</strong><span>ネットワーク容量</span></div>
+</div>
+<p class="gh-invest-test">Git インフラも刷新中。1 つのモノレポの負荷テストで<strong>5,000 の「angry agents」→ 毎秒 7,200 件の書き込み</strong>を達成。さらなる処理能力の向上へ。<a class="retro-link" href="https://www.youtube.com/watch?v=MZfqId_rrB0" target="_blank" rel="noopener noreferrer">Universe セッション ↗</a></p>
 </div>
 
 ## 業界からの評価
@@ -494,4 +430,126 @@ quadrantChart
     JetBrains: [0.21, 0.27]
 ```
 
+</div>
+
+## タスクからエージェントの協働へ <a class="h2-doc" href="https://docs.github.com/en/copilot/how-tos/github-copilot-app/working-with-projects" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+<figure class="gh-agent-teams">
+<style>
+.prose-akq .gh-agent-teams{margin:0;font:clamp(17px,1.4vw,22px)/1.45 var(--font-prose),sans-serif}
+.prose-akq .gh-agent-teams p{margin:0}
+.prose-akq .gh-work-eras{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.6em;margin-bottom:1.6em}
+.prose-akq .gh-work-era{padding:.75em;border-top:2px solid #e8f4ff40;background:#0a0e27}
+.prose-akq .gh-work-era span{display:block;color:#a8bed2;font-size:.7em;margin-bottom:.3em}
+.prose-akq .gh-work-era strong{color:#e8f4ff;font-size:.85em}
+.prose-akq .gh-work-era:last-child{border-color:#ff2e88}
+.prose-akq .gh-work-era:last-child strong{color:#ff2e88}
+.prose-akq .gh-team-flow{display:grid;grid-template-columns:1fr 1.8em 2.5fr 1.8em 1fr;align-items:center}
+.prose-akq .gh-team-person,.prose-akq .gh-team-tools{text-align:center;padding:.5em;line-height:1.5}
+.prose-akq .gh-team-person strong,.prose-akq .gh-team-tools strong{display:block;color:#e8f4ff;font-size:1.1em}
+.prose-akq .gh-team-person span{display:block;color:#00f0ff;font-size:.7em;letter-spacing:.15em;margin-bottom:.5em}
+.prose-akq .gh-team-person p,.prose-akq .gh-team-tools p{font-size:.8em;margin-top:.4em}
+.prose-akq .gh-team-tools small{display:block;color:#ffb000;font-size:.65em;margin-top:.5em}
+.prose-akq .gh-team-arrow{text-align:center;color:#ff2e88;font-size:1.5em}
+.prose-akq .gh-team-project{padding:1em;border:1px solid #ff2e88;background:#0a0e27}
+.prose-akq .gh-team-context{color:#a8bed2;font-size:.65em;letter-spacing:.08em;text-align:center;margin-bottom:1em}
+.prose-akq .gh-team-coordinator{border:1px solid #ff2e88;padding:.65em .5em;text-align:center;color:#ff2e88;font-weight:700}
+.prose-akq .gh-team-roles{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.45em;padding-top:1.5em}
+.prose-akq .gh-team-roles::before{content:"";position:absolute;top:.75em;left:16.66%;right:16.66%;height:1px;background:#ff2e8888}
+.prose-akq .gh-team-coordinator::after{content:"";display:block;width:1px;height:.75em;background:#ff2e8888;position:absolute;left:50%;bottom:-.75em}
+.prose-akq .gh-team-coordinator{position:relative}
+.prose-akq .gh-team-roles span{position:relative;border:1px solid #ff2e8855;padding:.6em .2em;text-align:center;font-size:.8em}
+.prose-akq .gh-team-roles span::before{content:"";position:absolute;left:50%;top:-.75em;width:1px;height:.75em;background:#ff2e8888}
+.prose-akq .gh-agent-teams .gh-team-return{margin:1em 0 .7em;border-bottom:1px dashed #00f0ff77;padding:.5em 0;color:#00f0ff;text-align:center;font-size:.9em}
+.prose-akq .gh-agent-teams figcaption{font-size:.65em;color:#a8bed2;line-height:1.5}
+@media(max-width:700px){.prose-akq .gh-work-eras{grid-template-columns:repeat(2,minmax(0,1fr))}.prose-akq .gh-team-flow{grid-template-columns:1fr}.prose-akq .gh-team-arrow{transform:rotate(90deg)}.prose-akq .gh-team-project{margin:.5em 0}}
+</style>
+<div class="gh-work-eras">
+<div class="gh-work-era"><span>〜2020</span><strong>ファイル / 実行</strong></div>
+<div class="gh-work-era"><span>2021〜2024</span><strong>提案 / コード差分</strong></div>
+<div class="gh-work-era"><span>2025</span><strong>タスク / セッション</strong></div>
+<div class="gh-work-era"><span>2026</span><strong>プロジェクト / Agent 群</strong></div>
+</div>
+<div class="gh-team-flow">
+<div class="gh-team-person"><span>開発者</span><strong>目標を決める</strong><p>優先度を選ぶ。<br>成果を判断する。</p></div>
+<span class="gh-team-arrow" aria-hidden="true">→</span>
+<div class="gh-team-project">
+<div class="gh-team-context">プロジェクト / 共有文脈 + 記憶</div>
+<div class="gh-team-coordinator">調整するエージェント</div>
+<div class="gh-team-roles"><span>実装</span><span>レビュー</span><span>調査</span></div>
+</div>
+<span class="gh-team-arrow" aria-hidden="true">↔</span>
+<div class="gh-team-tools"><strong>ツール + アプリ</strong><p>ブラウザー<br>Computer use</p><small>操作には承認が必要</small></div>
+</div>
+<p class="gh-team-return">← 進捗、成果物、判断が必要な事項は、開発者のもとへ。</p>
+<figcaption>役割分担の概念図であり、固定の製品構成ではありません。Projects + computer use：パブリックプレビュー（2026-11-11 時点）。<a class="retro-link" href="https://github.blog/changelog/2026-10-28-github-copilot-app-universe-releases" target="_blank" rel="noopener noreferrer">公式発表 ↗</a></figcaption>
+</figure>
+
+## Innovate / Scale / Trust <a class="h2-doc" href="https://github.blog/news-insights/company-news/github-universe-2026-evolving-every-layer-of-the-stack/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+エージェント時代の開発基盤を、3 つの視点で捉える。
+
+<div class="gh-pillars">
+<style>
+.prose-akq .gh-pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1em;font-family:var(--font-prose),sans-serif}
+.prose-akq .gh-pillar{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;padding:1em;border:1px solid var(--pillar);background:#0a0e27;min-width:0}
+.prose-akq .gh-pillar::after{content:attr(data-step);position:absolute;right:.05em;bottom:-.15em;font-size:6em;font-weight:700;color:var(--pillar);opacity:.08;z-index:-1}
+.prose-akq .gh-pillar-kicker{display:block;font-size:.65em;letter-spacing:.13em;color:var(--pillar);margin-bottom:.6em}
+.prose-akq .gh-pillar h3{margin:0;color:var(--pillar);font-size:1.25em;line-height:1.2;letter-spacing:.06em}
+.prose-akq .gh-pillar .gh-pillar-promise{font-size:.9em;line-height:1.5;margin:.75em 0;min-height:4.5em;text-wrap:balance}
+.prose-akq .gh-pillar .gh-pillar-examples{font-size:.65em;line-height:1.7;color:#a8bed2;margin:auto 0 0;padding-top:.8em;border-top:1px dashed color-mix(in srgb,var(--pillar) 40%,transparent)}
+@media(max-width:700px){.prose-akq .gh-pillars{grid-template-columns:1fr}.prose-akq .gh-pillar .gh-pillar-promise{min-height:0}}
+</style>
+<div class="gh-pillar" data-step="01" style="--pillar:#00f0ff"><span class="gh-pillar-kicker">01 / できることを広げる</span><h3>INNOVATE</h3><p class="gh-pillar-promise">開発全体で、AI をより有能で役に立つものに。</p><p class="gh-pillar-examples">Copilot app + Projects<br>Fusion + automations<br>Memory + より深いレビュー</p></div>
+<div class="gh-pillar" data-step="02" style="--pillar:#9bbc0f"><span class="gh-pillar-kicker">02 / より多くのチームへ</span><h3>SCALE</h3><p class="gh-pillar-promise">成長を支える基盤で、より多くのチームに AI を。</p><p class="gh-pillar-examples">Enterprise + Copilot<br>Agentic Workflows + Actions<br>Git インフラ + ポリシー</p></div>
+<div class="gh-pillar" data-step="03" style="--pillar:#ffb000"><span class="gh-pillar-kicker">03 / 安心して任せる</span><h3>TRUST</h3><p class="gh-pillar-promise">エージェントの成果が増えても、可視性と統制を保つ。</p><p class="gh-pillar-examples">AI Scan + agentic autofix<br>Reachability analysis<br>Package firewall</p></div>
+</div>
+
+## Universe 2026：提供状況 <a class="h2-doc" href="https://github.blog/changelog/type/new-releases/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+<div class="gh-release-map">
+<style>
+.prose-akq .gh-release-map{font:clamp(16px,1.25vw,19px)/1.4 var(--font-prose),sans-serif}
+.prose-akq .gh-release-map .gh-release-date{margin:0 0 .8em;color:#a8bed2;font-size:.8em}
+.prose-akq .gh-release-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1em}
+.prose-akq .gh-release-column{min-width:0;border-top:2px solid var(--pillar);background:#0a0e27cc;padding:.7em .8em}
+.prose-akq .gh-release-column h3{font-size:1em;color:var(--pillar);letter-spacing:.1em;margin:0 0 .4em}
+.prose-akq .gh-release-item{padding:.65em 0;border-top:1px solid #e8f4ff22}
+.prose-akq .gh-release-line{display:flex;align-items:baseline;justify-content:space-between;gap:.45em}
+.prose-akq .gh-release-line a{color:#e8f4ff;font-weight:600;text-decoration:none;line-height:1.3}
+.prose-akq .gh-release-line a:hover,.prose-akq .gh-release-line a:focus-visible{color:#00f0ff;text-decoration:underline}
+.prose-akq .gh-release-status{flex-shrink:0;padding:.1em .3em;border:1px solid currentColor;font-size:.6em;font-weight:700;color:#a8bed2;white-space:nowrap}
+.prose-akq .gh-release-status.is-ga{color:#9bbc0f}
+.prose-akq .gh-release-status.is-preview{color:#ffb000}
+.prose-akq .gh-release-item small{display:block;color:#a8bed2;font-size:.76em;line-height:1.45;margin-top:.25em}
+.prose-akq .gh-release-map .gh-release-note{font-size:.7em;color:#a8bed2;margin:.8em 0 0;line-height:1.5}
+@media(max-width:700px){.prose-akq .gh-release-columns{grid-template-columns:1fr}}
+</style>
+<p class="gh-release-date">2026-11-11 時点の公開情報で確認。機能名から公式発表を開けます。</p>
+<div class="gh-release-columns">
+<div class="gh-release-column" style="--pillar:#00f0ff">
+<h3>INNOVATE</h3>
+<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-28-github-copilot-app-universe-releases" target="_blank" rel="noopener noreferrer">Copilot app</a><span class="gh-release-status">提供中</span></div><small>Projects + computer use：プレビュー</small></div>
+<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion" target="_blank" rel="noopener noreferrer">Copilot Fusion</a><span class="gh-release-status is-ga">GA</span></div><small>複数モデルの選択とオーケストレーション</small></div>
+<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-28-build-shared-workflows-for-your-team-with-copilot-automations" target="_blank" rel="noopener noreferrer">Copilot Automations</a><span class="gh-release-status">提供中</span></div><small>共有ワークフローを順次展開</small></div>
+<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-28-copilot-code-review-merge-with-confidence-with-max-and-approvals" target="_blank" rel="noopener noreferrer">Code review Max</a><span class="gh-release-status is-preview">Preview</span></div><small>より深いレビュー。PR 承認機能は GA。</small></div>
+<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-28-github-intelligence-puts-your-code-context-and-history-to-work" target="_blank" rel="noopener noreferrer">Memory / Dreaming</a><span class="gh-release-status">機能別</span></div><small>Memory：GA、Dreaming：プレビュー</small></div>
+</div>
+<div class="gh-release-column" style="--pillar:#9bbc0f">
+<h3>SCALE</h3>
+<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-28-github-enterprise-now-includes-access-to-github-copilot" target="_blank" rel="noopener noreferrer">Enterprise + Copilot</a><span class="gh-release-status">営業経由</span></div><small>GHEC 対象。セルフサーブは今後。</small></div>
+<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/news-insights/company-news/github-universe-2026-evolving-every-layer-of-the-stack/" target="_blank" rel="noopener noreferrer">Git インフラ刷新</a><span class="gh-release-status">進行中</span></div><small>Azure 移行は 2027 年初めの完了を予定</small></div>
+<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-28-github-agentic-workflows-generally-available" target="_blank" rel="noopener noreferrer">Agentic Workflows</a><span class="gh-release-status is-ga">GA</span></div><small>GitHub Actions 上でエージェントを実行</small></div>
+<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-28-github-actions-workflow-lockfiles-are-generally-available" target="_blank" rel="noopener noreferrer">Actions lockfiles</a><span class="gh-release-status is-ga">GA</span></div><small>ワークフローのアクション依存を固定</small></div>
+<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-28-repository-plugin-defaults-and-enterprise-plugin-controls-generally-available" target="_blank" rel="noopener noreferrer">Copilot ガバナンス</a><span class="gh-release-status is-ga">GA</span></div><small>プラグインの既定値と Enterprise の統制</small></div>
+</div>
+<div class="gh-release-column" style="--pillar:#ffb000">
+<h3>TRUST</h3>
+<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-28-ai-scan-for-repositories-in-public-preview" target="_blank" rel="noopener noreferrer">AI Scan：リポジトリ</a><span class="gh-release-status is-preview">Preview</span></div><small><a class="retro-link" href="https://github.blog/changelog/2026-10-15-ai-scan-for-pull-requests-generally-available" target="_blank" rel="noopener noreferrer">PR 向け AI Scan は GA ↗</a></small></div>
+<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-28-prioritize-dependabot-alerts-with-reachability-analysis" target="_blank" rel="noopener noreferrer">Reachability analysis</a><span class="gh-release-status is-preview">Preview</span></div><small>GHEC の JavaScript / TypeScript が対象</small></div>
+<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-15-agentic-autofix-for-code-scanning-alerts-general-availability" target="_blank" rel="noopener noreferrer">Agentic autofix</a><span class="gh-release-status is-ga">GA</span></div><small>10 月 15 日に一般提供</small></div>
+<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-20-github-package-firewall-in-public-preview" target="_blank" rel="noopener noreferrer">Package firewall</a><span class="gh-release-status is-preview">Preview</span></div><small>npm / GHEC。プレビュー中は無料。</small></div>
+</div>
+</div>
+<p class="gh-release-note">GA = 一般提供。Preview = パブリックプレビュー。プラン、ポリシー、展開状況による制約があります。「提供中」は全機能の GA を意味しません。</p>
 </div>
