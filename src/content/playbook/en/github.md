@@ -57,27 +57,75 @@ links:
 
 From collaborating on code to coordinating work across agents.
 
-<figure class="gh-timeline">
-<style>
-.prose-akq .gh-timeline{margin:0;font-family:var(--font-prose),sans-serif;font-size:clamp(17px,1.35vw,21px)}
-.prose-akq .gh-timeline ol{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8em;margin:0;padding:0;list-style:none}
-.prose-akq .gh-timeline li{position:relative;margin:0;padding:.85em 1em;border:1px solid #00f0ff55;background:#0a0e27;line-height:1.45}
-.prose-akq .gh-timeline time{display:block;color:#00f0ff;font-size:1.6em;font-weight:700;line-height:1.1;margin-bottom:.3em}
-.prose-akq .gh-timeline strong{display:block;color:#e8f4ff;font-size:1.05em}
-.prose-akq .gh-timeline span{display:block;color:#a8bed2;font-size:.8em;margin-top:.3em}
-.prose-akq .gh-timeline .gh-timeline-now{border:2px solid #ff2e88;box-shadow:0 0 15px #ff2e8822}
-.prose-akq .gh-timeline-now time{color:#ff2e88}
-@media(max-width:700px){.prose-akq .gh-timeline ol{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:420px){.prose-akq .gh-timeline ol{grid-template-columns:1fr}}
-</style>
-<ol>
-<li><time>2008</time><strong>Pull requests</strong><span>Make collaboration the default.</span></li>
-<li><time>2012</time><strong>GitHub Enterprise</strong><span>Bring governance to team development.</span></li>
-<li><time>2019</time><strong>Actions / GHAS</strong><span>Automate delivery and security.</span></li>
-<li><time>2021</time><strong>GitHub Copilot</strong><span>Build with an AI coding assistant.</span></li>
-<li><time>2025</time><strong>Agent HQ</strong><span>Delegate tasks and track sessions.</span></li>
-<li class="gh-timeline-now"><time>2026</time><strong>Projects / Agent groups</strong><span>One goal. Shared context. Parallel work.</span></li>
-</ol>
+<figure class="rpi-pipeline" style="margin:1em 0 0;">
+<svg viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GitHub evolution from pull requests in 2008 to Projects and Agent groups in 2026" style="width:100%;height:auto;max-height:58vh;display:block;font-family:var(--font-prose),sans-serif;">
+  <defs>
+    <marker id="ghTimelineArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#00f0ff"/>
+    </marker>
+    <filter id="ghTimelineGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="4.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect x="0" y="0" width="1100" height="480" fill="none"/>
+  <path d="M 80 430 C 260 440, 380 410, 530 330 C 680 250, 820 160, 1050 30" stroke="#0a0e27" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <path d="M 80 430 C 260 440, 380 410, 530 330 C 680 250, 820 160, 1050 30" stroke="#00f0ff" stroke-width="2.5" fill="none" stroke-linecap="round" marker-end="url(#ghTimelineArrow)"/>
+  <g>
+    <line x1="80" y1="422" x2="80" y2="404" stroke="#00f0ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
+    <circle cx="80" cy="430" r="7" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
+    <rect x="40" y="372" width="80" height="32" rx="16" fill="#0a0e27" stroke="#00f0ff" stroke-width="1.5"/>
+    <text x="80" y="394" text-anchor="middle" fill="#00f0ff" font-size="16" font-weight="bold">2008</text>
+    <text x="80" y="340" text-anchor="middle" fill="#e8f4ff" font-size="18" font-weight="bold">Pull requests</text>
+    <text x="90" y="362" text-anchor="middle" fill="#e8f4ff" font-size="11">Make collaboration the default.</text>
+  </g>
+  <g>
+    <line x1="316" y1="406" x2="316" y2="390" stroke="#00f0ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
+    <circle cx="316" cy="414" r="7" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
+    <rect x="244" y="358" width="144" height="32" rx="16" fill="#0a0e27" stroke="#00f0ff" stroke-width="1.5"/>
+    <text x="316" y="380" text-anchor="middle" fill="#00f0ff" font-size="16" font-weight="bold">2012</text>
+    <text x="316" y="325" text-anchor="middle" fill="#e8f4ff" font-size="18" font-weight="bold">GitHub Enterprise</text>
+    <text x="316" y="345" text-anchor="middle" fill="#e8f4ff" font-size="11">Bring governance to team development.</text>
+  </g>
+  <g>
+    <line x1="530" y1="322" x2="530" y2="302" stroke="#00f0ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
+    <circle cx="530" cy="330" r="7" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
+    <rect x="450" y="270" width="160" height="32" rx="16" fill="#0a0e27" stroke="#00f0ff" stroke-width="1.5"/>
+    <text x="530" y="292" text-anchor="middle" fill="#00f0ff" font-size="16" font-weight="bold">2019</text>
+    <text x="530" y="237" text-anchor="middle" fill="#e8f4ff" font-size="18" font-weight="bold">Actions / GHAS</text>
+    <text x="530" y="257" text-anchor="middle" fill="#e8f4ff" font-size="11">Automate delivery and security.</text>
+  </g>
+  <g>
+    <line x1="760" y1="207" x2="760" y2="240" stroke="#00f0ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
+    <circle cx="760" cy="199" r="7" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
+    <rect x="688" y="240" width="144" height="32" rx="16" fill="#0a0e27" stroke="#00f0ff" stroke-width="1.5"/>
+    <text x="760" y="262" text-anchor="middle" fill="#00f0ff" font-size="16" font-weight="bold">2021</text>
+    <text x="760" y="290" text-anchor="middle" fill="#e8f4ff" font-size="18" font-weight="bold">GitHub Copilot</text>
+    <text x="760" y="312" text-anchor="middle" fill="#e8f4ff" font-size="11">Build with an AI coding assistant.</text>
+  </g>
+  <g>
+    <line x1="875" y1="124" x2="875" y2="104" stroke="#00f0ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
+    <circle cx="875" cy="132" r="7" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
+    <rect x="815" y="72" width="120" height="32" rx="16" fill="#0a0e27" stroke="#00f0ff" stroke-width="1.5"/>
+    <text x="875" y="94" text-anchor="middle" fill="#00f0ff" font-size="16" font-weight="bold">2025</text>
+    <text x="875" y="39" text-anchor="middle" fill="#e8f4ff" font-size="18" font-weight="bold">Agent HQ</text>
+    <text x="875" y="59" text-anchor="middle" fill="#e8f4ff" font-size="11">Delegate tasks and track sessions.</text>
+  </g>
+  <g>
+    <line x1="984" y1="80" x2="984" y2="118" stroke="#00f0ff" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.85"/>
+    <g filter="url(#ghTimelineGlow)">
+      <circle cx="984" cy="68" r="11" fill="#00f0ff"/>
+      <circle cx="984" cy="68" r="4" fill="#05060f"/>
+    </g>
+    <rect x="924" y="118" width="120" height="38" rx="19" fill="#00f0ff" stroke="#00f0ff" stroke-width="2"/>
+    <text x="984" y="144" text-anchor="middle" fill="#05060f" font-size="18" font-weight="bold">2026</text>
+    <text x="984" y="181" text-anchor="middle" fill="#00f0ff" font-size="20" font-weight="bold"><tspan x="984">Projects /</tspan><tspan x="984" dy="24">Agent groups</tspan></text>
+    <text x="984" y="227" text-anchor="middle" fill="#e8f4ff" font-size="11"><tspan x="984">One goal. Shared context.</tspan><tspan x="984" dy="18">Parallel work.</tspan></text>
+  </g>
+</svg>
 </figure>
 
 
