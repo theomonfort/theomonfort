@@ -24,6 +24,8 @@ Quick lookup for the playbook slide style. Use this as a reference when filling 
 
 ## Hero-quote variants (`<div class="hero-quote ...">`)
 
+**Intro body = main hero statement only.** English `In a nutshell` and Japanese `一言で` (including equivalent opening titles) must end after the hero. Never append a bottom note, callout, footnote, warning, caveat, or extra paragraph; place essential qualifications on a non-intro slide instead.
+
 | Class to add | Mascot | Use when |
 | --- | --- | --- |
 | (default, no extra class) | octocat-mascot | first slide, generic intro |
@@ -72,6 +74,8 @@ Label stays `📖 Docs` in both locales. Max one per slide. Everything else goes
 - Verify the entire slide at 1440×900 and 1920×1080, plus narrow-screen wrapping.
 
 ## Callout emoji palette
+
+For essential callouts on **non-intro slides only**. Never use a callout or bottom note on `In a nutshell` / `一言で` opening slides.
 
 | emoji | meaning |
 | --- | --- |

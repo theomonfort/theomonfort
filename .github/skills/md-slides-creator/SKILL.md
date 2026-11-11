@@ -50,7 +50,7 @@ A typical playbook entry has 6–8 slides:
 
 | # | Slide title pattern | Body |
 |---|---|---|
-| 1 | `## 一言で` / `## In a nutshell` | **octocat `hero-quote`** + 1–2 callout `>` lines (the frontmatter title/icon/summary header renders on top of this slide, not on one of its own) |
+| 1 | `## 一言で` / `## In a nutshell` | **octocat `hero-quote` only**, containing the main statement, with no appended note or callout (the frontmatter title/icon/summary header renders on top of this slide, not on one of its own) |
 | 2 | `## 何ができる?` / `## What it does` | comparison table or 3–5 bullets |
 | 3 | `## 設定方法` / `## Setup` | code fence + 4 bullets max |
 | 4 | `## ★ 使いどころ` / `## ★ Killer use case` | the one thing the reader must remember |
@@ -58,6 +58,8 @@ A typical playbook entry has 6–8 slides:
 | 6 | (auto from frontmatter `links`) | grouped link list |
 
 > 💬 **The first content slide is not optional.** The `## 一言で` / `## In a nutshell` slide must lead with the default **octocat-with-speech-bubble** `hero-quote` (see 4a) — it's the playbook's signature opener. It is also the **only** slide allowed to contain a `hero-quote`.
+
+**Opening-slide rule, both locales:** `In a nutshell`, `一言で`, and equivalent opening slides such as `In one line` contain **only the main hero statement**. The body ends immediately after the `hero-quote`. **NEVER append a bottom note, callout, footnote, warning, or caveat**, even as an unboxed paragraph. Put essential qualifications on an appropriate existing non-intro slide instead; do not tuck them into the hero to evade this rule.
 
 Adjust freely — but keep ≤ 1 H2 per "concept", and don't let a single slide exceed ~150 words.
 
@@ -119,6 +121,8 @@ These are the recurring patterns the deck uses. Use them — they're styled, acc
 
 **Every entry MUST open its first content slide (`## 一言で` / `## In a nutshell`) with a `hero-quote` showing the default octocat-with-speech-bubble** (the talking-character look) — *not* `hero-quote-plain`. This is the playbook's signature lead block; a section that opens without it looks off-brand.
 
+The hero contains **only the main statement**, and nothing follows it before the next `##`. This applies to English and Japanese intros. Notes and caveats belong on non-intro slides, never underneath the opening hero.
+
 > 🚫 **`hero-quote` is allowed on the first content slide ONLY — never on any other slide.** Exactly **one** `hero-quote` block per entry. The speech-bubble panel is the deck's opening statement; repeating it mid-deck makes later slides read like they're restarting the entry. Do **not** use it as a section divider, and do **not** reach for `hero-quote-plain` to sneak the styled box onto a later slide. On slides 3+, open with **normal prose** — a plain paragraph, a table, or a `###` sub-heading.
 
 ```html
@@ -170,9 +174,11 @@ GFM tables render with compact retro styling by default. Use them for: feature c
 
 ### 4c. Callouts (`>` blockquotes)
 
+**No callouts or bottom notes on opening slides, without exception.** `In a nutshell` / `一言で` and equivalent intros are hero-only. Plain paragraphs, footnotes, warnings, and caveats are not a workaround. The guidance below applies **only to non-intro slides**.
+
 **Default to zero callouts on a slide.** A `>` blockquote renders as a boxed panel, and a deck where every slide ends in one reads like a stack of footnotes — the boxes stop meaning anything and just eat vertical space. Most slides should end on their last real content block (the table, the widget, the bullets) with nothing after it.
 
-Add a callout **only when it carries information the slide would be wrong without**: a genuine gotcha, a constraint, a prerequisite, a decision rule. Never add one to restate the slide, to summarise what the reader just read, or to supply a closing "takeaway" the content already made obvious.
+On a non-intro slide, add a callout **only when it carries information the slide would be wrong without**: a genuine gotcha, a constraint, a prerequisite, a decision rule. Never add one to restate the slide, to summarise what the reader just read, or to supply a closing "takeaway" the content already made obvious.
 
 ```markdown
 > ⚠️ classic PAT (`ghp_…`) は使えない。
@@ -355,7 +361,7 @@ Canonical markup: `src/content/playbook/ja/secret-scanning.md` and `src/content/
    pnpm dev --host 127.0.0.1   # open http://127.0.0.1:4321/theomonfort/playbook/<slug>/
    ```
    Press `P` to enter present mode and arrow through slides — confirm:
-   - Slide 1 shows the frontmatter title header **plus** the first `## H2` section
+   - Slide 1 shows the frontmatter title header **plus** the first `## H2` section, whose body is **only the hero statement**, with no bottom note in either locale
    - Each `##` becomes its own slide
    - No slide overflows the viewport
    - The final auto-slide shows the grouped links
@@ -428,9 +434,10 @@ Before declaring done, verify EVERY item:
 - [ ] `order` doesn't collide with an existing entry (check `src/content/playbook/ja/*.md`).
 - [ ] All `links[].url` are fully-qualified URLs.
 - [ ] Slide count is 5–9.
-- [ ] First content slide (`## 一言で` / `## In a nutshell`) opens with the default octocat-with-speech-bubble `hero-quote` (or the category's auto-mascot) — **not** `hero-quote-plain`.
+- [ ] First content slide (`## 一言で` / `## In a nutshell`, including equivalent intro titles) contains **only the main statement** in the default octocat-with-speech-bubble `hero-quote` (or the category's auto-mascot), not `hero-quote-plain`.
+- [ ] In **both English and Japanese**, the intro body ends after the hero: **no bottom note, callout, footnote, warning, caveat, or extra paragraph**. Any essential qualification is on an existing non-intro slide, not hidden inside the hero.
 - [ ] **Exactly one `hero-quote` in the whole entry**, on the first content slide — no `hero-quote` (including `hero-quote-plain`) on any later slide.
-- [ ] No slide (other than the first, with its `hero-quote`) starts with a `>` callout — every slide opens with normal prose; callouts sit lower / at the bottom.
+- [ ] No slide starts with a `>` callout. Non-intro slides open with normal prose and may place an essential callout later; the intro remains hero-only.
 - [ ] Each slide stands on its own — no orphan H2 with no body, no body before the first H2.
 - [ ] Tables ≤ 5 cols, ≤ 8 rows.
 - [ ] Tables use compact spacing, short cells, and natural wrapping; introductory text is above the table, and the complete slide fits at 1440×900 and 1920×1080 without shrinking the prose font.
@@ -438,7 +445,7 @@ Before declaring done, verify EVERY item:
 - [ ] No `# H1` in body (frontmatter handles the title).
 - [ ] Slides that document a product's features, pricing, limits, or setup carry an `h2-doc` badge linking their canonical doc page.
 - [ ] Any `h2-doc` badge sits on the same line as its `##`, uses the `📖 Docs` label, and exists in both locales.
-- [ ] No slide ends in a callout that merely restates it — callouts only survive if they carry a real constraint, gotcha, or prerequisite.
+- [ ] No slide ends in a callout that merely restates it. Callouts are allowed **only on non-intro slides** and only for a real constraint, gotcha, or prerequisite.
 - [ ] Both `ja/<slug>.md` and `en/<slug>.md` exist with matching structure.
 - [ ] "New!" markers in `src/lib/playbook-meta.ts` point only at slides tied to an actual GitHub release you could link a changelog for — never at slides that are merely newly written.
 - [ ] `pnpm build` passes.

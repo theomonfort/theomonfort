@@ -39,9 +39,9 @@ links:
   </p>
 </div>
 
-Not the app's **Project Memory** or local memory files.
-
 ## Repository / Personal <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-memory#types-of-memories" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+These are **Copilot Memory** scopes, not the app's **Project Memory** or local memory files.
 
 <div class="setup-cards">
   <div class="setup-card">

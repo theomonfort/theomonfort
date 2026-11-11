@@ -39,9 +39,9 @@ links:
   </p>
 </div>
 
-アプリの **Project Memory** / ローカルメモリとは別の仕組み。
-
 ## Repo の知識 / 自分の好み <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-memory#types-of-memories" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+ここで扱うのは **Copilot Memory** のスコープ。アプリの **Project Memory** / ローカルメモリとは別の仕組み。
 
 <div class="setup-cards">
   <div class="setup-card">
