@@ -167,7 +167,7 @@ GitHub Copilot がより高度な AI ワークフローをサポートするに�
 
 > 💡 共有プールは **全体最適** — ヘビーユーザーが多く引いても、ライトユーザーの余剰が吸収する。
 
-## ユーザーレベル Budget（new）
+## ユーザーレベル Budget
 
 請求期間中にユーザーが消費できる **AI クレジットの合計数**（プール使用分と追加支出の両方を含む）を管理します。
 
@@ -193,7 +193,7 @@ GitHub Copilot がより高度な AI ワークフローをサポートするに�
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.9em;margin:1.2em 0 0;font-size:0.82em;">
 
 <div style="display:flex;flex-direction:column;border:1px solid rgba(255, 46, 136,0.4);background:rgba(5,6,15,0.85);">
-<div style="display:flex;align-items:center;justify-content:center;text-align:center;min-height:3.6em;padding:0.5em 0.6em;line-height:1.25;background:rgba(255, 46, 136,0.14);color:#ff2e88;font-weight:bold;border-bottom:1px solid rgba(255, 46, 136,0.3);">【新】ユーザーレベル Budget</div>
+<div style="display:flex;align-items:center;justify-content:center;text-align:center;min-height:3.6em;padding:0.5em 0.6em;line-height:1.25;background:rgba(255, 46, 136,0.14);color:#ff2e88;font-weight:bold;border-bottom:1px solid rgba(255, 46, 136,0.3);">ユーザーレベル Budget</div>
 <div style="padding:0.7em 0.6em;display:flex;flex-direction:column;flex:1;">
 <div style="display:grid;grid-template-columns:1fr 1fr;text-align:center;color:#e8f4ff;font-weight:bold;font-size:0.92em;height:2.8em;align-items:start;margin-bottom:1.1em;"><span>ユニバーサル</span><span>個別*</span></div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;height:200px;">
@@ -224,10 +224,10 @@ GitHub Copilot がより高度な AI ワークフローをサポートするに�
 <div style="display:flex;flex-direction:column;border:1px solid rgba(255, 46, 136,0.4);background:rgba(5,6,15,0.85);">
 <div style="display:flex;align-items:center;justify-content:center;text-align:center;min-height:3.6em;padding:0.5em 0.6em;line-height:1.25;background:rgba(255, 46, 136,0.14);color:#ff2e88;font-weight:bold;border-bottom:1px solid rgba(255, 46, 136,0.3);">コストセンターレベル Budget</div>
 <div style="padding:0.7em 0.6em;display:flex;flex-direction:column;flex:1;">
-<div style="color:#e8f4ff;font-size:0.92em;height:2.8em;margin-bottom:1.1em;line-height:1.3;">超過支出（Budget）＋<strong style="color:#ffb000;">【新】共有プール上限</strong></div>
+<div style="color:#e8f4ff;font-size:0.92em;height:2.8em;margin-bottom:1.1em;line-height:1.3;">超過支出（Budget）＋<strong style="color:#ffb000;">共有プール上限</strong></div>
 <div style="height:200px;display:flex;flex-direction:column;">
 <div style="flex:1.4;background:#ff2e88;color:#05060f;font-weight:bold;display:flex;align-items:center;justify-content:center;">超過支出</div>
-<div style="flex:1;background:rgba(255,176,0,0.28);border-top:2px solid #ffb000;color:#e8f4ff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1.2;">共有プール<br/><span style="font-size:0.78em;color:#ffb000;font-weight:bold;">【新】上限可</span></div>
+<div style="flex:1;background:rgba(255,176,0,0.28);border-top:2px solid #ffb000;color:#e8f4ff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1.2;">共有プール<br/><span style="font-size:0.78em;color:#ffb000;font-weight:bold;">上限可</span></div>
 </div>
 </div>
 </div>

@@ -49,6 +49,9 @@ links:
   - group: 📰 Recent Changelog
     label: "自動解決と分析の更新 (2026-09-11)"
     url: https://github.blog/changelog/2026-09-11-auto-resolution-and-analysis-updates-in-copilot-code-review/
+  - group: 📰 Recent Changelog
+    label: "Max パブリックプレビューと承認 GA (2026-10-28)"
+    url: https://github.blog/changelog/2026-10-28-copilot-code-review-merge-with-confidence-with-max-and-approvals
   - group: 💰 課金の仕組み
     label: "Code review の推定消費量"
     url: https://docs.github.com/en/copilot/concepts/agents/code-review#estimated-consumption
@@ -154,18 +157,58 @@ Copilot Code Review は **エージェント型アーキテクチャ**で動作�
 
 > 🔧 **ランナー環境の作り込み**：サイズ拡張 / self-hosted / Windows への切替は `copilot-setup-steps.yml` で制御する。詳細は <a class="retro-link" href="/theomonfort/playbook/cloud-agent/">Cloud Agent ↗</a>（Code Review と同じ仕組み）。
 
-## レビューの深さ・費用・エージェント <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/agents/code-review#estimated-consumption" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## レビューの深さ、費用、エージェント <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/agent-capabilities/agent-powered-workflows-and-operations/code-review#review-effort-level" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-レビューの深さは自動レビューの既定値として設定できる。PR サイズやリポジトリのカスタム指示が増えるほど、AI クレジットの消費量も増える。
-
-| レベル | 推定 AI クレジット / レビュー | 分析方法 |
-| --- | --- | --- |
-| **Lite** | **$0.05 〜 $1 USD** | 複数エージェントが別々の観点で確認し、結果を 1 つのレビューに統合 |
-| **Balanced** | **$0.25 〜 $5 USD** | より深い分析が必要な PR 向け |
-
-2026 年 9 月から Lite は 1 エージェントではなく**エージェント群**でレビューする。実験では、高重要度コメントの対応数が平均 47% 増え、レビュー費用は約 8% 減少した。
-
-> 💰 この推定額に **GitHub Actions 分**は含まれない。Actions が使えない場合でもレビューは生成されるが、プロジェクト全体の文脈収集などのエージェント機能は利用できない。
+<div class="det-widget">
+<p class="det-hint">▸ レベルを選択 / 1 回の推定額 (USD、2026-11-11 時点)</p>
+<div class="det-split">
+<div class="det-list">
+<details class="det-pick" name="review-effort">
+<summary class="det-btn"><span class="det-name"><b>Lite</b> / $0.05 〜 $1</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Lite</span></p>
+<p class="det-why"><b>日常的な変更</b>を速く、低コストで確認。複数エージェントが別々の観点で分析し、結果を 1 つのレビューに統合する。</p>
+</div>
+</details>
+<details class="det-pick" name="review-effort">
+<summary class="det-btn"><span class="det-name"><b>Balanced</b> / $0.25 〜 $5</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Balanced (default)</span></p>
+<p class="det-why"><b>既定のレベル</b>。高推論モデルで複雑なロジック、セキュリティ、サービスをまたぐ変更を分析。Lite より深く調べ、AI クレジットも多く使う。</p>
+</div>
+</details>
+<details class="det-pick" name="review-effort" open>
+<summary class="det-btn"><span class="det-name"><b>Max</b> / $1.50 〜 $25</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Max / Public preview</span></p>
+<p class="det-why"><b>高リスクな PR 向け</b>。複数プロバイダーの高推論エージェントで独立に分析し、指摘を照合、検証。最も深く調べる分、時間とクレジットが増える。</p>
+</div>
+</details>
+<details class="det-pick" name="review-effort">
+<summary class="det-btn"><span class="det-name">対象と管理設定</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Access &amp; controls</span></p>
+<p class="det-why"><b>対象：</b>Pro / Pro+ / Max / Business / Enterprise。Code review を有効化。<br /><b>選択：</b>PR の <b>Reviewers</b> または既定値。<br /><b>管理者：</b>enterprise / org / repo で既定値と上限を設定。Max は上限で許可する必要がある。</p>
+</div>
+</details>
+<details class="det-pick" name="review-effort">
+<summary class="det-btn"><span class="det-name">費用とエージェントの文脈</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Estimates, not caps</span></p>
+<p class="det-why">AI クレジットは PR サイズや指示で変動し、推定額を超える場合もある。<b>Actions 分は別。</b><br />Actions が使えなくてもレビューは続くが、プロジェクト全体の文脈収集などのエージェント機能は使えない。</p>
+</div>
+</details>
+<details class="det-pick" name="review-effort">
+<summary class="det-btn"><span class="det-name">承認 / GA</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Approvals / GA</span></p>
+<p class="det-why"><b>Max とは別設定で、既定は OFF。</b>有効にすると Copilot の承認が必須承認数にカウントされる。新しいコミットで承認は解除され、再レビューで再判定できる。</p>
+</div>
+</details>
+</div>
+<div class="det-screen"><p class="det-empty">レベルを選択 ▸</p></div>
+</div>
+</div>
 
 ## 限界と人間の役割
 
