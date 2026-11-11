@@ -67,9 +67,9 @@ PR を中心にブランチをどう構成するか。リリース頻度に合�
 
 ## GitHub Flow
 
-**長命なブランチは `main` 1 本、feature ブランチは短命。** `main` から枝を切り、PR を出してレビュー・マージし、そのままデプロイ。シンプルで速く、頻繁にデプロイする Web アプリや小規模チームに最適。
-
-<svg viewBox="0 0 700 380" role="img" aria-label="GitHub Flow: main branch with several short-lived change branches merging in" style="width:100%;height:auto;max-width:760px;display:block;margin:1.4em auto;font-family: 'Noto Sans JP', sans-serif;">
+<div class="split-image pr-compact pr-flow">
+<div class="split-figure">
+<svg viewBox="0 0 700 380" role="img" aria-label="GitHub Flow: main branch with several short-lived change branches merging in">
   <defs>
     <marker id="ghf-arrow" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
@@ -101,18 +101,24 @@ PR を中心にブランチをどう構成するか。リリース頻度に合�
   <circle cx="440" cy="326" r="19" fill="#ff5b6b"/>
 </svg>
 
-- 🌿 変更ごとに `main` から枝を切る（feature / fix）
-- 🔀 早めに **PR** を出す — レビューと CI はブランチ上で
-- ✅ `main` にマージ → **即デプロイ**
-- ♻️ `main` は常に **デプロイ可能** に保つ
+</div>
+<div class="split-text">
 
-> 💡 部品が少ない＝フィードバックが速い。継続的デリバリーの既定。
+**長命な `main` 1 本と、短命な feature ブランチ。** Web アプリや継続的に出荷するチームに、速いフィードバック。
+
+- 🌿 機能や修正ごとに `main` から分岐
+- 🔀 **早めに PR** を出し、レビューと CI
+- ✅ マージしたら **即デプロイ**
+- ♻️ `main` は常に **デプロイ可能** に
+
+</div>
+</div>
 
 ## Git Flow
 
-**長命なブランチは `main` + `develop` の 2 本、加えて補助ブランチ。** 作業は `develop` に統合し、`release` ブランチでバージョンを安定させてから `main` へマージしてタグ付け。定期的なバージョンリリースや大規模チーム向けの構造化フロー。
-
-<svg viewBox="0 0 740 400" role="img" aria-label="Git Flow branch model: main, hotfix, release, develop, and two feature lanes" style="width:100%;height:auto;max-width:820px;display:block;margin:1.4em auto;font-family: 'Noto Sans JP', sans-serif;">
+<div class="split-image pr-compact pr-flow">
+<div class="split-figure">
+<svg viewBox="0 0 740 400" role="img" aria-label="Git Flow branch model: main, hotfix, release, develop, and two feature lanes">
   <defs>
     <marker id="gf-arrow" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
@@ -169,16 +175,24 @@ PR を中心にブランチをどう構成するか。リリース頻度に合�
   <circle cx="475" cy="358" r="16" fill="#2fbf76"/>
 </svg>
 
-- 🌳 `develop` = 統合ライン・`main` = 本番（タグ付き）
-- 🧩 `feature/*` は `develop` から切って戻す
-- 📦 `release/*` で安定化 → `main` + `develop` へマージし、バージョンを **タグ**
-- 🚑 `hotfix/*` は `main` から切る緊急の本番修正 → 両方へマージ
+</div>
+<div class="split-text">
 
-> 🎯 手順は多いが制御は強い。継続デプロイではなく **バージョンリリース** を出すならこれ。
+**長命なブランチは `main` + `develop` の 2 本。** 定期的なバージョンリリースを、より厳密に制御。
+
+- 🌳 `develop` で統合、`main` はタグ付き本番
+- 🧩 `feature/*`: `develop` から切って戻す
+- 📦 `release/*`: 安定化後、両方にマージし **タグ付け**
+- 🚑 `hotfix/*`: `main` から緊急修正、両方へマージ
+
+</div>
+</div>
 
 ## レビューの中身
 
-今日、PR を開くのは **人間**・**Cloud Agent**・**Dependabot**・**Agentic Workflow** と多様になった。差分の上に会話・チェック・自動分析が集まり、マージ前に品質を担保する場。
+<div class="pr-compact pr-review">
+
+**人間**、**Cloud Agent**、**Dependabot**、**Agentic Workflow** が開く PR。レビュー、チェック、自動分析を集め、マージ前に品質を担保する。
 
 | 要素 | 役割 |
 | --- | --- |
@@ -191,39 +205,42 @@ PR を中心にブランチをどう構成するか。リリース頻度に合�
 
 > 🔑 PR で `Closes #123` → マージで Issue 自動クローズ。
 
+</div>
+
 ## Ruleset
 
-Ruleset は、ブランチへのマージ条件を **ルールとして強制** する品質ゲート。**Organization** レベルでも **repository** レベルでも設定でき、上位から横断適用もできる。
+<div class="pr-compact pr-rules">
 
-**最小構成の推奨:**
+**Organization または repository** で **マージ条件を強制** し、複数リポジトリに横断適用。まずはこの 5 つ:
 
 | ルール | 推奨設定 | 目的 |
 | --- | --- | --- |
-| 🔀 Require a pull request before merging | ON ＋ **Required approvals: 1** | 直 push を禁止し、必ず 1 名以上のレビューを通す |
-| 🛡️ Require status checks to pass | **test** を必須 ＋ **Require branches to be up to date before merging** | CI が緑、かつ最新の main に対して検証されたときだけマージ |
-| 🔍 Require code scanning results | CodeQL の結果を必須（重大度でブロック） | 未解決のセキュリティ脆弱性があるとマージを止める |
-| 🔒 Block force pushes | ON | 履歴の破壊的な上書きを防ぐ |
-| 🤖 Automatically request Copilot code review | ON | PR ごとに Copilot が自動で先行レビュー |
+| 🔀 Require a pull request before merging | ON ＋ **承認 1 名を必須** | 直 push を防ぎ、全変更をレビュー |
+| 🛡️ Require status checks to pass | **テスト** ＋ **ブランチの最新化** を必須 | 最新の `main` に対して CI が成功 |
+| 🔍 Require code scanning results | CodeQL、重大度でブロック | 未解決の脆弱性でマージを停止 |
+| 🔒 Block force pushes | ON | 破壊的な履歴の上書きを防ぐ |
+| 🤖 Automatically request Copilot code review | ON | Copilot が自動で先行レビュー |
 
-> 🎯 個別の手運用をやめ、Ruleset で「上から一括」ゲート。
+</div>
 
 ## Stacked pull requests（NEW） <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/pull-requests/reference/stacked-pull-requests" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-各 PR が 1 つ下の PR のブランチを base にする、順序付きのチェーン。レビュアーは巨大な差分ではなく、小さなレイヤーを 1 枚ずつ見ればよくなる。public preview は **2026-07-30** から。
+<div class="pr-compact pr-stack">
 
-スタックのマージは**不可分な 1 回の操作**。`main` に何が入るかはマージ方法で変わる:
+各 PR が 1 つ下のブランチを base にする。巨大な差分ではなく **小さなレイヤーごとにレビュー**。public preview は **2026-07-30** から。
 
+<div class="split-image">
 <div class="figtabs">
 <input class="figtabs-radio" type="radio" name="stack-merge-method" id="smm-1" checked>
 <input class="figtabs-radio" type="radio" name="stack-merge-method" id="smm-2">
 <input class="figtabs-radio" type="radio" name="stack-merge-method" id="smm-3">
 <div class="figtabs-bar">
-<label class="figtabs-tab" for="smm-1">マージコミットを作成</label>
-<label class="figtabs-tab" for="smm-2">スカッシュしてマージ</label>
-<label class="figtabs-tab" for="smm-3">リベースしてマージ</label>
+<label class="figtabs-tab" for="smm-1">マージコミット</label>
+<label class="figtabs-tab" for="smm-2">スカッシュ</label>
+<label class="figtabs-tab" for="smm-3">リベース</label>
 </div>
 <div class="figtabs-panel" data-idx="1">
-<svg viewBox="0 0 900 372" role="img" aria-label="マージコミットを作成: 各ブランチのコミットはそのまま残り、スタック全体が 1 つのマージコミットで main に入る" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family: 'Noto Sans JP', sans-serif;">
+<svg viewBox="0 0 900 372" role="img" aria-label="マージコミットを作成: 各ブランチのコミットはそのまま残り、スタック全体が 1 つのマージコミットで main に入る">
   <defs>
     <marker id="stk-mc" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
@@ -261,13 +278,13 @@ Ruleset は、ブランチへのマージ条件を **ルールとして強制** 
   <circle cx="200" cy="318" r="17" fill="#4ec3ff"/>
   <circle cx="780" cy="318" r="17" fill="#4ec3ff"/>
   <g font-size="13" font-weight="bold" text-anchor="middle">
-    <text x="780" y="362" fill="#4ec3ff">マージコミット 1 つ (PR #1-3)</text>
+    <text x="894" y="362" text-anchor="end" fill="#4ec3ff">マージコミット 1 つ (PR #1-3)</text>
   </g>
 </svg>
 <p class="figtabs-cap">ブランチのコミットはそのまま残り、<b>スタック全体が 1 つのマージコミット</b>で入る。履歴は最も詳しい。</p>
 </div>
 <div class="figtabs-panel" data-idx="2">
-<svg viewBox="0 0 900 372" role="img" aria-label="スカッシュしてマージ: 各 PR は main 上で 1 つのコミットにまとまる" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family: 'Noto Sans JP', sans-serif;">
+<svg viewBox="0 0 900 372" role="img" aria-label="スカッシュしてマージ: 各 PR は main 上で 1 つのコミットにまとまる">
   <defs>
     <marker id="stk-sq" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
@@ -313,13 +330,13 @@ Ruleset は、ブランチへのマージ条件を **ルールとして強制** 
   <g font-size="13" font-weight="bold" text-anchor="middle">
     <text x="650" y="362" fill="#2fbf76">PR #1</text>
     <text x="762" y="362" fill="#17d8e0">PR #2</text>
-    <text x="874" y="362" fill="#a56cff">PR #3</text>
+    <text x="894" y="362" text-anchor="end" fill="#a56cff">PR #3</text>
   </g>
 </svg>
 <p class="figtabs-cap">PR ごとに <b>1 コミット</b>へまとめて <code>main</code> に載せる。ログは最もきれいだが、個々のコミット（淡色）は失われる。</p>
 </div>
 <div class="figtabs-panel" data-idx="3">
-<svg viewBox="0 0 900 372" role="img" aria-label="リベースしてマージ: ブランチのコミットが順に main へ載せ直され、マージコミットは作られない" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family: 'Noto Sans JP', sans-serif;">
+<svg viewBox="0 0 900 372" role="img" aria-label="リベースしてマージ: ブランチのコミットが順に main へ載せ直され、マージコミットは作られない">
   <defs>
     <marker id="stk-rb" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
@@ -380,10 +397,20 @@ Ruleset は、ブランチへのマージ条件を **ルールとして強制** 
 </div>
 </div>
 
-- 🧱 ブランチ保護と CI は **すべてのレイヤー** で動く。一番下の PR だけではない
-- 🔄 **rebase は GitHub 任せ** — 下のレイヤーをマージすると、上の PR は自動で base を張り替える
-- ☝️ **1 つ・一部・全部** から選べる。一番上の PR をマージすればスタック全体が下から順に入る
-- 🛠️ github.com / Mobile / REST・GraphQL・webhook、そして `gh extension install github/gh-stack`
+<div class="split-text">
+
+**不可分な 1 回のマージ。** `main` に残る履歴を選ぶ。
+
+- 🧱 保護ルールと CI は **各レイヤー** に適用
+- 🔄 マージした層より上を **自動 rebase / retarget**
+- ☝️ **1 本、一部、全部** を下からマージ。最上段なら全体が入る
+
+</div>
+</div>
+
+🛠️ github.com、Mobile、REST / GraphQL / webhook、`gh extension install github/gh-stack`
+
+</div>
 
 ## Agent merge（NEW）
 

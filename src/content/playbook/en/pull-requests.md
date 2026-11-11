@@ -67,9 +67,9 @@ How a team organizes branches around PRs. Pick the model that matches your relea
 
 ## GitHub Flow
 
-**One long-lived branch (`main`), short-lived feature branches.** Branch off `main`, open a PR, review, merge, and deploy — continuously. Simple and fast; ideal for web apps and small teams shipping many times a day.
-
-<svg viewBox="0 0 700 380" role="img" aria-label="GitHub Flow: main branch with several short-lived change branches merging in" style="width:100%;height:auto;max-width:760px;display:block;margin:1.4em auto;font-family: 'Noto Sans JP', sans-serif;">
+<div class="split-image pr-compact pr-flow">
+<div class="split-figure">
+<svg viewBox="0 0 700 380" role="img" aria-label="GitHub Flow: main branch with several short-lived change branches merging in">
   <defs>
     <marker id="ghf-arrow" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
@@ -101,18 +101,24 @@ How a team organizes branches around PRs. Pick the model that matches your relea
   <circle cx="440" cy="326" r="19" fill="#ff5b6b"/>
 </svg>
 
-- 🌿 Branch from `main` for each change (feature / fix)
-- 🔀 Open a **PR** early — review and CI run on the branch
-- ✅ Merge to `main`, then **deploy immediately**
-- ♻️ `main` stays **always deployable**
+</div>
+<div class="split-text">
 
-> 💡 Fewer moving parts = faster feedback. The default for continuous delivery.
+**One long-lived `main`, short-lived feature branches.** Fast feedback for web apps and teams shipping continuously.
+
+- 🌿 Branch from `main` for each feature or fix
+- 🔀 Open a **PR early** for review and CI
+- ✅ Merge, then **deploy immediately**
+- ♻️ Keep `main` **always deployable**
+
+</div>
+</div>
 
 ## Git Flow
 
-**Two long-lived branches (`main` + `develop`) plus supporting branches.** Work integrates on `develop`; a `release` branch stabilizes a version, then merges to `main` and gets tagged. Structured for scheduled, versioned releases and larger teams.
-
-<svg viewBox="0 0 740 400" role="img" aria-label="Git Flow branch model: main, hotfix, release, develop, and two feature lanes" style="width:100%;height:auto;max-width:820px;display:block;margin:1.4em auto;font-family: 'Noto Sans JP', sans-serif;">
+<div class="split-image pr-compact pr-flow">
+<div class="split-figure">
+<svg viewBox="0 0 740 400" role="img" aria-label="Git Flow branch model: main, hotfix, release, develop, and two feature lanes">
   <defs>
     <marker id="gf-arrow" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
@@ -169,16 +175,24 @@ How a team organizes branches around PRs. Pick the model that matches your relea
   <circle cx="475" cy="358" r="16" fill="#2fbf76"/>
 </svg>
 
-- 🌳 `develop` = integration line · `main` = production (tagged)
-- 🧩 `feature/*` branches off `develop`, merges back
-- 📦 `release/*` stabilizes → merges to `main` + `develop`, **tags** the version
-- 🚑 `hotfix/*` off `main` for urgent prod fixes → merges to both
+</div>
+<div class="split-text">
 
-> 🎯 More ceremony, more control. Reach for it when you ship **versioned releases**, not continuous deploys.
+**Two long-lived branches: `main` + `develop`.** More control for scheduled, versioned releases.
+
+- 🌳 `develop` integrates; `main` is tagged production
+- 🧩 `feature/*`: branch from and return to `develop`
+- 📦 `release/*`: stabilize, merge to both, **tag the version**
+- 🚑 `hotfix/*`: urgent fix from `main`, merge to both
+
+</div>
+</div>
 
 ## Inside a review
 
-Today a PR can be opened by a **human**, a **cloud agent**, **Dependabot**, or an **agentic workflow**. On the diff, conversation, checks, and automated analysis converge: the place where quality is secured before merge.
+<div class="pr-compact pr-review">
+
+Opened by a **human**, **cloud agent**, **Dependabot**, or **agentic workflow**, a PR brings review, checks, and analysis together before merge.
 
 | Element | Role |
 | --- | --- |
@@ -191,39 +205,42 @@ Today a PR can be opened by a **human**, a **cloud agent**, **Dependabot**, or a
 
 > 🔑 `Closes #123` in a PR → the Issue auto-closes on merge.
 
+</div>
+
 ## Rulesets
 
-Rulesets enforce **merge conditions as rules**, a quality gate on your branches. Configure them at the **organization** or **repository** level, and apply them top-down across many repos.
+<div class="pr-compact pr-rules">
 
-**Minimal recommended setup:**
+Enforce **merge conditions** at the **organization or repository** level, across repos. Start with these five rules:
 
-| Rule | Recommended setting | Why |
+| Rule | Setting | Why |
 | --- | --- | --- |
-| 🔀 Require a pull request before merging | ON + **Required approvals: 1** | Block direct pushes; every change gets at least one review |
-| 🛡️ Require status checks to pass | Require **tests** + **Require branches to be up to date before merging** | Merge only when CI is green and validated against the latest main |
-| 🔍 Require code scanning results | Require CodeQL results (block by severity) | Stop merges while unresolved security alerts remain |
+| 🔀 Require a pull request before merging | ON + **1 required approval** | No direct pushes; every change reviewed |
+| 🛡️ Require status checks to pass | **Tests** + **up-to-date branches** | Green CI against the latest `main` |
+| 🔍 Require code scanning results | CodeQL, block by severity | Block unresolved security alerts |
 | 🔒 Block force pushes | ON | Prevent destructive history rewrites |
-| 🤖 Automatically request Copilot code review | ON | Copilot pre-reviews every PR automatically |
+| 🤖 Automatically request Copilot code review | ON | Automatic Copilot pre-review |
 
-> 🎯 Stop manual gatekeeping; let rulesets enforce top-down.
+</div>
 
 ## Stacked pull requests (NEW) <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/pull-requests/reference/stacked-pull-requests" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-An ordered chain where each PR targets the branch of the one below it, so reviewers get one small layer at a time instead of a giant diff. Public preview since **2026-07-30**.
+<div class="pr-compact pr-stack">
 
-Merging a stack is **one atomic operation**. What lands on `main` depends on the merge method:
+Each PR targets the branch below it: **small reviewable layers**, not one giant diff. Public preview since **2026-07-30**.
 
+<div class="split-image">
 <div class="figtabs">
 <input class="figtabs-radio" type="radio" name="stack-merge-method" id="smm-1" checked>
 <input class="figtabs-radio" type="radio" name="stack-merge-method" id="smm-2">
 <input class="figtabs-radio" type="radio" name="stack-merge-method" id="smm-3">
 <div class="figtabs-bar">
-<label class="figtabs-tab" for="smm-1">Create a merge commit</label>
-<label class="figtabs-tab" for="smm-2">Squash and merge</label>
-<label class="figtabs-tab" for="smm-3">Rebase and merge</label>
+<label class="figtabs-tab" for="smm-1">Merge commit</label>
+<label class="figtabs-tab" for="smm-2">Squash</label>
+<label class="figtabs-tab" for="smm-3">Rebase</label>
 </div>
 <div class="figtabs-panel" data-idx="1">
-<svg viewBox="0 0 900 372" role="img" aria-label="Create a merge commit: every branch keeps its own commits, and the whole stack lands on main through a single merge commit" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family: 'Noto Sans JP', sans-serif;">
+<svg viewBox="0 0 900 372" role="img" aria-label="Create a merge commit: every branch keeps its own commits, and the whole stack lands on main through a single merge commit">
   <defs>
     <marker id="stk-mc" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
@@ -261,13 +278,13 @@ Merging a stack is **one atomic operation**. What lands on `main` depends on the
   <circle cx="200" cy="318" r="17" fill="#4ec3ff"/>
   <circle cx="780" cy="318" r="17" fill="#4ec3ff"/>
   <g font-size="13" font-weight="bold" text-anchor="middle">
-    <text x="780" y="362" fill="#4ec3ff">1 merge commit (PR #1-3)</text>
+    <text x="894" y="362" text-anchor="end" fill="#4ec3ff">1 merge commit (PR #1-3)</text>
   </g>
 </svg>
 <p class="figtabs-cap">Branch commits are kept as-is and the <b>whole stack lands through one merge commit</b>. Fullest history.</p>
 </div>
 <div class="figtabs-panel" data-idx="2">
-<svg viewBox="0 0 900 372" role="img" aria-label="Squash and merge: each pull request collapses into a single commit on main" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family: 'Noto Sans JP', sans-serif;">
+<svg viewBox="0 0 900 372" role="img" aria-label="Squash and merge: each pull request collapses into a single commit on main">
   <defs>
     <marker id="stk-sq" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
@@ -313,13 +330,13 @@ Merging a stack is **one atomic operation**. What lands on `main` depends on the
   <g font-size="13" font-weight="bold" text-anchor="middle">
     <text x="650" y="362" fill="#2fbf76">PR #1</text>
     <text x="762" y="362" fill="#17d8e0">PR #2</text>
-    <text x="874" y="362" fill="#a56cff">PR #3</text>
+    <text x="894" y="362" text-anchor="end" fill="#a56cff">PR #3</text>
   </g>
 </svg>
 <p class="figtabs-cap">Each PR collapses into <b>a single commit</b> on <code>main</code>. Cleanest log, but the individual commits (faded) are lost.</p>
 </div>
 <div class="figtabs-panel" data-idx="3">
-<svg viewBox="0 0 900 372" role="img" aria-label="Rebase and merge: every branch commit is replayed onto main in order, with no merge commit" style="width:100%;height:auto;max-width:820px;display:block;margin:1.2em auto 0;font-family: 'Noto Sans JP', sans-serif;">
+<svg viewBox="0 0 900 372" role="img" aria-label="Rebase and merge: every branch commit is replayed onto main in order, with no merge commit">
   <defs>
     <marker id="stk-rb" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
@@ -380,10 +397,20 @@ Merging a stack is **one atomic operation**. What lands on `main` depends on the
 </div>
 </div>
 
-- 🧱 Branch protections and CI run on **every layer**, not just the bottom one
-- 🔄 GitHub **rebases for you** — merge a lower layer and the ones above retarget automatically
-- ☝️ **Merge one, some, or all**: merging the top PR lands the whole stack, always bottom-up
-- 🛠️ github.com, Mobile, REST / GraphQL / webhooks, and `gh extension install github/gh-stack`
+<div class="split-text">
+
+**One atomic merge.** Choose the history on `main`.
+
+- 🧱 Protections and CI on **every layer**
+- 🔄 **Auto-rebase / retarget** above merged layers
+- ☝️ **Merge one, some, or all**, bottom-up. Top PR = whole stack
+
+</div>
+</div>
+
+🛠️ github.com, Mobile, REST / GraphQL / webhooks, and `gh extension install github/gh-stack`
+
+</div>
 
 ## Agent merge (NEW)
 
