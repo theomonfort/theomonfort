@@ -1,7 +1,7 @@
 ---
 title: Copilot Memory
 titleEn: Copilot Memory
-summary: A mechanism for Copilot to remember and reuse knowledge learned while working in a repository, passing it on to future selves and the whole team. Gets smarter the more you use it.
+summary: Repository facts, personal preferences, and Copilot Dreaming.
 icon: /theomonfort/icons/copilot-memory.png
 color: green
 accent:
@@ -14,52 +14,156 @@ order: 19
 category: operate
 related: ['cloud-agent', 'copilot-code-review', 'cli', 'instructions']
 links:
-  - label: Blog — Building an agentic memory system
-    url: https://github.blog/ai-and-ml/github-copilot/building-an-agentic-memory-system-for-github-copilot/
-  - label: Docs — Copilot Memory
-    url: https://docs.github.com/en/copilot/concepts/agents/copilot-memory
-  - group: 📰 Recent Changelog
-    label: "User preferences for Pro / Pro+ (2026-05-15)"
-    url: https://github.blog/changelog/2026-05-15-copilot-memory-supports-user-preferences-for-pro-pro-users
-  - group: 📰 Recent Changelog
-    label: "On by default for Pro / Pro+ (public preview) (2026-03-04)"
-    url: https://github.blog/changelog/2026-03-04-copilot-memory-now-on-by-default-for-pro-and-pro-users-in-public-preview
+  - group: 📖 Official documentation
+    label: Copilot Memory
+    url: https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-memory
+  - group: 📖 Official documentation
+    label: Creating memories
+    url: https://docs.github.com/en/copilot/how-tos/use-copilot-agents/copilot-memory/create-memories
+  - group: 📖 Official documentation
+    label: Copilot Dreaming
+    url: https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-dreaming
+  - group: 🛠️ Settings and management
+    label: Personal Memory / Dreaming
+    url: https://docs.github.com/en/copilot/how-tos/use-copilot-agents/copilot-memory/manage-for-yourself
+  - group: 🛠️ Settings and management
+    label: Repository and organization controls / Dreaming results
+    url: https://docs.github.com/en/copilot/how-tos/use-copilot-agents/copilot-memory/manage-as-administrator
 ---
 
-## In a nutshell
+## In a nutshell <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-memory" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-<div class="hero-quote hero-quote-team">
+<div class="hero-quote">
   <p>
-    <strong>Copilot Memory</strong> is a mechanism for <strong>Code Review / Cloud Agent / CLI</strong> to <strong>remember and reuse</strong> knowledge learned in a repository.
-  </p>
-  <p>
-    No more repeating the same preamble every time — <strong>the more you use it, the smarter Copilot becomes</strong>.
+    <strong>Memory</strong> remembers repo facts and your preferences. <strong>Dreaming</strong> maintains them in the background.
   </p>
 </div>
 
-## Scope and mechanics
+Not the app's **Project Memory** or local memory files.
 
-### Scope
+## Repository / Personal <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-memory#types-of-memories" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-- 📦 **Per repository** — memories tied to a repo, **shared across users** who have access
-- 👤 **Per user** (Pro / Pro+, early access) — personal preferences that follow **you** across all repos and Copilot agents, **without affecting others**. Examples: preferred commit style, PR structure, tone. Manage them in your <a href="https://github.com/settings/copilot/memory" target="_blank" rel="noopener noreferrer">personal Copilot Memory settings ↗</a>
-- 🔀 **Cross-feature** — knowledge learned by Cloud Agent is available to Code Review, CLI, and vice versa
+<div class="setup-cards">
+  <div class="setup-card">
+    <div class="setup-card-head"><strong>📦 Repository</strong><span class="setup-card-tag tag-cyan">Shared</span></div>
+    <p>Architecture, conventions, commands.<br />Example: “Validate with <code>pnpm build</code>.”</p>
+    <ul class="setup-card-paths">
+      <li><strong>Scope:</strong> this repository only</li>
+      <li><strong>Evidence:</strong> code citations</li>
+    </ul>
+  </div>
+  <div class="setup-card">
+    <div class="setup-card-head"><strong>👤 Personal</strong><span class="setup-card-tag tag-magenta">For you</span></div>
+    <p>Stated, non-sensitive preferences.<br />Example: “Keep explanations brief.”</p>
+    <ul class="setup-card-paths">
+      <li><strong>Scope:</strong> only you, across repos</li>
+      <li><strong>Evidence:</strong> your own statements</li>
+    </ul>
+  </div>
+</div>
 
-### How it works
+Business / Enterprise: personal memories stay **with their billing entity**; admins can view, export, and delete them.
 
-- 🔍 Each memory carries **code citations** that are **verified against the current codebase** when the memory is used
-- ⏳ **Auto-deleted after 28 days** — refreshed and extended whenever the memory is used
+**Code review / Agentic Autofix use repo facts only.**
 
-### Why it matters
+## Remember → check → refine <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-memory#how-memories-are-created" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-No more repeating the same explanation in every prompt — **the more you use it, the deeper Copilot's understanding of the repository grows**.
+You can ask Copilot to “**remember this**.” It decides what to store.
 
-## Where to configure it
+| Step | What Copilot does |
+| --- | --- |
+| **① Store** | Select durable facts or preferences |
+| **② Reuse** | Check relevant repo facts against the current branch |
+| **③ Refine** | Upvote useful memories; downvote outdated or incorrect ones |
 
-| Scope | Settings path | What you can do |
+Default: **90 days**. **Upvotes reset expiry; reads do not.** Repo retention: 7–180 days by admins (as of 2026-11-11).
+
+> ⚠️ Memory cannot guarantee compliance. Use **custom instructions** for consistent guidance.
+
+## Memory ≠ Dreaming <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-dreaming" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+<div class="setup-cards">
+  <div class="setup-card">
+    <div class="setup-card-head"><strong>🧠 Memory</strong><span class="setup-card-tag tag-cyan">During everyday work</span></div>
+    <p>Save facts and preferences from conversations and code.<br />Reuse them in later tasks.</p>
+  </div>
+  <div class="setup-card">
+    <div class="setup-card-head"><strong>🌙 Dreaming</strong><span class="setup-card-tag tag-magenta">In the background</span></div>
+    <p>Analyze eligible sessions and PR feedback.<br />Refine duplicate or outdated context.</p>
+  </div>
+</div>
+
+No need to leave a chat open. It updates **context**, not the underlying model.
+
+> 💡 **Memory can still store and use memories when Dreaming is OFF.**
+
+## What Dreaming changes <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-dreaming#how-changes-are-applied" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+**Memories: automatic add / update / delete. Files: PR review.**
+
+| Scope | Context updated | File changes |
 | --- | --- | --- |
-| **Repository** | Repo → **Settings** → *Code and automation* → **Copilot** → **Memory** | **View the list** of saved memories and **delete individual entries** |
-| **Organization** | Org → **Settings** → *Code, planning, and automation* → **Copilot** → **Policies** → *Copilot Memory* | **Enable / Disable** for the entire org |
-| **Enterprise** | Enterprise → **AI controls** → **Copilot** → *Copilot Memory* | **Enabled / Disabled / Let orgs decide** for all orgs |
+| **📦 Repo** | Repo memories | Instructions / skills proposed in a **PR** |
+| **👤 Personal** | Personal memories | **No personal** instruction / skill changes |
+| **🔍 Code review** | Internal guidance from merged PR feedback + current code | **No PR** |
 
-> 📘 Official guide: [Managing and curating Copilot Memory](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/copilot-memory)
+Memories need no approval; files change **after merge**.<br />
+Runs may change nothing and still **consume AI credits**.
+
+## Configure each scope separately <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-dreaming#availability-and-prerequisites" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+Memory: paid plans. Dreaming: **public preview** on eligible plans, separately enabled and **OFF** by default (as of 2026-11-11).
+
+<div class="ctl-widget">
+<div class="ctl-list">
+<details class="ctl-item" name="memory-settings">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">👤</span><span class="ctl-name">Personal</span><span class="ctl-when">Your memories only</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Settings</span><span class="ctl-v"><strong>GitHub.com → Settings → Copilot → Features:</strong> Memory and Dreaming. Managed plans also need policy permission.</span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Turning off personal Dreaming does not stop organization repo runs.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="memory-settings">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📦</span><span class="ctl-name">Repository</span><span class="ctl-when">Repo knowledge and guidance</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Organization</span><span class="ctl-v"><strong>Settings → Copilot → Policies:</strong> Repository access and Dreaming. Enterprise restrictions apply.</span></p>
+<p class="ctl-row"><span class="ctl-k">Personal repo</span><span class="ctl-v">Eligible individual-only subscription: <strong>Repo → Settings → Copilot → Memory / Dreaming</strong>. Separate from personal memories.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="memory-settings">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔑</span><span class="ctl-name">Dreaming eligibility</span><span class="ctl-when">Public preview</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Required</span><span class="ctl-v">Eligible paid plan (<strong>not Pro</strong>), GPT-6.1 Sol allowed, Memory and Dreaming enabled for the scope. No GHEC with data residency.</span></p>
+<p class="ctl-row"><span class="ctl-k">Activation</span><span class="ctl-v">If prerequisites are completed later, turn that scope's Dreaming OFF, then ON again.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="memory-settings">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">☁️</span><span class="ctl-name">Session sync</span><span class="ctl-when">Depends on capability</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Repo / Personal</span><span class="ctl-v">Sync required. Managed CLI policy <strong>Store local sessions in the Cloud</strong> must allow at least <strong>View from cloud</strong>.</span></p>
+<p class="ctl-row"><span class="ctl-k">Code review</span><span class="ctl-v">No sync required. Enable code review and its preview features.</span></p>
+</div>
+</details>
+</div>
+</div>
+
+## Saved memories ≠ run results <a class="h2-doc" href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/copilot-memory/manage-as-administrator#viewing-copilot-dreaming-results-in-the-copilot-app" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+<div class="setup-cards">
+  <div class="setup-card">
+    <div class="setup-card-head"><strong>🧠 Memory</strong><span class="setup-card-tag tag-cyan">GitHub.com</span></div>
+    <p><strong>Personal:</strong> Copilot settings → Memory<br /><strong>Repo:</strong> Settings → Copilot → Memory</p>
+    <ul class="setup-card-paths">
+      <li>View and delete, not create or edit</li>
+    </ul>
+  </div>
+  <div class="setup-card">
+    <div class="setup-card-head"><strong>🌙 Dreaming</strong><span class="setup-card-tag tag-magenta">Copilot app</span></div>
+    <p><strong>Automations → Dreaming</strong><br />Personal Dream runs / Repository Dream runs</p>
+    <ul class="setup-card-paths">
+      <li>Added / Updated / Removed, Before / After, linked PRs (when available)</li>
+    </ul>
+  </div>
+</div>
+
+> ⚠️ Run details are not a full audit or an undo tool. Disabling Dreaming does not revert changes.
