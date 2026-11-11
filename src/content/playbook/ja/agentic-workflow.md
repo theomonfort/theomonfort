@@ -18,6 +18,8 @@ links:
     url: https://github.com/github/gh-aw
   - label: 公式ドキュメント（gh-aw）
     url: https://github.github.io/gh-aw/introduction/overview/
+  - label: クイックスタートと認証
+    url: https://github.github.com/gh-aw/setup/quick-start/
   - label: Peli's Agent Factory（Blog）
     url: https://github.github.com/gh-aw/blog/2026-01-12-welcome-to-pelis-agent-factory/
   - label: githubnext/agentics（サンプル集）
@@ -25,8 +27,8 @@ links:
   - label: gh-aw Wizard（ワークフロー生成）
     url: https://githubnext.github.io/gh-aw-wizard/
   - group: 📰 Recent Changelog
-    label: "GitHub Agentic Workflows is now in public preview (2026-06-11)"
-    url: https://github.blog/changelog/2026-06-11-github-agentic-workflows-is-now-in-public-preview/
+    label: "GitHub Agentic Workflows generally available (2026-10-28)"
+    url: https://github.blog/changelog/2026-10-28-github-agentic-workflows-generally-available
   - group: 📰 Recent Changelog
     label: "Agentic workflows no longer need a personal access token (2026-06-11)"
     url: https://github.blog/changelog/2026-06-11-agentic-workflows-no-longer-need-a-personal-access-token/
@@ -46,20 +48,19 @@ links:
   </p>
 </div>
 
-## 仕組み
+## 仕組みと GA の提供範囲 <a class="h2-doc" href="https://github.blog/changelog/2026-10-28-github-agentic-workflows-generally-available" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-### 概要
-- GitHub Actions 上で **AI エージェント** が作業を自動化
-- 現在 <a href="https://github.blog/changelog/2026-06-11-github-agentic-workflows-is-now-in-public-preview/" target="_blank" rel="noopener noreferrer" class="retro-link">パブリックプレビュー中</a>（2026 年 6 月 11 日発表）
-- もう <a href="https://github.blog/changelog/2026-06-11-agentic-workflows-no-longer-need-a-personal-access-token/" target="_blank" rel="noopener noreferrer" class="retro-link">PAT</a> は不要 — Actions 組み込みの `GITHUB_TOKEN` で動作
+**2026-10-28 に GA**。GitHub.com の Free、Team、Enterprise が対象。標準の Copilot エンジンには **Copilot ライセンス**が必要。
 
-### 構成要素
+| 構成 | 設定するもの |
+| --- | --- |
+| 記述 | Markdown の指示 + Actions のトリガー |
+| 実行 | Copilot などのエージェント、MCP / ツール |
+| 制御 | 原則 read-only、書き込みは検証済み `safe-outputs` 経由 |
 
-- ⚡ **トリガー** — `schedule (cron)` / `issue` / `PR` / `comment` / `@mention` など Actions と同じ
-- 📄 **記述** — `.github/workflows/NAME.md` に **自然言語の Markdown** で「やってほしいこと」を書く
-- 🤖 **エージェント** — Copilot / Claude / Codex などをランナー上で起動
-- 🔌 **MCP / ツール** — エージェントが GitHub API・外部サービスを呼び出して実作業
-- 🛡️ **safe-outputs** — デフォルト **read-only**。書き込みは PR / コメント / Label など **検証済みの境界** 経由のみ
+既存の **runner group と Actions ポリシー**を引き継ぐ。
+
+> **Org の Copilot を PAT なしで利用:** “Allow use of Copilot CLI billed to the organization” を有効化し、`copilot-requests: write` を付与。他のエンジンは個別の認証が必要。
 
 ## 何ができるか
 
@@ -72,27 +73,41 @@ links:
 
 > 🧪 サンプル集 <a href="https://github.com/githubnext/agentics" target="_blank" rel="noopener noreferrer" class="retro-link">githubnext/agentics</a> に動くテンプレートが揃っている。コピペで動かせる。<br />📝 開発者の実例ブログ <a href="https://github.github.com/gh-aw/blog/2026-01-12-welcome-to-pelis-agent-factory/" target="_blank" rel="noopener noreferrer" class="retro-link">Peli's Agent Factory</a> も最初に読むと雰囲気が掴める。
 
-## 始め方（4 ステップ）
+## 始め方（4 ステップ） <a class="h2-doc" href="https://github.github.com/gh-aw/setup/quick-start/" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="code-agentic-workflow" class="demo-toggle" /><label class="h2-demo h2-info" for="code-agentic-workflow">&lt;/&gt; CODE</label>
 
-1. **Step 1 — CLI 拡張をインストール** — `gh extension install github/gh-aw`
-2. **Step 2 — Markdown を書く** — `.github/workflows/NAME.md` にトリガーと指示を記述
-3. **Step 3 — コンパイル** — `gh aw compile` で `NAME.lock.yml` を生成
-4. **Step 4 — コミット & push** — lock ファイルを含めて push、以降は Actions が自動起動
+<div class="demo-panel is-info">
+<label class="demo-scrim" for="code-agentic-workflow" aria-label="workflow の例を閉じる"></label>
+<div class="demo-window" role="group" aria-label="Issue の要件を確認する workflow の例">
+<div class="demo-head"><span class="demo-tag">CODE</span><span class="demo-name">Issue clarifier</span><label class="demo-close" for="code-agentic-workflow" aria-label="閉じる">&#10005;</label></div>
+<div class="info-body">
+<p><code>.github/workflows/issue-clarifier.md</code> として保存。この例は Copilot の Org 課金を使うため、先にスライド 2 のポリシーを有効化する。</p>
 
 ```yaml
 ---
 on:
   issues:
     types: [opened]
-permissions: read-all
+permissions:
+  contents: read
+  issues: read
+  copilot-requests: write
 safe-outputs:
   add-comment:
 ---
 
-# Issue Clarifier
-新しく開かれた issue を読み、要件が曖昧なら
-- 何が起きているのか / 再現手順 / 期待される挙動
-の 3 点を確認するコメントを投稿せよ。明確なら何もしない。
+新しく開かれた issue を読み、要件が曖昧なら、
+実際の挙動、再現手順、期待する挙動を確認する。
+明確ならコメントしない。
 ```
 
-> ⚠️ **lock ファイルは Git にコミット**。これが実際に動く Actions ワークフローで、監査・レビューの対象。
+<p><code>gh aw compile</code> で生成した YAML をレビューし、両方をコミットする。<code>NAME.lock.yml</code> は実行される workflow であり、Actions の依存関係を固定する <code>actions.lock</code> とは別物。</p>
+</div>
+</div>
+</div>
+
+1. **導入:** `gh extension install github/gh-aw`
+2. **記述:** <code>.github/<wbr>workflows/<wbr>NAME.md</code> にトリガーと指示を書く。
+3. **生成:** `gh aw compile` で `NAME.lock.yml` を作る。
+4. **両方をレビューして push**。Actions で実行結果を確認。
+
+**実行前に:** Actions を有効化し、使うエンジンの認証を設定する。完全な例は **CODE** ボタンから確認できる。

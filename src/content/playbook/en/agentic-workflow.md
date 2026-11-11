@@ -18,6 +18,8 @@ links:
     url: https://github.com/github/gh-aw
   - label: Official documentation (gh-aw)
     url: https://github.github.io/gh-aw/introduction/overview/
+  - label: Quickstart and authentication
+    url: https://github.github.com/gh-aw/setup/quick-start/
   - label: Peli's Agent Factory (Blog)
     url: https://github.github.com/gh-aw/blog/2026-01-12-welcome-to-pelis-agent-factory/
   - label: githubnext/agentics (sample collection)
@@ -25,8 +27,8 @@ links:
   - label: gh-aw Wizard (workflow generator)
     url: https://githubnext.github.io/gh-aw-wizard/
   - group: 📰 Recent Changelog
-    label: "GitHub Agentic Workflows is now in public preview (2026-06-11)"
-    url: https://github.blog/changelog/2026-06-11-github-agentic-workflows-is-now-in-public-preview/
+    label: "GitHub Agentic Workflows generally available (2026-10-28)"
+    url: https://github.blog/changelog/2026-10-28-github-agentic-workflows-generally-available
   - group: 📰 Recent Changelog
     label: "Agentic workflows no longer need a personal access token (2026-06-11)"
     url: https://github.blog/changelog/2026-06-11-agentic-workflows-no-longer-need-a-personal-access-token/
@@ -46,20 +48,19 @@ links:
   </p>
 </div>
 
-## How it works
+## How it works, now GA <a class="h2-doc" href="https://github.blog/changelog/2026-10-28-github-agentic-workflows-generally-available" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-### Overview
-- **AI agents** automate work on top of GitHub Actions
-- Now in <a href="https://github.blog/changelog/2026-06-11-github-agentic-workflows-is-now-in-public-preview/" target="_blank" rel="noopener noreferrer" class="retro-link">public preview</a> (announced June 11, 2026)
-- No longer needs a <a href="https://github.blog/changelog/2026-06-11-agentic-workflows-no-longer-need-a-personal-access-token/" target="_blank" rel="noopener noreferrer" class="retro-link">PAT</a> — runs with the built-in `GITHUB_TOKEN`
+**Generally available since 2026-10-28** on GitHub.com: Free, Team and Enterprise. The default Copilot engine requires a **Copilot license**.
 
-### Components
+| Layer | What you configure |
+| --- | --- |
+| Describe | Markdown instructions + Actions triggers |
+| Run | Copilot or another agent, with MCP / tools |
+| Constrain | Read-only by default; validated `safe-outputs` for writes |
 
-- ⚡ **Trigger** — same as Actions: `schedule (cron)` / `issue` / `PR` / `comment` / `@mention`, etc.
-- 📄 **Description** — write "what you want done" in **natural-language Markdown** in `.github/workflows/NAME.md`
-- 🤖 **Agent** — Copilot / Claude / Codex and others launched on a runner
-- 🔌 **MCP / tools** — agents call GitHub API and external services to do real work
-- 🛡️ **safe-outputs** — read-only by default. Writes go only through **verified boundaries** like PRs, comments, and labels
+Existing **runner groups and Actions policies** still apply.
+
+> **PAT-free Copilot in an organization:** enable “Allow use of Copilot CLI billed to the organization” and grant `copilot-requests: write`. Other engines need their own authentication.
 
 ## What can it do?
 
@@ -72,28 +73,41 @@ links:
 
 > 🧪 The sample collection <a href="https://github.com/githubnext/agentics" target="_blank" rel="noopener noreferrer" class="retro-link">githubnext/agentics</a> has ready-to-run templates. Copy-paste to get started.<br />📝 Reading the developer blog <a href="https://github.github.com/gh-aw/blog/2026-01-12-welcome-to-pelis-agent-factory/" target="_blank" rel="noopener noreferrer" class="retro-link">Peli's Agent Factory</a> first gives you a good feel for how it all works.
 
-## Getting started (4 steps)
+## Getting started (4 steps) <a class="h2-doc" href="https://github.github.com/gh-aw/setup/quick-start/" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="code-agentic-workflow" class="demo-toggle" /><label class="h2-demo h2-info" for="code-agentic-workflow">&lt;/&gt; CODE</label>
 
-1. **Step 1 — Install the CLI extension** — `gh extension install github/gh-aw`
-2. **Step 2 — Write Markdown** — Add trigger and instructions to `.github/workflows/NAME.md`
-3. **Step 3 — Compile** — Run `gh aw compile` to generate `NAME.lock.yml`
-4. **Step 4 — Commit & push** — Push including the lock file; Actions will trigger automatically from then on
+<div class="demo-panel is-info">
+<label class="demo-scrim" for="code-agentic-workflow" aria-label="Close workflow example"></label>
+<div class="demo-window" role="group" aria-label="Issue clarifier workflow example">
+<div class="demo-head"><span class="demo-tag">CODE</span><span class="demo-name">Issue clarifier</span><label class="demo-close" for="code-agentic-workflow" aria-label="Close">&#10005;</label></div>
+<div class="info-body">
+<p>Save as <code>.github/workflows/issue-clarifier.md</code>. This example uses Copilot organization billing; enable the policy described on slide 2 first.</p>
 
 ```yaml
 ---
 on:
   issues:
     types: [opened]
-permissions: read-all
+permissions:
+  contents: read
+  issues: read
+  copilot-requests: write
 safe-outputs:
   add-comment:
 ---
 
-# Issue Clarifier
 Read newly opened issues. If the requirements are ambiguous,
-post a comment requesting clarification on these 3 points:
-- What is happening / reproduction steps / expected behavior
-Do nothing if the issue is already clear.
+ask for the actual behavior, reproduction steps and expected behavior.
+Otherwise, do not comment.
 ```
 
-> ⚠️ **Commit the lock file to Git**. It is the actual running Actions workflow and the target of audit and review.
+<p>Run <code>gh aw compile</code>, review the generated YAML, and commit both files. <code>NAME.lock.yml</code> is the executable workflow, not an Actions dependency <code>actions.lock</code>.</p>
+</div>
+</div>
+</div>
+
+1. **Install:** `gh extension install github/gh-aw`
+2. **Describe:** add triggers and instructions to <code>.github/<wbr>workflows/<wbr>NAME.md</code>.
+3. **Compile:** `gh aw compile` generates `NAME.lock.yml`.
+4. **Review and push both files**, then inspect the run in Actions.
+
+**Before running:** enable Actions and configure the chosen engine's authentication. The **CODE** button contains a complete example.

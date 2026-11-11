@@ -20,6 +20,8 @@ export const NEW_PLAYBOOK_SLUGS = new Set([
   'migrations',
   'dependabot',
   'cli',
+  'github-actions',
+  'agentic-workflow',
 ]);
 
 export function isNewPlaybookEntry(slug: string): boolean {
@@ -50,6 +52,8 @@ export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'dependabot': [5],
   'github-advanced-security': [6],
   'cli': [7],
+  'github-actions': [10],
+  'agentic-workflow': [1],
 };
 
 export function navHintSlides(slug: string): number[] {

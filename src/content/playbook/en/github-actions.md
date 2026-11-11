@@ -22,7 +22,7 @@ links:
     url: https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions
   - group: 📖 Official Documentation
     label: About billing for GitHub Actions
-    url: https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions
+    url: https://docs.github.com/en/billing/concepts/product-billing/github-actions
   - group: 📖 Official Documentation
     label: Actions runner pricing
     url: https://docs.github.com/en/billing/reference/actions-runner-pricing
@@ -38,6 +38,9 @@ links:
   - group: 🛒 Marketplace
     label: GitHub Marketplace · Actions
     url: https://github.com/marketplace?type=actions
+  - group: 📰 Recent Changelog
+    label: "Actions workflow lockfiles are generally available (2026-10-28)"
+    url: https://github.blog/changelog/2026-10-28-github-actions-workflow-lockfiles-are-generally-available
   - group: 📰 Recent Changelog
     label: "GitHub Actions: Upcoming image migrations (2026-05-14)"
     url: https://github.blog/changelog/2026-05-14-github-actions-upcoming-image-migrations
@@ -123,113 +126,137 @@ It's very simple: **when an event fires, borrow a clean VM, clone the repo, and 
 
 > 🧠 "Start from scratch every time" is the golden rule of GitHub Actions. To persist state, use `actions/cache`, artifacts, or rely on already-deployed infrastructure.
 
-## GitHub-hosted runners vs Self-hosted runners
+## Choose your runners <a class="h2-doc" href="https://docs.github.com/en/actions/concepts/runners/github-hosted-runners" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-| Aspect | 🟢 GitHub-hosted runner | 🛠️ Self-hosted runner |
+**GitHub-hosted for managed CI. Self-hosted for infrastructure you control.**
+
+| | GitHub-hosted | Self-hosted |
 | --- | --- | --- |
-| Management | GitHub provides, updates, and discards | You run it on your own server / VM / k8s |
-| OS | Linux / Windows / macOS | Anything (Raspberry Pi, on-prem LAN, GPU machines) |
-| Network | Public internet | Direct access to internal networks / VPN resources |
-| Scale | Auto-starts on demand, unlimited parallelism (within plan limits) | You manage capacity |
-| Cost | **Time-based billing** (see table below) | **Runner itself is free** (just your own infra costs) |
-| Use case | General CI/CD, OSS, lightweight jobs | Dedicated hardware, internal resource access, sensitive workloads, huge builds |
+| Maintenance | GitHub manages the environment | You patch and secure it |
+| Capacity | On demand, within plan limits | Your machines; ARC for Kubernetes |
+| Network | Public or configured private access | Your network and hardware |
+| Compute cost | Free standard public CI; otherwise metered | Your infrastructure, no Actions compute charge |
 
-> 🌐 As a middle ground, consider **larger runners** (high-spec GitHub-hosted) or **Actions Runner Controller** to run auto-scaling self-hosted runners on k8s.
+Need more power without managing machines? Use **larger runners** on Team or Enterprise Cloud.
 
-## Reuse components from the Marketplace
+## Reuse Marketplace actions <a class="h2-doc" href="https://docs.github.com/en/actions/reference/security/secure-use" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-You don't have to write everything from scratch. **GitHub Marketplace** has **20,000+** reusable actions.
+Compose existing actions instead of writing every step yourself.
 
-```yaml
-steps:
-  - uses: actions/checkout@v4              # GitHub official: clone repo
-  - uses: actions/setup-node@v4            # Set up Node.js environment
-    with: { node-version: 20 }
-  - uses: docker/build-push-action@v5      # Build & push Docker image
-  - uses: aws-actions/configure-aws-credentials@v4
-```
+| Task | Reusable action |
+| --- | --- |
+| Check out code | `actions/checkout` |
+| Install Node.js | `actions/setup-node` |
+| Build a container | `docker/build-push-action` |
 
-- 🏷️ **Official verified actions** — GitHub, AWS, Azure, GCP, Docker, HashiCorp, and other major vendors
-- 🔓 **OSS actions** — anyone can publish (`uses: owner/repo@sha` to reference)
-- 📌 **Always pin versions** — **commit SHA pins** are safer than tags (`@v4`) against supply chain attacks
-- 🛡️ **Org allowlist** — restrict available actions via `Settings → Actions → Allowed actions`
+- **Review the source**, including actions from verified creators.
+- **Lock dependencies or pin full commit SHAs**; tags can move.
+- **Set an organization allowlist** in Settings → Actions → General.
 
-## Getting started (fastest path)
+## Start with one workflow <a class="h2-doc" href="https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-Just drop a `.github/workflows/ci.yml`:
+For a Node.js project, add <code>.github/<wbr>workflows/<wbr>ci.yml</code>:
 
 ```yaml
 name: CI
-on:
-  push:        { branches: [main] }
-  pull_request:
+on: { push: { branches: [main] }, pull_request: {} }
+permissions: { contents: read }
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: 20 }
-      - run: npm ci
-      - run: npm test
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: 24 }
+      - run: npm ci && npm test
 ```
 
-The moment you push, execution logs appear in the **Actions tab**. Failures show as ❌ on the PR.
+Push → **Actions logs + PR checks**. Use a dependency lockfile or full SHA pins for the action references.
 
-> 🚀 Start with `runs-on: ubuntu-latest` for everything, then scale out to Windows / macOS / larger runners / self-hosted as needed.
+## Compute and pricing <a class="h2-doc" href="https://docs.github.com/en/billing/concepts/product-billing/github-actions" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="info-actions-pricing" class="demo-toggle" /><label class="h2-demo h2-info" for="info-actions-pricing">&#9432; INFO</label>
 
-## Eligibility and pricing
-
-**Public repos get GitHub-hosted runners completely free — only concurrency limits apply.** Private repos get a monthly free tier per plan; overages are pay-as-you-go.
-
-### Free tier per plan (private repos / month)
-
-| Plan | Actions minutes / month | Storage |
-| --- | :---: | :---: |
-| Free | 2,000 min | 500 MB |
-| Pro | 3,000 min | 1 GB |
-| Team | 3,000 min | 2 GB |
-| Enterprise | 50,000 min | 50 GB |
-
-> 💡 Free tier counts **Linux as 1× multiplier**. Windows consumes **2×** and macOS consumes **10×** — watch out.
-
-### Per-OS / per-size unit pricing (overages · 2-core standard)
-
-| OS / Runner | Multiplier | Unit price (USD/min) | Notes |
-| --- | :---: | :---: | --- |
-| Linux 2-core | 1× | $0.008 | Standard, cheapest |
-| Windows 2-core | 2× | $0.016 | 2× Linux |
-| macOS 3-core | 10× | $0.08 | iOS / Mac builds |
-| Linux 4-core (larger) | — | $0.016 | Team / Enterprise |
-| Linux 8-core (larger) | — | $0.032 | |
-| Linux 16-core (larger) | — | $0.064 | |
-| Linux 64-core (larger) | — | $0.256 | Huge builds |
-| GPU runner | — | $0.07+ | ML / inference |
-
-> 💰 Storage overages are **$0.25 / GB** (artifacts + Actions cache + Packages combined).  
-> 🛠️ **Self-hosted runners incur no GitHub billing** (as of now). Running on your own server / k8s means execution time is free — you just pay for your own infrastructure and electricity.  
-> 🌍 Billing is **usage-time-based, not per active committer**. Even a solo developer who runs CI heavily will see charges.
-
-## Your CI is not the only thing burning minutes <a class="h2-doc" href="https://docs.github.com/en/billing/tutorials/soft-budgets" target="_blank" rel="noopener noreferrer">📖 Docs</a>
-
-Alongside the CI/CD you wrote yourself, the headline Copilot and GHAS features run on **the same GitHub-hosted runners** and turn **the same Actions meter**.
-
-<div class="tbl-compact">
-
-| What spends Actions minutes | How it is billed |
-| --- | --- |
-| 🤖 <a class="retro-link" href="/theomonfort/en/playbook/cloud-agent/">Cloud Agent</a> | Every task it implements |
-| 👀 <a class="retro-link" href="/theomonfort/en/playbook/copilot-code-review/">Copilot Code Review</a> | Every review on a private repo |
-| 🔍 <a class="retro-link" href="/theomonfort/en/playbook/code-scanning/">Code Scanning (CodeQL)</a> | Every push, PR and weekly scan |
-| 🩺 <a class="retro-link" href="/theomonfort/en/playbook/code-quality/">Code Quality</a> | Every scan it runs |
-| ⚙️ Your own CI/CD | Whatever your workflows do |
-
+<div class="demo-panel is-info">
+<label class="demo-scrim" for="info-actions-pricing" aria-label="Close pricing details"></label>
+<div class="demo-window" role="group" aria-label="Compute and storage pricing">
+<div class="demo-head"><span class="demo-tag">INFO</span><span class="demo-name">Compute and storage</span><label class="demo-close" for="info-actions-pricing" aria-label="Close">&#10005;</label></div>
+<div class="info-body">
+<p>USD, as of 2026-11-11. Compute is a monthly monetary allowance, not a fixed minute quota. Eligible runner usage and cloud sandbox compute/memory draw from the same allowance.</p>
+<ul class="info-list">
+<li><b>Standard rates:</b> Linux x64 2-core $0.006/min, Windows x64 2-core $0.010/min, macOS 3/4-core $0.062/min. See <a class="retro-link" href="https://docs.github.com/en/billing/reference/actions-runner-pricing" target="_blank" rel="noopener noreferrer">all runner sizes and rates ↗</a>.</li>
+<li><b>Larger runners:</b> paid even for public repositories. Eligible usage can draw from Team / Enterprise Cloud included compute.</li>
+<li><b>Artifact storage:</b> Free 500 MB, Pro 1 GB, Team 2 GB, Enterprise Cloud 50 GB, shared with Packages. Overage: $0.25/GB-month.</li>
+<li><b>Cache storage:</b> separate 10 GB per repository; configured extra capacity costs $0.07/GB-month. Custom image storage has a separate allowance and the same overage rate.</li>
+<li><b>Billing:</b> the repository owner pays. Storage accrues hourly; deleting an artifact stops future charges, not past usage.</li>
+</ul>
+</div>
+</div>
 </div>
 
-### A hard budget stops all of it at once
+**Standard public runners and self-hosted compute are free.** Other eligible usage draws from a shared allowance.
 
-Exhaust a budget that has **Stop usage when budget limit is reached** ticked and **every GitHub-hosted runner halts**. It is not just CI going red: CodeQL scanning and Copilot stop in the same instant.
+| Plan | Included compute / month |
+| --- | ---: |
+| Free | $12 |
+| Pro / Team | $18 |
+| Enterprise Cloud | $300 |
 
-- ✅ **Prefer alert-only** — leave the box unticked for a "soft budget". Owners and billing managers are emailed at **75 / 90 / 100%** and nothing is blocked
-- 📊 **Measure before you cap** — <code>github.com/enterprises/&lt;enterprise slug&gt;/actions/metrics/usage</code> breaks minutes down by workflow, repo and OS
-- 🛠️ **Self-hosted runners are not billed** — the problem never arises there
+USD, **as of 2026-11-11**. Example: $300 covers **50,000 Linux 2-core minutes** at $0.006/min. Additional usage is billed; storage is separate.
+
+## Budget beyond your CI <a class="h2-doc" href="https://docs.github.com/en/billing/how-tos/set-up-budgets" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+**Automation shares compute; AI credits are a separate meter.**
+
+| Consumer | Compute usage |
+| --- | --- |
+| CI, <a class="retro-link" href="/theomonfort/en/playbook/code-scanning/">CodeQL</a>, <a class="retro-link" href="/theomonfort/en/playbook/code-quality/">Code Quality</a> | Hosted workflow / scan runs |
+| <a class="retro-link" href="/theomonfort/en/playbook/copilot-code-review/">Copilot Code Review</a> | Agentic context gathering and tools |
+| <a class="retro-link" href="/theomonfort/en/playbook/cloud-agent/">Copilot cloud tasks</a> | Actions or cloud sandbox compute |
+
+- **Monitor first:** soft budgets with **75 / 90 / 100%** alerts; inspect Actions usage metrics.
+- **Cap deliberately:** “Stop usage when budget limit is reached” blocks further billed usage **within that budget's scope**.
+
+Code review can still run without its Actions-powered agentic capabilities. An Actions budget does **not** stop every Copilot feature.
+
+## Workflow lockfiles (GA) <a class="h2-doc" href="https://docs.github.com/en/actions/concepts/security/workflow-dependency-lockfiles" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-actions-lockfiles" class="demo-toggle" /><label class="h2-demo" for="demo-actions-lockfiles">&#9658; DEMO</label>
+
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-actions-lockfiles" aria-label="Close demo steps"></label>
+<div class="demo-window" role="group" aria-label="Demo steps">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Lock this site's workflow</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-actions-lockfiles" aria-label="Close">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">COMPARE A TAG AND A COMMIT</p>
+<p>Open <a class="retro-link" href="https://github.com/actions/checkout/tree/v4" target="_blank" rel="noopener noreferrer">checkout@v4 ↗</a>, then <a class="retro-link" href="https://github.com/actions/checkout/commit/11d5960a326750d5838078e36cf38b85af677262" target="_blank" rel="noopener noreferrer">the locked commit ↗</a>.</p>
+<p class="demo-out">A tag can move; a full SHA identifies one revision. Even <code>v4.4.0</code> is a tag.</p>
+</li>
+<li>
+<p class="demo-step-title">OPEN THE EXISTING LOCKFILE</p>
+<p>Open <a class="retro-link" href="https://github.com/theomonfort/theomonfort/blob/main/.github/workflows/actions.lock" target="_blank" rel="noopener noreferrer">this site's actions.lock ↗</a>. Show <code class="demo-path">workflows</code>, then <code class="demo-path">dependencies</code>.</p>
+<p class="demo-out">Compare checkout's recorded SHA with the commit page. Show <code>owner_id</code>, <code>repo_id</code> and the transitive <code>upload-artifact</code> dependency.</p>
+</li>
+<li>
+<p class="demo-step-title">VERIFY WITHOUT MODIFYING FILES</p>
+<p>In an up-to-date checkout of this site, with <code>gh-actions-lock</code> installed:</p>
+<code class="demo-cmd">gh actions-lock --verify .github/workflows/deploy.yml</code>
+<p class="demo-out">Verification succeeds when the workflow and lockfile agree. The current <code>v4</code> tag need not match the recorded <code>v4.4.0</code> commit.</p>
+</li>
+<li>
+<p class="demo-step-title">REQUIRE LOCKFILES GRADUALLY</p>
+<p>As an authorized administrator, open <a class="retro-link" href="https://github.com/organizations/theomonfort-org/settings/actions/rules/new" target="_blank" rel="noopener noreferrer">theomonfort-org → New Actions policy ↗</a>. Name the policy, scope the demo repositories/workflows, enable <code class="demo-path">Require lockfile</code>, then save.</p>
+<p class="demo-out">On Enterprise Cloud, start in <code>Evaluate</code> and inspect <code>Policy insights</code>. Switch to <code>Active</code> only after targeted workflows are onboarded.</p>
+</li>
+</ol>
+</div>
+</div>
+
+**Keep readable tags; run the reviewed commits.** GA since **2026-10-28** on Free, Team and Enterprise Cloud, including data residency.
+
+- **Lock:** `gh actions-lock` records actions and transitive dependencies.
+- **Update:** Dependabot refreshes the matching lock entry in the same PR.
+- **Enforce:** the **Require lockfile** policy blocks workflows not onboarded.
+
+```text
+.github/workflows/actions.lock
+```
+
+> Locking fixes the version, not its safety. Pin reusable workflow calls separately by full SHA.
