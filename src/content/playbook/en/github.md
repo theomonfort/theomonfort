@@ -129,142 +129,37 @@ From collaborating on code to coordinating work across agents.
 </figure>
 
 
-## AI Developer Platform
+## <span class="gh-platform-title">AI Developer Platform</span>
 
-From **Plan → Code → Review → Test & Security → Operate**, AI on GitHub supports the entire SDLC end-to-end.
-
-<figure class="rpi-pipeline" style="margin:2em 0;">
-<div class="plat-toggle">
-  <button type="button" data-f="all" class="on">All</button>
-  <button type="button" data-f="cop">🤖 Copilot</button>
-  <button type="button" data-f="nat">Other</button>
+<figure class="rpi-pipeline gh-platform">
+<figcaption>AI on GitHub supports the <strong>entire SDLC</strong>, from planning to operations.</figcaption>
+<div class="plat-toggle" role="group" aria-label="Highlight platform tools">
+  <button type="button" data-f="all" class="on" aria-pressed="true">All</button>
+  <button type="button" data-f="cop" aria-pressed="false">🤖 Copilot</button>
+  <button type="button" data-f="nat" aria-pressed="false">Other</button>
 </div>
-<style>
-.plat-toggle{display:flex;gap:.6em;justify-content:center;margin-bottom:1em;flex-wrap:wrap}
-.plat-toggle button{font-family: 'Noto Sans JP', sans-serif;background:#0a0e27;color:#e8f4ff;border:2px solid #2a3050;padding:.35em 1em;cursor:pointer;font-size:.95em}
-.plat-toggle button.on{border-color:#9bbc0f;color:#9bbc0f;box-shadow:0 0 8px #9bbc0f}
-.rpi-pipeline .plat-item{transition:opacity .25s}
-.rpi-pipeline.f-cop .plat-item[data-cop="0"]{opacity:.1}
-.rpi-pipeline.f-nat .plat-item[data-cop="1"]{opacity:.1}
-</style>
-<svg viewBox="0 0 1080 510" xmlns="http://www.w3.org/2000/svg"
-     shape-rendering="crispEdges"
-     style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
-  <rect x="0" y="0" width="1080" height="510" fill="none"/>
-  <!-- ── Card 1: PLAN ── green ─────────────────────────────────── -->
-  <g>
-    <rect x="16" y="64" width="200" height="400" fill="#0f1604"/>
-    <rect x="12" y="60" width="200" height="400" fill="#0a0e27" stroke="#9bbc0f" stroke-width="3"/>
-    <path d="M 18 66 h 12 M 18 66 v 12 M 206 66 h -12 M 206 66 v 12 M 18 454 h 12 M 18 454 v -12 M 206 454 h -12 M 206 454 v -12" stroke="#9bbc0f" stroke-width="2" fill="none"/>
-    <rect x="32" y="38" width="160" height="44" fill="#05060f" stroke="#9bbc0f" stroke-width="3"/>
-    <text x="112" y="67" text-anchor="middle" fill="#9bbc0f" font-size="18" font-weight="bold">▮ PLAN</text>
-    <line x1="22" y1="100" x2="202" y2="100" stroke="#9bbc0f" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
-    <g>
-      <g class="plat-item" data-cop="0"><rect x="22" y="118" width="180" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="112" y="143" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ GitHub Projects</text></g>
-      <g class="plat-item" data-cop="0"><rect x="22" y="166" width="180" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="112" y="191" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Issues/Discussions</text></g>
-      <g class="plat-item" data-cop="1"><rect x="22" y="214" width="180" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="112" y="239" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Plan mode</text></g>
-      <g class="plat-item" data-cop="1"><rect x="22" y="262" width="180" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="112" y="287" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ MCP</text></g>
-      <g class="plat-item" data-cop="1"><rect x="22" y="310" width="180" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="112" y="335" text-anchor="middle" fill="#e8f4ff" font-size="12">▶ Skills/Instructions ...</text></g>
-    </g>
-  </g>
-  <!-- ── Card 2: CODE ── magenta ────────────────────────────────────── -->
-  <g>
-    <rect x="230" y="64" width="200" height="400" fill="#1a0610"/>
-    <rect x="226" y="60" width="200" height="400" fill="#0a0e27" stroke="#ff2e88" stroke-width="3"/>
-    <path d="M 232 66 h 12 M 232 66 v 12 M 420 66 h -12 M 420 66 v 12 M 232 454 h 12 M 232 454 v -12 M 420 454 h -12 M 420 454 v -12" stroke="#ff2e88" stroke-width="2" fill="none"/>
-    <rect x="246" y="38" width="160" height="44" fill="#05060f" stroke="#ff2e88" stroke-width="3"/>
-    <text x="326" y="67" text-anchor="middle" fill="#ff2e88" font-size="18" font-weight="bold">▮ CODE</text>
-    <line x1="236" y1="100" x2="416" y2="100" stroke="#ff2e88" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
-    <g>
-      <g class="plat-item" data-cop="1"><rect x="236" y="118" width="180" height="38" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
-      <text x="326" y="143" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Copilot Chat</text></g>
-      <g class="plat-item" data-cop="1"><rect x="236" y="166" width="180" height="38" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
-      <text x="326" y="191" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Cloud Agent</text></g>
-      <g class="plat-item" data-cop="1"><rect x="236" y="214" width="180" height="38" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
-      <text x="326" y="239" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ CLI</text></g>
-      <g class="plat-item" data-cop="1"><rect x="236" y="262" width="180" height="38" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
-      <text x="326" y="287" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Copilot App</text></g>
-      <g class="plat-item" data-cop="0"><rect x="236" y="310" width="180" height="38" fill="#0e1430" stroke="#ff2e88" stroke-width="2"/>
-      <text x="326" y="335" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Codespaces</text></g>
-    </g>
-  </g>
-  <!-- ── Card 3: REVIEW ── amber ─────────────────────────────────── -->
-  <g>
-    <rect x="444" y="64" width="200" height="400" fill="#1f1404"/>
-    <rect x="440" y="60" width="200" height="400" fill="#0a0e27" stroke="#ffb000" stroke-width="3"/>
-    <path d="M 446 66 h 12 M 446 66 v 12 M 634 66 h -12 M 634 66 v 12 M 446 454 h 12 M 446 454 v -12 M 634 454 h -12 M 634 454 v -12" stroke="#ffb000" stroke-width="2" fill="none"/>
-    <rect x="460" y="38" width="160" height="44" fill="#05060f" stroke="#ffb000" stroke-width="3"/>
-    <text x="540" y="67" text-anchor="middle" fill="#ffb000" font-size="18" font-weight="bold">▮ REVIEW</text>
-    <line x1="450" y1="100" x2="630" y2="100" stroke="#ffb000" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
-    <g>
-      <g class="plat-item" data-cop="0"><rect x="450" y="118" width="180" height="44" fill="#0e1430" stroke="#ffb000" stroke-width="2"/>
-      <text x="540" y="146" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Pull Requests</text></g>
-      <g class="plat-item" data-cop="1"><rect x="450" y="178" width="180" height="44" fill="#0e1430" stroke="#ffb000" stroke-width="2"/>
-      <text x="540" y="206" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Code Review</text></g>
-      <g class="plat-item" data-cop="1"><rect x="450" y="238" width="180" height="44" fill="#0e1430" stroke="#ffb000" stroke-width="2"/>
-      <text x="540" y="266" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Playwright</text></g>
-      <g class="plat-item" data-cop="1"><rect x="450" y="298" width="180" height="44" fill="#0e1430" stroke="#ffb000" stroke-width="2"/>
-      <text x="540" y="326" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Rubber Duck</text></g>
-    </g>
-  </g>
-  <!-- ── Card 4: TEST &amp; SECURE ── cyan ──────────────────────── -->
-  <g>
-    <rect x="658" y="64" width="200" height="400" fill="#02181c"/>
-    <rect x="654" y="60" width="200" height="400" fill="#0a0e27" stroke="#00f0ff" stroke-width="3"/>
-    <path d="M 660 66 h 12 M 660 66 v 12 M 848 66 h -12 M 848 66 v 12 M 660 454 h 12 M 660 454 v -12 M 848 454 h -12 M 848 454 v -12" stroke="#00f0ff" stroke-width="2" fill="none"/>
-    <rect x="668" y="38" width="172" height="44" fill="#05060f" stroke="#00f0ff" stroke-width="3"/>
-    <text x="754" y="67" text-anchor="middle" fill="#00f0ff" font-size="15" font-weight="bold">▮ TEST &amp; SECURE</text>
-    <line x1="664" y1="100" x2="844" y2="100" stroke="#00f0ff" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
-    <g>
-      <g class="plat-item" data-cop="0"><rect x="664" y="118" width="180" height="38" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
-      <text x="754" y="143" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Actions</text></g>
-      <g class="plat-item" data-cop="1"><rect x="664" y="166" width="180" height="38" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
-      <text x="754" y="191" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Autofix</text></g>
-      <g class="plat-item" data-cop="0"><rect x="664" y="214" width="180" height="38" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
-      <text x="754" y="239" text-anchor="middle" fill="#e8f4ff" font-size="14">▶ Code Quality</text></g>
-      <g class="plat-item" data-cop="0"><rect x="664" y="262" width="180" height="38" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
-      <text x="754" y="287" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Code Scanning</text></g>
-      <g class="plat-item" data-cop="0"><rect x="664" y="310" width="180" height="38" fill="#0e1430" stroke="#00f0ff" stroke-width="2"/>
-      <text x="754" y="335" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Secret Protection</text></g>
-    </g>
-  </g>
-  <!-- ── Card 5: OPERATE ── green ──────────────────────────────── -->
-  <g>
-    <rect x="872" y="64" width="200" height="400" fill="#0f1604"/>
-    <rect x="868" y="60" width="200" height="400" fill="#0a0e27" stroke="#9bbc0f" stroke-width="3"/>
-    <path d="M 874 66 h 12 M 874 66 v 12 M 1062 66 h -12 M 1062 66 v 12 M 874 454 h 12 M 874 454 v -12 M 1062 454 h -12 M 1062 454 v -12" stroke="#9bbc0f" stroke-width="2" fill="none"/>
-    <rect x="888" y="38" width="160" height="44" fill="#05060f" stroke="#9bbc0f" stroke-width="3"/>
-    <text x="968" y="67" text-anchor="middle" fill="#9bbc0f" font-size="18" font-weight="bold">▮ OPERATE</text>
-    <line x1="878" y1="100" x2="1058" y2="100" stroke="#9bbc0f" stroke-width="1" stroke-dasharray="4 4" opacity="0.55"/>
-    <g>
-      <g class="plat-item" data-cop="1"><rect x="878" y="118" width="180" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="968" y="143" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Agentic Workflows</text></g>
-      <g class="plat-item" data-cop="1"><rect x="878" y="166" width="180" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="968" y="191" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Copilot Memory</text></g>
-      <g class="plat-item" data-cop="1"><rect x="878" y="214" width="180" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="968" y="239" text-anchor="middle" fill="#e8f4ff" font-size="13">▶ Copilot Metrics</text></g>
-      <g class="plat-item" data-cop="0"><rect x="878" y="262" width="180" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="968" y="287" text-anchor="middle" fill="#e8f4ff" font-size="12">▶ REST/GraphQL API</text></g>
-      <g class="plat-item" data-cop="0"><rect x="878" y="310" width="180" height="38" fill="#0e1430" stroke="#9bbc0f" stroke-width="2"/>
-      <text x="968" y="335" text-anchor="middle" fill="#e8f4ff" font-size="11">▶ Packages/Registry</text></g>
-    </g>
-  </g>
-  <!-- ── scanline overlay (subtle CRT vibe) ──────────────────────── -->
-  <g opacity="0.08">
-    <line x1="0" y1="80"  x2="1080" y2="80"  stroke="#e8f4ff" stroke-width="1"/>
-    <line x1="0" y1="140" x2="1080" y2="140" stroke="#e8f4ff" stroke-width="1"/>
-    <line x1="0" y1="200" x2="1080" y2="200" stroke="#e8f4ff" stroke-width="1"/>
-    <line x1="0" y1="260" x2="1080" y2="260" stroke="#e8f4ff" stroke-width="1"/>
-    <line x1="0" y1="320" x2="1080" y2="320" stroke="#e8f4ff" stroke-width="1"/>
-    <line x1="0" y1="380" x2="1080" y2="380" stroke="#e8f4ff" stroke-width="1"/>
-    <line x1="0" y1="440" x2="1080" y2="440" stroke="#e8f4ff" stroke-width="1"/>
-  </g>
-</svg>
+<div class="gh-platform-stages">
+<section class="gh-platform-stage">
+<h3><span>01</span> PLAN</h3>
+<ul><li class="plat-item" data-cop="0">GitHub Projects</li><li class="plat-item" data-cop="0">Issues/Discussions</li><li class="plat-item" data-cop="1">Plan mode</li><li class="plat-item" data-cop="1">MCP</li><li class="plat-item" data-cop="1">Skills/Instructions ...</li></ul>
+</section>
+<section class="gh-platform-stage">
+<h3><span>02</span> CODE</h3>
+<ul><li class="plat-item" data-cop="1">Copilot Chat</li><li class="plat-item" data-cop="1">Cloud Agent</li><li class="plat-item" data-cop="1">CLI</li><li class="plat-item" data-cop="1">Copilot App</li><li class="plat-item" data-cop="0">Codespaces</li></ul>
+</section>
+<section class="gh-platform-stage">
+<h3><span>03</span> REVIEW</h3>
+<ul><li class="plat-item" data-cop="0">Pull Requests</li><li class="plat-item" data-cop="1">Code Review</li><li class="plat-item" data-cop="1">Playwright</li><li class="plat-item" data-cop="1">Rubber Duck</li></ul>
+</section>
+<section class="gh-platform-stage">
+<h3><span>04</span> TEST &amp; SECURE</h3>
+<ul><li class="plat-item" data-cop="0">Actions</li><li class="plat-item" data-cop="1">Autofix</li><li class="plat-item" data-cop="0">Code Quality</li><li class="plat-item" data-cop="0">Code Scanning</li><li class="plat-item" data-cop="0">Secret Protection</li></ul>
+</section>
+<section class="gh-platform-stage">
+<h3><span>05</span> OPERATE</h3>
+<ul><li class="plat-item" data-cop="1">Agentic Workflows</li><li class="plat-item" data-cop="1">Copilot Memory</li><li class="plat-item" data-cop="1">Copilot Metrics</li><li class="plat-item" data-cop="0">REST/GraphQL API</li><li class="plat-item" data-cop="0">Packages/Registry</li></ul>
+</section>
+</div>
 </figure>
 <script>
 (function(){
@@ -274,12 +169,15 @@ From **Plan → Code → Review → Test & Security → Operate**, AI on GitHub 
       if(!toggle||fig.dataset.platBound==='1')return;
       fig.dataset.platBound='1';
       var btns=toggle.querySelectorAll('button');
-      btns.forEach(function(b){b.addEventListener('click',function(){
+      btns.forEach(function(b){
+        b.addEventListener('keydown',function(e){if(e.key===' ')e.stopPropagation();});
+        b.addEventListener('click',function(){
         fig.classList.remove('f-cop','f-nat');
         if(b.dataset.f==='cop')fig.classList.add('f-cop');
         if(b.dataset.f==='nat')fig.classList.add('f-nat');
-        btns.forEach(function(x){x.classList.remove('on');});
+        btns.forEach(function(x){x.classList.remove('on');x.setAttribute('aria-pressed','false');});
         b.classList.add('on');
+        b.setAttribute('aria-pressed','true');
       });});
     });
   }
