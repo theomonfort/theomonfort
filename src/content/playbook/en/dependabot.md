@@ -331,6 +331,50 @@ body.present-mode .prose-akq > h2:has(.dependency-feature-title)::before{top:.35
 </div>
 </div>
 
+## <span class="dependency-feature-title">Package firewall: architecture</span> <span class="dependency-feature-links"><a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/protecting-endpoints-with-package-firewall#configuring-artifactory" target="_blank" rel="noopener noreferrer">📖 Docs</a></span>
+
+<div class="dependency-feature dependency-architecture">
+<style>
+.prose-akq .dependency-route-block{border:1px solid #e8f4ff22;background:#0a0e27cc;padding:14px}
+.prose-akq .dependency-route-block + .dependency-route-block{margin-top:12px}
+.prose-akq .dependency-route-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.prose-akq .dependency-feature .dependency-route-heading h3{margin:0;font-size:1em;line-height:1.3;color:#e8f4ff}
+.prose-akq .dependency-route-status{color:#ffb000;border:1px solid #ffb00066;padding:2px 6px;font-size:14px;white-space:nowrap}
+.prose-akq .dependency-route-flow{display:grid;grid-template-columns:minmax(0,1fr) 20px minmax(0,1fr) 20px minmax(0,1.3fr) 20px minmax(0,.9fr);gap:8px;align-items:center}
+.prose-akq .dependency-route-node{display:flex;align-items:center;justify-content:center;min-width:0;min-height:76px;padding:12px 8px;border:1px solid #a8bed266;text-align:center;overflow-wrap:anywhere}
+.prose-akq .dependency-route-node.is-firewall{border:2px solid #00f0ff;background:#00f0ff12;color:#00f0ff}
+.prose-akq .dependency-route-arrow{display:flex;align-items:center;color:#00f0ff;font-size:20px;line-height:1}
+.prose-akq .dependency-route-arrow::before{content:"";flex:1;height:2px;background:currentColor}
+.prose-akq .dependency-route-arrow::after{content:"→"}
+.prose-akq .dependency-route-arrow-long{grid-column:2 / 5}
+@media(max-width:520px){.prose-akq .dependency-route-flow{grid-template-columns:1fr}.prose-akq .dependency-route-arrow-long{grid-column:auto}.prose-akq .dependency-route-arrow{justify-content:center}.prose-akq .dependency-route-arrow::before{display:none}.prose-akq .dependency-route-arrow::after{content:"↓"}.prose-akq .dependency-route-heading{flex-wrap:wrap}}
+</style>
+<p class="dependency-lead">An artifact manager is <b>not required</b>.</p>
+<div class="dependency-route-block">
+<div class="dependency-route-heading"><h3>01 / Direct connection</h3></div>
+<div class="dependency-route-flow" role="img" aria-label="Developer, agent or CI requests go directly through GitHub package firewall to the npm registry.">
+<span class="dependency-route-node"><span>Developer<br>/ agent / CI</span></span>
+<span class="dependency-route-arrow dependency-route-arrow-long" aria-hidden="true"></span>
+<span class="dependency-route-node is-firewall"><strong>GitHub<br>package firewall</strong></span>
+<span class="dependency-route-arrow" aria-hidden="true"></span>
+<span class="dependency-route-node"><span>npm<br>registry</span></span>
+</div>
+</div>
+<div class="dependency-route-block">
+<div class="dependency-route-heading"><h3>02 / Optional Artifactory</h3><span class="dependency-route-status">Experimental integration</span></div>
+<div class="dependency-route-flow" role="img" aria-label="Developer, agent or CI requests go through optional Artifactory, then GitHub package firewall, then the npm registry.">
+<span class="dependency-route-node"><span>Developer<br>/ agent / CI</span></span>
+<span class="dependency-route-arrow" aria-hidden="true"></span>
+<span class="dependency-route-node">Artifactory</span>
+<span class="dependency-route-arrow" aria-hidden="true"></span>
+<span class="dependency-route-node is-firewall"><strong>GitHub<br>package firewall</strong></span>
+<span class="dependency-route-arrow" aria-hidden="true"></span>
+<span class="dependency-route-node"><span>npm<br>registry</span></span>
+</div>
+</div>
+<p class="dependency-note">Both paths must route public npm requests through the firewall.</p>
+</div>
+
 ## Eligibility and pricing <a class="h2-doc" href="https://docs.github.com/en/get-started/learning-about-github/about-github-advanced-security" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 Core Dependabot is **free on every plan**. Only Code Security premium features cost extra.
