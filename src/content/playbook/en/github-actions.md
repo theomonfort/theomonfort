@@ -242,7 +242,8 @@ Code review can still run without its Actions-powered agentic capabilities. An A
 </li>
 <li>
 <p class="demo-step-title">REQUIRE LOCKFILES GRADUALLY</p>
-<p>As an authorized administrator, open <a class="retro-link" href="https://github.com/organizations/theomonfort-org/settings/actions/rules/new?target=actions&amp;enforcement=disabled" target="_blank" rel="noopener noreferrer">theomonfort-org → New Actions policy ↗</a>. Name the policy, scope the demo repositories/workflows, enable <code class="demo-path">Require lockfile</code>, then save.</p>
+<p>As an authorized administrator, open <a class="retro-link" href="https://github.com/organizations/theomonfort-org/settings/actions/rules" target="_blank" rel="noopener noreferrer">theomonfort-org → Actions Policies ↗</a>.</p>
+<p>Path: organization <code class="demo-path">Settings → Actions → Policies → New policy → New policy</code> (in the dropdown). Name the policy, scope the demo repositories/workflows, enable <code class="demo-path">Require lockfile</code>, then save.</p>
 <p class="demo-out">On Enterprise Cloud, start in <code>Evaluate</code> and inspect <code>Policy insights</code>. Switch to <code>Active</code> only after targeted workflows are onboarded.</p>
 </li>
 </ol>

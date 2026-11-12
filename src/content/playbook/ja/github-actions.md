@@ -242,7 +242,8 @@ Code Review は Actions によるエージェント機能なしでも動作可�
 </li>
 <li>
 <p class="demo-step-title">LOCKFILE を段階的に必須化</p>
-<p>権限のある管理者として <a class="retro-link" href="https://github.com/organizations/theomonfort-org/settings/actions/rules/new?target=actions&amp;enforcement=disabled" target="_blank" rel="noopener noreferrer">theomonfort-org → New Actions policy ↗</a> を開く。名前とデモ対象 repo / workflow を設定し、<code class="demo-path">Require lockfile</code> をオンにして保存。</p>
+<p>権限のある管理者として <a class="retro-link" href="https://github.com/organizations/theomonfort-org/settings/actions/rules" target="_blank" rel="noopener noreferrer">theomonfort-org → Actions Policies ↗</a> を開く。</p>
+<p>場所: Organization の <code class="demo-path">Settings → Actions → Policies → New policy → New policy</code>（ドロップダウン内）。名前とデモ対象 repo / workflow を設定し、<code class="demo-path">Require lockfile</code> をオンにして保存。</p>
 <p class="demo-out">Enterprise Cloud では <code>Evaluate</code> から開始し、<code>Policy insights</code> を確認。対象 workflow の導入完了後に <code>Active</code> にする。</p>
 </li>
 </ol>
