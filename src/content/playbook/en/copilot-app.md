@@ -186,3 +186,59 @@ Choose **how to collaborate**, separately from what tools may do.
 - **Worktree ≠ sandbox:** isolate edits with a branch; restrict local tools with local sandboxing.
 
 App: **macOS / Windows / Linux**, all Copilot plans (**2026-11-11**). Business / Enterprise requires the app policy; feature-specific limits still apply.
+
+## <span class="app-demo-title">Demo scenario: fraud scoring</span>
+
+<div class="app-demo-scenario">
+<style>
+.prose-akq .app-demo-scenario,.prose-akq .playbook-demo-video{font:clamp(16px,1.3vw,20px)/1.4 var(--font-prose),sans-serif;color:#e8f4ff}
+.prose-akq .app-demo-scenario p,.prose-akq .playbook-demo-video p{margin:0}
+.prose-akq .app-demo-scenario .app-demo-lead{font-size:1.1em;margin-bottom:14px}
+.prose-akq .app-demo-context{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 16px}
+.prose-akq .app-demo-context span{padding:4px 10px;border:1px solid #ff2e8880;background:#0a0e27cc}
+.prose-akq .app-demo-stages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.prose-akq .app-demo-stage{padding:14px;border-top:2px solid #ff2e88;background:#0a0e27cc}
+.prose-akq .app-demo-scenario .app-demo-stage h3{margin:0 0 10px;font-size:1.1em;line-height:1.3;color:#ff2e88}
+.prose-akq .app-demo-scenario .app-demo-control{margin-top:16px;padding-left:12px;border-left:3px solid #ffb000}
+.prose-akq > h2:has(.app-demo-title){margin-bottom:14px}
+.prose-akq .playbook-demo-video video{display:block;width:100%;aspect-ratio:16/9;object-fit:contain;background:#05060f}
+.prose-akq .playbook-demo-video video:fullscreen{width:100vw;height:100dvh;max-height:none;aspect-ratio:auto;border:0;background:#000}
+.prose-akq .playbook-demo-video video::backdrop{background:#000}
+.prose-akq .playbook-demo-video video:focus-visible{outline:2px solid #00f0ff;outline-offset:3px}
+.prose-akq .playbook-video-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-top:12px}
+.prose-akq .playbook-video-actions button{padding:8px 14px;border:2px solid #ff2e88;background:#0a0e27;color:#e8f4ff;font:600 1em var(--font-prose),sans-serif;cursor:pointer}
+.prose-akq .playbook-video-actions button:hover,.prose-akq .playbook-video-actions button:focus-visible{background:#ff2e8822;outline:2px solid #ff2e88;outline-offset:3px}
+.prose-akq .playbook-video-actions button:disabled{opacity:.6;cursor:wait}
+.prose-akq .playbook-demo-video .playbook-video-help{margin-top:8px;font-size:14px;color:#a8bed2}
+.prose-akq .playbook-demo-video [data-video-status]{margin-top:8px;color:#ffb000}
+.prose-akq .playbook-demo-video [data-video-status][hidden]{display:none}
+body.present-mode .playbook-detail:has(.app-demo-scenario.akq-slide-active,.playbook-demo-video.akq-slide-active){padding-top:88px;padding-bottom:72px}
+body.present-mode .prose-akq > h2:has(.app-demo-title){margin:0 0 12px;font-size:clamp(28px,2.2vw,36px);line-height:1.2;letter-spacing:0}
+body.present-mode .prose-akq > h2:has(.app-demo-title)::before{top:.35em}
+body.present-mode .prose-akq .playbook-demo-video video:not(:fullscreen){max-height:calc(100dvh - 330px)}
+body.present-mode .prose-akq .playbook-demo-video:has([data-video-status]:not([hidden])) video:not(:fullscreen){max-height:calc(100dvh - 390px)}
+@media(max-width:767px){body.present-mode .playbook-detail:has(.app-demo-scenario.akq-slide-active,.playbook-demo-video.akq-slide-active){padding-left:20px;padding-right:20px}}
+@media(max-width:520px){.prose-akq .app-demo-stages{grid-template-columns:1fr}}
+</style>
+<p class="app-demo-lead">A <b>fictional insurer</b> needs a fraud-scoring feature, from policy rules to a working claims workflow.</p>
+<p><b>Starting context:</b> an Excel specification + a policy document in Projects / Library.</p>
+<div class="app-demo-context" aria-label="Four repositories"><span>contracts</span><span>API</span><span>web UI</span><span>docs</span></div>
+<div class="app-demo-stages">
+<div class="app-demo-stage"><h3>01 / Understand</h3><p>Fusion checks gaps against the spec. Agree on the rules and preserve decisions in Memory.</p></div>
+<div class="app-demo-stage"><h3>02 / Implement</h3><p>Delegate with <code>/goal</code>. Coordinate PR changes across repos, run CI and address code review.</p></div>
+<div class="app-demo-stage"><h3>03 / Operate</h3><p>Continue across devices, use a legacy desktop app, and monitor progress with Automations.</p></div>
+</div>
+<p class="app-demo-control"><b>You supply context, decide rules and approve consequential actions.</b> In this demo, PRs remain unmerged; registration in the legacy app needs approval.</p>
+</div>
+
+## <span class="app-demo-title">Demo: from specification to delivery</span>
+
+<div class="playbook-demo-video" data-playbook-video data-fullscreen-error="Fullscreen is unavailable. Use the normal player controls below." data-playback-error="Playback could not start. Try the player controls or open the MP4." data-media-error="The video could not be loaded. Reload the page or open the MP4.">
+<video id="copilot-app-demo-video" controls playsinline preload="metadata" tabindex="0" data-src="/theomonfort/media/copilot-app-fraud-scoring.mp4" poster="/theomonfort/media/copilot-app-fraud-scoring.jpg" aria-label="Fraud scoring demo with Japanese on-screen text" aria-describedby="copilot-app-video-help">
+Your browser does not support this video. <a href="/theomonfort/media/copilot-app-fraud-scoring.mp4">Open the MP4</a>.
+</video>
+<div class="playbook-video-actions"><button type="button" data-video-fullscreen aria-controls="copilot-app-demo-video">▶ Play fullscreen</button><a class="retro-link" href="/theomonfort/media/copilot-app-fraud-scoring.mp4" target="_blank" rel="noopener noreferrer">Open MP4 ↗</a></div>
+<p id="copilot-app-video-help" class="playbook-video-help">6:43 / Japanese on-screen text. Native playback, seek and volume controls. Esc exits fullscreen.</p>
+<p data-video-status role="status" aria-live="polite" hidden></p>
+<noscript><p>JavaScript is required for this player. Use the Open MP4 link above.</p></noscript>
+</div>

@@ -186,3 +186,59 @@ macOS は **Accessibility + Screen Recording** の許可が必要。Office キ�
 - **Worktree ≠ sandbox：** 編集はブランチで分離。ローカルツールの制限にはサンドボックスを使う。
 
 アプリは **macOS / Windows / Linux** と全 Copilot プランに対応（**2026-11-11 時点**）。Business / Enterprise はアプリのポリシー許可が必要。個別機能の条件は別。
+
+## <span class="app-demo-title">デモ：不正請求スコアリング</span>
+
+<div class="app-demo-scenario">
+<style>
+.prose-akq .app-demo-scenario,.prose-akq .playbook-demo-video{font:clamp(16px,1.3vw,20px)/1.4 var(--font-prose),sans-serif;color:#e8f4ff}
+.prose-akq .app-demo-scenario p,.prose-akq .playbook-demo-video p{margin:0}
+.prose-akq .app-demo-scenario .app-demo-lead{font-size:1.1em;margin-bottom:14px}
+.prose-akq .app-demo-context{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 16px}
+.prose-akq .app-demo-context span{padding:4px 10px;border:1px solid #ff2e8880;background:#0a0e27cc}
+.prose-akq .app-demo-stages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.prose-akq .app-demo-stage{padding:14px;border-top:2px solid #ff2e88;background:#0a0e27cc}
+.prose-akq .app-demo-scenario .app-demo-stage h3{margin:0 0 10px;font-size:1.1em;line-height:1.3;color:#ff2e88}
+.prose-akq .app-demo-scenario .app-demo-control{margin-top:16px;padding-left:12px;border-left:3px solid #ffb000}
+.prose-akq > h2:has(.app-demo-title){margin-bottom:14px}
+.prose-akq .playbook-demo-video video{display:block;width:100%;aspect-ratio:16/9;object-fit:contain;background:#05060f}
+.prose-akq .playbook-demo-video video:fullscreen{width:100vw;height:100dvh;max-height:none;aspect-ratio:auto;border:0;background:#000}
+.prose-akq .playbook-demo-video video::backdrop{background:#000}
+.prose-akq .playbook-demo-video video:focus-visible{outline:2px solid #00f0ff;outline-offset:3px}
+.prose-akq .playbook-video-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-top:12px}
+.prose-akq .playbook-video-actions button{padding:8px 14px;border:2px solid #ff2e88;background:#0a0e27;color:#e8f4ff;font:600 1em var(--font-prose),sans-serif;cursor:pointer}
+.prose-akq .playbook-video-actions button:hover,.prose-akq .playbook-video-actions button:focus-visible{background:#ff2e8822;outline:2px solid #ff2e88;outline-offset:3px}
+.prose-akq .playbook-video-actions button:disabled{opacity:.6;cursor:wait}
+.prose-akq .playbook-demo-video .playbook-video-help{margin-top:8px;font-size:14px;color:#a8bed2}
+.prose-akq .playbook-demo-video [data-video-status]{margin-top:8px;color:#ffb000}
+.prose-akq .playbook-demo-video [data-video-status][hidden]{display:none}
+body.present-mode .playbook-detail:has(.app-demo-scenario.akq-slide-active,.playbook-demo-video.akq-slide-active){padding-top:88px;padding-bottom:72px}
+body.present-mode .prose-akq > h2:has(.app-demo-title){margin:0 0 12px;font-size:clamp(28px,2.2vw,36px);line-height:1.2;letter-spacing:0}
+body.present-mode .prose-akq > h2:has(.app-demo-title)::before{top:.35em}
+body.present-mode .prose-akq .playbook-demo-video video:not(:fullscreen){max-height:calc(100dvh - 330px)}
+body.present-mode .prose-akq .playbook-demo-video:has([data-video-status]:not([hidden])) video:not(:fullscreen){max-height:calc(100dvh - 390px)}
+@media(max-width:767px){body.present-mode .playbook-detail:has(.app-demo-scenario.akq-slide-active,.playbook-demo-video.akq-slide-active){padding-left:20px;padding-right:20px}}
+@media(max-width:520px){.prose-akq .app-demo-stages{grid-template-columns:1fr}}
+</style>
+<p class="app-demo-lead"><b>架空の保険会社</b>に、不正請求スコアリングを導入。規程の解釈から、実際の査定業務までをつなぐ。</p>
+<p><b>最初に渡すもの：</b>Excel の仕様書と社内規程を Projects / Library に追加。</p>
+<div class="app-demo-context" aria-label="4 つのリポジトリ"><span>contracts</span><span>API</span><span>web UI</span><span>docs</span></div>
+<div class="app-demo-stages">
+<div class="app-demo-stage"><h3>01 / 整理する</h3><p>Fusion が仕様と実装の差を確認。人がルールを決め、Memory に判断を残す。</p></div>
+<div class="app-demo-stage"><h3>02 / 実装する</h3><p><code>/goal</code> で委任。リポジトリ間の PR 更新、CI、コードレビュー対応を進める。</p></div>
+<div class="app-demo-stage"><h3>03 / 業務につなぐ</h3><p>端末をまたいで継続。既存のデスクトップアプリを操作し、Automations で進捗を見守る。</p></div>
+</div>
+<p class="app-demo-control"><b>文脈を渡し、ルールを決め、重要な操作を承認するのは人。</b>このデモでは PR は未マージ。査定端末への登録も人が承認する。</p>
+</div>
+
+## <span class="app-demo-title">デモ動画：仕様から業務まで</span>
+
+<div class="playbook-demo-video" data-playbook-video data-fullscreen-error="全画面表示を利用できません。通常のプレーヤーの操作ボタンを使ってください。" data-playback-error="再生を開始できませんでした。操作ボタンを試すか、MP4 を直接開いてください。" data-media-error="動画を読み込めませんでした。ページを再読み込みするか、MP4 を直接開いてください。">
+<video id="copilot-app-demo-video" controls playsinline preload="metadata" tabindex="0" data-src="/theomonfort/media/copilot-app-fraud-scoring.mp4" poster="/theomonfort/media/copilot-app-fraud-scoring.jpg" aria-label="不正請求スコアリングのデモ動画、日本語テロップ付き" aria-describedby="copilot-app-video-help">
+このブラウザーでは動画を再生できません。<a href="/theomonfort/media/copilot-app-fraud-scoring.mp4">MP4 を直接開く</a>。
+</video>
+<div class="playbook-video-actions"><button type="button" data-video-fullscreen aria-controls="copilot-app-demo-video">▶ 全画面で再生</button><a class="retro-link" href="/theomonfort/media/copilot-app-fraud-scoring.mp4" target="_blank" rel="noopener noreferrer">MP4 を直接開く ↗</a></div>
+<p id="copilot-app-video-help" class="playbook-video-help">6 分 43 秒 / 日本語テロップ。標準の再生、シーク、音量操作に対応。Esc で全画面表示を終了。</p>
+<p data-video-status role="status" aria-live="polite" hidden></p>
+<noscript><p>このプレーヤーには JavaScript が必要です。上のリンクから MP4 を直接開いてください。</p></noscript>
+</div>

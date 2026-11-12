@@ -305,6 +305,8 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 </Layout>
 
 <script>
+  import { handlePlaybookVideoKey, pausePlaybookVideos, syncPlaybookVideos } from '../../../lib/playbook-video';
+
   // ── Slide engine (split content by <h2>; cover = header + first H2 group) ──
   type Slide = HTMLElement[];
   let slides: Slide[] = [];
@@ -486,6 +488,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       .forEach((el) => { el.checked = false; });
     updateChrome();
     syncHeroReveals();
+    syncPlaybookVideos();
   }
 
   function updateChrome() {
@@ -661,6 +664,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
 
   function exitSlideMode() {
+    pausePlaybookVideos();
     finishAllHeroReveals();
     restoreFns.forEach((fn) => fn());
     restoreFns = [];
@@ -720,6 +724,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       slideRefreshToken++;
       setSlidePreparing(false);
       if (wasOn || slides.length) exitSlideMode();
+      syncPlaybookVideos();
     }
 
     if (on) {
@@ -783,6 +788,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
 
   function onKey(e: KeyboardEvent) {
+    if (handlePlaybookVideoKey(e)) return;
     const t = e.target as HTMLElement | null;
     // The DEMO overlay is a CSS-only checkbox, so Escape has to close it here
     // before the global handler reads Escape as "leave presentation mode".
@@ -910,6 +916,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     initPresent();
     if (!document.body.classList.contains('present-mode')) {
       await renderMermaid();
+      syncPlaybookVideos();
     }
     syncToc();
   }
@@ -929,6 +936,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   document.addEventListener('click', onTocToggleClick);
   document.addEventListener('click', onDemoToggleClick);
   function preparePresentNavigation(event?: Event) {
+    pausePlaybookVideos();
     rememberTocScroll();
     if (escapingFromPresent) {
       // Escape-to-index: don't carry present-mode onto the destination doc.
@@ -968,7 +976,9 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     if (document.body.classList.contains('present-mode')) placeNewMarkers();
   };
   window.addEventListener('resize', onResizeMarkers);
+  window.addEventListener('pagehide', pausePlaybookVideos);
   win.__akqGlossaryCleanup = () => {
+    pausePlaybookVideos();
     document.removeEventListener('keydown', onKey);
     document.removeEventListener('click', onTocToggleClick);
     document.removeEventListener('astro:before-preparation', preparePresentNavigation);
@@ -976,6 +986,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     document.removeEventListener('astro:after-swap', clearPresentAfterEscape);
     document.removeEventListener('astro:page-load', initGlossaryInteractions);
     window.removeEventListener('resize', onResizeMarkers);
+    window.removeEventListener('pagehide', pausePlaybookVideos);
     document.querySelectorAll('.slide-new-marker').forEach((e) => e.remove());
   };
 

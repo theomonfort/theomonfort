@@ -16,6 +16,12 @@ GitHub Copilot や AI 駆動開発に関するプレイブック、ハンズオ�
 
 導入文が長い場合は、段落に `ctl-intro`、一覧に `ctl-widget ctl-tight` を指定できます。プレゼンモードの行間と余白だけを詰め、文字サイズと通常表示は維持します。
 
+## Playbook の動画
+
+動画スライドの例は `src/content/playbook/ja/copilot-app.md` と英語版を参照してください。動画とポスターは `public/media/` に置き、両言語で同じ `/theomonfort/media/` URL を使います。`data-playbook-video` 内の動画は `data-src` と `preload="metadata"` を使い、プレゼンでは対象スライドに入るまで動画を読み込みません。
+
+共通処理は `src/lib/playbook-video.ts`。クリックで全画面再生し、Esc で同じスライドに戻ります。動画操作中のキーはスライド移動に使わず、スライドやページを離れると一時停止します。全画面表示や再生に失敗した場合は、ローカライズしたメッセージと通常の操作ボタン、MP4 へのリンクを残します。
+
 ## Changelog
 
 更新情報は `src/content/changelog/ja/` と `src/content/changelog/en/` に同じファイル名で追加します。Universe 2026 の対象記事には frontmatter に `event: universe-2026` を指定すると、カテゴリとは別に白い文字のイベントバッジと虹色の枠が表示されます。日付だけでは判定しません。複数の発表をまとめる場合は、代表の `source` に加えて本文にすべての公式発表へのリンクを載せます。
