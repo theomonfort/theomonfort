@@ -190,14 +190,13 @@ From collaborating on code to coordinating work across agents.
 
 <div class="gh-summary-slide gh-numbers">
 <div class="gh-stat-grid">
-<div class="gh-stat"><span>GitHub developers</span><strong>225M+</strong><span>Worldwide, September 2026</span><a href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">Octoverse 2026 ↗</a></div>
-<div class="gh-stat"><span>New developers</span><strong>&gt;1 / sec</strong><span>Joined on average in 2025</span><a href="https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/" target="_blank" rel="noopener noreferrer">Octoverse 2025 ↗</a></div>
-<div class="gh-stat"><span>Public contributions</span><strong>2.5B</strong><span>October 2025 to September 2026</span><a href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">Octoverse 2026 ↗</a></div>
-<div class="gh-stat"><span>Fortune 100 adoption</span><strong>≈90%</strong><span>Have adopted Copilot</span><a href="https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx" target="_blank" rel="noopener noreferrer">Microsoft, 2025 ↗</a></div>
-<div class="gh-stat"><span>GitHub Copilot users</span><strong>50M</strong><span>Total users, announced July 29, 2026</span><a href="https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4" target="_blank" rel="noopener noreferrer">Microsoft FY26 Q4 ↗</a></div>
-<div class="gh-stat"><span>Copilot paid subscribers</span><strong>&gt;4.7M</strong><span>+75% YoY, announced January 28, 2026</span><a href="https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q2" target="_blank" rel="noopener noreferrer">Microsoft FY26 Q2 ↗</a></div>
+<div class="gh-stat"><span>GitHub developers</span><strong>225M+</strong><a href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">Octoverse 2026 ↗</a></div>
+<div class="gh-stat"><span>New developers</span><strong>&gt;1 / sec</strong><a href="https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/" target="_blank" rel="noopener noreferrer">Octoverse 2025 ↗</a></div>
+<div class="gh-stat"><span>Public contributions</span><strong>2.5B</strong><a href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">Octoverse 2026 ↗</a></div>
+<div class="gh-stat"><span>Fortune 100 using Copilot</span><strong>≈90%</strong><a href="https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx" target="_blank" rel="noopener noreferrer">Microsoft, 2025 ↗</a></div>
+<div class="gh-stat"><span>GitHub Copilot total users</span><strong>50M</strong><a href="https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4" target="_blank" rel="noopener noreferrer">Microsoft FY26 Q4 ↗</a></div>
+<div class="gh-stat"><span>Copilot paid subscribers</span><strong>&gt;4.7M</strong><a href="https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q2" target="_blank" rel="noopener noreferrer">Microsoft FY26 Q2 ↗</a></div>
 </div>
-<p class="gh-summary-note">Different reporting dates: total users and paid subscribers are not a same-date breakdown.</p>
 </div>
 
 ## The agent era, in numbers <a class="h2-doc" href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">📖 Docs</a>

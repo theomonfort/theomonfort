@@ -190,14 +190,13 @@ links:
 
 <div class="gh-summary-slide gh-numbers">
 <div class="gh-stat-grid">
-<div class="gh-stat"><span>GitHub 開発者</span><strong>2.25 億人+</strong><span>世界全体、2026 年 9 月時点</span><a href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">Octoverse 2026 ↗</a></div>
-<div class="gh-stat"><span>開発者の新規参加</span><strong>毎秒 1 人超</strong><span>2025 年の平均</span><a href="https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/" target="_blank" rel="noopener noreferrer">Octoverse 2025 ↗</a></div>
-<div class="gh-stat"><span>公開コントリビューション</span><strong>25 億件</strong><span>2025 年 10 月〜2026 年 9 月</span><a href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">Octoverse 2026 ↗</a></div>
-<div class="gh-stat"><span>Fortune 100 での採用</span><strong>約 90%</strong><span>Copilot を採用</span><a href="https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx" target="_blank" rel="noopener noreferrer">Microsoft、2025 年 ↗</a></div>
-<div class="gh-stat"><span>GitHub Copilot ユーザー</span><strong>5,000 万人</strong><span>総ユーザー数、2026-07-29 発表</span><a href="https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4" target="_blank" rel="noopener noreferrer">Microsoft FY26 Q4 ↗</a></div>
-<div class="gh-stat"><span>Copilot 有料登録者</span><strong>470 万人超</strong><span>前年比 +75%、2026-01-28 発表</span><a href="https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q2" target="_blank" rel="noopener noreferrer">Microsoft FY26 Q2 ↗</a></div>
+<div class="gh-stat"><span>GitHub 開発者</span><strong>2.25 億人+</strong><a href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">Octoverse 2026 ↗</a></div>
+<div class="gh-stat"><span>開発者の新規参加</span><strong>毎秒 1 人超</strong><a href="https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/" target="_blank" rel="noopener noreferrer">Octoverse 2025 ↗</a></div>
+<div class="gh-stat"><span>公開コントリビューション</span><strong>25 億件</strong><a href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">Octoverse 2026 ↗</a></div>
+<div class="gh-stat"><span>Fortune 100: Copilot 採用</span><strong>約 90%</strong><a href="https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx" target="_blank" rel="noopener noreferrer">Microsoft、2025 年 ↗</a></div>
+<div class="gh-stat"><span>GitHub Copilot 総ユーザー</span><strong>5,000 万人</strong><a href="https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4" target="_blank" rel="noopener noreferrer">Microsoft FY26 Q4 ↗</a></div>
+<div class="gh-stat"><span>Copilot 有料登録者</span><strong>470 万人超</strong><a href="https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q2" target="_blank" rel="noopener noreferrer">Microsoft FY26 Q2 ↗</a></div>
 </div>
-<p class="gh-summary-note">発表時点が異なるため、総ユーザー数と有料登録者数は同時点の内訳ではありません。</p>
 </div>
 
 ## 数字で見るエージェント時代 <a class="h2-doc" href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
