@@ -143,24 +143,3 @@ Memory は有料プランで利用可能。Dreaming は対象プランの **Publ
 </details>
 </div>
 </div>
-
-## 保存済みの記憶 ≠ 実行結果 <a class="h2-doc" href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/copilot-memory/manage-as-administrator#viewing-copilot-dreaming-results-in-the-copilot-app" target="_blank" rel="noopener noreferrer">📖 Docs</a>
-
-<div class="setup-cards">
-  <div class="setup-card">
-    <div class="setup-card-head"><strong>🧠 Memory</strong><span class="setup-card-tag tag-cyan">GitHub.com</span></div>
-    <p><strong>個人：</strong>Copilot settings → Memory<br /><strong>Repo：</strong>Settings → Copilot → Memory</p>
-    <ul class="setup-card-paths">
-      <li>一覧確認と削除。直接の作成、編集は不可</li>
-    </ul>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head"><strong>🌙 Dreaming</strong><span class="setup-card-tag tag-magenta">Copilot app</span></div>
-    <p><strong>Automations → Dreaming</strong><br />Personal Dream runs / Repository Dream runs</p>
-    <ul class="setup-card-paths">
-      <li>追加、更新、削除と Before / After、関連 PR（表示される場合）</li>
-    </ul>
-  </div>
-</div>
-
-> ⚠️ 実行結果は完全な履歴でも、ロールバック機能でもない。Dreaming を OFF にしても、過去の変更は元に戻らない。

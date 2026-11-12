@@ -143,24 +143,3 @@ Memory: paid plans. Dreaming: **public preview** on eligible plans, separately e
 </details>
 </div>
 </div>
-
-## Saved memories ≠ run results <a class="h2-doc" href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/copilot-memory/manage-as-administrator#viewing-copilot-dreaming-results-in-the-copilot-app" target="_blank" rel="noopener noreferrer">📖 Docs</a>
-
-<div class="setup-cards">
-  <div class="setup-card">
-    <div class="setup-card-head"><strong>🧠 Memory</strong><span class="setup-card-tag tag-cyan">GitHub.com</span></div>
-    <p><strong>Personal:</strong> Copilot settings → Memory<br /><strong>Repo:</strong> Settings → Copilot → Memory</p>
-    <ul class="setup-card-paths">
-      <li>View and delete, not create or edit</li>
-    </ul>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head"><strong>🌙 Dreaming</strong><span class="setup-card-tag tag-magenta">Copilot app</span></div>
-    <p><strong>Automations → Dreaming</strong><br />Personal Dream runs / Repository Dream runs</p>
-    <ul class="setup-card-paths">
-      <li>Added / Updated / Removed, Before / After, linked PRs (when available)</li>
-    </ul>
-  </div>
-</div>
-
-> ⚠️ Run details are not a full audit or an undo tool. Disabling Dreaming does not revert changes.
