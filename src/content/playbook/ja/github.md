@@ -186,13 +186,19 @@ links:
 })();
 </script>
 
-## 数字で見る GitHub
+## <span class="gh-summary-title">数字で見る GitHub</span>
 
-- GitHub 開発者：世界で **2.25 億人以上**（2026 年 9 月時点、<a class="retro-link" href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">Octoverse 2026 ↗</a>）
-- 2025 年は平均で **毎秒 1 人超の開発者が新規参加**（<a class="retro-link" href="https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/" target="_blank" rel="noopener noreferrer">Octoverse 2025 ↗</a>）
-- 公開コントリビューション：**25 億件**（2025 年 10 月〜2026 年 9 月、<a class="retro-link" href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">Octoverse 2026 ↗</a>）
-- Fortune 100 の **約 90%** が Copilot を採用（[2025](https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx)）
-- 有料 AI コーディングツール市場シェア **約 42%**（[2025](https://www.secondtalent.com/resources/github-copilot-statistics/)）
+<div class="gh-summary-slide gh-numbers">
+<div class="gh-stat-grid">
+<div class="gh-stat"><span>GitHub 開発者</span><strong>2.25 億人+</strong><span>世界全体、2026 年 9 月時点</span><a href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">Octoverse 2026 ↗</a></div>
+<div class="gh-stat"><span>開発者の新規参加</span><strong>毎秒 1 人超</strong><span>2025 年の平均</span><a href="https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/" target="_blank" rel="noopener noreferrer">Octoverse 2025 ↗</a></div>
+<div class="gh-stat"><span>公開コントリビューション</span><strong>25 億件</strong><span>2025 年 10 月〜2026 年 9 月</span><a href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">Octoverse 2026 ↗</a></div>
+<div class="gh-stat"><span>Fortune 100 での採用</span><strong>約 90%</strong><span>Copilot を採用</span><a href="https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4.aspx" target="_blank" rel="noopener noreferrer">Microsoft、2025 年 ↗</a></div>
+<div class="gh-stat"><span>GitHub Copilot ユーザー</span><strong>5,000 万人</strong><span>総ユーザー数、2026-07-29 発表</span><a href="https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4" target="_blank" rel="noopener noreferrer">Microsoft FY26 Q4 ↗</a></div>
+<div class="gh-stat"><span>Copilot 有料登録者</span><strong>470 万人超</strong><span>前年比 +75%、2026-01-28 発表</span><a href="https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q2" target="_blank" rel="noopener noreferrer">Microsoft FY26 Q2 ↗</a></div>
+</div>
+<p class="gh-summary-note">発表時点が異なるため、総ユーザー数と有料登録者数は同時点の内訳ではありません。</p>
+</div>
 
 ## 数字で見るエージェント時代 <a class="h2-doc" href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
@@ -343,39 +349,42 @@ links:
 <p class="gh-invest-test">Git インフラも刷新中。1 つのモノレポの負荷テストで<strong>5,000 の「angry agents」→ 毎秒 7,200 件の書き込み</strong>を達成。さらなる処理能力の向上へ。<a class="retro-link" href="https://www.youtube.com/watch?v=MZfqId_rrB0" target="_blank" rel="noopener noreferrer">Universe セッション ↗</a></p>
 </div>
 
-## 業界からの評価
+## <span class="gh-summary-title">業界からの評価</span>
 
-第三者機関からの評価でも、GitHub は **AI コーディング領域のリーダー** として認められている。
-
-- **IDC**：AI コーディングとソフトウェアエンジニアリングテクノロジーで **リーダー** に選出
-- **Gartner**：[2026 マジック・クアドラント](https://github.com/resources/whitepapers/gartner-magic-quadrant-for-enterprise-ai-coding-agents?locale=ja)、**エンタープライズ AI コーディングエージェント** 部門で **3 年連続リーダー**に選出。実行能力（Ability to Execute）で **最高位**（[Gartner レポート](https://www.gartner.com/doc/reprints?id=1-2NEACZCW&ct=260520&st=sb)）
-
-<div class="quadrant-small">
-
-```mermaid
-%%{init: {"theme":"base","themeVariables":{"quadrant1Fill":"#0a1a2e","quadrant2Fill":"#1a0e1f","quadrant3Fill":"#0f0a1f","quadrant4Fill":"#0a1f1a","quadrant1TextFill":"#00f0ff","quadrant2TextFill":"#ff7ab2","quadrant3TextFill":"#c9a5ff","quadrant4TextFill":"#9bbc0f","quadrantTitleFill":"#e8f4ff","quadrantPointFill":"#ffb000","quadrantPointTextFill":"#e8f4ff","quadrantXAxisTextFill":"#e8f4ff","quadrantYAxisTextFill":"#e8f4ff","quadrantInternalBorderStrokeFill":"#2a3050","quadrantExternalBorderStrokeFill":"#00f0ff"}}}%%
-quadrantChart
-    title Magic Quadrant for Enterprise AI Coding Agents (2026)
-    x-axis Low Vision --> Completeness of Vision
-    y-axis Low Execution --> Ability to Execute
-    quadrant-1 Leaders
-    quadrant-2 Challengers
-    quadrant-3 Niche Players
-    quadrant-4 Visionaries
-    GitHub: [0.65, 0.77]
-    Cursor: [0.71, 0.75]
-    Anthropic: [0.66, 0.73]
-    OpenAI: [0.71, 0.71]
-    Cognition: [0.47, 0.61]
-    Google: [0.42, 0.58]
-    Amazon Web Services: [0.48, 0.55]
-    Alibaba Cloud: [0.45, 0.54]
-    Atlassian: [0.45, 0.45]
-    Tabnine: [0.51, 0.42]
-    BytePlus: [0.18, 0.32]
-    JetBrains: [0.21, 0.27]
-```
-
+<div class="gh-summary-slide gh-recognition">
+<div class="gh-recognition-claims">
+<div class="gh-recognition-claim"><strong>IDC / リーダー</strong><p>AI コーディングとソフトウェアエンジニアリングテクノロジーで選出。</p></div>
+<div class="gh-recognition-claim"><strong>Gartner / 3 年連続リーダー</strong><p>エンタープライズ AI コーディングエージェント部門。実行能力で最高位。</p><a href="https://github.com/resources/whitepapers/gartner-magic-quadrant-for-enterprise-ai-coding-agents?locale=ja" target="_blank" rel="noopener noreferrer">2026 レポート ↗</a> / <a href="https://www.gartner.com/doc/reprints?id=1-2NEACZCW&ct=260520&st=sb" target="_blank" rel="noopener noreferrer">Gartner ↗</a></div>
+</div>
+<div class="gh-recognition-visual">
+<figure>
+<figcaption>Enterprise AI Coding Agents, 2026</figcaption>
+<svg class="gh-recognition-chart" viewBox="0 0 360 326" role="img" aria-labelledby="recognition-chart-title recognition-chart-desc" xmlns="http://www.w3.org/2000/svg">
+<title id="recognition-chart-title">2026 マジック・クアドラント：Enterprise AI Coding Agents</title>
+<desc id="recognition-chart-desc">右ほどビジョンの完全性が高く、上ほど実行能力が高い。GitHub は実行能力で最高位。番号は隣のベンダー一覧に対応。元のスライドの 12 社の位置を維持。</desc>
+<rect x="35" y="35" width="145" height="112.5" fill="#1a0e1f"/><rect x="180" y="35" width="145" height="112.5" fill="#0a1a2e"/><rect x="35" y="147.5" width="145" height="112.5" fill="#0f0a1f"/><rect x="180" y="147.5" width="145" height="112.5" fill="#0a1f1a"/>
+<rect x="35" y="35" width="290" height="225" fill="none" stroke="#00f0ff"/><path d="M180 35V260M35 147.5H325" stroke="#e8f4ff44" stroke-dasharray="4 4"/>
+<g font-size="17" text-anchor="middle"><text x="107" y="24" fill="#ff7ab2">Challengers</text><text x="252" y="24" fill="#00f0ff">Leaders</text><text x="107" y="279" fill="#c9a5ff">Niche Players</text><text x="252" y="279" fill="#9bbc0f">Visionaries</text><text x="180" y="310" fill="#e8f4ff">Completeness of Vision →</text><text transform="translate(21 150) rotate(-90)" fill="#e8f4ff">Ability to Execute →</text></g>
+<g fill="#bacddd" stroke="#bacddd" font-size="17" text-anchor="middle">
+<g data-vendor="GitHub" data-x="0.65" data-y="0.77" fill="#ffb000" stroke="#ffb000"><path d="M223.5 86.75L322 58" fill="none"/><circle cx="223.5" cy="86.75" r="4"/><text x="337" y="64" stroke="none">1</text></g>
+<g data-vendor="Cursor" data-x="0.71" data-y="0.75"><path d="M240.9 91.25L322 86" fill="none"/><circle cx="240.9" cy="91.25" r="3"/><text x="337" y="92" stroke="none">2</text></g>
+<g data-vendor="Anthropic" data-x="0.66" data-y="0.73"><path d="M226.4 95.75L322 114" fill="none"/><circle cx="226.4" cy="95.75" r="3"/><text x="337" y="120" stroke="none">3</text></g>
+<g data-vendor="OpenAI" data-x="0.71" data-y="0.71"><path d="M240.9 100.25L322 142" fill="none"/><circle cx="240.9" cy="100.25" r="3"/><text x="337" y="148" stroke="none">4</text></g>
+<g data-vendor="Cognition" data-x="0.47" data-y="0.61"><path d="M171.3 122.75L60 66" fill="none"/><circle cx="171.3" cy="122.75" r="3"/><text x="48" y="72" stroke="none">5</text></g>
+<g data-vendor="Google" data-x="0.42" data-y="0.58"><path d="M156.8 129.5L60 94" fill="none"/><circle cx="156.8" cy="129.5" r="3"/><text x="48" y="100" stroke="none">6</text></g>
+<g data-vendor="Amazon Web Services" data-x="0.48" data-y="0.55"><path d="M174.2 136.25L60 122" fill="none"/><circle cx="174.2" cy="136.25" r="3"/><text x="48" y="128" stroke="none">7</text></g>
+<g data-vendor="Alibaba Cloud" data-x="0.45" data-y="0.54"><path d="M165.5 138.5L60 150" fill="none"/><circle cx="165.5" cy="138.5" r="3"/><text x="48" y="156" stroke="none">8</text></g>
+<g data-vendor="Atlassian" data-x="0.45" data-y="0.45"><path d="M165.5 158.75L60 178" fill="none"/><circle cx="165.5" cy="158.75" r="3"/><text x="48" y="184" stroke="none">9</text></g>
+<g data-vendor="Tabnine" data-x="0.51" data-y="0.42"><path d="M182.9 165.5L322 180" fill="none"/><circle cx="182.9" cy="165.5" r="3"/><text x="337" y="186" stroke="none">10</text></g>
+<g data-vendor="BytePlus" data-x="0.18" data-y="0.32"><path d="M87.2 188L60 206" fill="none"/><circle cx="87.2" cy="188" r="3"/><text x="48" y="212" stroke="none">11</text></g>
+<g data-vendor="JetBrains" data-x="0.21" data-y="0.27"><path d="M95.9 199.25L60 234" fill="none"/><circle cx="95.9" cy="199.25" r="3"/><text x="48" y="240" stroke="none">12</text></g>
+</g>
+</svg>
+</figure>
+<div class="gh-recognition-key" aria-label="グラフのベンダー番号">
+<div><b>1</b><span>GitHub</span></div><div><b>2</b><span>Cursor</span></div><div><b>3</b><span>Anthropic</span></div><div><b>4</b><span>OpenAI</span></div><div><b>5</b><span>Cognition</span></div><div><b>6</b><span>Google</span></div><div><b>7</b><span>Amazon Web Services</span></div><div><b>8</b><span>Alibaba Cloud</span></div><div><b>9</b><span>Atlassian</span></div><div><b>10</b><span>Tabnine</span></div><div><b>11</b><span>BytePlus</span></div><div><b>12</b><span>JetBrains</span></div>
+</div>
+</div>
 </div>
 
 ## タスクからエージェントの協働へ <a class="h2-doc" href="https://docs.github.com/en/copilot/how-tos/github-copilot-app/working-with-projects" target="_blank" rel="noopener noreferrer">📖 Docs</a>
