@@ -387,12 +387,14 @@ More software is being built every month.
 </div>
 </div>
 
-## From tasks to agent teams <a class="h2-doc" href="https://docs.github.com/en/copilot/how-tos/github-copilot-app/working-with-projects" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## From tasks to agent teams <span class="gh-team-links"><a class="h2-doc" href="https://docs.github.com/en/copilot/how-tos/github-copilot-app/working-with-projects" target="_blank" rel="noopener noreferrer">📖 Docs</a><a class="h2-doc" href="https://github.blog/changelog/2026-10-28-github-copilot-app-universe-releases" target="_blank" rel="noopener noreferrer">Official announcement ↗</a></span>
 
 <figure class="gh-agent-teams">
 <style>
 .prose-akq .gh-agent-teams{margin:0;font:clamp(17px,1.4vw,22px)/1.45 var(--font-prose),sans-serif}
 .prose-akq .gh-agent-teams p{margin:0}
+.prose-akq h2 .gh-team-links{display:inline-flex;align-items:center;gap:8px;vertical-align:middle;margin-left:12px}
+.prose-akq h2 .gh-team-links .h2-doc{margin-left:0;font-size:14px}
 .prose-akq .gh-work-eras{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.6em;margin-bottom:1.6em}
 .prose-akq .gh-work-era{padding:.75em;border-top:2px solid #e8f4ff40;background:#0a0e27}
 .prose-akq .gh-work-era span{display:block;color:#a8bed2;font-size:.7em;margin-bottom:.3em}
@@ -418,7 +420,6 @@ More software is being built every month.
 .prose-akq .gh-agent-teams .gh-team-return{margin:1em 0 .7em;border-bottom:1px dashed #00f0ff77;padding:.5em 0;color:#00f0ff;text-align:center;font-size:.9em}
 .prose-akq .gh-agent-teams .gh-team-challenge{margin:.75em 0;padding:.55em .75em;border-left:3px solid #ffb000;background:#0a0e27;color:#e8f4ff;font-size:max(16px,.9em);line-height:1.45;text-wrap:pretty}
 .prose-akq .gh-team-challenge strong{color:#ffb000}
-.prose-akq .gh-agent-teams figcaption{font-size:.65em;color:#a8bed2;line-height:1.5}
 @media(max-height:720px),(max-width:767px){
 body.present-mode .playbook-detail:has(.gh-agent-teams.akq-slide-active){padding-top:88px;padding-bottom:72px}
 body.present-mode .prose-akq>h2:has(+.gh-agent-teams){margin:0 0 12px;font-size:26px;line-height:1.2;letter-spacing:0}
@@ -440,6 +441,7 @@ body.present-mode .prose-akq>h2:has(+.gh-agent-teams)::before{top:.35em}
 <div class="gh-work-era"><span>2025</span><strong>Tasks / sessions</strong></div>
 <div class="gh-work-era"><span>2026</span><strong>Projects / agent groups</strong></div>
 </div>
+<p class="gh-team-challenge"><strong>Challenge:</strong> How do we coordinate work across multiple agents and GUIs, and verify the results?</p>
 <div class="gh-team-flow">
 <div class="gh-team-person"><span>YOU</span><strong>Set the goal</strong><p>Choose priorities.<br>Judge the results.</p></div>
 <span class="gh-team-arrow" aria-hidden="true">→</span>
@@ -452,8 +454,6 @@ body.present-mode .prose-akq>h2:has(+.gh-agent-teams)::before{top:.35em}
 <div class="gh-team-tools"><strong>Tools + apps</strong><p>Browser<br>Computer use</p><small>Access requires approval</small></div>
 </div>
 <p class="gh-team-return">← Progress, artifacts and decisions come back to you.</p>
-<p class="gh-team-challenge"><strong>Challenge:</strong> How do we coordinate work across multiple agents and GUIs, and verify the results?</p>
-<figcaption>Conceptual roles, not a fixed architecture. Projects + computer use: public preview (2026-11-11). <a class="retro-link" href="https://github.blog/changelog/2026-10-28-github-copilot-app-universe-releases" target="_blank" rel="noopener noreferrer">Announcement ↗</a></figcaption>
 </figure>
 
 ## Innovate. Scale. Trust. <a class="h2-doc" href="https://github.blog/news-insights/company-news/github-universe-2026-evolving-every-layer-of-the-stack/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
