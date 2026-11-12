@@ -14,7 +14,7 @@ demoLinks:
   - label: "This site's actions.lock"
     url: "https://github.com/theomonfort/theomonfort/blob/main/.github/workflows/actions.lock"
   - label: "theomonfort-org → New Actions policy"
-    url: "https://github.com/organizations/theomonfort-org/settings/actions/rules/new"
+    url: "https://github.com/organizations/theomonfort-org/settings/actions/rules/new?target=actions&enforcement=disabled"
 demo:
   - "Open the actions/checkout@v4 link and point to /tree/v4 in the URL: v4 is a tag, a name that can be moved to another commit. Then open the locked commit link: the full SHA identifies one exact revision. Even a full version such as @v4.4.0 is still a tag, not an immutable commit."
   - "Open this site's actions.lock and show its two sections: workflows (the actions deploy.yml uses) and dependencies (the commit SHA each tag resolves to, plus owner_id / repo_id). Point out the transitive upload-artifact dependency recorded under upload-pages-artifact."

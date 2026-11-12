@@ -14,7 +14,7 @@ demoLinks:
   - label: "このサイトの actions.lock"
     url: "https://github.com/theomonfort/theomonfort/blob/main/.github/workflows/actions.lock"
   - label: "theomonfort-org → Actions ポリシーを作成"
-    url: "https://github.com/organizations/theomonfort-org/settings/actions/rules/new"
+    url: "https://github.com/organizations/theomonfort-org/settings/actions/rules/new?target=actions&enforcement=disabled"
 demo:
   - "actions/checkout@v4 のリンクを開き、URL の /tree/v4 を見せる。v4 は別のコミットに付け替えられる名前（タグ）。次に固定したコミットのリンクを開き、完全な SHA が特定のリビジョンを識別することを説明する。@v4.4.0 のような完全なバージョンもタグであり、不変のコミットではない。"
   - "このサイトの actions.lock を開き、workflows（deploy.yml が使うアクション）と dependencies（各タグが指すコミット SHA と owner_id / repo_id）の 2 つのセクションを見せる。upload-pages-artifact の下に、推移的依存の upload-artifact が記録されている点も見せる。"

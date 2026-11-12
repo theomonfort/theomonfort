@@ -242,21 +242,16 @@ Code Review は Actions によるエージェント機能なしでも動作可�
 </li>
 <li>
 <p class="demo-step-title">LOCKFILE を段階的に必須化</p>
-<p>権限のある管理者として <a class="retro-link" href="https://github.com/organizations/theomonfort-org/settings/actions/rules/new" target="_blank" rel="noopener noreferrer">theomonfort-org → New Actions policy ↗</a> を開く。名前とデモ対象 repo / workflow を設定し、<code class="demo-path">Require lockfile</code> をオンにして保存。</p>
+<p>権限のある管理者として <a class="retro-link" href="https://github.com/organizations/theomonfort-org/settings/actions/rules/new?target=actions&amp;enforcement=disabled" target="_blank" rel="noopener noreferrer">theomonfort-org → New Actions policy ↗</a> を開く。名前とデモ対象 repo / workflow を設定し、<code class="demo-path">Require lockfile</code> をオンにして保存。</p>
 <p class="demo-out">Enterprise Cloud では <code>Evaluate</code> から開始し、<code>Policy insights</code> を確認。対象 workflow の導入完了後に <code>Active</code> にする。</p>
 </li>
 </ol>
 </div>
 </div>
 
-**タグは読みやすく、実行するのはレビューしたコミット。** **2026-10-28 に GA**。Free、Team、データ所在地を含む Enterprise Cloud が対象。
+**なぜ重要？** `v4` のような action のタグは、別のコードを指すように変更できる。workflow を変更していなくても、次のビルドで未確認の変更や悪意のあるコードが実行されるおそれがある。
 
-- **固定:** `gh actions-lock` で action と推移的依存を記録。
-- **更新:** Dependabot が同じ PR で lockfile も更新。
-- **強制:** **Require lockfile** ポリシーで未導入 workflow をブロック。
+**何をする？** lockfile は、各 action と、その action が依存する action の正確なコミットを記録する。GitHub Actions は、移動するタグではなく、記録されたコミットを実行する。
 
-```text
-.github/workflows/actions.lock
-```
-
-> 固定するのはバージョンであり、安全性ではない。再利用 workflow の呼び出しは別途、完全な SHA で固定する。
+- **更新をレビュー:** Dependabot が action の更新と lockfile の変更を、同じプルリクエストで提案する。
+- **導入を必須化:** 管理者は、選択した workflow が lockfile を使うまで実行をブロックできる。
