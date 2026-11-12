@@ -151,14 +151,14 @@ flowchart LR
 </div>
 
 
-## <span class="fusion-title">Copilot Fusion</span> <span class="fusion-links"><a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a><a class="h2-doc" href="https://artificialanalysis.ai/articles/github-copilot-fusion-orchestrates-anthropic-and-openai-models-to-balance-performance-and-cost" target="_blank" rel="noopener noreferrer">Artificial Analysis ↗</a></span>
+## <span class="fusion-title">Copilot Fusion</span> <span class="fusion-links"><a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a><a class="h2-doc" href="https://github.blog/ai-and-ml/github-copilot/project-hydrafusion-frontier-quality-via-multi-model-orchestration/" target="_blank" rel="noopener noreferrer">Project HydraFusion ↗</a><a class="h2-doc" href="https://artificialanalysis.ai/articles/github-copilot-fusion-orchestrates-anthropic-and-openai-models-to-balance-performance-and-cost" target="_blank" rel="noopener noreferrer">Artificial Analysis ↗</a></span>
 
 <div class="fusion-slide fusion-overview">
 <p class="fusion-lead"><strong>人が労力を選び、</strong>Fusion がモデルを選ぶ。</p>
 <div class="fusion-value-grid">
 <div class="fusion-features">
-<div class="fusion-feature"><span>01</span><div><strong>モデルの切り替えはお任せ</strong><p>Fusion と Standard / High / Max を選ぶ。</p></div></div>
-<div class="fusion-feature"><span>02</span><div><strong>プロンプトごとに実行プラン</strong><p>タスクに合うモデル、推論、パターンを選択。</p></div></div>
+<div class="fusion-feature"><span>01</span><div><strong>努力レベルを選ぶだけ</strong><p>モデル選びはシステムに任せる。高コストモデルの常用や、やり直し、手動切り替えのムダを減らす。</p></div></div>
+<div class="fusion-feature"><span>02</span><div><strong>リクエストごとに実行プラン</strong><p><b>推論、コード生成、デバッグ、ツール利用の 4 観点</b>で評価し、パターン、モデル、推論レベルを自動で決定。</p></div></div>
 <div class="fusion-feature"><span>03</span><div><strong>最終回答は 1 つ</strong><p>追加のレビューは、必要なタスクだけ。</p></div></div>
 </div>
 <div class="fusion-metrics" aria-label="ベンチマーク結果">
@@ -192,7 +192,6 @@ flowchart LR
 </section>
 </div>
 <p class="fusion-availability"><strong>労力レベル ≠ モデルの推論レベル。</strong> モデルポリシーは適用され、必要なモデルが無効だと Max が使えない場合があります。</p>
-<p class="fusion-source"><b>Fast：</b>VS Code インラインチャット専用、手動選択不可。2026-11-11 時点。</p>
 </div>
 
 ## <span class="fusion-title">Fusion の仕組み</span> <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="info-fusion-runtime" class="demo-toggle" /><label class="h2-demo h2-info" for="info-fusion-runtime">&#9432; INFO</label>
@@ -258,7 +257,6 @@ flowchart LR
 <div class="fusion-feature"><span>01</span><div><strong>通常の課金</strong><p>各モデルの標準料金で計算。Fusion 固有の追加料金はなし。</p></div></div>
 <div class="fusion-feature"><span>02</span><div><strong>労力で費用も変わる</strong><p>High / Max は Standard より多くのモデルと AI クレジットを使う場合があります。</p></div></div>
 </div>
-<p class="fusion-source">2026-11-11 時点。期限後の継続は前提にせず、最新条件は Docs で確認してください。</p>
 </div>
 
 ## なぜ企業は Copilot を選ぶのか

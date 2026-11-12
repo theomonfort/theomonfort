@@ -151,14 +151,14 @@ flowchart LR
 </div>
 
 
-## <span class="fusion-title">Copilot Fusion</span> <span class="fusion-links"><a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a><a class="h2-doc" href="https://artificialanalysis.ai/articles/github-copilot-fusion-orchestrates-anthropic-and-openai-models-to-balance-performance-and-cost" target="_blank" rel="noopener noreferrer">Artificial Analysis ↗</a></span>
+## <span class="fusion-title">Copilot Fusion</span> <span class="fusion-links"><a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a><a class="h2-doc" href="https://github.blog/ai-and-ml/github-copilot/project-hydrafusion-frontier-quality-via-multi-model-orchestration/" target="_blank" rel="noopener noreferrer">Project HydraFusion ↗</a><a class="h2-doc" href="https://artificialanalysis.ai/articles/github-copilot-fusion-orchestrates-anthropic-and-openai-models-to-balance-performance-and-cost" target="_blank" rel="noopener noreferrer">Artificial Analysis ↗</a></span>
 
 <div class="fusion-slide fusion-overview">
 <p class="fusion-lead"><strong>You choose effort.</strong> Fusion chooses the models.</p>
 <div class="fusion-value-grid">
 <div class="fusion-features">
-<div class="fusion-feature"><span>01</span><div><strong>Stop switching models</strong><p>Select Fusion, then Standard, High or Max.</p></div></div>
-<div class="fusion-feature"><span>02</span><div><strong>A plan for each prompt</strong><p>Match the task to models, reasoning and an execution pattern.</p></div></div>
+<div class="fusion-feature"><span>01</span><div><strong>Just choose the effort level</strong><p>Let the system choose models, avoiding costly models for every task, rework and manual switching.</p></div></div>
+<div class="fusion-feature"><span>02</span><div><strong>A plan for every request</strong><p>Evaluates <b>4 dimensions: reasoning, code generation, debugging and tool use</b>, then automatically selects the pattern, model and reasoning level.</p></div></div>
 <div class="fusion-feature"><span>03</span><div><strong>One final response</strong><p>Extra review calls only when the task warrants them.</p></div></div>
 </div>
 <div class="fusion-metrics" aria-label="Benchmark results">
@@ -192,7 +192,6 @@ flowchart LR
 </section>
 </div>
 <p class="fusion-availability"><strong>Effort level ≠ per-model reasoning.</strong> Model policies still apply; disabling required models can make Max unavailable.</p>
-<p class="fusion-source"><b>Fast:</b> VS Code inline chat only, not selectable. Availability checked 2026-11-11.</p>
 </div>
 
 ## <span class="fusion-title">Inside Fusion</span> <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="info-fusion-runtime" class="demo-toggle" /><label class="h2-demo h2-info" for="info-fusion-runtime">&#9432; INFO</label>
@@ -258,7 +257,6 @@ flowchart LR
 <div class="fusion-feature"><span>01</span><div><strong>Normal billing</strong><p>Each model's standard rates, with no separate Fusion charge.</p></div></div>
 <div class="fusion-feature"><span>02</span><div><strong>Effort affects cost</strong><p>High / Max can use more models and AI credits than Standard.</p></div></div>
 </div>
-<p class="fusion-source">Verified 2026-11-11. Check Docs before assuming any extension beyond the published end date.</p>
 </div>
 
 ## Why Enterprises Choose Copilot

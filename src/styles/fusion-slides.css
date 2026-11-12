@@ -18,10 +18,12 @@
 
 .prose-akq h2 .fusion-links {
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 8px;
   vertical-align: middle;
   margin-left: 12px;
+  max-width: calc(100% - 12px);
 }
 
 .prose-akq h2 .fusion-links .h2-doc {
@@ -95,9 +97,13 @@
   gap: 8px;
 }
 
+.prose-akq .fusion-overview .fusion-feature {
+  align-items: center;
+}
+
 @media (min-width: 521px) {
   .prose-akq .fusion-overview .fusion-value-grid {
-    grid-template-columns: minmax(0, 3fr) minmax(0, 5fr);
+    grid-template-columns: minmax(0, 9fr) minmax(0, 11fr);
   }
 }
 
