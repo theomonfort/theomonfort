@@ -254,5 +254,5 @@ Code review can still run without its Actions-powered agentic capabilities. An A
 
 **What it does:** a lockfile records the exact commit of each action, including actions it depends on. GitHub Actions runs those recorded commits instead of following a moving tag.
 
-- **Review updates:** Dependabot proposes action updates and the matching lockfile changes together in a pull request.
+- **Review updates:** Dependabot proposes <a class="retro-link" href="https://github.com/theomonfort/theomonfort/blob/main/.github/dependabot.yml" target="_blank" rel="noopener noreferrer">action updates ↗</a> and the matching lockfile changes together in a pull request.
 - **Require adoption:** administrators can block selected workflows until they use a lockfile.
