@@ -13,6 +13,7 @@ export const NEW_PLAYBOOK_SLUGS = new Set([
   'pull-requests',
   'vscode-agents-window',
   'copilot-chat',
+  'copilot-memory',
   'copilot-code-review',
   'code-scanning',
   'dependabot',
