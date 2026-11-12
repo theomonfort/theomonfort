@@ -12,24 +12,36 @@ accent:
   hex: "#00f0ff"
 order: 2
 category: introduction
-related: ['github', 'copilot-chat', 'cloud-agent']
+related: ['github', 'copilot-chat', 'copilot-app', 'cloud-agent']
 links:
-  - label: GitHub Copilot 公式
+  - group: 📖 公式ドキュメント
+    label: GitHub Copilot 公式
     url: https://github.com/features/copilot
-  - label: Copilot Trust Center
+  - group: 📖 公式ドキュメント
+    label: Copilot Trust Center
     url: https://resources.github.com/copilot-trust-center/
-  - label: Copilot ドキュメント
+  - group: 📖 公式ドキュメント
+    label: Copilot ドキュメント
     url: https://docs.github.com/copilot
-  - group: 📰 Recent Changelog
-    label: "GitHub Copilot app is now available in technical preview (2026-05-14)"
-    url: https://github.blog/changelog/2026-05-14-github-copilot-app-is-now-available-in-technical-preview
-  - group: 📰 Recent Changelog
+  - group: 📖 公式ドキュメント
+    label: GitHub Copilot app
+    url: https://docs.github.com/en/copilot/concepts/copilot-surfaces/github-copilot-app
+  - group: 📖 公式ドキュメント
+    label: Copilot Fusion、労力レベルと課金
+    url: https://docs.github.com/en/copilot/concepts/models/copilot-fusion
+  - group: 📰 発表
+    label: "Copilot Fusion 一般提供（2026-10-28）"
+    url: https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion
+  - group: 📊 ベンチマーク
+    label: "Artificial Analysis: Copilot Fusion Max（2026-10-28）"
+    url: https://artificialanalysis.ai/articles/github-copilot-fusion-orchestrates-anthropic-and-openai-models-to-balance-performance-and-cost
+  - group: 📰 発表
     label: "GPT-5.5 is generally available for GitHub Copilot (2026-04-24)"
     url: https://github.blog/changelog/2026-04-24-gpt-5-5-is-generally-available-for-github-copilot
-  - group: 📰 Recent Changelog
+  - group: 📰 発表
     label: "Data residency (US + EU) and FedRAMP-authorized models in Copilot (2026-04-13)"
     url: https://github.blog/changelog/2026-04-13-copilot-data-residency-in-us-eu-and-fedramp-compliance-now-available
-  - group: 📰 Recent Changelog
+  - group: 📰 発表
     label: "Copilot SDK is now in public preview (2026-04-02)"
     url: https://github.blog/changelog/2026-04-02-copilot-sdk-in-public-preview
 ---
@@ -77,18 +89,19 @@ links:
   <div class="ch-tag" data-tone="cyan" style="grid-column: 5 / 6">IDE 外でも利用可能</div>
 </div>
 
-## AI モデルと利用サーフェス
+## AI モデルと利用サーフェス <a class="h2-doc" href="https://docs.github.com/en/copilot/reference/ai-models/supported-models" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-選べる AI モデル：GPT 系 / Claude 系 / Gemini 系 / Grok 系 / MAI 系 / Kimi 系。さらに **カスタムモデル**・**BYOK（Bring Your Own Key）** にも対応。
+**モデル：** GPT / Claude / Gemini / Grok / MAI / Kimi。対応クライアントではカスタムモデルと **BYOK** も利用可能。提供範囲はプラン、クライアント、ポリシーにより異なります。
 
-選べる利用サーフェス：
-
-- **IDE**：VS Code / Visual Studio / JetBrains / Xcode / Eclipse / Neovim
-- **ターミナル**：Copilot CLI でシェルから対話
-- **SDK**：自分のアプリに Copilot を組み込み
-- **クラウド**：Cloud Agent でブラウザから自律実行・Copilot Code Review が PR を自動レビュー
-- **自動化**：Agentic Workflow でワークフロー化
-- **Web / モバイル**：GitHub.com・GitHub Mobile からチャット・CLI のリモート操作・Cloud Agent 起動
+| 利用する場所 | できること |
+| --- | --- |
+| **IDE** | VS Code、Visual Studio、JetBrains、Xcode、Eclipse、Neovim で開発 |
+| <a class="retro-link" href="/theomonfort/playbook/copilot-app">Copilot App ↗</a> | 複数エージェントの並列実行、Issue 整理、PR 管理 |
+| <a class="retro-link" href="/theomonfort/playbook/cli">ターミナル ↗</a> | Copilot CLI でシェルから作業 |
+| <a class="retro-link" href="/theomonfort/playbook/cloud-agent">Cloud Agent ↗</a> / <a class="retro-link" href="/theomonfort/playbook/copilot-code-review">Code Review ↗</a> | 実装を委任 / PR をレビュー |
+| <a class="retro-link" href="https://github.com/github/copilot-sdk" target="_blank" rel="noopener noreferrer">SDK ↗</a> | 自分のアプリに Copilot を組み込む |
+| <a class="retro-link" href="/theomonfort/playbook/agentic-workflow">自動化 ↗</a> | リポジトリの作業をエージェント型ワークフローに |
+| **Web / モバイル** | チャット、リモートセッション操作、クラウドでの作業開始 |
 
 ## 開発者へのインパクト
 
@@ -137,6 +150,114 @@ flowchart LR
 
 </div>
 
+
+## <span class="fusion-title">Copilot Fusion</span> <span class="fusion-links"><a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a><a class="h2-doc" href="https://github.blog/ai-and-ml/github-copilot/project-hydrafusion-frontier-quality-via-multi-model-orchestration/" target="_blank" rel="noopener noreferrer">Project HydraFusion ↗</a><a class="h2-doc" href="https://artificialanalysis.ai/articles/github-copilot-fusion-orchestrates-anthropic-and-openai-models-to-balance-performance-and-cost" target="_blank" rel="noopener noreferrer">Artificial Analysis ↗</a></span>
+
+<div class="fusion-slide fusion-overview">
+<p class="fusion-lead"><strong>人が労力を選び、</strong>Fusion がモデルを選ぶ。</p>
+<div class="fusion-value-grid">
+<div class="fusion-features">
+<div class="fusion-feature"><span>01</span><div><strong>努力レベルを選ぶだけ</strong><p>モデル選びはシステムに任せる。高コストモデルの常用や、やり直し、手動切り替えのムダを減らす。</p></div></div>
+<div class="fusion-feature"><span>02</span><div><strong>リクエストごとに実行プラン</strong><p><b>推論、コード生成、デバッグ、ツール利用の 4 観点</b>で評価し、パターン、モデル、推論レベルを自動で決定。</p></div></div>
+<div class="fusion-feature"><span>03</span><div><strong>最終回答は 1 つ</strong><p>追加のレビューは、必要なタスクだけ。</p></div></div>
+</div>
+<div class="fusion-metrics" aria-label="ベンチマーク結果">
+<div class="fusion-metric"><strong>60</strong><span>Coding Agent Index</span><span class="fusion-micro">Fusion Max。Opus 5.5 Max との差 2 ポイント以内</span></div>
+<div class="fusion-metric"><strong>1/2</strong><span>コスト・トークン</span><span class="fusion-micro">タスクあたりの平均 API コストとトークン使用量</span></div>
+<div class="fusion-metric"><strong>40%</strong><span>時間を短縮</span><span class="fusion-micro">タスクあたりの所要時間を約 40% 短縮</span></div>
+<div class="fusion-metric"><strong>77%</strong><span>コスト削減（最大）</span><span class="fusion-micro">DeepSWE：Fusion High と GPT-6 Astra（high）の比較。正答率も上回る</span></div>
+</div>
+</div>
+<p class="fusion-availability"><strong>2026-10-28 に GA。</strong> VS Code / Copilot CLI / Copilot App / JetBrains。</p>
+</div>
+
+## <span class="fusion-title">Fusion：労力を選ぶ</span> <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+<div class="fusion-slide fusion-choices">
+<p class="fusion-lead">人が選ぶのは優先度。<strong>実行手順は固定しない。</strong></p>
+<div class="fusion-choice-grid">
+<section class="fusion-choice" aria-label="労力レベル">
+<p class="fusion-zone-label">人が選ぶ：労力レベル</p>
+<div class="fusion-choice-row"><strong>Standard</strong><p>日常の作業を 1 モデルで。<small>すべての Copilot プラン</small></p></div>
+<div class="fusion-choice-row"><strong>High</strong><p>複雑なバグ修正、複数ファイルの変更。</p></div>
+<div class="fusion-choice-row"><strong>Max</strong><p>最も深い推論と徹底した分析。</p></div>
+<p class="fusion-micro"><b>High / Max：</b>Pro+、Max、Business、Enterprise。</p>
+</section>
+<section class="fusion-choice" aria-label="実行パターン">
+<p class="fusion-zone-label">Fusion が選ぶ：実行パターン</p>
+<div class="fusion-choice-row"><strong>Single</strong><p>1 モデルで直接タスクを解く。</p></div>
+<div class="fusion-choice-row"><strong>Cascade</strong><p>効率的に生成 → 判定 → 採用か強化。</p></div>
+<div class="fusion-choice-row"><strong>Critique</strong><p>生成 → 並列レビュー → 集約 → 修正。</p></div>
+<p class="fusion-micro">次のプロンプトでは別のパターンも選択。</p>
+</section>
+</div>
+<p class="fusion-availability"><strong>労力レベル ≠ モデルの推論レベル。</strong> モデルポリシーは適用され、必要なモデルが無効だと Max が使えない場合があります。</p>
+</div>
+
+## <span class="fusion-title">Fusion の仕組み</span> <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="info-fusion-runtime" class="demo-toggle" /><label class="h2-demo h2-info" for="info-fusion-runtime">&#9432; INFO</label>
+
+<div class="demo-panel is-info fusion-help">
+<label class="demo-scrim" for="info-fusion-runtime" aria-label="Fusion の詳細を閉じる"></label>
+<div class="demo-window" role="group" aria-label="公開情報に基づく Fusion のルーティング">
+<div class="demo-head"><span class="demo-tag">INFO</span><span class="demo-name">公開情報に基づく仕組み</span><label class="demo-close" for="info-fusion-runtime" aria-label="閉じる">&#10005;</label></div>
+<div class="info-body">
+<p><b>ポリシーに従うモデル候補：</b>プラン、管理者、データ所在地、FedRAMP の制限を適用。モデル候補は変わる場合があります。</p>
+<p><b>状況に応じたルーティング：</b>稼働状況と可用性を考慮。自然なキャッシュ境界や、会話の複雑さが大きく変わる場面で経路を選びます。</p>
+<p><b>ステップごとの実行：</b>モデル、推論レベル、コンテキスト上限は各ステップに依存。進行状況と使用モデルを追跡でき、提示される回答は最終版だけです。</p>
+<p><b>作業ファイルの扱い：</b>Fusion 自体はサブエージェントを起動しません。下書きの破棄でファイル編集は元に戻らないため、コミット前に確認してください。</p>
+</div>
+</div>
+</div>
+
+<div class="fusion-slide fusion-system">
+<div class="fusion-system-top">
+<section class="fusion-zone fusion-input">
+<p class="fusion-zone-label">01 / 利用者の作業環境</p>
+<p><strong>プロンプト + 労力</strong></p>
+<p class="fusion-micro">Standard / High / Max</p>
+<div class="fusion-constraint">プラン + モデルポリシー</div>
+</section>
+<span class="fusion-connector" aria-hidden="true"></span>
+<section class="fusion-zone fusion-plan">
+<p class="fusion-zone-label">02 / FUSION が計画</p>
+<div class="fusion-signals"><span>推論</span><span>コード</span><span>デバッグ</span><span>ツール</span></div>
+<p><strong>パターンと、各段階のモデル、推論を選択。</strong></p>
+<p class="fusion-micro">ポリシー、稼働状況、可用性を考慮。</p>
+</section>
+</div>
+<p class="fusion-wire">↓ 実行プラン</p>
+<section class="fusion-zone fusion-execution">
+<div class="fusion-zone-head"><p class="fusion-zone-label">03 / 実行とレビュー</p><span class="fusion-micro">プロンプトごとに 1 つの経路</span></div>
+<div class="fusion-paths">
+<div class="fusion-path"><h3>Single</h3><div class="fusion-flow"><span>モデル</span><b aria-hidden="true">→</b><span>回答</span></div><p>直接解決。追加レビューは不要。</p></div>
+<div class="fusion-path"><h3>Cascade</h3><div class="fusion-flow"><span>生成</span><b aria-hidden="true">→</b><span>判定</span></div><p>下書きを<b>採用</b>、または<b>強力なモデル</b>で解き直す。</p></div>
+<div class="fusion-path"><h3>Critique</h3><div class="fusion-flow"><span>生成</span><b aria-hidden="true">→</b><span>並列レビュー</span></div><p>指摘を集約 → 元のモデルが修正。</p></div>
+</div>
+</section>
+<div class="fusion-output"><span>04</span><strong>1 つの最終回答</strong><span>途中の下書きは修正、破棄される場合も。</span></div>
+<p class="fusion-safety">サブエージェントは起動しない。下書きの破棄でファイル編集は戻らない。</p>
+</div>
+
+## <span class="fusion-title">Fusion：料金</span> <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion#billing-for-copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+<div class="fusion-slide fusion-billing">
+<div class="fusion-value-grid fusion-offer-grid">
+<div class="fusion-metric">
+<p class="fusion-zone-label">期間限定オファー</p>
+<strong>30%</strong><span>モデル費用を割引</span><span class="fusion-micro">Copilot Fusion 経由の利用のみ</span>
+</div>
+<section class="fusion-zone" aria-label="割引の条件">
+<p class="fusion-zone-label">対象と期限</p>
+<div class="fusion-choice-row"><strong>対象</strong><p><b>有料 Copilot プラン</b>のユーザー。</p></div>
+<div class="fusion-choice-row"><strong>終了日</strong><p><strong><time datetime="2026-11-30">2026-11-30</time></strong><small>公表されている期限</small></p></div>
+</section>
+</div>
+<p class="fusion-availability"><strong>モデル費用のみ。</strong> サブスクリプション料金の割引ではありません。</p>
+<div class="fusion-value-grid fusion-billing-notes">
+<div class="fusion-feature"><span>01</span><div><strong>通常の課金</strong><p>各モデルの標準料金で計算。Fusion 固有の追加料金はなし。</p></div></div>
+<div class="fusion-feature"><span>02</span><div><strong>労力で費用も変わる</strong><p>High / Max は Standard より多くのモデルと AI クレジットを使う場合があります。</p></div></div>
+</div>
+</div>
 
 ## なぜ企業は Copilot を選ぶのか
 

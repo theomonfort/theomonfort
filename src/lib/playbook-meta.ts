@@ -4,24 +4,21 @@ import type { LocalizedPlaybookEntry } from './playbook';
 
 // Slugs flagged as recently added; surfaced with a "New" badge in the TOC.
 export const NEW_PLAYBOOK_SLUGS = new Set([
-  'usage-based-billing',
-  'token-optimization',
   'github',
+  'github-copilot',
   'governance',
   'secret-scanning',
   'github-advanced-security',
   'code-quality',
-  'copilot-metrics',
   'pull-requests',
   'vscode-agents-window',
   'copilot-chat',
   'copilot-code-review',
   'code-scanning',
-  'migrations',
   'dependabot',
-  'cli',
   'github-actions',
   'agentic-workflow',
+  'copilot-app',
 ]);
 
 export function isNewPlaybookEntry(slug: string): boolean {
@@ -34,26 +31,22 @@ export function isNewPlaybookEntry(slug: string): boolean {
 // there is no standalone title slide: index N is simply the Nth `## H2` in the
 // body (0-based). The auto-generated links slide is the final index.
 export const NAV_HINT_SLIDES: Record<string, number[]> = {
-  'github': [3, 4, 5],
+  'github': [1, 3, 4, 8, 10],
+  'github-copilot': [5, 6, 7, 8],
   'copilot-chat': [1, 5],
-  'usage-based-billing': [8, 9],
-  'token-optimization': [8],
-  'governance': [3, 4, 10, 11],
+  'governance': [10],
   'secret-scanning': [2, 7],
   'code-quality': [4],
-  'copilot-metrics': [4],
   'copilot-memory': [3],
   'pull-requests': [6, 7],
   'custom-agent': [2],
   'agent-skills': [5, 6],
   'copilot-code-review': [7],
   'code-scanning': [5, 8, 9],
-  'migrations': [3],
   'dependabot': [5],
-  'github-advanced-security': [6],
-  'cli': [7],
   'github-actions': [10],
   'agentic-workflow': [1],
+  'copilot-app': [1, 2, 3, 4, 5, 6],
 };
 
 export function navHintSlides(slug: string): number[] {

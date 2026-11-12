@@ -1,0 +1,187 @@
+.prose-akq .gh-summary-slide {
+  font-family: var(--font-prose);
+  font-size: clamp(16px, 1.35vw, 20px);
+  line-height: 1.4;
+  color: #e8f4ff;
+}
+
+.prose-akq .gh-summary-slide p,
+.prose-akq .gh-summary-slide figure {
+  margin: 0;
+}
+
+.prose-akq .gh-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.prose-akq .gh-stat {
+  min-width: 0;
+  padding: 12px;
+  border-top: 2px solid #00f0ff;
+  background: #0a0e27ed;
+}
+
+.prose-akq .gh-stat:nth-child(n + 4) {
+  border-color: #ff2e88;
+}
+
+.prose-akq .gh-stat > strong {
+  display: block;
+  margin: 4px 0;
+  color: #00f0ff;
+  font-size: 2em;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+
+.prose-akq .gh-stat:nth-child(n + 4) > strong {
+  color: #ff2e88;
+}
+
+.prose-akq .gh-stat > span,
+.prose-akq .gh-stat > a,
+.prose-akq .gh-summary-slide .gh-summary-note {
+  display: block;
+  font-size: max(14px, 0.8em);
+  line-height: 1.4;
+}
+
+.prose-akq .gh-stat > span:first-child {
+  font-weight: 700;
+}
+
+.prose-akq .gh-stat > a {
+  margin-top: 6px;
+  color: #bacddd;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose-akq .gh-summary-slide .gh-summary-note {
+  margin-top: 8px;
+  color: #bacddd;
+}
+
+.prose-akq .gh-recognition-claims,
+.prose-akq .gh-recognition-visual {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.prose-akq .gh-recognition-claim {
+  padding: 6px 10px;
+  background: #0a0e27ed;
+  border-top: 2px solid #00f0ff;
+  font-size: max(14px, 0.8em);
+}
+
+.prose-akq .gh-recognition-claim > strong {
+  display: block;
+  color: #00f0ff;
+  font-size: 1.1em;
+  margin-bottom: 4px;
+}
+
+.prose-akq .gh-recognition-claim:last-child {
+  border-color: #ffb000;
+}
+
+.prose-akq .gh-recognition-claim:last-child > strong {
+  color: #ffb000;
+}
+
+.prose-akq .gh-recognition-claim a {
+  color: #bacddd;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose-akq .gh-recognition-visual {
+  align-items: center;
+  margin-top: 10px;
+}
+
+.prose-akq .gh-recognition-visual figcaption {
+  margin: 0 0 4px;
+  font-size: 14px;
+  color: #e8f4ff;
+  text-align: center;
+}
+
+.prose-akq .gh-recognition-chart {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin-inline: auto;
+  font-family: var(--font-prose);
+}
+
+.prose-akq .gh-recognition-key {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 10px;
+}
+
+.prose-akq .gh-recognition-key > div {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  font-size: max(14px, 0.8em);
+}
+
+.prose-akq .gh-recognition-key b {
+  color: #bacddd;
+  min-width: 1.3em;
+  font-variant-numeric: tabular-nums;
+}
+
+.prose-akq .gh-recognition-key > div:first-child {
+  color: #ffb000;
+  font-weight: 700;
+}
+
+.prose-akq .gh-recognition-key > div:first-child b {
+  color: inherit;
+}
+
+body.present-mode .playbook-detail:has(.gh-summary-slide.akq-slide-active) {
+  padding-top: 88px;
+  padding-bottom: 72px;
+}
+
+body.present-mode .prose-akq > h2:has(.gh-summary-title) {
+  margin: 0 0 12px;
+  font-size: clamp(26px, 2.1vw, 34px);
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+body.present-mode .prose-akq > h2:has(.gh-summary-title)::before {
+  top: 0.35em;
+}
+
+@media (max-height: 720px) {
+  body.present-mode .prose-akq .gh-summary-slide { font-size: 16px; }
+  body.present-mode .prose-akq .gh-recognition-chart { max-width: 300px; }
+}
+
+@media (max-width: 767px) {
+  body.present-mode .playbook-detail:has(.gh-summary-slide.akq-slide-active) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 520px) {
+  .prose-akq .gh-stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .prose-akq .gh-recognition-claims,
+  .prose-akq .gh-recognition-visual { grid-template-columns: minmax(0, 1fr); }
+
+  body.present-mode .playbook-detail:has(.gh-summary-slide.akq-slide-active) {
+    justify-content: flex-start;
+  }
+}
