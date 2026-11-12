@@ -141,7 +141,7 @@ From collaborating on code to coordinating work across agents.
 <div class="gh-platform-stages">
 <section class="gh-platform-stage">
 <h3><span>01</span> PLAN</h3>
-<ul><li class="plat-item" data-cop="0">GitHub Projects</li><li class="plat-item" data-cop="0">Issues/Discussions</li><li class="plat-item" data-cop="1">Plan mode</li><li class="plat-item" data-cop="1">MCP</li><li class="plat-item" data-cop="1">Skills/Instructions ...</li></ul>
+<ul><li class="plat-item" data-cop="0">GitHub Projects</li><li class="plat-item" data-cop="0">Issues/<wbr>Discussions</li><li class="plat-item" data-cop="1">Plan mode</li><li class="plat-item" data-cop="1">MCP</li><li class="plat-item" data-cop="1">Skills/<wbr>Instructions ...</li></ul>
 </section>
 <section class="gh-platform-stage">
 <h3><span>02</span> CODE</h3>
@@ -157,7 +157,7 @@ From collaborating on code to coordinating work across agents.
 </section>
 <section class="gh-platform-stage">
 <h3><span>05</span> OPERATE</h3>
-<ul><li class="plat-item" data-cop="1">Agentic Workflows</li><li class="plat-item" data-cop="1">Copilot Memory</li><li class="plat-item" data-cop="1">Copilot Metrics</li><li class="plat-item" data-cop="0">REST/GraphQL API</li><li class="plat-item" data-cop="0">Packages/Registry</li></ul>
+<ul><li class="plat-item" data-cop="1">Agentic Workflows</li><li class="plat-item" data-cop="1">Copilot Memory</li><li class="plat-item" data-cop="1">Copilot Metrics</li><li class="plat-item" data-cop="0">REST/<wbr>GraphQL API</li><li class="plat-item" data-cop="0">Packages/<wbr>Registry</li></ul>
 </section>
 </div>
 </figure>

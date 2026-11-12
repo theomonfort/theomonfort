@@ -42,17 +42,20 @@
 
 .prose-akq .gh-platform-stages {
   display: grid;
-  gap: 5px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
 }
 
 .prose-akq .gh-platform-stage {
   --stage-color: #9bbc0f;
   display: grid;
-  grid-template-columns: 128px minmax(0, 1fr);
-  align-items: center;
-  gap: 10px;
-  padding: 5px 10px;
-  border-left: 3px solid var(--stage-color);
+  grid-template-rows: 4.25em auto;
+  align-content: start;
+  gap: 8px;
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--stage-color);
+  border-top-width: 3px;
   background: #0a0e27ed;
 }
 
@@ -61,9 +64,7 @@
 .prose-akq .gh-platform-stage:nth-child(4) { --stage-color: #00f0ff; }
 
 .prose-akq .gh-platform .gh-platform-stage h3 {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
+  display: block;
   margin: 0;
   color: var(--stage-color);
   font-size: max(14px, 0.85em);
@@ -71,14 +72,22 @@
 }
 
 .prose-akq .gh-platform-stage h3 span {
+  display: block;
+  margin-bottom: 4px;
   font-family: 'VT323', monospace;
   font-size: 1.2em;
 }
 
+.prose-akq .gh-platform-stage:not(:last-child) h3 span::after {
+  content: "\2192";
+  float: right;
+  font-family: var(--font-prose);
+}
+
 .prose-akq .gh-platform-stage ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 6px;
+  display: grid;
+  align-content: start;
+  gap: 6px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -86,11 +95,11 @@
 
 .prose-akq .gh-platform .plat-item {
   margin: 0;
-  padding: 2px 6px;
-  border: 1px solid #e8f4ff26;
+  padding: 0;
   color: #e8f4ff;
   font-size: max(15px, 0.85em);
   line-height: 1.4;
+  overflow-wrap: anywhere;
   transition: opacity 0.2s;
 }
 
@@ -125,10 +134,30 @@ body.present-mode .prose-akq > h2:has(.gh-platform-title)::before {
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 600px) {
+  .prose-akq .gh-platform-stages { grid-template-columns: minmax(0, 1fr); }
+
   .prose-akq .gh-platform-stage {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto;
     gap: 6px;
+  }
+
+  .prose-akq .gh-platform .gh-platform-stage h3 {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+  }
+
+  .prose-akq .gh-platform-stage h3 span { margin: 0; }
+  .prose-akq .gh-platform-stage:not(:last-child) h3 span::after { content: none; }
+  .prose-akq .gh-platform-stage ul {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .prose-akq .gh-platform .plat-item {
+    padding: 2px 6px;
+    border: 1px solid #e8f4ff26;
   }
 
   body.present-mode .playbook-detail:has(.gh-platform.akq-slide-active) {
