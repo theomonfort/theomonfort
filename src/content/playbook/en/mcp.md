@@ -205,7 +205,6 @@ The GitHub official MCP server is connected out of the box. AI can operate Issue
 .prose-akq .mcp-connectors-locations > div{padding-top:6px;border-top:1px solid #e8f4ff22}
 .prose-akq .mcp-connectors-locations dt{margin-bottom:4px;font-weight:600;font-size:14px}
 .prose-akq .mcp-connectors-locations dd{margin:0;color:#a8bed2}
-.prose-akq .mcp-connectors .mcp-connectors-scope{margin-top:6px;font-size:14px;color:#a8bed2}
 .prose-akq > h2:has(.mcp-connectors-title){display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
 .prose-akq .mcp-connectors-links{display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px}
 .prose-akq h2 .mcp-connectors-links .h2-doc{margin:0;font-size:14px}
@@ -215,6 +214,7 @@ The GitHub official MCP server is connected out of the box. AI can operate Issue
 body.present-mode .playbook-detail:has(.mcp-connectors.akq-slide-active){padding-top:88px;padding-bottom:72px}
 body.present-mode .prose-akq > h2:has(.mcp-connectors-title){margin:0 0 12px;font-size:clamp(28px,2.2vw,36px);line-height:1.2;letter-spacing:0}
 body.present-mode .prose-akq > h2:has(.mcp-connectors-title)::before{top:.35em}
+@media(max-height:720px){body.present-mode .mcp-connectors .mcp-connectors-compare :is(th,td){padding-top:.25em;padding-bottom:.25em}}
 @media(max-width:767px){body.present-mode .playbook-detail:has(.mcp-connectors.akq-slide-active){padding-left:20px;padding-right:20px}}
 @media(max-width:520px){.prose-akq .mcp-connectors-locations{grid-template-columns:1fr}.prose-akq .mcp-connectors-compare th:first-child{width:20%}.prose-akq .mcp-connectors-compare th:nth-child(2){width:38%}}
 </style>
@@ -224,7 +224,7 @@ body.present-mode .prose-akq > h2:has(.mcp-connectors-title)::before{top:.35em}
 <tbody>
 <tr><th scope="row">What it is</th><td>Tools/context via MCP</td><td>GitHub-verified MCP integration</td></tr>
 <tr><th scope="row">Setup</th><td>Configure server and authentication yourself</td><td>Select service, sign in once, approve access</td></tr>
-<tr><th scope="row">Availability</th><td>Where you configure it</td><td>Reuse on supported surfaces</td></tr>
+<tr><th scope="row">Availability</th><td>Where you configure it</td><td>Reuse across supported surfaces (excluding GitHub Actions sessions).</td></tr>
 <tr><th scope="row">Choice</th><td>Custom / third-party</td><td>GitHub's supported catalog</td></tr>
 </tbody>
 </table>
@@ -237,5 +237,4 @@ body.present-mode .prose-akq > h2:has(.mcp-connectors-title)::before{top:.35em}
 <div><dt>VS Code</dt><dd>Agents window → Customizations</dd></div>
 </dl>
 </div>
-<p class="mcp-connectors-scope">Local + cloud sandbox, not GitHub Actions sessions.</p>
 </div>
