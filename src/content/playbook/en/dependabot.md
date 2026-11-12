@@ -240,6 +240,97 @@ Every Dependabot alert has an **"Assign to agent"** button — hand it to Copilo
 
 > 💰 Free for public repos. Private repos need **GitHub Code Security** (or the legacy Advanced Security bundle).
 
+## <span class="dependency-feature-title">Reachability analysis</span> <span class="dependency-feature-links"><a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/supply-chain-security/about-reachability-analysis-for-dependabot-alerts" target="_blank" rel="noopener noreferrer">📖 Docs</a><a class="dependency-announcement" href="https://github.blog/changelog/2026-10-28-prioritize-dependabot-alerts-with-reachability-analysis" target="_blank" rel="noopener noreferrer">Announcement ↗</a></span>
+
+<div class="dependency-feature">
+<style>
+.prose-akq .dependency-feature{font:clamp(16px,1.3vw,20px)/1.35 var(--font-prose),sans-serif;color:#e8f4ff}
+.prose-akq .dependency-feature p{margin:0}
+.prose-akq .dependency-feature .dependency-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:0 0 8px;color:#a8bed2;font-size:14px}
+.prose-akq .dependency-preview{border:1px solid #ffb000;color:#ffb000;padding:2px 6px;white-space:nowrap}
+.prose-akq .dependency-feature .dependency-lead{margin:0 0 8px;font-size:1.1em}
+.prose-akq .dependency-flow{display:grid;grid-template-columns:1fr auto 1.2fr auto 1fr;align-items:center;gap:10px;margin:0 0 8px;border:1px solid #00f0ff55;background:#0a0e27cc;padding:8px 12px;text-align:center}
+.prose-akq .dependency-flow b{color:#00f0ff}
+.prose-akq .dependency-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.prose-akq .dependency-panel{min-width:0;border-top:2px solid #00f0ff;background:#0a0e27cc;padding:12px}
+.prose-akq .dependency-feature .dependency-panel h3{margin:0 0 8px;font-size:1em;line-height:1.3;color:#00f0ff}
+.prose-akq .dependency-facts{margin:0}
+.prose-akq .dependency-facts > div{display:grid;grid-template-columns:1fr 1.15fr;gap:10px;padding:6px 0;border-top:1px solid #e8f4ff22}
+.prose-akq .dependency-policy > div{grid-template-columns:.7fr 1.3fr}
+.prose-akq .dependency-facts dt{font-weight:600}
+.prose-akq .dependency-facts dd{margin:0;color:#a8bed2}
+.prose-akq .dependency-feature .dependency-note{margin-top:8px;font-size:14px;color:#a8bed2}
+.prose-akq .dependency-feature .dependency-setup{list-style:none;margin:0;padding:0}
+.prose-akq .dependency-setup li{margin:0;padding:6px 0;border-top:1px solid #e8f4ff22}
+.prose-akq .dependency-setup b{color:#e8f4ff}
+.prose-akq .dependency-setup span{color:#a8bed2}
+.prose-akq > h2:has(.dependency-feature-title){display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.prose-akq .dependency-feature-links{display:inline-flex;flex-wrap:wrap;gap:6px;align-items:center}
+.prose-akq h2 .dependency-feature-links .h2-doc{margin:0;font-size:14px}
+.prose-akq h2 .dependency-announcement{display:inline-flex;align-items:center;padding:.2em .5em;border:1px solid #00f0ff66;color:#00f0ff;font-size:14px;font-weight:400;line-height:1.4;letter-spacing:0;text-decoration:none;white-space:nowrap}
+.prose-akq h2 .dependency-announcement:hover,.prose-akq h2 .dependency-announcement:focus-visible{border-color:#00f0ff;text-decoration:underline}
+.prose-akq h2 .dependency-announcement:focus-visible{outline:2px solid #00f0ff;outline-offset:2px}
+body.present-mode .playbook-detail:has(.dependency-feature.akq-slide-active){padding-top:88px;padding-bottom:72px}
+body.present-mode .prose-akq > h2:has(.dependency-feature-title){margin:0 0 12px;font-size:clamp(28px,2.2vw,36px);line-height:1.2;letter-spacing:0}
+body.present-mode .prose-akq > h2:has(.dependency-feature-title)::before{top:.35em}
+@media(max-width:767px){body.present-mode .playbook-detail:has(.dependency-feature.akq-slide-active){padding-left:20px;padding-right:20px}}
+@media(max-height:720px){body.present-mode .dependency-panel{padding:10px}body.present-mode .dependency-facts > div,body.present-mode .dependency-setup li{padding:3px 0}}
+@media(max-width:520px){.prose-akq .dependency-panels{grid-template-columns:1fr}.prose-akq .dependency-flow{gap:6px;padding:10px 6px;font-size:14px}}
+</style>
+<p class="dependency-meta"><span class="dependency-preview">Public preview</span><span>Enterprise Cloud, including data residency</span><span>Free during preview</span></p>
+<p class="dependency-lead">Prioritize <b>Dependabot alerts</b> using call paths to vulnerable functions.</p>
+<div class="dependency-flow"><span>Your code<br>+ dependencies</span><b aria-hidden="true">→</b><b>CodeQL<br>+ advisory data</b><b aria-hidden="true">→</b><span>Verdict + call-path evidence</span></div>
+<div class="dependency-panels">
+<div class="dependency-panel">
+<h3>Read the verdict</h3>
+<dl class="dependency-facts">
+<div><dt>Reachable</dt><dd>Prioritize.</dd></div>
+<div><dt>Potentially reachable</dt><dd>Prioritize too.</dd></div>
+<div><dt>Unreachable</dt><dd>Lower priority.</dd></div>
+<div><dt>Reachability unavailable</dt><dd>No verdict.</dd></div>
+</dl>
+<p class="dependency-note">Reachability is not exploitability. Alerts are not automatically closed or dismissed.</p>
+</div>
+<div class="dependency-panel">
+<h3>Enable, then prioritize</h3>
+<ul class="dependency-setup">
+<li><b>Scope:</b> <span>JavaScript / TypeScript with an npm, pnpm or Yarn lockfile.</span></li>
+<li><b>Enable:</b> <span>Turn on alerts, then reachability (off by default).</span></li>
+<li><b>Runs:</b> <span>GitHub-hosted only. Initial + daily scans, not on push.</span></li>
+</ul>
+<p class="dependency-note">No GHAS license or Actions charges.</p>
+</div>
+</div>
+</div>
+
+## <span class="dependency-feature-title">Package firewall</span> <span class="dependency-feature-links"><a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/protecting-endpoints-with-package-firewall" target="_blank" rel="noopener noreferrer">📖 Docs</a><a class="dependency-announcement" href="https://github.blog/changelog/2026-10-20-github-package-firewall-in-public-preview" target="_blank" rel="noopener noreferrer">Announcement ↗</a></span>
+
+<div class="dependency-feature">
+<p class="dependency-meta"><span class="dependency-preview">Public preview</span><span>Enterprise Cloud, including data residency</span><span>Free during preview</span></p>
+<p class="dependency-lead">Block risky <b>npm downloads</b> before developers, agents or CI install them.</p>
+<div class="dependency-flow"><span>Developer / agent / CI</span><b aria-hidden="true">→</b><b>Package firewall<br>Allow / block requests</b><b aria-hidden="true">→</b><span>npm registry</span></div>
+<div class="dependency-panels">
+<div class="dependency-panel">
+<h3>Enterprise policy checks</h3>
+<dl class="dependency-facts dependency-policy">
+<div><dt>Advisories</dt><dd>Malware + vulnerability threshold.</dd></div>
+<div><dt>Cooldown</dt><dd>Minimum version age.</dd></div>
+<div><dt>Supply chain</dt><dd>Lost SLSA attestations + new install scripts.</dd></div>
+</dl>
+<p class="dependency-note">Dependabot still monitors dependencies already in the repository.</p>
+</div>
+<div class="dependency-panel">
+<h3>Connect, then enforce</h3>
+<ul class="dependency-setup">
+<li><b>Set policy:</b> <span>Enterprise admin / security manager.</span></li>
+<li><b>Connect:</b> <span>npm only: firewall registry URL + enterprise-member token on each endpoint.</span></li>
+<li><b>Exceptions:</b> <span>Use the block-message link to request approval.</span></li>
+</ul>
+<p class="dependency-note">Only routed requests are checked. Policy does not reroute clients.</p>
+</div>
+</div>
+</div>
+
 ## Eligibility and pricing <a class="h2-doc" href="https://docs.github.com/en/get-started/learning-about-github/about-github-advanced-security" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 Core Dependabot is **free on every plan**. Only Code Security premium features cost extra.
