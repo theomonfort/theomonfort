@@ -475,51 +475,62 @@ body.present-mode .prose-akq>h2:has(+.gh-agent-teams)::before{top:.35em}
 <div class="gh-pillar" data-step="03" style="--pillar:#ffb000"><span class="gh-pillar-kicker">03 / 安心して任せる</span><h3>TRUST</h3><p class="gh-pillar-promise">エージェントの成果が増えても、可視性と統制を保つ。</p><p class="gh-pillar-examples">AI Scan + agentic autofix<br>Reachability analysis<br>Package firewall</p></div>
 </div>
 
-## Universe 2026：提供状況 <a class="h2-doc" href="https://github.blog/changelog/type/new-releases/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## <span class="gh-release-title">Universe 2026：提供状況</span> <a class="h2-doc" href="https://github.blog/changelog/type/new-releases/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 <div class="gh-release-map">
 <style>
-.prose-akq .gh-release-map{font:clamp(16px,1.25vw,19px)/1.4 var(--font-prose),sans-serif}
-.prose-akq .gh-release-map .gh-release-date{margin:0 0 .8em;color:#a8bed2;font-size:.8em}
-.prose-akq .gh-release-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1em}
-.prose-akq .gh-release-column{min-width:0;border-top:2px solid var(--pillar);background:#0a0e27cc;padding:.7em .8em}
-.prose-akq .gh-release-column h3{font-size:1em;color:var(--pillar);letter-spacing:.1em;margin:0 0 .4em}
-.prose-akq .gh-release-item{padding:.65em 0;border-top:1px solid #e8f4ff22}
+.prose-akq .gh-release-map{font:clamp(14px,1.25vw,18px)/1.3 var(--font-prose),sans-serif}
+.prose-akq .gh-release-map .gh-release-date{margin:0 0 8px;color:#a8bed2;font-size:14px}
+.prose-akq .gh-release-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.prose-akq .gh-release-column{min-width:0;border-top:2px solid var(--pillar);background:#0a0e27cc;padding:8px 10px}
+.prose-akq .gh-release-map .gh-release-column h3{font-size:1em;color:var(--pillar);letter-spacing:.1em;margin:0 0 6px}
+.prose-akq .gh-release-item{padding:4px 0;border-top:1px solid #e8f4ff22}
 .prose-akq .gh-release-line{display:flex;align-items:baseline;justify-content:space-between;gap:.45em}
 .prose-akq .gh-release-line a{color:#e8f4ff;font-weight:600;text-decoration:none;line-height:1.3}
 .prose-akq .gh-release-line a:hover,.prose-akq .gh-release-line a:focus-visible{color:#00f0ff;text-decoration:underline}
-.prose-akq .gh-release-status{flex-shrink:0;padding:.1em .3em;border:1px solid currentColor;font-size:.6em;font-weight:700;color:#a8bed2;white-space:nowrap}
+.prose-akq .gh-release-status{flex-shrink:0;padding:.1em .3em;border:1px solid currentColor;font-size:11px;font-weight:700;color:#a8bed2;white-space:nowrap}
 .prose-akq .gh-release-status.is-ga{color:#9bbc0f}
 .prose-akq .gh-release-status.is-preview{color:#ffb000}
-.prose-akq .gh-release-item small{display:block;color:#a8bed2;font-size:.76em;line-height:1.45;margin-top:.25em}
-.prose-akq .gh-release-map .gh-release-note{font-size:.7em;color:#a8bed2;margin:.8em 0 0;line-height:1.5}
-@media(max-width:700px){.prose-akq .gh-release-columns{grid-template-columns:1fr}}
+.prose-akq .gh-release-item small{color:#a8bed2;font-size:14px;line-height:1.3}
+.prose-akq .gh-release-topic{display:flex;align-items:baseline;gap:2px;min-width:0}
+.prose-akq .gh-release-topic > a:first-child{min-width:0;hyphens:auto;overflow-wrap:anywhere}
+.prose-akq .gh-release-line .gh-release-slide{display:inline-flex;align-items:center;justify-content:center;align-self:center;flex:0 0 24px;width:24px;height:24px;padding:0;border:0;color:#a8bed2;opacity:.7;line-height:1}
+.prose-akq .gh-release-slide > span{width:10px;height:14px;background:currentColor;mask:url("/theomonfort/icons/play-cyan.svg") center/contain no-repeat}
+.prose-akq .gh-release-line .gh-release-slide:hover,.prose-akq .gh-release-line .gh-release-slide:focus-visible{color:var(--pillar);opacity:1;text-decoration:none}
+.prose-akq .gh-release-slide:focus-visible{outline:2px solid var(--pillar);outline-offset:1px}
+body.present-mode .playbook-detail:has(.gh-release-map.akq-slide-active){padding-top:88px;padding-bottom:72px}
+body.present-mode .prose-akq > h2:has(.gh-release-title){margin:0 0 12px;font-size:clamp(26px,2.1vw,34px);line-height:1.2;letter-spacing:0}
+body.present-mode .prose-akq > h2:has(.gh-release-title)::before{top:.35em}
+.prose-akq h2:has(.gh-release-title) .h2-doc{font-size:14px}
+@media(max-width:767px){body.present-mode .playbook-detail:has(.gh-release-map.akq-slide-active){padding-left:20px;padding-right:20px}}
+@media(min-width:521px) and (max-width:767px){.prose-akq .gh-release-columns{grid-template-columns:1.175fr 1.125fr .9fr;gap:8px}.prose-akq .gh-release-column{padding:8px 4px}.prose-akq .gh-release-item{padding:2px 0}}
+@media(max-height:720px){body.present-mode .prose-akq .gh-release-item{padding:2px 0}}
+@media(max-width:520px){.prose-akq .gh-release-columns{grid-template-columns:1fr}}
 </style>
 <p class="gh-release-date">2026-11-11 時点の公開情報で確認。機能名から公式発表を開けます。</p>
 <div class="gh-release-columns">
 <div class="gh-release-column" style="--pillar:#00f0ff">
 <h3>INNOVATE</h3>
-<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-28-github-copilot-app-universe-releases" target="_blank" rel="noopener noreferrer">Copilot app</a><span class="gh-release-status">提供中</span></div><small>Projects + computer use：プレビュー</small></div>
-<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion" target="_blank" rel="noopener noreferrer">Copilot Fusion</a><span class="gh-release-status is-ga">GA</span></div><small>複数モデルの選択とオーケストレーション</small></div>
-<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-28-build-shared-workflows-for-your-team-with-copilot-automations" target="_blank" rel="noopener noreferrer">Copilot Automations</a><span class="gh-release-status">提供中</span></div><small>共有ワークフローを順次展開</small></div>
-<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-28-copilot-code-review-merge-with-confidence-with-max-and-approvals" target="_blank" rel="noopener noreferrer">Code review Max</a><span class="gh-release-status is-preview">Preview</span></div><small>より深いレビュー。PR 承認機能は GA。</small></div>
-<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-28-github-intelligence-puts-your-code-context-and-history-to-work" target="_blank" rel="noopener noreferrer">Memory / Dreaming</a><span class="gh-release-status">機能別</span></div><small>Memory：GA、Dreaming：プレビュー</small></div>
+<div class="gh-release-item"><div class="gh-release-line"><span class="gh-release-topic"><a href="https://github.blog/changelog/2026-10-28-github-copilot-app-universe-releases" target="_blank" rel="noopener noreferrer">Copilot app</a><a class="gh-release-slide" data-astro-reload href="/theomonfort/playbook/copilot-app/?present=1&amp;slide=2" aria-label="Copilot app のスライドを開く" title="Copilot app のスライドを開く"><span aria-hidden="true"></span></a></span><span class="gh-release-status">提供中</span></div><small>Projects + computer use：プレビュー</small></div>
+<div class="gh-release-item"><div class="gh-release-line"><span class="gh-release-topic"><a href="https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion" target="_blank" rel="noopener noreferrer">Copilot Fusion</a><a class="gh-release-slide" data-astro-reload href="/theomonfort/playbook/github-copilot/?present=1&amp;slide=6" aria-label="Copilot Fusion のスライドを開く" title="Copilot Fusion のスライドを開く"><span aria-hidden="true"></span></a></span><span class="gh-release-status is-ga">GA</span></div><small>複数モデルの選択とオーケストレーション</small></div>
+<div class="gh-release-item"><div class="gh-release-line"><span class="gh-release-topic"><a href="https://github.blog/changelog/2026-10-28-build-shared-workflows-for-your-team-with-copilot-automations" target="_blank" rel="noopener noreferrer">Copilot Automations</a><a class="gh-release-slide" data-astro-reload href="/theomonfort/playbook/copilot-app/?present=1&amp;slide=3" aria-label="Copilot Automations のスライドを開く" title="Copilot Automations のスライドを開く"><span aria-hidden="true"></span></a></span><span class="gh-release-status">提供中</span></div><small>共有ワークフローを順次展開</small></div>
+<div class="gh-release-item"><div class="gh-release-line"><span class="gh-release-topic"><a href="https://github.blog/changelog/2026-10-28-copilot-code-review-merge-with-confidence-with-max-and-approvals" target="_blank" rel="noopener noreferrer">Code review Max</a><a class="gh-release-slide" data-astro-reload href="/theomonfort/playbook/copilot-code-review/?present=1&amp;slide=8" aria-label="Code review Max のスライドを開く" title="Code review Max のスライドを開く"><span aria-hidden="true"></span></a></span><span class="gh-release-status is-preview">Preview</span></div><small>より深いレビュー。PR 承認機能は GA。</small></div>
+<div class="gh-release-item"><div class="gh-release-line"><span class="gh-release-topic"><a href="https://github.blog/changelog/2026-10-28-github-intelligence-puts-your-code-context-and-history-to-work" target="_blank" rel="noopener noreferrer">Memory / Dreaming</a><a class="gh-release-slide" data-astro-reload href="/theomonfort/playbook/copilot-memory/?present=1&amp;slide=5" aria-label="Memory / Dreaming のスライドを開く" title="Memory / Dreaming のスライドを開く"><span aria-hidden="true"></span></a></span><span class="gh-release-status">機能別</span></div><small>Memory：GA、Dreaming：プレビュー</small></div>
 </div>
 <div class="gh-release-column" style="--pillar:#9bbc0f">
 <h3>SCALE</h3>
 <div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-28-github-enterprise-now-includes-access-to-github-copilot" target="_blank" rel="noopener noreferrer">Enterprise + Copilot</a><span class="gh-release-status">営業経由</span></div><small>GHEC 対象。セルフサーブは今後。</small></div>
-<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/news-insights/company-news/github-universe-2026-evolving-every-layer-of-the-stack/" target="_blank" rel="noopener noreferrer">Git インフラ刷新</a><span class="gh-release-status">進行中</span></div><small>Azure 移行は 2027 年初めの完了を予定</small></div>
-<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-28-github-agentic-workflows-generally-available" target="_blank" rel="noopener noreferrer">Agentic Workflows</a><span class="gh-release-status is-ga">GA</span></div><small>GitHub Actions 上でエージェントを実行</small></div>
-<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-28-github-actions-workflow-lockfiles-are-generally-available" target="_blank" rel="noopener noreferrer">Actions lockfiles</a><span class="gh-release-status is-ga">GA</span></div><small>ワークフローのアクション依存を固定</small></div>
-<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-28-repository-plugin-defaults-and-enterprise-plugin-controls-generally-available" target="_blank" rel="noopener noreferrer">Copilot ガバナンス</a><span class="gh-release-status is-ga">GA</span></div><small>プラグインの既定値と Enterprise の統制</small></div>
+<div class="gh-release-item"><div class="gh-release-line"><span class="gh-release-topic"><a href="https://github.blog/news-insights/company-news/github-universe-2026-evolving-every-layer-of-the-stack/" target="_blank" rel="noopener noreferrer">Git インフラ刷新</a><a class="gh-release-slide" data-astro-reload href="/theomonfort/playbook/github/?present=1&amp;slide=7" aria-label="Git インフラ刷新 のスライドを開く" title="Git インフラ刷新 のスライドを開く"><span aria-hidden="true"></span></a></span><span class="gh-release-status">進行中</span></div><small>Azure 移行は 2027 年初めの完了を予定</small></div>
+<div class="gh-release-item"><div class="gh-release-line"><span class="gh-release-topic"><a href="https://github.blog/changelog/2026-10-28-github-agentic-workflows-generally-available" target="_blank" rel="noopener noreferrer">Agentic Workflows</a><a class="gh-release-slide" data-astro-reload href="/theomonfort/playbook/agentic-workflow/?present=1&amp;slide=2" aria-label="Agentic Workflows のスライドを開く" title="Agentic Workflows のスライドを開く"><span aria-hidden="true"></span></a></span><span class="gh-release-status is-ga">GA</span></div><small>GitHub Actions 上でエージェントを実行</small></div>
+<div class="gh-release-item"><div class="gh-release-line"><span class="gh-release-topic"><a href="https://github.blog/changelog/2026-10-28-github-actions-workflow-lockfiles-are-generally-available" target="_blank" rel="noopener noreferrer">Actions lockfiles</a><a class="gh-release-slide" data-astro-reload href="/theomonfort/playbook/github-actions/?present=1&amp;slide=11" aria-label="Actions lockfiles のスライドを開く" title="Actions lockfiles のスライドを開く"><span aria-hidden="true"></span></a></span><span class="gh-release-status is-ga">GA</span></div><small>ワークフローのアクション依存を固定</small></div>
+<div class="gh-release-item"><div class="gh-release-line"><span class="gh-release-topic"><a href="https://github.blog/changelog/2026-10-28-repository-plugin-defaults-and-enterprise-plugin-controls-generally-available" target="_blank" rel="noopener noreferrer">Copilot ガバナンス</a><a class="gh-release-slide" data-astro-reload href="/theomonfort/playbook/governance/?present=1&amp;slide=11" aria-label="Copilot ガバナンス のスライドを開く" title="Copilot ガバナンス のスライドを開く"><span aria-hidden="true"></span></a></span><span class="gh-release-status is-ga">GA</span></div><small>プラグインの既定値と Enterprise の統制</small></div>
 </div>
 <div class="gh-release-column" style="--pillar:#ffb000">
 <h3>TRUST</h3>
-<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-28-ai-scan-for-repositories-in-public-preview" target="_blank" rel="noopener noreferrer">AI Scan：リポジトリ</a><span class="gh-release-status is-preview">Preview</span></div><small><a class="retro-link" href="https://github.blog/changelog/2026-10-15-ai-scan-for-pull-requests-generally-available" target="_blank" rel="noopener noreferrer">PR 向け AI Scan は GA ↗</a></small></div>
+<div class="gh-release-item"><div class="gh-release-line"><span class="gh-release-topic"><a href="https://github.blog/changelog/2026-10-28-ai-scan-for-repositories-in-public-preview" target="_blank" rel="noopener noreferrer">AI Scan：リポジトリ</a><a class="gh-release-slide" data-astro-reload href="/theomonfort/playbook/code-scanning/?present=1&amp;slide=6" aria-label="AI Scan：リポジトリ のスライドを開く" title="AI Scan：リポジトリ のスライドを開く"><span aria-hidden="true"></span></a></span><span class="gh-release-status is-preview">Preview</span></div><small><a class="retro-link" href="https://github.blog/changelog/2026-10-15-ai-scan-for-pull-requests-generally-available" target="_blank" rel="noopener noreferrer">PR 向け AI Scan は GA ↗</a></small></div>
 <div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-28-prioritize-dependabot-alerts-with-reachability-analysis" target="_blank" rel="noopener noreferrer">Reachability analysis</a><span class="gh-release-status is-preview">Preview</span></div><small>GHEC の JavaScript / TypeScript が対象</small></div>
-<div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-15-agentic-autofix-for-code-scanning-alerts-general-availability" target="_blank" rel="noopener noreferrer">Agentic autofix</a><span class="gh-release-status is-ga">GA</span></div><small>10 月 15 日に一般提供</small></div>
+<div class="gh-release-item"><div class="gh-release-line"><span class="gh-release-topic"><a href="https://github.blog/changelog/2026-10-15-agentic-autofix-for-code-scanning-alerts-general-availability" target="_blank" rel="noopener noreferrer">Agentic autofix</a><a class="gh-release-slide" data-astro-reload href="/theomonfort/playbook/code-scanning/?present=1&amp;slide=9" aria-label="Agentic autofix のスライドを開く" title="Agentic autofix のスライドを開く"><span aria-hidden="true"></span></a></span><span class="gh-release-status is-ga">GA</span></div><small>10 月 15 日に一般提供</small></div>
 <div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-20-github-package-firewall-in-public-preview" target="_blank" rel="noopener noreferrer">Package firewall</a><span class="gh-release-status is-preview">Preview</span></div><small>npm / GHEC。プレビュー中は無料。</small></div>
 </div>
 </div>
-<p class="gh-release-note">GA = 一般提供。Preview = パブリックプレビュー。プラン、ポリシー、展開状況による制約があります。「提供中」は全機能の GA を意味しません。</p>
 </div>
