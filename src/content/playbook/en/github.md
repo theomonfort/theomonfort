@@ -416,8 +416,23 @@ More software is being built every month.
 .prose-akq .gh-team-roles span{position:relative;border:1px solid #ff2e8855;padding:.6em .2em;text-align:center;font-size:.8em}
 .prose-akq .gh-team-roles span::before{content:"";position:absolute;left:50%;top:-.75em;width:1px;height:.75em;background:#ff2e8888}
 .prose-akq .gh-agent-teams .gh-team-return{margin:1em 0 .7em;border-bottom:1px dashed #00f0ff77;padding:.5em 0;color:#00f0ff;text-align:center;font-size:.9em}
+.prose-akq .gh-agent-teams .gh-team-challenge{margin:.75em 0;padding:.55em .75em;border-left:3px solid #ffb000;background:#0a0e27;color:#e8f4ff;font-size:max(16px,.9em);line-height:1.45;text-wrap:pretty}
+.prose-akq .gh-team-challenge strong{color:#ffb000}
 .prose-akq .gh-agent-teams figcaption{font-size:.65em;color:#a8bed2;line-height:1.5}
-@media(max-width:700px){.prose-akq .gh-work-eras{grid-template-columns:repeat(2,minmax(0,1fr))}.prose-akq .gh-team-flow{grid-template-columns:1fr}.prose-akq .gh-team-arrow{transform:rotate(90deg)}.prose-akq .gh-team-project{margin:.5em 0}}
+@media(max-height:720px),(max-width:767px){
+body.present-mode .playbook-detail:has(.gh-agent-teams.akq-slide-active){padding-top:88px;padding-bottom:72px}
+body.present-mode .prose-akq>h2:has(+.gh-agent-teams){margin:0 0 12px;font-size:26px;line-height:1.2;letter-spacing:0}
+body.present-mode .prose-akq>h2:has(+.gh-agent-teams)::before{top:.35em}
+.prose-akq .gh-work-eras{margin-bottom:.6em}
+.prose-akq .gh-work-era{padding:.5em}
+.prose-akq .gh-team-person,.prose-akq .gh-team-tools{padding:.25em}
+.prose-akq .gh-team-project{padding:.65em}
+.prose-akq .gh-team-coordinator{padding:.45em .5em}
+.prose-akq .gh-agent-teams .gh-team-return{margin:.45em 0;padding:.4em 0}
+.prose-akq .gh-agent-teams .gh-team-challenge{margin:.5em 0;padding:.4em .65em}
+}
+@media(max-width:767px){body.present-mode .playbook-detail:has(.gh-agent-teams.akq-slide-active){padding-left:20px;padding-right:20px}}
+@media(max-width:600px){.prose-akq .gh-work-eras{grid-template-columns:repeat(2,minmax(0,1fr))}.prose-akq .gh-team-flow{grid-template-columns:1fr}.prose-akq .gh-team-arrow{transform:rotate(90deg)}.prose-akq .gh-team-project{margin:.5em 0}}
 </style>
 <div class="gh-work-eras">
 <div class="gh-work-era"><span>THROUGH 2020</span><strong>Files / execution</strong></div>
@@ -437,6 +452,7 @@ More software is being built every month.
 <div class="gh-team-tools"><strong>Tools + apps</strong><p>Browser<br>Computer use</p><small>Access requires approval</small></div>
 </div>
 <p class="gh-team-return">← Progress, artifacts and decisions come back to you.</p>
+<p class="gh-team-challenge"><strong>Challenge:</strong> How do we coordinate work across multiple agents and GUIs, and verify the results?</p>
 <figcaption>Conceptual roles, not a fixed architecture. Projects + computer use: public preview (2026-11-11). <a class="retro-link" href="https://github.blog/changelog/2026-10-28-github-copilot-app-universe-releases" target="_blank" rel="noopener noreferrer">Announcement ↗</a></figcaption>
 </figure>
 
