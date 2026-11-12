@@ -13,13 +13,13 @@ demoLinks:
     url: "https://github.com/actions/checkout/commit/11d5960a326750d5838078e36cf38b85af677262"
   - label: "This site's actions.lock"
     url: "https://github.com/theomonfort/theomonfort/blob/main/.github/workflows/actions.lock"
-  - label: "theomonfort-org → New Actions policy"
-    url: "https://github.com/organizations/theomonfort-org/settings/actions/rules/new"
+  - label: "theomonfort-org → Actions Policies"
+    url: "https://github.com/organizations/theomonfort-org/settings/actions/rules"
 demo:
   - "Open the actions/checkout@v4 link and point to /tree/v4 in the URL: v4 is a tag, a name that can be moved to another commit. Then open the locked commit link: the full SHA identifies one exact revision. Even a full version such as @v4.4.0 is still a tag, not an immutable commit."
   - "Open this site's actions.lock and show its two sections: workflows (the actions deploy.yml uses) and dependencies (the commit SHA each tag resolves to, plus owner_id / repo_id). Point out the transitive upload-artifact dependency recorded under upload-pages-artifact."
   - "For this demo, deploy.yml uses actions/checkout@v4.4.0 and actions.lock records commit 11d5960a326750d5838078e36cf38b85af677262. Compare that SHA with the commit page, rather than assuming the current v4 tag points to it. In a terminal, run gh actions-lock --verify .github/workflows/deploy.yml to confirm the lockfile is up to date."
-  - "In theomonfort-org, open Settings → Actions → Policies → New policy and turn on Require lockfile. Start in Evaluate mode scoped to specific repositories and workflows, check blocked runs in Policy insights, then switch to Active."
+  - "In theomonfort-org, open Settings → Actions → Policies → New policy → New policy (in the dropdown) and turn on Require lockfile. Start in Evaluate mode scoped to specific repositories and workflows, check blocked runs in Policy insights, then switch to Active."
 ---
 
 ### From preview to general availability
