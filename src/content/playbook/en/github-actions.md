@@ -242,21 +242,17 @@ Code review can still run without its Actions-powered agentic capabilities. An A
 </li>
 <li>
 <p class="demo-step-title">REQUIRE LOCKFILES GRADUALLY</p>
-<p>As an authorized administrator, open <a class="retro-link" href="https://github.com/organizations/theomonfort-org/settings/actions/rules/new" target="_blank" rel="noopener noreferrer">theomonfort-org → New Actions policy ↗</a>. Name the policy, scope the demo repositories/workflows, enable <code class="demo-path">Require lockfile</code>, then save.</p>
+<p>As an authorized administrator, open <a class="retro-link" href="https://github.com/organizations/theomonfort-org/settings/actions/rules" target="_blank" rel="noopener noreferrer">theomonfort-org → Actions Policies ↗</a>.</p>
+<p>Path: organization <code class="demo-path">Settings → Actions → Policies → New policy → New policy</code> (in the dropdown). Name the policy, scope the demo repositories/workflows, enable <code class="demo-path">Require lockfile</code>, then save.</p>
 <p class="demo-out">On Enterprise Cloud, start in <code>Evaluate</code> and inspect <code>Policy insights</code>. Switch to <code>Active</code> only after targeted workflows are onboarded.</p>
 </li>
 </ol>
 </div>
 </div>
 
-**Keep readable tags; run the reviewed commits.** GA since **2026-10-28** on Free, Team and Enterprise Cloud, including data residency.
+**Why it matters:** an action tag like `v4` can be moved to different code. Your next build could run an unreviewed change, or malicious code, without any change to your workflow.
 
-- **Lock:** `gh actions-lock` records actions and transitive dependencies.
-- **Update:** Dependabot refreshes the matching lock entry in the same PR.
-- **Enforce:** the **Require lockfile** policy blocks workflows not onboarded.
+**What it does:** a lockfile records the exact commit of each action, including actions it depends on. GitHub Actions runs those recorded commits instead of following a moving tag.
 
-```text
-.github/workflows/actions.lock
-```
-
-> Locking fixes the version, not its safety. Pin reusable workflow calls separately by full SHA.
+- **Review updates:** Dependabot proposes <a class="retro-link" href="https://github.com/theomonfort/theomonfort/blob/main/.github/dependabot.yml" target="_blank" rel="noopener noreferrer">action updates ↗</a> and the matching lockfile changes together in a pull request.
+- **Require adoption:** administrators can <a class="retro-link" href="https://github.com/organizations/theomonfort-org/settings/actions/rules" target="_blank" rel="noopener noreferrer">block selected workflows ↗</a> until they use a lockfile.
