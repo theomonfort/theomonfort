@@ -6,6 +6,7 @@ import type { LocalizedPlaybookEntry } from './playbook';
 export const NEW_PLAYBOOK_SLUGS = new Set([
   'github',
   'github-copilot',
+  'mcp',
   'governance',
   'secret-scanning',
   'github-advanced-security',
@@ -34,6 +35,7 @@ export function isNewPlaybookEntry(slug: string): boolean {
 export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'github': [1, 3, 4, 8, 10],
   'github-copilot': [5, 6, 7, 8],
+  'mcp': [6],
   'copilot-chat': [1, 5],
   'governance': [10],
   'secret-scanning': [2, 7],
