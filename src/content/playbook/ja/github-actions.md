@@ -255,4 +255,4 @@ Code Review は Actions によるエージェント機能なしでも動作可�
 **何をする？** lockfile は、各 action と、その action が依存する action の正確なコミットを記録する。GitHub Actions は、移動するタグではなく、記録されたコミットを実行する。
 
 - **更新をレビュー:** Dependabot が <a class="retro-link" href="https://github.com/theomonfort/theomonfort/blob/main/.github/dependabot.yml" target="_blank" rel="noopener noreferrer">action の更新 ↗</a>と lockfile の変更を、同じプルリクエストで提案する。
-- **導入を必須化:** 管理者は、選択した workflow が lockfile を使うまで実行をブロックできる。
+- **導入を必須化:** 管理者は、選択した workflow が lockfile を使うまで<a class="retro-link" href="https://github.com/organizations/theomonfort-org/settings/actions/rules" target="_blank" rel="noopener noreferrer">実行をブロック ↗</a>できる。
