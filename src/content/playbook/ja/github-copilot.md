@@ -162,14 +162,14 @@ flowchart LR
 <div class="fusion-feature"><span>03</span><div><strong>最終回答は 1 つ</strong><p>追加のレビューは、必要なタスクだけ。</p></div></div>
 </div>
 <div class="fusion-metrics" aria-label="ベンチマーク結果">
-<div class="fusion-metric"><strong>60</strong><span>Coding Agent Index</span><span class="fusion-micro">比較対象との差は 2 点以内</span></div>
-<div class="fusion-metric"><strong>約 ½</strong><span>タスクあたりの API 費用</span><span class="fusion-micro">$5.59 対 $11.42</span></div>
-<div class="fusion-metric"><strong>約 ½</strong><span>トークン / タスク</span><span class="fusion-micro">平均 720 万</span></div>
-<div class="fusion-metric"><strong>約 40%</strong><span>タスクあたりの時間を短縮</span><span class="fusion-micro">ベンチマーク平均</span></div>
+<div class="fusion-metric"><strong>60</strong><span>Coding Agent Index</span><span class="fusion-micro">Fusion Max。Opus 5.5 Max との差 2 ポイント以内</span></div>
+<div class="fusion-metric"><strong>1/2</strong><span>コスト・トークン</span><span class="fusion-micro">タスクあたりの平均 API コストとトークン使用量</span></div>
+<div class="fusion-metric"><strong>40%</strong><span>時間を短縮</span><span class="fusion-micro">タスクあたりの所要時間を約 40% 短縮</span></div>
+<div class="fusion-metric"><strong>77%</strong><span>コスト削減（最大）</span><span class="fusion-micro">DeepSWE：Fusion High と GPT-6 Astra（high）の比較。正答率も上回る</span></div>
 </div>
 </div>
 <p class="fusion-availability"><strong>2026-10-28 に GA。</strong> VS Code / Copilot CLI / Copilot App / JetBrains。</p>
-<p class="fusion-source"><a href="https://artificialanalysis.ai/articles/github-copilot-fusion-orchestrates-anthropic-and-openai-models-to-balance-performance-and-cost" target="_blank" rel="noopener noreferrer">Artificial Analysis、2026-10-28</a>：Coding Agent Index v2.0。Copilot CLI / Fusion Max と Claude Code / Opus 5.5 Max の比較。平均値であり、実タスクでの削減は保証されません。</p>
+<p class="fusion-source">77%：提供された元スライド（独立検証なし）。他 3 項目：<a href="https://artificialanalysis.ai/articles/github-copilot-fusion-orchestrates-anthropic-and-openai-models-to-balance-performance-and-cost" target="_blank" rel="noopener noreferrer">Artificial Analysis、2026-10-28</a>（Fusion Max 対 Opus 5.5 Max）。ベンチマーク結果であり、実タスクでの削減保証ではありません。</p>
 </div>
 
 ## <span class="fusion-title">Fusion：労力を選ぶ</span> <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>

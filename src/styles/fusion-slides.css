@@ -82,6 +82,16 @@
   gap: 8px;
 }
 
+@media (min-width: 521px) {
+  .prose-akq .fusion-overview .fusion-value-grid {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 5fr);
+  }
+}
+
+.prose-akq .fusion-overview .fusion-metric {
+  padding: 8px 12px;
+}
+
 .prose-akq .fusion-metric {
   display: flex;
   flex-direction: column;

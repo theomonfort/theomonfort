@@ -162,14 +162,14 @@ flowchart LR
 <div class="fusion-feature"><span>03</span><div><strong>One final response</strong><p>Extra review calls only when the task warrants them.</p></div></div>
 </div>
 <div class="fusion-metrics" aria-label="Benchmark results">
-<div class="fusion-metric"><strong>60</strong><span>Coding Agent Index</span><span class="fusion-micro">Within 2 points of baseline</span></div>
-<div class="fusion-metric"><strong>≈ ½</strong><span>API cost per task</span><span class="fusion-micro">$5.59 vs $11.42</span></div>
-<div class="fusion-metric"><strong>≈ ½</strong><span>Tokens per task</span><span class="fusion-micro">7.2M tokens on average</span></div>
-<div class="fusion-metric"><strong>≈ 40%</strong><span>Less time per task</span><span class="fusion-micro">Benchmark average</span></div>
+<div class="fusion-metric"><strong>60</strong><span>Coding Agent Index</span><span class="fusion-micro">Fusion Max, within 2 points of Opus 5.5 Max.</span></div>
+<div class="fusion-metric"><strong>1/2</strong><span>Cost / tokens</span><span class="fusion-micro">Average API cost and token usage per task.</span></div>
+<div class="fusion-metric"><strong>40%</strong><span>Less time</span><span class="fusion-micro">About 40% less time per task.</span></div>
+<div class="fusion-metric"><strong>77%</strong><span>Max cost reduction</span><span class="fusion-micro">DeepSWE: Fusion High vs GPT-6 Astra (high), with higher accuracy.</span></div>
 </div>
 </div>
 <p class="fusion-availability"><strong>GA, 2026-10-28.</strong> VS Code / Copilot CLI / Copilot App / JetBrains.</p>
-<p class="fusion-source"><a href="https://artificialanalysis.ai/articles/github-copilot-fusion-orchestrates-anthropic-and-openai-models-to-balance-performance-and-cost" target="_blank" rel="noopener noreferrer">Artificial Analysis, 2026-10-28</a>: Coding Agent Index v2.0. Fusion Max in Copilot CLI vs Claude Code / Opus 5.5 Max. Benchmark averages, not guaranteed savings.</p>
+<p class="fusion-source">77%: supplied original slide, not independently verified. Other three: <a href="https://artificialanalysis.ai/articles/github-copilot-fusion-orchestrates-anthropic-and-openai-models-to-balance-performance-and-cost" target="_blank" rel="noopener noreferrer">Artificial Analysis, 2026-10-28</a> (Fusion Max vs Opus 5.5 Max). Benchmark results, not guaranteed savings.</p>
 </div>
 
 ## <span class="fusion-title">Fusion: choose effort</span> <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
