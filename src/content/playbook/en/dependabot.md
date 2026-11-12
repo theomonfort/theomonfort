@@ -303,7 +303,7 @@ body.present-mode .prose-akq > h2:has(.dependency-feature-title)::before{top:.35
 </div>
 </div>
 
-## <span class="dependency-feature-title">Package firewall</span> <span class="dependency-feature-links"><a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/protecting-endpoints-with-package-firewall" target="_blank" rel="noopener noreferrer">📖 Docs</a><a class="dependency-announcement" href="https://github.blog/changelog/2026-10-20-github-package-firewall-in-public-preview" target="_blank" rel="noopener noreferrer">Announcement ↗</a></span>
+## <span class="dependency-feature-title">Package firewall</span> <span class="dependency-feature-links"><a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/protecting-endpoints-with-package-firewall" target="_blank" rel="noopener noreferrer">📖 Docs</a><a class="dependency-announcement" href="https://github.blog/changelog/2026-10-20-github-package-firewall-in-public-preview" target="_blank" rel="noopener noreferrer">Announcement ↗</a><a class="dependency-announcement" href="https://github.com/enterprises/octodemo/settings/policies/package_firewall" target="_blank" rel="noopener noreferrer">Demo ↗</a></span>
 
 <div class="dependency-feature">
 <p class="dependency-meta"><span class="dependency-preview">Public preview</span><span>Enterprise Cloud, including data residency</span><span>Free during preview</span></p>
