@@ -151,7 +151,7 @@ flowchart LR
 </div>
 
 
-## <span class="fusion-title">Copilot Fusion</span> <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## <span class="fusion-title">Copilot Fusion</span> <span class="fusion-links"><a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a><a class="h2-doc" href="https://artificialanalysis.ai/articles/github-copilot-fusion-orchestrates-anthropic-and-openai-models-to-balance-performance-and-cost" target="_blank" rel="noopener noreferrer">Artificial Analysis ↗</a></span>
 
 <div class="fusion-slide fusion-overview">
 <p class="fusion-lead"><strong>You choose effort.</strong> Fusion chooses the models.</p>
@@ -169,7 +169,6 @@ flowchart LR
 </div>
 </div>
 <p class="fusion-availability"><strong>GA, 2026-10-28.</strong> VS Code / Copilot CLI / Copilot App / JetBrains.</p>
-<p class="fusion-source">77%: supplied original slide, not independently verified. Other three: <a href="https://artificialanalysis.ai/articles/github-copilot-fusion-orchestrates-anthropic-and-openai-models-to-balance-performance-and-cost" target="_blank" rel="noopener noreferrer">Artificial Analysis, 2026-10-28</a> (Fusion Max vs Opus 5.5 Max). Benchmark results, not guaranteed savings.</p>
 </div>
 
 ## <span class="fusion-title">Fusion: choose effort</span> <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>

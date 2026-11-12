@@ -151,7 +151,7 @@ flowchart LR
 </div>
 
 
-## <span class="fusion-title">Copilot Fusion</span> <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## <span class="fusion-title">Copilot Fusion</span> <span class="fusion-links"><a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a><a class="h2-doc" href="https://artificialanalysis.ai/articles/github-copilot-fusion-orchestrates-anthropic-and-openai-models-to-balance-performance-and-cost" target="_blank" rel="noopener noreferrer">Artificial Analysis ↗</a></span>
 
 <div class="fusion-slide fusion-overview">
 <p class="fusion-lead"><strong>人が労力を選び、</strong>Fusion がモデルを選ぶ。</p>
@@ -169,7 +169,6 @@ flowchart LR
 </div>
 </div>
 <p class="fusion-availability"><strong>2026-10-28 に GA。</strong> VS Code / Copilot CLI / Copilot App / JetBrains。</p>
-<p class="fusion-source">77%：提供された元スライド（独立検証なし）。他 3 項目：<a href="https://artificialanalysis.ai/articles/github-copilot-fusion-orchestrates-anthropic-and-openai-models-to-balance-performance-and-cost" target="_blank" rel="noopener noreferrer">Artificial Analysis、2026-10-28</a>（Fusion Max 対 Opus 5.5 Max）。ベンチマーク結果であり、実タスクでの削減保証ではありません。</p>
 </div>
 
 ## <span class="fusion-title">Fusion：労力を選ぶ</span> <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/models/copilot-fusion" target="_blank" rel="noopener noreferrer">📖 Docs</a>

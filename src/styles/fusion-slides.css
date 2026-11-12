@@ -16,6 +16,19 @@
   color: inherit;
 }
 
+.prose-akq h2 .fusion-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  vertical-align: middle;
+  margin-left: 12px;
+}
+
+.prose-akq h2 .fusion-links .h2-doc {
+  margin-left: 0;
+  font-size: 14px;
+}
+
 .prose-akq .fusion-slide .fusion-lead {
   margin-bottom: var(--fusion-gap);
   font-size: 1.1em;
@@ -179,6 +192,11 @@
   padding: 9px 0;
   border-top: 1px dashed #e8f4ff26;
   align-items: baseline;
+}
+
+.prose-akq .fusion-choices .fusion-choice-row {
+  grid-template-columns: 5em minmax(0, 1fr);
+  column-gap: 12px;
 }
 
 .prose-akq .fusion-choice-row > p {
