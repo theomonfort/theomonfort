@@ -33,7 +33,7 @@ export function isNewPlaybookEntry(slug: string): boolean {
 // there is no standalone title slide: index N is simply the Nth `## H2` in the
 // body (0-based). The auto-generated links slide is the final index.
 export const NAV_HINT_SLIDES: Record<string, number[]> = {
-  'github': [1, 3, 4, 8, 10],
+  'github': [1, 3, 4, 5, 6, 8, 9, 10],
   'github-copilot': [5, 6, 7, 8],
   'mcp': [6],
   'copilot-chat': [1, 5],
