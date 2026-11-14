@@ -23,7 +23,7 @@ network:
 
 steps:
   - name: Checkout repository
-    uses: actions/checkout@v4
+    uses: actions/checkout@v7.0.1
     with:
       fetch-depth: 0
       persist-credentials: false
@@ -33,10 +33,10 @@ steps:
     shell: bash
     run: |
       set -euo pipefail
-      mkdir -p /tmp/aw
-      RESULTS=/tmp/aw/link-check-results.md
-      ALL=/tmp/aw/all-links.txt
-      UNIQ=/tmp/aw/unique-links.txt
+      mkdir -p /tmp/gh-aw/agent
+      RESULTS=/tmp/gh-aw/agent/link-check-results.md
+      ALL=/tmp/gh-aw/agent/all-links.txt
+      UNIQ=/tmp/gh-aw/agent/unique-links.txt
       : > "$ALL"
 
       echo "# Playbook Link Check Results" > "$RESULTS"
@@ -80,7 +80,7 @@ steps:
 
       BROKEN=0
       OK=0
-      : > /tmp/aw/broken-links.txt
+      : > /tmp/gh-aw/agent/broken-links.txt
 
       while IFS= read -r url; do
         [ -z "$url" ] && continue
@@ -93,7 +93,7 @@ steps:
         else
           BROKEN=$((BROKEN+1))
           echo "- ❌ \`$CODE\` $url" >> "$RESULTS"
-          echo "$url $CODE" >> /tmp/aw/broken-links.txt
+          echo "$url $CODE" >> /tmp/gh-aw/agent/broken-links.txt
         fi
       done < "$UNIQ"
 
@@ -115,7 +115,7 @@ steps:
               echo "  - \`$f\`" >> "$RESULTS"
             done
           fi
-        done < /tmp/aw/broken-links.txt
+        done < /tmp/gh-aw/agent/broken-links.txt
       fi
 
       echo "broken_count=$BROKEN" >> "$GITHUB_OUTPUT"
@@ -127,11 +127,10 @@ tools:
   github:
     toolsets: [default]
   cache-memory: true
-  web-fetch:
   edit:
   bash:
-    - "cat /tmp/aw/*"
-    - "ls /tmp/aw/*"
+    - "cat /tmp/gh-aw/agent/*"
+    - "ls /tmp/gh-aw/agent/*"
     - "grep:*"
     - "find src/content/playbook *"
 
@@ -157,8 +156,8 @@ tested every HTTP(S) URL in those markdown files.
 ## Step 1 — Read the test report
 
 ```bash
-cat /tmp/aw/link-check-results.md
-cat /tmp/aw/broken-links.txt
+cat /tmp/gh-aw/agent/link-check-results.md
+cat /tmp/gh-aw/agent/broken-links.txt
 ```
 
 The report lists every URL with its HTTP status. The "Broken link locations" section
@@ -188,10 +187,11 @@ Cache shape:
 
 For each broken URL not in the unfixable list:
 
-1. Use `web-fetch` to investigate. Try:
-   - the original URL (it may have been a transient failure),
-   - common variants (`http`↔`https`, with/without `www`, trailing slash),
-   - GitHub Docs / Blog / Changelog search if it looks like an official page that moved.
+1. Investigate using the `github` MCP tools (`search_code`, `search_commits`,
+   `get_file_contents`, `search_issues`, `list_releases` — e.g. searching
+   `github/docs` or target GitHub repositories when an official GitHub page,
+   release, or doc path moved). Non-GitHub URLs were already tested by `curl`
+   in the pre-step before sandbox network restrictions took effect.
 2. If you find a working replacement that points to **equivalent or better** content,
    use the `edit` tool on the playbook file(s) to swap the URL. Preserve the link
    label and any surrounding markdown/HTML.
@@ -211,12 +211,14 @@ Set `last_run` to today and persist any new `unfixable_links` entries.
 - **If broken URLs remain that you could not fix** (and there is no PR worth opening):
   emit a `create-issue` with the broken-link report inline so a human can review.
 - **If everything is healthy**: emit `noop` with the message
-  `All ${{ steps.link-check.outputs.link_count }} playbook links are reachable`.
+  `All <link_count> playbook links are reachable` (using the unique HTTP(S) URL count
+  reported in `/tmp/gh-aw/agent/link-check-results.md`).
 
 ## Guardrails
 
 - Only touch files under `src/content/playbook/`.
 - Never change link **labels** — only the URLs.
 - Skip relative links (`./foo.md`, `#anchor`) — they are validated by the Astro build.
-- A 403/429 from a single host is not necessarily a broken link; if `web-fetch` succeeds
-  on that URL, treat it as healthy and do **not** add it to the unfixable list.
+- A 403/429 from a single host often indicates anti-bot rate limiting rather than a
+  dead page; treat isolated 403/429 responses cautiously and do **not** add them to
+  `unfixable_links` unless confirmed removed.
