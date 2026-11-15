@@ -1,0 +1,564 @@
+---
+import '../../lib/zettelkasten/zettelkasten.css';
+import { siteCopy, type Locale } from '../../lib/i18n';
+import type { PlaybookCategory } from '../../lib/playbook-categories';
+
+interface Props {
+  locale: Locale;
+  slug: string;
+  category: PlaybookCategory;
+}
+
+const { locale, slug, category } = Astro.props;
+const copy = siteCopy[locale].playbook;
+---
+
+<button
+  type="button"
+  class="slide-zk-trigger font-body text-[11px]"
+  data-zk-trigger
+  data-playbook-slug={slug}
+  data-playbook-category={category}
+  data-locale={locale}
+  data-close-label={copy.zettelkastenClose}
+  data-loading-label={copy.zettelkastenLoading}
+  aria-label={copy.zettelkastenOpenAria}
+  title={copy.zettelkastenOpenAria}
+>
+  <span class="slide-zk-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="square" stroke-linejoin="miter">
+      <circle cx="6" cy="6" r="2.5" />
+      <circle cx="18" cy="7" r="2.5" />
+      <circle cx="11" cy="18" r="2.5" />
+      <path d="M8.2 7.2l7.4 0.6M7.3 8.2l2.6 7.5M16.5 9.1l-4.1 6.8" />
+    </svg>
+  </span>
+  <span class="key">Z</span>
+  <span class="slide-zk-label">{copy.zettelkastenLabel}</span>
+</button>
+
+<script>
+  import { resolvePlaybookZettelkastenTarget } from '../../lib/zettelkasten/playbook-mapping';
+  import { ZETTELKASTEN_VAULTS } from '../../lib/zettelkasten/vaults';
+  import type { PlaybookCategory } from '../../lib/playbook-categories';
+
+  type ZkWidgetInstance = {
+    openVaultAndNote: (
+      vaultId: string,
+      noteTarget: string,
+      options?: { pinGraph?: boolean; focusGraph?: boolean },
+    ) => Promise<void>;
+    hasOpenPopup: () => boolean;
+    dismissPopup: () => boolean;
+    fitView: () => void;
+    destroy: () => void;
+  };
+
+  type ZkGlobalState = {
+    overlayEl: HTMLDivElement | null;
+    stageEl: HTMLDivElement | null;
+    crumbVaultEl: HTMLSpanElement | null;
+    crumbNoteEl: HTMLSpanElement | null;
+    closeLabelEl: HTMLSpanElement | null;
+    loadingEl: HTMLDivElement | null;
+    instance: ZkWidgetInstance | null;
+    mountingPromise: Promise<ZkWidgetInstance> | null;
+    cleanup?: () => void;
+  };
+
+  const win = window as Window & typeof globalThis & { __akqZkModalState?: ZkGlobalState };
+
+  if (!win.__akqZkModalState) {
+    win.__akqZkModalState = {
+      overlayEl: null,
+      stageEl: null,
+      crumbVaultEl: null,
+      crumbNoteEl: null,
+      closeLabelEl: null,
+      loadingEl: null,
+      instance: null,
+      mountingPromise: null,
+    };
+  }
+
+  const zkState = win.__akqZkModalState;
+  zkState.cleanup?.();
+
+  function getTriggerButton(): HTMLButtonElement | null {
+    return document.querySelector<HTMLButtonElement>('[data-zk-trigger]');
+  }
+
+  function getCurrentSlideIndex(): number {
+    const selectedBar = document.querySelector<HTMLElement>('.slide-progress-bar[aria-selected="true"]');
+    const parsed = Number(selectedBar?.dataset.slideIndex);
+    return Number.isFinite(parsed) && parsed >= 0 ? parsed : 0;
+  }
+
+  function ensureOverlayDom(closeLabel: string, loadingLabel: string): HTMLDivElement {
+    if (zkState.overlayEl) {
+      if (!document.body.contains(zkState.overlayEl)) {
+        document.body.appendChild(zkState.overlayEl);
+      }
+      if (zkState.closeLabelEl) zkState.closeLabelEl.textContent = closeLabel;
+      const closeBtn = zkState.overlayEl.querySelector<HTMLButtonElement>('[data-zk-close]');
+      if (closeBtn) closeBtn.setAttribute('aria-label', `${closeLabel} (Esc)`);
+      if (zkState.loadingEl) zkState.loadingEl.textContent = loadingLabel;
+      return zkState.overlayEl;
+    }
+
+    const overlay = document.createElement('div');
+    overlay.className = 'zk-modal-overlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-label', 'Zettelkasten Knowledge Graph');
+    overlay.hidden = true;
+
+    overlay.innerHTML = `
+      <div class="zk-modal-topbar">
+        <div class="zk-modal-brand">
+          <span class="zk-modal-diamond" aria-hidden="true">◈</span>
+          <span class="zk-modal-kicker">ZETTELKASTEN</span>
+          <span class="zk-modal-sep" aria-hidden="true">//</span>
+          <span class="zk-modal-crumb">
+            <span class="zk-modal-crumb-vault"></span>
+            <span class="zk-modal-crumb-arrow" aria-hidden="true">▸</span>
+            <span class="zk-modal-crumb-note"></span>
+          </span>
+        </div>
+        <button type="button" class="zk-modal-close" data-zk-close aria-label="${closeLabel} (Esc)">
+          <span class="zk-modal-key">Esc</span>
+          <span class="zk-modal-close-text">${closeLabel}</span>
+          <span class="zk-modal-close-x" aria-hidden="true">✕</span>
+        </button>
+      </div>
+      <div class="zk-modal-body">
+        <div class="zk-modal-loading">${loadingLabel}</div>
+        <div class="zk-modal-stage"></div>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    zkState.overlayEl = overlay;
+    zkState.stageEl = overlay.querySelector<HTMLDivElement>('.zk-modal-stage');
+    zkState.crumbVaultEl = overlay.querySelector<HTMLSpanElement>('.zk-modal-crumb-vault');
+    zkState.crumbNoteEl = overlay.querySelector<HTMLSpanElement>('.zk-modal-crumb-note');
+    zkState.closeLabelEl = overlay.querySelector<HTMLSpanElement>('.zk-modal-close-text');
+    zkState.loadingEl = overlay.querySelector<HTMLDivElement>('.zk-modal-loading');
+
+    overlay.querySelector('[data-zk-close]')?.addEventListener('click', () => {
+      closeZettelkastenModal();
+    });
+
+    return overlay;
+  }
+
+  function isZettelkastenOpen(): boolean {
+    return Boolean(
+      zkState.overlayEl && document.body.contains(zkState.overlayEl) && !zkState.overlayEl.hidden,
+    );
+  }
+
+  async function openZettelkastenForCurrentSlide() {
+    const btn = getTriggerButton();
+    if (!btn) return;
+
+    const slug = btn.dataset.playbookSlug || 'github';
+    const category = (btn.dataset.playbookCategory || 'introduction') as PlaybookCategory;
+    const closeLabel = btn.dataset.closeLabel || 'Back to slide';
+    const loadingLabel = btn.dataset.loadingLabel || 'Loading Zettelkasten…';
+    const slideIdx = getCurrentSlideIndex();
+    const target = resolvePlaybookZettelkastenTarget(slug, category, slideIdx);
+
+    btn.blur();
+    const overlay = ensureOverlayDom(closeLabel, loadingLabel);
+    overlay.hidden = false;
+    document.body.classList.add('akq-zk-open');
+
+    import('../../lib/sfx')
+      .then(({ play }) => play('confirm'))
+      .catch(() => {});
+
+    if (zkState.instance) {
+      if (zkState.loadingEl) zkState.loadingEl.hidden = true;
+      await zkState.instance.openVaultAndNote(target.vault, target.note, {
+        pinGraph: true,
+        focusGraph: true,
+      });
+      return;
+    }
+
+    if (zkState.mountingPromise) {
+      const inst = await zkState.mountingPromise;
+      await inst.openVaultAndNote(target.vault, target.note, {
+        pinGraph: true,
+        focusGraph: true,
+      });
+      return;
+    }
+
+    if (zkState.loadingEl) zkState.loadingEl.hidden = false;
+
+    zkState.mountingPromise = (async () => {
+      const { mountZettelkasten } = await import('../../lib/zettelkasten/zettelkasten-widget.js');
+      const vaultsWithInitial = ZETTELKASTEN_VAULTS.map((v) =>
+        v.id === target.vault ? { ...v, initialNote: target.note } : v,
+      );
+      const instance = (await mountZettelkasten(zkState.stageEl!, {
+        vaults: vaultsWithInitial,
+        initialVault: target.vault,
+        pinInitialNote: true,
+        colorByGroup: true,
+        onActiveChange: ({ vaultLabel, title }: { vaultLabel: string; title: string }) => {
+          if (zkState.crumbVaultEl) zkState.crumbVaultEl.textContent = vaultLabel;
+          if (zkState.crumbNoteEl) zkState.crumbNoteEl.textContent = title;
+        },
+      })) as ZkWidgetInstance;
+
+      zkState.instance = instance;
+      if (zkState.loadingEl) zkState.loadingEl.hidden = true;
+      return instance;
+    })();
+
+    try {
+      await zkState.mountingPromise;
+    } finally {
+      zkState.mountingPromise = null;
+    }
+  }
+
+  function closeZettelkastenModal() {
+    if (!zkState.overlayEl || zkState.overlayEl.hidden) return;
+    zkState.overlayEl.hidden = true;
+    document.body.classList.remove('akq-zk-open');
+    import('../../lib/sfx')
+      .then(({ play }) => play('hover'))
+      .catch(() => {});
+  }
+
+  function onDocumentClick(e: MouseEvent) {
+    const target = e.target as HTMLElement | null;
+    const trigger = target?.closest<HTMLButtonElement>('[data-zk-trigger]');
+    if (!trigger) return;
+    e.preventDefault();
+    void openZettelkastenForCurrentSlide();
+  }
+
+  function onWindowKeyDown(e: KeyboardEvent) {
+    if (isZettelkastenOpen()) {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        if (zkState.instance?.hasOpenPopup()) {
+          zkState.instance.dismissPopup();
+          return;
+        }
+        closeZettelkastenModal();
+      }
+      return;
+    }
+
+    if (!document.body.classList.contains('present-mode')) return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const target = e.target as HTMLElement | null;
+    if (target && target.matches('input,textarea,select,[contenteditable="true"]')) return;
+
+    if (e.key === 'z' || e.key === 'Z') {
+      e.preventDefault();
+      void openZettelkastenForCurrentSlide();
+    }
+  }
+
+  function onBeforeNavigate() {
+    if (isZettelkastenOpen()) {
+      zkState.overlayEl!.hidden = true;
+      document.body.classList.remove('akq-zk-open');
+    }
+  }
+
+  document.addEventListener('click', onDocumentClick);
+  window.addEventListener('keydown', onWindowKeyDown, true);
+  document.addEventListener('astro:before-preparation', onBeforeNavigate);
+
+  zkState.cleanup = () => {
+    document.removeEventListener('click', onDocumentClick);
+    window.removeEventListener('keydown', onWindowKeyDown, true);
+    document.removeEventListener('astro:before-preparation', onBeforeNavigate);
+  };
+</script>
+
+<style is:global>
+  /* ---------- Bottom-left Presentation HUD Zettelkasten Button ---------- */
+  .slide-zk-trigger {
+    display: none;
+  }
+
+  body.present-mode .slide-zk-trigger {
+    position: fixed;
+    bottom: 16px;
+    left: 16px;
+    z-index: 60;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.38rem 0.72rem;
+    background: rgba(10, 14, 39, 0.88);
+    border: 2px solid color-mix(in srgb, var(--entry-accent, #00f0ff) 58%, transparent);
+    border-radius: 2px;
+    color: #e8f4ff;
+    font-family: 'DotGothic16', 'IBM Plex Sans JP', monospace;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    box-shadow:
+      4px 4px 0 #05060f,
+      0 0 14px color-mix(in srgb, var(--entry-accent, #00f0ff) 25%, transparent);
+    transition:
+      left 0.25s ease,
+      transform 0.14s ease,
+      border-color 0.14s ease,
+      color 0.14s ease,
+      box-shadow 0.14s ease,
+      opacity 0.15s ease;
+  }
+
+  @media (min-width: 768px) {
+    body.present-mode .slide-zk-trigger {
+      bottom: 18px;
+      left: 322px;
+    }
+
+    body.present-mode.akq-toc-hidden .slide-zk-trigger {
+      left: 22px;
+    }
+  }
+
+  html.slide-preparing body.present-mode .slide-zk-trigger,
+  body.akq-zk-open .slide-zk-trigger {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  body.present-mode .slide-zk-trigger:hover,
+  body.present-mode .slide-zk-trigger:focus-visible {
+    border-color: #ff2e88;
+    color: #ff2e88;
+    box-shadow:
+      4px 4px 0 #05060f,
+      0 0 14px rgba(255, 46, 136, 0.45);
+    transform: translate(-1px, -1px);
+    outline: none;
+  }
+
+  body.present-mode .slide-zk-trigger .slide-zk-icon {
+    width: 14px;
+    height: 14px;
+    display: inline-grid;
+    place-items: center;
+    color: var(--entry-accent, #00f0ff);
+    transition: color 0.14s ease;
+  }
+
+  body.present-mode .slide-zk-trigger:hover .slide-zk-icon,
+  body.present-mode .slide-zk-trigger:focus-visible .slide-zk-icon {
+    color: #ff2e88;
+  }
+
+  body.present-mode .slide-zk-trigger .slide-zk-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  body.present-mode .slide-zk-trigger .key {
+    display: inline-block;
+    padding: 1px 5px;
+    border: 1px solid #00f0ff;
+    background: #05060f;
+    color: #00f0ff;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+    line-height: 1.2;
+  }
+
+  body.present-mode .slide-zk-trigger:hover .key {
+    border-color: #ff2e88;
+    color: #ff2e88;
+  }
+
+  /* ---------- Fullscreen Zettelkasten Modal Overlay ---------- */
+  .zk-modal-overlay[hidden] {
+    display: none !important;
+  }
+
+  .zk-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 260;
+    display: flex;
+    flex-direction: column;
+    background: #05060f;
+    color: #e8f4ff;
+    animation: zk-modal-in 0.18s ease-out;
+  }
+
+  @keyframes zk-modal-in {
+    from {
+      opacity: 0;
+      transform: scale(0.992);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .zk-modal-topbar {
+    height: 46px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 14px;
+    background: linear-gradient(90deg, #05060f 0%, #0a0e27 55%, #1a0b2e 100%);
+    border-bottom: 2px solid #00f0ff;
+    box-shadow: 0 2px 16px rgba(0, 240, 255, 0.2);
+  }
+
+  .zk-modal-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .zk-modal-diamond {
+    color: #ff2e88;
+    font-size: 14px;
+    text-shadow: 0 0 8px #ff2e88;
+    flex-shrink: 0;
+  }
+
+  .zk-modal-kicker {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: #00f0ff;
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+    flex-shrink: 0;
+  }
+
+  .zk-modal-sep {
+    font-family: 'VT323', monospace;
+    font-size: 17px;
+    color: rgba(232, 244, 255, 0.35);
+    flex-shrink: 0;
+  }
+
+  .zk-modal-crumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    font-family: 'DotGothic16', 'IBM Plex Sans JP', monospace;
+    font-size: 13px;
+  }
+
+  .zk-modal-crumb-vault {
+    color: #ffb000;
+    white-space: nowrap;
+  }
+
+  .zk-modal-crumb-arrow {
+    color: #ff2e88;
+  }
+
+  .zk-modal-crumb-note {
+    color: #e8f4ff;
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .zk-modal-close {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 11px;
+    background: rgba(255, 46, 136, 0.16);
+    border: 2px solid #ff2e88;
+    border-radius: 2px;
+    color: #e8f4ff;
+    font-family: 'DotGothic16', 'IBM Plex Sans JP', monospace;
+    font-size: 12.5px;
+    cursor: pointer;
+    flex-shrink: 0;
+    box-shadow: 3px 3px 0 #05060f, 0 0 10px rgba(255, 46, 136, 0.32);
+    transition: background 0.14s ease, transform 0.12s ease, box-shadow 0.14s ease;
+  }
+
+  .zk-modal-close:hover,
+  .zk-modal-close:focus-visible {
+    background: rgba(255, 46, 136, 0.34);
+    color: #ffffff;
+    box-shadow: 3px 3px 0 #05060f, 0 0 16px rgba(255, 46, 136, 0.55);
+    transform: translate(-1px, -1px);
+    outline: none;
+  }
+
+  .zk-modal-key {
+    display: inline-block;
+    padding: 1px 5px;
+    background: #05060f;
+    border: 1px solid #00f0ff;
+    color: #00f0ff;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8.5px;
+    line-height: 1.25;
+  }
+
+  .zk-modal-close-x {
+    color: #ff2e88;
+    font-weight: 700;
+  }
+
+  .zk-modal-close:hover .zk-modal-close-x {
+    color: #ffffff;
+  }
+
+  .zk-modal-body {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .zk-modal-stage {
+    position: absolute;
+    inset: 0;
+  }
+
+  .zk-modal-loading {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(ellipse at center, #1a0b2e 0%, #0a0e27 55%, #05060f 100%);
+    color: #00f0ff;
+    font-family: 'DotGothic16', 'IBM Plex Sans JP', monospace;
+    font-size: 16px;
+    letter-spacing: 0.06em;
+  }
+
+  .zk-modal-loading[hidden] {
+    display: none !important;
+  }
+
+  @media (max-width: 640px) {
+    .zk-modal-sep,
+    .zk-modal-crumb {
+      display: none;
+    }
+  }
+</style>

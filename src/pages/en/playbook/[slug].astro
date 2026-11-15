@@ -6,6 +6,7 @@ import '../../../styles/github-platform-slide.css';
 import '../../../styles/github-summary-slides.css';
 import { render } from 'astro:content';
 import MenuArrow from '../../../components/retro/MenuArrow.astro';
+import PlaybookZettelkastenModal from '../../../components/playbook/PlaybookZettelkastenModal.astro';
 import { accentColorValues } from '../../../lib/theme';
 import { categories, localizedCategory } from '../../../lib/playbook-categories';
 import { localizedPath, siteCopy } from '../../../lib/i18n';
@@ -260,6 +261,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     </div>
 
     <div class="slide-progress" role="tablist" aria-label="Slides" data-hint-slides={navHintSlideNumbers.join(',')} data-new-label={newBadgeLabel}></div>
+    <PlaybookZettelkastenModal locale={locale} slug={item.slug} category={entry.data.category} />
     <a
       class="slide-counter font-pixel text-[10px]"
       href={t.handson.bugReportUrl}
@@ -788,6 +790,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
 
   function onKey(e: KeyboardEvent) {
+    if (document.body.classList.contains('akq-zk-open')) return;
     if (handlePlaybookVideoKey(e)) return;
     const t = e.target as HTMLElement | null;
     // The DEMO overlay is a CSS-only checkbox, so Escape has to close it here

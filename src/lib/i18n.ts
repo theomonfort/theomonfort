@@ -115,6 +115,10 @@ export const siteCopy = {
       tocLabel: 'プレゼン目次',
       updated: '更新',
       newBadge: 'New!',
+      zettelkastenLabel: 'Zettelkasten',
+      zettelkastenOpenAria: 'Zettelkasten ナレッジグラフを開く (Z)',
+      zettelkastenClose: 'スライドに戻る',
+      zettelkastenLoading: 'Zettelkasten を読み込み中…',
     },
     handson: {
       title: 'ハンズオン — AI 開発 QUEST',
@@ -295,6 +299,10 @@ export const siteCopy = {
       tocLabel: 'Presentation table of contents',
       updated: 'Updated',
       newBadge: 'New!',
+      zettelkastenLabel: 'Zettelkasten',
+      zettelkastenOpenAria: 'Open Zettelkasten knowledge graph (Z)',
+      zettelkastenClose: 'Back to slide',
+      zettelkastenLoading: 'Loading Zettelkasten vault…',
     },
     handson: {
       title: 'Hands-on — AI Dev Quest',
