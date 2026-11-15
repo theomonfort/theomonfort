@@ -14,28 +14,28 @@ export const accentTokens = {
     border: 'border-neon-magenta',
     glow: 'hover:shadow-neon-magenta',
     shadow: 'shadow-neon-magenta',
-    hex: '#ff2e88',
+    hex: '#93a8ff',
   },
   cyan: {
     text: 'text-neon-cyan',
     border: 'border-neon-cyan',
     glow: 'hover:shadow-neon-cyan',
     shadow: 'shadow-neon-cyan',
-    hex: '#00f0ff',
+    hex: '#5eead4',
   },
   amber: {
     text: 'text-crt-amber',
     border: 'border-crt-amber',
     glow: 'hover:shadow-neon-amber',
     shadow: 'shadow-neon-amber',
-    hex: '#ffb000',
+    hex: '#fcd34d',
   },
   green: {
     text: 'text-gb-green',
     border: 'border-gb-green',
     glow: 'hover:shadow-neon-green',
     shadow: 'shadow-neon-green',
-    hex: '#9bbc0f',
+    hex: '#86efac',
   },
 } as const satisfies Record<AccentColor, AccentToken>;
 

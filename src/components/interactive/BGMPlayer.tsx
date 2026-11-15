@@ -121,12 +121,11 @@ export default function BGMPlayer({ feedbackUrl }: { feedbackUrl?: string }) {
         onClick={toggle}
         disabled={galaxyMode}
         title={galaxyMode ? 'Use the ambience button in the 3D map' : undefined}
-        className="bgm-player font-pixel text-[10px] px-3 py-2 border-2 bg-shadow-ink/80 hover:bg-neon-magenta/20 transition-colors flex items-center gap-2"
-        style={{
-          borderColor: playing && !galaxyMode ? '#ff2e88' : '#444',
-          color: playing && !galaxyMode ? '#ff2e88' : '#888',
-          boxShadow: playing && !galaxyMode ? '0 0 8px #ff2e88' : 'none',
-        }}
+        className={`bgm-player font-mono text-[0.72rem] tracking-[0.04em] px-3 py-1.5 rounded-[3px] border backdrop-blur-md shadow-hud transition-colors flex items-center gap-2 ${
+          playing && !galaxyMode
+            ? 'border-neon-cyan bg-neon-cyan/[0.12] text-neon-cyan'
+            : 'border-[rgba(94,234,212,0.16)] bg-[rgba(9,18,28,0.90)] text-[#728fa3] hover:text-[#ecf7fb] hover:border-[rgba(94,234,212,0.32)]'
+        }`}
         aria-pressed={playing && !galaxyMode}
         aria-label="BGM toggle"
       >

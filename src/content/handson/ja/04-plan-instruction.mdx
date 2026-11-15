@@ -79,7 +79,7 @@ import Aside from '../../../components/handson/Aside.astro';
 ```
 ---
 applyTo: "**/*.{astro,css,tsx,html}"
-description: "フロントエンドのデザイントークン（レトロ JRPG テーマ）"
+description: "フロントエンドのデザイントークン（Phosphor Cosmos HUD テーマ）"
 ---
 
 # フロントエンド設計ルール
@@ -88,45 +88,47 @@ description: "フロントエンドのデザイントークン（レトロ JRPG 
 
 ## テーマ
 
-レトロ JRPG / サイバーパンクのアーケード。深紫 → 濃紺 → 漆黒のラジアル背景にネオンのアクセント、ピクセル系タイポグラフィ。
+Phosphor Cosmos HUD — 深宇宙の暗色サーフェスに 28px のブループリント座標グリッド、フォスファー系テレメトリカラー、読みやすい日本語サンセリフとテレメトリ等幅バッジを組み合わせる。
 
 ## カラー
 
-| 役割              | Hex       | Tailwind            |
-| ----------------- | --------- | ------------------- |
-| 漆黒 (ベース)     | `#05060f` | `bg-shadow-ink`     |
-| 濃紺 (パネル)     | `#0a0e27` | `bg-midnight`       |
-| 深紫 (背景上端)   | `#1a0b2e` | `bg-deep-purple`    |
-| ネオンマゼンタ    | `#ff2e88` | `text-neon-magenta` |
-| ネオンシアン      | `#00f0ff` | `text-neon-cyan`    |
-| アンバー          | `#ffb000` | `text-crt-amber`    |
-| フォスファ緑      | `#9bbc0f` | `text-gb-green`     |
-| 本文テキスト      | `#e8f4ff` | `text-phosphor`     |
+| 役割                 | Hex       | Tailwind              |
+| -------------------- | --------- | --------------------- |
+| 深淵インセット       | `#04080e` | `bg-shadow-ink`       |
+| ベースコスモス       | `#060b12` | `bg-midnight`         |
+| HUD パネル           | `#0b1420` | `bg-deep-purple`      |
+| フォスファーシアン   | `#5eead4` | `text-neon-cyan`      |
+| フォスファーグリーン | `#86efac` | `text-gb-green`       |
+| スターライトマゼンタ | `#93a8ff` | `text-neon-magenta`   |
+| ソーラーアンバー     | `#fcd34d` | `text-crt-amber`      |
+| コーラルアラート     | `#fb7185` | `text-coral-alert`    |
+| 見出しテキスト       | `#ecf7fb` | `text-phosphor`       |
+| 本文テキスト         | `#bad0de` | `text-phosphor-body`  |
+| 補助テキスト         | `#728fa3` | `text-phosphor-muted` |
 
-`body` 背景は深紫 → 濃紺 → 漆黒のラジアルグラデで作る。
+`body` 背景は `#060b12` ベースに 28px のブループリント座標グリッドを重ねる。
 
 ## フォント
 
-| 用途                                    | フォント            | Tailwind        |
-| --------------------------------------- | ------------------- | --------------- |
-| ブランド見出し (H1・ロゴ・大型ラベル)   | `'Press Start 2P'`  | `font-pixel`    |
-| 本文・見出し (日 + 英、既定)            | `'DotGothic16'`     | `font-pixel-jp` |
-| プレゼンモードの装飾 (slide counter 等) | `'VT323'`           | `font-terminal` |
-| コードブロック                          | `'IBM Plex Mono'`   | `font-mono`     |
+| 用途                                  | フォント                             | Tailwind       |
+| ------------------------------------- | ------------------------------------ | -------------- |
+| ヒーロー見出し (H1・セクション見出し) | `'Orbitron', 'IBM Plex Sans JP'`     | `font-display` |
+| 本文・カード見出し・説明              | `'IBM Plex Sans JP', 'Noto Sans JP'` | `font-body`    |
+| HUD バッジ・タグ・コードブロック      | `'IBM Plex Mono'`                    | `font-mono`    |
 
-`'Press Start 2P'` は小文字グリフを持たない（全部大文字になる）ので、ブランドロゴと最上位の見出しに限定。本文・節見出し・TOC・リンク・カードの説明など、**プロースは原則すべて `font-pixel-jp` (DotGothic16)** を使う — 日本語とラテン文字を一つのピクセルグリッドで揃えられる。すべて `monospace` / `sans-serif` を fallback に。
+ヒーロー見出しには `font-display`、ステータスバッジ・タグ・コードには `font-mono`、**本文・カード見出し・プロースには `font-body` (IBM Plex Sans JP)** を使って高い可読性を保つ。
 
 ## エフェクト
 
-- 控えめな CRT スキャンライン (`.crt-lines`) を全画面オーバーレイに。
-- ネオングロー: `shadow-neon-magenta` / `-cyan` / `-amber` / `-green` (= `0 0 8px <color>, 0 0 24px <rgba>`)。
-- ボーダー: `1px dashed` または `2px solid` のネオンカラー。コントラストは高めに、淡いパステルグラデは禁止。
+- カードサーフェス: `rgba(11, 20, 32, 0.86)`、角丸 `3px`、上端に `2px` の発光ステータスレール。
+- ボーダー: `1px solid rgba(94, 234, 212, 0.16)`（強調時 `rgba(94, 234, 212, 0.32)`）。
+- 塗りつぶしアクセントボタン上の文字は `#04080e` (`text-shadow-ink` + `font-semibold`) で高コントラストを確保する。
 
 ## してはいけないこと
 
 - 明るい / 白の背景。
-- pill 形状 / 4px 超の角丸。
-- 灰色のソフトドロップシャドウ（グローのみ使う）。
+- 過度な角丸（カード・バッジは `3px` に統一）。
+- 本文や長文ラベルへのピクセルフォントの乱用。
 ```
 
 ⏱ 約2分

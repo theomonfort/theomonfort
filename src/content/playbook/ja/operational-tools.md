@@ -9,7 +9,7 @@ accent:
   border: border-gameboy-green
   glow: hover:shadow-gameboy-green
   shadow: shadow-gameboy-green
-  hex: "#9bbc0f"
+  hex: "#86efac"
 order: 19.5
 category: operate
 related: ['collaboration-tools', 'github', 'enterprise-setup']

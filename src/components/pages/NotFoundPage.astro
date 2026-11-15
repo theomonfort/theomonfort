@@ -15,41 +15,41 @@ const t = siteCopy[locale];
       <img
         src="/theomonfort/favicon.svg"
         alt={t.notFound.mascotAlt}
-        class="w-40 md:w-56 mx-auto pixelated drop-shadow-[0_0_20px_rgba(255,46,136,0.6)] animate-float"
+        class="w-40 md:w-56 mx-auto pixelated drop-shadow-[0_10px_24px_rgba(94,234,212,0.28)] animate-float"
       />
       <span
-        class="absolute -top-3 -right-3 font-pixel text-[10px] text-crt-amber bg-shadow-ink/80 border-2 border-crt-amber px-2 py-1 rotate-[8deg]"
+        class="absolute -top-3 -right-3 font-mono text-xs font-bold text-crt-amber bg-shadow-ink border border-crt-amber/45 rounded-[3px] px-2 py-0.5 rotate-[6deg]"
         aria-hidden="true"
       >?!</span>
     </div>
 
-    <div class="space-y-4 max-w-xl">
-      <h1 class="font-pixel text-3xl md:text-5xl text-neon-magenta">404</h1>
-      <p class="font-pixel-jp text-lg md:text-2xl text-phosphor">
+    <div class="space-y-3 max-w-xl">
+      <h1 class="font-display font-bold text-5xl md:text-6xl tracking-[0.08em] text-neon-cyan">404</h1>
+      <p class="font-body font-bold text-xl md:text-2xl text-phosphor">
         {t.notFound.heading}
       </p>
-      <p class="font-body text-sm md:text-base text-phosphor/70 leading-relaxed">
+      <p class="font-body text-sm md:text-base text-phosphor-body leading-relaxed">
         {t.notFound.body}
       </p>
     </div>
 
-    <div class="flex flex-wrap items-center justify-center gap-4 font-pixel text-[10px] md:text-xs">
+    <div class="flex flex-wrap items-center justify-center gap-3.5 font-mono text-xs">
       <a
         href={localizedPath(locale, '/')}
-        class="px-4 py-3 border-2 border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-midnight transition-colors shadow-neon-cyan"
+        class="px-5 py-2.5 rounded-[3px] font-semibold tracking-[0.06em] bg-neon-cyan text-shadow-ink border border-neon-cyan hover:brightness-105 transition-all"
       >
         {t.notFound.home}
       </a>
       <a
         href={localizedPath(locale, '/playbook')}
-        class="px-4 py-3 border-2 border-neon-magenta/60 text-neon-magenta hover:bg-neon-magenta hover:text-midnight transition-colors"
+        class="px-5 py-2.5 rounded-[3px] font-semibold tracking-[0.06em] bg-deep-purple/85 border border-neon-magenta/40 text-neon-magenta hover:bg-neon-magenta hover:text-shadow-ink transition-colors"
       >
         {t.notFound.playbook}
       </a>
     </div>
 
-    <p class="font-mono text-[10px] text-phosphor/40 mt-6">
-      ERR_NO_QUEST_FOUND · {new Date().getFullYear()}
+    <p class="font-mono text-xs tracking-[0.1em] text-phosphor-muted mt-6">
+      ERR_NO_QUEST_FOUND // {new Date().getFullYear()}
     </p>
   </section>
 </Layout>

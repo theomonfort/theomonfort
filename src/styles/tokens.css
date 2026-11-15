@@ -1,15 +1,49 @@
 :root {
-  --c-midnight: #0a0e27;
-  --c-deep-purple: #1a0b2e;
-  --c-neon-magenta: #ff2e88;
-  --c-neon-cyan: #00f0ff;
-  --c-crt-amber: #ffb000;
-  --c-gb-green: #9bbc0f;
-  --c-phosphor: #e8f4ff;
-  --c-shadow-ink: #05060f;
+  /* Surfaces & Backgrounds — Phosphor Cosmos HUD */
+  --c-shadow-ink: #04080e;
+  --c-midnight: #060b12;
+  --c-deep-purple: #0b1420;
 
-  /* Playbook slide prose: one JA + Latin family so mixed lines read as one voice. */
+  --c-bg-base: #060b12;
+  --c-bg-elevated: rgba(11, 20, 32, 0.86);
+  --c-bg-elevated-hover: rgba(16, 29, 45, 0.95);
+  --c-bg-nav: rgba(6, 11, 18, 0.88);
+  --c-bg-toc: #04080e;
+  --c-bg-slide: #060b12;
+  --c-bg-table: rgba(10, 19, 30, 0.86);
+  --c-bg-table-head: rgba(94, 234, 212, 0.07);
+  --c-bg-hud: rgba(9, 18, 28, 0.90);
+
+  /* Cohesive Phosphor Telemetry Palette */
+  --c-neon-cyan: #5eead4;    /* Brand, Introduction, Test & Secure (seafoam-aqua) */
+  --c-gb-green: #86efac;     /* Plan, Operate (soft phosphor green) */
+  --c-neon-magenta: #93a8ff; /* Develop, Administration (starlight periwinkle) */
+  --c-crt-amber: #fcd34d;    /* Review, highlights, NEW! badges (solar champagne) */
+  --c-coral-alert: #fb7185;  /* Alert / danger contrast only */
+
+  /* Foregrounds & Links */
+  --c-phosphor: #ecf7fb;
+  --c-fg-strong: #ecf7fb;
+  --c-fg-body: #bad0de;
+  --c-fg-muted: #728fa3;
+
+  --c-link: #67e8f9;
+  --c-link-hover: #a5f3fc;
+  --c-code-fg: #5eead4;
+  --c-code-bg: rgba(94, 234, 212, 0.09);
+  --c-code-border: rgba(94, 234, 212, 0.24);
+
+  /* Borders & Geometry */
+  --c-border: rgba(94, 234, 212, 0.16);
+  --c-border-strong: rgba(94, 234, 212, 0.32);
+  --radius-card: 3px;
+  --radius-pill: 3px;
+  --radius-ui: 3px;
+
+  /* Typography */
   --font-prose: 'IBM Plex Sans JP', 'Noto Sans JP', sans-serif;
+  --font-display: 'Orbitron', 'IBM Plex Sans JP', sans-serif;
+  --font-mono-hud: 'IBM Plex Mono', monospace;
 
   --grid: 8px;
   --pixel: 2px;

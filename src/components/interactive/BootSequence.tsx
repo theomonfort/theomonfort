@@ -44,23 +44,27 @@ export default function BootSequence({ locale = 'ja', copy }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] bg-black flex items-center justify-center"
+      className="fixed inset-0 z-[100] bg-[#04080e] flex items-center justify-center"
+      style={{
+        backgroundImage:
+          'radial-gradient(640px 320px at 50% 45%, rgba(94, 234, 212, 0.12), transparent 72%)',
+      }}
       aria-hidden="true"
     >
       {phase === 'power' && (
-        <div className="font-pixel text-crt-amber text-xs animate-pulse">
-          ▮ POWER ON ...
+        <div className="font-mono text-neon-cyan text-xs tracking-[0.18em] uppercase animate-pulse">
+          ▮ TELEMETRY LINK ONLINE ...
         </div>
       )}
       {phase === 'logo' && (
         <div className="text-center animate-fadeIn">
-          <div className="font-pixel text-neon-magenta text-2xl md:text-4xl mb-2 tracking-widest leading-none flex items-center justify-center gap-3 md:gap-5 flex-wrap">
+          <div className="font-display text-neon-cyan text-2xl md:text-4xl font-bold mb-2.5 tracking-[0.12em] leading-none flex items-center justify-center gap-3 md:gap-5 flex-wrap">
             <span>AI</span>
-            <span className="font-pixel-jp text-[1.05em] leading-none -translate-y-[0.08em]">{copy?.brandMiddle ?? '駆動開発'}</span>
+            <span className="font-body text-[#ecf7fb] text-[0.95em] font-bold leading-none">{copy?.brandMiddle ?? '駆動開発'}</span>
             <span>QUEST</span>
           </div>
-          <div className="font-pixel-jp text-phosphor/70 text-xs md:text-sm">
-            PRESS ANY KEY TO START
+          <div className="font-mono text-[#728fa3] text-xs tracking-[0.14em] uppercase">
+            SYSTEM READY
           </div>
         </div>
       )}

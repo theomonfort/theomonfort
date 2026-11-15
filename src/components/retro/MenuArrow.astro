@@ -3,15 +3,15 @@ interface Props {
   class?: string;
   color?: string;
 }
-const { class: cls = '', color = 'text-neon-magenta' } = Astro.props;
+const { class: cls = '', color = 'text-neon-cyan' } = Astro.props;
 ---
 
 <span class={`menu-arrow inline-block ${color} ${cls}`} aria-hidden="true">▶</span>
 
 <style>
   .menu-arrow {
-    animation: arrow-bob 0.7s ease-in-out infinite;
-    text-shadow: 0 0 4px currentColor;
+    animation: arrow-bob 0.85s ease-in-out infinite;
+    opacity: 0.9;
   }
   @keyframes arrow-bob {
     0%, 100% {

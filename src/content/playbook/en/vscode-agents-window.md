@@ -9,7 +9,7 @@ accent:
   border: border-neon-magenta
   glow: hover:shadow-neon-magenta
   shadow: shadow-neon-magenta
-  hex: "#ff2e88"
+  hex: "#93a8ff"
 order: 16.8
 category: develop
 related: ['copilot-app', 'copilot-chat', 'agentic-workflow', 'harness-engineering']

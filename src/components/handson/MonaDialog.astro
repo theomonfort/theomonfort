@@ -8,7 +8,62 @@ interface Props {
 const { image, imageAlt = '', variant = 'mona' } = Astro.props;
 ---
 
-<div class={`hero-quote hero-quote-${variant}`}>
+<div class={`hero-quote hero-quote-${variant} mona-comm-dialog`}>
+  <div class="mona-comm-bar" aria-hidden="true">
+    <span class="mona-comm-dot"></span>
+    <span class="mona-comm-tag">COMM-LINK // MONA</span>
+    <span class="mona-comm-signal">▮▮▮</span>
+  </div>
   <div class="hero-quote-text"><slot /></div>
   {image && <img src={image} alt={imageAlt} />}
 </div>
+
+<style>
+  .mona-comm-dialog {
+    background-color: rgba(11, 20, 32, 0.90);
+    background-image: linear-gradient(
+      90deg,
+      var(--entry-accent, #5eead4) 0%,
+      color-mix(in srgb, var(--entry-accent, #5eead4) 32%, transparent) 55%,
+      transparent 100%
+    );
+    background-size: 100% 2px;
+    background-position: top left;
+    background-repeat: no-repeat;
+    border: 1px solid color-mix(in srgb, var(--entry-accent, #5eead4) 36%, rgba(94, 234, 212, 0.16));
+    border-radius: 3px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 28px rgba(4, 8, 14, 0.38);
+  }
+  .mona-comm-dialog::before {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+  .mona-comm-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding-bottom: 0.55rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(94, 234, 212, 0.16);
+    font-family: var(--font-mono-hud);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--entry-accent, #5eead4);
+  }
+  .mona-comm-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: #86efac;
+    box-shadow: 0 0 8px rgba(134, 239, 172, 0.7);
+  }
+  .mona-comm-signal {
+    margin-left: auto;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    color: #86efac;
+    opacity: 0.85;
+  }
+</style>

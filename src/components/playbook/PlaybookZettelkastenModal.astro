@@ -15,7 +15,7 @@ const copy = siteCopy[locale].playbook;
 
 <button
   type="button"
-  class="slide-zk-trigger font-body text-[11px]"
+  class="present-zk-btn slide-zk-trigger"
   data-zk-trigger
   data-playbook-slug={slug}
   data-playbook-category={category}
@@ -25,16 +25,18 @@ const copy = siteCopy[locale].playbook;
   aria-label={copy.zettelkastenOpenAria}
   title={copy.zettelkastenOpenAria}
 >
+  <span class="key" aria-hidden="true">[Z]</span>
   <span class="slide-zk-icon" aria-hidden="true">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="square" stroke-linejoin="miter">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="6" cy="6" r="2.5" />
       <circle cx="18" cy="7" r="2.5" />
       <circle cx="11" cy="18" r="2.5" />
       <path d="M8.2 7.2l7.4 0.6M7.3 8.2l2.6 7.5M16.5 9.1l-4.1 6.8" />
     </svg>
   </span>
-  <span class="key">Z</span>
   <span class="slide-zk-label">{copy.zettelkastenLabel}</span>
+  <span class="present-zk-sep" aria-hidden="true">/</span>
+  <span class="present-zk-topic" data-zk-topic>{slug}</span>
 </button>
 
 <script>
@@ -94,6 +96,34 @@ const copy = siteCopy[locale].playbook;
     return Number.isFinite(parsed) && parsed >= 0 ? parsed : 0;
   }
 
+  function syncTriggerTopicIndicator() {
+    const btn = getTriggerButton();
+    if (!btn) return;
+    const topicEl = btn.querySelector<HTMLElement>('[data-zk-topic]');
+    if (!topicEl) return;
+
+    const slug = btn.dataset.playbookSlug || 'github';
+    const category = (btn.dataset.playbookCategory || 'introduction') as PlaybookCategory;
+    const target = resolvePlaybookZettelkastenTarget(slug, category, getCurrentSlideIndex());
+    topicEl.textContent = target.note;
+  }
+
+  let slideObserver: MutationObserver | null = null;
+  function attachSlideProgressObserver() {
+    slideObserver?.disconnect();
+    syncTriggerTopicIndicator();
+    const progressEl = document.querySelector('.slide-progress');
+    if (!progressEl) return;
+    slideObserver = new MutationObserver(() => {
+      syncTriggerTopicIndicator();
+    });
+    slideObserver.observe(progressEl, {
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['aria-selected', 'class'],
+    });
+  }
+
   function ensureOverlayDom(closeLabel: string, loadingLabel: string): HTMLDivElement {
     if (zkState.overlayEl) {
       if (!document.body.contains(zkState.overlayEl)) {
@@ -126,7 +156,7 @@ const copy = siteCopy[locale].playbook;
           </span>
         </div>
         <button type="button" class="zk-modal-close" data-zk-close aria-label="${closeLabel} (Esc)">
-          <span class="zk-modal-key">Esc</span>
+          <span class="zk-modal-key">[ESC]</span>
           <span class="zk-modal-close-text">${closeLabel}</span>
           <span class="zk-modal-close-x" aria-hidden="true">✕</span>
         </button>
@@ -209,8 +239,19 @@ const copy = siteCopy[locale].playbook;
         initialVault: target.vault,
         pinInitialNote: true,
         colorByGroup: true,
-        onActiveChange: ({ vaultLabel, title }: { vaultLabel: string; title: string }) => {
-          if (zkState.crumbVaultEl) zkState.crumbVaultEl.textContent = vaultLabel;
+        onActiveChange: ({
+          vaultLabel,
+          vaultAccent,
+          title,
+        }: {
+          vaultLabel: string;
+          vaultAccent?: string;
+          title: string;
+        }) => {
+          if (zkState.crumbVaultEl) {
+            zkState.crumbVaultEl.textContent = vaultLabel;
+            if (vaultAccent) zkState.crumbVaultEl.style.color = vaultAccent;
+          }
           if (zkState.crumbNoteEl) zkState.crumbNoteEl.textContent = title;
         },
       })) as ZkWidgetInstance;
@@ -261,9 +302,15 @@ const copy = siteCopy[locale].playbook;
     if (!document.body.classList.contains('present-mode')) return;
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     const target = e.target as HTMLElement | null;
-    if (target && target.matches('input,textarea,select,[contenteditable="true"]')) return;
+    const active = document.activeElement as HTMLElement | null;
+    if (
+      (target && (target.matches('input,textarea,select,[contenteditable="true"]') || target.isContentEditable)) ||
+      (active && (active.matches('input,textarea,select,[contenteditable="true"]') || active.isContentEditable))
+    ) {
+      return;
+    }
 
-    if (e.key === 'z' || e.key === 'Z') {
+    if ((e.key === 'z' || e.key === 'Z') && getTriggerButton()) {
       e.preventDefault();
       void openZettelkastenForCurrentSlide();
     }
@@ -276,24 +323,33 @@ const copy = siteCopy[locale].playbook;
     }
   }
 
+  function onPageLoad() {
+    requestAnimationFrame(() => attachSlideProgressObserver());
+  }
+
+  attachSlideProgressObserver();
   document.addEventListener('click', onDocumentClick);
   window.addEventListener('keydown', onWindowKeyDown, true);
   document.addEventListener('astro:before-preparation', onBeforeNavigate);
+  document.addEventListener('astro:page-load', onPageLoad);
 
   zkState.cleanup = () => {
+    slideObserver?.disconnect();
+    slideObserver = null;
     document.removeEventListener('click', onDocumentClick);
     window.removeEventListener('keydown', onWindowKeyDown, true);
     document.removeEventListener('astro:before-preparation', onBeforeNavigate);
+    document.removeEventListener('astro:page-load', onPageLoad);
   };
 </script>
 
 <style is:global>
   /* ---------- Bottom-left Presentation HUD Zettelkasten Button ---------- */
-  .slide-zk-trigger {
+  .present-zk-btn {
     display: none;
   }
 
-  body.present-mode .slide-zk-trigger {
+  body.present-mode .present-zk-btn {
     position: fixed;
     bottom: 16px;
     left: 16px;
@@ -301,20 +357,24 @@ const copy = siteCopy[locale].playbook;
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
-    padding: 0.38rem 0.72rem;
-    background: rgba(10, 14, 39, 0.88);
-    border: 2px solid color-mix(in srgb, var(--entry-accent, #00f0ff) 58%, transparent);
-    border-radius: 2px;
-    color: #e8f4ff;
-    font-family: 'DotGothic16', 'IBM Plex Sans JP', monospace;
-    letter-spacing: 0.03em;
+    padding: 5px 11px 5px 8px;
+    background: rgba(9, 18, 28, 0.90);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(94, 234, 212, 0.28);
+    border-radius: 3px;
+    color: #ecf7fb;
+    font-family: var(--font-mono-hud, 'IBM Plex Mono', 'IBM Plex Sans JP', monospace);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
     cursor: pointer;
-    box-shadow:
-      4px 4px 0 #05060f,
-      0 0 14px color-mix(in srgb, var(--entry-accent, #00f0ff) 25%, transparent);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
     transition:
       left 0.25s ease,
       transform 0.14s ease,
+      background-color 0.14s ease,
       border-color 0.14s ease,
       color 0.14s ease,
       box-shadow 0.14s ease,
@@ -322,66 +382,95 @@ const copy = siteCopy[locale].playbook;
   }
 
   @media (min-width: 768px) {
-    body.present-mode .slide-zk-trigger {
-      bottom: 18px;
-      left: 322px;
+    body.present-mode .present-zk-btn {
+      bottom: 20px;
+      left: calc(var(--present-toc-width, 260px) + 22px);
     }
 
-    body.present-mode.akq-toc-hidden .slide-zk-trigger {
+    body.present-mode.akq-toc-hidden .present-zk-btn {
       left: 22px;
     }
   }
 
-  html.slide-preparing body.present-mode .slide-zk-trigger,
-  body.akq-zk-open .slide-zk-trigger {
+  html.slide-preparing body.present-mode .present-zk-btn,
+  body.akq-zk-open .present-zk-btn {
     opacity: 0;
     pointer-events: none;
   }
 
-  body.present-mode .slide-zk-trigger:hover,
-  body.present-mode .slide-zk-trigger:focus-visible {
-    border-color: #ff2e88;
-    color: #ff2e88;
-    box-shadow:
-      4px 4px 0 #05060f,
-      0 0 14px rgba(255, 46, 136, 0.45);
-    transform: translate(-1px, -1px);
+  body.present-mode .present-zk-btn:hover,
+  body.present-mode .present-zk-btn:focus-visible {
+    background: rgba(16, 29, 45, 0.95);
+    border-color: #5eead4;
+    color: #ecf7fb;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    transform: translateY(-1px);
     outline: none;
   }
 
-  body.present-mode .slide-zk-trigger .slide-zk-icon {
+  body.present-mode .present-zk-btn .key {
+    display: inline-block;
+    padding: 2px 5px;
+    border: 1px solid rgba(94, 234, 212, 0.30);
+    border-radius: 2px;
+    background: rgba(94, 234, 212, 0.12);
+    color: #5eead4;
+    font-family: var(--font-mono-hud, 'IBM Plex Mono', monospace);
+    font-size: 10.5px;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: 0.03em;
+    transition: background-color 0.14s ease, border-color 0.14s ease;
+  }
+
+  body.present-mode .present-zk-btn:hover .key,
+  body.present-mode .present-zk-btn:focus-visible .key {
+    border-color: #5eead4;
+    background: rgba(94, 234, 212, 0.20);
+  }
+
+  body.present-mode .present-zk-btn .slide-zk-icon {
     width: 14px;
     height: 14px;
     display: inline-grid;
     place-items: center;
-    color: var(--entry-accent, #00f0ff);
-    transition: color 0.14s ease;
+    color: #5eead4;
+    opacity: 0.9;
   }
 
-  body.present-mode .slide-zk-trigger:hover .slide-zk-icon,
-  body.present-mode .slide-zk-trigger:focus-visible .slide-zk-icon {
-    color: #ff2e88;
-  }
-
-  body.present-mode .slide-zk-trigger .slide-zk-icon svg {
+  body.present-mode .present-zk-btn .slide-zk-icon svg {
     width: 14px;
     height: 14px;
   }
 
-  body.present-mode .slide-zk-trigger .key {
-    display: inline-block;
-    padding: 1px 5px;
-    border: 1px solid #00f0ff;
-    background: #05060f;
-    color: #00f0ff;
-    font-family: 'Press Start 2P', monospace;
-    font-size: 9px;
-    line-height: 1.2;
+  body.present-mode .present-zk-btn .slide-zk-label {
+    color: #ecf7fb;
   }
 
-  body.present-mode .slide-zk-trigger:hover .key {
-    border-color: #ff2e88;
-    color: #ff2e88;
+  body.present-mode .present-zk-btn .present-zk-sep {
+    color: #728fa3;
+    opacity: 0.7;
+  }
+
+  body.present-mode .present-zk-btn .present-zk-topic {
+    color: #728fa3;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: color 0.14s ease;
+  }
+
+  body.present-mode .present-zk-btn:hover .present-zk-topic,
+  body.present-mode .present-zk-btn:focus-visible .present-zk-topic {
+    color: #5eead4;
+  }
+
+  @media (max-width: 640px) {
+    body.present-mode .present-zk-btn .present-zk-sep,
+    body.present-mode .present-zk-btn .present-zk-topic {
+      display: none;
+    }
   }
 
   /* ---------- Fullscreen Zettelkasten Modal Overlay ---------- */
@@ -395,15 +484,15 @@ const copy = siteCopy[locale].playbook;
     z-index: 260;
     display: flex;
     flex-direction: column;
-    background: #05060f;
-    color: #e8f4ff;
+    background: var(--c-midnight, #060b12);
+    color: #ecf7fb;
     animation: zk-modal-in 0.18s ease-out;
   }
 
   @keyframes zk-modal-in {
     from {
       opacity: 0;
-      transform: scale(0.992);
+      transform: scale(0.994);
     }
     to {
       opacity: 1;
@@ -418,10 +507,21 @@ const copy = siteCopy[locale].playbook;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    padding: 0 14px;
-    background: linear-gradient(90deg, #05060f 0%, #0a0e27 55%, #1a0b2e 100%);
-    border-bottom: 2px solid #00f0ff;
-    box-shadow: 0 2px 16px rgba(0, 240, 255, 0.2);
+    padding: 2px 14px 0;
+    background-color: rgba(11, 20, 32, 0.90);
+    background-image: linear-gradient(
+      90deg,
+      #5eead4 0%,
+      rgba(147, 168, 255, 0.45) 55%,
+      transparent 100%
+    );
+    background-size: 100% 2px;
+    background-position: top left;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(94, 234, 212, 0.22);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.42);
   }
 
   .zk-modal-brand {
@@ -433,25 +533,24 @@ const copy = siteCopy[locale].playbook;
   }
 
   .zk-modal-diamond {
-    color: #ff2e88;
-    font-size: 14px;
-    text-shadow: 0 0 8px #ff2e88;
+    color: #5eead4;
+    font-size: 13px;
     flex-shrink: 0;
   }
 
   .zk-modal-kicker {
-    font-family: 'Press Start 2P', monospace;
-    font-size: 10px;
-    letter-spacing: 0.06em;
-    color: #00f0ff;
-    text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+    font-family: var(--font-display, 'Orbitron', 'IBM Plex Sans JP', sans-serif);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    color: #ecf7fb;
     flex-shrink: 0;
   }
 
   .zk-modal-sep {
-    font-family: 'VT323', monospace;
-    font-size: 17px;
-    color: rgba(232, 244, 255, 0.35);
+    font-family: var(--font-mono-hud, 'IBM Plex Mono', monospace);
+    font-size: 12px;
+    color: #728fa3;
     flex-shrink: 0;
   }
 
@@ -460,22 +559,25 @@ const copy = siteCopy[locale].playbook;
     align-items: center;
     gap: 6px;
     min-width: 0;
-    font-family: 'DotGothic16', 'IBM Plex Sans JP', monospace;
-    font-size: 13px;
+    font-family: var(--font-mono-hud, 'IBM Plex Mono', 'IBM Plex Sans JP', monospace);
+    font-size: 12px;
   }
 
   .zk-modal-crumb-vault {
-    color: #ffb000;
+    color: #5eead4;
+    font-weight: 500;
     white-space: nowrap;
   }
 
   .zk-modal-crumb-arrow {
-    color: #ff2e88;
+    color: #728fa3;
+    font-size: 11px;
   }
 
   .zk-modal-crumb-note {
-    color: #e8f4ff;
-    font-weight: 700;
+    color: #ecf7fb;
+    font-family: var(--font-prose, 'IBM Plex Sans JP', sans-serif);
+    font-weight: 600;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -485,46 +587,63 @@ const copy = siteCopy[locale].playbook;
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    padding: 5px 11px;
-    background: rgba(255, 46, 136, 0.16);
-    border: 2px solid #ff2e88;
-    border-radius: 2px;
-    color: #e8f4ff;
-    font-family: 'DotGothic16', 'IBM Plex Sans JP', monospace;
-    font-size: 12.5px;
+    padding: 5px 11px 5px 8px;
+    background: rgba(9, 18, 28, 0.90);
+    border: 1px solid rgba(94, 234, 212, 0.28);
+    border-radius: 3px;
+    color: #ecf7fb;
+    font-family: var(--font-mono-hud, 'IBM Plex Mono', 'IBM Plex Sans JP', monospace);
+    font-size: 11.5px;
+    font-weight: 500;
     cursor: pointer;
     flex-shrink: 0;
-    box-shadow: 3px 3px 0 #05060f, 0 0 10px rgba(255, 46, 136, 0.32);
-    transition: background 0.14s ease, transform 0.12s ease, box-shadow 0.14s ease;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    transition:
+      background-color 0.14s ease,
+      border-color 0.14s ease,
+      transform 0.12s ease,
+      box-shadow 0.14s ease;
   }
 
   .zk-modal-close:hover,
   .zk-modal-close:focus-visible {
-    background: rgba(255, 46, 136, 0.34);
-    color: #ffffff;
-    box-shadow: 3px 3px 0 #05060f, 0 0 16px rgba(255, 46, 136, 0.55);
-    transform: translate(-1px, -1px);
+    background: rgba(16, 29, 45, 0.95);
+    border-color: #5eead4;
+    color: #ecf7fb;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    transform: translateY(-1px);
     outline: none;
   }
 
   .zk-modal-key {
     display: inline-block;
-    padding: 1px 5px;
-    background: #05060f;
-    border: 1px solid #00f0ff;
-    color: #00f0ff;
-    font-family: 'Press Start 2P', monospace;
-    font-size: 8.5px;
-    line-height: 1.25;
+    padding: 2px 5px;
+    background: rgba(94, 234, 212, 0.12);
+    border: 1px solid rgba(94, 234, 212, 0.30);
+    border-radius: 2px;
+    color: #5eead4;
+    font-family: var(--font-mono-hud, 'IBM Plex Mono', monospace);
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: 0.03em;
+  }
+
+  .zk-modal-close:hover .zk-modal-key,
+  .zk-modal-close:focus-visible .zk-modal-key {
+    border-color: #5eead4;
+    background: rgba(94, 234, 212, 0.20);
   }
 
   .zk-modal-close-x {
-    color: #ff2e88;
-    font-weight: 700;
+    color: #728fa3;
+    font-size: 11px;
+    transition: color 0.14s ease;
   }
 
-  .zk-modal-close:hover .zk-modal-close-x {
-    color: #ffffff;
+  .zk-modal-close:hover .zk-modal-close-x,
+  .zk-modal-close:focus-visible .zk-modal-close-x {
+    color: #5eead4;
   }
 
   .zk-modal-body {
@@ -544,11 +663,11 @@ const copy = siteCopy[locale].playbook;
     z-index: 5;
     display: grid;
     place-items: center;
-    background: radial-gradient(ellipse at center, #1a0b2e 0%, #0a0e27 55%, #05060f 100%);
-    color: #00f0ff;
-    font-family: 'DotGothic16', 'IBM Plex Sans JP', monospace;
-    font-size: 16px;
-    letter-spacing: 0.06em;
+    background: radial-gradient(ellipse at 50% 35%, rgba(94, 234, 212, 0.08) 0%, #060b12 70%);
+    color: #5eead4;
+    font-family: var(--font-mono-hud, 'IBM Plex Mono', 'IBM Plex Sans JP', monospace);
+    font-size: 13px;
+    letter-spacing: 0.08em;
   }
 
   .zk-modal-loading[hidden] {

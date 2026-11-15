@@ -9,7 +9,7 @@ accent:
   border: border-gb-green
   glow: hover:shadow-neon-green
   shadow: shadow-neon-green
-  hex: "#9bbc0f"
+  hex: "#86efac"
 order: 7
 category: plan
 related: ['agent-skills', 'cli']
@@ -156,51 +156,51 @@ VS Code でユーザーが選べるのは **Agent、Plan、Ask**。`searchSubage
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
 <svg viewBox="0 0 1080 470" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
-  <text x="20" y="50" fill="#e8f4ff" font-size="13" font-weight="bold">USER</text>
-  <rect x="110" y="25" width="340" height="50" rx="10" fill="#0a0e27" stroke="#ff2e88" stroke-width="2"/>
-  <text x="280" y="56" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">「/TDD-RED API エンドポイントを追加して」</text>
-  <path d="M 450 50 L 510 50" fill="none" stroke="#ff2e88" stroke-width="2"/>
-  <rect x="510" y="25" width="150" height="50" rx="12" fill="#ffb000"/>
-  <text x="585" y="56" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">カスタムエージェント</text>
-  <rect x="665" y="25" width="110" height="50" rx="12" fill="#ff2e88"/>
-  <text x="720" y="56" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">プロンプト</text>
-  <path d="M 585 75 L 585 115" fill="none" stroke="#ffb000" stroke-width="2"/>
-  <circle cx="585" cy="115" r="4" fill="#ffb000"/>
-  <rect x="380" y="115" width="400" height="65" rx="12" fill="#0a0e27" stroke="#ffb000" stroke-width="2"/>
-  <text x="580" y="139" fill="#ffb000" font-size="11" font-weight="bold" text-anchor="middle" letter-spacing="1">HARNESS</text>
-  <text x="580" y="162" fill="#e8f4ff" font-size="13" font-weight="bold" text-anchor="middle">.agent.md ファイルを取得</text>
-  <path d="M 580 180 L 580 215 L 245 215 L 245 245" fill="none" stroke="#ffb000" stroke-width="2"/>
-  <path d="M 580 215 L 580 245" fill="none" stroke="#ffb000" stroke-width="2"/>
-  <path d="M 580 215 L 815 215 L 815 245" fill="none" stroke="#ffb000" stroke-width="2"/>
-  <circle cx="245" cy="245" r="4" fill="#9bbc0f"/>
-  <circle cx="580" cy="245" r="4" fill="#ffb000"/>
-  <circle cx="815" cy="245" r="4" fill="#ff2e88"/>
-  <rect x="155" y="245" width="180" height="80" rx="12" fill="#0a0e27" stroke="#9bbc0f" stroke-width="2"/>
-  <text x="245" y="268" fill="#9bbc0f" font-size="10" font-weight="bold" text-anchor="middle" letter-spacing="1">HARNESS</text>
-  <text x="245" y="290" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">使えるツールを</text>
-  <text x="245" y="308" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">絞り込む</text>
-  <rect x="490" y="245" width="180" height="80" rx="12" fill="#0a0e27" stroke="#ffb000" stroke-width="2"/>
-  <text x="580" y="268" fill="#ffb000" font-size="10" font-weight="bold" text-anchor="middle" letter-spacing="1">HARNESS</text>
-  <text x="580" y="290" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">エージェント定義を</text>
-  <text x="580" y="308" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">差し込む</text>
-  <rect x="725" y="245" width="180" height="80" rx="12" fill="#0a0e27" stroke="#ff2e88" stroke-width="2"/>
-  <text x="815" y="268" fill="#ff2e88" font-size="10" font-weight="bold" text-anchor="middle" letter-spacing="1">HARNESS</text>
-  <text x="815" y="290" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">プロンプトを</text>
-  <text x="815" y="308" fill="#e8f4ff" font-size="12" font-weight="bold" text-anchor="middle">追加する</text>
-  <path d="M 245 325 L 245 395" fill="none" stroke="#9bbc0f" stroke-width="2" stroke-dasharray="4 4"/>
-  <path d="M 580 325 L 580 395 L 620 395" fill="none" stroke="#ffb000" stroke-width="2" stroke-dasharray="4 4"/>
-  <path d="M 815 325 L 815 395" fill="none" stroke="#ff2e88" stroke-width="2" stroke-dasharray="4 4"/>
-  <text x="20" y="417" fill="#e8f4ff" font-size="13" font-weight="bold">MODEL</text>
-  <text x="20" y="435" fill="#e8f4ff" font-size="13" font-weight="bold">CONTEXT</text>
-  <rect x="155" y="395" width="180" height="55" rx="12" fill="#9bbc0f"/>
-  <text x="245" y="420" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
-  <text x="245" y="436" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
-  <rect x="345" y="395" width="170" height="55" rx="12" fill="#00f0ff"/>
-  <text x="430" y="428" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
-  <rect x="525" y="395" width="190" height="55" rx="12" fill="#ffb000"/>
-  <text x="620" y="428" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">カスタムエージェント</text>
-  <rect x="725" y="395" width="180" height="55" rx="12" fill="#ff2e88"/>
-  <text x="815" y="428" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">プロンプト</text>
+  <text x="20" y="50" fill="#ecf7fb" font-size="13" font-weight="bold">USER</text>
+  <rect x="110" y="25" width="340" height="50" rx="10" fill="#0b1420" stroke="#93a8ff" stroke-width="2"/>
+  <text x="280" y="56" fill="#ecf7fb" font-size="12" font-weight="bold" text-anchor="middle">「/TDD-RED API エンドポイントを追加して」</text>
+  <path d="M 450 50 L 510 50" fill="none" stroke="#93a8ff" stroke-width="2"/>
+  <rect x="510" y="25" width="150" height="50" rx="12" fill="#fcd34d"/>
+  <text x="585" y="56" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">カスタムエージェント</text>
+  <rect x="665" y="25" width="110" height="50" rx="12" fill="#93a8ff"/>
+  <text x="720" y="56" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">プロンプト</text>
+  <path d="M 585 75 L 585 115" fill="none" stroke="#fcd34d" stroke-width="2"/>
+  <circle cx="585" cy="115" r="4" fill="#fcd34d"/>
+  <rect x="380" y="115" width="400" height="65" rx="12" fill="#0b1420" stroke="#fcd34d" stroke-width="2"/>
+  <text x="580" y="139" fill="#fcd34d" font-size="11" font-weight="bold" text-anchor="middle" letter-spacing="1">HARNESS</text>
+  <text x="580" y="162" fill="#ecf7fb" font-size="13" font-weight="bold" text-anchor="middle">.agent.md ファイルを取得</text>
+  <path d="M 580 180 L 580 215 L 245 215 L 245 245" fill="none" stroke="#fcd34d" stroke-width="2"/>
+  <path d="M 580 215 L 580 245" fill="none" stroke="#fcd34d" stroke-width="2"/>
+  <path d="M 580 215 L 815 215 L 815 245" fill="none" stroke="#fcd34d" stroke-width="2"/>
+  <circle cx="245" cy="245" r="4" fill="#86efac"/>
+  <circle cx="580" cy="245" r="4" fill="#fcd34d"/>
+  <circle cx="815" cy="245" r="4" fill="#93a8ff"/>
+  <rect x="155" y="245" width="180" height="80" rx="12" fill="#0b1420" stroke="#86efac" stroke-width="2"/>
+  <text x="245" y="268" fill="#86efac" font-size="10" font-weight="bold" text-anchor="middle" letter-spacing="1">HARNESS</text>
+  <text x="245" y="290" fill="#ecf7fb" font-size="12" font-weight="bold" text-anchor="middle">使えるツールを</text>
+  <text x="245" y="308" fill="#ecf7fb" font-size="12" font-weight="bold" text-anchor="middle">絞り込む</text>
+  <rect x="490" y="245" width="180" height="80" rx="12" fill="#0b1420" stroke="#fcd34d" stroke-width="2"/>
+  <text x="580" y="268" fill="#fcd34d" font-size="10" font-weight="bold" text-anchor="middle" letter-spacing="1">HARNESS</text>
+  <text x="580" y="290" fill="#ecf7fb" font-size="12" font-weight="bold" text-anchor="middle">エージェント定義を</text>
+  <text x="580" y="308" fill="#ecf7fb" font-size="12" font-weight="bold" text-anchor="middle">差し込む</text>
+  <rect x="725" y="245" width="180" height="80" rx="12" fill="#0b1420" stroke="#93a8ff" stroke-width="2"/>
+  <text x="815" y="268" fill="#93a8ff" font-size="10" font-weight="bold" text-anchor="middle" letter-spacing="1">HARNESS</text>
+  <text x="815" y="290" fill="#ecf7fb" font-size="12" font-weight="bold" text-anchor="middle">プロンプトを</text>
+  <text x="815" y="308" fill="#ecf7fb" font-size="12" font-weight="bold" text-anchor="middle">追加する</text>
+  <path d="M 245 325 L 245 395" fill="none" stroke="#86efac" stroke-width="2" stroke-dasharray="4 4"/>
+  <path d="M 580 325 L 580 395 L 620 395" fill="none" stroke="#fcd34d" stroke-width="2" stroke-dasharray="4 4"/>
+  <path d="M 815 325 L 815 395" fill="none" stroke="#93a8ff" stroke-width="2" stroke-dasharray="4 4"/>
+  <text x="20" y="417" fill="#ecf7fb" font-size="13" font-weight="bold">MODEL</text>
+  <text x="20" y="435" fill="#ecf7fb" font-size="13" font-weight="bold">CONTEXT</text>
+  <rect x="155" y="395" width="180" height="55" rx="12" fill="#86efac"/>
+  <text x="245" y="420" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
+  <text x="245" y="436" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
+  <rect x="345" y="395" width="170" height="55" rx="12" fill="#5eead4"/>
+  <text x="430" y="428" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
+  <rect x="525" y="395" width="190" height="55" rx="12" fill="#fcd34d"/>
+  <text x="620" y="428" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">カスタムエージェント</text>
+  <rect x="725" y="395" width="180" height="55" rx="12" fill="#93a8ff"/>
+  <text x="815" y="428" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">プロンプト</text>
 </svg>
 </figure>
 
@@ -212,52 +212,52 @@ VS Code でユーザーが選べるのは **Agent、Plan、Ask**。`searchSubage
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
 <svg viewBox="0 0 1080 460" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
-  <rect x="385" y="15" width="240" height="48" rx="10" fill="#0a0e27" stroke="#ff2e88" stroke-width="2"/>
-  <text x="505" y="45" fill="#e8f4ff" font-size="14" font-weight="bold" text-anchor="middle">「コードベースでこの機能を探して」</text>
-  <path d="M 505 63 L 505 93" fill="none" stroke="#ff2e88" stroke-width="2"/>
-  <circle cx="505" cy="93" r="4" fill="#ff2e88"/>
-  <text x="20" y="122" fill="#e8f4ff" font-size="14" font-weight="bold">MAIN SESSION</text>
-  <text x="20" y="142" fill="#e8f4ff" font-size="14" font-weight="bold">CONTEXT</text>
-  <text x="20" y="162" fill="#ffb000" font-size="12" font-weight="bold">(LLM)</text>
-  <rect x="160" y="98" width="135" height="55" rx="12" fill="#9bbc0f"/>
-  <text x="227" y="121" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">SYSTEM</text>
-  <text x="227" y="141" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
-  <rect x="300" y="98" width="135" height="55" rx="12" fill="#00f0ff"/>
-  <text x="367" y="132" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
-  <rect x="440" y="98" width="130" height="55" rx="12" fill="#ff2e88"/>
-  <text x="505" y="132" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">プロンプト</text>
+  <rect x="385" y="15" width="240" height="48" rx="10" fill="#0b1420" stroke="#93a8ff" stroke-width="2"/>
+  <text x="505" y="45" fill="#ecf7fb" font-size="14" font-weight="bold" text-anchor="middle">「コードベースでこの機能を探して」</text>
+  <path d="M 505 63 L 505 93" fill="none" stroke="#93a8ff" stroke-width="2"/>
+  <circle cx="505" cy="93" r="4" fill="#93a8ff"/>
+  <text x="20" y="122" fill="#ecf7fb" font-size="14" font-weight="bold">MAIN SESSION</text>
+  <text x="20" y="142" fill="#ecf7fb" font-size="14" font-weight="bold">CONTEXT</text>
+  <text x="20" y="162" fill="#fcd34d" font-size="12" font-weight="bold">(LLM)</text>
+  <rect x="160" y="98" width="135" height="55" rx="12" fill="#86efac"/>
+  <text x="227" y="121" fill="#04080e" font-size="13" font-weight="bold" text-anchor="middle">SYSTEM</text>
+  <text x="227" y="141" fill="#04080e" font-size="13" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
+  <rect x="300" y="98" width="135" height="55" rx="12" fill="#5eead4"/>
+  <text x="367" y="132" fill="#04080e" font-size="13" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
+  <rect x="440" y="98" width="130" height="55" rx="12" fill="#93a8ff"/>
+  <text x="505" y="132" fill="#04080e" font-size="13" font-weight="bold" text-anchor="middle">プロンプト</text>
   <rect x="575" y="98" width="135" height="55" rx="12" fill="#6b7280"/>
-  <text x="642" y="132" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">サマリ</text>
-  <path d="M 505 153 L 505 183" fill="none" stroke="#ff2e88" stroke-width="2"/>
-  <circle cx="505" cy="183" r="4" fill="#ff2e88"/>
-  <rect x="305" y="183" width="400" height="60" rx="12" fill="#0a0e27" stroke="#ffb000" stroke-width="2"/>
-  <text x="505" y="205" fill="#ffb000" font-size="13" font-weight="bold" text-anchor="middle" letter-spacing="1">LLM → HARNESS</text>
-  <text x="505" y="229" fill="#e8f4ff" font-size="14" font-weight="bold" text-anchor="middle">「サブエージェントを作って」</text>
-  <path d="M 505 243 L 505 273" fill="none" stroke="#ffb000" stroke-width="2"/>
-  <circle cx="505" cy="273" r="4" fill="#ffb000"/>
-  <text x="20" y="302" fill="#e8f4ff" font-size="14" font-weight="bold">SUBAGENT</text>
-  <text x="20" y="322" fill="#e8f4ff" font-size="14" font-weight="bold">CONTEXT</text>
-  <text x="20" y="342" fill="#ffb000" font-size="12" font-weight="bold">(LLM)</text>
-  <rect x="160" y="278" width="115" height="55" rx="12" fill="#9bbc0f"/>
-  <text x="217" y="301" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">SYSTEM</text>
-  <text x="217" y="321" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
-  <rect x="280" y="278" width="125" height="55" rx="12" fill="#00f0ff"/>
-  <text x="342" y="312" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
-  <rect x="410" y="278" width="100" height="55" rx="12" fill="#ff2e88"/>
-  <text x="460" y="312" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">プロンプト</text>
-  <rect x="515" y="278" width="85" height="55" rx="12" fill="#ffb000"/>
-  <text x="557" y="312" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">ファイル1</text>
-  <rect x="605" y="278" width="85" height="55" rx="12" fill="#ffb000"/>
-  <text x="647" y="312" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">ファイル2</text>
-  <rect x="695" y="278" width="85" height="55" rx="12" fill="#ffb000"/>
-  <text x="737" y="312" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">ファイル3</text>
+  <text x="642" y="132" fill="#04080e" font-size="13" font-weight="bold" text-anchor="middle">サマリ</text>
+  <path d="M 505 153 L 505 183" fill="none" stroke="#93a8ff" stroke-width="2"/>
+  <circle cx="505" cy="183" r="4" fill="#93a8ff"/>
+  <rect x="305" y="183" width="400" height="60" rx="12" fill="#0b1420" stroke="#fcd34d" stroke-width="2"/>
+  <text x="505" y="205" fill="#fcd34d" font-size="13" font-weight="bold" text-anchor="middle" letter-spacing="1">LLM → HARNESS</text>
+  <text x="505" y="229" fill="#ecf7fb" font-size="14" font-weight="bold" text-anchor="middle">「サブエージェントを作って」</text>
+  <path d="M 505 243 L 505 273" fill="none" stroke="#fcd34d" stroke-width="2"/>
+  <circle cx="505" cy="273" r="4" fill="#fcd34d"/>
+  <text x="20" y="302" fill="#ecf7fb" font-size="14" font-weight="bold">SUBAGENT</text>
+  <text x="20" y="322" fill="#ecf7fb" font-size="14" font-weight="bold">CONTEXT</text>
+  <text x="20" y="342" fill="#fcd34d" font-size="12" font-weight="bold">(LLM)</text>
+  <rect x="160" y="278" width="115" height="55" rx="12" fill="#86efac"/>
+  <text x="217" y="301" fill="#04080e" font-size="13" font-weight="bold" text-anchor="middle">SYSTEM</text>
+  <text x="217" y="321" fill="#04080e" font-size="13" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
+  <rect x="280" y="278" width="125" height="55" rx="12" fill="#5eead4"/>
+  <text x="342" y="312" fill="#04080e" font-size="13" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
+  <rect x="410" y="278" width="100" height="55" rx="12" fill="#93a8ff"/>
+  <text x="460" y="312" fill="#04080e" font-size="13" font-weight="bold" text-anchor="middle">プロンプト</text>
+  <rect x="515" y="278" width="85" height="55" rx="12" fill="#fcd34d"/>
+  <text x="557" y="312" fill="#04080e" font-size="13" font-weight="bold" text-anchor="middle">ファイル1</text>
+  <rect x="605" y="278" width="85" height="55" rx="12" fill="#fcd34d"/>
+  <text x="647" y="312" fill="#04080e" font-size="13" font-weight="bold" text-anchor="middle">ファイル2</text>
+  <rect x="695" y="278" width="85" height="55" rx="12" fill="#fcd34d"/>
+  <text x="737" y="312" fill="#04080e" font-size="13" font-weight="bold" text-anchor="middle">ファイル3</text>
   <rect x="785" y="278" width="115" height="55" rx="12" fill="#6b7280"/>
-  <text x="842" y="312" fill="#05060f" font-size="13" font-weight="bold" text-anchor="middle">サマリ</text>
+  <text x="842" y="312" fill="#04080e" font-size="13" font-weight="bold" text-anchor="middle">サマリ</text>
   <path d="M 900 305 L 985 305 L 985 125 L 720 125" fill="none" stroke="#6b7280" stroke-width="2.5"/>
   <polygon points="710,125 720,120 720,130" fill="#6b7280"/>
   <text x="1060" y="198" fill="#9ca3af" font-size="13" font-weight="bold" text-anchor="end" letter-spacing="1">HARNESS</text>
-  <text x="1060" y="218" fill="#e8f4ff" font-size="13" font-weight="bold" text-anchor="end">サマリを</text>
-  <text x="1060" y="236" fill="#e8f4ff" font-size="13" font-weight="bold" text-anchor="end">メインに戻す</text>
+  <text x="1060" y="218" fill="#ecf7fb" font-size="13" font-weight="bold" text-anchor="end">サマリを</text>
+  <text x="1060" y="236" fill="#ecf7fb" font-size="13" font-weight="bold" text-anchor="end">メインに戻す</text>
 </svg>
 </figure>
 
@@ -266,10 +266,10 @@ VS Code でユーザーが選べるのは **Agent、Plan、Ask**。`searchSubage
 AI モデルは、それぞれ異なるデータ・異なるアーキテクチャで学習されている。**すべてに最強な単一モデルは存在しない。**
 
 <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.2em;margin:1.8em 0;">
-<div style="padding:1.4em 1.2em;border:1px solid rgba(155,188,15,0.35);background:rgba(5,6,15,0.5);"><div style="font-size:1.15em;font-weight:bold;color:#e8f4ff;margin-bottom:0.5em;line-height:1.3;">📚 異なる学習データ</div><div style="color:rgba(232,244,255,0.65);font-size:0.95em;line-height:1.55;">学習コーパスが違えば、知識の穴と強みも変わる。</div></div>
-<div style="padding:1.4em 1.2em;border:1px solid rgba(0,240,255,0.35);background:rgba(5,6,15,0.5);"><div style="font-size:1.15em;font-weight:bold;color:#e8f4ff;margin-bottom:0.5em;line-height:1.3;">⚙️ 異なるアーキテクチャ</div><div style="color:rgba(232,244,255,0.65);font-size:0.95em;line-height:1.55;">推論力・速度・コンテキスト長。モデルごとに得意なタスクが違う。</div></div>
-<div style="padding:1.4em 1.2em;border:1px solid rgba(255,46,136,0.35);background:rgba(5,6,15,0.5);"><div style="font-size:1.15em;font-weight:bold;color:#e8f4ff;margin-bottom:0.5em;line-height:1.3;">✅ クロス検証</div><div style="color:rgba(232,244,255,0.65);font-size:0.95em;line-height:1.55;">同じタスクを複数モデルで走らせると、1 モデルでは見逃すバグに気づける。</div></div>
-<div style="padding:1.4em 1.2em;border:1px solid rgba(255,176,0,0.35);background:rgba(5,6,15,0.5);"><div style="font-size:1.15em;font-weight:bold;color:#e8f4ff;margin-bottom:0.5em;line-height:1.3;">🎯 コスト最適化</div><div style="color:rgba(232,244,255,0.65);font-size:0.95em;line-height:1.55;">タスクごとの最適モデル選びは、品質だけでなく予算の話にもなる。</div></div>
+<div style="padding:1.4em 1.2em;border:1px solid rgba(134, 239, 172,0.35);background:rgba(4, 8, 14,0.5);"><div style="font-size:1.15em;font-weight:bold;color:#ecf7fb;margin-bottom:0.5em;line-height:1.3;">📚 異なる学習データ</div><div style="color:rgba(236, 247, 251,0.65);font-size:0.95em;line-height:1.55;">学習コーパスが違えば、知識の穴と強みも変わる。</div></div>
+<div style="padding:1.4em 1.2em;border:1px solid rgba(94, 234, 212,0.35);background:rgba(4, 8, 14,0.5);"><div style="font-size:1.15em;font-weight:bold;color:#ecf7fb;margin-bottom:0.5em;line-height:1.3;">⚙️ 異なるアーキテクチャ</div><div style="color:rgba(236, 247, 251,0.65);font-size:0.95em;line-height:1.55;">推論力・速度・コンテキスト長。モデルごとに得意なタスクが違う。</div></div>
+<div style="padding:1.4em 1.2em;border:1px solid rgba(147, 168, 255,0.35);background:rgba(4, 8, 14,0.5);"><div style="font-size:1.15em;font-weight:bold;color:#ecf7fb;margin-bottom:0.5em;line-height:1.3;">✅ クロス検証</div><div style="color:rgba(236, 247, 251,0.65);font-size:0.95em;line-height:1.55;">同じタスクを複数モデルで走らせると、1 モデルでは見逃すバグに気づける。</div></div>
+<div style="padding:1.4em 1.2em;border:1px solid rgba(252, 211, 77,0.35);background:rgba(4, 8, 14,0.5);"><div style="font-size:1.15em;font-weight:bold;color:#ecf7fb;margin-bottom:0.5em;line-height:1.3;">🎯 コスト最適化</div><div style="color:rgba(236, 247, 251,0.65);font-size:0.95em;line-height:1.55;">タスクごとの最適モデル選びは、品質だけでなく予算の話にもなる。</div></div>
 </div>
 
 > Claude + Gemini + Codex + Microsoft を、統制・監査可能な **単一プラットフォーム** で動かせるのは Copilot だけ。
@@ -282,20 +282,20 @@ AI モデルは、それぞれ異なるデータ・異なるアーキテクチ�
 <table class="compact-table">
 <thead><tr><th>開発タスク</th><th>ベストなモデル：コスト/性能（例）</th></tr></thead>
 <tbody>
-<tr><td>要件定義</td><td><span style="color:#ffb000">Claude Opus 4.8</span></td></tr>
-<tr><td>アーキテクチャ・設計</td><td><span style="color:#ff2e88">Gemini 3.1 Pro</span></td></tr>
-<tr><td>コード計画</td><td><span style="color:#ffb000">Claude Opus 4.8</span></td></tr>
-<tr><td>コード生成</td><td><span style="color:#ffb000">Claude Sonnet 4.6</span></td></tr>
-<tr><td>テスト作成</td><td><span style="color:#ffb000">Claude Sonnet 4.6</span></td></tr>
-<tr><td>コードレビュー</td><td><span style="color:#00f0ff">GPT-5.5 Codex</span></td></tr>
-<tr><td>CI/CD・自動化</td><td><span style="color:#00f0ff">GPT-5.4 Codex</span></td></tr>
-<tr><td>ドキュメント</td><td><span style="color:#ff2e88">Gemini 3.1 Pro</span></td></tr>
-<tr><td>大量処理・コスト重視</td><td><span style="color:#9bbc0f">MAI-Code-1-Flash</span></td></tr>
+<tr><td>要件定義</td><td><span style="color:#fcd34d">Claude Opus 4.8</span></td></tr>
+<tr><td>アーキテクチャ・設計</td><td><span style="color:#93a8ff">Gemini 3.1 Pro</span></td></tr>
+<tr><td>コード計画</td><td><span style="color:#fcd34d">Claude Opus 4.8</span></td></tr>
+<tr><td>コード生成</td><td><span style="color:#fcd34d">Claude Sonnet 4.6</span></td></tr>
+<tr><td>テスト作成</td><td><span style="color:#fcd34d">Claude Sonnet 4.6</span></td></tr>
+<tr><td>コードレビュー</td><td><span style="color:#5eead4">GPT-5.5 Codex</span></td></tr>
+<tr><td>CI/CD・自動化</td><td><span style="color:#5eead4">GPT-5.4 Codex</span></td></tr>
+<tr><td>ドキュメント</td><td><span style="color:#93a8ff">Gemini 3.1 Pro</span></td></tr>
+<tr><td>大量処理・コスト重視</td><td><span style="color:#86efac">MAI-Code-1-Flash</span></td></tr>
 </tbody>
 </table>
 
 <div style="font-size:0.85em;margin-top:0.6em;letter-spacing:0.05em;">
-<span style="color:#ffb000;font-weight:bold;">● Anthropic</span>&nbsp;&nbsp;<span style="color:#00f0ff;font-weight:bold;">● OpenAI</span>&nbsp;&nbsp;<span style="color:#ff2e88;font-weight:bold;">● Google</span>&nbsp;&nbsp;<span style="color:#9bbc0f;font-weight:bold;">● Microsoft</span>
+<span style="color:#fcd34d;font-weight:bold;">● Anthropic</span>&nbsp;&nbsp;<span style="color:#5eead4;font-weight:bold;">● OpenAI</span>&nbsp;&nbsp;<span style="color:#93a8ff;font-weight:bold;">● Google</span>&nbsp;&nbsp;<span style="color:#86efac;font-weight:bold;">● Microsoft</span>
 </div>
 
 > 出典（ベンチマーク）：<a href="https://www.swebench.com/" target="_blank" rel="noopener noreferrer" class="retro-link">SWE-bench Verified ↗</a> ・ <a href="https://www.tbench.ai/" target="_blank" rel="noopener noreferrer" class="retro-link">Terminal-Bench ↗</a> ・ <a href="https://aider.chat/docs/leaderboards/" target="_blank" rel="noopener noreferrer" class="retro-link">Aider Polyglot ↗</a> ・ <a href="https://lmarena.ai/" target="_blank" rel="noopener noreferrer" class="retro-link">LMArena ↗</a>。モデルはあくまで一例で、タスクや好みによって変わる。

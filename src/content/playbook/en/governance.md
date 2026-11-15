@@ -9,7 +9,7 @@ accent:
   border: border-neon-magenta
   glow: hover:shadow-neon-magenta
   shadow: shadow-neon-magenta
-  hex: "#ff2e88"
+  hex: "#93a8ff"
 order: 30.8
 category: administration
 related: ['cost-centers-and-budgets', 'enterprise-setup', 'license-management', 'custom-agent', 'harness-engineering', 'usage-based-billing']
@@ -130,10 +130,10 @@ flowchart LR
   ORG -->|Write etc.| REPO
   ENT -->|Admin| REPO
 
-  classDef idp fill:#1a0a2e,stroke:#ffb000,color:#ffb000,stroke-width:2px
+  classDef idp fill:#11162c,stroke:#fcd34d,color:#fcd34d,stroke-width:2px
   classDef ent fill:#2a0a0a,stroke:#ff5555,color:#ff5555,stroke-width:2px
-  classDef org fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
-  classDef repo fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
+  classDef org fill:#0b1420,stroke:#5eead4,color:#5eead4,stroke-width:2px
+  classDef repo fill:#0a1a14,stroke:#86efac,color:#86efac,stroke-width:2px
   class IDP idp
   class ENT ent
   class ORG org

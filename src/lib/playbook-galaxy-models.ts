@@ -108,9 +108,9 @@ export function createGalaxyModels() {
         const a = index / 8 * Math.PI * 2;
         box(group, '#d6bc7a', [Math.cos(a) * 1.1, 2.1, Math.sin(a) * 1.1], [0.1, 1.3, 0.1]);
       }
-      mesh(group, geometry(new THREE.SphereGeometry(1.15, 12, 8, 0, Math.PI * 2, 0, Math.PI / 2)), '#9bbc70', [0, 2.55, 0], [1, 0.85, 1]);
+      mesh(group, geometry(new THREE.SphereGeometry(1.15, 12, 8, 0, Math.PI * 2, 0, Math.PI / 2)), '#86efac', [0, 2.55, 0], [1, 0.85, 1]);
       for (let index = 0; index < 4; index++) {
-        const arch = mesh(group, geometry(new THREE.TorusGeometry(1.17, 0.035, 6, 32, Math.PI)), '#f1d291', [0, 2.55, 0]);
+        const arch = mesh(group, geometry(new THREE.TorusGeometry(1.17, 0.035, 6, 32, Math.PI)), '#fcd34d', [0, 2.55, 0]);
         arch.rotation.y = index * Math.PI / 4;
         arch.scale.y = 0.85;
       }
@@ -122,7 +122,7 @@ export function createGalaxyModels() {
       const profile = [[1.95, 0], [1.55, 0.65], [0.85, 2.45], [0.72, 2.65], [0.53, 2.5], [0.45, 2.2]];
       mesh(group, geometry(new THREE.LatheGeometry(profile.map(([r, y]) => new THREE.Vector2(r, y)), 12)),
         '#59413b', [0, 1.23, 0]).name = 'volcano-crater';
-      cylinder(group, '#ff6a18', [0, 3.47, 0], 0.46, 0.46, 0.08, 12, true);
+      cylinder(group, '#fb7185', [0, 3.47, 0], 0.46, 0.46, 0.08, 12, true);
       for (let index = 0; index < 4; index++) {
         const angle = index * Math.PI / 2 + 0.3;
         const points = [[0.75, 3.9], [0.88, 3.65], [1.12, 3.08], [1.36, 2.5], [1.6, 1.92], [1.98, 1.28]];
@@ -131,7 +131,7 @@ export function createGalaxyModels() {
           return new THREE.Vector3(Math.cos(bend) * r, y, Math.sin(bend) * r);
         }));
         mesh(group, geometry(new THREE.TubeGeometry(curve, 24, 0.065, 5, false)),
-          '#ff7518', [0, 0, 0], [1, 1, 1], true).name = 'lava-flow';
+          '#fcd34d', [0, 0, 0], [1, 1, 1], true).name = 'lava-flow';
       }
       const rubble = geometry(new THREE.IcosahedronGeometry(1, 0));
       for (let index = 0; index < 7; index++) {
@@ -141,7 +141,7 @@ export function createGalaxyModels() {
       for (let index = 0; index < 4; index++) {
         mesh(group, rubble, index % 2 ? '#65545d' : '#887477',
           [index * 0.18 - 0.1, 4.35 + index * 0.5, -index * 0.12], [0.25 + index * 0.07, 0.3, 0.25 + index * 0.06]);
-        mesh(group, crystalGeometry, '#ffb000', [Math.sin(index * 2) * 0.6, 4.05 + index * 0.42, Math.cos(index * 2) * 0.5],
+        mesh(group, crystalGeometry, '#fcd34d', [Math.sin(index * 2) * 0.6, 4.05 + index * 0.42, Math.cos(index * 2) * 0.5],
           [0.055, 0.11, 0.055], true);
       }
     } else if (id === 'review') {
@@ -171,7 +171,7 @@ export function createGalaxyModels() {
       }
       box(group, '#493324', [0, 1.92, 0.64], [0.42, 0.74, 0.04]);
       cylinder(group, '#7a573d', [0, 6.65, 0], 0.035, 0.035, 1.5, 6);
-      box(group, '#ffb000', [0.3, 7.1, 0], [0.6, 0.34, 0.05]);
+      box(group, '#fcd34d', [0.3, 7.1, 0], [0.6, 0.34, 0.05]);
       for (let index = 0; index < 3; index++) {
         cylinder(group, '#ba894f', [-1.5 + index * 0.3, 1.55 + index * 0.1, -0.95],
           0.12, 0.16, 0.65 + index * 0.2, 6);
@@ -241,24 +241,24 @@ export function createGalaxyModels() {
     const hullShape = new THREE.Shape();
     hullShape.moveTo(0, 5); hullShape.lineTo(1.45, 2.5); hullShape.lineTo(1.4, -3.6);
     hullShape.lineTo(-1.4, -3.6); hullShape.lineTo(-1.45, 2.5); hullShape.closePath();
-    const hull = mesh(group, geometry(new THREE.ExtrudeGeometry(hullShape, { depth: 0.85, bevelEnabled: true, bevelSize: 0.22, bevelThickness: 0.2, bevelSegments: 1, steps: 1 })), '#64485d', [0, 0, 0]);
+    const hull = mesh(group, geometry(new THREE.ExtrudeGeometry(hullShape, { depth: 0.85, bevelEnabled: true, bevelSize: 0.22, bevelThickness: 0.2, bevelSegments: 1, steps: 1 })), '#24304a', [0, 0, 0]);
     hull.rotation.x = -Math.PI / 2;
-    box(group, '#b29460', [0, 0.95, -0.6], [1.9, 0.15, 6.6]);
-    box(group, '#394961', [0, 1.3, 0.8], [1.6, 0.65, 3.6]);
-    box(group, '#9aa8bc', [0, 1.9, 1], [1.25, 0.6, 1.3]);
-    windows(group, 0, 1.83, 1.67, 1, 2, '#00f0ff');
+    box(group, '#fcd34d', [0, 0.95, -0.6], [1.9, 0.15, 6.6]);
+    box(group, '#323f63', [0, 1.3, 0.8], [1.6, 0.65, 3.6]);
+    box(group, '#bad0de', [0, 1.9, 1], [1.25, 0.6, 1.3]);
+    windows(group, 0, 1.83, 1.67, 1, 2, '#5eead4');
     for (const x of [-2.2, 2.2]) {
-      box(group, '#8b745a', [x / 2, 0.35, 1], [2.4, 0.22, 1.5]);
-      box(group, '#4a4563', [x, 0.4, 1.1], [0.75, 0.8, 4.1]);
+      box(group, '#728fa3', [x / 2, 0.35, 1], [2.4, 0.22, 1.5]);
+      box(group, '#2b3959', [x, 0.4, 1.1], [0.75, 0.8, 4.1]);
       box(group, accent, [x, 0.84, 0.3], [0.2, 0.05, 1.6], true);
-      const engine = cylinder(group, '#8090a9', [x, 0.4, 3.3], 0.4, 0.5, 0.8, 10);
+      const engine = cylinder(group, '#728fa3', [x, 0.4, 3.3], 0.4, 0.5, 0.8, 10);
       engine.rotation.x = Math.PI / 2;
-      const fire = cylinder(group, '#00f0ff', [x, 0.4, 4.2], 0.3, 0.05, 1.4, 8, true);
+      const fire = cylinder(group, '#5eead4', [x, 0.4, 4.2], 0.3, 0.05, 1.4, 8, true);
       fire.rotation.x = Math.PI / 2;
-      cylinder(group, '#aa8a54', [x / 2, 1.55, 2.2], 0.3, 0.42, 1.65, 8);
-      cylinder(group, '#d3b373', [x / 2, 2.8, 2.2], 0, 0.47, 1, 8);
+      cylinder(group, '#93a8ff', [x / 2, 1.55, 2.2], 0.3, 0.42, 1.65, 8);
+      cylinder(group, '#fcd34d', [x / 2, 2.8, 2.2], 0, 0.47, 1, 8);
     }
-    box(group, '#00f0ff', [0, 1.08, -2.7], [0.8, 0.035, 1.5], true);
+    box(group, '#5eead4', [0, 1.08, -2.7], [0.8, 0.035, 1.5], true);
     dish(group, 0, 2.5, 0.8, accent, 0.65);
     group.rotation.y = -0.55;
     return group;
@@ -267,24 +267,24 @@ export function createGalaxyModels() {
   function courier() {
     const group = new THREE.Group();
     group.name = 'navigation-courier';
-    box(group, '#c5cfdf', [0, 0, 0], [0.42, 0.28, 1.25]);
-    const nose = cylinder(group, '#edf2fd', [0, 0, -0.85], 0, 0.29, 0.7, 4);
+    box(group, '#bad0de', [0, 0, 0], [0.42, 0.28, 1.25]);
+    const nose = cylinder(group, '#ecf7fb', [0, 0, -0.85], 0, 0.29, 0.7, 4);
     nose.rotation.x = -Math.PI / 2;
-    mesh(group, crystalGeometry, '#00c7dc', [0, 0.2, -0.28], [0.18, 0.14, 0.36]);
+    mesh(group, crystalGeometry, '#5eead4', [0, 0.2, -0.28], [0.18, 0.14, 0.36]);
     const wing = new THREE.Shape();
     wing.moveTo(-0.18, -0.45); wing.lineTo(-1.05, 0.65); wing.lineTo(-0.3, 0.45);
     wing.lineTo(0, 0.65); wing.lineTo(0.3, 0.45); wing.lineTo(1.05, 0.65);
     wing.lineTo(0.18, -0.45); wing.closePath();
     mesh(group, geometry(new THREE.ExtrudeGeometry(wing, { depth: 0.08, bevelEnabled: false })),
-      '#7d95b5', [0, 0.03, 0]).rotation.x = Math.PI / 2;
+      '#728fa3', [0, 0.03, 0]).rotation.x = Math.PI / 2;
     const exhaust = new THREE.Group();
     exhaust.name = 'courier-exhaust';
     exhaust.position.z = 0.9;
     group.add(exhaust);
     for (const x of [-0.48, 0.48]) {
-      cylinder(group, '#b4c3df', [x, 0, 0.55], 0.16, 0.16, 0.65, 8).rotation.x = Math.PI / 2;
-      cylinder(exhaust, '#00f0ff', [x, 0, 0.35], 0, 0.12, 0.7, 8, true).rotation.x = Math.PI / 2;
-      box(group, '#ffb000', [x * 1.65, 0.08, 0.48], [0.13, 0.035, 0.2], true);
+      cylinder(group, '#bad0de', [x, 0, 0.55], 0.16, 0.16, 0.65, 8).rotation.x = Math.PI / 2;
+      cylinder(exhaust, '#5eead4', [x, 0, 0.35], 0, 0.12, 0.7, 8, true).rotation.x = Math.PI / 2;
+      box(group, '#fcd34d', [x * 1.65, 0.08, 0.48], [0.13, 0.035, 0.2], true);
     }
     return group;
   }

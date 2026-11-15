@@ -12,6 +12,7 @@ export interface SkillEntry {
 
 interface Props {
   skills: SkillEntry[];
+  locale?: 'ja' | 'en';
   copy?: {
     setupSummary: string;
     setupIntro: string;
@@ -61,11 +62,35 @@ const defaultCopy: Required<Props>['copy'] = {
   copyOne: '▶ インストール・コマンドをコピー',
 };
 
-export default function SkillGallery({ skills, copy = defaultCopy }: Props) {
+export default function SkillGallery({ skills, locale = 'ja', copy = defaultCopy }: Props) {
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [scope, setScope] = useState<'project' | 'global'>('project');
+  const [query, setQuery] = useState('');
+  const [activeGroup, setActiveGroup] = useState<string>('all');
   const [copiedSlug, setCopiedSlug] = useState<string | null>(null);
   const [copiedAll, setCopiedAll] = useState(false);
+
+  const groups = Array.from(
+    new Set(skills.map((s) => s.group).filter((g): g is string => Boolean(g)))
+  );
+
+  const normalizedQuery = query.trim().toLowerCase();
+  const filteredSkills = skills.filter((s) => {
+    if (activeGroup !== 'all' && s.group !== activeGroup) return false;
+    if (!normalizedQuery) return true;
+    return (
+      s.name.toLowerCase().includes(normalizedQuery) ||
+      s.slug.toLowerCase().includes(normalizedQuery) ||
+      s.description.toLowerCase().includes(normalizedQuery) ||
+      (s.group ?? '').toLowerCase().includes(normalizedQuery)
+    );
+  });
+
+  const searchPlaceholder =
+    locale === 'en' ? 'Filter skills by name or keyword...' : 'スキル名・キーワードで検索...';
+  const allCategoryLabel = locale === 'en' ? 'ALL' : 'すべて';
+  const emptySearchLabel =
+    locale === 'en' ? 'No matching skills found.' : '条件に一致するスキルが見つかりません。';
 
   const toggle = (slug: string) => {
     play('click');
@@ -86,7 +111,7 @@ export default function SkillGallery({ skills, copy = defaultCopy }: Props) {
 
   const copyBatch = async () => {
     const skillsToCopy = selected.size === 0
-      ? skills
+      ? (filteredSkills.length > 0 ? filteredSkills : skills)
       : skills.filter((s) => selected.has(s.slug));
 
     await navigator.clipboard.writeText(buildBatchCommand(skillsToCopy, scope));
@@ -95,132 +120,225 @@ export default function SkillGallery({ skills, copy = defaultCopy }: Props) {
     setTimeout(() => setCopiedAll(false), BATCH_COPY_FEEDBACK_MS);
   };
 
+  const railBg = (tone: string) => ({
+    backgroundImage: `linear-gradient(90deg, ${tone} 0%, color-mix(in srgb, ${tone} 30%, transparent) 55%, transparent 100%)`,
+    backgroundSize: '100% 2px',
+    backgroundPosition: 'top left',
+    backgroundRepeat: 'no-repeat',
+  });
+
   return (
-    <div className="space-y-6">
-      <details className="bg-shadow-ink/70 border-2 border-dashed border-crt-amber/50 p-4 group">
-        <summary className="font-pixel text-[10px] text-crt-amber cursor-pointer select-none">
+    <div className="space-y-5">
+      <details
+        className="rounded-[3px] border border-[#fcd34d]/30 bg-[#0b1420]/85 p-4 group"
+        style={railBg('#fcd34d')}
+      >
+        <summary className="font-mono text-xs font-semibold tracking-wide text-[#fcd34d] cursor-pointer select-none">
           {copy.setupSummary}
         </summary>
-        <div className="mt-3 space-y-2 text-sm">
-          <p className="font-body text-phosphor/85">
+        <div className="mt-3 space-y-2.5 text-sm">
+          <p className="font-body text-[#bad0de]">
             {copy.setupIntro}
           </p>
-          <pre className="font-mono text-[11px] text-gb-green bg-shadow-ink border border-phosphor/20 p-2 overflow-x-auto"><code>{`# macOS
+          <pre className="font-mono text-xs text-[#86efac] bg-[#04080e] border border-[rgba(94,234,212,0.18)] rounded-[3px] px-3 py-2.5 overflow-x-auto"><code>{`# macOS
 brew install gh
 # or upgrade if already installed
 brew upgrade gh`}</code></pre>
-          <p className="font-body text-[11px] text-phosphor/60">
+          <p className="font-body text-xs text-[#728fa3]">
             {copy.setupAfter}
           </p>
         </div>
       </details>
 
-      <div className="flex flex-wrap items-center justify-between gap-4 font-pixel text-[10px]">
-        <div className="flex gap-2">
-          <button
-            type="button"
-            onClick={() => {
-              play('click');
-              setScope('project');
-            }}
-            className={`px-3 py-2 border-2 transition-colors ${
-              scope === 'project'
-                ? 'border-neon-cyan text-neon-cyan shadow-neon-cyan'
-                : 'border-phosphor/30 text-phosphor/50'
-            }`}
-          >
-            {copy.project}
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              play('click');
-              setScope('global');
-            }}
-            className={`px-3 py-2 border-2 transition-colors ${
-              scope === 'global'
-                ? 'border-neon-cyan text-neon-cyan shadow-neon-cyan'
-                : 'border-phosphor/30 text-phosphor/50'
-            }`}
-          >
-            {copy.global}
-          </button>
+      <div className="rounded-[3px] border border-[rgba(94,234,212,0.16)] bg-[#0b1420]/85 p-4 space-y-3.5">
+        <div className="flex flex-col sm:flex-row gap-3">
+          <div className="relative flex-1">
+            <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 font-mono text-xs text-[#728fa3]">
+              ⌕
+            </span>
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder={searchPlaceholder}
+              aria-label={searchPlaceholder}
+              className="w-full rounded-[3px] bg-[#04080e] border border-[rgba(94,234,212,0.22)] focus:border-[#5eead4] focus:outline-none pl-8 pr-3 py-2 font-body text-sm text-[#ecf7fb] placeholder:text-[#728fa3] transition-colors"
+            />
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2 font-mono text-xs">
+            <div className="inline-flex rounded-[3px] border border-[rgba(94,234,212,0.22)] bg-[#04080e] p-0.5">
+              <button
+                type="button"
+                onClick={() => {
+                  play('click');
+                  setScope('project');
+                }}
+                className={`px-3 py-1.5 rounded-[2px] transition-colors ${
+                  scope === 'project'
+                    ? 'bg-[#5eead4] text-[#04080e] font-semibold'
+                    : 'text-[#728fa3] hover:text-[#ecf7fb]'
+                }`}
+              >
+                {copy.project}
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  play('click');
+                  setScope('global');
+                }}
+                className={`px-3 py-1.5 rounded-[2px] transition-colors ${
+                  scope === 'global'
+                    ? 'bg-[#5eead4] text-[#04080e] font-semibold'
+                    : 'text-[#728fa3] hover:text-[#ecf7fb]'
+                }`}
+              >
+                {copy.global}
+              </button>
+            </div>
+
+            <button
+              type="button"
+              onClick={copyBatch}
+              className="px-3.5 py-2 rounded-[3px] bg-[#fcd34d] text-[#04080e] font-semibold hover:bg-[#fde68a] transition-colors"
+            >
+              {copy.savePrefix}
+              {selected.size > 0 ? `${copy.selected} ${selected.size}` : copy.all}{copy.copySuffix}
+            </button>
+          </div>
         </div>
-        <button
-          type="button"
-          onClick={copyBatch}
-          className="px-4 py-2 border-2 border-crt-amber text-crt-amber bg-shadow-ink hover:bg-crt-amber/10 shadow-neon-amber transition-colors"
-        >
-          {copy.savePrefix}
-          {selected.size > 0 ? `${copy.selected} ${selected.size}` : copy.all}{copy.copySuffix}
-        </button>
+
+        {groups.length > 1 && (
+          <div className="flex flex-wrap items-center gap-1.5 pt-1 border-t border-[rgba(94,234,212,0.12)]">
+            <button
+              type="button"
+              onClick={() => {
+                play('click');
+                setActiveGroup('all');
+              }}
+              className={`px-2.5 py-1 rounded-[3px] font-mono text-[11px] transition-colors ${
+                activeGroup === 'all'
+                  ? 'bg-[#5eead4] text-[#04080e] font-semibold'
+                  : 'border border-[rgba(94,234,212,0.18)] bg-[#04080e] text-[#728fa3] hover:text-[#ecf7fb] hover:border-[rgba(94,234,212,0.36)]'
+              }`}
+            >
+              {allCategoryLabel} ({skills.length})
+            </button>
+            {groups.map((grp) => {
+              const grpCount = skills.filter((s) => s.group === grp).length;
+              const isActive = activeGroup === grp;
+              return (
+                <button
+                  key={grp}
+                  type="button"
+                  onClick={() => {
+                    play('click');
+                    setActiveGroup(grp);
+                  }}
+                  className={`px-2.5 py-1 rounded-[3px] font-mono text-[11px] transition-colors ${
+                    isActive
+                      ? 'bg-[#5eead4] text-[#04080e] font-semibold'
+                      : 'border border-[rgba(94,234,212,0.18)] bg-[#04080e] text-[#728fa3] hover:text-[#ecf7fb] hover:border-[rgba(94,234,212,0.36)]'
+                  }`}
+                >
+                  {grp} ({grpCount})
+                </button>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {copiedAll && (
-        <div className="font-pixel text-[10px] text-gb-green border-2 border-gb-green p-3 bg-shadow-ink">
+        <div className="rounded-[3px] border border-[#86efac]/45 bg-[#86efac]/10 px-4 py-2.5 font-mono text-xs font-semibold text-[#86efac]">
           {copy.copiedAll}
         </div>
       )}
 
-      <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {skills.map((s) => {
-          const isSelected = selected.has(s.slug);
-          const isCopied = copiedSlug === s.slug;
-          return (
-            <li
-              key={s.slug}
-              className={`relative bg-shadow-ink/80 border-2 p-4 transition-all duration-150 ${
-                isSelected
-                  ? 'border-neon-magenta shadow-neon-magenta'
-                  : 'border-phosphor/20 hover:border-neon-cyan'
-              }`}
-              onMouseEnter={() => play('hover')}
-            >
-              <a
-                href={buildSkillRepoUrl(s)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute right-2 top-2 z-10 font-mono text-[10px] text-phosphor/50 hover:text-neon-cyan transition-colors"
-                aria-label={`Open ${s.name} skill in repository`}
+      {filteredSkills.length === 0 ? (
+        <p className="rounded-[3px] border border-[rgba(94,234,212,0.16)] bg-[#0b1420]/70 p-6 text-center font-body text-sm text-[#728fa3]">
+          {emptySearchLabel}
+        </p>
+      ) : (
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {filteredSkills.map((s) => {
+            const isSelected = selected.has(s.slug);
+            const isCopied = copiedSlug === s.slug;
+            const cmd = buildCommand(s, scope);
+            const tone = isSelected ? '#93a8ff' : '#5eead4';
+            return (
+              <li
+                key={s.slug}
+                style={railBg(tone)}
+                className={`relative rounded-[3px] bg-[rgba(11,20,32,0.86)] hover:bg-[rgba(16,29,45,0.95)] border p-4 transition-all duration-150 ${
+                  isSelected
+                    ? 'border-[#93a8ff]/65 shadow-[0_8px_24px_rgba(147,168,255,0.14)]'
+                    : 'border-[rgba(94,234,212,0.16)] hover:border-[rgba(94,234,212,0.34)] shadow-[0_8px_24px_rgba(4,8,14,0.34)]'
+                }`}
+                onMouseEnter={() => play('hover')}
               >
-                repo ↗
-              </a>
-              <div className="flex items-start gap-3">
-                <button
-                  type="button"
-                  onClick={() => toggle(s.slug)}
-                  className="font-pixel text-base shrink-0 w-8 h-8 border-2 border-current flex items-center justify-center"
-                  style={{ color: isSelected ? '#ff2e88' : '#e8f4ff' }}
-                  aria-pressed={isSelected}
-                  aria-label={`${copy.selectAria} ${s.name}`}
-                >
-                  {isSelected ? '✓' : ''}
-                </button>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-2 pr-14">
-                    {/\.(svg|png|jpg|jpeg|webp|gif)$/i.test(s.icon)
-                      ? <img src={s.icon} alt="" className="h-6 w-6 object-contain shrink-0" />
-                      : <span className="text-xl">{s.icon}</span>}
-                    <h3 className="font-pixel text-sm text-neon-cyan truncate">
-                      {s.name}
-                    </h3>
-                  </div>
-                  <p className="text-sm text-phosphor/80 leading-relaxed mb-3">
-                    {s.description}
-                  </p>
+                <div className="flex items-start gap-3">
                   <button
                     type="button"
-                    onClick={() => copyOne(s)}
-                    className="font-mono text-[10px] text-crt-amber hover:text-neon-magenta transition-colors underline-offset-4 hover:underline"
+                    onClick={() => toggle(s.slug)}
+                    className={`font-mono text-xs font-bold shrink-0 w-7 h-7 rounded-[3px] border flex items-center justify-center transition-colors ${
+                      isSelected
+                        ? 'bg-[#93a8ff] border-[#93a8ff] text-[#04080e]'
+                        : 'bg-[#04080e] border-[rgba(94,234,212,0.28)] text-[#ecf7fb] hover:border-[#5eead4]'
+                    }`}
+                    aria-pressed={isSelected}
+                    aria-label={`${copy.selectAria} ${s.name}`}
                   >
-                    {isCopied ? copy.copiedOne : copy.copyOne}
+                    {isSelected ? '✓' : ''}
                   </button>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-2 mb-1.5">
+                      <div className="flex items-center gap-2 min-w-0">
+                        {/\.(svg|png|jpg|jpeg|webp|gif)$/i.test(s.icon)
+                          ? <img src={s.icon} alt="" className="h-5 w-5 object-contain shrink-0" />
+                          : <span className="text-lg leading-none shrink-0">{s.icon}</span>}
+                        <h3 className="font-body text-[15px] font-semibold text-[#ecf7fb] truncate">
+                          {s.name}
+                        </h3>
+                      </div>
+                      <div className="flex items-center gap-1.5 shrink-0">
+                        {s.group && (
+                          <span className="font-mono text-[10px] font-semibold px-1.5 py-0.5 rounded-[3px] border border-[#93a8ff]/25 bg-[#93a8ff]/10 text-[#93a8ff]">
+                            {s.group}
+                          </span>
+                        )}
+                        <a
+                          href={buildSkillRepoUrl(s)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-mono text-[10px] px-1.5 py-0.5 rounded-[3px] border border-[rgba(94,234,212,0.18)] bg-[#04080e] text-[#67e8f9] hover:text-[#a5f3fc] hover:border-[#5eead4]/45 transition-colors"
+                          aria-label={`Open ${s.name} skill in repository`}
+                        >
+                          repo ↗
+                        </a>
+                      </div>
+                    </div>
+                    <p className="font-body text-sm text-[#bad0de] leading-relaxed mb-3">
+                      {s.description}
+                    </p>
+                    <div className="rounded-[3px] bg-[#04080e] border border-[rgba(94,234,212,0.16)] px-2.5 py-1.5 mb-2 overflow-x-auto">
+                      <code className="font-mono text-[11px] text-[#86efac] whitespace-nowrap">{cmd}</code>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => copyOne(s)}
+                      className="font-mono text-[11px] font-semibold text-[#fcd34d] hover:text-[#67e8f9] transition-colors"
+                    >
+                      {isCopied ? copy.copiedOne : copy.copyOne}
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 }

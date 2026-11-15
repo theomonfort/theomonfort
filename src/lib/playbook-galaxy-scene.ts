@@ -63,8 +63,8 @@ export function createGalaxyScene({ host, categories, onCategory, onEntry, onErr
   host.prepend(renderer.domElement);
 
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color('#05060f');
-  scene.fog = new THREE.FogExp2('#05060f', 0.0045);
+  scene.background = new THREE.Color('#060b12');
+  scene.fog = new THREE.FogExp2('#060b12', 0.0045);
   const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 400);
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = false;
@@ -130,15 +130,15 @@ export function createGalaxyScene({ host, categories, onCategory, onEntry, onErr
   let width = 1;
   let height = 1;
 
-  scene.add(new THREE.HemisphereLight('#b3c8ff', '#292139', 1.6));
-  const keyLight = new THREE.DirectionalLight('#fff0d9', 2.2);
+  scene.add(new THREE.HemisphereLight('#bad0de', '#0b1420', 1.6));
+  const keyLight = new THREE.DirectionalLight('#ecf7fb', 2.2);
   keyLight.position.set(-22, 38, 24);
   keyLight.castShadow = true;
   keyLight.shadow.mapSize.set(2048, 2048);
   Object.assign(keyLight.shadow.camera, { left: -52, right: 52, top: 52, bottom: -52, near: 1, far: 120 });
   keyLight.shadow.bias = -0.001;
   scene.add(keyLight);
-  const rim = new THREE.DirectionalLight('#6984ff', 1.5);
+  const rim = new THREE.DirectionalLight('#93a8ff', 1.5);
   rim.position.set(25, 8, -35);
   scene.add(rim);
 
@@ -169,19 +169,19 @@ export function createGalaxyScene({ host, categories, onCategory, onEntry, onErr
         float plasma = sin(surface.y * 5.0 + sin(surface.x * 3.0 + time * 0.12))
           * sin(surface.z * 4.0 - time * 0.08) * 0.5 + 0.5;
         float rim = pow(max(0.0, dot(normalize(viewNormal), normalize(viewDirection))), 0.45);
-        vec3 color = mix(vec3(1.4, 0.24, 0.012), vec3(2.4, 1.05, 0.12), plasma);
+        vec3 color = mix(vec3(1.2, 0.52, 0.08), vec3(2.15, 1.65, 0.45), plasma);
         gl_FragColor = vec4(color * (0.5 + rim * 0.65), 1.0);
       }
     `,
   });
   const solarCore = new THREE.Mesh(sunGeometry, sunMaterial);
   solarSun.add(solarCore);
-  const sunLight = new THREE.PointLight('#ffc476', 750, 120, 2);
+  const sunLight = new THREE.PointLight('#fcd34d', 750, 120, 2);
   solarSun.add(sunLight);
   geometries.push(sunGeometry);
   materials.push(sunMaterial);
   const coronaMaterial = new THREE.MeshBasicMaterial({
-    color: '#ffb000', transparent: true, opacity: 0.5,
+    color: '#fcd34d', transparent: true, opacity: 0.5,
     blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false,
   });
   materials.push(coronaMaterial);
@@ -200,7 +200,7 @@ export function createGalaxyScene({ host, categories, onCategory, onEntry, onErr
   const sunButton = document.createElement('button');
   sunButton.type = 'button';
   sunButton.className = 'galaxy-planet-label galaxy-sun-label';
-  sunButton.style.setProperty('--sector-color', '#ffb000');
+  sunButton.style.setProperty('--sector-color', '#fcd34d');
   sunButton.textContent = sunLabel;
   sunButton.addEventListener('click', onOverview);
   labels.append(sunButton);
@@ -208,9 +208,9 @@ export function createGalaxyScene({ host, categories, onCategory, onEntry, onErr
 
   const fireflyGeometry = new THREE.IcosahedronGeometry(1, 1);
   geometries.push(fireflyGeometry);
-  const fireflyColors = ['#ffe0a3', '#91efff', '#ffc2dc', '#d2e7ff'];
+  const fireflyColors = ['#fcd34d', '#5eead4', '#93a8ff', '#86efac'];
   const fireflyMaterials = fireflyColors.map((color) => {
-    const material = new THREE.MeshBasicMaterial({ color: new THREE.Color(color).multiplyScalar(3), toneMapped: false });
+    const material = new THREE.MeshBasicMaterial({ color: new THREE.Color(color).multiplyScalar(2.6), toneMapped: false });
     materials.push(material);
     return material;
   });
@@ -226,10 +226,10 @@ export function createGalaxyScene({ host, categories, onCategory, onEntry, onErr
     return { mesh, base, phase: angle };
   });
 
-  const grid = new THREE.GridHelper(180, 90, '#335382', '#20314f');
+  const grid = new THREE.GridHelper(180, 90, '#1e4252', '#0f2433');
   grid.position.y = -6;
   grid.material.transparent = true;
-  grid.material.opacity = 0.16;
+  grid.material.opacity = 0.2;
   geometries.push(grid.geometry);
   materials.push(grid.material);
   scene.add(grid);
@@ -245,7 +245,7 @@ export function createGalaxyScene({ host, categories, onCategory, onEntry, onErr
     const radius = 110 + random(3) * 55;
     const planar = Math.sqrt(1 - y * y);
     starPositions.push(Math.cos(angle) * planar * radius, y * radius, Math.sin(angle) * planar * radius);
-    const color = new THREE.Color().setHSL(0.55 + random(4) * 0.15, 0.3, 0.65 + random(5) * 0.3);
+    const color = new THREE.Color().setHSL(0.5 + random(4) * 0.16, 0.32, 0.68 + random(5) * 0.28);
     starColors.push(color.r, color.g, color.b);
   }
   const stars = new THREE.BufferGeometry();
@@ -270,10 +270,10 @@ export function createGalaxyScene({ host, categories, onCategory, onEntry, onErr
     path(Array.from({ length: 180 }, (_, index) => {
       const angle = index / 180 * Math.PI * 2;
       return new THREE.Vector3(Math.sin(angle) * radius, Math.cos(angle) * 1.2, Math.cos(angle) * radius);
-    }), radius === solarRadius ? '#ffb000' : '#657eab', radius === solarRadius ? 0.28 : 0.12, scene, true);
+    }), radius === solarRadius ? '#fcd34d' : '#5eead4', radius === solarRadius ? 0.28 : 0.14, scene, true);
   }
 
-  const selectionMaterial = new THREE.MeshBasicMaterial({ color: '#ffffff', transparent: true, opacity: 0.85 });
+  const selectionMaterial = new THREE.MeshBasicMaterial({ color: '#ecf7fb', transparent: true, opacity: 0.85 });
   const selectionGeometry = new THREE.TorusGeometry(1.35, 0.035, 6, 48);
   materials.push(selectionMaterial);
   geometries.push(selectionGeometry);

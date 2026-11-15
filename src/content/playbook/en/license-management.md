@@ -9,7 +9,7 @@ accent:
   border: border-neon-magenta
   glow: hover:shadow-neon-magenta
   shadow: shadow-neon-magenta
-  hex: "#ff2e88"
+  hex: "#93a8ff"
 order: 30
 category: administration
 related: ['github-copilot', 'copilot-metrics']
@@ -53,14 +53,14 @@ links:
 
 ## GitHub License & Service Procurement
 
-<div style="font-size:0.56em;line-height:1.25;--proc-row:8.45rem;--proc-gap:0.6rem;--proc-label:5.4rem;--proc-navy:#ff2e88;--proc-gray:#9bbc0f;--proc-blue:#00f0ff;--proc-copilot:#ffb000;--proc-panel:rgba(10,14,39,0.86);--proc-card:rgba(5,6,15,0.92);--proc-card-border:rgba(0,240,255,0.46);--proc-copilot-border:rgba(255,176,0,0.85);--proc-head:#ff2e88;--proc-accent:#00f0ff;--proc-dark:#05060f;--proc-ink:#e8f4ff;">
+<div style="font-size:0.56em;line-height:1.25;--proc-row:8.45rem;--proc-gap:0.6rem;--proc-label:5.4rem;--proc-navy:#93a8ff;--proc-gray:#86efac;--proc-blue:#5eead4;--proc-copilot:#fcd34d;--proc-panel:rgba(11, 20, 32,0.86);--proc-card:rgba(4, 8, 14,0.92);--proc-card-border:rgba(94, 234, 212,0.46);--proc-copilot-border:rgba(252, 211, 77,0.85);--proc-head:#93a8ff;--proc-accent:#5eead4;--proc-dark:#04080e;--proc-ink:#ecf7fb;">
 
 Overview of how GitHub services are licensed and billed.
 
 <div style="display:grid;grid-template-columns:minmax(0,1fr) 16.5rem;gap:1.05rem;align-items:start;margin-top:0.9rem;max-width:72rem;">
 <div style="display:grid;grid-template-rows:repeat(3,var(--proc-row));gap:var(--proc-gap);">
 <div style="display:grid;grid-template-columns:var(--proc-label) minmax(0,1fr);gap:0.25rem;min-height:0;">
-<div style="display:flex;align-items:center;justify-content:center;text-align:center;background:var(--proc-head);color:var(--proc-dark);font-weight:700;font-size:1.1em;line-height:1.35;border-bottom:0.6rem solid rgba(5,6,15,0.95);">User<br/>License</div>
+<div style="display:flex;align-items:center;justify-content:center;text-align:center;background:var(--proc-head);color:var(--proc-dark);font-weight:700;font-size:1.1em;line-height:1.35;border-bottom:0.6rem solid rgba(4, 8, 14,0.95);">User<br/>License</div>
 <div style="background:var(--proc-panel);color:var(--proc-ink);padding:0.3rem 0.7rem 0.55rem;">
 <div style="text-align:center;font-weight:700;font-size:1.05em;color:var(--proc-accent);margin-bottom:0.38rem;">Licenses for GitHub Enterprise usage</div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
@@ -76,7 +76,7 @@ Overview of how GitHub services are licensed and billed.
 </div>
 </div>
 <div style="display:grid;grid-template-columns:var(--proc-label) minmax(0,1fr);gap:0.25rem;min-height:0;">
-<div style="display:flex;align-items:center;justify-content:center;text-align:center;background:var(--proc-head);color:var(--proc-dark);font-weight:700;font-size:1.1em;line-height:1.35;border-top:0.6rem solid rgba(5,6,15,0.95);">Committer<br/>License</div>
+<div style="display:flex;align-items:center;justify-content:center;text-align:center;background:var(--proc-head);color:var(--proc-dark);font-weight:700;font-size:1.1em;line-height:1.35;border-top:0.6rem solid rgba(4, 8, 14,0.95);">Committer<br/>License</div>
 <div style="background:var(--proc-panel);color:var(--proc-ink);padding:0.3rem 0.7rem 0.55rem;display:grid;grid-template-rows:auto 1fr;">
 <div style="text-align:center;font-weight:700;font-size:1.05em;color:var(--proc-accent);margin-bottom:0.55rem;">License for DevSecOps on GitHub</div>
 <div style="background:var(--proc-card);border:1px solid var(--proc-card-border);height:100%;display:grid;grid-template-rows:auto 1fr;">
@@ -90,7 +90,7 @@ Overview of how GitHub services are licensed and billed.
 <div style="background:var(--proc-panel);color:var(--proc-ink);padding:0.35rem 0.55rem 0.55rem;">
 <div style="text-align:center;font-weight:700;font-size:1.05em;color:var(--proc-accent);margin-bottom:0.45rem;">Usage-based add-on services</div>
 <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:0.45rem;">
-<div style="background:var(--proc-card);border:2px solid var(--proc-copilot-border);height:100%;display:grid;grid-template-rows:auto 1fr;box-shadow:0 0 12px rgba(255,176,0,0.28);"><div style="background:var(--proc-copilot);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.18rem 0.25rem;font-size:1.03em;">Copilot<br/>Business/Enterprise</div><div style="padding:0.45rem 0.35rem;font-weight:700;color:var(--proc-copilot);">・AI-powered code suggestion service</div></div>
+<div style="background:var(--proc-card);border:2px solid var(--proc-copilot-border);height:100%;display:grid;grid-template-rows:auto 1fr;box-shadow:0 0 12px rgba(252, 211, 77,0.28);"><div style="background:var(--proc-copilot);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.18rem 0.25rem;font-size:1.03em;">Copilot<br/>Business/Enterprise</div><div style="padding:0.45rem 0.35rem;font-weight:700;color:var(--proc-copilot);">・AI-powered code suggestion service</div></div>
 <div style="background:var(--proc-card);border:1px solid var(--proc-card-border);height:100%;display:grid;grid-template-rows:auto 1fr;"><div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.3rem 0.25rem;font-size:1.08em;">Actions</div><div style="padding:0.55rem 0.35rem;font-weight:600;">・CI/CD<br/>・Workflow automation</div></div>
 <div style="background:var(--proc-card);border:1px solid var(--proc-card-border);height:100%;display:grid;grid-template-rows:auto 1fr;"><div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.3rem 0.25rem;font-size:1.08em;">Codespaces</div><div style="padding:0.55rem 0.35rem;font-weight:600;">・Cloud development machines</div></div>
 <div style="background:var(--proc-card);border:1px solid var(--proc-card-border);height:100%;display:grid;grid-template-rows:auto 1fr;"><div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.3rem 0.25rem;font-size:1.08em;">Packages</div><div style="padding:0.55rem 0.35rem;font-weight:600;">・Package management</div></div>

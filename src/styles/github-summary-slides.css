@@ -2,7 +2,7 @@
   font-family: var(--font-prose);
   font-size: clamp(16px, 1.35vw, 20px);
   line-height: 1.4;
-  color: #e8f4ff;
+  color: #ecf7fb;
 }
 
 .prose-akq .gh-summary-slide p,
@@ -19,25 +19,28 @@
 .prose-akq .gh-stat {
   min-width: 0;
   padding: 12px;
-  border-top: 2px solid #00f0ff;
-  background: #0a0e27ed;
+  border-radius: 3px;
+  border: 1px solid rgba(94, 234, 212, 0.18);
+  border-top: 2px solid #5eead4;
+  background: rgba(11, 20, 32, 0.88);
 }
 
 .prose-akq .gh-stat:nth-child(n + 4) {
-  border-color: #ff2e88;
+  border-color: rgba(147, 168, 255, 0.18);
+  border-top-color: #93a8ff;
 }
 
 .prose-akq .gh-stat > strong {
   display: block;
   margin: 4px 0;
-  color: #00f0ff;
+  color: #5eead4;
   font-size: 2em;
   line-height: 1.4;
   font-variant-numeric: tabular-nums;
 }
 
 .prose-akq .gh-stat:nth-child(n + 4) > strong {
-  color: #ff2e88;
+  color: #93a8ff;
 }
 
 .prose-akq .gh-stat > span,
@@ -54,14 +57,14 @@
 
 .prose-akq .gh-stat > a {
   margin-top: 6px;
-  color: #bacddd;
+  color: #bad0de;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
 .prose-akq .gh-summary-slide .gh-summary-note {
   margin-top: 8px;
-  color: #bacddd;
+  color: #bad0de;
 }
 
 .prose-akq .gh-recognition-claims,
@@ -72,29 +75,32 @@
 }
 
 .prose-akq .gh-recognition-claim {
-  padding: 6px 10px;
-  background: #0a0e27ed;
-  border-top: 2px solid #00f0ff;
+  padding: 8px 12px;
+  border-radius: 3px;
+  background: rgba(11, 20, 32, 0.88);
+  border: 1px solid rgba(94, 234, 212, 0.18);
+  border-top: 2px solid #5eead4;
   font-size: max(14px, 0.8em);
 }
 
 .prose-akq .gh-recognition-claim > strong {
   display: block;
-  color: #00f0ff;
+  color: #5eead4;
   font-size: 1.1em;
   margin-bottom: 4px;
 }
 
 .prose-akq .gh-recognition-claim:last-child {
-  border-color: #ffb000;
+  border-color: rgba(252, 211, 77, 0.18);
+  border-top-color: #fcd34d;
 }
 
 .prose-akq .gh-recognition-claim:last-child > strong {
-  color: #ffb000;
+  color: #fcd34d;
 }
 
 .prose-akq .gh-recognition-claim a {
-  color: #bacddd;
+  color: #bad0de;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -107,7 +113,7 @@
 .prose-akq .gh-recognition-visual figcaption {
   margin: 0 0 4px;
   font-size: 14px;
-  color: #e8f4ff;
+  color: #ecf7fb;
   text-align: center;
 }
 
@@ -134,13 +140,13 @@
 }
 
 .prose-akq .gh-recognition-key b {
-  color: #bacddd;
+  color: #bad0de;
   min-width: 1.3em;
   font-variant-numeric: tabular-nums;
 }
 
 .prose-akq .gh-recognition-key > div:first-child {
-  color: #ffb000;
+  color: #fcd34d;
   font-weight: 700;
 }
 

@@ -42,10 +42,10 @@ interface Section {
 // cyan = Introduction / Test & Secure, green = Plan / Operate,
 // magenta = Develop (Code), amber = Review (and the yellow bookends).
 const COLORS: Record<SectionColor, { text: string; accent: string; hex: string }> = {
-  magenta: { text: 'text-neon-magenta', accent: 'accent-neon-magenta', hex: '#ff2e88' },
-  cyan: { text: 'text-neon-cyan', accent: 'accent-neon-cyan', hex: '#00f0ff' },
-  amber: { text: 'text-crt-amber', accent: 'accent-crt-amber', hex: '#ffb000' },
-  green: { text: 'text-gb-green', accent: 'accent-gb-green', hex: '#9bbc0f' },
+  magenta: { text: 'text-neon-magenta', accent: 'accent-neon-magenta', hex: '#93a8ff' },
+  cyan: { text: 'text-neon-cyan', accent: 'accent-neon-cyan', hex: '#5eead4' },
+  amber: { text: 'text-crt-amber', accent: 'accent-crt-amber', hex: '#fcd34d' },
+  green: { text: 'text-gb-green', accent: 'accent-gb-green', hex: '#86efac' },
 };
 
 const sections: Section[] = [
@@ -264,7 +264,7 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
 <Layout locale={locale} currentPath="/ws" title="Workshop Presenter Notes">
   <section class="max-w-3xl mx-auto px-4 py-12 md:py-16">
     <section class="ws-quest">
-      <span class="ws-quest-time font-pixel">⏱ {timeText}</span>
+      <span class="ws-quest-time font-mono">⏱ {timeText}</span>
       <div class="ws-quest-grid">
         <div class="ws-quest-copy">
           <div class="ws-switch flex items-center gap-2 mb-3" role="tablist" aria-label="Workshop">
@@ -272,9 +272,9 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
             <button type="button" role="tab" class="ws-tab is-active" data-ws="copilot" aria-selected="true" aria-controls="ws-notes">COPILOT</button>
             <button type="button" role="tab" class="ws-tab" data-ws="ghas" aria-selected="false" aria-controls="ws-construction">GHAS</button>
           </div>
-          <h1 id="ws-title" class="ws-quest-title font-pixel">COPILOT WORKSHOP</h1>
+          <h1 id="ws-title" class="ws-quest-title font-display">COPILOT WORKSHOP</h1>
           <div id="ws-quest-body">
-            <p id="ws-objectives" class="ws-quest-sum font-pixel-jp">{objectivesText}</p>
+            <p id="ws-objectives" class="ws-quest-sum font-body">{objectivesText}</p>
             <div id="ws-progress" class="ws-quest-progress">
               <div class="ws-exp">
                 <span class="ws-exp-tag">EXP</span>
@@ -302,8 +302,8 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
 
     <div id="ws-construction" class="ws-construction" role="tabpanel" hidden>
       <img src={ucIcon} alt="" width="160" height="160" class="ws-uc-icon" />
-      <p class="ws-uc-title font-pixel">{ucTitle}</p>
-      <p class="ws-uc-body font-pixel-jp">{ucBody}</p>
+      <p class="ws-uc-title font-display">{ucTitle}</p>
+      <p class="ws-uc-body font-body">{ucBody}</p>
     </div>
 
     {workshops.map((w) => {
@@ -318,16 +318,16 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
         const c = COLORS[section.color];
         return (
           <details class="ws-section" data-section={`${w.id}-${si}`} style={`--c:${c.hex}`} open>
-            <summary class={`ws-summary flex items-center gap-3 cursor-pointer select-none px-2 py-2 ${c.text}`}>
+            <summary class={`ws-summary flex items-center gap-3 cursor-pointer select-none px-2.5 py-2.5 rounded-[3px] ${c.text}`}>
               <span class="ws-node shrink-0" aria-hidden="true"></span>
-              <span class="ws-chevron font-pixel text-[10px] transition-transform duration-200">▶</span>
-              <h2 class="font-pixel-jp text-base md:text-lg font-bold tracking-[0.12em] leading-tight flex-1">
-                {section.duration && <span class="ws-duration font-terminal normal-case opacity-90">（~{section.duration}）</span>}
+              <span class="ws-chevron font-mono text-xs transition-transform duration-200">▶</span>
+              <h2 class="font-display text-sm md:text-base font-bold tracking-[0.08em] leading-tight flex-1">
+                {section.duration && <span class="ws-duration font-mono text-xs font-medium normal-case opacity-90 mr-1.5">（~{section.duration}）</span>}
                 <span class="uppercase">{section.title}</span>
-                {section.subtitle && <span class="ws-subtitle"> : {section.subtitle}</span>}
+                {section.subtitle && <span class="ws-subtitle font-body"> : {section.subtitle}</span>}
               </h2>
-              <button type="button" class="ws-check-all font-pixel" aria-label="Toggle all items in this section">✓ ALL</button>
-              <span class="ws-section-count font-terminal text-base opacity-90">0 / {section.items.length}</span>
+              <button type="button" class="ws-check-all font-mono" aria-label="Toggle all items in this section">✓ ALL</button>
+              <span class="ws-section-count font-mono text-xs font-semibold opacity-90">0 / {section.items.length}</span>
             </summary>
             <ul class="ws-list ml-[6px] pl-5 py-1 space-y-0.5">
               {section.items.map((item) => {
@@ -348,11 +348,11 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
                 return (
                   <li>
                     <label
-                      class="ws-row group flex items-start gap-3 cursor-pointer px-2 py-2 border border-transparent hover:border-neon-cyan/30 hover:bg-midnight/40 transition-colors"
+                      class="ws-row group flex items-start gap-3 cursor-pointer px-2.5 py-2 rounded-[3px] border border-transparent hover:border-neon-cyan/25 hover:bg-deep-purple/65 transition-colors"
                       for={id}
                     >
                       <input type="checkbox" id={id} class={`ws-check mt-0.5 h-4 w-4 shrink-0 ${c.accent} cursor-pointer`} />
-                      <span class="ws-label font-pixel-jp text-sm md:text-[15px] text-phosphor/95 leading-snug">
+                      <span class="ws-label font-body text-sm md:text-[15px] text-phosphor leading-snug">
                         {stepKind === 'explain' && <span class="ws-step-ico" aria-hidden="true">💬</span>}
                         {stepKind === 'prep' && <span class="ws-step-ico" aria-hidden="true">🛠️</span>}
                         {stepKind === 'demo' && <img class="ws-step-ico ws-step-demo" src="/theomonfort/icons/arcade-machine.png" alt="" />}
@@ -380,19 +380,21 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
 </Layout>
 
 <style>
-  /* EXP progress bar (inside the QUEST frame) */
+  /* EXP progress bar (inside the Phosphor HUD frame) */
   .ws-exp { display: flex; align-items: center; gap: 0.7rem; }
   .ws-exp-tag {
-    font-family: 'Press Start 2P', monospace;
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    color: #00f0ff;
+    font-family: var(--font-mono-hud);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: #5eead4;
   }
   .ws-track {
     flex: 1;
-    height: 16px;
-    background: #05060f;
-    border: 2px solid rgba(0, 240, 255, 0.7);
+    height: 14px;
+    background: #04080e;
+    border: 1px solid rgba(94, 234, 212, 0.34);
+    border-radius: 3px;
     padding: 2px;
     position: relative;
     overflow: hidden;
@@ -400,74 +402,95 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
   .ws-bar-fill {
     height: 100%;
     width: 0;
-    background: linear-gradient(90deg, #00f0ff, #ff2e88);
-    box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    border-radius: 1px;
+    background: linear-gradient(90deg, #5eead4, #93a8ff);
+    box-shadow: 0 0 10px rgba(94, 234, 212, 0.4);
     transition: width 0.3s ease;
   }
   .ws-exp-ticks { position: absolute; inset: 2px; display: flex; pointer-events: none; }
-  .ws-exp-ticks span { flex: 1; border-right: 1px solid rgba(0, 240, 255, 0.22); }
+  .ws-exp-ticks span { flex: 1; border-right: 1px solid rgba(94, 234, 212, 0.16); }
   .ws-exp-ticks span:last-child { border-right: none; }
-  .ws-exp-count { font-family: 'VT323', monospace; font-size: 1.3rem; color: #00f0ff; white-space: nowrap; }
-  .ws-exp-ctrls { display: flex; justify-content: flex-start; gap: 0.4rem; margin-top: 0.9rem; }
-  .ws-exp-btn {
-    font-family: 'Press Start 2P', monospace;
-    font-size: 8px;
-    letter-spacing: 0.1em;
-    color: #00f0ff;
-    background: transparent;
-    border: 1px solid rgba(0, 240, 255, 0.6);
-    padding: 0.5em 0.65em;
-    cursor: pointer;
-    transition: background 0.15s ease, color 0.15s ease;
+  .ws-exp-count {
+    font-family: var(--font-mono-hud);
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: #5eead4;
+    white-space: nowrap;
   }
-  .ws-exp-btn:hover { background: #00f0ff; color: #05060f; }
-  .ws-exp-btn.reset { color: #ffb000; border-color: rgba(255, 176, 0, 0.6); }
-  .ws-exp-btn.reset:hover { background: #ffb000; color: #05060f; }
+  .ws-exp-ctrls { display: flex; justify-content: flex-start; gap: 0.45rem; margin-top: 0.9rem; }
+  .ws-exp-btn {
+    font-family: var(--font-mono-hud);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: #5eead4;
+    background: #04080e;
+    border: 1px solid rgba(94, 234, 212, 0.32);
+    border-radius: 3px;
+    padding: 0.45em 0.75em;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .ws-exp-btn:hover { background: #5eead4; border-color: #5eead4; color: #04080e; }
+  .ws-exp-btn.reset { color: #fcd34d; border-color: rgba(252, 211, 77, 0.38); }
+  .ws-exp-btn.reset:hover { background: #fcd34d; border-color: #fcd34d; color: #04080e; }
 
   .ws-summary::-webkit-details-marker { display: none; }
-  .ws-summary { list-style: none; }
+  .ws-summary {
+    list-style: none;
+    transition: background-color 0.15s ease;
+  }
+  .ws-summary:hover {
+    background-color: rgba(11, 20, 32, 0.75);
+  }
 
-  /* QUEST LOG frame for the /ws top */
+  /* HUD LOG frame for the /ws top */
   .ws-quest {
     position: relative;
     overflow: visible;
-    border: 2px solid rgba(0, 240, 255, 0.66);
-    padding: clamp(1rem, 3vw, 1.65rem);
+    border: 1px solid rgba(94, 234, 212, 0.24);
+    border-radius: 3px;
+    padding: clamp(1.15rem, 3vw, 1.75rem);
     margin-bottom: 2rem;
-    background:
-      linear-gradient(130deg, rgba(5, 6, 15, 0.94), rgba(10, 14, 39, 0.82)),
-      repeating-linear-gradient(90deg, rgba(0, 240, 255, 0.05) 0 1px, transparent 1px 36px);
-    box-shadow: 7px 7px 0 rgba(5, 6, 15, 0.88), inset 0 0 28px rgba(0, 240, 255, 0.1);
-  }
-  .ws-quest::before {
-    content: '';
-    position: absolute;
-    inset: 0.85rem;
-    border: 1px dashed rgba(0, 240, 255, 0.34);
-    pointer-events: none;
+    background-color: rgba(11, 20, 32, 0.86);
+    background-image:
+      linear-gradient(90deg, #5eead4 0%, color-mix(in srgb, #5eead4 30%, transparent) 55%, transparent 100%),
+      repeating-linear-gradient(90deg, rgba(94, 234, 212, 0.03) 0 1px, transparent 1px 36px);
+    background-size: 100% 2px, auto;
+    background-position: top left, 0 0;
+    background-repeat: no-repeat, repeat;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 14px 36px rgba(4, 8, 14, 0.48);
   }
   .ws-quest::after {
     content: 'WORKSHOP LOG';
     position: absolute;
     left: 1rem;
     top: -0.65rem;
-    padding: 0 0.6rem;
-    color: rgba(255, 176, 0, 0.82);
-    background: #05060f;
-    font-family: 'Press Start 2P', monospace;
-    font-size: 9px;
-    letter-spacing: 0.18em;
+    padding: 0.1rem 0.55rem;
+    border-radius: 3px;
+    border: 1px solid rgba(252, 211, 77, 0.35);
+    color: #fcd34d;
+    background: #04080e;
+    font-family: var(--font-mono-hud);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
     z-index: 2;
   }
   .ws-quest-time {
     position: absolute;
     right: 1rem;
     top: -0.65rem;
-    padding: 0 0.6rem;
-    color: rgba(0, 240, 255, 0.82);
-    background: #05060f;
-    font-size: 9px;
-    letter-spacing: 0.14em;
+    padding: 0.1rem 0.55rem;
+    border-radius: 3px;
+    border: 1px solid rgba(94, 234, 212, 0.32);
+    color: #5eead4;
+    background: #04080e;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
     z-index: 2;
   }
   .ws-quest-grid {
@@ -479,19 +502,20 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     align-items: center;
   }
   .ws-quest-title {
-    color: #00f0ff;
-    font-size: clamp(0.85rem, 3vw, 1.5rem);
-    line-height: 1.15;
+    color: #ecf7fb;
+    font-size: clamp(1.1rem, 3vw, 1.65rem);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
     white-space: nowrap;
-    text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
-    margin: 0.4rem 0 0;
+    margin: 0.35rem 0 0;
   }
   .ws-quest-sum {
     max-width: 46rem;
-    margin-top: 1rem;
-    color: rgba(232, 244, 255, 0.8);
-    font-size: 0.95rem;
-    line-height: 1.7;
+    margin-top: 0.9rem;
+    color: #bad0de;
+    font-size: 0.94rem;
+    line-height: 1.75;
   }
   .ws-quest-progress { margin-top: 1.35rem; }
   #ws-quest-body[hidden] { display: none; }
@@ -503,10 +527,10 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     top: 104%;
     width: 11rem;
     height: 4rem;
-    border: 1px solid rgba(0, 240, 255, 0.5);
+    border: 1px solid rgba(94, 234, 212, 0.38);
     border-radius: 50%;
     transform: translate(-50%, -50%) rotate(-14deg);
-    box-shadow: 0 0 12px rgba(0, 240, 255, 0.22);
+    box-shadow: 0 0 12px rgba(94, 234, 212, 0.18);
     pointer-events: none;
   }
   .ws-quest-mascot img {
@@ -514,7 +538,7 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     z-index: 1;
     width: min(9rem, 100%);
     height: auto;
-    filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 24px rgba(0, 240, 255, 0.45));
+    filter: drop-shadow(0 12px 18px rgba(4, 8, 14, 0.65)) drop-shadow(0 0 22px rgba(94, 234, 212, 0.32));
     animation: ws-mascot-drift 7s ease-in-out infinite;
   }
   @keyframes ws-mascot-drift { 50% { transform: translateY(-10px); } }
@@ -526,28 +550,26 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
 
   /* Workshop selector tabs */
   .ws-tab {
-    font-family: 'Press Start 2P', monospace;
-    font-size: 9px;
-    letter-spacing: 0.15em;
-    padding: 0.5rem 0.75rem;
-    color: rgba(0, 240, 255, 0.55);
-    background: transparent;
-    border: 2px solid rgba(0, 240, 255, 0.3);
+    font-family: var(--font-mono-hud);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    padding: 0.4rem 0.75rem;
+    border-radius: 3px;
+    color: #728fa3;
+    background: #04080e;
+    border: 1px solid rgba(94, 234, 212, 0.22);
     cursor: pointer;
-    transition: color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-  }
-  @media (min-width: 768px) {
-    .ws-tab { font-size: 10px; }
+    transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
   }
   .ws-tab:hover {
-    color: #00f0ff;
-    border-color: rgba(0, 240, 255, 0.6);
+    color: #ecf7fb;
+    border-color: rgba(94, 234, 212, 0.48);
   }
   .ws-tab.is-active {
-    color: #00f0ff;
-    border-color: #00f0ff;
-    background: rgba(0, 240, 255, 0.08);
-    box-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+    color: #04080e;
+    border-color: #5eead4;
+    background: #5eead4;
   }
 
   /* Under-construction panel for unbuilt workshops */
@@ -560,11 +582,14 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     text-align: center;
     gap: 1rem;
     padding: 4rem 1rem 5rem;
+    border-radius: 3px;
+    border: 1px solid rgba(94, 234, 212, 0.16);
+    background: rgba(11, 20, 32, 0.86);
   }
   .ws-uc-icon {
     width: 160px;
     height: 160px;
-    filter: drop-shadow(0 0 16px rgba(255, 176, 0, 0.45));
+    filter: drop-shadow(0 0 16px rgba(252, 211, 77, 0.35));
     animation: ws-uc-float 2.4s ease-in-out infinite;
   }
   @keyframes ws-uc-float {
@@ -575,17 +600,17 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     .ws-uc-icon { animation: none; }
   }
   .ws-uc-title {
-    font-size: 14px;
-    letter-spacing: 0.3em;
-    color: #ffb000;
-    text-shadow: 0 0 10px rgba(255, 176, 0, 0.5);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: #fcd34d;
   }
   .ws-uc-body {
-    font-size: 14px;
-    color: rgba(232, 244, 255, 0.7);
+    font-size: 0.92rem;
+    color: #bad0de;
   }
   .ws-subtitle {
-    font-weight: 400;
+    font-weight: 500;
     text-transform: none;
     letter-spacing: 0.02em;
     opacity: 0.92;
@@ -595,30 +620,33 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
   .ws-copy {
     display: inline-flex;
     align-items: center;
-    gap: 0.25rem;
-    padding: 0.05rem 0.4rem;
-    font-family: 'DotGothic16', sans-serif;
+    gap: 0.3rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    font-family: var(--font-mono-hud);
     font-size: 11px;
+    font-weight: 600;
     line-height: 1.4;
     color: var(--c);
-    background: transparent;
-    border: 1px solid var(--c);
+    background: #04080e;
+    border: 1px solid color-mix(in srgb, var(--c) 55%, transparent);
     cursor: pointer;
-    transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   }
   .ws-copy:hover {
     background: var(--c);
-    color: #05060f;
-    box-shadow: 0 0 8px var(--c), 0 0 24px color-mix(in srgb, var(--c) 40%, transparent);
+    border-color: var(--c);
+    color: #04080e;
   }
   .ws-copy.is-copied {
     background: var(--c);
-    color: #05060f;
+    border-color: var(--c);
+    color: #04080e;
   }
   .ws-copy-icon { font-size: 11px; line-height: 1; }
   details[open] > .ws-summary .ws-chevron { transform: rotate(90deg); }
 
-  /* Terminal blinking cursor on the open (current) section — from the V4 CRT prototype */
+  /* Telemetry blinking cursor on the open (current) section */
   details[open] > .ws-summary h2::after {
     content: '_';
     margin-left: 0.25rem;
@@ -633,7 +661,7 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     details[open] > .ws-summary h2::after { animation: none; }
   }
 
-  /* V7 — Roadmap Spine */
+  /* Roadmap Spine */
   .ws-secs {
     position: relative;
     padding-left: 1.5rem;
@@ -645,25 +673,26 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     top: 0.7rem;
     bottom: 0.7rem;
     width: 2px;
-    background: linear-gradient(#00f0ff, #ff2e88);
-    opacity: 0.5;
+    background: linear-gradient(#5eead4, #93a8ff);
+    opacity: 0.45;
   }
   .ws-section {
     position: relative;
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.45rem;
   }
   .ws-node {
     position: absolute;
     left: -1.3rem;
-    top: 1.1rem;
-    width: 14px;
-    height: 14px;
+    top: 0.95rem;
+    width: 13px;
+    height: 13px;
+    border-radius: 3px;
     background: var(--c);
-    box-shadow: 0 0 8px var(--c);
-    border: 2px solid #05060f;
+    box-shadow: 0 0 8px color-mix(in srgb, var(--c) 55%, transparent);
+    border: 2px solid #04080e;
   }
   .ws-list {
-    border-left: 1px dashed color-mix(in srgb, var(--c) 40%, transparent);
+    border-left: 1px solid color-mix(in srgb, var(--c) 32%, transparent);
   }
   .ws-list .ws-label::before {
     content: '– ';
@@ -688,14 +717,15 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     -webkit-appearance: none;
     width: 16px;
     height: 16px;
-    border: 2px solid var(--c);
-    background: transparent;
+    border-radius: 3px;
+    border: 1.5px solid var(--c);
+    background: #04080e;
     position: relative;
     cursor: pointer;
   }
   .ws-check:checked {
     background: var(--c);
-    box-shadow: 0 0 8px var(--c);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--c) 50%, transparent);
   }
   .ws-check:checked::after {
     content: '✓';
@@ -704,23 +734,25 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: var(--font-mono-hud);
     font-size: 11px;
+    font-weight: 700;
     line-height: 1;
-    color: #05060f;
+    color: #04080e;
   }
 
-  /* Checked label dims to gray with a strike-through */
+  /* Checked label dims to muted slate with a strike-through */
   .ws-check:checked + .ws-label {
-    color: rgba(232, 244, 255, 0.4);
+    color: #728fa3;
     text-decoration: line-through;
-    text-decoration-color: rgba(232, 244, 255, 0.4);
+    text-decoration-color: rgba(114, 143, 163, 0.55);
   }
   .ws-check:checked + .ws-label::before {
     color: inherit;
     opacity: 1;
   }
 
-  /* Completed section: all items checked -> grey it out */
+  /* Completed section: all items checked -> dim it */
   .ws-section.is-complete > .ws-summary {
     opacity: 0.45;
     filter: grayscale(0.85);
@@ -730,7 +762,7 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     opacity: 0.75;
   }
   .ws-section.is-complete > .ws-summary .ws-node {
-    background: #6b7280;
+    background: #728fa3;
     box-shadow: none;
   }
   .ws-section.is-complete > .ws-summary h2::after {
@@ -739,17 +771,19 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
 
   /* Per-section "check all / clear" button */
   .ws-check-all {
-    font-family: 'Press Start 2P', monospace;
-    font-size: 8px;
-    letter-spacing: 0.1em;
+    font-family: var(--font-mono-hud);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
     color: var(--c);
-    background: transparent;
-    border: 1px solid var(--c);
-    padding: 0.4em 0.6em;
+    background: #04080e;
+    border: 1px solid color-mix(in srgb, var(--c) 45%, transparent);
+    border-radius: 3px;
+    padding: 0.3em 0.6em;
     cursor: pointer;
-    opacity: 0.4;
+    opacity: 0.55;
     white-space: nowrap;
-    transition: opacity 0.15s ease, background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+    transition: opacity 0.15s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   }
   .ws-summary:hover .ws-check-all,
   .ws-check-all:focus-visible {
@@ -757,13 +791,14 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
   }
   .ws-check-all:hover {
     background: var(--c);
-    color: #05060f;
-    box-shadow: 0 0 8px var(--c);
+    border-color: var(--c);
+    color: #04080e;
   }
   .ws-check-all.is-all {
     opacity: 1;
     background: var(--c);
-    color: #05060f;
+    border-color: var(--c);
+    color: #04080e;
   }
 </style>
 

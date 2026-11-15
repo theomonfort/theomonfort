@@ -3,17 +3,17 @@ import { escapeHtml, renderNoteHtml, slugify } from './parser.js';
 import { NoteStore } from './store.js';
 
 const ICONS = {
-  graph: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="7" r="2.5"/><circle cx="11" cy="18" r="2.5"/><path d="M8.2 7.2l7.4 0.6M7.3 8.2l2.6 7.5M16.5 9.1l-4.1 6.8"/></svg>`,
-  search: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>`,
-  plus: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M12 5v14M5 12h14"/></svg>`,
-  fit: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>`,
-  zoomIn: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M12 6v12M6 12h12"/></svg>`,
-  zoomOut: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M6 12h12"/></svg>`,
-  panelClose: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><rect x="3" y="4" width="18" height="16"/><path d="M15 4v16M9 9l3 3-3 3"/></svg>`,
-  panelOpen: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><rect x="3" y="4" width="18" height="16"/><path d="M15 4v16M12 9l-3 3 3 3"/></svg>`,
-  download: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 4v11M8 11l4 4 4-4M4 19h16"/></svg>`,
-  trash: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13"/></svg>`,
-  reset: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>`,
+  graph: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="7" r="2.5"/><circle cx="11" cy="18" r="2.5"/><path d="M8.2 7.2l7.4 0.6M7.3 8.2l2.6 7.5M16.5 9.1l-4.1 6.8"/></svg>`,
+  search: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>`,
+  plus: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>`,
+  fit: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>`,
+  zoomIn: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 6v12M6 12h12"/></svg>`,
+  zoomOut: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 12h12"/></svg>`,
+  panelClose: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16M9 9l3 3-3 3"/></svg>`,
+  panelOpen: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16M12 9l-3 3 3 3"/></svg>`,
+  download: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M8 11l4 4 4-4M4 19h16"/></svg>`,
+  trash: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13"/></svg>`,
+  reset: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>`,
 };
 
 function computeDrawerWidth() {
@@ -47,6 +47,7 @@ export async function mountZettelkasten(container, options = {}) {
     id: String(v.id || `vault-${idx + 1}`),
     label: v.label || v.title || `Vault ${idx + 1}`,
     title: v.title || v.label || 'Zettelkasten',
+    accent: v.accent || '#5eead4',
     seedNotes: v.seedNotes || null,
     loadSeedNotes: typeof v.loadSeedNotes === 'function' ? v.loadSeedNotes : null,
     apiBaseUrl: v.apiBaseUrl !== undefined ? v.apiBaseUrl : null,
@@ -139,7 +140,7 @@ export async function mountZettelkasten(container, options = {}) {
                  ${vaultConfigs
                    .map(
                      (v, idx) =>
-                       `<button type="button" role="tab" class="zk-vault-tab ${idx === activeVaultIdx ? 'is-active' : ''}" aria-selected="${idx === activeVaultIdx}" data-vault-id="${escapeHtml(v.id)}">${escapeHtml(v.label)}</button>`,
+                       `<button type="button" role="tab" class="zk-vault-tab ${idx === activeVaultIdx ? 'is-active' : ''}" aria-selected="${idx === activeVaultIdx}" data-vault-id="${escapeHtml(v.id)}" style="--vault-accent:${escapeHtml(v.accent)}">${escapeHtml(v.label)}</button>`,
                    )
                    .join('')}
                </div>`
@@ -170,7 +171,7 @@ export async function mountZettelkasten(container, options = {}) {
             type="button"
             class="zk-chip-toggle zk-color-groups-btn ${state.colorByGroup ? 'is-active' : ''}"
             aria-pressed="${state.colorByGroup}"
-            title="Toggle neon category group colors"
+            title="Toggle telemetry category group colors"
           >
             Groups
           </button>
@@ -328,6 +329,7 @@ export async function mountZettelkasten(container, options = {}) {
     onActiveChange({
       vaultId: activeVault.id,
       vaultLabel: activeVault.label,
+      vaultAccent: activeVault.accent,
       slug: state.activeSlug,
       title: note ? note.title : state.activeSlug || '',
     });

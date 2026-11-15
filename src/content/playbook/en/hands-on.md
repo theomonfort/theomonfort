@@ -9,7 +9,7 @@ accent:
   border: border-neon-cyan
   glow: hover:shadow-neon-cyan
   shadow: shadow-neon-cyan
-  hex: "#00f0ff"
+  hex: "#5eead4"
 order: 3
 category: introduction
 related: ['github-copilot', 'codespaces', 'mcp']
@@ -61,10 +61,10 @@ flowchart TB
 
   Plan --> Code --> Review --> Improve --> Operate
 
-  classDef prep fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
-  classDef dev  fill:#1a0a2e,stroke:#ff2e88,color:#ff2e88,stroke-width:2px
-  classDef rev  fill:#1a1408,stroke:#ffb000,color:#ffb000,stroke-width:2px
-  classDef ops  fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
+  classDef prep fill:#0a1a14,stroke:#86efac,color:#86efac,stroke-width:2px
+  classDef dev  fill:#11162c,stroke:#93a8ff,color:#93a8ff,stroke-width:2px
+  classDef rev  fill:#1a1408,stroke:#fcd34d,color:#fcd34d,stroke-width:2px
+  classDef ops  fill:#0b1420,stroke:#5eead4,color:#5eead4,stroke-width:2px
   class Plan prep
   class Code,Improve dev
   class Review rev

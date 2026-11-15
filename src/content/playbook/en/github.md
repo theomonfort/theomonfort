@@ -9,7 +9,7 @@ accent:
   border: border-neon-cyan
   glow: hover:shadow-neon-cyan
   shadow: shadow-neon-cyan
-  hex: "#00f0ff"
+  hex: "#5eead4"
 order: 1
 category: introduction
 related: ['copilot-chat', 'cloud-agent']
@@ -61,7 +61,7 @@ From collaborating on code to coordinating work across agents.
 <svg viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GitHub evolution from pull requests in 2008 to Projects and Agent groups in 2026" style="width:100%;height:auto;max-height:58vh;display:block;font-family:var(--font-prose),sans-serif;">
   <defs>
     <marker id="ghTimelineArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#00f0ff"/>
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#5eead4"/>
     </marker>
     <filter id="ghTimelineGlow" x="-60%" y="-60%" width="220%" height="220%">
       <feGaussianBlur stdDeviation="4.5" result="blur"/>
@@ -72,58 +72,58 @@ From collaborating on code to coordinating work across agents.
     </filter>
   </defs>
   <rect x="0" y="0" width="1100" height="480" fill="none"/>
-  <path d="M 80 430 C 260 440, 380 410, 530 330 C 680 250, 820 160, 1050 30" stroke="#0a0e27" stroke-width="14" fill="none" stroke-linecap="round"/>
-  <path d="M 80 430 C 260 440, 380 410, 530 330 C 680 250, 820 160, 1050 30" stroke="#00f0ff" stroke-width="2.5" fill="none" stroke-linecap="round" marker-end="url(#ghTimelineArrow)"/>
+  <path d="M 80 430 C 260 440, 380 410, 530 330 C 680 250, 820 160, 1050 30" stroke="#0b1420" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <path d="M 80 430 C 260 440, 380 410, 530 330 C 680 250, 820 160, 1050 30" stroke="#5eead4" stroke-width="2.5" fill="none" stroke-linecap="round" marker-end="url(#ghTimelineArrow)"/>
   <g>
-    <line x1="80" y1="422" x2="80" y2="404" stroke="#00f0ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
-    <circle cx="80" cy="430" r="7" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
-    <rect x="40" y="372" width="80" height="32" rx="16" fill="#0a0e27" stroke="#00f0ff" stroke-width="1.5"/>
-    <text x="80" y="394" text-anchor="middle" fill="#00f0ff" font-size="16" font-weight="bold">2008</text>
-    <text x="80" y="340" text-anchor="middle" fill="#e8f4ff" font-size="18" font-weight="bold">Pull requests</text>
-    <text x="90" y="362" text-anchor="middle" fill="#e8f4ff" font-size="11">Make collaboration the default.</text>
+    <line x1="80" y1="422" x2="80" y2="404" stroke="#5eead4" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
+    <circle cx="80" cy="430" r="7" fill="#0b1420" stroke="#5eead4" stroke-width="2.5"/>
+    <rect x="40" y="372" width="80" height="32" rx="16" fill="#0b1420" stroke="#5eead4" stroke-width="1.5"/>
+    <text x="80" y="394" text-anchor="middle" fill="#5eead4" font-family="'Orbitron', 'IBM Plex Mono', sans-serif" font-size="16" font-weight="bold">2008</text>
+    <text x="80" y="340" text-anchor="middle" fill="#ecf7fb" font-size="18" font-weight="bold">Pull requests</text>
+    <text x="90" y="362" text-anchor="middle" fill="#bad0de" font-size="11">Make collaboration the default.</text>
   </g>
   <g>
-    <line x1="316" y1="406" x2="316" y2="390" stroke="#00f0ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
-    <circle cx="316" cy="414" r="7" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
-    <rect x="244" y="358" width="144" height="32" rx="16" fill="#0a0e27" stroke="#00f0ff" stroke-width="1.5"/>
-    <text x="316" y="380" text-anchor="middle" fill="#00f0ff" font-size="16" font-weight="bold">2012</text>
-    <text x="316" y="325" text-anchor="middle" fill="#e8f4ff" font-size="18" font-weight="bold">GitHub Enterprise</text>
-    <text x="316" y="345" text-anchor="middle" fill="#e8f4ff" font-size="11">Bring governance to team development.</text>
+    <line x1="316" y1="406" x2="316" y2="390" stroke="#5eead4" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
+    <circle cx="316" cy="414" r="7" fill="#0b1420" stroke="#5eead4" stroke-width="2.5"/>
+    <rect x="244" y="358" width="144" height="32" rx="16" fill="#0b1420" stroke="#5eead4" stroke-width="1.5"/>
+    <text x="316" y="380" text-anchor="middle" fill="#5eead4" font-family="'Orbitron', 'IBM Plex Mono', sans-serif" font-size="16" font-weight="bold">2012</text>
+    <text x="316" y="325" text-anchor="middle" fill="#ecf7fb" font-size="18" font-weight="bold">GitHub Enterprise</text>
+    <text x="316" y="345" text-anchor="middle" fill="#bad0de" font-size="11">Bring governance to team development.</text>
   </g>
   <g>
-    <line x1="530" y1="322" x2="530" y2="302" stroke="#00f0ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
-    <circle cx="530" cy="330" r="7" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
-    <rect x="450" y="270" width="160" height="32" rx="16" fill="#0a0e27" stroke="#00f0ff" stroke-width="1.5"/>
-    <text x="530" y="292" text-anchor="middle" fill="#00f0ff" font-size="16" font-weight="bold">2019</text>
-    <text x="530" y="237" text-anchor="middle" fill="#e8f4ff" font-size="18" font-weight="bold">Actions / GHAS</text>
-    <text x="530" y="257" text-anchor="middle" fill="#e8f4ff" font-size="11">Automate delivery and security.</text>
+    <line x1="530" y1="322" x2="530" y2="302" stroke="#5eead4" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
+    <circle cx="530" cy="330" r="7" fill="#0b1420" stroke="#5eead4" stroke-width="2.5"/>
+    <rect x="450" y="270" width="160" height="32" rx="16" fill="#0b1420" stroke="#5eead4" stroke-width="1.5"/>
+    <text x="530" y="292" text-anchor="middle" fill="#5eead4" font-family="'Orbitron', 'IBM Plex Mono', sans-serif" font-size="16" font-weight="bold">2019</text>
+    <text x="530" y="237" text-anchor="middle" fill="#ecf7fb" font-size="18" font-weight="bold">Actions / GHAS</text>
+    <text x="530" y="257" text-anchor="middle" fill="#bad0de" font-size="11">Automate delivery and security.</text>
   </g>
   <g>
-    <line x1="760" y1="207" x2="760" y2="240" stroke="#00f0ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
-    <circle cx="760" cy="199" r="7" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
-    <rect x="688" y="240" width="144" height="32" rx="16" fill="#0a0e27" stroke="#00f0ff" stroke-width="1.5"/>
-    <text x="760" y="262" text-anchor="middle" fill="#00f0ff" font-size="16" font-weight="bold">2021</text>
-    <text x="760" y="290" text-anchor="middle" fill="#e8f4ff" font-size="18" font-weight="bold">GitHub Copilot</text>
-    <text x="760" y="312" text-anchor="middle" fill="#e8f4ff" font-size="11">Build with an AI coding assistant.</text>
+    <line x1="760" y1="207" x2="760" y2="240" stroke="#5eead4" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
+    <circle cx="760" cy="199" r="7" fill="#0b1420" stroke="#5eead4" stroke-width="2.5"/>
+    <rect x="688" y="240" width="144" height="32" rx="16" fill="#0b1420" stroke="#5eead4" stroke-width="1.5"/>
+    <text x="760" y="262" text-anchor="middle" fill="#5eead4" font-family="'Orbitron', 'IBM Plex Mono', sans-serif" font-size="16" font-weight="bold">2021</text>
+    <text x="760" y="290" text-anchor="middle" fill="#ecf7fb" font-size="18" font-weight="bold">GitHub Copilot</text>
+    <text x="760" y="312" text-anchor="middle" fill="#bad0de" font-size="11">Build with an AI coding assistant.</text>
   </g>
   <g transform="translate(-40 22)">
-    <line x1="875" y1="124" x2="875" y2="104" stroke="#00f0ff" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
-    <circle cx="875" cy="132" r="7" fill="#0a0e27" stroke="#00f0ff" stroke-width="2.5"/>
-    <rect x="815" y="72" width="120" height="32" rx="16" fill="#0a0e27" stroke="#00f0ff" stroke-width="1.5"/>
-    <text x="875" y="94" text-anchor="middle" fill="#00f0ff" font-size="16" font-weight="bold">2025</text>
-    <text x="875" y="39" text-anchor="middle" fill="#e8f4ff" font-size="18" font-weight="bold">Agent HQ</text>
-    <text x="875" y="59" text-anchor="middle" fill="#e8f4ff" font-size="11">Delegate tasks and track sessions.</text>
+    <line x1="875" y1="124" x2="875" y2="104" stroke="#5eead4" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/>
+    <circle cx="875" cy="132" r="7" fill="#0b1420" stroke="#5eead4" stroke-width="2.5"/>
+    <rect x="815" y="72" width="120" height="32" rx="16" fill="#0b1420" stroke="#5eead4" stroke-width="1.5"/>
+    <text x="875" y="94" text-anchor="middle" fill="#5eead4" font-family="'Orbitron', 'IBM Plex Mono', sans-serif" font-size="16" font-weight="bold">2025</text>
+    <text x="875" y="39" text-anchor="middle" fill="#ecf7fb" font-size="18" font-weight="bold">Agent HQ</text>
+    <text x="875" y="59" text-anchor="middle" fill="#bad0de" font-size="11">Delegate tasks and track sessions.</text>
   </g>
   <g>
-    <line x1="984" y1="80" x2="984" y2="118" stroke="#00f0ff" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.85"/>
+    <line x1="984" y1="80" x2="984" y2="118" stroke="#5eead4" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.85"/>
     <g filter="url(#ghTimelineGlow)">
-      <circle cx="984" cy="68" r="11" fill="#00f0ff"/>
-      <circle cx="984" cy="68" r="4" fill="#05060f"/>
+      <circle cx="984" cy="68" r="11" fill="#5eead4"/>
+      <circle cx="984" cy="68" r="4" fill="#04080e"/>
     </g>
-    <rect x="924" y="118" width="120" height="38" rx="19" fill="#00f0ff" stroke="#00f0ff" stroke-width="2"/>
-    <text x="984" y="144" text-anchor="middle" fill="#05060f" font-size="18" font-weight="bold">2026</text>
-    <text x="984" y="181" text-anchor="middle" fill="#00f0ff" font-size="20" font-weight="bold"><tspan x="984">Projects /</tspan><tspan x="984" dy="24">Agent groups</tspan></text>
-    <text x="984" y="227" text-anchor="middle" fill="#e8f4ff" font-size="11"><tspan x="984">One goal. Shared context.</tspan><tspan x="984" dy="18">Parallel work.</tspan></text>
+    <rect x="924" y="118" width="120" height="38" rx="19" fill="#5eead4" stroke="#5eead4" stroke-width="2"/>
+    <text x="984" y="144" text-anchor="middle" fill="#04080e" font-family="'Orbitron', 'IBM Plex Mono', sans-serif" font-size="18" font-weight="bold">2026</text>
+    <text x="984" y="181" text-anchor="middle" fill="#5eead4" font-size="20" font-weight="bold"><tspan x="984">Projects /</tspan><tspan x="984" dy="24">Agent groups</tspan></text>
+    <text x="984" y="227" text-anchor="middle" fill="#bad0de" font-size="11"><tspan x="984">One goal. Shared context.</tspan><tspan x="984" dy="18">Parallel work.</tspan></text>
   </g>
 </svg>
 </figure>
@@ -203,47 +203,47 @@ From collaborating on code to coordinating work across agents.
 
 <figure class="gh-octoverse">
 <style>
-.prose-akq .gh-octoverse{margin:0;font-family:var(--font-prose),sans-serif;font-size:clamp(16px,1.35vw,20px);line-height:1.45;color:#e8f4ff}
+.prose-akq .gh-octoverse{margin:0;font-family:var(--font-prose),sans-serif;font-size:clamp(16px,1.35vw,20px);line-height:1.45;color:#ecf7fb}
 .prose-akq .gh-octoverse p{margin:0}
-.prose-akq .gh-octo-top{display:flex;justify-content:space-between;gap:1em;padding-bottom:.6em;color:#00f0ff;font-size:.75em;letter-spacing:.1em}
-.prose-akq .gh-octo-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:2px solid #00f0ff;background:#0a0e27}
+.prose-akq .gh-octo-top{display:flex;justify-content:space-between;gap:1em;padding-bottom:.6em;color:#5eead4;font-family:'Orbitron','IBM Plex Mono','IBM Plex Sans JP',sans-serif;font-size:.75em;letter-spacing:.1em}
+.prose-akq .gh-octo-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:2px solid #5eead4;background:#0b1420}
 .prose-akq .gh-octo-metric{padding:.75em 1.15em}
-.prose-akq .gh-octo-metric+.gh-octo-metric{border-left:1px dashed #00f0ff55}
-.prose-akq .gh-octo-number{display:block;color:#00f0ff;font-size:3.3em;font-weight:700;letter-spacing:-.06em;line-height:1.1;font-variant-numeric:tabular-nums}
+.prose-akq .gh-octo-metric+.gh-octo-metric{border-left:1px dashed rgba(94,234,212,.35)}
+.prose-akq .gh-octo-number{display:block;color:#5eead4;font-family:'Orbitron','IBM Plex Mono','IBM Plex Sans JP',sans-serif;font-size:3.3em;font-weight:700;letter-spacing:-.04em;line-height:1.1;font-variant-numeric:tabular-nums}
 .prose-akq .gh-octo-label{display:block;margin-top:.35em;font-size:.92em}
-.prose-akq .gh-octo-period{display:block;color:#a8bed2;font-size:.76em;margin-top:.2em}
+.prose-akq .gh-octo-period{display:block;color:#bad0de;font-size:.76em;margin-top:.2em}
 .prose-akq .gh-octo-body{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:1.7em;padding:1em 0}
 .prose-akq .gh-octo-chart-title{display:flex;justify-content:space-between;gap:1em;font-size:.8em;margin-bottom:.6em}
-.prose-akq .gh-octo-chart-title span{color:#a8bed2}
+.prose-akq .gh-octo-chart-title span{color:#bad0de}
 .prose-akq .gh-octo-row{display:grid;grid-template-columns:8em minmax(0,1fr) 4em;align-items:center;gap:.65em;margin:.55em 0;font-size:.85em}
-.prose-akq .gh-octo-track{position:relative;height:1.4em;background:#e8f4ff09}
-.prose-akq .gh-octo-track::after{content:"";position:absolute;inset:0 auto 0 28.5714%;border-left:1px dashed #e8f4ff99}
-.prose-akq .gh-octo-bar{display:flex;align-items:center;justify-content:flex-end;height:100%;width:var(--bar);background:var(--bar-color);color:#05060f;padding-right:.3em;font-size:.85em;font-weight:700}
+.prose-akq .gh-octo-track{position:relative;height:1.45em;background:#04080e;border:1px solid rgba(186,208,222,.16);border-radius:3px}
+.prose-akq .gh-octo-track::after{content:"";position:absolute;inset:0 auto 0 28.5714%;border-left:1px dashed rgba(236,247,251,.6)}
+.prose-akq .gh-octo-bar{display:flex;align-items:center;justify-content:flex-end;height:100%;width:var(--bar);background:linear-gradient(90deg,color-mix(in srgb,var(--bar-color) 78%,#0b1420),var(--bar-color));border-radius:3px;box-shadow:0 0 12px color-mix(in srgb,var(--bar-color) 26%,transparent);color:#04080e;text-shadow:none;padding-right:.45em;font-family:'IBM Plex Mono','IBM Plex Sans JP',var(--font-prose),monospace;font-size:.85em;font-weight:700}
 .prose-akq .gh-octo-total{text-align:right;font-size:1.15em;font-weight:700;font-variant-numeric:tabular-nums}
-.prose-akq .gh-octo-baseline{font-size:.7em;color:#a8bed2}
-.prose-akq .gh-octo-signals{display:grid;align-content:center;gap:1em;padding-left:1.4em;border-left:1px dashed #e8f4ff40}
+.prose-akq .gh-octo-baseline{font-size:.7em;color:#bad0de}
+.prose-akq .gh-octo-signals{display:grid;align-content:center;gap:1em;padding-left:1.4em;border-left:1px dashed rgba(236,247,251,.25)}
 .prose-akq .gh-octo-signal{display:grid;grid-template-columns:6em minmax(0,1fr);align-items:center;gap:.6em}
-.prose-akq .gh-octo-signal strong{font-size:1.65em;line-height:1.15;color:#ffb000}
+.prose-akq .gh-octo-signal strong{font-family:'Orbitron','IBM Plex Mono','IBM Plex Sans JP',sans-serif;font-size:1.65em;line-height:1.15;color:#fcd34d}
 .prose-akq .gh-octo-signal span{font-size:.78em}
-.prose-akq .gh-octo-signal small{display:block;color:#a8bed2;font-size:.9em;margin-top:.2em}
-.prose-akq .gh-octo-takeaway{display:flex;gap:1em;align-items:center;border-top:1px solid #ffb000;padding:.75em 0 .45em}
-.prose-akq .gh-octo-takeaway span{color:#ffb000;font-size:.65em;letter-spacing:.08em}
+.prose-akq .gh-octo-signal small{display:block;color:#bad0de;font-size:.9em;margin-top:.2em}
+.prose-akq .gh-octo-takeaway{display:flex;gap:1em;align-items:center;border-top:1px solid #fcd34d;padding:.75em 0 .45em}
+.prose-akq .gh-octo-takeaway span{color:#fcd34d;font-size:.65em;letter-spacing:.08em}
 .prose-akq .gh-octo-takeaway strong{font-size:1.05em;line-height:1.4}
-.prose-akq .gh-octoverse figcaption{font-size:.66em;line-height:1.5;color:#a8bed2;margin-top:.5em}
-@media(max-width:700px){.prose-akq .gh-octo-metric{padding:.75em .5em}.prose-akq .gh-octo-number{font-size:2.4em}.prose-akq .gh-octo-body{grid-template-columns:1fr;gap:1em}.prose-akq .gh-octo-signals{padding:1em 0 0;border-left:0;border-top:1px dashed #e8f4ff40;grid-template-columns:1fr 1fr}.prose-akq .gh-octo-signal{grid-template-columns:1fr;gap:.3em}.prose-akq .gh-octo-top{letter-spacing:0}.prose-akq .gh-octo-takeaway{align-items:flex-start}}
+.prose-akq .gh-octoverse figcaption{font-size:.66em;line-height:1.5;color:#bad0de;margin-top:.5em}
+@media(max-width:700px){.prose-akq .gh-octo-metric{padding:.75em .5em}.prose-akq .gh-octo-number{font-size:2.4em}.prose-akq .gh-octo-body{grid-template-columns:1fr;gap:1em}.prose-akq .gh-octo-signals{padding:1em 0 0;border-left:0;border-top:1px dashed rgba(236,247,251,.25);grid-template-columns:1fr 1fr}.prose-akq .gh-octo-signal{grid-template-columns:1fr;gap:.3em}.prose-akq .gh-octo-top{letter-spacing:0}.prose-akq .gh-octo-takeaway{align-items:flex-start}}
 .prose-akq .gh-growth{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.2em 0;font-family:var(--font-prose),sans-serif}
-.prose-akq .gh-growth svg{display:block;width:100%;height:auto;color:#9bbc0f;font-family:inherit}
-.prose-akq .gh-growth .gh-frame{fill:#0a0e27;stroke:currentColor;stroke-width:2}
+.prose-akq .gh-growth svg{display:block;width:100%;height:auto;color:#86efac;font-family:inherit}
+.prose-akq .gh-growth .gh-frame{fill:#0b1420;stroke:currentColor;stroke-width:2}
 .prose-akq .gh-growth .gh-corners{fill:none;stroke:currentColor;stroke-width:2}
-.prose-akq .gh-growth .gh-grid{fill:none;stroke:#2a3050;stroke-width:1;stroke-dasharray:4 4}
-.prose-akq .gh-growth text{fill:#e8f4ff;text-anchor:middle;font-size:20px}
+.prose-akq .gh-growth .gh-grid{fill:none;stroke:#1e3148;stroke-width:1;stroke-dasharray:4 4}
+.prose-akq .gh-growth text{fill:#ecf7fb;text-anchor:middle;font-size:20px}
 .prose-akq .gh-growth .gh-axis{font-size:14px}
 .prose-akq .gh-growth .gh-label{fill:currentColor;font-size:18px;font-weight:700}
-.prose-akq .gh-growth .gh-peak{fill:currentColor;font-size:30px;font-weight:700}
+.prose-akq .gh-growth .gh-peak{fill:currentColor;font-family:'Orbitron','IBM Plex Mono','IBM Plex Sans JP',sans-serif;font-size:30px;font-weight:700}
 .prose-akq .gh-growth .gh-line{fill:none;stroke:currentColor;stroke-width:3}
-.prose-akq .gh-growth .gh-point{fill:#0a0e27;stroke:currentColor;stroke-width:3}
+.prose-akq .gh-growth .gh-point{fill:#0b1420;stroke:currentColor;stroke-width:3}
 .prose-akq .gh-growth .gh-glow{filter:drop-shadow(0 0 5px currentColor)}
-.prose-akq .gh-growth figcaption{grid-column:1/-1;font-size:.72em;line-height:1.5;color:#e8f4ff}
+.prose-akq .gh-growth figcaption{grid-column:1/-1;font-size:.72em;line-height:1.5;color:#bad0de}
 @media(max-width:700px){.prose-akq .gh-growth{grid-template-columns:1fr}}
 @media(min-width:701px) and (max-height:800px){body.present-mode .prose-akq .gh-growth svg{max-height:280px}}
 </style>
@@ -256,10 +256,10 @@ From collaborating on code to coordinating work across agents.
 <div class="gh-octo-body">
 <div>
 <div class="gh-octo-chart-title"><strong>ANNUAL ACTIVITY</strong><span>2026 totals / growth vs. 2025</span></div>
-<div class="gh-octo-row"><span>Pushes</span><div class="gh-octo-track"><span class="gh-octo-bar" style="--bar:76.33%;--bar-color:#ffb000">2.7×</span></div><strong class="gh-octo-total">17.9B</strong></div>
-<div class="gh-octo-row"><span>Commits</span><div class="gh-octo-track"><span class="gh-octo-bar" style="--bar:75.97%;--bar-color:#ff2e88">2.7×</span></div><strong class="gh-octo-total">34.3B</strong></div>
-<div class="gh-octo-row"><span>Actions jobs</span><div class="gh-octo-track"><span class="gh-octo-bar" style="--bar:92.65%;--bar-color:#00f0ff">3.2×</span></div><strong class="gh-octo-total">45.4B</strong></div>
-<div class="gh-octo-row"><span>Merged PRs</span><div class="gh-octo-track"><span class="gh-octo-bar" style="--bar:69.04%;--bar-color:#9bbc0f">2.4×</span></div><strong class="gh-octo-total">1.3B</strong></div>
+<div class="gh-octo-row"><span>Pushes</span><div class="gh-octo-track"><span class="gh-octo-bar" style="--bar:76.33%;--bar-color:#fcd34d">2.7×</span></div><strong class="gh-octo-total">17.9B</strong></div>
+<div class="gh-octo-row"><span>Commits</span><div class="gh-octo-track"><span class="gh-octo-bar" style="--bar:75.97%;--bar-color:#93a8ff">2.7×</span></div><strong class="gh-octo-total">34.3B</strong></div>
+<div class="gh-octo-row"><span>Actions jobs</span><div class="gh-octo-track"><span class="gh-octo-bar" style="--bar:92.65%;--bar-color:#5eead4">3.2×</span></div><strong class="gh-octo-total">45.4B</strong></div>
+<div class="gh-octo-row"><span>Merged PRs</span><div class="gh-octo-track"><span class="gh-octo-bar" style="--bar:69.04%;--bar-color:#86efac">2.4×</span></div><strong class="gh-octo-total">1.3B</strong></div>
 <p class="gh-octo-baseline">Dashed line: 2025 = 1×. Shared scale: 0–3.5×. B = billion.</p>
 </div>
 <div class="gh-octo-signals">
@@ -290,29 +290,29 @@ More software is being built every month.
 <desc id="gh-monthly-prs-desc">Monthly growth from 2023 to 2026, reproduced from the GitHub Universe 2026 keynote chart. Merged pull requests rise sharply in 2026, reaching 220 million per month.</desc>
 <rect class="gh-frame" x="4" y="4" width="412" height="352"/>
 <text class="gh-peak" x="26" y="52">220M</text><text class="gh-label" x="26" y="82">MERGED PRs / MONTH</text>
-<path class="gh-grid" d="M 35 133.18 H 343 M 35 224.09 H 343"/><path d="M 35 315 H 343 V 105" fill="none" stroke="#2a3050" stroke-width="2"/>
+<path class="gh-grid" d="M 35 133.18 H 343 M 35 224.09 H 343"/><path d="M 35 315 H 343 V 105" fill="none" stroke="#1e3148" stroke-width="2"/>
 <text class="gh-scale" x="350" y="133.18">200M</text><text class="gh-scale" x="350" y="224.09">100M</text><text class="gh-scale" x="350" y="315">0</text>
 <polyline class="gh-line" points="35,289.4 42.5,288.4 50,289.2 57.5,289.7 65,290.6 72.5,289.3 80,288.3 87.5,288.0 95,289.1 102.5,289.3 110,288.0 117.5,285.9 125,285.8 132.5,286.3 140,286.2 147.5,284.4 155,281.9 162.5,281.8 170,281.8 177.5,280.5 185,278.6 192.5,275.0 200,273.7 207.5,273.3 215,272.1 222.5,268.1 230,263.6 237.5,260.5 245,259.3 252.5,257.1 260,254.0 267.5,247.1 275,244.1 282.5,231.8 290,221.6 297.5,217.9 305,205.3 312.5,190.6 320,173.9 327.5,158.0 335,115.0"/>
 <circle class="gh-point gh-glow" cx="335" cy="115" r="6"/>
 <text class="gh-axis" x="35" y="340">2023</text><text class="gh-axis" x="120" y="340">2024</text><text class="gh-axis" x="205" y="340">2025</text><text class="gh-axis" x="290" y="340">2026</text>
 </svg>
-<svg viewBox="0 0 420 360" role="img" aria-labelledby="gh-monthly-commits-title gh-monthly-commits-desc" style="color:#ff2e88">
+<svg viewBox="0 0 420 360" role="img" aria-labelledby="gh-monthly-commits-title gh-monthly-commits-desc" style="color:#93a8ff">
 <title id="gh-monthly-commits-title">7.38 billion commits per month</title>
 <desc id="gh-monthly-commits-desc">Monthly growth from 2023 to 2026, reproduced from the GitHub Universe 2026 keynote chart. Commits accelerate sharply in 2026, reaching 7.38 billion per month.</desc>
 <rect class="gh-frame" x="4" y="4" width="412" height="352"/>
 <text class="gh-peak" x="26" y="52">7.38B</text><text class="gh-label" x="26" y="82">COMMITS / MONTH</text>
-<path class="gh-grid" d="M 35 152.40 H 343 M 35 206.60 H 343 M 35 260.80 H 343"/><path d="M 35 315 H 343 V 105" fill="none" stroke="#2a3050" stroke-width="2"/>
+<path class="gh-grid" d="M 35 152.40 H 343 M 35 206.60 H 343 M 35 260.80 H 343"/><path d="M 35 315 H 343 V 105" fill="none" stroke="#1e3148" stroke-width="2"/>
 <text class="gh-scale" x="350" y="152.40">6B</text><text class="gh-scale" x="350" y="206.60">4B</text><text class="gh-scale" x="350" y="260.80">2B</text><text class="gh-scale" x="350" y="315">0</text>
 <polyline class="gh-line" points="35,302.8 42.5,302.5 50,302.7 57.5,303.2 65,303.7 72.5,302.8 80,302.5 87.5,302.5 95,303.0 102.5,302.9 110,302.3 117.5,301.7 125,301.9 132.5,301.6 140,301.5 147.5,300.4 155,299.8 162.5,299.1 170,299.1 177.5,298.5 185,297.0 192.5,295.6 200,295.0 207.5,294.4 215,291.6 222.5,288.2 230,287.0 237.5,285.3 245,282.5 252.5,279.4 260,276.9 267.5,274.1 275,271.2 282.5,268.4 290,263.7 297.5,258.4 305,253.1 312.5,247.5 320,236.9 327.5,188.5 335,115.0"/>
 <circle class="gh-point gh-glow" cx="335" cy="115" r="6"/>
 <text class="gh-axis" x="35" y="340">2023</text><text class="gh-axis" x="120" y="340">2024</text><text class="gh-axis" x="205" y="340">2025</text><text class="gh-axis" x="290" y="340">2026</text>
 </svg>
-<svg viewBox="0 0 420 360" role="img" aria-labelledby="gh-monthly-repos-title gh-monthly-repos-desc" style="color:#ffb000">
+<svg viewBox="0 0 420 360" role="img" aria-labelledby="gh-monthly-repos-title gh-monthly-repos-desc" style="color:#fcd34d">
 <title id="gh-monthly-repos-title">30.3 million new repositories per month</title>
 <desc id="gh-monthly-repos-desc">Monthly growth from 2023 to 2026, reproduced from the GitHub Universe 2026 keynote chart. New repositories rise sharply in 2026, reaching 30.3 million per month.</desc>
 <rect class="gh-frame" x="4" y="4" width="412" height="352"/>
 <text class="gh-peak" x="26" y="52">30.3M</text><text class="gh-label" x="26" y="82">NEW REPOSITORIES / MONTH</text>
-<path class="gh-grid" d="M 35 116.98 H 343 M 35 182.99 H 343 M 35 248.99 H 343"/><path d="M 35 315 H 343 V 105" fill="none" stroke="#2a3050" stroke-width="2"/>
+<path class="gh-grid" d="M 35 116.98 H 343 M 35 182.99 H 343 M 35 248.99 H 343"/><path d="M 35 315 H 343 V 105" fill="none" stroke="#1e3148" stroke-width="2"/>
 <text class="gh-scale" x="350" y="116.98">30M</text><text class="gh-scale" x="350" y="182.99">20M</text><text class="gh-scale" x="350" y="248.99">10M</text><text class="gh-scale" x="350" y="315">0</text>
 <polyline class="gh-line" points="35,281.7 42.5,279.6 50,281.4 57.5,284.6 65,283.8 72.5,280.0 80,278.5 87.5,280.5 95,282.5 102.5,281.2 110,277.5 117.5,275.7 125,277.4 132.5,279.0 140,276.9 147.5,272.0 155,270.2 162.5,271.3 170,272.3 177.5,270.0 185,265.6 192.5,261.4 200,261.5 207.5,262.1 215,259.8 222.5,252.9 230,246.8 237.5,245.0 245,244.9 252.5,242.8 260,235.0 267.5,226.0 275,221.1 282.5,220.0 290,217.5 297.5,209.4 305,195.9 312.5,184.2 320,172.6 327.5,164.3 335,115.0"/>
 <circle class="gh-point gh-glow" cx="335" cy="115" r="6"/>
@@ -328,15 +328,15 @@ More software is being built every month.
 .prose-akq .gh-investment{max-width:60rem;margin:0 auto;text-align:center;font-family:var(--font-prose),sans-serif}
 .prose-akq h2:has(+ .gh-investment){width:fit-content;margin-inline:auto;text-align:center}
 .prose-akq .gh-investment .gh-invest-lead{margin:0 auto 1.4em;max-width:38em;text-wrap:balance}
-.prose-akq .gh-invest-kicker{color:#a8bed2;font-size:.65em;letter-spacing:.12em;margin:0 0 .6em}
-.prose-akq .gh-invest-resources{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:1.1em 0;border-block:1px solid #00f0ff;background:#0a0e2799}
+.prose-akq .gh-invest-kicker{color:#bad0de;font-size:.65em;letter-spacing:.12em;margin:0 0 .6em}
+.prose-akq .gh-invest-resources{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:1.1em 0;border-block:1px solid #5eead4;background:rgba(11,20,32,.82)}
 .prose-akq .gh-invest-resource{padding:.35em .6em}
-.prose-akq .gh-invest-resource+.gh-invest-resource{border-left:1px dashed #00f0ff55}
-.prose-akq .gh-invest-resource strong{display:block;color:#00f0ff;font-size:clamp(1.7rem,3.8vw,3.6rem);line-height:1.2;letter-spacing:-.04em;white-space:nowrap}
+.prose-akq .gh-invest-resource+.gh-invest-resource{border-left:1px dashed rgba(94,234,212,.35)}
+.prose-akq .gh-invest-resource strong{display:block;color:#5eead4;font-family:'Orbitron','IBM Plex Mono','IBM Plex Sans JP',sans-serif;font-size:clamp(1.7rem,3.8vw,3.6rem);line-height:1.2;letter-spacing:-.04em;white-space:nowrap}
 .prose-akq .gh-invest-resource span{display:block;margin-top:.5em;font-size:.8em}
 .prose-akq .gh-investment .gh-invest-test{margin:1.5em auto 0;max-width:44em;font-size:.75em;line-height:1.65;text-wrap:balance}
-.prose-akq .gh-invest-test strong{color:#ffb000}
-@media(max-width:600px){.prose-akq .gh-invest-resources{grid-template-columns:1fr;padding:0 1em}.prose-akq .gh-invest-resource{padding:1em 0}.prose-akq .gh-invest-resource+.gh-invest-resource{border-left:0;border-top:1px dashed #00f0ff55}}
+.prose-akq .gh-invest-test strong{color:#fcd34d}
+@media(max-width:600px){.prose-akq .gh-invest-resources{grid-template-columns:1fr;padding:0 1em}.prose-akq .gh-invest-resource{padding:1em 0}.prose-akq .gh-invest-resource+.gh-invest-resource{border-left:0;border-top:1px dashed rgba(94,234,212,.35)}}
 </style>
 <p class="gh-invest-lead">GitHub is <strong>investing heavily</strong> in the infrastructure behind AI development.</p>
 <p class="gh-invest-kicker">CAPACITY ADDED IN 2026</p>
@@ -361,11 +361,11 @@ More software is being built every month.
 <svg class="gh-recognition-chart" viewBox="0 0 360 326" role="img" aria-labelledby="recognition-chart-title recognition-chart-desc" xmlns="http://www.w3.org/2000/svg">
 <title id="recognition-chart-title">Magic Quadrant for Enterprise AI Coding Agents, 2026</title>
 <desc id="recognition-chart-desc">Vision increases rightward; execution increases upward. GitHub is highest in execution. Numbers map to the adjacent vendor key. All twelve positions are retained from the original slide.</desc>
-<rect x="35" y="35" width="145" height="112.5" fill="#1a0e1f"/><rect x="180" y="35" width="145" height="112.5" fill="#0a1a2e"/><rect x="35" y="147.5" width="145" height="112.5" fill="#0f0a1f"/><rect x="180" y="147.5" width="145" height="112.5" fill="#0a1f1a"/>
-<rect x="35" y="35" width="290" height="225" fill="none" stroke="#00f0ff"/><path d="M180 35V260M35 147.5H325" stroke="#e8f4ff44" stroke-dasharray="4 4"/>
-<g font-size="17" text-anchor="middle"><text x="107" y="24" fill="#ff7ab2">Challengers</text><text x="252" y="24" fill="#00f0ff">Leaders</text><text x="107" y="279" fill="#c9a5ff">Niche Players</text><text x="252" y="279" fill="#9bbc0f">Visionaries</text><text x="180" y="310" fill="#e8f4ff">Completeness of Vision →</text><text transform="translate(21 150) rotate(-90)" fill="#e8f4ff">Ability to Execute →</text></g>
-<g fill="#bacddd" stroke="#bacddd" font-size="17" text-anchor="middle">
-<g data-vendor="GitHub" data-x="0.65" data-y="0.77" fill="#ffb000" stroke="#ffb000"><path d="M223.5 86.75L322 58" fill="none"/><circle cx="223.5" cy="86.75" r="4"/><text x="337" y="64" stroke="none">1</text></g>
+<rect x="35" y="35" width="145" height="112.5" fill="#0d1628"/><rect x="180" y="35" width="145" height="112.5" fill="#0b1c26"/><rect x="35" y="147.5" width="145" height="112.5" fill="#08101a"/><rect x="180" y="147.5" width="145" height="112.5" fill="#0b1d1a"/>
+<rect x="35" y="35" width="290" height="225" fill="none" stroke="#5eead4"/><path d="M180 35V260M35 147.5H325" stroke="rgba(236,247,251,0.25)" stroke-dasharray="4 4"/>
+<g font-size="17" text-anchor="middle"><text x="107" y="24" fill="#93a8ff">Challengers</text><text x="252" y="24" fill="#5eead4">Leaders</text><text x="107" y="279" fill="#bad0de">Niche Players</text><text x="252" y="279" fill="#86efac">Visionaries</text><text x="180" y="310" fill="#ecf7fb">Completeness of Vision →</text><text transform="translate(21 150) rotate(-90)" fill="#ecf7fb">Ability to Execute →</text></g>
+<g fill="#bad0de" stroke="#bad0de" font-size="17" text-anchor="middle">
+<g data-vendor="GitHub" data-x="0.65" data-y="0.77" fill="#fcd34d" stroke="#fcd34d"><path d="M223.5 86.75L322 58" fill="none"/><circle cx="223.5" cy="86.75" r="4"/><text x="337" y="64" stroke="none">1</text></g>
 <g data-vendor="Cursor" data-x="0.71" data-y="0.75"><path d="M240.9 91.25L322 86" fill="none"/><circle cx="240.9" cy="91.25" r="3"/><text x="337" y="92" stroke="none">2</text></g>
 <g data-vendor="Anthropic" data-x="0.66" data-y="0.73"><path d="M226.4 95.75L322 114" fill="none"/><circle cx="226.4" cy="95.75" r="3"/><text x="337" y="120" stroke="none">3</text></g>
 <g data-vendor="OpenAI" data-x="0.71" data-y="0.71"><path d="M240.9 100.25L322 142" fill="none"/><circle cx="240.9" cy="100.25" r="3"/><text x="337" y="148" stroke="none">4</text></g>
@@ -395,30 +395,30 @@ More software is being built every month.
 .prose-akq h2 .gh-team-links{display:inline-flex;align-items:center;gap:8px;vertical-align:middle;margin-left:12px}
 .prose-akq h2 .gh-team-links .h2-doc{margin-left:0;font-size:14px}
 .prose-akq .gh-work-eras{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.6em;margin-bottom:1.6em}
-.prose-akq .gh-work-era{padding:.75em;border-top:2px solid #e8f4ff40;background:#0a0e27}
-.prose-akq .gh-work-era span{display:block;color:#a8bed2;font-size:.7em;margin-bottom:.3em}
-.prose-akq .gh-work-era strong{color:#e8f4ff;font-size:.85em}
-.prose-akq .gh-work-era:last-child{border-color:#ff2e88}
-.prose-akq .gh-work-era:last-child strong{color:#ff2e88}
+.prose-akq .gh-work-era{padding:.75em;border-top:2px solid rgba(236,247,251,.25);background:#0b1420}
+.prose-akq .gh-work-era span{display:block;color:#bad0de;font-size:.7em;margin-bottom:.3em}
+.prose-akq .gh-work-era strong{color:#ecf7fb;font-size:.85em}
+.prose-akq .gh-work-era:last-child{border-color:#93a8ff}
+.prose-akq .gh-work-era:last-child strong{color:#93a8ff}
 .prose-akq .gh-team-flow{display:grid;grid-template-columns:1fr 1.8em 2.5fr 1.8em 1fr;align-items:center}
 .prose-akq .gh-team-person,.prose-akq .gh-team-tools{text-align:center;padding:.5em;line-height:1.5}
-.prose-akq .gh-team-person strong,.prose-akq .gh-team-tools strong{display:block;color:#e8f4ff;font-size:1.1em}
-.prose-akq .gh-team-person span{display:block;color:#00f0ff;font-size:.7em;letter-spacing:.15em;margin-bottom:.5em}
+.prose-akq .gh-team-person strong,.prose-akq .gh-team-tools strong{display:block;color:#ecf7fb;font-size:1.1em}
+.prose-akq .gh-team-person span{display:block;color:#5eead4;font-size:.7em;letter-spacing:.15em;margin-bottom:.5em}
 .prose-akq .gh-team-person p,.prose-akq .gh-team-tools p{font-size:.8em;margin-top:.4em}
-.prose-akq .gh-team-tools small{display:block;color:#ffb000;font-size:.65em;margin-top:.5em}
-.prose-akq .gh-team-arrow{text-align:center;color:#ff2e88;font-size:1.5em}
-.prose-akq .gh-team-project{padding:1em;border:1px solid #ff2e88;background:#0a0e27}
-.prose-akq .gh-team-context{color:#a8bed2;font-size:.65em;letter-spacing:.08em;text-align:center;margin-bottom:1em}
-.prose-akq .gh-team-coordinator{border:1px solid #ff2e88;padding:.65em .5em;text-align:center;color:#ff2e88;font-weight:700}
+.prose-akq .gh-team-tools small{display:block;color:#fcd34d;font-size:.65em;margin-top:.5em}
+.prose-akq .gh-team-arrow{text-align:center;color:#93a8ff;font-size:1.5em}
+.prose-akq .gh-team-project{padding:1em;border:1px solid #93a8ff;background:#0b1420}
+.prose-akq .gh-team-context{color:#bad0de;font-size:.65em;letter-spacing:.08em;text-align:center;margin-bottom:1em}
+.prose-akq .gh-team-coordinator{border:1px solid #93a8ff;padding:.65em .5em;text-align:center;color:#93a8ff;font-weight:700}
 .prose-akq .gh-team-roles{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.45em;padding-top:1.5em}
-.prose-akq .gh-team-roles::before{content:"";position:absolute;top:.75em;left:16.66%;right:16.66%;height:1px;background:#ff2e8888}
-.prose-akq .gh-team-coordinator::after{content:"";display:block;width:1px;height:.75em;background:#ff2e8888;position:absolute;left:50%;bottom:-.75em}
+.prose-akq .gh-team-roles::before{content:"";position:absolute;top:.75em;left:16.66%;right:16.66%;height:1px;background:rgba(147,168,255,.55)}
+.prose-akq .gh-team-coordinator::after{content:"";display:block;width:1px;height:.75em;background:rgba(147,168,255,.55);position:absolute;left:50%;bottom:-.75em}
 .prose-akq .gh-team-coordinator{position:relative}
-.prose-akq .gh-team-roles span{position:relative;border:1px solid #ff2e8855;padding:.6em .2em;text-align:center;font-size:.8em}
-.prose-akq .gh-team-roles span::before{content:"";position:absolute;left:50%;top:-.75em;width:1px;height:.75em;background:#ff2e8888}
-.prose-akq .gh-agent-teams .gh-team-return{margin:1em 0 .7em;border-bottom:1px dashed #00f0ff77;padding:.5em 0;color:#00f0ff;text-align:center;font-size:.9em}
-.prose-akq .gh-agent-teams .gh-team-challenge{margin:.75em 0;padding:.55em .75em;border-left:3px solid #ffb000;background:#0a0e27;color:#e8f4ff;font-size:max(16px,.9em);line-height:1.45;text-wrap:pretty}
-.prose-akq .gh-team-challenge strong{color:#ffb000}
+.prose-akq .gh-team-roles span{position:relative;border:1px solid rgba(147,168,255,.35);padding:.6em .2em;text-align:center;font-size:.8em}
+.prose-akq .gh-team-roles span::before{content:"";position:absolute;left:50%;top:-.75em;width:1px;height:.75em;background:rgba(147,168,255,.55)}
+.prose-akq .gh-agent-teams .gh-team-return{margin:1em 0 .7em;border-bottom:1px dashed rgba(94,234,212,.48);padding:.5em 0;color:#5eead4;text-align:center;font-size:.9em}
+.prose-akq .gh-agent-teams .gh-team-challenge{margin:.75em 0;padding:.55em .75em;border-left:3px solid #fcd34d;background:#0b1420;color:#ecf7fb;font-size:max(16px,.9em);line-height:1.45;text-wrap:pretty}
+.prose-akq .gh-team-challenge strong{color:#fcd34d}
 @media(max-height:720px),(max-width:767px){
 body.present-mode .playbook-detail:has(.gh-agent-teams.akq-slide-active){padding-top:88px;padding-bottom:72px}
 body.present-mode .prose-akq>h2:has(+.gh-agent-teams){margin:0 0 12px;font-size:26px;line-height:1.2;letter-spacing:0}
@@ -462,17 +462,17 @@ A practical lens for the agentic developer platform.
 <div class="gh-pillars">
 <style>
 .prose-akq .gh-pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1em;font-family:var(--font-prose),sans-serif}
-.prose-akq .gh-pillar{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;padding:1em;border:1px solid var(--pillar);background:#0a0e27;min-width:0}
-.prose-akq .gh-pillar::after{content:attr(data-step);position:absolute;right:.05em;bottom:-.15em;font-size:6em;font-weight:700;color:var(--pillar);opacity:.08;z-index:-1}
+.prose-akq .gh-pillar{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;padding:1em;border:1px solid var(--pillar);background:#0b1420;min-width:0}
+.prose-akq .gh-pillar::after{content:attr(data-step);position:absolute;right:.05em;bottom:-.15em;font-family:'Orbitron','IBM Plex Mono',sans-serif;font-size:6em;font-weight:700;color:var(--pillar);opacity:.08;z-index:-1}
 .prose-akq .gh-pillar-kicker{display:block;font-size:.65em;letter-spacing:.13em;color:var(--pillar);margin-bottom:.6em}
-.prose-akq .gh-pillar h3{margin:0;color:var(--pillar);font-size:1.25em;line-height:1.2;letter-spacing:.06em}
+.prose-akq .gh-pillar h3{margin:0;color:var(--pillar);font-family:'Orbitron','IBM Plex Mono',sans-serif;font-size:1.25em;line-height:1.2;letter-spacing:.06em}
 .prose-akq .gh-pillar .gh-pillar-promise{font-size:.9em;line-height:1.5;margin:.75em 0;min-height:4.5em;text-wrap:balance}
-.prose-akq .gh-pillar .gh-pillar-examples{font-size:.65em;line-height:1.7;color:#a8bed2;margin:auto 0 0;padding-top:.8em;border-top:1px dashed color-mix(in srgb,var(--pillar) 40%,transparent)}
+.prose-akq .gh-pillar .gh-pillar-examples{font-size:.65em;line-height:1.7;color:#bad0de;margin:auto 0 0;padding-top:.8em;border-top:1px dashed color-mix(in srgb,var(--pillar) 40%,transparent)}
 @media(max-width:700px){.prose-akq .gh-pillars{grid-template-columns:1fr}.prose-akq .gh-pillar .gh-pillar-promise{min-height:0}}
 </style>
-<div class="gh-pillar" data-step="01" style="--pillar:#00f0ff"><span class="gh-pillar-kicker">01 / CAPABILITY</span><h3>INNOVATE</h3><p class="gh-pillar-promise">Make AI useful from idea to delivery.</p><p class="gh-pillar-examples">Copilot app + Projects<br>Fusion + automations<br>Memory + deeper reviews</p></div>
-<div class="gh-pillar" data-step="02" style="--pillar:#9bbc0f"><span class="gh-pillar-kicker">02 / REACH</span><h3>SCALE</h3><p class="gh-pillar-promise">Bring AI workflows to more teams on a growing platform.</p><p class="gh-pillar-examples">Enterprise + Copilot<br>Agentic Workflows + Actions<br>Git infrastructure + policies</p></div>
-<div class="gh-pillar" data-step="03" style="--pillar:#ffb000"><span class="gh-pillar-kicker">03 / CONFIDENCE</span><h3>TRUST</h3><p class="gh-pillar-promise">Keep visibility and control as agents ship more software.</p><p class="gh-pillar-examples">AI Scan + agentic autofix<br>Reachability analysis<br>Package firewall</p></div>
+<div class="gh-pillar" data-step="01" style="--pillar:#5eead4"><span class="gh-pillar-kicker">01 / CAPABILITY</span><h3>INNOVATE</h3><p class="gh-pillar-promise">Make AI useful from idea to delivery.</p><p class="gh-pillar-examples">Copilot app + Projects<br>Fusion + automations<br>Memory + deeper reviews</p></div>
+<div class="gh-pillar" data-step="02" style="--pillar:#86efac"><span class="gh-pillar-kicker">02 / REACH</span><h3>SCALE</h3><p class="gh-pillar-promise">Bring AI workflows to more teams on a growing platform.</p><p class="gh-pillar-examples">Enterprise + Copilot<br>Agentic Workflows + Actions<br>Git infrastructure + policies</p></div>
+<div class="gh-pillar" data-step="03" style="--pillar:#fcd34d"><span class="gh-pillar-kicker">03 / CONFIDENCE</span><h3>TRUST</h3><p class="gh-pillar-promise">Keep visibility and control as agents ship more software.</p><p class="gh-pillar-examples">AI Scan + agentic autofix<br>Reachability analysis<br>Package firewall</p></div>
 </div>
 
 ## <span class="gh-release-title">Universe 2026: availability</span> <a class="h2-doc" href="https://github.blog/changelog/type/new-releases/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
@@ -480,21 +480,21 @@ A practical lens for the agentic developer platform.
 <div class="gh-release-map">
 <style>
 .prose-akq .gh-release-map{font:clamp(14px,1.25vw,18px)/1.3 var(--font-prose),sans-serif}
-.prose-akq .gh-release-map .gh-release-date{margin:0 0 8px;color:#a8bed2;font-size:14px}
+.prose-akq .gh-release-map .gh-release-date{margin:0 0 8px;color:#bad0de;font-size:14px}
 .prose-akq .gh-release-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.prose-akq .gh-release-column{min-width:0;border-top:2px solid var(--pillar);background:#0a0e27cc;padding:8px 10px}
-.prose-akq .gh-release-map .gh-release-column h3{font-size:1em;color:var(--pillar);letter-spacing:.1em;margin:0 0 6px}
-.prose-akq .gh-release-item{padding:4px 0;border-top:1px solid #e8f4ff22}
+.prose-akq .gh-release-column{min-width:0;border-top:2px solid var(--pillar);background:rgba(11,20,32,.84);padding:8px 10px}
+.prose-akq .gh-release-map .gh-release-column h3{font-family:'Orbitron','IBM Plex Mono',sans-serif;font-size:1em;color:var(--pillar);letter-spacing:.1em;margin:0 0 6px}
+.prose-akq .gh-release-item{padding:4px 0;border-top:1px solid rgba(236,247,251,.14)}
 .prose-akq .gh-release-line{display:flex;align-items:baseline;justify-content:space-between;gap:.45em}
-.prose-akq .gh-release-line a{color:#e8f4ff;font-weight:600;text-decoration:none;line-height:1.3}
-.prose-akq .gh-release-line a:hover,.prose-akq .gh-release-line a:focus-visible{color:#00f0ff;text-decoration:underline}
-.prose-akq .gh-release-status{flex-shrink:0;padding:.1em .3em;border:1px solid currentColor;font-size:11px;font-weight:700;color:#a8bed2;white-space:nowrap}
-.prose-akq .gh-release-status.is-ga{color:#9bbc0f}
-.prose-akq .gh-release-status.is-preview{color:#ffb000}
-.prose-akq .gh-release-item small{color:#a8bed2;font-size:14px;line-height:1.3}
+.prose-akq .gh-release-line a{color:#ecf7fb;font-weight:600;text-decoration:none;line-height:1.3}
+.prose-akq .gh-release-line a:hover,.prose-akq .gh-release-line a:focus-visible{color:#5eead4;text-decoration:underline}
+.prose-akq .gh-release-status{flex-shrink:0;padding:.1em .3em;border:1px solid currentColor;font-size:11px;font-weight:700;color:#bad0de;white-space:nowrap}
+.prose-akq .gh-release-status.is-ga{color:#86efac}
+.prose-akq .gh-release-status.is-preview{color:#fcd34d}
+.prose-akq .gh-release-item small{color:#bad0de;font-size:14px;line-height:1.3}
 .prose-akq .gh-release-topic{display:flex;align-items:baseline;gap:2px;min-width:0}
 .prose-akq .gh-release-topic > a:first-child{min-width:0;hyphens:auto;overflow-wrap:anywhere}
-.prose-akq .gh-release-line .gh-release-slide{display:inline-flex;align-items:center;justify-content:center;align-self:center;flex:0 0 24px;width:24px;height:24px;padding:0;border:0;color:#a8bed2;opacity:.7;line-height:1}
+.prose-akq .gh-release-line .gh-release-slide{display:inline-flex;align-items:center;justify-content:center;align-self:center;flex:0 0 24px;width:24px;height:24px;padding:0;border:0;color:#bad0de;opacity:.7;line-height:1}
 .prose-akq .gh-release-slide > span{width:10px;height:14px;background:currentColor;mask:url("/theomonfort/icons/play-cyan.svg") center/contain no-repeat}
 .prose-akq .gh-release-line .gh-release-slide:hover,.prose-akq .gh-release-line .gh-release-slide:focus-visible{color:var(--pillar);opacity:1;text-decoration:none}
 .prose-akq .gh-release-slide:focus-visible{outline:2px solid var(--pillar);outline-offset:1px}
@@ -509,7 +509,7 @@ body.present-mode .prose-akq > h2:has(.gh-release-title)::before{top:.35em}
 </style>
 <p class="gh-release-date">Public-source status checked 2026-11-11. Select a feature to open its announcement.</p>
 <div class="gh-release-columns">
-<div class="gh-release-column" style="--pillar:#00f0ff">
+<div class="gh-release-column" style="--pillar:#5eead4">
 <h3>INNOVATE</h3>
 <div class="gh-release-item"><div class="gh-release-line"><span class="gh-release-topic"><a href="https://github.blog/changelog/2026-10-28-github-copilot-app-universe-releases" target="_blank" rel="noopener noreferrer">Copilot app</a><a class="gh-release-slide" data-astro-reload href="/theomonfort/en/playbook/copilot-app/?present=1&amp;slide=2" aria-label="Open Copilot app slides" title="Open Copilot app slides"><span aria-hidden="true"></span></a></span><span class="gh-release-status">Available</span></div><small>Projects + computer use: public preview</small></div>
 <div class="gh-release-item"><div class="gh-release-line"><span class="gh-release-topic"><a href="https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion" target="_blank" rel="noopener noreferrer">Copilot Fusion</a><a class="gh-release-slide" data-astro-reload href="/theomonfort/en/playbook/github-copilot/?present=1&amp;slide=6" aria-label="Open Copilot Fusion slides" title="Open Copilot Fusion slides"><span aria-hidden="true"></span></a></span><span class="gh-release-status is-ga">GA</span></div><small>Multi-model routing and orchestration</small></div>
@@ -517,7 +517,7 @@ body.present-mode .prose-akq > h2:has(.gh-release-title)::before{top:.35em}
 <div class="gh-release-item"><div class="gh-release-line"><span class="gh-release-topic"><a href="https://github.blog/changelog/2026-10-28-copilot-code-review-merge-with-confidence-with-max-and-approvals" target="_blank" rel="noopener noreferrer">Code review Max</a><a class="gh-release-slide" data-astro-reload href="/theomonfort/en/playbook/copilot-code-review/?present=1&amp;slide=8" aria-label="Open Code review Max slides" title="Open Code review Max slides"><span aria-hidden="true"></span></a></span><span class="gh-release-status is-preview">Preview</span></div><small>Deeper review; approvals are GA</small></div>
 <div class="gh-release-item"><div class="gh-release-line"><span class="gh-release-topic"><a href="https://github.blog/changelog/2026-10-28-github-intelligence-puts-your-code-context-and-history-to-work" target="_blank" rel="noopener noreferrer">Memory / Dreaming</a><a class="gh-release-slide" data-astro-reload href="/theomonfort/en/playbook/copilot-memory/?present=1&amp;slide=5" aria-label="Open Memory / Dreaming slides" title="Open Memory / Dreaming slides"><span aria-hidden="true"></span></a></span><span class="gh-release-status">Mixed</span></div><small>Memory: GA. Dreaming: public preview.</small></div>
 </div>
-<div class="gh-release-column" style="--pillar:#9bbc0f">
+<div class="gh-release-column" style="--pillar:#86efac">
 <h3>SCALE</h3>
 <div class="gh-release-item"><div class="gh-release-line"><a href="https://github.blog/changelog/2026-10-28-github-enterprise-now-includes-access-to-github-copilot" target="_blank" rel="noopener noreferrer">Enterprise + Copilot</a><span class="gh-release-status">Sales</span></div><small>GHEC via sales; self-serve pending</small></div>
 <div class="gh-release-item"><div class="gh-release-line"><span class="gh-release-topic"><a href="https://github.blog/news-insights/company-news/github-universe-2026-evolving-every-layer-of-the-stack/" target="_blank" rel="noopener noreferrer">Git infrastructure</a><a class="gh-release-slide" data-astro-reload href="/theomonfort/en/playbook/github/?present=1&amp;slide=7" aria-label="Open Git infrastructure slides" title="Open Git infrastructure slides"><span aria-hidden="true"></span></a></span><span class="gh-release-status">Underway</span></div><small>Azure migration targets early 2027</small></div>
@@ -525,7 +525,7 @@ body.present-mode .prose-akq > h2:has(.gh-release-title)::before{top:.35em}
 <div class="gh-release-item"><div class="gh-release-line"><span class="gh-release-topic"><a href="https://github.blog/changelog/2026-10-28-github-actions-workflow-lockfiles-are-generally-available" target="_blank" rel="noopener noreferrer">Actions lockfiles</a><a class="gh-release-slide" data-astro-reload href="/theomonfort/en/playbook/github-actions/?present=1&amp;slide=11" aria-label="Open Actions lockfiles slides" title="Open Actions lockfiles slides"><span aria-hidden="true"></span></a></span><span class="gh-release-status is-ga">GA</span></div><small>Pin workflow action dependencies</small></div>
 <div class="gh-release-item"><div class="gh-release-line"><span class="gh-release-topic"><a href="https://github.blog/changelog/2026-10-28-repository-plugin-defaults-and-enterprise-plugin-controls-generally-available" target="_blank" rel="noopener noreferrer">Copilot governance</a><a class="gh-release-slide" data-astro-reload href="/theomonfort/en/playbook/governance/?present=1&amp;slide=11" aria-label="Open Copilot governance slides" title="Open Copilot governance slides"><span aria-hidden="true"></span></a></span><span class="gh-release-status is-ga">GA</span></div><small>Plugin defaults + enterprise controls</small></div>
 </div>
-<div class="gh-release-column" style="--pillar:#ffb000">
+<div class="gh-release-column" style="--pillar:#fcd34d">
 <h3>TRUST</h3>
 <div class="gh-release-item"><div class="gh-release-line"><span class="gh-release-topic"><a href="https://github.blog/changelog/2026-10-28-ai-scan-for-repositories-in-public-preview" target="_blank" rel="noopener noreferrer">AI Scan: repositories</a><a class="gh-release-slide" data-astro-reload href="/theomonfort/en/playbook/code-scanning/?present=1&amp;slide=6" aria-label="Open AI Scan: repositories slides" title="Open AI Scan: repositories slides"><span aria-hidden="true"></span></a></span><span class="gh-release-status is-preview">Preview</span></div><small><a class="retro-link" href="https://github.blog/changelog/2026-10-15-ai-scan-for-pull-requests-generally-available" target="_blank" rel="noopener noreferrer">AI Scan for pull requests: GA ↗</a></small></div>
 <div class="gh-release-item"><div class="gh-release-line"><span class="gh-release-topic"><a href="https://github.blog/changelog/2026-10-28-prioritize-dependabot-alerts-with-reachability-analysis" target="_blank" rel="noopener noreferrer">Reachability analysis</a><a class="gh-release-slide" data-astro-reload href="/theomonfort/en/playbook/dependabot/?present=1&amp;slide=9" aria-label="Open Reachability analysis slides" title="Open Reachability analysis slides"><span aria-hidden="true"></span></a></span><span class="gh-release-status is-preview">Preview</span></div><small>JavaScript / TypeScript on GHEC</small></div>

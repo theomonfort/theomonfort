@@ -9,7 +9,7 @@ accent:
   border: border-neon-magenta
   glow: hover:shadow-neon-magenta
   shadow: shadow-neon-magenta
-  hex: "#ff2e88"
+  hex: "#93a8ff"
 order: 29.2
 category: administration
 related: ['enterprise-setup', 'migrations', 'governance', 'license-management']
@@ -161,38 +161,38 @@ GitHub.com の EMU と比べた差分。❌ は使えない、⚠️ は条件�
 <div class="pa-map" style="margin:0.4rem auto 0.2rem;">
 <svg viewBox="0 0 1000 392" role="img" aria-label="個人アカウントの構成図。github.com の中でユーザーは Enterprise の外側にあり、Enterprise 内の Organization にも社外の Organization にも所属できる。社外 Organization と個人リポジトリは管理者の影響範囲外。" style="width:100%;height:auto;display:block;font-family:inherit;">
 <defs>
-<marker id="pa-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#00f0ff"/></marker>
-<marker id="pa-warn" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffb000"/></marker>
+<marker id="pa-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5eead4"/></marker>
+<marker id="pa-warn" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fcd34d"/></marker>
 </defs>
-<rect x="6" y="26" width="988" height="358" rx="14" fill="rgba(5,6,15,0.55)" stroke="#e8f4ff" stroke-width="2.5"/>
-<rect x="400" y="8" width="200" height="38" rx="6" fill="#05060f" stroke="#e8f4ff" stroke-width="2"/>
-<text x="500" y="35" text-anchor="middle" font-size="24" fill="#e8f4ff">github.com</text>
-<rect x="30" y="78" width="498" height="284" rx="12" fill="rgba(155,188,15,0.07)" stroke="#9bbc0f" stroke-width="3"/>
-<rect x="48" y="62" width="150" height="32" rx="6" fill="#05060f" stroke="#9bbc0f" stroke-width="2"/>
-<text x="123" y="85" text-anchor="middle" font-size="20" fill="#9bbc0f">Enterprise</text>
-<rect x="548" y="78" width="436" height="284" rx="12" fill="rgba(255,176,0,0.05)" stroke="#ffb000" stroke-width="2" stroke-dasharray="8 6"/>
-<rect x="748" y="62" width="222" height="32" rx="6" fill="#05060f" stroke="#ffb000" stroke-width="2"/>
-<text x="859" y="85" text-anchor="middle" font-size="18" fill="#ffb000">⚠️ 管理者の影響範囲外</text>
-<path d="M614 158 V122 H370 V156" stroke="#00f0ff" stroke-width="3" fill="none" marker-end="url(#pa-ok)"/>
-<path d="M370 122 H138 V156" stroke="#00f0ff" stroke-width="3" fill="none" marker-end="url(#pa-ok)"/>
-<text x="380" y="112" text-anchor="middle" font-size="20" fill="#00f0ff">✅ 所属可能（招待）</text>
-<text x="58" y="182" font-size="21" fill="#e8f4ff">📁 Organization</text>
+<rect x="6" y="26" width="988" height="358" rx="14" fill="rgba(4, 8, 14,0.55)" stroke="#ecf7fb" stroke-width="2.5"/>
+<rect x="400" y="8" width="200" height="38" rx="6" fill="#04080e" stroke="#ecf7fb" stroke-width="2"/>
+<text x="500" y="35" text-anchor="middle" font-size="24" fill="#ecf7fb">github.com</text>
+<rect x="30" y="78" width="498" height="284" rx="12" fill="rgba(134, 239, 172,0.07)" stroke="#86efac" stroke-width="3"/>
+<rect x="48" y="62" width="150" height="32" rx="6" fill="#04080e" stroke="#86efac" stroke-width="2"/>
+<text x="123" y="85" text-anchor="middle" font-size="20" fill="#86efac">Enterprise</text>
+<rect x="548" y="78" width="436" height="284" rx="12" fill="rgba(252, 211, 77,0.05)" stroke="#fcd34d" stroke-width="2" stroke-dasharray="8 6"/>
+<rect x="748" y="62" width="222" height="32" rx="6" fill="#04080e" stroke="#fcd34d" stroke-width="2"/>
+<text x="859" y="85" text-anchor="middle" font-size="18" fill="#fcd34d">⚠️ 管理者の影響範囲外</text>
+<path d="M614 158 V122 H370 V156" stroke="#5eead4" stroke-width="3" fill="none" marker-end="url(#pa-ok)"/>
+<path d="M370 122 H138 V156" stroke="#5eead4" stroke-width="3" fill="none" marker-end="url(#pa-ok)"/>
+<text x="380" y="112" text-anchor="middle" font-size="20" fill="#5eead4">✅ 所属可能（招待）</text>
+<text x="58" y="182" font-size="21" fill="#ecf7fb">📁 Organization</text>
 <path d="M78 196 V322 M78 236 H100 M78 322 H100" stroke="#7a8aa8" stroke-width="2" fill="none"/>
 <text x="106" y="243" font-size="19" fill="#c9d6ea">🗄️ リポジトリ</text>
 <text x="158" y="290" font-size="20" fill="#7a8aa8">⋮</text>
 <text x="106" y="329" font-size="19" fill="#c9d6ea">🗄️ リポジトリ</text>
-<text x="290" y="182" font-size="21" fill="#e8f4ff">📁 Organization</text>
+<text x="290" y="182" font-size="21" fill="#ecf7fb">📁 Organization</text>
 <path d="M310 196 V322 M310 236 H332 M310 322 H332" stroke="#7a8aa8" stroke-width="2" fill="none"/>
 <text x="338" y="243" font-size="19" fill="#c9d6ea">🗄️ リポジトリ</text>
 <text x="390" y="290" font-size="20" fill="#7a8aa8">⋮</text>
 <text x="338" y="329" font-size="19" fill="#c9d6ea">🗄️ リポジトリ</text>
-<text x="572" y="182" font-size="21" fill="#ffb000">👤 ユーザー</text>
+<text x="572" y="182" font-size="21" fill="#fcd34d">👤 ユーザー</text>
 <path d="M592 196 V286 M592 236 H614 M592 286 H614" stroke="#7a8aa8" stroke-width="2" fill="none"/>
 <text x="620" y="243" font-size="18" fill="#c9d6ea">🌐 public repo</text>
 <text x="620" y="293" font-size="18" fill="#c9d6ea">🔒 private repo</text>
-<path d="M684 176 H794" stroke="#ffb000" stroke-width="3" fill="none" marker-end="url(#pa-warn)"/>
-<text x="739" y="164" text-anchor="middle" font-size="16" fill="#ffb000">所属可能</text>
-<text x="800" y="182" font-size="21" fill="#e8f4ff">📁 Organization</text>
+<path d="M684 176 H794" stroke="#fcd34d" stroke-width="3" fill="none" marker-end="url(#pa-warn)"/>
+<text x="739" y="164" text-anchor="middle" font-size="16" fill="#fcd34d">所属可能</text>
+<text x="800" y="182" font-size="21" fill="#ecf7fb">📁 Organization</text>
 <path d="M820 196 V322 M820 236 H842 M820 322 H842" stroke="#7a8aa8" stroke-width="2" fill="none"/>
 <text x="848" y="243" font-size="19" fill="#c9d6ea">🗄️ リポジトリ</text>
 <text x="900" y="290" font-size="20" fill="#7a8aa8">⋮</text>
@@ -210,36 +210,36 @@ EMU のユーザーは Enterprise の **内側** に作られます。
 <div class="emu-map" style="margin:0.4rem auto 0.2rem;">
 <svg viewBox="0 0 1000 392" role="img" aria-label="EMU の構成図。github.com の中に Enterprise があり、マネージドユーザーは Enterprise 内の Organization には所属できるが、Enterprise 外の Organization には所属できない。" style="width:100%;height:auto;display:block;font-family:inherit;">
 <defs>
-<marker id="emu-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#00f0ff"/></marker>
-<marker id="emu-ng" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ff2e88"/></marker>
+<marker id="emu-ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5eead4"/></marker>
+<marker id="emu-ng" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fb7185"/></marker>
 </defs>
-<rect x="6" y="26" width="988" height="358" rx="14" fill="rgba(5,6,15,0.55)" stroke="#e8f4ff" stroke-width="2.5"/>
-<rect x="400" y="8" width="200" height="38" rx="6" fill="#05060f" stroke="#e8f4ff" stroke-width="2"/>
-<text x="500" y="35" text-anchor="middle" font-size="24" fill="#e8f4ff">github.com</text>
-<rect x="30" y="78" width="704" height="284" rx="12" fill="rgba(155,188,15,0.07)" stroke="#9bbc0f" stroke-width="3"/>
-<rect x="48" y="62" width="150" height="32" rx="6" fill="#05060f" stroke="#9bbc0f" stroke-width="2"/>
-<text x="123" y="85" text-anchor="middle" font-size="20" fill="#9bbc0f">Enterprise</text>
-<path d="M572 158 V122 H366 V156" stroke="#00f0ff" stroke-width="3" fill="none" marker-end="url(#emu-ok)"/>
-<path d="M366 122 H142 V156" stroke="#00f0ff" stroke-width="3" fill="none" marker-end="url(#emu-ok)"/>
-<text x="466" y="112" text-anchor="middle" font-size="20" fill="#00f0ff">✅ 所属可能</text>
-<text x="62" y="182" font-size="21" fill="#e8f4ff">📁 Organization</text>
+<rect x="6" y="26" width="988" height="358" rx="14" fill="rgba(4, 8, 14,0.55)" stroke="#ecf7fb" stroke-width="2.5"/>
+<rect x="400" y="8" width="200" height="38" rx="6" fill="#04080e" stroke="#ecf7fb" stroke-width="2"/>
+<text x="500" y="35" text-anchor="middle" font-size="24" fill="#ecf7fb">github.com</text>
+<rect x="30" y="78" width="704" height="284" rx="12" fill="rgba(134, 239, 172,0.07)" stroke="#86efac" stroke-width="3"/>
+<rect x="48" y="62" width="150" height="32" rx="6" fill="#04080e" stroke="#86efac" stroke-width="2"/>
+<text x="123" y="85" text-anchor="middle" font-size="20" fill="#86efac">Enterprise</text>
+<path d="M572 158 V122 H366 V156" stroke="#5eead4" stroke-width="3" fill="none" marker-end="url(#emu-ok)"/>
+<path d="M366 122 H142 V156" stroke="#5eead4" stroke-width="3" fill="none" marker-end="url(#emu-ok)"/>
+<text x="466" y="112" text-anchor="middle" font-size="20" fill="#5eead4">✅ 所属可能</text>
+<text x="62" y="182" font-size="21" fill="#ecf7fb">📁 Organization</text>
 <path d="M82 196 V322 M82 236 H104 M82 322 H104" stroke="#7a8aa8" stroke-width="2" fill="none"/>
 <text x="110" y="243" font-size="19" fill="#c9d6ea">🗄️ リポジトリ</text>
 <text x="162" y="290" font-size="20" fill="#7a8aa8">⋮</text>
 <text x="110" y="329" font-size="19" fill="#c9d6ea">🗄️ リポジトリ</text>
-<text x="286" y="182" font-size="21" fill="#e8f4ff">📁 Organization</text>
+<text x="286" y="182" font-size="21" fill="#ecf7fb">📁 Organization</text>
 <path d="M306 196 V322 M306 236 H328 M306 322 H328" stroke="#7a8aa8" stroke-width="2" fill="none"/>
 <text x="334" y="243" font-size="19" fill="#c9d6ea">🗄️ リポジトリ</text>
 <text x="386" y="290" font-size="20" fill="#7a8aa8">⋮</text>
 <text x="334" y="329" font-size="19" fill="#c9d6ea">🗄️ リポジトリ</text>
-<text x="522" y="182" font-size="21" fill="#ffb000">👤 ユーザー</text>
+<text x="522" y="182" font-size="21" fill="#fcd34d">👤 ユーザー</text>
 <path d="M542 196 V236 H562" stroke="#7a8aa8" stroke-width="2" fill="none"/>
 <text x="568" y="243" font-size="18" fill="#c9d6ea">🔒 private repo</text>
-<path d="M640 176 H762" stroke="#ff2e88" stroke-width="3" stroke-dasharray="7 6" fill="none" marker-end="url(#emu-ng)"/>
-<circle cx="734" cy="176" r="15" fill="#05060f" stroke="#ff2e88" stroke-width="2"/>
-<text x="734" y="183" text-anchor="middle" font-size="18" fill="#ff2e88">✕</text>
-<text x="866" y="120" text-anchor="middle" font-size="19" fill="#ff2e88">❌ Enterprise 外は所属不可</text>
-<text x="768" y="182" font-size="21" fill="#e8f4ff">📁 Organization</text>
+<path d="M640 176 H762" stroke="#fb7185" stroke-width="3" stroke-dasharray="7 6" fill="none" marker-end="url(#emu-ng)"/>
+<circle cx="734" cy="176" r="15" fill="#04080e" stroke="#fb7185" stroke-width="2"/>
+<text x="734" y="183" text-anchor="middle" font-size="18" fill="#fb7185">✕</text>
+<text x="866" y="120" text-anchor="middle" font-size="19" fill="#fb7185">❌ Enterprise 外は所属不可</text>
+<text x="768" y="182" font-size="21" fill="#ecf7fb">📁 Organization</text>
 <path d="M788 196 V322 M788 236 H810 M788 322 H810" stroke="#7a8aa8" stroke-width="2" fill="none"/>
 <text x="816" y="243" font-size="19" fill="#c9d6ea">🗄️ リポジトリ</text>
 <text x="868" y="290" font-size="20" fill="#7a8aa8">⋮</text>
@@ -362,10 +362,10 @@ flowchart LR
   Q3 -->|"Yes"| EMU
   Q3 -->|"No"| PA
 
-  classDef q fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
-  classDef dr fill:#1a0a2e,stroke:#ff2e88,color:#ff2e88,stroke-width:2px
-  classDef emu fill:#1a1500,stroke:#ffb000,color:#ffb000,stroke-width:2px
-  classDef pa fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
+  classDef q fill:#0b1420,stroke:#5eead4,color:#5eead4,stroke-width:2px
+  classDef dr fill:#11162c,stroke:#93a8ff,color:#93a8ff,stroke-width:2px
+  classDef emu fill:#1a1500,stroke:#fcd34d,color:#fcd34d,stroke-width:2px
+  classDef pa fill:#0a1a14,stroke:#86efac,color:#86efac,stroke-width:2px
   class Q1,Q2,Q3 q
   class DR dr
   class EMU emu

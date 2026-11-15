@@ -13,120 +13,124 @@ import {
 } from './vendor.js';
 
 export const GROUP_COLORS = {
-  // Root & core platform
-  root: '#ffb000',
-  platform: '#00f0ff',
-  sdlc: '#9bbc0f',
-  pillars: '#ff2e88',
-  'trust-arch': '#38bdf8',
+  // Root & core platform — Phosphor Cosmos Telemetry Palette
+  root: '#fcd34d',
+  platform: '#5eead4',
+  sdlc: '#86efac',
+  pillars: '#93a8ff',
+  'trust-arch': '#67e8f9',
 
   // Overall Extended domain groups (aligned with Playbook category accents)
-  intro: '#00f0ff',
-  plan: '#9bbc0f',
-  develop: '#ff2e88',
-  review: '#ffb000',
-  secure: '#38bdf8',
-  operate: '#a3e635',
-  admin: '#e879f9',
+  intro: '#5eead4',
+  plan: '#86efac',
+  develop: '#93a8ff',
+  review: '#fcd34d',
+  secure: '#67e8f9',
+  operate: '#86efac',
+  admin: '#c4b5fd',
 
   // Introduction & Copilot
-  copilot: '#00f0ff',
-  fusion: '#ff2e88',
+  copilot: '#5eead4',
+  fusion: '#93a8ff',
 
   // Plan vault groups
-  collaboration: '#00f0ff',
-  instructions: '#9bbc0f',
-  skills: '#ffb000',
-  plugins: '#e879f9',
-  mcp: '#38bdf8',
-  agents: '#ff2e88',
-  hooks: '#ff6b6b',
-  context: '#2dd4bf',
+  collaboration: '#5eead4',
+  instructions: '#86efac',
+  skills: '#fcd34d',
+  plugins: '#c4b5fd',
+  mcp: '#67e8f9',
+  agents: '#93a8ff',
+  hooks: '#fb7185',
+  context: '#5eead4',
 
   // Develop vault groups
-  vscode: '#00f0ff',
-  cli: '#9bbc0f',
-  'cloud-agent': '#ff2e88',
-  'copilot-app': '#e879f9',
-  'models-partners': '#ffb000',
-  environments: '#38bdf8',
-  bridge: '#2dd4bf',
+  vscode: '#5eead4',
+  cli: '#86efac',
+  'cloud-agent': '#93a8ff',
+  'copilot-app': '#c4b5fd',
+  'models-partners': '#fcd34d',
+  environments: '#67e8f9',
+  bridge: '#5eead4',
 
   // Review vault groups
-  'pr-workflow': '#00f0ff',
-  'human-review': '#9bbc0f',
-  stacking: '#e879f9',
-  'copilot-review': '#ff2e88',
-  'pr-rulesets': '#ffb000',
-  'pr-checks': '#38bdf8',
+  'pr-workflow': '#5eead4',
+  'human-review': '#86efac',
+  stacking: '#c4b5fd',
+  'copilot-review': '#93a8ff',
+  'pr-rulesets': '#fcd34d',
+  'pr-checks': '#67e8f9',
 
   // Test & Secure vault groups
-  actions: '#00f0ff',
-  suite: '#ff2e88',
-  product: '#c084fc',
-  secret: '#ffb000',
-  scanning: '#38bdf8',
-  dependabot: '#9bbc0f',
-  quality: '#2dd4bf',
-  governance: '#f472b6',
+  actions: '#5eead4',
+  suite: '#93a8ff',
+  product: '#c4b5fd',
+  secret: '#fcd34d',
+  scanning: '#67e8f9',
+  dependabot: '#86efac',
+  quality: '#5eead4',
+  governance: '#fb7185',
 
   // Administration vault groups
-  deployment: '#00f0ff',
-  iam: '#38bdf8',
-  licensing: '#9bbc0f',
-  billing: '#ffb000',
-  migrations: '#ff6b6b',
+  deployment: '#5eead4',
+  iam: '#67e8f9',
+  licensing: '#86efac',
+  billing: '#fcd34d',
+  migrations: '#fb7185',
 
   // Fallbacks
-  unresolved: '#4a5578',
-  general: '#8ba4c7',
+  unresolved: '#4b6478',
+  general: '#728fa3',
 };
 
-const JRPG_PALETTE = {
-  bgInner: '#1a0b2e',
-  bgMid: '#0a0e27',
-  bgOuter: '#05060f',
-  gridMinor: 'rgba(0, 240, 255, 0.035)',
-  gridMajor: 'rgba(255, 46, 136, 0.065)',
+const PHOSPHOR_PALETTE = {
+  bgBase: '#060b12',
+  bgDeep: '#04080e',
+  nebulaCore: 'rgba(94, 234, 212, 0.08)',
+  nebulaAmbient: 'rgba(94, 234, 212, 0.045)',
+  gridLine: 'rgba(94, 234, 212, 0.03)',
+  gridDot: 'rgba(94, 234, 212, 0.14)',
 
-  // Monochrome tactical node tones (when Groups toggle is off)
-  nodeLeaf: '#6b8db5',
-  nodeMid: '#9ec5eb',
-  nodeHub: '#d9eeff',
-  nodeRoot: '#ffb000',
-  nodeUnresolved: '#3d4870',
-  nodeDimmed: '#151b38',
+  // Monochrome telemetry node tones (when Groups toggle is off)
+  nodeLeaf: '#5c7c93',
+  nodeMid: '#8eb4cc',
+  nodeHub: '#ecf7fb',
+  nodeRoot: '#fcd34d',
+  nodeUnresolved: '#3d5568',
+  nodeDimmed: '#0f1c2b',
 
-  // Primary focus = Neon Magenta (#ff2e88)
-  accent: '#ff2e88',
-  accentBright: '#ff8ec0',
-  accentGlow: 'rgba(255, 46, 136, 0.42)',
-  accentEdge: 'rgba(255, 46, 136, 0.92)',
+  // Primary focus / Seafoam Aqua (#5eead4) + Solar Champagne reticle (#fcd34d)
+  primary: '#5eead4',
+  primaryBright: '#67e8f9',
+  primaryGlow: 'rgba(94, 234, 212, 0.30)',
+  primaryEdge: 'rgba(94, 234, 212, 0.88)',
+  selectRing: '#fcd34d',
+  selectGlow: 'rgba(252, 211, 77, 0.28)',
 
-  // Secondary hover (when another node is already pinned) = Neon Cyan (#00f0ff)
-  secondary: '#00f0ff',
-  secondaryBright: '#a5f8ff',
-  secondaryGlow: 'rgba(0, 240, 255, 0.40)',
-  secondaryEdge: 'rgba(0, 240, 255, 0.88)',
+  // Secondary hover (when another node is already pinned) = Starlight Periwinkle (#93a8ff)
+  secondary: '#93a8ff',
+  secondaryBright: '#c4b5fd',
+  secondaryGlow: 'rgba(147, 168, 255, 0.32)',
+  secondaryEdge: 'rgba(147, 168, 255, 0.88)',
 
-  // Search hit = CRT Amber (#ffb000)
-  search: '#ffb000',
-  searchGlow: 'rgba(255, 176, 0, 0.42)',
+  // Search hit = Solar Champagne (#fcd34d)
+  search: '#fcd34d',
+  searchGlow: 'rgba(252, 211, 77, 0.34)',
 
   // Edges
-  edgeIdle: 'rgba(0, 240, 255, 0.16)',
-  edgeIdleSubtle: 'rgba(0, 240, 255, 0.09)',
-  edgeDimmed: 'rgba(138, 164, 199, 0.035)',
+  edgeIdle: 'rgba(94, 234, 212, 0.16)',
+  edgeIdleSubtle: 'rgba(94, 234, 212, 0.10)',
+  edgeDimmed: 'rgba(114, 143, 163, 0.045)',
 
-  // Typography
-  labelBright: '#e8f4ff',
-  labelNeighbor: '#cde6ff',
-  labelIdle: 'rgba(232, 244, 255, 0.80)',
-  labelDim: 'rgba(232, 244, 255, 0.13)',
-  labelBg: 'rgba(5, 6, 15, 0.88)',
-  labelBorderFocus: 'rgba(255, 46, 136, 0.78)',
-  labelBorderHover: 'rgba(0, 240, 255, 0.75)',
-  labelBorderIdle: 'rgba(0, 240, 255, 0.22)',
+  // Typography & crisp obsidian label framing
+  labelActive: '#ecf7fb',
+  labelNormal: '#bad0de',
+  labelDim: '#728fa3',
+  labelHalo: '#04080e',
+  labelBg: 'rgba(4, 8, 14, 0.92)',
+  labelBorderSelect: 'rgba(252, 211, 77, 0.68)',
+  labelBorderHover: 'rgba(94, 234, 212, 0.62)',
+  labelBorderSecondary: 'rgba(147, 168, 255, 0.65)',
+  labelBorderNeighbor: 'rgba(94, 234, 212, 0.24)',
 };
 
 export function getGroupColor(group) {
@@ -138,7 +142,7 @@ export function getGroupColor(group) {
   for (let i = 0; i < clean.length; i += 1) {
     hash = clean.charCodeAt(i) + ((hash << 5) - hash);
   }
-  const palette = ['#00f0ff', '#ff2e88', '#ffb000', '#9bbc0f', '#c084fc', '#38bdf8', '#ff6b6b'];
+  const palette = ['#5eead4', '#86efac', '#93a8ff', '#fcd34d', '#67e8f9', '#c4b5fd', '#fb7185'];
   return palette[Math.abs(hash) % palette.length];
 }
 
@@ -200,12 +204,12 @@ export class GraphView {
   }
 
   getMonochromeNodeFill(node) {
-    if (!node.exists) return JRPG_PALETTE.nodeUnresolved;
-    if (node.group === 'root') return JRPG_PALETTE.nodeRoot;
+    if (!node.exists) return PHOSPHOR_PALETTE.nodeUnresolved;
+    if (node.group === 'root') return PHOSPHOR_PALETTE.nodeRoot;
     const deg = node.degree || 0;
-    if (deg >= 7) return JRPG_PALETTE.nodeHub;
-    if (deg >= 3) return JRPG_PALETTE.nodeMid;
-    return JRPG_PALETTE.nodeLeaf;
+    if (deg >= 7) return PHOSPHOR_PALETTE.nodeHub;
+    if (deg >= 3) return PHOSPHOR_PALETTE.nodeMid;
+    return PHOSPHOR_PALETTE.nodeLeaf;
   }
 
   refreshSize() {
@@ -692,36 +696,55 @@ export class GraphView {
   }
 
   drawBackdrop(ctx, w, h) {
-    const cx = this.visualCenterX();
-    const cy = h * 0.45;
-    const outerR = Math.max(w, h) * 0.85;
-    const bgGrad = ctx.createRadialGradient(cx, cy, 24, cx, cy, outerR);
-    bgGrad.addColorStop(0, JRPG_PALETTE.bgInner);
-    bgGrad.addColorStop(0.52, JRPG_PALETTE.bgMid);
-    bgGrad.addColorStop(1, JRPG_PALETTE.bgOuter);
-    ctx.fillStyle = bgGrad;
+    ctx.fillStyle = PHOSPHOR_PALETTE.bgBase;
     ctx.fillRect(0, 0, w, h);
 
-    // Subtle neon tactical coordinate grid in world space
-    const step = 80;
-    const scaledStep = step * this.transform.k;
-    if (scaledStep >= 22) {
-      const startX = ((this.transform.x % scaledStep) + scaledStep) % scaledStep;
-      const startY = ((this.transform.y % scaledStep) + scaledStep) % scaledStep;
+    // Soft top & constellation-center seafoam nebula glows
+    const cx = this.visualCenterX();
+    const topGlowR = Math.max(w, h) * 0.68;
+    const topGrad = ctx.createRadialGradient(cx, -h * 0.06, 12, cx, -h * 0.06, topGlowR);
+    topGrad.addColorStop(0, PHOSPHOR_PALETTE.nebulaCore);
+    topGrad.addColorStop(0.55, 'rgba(94, 234, 212, 0.025)');
+    topGrad.addColorStop(1, 'rgba(6, 11, 18, 0)');
+    ctx.fillStyle = topGrad;
+    ctx.fillRect(0, 0, w, h);
 
-      ctx.beginPath();
-      ctx.strokeStyle = JRPG_PALETTE.gridMinor;
-      ctx.lineWidth = 1;
-      for (let x = startX; x < w; x += scaledStep) {
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, h);
-      }
-      for (let y = startY; y < h; y += scaledStep) {
-        ctx.moveTo(0, y);
-        ctx.lineTo(w, y);
-      }
-      ctx.stroke();
+    const midGlowR = Math.max(w, h) * 0.56;
+    const midGrad = ctx.createRadialGradient(cx, h * 0.48, 16, cx, h * 0.48, midGlowR);
+    midGrad.addColorStop(0, PHOSPHOR_PALETTE.nebulaAmbient);
+    midGrad.addColorStop(1, 'rgba(6, 11, 18, 0)');
+    ctx.fillStyle = midGrad;
+    ctx.fillRect(0, 0, w, h);
+
+    // Subtle 28px Phosphor coordinate blueprint grid + intersection dots
+    let scaledStep = 28 * this.transform.k;
+    while (scaledStep < 20) scaledStep *= 2;
+    while (scaledStep > 56) scaledStep /= 2;
+
+    const startX = ((this.transform.x % scaledStep) + scaledStep) % scaledStep;
+    const startY = ((this.transform.y % scaledStep) + scaledStep) % scaledStep;
+
+    ctx.beginPath();
+    ctx.strokeStyle = PHOSPHOR_PALETTE.gridLine;
+    ctx.lineWidth = 1;
+    for (let x = startX; x < w; x += scaledStep) {
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, h);
     }
+    for (let y = startY; y < h; y += scaledStep) {
+      ctx.moveTo(0, y);
+      ctx.lineTo(w, y);
+    }
+    ctx.stroke();
+
+    ctx.beginPath();
+    for (let x = startX; x < w; x += scaledStep) {
+      for (let y = startY; y < h; y += scaledStep) {
+        ctx.rect(x - 0.65, y - 0.65, 1.3, 1.3);
+      }
+    }
+    ctx.fillStyle = PHOSPHOR_PALETTE.gridDot;
+    ctx.fill();
   }
 
   render() {
@@ -781,10 +804,10 @@ export class GraphView {
         ctx.lineTo(t.x, t.y);
       }
       ctx.strokeStyle = dimmed
-        ? JRPG_PALETTE.edgeDimmed
+        ? PHOSPHOR_PALETTE.edgeDimmed
         : this.nodes.length > 100
-          ? JRPG_PALETTE.edgeIdleSubtle
-          : JRPG_PALETTE.edgeIdle;
+          ? PHOSPHOR_PALETTE.edgeIdleSubtle
+          : PHOSPHOR_PALETTE.edgeIdle;
       ctx.lineWidth = (dimmed ? 0.75 : 1.0) * invK;
       ctx.stroke();
     }
@@ -825,44 +848,44 @@ export class GraphView {
       }
     };
 
-    // 2. Hover edges
+    // 2. Hover edges (#93a8ff when secondary hover, #5eead4 when solo hover)
     if (secondaryEdges.length > 0) {
-      const useCyan = isSecondaryHover;
+      const usePeriwinkle = isSecondaryHover;
       drawDirectedActiveEdges(
         secondaryEdges,
         hoverId,
-        useCyan ? JRPG_PALETTE.secondaryEdge : JRPG_PALETTE.accentEdge,
-        useCyan ? JRPG_PALETTE.secondary : JRPG_PALETTE.accent,
-        useCyan ? 1.55 : 1.65,
+        usePeriwinkle ? PHOSPHOR_PALETTE.secondaryEdge : PHOSPHOR_PALETTE.primaryEdge,
+        usePeriwinkle ? PHOSPHOR_PALETTE.secondary : PHOSPHOR_PALETTE.primary,
+        usePeriwinkle ? 1.55 : 1.65,
       );
     }
 
-    // 3. Selected edges (Neon Magenta)
+    // 3. Selected edges (Seafoam Aqua #5eead4)
     if (selectedEdges.length > 0) {
       drawDirectedActiveEdges(
         selectedEdges,
         selectedId,
-        JRPG_PALETTE.accentEdge,
-        JRPG_PALETTE.accent,
+        PHOSPHOR_PALETTE.primaryEdge,
+        PHOSPHOR_PALETTE.primary,
         1.75,
       );
     }
 
-    // 4. Bridge edges (Selected <-> Hovered: Neon Magenta -> Neon Cyan gradient)
+    // 4. Bridge edges (Selected <-> Hovered: Seafoam Aqua #5eead4 -> Starlight Periwinkle #93a8ff)
     for (const { s, t } of bridgeEdges) {
       const grad = ctx.createLinearGradient(s.x, s.y, t.x, t.y);
       if (s.id === selectedId) {
-        grad.addColorStop(0, JRPG_PALETTE.accent);
-        grad.addColorStop(1, JRPG_PALETTE.secondary);
+        grad.addColorStop(0, PHOSPHOR_PALETTE.primary);
+        grad.addColorStop(1, PHOSPHOR_PALETTE.secondary);
       } else {
-        grad.addColorStop(0, JRPG_PALETTE.secondary);
-        grad.addColorStop(1, JRPG_PALETTE.accent);
+        grad.addColorStop(0, PHOSPHOR_PALETTE.secondary);
+        grad.addColorStop(1, PHOSPHOR_PALETTE.primary);
       }
       ctx.beginPath();
       ctx.moveTo(s.x, s.y);
       ctx.lineTo(t.x, t.y);
       ctx.strokeStyle = grad;
-      ctx.lineWidth = 2.25 * invK;
+      ctx.lineWidth = 2.2 * invK;
       ctx.stroke();
     }
 
@@ -890,20 +913,20 @@ export class GraphView {
         inFocus = false;
       }
 
-      // Outer neon glow aura for selected, hovered, or search-matched nodes
+      // Soft telemetry halo for selected, hovered, or search-matched nodes
       if (isSelected || isHover || isSearchHit) {
         const glowColor = isSelected
-          ? JRPG_PALETTE.accentGlow
+          ? PHOSPHOR_PALETTE.selectGlow
           : isHover && isSecondaryHover
-            ? JRPG_PALETTE.secondaryGlow
+            ? PHOSPHOR_PALETTE.secondaryGlow
             : isHover
-              ? JRPG_PALETTE.accentGlow
-              : JRPG_PALETTE.searchGlow;
+              ? PHOSPHOR_PALETTE.primaryGlow
+              : PHOSPHOR_PALETTE.searchGlow;
 
         const haloRadius = r + 11 * invK;
         const grad = ctx.createRadialGradient(node.x, node.y, r * 0.4, node.x, node.y, haloRadius);
         grad.addColorStop(0, glowColor);
-        grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        grad.addColorStop(1, 'rgba(6, 11, 18, 0)');
         ctx.beginPath();
         ctx.arc(node.x, node.y, haloRadius, 0, Math.PI * 2);
         ctx.fillStyle = grad;
@@ -912,19 +935,19 @@ export class GraphView {
 
       let fill;
       if (isSelected) {
-        fill = JRPG_PALETTE.accent;
+        fill = PHOSPHOR_PALETTE.primary;
       } else if (isHover && isSecondaryHover) {
-        fill = JRPG_PALETTE.secondary;
+        fill = PHOSPHOR_PALETTE.secondary;
       } else if (isHover) {
-        fill = JRPG_PALETTE.accent;
+        fill = PHOSPHOR_PALETTE.primaryBright;
       } else if (isSearchHit) {
-        fill = JRPG_PALETTE.search;
+        fill = PHOSPHOR_PALETTE.search;
       } else if (!inFocus) {
-        fill = JRPG_PALETTE.nodeDimmed;
+        fill = PHOSPHOR_PALETTE.nodeDimmed;
       } else if (this.colorByGroup && node.exists) {
         fill = getGroupColor(node.group);
       } else if (isSelectedNeighbor || isHoverNeighbor) {
-        fill = JRPG_PALETTE.nodeHub;
+        fill = PHOSPHOR_PALETTE.nodeHub;
       } else {
         fill = this.getMonochromeNodeFill(node);
       }
@@ -934,36 +957,55 @@ export class GraphView {
       ctx.fillStyle = fill;
       ctx.fill();
 
-      // Subtle inner core highlight on bright nodes
+      // Crisp obsidian separation stroke on focused nodes
       if (inFocus && node.exists) {
-        ctx.strokeStyle = 'rgba(5, 6, 15, 0.65)';
-        ctx.lineWidth = 1.1 * invK;
+        ctx.strokeStyle = 'rgba(4, 8, 14, 0.82)';
+        ctx.lineWidth = 1.15 * invK;
         ctx.stroke();
       }
 
       if (!node.exists) {
         ctx.save();
         ctx.setLineDash([2.2 * invK, 2.2 * invK]);
-        ctx.strokeStyle = inFocus ? 'rgba(0, 240, 255, 0.55)' : 'rgba(138, 164, 199, 0.14)';
+        ctx.strokeStyle = inFocus ? 'rgba(94, 234, 212, 0.55)' : 'rgba(114, 143, 163, 0.16)';
         ctx.lineWidth = 1.1 * invK;
         ctx.stroke();
         ctx.restore();
       } else if (isSelected) {
+        // Crisp Solar Champagne (#fcd34d) telemetry reticle ring + cardinal ticks
+        const ringR = r + 3.1 * invK;
         ctx.beginPath();
-        ctx.arc(node.x, node.y, r + 3 * invK, 0, Math.PI * 2);
-        ctx.strokeStyle = JRPG_PALETTE.accentBright;
-        ctx.lineWidth = 1.85 * invK;
+        ctx.arc(node.x, node.y, ringR, 0, Math.PI * 2);
+        ctx.strokeStyle = PHOSPHOR_PALETTE.selectRing;
+        ctx.lineWidth = 1.75 * invK;
+        ctx.stroke();
+
+        const tickInner = ringR + 1.4 * invK;
+        const tickOuter = ringR + 4.0 * invK;
+        ctx.beginPath();
+        ctx.moveTo(node.x - tickOuter, node.y);
+        ctx.lineTo(node.x - tickInner, node.y);
+        ctx.moveTo(node.x + tickInner, node.y);
+        ctx.lineTo(node.x + tickOuter, node.y);
+        ctx.moveTo(node.x, node.y - tickOuter);
+        ctx.lineTo(node.x, node.y - tickInner);
+        ctx.moveTo(node.x, node.y + tickInner);
+        ctx.lineTo(node.x, node.y + tickOuter);
+        ctx.strokeStyle = PHOSPHOR_PALETTE.selectRing;
+        ctx.lineWidth = 1.35 * invK;
         ctx.stroke();
       } else if (isHover) {
         ctx.beginPath();
-        ctx.arc(node.x, node.y, r + 2.6 * invK, 0, Math.PI * 2);
-        ctx.strokeStyle = isSecondaryHover ? JRPG_PALETTE.secondaryBright : JRPG_PALETTE.accentBright;
-        ctx.lineWidth = 1.6 * invK;
+        ctx.arc(node.x, node.y, r + 2.7 * invK, 0, Math.PI * 2);
+        ctx.strokeStyle = isSecondaryHover
+          ? PHOSPHOR_PALETTE.secondaryBright
+          : PHOSPHOR_PALETTE.primary;
+        ctx.lineWidth = 1.55 * invK;
         ctx.stroke();
       } else if (isActive && !hasSelection) {
         ctx.beginPath();
         ctx.arc(node.x, node.y, r + 2.4 * invK, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(0, 240, 255, 0.72)';
+        ctx.strokeStyle = 'rgba(94, 234, 212, 0.72)';
         ctx.lineWidth = 1.3 * invK;
         ctx.stroke();
       }
@@ -998,6 +1040,7 @@ export class GraphView {
           r,
           isSelected,
           isHover,
+          isActive,
           isSecondaryHover,
           isNeighbor: isSelectedNeighbor || isHoverNeighbor,
           isSearchHit,
@@ -1007,56 +1050,83 @@ export class GraphView {
       }
     }
 
-    // 6. Crisp pixel-framed labels (max 2px corner radius per retro JRPG spec)
+    // 6. Crisp HUD telemetry labels (3px radius obsidian pills + dark #04080e glyph halo over edges)
     labelCandidates.sort((a, b) => a.priority - b.priority);
 
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
+    ctx.lineJoin = 'round';
+    ctx.miterLimit = 2;
 
     for (const item of labelCandidates) {
-      const { node, r, isSelected, isHover, isSecondaryHover, isNeighbor, isSearchHit, inFocus } = item;
+      const {
+        node,
+        r,
+        isSelected,
+        isHover,
+        isActive,
+        isSecondaryHover,
+        isNeighbor,
+        isSearchHit,
+        inFocus,
+      } = item;
       const emphasized = isSelected || isHover || isSearchHit;
       const fontSize = (emphasized ? 12 : 11) * invK;
-      const weight = emphasized ? '700' : isNeighbor ? '600' : '400';
+      const weight = emphasized ? '600' : isNeighbor ? '500' : '400';
 
       ctx.font = `${weight} ${fontSize}px "IBM Plex Sans JP", "Noto Sans JP", sans-serif`;
       const text = emphasized || isNeighbor ? node.title : truncateLabel(node.title, 26);
-      const labelY = node.y + r + 5 * invK;
+      const labelY = node.y + r + 5.5 * invK;
 
       if (emphasized || isNeighbor) {
         const metrics = ctx.measureText(text);
-        const padX = 5.5 * invK;
-        const padY = 2.5 * invK;
+        const padX = 6 * invK;
+        const padY = 2.8 * invK;
         const bw = metrics.width + padX * 2;
         const bh = fontSize + padY * 2;
         const bx = node.x - bw / 2;
         const by = labelY - padY;
+        const rad = 3 * invK;
 
-        ctx.fillStyle = JRPG_PALETTE.labelBg;
-        ctx.fillRect(bx, by, bw, bh);
+        ctx.beginPath();
+        if (typeof ctx.roundRect === 'function') {
+          ctx.roundRect(bx, by, bw, bh, rad);
+        } else {
+          ctx.rect(bx, by, bw, bh);
+        }
+        ctx.fillStyle = PHOSPHOR_PALETTE.labelBg;
+        ctx.fill();
 
         ctx.strokeStyle = isSelected
-          ? JRPG_PALETTE.labelBorderFocus
+          ? PHOSPHOR_PALETTE.labelBorderSelect
           : isHover && isSecondaryHover
-            ? JRPG_PALETTE.labelBorderHover
+            ? PHOSPHOR_PALETTE.labelBorderSecondary
             : isHover
-              ? JRPG_PALETTE.labelBorderFocus
-              : JRPG_PALETTE.labelBorderIdle;
-        ctx.lineWidth = (emphasized ? 1.3 : 0.9) * invK;
-        ctx.strokeRect(bx, by, bw, bh);
-      }
-
-      if (emphasized) {
-        ctx.fillStyle = JRPG_PALETTE.labelBright;
-      } else if (!inFocus) {
-        ctx.fillStyle = JRPG_PALETTE.labelDim;
-      } else if (isNeighbor) {
-        ctx.fillStyle = JRPG_PALETTE.labelNeighbor;
+              ? PHOSPHOR_PALETTE.labelBorderHover
+              : PHOSPHOR_PALETTE.labelBorderNeighbor;
+        ctx.lineWidth = (emphasized ? 1.2 : 0.85) * invK;
+        ctx.stroke();
       } else {
-        ctx.fillStyle = JRPG_PALETTE.labelIdle;
+        // Dark #04080e halo stroke so ambient/dimmed labels stay razor-sharp over crossing links
+        ctx.save();
+        ctx.globalAlpha = inFocus ? 0.92 : 0.55;
+        ctx.strokeStyle = PHOSPHOR_PALETTE.labelHalo;
+        ctx.lineWidth = 3.2 * invK;
+        ctx.strokeText(text, node.x, labelY);
+        ctx.restore();
       }
 
+      ctx.save();
+      if (emphasized || (isActive && inFocus)) {
+        ctx.fillStyle = PHOSPHOR_PALETTE.labelActive;
+      } else if (!inFocus) {
+        ctx.globalAlpha = 0.55;
+        ctx.fillStyle = PHOSPHOR_PALETTE.labelDim;
+      } else {
+        ctx.fillStyle = PHOSPHOR_PALETTE.labelNormal;
+      }
       ctx.fillText(text, node.x, labelY);
+      ctx.restore();
     }
 
     ctx.restore();

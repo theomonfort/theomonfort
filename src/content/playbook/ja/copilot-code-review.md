@@ -9,7 +9,7 @@ accent:
   border: border-crt-amber
   glow: hover:shadow-neon-amber
   shadow: shadow-neon-amber
-  hex: "#ffb000"
+  hex: "#fcd34d"
 order: 9
 category: review
 related: ['cloud-agent', 'instructions', 'agentic-workflow']

@@ -51,10 +51,16 @@ const items: RoomItem[] = [
   },
 ];
 
+const TONE_HEX: Record<AccentColor, string> = {
+  cyan: '#5eead4',
+  green: '#86efac',
+  magenta: '#93a8ff',
+  amber: '#fcd34d',
+};
 ---
 
 <div class="iso-room relative w-full max-w-5xl">
-  <!-- Tatami floor (isometric grid backdrop) -->
+  <!-- Coordinate floor (isometric grid backdrop) -->
   <div class="iso-floor absolute inset-x-0 -bottom-6 h-48 pointer-events-none" aria-hidden="true"></div>
 
   <!-- Window: distant Tokyo skyline -->
@@ -75,25 +81,27 @@ const items: RoomItem[] = [
   <div class="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 z-10">
     {items.map((item) => {
       const c = accentClasses[item.color];
+      const tone = TONE_HEX[item.color];
       return (
         <a
           href={item.href}
           target={item.external ? '_blank' : undefined}
           rel={item.external ? 'noopener noreferrer' : undefined}
-          class={`furniture group relative block bg-shadow-ink/85 border-2 ${c.border} ${c.glow} p-5 transition-all duration-200 hover:-translate-y-1`}
+          style={`--item-tone:${tone}`}
+          class="furniture group relative block p-5 transition-all duration-200 hover:-translate-y-0.5"
           data-sfx="select"
         >
-          <div class="flex items-center gap-3 mb-2">
-            <span class="text-3xl md:text-4xl group-hover:scale-110 transition-transform">{item.icon}</span>
+          <div class="flex items-center gap-3 mb-2.5">
+            <span class="text-3xl md:text-4xl group-hover:scale-105 transition-transform">{item.icon}</span>
             <div>
-              <div class={`font-pixel text-[10px] ${c.text}`}>{item.en}</div>
-              <div class="font-pixel-jp text-base text-phosphor">{item.desc}</div>
+              <div class={`font-mono text-[11px] font-semibold tracking-[0.1em] ${c.text}`}>{item.en}</div>
+              <div class="font-body font-bold text-base text-phosphor group-hover:text-neon-cyan transition-colors">{item.desc}</div>
             </div>
           </div>
-          <div class="font-mono text-[10px] text-phosphor/50 group-hover:text-phosphor transition-colors">
+          <div class="font-mono text-[11px] text-phosphor-muted group-hover:text-phosphor-body transition-colors">
             ▶ {item.label}
           </div>
-          <span class="absolute top-1 right-2 font-pixel text-[8px] text-phosphor/30 group-hover:text-neon-magenta transition-colors">
+          <span class="absolute top-2 right-2.5 font-mono text-[10px] font-semibold tracking-[0.08em] text-phosphor-muted/70 group-hover:text-neon-cyan transition-colors">
             ENTER
           </span>
         </a>
@@ -130,9 +138,9 @@ const items: RoomItem[] = [
 <style>
   .iso-floor {
     background-image:
-      linear-gradient(to right, rgba(155, 188, 15, 0.08) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(155, 188, 15, 0.08) 1px, transparent 1px);
-    background-size: 32px 32px;
+      linear-gradient(to right, rgba(94, 234, 212, 0.10) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(94, 234, 212, 0.10) 1px, transparent 1px);
+    background-size: 28px 28px;
     transform: perspective(700px) rotateX(60deg);
     transform-origin: top;
     mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
@@ -145,11 +153,12 @@ const items: RoomItem[] = [
     position: relative;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, #060818 0%, #1a0b2e 100%);
-    border: 4px solid #2a1f3d;
+    background: linear-gradient(to bottom, #04080e 0%, #0b1420 100%);
+    border: 1px solid rgba(94, 234, 212, 0.32);
+    border-radius: 3px;
     box-shadow:
-      inset 0 0 0 2px #4a3760,
-      4px 4px 0 #05060f;
+      inset 0 0 0 1px rgba(147, 168, 255, 0.14),
+      0 8px 20px rgba(4, 8, 14, 0.65);
     overflow: hidden;
   }
   .window-frame::after {
@@ -157,8 +166,8 @@ const items: RoomItem[] = [
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(to right, transparent 49%, #2a1f3d 49%, #2a1f3d 51%, transparent 51%),
-      linear-gradient(to bottom, transparent 49%, #2a1f3d 49%, #2a1f3d 51%, transparent 51%);
+      linear-gradient(to right, transparent 49.2%, rgba(94, 234, 212, 0.2) 49.2%, rgba(94, 234, 212, 0.2) 50.8%, transparent 50.8%),
+      linear-gradient(to bottom, transparent 49.2%, rgba(94, 234, 212, 0.2) 49.2%, rgba(94, 234, 212, 0.2) 50.8%, transparent 50.8%);
     pointer-events: none;
   }
   .skyline { position: absolute; inset: 0; }
@@ -168,38 +177,42 @@ const items: RoomItem[] = [
     right: 12px;
     width: 14px;
     height: 14px;
-    background: #ffb000;
-    box-shadow: 0 0 12px #ffb000, 0 0 4px #fff;
-    border-radius: 0;
+    background: #fcd34d;
+    box-shadow: 0 0 12px rgba(252, 211, 77, 0.7), 0 0 4px #ecf7fb;
+    border-radius: 999px;
   }
   .building {
     position: absolute;
     bottom: 0;
-    background: #ff2e88;
-    box-shadow: inset 0 0 0 1px #05060f;
+    background: #93a8ff;
+    box-shadow: inset 0 0 0 1px #04080e;
   }
-  .b1 { left: 0;   width: 18px; height: 50%; background: #00f0ff; opacity: 0.7; }
-  .b2 { left: 22px; width: 14px; height: 70%; background: #ff2e88; opacity: 0.8; }
-  .b3 { left: 40px; width: 22px; height: 45%; background: #ffb000; opacity: 0.6; }
-  .b4 { left: 66px; width: 16px; height: 80%; background: #00f0ff; opacity: 0.7; }
-  .b5 { left: 86px; width: 20px; height: 55%; background: #ff2e88; opacity: 0.6; }
+  .b1 { left: 0;   width: 18px; height: 50%; background: #5eead4; opacity: 0.7; }
+  .b2 { left: 22px; width: 14px; height: 70%; background: #93a8ff; opacity: 0.8; }
+  .b3 { left: 40px; width: 22px; height: 45%; background: #fcd34d; opacity: 0.6; }
+  .b4 { left: 66px; width: 16px; height: 80%; background: #5eead4; opacity: 0.7; }
+  .b5 { left: 86px; width: 20px; height: 55%; background: #86efac; opacity: 0.65; }
 
   .furniture {
-    image-rendering: pixelated;
+    --item-tone: #5eead4;
+    border-radius: 3px;
+    border: 1px solid color-mix(in srgb, var(--item-tone) 24%, rgba(94, 234, 212, 0.16));
+    background-color: rgba(11, 20, 32, 0.86);
+    background-image: linear-gradient(
+      90deg,
+      var(--item-tone) 0%,
+      color-mix(in srgb, var(--item-tone) 30%, transparent) 55%,
+      transparent 100%
+    );
+    background-size: 100% 2px;
+    background-position: top left;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 24px rgba(4, 8, 14, 0.35);
   }
-  .furniture::before {
-    content: '';
-    position: absolute;
-    top: -4px;
-    left: -4px;
-    right: -4px;
-    bottom: -4px;
-    border: 2px solid transparent;
-    pointer-events: none;
-    transition: border-color 0.2s;
-  }
-  .furniture:hover::before {
-    border-color: currentColor;
-    opacity: 0.3;
+  .furniture:hover {
+    background-color: rgba(16, 29, 45, 0.95);
+    border-color: color-mix(in srgb, var(--item-tone) 55%, rgba(94, 234, 212, 0.16));
+    box-shadow: 0 12px 28px rgba(4, 8, 14, 0.5), 0 0 18px color-mix(in srgb, var(--item-tone) 16%, transparent);
   }
 </style>

@@ -475,25 +475,80 @@ const systems: GalaxyCategory[] = categories.map((category) => ({
   playbook-explorer {
     display: block;
     max-width: 100%;
-    color: #e8f4ff;
-    font-family: 'DotGothic16', monospace;
-    --sector-color: #00f0ff;
+    color: var(--c-fg-strong);
+    font-family: var(--font-prose);
+    --sector-color: var(--c-neon-cyan);
   }
   playbook-explorer [hidden], .playbook-cosmos [hidden] { display: none !important; }
   playbook-explorer button, playbook-explorer select { font: inherit; }
   playbook-explorer button { cursor: pointer; }
-  playbook-explorer :is(button, select, a):focus-visible { outline: 2px solid #ffb000; outline-offset: 4px; }
+  playbook-explorer :is(button, select, a):focus-visible { outline: 2px solid var(--c-crt-amber); outline-offset: 4px; }
   .explorer-heading { display: flex; align-items: center; }
-  .explorer-eyebrow { color: #00f0ff; font-family: 'VT323', monospace; font-size: 1rem; letter-spacing: .12em; margin: 0 0 .5rem; }
-  .explorer-switch { display: flex; flex-shrink: 0; border: 1px solid #00f0ff40; background: #05060f80; }
-  .explorer-switch button { padding: .25rem .55rem; color: #b6c7db; font-size: .75rem; border-bottom: 2px solid transparent; }
-  .explorer-switch button[aria-pressed="true"] { background: #00f0ff15; color: #00f0ff; border-bottom-color: #00f0ff; }
+  .explorer-eyebrow {
+    color: var(--c-neon-cyan);
+    font-family: var(--font-mono-hud);
+    font-size: .74rem;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    margin: 0 0 .45rem;
+  }
+  .explorer-switch {
+    display: flex;
+    flex-shrink: 0;
+    gap: 2px;
+    padding: 2px;
+    border: 1px solid var(--c-border-strong);
+    border-radius: var(--radius-ui);
+    background: var(--c-bg-elevated);
+    box-shadow: inset 0 1px 0 rgba(94, 234, 212, 0.14);
+  }
+  .explorer-switch button {
+    font-family: var(--font-mono-hud);
+    font-weight: 600;
+    letter-spacing: .06em;
+    padding: .24rem .62rem;
+    color: var(--c-fg-muted);
+    font-size: .74rem;
+    border-radius: 2px;
+    border: 0;
+    transition: color .15s ease, background .15s ease;
+  }
+  .explorer-switch button:hover { color: var(--c-fg-strong); }
+  .explorer-switch button[aria-pressed="true"] {
+    background: rgba(94, 234, 212, 0.18);
+    color: var(--c-neon-cyan);
+  }
   .explorer-filters { display: flex; gap: 1rem; margin-top: 1.5rem; }
-  .explorer-filters label { display: grid; gap: .4rem; min-width: 0; flex: 1; }
-  .explorer-filters label > span { font-size: .8rem; color: #b6c7db; }
-  .explorer-filters select { background: #0a0e27; color: #e8f4ff; padding: .7rem .9rem; border: 1px solid #00f0ff55; border-radius: 0; width: 100%; }
-  .explorer-status { font-size: .8rem; color: #b6c7db; margin: .7rem 0; }
-  .explorer-error, .explorer-empty, .explorer-audio-error { padding: 1rem; border: 1px dashed #ffb000; color: #ffb000; margin: 1rem 0; }
+  .explorer-filters label { display: grid; gap: .35rem; min-width: 0; flex: 1; }
+  .explorer-filters label > span {
+    font-family: var(--font-mono-hud), var(--font-prose);
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--c-fg-muted);
+  }
+  .explorer-filters select {
+    background: var(--c-deep-purple);
+    color: var(--c-fg-strong);
+    padding: .62rem .85rem;
+    border: 1px solid var(--c-border-strong);
+    border-radius: var(--radius-ui);
+    font-family: var(--font-prose);
+    font-size: .88rem;
+    width: 100%;
+  }
+  .explorer-status { font-size: .8rem; color: var(--c-fg-muted); margin: .7rem 0; }
+  .explorer-error, .explorer-empty, .explorer-audio-error {
+    padding: .85rem 1rem;
+    border: 1px solid rgba(252, 211, 77, 0.35);
+    border-radius: var(--radius-ui);
+    background: rgba(252, 211, 77, 0.08);
+    color: var(--c-crt-amber);
+    font-size: .85rem;
+    margin: 1rem 0;
+  }
   html:has(playbook-explorer[data-view="3d"]),
   body:has(playbook-explorer[data-view="3d"]) { overflow: hidden; }
   playbook-explorer[data-view="3d"] {
@@ -508,9 +563,9 @@ const systems: GalaxyCategory[] = categories.map((category) => ({
     padding: 0;
     border: 0;
     overflow: hidden;
-    background: #05060f;
+    background: var(--c-midnight);
   }
-  playbook-explorer[data-view="3d"]::backdrop { background: #05060f; }
+  playbook-explorer[data-view="3d"]::backdrop { background: var(--c-midnight); }
   [data-view="3d"] .explorer-controls {
     position: absolute;
     z-index: 5;
@@ -522,11 +577,15 @@ const systems: GalaxyCategory[] = categories.map((category) => ({
     grid-template-columns: auto minmax(0, 1fr);
     align-items: end;
     gap: .5rem 1rem;
-    padding: .65rem;
-    border: 1px solid #00f0ff55;
-    background: #05060fe6;
+    padding: .65rem .75rem;
+    border: 1px solid var(--c-border-strong);
+    border-radius: var(--radius-card);
+    background: var(--c-bg-hud);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   }
-  [data-view="3d"] .explorer-switch button { padding: .7rem .8rem; }
+  [data-view="3d"] .explorer-switch button { padding: .62rem .75rem; }
   [data-view="3d"] .explorer-filters { margin: 0; }
   [data-view="3d"] .explorer-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
   [data-view="3d"] :is(.explorer-error, .explorer-empty, .explorer-audio-error) { grid-column: 1 / -1; margin: 0; padding: .5rem; }
@@ -542,56 +601,315 @@ const systems: GalaxyCategory[] = categories.map((category) => ({
     bottom: 6rem;
     width: min(320px, calc(100% - 2rem));
     max-height: none;
-    border: 1px solid #00f0ff65;
-    background: #0a0e27ed;
+    border: 1px solid var(--c-border-strong);
+    border-radius: var(--radius-card);
+    background: rgba(11, 20, 32, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.42);
     overscroll-behavior: contain;
   }
   [data-view="3d"] .galaxy-camera { bottom: max(3.5rem, env(safe-area-inset-bottom)); }
-  .galaxy { --map-height: clamp(560px, 72vh, 820px); display: grid; grid-template-columns: minmax(0, 1fr) 285px; border: 1px solid #00f0ff65; background: #05060f; }
-  .galaxy-map { position: relative; min-width: 0; background: radial-gradient(ellipse at 40% 35%, #1a0b2e 0, #0a0e27 40%, #05060f 80%); }
-  .galaxy-map-heading { position: absolute; top: 1rem; left: 1rem; right: 1rem; z-index: 2; display: flex; justify-content: space-between; gap: .5rem; font-family: 'VT323', monospace; font-size: .9rem; letter-spacing: .08em; color: #00f0ff; pointer-events: none; }
-  .galaxy-map-heading button { pointer-events: auto; background: #05060fe6; padding: .2rem .5rem; border: 1px solid #00f0ff55; }
+  .galaxy {
+    --map-height: clamp(560px, 72vh, 820px);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 285px;
+    border: 1px solid var(--c-border-strong);
+    border-radius: var(--radius-card);
+    background: var(--c-midnight);
+  }
+  .galaxy-map {
+    position: relative;
+    min-width: 0;
+    background: radial-gradient(ellipse at 40% 35%, #0f1e30 0%, #0b1420 42%, #060b12 82%);
+  }
+  .galaxy-map-heading {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    gap: .5rem;
+    font-family: var(--font-mono-hud), var(--font-prose);
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: .08em;
+    color: var(--c-neon-cyan);
+    pointer-events: none;
+  }
+  .galaxy-map-heading button {
+    pointer-events: auto;
+    background: var(--c-bg-hud);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: .28rem .6rem;
+    border: 1px solid var(--c-border-strong);
+    border-radius: var(--radius-ui);
+    color: var(--c-fg-body);
+    transition: color .15s ease, border-color .15s ease, background .15s ease;
+  }
+  .galaxy-map-heading button:hover {
+    color: var(--c-neon-cyan);
+    border-color: var(--c-neon-cyan);
+  }
   .galaxy-map-actions { display: flex; gap: .5rem; flex-wrap: wrap; justify-content: end; }
-  .galaxy-map-actions button[aria-pressed="true"] { background: #00f0ff20; }
-  .galaxy-signal { display: inline-block; width: 6px; height: 6px; background: #9bbc0f; box-shadow: 0 0 8px #9bbc0f; margin-right: .4rem; }
+  .galaxy-map-actions button[aria-pressed="true"],
+  .galaxy-map-actions button[aria-expanded="true"] {
+    background: rgba(94, 234, 212, 0.16);
+    color: var(--c-neon-cyan);
+    border-color: rgba(94, 234, 212, 0.45);
+  }
+  .galaxy-signal {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--c-gb-green);
+    box-shadow: 0 0 8px var(--c-gb-green);
+    margin-right: .4rem;
+  }
   .galaxy-stage { position: relative; height: var(--map-height); overflow: hidden; }
   .galaxy-stage canvas { display: block; position: absolute; inset: 0; cursor: grab; }
   .galaxy-stage canvas:active { cursor: grabbing; }
   .galaxy-labels { position: absolute; inset: 0; pointer-events: none; }
   .galaxy-labels button { position: absolute; transform: translate(-50%, -50%); pointer-events: auto; }
-  .galaxy-planet-label { color: var(--sector-color); border: 1px solid color-mix(in srgb, var(--sector-color) 50%, transparent); background: #05060fd9; padding: .35rem .5rem; text-align: center; min-width: 90px; max-width: 150px; line-height: 1.2; }
-  .galaxy-planet-label strong { display: block; font-size: .85rem; font-weight: normal; }
-  .galaxy-planet-label > span { display: block; font: .75rem 'VT323', monospace; letter-spacing: .13em; color: #b6c7db; margin-top: .25rem; }
-  .galaxy-planet-label:hover { background: #0a0e27; box-shadow: 0 0 16px color-mix(in srgb, var(--sector-color) 30%, transparent); }
-  .galaxy-satellite { display: grid; place-items: center; width: 30px; height: 30px; border: 1px solid var(--sector-color); color: var(--sector-color); background: #05060fc9; font-family: 'VT323', monospace !important; font-size: 1rem !important; }
-  .galaxy-satellite[aria-pressed="true"], .galaxy-satellite:hover { color: #05060f; background: var(--sector-color); z-index: 3; }
-  .galaxy-satellite-title { display: none; position: absolute; top: calc(100% + 7px); left: 50%; transform: translateX(-50%); width: max-content; max-width: 190px; padding: .4rem .6rem; border: 1px solid var(--sector-color); background: #05060f; color: #e8f4ff; font: .8rem 'DotGothic16', monospace; }
+  .galaxy-planet-label {
+    color: var(--sector-color);
+    border: 1px solid color-mix(in srgb, var(--sector-color) 42%, transparent);
+    border-radius: var(--radius-ui);
+    background: rgba(6, 11, 18, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: .38rem .55rem;
+    text-align: center;
+    min-width: 92px;
+    max-width: 155px;
+    line-height: 1.2;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.32);
+    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease;
+  }
+  .galaxy-planet-label strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: .76rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+  }
+  .galaxy-planet-label > span {
+    display: block;
+    font: 600 .68rem var(--font-mono-hud);
+    letter-spacing: .1em;
+    color: var(--c-fg-muted);
+    margin-top: .22rem;
+  }
+  .galaxy-planet-label:hover {
+    background: var(--c-deep-purple);
+    border-color: var(--sector-color);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.42), 0 0 12px color-mix(in srgb, var(--sector-color) 24%, transparent);
+  }
+  .galaxy-satellite {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid color-mix(in srgb, var(--sector-color) 65%, transparent);
+    border-radius: var(--radius-ui);
+    color: var(--sector-color);
+    background: rgba(6, 11, 18, 0.88);
+    font-family: var(--font-mono-hud) !important;
+    font-size: .78rem !important;
+    font-weight: 600;
+    transition: color .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .galaxy-satellite[aria-pressed="true"], .galaxy-satellite:hover {
+    color: var(--c-shadow-ink);
+    background: var(--sector-color);
+    border-color: var(--sector-color);
+    z-index: 3;
+  }
+  .galaxy-satellite-title {
+    display: none;
+    position: absolute;
+    top: calc(100% + 7px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: 196px;
+    padding: .42rem .65rem;
+    border: 1px solid color-mix(in srgb, var(--sector-color) 55%, transparent);
+    border-radius: var(--radius-ui);
+    background: var(--c-shadow-ink);
+    color: var(--c-fg-strong);
+    font: .78rem var(--font-prose);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+  }
   .galaxy-satellite:hover .galaxy-satellite-title, .galaxy-satellite:focus-visible .galaxy-satellite-title { display: block; }
-  .galaxy-loading { position: absolute; top: 45%; left: 0; right: 0; text-align: center; color: #00f0ff; }
-  .galaxy-camera { position: absolute; z-index: 2; left: 1rem; bottom: 3.5rem; display: flex; background: #05060fe6; border: 1px solid #00f0ff55; }
-  .galaxy-camera button { width: 36px; height: 38px; color: #00f0ff; font-size: 1.25rem; }
-  .galaxy-camera button:hover { background: #00f0ff20; }
-  .galaxy-camera > span { border-left: 1px solid #00f0ff55; }
-  .galaxy-hint { position: absolute; bottom: 1rem; left: 1rem; right: 1rem; font-size: .7rem; line-height: 1.5; color: #b6c7db; margin: 0; pointer-events: none; }
-  .galaxy-panel { border-left: 1px solid #00f0ff40; padding: 1.25rem; background: #0a0e2799; max-height: var(--map-height); overflow-y: auto; scrollbar-color: #00f0ff55 #05060f; scrollbar-width: thin; }
-  .galaxy-panel h3 { font-size: 1.25rem; color: var(--sector-color); margin: 0 0 .8rem; }
-  .galaxy-panel p:not(.explorer-eyebrow) { font-size: .8rem; line-height: 1.8; color: #b6c7db; margin: 0 0 1rem; }
+  .galaxy-loading {
+    position: absolute;
+    top: 45%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: var(--font-mono-hud), var(--font-prose);
+    font-size: .85rem;
+    letter-spacing: .08em;
+    color: var(--c-neon-cyan);
+  }
+  .galaxy-camera {
+    position: absolute;
+    z-index: 2;
+    left: 1rem;
+    bottom: 3.5rem;
+    display: flex;
+    background: var(--c-bg-hud);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--c-border-strong);
+    border-radius: var(--radius-ui);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.32);
+    overflow: hidden;
+  }
+  .galaxy-camera button {
+    width: 36px;
+    height: 38px;
+    color: var(--c-neon-cyan);
+    font-family: var(--font-mono-hud);
+    font-size: 1.1rem;
+    transition: background .15s ease;
+  }
+  .galaxy-camera button:hover { background: rgba(94, 234, 212, 0.16); }
+  .galaxy-camera > span { border-left: 1px solid var(--c-border); }
+  .galaxy-hint {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    font-family: var(--font-mono-hud), var(--font-prose);
+    font-size: .72rem;
+    line-height: 1.5;
+    color: var(--c-fg-muted);
+    margin: 0;
+    pointer-events: none;
+  }
+  .galaxy-panel {
+    border-left: 1px solid var(--c-border);
+    padding: 1.25rem;
+    background: var(--c-bg-elevated);
+    max-height: var(--map-height);
+    overflow-y: auto;
+    scrollbar-color: rgba(94, 234, 212, 0.3) var(--c-midnight);
+    scrollbar-width: thin;
+  }
+  .galaxy-panel h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: .04em;
+    color: var(--sector-color);
+    margin: 0 0 .75rem;
+  }
+  .galaxy-panel p:not(.explorer-eyebrow) { font-size: .84rem; line-height: 1.75; color: var(--c-fg-body); margin: 0 0 .95rem; }
   .galaxy-destinations { display: grid; gap: .4rem; margin-top: 1rem; }
-  .galaxy-destinations button { position: relative; text-align: left; border-left: 2px solid var(--sector-color); background: #05060f80; padding: .45rem 2.25rem .45rem .65rem; }
-  .galaxy-destinations button:hover { background: #ffffff0a; }
-  .galaxy-destinations button > span:first-child { display: block; color: var(--sector-color); font-size: .9rem; }
-  .galaxy-destinations small { display: block; font-size: .65rem; color: #b6c7db; margin-top: .15rem; }
-  .galaxy-count { position: absolute; top: .65rem; right: .6rem; font: 1.2rem 'VT323', monospace; color: var(--sector-color); }
-  .galaxy-detail { border-block: 1px dashed var(--sector-color); padding: 1rem 0; margin-bottom: 1.2rem; }
-  .galaxy-back-orbit { color: var(--sector-color); font-size: .8rem !important; margin-bottom: .8rem; }
-  .galaxy-detail h4 { display: flex; align-items: center; gap: .5rem; font-size: 1rem; color: #e8f4ff; margin-bottom: .6rem; }
+  .galaxy-destinations button {
+    position: relative;
+    text-align: left;
+    border-left: 2px solid var(--sector-color);
+    border-radius: 0 var(--radius-ui) var(--radius-ui) 0;
+    background: rgba(4, 8, 14, 0.65);
+    padding: .5rem 2.3rem .5rem .7rem;
+    transition: background .15s ease;
+  }
+  .galaxy-destinations button:hover { background: rgba(94, 234, 212, 0.08); }
+  .galaxy-destinations button > span:first-child {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: .04em;
+    color: var(--sector-color);
+    font-size: .82rem;
+  }
+  .galaxy-destinations small { display: block; font-size: .72rem; color: var(--c-fg-muted); margin-top: .15rem; }
+  .galaxy-count {
+    position: absolute;
+    top: .65rem;
+    right: .65rem;
+    font: 600 .88rem var(--font-mono-hud);
+    color: var(--sector-color);
+  }
+  .galaxy-detail {
+    border-block: 1px solid color-mix(in srgb, var(--sector-color) 32%, transparent);
+    padding: 1rem 0;
+    margin-bottom: 1.2rem;
+  }
+  .galaxy-back-orbit {
+    font-family: var(--font-mono-hud), var(--font-prose) !important;
+    color: var(--sector-color);
+    font-size: .78rem !important;
+    margin-bottom: .75rem;
+  }
+  .galaxy-detail h4 {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--c-fg-strong);
+    margin-bottom: .55rem;
+  }
   .galaxy-detail h4 img { object-fit: contain; }
-  .galaxy-detail a { display: flex; justify-content: space-between; color: var(--sector-color); border: 1px solid var(--sector-color); padding: .6rem .7rem; font-size: .85rem; }
-  .galaxy-missions-title { color: #b6c7db; font-size: .75rem; margin-bottom: .6rem; }
-  .galaxy-missions { list-style: none; padding: 0; margin: 0; display: grid; gap: .3rem; }
-  .galaxy-missions button { display: flex; gap: .65rem; align-items: baseline; width: 100%; text-align: left; padding: .5rem; font-size: .8rem; border: 1px solid transparent; }
-  .galaxy-missions button > span { color: var(--sector-color); font: 1rem 'VT323', monospace; }
-  .galaxy-missions button:hover, .galaxy-missions button[aria-pressed="true"] { border-color: var(--sector-color); background: #05060f; }
+  .galaxy-detail a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono-hud), var(--font-prose);
+    font-weight: 600;
+    color: var(--sector-color);
+    background: color-mix(in srgb, var(--sector-color) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--sector-color) 45%, transparent);
+    border-radius: var(--radius-ui);
+    padding: .55rem .75rem;
+    font-size: .82rem;
+    text-decoration: none;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .galaxy-detail a:hover {
+    background: color-mix(in srgb, var(--sector-color) 20%, transparent);
+    border-color: var(--sector-color);
+  }
+  .galaxy-missions-title {
+    font-family: var(--font-mono-hud), var(--font-prose);
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--c-fg-muted);
+    font-size: .72rem;
+    margin-bottom: .6rem;
+  }
+  .galaxy-missions { list-style: none; padding: 0; margin: 0; display: grid; gap: .28rem; }
+  .galaxy-missions button {
+    display: flex;
+    gap: .65rem;
+    align-items: baseline;
+    width: 100%;
+    text-align: left;
+    padding: .48rem .55rem;
+    font-size: .84rem;
+    color: var(--c-fg-body);
+    border: 1px solid transparent;
+    border-radius: var(--radius-ui);
+    transition: background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .galaxy-missions button > span {
+    color: var(--sector-color);
+    font: 600 .76rem var(--font-mono-hud);
+  }
+  .galaxy-missions button:hover, .galaxy-missions button[aria-pressed="true"] {
+    color: var(--c-fg-strong);
+    border-color: color-mix(in srgb, var(--sector-color) 55%, transparent);
+    background: rgba(4, 8, 14, 0.72);
+  }
   @media (min-width: 900px) {
     [data-view="3d"] .galaxy-map-actions {
       position: fixed;
@@ -605,16 +923,16 @@ const systems: GalaxyCategory[] = categories.map((category) => ({
     .explorer-filters { flex-direction: column; gap: .75rem; }
     .galaxy { grid-template-columns: 1fr; }
     .galaxy-stage { height: 480px; }
-    .galaxy-panel { border-left: 0; border-top: 1px solid #00f0ff40; max-height: none; }
+    .galaxy-panel { border-left: 0; border-top: 1px solid var(--c-border); max-height: none; }
     .galaxy-destinations { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .galaxy-planet-label { min-width: 70px; max-width: 110px; padding: .3rem; }
-    .galaxy-planet-label strong { font-size: .7rem; }
-    .galaxy-map-heading { font-size: .8rem; }
+    .galaxy-planet-label strong { font-size: .68rem; }
+    .galaxy-map-heading { font-size: .74rem; }
     playbook-explorer[data-view="3d"] { --hud-top: 9rem; }
     [data-view="3d"] .explorer-controls { grid-template-columns: minmax(0, 1fr); top: max(.5rem, env(safe-area-inset-top)); left: .5rem; right: .5rem; width: auto; padding: .5rem; }
     [data-view="3d"] .explorer-filters { flex-direction: row; gap: .5rem; }
     [data-view="3d"] .explorer-filters label { flex: 1; }
-    [data-view="3d"] .explorer-switch button { padding: .4rem .5rem; font-size: .8rem; }
+    [data-view="3d"] .explorer-switch button { padding: .4rem .5rem; font-size: .76rem; }
     [data-view="3d"] .explorer-filters select { padding: .4rem; font-size: .8rem; }
     [data-view="3d"] .galaxy-map-heading { left: .5rem; right: .5rem; letter-spacing: 0; }
     [data-view="3d"] .galaxy-map-heading > span { display: none; }

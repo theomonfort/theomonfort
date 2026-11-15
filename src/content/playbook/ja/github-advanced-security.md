@@ -9,7 +9,7 @@ accent:
   border: border-neon-cyan
   glow: hover:shadow-neon-cyan
   shadow: shadow-neon-cyan
-  hex: "#00f0ff"
+  hex: "#5eead4"
 order: 19.3
 category: secure
 related: ['secret-scanning', 'code-scanning', 'dependabot']
@@ -147,43 +147,43 @@ links:
 <p class="duo-sub">CVE 公開から初の実悪用までの平均日数。</p>
 <div class="tte">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 292" role="img" aria-label="Mean time from CVE disclosure to first confirmed exploitation, 2018 to 2026">
-<line x1="52.0" y1="70.6" x2="574.0" y2="70.6" stroke="rgba(0,240,255,0.13)" stroke-width="1.2"/>
-<text x="42.0" y="76.6" text-anchor="end" font-size="17" fill="rgba(232,244,255,0.4)">1y</text>
-<line x1="52.0" y1="146.6" x2="574.0" y2="146.6" stroke="rgba(0,240,255,0.13)" stroke-width="1.2"/>
-<text x="42.0" y="152.6" text-anchor="end" font-size="17" fill="rgba(232,244,255,0.4)">1mo</text>
-<line x1="52.0" y1="190.8" x2="574.0" y2="190.8" stroke="rgba(0,240,255,0.13)" stroke-width="1.2"/>
-<text x="42.0" y="196.8" text-anchor="end" font-size="17" fill="rgba(232,244,255,0.4)">7d</text>
-<line x1="52.0" y1="250.0" x2="574.0" y2="250.0" stroke="rgba(0,240,255,0.13)" stroke-width="1.2"/>
-<text x="42.0" y="256.0" text-anchor="end" font-size="17" fill="rgba(232,244,255,0.4)">1d</text>
-<polyline points="52.0,45.3 117.2,54.5 182.5,62.6 247.8,76.2 313.0,80.7 378.2,102.5 443.5,129.3 508.8,156.7 574.0,250.0" fill="none" stroke="#00f0ff" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" opacity="0.25"/>
-<polyline points="52.0,45.3 117.2,54.5 182.5,62.6 247.8,76.2 313.0,80.7 378.2,102.5 443.5,129.3 508.8,156.7 574.0,250.0" fill="none" stroke="#00f0ff" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
-<circle cx="52.0" cy="45.3" r="4.6" fill="#e8f4ff"/>
-<text x="52.0" y="31.3" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">2.3y</text>
-<circle cx="117.2" cy="54.5" r="4.6" fill="#e8f4ff"/>
-<text x="117.2" y="40.5" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">1.7y</text>
-<circle cx="182.5" cy="62.6" r="4.6" fill="#e8f4ff"/>
-<text x="182.5" y="48.6" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">1.3y</text>
-<circle cx="247.8" cy="76.2" r="4.6" fill="#e8f4ff"/>
-<text x="247.8" y="62.2" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">10mo</text>
-<circle cx="313.0" cy="80.7" r="4.6" fill="#e8f4ff"/>
-<text x="313.0" y="66.7" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">8.6mo</text>
-<circle cx="378.2" cy="102.5" r="4.6" fill="#e8f4ff"/>
-<text x="378.2" y="88.5" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">4.2mo</text>
-<circle cx="443.5" cy="129.3" r="4.6" fill="#e8f4ff"/>
-<text x="443.5" y="115.3" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">53d</text>
-<circle cx="508.8" cy="156.7" r="4.6" fill="#e8f4ff"/>
-<text x="508.8" y="142.7" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">21.5d</text>
-<circle cx="574.0" cy="250.0" r="6.5" fill="#ff2e88"/>
-<text x="559.0" y="257.0" text-anchor="end" font-size="20" font-weight="700" fill="#ff7ab2">24h</text>
-<text x="52.0" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2018</text>
-<text x="117.2" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2019</text>
-<text x="182.5" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2020</text>
-<text x="247.8" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2021</text>
-<text x="313.0" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2022</text>
-<text x="378.2" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2023</text>
-<text x="443.5" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2024</text>
-<text x="508.8" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2025</text>
-<text x="574.0" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2026</text>
+<line x1="52.0" y1="70.6" x2="574.0" y2="70.6" stroke="rgba(94,234,212,0.16)" stroke-width="1.2"/>
+<text x="42.0" y="76.6" text-anchor="end" font-size="17" fill="rgba(186,208,222,0.68)">1y</text>
+<line x1="52.0" y1="146.6" x2="574.0" y2="146.6" stroke="rgba(94,234,212,0.16)" stroke-width="1.2"/>
+<text x="42.0" y="152.6" text-anchor="end" font-size="17" fill="rgba(186,208,222,0.68)">1mo</text>
+<line x1="52.0" y1="190.8" x2="574.0" y2="190.8" stroke="rgba(94,234,212,0.16)" stroke-width="1.2"/>
+<text x="42.0" y="196.8" text-anchor="end" font-size="17" fill="rgba(186,208,222,0.68)">7d</text>
+<line x1="52.0" y1="250.0" x2="574.0" y2="250.0" stroke="rgba(94,234,212,0.16)" stroke-width="1.2"/>
+<text x="42.0" y="256.0" text-anchor="end" font-size="17" fill="rgba(186,208,222,0.68)">1d</text>
+<polyline points="52.0,45.3 117.2,54.5 182.5,62.6 247.8,76.2 313.0,80.7 378.2,102.5 443.5,129.3 508.8,156.7 574.0,250.0" fill="none" stroke="#5eead4" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="52.0,45.3 117.2,54.5 182.5,62.6 247.8,76.2 313.0,80.7 378.2,102.5 443.5,129.3 508.8,156.7 574.0,250.0" fill="none" stroke="#5eead4" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="52.0" cy="45.3" r="4.6" fill="#ecf7fb"/>
+<text x="52.0" y="31.3" text-anchor="middle" font-size="18" fill="rgba(236,247,251,0.88)">2.3y</text>
+<circle cx="117.2" cy="54.5" r="4.6" fill="#ecf7fb"/>
+<text x="117.2" y="40.5" text-anchor="middle" font-size="18" fill="rgba(236,247,251,0.88)">1.7y</text>
+<circle cx="182.5" cy="62.6" r="4.6" fill="#ecf7fb"/>
+<text x="182.5" y="48.6" text-anchor="middle" font-size="18" fill="rgba(236,247,251,0.88)">1.3y</text>
+<circle cx="247.8" cy="76.2" r="4.6" fill="#ecf7fb"/>
+<text x="247.8" y="62.2" text-anchor="middle" font-size="18" fill="rgba(236,247,251,0.88)">10mo</text>
+<circle cx="313.0" cy="80.7" r="4.6" fill="#ecf7fb"/>
+<text x="313.0" y="66.7" text-anchor="middle" font-size="18" fill="rgba(236,247,251,0.88)">8.6mo</text>
+<circle cx="378.2" cy="102.5" r="4.6" fill="#ecf7fb"/>
+<text x="378.2" y="88.5" text-anchor="middle" font-size="18" fill="rgba(236,247,251,0.88)">4.2mo</text>
+<circle cx="443.5" cy="129.3" r="4.6" fill="#ecf7fb"/>
+<text x="443.5" y="115.3" text-anchor="middle" font-size="18" fill="rgba(236,247,251,0.88)">53d</text>
+<circle cx="508.8" cy="156.7" r="4.6" fill="#ecf7fb"/>
+<text x="508.8" y="142.7" text-anchor="middle" font-size="18" fill="rgba(236,247,251,0.88)">21.5d</text>
+<circle cx="574.0" cy="250.0" r="6.5" fill="#fb7185"/>
+<text x="559.0" y="257.0" text-anchor="end" font-family="'Orbitron', 'IBM Plex Mono', sans-serif" font-size="20" font-weight="700" fill="#fb7185">24h</text>
+<text x="52.0" y="281" text-anchor="middle" font-size="17" fill="rgba(186,208,222,0.72)">2018</text>
+<text x="117.2" y="281" text-anchor="middle" font-size="17" fill="rgba(186,208,222,0.72)">2019</text>
+<text x="182.5" y="281" text-anchor="middle" font-size="17" fill="rgba(186,208,222,0.72)">2020</text>
+<text x="247.8" y="281" text-anchor="middle" font-size="17" fill="rgba(186,208,222,0.72)">2021</text>
+<text x="313.0" y="281" text-anchor="middle" font-size="17" fill="rgba(186,208,222,0.72)">2022</text>
+<text x="378.2" y="281" text-anchor="middle" font-size="17" fill="rgba(186,208,222,0.72)">2023</text>
+<text x="443.5" y="281" text-anchor="middle" font-size="17" fill="rgba(186,208,222,0.72)">2024</text>
+<text x="508.8" y="281" text-anchor="middle" font-size="17" fill="rgba(186,208,222,0.72)">2025</text>
+<text x="574.0" y="281" text-anchor="middle" font-size="17" fill="rgba(186,208,222,0.72)">2026</text>
 </svg>
 </div>
 <p class="duo-foot">悪用が確認された 3,500 件超の CVE に基づく（CISA KEV + VulnCheck KEV）· zerodayclock.com</p>
@@ -440,7 +440,7 @@ links:
 
 <div class="ctl-widget">
 <div class="ctl-list">
-<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#ffb000">
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#fcd34d">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🚫</span><span class="ctl-name">使わせない org は先に止める</span><span class="ctl-when">配る前にやる</span><a class="ctl-doc" href="https://docs.github.com/ja/enterprise-cloud@latest/admin/enforcing-policies/enforcing-policies-for-your-enterprise/enforcing-policies-for-code-security-and-analysis-for-your-enterprise" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">やること</span><span class="ctl-v">Enterprise → Policies → <b>Advanced Security</b> → <b>Policies</b> タブ → dropdown を <b>Allow for selected organizations</b> にして許可する org だけ残す</span></p>
@@ -448,21 +448,21 @@ links:
 <p class="ctl-row"><span class="ctl-k">効く相手</span><span class="ctl-v"><b>repository administrator だけ</b>。org owner と security manager はポリシーに関係なく有効化できる</span></p>
 </div>
 </details>
-<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#ff4d4d">
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#fb7185">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛡️</span><span class="ctl-name">Push protection が ON になる</span><span class="ctl-when">止まるのは <code>push</code> だけ</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/push-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">止まる</span><span class="ctl-v"><code>git push</code>・GitHub UI 上のコミット・ファイルアップロード・REST API 経由のリクエスト</span></p>
 <p class="ctl-row"><span class="ctl-k">止まらない</span><span class="ctl-v"><code>git pull</code>・<code>git clone</code>・<code>git fetch</code>。<b>「secret に引っかかって pull できなくなる」は誤解</b></span></p>
 </div>
 </details>
-<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#ff4d4d">
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#fb7185">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛂</span><span class="ctl-name">bypass は write 権限者に開放</span><span class="ctl-when">デフォルト設定</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/delegated-bypass" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">デフォルト</span><span class="ctl-v">write 権限を持つ<b>全員</b>が理由を選んで bypass 可能。ただし<b>アラート + 監査ログ + owner へのメール</b>が必ず残る</span></p>
 <p class="ctl-row"><span class="ctl-k">絞るには</span><span class="ctl-v">configuration の <b>Bypass privileges</b> を <b>Specific actors</b> に(= delegated bypass)。指定外の人は申請 → 承認フロー(申請は 7 日で失効)</span></p>
 </div>
 </details>
-<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#00f0ff">
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#5eead4">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔍</span><span class="ctl-name">Code scanning が 3 タイミングで走る</span><span class="ctl-when">Actions 分を消費</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/setup-types" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">いつ走る</span><span class="ctl-v">default / protected branch への push のたび・同ブランチ宛て PR の作成とコミットのたび(fork からの PR は除く)・<b>週 1 回</b>のスケジュール</span></p>
@@ -470,7 +470,7 @@ links:
 <p class="ctl-row"><span class="ctl-k">注意</span><span class="ctl-v">code scanning 自体は <b>merge をブロックしない</b></span></p>
 </div>
 </details>
-<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#00f0ff">
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#5eead4">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🚧</span><span class="ctl-name">merge を止めたいなら ruleset</span><span class="ctl-when">Enterprise → Policies → Rulesets</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/merge-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">設定場所</span><span class="ctl-v">Policies → Repository → Rulesets → <b>Require code scanning results</b></span></p>
@@ -479,14 +479,14 @@ links:
 <p class="ctl-row"><span class="ctl-k">Evaluate とは</span><span class="ctl-v"><b>ブロックせず記録だけ取るお試しモード</b>。<b>Rule Insights</b> ページで「Active だったら何が弾かれたか」を確認できる。残りは Active(即適用)と Disabled(無効)</span></p>
 </div>
 </details>
-<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#9bbc0f">
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#86efac">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🆕</span><span class="ctl-name">新規リポジトリに配る</span><span class="ctl-when">Policy で設定</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/create-custom-configuration" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">やること</span><span class="ctl-v">Policy → <b>Use as default for newly created repositories</b> を設定。Code scanning は <b>Enabled with advanced setup allowed</b> を選ぶと既存の CodeQL workflow を壊さない</span></p>
 <p class="ctl-row"><span class="ctl-k">効く範囲</span><span class="ctl-v"><b>新規リポジトリのみ</b>。既存リポジトリには一切効かない</span></p>
 </div>
 </details>
-<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#9bbc0f">
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#86efac">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🗂️</span><span class="ctl-name">既存リポジトリに配る</span><span class="ctl-when">Apply to で別途実行</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/apply-custom-configuration" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">やること</span><span class="ctl-v">Configurations 一覧 → <b>Apply to</b> → <b>All repositories without configurations</b></span></p>
@@ -495,7 +495,7 @@ links:
 <p class="ctl-row"><span class="ctl-k">対象</span><span class="ctl-v">archived リポジトリにも適用される(secret scanning は archived でも動くため)</span></p>
 </div>
 </details>
-<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#9bbc0f">
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#86efac">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🎯</span><span class="ctl-name">リポジトリを選んで配る</span><span class="ctl-when">org / enterprise config に対応</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/apply-custom-configuration" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">repo 単位</span><span class="ctl-v">org のリポジトリ一覧から、<b>enterprise で作成した configuration も選択した repo に適用できる</b>。選択する画面が org レベルなだけで、config の作成元は <b>org に限定されない</b></span></p>
@@ -503,7 +503,7 @@ links:
 <p class="ctl-row"><span class="ctl-k">どちらが優先</span><span class="ctl-v">enterprise 側の変更が org configuration と衝突すると repo は <code>removed_by_enterprise</code> になり org config が外れる。<b>enterprise が優先</b></span></p>
 </div>
 </details>
-<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#9bbc0f">
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#86efac">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">⚖️</span><span class="ctl-name">どの configuration が適用されるか</span><span class="ctl-when">1 repo = 1 config（後勝ち）</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/reference/security-at-scale/configuration-statuses" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">基本ルール</span><span class="ctl-v">マージや重ね掛けはなく、<b>1 リポジトリに紐づく configuration は常に 1 つだけ</b>。別の config を当てると Detach 不要で<b>後から適用した方が上書き</b>する（<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-organization-security/manage-your-coverage/detach-security-configuration" target="_blank" rel="noopener noreferrer">Detach の仕様 ↗</a>）。なお Detach だけでは有効化済みの機能は OFF にならない</span></p>

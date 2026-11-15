@@ -9,7 +9,7 @@ accent:
   border: border-gb-green
   glow: hover:shadow-neon-green
   shadow: shadow-neon-green
-  hex: "#9bbc0f"
+  hex: "#86efac"
 order: 6
 category: plan
 related: ['mcp', 'instructions', 'custom-agent', 'cli']
@@ -92,30 +92,30 @@ When a user makes a request, the harness first loads only the **metadata for eve
 <svg viewBox="0 0 1080 490" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
   <defs>
     <marker id="arrow-orange" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ffb000"/>
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#fcd34d"/>
     </marker>
     <marker id="arrow-blue" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/>
     </marker>
     <marker id="arrow-pink" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ff2e88"/>
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#93a8ff"/>
     </marker>
   </defs>
-  <path d="M 260 50 L 720 50" fill="none" stroke="#ffb000" stroke-width="2" marker-end="url(#arrow-orange)"/>
-  <path d="M 140 85 L 140 400 L 400 400 L 400 420" fill="none" stroke="#ffb000" stroke-width="2" marker-end="url(#arrow-orange)"/>
-  <path d="M 410 290 L 410 400 L 515 400 L 515 420" fill="none" stroke="#ff2e88" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-pink)"/>
+  <path d="M 260 50 L 720 50" fill="none" stroke="#fcd34d" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <path d="M 140 85 L 140 400 L 400 400 L 400 420" fill="none" stroke="#fcd34d" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <path d="M 410 290 L 410 400 L 515 400 L 515 420" fill="none" stroke="#93a8ff" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-pink)"/>
   <path d="M 620 420 L 620 376" fill="none" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)"/>
-  <path d="M 660 375 L 750 375 L 750 420" fill="none" stroke="#ffb000" stroke-width="2" marker-end="url(#arrow-orange)"/>
-  <path d="M 660 340 L 690 340 L 690 200 L 720 200" fill="none" stroke="#ffb000" stroke-width="2" marker-end="url(#arrow-orange)"/>
-  <rect x="20" y="15" width="240" height="70" rx="12" fill="#0a0e27" stroke="#ffb000" stroke-width="2"/>
-  <text x="35" y="36" fill="#ffb000" font-size="11" font-weight="bold" letter-spacing="1">HARNESS</text>
-  <text x="35" y="58" fill="#e8f4ff" font-size="12" font-weight="bold">PUT ALL SKILLS DESCRIPTIONS</text>
-  <text x="35" y="74" fill="#e8f4ff" font-size="12" font-weight="bold">IN CONTEXT</text>
-  <rect x="720" y="15" width="340" height="215" rx="6" fill="#0a0e27" stroke="#1e2a4a" stroke-width="1"/>
+  <path d="M 660 375 L 750 375 L 750 420" fill="none" stroke="#fcd34d" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <path d="M 660 340 L 690 340 L 690 200 L 720 200" fill="none" stroke="#fcd34d" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <rect x="20" y="15" width="240" height="70" rx="12" fill="#0b1420" stroke="#fcd34d" stroke-width="2"/>
+  <text x="35" y="36" fill="#fcd34d" font-size="11" font-weight="bold" letter-spacing="1">HARNESS</text>
+  <text x="35" y="58" fill="#ecf7fb" font-size="12" font-weight="bold">PUT ALL SKILLS DESCRIPTIONS</text>
+  <text x="35" y="74" fill="#ecf7fb" font-size="12" font-weight="bold">IN CONTEXT</text>
+  <rect x="720" y="15" width="340" height="215" rx="6" fill="#0b1420" stroke="#1e2a4a" stroke-width="1"/>
   <text x="735" y="40" font-size="10" fill="#cfe9ff">
     <tspan x="735" dy="0" fill="#555">---</tspan>
-    <tspan x="735" dy="14"><tspan fill="#ffb000">name:</tspan> api-endpoint</tspan>
-    <tspan x="735" dy="14"><tspan fill="#ffb000">description:</tspan> Generate REST API</tspan>
+    <tspan x="735" dy="14"><tspan fill="#fcd34d">name:</tspan> api-endpoint</tspan>
+    <tspan x="735" dy="14"><tspan fill="#fcd34d">description:</tspan> Generate REST API</tspan>
     <tspan x="735" dy="14">  endpoints for the OctoCAT Supply</tspan>
     <tspan x="735" dy="14">  Chain application following</tspan>
     <tspan x="735" dy="14">  established patterns. Use this</tspan>
@@ -123,37 +123,37 @@ When a user makes a request, the harness first loads only the **metadata for eve
     <tspan x="735" dy="14">  endpoints, adding routes,</tspan>
     <tspan x="735" dy="14">  implementing JPA repositories.</tspan>
     <tspan x="735" dy="14" fill="#555">---</tspan>
-    <tspan x="735" dy="22" fill="#00f0ff" font-weight="bold"># API Endpoint Development</tspan>
-    <tspan x="735" dy="22" fill="#00f0ff" font-weight="bold">## Architecture Overview</tspan>
+    <tspan x="735" dy="22" fill="#5eead4" font-weight="bold"># API Endpoint Development</tspan>
+    <tspan x="735" dy="22" fill="#5eead4" font-weight="bold">## Architecture Overview</tspan>
   </text>
-  <rect x="370" y="230" width="80" height="60" rx="10" fill="#0a0e27" stroke="#ff2e88" stroke-width="2"/>
-  <text x="410" y="252" fill="#ff2e88" font-size="10" font-weight="bold" letter-spacing="1" text-anchor="middle">USER</text>
-  <text x="410" y="271" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">"WORK ON</text>
-  <text x="410" y="284" fill="#e8f4ff" font-size="11" font-weight="bold" text-anchor="middle">API"</text>
-  <rect x="420" y="305" width="240" height="70" rx="12" fill="#0a0e27" stroke="#ffb000" stroke-width="2"/>
-  <text x="435" y="326" fill="#ffb000" font-size="11" font-weight="bold" letter-spacing="1">HARNESS</text>
-  <text x="435" y="348" fill="#e8f4ff" font-size="12" font-weight="bold">LOADS FULL SKILL INTO</text>
-  <text x="435" y="364" fill="#e8f4ff" font-size="12" font-weight="bold">CONTEXT</text>
+  <rect x="370" y="230" width="80" height="60" rx="10" fill="#0b1420" stroke="#93a8ff" stroke-width="2"/>
+  <text x="410" y="252" fill="#93a8ff" font-size="10" font-weight="bold" letter-spacing="1" text-anchor="middle">USER</text>
+  <text x="410" y="271" fill="#ecf7fb" font-size="11" font-weight="bold" text-anchor="middle">"WORK ON</text>
+  <text x="410" y="284" fill="#ecf7fb" font-size="11" font-weight="bold" text-anchor="middle">API"</text>
+  <rect x="420" y="305" width="240" height="70" rx="12" fill="#0b1420" stroke="#fcd34d" stroke-width="2"/>
+  <text x="435" y="326" fill="#fcd34d" font-size="11" font-weight="bold" letter-spacing="1">HARNESS</text>
+  <text x="435" y="348" fill="#ecf7fb" font-size="12" font-weight="bold">LOADS FULL SKILL INTO</text>
+  <text x="435" y="364" fill="#ecf7fb" font-size="12" font-weight="bold">CONTEXT</text>
   <text x="635" y="389" fill="#3b82f6" font-size="10" font-weight="bold">need the</text>
   <text x="635" y="402" fill="#3b82f6" font-size="10" font-weight="bold">API skill</text>
-  <text x="20" y="445" fill="#e8f4ff" font-size="11" font-weight="bold">MODEL</text>
-  <text x="20" y="461" fill="#e8f4ff" font-size="11" font-weight="bold">CONTEXT</text>
-  <rect x="95" y="420" width="110" height="55" rx="10" fill="#9bbc0f"/>
-  <text x="150" y="444" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
-  <text x="150" y="460" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
-  <rect x="215" y="420" width="110" height="55" rx="10" fill="#00f0ff"/>
-  <text x="270" y="453" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
-  <rect x="335" y="420" width="130" height="55" rx="10" fill="#ffb000"/>
-  <text x="400" y="444" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SKILLS</text>
-  <text x="400" y="460" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">DESCRIPTION</text>
-  <rect x="475" y="420" width="80" height="55" rx="10" fill="#ff2e88"/>
-  <text x="515" y="453" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
-  <rect x="565" y="420" width="110" height="55" rx="10" fill="#00f0ff"/>
-  <text x="620" y="444" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SKILL</text>
-  <text x="620" y="460" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">REQUEST</text>
-  <rect x="685" y="420" width="130" height="55" rx="10" fill="#ffb000"/>
-  <text x="750" y="444" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">SKILL</text>
-  <text x="750" y="460" fill="#05060f" font-size="11" font-weight="bold" text-anchor="middle">DOCUMENT</text>
+  <text x="20" y="445" fill="#ecf7fb" font-size="11" font-weight="bold">MODEL</text>
+  <text x="20" y="461" fill="#ecf7fb" font-size="11" font-weight="bold">CONTEXT</text>
+  <rect x="95" y="420" width="110" height="55" rx="10" fill="#86efac"/>
+  <text x="150" y="444" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
+  <text x="150" y="460" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
+  <rect x="215" y="420" width="110" height="55" rx="10" fill="#5eead4"/>
+  <text x="270" y="453" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
+  <rect x="335" y="420" width="130" height="55" rx="10" fill="#fcd34d"/>
+  <text x="400" y="444" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">SKILLS</text>
+  <text x="400" y="460" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">DESCRIPTION</text>
+  <rect x="475" y="420" width="80" height="55" rx="10" fill="#93a8ff"/>
+  <text x="515" y="453" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
+  <rect x="565" y="420" width="110" height="55" rx="10" fill="#5eead4"/>
+  <text x="620" y="444" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">SKILL</text>
+  <text x="620" y="460" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">REQUEST</text>
+  <rect x="685" y="420" width="130" height="55" rx="10" fill="#fcd34d"/>
+  <text x="750" y="444" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">SKILL</text>
+  <text x="750" y="460" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">DOCUMENT</text>
 </svg>
 </figure>
 
