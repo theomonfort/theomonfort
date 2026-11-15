@@ -61,9 +61,6 @@ links:
     label: "Remote control of CLI sessions — GA (mobile/web/VS Code) (2026-05-18)"
     url: https://github.blog/changelog/2026-05-18-remote-control-for-copilot-cli-sessions-now-generally-available-on-mobile-web-and-vs-code
   - group: 📰 Recent Changelog
-    label: "Custom registry-based MCP allowlists (2026-04-16)"
-    url: https://github.blog/changelog/2026-04-16-copilot-cli-supports-custom-registry-based-mcp-allowlists
-  - group: 📰 Recent Changelog
     label: "GitHub Copilot CLI is now generally available (2026-02-25)"
     url: https://github.blog/changelog/2026-02-25-github-copilot-cli-is-now-generally-available
 ---

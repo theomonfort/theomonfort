@@ -24,10 +24,10 @@ links:
     url: https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference#mcp-server-configuration
   - label: GitHub 公式 MCP server
     url: https://github.com/github/github-mcp-server
-  - label: GitHub Docs — Configure MCP server access (org/enterprise)
-    url: https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-mcp-usage/configure-mcp-server-access
+  - label: GitHub Docs — Configure an MCP server allowlist (enterprise)
+    url: https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-mcp-usage/configure-enterprise-allowlist
   - label: GitHub Docs — MCP server usage in your company
-    url: https://docs.github.com/en/copilot/concepts/mcp-management
+    url: https://docs.github.com/en/copilot/concepts/enterprise/mcp-management
   - label: GitHub Docs — MCP and the cloud agent
     url: https://docs.github.com/en/copilot/concepts/agents/cloud-agent/mcp-and-cloud-agent
   - group: 📖 公式ドキュメント
@@ -36,9 +36,6 @@ links:
   - group: 📖 公式ドキュメント
     label: 対応する Copilot connectors
     url: https://docs.github.com/en/copilot/reference/supported-connectors
-  - group: 📖 公式ドキュメント
-    label: GitHub Docs — MCP allowlist enforcement
-    url: https://docs.github.com/en/copilot/reference/mcp-allowlist-enforcement
   - group: 🔌 コネクターを探す
     label: Copilot カスタマイズページ
     url: https://github.com/copilot/customize
@@ -46,14 +43,14 @@ links:
     label: "VS Code の Copilot connectors（パブリックプレビュー、2026-10-28）"
     url: https://github.blog/changelog/2026-10-28-github-copilot-in-vs-code-universe-releases#connect-services-with-copilot-connectors
   - group: 📰 発表
+    label: "Enterprise managed settings での MCP allowlists（GA、2026-08-06）"
+    url: https://github.blog/changelog/2026-08-06-mcp-allowlists-in-enterprise-managed-settings/
+  - group: 📰 発表
     label: "Secret scanning with GitHub MCP Server is now GA (2026-05-05)"
     url: https://github.blog/changelog/2026-05-05-secret-scanning-with-github-mcp-server-is-now-generally-available
   - group: 📰 発表
     label: "Dependency scanning with GitHub MCP Server (public preview) (2026-05-05)"
     url: https://github.blog/changelog/2026-05-05-dependency-scanning-with-github-mcp-server-is-in-public-preview
-  - group: 📰 発表
-    label: "Custom registry-based MCP allowlists for Copilot CLI (2026-04-16)"
-    url: https://github.blog/changelog/2026-04-16-copilot-cli-supports-custom-registry-based-mcp-allowlists
 ---
 
 ## 一言で
