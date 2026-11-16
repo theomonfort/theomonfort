@@ -261,7 +261,9 @@ export function buildGraphData(notesMap, { includeUnresolved = true } = {}) {
 
   for (const note of notesMap.values()) {
     for (const wl of note.wikilinks) {
-      let targetSlug = resolveTarget(wl.target);
+      const resolved = resolveTarget(wl.target);
+      const isResolved = Boolean(resolved);
+      let targetSlug = resolved;
 
       if (!targetSlug) {
         if (!includeUnresolved) continue;
@@ -296,13 +298,18 @@ export function buildGraphData(notesMap, { includeUnresolved = true } = {}) {
         });
       }
 
-      const edgeKey = `${note.slug}-->${targetSlug}`;
-      if (!pairSet.has(edgeKey)) {
-        pairSet.add(edgeKey);
+      // Undirected canonical pair key so bidirectional links neither double-spring nor double-stroke
+      const pairKey =
+        note.slug < targetSlug
+          ? `${note.slug}:::${targetSlug}`
+          : `${targetSlug}:::${note.slug}`;
+      if (!pairSet.has(pairKey)) {
+        pairSet.add(pairKey);
         links.push({
-          id: edgeKey,
+          id: pairKey,
           source: note.slug,
           target: targetSlug,
+          unresolved: !isResolved,
         });
       }
     }
@@ -313,14 +320,12 @@ export function buildGraphData(notesMap, { includeUnresolved = true } = {}) {
     degreeMap.set(node.id, new Set());
   }
   for (const link of links) {
-    const src = nodesMap.get(link.source);
-    const tgt = nodesMap.get(link.target);
-    if (src) src.outDegree += 1;
-    if (tgt) tgt.inDegree += 1;
     degreeMap.get(link.source)?.add(link.target);
     degreeMap.get(link.target)?.add(link.source);
   }
   for (const node of nodesMap.values()) {
+    node.outDegree = outgoing.get(node.id)?.size || 0;
+    node.inDegree = backlinks.get(node.id)?.length || 0;
     node.degree = degreeMap.get(node.id)?.size || 0;
   }
 

@@ -42,6 +42,7 @@ export const PHOSPHOR_GROUP_COLORS = {
   agents: '#93a8ff',
   hooks: '#fb7185',
   context: '#5eead4',
+  harness: '#fcd34d',
 
   // Develop vault groups
   vscode: '#5eead4',
@@ -66,7 +67,9 @@ export const PHOSPHOR_GROUP_COLORS = {
   product: '#c4b5fd',
   secret: '#fcd34d',
   scanning: '#67e8f9',
+  code: '#67e8f9',
   dependabot: '#86efac',
+  supply: '#fcd34d',
   quality: '#5eead4',
   governance: '#fb7185',
 
@@ -78,8 +81,9 @@ export const PHOSPHOR_GROUP_COLORS = {
   migrations: '#fb7185',
 
   // Fallbacks
+  concept: '#9fb8c9',
   unresolved: '#4b6478',
-  general: '#728fa3',
+  general: '#8faab9',
 };
 
 export const RETRO_GROUP_COLORS = {
@@ -112,6 +116,7 @@ export const RETRO_GROUP_COLORS = {
   agents: '#ff2e88',
   hooks: '#ff6e67',
   context: '#2dd4bf',
+  harness: '#ffb000',
 
   // Develop vault groups
   vscode: '#00f0ff',
@@ -136,7 +141,9 @@ export const RETRO_GROUP_COLORS = {
   product: '#bd93f9',
   secret: '#ffb000',
   scanning: '#38bdf8',
+  code: '#38bdf8',
   dependabot: '#9bbc0f',
+  supply: '#ffb000',
   quality: '#e8f4ff',
   governance: '#ff6e67',
 
@@ -148,6 +155,7 @@ export const RETRO_GROUP_COLORS = {
   migrations: '#ff6e67',
 
   // Fallbacks
+  concept: '#9fb6d8',
   unresolved: '#4a5578',
   general: '#8ba4c7',
 };
@@ -160,116 +168,96 @@ export function isRetroTheme() {
 
 const PHOSPHOR_PALETTE = {
   bgBase: '#060b12',
-  bgDeep: '#04080e',
-  nebulaCore: 'rgba(94, 234, 212, 0.08)',
-  nebulaAmbient: 'rgba(94, 234, 212, 0.045)',
-  gridLine: 'rgba(94, 234, 212, 0.03)',
-  gridDot: 'rgba(94, 234, 212, 0.14)',
+  nebulaTop: 'rgba(94, 234, 212, 0.045)',
+  nebulaMid: 'rgba(94, 234, 212, 0.022)',
+  gridLine: 'rgba(94, 234, 212, 0.015)',
+  gridDot: 'rgba(94, 234, 212, 0.055)',
 
-  // Monochrome telemetry node tones (when Groups toggle is off)
-  nodeLeaf: '#5c7c93',
-  nodeMid: '#8eb4cc',
-  nodeHub: '#ecf7fb',
-  nodeRoot: '#fcd34d',
-  nodeUnresolved: '#3d5568',
-  nodeDimmed: '#0f1c2b',
-  nodeCoreStroke: 'rgba(4, 8, 14, 0.82)',
-  unresolvedStrokeFocus: 'rgba(94, 234, 212, 0.55)',
-  unresolvedStrokeDim: 'rgba(114, 143, 163, 0.16)',
+  // Calm monochrome seafoam-slate nodes when Groups toggle is OFF (default)
+  nodeDefault: '#8faab9',
+  nodeHub: '#c2dae6',
+  nodeUnresolved: '#485e70',
+  nodeDimmed: '#152231',
+  nodeNeighbor: '#daedf6',
+  nodeSecondaryNeighbor: '#dce4ff',
+  nodeSharedNeighbor: '#f4fbff',
 
-  // Primary focus / Seafoam Aqua (#5eead4) + Solar Champagne reticle (#fcd34d)
+  // Primary focus = Seafoam Aqua (#5eead4)
   primary: '#5eead4',
-  primaryBright: '#67e8f9',
-  primaryGlow: 'rgba(94, 234, 212, 0.30)',
-  primaryEdge: 'rgba(94, 234, 212, 0.88)',
-  selectRing: '#fcd34d',
-  selectGlow: 'rgba(252, 211, 77, 0.28)',
-  activeRing: 'rgba(94, 234, 212, 0.72)',
-  haloOuterStop: 'rgba(6, 11, 18, 0)',
+  primaryRgb: '94, 234, 212',
+  primaryGlow: 'rgba(94, 234, 212, 0.34)',
+  selectRingRgb: '186, 250, 236',
 
-  // Secondary hover (when another node is already pinned) = Starlight Periwinkle (#93a8ff)
+  // Secondary hover (while another node is pinned) = Starlight Periwinkle (#93a8ff)
   secondary: '#93a8ff',
-  secondaryBright: '#c4b5fd',
-  secondaryGlow: 'rgba(147, 168, 255, 0.32)',
-  secondaryEdge: 'rgba(147, 168, 255, 0.88)',
+  secondaryRgb: '147, 168, 255',
 
-  // Search hit = Solar Champagne (#fcd34d)
-  search: '#fcd34d',
-  searchGlow: 'rgba(252, 211, 77, 0.34)',
+  // Search match = Solar Champagne (#fcd34d)
+  searchMatch: '#fcd34d',
+  searchGlow: 'rgba(252, 211, 77, 0.36)',
 
   // Edges
-  edgeIdle: 'rgba(94, 234, 212, 0.16)',
-  edgeIdleSubtle: 'rgba(94, 234, 212, 0.10)',
-  edgeDimmed: 'rgba(114, 143, 163, 0.045)',
+  edgeIdleRgb: '196, 228, 242',
+  edgeIdleAlpha: 0.135,
+  edgeUnresolvedAlpha: 0.072,
+  edgeDimAlpha: 0.026,
 
-  // Typography & crisp obsidian label framing
-  labelActive: '#ecf7fb',
-  labelNeighbor: '#bad0de',
-  labelNormal: '#bad0de',
-  labelDim: '#728fa3',
-  labelHalo: '#04080e',
-  labelBg: 'rgba(4, 8, 14, 0.92)',
-  labelBorderSelect: 'rgba(252, 211, 77, 0.68)',
-  labelBorderHover: 'rgba(94, 234, 212, 0.62)',
-  labelBorderSecondary: 'rgba(147, 168, 255, 0.65)',
-  labelBorderNeighbor: 'rgba(94, 234, 212, 0.24)',
+  // High-legibility floating unboxed typography
+  labelHighlightRgb: '255, 255, 255', // #ffffff
+  labelNeighborRgb: '242, 249, 253', // #f2f9fd
+  labelSecNeighborRgb: '232, 240, 255', // #e8f0ff
+  labelDefaultRgb: '230, 242, 248', // #e6f2f8
+  labelDimRgb: '148, 172, 190',
+  haloRgb: '6, 11, 18',
 };
 
 const RETRO_PALETTE = {
-  bgInner: '#1a0b2e',
+  bgInner: '#150b26',
   bgMid: '#0a0e27',
   bgOuter: '#05060f',
-  gridMinor: 'rgba(0, 240, 255, 0.038)',
-  gridMajor: 'rgba(255, 46, 136, 0.068)',
+  gridMinor: 'rgba(0, 240, 255, 0.020)',
+  gridMajor: 'rgba(255, 46, 136, 0.034)',
 
-  // Monochrome tactical node tones (when Groups toggle is off)
-  nodeLeaf: '#6b8db5',
-  nodeMid: '#9ec5eb',
-  nodeHub: '#d9eeff',
-  nodeRoot: '#ffb000',
-  nodeUnresolved: '#3d4870',
-  nodeDimmed: '#151b38',
-  nodeCoreStroke: 'rgba(5, 6, 15, 0.68)',
-  unresolvedStrokeFocus: 'rgba(0, 240, 255, 0.55)',
-  unresolvedStrokeDim: 'rgba(138, 164, 199, 0.14)',
+  // Calm monochrome arcade-slate nodes when Groups toggle is OFF (default)
+  nodeDefault: '#8fa7cb',
+  nodeHub: '#c4ddfb',
+  nodeUnresolved: '#48527a',
+  nodeDimmed: '#171d3a',
+  nodeNeighbor: '#dcecff',
+  nodeSecondaryNeighbor: '#cff9ff',
+  nodeSharedNeighbor: '#f5fbff',
 
   // Primary focus = Neon Magenta (#ff2e88)
   primary: '#ff2e88',
-  primaryBright: '#ff8ec0',
-  primaryGlow: 'rgba(255, 46, 136, 0.42)',
-  primaryEdge: 'rgba(255, 46, 136, 0.92)',
-  selectRing: '#ff8ec0',
-  selectGlow: 'rgba(255, 46, 136, 0.42)',
-  activeRing: 'rgba(0, 240, 255, 0.72)',
-  haloOuterStop: 'rgba(5, 6, 15, 0)',
+  primaryRgb: '255, 46, 136',
+  primaryGlow: 'rgba(255, 46, 136, 0.36)',
+  selectRingRgb: '255, 174, 212',
 
-  // Secondary hover (when another node is already pinned) = Neon Cyan (#00f0ff)
+  // Secondary hover (while another node is pinned) = Neon Cyan (#00f0ff)
   secondary: '#00f0ff',
-  secondaryBright: '#a5f8ff',
-  secondaryGlow: 'rgba(0, 240, 255, 0.40)',
-  secondaryEdge: 'rgba(0, 240, 255, 0.88)',
+  secondaryRgb: '0, 240, 255',
 
-  // Search hit = CRT Amber (#ffb000)
-  search: '#ffb000',
-  searchGlow: 'rgba(255, 176, 0, 0.42)',
+  // Search match = CRT Amber (#ffb000)
+  searchMatch: '#ffb000',
+  searchGlow: 'rgba(255, 176, 0, 0.38)',
 
   // Edges
-  edgeIdle: 'rgba(0, 240, 255, 0.16)',
-  edgeIdleSubtle: 'rgba(0, 240, 255, 0.09)',
-  edgeDimmed: 'rgba(138, 164, 199, 0.035)',
+  edgeIdleRgb: '196, 224, 255',
+  edgeIdleAlpha: 0.135,
+  edgeUnresolvedAlpha: 0.072,
+  edgeDimAlpha: 0.026,
 
-  // Typography & crisp pixel label framing
-  labelActive: '#e8f4ff',
-  labelNeighbor: '#cde6ff',
-  labelNormal: 'rgba(232, 244, 255, 0.82)',
-  labelDim: 'rgba(232, 244, 255, 0.24)',
-  labelHalo: '#05060f',
-  labelBg: 'rgba(5, 6, 15, 0.88)',
-  labelBorderSelect: 'rgba(255, 46, 136, 0.78)',
-  labelBorderHover: 'rgba(255, 46, 136, 0.78)',
-  labelBorderSecondary: 'rgba(0, 240, 255, 0.75)',
-  labelBorderNeighbor: 'rgba(0, 240, 255, 0.24)',
+  // High-legibility floating unboxed typography
+  labelHighlightRgb: '255, 255, 255', // #ffffff
+  labelNeighborRgb: '244, 248, 255', // #f4f8ff
+  labelSecNeighborRgb: '222, 250, 255', // #defaff
+  labelDefaultRgb: '232, 244, 255', // #e8f4ff
+  labelDimRgb: '164, 184, 214',
+  haloRgb: '7, 10, 24',
 };
+
+const LABEL_FONT_STACK =
+  '"IBM Plex Sans JP", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
 
 export function getGroupColor(group, retro = isRetroTheme()) {
   const colorMap = retro ? RETRO_GROUP_COLORS : PHOSPHOR_GROUP_COLORS;
@@ -287,13 +275,24 @@ export function getGroupColor(group, retro = isRetroTheme()) {
   return palette[Math.abs(hash) % palette.length];
 }
 
-function clamp(val, min, max) {
-  return Math.max(min, Math.min(max, val));
+export function computeNodeRadius(
+  degree,
+  { minDegree = 0, maxDegree = 16, exists = true } = {},
+) {
+  if (!exists) return 3.4;
+  const d = Math.max(0, Number(degree) || 0);
+  if (d === 0) return 3.8;
+  const span = Math.max(8, maxDegree - minDegree);
+  const norm = Math.max(0, Math.min(1, (d - minDegree) / span));
+  const extra = d > maxDegree ? Math.min(2.6, Math.sqrt(d - maxDegree) * 0.38) : 0;
+  return Math.min(
+    26,
+    4.2 + Math.pow(norm, 1.15) * 15.2 + Math.sqrt(Math.min(d, maxDegree)) * 0.45 + extra,
+  );
 }
 
-function truncateLabel(text, maxChars = 28) {
-  const s = String(text || '');
-  return s.length > maxChars ? `${s.slice(0, maxChars - 1)}…` : s;
+function clamp(val, min, max) {
+  return Math.max(min, Math.min(max, val));
 }
 
 export class GraphView {
@@ -303,26 +302,38 @@ export class GraphView {
     this.onSelectNode = options.onSelectNode || (() => {});
     this.onSelectionChange = options.onSelectionChange || (() => {});
     this.onHoverNode = options.onHoverNode || (() => {});
-    this.rightInset = options.rightInset ?? 0;
+    this.rightInset = Math.max(0, Number(options.rightInset) || 0);
 
     this.width = 800;
     this.height = 600;
     this.dpr = Math.min(window.devicePixelRatio || 1, 2);
     this.transform = zoomIdentity;
+    this.hasInitialTransform = false;
 
     this.rawGraph = { nodes: [], links: [], adjacency: new Map() };
+    this.allNodes = [];
+    this.allLinks = [];
     this.nodes = [];
     this.links = [];
     this.nodeById = new Map();
+    this.nodePositions = new Map();
+    this.adjacency = new Map();
 
     this.activeSlug = null;
     this.selectedSlug = null;
+    this.hoveredNode = null;
     this.hoverSlug = null;
     this.searchQuery = '';
     this.searchMatches = new Set();
     this.localDepth = 0;
     this.showUnresolved = true;
-    this.colorByGroup = options.colorByGroup !== false;
+    this.colorByGroup = Boolean(options.colorByGroup);
+
+    // Smooth dual-focus lighting blends (matching original Zettelkasten repo)
+    this.selectBlend = 0;
+    this.displaySelectedId = null;
+    this.hoverBlend = 0;
+    this.displayFocusId = null;
 
     this.pointerDownPos = null;
     this.isDraggingNode = false;
@@ -333,11 +344,6 @@ export class GraphView {
     this.zoomBehavior = null;
 
     this.handleThemeChange = () => {
-      for (const node of this.nodes) {
-        if (node.exists) {
-          node.color = getGroupColor(node.group);
-        }
-      }
       this.requestRender();
     };
     if (typeof window !== 'undefined') {
@@ -349,20 +355,10 @@ export class GraphView {
     this.startRenderLoop();
   }
 
-  nodeRadius(node) {
-    if (!node.exists) return 3.6;
-    const deg = node.degree || 0;
-    if (node.group === 'root') return clamp(7.5 + Math.sqrt(deg) * 1.45, 9, 14.5);
-    return clamp(4.2 + Math.sqrt(deg) * 1.45, 4.4, 13.0);
-  }
-
-  getMonochromeNodeFill(node, palette = isRetroTheme() ? RETRO_PALETTE : PHOSPHOR_PALETTE) {
-    if (!node.exists) return palette.nodeUnresolved;
-    if (node.group === 'root') return palette.nodeRoot;
-    const deg = node.degree || 0;
-    if (deg >= 7) return palette.nodeHub;
-    if (deg >= 3) return palette.nodeMid;
-    return palette.nodeLeaf;
+  visualCenterX() {
+    const usableRight = Math.max(280, this.width - this.rightInset);
+    const leftHudBias = this.width >= 1120 ? 84 : 0;
+    return (leftHudBias + usableRight) / 2;
   }
 
   refreshSize() {
@@ -382,6 +378,8 @@ export class GraphView {
       return;
     }
 
+    const prevW = this.width;
+    const prevH = this.height;
     this.width = nextW;
     this.height = nextH;
     this.dpr = nextDpr;
@@ -391,14 +389,23 @@ export class GraphView {
     this.canvas.style.width = `${this.width}px`;
     this.canvas.style.height = `${this.height}px`;
 
-    if (this.simulation) {
-      const cx = this.visualCenterX();
-      const cy = this.height / 2;
-      this.simulation.force('center', forceCenter(cx, cy).strength(0.05));
-      this.simulation.force('x', forceX(cx).strength(0.036));
-      this.simulation.force('y', forceY(cy).strength(0.036));
-      this.simulation.alpha(0.18).restart();
+    if (!this.hasInitialTransform) {
+      this.hasInitialTransform = true;
+      const scale =
+        this.allNodes.length > 140 ? 0.38 : this.allNodes.length > 48 ? 0.78 : 0.84;
+      const initialTransform = zoomIdentity
+        .translate(this.visualCenterX(), this.height / 2)
+        .scale(scale);
+      select(this.canvas).call(this.zoomBehavior.transform, initialTransform);
+    } else if (prevW > 0 && prevH > 0) {
+      const dx = (this.width - prevW) / 2;
+      const dy = (this.height - prevH) / 2;
+      const shifted = zoomIdentity
+        .translate(this.transform.x + dx, this.transform.y + dy)
+        .scale(this.transform.k);
+      select(this.canvas).call(this.zoomBehavior.transform, shifted);
     }
+
     this.requestRender();
   }
 
@@ -411,21 +418,17 @@ export class GraphView {
     }
   }
 
-  visualCenterX() {
-    const usable = Math.max(280, this.width - this.rightInset);
-    return usable / 2;
-  }
-
   setRightInset(px) {
-    if (this.rightInset === px) return;
-    this.rightInset = px;
-    if (this.simulation) {
-      const cx = this.visualCenterX();
-      const cy = this.height / 2;
-      this.simulation.force('center', forceCenter(cx, cy).strength(0.05));
-      this.simulation.force('x', forceX(cx).strength(0.036));
-      this.simulation.force('y', forceY(cy).strength(0.036));
-      this.simulation.alpha(0.22).restart();
+    const next = Math.max(0, Number(px) || 0);
+    const prev = this.rightInset;
+    if (prev === next) return;
+    this.rightInset = next;
+    if (this.hasInitialTransform) {
+      const shiftX = (prev - next) / 2;
+      const nextTransform = zoomIdentity
+        .translate(this.transform.x + shiftX, this.transform.y)
+        .scale(this.transform.k);
+      select(this.canvas).call(this.zoomBehavior.transform, nextTransform);
     }
     this.requestRender();
   }
@@ -443,11 +446,11 @@ export class GraphView {
   }
 
   findNodeAt(worldX, worldY) {
-    const hitPad = 6 / Math.max(0.55, this.transform.k);
+    const hitPad = 5 / Math.max(0.45, this.transform.k);
     for (let i = this.nodes.length - 1; i >= 0; i -= 1) {
       const node = this.nodes[i];
-      if (node.x == null || node.y == null) continue;
-      const r = this.nodeRadius(node) + hitPad;
+      if (!Number.isFinite(node.x) || !Number.isFinite(node.y)) continue;
+      const r = (node.radius || 5) + hitPad;
       const dx = worldX - node.x;
       const dy = worldY - node.y;
       if (dx * dx + dy * dy <= r * r) {
@@ -461,7 +464,7 @@ export class GraphView {
     const sel = select(this.canvas);
 
     this.zoomBehavior = d3Zoom()
-      .scaleExtent([0.2, 5])
+      .scaleExtent([0.22, 4.5])
       .filter((event) => {
         if (event.type === 'wheel') return true;
         if (event.type === 'dblclick') return false;
@@ -480,19 +483,19 @@ export class GraphView {
         const srcEvent = event.sourceEvent || event;
         const { x, y } = this.screenToWorld(srcEvent.clientX, srcEvent.clientY);
         const hit = this.findNodeAt(x, y);
-        if (!hit) return null;
-        return hit;
+        return hit || null;
       })
       .on('start', (event) => {
         const srcEvent = event.sourceEvent;
         this.pointerDownPos = srcEvent ? { x: srcEvent.clientX, y: srcEvent.clientY } : null;
         this.isDraggingNode = false;
         if (!event.active && this.simulation) {
-          this.simulation.alphaTarget(0.28).restart();
+          this.simulation.alphaTarget(0.25).restart();
         }
         event.subject.fx = event.subject.x;
         event.subject.fy = event.subject.y;
         this.canvas.style.cursor = 'grabbing';
+        this.requestRender();
       })
       .on('drag', (event) => {
         const srcEvent = event.sourceEvent;
@@ -514,16 +517,17 @@ export class GraphView {
         }
         event.subject.fx = null;
         event.subject.fy = null;
-        this.canvas.style.cursor = this.hoverSlug ? 'pointer' : 'grab';
+        this.canvas.style.cursor = this.hoveredNode ? 'pointer' : 'grab';
 
         if (!this.isDraggingNode && event.subject) {
           this.setSelectedSlug(event.subject.id);
           this.onSelectNode(event.subject);
         }
         this.isDraggingNode = false;
+        this.requestRender();
       });
 
-    sel.call(dragBehavior).call(this.zoomBehavior);
+    sel.call(dragBehavior).call(this.zoomBehavior).on('dblclick.zoom', null);
 
     this.handlePointerMove = (e) => {
       if (this.isDraggingNode) return;
@@ -531,7 +535,11 @@ export class GraphView {
       const hit = this.findNodeAt(x, y);
       const nextSlug = hit ? hit.id : null;
       if (nextSlug !== this.hoverSlug) {
+        this.hoveredNode = hit || null;
         this.hoverSlug = nextSlug;
+        if (hit) {
+          this.displayFocusId = hit.id;
+        }
         this.canvas.style.cursor = hit ? 'pointer' : 'grab';
         this.onHoverNode(hit || null);
         this.requestRender();
@@ -539,19 +547,22 @@ export class GraphView {
     };
 
     this.handlePointerLeave = () => {
-      if (this.hoverSlug) {
+      if (this.hoveredNode || this.hoverSlug) {
+        this.hoveredNode = null;
         this.hoverSlug = null;
+        this.canvas.style.cursor = 'grab';
         this.onHoverNode(null);
         this.requestRender();
       }
     };
 
     this.handlePointerDown = (e) => {
+      if (e.button !== 0) return;
       this.pointerDownPos = { x: e.clientX, y: e.clientY };
     };
 
     this.handlePointerUp = (e) => {
-      if (!this.pointerDownPos || this.isDraggingNode) return;
+      if (e.button !== 0 || !this.pointerDownPos || this.isDraggingNode) return;
       const dist = Math.hypot(e.clientX - this.pointerDownPos.x, e.clientY - this.pointerDownPos.y);
       if (dist < 5) {
         const { x, y } = this.screenToWorld(e.clientX, e.clientY);
@@ -567,7 +578,7 @@ export class GraphView {
       const hit = this.findNodeAt(x, y);
       if (hit) {
         this.setSelectedSlug(hit.id);
-        this.focusOnNode(hit.id, { scale: 1.55 });
+        this.focusOnNode(hit.id, { scale: 1.42 });
         this.onSelectNode(hit);
       } else {
         this.fitView();
@@ -581,81 +592,153 @@ export class GraphView {
     this.canvas.addEventListener('dblclick', this.handleDoubleClick);
   }
 
-  getNeighborhoodSet(centerSlug, depth) {
-    const visited = new Set();
-    if (!centerSlug || !this.rawGraph.adjacency.has(centerSlug)) return visited;
+  setGraph(graph, { resetLayout = false } = {}) {
+    this.rawGraph = graph || { nodes: [], links: [], adjacency: new Map() };
 
-    let frontier = new Set([centerSlug]);
-    visited.add(centerSlug);
-
-    for (let step = 0; step < depth; step += 1) {
-      const next = new Set();
-      for (const id of frontier) {
-        const neighbors = this.rawGraph.adjacency.get(id);
-        if (!neighbors) continue;
-        for (const nb of neighbors) {
-          if (!visited.has(nb)) {
-            visited.add(nb);
-            next.add(nb);
-          }
+    if (resetLayout) {
+      this.nodePositions.clear();
+      this.nodes = [];
+      this.hoveredNode = null;
+      this.hoverSlug = null;
+      this.selectedSlug = null;
+      this.displaySelectedId = null;
+      this.selectBlend = 0;
+      this.displayFocusId = null;
+      this.hoverBlend = 0;
+    } else {
+      for (const existing of this.nodes) {
+        if (Number.isFinite(existing.x) && Number.isFinite(existing.y)) {
+          this.nodePositions.set(existing.id, {
+            x: existing.x,
+            y: existing.y,
+            vx: existing.vx || 0,
+            vy: existing.vy || 0,
+          });
         }
       }
-      frontier = next;
     }
-    return visited;
-  }
 
-  setGraph(graph, { resetLayout = false } = {}) {
-    this.rawGraph = graph;
+    this.allNodes = (this.rawGraph.nodes || []).map((n) => ({ ...n }));
+    this.allLinks = (this.rawGraph.links || []).map((l) => ({
+      id: l.id,
+      source: typeof l.source === 'object' ? l.source.id : l.source,
+      target: typeof l.target === 'object' ? l.target.id : l.target,
+      unresolved: Boolean(l.unresolved),
+    }));
+
     this.recomputeGraph({ resetLayout });
   }
 
   recomputeGraph({ resetLayout = false } = {}) {
-    const prevPositions = new Map();
-    if (!resetLayout) {
-      for (const n of this.nodes) {
-        if (n.x != null && n.y != null) {
-          prevPositions.set(n.id, { x: n.x, y: n.y, vx: n.vx || 0, vy: n.vy || 0 });
+    if (!resetLayout && this.nodes.length > 0) {
+      for (const existing of this.nodes) {
+        if (Number.isFinite(existing.x) && Number.isFinite(existing.y)) {
+          this.nodePositions.set(existing.id, {
+            x: existing.x,
+            y: existing.y,
+            vx: existing.vx || 0,
+            vy: existing.vy || 0,
+          });
         }
       }
     }
 
-    const scopeCenter = this.selectedSlug || this.activeSlug;
-    let allowedIds = null;
-    if (this.localDepth > 0 && scopeCenter) {
-      allowedIds = this.getNeighborhoodSet(scopeCenter, this.localDepth);
+    // Build bidirectional full adjacency across all nodes for local-hop filtering
+    const fullAdj = new Map();
+    for (const n of this.allNodes) {
+      fullAdj.set(n.id, new Set());
+    }
+    for (const l of this.allLinks) {
+      fullAdj.get(l.source)?.add(l.target);
+      fullAdj.get(l.target)?.add(l.source);
     }
 
-    const cx = this.visualCenterX();
-    const cy = this.height / 2;
+    const scopeCenter = this.selectedSlug || this.activeSlug;
+    let allowedIds = null;
+    if (this.localDepth > 0 && scopeCenter && fullAdj.has(scopeCenter)) {
+      allowedIds = new Set([scopeCenter]);
+      let frontier = [scopeCenter];
+      for (let hop = 0; hop < this.localDepth; hop += 1) {
+        const nextFrontier = [];
+        for (const id of frontier) {
+          for (const nb of fullAdj.get(id) || []) {
+            if (!allowedIds.has(nb)) {
+              allowedIds.add(nb);
+              nextFrontier.push(nb);
+            }
+          }
+        }
+        frontier = nextFrontier;
+      }
+    }
 
-    const filteredNodes = this.rawGraph.nodes
+    const filteredSourceNodes = this.allNodes
       .filter((n) => (this.showUnresolved ? true : n.exists))
-      .filter((n) => (allowedIds ? allowedIds.has(n.id) : true))
-      .map((n, idx, arr) => {
-        const prev = prevPositions.get(n.id);
-        const angle = (idx / Math.max(1, arr.length)) * Math.PI * 2;
-        const ring = n.group === 'root' ? 12 : 95 + (idx % 5) * 34;
-        return {
-          ...n,
-          x: prev ? prev.x : cx + Math.cos(angle) * ring,
-          y: prev ? prev.y : cy + Math.sin(angle) * ring,
-          vx: prev ? prev.vx : 0,
-          vy: prev ? prev.vy : 0,
-        };
-      });
+      .filter((n) => (allowedIds ? allowedIds.has(n.id) : true));
 
-    const visibleSet = new Set(filteredNodes.map((n) => n.id));
-    const filteredLinks = this.rawGraph.links
+    const visibleSet = new Set(filteredSourceNodes.map((n) => n.id));
+    const filteredLinks = this.allLinks
       .filter((l) => visibleSet.has(l.source) && visibleSet.has(l.target))
       .map((l) => ({ ...l }));
 
-    this.nodes = filteredNodes;
-    this.links = filteredLinks;
-    this.nodeById = new Map(filteredNodes.map((n) => [n.id, n]));
+    const existingDegrees = this.allNodes
+      .filter((n) => n.exists)
+      .map((n) => n.degree || 0)
+      .sort((a, b) => b - a);
+    const minDegree = existingDegrees.length ? existingDegrees[existingDegrees.length - 1] : 0;
+    const maxDegree = existingDegrees.length
+      ? existingDegrees.length > 80
+        ? Math.max(16, (existingDegrees[1] || existingDegrees[0]) + 2)
+        : existingDegrees[0]
+      : 16;
 
+    const hadSavedPositions = !resetLayout && this.nodePositions.size > 0;
+    const isLargeGraph = filteredSourceNodes.length > 140;
+
+    // Seed unpositioned nodes along a golden-angle spiral around world origin (0, 0)
+    const seededNodes = filteredSourceNodes.map((n, idx) => {
+      const saved = hadSavedPositions ? this.nodePositions.get(n.id) : null;
+      const angle = idx * 2.399963229728653;
+      const isCenterHub = n.id === 'github' || n.group === 'root';
+      const ring = isCenterHub
+        ? 0
+        : isLargeGraph
+          ? 95 + Math.sqrt(idx) * 38
+          : 72 + Math.sqrt(idx) * 44;
+      return {
+        ...n,
+        radius: computeNodeRadius(n.degree, { minDegree, maxDegree, exists: n.exists }),
+        x: saved ? saved.x : Math.cos(angle) * ring,
+        y: saved ? saved.y : Math.sin(angle) * ring,
+        vx: saved ? saved.vx : 0,
+        vy: saved ? saved.vy : 0,
+      };
+    });
+
+    // Sort small-to-large so leaf nodes draw first and hub nodes draw cleanly on top
+    seededNodes.sort((a, b) => a.radius - b.radius);
+
+    this.nodes = seededNodes;
+    this.links = filteredLinks;
+    this.nodeById = new Map(this.nodes.map((n) => [n.id, n]));
+
+    // Undirected/bidirectional subgraph adjacency (including self, matching original repo)
+    this.adjacency.clear();
+    for (const n of this.nodes) {
+      this.adjacency.set(n.id, new Set([n.id]));
+    }
+    for (const l of this.links) {
+      this.adjacency.get(l.source)?.add(l.target);
+      this.adjacency.get(l.target)?.add(l.source);
+    }
+
+    if (this.hoveredNode) {
+      this.hoveredNode = this.nodeById.get(this.hoveredNode.id) || null;
+      this.hoverSlug = this.hoveredNode ? this.hoveredNode.id : null;
+    }
     if (this.selectedSlug && !this.nodeById.has(this.selectedSlug)) {
       this.selectedSlug = null;
+      this.onSelectionChange(null);
     }
 
     this.updateSearchMatches();
@@ -664,67 +747,97 @@ export class GraphView {
       this.simulation.stop();
     }
 
-    const nodeCount = this.nodes.length;
-    const isDense = nodeCount > 90;
-
+    // Spacious d3-force parameters ported directly from original Zettelkasten repo
     this.simulation = forceSimulation(this.nodes)
+      .alphaDecay(0.024)
+      .velocityDecay(0.36)
       .force(
         'link',
         forceLink(this.links)
           .id((d) => d.id)
           .distance((l) => {
-            const sDeg = typeof l.source === 'object' ? l.source.degree : 1;
-            const tDeg = typeof l.target === 'object' ? l.target.degree : 1;
-            const base = isDense ? 66 : 80;
-            return base + Math.min(58, (sDeg + tDeg) * 2.5);
+            const sObj = typeof l.source === 'object' ? l.source : this.nodeById.get(l.source);
+            const tObj = typeof l.target === 'object' ? l.target : this.nodeById.get(l.target);
+            const degA = Math.min(36, (sObj && sObj.degree) || 1);
+            const degB = Math.min(36, (tObj && tObj.degree) || 1);
+            return 80 + Math.sqrt(degA + degB) * 17;
           })
-          .strength(isDense ? 0.38 : 0.44),
+          .strength((l) => {
+            const sObj = typeof l.source === 'object' ? l.source : this.nodeById.get(l.source);
+            const tObj = typeof l.target === 'object' ? l.target : this.nodeById.get(l.target);
+            const minDeg = Math.min((sObj && sObj.degree) || 1, (tObj && tObj.degree) || 1);
+            return minDeg <= 2 ? 0.68 : isLargeGraph ? 0.3 : 0.36;
+          }),
       )
       .force(
         'charge',
         forceManyBody()
-          .strength((d) => (isDense ? -160 - d.degree * 16 : -220 - d.degree * 24))
-          .distanceMax(isDense ? 520 : 620),
+          .strength((d) => -400 - Math.min(d.degree || 0, 34) * 54)
+          .distanceMax(isLargeGraph ? 1380 : 860),
+      )
+      .force('center', forceCenter(0, 0).strength(0.05))
+      .force(
+        'x',
+        forceX(0).strength((d) =>
+          d.id === 'github' || d.group === 'root' ? 0.32 : isLargeGraph ? 0.028 : 0.038,
+        ),
+      )
+      .force(
+        'y',
+        forceY(0).strength((d) =>
+          d.id === 'github' || d.group === 'root' ? 0.32 : isLargeGraph ? 0.03 : 0.042,
+        ),
       )
       .force(
         'collide',
         forceCollide()
-          .radius((d) => this.nodeRadius(d) + (isDense ? 11 : 15))
-          .iterations(2),
+          .radius((d) => d.radius + 32)
+          .iterations(3),
       )
-      .force('center', forceCenter(cx, cy).strength(0.05))
-      .force('x', forceX(cx).strength(0.038))
-      .force('y', forceY(cy).strength(0.038))
-      .alpha(resetLayout || prevPositions.size === 0 ? 0.92 : 0.35)
-      .alphaDecay(0.026)
       .on('tick', () => this.requestRender());
 
-    if (resetLayout || prevPositions.size === 0) {
-      // Pre-settle initial constellation so frame 1 is immediately readable and focusOnNode is accurate.
-      this.simulation.tick(68);
-      this.simulation.alpha(0.24).restart();
+    if (!hadSavedPositions) {
+      // Pre-settle spacious constellation so initial fitView / focusOnNode is immediately spacious
+      this.simulation.alpha(0.96);
+      this.simulation.tick(95);
+      this.simulation.alpha(0.22).restart();
+
+      if (this.hasInitialTransform && this.zoomBehavior) {
+        const scale =
+          this.nodes.length > 140 ? 0.38 : this.nodes.length > 48 ? 0.78 : 0.84;
+        select(this.canvas).call(
+          this.zoomBehavior.transform,
+          zoomIdentity.translate(this.visualCenterX(), this.height / 2).scale(scale),
+        );
+      }
+    } else {
+      this.simulation.alpha(0.35).restart();
     }
 
     this.requestRender();
   }
 
-  setActiveSlug(slug, { focus = false, pin = false } = {}) {
+  setActiveSlug(slug, { focus = false, center = false, pin = false } = {}) {
     const changed = this.activeSlug !== slug;
     this.activeSlug = slug;
-    if (pin) {
+    if (pin && slug) {
       this.setSelectedSlug(slug);
     }
     if (changed && this.localDepth > 0 && !this.selectedSlug) {
       this.recomputeGraph({ resetLayout: false });
     }
-    if (focus && slug) {
+    if ((focus || center) && slug) {
       this.focusOnNode(slug);
+    } else {
+      this.requestRender();
     }
-    this.requestRender();
   }
 
   setSelectedSlug(slug) {
     const next = slug && this.nodeById.has(slug) ? slug : null;
+    if (next) {
+      this.displaySelectedId = next;
+    }
     if (this.selectedSlug === next) return;
     this.selectedSlug = next;
     if (this.localDepth > 0) {
@@ -765,36 +878,51 @@ export class GraphView {
   updateSearchMatches() {
     this.searchMatches = new Set();
     if (!this.searchQuery) return;
+    const clean = this.searchQuery.startsWith('#') ? this.searchQuery.slice(1) : this.searchQuery;
     for (const node of this.nodes) {
-      const hay = `${node.title} ${node.id} ${(node.tags || []).join(' ')}`.toLowerCase();
-      if (hay.includes(this.searchQuery)) {
+      const hay = `${node.title} ${node.id} ${node.group || ''} ${(node.tags || []).join(' ')}`.toLowerCase();
+      if (hay.includes(clean)) {
         this.searchMatches.add(node.id);
       }
     }
   }
 
-  focusOnNode(slug, { scale = null } = {}) {
+  focusOnNode(slug, optionsOrScale = null) {
     const node = this.nodeById.get(slug);
-    if (!node || node.x == null || node.y == null) return;
-    const defaultScale = this.nodes.length > 100 ? 1.15 : 1.24;
-    const targetK = scale || clamp(this.transform.k, defaultScale, 2.2);
+    if (!node || !Number.isFinite(node.x) || !Number.isFinite(node.y)) return;
+
+    const explicitScale =
+      typeof optionsOrScale === 'number'
+        ? optionsOrScale
+        : optionsOrScale && typeof optionsOrScale === 'object'
+          ? optionsOrScale.scale || null
+          : null;
+
+    const minFocusScale =
+      this.nodes.length > 140 ? 0.62 : this.nodes.length > 52 ? 0.80 : 0.86;
+    const targetK = explicitScale || clamp(Math.max(this.transform.k, minFocusScale), 0.55, 1.35);
+
     const cx = this.visualCenterX();
     const cy = this.height / 2;
-    const nextTransform = zoomIdentity.translate(cx - node.x * targetK, cy - node.y * targetK).scale(targetK);
+    const nextTransform = zoomIdentity
+      .translate(cx - node.x * targetK, cy - node.y * targetK)
+      .scale(targetK);
     select(this.canvas).call(this.zoomBehavior.transform, nextTransform);
   }
 
   zoomBy(factor) {
     const cx = this.visualCenterX();
     const cy = this.height / 2;
-    const nextK = clamp(this.transform.k * factor, 0.2, 5);
+    const nextK = clamp(this.transform.k * factor, 0.22, 4.5);
     const worldX = (cx - this.transform.x) / this.transform.k;
     const worldY = (cy - this.transform.y) / this.transform.k;
-    const nextTransform = zoomIdentity.translate(cx - worldX * nextK, cy - worldY * nextK).scale(nextK);
+    const nextTransform = zoomIdentity
+      .translate(cx - worldX * nextK, cy - worldY * nextK)
+      .scale(nextK);
     select(this.canvas).call(this.zoomBehavior.transform, nextTransform);
   }
 
-  fitView(padding = 68) {
+  fitView(padding = 72) {
     if (this.nodes.length === 0) return;
     let minX = Infinity;
     let maxX = -Infinity;
@@ -802,37 +930,40 @@ export class GraphView {
     let maxY = -Infinity;
 
     for (const n of this.nodes) {
-      if (n.x == null || n.y == null) continue;
-      const r = this.nodeRadius(n) + 18;
-      if (n.x - r < minX) minX = n.x - r;
-      if (n.x + r > maxX) maxX = n.x + r;
-      if (n.y - r < minY) minY = n.y - r;
-      if (n.y + r > maxY) maxY = n.y + r;
+      if (!Number.isFinite(n.x) || !Number.isFinite(n.y)) continue;
+      minX = Math.min(minX, n.x - n.radius - 28);
+      maxX = Math.max(maxX, n.x + n.radius + 28);
+      minY = Math.min(minY, n.y - n.radius - 24);
+      maxY = Math.max(maxY, n.y + n.radius + 32);
     }
 
     if (!Number.isFinite(minX)) return;
 
-    const usableW = Math.max(280, this.width - this.rightInset);
+    const usableW = Math.max(240, this.width - this.rightInset);
     const usableH = this.height;
-    const graphW = Math.max(120, maxX - minX);
-    const graphH = Math.max(120, maxY - minY);
+    const boxW = Math.max(120, maxX - minX);
+    const boxH = Math.max(120, maxY - minY);
 
     const k = clamp(
-      Math.min((usableW - padding * 2) / graphW, (usableH - padding * 2) / graphH),
-      0.32,
-      1.65,
+      Math.min((usableW - padding * 2) / boxW, (usableH - padding * 2) / boxH),
+      0.3,
+      1.35,
     );
 
     const midX = (minX + maxX) / 2;
     const midY = (minY + maxY) / 2;
-    const tx = usableW / 2 - midX * k;
-    const ty = usableH / 2 - midY * k;
+    const cx = this.visualCenterX();
+    const cy = usableH / 2;
 
-    const nextTransform = zoomIdentity.translate(tx, ty).scale(k);
+    const nextTransform = zoomIdentity.translate(cx - midX * k, cy - midY * k).scale(k);
     select(this.canvas).call(this.zoomBehavior.transform, nextTransform);
   }
 
   requestRender() {
+    this.needsRender = true;
+  }
+
+  scheduleRender() {
     this.needsRender = true;
   }
 
@@ -855,19 +986,19 @@ export class GraphView {
       ctx.fillStyle = RETRO_PALETTE.bgOuter;
       ctx.fillRect(0, 0, w, h);
 
-      const cy = h * 0.45;
-      const outerR = Math.max(w, h) * 0.85;
+      const cy = h * 0.46;
+      const outerR = Math.max(w, h) * 0.86;
       const bgGrad = ctx.createRadialGradient(cx, cy, 24, cx, cy, outerR);
       bgGrad.addColorStop(0, RETRO_PALETTE.bgInner);
-      bgGrad.addColorStop(0.52, RETRO_PALETTE.bgMid);
+      bgGrad.addColorStop(0.54, RETRO_PALETTE.bgMid);
       bgGrad.addColorStop(1, RETRO_PALETTE.bgOuter);
       ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, w, h);
 
-      // Tactical neon coordinate grid in world space
-      let scaledStep = 80 * this.transform.k;
-      while (scaledStep < 22) scaledStep *= 2;
-      while (scaledStep > 128) scaledStep /= 2;
+      // Subtle tactical grid that stays whisper-quiet behind floating node labels
+      let scaledStep = 84 * this.transform.k;
+      while (scaledStep < 26) scaledStep *= 2;
+      while (scaledStep > 136) scaledStep /= 2;
 
       const startX = ((this.transform.x % scaledStep) + scaledStep) % scaledStep;
       const startY = ((this.transform.y % scaledStep) + scaledStep) % scaledStep;
@@ -906,26 +1037,25 @@ export class GraphView {
     ctx.fillStyle = PHOSPHOR_PALETTE.bgBase;
     ctx.fillRect(0, 0, w, h);
 
-    // Soft top & constellation-center seafoam nebula glows
+    // Whisper-subtle Phosphor cosmos glow + delicate coordinate grid
     const topGlowR = Math.max(w, h) * 0.68;
     const topGrad = ctx.createRadialGradient(cx, -h * 0.06, 12, cx, -h * 0.06, topGlowR);
-    topGrad.addColorStop(0, PHOSPHOR_PALETTE.nebulaCore);
-    topGrad.addColorStop(0.55, 'rgba(94, 234, 212, 0.025)');
+    topGrad.addColorStop(0, PHOSPHOR_PALETTE.nebulaTop);
+    topGrad.addColorStop(0.55, 'rgba(94, 234, 212, 0.014)');
     topGrad.addColorStop(1, 'rgba(6, 11, 18, 0)');
     ctx.fillStyle = topGrad;
     ctx.fillRect(0, 0, w, h);
 
     const midGlowR = Math.max(w, h) * 0.56;
     const midGrad = ctx.createRadialGradient(cx, h * 0.48, 16, cx, h * 0.48, midGlowR);
-    midGrad.addColorStop(0, PHOSPHOR_PALETTE.nebulaAmbient);
+    midGrad.addColorStop(0, PHOSPHOR_PALETTE.nebulaMid);
     midGrad.addColorStop(1, 'rgba(6, 11, 18, 0)');
     ctx.fillStyle = midGrad;
     ctx.fillRect(0, 0, w, h);
 
-    // Subtle 28px Phosphor coordinate blueprint grid + intersection dots
-    let scaledStep = 28 * this.transform.k;
-    while (scaledStep < 20) scaledStep *= 2;
-    while (scaledStep > 56) scaledStep /= 2;
+    let scaledStep = 34 * this.transform.k;
+    while (scaledStep < 22) scaledStep *= 2;
+    while (scaledStep > 64) scaledStep /= 2;
 
     const startX = ((this.transform.x % scaledStep) + scaledStep) % scaledStep;
     const startY = ((this.transform.y % scaledStep) + scaledStep) % scaledStep;
@@ -946,7 +1076,7 @@ export class GraphView {
     ctx.beginPath();
     for (let x = startX; x < w; x += scaledStep) {
       for (let y = startY; y < h; y += scaledStep) {
-        ctx.rect(x - 0.65, y - 0.65, 1.3, 1.3);
+        ctx.rect(x - 0.55, y - 0.55, 1.1, 1.1);
       }
     }
     ctx.fillStyle = PHOSPHOR_PALETTE.gridDot;
@@ -957,418 +1087,425 @@ export class GraphView {
     const ctx = this.ctx;
     const w = this.width;
     const h = this.height;
+    const transform = this.transform;
     const retro = isRetroTheme();
     const palette = retro ? RETRO_PALETTE : PHOSPHOR_PALETTE;
+
+    // Smooth pinned-selection transition blend (0.28 lerp, matching original repo)
+    const targetSelectBlend =
+      this.selectedSlug && this.adjacency.has(this.selectedSlug) ? 1 : 0;
+    const selectDiff = targetSelectBlend - this.selectBlend;
+    if (Math.abs(selectDiff) > 0.015) {
+      this.selectBlend += selectDiff * 0.28;
+      this.requestRender();
+    } else {
+      this.selectBlend = targetSelectBlend;
+      if (targetSelectBlend === 0) {
+        this.displaySelectedId = null;
+      }
+    }
+
+    // Smooth hover transition blend (0.28 lerp)
+    const targetHoverBlend = this.hoveredNode ? 1 : 0;
+    const hoverDiff = targetHoverBlend - this.hoverBlend;
+    if (Math.abs(hoverDiff) > 0.015) {
+      this.hoverBlend += hoverDiff * 0.28;
+      this.requestRender();
+    } else {
+      this.hoverBlend = targetHoverBlend;
+      if (targetHoverBlend === 0) {
+        this.displayFocusId = null;
+      }
+    }
+
+    const selId = this.selectedSlug
+      ? this.selectedSlug
+      : this.selectBlend > 0.01
+        ? this.displaySelectedId
+        : null;
+    const selNeighbors = selId ? this.adjacency.get(selId) : null;
+    const hasSelection = Boolean(selId && this.selectBlend > 0.01);
+
+    const hovId = this.hoveredNode
+      ? this.hoveredNode.id
+      : this.hoverBlend > 0.01
+        ? this.displayFocusId
+        : null;
+    const hovNeighbors = hovId ? this.adjacency.get(hovId) : null;
+    const hasHover = Boolean(hovId && this.hoverBlend > 0.01);
+
+    // Dual-focus lighting: when selId is pinned, hovering a different node illuminates BOTH neighborhoods
+    const isSecondaryHover = Boolean(hasHover && this.selectedSlug && hovId !== this.selectedSlug);
+    const isPrimaryHover = Boolean(hasHover && !this.selectedSlug);
+    const dimStrength = Math.max(
+      hasSelection ? this.selectBlend : 0,
+      isPrimaryHover ? this.hoverBlend : 0,
+    );
+    const isDimmingBg = dimStrength > 0.01;
+    const hasSearch = this.searchQuery.length > 0;
 
     ctx.save();
     ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
     this.drawBackdrop(ctx, w, h, retro);
 
-    ctx.translate(this.transform.x, this.transform.y);
-    ctx.scale(this.transform.k, this.transform.k);
+    ctx.translate(transform.x, transform.y);
+    ctx.scale(transform.k, transform.k);
 
-    const selectedId = this.selectedSlug;
-    const hoverId = this.hoverSlug;
-    const isSecondaryHover = Boolean(selectedId && hoverId && hoverId !== selectedId);
+    const invK = 1 / Math.max(0.45, Math.min(2.2, transform.k));
 
-    const selectedAdj = selectedId ? this.rawGraph.adjacency.get(selectedId) || new Set() : null;
-    const hoverAdj = hoverId ? this.rawGraph.adjacency.get(hoverId) || new Set() : null;
-
-    const hasSelection = Boolean(selectedId);
-    const hasSoloHover = Boolean(!selectedId && hoverId);
-    const hasSearch = this.searchQuery.length > 0;
-    const invK = 1 / Math.max(0.45, this.transform.k);
-
-    const idleEdges = [];
-    const selectedEdges = [];
-    const secondaryEdges = [];
-    const bridgeEdges = [];
-
+    // Pass 1: Non-highlighted background edges (clean undirected lines, no arrowheads)
     for (const link of this.links) {
       const s = typeof link.source === 'object' ? link.source : this.nodeById.get(link.source);
       const t = typeof link.target === 'object' ? link.target : this.nodeById.get(link.target);
-      if (!s || !t || s.x == null || t.x == null) continue;
+      if (!s || !t || !Number.isFinite(s.x) || !Number.isFinite(t.x)) continue;
 
-      const touchesSelected = selectedId && (s.id === selectedId || t.id === selectedId);
-      const touchesHover = hoverId && (s.id === hoverId || t.id === hoverId);
+      const touchesSelected = hasSelection && (s.id === selId || t.id === selId);
+      const touchesHover =
+        (isPrimaryHover || isSecondaryHover) && (s.id === hovId || t.id === hovId);
+      if (touchesSelected || touchesHover) continue;
 
-      if (touchesSelected && touchesHover && isSecondaryHover) {
-        bridgeEdges.push({ s, t });
-      } else if (touchesSelected) {
-        selectedEdges.push({ s, t });
-      } else if (touchesHover) {
-        secondaryEdges.push({ s, t });
-      } else {
-        idleEdges.push({ s, t });
-      }
-    }
-
-    // 1. Background / non-focused edges
-    if (idleEdges.length > 0) {
-      const dimmed = hasSelection || hasSoloHover || hasSearch;
-      ctx.beginPath();
-      for (const { s, t } of idleEdges) {
-        ctx.moveTo(s.x, s.y);
-        ctx.lineTo(t.x, t.y);
-      }
-      ctx.strokeStyle = dimmed
-        ? palette.edgeDimmed
-        : this.nodes.length > 100
-          ? palette.edgeIdleSubtle
-          : palette.edgeIdle;
-      ctx.lineWidth = (dimmed ? 0.75 : 1.0) * invK;
-      ctx.stroke();
-    }
-
-    const drawDirectedActiveEdges = (edges, focusId, strokeStyle, arrowFill, lineW) => {
-      if (edges.length === 0) return;
-
-      ctx.beginPath();
-      for (const { s, t } of edges) {
-        ctx.moveTo(s.x, s.y);
-        ctx.lineTo(t.x, t.y);
-      }
-      ctx.strokeStyle = strokeStyle;
-      ctx.lineWidth = lineW * invK;
-      ctx.stroke();
-
-      for (const { s, t } of edges) {
-        const dx = t.x - s.x;
-        const dy = t.y - s.y;
-        const dist = Math.hypot(dx, dy);
-        if (dist < 22) continue;
-
-        const targetR = this.nodeRadius(t) + (t.id === focusId ? 3.5 : 2);
-        const ux = dx / dist;
-        const uy = dy / dist;
-        const ax = t.x - ux * targetR;
-        const ay = t.y - uy * targetR;
-        const arrowLen = 6 * invK;
-        const arrowWidth = 3.2 * invK;
-
-        ctx.beginPath();
-        ctx.moveTo(ax, ay);
-        ctx.lineTo(ax - ux * arrowLen - uy * arrowWidth, ay - uy * arrowLen + ux * arrowWidth);
-        ctx.lineTo(ax - ux * arrowLen + uy * arrowWidth, ay - uy * arrowLen - ux * arrowWidth);
-        ctx.closePath();
-        ctx.fillStyle = arrowFill;
-        ctx.fill();
-      }
-    };
-
-    // 2. Hover edges
-    if (secondaryEdges.length > 0) {
-      drawDirectedActiveEdges(
-        secondaryEdges,
-        hoverId,
-        isSecondaryHover ? palette.secondaryEdge : palette.primaryEdge,
-        isSecondaryHover ? palette.secondary : palette.primary,
-        isSecondaryHover ? 1.55 : 1.65,
-      );
-    }
-
-    // 3. Selected edges
-    if (selectedEdges.length > 0) {
-      drawDirectedActiveEdges(
-        selectedEdges,
-        selectedId,
-        palette.primaryEdge,
-        palette.primary,
-        1.75,
-      );
-    }
-
-    // 4. Bridge edges (Selected <-> Hovered gradient)
-    for (const { s, t } of bridgeEdges) {
-      const grad = ctx.createLinearGradient(s.x, s.y, t.x, t.y);
-      if (s.id === selectedId) {
-        grad.addColorStop(0, palette.primary);
-        grad.addColorStop(1, palette.secondary);
-      } else {
-        grad.addColorStop(0, palette.secondary);
-        grad.addColorStop(1, palette.primary);
-      }
       ctx.beginPath();
       ctx.moveTo(s.x, s.y);
       ctx.lineTo(t.x, t.y);
-      ctx.strokeStyle = grad;
-      ctx.lineWidth = (retro ? 2.25 : 2.2) * invK;
+
+      if (isDimmingBg) {
+        const alpha =
+          palette.edgeIdleAlpha * (1 - dimStrength) + palette.edgeDimAlpha * dimStrength;
+        ctx.strokeStyle = `rgba(${palette.edgeIdleRgb}, ${alpha.toFixed(3)})`;
+      } else if (hasSearch) {
+        ctx.strokeStyle = `rgba(${palette.edgeIdleRgb}, 0.038)`;
+      } else {
+        const alpha = link.unresolved ? palette.edgeUnresolvedAlpha : palette.edgeIdleAlpha;
+        ctx.strokeStyle = `rgba(${palette.edgeIdleRgb}, ${alpha.toFixed(3)})`;
+      }
+
+      if (link.unresolved) {
+        ctx.setLineDash([4 * invK, 4 * invK]);
+      } else {
+        ctx.setLineDash([]);
+      }
+      ctx.lineWidth = 0.88 * invK;
       ctx.stroke();
     }
+    ctx.setLineDash([]);
 
-    // 5. Nodes
-    const labelCandidates = [];
+    // Pass 2a: Primary accent edges for selected node (or solo hover when nothing is selected)
+    const primaryFocusId = hasSelection ? selId : isPrimaryHover ? hovId : null;
+    const primaryStrength = hasSelection
+      ? this.selectBlend
+      : isPrimaryHover
+        ? this.hoverBlend
+        : 0;
+
+    if (primaryFocusId && primaryStrength > 0.01) {
+      for (const link of this.links) {
+        const s = typeof link.source === 'object' ? link.source : this.nodeById.get(link.source);
+        const t = typeof link.target === 'object' ? link.target : this.nodeById.get(link.target);
+        if (!s || !t || !Number.isFinite(s.x) || !Number.isFinite(t.x)) continue;
+        if (s.id !== primaryFocusId && t.id !== primaryFocusId) continue;
+
+        // Bridge edge between pinned primary and hovered secondary is drawn as a gradient in Pass 2b
+        if (
+          isSecondaryHover &&
+          ((s.id === primaryFocusId && t.id === hovId) ||
+            (s.id === hovId && t.id === primaryFocusId))
+        ) {
+          continue;
+        }
+
+        ctx.beginPath();
+        ctx.moveTo(s.x, s.y);
+        ctx.lineTo(t.x, t.y);
+        const alpha = 0.18 + 0.74 * primaryStrength;
+        ctx.strokeStyle = `rgba(${palette.primaryRgb}, ${alpha.toFixed(3)})`;
+        ctx.lineWidth = (1.05 + 0.65 * primaryStrength) * invK;
+        ctx.stroke();
+      }
+    }
+
+    // Pass 2b: Secondary accent edges for hovered node when another node is already pinned
+    if (isSecondaryHover) {
+      for (const link of this.links) {
+        const s = typeof link.source === 'object' ? link.source : this.nodeById.get(link.source);
+        const t = typeof link.target === 'object' ? link.target : this.nodeById.get(link.target);
+        if (!s || !t || !Number.isFinite(s.x) || !Number.isFinite(t.x)) continue;
+        if (s.id !== hovId && t.id !== hovId) continue;
+
+        const isBridgeToSelected =
+          hasSelection &&
+          ((s.id === selId && t.id === hovId) || (s.id === hovId && t.id === selId));
+
+        ctx.beginPath();
+        ctx.moveTo(s.x, s.y);
+        ctx.lineTo(t.x, t.y);
+
+        if (isBridgeToSelected && Math.hypot(t.x - s.x, t.y - s.y) > 0.5) {
+          const selEnd = s.id === selId ? s : t;
+          const hovEnd = s.id === hovId ? s : t;
+          const grad = ctx.createLinearGradient(selEnd.x, selEnd.y, hovEnd.x, hovEnd.y);
+          grad.addColorStop(0, `rgba(${palette.primaryRgb}, 0.96)`);
+          grad.addColorStop(
+            1,
+            `rgba(${palette.secondaryRgb}, ${(0.25 + 0.73 * this.hoverBlend).toFixed(3)})`,
+          );
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = (1.55 + 0.65 * this.hoverBlend) * invK;
+        } else {
+          const alpha = 0.18 + 0.78 * this.hoverBlend;
+          ctx.strokeStyle = `rgba(${palette.secondaryRgb}, ${alpha.toFixed(3)})`;
+          ctx.lineWidth = (1.05 + 0.72 * this.hoverBlend) * invK;
+        }
+        ctx.stroke();
+      }
+    }
+
+    // Pass 3: Nodes + collect label descriptors so foreground labels always render above dimmed ones
+    const labelItems = [];
 
     for (const node of this.nodes) {
-      if (node.x == null || node.y == null) continue;
-      const r = this.nodeRadius(node);
+      if (!Number.isFinite(node.x) || !Number.isFinite(node.y)) continue;
 
-      const isSelected = node.id === selectedId;
-      const isHover = node.id === hoverId;
+      const isSelected = hasSelection && node.id === selId;
+      const isSelectedNeighbor =
+        hasSelection && Boolean(selNeighbors && selNeighbors.has(node.id)) && !isSelected;
+      const isPrimaryFocus = isPrimaryHover && node.id === hovId;
+      const isPrimaryNeighbor =
+        isPrimaryHover && Boolean(hovNeighbors && hovNeighbors.has(node.id)) && !isPrimaryFocus;
+      const isSecFocus = isSecondaryHover && node.id === hovId;
+      const isSecNeighbor =
+        isSecondaryHover &&
+        Boolean(hovNeighbors && hovNeighbors.has(node.id)) &&
+        !isSecFocus &&
+        !isSelected;
+      const isSharedNeighbor = isSelectedNeighbor && isSecNeighbor;
       const isActive = node.id === this.activeSlug;
-      const isSelectedNeighbor = Boolean(selectedAdj && selectedAdj.has(node.id));
-      const isHoverNeighbor = Boolean(hoverAdj && hoverAdj.has(node.id));
       const isSearchHit = hasSearch && this.searchMatches.has(node.id);
 
-      let inFocus = true;
-      if (hasSelection) {
-        inFocus = isSelected || isSelectedNeighbor || isHover || isHoverNeighbor;
-      } else if (hasSoloHover) {
-        inFocus = isHover || isHoverNeighbor;
-      }
-      if (hasSearch && !isSearchHit && !isSelected && !isHover) {
-        inFocus = false;
+      let drawRadius = node.radius;
+      if (isSelected) {
+        const selfHoverBoost = hasHover && hovId === selId ? 1.1 * this.hoverBlend : 0;
+        drawRadius += 1.6 * this.selectBlend + selfHoverBoost;
+      } else if (isPrimaryFocus || isSecFocus) {
+        drawRadius += 1.8 * this.hoverBlend;
       }
 
-      // Halo / neon aura for selected, hovered, or search-matched nodes
-      if (isSelected || isHover || isSearchHit) {
-        const glowColor = isSelected
-          ? palette.selectGlow
-          : isHover && isSecondaryHover
-            ? palette.secondaryGlow
-            : isHover
-              ? palette.primaryGlow
-              : palette.searchGlow;
-
-        const haloRadius = r + 11 * invK;
-        const grad = ctx.createRadialGradient(node.x, node.y, r * 0.4, node.x, node.y, haloRadius);
-        grad.addColorStop(0, glowColor);
-        grad.addColorStop(1, palette.haloOuterStop);
+      // Soft outer glow on selected, primary hover, or search match
+      if (isSelected || isPrimaryFocus || isSearchHit) {
         ctx.beginPath();
-        ctx.arc(node.x, node.y, haloRadius, 0, Math.PI * 2);
-        ctx.fillStyle = grad;
+        ctx.arc(node.x, node.y, drawRadius + 5.6 * invK, 0, Math.PI * 2);
+        ctx.fillStyle = isSearchHit && !isSelected && !isPrimaryFocus
+          ? palette.searchGlow
+          : palette.primaryGlow;
         ctx.fill();
       }
 
-      let fill;
-      if (isSelected) {
-        fill = palette.primary;
-      } else if (isHover && isSecondaryHover) {
-        fill = palette.secondary;
-      } else if (isHover) {
-        fill = retro ? palette.primary : palette.primaryBright;
-      } else if (isSearchHit) {
-        fill = palette.search;
-      } else if (!inFocus) {
-        fill = palette.nodeDimmed;
-      } else if (this.colorByGroup && node.exists) {
-        fill = getGroupColor(node.group, retro);
-      } else if (isSelectedNeighbor || isHoverNeighbor) {
-        fill = palette.nodeHub;
-      } else {
-        fill = this.getMonochromeNodeFill(node, palette);
+      // Soft outer glow on secondary hovered node while another node is pinned
+      if (isSecFocus) {
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, drawRadius + 5.6 * invK, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${palette.secondaryRgb}, ${(0.38 * this.hoverBlend).toFixed(3)})`;
+        ctx.fill();
+      }
+
+      // Subtle active-drawer ring when no graph node is pinned
+      if (isActive && !isSelected && !isPrimaryFocus && !isSecFocus) {
+        const dimFactor =
+          isDimmingBg && !isSelectedNeighbor && !isPrimaryNeighbor && !isSecNeighbor ? 0.24 : 0.85;
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, drawRadius + 3.0 * invK, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(${palette.primaryRgb}, ${dimFactor})`;
+        ctx.lineWidth = 1.5 * invK;
+        ctx.stroke();
       }
 
       ctx.beginPath();
-      ctx.arc(node.x, node.y, r, 0, Math.PI * 2);
-      ctx.fillStyle = fill;
+      ctx.arc(node.x, node.y, drawRadius, 0, Math.PI * 2);
+
+      if (isSelected || isPrimaryFocus) {
+        ctx.fillStyle = palette.primary;
+      } else if (isSecFocus) {
+        ctx.fillStyle = palette.secondary;
+      } else if (isSharedNeighbor) {
+        ctx.fillStyle = palette.nodeSharedNeighbor;
+      } else if (isSecNeighbor) {
+        ctx.fillStyle = this.colorByGroup && node.exists
+          ? getGroupColor(node.group, retro)
+          : palette.nodeSecondaryNeighbor;
+      } else if (isSelectedNeighbor || isPrimaryNeighbor) {
+        ctx.fillStyle = this.colorByGroup && node.exists
+          ? getGroupColor(node.group, retro)
+          : palette.nodeNeighbor;
+      } else if (isDimmingBg) {
+        ctx.fillStyle = palette.nodeDimmed;
+      } else if (hasSearch) {
+        ctx.fillStyle = isSearchHit ? palette.searchMatch : palette.nodeDimmed;
+      } else if (!node.exists) {
+        ctx.fillStyle = palette.nodeUnresolved;
+      } else if (this.colorByGroup) {
+        ctx.fillStyle = getGroupColor(node.group, retro);
+      } else {
+        ctx.fillStyle = node.degree >= 6 ? palette.nodeHub : palette.nodeDefault;
+      }
+
       ctx.fill();
 
-      // Separation stroke on focused nodes
-      if (inFocus && node.exists) {
-        ctx.strokeStyle = palette.nodeCoreStroke;
-        ctx.lineWidth = (retro ? 1.1 : 1.15) * invK;
+      // Crisp selection ring on locked node or shared neighbor
+      if (isSelected) {
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, drawRadius + 2.2 * invK, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(${palette.selectRingRgb}, ${(0.90 * this.selectBlend).toFixed(3)})`;
+        ctx.lineWidth = 1.5 * invK;
+        ctx.stroke();
+      } else if (isSharedNeighbor) {
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, drawRadius + 2.0 * invK, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(${palette.secondaryRgb}, ${(0.84 * this.hoverBlend).toFixed(3)})`;
+        ctx.lineWidth = 1.4 * invK;
+        ctx.stroke();
+      } else if (
+        !node.exists &&
+        (!isDimmingBg || isSelectedNeighbor || isPrimaryNeighbor || isSecNeighbor)
+      ) {
+        ctx.strokeStyle = `rgba(${palette.edgeIdleRgb}, 0.28)`;
+        ctx.lineWidth = 1 * invK;
         ctx.stroke();
       }
 
-      if (!node.exists) {
-        ctx.save();
-        ctx.setLineDash([2.2 * invK, 2.2 * invK]);
-        ctx.strokeStyle = inFocus ? palette.unresolvedStrokeFocus : palette.unresolvedStrokeDim;
-        ctx.lineWidth = 1.1 * invK;
-        ctx.stroke();
-        ctx.restore();
-      } else if (isSelected) {
-        if (retro) {
-          ctx.beginPath();
-          ctx.arc(node.x, node.y, r + 3 * invK, 0, Math.PI * 2);
-          ctx.strokeStyle = palette.selectRing;
-          ctx.lineWidth = 1.85 * invK;
-          ctx.stroke();
-        } else {
-          // Crisp Solar Champagne (#fcd34d) telemetry reticle ring + cardinal ticks
-          const ringR = r + 3.1 * invK;
-          ctx.beginPath();
-          ctx.arc(node.x, node.y, ringR, 0, Math.PI * 2);
-          ctx.strokeStyle = palette.selectRing;
-          ctx.lineWidth = 1.75 * invK;
-          ctx.stroke();
-
-          const tickInner = ringR + 1.4 * invK;
-          const tickOuter = ringR + 4.0 * invK;
-          ctx.beginPath();
-          ctx.moveTo(node.x - tickOuter, node.y);
-          ctx.lineTo(node.x - tickInner, node.y);
-          ctx.moveTo(node.x + tickInner, node.y);
-          ctx.lineTo(node.x + tickOuter, node.y);
-          ctx.moveTo(node.x, node.y - tickOuter);
-          ctx.lineTo(node.x, node.y - tickInner);
-          ctx.moveTo(node.x, node.y + tickInner);
-          ctx.lineTo(node.x, node.y + tickOuter);
-          ctx.strokeStyle = palette.selectRing;
-          ctx.lineWidth = 1.35 * invK;
-          ctx.stroke();
-        }
-      } else if (isHover) {
-        ctx.beginPath();
-        ctx.arc(node.x, node.y, r + (retro ? 2.6 : 2.7) * invK, 0, Math.PI * 2);
-        ctx.strokeStyle = isSecondaryHover
-          ? palette.secondaryBright
-          : retro
-            ? palette.primaryBright
-            : palette.primary;
-        ctx.lineWidth = (retro ? 1.6 : 1.55) * invK;
-        ctx.stroke();
-      } else if (isActive && !hasSelection) {
-        ctx.beginPath();
-        ctx.arc(node.x, node.y, r + 2.4 * invK, 0, Math.PI * 2);
-        ctx.strokeStyle = palette.activeRing;
-        ctx.lineWidth = 1.3 * invK;
-        ctx.stroke();
-      }
-
-      const k = this.transform.k;
-      const showLabel =
+      const isLit =
         isSelected ||
-        isHover ||
-        isSearchHit ||
         isSelectedNeighbor ||
-        isHoverNeighbor ||
-        node.group === 'root' ||
-        (k >= 0.72 && node.degree >= 6) ||
-        (k >= 0.96 && node.degree >= 3) ||
-        k >= 1.25;
+        isPrimaryFocus ||
+        isPrimaryNeighbor ||
+        isSecFocus ||
+        isSecNeighbor;
 
-      if (showLabel) {
-        const priority = isSelected
-          ? 5
-          : isHover
-            ? 4
-            : isSearchHit
-              ? 3
-              : isSelectedNeighbor || isHoverNeighbor
-                ? 2
-                : inFocus
-                  ? 1
-                  : 0;
+      const drawOrder = isSelected || isPrimaryFocus || isSecFocus
+        ? 4
+        : isSharedNeighbor || isSearchHit
+          ? 3
+          : isSelectedNeighbor || isPrimaryNeighbor || isSecNeighbor
+            ? 2
+            : !isDimmingBg && !hasSearch
+              ? 1
+              : 0;
 
-        labelCandidates.push({
-          node,
-          r,
-          isSelected,
-          isHover,
-          isActive,
-          isSecondaryHover,
-          isNeighbor: isSelectedNeighbor || isHoverNeighbor,
-          isSearchHit,
-          inFocus,
-          priority,
-        });
-      }
+      labelItems.push({
+        node,
+        drawRadius,
+        isSelected,
+        isSelectedNeighbor,
+        isPrimaryFocus,
+        isPrimaryNeighbor,
+        isSecFocus,
+        isSecNeighbor,
+        isSharedNeighbor,
+        isLit,
+        isActive,
+        isSearchHit,
+        drawOrder,
+      });
     }
 
-    // 6. Theme-aware labels (3px Phosphor HUD pills vs 0px Retro JRPG pixel frames)
-    labelCandidates.sort((a, b) => a.priority - b.priority);
+    // Pass 4: Crisp, unboxed Obsidian-style floating labels below nodes
+    labelItems.sort((a, b) => a.drawOrder - b.drawOrder || a.node.radius - b.node.radius);
+
+    // Sub-linear zoom curve matching original repo (12 / k^0.35 clamped to [10, 14])
+    const baseFontPx = Math.max(10, Math.min(14, 12 / Math.pow(transform.k, 0.35)));
 
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
     ctx.lineJoin = 'round';
     ctx.miterLimit = 2;
 
-    const labelFontFamily = retro
-      ? '"DotGothic16", "IBM Plex Sans JP", monospace'
-      : '"IBM Plex Sans JP", "IBM Plex Mono", sans-serif';
-
-    for (const item of labelCandidates) {
+    for (const item of labelItems) {
       const {
         node,
-        r,
+        drawRadius,
         isSelected,
-        isHover,
+        isSelectedNeighbor,
+        isPrimaryFocus,
+        isPrimaryNeighbor,
+        isSecFocus,
+        isSecNeighbor,
+        isSharedNeighbor,
+        isLit,
         isActive,
-        isSecondaryHover,
-        isNeighbor,
         isSearchHit,
-        inFocus,
       } = item;
-      const emphasized = isSelected || isHover || isSearchHit;
-      const fontSize = (emphasized ? 12 : 11) * invK;
-      const weight = retro
-        ? emphasized
-          ? '700'
-          : isNeighbor
-            ? '600'
-            : '400'
-        : emphasized
-          ? '600'
-          : isNeighbor
-            ? '500'
-            : '400';
 
-      ctx.font = `${weight} ${fontSize}px ${labelFontFamily}`;
-      const text = emphasized || isNeighbor ? node.title : truncateLabel(node.title, 26);
-      const labelY = node.y + r + (retro ? 5 : 5.5) * invK;
-
-      if (emphasized || isNeighbor) {
-        const metrics = ctx.measureText(text);
-        const padX = (retro ? 5.5 : 6) * invK;
-        const padY = (retro ? 2.5 : 2.8) * invK;
-        const bw = metrics.width + padX * 2;
-        const bh = fontSize + padY * 2;
-        const bx = node.x - bw / 2;
-        const by = labelY - padY;
-
-        const borderStroke = isSelected
-          ? palette.labelBorderSelect
-          : isHover && isSecondaryHover
-            ? palette.labelBorderSecondary
-            : isHover
-              ? palette.labelBorderHover
-              : palette.labelBorderNeighbor;
-
-        if (retro) {
-          ctx.fillStyle = palette.labelBg;
-          ctx.fillRect(bx, by, bw, bh);
-          ctx.strokeStyle = borderStroke;
-          ctx.lineWidth = (emphasized ? 1.3 : 0.9) * invK;
-          ctx.strokeRect(bx, by, bw, bh);
-        } else {
-          const rad = 3 * invK;
-          ctx.beginPath();
-          if (typeof ctx.roundRect === 'function') {
-            ctx.roundRect(bx, by, bw, bh, rad);
-          } else {
-            ctx.rect(bx, by, bw, bh);
-          }
-          ctx.fillStyle = palette.labelBg;
-          ctx.fill();
-          ctx.strokeStyle = borderStroke;
-          ctx.lineWidth = (emphasized ? 1.2 : 0.85) * invK;
-          ctx.stroke();
+      // Progressive zoom-threshold disclosure when idle; lit & search-matched nodes are ALWAYS 100% visible
+      let zoomAlpha = 1;
+      if (!isLit && !isActive && !isSearchHit) {
+        const isLarge = this.nodes.length > 140;
+        const minK = isLarge
+          ? node.degree >= 16
+            ? 0.24
+            : node.degree >= 10
+              ? 0.42
+              : node.degree >= 6
+                ? 0.58
+                : 0.76
+          : node.degree >= 9
+            ? 0.24
+            : node.degree >= 5
+              ? 0.42
+              : node.degree >= 3
+                ? 0.56
+                : 0.72;
+        if (transform.k < minK) {
+          zoomAlpha = Math.max(0, (transform.k - (minK - 0.14)) / 0.14);
         }
-      } else {
-        // Dark glyph halo stroke so ambient/dimmed labels stay razor-sharp over crossing links
-        ctx.save();
-        ctx.globalAlpha = inFocus ? 0.92 : 0.55;
-        ctx.strokeStyle = palette.labelHalo;
-        ctx.lineWidth = 3.2 * invK;
-        ctx.strokeText(text, node.x, labelY);
-        ctx.restore();
+      }
+      if (zoomAlpha <= 0.02) continue;
+
+      let textAlpha = 0.88 * zoomAlpha;
+      let colorRgb = palette.labelDefaultRgb;
+      let fontWeight = node.degree >= 8 ? '600' : '400';
+      let isDimmedLabel = false;
+
+      if (isSelected || isPrimaryFocus || isSecFocus || isSharedNeighbor) {
+        textAlpha = 1;
+        colorRgb = palette.labelHighlightRgb;
+        fontWeight = '600';
+      } else if (isSecNeighbor) {
+        textAlpha = 0.96;
+        colorRgb = palette.labelSecNeighborRgb;
+        fontWeight = '500';
+      } else if (isSelectedNeighbor || isPrimaryNeighbor) {
+        textAlpha = 0.96;
+        colorRgb = palette.labelNeighborRgb;
+        fontWeight = '500';
+      } else if (isDimmingBg) {
+        textAlpha = (0.88 * (1 - dimStrength) + 0.13 * dimStrength) * zoomAlpha;
+        colorRgb = palette.labelDimRgb;
+        isDimmedLabel = dimStrength > 0.35;
+      } else if (hasSearch) {
+        if (isSearchHit) {
+          textAlpha = 1;
+          colorRgb = palette.labelHighlightRgb;
+          fontWeight = '600';
+        } else {
+          textAlpha = 0.13 * zoomAlpha;
+          colorRgb = palette.labelDimRgb;
+          isDimmedLabel = true;
+        }
       }
 
-      ctx.save();
-      if (emphasized || (isActive && inFocus)) {
-        ctx.fillStyle = palette.labelActive;
-      } else if (!inFocus) {
-        if (!retro) ctx.globalAlpha = 0.55;
-        ctx.fillStyle = palette.labelDim;
-      } else if (isNeighbor) {
-        ctx.fillStyle = palette.labelNeighbor;
-      } else {
-        ctx.fillStyle = palette.labelNormal;
+      const isFocusNode = isSelected || isPrimaryFocus || isSecFocus;
+      const fontSize = isFocusNode ? baseFontPx * 1.07 : baseFontPx;
+      ctx.font = `${fontWeight} ${fontSize.toFixed(2)}px ${LABEL_FONT_STACK}`;
+
+      const labelY = node.y + drawRadius + (isSelected ? 6.2 : 5.5) * invK;
+
+      // Subtle tight text halo ONLY on visible/lit labels, NEVER on dimmed background labels
+      if (!isDimmedLabel && textAlpha > 0.25) {
+        ctx.strokeStyle = `rgba(${palette.haloRgb}, ${(textAlpha * 0.86).toFixed(3)})`;
+        ctx.lineWidth = 2.6 / Math.max(0.45, transform.k);
+        ctx.strokeText(node.title, node.x, labelY);
       }
-      ctx.fillText(text, node.x, labelY);
-      ctx.restore();
+
+      ctx.fillStyle = `rgba(${colorRgb}, ${textAlpha.toFixed(3)})`;
+      ctx.fillText(node.title, node.x, labelY);
     }
 
     ctx.restore();

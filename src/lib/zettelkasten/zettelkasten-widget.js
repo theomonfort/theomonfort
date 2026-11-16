@@ -104,7 +104,7 @@ export async function mountZettelkasten(container, options = {}) {
     mode: 'read',
     drawerCollapsed: Boolean(options.defaultCollapsed),
     localDepth: 0,
-    colorByGroup: options.colorByGroup !== false,
+    colorByGroup: Boolean(options.colorByGroup),
     searchQuery: '',
     dirty: false,
     saveTimer: null,
@@ -356,14 +356,12 @@ export async function mountZettelkasten(container, options = {}) {
       }
     },
     onHoverNode: (node) => {
-      if (!node) {
+      if (!node || node.exists) {
         el.tooltip.hidden = true;
         return;
       }
       el.tooltip.hidden = false;
-      el.tooltip.innerHTML = node.exists
-        ? `<strong>${escapeHtml(node.title)}</strong><span>${node.degree} links / ${escapeHtml(node.group)}</span>`
-        : `<strong>${escapeHtml(node.title)}</strong><span class="is-warn">Uncreated note / click to create</span>`;
+      el.tooltip.innerHTML = `<strong>${escapeHtml(node.title)}</strong><span class="is-warn">Uncreated note / click to create</span>`;
     },
   });
 
@@ -888,7 +886,7 @@ export async function mountZettelkasten(container, options = {}) {
     if (el.tooltip.hidden) return;
     const rect = root.getBoundingClientRect();
     el.tooltip.style.left = `${e.clientX - rect.left + 14}px`;
-    el.tooltip.style.top = `${e.clientY - rect.top + 14}px`;
+    el.tooltip.style.top = `${Math.max(8, e.clientY - rect.top - 42)}px`;
   });
 
   root.addEventListener('click', async (e) => {

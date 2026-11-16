@@ -1347,20 +1347,13 @@ html[data-theme='retro'] .zk-root {
   --zk-radius-pill: 0px;
 }
 
-/* Delicate CRT scanline veil across the Retro stage */
+/* Keep the 2D graph canvas free of scanline banding in Retro mode; CRTOverlay handles site CRT */
 html[data-theme='retro'] .zk-root::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 4;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 0,
-    rgba(0, 0, 0, 0) 2px,
-    rgba(0, 0, 0, 0.14) 3px,
-    rgba(0, 0, 0, 0) 4px
-  );
+  content: none;
+}
+
+html[data-theme='retro'] .zk-canvas {
+  image-rendering: auto !important;
 }
 
 html[data-theme='retro'] .zk-hud-left {
