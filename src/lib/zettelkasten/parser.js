@@ -33,6 +33,21 @@ export function escapeHtml(str) {
     .replace(/'/g, '&#39;');
 }
 
+function unquoteYamlString(raw) {
+  const trimmed = raw.trim();
+  if (trimmed.length >= 2 && trimmed.startsWith('"') && trimmed.endsWith('"')) {
+    try {
+      return JSON.parse(trimmed);
+    } catch {
+      return trimmed.slice(1, -1);
+    }
+  }
+  if (trimmed.length >= 2 && trimmed.startsWith("'") && trimmed.endsWith("'")) {
+    return trimmed.slice(1, -1);
+  }
+  return trimmed;
+}
+
 function parseYamlValue(raw) {
   const val = raw.trim();
   if (!val) return '';
@@ -42,11 +57,11 @@ function parseYamlValue(raw) {
     if (!inner) return [];
     return inner
       .split(',')
-      .map((item) => item.trim().replace(/^['"]|['"]$/g, ''))
+      .map((item) => unquoteYamlString(item))
       .filter(Boolean);
   }
 
-  return val.replace(/^['"]|['"]$/g, '');
+  return unquoteYamlString(val);
 }
 
 export function parseFrontmatter(raw) {
@@ -102,10 +117,10 @@ export function serializeFrontmatter(frontmatter, body) {
   const lines = ['---'];
   for (const [key, val] of entries) {
     if (Array.isArray(val)) {
-      const formatted = val.map((v) => `"${String(v).replace(/"/g, '\\"')}"`).join(', ');
+      const formatted = val.map((v) => JSON.stringify(String(v))).join(', ');
       lines.push(`${key}: [${formatted}]`);
     } else {
-      lines.push(`${key}: "${String(val).replace(/"/g, '\\"')}"`);
+      lines.push(`${key}: ${JSON.stringify(String(val))}`);
     }
   }
   lines.push('---', '', body.replace(/^\n+/, ''));
