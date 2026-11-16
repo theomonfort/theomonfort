@@ -1,4 +1,8 @@
 export type AccentColor = 'magenta' | 'cyan' | 'amber' | 'green';
+export type SiteTheme = 'phosphor' | 'retro';
+
+export const SITE_THEME_KEY = 'akq-site-theme';
+export const SITE_THEME_EVENT = 'akq:theme-change';
 
 export interface AccentToken {
   text: string;
@@ -8,34 +12,59 @@ export interface AccentToken {
   hex: string;
 }
 
+export const phosphorAccentHex: Record<AccentColor, string> = {
+  magenta: '#93a8ff',
+  cyan: '#5eead4',
+  amber: '#fcd34d',
+  green: '#86efac',
+};
+
+export const retroAccentHex: Record<AccentColor, string> = {
+  magenta: '#ff2e88',
+  cyan: '#00f0ff',
+  amber: '#ffb000',
+  green: '#9bbc0f',
+};
+
+export function getCurrentSiteTheme(): SiteTheme {
+  if (typeof document !== 'undefined') {
+    return document.documentElement.dataset.theme === 'retro' ? 'retro' : 'phosphor';
+  }
+  return 'phosphor';
+}
+
+export function getAccentHexForTheme(color: AccentColor, theme: SiteTheme = getCurrentSiteTheme()): string {
+  return theme === 'retro' ? retroAccentHex[color] : phosphorAccentHex[color];
+}
+
 export const accentTokens = {
   magenta: {
     text: 'text-neon-magenta',
     border: 'border-neon-magenta',
     glow: 'hover:shadow-neon-magenta',
     shadow: 'shadow-neon-magenta',
-    hex: '#ff2e88',
+    hex: 'var(--c-neon-magenta)',
   },
   cyan: {
     text: 'text-neon-cyan',
     border: 'border-neon-cyan',
     glow: 'hover:shadow-neon-cyan',
     shadow: 'shadow-neon-cyan',
-    hex: '#00f0ff',
+    hex: 'var(--c-neon-cyan)',
   },
   amber: {
     text: 'text-crt-amber',
     border: 'border-crt-amber',
     glow: 'hover:shadow-neon-amber',
     shadow: 'shadow-neon-amber',
-    hex: '#ffb000',
+    hex: 'var(--c-crt-amber)',
   },
   green: {
     text: 'text-gb-green',
     border: 'border-gb-green',
     glow: 'hover:shadow-neon-green',
     shadow: 'shadow-neon-green',
-    hex: '#9bbc0f',
+    hex: 'var(--c-gb-green)',
   },
 } as const satisfies Record<AccentColor, AccentToken>;
 

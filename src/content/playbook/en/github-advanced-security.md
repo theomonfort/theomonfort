@@ -9,7 +9,7 @@ accent:
   border: border-neon-cyan
   glow: hover:shadow-neon-cyan
   shadow: shadow-neon-cyan
-  hex: "#00f0ff"
+  hex: "#5eead4"
 order: 19.3
 category: secure
 related: ['secret-scanning', 'code-scanning', 'dependabot']
@@ -147,43 +147,44 @@ links:
 <p class="duo-sub">Mean time from CVE disclosure to first exploitation.</p>
 <div class="tte">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 292" role="img" aria-label="Mean time from CVE disclosure to first confirmed exploitation, 2018 to 2026">
-<line x1="52.0" y1="70.6" x2="574.0" y2="70.6" stroke="rgba(0,240,255,0.13)" stroke-width="1.2"/>
-<text x="42.0" y="76.6" text-anchor="end" font-size="17" fill="rgba(232,244,255,0.4)">1y</text>
-<line x1="52.0" y1="146.6" x2="574.0" y2="146.6" stroke="rgba(0,240,255,0.13)" stroke-width="1.2"/>
-<text x="42.0" y="152.6" text-anchor="end" font-size="17" fill="rgba(232,244,255,0.4)">1mo</text>
-<line x1="52.0" y1="190.8" x2="574.0" y2="190.8" stroke="rgba(0,240,255,0.13)" stroke-width="1.2"/>
-<text x="42.0" y="196.8" text-anchor="end" font-size="17" fill="rgba(232,244,255,0.4)">7d</text>
-<line x1="52.0" y1="250.0" x2="574.0" y2="250.0" stroke="rgba(0,240,255,0.13)" stroke-width="1.2"/>
-<text x="42.0" y="256.0" text-anchor="end" font-size="17" fill="rgba(232,244,255,0.4)">1d</text>
-<polyline points="52.0,45.3 117.2,54.5 182.5,62.6 247.8,76.2 313.0,80.7 378.2,102.5 443.5,129.3 508.8,156.7 574.0,250.0" fill="none" stroke="#00f0ff" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" opacity="0.25"/>
-<polyline points="52.0,45.3 117.2,54.5 182.5,62.6 247.8,76.2 313.0,80.7 378.2,102.5 443.5,129.3 508.8,156.7 574.0,250.0" fill="none" stroke="#00f0ff" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
-<circle cx="52.0" cy="45.3" r="4.6" fill="#e8f4ff"/>
-<text x="52.0" y="31.3" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">2.3y</text>
-<circle cx="117.2" cy="54.5" r="4.6" fill="#e8f4ff"/>
-<text x="117.2" y="40.5" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">1.7y</text>
-<circle cx="182.5" cy="62.6" r="4.6" fill="#e8f4ff"/>
-<text x="182.5" y="48.6" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">1.3y</text>
-<circle cx="247.8" cy="76.2" r="4.6" fill="#e8f4ff"/>
-<text x="247.8" y="62.2" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">10mo</text>
-<circle cx="313.0" cy="80.7" r="4.6" fill="#e8f4ff"/>
-<text x="313.0" y="66.7" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">8.6mo</text>
-<circle cx="378.2" cy="102.5" r="4.6" fill="#e8f4ff"/>
-<text x="378.2" y="88.5" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">4.2mo</text>
-<circle cx="443.5" cy="129.3" r="4.6" fill="#e8f4ff"/>
-<text x="443.5" y="115.3" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">53d</text>
-<circle cx="508.8" cy="156.7" r="4.6" fill="#e8f4ff"/>
-<text x="508.8" y="142.7" text-anchor="middle" font-size="18" fill="rgba(232,244,255,0.82)">21.5d</text>
-<circle cx="574.0" cy="250.0" r="6.5" fill="#ff2e88"/>
-<text x="559.0" y="257.0" text-anchor="end" font-size="20" font-weight="700" fill="#ff7ab2">24h</text>
-<text x="52.0" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2018</text>
-<text x="117.2" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2019</text>
-<text x="182.5" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2020</text>
-<text x="247.8" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2021</text>
-<text x="313.0" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2022</text>
-<text x="378.2" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2023</text>
-<text x="443.5" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2024</text>
-<text x="508.8" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2025</text>
-<text x="574.0" y="281" text-anchor="middle" font-size="17" fill="rgba(232,244,255,0.5)">2026</text>
+<style>html[data-theme='retro'] .tte svg text[font-family]{font-family:inherit}</style>
+<line x1="52.0" y1="70.6" x2="574.0" y2="70.6" stroke="rgb(var(--rgb-neon-cyan) / 0.16)" stroke-width="1.2"/>
+<text x="42.0" y="76.6" text-anchor="end" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.68)">1y</text>
+<line x1="52.0" y1="146.6" x2="574.0" y2="146.6" stroke="rgb(var(--rgb-neon-cyan) / 0.16)" stroke-width="1.2"/>
+<text x="42.0" y="152.6" text-anchor="end" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.68)">1mo</text>
+<line x1="52.0" y1="190.8" x2="574.0" y2="190.8" stroke="rgb(var(--rgb-neon-cyan) / 0.16)" stroke-width="1.2"/>
+<text x="42.0" y="196.8" text-anchor="end" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.68)">7d</text>
+<line x1="52.0" y1="250.0" x2="574.0" y2="250.0" stroke="rgb(var(--rgb-neon-cyan) / 0.16)" stroke-width="1.2"/>
+<text x="42.0" y="256.0" text-anchor="end" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.68)">1d</text>
+<polyline points="52.0,45.3 117.2,54.5 182.5,62.6 247.8,76.2 313.0,80.7 378.2,102.5 443.5,129.3 508.8,156.7 574.0,250.0" fill="none" stroke="var(--c-neon-cyan)" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="52.0,45.3 117.2,54.5 182.5,62.6 247.8,76.2 313.0,80.7 378.2,102.5 443.5,129.3 508.8,156.7 574.0,250.0" fill="none" stroke="var(--c-neon-cyan)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="52.0" cy="45.3" r="4.6" fill="var(--c-phosphor)"/>
+<text x="52.0" y="31.3" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">2.3y</text>
+<circle cx="117.2" cy="54.5" r="4.6" fill="var(--c-phosphor)"/>
+<text x="117.2" y="40.5" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">1.7y</text>
+<circle cx="182.5" cy="62.6" r="4.6" fill="var(--c-phosphor)"/>
+<text x="182.5" y="48.6" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">1.3y</text>
+<circle cx="247.8" cy="76.2" r="4.6" fill="var(--c-phosphor)"/>
+<text x="247.8" y="62.2" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">10mo</text>
+<circle cx="313.0" cy="80.7" r="4.6" fill="var(--c-phosphor)"/>
+<text x="313.0" y="66.7" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">8.6mo</text>
+<circle cx="378.2" cy="102.5" r="4.6" fill="var(--c-phosphor)"/>
+<text x="378.2" y="88.5" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">4.2mo</text>
+<circle cx="443.5" cy="129.3" r="4.6" fill="var(--c-phosphor)"/>
+<text x="443.5" y="115.3" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">53d</text>
+<circle cx="508.8" cy="156.7" r="4.6" fill="var(--c-phosphor)"/>
+<text x="508.8" y="142.7" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">21.5d</text>
+<circle cx="574.0" cy="250.0" r="6.5" fill="var(--c-coral-alert)"/>
+<text x="559.0" y="257.0" text-anchor="end" font-family="'Orbitron', 'IBM Plex Mono', sans-serif" font-size="20" font-weight="700" fill="var(--c-coral-alert)">24h</text>
+<text x="52.0" y="281" text-anchor="middle" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.72)">2018</text>
+<text x="117.2" y="281" text-anchor="middle" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.72)">2019</text>
+<text x="182.5" y="281" text-anchor="middle" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.72)">2020</text>
+<text x="247.8" y="281" text-anchor="middle" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.72)">2021</text>
+<text x="313.0" y="281" text-anchor="middle" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.72)">2022</text>
+<text x="378.2" y="281" text-anchor="middle" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.72)">2023</text>
+<text x="443.5" y="281" text-anchor="middle" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.72)">2024</text>
+<text x="508.8" y="281" text-anchor="middle" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.72)">2025</text>
+<text x="574.0" y="281" text-anchor="middle" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.72)">2026</text>
 </svg>
 </div>
 <p class="duo-foot">Based on 3,500+ confirmed-exploited CVEs (CISA KEV + VulnCheck KEV) · zerodayclock.com</p>
@@ -440,7 +441,7 @@ You can now **enforce enterprise security configurations** across both new and e
 
 <div class="ctl-widget">
 <div class="ctl-list">
-<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#ffb000">
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:var(--c-crt-amber)">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🚫</span><span class="ctl-name">Block orgs that should not have it</span><span class="ctl-when">Do this first</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/admin/enforcing-policies/enforcing-policies-for-your-enterprise/enforcing-policies-for-code-security-and-analysis-for-your-enterprise" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">Do this</span><span class="ctl-v">Enterprise → Policies → <b>Advanced Security</b> → <b>Policies</b> tab → set the dropdown to <b>Allow for selected organizations</b> and keep only the orgs you want</span></p>
@@ -448,21 +449,21 @@ You can now **enforce enterprise security configurations** across both new and e
 <p class="ctl-row"><span class="ctl-k">Who it binds</span><span class="ctl-v"><b>Repository administrators only</b>. Org owners and security managers can always enable it regardless of the policy</span></p>
 </div>
 </details>
-<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#ff4d4d">
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:var(--c-coral-alert)">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛡️</span><span class="ctl-name">Push protection turns on</span><span class="ctl-when">blocks <code>push</code> only</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/push-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">Blocked</span><span class="ctl-v"><code>git push</code>, commits made in the GitHub UI, file uploads, REST API requests</span></p>
 <p class="ctl-row"><span class="ctl-k">Not blocked</span><span class="ctl-v"><code>git pull</code>, <code>git clone</code>, <code>git fetch</code>. <b>"Secret scanning will stop us pulling" is a misconception</b></span></p>
 </div>
 </details>
-<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#ff4d4d">
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:var(--c-coral-alert)">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛂</span><span class="ctl-name">Bypass is open to anyone with write</span><span class="ctl-when">default behavior</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/delegated-bypass" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">Default</span><span class="ctl-v"><b>anyone</b> with write access can bypass by picking a reason. Every bypass still leaves <b>an alert, an audit log entry, and an email to owners</b></span></p>
 <p class="ctl-row"><span class="ctl-k">To restrict</span><span class="ctl-v">set <b>Bypass privileges</b> to <b>Specific actors</b> in the configuration (delegated bypass). Everyone else goes through a request and approval flow (requests expire after 7 days)</span></p>
 </div>
 </details>
-<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#00f0ff">
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:var(--c-neon-cyan)">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔍</span><span class="ctl-name">Code scanning runs on three triggers</span><span class="ctl-when">consumes Actions minutes</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/setup-types" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">When</span><span class="ctl-v">every push to the default or a protected branch, every PR creation and commit against those branches (fork PRs excluded), and a <b>weekly schedule</b></span></p>
@@ -470,7 +471,7 @@ You can now **enforce enterprise security configurations** across both new and e
 <p class="ctl-row"><span class="ctl-k">Note</span><span class="ctl-v">code scanning on its own <b>never blocks a merge</b></span></p>
 </div>
 </details>
-<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#00f0ff">
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:var(--c-neon-cyan)">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🚧</span><span class="ctl-name">Blocking merges needs a ruleset</span><span class="ctl-when">Enterprise → Policies → Rulesets</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/merge-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">Where</span><span class="ctl-v">Policies → Repository → Rulesets → <b>Require code scanning results</b></span></p>
@@ -479,14 +480,14 @@ You can now **enforce enterprise security configurations** across both new and e
 <p class="ctl-row"><span class="ctl-k">What Evaluate is</span><span class="ctl-v">a <b>dry run that records instead of blocking</b>. <b>Rule Insights</b> shows what Active would have rejected. The others are Active and Disabled</span></p>
 </div>
 </details>
-<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#9bbc0f">
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:var(--c-gb-green)">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🆕</span><span class="ctl-name">Cover new repositories</span><span class="ctl-when">set via Policy</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/create-custom-configuration" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">Do this</span><span class="ctl-v">Policy → <b>Use as default for newly created repositories</b>. Pick <b>Enabled with advanced setup allowed</b> for code scanning so existing CodeQL workflows survive</span></p>
 <p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v"><b>new repositories only</b>. It does nothing to repositories that already exist</span></p>
 </div>
 </details>
-<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#9bbc0f">
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:var(--c-gb-green)">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🗂️</span><span class="ctl-name">Cover existing repositories</span><span class="ctl-when">separate Apply to action</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-enterprise-security/establish-complete-coverage/apply-custom-configuration" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">Do this</span><span class="ctl-v">from the configurations list, <b>Apply to</b> → <b>All repositories without configurations</b></span></p>
@@ -495,7 +496,7 @@ You can now **enforce enterprise security configurations** across both new and e
 <p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">archived repos are included too, since secret scanning still runs on them</span></p>
 </div>
 </details>
-<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#9bbc0f">
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:var(--c-gb-green)">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🎯</span><span class="ctl-name">Pick specific repositories</span><span class="ctl-when">org and enterprise configurations</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/apply-custom-configuration" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">Per repo</span><span class="ctl-v"><b>Enterprise configurations can also be applied to selected repositories</b> from the organization's repository list. The selection interface is at org level; the configuration does <b>not</b> have to be created there</span></p>
@@ -503,7 +504,7 @@ You can now **enforce enterprise security configurations** across both new and e
 <p class="ctl-row"><span class="ctl-k">Who wins</span><span class="ctl-v">if an enterprise change conflicts with the org configuration the repo flips to <code>removed_by_enterprise</code> and the org config detaches. <b>Enterprise wins</b></span></p>
 </div>
 </details>
-<details class="ctl-item" name="ghas-rollout" style="--entry-accent:#9bbc0f">
+<details class="ctl-item" name="ghas-rollout" style="--entry-accent:var(--c-gb-green)">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">⚖️</span><span class="ctl-name">Which configuration is applied</span><span class="ctl-when">1 repo = 1 config (last applied wins)</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/reference/security-at-scale/configuration-statuses" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">Core rule</span><span class="ctl-v">no merging and no stacking: <b>a repository has at most one configuration attached at a time</b>. Applying another configuration <b>replaces the current one</b> without detaching first (<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-at-scale/configure-organization-security/manage-your-coverage/detach-security-configuration" target="_blank" rel="noopener noreferrer">detaching docs ↗</a>). Detaching alone leaves already-enabled features on</span></p>

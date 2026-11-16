@@ -9,7 +9,7 @@ accent:
   border: border-neon-cyan
   glow: hover:shadow-neon-cyan
   shadow: shadow-neon-cyan
-  hex: "#00f0ff"
+  hex: "#5eead4"
 order: 19.2
 category: secure
 related: ['cloud-agent', 'copilot-code-review', 'agentic-workflow', 'dependabot']
@@ -101,9 +101,9 @@ flowchart LR
   RUN -->|③ 結果・ログを返す| REPO
   RUN -->|④ 完了| GONE
 
-  classDef gh fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
-  classDef vm fill:#1a0a2e,stroke:#ffb000,color:#ffb000,stroke-width:2px
-  classDef run fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
+  classDef gh fill:#0b1420,stroke:#5eead4,color:#5eead4,stroke-width:2px
+  classDef vm fill:#11162c,stroke:#fcd34d,color:#fcd34d,stroke-width:2px
+  classDef run fill:#0a1a14,stroke:#86efac,color:#86efac,stroke-width:2px
   classDef gone fill:#2a0a0a,stroke:#ff5555,color:#ff5555,stroke-width:2px
   class REPO gh
   class VM vm

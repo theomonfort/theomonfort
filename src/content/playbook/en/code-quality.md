@@ -9,7 +9,7 @@ accent:
   border: border-neon-cyan
   glow: hover:shadow-neon-cyan
   shadow: shadow-neon-cyan
-  hex: "#00f0ff"
+  hex: "#5eead4"
 order: 19.6
 category: secure
 related: ['code-scanning', 'github-advanced-security', 'copilot-code-review']

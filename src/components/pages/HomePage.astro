@@ -17,23 +17,23 @@ const t = siteCopy[locale];
       <PixelRoom immersive={true} locale={locale} src="/theomonfort/room/equipment-room.png" />
     </div>
 
-    <div class="relative z-10 flex flex-col items-center justify-between min-h-[calc(100vh-72px)] pt-2 md:pt-3 pb-8 md:pb-12 px-4 pointer-events-none">
+    <div class="relative z-10 flex flex-col items-center justify-between min-h-[calc(100vh-72px)] pt-3 md:pt-5 pb-8 md:pb-12 px-4 pointer-events-none">
       <div class="text-center max-w-2xl">
-        <p class="font-pixel text-[9px] md:text-[10px] text-crt-amber mb-1 tracking-[0.3em] drop-shadow-[0_0_6px_rgba(255,176,0,0.5)]">{t.home.insertCoin}</p>
-        <h1 class="font-pixel text-2xl md:text-4xl text-neon-magenta tracking-wider drop-shadow-[0_0_14px_rgba(255,46,136,0.85)] leading-none flex items-center justify-center gap-3 md:gap-5 flex-wrap">
-          <span>AI</span>
-          <span class="font-pixel-jp text-[1.05em] leading-none -translate-y-[0.08em]">{t.brandMiddle}</span>
-          <span>QUEST</span>
+        <p class="hero-coin inline-flex items-center gap-2 px-2.5 py-1 rounded-[var(--radius-ui)] border border-crt-amber/30 bg-shadow-ink/80 backdrop-blur-sm font-mono text-[11px] font-semibold text-crt-amber mb-2.5 tracking-[0.22em] uppercase shadow-[0_4px_16px_rgb(var(--rgb-shadow-ink)/0.45)]">{t.home.insertCoin}</p>
+        <h1 class="hero-title font-display font-bold text-3xl md:text-5xl text-phosphor tracking-[0.06em] drop-shadow-[0_2px_18px_rgb(var(--rgb-neon-cyan)/0.25)] leading-tight flex items-center justify-center gap-2.5 md:gap-4 flex-wrap">
+          <span class="hero-title-edge text-neon-cyan">AI</span>
+          <span class="hero-title-mid font-body font-bold text-[0.94em] tracking-tight leading-none">{t.brandMiddle}</span>
+          <span class="hero-title-edge text-neon-cyan">QUEST</span>
         </h1>
-        <p class="font-pixel-jp text-sm md:text-base text-neon-cyan mt-1 drop-shadow-[0_0_8px_rgba(0,240,255,0.7)]">{t.home.subtitle}</p>
+        <p class="hero-subtitle font-mono text-xs md:text-sm font-medium tracking-[0.12em] text-phosphor-body mt-2 drop-shadow-[0_2px_8px_rgb(var(--rgb-shadow-ink)/0.9)]">{t.home.subtitle}</p>
       </div>
 
-      <div class="text-center font-pixel text-[10px] text-phosphor/80 space-y-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
-        <p class="font-body text-sm md:text-base text-phosphor/90 mb-3 max-w-xl mx-auto leading-relaxed">
-          <span class="inline-flex items-center justify-center gap-2 text-crt-amber">
+      <div class="hero-hud-hint text-center px-5 py-3 rounded-[var(--radius-card)] max-w-xl mx-auto">
+        <p class="hero-hint-copy font-body text-sm md:text-base text-phosphor-body leading-relaxed">
+          <span class="hero-hint-lead inline-flex items-center justify-center gap-2 font-mono text-xs md:text-sm font-semibold tracking-[0.04em] text-crt-amber">
             <MenuArrow color="text-crt-amber" /> <span>{t.home.hint[0]}</span>
           </span><br />
-          {t.home.hint[1]}
+          <span class="text-xs md:text-sm text-phosphor-body">{t.home.hint[1]}</span>
         </p>
       </div>
     </div>
@@ -51,12 +51,73 @@ const t = siteCopy[locale];
       radial-gradient(ellipse at 50% 50%,
         transparent 0%,
         transparent 55%,
-        rgba(10, 14, 39, 0.45) 90%,
-        rgba(10, 14, 39, 0.85) 100%),
+        rgb(var(--rgb-midnight) / 0.48) 90%,
+        rgb(var(--rgb-midnight) / 0.88) 100%),
       linear-gradient(to bottom,
-        rgba(10, 14, 39, 0.55) 0%,
+        rgb(var(--rgb-midnight) / 0.58) 0%,
         transparent 18%,
         transparent 82%,
-        rgba(10, 14, 39, 0.55) 100%);
+        rgb(var(--rgb-midnight) / 0.62) 100%);
+  }
+
+  .hero-hud-hint {
+    background-color: var(--c-bg-hud);
+    background-image: linear-gradient(
+      90deg,
+      var(--c-neon-cyan) 0%,
+      rgb(var(--rgb-neon-cyan) / 0.30) 55%,
+      transparent 100%
+    );
+    background-size: 100% 2px;
+    background-position: top left;
+    background-repeat: no-repeat;
+    border: 1px solid rgb(var(--rgb-neon-cyan) / 0.24);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 24px rgb(var(--rgb-shadow-ink) / 0.5);
+  }
+
+  :global(html[data-theme='retro']) .hero-coin {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    background: transparent;
+    border-color: transparent;
+    backdrop-filter: none;
+    box-shadow: none;
+    padding: 0;
+    filter: drop-shadow(0 0 6px rgb(var(--rgb-crt-amber) / 0.5));
+  }
+  :global(html[data-theme='retro']) .hero-title {
+    font-family: 'Press Start 2P', monospace;
+    color: var(--c-neon-magenta);
+    letter-spacing: 0.05em;
+    filter: drop-shadow(0 0 14px rgb(var(--rgb-neon-magenta) / 0.85));
+  }
+  :global(html[data-theme='retro']) .hero-title-edge {
+    color: inherit;
+  }
+  :global(html[data-theme='retro']) .hero-title-mid {
+    font-family: 'DotGothic16', sans-serif;
+    font-size: 1.05em;
+    transform: translateY(-0.08em);
+  }
+  :global(html[data-theme='retro']) .hero-subtitle {
+    font-family: 'DotGothic16', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    color: var(--c-neon-cyan);
+    filter: drop-shadow(0 0 8px rgb(var(--rgb-neon-cyan) / 0.7));
+  }
+  :global(html[data-theme='retro']) .hero-hud-hint {
+    background-image: none;
+    background-color: rgb(var(--rgb-shadow-ink) / 0.86);
+    border: 2px solid var(--c-neon-cyan);
+    border-radius: 0;
+    backdrop-filter: none;
+    box-shadow: 4px 4px 0 var(--c-shadow-ink), var(--shadow-neon-cyan);
+  }
+  :global(html[data-theme='retro']) .hero-hint-copy,
+  :global(html[data-theme='retro']) .hero-hint-lead {
+    font-family: 'DotGothic16', sans-serif;
   }
 </style>

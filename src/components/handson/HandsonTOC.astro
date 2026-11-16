@@ -36,8 +36,8 @@ const currentOrder = steps.find((step) => step.slug === currentSlug)?.entry.data
         <>
           {startsCategory && (
             <li class="handson-toc-phase" style={style}>
-              <span class="font-pixel">{meta.labelEn}</span>
-              {meta.label !== meta.labelEn && <small class="font-pixel-jp">{meta.label}</small>}
+              <span class="font-display text-[0.66rem] font-bold tracking-[0.1em] uppercase">{meta.labelEn}</span>
+              {meta.label !== meta.labelEn && <small class="font-body">{meta.label}</small>}
             </li>
           )}
           <li>
@@ -48,11 +48,11 @@ const currentOrder = steps.find((step) => step.slug === currentSlug)?.entry.data
               data-slug={step.slug}
               style={style}
             >
-              <span class="toc-status font-pixel" aria-hidden="true">{active ? '▶' : complete ? '◆' : '◇'}</span>
-              <span class="toc-num font-pixel">{String(order).padStart(2, '0')}</span>
-              <span class="toc-text font-pixel-jp">{handsonStepTitle(step)}</span>
+              <span class="toc-status font-mono" aria-hidden="true">{active ? '▶' : complete ? '◆' : '◇'}</span>
+              <span class="toc-num font-mono">{String(order).padStart(2, '0')}</span>
+              <span class="toc-text font-body">{handsonStepTitle(step)}</span>
               {step.entry.data.duration != null && (
-                <span class="toc-duration font-pixel">{step.entry.data.duration}m</span>
+                <span class="toc-duration font-mono">{step.entry.data.duration}m</span>
               )}
             </a>
           </li>
@@ -63,7 +63,7 @@ const currentOrder = steps.find((step) => step.slug === currentSlug)?.entry.data
   {feedbackUrl && feedbackLabel && (
     <a
       href={feedbackUrl}
-      class="handson-toc-feedback font-pixel"
+      class="handson-toc-feedback font-mono"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -71,3 +71,17 @@ const currentOrder = steps.find((step) => step.slug === currentSlug)?.entry.data
     </a>
   )}
 </nav>
+
+<style>
+  :global(html[data-theme='retro']) .handson-toc-phase > span,
+  :global(html[data-theme='retro']) .toc-status,
+  :global(html[data-theme='retro']) .toc-num,
+  :global(html[data-theme='retro']) .toc-duration,
+  :global(html[data-theme='retro']) .handson-toc-feedback {
+    font-family: 'Press Start 2P', monospace;
+  }
+  :global(html[data-theme='retro']) .handson-toc-phase > small,
+  :global(html[data-theme='retro']) .toc-text {
+    font-family: 'DotGothic16', sans-serif;
+  }
+</style>

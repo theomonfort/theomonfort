@@ -9,7 +9,7 @@ accent:
   border: border-gb-green
   glow: hover:shadow-neon-green
   shadow: shadow-neon-green
-  hex: "#9bbc0f"
+  hex: "#86efac"
 order: 4
 category: plan
 related: ['agent-skills']
@@ -103,9 +103,9 @@ flowchart LR
   PWs <-->|API| PW
   APIs <-->|API| API
 
-  classDef host fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
-  classDef proto fill:#1a0a2e,stroke:#ffb000,color:#ffb000,stroke-width:2px
-  classDef tool fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
+  classDef host fill:#0b1420,stroke:#5eead4,color:#5eead4,stroke-width:2px
+  classDef proto fill:#11162c,stroke:#fcd34d,color:#fcd34d,stroke-width:2px
+  classDef tool fill:#0a1a14,stroke:#86efac,color:#86efac,stroke-width:2px
   class APP,CL1,CL2,CL3,CL4,CL5 host
   class SLs,JRs,FSs,PWs,APIs proto
   class SL,JR,FS,PW,API tool
@@ -186,28 +186,28 @@ GitHub 公式 MCP server は最初から接続済み。`gh` コマンドを叩�
 
 <div class="mcp-connectors">
 <style>
-.prose-akq .mcp-connectors{font:clamp(16px,1.3vw,20px)/1.35 var(--font-prose),sans-serif;color:#e8f4ff}
+.prose-akq .mcp-connectors{font:clamp(16px,1.3vw,20px)/1.35 var(--font-prose),sans-serif;color:var(--c-phosphor)}
 .prose-akq .mcp-connectors p{margin:0}
-.prose-akq .mcp-connectors .mcp-connectors-status{padding:2px 6px;border:1px solid #ffb000;color:#ffb000;font-size:14px}
+.prose-akq .mcp-connectors .mcp-connectors-status{padding:2px 6px;border:1px solid var(--c-crt-amber);color:var(--c-crt-amber);font-size:14px}
 .prose-akq .mcp-connectors .mcp-connectors-lead{margin-bottom:10px;font-size:1.1em}
 .prose-akq .mcp-connectors .mcp-connectors-compare{margin:0;table-layout:fixed;font-size:1em}
 .prose-akq .mcp-connectors .mcp-connectors-compare th{font-size:1em;letter-spacing:0}
 .prose-akq .mcp-connectors-compare th:first-child{width:17%}
 .prose-akq .mcp-connectors-compare th:nth-child(2){width:40%}
-.prose-akq .mcp-connectors-compare :is(th,td):last-child{background:#9bbc0f12}
+.prose-akq .mcp-connectors-compare :is(th,td):last-child{background:rgb(var(--rgb-gb-green) / 0.07)}
 .prose-akq .mcp-connectors-find{margin-top:10px}
 .prose-akq .mcp-connectors-find-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}
-.prose-akq .mcp-connectors .mcp-connectors-find h3{margin:0;font-size:1em;line-height:1.3;color:#9bbc0f}
+.prose-akq .mcp-connectors .mcp-connectors-find h3{margin:0;font-size:1em;line-height:1.3;color:var(--c-gb-green)}
 .prose-akq .mcp-connectors-locations{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0}
-.prose-akq .mcp-connectors-locations > div{padding-top:6px;border-top:1px solid #e8f4ff22}
+.prose-akq .mcp-connectors-locations > div{padding-top:6px;border-top:1px solid rgb(var(--rgb-phosphor) / 0.13)}
 .prose-akq .mcp-connectors-locations dt{margin-bottom:4px;font-weight:600;font-size:14px}
-.prose-akq .mcp-connectors-locations dd{margin:0;color:#a8bed2}
+.prose-akq .mcp-connectors-locations dd{margin:0;color:var(--c-fg-body)}
 .prose-akq > h2:has(.mcp-connectors-title){display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
 .prose-akq .mcp-connectors-links{display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px}
 .prose-akq h2 .mcp-connectors-links .h2-doc{margin:0;font-size:14px}
-.prose-akq h2 .mcp-connectors-explore{display:inline-flex;padding:.2em .5em;border:1px solid #9bbc0f88;color:#9bbc0f;font-size:14px;font-weight:400;line-height:1.4;letter-spacing:0;text-decoration:none;white-space:nowrap}
-.prose-akq h2 .mcp-connectors-explore:hover,.prose-akq h2 .mcp-connectors-explore:focus-visible{border-color:#9bbc0f;text-decoration:underline}
-.prose-akq h2 .mcp-connectors-explore:focus-visible{outline:2px solid #9bbc0f;outline-offset:2px}
+.prose-akq h2 .mcp-connectors-explore{display:inline-flex;padding:.2em .5em;border:1px solid rgb(var(--rgb-gb-green) / 0.53);color:var(--c-gb-green);font-size:14px;font-weight:400;line-height:1.4;letter-spacing:0;text-decoration:none;white-space:nowrap}
+.prose-akq h2 .mcp-connectors-explore:hover,.prose-akq h2 .mcp-connectors-explore:focus-visible{border-color:var(--c-gb-green);text-decoration:underline}
+.prose-akq h2 .mcp-connectors-explore:focus-visible{outline:2px solid var(--c-gb-green);outline-offset:2px}
 body.present-mode .playbook-detail:has(.mcp-connectors.akq-slide-active){padding-top:88px;padding-bottom:72px}
 body.present-mode .prose-akq > h2:has(.mcp-connectors-title){margin:0 0 12px;font-size:clamp(28px,2.2vw,36px);line-height:1.2;letter-spacing:0}
 body.present-mode .prose-akq > h2:has(.mcp-connectors-title)::before{top:.35em}

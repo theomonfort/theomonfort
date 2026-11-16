@@ -57,7 +57,7 @@ const shellStyle = `--handson-progress:${progress}%;--entry-accent:${categoryMet
     <main class="handson-main">
       <button
         type="button"
-        class="handson-toc-toggle font-pixel text-[10px]"
+        class="handson-toc-toggle font-mono text-xs font-semibold"
         data-handson-toc-toggle
         aria-expanded="false"
       >
@@ -68,26 +68,26 @@ const shellStyle = `--handson-progress:${progress}%;--entry-accent:${categoryMet
         <div class="handson-step-header-grid">
           <div class="handson-step-copy">
             <div class="handson-step-meta">
-              <span class="handson-step-chip is-area font-pixel">
+              <span class="handson-step-chip is-area font-mono font-semibold text-shadow-ink">
                 {categoryMeta.icon} {categoryMeta.labelEn}
               </span>
-              <span class="handson-step-chip font-pixel">
+              <span class="handson-step-chip font-mono font-semibold">
                 {t.handson.stepLabel} {String(entry.data.order).padStart(2, '0')} / {String(all.length).padStart(2, '0')}
               </span>
               {entry.data.duration != null && (
-                <span class="handson-step-chip font-pixel">
+                <span class="handson-step-chip font-mono font-semibold">
                   ⏱ {entry.data.duration}{t.handson.durationSuffix}
                 </span>
               )}
               {remainingMin > 0 && (
-                <span class="handson-step-chip is-remaining font-pixel">
+                <span class="handson-step-chip is-remaining font-mono font-semibold">
                   ⏳ {t.handson.remainingPrefix}{remainingMin}{t.handson.remainingSuffix}
                 </span>
               )}
             </div>
 
-            <h1 class="font-pixel-jp">{handsonStepTitle(item)}</h1>
-            <p class="handson-step-summary font-pixel-jp">{entry.data.summary}</p>
+            <h1 class="font-display">{handsonStepTitle(item)}</h1>
+            <p class="handson-step-summary font-body">{entry.data.summary}</p>
 
             <div
               class="handson-step-meter"
@@ -107,7 +107,7 @@ const shellStyle = `--handson-progress:${progress}%;--entry-accent:${categoryMet
         </div>
 
         {item.isFallback && (
-          <p class="mt-4 p-3 border-2 border-crt-amber/60 bg-shadow-ink/70 font-pixel-jp text-sm text-crt-amber">
+          <p class="handson-fallback-note mt-4 px-3.5 py-2.5 rounded-[var(--radius-card)] border border-crt-amber/35 bg-crt-amber/10 font-body text-sm text-crt-amber">
             {t.common.translationPending}
           </p>
         )}
@@ -217,3 +217,19 @@ const shellStyle = `--handson-progress:${progress}%;--entry-accent:${categoryMet
     })();
   </script>
 </Layout>
+
+<style>
+  :global(html[data-theme='retro']) .handson-toc-toggle,
+  :global(html[data-theme='retro']) .handson-step-chip {
+    font-family: 'Press Start 2P', monospace;
+  }
+  :global(html[data-theme='retro']) .handson-step-header h1,
+  :global(html[data-theme='retro']) .handson-step-summary,
+  :global(html[data-theme='retro']) .handson-fallback-note {
+    font-family: 'DotGothic16', sans-serif;
+  }
+  :global(html[data-theme='retro']) .handson-fallback-note {
+    border-width: 2px;
+    background-color: rgb(var(--rgb-shadow-ink) / 0.75);
+  }
+</style>

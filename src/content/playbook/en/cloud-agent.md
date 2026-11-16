@@ -9,7 +9,7 @@ accent:
   border: border-neon-magenta
   glow: hover:shadow-neon-magenta
   shadow: shadow-neon-magenta
-  hex: "#ff2e88"
+  hex: "#93a8ff"
 order: 15
 category: develop
 related: ['partner-agent', 'copilot-code-review', 'instructions', 'mcp']
@@ -177,10 +177,10 @@ flowchart LR
   D -->|"OK"| M
   M -.->|"Next Issue"| A
 
-  classDef human fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
-  classDef agent fill:#1a1500,stroke:#ffb000,color:#ffb000,stroke-width:2px
-  classDef decide fill:#1a0a2e,stroke:#ff2e88,color:#ff2e88,stroke-width:2px
-  classDef done fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
+  classDef human fill:#0b1420,stroke:#5eead4,color:#5eead4,stroke-width:2px
+  classDef agent fill:#1a1500,stroke:#fcd34d,color:#fcd34d,stroke-width:2px
+  classDef decide fill:#11162c,stroke:#93a8ff,color:#93a8ff,stroke-width:2px
+  classDef done fill:#0a1a14,stroke:#86efac,color:#86efac,stroke-width:2px
   class A,B,C human
   class E,F,G agent
   class D decide

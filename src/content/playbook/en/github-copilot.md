@@ -9,7 +9,7 @@ accent:
   border: border-neon-cyan
   glow: hover:shadow-neon-cyan
   shadow: shadow-neon-cyan
-  hex: "#00f0ff"
+  hex: "#5eead4"
 order: 2
 category: introduction
 related: ['github', 'copilot-chat', 'copilot-app', 'cloud-agent']
@@ -140,9 +140,9 @@ flowchart LR
   Sub --> IDE
   Sub --> Cloud
 
-  classDef sub fill:#1a0a2e,stroke:#ff2e88,color:#ff2e88,stroke-width:2px
-  classDef ide fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
-  classDef cloud fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
+  classDef sub fill:#11162c,stroke:#93a8ff,color:#93a8ff,stroke-width:2px
+  classDef ide fill:#0b1420,stroke:#5eead4,color:#5eead4,stroke-width:2px
+  classDef cloud fill:#0a1a14,stroke:#86efac,color:#86efac,stroke-width:2px
   class Sub sub
   class VSC,JB,CL ide
   class CA,GH,GO cloud
@@ -293,9 +293,9 @@ flowchart LR
   Proxy -->|"Suggestions"| Dev
   Proxy <-->|" "| LLM
 
-  classDef llm fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
-  classDef proxy fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
-  classDef dev fill:#1a0a2e,stroke:#ff2e88,color:#ff2e88,stroke-width:2px
+  classDef llm fill:#0a1a14,stroke:#86efac,color:#86efac,stroke-width:2px
+  classDef proxy fill:#0b1420,stroke:#5eead4,color:#5eead4,stroke-width:2px
+  classDef dev fill:#11162c,stroke:#93a8ff,color:#93a8ff,stroke-width:2px
   class LLM llm
   class Proxy proxy
   class Dev dev

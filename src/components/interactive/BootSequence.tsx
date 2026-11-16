@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { play } from '../../lib/sfx';
+import { getCurrentSiteTheme, SITE_THEME_EVENT, type SiteTheme } from '../../lib/theme';
 
 const STORAGE_KEY = 'akq-booted';
 
@@ -12,12 +13,21 @@ interface Props {
 
 export default function BootSequence({ locale = 'ja', copy }: Props) {
   const [phase, setPhase] = useState<'off' | 'power' | 'logo' | 'done'>('off');
+  const [siteTheme, setSiteTheme] = useState<SiteTheme>('phosphor');
+
+  useEffect(() => {
+    setSiteTheme(getCurrentSiteTheme());
+    const onThemeChange = (e: Event) => {
+      const detail = (e as CustomEvent<{ theme?: SiteTheme }>).detail;
+      setSiteTheme(detail?.theme === 'retro' ? 'retro' : getCurrentSiteTheme());
+    };
+    window.addEventListener(SITE_THEME_EVENT, onThemeChange);
+    return () => window.removeEventListener(SITE_THEME_EVENT, onThemeChange);
+  }, []);
 
   useEffect(() => {
     const booted = sessionStorage.getItem(STORAGE_KEY) === '1';
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // Only show the boot animation when the user lands on the home page directly.
-    // Deep links (playbook, hands-on, etc.) skip straight to the content.
     const path = window.location.pathname.replace(/\/+$/, '');
     const base = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '');
     const homePath = locale === 'en' ? `${base}/en` : base;
@@ -42,25 +52,57 @@ export default function BootSequence({ locale = 'ja', copy }: Props) {
 
   if (phase === 'done') return null;
 
+  if (siteTheme === 'retro') {
+    return (
+      <div className="fixed inset-0 z-[100] bg-black flex items-center justify-center" aria-hidden="true">
+        {phase === 'power' && (
+          <div className="font-pixel text-crt-amber text-xs animate-pulse">
+            ▮ POWER ON ...
+          </div>
+        )}
+        {phase === 'logo' && (
+          <div className="text-center animate-fadeIn">
+            <div className="font-pixel text-neon-magenta text-2xl md:text-4xl mb-2 tracking-widest leading-none flex items-center justify-center gap-3 md:gap-5 flex-wrap">
+              <span>AI</span>
+              <span className="font-pixel-jp text-[1.05em] leading-none -translate-y-[0.08em]">{copy?.brandMiddle ?? '駆動開発'}</span>
+              <span>QUEST</span>
+            </div>
+            <div className="font-pixel-jp text-phosphor/70 text-xs md:text-sm">
+              PRESS ANY KEY TO START
+            </div>
+          </div>
+        )}
+        <style>{`
+          @keyframes fadeIn { from { opacity: 0; transform: scale(0.95) } to { opacity: 1; transform: scale(1) } }
+          .animate-fadeIn { animation: fadeIn .5s ease-out both; }
+        `}</style>
+      </div>
+    );
+  }
+
   return (
     <div
-      className="fixed inset-0 z-[100] bg-black flex items-center justify-center"
+      className="fixed inset-0 z-[100] bg-shadow-ink flex items-center justify-center"
+      style={{
+        backgroundImage:
+          'radial-gradient(640px 320px at 50% 45%, rgba(94, 234, 212, 0.12), transparent 72%)',
+      }}
       aria-hidden="true"
     >
       {phase === 'power' && (
-        <div className="font-pixel text-crt-amber text-xs animate-pulse">
-          ▮ POWER ON ...
+        <div className="font-mono text-neon-cyan text-xs tracking-[0.18em] uppercase animate-pulse">
+          ▮ TELEMETRY LINK ONLINE ...
         </div>
       )}
       {phase === 'logo' && (
         <div className="text-center animate-fadeIn">
-          <div className="font-pixel text-neon-magenta text-2xl md:text-4xl mb-2 tracking-widest leading-none flex items-center justify-center gap-3 md:gap-5 flex-wrap">
+          <div className="font-display text-neon-cyan text-2xl md:text-4xl font-bold mb-2.5 tracking-[0.12em] leading-none flex items-center justify-center gap-3 md:gap-5 flex-wrap">
             <span>AI</span>
-            <span className="font-pixel-jp text-[1.05em] leading-none -translate-y-[0.08em]">{copy?.brandMiddle ?? '駆動開発'}</span>
+            <span className="font-body text-phosphor text-[0.95em] font-bold leading-none">{copy?.brandMiddle ?? '駆動開発'}</span>
             <span>QUEST</span>
           </div>
-          <div className="font-pixel-jp text-phosphor/70 text-xs md:text-sm">
-            PRESS ANY KEY TO START
+          <div className="font-mono text-phosphor-muted text-xs tracking-[0.14em] uppercase">
+            SYSTEM READY
           </div>
         </div>
       )}

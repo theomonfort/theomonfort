@@ -1,4 +1,5 @@
 ---
+import '../../../styles/tokens.css';
 import { localizedPath } from '../../../lib/i18n';
 import { getHandsonSteps } from '../../../lib/handson';
 
@@ -15,7 +16,7 @@ Astro.response.headers.set('Refresh', `0;url=${target}`);
     <meta http-equiv="refresh" content={`0;url=${target}`}>
     <link rel="canonical" href={target}>
     <title>Redirecting…</title>
-    <style>body{background:#0a0e27;color:#00f0ff;font-family:monospace;display:grid;place-items:center;height:100vh;margin:0;}a{color:#ff2e88}</style>
+    <style>body{background:var(--c-midnight);color:var(--c-phosphor);font-family:var(--font-mono-hud,monospace);display:grid;place-items:center;height:100vh;margin:0;}a{color:var(--c-neon-cyan);text-decoration:none;border:1px solid var(--c-border-strong);border-radius:var(--radius-card);padding:0.5rem 0.9rem;background:var(--c-bg-elevated);}a:hover{border-color:var(--c-neon-cyan);color:var(--c-link-hover);}</style>
   </head>
   <body>
     <p>→ <a href={target}>Open the hands-on</a></p>

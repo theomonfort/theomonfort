@@ -9,7 +9,7 @@ accent:
   border: border-neon-magenta
   glow: hover:shadow-neon-magenta
   shadow: shadow-neon-magenta
-  hex: "#ff2e88"
+  hex: "#93a8ff"
 order: 14
 category: develop
 related: ['agent-skills', 'mcp', 'custom-agent', 'cloud-agent']
@@ -212,10 +212,10 @@ flowchart LR
   Duck -->|"盲点 / 前提誤り"| Main
   Main --> Final
 
-  classDef user fill:#0a1a14,stroke:#9bbc0f,color:#9bbc0f,stroke-width:2px
-  classDef main fill:#0a0e27,stroke:#00f0ff,color:#00f0ff,stroke-width:2px
-  classDef duck fill:#1a1500,stroke:#ffb000,color:#ffb000,stroke-width:2px
-  classDef out fill:#1a0a2e,stroke:#ff2e88,color:#ff2e88,stroke-width:2px
+  classDef user fill:#0a1a14,stroke:#86efac,color:#86efac,stroke-width:2px
+  classDef main fill:#0b1420,stroke:#5eead4,color:#5eead4,stroke-width:2px
+  classDef duck fill:#1a1500,stroke:#fcd34d,color:#fcd34d,stroke-width:2px
+  classDef out fill:#11162c,stroke:#93a8ff,color:#93a8ff,stroke-width:2px
   class User,Final user
   class Main main
   class Duck duck

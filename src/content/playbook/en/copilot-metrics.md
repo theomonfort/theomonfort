@@ -9,7 +9,7 @@ accent:
   border: border-gb-green
   glow: hover:shadow-neon-green
   shadow: shadow-neon-green
-  hex: "#9bbc0f"
+  hex: "#86efac"
 order: 18
 category: operate
 related: ['github-copilot', 'governance', 'usage-based-billing']

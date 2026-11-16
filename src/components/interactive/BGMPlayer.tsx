@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { GALAXY_AUDIO_MODE_EVENT, getAudioContextConstructor, isGalaxyAudioMode } from '../../lib/audio';
+import { getCurrentSiteTheme, SITE_THEME_EVENT, type SiteTheme } from '../../lib/theme';
 
 const STORAGE_KEY = 'akq-bgm-on';
 
@@ -59,11 +60,21 @@ function startSynthLoop(ctx: AudioContext): { stop: () => void; gain: GainNode }
 export default function BGMPlayer({ feedbackUrl }: { feedbackUrl?: string }) {
   const [playing, setPlaying] = useState(false);
   const [galaxyMode, setGalaxyMode] = useState(false);
+  const [siteTheme, setSiteTheme] = useState<SiteTheme>('phosphor');
   const playingRef = useRef(false);
   const ctxRef = useRef<AudioContext | null>(null);
   const handleRef = useRef<{ stop: () => void } | null>(null);
 
   useEffect(() => {
+    setSiteTheme(getCurrentSiteTheme());
+    const onThemeChange = (e: Event) => {
+      const detail = (e as CustomEvent<{ theme?: SiteTheme }>).detail;
+      setSiteTheme(detail?.theme === 'retro' ? 'retro' : getCurrentSiteTheme());
+    };
+    const onPageLoad = () => setSiteTheme(getCurrentSiteTheme());
+    window.addEventListener(SITE_THEME_EVENT, onThemeChange);
+    document.addEventListener('astro:page-load', onPageLoad);
+
     const syncGalaxyMode = () => {
       const active = isGalaxyAudioMode();
       setGalaxyMode(active);
@@ -77,6 +88,8 @@ export default function BGMPlayer({ feedbackUrl }: { feedbackUrl?: string }) {
     syncGalaxyMode();
     document.addEventListener(GALAXY_AUDIO_MODE_EVENT, syncGalaxyMode);
     return () => {
+      window.removeEventListener(SITE_THEME_EVENT, onThemeChange);
+      document.removeEventListener('astro:page-load', onPageLoad);
       document.removeEventListener(GALAXY_AUDIO_MODE_EVENT, syncGalaxyMode);
       handleRef.current?.stop();
       ctxRef.current?.close();
@@ -104,6 +117,9 @@ export default function BGMPlayer({ feedbackUrl }: { feedbackUrl?: string }) {
     }
   };
 
+  const isRetro = siteTheme === 'retro';
+  const isActive = playing && !galaxyMode;
+
   return (
     <div className="fixed bottom-4 right-4 z-[60] flex items-center gap-2">
       {feedbackUrl && (
@@ -121,16 +137,28 @@ export default function BGMPlayer({ feedbackUrl }: { feedbackUrl?: string }) {
         onClick={toggle}
         disabled={galaxyMode}
         title={galaxyMode ? 'Use the ambience button in the 3D map' : undefined}
-        className="bgm-player font-pixel text-[10px] px-3 py-2 border-2 bg-shadow-ink/80 hover:bg-neon-magenta/20 transition-colors flex items-center gap-2"
-        style={{
-          borderColor: playing && !galaxyMode ? '#ff2e88' : '#444',
-          color: playing && !galaxyMode ? '#ff2e88' : '#888',
-          boxShadow: playing && !galaxyMode ? '0 0 8px #ff2e88' : 'none',
-        }}
-        aria-pressed={playing && !galaxyMode}
+        className={
+          isRetro
+            ? 'bgm-player font-pixel text-[10px] px-3 py-2 border-2 bg-shadow-ink/80 hover:bg-neon-magenta/20 transition-colors flex items-center gap-2'
+            : `bgm-player font-mono text-[0.72rem] tracking-[0.04em] px-3 py-1.5 rounded-[3px] border backdrop-blur-md shadow-hud transition-colors flex items-center gap-2 ${
+                isActive
+                  ? 'border-neon-cyan bg-neon-cyan/[0.12] text-neon-cyan'
+                  : 'border-[var(--c-border)] bg-[var(--c-bg-hud)] text-phosphor-muted hover:text-phosphor hover:border-[var(--c-border-strong)]'
+              }`
+        }
+        style={
+          isRetro
+            ? {
+                borderColor: isActive ? '#ff2e88' : '#444',
+                color: isActive ? '#ff2e88' : '#888',
+                boxShadow: isActive ? '0 0 8px #ff2e88' : 'none',
+              }
+            : undefined
+        }
+        aria-pressed={isActive}
         aria-label="BGM toggle"
       >
-        <span aria-hidden="true">{playing && !galaxyMode ? '♪♪' : '🎵'}</span>
+        <span aria-hidden="true">{isActive ? '♪♪' : '🎵'}</span>
         BGM: {galaxyMode ? '3D' : playing ? 'ON' : 'OFF'}
       </button>
     </div>

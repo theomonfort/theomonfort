@@ -1,0 +1,1078 @@
+---
+import '../../lib/zettelkasten/zettelkasten.css';
+import { siteCopy, type Locale } from '../../lib/i18n';
+import type { PlaybookCategory } from '../../lib/playbook-categories';
+
+interface Props {
+  locale: Locale;
+  slug: string;
+  category: PlaybookCategory;
+}
+
+const { locale, slug, category } = Astro.props;
+const copy = siteCopy[locale].playbook;
+---
+
+<button
+  type="button"
+  class="present-zk-btn slide-zk-trigger zk-slide-trigger"
+  data-zk-trigger
+  data-playbook-slug={slug}
+  data-playbook-category={category}
+  data-locale={locale}
+  data-close-label={copy.zettelkastenClose}
+  data-loading-label={copy.zettelkastenLoading}
+  aria-label={copy.zettelkastenOpenAria}
+  title={copy.zettelkastenOpenAria}
+>
+  <span class="key" aria-hidden="true">[Z]</span>
+  <span class="slide-zk-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="6" cy="6" r="2.5" />
+      <circle cx="18" cy="7" r="2.5" />
+      <circle cx="11" cy="18" r="2.5" />
+      <path d="M8.2 7.2l7.4 0.6M7.3 8.2l2.6 7.5M16.5 9.1l-4.1 6.8" />
+    </svg>
+  </span>
+  <span class="slide-zk-label">{copy.zettelkastenLabel}</span>
+  <span class="present-zk-sep" aria-hidden="true">/</span>
+  <span class="present-zk-topic" data-zk-topic>{slug}</span>
+</button>
+
+<script>
+  import { resolvePlaybookZettelkastenTarget } from '../../lib/zettelkasten/playbook-mapping';
+  import { ZETTELKASTEN_VAULTS } from '../../lib/zettelkasten/vaults';
+  import type { PlaybookCategory } from '../../lib/playbook-categories';
+
+  type ThemeMode = 'phosphor' | 'retro';
+
+  type ZkWidgetInstance = {
+    openVaultAndNote: (
+      vaultId: string,
+      noteTarget: string,
+      options?: { pinGraph?: boolean; focusGraph?: boolean },
+    ) => Promise<void>;
+    hasOpenPopup: () => boolean;
+    dismissPopup: () => boolean;
+    fitView: () => void;
+    destroy: () => void;
+  };
+
+  type ZkGlobalState = {
+    overlayEl: HTMLDivElement | null;
+    stageEl: HTMLDivElement | null;
+    crumbVaultEl: HTMLSpanElement | null;
+    crumbNoteEl: HTMLSpanElement | null;
+    closeLabelEl: HTMLSpanElement | null;
+    loadingEl: HTMLDivElement | null;
+    instance: ZkWidgetInstance | null;
+    mountingPromise: Promise<ZkWidgetInstance> | null;
+    cleanup?: () => void;
+  };
+
+  const win = window as Window &
+    typeof globalThis & {
+      __akqZkModalState?: ZkGlobalState;
+      __akqGetTheme?: () => ThemeMode;
+      __akqSetTheme?: (theme: ThemeMode) => void;
+    };
+
+  if (!win.__akqZkModalState) {
+    win.__akqZkModalState = {
+      overlayEl: null,
+      stageEl: null,
+      crumbVaultEl: null,
+      crumbNoteEl: null,
+      closeLabelEl: null,
+      loadingEl: null,
+      instance: null,
+      mountingPromise: null,
+    };
+  }
+
+  const zkState = win.__akqZkModalState;
+  zkState.cleanup?.();
+
+  function getActiveTheme(): ThemeMode {
+    const helperVal = win.__akqGetTheme?.();
+    if (helperVal === 'retro' || helperVal === 'phosphor') return helperVal;
+    return document.documentElement.dataset.theme === 'retro' ? 'retro' : 'phosphor';
+  }
+
+  function applyThemeSelection(nextTheme: ThemeMode) {
+    if (typeof win.__akqSetTheme === 'function') {
+      win.__akqSetTheme(nextTheme);
+    } else {
+      document.documentElement.dataset.theme = nextTheme;
+      try {
+        localStorage.setItem('akq-theme', nextTheme);
+      } catch {}
+      window.dispatchEvent(new CustomEvent('akq:theme-change', { detail: { theme: nextTheme } }));
+    }
+    syncModalThemeToggle(nextTheme);
+  }
+
+  function syncModalThemeToggle(theme: ThemeMode = getActiveTheme()) {
+    if (!zkState.overlayEl) return;
+    const opts = zkState.overlayEl.querySelectorAll<HTMLButtonElement>('[data-zk-theme-opt]');
+    opts.forEach((btn) => {
+      const active = btn.dataset.zkThemeOpt === theme;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-pressed', String(active));
+    });
+  }
+
+  function getTriggerButton(): HTMLButtonElement | null {
+    return document.querySelector<HTMLButtonElement>('[data-zk-trigger]');
+  }
+
+  function getCurrentSlideIndex(): number {
+    const selectedBar = document.querySelector<HTMLElement>('.slide-progress-bar[aria-selected="true"]');
+    const parsed = Number(selectedBar?.dataset.slideIndex);
+    return Number.isFinite(parsed) && parsed >= 0 ? parsed : 0;
+  }
+
+  function syncTriggerTopicIndicator() {
+    const btn = getTriggerButton();
+    if (!btn) return;
+    const topicEl = btn.querySelector<HTMLElement>('[data-zk-topic]');
+    if (!topicEl) return;
+
+    const slug = btn.dataset.playbookSlug || 'github';
+    const category = (btn.dataset.playbookCategory || 'introduction') as PlaybookCategory;
+    const target = resolvePlaybookZettelkastenTarget(slug, category, getCurrentSlideIndex());
+    topicEl.textContent = target.note;
+  }
+
+  let slideObserver: MutationObserver | null = null;
+  function attachSlideProgressObserver() {
+    slideObserver?.disconnect();
+    syncTriggerTopicIndicator();
+    const progressEl = document.querySelector('.slide-progress');
+    if (!progressEl) return;
+    slideObserver = new MutationObserver(() => {
+      syncTriggerTopicIndicator();
+    });
+    slideObserver.observe(progressEl, {
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['aria-selected', 'class'],
+    });
+  }
+
+  function ensureOverlayDom(closeLabel: string, loadingLabel: string): HTMLDivElement {
+    if (zkState.overlayEl && zkState.overlayEl.querySelector('[data-zk-theme-switch]')) {
+      if (!document.body.contains(zkState.overlayEl)) {
+        document.body.appendChild(zkState.overlayEl);
+      }
+      if (zkState.closeLabelEl) zkState.closeLabelEl.textContent = closeLabel;
+      const closeBtn = zkState.overlayEl.querySelector<HTMLButtonElement>('[data-zk-close]');
+      if (closeBtn) closeBtn.setAttribute('aria-label', `${closeLabel} (Esc)`);
+      if (zkState.loadingEl) zkState.loadingEl.textContent = loadingLabel;
+      syncModalThemeToggle();
+      return zkState.overlayEl;
+    }
+
+    if (zkState.overlayEl) {
+      zkState.instance?.destroy();
+      zkState.instance = null;
+      zkState.overlayEl.remove();
+      zkState.overlayEl = null;
+    }
+
+    const overlay = document.createElement('div');
+    overlay.className = 'zk-modal-overlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-label', 'Zettelkasten Knowledge Graph');
+    overlay.hidden = true;
+
+    overlay.innerHTML = `
+      <div class="zk-modal-topbar zk-modal-bar">
+        <div class="zk-modal-brand">
+          <span class="zk-modal-diamond" aria-hidden="true">◈</span>
+          <span class="zk-modal-kicker">ZETTELKASTEN</span>
+          <span class="zk-modal-sep" aria-hidden="true">//</span>
+          <span class="zk-modal-crumb">
+            <span class="zk-modal-crumb-vault zk-vault-pill"></span>
+            <span class="zk-modal-crumb-arrow" aria-hidden="true">▸</span>
+            <span class="zk-modal-crumb-note"></span>
+          </span>
+        </div>
+        <div class="zk-modal-actions">
+          <div class="zk-modal-theme-switch" role="group" aria-label="Theme" data-zk-theme-switch>
+            <button
+              type="button"
+              class="zk-theme-opt"
+              data-zk-theme-opt="retro"
+              aria-pressed="false"
+              title="Switch to Retro JRPG theme"
+            >RETRO</button>
+            <span class="zk-theme-sep" aria-hidden="true">|</span>
+            <button
+              type="button"
+              class="zk-theme-opt"
+              data-zk-theme-opt="phosphor"
+              aria-pressed="true"
+              title="Switch to Phosphor Cosmos HUD theme"
+            >PHOSPHOR</button>
+          </div>
+          <button type="button" class="zk-modal-close zk-close-btn" data-zk-close aria-label="${closeLabel} (Esc)">
+            <span class="zk-modal-key">[ESC]</span>
+            <span class="zk-modal-close-text">${closeLabel}</span>
+            <span class="zk-modal-close-x" aria-hidden="true">✕</span>
+          </button>
+        </div>
+      </div>
+      <div class="zk-modal-body">
+        <div class="zk-modal-loading">${loadingLabel}</div>
+        <div class="zk-modal-stage"></div>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    zkState.overlayEl = overlay;
+    zkState.stageEl = overlay.querySelector<HTMLDivElement>('.zk-modal-stage');
+    zkState.crumbVaultEl = overlay.querySelector<HTMLSpanElement>('.zk-modal-crumb-vault');
+    zkState.crumbNoteEl = overlay.querySelector<HTMLSpanElement>('.zk-modal-crumb-note');
+    zkState.closeLabelEl = overlay.querySelector<HTMLSpanElement>('.zk-modal-close-text');
+    zkState.loadingEl = overlay.querySelector<HTMLDivElement>('.zk-modal-loading');
+
+    overlay.addEventListener('click', (evt) => {
+      const targetEl = evt.target as HTMLElement | null;
+      const themeBtn = targetEl?.closest<HTMLButtonElement>('[data-zk-theme-opt]');
+      if (themeBtn) {
+        const nextTheme: ThemeMode = themeBtn.dataset.zkThemeOpt === 'retro' ? 'retro' : 'phosphor';
+        applyThemeSelection(nextTheme);
+        import('../../lib/sfx')
+          .then(({ play }) => play('confirm'))
+          .catch(() => {});
+        return;
+      }
+      if (targetEl?.closest('[data-zk-close]')) {
+        closeZettelkastenModal();
+      }
+    });
+
+    syncModalThemeToggle();
+
+    return overlay;
+  }
+
+  function isZettelkastenOpen(): boolean {
+    return Boolean(
+      zkState.overlayEl && document.body.contains(zkState.overlayEl) && !zkState.overlayEl.hidden,
+    );
+  }
+
+  async function openZettelkastenForCurrentSlide() {
+    const btn = getTriggerButton();
+    if (!btn) return;
+
+    const slug = btn.dataset.playbookSlug || 'github';
+    const category = (btn.dataset.playbookCategory || 'introduction') as PlaybookCategory;
+    const closeLabel = btn.dataset.closeLabel || 'Back to slide';
+    const loadingLabel = btn.dataset.loadingLabel || 'Loading Zettelkasten…';
+    const slideIdx = getCurrentSlideIndex();
+    const target = resolvePlaybookZettelkastenTarget(slug, category, slideIdx);
+
+    btn.blur();
+    const overlay = ensureOverlayDom(closeLabel, loadingLabel);
+    overlay.hidden = false;
+    document.body.classList.add('akq-zk-open');
+
+    import('../../lib/sfx')
+      .then(({ play }) => play('confirm'))
+      .catch(() => {});
+
+    if (zkState.instance) {
+      if (zkState.loadingEl) zkState.loadingEl.hidden = true;
+      await zkState.instance.openVaultAndNote(target.vault, target.note, {
+        pinGraph: true,
+        focusGraph: true,
+      });
+      return;
+    }
+
+    if (zkState.mountingPromise) {
+      const inst = await zkState.mountingPromise;
+      await inst.openVaultAndNote(target.vault, target.note, {
+        pinGraph: true,
+        focusGraph: true,
+      });
+      return;
+    }
+
+    if (zkState.loadingEl) zkState.loadingEl.hidden = false;
+
+    zkState.mountingPromise = (async () => {
+      const { mountZettelkasten } = await import('../../lib/zettelkasten/zettelkasten-widget.js');
+      const vaultsWithInitial = ZETTELKASTEN_VAULTS.map((v) =>
+        v.id === target.vault ? { ...v, initialNote: target.note } : v,
+      );
+      const instance = (await mountZettelkasten(zkState.stageEl!, {
+        vaults: vaultsWithInitial,
+        initialVault: target.vault,
+        pinInitialNote: true,
+        colorByGroup: false,
+        onActiveChange: ({
+          vaultLabel,
+          vaultAccent,
+          title,
+        }: {
+          vaultLabel: string;
+          vaultAccent?: string;
+          title: string;
+        }) => {
+          if (zkState.crumbVaultEl) {
+            zkState.crumbVaultEl.textContent = vaultLabel;
+            if (vaultAccent) {
+              zkState.crumbVaultEl.style.setProperty('--crumb-vault-accent', vaultAccent);
+            }
+          }
+          if (zkState.crumbNoteEl) zkState.crumbNoteEl.textContent = title;
+        },
+      })) as ZkWidgetInstance;
+
+      zkState.instance = instance;
+      if (zkState.loadingEl) zkState.loadingEl.hidden = true;
+      return instance;
+    })();
+
+    try {
+      await zkState.mountingPromise;
+    } finally {
+      zkState.mountingPromise = null;
+    }
+  }
+
+  function closeZettelkastenModal() {
+    if (!zkState.overlayEl || zkState.overlayEl.hidden) return;
+    zkState.overlayEl.hidden = true;
+    document.body.classList.remove('akq-zk-open');
+    import('../../lib/sfx')
+      .then(({ play }) => play('hover'))
+      .catch(() => {});
+  }
+
+  function onDocumentClick(e: MouseEvent) {
+    const target = e.target as HTMLElement | null;
+    const trigger = target?.closest<HTMLButtonElement>('[data-zk-trigger]');
+    if (!trigger) return;
+    e.preventDefault();
+    void openZettelkastenForCurrentSlide();
+  }
+
+  function onWindowKeyDown(e: KeyboardEvent) {
+    if (isZettelkastenOpen()) {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        if (zkState.instance?.hasOpenPopup()) {
+          zkState.instance.dismissPopup();
+          return;
+        }
+        closeZettelkastenModal();
+      }
+      return;
+    }
+
+    if (!document.body.classList.contains('present-mode')) return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const target = e.target as HTMLElement | null;
+    const active = document.activeElement as HTMLElement | null;
+    if (
+      (target && (target.matches('input,textarea,select,[contenteditable="true"]') || target.isContentEditable)) ||
+      (active && (active.matches('input,textarea,select,[contenteditable="true"]') || active.isContentEditable))
+    ) {
+      return;
+    }
+
+    if ((e.key === 'z' || e.key === 'Z') && getTriggerButton()) {
+      e.preventDefault();
+      void openZettelkastenForCurrentSlide();
+    }
+  }
+
+  function onThemeChange(e: Event) {
+    const detailTheme = (e as CustomEvent<{ theme?: ThemeMode }>).detail?.theme;
+    syncModalThemeToggle(
+      detailTheme === 'retro' || detailTheme === 'phosphor' ? detailTheme : getActiveTheme(),
+    );
+  }
+
+  function onBeforeNavigate() {
+    if (isZettelkastenOpen()) {
+      zkState.overlayEl!.hidden = true;
+      document.body.classList.remove('akq-zk-open');
+    }
+  }
+
+  function onPageLoad() {
+    requestAnimationFrame(() => attachSlideProgressObserver());
+    syncModalThemeToggle();
+  }
+
+  attachSlideProgressObserver();
+  syncModalThemeToggle();
+  document.addEventListener('click', onDocumentClick);
+  window.addEventListener('keydown', onWindowKeyDown, true);
+  window.addEventListener('akq:theme-change', onThemeChange);
+  document.addEventListener('astro:before-preparation', onBeforeNavigate);
+  document.addEventListener('astro:page-load', onPageLoad);
+
+  zkState.cleanup = () => {
+    slideObserver?.disconnect();
+    slideObserver = null;
+    document.removeEventListener('click', onDocumentClick);
+    window.removeEventListener('keydown', onWindowKeyDown, true);
+    window.removeEventListener('akq:theme-change', onThemeChange);
+    document.removeEventListener('astro:before-preparation', onBeforeNavigate);
+    document.removeEventListener('astro:page-load', onPageLoad);
+  };
+</script>
+
+<style is:global>
+  /* ---------- Bottom-left Presentation HUD Zettelkasten Button ---------- */
+  .present-zk-btn {
+    display: none;
+  }
+
+  body.present-mode .present-zk-btn {
+    position: fixed;
+    bottom: 16px;
+    left: 16px;
+    z-index: 60;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 5px 11px 5px 8px;
+    background: rgba(9, 18, 28, 0.90);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(94, 234, 212, 0.28);
+    border-radius: 3px;
+    color: #ecf7fb;
+    font-family: var(--font-mono-hud, 'IBM Plex Mono', 'IBM Plex Sans JP', monospace);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    transition:
+      left 0.25s ease,
+      transform 0.14s ease,
+      background-color 0.14s ease,
+      border-color 0.14s ease,
+      color 0.14s ease,
+      box-shadow 0.14s ease,
+      opacity 0.15s ease;
+  }
+
+  @media (min-width: 768px) {
+    body.present-mode .present-zk-btn {
+      bottom: 20px;
+      left: calc(var(--present-toc-width, 260px) + 22px);
+    }
+
+    body.present-mode.akq-toc-hidden .present-zk-btn {
+      left: 22px;
+    }
+  }
+
+  html.slide-preparing body.present-mode .present-zk-btn,
+  body.akq-zk-open .present-zk-btn {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  body.present-mode .present-zk-btn:hover,
+  body.present-mode .present-zk-btn:focus-visible {
+    background: rgba(16, 29, 45, 0.95);
+    border-color: #5eead4;
+    color: #ecf7fb;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    transform: translateY(-1px);
+    outline: none;
+  }
+
+  body.present-mode .present-zk-btn .key {
+    display: inline-block;
+    padding: 2px 5px;
+    border: 1px solid rgba(94, 234, 212, 0.30);
+    border-radius: 2px;
+    background: rgba(94, 234, 212, 0.12);
+    color: #5eead4;
+    font-family: var(--font-mono-hud, 'IBM Plex Mono', monospace);
+    font-size: 10.5px;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: 0.03em;
+    transition: background-color 0.14s ease, border-color 0.14s ease;
+  }
+
+  body.present-mode .present-zk-btn:hover .key,
+  body.present-mode .present-zk-btn:focus-visible .key {
+    border-color: #5eead4;
+    background: rgba(94, 234, 212, 0.20);
+  }
+
+  body.present-mode .present-zk-btn .slide-zk-icon {
+    width: 14px;
+    height: 14px;
+    display: inline-grid;
+    place-items: center;
+    color: #5eead4;
+    opacity: 0.9;
+  }
+
+  body.present-mode .present-zk-btn .slide-zk-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  body.present-mode .present-zk-btn .slide-zk-label {
+    color: #ecf7fb;
+  }
+
+  body.present-mode .present-zk-btn .present-zk-sep {
+    color: #728fa3;
+    opacity: 0.7;
+  }
+
+  body.present-mode .present-zk-btn .present-zk-topic {
+    color: #728fa3;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: color 0.14s ease;
+  }
+
+  body.present-mode .present-zk-btn:hover .present-zk-topic,
+  body.present-mode .present-zk-btn:focus-visible .present-zk-topic {
+    color: #5eead4;
+  }
+
+  @media (max-width: 640px) {
+    body.present-mode .present-zk-btn .present-zk-sep,
+    body.present-mode .present-zk-btn .present-zk-topic {
+      display: none;
+    }
+  }
+
+  /* ---------- Fullscreen Zettelkasten Modal Overlay ---------- */
+  .zk-modal-overlay[hidden] {
+    display: none !important;
+  }
+
+  .zk-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 260;
+    display: flex;
+    flex-direction: column;
+    background: var(--c-midnight, #060b12);
+    color: #ecf7fb;
+    animation: zk-modal-in 0.18s ease-out;
+  }
+
+  @keyframes zk-modal-in {
+    from {
+      opacity: 0;
+      transform: scale(0.994);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .zk-modal-topbar {
+    height: 46px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 2px 14px 0;
+    background-color: rgba(11, 20, 32, 0.90);
+    background-image: linear-gradient(
+      90deg,
+      #5eead4 0%,
+      rgba(147, 168, 255, 0.45) 55%,
+      transparent 100%
+    );
+    background-size: 100% 2px;
+    background-position: top left;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(94, 234, 212, 0.22);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.42);
+  }
+
+  .zk-modal-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .zk-modal-diamond {
+    color: #5eead4;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  .zk-modal-kicker {
+    font-family: var(--font-display, 'Orbitron', 'IBM Plex Sans JP', sans-serif);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    color: #ecf7fb;
+    flex-shrink: 0;
+  }
+
+  .zk-modal-sep {
+    font-family: var(--font-mono-hud, 'IBM Plex Mono', monospace);
+    font-size: 12px;
+    color: #728fa3;
+    flex-shrink: 0;
+  }
+
+  .zk-modal-crumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    font-family: var(--font-mono-hud, 'IBM Plex Mono', 'IBM Plex Sans JP', monospace);
+    font-size: 12px;
+  }
+
+  .zk-modal-crumb-vault {
+    color: var(--crumb-vault-accent, #5eead4);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .zk-modal-crumb-arrow {
+    color: #728fa3;
+    font-size: 11px;
+  }
+
+  .zk-modal-crumb-note {
+    color: #ecf7fb;
+    font-family: var(--font-prose, 'IBM Plex Sans JP', sans-serif);
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .zk-modal-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .zk-modal-theme-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 2px;
+    background: rgba(9, 18, 28, 0.90);
+    border: 1px solid rgba(94, 234, 212, 0.26);
+    border-radius: 3px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  }
+
+  .zk-theme-sep {
+    color: rgba(114, 143, 163, 0.45);
+    font-family: var(--font-mono-hud, 'IBM Plex Mono', monospace);
+    font-size: 10px;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .zk-theme-opt {
+    padding: 3px 7px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    background: transparent;
+    color: #728fa3;
+    font-family: var(--font-mono-hud, 'IBM Plex Mono', monospace);
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition:
+      color 0.14s ease,
+      background-color 0.14s ease,
+      border-color 0.14s ease;
+  }
+
+  .zk-theme-opt:hover {
+    color: #ecf7fb;
+  }
+
+  .zk-theme-opt.is-active {
+    background: rgba(94, 234, 212, 0.14);
+    border-color: rgba(94, 234, 212, 0.36);
+    color: #5eead4;
+  }
+
+  .zk-modal-close {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 11px 5px 8px;
+    background: rgba(9, 18, 28, 0.90);
+    border: 1px solid rgba(94, 234, 212, 0.28);
+    border-radius: 3px;
+    color: #ecf7fb;
+    font-family: var(--font-mono-hud, 'IBM Plex Mono', 'IBM Plex Sans JP', monospace);
+    font-size: 11.5px;
+    font-weight: 500;
+    cursor: pointer;
+    flex-shrink: 0;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    transition:
+      background-color 0.14s ease,
+      border-color 0.14s ease,
+      transform 0.12s ease,
+      box-shadow 0.14s ease;
+  }
+
+  .zk-modal-close:hover,
+  .zk-modal-close:focus-visible {
+    background: rgba(16, 29, 45, 0.95);
+    border-color: #5eead4;
+    color: #ecf7fb;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    transform: translateY(-1px);
+    outline: none;
+  }
+
+  .zk-modal-key {
+    display: inline-block;
+    padding: 2px 5px;
+    background: rgba(94, 234, 212, 0.12);
+    border: 1px solid rgba(94, 234, 212, 0.30);
+    border-radius: 2px;
+    color: #5eead4;
+    font-family: var(--font-mono-hud, 'IBM Plex Mono', monospace);
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: 0.03em;
+  }
+
+  .zk-modal-close:hover .zk-modal-key,
+  .zk-modal-close:focus-visible .zk-modal-key {
+    border-color: #5eead4;
+    background: rgba(94, 234, 212, 0.20);
+  }
+
+  .zk-modal-close-x {
+    color: #728fa3;
+    font-size: 11px;
+    transition: color 0.14s ease;
+  }
+
+  .zk-modal-close:hover .zk-modal-close-x,
+  .zk-modal-close:focus-visible .zk-modal-close-x {
+    color: #5eead4;
+  }
+
+  .zk-modal-body {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .zk-modal-stage {
+    position: absolute;
+    inset: 0;
+  }
+
+  .zk-modal-loading {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(ellipse at 50% 35%, rgba(94, 234, 212, 0.08) 0%, #060b12 70%);
+    color: #5eead4;
+    font-family: var(--font-mono-hud, 'IBM Plex Mono', 'IBM Plex Sans JP', monospace);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+  }
+
+  .zk-modal-loading[hidden] {
+    display: none !important;
+  }
+
+  @media (max-width: 640px) {
+    .zk-modal-sep,
+    .zk-modal-crumb {
+      display: none;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .zk-modal-close-text {
+      display: none;
+    }
+  }
+
+  /* ==========================================================================
+     Retro JRPG Theme Overrides (html[data-theme="retro"])
+     0px pixel corners, 2px neon borders, Press Start 2P / DotGothic16 labels,
+     and 4px 4px 0 #05060f pixel shadows.
+     ========================================================================== */
+
+  html[data-theme='retro'] body.present-mode .present-zk-btn,
+  html[data-theme='retro'] body.present-mode .zk-slide-trigger {
+    padding: 0.36rem 0.72rem 0.36rem 0.52rem;
+    background: rgba(10, 14, 39, 0.90);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 2px solid color-mix(in srgb, var(--entry-accent, #00f0ff) 64%, transparent);
+    border-radius: 0;
+    color: #e8f4ff;
+    font-family: 'DotGothic16', 'IBM Plex Sans JP', monospace;
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    box-shadow:
+      4px 4px 0 #05060f,
+      0 0 14px color-mix(in srgb, var(--entry-accent, #00f0ff) 25%, transparent);
+  }
+
+  html[data-theme='retro'] body.present-mode .present-zk-btn:hover,
+  html[data-theme='retro'] body.present-mode .present-zk-btn:focus-visible,
+  html[data-theme='retro'] body.present-mode .zk-slide-trigger:hover,
+  html[data-theme='retro'] body.present-mode .zk-slide-trigger:focus-visible {
+    background: #1a0b2e;
+    border-color: #ff2e88;
+    color: #ff2e88;
+    box-shadow:
+      4px 4px 0 #05060f,
+      0 0 14px rgba(255, 46, 136, 0.45);
+    transform: translate(-1px, -1px);
+  }
+
+  html[data-theme='retro'] body.present-mode .present-zk-btn .key,
+  html[data-theme='retro'] body.present-mode .zk-slide-trigger .key {
+    padding: 2px 5px;
+    border: 1px solid #00f0ff;
+    border-radius: 0;
+    background: #05060f;
+    color: #00f0ff;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8.5px;
+    line-height: 1.2;
+  }
+
+  html[data-theme='retro'] body.present-mode .present-zk-btn:hover .key,
+  html[data-theme='retro'] body.present-mode .present-zk-btn:focus-visible .key,
+  html[data-theme='retro'] body.present-mode .zk-slide-trigger:hover .key,
+  html[data-theme='retro'] body.present-mode .zk-slide-trigger:focus-visible .key {
+    border-color: #ff2e88;
+    background: #05060f;
+    color: #ff2e88;
+  }
+
+  html[data-theme='retro'] body.present-mode .present-zk-btn .slide-zk-icon,
+  html[data-theme='retro'] body.present-mode .zk-slide-trigger .slide-zk-icon {
+    color: var(--entry-accent, #00f0ff);
+  }
+
+  html[data-theme='retro'] body.present-mode .present-zk-btn:hover .slide-zk-icon,
+  html[data-theme='retro'] body.present-mode .present-zk-btn:focus-visible .slide-zk-icon,
+  html[data-theme='retro'] body.present-mode .zk-slide-trigger:hover .slide-zk-icon,
+  html[data-theme='retro'] body.present-mode .zk-slide-trigger:focus-visible .slide-zk-icon {
+    color: #ff2e88;
+  }
+
+  html[data-theme='retro'] body.present-mode .present-zk-btn .slide-zk-label,
+  html[data-theme='retro'] body.present-mode .zk-slide-trigger .slide-zk-label {
+    color: inherit;
+  }
+
+  html[data-theme='retro'] body.present-mode .present-zk-btn .present-zk-sep,
+  html[data-theme='retro'] body.present-mode .zk-slide-trigger .present-zk-sep {
+    color: rgba(232, 244, 255, 0.42);
+  }
+
+  html[data-theme='retro'] body.present-mode .present-zk-btn .present-zk-topic,
+  html[data-theme='retro'] body.present-mode .zk-slide-trigger .present-zk-topic {
+    color: #ffb000;
+  }
+
+  html[data-theme='retro'] body.present-mode .present-zk-btn:hover .present-zk-topic,
+  html[data-theme='retro'] body.present-mode .present-zk-btn:focus-visible .present-zk-topic,
+  html[data-theme='retro'] body.present-mode .zk-slide-trigger:hover .present-zk-topic,
+  html[data-theme='retro'] body.present-mode .zk-slide-trigger:focus-visible .present-zk-topic {
+    color: #ff8ec0;
+  }
+
+  html[data-theme='retro'] .zk-modal-overlay {
+    background: #05060f;
+    color: #e8f4ff;
+  }
+
+  html[data-theme='retro'] .zk-modal-topbar,
+  html[data-theme='retro'] .zk-modal-bar {
+    padding: 0 14px;
+    background: linear-gradient(90deg, #05060f 0%, #0a0e27 55%, #1a0b2e 100%);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom: 2px solid #00f0ff;
+    box-shadow: 0 2px 16px rgba(0, 240, 255, 0.22);
+  }
+
+  html[data-theme='retro'] .zk-modal-diamond {
+    color: #ff2e88;
+    font-size: 14px;
+    text-shadow: 0 0 8px #ff2e88;
+  }
+
+  html[data-theme='retro'] .zk-modal-kicker {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: #00f0ff;
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+  }
+
+  html[data-theme='retro'] .zk-modal-sep {
+    font-family: 'VT323', monospace;
+    font-size: 17px;
+    color: rgba(232, 244, 255, 0.35);
+  }
+
+  html[data-theme='retro'] .zk-modal-crumb {
+    font-family: 'DotGothic16', 'IBM Plex Sans JP', monospace;
+    font-size: 13px;
+  }
+
+  html[data-theme='retro'] .zk-modal-crumb-vault,
+  html[data-theme='retro'] .zk-vault-pill {
+    color: var(--crumb-vault-accent, #ffb000);
+    padding: 1px 7px;
+    border: 1px solid color-mix(in srgb, var(--crumb-vault-accent, #ffb000) 55%, transparent);
+    background: color-mix(in srgb, var(--crumb-vault-accent, #ffb000) 14%, #05060f);
+    border-radius: 0;
+  }
+
+  html[data-theme='retro'] .zk-modal-crumb-arrow {
+    color: #ff2e88;
+  }
+
+  html[data-theme='retro'] .zk-modal-crumb-note {
+    color: #e8f4ff;
+    font-family: 'DotGothic16', 'IBM Plex Sans JP', sans-serif;
+    font-weight: 700;
+  }
+
+  html[data-theme='retro'] .zk-modal-theme-switch {
+    background: #05060f;
+    border: 2px solid #00f0ff;
+    border-radius: 0;
+    box-shadow: 3px 3px 0 #05060f, 0 0 10px rgba(0, 240, 255, 0.25);
+  }
+
+  html[data-theme='retro'] .zk-theme-sep {
+    color: rgba(0, 240, 255, 0.45);
+    font-family: 'VT323', monospace;
+    font-size: 13px;
+  }
+
+  html[data-theme='retro'] .zk-theme-opt {
+    border-radius: 0;
+    color: rgba(232, 244, 255, 0.62);
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    letter-spacing: 0.04em;
+  }
+
+  html[data-theme='retro'] .zk-theme-opt:hover {
+    color: #00f0ff;
+  }
+
+  html[data-theme='retro'] .zk-theme-opt.is-active {
+    background: rgba(255, 46, 136, 0.28);
+    border-color: #ff2e88;
+    color: #ffffff;
+    text-shadow: 0 0 6px rgba(255, 46, 136, 0.6);
+  }
+
+  html[data-theme='retro'] .zk-modal-close,
+  html[data-theme='retro'] .zk-close-btn {
+    padding: 5px 11px;
+    background: rgba(255, 46, 136, 0.16);
+    border: 2px solid #ff2e88;
+    border-radius: 0;
+    color: #e8f4ff;
+    font-family: 'DotGothic16', 'IBM Plex Sans JP', monospace;
+    font-size: 12.5px;
+    box-shadow: 3px 3px 0 #05060f, 0 0 10px rgba(255, 46, 136, 0.32);
+  }
+
+  html[data-theme='retro'] .zk-modal-close:hover,
+  html[data-theme='retro'] .zk-modal-close:focus-visible,
+  html[data-theme='retro'] .zk-close-btn:hover,
+  html[data-theme='retro'] .zk-close-btn:focus-visible {
+    background: rgba(255, 46, 136, 0.34);
+    border-color: #ff2e88;
+    color: #ffffff;
+    box-shadow: 3px 3px 0 #05060f, 0 0 16px rgba(255, 46, 136, 0.55);
+    transform: translate(-1px, -1px);
+  }
+
+  html[data-theme='retro'] .zk-modal-key {
+    padding: 2px 5px;
+    background: #05060f;
+    border: 1px solid #00f0ff;
+    border-radius: 0;
+    color: #00f0ff;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    line-height: 1.25;
+  }
+
+  html[data-theme='retro'] .zk-modal-close:hover .zk-modal-key,
+  html[data-theme='retro'] .zk-modal-close:focus-visible .zk-modal-key,
+  html[data-theme='retro'] .zk-close-btn:hover .zk-modal-key,
+  html[data-theme='retro'] .zk-close-btn:focus-visible .zk-modal-key {
+    border-color: #00f0ff;
+    background: #05060f;
+    color: #00f0ff;
+  }
+
+  html[data-theme='retro'] .zk-modal-close-x {
+    color: #ff2e88;
+    font-weight: 700;
+  }
+
+  html[data-theme='retro'] .zk-modal-close:hover .zk-modal-close-x,
+  html[data-theme='retro'] .zk-modal-close:focus-visible .zk-modal-close-x,
+  html[data-theme='retro'] .zk-close-btn:hover .zk-modal-close-x,
+  html[data-theme='retro'] .zk-close-btn:focus-visible .zk-modal-close-x {
+    color: #ffffff;
+  }
+
+  html[data-theme='retro'] .zk-modal-loading {
+    background: radial-gradient(ellipse at center, #1a0b2e 0%, #0a0e27 55%, #05060f 100%);
+    color: #00f0ff;
+    font-family: 'DotGothic16', 'IBM Plex Sans JP', monospace;
+    font-size: 16px;
+    letter-spacing: 0.06em;
+  }
+</style>

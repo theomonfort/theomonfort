@@ -9,7 +9,7 @@ accent:
   border: border-gb-green
   glow: hover:shadow-neon-green
   shadow: shadow-neon-green
-  hex: "#9bbc0f"
+  hex: "#86efac"
 order: 3.5
 category: plan
 related: ['agentic-workflow', 'agent-skills', 'mcp']
@@ -63,8 +63,8 @@ flowchart LR
   You[You] -->|Prompt| LLM[The LLM]
   LLM -->|Answer| You
 
-  classDef human fill:#102033,stroke:#00f0ff,color:#e8f4ff,stroke-width:2px;
-  classDef llm fill:#302500,stroke:#ffb000,color:#fff4d6,stroke-width:2px;
+  classDef human fill:#0b1826,stroke:#5eead4,color:#ecf7fb,stroke-width:2px;
+  classDef llm fill:#1d1a10,stroke:#fcd34d,color:#fef3c7,stroke-width:2px;
   class You human;
   class LLM llm;
 ```
@@ -94,10 +94,10 @@ flowchart LR
   Agent -->|tool call| Tools[Tools<br/>read / edit / run]
   Tools -->|result| Agent
 
-  classDef human fill:#102033,stroke:#00f0ff,color:#e8f4ff,stroke-width:2px;
-  classDef llm fill:#302500,stroke:#ffb000,color:#fff4d6,stroke-width:2px;
-  classDef agent fill:#132812,stroke:#9bbc0f,color:#f4ffd8,stroke-width:2px;
-  classDef tools fill:#2a0f1a,stroke:#ff2e88,color:#ffd6e7,stroke-width:2px;
+  classDef human fill:#0b1826,stroke:#5eead4,color:#ecf7fb,stroke-width:2px;
+  classDef llm fill:#1d1a10,stroke:#fcd34d,color:#fef3c7,stroke-width:2px;
+  classDef agent fill:#0d1e18,stroke:#86efac,color:#dcfce7,stroke-width:2px;
+  classDef tools fill:#11162c,stroke:#93a8ff,color:#e0e7ff,stroke-width:2px;
   class Project human;
   class LLM llm;
   class Agent agent;
@@ -249,10 +249,10 @@ flowchart LR
   D --> O
   O --> R[Pull Request<br/>human review]
 
-  classDef host fill:#102033,stroke:#00f0ff,color:#e8f4ff,stroke-width:2px;
-  classDef agent fill:#132812,stroke:#9bbc0f,color:#f4ffd8,stroke-width:2px;
-  classDef harness fill:#2a1020,stroke:#ff2e88,color:#ffe8f4,stroke-width:2px;
-  classDef ship fill:#302500,stroke:#ffb000,color:#fff4d6,stroke-width:2px;
+  classDef host fill:#0b1826,stroke:#5eead4,color:#ecf7fb,stroke-width:2px;
+  classDef agent fill:#0d1e18,stroke:#86efac,color:#dcfce7,stroke-width:2px;
+  classDef harness fill:#2a1020,stroke:#93a8ff,color:#ffe8f4,stroke-width:2px;
+  classDef ship fill:#1d1a10,stroke:#fcd34d,color:#fef3c7,stroke-width:2px;
   class O host;
   class P,C,D agent;
   class S,M harness;
@@ -268,75 +268,76 @@ This playbook site is built with the same kind of harness. The Orchestrator (The
 <div class="harness-map">
   <svg viewBox="0 0 940 566" role="img" aria-label="Diagram of the harness that builds this site" xmlns="http://www.w3.org/2000/svg">
     <defs>
+      <style>html[data-theme='retro'] .harness-map svg text{font-family:'DotGothic16',monospace}</style>
       <marker id="hm-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-        <path d="M0,0 L10,5 L0,10 z" fill="#9bbc0f"/>
+        <path d="M0,0 L10,5 L0,10 z" fill="var(--c-gb-green)"/>
       </marker>
     </defs>
-    <path d="M310,290 H340 V175 H374" fill="none" stroke="#9bbc0f" stroke-width="2.5" marker-end="url(#hm-arrow)"/>
-    <path d="M310,290 H374" fill="none" stroke="#9bbc0f" stroke-width="2.5" marker-end="url(#hm-arrow)"/>
-    <path d="M499,140 V98" fill="none" stroke="#9bbc0f" stroke-width="2.5" marker-end="url(#hm-arrow)"/>
-    <path d="M499,325 V367" fill="none" stroke="#9bbc0f" stroke-width="2.5" marker-end="url(#hm-arrow)"/>
-    <path d="M374,303 H356 V520 H374" fill="none" stroke="#9bbc0f" stroke-width="2.5" marker-end="url(#hm-arrow)"/>
-    <path d="M624,175 H652 V80 H688" fill="none" stroke="#9bbc0f" stroke-width="2.5" marker-end="url(#hm-arrow)"/>
-    <path d="M624,290 H652 V195 H688" fill="none" stroke="#9bbc0f" stroke-width="2.5" marker-end="url(#hm-arrow)"/>
-    <path d="M624,290 H688" fill="none" stroke="#9bbc0f" stroke-width="2.5" marker-end="url(#hm-arrow)"/>
-    <path d="M624,290 H678 V390 H688" fill="none" stroke="#9bbc0f" stroke-width="2.5" marker-end="url(#hm-arrow)"/>
-    <path d="M624,405 H668 V505 H688" fill="none" stroke="#9bbc0f" stroke-width="2.5" marker-end="url(#hm-arrow)"/>
-    <rect x="24" y="249" width="290" height="90" rx="2" fill="#05060f"/>
-    <rect x="20" y="245" width="290" height="90" rx="2" fill="#0a0e1f" stroke="#00f0ff" stroke-width="2"/>
-    <text x="165" y="284" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="19" font-weight="700" fill="#00f0ff">Orchestrator：Theo</text>
-    <text x="165" y="306" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="13" fill="#aeb6c2">+ instructions / prompts</text>
-    <rect x="378" y="29" width="250" height="70" rx="2" fill="#05060f"/>
-    <rect x="374" y="25" width="250" height="70" rx="2" fill="#0a0e1f" stroke="#8b949e" stroke-width="2"/>
-    <text x="499" y="54" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="19" font-weight="700" fill="#d0d7de">Explore / Research</text>
-    <text x="499" y="76" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="13" fill="#aeb6c2">CLI Built-in Agents</text>
-    <rect x="378" y="144" width="250" height="70" rx="2" fill="#05060f"/>
-    <rect x="374" y="140" width="250" height="70" rx="2" fill="#0a0e1f" stroke="#00f0ff" stroke-width="2"/>
-    <text x="499" y="169" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="19" font-weight="700" fill="#00f0ff">planner</text>
-    <text x="499" y="191" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="13" fill="#aeb6c2">Custom agent</text>
-    <text x="616" y="201" text-anchor="end" font-family="'DotGothic16', monospace" font-size="11.5" letter-spacing="1" fill="#9bbc0f">LOCAL</text>
-    <text x="382" y="201" text-anchor="start" font-family="'DotGothic16', monospace" font-size="11.5" letter-spacing="0.5" fill="#ffb000">Opus 4.8</text>
-    <rect x="378" y="259" width="250" height="70" rx="2" fill="#05060f"/>
-    <rect x="374" y="255" width="250" height="70" rx="2" fill="#0a0e1f" stroke="#8b949e" stroke-width="2"/>
-    <text x="499" y="284" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="19" font-weight="700" fill="#d0d7de">Coding</text>
-    <text x="499" y="306" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="13" fill="#aeb6c2">CLI Built-in Agents</text>
-    <text x="382" y="316" text-anchor="start" font-family="'DotGothic16', monospace" font-size="11.5" letter-spacing="0.5" fill="#ffb000">Opus 4.8</text>
-    <rect x="378" y="374" width="250" height="70" rx="2" fill="#05060f"/>
-    <rect x="374" y="370" width="250" height="70" rx="2" fill="#0a0e1f" stroke="#00f0ff" stroke-width="2"/>
-    <text x="499" y="399" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="19" font-weight="700" fill="#00f0ff">Tester</text>
-    <text x="499" y="421" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="13" fill="#aeb6c2">Custom agent</text>
-    <text x="616" y="431" text-anchor="end" font-family="'DotGothic16', monospace" font-size="11.5" letter-spacing="1" fill="#9bbc0f">LOCAL</text>
-    <text x="382" y="431" text-anchor="start" font-family="'DotGothic16', monospace" font-size="11.5" letter-spacing="0.5" fill="#ffb000">GPT-5.5</text>
-    <rect x="378" y="489" width="250" height="70" rx="2" fill="#05060f"/>
-    <rect x="374" y="485" width="250" height="70" rx="2" fill="#0a0e1f" stroke="#8b949e" stroke-width="2"/>
-    <text x="499" y="514" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="19" font-weight="700" fill="#d0d7de">Review</text>
-    <text x="499" y="536" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="13" fill="#aeb6c2">CLI Built-in · Rubber Duck</text>
-    <text x="382" y="546" text-anchor="start" font-family="'DotGothic16', monospace" font-size="11.5" letter-spacing="0.5" fill="#ffb000">GPT family</text>
-    <rect x="692" y="51" width="240" height="66" rx="2" fill="#05060f"/>
-    <rect x="688" y="47" width="240" height="66" rx="2" fill="#0a0e1f" stroke="#ff2e88" stroke-width="2"/>
-    <text x="808" y="74" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="19" font-weight="700" fill="#ff2e88">Grill-me</text>
-    <text x="808" y="96" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="13" fill="#aeb6c2">Skill</text>
-    <text x="920" y="104" text-anchor="end" font-family="'DotGothic16', monospace" font-size="11.5" letter-spacing="1" fill="#9bbc0f">LOCAL</text>
-    <rect x="692" y="166" width="240" height="66" rx="2" fill="#05060f"/>
-    <rect x="688" y="162" width="240" height="66" rx="2" fill="#0a0e1f" stroke="#9bbc0f" stroke-width="2"/>
-    <text x="808" y="189" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="19" font-weight="700" fill="#9bbc0f">MCP Context7</text>
-    <text x="808" y="211" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="13" fill="#aeb6c2">MCP server</text>
-    <text x="920" y="219" text-anchor="end" font-family="'DotGothic16', monospace" font-size="11.5" letter-spacing="1" fill="#9bbc0f">LOCAL</text>
-    <rect x="692" y="261" width="240" height="66" rx="2" fill="#05060f"/>
-    <rect x="688" y="257" width="240" height="66" rx="2" fill="#0a0e1f" stroke="#ff2e88" stroke-width="2"/>
-    <text x="808" y="284" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="19" font-weight="700" fill="#ff2e88">Slide Creator</text>
-    <text x="808" y="306" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="13" fill="#aeb6c2">Skill</text>
-    <text x="920" y="314" text-anchor="end" font-family="'DotGothic16', monospace" font-size="11.5" letter-spacing="1" fill="#ffb000">REPO</text>
-    <rect x="692" y="361" width="240" height="66" rx="2" fill="#05060f"/>
-    <rect x="688" y="357" width="240" height="66" rx="2" fill="#0a0e1f" stroke="#ff2e88" stroke-width="2"/>
-    <text x="808" y="384" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="19" font-weight="700" fill="#ff2e88">Prototyper</text>
-    <text x="808" y="406" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="13" fill="#aeb6c2">Skill</text>
-    <text x="920" y="414" text-anchor="end" font-family="'DotGothic16', monospace" font-size="11.5" letter-spacing="1" fill="#ffb000">REPO</text>
-    <rect x="692" y="476" width="240" height="66" rx="2" fill="#05060f"/>
-    <rect x="688" y="472" width="240" height="66" rx="2" fill="#0a0e1f" stroke="#9bbc0f" stroke-width="2"/>
-    <text x="808" y="499" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="19" font-weight="700" fill="#9bbc0f">MCP Playwright</text>
-    <text x="808" y="521" text-anchor="middle" font-family="'DotGothic16', monospace" font-size="13" fill="#aeb6c2">MCP server</text>
-    <text x="920" y="529" text-anchor="end" font-family="'DotGothic16', monospace" font-size="11.5" letter-spacing="1" fill="#9bbc0f">LOCAL</text>
+    <path d="M310,290 H340 V175 H374" fill="none" stroke="var(--c-gb-green)" stroke-width="2.5" marker-end="url(#hm-arrow)"/>
+    <path d="M310,290 H374" fill="none" stroke="var(--c-gb-green)" stroke-width="2.5" marker-end="url(#hm-arrow)"/>
+    <path d="M499,140 V98" fill="none" stroke="var(--c-gb-green)" stroke-width="2.5" marker-end="url(#hm-arrow)"/>
+    <path d="M499,325 V367" fill="none" stroke="var(--c-gb-green)" stroke-width="2.5" marker-end="url(#hm-arrow)"/>
+    <path d="M374,303 H356 V520 H374" fill="none" stroke="var(--c-gb-green)" stroke-width="2.5" marker-end="url(#hm-arrow)"/>
+    <path d="M624,175 H652 V80 H688" fill="none" stroke="var(--c-gb-green)" stroke-width="2.5" marker-end="url(#hm-arrow)"/>
+    <path d="M624,290 H652 V195 H688" fill="none" stroke="var(--c-gb-green)" stroke-width="2.5" marker-end="url(#hm-arrow)"/>
+    <path d="M624,290 H688" fill="none" stroke="var(--c-gb-green)" stroke-width="2.5" marker-end="url(#hm-arrow)"/>
+    <path d="M624,290 H678 V390 H688" fill="none" stroke="var(--c-gb-green)" stroke-width="2.5" marker-end="url(#hm-arrow)"/>
+    <path d="M624,405 H668 V505 H688" fill="none" stroke="var(--c-gb-green)" stroke-width="2.5" marker-end="url(#hm-arrow)"/>
+    <rect x="24" y="249" width="290" height="90" rx="2" fill="var(--c-shadow-ink)"/>
+    <rect x="20" y="245" width="290" height="90" rx="2" fill="var(--c-midnight)" stroke="var(--c-neon-cyan)" stroke-width="2"/>
+    <text x="165" y="284" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="var(--c-neon-cyan)">Orchestrator：Theo</text>
+    <text x="165" y="306" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">+ instructions / prompts</text>
+    <rect x="378" y="29" width="250" height="70" rx="2" fill="var(--c-shadow-ink)"/>
+    <rect x="374" y="25" width="250" height="70" rx="2" fill="var(--c-midnight)" stroke="#8b949e" stroke-width="2"/>
+    <text x="499" y="54" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="#d0d7de">Explore / Research</text>
+    <text x="499" y="76" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">CLI Built-in Agents</text>
+    <rect x="378" y="144" width="250" height="70" rx="2" fill="var(--c-shadow-ink)"/>
+    <rect x="374" y="140" width="250" height="70" rx="2" fill="var(--c-midnight)" stroke="var(--c-neon-cyan)" stroke-width="2"/>
+    <text x="499" y="169" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="var(--c-neon-cyan)">planner</text>
+    <text x="499" y="191" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">Custom agent</text>
+    <text x="616" y="201" text-anchor="end" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="1" fill="var(--c-gb-green)">LOCAL</text>
+    <text x="382" y="201" text-anchor="start" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="0.5" fill="var(--c-crt-amber)">Opus 4.8</text>
+    <rect x="378" y="259" width="250" height="70" rx="2" fill="var(--c-shadow-ink)"/>
+    <rect x="374" y="255" width="250" height="70" rx="2" fill="var(--c-midnight)" stroke="#8b949e" stroke-width="2"/>
+    <text x="499" y="284" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="#d0d7de">Coding</text>
+    <text x="499" y="306" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">CLI Built-in Agents</text>
+    <text x="382" y="316" text-anchor="start" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="0.5" fill="var(--c-crt-amber)">Opus 4.8</text>
+    <rect x="378" y="374" width="250" height="70" rx="2" fill="var(--c-shadow-ink)"/>
+    <rect x="374" y="370" width="250" height="70" rx="2" fill="var(--c-midnight)" stroke="var(--c-neon-cyan)" stroke-width="2"/>
+    <text x="499" y="399" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="var(--c-neon-cyan)">Tester</text>
+    <text x="499" y="421" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">Custom agent</text>
+    <text x="616" y="431" text-anchor="end" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="1" fill="var(--c-gb-green)">LOCAL</text>
+    <text x="382" y="431" text-anchor="start" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="0.5" fill="var(--c-crt-amber)">GPT-5.5</text>
+    <rect x="378" y="489" width="250" height="70" rx="2" fill="var(--c-shadow-ink)"/>
+    <rect x="374" y="485" width="250" height="70" rx="2" fill="var(--c-midnight)" stroke="#8b949e" stroke-width="2"/>
+    <text x="499" y="514" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="#d0d7de">Review</text>
+    <text x="499" y="536" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">CLI Built-in · Rubber Duck</text>
+    <text x="382" y="546" text-anchor="start" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="0.5" fill="var(--c-crt-amber)">GPT family</text>
+    <rect x="692" y="51" width="240" height="66" rx="2" fill="var(--c-shadow-ink)"/>
+    <rect x="688" y="47" width="240" height="66" rx="2" fill="var(--c-midnight)" stroke="var(--c-neon-magenta)" stroke-width="2"/>
+    <text x="808" y="74" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="var(--c-neon-magenta)">Grill-me</text>
+    <text x="808" y="96" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">Skill</text>
+    <text x="920" y="104" text-anchor="end" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="1" fill="var(--c-gb-green)">LOCAL</text>
+    <rect x="692" y="166" width="240" height="66" rx="2" fill="var(--c-shadow-ink)"/>
+    <rect x="688" y="162" width="240" height="66" rx="2" fill="var(--c-midnight)" stroke="var(--c-gb-green)" stroke-width="2"/>
+    <text x="808" y="189" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="var(--c-gb-green)">MCP Context7</text>
+    <text x="808" y="211" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">MCP server</text>
+    <text x="920" y="219" text-anchor="end" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="1" fill="var(--c-gb-green)">LOCAL</text>
+    <rect x="692" y="261" width="240" height="66" rx="2" fill="var(--c-shadow-ink)"/>
+    <rect x="688" y="257" width="240" height="66" rx="2" fill="var(--c-midnight)" stroke="var(--c-neon-magenta)" stroke-width="2"/>
+    <text x="808" y="284" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="var(--c-neon-magenta)">Slide Creator</text>
+    <text x="808" y="306" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">Skill</text>
+    <text x="920" y="314" text-anchor="end" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="1" fill="var(--c-crt-amber)">REPO</text>
+    <rect x="692" y="361" width="240" height="66" rx="2" fill="var(--c-shadow-ink)"/>
+    <rect x="688" y="357" width="240" height="66" rx="2" fill="var(--c-midnight)" stroke="var(--c-neon-magenta)" stroke-width="2"/>
+    <text x="808" y="384" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="var(--c-neon-magenta)">Prototyper</text>
+    <text x="808" y="406" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">Skill</text>
+    <text x="920" y="414" text-anchor="end" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="1" fill="var(--c-crt-amber)">REPO</text>
+    <rect x="692" y="476" width="240" height="66" rx="2" fill="var(--c-shadow-ink)"/>
+    <rect x="688" y="472" width="240" height="66" rx="2" fill="var(--c-midnight)" stroke="var(--c-gb-green)" stroke-width="2"/>
+    <text x="808" y="499" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="var(--c-gb-green)">MCP Playwright</text>
+    <text x="808" y="521" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">MCP server</text>
+    <text x="920" y="529" text-anchor="end" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="1" fill="var(--c-gb-green)">LOCAL</text>
   </svg>
 </div>
 

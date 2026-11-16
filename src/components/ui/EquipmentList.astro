@@ -16,30 +16,37 @@ interface Props {
 }
 const { items, color = 'cyan', readMoreLabel = '▶ 詳細を見る ↗' } = Astro.props;
 const c = accentClasses[color];
+const TONE_CSS: Record<AccentColor, string> = {
+  cyan: 'var(--c-neon-cyan)',
+  magenta: 'var(--c-neon-magenta)',
+  amber: 'var(--c-crt-amber)',
+  green: 'var(--c-gb-green)',
+};
+const tone = TONE_CSS[color];
 ---
 
 <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
   {items.map((it) => (
-    <li class={`bg-shadow-ink/80 border-2 ${c.border} ${c.glow} p-4 transition-all duration-150 hover:-translate-y-0.5`}>
-      <div class="flex items-start gap-3">
-        {it.icon && <span class="text-2xl shrink-0">{it.icon}</span>}
+    <li class="equip-card p-5 transition-all duration-150 hover:-translate-y-0.5" style={`--tone:${tone}`}>
+      <div class="flex items-start gap-3.5">
+        {it.icon && <span class="text-2xl shrink-0 leading-none mt-0.5">{it.icon}</span>}
         <div class="flex-1 min-w-0">
-          <div class="flex items-baseline gap-2 flex-wrap mb-1">
-            <h3 class={`font-pixel text-xs ${c.text}`}>{it.name}</h3>
+          <div class="flex items-center gap-2 flex-wrap mb-1.5">
+            <h3 class="equip-title font-body text-base font-semibold text-phosphor">{it.name}</h3>
             {it.badge && (
-              <span class="font-pixel text-[8px] px-1.5 py-0.5 border border-current text-phosphor/60">
+              <span class={`equip-badge font-mono text-[10px] font-semibold px-1.5 py-0.5 rounded-[var(--radius-ui)] border border-current/30 bg-shadow-ink/80 ${c.text}`}>
                 {it.badge}
               </span>
             )}
           </div>
-          <p class="font-body text-sm text-phosphor/85 leading-relaxed">
+          <p class="font-body text-sm text-phosphor-body leading-relaxed">
             {it.description}
           </p>
           {it.install && (
-            <pre class="font-mono text-[11px] text-gb-green bg-shadow-ink border border-phosphor/20 p-2 mt-3 overflow-x-auto"><code>{it.install}</code></pre>
+            <pre class="equip-code font-mono text-[11px] text-gb-green bg-shadow-ink border border-neon-cyan/20 rounded-[var(--radius-ui)] px-3 py-2 mt-3 overflow-x-auto"><code>{it.install}</code></pre>
           )}
           {it.url && (
-            <a href={it.url} target="_blank" rel="noopener noreferrer" class="inline-block font-mono text-[11px] mt-2 retro-link">
+            <a href={it.url} target="_blank" rel="noopener noreferrer" class="equip-link inline-block font-mono text-xs mt-2.5">
               {readMoreLabel}
             </a>
           )}
@@ -48,3 +55,55 @@ const c = accentClasses[color];
     </li>
   ))}
 </ul>
+
+<style>
+  .equip-card {
+    background-color: var(--c-bg-elevated);
+    background-image: linear-gradient(
+      90deg,
+      var(--tone, var(--c-neon-cyan)) 0%,
+      color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 30%, transparent) 55%,
+      transparent 100%
+    );
+    background-size: 100% 2px;
+    background-position: top left;
+    background-repeat: no-repeat;
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-card);
+    box-shadow: 0 8px 24px rgb(var(--rgb-shadow-ink) / 0.34);
+  }
+  .equip-card:hover {
+    background-color: var(--c-bg-elevated-hover);
+    border-color: color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 45%, var(--c-border-strong));
+  }
+  .equip-link {
+    color: var(--c-link);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: color 0.15s ease;
+  }
+  .equip-link:hover {
+    color: var(--c-link-hover);
+  }
+
+  :global(html[data-theme='retro']) .equip-card {
+    background-image: none;
+    background-color: rgb(var(--rgb-shadow-ink) / 0.82);
+    border: 2px solid var(--tone, var(--c-neon-cyan));
+    border-radius: 0;
+    box-shadow: 4px 4px 0 var(--c-shadow-ink), 0 0 12px color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 28%, transparent);
+  }
+  :global(html[data-theme='retro']) .equip-title {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    color: var(--tone, var(--c-neon-cyan));
+  }
+  :global(html[data-theme='retro']) .equip-badge {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    border-radius: 0;
+  }
+  :global(html[data-theme='retro']) .equip-code {
+    border-radius: 0;
+  }
+</style>

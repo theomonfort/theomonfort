@@ -2,10 +2,11 @@
 import Layout from '../../components/layout/Layout.astro';
 import MenuArrow from '../../components/retro/MenuArrow.astro';
 import PlaybookExplorer from '../../components/interactive/PlaybookExplorer.astro';
-import { accentClasses } from '../../lib/theme';
+import { accentClasses, accentColorValues } from '../../lib/theme';
 import { categories, localizedCategory } from '../../lib/playbook-categories';
 import { localizedPath, siteCopy } from '../../lib/i18n';
 import { getPlaybookEntries, playbookEntryTitle } from '../../lib/playbook';
+import { isNewPlaybookEntry } from '../../lib/playbook-meta';
 
 const locale = 'ja';
 const t = siteCopy[locale];
@@ -22,30 +23,31 @@ const CATEGORIES_WITH_PLANETS = new Set<string>(['plan', 'operate', 'review', 'd
 
 <Layout locale={locale} currentPath="/playbook" title={t.playbook.title}>
   <section class="max-w-5xl mx-auto px-4 py-12 relative playbook-cosmos">
-    <header class="mb-10 relative z-10">
+    <header class="mb-10 relative z-10 playbook-hero">
       <div class="playbook-title-row">
-        <h1 class="font-pixel text-2xl md:text-4xl text-neon-magenta">{t.playbook.heading}</h1>
+        <h1 class="playbook-hero-title">{t.playbook.heading}</h1>
         <PlaybookExplorer locale={locale} entries={entries} />
       </div>
-      <p class="font-body text-lg text-neon-cyan">{t.playbook.subtitle}</p>
-      <p class="font-body text-sm leading-relaxed text-phosphor/80 mt-4 max-w-2xl">
+      <p class="playbook-hero-sub">{t.playbook.subtitle}</p>
+      <p class="playbook-hero-intro">
         {t.playbook.intro}{' '}
-        なお、これは個人的な学習リソースで情報が古くなっている可能性があるため、正確な情報は必ず <a href="https://docs.github.com/ja/copilot" target="_blank" rel="noopener noreferrer" class="text-neon-cyan hover:text-neon-magenta underline">GitHub 公式ドキュメント ↗</a> をご確認ください。
+        なお、これは個人的な学習リソースで情報が古くなっている可能性があるため、正確な情報は必ず <a href="https://docs.github.com/ja/copilot" target="_blank" rel="noopener noreferrer" class="playbook-hero-link">GitHub 公式ドキュメント ↗</a> をご確認ください。
       </p>
 
-      <nav data-category-nav class="mt-8 flex flex-wrap md:flex-nowrap items-center gap-2 md:gap-3">
+      <nav data-category-nav class="mt-8 flex flex-wrap md:flex-nowrap items-center gap-2 md:gap-2.5">
         {grouped.filter((g) => g.items.length > 0 && g.id !== 'introduction' && g.id !== 'administration').map((g, i, arr) => {
-          const c = accentClasses[g.color];
+          const tone = accentColorValues[g.color];
           return (
             <>
               <a
                 href={`#cat-${g.id}`}
-                class={`font-body font-bold text-xs md:text-sm px-3 py-2 border-2 whitespace-nowrap ${c.border} ${c.text} ${c.glow} transition`}
+                style={`--tone:${tone}`}
+                class="playbook-phase-tab whitespace-nowrap transition"
               >
                 {g.icon} {g.labelEn}
               </a>
               {i < arr.length - 1 && (
-                <span class="font-pixel text-phosphor/60 text-2xl md:text-3xl">→</span>
+                <span class="playbook-phase-sep" aria-hidden="true">→</span>
               )}
             </>
           );
@@ -56,32 +58,33 @@ const CATEGORIES_WITH_PLANETS = new Set<string>(['plan', 'operate', 'review', 'd
     {grouped.map((g) => {
       if (g.items.length === 0) return null;
       const c = accentClasses[g.color];
+      const tone = accentColorValues[g.color];
       return (
-        <section id={`cat-${g.id}`} class="mb-12 scroll-mt-24 relative category-section">
-          <header class={`mb-5 pb-3 border-b-2 ${c.border} relative z-10`}>
-            <div class="flex items-baseline gap-3 flex-wrap">
-              <span class="text-2xl">{g.icon}</span>
-              <h2 class={`font-pixel text-lg md:text-xl ${c.text}`}>{g.labelEn}</h2>
-              {g.labelJa !== g.labelEn && <span class="font-body text-base text-phosphor/70">{g.labelJa}</span>}
-              <span class={`font-pixel text-[10px] ${c.text} opacity-60 ml-auto`}>
+        <section id={`cat-${g.id}`} style={`--tone:${tone}`} class="mb-14 scroll-mt-24 relative category-section">
+          <header class="category-header relative z-10">
+            <div class="flex items-center gap-3 flex-wrap">
+              <span class="text-xl leading-none">{g.icon}</span>
+              <h2 class="category-title">{g.labelEn}</h2>
+              {g.labelJa !== g.labelEn && <span class="category-label-sub">{g.labelJa}</span>}
+              <span class="category-count">
                 {g.items.length} {t.playbook.itemCount}
               </span>
             </div>
             {(g.avatar || g.localizedDescription) && (
-              <div class="mt-3 flex items-start gap-3">
+              <div class="mt-3.5 flex items-start gap-3.5">
                 {g.avatar && (
                   <img
                     src={g.avatar}
                     alt={g.actorLabel}
-                    class={`h-12 w-12 rounded-full object-cover border-2 ${c.border} shrink-0`}
+                    class="category-avatar shrink-0"
                   />
                 )}
                 <div class="flex-1 min-w-0">
                   {g.actorLabel && (
-                    <p class={`font-body font-bold text-sm ${c.text} mb-1`}>👤 {g.actorLabel}</p>
+                    <p class="category-actor">👤 {g.actorLabel}</p>
                   )}
                   {g.localizedDescription && (
-                    <p class="font-body text-sm text-phosphor/80 leading-relaxed" set:html={g.localizedDescription}>
+                    <p class="category-desc" set:html={g.localizedDescription}>
                     </p>
                   )}
                 </div>
@@ -95,27 +98,30 @@ const CATEGORIES_WITH_PLANETS = new Set<string>(['plan', 'operate', 'review', 'd
               const ec = c;
               const cardTitle = e.data.titleEn || playbookEntryTitle(item);
               const cardSubtitle = e.data.title !== cardTitle ? e.data.title : undefined;
+              const isNew = isNewPlaybookEntry(item.slug);
               return (
                 <li class="h-full" data-catalogue-entry={item.slug}>
                   <a
                     href={localizedPath(locale, `/playbook/${item.slug}`)}
                     data-playbook-tile
-                    class={`flex h-full bg-shadow-ink/80 border-2 ${ec.border} ${ec.glow} p-5 transition-all duration-200 hover:-translate-y-1 group`}
+                    style={`--tone:${tone}`}
+                    class="playbook-card flex h-full group"
                   >
-                    <div class="flex items-start gap-3 w-full">
+                    <div class="flex items-start gap-3.5 w-full">
                       {e.data.icon && /\.(svg|png|jpg|jpeg|webp|gif)$/i.test(e.data.icon)
-                        ? <img src={e.data.icon} alt="" class="h-8 w-8 object-contain shrink-0" />
-                        : <span class="text-3xl">{e.data.icon}</span>}
+                        ? <img src={e.data.icon} alt="" class="h-8 w-8 object-contain shrink-0 mt-0.5" />
+                        : <span class="text-2xl leading-none shrink-0 mt-0.5">{e.data.icon}</span>}
                       <div class="flex-1 min-w-0">
-                        <div class="flex items-baseline gap-2 mb-1">
-                          <span class={`font-pixel text-[10px] ${ec.text}`}>NO.{String(e.data.order).padStart(2, '0')}</span>
+                        <div class="flex items-center gap-2 mb-2">
+                          <span class="playbook-card-no">NO.{String(e.data.order).padStart(2, '0')}</span>
+                          {isNew && <span class="playbook-card-new">{t.playbook.newBadge}</span>}
                         </div>
-                        <h3 class={`font-body font-bold text-lg md:text-xl ${ec.text} mb-2 leading-snug`}>{cardTitle}</h3>
-                        {cardSubtitle && <p class="font-body text-sm text-phosphor/70 mb-2">{cardSubtitle}</p>}
-                        <p class="font-body text-sm text-phosphor/85 leading-relaxed line-clamp-3">
+                        <h3 class="playbook-card-title">{cardTitle}</h3>
+                        {cardSubtitle && <p class="playbook-card-subtitle">{cardSubtitle}</p>}
+                        <p class="playbook-card-summary line-clamp-3">
                           {e.data.summary}
                         </p>
-                        <div class={`mt-3 font-body text-sm ${ec.text} opacity-0 group-hover:opacity-100 transition-opacity`}>
+                        <div class="playbook-card-more">
                           <MenuArrow color={ec.text} /> {t.playbook.readMore}
                         </div>
                       </div>
@@ -228,7 +234,252 @@ const CATEGORIES_WITH_PLANETS = new Set<string>(['plan', 'operate', 'review', 'd
 </script>
 
 <style>
-  .playbook-cosmos { overflow: visible; }
+  .playbook-cosmos {
+    overflow: visible;
+    padding-top: 2.75rem;
+    padding-bottom: 4rem;
+  }
+
+  .playbook-hero-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 3.2vw, 2.55rem);
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    color: var(--c-fg-strong);
+    margin: 0;
+  }
+
+  .playbook-hero-sub {
+    font-family: var(--font-mono-hud), var(--font-prose);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-neon-cyan);
+    margin: 0.25rem 0 0;
+  }
+
+  .playbook-hero-intro {
+    font-family: var(--font-prose);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--c-fg-body);
+    margin-top: 0.9rem;
+    max-width: 44rem;
+  }
+
+  .playbook-hero-link {
+    color: var(--c-link);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.15s ease;
+  }
+  .playbook-hero-link:hover {
+    color: var(--c-link-hover);
+  }
+
+  .playbook-phase-tab {
+    font-family: var(--font-mono-hud), var(--font-prose);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    padding: 0.48rem 0.9rem;
+    border: 1px solid color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 32%, transparent);
+    border-radius: var(--radius-pill);
+    background: rgb(var(--rgb-deep-purple) / 0.85);
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 35%, transparent);
+    color: var(--c-fg-strong);
+    text-decoration: none;
+  }
+  .playbook-phase-tab:hover {
+    transform: translateY(-1px);
+    border-color: color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 70%, transparent);
+    background: color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 16%, var(--c-bg-elevated));
+    color: var(--tone, var(--c-neon-cyan));
+  }
+
+  .playbook-phase-sep {
+    font-family: var(--font-mono-hud);
+    font-size: 0.95rem;
+    color: var(--c-fg-muted);
+    opacity: 0.55;
+    line-height: 1;
+  }
+
+  .category-header {
+    padding-bottom: 0.95rem;
+    margin-bottom: 1.35rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 24%, var(--c-border));
+    background-image: linear-gradient(
+      90deg,
+      var(--tone, var(--c-neon-cyan)) 0%,
+      color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 35%, transparent) 42%,
+      transparent 100%
+    );
+    background-size: 100% 2px;
+    background-position: bottom left;
+    background-repeat: no-repeat;
+  }
+
+  .category-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--tone, var(--c-neon-cyan));
+    margin: 0;
+  }
+
+  .category-label-sub {
+    font-family: var(--font-prose);
+    font-size: 0.92rem;
+    color: var(--c-fg-muted);
+  }
+
+  .category-count {
+    margin-left: auto;
+    font-family: var(--font-mono-hud), var(--font-prose);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--tone, var(--c-neon-cyan));
+    background: color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 25%, transparent);
+    padding: 0.18rem 0.55rem;
+    border-radius: var(--radius-pill);
+  }
+
+  .category-avatar {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 9999px;
+    object-fit: cover;
+    border: 1.5px solid color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 45%, var(--c-border));
+  }
+
+  .category-actor {
+    font-family: var(--font-prose);
+    font-weight: 600;
+    font-size: 0.82rem;
+    color: var(--tone, var(--c-neon-cyan));
+    margin: 0 0 0.25rem;
+  }
+
+  .category-desc {
+    font-family: var(--font-prose);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--c-fg-body);
+    margin: 0;
+  }
+  .category-desc :global(strong) {
+    color: var(--c-fg-strong);
+    font-weight: 600;
+    background: color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 12%, transparent);
+    padding: 0.05em 0.35em;
+    border-radius: 3px;
+  }
+
+  .playbook-card {
+    background-color: var(--c-bg-elevated);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 22%, transparent);
+    border-radius: var(--radius-card);
+    padding: 1.35rem 1.45rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.32);
+    background-image: linear-gradient(
+      90deg,
+      var(--tone, var(--c-neon-cyan)) 0%,
+      color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 30%, transparent) 55%,
+      transparent 100%
+    );
+    background-size: 100% 2px;
+    background-position: top left;
+    background-repeat: no-repeat;
+    text-decoration: none;
+    transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .playbook-card:hover {
+    background-color: var(--c-bg-elevated-hover);
+    border-color: color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 52%, var(--c-border));
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.42);
+  }
+
+  .playbook-card-no {
+    display: inline-block;
+    font-family: var(--font-mono-hud);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    color: var(--tone, var(--c-neon-cyan));
+    background: color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 11%, transparent);
+    border: 1px solid color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 26%, transparent);
+    padding: 0.16rem 0.45rem;
+    border-radius: 2px;
+  }
+
+  .playbook-card-new {
+    display: inline-block;
+    font-family: var(--font-mono-hud);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: var(--c-crt-amber);
+    background: rgb(var(--rgb-crt-amber) / 0.14);
+    border: 1px solid rgb(var(--rgb-crt-amber) / 0.32);
+    padding: 0.16rem 0.42rem;
+    border-radius: 2px;
+  }
+  .playbook-card-new::before { content: '['; opacity: 0.72; margin-right: 1px; }
+  .playbook-card-new::after  { content: ']'; opacity: 0.72; margin-left: 1px; }
+
+  .playbook-card-title {
+    font-family: var(--font-prose);
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.35;
+    color: var(--c-fg-strong);
+    margin: 0 0 0.35rem;
+    transition: color 0.15s ease;
+  }
+  .playbook-card:hover .playbook-card-title {
+    color: var(--tone, var(--c-neon-cyan));
+  }
+
+  .playbook-card-subtitle {
+    font-family: var(--font-prose);
+    font-size: 0.8rem;
+    color: var(--c-fg-muted);
+    margin: 0 0 0.45rem;
+  }
+
+  .playbook-card-summary {
+    font-family: var(--font-prose);
+    font-size: 0.9rem;
+    line-height: 1.72;
+    color: var(--c-fg-body);
+    margin: 0;
+  }
+
+  .playbook-card-more {
+    margin-top: 0.75rem;
+    font-family: var(--font-mono-hud), var(--font-prose);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--tone, var(--c-neon-cyan));
+    opacity: 0;
+    transition: opacity 0.18s ease;
+  }
+  .playbook-card:hover .playbook-card-more {
+    opacity: 1;
+  }
 
   .category-planet {
     position: absolute;
@@ -241,7 +492,8 @@ const CATEGORIES_WITH_PLANETS = new Set<string>(['plan', 'operate', 'review', 'd
     pointer-events: none;
     z-index: 0;
     will-change: transform;
-    opacity: 0.95;
+    opacity: 0.68;
+    filter: hue-rotate(-8deg) saturate(0.85);
   }
   .category-planet img {
     width: auto;
@@ -363,13 +615,220 @@ const CATEGORIES_WITH_PLANETS = new Set<string>(['plan', 'operate', 'review', 'd
   }
 
   /* Per-category glow (color matches the section accent) */
-  .category-planet[data-planet='plan']         img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgba(155, 188, 15, 0.32)); }
-  .category-planet[data-planet='introduction'] img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgba(0, 240, 255, 0.32)); }
-  .category-planet[data-planet='develop']      img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgba(255, 46, 136, 0.32)); }
-  .category-planet[data-planet='review']       img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgba(255, 176, 0, 0.32)); }
-  .category-planet[data-planet='secure']       img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgba(0, 240, 255, 0.32)); }
-  .category-planet[data-planet='operate']      img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgba(155, 188, 15, 0.32)); }
-  .category-planet[data-planet='administration'] img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgba(255, 46, 136, 0.32)); }
+  .category-planet[data-planet='plan']         img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-gb-green) / 0.28)); }
+  .category-planet[data-planet='introduction'] img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-neon-cyan) / 0.28)); }
+  .category-planet[data-planet='develop']      img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-neon-magenta) / 0.28)); }
+  .category-planet[data-planet='review']       img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-crt-amber) / 0.28)); }
+  .category-planet[data-planet='secure']       img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-neon-cyan) / 0.28)); }
+  .category-planet[data-planet='operate']      img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-gb-green) / 0.28)); }
+  .category-planet[data-planet='administration'] img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-neon-magenta) / 0.28)); }
+
+  /* ═══════════ Retro JRPG theme overrides ═══════════ */
+  :global(html[data-theme='retro']) .playbook-cosmos {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  :global(html[data-theme='retro']) .playbook-hero-title {
+    font-family: 'Press Start 2P', 'DotGothic16', monospace;
+    font-weight: 400;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    line-height: 1.35;
+    letter-spacing: 0.04em;
+    color: var(--c-neon-magenta);
+  }
+
+  :global(html[data-theme='retro']) .playbook-hero-sub {
+    font-family: var(--font-prose);
+    font-size: 1.125rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    color: var(--c-neon-cyan);
+    margin-top: 0.35rem;
+  }
+
+  :global(html[data-theme='retro']) .playbook-hero-intro {
+    font-size: 0.875rem;
+    line-height: 1.625;
+    color: rgb(var(--rgb-phosphor) / 0.8);
+    margin-top: 1rem;
+    max-width: 42rem;
+  }
+
+  :global(html[data-theme='retro']) .playbook-phase-tab {
+    font-family: var(--font-prose);
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 0.5rem 0.75rem;
+    border: 2px solid var(--tone, var(--c-neon-cyan));
+    border-radius: 0;
+    background: rgb(var(--rgb-shadow-ink) / 0.8);
+    color: var(--tone, var(--c-neon-cyan));
+    box-shadow:
+      4px 4px 0 var(--c-deep-purple),
+      0 0 12px color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 26%, transparent);
+  }
+  :global(html[data-theme='retro']) .playbook-phase-tab:hover {
+    transform: translate(-1px, -1px);
+    border-color: var(--tone, var(--c-neon-cyan));
+    background: color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 14%, var(--c-shadow-ink));
+    color: var(--tone, var(--c-neon-cyan));
+    box-shadow:
+      4px 4px 0 var(--tone, var(--c-neon-cyan)),
+      0 0 18px color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 42%, transparent);
+  }
+
+  :global(html[data-theme='retro']) .playbook-phase-sep {
+    font-family: 'Press Start 2P', 'DotGothic16', monospace;
+    font-size: 1.5rem;
+    color: rgb(var(--rgb-phosphor) / 0.6);
+    opacity: 1;
+  }
+
+  :global(html[data-theme='retro']) .category-section {
+    margin-bottom: 3rem;
+  }
+
+  :global(html[data-theme='retro']) .category-header {
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 2px solid var(--tone, var(--c-neon-cyan));
+    background-image: none;
+  }
+
+  :global(html[data-theme='retro']) .category-title {
+    font-family: 'Press Start 2P', 'DotGothic16', monospace;
+    font-weight: 400;
+    font-size: 1.2rem;
+    letter-spacing: 0.04em;
+    color: var(--tone, var(--c-neon-cyan));
+  }
+
+  :global(html[data-theme='retro']) .category-label-sub {
+    font-size: 1rem;
+    color: rgb(var(--rgb-phosphor) / 0.7);
+  }
+
+  :global(html[data-theme='retro']) .category-count {
+    font-family: 'Press Start 2P', 'DotGothic16', monospace;
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--tone, var(--c-neon-cyan));
+    opacity: 0.65;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  :global(html[data-theme='retro']) .category-avatar {
+    width: 3rem;
+    height: 3rem;
+    border: 2px solid var(--tone, var(--c-neon-cyan));
+  }
+
+  :global(html[data-theme='retro']) .category-actor {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--tone, var(--c-neon-cyan));
+  }
+
+  :global(html[data-theme='retro']) .category-desc {
+    font-size: 0.875rem;
+    line-height: 1.625;
+    color: rgb(var(--rgb-phosphor) / 0.8);
+  }
+  :global(html[data-theme='retro']) .category-desc :global(strong) {
+    border-radius: 0;
+  }
+
+  :global(html[data-theme='retro']) .playbook-card {
+    background-color: rgb(var(--rgb-shadow-ink) / 0.8);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 2px solid var(--tone, var(--c-neon-cyan));
+    border-radius: 0;
+    padding: 1.25rem;
+    background-image: none;
+    box-shadow:
+      4px 4px 0 var(--c-deep-purple),
+      0 0 14px color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 22%, transparent);
+  }
+  :global(html[data-theme='retro']) .playbook-card:hover {
+    background-color: rgb(var(--rgb-shadow-ink) / 0.92);
+    border-color: var(--tone, var(--c-neon-cyan));
+    transform: translateY(-4px);
+    box-shadow:
+      4px 4px 0 var(--tone, var(--c-neon-cyan)),
+      0 0 20px color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 38%, transparent);
+  }
+
+  :global(html[data-theme='retro']) .playbook-card-no {
+    font-family: 'Press Start 2P', 'DotGothic16', monospace;
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--tone, var(--c-neon-cyan));
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  :global(html[data-theme='retro']) .playbook-card-new {
+    font-family: 'Press Start 2P', 'DotGothic16', monospace;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--c-shadow-ink);
+    background: var(--c-crt-amber);
+    border: 1px solid var(--c-crt-amber);
+    border-radius: 0;
+    padding: 0.16rem 0.38rem;
+    box-shadow: 2px 2px 0 var(--c-deep-purple);
+  }
+  :global(html[data-theme='retro']) .playbook-card-new::before,
+  :global(html[data-theme='retro']) .playbook-card-new::after {
+    content: none;
+  }
+
+  :global(html[data-theme='retro']) .playbook-card-title {
+    font-family: var(--font-prose);
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.375;
+    color: var(--tone, var(--c-neon-cyan));
+  }
+
+  :global(html[data-theme='retro']) .playbook-card-subtitle {
+    font-size: 0.875rem;
+    color: rgb(var(--rgb-phosphor) / 0.7);
+  }
+
+  :global(html[data-theme='retro']) .playbook-card-summary {
+    font-size: 0.875rem;
+    line-height: 1.625;
+    color: rgb(var(--rgb-phosphor) / 0.85);
+  }
+
+  :global(html[data-theme='retro']) .playbook-card-more {
+    font-family: var(--font-prose);
+    font-size: 0.875rem;
+    color: var(--tone, var(--c-neon-cyan));
+  }
+
+  :global(html[data-theme='retro']) .category-planet {
+    opacity: 0.95;
+    filter: none;
+  }
+  :global(html[data-theme='retro']) .category-planet[data-planet='plan']         img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-gb-green) / 0.32)); }
+  :global(html[data-theme='retro']) .category-planet[data-planet='introduction'] img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-neon-cyan) / 0.32)); }
+  :global(html[data-theme='retro']) .category-planet[data-planet='develop']      img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-neon-magenta) / 0.32)); }
+  :global(html[data-theme='retro']) .category-planet[data-planet='review']       img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-crt-amber) / 0.32)); }
+  :global(html[data-theme='retro']) .category-planet[data-planet='secure']       img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-neon-cyan) / 0.32)); }
+  :global(html[data-theme='retro']) .category-planet[data-planet='operate']      img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-gb-green) / 0.32)); }
+  :global(html[data-theme='retro']) .category-planet[data-planet='administration'] img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-neon-magenta) / 0.32)); }
 
   @media (max-width: 767px) {
     .category-planet { display: none; }
