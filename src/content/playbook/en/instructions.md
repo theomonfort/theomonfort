@@ -109,62 +109,62 @@ At session start, the harness loads the **always-on instructions** (`.github/cop
 <svg viewBox="0 0 1080 490" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
   <defs>
     <marker id="arrow-orange" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#fcd34d"/>
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--c-crt-amber)"/>
     </marker>
     <marker id="arrow-blue" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/>
     </marker>
     <marker id="arrow-pink" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#93a8ff"/>
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--c-neon-magenta)"/>
     </marker>
   </defs>
-  <path d="M 260 50 L 720 50" fill="none" stroke="#fcd34d" stroke-width="2" marker-end="url(#arrow-orange)"/>
-  <path d="M 140 85 L 140 415 L 350 415 L 350 420" fill="none" stroke="#fcd34d" stroke-width="2" marker-end="url(#arrow-orange)"/>
-  <path d="M 475 240 L 475 420" fill="none" stroke="#93a8ff" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-pink)"/>
+  <path d="M 260 50 L 720 50" fill="none" stroke="var(--c-crt-amber)" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <path d="M 140 85 L 140 415 L 350 415 L 350 420" fill="none" stroke="var(--c-crt-amber)" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <path d="M 475 240 L 475 420" fill="none" stroke="var(--c-neon-magenta)" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-pink)"/>
   <path d="M 610 420 L 610 338" fill="none" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)"/>
-  <path d="M 660 335 L 660 400 L 775 400 L 775 420" fill="none" stroke="#fcd34d" stroke-width="2" marker-end="url(#arrow-orange)"/>
-  <path d="M 705 290 L 712 290 L 712 195 L 720 195" fill="none" stroke="#fcd34d" stroke-width="2" marker-end="url(#arrow-orange)"/>
-  <rect x="20" y="15" width="240" height="70" rx="12" fill="#0b1420" stroke="#fcd34d" stroke-width="2"/>
-  <text x="35" y="36" fill="#fcd34d" font-size="11" font-weight="bold" letter-spacing="1">HARNESS</text>
-  <text x="35" y="58" fill="#ecf7fb" font-size="12" font-weight="bold">PUT ALWAYS-ON</text>
-  <text x="35" y="74" fill="#ecf7fb" font-size="12" font-weight="bold">INSTRUCTIONS IN CONTEXT</text>
-  <rect x="720" y="15" width="340" height="215" rx="6" fill="#0b1420" stroke="#1e2a4a" stroke-width="1"/>
+  <path d="M 660 335 L 660 400 L 775 400 L 775 420" fill="none" stroke="var(--c-crt-amber)" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <path d="M 705 290 L 712 290 L 712 195 L 720 195" fill="none" stroke="var(--c-crt-amber)" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <rect x="20" y="15" width="240" height="70" rx="12" fill="var(--c-deep-purple)" stroke="var(--c-crt-amber)" stroke-width="2"/>
+  <text x="35" y="36" fill="var(--c-crt-amber)" font-size="11" font-weight="bold" letter-spacing="1">HARNESS</text>
+  <text x="35" y="58" fill="var(--c-phosphor)" font-size="12" font-weight="bold">PUT ALWAYS-ON</text>
+  <text x="35" y="74" fill="var(--c-phosphor)" font-size="12" font-weight="bold">INSTRUCTIONS IN CONTEXT</text>
+  <rect x="720" y="15" width="340" height="215" rx="6" fill="var(--c-deep-purple)" stroke="#1e2a4a" stroke-width="1"/>
   <text x="735" y="40" font-size="10" fill="#cfe9ff">
     <tspan x="735" dy="0" fill="#888">.github/copilot-instructions.md</tspan>
     <tspan x="735" dy="14" fill="#555">---</tspan>
-    <tspan x="735" dy="14" fill="#5eead4" font-weight="bold"># Coding rules</tspan>
+    <tspan x="735" dy="14" fill="var(--c-neon-cyan)" font-weight="bold"># Coding rules</tspan>
     <tspan x="735" dy="14">- Use TypeScript</tspan>
     <tspan x="735" dy="14">- Use pnpm</tspan>
     <tspan x="735" dy="14">- Write tests</tspan>
     <tspan x="735" dy="22" fill="#888">.github/instructions/db.instructions.md</tspan>
     <tspan x="735" dy="14" fill="#555">---</tspan>
-    <tspan x="735" dy="14"><tspan fill="#fcd34d">applyTo:</tspan> src/db/**</tspan>
+    <tspan x="735" dy="14"><tspan fill="var(--c-crt-amber)">applyTo:</tspan> src/db/**</tspan>
     <tspan x="735" dy="14" fill="#555">---</tspan>
-    <tspan x="735" dy="22" fill="#5eead4" font-weight="bold"># DB guidelines</tspan>
+    <tspan x="735" dy="22" fill="var(--c-neon-cyan)" font-weight="bold"># DB guidelines</tspan>
     <tspan x="735" dy="14">- Use prepared statements</tspan>
   </text>
-  <rect x="415" y="160" width="120" height="80" rx="12" fill="#0b1420" stroke="#93a8ff" stroke-width="2"/>
-  <text x="475" y="185" fill="#93a8ff" font-size="12" font-weight="bold" letter-spacing="1" text-anchor="middle">USER</text>
-  <text x="475" y="212" fill="#ecf7fb" font-size="14" font-weight="bold" text-anchor="middle">"TOUCH</text>
-  <text x="475" y="230" fill="#ecf7fb" font-size="14" font-weight="bold" text-anchor="middle">THE DB"</text>
-  <rect x="485" y="265" width="220" height="70" rx="12" fill="#0b1420" stroke="#fcd34d" stroke-width="2"/>
-  <text x="500" y="286" fill="#fcd34d" font-size="11" font-weight="bold" letter-spacing="1">HARNESS</text>
-  <text x="500" y="308" fill="#ecf7fb" font-size="12" font-weight="bold">LOADS MATCHING PATH</text>
-  <text x="500" y="324" fill="#ecf7fb" font-size="12" font-weight="bold">INSTRUCTION INTO CONTEXT</text>
+  <rect x="415" y="160" width="120" height="80" rx="12" fill="var(--c-deep-purple)" stroke="var(--c-neon-magenta)" stroke-width="2"/>
+  <text x="475" y="185" fill="var(--c-neon-magenta)" font-size="12" font-weight="bold" letter-spacing="1" text-anchor="middle">USER</text>
+  <text x="475" y="212" fill="var(--c-phosphor)" font-size="14" font-weight="bold" text-anchor="middle">"TOUCH</text>
+  <text x="475" y="230" fill="var(--c-phosphor)" font-size="14" font-weight="bold" text-anchor="middle">THE DB"</text>
+  <rect x="485" y="265" width="220" height="70" rx="12" fill="var(--c-deep-purple)" stroke="var(--c-crt-amber)" stroke-width="2"/>
+  <text x="500" y="286" fill="var(--c-crt-amber)" font-size="11" font-weight="bold" letter-spacing="1">HARNESS</text>
+  <text x="500" y="308" fill="var(--c-phosphor)" font-size="12" font-weight="bold">LOADS MATCHING PATH</text>
+  <text x="500" y="324" fill="var(--c-phosphor)" font-size="12" font-weight="bold">INSTRUCTION INTO CONTEXT</text>
   <text x="605" y="385" fill="#3b82f6" font-size="10" font-weight="bold" text-anchor="end">edit src/db/users.ts</text>
-  <text x="80" y="441" fill="#ecf7fb" font-size="11" font-weight="bold" letter-spacing="1"><tspan x="80" dy="0">MODEL</tspan><tspan x="80" dy="13">CONTEXT</tspan></text>
-  <rect x="155" y="420" width="110" height="55" rx="10" fill="#86efac"/>
-  <text x="210" y="444" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
-  <text x="210" y="460" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
-  <rect x="295" y="420" width="110" height="55" rx="10" fill="#5eead4"/>
-  <text x="350" y="453" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
-  <rect x="435" y="420" width="80" height="55" rx="10" fill="#93a8ff"/>
-  <text x="475" y="453" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
-  <rect x="545" y="420" width="130" height="55" rx="10" fill="#5eead4"/>
-  <text x="610" y="444" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">FILE EDIT</text>
-  <text x="610" y="460" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">REQUEST</text>
-  <rect x="705" y="420" width="140" height="55" rx="10" fill="#fcd34d"/>
-  <text x="775" y="444" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">PATH</text>
-  <text x="775" y="460" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTION</text>
+  <text x="80" y="441" fill="var(--c-phosphor)" font-size="11" font-weight="bold" letter-spacing="1"><tspan x="80" dy="0">MODEL</tspan><tspan x="80" dy="13">CONTEXT</tspan></text>
+  <rect x="155" y="420" width="110" height="55" rx="10" fill="var(--c-gb-green)"/>
+  <text x="210" y="444" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
+  <text x="210" y="460" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
+  <rect x="295" y="420" width="110" height="55" rx="10" fill="var(--c-neon-cyan)"/>
+  <text x="350" y="453" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
+  <rect x="435" y="420" width="80" height="55" rx="10" fill="var(--c-neon-magenta)"/>
+  <text x="475" y="453" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
+  <rect x="545" y="420" width="130" height="55" rx="10" fill="var(--c-neon-cyan)"/>
+  <text x="610" y="444" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">FILE EDIT</text>
+  <text x="610" y="460" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">REQUEST</text>
+  <rect x="705" y="420" width="140" height="55" rx="10" fill="var(--c-crt-amber)"/>
+  <text x="775" y="444" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">PATH</text>
+  <text x="775" y="460" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTION</text>
 </svg>
 </figure>

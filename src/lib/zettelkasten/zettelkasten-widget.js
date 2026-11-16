@@ -1,4 +1,4 @@
-import { GraphView, getGroupColor } from './graph-view.js';
+import { GraphView, getGroupColor, isRetroTheme } from './graph-view.js';
 import { escapeHtml, renderNoteHtml, slugify } from './parser.js';
 import { NoteStore } from './store.js';
 
@@ -48,6 +48,7 @@ export async function mountZettelkasten(container, options = {}) {
     label: v.label || v.title || `Vault ${idx + 1}`,
     title: v.title || v.label || 'Zettelkasten',
     accent: v.accent || '#5eead4',
+    retroAccent: v.retroAccent || '#00f0ff',
     seedNotes: v.seedNotes || null,
     loadSeedNotes: typeof v.loadSeedNotes === 'function' ? v.loadSeedNotes : null,
     apiBaseUrl: v.apiBaseUrl !== undefined ? v.apiBaseUrl : null,
@@ -55,6 +56,10 @@ export async function mountZettelkasten(container, options = {}) {
     initialNote: v.initialNote || 'github',
     persistLocalStorage: v.persistLocalStorage !== false,
   }));
+
+  function resolveVaultAccent(vault) {
+    return isRetroTheme() ? vault.retroAccent || vault.accent : vault.accent;
+  }
 
   let activeVaultIdx = Math.max(
     0,
@@ -140,7 +145,7 @@ export async function mountZettelkasten(container, options = {}) {
                  ${vaultConfigs
                    .map(
                      (v, idx) =>
-                       `<button type="button" role="tab" class="zk-vault-tab ${idx === activeVaultIdx ? 'is-active' : ''}" aria-selected="${idx === activeVaultIdx}" data-vault-id="${escapeHtml(v.id)}" style="--vault-accent:${escapeHtml(v.accent)}">${escapeHtml(v.label)}</button>`,
+                       `<button type="button" role="tab" class="zk-vault-tab ${idx === activeVaultIdx ? 'is-active' : ''}" aria-selected="${idx === activeVaultIdx}" data-vault-id="${escapeHtml(v.id)}" style="--vault-accent:${escapeHtml(resolveVaultAccent(v))}">${escapeHtml(v.label)}</button>`,
                    )
                    .join('')}
                </div>`
@@ -329,7 +334,7 @@ export async function mountZettelkasten(container, options = {}) {
     onActiveChange({
       vaultId: activeVault.id,
       vaultLabel: activeVault.label,
-      vaultAccent: activeVault.accent,
+      vaultAccent: resolveVaultAccent(activeVault),
       slug: state.activeSlug,
       title: note ? note.title : state.activeSlug || '',
     });
@@ -459,10 +464,12 @@ export async function mountZettelkasten(container, options = {}) {
 
     el.readPane.innerHTML = renderNoteHtml(note, store.graph.resolveTarget);
 
-    if (state.mode === 'edit' && document.activeElement !== el.textarea) {
-      el.textarea.value = note.raw;
-    } else if (state.mode !== 'edit') {
-      el.textarea.value = note.raw;
+    if (!state.dirty) {
+      if (state.mode === 'edit' && document.activeElement !== el.textarea) {
+        el.textarea.value = note.raw;
+      } else if (state.mode !== 'edit') {
+        el.textarea.value = note.raw;
+      }
     }
 
     const backlinks = store.graph.backlinks.get(note.slug) || [];
@@ -1006,6 +1013,27 @@ export async function mountZettelkasten(container, options = {}) {
   };
   window.addEventListener('resize', onWindowResize);
 
+  const onThemeChange = () => {
+    if (el.vaultSwitcher) {
+      for (const btn of el.vaultSwitcher.querySelectorAll('.zk-vault-tab')) {
+        const vCfg = vaultConfigs.find((v) => v.id === btn.dataset.vaultId);
+        if (vCfg) {
+          btn.style.setProperty('--vault-accent', resolveVaultAccent(vCfg));
+        }
+      }
+    }
+    renderLegend();
+    if (state.activeSlug && store.getNote(state.activeSlug)) {
+      renderActiveNote();
+    }
+    if (!el.searchResults.hidden && state.searchQuery) {
+      runSearch(state.searchQuery);
+    }
+    notifyActiveChange();
+    graphView.requestRender();
+  };
+  window.addEventListener('akq:theme-change', onThemeChange);
+
   bindStoreSubscription(store);
 
   updateHudStats();
@@ -1064,6 +1092,7 @@ export async function mountZettelkasten(container, options = {}) {
       if (unsubscribeStore) unsubscribeStore();
       window.removeEventListener('keydown', onKeyDown);
       window.removeEventListener('resize', onWindowResize);
+      window.removeEventListener('akq:theme-change', onThemeChange);
       graphView.destroy();
       root.innerHTML = '';
     },

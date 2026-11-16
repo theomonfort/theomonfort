@@ -12,23 +12,23 @@ const t = siteCopy[locale];
 const targetLocale = otherLocale(locale);
 ---
 
-<footer class="border-t border-[rgba(94,234,212,0.16)] bg-[rgba(4,8,14,0.65)] mt-24 py-10 px-4 text-center font-mono text-xs text-phosphor-muted">
+<footer class="site-footer mt-24 py-10 px-4 text-center font-mono text-xs text-phosphor-muted">
   <div class="max-w-3xl mx-auto space-y-3.5">
-    <div class="flex items-center justify-center gap-3 font-display text-[11px] tracking-[0.14em] uppercase text-neon-cyan">
+    <div class="site-footer__end flex items-center justify-center gap-3 font-display text-[11px] tracking-[0.14em] uppercase text-neon-cyan">
       <img src="/theomonfort/favicon.svg" alt="" class="w-5 h-5 pixelated opacity-85" aria-hidden="true" />
       <span>{t.footer.end}</span>
       <img src="/theomonfort/favicon.svg" alt="" class="w-5 h-5 pixelated opacity-85 -scale-x-100" aria-hidden="true" />
     </div>
 
-    <div class="pt-1 font-mono text-xs text-phosphor-body">
+    <div class="site-footer__lang pt-1 font-mono text-xs text-phosphor-body">
       <span class="text-phosphor-muted">{t.footer.languageLabel}</span>
       <span aria-hidden="true" class="mx-1.5 text-phosphor-muted/60">/</span>
-      <a href={localizedPath(targetLocale, currentPath)} class="text-neon-cyan hover:text-[#a5f3fc] transition-colors font-medium">
+      <a href={localizedPath(targetLocale, currentPath)} class="text-neon-cyan hover:text-[var(--c-link-hover)] transition-colors font-medium">
         ▶ {t.footer.switchTo}
       </a>
     </div>
 
-    <ul class="flex flex-col items-center justify-center gap-2 pt-1 font-body text-sm text-phosphor-body">
+    <ul class="site-footer__links flex flex-col items-center justify-center gap-2 pt-1 font-body text-sm text-phosphor-body">
       <li>
         <a href="https://github.com/theomonfort" target="_blank" rel="noopener noreferrer"
            class="retro-link inline-flex items-center gap-1.5">
@@ -52,7 +52,33 @@ const targetLocale = otherLocale(locale);
     <p class="font-mono text-[11px] text-phosphor-muted/75">© {year} · AI KUDŌ KAIHATSU QUEST · {t.footer.konami}</p>
     <p class="font-mono text-[11px] text-phosphor-muted/60">
       {t.footer.attribution}
-      <a href="https://www.flaticon.com/" target="_blank" rel="noopener noreferrer" class="text-neon-cyan/80 hover:text-[#a5f3fc] transition-colors underline decoration-dotted underline-offset-2">{t.footer.attributionSource}</a>
+      <a href="https://www.flaticon.com/" target="_blank" rel="noopener noreferrer" class="text-neon-cyan/80 hover:text-[var(--c-link-hover)] transition-colors underline decoration-dotted underline-offset-2">{t.footer.attributionSource}</a>
     </p>
   </div>
 </footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--c-border);
+    background: rgb(var(--rgb-shadow-ink) / 0.65);
+  }
+  :global(html[data-theme='retro']) .site-footer {
+    border-top: 2px solid rgba(255, 46, 136, 0.3);
+    background: transparent;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+  }
+  :global(html[data-theme='retro']) .site-footer__end {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--c-crt-amber);
+  }
+  :global(html[data-theme='retro']) .site-footer__lang {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+  }
+  :global(html[data-theme='retro']) .site-footer__links {
+    font-family: 'DotGothic16', monospace;
+  }
+</style>

@@ -36,11 +36,11 @@ const style = styleParts.length ? `${styleParts.join('; ')};` : undefined;
 </aside>
 
 <style>
-  .handson-aside {
+  :global(html:not([data-theme='retro'])) .handson-aside {
     background-image: linear-gradient(
       90deg,
-      var(--aside-accent, #5eead4) 0%,
-      color-mix(in srgb, var(--aside-accent, #5eead4) 30%, transparent) 55%,
+      var(--aside-accent, var(--c-neon-cyan)) 0%,
+      color-mix(in srgb, var(--aside-accent, var(--c-neon-cyan)) 30%, transparent) 55%,
       transparent 100%
     );
     background-size: 100% 2px;
@@ -48,6 +48,10 @@ const style = styleParts.length ? `${styleParts.join('; ')};` : undefined;
     background-repeat: no-repeat;
   }
   .handson-aside.is-alert {
-    --aside-accent: var(--c-coral-alert, #fb7185);
+    --aside-accent: var(--c-coral-alert);
+  }
+  :global(html[data-theme='retro']) .aside-marker {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
   }
 </style>

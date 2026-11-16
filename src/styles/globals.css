@@ -180,7 +180,7 @@ a.retro-link:hover {
 
 /* ---------- HANDS-ON WORKSHOP (Phosphor Cosmos HUD) ---------- */
 .handson-shell {
-  --entry-accent: #5eead4;
+  --entry-accent: var(--c-neon-cyan);
   position: relative;
   max-width: 1200px;
   min-height: calc(100vh - 64px);
@@ -200,7 +200,7 @@ a.retro-link:hover {
   height: 36rem;
   background:
     radial-gradient(circle at 72% 4%, color-mix(in srgb, var(--entry-accent), transparent 84%), transparent 24rem),
-    radial-gradient(circle at 12% 18%, rgba(147, 168, 255, 0.09), transparent 24rem);
+    radial-gradient(circle at 12% 18%, rgb(var(--rgb-neon-magenta) / 0.09), transparent 24rem);
   opacity: 0.9;
 }
 .handson-shell::after {
@@ -240,9 +240,9 @@ a.retro-link:hover {
 .handson-toc {
   position: relative;
   overflow: hidden;
-  border-radius: 3px;
+  border-radius: var(--radius-card);
   border: 1px solid var(--c-border-strong);
-  background-color: rgba(4, 8, 14, 0.92);
+  background-color: var(--c-bg-toc);
   background-image: linear-gradient(
     90deg,
     var(--entry-accent) 0%,
@@ -273,7 +273,7 @@ a.retro-link:hover {
   counter-reset: hstep;
 }
 .handson-toc-phase {
-  --toc-accent: #5eead4;
+  --toc-accent: var(--c-neon-cyan);
   display: flex;
   align-items: center;
   gap: 0.45rem;
@@ -304,13 +304,13 @@ a.retro-link:hover {
   white-space: nowrap;
 }
 .handson-toc-item {
-  --toc-accent: #5eead4;
+  --toc-accent: var(--c-neon-cyan);
   display: grid;
   grid-template-columns: auto auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 0.45rem;
   padding: 0.38rem 0.52rem;
-  border-radius: 3px;
+  border-radius: var(--radius-ui);
   border: 1px solid transparent;
   border-left: 2.5px solid transparent;
   background: transparent;
@@ -371,9 +371,9 @@ a.retro-link:hover {
   align-items: center;
   gap: 0.5rem;
   padding: 0.42rem 0.85rem;
-  border-radius: 3px;
-  border: 1px solid color-mix(in srgb, var(--entry-accent, #5eead4) 40%, transparent);
-  color: var(--entry-accent, #5eead4);
+  border-radius: var(--radius-ui);
+  border: 1px solid color-mix(in srgb, var(--entry-accent, var(--c-neon-cyan)) 40%, transparent);
+  color: var(--entry-accent, var(--c-neon-cyan));
   background: var(--c-bg-hud);
   font-family: var(--font-mono-hud);
   font-size: 0.76rem;
@@ -382,7 +382,7 @@ a.retro-link:hover {
 }
 .handson-toc-toggle:hover {
   color: var(--c-shadow-ink);
-  background: var(--entry-accent, #5eead4);
+  background: var(--entry-accent, var(--c-neon-cyan));
 }
 @media (min-width: 900px) {
   .handson-toc-toggle { display: none; }
@@ -403,7 +403,7 @@ a.retro-link:hover {
 .handson-step-header {
   position: relative;
   overflow: visible;
-  border-radius: 3px;
+  border-radius: var(--radius-card);
   border: 1px solid color-mix(in srgb, var(--entry-accent) 26%, var(--c-border));
   background-color: var(--c-bg-elevated);
   background-image: linear-gradient(
@@ -427,9 +427,9 @@ a.retro-link:hover {
   top: -0.6rem;
   padding: 0.08rem 0.5rem;
   color: var(--c-crt-amber);
-  background: #04080e;
-  border: 1px solid rgba(252, 211, 77, 0.32);
-  border-radius: 3px;
+  background: var(--c-shadow-ink);
+  border: 1px solid rgb(var(--rgb-crt-amber) / 0.32);
+  border-radius: var(--radius-ui);
   font-family: var(--font-mono-hud);
   font-size: 0.65rem;
   font-weight: 600;
@@ -471,24 +471,24 @@ a.retro-link:hover {
   align-items: center;
   gap: 0.35rem;
   padding: 0.28rem 0.58rem;
-  border-radius: 3px;
+  border-radius: var(--radius-ui);
   color: var(--c-fg-body);
   border: 1px solid var(--c-border);
-  background: rgba(4, 8, 14, 0.65);
+  background: rgb(var(--rgb-shadow-ink) / 0.65);
   font-family: var(--font-mono-hud);
   font-size: 0.7rem;
   font-weight: 600;
   line-height: 1.3;
 }
 .handson-step-chip.is-area {
-  color: #04080e;
+  color: var(--c-shadow-ink);
   background: var(--entry-accent);
   border-color: var(--entry-accent);
 }
 .handson-step-chip.is-remaining {
   color: var(--c-crt-amber);
-  border-color: rgba(252, 211, 77, 0.35);
-  background: rgba(252, 211, 77, 0.10);
+  border-color: rgb(var(--rgb-crt-amber) / 0.35);
+  background: rgb(var(--rgb-crt-amber) / 0.10);
 }
 .handson-step-header h1 {
   max-width: 48rem;
@@ -520,11 +520,11 @@ a.retro-link:hover {
   width: var(--handson-progress, 0%);
   height: 100%;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--entry-accent), var(--entry-accent-secondary, #93a8ff));
+  background: linear-gradient(90deg, var(--entry-accent), var(--entry-accent-secondary, var(--c-neon-magenta)));
 }
 .handson-shell[data-handson-category='develop'],
 .handson-shell[data-handson-category='final'] {
-  --entry-accent-secondary: #fcd34d;
+  --entry-accent-secondary: var(--c-crt-amber);
 }
 .handson-step-planet {
   position: relative;
@@ -563,7 +563,7 @@ a.retro-link:hover {
   font-family: var(--font-prose);
   line-height: 1.82;
   padding: clamp(1.35rem, 3vw, 2.15rem);
-  border-radius: 3px;
+  border-radius: var(--radius-card);
   border: 1px solid var(--c-border);
   background-color: var(--c-bg-elevated);
   background-image: linear-gradient(
@@ -585,9 +585,9 @@ a.retro-link:hover {
   left: 1rem;
   padding: 0.08rem 0.5rem;
   color: var(--entry-accent);
-  background: #04080e;
+  background: var(--c-shadow-ink);
   border: 1px solid color-mix(in srgb, var(--entry-accent) 35%, transparent);
-  border-radius: 3px;
+  border-radius: var(--radius-ui);
   font-family: var(--font-mono-hud);
   font-size: 0.65rem;
   font-weight: 600;
@@ -689,9 +689,9 @@ a.retro-link:hover {
 }
 .handson-article pre {
   position: relative;
-  background: #04080e;
+  background: var(--c-shadow-ink);
   border: 1px solid var(--c-border-strong);
-  border-radius: 3px;
+  border-radius: var(--radius-card);
   padding: 2.35em 1.1em 1.05em;
   margin: 1.45em 0;
   white-space: pre-wrap;
@@ -723,9 +723,9 @@ a.retro-link:hover {
   letter-spacing: 0.08em;
   line-height: 1;
   color: var(--entry-accent);
-  background: rgba(9, 18, 28, 0.92);
+  background: var(--c-bg-hud);
   border: 1px solid color-mix(in srgb, var(--entry-accent) 38%, transparent);
-  border-radius: 3px;
+  border-radius: var(--radius-ui);
   padding: 5px 9px;
   cursor: pointer;
   z-index: 2;
@@ -733,13 +733,13 @@ a.retro-link:hover {
 }
 .handson-copy-btn:hover,
 .handson-copy-btn:focus-visible {
-  color: #04080e;
+  color: var(--c-shadow-ink);
   background: var(--entry-accent);
   border-color: var(--entry-accent);
   outline: none;
 }
 .handson-copy-btn.is-copied {
-  color: #04080e;
+  color: var(--c-shadow-ink);
   background: var(--c-gb-green);
   border-color: var(--c-gb-green);
 }
@@ -747,8 +747,8 @@ a.retro-link:hover {
   border-left: 3px solid var(--c-crt-amber);
   padding: 0.95em 1.2em;
   color: var(--c-fg-body);
-  background: color-mix(in srgb, var(--c-crt-amber) 7%, rgba(11, 20, 32, 0.86));
-  border-radius: 0 3px 3px 0;
+  background: color-mix(in srgb, var(--c-crt-amber) 7%, var(--c-bg-elevated));
+  border-radius: 0 var(--radius-card) var(--radius-card) 0;
   margin: 1.6em 0;
 }
 .handson-article blockquote p { margin: 0.4em 0; }
@@ -952,25 +952,25 @@ a.retro-link:hover {
 
 .handson-aside.aside-positive,
 .handson-aside.aside-negative {
-  --aside-accent: #5eead4;
-  border-radius: 3px;
+  --aside-accent: var(--c-neon-cyan);
+  border-radius: var(--radius-card);
   border: 1px solid color-mix(in srgb, var(--aside-accent) 36%, var(--c-border));
-  background: color-mix(in srgb, var(--aside-accent) 7%, rgba(4, 8, 14, 0.72));
+  background: color-mix(in srgb, var(--aside-accent) 7%, rgb(var(--rgb-shadow-ink) / 0.72));
   padding: 1.1em 1.3em;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.24);
 }
 .handson-aside.aside-negative {
-  --aside-accent: #fcd34d;
+  --aside-accent: var(--c-crt-amber);
 }
 .handson-aside .aside-marker {
   position: absolute;
   top: -10px;
   left: 1em;
-  background: #04080e;
-  border: 1px solid color-mix(in srgb, var(--aside-accent, #5eead4) 36%, transparent);
-  border-radius: 3px;
+  background: var(--c-shadow-ink);
+  border: 1px solid color-mix(in srgb, var(--aside-accent, var(--c-neon-cyan)) 36%, transparent);
+  border-radius: var(--radius-ui);
   padding: 0.05em 0.55em;
-  color: var(--aside-accent, #5eead4);
+  color: var(--aside-accent, var(--c-neon-cyan));
   font-family: var(--font-mono-hud);
   font-size: 0.72rem;
   font-weight: 600;
@@ -981,8 +981,8 @@ a.retro-link:hover {
   margin-left: 150px;
   padding: 1.15em 1.35em 1.25em 1.6em;
   color: var(--c-fg-strong);
-  border-radius: 3px;
-  border: 1px solid color-mix(in srgb, var(--aside-accent, #fcd34d) 40%, var(--c-border));
+  border-radius: var(--radius-card);
+  border: 1px solid color-mix(in srgb, var(--aside-accent, var(--c-crt-amber)) 40%, var(--c-border));
   background: var(--c-bg-elevated);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
   font-family: var(--font-prose);
@@ -1010,11 +1010,11 @@ a.retro-link:hover {
   height: 0;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
-  border-right: 12px solid color-mix(in srgb, var(--aside-accent, #fcd34d) 45%, var(--c-border));
+  border-right: 12px solid color-mix(in srgb, var(--aside-accent, var(--c-crt-amber)) 45%, var(--c-border));
 }
-.handson-aside.aside-reference .aside-body strong { color: var(--aside-accent, #fcd34d); }
+.handson-aside.aside-reference .aside-body strong { color: var(--aside-accent, var(--c-crt-amber)); }
 .handson-aside.aside-reference .aside-body a {
-  color: var(--aside-accent, #fcd34d);
+  color: var(--aside-accent, var(--c-crt-amber));
   text-decoration: underline;
   text-decoration-style: dotted;
 }
@@ -1052,12 +1052,12 @@ a.retro-link:hover {
   margin-top: 2rem;
 }
 .step-nav-card {
-  --nav-accent: var(--entry-accent, #5eead4);
+  --nav-accent: var(--entry-accent, var(--c-neon-cyan));
   position: relative;
   display: block;
   overflow: hidden;
   padding: 1rem 1.2rem;
-  border-radius: 3px;
+  border-radius: var(--radius-card);
   border: 1px solid var(--c-border);
   background: var(--c-bg-elevated);
   color: inherit;
@@ -1097,18 +1097,18 @@ a.retro-link:hover {
   z-index: 1;
 }
 .step-nav-card.placeholder {
-  border: 1px dashed rgba(236, 247, 251, 0.08);
-  background: rgba(4, 8, 14, 0.24);
+  border: 1px dashed rgb(var(--rgb-phosphor) / 0.08);
+  background: rgb(var(--rgb-shadow-ink) / 0.24);
   box-shadow: none;
   pointer-events: none;
 }
 .step-nav-card.feedback {
-  border-color: rgba(252, 211, 77, 0.36);
-  background: rgba(252, 211, 77, 0.06);
+  border-color: rgb(var(--rgb-crt-amber) / 0.36);
+  background: rgb(var(--rgb-crt-amber) / 0.06);
 }
 .step-nav-card.feedback:hover {
   border-color: var(--c-crt-amber);
-  background: rgba(252, 211, 77, 0.12);
+  background: rgb(var(--rgb-crt-amber) / 0.12);
   transform: translateX(3px);
 }
 
@@ -1118,9 +1118,9 @@ a.retro-link:hover {
   padding: 0.65rem 0.8rem;
   text-align: center;
   color: var(--c-crt-amber);
-  border-radius: 3px;
-  border: 1px solid rgba(252, 211, 77, 0.32);
-  background: rgba(252, 211, 77, 0.06);
+  border-radius: var(--radius-ui);
+  border: 1px solid rgb(var(--rgb-crt-amber) / 0.32);
+  background: rgb(var(--rgb-crt-amber) / 0.06);
   font-family: var(--font-mono-hud);
   font-weight: 600;
   font-size: 0.72rem;
@@ -1130,7 +1130,7 @@ a.retro-link:hover {
   transition: color 0.16s ease, background-color 0.16s ease, border-color 0.16s ease;
 }
 .handson-toc-feedback:hover {
-  color: #04080e;
+  color: var(--c-shadow-ink);
   background: var(--c-crt-amber);
   border-color: var(--c-crt-amber);
 }
@@ -1147,6 +1147,173 @@ a.retro-link:hover {
   .handson-step-planet {
     display: none;
   }
+}
+
+/* =====================================================================
+   RETRO JRPG THEME OVERRIDES (html[data-theme='retro'])
+   ===================================================================== */
+html[data-theme='retro'] * {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+html[data-theme='retro'],
+html[data-theme='retro'] body,
+html[data-theme='retro'] .bg-stars,
+html[data-theme='retro'] body.bg-stars {
+  background-color: var(--c-midnight);
+  background-image:
+    radial-gradient(1px 1px at 17px 27px, #ffffffaa, transparent),
+    radial-gradient(1px 1px at 59px 83px, #00f0ffaa, transparent),
+    radial-gradient(1px 1px at 112px 41px, #ffffff88, transparent),
+    radial-gradient(1px 1px at 183px 131px, #ff2e88aa, transparent),
+    radial-gradient(1px 1px at 227px 67px, #ffffffaa, transparent),
+    radial-gradient(1px 1px at 271px 173px, #ffb000aa, transparent),
+    radial-gradient(ellipse at top, #1a0b2e 0%, #0a0e27 60%, #05060f 100%);
+  background-size: 300px 220px, 300px 220px, 300px 220px, 300px 220px, 300px 220px, 300px 220px, 100% 100%;
+  background-repeat: repeat, repeat, repeat, repeat, repeat, repeat, no-repeat;
+  color: var(--c-phosphor);
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+html[data-theme='retro'] ::selection {
+  background: var(--c-neon-magenta);
+  color: var(--c-shadow-ink);
+}
+
+html[data-theme='retro'] ::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+html[data-theme='retro'] ::-webkit-scrollbar-track {
+  background: var(--c-shadow-ink);
+  border-left: 2px solid var(--c-deep-purple);
+}
+html[data-theme='retro'] ::-webkit-scrollbar-thumb {
+  background: var(--c-neon-magenta);
+  border: 2px solid var(--c-shadow-ink);
+  border-radius: 0;
+}
+html[data-theme='retro'] ::-webkit-scrollbar-thumb:hover {
+  background: var(--c-neon-cyan);
+}
+
+/* CRT scanline & vignette overlay (active only in Retro mode) */
+html[data-theme='retro'] .crt-lines::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.03) 0px,
+    rgba(255, 255, 255, 0.03) 1px,
+    rgba(0, 0, 0, 0.22) 2px,
+    rgba(0, 0, 0, 0.22) 3px
+  );
+  mix-blend-mode: overlay;
+}
+html[data-theme='retro'] .crt-vignette::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 49;
+  box-shadow: inset 0 0 140px rgba(0, 0, 0, 0.85);
+}
+
+html[data-theme='retro'] a.retro-link {
+  color: var(--c-neon-cyan);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.15s steps(2);
+}
+html[data-theme='retro'] a.retro-link:hover {
+  color: var(--c-neon-magenta);
+  text-shadow: 0 0 8px var(--c-neon-magenta);
+}
+html[data-theme='retro'] a.retro-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.15s steps(3);
+}
+html[data-theme='retro'] a.retro-link:hover::after {
+  transform: scaleX(1);
+}
+
+html[data-theme='retro'] .page-wipe {
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 35%,
+      rgba(255, 176, 0, 0.10) 48%,
+      rgba(255, 255, 255, 0.18) 50%,
+      rgba(0, 240, 255, 0.12) 52%,
+      transparent 65%,
+      transparent 100%
+    );
+}
+html[data-theme='retro'] .nav-flashing {
+  animation: nav-flash-retro 0.45s ease-out;
+}
+@keyframes nav-flash-retro {
+  0%   { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0), inset 0 0 0 0 rgba(255, 46, 136, 0); }
+  40%  { box-shadow: 0 0 22px 2px rgba(0, 240, 255, 0.65), inset 0 0 12px rgba(255, 46, 136, 0.55); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0), inset 0 0 0 0 rgba(255, 46, 136, 0); }
+}
+
+/* Hands-on Retro JRPG styling */
+html[data-theme='retro'] .handson-toc,
+html[data-theme='retro'] .handson-step-header,
+html[data-theme='retro'] .handson-article,
+html[data-theme='retro'] .step-nav-card,
+html[data-theme='retro'] .handson-article pre,
+html[data-theme='retro'] .handson-aside.aside-positive,
+html[data-theme='retro'] .handson-aside.aside-negative,
+html[data-theme='retro'] .handson-aside.aside-reference,
+html[data-theme='retro'] .handson-article .hero-quote {
+  border-width: 2px;
+  border-radius: 0;
+  background-image: none;
+  box-shadow: 4px 4px 0 var(--c-shadow-ink);
+}
+html[data-theme='retro'] .handson-toc {
+  border-color: var(--c-neon-cyan);
+  background-color: rgba(10, 14, 39, 0.88);
+}
+html[data-theme='retro'] .handson-step-header {
+  border-color: var(--entry-accent);
+  box-shadow:
+    inset 0 0 0 2px var(--c-shadow-ink),
+    6px 6px 0 var(--c-shadow-ink);
+}
+html[data-theme='retro'] .handson-step-header::after,
+html[data-theme='retro'] .handson-article::before,
+html[data-theme='retro'] .handson-aside .aside-marker,
+html[data-theme='retro'] .handson-copy-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  border-radius: 0;
+  border-width: 2px;
+}
+html[data-theme='retro'] .handson-step-header h1,
+html[data-theme='retro'] .handson-article h2,
+html[data-theme='retro'] .handson-article h3,
+html[data-theme='retro'] .handson-article h4 {
+  font-family: 'DotGothic16', 'Noto Sans JP', sans-serif;
+}
+html[data-theme='retro'] .handson-toc-phase .font-pixel {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.62rem;
 }
 
 @media (max-width: 640px) {

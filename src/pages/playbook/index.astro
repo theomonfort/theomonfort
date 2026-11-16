@@ -287,7 +287,7 @@ const CATEGORIES_WITH_PLANETS = new Set<string>(['plan', 'operate', 'review', 'd
     padding: 0.48rem 0.9rem;
     border: 1px solid color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 32%, transparent);
     border-radius: var(--radius-pill);
-    background: rgba(12, 22, 35, 0.85);
+    background: rgb(var(--rgb-deep-purple) / 0.85);
     box-shadow: inset 0 1px 0 color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 35%, transparent);
     color: var(--c-fg-strong);
     text-decoration: none;
@@ -432,8 +432,8 @@ const CATEGORIES_WITH_PLANETS = new Set<string>(['plan', 'operate', 'review', 'd
     line-height: 1.2;
     text-transform: uppercase;
     color: var(--c-crt-amber);
-    background: rgba(252, 211, 77, 0.14);
-    border: 1px solid rgba(252, 211, 77, 0.32);
+    background: rgb(var(--rgb-crt-amber) / 0.14);
+    border: 1px solid rgb(var(--rgb-crt-amber) / 0.32);
     padding: 0.16rem 0.42rem;
     border-radius: 2px;
   }
@@ -615,13 +615,220 @@ const CATEGORIES_WITH_PLANETS = new Set<string>(['plan', 'operate', 'review', 'd
   }
 
   /* Per-category glow (color matches the section accent) */
-  .category-planet[data-planet='plan']         img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgba(134, 239, 172, 0.28)); }
-  .category-planet[data-planet='introduction'] img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgba(94, 234, 212, 0.28)); }
-  .category-planet[data-planet='develop']      img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgba(147, 168, 255, 0.28)); }
-  .category-planet[data-planet='review']       img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgba(252, 211, 77, 0.28)); }
-  .category-planet[data-planet='secure']       img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgba(94, 234, 212, 0.28)); }
-  .category-planet[data-planet='operate']      img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgba(134, 239, 172, 0.28)); }
-  .category-planet[data-planet='administration'] img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgba(147, 168, 255, 0.28)); }
+  .category-planet[data-planet='plan']         img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-gb-green) / 0.28)); }
+  .category-planet[data-planet='introduction'] img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-neon-cyan) / 0.28)); }
+  .category-planet[data-planet='develop']      img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-neon-magenta) / 0.28)); }
+  .category-planet[data-planet='review']       img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-crt-amber) / 0.28)); }
+  .category-planet[data-planet='secure']       img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-neon-cyan) / 0.28)); }
+  .category-planet[data-planet='operate']      img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-gb-green) / 0.28)); }
+  .category-planet[data-planet='administration'] img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-neon-magenta) / 0.28)); }
+
+  /* ═══════════ Retro JRPG theme overrides ═══════════ */
+  :global(html[data-theme='retro']) .playbook-cosmos {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  :global(html[data-theme='retro']) .playbook-hero-title {
+    font-family: 'Press Start 2P', 'DotGothic16', monospace;
+    font-weight: 400;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    line-height: 1.35;
+    letter-spacing: 0.04em;
+    color: var(--c-neon-magenta);
+  }
+
+  :global(html[data-theme='retro']) .playbook-hero-sub {
+    font-family: var(--font-prose);
+    font-size: 1.125rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    color: var(--c-neon-cyan);
+    margin-top: 0.35rem;
+  }
+
+  :global(html[data-theme='retro']) .playbook-hero-intro {
+    font-size: 0.875rem;
+    line-height: 1.625;
+    color: rgb(var(--rgb-phosphor) / 0.8);
+    margin-top: 1rem;
+    max-width: 42rem;
+  }
+
+  :global(html[data-theme='retro']) .playbook-phase-tab {
+    font-family: var(--font-prose);
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 0.5rem 0.75rem;
+    border: 2px solid var(--tone, var(--c-neon-cyan));
+    border-radius: 0;
+    background: rgb(var(--rgb-shadow-ink) / 0.8);
+    color: var(--tone, var(--c-neon-cyan));
+    box-shadow:
+      4px 4px 0 var(--c-deep-purple),
+      0 0 12px color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 26%, transparent);
+  }
+  :global(html[data-theme='retro']) .playbook-phase-tab:hover {
+    transform: translate(-1px, -1px);
+    border-color: var(--tone, var(--c-neon-cyan));
+    background: color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 14%, var(--c-shadow-ink));
+    color: var(--tone, var(--c-neon-cyan));
+    box-shadow:
+      4px 4px 0 var(--tone, var(--c-neon-cyan)),
+      0 0 18px color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 42%, transparent);
+  }
+
+  :global(html[data-theme='retro']) .playbook-phase-sep {
+    font-family: 'Press Start 2P', 'DotGothic16', monospace;
+    font-size: 1.5rem;
+    color: rgb(var(--rgb-phosphor) / 0.6);
+    opacity: 1;
+  }
+
+  :global(html[data-theme='retro']) .category-section {
+    margin-bottom: 3rem;
+  }
+
+  :global(html[data-theme='retro']) .category-header {
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 2px solid var(--tone, var(--c-neon-cyan));
+    background-image: none;
+  }
+
+  :global(html[data-theme='retro']) .category-title {
+    font-family: 'Press Start 2P', 'DotGothic16', monospace;
+    font-weight: 400;
+    font-size: 1.2rem;
+    letter-spacing: 0.04em;
+    color: var(--tone, var(--c-neon-cyan));
+  }
+
+  :global(html[data-theme='retro']) .category-label-sub {
+    font-size: 1rem;
+    color: rgb(var(--rgb-phosphor) / 0.7);
+  }
+
+  :global(html[data-theme='retro']) .category-count {
+    font-family: 'Press Start 2P', 'DotGothic16', monospace;
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--tone, var(--c-neon-cyan));
+    opacity: 0.65;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  :global(html[data-theme='retro']) .category-avatar {
+    width: 3rem;
+    height: 3rem;
+    border: 2px solid var(--tone, var(--c-neon-cyan));
+  }
+
+  :global(html[data-theme='retro']) .category-actor {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--tone, var(--c-neon-cyan));
+  }
+
+  :global(html[data-theme='retro']) .category-desc {
+    font-size: 0.875rem;
+    line-height: 1.625;
+    color: rgb(var(--rgb-phosphor) / 0.8);
+  }
+  :global(html[data-theme='retro']) .category-desc :global(strong) {
+    border-radius: 0;
+  }
+
+  :global(html[data-theme='retro']) .playbook-card {
+    background-color: rgb(var(--rgb-shadow-ink) / 0.8);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 2px solid var(--tone, var(--c-neon-cyan));
+    border-radius: 0;
+    padding: 1.25rem;
+    background-image: none;
+    box-shadow:
+      4px 4px 0 var(--c-deep-purple),
+      0 0 14px color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 22%, transparent);
+  }
+  :global(html[data-theme='retro']) .playbook-card:hover {
+    background-color: rgb(var(--rgb-shadow-ink) / 0.92);
+    border-color: var(--tone, var(--c-neon-cyan));
+    transform: translateY(-4px);
+    box-shadow:
+      4px 4px 0 var(--tone, var(--c-neon-cyan)),
+      0 0 20px color-mix(in srgb, var(--tone, var(--c-neon-cyan)) 38%, transparent);
+  }
+
+  :global(html[data-theme='retro']) .playbook-card-no {
+    font-family: 'Press Start 2P', 'DotGothic16', monospace;
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--tone, var(--c-neon-cyan));
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  :global(html[data-theme='retro']) .playbook-card-new {
+    font-family: 'Press Start 2P', 'DotGothic16', monospace;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--c-shadow-ink);
+    background: var(--c-crt-amber);
+    border: 1px solid var(--c-crt-amber);
+    border-radius: 0;
+    padding: 0.16rem 0.38rem;
+    box-shadow: 2px 2px 0 var(--c-deep-purple);
+  }
+  :global(html[data-theme='retro']) .playbook-card-new::before,
+  :global(html[data-theme='retro']) .playbook-card-new::after {
+    content: none;
+  }
+
+  :global(html[data-theme='retro']) .playbook-card-title {
+    font-family: var(--font-prose);
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.375;
+    color: var(--tone, var(--c-neon-cyan));
+  }
+
+  :global(html[data-theme='retro']) .playbook-card-subtitle {
+    font-size: 0.875rem;
+    color: rgb(var(--rgb-phosphor) / 0.7);
+  }
+
+  :global(html[data-theme='retro']) .playbook-card-summary {
+    font-size: 0.875rem;
+    line-height: 1.625;
+    color: rgb(var(--rgb-phosphor) / 0.85);
+  }
+
+  :global(html[data-theme='retro']) .playbook-card-more {
+    font-family: var(--font-prose);
+    font-size: 0.875rem;
+    color: var(--tone, var(--c-neon-cyan));
+  }
+
+  :global(html[data-theme='retro']) .category-planet {
+    opacity: 0.95;
+    filter: none;
+  }
+  :global(html[data-theme='retro']) .category-planet[data-planet='plan']         img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-gb-green) / 0.32)); }
+  :global(html[data-theme='retro']) .category-planet[data-planet='introduction'] img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-neon-cyan) / 0.32)); }
+  :global(html[data-theme='retro']) .category-planet[data-planet='develop']      img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-neon-magenta) / 0.32)); }
+  :global(html[data-theme='retro']) .category-planet[data-planet='review']       img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-crt-amber) / 0.32)); }
+  :global(html[data-theme='retro']) .category-planet[data-planet='secure']       img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-neon-cyan) / 0.32)); }
+  :global(html[data-theme='retro']) .category-planet[data-planet='operate']      img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-gb-green) / 0.32)); }
+  :global(html[data-theme='retro']) .category-planet[data-planet='administration'] img { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgb(var(--rgb-neon-magenta) / 0.32)); }
 
   @media (max-width: 767px) {
     .category-planet { display: none; }

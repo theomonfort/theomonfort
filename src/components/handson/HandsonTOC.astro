@@ -71,3 +71,17 @@ const currentOrder = steps.find((step) => step.slug === currentSlug)?.entry.data
     </a>
   )}
 </nav>
+
+<style>
+  :global(html[data-theme='retro']) .handson-toc-phase > span,
+  :global(html[data-theme='retro']) .toc-status,
+  :global(html[data-theme='retro']) .toc-num,
+  :global(html[data-theme='retro']) .toc-duration,
+  :global(html[data-theme='retro']) .handson-toc-feedback {
+    font-family: 'Press Start 2P', monospace;
+  }
+  :global(html[data-theme='retro']) .handson-toc-phase > small,
+  :global(html[data-theme='retro']) .toc-text {
+    font-family: 'DotGothic16', sans-serif;
+  }
+</style>

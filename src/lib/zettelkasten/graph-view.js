@@ -12,7 +12,7 @@ import {
   zoomIdentity,
 } from './vendor.js';
 
-export const GROUP_COLORS = {
+export const PHOSPHOR_GROUP_COLORS = {
   // Root & core platform — Phosphor Cosmos Telemetry Palette
   root: '#fcd34d',
   platform: '#5eead4',
@@ -82,6 +82,82 @@ export const GROUP_COLORS = {
   general: '#728fa3',
 };
 
+export const RETRO_GROUP_COLORS = {
+  // Root & core platform — Retro JRPG / Neon Cyberpunk Palette
+  root: '#ffb000',
+  platform: '#00f0ff',
+  sdlc: '#9bbc0f',
+  pillars: '#ff2e88',
+  'trust-arch': '#38bdf8',
+
+  // Overall Extended domain groups (aligned with Playbook category accents)
+  intro: '#00f0ff',
+  plan: '#9bbc0f',
+  develop: '#ff2e88',
+  review: '#ffb000',
+  secure: '#38bdf8',
+  operate: '#a3e635',
+  admin: '#bd93f9',
+
+  // Introduction & Copilot
+  copilot: '#00f0ff',
+  fusion: '#ff2e88',
+
+  // Plan vault groups
+  collaboration: '#00f0ff',
+  instructions: '#9bbc0f',
+  skills: '#ffb000',
+  plugins: '#bd93f9',
+  mcp: '#38bdf8',
+  agents: '#ff2e88',
+  hooks: '#ff6e67',
+  context: '#2dd4bf',
+
+  // Develop vault groups
+  vscode: '#00f0ff',
+  cli: '#9bbc0f',
+  'cloud-agent': '#ff2e88',
+  'copilot-app': '#bd93f9',
+  'models-partners': '#ffb000',
+  environments: '#38bdf8',
+  bridge: '#2dd4bf',
+
+  // Review vault groups
+  'pr-workflow': '#00f0ff',
+  'human-review': '#9bbc0f',
+  stacking: '#bd93f9',
+  'copilot-review': '#ff2e88',
+  'pr-rulesets': '#ffb000',
+  'pr-checks': '#38bdf8',
+
+  // Test & Secure vault groups
+  actions: '#00f0ff',
+  suite: '#ff2e88',
+  product: '#bd93f9',
+  secret: '#ffb000',
+  scanning: '#38bdf8',
+  dependabot: '#9bbc0f',
+  quality: '#e8f4ff',
+  governance: '#ff6e67',
+
+  // Administration vault groups
+  deployment: '#00f0ff',
+  iam: '#38bdf8',
+  licensing: '#9bbc0f',
+  billing: '#ffb000',
+  migrations: '#ff6e67',
+
+  // Fallbacks
+  unresolved: '#4a5578',
+  general: '#8ba4c7',
+};
+
+export const GROUP_COLORS = PHOSPHOR_GROUP_COLORS;
+
+export function isRetroTheme() {
+  return typeof document !== 'undefined' && document.documentElement.dataset.theme === 'retro';
+}
+
 const PHOSPHOR_PALETTE = {
   bgBase: '#060b12',
   bgDeep: '#04080e',
@@ -97,6 +173,9 @@ const PHOSPHOR_PALETTE = {
   nodeRoot: '#fcd34d',
   nodeUnresolved: '#3d5568',
   nodeDimmed: '#0f1c2b',
+  nodeCoreStroke: 'rgba(4, 8, 14, 0.82)',
+  unresolvedStrokeFocus: 'rgba(94, 234, 212, 0.55)',
+  unresolvedStrokeDim: 'rgba(114, 143, 163, 0.16)',
 
   // Primary focus / Seafoam Aqua (#5eead4) + Solar Champagne reticle (#fcd34d)
   primary: '#5eead4',
@@ -105,6 +184,8 @@ const PHOSPHOR_PALETTE = {
   primaryEdge: 'rgba(94, 234, 212, 0.88)',
   selectRing: '#fcd34d',
   selectGlow: 'rgba(252, 211, 77, 0.28)',
+  activeRing: 'rgba(94, 234, 212, 0.72)',
+  haloOuterStop: 'rgba(6, 11, 18, 0)',
 
   // Secondary hover (when another node is already pinned) = Starlight Periwinkle (#93a8ff)
   secondary: '#93a8ff',
@@ -123,6 +204,7 @@ const PHOSPHOR_PALETTE = {
 
   // Typography & crisp obsidian label framing
   labelActive: '#ecf7fb',
+  labelNeighbor: '#bad0de',
   labelNormal: '#bad0de',
   labelDim: '#728fa3',
   labelHalo: '#04080e',
@@ -133,16 +215,75 @@ const PHOSPHOR_PALETTE = {
   labelBorderNeighbor: 'rgba(94, 234, 212, 0.24)',
 };
 
-export function getGroupColor(group) {
-  if (!group) return GROUP_COLORS.general;
+const RETRO_PALETTE = {
+  bgInner: '#1a0b2e',
+  bgMid: '#0a0e27',
+  bgOuter: '#05060f',
+  gridMinor: 'rgba(0, 240, 255, 0.038)',
+  gridMajor: 'rgba(255, 46, 136, 0.068)',
+
+  // Monochrome tactical node tones (when Groups toggle is off)
+  nodeLeaf: '#6b8db5',
+  nodeMid: '#9ec5eb',
+  nodeHub: '#d9eeff',
+  nodeRoot: '#ffb000',
+  nodeUnresolved: '#3d4870',
+  nodeDimmed: '#151b38',
+  nodeCoreStroke: 'rgba(5, 6, 15, 0.68)',
+  unresolvedStrokeFocus: 'rgba(0, 240, 255, 0.55)',
+  unresolvedStrokeDim: 'rgba(138, 164, 199, 0.14)',
+
+  // Primary focus = Neon Magenta (#ff2e88)
+  primary: '#ff2e88',
+  primaryBright: '#ff8ec0',
+  primaryGlow: 'rgba(255, 46, 136, 0.42)',
+  primaryEdge: 'rgba(255, 46, 136, 0.92)',
+  selectRing: '#ff8ec0',
+  selectGlow: 'rgba(255, 46, 136, 0.42)',
+  activeRing: 'rgba(0, 240, 255, 0.72)',
+  haloOuterStop: 'rgba(5, 6, 15, 0)',
+
+  // Secondary hover (when another node is already pinned) = Neon Cyan (#00f0ff)
+  secondary: '#00f0ff',
+  secondaryBright: '#a5f8ff',
+  secondaryGlow: 'rgba(0, 240, 255, 0.40)',
+  secondaryEdge: 'rgba(0, 240, 255, 0.88)',
+
+  // Search hit = CRT Amber (#ffb000)
+  search: '#ffb000',
+  searchGlow: 'rgba(255, 176, 0, 0.42)',
+
+  // Edges
+  edgeIdle: 'rgba(0, 240, 255, 0.16)',
+  edgeIdleSubtle: 'rgba(0, 240, 255, 0.09)',
+  edgeDimmed: 'rgba(138, 164, 199, 0.035)',
+
+  // Typography & crisp pixel label framing
+  labelActive: '#e8f4ff',
+  labelNeighbor: '#cde6ff',
+  labelNormal: 'rgba(232, 244, 255, 0.82)',
+  labelDim: 'rgba(232, 244, 255, 0.24)',
+  labelHalo: '#05060f',
+  labelBg: 'rgba(5, 6, 15, 0.88)',
+  labelBorderSelect: 'rgba(255, 46, 136, 0.78)',
+  labelBorderHover: 'rgba(255, 46, 136, 0.78)',
+  labelBorderSecondary: 'rgba(0, 240, 255, 0.75)',
+  labelBorderNeighbor: 'rgba(0, 240, 255, 0.24)',
+};
+
+export function getGroupColor(group, retro = isRetroTheme()) {
+  const colorMap = retro ? RETRO_GROUP_COLORS : PHOSPHOR_GROUP_COLORS;
+  if (!group) return colorMap.general;
   const clean = String(group).toLowerCase();
-  if (GROUP_COLORS[clean]) return GROUP_COLORS[clean];
+  if (colorMap[clean]) return colorMap[clean];
 
   let hash = 0;
   for (let i = 0; i < clean.length; i += 1) {
     hash = clean.charCodeAt(i) + ((hash << 5) - hash);
   }
-  const palette = ['#5eead4', '#86efac', '#93a8ff', '#fcd34d', '#67e8f9', '#c4b5fd', '#fb7185'];
+  const palette = retro
+    ? ['#00f0ff', '#ff2e88', '#ffb000', '#9bbc0f', '#bd93f9', '#ff6e67', '#e8f4ff']
+    : ['#5eead4', '#86efac', '#93a8ff', '#fcd34d', '#67e8f9', '#c4b5fd', '#fb7185'];
   return palette[Math.abs(hash) % palette.length];
 }
 
@@ -191,6 +332,18 @@ export class GraphView {
     this.simulation = null;
     this.zoomBehavior = null;
 
+    this.handleThemeChange = () => {
+      for (const node of this.nodes) {
+        if (node.exists) {
+          node.color = getGroupColor(node.group);
+        }
+      }
+      this.requestRender();
+    };
+    if (typeof window !== 'undefined') {
+      window.addEventListener('akq:theme-change', this.handleThemeChange);
+    }
+
     this.setupInteractions();
     this.setupResizeObserver();
     this.startRenderLoop();
@@ -203,13 +356,13 @@ export class GraphView {
     return clamp(4.2 + Math.sqrt(deg) * 1.45, 4.4, 13.0);
   }
 
-  getMonochromeNodeFill(node) {
-    if (!node.exists) return PHOSPHOR_PALETTE.nodeUnresolved;
-    if (node.group === 'root') return PHOSPHOR_PALETTE.nodeRoot;
+  getMonochromeNodeFill(node, palette = isRetroTheme() ? RETRO_PALETTE : PHOSPHOR_PALETTE) {
+    if (!node.exists) return palette.nodeUnresolved;
+    if (node.group === 'root') return palette.nodeRoot;
     const deg = node.degree || 0;
-    if (deg >= 7) return PHOSPHOR_PALETTE.nodeHub;
-    if (deg >= 3) return PHOSPHOR_PALETTE.nodeMid;
-    return PHOSPHOR_PALETTE.nodeLeaf;
+    if (deg >= 7) return palette.nodeHub;
+    if (deg >= 3) return palette.nodeMid;
+    return palette.nodeLeaf;
   }
 
   refreshSize() {
@@ -695,12 +848,65 @@ export class GraphView {
     requestAnimationFrame(loop);
   }
 
-  drawBackdrop(ctx, w, h) {
+  drawBackdrop(ctx, w, h, retro = isRetroTheme()) {
+    const cx = this.visualCenterX();
+
+    if (retro) {
+      ctx.fillStyle = RETRO_PALETTE.bgOuter;
+      ctx.fillRect(0, 0, w, h);
+
+      const cy = h * 0.45;
+      const outerR = Math.max(w, h) * 0.85;
+      const bgGrad = ctx.createRadialGradient(cx, cy, 24, cx, cy, outerR);
+      bgGrad.addColorStop(0, RETRO_PALETTE.bgInner);
+      bgGrad.addColorStop(0.52, RETRO_PALETTE.bgMid);
+      bgGrad.addColorStop(1, RETRO_PALETTE.bgOuter);
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, w, h);
+
+      // Tactical neon coordinate grid in world space
+      let scaledStep = 80 * this.transform.k;
+      while (scaledStep < 22) scaledStep *= 2;
+      while (scaledStep > 128) scaledStep /= 2;
+
+      const startX = ((this.transform.x % scaledStep) + scaledStep) % scaledStep;
+      const startY = ((this.transform.y % scaledStep) + scaledStep) % scaledStep;
+
+      ctx.beginPath();
+      ctx.strokeStyle = RETRO_PALETTE.gridMinor;
+      ctx.lineWidth = 1;
+      for (let x = startX; x < w; x += scaledStep) {
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, h);
+      }
+      for (let y = startY; y < h; y += scaledStep) {
+        ctx.moveTo(0, y);
+        ctx.lineTo(w, y);
+      }
+      ctx.stroke();
+
+      const majorStep = scaledStep * 4;
+      const majorStartX = ((this.transform.x % majorStep) + majorStep) % majorStep;
+      const majorStartY = ((this.transform.y % majorStep) + majorStep) % majorStep;
+      ctx.beginPath();
+      ctx.strokeStyle = RETRO_PALETTE.gridMajor;
+      ctx.lineWidth = 1;
+      for (let x = majorStartX; x < w; x += majorStep) {
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, h);
+      }
+      for (let y = majorStartY; y < h; y += majorStep) {
+        ctx.moveTo(0, y);
+        ctx.lineTo(w, y);
+      }
+      ctx.stroke();
+      return;
+    }
+
     ctx.fillStyle = PHOSPHOR_PALETTE.bgBase;
     ctx.fillRect(0, 0, w, h);
 
     // Soft top & constellation-center seafoam nebula glows
-    const cx = this.visualCenterX();
     const topGlowR = Math.max(w, h) * 0.68;
     const topGrad = ctx.createRadialGradient(cx, -h * 0.06, 12, cx, -h * 0.06, topGlowR);
     topGrad.addColorStop(0, PHOSPHOR_PALETTE.nebulaCore);
@@ -751,10 +957,12 @@ export class GraphView {
     const ctx = this.ctx;
     const w = this.width;
     const h = this.height;
+    const retro = isRetroTheme();
+    const palette = retro ? RETRO_PALETTE : PHOSPHOR_PALETTE;
 
     ctx.save();
     ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
-    this.drawBackdrop(ctx, w, h);
+    this.drawBackdrop(ctx, w, h, retro);
 
     ctx.translate(this.transform.x, this.transform.y);
     ctx.scale(this.transform.k, this.transform.k);
@@ -804,10 +1012,10 @@ export class GraphView {
         ctx.lineTo(t.x, t.y);
       }
       ctx.strokeStyle = dimmed
-        ? PHOSPHOR_PALETTE.edgeDimmed
+        ? palette.edgeDimmed
         : this.nodes.length > 100
-          ? PHOSPHOR_PALETTE.edgeIdleSubtle
-          : PHOSPHOR_PALETTE.edgeIdle;
+          ? palette.edgeIdleSubtle
+          : palette.edgeIdle;
       ctx.lineWidth = (dimmed ? 0.75 : 1.0) * invK;
       ctx.stroke();
     }
@@ -848,44 +1056,43 @@ export class GraphView {
       }
     };
 
-    // 2. Hover edges (#93a8ff when secondary hover, #5eead4 when solo hover)
+    // 2. Hover edges
     if (secondaryEdges.length > 0) {
-      const usePeriwinkle = isSecondaryHover;
       drawDirectedActiveEdges(
         secondaryEdges,
         hoverId,
-        usePeriwinkle ? PHOSPHOR_PALETTE.secondaryEdge : PHOSPHOR_PALETTE.primaryEdge,
-        usePeriwinkle ? PHOSPHOR_PALETTE.secondary : PHOSPHOR_PALETTE.primary,
-        usePeriwinkle ? 1.55 : 1.65,
+        isSecondaryHover ? palette.secondaryEdge : palette.primaryEdge,
+        isSecondaryHover ? palette.secondary : palette.primary,
+        isSecondaryHover ? 1.55 : 1.65,
       );
     }
 
-    // 3. Selected edges (Seafoam Aqua #5eead4)
+    // 3. Selected edges
     if (selectedEdges.length > 0) {
       drawDirectedActiveEdges(
         selectedEdges,
         selectedId,
-        PHOSPHOR_PALETTE.primaryEdge,
-        PHOSPHOR_PALETTE.primary,
+        palette.primaryEdge,
+        palette.primary,
         1.75,
       );
     }
 
-    // 4. Bridge edges (Selected <-> Hovered: Seafoam Aqua #5eead4 -> Starlight Periwinkle #93a8ff)
+    // 4. Bridge edges (Selected <-> Hovered gradient)
     for (const { s, t } of bridgeEdges) {
       const grad = ctx.createLinearGradient(s.x, s.y, t.x, t.y);
       if (s.id === selectedId) {
-        grad.addColorStop(0, PHOSPHOR_PALETTE.primary);
-        grad.addColorStop(1, PHOSPHOR_PALETTE.secondary);
+        grad.addColorStop(0, palette.primary);
+        grad.addColorStop(1, palette.secondary);
       } else {
-        grad.addColorStop(0, PHOSPHOR_PALETTE.secondary);
-        grad.addColorStop(1, PHOSPHOR_PALETTE.primary);
+        grad.addColorStop(0, palette.secondary);
+        grad.addColorStop(1, palette.primary);
       }
       ctx.beginPath();
       ctx.moveTo(s.x, s.y);
       ctx.lineTo(t.x, t.y);
       ctx.strokeStyle = grad;
-      ctx.lineWidth = 2.2 * invK;
+      ctx.lineWidth = (retro ? 2.25 : 2.2) * invK;
       ctx.stroke();
     }
 
@@ -913,20 +1120,20 @@ export class GraphView {
         inFocus = false;
       }
 
-      // Soft telemetry halo for selected, hovered, or search-matched nodes
+      // Halo / neon aura for selected, hovered, or search-matched nodes
       if (isSelected || isHover || isSearchHit) {
         const glowColor = isSelected
-          ? PHOSPHOR_PALETTE.selectGlow
+          ? palette.selectGlow
           : isHover && isSecondaryHover
-            ? PHOSPHOR_PALETTE.secondaryGlow
+            ? palette.secondaryGlow
             : isHover
-              ? PHOSPHOR_PALETTE.primaryGlow
-              : PHOSPHOR_PALETTE.searchGlow;
+              ? palette.primaryGlow
+              : palette.searchGlow;
 
         const haloRadius = r + 11 * invK;
         const grad = ctx.createRadialGradient(node.x, node.y, r * 0.4, node.x, node.y, haloRadius);
         grad.addColorStop(0, glowColor);
-        grad.addColorStop(1, 'rgba(6, 11, 18, 0)');
+        grad.addColorStop(1, palette.haloOuterStop);
         ctx.beginPath();
         ctx.arc(node.x, node.y, haloRadius, 0, Math.PI * 2);
         ctx.fillStyle = grad;
@@ -935,21 +1142,21 @@ export class GraphView {
 
       let fill;
       if (isSelected) {
-        fill = PHOSPHOR_PALETTE.primary;
+        fill = palette.primary;
       } else if (isHover && isSecondaryHover) {
-        fill = PHOSPHOR_PALETTE.secondary;
+        fill = palette.secondary;
       } else if (isHover) {
-        fill = PHOSPHOR_PALETTE.primaryBright;
+        fill = retro ? palette.primary : palette.primaryBright;
       } else if (isSearchHit) {
-        fill = PHOSPHOR_PALETTE.search;
+        fill = palette.search;
       } else if (!inFocus) {
-        fill = PHOSPHOR_PALETTE.nodeDimmed;
+        fill = palette.nodeDimmed;
       } else if (this.colorByGroup && node.exists) {
-        fill = getGroupColor(node.group);
+        fill = getGroupColor(node.group, retro);
       } else if (isSelectedNeighbor || isHoverNeighbor) {
-        fill = PHOSPHOR_PALETTE.nodeHub;
+        fill = palette.nodeHub;
       } else {
-        fill = this.getMonochromeNodeFill(node);
+        fill = this.getMonochromeNodeFill(node, palette);
       }
 
       ctx.beginPath();
@@ -957,55 +1164,65 @@ export class GraphView {
       ctx.fillStyle = fill;
       ctx.fill();
 
-      // Crisp obsidian separation stroke on focused nodes
+      // Separation stroke on focused nodes
       if (inFocus && node.exists) {
-        ctx.strokeStyle = 'rgba(4, 8, 14, 0.82)';
-        ctx.lineWidth = 1.15 * invK;
+        ctx.strokeStyle = palette.nodeCoreStroke;
+        ctx.lineWidth = (retro ? 1.1 : 1.15) * invK;
         ctx.stroke();
       }
 
       if (!node.exists) {
         ctx.save();
         ctx.setLineDash([2.2 * invK, 2.2 * invK]);
-        ctx.strokeStyle = inFocus ? 'rgba(94, 234, 212, 0.55)' : 'rgba(114, 143, 163, 0.16)';
+        ctx.strokeStyle = inFocus ? palette.unresolvedStrokeFocus : palette.unresolvedStrokeDim;
         ctx.lineWidth = 1.1 * invK;
         ctx.stroke();
         ctx.restore();
       } else if (isSelected) {
-        // Crisp Solar Champagne (#fcd34d) telemetry reticle ring + cardinal ticks
-        const ringR = r + 3.1 * invK;
-        ctx.beginPath();
-        ctx.arc(node.x, node.y, ringR, 0, Math.PI * 2);
-        ctx.strokeStyle = PHOSPHOR_PALETTE.selectRing;
-        ctx.lineWidth = 1.75 * invK;
-        ctx.stroke();
+        if (retro) {
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, r + 3 * invK, 0, Math.PI * 2);
+          ctx.strokeStyle = palette.selectRing;
+          ctx.lineWidth = 1.85 * invK;
+          ctx.stroke();
+        } else {
+          // Crisp Solar Champagne (#fcd34d) telemetry reticle ring + cardinal ticks
+          const ringR = r + 3.1 * invK;
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, ringR, 0, Math.PI * 2);
+          ctx.strokeStyle = palette.selectRing;
+          ctx.lineWidth = 1.75 * invK;
+          ctx.stroke();
 
-        const tickInner = ringR + 1.4 * invK;
-        const tickOuter = ringR + 4.0 * invK;
-        ctx.beginPath();
-        ctx.moveTo(node.x - tickOuter, node.y);
-        ctx.lineTo(node.x - tickInner, node.y);
-        ctx.moveTo(node.x + tickInner, node.y);
-        ctx.lineTo(node.x + tickOuter, node.y);
-        ctx.moveTo(node.x, node.y - tickOuter);
-        ctx.lineTo(node.x, node.y - tickInner);
-        ctx.moveTo(node.x, node.y + tickInner);
-        ctx.lineTo(node.x, node.y + tickOuter);
-        ctx.strokeStyle = PHOSPHOR_PALETTE.selectRing;
-        ctx.lineWidth = 1.35 * invK;
-        ctx.stroke();
+          const tickInner = ringR + 1.4 * invK;
+          const tickOuter = ringR + 4.0 * invK;
+          ctx.beginPath();
+          ctx.moveTo(node.x - tickOuter, node.y);
+          ctx.lineTo(node.x - tickInner, node.y);
+          ctx.moveTo(node.x + tickInner, node.y);
+          ctx.lineTo(node.x + tickOuter, node.y);
+          ctx.moveTo(node.x, node.y - tickOuter);
+          ctx.lineTo(node.x, node.y - tickInner);
+          ctx.moveTo(node.x, node.y + tickInner);
+          ctx.lineTo(node.x, node.y + tickOuter);
+          ctx.strokeStyle = palette.selectRing;
+          ctx.lineWidth = 1.35 * invK;
+          ctx.stroke();
+        }
       } else if (isHover) {
         ctx.beginPath();
-        ctx.arc(node.x, node.y, r + 2.7 * invK, 0, Math.PI * 2);
+        ctx.arc(node.x, node.y, r + (retro ? 2.6 : 2.7) * invK, 0, Math.PI * 2);
         ctx.strokeStyle = isSecondaryHover
-          ? PHOSPHOR_PALETTE.secondaryBright
-          : PHOSPHOR_PALETTE.primary;
-        ctx.lineWidth = 1.55 * invK;
+          ? palette.secondaryBright
+          : retro
+            ? palette.primaryBright
+            : palette.primary;
+        ctx.lineWidth = (retro ? 1.6 : 1.55) * invK;
         ctx.stroke();
       } else if (isActive && !hasSelection) {
         ctx.beginPath();
         ctx.arc(node.x, node.y, r + 2.4 * invK, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(94, 234, 212, 0.72)';
+        ctx.strokeStyle = palette.activeRing;
         ctx.lineWidth = 1.3 * invK;
         ctx.stroke();
       }
@@ -1050,13 +1267,17 @@ export class GraphView {
       }
     }
 
-    // 6. Crisp HUD telemetry labels (3px radius obsidian pills + dark #04080e glyph halo over edges)
+    // 6. Theme-aware labels (3px Phosphor HUD pills vs 0px Retro JRPG pixel frames)
     labelCandidates.sort((a, b) => a.priority - b.priority);
 
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
     ctx.lineJoin = 'round';
     ctx.miterLimit = 2;
+
+    const labelFontFamily = retro
+      ? '"DotGothic16", "IBM Plex Sans JP", monospace'
+      : '"IBM Plex Sans JP", "IBM Plex Mono", sans-serif';
 
     for (const item of labelCandidates) {
       const {
@@ -1072,45 +1293,64 @@ export class GraphView {
       } = item;
       const emphasized = isSelected || isHover || isSearchHit;
       const fontSize = (emphasized ? 12 : 11) * invK;
-      const weight = emphasized ? '600' : isNeighbor ? '500' : '400';
+      const weight = retro
+        ? emphasized
+          ? '700'
+          : isNeighbor
+            ? '600'
+            : '400'
+        : emphasized
+          ? '600'
+          : isNeighbor
+            ? '500'
+            : '400';
 
-      ctx.font = `${weight} ${fontSize}px "IBM Plex Sans JP", "Noto Sans JP", sans-serif`;
+      ctx.font = `${weight} ${fontSize}px ${labelFontFamily}`;
       const text = emphasized || isNeighbor ? node.title : truncateLabel(node.title, 26);
-      const labelY = node.y + r + 5.5 * invK;
+      const labelY = node.y + r + (retro ? 5 : 5.5) * invK;
 
       if (emphasized || isNeighbor) {
         const metrics = ctx.measureText(text);
-        const padX = 6 * invK;
-        const padY = 2.8 * invK;
+        const padX = (retro ? 5.5 : 6) * invK;
+        const padY = (retro ? 2.5 : 2.8) * invK;
         const bw = metrics.width + padX * 2;
         const bh = fontSize + padY * 2;
         const bx = node.x - bw / 2;
         const by = labelY - padY;
-        const rad = 3 * invK;
 
-        ctx.beginPath();
-        if (typeof ctx.roundRect === 'function') {
-          ctx.roundRect(bx, by, bw, bh, rad);
-        } else {
-          ctx.rect(bx, by, bw, bh);
-        }
-        ctx.fillStyle = PHOSPHOR_PALETTE.labelBg;
-        ctx.fill();
-
-        ctx.strokeStyle = isSelected
-          ? PHOSPHOR_PALETTE.labelBorderSelect
+        const borderStroke = isSelected
+          ? palette.labelBorderSelect
           : isHover && isSecondaryHover
-            ? PHOSPHOR_PALETTE.labelBorderSecondary
+            ? palette.labelBorderSecondary
             : isHover
-              ? PHOSPHOR_PALETTE.labelBorderHover
-              : PHOSPHOR_PALETTE.labelBorderNeighbor;
-        ctx.lineWidth = (emphasized ? 1.2 : 0.85) * invK;
-        ctx.stroke();
+              ? palette.labelBorderHover
+              : palette.labelBorderNeighbor;
+
+        if (retro) {
+          ctx.fillStyle = palette.labelBg;
+          ctx.fillRect(bx, by, bw, bh);
+          ctx.strokeStyle = borderStroke;
+          ctx.lineWidth = (emphasized ? 1.3 : 0.9) * invK;
+          ctx.strokeRect(bx, by, bw, bh);
+        } else {
+          const rad = 3 * invK;
+          ctx.beginPath();
+          if (typeof ctx.roundRect === 'function') {
+            ctx.roundRect(bx, by, bw, bh, rad);
+          } else {
+            ctx.rect(bx, by, bw, bh);
+          }
+          ctx.fillStyle = palette.labelBg;
+          ctx.fill();
+          ctx.strokeStyle = borderStroke;
+          ctx.lineWidth = (emphasized ? 1.2 : 0.85) * invK;
+          ctx.stroke();
+        }
       } else {
-        // Dark #04080e halo stroke so ambient/dimmed labels stay razor-sharp over crossing links
+        // Dark glyph halo stroke so ambient/dimmed labels stay razor-sharp over crossing links
         ctx.save();
         ctx.globalAlpha = inFocus ? 0.92 : 0.55;
-        ctx.strokeStyle = PHOSPHOR_PALETTE.labelHalo;
+        ctx.strokeStyle = palette.labelHalo;
         ctx.lineWidth = 3.2 * invK;
         ctx.strokeText(text, node.x, labelY);
         ctx.restore();
@@ -1118,12 +1358,14 @@ export class GraphView {
 
       ctx.save();
       if (emphasized || (isActive && inFocus)) {
-        ctx.fillStyle = PHOSPHOR_PALETTE.labelActive;
+        ctx.fillStyle = palette.labelActive;
       } else if (!inFocus) {
-        ctx.globalAlpha = 0.55;
-        ctx.fillStyle = PHOSPHOR_PALETTE.labelDim;
+        if (!retro) ctx.globalAlpha = 0.55;
+        ctx.fillStyle = palette.labelDim;
+      } else if (isNeighbor) {
+        ctx.fillStyle = palette.labelNeighbor;
       } else {
-        ctx.fillStyle = PHOSPHOR_PALETTE.labelNormal;
+        ctx.fillStyle = palette.labelNormal;
       }
       ctx.fillText(text, node.x, labelY);
       ctx.restore();
@@ -1136,6 +1378,9 @@ export class GraphView {
     this.destroyed = true;
     if (this.simulation) this.simulation.stop();
     if (this.resizeObserver) this.resizeObserver.disconnect();
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('akq:theme-change', this.handleThemeChange);
+    }
     this.canvas.removeEventListener('pointermove', this.handlePointerMove);
     this.canvas.removeEventListener('pointerleave', this.handlePointerLeave);
     this.canvas.removeEventListener('pointerdown', this.handlePointerDown);

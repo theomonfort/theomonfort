@@ -107,7 +107,7 @@ const shellStyle = `--handson-progress:${progress}%;--entry-accent:${categoryMet
         </div>
 
         {item.isFallback && (
-          <p class="mt-4 px-3.5 py-2.5 rounded-[3px] border border-crt-amber/35 bg-crt-amber/10 font-body text-sm text-crt-amber">
+          <p class="handson-fallback-note mt-4 px-3.5 py-2.5 rounded-[var(--radius-card)] border border-crt-amber/35 bg-crt-amber/10 font-body text-sm text-crt-amber">
             {t.common.translationPending}
           </p>
         )}
@@ -217,3 +217,19 @@ const shellStyle = `--handson-progress:${progress}%;--entry-accent:${categoryMet
     })();
   </script>
 </Layout>
+
+<style>
+  :global(html[data-theme='retro']) .handson-toc-toggle,
+  :global(html[data-theme='retro']) .handson-step-chip {
+    font-family: 'Press Start 2P', monospace;
+  }
+  :global(html[data-theme='retro']) .handson-step-header h1,
+  :global(html[data-theme='retro']) .handson-step-summary,
+  :global(html[data-theme='retro']) .handson-fallback-note {
+    font-family: 'DotGothic16', sans-serif;
+  }
+  :global(html[data-theme='retro']) .handson-fallback-note {
+    border-width: 2px;
+    background-color: rgb(var(--rgb-shadow-ink) / 0.75);
+  }
+</style>

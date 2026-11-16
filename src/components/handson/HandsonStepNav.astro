@@ -29,7 +29,7 @@ const nextAccent = next ? handsonCategoryMeta(handsonCategoryForSlug(next.slug),
       data-handson-prev
       style={`--nav-accent:${prevAccent}`}
     >
-      <span class="font-mono text-[11px] font-semibold tracking-[0.08em] uppercase text-phosphor-muted">◀ {prevLabel}</span>
+      <span class="step-nav-label font-mono text-[11px] font-semibold tracking-[0.08em] uppercase text-phosphor-muted">◀ {prevLabel}</span>
       <span class="step-nav-title font-body text-sm md:text-base mt-1 block">
         {String(prev.entry.data.order).padStart(2, '0')} · {handsonStepTitle(prev)}
       </span>
@@ -43,7 +43,7 @@ const nextAccent = next ? handsonCategoryMeta(handsonCategoryForSlug(next.slug),
       data-handson-next
       style={`--nav-accent:${nextAccent}`}
     >
-      <span class="font-mono text-[11px] font-semibold tracking-[0.08em] uppercase text-phosphor-muted text-right block">{nextLabel} ▶</span>
+      <span class="step-nav-label font-mono text-[11px] font-semibold tracking-[0.08em] uppercase text-phosphor-muted text-right block">{nextLabel} ▶</span>
       <span class="step-nav-title font-body text-sm md:text-base mt-1 block text-right">
         {String(next.entry.data.order).padStart(2, '0')} · {handsonStepTitle(next)}
       </span>
@@ -52,15 +52,22 @@ const nextAccent = next ? handsonCategoryMeta(handsonCategoryForSlug(next.slug),
 </nav>
 
 <style>
-  .step-nav-card:not(.placeholder) {
+  :global(html:not([data-theme='retro'])) .step-nav-card:not(.placeholder) {
     background-image: linear-gradient(
       90deg,
-      var(--nav-accent, #5eead4) 0%,
-      color-mix(in srgb, var(--nav-accent, #5eead4) 30%, transparent) 55%,
+      var(--nav-accent, var(--c-neon-cyan)) 0%,
+      color-mix(in srgb, var(--nav-accent, var(--c-neon-cyan)) 30%, transparent) 55%,
       transparent 100%
     );
     background-size: 100% 2px;
     background-position: top left;
     background-repeat: no-repeat;
+  }
+  :global(html[data-theme='retro']) .step-nav-label {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+  }
+  :global(html[data-theme='retro']) .step-nav-title {
+    font-family: 'DotGothic16', sans-serif;
   }
 </style>

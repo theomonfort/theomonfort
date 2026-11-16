@@ -1,4 +1,18 @@
-:root {
+:root,
+html[data-theme='phosphor'] {
+  /* RGB Channels (space-separated for Tailwind <alpha-value> and rgb(var(--rgb-*) / a)) */
+  --rgb-shadow-ink: 4 8 14;
+  --rgb-midnight: 6 11 18;
+  --rgb-deep-purple: 11 20 32;
+  --rgb-neon-cyan: 94 234 212;
+  --rgb-gb-green: 134 239 172;
+  --rgb-neon-magenta: 147 168 255;
+  --rgb-crt-amber: 252 211 77;
+  --rgb-coral-alert: 251 113 133;
+  --rgb-phosphor: 236 247 251;
+  --rgb-phosphor-body: 186 208 222;
+  --rgb-phosphor-muted: 114 143 163;
+
   /* Surfaces & Backgrounds — Phosphor Cosmos HUD */
   --c-shadow-ink: #04080e;
   --c-midnight: #060b12;
@@ -26,6 +40,7 @@
   --c-fg-strong: #ecf7fb;
   --c-fg-body: #bad0de;
   --c-fg-muted: #728fa3;
+  --c-ink-on-bright: #04080e;
 
   --c-link: #67e8f9;
   --c-link-hover: #a5f3fc;
@@ -40,6 +55,15 @@
   --radius-pill: 3px;
   --radius-ui: 3px;
 
+  /* Shadows */
+  --shadow-pixel: 0 6px 20px rgba(0, 0, 0, 0.28);
+  --shadow-pixel-sm: 0 4px 14px rgba(0, 0, 0, 0.24);
+  --shadow-hud: 0 6px 20px rgba(0, 0, 0, 0.28);
+  --shadow-neon-magenta: inset 0 1px 0 rgba(147, 168, 255, 0.35), 0 8px 24px rgba(0, 0, 0, 0.32);
+  --shadow-neon-cyan: inset 0 1px 0 rgba(94, 234, 212, 0.35), 0 8px 24px rgba(0, 0, 0, 0.32);
+  --shadow-neon-amber: inset 0 1px 0 rgba(252, 211, 77, 0.35), 0 8px 24px rgba(0, 0, 0, 0.32);
+  --shadow-neon-green: inset 0 1px 0 rgba(134, 239, 172, 0.35), 0 8px 24px rgba(0, 0, 0, 0.32);
+
   /* Typography */
   --font-prose: 'IBM Plex Sans JP', 'Noto Sans JP', sans-serif;
   --font-display: 'Orbitron', 'IBM Plex Sans JP', sans-serif;
@@ -47,4 +71,75 @@
 
   --grid: 8px;
   --pixel: 2px;
+}
+
+html[data-theme='retro'] {
+  /* RGB Channels — Original Retro JRPG Neon Arcade */
+  --rgb-shadow-ink: 5 6 15;
+  --rgb-midnight: 10 14 39;
+  --rgb-deep-purple: 26 11 46;
+  --rgb-neon-cyan: 0 240 255;
+  --rgb-gb-green: 155 188 15;
+  --rgb-neon-magenta: 255 46 136;
+  --rgb-crt-amber: 255 176 0;
+  --rgb-coral-alert: 255 46 136;
+  --rgb-phosphor: 232 244 255;
+  --rgb-phosphor-body: 232 244 255;
+  --rgb-phosphor-muted: 174 194 224;
+
+  /* Surfaces & Backgrounds — Retro JRPG */
+  --c-shadow-ink: #05060f;
+  --c-midnight: #0a0e27;
+  --c-deep-purple: #1a0b2e;
+
+  --c-bg-base: #05060f;
+  --c-bg-elevated: rgba(10, 14, 39, 0.84);
+  --c-bg-elevated-hover: rgba(26, 11, 46, 0.92);
+  --c-bg-nav: rgba(10, 14, 39, 0.78);
+  --c-bg-toc: #05060f;
+  --c-bg-slide: #05060f;
+  --c-bg-table: rgba(10, 14, 39, 0.85);
+  --c-bg-table-head: rgba(0, 240, 255, 0.12);
+  --c-bg-hud: rgba(5, 6, 15, 0.88);
+
+  /* Retro Neon Palette */
+  --c-neon-cyan: #00f0ff;
+  --c-gb-green: #9bbc0f;
+  --c-neon-magenta: #ff2e88;
+  --c-crt-amber: #ffb000;
+  --c-coral-alert: #ff2e88;
+
+  /* Foregrounds & Links */
+  --c-phosphor: #e8f4ff;
+  --c-fg-strong: #e8f4ff;
+  --c-fg-body: #e8f4ff;
+  --c-fg-muted: #aec2e0;
+  --c-ink-on-bright: #05060f;
+
+  --c-link: #00f0ff;
+  --c-link-hover: #ff2e88;
+  --c-code-fg: #00f0ff;
+  --c-code-bg: rgba(0, 240, 255, 0.10);
+  --c-code-border: rgba(0, 240, 255, 0.35);
+
+  /* Borders & Geometry */
+  --c-border: rgba(0, 240, 255, 0.25);
+  --c-border-strong: rgba(0, 240, 255, 0.50);
+  --radius-card: 0px;
+  --radius-pill: 0px;
+  --radius-ui: 0px;
+
+  /* Shadows */
+  --shadow-pixel: 4px 4px 0 0 #05060f;
+  --shadow-pixel-sm: 2px 2px 0 0 #05060f;
+  --shadow-hud: 4px 4px 0 0 #05060f;
+  --shadow-neon-magenta: 0 0 8px #ff2e88, 0 0 24px rgba(255, 46, 136, 0.35);
+  --shadow-neon-cyan: 0 0 8px #00f0ff, 0 0 24px rgba(0, 240, 255, 0.35);
+  --shadow-neon-amber: 0 0 8px #ffb000, 0 0 24px rgba(255, 176, 0, 0.35);
+  --shadow-neon-green: 0 0 8px #9bbc0f, 0 0 24px rgba(155, 188, 15, 0.35);
+
+  /* Typography */
+  --font-prose: 'IBM Plex Sans JP', 'Noto Sans JP', sans-serif;
+  --font-display: 'Press Start 2P', 'DotGothic16', monospace;
+  --font-mono-hud: 'VT323', 'IBM Plex Mono', monospace;
 }

@@ -244,32 +244,32 @@ Every Dependabot alert has an **"Assign to agent"** button — hand it to Copilo
 
 <div class="dependency-feature">
 <style>
-.prose-akq .dependency-feature{font:clamp(16px,1.3vw,20px)/1.35 var(--font-prose),sans-serif;color:#ecf7fb}
+.prose-akq .dependency-feature{font:clamp(16px,1.3vw,20px)/1.35 var(--font-prose),sans-serif;color:var(--c-phosphor)}
 .prose-akq .dependency-feature p{margin:0}
-.prose-akq .dependency-feature .dependency-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:0 0 8px;color:#bad0de;font-size:14px}
-.prose-akq .dependency-preview{border:1px solid #fcd34d;color:#fcd34d;padding:2px 6px;white-space:nowrap}
+.prose-akq .dependency-feature .dependency-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:0 0 8px;color:var(--c-fg-body);font-size:14px}
+.prose-akq .dependency-preview{border:1px solid var(--c-crt-amber);color:var(--c-crt-amber);padding:2px 6px;white-space:nowrap}
 .prose-akq .dependency-feature .dependency-lead{margin:0 0 8px;font-size:1.1em}
-.prose-akq .dependency-flow{display:grid;grid-template-columns:1fr auto 1.2fr auto 1fr;align-items:center;gap:10px;margin:0 0 8px;border:1px solid #5eead455;background:#0b1420cc;padding:8px 12px;text-align:center}
-.prose-akq .dependency-flow b{color:#5eead4}
+.prose-akq .dependency-flow{display:grid;grid-template-columns:1fr auto 1.2fr auto 1fr;align-items:center;gap:10px;margin:0 0 8px;border:1px solid rgb(var(--rgb-neon-cyan) / 0.33);background:rgb(var(--rgb-deep-purple) / 0.8);padding:8px 12px;text-align:center}
+.prose-akq .dependency-flow b{color:var(--c-neon-cyan)}
 .prose-akq .dependency-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.prose-akq .dependency-panel{min-width:0;border-top:2px solid #5eead4;background:#0b1420cc;padding:12px}
-.prose-akq .dependency-feature .dependency-panel h3{margin:0 0 8px;font-size:1em;line-height:1.3;color:#5eead4}
+.prose-akq .dependency-panel{min-width:0;border-top:2px solid var(--c-neon-cyan);background:rgb(var(--rgb-deep-purple) / 0.8);padding:12px}
+.prose-akq .dependency-feature .dependency-panel h3{margin:0 0 8px;font-size:1em;line-height:1.3;color:var(--c-neon-cyan)}
 .prose-akq .dependency-facts{margin:0}
-.prose-akq .dependency-facts > div{display:grid;grid-template-columns:1fr 1.15fr;gap:10px;padding:6px 0;border-top:1px solid #ecf7fb22}
+.prose-akq .dependency-facts > div{display:grid;grid-template-columns:1fr 1.15fr;gap:10px;padding:6px 0;border-top:1px solid rgb(var(--rgb-phosphor) / 0.13)}
 .prose-akq .dependency-policy > div{grid-template-columns:.7fr 1.3fr}
 .prose-akq .dependency-facts dt{font-weight:600}
-.prose-akq .dependency-facts dd{margin:0;color:#bad0de}
-.prose-akq .dependency-feature .dependency-note{margin-top:8px;font-size:14px;color:#bad0de}
+.prose-akq .dependency-facts dd{margin:0;color:var(--c-fg-body)}
+.prose-akq .dependency-feature .dependency-note{margin-top:8px;font-size:14px;color:var(--c-fg-body)}
 .prose-akq .dependency-feature .dependency-setup{list-style:none;margin:0;padding:0}
-.prose-akq .dependency-setup li{margin:0;padding:6px 0;border-top:1px solid #ecf7fb22}
-.prose-akq .dependency-setup b{color:#ecf7fb}
-.prose-akq .dependency-setup span{color:#bad0de}
+.prose-akq .dependency-setup li{margin:0;padding:6px 0;border-top:1px solid rgb(var(--rgb-phosphor) / 0.13)}
+.prose-akq .dependency-setup b{color:var(--c-phosphor)}
+.prose-akq .dependency-setup span{color:var(--c-fg-body)}
 .prose-akq > h2:has(.dependency-feature-title){display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
 .prose-akq .dependency-feature-links{display:inline-flex;flex-wrap:wrap;gap:6px;align-items:center}
 .prose-akq h2 .dependency-feature-links .h2-doc{margin:0;font-size:14px}
-.prose-akq h2 .dependency-announcement{display:inline-flex;align-items:center;padding:.2em .5em;border:1px solid #5eead466;color:#5eead4;font-size:14px;font-weight:400;line-height:1.4;letter-spacing:0;text-decoration:none;white-space:nowrap}
-.prose-akq h2 .dependency-announcement:hover,.prose-akq h2 .dependency-announcement:focus-visible{border-color:#5eead4;text-decoration:underline}
-.prose-akq h2 .dependency-announcement:focus-visible{outline:2px solid #5eead4;outline-offset:2px}
+.prose-akq h2 .dependency-announcement{display:inline-flex;align-items:center;padding:.2em .5em;border:1px solid rgb(var(--rgb-neon-cyan) / 0.4);color:var(--c-neon-cyan);font-size:14px;font-weight:400;line-height:1.4;letter-spacing:0;text-decoration:none;white-space:nowrap}
+.prose-akq h2 .dependency-announcement:hover,.prose-akq h2 .dependency-announcement:focus-visible{border-color:var(--c-neon-cyan);text-decoration:underline}
+.prose-akq h2 .dependency-announcement:focus-visible{outline:2px solid var(--c-neon-cyan);outline-offset:2px}
 body.present-mode .playbook-detail:has(.dependency-feature.akq-slide-active){padding-top:88px;padding-bottom:72px}
 body.present-mode .prose-akq > h2:has(.dependency-feature-title){margin:0 0 12px;font-size:clamp(28px,2.2vw,36px);line-height:1.2;letter-spacing:0}
 body.present-mode .prose-akq > h2:has(.dependency-feature-title)::before{top:.35em}
@@ -335,15 +335,15 @@ body.present-mode .prose-akq > h2:has(.dependency-feature-title)::before{top:.35
 
 <div class="dependency-feature dependency-architecture">
 <style>
-.prose-akq .dependency-route-block{border:1px solid #ecf7fb22;background:#0b1420cc;padding:14px}
+.prose-akq .dependency-route-block{border:1px solid rgb(var(--rgb-phosphor) / 0.13);background:rgb(var(--rgb-deep-purple) / 0.8);padding:14px}
 .prose-akq .dependency-route-block + .dependency-route-block{margin-top:12px}
 .prose-akq .dependency-route-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
-.prose-akq .dependency-feature .dependency-route-heading h3{margin:0;font-size:1em;line-height:1.3;color:#ecf7fb}
-.prose-akq .dependency-route-status{color:#fcd34d;border:1px solid #fcd34d66;padding:2px 6px;font-size:14px;white-space:nowrap}
+.prose-akq .dependency-feature .dependency-route-heading h3{margin:0;font-size:1em;line-height:1.3;color:var(--c-phosphor)}
+.prose-akq .dependency-route-status{color:var(--c-crt-amber);border:1px solid rgb(var(--rgb-crt-amber) / 0.4);padding:2px 6px;font-size:14px;white-space:nowrap}
 .prose-akq .dependency-route-flow{display:grid;grid-template-columns:minmax(0,1fr) 20px minmax(0,1fr) 20px minmax(0,1.3fr) 20px minmax(0,.9fr);gap:8px;align-items:center}
-.prose-akq .dependency-route-node{display:flex;align-items:center;justify-content:center;min-width:0;min-height:76px;padding:12px 8px;border:1px solid #bad0de66;text-align:center;overflow-wrap:anywhere}
-.prose-akq .dependency-route-node.is-firewall{border:2px solid #5eead4;background:#5eead412;color:#5eead4}
-.prose-akq .dependency-route-arrow{display:flex;align-items:center;color:#5eead4;font-size:20px;line-height:1}
+.prose-akq .dependency-route-node{display:flex;align-items:center;justify-content:center;min-width:0;min-height:76px;padding:12px 8px;border:1px solid color-mix(in srgb, var(--c-fg-body) 40%, transparent);text-align:center;overflow-wrap:anywhere}
+.prose-akq .dependency-route-node.is-firewall{border:2px solid var(--c-neon-cyan);background:rgb(var(--rgb-neon-cyan) / 0.07);color:var(--c-neon-cyan)}
+.prose-akq .dependency-route-arrow{display:flex;align-items:center;color:var(--c-neon-cyan);font-size:20px;line-height:1}
 .prose-akq .dependency-route-arrow::before{content:"";flex:1;height:2px;background:currentColor}
 .prose-akq .dependency-route-arrow::after{content:"→"}
 .prose-akq .dependency-route-arrow-long{grid-column:2 / 5}

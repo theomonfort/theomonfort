@@ -51,11 +51,11 @@ const items: RoomItem[] = [
   },
 ];
 
-const TONE_HEX: Record<AccentColor, string> = {
-  cyan: '#5eead4',
-  green: '#86efac',
-  magenta: '#93a8ff',
-  amber: '#fcd34d',
+const TONE_CSS: Record<AccentColor, string> = {
+  cyan: 'var(--c-neon-cyan)',
+  green: 'var(--c-gb-green)',
+  magenta: 'var(--c-neon-magenta)',
+  amber: 'var(--c-crt-amber)',
 };
 ---
 
@@ -81,7 +81,7 @@ const TONE_HEX: Record<AccentColor, string> = {
   <div class="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 z-10">
     {items.map((item) => {
       const c = accentClasses[item.color];
-      const tone = TONE_HEX[item.color];
+      const tone = TONE_CSS[item.color];
       return (
         <a
           href={item.href}
@@ -94,14 +94,14 @@ const TONE_HEX: Record<AccentColor, string> = {
           <div class="flex items-center gap-3 mb-2.5">
             <span class="text-3xl md:text-4xl group-hover:scale-105 transition-transform">{item.icon}</span>
             <div>
-              <div class={`font-mono text-[11px] font-semibold tracking-[0.1em] ${c.text}`}>{item.en}</div>
-              <div class="font-body font-bold text-base text-phosphor group-hover:text-neon-cyan transition-colors">{item.desc}</div>
+              <div class={`furniture-en font-mono text-[11px] font-semibold tracking-[0.1em] ${c.text}`}>{item.en}</div>
+              <div class="furniture-desc font-body font-bold text-base text-phosphor group-hover:text-neon-cyan transition-colors">{item.desc}</div>
             </div>
           </div>
-          <div class="font-mono text-[11px] text-phosphor-muted group-hover:text-phosphor-body transition-colors">
+          <div class="furniture-label font-mono text-[11px] text-phosphor-muted group-hover:text-phosphor-body transition-colors">
             ▶ {item.label}
           </div>
-          <span class="absolute top-2 right-2.5 font-mono text-[10px] font-semibold tracking-[0.08em] text-phosphor-muted/70 group-hover:text-neon-cyan transition-colors">
+          <span class="furniture-enter absolute top-2 right-2.5 font-mono text-[10px] font-semibold tracking-[0.08em] text-phosphor-muted/70 group-hover:text-neon-cyan transition-colors">
             ENTER
           </span>
         </a>
@@ -138,8 +138,8 @@ const TONE_HEX: Record<AccentColor, string> = {
 <style>
   .iso-floor {
     background-image:
-      linear-gradient(to right, rgba(94, 234, 212, 0.10) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(94, 234, 212, 0.10) 1px, transparent 1px);
+      linear-gradient(to right, rgb(var(--rgb-neon-cyan) / 0.10) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--rgb-neon-cyan) / 0.10) 1px, transparent 1px);
     background-size: 28px 28px;
     transform: perspective(700px) rotateX(60deg);
     transform-origin: top;
@@ -153,12 +153,12 @@ const TONE_HEX: Record<AccentColor, string> = {
     position: relative;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, #04080e 0%, #0b1420 100%);
-    border: 1px solid rgba(94, 234, 212, 0.32);
-    border-radius: 3px;
+    background: linear-gradient(to bottom, var(--c-shadow-ink) 0%, var(--c-deep-purple) 100%);
+    border: 1px solid var(--c-border-strong);
+    border-radius: var(--radius-card);
     box-shadow:
-      inset 0 0 0 1px rgba(147, 168, 255, 0.14),
-      0 8px 20px rgba(4, 8, 14, 0.65);
+      inset 0 0 0 1px rgb(var(--rgb-neon-magenta) / 0.14),
+      0 8px 20px rgb(var(--rgb-shadow-ink) / 0.65);
     overflow: hidden;
   }
   .window-frame::after {
@@ -166,8 +166,8 @@ const TONE_HEX: Record<AccentColor, string> = {
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(to right, transparent 49.2%, rgba(94, 234, 212, 0.2) 49.2%, rgba(94, 234, 212, 0.2) 50.8%, transparent 50.8%),
-      linear-gradient(to bottom, transparent 49.2%, rgba(94, 234, 212, 0.2) 49.2%, rgba(94, 234, 212, 0.2) 50.8%, transparent 50.8%);
+      linear-gradient(to right, transparent 49.2%, rgb(var(--rgb-neon-cyan) / 0.2) 49.2%, rgb(var(--rgb-neon-cyan) / 0.2) 50.8%, transparent 50.8%),
+      linear-gradient(to bottom, transparent 49.2%, rgb(var(--rgb-neon-cyan) / 0.2) 49.2%, rgb(var(--rgb-neon-cyan) / 0.2) 50.8%, transparent 50.8%);
     pointer-events: none;
   }
   .skyline { position: absolute; inset: 0; }
@@ -177,27 +177,27 @@ const TONE_HEX: Record<AccentColor, string> = {
     right: 12px;
     width: 14px;
     height: 14px;
-    background: #fcd34d;
-    box-shadow: 0 0 12px rgba(252, 211, 77, 0.7), 0 0 4px #ecf7fb;
+    background: var(--c-crt-amber);
+    box-shadow: 0 0 12px rgb(var(--rgb-crt-amber) / 0.7), 0 0 4px var(--c-phosphor);
     border-radius: 999px;
   }
   .building {
     position: absolute;
     bottom: 0;
-    background: #93a8ff;
-    box-shadow: inset 0 0 0 1px #04080e;
+    background: var(--c-neon-magenta);
+    box-shadow: inset 0 0 0 1px var(--c-shadow-ink);
   }
-  .b1 { left: 0;   width: 18px; height: 50%; background: #5eead4; opacity: 0.7; }
-  .b2 { left: 22px; width: 14px; height: 70%; background: #93a8ff; opacity: 0.8; }
-  .b3 { left: 40px; width: 22px; height: 45%; background: #fcd34d; opacity: 0.6; }
-  .b4 { left: 66px; width: 16px; height: 80%; background: #5eead4; opacity: 0.7; }
-  .b5 { left: 86px; width: 20px; height: 55%; background: #86efac; opacity: 0.65; }
+  .b1 { left: 0;   width: 18px; height: 50%; background: var(--c-neon-cyan); opacity: 0.7; }
+  .b2 { left: 22px; width: 14px; height: 70%; background: var(--c-neon-magenta); opacity: 0.8; }
+  .b3 { left: 40px; width: 22px; height: 45%; background: var(--c-crt-amber); opacity: 0.6; }
+  .b4 { left: 66px; width: 16px; height: 80%; background: var(--c-neon-cyan); opacity: 0.7; }
+  .b5 { left: 86px; width: 20px; height: 55%; background: var(--c-gb-green); opacity: 0.65; }
 
   .furniture {
-    --item-tone: #5eead4;
-    border-radius: 3px;
-    border: 1px solid color-mix(in srgb, var(--item-tone) 24%, rgba(94, 234, 212, 0.16));
-    background-color: rgba(11, 20, 32, 0.86);
+    --item-tone: var(--c-neon-cyan);
+    border-radius: var(--radius-card);
+    border: 1px solid color-mix(in srgb, var(--item-tone) 24%, var(--c-border));
+    background-color: var(--c-bg-elevated);
     background-image: linear-gradient(
       90deg,
       var(--item-tone) 0%,
@@ -208,11 +208,74 @@ const TONE_HEX: Record<AccentColor, string> = {
     background-position: top left;
     background-repeat: no-repeat;
     backdrop-filter: blur(10px);
-    box-shadow: 0 8px 24px rgba(4, 8, 14, 0.35);
+    box-shadow: 0 8px 24px rgb(var(--rgb-shadow-ink) / 0.35);
   }
   .furniture:hover {
-    background-color: rgba(16, 29, 45, 0.95);
-    border-color: color-mix(in srgb, var(--item-tone) 55%, rgba(94, 234, 212, 0.16));
-    box-shadow: 0 12px 28px rgba(4, 8, 14, 0.5), 0 0 18px color-mix(in srgb, var(--item-tone) 16%, transparent);
+    background-color: var(--c-bg-elevated-hover);
+    border-color: color-mix(in srgb, var(--item-tone) 55%, var(--c-border));
+    box-shadow: 0 12px 28px rgb(var(--rgb-shadow-ink) / 0.5), 0 0 18px color-mix(in srgb, var(--item-tone) 16%, transparent);
+  }
+
+  /* Retro JRPG overrides */
+  :global(html[data-theme='retro']) .iso-floor {
+    background-image:
+      linear-gradient(to right, rgb(var(--rgb-gb-green) / 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--rgb-gb-green) / 0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  :global(html[data-theme='retro']) .window-frame {
+    border: 4px solid color-mix(in srgb, var(--c-deep-purple) 78%, var(--c-neon-magenta));
+    border-radius: 0;
+    box-shadow:
+      inset 0 0 0 2px color-mix(in srgb, var(--c-deep-purple) 62%, var(--c-phosphor)),
+      4px 4px 0 var(--c-shadow-ink);
+  }
+  :global(html[data-theme='retro']) .window-frame::after {
+    background:
+      linear-gradient(to right, transparent 49%, color-mix(in srgb, var(--c-deep-purple) 78%, var(--c-neon-magenta)) 49%, color-mix(in srgb, var(--c-deep-purple) 78%, var(--c-neon-magenta)) 51%, transparent 51%),
+      linear-gradient(to bottom, transparent 49%, color-mix(in srgb, var(--c-deep-purple) 78%, var(--c-neon-magenta)) 49%, color-mix(in srgb, var(--c-deep-purple) 78%, var(--c-neon-magenta)) 51%, transparent 51%);
+  }
+  :global(html[data-theme='retro']) .moon {
+    border-radius: 0;
+    box-shadow: 0 0 12px var(--c-crt-amber), 0 0 4px var(--c-phosphor);
+  }
+  :global(html[data-theme='retro']) .b5 {
+    background: var(--c-neon-magenta);
+    opacity: 0.6;
+  }
+  :global(html[data-theme='retro']) .furniture {
+    image-rendering: pixelated;
+    border-radius: 0;
+    border: 2px solid var(--item-tone);
+    background-image: none;
+    background-color: rgb(var(--rgb-shadow-ink) / 0.85);
+    backdrop-filter: none;
+    box-shadow: 4px 4px 0 var(--c-shadow-ink), 0 0 14px color-mix(in srgb, var(--item-tone) 32%, transparent);
+  }
+  :global(html[data-theme='retro']) .furniture::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 2px solid transparent;
+    pointer-events: none;
+    transition: border-color 0.2s ease, opacity 0.2s ease;
+  }
+  :global(html[data-theme='retro']) .furniture:hover::before {
+    border-color: var(--item-tone);
+    opacity: 0.35;
+  }
+  :global(html[data-theme='retro']) .furniture-en {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+  }
+  :global(html[data-theme='retro']) .furniture-desc {
+    font-family: 'DotGothic16', sans-serif;
+  }
+  :global(html[data-theme='retro']) .furniture-enter {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+  }
+  :global(html[data-theme='retro']) .furniture:hover .furniture-enter {
+    color: var(--c-neon-magenta);
   }
 </style>

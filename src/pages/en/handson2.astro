@@ -5,7 +5,7 @@ import Aside from '../../components/handson/Aside.astro';
 const locale = 'en';
 const repo = 'theomonfort-org/Github-introduction-workshop';
 const repoUrl = `https://github.com/${repo}`;
-const accent = '#86efac';
+const accent = 'var(--c-gb-green)';
 const shellStyle = `--entry-accent:${accent};--aside-accent:${accent}`;
 ---
 
@@ -15,6 +15,13 @@ const shellStyle = `--entry-accent:${accent};--aside-accent:${accent}`;
     .handson-shell--solo { max-width: 900px; }
     @media (min-width: 1024px) {
       .handson-shell--solo { padding-left: 1rem; }
+    }
+    :global(html[data-theme='retro']) .handson-step-chip {
+      font-family: 'Press Start 2P', monospace;
+    }
+    :global(html[data-theme='retro']) .handson-step-header h1,
+    :global(html[data-theme='retro']) .handson-step-summary {
+      font-family: 'DotGothic16', sans-serif;
     }
   </style>
   <section class="handson-shell handson-shell--solo" style={shellStyle}>

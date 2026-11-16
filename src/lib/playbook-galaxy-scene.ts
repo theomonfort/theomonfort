@@ -4,20 +4,38 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { createGalaxyModels } from './playbook-galaxy-models';
+import { createGalaxyModels, type GalaxyTheme } from './playbook-galaxy-models';
 import type { GalaxyCategory } from './playbook-galaxy';
 import type { CategoryId } from './playbook-categories';
 import type { GalaxyAudioPose } from './playbook-galaxy-audio';
+import { SITE_THEME_EVENT } from './theme';
+
+type ThemeableGalaxyCategory = GalaxyCategory & {
+  accentColor?: string;
+  accentHexPhosphor?: string;
+  accentHexRetro?: string;
+};
 
 interface SceneOptions {
   host: HTMLElement;
-  categories: GalaxyCategory[];
+  categories: ThemeableGalaxyCategory[];
   onCategory: (id: CategoryId) => void;
   onEntry: (category: CategoryId, slug: string) => void;
   onError: (error: unknown) => void;
   onOverview: () => void;
   onCameraPose: (pose: GalaxyAudioPose) => void;
   sunLabel: string;
+}
+
+function readActiveTheme(): GalaxyTheme {
+  return document.documentElement.dataset.theme === 'retro' ? 'retro' : 'phosphor';
+}
+
+function resolveCategoryHex(category: ThemeableGalaxyCategory, theme: GalaxyTheme): string {
+  const candidate = theme === 'retro'
+    ? (category.accentHexRetro ?? category.accentColor ?? category.color)
+    : (category.accentHexPhosphor ?? category.accentColor ?? category.color);
+  return candidate.startsWith('#') ? candidate : (theme === 'retro' ? '#00f0ff' : '#5eead4');
 }
 
 const solarRadius = 23;
@@ -38,11 +56,15 @@ const positions: Record<CategoryId, [number, number, number]> = {
 const route = ['plan', 'develop', 'review', 'secure', 'operate'] as const;
 
 interface Destination {
-  category: GalaxyCategory;
+  category: ThemeableGalaxyCategory;
   group: THREE.Group;
   model: THREE.Group;
   radius: number;
   height: number;
+  light: THREE.PointLight;
+  planetButton: HTMLButtonElement;
+  orbitRingMaterials: THREE.LineBasicMaterial[];
+  satelliteButtons: HTMLButtonElement[];
 }
 
 interface Mission {
@@ -53,6 +75,8 @@ interface Mission {
 }
 
 export function createGalaxyScene({ host, categories, onCategory, onEntry, onError, onOverview, onCameraPose, sunLabel }: SceneOptions) {
+  let currentTheme: GalaxyTheme = readActiveTheme();
+  const isRetroInit = currentTheme === 'retro';
   const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -62,9 +86,10 @@ export function createGalaxyScene({ host, categories, onCategory, onEntry, onErr
   renderer.domElement.setAttribute('aria-hidden', 'true');
   host.prepend(renderer.domElement);
 
+  const initBg = isRetroInit ? '#05060f' : '#060b12';
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color('#060b12');
-  scene.fog = new THREE.FogExp2('#060b12', 0.0045);
+  scene.background = new THREE.Color(initBg);
+  scene.fog = new THREE.FogExp2(initBg, 0.0045);
   const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 400);
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = false;
@@ -84,7 +109,7 @@ export function createGalaxyScene({ host, categories, onCategory, onEntry, onErr
   composer.addPass(bloom);
   composer.addPass(outputPass);
 
-  const models = createGalaxyModels();
+  const models = createGalaxyModels(currentTheme);
   const courier = models.courier();
   const courierExhaust = courier.getObjectByName('courier-exhaust')!;
   courier.visible = false;
@@ -130,15 +155,16 @@ export function createGalaxyScene({ host, categories, onCategory, onEntry, onErr
   let width = 1;
   let height = 1;
 
-  scene.add(new THREE.HemisphereLight('#bad0de', '#0b1420', 1.6));
-  const keyLight = new THREE.DirectionalLight('#ecf7fb', 2.2);
+  const hemiLight = new THREE.HemisphereLight(isRetroInit ? '#b3c8ff' : '#bad0de', isRetroInit ? '#292139' : '#0b1420', 1.6);
+  scene.add(hemiLight);
+  const keyLight = new THREE.DirectionalLight(isRetroInit ? '#fff0d9' : '#ecf7fb', 2.2);
   keyLight.position.set(-22, 38, 24);
   keyLight.castShadow = true;
   keyLight.shadow.mapSize.set(2048, 2048);
   Object.assign(keyLight.shadow.camera, { left: -52, right: 52, top: 52, bottom: -52, near: 1, far: 120 });
   keyLight.shadow.bias = -0.001;
   scene.add(keyLight);
-  const rim = new THREE.DirectionalLight('#93a8ff', 1.5);
+  const rim = new THREE.DirectionalLight(isRetroInit ? '#6984ff' : '#93a8ff', 1.5);
   rim.position.set(25, 8, -35);
   scene.add(rim);
 
@@ -147,7 +173,11 @@ export function createGalaxyScene({ host, categories, onCategory, onEntry, onErr
   solarSun.position.y = 1;
   const sunGeometry = new THREE.IcosahedronGeometry(3.4, 3);
   const sunMaterial = new THREE.ShaderMaterial({
-    uniforms: { time: { value: 0 } },
+    uniforms: {
+      time: { value: 0 },
+      colorA: { value: new THREE.Vector3(...(isRetroInit ? [1.4, 0.24, 0.012] : [1.2, 0.52, 0.08])) },
+      colorB: { value: new THREE.Vector3(...(isRetroInit ? [2.4, 1.05, 0.12] : [2.15, 1.65, 0.45])) },
+    },
     vertexShader: `
       varying vec3 surface;
       varying vec3 viewNormal;
@@ -162,6 +192,8 @@ export function createGalaxyScene({ host, categories, onCategory, onEntry, onErr
     `,
     fragmentShader: `
       uniform float time;
+      uniform vec3 colorA;
+      uniform vec3 colorB;
       varying vec3 surface;
       varying vec3 viewNormal;
       varying vec3 viewDirection;
@@ -169,19 +201,19 @@ export function createGalaxyScene({ host, categories, onCategory, onEntry, onErr
         float plasma = sin(surface.y * 5.0 + sin(surface.x * 3.0 + time * 0.12))
           * sin(surface.z * 4.0 - time * 0.08) * 0.5 + 0.5;
         float rim = pow(max(0.0, dot(normalize(viewNormal), normalize(viewDirection))), 0.45);
-        vec3 color = mix(vec3(1.2, 0.52, 0.08), vec3(2.15, 1.65, 0.45), plasma);
+        vec3 color = mix(colorA, colorB, plasma);
         gl_FragColor = vec4(color * (0.5 + rim * 0.65), 1.0);
       }
     `,
   });
   const solarCore = new THREE.Mesh(sunGeometry, sunMaterial);
   solarSun.add(solarCore);
-  const sunLight = new THREE.PointLight('#fcd34d', 750, 120, 2);
+  const sunLight = new THREE.PointLight(isRetroInit ? '#ffc476' : '#fcd34d', 750, 120, 2);
   solarSun.add(sunLight);
   geometries.push(sunGeometry);
   materials.push(sunMaterial);
   const coronaMaterial = new THREE.MeshBasicMaterial({
-    color: '#fcd34d', transparent: true, opacity: 0.5,
+    color: isRetroInit ? '#ffb000' : '#fcd34d', transparent: true, opacity: 0.5,
     blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false,
   });
   materials.push(coronaMaterial);
@@ -200,7 +232,7 @@ export function createGalaxyScene({ host, categories, onCategory, onEntry, onErr
   const sunButton = document.createElement('button');
   sunButton.type = 'button';
   sunButton.className = 'galaxy-planet-label galaxy-sun-label';
-  sunButton.style.setProperty('--sector-color', '#fcd34d');
+  sunButton.style.setProperty('--sector-color', isRetroInit ? '#ffb000' : '#fcd34d');
   sunButton.textContent = sunLabel;
   sunButton.addEventListener('click', onOverview);
   labels.append(sunButton);
@@ -208,9 +240,13 @@ export function createGalaxyScene({ host, categories, onCategory, onEntry, onErr
 
   const fireflyGeometry = new THREE.IcosahedronGeometry(1, 1);
   geometries.push(fireflyGeometry);
-  const fireflyColors = ['#fcd34d', '#5eead4', '#93a8ff', '#86efac'];
-  const fireflyMaterials = fireflyColors.map((color) => {
-    const material = new THREE.MeshBasicMaterial({ color: new THREE.Color(color).multiplyScalar(2.6), toneMapped: false });
+  const phosphorFireflies = ['#fcd34d', '#5eead4', '#93a8ff', '#86efac'] as const;
+  const retroFireflies = ['#ffe0a3', '#91efff', '#ffc2dc', '#d2e7ff'] as const;
+  const fireflyMaterials = (isRetroInit ? retroFireflies : phosphorFireflies).map((color) => {
+    const material = new THREE.MeshBasicMaterial({
+      color: new THREE.Color(color).multiplyScalar(isRetroInit ? 3 : 2.6),
+      toneMapped: false,
+    });
     materials.push(material);
     return material;
   });
@@ -226,15 +262,33 @@ export function createGalaxyScene({ host, categories, onCategory, onEntry, onErr
     return { mesh, base, phase: angle };
   });
 
-  const grid = new THREE.GridHelper(180, 90, '#1e4252', '#0f2433');
+  const gridDivisions = 90;
+  const grid = new THREE.GridHelper(180, gridDivisions, isRetroInit ? '#335382' : '#1e4252', isRetroInit ? '#20314f' : '#0f2433');
   grid.position.y = -6;
-  grid.material.transparent = true;
-  grid.material.opacity = 0.2;
+  const gridMaterial = grid.material as THREE.LineBasicMaterial;
+  gridMaterial.transparent = true;
+  gridMaterial.opacity = isRetroInit ? 0.16 : 0.2;
   geometries.push(grid.geometry);
-  materials.push(grid.material);
+  materials.push(gridMaterial);
   scene.add(grid);
+
+  function applyGridColors(retro: boolean) {
+    const attr = grid.geometry.getAttribute('color') as THREE.BufferAttribute | undefined;
+    if (!attr) return;
+    const centerColor = new THREE.Color(retro ? '#335382' : '#1e4252');
+    const lineColor = new THREE.Color(retro ? '#20314f' : '#0f2433');
+    const centerLine = gridDivisions / 2;
+    for (let v = 0; v < attr.count; v++) {
+      const c = Math.floor(v / 4) === centerLine ? centerColor : lineColor;
+      attr.setXYZ(v, c.r, c.g, c.b);
+    }
+    attr.needsUpdate = true;
+    gridMaterial.opacity = retro ? 0.16 : 0.2;
+  }
+
   const starPositions: number[] = [];
   const starColors: number[] = [];
+  const starSeeds: Array<[number, number]> = [];
   for (let index = 0; index < 1400; index++) {
     const random = (seed: number) => {
       const value = Math.sin(index * 127.1 + seed * 311.7) * 43758.5453;
@@ -245,16 +299,33 @@ export function createGalaxyScene({ host, categories, onCategory, onEntry, onErr
     const radius = 110 + random(3) * 55;
     const planar = Math.sqrt(1 - y * y);
     starPositions.push(Math.cos(angle) * planar * radius, y * radius, Math.sin(angle) * planar * radius);
-    const color = new THREE.Color().setHSL(0.5 + random(4) * 0.16, 0.32, 0.68 + random(5) * 0.28);
+    const r4 = random(4);
+    const r5 = random(5);
+    starSeeds.push([r4, r5]);
+    const color = isRetroInit
+      ? new THREE.Color().setHSL(0.55 + r4 * 0.15, 0.3, 0.65 + r5 * 0.3)
+      : new THREE.Color().setHSL(0.5 + r4 * 0.16, 0.32, 0.68 + r5 * 0.28);
     starColors.push(color.r, color.g, color.b);
   }
   const stars = new THREE.BufferGeometry();
   stars.setAttribute('position', new THREE.Float32BufferAttribute(starPositions, 3));
-  stars.setAttribute('color', new THREE.Float32BufferAttribute(starColors, 3));
+  const starColorAttribute = new THREE.Float32BufferAttribute(starColors, 3);
+  stars.setAttribute('color', starColorAttribute);
   const starMaterial = new THREE.PointsMaterial({ size: 1.5, sizeAttenuation: false, vertexColors: true, fog: false });
   geometries.push(stars);
   materials.push(starMaterial);
   scene.add(new THREE.Points(stars, starMaterial));
+
+  function applyStarColors(retro: boolean) {
+    const temp = new THREE.Color();
+    for (let i = 0; i < starSeeds.length; i++) {
+      const [r4, r5] = starSeeds[i];
+      if (retro) temp.setHSL(0.55 + r4 * 0.15, 0.3, 0.65 + r5 * 0.3);
+      else temp.setHSL(0.5 + r4 * 0.16, 0.32, 0.68 + r5 * 0.28);
+      starColorAttribute.setXYZ(i, temp.r, temp.g, temp.b);
+    }
+    starColorAttribute.needsUpdate = true;
+  }
 
   function path(points: THREE.Vector3[], color: string, opacity: number, parent: THREE.Group | THREE.Scene, loop = false) {
     const geometry = new THREE.BufferGeometry().setFromPoints(points);
@@ -263,17 +334,26 @@ export function createGalaxyScene({ host, categories, onCategory, onEntry, onErr
     materials.push(material);
     const object = loop ? new THREE.LineLoop(geometry, material) : new THREE.Line(geometry, material);
     parent.add(object);
-    return object;
+    return { object, material };
   }
 
+  const solarRingMaterials: Array<{ radius: number; material: THREE.LineBasicMaterial }> = [];
   for (const radius of [solarRadius, 15, 32]) {
-    path(Array.from({ length: 180 }, (_, index) => {
-      const angle = index / 180 * Math.PI * 2;
-      return new THREE.Vector3(Math.sin(angle) * radius, Math.cos(angle) * 1.2, Math.cos(angle) * radius);
-    }), radius === solarRadius ? '#fcd34d' : '#5eead4', radius === solarRadius ? 0.28 : 0.14, scene, true);
+    const isMain = radius === solarRadius;
+    const { material } = path(
+      Array.from({ length: 180 }, (_, index) => {
+        const angle = index / 180 * Math.PI * 2;
+        return new THREE.Vector3(Math.sin(angle) * radius, Math.cos(angle) * 1.2, Math.cos(angle) * radius);
+      }),
+      isMain ? (isRetroInit ? '#ffb000' : '#fcd34d') : (isRetroInit ? '#657eab' : '#5eead4'),
+      isMain ? 0.28 : (isRetroInit ? 0.12 : 0.14),
+      scene,
+      true,
+    );
+    solarRingMaterials.push({ radius, material });
   }
 
-  const selectionMaterial = new THREE.MeshBasicMaterial({ color: '#ecf7fb', transparent: true, opacity: 0.85 });
+  const selectionMaterial = new THREE.MeshBasicMaterial({ color: isRetroInit ? '#ffffff' : '#ecf7fb', transparent: true, opacity: 0.85 });
   const selectionGeometry = new THREE.TorusGeometry(1.35, 0.035, 6, 48);
   materials.push(selectionMaterial);
   geometries.push(selectionGeometry);
@@ -283,15 +363,17 @@ export function createGalaxyScene({ host, categories, onCategory, onEntry, onErr
   scene.add(selectionRing);
 
   for (const category of categories) {
+    const phosphorHex = resolveCategoryHex(category, 'phosphor');
+    const retroHex = resolveCategoryHex(category, 'retro');
+    const activeHex = isRetroInit ? retroHex : phosphorHex;
     const group = new THREE.Group();
     group.position.set(...positions[category.id]);
-    const model = models.destination(category.id, category.color);
+    const model = models.destination(category.id, phosphorHex, retroHex);
     const modelHeight = new THREE.Box3().setFromObject(model).max.y;
     group.add(model);
     scene.add(group);
     const radius = 6.5 + Math.max(0, Math.ceil(category.entries.length / 10) - 1) * 2;
-    destinations.push({ category, group, model, radius, height: modelHeight });
-    const light = new THREE.PointLight(category.color, 12, 13, 2);
+    const light = new THREE.PointLight(activeHex, 12, 13, 2);
     light.position.set(0, 3, 0);
     group.add(light);
     const anchor = new THREE.Object3D();
@@ -301,7 +383,7 @@ export function createGalaxyScene({ host, categories, onCategory, onEntry, onErr
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'galaxy-planet-label';
-    button.style.setProperty('--sector-color', category.color);
+    button.style.setProperty('--sector-color', activeHex);
     button.setAttribute('aria-label', `${category.label} (${category.entries.length})`);
     const title = document.createElement('strong');
     title.textContent = category.name;
@@ -312,44 +394,113 @@ export function createGalaxyScene({ host, categories, onCategory, onEntry, onErr
     labels.append(button);
     anchors.push({ button, object: anchor, category: category.id });
 
+    const orbitRingMaterials: THREE.LineBasicMaterial[] = [];
     for (let ring = 0; ring < Math.ceil(category.entries.length / 10); ring++) {
-      const radius = 6.5 + ring * 2;
-      path(Array.from({ length: 120 }, (_, index) => {
+      const ringRadius = 6.5 + ring * 2;
+      const { material: ringMat } = path(Array.from({ length: 120 }, (_, index) => {
         const angle = index / 120 * Math.PI * 2;
-        return new THREE.Vector3(Math.cos(angle) * radius, Math.sin(angle) * radius * 0.22, Math.sin(angle) * radius);
-      }), category.color, 0.32, group, true);
+        return new THREE.Vector3(Math.cos(angle) * ringRadius, Math.sin(angle) * ringRadius * 0.22, Math.sin(angle) * ringRadius);
+      }), activeHex, 0.32, group, true);
+      orbitRingMaterials.push(ringMat);
     }
 
+    const satelliteButtons: HTMLButtonElement[] = [];
     category.entries.forEach((entry, index) => {
       const ring = Math.floor(index / 10);
       const count = Math.min(10, category.entries.length - ring * 10);
       const angle = (index % 10) / count * Math.PI * 2;
-      const radius = 6.5 + ring * 2;
+      const satRadius = 6.5 + ring * 2;
       const satellite = new THREE.Group();
-      satellite.position.set(Math.cos(angle) * radius, Math.sin(angle) * radius * 0.22, Math.sin(angle) * radius);
-      const satelliteModel = models.satellite(category.color, index);
+      satellite.position.set(Math.cos(angle) * satRadius, Math.sin(angle) * satRadius * 0.22, Math.sin(angle) * satRadius);
+      const satelliteModel = models.satellite(phosphorHex, index, retroHex);
       satellite.add(satelliteModel);
       group.add(satellite);
       missions.push({ category: category.id, slug: entry.slug, group: satellite, model: satelliteModel });
-      const anchor = new THREE.Object3D();
-      anchor.position.y = -1.05;
-      satellite.add(anchor);
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'galaxy-satellite';
-      button.style.setProperty('--sector-color', category.color);
-      button.setAttribute('aria-label', entry.title);
-      button.title = entry.title;
+      const satAnchor = new THREE.Object3D();
+      satAnchor.position.y = -1.05;
+      satellite.add(satAnchor);
+      const satButton = document.createElement('button');
+      satButton.type = 'button';
+      satButton.className = 'galaxy-satellite';
+      satButton.style.setProperty('--sector-color', activeHex);
+      satButton.setAttribute('aria-label', entry.title);
+      satButton.title = entry.title;
       const number = document.createElement('span');
       number.textContent = String(index + 1).padStart(2, '0');
       const name = document.createElement('span');
       name.className = 'galaxy-satellite-title';
       name.textContent = entry.title;
-      button.append(number, name);
-      button.addEventListener('click', () => onEntry(category.id, entry.slug));
-      labels.append(button);
-      anchors.push({ button, object: anchor, category: category.id, slug: entry.slug });
+      satButton.append(number, name);
+      satButton.addEventListener('click', () => onEntry(category.id, entry.slug));
+      labels.append(satButton);
+      anchors.push({ button: satButton, object: satAnchor, category: category.id, slug: entry.slug });
+      satelliteButtons.push(satButton);
     });
+
+    destinations.push({
+      category,
+      group,
+      model,
+      radius,
+      height: modelHeight,
+      light,
+      planetButton: button,
+      orbitRingMaterials,
+      satelliteButtons,
+    });
+  }
+
+  function applySceneTheme(nextTheme: GalaxyTheme) {
+    if (disposed || nextTheme === currentTheme) return;
+    currentTheme = nextTheme;
+    const retro = nextTheme === 'retro';
+    models.setTheme(nextTheme);
+
+    const bgHex = retro ? '#05060f' : '#060b12';
+    (scene.background as THREE.Color).set(bgHex);
+    (scene.fog as THREE.FogExp2).color.set(bgHex);
+
+    hemiLight.color.set(retro ? '#b3c8ff' : '#bad0de');
+    hemiLight.groundColor.set(retro ? '#292139' : '#0b1420');
+    keyLight.color.set(retro ? '#fff0d9' : '#ecf7fb');
+    rim.color.set(retro ? '#6984ff' : '#93a8ff');
+
+    sunMaterial.uniforms.colorA.value.set(...(retro ? [1.4, 0.24, 0.012] : [1.2, 0.52, 0.08]));
+    sunMaterial.uniforms.colorB.value.set(...(retro ? [2.4, 1.05, 0.12] : [2.15, 1.65, 0.45]));
+    sunLight.color.set(retro ? '#ffc476' : '#fcd34d');
+    coronaMaterial.color.set(retro ? '#ffb000' : '#fcd34d');
+    sunButton.style.setProperty('--sector-color', retro ? '#ffb000' : '#fcd34d');
+
+    const nextFireflies = retro ? retroFireflies : phosphorFireflies;
+    const fireflyScale = retro ? 3 : 2.6;
+    fireflyMaterials.forEach((mat, idx) => {
+      mat.color.set(nextFireflies[idx]).multiplyScalar(fireflyScale);
+    });
+
+    applyGridColors(retro);
+    applyStarColors(retro);
+
+    for (const { radius: r, material: ringMat } of solarRingMaterials) {
+      if (r === solarRadius) {
+        ringMat.color.set(retro ? '#ffb000' : '#fcd34d');
+        ringMat.opacity = 0.28;
+      } else {
+        ringMat.color.set(retro ? '#657eab' : '#5eead4');
+        ringMat.opacity = retro ? 0.12 : 0.14;
+      }
+    }
+
+    selectionMaterial.color.set(retro ? '#ffffff' : '#ecf7fb');
+
+    for (const dest of destinations) {
+      const hex = resolveCategoryHex(dest.category, nextTheme);
+      dest.light.color.set(hex);
+      dest.planetButton.style.setProperty('--sector-color', hex);
+      dest.orbitRingMaterials.forEach((mat) => mat.color.set(hex));
+      dest.satelliteButtons.forEach((btn) => btn.style.setProperty('--sector-color', hex));
+    }
+
+    schedule();
   }
 
   function dockingMission() {
@@ -563,6 +714,10 @@ export function createGalaxyScene({ host, categories, onCategory, onEntry, onErr
   }, { signal });
   document.addEventListener('visibilitychange', schedule, { signal });
   reducedMotion.addEventListener('change', schedule, { signal });
+  window.addEventListener(SITE_THEME_EVENT, (event: Event) => {
+    const detailTheme = (event as CustomEvent<{ theme?: string }>).detail?.theme;
+    applySceneTheme(detailTheme === 'retro' ? 'retro' : readActiveTheme());
+  }, { signal });
   const resizeObserver = new ResizeObserver(resize);
   resizeObserver.observe(host);
   const intersectionObserver = new IntersectionObserver(([entry]) => {

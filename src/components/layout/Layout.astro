@@ -49,6 +49,101 @@ const enUrl = localizedPath('en', currentPath);
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&family=VT323&family=Noto+Sans+JP:wght@400;700&family=IBM+Plex+Sans+JP:wght@400;700&family=IBM+Plex+Mono:wght@400;700&family=Orbitron:wght@500;700&family=Share+Tech+Mono&family=M+PLUS+1+Code:wght@400;700&family=Caveat:wght@700&display=swap"
     />
     <link rel="icon" type="image/svg+xml" href="/theomonfort/favicon.svg" />
+    <script is:inline>
+      (function () {
+        var KEY = 'akq-site-theme';
+        var EVENT = 'akq:theme-change';
+        var SWAP_SVGS = [
+          ['/theomonfort/favicon.svg', '/theomonfort/favicon-retro.svg'],
+          ['/theomonfort/diagrams/codeql-architecture.svg', '/theomonfort/diagrams/codeql-architecture-retro.svg'],
+          ['/theomonfort/icons/play-cyan.svg', '/theomonfort/icons/play-cyan-retro.svg'],
+          ['/theomonfort/icons/vscode-extensions.svg', '/theomonfort/icons/vscode-extensions-retro.svg']
+        ];
+
+        function resolveInitialTheme() {
+          try {
+            var params = new URLSearchParams(window.location.search);
+            var q = params.get('theme');
+            if (q === 'retro' || q === 'phosphor') {
+              localStorage.setItem(KEY, q);
+              return q;
+            }
+            var stored = localStorage.getItem(KEY);
+            if (stored === 'retro' || stored === 'phosphor') return stored;
+          } catch (_) {}
+          return 'phosphor';
+        }
+
+        function syncThemeAssets(theme, rootDoc) {
+          var doc = rootDoc || document;
+          var isRetro = theme === 'retro';
+          var meta = doc.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', isRetro ? '#0a0e27' : '#060b12');
+          var icon = doc.querySelector('link[rel="icon"]');
+          if (icon) icon.setAttribute('href', isRetro ? '/theomonfort/favicon-retro.svg' : '/theomonfort/favicon.svg');
+
+          var imgs = doc.querySelectorAll('img[src]');
+          for (var i = 0; i < imgs.length; i++) {
+            var img = imgs[i];
+            var src = img.getAttribute('src') || '';
+            for (var j = 0; j < SWAP_SVGS.length; j++) {
+              var phos = SWAP_SVGS[j][0];
+              var ret = SWAP_SVGS[j][1];
+              if (src === phos || src === ret) {
+                var target = isRetro ? ret : phos;
+                if (src !== target) img.setAttribute('src', target);
+                break;
+              }
+            }
+          }
+        }
+
+        function applyTheme(next, broadcast) {
+          var theme = next === 'retro' ? 'retro' : 'phosphor';
+          document.documentElement.dataset.theme = theme;
+          try {
+            localStorage.setItem(KEY, theme);
+          } catch (_) {}
+          syncThemeAssets(theme, document);
+          if (broadcast !== false) {
+            window.dispatchEvent(new CustomEvent(EVENT, { detail: { theme: theme } }));
+          }
+          return theme;
+        }
+
+        var initial = resolveInitialTheme();
+        document.documentElement.dataset.theme = initial;
+        syncThemeAssets(initial, document);
+
+        window.__akqGetTheme = function () {
+          return document.documentElement.dataset.theme === 'retro' ? 'retro' : 'phosphor';
+        };
+        window.__akqSyncThemeAssets = syncThemeAssets;
+        window.__akqSetTheme = function (next) {
+          return applyTheme(next, true);
+        };
+        window.__akqToggleTheme = function () {
+          var cur = window.__akqGetTheme();
+          return applyTheme(cur === 'retro' ? 'phosphor' : 'retro', true);
+        };
+
+        if (!window.__akqThemeRouterBound) {
+          window.__akqThemeRouterBound = true;
+          document.addEventListener('astro:before-swap', function (e) {
+            var cur = window.__akqGetTheme();
+            if (e && e.newDocument && e.newDocument.documentElement) {
+              e.newDocument.documentElement.dataset.theme = cur;
+              syncThemeAssets(cur, e.newDocument);
+            }
+          });
+          document.addEventListener('astro:page-load', function () {
+            var cur = window.__akqGetTheme();
+            document.documentElement.dataset.theme = cur;
+            syncThemeAssets(cur, document);
+          });
+        }
+      })();
+    </script>
     <ClientRouter />
   </head>
   <body class="bg-stars min-h-screen relative">

@@ -191,26 +191,26 @@ macOS は **Accessibility + Screen Recording** の許可が必要。Office キ�
 
 <div class="app-demo-scenario">
 <style>
-.prose-akq .app-demo-scenario,.prose-akq .playbook-demo-video{font:clamp(16px,1.3vw,20px)/1.4 var(--font-prose),sans-serif;color:#ecf7fb}
+.prose-akq .app-demo-scenario,.prose-akq .playbook-demo-video{font:clamp(16px,1.3vw,20px)/1.4 var(--font-prose),sans-serif;color:var(--c-phosphor)}
 .prose-akq .app-demo-scenario p,.prose-akq .playbook-demo-video p{margin:0}
 .prose-akq .app-demo-scenario .app-demo-lead{font-size:1.1em;margin-bottom:14px}
 .prose-akq .app-demo-context{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 16px}
-.prose-akq .app-demo-context span{padding:4px 10px;border:1px solid #93a8ff80;background:#0b1420cc}
+.prose-akq .app-demo-context span{padding:4px 10px;border:1px solid rgb(var(--rgb-neon-magenta) / 0.5);background:rgb(var(--rgb-deep-purple) / 0.8)}
 .prose-akq .app-demo-stages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.prose-akq .app-demo-stage{padding:14px;border-top:2px solid #93a8ff;background:#0b1420cc}
-.prose-akq .app-demo-scenario .app-demo-stage h3{margin:0 0 10px;font-size:1.1em;line-height:1.3;color:#93a8ff}
-.prose-akq .app-demo-scenario .app-demo-control{margin-top:16px;padding-left:12px;border-left:3px solid #fcd34d}
+.prose-akq .app-demo-stage{padding:14px;border-top:2px solid var(--c-neon-magenta);background:rgb(var(--rgb-deep-purple) / 0.8)}
+.prose-akq .app-demo-scenario .app-demo-stage h3{margin:0 0 10px;font-size:1.1em;line-height:1.3;color:var(--c-neon-magenta)}
+.prose-akq .app-demo-scenario .app-demo-control{margin-top:16px;padding-left:12px;border-left:3px solid var(--c-crt-amber)}
 .prose-akq > h2:has(.app-demo-title){margin-bottom:14px}
-.prose-akq .playbook-demo-video video{display:block;width:100%;aspect-ratio:16/9;object-fit:contain;background:#04080e}
+.prose-akq .playbook-demo-video video{display:block;width:100%;aspect-ratio:16/9;object-fit:contain;background:var(--c-shadow-ink)}
 .prose-akq .playbook-demo-video video:fullscreen{width:100vw;height:100dvh;max-height:none;aspect-ratio:auto;border:0;background:#000}
 .prose-akq .playbook-demo-video video::backdrop{background:#000}
-.prose-akq .playbook-demo-video video:focus-visible{outline:2px solid #5eead4;outline-offset:3px}
+.prose-akq .playbook-demo-video video:focus-visible{outline:2px solid var(--c-neon-cyan);outline-offset:3px}
 .prose-akq .playbook-video-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-top:12px}
-.prose-akq .playbook-video-actions button{padding:8px 14px;border:2px solid #93a8ff;background:#0b1420;color:#ecf7fb;font:600 1em var(--font-prose),sans-serif;cursor:pointer}
-.prose-akq .playbook-video-actions button:hover,.prose-akq .playbook-video-actions button:focus-visible{background:#93a8ff22;outline:2px solid #93a8ff;outline-offset:3px}
+.prose-akq .playbook-video-actions button{padding:8px 14px;border:2px solid var(--c-neon-magenta);background:var(--c-deep-purple);color:var(--c-phosphor);font:600 1em var(--font-prose),sans-serif;cursor:pointer}
+.prose-akq .playbook-video-actions button:hover,.prose-akq .playbook-video-actions button:focus-visible{background:rgb(var(--rgb-neon-magenta) / 0.13);outline:2px solid var(--c-neon-magenta);outline-offset:3px}
 .prose-akq .playbook-video-actions button:disabled{opacity:.6;cursor:wait}
-.prose-akq .playbook-demo-video .playbook-video-help{margin-top:8px;font-size:14px;color:#bad0de}
-.prose-akq .playbook-demo-video [data-video-status]{margin-top:8px;color:#fcd34d}
+.prose-akq .playbook-demo-video .playbook-video-help{margin-top:8px;font-size:14px;color:var(--c-fg-body)}
+.prose-akq .playbook-demo-video [data-video-status]{margin-top:8px;color:var(--c-crt-amber)}
 .prose-akq .playbook-demo-video [data-video-status][hidden]{display:none}
 body.present-mode .playbook-detail:has(.app-demo-scenario.akq-slide-active,.playbook-demo-video.akq-slide-active){padding-top:88px;padding-bottom:72px}
 body.present-mode .prose-akq > h2:has(.app-demo-title){margin:0 0 12px;font-size:clamp(28px,2.2vw,36px);line-height:1.2;letter-spacing:0}

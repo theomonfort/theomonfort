@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { play } from '../../lib/sfx';
+import { SITE_THEME_EVENT, getCurrentSiteTheme, type SiteTheme } from '../../lib/theme';
 
 export interface SkillEntry {
   slug: string;
@@ -69,6 +70,16 @@ export default function SkillGallery({ skills, locale = 'ja', copy = defaultCopy
   const [activeGroup, setActiveGroup] = useState<string>('all');
   const [copiedSlug, setCopiedSlug] = useState<string | null>(null);
   const [copiedAll, setCopiedAll] = useState(false);
+  const [siteTheme, setSiteTheme] = useState<SiteTheme>('phosphor');
+
+  useEffect(() => {
+    const sync = () => setSiteTheme(getCurrentSiteTheme());
+    sync();
+    window.addEventListener(SITE_THEME_EVENT, sync);
+    return () => window.removeEventListener(SITE_THEME_EVENT, sync);
+  }, []);
+
+  const isRetro = siteTheme === 'retro';
 
   const groups = Array.from(
     new Set(skills.map((s) => s.group).filter((g): g is string => Boolean(g)))
@@ -120,40 +131,63 @@ export default function SkillGallery({ skills, locale = 'ja', copy = defaultCopy
     setTimeout(() => setCopiedAll(false), BATCH_COPY_FEEDBACK_MS);
   };
 
-  const railBg = (tone: string) => ({
-    backgroundImage: `linear-gradient(90deg, ${tone} 0%, color-mix(in srgb, ${tone} 30%, transparent) 55%, transparent 100%)`,
-    backgroundSize: '100% 2px',
-    backgroundPosition: 'top left',
-    backgroundRepeat: 'no-repeat',
-  });
+  const railBg = (tone: string) =>
+    isRetro
+      ? undefined
+      : {
+          backgroundImage: `linear-gradient(90deg, ${tone} 0%, color-mix(in srgb, ${tone} 30%, transparent) 55%, transparent 100%)`,
+          backgroundSize: '100% 2px',
+          backgroundPosition: 'top left',
+          backgroundRepeat: 'no-repeat',
+        };
 
   return (
     <div className="space-y-5">
       <details
-        className="rounded-[3px] border border-[#fcd34d]/30 bg-[#0b1420]/85 p-4 group"
-        style={railBg('#fcd34d')}
+        className={`rounded-[var(--radius-card)] p-4 group ${
+          isRetro
+            ? 'border-2 border-dashed border-crt-amber/60 bg-shadow-ink/80 shadow-pixel'
+            : 'border border-crt-amber/30 bg-deep-purple/85'
+        }`}
+        style={railBg('var(--c-crt-amber)')}
       >
-        <summary className="font-mono text-xs font-semibold tracking-wide text-[#fcd34d] cursor-pointer select-none">
+        <summary
+          className={`cursor-pointer select-none text-crt-amber ${
+            isRetro
+              ? 'font-pixel text-[10px]'
+              : 'font-mono text-xs font-semibold tracking-wide'
+          }`}
+        >
           {copy.setupSummary}
         </summary>
         <div className="mt-3 space-y-2.5 text-sm">
-          <p className="font-body text-[#bad0de]">
+          <p className="font-body text-phosphor-body">
             {copy.setupIntro}
           </p>
-          <pre className="font-mono text-xs text-[#86efac] bg-[#04080e] border border-[rgba(94,234,212,0.18)] rounded-[3px] px-3 py-2.5 overflow-x-auto"><code>{`# macOS
+          <pre
+            className={`font-mono text-xs text-gb-green bg-shadow-ink rounded-[var(--radius-ui)] px-3 py-2.5 overflow-x-auto ${
+              isRetro ? 'border-2 border-phosphor/20' : 'border border-neon-cyan/20'
+            }`}
+          ><code>{`# macOS
 brew install gh
 # or upgrade if already installed
 brew upgrade gh`}</code></pre>
-          <p className="font-body text-xs text-[#728fa3]">
+          <p className="font-body text-xs text-phosphor-muted">
             {copy.setupAfter}
           </p>
         </div>
       </details>
 
-      <div className="rounded-[3px] border border-[rgba(94,234,212,0.16)] bg-[#0b1420]/85 p-4 space-y-3.5">
+      <div
+        className={`rounded-[var(--radius-card)] p-4 space-y-3.5 ${
+          isRetro
+            ? 'border-2 border-neon-cyan/50 bg-shadow-ink/85 shadow-pixel'
+            : 'border border-[var(--c-border)] bg-deep-purple/85'
+        }`}
+      >
         <div className="flex flex-col sm:flex-row gap-3">
           <div className="relative flex-1">
-            <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 font-mono text-xs text-[#728fa3]">
+            <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 font-mono text-xs text-phosphor-muted">
               ⌕
             </span>
             <input
@@ -162,46 +196,87 @@ brew upgrade gh`}</code></pre>
               onChange={(e) => setQuery(e.target.value)}
               placeholder={searchPlaceholder}
               aria-label={searchPlaceholder}
-              className="w-full rounded-[3px] bg-[#04080e] border border-[rgba(94,234,212,0.22)] focus:border-[#5eead4] focus:outline-none pl-8 pr-3 py-2 font-body text-sm text-[#ecf7fb] placeholder:text-[#728fa3] transition-colors"
+              className={`w-full rounded-[var(--radius-ui)] bg-shadow-ink focus:border-neon-cyan focus:outline-none pl-8 pr-3 py-2 text-sm text-phosphor placeholder:text-phosphor-muted transition-colors ${
+                isRetro
+                  ? 'border-2 border-neon-cyan/40 font-pixel-jp'
+                  : 'border border-neon-cyan/25 font-body'
+              }`}
             />
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 font-mono text-xs">
-            <div className="inline-flex rounded-[3px] border border-[rgba(94,234,212,0.22)] bg-[#04080e] p-0.5">
-              <button
-                type="button"
-                onClick={() => {
-                  play('click');
-                  setScope('project');
-                }}
-                className={`px-3 py-1.5 rounded-[2px] transition-colors ${
-                  scope === 'project'
-                    ? 'bg-[#5eead4] text-[#04080e] font-semibold'
-                    : 'text-[#728fa3] hover:text-[#ecf7fb]'
-                }`}
-              >
-                {copy.project}
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  play('click');
-                  setScope('global');
-                }}
-                className={`px-3 py-1.5 rounded-[2px] transition-colors ${
-                  scope === 'global'
-                    ? 'bg-[#5eead4] text-[#04080e] font-semibold'
-                    : 'text-[#728fa3] hover:text-[#ecf7fb]'
-                }`}
-              >
-                {copy.global}
-              </button>
-            </div>
+          <div className={`flex flex-wrap items-center gap-2 ${isRetro ? 'font-pixel text-[10px]' : 'font-mono text-xs'}`}>
+            {isRetro ? (
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    play('click');
+                    setScope('project');
+                  }}
+                  className={`px-3 py-2 border-2 transition-colors ${
+                    scope === 'project'
+                      ? 'border-neon-cyan text-neon-cyan bg-shadow-ink shadow-neon-cyan'
+                      : 'border-phosphor/30 text-phosphor-muted hover:text-phosphor'
+                  }`}
+                >
+                  {copy.project}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    play('click');
+                    setScope('global');
+                  }}
+                  className={`px-3 py-2 border-2 transition-colors ${
+                    scope === 'global'
+                      ? 'border-neon-cyan text-neon-cyan bg-shadow-ink shadow-neon-cyan'
+                      : 'border-phosphor/30 text-phosphor-muted hover:text-phosphor'
+                  }`}
+                >
+                  {copy.global}
+                </button>
+              </div>
+            ) : (
+              <div className="inline-flex rounded-[var(--radius-ui)] border border-neon-cyan/25 bg-shadow-ink p-0.5">
+                <button
+                  type="button"
+                  onClick={() => {
+                    play('click');
+                    setScope('project');
+                  }}
+                  className={`px-3 py-1.5 rounded-[var(--radius-ui)] transition-colors ${
+                    scope === 'project'
+                      ? 'bg-neon-cyan text-shadow-ink font-semibold'
+                      : 'text-phosphor-muted hover:text-phosphor'
+                  }`}
+                >
+                  {copy.project}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    play('click');
+                    setScope('global');
+                  }}
+                  className={`px-3 py-1.5 rounded-[var(--radius-ui)] transition-colors ${
+                    scope === 'global'
+                      ? 'bg-neon-cyan text-shadow-ink font-semibold'
+                      : 'text-phosphor-muted hover:text-phosphor'
+                  }`}
+                >
+                  {copy.global}
+                </button>
+              </div>
+            )}
 
             <button
               type="button"
               onClick={copyBatch}
-              className="px-3.5 py-2 rounded-[3px] bg-[#fcd34d] text-[#04080e] font-semibold hover:bg-[#fde68a] transition-colors"
+              className={
+                isRetro
+                  ? 'px-3.5 py-2 border-2 border-crt-amber text-crt-amber bg-shadow-ink hover:bg-crt-amber hover:text-shadow-ink shadow-neon-amber transition-colors'
+                  : 'px-3.5 py-2 rounded-[var(--radius-ui)] bg-crt-amber text-shadow-ink font-semibold hover:brightness-110 transition-all'
+              }
             >
               {copy.savePrefix}
               {selected.size > 0 ? `${copy.selected} ${selected.size}` : copy.all}{copy.copySuffix}
@@ -210,17 +285,27 @@ brew upgrade gh`}</code></pre>
         </div>
 
         {groups.length > 1 && (
-          <div className="flex flex-wrap items-center gap-1.5 pt-1 border-t border-[rgba(94,234,212,0.12)]">
+          <div
+            className={`flex flex-wrap items-center gap-1.5 pt-2 ${
+              isRetro ? 'border-t-2 border-dashed border-neon-cyan/30' : 'border-t border-neon-cyan/15'
+            }`}
+          >
             <button
               type="button"
               onClick={() => {
                 play('click');
                 setActiveGroup('all');
               }}
-              className={`px-2.5 py-1 rounded-[3px] font-mono text-[11px] transition-colors ${
+              className={`px-2.5 py-1 rounded-[var(--radius-ui)] transition-colors ${
+                isRetro ? 'font-pixel-jp text-xs border-2' : 'font-mono text-[11px]'
+              } ${
                 activeGroup === 'all'
-                  ? 'bg-[#5eead4] text-[#04080e] font-semibold'
-                  : 'border border-[rgba(94,234,212,0.18)] bg-[#04080e] text-[#728fa3] hover:text-[#ecf7fb] hover:border-[rgba(94,234,212,0.36)]'
+                  ? isRetro
+                    ? 'border-neon-cyan bg-neon-cyan text-shadow-ink font-bold'
+                    : 'bg-neon-cyan text-shadow-ink font-semibold'
+                  : isRetro
+                    ? 'border-phosphor/25 bg-shadow-ink text-phosphor-muted hover:text-phosphor hover:border-neon-cyan'
+                    : 'border border-neon-cyan/20 bg-shadow-ink text-phosphor-muted hover:text-phosphor hover:border-[var(--c-border-strong)]'
               }`}
             >
               {allCategoryLabel} ({skills.length})
@@ -236,10 +321,16 @@ brew upgrade gh`}</code></pre>
                     play('click');
                     setActiveGroup(grp);
                   }}
-                  className={`px-2.5 py-1 rounded-[3px] font-mono text-[11px] transition-colors ${
+                  className={`px-2.5 py-1 rounded-[var(--radius-ui)] transition-colors ${
+                    isRetro ? 'font-pixel-jp text-xs border-2' : 'font-mono text-[11px]'
+                  } ${
                     isActive
-                      ? 'bg-[#5eead4] text-[#04080e] font-semibold'
-                      : 'border border-[rgba(94,234,212,0.18)] bg-[#04080e] text-[#728fa3] hover:text-[#ecf7fb] hover:border-[rgba(94,234,212,0.36)]'
+                      ? isRetro
+                        ? 'border-neon-cyan bg-neon-cyan text-shadow-ink font-bold'
+                        : 'bg-neon-cyan text-shadow-ink font-semibold'
+                      : isRetro
+                        ? 'border-phosphor/25 bg-shadow-ink text-phosphor-muted hover:text-phosphor hover:border-neon-cyan'
+                        : 'border border-neon-cyan/20 bg-shadow-ink text-phosphor-muted hover:text-phosphor hover:border-[var(--c-border-strong)]'
                   }`}
                 >
                   {grp} ({grpCount})
@@ -251,13 +342,25 @@ brew upgrade gh`}</code></pre>
       </div>
 
       {copiedAll && (
-        <div className="rounded-[3px] border border-[#86efac]/45 bg-[#86efac]/10 px-4 py-2.5 font-mono text-xs font-semibold text-[#86efac]">
+        <div
+          className={`rounded-[var(--radius-card)] px-4 py-2.5 text-gb-green ${
+            isRetro
+              ? 'font-pixel text-[10px] border-2 border-gb-green bg-shadow-ink shadow-neon-green'
+              : 'font-mono text-xs font-semibold border border-gb-green/45 bg-gb-green/10'
+          }`}
+        >
           {copy.copiedAll}
         </div>
       )}
 
       {filteredSkills.length === 0 ? (
-        <p className="rounded-[3px] border border-[rgba(94,234,212,0.16)] bg-[#0b1420]/70 p-6 text-center font-body text-sm text-[#728fa3]">
+        <p
+          className={`rounded-[var(--radius-card)] p-6 text-center font-body text-sm text-phosphor-muted ${
+            isRetro
+              ? 'border-2 border-dashed border-neon-cyan/40 bg-shadow-ink/80'
+              : 'border border-[var(--c-border)] bg-deep-purple/70'
+          }`}
+        >
           {emptySearchLabel}
         </p>
       ) : (
@@ -266,15 +369,23 @@ brew upgrade gh`}</code></pre>
             const isSelected = selected.has(s.slug);
             const isCopied = copiedSlug === s.slug;
             const cmd = buildCommand(s, scope);
-            const tone = isSelected ? '#93a8ff' : '#5eead4';
+            const tone = isSelected ? 'var(--c-neon-magenta)' : 'var(--c-neon-cyan)';
             return (
               <li
                 key={s.slug}
                 style={railBg(tone)}
-                className={`relative rounded-[3px] bg-[rgba(11,20,32,0.86)] hover:bg-[rgba(16,29,45,0.95)] border p-4 transition-all duration-150 ${
-                  isSelected
-                    ? 'border-[#93a8ff]/65 shadow-[0_8px_24px_rgba(147,168,255,0.14)]'
-                    : 'border-[rgba(94,234,212,0.16)] hover:border-[rgba(94,234,212,0.34)] shadow-[0_8px_24px_rgba(4,8,14,0.34)]'
+                className={`relative rounded-[var(--radius-card)] p-4 transition-all duration-150 ${
+                  isRetro
+                    ? `bg-shadow-ink/85 border-2 shadow-pixel ${
+                        isSelected
+                          ? 'border-neon-magenta shadow-neon-magenta'
+                          : 'border-phosphor/25 hover:border-neon-cyan'
+                      }`
+                    : `bg-[var(--c-bg-elevated)] hover:bg-[var(--c-bg-elevated-hover)] border ${
+                        isSelected
+                          ? 'border-neon-magenta/65 shadow-[0_8px_24px_rgb(var(--rgb-neon-magenta)/0.14)]'
+                          : 'border-[var(--c-border)] hover:border-[var(--c-border-strong)] shadow-[0_8px_24px_rgb(var(--rgb-shadow-ink)/0.34)]'
+                      }`
                 }`}
                 onMouseEnter={() => play('hover')}
               >
@@ -282,10 +393,18 @@ brew upgrade gh`}</code></pre>
                   <button
                     type="button"
                     onClick={() => toggle(s.slug)}
-                    className={`font-mono text-xs font-bold shrink-0 w-7 h-7 rounded-[3px] border flex items-center justify-center transition-colors ${
-                      isSelected
-                        ? 'bg-[#93a8ff] border-[#93a8ff] text-[#04080e]'
-                        : 'bg-[#04080e] border-[rgba(94,234,212,0.28)] text-[#ecf7fb] hover:border-[#5eead4]'
+                    className={`shrink-0 rounded-[var(--radius-ui)] flex items-center justify-center transition-colors ${
+                      isRetro
+                        ? `font-pixel text-sm w-8 h-8 border-2 ${
+                            isSelected
+                              ? 'border-neon-magenta text-neon-magenta bg-shadow-ink'
+                              : 'border-phosphor/40 text-phosphor bg-shadow-ink hover:border-neon-cyan'
+                          }`
+                        : `font-mono text-xs font-bold w-7 h-7 border ${
+                            isSelected
+                              ? 'bg-neon-magenta border-neon-magenta text-shadow-ink'
+                              : 'bg-shadow-ink border-neon-cyan/30 text-phosphor hover:border-neon-cyan'
+                          }`
                     }`}
                     aria-pressed={isSelected}
                     aria-label={`${copy.selectAria} ${s.name}`}
@@ -298,13 +417,25 @@ brew upgrade gh`}</code></pre>
                         {/\.(svg|png|jpg|jpeg|webp|gif)$/i.test(s.icon)
                           ? <img src={s.icon} alt="" className="h-5 w-5 object-contain shrink-0" />
                           : <span className="text-lg leading-none shrink-0">{s.icon}</span>}
-                        <h3 className="font-body text-[15px] font-semibold text-[#ecf7fb] truncate">
+                        <h3
+                          className={`truncate ${
+                            isRetro
+                              ? 'font-pixel text-xs text-neon-cyan'
+                              : 'font-body text-[15px] font-semibold text-phosphor'
+                          }`}
+                        >
                           {s.name}
                         </h3>
                       </div>
                       <div className="flex items-center gap-1.5 shrink-0">
                         {s.group && (
-                          <span className="font-mono text-[10px] font-semibold px-1.5 py-0.5 rounded-[3px] border border-[#93a8ff]/25 bg-[#93a8ff]/10 text-[#93a8ff]">
+                          <span
+                            className={`px-1.5 py-0.5 rounded-[var(--radius-ui)] text-neon-magenta ${
+                              isRetro
+                                ? 'font-pixel-jp text-[10px] border-2 border-neon-magenta/40 bg-shadow-ink'
+                                : 'font-mono text-[10px] font-semibold border border-neon-magenta/25 bg-neon-magenta/10'
+                            }`}
+                          >
                             {s.group}
                           </span>
                         )}
@@ -312,23 +443,33 @@ brew upgrade gh`}</code></pre>
                           href={buildSkillRepoUrl(s)}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="font-mono text-[10px] px-1.5 py-0.5 rounded-[3px] border border-[rgba(94,234,212,0.18)] bg-[#04080e] text-[#67e8f9] hover:text-[#a5f3fc] hover:border-[#5eead4]/45 transition-colors"
+                          className={`font-mono text-[10px] px-1.5 py-0.5 rounded-[var(--radius-ui)] bg-shadow-ink text-[var(--c-link)] hover:text-[var(--c-link-hover)] transition-colors ${
+                            isRetro
+                              ? 'border-2 border-phosphor/25 hover:border-neon-cyan'
+                              : 'border border-neon-cyan/20 hover:border-neon-cyan/45'
+                          }`}
                           aria-label={`Open ${s.name} skill in repository`}
                         >
                           repo ↗
                         </a>
                       </div>
                     </div>
-                    <p className="font-body text-sm text-[#bad0de] leading-relaxed mb-3">
+                    <p className="font-body text-sm text-phosphor-body leading-relaxed mb-3">
                       {s.description}
                     </p>
-                    <div className="rounded-[3px] bg-[#04080e] border border-[rgba(94,234,212,0.16)] px-2.5 py-1.5 mb-2 overflow-x-auto">
-                      <code className="font-mono text-[11px] text-[#86efac] whitespace-nowrap">{cmd}</code>
+                    <div
+                      className={`rounded-[var(--radius-ui)] bg-shadow-ink px-2.5 py-1.5 mb-2 overflow-x-auto ${
+                        isRetro ? 'border-2 border-phosphor/20' : 'border border-[var(--c-border)]'
+                      }`}
+                    >
+                      <code className="font-mono text-[11px] text-gb-green whitespace-nowrap">{cmd}</code>
                     </div>
                     <button
                       type="button"
                       onClick={() => copyOne(s)}
-                      className="font-mono text-[11px] font-semibold text-[#fcd34d] hover:text-[#67e8f9] transition-colors"
+                      className={`font-mono text-[11px] font-semibold text-crt-amber transition-colors ${
+                        isRetro ? 'hover:text-neon-magenta underline-offset-4 hover:underline' : 'hover:text-[var(--c-link)]'
+                      }`}
                     >
                       {isCopied ? copy.copiedOne : copy.copyOne}
                     </button>

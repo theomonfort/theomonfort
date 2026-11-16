@@ -75,10 +75,10 @@ How a team organizes branches around PRs. Pick the model that matches your relea
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
     </marker>
   </defs>
-  <rect x="16" y="49" width="118" height="34" rx="7" fill="#2fbf76"/><text x="75" y="71" text-anchor="middle" fill="#04080e" font-size="16" font-weight="bold">change</text>
-  <rect x="16" y="135" width="118" height="34" rx="7" fill="#4ec3ff"/><text x="75" y="157" text-anchor="middle" fill="#04080e" font-size="16" font-weight="bold">main</text>
-  <rect x="16" y="223" width="118" height="34" rx="7" fill="#17d8e0"/><text x="75" y="245" text-anchor="middle" fill="#04080e" font-size="16" font-weight="bold">change</text>
-  <rect x="16" y="309" width="118" height="34" rx="7" fill="#ff5b6b"/><text x="75" y="331" text-anchor="middle" fill="#04080e" font-size="16" font-weight="bold">change</text>
+  <rect x="16" y="49" width="118" height="34" rx="7" fill="#2fbf76"/><text x="75" y="71" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">change</text>
+  <rect x="16" y="135" width="118" height="34" rx="7" fill="#4ec3ff"/><text x="75" y="157" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">main</text>
+  <rect x="16" y="223" width="118" height="34" rx="7" fill="#17d8e0"/><text x="75" y="245" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">change</text>
+  <rect x="16" y="309" width="118" height="34" rx="7" fill="#ff5b6b"/><text x="75" y="331" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">change</text>
   <g stroke="#7d8595" stroke-width="2.6" fill="none">
     <line x1="249" y1="152" x2="336" y2="152" marker-end="url(#ghf-arrow)"/>
     <line x1="374" y1="152" x2="471" y2="152" marker-end="url(#ghf-arrow)"/>
@@ -124,12 +124,12 @@ How a team organizes branches around PRs. Pick the model that matches your relea
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
     </marker>
   </defs>
-  <rect x="16" y="31" width="118" height="34" rx="7" fill="#4ec3ff"/><text x="75" y="53" text-anchor="middle" fill="#04080e" font-size="16" font-weight="bold">main</text>
-  <rect x="16" y="93" width="118" height="34" rx="7" fill="#ff7a2f"/><text x="75" y="115" text-anchor="middle" fill="#04080e" font-size="16" font-weight="bold">hotfix</text>
-  <rect x="16" y="155" width="118" height="34" rx="7" fill="#17c2b8"/><text x="75" y="177" text-anchor="middle" fill="#04080e" font-size="16" font-weight="bold">release</text>
-  <rect x="16" y="217" width="118" height="34" rx="7" fill="#a56cff"/><text x="75" y="239" text-anchor="middle" fill="#04080e" font-size="16" font-weight="bold">develop</text>
-  <rect x="16" y="279" width="118" height="34" rx="7" fill="#2fbf76"/><text x="75" y="301" text-anchor="middle" fill="#04080e" font-size="16" font-weight="bold">feature</text>
-  <rect x="16" y="341" width="118" height="34" rx="7" fill="#2fbf76"/><text x="75" y="363" text-anchor="middle" fill="#04080e" font-size="16" font-weight="bold">feature</text>
+  <rect x="16" y="31" width="118" height="34" rx="7" fill="#4ec3ff"/><text x="75" y="53" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">main</text>
+  <rect x="16" y="93" width="118" height="34" rx="7" fill="#ff7a2f"/><text x="75" y="115" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">hotfix</text>
+  <rect x="16" y="155" width="118" height="34" rx="7" fill="#17c2b8"/><text x="75" y="177" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">release</text>
+  <rect x="16" y="217" width="118" height="34" rx="7" fill="#a56cff"/><text x="75" y="239" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">develop</text>
+  <rect x="16" y="279" width="118" height="34" rx="7" fill="#2fbf76"/><text x="75" y="301" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feature</text>
+  <rect x="16" y="341" width="118" height="34" rx="7" fill="#2fbf76"/><text x="75" y="363" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feature</text>
   <g stroke="#7d8595" stroke-width="2.6" fill="none">
     <line x1="214" y1="48" x2="344" y2="48" marker-end="url(#gf-arrow)"/>
     <line x1="396" y1="48" x2="639" y2="48" marker-end="url(#gf-arrow)"/>
@@ -155,9 +155,9 @@ How a team organizes branches around PRs. Pick the model that matches your relea
     <line x1="622" y1="159" x2="652" y2="61" marker-end="url(#gf-arrow)"/>
     <line x1="621" y1="184" x2="641" y2="218" marker-end="url(#gf-arrow)"/>
   </g>
-  <ellipse cx="190" cy="48" rx="24" ry="15" fill="#4ec3ff"/><text x="190" y="52" text-anchor="middle" fill="#04080e" font-size="12" font-weight="bold">v0.1</text>
-  <ellipse cx="370" cy="48" rx="24" ry="15" fill="#4ec3ff"/><text x="370" y="52" text-anchor="middle" fill="#04080e" font-size="12" font-weight="bold">v0.2</text>
-  <ellipse cx="665" cy="48" rx="24" ry="15" fill="#4ec3ff"/><text x="665" y="52" text-anchor="middle" fill="#04080e" font-size="12" font-weight="bold">v1.0</text>
+  <ellipse cx="190" cy="48" rx="24" ry="15" fill="#4ec3ff"/><text x="190" y="52" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="12" font-weight="bold">v0.1</text>
+  <ellipse cx="370" cy="48" rx="24" ry="15" fill="#4ec3ff"/><text x="370" y="52" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="12" font-weight="bold">v0.2</text>
+  <ellipse cx="665" cy="48" rx="24" ry="15" fill="#4ec3ff"/><text x="665" y="52" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="12" font-weight="bold">v1.0</text>
   <circle cx="290" cy="110" r="17" fill="#ff7a2f"/>
   <circle cx="545" cy="172" r="17" fill="#17c2b8"/>
   <circle cx="610" cy="172" r="17" fill="#17c2b8"/>
@@ -246,10 +246,10 @@ Each PR targets the branch below it: **small reviewable layers**, not one giant 
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
     </marker>
   </defs>
-  <rect x="16" y="31" width="118" height="34" rx="4" fill="#a56cff"/><text x="75" y="53" text-anchor="middle" fill="#04080e" font-size="16" font-weight="bold">feat-c</text>
-  <rect x="16" y="121" width="118" height="34" rx="4" fill="#17d8e0"/><text x="75" y="143" text-anchor="middle" fill="#04080e" font-size="16" font-weight="bold">feat-b</text>
-  <rect x="16" y="211" width="118" height="34" rx="4" fill="#2fbf76"/><text x="75" y="233" text-anchor="middle" fill="#04080e" font-size="16" font-weight="bold">feat-a</text>
-  <rect x="16" y="301" width="118" height="34" rx="4" fill="#4ec3ff"/><text x="75" y="323" text-anchor="middle" fill="#04080e" font-size="16" font-weight="bold">main</text>
+  <rect x="16" y="31" width="118" height="34" rx="4" fill="#a56cff"/><text x="75" y="53" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-c</text>
+  <rect x="16" y="121" width="118" height="34" rx="4" fill="#17d8e0"/><text x="75" y="143" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-b</text>
+  <rect x="16" y="211" width="118" height="34" rx="4" fill="#2fbf76"/><text x="75" y="233" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-a</text>
+  <rect x="16" y="301" width="118" height="34" rx="4" fill="#4ec3ff"/><text x="75" y="323" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">main</text>
   <g font-size="13" font-weight="bold" text-anchor="middle">
     <rect x="144" y="33" width="124" height="30" rx="4" fill="#131a2b" stroke="#a56cff" stroke-width="2"/><text x="206" y="53" fill="#a56cff">base: feat-b</text>
     <rect x="144" y="123" width="124" height="30" rx="4" fill="#131a2b" stroke="#17d8e0" stroke-width="2"/><text x="206" y="143" fill="#17d8e0">base: feat-a</text>
@@ -290,10 +290,10 @@ Each PR targets the branch below it: **small reviewable layers**, not one giant 
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
     </marker>
   </defs>
-  <rect x="16" y="31" width="118" height="34" rx="4" fill="#a56cff"/><text x="75" y="53" text-anchor="middle" fill="#04080e" font-size="16" font-weight="bold">feat-c</text>
-  <rect x="16" y="121" width="118" height="34" rx="4" fill="#17d8e0"/><text x="75" y="143" text-anchor="middle" fill="#04080e" font-size="16" font-weight="bold">feat-b</text>
-  <rect x="16" y="211" width="118" height="34" rx="4" fill="#2fbf76"/><text x="75" y="233" text-anchor="middle" fill="#04080e" font-size="16" font-weight="bold">feat-a</text>
-  <rect x="16" y="301" width="118" height="34" rx="4" fill="#4ec3ff"/><text x="75" y="323" text-anchor="middle" fill="#04080e" font-size="16" font-weight="bold">main</text>
+  <rect x="16" y="31" width="118" height="34" rx="4" fill="#a56cff"/><text x="75" y="53" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-c</text>
+  <rect x="16" y="121" width="118" height="34" rx="4" fill="#17d8e0"/><text x="75" y="143" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-b</text>
+  <rect x="16" y="211" width="118" height="34" rx="4" fill="#2fbf76"/><text x="75" y="233" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-a</text>
+  <rect x="16" y="301" width="118" height="34" rx="4" fill="#4ec3ff"/><text x="75" y="323" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">main</text>
   <g font-size="13" font-weight="bold" text-anchor="middle">
     <rect x="144" y="33" width="124" height="30" rx="4" fill="#131a2b" stroke="#a56cff" stroke-width="2"/><text x="206" y="53" fill="#a56cff">base: feat-b</text>
     <rect x="144" y="123" width="124" height="30" rx="4" fill="#131a2b" stroke="#17d8e0" stroke-width="2"/><text x="206" y="143" fill="#17d8e0">base: feat-a</text>
@@ -342,10 +342,10 @@ Each PR targets the branch below it: **small reviewable layers**, not one giant 
       <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
     </marker>
   </defs>
-  <rect x="16" y="31" width="118" height="34" rx="4" fill="#a56cff"/><text x="75" y="53" text-anchor="middle" fill="#04080e" font-size="16" font-weight="bold">feat-c</text>
-  <rect x="16" y="121" width="118" height="34" rx="4" fill="#17d8e0"/><text x="75" y="143" text-anchor="middle" fill="#04080e" font-size="16" font-weight="bold">feat-b</text>
-  <rect x="16" y="211" width="118" height="34" rx="4" fill="#2fbf76"/><text x="75" y="233" text-anchor="middle" fill="#04080e" font-size="16" font-weight="bold">feat-a</text>
-  <rect x="16" y="301" width="118" height="34" rx="4" fill="#4ec3ff"/><text x="75" y="323" text-anchor="middle" fill="#04080e" font-size="16" font-weight="bold">main</text>
+  <rect x="16" y="31" width="118" height="34" rx="4" fill="#a56cff"/><text x="75" y="53" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-c</text>
+  <rect x="16" y="121" width="118" height="34" rx="4" fill="#17d8e0"/><text x="75" y="143" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-b</text>
+  <rect x="16" y="211" width="118" height="34" rx="4" fill="#2fbf76"/><text x="75" y="233" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-a</text>
+  <rect x="16" y="301" width="118" height="34" rx="4" fill="#4ec3ff"/><text x="75" y="323" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">main</text>
   <g font-size="13" font-weight="bold" text-anchor="middle">
     <rect x="144" y="33" width="124" height="30" rx="4" fill="#131a2b" stroke="#a56cff" stroke-width="2"/><text x="206" y="53" fill="#a56cff">base: feat-b</text>
     <rect x="144" y="123" width="124" height="30" rx="4" fill="#131a2b" stroke="#17d8e0" stroke-width="2"/><text x="206" y="143" fill="#17d8e0">base: feat-a</text>

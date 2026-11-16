@@ -3,7 +3,14 @@ import { categories, localizedCategory } from '../../lib/playbook-categories';
 import { localizedPath, type Locale } from '../../lib/i18n';
 import type { LocalizedPlaybookEntry } from '../../lib/playbook';
 import type { GalaxyCategory } from '../../lib/playbook-galaxy';
-import { accentColorValues } from '../../lib/theme';
+import { accentColorValues, phosphorAccentHex, retroAccentHex } from '../../lib/theme';
+
+type ExplorerGalaxyCategory = GalaxyCategory & {
+  accentColor: string;
+  accentHexPhosphor: string;
+  accentHexRetro: string;
+  cssColor: string;
+};
 
 interface Props {
   locale: Locale;
@@ -48,11 +55,15 @@ const copy = {
     audioError: '環境音楽を再生できません。音楽ボタンで再試行できます。3D マップは引き続き利用できます。',
   },
 }[locale];
-const systems: GalaxyCategory[] = categories.map((category) => ({
+const systems: ExplorerGalaxyCategory[] = categories.map((category) => ({
   id: category.id,
   name: category.labelEn,
   label: localizedCategory(category, locale).label,
-  color: accentColorValues[category.color],
+  color: phosphorAccentHex[category.color],
+  accentColor: phosphorAccentHex[category.color],
+  accentHexPhosphor: phosphorAccentHex[category.color],
+  accentHexRetro: retroAccentHex[category.color],
+  cssColor: accentColorValues[category.color],
   entries: entries.filter((item) => item.entry.data.category === category.id).map((item) => ({
     slug: item.slug,
     title: item.entry.data.titleEn || item.entry.data.title,
@@ -121,7 +132,7 @@ const systems: GalaxyCategory[] = categories.map((category) => ({
         <p>{copy.description}</p>
         <div class="galaxy-destinations">
           {systems.map((category) => (
-            <button type="button" data-system={category.id} style={`--sector-color:${category.color}`}>
+            <button type="button" data-system={category.id} style={`--sector-color:${category.cssColor}`}>
               <span>{category.name}</span>
               <small>{category.id === 'introduction' ? copy.station : category.id === 'administration' ? copy.ship : category.label}</small>
               <span class="galaxy-count">{String(category.entries.length).padStart(2, '0')}</span>
@@ -130,7 +141,7 @@ const systems: GalaxyCategory[] = categories.map((category) => ({
         </div>
       </div>
       {systems.map((category) => (
-        <div data-sector={category.id} style={`--sector-color:${category.color}`} hidden>
+        <div data-sector={category.id} style={`--sector-color:${category.cssColor}`} hidden>
           <p class="explorer-eyebrow">{category.id === 'administration' ? 'COMMAND SHIP' : category.id === 'introduction' ? 'DEPARTURE STATION' : 'SECTOR / SDLC'}</p>
           <h3>{category.name}</h3>
           {category.name !== category.label && <p>{category.label}</p>}
@@ -501,7 +512,7 @@ const systems: GalaxyCategory[] = categories.map((category) => ({
     border: 1px solid var(--c-border-strong);
     border-radius: var(--radius-ui);
     background: var(--c-bg-elevated);
-    box-shadow: inset 0 1px 0 rgba(94, 234, 212, 0.14);
+    box-shadow: inset 0 1px 0 rgb(var(--rgb-neon-cyan) / 0.14);
   }
   .explorer-switch button {
     font-family: var(--font-mono-hud);
@@ -516,7 +527,7 @@ const systems: GalaxyCategory[] = categories.map((category) => ({
   }
   .explorer-switch button:hover { color: var(--c-fg-strong); }
   .explorer-switch button[aria-pressed="true"] {
-    background: rgba(94, 234, 212, 0.18);
+    background: rgb(var(--rgb-neon-cyan) / 0.18);
     color: var(--c-neon-cyan);
   }
   .explorer-filters { display: flex; gap: 1rem; margin-top: 1.5rem; }
@@ -542,9 +553,9 @@ const systems: GalaxyCategory[] = categories.map((category) => ({
   .explorer-status { font-size: .8rem; color: var(--c-fg-muted); margin: .7rem 0; }
   .explorer-error, .explorer-empty, .explorer-audio-error {
     padding: .85rem 1rem;
-    border: 1px solid rgba(252, 211, 77, 0.35);
+    border: 1px solid rgb(var(--rgb-crt-amber) / 0.35);
     border-radius: var(--radius-ui);
-    background: rgba(252, 211, 77, 0.08);
+    background: rgb(var(--rgb-crt-amber) / 0.08);
     color: var(--c-crt-amber);
     font-size: .85rem;
     margin: 1rem 0;
@@ -603,7 +614,7 @@ const systems: GalaxyCategory[] = categories.map((category) => ({
     max-height: none;
     border: 1px solid var(--c-border-strong);
     border-radius: var(--radius-card);
-    background: rgba(11, 20, 32, 0.92);
+    background: rgb(var(--rgb-deep-purple) / 0.92);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.42);
@@ -621,7 +632,7 @@ const systems: GalaxyCategory[] = categories.map((category) => ({
   .galaxy-map {
     position: relative;
     min-width: 0;
-    background: radial-gradient(ellipse at 40% 35%, #0f1e30 0%, #0b1420 42%, #060b12 82%);
+    background: radial-gradient(ellipse at 40% 35%, #0f1e30 0%, var(--c-deep-purple) 42%, var(--c-midnight) 82%);
   }
   .galaxy-map-heading {
     position: absolute;
@@ -657,9 +668,9 @@ const systems: GalaxyCategory[] = categories.map((category) => ({
   .galaxy-map-actions { display: flex; gap: .5rem; flex-wrap: wrap; justify-content: end; }
   .galaxy-map-actions button[aria-pressed="true"],
   .galaxy-map-actions button[aria-expanded="true"] {
-    background: rgba(94, 234, 212, 0.16);
+    background: rgb(var(--rgb-neon-cyan) / 0.16);
     color: var(--c-neon-cyan);
-    border-color: rgba(94, 234, 212, 0.45);
+    border-color: rgb(var(--rgb-neon-cyan) / 0.45);
   }
   .galaxy-signal {
     display: inline-block;
@@ -679,7 +690,7 @@ const systems: GalaxyCategory[] = categories.map((category) => ({
     color: var(--sector-color);
     border: 1px solid color-mix(in srgb, var(--sector-color) 42%, transparent);
     border-radius: var(--radius-ui);
-    background: rgba(6, 11, 18, 0.88);
+    background: rgb(var(--rgb-midnight) / 0.88);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     padding: .38rem .55rem;
@@ -717,7 +728,7 @@ const systems: GalaxyCategory[] = categories.map((category) => ({
     border: 1px solid color-mix(in srgb, var(--sector-color) 65%, transparent);
     border-radius: var(--radius-ui);
     color: var(--sector-color);
-    background: rgba(6, 11, 18, 0.88);
+    background: rgb(var(--rgb-midnight) / 0.88);
     font-family: var(--font-mono-hud) !important;
     font-size: .78rem !important;
     font-weight: 600;
@@ -779,7 +790,7 @@ const systems: GalaxyCategory[] = categories.map((category) => ({
     font-size: 1.1rem;
     transition: background .15s ease;
   }
-  .galaxy-camera button:hover { background: rgba(94, 234, 212, 0.16); }
+  .galaxy-camera button:hover { background: rgb(var(--rgb-neon-cyan) / 0.16); }
   .galaxy-camera > span { border-left: 1px solid var(--c-border); }
   .galaxy-hint {
     position: absolute;
@@ -799,7 +810,7 @@ const systems: GalaxyCategory[] = categories.map((category) => ({
     background: var(--c-bg-elevated);
     max-height: var(--map-height);
     overflow-y: auto;
-    scrollbar-color: rgba(94, 234, 212, 0.3) var(--c-midnight);
+    scrollbar-color: rgb(var(--rgb-neon-cyan) / 0.3) var(--c-midnight);
     scrollbar-width: thin;
   }
   .galaxy-panel h3 {
@@ -817,11 +828,11 @@ const systems: GalaxyCategory[] = categories.map((category) => ({
     text-align: left;
     border-left: 2px solid var(--sector-color);
     border-radius: 0 var(--radius-ui) var(--radius-ui) 0;
-    background: rgba(4, 8, 14, 0.65);
+    background: rgb(var(--rgb-shadow-ink) / 0.65);
     padding: .5rem 2.3rem .5rem .7rem;
     transition: background .15s ease;
   }
-  .galaxy-destinations button:hover { background: rgba(94, 234, 212, 0.08); }
+  .galaxy-destinations button:hover { background: rgb(var(--rgb-neon-cyan) / 0.08); }
   .galaxy-destinations button > span:first-child {
     display: block;
     font-family: var(--font-display);
@@ -908,7 +919,262 @@ const systems: GalaxyCategory[] = categories.map((category) => ({
   .galaxy-missions button:hover, .galaxy-missions button[aria-pressed="true"] {
     color: var(--c-fg-strong);
     border-color: color-mix(in srgb, var(--sector-color) 55%, transparent);
-    background: rgba(4, 8, 14, 0.72);
+    background: rgb(var(--rgb-shadow-ink) / 0.72);
+  }
+
+  /* ── Retro JRPG overrides ── */
+  html[data-theme='retro'] playbook-explorer {
+    font-family: 'DotGothic16', monospace;
+  }
+  html[data-theme='retro'] .explorer-eyebrow {
+    font-family: 'VT323', monospace;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: .12em;
+    margin: 0 0 .5rem;
+  }
+  html[data-theme='retro'] .explorer-switch {
+    gap: 0;
+    padding: 0;
+    border: 1px solid rgb(var(--rgb-neon-cyan) / 0.25);
+    border-radius: 0;
+    background: rgb(var(--rgb-shadow-ink) / 0.5);
+    box-shadow: none;
+  }
+  html[data-theme='retro'] .explorer-switch button {
+    font-family: inherit;
+    font-weight: 400;
+    letter-spacing: 0;
+    padding: .25rem .55rem;
+    color: #b6c7db;
+    font-size: .75rem;
+    border-radius: 0;
+    border-bottom: 2px solid transparent;
+  }
+  html[data-theme='retro'] .explorer-switch button[aria-pressed="true"] {
+    background: rgb(var(--rgb-neon-cyan) / 0.08);
+    color: var(--c-neon-cyan);
+    border-bottom-color: var(--c-neon-cyan);
+  }
+  html[data-theme='retro'] .explorer-filters label > span {
+    font-family: inherit;
+    font-size: .8rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+    color: #b6c7db;
+  }
+  html[data-theme='retro'] .explorer-filters select {
+    background: var(--c-midnight);
+    padding: .7rem .9rem;
+    border: 1px solid rgb(var(--rgb-neon-cyan) / 0.33);
+    border-radius: 0;
+    font-family: inherit;
+    font-size: inherit;
+  }
+  html[data-theme='retro'] .explorer-error,
+  html[data-theme='retro'] .explorer-empty,
+  html[data-theme='retro'] .explorer-audio-error {
+    padding: 1rem;
+    border: 1px dashed var(--c-crt-amber);
+    border-radius: 0;
+    background: transparent;
+  }
+  html[data-theme='retro'] playbook-explorer[data-view="3d"],
+  html[data-theme='retro'] playbook-explorer[data-view="3d"]::backdrop {
+    background: var(--c-shadow-ink);
+  }
+  html[data-theme='retro'] [data-view="3d"] .explorer-controls {
+    padding: .65rem;
+    border: 1px solid rgb(var(--rgb-neon-cyan) / 0.33);
+    border-radius: 0;
+    background: rgb(var(--rgb-shadow-ink) / 0.9);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+  }
+  html[data-theme='retro'] [data-view="3d"] .explorer-switch button {
+    padding: .7rem .8rem;
+  }
+  html[data-theme='retro'] [data-view="3d"] .galaxy-panel {
+    border: 1px solid rgb(var(--rgb-neon-cyan) / 0.4);
+    border-radius: 0;
+    background: rgb(var(--rgb-midnight) / 0.93);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+  }
+  html[data-theme='retro'] .galaxy {
+    border: 1px solid rgb(var(--rgb-neon-cyan) / 0.4);
+    border-radius: 0;
+    background: var(--c-shadow-ink);
+  }
+  html[data-theme='retro'] .galaxy-map {
+    background: radial-gradient(ellipse at 40% 35%, #1a0b2e 0, #0a0e27 40%, #05060f 80%);
+  }
+  html[data-theme='retro'] .galaxy-map-heading {
+    font-family: 'VT323', monospace;
+    font-size: .9rem;
+    font-weight: 400;
+  }
+  html[data-theme='retro'] .galaxy-map-heading button {
+    background: rgb(var(--rgb-shadow-ink) / 0.9);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding: .2rem .5rem;
+    border: 1px solid rgb(var(--rgb-neon-cyan) / 0.33);
+    border-radius: 0;
+    color: inherit;
+  }
+  html[data-theme='retro'] .galaxy-signal {
+    border-radius: 0;
+  }
+  html[data-theme='retro'] .galaxy-planet-label {
+    border: 1px solid color-mix(in srgb, var(--sector-color) 50%, transparent);
+    border-radius: 0;
+    background: rgb(var(--rgb-shadow-ink) / 0.85);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding: .35rem .5rem;
+    min-width: 90px;
+    max-width: 150px;
+    box-shadow: none;
+  }
+  html[data-theme='retro'] .galaxy-planet-label strong {
+    font-family: inherit;
+    font-size: .85rem;
+    font-weight: normal;
+    letter-spacing: 0;
+  }
+  html[data-theme='retro'] .galaxy-planet-label > span {
+    font: .75rem 'VT323', monospace;
+    letter-spacing: .13em;
+    color: #b6c7db;
+  }
+  html[data-theme='retro'] .galaxy-planet-label:hover {
+    background: var(--c-midnight);
+    box-shadow: 0 0 16px color-mix(in srgb, var(--sector-color) 30%, transparent);
+  }
+  html[data-theme='retro'] .galaxy-satellite {
+    border: 1px solid var(--sector-color);
+    border-radius: 0;
+    background: rgb(var(--rgb-shadow-ink) / 0.79);
+    font-family: 'VT323', monospace !important;
+    font-size: 1rem !important;
+    font-weight: 400;
+  }
+  html[data-theme='retro'] .galaxy-satellite-title {
+    border: 1px solid var(--sector-color);
+    border-radius: 0;
+    font: .8rem 'DotGothic16', monospace;
+    box-shadow: none;
+  }
+  html[data-theme='retro'] .galaxy-loading {
+    font-family: inherit;
+    font-size: inherit;
+    letter-spacing: 0;
+  }
+  html[data-theme='retro'] .galaxy-camera {
+    background: rgb(var(--rgb-shadow-ink) / 0.9);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 1px solid rgb(var(--rgb-neon-cyan) / 0.33);
+    border-radius: 0;
+    box-shadow: none;
+  }
+  html[data-theme='retro'] .galaxy-camera button {
+    font-family: inherit;
+    font-size: 1.25rem;
+  }
+  html[data-theme='retro'] .galaxy-camera > span {
+    border-left: 1px solid rgb(var(--rgb-neon-cyan) / 0.33);
+  }
+  html[data-theme='retro'] .galaxy-hint {
+    font-family: inherit;
+    font-size: .7rem;
+    color: #b6c7db;
+  }
+  html[data-theme='retro'] .galaxy-panel {
+    border-left: 1px solid rgb(var(--rgb-neon-cyan) / 0.25);
+    background: rgb(var(--rgb-midnight) / 0.6);
+    scrollbar-color: rgb(var(--rgb-neon-cyan) / 0.33) var(--c-shadow-ink);
+  }
+  html[data-theme='retro'] .galaxy-panel h3 {
+    font-family: inherit;
+    font-weight: 400;
+    font-size: 1.25rem;
+    letter-spacing: 0;
+    margin: 0 0 .8rem;
+  }
+  html[data-theme='retro'] .galaxy-panel p:not(.explorer-eyebrow) {
+    font-size: .8rem;
+    line-height: 1.8;
+    color: #b6c7db;
+    margin: 0 0 1rem;
+  }
+  html[data-theme='retro'] .galaxy-destinations button {
+    border-radius: 0;
+    background: rgb(var(--rgb-shadow-ink) / 0.5);
+    padding: .45rem 2.25rem .45rem .65rem;
+  }
+  html[data-theme='retro'] .galaxy-destinations button:hover {
+    background: #ffffff0a;
+  }
+  html[data-theme='retro'] .galaxy-destinations button > span:first-child {
+    font-family: inherit;
+    font-weight: 400;
+    letter-spacing: 0;
+    font-size: .9rem;
+  }
+  html[data-theme='retro'] .galaxy-destinations small {
+    font-size: .65rem;
+    color: #b6c7db;
+  }
+  html[data-theme='retro'] .galaxy-count {
+    font: 1.2rem 'VT323', monospace;
+  }
+  html[data-theme='retro'] .galaxy-detail {
+    border-block: 1px dashed var(--sector-color);
+  }
+  html[data-theme='retro'] .galaxy-back-orbit {
+    font-family: inherit !important;
+    font-size: .8rem !important;
+    margin-bottom: .8rem;
+  }
+  html[data-theme='retro'] .galaxy-detail h4 {
+    font-weight: 400;
+    margin-bottom: .6rem;
+  }
+  html[data-theme='retro'] .galaxy-detail a {
+    font-family: inherit;
+    font-weight: 400;
+    background: transparent;
+    border: 1px solid var(--sector-color);
+    border-radius: 0;
+    padding: .6rem .7rem;
+    font-size: .85rem;
+  }
+  html[data-theme='retro'] .galaxy-missions-title {
+    font-family: inherit;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+    color: #b6c7db;
+    font-size: .75rem;
+  }
+  html[data-theme='retro'] .galaxy-missions button {
+    padding: .5rem;
+    font-size: .8rem;
+    border-radius: 0;
+    color: var(--c-phosphor);
+  }
+  html[data-theme='retro'] .galaxy-missions button > span {
+    font: 1rem 'VT323', monospace;
+  }
+  html[data-theme='retro'] .galaxy-missions button:hover,
+  html[data-theme='retro'] .galaxy-missions button[aria-pressed="true"] {
+    border-color: var(--sector-color);
+    background: var(--c-shadow-ink);
   }
   @media (min-width: 900px) {
     [data-view="3d"] .galaxy-map-actions {

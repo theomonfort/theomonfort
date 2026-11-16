@@ -15,17 +15,17 @@ const t = siteCopy[locale];
       <img
         src="/theomonfort/favicon.svg"
         alt={t.notFound.mascotAlt}
-        class="w-40 md:w-56 mx-auto pixelated drop-shadow-[0_10px_24px_rgba(94,234,212,0.28)] animate-float"
+        class="nf-mascot w-40 md:w-56 mx-auto pixelated drop-shadow-[0_10px_24px_rgb(var(--rgb-neon-cyan)/0.28)] animate-float"
       />
       <span
-        class="absolute -top-3 -right-3 font-mono text-xs font-bold text-crt-amber bg-shadow-ink border border-crt-amber/45 rounded-[3px] px-2 py-0.5 rotate-[6deg]"
+        class="nf-badge absolute -top-3 -right-3 font-mono text-xs font-bold text-crt-amber bg-shadow-ink border border-crt-amber/45 rounded-[var(--radius-ui)] px-2 py-0.5 rotate-[6deg]"
         aria-hidden="true"
       >?!</span>
     </div>
 
     <div class="space-y-3 max-w-xl">
-      <h1 class="font-display font-bold text-5xl md:text-6xl tracking-[0.08em] text-neon-cyan">404</h1>
-      <p class="font-body font-bold text-xl md:text-2xl text-phosphor">
+      <h1 class="nf-code font-display font-bold text-5xl md:text-6xl tracking-[0.08em] text-neon-cyan">404</h1>
+      <p class="nf-heading font-body font-bold text-xl md:text-2xl text-phosphor">
         {t.notFound.heading}
       </p>
       <p class="font-body text-sm md:text-base text-phosphor-body leading-relaxed">
@@ -33,16 +33,16 @@ const t = siteCopy[locale];
       </p>
     </div>
 
-    <div class="flex flex-wrap items-center justify-center gap-3.5 font-mono text-xs">
+    <div class="nf-actions flex flex-wrap items-center justify-center gap-3.5 font-mono text-xs">
       <a
         href={localizedPath(locale, '/')}
-        class="px-5 py-2.5 rounded-[3px] font-semibold tracking-[0.06em] bg-neon-cyan text-shadow-ink border border-neon-cyan hover:brightness-105 transition-all"
+        class="nf-btn-home px-5 py-2.5 rounded-[var(--radius-ui)] font-semibold tracking-[0.06em] bg-neon-cyan text-shadow-ink border border-neon-cyan hover:brightness-105 transition-all"
       >
         {t.notFound.home}
       </a>
       <a
         href={localizedPath(locale, '/playbook')}
-        class="px-5 py-2.5 rounded-[3px] font-semibold tracking-[0.06em] bg-deep-purple/85 border border-neon-magenta/40 text-neon-magenta hover:bg-neon-magenta hover:text-shadow-ink transition-colors"
+        class="nf-btn-playbook px-5 py-2.5 rounded-[var(--radius-ui)] font-semibold tracking-[0.06em] bg-deep-purple/85 border border-neon-magenta/40 text-neon-magenta hover:bg-neon-magenta hover:text-shadow-ink transition-colors"
       >
         {t.notFound.playbook}
       </a>
@@ -60,4 +60,47 @@ const t = siteCopy[locale];
     50% { transform: translateY(-8px); }
   }
   .animate-float { animation: float 2.4s ease-in-out infinite; }
+
+  :global(html[data-theme='retro']) .nf-mascot {
+    filter: drop-shadow(0 0 20px rgb(var(--rgb-neon-magenta) / 0.6));
+  }
+  :global(html[data-theme='retro']) .nf-badge {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    border: 2px solid var(--c-crt-amber);
+    border-radius: 0;
+  }
+  :global(html[data-theme='retro']) .nf-code {
+    font-family: 'Press Start 2P', monospace;
+    color: var(--c-neon-magenta);
+  }
+  :global(html[data-theme='retro']) .nf-heading {
+    font-family: 'DotGothic16', sans-serif;
+  }
+  :global(html[data-theme='retro']) .nf-actions {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+  }
+  :global(html[data-theme='retro']) .nf-btn-home {
+    background: transparent;
+    color: var(--c-neon-cyan);
+    border: 2px solid var(--c-neon-cyan);
+    border-radius: 0;
+    box-shadow: 4px 4px 0 var(--c-shadow-ink), var(--shadow-neon-cyan);
+  }
+  :global(html[data-theme='retro']) .nf-btn-home:hover {
+    background: var(--c-neon-cyan);
+    color: var(--c-midnight);
+  }
+  :global(html[data-theme='retro']) .nf-btn-playbook {
+    background: transparent;
+    color: var(--c-neon-magenta);
+    border: 2px solid rgb(var(--rgb-neon-magenta) / 0.6);
+    border-radius: 0;
+    box-shadow: 4px 4px 0 var(--c-shadow-ink);
+  }
+  :global(html[data-theme='retro']) .nf-btn-playbook:hover {
+    background: var(--c-neon-magenta);
+    color: var(--c-midnight);
+  }
 </style>

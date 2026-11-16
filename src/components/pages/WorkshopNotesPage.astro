@@ -41,11 +41,11 @@ interface Section {
 // Section colors mirror the playbook category logic:
 // cyan = Introduction / Test & Secure, green = Plan / Operate,
 // magenta = Develop (Code), amber = Review (and the yellow bookends).
-const COLORS: Record<SectionColor, { text: string; accent: string; hex: string }> = {
-  magenta: { text: 'text-neon-magenta', accent: 'accent-neon-magenta', hex: '#93a8ff' },
-  cyan: { text: 'text-neon-cyan', accent: 'accent-neon-cyan', hex: '#5eead4' },
-  amber: { text: 'text-crt-amber', accent: 'accent-crt-amber', hex: '#fcd34d' },
-  green: { text: 'text-gb-green', accent: 'accent-gb-green', hex: '#86efac' },
+const COLORS: Record<SectionColor, { text: string; accent: string; cssVar: string }> = {
+  magenta: { text: 'text-neon-magenta', accent: 'accent-neon-magenta', cssVar: 'var(--c-neon-magenta)' },
+  cyan: { text: 'text-neon-cyan', accent: 'accent-neon-cyan', cssVar: 'var(--c-neon-cyan)' },
+  amber: { text: 'text-crt-amber', accent: 'accent-crt-amber', cssVar: 'var(--c-crt-amber)' },
+  green: { text: 'text-gb-green', accent: 'accent-gb-green', cssVar: 'var(--c-gb-green)' },
 };
 
 const sections: Section[] = [
@@ -317,8 +317,8 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
       {w.sections.map((section, si) => {
         const c = COLORS[section.color];
         return (
-          <details class="ws-section" data-section={`${w.id}-${si}`} style={`--c:${c.hex}`} open>
-            <summary class={`ws-summary flex items-center gap-3 cursor-pointer select-none px-2.5 py-2.5 rounded-[3px] ${c.text}`}>
+          <details class="ws-section" data-section={`${w.id}-${si}`} style={`--c:${c.cssVar}`} open>
+            <summary class={`ws-summary flex items-center gap-3 cursor-pointer select-none px-2.5 py-2.5 rounded-[var(--radius-card)] ${c.text}`}>
               <span class="ws-node shrink-0" aria-hidden="true"></span>
               <span class="ws-chevron font-mono text-xs transition-transform duration-200">▶</span>
               <h2 class="font-display text-sm md:text-base font-bold tracking-[0.08em] leading-tight flex-1">
@@ -348,7 +348,7 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
                 return (
                   <li>
                     <label
-                      class="ws-row group flex items-start gap-3 cursor-pointer px-2.5 py-2 rounded-[3px] border border-transparent hover:border-neon-cyan/25 hover:bg-deep-purple/65 transition-colors"
+                      class="ws-row group flex items-start gap-3 cursor-pointer px-2.5 py-2 rounded-[var(--radius-card)] border border-transparent hover:border-neon-cyan/25 hover:bg-deep-purple/65 transition-colors"
                       for={id}
                     >
                       <input type="checkbox" id={id} class={`ws-check mt-0.5 h-4 w-4 shrink-0 ${c.accent} cursor-pointer`} />
@@ -380,21 +380,21 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
 </Layout>
 
 <style>
-  /* EXP progress bar (inside the Phosphor HUD frame) */
+  /* EXP progress bar (inside the Phosphor HUD / Retro QUEST frame) */
   .ws-exp { display: flex; align-items: center; gap: 0.7rem; }
   .ws-exp-tag {
     font-family: var(--font-mono-hud);
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 0.14em;
-    color: #5eead4;
+    color: var(--c-neon-cyan);
   }
   .ws-track {
     flex: 1;
     height: 14px;
-    background: #04080e;
-    border: 1px solid rgba(94, 234, 212, 0.34);
-    border-radius: 3px;
+    background: var(--c-shadow-ink);
+    border: 1px solid rgb(var(--rgb-neon-cyan) / 0.34);
+    border-radius: var(--radius-card);
     padding: 2px;
     position: relative;
     overflow: hidden;
@@ -402,20 +402,20 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
   .ws-bar-fill {
     height: 100%;
     width: 0;
-    border-radius: 1px;
-    background: linear-gradient(90deg, #5eead4, #93a8ff);
-    box-shadow: 0 0 10px rgba(94, 234, 212, 0.4);
+    border-radius: var(--radius-ui);
+    background: linear-gradient(90deg, var(--c-neon-cyan), var(--c-neon-magenta));
+    box-shadow: 0 0 10px rgb(var(--rgb-neon-cyan) / 0.4);
     transition: width 0.3s ease;
   }
   .ws-exp-ticks { position: absolute; inset: 2px; display: flex; pointer-events: none; }
-  .ws-exp-ticks span { flex: 1; border-right: 1px solid rgba(94, 234, 212, 0.16); }
+  .ws-exp-ticks span { flex: 1; border-right: 1px solid rgb(var(--rgb-neon-cyan) / 0.16); }
   .ws-exp-ticks span:last-child { border-right: none; }
   .ws-exp-count {
     font-family: var(--font-mono-hud);
     font-size: 0.85rem;
     font-weight: 600;
     font-variant-numeric: tabular-nums;
-    color: #5eead4;
+    color: var(--c-neon-cyan);
     white-space: nowrap;
   }
   .ws-exp-ctrls { display: flex; justify-content: flex-start; gap: 0.45rem; margin-top: 0.9rem; }
@@ -424,17 +424,17 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 0.1em;
-    color: #5eead4;
-    background: #04080e;
-    border: 1px solid rgba(94, 234, 212, 0.32);
-    border-radius: 3px;
+    color: var(--c-neon-cyan);
+    background: var(--c-shadow-ink);
+    border: 1px solid var(--c-border-strong);
+    border-radius: var(--radius-ui);
     padding: 0.45em 0.75em;
     cursor: pointer;
     transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   }
-  .ws-exp-btn:hover { background: #5eead4; border-color: #5eead4; color: #04080e; }
-  .ws-exp-btn.reset { color: #fcd34d; border-color: rgba(252, 211, 77, 0.38); }
-  .ws-exp-btn.reset:hover { background: #fcd34d; border-color: #fcd34d; color: #04080e; }
+  .ws-exp-btn:hover { background: var(--c-neon-cyan); border-color: var(--c-neon-cyan); color: var(--c-shadow-ink); }
+  .ws-exp-btn.reset { color: var(--c-crt-amber); border-color: rgb(var(--rgb-crt-amber) / 0.38); }
+  .ws-exp-btn.reset:hover { background: var(--c-crt-amber); border-color: var(--c-crt-amber); color: var(--c-shadow-ink); }
 
   .ws-summary::-webkit-details-marker { display: none; }
   .ws-summary {
@@ -442,26 +442,26 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     transition: background-color 0.15s ease;
   }
   .ws-summary:hover {
-    background-color: rgba(11, 20, 32, 0.75);
+    background-color: rgb(var(--rgb-deep-purple) / 0.75);
   }
 
   /* HUD LOG frame for the /ws top */
   .ws-quest {
     position: relative;
     overflow: visible;
-    border: 1px solid rgba(94, 234, 212, 0.24);
-    border-radius: 3px;
+    border: 1px solid rgb(var(--rgb-neon-cyan) / 0.24);
+    border-radius: var(--radius-card);
     padding: clamp(1.15rem, 3vw, 1.75rem);
     margin-bottom: 2rem;
-    background-color: rgba(11, 20, 32, 0.86);
+    background-color: var(--c-bg-elevated);
     background-image:
-      linear-gradient(90deg, #5eead4 0%, color-mix(in srgb, #5eead4 30%, transparent) 55%, transparent 100%),
-      repeating-linear-gradient(90deg, rgba(94, 234, 212, 0.03) 0 1px, transparent 1px 36px);
+      linear-gradient(90deg, var(--c-neon-cyan) 0%, color-mix(in srgb, var(--c-neon-cyan) 30%, transparent) 55%, transparent 100%),
+      repeating-linear-gradient(90deg, rgb(var(--rgb-neon-cyan) / 0.03) 0 1px, transparent 1px 36px);
     background-size: 100% 2px, auto;
     background-position: top left, 0 0;
     background-repeat: no-repeat, repeat;
     backdrop-filter: blur(10px);
-    box-shadow: 0 14px 36px rgba(4, 8, 14, 0.48);
+    box-shadow: 0 14px 36px rgb(var(--rgb-shadow-ink) / 0.48);
   }
   .ws-quest::after {
     content: 'WORKSHOP LOG';
@@ -469,10 +469,10 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     left: 1rem;
     top: -0.65rem;
     padding: 0.1rem 0.55rem;
-    border-radius: 3px;
-    border: 1px solid rgba(252, 211, 77, 0.35);
-    color: #fcd34d;
-    background: #04080e;
+    border-radius: var(--radius-ui);
+    border: 1px solid rgb(var(--rgb-crt-amber) / 0.35);
+    color: var(--c-crt-amber);
+    background: var(--c-shadow-ink);
     font-family: var(--font-mono-hud);
     font-size: 10px;
     font-weight: 600;
@@ -484,10 +484,10 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     right: 1rem;
     top: -0.65rem;
     padding: 0.1rem 0.55rem;
-    border-radius: 3px;
-    border: 1px solid rgba(94, 234, 212, 0.32);
-    color: #5eead4;
-    background: #04080e;
+    border-radius: var(--radius-ui);
+    border: 1px solid var(--c-border-strong);
+    color: var(--c-neon-cyan);
+    background: var(--c-shadow-ink);
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 0.12em;
@@ -502,7 +502,7 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     align-items: center;
   }
   .ws-quest-title {
-    color: #ecf7fb;
+    color: var(--c-phosphor);
     font-size: clamp(1.1rem, 3vw, 1.65rem);
     font-weight: 700;
     letter-spacing: 0.06em;
@@ -513,7 +513,7 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
   .ws-quest-sum {
     max-width: 46rem;
     margin-top: 0.9rem;
-    color: #bad0de;
+    color: var(--c-fg-body);
     font-size: 0.94rem;
     line-height: 1.75;
   }
@@ -527,10 +527,10 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     top: 104%;
     width: 11rem;
     height: 4rem;
-    border: 1px solid rgba(94, 234, 212, 0.38);
+    border: 1px solid rgb(var(--rgb-neon-cyan) / 0.38);
     border-radius: 50%;
     transform: translate(-50%, -50%) rotate(-14deg);
-    box-shadow: 0 0 12px rgba(94, 234, 212, 0.18);
+    box-shadow: 0 0 12px rgb(var(--rgb-neon-cyan) / 0.18);
     pointer-events: none;
   }
   .ws-quest-mascot img {
@@ -538,7 +538,7 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     z-index: 1;
     width: min(9rem, 100%);
     height: auto;
-    filter: drop-shadow(0 12px 18px rgba(4, 8, 14, 0.65)) drop-shadow(0 0 22px rgba(94, 234, 212, 0.32));
+    filter: drop-shadow(0 12px 18px rgb(var(--rgb-shadow-ink) / 0.65)) drop-shadow(0 0 22px rgb(var(--rgb-neon-cyan) / 0.32));
     animation: ws-mascot-drift 7s ease-in-out infinite;
   }
   @keyframes ws-mascot-drift { 50% { transform: translateY(-10px); } }
@@ -555,21 +555,21 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     font-weight: 600;
     letter-spacing: 0.12em;
     padding: 0.4rem 0.75rem;
-    border-radius: 3px;
-    color: #728fa3;
-    background: #04080e;
-    border: 1px solid rgba(94, 234, 212, 0.22);
+    border-radius: var(--radius-ui);
+    color: var(--c-fg-muted);
+    background: var(--c-shadow-ink);
+    border: 1px solid rgb(var(--rgb-neon-cyan) / 0.22);
     cursor: pointer;
     transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
   }
   .ws-tab:hover {
-    color: #ecf7fb;
-    border-color: rgba(94, 234, 212, 0.48);
+    color: var(--c-phosphor);
+    border-color: rgb(var(--rgb-neon-cyan) / 0.48);
   }
   .ws-tab.is-active {
-    color: #04080e;
-    border-color: #5eead4;
-    background: #5eead4;
+    color: var(--c-shadow-ink);
+    border-color: var(--c-neon-cyan);
+    background: var(--c-neon-cyan);
   }
 
   /* Under-construction panel for unbuilt workshops */
@@ -582,14 +582,14 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     text-align: center;
     gap: 1rem;
     padding: 4rem 1rem 5rem;
-    border-radius: 3px;
-    border: 1px solid rgba(94, 234, 212, 0.16);
-    background: rgba(11, 20, 32, 0.86);
+    border-radius: var(--radius-card);
+    border: 1px solid var(--c-border);
+    background: var(--c-bg-elevated);
   }
   .ws-uc-icon {
     width: 160px;
     height: 160px;
-    filter: drop-shadow(0 0 16px rgba(252, 211, 77, 0.35));
+    filter: drop-shadow(0 0 16px rgb(var(--rgb-crt-amber) / 0.35));
     animation: ws-uc-float 2.4s ease-in-out infinite;
   }
   @keyframes ws-uc-float {
@@ -603,11 +603,11 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     font-size: 1rem;
     font-weight: 700;
     letter-spacing: 0.22em;
-    color: #fcd34d;
+    color: var(--c-crt-amber);
   }
   .ws-uc-body {
     font-size: 0.92rem;
-    color: #bad0de;
+    color: var(--c-fg-body);
   }
   .ws-subtitle {
     font-weight: 500;
@@ -622,13 +622,13 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     align-items: center;
     gap: 0.3rem;
     padding: 0.15rem 0.5rem;
-    border-radius: 3px;
+    border-radius: var(--radius-ui);
     font-family: var(--font-mono-hud);
     font-size: 11px;
     font-weight: 600;
     line-height: 1.4;
     color: var(--c);
-    background: #04080e;
+    background: var(--c-shadow-ink);
     border: 1px solid color-mix(in srgb, var(--c) 55%, transparent);
     cursor: pointer;
     transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
@@ -636,12 +636,12 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
   .ws-copy:hover {
     background: var(--c);
     border-color: var(--c);
-    color: #04080e;
+    color: var(--c-shadow-ink);
   }
   .ws-copy.is-copied {
     background: var(--c);
     border-color: var(--c);
-    color: #04080e;
+    color: var(--c-shadow-ink);
   }
   .ws-copy-icon { font-size: 11px; line-height: 1; }
   details[open] > .ws-summary .ws-chevron { transform: rotate(90deg); }
@@ -673,7 +673,7 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     top: 0.7rem;
     bottom: 0.7rem;
     width: 2px;
-    background: linear-gradient(#5eead4, #93a8ff);
+    background: linear-gradient(var(--c-neon-cyan), var(--c-neon-magenta));
     opacity: 0.45;
   }
   .ws-section {
@@ -686,10 +686,10 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     top: 0.95rem;
     width: 13px;
     height: 13px;
-    border-radius: 3px;
+    border-radius: var(--radius-ui);
     background: var(--c);
     box-shadow: 0 0 8px color-mix(in srgb, var(--c) 55%, transparent);
-    border: 2px solid #04080e;
+    border: 2px solid var(--c-shadow-ink);
   }
   .ws-list {
     border-left: 1px solid color-mix(in srgb, var(--c) 32%, transparent);
@@ -717,9 +717,9 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     -webkit-appearance: none;
     width: 16px;
     height: 16px;
-    border-radius: 3px;
+    border-radius: var(--radius-ui);
     border: 1.5px solid var(--c);
-    background: #04080e;
+    background: var(--c-shadow-ink);
     position: relative;
     cursor: pointer;
   }
@@ -738,14 +738,14 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     font-size: 11px;
     font-weight: 700;
     line-height: 1;
-    color: #04080e;
+    color: var(--c-shadow-ink);
   }
 
   /* Checked label dims to muted slate with a strike-through */
   .ws-check:checked + .ws-label {
-    color: #728fa3;
+    color: var(--c-fg-muted);
     text-decoration: line-through;
-    text-decoration-color: rgba(114, 143, 163, 0.55);
+    text-decoration-color: rgb(var(--rgb-phosphor-muted) / 0.55);
   }
   .ws-check:checked + .ws-label::before {
     color: inherit;
@@ -762,7 +762,7 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     opacity: 0.75;
   }
   .ws-section.is-complete > .ws-summary .ws-node {
-    background: #728fa3;
+    background: var(--c-fg-muted);
     box-shadow: none;
   }
   .ws-section.is-complete > .ws-summary h2::after {
@@ -776,9 +776,9 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     font-weight: 600;
     letter-spacing: 0.08em;
     color: var(--c);
-    background: #04080e;
+    background: var(--c-shadow-ink);
     border: 1px solid color-mix(in srgb, var(--c) 45%, transparent);
-    border-radius: 3px;
+    border-radius: var(--radius-ui);
     padding: 0.3em 0.6em;
     cursor: pointer;
     opacity: 0.55;
@@ -792,13 +792,142 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
   .ws-check-all:hover {
     background: var(--c);
     border-color: var(--c);
-    color: #04080e;
+    color: var(--c-shadow-ink);
   }
   .ws-check-all.is-all {
     opacity: 1;
     background: var(--c);
     border-color: var(--c);
-    color: #04080e;
+    color: var(--c-shadow-ink);
+  }
+
+  /* Retro JRPG overrides */
+  :global(html[data-theme='retro']) .ws-quest {
+    border: 2px solid rgb(var(--rgb-neon-cyan) / 0.66);
+    border-radius: 0;
+    background:
+      linear-gradient(130deg, rgb(var(--rgb-shadow-ink) / 0.94), rgb(var(--rgb-midnight) / 0.82)),
+      repeating-linear-gradient(90deg, rgb(var(--rgb-neon-cyan) / 0.05) 0 1px, transparent 1px 36px);
+    backdrop-filter: none;
+    box-shadow: 7px 7px 0 rgb(var(--rgb-shadow-ink) / 0.88), inset 0 0 28px rgb(var(--rgb-neon-cyan) / 0.1);
+  }
+  :global(html[data-theme='retro']) .ws-quest::before {
+    content: '';
+    position: absolute;
+    inset: 0.85rem;
+    border: 1px dashed rgb(var(--rgb-neon-cyan) / 0.34);
+    pointer-events: none;
+  }
+  :global(html[data-theme='retro']) .ws-quest::after {
+    border: 0;
+    border-radius: 0;
+    padding: 0 0.6rem;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+  }
+  :global(html[data-theme='retro']) .ws-quest-time {
+    border: 0;
+    border-radius: 0;
+    padding: 0 0.6rem;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+  }
+  :global(html[data-theme='retro']) .ws-quest-title {
+    font-family: 'Press Start 2P', monospace;
+    color: var(--c-neon-cyan);
+    font-size: clamp(0.85rem, 3vw, 1.5rem);
+    text-shadow: 0 0 20px rgb(var(--rgb-neon-cyan) / 0.5);
+  }
+  :global(html[data-theme='retro']) .ws-quest-sum,
+  :global(html[data-theme='retro']) .ws-label,
+  :global(html[data-theme='retro']) .ws-uc-body {
+    font-family: 'DotGothic16', sans-serif;
+  }
+  :global(html[data-theme='retro']) .ws-tab {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+    border-radius: 0;
+    border-width: 2px;
+    background: transparent;
+  }
+  :global(html[data-theme='retro']) .ws-tab.is-active {
+    background: var(--c-neon-cyan);
+    color: var(--c-shadow-ink);
+    box-shadow: 0 0 10px rgb(var(--rgb-neon-cyan) / 0.45);
+  }
+  :global(html[data-theme='retro']) .ws-exp-tag {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+  }
+  :global(html[data-theme='retro']) .ws-track {
+    height: 16px;
+    border: 2px solid rgb(var(--rgb-neon-cyan) / 0.7);
+    border-radius: 0;
+  }
+  :global(html[data-theme='retro']) .ws-bar-fill {
+    border-radius: 0;
+  }
+  :global(html[data-theme='retro']) .ws-exp-count {
+    font-family: 'VT323', monospace;
+    font-size: 1.3rem;
+  }
+  :global(html[data-theme='retro']) .ws-exp-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    border-radius: 0;
+    background: transparent;
+  }
+  :global(html[data-theme='retro']) .ws-construction {
+    border: 2px dashed rgb(var(--rgb-crt-amber) / 0.5);
+    border-radius: 0;
+    background: rgb(var(--rgb-shadow-ink) / 0.85);
+  }
+  :global(html[data-theme='retro']) .ws-uc-title {
+    font-family: 'Press Start 2P', monospace;
+  }
+  :global(html[data-theme='retro']) .ws-summary {
+    border-radius: 0;
+  }
+  :global(html[data-theme='retro']) .ws-summary h2 {
+    font-family: 'DotGothic16', sans-serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.12em;
+  }
+  :global(html[data-theme='retro']) .ws-duration,
+  :global(html[data-theme='retro']) .ws-section-count {
+    font-family: 'VT323', monospace;
+    font-size: 1.05rem;
+  }
+  :global(html[data-theme='retro']) .ws-node {
+    border-radius: 0;
+    width: 14px;
+    height: 14px;
+    box-shadow: 0 0 8px var(--c);
+  }
+  :global(html[data-theme='retro']) .ws-list {
+    border-left: 1px dashed color-mix(in srgb, var(--c) 40%, transparent);
+  }
+  :global(html[data-theme='retro']) .ws-check {
+    border-radius: 0;
+    border-width: 2px;
+    background: transparent;
+  }
+  :global(html[data-theme='retro']) .ws-check-all,
+  :global(html[data-theme='retro']) .ws-copy {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    border-radius: 0;
+    background: transparent;
+  }
+  :global(html[data-theme='retro']) .ws-check-all:hover,
+  :global(html[data-theme='retro']) .ws-check-all.is-all,
+  :global(html[data-theme='retro']) .ws-copy:hover,
+  :global(html[data-theme='retro']) .ws-copy.is-copied {
+    background: var(--c);
+    color: var(--c-shadow-ink);
+    box-shadow: 0 0 8px var(--c);
   }
 </style>
 

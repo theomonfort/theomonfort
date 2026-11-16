@@ -47,28 +47,28 @@ links:
 <svg viewBox="0 0 1720 460" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Agent ROI = (Agent 出力の価値 − トークンコスト) / トークンコスト × 100%。価値を伸ばせば、結果としてコストは下がる。" style="display:block;max-width:1100px;margin:0 auto;">
 <defs>
 <linearGradient id="roi-funnel" x1="0" y1="0" x2="0" y2="1">
-<stop offset="0%" stop-color="#86efac" stop-opacity="0.55"/>
-<stop offset="100%" stop-color="#86efac" stop-opacity="0"/>
+<stop offset="0%" stop-color="var(--c-gb-green)" stop-opacity="0.55"/>
+<stop offset="100%" stop-color="var(--c-gb-green)" stop-opacity="0"/>
 </linearGradient>
 </defs>
-<text x="20" y="340" font-size="60" font-weight="bold" fill="#86efac" font-family="'JetBrains Mono','Courier New',monospace" letter-spacing="3">AGENT ROI</text>
-<circle cx="475" cy="320" r="34" fill="none" stroke="#86efac" stroke-width="2"/>
+<text x="20" y="340" font-size="60" font-weight="bold" fill="var(--c-gb-green)" font-family="'JetBrains Mono','Courier New',monospace" letter-spacing="3">AGENT ROI</text>
+<circle cx="475" cy="320" r="34" fill="none" stroke="var(--c-gb-green)" stroke-width="2"/>
 <text x="475" y="338" text-anchor="middle" font-size="44" fill="#ffffff" font-family="serif">=</text>
-<rect x="555" y="20" width="350" height="80" fill="rgba(4, 8, 14,0.85)" stroke="#86efac" stroke-width="2"/>
-<text x="730" y="50" text-anchor="middle" font-size="22" fill="#86efac" font-family="'JetBrains Mono','Noto Sans JP',monospace" font-weight="bold">ここを</text>
-<text x="730" y="82" text-anchor="middle" font-size="22" fill="#86efac" font-family="'JetBrains Mono','Noto Sans JP',monospace" font-weight="bold">伸ばすほど…</text>
+<rect x="555" y="20" width="350" height="80" fill="rgb(var(--rgb-shadow-ink) / 0.85)" stroke="var(--c-gb-green)" stroke-width="2"/>
+<text x="730" y="50" text-anchor="middle" font-size="22" fill="var(--c-gb-green)" font-family="'JetBrains Mono','Noto Sans JP',monospace" font-weight="bold">ここを</text>
+<text x="730" y="82" text-anchor="middle" font-size="22" fill="var(--c-gb-green)" font-family="'JetBrains Mono','Noto Sans JP',monospace" font-weight="bold">伸ばすほど…</text>
 <polygon points="555,100 905,100 810,225 650,225" fill="url(#roi-funnel)"/>
 <text x="730" y="265" text-anchor="middle" font-size="46" fill="#ffffff" font-family="'Noto Sans JP',sans-serif">Agent 出力の価値</text>
-<circle cx="1080" cy="248" r="30" fill="none" stroke="#86efac" stroke-width="2"/>
+<circle cx="1080" cy="248" r="30" fill="none" stroke="var(--c-gb-green)" stroke-width="2"/>
 <text x="1080" y="265" text-anchor="middle" font-size="40" fill="#ffffff" font-family="serif">−</text>
-<rect x="1060" y="20" width="420" height="80" fill="rgba(4, 8, 14,0.85)" stroke="#86efac" stroke-width="2"/>
-<text x="1270" y="50" text-anchor="middle" font-size="22" fill="#86efac" font-family="'JetBrains Mono','Noto Sans JP',monospace" font-weight="bold">…たいてい</text>
-<text x="1270" y="82" text-anchor="middle" font-size="22" fill="#86efac" font-family="'JetBrains Mono','Noto Sans JP',monospace" font-weight="bold">こちらは下がる</text>
+<rect x="1060" y="20" width="420" height="80" fill="rgb(var(--rgb-shadow-ink) / 0.85)" stroke="var(--c-gb-green)" stroke-width="2"/>
+<text x="1270" y="50" text-anchor="middle" font-size="22" fill="var(--c-gb-green)" font-family="'JetBrains Mono','Noto Sans JP',monospace" font-weight="bold">…たいてい</text>
+<text x="1270" y="82" text-anchor="middle" font-size="22" fill="var(--c-gb-green)" font-family="'JetBrains Mono','Noto Sans JP',monospace" font-weight="bold">こちらは下がる</text>
 <polygon points="1060,100 1480,100 1370,225 1200,225" fill="url(#roi-funnel)"/>
 <text x="1270" y="265" text-anchor="middle" font-size="46" fill="#ffffff" font-family="'Noto Sans JP',sans-serif">トークンコスト</text>
 <line x1="585" y1="320" x2="1480" y2="320" stroke="#ffffff" stroke-width="3"/>
 <text x="1032" y="395" text-anchor="middle" font-size="46" fill="#ffffff" font-family="'Noto Sans JP',sans-serif">トークンコスト</text>
-<circle cx="1525" cy="320" r="30" fill="none" stroke="#86efac" stroke-width="2"/>
+<circle cx="1525" cy="320" r="30" fill="none" stroke="var(--c-gb-green)" stroke-width="2"/>
 <text x="1525" y="340" text-anchor="middle" font-size="40" fill="#ffffff" font-family="serif">*</text>
 <text x="1570" y="338" font-size="46" fill="#ffffff" font-family="'Noto Sans JP',sans-serif">100%</text>
 </svg>
@@ -82,23 +82,23 @@ links:
 
 <div style="max-width:80%;margin:1.5em auto;">
 <svg viewBox="0 0 560 344" role="img" aria-label="N ステップ後の成功率" style="width:100%;height:auto;font-family:inherit;overflow:visible">
-<line x1="150" y1="22" x2="178" y2="22" stroke="#fb7185" stroke-width="3"/><circle cx="164" cy="22" r="3" fill="#fb7185"/>
-<text x="186" y="27" fill="#fb7185" font-size="14" font-weight="700">95% / ステップ</text>
-<line x1="320" y1="22" x2="348" y2="22" stroke="#86efac" stroke-width="3"/><circle cx="334" cy="22" r="3" fill="#86efac"/>
-<text x="356" y="27" fill="#86efac" font-size="14" font-weight="700">99% / ステップ</text>
+<line x1="150" y1="22" x2="178" y2="22" stroke="var(--c-coral-alert)" stroke-width="3"/><circle cx="164" cy="22" r="3" fill="var(--c-coral-alert)"/>
+<text x="186" y="27" fill="var(--c-coral-alert)" font-size="14" font-weight="700">95% / ステップ</text>
+<line x1="320" y1="22" x2="348" y2="22" stroke="var(--c-gb-green)" stroke-width="3"/><circle cx="334" cy="22" r="3" fill="var(--c-gb-green)"/>
+<text x="356" y="27" fill="var(--c-gb-green)" font-size="14" font-weight="700">99% / ステップ</text>
 <line x1="64" y1="300" x2="516" y2="300" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="64" y1="248" x2="516" y2="248" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="64" y1="196" x2="516" y2="196" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="64" y1="144" x2="516" y2="144" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="64" y1="92" x2="516" y2="92" stroke="rgba(255,255,255,0.08)" stroke-width="1"/><line x1="64" y1="40" x2="516" y2="40" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
 <line x1="64" y1="300" x2="516" y2="300" stroke="#9fb3c8" stroke-width="1.2"/>
 <text x="54" y="304" text-anchor="end" fill="#9fb3c8" font-size="13">0%</text><text x="54" y="252" text-anchor="end" fill="#9fb3c8" font-size="13">20%</text><text x="54" y="200" text-anchor="end" fill="#9fb3c8" font-size="13">40%</text><text x="54" y="148" text-anchor="end" fill="#9fb3c8" font-size="13">60%</text><text x="54" y="96" text-anchor="end" fill="#9fb3c8" font-size="13">80%</text><text x="54" y="44" text-anchor="end" fill="#9fb3c8" font-size="13">100%</text>
 <text x="64" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">1</text><text x="100.9" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">5</text><text x="147" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">10</text><text x="193.1" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">15</text><text x="239.3" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">20</text><text x="331.5" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">30</text><text x="423.8" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">40</text><text x="516" y="318" text-anchor="middle" fill="#9fb3c8" font-size="13">50</text>
 <text x="290" y="340" text-anchor="middle" fill="#9fb3c8" font-size="13" font-weight="700">ステップ数</text>
-<polyline points="64,42.6 100.9,53 147,66 193.1,76.4 239.3,86.8 285.4,97.2 331.5,107.6 377.6,118 423.8,125.8 469.9,133.6 516,144" fill="none" stroke="#86efac" stroke-width="2.6" stroke-linejoin="round"/><circle cx="64" cy="42.6" r="2.6" fill="#86efac"/><circle cx="100.9" cy="53" r="2.6" fill="#86efac"/><circle cx="147" cy="66" r="2.6" fill="#86efac"/><circle cx="193.1" cy="76.4" r="2.6" fill="#86efac"/><circle cx="239.3" cy="86.8" r="2.6" fill="#86efac"/><circle cx="285.4" cy="97.2" r="2.6" fill="#86efac"/><circle cx="331.5" cy="107.6" r="2.6" fill="#86efac"/><circle cx="377.6" cy="118" r="2.6" fill="#86efac"/><circle cx="423.8" cy="125.8" r="2.6" fill="#86efac"/><circle cx="469.9" cy="133.6" r="2.6" fill="#86efac"/><circle cx="516" cy="144" r="2.6" fill="#86efac"/>
-<polyline points="64,53 100.9,99.8 147,144 193.1,180.4 239.3,206.4 285.4,227.2 331.5,245.4 377.6,255.8 423.8,266.2 469.9,274 516,279.2" fill="none" stroke="#fb7185" stroke-width="2.6" stroke-linejoin="round"/><circle cx="64" cy="53" r="2.6" fill="#fb7185"/><circle cx="100.9" cy="99.8" r="2.6" fill="#fb7185"/><circle cx="147" cy="144" r="2.6" fill="#fb7185"/><circle cx="193.1" cy="180.4" r="2.6" fill="#fb7185"/><circle cx="239.3" cy="206.4" r="2.6" fill="#fb7185"/><circle cx="285.4" cy="227.2" r="2.6" fill="#fb7185"/><circle cx="331.5" cy="245.4" r="2.6" fill="#fb7185"/><circle cx="377.6" cy="255.8" r="2.6" fill="#fb7185"/><circle cx="423.8" cy="266.2" r="2.6" fill="#fb7185"/><circle cx="469.9" cy="274" r="2.6" fill="#fb7185"/><circle cx="516" cy="279.2" r="2.6" fill="#fb7185"/>
-<text x="70" y="34.6" fill="#86efac" font-size="14" font-weight="700">99%</text>
-<text x="235.3" y="77.8" text-anchor="middle" fill="#86efac" font-size="14" font-weight="700">82%</text>
-<text x="524" y="148" fill="#86efac" font-size="14" font-weight="700">60%</text>
-<text x="70" y="71" fill="#fb7185" font-size="14" font-weight="700">95%</text>
-<text x="235.3" y="226.4" text-anchor="middle" fill="#fb7185" font-size="14" font-weight="700">36%</text>
-<text x="524" y="283.2" fill="#fb7185" font-size="14" font-weight="700">8%</text>
+<polyline points="64,42.6 100.9,53 147,66 193.1,76.4 239.3,86.8 285.4,97.2 331.5,107.6 377.6,118 423.8,125.8 469.9,133.6 516,144" fill="none" stroke="var(--c-gb-green)" stroke-width="2.6" stroke-linejoin="round"/><circle cx="64" cy="42.6" r="2.6" fill="var(--c-gb-green)"/><circle cx="100.9" cy="53" r="2.6" fill="var(--c-gb-green)"/><circle cx="147" cy="66" r="2.6" fill="var(--c-gb-green)"/><circle cx="193.1" cy="76.4" r="2.6" fill="var(--c-gb-green)"/><circle cx="239.3" cy="86.8" r="2.6" fill="var(--c-gb-green)"/><circle cx="285.4" cy="97.2" r="2.6" fill="var(--c-gb-green)"/><circle cx="331.5" cy="107.6" r="2.6" fill="var(--c-gb-green)"/><circle cx="377.6" cy="118" r="2.6" fill="var(--c-gb-green)"/><circle cx="423.8" cy="125.8" r="2.6" fill="var(--c-gb-green)"/><circle cx="469.9" cy="133.6" r="2.6" fill="var(--c-gb-green)"/><circle cx="516" cy="144" r="2.6" fill="var(--c-gb-green)"/>
+<polyline points="64,53 100.9,99.8 147,144 193.1,180.4 239.3,206.4 285.4,227.2 331.5,245.4 377.6,255.8 423.8,266.2 469.9,274 516,279.2" fill="none" stroke="var(--c-coral-alert)" stroke-width="2.6" stroke-linejoin="round"/><circle cx="64" cy="53" r="2.6" fill="var(--c-coral-alert)"/><circle cx="100.9" cy="99.8" r="2.6" fill="var(--c-coral-alert)"/><circle cx="147" cy="144" r="2.6" fill="var(--c-coral-alert)"/><circle cx="193.1" cy="180.4" r="2.6" fill="var(--c-coral-alert)"/><circle cx="239.3" cy="206.4" r="2.6" fill="var(--c-coral-alert)"/><circle cx="285.4" cy="227.2" r="2.6" fill="var(--c-coral-alert)"/><circle cx="331.5" cy="245.4" r="2.6" fill="var(--c-coral-alert)"/><circle cx="377.6" cy="255.8" r="2.6" fill="var(--c-coral-alert)"/><circle cx="423.8" cy="266.2" r="2.6" fill="var(--c-coral-alert)"/><circle cx="469.9" cy="274" r="2.6" fill="var(--c-coral-alert)"/><circle cx="516" cy="279.2" r="2.6" fill="var(--c-coral-alert)"/>
+<text x="70" y="34.6" fill="var(--c-gb-green)" font-size="14" font-weight="700">99%</text>
+<text x="235.3" y="77.8" text-anchor="middle" fill="var(--c-gb-green)" font-size="14" font-weight="700">82%</text>
+<text x="524" y="148" fill="var(--c-gb-green)" font-size="14" font-weight="700">60%</text>
+<text x="70" y="71" fill="var(--c-coral-alert)" font-size="14" font-weight="700">95%</text>
+<text x="235.3" y="226.4" text-anchor="middle" fill="var(--c-coral-alert)" font-size="14" font-weight="700">36%</text>
+<text x="524" y="283.2" fill="var(--c-coral-alert)" font-size="14" font-weight="700">8%</text>
 </svg>
 </div>
 
@@ -125,9 +125,9 @@ links:
 ## Advice 3 — プロンプトエンジニアリング
 
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2em;margin:1.8em 0;">
-<div style="padding:1.4em 1.2em;border:1px solid rgba(134, 239, 172,0.35);background:rgba(4, 8, 14,0.5);"><div style="font-family: 'Noto Sans JP', sans-serif;font-size:0.78em;letter-spacing:0.2em;color:#86efac;text-transform:uppercase;margin-bottom:0.8em;">✓ ルール 01</div><div style="font-size:1.2em;font-weight:bold;color:#ecf7fb;margin-bottom:0.5em;line-height:1.3;">明確に</div><div style="color:rgba(236, 247, 251,0.65);font-size:0.95em;line-height:1.5;">目的・制約・「完了」の条件まで書く。</div></div>
-<div style="padding:1.4em 1.2em;border:1px solid rgba(94, 234, 212,0.35);background:rgba(4, 8, 14,0.5);"><div style="font-family: 'Noto Sans JP', sans-serif;font-size:0.78em;letter-spacing:0.2em;color:#5eead4;text-transform:uppercase;margin-bottom:0.8em;">✓ ルール 02</div><div style="font-size:1.2em;font-weight:bold;color:#ecf7fb;margin-bottom:0.5em;line-height:1.3;">停止条件を入れる</div><div style="color:rgba(236, 247, 251,0.65);font-size:0.95em;line-height:1.5;">「X なら止まれ」で探索の暴走を防ぐ。</div></div>
-<div style="padding:1.4em 1.2em;border:1px solid rgba(252, 211, 77,0.35);background:rgba(4, 8, 14,0.5);"><div style="font-family: 'Noto Sans JP', sans-serif;font-size:0.78em;letter-spacing:0.2em;color:#fcd34d;text-transform:uppercase;margin-bottom:0.8em;">✓ ルール 03</div><div style="font-size:1.2em;font-weight:bold;color:#ecf7fb;margin-bottom:0.5em;line-height:1.3;">事前にコンテキストを渡す</div><div style="color:rgba(236, 247, 251,0.65);font-size:0.95em;line-height:1.5;">ファイル・フォルダ・URL・エラーログ ── agent に探させないで済むものは全部。</div></div>
+<div style="padding:1.4em 1.2em;border:1px solid rgb(var(--rgb-gb-green) / 0.35);background:rgb(var(--rgb-shadow-ink) / 0.5);"><div style="font-family: 'Noto Sans JP', sans-serif;font-size:0.78em;letter-spacing:0.2em;color:var(--c-gb-green);text-transform:uppercase;margin-bottom:0.8em;">✓ ルール 01</div><div style="font-size:1.2em;font-weight:bold;color:var(--c-phosphor);margin-bottom:0.5em;line-height:1.3;">明確に</div><div style="color:rgb(var(--rgb-phosphor) / 0.65);font-size:0.95em;line-height:1.5;">目的・制約・「完了」の条件まで書く。</div></div>
+<div style="padding:1.4em 1.2em;border:1px solid rgb(var(--rgb-neon-cyan) / 0.35);background:rgb(var(--rgb-shadow-ink) / 0.5);"><div style="font-family: 'Noto Sans JP', sans-serif;font-size:0.78em;letter-spacing:0.2em;color:var(--c-neon-cyan);text-transform:uppercase;margin-bottom:0.8em;">✓ ルール 02</div><div style="font-size:1.2em;font-weight:bold;color:var(--c-phosphor);margin-bottom:0.5em;line-height:1.3;">停止条件を入れる</div><div style="color:rgb(var(--rgb-phosphor) / 0.65);font-size:0.95em;line-height:1.5;">「X なら止まれ」で探索の暴走を防ぐ。</div></div>
+<div style="padding:1.4em 1.2em;border:1px solid rgb(var(--rgb-crt-amber) / 0.35);background:rgb(var(--rgb-shadow-ink) / 0.5);"><div style="font-family: 'Noto Sans JP', sans-serif;font-size:0.78em;letter-spacing:0.2em;color:var(--c-crt-amber);text-transform:uppercase;margin-bottom:0.8em;">✓ ルール 03</div><div style="font-size:1.2em;font-weight:bold;color:var(--c-phosphor);margin-bottom:0.5em;line-height:1.3;">事前にコンテキストを渡す</div><div style="color:rgb(var(--rgb-phosphor) / 0.65);font-size:0.95em;line-height:1.5;">ファイル・フォルダ・URL・エラーログ ── agent に探させないで済むものは全部。</div></div>
 </div>
 
 > 💡 **プロンプトは常時オン** ── 一度送ると、以降のターンすべてで system + tools と一緒に課金されます。だからこそ、丁寧に書く価値があります。
@@ -138,84 +138,84 @@ links:
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
 <svg viewBox="0 130 1100 475" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
-<rect x="155" y="150" width="320" height="68" rx="10" fill="#0b1420" stroke="#93a8ff" stroke-width="2"/>
-<text x="175" y="180" fill="#ecf7fb" font-size="13" font-weight="bold">“I WANT TO CHANGE X.</text>
-<text x="175" y="202" fill="#ecf7fb" font-size="13" font-weight="bold">WHAT FILES ARE RELEVANT?”</text>
-<line x1="315" y1="218" x2="315" y2="263" stroke="#93a8ff" stroke-width="2"/>
-<circle cx="315" cy="263" r="5" fill="#93a8ff"/>
-<text x="20" y="292" fill="#ecf7fb" font-size="14" font-weight="bold">/RESEARCH</text>
-<text x="20" y="310" fill="#86efac" font-size="11" letter-spacing="1">GEMINI 2.5 PRO</text>
-<rect x="155" y="265" width="110" height="55" rx="12" fill="#86efac"/>
-<text x="210" y="290" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
-<text x="210" y="306" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
-<rect x="270" y="265" width="90" height="55" rx="12" fill="#93a8ff"/>
-<text x="315" y="298" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
-<rect x="365" y="265" width="78" height="55" rx="12" fill="#fcd34d"/>
-<text x="404" y="298" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">FILE</text>
-<circle cx="435" cy="270" r="10" fill="#04080e" stroke="#fb7185" stroke-width="2"/>
-<text x="435" y="274" fill="#fb7185" font-size="12" font-weight="bold" text-anchor="middle">✗</text>
-<rect x="448" y="265" width="78" height="55" rx="12" fill="#fcd34d"/>
-<text x="487" y="298" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">FILE</text>
-<circle cx="518" cy="270" r="10" fill="#04080e" stroke="#fb7185" stroke-width="2"/>
-<text x="518" y="274" fill="#fb7185" font-size="12" font-weight="bold" text-anchor="middle">✗</text>
-<rect x="531" y="265" width="78" height="55" rx="12" fill="#fcd34d"/>
-<text x="570" y="298" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">FILE</text>
-<circle cx="601" cy="270" r="10" fill="#04080e" stroke="#86efac" stroke-width="2"/>
-<text x="601" y="274" fill="#86efac" font-size="12" font-weight="bold" text-anchor="middle">✓</text>
-<rect x="614" y="265" width="78" height="55" rx="12" fill="#fcd34d"/>
-<text x="653" y="298" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">FILE</text>
-<circle cx="684" cy="270" r="10" fill="#04080e" stroke="#fb7185" stroke-width="2"/>
-<text x="684" y="274" fill="#fb7185" font-size="12" font-weight="bold" text-anchor="middle">✗</text>
-<rect x="697" y="265" width="78" height="55" rx="12" fill="#fcd34d"/>
-<text x="736" y="298" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">FILE</text>
-<circle cx="767" cy="270" r="10" fill="#04080e" stroke="#fb7185" stroke-width="2"/>
-<text x="767" y="274" fill="#fb7185" font-size="12" font-weight="bold" text-anchor="middle">✗</text>
-<rect x="780" y="265" width="78" height="55" rx="12" fill="#fcd34d"/>
-<text x="819" y="298" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">FILE</text>
-<circle cx="850" cy="270" r="10" fill="#04080e" stroke="#86efac" stroke-width="2"/>
-<text x="850" y="274" fill="#86efac" font-size="12" font-weight="bold" text-anchor="middle">✓</text>
-<rect x="863" y="265" width="110" height="55" rx="12" fill="#5eead4"/>
-<text x="918" y="290" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">PLAN</text>
-<text x="918" y="306" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">INPUT</text>
-<path d="M 945 320 L 945 365 L 425 365 L 425 393" fill="none" stroke="#5eead4" stroke-width="2"/>
-<circle cx="425" cy="394" r="5" fill="#5eead4"/>
-<text x="20" y="422" fill="#ecf7fb" font-size="14" font-weight="bold">/PLAN</text>
-<text x="20" y="440" fill="#86efac" font-size="11" letter-spacing="1">OPUS 4.7</text>
-<rect x="155" y="395" width="110" height="55" rx="12" fill="#86efac"/>
-<text x="210" y="420" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
-<text x="210" y="436" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
-<rect x="270" y="395" width="90" height="55" rx="12" fill="#93a8ff"/>
-<text x="315" y="428" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
-<rect x="370" y="395" width="110" height="55" rx="12" fill="#5eead4"/>
-<text x="425" y="420" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">PLAN</text>
-<text x="425" y="436" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">INPUT</text>
-<rect x="485" y="395" width="78" height="55" rx="12" fill="#fcd34d"/>
-<text x="524" y="428" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">FILE</text>
-<rect x="568" y="395" width="78" height="55" rx="12" fill="#fcd34d"/>
-<text x="607" y="428" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">FILE</text>
-<rect x="651" y="395" width="130" height="55" rx="12" fill="rgba(236, 247, 251,0.08)" stroke="rgba(236, 247, 251,0.35)" stroke-width="1"/>
-<text x="716" y="428" fill="#ecf7fb" font-size="11" font-weight="bold" text-anchor="middle">REASONING</text>
-<rect x="786" y="395" width="120" height="55" rx="12" fill="#5eead4"/>
-<text x="846" y="420" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">PRECISE</text>
-<text x="846" y="436" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">SPEC</text>
-<path d="M 875 450 L 875 495 L 430 495 L 430 523" fill="none" stroke="#5eead4" stroke-width="2"/>
-<circle cx="430" cy="524" r="5" fill="#5eead4"/>
-<text x="20" y="552" fill="#ecf7fb" font-size="14" font-weight="bold">/FLEET</text>
-<text x="20" y="570" fill="#86efac" font-size="11" letter-spacing="1">GPT 5.4</text>
-<rect x="155" y="525" width="110" height="55" rx="12" fill="#86efac"/>
-<text x="210" y="550" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
-<text x="210" y="566" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
-<rect x="270" y="525" width="90" height="55" rx="12" fill="#93a8ff"/>
-<text x="315" y="558" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
-<rect x="370" y="525" width="120" height="55" rx="12" fill="#5eead4"/>
-<text x="430" y="550" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">PRECISE</text>
-<text x="430" y="566" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">SPEC</text>
-<rect x="495" y="525" width="78" height="55" rx="12" fill="#fcd34d"/>
-<text x="534" y="558" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">FILE</text>
-<rect x="578" y="525" width="78" height="55" rx="12" fill="#fcd34d"/>
-<text x="617" y="558" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">FILE</text>
-<rect x="661" y="525" width="200" height="55" rx="12" fill="#5eead4"/>
-<text x="761" y="558" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">CHANGE CALLS</text>
+<rect x="155" y="150" width="320" height="68" rx="10" fill="var(--c-deep-purple)" stroke="var(--c-neon-magenta)" stroke-width="2"/>
+<text x="175" y="180" fill="var(--c-phosphor)" font-size="13" font-weight="bold">“I WANT TO CHANGE X.</text>
+<text x="175" y="202" fill="var(--c-phosphor)" font-size="13" font-weight="bold">WHAT FILES ARE RELEVANT?”</text>
+<line x1="315" y1="218" x2="315" y2="263" stroke="var(--c-neon-magenta)" stroke-width="2"/>
+<circle cx="315" cy="263" r="5" fill="var(--c-neon-magenta)"/>
+<text x="20" y="292" fill="var(--c-phosphor)" font-size="14" font-weight="bold">/RESEARCH</text>
+<text x="20" y="310" fill="var(--c-gb-green)" font-size="11" letter-spacing="1">GEMINI 2.5 PRO</text>
+<rect x="155" y="265" width="110" height="55" rx="12" fill="var(--c-gb-green)"/>
+<text x="210" y="290" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
+<text x="210" y="306" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
+<rect x="270" y="265" width="90" height="55" rx="12" fill="var(--c-neon-magenta)"/>
+<text x="315" y="298" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
+<rect x="365" y="265" width="78" height="55" rx="12" fill="var(--c-crt-amber)"/>
+<text x="404" y="298" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">FILE</text>
+<circle cx="435" cy="270" r="10" fill="var(--c-shadow-ink)" stroke="var(--c-coral-alert)" stroke-width="2"/>
+<text x="435" y="274" fill="var(--c-coral-alert)" font-size="12" font-weight="bold" text-anchor="middle">✗</text>
+<rect x="448" y="265" width="78" height="55" rx="12" fill="var(--c-crt-amber)"/>
+<text x="487" y="298" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">FILE</text>
+<circle cx="518" cy="270" r="10" fill="var(--c-shadow-ink)" stroke="var(--c-coral-alert)" stroke-width="2"/>
+<text x="518" y="274" fill="var(--c-coral-alert)" font-size="12" font-weight="bold" text-anchor="middle">✗</text>
+<rect x="531" y="265" width="78" height="55" rx="12" fill="var(--c-crt-amber)"/>
+<text x="570" y="298" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">FILE</text>
+<circle cx="601" cy="270" r="10" fill="var(--c-shadow-ink)" stroke="var(--c-gb-green)" stroke-width="2"/>
+<text x="601" y="274" fill="var(--c-gb-green)" font-size="12" font-weight="bold" text-anchor="middle">✓</text>
+<rect x="614" y="265" width="78" height="55" rx="12" fill="var(--c-crt-amber)"/>
+<text x="653" y="298" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">FILE</text>
+<circle cx="684" cy="270" r="10" fill="var(--c-shadow-ink)" stroke="var(--c-coral-alert)" stroke-width="2"/>
+<text x="684" y="274" fill="var(--c-coral-alert)" font-size="12" font-weight="bold" text-anchor="middle">✗</text>
+<rect x="697" y="265" width="78" height="55" rx="12" fill="var(--c-crt-amber)"/>
+<text x="736" y="298" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">FILE</text>
+<circle cx="767" cy="270" r="10" fill="var(--c-shadow-ink)" stroke="var(--c-coral-alert)" stroke-width="2"/>
+<text x="767" y="274" fill="var(--c-coral-alert)" font-size="12" font-weight="bold" text-anchor="middle">✗</text>
+<rect x="780" y="265" width="78" height="55" rx="12" fill="var(--c-crt-amber)"/>
+<text x="819" y="298" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">FILE</text>
+<circle cx="850" cy="270" r="10" fill="var(--c-shadow-ink)" stroke="var(--c-gb-green)" stroke-width="2"/>
+<text x="850" y="274" fill="var(--c-gb-green)" font-size="12" font-weight="bold" text-anchor="middle">✓</text>
+<rect x="863" y="265" width="110" height="55" rx="12" fill="var(--c-neon-cyan)"/>
+<text x="918" y="290" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">PLAN</text>
+<text x="918" y="306" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">INPUT</text>
+<path d="M 945 320 L 945 365 L 425 365 L 425 393" fill="none" stroke="var(--c-neon-cyan)" stroke-width="2"/>
+<circle cx="425" cy="394" r="5" fill="var(--c-neon-cyan)"/>
+<text x="20" y="422" fill="var(--c-phosphor)" font-size="14" font-weight="bold">/PLAN</text>
+<text x="20" y="440" fill="var(--c-gb-green)" font-size="11" letter-spacing="1">OPUS 4.7</text>
+<rect x="155" y="395" width="110" height="55" rx="12" fill="var(--c-gb-green)"/>
+<text x="210" y="420" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
+<text x="210" y="436" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
+<rect x="270" y="395" width="90" height="55" rx="12" fill="var(--c-neon-magenta)"/>
+<text x="315" y="428" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
+<rect x="370" y="395" width="110" height="55" rx="12" fill="var(--c-neon-cyan)"/>
+<text x="425" y="420" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">PLAN</text>
+<text x="425" y="436" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">INPUT</text>
+<rect x="485" y="395" width="78" height="55" rx="12" fill="var(--c-crt-amber)"/>
+<text x="524" y="428" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">FILE</text>
+<rect x="568" y="395" width="78" height="55" rx="12" fill="var(--c-crt-amber)"/>
+<text x="607" y="428" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">FILE</text>
+<rect x="651" y="395" width="130" height="55" rx="12" fill="rgb(var(--rgb-phosphor) / 0.08)" stroke="rgb(var(--rgb-phosphor) / 0.35)" stroke-width="1"/>
+<text x="716" y="428" fill="var(--c-phosphor)" font-size="11" font-weight="bold" text-anchor="middle">REASONING</text>
+<rect x="786" y="395" width="120" height="55" rx="12" fill="var(--c-neon-cyan)"/>
+<text x="846" y="420" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">PRECISE</text>
+<text x="846" y="436" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">SPEC</text>
+<path d="M 875 450 L 875 495 L 430 495 L 430 523" fill="none" stroke="var(--c-neon-cyan)" stroke-width="2"/>
+<circle cx="430" cy="524" r="5" fill="var(--c-neon-cyan)"/>
+<text x="20" y="552" fill="var(--c-phosphor)" font-size="14" font-weight="bold">/FLEET</text>
+<text x="20" y="570" fill="var(--c-gb-green)" font-size="11" letter-spacing="1">GPT 5.4</text>
+<rect x="155" y="525" width="110" height="55" rx="12" fill="var(--c-gb-green)"/>
+<text x="210" y="550" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
+<text x="210" y="566" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
+<rect x="270" y="525" width="90" height="55" rx="12" fill="var(--c-neon-magenta)"/>
+<text x="315" y="558" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
+<rect x="370" y="525" width="120" height="55" rx="12" fill="var(--c-neon-cyan)"/>
+<text x="430" y="550" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">PRECISE</text>
+<text x="430" y="566" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">SPEC</text>
+<rect x="495" y="525" width="78" height="55" rx="12" fill="var(--c-crt-amber)"/>
+<text x="534" y="558" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">FILE</text>
+<rect x="578" y="525" width="78" height="55" rx="12" fill="var(--c-crt-amber)"/>
+<text x="617" y="558" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">FILE</text>
+<rect x="661" y="525" width="200" height="55" rx="12" fill="var(--c-neon-cyan)"/>
+<text x="761" y="558" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">CHANGE CALLS</text>
 </svg>
 </figure>
 
@@ -227,68 +227,68 @@ links:
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
 <svg viewBox="0 140 1000 370" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
-<text x="20" y="183" fill="#ecf7fb" font-size="13" font-weight="bold">WITH</text>
-<text x="20" y="200" fill="#ecf7fb" font-size="13" font-weight="bold">UNIT TESTS</text>
-<rect x="160" y="160" width="95" height="55" rx="12" fill="#86efac"/>
-<text x="207" y="185" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
-<text x="207" y="201" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
-<rect x="263" y="160" width="95" height="55" rx="12" fill="#93a8ff"/>
-<text x="310" y="193" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
+<text x="20" y="183" fill="var(--c-phosphor)" font-size="13" font-weight="bold">WITH</text>
+<text x="20" y="200" fill="var(--c-phosphor)" font-size="13" font-weight="bold">UNIT TESTS</text>
+<rect x="160" y="160" width="95" height="55" rx="12" fill="var(--c-gb-green)"/>
+<text x="207" y="185" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
+<text x="207" y="201" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
+<rect x="263" y="160" width="95" height="55" rx="12" fill="var(--c-neon-magenta)"/>
+<text x="310" y="193" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
 <rect x="366" y="160" width="95" height="55" rx="12" fill="#dc2626"/>
-<text x="413" y="185" fill="#ecf7fb" font-size="11" font-weight="bold" text-anchor="middle">BUGGY</text>
-<text x="413" y="201" fill="#ecf7fb" font-size="11" font-weight="bold" text-anchor="middle">CHANGE</text>
+<text x="413" y="185" fill="var(--c-phosphor)" font-size="11" font-weight="bold" text-anchor="middle">BUGGY</text>
+<text x="413" y="201" fill="var(--c-phosphor)" font-size="11" font-weight="bold" text-anchor="middle">CHANGE</text>
 <rect x="469" y="160" width="95" height="55" rx="12" fill="#dc2626"/>
-<text x="516" y="185" fill="#ecf7fb" font-size="11" font-weight="bold" text-anchor="middle">FAILING</text>
-<text x="516" y="201" fill="#ecf7fb" font-size="11" font-weight="bold" text-anchor="middle">TESTS</text>
-<rect x="572" y="160" width="120" height="55" rx="12" fill="#86efac"/>
-<text x="632" y="185" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">CORRECTION</text>
-<text x="632" y="201" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">CHANGE</text>
-<rect x="700" y="160" width="95" height="55" rx="12" fill="#86efac"/>
-<text x="747" y="185" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">CHANGE</text>
-<text x="747" y="201" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">2</text>
-<rect x="803" y="160" width="130" height="55" rx="12" fill="#86efac"/>
-<text x="868" y="185" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">SUCCEEDING</text>
-<text x="868" y="201" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">TESTS</text>
-<text x="20" y="298" fill="#ecf7fb" font-size="13" font-weight="bold">WITHOUT</text>
-<text x="20" y="315" fill="#ecf7fb" font-size="13" font-weight="bold">UNIT TESTS</text>
-<rect x="160" y="275" width="95" height="55" rx="12" fill="#86efac"/>
-<text x="207" y="300" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
-<text x="207" y="316" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
-<rect x="263" y="275" width="95" height="55" rx="12" fill="#93a8ff"/>
-<text x="310" y="308" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
+<text x="516" y="185" fill="var(--c-phosphor)" font-size="11" font-weight="bold" text-anchor="middle">FAILING</text>
+<text x="516" y="201" fill="var(--c-phosphor)" font-size="11" font-weight="bold" text-anchor="middle">TESTS</text>
+<rect x="572" y="160" width="120" height="55" rx="12" fill="var(--c-gb-green)"/>
+<text x="632" y="185" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">CORRECTION</text>
+<text x="632" y="201" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">CHANGE</text>
+<rect x="700" y="160" width="95" height="55" rx="12" fill="var(--c-gb-green)"/>
+<text x="747" y="185" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">CHANGE</text>
+<text x="747" y="201" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">2</text>
+<rect x="803" y="160" width="130" height="55" rx="12" fill="var(--c-gb-green)"/>
+<text x="868" y="185" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">SUCCEEDING</text>
+<text x="868" y="201" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">TESTS</text>
+<text x="20" y="298" fill="var(--c-phosphor)" font-size="13" font-weight="bold">WITHOUT</text>
+<text x="20" y="315" fill="var(--c-phosphor)" font-size="13" font-weight="bold">UNIT TESTS</text>
+<rect x="160" y="275" width="95" height="55" rx="12" fill="var(--c-gb-green)"/>
+<text x="207" y="300" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
+<text x="207" y="316" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
+<rect x="263" y="275" width="95" height="55" rx="12" fill="var(--c-neon-magenta)"/>
+<text x="310" y="308" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
 <rect x="366" y="275" width="95" height="55" rx="12" fill="#dc2626"/>
-<text x="413" y="300" fill="#ecf7fb" font-size="11" font-weight="bold" text-anchor="middle">BUGGY</text>
-<text x="413" y="316" fill="#ecf7fb" font-size="11" font-weight="bold" text-anchor="middle">CHANGE</text>
+<text x="413" y="300" fill="var(--c-phosphor)" font-size="11" font-weight="bold" text-anchor="middle">BUGGY</text>
+<text x="413" y="316" fill="var(--c-phosphor)" font-size="11" font-weight="bold" text-anchor="middle">CHANGE</text>
 <rect x="469" y="275" width="110" height="55" rx="12" fill="#dc2626"/>
-<text x="524" y="300" fill="#ecf7fb" font-size="11" font-weight="bold" text-anchor="middle">BUGGY</text>
-<text x="524" y="316" fill="#ecf7fb" font-size="11" font-weight="bold" text-anchor="middle">CHANGE 2</text>
+<text x="524" y="300" fill="var(--c-phosphor)" font-size="11" font-weight="bold" text-anchor="middle">BUGGY</text>
+<text x="524" y="316" fill="var(--c-phosphor)" font-size="11" font-weight="bold" text-anchor="middle">CHANGE 2</text>
 <rect x="587" y="275" width="110" height="55" rx="12" fill="#dc2626"/>
-<text x="642" y="300" fill="#ecf7fb" font-size="11" font-weight="bold" text-anchor="middle">BUGGY</text>
-<text x="642" y="316" fill="#ecf7fb" font-size="11" font-weight="bold" text-anchor="middle">CHANGE 3</text>
+<text x="642" y="300" fill="var(--c-phosphor)" font-size="11" font-weight="bold" text-anchor="middle">BUGGY</text>
+<text x="642" y="316" fill="var(--c-phosphor)" font-size="11" font-weight="bold" text-anchor="middle">CHANGE 3</text>
 <rect x="705" y="275" width="110" height="55" rx="12" fill="#dc2626"/>
-<text x="760" y="300" fill="#ecf7fb" font-size="11" font-weight="bold" text-anchor="middle">BUGGY</text>
-<text x="760" y="316" fill="#ecf7fb" font-size="11" font-weight="bold" text-anchor="middle">CHANGE 4</text>
-<line x1="10" y1="335" x2="10" y2="365" stroke="#86efac" stroke-width="2"/>
-<polygon points="6,360 14,360 10,370" fill="#86efac"/>
-<text x="20" y="370" fill="#ecf7fb" font-size="13" font-weight="bold">INCIDENT</text>
-<circle cx="160" cy="365" r="5" fill="#93a8ff"/>
-<line x1="165" y1="365" x2="220" y2="365" stroke="#93a8ff" stroke-width="2"/>
-<text x="228" y="354" fill="#ecf7fb" font-size="11" font-weight="bold">WASTED CI/CD MINUTES,</text>
-<text x="228" y="370" fill="#ecf7fb" font-size="11" font-weight="bold">COPILOT REVIEW CYCLES,</text>
-<text x="228" y="386" fill="#ecf7fb" font-size="11" font-weight="bold">HUMAN TIME ETC.</text>
-<line x1="10" y1="395" x2="10" y2="415" stroke="#86efac" stroke-width="2"/>
-<polygon points="6,410 14,410 10,420" fill="#86efac"/>
-<text x="20" y="438" fill="#ecf7fb" font-size="13" font-weight="bold">DEBUGGING</text>
-<text x="20" y="455" fill="#ecf7fb" font-size="13" font-weight="bold">SESSION</text>
-<rect x="160" y="420" width="95" height="55" rx="12" fill="#86efac"/>
-<text x="207" y="445" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
-<text x="207" y="461" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
-<rect x="263" y="420" width="95" height="55" rx="12" fill="#93a8ff"/>
-<text x="310" y="453" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
+<text x="760" y="300" fill="var(--c-phosphor)" font-size="11" font-weight="bold" text-anchor="middle">BUGGY</text>
+<text x="760" y="316" fill="var(--c-phosphor)" font-size="11" font-weight="bold" text-anchor="middle">CHANGE 4</text>
+<line x1="10" y1="335" x2="10" y2="365" stroke="var(--c-gb-green)" stroke-width="2"/>
+<polygon points="6,360 14,360 10,370" fill="var(--c-gb-green)"/>
+<text x="20" y="370" fill="var(--c-phosphor)" font-size="13" font-weight="bold">INCIDENT</text>
+<circle cx="160" cy="365" r="5" fill="var(--c-neon-magenta)"/>
+<line x1="165" y1="365" x2="220" y2="365" stroke="var(--c-neon-magenta)" stroke-width="2"/>
+<text x="228" y="354" fill="var(--c-phosphor)" font-size="11" font-weight="bold">WASTED CI/CD MINUTES,</text>
+<text x="228" y="370" fill="var(--c-phosphor)" font-size="11" font-weight="bold">COPILOT REVIEW CYCLES,</text>
+<text x="228" y="386" fill="var(--c-phosphor)" font-size="11" font-weight="bold">HUMAN TIME ETC.</text>
+<line x1="10" y1="395" x2="10" y2="415" stroke="var(--c-gb-green)" stroke-width="2"/>
+<polygon points="6,410 14,410 10,420" fill="var(--c-gb-green)"/>
+<text x="20" y="438" fill="var(--c-phosphor)" font-size="13" font-weight="bold">DEBUGGING</text>
+<text x="20" y="455" fill="var(--c-phosphor)" font-size="13" font-weight="bold">SESSION</text>
+<rect x="160" y="420" width="95" height="55" rx="12" fill="var(--c-gb-green)"/>
+<text x="207" y="445" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
+<text x="207" y="461" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
+<rect x="263" y="420" width="95" height="55" rx="12" fill="var(--c-neon-magenta)"/>
+<text x="310" y="453" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
 <rect x="366" y="420" width="180" height="55" rx="12" fill="#dc2626"/>
-<text x="456" y="453" fill="#ecf7fb" font-size="11" font-weight="bold" text-anchor="middle">BUGGY RESEARCH</text>
-<rect x="554" y="420" width="110" height="55" rx="12" fill="#86efac"/>
-<text x="609" y="453" fill="#04080e" font-size="11" font-weight="bold" text-anchor="middle">BUG FIX</text>
+<text x="456" y="453" fill="var(--c-phosphor)" font-size="11" font-weight="bold" text-anchor="middle">BUGGY RESEARCH</text>
+<rect x="554" y="420" width="110" height="55" rx="12" fill="var(--c-gb-green)"/>
+<text x="609" y="453" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">BUG FIX</text>
 </svg>
 </figure>
 
@@ -318,11 +318,11 @@ links:
 同じ意味の文でも、日本語は英語の **約 2〜3 倍のトークン** を消費します。`copilot-instructions.md`・Skill の description・MCP のツール定義・コードコメントなど **常時オン** のテキストでは、この差が **毎ループに課税** されます。
 
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2em;margin:1.8em 0;">
-<div style="padding:1.4em 1.2em;border:1px solid rgba(134, 239, 172,0.35);background:rgba(4, 8, 14,0.5);"><div style="font-family: 'Noto Sans JP', sans-serif;font-size:0.78em;letter-spacing:0.2em;color:#86efac;text-transform:uppercase;margin-bottom:0.8em;">🇬🇧 ENGLISH</div><div style="font-size:1.05em;color:#ecf7fb;margin-bottom:1.2em;line-height:1.5;font-style:italic;">Always run tests before committing changes</div><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:1em;line-height:1.4;"><span style="background:#86efac;color:#04080e;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">Always</span><span style="background:#86efac;color:#04080e;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">·run</span><span style="background:#86efac;color:#04080e;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">·tests</span><span style="background:#86efac;color:#04080e;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">·before</span><span style="background:#86efac;color:#04080e;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">·committing</span><span style="background:#86efac;color:#04080e;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">·changes</span></div><div style="font-size:1.1em;color:#86efac;font-weight:700;font-family:'JetBrains Mono',monospace;">= 6 トークン</div></div>
-<div style="padding:1.4em 1.2em;border:1px solid rgba(147, 168, 255,0.35);background:rgba(4, 8, 14,0.5);"><div style="font-family: 'Noto Sans JP', sans-serif;font-size:0.78em;letter-spacing:0.2em;color:#93a8ff;text-transform:uppercase;margin-bottom:0.8em;">🇯🇵 JAPANESE</div><div style="font-size:1.05em;color:#ecf7fb;margin-bottom:1.2em;line-height:1.5;font-style:italic;">変更をコミットする前に必ずテストを実行して</div><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:1em;line-height:1.4;"><span style="background:#93a8ff;color:#04080e;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">変更</span><span style="background:#93a8ff;color:#04080e;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">を</span><span style="background:#93a8ff;color:#04080e;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">コミ</span><span style="background:#93a8ff;color:#04080e;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">ット</span><span style="background:#93a8ff;color:#04080e;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">する</span><span style="background:#93a8ff;color:#04080e;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">前</span><span style="background:#93a8ff;color:#04080e;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">に</span><span style="background:#93a8ff;color:#04080e;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">必</span><span style="background:#93a8ff;color:#04080e;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">ず</span><span style="background:#93a8ff;color:#04080e;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">テ</span><span style="background:#93a8ff;color:#04080e;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">スト</span><span style="background:#93a8ff;color:#04080e;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">を</span><span style="background:#93a8ff;color:#04080e;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">実</span><span style="background:#93a8ff;color:#04080e;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">行</span><span style="background:#93a8ff;color:#04080e;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">して</span></div><div style="font-size:1.1em;color:#93a8ff;font-weight:700;font-family:'JetBrains Mono',monospace;">= 15 トークン（約 2.5 倍）</div></div>
+<div style="padding:1.4em 1.2em;border:1px solid rgb(var(--rgb-gb-green) / 0.35);background:rgb(var(--rgb-shadow-ink) / 0.5);"><div style="font-family: 'Noto Sans JP', sans-serif;font-size:0.78em;letter-spacing:0.2em;color:var(--c-gb-green);text-transform:uppercase;margin-bottom:0.8em;">🇬🇧 ENGLISH</div><div style="font-size:1.05em;color:var(--c-phosphor);margin-bottom:1.2em;line-height:1.5;font-style:italic;">Always run tests before committing changes</div><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:1em;line-height:1.4;"><span style="background:var(--c-gb-green);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">Always</span><span style="background:var(--c-gb-green);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">·run</span><span style="background:var(--c-gb-green);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">·tests</span><span style="background:var(--c-gb-green);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">·before</span><span style="background:var(--c-gb-green);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">·committing</span><span style="background:var(--c-gb-green);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">·changes</span></div><div style="font-size:1.1em;color:var(--c-gb-green);font-weight:700;font-family:'JetBrains Mono',monospace;">= 6 トークン</div></div>
+<div style="padding:1.4em 1.2em;border:1px solid rgb(var(--rgb-neon-magenta) / 0.35);background:rgb(var(--rgb-shadow-ink) / 0.5);"><div style="font-family: 'Noto Sans JP', sans-serif;font-size:0.78em;letter-spacing:0.2em;color:var(--c-neon-magenta);text-transform:uppercase;margin-bottom:0.8em;">🇯🇵 JAPANESE</div><div style="font-size:1.05em;color:var(--c-phosphor);margin-bottom:1.2em;line-height:1.5;font-style:italic;">変更をコミットする前に必ずテストを実行して</div><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:1em;line-height:1.4;"><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">変更</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">を</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">コミ</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">ット</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">する</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">前</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">に</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">必</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">ず</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">テ</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">スト</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">を</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">実</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">行</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">して</span></div><div style="font-size:1.1em;color:var(--c-neon-magenta);font-weight:700;font-family:'JetBrains Mono',monospace;">= 15 トークン（約 2.5 倍）</div></div>
 </div>
 
-<div style="font-size:0.85em;color:rgba(236, 247, 251,0.55);margin:-0.5em 0 1.5em;font-style:italic;">トークン数は OpenAI の <code>o200k_base</code>（<strong>GPT-5.x・GPT-4o・o1・o3</strong> が使用するトークナイザ）で計測。旧 <code>cl100k_base</code>（GPT-4 / GPT-3.5）では日本語側が 22 トークン（約 3.7 倍）でした。</div>
+<div style="font-size:0.85em;color:rgb(var(--rgb-phosphor) / 0.55);margin:-0.5em 0 1.5em;font-style:italic;">トークン数は OpenAI の <code>o200k_base</code>（<strong>GPT-5.x・GPT-4o・o1・o3</strong> が使用するトークナイザ）で計測。旧 <code>cl100k_base</code>（GPT-4 / GPT-3.5）では日本語側が 22 トークン（約 3.7 倍）でした。</div>
 
 > 🔬 **自分で確認:** <a class="retro-link" href="https://tiktokenizer.vercel.app/" target="_blank" rel="noopener">tiktokenizer.vercel.app ↗</a> や <a class="retro-link" href="https://platform.openai.com/tokenizer" target="_blank" rel="noopener">platform.openai.com/tokenizer ↗</a> に同じ指示文を英日で貼り付け、トークン数を見比べてください。
 
