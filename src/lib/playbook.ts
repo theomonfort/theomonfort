@@ -23,7 +23,10 @@ export function playbookLocale(entry: PlaybookEntry): Locale {
   return splitPlaybookId(entry.id)?.locale ?? 'ja';
 }
 
-export async function getPlaybookEntries(locale: Locale): Promise<LocalizedPlaybookEntry[]> {
+export async function getPlaybookEntries(
+  locale: Locale,
+  status: 'active' | 'archived' | 'all' = 'active',
+): Promise<LocalizedPlaybookEntry[]> {
   const entries = (await getCollection('playbook'))
     .map((entry) => ({ entry, parsed: splitPlaybookId(entry.id) }))
     .filter((item): item is { entry: PlaybookEntry; parsed: { locale: Locale; slug: string } } => Boolean(item.parsed));
@@ -32,20 +35,18 @@ export async function getPlaybookEntries(locale: Locale): Promise<LocalizedPlayb
     .filter(({ parsed }) => parsed.locale === locale)
     .map(({ entry, parsed }) => ({ entry, slug: parsed.slug, locale: parsed.locale, isFallback: false }));
 
-  if (locale === 'ja') {
-    return primary.sort((a, b) => a.entry.data.order - b.entry.data.order);
-  }
-
   const primarySlugs = new Set(primary.map((item) => item.slug));
-  const fallbacks = entries
+  const fallbacks = locale === 'ja' ? [] : entries
     .filter(({ parsed }) => parsed.locale === 'ja' && !primarySlugs.has(parsed.slug))
     .map(({ entry, parsed }) => ({ entry, slug: parsed.slug, locale, isFallback: true }));
 
-  return [...primary, ...fallbacks].sort((a, b) => a.entry.data.order - b.entry.data.order);
+  return [...primary, ...fallbacks]
+    .filter(({ entry }) => status === 'all' || entry.data.archived === (status === 'archived'))
+    .sort((a, b) => a.entry.data.order - b.entry.data.order);
 }
 
 export async function getPlaybookEntry(locale: Locale, slug: string): Promise<LocalizedPlaybookEntry | null> {
-  const localized = await getPlaybookEntries(locale);
+  const localized = await getPlaybookEntries(locale, 'all');
   return localized.find((item) => item.slug === slug) ?? null;
 }
 

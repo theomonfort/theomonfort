@@ -18,7 +18,7 @@ const locale = 'ja';
 const t = siteCopy[locale];
 
 export async function getStaticPaths() {
-  const entries = await getPlaybookEntries('ja');
+  const entries = await getPlaybookEntries('ja', 'all');
   return entries.map((item) => ({
     params: { slug: item.slug },
     props: { item },
@@ -29,7 +29,13 @@ const { item } = Astro.props;
 const entry = item.entry;
 const { Content } = await render(entry);
 
-const all = await getPlaybookEntries(locale);
+const available = await getPlaybookEntries(locale, 'all');
+const all = available.filter(({ entry: candidate }) => candidate.data.archived === entry.data.archived);
+const related = entry.data.related.flatMap((slug) => {
+  const candidate = available.find((e) => e.slug === slug);
+  return candidate && (entry.data.archived || !candidate.entry.data.archived) ? [candidate] : [];
+});
+const indexPath = entry.data.archived ? '/archive' : '/playbook';
 const idx = all.findIndex((e) => e.slug === item.slug);
 const prev = idx > 0 ? all[idx - 1] : null;
 const next = idx < all.length - 1 ? all[idx + 1] : null;
@@ -40,13 +46,13 @@ const tocEntries = all.map((e) => ({
   titleEn: playbookEntryKicker(e),
   icon: e.entry.data.icon,
   category: e.entry.data.category,
-  isNew: isNewPlaybookEntry(e.slug),
+  isNew: !e.entry.data.archived && isNewPlaybookEntry(e.slug),
   url: localizedPath(locale, `/playbook/${e.slug}`),
 }));
 
 const updatedLabel = formatPlaybookUpdated(playbookUpdatedISO(item), locale);
 const newBadgeLabel = t.playbook.newBadge;
-const navHintSlideNumbers = navHintSlides(item.slug);
+const navHintSlideNumbers = entry.data.archived ? [] : navHintSlides(item.slug);
 
 const tocGroups = categories
   .map((cat) => ({
@@ -111,15 +117,16 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     data-playbook-slug={item.slug}
     data-prev={prev ? localizedPath(locale, `/playbook/${prev.slug}`) : ''}
     data-next={next ? localizedPath(locale, `/playbook/${next.slug}`) : ''}
-    data-index={localizedPath(locale, '/playbook')}
+    data-index={localizedPath(locale, indexPath)}
   >
-    <a href={localizedPath(locale, '/playbook')} class="playbook-back-link">{t.playbook.backToList}</a>
+    <a href={localizedPath(locale, indexPath)} class="playbook-back-link">{entry.data.archived ? t.archive.backToList : t.playbook.backToList}</a>
 
     <header class="playbook-entry-header">
       <div class="flex items-center gap-2.5 mb-2.5 flex-wrap">
         <span class="playbook-entry-no">
           NO.{String(entry.data.order).padStart(2, '0')}
         </span>
+        {entry.data.archived && <span class="playbook-entry-cat">{t.archive.badge}</span>}
         {category && (
           <span class="playbook-entry-cat">
             {category.icon} {category.labelEn}
@@ -187,13 +194,11 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       </aside>
     )}
 
-    {entry.data.related.length > 0 && (
+    {related.length > 0 && (
       <aside class="related-aside mt-8">
         <h2 class="related-aside-title">{t.playbook.related}</h2>
         <div class="flex flex-wrap gap-2">
-          {entry.data.related.map((slug) => {
-            const r = all.find((e) => e.slug === slug);
-            if (!r) return null;
+          {related.map((r) => {
             return (
               <a
                 href={localizedPath(locale, `/playbook/${r.slug}`)}
@@ -232,19 +237,16 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     </button>
 
     <div class="present-overlay-hint present-overlay-settings">
-      <button
-        type="button"
-        class="present-action-btn"
-        data-slide-action="exit"
-        aria-label="プレゼンテーションを終了"
-        title="終了 (Esc)"
-      >
-        <span class="key">Esc</span> {t.playbook.exit}
-      </button>
-      <span class="present-theme-switch" role="group" aria-label="テーマ切り替え">
-        <button type="button" class="present-theme-btn" data-slide-theme="retro">RETRO</button>
+      <a
+        class="present-lang-toggle"
+        href={`${localizedPath('en', `/playbook/${item.slug}`)}?present=1`}
+        data-other-locale-base={localizedPath('en', `/playbook/${item.slug}`)}
+        aria-label="Switch to English"
+      ><span class="key">Eng</span></a>
+      <span class="present-theme-switch" role="group" aria-label="テーマ切り替え" data-theme-switch>
+        <button type="button" class="present-theme-btn" data-theme-choice="retro" aria-pressed="false">RETRO</button>
         <span class="present-theme-sep" aria-hidden="true">|</span>
-        <button type="button" class="present-theme-btn" data-slide-theme="phosphor">PHOSPHOR</button>
+        <button type="button" class="present-theme-btn" data-theme-choice="phosphor" aria-pressed="true">PHOSPHOR</button>
       </span>
     </div>
     <div class="present-overlay-hint present-overlay-navigation">
@@ -268,12 +270,15 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       <button type="button" class="present-toc-toggle" aria-label="目次の表示切り替え" data-toc-toggle>
         <span class="key">T</span> 目次
       </button>
-      <a
-        class="present-lang-toggle"
-        href={`${localizedPath('en', `/playbook/${item.slug}`)}?present=1`}
-        data-other-locale-base={localizedPath('en', `/playbook/${item.slug}`)}
-        aria-label="Switch to English"
-      ><span class="key">Eng</span></a>
+      <button
+        type="button"
+        class="present-action-btn"
+        data-slide-action="exit"
+        aria-label="プレゼンテーションを終了"
+        title="終了 (Esc)"
+      >
+        <span class="key">Esc</span> {t.playbook.exit}
+      </button>
     </div>
 
     <div class="slide-progress" role="tablist" aria-label="Slides" data-hint-slides={navHintSlideNumbers.join(',')} data-new-label={newBadgeLabel}></div>
@@ -291,6 +296,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     </a>
     <div class="slide-title-tag" aria-hidden="true"></div>
     <nav class="present-toc" aria-label={t.playbook.tocLabel} data-current-id={item.slug} transition:persist={`present-toc-${locale}`}>
+      <div class="present-toc-scroll">
       {tocGroups.map((g) => (
         <>
           <div class="toc-section" style={`color:${g.color}; border-color:${g.color}`}>
@@ -310,14 +316,15 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
                 <span class="toc-num">{String(num).padStart(2, '0')}</span>
                 <span class="toc-text">
                   {t.icon && /\.(svg|png|jpg|jpeg|webp|gif)$/i.test(t.icon)
-                    ? <img src={t.icon} alt="" class="inline h-[1em] w-auto align-middle mr-3" />
-                    : <span>{t.icon} </span>}<span class="toc-title-text">{t.title}{t.isNew && <span class="toc-new-badge">{newBadgeLabel}</span>}</span>
+                    ? <img src={t.icon} alt="" class="h-[1em] w-auto shrink-0" />
+                    : <span>{t.icon}</span>}<span class="toc-title-text">{t.title}</span>{t.isNew && <span class="toc-new-badge">{newBadgeLabel}</span>}
                 </span>
               </a>
             );
           })}
         </>
       ))}
+      </div>
     </nav>
   </section>
 </Layout>
@@ -604,7 +611,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 
   // ── TOC across playbook entries ──────────────────────────────
   function rememberTocScroll() {
-    const toc = document.querySelector<HTMLElement>('.present-toc');
+    const toc = document.querySelector<HTMLElement>('.present-toc-scroll');
     if (toc) preservedTocScrollTop = toc.scrollTop;
   }
 
@@ -624,7 +631,9 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   function syncToc() {
     const toc = document.querySelector<HTMLElement>('.present-toc');
     if (!toc) return;
-    const currentScrollTop = preservedTocScrollTop ?? toc.scrollTop;
+    const scroller = toc.querySelector<HTMLElement>('.present-toc-scroll');
+    if (!scroller) return;
+    const currentScrollTop = preservedTocScrollTop ?? scroller.scrollTop;
     const currentId = (location.pathname.match(/\/(?:en\/)?playbook\/([^/]+)/)?.[1]) || toc.dataset.currentId || '';
     const items = Array.from(toc.querySelectorAll<HTMLElement>('.toc-item'));
     items.forEach((el) => {
@@ -639,8 +648,8 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       }
     });
     // Do not auto-scroll the TOC: keep the user's current sidebar position stable.
-    toc.scrollTop = currentScrollTop;
-    restoreTocScroll(toc);
+    scroller.scrollTop = currentScrollTop;
+    restoreTocScroll(scroller);
   }
 
   function enterSlideMode(startSlide?: number) {
@@ -775,19 +784,9 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     return document.documentElement.dataset.theme === 'retro' ? 'retro' : 'phosphor';
   }
 
-  function syncPresentThemeSwitch() {
-    const active = getActiveTheme();
-    document.querySelectorAll<HTMLButtonElement>('.present-theme-btn[data-slide-theme]').forEach((btn) => {
-      const isCurrent = btn.dataset.slideTheme === active;
-      btn.classList.toggle('is-active', isCurrent);
-      btn.setAttribute('aria-pressed', isCurrent ? 'true' : 'false');
-    });
-  }
-
   function initPresent() {
     const params = new URLSearchParams(window.location.search);
     setPresent(params.get('present') === '1');
-    syncPresentThemeSwitch();
     const btn = document.getElementById('present-toggle');
     if (btn && !btn.dataset.bound) {
       btn.dataset.bound = '1';
@@ -970,24 +969,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     });
   }
 
-  function onPresentThemeClick(e: MouseEvent) {
-    const btn = (e.target as HTMLElement | null)?.closest<HTMLButtonElement>('.present-theme-btn[data-slide-theme]');
-    if (!btn) return;
-    e.preventDefault();
-    btn.blur();
-    const target: SiteTheme = btn.dataset.slideTheme === 'retro' ? 'retro' : 'phosphor';
-    const setTheme = (window as unknown as { __akqSetTheme?: (next: SiteTheme) => void }).__akqSetTheme;
-    if (setTheme) {
-      setTheme(target);
-    } else {
-      document.documentElement.dataset.theme = target;
-      window.dispatchEvent(new CustomEvent('akq:theme-change', { detail: { theme: target } }));
-    }
-    syncPresentThemeSwitch();
-  }
-
   function onSiteThemeChange() {
-    syncPresentThemeSwitch();
     void renderMermaid();
     if (document.body.classList.contains('present-mode')) {
       requestAnimationFrame(() => {
@@ -999,7 +981,6 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   document.addEventListener('keydown', onKey);
   document.addEventListener('click', onTocToggleClick);
   document.addEventListener('click', onDemoToggleClick);
-  document.addEventListener('click', onPresentThemeClick);
   function preparePresentNavigation(event?: Event) {
     pausePlaybookVideos();
     rememberTocScroll();
@@ -1048,7 +1029,6 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     document.removeEventListener('keydown', onKey);
     document.removeEventListener('click', onTocToggleClick);
     document.removeEventListener('click', onDemoToggleClick);
-    document.removeEventListener('click', onPresentThemeClick);
     document.removeEventListener('astro:before-preparation', preparePresentNavigation);
     document.removeEventListener('astro:before-swap', preparePresentNavigation);
     document.removeEventListener('astro:after-swap', clearPresentAfterEscape);
@@ -3523,14 +3503,12 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     outline: 2px solid var(--c-neon-cyan);
     outline-offset: 2px;
   }
-
   /* ── Presentation mode ── */
   body.present-mode { background: var(--c-midnight) !important; overflow: hidden; }
   body.present-mode header.sticky,
   body.present-mode nav,
   body.present-mode footer,
-  body.present-mode .bgm-player,
-  body.present-mode .bgm-bug-report,
+  body.present-mode .site-bug-report,
   body.present-mode .crt-overlay { display: none !important; }
   body.present-mode .present-hint { display: none; }
   body.present-mode .present-overlay-hint { display: flex; }
@@ -3701,23 +3679,32 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     display: none !important;
   }
   @media (min-width: 768px) {
+    body.present-mode {
+      --present-toc-width: 284px;
+    }
     body.present-mode .present-toc {
       display: flex !important;
       flex-direction: column;
       position: fixed;
-      top: 84px;
+      top: 0;
       left: 0;
       bottom: 0;
-      width: 284px;
-      padding: 0 0.85rem 2rem;
-      gap: 2px;
-      overflow-y: auto;
+      width: var(--present-toc-width);
+      padding: 84px 0.85rem 2rem;
+      overflow: hidden;
       background: rgb(var(--rgb-shadow-ink) / 0.96);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-right: 1px solid rgb(var(--rgb-neon-cyan) / 0.16);
       z-index: 40;
       transition: transform 0.25s ease;
+    }
+    .present-toc-scroll {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-height: 0;
+      overflow-y: auto;
     }
     body.present-mode .playbook-detail {
       padding-left: 316px;
@@ -3820,19 +3807,21 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   }
   .present-toc .toc-text {
     flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
   }
   .present-toc .toc-title-text {
-    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .present-toc .toc-new-badge {
     display: inline-block;
+    flex-shrink: 0;
     position: static;
-    margin-left: 0.35rem;
     padding: 0.04rem 0.32rem;
     font-family: var(--font-mono-hud);
     font-weight: 600;
@@ -5990,14 +5979,19 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
 
   /* Retro TOC Sidebar */
   @media (min-width: 768px) {
+    html[data-theme='retro'] body.present-mode {
+      --present-toc-width: 300px;
+    }
     html[data-theme='retro'] body.present-mode .present-toc {
-      width: 300px;
-      padding: 2.5rem 1rem 2rem;
-      gap: 0;
+      width: var(--present-toc-width);
+      padding: calc(84px + 2.5rem) 0.5rem 2rem;
       background: var(--c-midnight);
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
       border-right: 1px solid rgb(var(--rgb-neon-magenta) / 0.2);
+    }
+    html[data-theme='retro'] .present-toc-scroll {
+      gap: 0;
     }
     html[data-theme='retro'] body.present-mode .playbook-detail {
       padding-left: 320px;
@@ -6007,7 +6001,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     }
   }
   html[data-theme='retro'] .present-toc .toc-item {
-    padding: 0.5rem 0.6rem 0.5rem 1.5rem;
+    padding: 0.5rem 0.4rem 0.5rem 1.5rem;
     border-left: none;
     border-bottom: 1px dashed rgb(var(--rgb-phosphor) / 0.12);
     border-radius: 0;

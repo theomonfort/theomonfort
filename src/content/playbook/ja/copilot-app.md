@@ -2,7 +2,7 @@
 title: Copilot App
 titleEn: Copilot App
 summary: 目標とコンテキストを渡し、成果をレビュー。複数リポジトリのエージェントを指揮し、資料も作成。クラウドセッションは別の端末から続けられる。
-icon: /theomonfort/github-copilot-white-icon.png
+icon: /theomonfort/github-copilot-white-icon.svg
 color: magenta
 accent:
   text: text-neon-magenta

@@ -1,0 +1,156 @@
+---
+import Layout from '../layout/Layout.astro';
+import { localizedPath, siteCopy, type Locale } from '../../lib/i18n';
+import { getPlaybookEntries, playbookEntryTitle } from '../../lib/playbook';
+import { accentColorValues } from '../../lib/theme';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = siteCopy[locale];
+const entries = await getPlaybookEntries(locale, 'archived');
+---
+
+<Layout locale={locale} currentPath="/archive" title={`${t.archive.title} | ${t.playbook.heading}`} description={t.archive.description}>
+  <section class="archive-shell max-w-5xl mx-auto px-4 py-12">
+    <a class="retro-link" href={localizedPath(locale, '/playbook')}>{t.archive.backToPlaybook}</a>
+    <header class="archive-header">
+      <p class="archive-kicker">PLAYBOOK / ARCHIVE</p>
+      <div class="archive-title-row">
+        <h1>{t.archive.title}</h1>
+        <span class="archive-count">{entries.length} {t.playbook.itemCount}</span>
+      </div>
+      <p class="archive-description">{t.archive.description}</p>
+    </header>
+
+    {entries.length === 0 ? <p>{t.archive.empty}</p> : (
+      <ul class="archive-list">
+        {entries.map((item) => {
+          const entry = item.entry;
+          const href = localizedPath(locale, `/playbook/${item.slug}`);
+          return (
+            <li class="archive-card" data-archive-entry={item.slug} style={`--archive-accent:${accentColorValues[entry.data.color]}`}>
+              <div class="archive-card-head">
+                {/\.(svg|png|jpg|jpeg|webp|gif)$/i.test(entry.data.icon)
+                  ? <img src={entry.data.icon} alt="" width="32" height="32" />
+                  : <span class="archive-icon" aria-hidden="true">{entry.data.icon}</span>}
+                <span class="archive-badge">{t.archive.badge}</span>
+              </div>
+              <h2><a href={href}>{entry.data.titleEn || playbookEntryTitle(item)}</a></h2>
+              <p class="archive-summary">{entry.data.summary}</p>
+              <div class="archive-actions">
+                <a class="retro-link" href={href}>{t.playbook.readMore} ↗</a>
+                <a class="retro-link" href={`${href}?present=1`}>{t.playbook.presentationMode} ↗</a>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    )}
+  </section>
+</Layout>
+
+<style>
+  .archive-shell {
+    font-family: 'DotGothic16', sans-serif;
+  }
+  .archive-header {
+    margin: 2rem 0;
+  }
+  .archive-kicker,
+  .archive-count,
+  .archive-badge {
+    font-family: var(--font-mono-hud);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--c-crt-amber);
+  }
+  .archive-kicker {
+    margin-bottom: 0.65rem;
+  }
+  .archive-title-row {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.2;
+    color: var(--c-fg-strong);
+  }
+  .archive-description {
+    max-width: 46rem;
+    margin-top: 1rem;
+    color: var(--c-fg-muted);
+    line-height: 1.7;
+  }
+  .archive-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .archive-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 1.35rem;
+    border: 1px solid var(--c-border);
+    border-top: 2px solid var(--archive-accent);
+    border-radius: 3px;
+    background: rgb(var(--rgb-midnight) / 0.7);
+  }
+  .archive-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 1.1rem;
+  }
+  .archive-card-head img {
+    object-fit: contain;
+  }
+  .archive-icon {
+    font-size: 2rem;
+    line-height: 1;
+  }
+  .archive-badge {
+    padding: 0.2rem 0.4rem;
+    border: 1px dashed rgb(var(--rgb-crt-amber) / 0.4);
+  }
+  h2 {
+    font-size: 1.25rem;
+    line-height: 1.4;
+    color: var(--c-fg-strong);
+  }
+  h2 a:hover {
+    color: var(--archive-accent);
+  }
+  .archive-summary {
+    margin: 0.8rem 0 1.5rem;
+    color: var(--c-fg-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+  }
+  .archive-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--c-border);
+    font-size: 0.85rem;
+  }
+  a:focus-visible {
+    outline: 2px solid var(--c-neon-cyan);
+    outline-offset: 4px;
+  }
+  @media (max-width: 900px) {
+    .archive-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

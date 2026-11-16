@@ -181,7 +181,6 @@ const systems: ExplorerGalaxyCategory[] = categories.map((category) => ({
   import type { GalaxyCategory } from '../../lib/playbook-galaxy';
   import type { GalaxyScene } from '../../lib/playbook-galaxy-scene';
   import type { CategoryId } from '../../lib/playbook-categories';
-  import { setGalaxyAudioMode } from '../../lib/audio';
   import { createGalaxyAmbience, type GalaxyAmbience, type GalaxyAudioPose } from '../../lib/playbook-galaxy-audio';
 
   class PlaybookExplorer extends HTMLElement {
@@ -295,7 +294,6 @@ const systems: ExplorerGalaxyCategory[] = categories.map((category) => ({
       this.scene?.dispose();
       this.scene = undefined;
       this.stopMusic();
-      setGalaxyAudioMode(false);
     }
 
     private setPanelOpen(open: boolean) {
@@ -350,7 +348,6 @@ const systems: ExplorerGalaxyCategory[] = categories.map((category) => ({
       this.dataset.view = mode;
       this.closest('.playbook-cosmos')!.classList.toggle('galaxy-active', mode === '3d');
       this.stopScene();
-      setGalaxyAudioMode(mode === '3d');
       this.querySelector<HTMLElement>('.explorer-audio-error')!.hidden = true;
       const request = this.request;
       this.querySelector<HTMLElement>('.galaxy')!.hidden = mode !== '3d';

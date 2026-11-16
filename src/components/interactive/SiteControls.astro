@@ -1,0 +1,144 @@
+---
+import type { Locale } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+  feedbackUrl: string;
+}
+
+const { locale, feedbackUrl } = Astro.props;
+---
+
+<div class="site-controls">
+  <a
+    href={feedbackUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="site-bug-report"
+    aria-label={locale === 'ja' ? '不具合を報告（新しいタブ）' : 'Report a bug (new tab)'}
+    title={locale === 'ja' ? '不具合を報告' : 'Report a bug'}
+  ></a>
+  <div
+    class="theme-switch"
+    role="group"
+    aria-label={locale === 'ja' ? 'サイトの表示テーマ切り替え' : 'Switch site visual theme'}
+    data-theme-switch
+  >
+    <button
+      type="button"
+      class="theme-switch__btn"
+      data-theme-choice="retro"
+      aria-pressed="false"
+    >RETRO</button>
+    <button
+      type="button"
+      class="theme-switch__btn"
+      data-theme-choice="phosphor"
+      aria-pressed="true"
+    >PHOSPHOR</button>
+  </div>
+</div>
+
+<script>
+  import { play } from '../../lib/sfx';
+  import { getCurrentSiteTheme, SITE_THEME_EVENT, type SiteTheme } from '../../lib/theme';
+
+  type SiteWindow = Window & typeof globalThis & {
+    __akqSetTheme: (next: SiteTheme) => SiteTheme;
+    __akqSiteControlsBound?: boolean;
+  };
+
+  function syncSwitches() {
+    const active = getCurrentSiteTheme();
+    document.querySelectorAll<HTMLButtonElement>('[data-theme-switch] [data-theme-choice]').forEach((button) => {
+      const selected = button.dataset.themeChoice === active;
+      button.classList.toggle('is-active', selected);
+      button.setAttribute('aria-pressed', String(selected));
+    });
+  }
+
+  syncSwitches();
+  const win = window as SiteWindow;
+  if (!win.__akqSiteControlsBound) {
+    win.__akqSiteControlsBound = true;
+    document.addEventListener('click', (event) => {
+      const button = (event.target as HTMLElement | null)?.closest<HTMLButtonElement>('[data-theme-switch] [data-theme-choice]');
+      if (!button) return;
+      const choice = button.dataset.themeChoice === 'retro' ? 'retro' : 'phosphor';
+      if (choice === getCurrentSiteTheme()) return;
+      win.__akqSetTheme(choice);
+      play('select');
+    });
+    window.addEventListener(SITE_THEME_EVENT, syncSwitches);
+    document.addEventListener('astro:page-load', syncSwitches);
+  }
+</script>
+
+<style>
+  .site-controls {
+    position: fixed;
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  :global(body.present-mode) .site-controls {
+    display: none;
+  }
+  .theme-switch {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 128px;
+    gap: 2px;
+    padding: 2px;
+    border: 1px solid var(--c-border-strong);
+    border-radius: var(--radius-ui);
+    background: var(--c-bg-hud);
+    backdrop-filter: blur(8px);
+  }
+  .theme-switch__btn {
+    flex: 1;
+    padding: 0.25rem 0.2rem;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-family: var(--font-mono-hud);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: var(--c-fg-muted);
+    background: transparent;
+    cursor: pointer;
+    transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+  }
+  .theme-switch__btn:hover {
+    color: var(--c-fg-strong);
+  }
+  .theme-switch__btn:focus-visible {
+    outline: 2px solid var(--c-neon-cyan);
+    outline-offset: 2px;
+  }
+  .theme-switch__btn.is-active {
+    color: var(--c-ink-on-bright);
+    background: var(--c-neon-cyan);
+    border-color: var(--c-neon-cyan);
+  }
+  :global(html[data-theme='retro']) .theme-switch {
+    border: 2px solid var(--c-neon-magenta);
+    border-radius: 0;
+    background: var(--c-shadow-ink);
+    backdrop-filter: none;
+  }
+  :global(html[data-theme='retro']) .theme-switch__btn {
+    border-radius: 0;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 6px;
+  }
+  :global(html[data-theme='retro']) .theme-switch__btn.is-active {
+    background: var(--c-neon-magenta);
+    border-color: var(--c-neon-magenta);
+  }
+</style>

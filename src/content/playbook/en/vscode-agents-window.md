@@ -12,6 +12,7 @@ accent:
   hex: "#93a8ff"
 order: 16.8
 category: develop
+archived: true
 related: ['copilot-app', 'copilot-chat', 'agentic-workflow', 'harness-engineering']
 links:
   - group: 📖 Official docs
