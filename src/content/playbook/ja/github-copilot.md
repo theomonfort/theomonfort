@@ -2,7 +2,7 @@
 title: GitHub Copilot
 titleEn: GitHub Copilot
 summary: 世界で最も活用されている AI 開発ツール。SDLC 全体を AI で支える開発者プラットフォーム。
-icon: /theomonfort/github-copilot-white-icon.png
+icon: /theomonfort/github-copilot-white-icon.svg
 color: cyan
 accent:
   text: text-neon-cyan
@@ -64,23 +64,23 @@ links:
 
   <div class="ch-card" data-tone="amber">
     <div class="ch-card-title">LLM による<br/>コード補完</div>
-    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.png" alt="" />
+    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.svg" alt="" />
   </div>
   <div class="ch-card" data-tone="green">
     <div class="ch-card-title">Copilot Chat<br/>Ask Mode</div>
-    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.png" alt="" />
+    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.svg" alt="" />
   </div>
   <div class="ch-card" data-tone="green">
     <div class="ch-card-title">Copilot Chat<br/>Edit Mode</div>
-    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.png" alt="" />
+    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.svg" alt="" />
   </div>
   <div class="ch-card" data-tone="magenta">
     <div class="ch-card-title">GitHub Copilot<br/>Agent Mode</div>
-    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.png" alt="" />
+    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.svg" alt="" />
   </div>
   <div class="ch-card" data-tone="cyan">
     <div class="ch-card-title">IDE 以外での<br/>GitHub Copilot</div>
-    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.png" alt="" />
+    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.svg" alt="" />
   </div>
 
   <div class="ch-tag" data-tone="amber" style="grid-column: 1 / 2">コード補完だけ</div>
@@ -286,7 +286,7 @@ config:
 ---
 flowchart LR
   Dev["👤 開発者"]
-  Proxy["<img class='proxy-ico' src='/theomonfort/github-copilot-white-icon.png' alt=''/><b>Copilot Proxy</b>"]
+  Proxy["<img class='proxy-ico' src='/theomonfort/github-copilot-white-icon.svg' alt=''/><b>Copilot Proxy</b>"]
   LLM["<b>LLM プロバイダー</b><div class='llm-row'><img src='/theomonfort/llm-openai.png' alt=''/><img src='/theomonfort/llm-anthropic.svg' alt=''/><img src='/theomonfort/llm-gemini.png' alt=''/><img src='/theomonfort/llm-grok.png' alt=''/><img class='ms-ico' src='/theomonfort/llm-microsoft.svg' alt=''/></div>"]
 
   Dev -->|"文脈"| Proxy

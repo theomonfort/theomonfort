@@ -12,6 +12,7 @@ accent:
   hex: "#86efac"
 order: 7.5
 category: plan
+archived: true
 related: ['harness-engineering', 'custom-agent', 'instructions']
 links:
   - group: 📖 公式ドキュメント

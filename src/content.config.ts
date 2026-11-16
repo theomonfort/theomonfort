@@ -25,6 +25,7 @@ const playbook = defineCollection({
       }))
       .default([]),
     order: z.number().default(0),
+    archived: z.boolean().default(false),
     category: z
       .enum(['introduction', 'plan', 'develop', 'review', 'secure', 'operate', 'administration'])
       .default('introduction'),

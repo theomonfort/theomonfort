@@ -2,7 +2,7 @@
 title: GitHub Copilot
 titleEn: GitHub Copilot
 summary: The world's most widely used AI development tool. An orchestrator that lets you freely combine major AI models with a variety of surfaces.
-icon: /theomonfort/github-copilot-white-icon.png
+icon: /theomonfort/github-copilot-white-icon.svg
 color: cyan
 accent:
   text: text-neon-cyan
@@ -64,23 +64,23 @@ links:
 
   <div class="ch-card" data-tone="amber">
     <div class="ch-card-title">LLM Code<br/>Completion</div>
-    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.png" alt="" />
+    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.svg" alt="" />
   </div>
   <div class="ch-card" data-tone="green">
     <div class="ch-card-title">Copilot Chat<br/>Ask Mode</div>
-    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.png" alt="" />
+    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.svg" alt="" />
   </div>
   <div class="ch-card" data-tone="green">
     <div class="ch-card-title">Copilot Chat<br/>Edit Mode</div>
-    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.png" alt="" />
+    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.svg" alt="" />
   </div>
   <div class="ch-card" data-tone="magenta">
     <div class="ch-card-title">GitHub Copilot<br/>Agent Mode</div>
-    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.png" alt="" />
+    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.svg" alt="" />
   </div>
   <div class="ch-card" data-tone="cyan">
     <div class="ch-card-title">GitHub Copilot<br/>Beyond the IDE</div>
-    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.png" alt="" />
+    <img class="ch-mona" src="/theomonfort/github-copilot-white-icon.svg" alt="" />
   </div>
 
   <div class="ch-tag" data-tone="amber" style="grid-column: 1 / 2">Code completion only</div>
@@ -286,7 +286,7 @@ config:
 ---
 flowchart LR
   Dev["👤 Developer"]
-  Proxy["<img class='proxy-ico' src='/theomonfort/github-copilot-white-icon.png' alt=''/><b>Copilot Proxy</b>"]
+  Proxy["<img class='proxy-ico' src='/theomonfort/github-copilot-white-icon.svg' alt=''/><b>Copilot Proxy</b>"]
   LLM["<b>LLM Providers</b><div class='llm-row'><img src='/theomonfort/llm-openai.png' alt=''/><img src='/theomonfort/llm-anthropic.svg' alt=''/><img src='/theomonfort/llm-gemini.png' alt=''/><img src='/theomonfort/llm-grok.png' alt=''/><img class='ms-ico' src='/theomonfort/llm-microsoft.svg' alt=''/></div>"]
 
   Dev -->|"Context"| Proxy

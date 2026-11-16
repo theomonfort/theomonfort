@@ -2,7 +2,7 @@
 title: Copilot App
 titleEn: Copilot App
 summary: Give Copilot a goal, connect your context, and review the results. Coordinate agents across repositories, create files, and continue cloud sessions across devices.
-icon: /theomonfort/github-copilot-white-icon.png
+icon: /theomonfort/github-copilot-white-icon.svg
 color: magenta
 accent:
   text: text-neon-magenta

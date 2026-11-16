@@ -12,6 +12,7 @@ accent:
   hex: "#93a8ff"
 order: 30.5
 category: administration
+archived: true
 related: ['license-management', 'copilot-metrics', 'token-optimization']
 links:
   - group: 📰 Announcement

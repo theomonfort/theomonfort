@@ -85,6 +85,15 @@ export const siteCopy = {
       feedback: 'フィードバックを送る',
       repository: 'Repository（⭐募集中です🤲）',
     },
+    archive: {
+      title: 'アーカイブ',
+      description: '通常のプレイブックから外した項目を保管しています。内容が最新ではない場合があります。',
+      link: 'アーカイブを見る',
+      badge: 'アーカイブ',
+      backToList: '◀ アーカイブ一覧',
+      backToPlaybook: '◀ プレイブックに戻る',
+      empty: 'アーカイブされた項目はありません。',
+    },
     common: {
       backHome: '◀ 道場に戻る',
       translationPending: '英語版は準備中です。現在は日本語コンテンツを表示しています。',
@@ -268,6 +277,15 @@ export const siteCopy = {
       attributionSource: 'Flaticon',
       feedback: 'Send feedback',
       repository: 'Repository (⭐ wanted 🤲)',
+    },
+    archive: {
+      title: 'Archive',
+      description: 'Sections retired from the main playbook, kept for reference. Their content may no longer be up to date.',
+      link: 'Browse the archive',
+      badge: 'Archived',
+      backToList: '◀ Back to archive',
+      backToPlaybook: '◀ Back to playbook',
+      empty: 'No archived entries.',
     },
     common: {
       backHome: '◀ Back to the dojo',

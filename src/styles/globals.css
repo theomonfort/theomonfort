@@ -7,7 +7,7 @@
 /* Smooth anti-aliased rendering by default; crisp nearest-neighbor strictly on pixel sprites */
 .pixelated,
 .slide-counter-bug,
-.bgm-bug-report {
+.site-bug-report {
   image-rendering: pixelated;
   image-rendering: crisp-edges;
 }
@@ -1344,8 +1344,8 @@ html[data-theme='retro'] .handson-toc-phase .font-pixel {
   }
 }
 
-/* ── Bug-report icon shown to the left of the global BGM button ── */
-.bgm-bug-report {
+/* Bug-report icon beside the global theme switch */
+.site-bug-report {
   flex: 0 0 auto;
   width: 1.5rem;
   height: 1.5rem;
@@ -1362,7 +1362,7 @@ html[data-theme='retro'] .handson-toc-phase .font-pixel {
   cursor: pointer;
   transition: opacity 0.16s ease, background-color 0.16s ease, transform 0.16s ease;
 }
-.bgm-bug-report:hover {
+.site-bug-report:hover {
   background-color: var(--c-fg-strong);
   opacity: 0.9;
   transform: translateY(-1px);

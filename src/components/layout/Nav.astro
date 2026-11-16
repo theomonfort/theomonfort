@@ -18,10 +18,6 @@ const items = [
   { path: '/skills', label: t.nav.equipment, short: t.nav.equipmentShort },
   { path: '/changelog', label: t.nav.changelog, short: t.nav.changelogShort },
 ];
-
-const themeGroupLabel = locale === 'ja' ? 'サイトの表示テーマ切り替え' : 'Switch site visual theme';
-const retroTitle = locale === 'ja' ? 'レトロ JRPG モードに切り替え' : 'Switch to Retro JRPG mode';
-const phosphorTitle = locale === 'ja' ? 'Phosphor Cosmos モードに切り替え' : 'Switch to Phosphor Cosmos mode';
 ---
 
 <header class="site-nav sticky top-0 z-40 backdrop-blur-md">
@@ -60,82 +56,9 @@ const phosphorTitle = locale === 'ja' ? 'Phosphor Cosmos モードに切り替�
           );
         })}
       </ul>
-
-      <div
-        class="theme-switch"
-        role="group"
-        aria-label={themeGroupLabel}
-        data-theme-switch
-      >
-        <button
-          type="button"
-          class="theme-switch__btn"
-          data-theme-choice="retro"
-          title={retroTitle}
-          aria-pressed="false"
-        >
-          <span class="theme-switch__dot theme-switch__dot--retro" aria-hidden="true"></span>
-          <span>RETRO</span>
-        </button>
-        <button
-          type="button"
-          class="theme-switch__btn"
-          data-theme-choice="phosphor"
-          title={phosphorTitle}
-          aria-pressed="true"
-        >
-          <span class="theme-switch__dot theme-switch__dot--phosphor" aria-hidden="true"></span>
-          <span>PHOSPHOR</span>
-        </button>
-      </div>
     </div>
   </nav>
 </header>
-
-<script>
-  import { play } from '../../lib/sfx';
-
-  type SiteWin = Window & typeof globalThis & {
-    __akqGetTheme?: () => 'phosphor' | 'retro';
-    __akqSetTheme?: (next: 'phosphor' | 'retro') => 'phosphor' | 'retro';
-    __akqNavThemeBound?: boolean;
-  };
-
-  const syncSwitches = (theme?: string) => {
-    const win = window as SiteWin;
-    const active = theme ?? win.__akqGetTheme?.() ?? (document.documentElement.dataset.theme === 'retro' ? 'retro' : 'phosphor');
-    document.querySelectorAll<HTMLButtonElement>('[data-theme-switch] [data-theme-choice]').forEach((btn) => {
-      const isSelected = btn.dataset.themeChoice === active;
-      btn.classList.toggle('is-active', isSelected);
-      btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
-    });
-  };
-
-  syncSwitches();
-
-  const win = window as SiteWin;
-  if (!win.__akqNavThemeBound) {
-    win.__akqNavThemeBound = true;
-
-    document.addEventListener('click', (e) => {
-      const target = (e.target as HTMLElement | null)?.closest<HTMLButtonElement>('[data-theme-switch] [data-theme-choice]');
-      if (!target) return;
-      const choice = target.dataset.themeChoice === 'retro' ? 'retro' : 'phosphor';
-      const current = win.__akqGetTheme?.() ?? 'phosphor';
-      if (choice === current) return;
-      win.__akqSetTheme?.(choice);
-      play('select');
-    });
-
-    window.addEventListener('akq:theme-change', ((e: CustomEvent<{ theme: string }>) => {
-      syncSwitches(e.detail?.theme);
-    }) as EventListener);
-
-    document.addEventListener('astro:page-load', () => {
-      syncSwitches();
-    });
-  }
-</script>
 
 <style>
   .site-nav {
@@ -200,75 +123,6 @@ const phosphorTitle = locale === 'ja' ? 'Phosphor Cosmos モードに切り替�
     color: var(--c-phosphor);
   }
 
-  /* Segmented Retro / Phosphor theme toggle */
-  .theme-switch {
-    display: inline-flex;
-    align-items: center;
-    padding: 2px;
-    gap: 2px;
-    border-radius: var(--radius-ui);
-    border: 1px solid var(--c-border-strong);
-    background: rgba(4, 8, 14, 0.78);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  }
-  .theme-switch__btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.32rem;
-    padding: 0.26rem 0.52rem;
-    border-radius: calc(var(--radius-ui) - 1px);
-    border: 1px solid transparent;
-    font-family: var(--font-mono-hud);
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    line-height: 1;
-    color: var(--c-fg-muted);
-    background: transparent;
-    cursor: pointer;
-    transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-  }
-  .theme-switch__btn:hover {
-    color: var(--c-phosphor);
-  }
-  .theme-switch__btn:focus-visible {
-    outline: 2px solid var(--c-neon-cyan);
-    outline-offset: 2px;
-  }
-  .theme-switch__dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 999px;
-    opacity: 0.55;
-    transition: opacity 0.15s ease, box-shadow 0.15s ease;
-  }
-  .theme-switch__dot--retro {
-    background: #ff2e88;
-    border-radius: 1px;
-  }
-  .theme-switch__dot--phosphor {
-    background: #5eead4;
-  }
-  .theme-switch__btn.is-active[data-theme-choice='phosphor'] {
-    color: #04080e;
-    background: #5eead4;
-    border-color: #5eead4;
-  }
-  .theme-switch__btn.is-active[data-theme-choice='phosphor'] .theme-switch__dot {
-    background: #04080e;
-    opacity: 1;
-  }
-  .theme-switch__btn.is-active[data-theme-choice='retro'] {
-    color: #05060f;
-    background: #ff2e88;
-    border-color: #ff2e88;
-    box-shadow: 0 0 10px rgba(255, 46, 136, 0.45);
-  }
-  .theme-switch__btn.is-active[data-theme-choice='retro'] .theme-switch__dot {
-    background: #05060f;
-    opacity: 1;
-  }
-
   /* Retro JRPG mode fidelity */
   :global(html[data-theme='retro']) .site-nav {
     background: rgba(10, 14, 39, 0.78);
@@ -319,19 +173,5 @@ const phosphorTitle = locale === 'ja' ? 'Phosphor Cosmos モードに切り替�
     background: transparent;
     color: var(--c-neon-cyan);
     box-shadow: var(--shadow-neon-cyan);
-  }
-  :global(html[data-theme='retro']) .theme-switch {
-    border-width: 2px;
-    border-radius: 0;
-    border-color: rgba(255, 46, 136, 0.55);
-    background: rgba(5, 6, 15, 0.9);
-    box-shadow: 2px 2px 0 #05060f;
-  }
-  :global(html[data-theme='retro']) .theme-switch__btn {
-    border-radius: 0;
-    font-family: 'Press Start 2P', monospace;
-    font-size: 0.52rem;
-    letter-spacing: 0.04em;
-    padding: 0.34rem 0.48rem;
   }
 </style>
