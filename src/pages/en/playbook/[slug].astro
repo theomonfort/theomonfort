@@ -2,6 +2,7 @@
 import Layout from '../../../components/layout/Layout.astro';
 import '../../../styles/pull-request-slides.css';
 import '../../../styles/fusion-slides.css';
+import '../../../styles/presentation-slides.css';
 import '../../../styles/github-platform-slide.css';
 import '../../../styles/github-summary-slides.css';
 import { render } from 'astro:content';
@@ -107,6 +108,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     class="max-w-5xl mx-auto px-4 py-12 playbook-detail"
     style={`--entry-accent:${accent}`}
     data-category={entry.data.category}
+    data-playbook-slug={item.slug}
     data-prev={prev ? localizedPath(locale, `/playbook/${prev.slug}`) : ''}
     data-next={next ? localizedPath(locale, `/playbook/${next.slug}`) : ''}
     data-index={localizedPath(locale, '/playbook')}
@@ -227,7 +229,23 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       <span class="key">P</span> {t.playbook.presentationMode}
     </button>
 
-    <div class="present-overlay-hint">
+    <div class="present-overlay-hint present-overlay-settings">
+      <button
+        type="button"
+        class="present-action-btn"
+        data-slide-action="exit"
+        aria-label="Exit presentation"
+        title="Exit (Esc)"
+      >
+        <span class="key">Esc</span> {t.playbook.exit}
+      </button>
+      <span class="present-theme-switch" role="group" aria-label="Switch theme">
+        <button type="button" class="present-theme-btn" data-slide-theme="retro">RETRO</button>
+        <span class="present-theme-sep" aria-hidden="true">|</span>
+        <button type="button" class="present-theme-btn" data-slide-theme="phosphor">PHOSPHOR</button>
+      </span>
+    </div>
+    <div class="present-overlay-hint present-overlay-navigation">
       <span>
         <button
           type="button"
@@ -245,23 +263,9 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
         >▶</button>
         {t.playbook.slides}
       </span>
-      <button
-        type="button"
-        class="present-action-btn"
-        data-slide-action="exit"
-        aria-label="Exit presentation"
-        title="Exit (Esc)"
-      >
-        <span class="key">Esc</span> {t.playbook.exit}
-      </button>
       <button type="button" class="present-toc-toggle" aria-label="Toggle TOC" data-toc-toggle>
         <span class="key">T</span> TOC
       </button>
-      <span class="present-theme-switch" role="group" aria-label="Switch theme">
-        <button type="button" class="present-theme-btn" data-slide-theme="retro">RETRO</button>
-        <span class="present-theme-sep" aria-hidden="true">|</span>
-        <button type="button" class="present-theme-btn" data-slide-theme="phosphor">PHOSPHOR</button>
-      </span>
       <a
         class="present-lang-toggle"
         href={`${localizedPath('ja', `/playbook/${item.slug}`)}?present=1`}
@@ -3220,7 +3224,7 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .prose-akq .copilot-flow-small .mermaid-wrap { padding: 0.4em 1em; margin: 0; overflow: visible; }
   .prose-akq .copilot-flow-small .mermaid-wrap svg { max-width: 100% !important; width: 100% !important; height: auto !important; min-height: 380px; }
   body.present-mode .prose-akq .copilot-flow-small { max-width: 1100px; }
-  body.present-mode .prose-akq .copilot-flow-small .mermaid-wrap svg { min-height: 480px; }
+  body.present-mode .prose-akq .copilot-flow-small .mermaid-wrap svg { min-height: 0; }
 
   /* Vertical workshop flow — boxes now hold full sentences, so give the diagram more room */
   .prose-akq .workshop-flow-vertical { max-width: 920px; margin: 1.2em auto 0; }
@@ -3387,6 +3391,11 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     border-radius: var(--radius-ui);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
     z-index: 60;
+  }
+  .present-overlay-hint.present-overlay-settings {
+    left: 22px;
+    right: auto;
+    white-space: nowrap;
   }
   .present-overlay-hint .key {
     display: inline-flex;
@@ -3694,11 +3703,11 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       display: flex !important;
       flex-direction: column;
       position: fixed;
-      top: 0;
+      top: 84px;
       left: 0;
       bottom: 0;
       width: 284px;
-      padding: 2.25rem 0.85rem 2rem;
+      padding: 0 0.85rem 2rem;
       gap: 2px;
       overflow-y: auto;
       background: rgb(var(--rgb-shadow-ink) / 0.96);
@@ -3864,6 +3873,22 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   body.present-mode .playbook-detail header > p:nth-of-type(2) { font-size: 1.45rem !important; }
   body.present-mode .prose-akq { font-size: 1.55rem; line-height: 1.78; max-width: 72rem; width: 100%; margin: 0 auto; }
   body.present-mode .prose-akq h2 { font-size: 2.3rem; margin-top: 0.4em; margin-bottom: 0.65em; }
+  body.present-mode.slide-cover .playbook-detail > header { margin-top: 0; margin-bottom: 0; padding-bottom: 0.5rem; }
+  body.present-mode.slide-cover .prose-akq > h2 { margin-top: 0.15em; margin-bottom: 0.25em; }
+  body.present-mode.slide-cover .prose-akq .hero-quote {
+    margin: 0.4em 0 0.4em 155px;
+    padding: 0.7em 1em;
+    line-height: 1.5;
+  }
+  body.present-mode.slide-cover .prose-akq .hero-quote::before { left: -155px; width: 140px; height: 140px; }
+  body.present-mode.slide-cover .prose-akq .hero-quote.hero-quote-plain { margin-left: 0; }
+  @media (max-width: 640px) {
+    body.present-mode.slide-cover .prose-akq .hero-quote { margin-left: 0; padding-top: 110px; }
+    body.present-mode.slide-cover .prose-akq .hero-quote::before {
+      left: 50%; top: 8px; transform: translateX(-50%); width: 100px; height: 100px;
+    }
+    body.present-mode.slide-cover .prose-akq .hero-quote.hero-quote-plain { padding-top: 0.7em; }
+  }
   body.present-mode .prose-akq > h2 {
     position: relative;
     padding-left: 0.85rem;
@@ -6104,6 +6129,15 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     border: 2px solid color-mix(in srgb, var(--entry-accent, var(--c-neon-cyan)) 55%, transparent);
     border-radius: 0;
     box-shadow: 4px 4px 0 var(--c-shadow-ink), 0 0 14px color-mix(in srgb, var(--entry-accent, var(--c-neon-cyan)) 25%, transparent);
+  }
+  html[data-theme='retro'] .present-overlay-hint.present-overlay-settings {
+    left: 22px;
+    right: auto;
+  }
+  @media (max-width: 600px) {
+    body.present-mode .playbook-detail { padding-top: 8rem; }
+    .present-overlay-hint.present-overlay-navigation,
+    html[data-theme='retro'] .present-overlay-hint.present-overlay-navigation { top: 78px; }
   }
   html[data-theme='retro'] .present-overlay-hint .key {
     font-family: 'Press Start 2P', 'DotGothic16', monospace;

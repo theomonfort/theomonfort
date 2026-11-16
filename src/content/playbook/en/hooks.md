@@ -64,6 +64,9 @@ links:
 
 Place **one or more `.json` files** with any name under `.github/hooks/`. CLI / VS Code read locally; Cloud Agent reads from `.github/hooks/` on the **default branch**.
 
+<div class="example-columns">
+<div>
+
 ```json
 {
   "version": 1,
@@ -82,14 +85,25 @@ Place **one or more `.json` files** with any name under `.github/hooks/`. CLI / 
 }
 ```
 
+</div>
+<div>
+
 - 📦 Write both `bash` and `powershell` for cross-OS compatibility
 - ⏱️ Default timeout is **30 seconds**. Raise `timeoutSec` for heavy validations
 - 🔁 Stacking **multiple hooks in an array** for the same event runs them top to bottom
 - 📥 Scripts receive **JSON on stdin** and optionally return **JSON on stdout**
 
+</div>
+</div>
+
 ## ★ Blocking specific commands (PreToolUse)
 
-The script receives what the agent is about to run as `toolName` and `toolArgs`, and can stop execution by returning `{"permissionDecision": "deny", "permissionDecisionReason": "..."}`.
+Read `toolName` / `toolArgs`; return **`permissionDecision: deny`** to block execution.
+
+<div class="example-columns hook-guard">
+<div>
+
+### 1. Inspect the command
 
 ```bash
 #!/bin/bash
@@ -98,22 +112,22 @@ INPUT=$(cat)
 TOOL_NAME=$(echo "$INPUT" | jq -r '.toolName')
 TOOL_ARGS=$(echo "$INPUT" | jq -r '.toolArgs')
 
-# Pass through anything that isn't bash
-if [ "$TOOL_NAME" != "bash" ]; then
-  exit 0
-fi
-
+if [ "$TOOL_NAME" != "bash" ]; then exit 0; fi
 COMMAND=$(echo "$TOOL_ARGS" | jq -r '.command')
-
-# 🚨 Blocklist of dangerous commands
 if echo "$COMMAND" | grep -qE 'rm -rf /|sudo |mkfs|dd if=|:\(\)\{'; then
   jq -nc \
     --arg reason "Forbidden command: $COMMAND" \
     '{permissionDecision: "deny", permissionDecisionReason: $reason}'
   exit 0
 fi
+```
 
-# 🔒 Block changes to production environments
+</div>
+<div>
+
+### 2. Protect production
+
+```bash
 if echo "$COMMAND" | grep -qE 'kubectl .*--context[= ]prod|terraform apply.*prod'; then
   jq -nc '{permissionDecision: "deny", permissionDecisionReason: "Changes to production require human review"}'
   exit 0
@@ -122,6 +136,9 @@ fi
 # Allow everything else (no output or "allow")
 exit 0
 ```
+
+</div>
+</div>
 
 ## Where are hooks loaded from?
 

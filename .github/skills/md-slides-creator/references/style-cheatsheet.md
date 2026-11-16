@@ -2,6 +2,17 @@
 
 Quick lookup for the playbook slide style. Use this as a reference when filling in frontmatter or picking a visual block.
 
+## Presentation fit
+
+- Target: **15-inch Mac, Chrome 125% zoom, TOC hidden**.
+- Regression viewports: **1280 x 720 and 1360 x 740 CSS pixels**, both locales and themes. Do not divide by zoom again or use docked DevTools measurements.
+- Reference: Hooks slide 5. Fit the entire slide, captions and sources, leaving space for controls. No vertical scrolling, clipping, or internally scrolling presentation code/figures.
+- Tighten whitespace and repeated prose before reducing fonts. Keep ordinary prose near **24.8px**, non-cover H2 near **36.8px**; use **20-22px components** and **18px code** where needed. Enlarge sparse slides instead of making dense and sparse slides look unrelated.
+- Keep connected figures, not substitute tables/card grids. SVG or HTML is fine instead of Mermaid. Follow Instructions slide 4 and Custom Agent slides 7-8; check actual rendered labels and arrow/text bounds.
+- Preserve existing slide order/deep links. Long code can use `.example-columns` on one slide. Document mode must stack/wrap at 390 and 1100 CSS pixels.
+
+See `SKILL.md` **Presentation size and visual preferences** for the full acceptance checks and shared figure classes.
+
 ## Categories (`category`)
 
 | id | JA label | EN label | Default actor | Typical color |
@@ -71,7 +82,7 @@ Label stays `📖 Docs` in both locales. Max one per slide. Everything else goes
 - Put a short introductory description above the table.
 - Use standard Markdown tables or the existing `compact-table` HTML class. Do not add roomy per-entry overrides.
 - Keep prose readable: reduce whitespace first, then use a collapsible widget for long explanations rather than shrinking the font.
-- Verify the entire slide at 1440×900 and 1920×1080, plus narrow-screen wrapping.
+- Verify the entire slide at 1280 x 720 and 1360 x 740 CSS pixels, both locales/themes with TOC hidden, plus narrow document wrapping.
 
 ## Callout emoji palette
 

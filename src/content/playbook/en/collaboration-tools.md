@@ -51,7 +51,7 @@ links:
   </p>
 </div>
 
-## Issues & Sub-issues
+## <span class="slide-heading-text">Issues & Sub-issues</span> <span class="slide-heading-links" aria-label="Real examples"><a class="h2-doc" href="https://github.com/microsoft/vscode/issues" target="_blank" rel="noopener noreferrer">VS Code ↗</a><a class="h2-doc" href="https://github.com/rust-lang/rust/issues" target="_blank" rel="noopener noreferrer">Rust ↗</a><a class="h2-doc" href="https://github.com/vercel/next.js/issues" target="_blank" rel="noopener noreferrer">Next.js ↗</a><a class="h2-doc" href="https://github.com/github/docs/issues" target="_blank" rel="noopener noreferrer">GitHub Docs ↗</a></span>
 
 Issues are the unit for tracking bugs, tasks, and requests one at a time. Sub-issues break a big effort apart and make parent/child progress visible.
 
@@ -63,9 +63,19 @@ Issues are the unit for tracking bugs, tasks, and requests one at a time. Sub-is
 | 🔗 Linking | `Closes #123` in a PR | Issue auto-closes on merge |
 | 🤖 Assign Copilot | Hand an Issue to the agent | Opens a PR for you |
 
-> 💡 Real examples: <a class="retro-link" href="https://github.com/microsoft/vscode/issues" target="_blank" rel="noopener noreferrer">VS Code ↗</a> · <a class="retro-link" href="https://github.com/rust-lang/rust/issues" target="_blank" rel="noopener noreferrer">Rust ↗</a> · <a class="retro-link" href="https://github.com/vercel/next.js/issues" target="_blank" rel="noopener noreferrer">Next.js ↗</a> · <a class="retro-link" href="https://github.com/github/docs/issues" target="_blank" rel="noopener noreferrer">GitHub Docs ↗</a>
+## Issue Fields (NEW) <a class="h2-doc" href="https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-issue-fields" class="demo-toggle" /><label class="h2-demo" for="demo-issue-fields">&#9658; DEMO</label>
 
-## Issue Fields (NEW)
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-issue-fields" aria-label="Close demo steps"></label>
+<div class="demo-window" role="group" aria-label="Demo steps">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Issue fields</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-issue-fields" aria-label="Close">&#10005;</label></div>
+<ol class="demo-steps">
+<li><p class="demo-step-title">OPEN ORGANIZATION SETTINGS</p><p>As an org admin, open <a class="retro-link" href="https://github.com/organizations/theomonfort-org/settings/issue-fields" target="_blank" rel="noopener noreferrer">theomonfort-org Issue fields ↗</a>. The location is <code class="demo-path">Settings › Planning › Issue fields</code>.</p></li>
+<li><p class="demo-step-title">INSPECT A FIELD</p><p>Open an existing field such as <code class="demo-path">Priority</code> and inspect its name, type, and options. This is where admins add and customize fields.</p></li>
+<li><p class="demo-step-title">CHECK VISIBILITY BY ISSUE TYPE</p><p>Inspect <code class="demo-path">Pin to types</code> to see which issue types display the field.</p><p class="demo-out">Issues of the matching type use shared fields for priority, effort, and dates.</p></li>
+</ol>
+</div>
+</div>
 
 Structured, **typed metadata** on issues. **Generally available** as of 2026-07-02. Every organization gets four default fields out of the box (`Priority`, `Effort`, `Start date`, `Target date`), so priority, effort, and dates stay **searchable, reportable, and consistent** across every repository.
 
@@ -75,8 +85,6 @@ Structured, **typed metadata** on issues. **Generally available** as of 2026-07-
 | ⏱️ Effort | Number / select | Bug / Task / Feature | Estimates & effort |
 | 📅 Start / Target date | Date | Feature only | Start & deadline |
 | 🛠️ Custom | Any | — | Org-specific values |
-
-> ⚙️ Setup: org admins add, customize, and choose which fields appear per issue type from **Settings › Planning › Issue fields**. <a class="retro-link" href="https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-your-organization" target="_blank" rel="noopener noreferrer">Managing issue fields ↗</a>
 
 ## Discussions
 

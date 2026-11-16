@@ -213,57 +213,7 @@ while True:
 
 > Copilot の強みは、主要ベンダーの形式を native にサポートできること。CLI では `/help` を入力すると、今使える形式やコマンドを確認できる。
 
-## よく使う概念
-
-良い harness はツールの寄せ集めではなく、**AI が迷わない進め方** を先に決める。
-
-| 型 | 何をする？ | 何が良くなる？ |
-| --- | --- | --- |
-| Spec-to-code / Spec-driven | 先に **what / why** を spec にし、plan → tasks → implement へ落とす | 仕様が source of truth になり、vibe coding ではなく予測可能な実装になる |
-| Multi-phase coding plan | orchestrator が実装を複数 phase に分解し、各 phase の目的・順序・完了条件を決める | 大きな変更でも、AI が一気に突っ込まず段階的に進められる |
-| File assignment | Planner が触るファイルを明示し、orchestrator が file overlap を見て並列化する | 複数 agent が同じファイルを壊し合わず、Coder / Designer を並列に走らせられる |
-| Prompt engineering | Skill / Agent を作る時に **role・objective・deliverable** を明確に書く | 何者として、何を達成し、何を出力すべきかがぶれない |
-| Context engineering | タスクに必要な context だけを構造化して渡す | 余計な情報で迷わず、コードベース・仕様・制約に沿った回答になる |
-| Approval gates | spec / plan / PR / release など重要な節目で人間が確認する | 自動化の速度を保ちながら、危険な判断だけ人間が止められる |
-
-> 先に **spec・phase・file ownership・role/objective/deliverable・context・approval** を設計すると、AI は速くなるだけでなく、やり直しも減る。
-
-## 例：Ultralight
-
-[Ultralight](https://burkeholland.github.io/ultralight/) は Microsoft の Developer Advocate、Burke Holland さんの multi-agent orchestration 例。  
-Multi-phase execution plan を作り、ファイルの重なりを検出し、Planner / Coder / Designer に並列で仕事を渡す harness になっている。
-
-```mermaid
-flowchart LR
-  User[User prompt] --> O[Orchestrator<br/>Claude Sonnet 4.6<br/>multi-phase plan]
-
-  O --> P[Planner<br/>Claude Opus 4.6<br/>research + docs]
-  O --> C[Coder<br/>GPT-5.3-Codex<br/>scoped code changes]
-  O --> D[Designer<br/>Claude Opus 4.6<br/>UI / UX owner]
-
-  D -.-> S[Frontend Design Skill<br/>used by Designer<br/>brand / layout / CSS]
-  C -.-> M[MCP Server<br/>used by Coder<br/>GitHub / Playwright<br/>docs]
-
-  P --> O
-  C --> O
-  D --> O
-  O --> R[Pull Request<br/>human review]
-
-  classDef host fill:#0b1826,stroke:#5eead4,color:#ecf7fb,stroke-width:2px;
-  classDef agent fill:#0d1e18,stroke:#86efac,color:#dcfce7,stroke-width:2px;
-  classDef harness fill:#2a1020,stroke:#93a8ff,color:#ffe8f4,stroke-width:2px;
-  classDef ship fill:#1d1a10,stroke:#fcd34d,color:#fef3c7,stroke-width:2px;
-  class O host;
-  class P,C,D agent;
-  class S,M harness;
-  class R ship;
-```
-
-> 🚀 数クリックで試せるように Codespace 対応のリポジトリを用意しました： [theomonfort/ultralight-template](https://github.com/theomonfort/ultralight-template)
-
 ## このサイトを作るハーネス
-
-この playbook サイト自体も、同じ考え方のハーネスで作っている。Orchestrator（Theo）が指示書とプロンプトで全体を束ね、フェーズごとに CLI built-in agent・custom agent・skill・MCP を使い分ける。
 
 <div class="harness-map">
   <svg viewBox="0 0 940 566" role="img" aria-label="このサイトを作るハーネスの構成図" xmlns="http://www.w3.org/2000/svg">
@@ -340,5 +290,3 @@ flowchart LR
     <text x="920" y="529" text-anchor="end" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="1" fill="var(--c-gb-green)">LOCAL</text>
   </svg>
 </div>
-
-> 🟦 Orchestrator / Custom agent ・ ⬜ CLI Built-in ・ 🟩 MCP ・ 🟥 Skill。`Local` は手元の設定、`Repo` はこのリポジトリ内に置いたもの。

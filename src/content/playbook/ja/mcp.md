@@ -63,66 +63,53 @@ MCP は「Model Context Protocol」の略称で、AI モデルに対して追加
 
 ## 仕組み
 
-```mermaid
-flowchart LR
-  subgraph Host["🤖 AI Host (VS Code / Copilot CLI 等)"]
-    APP[Copilot]
-    CL1[MCP Client]
-    CL2[MCP Client]
-    CL3[MCP Client]
-    CL4[MCP Client]
-    CL5[MCP Client]
-  end
-  subgraph MCP["🔌 MCP Layer (1 Client ⇄ 1 Server)"]
-    SLs[Work IQ MCP Server]
-    JRs[GitHub MCP Server]
-    FSs[Playwright MCP Server]
-    PWs[Context7 MCP Server]
-    APIs[Salesforce MCP Server]
-  end
-  subgraph Tools["🛠️ External Tools"]
-    SL[Work IQ]
-    JR[GitHub]
-    FS[Playwright]
-    PW[Context7]
-    API[Salesforce]
-  end
-  APP --- CL1
-  APP --- CL2
-  APP --- CL3
-  APP --- CL4
-  APP --- CL5
-  CL1 <-->|stdio| SLs
-  CL2 <-->|HTTP| JRs
-  CL3 <-->|stdio| FSs
-  CL4 <-->|stdio| PWs
-  CL5 <-->|stdio| APIs
-  SLs <-->|API| SL
-  JRs <-->|API| JR
-  FSs <-->|API| FS
-  PWs <-->|API| PW
-  APIs <-->|API| API
+**Copilot（VS Code / Copilot CLI 等）** の中で、**1 MCP Client ⇄ 1 MCP Server** の接続を作る。
 
-  classDef host fill:#0b1420,stroke:#5eead4,color:#5eead4,stroke-width:2px
-  classDef proto fill:#11162c,stroke:#fcd34d,color:#fcd34d,stroke-width:2px
-  classDef tool fill:#0a1a14,stroke:#86efac,color:#86efac,stroke-width:2px
-  class APP,CL1,CL2,CL3,CL4,CL5 host
-  class SLs,JRs,FSs,PWs,APIs proto
-  class SL,JR,FS,PW,API tool
-```
+<div class="mcp-diagram" role="img" aria-label="Copilot 内の 5 つの Client が stdio または HTTP で MCP Server と一対一で接続する。Server が外部ツールの API を呼び出し、結果を返す。">
+<div class="mcp-flow">
+<div class="mcp-host">
+<div class="mcp-flow-heading"><strong>Copilot</strong><small>VS Code / Copilot CLI</small></div>
+<div class="mcp-node">Client 1</div>
+<div class="mcp-node">Client 2</div>
+<div class="mcp-node">Client 3</div>
+<div class="mcp-node">Client 4</div>
+<div class="mcp-node">Client 5</div>
+</div>
+<div class="mcp-flow-heading"><small>接続方式</small></div>
+<div class="mcp-flow-heading"><strong>MCP Servers</strong></div>
+<div class="mcp-flow-heading"><small>API</small></div>
+<div class="mcp-flow-heading"><strong>外部ツール</strong></div>
+<div class="mcp-connection"><small>stdio</small><span>⇄</span></div><div class="mcp-node mcp-server">Work IQ</div><div class="mcp-connection">⇄</div><div class="mcp-node mcp-tool">Work IQ</div>
+<div class="mcp-connection"><small>HTTP</small><span>⇄</span></div><div class="mcp-node mcp-server">GitHub</div><div class="mcp-connection">⇄</div><div class="mcp-node mcp-tool">GitHub</div>
+<div class="mcp-connection"><small>stdio</small><span>⇄</span></div><div class="mcp-node mcp-server">Playwright</div><div class="mcp-connection">⇄</div><div class="mcp-node mcp-tool">Playwright</div>
+<div class="mcp-connection"><small>stdio</small><span>⇄</span></div><div class="mcp-node mcp-server">Context7</div><div class="mcp-connection">⇄</div><div class="mcp-node mcp-tool">Context7</div>
+<div class="mcp-connection"><small>stdio</small><span>⇄</span></div><div class="mcp-node mcp-server">Salesforce</div><div class="mcp-connection">⇄</div><div class="mcp-node mcp-tool">Salesforce</div>
+</div>
+</div>
 
 ## なぜ重要?
 
 MCP がもたらす 3 つの価値：
 
-- **🧩 機能拡張**：Copilot を **一つの起点** にして、あらゆる外部ツールを操作できる。
-  - 要件を読み書きする (**Jira**)
-  - デザインを作る (**Figma**)
-  - 3D デザインを生成して印刷する (**Blender** + 3D プリンター)
-  - メール・カレンダーを確認・編集する (**Work IQ**)
-  - 社内データベースに接続して分析する
-- **🔗 ワークフローを統合**：個別ツールを繋ぐカスタム実装が不要になり、Copilot が **複数システムを横断するハブ** として機能する。
-- **🌐 広いエコシステム対応**：MCP は **オープンなプロトコル** で、すでに **事実上の標準** になりつつあります。AI アシスタント、**Visual Studio** などの開発ツール、その他多くのアプリケーションが MCP をサポートしており、**一度作れば、どこでも繋がる**。コーディング統合との相性も抜群。
+<div class="ctl-widget ctl-compact ctl-tight">
+<div class="ctl-list">
+<details class="ctl-item" name="mcp-values">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🧩</span><span class="ctl-name">機能拡張</span><span class="ctl-when">外部ツールを操作</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p>Copilot を <strong>一つの起点</strong> にして、あらゆる外部ツールを操作できる。</p>
+<ul><li>要件を読み書きする（<strong>Jira</strong>）</li><li>デザインを作る（<strong>Figma</strong>）</li><li>3D デザインを生成して印刷する（<strong>Blender</strong> + 3D プリンター）</li><li>メール・カレンダーを確認・編集する（<strong>Work IQ</strong>）</li><li>社内データベースに接続して分析する</li></ul>
+</div>
+</details>
+<details class="ctl-item" name="mcp-values">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔗</span><span class="ctl-name">ワークフローを統合</span><span class="ctl-when">複数システムを繋ぐ</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body"><p>個別ツールを繋ぐカスタム実装が不要になり、Copilot が <strong>複数システムを横断するハブ</strong> として機能する。</p></div>
+</details>
+<details class="ctl-item" name="mcp-values">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🌐</span><span class="ctl-name">広いエコシステム対応</span><span class="ctl-when">一度作れば、どこでも繋がる</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body"><p>MCP は <strong>オープンなプロトコル</strong> で、すでに <strong>事実上の標準</strong> になりつつあります。AI アシスタント、<strong>Visual Studio</strong> などの開発ツール、その他多くのアプリケーションが MCP をサポートしており、<strong>一度作れば、どこでも繋がる</strong>。コーディング統合との相性も抜群。</p></div>
+</details>
+</div>
+</div>
 
 ## どこで動く?
 

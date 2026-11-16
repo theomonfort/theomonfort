@@ -213,57 +213,7 @@ The same "AI scaffold" concept exists across ecosystems, but file locations and 
 
 > Copilot's strength is native support for the formats of major vendors. In the CLI, type `/help` to see available formats and commands.
 
-## Common Concepts
-
-A good harness is not just a collection of tools — it defines **how AI should proceed without getting lost**.
-
-| Pattern | What does it do? | What improves? |
-| --- | --- | --- |
-| Spec-to-code / Spec-driven | Write the **what / why** as a spec first, then break it into plan → tasks → implement | The spec becomes the source of truth — predictable implementation instead of vibe coding |
-| Multi-phase coding plan | The orchestrator decomposes implementation into multiple phases, each with a clear purpose, order, and completion criteria | Even large changes proceed step by step, without AI rushing ahead all at once |
-| File assignment | The Planner explicitly lists files to touch; the orchestrator checks for file overlap before parallelizing | Multiple agents don't overwrite each other; Coder / Designer can run in parallel safely |
-| Prompt engineering | When writing a Skill / Agent, clearly specify **role · objective · deliverable** | Keeps the agent consistent on who it is, what to achieve, and what to output |
-| Context engineering | Deliver only the context needed for the task, structured appropriately | Avoids distraction from noise; answers stay aligned with the codebase, spec, and constraints |
-| Approval gates | Humans review at key checkpoints — spec / plan / PR / release | Preserves automation speed while letting humans stop only the dangerous decisions |
-
-> Designing **spec · phase · file ownership · role/objective/deliverable · context · approval** upfront makes AI not just faster, but produces fewer reworks too.
-
-## Example: Ultralight
-
-[Ultralight](https://burkeholland.github.io/ultralight/) is a multi-agent orchestration example by Burke Holland, Developer Advocate at Microsoft.  
-It creates a multi-phase execution plan, detects file overlaps, and acts as a harness that distributes work in parallel to Planner / Coder / Designer.
-
-```mermaid
-flowchart LR
-  User[User prompt] --> O[Orchestrator<br/>Claude Sonnet 4.6<br/>multi-phase plan]
-
-  O --> P[Planner<br/>Claude Opus 4.6<br/>research + docs]
-  O --> C[Coder<br/>GPT-5.3-Codex<br/>scoped code changes]
-  O --> D[Designer<br/>Claude Opus 4.6<br/>UI / UX owner]
-
-  D -.-> S[Frontend Design Skill<br/>used by Designer<br/>brand / layout / CSS]
-  C -.-> M[MCP Server<br/>used by Coder<br/>GitHub / Playwright<br/>docs]
-
-  P --> O
-  C --> O
-  D --> O
-  O --> R[Pull Request<br/>human review]
-
-  classDef host fill:#0b1826,stroke:#5eead4,color:#ecf7fb,stroke-width:2px;
-  classDef agent fill:#0d1e18,stroke:#86efac,color:#dcfce7,stroke-width:2px;
-  classDef harness fill:#2a1020,stroke:#93a8ff,color:#ffe8f4,stroke-width:2px;
-  classDef ship fill:#1d1a10,stroke:#fcd34d,color:#fef3c7,stroke-width:2px;
-  class O host;
-  class P,C,D agent;
-  class S,M harness;
-  class R ship;
-```
-
-> 🚀 I made a Codespace-ready template repo so you can try it in a few clicks: [theomonfort/ultralight-template](https://github.com/theomonfort/ultralight-template)
-
 ## Harness for coding this website
-
-This playbook site is built with the same kind of harness. The Orchestrator (Theo) ties everything together with instruction files and prompts, then switches between CLI built-in agents, custom agents, skills, and MCP per phase.
 
 <div class="harness-map">
   <svg viewBox="0 0 940 566" role="img" aria-label="Diagram of the harness that builds this site" xmlns="http://www.w3.org/2000/svg">
@@ -340,5 +290,3 @@ This playbook site is built with the same kind of harness. The Orchestrator (The
     <text x="920" y="529" text-anchor="end" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="1" fill="var(--c-gb-green)">LOCAL</text>
   </svg>
 </div>
-
-> 🟦 Orchestrator / Custom agent · ⬜ CLI Built-in · 🟩 MCP · 🟥 Skill. `Local` = configured on my machine, `Repo` = checked into this repository.

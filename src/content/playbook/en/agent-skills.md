@@ -74,102 +74,90 @@ links:
 
 ## How It Works
 
-Agent Skills are loaded via **progressive disclosure**.  
-Rather than putting every skill's full content in context from the start, only lightweight **metadata** is read first; the content is expanded only for the skill that matches the user's request.
-
+**Progressive disclosure**: read lightweight metadata first, then expand only the skill that matches the request.
 
 | Stage | What is loaded | When | Role |
 | --- | --- | --- | --- |
-| 1 | `name` / `description` | At startup / candidate selection | Determine which skill is likely to apply<br/>※ Clearly state **what the skill does** + **when to use it** |
+| 1 | `name` / `description` | At startup / candidate selection | Select a skill: **what it does + when to use it** |
 | 2 | `SKILL.md` body | When description matches the request | Hand the concrete execution steps to the agent |
 | 3 | scripts / references / assets | When `SKILL.md` requires them | Add only the supporting information needed for execution |
 
 ## What happens inside the harness?
 
-When a user makes a request, the harness first loads only the **metadata for every skill** into context. When the LLM decides it needs a specific skill, the harness **expands the full body (SKILL.md)** and adds it to the context.
+**All skill metadata first**, then the full **SKILL.md** only when needed.
 
-<figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 0 1080 490" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
-  <defs>
-    <marker id="arrow-orange" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--c-crt-amber)"/>
-    </marker>
-    <marker id="arrow-blue" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/>
-    </marker>
-    <marker id="arrow-pink" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--c-neon-magenta)"/>
-    </marker>
-  </defs>
-  <path d="M 260 50 L 720 50" fill="none" stroke="var(--c-crt-amber)" stroke-width="2" marker-end="url(#arrow-orange)"/>
-  <path d="M 140 85 L 140 400 L 400 400 L 400 420" fill="none" stroke="var(--c-crt-amber)" stroke-width="2" marker-end="url(#arrow-orange)"/>
-  <path d="M 410 290 L 410 400 L 515 400 L 515 420" fill="none" stroke="var(--c-neon-magenta)" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-pink)"/>
-  <path d="M 620 420 L 620 376" fill="none" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)"/>
-  <path d="M 660 375 L 750 375 L 750 420" fill="none" stroke="var(--c-crt-amber)" stroke-width="2" marker-end="url(#arrow-orange)"/>
-  <path d="M 660 340 L 690 340 L 690 200 L 720 200" fill="none" stroke="var(--c-crt-amber)" stroke-width="2" marker-end="url(#arrow-orange)"/>
-  <rect x="20" y="15" width="240" height="70" rx="12" fill="var(--c-deep-purple)" stroke="var(--c-crt-amber)" stroke-width="2"/>
-  <text x="35" y="36" fill="var(--c-crt-amber)" font-size="11" font-weight="bold" letter-spacing="1">HARNESS</text>
-  <text x="35" y="58" fill="var(--c-phosphor)" font-size="12" font-weight="bold">PUT ALL SKILLS DESCRIPTIONS</text>
-  <text x="35" y="74" fill="var(--c-phosphor)" font-size="12" font-weight="bold">IN CONTEXT</text>
-  <rect x="720" y="15" width="340" height="215" rx="6" fill="var(--c-deep-purple)" stroke="#1e2a4a" stroke-width="1"/>
-  <text x="735" y="40" font-size="10" fill="#cfe9ff">
-    <tspan x="735" dy="0" fill="#555">---</tspan>
-    <tspan x="735" dy="14"><tspan fill="var(--c-crt-amber)">name:</tspan> api-endpoint</tspan>
-    <tspan x="735" dy="14"><tspan fill="var(--c-crt-amber)">description:</tspan> Generate REST API</tspan>
-    <tspan x="735" dy="14">  endpoints for the OctoCAT Supply</tspan>
-    <tspan x="735" dy="14">  Chain application following</tspan>
-    <tspan x="735" dy="14">  established patterns. Use this</tspan>
-    <tspan x="735" dy="14">  skill when creating new CRUD</tspan>
-    <tspan x="735" dy="14">  endpoints, adding routes,</tspan>
-    <tspan x="735" dy="14">  implementing JPA repositories.</tspan>
-    <tspan x="735" dy="14" fill="#555">---</tspan>
-    <tspan x="735" dy="22" fill="var(--c-neon-cyan)" font-weight="bold"># API Endpoint Development</tspan>
-    <tspan x="735" dy="22" fill="var(--c-neon-cyan)" font-weight="bold">## Architecture Overview</tspan>
-  </text>
-  <rect x="370" y="230" width="80" height="60" rx="10" fill="var(--c-deep-purple)" stroke="var(--c-neon-magenta)" stroke-width="2"/>
-  <text x="410" y="252" fill="var(--c-neon-magenta)" font-size="10" font-weight="bold" letter-spacing="1" text-anchor="middle">USER</text>
-  <text x="410" y="271" fill="var(--c-phosphor)" font-size="11" font-weight="bold" text-anchor="middle">"WORK ON</text>
-  <text x="410" y="284" fill="var(--c-phosphor)" font-size="11" font-weight="bold" text-anchor="middle">API"</text>
-  <rect x="420" y="305" width="240" height="70" rx="12" fill="var(--c-deep-purple)" stroke="var(--c-crt-amber)" stroke-width="2"/>
-  <text x="435" y="326" fill="var(--c-crt-amber)" font-size="11" font-weight="bold" letter-spacing="1">HARNESS</text>
-  <text x="435" y="348" fill="var(--c-phosphor)" font-size="12" font-weight="bold">LOADS FULL SKILL INTO</text>
-  <text x="435" y="364" fill="var(--c-phosphor)" font-size="12" font-weight="bold">CONTEXT</text>
-  <text x="635" y="389" fill="#3b82f6" font-size="10" font-weight="bold">need the</text>
-  <text x="635" y="402" fill="#3b82f6" font-size="10" font-weight="bold">API skill</text>
-  <text x="20" y="445" fill="var(--c-phosphor)" font-size="11" font-weight="bold">MODEL</text>
-  <text x="20" y="461" fill="var(--c-phosphor)" font-size="11" font-weight="bold">CONTEXT</text>
-  <rect x="95" y="420" width="110" height="55" rx="10" fill="var(--c-gb-green)"/>
-  <text x="150" y="444" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
-  <text x="150" y="460" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
-  <rect x="215" y="420" width="110" height="55" rx="10" fill="var(--c-neon-cyan)"/>
-  <text x="270" y="453" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
-  <rect x="335" y="420" width="130" height="55" rx="10" fill="var(--c-crt-amber)"/>
-  <text x="400" y="444" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">SKILLS</text>
-  <text x="400" y="460" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">DESCRIPTION</text>
-  <rect x="475" y="420" width="80" height="55" rx="10" fill="var(--c-neon-magenta)"/>
-  <text x="515" y="453" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
-  <rect x="565" y="420" width="110" height="55" rx="10" fill="var(--c-neon-cyan)"/>
-  <text x="620" y="444" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">SKILL</text>
-  <text x="620" y="460" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">REQUEST</text>
-  <rect x="685" y="420" width="130" height="55" rx="10" fill="var(--c-crt-amber)"/>
-  <text x="750" y="444" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">SKILL</text>
-  <text x="750" y="460" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">DOCUMENT</text>
+<figure class="skills-pipeline">
+<svg viewBox="0 0 1100 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="skills-title skills-desc">
+<title id="skills-title">Progressive skill loading inside the harness</title>
+<desc id="skills-desc">The harness adds metadata for every skill to model context. When the model requests the API skill, the harness reads its full SKILL.md and appends the body.</desc>
+<defs>
+<marker id="skills-amber" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L10 5 L0 10z" fill="var(--c-crt-amber)"/></marker>
+<marker id="skills-cyan" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L10 5 L0 10z" fill="var(--c-neon-cyan)"/></marker>
+<marker id="skills-magenta" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L10 5 L0 10z" fill="var(--c-neon-magenta)"/></marker>
+</defs>
+<g fill="none" stroke-width="2">
+<path d="M320 70 H730" stroke="var(--c-crt-amber)" marker-end="url(#skills-amber)"/>
+<path d="M170 120 V375 H522.5 V390" stroke="var(--c-crt-amber)" marker-end="url(#skills-amber)"/>
+<path d="M525 255 V365 H680 V390" stroke="var(--c-neon-magenta)" stroke-dasharray="6 5" marker-end="url(#skills-magenta)"/>
+<path d="M817.5 390 V360" stroke="var(--c-neon-cyan)" marker-end="url(#skills-cyan)"/>
+<path d="M920 325 H1090 V215 H1080" stroke="var(--c-crt-amber)" marker-end="url(#skills-amber)"/>
+<path d="M870 360 V372 H990 V390" stroke="var(--c-crt-amber)" marker-end="url(#skills-amber)"/>
+</g>
+<rect x="20" y="20" width="300" height="100" rx="3" fill="var(--c-midnight)" stroke="var(--c-crt-amber)" stroke-width="2"/>
+<text x="38" y="48" fill="var(--c-crt-amber)" font-size="20" font-weight="700">HARNESS</text>
+<text x="38" y="78" fill="var(--c-phosphor)" font-size="19"><tspan x="38">Load metadata for all skills</tspan><tspan x="38" dy="25">into model context</tspan></text>
+<rect x="730" y="20" width="350" height="240" rx="3" fill="var(--c-midnight)" stroke="var(--c-neon-cyan)" stroke-width="1.5"/>
+<text x="746" y="45" fill="var(--c-neon-cyan)" font-size="18" font-weight="700">SKILL.md</text>
+<text x="746" y="72" fill="var(--c-phosphor)" font-size="16">
+<tspan x="746"><tspan fill="var(--c-crt-amber)">name:</tspan> api-endpoint</tspan>
+<tspan x="746" dy="23"><tspan fill="var(--c-crt-amber)">description:</tspan> REST API endpoints</tspan>
+<tspan x="746" dy="23">for OctoCAT Supply Chain.</tspan>
+<tspan x="746" dy="23">Use for CRUD endpoints, routes,</tspan>
+<tspan x="746" dy="23">and JPA repositories; follow patterns.</tspan>
+<tspan x="746" dy="30" fill="var(--c-neon-cyan)" font-weight="700"># API Endpoint Development</tspan>
+<tspan x="746" dy="24" fill="var(--c-neon-cyan)" font-weight="700">## Architecture Overview</tspan>
+</text>
+<rect x="430" y="155" width="190" height="100" rx="3" fill="var(--c-midnight)" stroke="var(--c-neon-magenta)" stroke-width="2"/>
+<text x="525" y="187" text-anchor="middle" fill="var(--c-neon-magenta)" font-size="20" font-weight="700">USER</text>
+<text x="525" y="222" text-anchor="middle" fill="var(--c-phosphor)" font-size="20">“Work on API”</text>
+<rect x="620" y="290" width="300" height="70" rx="3" fill="var(--c-midnight)" stroke="var(--c-crt-amber)" stroke-width="2"/>
+<text x="638" y="318" fill="var(--c-crt-amber)" font-size="18" font-weight="700">HARNESS (ON DEMAND)</text>
+<text x="638" y="343" fill="var(--c-phosphor)" font-size="18">Append the selected skill body</text>
+<text x="10" y="414" fill="var(--c-phosphor)" font-size="17" font-weight="700"><tspan x="10">MODEL</tspan><tspan x="10" dy="24">CONTEXT</tspan></text>
+<rect x="110" y="390" width="135" height="60" rx="3" fill="var(--c-gb-green)"/>
+<rect x="260" y="390" width="160" height="60" rx="3" fill="var(--c-neon-cyan)"/>
+<rect x="435" y="390" width="175" height="60" rx="3" fill="var(--c-crt-amber)"/>
+<rect x="625" y="390" width="110" height="60" rx="3" fill="var(--c-neon-magenta)"/>
+<rect x="742.5" y="390" width="150" height="60" rx="3" fill="var(--c-neon-cyan)"/>
+<rect x="900" y="390" width="180" height="60" rx="3" fill="var(--c-crt-amber)"/>
+<g fill="var(--c-shadow-ink)" text-anchor="middle" font-size="17" font-weight="700">
+<text x="177.5" y="414"><tspan x="177.5">SYSTEM</tspan><tspan x="177.5" dy="23">+ TOOLS</tspan></text>
+<text x="340" y="426">INSTRUCTIONS</text>
+<text x="522.5" y="414"><tspan x="522.5">ALL SKILLS</tspan><tspan x="522.5" dy="23">METADATA</tspan></text>
+<text x="680" y="426">PROMPT</text>
+<text x="817.5" y="414"><tspan x="817.5">SKILL REQUEST</tspan><tspan x="817.5" dy="23" font-size="14">api-endpoint</tspan></text>
+<text x="990" y="414"><tspan x="990">SELECTED</tspan><tspan x="990" dy="23">SKILL BODY</tspan></text>
+</g>
 </svg>
 </figure>
 
 ## Example
 
-You can write skills yourself or install community-built ones as-is.  
-GitHub-hosted skills are added to the current repository's skill directory (e.g. `.agents/skills/`) via `gh skill install` (GitHub CLI v2.90.0+).
+Write your own skills or install community skills with `gh skill install` (GitHub CLI v2.90.0+). GitHub-hosted skills go into the current repository's skill directory, e.g. `.agents/skills/`.
+
+<div class="setup-cards skill-examples">
+<div class="setup-card">
 
 ### [github/awesome-copilot](https://awesome-copilot.github.com/skills)
 
-GitHub's official curated skill collection. Pick the skill you want and add it.
-
+GitHub's curated skill collection. Pick a skill and add it.
 
 ```bash
 gh skills install github/awesome-copilot <skill-name>
 ```
+
+</div>
+<div class="setup-card">
 
 ### [skills.sh - Visit page](https://skills.sh/)
 
@@ -179,13 +167,19 @@ A cross-ecosystem open registry. Browse and add GitHub-hosted skills.
 gh skills install <owner>/<repo> <skill-name>
 ```
 
+</div>
+<div class="setup-card">
+
 ### [GitHub Agent Finder](https://github.com/agentfinder)
 
-A discovery service that searches across **MCP servers, tools, skills, and agents** for a task. Install the `agentfinder` skill, then run `/agentfinder <what you want>` to list matches. See the [SKILL.md](https://github.com/ards-project/connectors/blob/main/skills/github-copilot/SKILL.md) definition.
+Find **MCP servers, tools, skills, and agents** for a task. Install `agentfinder`, then run `/agentfinder <task>` to list matches. [SKILL.md](https://github.com/ards-project/connectors/blob/main/skills/github-copilot/SKILL.md)
 
 ```bash
 gh skills install ards-project/connectors skills/github-copilot
 ```
+
+</div>
+</div>
 
 ## Agent Plugins 1.0
 
@@ -198,7 +192,7 @@ gh skills install ards-project/connectors skills/github-copilot
 | 🔌 `mcp.json` | Local and remote MCP server config | ✅ All clients |
 | 🐙 `com.github.copilot/` | Custom agents, commands, rules, hooks, canvases | ⬜ Copilot only |
 
-That last row is the trick: only skills and MCP are standardized, so everything Copilot-specific stays in a namespaced folder that other clients simply skip.
+Only skills and MCP are standardized. Copilot-specific features stay in a namespaced folder that other clients skip.
 
 > 🌐 Build once, run it in VS Code, Copilot CLI, the SDK, and the Copilot app — GA on all plans.
 > 🏢 **Enterprise**: `managed-settings.json` still governs which plugins and marketplaces are allowed.
@@ -214,6 +208,6 @@ Two marketplaces ship built in: **`copilot-plugins`** (GitHub's own) and **`awes
 | 📋 `copilot plugin list` | Show installed plugins and their state |
 | 🗑️ `copilot plugin uninstall <name>` | Remove it |
 
-You can also install from `owner/repo`, `owner/repo:path`, or a git URL. `copilot --plugin-dir ./my-plugin` loads one straight from disk without installing it.
+Also install from `owner/repo`, `owner/repo:path`, or a git URL. Load from disk without installing: `copilot --plugin-dir ./my-plugin`.
 
 > ⚠️ Installs are **user-level, not per-repo** — they land in `~/.copilot/installed-plugins/` and apply to every project.

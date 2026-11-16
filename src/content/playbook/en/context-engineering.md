@@ -29,10 +29,10 @@ links:
 
 <div class="hero-quote">
   <p>
-    <strong>Context Engineering</strong> is the practice of designing the context passed to AI with "as little as possible, but as much as necessary."
+    <strong>Context Engineering</strong> designs AI context with <strong>as little as possible, as much as necessary</strong>.
   </p>
   <p>
-    Rather than making AI read everything, you narrow down the goal, constraints, relevant files, and verification method so AI can pick its next move without hesitation.
+    Select the <strong>goal, constraints, relevant files and verification method</strong> so the agent can choose its next action.
   </p>
 </div>
 
@@ -40,18 +40,13 @@ links:
 
 ## Context Rot
 
-A larger context window does not make an LLM smarter. Cramming in too much information causes **Lost in the Middle** — important details get buried in the center — or **Recency Bias** — recent information gets overweighted — blunting the model's judgment.
+A larger window does not guarantee better judgment. Too much context buries important details (**Lost in the Middle**) or overweights recent information (**Recency Bias**).
 
-This is called **context rot**.
-
-```mermaid
-treemap-beta
-"Context window"
-  "Smart zone": 60:::smart
-  "Dumb zone": 40:::dumb
-classDef smart fill:#0891b2,stroke:#67e8f9,color:#ecfeff
-classDef dumb fill:#7a1748,stroke:#93a8ff,color:#ffe8f4
-```
+<figure class="context-diagram">
+<div class="context-window" role="group" aria-label="Illustrative context window"><div class="context-block context-smart" style="--context-size:60">Smart zone</div>
+<div class="context-block context-dumb" style="--context-size:40">Dumb zone</div></div>
+<figcaption>Illustrative proportions, not measured token usage.</figcaption>
+</figure>
 
 > The goal of Context Engineering is not to fill the context window, but to **keep the necessary information visible**.
 
@@ -75,15 +70,12 @@ Start is nearly ideal. Only the always-on **System & tools** are loaded — skil
 
 <p class="legend"><span style="display:inline-block;width:0.85em;height:0.85em;background:#7a1748;border:1px solid var(--c-neon-magenta);vertical-align:middle;margin-right:0.3em"></span><strong>Input tokens</strong> (sent this turn) &nbsp;·&nbsp; <span style="display:inline-block;width:0.85em;height:0.85em;background:#0891b2;border:1px solid var(--c-link);vertical-align:middle;margin-right:0.3em"></span>Free space / buffer</p>
 
-```mermaid
-treemap-beta
-"Context window"
-  "System & tools": 10:::used
-  "Free space": 75:::free
-  "Buffer": 15:::free
-classDef used fill:#7a1748,stroke:#93a8ff,color:#ffe8f4
-classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
-```
+<figure class="context-diagram">
+<div class="context-window" role="group" aria-label="Illustrative context window"><div class="context-occupied" style="--context-share:10"><div class="context-block context-input" style="--context-size:10">System &amp; tools</div></div>
+<div class="context-available" style="--context-share:90"><div class="context-block context-free" style="--context-size:75">Free space</div>
+<div class="context-block context-buffer" style="--context-size:15">Buffer</div></div></div>
+<figcaption>Illustrative proportions, not measured token usage.</figcaption>
+</figure>
 
 ## Context Window: Custom Agent (turn 1)
 
@@ -91,16 +83,13 @@ Switching to a custom agent adds that agent's instruction to the context. Both s
 
 <p class="legend"><span style="display:inline-block;width:0.85em;height:0.85em;background:#7a1748;border:1px solid var(--c-neon-magenta);vertical-align:middle;margin-right:0.3em"></span><strong>Input tokens</strong> (sent this turn) &nbsp;·&nbsp; <span style="display:inline-block;width:0.85em;height:0.85em;background:#0891b2;border:1px solid var(--c-link);vertical-align:middle;margin-right:0.3em"></span>Free space / buffer</p>
 
-```mermaid
-treemap-beta
-"Context window"
-  "System & tools": 10:::used
-  "Custom Agent": 10:::used
-  "Free space": 65:::free
-  "Buffer": 15:::free
-classDef used fill:#7a1748,stroke:#93a8ff,color:#ffe8f4
-classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
-```
+<figure class="context-diagram">
+<div class="context-window" role="group" aria-label="Illustrative context window"><div class="context-occupied" style="--context-share:20"><div class="context-part" style="--context-size:20;--context-direction:column"><div class="context-block context-input" style="--context-size:10">System &amp; tools</div>
+<div class="context-block context-input" style="--context-size:10">Custom Agent</div></div></div>
+<div class="context-available" style="--context-share:80"><div class="context-block context-free" style="--context-size:65">Free space</div>
+<div class="context-block context-buffer" style="--context-size:15">Buffer</div></div></div>
+<figcaption>Illustrative proportions, not measured token usage.</figcaption>
+</figure>
 
 ## Context Window: Prompt (turn 1)
 
@@ -108,19 +97,16 @@ You write a prompt. For example, asking to "add a test" may cause a relevant ski
 
 <p class="legend"><span style="display:inline-block;width:0.85em;height:0.85em;background:#7a1748;border:1px solid var(--c-neon-magenta);vertical-align:middle;margin-right:0.3em"></span><strong>Input tokens</strong> (sent this turn) &nbsp;·&nbsp; <span style="display:inline-block;width:0.85em;height:0.85em;background:#0891b2;border:1px solid var(--c-link);vertical-align:middle;margin-right:0.3em"></span>Free space / buffer</p>
 
-```mermaid
-treemap-beta
-"Context window"
-  "System & tools": 10:::used
-  "Custom Agent": 10:::used
-  "Path instruction": 10:::used
-  "Skill": 10:::used
-  "Prompt": 10:::used
-  "Free space": 35:::free
-  "Buffer": 15:::free
-classDef used fill:#7a1748,stroke:#93a8ff,color:#ffe8f4
-classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
-```
+<figure class="context-diagram">
+<div class="context-window" role="group" aria-label="Illustrative context window"><div class="context-occupied" style="--context-share:50"><div class="context-part" style="--context-size:50;--context-direction:row"><div class="context-part" style="--context-size:20;--context-direction:column"><div class="context-block context-input" style="--context-size:10">System &amp; tools</div>
+<div class="context-block context-input" style="--context-size:10">Custom Agent</div></div>
+<div class="context-part" style="--context-size:30;--context-direction:column"><div class="context-block context-input" style="--context-size:10">Path instruction</div>
+<div class="context-block context-input" style="--context-size:10">Skill</div>
+<div class="context-block context-input" style="--context-size:10">Prompt</div></div></div></div>
+<div class="context-available" style="--context-share:50"><div class="context-block context-free" style="--context-size:35">Free space</div>
+<div class="context-block context-buffer" style="--context-size:15">Buffer</div></div></div>
+<figcaption>Illustrative proportions, not measured token usage.</figcaption>
+</figure>
 
 ## Context Window: Sub-agent (turn 1)
 
@@ -128,20 +114,17 @@ The agent might call **sub-agents** — for example to explore the codebase, que
 
 <p class="legend"><span style="display:inline-block;width:0.85em;height:0.85em;background:#7a1748;border:1px solid var(--c-neon-magenta);vertical-align:middle;margin-right:0.3em"></span><strong>Input tokens</strong> (sent this turn) &nbsp;·&nbsp; <span style="display:inline-block;width:0.85em;height:0.85em;background:#0891b2;border:1px solid var(--c-link);vertical-align:middle;margin-right:0.3em"></span>Free space / buffer</p>
 
-```mermaid
-treemap-beta
-"Context window"
-  "System & tools": 10:::used
-  "Custom Agent": 10:::used
-  "Path instruction": 10:::used
-  "Skill": 10:::used
-  "Prompt": 10:::used
-  "Sub-agent data": 10:::used
-  "Free space": 25:::free
-  "Buffer": 15:::free
-classDef used fill:#7a1748,stroke:#93a8ff,color:#ffe8f4
-classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
-```
+<figure class="context-diagram">
+<div class="context-window" role="group" aria-label="Illustrative context window"><div class="context-occupied" style="--context-share:60"><div class="context-part" style="--context-size:60;--context-direction:row"><div class="context-part" style="--context-size:30;--context-direction:column"><div class="context-block context-input" style="--context-size:10">System &amp; tools</div>
+<div class="context-block context-input" style="--context-size:10">Custom Agent</div>
+<div class="context-block context-input" style="--context-size:10">Path instruction</div></div>
+<div class="context-part" style="--context-size:30;--context-direction:column"><div class="context-block context-input" style="--context-size:10">Skill</div>
+<div class="context-block context-input" style="--context-size:10">Prompt</div>
+<div class="context-block context-input" style="--context-size:10">Sub-agent data</div></div></div></div>
+<div class="context-available" style="--context-share:40"><div class="context-block context-free" style="--context-size:25">Free space</div>
+<div class="context-block context-buffer" style="--context-size:15">Buffer</div></div></div>
+<figcaption>Illustrative proportions, not measured token usage.</figcaption>
+</figure>
 
 ## Context Window: Memory (turn 1)
 
@@ -149,21 +132,18 @@ As you keep working in the repo, memories are generated and may be dynamically l
 
 <p class="legend"><span style="display:inline-block;width:0.85em;height:0.85em;background:#7a1748;border:1px solid var(--c-neon-magenta);vertical-align:middle;margin-right:0.3em"></span><strong>Input tokens</strong> (sent this turn) &nbsp;·&nbsp; <span style="display:inline-block;width:0.85em;height:0.85em;background:#0891b2;border:1px solid var(--c-link);vertical-align:middle;margin-right:0.3em"></span>Free space / buffer</p>
 
-```mermaid
-treemap-beta
-"Context window"
-  "System & tools": 10:::used
-  "Custom Agent": 10:::used
-  "Path instruction": 10:::used
-  "Skill": 10:::used
-  "Prompt": 10:::used
-  "Sub-agent data": 10:::used
-  "Memory": 10:::used
-  "Free space": 15:::free
-  "Buffer": 15:::free
-classDef used fill:#7a1748,stroke:#93a8ff,color:#ffe8f4
-classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
-```
+<figure class="context-diagram">
+<div class="context-window" role="group" aria-label="Illustrative context window"><div class="context-occupied" style="--context-share:70"><div class="context-part" style="--context-size:70;--context-direction:row"><div class="context-part" style="--context-size:30;--context-direction:column"><div class="context-block context-input" style="--context-size:10">System &amp; tools</div>
+<div class="context-block context-input" style="--context-size:10">Custom Agent</div>
+<div class="context-block context-input" style="--context-size:10">Path instruction</div></div>
+<div class="context-part" style="--context-size:40;--context-direction:row"><div class="context-part" style="--context-size:20;--context-direction:column"><div class="context-block context-input" style="--context-size:10">Skill</div>
+<div class="context-block context-input" style="--context-size:10">Prompt</div></div>
+<div class="context-part" style="--context-size:20;--context-direction:column"><div class="context-block context-input" style="--context-size:10">Sub-agent data</div>
+<div class="context-block context-input" style="--context-size:10">Memory</div></div></div></div></div>
+<div class="context-available" style="--context-share:30"><div class="context-block context-free" style="--context-size:15">Free space</div>
+<div class="context-block context-buffer" style="--context-size:15">Buffer</div></div></div>
+<figcaption>Illustrative proportions, not measured token usage.</figcaption>
+</figure>
 
 ## Context Window: Output (turn 1)
 
@@ -171,45 +151,37 @@ The LLM responds. Its **Answer** is appended to the context — those are **outp
 
 <p class="legend"><span style="display:inline-block;width:0.85em;height:0.85em;background:#7a1748;border:1px solid var(--c-neon-magenta);vertical-align:middle;margin-right:0.3em"></span><strong>Input tokens</strong> (sent this turn) &nbsp;·&nbsp; <span style="display:inline-block;width:0.85em;height:0.85em;background:#a16207;border:1px solid #fbbf24;vertical-align:middle;margin-right:0.3em"></span><strong>Output tokens</strong> (LLM response) &nbsp;·&nbsp; <span style="display:inline-block;width:0.85em;height:0.85em;background:#0891b2;border:1px solid var(--c-link);vertical-align:middle;margin-right:0.3em"></span>Free space / buffer</p>
 
-```mermaid
-treemap-beta
-"Context window"
-  "System & tools": 10:::used
-  "Custom Agent": 10:::used
-  "Path instruction": 10:::used
-  "Skill": 10:::used
-  "Prompt": 10:::used
-  "Sub-agent data": 10:::used
-  "Memory": 10:::used
-  "Answer": 10:::output
-  "Free space": 5:::free
-  "Buffer": 15:::free
-classDef used fill:#7a1748,stroke:#93a8ff,color:#ffe8f4
-classDef output fill:#a16207,stroke:#fbbf24,color:#fef3c7
-classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
-```
+<figure class="context-diagram">
+<div class="context-window" role="group" aria-label="Illustrative context window"><div class="context-occupied" style="--context-share:80"><div class="context-part" style="--context-size:80;--context-direction:row"><div class="context-part" style="--context-size:40;--context-direction:row"><div class="context-part" style="--context-size:20;--context-direction:column"><div class="context-block context-input" style="--context-size:10">System &amp; tools</div>
+<div class="context-block context-input" style="--context-size:10">Custom Agent</div></div>
+<div class="context-part" style="--context-size:20;--context-direction:column"><div class="context-block context-input" style="--context-size:10">Path instruction</div>
+<div class="context-block context-input" style="--context-size:10">Skill</div></div></div>
+<div class="context-part" style="--context-size:40;--context-direction:row"><div class="context-part" style="--context-size:20;--context-direction:column"><div class="context-block context-input" style="--context-size:10">Prompt</div>
+<div class="context-block context-input" style="--context-size:10">Sub-agent data</div></div>
+<div class="context-part" style="--context-size:20;--context-direction:column"><div class="context-block context-input" style="--context-size:10">Memory</div>
+<div class="context-block context-output" style="--context-size:10">Answer</div></div></div></div></div>
+<div class="context-available" style="--context-share:20"><div class="context-block context-free" style="--context-size:5">Free space</div>
+<div class="context-block context-buffer" style="--context-size:15">Buffer</div></div></div>
+<figcaption>Illustrative proportions, not measured token usage.</figcaption>
+</figure>
 
 ## Context Window: Cache input (turn 2)
 
-The user sends a new prompt to start the next turn. Everything from turn 1 — system, tools, custom agent, prompt, sub-agent data, memory, **even the LLM's answer** — is now reused from the **prompt cache** as cheaper **cache input tokens**. Only **Prompt #2** is fresh **input tokens** this turn.
+Turn 1, **including the answer**, can be reused as **cached input**. Only **Prompt #2** is new input. Cache hits are not guaranteed.
 
 <p class="legend"><span style="display:inline-block;width:0.85em;height:0.85em;background:#475569;border:1px solid #cbd5e1;vertical-align:middle;margin-right:0.3em"></span><strong>Cache input tokens</strong> (not guaranteed) &nbsp;·&nbsp; <span style="display:inline-block;width:0.85em;height:0.85em;background:#7a1748;border:1px solid var(--c-neon-magenta);vertical-align:middle;margin-right:0.3em"></span><strong>Input tokens</strong> (new this turn) &nbsp;·&nbsp; <span style="display:inline-block;width:0.85em;height:0.85em;background:#0891b2;border:1px solid var(--c-link);vertical-align:middle;margin-right:0.3em"></span>Free space / buffer</p>
 
-```mermaid
-treemap-beta
-"Context window"
-  "System & tools": 10:::cache
-  "Custom Agent": 10:::cache
-  "Path instruction": 10:::cache
-  "Skill": 10:::cache
-  "Prompt": 10:::cache
-  "Sub-agent data": 10:::cache
-  "Memory": 10:::cache
-  "Answer": 10:::cache
-  "Prompt #2": 10:::used
-  "Free space": 5:::free
-  "Buffer": 5:::free
-classDef used fill:#7a1748,stroke:#93a8ff,color:#ffe8f4
-classDef cache fill:#475569,stroke:#cbd5e1,color:#f1f5f9
-classDef free fill:#0891b2,stroke:#67e8f9,color:#ecfeff
-```
+<figure class="context-diagram">
+<div class="context-window" role="group" aria-label="Illustrative context window"><div class="context-occupied" style="--context-share:90"><div class="context-part" style="--context-size:90;--context-direction:row"><div class="context-part" style="--context-size:40;--context-direction:row"><div class="context-part" style="--context-size:20;--context-direction:column"><div class="context-block context-cache" style="--context-size:10">System &amp; tools</div>
+<div class="context-block context-cache" style="--context-size:10">Custom Agent</div></div>
+<div class="context-part" style="--context-size:20;--context-direction:column"><div class="context-block context-cache" style="--context-size:10">Path instruction</div>
+<div class="context-block context-cache" style="--context-size:10">Skill</div></div></div>
+<div class="context-part" style="--context-size:50;--context-direction:row"><div class="context-part" style="--context-size:20;--context-direction:column"><div class="context-block context-cache" style="--context-size:10">Prompt</div>
+<div class="context-block context-cache" style="--context-size:10">Sub-agent data</div></div>
+<div class="context-part" style="--context-size:30;--context-direction:column"><div class="context-block context-cache" style="--context-size:10">Memory</div>
+<div class="context-block context-cache" style="--context-size:10">Answer</div>
+<div class="context-block context-input" style="--context-size:10">Prompt #2</div></div></div></div></div>
+<div class="context-available" style="--context-share:10"><div class="context-block context-free" style="--context-size:5">Free space</div>
+<div class="context-block context-buffer" style="--context-size:5">Buffer</div></div></div>
+<figcaption>Illustrative proportions, not measured token usage.</figcaption>
+</figure>

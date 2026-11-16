@@ -33,6 +33,40 @@ For other projects: any single `.md` file works as long as the renderer splits o
 
 ---
 
+## Presentation size and visual preferences
+
+These are the approved defaults for this playbook, not optional large-screen checks.
+
+### Target and acceptance
+
+- Present on a **15-inch Mac, Chrome at 125% zoom, TOC hidden**.
+- Use `/theomonfort/playbook/hooks/?present=1&slide=5` as the reference for readable text and usable content height.
+- Test **1280 x 720 and 1360 x 740 CSS pixels** in both locales and both themes, with the TOC actually hidden. These are screenshot-derived regression sizes, not a confirmed physical screen resolution. Do not infer the target from docked DevTools or divide these sizes by 125% again.
+- The **whole slide** must fit without vertical scrolling, horizontal overflow, clipped text, or internally scrolling code/figures. Keep the section's bottom padding free for fixed presentation controls, including captions and the generated sources slide.
+- Also check document mode at narrow and desktop widths (390 and 1100 CSS pixels). Preserve normal document typography and stacking; a wide diagram may scroll inside its own document-mode figure, not the whole page.
+- For existing decks, preserve H2 count/order and `?present=1&slide=N` deep links unless the user explicitly requests slide removal or reordering. Layout work does not justify "New!" markers.
+
+### Readability before compression
+
+1. Tighten margins, padding, gaps, and unnecessary diagram minimum heights.
+2. Remove repeated explanations and nonessential closing notes without dropping facts, prerequisites, or qualifications.
+3. Balance related content in existing columns, code panels, or compact widgets. Keep presenter click-by-click instructions in a `DEMO` overlay and official documentation on a title-side Docs badge.
+4. Only then use a smaller component font. Do not shrink the whole slide to make an overlong layout fit. Enlarge sparse slides so their text does not look weaker than neighboring slides.
+
+Reuse `src/styles/presentation-slides.css` and the frontend font/color tokens. The approved present-mode baseline is **24.8px prose**, approximately **36.8px non-cover H2**, **20-22px dense tables/components**, and **18px code** when needed. Sources use approximately 20px links. Cover typography has its own sizing; do not force regular H2 dimensions onto it.
+
+### Keep figures as figures
+
+- Preserve connected visual explanations. **Do not replace a harness, pipeline, or connection figure with a table or generic card grid** merely to fit it.
+- Mermaid is not mandatory. Prefer whichever of **SVG, semantic HTML/CSS, or Mermaid** produces the clearest readable figure.
+- For harness diagrams, follow the approved composition of `instructions` slide 4, `agent-skills` slide 4, and `custom-agent` slides 7-8: connected actors/steps, explicit arrows, and colored model-context blocks. Concise prose plus a large figure is better than a tiny figure beneath a long explanation.
+- Reuse `.instructions-pipeline`, `.skills-pipeline`, `.agent-pipeline`, `.mcp-diagram`, or `.context-diagram` where appropriate. Scope any necessary new styling by slug in the shared stylesheet rather than duplicating locale-renderer CSS.
+- SVG labels should be comparable to the approved figures (typically 17-20px main labels, 14-16px file examples). Check **effective rendered size**, not just `font-size` in viewBox units. Never squeeze labels with `textLength` to conceal overflow.
+- Verify text bounds inside each node/file panel, arrowheads, connector direction, captions, and the complete slide. Use explicit wrapping/line breaks and `markerUnits="userSpaceOnUse"` for predictable arrowheads.
+- Preserve diagram meaning: metadata versus loaded bodies, main versus subagent context, conditional loading, and summary-only return paths. For context-window illustrations, preserve relative areas, token-type colors, free space versus buffer, and label illustrative proportions as examples rather than measured usage.
+
+---
+
 ## Step 1 — Plan the deck (do this BEFORE writing)
 
 Open with the user and agree on:
@@ -115,7 +149,7 @@ So: **every section you want as a separate slide MUST start with `##`**. To grou
 
 ## Step 4 — Visual building blocks
 
-These are the recurring patterns the deck uses. Use them — they're styled, accessible, and present-mode friendly. Don't invent new HTML wrappers.
+These are the recurring patterns the deck uses. Reuse them: they are styled, accessible, and present-mode friendly. Use the shared figure and column patterns above when a standard block cannot express a diagram or fit a long example.
 
 ### 4a. Hero-quote (the "speech bubble" lead block)
 
@@ -168,7 +202,7 @@ GFM tables render with compact retro styling by default. Use them for: feature c
 - Keep ≤ 5 columns and ≤ 8 rows per slide.
 - Prefer short labels and one-line cells. Move sentence-heavy explanations into a collapsible widget instead of building tall rows.
 - Standard Markdown tables already use compact spacing in both locale renderers. For HTML tables, reuse the same defaults or the existing `compact-table` class; do not add per-entry CSS to restore roomy padding.
-- Check the rendered slide at 1440×900 and 1920×1080, and check narrow-screen wrapping. A table must not push the slide's remaining content off-screen or force long first-column labels onto one line.
+- Check the complete slide at 1280 x 720 and 1360 x 740 CSS pixels, both locales/themes and TOC hidden, plus narrow document wrapping. A table must not push remaining content off-screen or force long first-column labels onto one line.
 - Use emoji as row icons (🔑 / 🔍 / 🛡️) for scannability.
 - Bold the column the reader should look at first.
 
@@ -197,7 +231,7 @@ Common emojis: 🔑 key · ⚠️ warning · 💡 tip · 📝 note · 🤖 autom
 
 ### 4d. Code blocks
 
-Use fenced code with a language hint (`bash`, `json`, `yaml`, `js`, `ts`, `python`). Each code block must fit on one slide — if it doesn't, split into two slides with `### Step 1` / `### Step 2` headings.
+Use fenced code with a language hint (`bash`, `json`, `yaml`, `js`, `ts`, `python`). Each code block must fit without internal scrolling. For long examples in an existing deck, reuse `.example-columns` with `### Step 1` / `### Step 2` panels **on the same slide**; stack them in document mode. Preserve code order, quoting, indentation, and complete executable meaning. `###` does not start a slide. Do not add an H2 or change deep links just to solve overflow without the user's approval.
 
 ```bash
 copilot -p "Generate a one-line conventional commit for the staged diff." -s --no-ask-user
@@ -352,7 +386,7 @@ Canonical markup: `src/content/playbook/ja/secret-scanning.md` and `src/content/
 1. **Confirm metadata with the user** (title, category, color, order, summary). Use a single `ask_user` form if anything is ambiguous.
 2. **Write the slide outline** as a numbered list of H2 titles. Get user buy-in.
 3. **Draft the frontmatter** with placeholder `links[]` (you'll fill in URLs after the body).
-4. **Fill each slide** in order, following the visual-blocks recipe. After each slide, mentally check: "would this fit on a 1080p screen at 1.5× font without overflow?"
+4. **Fill each slide** in order, following the visual-blocks recipe. Apply the presentation-size and readability defaults above, not an assumed 1080p or docked-DevTools viewport.
 5. **Add 5–9 official links** to frontmatter, grouped by emoji-prefix labels.
 6. **Mirror to the other locale** (ja ↔ en). Keep the slide count and frontmatter shape identical; only the prose changes.
 7. **Build & preview**:
@@ -433,14 +467,17 @@ Before declaring done, verify EVERY item:
 - [ ] `titleEn` set (used in TOC + present-mode tag).
 - [ ] `order` doesn't collide with an existing entry (check `src/content/playbook/ja/*.md`).
 - [ ] All `links[].url` are fully-qualified URLs.
-- [ ] Slide count is 5–9.
+- [ ] New decks target 5–9 slides; existing decks retain their approved H2 count/order and deep links unless the user requested changes.
 - [ ] First content slide (`## 一言で` / `## In a nutshell`, including equivalent intro titles) contains **only the main statement** in the default octocat-with-speech-bubble `hero-quote` (or the category's auto-mascot), not `hero-quote-plain`.
 - [ ] In **both English and Japanese**, the intro body ends after the hero: **no bottom note, callout, footnote, warning, caveat, or extra paragraph**. Any essential qualification is on an existing non-intro slide, not hidden inside the hero.
 - [ ] **Exactly one `hero-quote` in the whole entry**, on the first content slide — no `hero-quote` (including `hero-quote-plain`) on any later slide.
 - [ ] No slide starts with a `>` callout. Non-intro slides open with normal prose and may place an essential callout later; the intro remains hero-only.
 - [ ] Each slide stands on its own — no orphan H2 with no body, no body before the first H2.
 - [ ] Tables ≤ 5 cols, ≤ 8 rows.
-- [ ] Tables use compact spacing, short cells, and natural wrapping; introductory text is above the table, and the complete slide fits at 1440×900 and 1920×1080 without shrinking the prose font.
+- [ ] Tables use compact spacing, short cells, and natural wrapping; introductory text is above the table, and the complete slide fits at 1280 x 720 and 1360 x 740 CSS pixels without shrinking the prose font.
+- [ ] Both locales and themes fit with TOC hidden, including figures, captions, sources, and reserved control space. No vertical scrolling, internal presentation scrolling, or clipping.
+- [ ] Figures remain visual and readable; SVG text fits its panels at the actual rendered scale, connectors retain their meaning, and illustrative proportions remain correct.
+- [ ] Sparse slides use comparable typography to neighboring slides. Document mode still wraps/stacks correctly at 390 and 1100 CSS pixels.
 - [ ] Code blocks fit one slide each.
 - [ ] No `# H1` in body (frontmatter handles the title).
 - [ ] Slides that document a product's features, pricing, limits, or setup carry an `h2-doc` badge linking their canonical doc page.

@@ -50,7 +50,7 @@ links:
 
 <div class="hero-quote hero-quote-mona">
   <p>こんにちは、<strong>Mona</strong> です！<strong>GitHub</strong> の顔として世界中の開発者を見守っています。</p>
-  <p>今日お話しする <strong>GitHub</strong> は、<strong>2.25 億人以上</strong>の開発者が集う世界最大の AI ネイティブ開発者プラットフォームです（Octoverse、2026 年 9 月時点）。</p>
+  <p>今日お話しする <strong>GitHub</strong> は、<strong>2.25 億人以上</strong>の開発者が集う世界最大の AI ネイティブ開発者プラットフォームです（2026 年 9 月時点）。</p>
 </div>
 
 ## 進化の歴史 <a class="h2-doc" href="https://github.blog/news-insights/company-news/github-universe-2026-evolving-every-layer-of-the-stack/" target="_blank" rel="noopener noreferrer">📖 Docs</a>

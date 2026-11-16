@@ -51,7 +51,7 @@ links:
   </p>
 </div>
 
-## Issues & Sub-issues
+## <span class="slide-heading-text">Issues & Sub-issues</span> <span class="slide-heading-links" aria-label="実例"><a class="h2-doc" href="https://github.com/microsoft/vscode/issues" target="_blank" rel="noopener noreferrer">VS Code ↗</a><a class="h2-doc" href="https://github.com/rust-lang/rust/issues" target="_blank" rel="noopener noreferrer">Rust ↗</a><a class="h2-doc" href="https://github.com/vercel/next.js/issues" target="_blank" rel="noopener noreferrer">Next.js ↗</a><a class="h2-doc" href="https://github.com/github/docs/issues" target="_blank" rel="noopener noreferrer">GitHub Docs ↗</a></span>
 
 Issues はバグ・タスク・要望を 1 件ずつ追跡する基本単位。Sub-issues で大きな課題を分解し、親子の進捗を可視化できる。
 
@@ -63,9 +63,19 @@ Issues はバグ・タスク・要望を 1 件ずつ追跡する基本単位。S
 | 🔗 リンク | PR で `Closes #123` | マージで Issue 自動クローズ |
 | 🤖 Copilot 割当 | Issue を担当に指定 | 自動で PR を起票 |
 
-> 💡 実例: <a class="retro-link" href="https://github.com/microsoft/vscode/issues" target="_blank" rel="noopener noreferrer">VS Code ↗</a> · <a class="retro-link" href="https://github.com/rust-lang/rust/issues" target="_blank" rel="noopener noreferrer">Rust ↗</a> · <a class="retro-link" href="https://github.com/vercel/next.js/issues" target="_blank" rel="noopener noreferrer">Next.js ↗</a> · <a class="retro-link" href="https://github.com/github/docs/issues" target="_blank" rel="noopener noreferrer">GitHub Docs ↗</a>
+## Issue Fields（NEW） <a class="h2-doc" href="https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-issue-fields" class="demo-toggle" /><label class="h2-demo" for="demo-issue-fields">&#9658; DEMO</label>
 
-## Issue Fields（NEW）
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-issue-fields" aria-label="デモ手順を閉じる"></label>
+<div class="demo-window" role="group" aria-label="デモ手順">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Issue fields</span><span class="demo-note">発表者専用</span><label class="demo-close" for="demo-issue-fields" aria-label="閉じる">&#10005;</label></div>
+<ol class="demo-steps">
+<li><p class="demo-step-title">組織の設定を開く</p><p>組織管理者として <a class="retro-link" href="https://github.com/organizations/theomonfort-org/settings/issue-fields" target="_blank" rel="noopener noreferrer">theomonfort-org の Issue fields ↗</a> を開く。場所は <code class="demo-path">Settings › Planning › Issue fields</code>。</p></li>
+<li><p class="demo-step-title">フィールドを確認する</p><p><code class="demo-path">Priority</code> などの既存フィールドを開き、名前・型・選択肢を確認する。フィールドの追加・カスタマイズはこの画面から行う。</p></li>
+<li><p class="demo-step-title">ISSUE TYPE ごとの表示を確認する</p><p><code class="demo-path">Pin to types</code> で、どの Issue type に表示するかを確認する。</p><p class="demo-out">対応する type の Issue では、共通のフィールドを使って優先度・工数・期日を整理できる。</p></li>
+</ol>
+</div>
+</div>
 
 Issue に **構造化された型付きメタデータ** を付与する仕組み。2026-07-02 に **一般提供（GA）**。全 Organization に既定で 4 フィールド（`Priority`・`Effort`・`Start date`・`Target date`）が用意され、Repository 横断で優先度・工数・期日を **一貫して検索・集計** できる。
 
@@ -75,8 +85,6 @@ Issue に **構造化された型付きメタデータ** を付与する仕組�
 | ⏱️ Effort | 数値 / 選択 | Bug / Task / Feature | 見積・工数 |
 | 📅 Start / Target date | 日付 | Feature のみ | 開始・期限 |
 | 🛠️ カスタム | 任意 | — | 組織独自の値 |
-
-> ⚙️ 設定: 組織管理者は **Settings › Planning › Issue fields** からフィールドの追加・カスタマイズ、Issue type ごとの表示設定が可能。<a class="retro-link" href="https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-your-organization" target="_blank" rel="noopener noreferrer">Managing issue fields ↗</a>
 
 ## Discussions
 

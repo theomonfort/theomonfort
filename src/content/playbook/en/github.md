@@ -50,7 +50,7 @@ links:
 
 <div class="hero-quote hero-quote-mona">
   <p>Hi, I'm <strong>Mona</strong> — the face of <strong>GitHub</strong>, watching over developers worldwide.</p>
-  <p>Today's topic, <strong>GitHub</strong>, is the world's largest AI-native developer platform, home to <strong>225 million+</strong> developers (Octoverse, September 2026).</p>
+  <p>Today's topic, <strong>GitHub</strong>, is the world's largest AI-native developer platform, home to <strong>225 million+</strong> developers (as of September 2026).</p>
 </div>
 
 ## The Evolution of GitHub <a class="h2-doc" href="https://github.blog/news-insights/company-news/github-universe-2026-evolving-every-layer-of-the-stack/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
