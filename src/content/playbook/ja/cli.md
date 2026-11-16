@@ -226,11 +226,12 @@ flowchart LR
 
 ## その他の便利コマンド
 
-CLI は slash command で、モデル・共有・実験機能・環境情報などをすぐ確認できる。
+CLI は slash command で、設定・モデル・共有・実験機能・環境情報などをすぐ確認できる。
 
 | コマンド | 使いどころ |
 |---|---|
 | `/help` | 利用できるコマンドやショートカットを確認する。 |
+| `/settings` | CLI のユーザー設定を検索・確認・変更する。`/settings KEY VALUE` で直接変更もできる。<a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/change-settings" target="_blank" rel="noopener noreferrer">Docs ↗</a> |
 | `/model` | 使用するモデルを確認・切り替える。 |
 | `/ide` | VS Code などの IDE と接続する。 |
 | `/share` | 現在のセッションを共有する。 |

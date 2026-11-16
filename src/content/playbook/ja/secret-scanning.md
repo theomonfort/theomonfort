@@ -190,7 +190,7 @@ links:
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔍</span><span class="ctl-name">Secret scanning alerts</span><span class="ctl-when">コミット後・常時</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/secret-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">検出された secret を <b>Security and quality</b> タブに通知</span></p>
-<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">全ブランチの Git 履歴全体・Issue・PR・GitHub Discussions・Wiki・secret gists。新しい secret type の追加時に<b>再スキャン</b>される</span></p>
+<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">全ブランチの Git 履歴全体・Issue・PR・GitHub Discussions・Wiki・secret gists・<a class="retro-link" href="/theomonfort/changelog/#2026-11-09-secret-scanning-workflow-logs">Workflow logs ↗</a>（パブリックプレビュー）。既存の対象は新しい secret type の追加時に<b>再スキャン</b>される</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
