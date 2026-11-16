@@ -51,28 +51,25 @@ links:
 
 | フック | いつ走る | 入力 (CLI / Cloud Agent) | できること |
 | --- | --- | --- | --- |
-| 🟢 **sessionStart** | 新規 / 再開 / 起動時 | `source`, `initialPrompt` | ログ初期化・環境準備・通知 |
-| 📝 **userPromptSubmitted** | ユーザーがプロンプト送信した瞬間 | `prompt` | プロンプト監査ログ・キーワードアラート |
-| 🔐 **permissionRequest** | 権限サービスが走る **直前** (CLI のみ) | `toolName`, `toolArgs` | **allow / deny で許可フローを短絡** |
-| 🛡️ **preToolUse** ★ | ツール実行の **直前** | `toolName`, `toolArgs` | **deny で実行をブロック** ・ allow ・ ask |
-| 📊 **postToolUse** | ツール実行の **直後** | `toolResult` | 結果ログ・失敗時の通知・統計 |
-| 🌱 **subagentStart** | サブエージェントが起動する直前 | `agentName`, `agentDescription` | サブエージェントのプロンプトに `additionalContext` を追加 (**起動自体は止められない**) |
-| 🏁 **subagentStop** | サブエージェントの 1 ターン終了時 | `agentName`, `stopReason` | **block で続行を強制** ・ 結果ログ |
-| 🛑 **agentStop** | メイン agent が 1 ターン終了する時 | `stopReason: "end_turn"` | **block で続行を強制** (テスト未実行・PR 未作成などの再ループ) |
-| 💥 **errorOccurred** | agent がエラーで落ちた時 | `error` | Slack/メール通知・障害ログ |
-| 🔚 **sessionEnd** | セッション終了時 | `reason` | クリーンアップ・サマリー送信 |
+| 🟢 **sessionStart** | 新規 / 再開 / 起動時 | `source`, `initialPrompt` | ログ初期化、環境準備、通知 |
+| 📝 **userPromptSubmitted** | プロンプト送信時 | `prompt` | 監査ログ、キーワード通知 |
+| 🔐 **permissionRequest** | 権限確認の直前（CLI） | `toolName`, `toolArgs` | **allow / deny** で権限フローを短絡 |
+| 🛡️ **preToolUse** ★ | ツール実行の直前 | `toolName`, `toolArgs` | **deny** で実行をブロック。allow / ask |
+| 📊 **postToolUse** | ツール実行の直後 | `toolResult` | 結果ログ、失敗通知、統計 |
+| 🌱 **subagentStart** | サブエージェント起動前 | `agentName`, `agentDescription` | `additionalContext` を追加（起動は止めない） |
+| 🏁 **subagentStop** | サブエージェントのターン終了時 | `agentName`, `stopReason` | **block** で続行を強制、結果ログ |
+| 🛑 **agentStop** | メイン agent のターン終了時 | `stopReason: "end_turn"` | **block** で続行を強制（テスト等の再ループ） |
+| 💥 **errorOccurred** | エラー発生時 | `error` | Slack / メール通知、障害ログ |
+| 🔚 **sessionEnd** | セッション終了時 | `reason` | クリーンアップ、サマリー送信 |
 
-> 🔑 **エージェントの動きを止められる / 分岐できるのは 4 つだけ**:
-> - 🛡️ **preToolUse** → ツール呼び出しを **deny**（rm -rf / sudo / prod push などを実行前にブロック）
-> - 🔐 **permissionRequest** → 権限フローを **allow / deny** で短絡（CLI のみ）
-> - 🏁 **subagentStop** → サブエージェントの停止を **block** して続行を強制
-> - 🛑 **agentStop** → メイン agent の停止を **block** して続行を強制（"テスト走らせるまで終わるな" 系）
->
-> 他のフックは「観察 / 記録 / 通知」用途で、実行ロジックそのものは止められない。
+> 🔑 制御できるのは **preToolUse / permissionRequest / subagentStop / agentStop**。他は観察、記録、通知。
 
 ## 設定方法
 
 `.github/hooks/` 配下に **任意名の `.json` ファイル** を 1 個以上置く。CLI / VS Code はローカルから、Cloud Agent は **デフォルトブランチの `.github/hooks/`** から読み込む。
+
+<div class="example-columns">
+<div>
 
 ```json
 {
@@ -92,14 +89,25 @@ links:
 }
 ```
 
+</div>
+<div>
+
 - 📦 `bash` / `powershell` どちらも書いておけば OS 横断で動く
 - ⏱️ デフォルト timeout は **30 秒**。重い検証を入れるなら `timeoutSec` を上げる
 - 🔁 同じイベントに **複数フックを配列で** 並べると上から順に実行される
 - 📥 スクリプトは **stdin から JSON** を受け取り、必要なら **stdout に JSON** を返す
 
+</div>
+</div>
+
 ## ★ 特定コマンドのブロック (PreToolUse)
 
-agent が何を実行しようとしているかを `toolName` と `toolArgs` で受け取り、`{"permissionDecision": "deny", "permissionDecisionReason": "..."}` を返すだけで実行を止められる。
+`toolName` / `toolArgs` を読み、**`permissionDecision: deny`** を返して実行を止める。
+
+<div class="example-columns hook-guard">
+<div>
+
+### 1. コマンドを確認
 
 ```bash
 #!/bin/bash
@@ -108,22 +116,22 @@ INPUT=$(cat)
 TOOL_NAME=$(echo "$INPUT" | jq -r '.toolName')
 TOOL_ARGS=$(echo "$INPUT" | jq -r '.toolArgs')
 
-# bash 以外はそのまま許可
-if [ "$TOOL_NAME" != "bash" ]; then
-  exit 0
-fi
-
+if [ "$TOOL_NAME" != "bash" ]; then exit 0; fi
 COMMAND=$(echo "$TOOL_ARGS" | jq -r '.command')
-
-# 🚨 危険コマンドの黒リスト
 if echo "$COMMAND" | grep -qE 'rm -rf /|sudo |mkfs|dd if=|:\(\)\{'; then
   jq -nc \
     --arg reason "禁止コマンド: $COMMAND" \
     '{permissionDecision: "deny", permissionDecisionReason: $reason}'
   exit 0
 fi
+```
 
-# 🔒 production 環境への変更を禁止
+</div>
+<div>
+
+### 2. production を保護
+
+```bash
 if echo "$COMMAND" | grep -qE 'kubectl .*--context[= ]prod|terraform apply.*prod'; then
   jq -nc '{permissionDecision: "deny", permissionDecisionReason: "production への変更は人間レビュー必須"}'
   exit 0
@@ -132,6 +140,9 @@ fi
 # それ以外は許可 (出力なし or "allow")
 exit 0
 ```
+
+</div>
+</div>
 
 ## どこから読み込まれる?
 

@@ -52,7 +52,7 @@ links:
 </div>
 
 
-## 3 つのスコープ
+## 3 つのスコープ <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting/response-customization" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 | スコープ | 📁 場所 | 💡 用途 |
 | --- | --- | --- |
@@ -60,12 +60,13 @@ links:
 | 📦 **Repository**（リポジトリ） | `.github/copilot-instructions.md`（単一）<br/>または `.github/instructions/*.instructions.md`（`applyTo` 付き） | プロジェクト規約・フレームワーク固有ルール・「X ライブラリを必ず使う」 |
 | 🏢 **Org / Enterprise**（組織） | GitHub.com → Organization Settings → Copilot -> Custom instructions | コンプライアンス・セキュリティ要件・全社共通ポリシー |
 
-> 🎯 **優先順位**：Personal → Repository → Organization の順に強い。**Personal の指示が最も優先される**ため、ユーザー設定が組織ポリシーよりも上書きする側に立つ（詳細は <a href="https://docs.github.com/en/copilot/concepts/prompting/response-customization" target="_blank" rel="noopener noreferrer" class="retro-link">公式ドキュメント</a> を参照）。
+> 🎯 **優先順位**：**Personal → Repository → Organization**。Personal の指示が最も優先され、組織ポリシーを上書きする。
 
 ## 📦 Repository レベル
 
-**チーム全員** に効くルール。`git clone` した瞬間にプロジェクト固有の規約が Copilot に伝わる。**2 つのファイル形式** がある：
+`git clone` で **チーム全員** にプロジェクトの規約を共有する。指示書は **2 つの形式**：
 
+<div class="instructions-repository">
 <div class="setup-cards">
   <div class="setup-card">
     <div class="setup-card-head">
@@ -91,80 +92,58 @@ links:
   </div>
 </div>
 
-```yaml
----
-applyTo: "server/tests/test_*.py"
----
-このファイルは pytest の関数型テスト。
-- fixture は `conftest.py` から読む
-- assert は 1 関数に 1 つまで
-- LLM call は必ず mock すること
-```
+</div>
 
 ## ハーネスの中で何が起きる？
 
-セッション開始時、ハーネスはまず **常時ロードの Instructions**（`.github/copilot-instructions.md`）をコンテキストに入れる。その後、ユーザーが特定パスのファイルを編集しようとすると、ハーネスは `applyTo` グロブが一致する **path-specific Instructions** だけを追加でコンテキストに読み込む。
+まず **常時ロードの指示**。ファイル編集時に **パス別の指示を追加** する。
 
-<figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 0 1080 490" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
-  <defs>
-    <marker id="arrow-orange" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--c-crt-amber)"/>
-    </marker>
-    <marker id="arrow-blue" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/>
-    </marker>
-    <marker id="arrow-pink" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--c-neon-magenta)"/>
-    </marker>
-  </defs>
-  <path d="M 260 50 L 720 50" fill="none" stroke="var(--c-crt-amber)" stroke-width="2" marker-end="url(#arrow-orange)"/>
-  <path d="M 140 85 L 140 415 L 350 415 L 350 420" fill="none" stroke="var(--c-crt-amber)" stroke-width="2" marker-end="url(#arrow-orange)"/>
-  <path d="M 475 240 L 475 420" fill="none" stroke="var(--c-neon-magenta)" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-pink)"/>
-  <path d="M 610 420 L 610 338" fill="none" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)"/>
-  <path d="M 660 335 L 660 400 L 775 400 L 775 420" fill="none" stroke="var(--c-crt-amber)" stroke-width="2" marker-end="url(#arrow-orange)"/>
-  <path d="M 705 290 L 712 290 L 712 195 L 720 195" fill="none" stroke="var(--c-crt-amber)" stroke-width="2" marker-end="url(#arrow-orange)"/>
-  <rect x="20" y="15" width="240" height="70" rx="12" fill="var(--c-deep-purple)" stroke="var(--c-crt-amber)" stroke-width="2"/>
-  <text x="35" y="36" fill="var(--c-crt-amber)" font-size="11" font-weight="bold" letter-spacing="1">ハーネス</text>
-  <text x="35" y="58" fill="var(--c-phosphor)" font-size="12" font-weight="bold">INSTRUCTIONS を</text>
-  <text x="35" y="74" fill="var(--c-phosphor)" font-size="12" font-weight="bold">Context に追加</text>
-  <rect x="720" y="15" width="340" height="215" rx="6" fill="var(--c-deep-purple)" stroke="#1e2a4a" stroke-width="1"/>
-  <text x="735" y="40" font-size="10" fill="#cfe9ff">
-    <tspan x="735" dy="0" fill="#888">.github/copilot-instructions.md</tspan>
-    <tspan x="735" dy="14" fill="#555">---</tspan>
-    <tspan x="735" dy="14" fill="var(--c-neon-cyan)" font-weight="bold"># 開発ルール</tspan>
-    <tspan x="735" dy="14">- TypeScript を使う</tspan>
-    <tspan x="735" dy="14">- pnpm を使う</tspan>
-    <tspan x="735" dy="14">- テストを書く</tspan>
-    <tspan x="735" dy="22" fill="#888">.github/instructions/db.instructions.md</tspan>
-    <tspan x="735" dy="14" fill="#555">---</tspan>
-    <tspan x="735" dy="14"><tspan fill="var(--c-crt-amber)">applyTo:</tspan> src/db/**</tspan>
-    <tspan x="735" dy="14" fill="#555">---</tspan>
-    <tspan x="735" dy="22" fill="var(--c-neon-cyan)" font-weight="bold"># DB ガイドライン</tspan>
-    <tspan x="735" dy="14">- prepared statement を使う</tspan>
-  </text>
-  <rect x="415" y="160" width="120" height="80" rx="12" fill="var(--c-deep-purple)" stroke="var(--c-neon-magenta)" stroke-width="2"/>
-  <text x="475" y="185" fill="var(--c-neon-magenta)" font-size="12" font-weight="bold" letter-spacing="1" text-anchor="middle">ユーザー</text>
-  <text x="475" y="212" fill="var(--c-phosphor)" font-size="14" font-weight="bold" text-anchor="middle">「DB を</text>
-  <text x="475" y="230" fill="var(--c-phosphor)" font-size="14" font-weight="bold" text-anchor="middle">触って」</text>
-  <rect x="485" y="265" width="220" height="70" rx="12" fill="var(--c-deep-purple)" stroke="var(--c-crt-amber)" stroke-width="2"/>
-  <text x="500" y="286" fill="var(--c-crt-amber)" font-size="11" font-weight="bold" letter-spacing="1">ハーネス</text>
-  <text x="500" y="308" fill="var(--c-phosphor)" font-size="12" font-weight="bold">path に一致する</text>
-  <text x="500" y="324" fill="var(--c-phosphor)" font-size="12" font-weight="bold">INSTRUCTION を読込</text>
-  <text x="605" y="375" fill="#3b82f6" font-size="10" font-weight="bold" text-anchor="end"><tspan x="605" dy="0">src/db/users.ts</tspan><tspan x="605" dy="12">を編集する</tspan></text>
-  <text x="80" y="441" fill="var(--c-phosphor)" font-size="11" font-weight="bold" letter-spacing="1"><tspan x="80" dy="0">モデル</tspan><tspan x="80" dy="13">コンテキスト</tspan></text>
-  <rect x="155" y="420" width="110" height="55" rx="10" fill="var(--c-gb-green)"/>
-  <text x="210" y="444" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">SYSTEM</text>
-  <text x="210" y="460" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">&amp; TOOLS</text>
-  <rect x="295" y="420" width="110" height="55" rx="10" fill="var(--c-neon-cyan)"/>
-  <text x="350" y="453" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTIONS</text>
-  <rect x="435" y="420" width="80" height="55" rx="10" fill="var(--c-neon-magenta)"/>
-  <text x="475" y="453" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">PROMPT</text>
-  <rect x="545" y="420" width="130" height="55" rx="10" fill="var(--c-neon-cyan)"/>
-  <text x="610" y="444" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">FILE EDIT</text>
-  <text x="610" y="460" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">REQUEST</text>
-  <rect x="705" y="420" width="140" height="55" rx="10" fill="var(--c-crt-amber)"/>
-  <text x="775" y="444" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">PATH</text>
-  <text x="775" y="460" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">INSTRUCTION</text>
+<figure class="instructions-pipeline">
+<svg viewBox="0 0 1100 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ハーネスがリポジトリの指示をモデルコンテキストへ読み込む。ユーザーの DB 編集要求に対し、既存のコンテキストを置き換えず、パスに一致する指示を追加する。">
+<defs>
+<marker id="instructions-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="var(--c-crt-amber)"/></marker>
+<marker id="instructions-cyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="var(--c-neon-cyan)"/></marker>
+<marker id="instructions-magenta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="var(--c-neon-magenta)"/></marker>
+</defs>
+<g fill="none" stroke-width="2.5">
+<path d="M320 70 H730" stroke="var(--c-crt-amber)" marker-end="url(#instructions-amber)"/>
+<path d="M170 120 V375 H390 V390" stroke="var(--c-crt-amber)" marker-end="url(#instructions-amber)"/>
+<path d="M525 255 V365 H575 V390" stroke="var(--c-neon-magenta)" stroke-dasharray="6 5" marker-end="url(#instructions-magenta)"/>
+<path d="M760 390 V360" stroke="var(--c-neon-cyan)" marker-end="url(#instructions-cyan)"/>
+<path d="M920 325 H1090 V180 H1080" stroke="var(--c-crt-amber)" marker-end="url(#instructions-amber)"/>
+<path d="M820 360 V372 H970 V390" stroke="var(--c-crt-amber)" marker-end="url(#instructions-amber)"/>
+</g>
+<rect x="20" y="20" width="300" height="100" rx="3" fill="var(--c-midnight)" stroke="var(--c-crt-amber)" stroke-width="2"/>
+<text x="38" y="48" fill="var(--c-crt-amber)" font-size="20" font-weight="700">ハーネス</text>
+<text x="38" y="78" fill="var(--c-phosphor)" font-size="19"><tspan x="38">常時ロードの指示を</tspan><tspan x="38" dy="25">モデルコンテキストへ追加</tspan></text>
+<rect x="730" y="20" width="350" height="240" rx="3" fill="var(--c-midnight)" stroke="var(--c-neon-cyan)" stroke-width="1.5"/>
+<text x="746" y="45" fill="var(--c-phosphor)" font-size="16">
+<tspan x="746" class="instruction-source">.github/copilot-instructions.md</tspan>
+<tspan x="746" dy="24" fill="var(--c-neon-cyan)" font-weight="700"># 開発ルール</tspan>
+<tspan x="746" dy="22">- TypeScript を使う</tspan><tspan x="746" dy="22">- pnpm を使う</tspan><tspan x="746" dy="22">- テストを書く</tspan>
+<tspan x="746" dy="28" class="instruction-source">.github/instructions/db.instructions.md</tspan>
+<tspan x="746" dy="24" fill="var(--c-crt-amber)">applyTo: src/db/**</tspan>
+<tspan x="746" dy="24" fill="var(--c-neon-cyan)" font-weight="700"># DB ガイドライン</tspan>
+<tspan x="746" dy="22">- prepared statement を使う</tspan>
+</text>
+<rect x="430" y="155" width="190" height="100" rx="3" fill="var(--c-midnight)" stroke="var(--c-neon-magenta)" stroke-width="2"/>
+<text x="525" y="187" text-anchor="middle" fill="var(--c-neon-magenta)" font-size="20" font-weight="700">ユーザー</text>
+<text x="525" y="222" text-anchor="middle" fill="var(--c-phosphor)" font-size="20">「DB を触って」</text>
+<rect x="620" y="290" width="300" height="70" rx="3" fill="var(--c-midnight)" stroke="var(--c-crt-amber)" stroke-width="2"/>
+<text x="638" y="318" fill="var(--c-crt-amber)" font-size="20" font-weight="700">ハーネス</text>
+<text x="638" y="343" fill="var(--c-phosphor)" font-size="18">パスに一致する指示を追加</text>
+<text x="12" y="414" fill="var(--c-phosphor)" font-size="17" font-weight="700"><tspan x="12">モデル</tspan><tspan x="12" dy="24">コンテキスト</tspan></text>
+<rect x="120" y="390" width="150" height="60" rx="3" fill="var(--c-gb-green)"/>
+<rect x="300" y="390" width="180" height="60" rx="3" fill="var(--c-neon-cyan)"/>
+<rect x="510" y="390" width="130" height="60" rx="3" fill="var(--c-neon-magenta)"/>
+<rect x="670" y="390" width="180" height="60" rx="3" fill="var(--c-neon-cyan)"/>
+<rect x="880" y="390" width="180" height="60" rx="3" fill="var(--c-crt-amber)"/>
+<g fill="var(--c-shadow-ink)" text-anchor="middle" font-size="17" font-weight="700">
+<text x="195" y="414"><tspan x="195">SYSTEM</tspan><tspan x="195" dy="23">+ TOOLS</tspan></text>
+<text x="390" y="426">INSTRUCTIONS</text>
+<text x="575" y="426">PROMPT</text>
+<text x="760" y="414"><tspan x="760">編集リクエスト</tspan><tspan x="760" dy="23" font-size="14">src/db/users.ts</tspan></text>
+<text x="970" y="414"><tspan x="970">PATH</tspan><tspan x="970" dy="23">INSTRUCTIONS</tspan></text>
+</g>
 </svg>
 </figure>

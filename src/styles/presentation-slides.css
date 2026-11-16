@@ -1,0 +1,767 @@
+body.present-mode .playbook-detail:is([data-playbook-slug="github-copilot"], [data-playbook-slug="hands-on"]) {
+  --presentation-slide-space: 0.3em;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="github-copilot"], [data-playbook-slug="hands-on"]) .prose-akq {
+  line-height: 1.5;
+}
+
+body.present-mode [data-playbook-slug="github-copilot"] .prose-akq > ul > li {
+  margin: 0.1em 0;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-copilot"] .prose-akq > h2,
+body.present-mode:not(.slide-cover) .playbook-detail[data-playbook-slug="hands-on"] .prose-akq > h2 {
+  margin-top: 0;
+  margin-bottom: 0.4em;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-copilot"] .prose-akq > h2:has(.fusion-title) {
+  font-size: 2.3rem;
+  line-height: 1.42;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="github-copilot"], [data-playbook-slug="hands-on"]) .prose-akq > p,
+body.present-mode .playbook-detail[data-playbook-slug="github-copilot"] .prose-akq > ul,
+body.present-mode .playbook-detail[data-playbook-slug="github-copilot"] .prose-akq > table {
+  margin-top: var(--presentation-slide-space);
+  margin-bottom: var(--presentation-slide-space);
+}
+
+body.present-mode [data-playbook-slug="github-copilot"] .prose-akq > table th,
+body.present-mode [data-playbook-slug="github-copilot"] .prose-akq > table td {
+  padding: 0.2em 0.6em;
+  line-height: 1.35;
+}
+
+body.present-mode [data-playbook-slug="github-copilot"] .prose-akq .big-stat {
+  font-size: 1.8em;
+}
+
+body.present-mode [data-playbook-slug="github-copilot"] .prose-akq > .mermaid-wrap,
+body.present-mode [data-playbook-slug="github-copilot"] .copilot-flow-small .mermaid-wrap {
+  padding: 0.25em 0.5em;
+  margin: var(--presentation-slide-space) 0;
+}
+
+body.present-mode [data-playbook-slug="github-copilot"] .copilot-flow-small {
+  margin-top: var(--presentation-slide-space);
+}
+
+body.present-mode [data-playbook-slug="github-copilot"] .copilot-flow-small .mermaid-wrap svg {
+  min-height: 0;
+  max-height: 40vh;
+}
+
+body.present-mode [data-playbook-slug="github-copilot"] .prose-akq .fusion-slide {
+  font-size: clamp(22px, 1.7vw, 24px);
+}
+
+body.present-mode [data-playbook-slug="github-copilot"] .fusion-slide .fusion-feature p,
+body.present-mode [data-playbook-slug="github-copilot"] .fusion-slide .fusion-micro,
+body.present-mode [data-playbook-slug="github-copilot"] .fusion-slide .fusion-availability,
+body.present-mode [data-playbook-slug="github-copilot"] .fusion-slide .fusion-safety,
+body.present-mode [data-playbook-slug="github-copilot"] .fusion-slide .fusion-metric > span,
+body.present-mode [data-playbook-slug="github-copilot"] .fusion-slide .fusion-choice-row small,
+body.present-mode [data-playbook-slug="github-copilot"] .fusion-slide .fusion-zone-label,
+body.present-mode [data-playbook-slug="github-copilot"] .fusion-slide .fusion-signals > span,
+body.present-mode [data-playbook-slug="github-copilot"] .fusion-slide .fusion-wire,
+body.present-mode [data-playbook-slug="github-copilot"] .fusion-slide .fusion-output > span:last-child {
+  font-size: 18px;
+}
+
+body.present-mode [data-playbook-slug="hands-on"] .prose-akq > .build-preview {
+  width: auto;
+  max-width: 100%;
+  max-height: 45vh;
+  margin: var(--presentation-slide-space) auto;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="hands-on"] .workshop-flow-vertical {
+  margin-top: var(--presentation-slide-space);
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="hands-on"] .workshop-flow-vertical .mermaid-wrap {
+  max-height: none;
+  padding: 0.25em 0.5em;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="hands-on"] .workshop-flow-vertical .mermaid-wrap svg {
+  max-height: 65vh;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="collaboration-tools"], [data-playbook-slug="harness-engineering"], [data-playbook-slug="mcp"], [data-playbook-slug="instructions"], [data-playbook-slug="agent-skills"], [data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"], [data-playbook-slug="context-engineering"]) {
+  --presentation-slide-space: 0.3em;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="collaboration-tools"], [data-playbook-slug="harness-engineering"], [data-playbook-slug="mcp"], [data-playbook-slug="instructions"], [data-playbook-slug="agent-skills"], [data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"], [data-playbook-slug="context-engineering"]) .prose-akq {
+  line-height: 1.5;
+}
+
+body.present-mode:not(.slide-cover) .playbook-detail:is([data-playbook-slug="collaboration-tools"], [data-playbook-slug="harness-engineering"], [data-playbook-slug="mcp"], [data-playbook-slug="instructions"], [data-playbook-slug="agent-skills"], [data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"], [data-playbook-slug="context-engineering"]) .prose-akq > h2 {
+  margin-top: 0;
+  margin-bottom: 0.4em;
+  font-size: 2.3rem;
+  line-height: 1.42;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="collaboration-tools"], [data-playbook-slug="harness-engineering"], [data-playbook-slug="mcp"], [data-playbook-slug="instructions"], [data-playbook-slug="agent-skills"], [data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"], [data-playbook-slug="context-engineering"]) .prose-akq > :is(p, ul, ol, table, blockquote, .ctl-widget, .setup-cards, .mermaid-wrap) {
+  margin-block: var(--presentation-slide-space);
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="collaboration-tools"], [data-playbook-slug="harness-engineering"], [data-playbook-slug="mcp"], [data-playbook-slug="instructions"], [data-playbook-slug="agent-skills"], [data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"], [data-playbook-slug="context-engineering"]) .prose-akq table :is(th, td) {
+  padding: 0.2em 0.6em;
+  line-height: 1.35;
+}
+
+body.present-mode [data-playbook-slug="harness-engineering"] .prose-akq > table {
+  table-layout: fixed;
+}
+
+body.present-mode [data-playbook-slug="harness-engineering"] .prose-akq > table :is(th, td):first-child {
+  width: 24%;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="harness-engineering"] .prose-akq > table :is(th, td) {
+  padding-block: 0.15em;
+}
+
+body.present-mode [data-playbook-slug="harness-engineering"] .prose-akq td code {
+  overflow-wrap: anywhere;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="collaboration-tools"], [data-playbook-slug="harness-engineering"], [data-playbook-slug="mcp"], [data-playbook-slug="instructions"], [data-playbook-slug="agent-skills"], [data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"], [data-playbook-slug="context-engineering"]) .prose-akq li {
+  margin-block: 0.1em;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="collaboration-tools"], [data-playbook-slug="harness-engineering"], [data-playbook-slug="mcp"], [data-playbook-slug="instructions"], [data-playbook-slug="agent-skills"], [data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"], [data-playbook-slug="context-engineering"]) .prose-akq > blockquote {
+  padding: 0.3em 0.7em;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="harness-engineering"], [data-playbook-slug="mcp"]) .prose-akq > .mermaid-wrap {
+  padding: 0.25em 0.5em;
+  max-height: none;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="harness-engineering"], [data-playbook-slug="mcp"]) .prose-akq > .mermaid-wrap svg {
+  max-width: 100% !important;
+  max-height: 45vh;
+}
+
+.prose-akq > h2:has(.slide-heading-links) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.prose-akq .slide-heading-text {
+  flex: 1 1 auto;
+}
+
+.prose-akq .slide-heading-links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-left: auto;
+}
+
+.prose-akq .slide-heading-links .h2-doc {
+  margin-left: 0;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="harness-engineering"], [data-playbook-slug="mcp"]) .prose-akq .ctl-widget.ctl-compact {
+  font-size: 22px;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="harness-engineering"], [data-playbook-slug="mcp"]) .prose-akq .ctl-body > :is(p, ul) {
+  margin-block: 0.1em;
+  line-height: 1.4;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="harness-engineering"], [data-playbook-slug="mcp"]) .prose-akq .ctl-body {
+  gap: 0;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="harness-engineering"] .prose-akq .harness-map {
+  margin: 0 auto;
+}
+
+body.present-mode:not(.slide-cover) .playbook-detail[data-playbook-slug="harness-engineering"] .prose-akq > h2:has(+ .harness-map) {
+  margin-bottom: 0;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="harness-engineering"] .prose-akq .harness-map svg {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100dvh - 12rem);
+  margin-inline: auto;
+}
+
+.prose-akq .mcp-diagram {
+  overflow-x: auto;
+  margin-block: 0.5em;
+  font-family: var(--font-prose);
+  font-size: 22px;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="mcp"] .prose-akq > .mcp-diagram {
+  margin-block: var(--presentation-slide-space);
+}
+
+.prose-akq .mcp-flow {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.15fr) 100px minmax(190px, 1fr) 60px minmax(190px, 1fr);
+  grid-template-rows: 64px repeat(5, 64px);
+  gap: 8px 12px;
+  min-width: 880px;
+}
+
+.prose-akq .mcp-host {
+  display: grid;
+  grid-column: 1;
+  grid-row: 1 / span 6;
+  grid-template-rows: subgrid;
+  padding: 0 12px 8px;
+  border: 2px solid var(--c-neon-cyan);
+  background: var(--c-midnight);
+}
+
+.prose-akq .mcp-flow-heading,
+.prose-akq .mcp-connection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.prose-akq .mcp-flow-heading small,
+.prose-akq .mcp-connection small {
+  font-size: 17px;
+}
+
+.prose-akq .mcp-flow-heading strong {
+  font-size: 22px;
+}
+
+.prose-akq .mcp-host .mcp-flow-heading {
+  color: var(--c-neon-cyan);
+}
+
+.prose-akq .mcp-node {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  min-height: 48px;
+  padding: 0.3em 0.5em;
+  border: 1px solid var(--c-neon-cyan);
+  background: var(--c-midnight);
+  color: var(--c-neon-cyan);
+  line-height: 1.2;
+  text-align: center;
+}
+
+.prose-akq .mcp-server {
+  border-color: var(--c-gb-green);
+  color: var(--c-gb-green);
+}
+
+.prose-akq .mcp-tool {
+  border-color: var(--c-crt-amber);
+  color: var(--c-crt-amber);
+}
+
+.prose-akq .mcp-connection {
+  color: var(--c-gb-green);
+  font-size: 28px;
+  line-height: 1.4;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="harness-engineering"], [data-playbook-slug="mcp"]) .setup-card {
+  padding: 0.45em 0.65em;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="harness-engineering"], [data-playbook-slug="mcp"]) .setup-card p {
+  margin-block: 0.1em;
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="mcp"] .prose-akq > pre {
+  padding: 0.65em 0.9em;
+  margin-block: var(--presentation-slide-space);
+  font-size: 20px;
+  line-height: 1.45;
+  max-height: none;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="mcp"] .split-image {
+  margin-block: var(--presentation-slide-space);
+  gap: 1em;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="mcp"] .split-text :is(p, ol) {
+  margin-block: var(--presentation-slide-space);
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="mcp"] .split-figure img {
+  max-height: 42vh;
+  object-fit: contain;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="mcp"] .split-figure figcaption {
+  margin-top: 0.3em;
+  padding-top: 0.3em;
+  line-height: 1.4;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="mcp"] .mcp-connectors {
+  font-size: 22px;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="mcp"] .mcp-connectors-locations dt {
+  font-size: 18px;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="mcp"]:has(.mcp-connectors.akq-slide-active) {
+  padding-top: 5rem;
+  padding-bottom: 3rem;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="collaboration-tools"], [data-playbook-slug="harness-engineering"], [data-playbook-slug="mcp"], [data-playbook-slug="instructions"], [data-playbook-slug="agent-skills"], [data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"], [data-playbook-slug="context-engineering"]) .links-aside > div {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.5rem;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="collaboration-tools"], [data-playbook-slug="harness-engineering"], [data-playbook-slug="mcp"], [data-playbook-slug="instructions"], [data-playbook-slug="agent-skills"], [data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"], [data-playbook-slug="context-engineering"]) .links-aside > div > div {
+  margin: 0;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="collaboration-tools"], [data-playbook-slug="harness-engineering"], [data-playbook-slug="mcp"], [data-playbook-slug="instructions"], [data-playbook-slug="agent-skills"], [data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"], [data-playbook-slug="context-engineering"]) .links-aside {
+  padding: 0.85rem 1.25rem;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="collaboration-tools"], [data-playbook-slug="harness-engineering"], [data-playbook-slug="mcp"], [data-playbook-slug="instructions"], [data-playbook-slug="agent-skills"], [data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"], [data-playbook-slug="context-engineering"]) .links-aside-title {
+  margin-bottom: 0.5rem;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="collaboration-tools"], [data-playbook-slug="harness-engineering"], [data-playbook-slug="mcp"], [data-playbook-slug="instructions"], [data-playbook-slug="agent-skills"], [data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"], [data-playbook-slug="context-engineering"]) .links-aside-group {
+  margin-bottom: 0.35rem;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="collaboration-tools"], [data-playbook-slug="harness-engineering"], [data-playbook-slug="mcp"], [data-playbook-slug="instructions"], [data-playbook-slug="agent-skills"], [data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"], [data-playbook-slug="context-engineering"]) .links-aside-item {
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="collaboration-tools"], [data-playbook-slug="harness-engineering"], [data-playbook-slug="mcp"], [data-playbook-slug="instructions"], [data-playbook-slug="agent-skills"], [data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"], [data-playbook-slug="context-engineering"]) .links-aside-item + .links-aside-item {
+  margin-top: 0.3em;
+}
+
+@media (min-width: 768px) {
+  body.present-mode .playbook-detail[data-playbook-slug="mcp"] .links-aside > div > div:first-child {
+    grid-row: 1 / span 3;
+  }
+}
+
+@media (max-width: 767px) {
+  body.present-mode .playbook-detail:is([data-playbook-slug="collaboration-tools"], [data-playbook-slug="harness-engineering"], [data-playbook-slug="mcp"], [data-playbook-slug="instructions"], [data-playbook-slug="agent-skills"], [data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"], [data-playbook-slug="context-engineering"]) .links-aside > div {
+    grid-template-columns: 1fr;
+  }
+}
+
+  body.present-mode .playbook-detail[data-playbook-slug="instructions"] .prose-akq > table {
+    table-layout: fixed;
+  }
+
+  body.present-mode .playbook-detail[data-playbook-slug="instructions"] .prose-akq > table :is(th, td):first-child {
+    width: 18%;
+  }
+
+  body.present-mode .playbook-detail[data-playbook-slug="instructions"] .prose-akq > table :is(th, td):nth-child(2) {
+    width: 55%;
+  }
+
+  body.present-mode .playbook-detail[data-playbook-slug="instructions"] .prose-akq > table :is(th, td) {
+    padding-block: 0.1em;
+  }
+
+  body.present-mode:not(.slide-cover) .playbook-detail[data-playbook-slug="instructions"] .prose-akq > h2:has(+ table) {
+    margin-bottom: 0.2em;
+  }
+
+  body.present-mode .playbook-detail[data-playbook-slug="instructions"] .prose-akq code {
+    overflow-wrap: anywhere;
+  }
+
+  body.present-mode .playbook-detail[data-playbook-slug="instructions"] .instructions-repository {
+    margin-block: var(--presentation-slide-space);
+  }
+
+  body.present-mode .playbook-detail[data-playbook-slug="instructions"] .instructions-repository .setup-cards {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    margin: 0;
+  }
+
+  body.present-mode .playbook-detail[data-playbook-slug="instructions"] .instructions-repository .setup-card {
+    padding: 0.5em 0.65em;
+  }
+
+  body.present-mode .playbook-detail[data-playbook-slug="instructions"] .instructions-repository .setup-card-head {
+    margin-bottom: 0.3em;
+    padding-bottom: 0.3em;
+  }
+
+  body.present-mode .playbook-detail[data-playbook-slug="instructions"] .instructions-repository .setup-card-head code {
+    padding: 0.15em 0.3em;
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  body.present-mode .playbook-detail[data-playbook-slug="instructions"] .instructions-repository .setup-card-tag {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  body.present-mode .playbook-detail[data-playbook-slug="instructions"] .instructions-repository .setup-card p {
+    margin: 0;
+    font-size: 22px;
+    line-height: 1.4;
+  }
+
+  .prose-akq :is(.instructions-pipeline, .skills-pipeline, .agent-pipeline) {
+    overflow-x: auto;
+    margin-block: 0.5em;
+  }
+
+  .prose-akq :is(.instructions-pipeline, .skills-pipeline, .agent-pipeline) svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-width: 800px;
+    font-family: var(--font-prose);
+  }
+
+  .prose-akq .instructions-pipeline .instruction-source {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13.5px;
+  }
+
+  body.present-mode .playbook-detail:is([data-playbook-slug="instructions"], [data-playbook-slug="agent-skills"], [data-playbook-slug="custom-agent"]) .prose-akq > :is(.instructions-pipeline, .skills-pipeline, .agent-pipeline) {
+    margin-top: var(--presentation-slide-space);
+    margin-bottom: 0;
+  }
+
+  body.present-mode .playbook-detail:is([data-playbook-slug="instructions"], [data-playbook-slug="agent-skills"], [data-playbook-slug="custom-agent"]) .prose-akq :is(.instructions-pipeline, .skills-pipeline, .agent-pipeline) svg {
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+    max-height: calc(100dvh - 15.5rem);
+    margin-inline: auto;
+  }
+
+  @media (min-width: 900px) {
+    body.present-mode .playbook-detail[data-playbook-slug="instructions"] .instructions-repository .setup-cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+.playbook-detail[data-playbook-slug="agent-skills"] .prose-akq .skill-examples {
+  grid-template-columns: 1fr;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="agent-skills"] .prose-akq code {
+  overflow-wrap: anywhere;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="agent-skills"] .skill-examples {
+  gap: 0.75rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="agent-skills"] .skill-examples .setup-card {
+  min-width: 0;
+  padding: 0.5em 0.65em;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="agent-skills"] .skill-examples h3 {
+  margin: 0 0 0.4em;
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="agent-skills"] .skill-examples p {
+  margin-block: 0.3em;
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="agent-skills"] .skill-examples pre {
+  margin-block: 0.4em 0;
+  padding: 0.6em;
+  max-height: none;
+  font-size: 18px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="agent-skills"] .skill-examples pre code {
+  font-size: inherit;
+  white-space: inherit;
+}
+
+@media (min-width: 900px) {
+  body.present-mode .playbook-detail[data-playbook-slug="agent-skills"] .prose-akq .skill-examples {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.playbook-detail:is([data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"]) .prose-akq .example-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.prose-akq .agent-model-benefits {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1em;
+  margin-block: 1em;
+}
+
+.prose-akq .agent-model-benefit {
+  padding: 0.8em;
+  border: 1px solid var(--benefit-color);
+  background: var(--c-midnight);
+}
+
+.prose-akq .agent-model-benefit strong {
+  display: block;
+  color: var(--benefit-color);
+}
+
+.prose-akq .context-diagram {
+  margin-block: 0.5em;
+}
+
+.prose-akq .context-window {
+  display: flex;
+  height: 320px;
+  font-size: 22px;
+  line-height: 1.15;
+}
+
+.prose-akq .context-occupied,
+.prose-akq .context-available {
+  flex: var(--context-share) 1 0;
+  min-width: 0;
+}
+
+.prose-akq .context-occupied {
+  display: flex;
+}
+
+.prose-akq .context-part {
+  display: flex;
+  flex: var(--context-size) 1 0;
+  flex-direction: var(--context-direction);
+  min-width: 0;
+  min-height: 0;
+}
+
+.prose-akq .context-available {
+  display: flex;
+  flex-direction: column;
+}
+
+.prose-akq .context-block {
+  display: flex;
+  flex: var(--context-size) 1 0;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 0;
+  padding: 4px;
+  border: 1px solid var(--context-color);
+  background: color-mix(in srgb, var(--context-color) 25%, var(--c-midnight));
+  color: var(--c-phosphor);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.prose-akq .context-input,
+.prose-akq .context-dumb {
+  --context-color: var(--c-neon-magenta);
+}
+
+.prose-akq .context-cache {
+  --context-color: var(--c-phosphor);
+}
+
+.prose-akq .context-output {
+  --context-color: var(--c-crt-amber);
+}
+
+.prose-akq .context-free,
+.prose-akq .context-smart,
+.prose-akq .context-buffer {
+  --context-color: var(--c-neon-cyan);
+}
+
+.prose-akq .context-buffer {
+  border-style: dashed;
+  background: color-mix(in srgb, var(--context-color) 8%, var(--c-midnight));
+}
+
+.prose-akq .context-window > .context-block {
+  flex: 0 0 calc(var(--context-size) * 1%);
+}
+
+.prose-akq .context-available > .context-block {
+  flex: 0 0 calc(100% * var(--context-size) / var(--context-share));
+}
+
+.prose-akq .context-diagram figcaption {
+  margin-top: 0.3em;
+  color: var(--c-phosphor);
+  font-size: 14px;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"], [data-playbook-slug="context-engineering"]) .prose-akq .hero-quote p {
+  margin-block: 0.3em;
+  line-height: 1.5;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"], [data-playbook-slug="context-engineering"]) .prose-akq .hero-quote {
+  padding: 0.6em 0.9em;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"]) .prose-akq code {
+  overflow-wrap: anywhere;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"]) .prose-akq .example-columns {
+  margin-block: var(--presentation-slide-space);
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"]) .example-columns > div {
+  min-width: 0;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"]) .example-columns h3 {
+  margin: 0 0 0.3em;
+  font-size: 22px;
+  line-height: 1.3;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"]) .example-columns :is(pre, ul) {
+  margin: 0;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"]) .example-columns pre {
+  max-height: none;
+  padding: 0.6em;
+  font-size: 18px;
+  line-height: 1.3;
+  white-space: pre-wrap;
+}
+
+body.present-mode .playbook-detail:is([data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"]) .example-columns pre code {
+  font-size: inherit;
+  white-space: inherit;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="custom-agent"] .prose-akq table {
+  font-size: 22px;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="custom-agent"] .prose-akq table :is(th, td) {
+  font-size: 22px;
+}
+
+body.present-mode:not(.slide-cover) .playbook-detail[data-playbook-slug="custom-agent"] .prose-akq > h2:is(:has(+ table), :has(+ p + table)) {
+  margin-bottom: 0.1em;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="custom-agent"] .prose-akq > h2:nth-of-type(3) + p + table :is(th, td) {
+  padding-block: 0.1em;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="custom-agent"] .prose-akq .agent-model-table :is(th, td) {
+  padding-block: 0.1em;
+  line-height: 1.25;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="custom-agent"] .prose-akq .agent-model-benefits {
+  gap: 0.5rem;
+  margin-block: var(--presentation-slide-space);
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="custom-agent"] .prose-akq .agent-model-benefit {
+  padding: 0.55em 0.7em;
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="custom-agent"] .agent-model-benefit p {
+  margin-block: 0.2em 0;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="hooks"] .prose-akq > h2:nth-of-type(2) + table {
+  table-layout: fixed;
+  font-size: 20px;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="hooks"] .prose-akq > h2:nth-of-type(2) + table :is(th, td) {
+  padding: 0.15em 0.4em;
+  line-height: 1.25;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="hooks"] .prose-akq > h2:nth-of-type(2) + table :is(th, td):first-child {
+  width: 24%;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="hooks"] .prose-akq > h2:nth-of-type(2) + table :is(th, td):nth-child(2) {
+  width: 20%;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="hooks"] .prose-akq > h2:nth-of-type(2) + table :is(th, td):nth-child(3) {
+  width: 24%;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="context-engineering"] .prose-akq > .context-diagram {
+  margin-top: var(--presentation-slide-space);
+  margin-bottom: 0;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="context-engineering"] .prose-akq .legend {
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="context-engineering"] .context-diagram figcaption {
+  font-size: 17px;
+}
+
+@media (min-width: 900px) {
+  body.present-mode .playbook-detail:is([data-playbook-slug="custom-agent"], [data-playbook-slug="hooks"]) .prose-akq .example-columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .prose-akq .agent-model-benefits {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .prose-akq .context-window {
+    font-size: 14px;
+  }
+}
