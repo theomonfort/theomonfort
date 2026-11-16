@@ -361,7 +361,7 @@ export async function mountZettelkasten(container, options = {}) {
         return;
       }
       el.tooltip.hidden = false;
-      el.tooltip.innerHTML = `<strong>${escapeHtml(node.title)}</strong><span class="is-warn">Uncreated note / click to create</span>`;
+      el.tooltip.innerHTML = `<strong>${escapeHtml(node.title)}</strong><span class="is-warn">${readOnly ? 'Uncreated note' : 'Uncreated note / click to create'}</span>`;
     },
   });
 
