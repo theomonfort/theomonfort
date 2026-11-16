@@ -314,6 +314,7 @@ const copy = siteCopy[locale].playbook;
       const instance = (await mountZettelkasten(zkState.stageEl!, {
         vaults: vaultsWithInitial,
         initialVault: target.vault,
+        readOnly: true,
         pinInitialNote: true,
         colorByGroup: false,
         onActiveChange: ({
