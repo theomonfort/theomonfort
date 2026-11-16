@@ -226,11 +226,12 @@ flowchart LR
 
 ## Other Useful Commands
 
-The CLI lets you instantly check models, sharing, experimental features, and environment info via slash commands.
+The CLI lets you instantly manage settings, check models, share sessions, and inspect experimental features and environment info via slash commands.
 
 | Command | When to use |
 |---|---|
 | `/help` | Check available commands and shortcuts. |
+| `/settings` | Browse, view, and change your CLI settings, or set one directly with `/settings KEY VALUE`. <a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/change-settings" target="_blank" rel="noopener noreferrer">Docs ↗</a> |
 | `/model` | Check or switch the model in use. |
 | `/ide` | Connect to an IDE such as VS Code. |
 | `/share` | Share the current session. |
