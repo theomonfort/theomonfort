@@ -167,6 +167,11 @@ links:
 <p>In the default view under <b>Security → Secret scanning</b>, use the <b>Validity filter</b>.</p>
 <p class="demo-out">Triage by real risk: start with the secrets that are still live.</p>
 </li>
+<li>
+<p class="demo-step-title">PUBLIC MONITORING</p>
+<p>Enterprise-level report: open <a href="https://github.com/enterprises/octodemo/security/public-monitoring" target="_blank" rel="noopener noreferrer">octodemo → Public monitoring ↗</a> and review the findings.</p>
+<p>Repository-level alerts: open <a href="https://github.com/theomonfort-org/ghas-test-1/security/secret-scanning" target="_blank" rel="noopener noreferrer">ghas-test-1 → Secret scanning ↗</a>. Compare the enterprise Public monitoring report with this repository's Secret scanning alert list.</p>
+</li>
 </ol>
 </div>
 </div>

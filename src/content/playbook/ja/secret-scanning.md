@@ -167,6 +167,11 @@ links:
 <p><b>Security → Secret scanning</b> の default ビューで <b>Validity フィルター</b>を使う。</p>
 <p class="demo-out">「今も有効な secret」から優先的に対応でき、実リスク順にトリアージできる。</p>
 </li>
+<li>
+<p class="demo-step-title">PUBLIC MONITORING</p>
+<p>Enterprise レベルのレポート：<a href="https://github.com/enterprises/octodemo/security/public-monitoring" target="_blank" rel="noopener noreferrer">octodemo → Public monitoring ↗</a> を開き、検出結果を確認する。</p>
+<p>Repo レベルのアラート：<a href="https://github.com/theomonfort-org/ghas-test-1/security/secret-scanning" target="_blank" rel="noopener noreferrer">ghas-test-1 → Secret scanning ↗</a> を開く。Enterprise の Public monitoring レポートと、このリポジトリの Secret scanning アラート一覧を比較する。</p>
+</li>
 </ol>
 </div>
 </div>
