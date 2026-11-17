@@ -48,24 +48,43 @@ links:
   </p>
 </div>
 
-## 特徴
+## 特徴 <a class="h2-doc" href="https://docs.github.com/en/codespaces/about-codespaces/deep-dive" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-クラウド上の **Docker コンテナ** が 1 セッション = 1 codespace。設定は repo 内の `devcontainer.json` でコード化される。
+どこから接続しても、コードとツールは **同じクラウド開発環境** で動く。
 
-**接続方法（どこからでも）**
-
-- 🌐 **ブラウザ** — `github.com` から直接、URL 1 つで開ける
-- 💻 **VS Code Desktop** — ローカル VS Code から remote 接続
-- 🖥️ **GitHub CLI** (`gh codespace ssh`) — ターミナルから直接接続
-
-**コンテナ環境**
-
-- 🐳 **Docker ベース** — base image + features + post-create script を `devcontainer.json` で宣言
-- 📦 **再現性** — 同じ repo を開けば、誰でも同じ環境
-- 🔌 **VS Code 拡張も pre-install** — Copilot・MCP server・linter まで仕込める
-- ⚡ **マシンサイズ** — 必要に応じて切替可能（最大 **32 core / 128 GB RAM / 128 GB ストレージ**）
-
-> 重い build や AI agent を並列で走らせたいときは大きめを選ぶ。**起動後でもサイズ変更可能**。
+<figure class="codespaces-workspace" aria-label="Codespace への 3 つの接続方法">
+<div class="codespaces-diagram">
+<ul class="codespaces-access" aria-label="接続方法">
+<li>
+<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="18" rx="1"/><path d="M2 8H22M6 5.5H6.1M9 5.5H9.1"/></svg>
+<div><strong>ブラウザ</strong><span>github.com で開く</span></div>
+</li>
+<li>
+<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="1"/><path d="M8 21H16M12 17V21M9 8L6 10L9 12M15 8L18 10L15 12"/></svg>
+<div><strong>VS Code Desktop</strong><span>リモート接続</span></div>
+</li>
+<li>
+<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="18" rx="1"/><path d="M6 8L10 12L6 16M13 16H18"/></svg>
+<div><strong>GitHub CLI</strong><code>gh codespace ssh</code></div>
+</li>
+</ul>
+<svg class="codespaces-connectors" viewBox="0 0 80 292" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+<defs><marker id="codespaces-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10Z"/></marker></defs>
+<path class="codespaces-branches" d="M0 42H32V250H0M0 146H78" marker-end="url(#codespaces-arrow)"/>
+</svg>
+<span class="codespaces-stacked-arrow" aria-hidden="true">↓</span>
+<div class="codespaces-container">
+<div class="codespaces-container-head"><h3>自分の Codespace</h3><span>Docker 開発コンテナ</span></div>
+<div class="codespaces-config"><code>devcontainer.json</code><p>基本イメージ + features + 作成後のセットアップ</p></div>
+<p class="codespaces-tools"><strong>事前設定：</strong>Copilot / MCP server / VS Code 拡張 / linter</p>
+<p class="codespaces-repeatable">同じ設定から、誰でも同じ開発環境へ。</p>
+</div>
+</div>
+<figcaption class="codespaces-compute">
+<p><span>必要に応じて最大</span><strong>32 <span>core</span></strong><strong>128 <span>GB RAM</span></strong><strong>128 <span>GB ストレージ</span></strong></p>
+<p>起動後もサイズ変更可能。重いビルドや並列実行に合わせて拡張。<span>利用状況とポリシーにより制限あり。2026-11-16 時点。</span></p>
+</figcaption>
+</figure>
 
 ## メリット
 

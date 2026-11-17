@@ -53,35 +53,33 @@ links:
 
 ## GitHub License & Service Procurement
 
-<div style="font-size:0.56em;line-height:1.25;--proc-row:8.45rem;--proc-gap:0.6rem;--proc-label:5.4rem;--proc-navy:var(--c-neon-magenta);--proc-gray:var(--c-gb-green);--proc-blue:var(--c-neon-cyan);--proc-copilot:var(--c-crt-amber);--proc-panel:rgb(var(--rgb-deep-purple) / 0.86);--proc-card:rgb(var(--rgb-shadow-ink) / 0.92);--proc-card-border:rgb(var(--rgb-neon-cyan) / 0.46);--proc-copilot-border:rgb(var(--rgb-crt-amber) / 0.85);--proc-head:var(--c-neon-magenta);--proc-accent:var(--c-neon-cyan);--proc-dark:var(--c-shadow-ink);--proc-ink:var(--c-phosphor);">
-
-Overview of how GitHub services are licensed and billed.
+<div class="admin-procurement" style="font-size:18px;line-height:1.25;--proc-rows:180px 120px 180px;--proc-gap:0.6rem;--proc-label:7rem;--proc-navy:var(--c-neon-magenta);--proc-gray:var(--c-gb-green);--proc-blue:var(--c-neon-cyan);--proc-copilot:var(--c-crt-amber);--proc-panel:rgb(var(--rgb-deep-purple) / 0.86);--proc-card:rgb(var(--rgb-shadow-ink) / 0.92);--proc-card-border:rgb(var(--rgb-neon-cyan) / 0.46);--proc-copilot-border:rgb(var(--rgb-crt-amber) / 0.85);--proc-head:var(--c-neon-magenta);--proc-accent:var(--c-neon-cyan);--proc-dark:var(--c-shadow-ink);--proc-ink:var(--c-phosphor);">
 
 <div style="display:grid;grid-template-columns:minmax(0,1fr) 16.5rem;gap:1.05rem;align-items:start;margin-top:0.9rem;max-width:72rem;">
-<div style="display:grid;grid-template-rows:repeat(3,var(--proc-row));gap:var(--proc-gap);">
+<div style="display:grid;grid-template-rows:var(--proc-rows);gap:var(--proc-gap);">
 <div style="display:grid;grid-template-columns:var(--proc-label) minmax(0,1fr);gap:0.25rem;min-height:0;">
 <div style="display:flex;align-items:center;justify-content:center;text-align:center;background:var(--proc-head);color:var(--proc-dark);font-weight:700;font-size:1.1em;line-height:1.35;border-bottom:0.6rem solid rgb(var(--rgb-shadow-ink) / 0.95);">User<br/>License</div>
-<div style="background:var(--proc-panel);color:var(--proc-ink);padding:0.3rem 0.7rem 0.55rem;">
-<div style="text-align:center;font-weight:700;font-size:1.05em;color:var(--proc-accent);margin-bottom:0.38rem;">Licenses for GitHub Enterprise usage</div>
+<div style="background:var(--proc-panel);color:var(--proc-ink);padding:0.2rem 0.7rem;">
+<div style="text-align:center;font-weight:700;font-size:1.05em;color:var(--proc-accent);margin-bottom:0.2rem;">Licenses for GitHub Enterprise usage</div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
-<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);height:100%;display:grid;grid-template-rows:auto 1fr;">
+<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);min-height:0;display:grid;grid-template-rows:auto 1fr;">
 <div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.22rem 0.35rem;font-size:1.08em;">Visual Studio subscriptions</div>
 <div style="padding:0.45rem 0.55rem;font-weight:600;">・For users who need a Visual Studio subscription</div>
 </div>
-<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);height:100%;display:grid;grid-template-rows:auto 1fr;">
+<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);min-height:0;display:grid;grid-template-rows:auto 1fr;">
 <div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.22rem 0.35rem;font-size:1.08em;">GitHub Enterprise</div>
-<div style="padding:0.45rem 0.55rem;font-weight:600;">・Users who do not need a Visual Studio subscription<br/>・Developers / Infra / DevOps / Designers<br/>・Project managers / Stakeholders</div>
+<div style="padding:0.45rem 0.55rem;font-weight:600;">No Visual Studio subscription needed.<br/>Developers / Infra / DevOps / Designers<br/>Project managers / Stakeholders</div>
 </div>
 </div>
 </div>
 </div>
 <div style="display:grid;grid-template-columns:var(--proc-label) minmax(0,1fr);gap:0.25rem;min-height:0;">
 <div style="display:flex;align-items:center;justify-content:center;text-align:center;background:var(--proc-head);color:var(--proc-dark);font-weight:700;font-size:1.1em;line-height:1.35;border-top:0.6rem solid rgb(var(--rgb-shadow-ink) / 0.95);">Committer<br/>License</div>
-<div style="background:var(--proc-panel);color:var(--proc-ink);padding:0.3rem 0.7rem 0.55rem;display:grid;grid-template-rows:auto 1fr;">
-<div style="text-align:center;font-weight:700;font-size:1.05em;color:var(--proc-accent);margin-bottom:0.55rem;">License for DevSecOps on GitHub</div>
-<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);height:100%;display:grid;grid-template-rows:auto 1fr;">
+<div style="background:var(--proc-panel);color:var(--proc-ink);padding:0.2rem 0.7rem;display:grid;grid-template-rows:auto 1fr;">
+<div style="text-align:center;font-weight:700;font-size:1.05em;color:var(--proc-accent);margin-bottom:0.2rem;">License for DevSecOps on GitHub</div>
+<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);min-height:0;display:grid;grid-template-rows:auto 1fr;">
 <div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.22rem 0.35rem;font-size:1.08em;">GitHub Advanced Security</div>
-<div style="padding:0.62rem 0.7rem;font-weight:600;">・Users who commit or merge code</div>
+<div style="padding:0.2rem 0.7rem;font-weight:600;">・Users who commit or merge code</div>
 </div>
 </div>
 </div>
@@ -89,18 +87,18 @@ Overview of how GitHub services are licensed and billed.
 <div style="display:flex;align-items:center;justify-content:center;text-align:center;background:var(--proc-head);color:var(--proc-dark);font-weight:700;font-size:1.1em;line-height:1.35;">Metered<br/>Billing</div>
 <div style="background:var(--proc-panel);color:var(--proc-ink);padding:0.35rem 0.55rem 0.55rem;">
 <div style="text-align:center;font-weight:700;font-size:1.05em;color:var(--proc-accent);margin-bottom:0.45rem;">Usage-based add-on services</div>
-<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:0.45rem;">
-<div style="background:var(--proc-card);border:2px solid var(--proc-copilot-border);height:100%;display:grid;grid-template-rows:auto 1fr;box-shadow:0 0 12px rgb(var(--rgb-crt-amber) / 0.28);"><div style="background:var(--proc-copilot);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.18rem 0.25rem;font-size:1.03em;">Copilot<br/>Business/Enterprise</div><div style="padding:0.45rem 0.35rem;font-weight:700;color:var(--proc-copilot);">・AI-powered code suggestion service</div></div>
-<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);height:100%;display:grid;grid-template-rows:auto 1fr;"><div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.3rem 0.25rem;font-size:1.08em;">Actions</div><div style="padding:0.55rem 0.35rem;font-weight:600;">・CI/CD<br/>・Workflow automation</div></div>
-<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);height:100%;display:grid;grid-template-rows:auto 1fr;"><div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.3rem 0.25rem;font-size:1.08em;">Codespaces</div><div style="padding:0.55rem 0.35rem;font-weight:600;">・Cloud development machines</div></div>
-<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);height:100%;display:grid;grid-template-rows:auto 1fr;"><div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.3rem 0.25rem;font-size:1.08em;">Packages</div><div style="padding:0.55rem 0.35rem;font-weight:600;">・Package management</div></div>
-<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);height:100%;display:grid;grid-template-rows:auto 1fr;"><div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.3rem 0.25rem;font-size:1.08em;">LFS</div><div style="padding:0.55rem 0.35rem;font-weight:600;">・Currently free during migration</div></div>
+<div style="display:grid;grid-template-columns:1.3fr repeat(4,1fr);gap:0.45rem;">
+<div style="background:var(--proc-card);border:2px solid var(--proc-copilot-border);min-height:0;display:grid;grid-template-rows:auto 1fr;box-shadow:0 0 12px rgb(var(--rgb-crt-amber) / 0.28);"><div style="background:var(--proc-copilot);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.18rem 0.25rem;font-size:1.03em;">Copilot<br/>Business / Enterprise</div><div style="padding:0.45rem 0.35rem;font-weight:700;color:var(--proc-copilot);">AI code suggestions</div></div>
+<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);min-height:0;display:grid;grid-template-rows:auto 1fr;"><div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.3rem 0.25rem;font-size:1.08em;">Actions</div><div style="padding:0.55rem 0.35rem;font-weight:600;">・CI/CD<br/>・Workflow automation</div></div>
+<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);min-height:0;display:grid;grid-template-rows:auto 1fr;"><div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.3rem 0.25rem;font-size:1.08em;">Codespaces</div><div style="padding:0.55rem 0.35rem;font-weight:600;">・Cloud development machines</div></div>
+<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);min-height:0;display:grid;grid-template-rows:auto 1fr;"><div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.3rem 0.25rem;font-size:1.08em;">Packages</div><div style="padding:0.55rem 0.35rem;font-weight:600;">・Package management</div></div>
+<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);min-height:0;display:grid;grid-template-rows:auto 1fr;"><div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.3rem 0.25rem;font-size:1.08em;">LFS</div><div style="padding:0.55rem 0.35rem;font-weight:600;">Currently free during migration</div></div>
 </div>
 </div>
 </div>
 </div>
-<div style="position:relative;">
-<div style="position:absolute;top:-3.12rem;left:0;right:0;">
+<div class="admin-procurement-methods" style="position:relative;">
+<div style="position:absolute;top:-1.1rem;left:0;right:0;">
 <div style="background:var(--proc-navy);color:var(--proc-dark);text-align:center;font-weight:700;font-size:1.15em;padding:0.28rem 0.4rem;">Procurement methods</div>
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.65rem;align-items:center;margin-top:0.14rem;">
 <div style="width:1.55rem;height:1.55rem;border-radius:50%;background:var(--proc-navy);color:var(--proc-dark);display:flex;align-items:center;justify-content:center;margin:auto;font-weight:700;font-size:1.1em;">1</div>
@@ -109,17 +107,17 @@ Overview of how GitHub services are licensed and billed.
 </div>
 </div>
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.65rem;align-items:stretch;">
-<div style="display:grid;grid-template-rows:repeat(3,var(--proc-row));gap:var(--proc-gap);">
+<div style="display:grid;grid-template-rows:var(--proc-rows);gap:var(--proc-gap);">
 <div style="grid-row:1;background:var(--proc-gray);color:var(--proc-dark);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:1.05em;line-height:1.1;writing-mode:vertical-rl;">Subscription<br/>license</div>
 <div style="grid-row:2;background:var(--proc-gray);color:var(--proc-dark);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:1.05em;line-height:1.1;writing-mode:vertical-rl;">Subscription<br/>license</div>
 <div style="grid-row:3;background:var(--proc-blue);color:var(--proc-dark);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:1.05em;line-height:1.1;writing-mode:vertical-rl;">Metered<br/>billing model</div>
 </div>
-<div style="display:grid;grid-template-rows:repeat(3,var(--proc-row));gap:var(--proc-gap);">
+<div style="display:grid;grid-template-rows:var(--proc-rows);gap:var(--proc-gap);">
 <div style="grid-row:1;background:var(--proc-gray);color:var(--proc-dark);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:1.05em;line-height:1.1;writing-mode:vertical-rl;">Subscription<br/>license</div>
 <div style="grid-row:2;background:var(--proc-blue);color:var(--proc-dark);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:1.05em;line-height:1.1;writing-mode:vertical-rl;">Metered<br/>billing model</div>
 <div style="grid-row:3;background:var(--proc-blue);color:var(--proc-dark);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:1.05em;line-height:1.1;writing-mode:vertical-rl;">Metered<br/>billing model</div>
 </div>
-<div style="display:grid;grid-template-rows:repeat(3,var(--proc-row));gap:var(--proc-gap);">
+<div style="display:grid;grid-template-rows:var(--proc-rows);gap:var(--proc-gap);">
 <div style="grid-row:1;background:var(--proc-blue);color:var(--proc-dark);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:1.05em;line-height:1.1;writing-mode:vertical-rl;">Metered<br/>billing model</div>
 <div style="grid-row:2;background:var(--proc-blue);color:var(--proc-dark);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:1.05em;line-height:1.1;writing-mode:vertical-rl;">Metered<br/>billing model</div>
 <div style="grid-row:3;background:var(--proc-blue);color:var(--proc-dark);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:1.05em;line-height:1.1;writing-mode:vertical-rl;">Metered<br/>billing model</div>
@@ -141,17 +139,26 @@ Overview of how GitHub services are licensed and billed.
 
 ## License assignment at the Enterprise / Org level
 
-- 🏷️ **An org has exactly one Copilot plan** — Business **or** Enterprise. You can't mix tiers inside the same organization.
-- 👥 **Members of that org** are eligible for a seat of that tier. Owners assign seats from **Org Settings → Copilot → Access**.
-- 🆕 **Enterprise-level assignment (Business only, GA 2025‑10‑28)** — admins can now assign **Copilot Business** seats directly from the Enterprise settings. The license then **follows the user across every org in the enterprise**.
-- 🔒 **Users licensed by the enterprise, not through an org**, skip "Let organizations decide": those policies follow the separate **Policies for enterprise-assigned users** setting, so if it is disabled, those features are off for them. <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/enterprise/policies" target="_blank" rel="noopener noreferrer">Copilot policies ↗</a>
+<div class="admin-columns">
+<div>
 
-| Where you assign | Plan available | Who gets the seat |
-| --- | --- | --- |
-| **Org → Copilot → Access** | Business **or** Enterprise (matches the org's plan) | Members of that org |
-| **Enterprise → Copilot → Access** | **Business only** | The user, across every org in the enterprise |
+### Organization assignment
 
-> 📰 Changelog: <a href="https://github.blog/changelog/2025-10-28-managing-copilot-business-in-enterprise-is-now-generally-available/" target="_blank" rel="noopener noreferrer" class="retro-link">Managing Copilot Business in enterprise is now GA</a>
+- **One plan per org:** Business **or** Enterprise, never mixed.
+- **Who:** members of that organization.
+- **Where:** owners use **Org Settings → Copilot → Access**.
+
+</div>
+<div>
+
+### Enterprise assignment
+
+- **Business only:** the seat follows the user across every org in the enterprise.
+- **Where:** admins use **Enterprise → Copilot → Access**. <a class="retro-link" href="https://github.blog/changelog/2025-10-28-managing-copilot-business-in-enterprise-is-now-generally-available/" target="_blank" rel="noopener noreferrer">GA 2025-10-28 ↗</a>
+- **Separate policies:** "Let organizations decide" does not cover directly assigned users. Enable their features under **Policies for enterprise-assigned users**. <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/enterprise/policies" target="_blank" rel="noopener noreferrer">Copilot policies ↗</a>
+
+</div>
+</div>
 
 ## Multi-org policy & one bill
 
@@ -168,20 +175,30 @@ When the same user belongs to **multiple orgs in the same enterprise**, two thin
 
 You can extend Copilot to people who aren't members of your org — useful for vendors, contractors, and short-term partners.
 
-### Standard orgs — Outside collaborators
+<div class="admin-columns">
+<div>
 
-- 🎫 **Just assign a seat** — the dedicated Copilot toggle is gone; to give an outside collaborator Copilot, assign them a **seat** like any other member.
-- 📦 **Invite per repository** — outside collaborators don't see the rest of the org; they only get the repos you grant them.
-- 🚫 **To restrict them** — *Org → Settings → Member privileges → uncheck "Allow members to invite outside collaborators"*.
-- 💵 **Each seated outside collaborator counts as 1 license** on the enterprise invoice.
+### Standard orgs
 
-### EMU enterprises — Guest collaborators
+- **Outside collaborators:** invite per repository, with no access to the rest of the org.
+- **Assign a Copilot seat**, no separate toggle. Each seat is **one billed licence**.
+- **Block invitations:** Org Settings → Member privileges → clear **Allow members to invite outside collaborators**.
 
-- 🪪 In **Enterprise Managed Users (EMU)**, the equivalent role is **Guest collaborator** — provisioned by your IdP (Entra ID / Okta) just like regular EMU accounts.
-- 🚧 Guest collaborators **cannot access internal repositories** by default; they only see the repos / orgs they are explicitly added to.
-- 💵 A Guest collaborator with a Copilot seat is also billed as **1 license**.
+<a class="retro-link" href="https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-outside-collaborators/adding-outside-collaborators-to-repositories-in-your-organization" target="_blank" rel="noopener noreferrer">Outside collaborator setup ↗</a>
 
-> 📘 Setup guides: <a href="https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-outside-collaborators/adding-outside-collaborators-to-repositories-in-your-organization" target="_blank" rel="noopener noreferrer" class="retro-link">Adding outside collaborators</a> · <a href="https://docs.github.com/en/enterprise-cloud@latest/admin/managing-accounts-and-repositories/managing-users-in-your-enterprise/enabling-guest-collaborators" target="_blank" rel="noopener noreferrer" class="retro-link">Enabling guest collaborators (EMU)</a>
+</div>
+<div>
+
+### EMU enterprises
+
+- **Guest collaborators:** provision through your IdP (Entra ID / Okta), like other managed users.
+- **No internal repo access by default:** only explicitly granted orgs / repos.
+- **Assign a Copilot seat:** each seat is **one billed licence**.
+
+<a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/managing-accounts-and-repositories/managing-users-in-your-enterprise/enabling-guest-collaborators" target="_blank" rel="noopener noreferrer">Guest collaborator setup ↗</a>
+
+</div>
+</div>
 
 ## GHE licence management <a class="h2-doc" href="https://docs.github.com/en/billing/reference/github-license-users" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 

@@ -68,30 +68,36 @@ links:
 - **From an Issue**: Simply **assign the Issue to Copilot**. The title and body become the task specification.
 - **From the CLI**: Use `/delegate` to hand off work to Copilot Cloud Agent. You cannot delegate to other SDKs / harnesses this way.
 
-## Environment Customization (`copilot-setup-steps.yml`)
+## Environment Customization <span class="slide-heading-links"><input type="checkbox" id="demo-cloud-setup" class="demo-toggle" /><label class="h2-demo" for="demo-cloud-setup">Code</label></span>
 
-Optionally place `.github/workflows/copilot-setup-steps.yml` in your repository to **fully control the Cloud Agent's GitHub Actions environment**. Without this file, the agent runs on a default Ubuntu environment and auto-infers dependencies.
+<div class="demo-panel cloud-code-panel">
+<label class="demo-scrim" for="demo-cloud-setup" aria-label="Close code example"></label>
+<div class="demo-window" role="group" aria-label="Cloud Agent setup code">
+<div class="demo-head"><span class="demo-tag">CODE</span><span class="demo-name">copilot-setup-steps.yml</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-cloud-setup" aria-label="Close">&#10005;</label></div>
+<div class="cloud-code-example">
 
 ```yaml
 name: "Copilot Setup Steps"
-
 on: workflow_dispatch
-
 jobs:
   copilot-setup-steps:
-    runs-on: ubuntu-latest  # ← Can also switch to a larger runner / self-hosted / windows-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          lfs: true                    # Enable Git LFS
+        with: {lfs: true}
       - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-      - run: npm ci                    # Pre-install dependencies
+        with: {node-version: "20"}
+      - run: npm ci
       - run: pip install -r requirements.txt
     env:
       MY_API_BASE: https://api.example.com
 ```
+
+</div>
+</div>
+</div>
+
+Optionally place `.github/workflows/copilot-setup-steps.yml` in your repository to **fully control the Cloud Agent's GitHub Actions environment**. Without this file, the agent runs on a default Ubuntu environment and auto-infers dependencies.
 
 **What you can customize:**
 
@@ -103,36 +109,20 @@ jobs:
 - 🔑 Set **environment variables**
 - 🔥 Disable or customize the agent **firewall**
 
-## Adding External Tools with MCP Servers
+## Adding External Tools with MCP Servers <span class="slide-heading-links"><a class="h2-doc" href="https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/extend-cloud-agent-with-mcp" target="_blank" rel="noopener noreferrer">📖 Docs</a><a class="h2-demo" href="https://github.com/theomonfort-org/.github-private/settings/copilot/mcp" target="_blank" rel="noopener noreferrer">&#9658; DEMO</a></span>
 
-The **GitHub MCP server and Playwright MCP server are enabled by default** — no setup needed. To go further, Cloud Agent has a **dedicated MCP server configuration**, managed separately from local MCP settings. Just paste JSON at `Settings → Code & automation → Copilot → MCP servers` in the browser. Configured servers are automatically connected to every Cloud Agent session launched under that Org / account.
+**GitHub MCP and Playwright MCP are enabled by default.** Additional servers use **dedicated cloud settings**, separate from local MCP configuration.
 
-**Example: Adding Context7 alongside the defaults**
-
-```json
-{
-  "mcpServers": {
-    "context7": {
-      "type": "http",
-      "url": "https://mcp.context7.com/mcp",
-      "tools": ["*"]
-    }
-  }
-}
-```
-
-> 💡 For details, see <a href="https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/extend-cloud-agent-with-mcp" target="_blank" rel="noopener noreferrer" class="retro-link">Extend Cloud Agent with MCP</a>.
+Configure servers in the repository's `Settings → Copilot → MCP servers`. This shared repository configuration connects the servers to its Cloud Agent sessions.
 
 ## Validation Tools (ON by default)
 
 Cloud Agent automatically runs **4 validations** on generated code before creating the PR. **If a problem is detected, it attempts to fix it on its own** before opening the PR.
 
-| Validation tool | What it checks | Purpose |
-|---|---|---|
-| **CodeQL Code scanning** | Security vulnerabilities | Detects SQLi, XSS, dangerous API usage, etc. |
-| **Copilot Code Review** | Code quality | Flags logic bugs, unnecessary complexity, and implementation issues. |
-| **Secret Scanning** | API keys & credentials | Prevents secret leakage through generated code. |
-| **Dependency Vulnerability checks** | Dependency packages | Cross-references the GitHub Advisory Database to detect vulnerable dependency additions. |
+- **CodeQL Code scanning**
+- **Copilot Code Review**
+- **Secret Scanning**
+- **Dependency Vulnerability checks**
 
 > 💰 **Free to use** — GitHub Advanced Security license is **not required**. Toggle at `Settings → Copilot → Cloud agent → Validation tools`.
 
@@ -148,43 +138,30 @@ Cloud Agent automatically runs **4 validations** on generated code before creati
 
 Humans only **refine Issues, review, and merge**. The loop of implementation and fixes is driven by Cloud Agent.
 
-```mermaid
-%%{init: {'themeVariables': {'fontSize': '40px'}}}%%
-flowchart LR
-  subgraph Human["👤 Human (Developer)"]
-    direction TB
-    A["Refine<br/>Issue content"]
-    B["Assign Issue<br/>to Copilot"]
-    C["Leave review<br/>comments"]
-    D{"Fix<br/>complete?"}
-    M["Merge"]
-    A --> B
-  end
-
-  subgraph Copilot["☁️ Cloud Agent"]
-    direction TB
-    E["Create artifacts"]
-    F["Create PR"]
-    G["Fix issues"]
-    E --> F
-  end
-
-  B --> E
-  F --> C
-  C --> G
-  G --> D
-  D -->|"Fix rejected /<br/>additional feedback"| C
-  D -->|"OK"| M
-  M -.->|"Next Issue"| A
-
-  classDef human fill:#0b1420,stroke:#5eead4,color:#5eead4,stroke-width:2px
-  classDef agent fill:#1a1500,stroke:#fcd34d,color:#fcd34d,stroke-width:2px
-  classDef decide fill:#11162c,stroke:#93a8ff,color:#93a8ff,stroke-width:2px
-  classDef done fill:#0a1a14,stroke:#86efac,color:#86efac,stroke-width:2px
-  class A,B,C human
-  class E,F,G agent
-  class D decide
-  class M done
-```
-
-> The human's task is **judgment and decision-making**, Copilot's task is **implementation and iteration**. By separating these responsibilities, PRs flow through the pipeline like a conveyor belt.
+<figure class="cloud-swimlane-figure" role="group" aria-labelledby="cloud-workflow-caption">
+<div class="cloud-swimlane">
+<div class="cloud-lane cloud-lane-agent"><strong>☁️ Cloud Agent</strong></div>
+<div class="cloud-lane cloud-lane-human"><strong>👤 Human (Developer)</strong></div>
+<svg class="cloud-lane-connectors" viewBox="0 0 1100 360" aria-hidden="true">
+<defs><marker id="cloud-lane-arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 10 5 0 10z" fill="#93a8ff"/></marker></defs>
+<g marker-end="url(#cloud-lane-arrow)">
+<path d="M170 252H190V245H210"/><path d="M285 205V170H360V122"/><path d="M435 89H490"/>
+<path d="M560 122V180H550V205"/><path d="M630 245H685V175H795V122"/><path d="M860 122V170H835V190"/>
+<path d="M890 245H920V252H945"/><path d="M835 300V316H550V285"/>
+<path class="cloud-next-connector" d="M1010 285V347H100V285"/>
+</g>
+</svg>
+<div class="cloud-lane-node cloud-node-artifacts">Create<br />artifacts</div>
+<div class="cloud-lane-node cloud-node-pr">Create PR</div>
+<div class="cloud-lane-node cloud-node-fix">Fix<br />instructions</div>
+<div class="cloud-lane-node cloud-node-issue">Refine<br />Issue</div>
+<div class="cloud-lane-node cloud-node-assign">Assign to<br />Copilot</div>
+<div class="cloud-lane-node cloud-node-review">Review<br />comments</div>
+<div class="cloud-lane-node cloud-node-decision"><span>Fixed?</span></div>
+<div class="cloud-lane-node cloud-node-merge">Merge</div>
+<span class="cloud-edge-label cloud-label-ok">OK</span>
+<span class="cloud-edge-label cloud-label-feedback">Not fixed / more feedback</span>
+<span class="cloud-edge-label cloud-label-next">Next Issue</span>
+</div>
+<figcaption id="cloud-workflow-caption" hidden>Humans refine and assign an Issue. Cloud Agent creates artifacts and a PR. Human review sends fix instructions to Cloud Agent; humans check the result, request further fixes as needed, and merge when complete. The next Issue restarts the loop.</figcaption>
+</figure>

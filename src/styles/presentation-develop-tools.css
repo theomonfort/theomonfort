@@ -1,0 +1,270 @@
+/* Presentation refinements for Copilot app, CLI, and Chat. */
+body.present-mode .playbook-detail[data-category="develop"]:is([data-playbook-slug="copilot-app"], [data-playbook-slug="cli"], [data-playbook-slug="copilot-chat"]) .links-aside {
+  padding: 14px 20px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"]:is([data-playbook-slug="copilot-app"], [data-playbook-slug="cli"], [data-playbook-slug="copilot-chat"]) .links-aside > div {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 28px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"]:is([data-playbook-slug="copilot-app"], [data-playbook-slug="cli"], [data-playbook-slug="copilot-chat"]) .links-aside > div > div {
+  margin: 0;
+  min-width: 0;
+}
+
+body.present-mode .playbook-detail[data-category="develop"]:is([data-playbook-slug="copilot-app"], [data-playbook-slug="cli"], [data-playbook-slug="copilot-chat"]) .links-aside-title {
+  margin-bottom: 12px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"]:is([data-playbook-slug="copilot-app"], [data-playbook-slug="cli"], [data-playbook-slug="copilot-chat"]) .links-aside-group {
+  margin-bottom: 6px;
+  padding-bottom: 4px;
+  font-size: 20px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"]:is([data-playbook-slug="copilot-app"], [data-playbook-slug="cli"], [data-playbook-slug="copilot-chat"]) .links-aside-item {
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+body.present-mode .playbook-detail[data-category="develop"]:is([data-playbook-slug="copilot-app"], [data-playbook-slug="cli"], [data-playbook-slug="copilot-chat"]) .links-aside-item + .links-aside-item {
+  margin-top: 6px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="copilot-chat"] .links-aside > div > div:first-child {
+  grid-row: span 2;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .links-aside > div > div:last-child {
+  grid-column: 2;
+  grid-row: 2 / span 2;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .ctl-widget {
+  font-size: 22px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .ctl-btn {
+  padding-block: 5px;
+  font-size: 22px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .ctl-body {
+  padding: 8px 12px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .ctl-row {
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .cli-features {
+  margin-top: 20px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .cli-features li {
+  margin-block: 0;
+  line-height: 1.6;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .cli-features li + li {
+  margin-top: 14px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .cli-built-ins {
+  margin-top: 20px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .cli-built-ins .ctl-btn {
+  padding-block: 8px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .cli-built-ins .ctl-row {
+  font-size: 22px;
+  line-height: 1.45;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .cli-tui > p {
+  line-height: 1.6;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .cli-tui table {
+  margin-block: 24px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .cli-tui table :is(th, td) {
+  padding-block: 10px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .cli-tui blockquote {
+  margin-bottom: 0;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .det-widget {
+  font-size: 22px;
+  margin-block: 12px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .det-split {
+  --det-col: 10em;
+  min-height: 340px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .det-pane {
+  padding: 14px 18px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .det-why {
+  font-size: 22px;
+  line-height: 1.45;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cli"] .cli-commands,
+.playbook-detail[data-category="develop"][data-playbook-slug="copilot-chat"] .chat-continuity {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cli"] .cli-commands > *,
+.playbook-detail[data-category="develop"][data-playbook-slug="copilot-chat"] .chat-continuity > * {
+  min-width: 0;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .cli-commands table {
+  margin: 0;
+  font-size: 20px;
+  table-layout: fixed;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .cli-commands table :is(th, td):first-child {
+  width: 180px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .cli-commands table :is(th, td) {
+  padding: 3px 10px;
+  line-height: 1.35;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .cli-budget {
+  font-size: 20px;
+  line-height: 1.4;
+  margin-block: 12px 0;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="copilot-chat"] .chat-continuity {
+  align-items: start;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="copilot-chat"] .chat-surfaces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="copilot-chat"] .chat-surfaces li {
+  margin: 0;
+  padding: 5px 12px;
+  border: 1px solid rgb(var(--rgb-neon-magenta) / 0.35);
+  background: rgb(var(--rgb-midnight) / 0.55);
+  font-size: 20px;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="copilot-chat"] .chat-continuity h3 {
+  margin: 0 0 12px;
+  color: var(--c-neon-cyan);
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="copilot-chat"] .chat-continuity > section + section {
+  padding-left: 24px;
+  border-left: 1px solid rgb(var(--rgb-crt-amber) / 0.35);
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="copilot-chat"] .chat-continuity > section + section h3 {
+  color: var(--c-crt-amber);
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="copilot-chat"] .chat-policy {
+  display: grid;
+  gap: 6px;
+  padding-top: 12px;
+  border-top: 1px solid rgb(var(--rgb-neon-magenta) / 0.35);
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="copilot-chat"] .chat-continuity {
+  margin-block: 16px;
+  font-size: 22px;
+  line-height: 1.45;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="copilot-chat"] .chat-continuity h3 {
+  font-size: 24.8px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="copilot-chat"] .chat-continuity ul {
+  margin: 0;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="copilot-chat"] .chat-continuity li + li {
+  margin-top: 12px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="copilot-chat"] .chat-policy {
+  margin-block: 0;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cli"] .cli-duck-diagram svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: var(--font-prose), sans-serif;
+}
+
+body:not(.present-mode) .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .cli-duck-diagram {
+  overflow-x: auto;
+}
+
+body:not(.present-mode) .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .cli-duck-diagram svg {
+  min-width: 900px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .cli-duck-diagram {
+  margin-block: 12px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="copilot-app"] .app-demo-scenario {
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="copilot-app"] .app-demo-scenario .app-demo-lead {
+  font-size: 24.8px;
+  margin-bottom: 12px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="copilot-app"] .app-demo-stage {
+  padding: 12px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="copilot-app"] .playbook-video-help {
+  font-size: 20px;
+}
+
+@media (max-width: 767px) {
+  .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .cli-commands,
+  .playbook-detail[data-category="develop"][data-playbook-slug="copilot-chat"] .chat-continuity {
+    grid-template-columns: 1fr;
+  }
+
+  .playbook-detail[data-category="develop"][data-playbook-slug="copilot-chat"] .chat-continuity > section + section {
+    padding: 16px 0 0;
+    border-left: 0;
+    border-top: 1px solid rgb(var(--rgb-crt-amber) / 0.35);
+  }
+}

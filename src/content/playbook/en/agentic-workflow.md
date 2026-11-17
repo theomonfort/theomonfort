@@ -71,7 +71,7 @@ Existing **runner groups and Actions policies** still apply.
 | 🔍 **CI Failure Analyst** | Analyzes failed CI runs, **identifies root causes, and comments on the PR** |
 | 📝 **Docs Maintainer** | Detects stale links, examples, and API descriptions, then **opens a fix PR aligned with the latest implementation** |
 
-> 🧪 The sample collection <a href="https://github.com/githubnext/agentics" target="_blank" rel="noopener noreferrer" class="retro-link">githubnext/agentics</a> has ready-to-run templates. Copy-paste to get started.<br />📝 Reading the developer blog <a href="https://github.github.com/gh-aw/blog/2026-01-12-welcome-to-pelis-agent-factory/" target="_blank" rel="noopener noreferrer" class="retro-link">Peli's Agent Factory</a> first gives you a good feel for how it all works.
+Start with templates in <a href="https://github.com/githubnext/agentics" target="_blank" rel="noopener noreferrer" class="retro-link">githubnext/agentics</a> and examples from <a href="https://github.github.com/gh-aw/blog/2026-01-12-welcome-to-pelis-agent-factory/" target="_blank" rel="noopener noreferrer" class="retro-link">Peli's Agent Factory</a>.
 
 ## Getting started (4 steps) <a class="h2-doc" href="https://github.github.com/gh-aw/setup/quick-start/" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="code-agentic-workflow" class="demo-toggle" /><label class="h2-demo h2-info" for="code-agentic-workflow">&lt;/&gt; CODE</label>
 

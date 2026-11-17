@@ -80,8 +80,8 @@ links:
 
 1 ステップあたり **99%** の精度でも、**50 ステップ** のワークフローでは最終精度は **約 60%** まで低下します。LLM は非決定的なので、小さな誤差は対処しないと **複利で効いてきます**。最速のトークン削減策は、**小さなミスを早めに見つけて「リトライを起こさせない」** ことです。
 
-<div style="max-width:80%;margin:1.5em auto;">
-<svg viewBox="0 0 560 344" role="img" aria-label="N ステップ後の成功率" style="width:100%;height:auto;font-family:inherit;overflow:visible">
+<div class="compound-error-chart">
+<svg viewBox="0 0 570 356" role="img" aria-label="N ステップ後の成功率" style="width:100%;height:auto;font-family:inherit;">
 <line x1="150" y1="22" x2="178" y2="22" stroke="var(--c-coral-alert)" stroke-width="3"/><circle cx="164" cy="22" r="3" fill="var(--c-coral-alert)"/>
 <text x="186" y="27" fill="var(--c-coral-alert)" font-size="14" font-weight="700">95% / ステップ</text>
 <line x1="320" y1="22" x2="348" y2="22" stroke="var(--c-gb-green)" stroke-width="3"/><circle cx="334" cy="22" r="3" fill="var(--c-gb-green)"/>
@@ -124,7 +124,7 @@ links:
 
 ## Advice 3 — プロンプトエンジニアリング
 
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2em;margin:1.8em 0;">
+<div class="token-panels token-prompt-rules">
 <div style="padding:1.4em 1.2em;border:1px solid rgb(var(--rgb-gb-green) / 0.35);background:rgb(var(--rgb-shadow-ink) / 0.5);"><div style="font-family: 'Noto Sans JP', sans-serif;font-size:0.78em;letter-spacing:0.2em;color:var(--c-gb-green);text-transform:uppercase;margin-bottom:0.8em;">✓ ルール 01</div><div style="font-size:1.2em;font-weight:bold;color:var(--c-phosphor);margin-bottom:0.5em;line-height:1.3;">明確に</div><div style="color:rgb(var(--rgb-phosphor) / 0.65);font-size:0.95em;line-height:1.5;">目的・制約・「完了」の条件まで書く。</div></div>
 <div style="padding:1.4em 1.2em;border:1px solid rgb(var(--rgb-neon-cyan) / 0.35);background:rgb(var(--rgb-shadow-ink) / 0.5);"><div style="font-family: 'Noto Sans JP', sans-serif;font-size:0.78em;letter-spacing:0.2em;color:var(--c-neon-cyan);text-transform:uppercase;margin-bottom:0.8em;">✓ ルール 02</div><div style="font-size:1.2em;font-weight:bold;color:var(--c-phosphor);margin-bottom:0.5em;line-height:1.3;">停止条件を入れる</div><div style="color:rgb(var(--rgb-phosphor) / 0.65);font-size:0.95em;line-height:1.5;">「X なら止まれ」で探索の暴走を防ぐ。</div></div>
 <div style="padding:1.4em 1.2em;border:1px solid rgb(var(--rgb-crt-amber) / 0.35);background:rgb(var(--rgb-shadow-ink) / 0.5);"><div style="font-family: 'Noto Sans JP', sans-serif;font-size:0.78em;letter-spacing:0.2em;color:var(--c-crt-amber);text-transform:uppercase;margin-bottom:0.8em;">✓ ルール 03</div><div style="font-size:1.2em;font-weight:bold;color:var(--c-phosphor);margin-bottom:0.5em;line-height:1.3;">事前にコンテキストを渡す</div><div style="color:rgb(var(--rgb-phosphor) / 0.65);font-size:0.95em;line-height:1.5;">ファイル・フォルダ・URL・エラーログ ── agent に探させないで済むものは全部。</div></div>
@@ -134,10 +134,10 @@ links:
 
 ## Advice 4 — Research → Plan → Implement
 
-**タスクを分割統治する。** 調査・計画・実装を **1 セッション** でまとめてやらないでください。コンテキストが汚染され、エージェントが迷子になります。3 つの順次エージェントに分け、それぞれに必要最小限のコンテキストだけを渡します。
+**調査、計画、実装は別のコンテキストで。** 調査で必要なファイルを選び、計画で仕様を固めてから実装。会話全体ではなく、必要な成果だけを次へ渡します。
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 130 1100 475" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
+<svg class="research-plan-implement" viewBox="0 130 1100 350" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Research で必要なファイルを選び、Plan 用の情報を渡す。新しい Plan のコンテキストで仕様を作り、新しい実装のコンテキストで仕様と必要なファイルから変更する。モデルの割り当ては例。" style="width:100%;height:auto;display:block;font-family:inherit;">
 <rect x="155" y="150" width="320" height="68" rx="10" fill="var(--c-deep-purple)" stroke="var(--c-neon-magenta)" stroke-width="2"/>
 <text x="175" y="180" fill="var(--c-phosphor)" font-size="13" font-weight="bold">“I WANT TO CHANGE X.</text>
 <text x="175" y="202" fill="var(--c-phosphor)" font-size="13" font-weight="bold">WHAT FILES ARE RELEVANT?”</text>
@@ -177,8 +177,9 @@ links:
 <rect x="863" y="265" width="110" height="55" rx="12" fill="var(--c-neon-cyan)"/>
 <text x="918" y="290" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">PLAN</text>
 <text x="918" y="306" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">INPUT</text>
-<path d="M 945 320 L 945 365 L 425 365 L 425 393" fill="none" stroke="var(--c-neon-cyan)" stroke-width="2"/>
-<circle cx="425" cy="394" r="5" fill="var(--c-neon-cyan)"/>
+<path d="M 945 320 L 945 328 L 425 328 L 425 334" fill="none" stroke="var(--c-neon-cyan)" stroke-width="2"/>
+<circle cx="425" cy="334" r="5" fill="var(--c-neon-cyan)"/>
+<g transform="translate(0,-60)">
 <text x="20" y="422" fill="var(--c-phosphor)" font-size="14" font-weight="bold">/PLAN</text>
 <text x="20" y="440" fill="var(--c-gb-green)" font-size="11" letter-spacing="1">OPUS 4.7</text>
 <rect x="155" y="395" width="110" height="55" rx="12" fill="var(--c-gb-green)"/>
@@ -198,8 +199,10 @@ links:
 <rect x="786" y="395" width="120" height="55" rx="12" fill="var(--c-neon-cyan)"/>
 <text x="846" y="420" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">PRECISE</text>
 <text x="846" y="436" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">SPEC</text>
-<path d="M 875 450 L 875 495 L 430 495 L 430 523" fill="none" stroke="var(--c-neon-cyan)" stroke-width="2"/>
-<circle cx="430" cy="524" r="5" fill="var(--c-neon-cyan)"/>
+</g>
+<path d="M 875 390 L 875 398 L 430 398 L 430 404" fill="none" stroke="var(--c-neon-cyan)" stroke-width="2"/>
+<circle cx="430" cy="404" r="5" fill="var(--c-neon-cyan)"/>
+<g transform="translate(0,-120)">
 <text x="20" y="552" fill="var(--c-phosphor)" font-size="14" font-weight="bold">/FLEET</text>
 <text x="20" y="570" fill="var(--c-gb-green)" font-size="11" letter-spacing="1">GPT 5.4</text>
 <rect x="155" y="525" width="110" height="55" rx="12" fill="var(--c-gb-green)"/>
@@ -216,17 +219,18 @@ links:
 <text x="617" y="558" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">FILE</text>
 <rect x="661" y="525" width="200" height="55" rx="12" fill="var(--c-neon-cyan)"/>
 <text x="761" y="558" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">CHANGE CALLS</text>
+</g>
 </svg>
 </figure>
 
-> 💡 <a class="retro-link" href="/theomonfort/playbook/cli">Copilot CLI ↗</a> の `/research`・`/plan`・`/fleet` がこの 3 フェーズに対応しています。各フェーズは別のコンテキストウィンドウで走るので、肥大化した Research セッションが Implementer に届きません。
+<a class="retro-link" href="/theomonfort/playbook/cli">Copilot CLI ↗</a>：`/research` → `/plan` → `/fleet`。図のモデルは一例です。
 
 ## Advice 5 — 決定的なコントロール
 
-テスト・リンター・型チェック・セキュリティスキャンは「人間のためのチェック」だけではありません ── 1 回のバグ修正が 4 段重ねの劣化スパイラルになるのを止める **トークン節約のガードレール** です。あれば **入った同じループでエラーが捕まり**、無ければ CI 時間・Copilot レビュー往復・人間のトリアージ時間で支払う羽目になります。
+**テスト、リンター、型チェック、セキュリティスキャンで、同じループ内にエラーを捕捉。** ガードレールがなければバグが複利的に増え、CI 時間、レビュー往復、人間の調査時間を浪費します。
 
 <figure class="rpi-pipeline" style="margin:2em 0;">
-<svg viewBox="0 140 1000 370" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family: 'Noto Sans JP', sans-serif;">
+<svg class="deterministic-controls" viewBox="0 140 1000 285" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="テストがあればバグを同じループで修正できる。テストがなければ 4 回の変更でバグが複利的に増え、インシデント、CI とレビューの無駄、別のデバッグセッションにつながる。" style="width:100%;height:auto;display:block;font-family:inherit;">
 <text x="20" y="183" fill="var(--c-phosphor)" font-size="13" font-weight="bold">WITH</text>
 <text x="20" y="200" fill="var(--c-phosphor)" font-size="13" font-weight="bold">UNIT TESTS</text>
 <rect x="160" y="160" width="95" height="55" rx="12" fill="var(--c-gb-green)"/>
@@ -249,6 +253,7 @@ links:
 <rect x="803" y="160" width="130" height="55" rx="12" fill="var(--c-gb-green)"/>
 <text x="868" y="185" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">SUCCEEDING</text>
 <text x="868" y="201" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">TESTS</text>
+<g transform="translate(0,-35)">
 <text x="20" y="298" fill="var(--c-phosphor)" font-size="13" font-weight="bold">WITHOUT</text>
 <text x="20" y="315" fill="var(--c-phosphor)" font-size="13" font-weight="bold">UNIT TESTS</text>
 <rect x="160" y="275" width="95" height="55" rx="12" fill="var(--c-gb-green)"/>
@@ -276,8 +281,10 @@ links:
 <text x="228" y="354" fill="var(--c-phosphor)" font-size="11" font-weight="bold">WASTED CI/CD MINUTES,</text>
 <text x="228" y="370" fill="var(--c-phosphor)" font-size="11" font-weight="bold">COPILOT REVIEW CYCLES,</text>
 <text x="228" y="386" fill="var(--c-phosphor)" font-size="11" font-weight="bold">HUMAN TIME ETC.</text>
-<line x1="10" y1="395" x2="10" y2="415" stroke="var(--c-gb-green)" stroke-width="2"/>
-<polygon points="6,410 14,410 10,420" fill="var(--c-gb-green)"/>
+</g>
+<line x1="10" y1="357" x2="10" y2="362" stroke="var(--c-gb-green)" stroke-width="2"/>
+<polygon points="6,360 14,360 10,368" fill="var(--c-gb-green)"/>
+<g transform="translate(0,-60)">
 <text x="20" y="438" fill="var(--c-phosphor)" font-size="13" font-weight="bold">DEBUGGING</text>
 <text x="20" y="455" fill="var(--c-phosphor)" font-size="13" font-weight="bold">SESSION</text>
 <rect x="160" y="420" width="95" height="55" rx="12" fill="var(--c-gb-green)"/>
@@ -289,6 +296,7 @@ links:
 <text x="456" y="453" fill="var(--c-phosphor)" font-size="11" font-weight="bold" text-anchor="middle">BUGGY RESEARCH</text>
 <rect x="554" y="420" width="110" height="55" rx="12" fill="var(--c-gb-green)"/>
 <text x="609" y="453" fill="var(--c-shadow-ink)" font-size="11" font-weight="bold" text-anchor="middle">BUG FIX</text>
+</g>
 </svg>
 </figure>
 
@@ -297,8 +305,6 @@ links:
 ## Advice 6 — モデル選びと Auto モード <a class="h2-doc" href="https://docs.github.com/copilot/concepts/models/auto-model-selection" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 タスクに合うモデルを選びましょう。typo 修正に Reasoning モデルの料金を払う必要はありません。
-
-<style>.advice6-models td:first-child,.advice6-models th:first-child{min-width:200px;white-space:nowrap;}</style>
 
 <div class="advice6-models">
 
@@ -317,12 +323,12 @@ links:
 
 同じ意味の文でも、日本語は英語の **約 2〜3 倍のトークン** を消費します。`copilot-instructions.md`・Skill の description・MCP のツール定義・コードコメントなど **常時オン** のテキストでは、この差が **毎ループに課税** されます。
 
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2em;margin:1.8em 0;">
+<div class="token-panels token-language-comparison">
 <div style="padding:1.4em 1.2em;border:1px solid rgb(var(--rgb-gb-green) / 0.35);background:rgb(var(--rgb-shadow-ink) / 0.5);"><div style="font-family: 'Noto Sans JP', sans-serif;font-size:0.78em;letter-spacing:0.2em;color:var(--c-gb-green);text-transform:uppercase;margin-bottom:0.8em;">🇬🇧 ENGLISH</div><div style="font-size:1.05em;color:var(--c-phosphor);margin-bottom:1.2em;line-height:1.5;font-style:italic;">Always run tests before committing changes</div><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:1em;line-height:1.4;"><span style="background:var(--c-gb-green);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">Always</span><span style="background:var(--c-gb-green);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">·run</span><span style="background:var(--c-gb-green);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">·tests</span><span style="background:var(--c-gb-green);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">·before</span><span style="background:var(--c-gb-green);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">·committing</span><span style="background:var(--c-gb-green);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">·changes</span></div><div style="font-size:1.1em;color:var(--c-gb-green);font-weight:700;font-family:'JetBrains Mono',monospace;">= 6 トークン</div></div>
 <div style="padding:1.4em 1.2em;border:1px solid rgb(var(--rgb-neon-magenta) / 0.35);background:rgb(var(--rgb-shadow-ink) / 0.5);"><div style="font-family: 'Noto Sans JP', sans-serif;font-size:0.78em;letter-spacing:0.2em;color:var(--c-neon-magenta);text-transform:uppercase;margin-bottom:0.8em;">🇯🇵 JAPANESE</div><div style="font-size:1.05em;color:var(--c-phosphor);margin-bottom:1.2em;line-height:1.5;font-style:italic;">変更をコミットする前に必ずテストを実行して</div><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:1em;line-height:1.4;"><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">変更</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">を</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">コミ</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">ット</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">する</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">前</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">に</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">必</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">ず</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">テ</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">スト</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">を</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">実</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">行</span><span style="background:var(--c-neon-magenta);color:var(--c-shadow-ink);padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.82em;font-weight:600;">して</span></div><div style="font-size:1.1em;color:var(--c-neon-magenta);font-weight:700;font-family:'JetBrains Mono',monospace;">= 15 トークン（約 2.5 倍）</div></div>
 </div>
 
-<div style="font-size:0.85em;color:rgb(var(--rgb-phosphor) / 0.55);margin:-0.5em 0 1.5em;font-style:italic;">トークン数は OpenAI の <code>o200k_base</code>（<strong>GPT-5.x・GPT-4o・o1・o3</strong> が使用するトークナイザ）で計測。旧 <code>cl100k_base</code>（GPT-4 / GPT-3.5）では日本語側が 22 トークン（約 3.7 倍）でした。</div>
+<div class="token-measurement">OpenAI の <code>o200k_base</code>（<strong>GPT-5.x / GPT-4o / o1 / o3</strong>）で計測。旧 <code>cl100k_base</code>（GPT-4 / GPT-3.5）では日本語が 22 トークン（約 3.7 倍）。</div>
 
 > 🔬 **自分で確認:** <a class="retro-link" href="https://tiktokenizer.vercel.app/" target="_blank" rel="noopener">tiktokenizer.vercel.app ↗</a> や <a class="retro-link" href="https://platform.openai.com/tokenizer" target="_blank" rel="noopener">platform.openai.com/tokenizer ↗</a> に同じ指示文を英日で貼り付け、トークン数を見比べてください。
 

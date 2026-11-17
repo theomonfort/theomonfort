@@ -92,7 +92,7 @@ GitHub.com の EMU と比べた差分。❌ は使えない、⚠️ は条件�
 
 📖 <a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/admin/data-residency/feature-overview-for-github-enterprise-cloud-with-data-residency" target="_blank" rel="noopener noreferrer">GHE.com の機能の概要 ↗</a>　📖 <a class="retro-link" href="https://docs.github.com/ja/enterprise-server@latest/admin/overview/about-github-enterprise-server" target="_blank" rel="noopener noreferrer">GHES について ↗</a>
 
-<div class="ctl-widget">
+<div class="ctl-widget admin-picker">
 <p class="ctl-hint">▸ + をクリックして詳細を表示</p>
 <div class="ctl-list">
 <details class="ctl-item" name="ghe-gaps">
@@ -376,7 +376,7 @@ flowchart LR
 
 ## GitHub.com → EMU / GHE.com (GEI) <a class="h2-doc" href="https://docs.github.com/ja/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/migrating-organizations-from-githubcom-to-github-enterprise-cloud" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-<div class="ctl-widget ctl-stable ctl-tight">
+<div class="ctl-widget ctl-stable ctl-tight admin-picker">
 <div class="ctl-list">
 <details class="ctl-item" name="emu-org-migration">
 <summary class="ctl-btn"><span class="ctl-name">一言で</span><span class="ctl-toggle" aria-hidden="true"></span></summary>

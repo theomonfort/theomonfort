@@ -58,5 +58,3 @@ GitHub Apps extend functionality with least-privilege, the official way to integ
 - 🔑 Run on short-lived tokens (safer than PATs)
 - 🏢 Install org-wide and share with everyone
 - 🧩 Many ready-made apps on the Marketplace (e.g. Slack, Jira, Sentry, SonarCloud)
-
-> 🎯 Lean on **Apps**, not PATs, for automation and external integrations.

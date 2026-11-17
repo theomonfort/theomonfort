@@ -58,5 +58,3 @@ GitHub Apps は最小権限で機能を拡張する公式の連携方式。個�
 - 🔑 短命トークンで動く (PAT より安全)
 - 🏢 組織にインストールして全員で共有
 - 🧩 Marketplace に多数の既製アプリ (例: Slack・Jira・Sentry・SonarCloud)
-
-> 🎯 自動化や外部連携は PAT ではなく **App** に寄せるのが定石。

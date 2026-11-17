@@ -12,6 +12,7 @@ accent:
   hex: "#93a8ff"
 order: 29.5
 category: administration
+archived: true
 related: ['license-management']
 links:
   - group: 📖 Official Documentation
@@ -41,6 +42,9 @@ links:
 
 ## Create an Enterprise (30-day trial)
 
+<div class="admin-columns admin-setup">
+<div>
+
 First, create a **GitHub Enterprise Cloud** account. A 30-day free trial is available.
 
 | Type | Link |
@@ -50,9 +54,18 @@ First, create a **GitHub Enterprise Cloud** account. A 30-day free trial is avai
 
 During creation, the **Data hosting** option lets you choose between **GitHub Enterprise Cloud** (github.com) or **Data Residency** (a dedicated regional subdomain on GHE.com).
 
+</div>
+<div>
+
 ![Data hosting options](/theomonfort/playbook/img/enterprise-data-hosting.png)
 
+</div>
+</div>
+
 ## EMU: Admin account initial setup
+
+<div class="admin-columns admin-setup">
+<div>
 
 When you choose EMU, a **dedicated admin account** (`shortname_admin`) is automatically created.
 
@@ -60,9 +73,15 @@ When you choose EMU, a **dedicated admin account** (`shortname_admin`) is automa
 2. Log in with the admin account → the **Overview** tab shows the setup steps
 3. Follow the steps to configure SSO and provisioning
 
+> ⚠️ This admin account is only for configuring SSO and SCIM provisioning. For day-to-day development, use user accounts provisioned through your IdP.
+
+</div>
+<div>
+
 ![EMU admin Overview](/theomonfort/playbook/img/enterprise-emu-admin-overview.png)
 
-> ⚠️ This admin account is only for configuring SSO and SCIM provisioning. For day-to-day development, use user accounts provisioned through your IdP.
+</div>
+</div>
 
 ## SSO method: OIDC vs SAML
 
@@ -80,6 +99,9 @@ When enabling SSO, you choose between **OIDC** or **SAML**.
 
 ## Register the app in Entra ID
 
+<div class="admin-columns admin-registration">
+<div>
+
 To configure SSO, add an **Enterprise Application** in **Entra ID**.
 
 | SSO method | Application to add | Tutorial |
@@ -92,6 +114,9 @@ To configure SSO, add an **Enterprise Application** in **Entra ID**.
 <img src="/theomonfort/playbook/img/entra-app-emu-saml.png" alt="GitHub Enterprise Managed User" style="max-width:48%;" />
 </div>
 
+</div>
+<div>
+
 ### SAML: GitHub ↔ Entra ID field mapping
 
 In GitHub's **Identity provider** settings, fill in the following. The Entra ID values can be found under **Enterprise Application → Manage → Single sign-on**.
@@ -102,33 +127,54 @@ In GitHub's **Identity provider** settings, fill in the following. The Entra ID 
 | **Issuer** | Microsoft Entra Identifier |
 | **Public certificate** | Certificate (Base64) — paste the text content from the file |
 
+</div>
+</div>
+
 ## SCIM Provisioning configuration
 
-Once SSO is configured, set up **Provisioning** (automatic user sync).
+After SSO, configure automatic user provisioning in **Entra ID → Enterprise Application → Manage → Provisioning**.
 
-In Entra ID under **Enterprise Application → Manage → Provisioning**, fill in:
+<div class="admin-columns admin-setup">
+<div>
+
+### Provisioning fields
 
 - **Tenant URL**: `https://api.github.com/scim/v2/enterprises/<enterprise-slug>`
 - **Secret Token**: A **Personal Access Token (PAT)** created with the GitHub setup user (`shortname_admin`)
+
+</div>
+<div>
 
 ![Provisioning configuration](/theomonfort/playbook/img/entra-provisioning-config.png)
 
 > Create the PAT in GitHub under **Settings → Developer settings → Personal access tokens** with the `admin:enterprise` scope.
 
-Once configured, add security groups or users to the app under **Users and groups**. Entra ID automatically provisions them to GitHub Enterprise **every ~40 minutes**.
+</div>
+</div>
+
+Add security groups or users under **Users and groups**. Entra ID provisions them to GitHub Enterprise **every ~40 minutes**.
 
 ## IdP Group and Team sync
 
-By default, provisioned users are added as **Unaffiliated** — they belong to the Enterprise but are not assigned to any Organization or Team. You can automate team membership by syncing IdP groups (**a security group in the case of Entra ID**).
+Provisioned users start **unaffiliated**, without an org or team. Sync IdP groups (**security groups in Entra ID**) to automate membership.
+
+<div class="admin-columns admin-setup">
+<div>
 
 | Configuration | Result |
 |---|---|
-| **Do nothing** | Users are added to the Enterprise but not affiliated to any Org/Team |
-| **Link an IdP group to an Enterprise Team** | IdP group members are automatically synced to the Enterprise Team |
-| **Link an IdP group to an Organization Team** | IdP group members are automatically synced to the Org Team (and auto-join the Org) |
+| **No group sync** | Enterprise only, no org/team |
+| **Enterprise Team + IdP group** | Group members sync to the Enterprise Team |
+| **Org Team + IdP group** | Group members sync to the Org Team and automatically join its org |
 
 In GitHub, go to the Team settings → **Identity Provider Group** and select the corresponding IdP group.
 
-> **For Entra ID**: you can only connect a team to a **security group**. Microsoft 365 groups and nested (parent/child) groups or teams are not supported.
+</div>
+<div>
 
 ![IdP Group sync](/theomonfort/playbook/img/enterprise-idp-group-sync.png)
+
+> **For Entra ID**: you can only connect a team to a **security group**. Microsoft 365 groups and nested (parent/child) groups or teams are not supported.
+
+</div>
+</div>

@@ -67,6 +67,9 @@ Cost centers group **enterprise metered spending**, including metered licences, 
 
 **One direct assignment per resource.** Adding it elsewhere **moves** it. Multiple team/org memberships do not split the same charge.
 
+<div class="admin-columns">
+<div>
+
 For **licence and Copilot AI costs**, the first matching cost center wins:
 
 <div class="tbl-compact">
@@ -80,11 +83,17 @@ For **licence and Copilot AI costs**, the first matching cost center wins:
 
 </div>
 
+</div>
+<div>
+
 **Verify:** in the <a class="retro-link" href="https://docs.github.com/en/billing/reference/billing-reports#detailed-usage-report" target="_blank" rel="noopener noreferrer">detailed usage report ↗</a>, filter `username` + licence `sku`, then check `organization` and `cost_center_name`.
 
 **Example:** Alice is directly in A and in a team in B: Copilot → **A**. Actions on a repo assigned to B → **B**, regardless of who runs them.
 
 Reassignment affects **future usage only**, not historical charges.
+
+</div>
+</div>
 
 ## Budget options <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/billing/how-tos/set-up-budgets" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
@@ -143,9 +152,18 @@ Enable budget alerts at **75 / 90 / 100%** (as of **2026-10-20**). Owners, billi
 
 </div>
 
+<div class="admin-columns admin-notes">
+<div>
+
 **Hard budgets do not add together.** Any exhausted applicable limit can block usage. A broad Actions/AI limit can also stop CI or security workflows.
 
-> ⚠️ New budgets count **only usage after creation**. User-level alerts are not always available; also monitor cost center or enterprise usage.
+</div>
+<div>
+
+⚠️ New budgets count **only usage after creation**. User-level alerts are not always available; also monitor cost center or enterprise usage.
+
+</div>
+</div>
 
 ## Department setup: costs, budgets, pools <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/billing/tutorials/control-costs-at-scale" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 

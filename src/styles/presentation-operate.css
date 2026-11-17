@@ -1,0 +1,119 @@
+/* Presentation refinements for the active Operate decks. */
+
+body.present-mode .playbook-detail[data-category="operate"]:is([data-playbook-slug="operational-tools"], [data-playbook-slug="agentic-workflow"], [data-playbook-slug="copilot-metrics"], [data-playbook-slug="copilot-memory"], [data-playbook-slug="token-optimization"]) .prose-akq table {
+  font-size: 22px;
+}
+
+body.present-mode .playbook-detail[data-category="operate"][data-playbook-slug="copilot-memory"] :is(.setup-card, .ctl-btn, .ctl-body) {
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+.playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] .advice6-models :is(th, td):first-child {
+  min-width: 0;
+  white-space: normal;
+}
+
+.playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] .token-panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1em;
+}
+
+.playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] .token-panels > div {
+  min-width: 0;
+}
+
+@media (max-width: 640px) {
+  .playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] .token-panels {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+body.present-mode .playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] .prose-akq > :is(figure, .token-panels) {
+  margin-block: 0.35em !important;
+}
+
+body.present-mode .playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] .prose-akq .token-panels > div {
+  padding: 0.6em 0.8em !important;
+  font-size: 22px;
+}
+
+body.present-mode .playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] .token-panels > div > div {
+  margin-bottom: 0.4em !important;
+}
+
+body.present-mode .playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] .token-panels > div > div:last-child {
+  margin-bottom: 0 !important;
+}
+
+body.present-mode .playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] .token-measurement {
+  margin-block: 0.4em !important;
+  font-size: 20px !important;
+}
+
+body.present-mode .playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] .compound-error-chart {
+  max-width: 620px;
+  margin: 0.3em auto;
+}
+
+.playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] .compound-error-chart text {
+  font-size: 16px;
+}
+
+.playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] .agent-roi-formula text:is([font-size="20"], [font-size="22"]) {
+  font-size: 32px;
+}
+
+body:not(.present-mode) .playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] :is(.rpi-pipeline, .agent-roi-formula, .compound-error-chart) {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+body:not(.present-mode) .playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] :is(.rpi-pipeline, .agent-roi-formula) svg {
+  min-width: 1000px;
+}
+
+body:not(.present-mode) .playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] .compound-error-chart svg {
+  min-width: 570px;
+}
+
+.playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] :is(.research-plan-implement, .deterministic-controls) text {
+  font-size: 17px;
+}
+
+.playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] :is(.research-plan-implement, .deterministic-controls) text[font-size="14"] {
+  font-size: 20px;
+}
+
+.playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] .research-plan-implement text[y="310"] {
+  letter-spacing: 0;
+}
+
+.playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] .deterministic-controls text {
+  font-size: 16px;
+}
+
+.playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] :is(.research-plan-implement, .deterministic-controls) text:is([y="180"], [y="290"], [y="420"], [y="550"], [y="185"], [y="300"], [y="445"], [y="354"]) {
+  transform: translateY(-3px);
+}
+
+.playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] :is(.research-plan-implement, .deterministic-controls) text:is([y="202"], [y="306"], [y="436"], [y="566"], [y="201"], [y="316"], [y="461"], [y="386"]) {
+  transform: translateY(3px);
+}
+
+body.present-mode .playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] .token-prompt-rules {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+body.present-mode .playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] .prose-akq > :is(ul, ol) {
+  font-size: 22px;
+  line-height: 1.45;
+}
+
+body.present-mode .playbook-detail[data-category="operate"][data-playbook-slug="copilot-metrics"] .prose-akq > pre {
+  padding: 0.6em 0.8em;
+  font-size: 18px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}

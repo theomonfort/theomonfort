@@ -127,32 +127,28 @@ Copilot harness では **`@` chat participants は非推奨で非対応**。直�
 | **BYOK** | Bring Your Own Key: 自分のキーで接続。<a class="retro-link" href="https://code.visualstudio.com/docs/agent-customization/language-models#_bring-your-own-language-model-key" target="_blank" rel="noopener noreferrer">設定方法 ↗</a> |
 | **ローカルモデル** | 対応ハードウェアで Copilot の <a class="retro-link" href="https://code.visualstudio.com/docs/agent-customization/language-models#_use-on-device-models" target="_blank" rel="noopener noreferrer">on-device モデル ↗</a>、または **BYOK 経由の Ollama** |
 
-## Copilot の利用画面 <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-on-github" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## Copilot の利用画面 <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-on-github" target="_blank" rel="noopener noreferrer">📖 Docs</a> <a class="h2-demo" href="https://github.com/enterprises/octodemo/ai-controls/copilot/features" target="_blank" rel="noopener noreferrer" aria-label="Octodemo の Copilot 機能設定を開く">&#9658; DEMO ↗</a>
 
-**Copilot in the cloud** では、同じ cloud sandbox session をこれらの画面から継続できる（**2026-10-28** から）。<a class="retro-link" href="https://github.blog/changelog/2026-10-28-work-from-anywhere-with-a-new-connected-copilot-cloud-experience/" target="_blank" rel="noopener noreferrer">Changelog ↗</a>
+<ul class="chat-surfaces" aria-label="Copilot の利用画面">
+<li>VS Code</li><li>GitHub.com</li><li>GitHub Mobile</li><li>Copilot CLI</li><li>GitHub Copilot app</li>
+</ul>
 
-<table class="compact-table">
-<thead><tr><th>利用画面</th><th>入口</th></tr></thead>
-<tbody>
-<tr><td><strong>VS Code</strong></td><td><strong>Chat view</strong> / <strong>Agents window</strong></td></tr>
-<tr><td><strong>GitHub.com</strong></td><td><strong>Copilot</strong> / repo の <strong>Agents</strong> タブ</td></tr>
-<tr><td><strong>GitHub Mobile</strong></td><td><strong>Copilot</strong> タブ</td></tr>
-<tr><td><strong>Copilot CLI</strong></td><td>ターミナルで <code>copilot</code></td></tr>
-<tr><td><strong>GitHub Copilot app</strong></td><td>複数タスクを並行して進めるデスクトップ app</td></tr>
-</tbody>
-</table>
-
-**有料プラン向け**で、ポリシーに従う。**ホストのオフライン ≠ session の失効。**
-
-<div class="ctl-widget">
-<div class="ctl-list">
-<details class="ctl-item" name="copilot-remote-lifecycle">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔌</span><span class="ctl-name">何をオンラインに保つ？</span><a class="ctl-doc" href="https://code.visualstudio.com/docs/agents/run/remote-agent-sessions" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">ホスト</span><span class="ctl-v">作業フォルダーを持つマシンと agent のプロセスを起動し、接続可能にしておく。デスクトップ VS Code がホストならアプリも起動したままにする。GitHub Actions の runner や管理型 cloud sandbox とは別。</span></p>
-<p class="ctl-row"><span class="ctl-k">オフライン</span><span class="ctl-v">スリープや通信断では遠隔操作が使えなくなるが、自動的な失効や削除ではない。元のホストへ再接続する。同期された会話履歴は実行中のプロセスでも作業フォルダーのバックアップでもない。</span></p>
-<p class="ctl-row"><span class="ctl-k">CLI の再開</span><span class="ctl-v">CLI を終了した場合、保存済み session と作業フォルダーがある元のマシンで <code>copilot --continue</code> / <code>copilot --resume</code> を使う。以前有効にした遠隔操作も再有効化される。<a class="retro-link" href="https://docs.github.com/en/copilot/concepts/agent-capabilities/agent-powered-workflows-and-operations/about-remote-control#reconnection" target="_blank" rel="noopener noreferrer">CLI docs ↗</a></span></p>
+<div class="chat-continuity">
+<section>
+<h3>できること</h3>
+<ul>
+<li><strong>Cloud sandbox:</strong> 画面を切り替えて同じ session を継続。ノート PC を閉じても動き続ける。</li>
+<li><strong>ローカル session の遠隔操作:</strong> 同じ GitHub アカウントで進捗確認、プロンプト送信、プランやツール実行の承認。</li>
+</ul>
+</section>
+<section>
+<h3>制約と注意点</h3>
+<ul>
+<li><strong>ローカル実行は元のマシンのまま。</strong> ホストを起動・接続し、agent も動かしておく。履歴同期は作業フォルダーのバックアップではない。</li>
+<li><strong>CLI の遠隔操作:</strong> 対話 session のみ。遠隔からのスラッシュコマンドは不可。オフラインは接続中断であり、自動削除ではない。</li>
+<li><strong>Cloud session:</strong> 有料プラン、リポジトリへのアクセス権、組織 / Enterprise のポリシーに従う。</li>
+</ul>
+</section>
 </div>
-</details>
-</div>
-</div>
+
+<p class="chat-policy"><strong>Store local sessions in the Cloud</strong><span><b>View from cloud</b>: 履歴のみ。<b>View and control</b>: 履歴 + 遠隔操作。<a class="retro-link" href="https://docs.github.com/en/copilot/concepts/agent-capabilities/agent-powered-workflows-and-operations/about-remote-control#administering-remote-control" target="_blank" rel="noopener noreferrer">ポリシーの Docs ↗</a></span></p>
