@@ -77,16 +77,16 @@ links:
 
 <div class="hero-quote">
   <p>
-    <strong>Secret Protection</strong> is GitHub's product for detecting and preventing secret leaks. It includes <strong>secret scanning</strong> to find API keys, tokens, and connection strings in your repository.
+    <strong>Secret Protection</strong> detects and prevents secret leaks. <strong>Secret scanning</strong> finds API keys, tokens, and connection strings in repositories.
   </p>
   <p>
-    Secrets already committed get an <strong>alert</strong>; secrets about to be pushed are blocked at <code>git push</code> time by <strong>Push protection</strong>. Stopping leaks before they happen is the core strategy.
+    Committed secrets trigger an <strong>alert</strong>; <strong>push protection</strong> blocks secrets at <code>git push</code>, before they leak.
   </p>
 </div>
 
 ## Why secrets matter in private / internal repos
 
-**Private does not mean the breach stays contained.** An attacker who compromises one developer account or runner can use internally exposed secrets to expand the attack. Keep secrets in a secret manager and block leaks with **Push protection**. Here are 8 reasons why.
+**Private does not contain a breach.** A compromised developer account or runner can expose secrets and enable further attacks. Use a secret manager and **push protection**.
 
 <div class="risk-widget">
 <p class="risk-hint">▸ CLICK + TO REVEAL</p>
@@ -176,7 +176,7 @@ links:
 </div>
 </div>
 
-**Push protection** checks pushes to all branches on GitHub, **not local commits at commit time**. **Merge protection** checks before PR merge.
+**Push protection** checks GitHub pushes, not local commits. **Merge protection** checks before merge.
 
 <div class="ctl-widget">
 <p class="ctl-hint">▸ CLICK + FOR DETAILS</p>
@@ -332,7 +332,7 @@ links:
 </div>
 </div>
 
-When a secret is found, **remediation matters more than detection**. At scale, don't work the raw alert list, run it as a **security campaign**.
+**Remediation beats detection.** At scale, use **security campaigns**, not raw alerts.
 
 <div class="rem-widget">
 <p class="rem-hint">▸ CLICK A STEP FOR DETAILS</p>
@@ -415,7 +415,7 @@ When a secret is found, **remediation matters more than detection**. At scale, d
 With **Secret Protection and push protection enabled**, this is the order I recommend.
 
 <div class="ctl-widget">
-<p class="ctl-hint">▸ CHECK COMPLETED STEPS. OPEN A STEP FOR SETTINGS</p>
+<p class="ctl-hint">▸ CHECK STEPS, OPEN FOR SETTINGS. REPLACE ENTERPRISE / ORG / OWNER / REPO IN URLS.</p>
 <div class="ctl-list">
 <details class="ctl-item" name="ss-start">
 <summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="ss-start-1" /><span class="ctl-icon">1</span><span class="ctl-name" id="ss-start-1">Add patterns for internal secrets, if any</span><span class="ctl-when">CUSTOM PATTERNS</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/customize-leak-detection/define-custom-patterns" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
@@ -456,10 +456,9 @@ With **Secret Protection and push protection enabled**, this is the order I reco
 </div>
 </div>
 
-URL templates: replace `ENTERPRISE`, `ORG`, `OWNER`, `REPO`.
-
 ## Availability by product
 
+<div class="ss-availability">
 <table class="availability-table">
 <thead>
 <tr>
@@ -470,24 +469,19 @@ URL templates: replace `ENTERPRISE`, `ORG`, `OWNER`, `REPO`.
 </tr>
 </thead>
 <tbody>
-<tr><td>Secret scanning alerts</td><td>✅ Free</td><td>❌</td><td>✅ Included</td></tr>
-<tr><td>Push protection (repo / org)</td><td>✅ Free</td><td>❌</td><td>✅ Included</td></tr>
+<tr><td>Secret scanning alerts / push protection (repo / org)</td><td>✅ Free</td><td>❌</td><td>✅ Included</td></tr>
 <tr><td>Partner program alerts (sent to the provider)</td><td>✅ Free, always on</td><td>❌</td><td>❌ Public repos only</td></tr>
-<tr><td>Validity checks</td><td>❌</td><td>❌</td><td>✅ Supported providers</td></tr>
-<tr><td>Generic patterns</td><td>❌</td><td>❌</td><td>✅ Included</td></tr>
-<tr><td>Custom patterns</td><td>❌</td><td>❌</td><td>✅ Included</td></tr>
-<tr><td>AI-detected secrets</td><td>❌</td><td>❌</td><td>✅ Included</td></tr>
+<tr><td>Generic / custom patterns / AI-detected secrets; validity checks (supported providers)</td><td>❌</td><td>❌</td><td>✅ Included</td></tr>
 <tr><td>Public monitoring</td><td>❌</td><td>❌</td><td>✅ GHEC Enterprise</td></tr>
 </tbody>
 </table>
+</div>
 
-> 🆓 **User push protection** is free and enabled by default on all plans, but only covers pushes to public repositories. **Partner alerts** also notify providers only about leaks in public repositories and public npm packages — always on, and not configurable.
+> 🆓 **User push protection** is free and on by default for public repo pushes on all plans. **Partner alerts** notify providers of public repo / npm leaks only, always on and not configurable.
 >
-> 👤 **User-owned repositories** are a special case: alerts require GHEC with **Enterprise Managed Users**, or GHES with Secret Protection enabled on the enterprise. Org-owned private / internal repos only need Secret Protection on Team or GHEC.
+> 👤 **User-owned repo** alerts require GHEC with **Enterprise Managed Users**, or GHES with enterprise Secret Protection. Org-owned private / internal repos need Secret Protection on Team or GHEC.
 >
-> 💰 Generic, custom, and AI detection, validity checks, and private / internal repository coverage require **Secret Protection or a legacy GHAS license**. **Public monitoring** is an enterprise-wide feature for GHEC Enterprise.
-
-📘 Details: <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/get-started/learning-about-github/about-github-advanced-security" target="_blank" rel="noopener noreferrer">Advanced Security products ↗</a> / <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/tutorials/secret-scanning-partner-program" target="_blank" rel="noopener noreferrer">Partner program ↗</a> / <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Public monitoring ↗</a>
+> 💰 Generic, custom and AI detection, validity checks, and private / internal coverage require **Secret Protection or legacy GHAS**. **Public monitoring** is enterprise-wide for GHEC Enterprise.
 
 ## Public monitoring (NEW) <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
@@ -527,11 +521,9 @@ Scans every org repo to show what secrets sit where. **Free for Team and Enterpr
 
 ## AI workflows can commit secrets too <a class="h2-doc" href="https://docs.github.com/en/code-security/tutorials/remediate-leaked-secrets/remediating-a-leaked-secret" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**Review agent-generated config, not just application code.** <a class="retro-link" href="https://thehackernews.com/2026/11/claude-codes-dont-ask-again-file.html" target="_blank" rel="noopener noreferrer">Reporting on Apiiro's research ↗</a> describes secrets in saved approval commands in <code>.claude/settings.local.json</code> reaching public Git history.
+**Review agent-generated config, not just code.** <a class="retro-link" href="https://thehackernews.com/2026/11/claude-codes-dont-ask-again-file.html" target="_blank" rel="noopener noreferrer">Apiiro research reporting ↗</a> describes approval-command secrets in public Git history. The <a class="retro-link" href="https://news.ycombinator.com/item?id=50408126" target="_blank" rel="noopener noreferrer">Claude Code team ↗</a> says <code>.claude/settings.local.json</code> should stay local and ignored. This risk does not imply every agent leaks secrets.
 
-The <a class="retro-link" href="https://news.ycombinator.com/item?id=50408126" target="_blank" rel="noopener noreferrer">Claude Code team's HN response ↗</a> says this file is intended to stay local and ignored. This is a reported workflow risk, not proof that every agent leaks secrets.
-
-- **Review** staged files and `git diff --cached` before committing.
-- **Keep local** secret-bearing config: verify ignore rules and that the file is untracked. Use a secret manager, not literal credentials in commands.
-- **Detect / block** with secret scanning + push protection where available. Coverage is not a guarantee.
-- **If exposed**, revoke or rotate the credential first, then clean up. Deleting the file does not erase Git history.
+- **Review** staged files and `git diff --cached` before commit.
+- **Keep local** secret-bearing config: check ignore rules and untracked status. Use a secret manager, not credentials in commands.
+- **Detect / block** with secret scanning + push protection where available. Coverage is not guaranteed.
+- **If exposed**, revoke or rotate first, then clean up. Deleting the file does not erase Git history.

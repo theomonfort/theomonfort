@@ -86,7 +86,7 @@ links:
 
 ## なぜ private / internal repo でも secret はダメなのか
 
-<strong>非公開でも、侵害の被害はリポジトリ内で止まらない。</strong>開発者アカウントやランナーを侵害した攻撃者は、社内に露出した secret を足掛かりに攻撃を拡大できる。secret はシークレットマネージャーで管理し、**Push protection** で流入を防ぐ。理由は 8 つある。
+<strong>非公開でも侵害の被害は止まらない。</strong>開発者アカウントやランナーの侵害で secret が露出し、攻撃が拡大し得る。シークレットマネージャーと **Push protection** を使う。
 
 <div class="risk-widget">
 <p class="risk-hint">▸ + をクリックして表示</p>
@@ -176,7 +176,7 @@ links:
 </div>
 </div>
 
-**Push protection** は GitHub 上の全ブランチへの push 時にチェック。**ローカルのコミット時にはチェックしない**。**Merge protection** は PR のマージ前のチェック。
+**Push protection** は GitHub の push をチェックし、ローカルのコミットは対象外。**Merge protection** はマージ前にチェック。
 
 <div class="ctl-widget">
 <p class="ctl-hint">▸ + をクリックして詳細を表示</p>
@@ -332,7 +332,7 @@ links:
 </div>
 </div>
 
-Secret が見つかった時にやることは **検知より修復が大事**。規模が大きいときは生のアラート一覧を追わず、**security campaign** として回す。
+**検知より修復が大事**。大規模ではアラート一覧を追わず、**security campaign** で対応する。
 
 <div class="rem-widget">
 <p class="rem-hint">▸ ステップをクリックして詳細を表示</p>
@@ -415,7 +415,7 @@ Secret が見つかった時にやることは **検知より修復が大事**�
 **Secret Protection と push protection を有効化したら**、この順番で進めるのがおすすめ。
 
 <div class="ctl-widget">
-<p class="ctl-hint">▸ 完了したステップにチェック。ステップを開くと設定リンクを表示</p>
+<p class="ctl-hint">▸ チェック / 設定を表示。URL の ENTERPRISE / ORG / OWNER / REPO は置き換える</p>
 <div class="ctl-list">
 <details class="ctl-item" name="ss-start">
 <summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="ss-start-1" /><span class="ctl-icon">1</span><span class="ctl-name" id="ss-start-1">社内独自の secret があればパターンを追加</span><span class="ctl-when">CUSTOM PATTERNS</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-secrets/customize-leak-detection/define-custom-patterns" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
@@ -456,10 +456,9 @@ Secret が見つかった時にやることは **検知より修復が大事**�
 </div>
 </div>
 
-URL テンプレート内の `ENTERPRISE`、`ORG`、`OWNER`、`REPO` を置き換えて使う。
-
 ## 利用条件と製品
 
+<div class="ss-availability">
 <table class="availability-table">
 <thead>
 <tr>
@@ -470,24 +469,19 @@ URL テンプレート内の `ENTERPRISE`、`ORG`、`OWNER`、`REPO` を置き�
 </tr>
 </thead>
 <tbody>
-<tr><td>Secret scanning alerts</td><td>✅ 無料</td><td>❌</td><td>✅ 含む</td></tr>
-<tr><td>Push protection（リポ / 組織）</td><td>✅ 無料</td><td>❌</td><td>✅ 含む</td></tr>
+<tr><td>Secret scanning alerts / push protection（リポ / 組織）</td><td>✅ 無料</td><td>❌</td><td>✅ 含む</td></tr>
 <tr><td>Partner program alerts（provider に通知）</td><td>✅ 無料・常時 ON</td><td>❌</td><td>❌ public repo のみ</td></tr>
-<tr><td>Validity checks</td><td>❌</td><td>❌</td><td>✅ 対応 provider</td></tr>
-<tr><td>Generic patterns</td><td>❌</td><td>❌</td><td>✅ 含む</td></tr>
-<tr><td>Custom patterns</td><td>❌</td><td>❌</td><td>✅ 含む</td></tr>
-<tr><td>AI-detected secrets</td><td>❌</td><td>❌</td><td>✅ 含む</td></tr>
+<tr><td>Generic / custom patterns / AI-detected secrets、Validity checks（対応 provider）</td><td>❌</td><td>❌</td><td>✅ 含む</td></tr>
 <tr><td>Public monitoring</td><td>❌</td><td>❌</td><td>✅ GHEC Enterprise</td></tr>
 </tbody>
 </table>
+</div>
 
-> 🆓 **ユーザー push protection** は全プランで無料・デフォルト ON だが、public repo への push のみが対象。**Partner alerts** も public repo / public npm package の漏洩だけを provider に通知する(常時 ON、設定変更は不可)。
+> 🆓 **ユーザー push protection** は全プランで無料・デフォルト ON、public repo への push のみ対象。**Partner alerts** は public repo / npm の漏洩のみ provider に通知（常時 ON、設定変更不可）。
 >
-> 👤 **ユーザー所有リポジトリ** は例外扱い。アラートには GHEC の **Enterprise Managed Users**、または Secret Protection を有効にした GHES が必要。Org 所有の private / internal repo なら Team / GHEC で Secret Protection があれば良い。
+> 👤 **ユーザー所有 repo** のアラートには GHEC の **Enterprise Managed Users** または enterprise で Secret Protection を有効にした GHES が必要。Org 所有 private / internal repo は Team / GHEC と Secret Protection で利用可能。
 >
-> 💰 Generic / Custom / AI detection、Validity checks、private / internal repo の保護には **Secret Protection または従来の GHAS** が必要。**Public monitoring** は GHEC Enterprise 向けの enterprise-wide 機能。
-
-📘 詳細: <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/get-started/learning-about-github/about-github-advanced-security" target="_blank" rel="noopener noreferrer">Advanced Security products ↗</a> / <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/tutorials/secret-scanning-partner-program" target="_blank" rel="noopener noreferrer">Partner program ↗</a> / <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Public monitoring ↗</a>
+> 💰 Generic / Custom / AI detection、Validity checks、private / internal の保護には **Secret Protection または従来の GHAS** が必要。**Public monitoring** は GHEC Enterprise 全体向け。
 
 ## Public monitoring（NEW） <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
@@ -527,11 +521,9 @@ Org 全体をスキャンし、secret の在りかを可視化。**Team / Enterp
 
 ## AI の作業でも secret はコミットされ得る <a class="h2-doc" href="https://docs.github.com/en/code-security/tutorials/remediate-leaked-secrets/remediating-a-leaked-secret" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**コードだけでなく、agent が生成する設定もレビュー。** <a class="retro-link" href="https://thehackernews.com/2026/11/claude-codes-dont-ask-again-file.html" target="_blank" rel="noopener noreferrer">Apiiro の調査を伝える報道 ↗</a> では、<code>.claude/settings.local.json</code> に保存された承認コマンド内の secret が、公開 Git 履歴に入った事例を紹介。
-
-<a class="retro-link" href="https://news.ycombinator.com/item?id=50408126" target="_blank" rel="noopener noreferrer">Claude Code チームの HN 回答 ↗</a> は、このファイルはローカルに留めて ignore する設計だと説明。報告された作業上のリスクであり、全 agent が漏洩するという意味ではない。
+**コードだけでなく、agent 生成の設定もレビュー。** <a class="retro-link" href="https://thehackernews.com/2026/11/claude-codes-dont-ask-again-file.html" target="_blank" rel="noopener noreferrer">Apiiro の調査報道 ↗</a> は、承認コマンド内の secret が公開 Git 履歴に入った事例を紹介。<a class="retro-link" href="https://news.ycombinator.com/item?id=50408126" target="_blank" rel="noopener noreferrer">Claude Code チーム ↗</a> は <code>.claude/settings.local.json</code> をローカルに留めて ignore する設計と説明。このリスクは全 agent が漏洩するという意味ではない。
 
 - **レビュー**: commit 前にステージ済みファイルと `git diff --cached` を確認。
-- **ローカルに保つ**: secret を含む設定の ignore と未追跡を確認。コマンドに認証情報を直書きせず、secret manager を使う。
+- **ローカルに保つ**: secret を含む設定の ignore と未追跡を確認。認証情報をコマンドに書かず、secret manager を使う。
 - **検知とブロック**: 利用可能な secret scanning + push protection を有効化。完全な防止は保証されない。
-- **漏洩したら**: まず revoke / rotate、その後に除去。ファイル削除だけでは Git 履歴から消えない。
+- **漏洩したら**: まず revoke / rotate、その後に除去。ファイル削除では Git 履歴から消えない。
