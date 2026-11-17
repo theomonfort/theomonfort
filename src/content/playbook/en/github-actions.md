@@ -67,7 +67,29 @@ links:
 
 Beyond CI/CD, GitHub Actions can automate **every stage of the SDLC**, all triggered by events.
 
-<img src="/theomonfort/github-actions-sdlc.svg" alt="GitHub Actions across the whole SDLC (Plan, Code, Build, Test, Release, Deploy, Operate, Monitor)" style="width:100%;max-width:760px;display:block;margin:1.2em auto;" />
+<div class="actions-sdlc">
+<svg viewBox="0 0 1100 300" role="img" aria-label="GitHub Actions across the SDLC: plan, code, build, test, release, deploy, operate, and monitor">
+<defs><marker id="actions-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L10 5 L0 10 Z" /></marker></defs>
+<g class="actions-sdlc-links" marker-end="url(#actions-arrow)">
+<path d="M250 65 H274" /><path d="M530 65 H554" /><path d="M810 65 H834" /><path d="M965 120 V175" />
+<path d="M840 235 H816" /><path d="M560 235 H536" /><path d="M280 235 H256" /><path d="M125 180 V125" />
+</g>
+<g class="actions-sdlc-nodes">
+<rect x="0" y="10" width="250" height="110" /><rect x="280" y="10" width="250" height="110" /><rect x="560" y="10" width="250" height="110" /><rect x="840" y="10" width="250" height="110" />
+<rect x="840" y="180" width="250" height="110" /><rect x="560" y="180" width="250" height="110" /><rect x="280" y="180" width="250" height="110" /><rect x="0" y="180" width="250" height="110" />
+</g>
+<g class="actions-sdlc-text">
+<text x="18" y="40"><tspan class="actions-sdlc-title">PLAN</tspan><tspan x="18" dy="27">Project board, issue triage</tspan><tspan x="18" dy="24">Onboarding</tspan></text>
+<text x="298" y="40"><tspan class="actions-sdlc-title">CODE</tspan><tspan x="298" dy="27">Coding standards, licensing</tspan><tspan x="298" dy="24">Linting</tspan></text>
+<text x="578" y="40"><tspan class="actions-sdlc-title">BUILD</tspan><tspan x="578" dy="27">Packaging</tspan><tspan x="578" dy="24">Build</tspan></text>
+<text x="858" y="40"><tspan class="actions-sdlc-title">TEST</tspan><tspan x="858" dy="27">Tests, code scanning</tspan><tspan x="858" dy="24">Security scanning</tspan></text>
+<text x="858" y="210"><tspan class="actions-sdlc-title">RELEASE</tspan><tspan x="858" dy="27">Versioning, release note</tspan><tspan x="858" dy="24">Artifact upload</tspan></text>
+<text x="578" y="210"><tspan class="actions-sdlc-title">DEPLOY</tspan><tspan x="578" dy="27">Deployment</tspan><tspan x="578" dy="24">Protection rule</tspan></text>
+<text x="298" y="210"><tspan class="actions-sdlc-title">OPERATE</tspan><tspan x="298" dy="27">Scheduled maintenance</tspan></text>
+<text x="18" y="210"><tspan class="actions-sdlc-title">MONITOR</tspan><tspan x="18" dy="27">Incident creation</tspan></text>
+</g>
+</svg>
+</div>
 
 ## The metrics it improves (DORA)
 
@@ -84,78 +106,85 @@ The point of automation (CI/CD, tests, reviews) is to raise both **speed and sta
 
 </div>
 
-> 🎯 Automation's value: raise speed (frequency, lead time) and stability (failure rate, recovery) **at the same time**.
-
 ## Architecture: clone → run → destroy
 
 Your GitHub repo is cloned onto a **disposable cloud VM**; steps (like tests) run there, results are sent back, and the **VM is destroyed**.
 
-```mermaid
-flowchart LR
-  REPO["🐙 GitHub<br/>📦 Repository"]
-  VM["☁️ Runner VM<br/>fresh &amp; disposable"]
-  RUN["▶️ Run steps<br/>✅ test · 🏗️ build"]
-  GONE["💥 VM destroyed"]
-  REPO -->|① event triggers| VM
-  VM -->|② clone repo| RUN
-  RUN -->|③ send results back| REPO
-  RUN -->|④ job ends| GONE
-
-  classDef gh fill:#0b1420,stroke:#5eead4,color:#5eead4,stroke-width:2px
-  classDef vm fill:#11162c,stroke:#fcd34d,color:#fcd34d,stroke-width:2px
-  classDef run fill:#0a1a14,stroke:#86efac,color:#86efac,stroke-width:2px
-  classDef gone fill:#2a0a0a,stroke:#ff5555,color:#ff5555,stroke-width:2px
-  class REPO gh
-  class VM vm
-  class RUN run
-  class GONE gone
-```
+<div class="actions-architecture">
+<svg viewBox="0 0 1100 210" role="img" aria-label="An event starts a runner, the repository is cloned and steps run, results return to GitHub, and the runner is destroyed">
+<defs><marker id="actions-flow-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L10 5 L0 10 Z" /></marker></defs>
+<g class="actions-sdlc-links" marker-end="url(#actions-flow-arrow)">
+<path d="M225 125 H300" /><path d="M495 125 H570" /><path d="M765 125 H840" /><path d="M670 80 V35 H130 V75" />
+</g>
+<g class="actions-sdlc-nodes">
+<rect x="35" y="80" width="190" height="90" /><rect x="305" y="80" width="190" height="90" /><rect x="575" y="80" width="190" height="90" /><rect x="845" y="80" width="190" height="90" />
+</g>
+<g class="actions-flow-text">
+<text x="130" y="112"><tspan class="actions-sdlc-title">GitHub</tspan><tspan x="130" dy="27">Repository</tspan></text>
+<text x="400" y="112"><tspan class="actions-sdlc-title">Runner VM</tspan><tspan x="400" dy="27">Fresh, disposable</tspan></text>
+<text x="670" y="112"><tspan class="actions-sdlc-title">Run steps</tspan><tspan x="670" dy="27">Test, build</tspan></text>
+<text x="940" y="112"><tspan class="actions-sdlc-title">Job ends</tspan><tspan x="940" dy="27">VM destroyed</tspan></text>
+<text x="265" y="112">① Event</text><text x="535" y="112">② Clone</text><text x="805" y="112">④ Done</text><text x="400" y="24">③ Results and logs</text>
+</g>
+</svg>
+</div>
 
 > 🔁 Results return as checks, logs, and artifacts; the VM is discarded every run.
 
 ## How it works (core concepts)
 
-It's very simple: **when an event fires, borrow a clean VM, clone the repo, and run the steps you wrote — in order**.
+An event starts a clean VM, checks out the repo, and runs the steps in order.
 
-- 📁 **Location** — `.github/workflows/*.yml` (multiple files supported)
-- ⚡ **Triggers** — `push` / `pull_request` / `schedule` (cron) / `workflow_dispatch` (manual) / `issues` / `release` and 35+ other events
-- 🖥️ **Execution environment** — a fresh **GitHub-hosted runner** (Linux / Windows / macOS VM) starts up per job
-- 📦 **Repo cloned every time** — `actions/checkout` full-clones into `$GITHUB_WORKSPACE` (no state carried over from previous jobs)
-- ⏱️ **Time limits** — 6 hours max per job, 35 days max per workflow (matrix parallelism is supported)
-- �� **Secrets** — stored in `Settings → Secrets` → referenced as `${{ secrets.NAME }}` (masked in logs)
-
-> 🧠 "Start from scratch every time" is the golden rule of GitHub Actions. To persist state, use `actions/cache`, artifacts, or rely on already-deployed infrastructure.
+<div class="actions-concepts">
+<p>📁 <strong>Workflows:</strong> <code>.github/workflows/*.yml</code>; multiple files supported.</p>
+<p>⚡ <strong>Events:</strong> <code>push</code>, <code>pull_request</code>, cron <code>schedule</code>, manual <code>workflow_dispatch</code>, <code>issues</code>, <code>release</code> and 35+ events.</p>
+<p>🖥️ <strong>Runner:</strong> fresh GitHub-hosted Linux / Windows / macOS VM per job.</p>
+<p>📦 <strong>Checkout:</strong> <code>actions/checkout</code> clones to <code>$GITHUB_WORKSPACE</code>; jobs do not share state.</p>
+<p>⏱️ <strong>Limits:</strong> 6 hours per job, 35 days per workflow; matrix jobs can run in parallel.</p>
+<p>🔐 <strong>Secrets:</strong> <code>Settings → Secrets</code>, accessed as <code>${{ secrets.NAME }}</code> and masked in logs.</p>
+<p>Persist state with <code>actions/cache</code>, artifacts, or deployed infrastructure.</p>
+</div>
 
 ## Choose your runners <a class="h2-doc" href="https://docs.github.com/en/actions/concepts/runners/github-hosted-runners" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**GitHub-hosted for managed CI. Self-hosted for infrastructure you control.**
+<p class="actions-compact-lead"><strong>GitHub-hosted for managed CI. Self-hosted for your own infrastructure.</strong></p>
 
-| | GitHub-hosted | Self-hosted |
-| --- | --- | --- |
-| Maintenance | GitHub manages the environment | You patch and secure it |
-| Capacity | On demand, within plan limits | Your machines; ARC for Kubernetes |
-| Network | Public or configured private access | Your network and hardware |
-| Compute cost | Free standard public CI; otherwise metered | Your infrastructure, no Actions compute charge |
+<table class="compact-table actions-runners">
+<thead><tr><th></th><th>GitHub-hosted</th><th>Self-hosted</th></tr></thead>
+<tbody>
+<tr><td>Maintenance</td><td>Managed by GitHub</td><td>You patch and secure it</td></tr>
+<tr><td>Capacity</td><td>On demand, within plan limits</td><td>Your machines; ARC on Kubernetes</td></tr>
+<tr><td>Network</td><td>Public or configured private access</td><td>Your network and hardware</td></tr>
+<tr><td>Compute cost</td><td>Standard public runners free; otherwise metered</td><td>Infrastructure cost; no Actions compute charge</td></tr>
+</tbody>
+</table>
 
 Need more power without managing machines? Use **larger runners** on Team or Enterprise Cloud.
 
 ## Reuse Marketplace actions <a class="h2-doc" href="https://docs.github.com/en/actions/reference/security/secure-use" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-Compose existing actions instead of writing every step yourself.
+Compose existing <a class="retro-link" href="https://github.com/marketplace?type=actions" target="_blank" rel="noopener noreferrer">Marketplace actions ↗</a> instead of writing every step.
 
-| Task | Reusable action |
-| --- | --- |
-| Check out code | `actions/checkout` |
-| Install Node.js | `actions/setup-node` |
-| Build a container | `docker/build-push-action` |
+<table class="compact-table">
+<thead><tr><th>Task</th><th>Reusable action</th></tr></thead>
+<tbody>
+<tr><td>Check out code</td><td><code>actions/checkout</code></td></tr>
+<tr><td>Install Node.js</td><td><code>actions/setup-node</code></td></tr>
+<tr><td>Build a container</td><td><code>docker/build-push-action</code></td></tr>
+</tbody>
+</table>
 
-- **Review the source**, including actions from verified creators.
-- **Lock dependencies or pin full commit SHAs**; tags can move.
-- **Set an organization allowlist** in Settings → Actions → General.
+<ul class="actions-compact-list">
+<li><strong>Review source</strong>, including verified creators.</li>
+<li><strong>Use lockfiles or full commit SHAs</strong>; tags can move.</li>
+<li><strong>Set an org allowlist</strong> in Settings → Actions → General.</li>
+</ul>
 
 ## Start with one workflow <a class="h2-doc" href="https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-For a Node.js project, add <code>.github/<wbr>workflows/<wbr>ci.yml</code>:
+Add <code>.github/<wbr>workflows/<wbr>ci.yml</code> to a Node.js project:
+
+<div class="pre-compact">
 
 ```yaml
 name: CI
@@ -166,12 +195,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
-        with: { node-version: 24 }
+      - { uses: actions/setup-node@v7, with: { node-version: 24 } }
       - run: npm ci && npm test
 ```
 
-Push → **Actions logs + PR checks**. Use a dependency lockfile or full SHA pins for the action references.
+</div>
+
+Push → **Actions logs + PR checks**. Lock dependencies or pin full SHAs.
 
 ## Compute and pricing <a class="h2-doc" href="https://docs.github.com/en/billing/concepts/product-billing/github-actions" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="info-actions-pricing" class="demo-toggle" /><label class="h2-demo h2-info" for="info-actions-pricing">&#9432; INFO</label>
 
@@ -192,7 +222,7 @@ Push → **Actions logs + PR checks**. Use a dependency lockfile or full SHA pin
 </div>
 </div>
 
-**Standard public runners and self-hosted compute are free.** Other eligible usage draws from a shared allowance.
+<p class="actions-compact-lead"><strong>Standard public runners and self-hosted compute are free.</strong> Other eligible usage draws from a shared allowance.</p>
 
 | Plan | Included compute / month |
 | --- | ---: |
@@ -200,22 +230,26 @@ Push → **Actions logs + PR checks**. Use a dependency lockfile or full SHA pin
 | Pro / Team | $18 |
 | Enterprise Cloud | $300 |
 
-USD, **as of 2026-11-11**. Example: $300 covers **50,000 Linux 2-core minutes** at $0.006/min. Additional usage is billed; storage is separate.
+<p class="actions-pricing-note">USD, <strong>as of 2026-11-11</strong>. Example: $300 covers <strong>50,000 Linux 2-core minutes</strong> at $0.006/min. Additional usage is billed; storage is separate.</p>
 
 ## Budget beyond your CI <a class="h2-doc" href="https://docs.github.com/en/billing/how-tos/set-up-budgets" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**Automation shares compute; AI credits are a separate meter.**
+<p class="actions-compact-lead"><strong>Automation shares compute; AI credits are a separate meter.</strong></p>
 
-| Consumer | Compute usage |
-| --- | --- |
-| CI, <a class="retro-link" href="/theomonfort/en/playbook/code-scanning/">CodeQL</a>, <a class="retro-link" href="/theomonfort/en/playbook/code-quality/">Code Quality</a> | Hosted workflow / scan runs |
-| <a class="retro-link" href="/theomonfort/en/playbook/copilot-code-review/">Copilot Code Review</a> | Agentic context gathering and tools |
-| <a class="retro-link" href="/theomonfort/en/playbook/cloud-agent/">Copilot cloud tasks</a> | Actions or cloud sandbox compute |
+<table class="compact-table">
+<thead><tr><th>Consumer</th><th>Compute usage</th></tr></thead>
+<tbody>
+<tr><td>CI, <a class="retro-link" href="/theomonfort/en/playbook/code-scanning/">CodeQL</a>, <a class="retro-link" href="/theomonfort/en/playbook/code-quality/">Code Quality</a></td><td>Hosted workflow / scan runs</td></tr>
+<tr><td><a class="retro-link" href="/theomonfort/en/playbook/copilot-code-review/">Copilot Code Review</a></td><td>Agentic context gathering and tools</td></tr>
+<tr><td><a class="retro-link" href="/theomonfort/en/playbook/cloud-agent/">Copilot cloud tasks</a></td><td>Actions or cloud sandbox compute</td></tr>
+</tbody>
+</table>
 
-- **Monitor first:** soft budgets with **75 / 90 / 100%** alerts; inspect Actions usage metrics.
-- **Cap deliberately:** “Stop usage when budget limit is reached” blocks further billed usage **within that budget's scope**.
-
-Code review can still run without its Actions-powered agentic capabilities. An Actions budget does **not** stop every Copilot feature.
+<div class="actions-budget-notes">
+<p><strong>Monitor:</strong> soft budgets alert at <strong>75 / 90 / 100%</strong>; inspect usage metrics.</p>
+<p><strong>Cap carefully:</strong> “Stop usage when budget limit is reached” blocks billed usage <strong>within that budget's scope</strong>.</p>
+<p>Code review still runs without Actions-powered agentic capabilities; an Actions budget does <strong>not</strong> stop all Copilot features.</p>
+</div>
 
 ## Workflow lockfiles (GA) <a class="h2-doc" href="https://docs.github.com/en/actions/concepts/security/workflow-dependency-lockfiles" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-actions-lockfiles" class="demo-toggle" /><label class="h2-demo" for="demo-actions-lockfiles">&#9658; DEMO</label>
 

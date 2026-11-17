@@ -1,1 +1,118 @@
-/* github-actions presentation rules. Scope every selector to .playbook-detail[data-playbook-slug="github-actions"]. */
+.playbook-detail[data-playbook-slug="github-actions"] :is(.actions-sdlc, .actions-architecture) {
+  margin: 1em auto;
+  overflow-x: auto;
+}
+
+.playbook-detail[data-playbook-slug="github-actions"] :is(.actions-sdlc, .actions-architecture) svg {
+  display: block;
+  width: 100%;
+  min-width: 850px;
+  height: auto;
+  font-family: var(--font-prose), sans-serif;
+}
+
+.playbook-detail[data-playbook-slug="github-actions"] .actions-sdlc-nodes {
+  fill: #0b1420;
+  stroke: #5eead4;
+  stroke-width: 2;
+}
+
+.playbook-detail[data-playbook-slug="github-actions"] .actions-sdlc-links {
+  fill: none;
+  stroke: #5eead4;
+  stroke-width: 2;
+}
+
+.playbook-detail[data-playbook-slug="github-actions"] :is(.actions-sdlc, .actions-architecture) marker {
+  fill: #5eead4;
+}
+
+.playbook-detail[data-playbook-slug="github-actions"] .actions-sdlc-text {
+  fill: #e8f4ff;
+  font-size: 17px;
+}
+
+.playbook-detail[data-playbook-slug="github-actions"] .actions-flow-text {
+  fill: #e8f4ff;
+  font-size: 17px;
+  text-anchor: middle;
+}
+
+.playbook-detail[data-playbook-slug="github-actions"] .actions-sdlc-title {
+  fill: #5eead4;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.playbook-detail[data-playbook-slug="github-actions"] .actions-concepts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 430px), 1fr));
+  gap: 0.5em 1.5em;
+  line-height: 1.45;
+}
+
+.playbook-detail[data-playbook-slug="github-actions"] .actions-concepts p {
+  margin: 0;
+  min-width: 0;
+}
+
+.playbook-detail[data-playbook-slug="github-actions"] .actions-concepts p:last-child {
+  grid-column: 1 / -1;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-actions"] :is(.actions-sdlc, .actions-architecture) {
+  margin: 0.5em auto;
+  overflow: visible;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-actions"] :is(.actions-sdlc, .actions-architecture) svg {
+  min-width: 0;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-actions"] .prose-akq:has(> .actions-sdlc.akq-slide-active) > :is(h2, p).akq-slide-active,
+body.present-mode .playbook-detail[data-playbook-slug="github-actions"] .prose-akq:has(> .actions-compact-list.akq-slide-active) > p.akq-slide-active {
+  margin-block: 0.25em;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-actions"] .prose-akq:has(> .actions-budget-notes.akq-slide-active) > h2.akq-slide-active {
+  margin-block: 0.2em;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-actions"] .prose-akq:has(> .actions-pricing-note.akq-slide-active) > h2.akq-slide-active {
+  margin-bottom: 0.3em;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-actions"] .actions-concepts code {
+  white-space: nowrap;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-actions"] .actions-runners :is(th, td):first-child {
+  width: 16%;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-actions"] .pre-compact pre code {
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-actions"] .actions-compact-lead,
+body.present-mode .playbook-detail[data-playbook-slug="github-actions"] .actions-compact-list,
+body.present-mode .playbook-detail[data-playbook-slug="github-actions"] .actions-pricing-note {
+  margin-block: 0.1em;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-actions"] .actions-compact-lead + table {
+  margin-block: 0.2em;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-actions"] table:has(+ .actions-compact-list) {
+  margin-block: 0.3em;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-actions"] .actions-budget-notes {
+  line-height: 1.4;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-actions"] .actions-budget-notes p {
+  margin: 0.12em 0;
+}

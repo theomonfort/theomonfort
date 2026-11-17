@@ -67,7 +67,29 @@ links:
 
 CI/CD だけでなく、**SDLC のあらゆる工程** をイベント起点で自動化できる。
 
-<img src="/theomonfort/github-actions-sdlc.svg" alt="GitHub Actions が SDLC 全体（Plan・Code・Build・Test・Release・Deploy・Operate・Monitor）で使える様子" style="width:100%;max-width:760px;display:block;margin:1.2em auto;" />
+<div class="actions-sdlc">
+<svg viewBox="0 0 1100 300" role="img" aria-label="GitHub Actions が SDLC 全体（Plan、Code、Build、Test、Release、Deploy、Operate、Monitor）で使える様子">
+<defs><marker id="actions-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L10 5 L0 10 Z" /></marker></defs>
+<g class="actions-sdlc-links" marker-end="url(#actions-arrow)">
+<path d="M250 65 H274" /><path d="M530 65 H554" /><path d="M810 65 H834" /><path d="M965 120 V175" />
+<path d="M840 235 H816" /><path d="M560 235 H536" /><path d="M280 235 H256" /><path d="M125 180 V125" />
+</g>
+<g class="actions-sdlc-nodes">
+<rect x="0" y="10" width="250" height="110" /><rect x="280" y="10" width="250" height="110" /><rect x="560" y="10" width="250" height="110" /><rect x="840" y="10" width="250" height="110" />
+<rect x="840" y="180" width="250" height="110" /><rect x="560" y="180" width="250" height="110" /><rect x="280" y="180" width="250" height="110" /><rect x="0" y="180" width="250" height="110" />
+</g>
+<g class="actions-sdlc-text">
+<text x="18" y="40"><tspan class="actions-sdlc-title">PLAN</tspan><tspan x="18" dy="27">Project board, issue triage</tspan><tspan x="18" dy="24">Onboarding</tspan></text>
+<text x="298" y="40"><tspan class="actions-sdlc-title">CODE</tspan><tspan x="298" dy="27">Coding standards, licensing</tspan><tspan x="298" dy="24">Linting</tspan></text>
+<text x="578" y="40"><tspan class="actions-sdlc-title">BUILD</tspan><tspan x="578" dy="27">Packaging</tspan><tspan x="578" dy="24">Build</tspan></text>
+<text x="858" y="40"><tspan class="actions-sdlc-title">TEST</tspan><tspan x="858" dy="27">Tests, code scanning</tspan><tspan x="858" dy="24">Security scanning</tspan></text>
+<text x="858" y="210"><tspan class="actions-sdlc-title">RELEASE</tspan><tspan x="858" dy="27">Versioning, release note</tspan><tspan x="858" dy="24">Artifact upload</tspan></text>
+<text x="578" y="210"><tspan class="actions-sdlc-title">DEPLOY</tspan><tspan x="578" dy="27">Deployment</tspan><tspan x="578" dy="24">Protection rule</tspan></text>
+<text x="298" y="210"><tspan class="actions-sdlc-title">OPERATE</tspan><tspan x="298" dy="27">Scheduled maintenance</tspan></text>
+<text x="18" y="210"><tspan class="actions-sdlc-title">MONITOR</tspan><tspan x="18" dy="27">Incident creation</tspan></text>
+</g>
+</svg>
+</div>
 
 ## 改善する指標(DORA メトリクス)
 
@@ -84,78 +106,85 @@ CI/CD だけでなく、**SDLC のあらゆる工程** をイベント起点で�
 
 </div>
 
-> 🎯 スピード(頻度・リードタイム)と安定性(失敗率・復旧時間)を **同時に** 上げるのが自動化の価値。
-
 ## アーキテクチャ:clone → 実行 → 破棄
 
 GitHub 上の repo が **クラウドの使い捨て VM** に clone され、そこで test 等を実行 → 結果を返して **VM は破棄** される。
 
-```mermaid
-flowchart LR
-  REPO["🐙 GitHub<br/>📦 Repository"]
-  VM["☁️ Runner VM<br/>使い捨て・クラウド"]
-  RUN["▶️ steps 実行<br/>✅ test ・ 🏗️ build"]
-  GONE["💥 VM 破棄"]
-  REPO -->|① event で起動| VM
-  VM -->|② repo を clone| RUN
-  RUN -->|③ 結果・ログを返す| REPO
-  RUN -->|④ 完了| GONE
-
-  classDef gh fill:#0b1420,stroke:#5eead4,color:#5eead4,stroke-width:2px
-  classDef vm fill:#11162c,stroke:#fcd34d,color:#fcd34d,stroke-width:2px
-  classDef run fill:#0a1a14,stroke:#86efac,color:#86efac,stroke-width:2px
-  classDef gone fill:#2a0a0a,stroke:#ff5555,color:#ff5555,stroke-width:2px
-  class REPO gh
-  class VM vm
-  class RUN run
-  class GONE gone
-```
+<div class="actions-architecture">
+<svg viewBox="0 0 1100 210" role="img" aria-label="イベントで runner を起動、リポジトリを clone して手順を実行し、結果を GitHub に返して VM を破棄する">
+<defs><marker id="actions-flow-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L10 5 L0 10 Z" /></marker></defs>
+<g class="actions-sdlc-links" marker-end="url(#actions-flow-arrow)">
+<path d="M225 125 H300" /><path d="M495 125 H570" /><path d="M765 125 H840" /><path d="M670 80 V35 H130 V75" />
+</g>
+<g class="actions-sdlc-nodes">
+<rect x="35" y="80" width="190" height="90" /><rect x="305" y="80" width="190" height="90" /><rect x="575" y="80" width="190" height="90" /><rect x="845" y="80" width="190" height="90" />
+</g>
+<g class="actions-flow-text">
+<text x="130" y="112"><tspan class="actions-sdlc-title">GitHub</tspan><tspan x="130" dy="27">Repository</tspan></text>
+<text x="400" y="112"><tspan class="actions-sdlc-title">Runner VM</tspan><tspan x="400" dy="27">使い捨て・クラウド</tspan></text>
+<text x="670" y="112"><tspan class="actions-sdlc-title">Steps 実行</tspan><tspan x="670" dy="27">Test・build</tspan></text>
+<text x="940" y="112"><tspan class="actions-sdlc-title">Job 完了</tspan><tspan x="940" dy="27">VM を破棄</tspan></text>
+<text x="265" y="112">① 起動</text><text x="535" y="112">② Clone</text><text x="805" y="112">④ 完了</text><text x="400" y="24">③ 結果・ログ</text>
+</g>
+</svg>
+</div>
 
 > 🔁 結果は checks・ログ・artifact として GitHub に戻り、VM は毎回破棄される。
 
 ## 仕組み(コアコンセプト)
 
-すごくシンプル: **イベントが起きたら、まっさらな VM を借りて、リポを clone して、書いた手順を順に走らせる**。
+イベントで新しい VM を起動し、リポジトリを取得して手順を順に実行する。
 
-- 📁 **配置場所** — `.github/workflows/*.yml`(複数ファイル可)
-- ⚡ **トリガー** — `push` / `pull_request` / `schedule`(cron) / `workflow_dispatch`(手動) / `issues` / `release` ほか 35+ イベント
-- 🖥️ **実行環境** — ジョブごとに新品の **GitHub-hosted runner**(Linux / Windows / macOS の VM)が起動
-- 📦 **リポは毎回 clone** — `actions/checkout` で `$GITHUB_WORKSPACE` に full clone(状態は前回のジョブから引き継がない)
-- ⏱️ **時間制限** — 1 ジョブ最大 6 時間、1 workflow 最大 35 日(matrix で並列もできる)
-- 🔐 **シークレット** — `Settings → Secrets` に保存 → `${{ secrets.NAME }}` で参照(ログにマスク)
-
-> 🧠 「毎回ゼロから」が GitHub Actions の鉄則。状態を保ちたいなら `actions/cache` か artifact、デプロイ済みのものに頼る。
+<div class="actions-concepts">
+<p>📁 <strong>Workflow:</strong> <code>.github/workflows/*.yml</code>（複数ファイル可）。</p>
+<p>⚡ <strong>イベント:</strong> <code>push</code>、<code>pull_request</code>、cron <code>schedule</code>、手動 <code>workflow_dispatch</code>、<code>issues</code>、<code>release</code> など 35+。</p>
+<p>🖥️ <strong>Runner:</strong> ジョブごとに新しい GitHub-hosted Linux / Windows / macOS VM。</p>
+<p>📦 <strong>Checkout:</strong> <code>actions/checkout</code> で <code>$GITHUB_WORKSPACE</code> に clone。ジョブ間で状態を引き継がない。</p>
+<p>⏱️ <strong>制限:</strong> 1 ジョブ 6 時間、1 workflow 35 日。matrix で並列実行可。</p>
+<p>🔐 <strong>Secrets:</strong> <code>Settings → Secrets</code> に保存し、<code>${{ secrets.NAME }}</code> で参照。ログではマスク。</p>
+<p>状態の保持には <code>actions/cache</code>、artifact、デプロイ済み環境を使う。</p>
+</div>
 
 ## Runner を選ぶ <a class="h2-doc" href="https://docs.github.com/en/actions/concepts/runners/github-hosted-runners" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**管理を任せるなら GitHub-hosted。自社環境で動かすなら Self-hosted。**
+<p class="actions-compact-lead"><strong>管理を任せるなら GitHub-hosted。自社環境で動かすなら Self-hosted。</strong></p>
 
-| | GitHub-hosted | Self-hosted |
-| --- | --- | --- |
-| 保守 | GitHub が環境を管理 | 更新とセキュリティは自社で管理 |
-| 容量 | プランの上限内で自動起動 | 自社設備、Kubernetes なら ARC |
-| 接続 | 公開ネットワーク / 構成したプライベート接続 | 自社ネットワークと専用機器 |
-| 実行料金 | public の標準 runner は無料、ほかは従量課金 | インフラ代のみ、Actions の実行課金なし |
+<table class="compact-table actions-runners">
+<thead><tr><th></th><th>GitHub-hosted</th><th>Self-hosted</th></tr></thead>
+<tbody>
+<tr><td>保守</td><td>GitHub が環境を管理</td><td>更新とセキュリティは自社で管理</td></tr>
+<tr><td>容量</td><td>プランの上限内で自動起動</td><td>自社設備、Kubernetes なら ARC</td></tr>
+<tr><td>接続</td><td>公開ネットワーク / 構成したプライベート接続</td><td>自社ネットワークと専用機器</td></tr>
+<tr><td>実行料金</td><td>public の標準 runner は無料、ほかは従量課金</td><td>インフラ代のみ、Actions の実行課金なし</td></tr>
+</tbody>
+</table>
 
 管理を任せたまま高性能にするなら、Team / Enterprise Cloud の **larger runners**。
 
 ## Marketplace で部品を再利用 <a class="h2-doc" href="https://docs.github.com/en/actions/reference/security/secure-use" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-各 step を自作せず、既存の action を組み合わせる。
+各 step を自作せず、<a class="retro-link" href="https://github.com/marketplace?type=actions" target="_blank" rel="noopener noreferrer">Marketplace の action ↗</a> を組み合わせる。
 
-| やりたいこと | 再利用する action |
-| --- | --- |
-| コードを取得 | `actions/checkout` |
-| Node.js を準備 | `actions/setup-node` |
-| コンテナーをビルド | `docker/build-push-action` |
+<table class="compact-table">
+<thead><tr><th>やりたいこと</th><th>再利用する action</th></tr></thead>
+<tbody>
+<tr><td>コードを取得</td><td><code>actions/checkout</code></td></tr>
+<tr><td>Node.js を準備</td><td><code>actions/setup-node</code></td></tr>
+<tr><td>コンテナーをビルド</td><td><code>docker/build-push-action</code></td></tr>
+</tbody>
+</table>
 
-- **ソースを確認**。認証済みの公開者でもレビューは必要。
-- **lockfile または完全な SHA で固定**。タグは移動できる。
-- **Org の許可リスト**は Settings → Actions → General で設定。
+<ul class="actions-compact-list">
+<li><strong>ソースを確認</strong>。認証済み公開者もレビュー。</li>
+<li><strong>lockfile または完全な SHA で固定</strong>。タグは移動可能。</li>
+<li><strong>Org の許可リスト</strong>を Settings → Actions → General で設定。</li>
+</ul>
 
 ## Workflow を 1 つ作る <a class="h2-doc" href="https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 Node.js プロジェクトに <code>.github/<wbr>workflows/<wbr>ci.yml</code> を追加:
+
+<div class="pre-compact">
 
 ```yaml
 name: CI
@@ -166,12 +195,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
-        with: { node-version: 24 }
+      - { uses: actions/setup-node@v7, with: { node-version: 24 } }
       - run: npm ci && npm test
 ```
 
-push → **Actions のログと PR のチェック**。action の参照は lockfile または完全な SHA で固定する。
+</div>
+
+push → **Actions のログと PR チェック**。lockfile または完全な SHA で固定。
 
 ## 実行料金と無料枠 <a class="h2-doc" href="https://docs.github.com/en/billing/concepts/product-billing/github-actions" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="info-actions-pricing" class="demo-toggle" /><label class="h2-demo h2-info" for="info-actions-pricing">&#9432; INFO</label>
 
@@ -192,7 +222,7 @@ push → **Actions のログと PR のチェック**。action の参照は lockf
 </div>
 </div>
 
-**Public の標準 runner と self-hosted の実行は無料**。それ以外の対象利用は共通の無料枠から消費。
+<p class="actions-compact-lead"><strong>Public の標準 runner と self-hosted の実行は無料</strong>。それ以外の対象利用は共通の無料枠から消費。</p>
 
 | プラン | 月の実行無料枠 |
 | --- | ---: |
@@ -200,22 +230,26 @@ push → **Actions のログと PR のチェック**。action の参照は lockf
 | Pro / Team | $18 |
 | Enterprise Cloud | $300 |
 
-USD、**2026-11-11 時点**。$300 は Linux 2-core **50,000 分**相当（$0.006/分）。超過分は従量課金、ストレージは別枠。
+<p class="actions-pricing-note">USD、<strong>2026-11-11 時点</strong>。$300 は Linux 2-core <strong>50,000 分</strong>相当（$0.006/分）。超過分は従量課金、ストレージは別枠。</p>
 
 ## CI 以外の利用も予算に含める <a class="h2-doc" href="https://docs.github.com/en/billing/how-tos/set-up-budgets" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**自動化は実行枠を共有。AI クレジットは別のメーター。**
+<p class="actions-compact-lead"><strong>自動化は実行枠を共有。AI クレジットは別のメーター。</strong></p>
 
-| 利用元 | 実行枠の消費 |
-| --- | --- |
-| CI、<a class="retro-link" href="/theomonfort/playbook/code-scanning/">CodeQL</a>、<a class="retro-link" href="/theomonfort/playbook/code-quality/">Code Quality</a> | ホスト型 runner での実行 / スキャン |
-| <a class="retro-link" href="/theomonfort/playbook/copilot-code-review/">Copilot Code Review</a> | エージェントの文脈取得とツール実行 |
-| <a class="retro-link" href="/theomonfort/playbook/cloud-agent/">Copilot のクラウドタスク</a> | Actions またはサンドボックスの実行 |
+<table class="compact-table">
+<thead><tr><th>利用元</th><th>実行枠の消費</th></tr></thead>
+<tbody>
+<tr><td>CI、<a class="retro-link" href="/theomonfort/playbook/code-scanning/">CodeQL</a>、<a class="retro-link" href="/theomonfort/playbook/code-quality/">Code Quality</a></td><td>ホスト型 runner での実行 / スキャン</td></tr>
+<tr><td><a class="retro-link" href="/theomonfort/playbook/copilot-code-review/">Copilot Code Review</a></td><td>エージェントの文脈取得とツール実行</td></tr>
+<tr><td><a class="retro-link" href="/theomonfort/playbook/cloud-agent/">Copilot のクラウドタスク</a></td><td>Actions またはサンドボックスの実行</td></tr>
+</tbody>
+</table>
 
-- **まず監視:** soft budget で **75 / 90 / 100%** の通知を設定し、Actions の利用指標を確認。
-- **停止は慎重に:** “Stop usage when budget limit is reached” は、**その予算の対象範囲**で追加の有料利用を止める。
-
-Code Review は Actions によるエージェント機能なしでも動作可能。Actions 予算で **Copilot 全体が止まるわけではない**。
+<div class="actions-budget-notes">
+<p><strong>監視:</strong> soft budget の <strong>75 / 90 / 100%</strong> 通知と利用指標を確認。</p>
+<p><strong>停止は慎重に:</strong> “Stop usage when budget limit is reached” は、<strong>その予算の対象範囲</strong>の追加有料利用を止める。</p>
+<p>Code Review は Actions によるエージェント機能なしでも動作可能。Actions 予算で <strong>Copilot 全体が止まるわけではない</strong>。</p>
+</div>
 
 ## Workflow lockfiles (GA) <a class="h2-doc" href="https://docs.github.com/en/actions/concepts/security/workflow-dependency-lockfiles" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-actions-lockfiles" class="demo-toggle" /><label class="h2-demo" for="demo-actions-lockfiles">&#9658; DEMO</label>
 
