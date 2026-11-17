@@ -155,7 +155,7 @@ links:
 <line x1="52.0" y1="190.8" x2="574.0" y2="190.8" stroke="rgb(var(--rgb-neon-cyan) / 0.16)" stroke-width="1.2"/>
 <text x="42.0" y="196.8" text-anchor="end" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.68)">7d</text>
 <line x1="52.0" y1="250.0" x2="574.0" y2="250.0" stroke="rgb(var(--rgb-neon-cyan) / 0.16)" stroke-width="1.2"/>
-<text x="42.0" y="256.0" text-anchor="end" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.68)">1d</text>
+<text x="42.0" y="240.0" text-anchor="end" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.68)">1d</text>
 <polyline points="52.0,45.3 117.2,54.5 182.5,62.6 247.8,76.2 313.0,80.7 378.2,102.5 443.5,129.3 508.8,156.7 574.0,250.0" fill="none" stroke="var(--c-neon-cyan)" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
 <polyline points="52.0,45.3 117.2,54.5 182.5,62.6 247.8,76.2 313.0,80.7 378.2,102.5 443.5,129.3 508.8,156.7 574.0,250.0" fill="none" stroke="var(--c-neon-cyan)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
 <circle cx="52.0" cy="45.3" r="4.6" fill="var(--c-phosphor)"/>
@@ -165,17 +165,17 @@ links:
 <circle cx="182.5" cy="62.6" r="4.6" fill="var(--c-phosphor)"/>
 <text x="182.5" y="48.6" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">1.3y</text>
 <circle cx="247.8" cy="76.2" r="4.6" fill="var(--c-phosphor)"/>
-<text x="247.8" y="62.2" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">10mo</text>
+<text x="241.8" y="62.2" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">10mo</text>
 <circle cx="313.0" cy="80.7" r="4.6" fill="var(--c-phosphor)"/>
-<text x="313.0" y="66.7" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">8.6mo</text>
+<text x="318.0" y="66.7" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">8.6mo</text>
 <circle cx="378.2" cy="102.5" r="4.6" fill="var(--c-phosphor)"/>
-<text x="378.2" y="88.5" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">4.2mo</text>
+<text x="389.2" y="88.5" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">4.2mo</text>
 <circle cx="443.5" cy="129.3" r="4.6" fill="var(--c-phosphor)"/>
 <text x="443.5" y="115.3" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">53d</text>
 <circle cx="508.8" cy="156.7" r="4.6" fill="var(--c-phosphor)"/>
 <text x="508.8" y="142.7" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">21.5d</text>
 <circle cx="574.0" cy="250.0" r="6.5" fill="var(--c-coral-alert)"/>
-<text x="559.0" y="257.0" text-anchor="end" font-family="'Orbitron', 'IBM Plex Mono', sans-serif" font-size="20" font-weight="700" fill="var(--c-coral-alert)">24h</text>
+<text x="559.0" y="240.0" text-anchor="end" font-family="'Orbitron', 'IBM Plex Mono', sans-serif" font-size="20" font-weight="700" fill="var(--c-coral-alert)">24h</text>
 <text x="52.0" y="281" text-anchor="middle" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.72)">2018</text>
 <text x="117.2" y="281" text-anchor="middle" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.72)">2019</text>
 <text x="182.5" y="281" text-anchor="middle" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.72)">2020</text>
@@ -193,7 +193,7 @@ links:
 
 ## FIRST の 4 つの提言 <a class="h2-doc" href="https://www.first.org/newsroom/releases/20260615" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**従来のセキュリティが追いつかない。** AI が生成する新規コードの量は従来のレビュープロセスが検査できる範囲を超え、しかも一度に多数の新しい面から流れ込む。エージェントが変更を複数リポジトリへ波及させた後では、PR でのゲートはすでに手遅れ。
+**従来のセキュリティが追いつかない。** AI 生成コードは新たな領域へレビューより速く広がる。エージェントが複数 repo に変更を波及させた後の PR ゲートでは手遅れ。
 
 <div class="imp2">
 <div class="imp2-col">
@@ -206,11 +206,11 @@ links:
 </div>
 <div class="imp2-col">
 <p class="imp2-k">🎯 深刻度と悪用可能性で絞り込む</p>
-<p class="imp2-v">FIRST は <a class="retro-link" href="https://www.first.org/cvss/v3.1/specification-document#Qualitative-Severity-Rating-Scale" target="_blank" rel="noopener noreferrer">CVSS ↗</a> を自社環境に合わせて調整し、深刻度を評価することも推奨。悪用可能性の指標も併用する。Dependabot アラートには <a class="retro-link" href="https://github.blog/changelog/2025-02-19-dependabot-helps-users-focus-on-the-most-important-alerts-by-including-epss-scores-that-indicate-likelihood-of-exploitation-now-generally-available/" target="_blank" rel="noopener noreferrer">EPSS スコア ↗</a>（実際に悪用される可能性）が表示される。</p>
+<p class="imp2-v"><a class="retro-link" href="https://www.first.org/cvss/v3.1/specification-document#Qualitative-Severity-Rating-Scale" target="_blank" rel="noopener noreferrer">CVSS ↗</a> の深刻度を自社環境に合わせて調整。Dependabot は悪用可能性を示す <a class="retro-link" href="https://github.blog/changelog/2025-02-19-dependabot-helps-users-focus-on-the-most-important-alerts-by-including-epss-scores-that-indicate-likelihood-of-exploitation-now-generally-available/" target="_blank" rel="noopener noreferrer">EPSS ↗</a> も表示。</p>
 </div>
 <div class="imp2-col">
 <p class="imp2-k">🤖 防御側の AI を今すぐ使う</p>
-<p class="imp2-v">悪用はかつてなく速い。攻撃者も同じ最新モデルを使えて、コストは障害にならない。防御側がトリアージするより速くリスクを見つけて武器化し、サプライチェーン攻撃も人間のレビューサイクルより速く動く。</p>
+<p class="imp2-v">攻撃者もコストを問わず同じ最新モデルを使い、防御側より速くリスクを武器化する。サプライチェーン攻撃は人間のレビューを上回る。</p>
 </div>
 </div>
 
@@ -253,9 +253,7 @@ links:
 
 ## 日本企業で相次ぐデータ漏洩
 
-**2026年、サイバー脅威が急拡大。** 警察庁の観測では、上半期の不審アクセスは前年同期比 **51% 増**。ランサムウェア被害報告は **123 件で半期最多**（<a class="retro-link" href="https://www.npa.go.jp/publications/statistics/cybersecurity/data/R8kami/R08_kami_cyber_jousei.pdf" target="_blank" rel="noopener noreferrer">警察庁 ↗</a>）。
-
-公表日（続報や訂正を含む）の古い順。2026-10-22 時点。
+**2026年上半期:** 不審アクセスは前年比 **51% 増**、ランサムウェア報告は半期最多の **123 件**（<a class="retro-link" href="https://www.npa.go.jp/publications/statistics/cybersecurity/data/R8kami/R08_kami_cyber_jousei.pdf" target="_blank" rel="noopener noreferrer">警察庁 ↗</a>）。公表日（続報含む）の古い順、2026-10-22 時点。
 
 <div class="imp2">
 <div class="imp2-col">
@@ -287,7 +285,7 @@ links:
 
 ## GHAS はどう応えるか
 
-スキャンツールは通常プラットフォームの外側にある。別のコンソール、別のバックログ、そしてコードを書いた数日後に届く検出結果。GHAS はこの 4 ステップすべてを、コードがすでに置かれている場所で実行する。
+外部スキャナーは別のコンソールやバックログで検出結果が数日遅れることも。GHAS は 4 ステップをコードのある場所に集約する。
 
 <div class="rem-widget">
 <p class="rem-hint">▸ ステップをクリックで詳細</p>
@@ -376,7 +374,7 @@ links:
 
 ## 誰が何をできる? <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization#access-requirements-for-security-features" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**Org owner / Security manager** は全アラートを閲覧、管理できる。その他の組織メンバーは以下の権限がある repo のみ。
+**Org owner / Security manager** は全アラートを管理。その他のメンバーには以下の repo 権限が必要。
 
 | 操作 | 場所 | Code scanning | Secret scanning |
 | --- | --- | --- | --- |
@@ -385,9 +383,7 @@ links:
 | ステータスを変更 | Repo → アラート | **Write+** | **Admin**¹ |
 | Copilot に割り当てる | Org → Campaigns → repo | **Write+** ² | 非対応 |
 
-¹ **Write / Maintain** でも**自分のコミット**の secret は閲覧、管理できる。一覧は閲覧できない。
-
-² **Agentic Autofix 有効化 + 対象 repo の Write** が必要。Security manager 単独では **Read** のみ。
+¹ **Write / Maintain** は**自分のコミット**の secret を管理可能、一覧は不可。² **Agentic Autofix 有効化 + repo の Write** が必要。Security manager 単独では **Read** のみ。
 
 組織 repo の標準権限（2026-11-10）。**Write+** = Write / Maintain / Admin。
 
@@ -404,14 +400,14 @@ links:
 - 🌐 **public repo は「ほとんど」無料だが「全部」ではない** — custom patterns、delegated bypass、AI-detected secrets、campaigns、Security overview はライセンスが必要 (<a class="retro-link" href="https://docs.github.com/en/code-security/getting-started/github-security-features" target="_blank" rel="noopener noreferrer">正確な線引き ↗</a>)
 
 
-## 購入前の棚卸し — Risk Assessments <a class="h2-doc" href="https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## 購入前の Risk Assessments <a class="h2-doc" href="https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**Org → Security → Assessments** から実行できる無料の棚卸しが 2 つある。ライセンスもトライアルも不要で、購入を判断する前に実際の数字を見られる。
+**Org → Security → Assessments** で購入前に無料の棚卸しを 2 種類実行。ライセンスもトライアルも不要。
 
 <div class="assess">
 <div class="assess-card">
 <p class="assess-name">🔑 Secret Risk Assessment</p>
-<p class="assess-what">組織のリポジトリに眠っている secret の種類と件数を、カテゴリ別に集計する。</p>
+<p class="assess-what">組織内の secret の種類と件数をカテゴリ別に集計。</p>
 <dl class="assess-meta">
 <div class="assess-line"><dt>対象</dt><dd>すべての repo — public / private / internal / archived</dd></div>
 <div class="assess-line"><dt>頻度</dt><dd>90 日に 1 回</dd></div>
@@ -420,7 +416,7 @@ links:
 </div>
 <div class="assess-card is-code">
 <p class="assess-name">🔍 Code Security Risk Assessment</p>
-<p class="assess-what">CodeQL が検出したコードの脆弱性を、深刻度・言語・Copilot Autofix で修正可能な件数に分けて表示する。</p>
+<p class="assess-what">CodeQL の脆弱性を深刻度・言語・Copilot Autofix 対応件数で集計。</p>
 <dl class="assess-meta">
 <div class="assess-line"><dt>対象</dt><dd>最もアクティブな最大 20 repo</dd></div>
 <div class="assess-line"><dt>頻度</dt><dd>90 日に 1 回</dd></div>
@@ -429,15 +425,14 @@ links:
 </div>
 </div>
 
-- 🛂 実行できるのは **Organization owner** と **security manager** のみ
-- 🏷️ **GitHub Team** と **GitHub Enterprise Cloud** (Server は 3.22 で対応予定)
-- 🧪 結果画面からそのまま <a class="retro-link" href="https://docs.github.com/en/code-security/tutorials/trialing-github-advanced-security/planning-a-trial-of-ghas" target="_blank" rel="noopener noreferrer">GHAS トライアル ↗</a> を開始できる。数字が出た後の次の一手はこれ
+- 🛂 **Org owner / security manager** のみ。**Team / Enterprise Cloud**（Server は 3.22 対応予定）
+- 🧪 結果から <a class="retro-link" href="https://docs.github.com/en/code-security/tutorials/trialing-github-advanced-security/planning-a-trial-of-ghas" target="_blank" rel="noopener noreferrer">GHAS トライアル ↗</a> を開始可能
 
 ## エンタープライズ全体へのロールアウト手順
 
-**Enterprise → Settings → Advanced Security → Code security** で configuration を 1 つ作れば配下の全 org / repo に配れる。**New configuration** は最初から **GitHub recommended**。
+**Enterprise → Settings → Advanced Security → Code security** で 1 つの設定を全 org / repo に配布。**New configuration** は **GitHub recommended** で始まる。
 
-**Enterprise の security configuration を強制適用**し、新規 / 既存リポジトリを問わず org / repo 管理者によるポリシーの上書きを防げるようになった。<a class="retro-link" href="https://github.blog/changelog/2026-09-15-enforce-github-advanced-security-configurations/" target="_blank" rel="noopener noreferrer">9 月 15 日の発表 ↗</a>
+新規 / 既存 repo に**強制適用**し、org / repo 管理者の上書きを防げる。<a class="retro-link" href="https://github.blog/changelog/2026-09-15-enforce-github-advanced-security-configurations/" target="_blank" rel="noopener noreferrer">9 月 15 日の発表 ↗</a>
 
 <div class="ctl-widget">
 <div class="ctl-list">
@@ -542,7 +537,7 @@ links:
 </div>
 </div>
 
-配り終わったら次の関心事は「実際どこまで守れているか」。**Security and quality** タブが **Enterprise / Organization** の両レベルで答えてくれる。
+**Security and quality** タブで **Enterprise / Organization** のカバレッジを確認。
 
 | ビュー | わかること | レベル |
 | --- | --- | :---: |
@@ -551,6 +546,6 @@ links:
 | 🛡️ **Risk** | アラートが多いのはどの repo か | Ent + Org |
 | 🌐 **Public monitoring** | メンバーが **GitHub 上の public repo に漏らした** secret | **Ent のみ** |
 
-- 🏢 **Org レベルの Coverage** が現場の日常ビュー。enterprise 側は自分が owner / security manager になっている org しか集計されない
-- 🌐 **Public monitoring** (public preview・Secret Protection 必須) は enterprise メンバーと verified domain で漏洩を紐付ける。**Enterprise → Settings → Advanced Security → Code security** で ON
-- 📤 **Export CSV** は Overview / Coverage / Risk で使え、**適用中のフィルタがそのまま反映**される
+- 🏢 **Org Coverage** は日常ビュー。enterprise は自分が owner / security manager の org のみ集計
+- 🌐 **Public monitoring**（public preview・Secret Protection 必須）はメンバー / verified domain で紐付け。**Enterprise → Settings → Advanced Security → Code security** で ON
+- 📤 **CSV 出力**は Overview / Coverage / Risk のフィルタを維持

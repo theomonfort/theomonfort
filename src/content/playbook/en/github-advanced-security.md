@@ -155,7 +155,7 @@ links:
 <line x1="52.0" y1="190.8" x2="574.0" y2="190.8" stroke="rgb(var(--rgb-neon-cyan) / 0.16)" stroke-width="1.2"/>
 <text x="42.0" y="196.8" text-anchor="end" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.68)">7d</text>
 <line x1="52.0" y1="250.0" x2="574.0" y2="250.0" stroke="rgb(var(--rgb-neon-cyan) / 0.16)" stroke-width="1.2"/>
-<text x="42.0" y="256.0" text-anchor="end" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.68)">1d</text>
+<text x="42.0" y="240.0" text-anchor="end" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.68)">1d</text>
 <polyline points="52.0,45.3 117.2,54.5 182.5,62.6 247.8,76.2 313.0,80.7 378.2,102.5 443.5,129.3 508.8,156.7 574.0,250.0" fill="none" stroke="var(--c-neon-cyan)" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
 <polyline points="52.0,45.3 117.2,54.5 182.5,62.6 247.8,76.2 313.0,80.7 378.2,102.5 443.5,129.3 508.8,156.7 574.0,250.0" fill="none" stroke="var(--c-neon-cyan)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
 <circle cx="52.0" cy="45.3" r="4.6" fill="var(--c-phosphor)"/>
@@ -165,17 +165,17 @@ links:
 <circle cx="182.5" cy="62.6" r="4.6" fill="var(--c-phosphor)"/>
 <text x="182.5" y="48.6" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">1.3y</text>
 <circle cx="247.8" cy="76.2" r="4.6" fill="var(--c-phosphor)"/>
-<text x="247.8" y="62.2" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">10mo</text>
+<text x="241.8" y="62.2" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">10mo</text>
 <circle cx="313.0" cy="80.7" r="4.6" fill="var(--c-phosphor)"/>
-<text x="313.0" y="66.7" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">8.6mo</text>
+<text x="318.0" y="66.7" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">8.6mo</text>
 <circle cx="378.2" cy="102.5" r="4.6" fill="var(--c-phosphor)"/>
-<text x="378.2" y="88.5" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">4.2mo</text>
+<text x="389.2" y="88.5" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">4.2mo</text>
 <circle cx="443.5" cy="129.3" r="4.6" fill="var(--c-phosphor)"/>
 <text x="443.5" y="115.3" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">53d</text>
 <circle cx="508.8" cy="156.7" r="4.6" fill="var(--c-phosphor)"/>
 <text x="508.8" y="142.7" text-anchor="middle" font-size="18" fill="rgb(var(--rgb-phosphor) / 0.88)">21.5d</text>
 <circle cx="574.0" cy="250.0" r="6.5" fill="var(--c-coral-alert)"/>
-<text x="559.0" y="257.0" text-anchor="end" font-family="'Orbitron', 'IBM Plex Mono', sans-serif" font-size="20" font-weight="700" fill="var(--c-coral-alert)">24h</text>
+<text x="559.0" y="240.0" text-anchor="end" font-family="'Orbitron', 'IBM Plex Mono', sans-serif" font-size="20" font-weight="700" fill="var(--c-coral-alert)">24h</text>
 <text x="52.0" y="281" text-anchor="middle" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.72)">2018</text>
 <text x="117.2" y="281" text-anchor="middle" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.72)">2019</text>
 <text x="182.5" y="281" text-anchor="middle" font-size="17" fill="rgb(var(--rgb-phosphor) / 0.72)">2020</text>
@@ -193,7 +193,7 @@ links:
 
 ## FIRST's four recommendations <a class="h2-doc" href="https://www.first.org/newsroom/releases/20260615" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**Traditional security can't keep up.** The volume of new, AI-generated code outpaces what any traditional review process can inspect, and it arrives across many new surfaces at once. Gating at the pull request is already too late once an agent has propagated a change across repos.
+**Traditional security can't keep up.** AI-generated code spans new surfaces faster than reviews can inspect it. A PR gate is too late after an agent propagates a change across repos.
 
 <div class="imp2">
 <div class="imp2-col">
@@ -206,11 +206,11 @@ links:
 </div>
 <div class="imp2-col">
 <p class="imp2-k">🎯 Triage by severity and exploitability</p>
-<p class="imp2-v">FIRST also recommends assessing severity with <a class="retro-link" href="https://www.first.org/cvss/v3.1/specification-document#Qualitative-Severity-Rating-Scale" target="_blank" rel="noopener noreferrer">CVSS ↗</a>, adjusted to your environment. Complement this with exploitability signals: Dependabot alerts show the <a class="retro-link" href="https://github.blog/changelog/2025-02-19-dependabot-helps-users-focus-on-the-most-important-alerts-by-including-epss-scores-that-indicate-likelihood-of-exploitation-now-generally-available/" target="_blank" rel="noopener noreferrer">EPSS score ↗</a>, the likelihood of real-world exploitation.</p>
+<p class="imp2-v">Adjust <a class="retro-link" href="https://www.first.org/cvss/v3.1/specification-document#Qualitative-Severity-Rating-Scale" target="_blank" rel="noopener noreferrer">CVSS ↗</a> severity to your environment. Dependabot also shows <a class="retro-link" href="https://github.blog/changelog/2025-02-19-dependabot-helps-users-focus-on-the-most-important-alerts-by-including-epss-scores-that-indicate-likelihood-of-exploitation-now-generally-available/" target="_blank" rel="noopener noreferrer">EPSS ↗</a>, the likelihood of exploitation.</p>
 </div>
 <div class="imp2-col">
 <p class="imp2-k">🤖 Use defensive AI now</p>
-<p class="imp2-v">Exploitation is faster than ever. Attackers reach the same frontier models, and cost is no object. They find and weaponize risk faster than defenders can triage it, and supply chain attacks move faster than any human review cycle.</p>
+<p class="imp2-v">Attackers use the same frontier models regardless of cost, weaponizing risks faster than defenders can triage. Supply chain attacks outpace human review.</p>
 </div>
 </div>
 
@@ -253,9 +253,7 @@ Public disclosure dates, including the cited updates.
 
 ## A wave of data leaks at Japanese companies
 
-**Cyber threats surged in 2026.** In H1, suspicious accesses detected by police sensors rose **51% year over year**; reported ransomware cases hit a **half-year record of 123** (<a class="retro-link" href="https://www.npa.go.jp/publications/statistics/cybersecurity/data/R8kami/R08_kami_cyber_jousei.pdf" target="_blank" rel="noopener noreferrer">Japan NPA ↗</a>).
-
-Public disclosure dates, including updates, oldest first. As of 2026-10-22.
+**2026 H1:** suspicious accesses at police sensors rose **51% YoY**; ransomware reports hit a half-year record of **123** (<a class="retro-link" href="https://www.npa.go.jp/publications/statistics/cybersecurity/data/R8kami/R08_kami_cyber_jousei.pdf" target="_blank" rel="noopener noreferrer">Japan NPA ↗</a>). Disclosure dates, including updates, oldest first, as of 2026-10-22.
 
 <div class="imp2">
 <div class="imp2-col">
@@ -287,7 +285,7 @@ Public disclosure dates, including updates, oldest first. As of 2026-10-22.
 
 ## How GHAS answers it
 
-Scanning tools normally live outside the platform: a separate console, a separate backlog, and findings that reach the developer days after the code was written. GHAS puts all four steps where the code already is.
+External scanners can delay findings by days across separate consoles and backlogs. GHAS brings all four steps to the code.
 
 <div class="rem-widget">
 <p class="rem-hint">▸ CLICK A STEP FOR DETAILS</p>
@@ -376,7 +374,7 @@ Scanning tools normally live outside the platform: a separate console, a separat
 
 ## Who can do what? <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization#access-requirements-for-security-features" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**Org owners / Security managers:** view and manage all alerts. **Other org members:** only repos with these permissions.
+**Org owners / Security managers** manage all alerts. Other members need these repo permissions.
 
 | Action | Where | Code scanning | Secret scanning |
 | --- | --- | --- | --- |
@@ -385,9 +383,7 @@ Scanning tools normally live outside the platform: a separate console, a separat
 | Change status | Repo → alert | **Write+** | **Admin**¹ |
 | Assign Copilot | Org → Campaigns → repo | **Write+** ² | Not supported |
 
-¹ **Write / Maintain:** view/manage secrets in **their own commits**, no alert list.
-
-² Requires **Agentic Autofix enabled + Write on the target repo**. Security manager alone grants **Read**, not Write.
+¹ **Write / Maintain:** manage secrets in **own commits**, not the alert list. ² **Agentic Autofix enabled** and repo **Write** required; Security manager grants **Read**, not Write.
 
 Org repos, default roles (2026-11-10). **Write+** = Write / Maintain / Admin.
 
@@ -404,14 +400,14 @@ Org repos, default roles (2026-11-10). **Write+** = Write / Maintain / Admin.
 - 🌐 **Public repos get most features free, not all** — custom patterns, delegated bypass, AI-detected secrets, campaigns and Security overview still need a licence (<a class="retro-link" href="https://docs.github.com/en/code-security/getting-started/github-security-features" target="_blank" rel="noopener noreferrer">exact split ↗</a>)
 
 
-## Pre-purchase inventory — Risk Assessments <a class="h2-doc" href="https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## Risk Assessments before purchase <a class="h2-doc" href="https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-Two free assessments run from **Org → Security → Assessments** and show what is already hiding in your repos. No licence, no trial, and you see the numbers before deciding to buy.
+Run two free assessments at **Org → Security → Assessments** before buying. No licence or trial required.
 
 <div class="assess">
 <div class="assess-card">
 <p class="assess-name">🔑 Secret Risk Assessment</p>
-<p class="assess-what">Types and count of secrets sitting in your org's repositories, aggregated by category.</p>
+<p class="assess-what">Secret types and counts by category across the org.</p>
 <dl class="assess-meta">
 <div class="assess-line"><dt>SCOPE</dt><dd>All repos — public, private, internal, archived</dd></div>
 <div class="assess-line"><dt>RUNS</dt><dd>Once every 90 days</dd></div>
@@ -420,7 +416,7 @@ Two free assessments run from **Org → Security → Assessments** and show what
 </div>
 <div class="assess-card is-code">
 <p class="assess-name">🔍 Code Security Risk Assessment</p>
-<p class="assess-what">Code vulnerabilities found by CodeQL, broken down by severity, language, and how many Copilot Autofix can fix.</p>
+<p class="assess-what">CodeQL vulnerabilities by severity, language and Copilot Autofix eligibility.</p>
 <dl class="assess-meta">
 <div class="assess-line"><dt>SCOPE</dt><dd>Up to the 20 most active repos</dd></div>
 <div class="assess-line"><dt>RUNS</dt><dd>Once every 90 days</dd></div>
@@ -429,15 +425,14 @@ Two free assessments run from **Org → Security → Assessments** and show what
 </div>
 </div>
 
-- 🛂 Only **organization owners** and **security managers** can run them
-- 🏷️ **GitHub Team** and **GitHub Enterprise Cloud** (Server support expected in 3.22)
-- 🧪 You can start a <a class="retro-link" href="https://docs.github.com/en/code-security/tutorials/trialing-github-advanced-security/planning-a-trial-of-ghas" target="_blank" rel="noopener noreferrer">GHAS trial directly from the results ↗</a>, which is the natural next step once you have the numbers
+- 🛂 **Org owners / security managers** on **Team / Enterprise Cloud** (Server expected in 3.22)
+- 🧪 Start a <a class="retro-link" href="https://docs.github.com/en/code-security/tutorials/trialing-github-advanced-security/planning-a-trial-of-ghas" target="_blank" rel="noopener noreferrer">GHAS trial ↗</a> directly from results
 
 ## Rolling out across the enterprise
 
-One configuration at **Enterprise → Settings → Advanced Security → Code security** rolls out to every org and repo. **New configuration** opens pre-filled with **GitHub recommended**.
+At **Enterprise → Settings → Advanced Security → Code security**, create one configuration for all orgs and repos. **New configuration** starts with **GitHub recommended**.
 
-You can now **enforce enterprise security configurations** across both new and existing repositories, preventing organization and repository admins from overriding those policies. <a class="retro-link" href="https://github.blog/changelog/2026-09-15-enforce-github-advanced-security-configurations/" target="_blank" rel="noopener noreferrer">September 15 announcement ↗</a>
+**Enforce** it for new and existing repos to prevent org / repo admin overrides. <a class="retro-link" href="https://github.blog/changelog/2026-09-15-enforce-github-advanced-security-configurations/" target="_blank" rel="noopener noreferrer">September 15 announcement ↗</a>
 
 <div class="ctl-widget">
 <div class="ctl-list">
@@ -542,7 +537,7 @@ You can now **enforce enterprise security configurations** across both new and e
 </div>
 </div>
 
-Once the configuration is out, the question becomes "how far are we actually covered?" The **Security and quality** tab answers it at both **Enterprise** and **Organization** level.
+The **Security and quality** tab shows coverage at **Enterprise** and **Organization** level.
 
 | View | What it answers | Level |
 | --- | --- | :---: |
@@ -551,6 +546,6 @@ Once the configuration is out, the question becomes "how far are we actually cov
 | 🛡️ **Risk** | Which repos carry the most alerts | Ent + Org |
 | 🌐 **Public monitoring** | Secrets your members leaked in **public repos across GitHub** | **Ent only** |
 
-- 🏢 **Org-level Coverage** is the day-to-day view — enterprise views only aggregate orgs where you are an owner or security manager
-- 🌐 **Public monitoring** (public preview, needs Secret Protection) attributes leaks by enterprise membership and verified domain. Turn it on at **Enterprise → Settings → Advanced Security → Code security**
-- 📤 **Export CSV** on Overview / Coverage / Risk keeps the filters you already applied
+- 🏢 **Org Coverage** is the day-to-day view; enterprise aggregates only orgs where you are owner / security manager
+- 🌐 **Public monitoring** (public preview, Secret Protection required): attributes by membership / verified domains. Enable at **Enterprise → Settings → Advanced Security → Code security**
+- 📤 **CSV export** preserves filters on Overview / Coverage / Risk

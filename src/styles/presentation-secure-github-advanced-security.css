@@ -1,1 +1,190 @@
 /* github-advanced-security presentation rules. Scope every selector to .playbook-detail[data-playbook-slug="github-advanced-security"]. */
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"]:not(:has(.hero-quote.akq-slide-active)) {
+  padding-top: 4.25rem;
+  padding-bottom: 4rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .prose-akq > .akq-slide-active {
+  margin-block: 0.55rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .prose-akq > h2.akq-slide-active {
+  margin-bottom: 0.8rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .surge-steps {
+  gap: 1rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .surge-step {
+  gap: 0.1rem;
+  padding-left: 0.6rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .surge-k {
+  font-family: var(--font-prose);
+  font-size: 22px;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .duo-fig {
+  gap: 1rem;
+  margin-block: 0.5rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .duo-panel {
+  padding: 0.55rem 0.8rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .qbars {
+  height: 110px;
+  margin-top: 1.6rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .tte {
+  margin-top: 0.35rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .tte svg {
+  max-height: 172px;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .tte svg text {
+  font-size: 22px;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .duo-foot {
+  margin-top: 0.35rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .imp2 {
+  gap: 0.9rem 2rem;
+  margin-block: 0.7rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .imp2-col {
+  gap: 0.25rem;
+  padding-left: 0.9rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .imp2-v {
+  line-height: 1.4;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .rem-widget {
+  margin-block: 0.5rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .rem-flow {
+  --rem-tile: 3.5em;
+  --rem-gap: 1em;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .rem-screen {
+  min-height: 7em;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"]:has([name="ghas-answer"][open]) .prose-akq > p.akq-slide-active {
+  display: none;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"]:has([name="ghas-answer"][open]) .rem-screen {
+  min-height: 10em;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .rem-why {
+  line-height: 1.35;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .assess {
+  gap: 1rem;
+  margin-block: 0.7rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .assess-card {
+  gap: 0.25rem;
+  padding: 0.15rem 0.8rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] :is(.assess-what, .assess-line) {
+  line-height: 1.3;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .prose-akq > table.akq-slide-active :is(th, td) {
+  padding: 0.25em 0.5em;
+  line-height: 1.3;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .prose-akq > ul.akq-slide-active > li {
+  margin-block: 0.15em;
+  line-height: 1.35;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-widget {
+  margin-block: 0.5rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-btn {
+  min-height: 0;
+  padding-block: 0.3rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-list:has([name="ghas-rollout"]) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.3rem 0.8rem;
+  align-items: start;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-list:has([name="ghas-rollout"]) .ctl-item {
+  margin: 0;
+  min-width: 0;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-list:has([name="ghas-rollout"]) .ctl-name {
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-list:has([name="ghas-rollout"]) .ctl-when {
+  display: none;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-list:has([name="ghas-rollout"][open]) .ctl-item:not([open]) {
+  display: none;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-list:has([name="ghas-rollout"][open]) .ctl-item[open] {
+  grid-column: 1 / -1;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"]:has([name="ghas-rollout"][open]) .prose-akq > p.akq-slide-active {
+  display: none;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-item[open] .ctl-body {
+  padding: 0.4rem 0.7rem;
+  gap: 0.25rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-item[open] .ctl-row {
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .trio-panel:has(.trio-row[open]) .trio-row:not([open]) {
+  display: none;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .trio-summary {
+  min-height: 40px;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .trio-bar {
+  margin-bottom: 0.3rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .trio-foot {
+  margin-top: 0.25em;
+  padding-top: 0.25em;
+}
