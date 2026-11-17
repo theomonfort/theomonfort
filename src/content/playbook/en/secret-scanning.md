@@ -154,8 +154,13 @@ links:
 <p>Configure it across the org: open <a href="https://github.com/organizations/theomonfort-org/settings/security_products/configurations/edit/250834" target="_blank" rel="noopener noreferrer">theomonfort-org → Security configuration ↗</a>, set <b>Push protection</b> to <b>Enabled</b> and <b>Bypass privileges</b> to <b>Specific actors</b>, then select the actors. Click <b>Save configuration</b> and apply it to the target repos. Configuring delegated bypass at the org / enterprise level disables the repo-level setting.</p>
 <p>Demo the request flow as a <b>contributor without bypass privileges</b> (org owners / security managers can always bypass). Submit a request with a justification from the block page; reviewers receive an email notification.</p>
 <p>Review requests: <a href="https://github.com/theomonfort-org/ghas-test-1/security/secret_scanning/bypass_requests" target="_blank" rel="noopener noreferrer">ghas-test-1 → Push protection bypass requests ↗</a> (<b>Security and quality → Requests → Push protection bypass</b>). Filter by <b>All statuses → Open</b>, open a request, and show <b>Approve bypass request</b> / <b>Deny bypass request</b>. After approval, the requester pushes again.</p>
-<p>Gate the merge too: in <a href="https://github.com/theomonfort-org/ghas-test-1/settings/rules/new?target=branch&amp;enforcement=disabled" target="_blank" rel="noopener noreferrer">ghas-test-1 → New branch ruleset ↗</a>, turn on <b>Require secret scanning alerts are resolved</b> (Preview).</p>
-<p class="demo-out">An <b>I'll fix it later</b> secret is still an open alert, so the PR merge is blocked. <b>It's used in tests</b> doesn't block.</p>
+</li>
+<li>
+<p class="demo-step-title">MERGE PROTECTION</p>
+<p>Open the org ruleset: <a href="https://github.com/organizations/theomonfort-org/settings/rules/18296119" target="_blank" rel="noopener noreferrer">theomonfort-org → CODE REVIEW ORG LVL ↗</a> (<b>Active</b>, targets the default branch).</p>
+<p><b>Require secret scanning alerts are resolved</b> (Preview) is on, scoped to <b>Provider patterns</b>. The same ruleset also holds Copilot code review, code scanning, and code quality rules.</p>
+<p>In <code class="demo-path">ghas-test-1</code>, open a PR to <code class="demo-path">main</code> from the branch you bypassed with <b>I'll fix it later</b>.</p>
+<p class="demo-out">The secret is still an open alert, so the PR merge is blocked. A secret bypassed with <b>It's used in tests</b> doesn't block.</p>
 </li>
 <li>
 <p class="demo-step-title">VALIDITY CHECK</p>
