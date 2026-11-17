@@ -179,7 +179,7 @@ links:
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🚧</span><span class="ctl-name">Merge protection</span><span class="ctl-when">PR のマージ前</span><a class="ctl-doc" href="https://github.blog/changelog/2026-09-09-block-pull-requests-with-exposed-secrets-from-merging/" target="_blank" rel="noopener noreferrer">Changelog</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🚧</span><span class="ctl-name">Merge protection <span class="ctl-new">New!</span></span><span class="ctl-when">PR のマージ前</span><a class="ctl-doc" href="https://github.blog/changelog/2026-09-09-block-pull-requests-with-exposed-secrets-from-merging/" target="_blank" rel="noopener noreferrer">Changelog</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">設定方法</span><span class="ctl-v"><b>Rulesets → Require secret scanning alerts are resolved</b> を追加（Repo / Org / Enterprise）</span></p>
 <p class="ctl-row"><span class="ctl-k">マージ条件</span><span class="ctl-v">最新コミットのスキャン完了 + <b>PR が持ち込む未解決アラートなし</b>。Secret Protection / GHAS 向け public preview。ruleset の bypass は有効</span></p>
@@ -187,10 +187,10 @@ links:
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔍</span><span class="ctl-name">Secret scanning alerts</span><span class="ctl-when">コミット後・常時</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/secret-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔍</span><span class="ctl-name">Secret scanning alerts <span class="ctl-new">New!</span></span><span class="ctl-when">コミット後・常時</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/secret-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">検出された secret を <b>Security and quality</b> タブに通知</span></p>
-<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">全ブランチの Git 履歴全体・Issue・PR・GitHub Discussions・Wiki・secret gists・<a class="retro-link" href="/theomonfort/changelog/#2026-11-09-secret-scanning-workflow-logs">Workflow logs ↗</a>（パブリックプレビュー）。既存の対象は新しい secret type の追加時に<b>再スキャン</b>される</span></p>
+<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">全ブランチの Git 履歴全体・Issue・PR・GitHub Discussions・Wiki・secret gists・<a class="retro-link" href="https://github.blog/changelog/2026-11-09-secret-scanning-detects-secrets-in-github-actions-workflow-logs/" target="_blank" rel="noopener noreferrer">Workflow logs ↗</a> <span class="ctl-new">New!</span>（パブリックプレビュー）。既存の対象は新しい secret type の追加時に<b>再スキャン</b>される</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
@@ -208,7 +208,7 @@ links:
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🌐</span><span class="ctl-name">Public monitoring</span><span class="ctl-when">github.com 全体をリアルタイム</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🌐</span><span class="ctl-name">Public monitoring <span class="ctl-new">New!</span></span><span class="ctl-when">github.com 全体をリアルタイム</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">自分の repo の外(個人フォーク・OSS・公開 issue / PR)で漏れた secret を <b>エンタープライズに帰属</b>させて通知</span></p>
 <p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">公開コンテンツのみ。<b>private repo は絶対にスキャンしない</b>。GHEC Enterprise 向け</span></p>

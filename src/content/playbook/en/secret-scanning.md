@@ -179,7 +179,7 @@ links:
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🚧</span><span class="ctl-name">Merge protection</span><span class="ctl-when">Before PR merge</span><a class="ctl-doc" href="https://github.blog/changelog/2026-09-09-block-pull-requests-with-exposed-secrets-from-merging/" target="_blank" rel="noopener noreferrer">Changelog</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🚧</span><span class="ctl-name">Merge protection <span class="ctl-new">New!</span></span><span class="ctl-when">Before PR merge</span><a class="ctl-doc" href="https://github.blog/changelog/2026-09-09-block-pull-requests-with-exposed-secrets-from-merging/" target="_blank" rel="noopener noreferrer">Changelog</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">Setup</span><span class="ctl-v">Add <b>Rulesets → Require secret scanning alerts are resolved</b> (Repo / Org / Enterprise)</span></p>
 <p class="ctl-row"><span class="ctl-k">Merge gate</span><span class="ctl-v">Head scan complete, <b>no open PR-introduced alerts</b>. Public preview, Secret Protection / GHAS. Ruleset bypass applies</span></p>
@@ -187,10 +187,10 @@ links:
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔍</span><span class="ctl-name">Secret scanning alerts</span><span class="ctl-when">After commit, continuous</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/secret-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔍</span><span class="ctl-name">Secret scanning alerts <span class="ctl-new">New!</span></span><span class="ctl-when">After commit, continuous</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/secret-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">Notifies you of detected secrets in the <b>Security and quality</b> tab</span></p>
-<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Full Git history on all branches, Issues, PRs, GitHub Discussions, Wikis, secret gists, and <a class="retro-link" href="/theomonfort/en/changelog/#2026-11-09-secret-scanning-workflow-logs">workflow logs ↗</a> (public preview). Existing content is <b>rescanned</b> as new secret types ship</span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Full Git history on all branches, Issues, PRs, GitHub Discussions, Wikis, secret gists, and <a class="retro-link" href="https://github.blog/changelog/2026-11-09-secret-scanning-detects-secrets-in-github-actions-workflow-logs/" target="_blank" rel="noopener noreferrer">workflow logs ↗</a> <span class="ctl-new">New!</span> (public preview). Existing content is <b>rescanned</b> as new secret types ship</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
@@ -208,7 +208,7 @@ links:
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🌐</span><span class="ctl-name">Public monitoring</span><span class="ctl-when">Real-time across github.com</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🌐</span><span class="ctl-name">Public monitoring <span class="ctl-new">New!</span></span><span class="ctl-when">Real-time across github.com</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">Detects secrets leaked <b>outside your own repos</b> (personal forks, OSS, public issues and PRs) and attributes them to your enterprise</span></p>
 <p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Public content only, and it <b>never scans private repos</b>. GHEC Enterprise</span></p>
