@@ -256,6 +256,25 @@ body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="
   font-size: 20px;
 }
 
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="copilot-app"] .ctl-widget {
+  font-size: 22px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="copilot-app"] .ctl-btn {
+  padding-block: 6px;
+  font-size: 22px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="copilot-app"] .ctl-body {
+  padding: 8px 12px 10px 38px;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="copilot-app"] .ctl-row {
+  grid-template-columns: 9.5em minmax(0, 1fr);
+  font-size: 20px;
+  line-height: 1.45;
+}
+
 @media (max-width: 767px) {
   .playbook-detail[data-category="develop"][data-playbook-slug="cli"] .cli-commands,
   .playbook-detail[data-category="develop"][data-playbook-slug="copilot-chat"] .chat-continuity {

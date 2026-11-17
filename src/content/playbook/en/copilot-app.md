@@ -21,6 +21,12 @@ links:
     label: Projects and shared context
     url: https://docs.github.com/en/copilot/how-tos/github-copilot-app/working-with-projects
   - group: 📖 Official docs
+    label: Working with agent sessions
+    url: https://docs.github.com/en/copilot/how-tos/github-copilot-app/agent-sessions
+  - group: 📖 Official docs
+    label: Optimizing your AI usage
+    url: https://docs.github.com/en/copilot/tutorials/optimize-ai-usage
+  - group: 📖 Official docs
     label: Connectors and access policies
     url: https://docs.github.com/en/copilot/concepts/customizations/copilot-connectors
   - group: 📖 Official docs
@@ -241,4 +247,41 @@ Your browser does not support this video. <a href="/theomonfort/media/copilot-ap
 <p id="copilot-app-video-help" class="playbook-video-help">6:43 / Japanese on-screen text. Native playback, seek and volume controls. Esc exits fullscreen.</p>
 <p data-video-status role="status" aria-live="polite" hidden></p>
 <noscript><p>JavaScript is required for this player. Use the Open MP4 link above.</p></noscript>
+</div>
+
+## Reuse a Project, or start fresh? <a class="h2-doc" href="https://docs.github.com/en/copilot/tutorials/optimize-ai-usage" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+**Keep the same Project** across days for an ongoing domain goal, start a **new Session** for every task or PR, and open a **new Project** when switching domains.
+
+<div class="ctl-widget">
+<div class="ctl-list">
+<details class="ctl-item" name="copilot-app-lifecycle" style="--entry-accent:var(--c-gb-green)" open>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🗂️</span><span class="ctl-name">Keep the Project (multi-day, same goal)</span><span class="ctl-when">Same domain</span><a class="ctl-doc" href="https://docs.github.com/en/copilot/how-tos/github-copilot-app/working-with-projects" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Ongoing state</span><span class="ctl-v">A Project is built for an ongoing goal over time, retaining linked repositories, shared <b>Library</b> specs and artifacts, <b>Overview</b> tracking, and <b>Automations</b>.</span></p>
+<p class="ctl-row"><span class="ctl-k">Context guard</span><span class="ctl-v">Heavy file reads, builds, and diffs stay isolated inside child sessions instead of bloating the Project coordinator thread.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="copilot-app-lifecycle" style="--entry-accent:var(--c-neon-cyan)">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔀</span><span class="ctl-name">New Session per task or merged PR</span><span class="ctl-when">Every PR / task</span><a class="ctl-doc" href="https://docs.github.com/en/copilot/how-tos/github-copilot-app/agent-sessions" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Lean context</span><span class="ctl-v">Reusing a finished session resends tens of thousands of stale history tokens on every turn (<b>Optimizing your AI usage §3</b>: start a new conversation when switching problems).</span></p>
+<p class="ctl-row"><span class="ctl-k">Clean worktree</span><span class="ctl-v">After a squash-merge into <code>main</code>, an old session's worktree branch diverges from <code>main</code> and creates avoidable merge conflicts.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="copilot-app-lifecycle" style="--entry-accent:var(--c-crt-amber)">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">⏱️</span><span class="ctl-name">Prompt cache expiration and token cost</span><span class="ctl-when">1h / 24h TTL</span><a class="ctl-doc" href="https://docs.github.com/en/copilot/tutorials/optimize-ai-usage#4-preserve-the-cache" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">10% vs 100%</span><span class="ctl-v">Cached input tokens cost ~<b>10%</b> of normal input rates, but expire after <b>1h of inactivity</b> on most models (<b>24h</b> on OpenAI models).</span></p>
+<p class="ctl-row"><span class="ctl-k">Avoid rebuilds</span><span class="ctl-v">Waking a huge stale session days later, or switching model or reasoning effort mid-session, rebuilds the entire history at full input token cost; start fresh or run <code>/compact</code> in CLI.</span></p>
+</div>
+</details>
+<details class="ctl-item" name="copilot-app-lifecycle" style="--entry-accent:var(--c-neon-magenta)">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🧭</span><span class="ctl-name">When to create a new Project (or direct Session)</span><span class="ctl-when">New goal / 1-off</span><a class="ctl-doc" href="https://docs.github.com/en/copilot/how-tos/github-copilot-app/working-with-projects" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">Focused goal</span><span class="ctl-v">Create a separate Project when changing topics or repository sets so <b>Library</b> files and context never mix.</span></p>
+<p class="ctl-row"><span class="ctl-k">Skip Projects</span><span class="ctl-v">For a single focused task in one repo, launch a <b>Session</b> directly without coordinator overhead; also start a fresh Project once an old multi-day initiative is 100% closed and its Library artifacts are no longer needed.</span></p>
+</div>
+</details>
+</div>
 </div>

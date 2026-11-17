@@ -21,6 +21,12 @@ links:
     label: Projects とコンテキスト共有
     url: https://docs.github.com/en/copilot/how-tos/github-copilot-app/working-with-projects
   - group: 📖 公式ドキュメント
+    label: Working with agent sessions
+    url: https://docs.github.com/en/copilot/how-tos/github-copilot-app/agent-sessions
+  - group: 📖 公式ドキュメント
+    label: Optimizing your AI usage
+    url: https://docs.github.com/en/copilot/tutorials/optimize-ai-usage
+  - group: 📖 公式ドキュメント
     label: Connectors とアクセス制御
     url: https://docs.github.com/en/copilot/concepts/customizations/copilot-connectors
   - group: 📖 公式ドキュメント
@@ -241,4 +247,41 @@ body.present-mode .prose-akq .playbook-demo-video:has([data-video-status]:not([h
 <p id="copilot-app-video-help" class="playbook-video-help">6 分 43 秒 / 日本語テロップ。標準の再生、シーク、音量操作に対応。Esc で全画面表示を終了。</p>
 <p data-video-status role="status" aria-live="polite" hidden></p>
 <noscript><p>このプレーヤーには JavaScript が必要です。上のリンクから MP4 を直接開いてください。</p></noscript>
+</div>
+
+## Project の継続と作り直しの使い分け <a class="h2-doc" href="https://docs.github.com/en/copilot/tutorials/optimize-ai-usage" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+同じ領域の継続目標には数日かけて**同じ Project** を使い、タスクや PR ごとに**新しい Session** を開始。領域が変わるときだけ**新しい Project** を作る。
+
+<div class="ctl-widget">
+<div class="ctl-list">
+<details class="ctl-item" name="copilot-app-lifecycle" style="--entry-accent:var(--c-gb-green)" open>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🗂️</span><span class="ctl-name">Project を継続（数日またぎの同じ目標）</span><span class="ctl-when">同じ領域 / 目標</span><a class="ctl-doc" href="https://docs.github.com/en/copilot/how-tos/github-copilot-app/working-with-projects" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">継続する状態</span><span class="ctl-v">Project は継続的な目標のための仕組み。紐づけたリポジトリ、<b>Library</b> の仕様書や成果物、<b>Overview</b> の進捗、<b>Automations</b> を日またぎで保持する。</span></p>
+<p class="ctl-row"><span class="ctl-k">文脈の保護</span><span class="ctl-v">大量のファイル読み取り、ビルド、差分は子セッション側に隔離され、Project の調整スレッドが肥大化するのを防ぐ。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="copilot-app-lifecycle" style="--entry-accent:var(--c-neon-cyan)">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔀</span><span class="ctl-name">タスクや PR マージごとに新しい Session</span><span class="ctl-when">PR / タスクごと</span><a class="ctl-doc" href="https://docs.github.com/en/copilot/how-tos/github-copilot-app/agent-sessions" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">軽量な文脈</span><span class="ctl-v">完了済みセッションの使い回しは、数万トークンの古い履歴を毎ターン再送する（<b>Optimizing your AI usage §3</b>: 課題が変わったら新しい会話を開始）。</span></p>
+<p class="ctl-row"><span class="ctl-k">清潔な Worktree</span><span class="ctl-v"><code>main</code> への squash merge 後も古いセッションの worktree ブランチを使い続けると、<code>main</code> から乖離して不要な競合を招く。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="copilot-app-lifecycle" style="--entry-accent:var(--c-crt-amber)">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">⏱️</span><span class="ctl-name">プロンプトキャッシュの期限とトークンコスト</span><span class="ctl-when">1h / 24h TTL</span><a class="ctl-doc" href="https://docs.github.com/en/copilot/tutorials/optimize-ai-usage#4-preserve-the-cache" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">10% 対 100%</span><span class="ctl-v">キャッシュ済み入力トークンは通常単価の<b>約 10%</b>だが、無操作が続くと大半のモデルで <b>1 時間</b>（OpenAI モデルは <b>24 時間</b>）で失効する。</span></p>
+<p class="ctl-row"><span class="ctl-k">再構築を回避</span><span class="ctl-v">数日放置した巨大セッションの再開や、途中のモデル / reasoning effort 変更は全履歴を通常単価で再構築する。新規開始か CLI の <code>/compact</code> を使う。</span></p>
+</div>
+</details>
+<details class="ctl-item" name="copilot-app-lifecycle" style="--entry-accent:var(--c-neon-magenta)">
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🧭</span><span class="ctl-name">新しい Project（または直接 Session）を作る場面</span><span class="ctl-when">別テーマ / 単発作業</span><a class="ctl-doc" href="https://docs.github.com/en/copilot/how-tos/github-copilot-app/working-with-projects" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<div class="ctl-body">
+<p class="ctl-row"><span class="ctl-k">別テーマで分離</span><span class="ctl-v">テーマや対象リポジトリ群が変わるときは別 Project を作成し、<b>Library</b> の資料や文脈が混ざるのを防ぐ。</span></p>
+<p class="ctl-row"><span class="ctl-k">単発と完了後</span><span class="ctl-v">単一リポジトリの単発修正は調整オーバーヘッドなしの直接 <b>Session</b> で十分。長期施策が 100% 完了し Library の成果物も不要になったら次回は新規作成する。</span></p>
+</div>
+</details>
+</div>
 </div>
