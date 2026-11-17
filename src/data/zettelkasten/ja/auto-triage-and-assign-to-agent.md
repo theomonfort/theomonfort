@@ -1,0 +1,19 @@
+---
+title: "自動トリアージとエージェントへの割り当て"
+---
+
+大規模な依存関係ツリーでは、数百件の [[Dependabot Alerts & Updates]] が発生することがあります。**自動トリアージルール**と**エージェントへの割り当て**により、[[Dependabot]] の検出結果を [[Code Security]] 内で対応しやすくします。
+
+## 1. 自動トリアージルール
+
+- GitHub のプリセットが、既知の誤検知を自動処理します。
+- リポジトリまたは Organization のカスタムルールで、影響の小さいアラート（`devDependencies` のみのテストパッケージ、低い EPSS スコア、[[Reachability Analysis]] の `Unreachable` 判定など）を自動で無視またはスヌーズし、対象範囲が変われば自動で再オープンします。
+
+## 2. エージェントへの割り当て
+
+- バージョンアップで破壊的な API 変更が入り、通常の Dependabot PR ではコンパイルできない場合、アラートの **Assign to agent** をクリックします。
+- コーディングエージェント（Copilot、Claude、Codex）が呼び出し箇所の到達可能性を調べ、リポジトリ全体で影響を受けるインポートと呼び出し元をリファクタリングし、テストを実行してレビュー可能なドラフト PR を作成します。自社コード向けの [[Agentic Autofix]] を補完します。
+
+## Cloud Agent と連携した修正
+
+- 優先順位を付けた [[Dependabot Alerts & Updates]] を [[Copilot Cloud Agent]] へ直接委任し、検証済みの修正 [[Pull Requests]] を作成します。

@@ -228,26 +228,30 @@ export function parseNote(slug, raw) {
 
 export function buildResolutionIndex(notesMap) {
   const lookup = new Map();
+  const slugLookup = new Map();
 
   for (const note of notesMap.values()) {
-    lookup.set(note.slug, note.slug);
-    lookup.set(normalizeKey(note.slug), note.slug);
-    lookup.set(normalizeKey(note.title), note.slug);
-    lookup.set(slugify(note.title), note.slug);
-
-    for (const alias of note.aliases) {
-      lookup.set(normalizeKey(alias), note.slug);
-      lookup.set(slugify(alias), note.slug);
+    for (const name of [note.title, ...note.aliases]) {
+      const key = normalizeKey(name);
+      if (key) lookup.set(key, note.slug);
+      const slugKey = slugify(name);
+      if (slugKey && /^[\x00-\x7F]+$/.test(name)) {
+        slugLookup.set(slugKey, note.slug);
+      }
     }
+  }
+
+  // Stable filenames take precedence over titles and aliases in either language.
+  for (const note of notesMap.values()) {
+    lookup.set(normalizeKey(note.slug), note.slug);
+    slugLookup.set(note.slug, note.slug);
   }
 
   return function resolveTarget(target) {
     if (!target) return null;
     const byNorm = lookup.get(normalizeKey(target));
     if (byNorm) return byNorm;
-    const bySlug = lookup.get(slugify(target));
-    if (bySlug) return bySlug;
-    return null;
+    return /^[\x00-\x7F]+$/.test(target) ? slugLookup.get(slugify(target)) || null : null;
   };
 }
 
@@ -354,7 +358,7 @@ export function buildGraphData(notesMap, { includeUnresolved = true } = {}) {
   };
 }
 
-export function renderNoteHtml(note, resolveTarget) {
+export function renderNoteHtml(note, resolveTarget, getTitle = () => null) {
   const placeholders = [];
 
   let bodyToRender = note.body.replace(/^\s*#\s+.+\n+/, '');
@@ -374,8 +378,9 @@ export function renderNoteHtml(note, resolveTarget) {
         const [targetPart, aliasPart] = inner.split('|');
         const [rawTarget, headingPart] = targetPart.split('#');
         const cleanTarget = rawTarget.trim();
-        const display = (aliasPart ? aliasPart.trim() : cleanTarget) + (headingPart ? ` > ${headingPart.trim()}` : '');
         const resolvedSlug = resolveTarget(cleanTarget);
+        const display = (aliasPart ? aliasPart.trim() : getTitle(resolvedSlug) || cleanTarget) +
+          (headingPart ? ` > ${headingPart.trim()}` : '');
         const exists = Boolean(resolvedSlug);
 
         return stash(
