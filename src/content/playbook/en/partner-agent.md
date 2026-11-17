@@ -33,8 +33,8 @@ links:
     label: Manage policies (Enterprise)
     url: https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-enterprise-policies
   - group: VS Code Docs
-    label: Partner agents
-    url: https://code.visualstudio.com/docs/copilot/agents/third-party-agents
+    label: Agent harnesses and native Codex setup
+    url: https://code.visualstudio.com/docs/agents/run/agent-harnesses#_codex
   - group: VS Code Docs
     label: Cloud agents
     url: https://code.visualstudio.com/docs/copilot/agents/cloud-agents
@@ -60,8 +60,8 @@ links:
     label: "GPT-5.3-Codex default, Business/Enterprise (2026-05-18)"
     url: https://github.blog/changelog/2026-05-17-gpt-5-3-codex-is-now-the-base-model-for-copilot-business-and-enterprise
   - group: 📰 Recent Changelog
-    label: "JetBrains inline agent preview (2026-04-24)"
-    url: https://github.blog/changelog/2026-04-24-inline-agent-mode-in-preview-and-more-in-github-copilot-for-jetbrains-ides
+    label: "Codex Agent Host / SDK download (2026-09-16)"
+    url: https://code.visualstudio.com/updates/v1_138#_expanded-codex-support-in-the-agent-host
   - group: 📰 Recent Changelog
     label: "Cloud Claude/Codex model picker (2026-04-14)"
     url: https://github.blog/changelog/2026-04-14-model-selection-for-claude-and-codex-agents-on-github-com
@@ -125,27 +125,62 @@ links:
 > ⚠️ **Copilot is a harness, not a cloud location.** The policies above govern **GitHub-hosted agents**. VS Code's **Claude / Codex harnesses** have separate controls and are disabled when **Copilot enterprise-managed settings** apply.
 
 
-## VS Code × OpenAI Codex
+## VS Code × OpenAI Codex <a class="h2-doc" href="https://code.visualstudio.com/docs/agents/run/agent-harnesses#_codex" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-partner-codex" class="demo-toggle" /><label class="h2-demo" for="demo-partner-codex">&#9658; DEMO</label>
 
-To use Codex from VS Code, install the **OpenAI Codex extension** and choose **"Sign in with Copilot"** at launch. Logging in via Copilot means no separate OpenAI account or billing is needed.
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-partner-codex" aria-label="Close demo steps"></label>
+<div class="demo-window" role="group" aria-label="Demo steps">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Native Codex setup</span><span class="demo-note">FOR PRESENTER ONLY</span><label class="demo-close" for="demo-partner-codex" aria-label="Close">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">ENABLE THE CODEX AGENT HOST</p>
+<p>In VS Code Settings, set <code class="demo-path">chat.agentHost.codexAgent.enabled</code> to <b>true</b>.</p>
+<p class="demo-out">Codex becomes available in the Agents window without the OpenAI extension. Enterprise-managed settings can disable this harness; a user setting cannot override them.</p>
+</li>
+<li>
+<p class="demo-step-title">USE IT IN THE EDITOR CHAT VIEW</p>
+<p>Set <code class="demo-path">chat.editor.codex.preferAgentHost</code> to <b>true</b> and restart VS Code when prompted.</p>
+<p class="demo-out">The native integration supplies the Codex choice in Chat, replacing the extension's choice if installed. You do not need both integrations.</p>
+</li>
+<li>
+<p class="demo-step-title">SELECT THE HARNESS</p>
+<p>Open Chat, select <b>New Chat</b>, then <code class="demo-path">Session Target → Codex</code>.</p>
+<p class="demo-out">The input shows <b>Chat with Codex</b>. Selecting a Codex model inside the Copilot harness is not the same thing.</p>
+</li>
+<li>
+<p class="demo-step-title">DOWNLOAD THE SDK</p>
+<p>If <b>Download the Codex Agent</b> appears, click <b>Download</b>. When models are available, sending a prompt also starts the SDK download.</p>
+<p class="demo-out">VS Code downloads the agent runtime on demand, not the standalone Codex app. <a class="retro-link" href="https://code.visualstudio.com/updates/v1_138#_on-demand-agent-sdk-downloads" target="_blank" rel="noopener noreferrer">VS Code 1.138 download prompt ↗</a></p>
+</li>
+<li>
+<p class="demo-step-title">CHOOSE MODEL ACCESS</p>
+<p>For Copilot-backed models, sign in to GitHub. The <a class="retro-link" href="https://code.visualstudio.com/docs/agents/run/agent-harnesses#_codex" target="_blank" rel="noopener noreferrer">VS Code docs ↗</a> require <b>Copilot Pro+</b> for this route (as of 2026-11-17).</p>
+<p>Alternatively, use <b>Sign in to ChatGPT</b> in the account menu. If both accounts are signed in, choose the <b>Copilot</b> model group to use Copilot access and billing, not the <b>ChatGPT</b> group.</p>
+<p class="demo-out">The selected provider determines the account, usage limits, and billing.</p>
+</li>
+</ol>
+</div>
+</div>
+
+Use the **Codex harness directly in VS Code** through the **experimental Agent Host integration**. No separate Codex app or OpenAI extension is required.
 
 <div class="partner-setup-columns">
 <div>
 
 ### Get started
 
-- Install the **OpenAI Codex extension** from the VS Code Marketplace
-- Launch the extension and click **"Sign in with Copilot"**
-- Find your Codex session in the **Agent Sessions** view
+- Enable the **native integration** (settings in **DEMO**)
+- **New Chat → Session Target → Codex**
+- **Download** the SDK, or send your first prompt
 
 </div>
 <div>
 
-### What to know
+### Access (as of 2026-11-17)
 
-- **Extension required**, this is a dedicated VS Code integration
-- **OpenAI models only**, availability follows the extension's model picker
-- **Copilot billing**, all requests go through the Copilot API
+- **Copilot-backed models**: VS Code docs require **Pro+**; usage is billed to Copilot
+- **ChatGPT sign-in**: an alternative with its own limits and billing
+- **OpenAI extension**: still an option, not a prerequisite
 
 </div>
 </div>
