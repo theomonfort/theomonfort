@@ -215,7 +215,7 @@ links:
 
 言語と <a class="retro-link" href="https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/manage-your-configuration/codeql-for-compiled-languages" target="_blank" rel="noopener noreferrer">build mode ↗</a> に応じて、ソースを直接抽出するか、ビルドを監視する。
 
-## CodeQL クエリの読み方 <a class="h2-doc" href="https://codeql.github.com/docs/writing-codeql-queries/about-codeql-queries/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## <span id="codeql-クエリの読み方">CodeQL クエリの読み方</span> <a class="h2-doc" href="https://codeql.github.com/docs/writing-codeql-queries/about-codeql-queries/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 QL は宣言型言語。**バグの形を定義すると evaluator が該当箇所を探す**。SQL の `FROM / WHERE / SELECT` に近い。
 
@@ -228,7 +228,7 @@ where
 select ifstmt, "This if-statement is redundant." // ④ 報告
 ```
 
-セキュリティクエリは <a class="retro-link" href="https://codeql.github.com/docs/writing-codeql-queries/about-data-flow-analysis/" target="_blank" rel="noopener noreferrer">DataFlow / TaintTracking ↗</a> で **source → sanitizer → sink** の経路を探索。通常は <a class="retro-link" href="https://github.com/github/codeql" target="_blank" rel="noopener noreferrer">公開パック ↗</a> を使い、独自クエリは自社フレームワークの source / sink を補う。
+セキュリティクエリは <a class="retro-link" href="https://codeql.github.com/docs/writing-codeql-queries/about-data-flow-analysis/" target="_blank" rel="noopener noreferrer">DataFlow / TaintTracking ↗</a> で **sanitizer に遮られない source → sink** を探索。通常は <a class="retro-link" href="https://github.com/github/codeql" target="_blank" rel="noopener noreferrer">公開パック ↗</a> を使い、独自クエリは自社フレームワークの source / sink を補う。
 
 ## CodeQL が見つける脆弱性
 
@@ -590,7 +590,7 @@ Copilot Autofix は **対応するアラートに修正パッチを提案**す�
 </div>
 </div>
 
-## Security Campaigns: 組織横断の修正 <a class="h2-doc" href="https://docs.github.com/en/code-security/securing-your-organization/fixing-security-alerts-at-scale/about-security-campaigns" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## <span id="security-campaigns--組織横断で計画的に修正">Security Campaigns: 組織横断の修正</span> <a class="h2-doc" href="https://docs.github.com/en/code-security/securing-your-organization/fixing-security-alerts-at-scale/about-security-campaigns" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 バックログを **期限付きのキャンペーン**にして、担当と締め切りを決める。
 
@@ -733,7 +733,7 @@ Copilot Autofix は **対応するアラートに修正パッチを提案**す�
 </div>
 </div>
 
-## Advanced setup と SARIF 連携 <a class="h2-doc" href="https://docs.github.com/en/code-security/code-scanning/enabling-code-scanning/configuring-default-setup-for-code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## <span id="advanced-setup-と-sarif-連携">Advanced setup と SARIF 連携</span> <a class="h2-doc" href="https://docs.github.com/en/code-security/code-scanning/enabling-code-scanning/configuring-default-setup-for-code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 Monorepo、独自ビルド、他社ツール併用なら workflow を自分で書く。
 
@@ -870,9 +870,9 @@ jobs:
 >
 > ⚠️ **Public → private**: Code Scanning を継続するには Code Security が必要。
 
-## Code Security Risk Assessment(無料の棚卸しスキャン) <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## <span id="code-security-risk-assessment無料の棚卸しスキャン">Code Security Risk Assessment(無料の棚卸しスキャン)</span> <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**CodeQL で無料の棚卸し**。GHAS / Code Security ライセンス不要（2026 年 4 月 GA）。
+<a class="retro-link" href="https://github.blog/security/application-security/how-exposed-is-your-code-find-out-in-minutes-for-free/" target="_blank" rel="noopener noreferrer"><strong>CodeQL で無料の棚卸し ↗</strong></a>。GHAS / Code Security ライセンス不要（2026 年 4 月 GA）。
 
 - 🔎 **対象** — 最近のコミットが活発な repo を最大 20 件（毎回選び直し可）
 - 📊 **出力** — **重大度・言語・ルール種別** 別のレポート、**Copilot Autofix で修正可能な件数** も表示

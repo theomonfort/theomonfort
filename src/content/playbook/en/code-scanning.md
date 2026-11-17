@@ -215,7 +215,7 @@ links:
 
 Extraction: source or build monitoring, depending on language and <a class="retro-link" href="https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/manage-your-configuration/codeql-for-compiled-languages" target="_blank" rel="noopener noreferrer">build mode ↗</a>.
 
-## Reading a CodeQL query <a class="h2-doc" href="https://codeql.github.com/docs/writing-codeql-queries/about-codeql-queries/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## <span id="reading-a-codeql-query">Reading a CodeQL query</span> <a class="h2-doc" href="https://codeql.github.com/docs/writing-codeql-queries/about-codeql-queries/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 QL is declarative: **describe the bug; the evaluator finds matching instances**. Think SQL's `FROM / WHERE / SELECT`.
 
@@ -228,7 +228,7 @@ where
 select ifstmt, "This if-statement is redundant." // ④ report
 ```
 
-Security queries add <a class="retro-link" href="https://codeql.github.com/docs/writing-codeql-queries/about-data-flow-analysis/" target="_blank" rel="noopener noreferrer">DataFlow / TaintTracking ↗</a>: **sources → sanitizers → sinks**. Start with the open-source <a class="retro-link" href="https://github.com/github/codeql" target="_blank" rel="noopener noreferrer">query packs ↗</a>; custom queries mainly model your framework's sources and sinks.
+Security queries add <a class="retro-link" href="https://codeql.github.com/docs/writing-codeql-queries/about-data-flow-analysis/" target="_blank" rel="noopener noreferrer">DataFlow / TaintTracking ↗</a>: **unsanitized source → sink flows**. Start with the open-source <a class="retro-link" href="https://github.com/github/codeql" target="_blank" rel="noopener noreferrer">query packs ↗</a>; custom queries mainly model your framework's sources and sinks.
 
 ## What CodeQL finds
 
@@ -590,7 +590,7 @@ Copilot Autofix can generate a **suggested patch for an eligible alert**. You re
 </div>
 </div>
 
-## Security Campaigns at scale <a class="h2-doc" href="https://docs.github.com/en/code-security/securing-your-organization/fixing-security-alerts-at-scale/about-security-campaigns" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## <span id="security-campaigns--drive-remediation-at-scale">Security Campaigns at scale</span> <a class="h2-doc" href="https://docs.github.com/en/code-security/securing-your-organization/fixing-security-alerts-at-scale/about-security-campaigns" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 Turn the backlog into a **time-boxed campaign**, with an owner and a deadline.
 
@@ -733,7 +733,7 @@ Verify coverage, protect PRs, then fix the backlog. Replace `ORG`, `OWNER`, `REP
 </div>
 </div>
 
-## Advanced setup and SARIF <a class="h2-doc" href="https://docs.github.com/en/code-security/code-scanning/enabling-code-scanning/configuring-default-setup-for-code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## <span id="advanced-setup-and-sarif">Advanced setup and SARIF</span> <a class="h2-doc" href="https://docs.github.com/en/code-security/code-scanning/enabling-code-scanning/configuring-default-setup-for-code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 For monorepos, custom builds or another SAST tool, own the workflow.
 
@@ -870,9 +870,9 @@ jobs:
 >
 > ⚠️ **Public → private**: Code Security is required to keep code scanning enabled.
 
-## Code Security Risk Assessment (free inventory scan) <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## <span id="code-security-risk-assessment-free-inventory-scan">Code Security Risk Assessment (free inventory scan)</span> <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**Free CodeQL inventory**, without a GHAS / Code Security license (GA April 2026).
+<a class="retro-link" href="https://github.blog/security/application-security/how-exposed-is-your-code-find-out-in-minutes-for-free/" target="_blank" rel="noopener noreferrer"><strong>Free CodeQL inventory ↗</strong></a>, without a GHAS / Code Security license (GA April 2026).
 
 - 🔎 **Scope** — up to 20 repos with the most recent commits, re-selectable each run
 - 📊 **Output** — report by **severity, language, rule type**, plus **how many Copilot Autofix can fix**
