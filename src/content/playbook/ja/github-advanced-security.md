@@ -414,7 +414,7 @@ links:
 <p class="assess-what">組織のリポジトリに眠っている secret の種類と件数を、カテゴリ別に集計する。</p>
 <dl class="assess-meta">
 <div class="assess-line"><dt>対象</dt><dd>すべての repo — public / private / internal / archived</dd></div>
-<div class="assess-line"><dt>頻度</dt><dd>1 回限り</dd></div>
+<div class="assess-line"><dt>頻度</dt><dd>90 日に 1 回</dd></div>
 <div class="assess-line"><dt>出力</dt><dd>件数のみ。secret の値は保存されない</dd></div>
 </dl>
 </div>
