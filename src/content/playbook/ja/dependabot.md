@@ -80,13 +80,13 @@ links:
 
 ## Alerts と Updates の違い
 
-Dependabot は **3 つの機能** に分かれている。よく混同されるが、役割が異なる。
+Dependabot は **3 つの機能** に分かれている。
 
 | 機能 | 何をする？ | トリガー | 出力 |
 | --- | --- | --- | --- |
-| 🚨 **Security alerts** | 既存依存の脆弱性を通知(opt-in で [npm の malware alerts ↗](https://gh.io/dependabot-malware) も含む) | GitHub Advisory Database に新規 CVE が登録された時 | Security タブ + メール |
-| 🔧 **Security updates** | 脆弱性を直す PR を自動作成 | アラート発生時(自動的に) | PR(脆弱性 → 修正版に上げる) |
-| ⏰ **Version updates** | 脆弱性に関係なく新バージョンへ追従する PR | 設定ファイルのスケジュール(daily / weekly) | PR(古い → 最新) |
+| 🚨 **Security alerts** | 既存依存の脆弱性を通知。opt-in で [npm malware alerts ↗](https://gh.io/dependabot-malware) も対象 | GitHub Advisory Database に新規 CVE | Security タブ + メール |
+| 🔧 **Security updates** | 修正版への PR を自動作成 | アラート発生 | 修正 PR |
+| ⏰ **Version updates** | 脆弱性に関係なく更新 | 設定スケジュール（daily / weekly） | PR（古い → 最新） |
 
 > 🔑 **Alerts** = 検知だけ、**Updates** = 修正 PR まで作る。Security updates は Alerts に乗っかって動く(Alerts 無しでは動かない)。
 
@@ -94,52 +94,52 @@ Dependabot は **3 つの機能** に分かれている。よく混同される�
 
 Dependabot のすべての判断は **Dependency graph** が出発点。
 
-- 🗂️ マニフェストとロックファイルを解析 — `package-lock.json`、`requirements.txt`、`go.mod`、`pom.xml`、`Gemfile.lock` など各エコシステムの依存定義を読む
-- 🔄 直接 + 推移的依存 の両方を解決 — `lodash` を直接入れていなくても、依存先が引っ張っていれば追跡対象
-- 📚 GitHub Advisory Database と照合 — 検出された依存と公開済み CVE を突き合わせて脆弱性を判定
-- 🛂 対応エコシステム — npm, pip, Maven, NuGet, Composer, Bundler, Go modules, Cargo, Gradle, Hex, Pub, Docker, GitHub Actions ほか
+- 🗂️ `package-lock.json`、`requirements.txt`、`go.mod`、`pom.xml`、`Gemfile.lock` などを解析。
+- 🔄 直接 + 推移的依存を解決。他の依存が持ち込む `lodash` も追跡。
+- 📚 GitHub Advisory Database の公開 CVE と依存関係を照合。
+- 🛂 npm、pip、Maven、NuGet、Composer、Bundler、Go、Cargo、Gradle、Hex、Pub、Docker、GitHub Actions などに対応。
 
 > 🌍 Advisory Database は GitHub・コミュニティ・MITRE の CVE フィードから集約された脆弱性データベース。
 
 ## 始め方（最短ルート）
 
-**Step 1 — Security alerts / updates を ON**
+<div class="dependency-start">
+<div>
 
-```
-Repo → Settings → Code security
-  ✅ Dependency graph
-  ✅ Dependabot alerts
-  ✅ Dependabot security updates
-```
+**Step 1 — Security alerts / updates**
 
-3 つチェックを入れるだけ。**設定ファイル不要** で動き出す。
+`Repo → Settings → Code security` で dependency graph、Dependabot alerts、security updates を有効化。**設定ファイル不要**。
 
-**Step 2 — Version updates を使うなら `.github/dependabot.yml` を追加**
+**Step 3 — 一括展開**
+
+`Org → Settings → Code security` の **default settings** で全 repo に適用。
+
+Version updates の間隔は `daily` / `weekly` / `monthly`。`groups` で PR をまとめ、`ignore` でパッケージを除外できる。
+
+</div>
+<div>
+
+**Step 2 — Version updates**
+
+`.github/dependabot.yml` を追加：
 
 ```yaml
 version: 2
 updates:
   - package-ecosystem: "npm"
     directory: "/"
-    schedule:
-      interval: "weekly"
+    schedule: { interval: "weekly" }
   - package-ecosystem: "github-actions"
     directory: "/"
-    schedule:
-      interval: "monthly"
+    schedule: { interval: "monthly" }
 ```
 
-- 📦 `package-ecosystem` でエコシステム指定
-- 📅 `interval`: `daily` / `weekly` / `monthly`
-- 🏷️ `groups` でまとめて 1 つの PR にしたり、`ignore` で特定パッケージを除外可
-
-**Step 3 — Org / Enterprise で一括 ON にしたい場合**
-
-`Org → Settings → Code security` から **default settings** で全リポジトリに適用できる。
+</div>
+</div>
 
 ## 補完機能: Dependency Review <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**Dependency Review** は Dependabot の **PR タイム版**。脆弱な依存や違反ライセンスをマージ前に止めるゲートで、**default branch だけでなく任意の base branch** で動く。
+**Dependency Review** はマージ前のゲート。**任意の base branch** の PR で動く。
 
 | | Dependency Review | Dependabot alerts |
 | --- | --- | --- |
@@ -147,17 +147,15 @@ updates:
 | **マージを止める？** | ✅ Yes(required check 化すれば) | ❌ 通知のみ |
 | **ライセンスチェック** | ✅ allow / deny list | ❌ 非対応 |
 
-- 🚨 **脆弱なパッケージ** が PR で追加 / 更新された時 — `fail-on-severity` で閾値設定
-- 📜 **ライセンス遵守** — allow / deny list(例: proprietary repo で `GPL-3.0` を拒否)
-- 📦 **依存差分** — lockfile から解決した推移的依存も含めて全部
+- 🚨 脆弱なパッケージ：`fail-on-severity` で閾値を設定。
+- 📜 ライセンスの allow / deny list（例：proprietary repo で `GPL-3.0` を拒否）。
+- 📦 lockfile の推移的依存を含む依存差分。
 
-[`actions/dependency-review-action`](https://github.com/actions/dependency-review-action) を入れて **required status check** にすればゲート化完了。Org owner は repository ruleset で組織横断に強制可。
-
-> ⚠️ **PR タイムのゲートであり常時監視ではない**。マージ後に公開された CVE を拾うのは Dependabot alerts の役目 — **必ず両方を併用** する。
+[`actions/dependency-review-action`](https://github.com/actions/dependency-review-action) を **required check** にする。Org owner は ruleset で強制可能。**マージ後**の CVE は alerts と併用して検出。
 
 ## Open source license compliance <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/supply-chain-security/open-source-license-compliance" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**2026-10-16 に GA。** Dependabot の補完機能として、脆弱性だけでなく依存関係のライセンスをマージ前に統制する。
+**2026-10-16 に GA。** Dependabot と併用し、依存ライセンスをマージ前に統制。
 
 <div class="ctl-widget">
 <div class="ctl-list">
@@ -229,54 +227,18 @@ updates:
 
 ## AI triage: alert を agent に渡す
 
-各 Dependabot alert に **「Assign to agent」** ボタンがあり、Copilot / Claude / Codex に渡すと、agent が advisory とリポジトリを読んで **alert ごとに on-demand で triage と修正** を行う。
+**Assign to agent** で alert を Copilot / Claude / Codex に渡し、advisory と repo を使って on-demand で triage / 修正する。
 
-- 🔍 **agent が typically やること** — reachability チェック(「脆弱関数が実際に自分のコードパスから呼ばれているか？」)、自分のコンテキストでの exploitability 判定、そして breaking change / downgrade / refactor まで含む **draft 修正 PR** の作成
-- 🏁 同じ alert に **複数 agent を競わせて** PR を比較できる
-- 🧹 **Auto-triage rules** — 別軸として、**severity / ecosystem / dependency scope(runtime か dev か)** で低リスク alert を自動 dismiss / snooze。agent が見る alert を本物だけに絞れる
-- 👀 agent の修正は **first-pass** として扱う。マージ前の人間レビュー + テストは依然として必須
+- 🔍 Reachability と文脈に応じた exploitability を確認し、breaking change / downgrade / refactor を含む **draft 修正 PR** を作成。
+- 🏁 複数 agent を競わせて PR を比較できる。
+- 🧹 別機能の **auto-triage rules** で severity / ecosystem / runtime・dev scope により低リスク alert を dismiss / snooze。
+- 👀 マージ前の人間レビューとテストは必須。
 
-> 🎯 Alert → *Assign to agent* → reachability + fix → draft PR → 人間レビュー → merge。ボトルネックは「パッチ合成」から「承認」へ移る。
-
-> 💰 Public repo は無料。Private repo は **GitHub Code Security**(旧 Advanced Security バンドル)が必要。
+Public は無料。Private は **Code Security**（旧 Advanced Security）が必要。
 
 ## <span class="dependency-feature-title">Reachability analysis</span> <span class="dependency-feature-links"><a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/supply-chain-security/about-reachability-analysis-for-dependabot-alerts" target="_blank" rel="noopener noreferrer">📖 Docs</a><a class="dependency-announcement" href="https://github.blog/changelog/2026-10-28-prioritize-dependabot-alerts-with-reachability-analysis" target="_blank" rel="noopener noreferrer">公式発表 ↗</a></span>
 
 <div class="dependency-feature">
-<style>
-.prose-akq .dependency-feature{font:clamp(16px,1.3vw,20px)/1.35 var(--font-prose),sans-serif;color:var(--c-phosphor)}
-.prose-akq .dependency-feature p{margin:0}
-.prose-akq .dependency-feature .dependency-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:0 0 8px;color:var(--c-fg-body);font-size:14px}
-.prose-akq .dependency-preview{border:1px solid var(--c-crt-amber);color:var(--c-crt-amber);padding:2px 6px;white-space:nowrap}
-.prose-akq .dependency-feature .dependency-lead{margin:0 0 8px;font-size:1.1em}
-.prose-akq .dependency-flow{display:grid;grid-template-columns:1fr auto 1.2fr auto 1fr;align-items:center;gap:10px;margin:0 0 8px;border:1px solid rgb(var(--rgb-neon-cyan) / 0.33);background:rgb(var(--rgb-deep-purple) / 0.8);padding:8px 12px;text-align:center}
-.prose-akq .dependency-flow b{color:var(--c-neon-cyan)}
-.prose-akq .dependency-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.prose-akq .dependency-panel{min-width:0;border-top:2px solid var(--c-neon-cyan);background:rgb(var(--rgb-deep-purple) / 0.8);padding:12px}
-.prose-akq .dependency-feature .dependency-panel h3{margin:0 0 8px;font-size:1em;line-height:1.3;color:var(--c-neon-cyan)}
-.prose-akq .dependency-facts{margin:0}
-.prose-akq .dependency-facts > div{display:grid;grid-template-columns:1fr 1.15fr;gap:10px;padding:6px 0;border-top:1px solid rgb(var(--rgb-phosphor) / 0.13)}
-.prose-akq .dependency-policy > div{grid-template-columns:.7fr 1.3fr}
-.prose-akq .dependency-facts dt{font-weight:600}
-.prose-akq .dependency-facts dd{margin:0;color:var(--c-fg-body)}
-.prose-akq .dependency-feature .dependency-note{margin-top:8px;font-size:14px;color:var(--c-fg-body)}
-.prose-akq .dependency-feature .dependency-setup{list-style:none;margin:0;padding:0}
-.prose-akq .dependency-setup li{margin:0;padding:6px 0;border-top:1px solid rgb(var(--rgb-phosphor) / 0.13)}
-.prose-akq .dependency-setup b{color:var(--c-phosphor)}
-.prose-akq .dependency-setup span{color:var(--c-fg-body)}
-.prose-akq > h2:has(.dependency-feature-title){display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
-.prose-akq .dependency-feature-links{display:inline-flex;flex-wrap:wrap;gap:6px;align-items:center}
-.prose-akq h2 .dependency-feature-links .h2-doc{margin:0;font-size:14px}
-.prose-akq h2 .dependency-announcement{display:inline-flex;align-items:center;padding:.2em .5em;border:1px solid rgb(var(--rgb-neon-cyan) / 0.4);color:var(--c-neon-cyan);font-size:14px;font-weight:400;line-height:1.4;letter-spacing:0;text-decoration:none;white-space:nowrap}
-.prose-akq h2 .dependency-announcement:hover,.prose-akq h2 .dependency-announcement:focus-visible{border-color:var(--c-neon-cyan);text-decoration:underline}
-.prose-akq h2 .dependency-announcement:focus-visible{outline:2px solid var(--c-neon-cyan);outline-offset:2px}
-body.present-mode .playbook-detail:has(.dependency-feature.akq-slide-active){padding-top:88px;padding-bottom:72px}
-body.present-mode .prose-akq > h2:has(.dependency-feature-title){margin:0 0 12px;font-size:clamp(28px,2.2vw,36px);line-height:1.2;letter-spacing:0}
-body.present-mode .prose-akq > h2:has(.dependency-feature-title)::before{top:.35em}
-@media(max-width:767px){body.present-mode .playbook-detail:has(.dependency-feature.akq-slide-active){padding-left:20px;padding-right:20px}}
-@media(max-height:720px){body.present-mode .dependency-panel{padding:10px}body.present-mode .dependency-facts > div,body.present-mode .dependency-setup li{padding:3px 0}}
-@media(max-width:520px){.prose-akq .dependency-panels{grid-template-columns:1fr}.prose-akq .dependency-flow{gap:6px;padding:10px 6px;font-size:14px}}
-</style>
 <p class="dependency-meta"><span class="dependency-preview">Public preview</span><span>Enterprise Cloud（データ所在地対応）</span><span>プレビュー中は無料</span></p>
 <p class="dependency-lead">脆弱関数への経路で、<b>Dependabot alert の優先度</b>を判断。</p>
 <div class="dependency-flow"><span>自分のコード<br>+ 依存関係</span><b aria-hidden="true">→</b><b>CodeQL<br>+ advisory データ</b><b aria-hidden="true">→</b><span>判定 + 呼び出し経路</span></div>
@@ -334,21 +296,6 @@ body.present-mode .prose-akq > h2:has(.dependency-feature-title)::before{top:.35
 ## <span class="dependency-feature-title">Package firewall：接続構成</span> <span class="dependency-feature-links"><a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/protecting-endpoints-with-package-firewall#configuring-artifactory" target="_blank" rel="noopener noreferrer">📖 Docs</a></span>
 
 <div class="dependency-feature dependency-architecture">
-<style>
-.prose-akq .dependency-route-block{border:1px solid rgb(var(--rgb-phosphor) / 0.13);background:rgb(var(--rgb-deep-purple) / 0.8);padding:14px}
-.prose-akq .dependency-route-block + .dependency-route-block{margin-top:12px}
-.prose-akq .dependency-route-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
-.prose-akq .dependency-feature .dependency-route-heading h3{margin:0;font-size:1em;line-height:1.3;color:var(--c-phosphor)}
-.prose-akq .dependency-route-status{color:var(--c-crt-amber);border:1px solid rgb(var(--rgb-crt-amber) / 0.4);padding:2px 6px;font-size:14px;white-space:nowrap}
-.prose-akq .dependency-route-flow{display:grid;grid-template-columns:minmax(0,1fr) 20px minmax(0,1fr) 20px minmax(0,1.3fr) 20px minmax(0,.9fr);gap:8px;align-items:center}
-.prose-akq .dependency-route-node{display:flex;align-items:center;justify-content:center;min-width:0;min-height:76px;padding:12px 8px;border:1px solid color-mix(in srgb, var(--c-fg-body) 40%, transparent);text-align:center;overflow-wrap:anywhere}
-.prose-akq .dependency-route-node.is-firewall{border:2px solid var(--c-neon-cyan);background:rgb(var(--rgb-neon-cyan) / 0.07);color:var(--c-neon-cyan)}
-.prose-akq .dependency-route-arrow{display:flex;align-items:center;color:var(--c-neon-cyan);font-size:20px;line-height:1}
-.prose-akq .dependency-route-arrow::before{content:"";flex:1;height:2px;background:currentColor}
-.prose-akq .dependency-route-arrow::after{content:"→"}
-.prose-akq .dependency-route-arrow-long{grid-column:2 / 5}
-@media(max-width:520px){.prose-akq .dependency-route-flow{grid-template-columns:1fr}.prose-akq .dependency-route-arrow-long{grid-column:auto}.prose-akq .dependency-route-arrow{justify-content:center}.prose-akq .dependency-route-arrow::before{display:none}.prose-akq .dependency-route-arrow::after{content:"↓"}.prose-akq .dependency-route-heading{flex-wrap:wrap}}
-</style>
 <p class="dependency-lead">アーティファクト管理ツールは<b>必須ではない</b>。</p>
 <div class="dependency-route-block">
 <div class="dependency-route-heading"><h3>01 / 直接接続</h3></div>
@@ -379,7 +326,7 @@ body.present-mode .prose-akq > h2:has(.dependency-feature-title)::before{top:.35
 
 Dependabot 本体は **全プラン無料**。有料は Code Security の premium 機能のみ。
 
-| 機能 | Public repo | Private repo（個人 / Free） | Private repo（Team / Enterprise） |
+| 機能 | Public | Private：個人 / Free | Private：Team / Enterprise |
 | --- | :---: | :---: | :---: |
 | Dependency graph | ✅ 既定 ON | ✅ 無料(opt-in) | ✅ 無料 |
 | Dependabot alerts(malware 含む) | ✅ 無料 | ✅ 無料 | ✅ 無料 |
@@ -387,7 +334,6 @@ Dependabot 本体は **全プラン無料**。有料は Code Security の premiu
 | Dependabot version updates | ✅ 無料 | ✅ 無料 | ✅ 無料 |
 | Custom auto-triage rules | ✅ 無料 | ❌ | 💰 Code Security |
 
-**Enterprise の License compliance は無料の Dependabot とは別**。Public repo も含め、Enterprise Cloud + Code Security が必要。
+License compliance は Public も **Enterprise Cloud + Code Security** が必要。Assign to agent は **Code Security + Copilot**（coding agent 対応）が必要。
 
-> ⚙️ standard / self-hosted runner なら **Actions 分数を消費しない**。課金は larger runner のみ。  
-> 🤖 Assign to agent は **Code Security** + coding agent 付き **Copilot プラン** が必要。
+Standard / self-hosted runner は **Actions 分数を消費しない**。Larger runner は課金。
