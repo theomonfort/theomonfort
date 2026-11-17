@@ -414,7 +414,7 @@ Two free assessments run from **Org → Security → Assessments** and show what
 <p class="assess-what">Types and count of secrets sitting in your org's repositories, aggregated by category.</p>
 <dl class="assess-meta">
 <div class="assess-line"><dt>SCOPE</dt><dd>All repos — public, private, internal, archived</dd></div>
-<div class="assess-line"><dt>RUNS</dt><dd>Once</dd></div>
+<div class="assess-line"><dt>RUNS</dt><dd>Once every 90 days</dd></div>
 <div class="assess-line"><dt>OUTPUT</dt><dd>Counts only; secret values are never stored</dd></div>
 </dl>
 </div>
