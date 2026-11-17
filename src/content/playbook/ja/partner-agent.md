@@ -33,8 +33,8 @@ links:
     label: Manage policies (Enterprise)
     url: https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-enterprise-policies
   - group: VS Code Docs
-    label: Partner agents
-    url: https://code.visualstudio.com/docs/copilot/agents/third-party-agents
+    label: Agent harnesses and native Codex setup
+    url: https://code.visualstudio.com/docs/agents/run/agent-harnesses#_codex
   - group: VS Code Docs
     label: Cloud agents
     url: https://code.visualstudio.com/docs/copilot/agents/cloud-agents
@@ -60,8 +60,8 @@ links:
     label: "GPT-5.3-Codex default, Business/Enterprise (2026-05-18)"
     url: https://github.blog/changelog/2026-05-17-gpt-5-3-codex-is-now-the-base-model-for-copilot-business-and-enterprise
   - group: 📰 Recent Changelog
-    label: "JetBrains inline agent preview (2026-04-24)"
-    url: https://github.blog/changelog/2026-04-24-inline-agent-mode-in-preview-and-more-in-github-copilot-for-jetbrains-ides
+    label: "Codex Agent Host / SDK download (2026-09-16)"
+    url: https://code.visualstudio.com/updates/v1_138#_expanded-codex-support-in-the-agent-host
   - group: 📰 Recent Changelog
     label: "Cloud Claude/Codex model picker (2026-04-14)"
     url: https://github.blog/changelog/2026-04-14-model-selection-for-claude-and-codex-agents-on-github-com
@@ -125,27 +125,62 @@ links:
 > ⚠️ **Copilot は harness 名であり、cloud 実行という意味ではない**。上の policy は **GitHub 上の agent** が対象。VS Code の **Claude / Codex harness** は別の制御に従い、**Copilot enterprise-managed settings** が適用されると無効になる。
 
 
-## VS Code × OpenAI Codex
+## VS Code × OpenAI Codex <a class="h2-doc" href="https://code.visualstudio.com/docs/agents/run/agent-harnesses#_codex" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-partner-codex" class="demo-toggle" /><label class="h2-demo" for="demo-partner-codex">&#9658; DEMO</label>
 
-VS Code から Codex を使うには、**OpenAI Codex 拡張** をインストールし、起動時に **「Sign in with Copilot」** を選ぶ。Copilot 経由でログインすれば、別途 OpenAI のアカウント・課金は不要。
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-partner-codex" aria-label="デモ手順を閉じる"></label>
+<div class="demo-window" role="group" aria-label="デモ手順">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Native Codex setup</span><span class="demo-note">発表者専用</span><label class="demo-close" for="demo-partner-codex" aria-label="閉じる">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">CODEX AGENT HOST を有効化</p>
+<p>VS Code の設定で <code class="demo-path">chat.agentHost.codexAgent.enabled</code> を <b>true</b> にする。</p>
+<p class="demo-out">OpenAI 拡張なしで、Agents window に Codex が表示される。Enterprise-managed settings で無効化されている場合、ユーザー設定では上書きできない。</p>
+</li>
+<li>
+<p class="demo-step-title">エディターの CHAT ビューでも使う</p>
+<p><code class="demo-path">chat.editor.codex.preferAgentHost</code> を <b>true</b> にし、表示される案内に従って VS Code を再起動する。</p>
+<p class="demo-out">Chat の Codex がネイティブ統合に切り替わる。拡張が入っている場合はその選択肢を置き換えるため、両方を用意する必要はない。</p>
+</li>
+<li>
+<p class="demo-step-title">HARNESS を選択</p>
+<p>Chat を開き、<b>New Chat</b> → <code class="demo-path">Session Target → Codex</code> を選ぶ。</p>
+<p class="demo-out">入力欄に <b>Chat with Codex</b> と表示される。Copilot harness 内で Codex モデルを選ぶ操作とは異なる。</p>
+</li>
+<li>
+<p class="demo-step-title">SDK をダウンロード</p>
+<p><b>Download the Codex Agent</b> が表示されたら、<b>Download</b> をクリック。モデルが利用可能なら、プロンプトの送信でも SDK のダウンロードが始まる。</p>
+<p class="demo-out">ダウンロードするのは agent の実行用 SDK であり、単体の Codex アプリではない。<a class="retro-link" href="https://code.visualstudio.com/updates/v1_138#_on-demand-agent-sdk-downloads" target="_blank" rel="noopener noreferrer">VS Code 1.138 のダウンロード案内 ↗</a></p>
+</li>
+<li>
+<p class="demo-step-title">モデルの利用経路を選択</p>
+<p>Copilot 経由のモデルを使う場合は GitHub にサインインする。<a class="retro-link" href="https://code.visualstudio.com/docs/agents/run/agent-harnesses#_codex" target="_blank" rel="noopener noreferrer">VS Code の公式ドキュメント ↗</a> では、この経路に <b>Copilot Pro+</b> が必要（2026-11-17 時点）。</p>
+<p>代わりにアカウントメニューの <b>Sign in to ChatGPT</b> も使える。両方にサインインしている場合、Copilot の利用枠と課金を使うには <b>ChatGPT</b> ではなく <b>Copilot</b> のモデルグループを選ぶ。</p>
+<p class="demo-out">選択した provider に応じて、アカウント、利用制限、課金先が決まる。</p>
+</li>
+</ol>
+</div>
+</div>
+
+**実験的な Agent Host 統合**により、**VS Code から Codex harness を直接使える**。単体の Codex アプリや OpenAI 拡張は不要。
 
 <div class="partner-setup-columns">
 <div>
 
 ### はじめ方
 
-- VS Code Marketplace から **OpenAI Codex 拡張** をインストール
-- 拡張を起動して **「Sign in with Copilot」** をクリック
-- **Agent Sessions** ビューで Codex セッションを開く
+- **ネイティブ統合**を有効化（設定値は **DEMO**）
+- **New Chat → Session Target → Codex** を選択
+- **Download** で SDK を取得、または最初のプロンプトを送信
 
 </div>
 <div>
 
-### 押さえるポイント
+### 利用条件（2026-11-17 時点）
 
-- **専用の拡張が必要**。VS Code にインストールして使う
-- **OpenAI モデルのみ**。利用可能なモデルは拡張のピッカーで確認
-- **Copilot で課金**。リクエストはすべて Copilot API 経由
+- **Copilot 経由のモデル**：VS Code 公式では **Pro+** が必要。Copilot で課金
+- **ChatGPT でサインイン**：別の利用経路。利用制限と課金先も別
+- **OpenAI 拡張**：引き続き選べるが、必須ではない
 
 </div>
 </div>

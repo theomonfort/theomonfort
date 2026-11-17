@@ -21,6 +21,7 @@ export const NEW_PLAYBOOK_SLUGS = new Set([
   'github-actions',
   'agentic-workflow',
   'copilot-app',
+  'partner-agent',
 ]);
 
 export function isNewPlaybookEntry(slug: string): boolean {
@@ -50,6 +51,7 @@ export const NAV_HINT_SLIDES: Record<string, number[]> = {
   'github-actions': [10],
   'agentic-workflow': [1],
   'copilot-app': [1, 2, 3, 4, 5, 6],
+  'partner-agent': [2],
 };
 
 export function navHintSlides(slug: string): number[] {
