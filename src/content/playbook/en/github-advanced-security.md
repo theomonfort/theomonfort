@@ -400,7 +400,7 @@ Org repos, default roles (2026-11-10). **Write+** = Write / Maintain / Admin.
 - 🌐 **Public repos get most features free, not all** — custom patterns, delegated bypass, AI-detected secrets, campaigns and Security overview still need a licence (<a class="retro-link" href="https://docs.github.com/en/code-security/getting-started/github-security-features" target="_blank" rel="noopener noreferrer">exact split ↗</a>)
 
 
-## Risk Assessments before purchase <a class="h2-doc" href="https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## <span id="pre-purchase-inventory--risk-assessments--docs">Risk Assessments before purchase</span> <a class="h2-doc" href="https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 Run two free assessments at **Org → Security → Assessments** before buying. No licence or trial required.
 
