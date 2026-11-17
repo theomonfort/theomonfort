@@ -1,6 +1,7 @@
 import { GraphView, getGroupColor, isRetroTheme } from './graph-view.js';
 import { escapeHtml, renderNoteHtml, slugify } from './parser.js';
 import { NoteStore } from './store.js';
+import { getGroupLabel, getZettelkastenCopy } from './i18n.js';
 
 const ICONS = {
   graph: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="7" r="2.5"/><circle cx="11" cy="18" r="2.5"/><path d="M8.2 7.2l7.4 0.6M7.3 8.2l2.6 7.5M16.5 9.1l-4.1 6.8"/></svg>`,
@@ -25,6 +26,9 @@ function computeDrawerWidth() {
 export async function mountZettelkasten(container, options = {}) {
   const root = typeof container === 'string' ? document.querySelector(container) : container;
   if (!root) throw new Error('mountZettelkasten: container element not found');
+  const locale = options.locale === 'ja' ? 'ja' : 'en';
+  const copy = getZettelkastenCopy(locale);
+  const groupLabel = (group) => getGroupLabel(group, locale);
 
   const rawVaults =
     Array.isArray(options.vaults) && options.vaults.length > 0
@@ -98,6 +102,7 @@ export async function mountZettelkasten(container, options = {}) {
   }
 
   let store = await resolveVaultStore(activeVault);
+  let destroyed = false;
 
   const state = {
     activeSlug: null,
@@ -112,10 +117,11 @@ export async function mountZettelkasten(container, options = {}) {
   };
 
   root.classList.add('zk-host');
+  root.lang = locale;
   root.innerHTML = `
     <div class="zk-root ${state.drawerCollapsed ? 'is-drawer-collapsed' : ''}">
       <div class="zk-canvas-stage">
-        <canvas class="zk-canvas" aria-label="Zettelkasten knowledge graph"></canvas>
+        <canvas class="zk-canvas" aria-label="${copy.graph}"></canvas>
       </div>
 
       <header class="zk-hud-left">
@@ -131,8 +137,8 @@ export async function mountZettelkasten(container, options = {}) {
             <span class="zk-storage-badge"></span>
             ${
               !readOnly
-                ? `<button type="button" class="zk-btn zk-btn-primary zk-new-note-btn" title="Create new note">
-                     ${ICONS.plus}<span>New</span>
+                ? `<button type="button" class="zk-btn zk-btn-primary zk-new-note-btn" title="${copy.newNote}">
+                     ${ICONS.plus}<span>${copy.new}</span>
                    </button>`
                 : ''
             }
@@ -141,7 +147,7 @@ export async function mountZettelkasten(container, options = {}) {
 
         ${
           vaultConfigs.length > 1
-            ? `<div class="zk-vault-switcher" role="tablist" aria-label="Knowledge vaults">
+            ? `<div class="zk-vault-switcher" role="tablist" aria-label="${copy.vaults}">
                  ${vaultConfigs
                    .map(
                      (v, idx) =>
@@ -157,43 +163,44 @@ export async function mountZettelkasten(container, options = {}) {
           <input
             type="search"
             class="zk-search-input"
-            placeholder="Search notes, #tags, [[links]]… ( / )"
+            placeholder="${copy.search}"
+            aria-label="${copy.search}"
             autocomplete="off"
             spellcheck="false"
           />
-          <button type="button" class="zk-search-clear" hidden aria-label="Clear search">&times;</button>
+          <button type="button" class="zk-search-clear" hidden aria-label="${copy.clearSearch}">&times;</button>
         </div>
 
         <div class="zk-search-results" hidden></div>
 
         <div class="zk-scope-bar">
-          <div class="zk-segmented" role="group" aria-label="Graph scope">
-            <button type="button" class="zk-seg-btn is-active" data-depth="0">Global</button>
-            <button type="button" class="zk-seg-btn" data-depth="1">1-Hop</button>
-            <button type="button" class="zk-seg-btn" data-depth="2">2-Hop</button>
+          <div class="zk-segmented" role="group" aria-label="${copy.scope}">
+            <button type="button" class="zk-seg-btn is-active" data-depth="0">${copy.global}</button>
+            <button type="button" class="zk-seg-btn" data-depth="1">${copy.oneHop}</button>
+            <button type="button" class="zk-seg-btn" data-depth="2">${copy.twoHops}</button>
           </div>
           <button
             type="button"
             class="zk-chip-toggle zk-color-groups-btn ${state.colorByGroup ? 'is-active' : ''}"
             aria-pressed="${state.colorByGroup}"
-            title="Toggle telemetry category group colors"
+            title="${copy.groupColors}"
           >
-            Groups
+            ${copy.groups}
           </button>
         </div>
 
         <div class="zk-selection-pill" hidden>
           <span class="zk-selection-dot"></span>
           <span class="zk-selection-label"></span>
-          <button type="button" class="zk-selection-clear" title="Clear graph focus">&times;</button>
+          <button type="button" class="zk-selection-clear" title="${copy.clearFocus}">&times;</button>
         </div>
       </header>
 
       <div class="zk-bottom-left">
         <div class="zk-zoom-bar">
-          <button type="button" class="zk-icon-btn" data-action="zoom-in" title="Zoom in">${ICONS.zoomIn}</button>
-          <button type="button" class="zk-icon-btn" data-action="zoom-out" title="Zoom out">${ICONS.zoomOut}</button>
-          <button type="button" class="zk-icon-btn" data-action="fit" title="Fit graph to view">${ICONS.fit}</button>
+          <button type="button" class="zk-icon-btn" data-action="zoom-in" title="${copy.zoomIn}">${ICONS.zoomIn}</button>
+          <button type="button" class="zk-icon-btn" data-action="zoom-out" title="${copy.zoomOut}">${ICONS.zoomOut}</button>
+          <button type="button" class="zk-icon-btn" data-action="fit" title="${copy.fit}">${ICONS.fit}</button>
         </div>
         <div class="zk-legend" ${state.colorByGroup ? '' : 'hidden'}></div>
       </div>
@@ -201,32 +208,32 @@ export async function mountZettelkasten(container, options = {}) {
       <button
         type="button"
         class="zk-drawer-reopen"
-        title="Open note panel"
+        title="${copy.openPanel}"
         ${state.drawerCollapsed ? '' : 'hidden'}
       >
         ${ICONS.panelOpen}
-        <span>Open Note</span>
+        <span>${copy.openNote}</span>
       </button>
 
-      <aside class="zk-drawer" aria-label="Selected note">
+      <aside class="zk-drawer" aria-label="${copy.selectedNote}">
         <div class="zk-drawer-topbar">
           <div class="zk-mode-tabs">
-            <button type="button" class="zk-tab is-active" data-mode="read">Read</button>
-            ${!readOnly ? `<button type="button" class="zk-tab" data-mode="edit">Edit .md</button>` : ''}
+            <button type="button" class="zk-tab is-active" data-mode="read">${copy.read}</button>
+            ${!readOnly ? `<button type="button" class="zk-tab" data-mode="edit">${copy.edit}</button>` : ''}
           </div>
           <div class="zk-drawer-actions">
             <span class="zk-save-indicator"></span>
-            <button type="button" class="zk-icon-btn" data-action="download-md" title="Download current note (.md)">
+            <button type="button" class="zk-icon-btn" data-action="download-md" title="${copy.download}">
               ${ICONS.download}
             </button>
             ${
               !readOnly
-                ? `<button type="button" class="zk-icon-btn zk-danger-hover" data-action="delete-note" title="Delete note">
+                ? `<button type="button" class="zk-icon-btn zk-danger-hover" data-action="delete-note" title="${copy.deleteNote}">
                      ${ICONS.trash}
                    </button>`
                 : ''
             }
-            <button type="button" class="zk-icon-btn" data-action="collapse-drawer" title="Collapse note panel">
+            <button type="button" class="zk-icon-btn" data-action="collapse-drawer" title="${copy.collapse}">
               ${ICONS.panelClose}
             </button>
           </div>
@@ -247,7 +254,7 @@ export async function mountZettelkasten(container, options = {}) {
 
           <div class="zk-edit-pane" hidden>
             <div class="zk-editor-help">
-              <span>Markdown + YAML frontmatter. Type <code>[[</code> to link notes.</span>
+              <span>${copy.editorHelp}</span>
             </div>
             <div class="zk-textarea-wrap">
               <textarea class="zk-editor-textarea" spellcheck="false"></textarea>
@@ -258,7 +265,7 @@ export async function mountZettelkasten(container, options = {}) {
           <section class="zk-connections">
             <div class="zk-conn-block">
               <h3 class="zk-conn-heading">
-                <span>Linked Mentions (Backlinks)</span>
+                <span>${copy.backlinks}</span>
                 <span class="zk-conn-count zk-backlink-count">0</span>
               </h3>
               <div class="zk-backlinks-list"></div>
@@ -266,7 +273,7 @@ export async function mountZettelkasten(container, options = {}) {
 
             <div class="zk-conn-block">
               <h3 class="zk-conn-heading">
-                <span>Outgoing Links</span>
+                <span>${copy.outgoing}</span>
                 <span class="zk-conn-count zk-outgoing-count">0</span>
               </h3>
               <div class="zk-outgoing-list"></div>
@@ -276,10 +283,10 @@ export async function mountZettelkasten(container, options = {}) {
 
         <footer class="zk-drawer-footer">
           <button type="button" class="zk-footer-btn" data-action="export-zip">
-            ${ICONS.download}<span>Vault .zip</span>
+            ${ICONS.download}<span>${copy.export}</span>
           </button>
           <button type="button" class="zk-footer-btn zk-reset-seed-btn" data-action="reset-seed" hidden>
-            ${ICONS.reset}<span>Reset</span>
+            ${ICONS.reset}<span>${copy.reset}</span>
           </button>
         </footer>
       </aside>
@@ -361,7 +368,7 @@ export async function mountZettelkasten(container, options = {}) {
         return;
       }
       el.tooltip.hidden = false;
-      el.tooltip.innerHTML = `<strong>${escapeHtml(node.title)}</strong><span class="is-warn">${readOnly ? 'Uncreated note' : 'Uncreated note / click to create'}</span>`;
+      el.tooltip.innerHTML = `<strong>${escapeHtml(node.title)}</strong><span class="is-warn">${readOnly ? copy.uncreated : copy.clickToCreate}</span>`;
     },
   });
 
@@ -370,7 +377,7 @@ export async function mountZettelkasten(container, options = {}) {
   function updateHudStats() {
     const totalNotes = store.notes.size;
     const totalLinks = store.graph.links.length;
-    el.stats.textContent = `${totalNotes} notes / ${totalLinks} links`;
+    el.stats.textContent = copy.stats(totalNotes, totalLinks);
 
     const hasSavedEdits =
       store.persistLocalStorage &&
@@ -378,16 +385,16 @@ export async function mountZettelkasten(container, options = {}) {
       Boolean(localStorage.getItem(store.storageKey));
 
     if (store.mode === 'fs') {
-      el.storageBadge.textContent = 'Vault .md';
-      el.storageBadge.title = 'Synced directly with markdown files on disk';
+      el.storageBadge.textContent = copy.disk;
+      el.storageBadge.title = copy.diskHelp;
       el.resetSeedBtn.hidden = true;
     } else if (hasSavedEdits) {
-      el.storageBadge.textContent = 'Local Edit';
-      el.storageBadge.title = 'Modified notes saved in browser localStorage';
+      el.storageBadge.textContent = copy.local;
+      el.storageBadge.title = copy.localHelp;
       el.resetSeedBtn.hidden = readOnly;
     } else {
-      el.storageBadge.textContent = 'Static Vault';
-      el.storageBadge.title = 'Bundled Playbook Zettelkasten vault';
+      el.storageBadge.textContent = copy.bundled;
+      el.storageBadge.title = copy.bundledHelp;
       el.resetSeedBtn.hidden = true;
     }
   }
@@ -405,9 +412,9 @@ export async function mountZettelkasten(container, options = {}) {
     el.legend.innerHTML = sorted
       .map(
         ([group, count]) =>
-          `<button type="button" class="zk-legend-item" data-group="${escapeHtml(group)}" title="Filter by ${escapeHtml(group)}">` +
+          `<button type="button" class="zk-legend-item" data-group="${escapeHtml(group)}" title="${escapeHtml(copy.filterGroup(groupLabel(group)))}">` +
           `<span class="zk-legend-dot" style="background:${getGroupColor(group)}"></span>` +
-          `<span>${escapeHtml(group)}</span>` +
+          `<span>${escapeHtml(groupLabel(group))}</span>` +
           `<em>${count}</em>` +
           `</button>`,
       )
@@ -447,10 +454,10 @@ export async function mountZettelkasten(container, options = {}) {
     const nodeMeta = store.graph.nodes.find((n) => n.id === note.slug);
     const groupColor = getGroupColor(note.group);
 
-    el.groupPill.textContent = note.group;
+    el.groupPill.textContent = groupLabel(note.group);
     el.groupPill.style.setProperty('--pill-color', groupColor);
     el.slugCode.textContent = `${note.slug}.md`;
-    el.degreePill.textContent = nodeMeta ? `${nodeMeta.degree} connections` : '0 connections';
+    el.degreePill.textContent = copy.connections(nodeMeta?.degree || 0);
     el.noteTitle.textContent = note.title;
 
     el.noteTags.innerHTML = note.tags
@@ -460,7 +467,11 @@ export async function mountZettelkasten(container, options = {}) {
       )
       .join('');
 
-    el.readPane.innerHTML = renderNoteHtml(note, store.graph.resolveTarget);
+    el.readPane.innerHTML = renderNoteHtml(
+      note,
+      store.graph.resolveTarget,
+      locale === 'ja' ? (slug) => store.getNote(slug)?.title : undefined,
+    );
 
     if (!state.dirty) {
       if (state.mode === 'edit' && document.activeElement !== el.textarea) {
@@ -473,7 +484,7 @@ export async function mountZettelkasten(container, options = {}) {
     const backlinks = store.graph.backlinks.get(note.slug) || [];
     el.backlinkCount.textContent = String(backlinks.length);
     if (backlinks.length === 0) {
-      el.backlinksList.innerHTML = `<p class="zk-empty-muted">No incoming links yet. Reference this note with <code>[[${escapeHtml(note.title)}]]</code>.</p>`;
+      el.backlinksList.innerHTML = `<p class="zk-empty-muted">${copy.noBacklinks} <code>[[${escapeHtml(note.title)}]]</code>${locale === 'en' ? '.' : '。'}</p>`;
     } else {
       el.backlinksList.innerHTML = backlinks
         .map(
@@ -489,7 +500,7 @@ export async function mountZettelkasten(container, options = {}) {
     const outgoingIds = [...(store.graph.outgoing.get(note.slug) || [])];
     el.outgoingCount.textContent = String(outgoingIds.length);
     if (outgoingIds.length === 0) {
-      el.outgoingList.innerHTML = `<p class="zk-empty-muted">No outgoing <code>[[wikilinks]]</code> in this note.</p>`;
+      el.outgoingList.innerHTML = `<p class="zk-empty-muted">${copy.noOutgoing}</p>`;
     } else {
       el.outgoingList.innerHTML = outgoingIds
         .map((id) => {
@@ -559,7 +570,7 @@ export async function mountZettelkasten(container, options = {}) {
     state.dirty = false;
     if (state.activeSlug && store.getNote(state.activeSlug)) {
       await store.saveNote(state.activeSlug, el.textarea.value);
-      el.saveIndicator.textContent = 'Saved';
+      el.saveIndicator.textContent = copy.saved;
     }
   }
 
@@ -599,6 +610,7 @@ export async function mountZettelkasten(container, options = {}) {
 
     try {
       await flushPendingSave();
+      if (destroyed) return;
 
       if (state.activeSlug) {
         vaultLastSlug.set(activeVault.id, state.activeSlug);
@@ -618,6 +630,7 @@ export async function mountZettelkasten(container, options = {}) {
       el.brandTitle.textContent = activeVault.title;
 
       store = await resolveVaultStore(activeVault);
+      if (destroyed) return;
       bindStoreSubscription(store);
 
       state.searchQuery = '';
@@ -648,6 +661,7 @@ export async function mountZettelkasten(container, options = {}) {
       });
 
       requestAnimationFrame(() => {
+        if (destroyed) return;
         if (focusGraph && state.activeSlug) {
           graphView.focusOnNode(state.activeSlug);
         } else {
@@ -683,8 +697,9 @@ export async function mountZettelkasten(container, options = {}) {
         if (titleL === clean) score = 30;
         else if (titleL.startsWith(clean)) score = 22;
         else if (titleL.includes(clean)) score = 16;
+        else if (note.slug.includes(clean) || note.aliases.some((alias) => alias.toLowerCase().includes(clean))) score = 14;
         else if (note.tags.some((t) => t.includes(clean))) score = 12;
-        else if (note.group.toLowerCase().includes(clean)) score = 10;
+        else if (note.group.toLowerCase().includes(clean) || groupLabel(note.group).toLowerCase().includes(clean)) score = 10;
         else if (note.body.toLowerCase().includes(clean)) score = 6;
       }
 
@@ -701,11 +716,11 @@ export async function mountZettelkasten(container, options = {}) {
       el.searchResults.hidden = false;
       el.searchResults.innerHTML = `
         <div class="zk-search-empty">
-          <span>No matching notes for "${escapeHtml(query)}"</span>
+          <span>${escapeHtml(copy.noResults(query))}</span>
           ${
             !readOnly
               ? `<button type="button" class="zk-btn zk-btn-primary zk-create-from-search" data-title="${escapeHtml(query.replace(/^#/, ''))}">
-                   Create "${escapeHtml(query.replace(/^#/, ''))}"
+                   ${escapeHtml(copy.create(query.replace(/^#/, '')))}
                  </button>`
               : ''
           }
@@ -721,7 +736,7 @@ export async function mountZettelkasten(container, options = {}) {
         <button type="button" class="zk-search-item" data-open-slug="${escapeHtml(note.slug)}">
           <span class="zk-legend-dot" style="background:${getGroupColor(note.group)}"></span>
           <span class="zk-search-item-title">${escapeHtml(note.title)}</span>
-          <span class="zk-search-item-group">${escapeHtml(note.group)}</span>
+          <span class="zk-search-item-group">${escapeHtml(groupLabel(note.group))}</span>
         </button>`,
       )
       .join('');
@@ -730,20 +745,20 @@ export async function mountZettelkasten(container, options = {}) {
   function scheduleAutosave() {
     if (readOnly || !state.activeSlug) return;
     state.dirty = true;
-    el.saveIndicator.textContent = 'Saving…';
+    el.saveIndicator.textContent = copy.saving;
     clearTimeout(state.saveTimer);
     state.saveTimer = setTimeout(async () => {
       try {
         await store.saveNote(state.activeSlug, el.textarea.value);
         state.dirty = false;
-        el.saveIndicator.textContent = 'Saved';
+        el.saveIndicator.textContent = copy.saved;
         setTimeout(() => {
-          if (!state.dirty && el.saveIndicator.textContent === 'Saved') {
+          if (!state.dirty && el.saveIndicator.textContent === copy.saved) {
             el.saveIndicator.textContent = '';
           }
         }, 1400);
       } catch (err) {
-        el.saveIndicator.textContent = 'Save error';
+        el.saveIndicator.textContent = copy.saveError;
         console.error(err);
       }
     }, 320);
@@ -819,12 +834,10 @@ export async function mountZettelkasten(container, options = {}) {
 
   if (el.newNoteBtn) {
     el.newNoteBtn.addEventListener('click', async () => {
-      const title = window.prompt('New Zettelkasten note title:');
+      const title = window.prompt(copy.newTitle);
       if (!title || !title.trim()) return;
       const current = store.getNote(state.activeSlug);
-      const body =
-        `Atomic note connected to [[${current ? current.title : 'GitHub'}]].\n\n` +
-        `## Key Idea\n- \n`;
+      const body = copy.newBody(current ? current.title : 'GitHub');
       const created = await store.createNote({
         title: title.trim(),
         group: current ? current.group : 'general',
@@ -902,7 +915,7 @@ export async function mountZettelkasten(container, options = {}) {
           title: target,
           group: 'general',
           tags: ['fleeting'],
-          body: `Linked from [[${store.getNote(state.activeSlug)?.title || 'GitHub'}]].\n`,
+          body: copy.linkedFrom(store.getNote(state.activeSlug)?.title || 'GitHub'),
         });
         selectNote(created.slug, { focusGraph: true, openDrawer: true, pinGraph: true });
         setMode('edit');
@@ -977,15 +990,15 @@ export async function mountZettelkasten(container, options = {}) {
         const note = store.getNote(state.activeSlug);
         if (!note) return;
         if (store.notes.size <= 1) {
-          window.alert('Cannot delete the last remaining note in the vault.');
+          window.alert(copy.lastNote);
           return;
         }
-        if (window.confirm(`Delete "${note.title}" (${note.slug}.md)?`)) {
+        if (window.confirm(copy.confirmDelete(note.title, note.slug))) {
           await store.deleteNote(note.slug);
           selectNote(activeVault.initialNote, { focusGraph: true });
         }
       } else if (action === 'reset-seed' && !readOnly) {
-        if (window.confirm('Reset local browser edits back to the original Playbook vault?')) {
+        if (window.confirm(copy.confirmReset)) {
           await store.resetToSeed();
           selectNote(activeVault.initialNote, { focusGraph: true });
         }
@@ -1046,6 +1059,7 @@ export async function mountZettelkasten(container, options = {}) {
   });
 
   requestAnimationFrame(() => {
+    if (destroyed) return;
     if (pinInitial && state.activeSlug) {
       graphView.focusOnNode(state.activeSlug);
     } else {
@@ -1086,6 +1100,7 @@ export async function mountZettelkasten(container, options = {}) {
       return false;
     },
     destroy() {
+      destroyed = true;
       clearTimeout(state.saveTimer);
       if (unsubscribeStore) unsubscribeStore();
       window.removeEventListener('keydown', onKeyDown);

@@ -1,3 +1,5 @@
+import type { Locale } from '../i18n';
+
 export type ZettelkastenVaultId =
   | 'introduction'
   | 'plan'
@@ -17,6 +19,7 @@ export interface ZettelkastenVaultConfig {
   apiBaseUrl: null;
   storageKey: string;
   initialNote: string;
+  persistLocalStorage?: boolean;
 }
 
 export const ZETTELKASTEN_VAULTS: ZettelkastenVaultConfig[] = [
@@ -98,3 +101,32 @@ export const ZETTELKASTEN_VAULTS: ZettelkastenVaultConfig[] = [
     initialNote: 'github',
   },
 ];
+
+const japaneseVaultLabels: Record<ZettelkastenVaultId, string> = {
+  introduction: 'はじめに',
+  plan: '計画',
+  develop: '開発',
+  review: 'レビュー',
+  security: 'テストとセキュリティ',
+  administration: '管理',
+  extended: '全体マップ',
+};
+
+export function getZettelkastenVaults(locale: Locale): ZettelkastenVaultConfig[] {
+  return ZETTELKASTEN_VAULTS.map((vault) => ({
+    ...vault,
+    label: locale === 'ja' ? japaneseVaultLabels[vault.id] : vault.label,
+    title: locale === 'ja' ? japaneseVaultLabels[vault.id] : vault.title,
+    storageKey: `${vault.storageKey}:${locale}`,
+    persistLocalStorage: false,
+    loadSeedNotes: locale === 'ja'
+      ? async () => {
+          const [source, { localizeVault }] = await Promise.all([
+            vault.loadSeedNotes(),
+            import('./vault-loaders/ja'),
+          ]);
+          return localizeVault(vault.id, source.default);
+        }
+      : vault.loadSeedNotes,
+  }));
+}

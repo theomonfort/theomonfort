@@ -41,7 +41,9 @@ const copy = siteCopy[locale].playbook;
 
 <script>
   import { resolvePlaybookZettelkastenTarget } from '../../lib/zettelkasten/playbook-mapping';
-  import { ZETTELKASTEN_VAULTS } from '../../lib/zettelkasten/vaults';
+  import { getZettelkastenVaults } from '../../lib/zettelkasten/vaults';
+  import { getZettelkastenCopy } from '../../lib/zettelkasten/i18n.js';
+  import type { Locale } from '../../lib/i18n';
   import type { PlaybookCategory } from '../../lib/playbook-categories';
 
   type ThemeMode = 'phosphor' | 'retro';
@@ -66,7 +68,9 @@ const copy = siteCopy[locale].playbook;
     closeLabelEl: HTMLSpanElement | null;
     loadingEl: HTMLDivElement | null;
     instance: ZkWidgetInstance | null;
-    mountingPromise: Promise<ZkWidgetInstance> | null;
+    mountingPromise: Promise<ZkWidgetInstance | null> | null;
+    locale: Locale | null;
+    generation: number;
     cleanup?: () => void;
   };
 
@@ -87,6 +91,8 @@ const copy = siteCopy[locale].playbook;
       loadingEl: null,
       instance: null,
       mountingPromise: null,
+      locale: null,
+      generation: 0,
     };
   }
 
@@ -160,7 +166,8 @@ const copy = siteCopy[locale].playbook;
     });
   }
 
-  function ensureOverlayDom(closeLabel: string, loadingLabel: string): HTMLDivElement {
+  function ensureOverlayDom(closeLabel: string, loadingLabel: string, locale: Locale): HTMLDivElement {
+    const copy = getZettelkastenCopy(locale);
     if (zkState.overlayEl && zkState.overlayEl.querySelector('[data-zk-theme-switch]')) {
       if (!document.body.contains(zkState.overlayEl)) {
         document.body.appendChild(zkState.overlayEl);
@@ -184,7 +191,8 @@ const copy = siteCopy[locale].playbook;
     overlay.className = 'zk-modal-overlay';
     overlay.setAttribute('role', 'dialog');
     overlay.setAttribute('aria-modal', 'true');
-    overlay.setAttribute('aria-label', 'Zettelkasten Knowledge Graph');
+    overlay.setAttribute('aria-label', copy.graph);
+    overlay.lang = locale;
     overlay.hidden = true;
 
     overlay.innerHTML = `
@@ -200,13 +208,13 @@ const copy = siteCopy[locale].playbook;
           </span>
         </div>
         <div class="zk-modal-actions">
-          <div class="zk-modal-theme-switch" role="group" aria-label="Theme" data-zk-theme-switch>
+          <div class="zk-modal-theme-switch" role="group" aria-label="${copy.theme}" data-zk-theme-switch>
             <button
               type="button"
               class="zk-theme-opt"
               data-zk-theme-opt="retro"
               aria-pressed="false"
-              title="Switch to Retro JRPG theme"
+              title="${copy.retroTheme}"
             >RETRO</button>
             <span class="zk-theme-sep" aria-hidden="true">|</span>
             <button
@@ -214,7 +222,7 @@ const copy = siteCopy[locale].playbook;
               class="zk-theme-opt"
               data-zk-theme-opt="phosphor"
               aria-pressed="true"
-              title="Switch to Phosphor Cosmos HUD theme"
+              title="${copy.phosphorTheme}"
             >PHOSPHOR</button>
           </div>
           <button type="button" class="zk-modal-close zk-close-btn" data-zk-close aria-label="${closeLabel} (Esc)">
@@ -266,6 +274,22 @@ const copy = siteCopy[locale].playbook;
     );
   }
 
+  function disposeZettelkasten() {
+    zkState.generation += 1;
+    zkState.instance?.destroy();
+    zkState.instance = null;
+    zkState.mountingPromise = null;
+    zkState.overlayEl?.remove();
+    zkState.overlayEl = null;
+    zkState.stageEl = null;
+    zkState.crumbVaultEl = null;
+    zkState.crumbNoteEl = null;
+    zkState.closeLabelEl = null;
+    zkState.loadingEl = null;
+    zkState.locale = null;
+    document.body.classList.remove('akq-zk-open');
+  }
+
   async function openZettelkastenForCurrentSlide() {
     const btn = getTriggerButton();
     if (!btn) return;
@@ -274,11 +298,16 @@ const copy = siteCopy[locale].playbook;
     const category = (btn.dataset.playbookCategory || 'introduction') as PlaybookCategory;
     const closeLabel = btn.dataset.closeLabel || 'Back to slide';
     const loadingLabel = btn.dataset.loadingLabel || 'Loading Zettelkasten…';
+    const locale: Locale = btn.dataset.locale === 'ja' ? 'ja' : 'en';
+    const copy = getZettelkastenCopy(locale);
     const slideIdx = getCurrentSlideIndex();
     const target = resolvePlaybookZettelkastenTarget(slug, category, slideIdx);
 
+    if (zkState.locale !== locale) disposeZettelkasten();
+    zkState.locale = locale;
+    const generation = zkState.generation;
     btn.blur();
-    const overlay = ensureOverlayDom(closeLabel, loadingLabel);
+    const overlay = ensureOverlayDom(closeLabel, loadingLabel, locale);
     overlay.hidden = false;
     document.body.classList.add('akq-zk-open');
 
@@ -286,65 +315,70 @@ const copy = siteCopy[locale].playbook;
       .then(({ play }) => play('confirm'))
       .catch(() => {});
 
-    if (zkState.instance) {
-      if (zkState.loadingEl) zkState.loadingEl.hidden = true;
-      await zkState.instance.openVaultAndNote(target.vault, target.note, {
-        pinGraph: true,
-        focusGraph: true,
-      });
-      return;
-    }
-
-    if (zkState.mountingPromise) {
-      const inst = await zkState.mountingPromise;
-      await inst.openVaultAndNote(target.vault, target.note, {
-        pinGraph: true,
-        focusGraph: true,
-      });
-      return;
-    }
-
-    if (zkState.loadingEl) zkState.loadingEl.hidden = false;
-
-    zkState.mountingPromise = (async () => {
-      const { mountZettelkasten } = await import('../../lib/zettelkasten/zettelkasten-widget.js');
-      const vaultsWithInitial = ZETTELKASTEN_VAULTS.map((v) =>
-        v.id === target.vault ? { ...v, initialNote: target.note } : v,
-      );
-      const instance = (await mountZettelkasten(zkState.stageEl!, {
-        vaults: vaultsWithInitial,
-        initialVault: target.vault,
-        readOnly: true,
-        pinInitialNote: true,
-        colorByGroup: false,
-        onActiveChange: ({
-          vaultLabel,
-          vaultAccent,
-          title,
-        }: {
-          vaultLabel: string;
-          vaultAccent?: string;
-          title: string;
-        }) => {
-          if (zkState.crumbVaultEl) {
-            zkState.crumbVaultEl.textContent = vaultLabel;
-            if (vaultAccent) {
-              zkState.crumbVaultEl.style.setProperty('--crumb-vault-accent', vaultAccent);
-            }
-          }
-          if (zkState.crumbNoteEl) zkState.crumbNoteEl.textContent = title;
-        },
-      })) as ZkWidgetInstance;
-
-      zkState.instance = instance;
-      if (zkState.loadingEl) zkState.loadingEl.hidden = true;
-      return instance;
-    })();
-
     try {
-      await zkState.mountingPromise;
+      if (!zkState.instance && !zkState.mountingPromise) {
+        const stage = zkState.stageEl!;
+        if (zkState.loadingEl) zkState.loadingEl.hidden = false;
+        const mountingPromise = (async () => {
+          const { mountZettelkasten } = await import('../../lib/zettelkasten/zettelkasten-widget.js');
+          if (generation !== zkState.generation) return null;
+          const vaultsWithInitial = getZettelkastenVaults(locale).map((v) =>
+            v.id === target.vault ? { ...v, initialNote: target.note } : v,
+          );
+          const instance = (await mountZettelkasten(stage, {
+            locale,
+            vaults: vaultsWithInitial,
+            initialVault: target.vault,
+            readOnly: true,
+            pinInitialNote: true,
+            colorByGroup: false,
+            onActiveChange: ({
+              vaultLabel,
+              vaultAccent,
+              title,
+            }: {
+              vaultLabel: string;
+              vaultAccent?: string;
+              title: string;
+            }) => {
+              if (generation !== zkState.generation) return;
+              if (zkState.crumbVaultEl) {
+                zkState.crumbVaultEl.textContent = vaultLabel;
+                if (vaultAccent) {
+                  zkState.crumbVaultEl.style.setProperty('--crumb-vault-accent', vaultAccent);
+                }
+              }
+              if (zkState.crumbNoteEl) zkState.crumbNoteEl.textContent = title;
+            },
+          })) as ZkWidgetInstance;
+
+          if (generation !== zkState.generation) {
+            instance.destroy();
+            return null;
+          }
+          zkState.instance = instance;
+          return instance;
+        })();
+        zkState.mountingPromise = mountingPromise;
+      }
+
+      const instance = zkState.instance || await zkState.mountingPromise;
+      if (!instance || generation !== zkState.generation) return;
+      if (zkState.loadingEl) zkState.loadingEl.hidden = true;
+      await instance.openVaultAndNote(target.vault, target.note, {
+        pinGraph: true,
+        focusGraph: true,
+      });
+    } catch (error) {
+      console.error('Failed to load Zettelkasten', error);
+      if (generation === zkState.generation && zkState.loadingEl) {
+        zkState.loadingEl.hidden = false;
+        zkState.loadingEl.textContent = copy.loadError;
+      }
     } finally {
-      zkState.mountingPromise = null;
+      if (generation === zkState.generation) {
+        zkState.mountingPromise = null;
+      }
     }
   }
 
@@ -404,10 +438,7 @@ const copy = siteCopy[locale].playbook;
   }
 
   function onBeforeNavigate() {
-    if (isZettelkastenOpen()) {
-      zkState.overlayEl!.hidden = true;
-      document.body.classList.remove('akq-zk-open');
-    }
+    disposeZettelkasten();
   }
 
   function onPageLoad() {

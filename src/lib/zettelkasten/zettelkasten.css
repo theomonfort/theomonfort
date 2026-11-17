@@ -1375,7 +1375,7 @@ html[data-theme='retro'] .zk-brand-icon {
 }
 
 html[data-theme='retro'] .zk-brand-title {
-  font-family: 'Press Start 2P', monospace;
+  font-family: 'Press Start 2P', 'DotGothic16', monospace;
   font-size: 10px;
   line-height: 1.35;
   letter-spacing: 0.04em;
