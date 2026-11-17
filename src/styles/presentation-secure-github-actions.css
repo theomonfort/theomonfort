@@ -12,34 +12,34 @@
 }
 
 .playbook-detail[data-playbook-slug="github-actions"] .actions-sdlc-nodes {
-  fill: #0b1420;
-  stroke: #5eead4;
+  fill: var(--c-bg-elevated);
+  stroke: var(--c-neon-cyan);
   stroke-width: 2;
 }
 
 .playbook-detail[data-playbook-slug="github-actions"] .actions-sdlc-links {
   fill: none;
-  stroke: #5eead4;
+  stroke: var(--c-neon-cyan);
   stroke-width: 2;
 }
 
 .playbook-detail[data-playbook-slug="github-actions"] :is(.actions-sdlc, .actions-architecture) marker {
-  fill: #5eead4;
+  fill: var(--c-neon-cyan);
 }
 
 .playbook-detail[data-playbook-slug="github-actions"] .actions-sdlc-text {
-  fill: #e8f4ff;
+  fill: var(--c-phosphor);
   font-size: 17px;
 }
 
 .playbook-detail[data-playbook-slug="github-actions"] .actions-flow-text {
-  fill: #e8f4ff;
+  fill: var(--c-phosphor);
   font-size: 17px;
   text-anchor: middle;
 }
 
 .playbook-detail[data-playbook-slug="github-actions"] .actions-sdlc-title {
-  fill: #5eead4;
+  fill: var(--c-neon-cyan);
   font-size: 22px;
   font-weight: 700;
 }
