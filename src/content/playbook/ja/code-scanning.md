@@ -30,10 +30,10 @@ links:
     label: AI applications scanning for pull requests
     url: https://docs.github.com/en/code-security/concepts/code-scanning/ai-applications-scanning-for-pull-requests
   - group: 📰 Recent Changelog
-    label: "Changelog: AI Scan for pull request APIs (public preview)"
+    label: "AI Scan PR APIs (preview)"
     url: https://github.blog/changelog/2026-09-10-ai-scan-for-pull-request-apis-in-public-preview/
   - group: 📰 Recent Changelog
-    label: "AI Scan for repositories public preview (2026-10-28)"
+    label: "Repository AI Scan (2026-10-28)"
     url: https://github.blog/changelog/2026-10-28-ai-scan-for-repositories-in-public-preview
   - group: 📖 公式ドキュメント
     label: Resolving code scanning alerts
@@ -45,10 +45,10 @@ links:
     label: Autofix for code scanning
     url: https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning
   - group: 📖 公式ドキュメント
-    label: Managing access to Agentic Autofix
+    label: Agentic Autofix access
     url: https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/managing-access-to-agentic-autofix-for-code-scanning
   - group: 📖 公式ドキュメント
-    label: Managing Copilot Autofix (separate controls)
+    label: Copilot Autofix controls
     url: https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/disabling-copilot-autofix-for-code-scanning
   - group: 📖 公式ドキュメント
     label: SARIF support for code scanning
@@ -57,25 +57,25 @@ links:
     label: About CodeQL (CodeQL docs)
     url: https://codeql.github.com/docs/codeql-overview/about-codeql/
   - group: 🔬 CodeQL を深く知る
-    label: About CodeQL queries（クエリの書き方）
+    label: Writing CodeQL queries
     url: https://codeql.github.com/docs/writing-codeql-queries/about-codeql-queries/
   - group: 🔬 CodeQL を深く知る
-    label: About data flow analysis（taint tracking）
+    label: Data flow / taint tracking
     url: https://codeql.github.com/docs/writing-codeql-queries/about-data-flow-analysis/
   - group: 🔬 CodeQL を深く知る
-    label: github/codeql（公式クエリの OSS リポジトリ）
+    label: Open-source query packs
     url: https://github.com/github/codeql
   - group: 💰 料金
-    label: GitHub security plans（$30 / $19 の一次情報）
+    label: Security plans ($30 / $19)
     url: https://github.com/security/plans
   - group: 💰 料金
     label: Billing for GitHub Advanced Security
     url: https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security
   - group: 💰 料金
-    label: Copilot AI credits（個人プラン）
+    label: Copilot credits (individual)
     url: https://docs.github.com/en/copilot/concepts/billing-and-usage/individuals/billing
   - group: 💰 料金
-    label: Copilot AI credits（組織 / Enterprise の共有枠）
+    label: Copilot credits (org pool)
     url: https://docs.github.com/en/copilot/concepts/billing-and-usage/organizations-and-enterprises/billing
   - group: 💰 料金
     label: Billing for GitHub Actions
@@ -84,10 +84,10 @@ links:
     label: Code security risk assessment (Docs)
     url: https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment
   - group: 📰 Recent Changelog
-    label: "Agentic autofix now uses Copilot Memory (2026-09-25)"
+    label: "Autofix Memory (2026-09-25)"
     url: https://github.blog/changelog/2026-09-25-agentic-autofix-now-uses-copilot-memory/
   - group: 📰 Recent Changelog
-    label: "Agentic Autofix general availability (2026-10-15)"
+    label: "Agentic Autofix GA (2026-10-15)"
     url: https://github.blog/changelog/2026-10-15-agentic-autofix-for-code-scanning-alerts-general-availability
 ---
 
@@ -147,7 +147,7 @@ links:
 </div>
 </details>
 </div>
-<div class="det-screen" style="min-height:14em"><p class="det-empty">項目を選んでください ▸</p></div>
+<div class="det-screen"><p class="det-empty">項目を選んでください ▸</p></div>
 </div>
 </div>
 
@@ -156,31 +156,79 @@ links:
 
 処理は 2 段階。**コードを抽出してデータベース化**し、**クエリをコンパイルして評価**する。
 
-<figure class="harness-map split-figure">
-<img src="/theomonfort/diagrams/codeql-architecture.svg" width="1100" height="475" style="max-height:min(440px, 46vh);object-fit:contain" alt="CodeQL の構成: ソースコードとビルドの監視から Extractor がデータベースを作成。Schema、Query、Libraries が QL compiler に入り、Evaluator がコンパイル済みクエリとデータベースから結果を生成する。ビルド成果物は別系統。" />
+<figure class="harness-map cs-architecture">
+<svg viewBox="0 0 1100 365" role="img" aria-labelledby="cs-map-title cs-map-desc" xmlns="http://www.w3.org/2000/svg">
+<title id="cs-map-title">CodeQL: コード抽出とクエリ評価</title>
+<desc id="cs-map-desc">ソースコードまたはビルド監視から Extractor が database を生成。Schema は database の構造を定義し、Query と Libraries と共に compiler に入る。Evaluator はコンパイル、最適化したクエリと database から結果を生成。ビルド成果物は別系統。</desc>
+<defs>
+<marker id="cs-arrow" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" class="cs-arrowhead" /></marker>
+<marker id="cs-data-arrow" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" class="cs-data-arrowhead" /></marker>
+</defs>
+<text x="20" y="27" class="cs-stage">01 / CREATE THE DATABASE</text>
+<text x="680" y="27" class="cs-stage">02 / RUN THE QUERY</text>
+<path d="M650 40V350" class="cs-divider" />
+<g class="cs-connect" marker-end="url(#cs-arrow)">
+<path d="M100 110V160" />
+<path d="M180 192H235" />
+<path d="M395 192H415V267H435" />
+<path d="M100 225V300" />
+<path d="M755 90V107H880V125" />
+<path d="M987 90V107H880V125" />
+<path d="M880 177V230" />
+<path d="M880 282V310" />
+<path d="M180 85H315V160" stroke-dasharray="5 5" />
+</g>
+<g class="cs-connect cs-data-connect" marker-end="url(#cs-data-arrow)">
+<path d="M522 125V235" />
+<path d="M610 92H635V151H780" />
+<path d="M610 267H700V256H780" />
+</g>
+<rect x="20" y="60" width="160" height="50" class="cs-node" />
+<rect x="20" y="160" width="160" height="65" class="cs-node" />
+<rect x="235" y="160" width="160" height="65" class="cs-node" />
+<rect x="435" y="60" width="175" height="65" class="cs-node cs-data-node" />
+<rect x="435" y="235" width="175" height="70" class="cs-node cs-data-node" />
+<rect x="20" y="300" width="170" height="45" class="cs-node cs-artifacts" />
+<rect x="680" y="50" width="150" height="40" class="cs-node" />
+<rect x="900" y="50" width="175" height="40" class="cs-node" />
+<rect x="780" y="125" width="200" height="52" class="cs-node" />
+<rect x="780" y="230" width="200" height="52" class="cs-node" />
+<rect x="780" y="310" width="200" height="50" class="cs-node" />
+<g text-anchor="middle">
+<text x="100" y="92">Codebase</text>
+<text x="100" y="187">Build system</text><text x="100" y="212" class="cs-small">if build-enabled</text>
+<text x="315" y="187">Extractor</text><text x="315" y="212" class="cs-small">code to data</text>
+<text x="522" y="87">Schema</text><text x="522" y="112" class="cs-small">describes the data</text>
+<text x="522" y="261">Database</text><text x="522" y="287" class="cs-small">exprs / stmts / types</text>
+<text x="105" y="329">Build artifacts</text>
+<text x="755" y="77">Query</text><text x="987" y="77">Libraries</text>
+<text x="880" y="157">QL compiler</text><text x="880" y="262">QL evaluator</text>
+<text x="880" y="341">Query results</text>
+</g>
+<text x="224" y="76" class="cs-small">source</text>
+<text x="202" y="245" class="cs-small">monitors the build</text>
+<text x="224" y="329" class="cs-small">Artifacts ≠ analysis database</text>
+<text x="895" y="201" class="cs-small">Compiled query</text>
+<text x="895" y="222" class="cs-small">(optimized)</text>
+</svg>
 </figure>
 
-**Schema** はデータ構造を記述し、**database** はデータを保存する。言語と <a class="retro-link" href="https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/manage-your-configuration/codeql-for-compiled-languages" target="_blank" rel="noopener noreferrer">build mode ↗</a> に応じて、ソースコードを直接抽出するか、ビルドを監視する。
+言語と <a class="retro-link" href="https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/manage-your-configuration/codeql-for-compiled-languages" target="_blank" rel="noopener noreferrer">build mode ↗</a> に応じて、ソースを直接抽出するか、ビルドを監視する。
 
-## CodeQL クエリの読み方
+## CodeQL クエリの読み方 <a class="h2-doc" href="https://codeql.github.com/docs/writing-codeql-queries/about-codeql-queries/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-QL は宣言型のロジックプログラミング言語。**「バグとはどういう形か」を書くと、evaluator が全インスタンスを見つけてくる**。構造は SQL の `FROM / WHERE / SELECT` とほぼ同じ。
+QL は宣言型言語。**バグの形を定義すると evaluator が該当箇所を探す**。SQL の `FROM / WHERE / SELECT` に近い。
 
 ```ql
-import java                                       // ① 標準ライブラリを読み込む
-
-from IfStmt ifstmt, Block block                   // ② 調べたい要素を変数として宣言
+import java                                      // ① ライブラリ
+from IfStmt ifstmt, Block block                   // ② 要素
 where
-  block = ifstmt.getThen() and                    // ③ 条件で絞り込む
-  block.getNumStmt() = 0                          //    → then 節が空のブロック
-select ifstmt, "This if-statement is redundant."  // ④ 何をどう報告するか
+  block = ifstmt.getThen() and                    // ③ 条件
+  block.getNumStmt() = 0                          // 空の then 節
+select ifstmt, "This if-statement is redundant." // ④ 報告
 ```
 
-言語の本質はこの形だけ。**`where` が「バグとはどういう形か」の定義そのもの**で、探索は evaluator がやる。
-
-> 🔬 セキュリティクエリはこの上に `DataFlow` / `TaintTracking` を重ね、**source / sink / sanitizer** を定義して経路を探索する。公式クエリは <a class="retro-link" href="https://github.com/github/codeql" target="_blank" rel="noopener noreferrer">github/codeql ↗</a> で OSS 公開されている。通常は公開パックで十分で、独自クエリは「自社フレームワーク固有の source / sink を教える」ときに書く。
-
-📘 詳細: <a class="retro-link" href="https://codeql.github.com/docs/writing-codeql-queries/about-codeql-queries/" target="_blank" rel="noopener noreferrer">About CodeQL queries ↗</a> / <a class="retro-link" href="https://codeql.github.com/docs/writing-codeql-queries/about-data-flow-analysis/" target="_blank" rel="noopener noreferrer">About data flow analysis ↗</a>
+セキュリティクエリは <a class="retro-link" href="https://codeql.github.com/docs/writing-codeql-queries/about-data-flow-analysis/" target="_blank" rel="noopener noreferrer">DataFlow / TaintTracking ↗</a> で **source → sanitizer → sink** の経路を探索。通常は <a class="retro-link" href="https://github.com/github/codeql" target="_blank" rel="noopener noreferrer">公開パック ↗</a> を使い、独自クエリは自社フレームワークの source / sink を補う。
 
 ## CodeQL が見つける脆弱性
 
@@ -225,11 +273,11 @@ select ifstmt, "This if-statement is redundant."  // ④ 何をどう報告す�
 </div>
 </details>
 </div>
-<div class="det-screen" style="min-height:15em"><p class="det-empty">カテゴリを選んでください ▸</p></div>
+<div class="det-screen"><p class="det-empty">カテゴリを選んでください ▸</p></div>
 </div>
 </div>
 
-> 🌐 **対応言語** — C/C++、C#、Go、Java/Kotlin、JavaScript/TypeScript、Python、Ruby、Rust、Swift、GitHub Actions。CodeQL 対応言語が 1 つもない repo は **スキャンが走らない = Actions 分も消費しない**。
+CodeQL 対応言語がなければ **CodeQL スキャンも Actions 分の消費もない**。対応言語一覧はスライド 2。
 
 ## 主な機能 <input type="checkbox" id="demo-codeql-setup" class="demo-toggle" /><label class="h2-demo" for="demo-codeql-setup">&#9658; DEMO</label>
 
@@ -260,45 +308,56 @@ select ifstmt, "This if-statement is redundant."  // ④ 何をどう報告す�
 </div>
 </div>
 
-**まず Default setup**。足りなければ repository property でカスタマイズし、独自ビルドが必要なときだけ Advanced へ。
+**まず Default setup**。独自ビルドが必要なら Advanced へ。
 
-<div class="ctl-widget">
-<p class="ctl-hint">▸ + をクリックして詳細を表示</p>
-<div class="ctl-list">
-<details class="ctl-item" name="cs-capabilities">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🟢</span><span class="ctl-name">Default setup</span><span class="ctl-when">1 クリック、組織全体</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/setup-types" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v"><b>workflow ファイル不要。</b>CodeQL 対応言語を自動検出し、新しい言語が増えれば自動で追加</span></p>
-<p class="ctl-row"><span class="ctl-k">実行タイミング</span><span class="ctl-v">default / <b>protected branch</b> への push、それらへの PR、<b>週次スケジュール</b></span></p>
-<p class="ctl-row"><span class="ctl-k">展開</span><span class="ctl-v"><b>security configuration</b> で組織の全リポジトリに一括適用</span></p>
+<div class="det-widget">
+<p class="det-hint">▸ 項目をクリックして詳細を表示</p>
+<div class="det-split">
+<div class="det-list">
+<details class="det-pick" name="cs-capabilities">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🟢</span><span class="det-name">Default setup</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Default setup</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/setup-types" target="_blank" rel="noopener noreferrer">Docs</a></p>
+<p class="det-doc">1 クリック、組織全体</p>
+<p class="det-why"><b>何をする？:</b> <b>workflow ファイル不要。</b>CodeQL 対応言語を自動検出し、新しい言語が増えれば自動で追加</p>
+<p class="det-why"><b>実行タイミング:</b> default / <b>protected branch</b> への push、それらへの PR、<b>週次スケジュール</b></p>
+<p class="det-why"><b>展開:</b> <b>security configuration</b> で組織の全リポジトリに一括適用</p>
 </div>
 </details>
-<details class="ctl-item" name="cs-capabilities">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🧩</span><span class="ctl-name">Custom queries</span><span class="ctl-when">Default setup + repo property</span><a class="ctl-doc" href="https://github.blog/changelog/2026-08-04-customize-code-scanning-default-setup-at-scale/" target="_blank" rel="noopener noreferrer">Changelog</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">独自クエリ（例: <b>コーディング規約</b>、社内ルール）を <b>Advanced に切り替えずに</b>追加</span></p>
-<p class="ctl-row"><span class="ctl-k">方法</span><span class="ctl-v"><code>github-codeql-config-file</code> で<b>中央の設定ファイル</b>（クエリ、除外パス、threat model）をマージ。<code>github-codeql-extra-queries</code> はクエリの追加のみ</span></p>
-<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v"><b>組織全体の既定値</b>を設定し、リポジトリごとの上書きを許可するかは org owner が決める。GA</span></p>
+<details class="det-pick" name="cs-capabilities">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🧩</span><span class="det-name">Custom queries</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Custom queries</span><a class="ctl-doc" href="https://github.blog/changelog/2026-08-04-customize-code-scanning-default-setup-at-scale/" target="_blank" rel="noopener noreferrer">Changelog</a></p>
+<p class="det-doc">Default setup + repo property</p>
+<p class="det-why"><b>何をする？:</b> 独自クエリ（例: <b>コーディング規約</b>、社内ルール）を <b>Advanced に切り替えずに</b>追加</p>
+<p class="det-why"><b>方法:</b> <code>github-codeql-config-file</code> で<b>中央の設定ファイル</b>（クエリ、除外パス、threat model）をマージ。<code>github-codeql-extra-queries</code> はクエリの追加のみ</p>
+<p class="det-why"><b>対象範囲:</b> <b>組織全体の既定値</b>を設定し、リポジトリごとの上書きを許可するかは org owner が決める。GA</p>
 </div>
 </details>
-<details class="ctl-item" name="cs-capabilities">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛠️</span><span class="ctl-name">Advanced setup</span><span class="ctl-when">自前の workflow</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configuring-advanced-setup-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v"><code>.github/workflows/codeql.yml</code> を自分で持つ。コンパイル言語の<b>独自ビルド</b>、matrix、トリガーやスケジュールを制御</span></p>
-<p class="ctl-row"><span class="ctl-k">Actions 以外</span><span class="ctl-v">他の CI で <b>CodeQL CLI</b> を実行、または他社ツールの結果を <b>SARIF</b> でアップロード</span></p>
+<details class="det-pick" name="cs-capabilities">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🛠️</span><span class="det-name">Advanced setup</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Advanced setup</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configuring-advanced-setup-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a></p>
+<p class="det-doc">自前の workflow</p>
+<p class="det-why"><b>何をする？:</b> <code>.github/workflows/codeql.yml</code> を自分で持つ。コンパイル言語の<b>独自ビルド</b>、matrix、トリガーやスケジュールを制御</p>
+<p class="det-why"><b>Actions 以外:</b> 他の CI で <b>CodeQL CLI</b> を実行、または他社ツールの結果を <b>SARIF</b> でアップロード</p>
 </div>
 </details>
-<details class="ctl-item" name="cs-capabilities">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🚧</span><span class="ctl-name">Merge protection</span><span class="ctl-when">PR のマージ前</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/merge-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">PR 上</span><span class="ctl-v">新しいアラートは <code>github-advanced-security[bot]</code> が <b>Files changed</b> に注釈として表示</span></p>
-<p class="ctl-row"><span class="ctl-k">マージ条件</span><span class="ctl-v">Ruleset の <b>Require code scanning results</b> で、指定した重大度のアラートがある間、または必須ツールの解析が終わるまでマージをブロック</span></p>
-<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">Repo / Org（Enterprise プラン）。ruleset がなければ code scanning は<b>マージを止めない</b></span></p>
+<details class="det-pick" name="cs-capabilities">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🚧</span><span class="det-name">Merge protection</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Merge protection</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/merge-protection" target="_blank" rel="noopener noreferrer">Docs</a></p>
+<p class="det-doc">PR のマージ前</p>
+<p class="det-why"><b>PR 上:</b> 新しいアラートは <code>github-advanced-security[bot]</code> が <b>Files changed</b> に注釈として表示</p>
+<p class="det-why"><b>マージ条件:</b> Ruleset の <b>Require code scanning results</b> で、指定した重大度のアラートがある間、または必須ツールの解析が終わるまでマージをブロック</p>
+<p class="det-why"><b>対象範囲:</b> Repo / Org（Enterprise プラン）。ruleset がなければ code scanning は<b>マージを止めない</b></p>
 </div>
 </details>
-<details class="ctl-item" name="cs-capabilities">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🤖</span><span class="ctl-name">AI Scan</span><span class="ctl-when">PR / リポジトリ / AI アプリ</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
+<details class="det-pick" name="cs-capabilities">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🤖</span><span class="det-name">AI Scan</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">AI Scan</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan" target="_blank" rel="noopener noreferrer">Docs</a></p>
+<p class="det-doc">PR / リポジトリ / AI アプリ</p>
 <ul class="list-disc text-[0.88em] leading-[1.6] !my-0">
 <li><b>PR（GA）:</b> CodeQL 未対応の変更を自動検査。PR 上の助言。</li>
 <li><b>リポジトリ（preview）:</b> デフォルトブランチの全言語を手動スキャン。バックログアラートを作成。</li>
@@ -306,27 +365,35 @@ select ifstmt, "This if-statement is redundant."  // ④ 何をどう報告す�
 </ul>
 </div>
 </details>
-<details class="ctl-item" name="cs-capabilities">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔧</span><span class="ctl-name">Copilot Autofix</span><span class="ctl-when">アラート / PR 上</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">アラート、周辺コード、CodeQL の<b>データフロー経路</b>から修正パッチを提案</span></p>
-<p class="ctl-row"><span class="ctl-k">どこで？</span><span class="ctl-v">PR ではインライン、バックログのアラートでは <b>Generate fix</b>。レビューしてから適用</span></p>
+<details class="det-pick" name="cs-capabilities">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🔧</span><span class="det-name">Copilot Autofix</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Copilot Autofix</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a></p>
+<p class="det-doc">アラート / PR 上</p>
+<p class="det-why"><b>何をする？:</b> アラート、周辺コード、CodeQL の<b>データフロー経路</b>から修正パッチを提案</p>
+<p class="det-why"><b>どこで？:</b> PR ではインライン、バックログのアラートでは <b>Generate fix</b>。レビューしてから適用</p>
 </div>
 </details>
-<details class="ctl-item" name="cs-capabilities">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🎯</span><span class="ctl-name">Agentic Autofix</span><span class="ctl-when">バックログ 1〜25 件</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v"><b>Assign to Copilot</b>: クラウドエージェントがリポジトリを調べて修正、検証し、<b>draft PR</b> を作成</span></p>
-<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">デフォルトブランチのバックログから 1〜25 件。キャンペーンも対象。<b>2026-10-15 に GA</b></span></p>
+<details class="det-pick" name="cs-capabilities">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🎯</span><span class="det-name">Agentic Autofix</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Agentic Autofix</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts" target="_blank" rel="noopener noreferrer">Docs</a></p>
+<p class="det-doc">バックログ 1〜25 件</p>
+<p class="det-why"><b>何をする？:</b> <b>Assign to Copilot</b>: クラウドエージェントがリポジトリを調べて修正、検証し、<b>draft PR</b> を作成</p>
+<p class="det-why"><b>対象範囲:</b> デフォルトブランチのバックログから 1〜25 件。キャンペーンも対象。<b>2026-10-15 に GA</b></p>
 </div>
 </details>
-<details class="ctl-item" name="cs-capabilities">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🗺️</span><span class="ctl-name">Security campaigns</span><span class="ctl-when">組織横断の修正</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/securing-your-organization/fixing-security-alerts-at-scale/about-security-campaigns" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">期限付きのアラート集合（最大 1000 件）。campaign manager と期日を設定</span></p>
-<p class="ctl-row"><span class="ctl-k">流れ</span><span class="ctl-v">各リポジトリの Security タブに表示され、開発者が Autofix や Copilot で修正</span></p>
+<details class="det-pick" name="cs-capabilities">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🗺️</span><span class="det-name">Security campaigns</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Security campaigns</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/securing-your-organization/fixing-security-alerts-at-scale/about-security-campaigns" target="_blank" rel="noopener noreferrer">Docs</a></p>
+<p class="det-doc">組織横断の修正</p>
+<p class="det-why"><b>何をする？:</b> 期限付きのアラート集合（最大 1000 件）。campaign manager と期日を設定</p>
+<p class="det-why"><b>流れ:</b> 各リポジトリの Security タブに表示され、開発者が Autofix や Copilot で修正</p>
 </div>
 </details>
+</div>
+<div class="det-screen"><p class="det-empty">項目を選んでください ▸</p></div>
 </div>
 </div>
 
@@ -403,48 +470,63 @@ Copilot Autofix は **対応するアラートに修正パッチを提案**す�
 
 **2026-10-15 に GA。** Agentic Autofix が有効なら、デフォルトブランチのバックログで **Generate fix は Assign to Copilot に置き換わる**。
 
-<div class="ctl-widget">
-<p class="ctl-hint">▸ + をクリックして詳細を表示</p>
-<div class="ctl-list">
-<details class="ctl-item" name="cs-agentic">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🎯</span><span class="ctl-name">依頼</span><span class="ctl-when">1〜25 件</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">対象</span><span class="ctl-v"><b>デフォルトブランチのバックログ 1〜25 件</b>。キャンペーンも対象。1 回の割り当て → 1 セッション → 1 PR。<b>PR / 他ブランチのみにあるアラートは対象外</b></span></p>
+<div class="det-widget">
+<p class="det-hint">▸ 項目をクリックして詳細を表示</p>
+<div class="det-split">
+<div class="det-list">
+<details class="det-pick" name="cs-agentic">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🎯</span><span class="det-name">依頼</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">依頼</span></p>
+<p class="det-doc">1〜25 件</p>
+<p class="det-why"><b>対象:</b> <b>デフォルトブランチのバックログ 1〜25 件</b>。キャンペーンも対象。1 回の割り当て → 1 セッション → 1 PR。<b>PR / 他ブランチのみにあるアラートは対象外</b></p>
 </div>
 </details>
-<details class="ctl-item" name="cs-agentic">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔁</span><span class="ctl-name">セッション</span><span class="ctl-when">ドラフト PR</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">流れ</span><span class="ctl-v">探索 → 修正 → CodeQL 再実行と反復 → 検証内容付きの<b>ドラフト PR</b>。セッションログを確認し、セッションや PR コメントで追加修正を依頼</span></p>
+<details class="det-pick" name="cs-agentic">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🔁</span><span class="det-name">セッション</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">セッション</span></p>
+<p class="det-doc">ドラフト PR</p>
+<p class="det-why"><b>流れ:</b> 探索 → 修正 → CodeQL 再実行と反復 → 検証内容付きの<b>ドラフト PR</b>。セッションログを確認し、セッションや PR コメントで追加修正を依頼</p>
 </div>
 </details>
-<details class="ctl-item" name="cs-agentic">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🧠</span><span class="ctl-name">Copilot Memory</span><span class="ctl-when">修正パターンを学習</span><a class="ctl-doc" href="https://github.blog/changelog/2026-09-25-agentic-autofix-now-uses-copilot-memory/" target="_blank" rel="noopener noreferrer">Changelog</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">参照</span><span class="ctl-v">既存のメモリを参照して修正に活かす（Copilot Memory 有効時）</span></p>
-<p class="ctl-row"><span class="ctl-k">保存</span><span class="ctl-v">修正パターンを新しいメモリとして保存。<b>Copilot code review やクラウドエージェント</b>にもリポジトリ固有のセキュアな書き方が伝わる</span></p>
+<details class="det-pick" name="cs-agentic">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🧠</span><span class="det-name">Copilot Memory</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Copilot Memory</span><a class="ctl-doc" href="https://github.blog/changelog/2026-09-25-agentic-autofix-now-uses-copilot-memory/" target="_blank" rel="noopener noreferrer">Changelog</a></p>
+<p class="det-doc">修正パターンを学習</p>
+<p class="det-why"><b>参照:</b> 既存のメモリを参照して修正に活かす（Copilot Memory 有効時）</p>
+<p class="det-why"><b>保存:</b> 修正パターンを新しいメモリとして保存。<b>Copilot code review やクラウドエージェント</b>にもリポジトリ固有のセキュアな書き方が伝わる</p>
 </div>
 </details>
-<details class="ctl-item" name="cs-agentic">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🛂</span><span class="ctl-name">前提</span><span class="ctl-when">Copilot ライセンス不要</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">提供範囲</span><span class="ctl-v">Enterprise Cloud の Code Security / GHAS 向けに GA。データレジデンシーも対象。現行 Docs は個人所有の対象 public repo も記載。Managed user の個人 repo は対象外</span></p>
-<p class="ctl-row"><span class="ctl-k">条件</span><span class="ctl-v"><b>Agentic Autofix の有効化</b>、課金方法の設定、repo の write 権限。<b>Copilot ライセンスや事前の修正提案は不要</b>。設定は次のスライド</span></p>
+<details class="det-pick" name="cs-agentic">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🛂</span><span class="det-name">前提</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">前提</span></p>
+<p class="det-doc">Copilot ライセンス不要</p>
+<p class="det-why"><b>提供範囲:</b> Enterprise Cloud の Code Security / GHAS 向けに GA。データレジデンシーも対象。現行 Docs は個人所有の対象 public repo も記載。Managed user の個人 repo は対象外</p>
+<p class="det-why"><b>条件:</b> <b>Agentic Autofix の有効化</b>、課金方法の設定、repo の write 権限。<b>Copilot ライセンスや事前の修正提案は不要</b>。設定は次のスライド</p>
 </div>
 </details>
-<details class="ctl-item" name="cs-agentic">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">💸</span><span class="ctl-name">料金</span><span class="ctl-when">AI クレジット + Actions</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">Agentic</span><span class="ctl-v"><b>Code Security AI Credits + Actions 分</b>。Public repo も対象。課金画面の AI usage では <b>Advanced Security</b> として表示</span></p>
-<p class="ctl-row"><span class="ctl-k">予算</span><span class="ctl-v">対象の付属クレジットを先に使い、超過分は従量課金。<b>Code Security AI Credits</b> の SKU 予算を設定する</span></p>
+<details class="det-pick" name="cs-agentic">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">💸</span><span class="det-name">料金</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">料金</span></p>
+<p class="det-doc">AI クレジット + Actions</p>
+<p class="det-why"><b>Agentic:</b> <b>Code Security AI Credits + Actions 分</b>。Public repo も対象。課金画面の AI usage では <b>Advanced Security</b> として表示</p>
+<p class="det-why"><b>予算:</b> 対象の付属クレジットを先に使い、超過分は従量課金。<b>Code Security AI Credits</b> の SKU 予算を設定する</p>
 </div>
 </details>
-<details class="ctl-item" name="cs-agentic">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">⚠️</span><span class="ctl-name">検証</span><span class="ctl-when">ベストエフォート</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">制約</span><span class="ctl-v">カスタムクエリ、<code>security-extended</code>、他社ツールの修正は確認できない。未検証や誤検知の疑いは PR に記載。<b>マージ前にレビューとテストが必要</b></span></p>
+<details class="det-pick" name="cs-agentic">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">⚠️</span><span class="det-name">検証</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">検証</span></p>
+<p class="det-doc">ベストエフォート</p>
+<p class="det-why"><b>制約:</b> カスタムクエリ、<code>security-extended</code>、他社ツールの修正は確認できない。未検証や誤検知の疑いは PR に記載。<b>マージ前にレビューとテストが必要</b></p>
 </div>
 </details>
+</div>
+<div class="det-screen"><p class="det-empty">項目を選んでください ▸</p></div>
 </div>
 </div>
 
@@ -452,53 +534,65 @@ Copilot Autofix は **対応するアラートに修正パッチを提案**す�
 
 **2 つの独立した設定**。クラウドエージェントのスイッチではない（2026-10-19 時点）。
 
-<div class="ctl-widget">
-<p class="ctl-hint">▸ 各レベルを開くと具体的な設定を表示</p>
-<div class="ctl-list">
-<details class="ctl-item" name="cs-fix-vs">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">⚖️</span><span class="ctl-name">比較</span><span class="ctl-when">修正提案 vs エージェント</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">従来型</span><span class="ctl-v">対応アラート 1 件の修正案をレビューして適用。<b>AI クレジット消費なし</b></span></p>
-<p class="ctl-row"><span class="ctl-k">Agentic</span><span class="ctl-v"><b>デフォルトブランチのバックログ 1〜25 件</b>を探索、修正、検証してドラフト PR を作成。<b>Code Security AI Credits + Actions</b>。どちらも Copilot ライセンス不要</span></p>
+<div class="det-widget">
+<p class="det-hint">▸ 項目をクリックして詳細を表示</p>
+<div class="det-split">
+<div class="det-list">
+<details class="det-pick" name="cs-fix-vs">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">⚖️</span><span class="det-name">比較</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">比較</span></p>
+<p class="det-doc">修正提案 vs エージェント</p>
+<p class="det-why"><b>従来型:</b> 対応アラート 1 件の修正案をレビューして適用。<b>AI クレジット消費なし</b></p>
+<p class="det-why"><b>Agentic:</b> <b>デフォルトブランチのバックログ 1〜25 件</b>を探索、修正、検証してドラフト PR を作成。<b>Code Security AI Credits + Actions</b>。どちらも Copilot ライセンス不要</p>
 </div>
 </details>
-<details class="ctl-item" name="cs-fix-vs">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🏢</span><span class="ctl-name">Enterprise</span><span class="ctl-when">許可 ≠ 有効化</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">場所</span><span class="ctl-v"><b>Policies → Advanced Security → Agentic Autofix → All organizations: Allowed</b>。Enterprise owner または security manager が設定</span></p>
-<p class="ctl-row"><span class="ctl-k">効果</span><span class="ctl-v">組織での設定を許可するだけで、<b>repo はまだ有効にならない</b>。<b>Copilot Autofix</b> は別ポリシー。Enterprise に属さない組織ではこの段階を省略</span></p>
+<details class="det-pick" name="cs-fix-vs">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🏢</span><span class="det-name">Enterprise</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Enterprise</span></p>
+<p class="det-doc">許可 ≠ 有効化</p>
+<p class="det-why"><b>場所:</b> <b>Policies → Advanced Security → Agentic Autofix → All organizations: Allowed</b>。Enterprise owner または security manager が設定</p>
+<p class="det-why"><b>効果:</b> 組織での設定を許可するだけで、<b>repo はまだ有効にならない</b>。<b>Copilot Autofix</b> は別ポリシー。Enterprise に属さない組織ではこの段階を省略</p>
 </div>
 </details>
-<details class="ctl-item" name="cs-fix-vs">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🏗️</span><span class="ctl-name">Organization</span><span class="ctl-when">対象 repo を有効化</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/managing-access-to-agentic-autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">場所</span><span class="ctl-v"><b>Settings → Advanced Security → Global settings → Code scanning → Agentic Autofix → On</b>。Organization owner または security manager が設定</span></p>
-<p class="ctl-row"><span class="ctl-k">効果</span><span class="ctl-v">対象 repo で<b>既定で有効</b>になるため、除外する repo を事前に調整。Enterprise で禁止されていれば上書き不可</span></p>
+<details class="det-pick" name="cs-fix-vs">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🏗️</span><span class="det-name">Organization</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Organization</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/managing-access-to-agentic-autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a></p>
+<p class="det-doc">対象 repo を有効化</p>
+<p class="det-why"><b>場所:</b> <b>Settings → Advanced Security → Global settings → Code scanning → Agentic Autofix → On</b>。Organization owner または security manager が設定</p>
+<p class="det-why"><b>効果:</b> 対象 repo で<b>既定で有効</b>になるため、除外する repo を事前に調整。Enterprise で禁止されていれば上書き不可</p>
+<p class="det-why">⚠️ Preview 利用組織も <b>GA 後に Agentic Autofix の再有効化が必要</b>。</p>
 </div>
 </details>
-<details class="ctl-item" name="cs-fix-vs">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📦</span><span class="ctl-name">Repository</span><span class="ctl-when">除外 / 再有効化</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">場所</span><span class="ctl-v"><b>Settings → Advanced Security → Code Security → Agentic Autofix → On / Off</b>。Repository admin が設定</span></p>
-<p class="ctl-row"><span class="ctl-k">効果</span><span class="ctl-v">上位設定の範囲内で除外 / 再有効化できる。対象となる個人所有 public repo はここで直接設定。Managed user の個人 repo は対象外</span></p>
+<details class="det-pick" name="cs-fix-vs">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">📦</span><span class="det-name">Repository</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Repository</span></p>
+<p class="det-doc">除外 / 再有効化</p>
+<p class="det-why"><b>場所:</b> <b>Settings → Advanced Security → Code Security → Agentic Autofix → On / Off</b>。Repository admin が設定</p>
+<p class="det-why"><b>効果:</b> 上位設定の範囲内で除外 / 再有効化できる。対象となる個人所有 public repo はここで直接設定。Managed user の個人 repo は対象外</p>
 </div>
 </details>
-<details class="ctl-item" name="cs-fix-vs">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔧</span><span class="ctl-name">表示されるボタン</span><span class="ctl-when">独立した制御</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/disabling-copilot-autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">Agentic on</span><span class="ctl-v">デフォルトブランチのバックログで <b>Assign to Copilot</b>。有効化ではなく、割り当てが従量課金セッションを開始する</span></p>
-<p class="ctl-row"><span class="ctl-k">Agentic off</span><span class="ctl-v">Copilot Autofix がオンで対応するアラートに限り <b>Generate fix → Create PR with fix</b>。両方オフなら AI 修正の入口なし</span></p>
-<p class="ctl-row"><span class="ctl-k">従来型</span><span class="ctl-v"><b>Copilot Autofix</b> は CodeQL で既定でオン。同じ設定階層で独立して制御し、上位での禁止は下位で解除できない。PR の提案はエージェント修正とは別</span></p>
+<details class="det-pick" name="cs-fix-vs">
+<summary class="det-btn"><span class="det-icon" aria-hidden="true">🔧</span><span class="det-name">表示されるボタン</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">表示されるボタン</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/disabling-copilot-autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a></p>
+<p class="det-doc">独立した制御</p>
+<p class="det-why"><b>Agentic on:</b> デフォルトブランチのバックログで <b>Assign to Copilot</b>。有効化ではなく、割り当てが従量課金セッションを開始する</p>
+<p class="det-why"><b>Agentic off:</b> Copilot Autofix がオンで対応するアラートに限り <b>Generate fix → Create PR with fix</b>。両方オフなら AI 修正の入口なし</p>
+<p class="det-why"><b>従来型:</b> <b>Copilot Autofix</b> は CodeQL で既定でオン。同じ設定階層で独立して制御し、上位での禁止は下位で解除できない。PR の提案はエージェント修正とは別</p>
 </div>
 </details>
+</div>
+<div class="det-screen"><p class="det-empty">項目を選んでください ▸</p></div>
 </div>
 </div>
 
-> ⚠️ Preview 利用組織も **GA 後に Agentic Autofix の再有効化が必要**。
+## Security Campaigns: 組織横断の修正 <a class="h2-doc" href="https://docs.github.com/en/code-security/securing-your-organization/fixing-security-alerts-at-scale/about-security-campaigns" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-## Security Campaigns — 組織横断で計画的に修正
-
-アラートは **見つけた後の運用**が本番。件数が多い組織ほど、生のアラート一覧を上から潰すのではなく **期限付きのキャンペーン**として回す。
+バックログを **期限付きのキャンペーン**にして、担当と締め切りを決める。
 
 <div class="rem-widget">
 <p class="rem-hint">▸ ステップをクリックすると詳細が出ます</p>
@@ -537,11 +631,9 @@ Copilot Autofix は **対応するアラートに修正パッチを提案**す�
 </div>
 </details>
 </div>
-<div class="rem-screen" style="min-height:11.4em"><p class="rem-empty">ステップを選んでください ▸</p></div>
+<div class="rem-screen"><p class="rem-empty">ステップを選んでください ▸</p></div>
 </div>
 </div>
-
-📘 詳細: <a class="retro-link" href="https://docs.github.com/en/code-security/securing-your-organization/fixing-security-alerts-at-scale/about-security-campaigns" target="_blank" rel="noopener noreferrer">About security campaigns（GitHub Docs）↗</a>
 
 ## 私のおすすめ導入チェックリスト <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-code-checklist" class="demo-toggle" /><label class="h2-demo" for="demo-code-checklist">&#9658; DEMO</label>
 
@@ -581,56 +673,74 @@ Copilot Autofix は **対応するアラートに修正パッチを提案**す�
 </div>
 </div>
 
-検知の確認 → 新規コードの保護 → バックログの解消。この順番で進める。
+検知の確認 → PR の保護 → バックログ解消。URL 内の `ORG`、`OWNER`、`REPO` は置き換える。
 
-<div class="ctl-widget">
-<p class="ctl-hint">▸ 完了したステップにチェック。ステップを開くと設定リンクを表示</p>
-<div class="ctl-list">
-<details class="ctl-item" name="cs-start">
-<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-1" /><span class="ctl-icon">1</span><span class="ctl-name" id="cs-start-1">CodeQL を有効化し、カバレッジを確認</span><span class="ctl-when">ACTIVATE</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configure-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">開始</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/security_analysis" target="_blank" rel="noopener noreferrer">CodeQL settings ↗</a>: <b>Default setup</b> から開始。初回スキャン、対象言語、Actions 使用量を確認してから security configuration で展開。</span></p>
+<div class="det-widget">
+<p class="det-hint">▸ 項目をクリックして詳細を表示</p>
+<div class="det-split">
+<div class="det-list">
+<details class="det-pick" name="cs-start">
+<summary class="det-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-1" /><span class="det-icon" aria-hidden="true">1</span><span class="det-name" id="cs-start-1">CodeQL の対象確認</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">CodeQL を有効化し、カバレッジを確認</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configure-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a></p>
+<p class="det-doc">ACTIVATE</p>
+<p class="det-why"><b>開始:</b> <a class="retro-link" href="https://github.com/OWNER/REPO/settings/security_analysis" target="_blank" rel="noopener noreferrer">CodeQL settings ↗</a>: <b>Default setup</b> から開始。初回スキャン、対象言語、Actions 使用量を確認してから security configuration で展開。</p>
 </div>
 </details>
-<details class="ctl-item" name="cs-start">
-<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-2" /><span class="ctl-icon">2</span><span class="ctl-name" id="cs-start-2">必要に応じて追加のクエリパックを導入</span><span class="ctl-when">OPTIONAL</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/reference/code-scanning/workflow-configuration-options#specifying-codeql-query-packs" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">調整</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/security_analysis" target="_blank" rel="noopener noreferrer">CodeQL configuration ↗</a>: C/C++ 向けの <a class="retro-link" href="https://github.com/github/codeql-coding-standards" target="_blank" rel="noopener noreferrer">MISRA / CERT / AUTOSAR packs ↗</a> や社内クエリを追加。ビルドに合わせて設定する。</span></p>
+<details class="det-pick" name="cs-start">
+<summary class="det-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-2" /><span class="det-icon" aria-hidden="true">2</span><span class="det-name" id="cs-start-2">追加クエリ</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">必要に応じて追加のクエリパックを導入</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/reference/code-scanning/workflow-configuration-options#specifying-codeql-query-packs" target="_blank" rel="noopener noreferrer">Docs</a></p>
+<p class="det-doc">OPTIONAL</p>
+<p class="det-why"><b>調整:</b> <a class="retro-link" href="https://github.com/OWNER/REPO/settings/security_analysis" target="_blank" rel="noopener noreferrer">CodeQL configuration ↗</a>: C/C++ 向けの <a class="retro-link" href="https://github.com/github/codeql-coding-standards" target="_blank" rel="noopener noreferrer">MISRA / CERT / AUTOSAR packs ↗</a> や社内クエリを追加。ビルドに合わせて設定する。</p>
 </div>
 </details>
-<details class="ctl-item" name="cs-start">
-<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-3" /><span class="ctl-icon">3</span><span class="ctl-name" id="cs-start-3">重大な検出結果がある merge をブロック</span><span class="ctl-when">RULESETS</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/manage-your-configuration/set-merge-protection" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">例</span><span class="ctl-v"><a class="retro-link" href="https://github.com/OWNER/REPO/settings/rules" target="_blank" rel="noopener noreferrer">Rulesets ↗</a>: <b>Require code scanning results</b>（CodeQL）。<b>Security alerts: High or higher</b>、<b>Alerts: Errors</b>。<code>main</code> を対象にし、bypass 権限も制限。</span></p>
+<details class="det-pick" name="cs-start">
+<summary class="det-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-3" /><span class="det-icon" aria-hidden="true">3</span><span class="det-name" id="cs-start-3">マージ保護</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">重大な検出結果がある merge をブロック</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/manage-your-configuration/set-merge-protection" target="_blank" rel="noopener noreferrer">Docs</a></p>
+<p class="det-doc">RULESETS</p>
+<p class="det-why"><b>例:</b> <a class="retro-link" href="https://github.com/OWNER/REPO/settings/rules" target="_blank" rel="noopener noreferrer">Rulesets ↗</a>: <b>Require code scanning results</b>（CodeQL）。<b>Security alerts: High or higher</b>、<b>Alerts: Errors</b>。<code>main</code> を対象にし、bypass 権限も制限。</p>
 </div>
 </details>
-<details class="ctl-item" name="cs-start">
-<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-4" /><span class="ctl-icon">4</span><span class="ctl-name" id="cs-start-4">AI Scan の対象範囲を選ぶ</span><span class="ctl-when">AI SCAN</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan#managing-ai-scan" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">有効化</span><span class="ctl-v"><a class="retro-link" href="https://github.com/organizations/ORG/settings/security_analysis" target="_blank" rel="noopener noreferrer">Org settings ↗</a>: Enterprise の許可、各機能の利用条件、<b>AI credits</b> 予算を確認。<b>PR スキャン</b>、<b>リポジトリスキャン</b>、<b>Scan for AI applications</b> は個別に有効化し、repo ごとにオプトアウトできる。</span></p>
-<p class="ctl-row"><span class="ctl-k">実行</span><span class="ctl-v">PR 検出器は自動実行され、結果は助言扱い。リポジトリスキャンは <b>Code scanning → AI Scan</b> から手動実行し、CodeQL 対応言語も含むデフォルトブランチの全言語を対象にする。一定の予算内でコードを選んで調べるため、全ファイルを網羅するものではない。AI Scan に <b>CodeQL default setup は不要</b>。</span></p>
+<details class="det-pick" name="cs-start">
+<summary class="det-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-4" /><span class="det-icon" aria-hidden="true">4</span><span class="det-name" id="cs-start-4">AI Scan</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">AI Scan の対象範囲を選ぶ</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan#managing-ai-scan" target="_blank" rel="noopener noreferrer">Docs</a></p>
+<p class="det-doc">AI SCAN</p>
+<p class="det-why"><b>有効化:</b> <a class="retro-link" href="https://github.com/organizations/ORG/settings/security_analysis" target="_blank" rel="noopener noreferrer">Org settings ↗</a>: Enterprise の許可、各機能の利用条件、<b>AI credits</b> 予算を確認。<b>PR スキャン</b>、<b>リポジトリスキャン</b>、<b>Scan for AI applications</b> は個別に有効化し、repo ごとにオプトアウトできる。</p>
+<p class="det-why"><b>実行:</b> PR 検出器は自動実行され、結果は助言扱い。リポジトリスキャンは <b>Code scanning → AI Scan</b> から手動実行し、CodeQL 対応言語も含むデフォルトブランチの全言語を対象にする。一定の予算内でコードを選んで調べるため、全ファイルを網羅するものではない。AI Scan に <b>CodeQL default setup は不要</b>。</p>
 </div>
 </details>
-<details class="ctl-item" name="cs-start">
-<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-5" /><span class="ctl-icon">5</span><span class="ctl-name" id="cs-start-5">AI による修正支援を準備</span><span class="ctl-when">AUTOFIX</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">準備</span><span class="ctl-v"><a class="retro-link" href="https://github.com/organizations/ORG/settings/security_analysis" target="_blank" rel="noopener noreferrer">Org settings ↗</a>: 従来の Autofix は無効化されていなければ CodeQL と共に有効。Draft PR 作成には任意で <b>Agentic Autofix</b> を有効化し、AI credits + Actions の予算を確保。</span></p>
+<details class="det-pick" name="cs-start">
+<summary class="det-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-5" /><span class="det-icon" aria-hidden="true">5</span><span class="det-name" id="cs-start-5">Autofix</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">AI による修正支援を準備</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/autofix-for-code-scanning" target="_blank" rel="noopener noreferrer">Docs</a></p>
+<p class="det-doc">AUTOFIX</p>
+<p class="det-why"><b>準備:</b> <a class="retro-link" href="https://github.com/organizations/ORG/settings/security_analysis" target="_blank" rel="noopener noreferrer">Org settings ↗</a>: 従来の Autofix は無効化されていなければ CodeQL と共に有効。Draft PR 作成には任意で <b>Agentic Autofix</b> を有効化し、AI credits + Actions の予算を確保。</p>
 </div>
 </details>
-<details class="ctl-item" name="cs-start">
-<summary class="ctl-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-6" /><span class="ctl-icon">6</span><span class="ctl-name" id="cs-start-6">Security campaign を作成</span><span class="ctl-when">CAMPAIGNS</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/remediate-alerts-at-scale/creating-managing-security-campaigns" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">対応</span><span class="ctl-v"><a class="retro-link" href="https://github.com/orgs/ORG/security/campaigns" target="_blank" rel="noopener noreferrer">Campaigns ↗</a>: code scanning アラートを選び、リスク順に優先度をつけ、担当と期限を決める。小さなバックログから始める。</span></p>
+<details class="det-pick" name="cs-start">
+<summary class="det-btn"><input type="checkbox" class="ctl-check" aria-labelledby="cs-start-6" /><span class="det-icon" aria-hidden="true">6</span><span class="det-name" id="cs-start-6">Campaigns</span></summary>
+<div class="det-pane">
+<p class="det-head"><span class="det-title">Security campaign を作成</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/how-tos/manage-security-alerts/remediate-alerts-at-scale/creating-managing-security-campaigns" target="_blank" rel="noopener noreferrer">Docs</a></p>
+<p class="det-doc">CAMPAIGNS</p>
+<p class="det-why"><b>対応:</b> <a class="retro-link" href="https://github.com/orgs/ORG/security/campaigns" target="_blank" rel="noopener noreferrer">Campaigns ↗</a>: code scanning アラートを選び、リスク順に優先度をつけ、担当と期限を決める。小さなバックログから始める。</p>
 </div>
 </details>
+</div>
+<div class="det-screen"><p class="det-empty">項目を選んでください ▸</p></div>
 </div>
 </div>
 
-URL テンプレート内の `ORG`、`OWNER`、`REPO` を置き換えて使う。
+## Advanced setup と SARIF 連携 <a class="h2-doc" href="https://docs.github.com/en/code-security/code-scanning/enabling-code-scanning/configuring-default-setup-for-code-scanning" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-## Advanced setup と SARIF 連携
+Monorepo、独自ビルド、他社ツール併用なら workflow を自分で書く。
 
-Default で足りないとき（monorepo、特殊なビルド、他社ツール併用）は workflow を自分で書く。
+<div class="grid md:grid-cols-2 gap-4 example-columns">
+<div>
+
+### 1. トリガーとジョブ
 
 ```yaml
 # .github/workflows/codeql.yml
@@ -645,34 +755,41 @@ jobs:
     permissions: { security-events: write, contents: read }
     strategy:
       matrix: { language: [javascript, python] }
+```
+
+</div>
+<div>
+
+### 2. 解析ステップ（続き）
+
+```yaml
     steps:
       - uses: actions/checkout@v4
       - uses: github/codeql-action/init@v3
-        with: { languages: '${{ matrix.language }}', queries: security-extended }
+        with:
+          languages: ${{ matrix.language }}
+          queries: security-extended
       - uses: github/codeql-action/analyze@v3
 
-      # サードパーティ SAST（Semgrep / Snyk / ESLint security）も同じ画面に同居する:
+      # 他社ツールで results.sarif を生成してから:
       - uses: github/codeql-action/upload-sarif@v3
         with: { sarif_file: results.sarif }
 ```
 
-> 💡 `runs-on` を **self-hosted runner** にすれば Actions 分の課金は発生しない。大規模展開でコストが問題になる場合の第一手。
+</div>
+</div>
+
+**SARIF:** 他社 SAST も同じ UI。**Self-hosted:** Actions 分の課金なし。
 
 ## 料金: 3 つのメーター <a class="h2-doc" href="https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security#how-ai-feature-usage-is-billed" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-<p class="spec-hint">▸ ＋ をクリックすると詳細が開きます</p>
-
-<div class="spec-widget spec-compact">
-<table class="compact-table" style="table-layout:fixed">
-<colgroup><col style="width:22%" /><col style="width:40%" /><col style="width:38%" /></colgroup>
-<thead>
-<tr><th style="white-space:normal">コスト</th><th>どう測られるか</th><th>知っておくこと</th></tr>
-</thead>
-<tbody>
-<tr>
-<td style="white-space:normal">💺 ライセンス</td>
-<td><b>$30 / active committer / 月</b><br>GitHub Code Security</td>
-<td>
+<div class="det-widget">
+<div class="det-split">
+<div class="det-list">
+<details class="det-pick" name="cs-meter">
+<summary class="det-btn"><span class="det-name">💺 ライセンス</span></summary>
+<div class="det-pane spec-widget spec-compact">
+<p class="det-why"><b>$30 / active committer / 月</b><br>GitHub Code Security</p>
 <div class="spec-list">
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">📦</span><span class="spec-key">何が含まれる</span><span class="spec-toggle" aria-hidden="true"></span></summary>
@@ -683,12 +800,12 @@ jobs:
 <p class="spec-what">直近 <b>90 日</b> に有効な repo へコミットが push された作者が active committer。Enterprise 内の対象 repo や Org をまたいでも <b>1 人 1 ライセンス</b>。GitHub App の bot は対象外。Code Security は <b>単体購入できる</b>。</p>
 </details>
 </div>
-</td>
-</tr>
-<tr>
-<td style="white-space:normal">⚙️ Actions 分</td>
-<td>CodeQL は <b>Actions で実行</b>。Private のスキャンは実行分を消費し、超過分が課金される。</td>
-<td>
+</div>
+</details>
+<details class="det-pick" name="cs-meter">
+<summary class="det-btn"><span class="det-name">⚙️ Actions 分</span></summary>
+<div class="det-pane spec-widget spec-compact">
+<p class="det-why">CodeQL は <b>Actions で実行</b>。Private のスキャンは実行分を消費し、超過分が課金される。</p>
 <div class="spec-list">
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔁</span><span class="spec-key">いつ回るか</span><span class="spec-toggle" aria-hidden="true"></span></summary>
@@ -703,16 +820,16 @@ jobs:
 <p class="spec-what">Actions usage metrics を <b>workflow 名で絞れば</b>、CodeQL だけの消費分が出る。見積もりではなく実測値で議論できる。<br /><code>github.com/orgs/&lt;org&gt;/actions/metrics/usage?filters=codeql.yml</code></p>
 </details>
 </div>
-</td>
-</tr>
-<tr>
-<td style="white-space:normal">🤖 AI クレジット</td>
-<td><b>AI Scan</b>（検知）と <b>Agentic Autofix</b>（修正）は従量課金。従来の Autofix 提案は無料。</td>
-<td>
+</div>
+</details>
+<details class="det-pick" name="cs-meter">
+<summary class="det-btn"><span class="det-name">🤖 AI クレジット</span></summary>
+<div class="det-pane spec-widget spec-compact">
+<p class="det-why"><b>AI Scan + Agentic Autofix:</b> 従量課金。従来の Autofix 提案は無料。</p>
 <div class="spec-list">
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🔎</span><span class="spec-key">AI Scan</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what"><b>2026-11-11 時点</b>: PR の自動スキャンとリポジトリの手動スキャンは、修正依頼がなくても <b>Code Security AI Credits</b> を消費。<b>組織所有の repo</b> では、<b>実行のきっかけとなったユーザーの個人クレジットではなく</b>、組織の課金アカウント（単独の Org または Enterprise）が負担する。どちらも Copilot ライセンス不要。<a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan-for-repositories#billing" target="_blank" rel="noopener noreferrer">リポジトリスキャンの課金 ↗</a>。別機能の <b>AI アプリ検出器</b>には独自の<a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-applications-scanning-for-pull-requests#billing" target="_blank" rel="noopener noreferrer">ライセンスと AI credits の条件 ↗</a>がある。</p>
+<p class="spec-what"><b>2026-11-11 時点:</b> PR 自動 / repo 手動スキャンは、修正依頼がなくても <b>Code Security AI Credits</b> を消費。どちらも Copilot ライセンス不要。<b>組織所有 repo は実行者の個人枠ではなく Org / Enterprise が負担</b>。<a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan-for-repositories#billing" target="_blank" rel="noopener noreferrer">スキャン課金 ↗</a>。別機能の AI アプリ検出器には独自の<a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-applications-scanning-for-pull-requests#billing" target="_blank" rel="noopener noreferrer">ライセンス / クレジット条件 ↗</a>がある。</p>
 </details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🆓</span><span class="spec-key">Copilot Autofix</span><span class="spec-toggle" aria-hidden="true"></span></summary>
@@ -720,17 +837,18 @@ jobs:
 </details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">💸</span><span class="spec-key">Agentic Autofix</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what"><b>2026-10-26 時点</b>: <b>Security → Assign to Copilot</b> や campaign からの割り当ては、<b>Code Security AI Credits + Actions 分</b>を消費。<b>組織所有の repo</b> では、自分で割り当てても<b>個人クレジットではなく、Org / Enterprise の課金アカウント</b>が負担する。Copilot ライセンス不要。<b>Code Security AI Credits</b> の SKU 予算を設定できる。<a class="retro-link" href="https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security#how-ai-feature-usage-is-billed" target="_blank" rel="noopener noreferrer">課金 Docs ↗</a></p>
+<p class="spec-what"><b>2026-10-26 時点:</b> <b>Security → Assign to Copilot</b> / campaign の割り当ては <b>Code Security AI Credits + Actions 分</b>を消費。<b>組織所有 repo は自分の割り当ても個人枠ではなく Org / Enterprise が負担</b>。Copilot ライセンス不要。<b>Code Security AI Credits</b> の SKU 予算を設定できる。<a class="retro-link" href="https://docs.github.com/en/billing/concepts/product-billing/github-advanced-security#how-ai-feature-usage-is-billed" target="_blank" rel="noopener noreferrer">課金 ↗</a></p>
 </details>
 <details class="spec-item" name="cs-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">👤</span><span class="spec-key">Copilot Chat / agent</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what"><b>Copilot Chat</b> や<b>通常のクラウドエージェントのタスク</b>で脆弱性の修正を依頼する場合は、Agentic Autofix ではなく Copilot の利用。<b>自分の Copilot プラン</b>の AI クレジットを消費し、個人プランなら個人の枠、Business / Enterprise なら <b>Org / Enterprise の共有枠</b>から差し引かれる。<a class="retro-link" href="https://docs.github.com/en/copilot/concepts/billing-and-usage/individuals/billing" target="_blank" rel="noopener noreferrer">個人プラン ↗</a> / <a class="retro-link" href="https://docs.github.com/en/copilot/concepts/billing-and-usage/organizations-and-enterprises/billing" target="_blank" rel="noopener noreferrer">組織プラン ↗</a></p>
+<p class="spec-what"><b>Copilot Chat / 通常のクラウドエージェント</b>での脆弱性修正は Agentic Autofix ではなく Copilot の利用。<b>自分の Copilot プランの AI クレジット</b>を消費する。個人プランは個人枠、Business / Enterprise は <b>Org / Enterprise の共有枠</b>。<a class="retro-link" href="https://docs.github.com/en/copilot/concepts/billing-and-usage/individuals/billing" target="_blank" rel="noopener noreferrer">個人 ↗</a> / <a class="retro-link" href="https://docs.github.com/en/copilot/concepts/billing-and-usage/organizations-and-enterprises/billing" target="_blank" rel="noopener noreferrer">組織 ↗</a></p>
 </details>
 </div>
-</td>
-</tr>
-</tbody>
-</table>
+</div>
+</details>
+</div>
+<div class="det-screen"><p class="det-empty">項目を選んでください ▸</p></div>
+</div>
 </div>
 
 ## repo 種別ごとの利用条件 <a class="h2-doc" href="https://github.blog/changelog/2025-03-04-introducing-github-secret-protection-and-github-code-security/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
@@ -752,16 +870,14 @@ jobs:
 >
 > ⚠️ **Public → private**: Code Scanning を継続するには Code Security が必要。
 
-## Code Security Risk Assessment(無料の棚卸しスキャン)
+## Code Security Risk Assessment(無料の棚卸しスキャン) <a class="h2-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-1 クリックで Org 内の **最もアクティブな最大 20 リポジトリ** を CodeQL スキャンし、どこに脆弱性が眠っているかを可視化する。**GHAS / Code Security ライセンス不要、完全無料**（2026 年 4 月 GA）。
+**CodeQL で無料の棚卸し**。GHAS / Code Security ライセンス不要（2026 年 4 月 GA）。
 
 - 🔎 **対象** — 最近のコミットが活発な repo を最大 20 件（毎回選び直し可）
 - 📊 **出力** — **重大度・言語・ルール種別** 別のレポート、**Copilot Autofix で修正可能な件数** も表示
 - 🕒 **頻度** — **90 日に 1 回** 再実行可。実行できるのは Org owner / security manager のみ
 - 🚀 **動かし方** — `Org → Security → Assessments → Run code security risk assessment`
-- 🆓 **コスト** — ライセンス不要、Actions 分も消費しない — 購入前の判断材料に最適
+- 🆓 **コスト**: ライセンス不要、Actions 分も消費しない
 
-> 📊 Secret Risk Assessment（<a class="retro-link" href="/theomonfort/playbook/secret-scanning">Secret Protection ↗</a>）とセットで、組織のセキュリティ姿勢を 1 日で可視化できる。実数を見てから **Code Security 導入** を判断するのが定石。
-
-📘 詳細: <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/code-security-risk-assessment" target="_blank" rel="noopener noreferrer">Code security risk assessment ↗</a> / <a class="retro-link" href="https://github.blog/security/application-security/how-exposed-is-your-code-find-out-in-minutes-for-free/" target="_blank" rel="noopener noreferrer">How exposed is your code? ↗</a>
+<a class="retro-link" href="/theomonfort/playbook/secret-scanning">Secret Risk Assessment ↗</a> と組み合わせ、実数を見て Code Security 導入を判断する。
