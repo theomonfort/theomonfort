@@ -67,6 +67,9 @@ links:
 
 **直接割り当ては 1 リソースにつき 1 つ。** 別のセンターに追加すると**移動**する。複数の team / org に所属しても、同じ料金を分割しない。
 
+<div class="admin-columns">
+<div>
+
 **ライセンスと Copilot AI の費用**は、最初に該当するコストセンターに計上する。
 
 <div class="tbl-compact">
@@ -80,11 +83,17 @@ links:
 
 </div>
 
+</div>
+<div>
+
 **確認：** <a class="retro-link" href="https://docs.github.com/en/billing/reference/billing-reports#detailed-usage-report" target="_blank" rel="noopener noreferrer">詳細利用レポート ↗</a>で `username` とライセンスの `sku` を絞り、`organization` と `cost_center_name` を確認する。
 
 **例：** Alice は A に直接割り当てられ、B の team にも所属：Copilot → **A**。B の repo で動く Actions → **B**。誰が実行しても同じ。
 
 再割り当ては**今後の利用だけ**に反映され、過去の料金は変更しない。
+
+</div>
+</div>
 
 ## どんな予算を設定できる？ <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/billing/how-tos/set-up-budgets" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
@@ -143,9 +152,18 @@ links:
 
 </div>
 
+<div class="admin-columns admin-notes">
+<div>
+
 **ハード予算は足し算にならない。** 適用される上限を 1 つでも使い切れば停止しうる。Actions / AI 全体の上限は CI やセキュリティの処理も止める可能性がある。
 
-> ⚠️ 新しい予算は**作成後の利用だけ**を集計。ユーザー別アラートは常に利用できるわけではないため、センターや enterprise でも監視する。
+</div>
+<div>
+
+⚠️ 新しい予算は**作成後の利用だけ**を集計。ユーザー別アラートは常に利用できるわけではないため、センターや enterprise でも監視する。
+
+</div>
+</div>
 
 ## 部門での設定：費用、予算、プール <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/billing/tutorials/control-costs-at-scale" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 

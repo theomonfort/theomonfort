@@ -127,32 +127,28 @@ Remote access connects to an **existing host**; it does not move that session in
 | **BYOK** | Bring Your Own Key: connect your provider. <a class="retro-link" href="https://code.visualstudio.com/docs/agent-customization/language-models#_bring-your-own-language-model-key" target="_blank" rel="noopener noreferrer">Setup ↗</a> |
 | **Local models** | Copilot <a class="retro-link" href="https://code.visualstudio.com/docs/agent-customization/language-models#_use-on-device-models" target="_blank" rel="noopener noreferrer">on-device models ↗</a> on supported hardware, or **Ollama via BYOK** |
 
-## Copilot across interfaces <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-on-github" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+## Copilot across interfaces <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-on-github" target="_blank" rel="noopener noreferrer">📖 Docs</a> <a class="h2-demo" href="https://github.com/enterprises/octodemo/ai-controls/copilot/features" target="_blank" rel="noopener noreferrer" aria-label="Open Octodemo Copilot feature settings">&#9658; DEMO ↗</a>
 
-**Copilot in the cloud** connects the same cloud sandbox session across these surfaces (since **2026-10-28**). <a class="retro-link" href="https://github.blog/changelog/2026-10-28-work-from-anywhere-with-a-new-connected-copilot-cloud-experience/" target="_blank" rel="noopener noreferrer">Changelog ↗</a>
+<ul class="chat-surfaces" aria-label="Copilot surfaces">
+<li>VS Code</li><li>GitHub.com</li><li>GitHub Mobile</li><li>Copilot CLI</li><li>GitHub Copilot app</li>
+</ul>
 
-<table class="compact-table">
-<thead><tr><th>Surface</th><th>Entry point</th></tr></thead>
-<tbody>
-<tr><td><strong>VS Code</strong></td><td><strong>Chat view</strong> / <strong>Agents window</strong></td></tr>
-<tr><td><strong>GitHub.com</strong></td><td><strong>Copilot</strong> / repository <strong>Agents</strong> tab</td></tr>
-<tr><td><strong>GitHub Mobile</strong></td><td><strong>Copilot</strong> tab</td></tr>
-<tr><td><strong>Copilot CLI</strong></td><td><code>copilot</code> in your terminal</td></tr>
-<tr><td><strong>GitHub Copilot app</strong></td><td>Desktop app for parallel agent tasks</td></tr>
-</tbody>
-</table>
-
-**Paid plans** and policies apply. **Local host offline ≠ session expired.**
-
-<div class="ctl-widget">
-<div class="ctl-list">
-<details class="ctl-item" name="copilot-remote-lifecycle">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔌</span><span class="ctl-name">What must stay online?</span><a class="ctl-doc" href="https://code.visualstudio.com/docs/agents/run/remote-agent-sessions" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body">
-<p class="ctl-row"><span class="ctl-k">Host</span><span class="ctl-v">The machine with your workspace and its agent process must be running and reachable. For a desktop VS Code host, keep VS Code running. This is not a GitHub Actions runner or a managed cloud sandbox.</span></p>
-<p class="ctl-row"><span class="ctl-k">Offline</span><span class="ctl-v">Sleep or a network outage makes remote control unavailable, not automatically expired or deleted. Reconnect to the original host; a synced transcript is not a live process or a backup of your workspace.</span></p>
-<p class="ctl-row"><span class="ctl-k">CLI resume</span><span class="ctl-v">If the CLI stopped, use <code>copilot --continue</code> or <code>copilot --resume</code> on the original machine with its saved session and workspace. Previously enabled remote control is re-enabled. <a class="retro-link" href="https://docs.github.com/en/copilot/concepts/agent-capabilities/agent-powered-workflows-and-operations/about-remote-control#reconnection" target="_blank" rel="noopener noreferrer">CLI docs ↗</a></span></p>
+<div class="chat-continuity">
+<section>
+<h3>What you can do</h3>
+<ul>
+<li><strong>Cloud sandbox:</strong> continue the same session across surfaces, even with your laptop closed.</li>
+<li><strong>Remote local session:</strong> monitor progress, send prompts, approve plans and tool requests with the same GitHub account.</li>
+</ul>
+</section>
+<section>
+<h3>Limits to know</h3>
+<ul>
+<li><strong>Local execution stays local.</strong> Keep the host awake, online, and its agent running. History sync is not a workspace backup.</li>
+<li><strong>CLI remote control:</strong> interactive sessions only; no remote slash commands. Going offline does not delete the session.</li>
+<li><strong>Cloud sessions:</strong> paid plan, repository access, and organization / enterprise policies apply.</li>
+</ul>
+</section>
 </div>
-</details>
-</div>
-</div>
+
+<p class="chat-policy"><strong>Store local sessions in the Cloud</strong><span><b>View from cloud</b>: history only. <b>View and control</b>: history + remote control. <a class="retro-link" href="https://docs.github.com/en/copilot/concepts/agent-capabilities/agent-powered-workflows-and-operations/about-remote-control#administering-remote-control" target="_blank" rel="noopener noreferrer">Policy docs ↗</a></span></p>

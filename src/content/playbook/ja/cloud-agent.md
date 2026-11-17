@@ -68,30 +68,36 @@ links:
 - **Issue から**：Issue を **Copilot に assign** するだけ。タイトルと本文がそのままタスク仕様になる。
 - **CLI から**：`/delegate` を使って Copilot Cloud Agent に作業を渡す。他の SDK / Harness には delegate できない。
 
-## 環境カスタマイズ（`copilot-setup-steps.yml`）
+## 環境カスタマイズ <span class="slide-heading-links"><input type="checkbox" id="demo-cloud-setup" class="demo-toggle" /><label class="h2-demo" for="demo-cloud-setup">Code</label></span>
 
-リポジトリに **任意で** `.github/workflows/copilot-setup-steps.yml` を置くと、Cloud Agent の **GitHub Actions 環境を完全に制御** できる。未設定なら Ubuntu のデフォルト環境で依存を自動推測。
+<div class="demo-panel cloud-code-panel">
+<label class="demo-scrim" for="demo-cloud-setup" aria-label="コード例を閉じる"></label>
+<div class="demo-window" role="group" aria-label="Cloud Agent 環境設定のコード">
+<div class="demo-head"><span class="demo-tag">CODE</span><span class="demo-name">copilot-setup-steps.yml</span><span class="demo-note">発表者専用</span><label class="demo-close" for="demo-cloud-setup" aria-label="閉じる">&#10005;</label></div>
+<div class="cloud-code-example">
 
 ```yaml
 name: "Copilot Setup Steps"
-
 on: workflow_dispatch
-
 jobs:
   copilot-setup-steps:
-    runs-on: ubuntu-latest  # ← より大きなランナー / self-hosted / windows-latest にも切替可
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          lfs: true                    # Git LFS 有効化
+        with: {lfs: true}
       - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-      - run: npm ci                    # 依存を事前インストール
+        with: {node-version: "20"}
+      - run: npm ci
       - run: pip install -r requirements.txt
     env:
       MY_API_BASE: https://api.example.com
 ```
+
+</div>
+</div>
+</div>
+
+リポジトリに **任意で** `.github/workflows/copilot-setup-steps.yml` を置くと、Cloud Agent の **GitHub Actions 環境を完全に制御** できる。未設定なら Ubuntu のデフォルト環境で依存を自動推測。
 
 **カスタマイズできること：**
 
@@ -103,36 +109,20 @@ jobs:
 - 🔑 **環境変数** の設定
 - 🔥 エージェント **ファイアウォール** の無効化・カスタマイズ
 
-## MCP サーバーで外部ツールを追加
+## MCP サーバーで外部ツールを追加 <span class="slide-heading-links"><a class="h2-doc" href="https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/extend-cloud-agent-with-mcp" target="_blank" rel="noopener noreferrer">📖 Docs</a><a class="h2-demo" href="https://github.com/theomonfort-org/.github-private/settings/copilot/mcp" target="_blank" rel="noopener noreferrer">&#9658; DEMO</a></span>
 
-**GitHub MCP サーバーと Playwright MCP サーバーはデフォルトで有効** — 設定不要ですぐ使える。さらに拡張したい場合、Cloud Agent には **専用の MCP サーバー設定** がある。ローカルの MCP 設定とは別管理で、ブラウザ上の `Settings → Code & automation → Copilot → MCP servers` から JSON を貼るだけ。設定したサーバーは、その Org / アカウントで起動するすべての Cloud Agent セッションに自動で接続される。
+**GitHub MCP と Playwright MCP はデフォルトで有効**。追加サーバーは、ローカルとは別の **クラウド専用設定** で管理する。
 
-**例：デフォルトに加えて Context7 を追加**
-
-```json
-{
-  "mcpServers": {
-    "context7": {
-      "type": "http",
-      "url": "https://mcp.context7.com/mcp",
-      "tools": ["*"]
-    }
-  }
-}
-```
-
-> 💡 詳細は <a href="https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/extend-cloud-agent-with-mcp" target="_blank" rel="noopener noreferrer" class="retro-link">Extend Cloud Agent with MCP</a> を参照。
+リポジトリの `Settings → Copilot → MCP servers` で設定する。共有された設定が、そのリポジトリの Cloud Agent セッションに適用される。
 
 ## 検証ツール（デフォルト ON）
 
 Cloud Agent は生成コードに対し、PR 作成前に **4 つの検証** を自動実行。**問題を検出したら自前で修正を試みてから** PR を出す。
 
-| 検証ツール | 見るもの | 目的 |
-|---|---|---|
-| **CodeQL Code scanning** | セキュリティ脆弱性 | SQLi、XSS、危険な API 使用などを検出する。 |
-| **Copilot Code Review** | コード品質 | ロジックバグ、不要な複雑さ、実装上の問題を指摘する。 |
-| **Secret Scanning** | API キー・認証情報 | 生成コード経由の secret 漏洩を防ぐ。 |
-| **Dependency Vulnerability checks** | 依存パッケージ | GitHub Advisory Database と照合し、脆弱な依存追加を検出する。 |
+- **CodeQL Code scanning**
+- **Copilot Code Review**
+- **Secret Scanning**
+- **Dependency Vulnerability checks**
 
 > 💰 **無料で使える** ── GitHub Advanced Security ライセンスは **不要**。設定は `Settings → Copilot → Cloud agent → Validation tools` から ON/OFF 可能。
 
@@ -148,43 +138,30 @@ Cloud Agent は生成コードに対し、PR 作成前に **4 つの検証** を
 
 人は **Issue を整える・レビューする・マージする** だけ。実装と修正のループは Cloud Agent が回す。
 
-```mermaid
-%%{init: {'themeVariables': {'fontSize': '40px'}}}%%
-flowchart LR
-  subgraph Human["👤 人（開発者）"]
-    direction TB
-    A["Issue の<br/>内容を調整"]
-    B["Issue を<br/>Copilot に assign"]
-    C["コメントで<br/>レビュー指摘"]
-    D{"修正<br/>完了?"}
-    M["マージ"]
-    A --> B
-  end
-
-  subgraph Copilot["☁️ Cloud Agent"]
-    direction TB
-    E["成果物作成"]
-    F["PR 作成"]
-    G["指摘を修正"]
-    E --> F
-  end
-
-  B --> E
-  F --> C
-  C --> G
-  G --> D
-  D -->|"修正NG /<br/>追加指摘"| C
-  D -->|"OK"| M
-  M -.->|"次の Issue へ"| A
-
-  classDef human fill:#0b1420,stroke:#5eead4,color:#5eead4,stroke-width:2px
-  classDef agent fill:#1a1500,stroke:#fcd34d,color:#fcd34d,stroke-width:2px
-  classDef decide fill:#11162c,stroke:#93a8ff,color:#93a8ff,stroke-width:2px
-  classDef done fill:#0a1a14,stroke:#86efac,color:#86efac,stroke-width:2px
-  class A,B,C human
-  class E,F,G agent
-  class D decide
-  class M done
-```
-
-> 人間のタスクは **判断と意思決定**、Copilot のタスクは **実装と反復**。境界を分けることで、レビュー待ちの PR がパイプラインのように流れる。
+<figure class="cloud-swimlane-figure" role="group" aria-labelledby="cloud-workflow-caption">
+<div class="cloud-swimlane">
+<div class="cloud-lane cloud-lane-agent"><strong>☁️ Cloud Agent</strong></div>
+<div class="cloud-lane cloud-lane-human"><strong>👤 人（開発者）</strong></div>
+<svg class="cloud-lane-connectors" viewBox="0 0 1100 360" aria-hidden="true">
+<defs><marker id="cloud-lane-arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 10 5 0 10z" fill="#93a8ff"/></marker></defs>
+<g marker-end="url(#cloud-lane-arrow)">
+<path d="M170 252H190V245H210"/><path d="M285 205V170H360V122"/><path d="M435 89H490"/>
+<path d="M560 122V180H550V205"/><path d="M630 245H685V175H795V122"/><path d="M860 122V170H835V190"/>
+<path d="M890 245H920V252H945"/><path d="M835 300V316H550V285"/>
+<path class="cloud-next-connector" d="M1010 285V347H100V285"/>
+</g>
+</svg>
+<div class="cloud-lane-node cloud-node-artifacts">成果物<br />作成</div>
+<div class="cloud-lane-node cloud-node-pr">PR 作成</div>
+<div class="cloud-lane-node cloud-node-fix">指摘を修正</div>
+<div class="cloud-lane-node cloud-node-issue">Issue の<br />内容を調整</div>
+<div class="cloud-lane-node cloud-node-assign">Copilot に<br />assign</div>
+<div class="cloud-lane-node cloud-node-review">コメントで<br />レビュー</div>
+<div class="cloud-lane-node cloud-node-decision"><span>完了？</span></div>
+<div class="cloud-lane-node cloud-node-merge">マージ</div>
+<span class="cloud-edge-label cloud-label-ok">OK</span>
+<span class="cloud-edge-label cloud-label-feedback">修正 NG / 追加指摘</span>
+<span class="cloud-edge-label cloud-label-next">次の Issue へ</span>
+</div>
+<figcaption id="cloud-workflow-caption" hidden>人が Issue を調整して assign し、Cloud Agent が成果物と PR を作成。人のレビュー指摘を Cloud Agent が修正し、人が完了を判断する。未完了なら追加指摘に戻り、完了ならマージして次の Issue へ進む。</figcaption>
+</figure>

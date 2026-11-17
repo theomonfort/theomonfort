@@ -53,35 +53,33 @@ links:
 
 ## GitHub 関連ライセンス／サービスの調達方法
 
-<div style="font-size:0.56em;line-height:1.25;--proc-row:8.45rem;--proc-gap:0.6rem;--proc-label:5.4rem;--proc-navy:var(--c-neon-magenta);--proc-gray:var(--c-gb-green);--proc-blue:var(--c-neon-cyan);--proc-copilot:var(--c-crt-amber);--proc-panel:rgb(var(--rgb-deep-purple) / 0.86);--proc-card:rgb(var(--rgb-shadow-ink) / 0.92);--proc-card-border:rgb(var(--rgb-neon-cyan) / 0.46);--proc-copilot-border:rgb(var(--rgb-crt-amber) / 0.85);--proc-head:var(--c-neon-magenta);--proc-accent:var(--c-neon-cyan);--proc-dark:var(--c-shadow-ink);--proc-ink:var(--c-phosphor);">
-
-GitHub サービスの利用方法は下記の通りです。
+<div class="admin-procurement" style="font-size:18px;line-height:1.25;--proc-rows:180px 120px 180px;--proc-gap:0.6rem;--proc-label:7rem;--proc-navy:var(--c-neon-magenta);--proc-gray:var(--c-gb-green);--proc-blue:var(--c-neon-cyan);--proc-copilot:var(--c-crt-amber);--proc-panel:rgb(var(--rgb-deep-purple) / 0.86);--proc-card:rgb(var(--rgb-shadow-ink) / 0.92);--proc-card-border:rgb(var(--rgb-neon-cyan) / 0.46);--proc-copilot-border:rgb(var(--rgb-crt-amber) / 0.85);--proc-head:var(--c-neon-magenta);--proc-accent:var(--c-neon-cyan);--proc-dark:var(--c-shadow-ink);--proc-ink:var(--c-phosphor);">
 
 <div style="display:grid;grid-template-columns:minmax(0,1fr) 16.5rem;gap:1.05rem;align-items:start;margin-top:0.9rem;max-width:72rem;">
-<div style="display:grid;grid-template-rows:repeat(3,var(--proc-row));gap:var(--proc-gap);">
+<div style="display:grid;grid-template-rows:var(--proc-rows);gap:var(--proc-gap);">
 <div style="display:grid;grid-template-columns:var(--proc-label) minmax(0,1fr);gap:0.25rem;min-height:0;">
 <div style="display:flex;align-items:center;justify-content:center;text-align:center;background:var(--proc-head);color:var(--proc-dark);font-weight:700;font-size:1.1em;line-height:1.35;border-bottom:0.6rem solid rgb(var(--rgb-shadow-ink) / 0.95);">ユーザー<br/>ライセンス</div>
-<div style="background:var(--proc-panel);color:var(--proc-ink);padding:0.3rem 0.7rem 0.55rem;">
-<div style="text-align:center;font-weight:700;font-size:1.05em;color:var(--proc-accent);margin-bottom:0.38rem;">GitHub Enterprise利用のためのライセンス</div>
+<div style="background:var(--proc-panel);color:var(--proc-ink);padding:0.2rem 0.7rem;">
+<div style="text-align:center;font-weight:700;font-size:1.05em;color:var(--proc-accent);margin-bottom:0.2rem;">GitHub Enterprise利用のためのライセンス</div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
-<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);height:100%;display:grid;grid-template-rows:auto 1fr;">
+<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);min-height:0;display:grid;grid-template-rows:auto 1fr;">
 <div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.22rem 0.35rem;font-size:1.08em;">Visual Studio subscriptions</div>
 <div style="padding:0.45rem 0.55rem;font-weight:600;">・Visual Studio サブスクリプションが必要な方</div>
 </div>
-<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);height:100%;display:grid;grid-template-rows:auto 1fr;">
+<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);min-height:0;display:grid;grid-template-rows:auto 1fr;">
 <div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.22rem 0.35rem;font-size:1.08em;">GitHub Enterprise</div>
-<div style="padding:0.45rem 0.55rem;font-weight:600;">・Visual Studio サブスクリプション不要な方<br/>・開発者/インフラエンジニア/DevOpsエンジニア/デザインなど<br/>・プロジェクト管理者/関係者</div>
+<div style="padding:0.45rem 0.55rem;font-weight:600;">Visual Studio サブスクリプション不要。<br/>開発 / インフラ / DevOps / デザイン<br/>プロジェクト管理 / 関係者</div>
 </div>
 </div>
 </div>
 </div>
 <div style="display:grid;grid-template-columns:var(--proc-label) minmax(0,1fr);gap:0.25rem;min-height:0;">
 <div style="display:flex;align-items:center;justify-content:center;text-align:center;background:var(--proc-head);color:var(--proc-dark);font-weight:700;font-size:1.1em;line-height:1.35;border-top:0.6rem solid rgb(var(--rgb-shadow-ink) / 0.95);">Committer<br/>ライセンス</div>
-<div style="background:var(--proc-panel);color:var(--proc-ink);padding:0.3rem 0.7rem 0.55rem;display:grid;grid-template-rows:auto 1fr;">
-<div style="text-align:center;font-weight:700;font-size:1.05em;color:var(--proc-accent);margin-bottom:0.55rem;">GitHub でDevSecOps実現するためのライセンス</div>
-<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);height:100%;display:grid;grid-template-rows:auto 1fr;">
-<div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.22rem 0.35rem;font-size:1.08em;">GitHub でDevSecOps実現するためのライセンス</div>
-<div style="padding:0.62rem 0.7rem;font-weight:600;">・コードのコミット/マージを行う方</div>
+<div style="background:var(--proc-panel);color:var(--proc-ink);padding:0.2rem 0.7rem;display:grid;grid-template-rows:auto 1fr;">
+<div style="text-align:center;font-weight:700;font-size:1.05em;color:var(--proc-accent);margin-bottom:0.2rem;">GitHub でDevSecOps実現するためのライセンス</div>
+<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);min-height:0;display:grid;grid-template-rows:auto 1fr;">
+<div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.22rem 0.35rem;font-size:1.08em;">GitHub Advanced Security</div>
+<div style="padding:0.2rem 0.7rem;font-weight:600;">・コードのコミット/マージを行う方</div>
 </div>
 </div>
 </div>
@@ -89,18 +87,18 @@ GitHub サービスの利用方法は下記の通りです。
 <div style="display:flex;align-items:center;justify-content:center;text-align:center;background:var(--proc-head);color:var(--proc-dark);font-weight:700;font-size:1.1em;line-height:1.35;">従量課金</div>
 <div style="background:var(--proc-panel);color:var(--proc-ink);padding:0.35rem 0.55rem 0.55rem;">
 <div style="text-align:center;font-weight:700;font-size:1.05em;color:var(--proc-accent);margin-bottom:0.45rem;">その他従量課金モデルの追加サービス</div>
-<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:0.45rem;">
-<div style="background:var(--proc-card);border:2px solid var(--proc-copilot-border);height:100%;display:grid;grid-template-rows:auto 1fr;box-shadow:0 0 12px rgb(var(--rgb-crt-amber) / 0.28);"><div style="background:var(--proc-copilot);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.18rem 0.25rem;font-size:1.03em;">Copilot<br/>Business/Enterprise</div><div style="padding:0.45rem 0.35rem;font-weight:700;color:var(--proc-copilot);">・生成系AIによるコード提案サービス</div></div>
-<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);height:100%;display:grid;grid-template-rows:auto 1fr;"><div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.3rem 0.25rem;font-size:1.08em;">Actions</div><div style="padding:0.55rem 0.35rem;font-weight:600;">・CI/CD<br/>・ワークフロー自動化</div></div>
-<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);height:100%;display:grid;grid-template-rows:auto 1fr;"><div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.3rem 0.25rem;font-size:1.08em;">Codespaces</div><div style="padding:0.55rem 0.35rem;font-weight:600;">・開発用マシンを提供</div></div>
-<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);height:100%;display:grid;grid-template-rows:auto 1fr;"><div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.3rem 0.25rem;font-size:1.08em;">Packages</div><div style="padding:0.55rem 0.35rem;font-weight:600;">・パッケージ管理</div></div>
-<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);height:100%;display:grid;grid-template-rows:auto 1fr;"><div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.3rem 0.25rem;font-size:1.08em;">LFS</div><div style="padding:0.55rem 0.35rem;font-weight:600;">・システム移行に伴い、現在無料提供</div></div>
+<div style="display:grid;grid-template-columns:1.3fr repeat(4,1fr);gap:0.45rem;">
+<div style="background:var(--proc-card);border:2px solid var(--proc-copilot-border);min-height:0;display:grid;grid-template-rows:auto 1fr;box-shadow:0 0 12px rgb(var(--rgb-crt-amber) / 0.28);"><div style="background:var(--proc-copilot);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.18rem 0.25rem;font-size:1.03em;">Copilot<br/>Business / Enterprise</div><div style="padding:0.45rem 0.35rem;font-weight:700;color:var(--proc-copilot);">生成 AI によるコード提案</div></div>
+<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);min-height:0;display:grid;grid-template-rows:auto 1fr;"><div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.3rem 0.25rem;font-size:1.08em;">Actions</div><div style="padding:0.55rem 0.35rem;font-weight:600;">・CI/CD<br/>・ワークフロー自動化</div></div>
+<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);min-height:0;display:grid;grid-template-rows:auto 1fr;"><div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.3rem 0.25rem;font-size:1.08em;">Codespaces</div><div style="padding:0.55rem 0.35rem;font-weight:600;">・開発用マシンを提供</div></div>
+<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);min-height:0;display:grid;grid-template-rows:auto 1fr;"><div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.3rem 0.25rem;font-size:1.08em;">Packages</div><div style="padding:0.55rem 0.35rem;font-weight:600;">・パッケージ管理</div></div>
+<div style="background:var(--proc-card);border:1px solid var(--proc-card-border);min-height:0;display:grid;grid-template-rows:auto 1fr;"><div style="background:var(--proc-head);color:var(--proc-dark);text-align:center;font-weight:700;padding:0.3rem 0.25rem;font-size:1.08em;">LFS</div><div style="padding:0.55rem 0.35rem;font-weight:600;">・システム移行に伴い、現在無料提供</div></div>
 </div>
 </div>
 </div>
 </div>
-<div style="position:relative;">
-<div style="position:absolute;top:-3.12rem;left:0;right:0;">
+<div class="admin-procurement-methods" style="position:relative;">
+<div style="position:absolute;top:-1.1rem;left:0;right:0;">
 <div style="background:var(--proc-navy);color:var(--proc-dark);text-align:center;font-weight:700;font-size:1.15em;padding:0.28rem 0.4rem;">ご調達方法</div>
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.65rem;align-items:center;margin-top:0.14rem;">
 <div style="width:1.55rem;height:1.55rem;border-radius:50%;background:var(--proc-navy);color:var(--proc-dark);display:flex;align-items:center;justify-content:center;margin:auto;font-weight:700;font-size:1.1em;">1</div>
@@ -109,17 +107,17 @@ GitHub サービスの利用方法は下記の通りです。
 </div>
 </div>
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.65rem;align-items:stretch;">
-<div style="display:grid;grid-template-rows:repeat(3,var(--proc-row));gap:var(--proc-gap);">
+<div style="display:grid;grid-template-rows:var(--proc-rows);gap:var(--proc-gap);">
 <div style="grid-row:1;background:var(--proc-gray);color:var(--proc-dark);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:1.25em;line-height:1.1;writing-mode:vertical-rl;">サブスク<br/>ライセンス</div>
 <div style="grid-row:2;background:var(--proc-gray);color:var(--proc-dark);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:1.25em;line-height:1.1;writing-mode:vertical-rl;">サブスク<br/>ライセンス</div>
 <div style="grid-row:3;background:var(--proc-blue);color:var(--proc-dark);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:1.25em;line-height:1.1;writing-mode:vertical-rl;">従量課金<br/>モデル</div>
 </div>
-<div style="display:grid;grid-template-rows:repeat(3,var(--proc-row));gap:var(--proc-gap);">
+<div style="display:grid;grid-template-rows:var(--proc-rows);gap:var(--proc-gap);">
 <div style="grid-row:1;background:var(--proc-gray);color:var(--proc-dark);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:1.25em;line-height:1.1;writing-mode:vertical-rl;">サブスク<br/>ライセンス</div>
 <div style="grid-row:2;background:var(--proc-blue);color:var(--proc-dark);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:1.25em;line-height:1.1;writing-mode:vertical-rl;">従量課金<br/>モデル</div>
 <div style="grid-row:3;background:var(--proc-blue);color:var(--proc-dark);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:1.25em;line-height:1.1;writing-mode:vertical-rl;">従量課金<br/>モデル</div>
 </div>
-<div style="display:grid;grid-template-rows:repeat(3,var(--proc-row));gap:var(--proc-gap);">
+<div style="display:grid;grid-template-rows:var(--proc-rows);gap:var(--proc-gap);">
 <div style="grid-row:1;background:var(--proc-blue);color:var(--proc-dark);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:1.25em;line-height:1.1;writing-mode:vertical-rl;">従量課金<br/>モデル</div>
 <div style="grid-row:2;background:var(--proc-blue);color:var(--proc-dark);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:1.25em;line-height:1.1;writing-mode:vertical-rl;">従量課金<br/>モデル</div>
 <div style="grid-row:3;background:var(--proc-blue);color:var(--proc-dark);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:1.25em;line-height:1.1;writing-mode:vertical-rl;">従量課金<br/>モデル</div>
@@ -141,17 +139,26 @@ GitHub サービスの利用方法は下記の通りです。
 
 ## Enterprise / Organization レベルでのライセンス割り当て
 
-- 🏷️ **1 つの org が選べる Copilot プランは 1 種類だけ** — Business **か** Enterprise。同じ org の中で混在はできない。
-- 👥 **その org のメンバー** が seat の対象。Owner が **Org Settings → Copilot → Access** から割り当てる。
-- 🆕 **Enterprise レベルでの割り当て（Business のみ・2025‑10‑28 GA）** — 管理者は Enterprise 設定から **Copilot Business** seat を直接アサインできる。割り当てた seat は **Enterprise 配下の全 org でそのユーザーに付随する**。
-- 🔒 **org 経由ではなく Enterprise から直接ライセンスを受けたユーザー** には「Let organizations decide」が適用されない。該当ポリシーは別設定の **Policies for enterprise-assigned users** に従うため、これが無効だとそれらの機能は使えない。<a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/copilot/concepts/enterprise/policies" target="_blank" rel="noopener noreferrer">Copilot ポリシー ↗</a>
+<div class="admin-columns">
+<div>
 
-| 割り当て場所 | 選べるプラン | seat を受け取る人 |
-| --- | --- | --- |
-| **Org → Copilot → Access** | Business **または** Enterprise（その org のプランに準拠） | その org のメンバー |
-| **Enterprise → Copilot → Access** | **Business のみ** | Enterprise 配下のどの org に居ても、そのユーザー |
+### Organization から割り当て
 
-> 📰 Changelog: <a href="https://github.blog/changelog/2025-10-28-managing-copilot-business-in-enterprise-is-now-generally-available/" target="_blank" rel="noopener noreferrer" class="retro-link">Managing Copilot Business in enterprise is now GA</a>
+- **1 org に 1 プラン：** Business **か** Enterprise。混在はできない。
+- **対象：** その org のメンバー。
+- **設定：** Owner が **Org Settings → Copilot → Access** で割り当てる。
+
+</div>
+<div>
+
+### Enterprise から割り当て
+
+- **Business のみ：** seat は Enterprise 配下の全 org でユーザーに付随する。
+- **設定：** 管理者が **Enterprise → Copilot → Access** で割り当てる。<a class="retro-link" href="https://github.blog/changelog/2025-10-28-managing-copilot-business-in-enterprise-is-now-generally-available/" target="_blank" rel="noopener noreferrer">2025-10-28 GA ↗</a>
+- **別のポリシー：** 直接割り当てのユーザーには「Let organizations decide」は適用されない。**Policies for enterprise-assigned users** で機能を許可する。<a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/copilot/concepts/enterprise/policies" target="_blank" rel="noopener noreferrer">Copilot ポリシー ↗</a>
+
+</div>
+</div>
 
 ## 複数 org と請求
 
@@ -168,20 +175,30 @@ GitHub サービスの利用方法は下記の通りです。
 
 org のメンバーではない人（ベンダー・契約者・短期パートナー）にも Copilot を渡せる。
 
-### 通常 org — Outside collaborator
+<div class="admin-columns">
+<div>
 
-- 🎫 **seat を割り当てるだけ** — 専用の Copilot トグルは廃止。Outside collaborator に Copilot を渡すには、他のメンバーと同じく **seat を割り当てる** だけでよい。
-- 📦 **リポジトリ単位で招待** — Outside collaborator は org の他のリポジトリを見られず、明示的に追加されたリポジトリだけにアクセスできる。
-- 🚫 **招待を制限したい場合** — *Org → Settings → Member privileges → 「Allow members to invite outside collaborators」のチェックを外す*。
-- 💵 seat を割り当てた Outside collaborator は **1 ライセンスとして** Enterprise 請求書に計上される。
+### 通常の org
 
-### EMU 環境 — Guest collaborator
+- **Outside collaborator：** repo 単位で招待し、org の他の repo にはアクセスできない。
+- **Copilot の seat を割り当てる：** 専用トグルは不要。**1 seat 分**を請求。
+- **招待を制限：** Org Settings → Member privileges → **Allow members to invite outside collaborators** をオフにする。
 
-- 🪪 **Enterprise Managed Users (EMU)** での同等ロールは **Guest collaborator**。通常の EMU アカウントと同様に IdP（Entra ID / Okta）からプロビジョニング。
-- 🚧 Guest collaborator は **internal リポジトリにはデフォルトでアクセスできない**。明示的に追加された org / リポジトリのみ参照可。
-- 💵 seat を割り当てた Guest collaborator も **1 ライセンス分** が課金される。
+<a class="retro-link" href="https://docs.github.com/ja/organizations/managing-user-access-to-your-organizations-repositories/managing-outside-collaborators/adding-outside-collaborators-to-repositories-in-your-organization" target="_blank" rel="noopener noreferrer">Outside collaborator の設定 ↗</a>
 
-> 📘 セットアップ: <a href="https://docs.github.com/ja/organizations/managing-user-access-to-your-organizations-repositories/managing-outside-collaborators/adding-outside-collaborators-to-repositories-in-your-organization" target="_blank" rel="noopener noreferrer" class="retro-link">Outside collaborator の追加</a> · <a href="https://docs.github.com/ja/enterprise-cloud@latest/admin/managing-accounts-and-repositories/managing-users-in-your-enterprise/enabling-guest-collaborators" target="_blank" rel="noopener noreferrer" class="retro-link">Guest collaborator の有効化（EMU）</a>
+</div>
+<div>
+
+### EMU の Enterprise
+
+- **Guest collaborator：** 他の managed user と同じく IdP（Entra ID / Okta）から払い出す。
+- **internal repo には既定でアクセス不可：** 明示的に許可された org / repo のみ。
+- **Copilot の seat を割り当てる：** **1 seat 分**を請求。
+
+<a class="retro-link" href="https://docs.github.com/ja/enterprise-cloud@latest/admin/managing-accounts-and-repositories/managing-users-in-your-enterprise/enabling-guest-collaborators" target="_blank" rel="noopener noreferrer">Guest collaborator の設定 ↗</a>
+
+</div>
+</div>
 
 ## GHE ライセンス管理 <a class="h2-doc" href="https://docs.github.com/ja/billing/reference/github-license-users" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 

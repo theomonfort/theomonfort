@@ -51,9 +51,9 @@ links:
   </p>
 </div>
 
-> 🎯 Space は「新しい IDE」ではなく、**共有できる context artifact**。一度作ると、同じ説明をチームで何度も繰り返さなくてよくなる。
-
 ## 何を入れられる？
+
+Space は IDE ではなく **共有できる context artifact**。背景説明を一度まとめてチームで再利用する。
 
 | Source | 例 | 使いどころ |
 | --- | --- | --- |
@@ -89,6 +89,9 @@ Spaces は **個人所有** または **Organization 所有** にできる。共
 
 GitHub.com の Copilot Chat だけでなく、IDE の Agent mode からも Spaces を参照できる。鍵は **GitHub MCP Server** の `copilot_spaces` toolset。
 
+<div class="cloud-example-columns spaces-mcp-columns">
+<div>
+
 ```json
 {
   "servers": {
@@ -103,18 +106,34 @@ GitHub.com の Copilot Chat だけでなく、IDE の Agent mode からも Space
 }
 ```
 
+</div>
+<div>
+
 > 🔌 IDE では `list_copilot_spaces` / `get_copilot_space` を使って Space の context を取得する。利用は **Agent mode** が前提。
+
+</div>
+</div>
 
 ## ★ 使いどころ
 
-```mermaid
-flowchart LR
-  A[散らばった知識<br/>docs / issues / PRs / notes] --> B[Copilot Space]
-  B --> C[GitHub.com Chat]
-  B --> D[IDE Agent<br/>via MCP]
-  C --> E[grounded answer]
-  D --> E
-```
+<figure class="cloud-connected-figure spaces-context-flow">
+<svg viewBox="0 0 1100 235" role="img" aria-labelledby="spaces-flow-title">
+<title id="spaces-flow-title">散らばった知識を Space に集約し、GitHub Chat または IDE Agent が根拠に沿って回答</title>
+<defs><marker id="spaces-flow-arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 10 5 0 10z" fill="#93a8ff"/></marker></defs>
+<g class="cloud-flow-lines" marker-end="url(#spaces-flow-arrow)">
+<path d="M310 115H350"/><path d="M550 115H580V55H620"/><path d="M550 115H580V180H620"/>
+<path d="M810 55H845V95H880"/><path d="M810 180H845V135H880"/>
+</g>
+<g class="cloud-flow-human"><rect x="10" y="70" width="300" height="90"/><rect x="620" y="20" width="190" height="70"/><rect x="620" y="145" width="190" height="70"/></g>
+<g class="cloud-flow-agent"><rect x="350" y="70" width="200" height="90"/><rect x="880" y="70" width="200" height="90"/></g>
+<g class="cloud-flow-labels">
+<text x="160" y="108">散らばった知識<tspan x="160" dy="28">docs / issues / PRs / notes</tspan></text>
+<text x="450" y="123">Copilot Space</text><text x="715" y="63">GitHub.com Chat</text>
+<text x="715" y="173">IDE Agent<tspan x="715" dy="27">via MCP</tspan></text>
+<text x="980" y="108">文脈に沿った<tspan x="980" dy="28">回答</tspan></text>
+</g>
+</svg>
+</figure>
 
 - 🚀 **Feature kickoff** — spec、関連 code、mock、設計メモを 1 か所に集める
 - 🧭 **Onboarding** — auth / billing / CI など、質問が集中する領域を self-service 化
@@ -130,5 +149,3 @@ flowchart LR
 | upload だけに頼る | GitHub source を使い、最新状態に追従させる |
 | public 共有を雑に使う | 個人 Space / org Space / 権限を先に決める |
 | Space に実装を任せる | Space は context。実装は Chat / Agent / Cloud Agent に依頼する |
-
-> 🎯 良い Space は「資料置き場」ではなく、**Copilot が迷わず答えるための context product**。

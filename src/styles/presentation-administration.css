@@ -1,0 +1,347 @@
+body.present-mode .playbook-detail[data-category="administration"]:not([data-playbook-slug="usage-based-billing"]) .prose-akq {
+  line-height: 1.5;
+}
+
+body.present-mode:not(.slide-cover) .playbook-detail[data-category="administration"]:not([data-playbook-slug="usage-based-billing"]) .prose-akq > h2 {
+  margin: 0 0 0.4em;
+  font-size: 2.3rem;
+  line-height: 1.42;
+}
+
+body.present-mode .playbook-detail[data-category="administration"]:not([data-playbook-slug="usage-based-billing"]) .prose-akq > :is(p, ul, ol, table, blockquote, div, .mermaid-wrap):not(.demo-panel) {
+  margin-block: 0.3em;
+}
+
+body.present-mode .playbook-detail[data-category="administration"]:not([data-playbook-slug="usage-based-billing"]) .prose-akq > .akq-slide-active:not(:has(~ .akq-slide-active)) {
+  margin-bottom: 0;
+}
+
+body.present-mode .playbook-detail[data-category="administration"]:not([data-playbook-slug="usage-based-billing"]) .prose-akq li {
+  margin-block: 0.1em;
+}
+
+body.present-mode .playbook-detail[data-category="administration"]:not([data-playbook-slug="usage-based-billing"]) .prose-akq table {
+  font-size: 22px;
+}
+
+body.present-mode .playbook-detail[data-category="administration"]:not([data-playbook-slug="usage-based-billing"]) .prose-akq table :is(th, td) {
+  padding: 0.2em 0.6em;
+  line-height: 1.35;
+}
+
+body.present-mode .playbook-detail[data-category="administration"]:not([data-playbook-slug="usage-based-billing"]) .prose-akq > blockquote {
+  padding: 0.3em 0.7em;
+}
+
+body.present-mode .playbook-detail[data-category="administration"]:not([data-playbook-slug="usage-based-billing"]) .prose-akq blockquote p {
+  margin-block: 0.2em;
+}
+
+body.present-mode .playbook-detail[data-category="administration"]:not([data-playbook-slug="usage-based-billing"]) .links-aside > div {
+  columns: 3;
+  column-gap: 2rem;
+}
+
+body.present-mode .playbook-detail[data-category="administration"]:not([data-playbook-slug="usage-based-billing"]) .links-aside {
+  padding: 1rem 1.2rem;
+}
+
+body.present-mode .playbook-detail[data-category="administration"]:not([data-playbook-slug="usage-based-billing"]) .links-aside > div > div {
+  min-width: 0;
+  margin: 0 0 1.2rem;
+  break-inside: avoid;
+}
+
+body.present-mode .playbook-detail[data-category="administration"]:not([data-playbook-slug="usage-based-billing"]) .links-aside :is(a, h3) {
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+body.present-mode .playbook-detail[data-category="administration"]:not([data-playbook-slug="usage-based-billing"]) .links-aside li {
+  margin-block: 0.3em;
+  font-size: 20px;
+  line-height: 1.35;
+  break-inside: avoid;
+}
+
+body.present-mode .playbook-detail[data-category="administration"]:not([data-playbook-slug="usage-based-billing"]) .links-aside :is(.links-aside-title, .links-aside-group) {
+  margin-bottom: 0.4rem;
+}
+
+.playbook-detail[data-category="administration"] .admin-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5em;
+}
+
+.playbook-detail[data-category="administration"] .admin-columns > div {
+  min-width: 0;
+}
+
+.playbook-detail[data-category="administration"] .admin-columns > div + div {
+  padding-left: 1.3em;
+  border-left: 1px solid rgb(var(--rgb-neon-cyan) / 0.3);
+}
+
+.playbook-detail[data-category="administration"] .admin-columns h3 {
+  margin: 0 0 0.5em;
+  font-size: 1em;
+  color: var(--c-neon-magenta);
+}
+
+.playbook-detail[data-category="administration"] .admin-columns :is(p, ul, ol) {
+  margin-block: 0.4em;
+}
+
+.playbook-detail[data-category="administration"] .admin-columns ul {
+  list-style: square;
+  padding-left: 1em;
+}
+
+.playbook-detail[data-category="administration"] .admin-columns li::marker {
+  color: var(--c-neon-cyan);
+}
+
+body.present-mode .playbook-detail[data-category="administration"] .admin-columns li {
+  margin-block: 0.55em;
+}
+
+body.present-mode .playbook-detail[data-category="administration"] .admin-columns :is(p, ul, ol) {
+  margin-block: 0.35em;
+}
+
+body.present-mode .playbook-detail[data-category="administration"] .admin-columns blockquote {
+  margin-block: 0.5em;
+  padding: 0.4em 0.65em;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+body.present-mode .playbook-detail[data-category="administration"] .admin-notes {
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+.playbook-detail[data-category="administration"] .admin-setup code {
+  overflow-wrap: anywhere;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="enterprise-setup"] .admin-setup img {
+  max-height: 300px;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="enterprise-setup"] .prose-akq img {
+  max-height: 240px;
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="ghec-emu-data-residency"] .prose-akq :is(.pa-map, .emu-map) {
+  max-width: 820px;
+  margin-inline: auto;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="ghec-emu-data-residency"] .prose-akq :is(.pa-map, .emu-map) + ul {
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="ghec-emu-data-residency"] :is(.pa-map, .emu-map) text[font-size="16"] {
+  font-size: 18px;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="ghec-emu-data-residency"] .prose-akq .tbl-fit table {
+  width: 100%;
+  font-size: 21px;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="ghec-emu-data-residency"] .prose-akq .tbl-fit :is(th, td) {
+  padding: 0.17em 0.45em;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="ghec-emu-data-residency"] .links-aside > div > div:is(:nth-child(3), :nth-child(4)) {
+  break-before: column;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="governance"] .prose-akq .grd-widget {
+  margin-block: 0.3em;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="governance"] .prose-akq .grd-widget.grd-compact .grd-btn {
+  padding-block: 0.1em;
+}
+
+.playbook-detail[data-category="administration"][data-playbook-slug="license-management"] .admin-procurement {
+  max-width: 100%;
+  overflow-x: auto;
+  padding-block: 0.3em;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="license-management"] .admin-procurement {
+  overflow: visible;
+  padding-block: 0;
+}
+
+.playbook-detail[data-category="administration"][data-playbook-slug="license-management"] .admin-procurement-methods > div:last-child > div > div:first-child {
+  padding-top: 28px;
+}
+
+.playbook-detail[data-category="administration"][data-playbook-slug="license-management"] .admin-procurement > div {
+  min-width: 1100px;
+}
+
+.playbook-detail[data-category="administration"][data-playbook-slug="license-management"] .admin-procurement div {
+  min-height: 0;
+  min-width: 0;
+}
+
+body.present-mode .playbook-detail[data-category="administration"] .prose-akq :is(.admin-picker, .spec-widget) {
+  margin-block: 0.3em;
+}
+
+body.present-mode .playbook-detail[data-category="administration"] .admin-picker .ctl-list {
+  position: relative;
+  min-height: 390px;
+  gap: 5px;
+}
+
+body.present-mode .playbook-detail[data-category="administration"] .admin-picker .ctl-item {
+  position: static;
+  width: 43%;
+}
+
+body.present-mode .playbook-detail[data-category="administration"] .admin-picker .ctl-btn {
+  padding: 5px 9px;
+  font-size: 22px;
+  line-height: 1.35;
+}
+
+body.present-mode .playbook-detail[data-category="administration"] .admin-picker .ctl-when {
+  display: none;
+}
+
+body.present-mode .playbook-detail[data-category="administration"] .admin-picker .ctl-body {
+  position: absolute;
+  top: 0;
+  left: 46%;
+  right: 0;
+  margin: 0;
+  padding: 18px;
+  border: 1px solid rgb(var(--rgb-neon-cyan) / 0.3);
+  border-top: 2px solid var(--c-neon-cyan);
+  background: var(--c-bg-elevated);
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+body.present-mode .playbook-detail[data-category="administration"] .admin-picker .ctl-row {
+  grid-template-columns: minmax(0, 1fr);
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+body.present-mode .playbook-detail[data-category="administration"] .admin-picker .ctl-item::details-content {
+  overflow: visible;
+  transition: none;
+}
+
+body.present-mode .playbook-detail[data-category="administration"] :is(.admin-picker .ctl-hint, .spec-hint) {
+  margin: 0 0 0.4em;
+  font-size: 20px;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="governance"] .prose-akq .spec-btn {
+  font-size: 20px;
+  line-height: 1.2;
+  padding: 1px 9px;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="governance"] .spec-key code {
+  font-size: 18px;
+  padding-block: 0;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="governance"] .spec-list {
+  gap: 2px;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="governance"] .spec-since {
+  padding-block: 0;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="governance"] .spec-what {
+  margin: 0 9px;
+  padding: 4px 12px;
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="migrations"] .ctl-list {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  padding-bottom: 340px;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="migrations"] .ctl-item {
+  position: static;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="migrations"] .prose-akq .ctl-widget .ctl-btn {
+  min-height: 42px;
+  padding: 5px 8px;
+  font-size: 20px;
+  line-height: 1.3;
+  gap: 8px;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="migrations"] :is(.ctl-when, .ctl-icon) {
+  display: none;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="migrations"] .ctl-doc {
+  font-size: 14px;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="migrations"] .ctl-body {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="migrations"] .ctl-item::details-content {
+  overflow: visible;
+  transition: none;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="migrations"] .prose-akq .ctl-body table {
+  font-size: 20px;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="migrations"] .prose-akq .ctl-body :is(th, td) {
+  padding: 0.15em 0.45em;
+  line-height: 1.3;
+}
+
+body.present-mode .playbook-detail[data-category="administration"][data-playbook-slug="cost-centers-and-budgets"] .prose-akq table :is(th, td) {
+  padding-block: 0.15em;
+}
+
+@media (max-width: 700px) {
+  .playbook-detail[data-category="administration"] .admin-columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .playbook-detail[data-category="administration"] .admin-columns > div + div {
+    padding: 1em 0 0;
+    border-left: 0;
+    border-top: 1px solid rgb(var(--rgb-neon-cyan) / 0.3);
+  }
+}

@@ -48,24 +48,43 @@ links:
   </p>
 </div>
 
-## Features
+## Features <a class="h2-doc" href="https://docs.github.com/en/codespaces/about-codespaces/deep-dive" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-A **Docker container** in the cloud, where 1 session = 1 codespace. Configuration is codified in `devcontainer.json` inside the repo.
+Connect your way. Your code and tools run in the **same cloud workspace**.
 
-**How to connect (from anywhere)**
-
-- 🌐 **Browser** — Open directly from `github.com` with a single URL
-- 💻 **VS Code Desktop** — Remote connection from local VS Code
-- 🖥️ **GitHub CLI** (`gh codespace ssh`) — Connect directly from the terminal
-
-**Container environment**
-
-- 🐳 **Docker-based** — Declare base image + features + post-create script in `devcontainer.json`
-- 📦 **Reproducible** — Open the same repo and everyone gets the same environment
-- 🔌 **VS Code extensions pre-installed** — Copilot, MCP servers, linters can all be pre-configured
-- ⚡ **Machine size** — Switchable on demand (up to **32 cores / 128 GB RAM / 128 GB storage**)
-
-> When you want to run heavy builds or AI agents in parallel, choose a larger size. **You can also change the size after startup**.
+<figure class="codespaces-workspace" aria-label="Three ways to connect to your codespace">
+<div class="codespaces-diagram">
+<ul class="codespaces-access" aria-label="Connect via">
+<li>
+<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="18" rx="1"/><path d="M2 8H22M6 5.5H6.1M9 5.5H9.1"/></svg>
+<div><strong>Browser</strong><span>Open on github.com</span></div>
+</li>
+<li>
+<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="1"/><path d="M8 21H16M12 17V21M9 8L6 10L9 12M15 8L18 10L15 12"/></svg>
+<div><strong>VS Code Desktop</strong><span>Connect remotely</span></div>
+</li>
+<li>
+<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="18" rx="1"/><path d="M6 8L10 12L6 16M13 16H18"/></svg>
+<div><strong>GitHub CLI</strong><code>gh codespace ssh</code></div>
+</li>
+</ul>
+<svg class="codespaces-connectors" viewBox="0 0 80 292" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+<defs><marker id="codespaces-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10Z"/></marker></defs>
+<path class="codespaces-branches" d="M0 42H32V250H0M0 146H78" marker-end="url(#codespaces-arrow)"/>
+</svg>
+<span class="codespaces-stacked-arrow" aria-hidden="true">↓</span>
+<div class="codespaces-container">
+<div class="codespaces-container-head"><h3>Your codespace</h3><span>Docker dev container</span></div>
+<div class="codespaces-config"><code>devcontainer.json</code><p>Base image + features + post-create scripts</p></div>
+<p class="codespaces-tools"><strong>Preconfigure:</strong> Copilot / MCP servers / extensions / linters</p>
+<p class="codespaces-repeatable">Same configuration for every collaborator.</p>
+</div>
+</div>
+<figcaption class="codespaces-compute">
+<p><span>Scale up to</span><strong>32 <span>cores</span></strong><strong>128 <span>GB RAM</span></strong><strong>128 <span>GB storage</span></strong></p>
+<p>Resize after startup for heavy builds and parallel agents. <span>Subject to availability and policy, as of 2026-11-16.</span></p>
+</figcaption>
+</figure>
 
 ## Benefits
 

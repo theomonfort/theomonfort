@@ -80,12 +80,16 @@ links:
 
 A full-stack AI environment packed into a single terminal.
 
+<div class="cli-features">
+
 - **Multi-file context awareness**: Treats the entire repository as a single workspace.
 - **Code generation & editing**: Make edits from the terminal, review diffs, and approve.
 - **Command execution**: Run builds, tests, lint, and more — read the results and proceed.
 - **IDE-agnostic**: Works anywhere there's a terminal: VS Code, Vim, over SSH, etc.
 - **Skills / MCP support**: Add the capabilities and external tools you need.
 - **Non-interactive execution**: Run via CI, cron, or scripts with `copilot -p "..."`.
+
+</div>
 
 ## CLI vs VS Code Chat
 
@@ -164,9 +168,9 @@ A full-stack AI environment packed into a single terminal.
 </div>
 </div>
 
-Copilot CLI includes built-in agents for common tasks. Check them and configure their models with **`/subagents`**.
+Check the agents and configure their models with **`/subagents`**.
 
-<div class="ctl-widget">
+<div class="ctl-widget cli-built-ins">
 <div class="ctl-list">
 <details class="ctl-item" name="cli-built-in-agents">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔎</span><span class="ctl-name">Explore</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
@@ -190,64 +194,82 @@ Copilot CLI includes built-in agents for common tasks. Check them and configure 
 </details>
 <details class="ctl-item" name="cli-built-in-agents">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🦆</span><span class="ctl-name">Rubber duck</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body"><p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">Returns constructive critical feedback for complex tasks. Used automatically by Copilot CLI.</span></p></div>
+<div class="ctl-body"><p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">Returns constructive critical feedback for complex tasks. Invoke with <code>/rubber-duck</code>.</span></p></div>
 </details>
 </div>
 </div>
 
-## Rubber Duck — Cross-model Review
+## Rubber Duck — Cross-model Review <a class="h2-doc" href="https://github.com/github/copilot-cli/blob/main/changelog.md" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-> 🦆 **Experimental**: A **different model family** from the main model provides a "second opinion" as a constructive critic, independently reviewing each phase of planning, implementation, and testing.
+A **different model family** independently reviews planning, implementation, and testing as a constructive critic. **Enabled by default.**
 
-```mermaid
-flowchart LR
-  User([👤 Developer])
-  Main["🧠 Main Model<br/>e.g. Claude"]
-  Out["📝 Plan / Implementation / Test"]
-  Duck["🦆 Rubber Duck<br/>e.g. GPT-5.4"]
-  Final([✅ Verified output])
-  User --> Main
-  Main --> Out
-  Out -->|"Independent review"| Duck
-  Duck -->|"Blind spots / wrong assumptions"| Main
-  Main --> Final
+<div class="cli-duck-diagram">
+<svg viewBox="0 0 1100 285" role="img" aria-label="Developer asks the main model. A different model family independently reviews its plan, implementation and tests, returning blind spots and wrong assumptions. The main model produces verified output.">
+<defs><marker id="cli-duck-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#93a8ff"/></marker></defs>
+<g fill="none" stroke="#93a8ff" stroke-width="2" marker-end="url(#cli-duck-arrow)">
+<path d="M160 154H210"/><path d="M390 154H440"/><path d="M680 154H710"/>
+<path d="M800 198V262H300V198"/><path d="M300 110V40H1025V110"/>
+</g>
+<g text-anchor="middle" font-size="18" fill="#e8f4ff">
+<text x="695" y="94">Independent review</text>
+<text x="550" y="248">Blind spots / wrong assumptions</text>
+</g>
+<g text-anchor="middle" stroke-width="2">
+<rect x="1" y="110" width="159" height="88" rx="4" fill="#0a1a14" stroke="#86efac"/>
+<rect x="210" y="110" width="180" height="88" rx="4" fill="#0b1420" stroke="#5eead4"/>
+<rect x="440" y="110" width="240" height="88" rx="4" fill="#11162c" stroke="#93a8ff"/>
+<rect x="710" y="110" width="180" height="88" rx="4" fill="#1a1500" stroke="#fcd34d"/>
+<rect x="950" y="110" width="149" height="88" rx="4" fill="#0a1a14" stroke="#86efac"/>
+<g font-size="20" fill="#e8f4ff" stroke="none">
+<text x="80" y="162">👤 Developer</text>
+<text x="300" y="146" fill="#5eead4">Main model</text><text x="300" y="176" font-size="18">e.g. Claude</text>
+<text x="560" y="145">Plan / Implementation</text><text x="560" y="175">/ Test</text>
+<text x="800" y="146" fill="#fcd34d">🦆 Rubber Duck</text><text x="800" y="176" font-size="18">e.g. GPT-5.4</text>
+<text x="1025" y="146" fill="#86efac">✅ Verified</text><text x="1025" y="176" fill="#86efac">output</text>
+</g></g>
+</svg>
+</div>
 
-  classDef user fill:#0a1a14,stroke:#86efac,color:#86efac,stroke-width:2px
-  classDef main fill:#0b1420,stroke:#5eead4,color:#5eead4,stroke-width:2px
-  classDef duck fill:#1a1500,stroke:#fcd34d,color:#fcd34d,stroke-width:2px
-  classDef out fill:#11162c,stroke:#93a8ff,color:#93a8ff,stroke-width:2px
-  class User,Final user
-  class Main main
-  class Duck duck
-  class Out out
-```
-
-**Why does it work?** ── When the same model checks its own output, it gets caught by the **same assumptions and the same blind spots**. A model from a different family has different training data and different values, so it can catch **logic errors that were invisible** to the first model.
+**Why?** Self-review can repeat the **same assumptions and blind spots**. Different training data and priorities help another model family catch missed logic errors.
 
 ## Other Useful Commands
 
-The CLI lets you instantly manage settings, check models, share sessions, and inspect experimental features and environment info via slash commands.
+Manage your session with slash commands.
+
+<div class="cli-commands">
+<div>
 
 | Command | When to use |
 |---|---|
-| `/help` | Check available commands and shortcuts. |
-| `/settings` | Browse, view, and change your CLI settings, or set one directly with `/settings KEY VALUE`. <a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/change-settings" target="_blank" rel="noopener noreferrer">Docs ↗</a> |
+| `/help` | List commands and shortcuts. |
+| `/settings` | Browse / change settings; direct: `/settings KEY VALUE`. <a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/change-settings" target="_blank" rel="noopener noreferrer">Docs ↗</a> |
 | `/model` | Check or switch the model in use. |
 | `/ide` | Connect to an IDE such as VS Code. |
 | `/share` | Share the current session. |
 | `/experimental` | Check and enable experimental features. |
-| `/chronicle` | Review the session history and work log. |
-| `/task` | Check agents and tasks running in the background. |
-| `/fleet [PROMPT]` | Split a plan across parallel subagents. <a class="retro-link" href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/fleet" target="_blank" rel="noopener noreferrer">Docs ↗</a> |
-| `/limits set max-ai-credits N` | Set a soft cap on the session's AI Credits. <a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/set-session-limit" target="_blank" rel="noopener noreferrer">Docs ↗</a> |
-| `/ask` | Consult Copilot as a question before proceeding. |
-| `/env` | Check the environment information visible to the CLI. |
 
-> 💰 **The agent knows its budget**: used, remaining, and max credits reach the model as `<session_limits_status>`, so it skips optional exploration. On its final call it uses no tools, summarizes progress and what remains, then stops. `/fleet` subagents share the same limit. Non-interactive: `--max-ai-credits N`.
+</div>
+<div>
 
-## 🖥️ TUI (Terminal UI)
+| Command | When to use |
+|---|---|
+| `/chronicle` | Session history and work log. |
+| `/task` | Background agents and tasks. |
+| `/fleet [PROMPT]` | Parallel subagents for a plan. <a class="retro-link" href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/fleet" target="_blank" rel="noopener noreferrer">Docs ↗</a> |
+| `/limits set max-ai-credits N` | Session AI Credits soft cap. <a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/set-session-limit" target="_blank" rel="noopener noreferrer">Docs ↗</a> |
+| `/ask` | Ask before proceeding. |
+| `/env` | Environment visible to the CLI. |
 
-Run `/experimental on` to try the redesigned terminal UI with theme-aware semantic colors — check them with `/theme`. Inside a GitHub repository, use `Tab` to move between the menus in the table below.
+</div>
+</div>
+
+<p class="cli-budget">💰 <strong>Budget-aware:</strong> <code>&lt;session_limits_status&gt;</code> supplies used / remaining / max credits. The agent skips optional exploration, then makes a final tool-free progress / remaining-work summary and stops. <code>/fleet</code> shares the cap. Non-interactive: <code>--max-ai-credits N</code>.</p>
+
+## 🖥️ TUI (Terminal UI) <a class="h2-doc" href="https://github.com/github/copilot-cli/blob/main/changelog.md" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+<div class="cli-tui">
+
+The redesigned terminal UI is **enabled by default**. Choose your theme with **`/settings`**. Inside a GitHub repository, use **`Tab`** to move between the views below.
 
 | Tab | What's in it |
 |---|---|
@@ -257,6 +279,8 @@ Run `/experimental on` to try the redesigned terminal UI with theme-aware semant
 | **Gists** | Browse your personal gists |
 
 > 📝 Screen-reader support and many other UI improvements landed too — see the <a class="retro-link" href="https://github.blog/changelog/2026-06-02-copilot-cli-improved-ui-rubber-duck-prompt-scheduling-and-voice-input/" target="_blank" rel="noopener noreferrer">changelog ↗</a>.
+
+</div>
 
 ## 🛡️ Sandboxes <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/about-cloud-and-local-sandboxes" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 

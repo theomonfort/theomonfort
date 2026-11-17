@@ -80,12 +80,16 @@ links:
 
 ターミナル一枚に、フルスタックの AI 環境が乗る。
 
+<div class="cli-features">
+
 - **複数ファイルの文脈把握**：リポジトリ全体を一つのワークスペースとして扱う。
 - **コード生成・編集**：ターミナルから修正し、差分を確認して承認できる。
 - **コマンド実行**：ビルド・テスト・lint などを実行し、結果を読んで次に進む。
 - **IDE を選ばない**：VS Code、Vim、SSH 先など、ターミナルがあれば使える。
 - **Skills / MCP 対応**：必要な能力や外部ツールを追加できる。
 - **非対話実行**：CI、cron、script から `copilot -p "..."` で実行できる。
+
+</div>
 
 ## CLI と VS Code Chat の違い
 
@@ -164,9 +168,9 @@ links:
 </div>
 </div>
 
-Copilot CLI には、よくあるタスク向けのビルトインエージェントがある。**`/subagents`** で確認し、使うモデルを設定できる。
+**`/subagents`** でエージェントを確認し、使うモデルを設定できる。
 
-<div class="ctl-widget">
+<div class="ctl-widget cli-built-ins">
 <div class="ctl-list">
 <details class="ctl-item" name="cli-built-in-agents">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔎</span><span class="ctl-name">Explore</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
@@ -190,64 +194,82 @@ Copilot CLI には、よくあるタスク向けのビルトインエージェ�
 </details>
 <details class="ctl-item" name="cli-built-in-agents">
 <summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🦆</span><span class="ctl-name">Rubber duck</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
-<div class="ctl-body"><p class="ctl-row"><span class="ctl-k">できること</span><span class="ctl-v">複雑なタスクに対して建設的な批評役としてフィードバックを返す。Copilot CLI が自動的に使う。</span></p></div>
+<div class="ctl-body"><p class="ctl-row"><span class="ctl-k">できること</span><span class="ctl-v">複雑なタスクに建設的な批評を返す。<code>/rubber-duck</code> で呼び出す。</span></p></div>
 </details>
 </div>
 </div>
 
-## Rubber Duck — クロスモデルレビュー
+## Rubber Duck — クロスモデルレビュー <a class="h2-doc" href="https://github.com/github/copilot-cli/blob/main/changelog.md" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-> 🦆 **Experimental**：メインモデルとは **異なるモデルファミリー** が「セカンドオピニオン」として、計画・実装・テストの各段階で独立レビュー。
+メインとは **異なるモデルファミリー** が、計画・実装・テストを建設的に独立レビュー。**デフォルトで有効。**
 
-```mermaid
-flowchart LR
-  User([👤 開発者])
-  Main["🧠 Main Model<br/>例: Claude"]
-  Out["📝 計画 / 実装 / テスト"]
-  Duck["🦆 Rubber Duck<br/>例: GPT-5.4"]
-  Final([✅ 検証済み出力])
-  User --> Main
-  Main --> Out
-  Out -->|"独立レビュー"| Duck
-  Duck -->|"盲点 / 前提誤り"| Main
-  Main --> Final
+<div class="cli-duck-diagram">
+<svg viewBox="0 0 1100 285" role="img" aria-label="開発者がメインモデルへ依頼。異なるモデルファミリーが計画・実装・テストを独立レビューし、盲点や前提誤りを返す。メインモデルが検証済み出力を返す。">
+<defs><marker id="cli-duck-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#93a8ff"/></marker></defs>
+<g fill="none" stroke="#93a8ff" stroke-width="2" marker-end="url(#cli-duck-arrow)">
+<path d="M160 154H210"/><path d="M390 154H440"/><path d="M680 154H710"/>
+<path d="M800 198V262H300V198"/><path d="M300 110V40H1025V110"/>
+</g>
+<g text-anchor="middle" font-size="18" fill="#e8f4ff">
+<text x="695" y="94">独立レビュー</text>
+<text x="550" y="248">盲点 / 前提誤り</text>
+</g>
+<g text-anchor="middle" stroke-width="2">
+<rect x="1" y="110" width="159" height="88" rx="4" fill="#0a1a14" stroke="#86efac"/>
+<rect x="210" y="110" width="180" height="88" rx="4" fill="#0b1420" stroke="#5eead4"/>
+<rect x="440" y="110" width="240" height="88" rx="4" fill="#11162c" stroke="#93a8ff"/>
+<rect x="710" y="110" width="180" height="88" rx="4" fill="#1a1500" stroke="#fcd34d"/>
+<rect x="950" y="110" width="149" height="88" rx="4" fill="#0a1a14" stroke="#86efac"/>
+<g font-size="20" fill="#e8f4ff" stroke="none">
+<text x="80" y="162">👤 開発者</text>
+<text x="300" y="146" fill="#5eead4">Main model</text><text x="300" y="176" font-size="18">例: Claude</text>
+<text x="560" y="145">計画 / 実装</text><text x="560" y="175">/ テスト</text>
+<text x="800" y="146" fill="#fcd34d">🦆 Rubber Duck</text><text x="800" y="176" font-size="18">例: GPT-5.4</text>
+<text x="1025" y="146" fill="#86efac">✅ 検証済み</text><text x="1025" y="176" fill="#86efac">出力</text>
+</g></g>
+</svg>
+</div>
 
-  classDef user fill:#0a1a14,stroke:#86efac,color:#86efac,stroke-width:2px
-  classDef main fill:#0b1420,stroke:#5eead4,color:#5eead4,stroke-width:2px
-  classDef duck fill:#1a1500,stroke:#fcd34d,color:#fcd34d,stroke-width:2px
-  classDef out fill:#11162c,stroke:#93a8ff,color:#93a8ff,stroke-width:2px
-  class User,Final user
-  class Main main
-  class Duck duck
-  class Out out
-```
-
-**なぜ効く？** ── 同じモデルが自分の出力をチェックすると、**同じ前提・同じ盲点** に引っかかる。別ファミリーのモデルなら、訓練データも価値観も違うので **見えていなかったロジックエラー** を拾える。
+**なぜ効く？** 自己レビューは **同じ前提・盲点** を繰り返しやすい。訓練データや判断の異なる別ファミリーが、見逃したロジックエラーを拾う。
 
 ## その他の便利コマンド
 
-CLI は slash command で、設定・モデル・共有・実験機能・環境情報などをすぐ確認できる。
+slash command でセッションを管理する。
+
+<div class="cli-commands">
+<div>
 
 | コマンド | 使いどころ |
 |---|---|
 | `/help` | 利用できるコマンドやショートカットを確認する。 |
-| `/settings` | CLI のユーザー設定を検索・確認・変更する。`/settings KEY VALUE` で直接変更もできる。<a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/change-settings" target="_blank" rel="noopener noreferrer">Docs ↗</a> |
+| `/settings` | 設定を検索・確認・変更。直接指定: `/settings KEY VALUE`。<a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/change-settings" target="_blank" rel="noopener noreferrer">Docs ↗</a> |
 | `/model` | 使用するモデルを確認・切り替える。 |
 | `/ide` | VS Code などの IDE と接続する。 |
 | `/share` | 現在のセッションを共有する。 |
 | `/experimental` | 実験的な機能を確認・有効化する。 |
-| `/chronicle` | セッションの流れや作業履歴を確認する。 |
-| `/task` | background で動いている agent や task を確認する。 |
-| `/fleet [PROMPT]` | 計画をサブタスクに分け、subagent で並列実行する。<a class="retro-link" href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/fleet" target="_blank" rel="noopener noreferrer">Docs ↗</a> |
-| `/limits set max-ai-credits N` | セッションの AI Credits 上限(soft cap)を設定する。<a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/set-session-limit" target="_blank" rel="noopener noreferrer">Docs ↗</a> |
+
+</div>
+<div>
+
+| コマンド | 使いどころ |
+|---|---|
+| `/chronicle` | セッション / 作業履歴を確認。 |
+| `/task` | バックグラウンドの agent / task を確認。 |
+| `/fleet [PROMPT]` | 計画を分担し subagent で並列実行。<a class="retro-link" href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/fleet" target="_blank" rel="noopener noreferrer">Docs ↗</a> |
+| `/limits set max-ai-credits N` | セッションの AI Credits 上限 (soft cap)。<a class="retro-link" href="https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/set-session-limit" target="_blank" rel="noopener noreferrer">Docs ↗</a> |
 | `/ask` | 作業を進める前に、質問として Copilot に相談する。 |
 | `/env` | CLI が見ている環境情報を確認する。 |
 
-> 💰 **エージェントは予算を把握している**：使用量・残量・上限が `<session_limits_status>` としてモデルに渡るので、寄り道を控え、最後の 1 回はツールを使わず進捗と残作業をまとめて止まる。`/fleet` の subagent も同じ上限を共有する。非対話では `--max-ai-credits N`。
+</div>
+</div>
 
-## 🖥️ TUI(ターミナル UI)
+<p class="cli-budget">💰 <strong>予算を把握:</strong> <code>&lt;session_limits_status&gt;</code> で使用量 / 残量 / 上限を伝達。寄り道を控え、最後はツールなしで進捗と残作業をまとめて停止。<code>/fleet</code> も同じ上限を共有。非対話: <code>--max-ai-credits N</code>。</p>
 
-`/experimental on` で、再設計されたターミナル UI を試せる。テーマ対応のセマンティックカラーを備え、`/theme` で確認できる。GitHub リポジトリ内では `Tab` キーで下の表のメニューを行き来できる。
+## 🖥️ TUI(ターミナル UI) <a class="h2-doc" href="https://github.com/github/copilot-cli/blob/main/changelog.md" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+<div class="cli-tui">
+
+再設計されたターミナル UI は **デフォルトで有効**。テーマは **`/settings`** で選べる。GitHub リポジトリ内では **`Tab`** キーで下のビューを切り替える。
 
 | タブ | 中身 |
 |---|---|
@@ -257,6 +279,8 @@ CLI は slash command で、設定・モデル・共有・実験機能・環境�
 | **Gists** | 自分の Gist を一覧・閲覧 |
 
 > 📝 スクリーンリーダー対応をはじめ、ほかにも多くの UI 改善が入っている。詳しくは <a class="retro-link" href="https://github.blog/changelog/2026-06-02-copilot-cli-improved-ui-rubber-duck-prompt-scheduling-and-voice-input/" target="_blank" rel="noopener noreferrer">changelog ↗</a>。
+
+</div>
 
 ## 🛡️ Sandbox <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/about-cloud-and-local-sandboxes" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 

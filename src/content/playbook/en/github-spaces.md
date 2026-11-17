@@ -51,9 +51,9 @@ links:
   </p>
 </div>
 
-> 🎯 A Space is not a new IDE. It is a **shareable context artifact** that prevents the same background explanation from being repeated over and over.
-
 ## What can you add?
+
+A Space is a **shareable context artifact**, not an IDE: capture background once for the team.
 
 | Source | Examples | Best use |
 | --- | --- | --- |
@@ -89,6 +89,9 @@ Spaces can belong to a **personal account** or an **organization**. Sharing opti
 
 Spaces also work from IDE Agent mode through the **GitHub MCP Server**. Enable the `copilot_spaces` toolset.
 
+<div class="cloud-example-columns spaces-mcp-columns">
+<div>
+
 ```json
 {
   "servers": {
@@ -103,18 +106,34 @@ Spaces also work from IDE Agent mode through the **GitHub MCP Server**. Enable t
 }
 ```
 
+</div>
+<div>
+
 > 🔌 In the IDE, Copilot uses `list_copilot_spaces` and `get_copilot_space` to access Space context. This requires **Agent mode**.
+
+</div>
+</div>
 
 ## ★ Killer use cases
 
-```mermaid
-flowchart LR
-  A[Scattered knowledge<br/>docs / issues / PRs / notes] --> B[Copilot Space]
-  B --> C[GitHub.com Chat]
-  B --> D[IDE Agent<br/>via MCP]
-  C --> E[grounded answer]
-  D --> E
-```
+<figure class="cloud-connected-figure spaces-context-flow">
+<svg viewBox="0 0 1100 235" role="img" aria-labelledby="spaces-flow-title">
+<title id="spaces-flow-title">Scattered knowledge becomes a Space, used by GitHub Chat or IDE Agent for grounded answers</title>
+<defs><marker id="spaces-flow-arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 10 5 0 10z" fill="#93a8ff"/></marker></defs>
+<g class="cloud-flow-lines" marker-end="url(#spaces-flow-arrow)">
+<path d="M310 115H350"/><path d="M550 115H580V55H620"/><path d="M550 115H580V180H620"/>
+<path d="M810 55H845V95H880"/><path d="M810 180H845V135H880"/>
+</g>
+<g class="cloud-flow-human"><rect x="10" y="70" width="300" height="90"/><rect x="620" y="20" width="190" height="70"/><rect x="620" y="145" width="190" height="70"/></g>
+<g class="cloud-flow-agent"><rect x="350" y="70" width="200" height="90"/><rect x="880" y="70" width="200" height="90"/></g>
+<g class="cloud-flow-labels">
+<text x="160" y="108">Scattered knowledge<tspan x="160" dy="28">docs / issues / PRs / notes</tspan></text>
+<text x="450" y="123">Copilot Space</text><text x="715" y="63">GitHub.com Chat</text>
+<text x="715" y="173">IDE Agent<tspan x="715" dy="27">via MCP</tspan></text>
+<text x="980" y="108">Grounded<tspan x="980" dy="28">answer</tspan></text>
+</g>
+</svg>
+</figure>
 
 - 🚀 **Feature kickoff** — collect the spec, related code, mockups, and design notes in one place
 - 🧭 **Onboarding** — make auth, billing, CI, and other high-question areas self-service
@@ -130,5 +149,3 @@ flowchart LR
 | Rely only on uploads | Use GitHub sources so context stays current |
 | Share publicly by default | Choose personal vs org ownership and permissions first |
 | Expect the Space to implement | A Space is context. Ask Chat / Agent / Cloud Agent to do the work |
-
-> 🎯 A strong Space is not a file dump. It is a **context product** that helps Copilot answer without guessing.

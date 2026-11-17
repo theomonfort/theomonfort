@@ -1,3 +1,8 @@
+@import './presentation-develop-tools.css';
+@import './presentation-develop-cloud.css';
+@import './presentation-operate.css';
+@import './presentation-administration.css';
+
 body.present-mode .playbook-detail:is([data-playbook-slug="github-copilot"], [data-playbook-slug="hands-on"]) {
   --presentation-slide-space: 0.3em;
 }
@@ -764,4 +769,36 @@ body.present-mode .playbook-detail[data-playbook-slug="context-engineering"] .co
   .prose-akq .context-window {
     font-size: 14px;
   }
+}
+
+body.present-mode .playbook-detail:where([data-playbook-slug="copilot-app"], [data-playbook-slug="cli"], [data-playbook-slug="copilot-chat"], [data-playbook-slug="cloud-agent"], [data-playbook-slug="partner-agent"], [data-playbook-slug="github-spaces"], [data-playbook-slug="codespaces"], [data-playbook-slug="operational-tools"], [data-playbook-slug="agentic-workflow"], [data-playbook-slug="copilot-metrics"], [data-playbook-slug="copilot-memory"], [data-playbook-slug="token-optimization"]) {
+  --presentation-slide-space: 0.3em;
+}
+
+body.present-mode .playbook-detail:where([data-category="develop"], [data-category="operate"]):not([data-playbook-slug="vscode-agents-window"]) .prose-akq {
+  line-height: 1.5;
+}
+
+body.present-mode:not(.slide-cover) .playbook-detail:where([data-category="develop"], [data-category="operate"]):not([data-playbook-slug="vscode-agents-window"]) .prose-akq > h2 {
+  margin-top: 0;
+  margin-bottom: 0.4em;
+  font-size: 2.3rem;
+  line-height: 1.42;
+}
+
+body.present-mode .playbook-detail:where([data-category="develop"], [data-category="operate"]):not([data-playbook-slug="vscode-agents-window"]) .prose-akq > :is(p, ul, ol, table, blockquote, .ctl-widget, .mermaid-wrap) {
+  margin-block: var(--presentation-slide-space);
+}
+
+body.present-mode .playbook-detail:where([data-category="develop"], [data-category="operate"]):not([data-playbook-slug="vscode-agents-window"]) .prose-akq li {
+  margin-block: 0.1em;
+}
+
+body.present-mode .playbook-detail:where([data-category="develop"], [data-category="operate"]):not([data-playbook-slug="vscode-agents-window"]) .prose-akq table :is(th, td) {
+  padding: 0.2em 0.6em;
+  line-height: 1.35;
+}
+
+body.present-mode .playbook-detail:where([data-category="develop"], [data-category="operate"]):not([data-playbook-slug="vscode-agents-window"]) .prose-akq > blockquote {
+  padding: 0.3em 0.7em;
 }

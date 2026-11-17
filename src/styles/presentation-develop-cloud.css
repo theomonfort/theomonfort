@@ -1,0 +1,601 @@
+/* Presentation refinements for cloud development and collaboration. */
+
+.playbook-detail[data-category="develop"]:is([data-playbook-slug="cloud-agent"], [data-playbook-slug="github-spaces"]) .cloud-connected-figure {
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+.playbook-detail[data-category="develop"]:is([data-playbook-slug="cloud-agent"], [data-playbook-slug="github-spaces"]) .cloud-connected-figure svg {
+  display: block;
+  width: 100%;
+  min-width: 850px;
+  height: auto;
+  font-family: var(--font-prose), sans-serif;
+}
+
+.playbook-detail[data-category="develop"]:is([data-playbook-slug="cloud-agent"], [data-playbook-slug="github-spaces"]) .cloud-flow-lines {
+  fill: none;
+  stroke: #93a8ff;
+  stroke-width: 2;
+}
+
+.playbook-detail[data-category="develop"]:is([data-playbook-slug="cloud-agent"], [data-playbook-slug="github-spaces"]) .cloud-flow-human {
+  fill: #0b1420;
+  stroke: #5eead4;
+  stroke-width: 2;
+}
+
+.playbook-detail[data-category="develop"]:is([data-playbook-slug="cloud-agent"], [data-playbook-slug="github-spaces"]) .cloud-flow-agent {
+  fill: #1a1500;
+  stroke: #fcd34d;
+  stroke-width: 2;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-flow-decision {
+  fill: #11162c;
+  stroke: #93a8ff;
+  stroke-width: 2;
+}
+
+.playbook-detail[data-category="develop"]:is([data-playbook-slug="cloud-agent"], [data-playbook-slug="github-spaces"]) .cloud-flow-labels {
+  fill: #e8f4ff;
+  font-size: 22px;
+  text-anchor: middle;
+}
+
+body.present-mode .playbook-detail[data-category="develop"]:is([data-playbook-slug="cloud-agent"], [data-playbook-slug="github-spaces"]) .cloud-connected-figure {
+  margin-block: 0.6rem;
+  overflow: visible;
+}
+
+body.present-mode .playbook-detail[data-category="develop"]:is([data-playbook-slug="cloud-agent"], [data-playbook-slug="github-spaces"]) .cloud-connected-figure svg {
+  min-width: 0;
+}
+
+.playbook-detail[data-category="develop"]:is([data-playbook-slug="cloud-agent"], [data-playbook-slug="partner-agent"], [data-playbook-slug="github-spaces"], [data-playbook-slug="codespaces"]) .cloud-example-columns > div {
+  min-width: 0;
+}
+
+body.present-mode .playbook-detail[data-category="develop"]:is([data-playbook-slug="cloud-agent"], [data-playbook-slug="partner-agent"], [data-playbook-slug="github-spaces"], [data-playbook-slug="codespaces"]) .cloud-example-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  margin-block: 0.6rem;
+  align-items: start;
+}
+
+body.present-mode .playbook-detail[data-category="develop"]:is([data-playbook-slug="cloud-agent"], [data-playbook-slug="partner-agent"], [data-playbook-slug="github-spaces"], [data-playbook-slug="codespaces"]) .cloud-example-columns :is(p, ul, ol, blockquote, pre) {
+  margin-block: 0 0.55rem;
+}
+
+body.present-mode .playbook-detail[data-category="develop"]:is([data-playbook-slug="cloud-agent"], [data-playbook-slug="partner-agent"], [data-playbook-slug="github-spaces"], [data-playbook-slug="codespaces"]) .cloud-example-columns pre {
+  padding: 0.7rem 0.9rem;
+  max-height: none;
+  overflow: visible;
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+body.present-mode .playbook-detail[data-category="develop"]:is([data-playbook-slug="cloud-agent"], [data-playbook-slug="partner-agent"], [data-playbook-slug="github-spaces"], [data-playbook-slug="codespaces"]) .cloud-example-columns pre code {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-example-columns:not(.cloud-mcp-columns) {
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-example-columns:not(.cloud-mcp-columns) > div:last-child {
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+.playbook-detail[data-playbook-slug="partner-agent"] .partner-setup-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-block: 1.5rem 0;
+  font-family: var(--font-prose);
+}
+
+.playbook-detail[data-playbook-slug="partner-agent"] .partner-setup-columns > div {
+  min-width: 0;
+  padding-inline-end: 2rem;
+}
+
+.playbook-detail[data-playbook-slug="partner-agent"] .partner-setup-columns > div + div {
+  padding-inline: 2rem 0;
+  border-inline-start: 1px solid rgb(var(--rgb-neon-magenta) / 0.35);
+}
+
+.playbook-detail[data-playbook-slug="partner-agent"] .partner-setup-columns h3 {
+  margin-block: 0 1rem;
+  color: var(--entry-accent, var(--c-neon-magenta));
+  font-size: 1.05em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.playbook-detail[data-playbook-slug="partner-agent"] .partner-setup-columns ul {
+  display: grid;
+  gap: 0.8em;
+  margin: 0;
+  padding-inline-start: 1.1em;
+  list-style: square;
+}
+
+.playbook-detail[data-playbook-slug="partner-agent"] .partner-setup-columns li,
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="partner-agent"] .partner-setup-columns li {
+  margin: 0;
+  padding-inline-start: 0.25em;
+  line-height: 1.5;
+}
+
+.playbook-detail[data-playbook-slug="partner-agent"] .partner-setup-columns li::marker {
+  color: var(--c-neon-cyan);
+  font-size: 0.8em;
+}
+
+@media (max-width: 999px) {
+  .playbook-detail[data-playbook-slug="partner-agent"] .partner-setup-columns {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  .playbook-detail[data-playbook-slug="partner-agent"] .partner-setup-columns > div {
+    padding-inline: 0;
+  }
+
+  .playbook-detail[data-playbook-slug="partner-agent"] .partner-setup-columns > div + div {
+    padding-inline: 0;
+    padding-block-start: 1.5rem;
+    border-inline-start: 0;
+    border-block-start: 1px solid rgb(var(--rgb-neon-magenta) / 0.35);
+  }
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-mcp-columns {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-workspace {
+  margin: 24px 0 0;
+  font-family: var(--font-prose), sans-serif;
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-diagram {
+  display: grid;
+  grid-template-columns: 300px 80px minmax(0, 1fr);
+  align-items: center;
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-access {
+  display: grid;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-access li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 84px;
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid rgb(var(--rgb-neon-cyan) / 0.4);
+  background: rgb(var(--rgb-midnight) / 0.75);
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-access li > div {
+  min-width: 0;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="codespaces"] .codespaces-access li {
+  margin: 0;
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-access svg {
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: var(--c-neon-cyan);
+  stroke-width: 1.5;
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-access strong {
+  display: block;
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-access :is(span, code) {
+  display: block;
+  margin-top: 4px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] :is(.codespaces-access code, .codespaces-config > code) {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-connectors {
+  display: block;
+  width: 100%;
+  height: 292px;
+  overflow: visible;
+  fill: var(--c-neon-cyan);
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-branches {
+  fill: none;
+  stroke: var(--c-neon-cyan);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-stacked-arrow {
+  display: none;
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  min-width: 0;
+  min-height: 292px;
+  padding: 18px 24px;
+  border: 2px solid var(--c-neon-cyan);
+  background: rgb(var(--rgb-midnight) / 0.9);
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-container-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgb(var(--rgb-neon-cyan) / 0.35);
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-container-head h3 {
+  margin: 0;
+  color: var(--c-neon-cyan);
+  font-family: var(--font-prose), sans-serif;
+  font-size: 26px;
+  line-height: 1.3;
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-container-head > span {
+  font-size: 20px;
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-container p {
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-config > code {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--c-crt-amber);
+  font-size: 22px;
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-config > p {
+  margin-top: 6px;
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-repeatable {
+  color: var(--c-neon-cyan);
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-compute {
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px dashed rgb(var(--rgb-crt-amber) / 0.6);
+  text-align: left;
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-compute > p:first-child {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 12px 28px;
+  margin: 0;
+  font-size: 22px;
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-compute strong {
+  color: var(--c-crt-amber);
+  font-size: 32px;
+  line-height: 1.25;
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-compute strong span {
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-compute > p + p {
+  margin: 8px 0 0;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.playbook-detail[data-playbook-slug="codespaces"] .codespaces-compute > p + p span {
+  display: block;
+  opacity: 0.8;
+}
+
+@media (max-width: 999px) {
+  .playbook-detail[data-playbook-slug="codespaces"] .codespaces-diagram {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .playbook-detail[data-playbook-slug="codespaces"] .codespaces-connectors {
+    display: none;
+  }
+
+  .playbook-detail[data-playbook-slug="codespaces"] .codespaces-stacked-arrow {
+    display: block;
+    color: var(--c-neon-cyan);
+    text-align: center;
+    font-size: 32px;
+    line-height: 1;
+  }
+
+  .playbook-detail[data-playbook-slug="codespaces"] .codespaces-container {
+    padding: 18px;
+  }
+}
+
+body.present-mode .playbook-detail[data-category="develop"]:is([data-playbook-slug="cloud-agent"], [data-playbook-slug="partner-agent"], [data-playbook-slug="github-spaces"], [data-playbook-slug="codespaces"]) .links-aside {
+  padding: 0.85rem 1.25rem;
+}
+
+body.present-mode .playbook-detail[data-category="develop"]:is([data-playbook-slug="cloud-agent"], [data-playbook-slug="partner-agent"], [data-playbook-slug="github-spaces"], [data-playbook-slug="codespaces"]) .links-aside > div {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem 1.5rem;
+}
+
+body.present-mode .playbook-detail[data-category="develop"]:is([data-playbook-slug="cloud-agent"], [data-playbook-slug="partner-agent"], [data-playbook-slug="github-spaces"], [data-playbook-slug="codespaces"]) .links-aside > div > div {
+  margin: 0;
+}
+
+body.present-mode .playbook-detail[data-category="develop"]:is([data-playbook-slug="cloud-agent"], [data-playbook-slug="partner-agent"], [data-playbook-slug="github-spaces"], [data-playbook-slug="codespaces"]) .links-aside-title {
+  margin-bottom: 0.5rem;
+}
+
+body.present-mode .playbook-detail[data-category="develop"]:is([data-playbook-slug="cloud-agent"], [data-playbook-slug="partner-agent"], [data-playbook-slug="github-spaces"], [data-playbook-slug="codespaces"]) .links-aside-group {
+  margin-bottom: 0.3rem;
+}
+
+body.present-mode .playbook-detail[data-category="develop"]:is([data-playbook-slug="cloud-agent"], [data-playbook-slug="partner-agent"], [data-playbook-slug="github-spaces"], [data-playbook-slug="codespaces"]) .links-aside-item {
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+body.present-mode .playbook-detail[data-category="develop"]:is([data-playbook-slug="cloud-agent"], [data-playbook-slug="partner-agent"], [data-playbook-slug="github-spaces"], [data-playbook-slug="codespaces"]) .links-aside-item + .links-aside-item {
+  margin-top: 0.25em;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="partner-agent"] .links-aside > div {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-code-example {
+  padding: 1rem;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-code-example pre {
+  margin: 0;
+  padding: 0.8rem 1rem;
+  max-height: none;
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-code-example pre code {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-swimlane-figure {
+  margin: 1rem 0;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-swimlane {
+  position: relative;
+  width: 100%;
+  min-width: 1000px;
+  aspect-ratio: 1100 / 360;
+  color: #e8f4ff;
+  font-family: var(--font-prose), sans-serif;
+  font-size: 22px;
+  line-height: 1.25;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-lane {
+  position: absolute;
+  border: 1px solid #5eead4;
+  background: #05060f;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-lane strong {
+  position: absolute;
+  top: 0.3rem;
+  left: 0.75rem;
+  font-size: 22px;
+  color: inherit;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-lane-agent {
+  left: 23.6364%;
+  top: 2.7778%;
+  width: 60%;
+  height: 37.5%;
+  border-color: #fcd34d;
+  color: #fcd34d;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-lane-human {
+  left: 0.9091%;
+  top: 43.0556%;
+  width: 98.1818%;
+  height: 55.5556%;
+  color: #5eead4;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-lane-connectors {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-lane-connectors > g {
+  fill: none;
+  stroke: #93a8ff;
+  stroke-width: 2;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-next-connector {
+  stroke-dasharray: 5 5;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-lane-node {
+  position: absolute;
+  display: grid;
+  place-content: center;
+  padding: 0.25rem;
+  border: 2px solid #5eead4;
+  background: #0b1420;
+  text-align: center;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] :is(.cloud-node-artifacts, .cloud-node-pr, .cloud-node-fix) {
+  top: 15.8333%;
+  height: 18.0556%;
+  border-color: #fcd34d;
+  background: #1a1500;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-node-artifacts {
+  left: 25.9091%;
+  width: 13.6364%;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-node-pr {
+  left: 44.5455%;
+  width: 12.7273%;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-node-fix {
+  left: 67.2727%;
+  width: 15.4545%;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-node-issue {
+  left: 2.7273%;
+  top: 61.1111%;
+  width: 12.7273%;
+  height: 18.0556%;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-node-assign {
+  left: 19.0909%;
+  top: 56.9444%;
+  width: 13.6364%;
+  height: 22.2222%;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-node-review {
+  left: 42.7273%;
+  top: 56.9444%;
+  width: 14.5455%;
+  height: 22.2222%;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-node-decision {
+  left: 70.9091%;
+  top: 52.7778%;
+  width: 10%;
+  height: 30.5556%;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-node-decision::before {
+  content: "";
+  position: absolute;
+  left: 14.6447%;
+  top: 14.6447%;
+  width: 70.7107%;
+  height: 70.7107%;
+  border: 2px solid #93a8ff;
+  background: #11162c;
+  transform: rotate(45deg);
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-node-decision span {
+  position: relative;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-node-merge {
+  left: 85.9091%;
+  top: 61.1111%;
+  width: 11.8182%;
+  height: 18.0556%;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-edge-label {
+  position: absolute;
+  padding-inline: 0.25rem;
+  background: #05060f;
+  font-size: 22px;
+  white-space: nowrap;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-label-ok {
+  left: 81.3636%;
+  top: 59.1667%;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-label-feedback {
+  left: 56.3636%;
+  top: 88.0556%;
+}
+
+.playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-label-next {
+  left: 25.4545%;
+  top: 92.5%;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-swimlane-figure {
+  margin-block: 0.6rem;
+  overflow: visible;
+}
+
+body.present-mode .playbook-detail[data-category="develop"][data-playbook-slug="cloud-agent"] .cloud-swimlane {
+  min-width: 0;
+}

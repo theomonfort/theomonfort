@@ -48,9 +48,9 @@ links:
   </p>
 </div>
 
-> 🎯 Do not reduce the story to active users alone. Combine adoption, engagement, code generation, and pull request flow.
-
 ## What to measure
+
+Combine adoption, engagement, code generation, and PR flow, not active users alone.
 
 | Signal | Examples | Question answered |
 | --- | --- | --- |
@@ -98,7 +98,6 @@ The dashboard answers four questions for enterprise administrators and organizat
 | 📈 **Trends** | Are cohort growth and pull request throughput changing over the last **six months**? |
 | 🎯 **Recommended next steps** | Which concrete enablement action can move more users into deeper-adoption cohorts? |
 
-> 🎯 Move beyond “who is active?” to explain **how deeply Copilot is adopted** and **where enablement should focus next**.
 
 ## Read the numbers carefully
 

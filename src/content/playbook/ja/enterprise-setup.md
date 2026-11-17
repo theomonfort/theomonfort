@@ -12,6 +12,7 @@ accent:
   hex: "#93a8ff"
 order: 29.5
 category: administration
+archived: true
 related: ['license-management']
 links:
   - group: 📖 公式ドキュメント
@@ -41,6 +42,9 @@ links:
 
 ## Enterprise の作成（30日間トライアル）
 
+<div class="admin-columns admin-setup">
+<div>
+
 まず **GitHub Enterprise Cloud** を作成します。30 日間の無料トライアルが利用可能です。
 
 | 種類 | リンク |
@@ -50,9 +54,18 @@ links:
 
 作成時に **Data hosting** オプションで、**GitHub Enterprise Cloud**（github.com）または **Data Residency**（GHE.com のリージョン別サブドメイン）を選択できます。
 
+</div>
+<div>
+
 ![Data hosting 選択画面](/theomonfort/playbook/img/enterprise-data-hosting.png)
 
+</div>
+</div>
+
 ## EMU：管理者アカウントの初期設定
+
+<div class="admin-columns admin-setup">
+<div>
 
 EMU を選択すると、**専用の管理者アカウント**（`shortname_admin`）が自動生成されます。
 
@@ -60,9 +73,15 @@ EMU を選択すると、**専用の管理者アカウント**（`shortname_admi
 2. 管理者アカウントでログイン → **Overview** タブにセットアップ手順が表示される
 3. 表示されるステップに沿って SSO とプロビジョニングを構成
 
+> ⚠️ この管理者アカウントは SSO・SCIM の構成専用です。日常的な開発には IdP からプロビジョニングされたユーザーアカウントを使用してください。
+
+</div>
+<div>
+
 ![EMU 管理者の Overview 画面](/theomonfort/playbook/img/enterprise-emu-admin-overview.png)
 
-> ⚠️ この管理者アカウントは SSO・SCIM の構成専用です。日常的な開発には IdP からプロビジョニングされたユーザーアカウントを使用してください。
+</div>
+</div>
 
 ## SSO 方式：OIDC vs SAML
 
@@ -80,6 +99,9 @@ SSO を有効化する際に **OIDC** または **SAML** を選択します。
 
 ## Entra ID でのアプリ登録
 
+<div class="admin-columns admin-registration">
+<div>
+
 SSO を構成するには **Entra ID** で Enterprise Application を追加します。
 
 | SSO 方式 | 追加するアプリ | チュートリアル |
@@ -92,6 +114,9 @@ SSO を構成するには **Entra ID** で Enterprise Application を追加し�
 <img src="/theomonfort/playbook/img/entra-app-emu-saml.png" alt="GitHub Enterprise Managed User" style="max-width:48%;" />
 </div>
 
+</div>
+<div>
+
 ### SAML：GitHub ↔ Entra ID のフィールド対応
 
 GitHub の **Identity provider** 設定画面で以下を入力します。Entra ID 側の値は **Enterprise Application → Manage → Single sign-on** に記載されています。
@@ -102,33 +127,54 @@ GitHub の **Identity provider** 設定画面で以下を入力します。Entra
 | **Issuer** | Microsoft Entra Identifier |
 | **Public certificate** | Certificate (Base64) — ファイルの中身テキストを貼り付け |
 
+</div>
+</div>
+
 ## SCIM プロビジョニングの設定
 
-SSO の設定が完了したら、次に **Provisioning**（自動プロビジョニング）を構成します。
+SSO の設定後、**Entra ID → Enterprise Application → Manage → Provisioning** で自動プロビジョニングを構成します。
 
-Entra ID の **Enterprise Application → Manage → Provisioning** で以下を入力します：
+<div class="admin-columns admin-setup">
+<div>
+
+### Provisioning の入力項目
 
 - **Tenant URL**: `https://api.github.com/scim/v2/enterprises/<enterprise-slug>`
 - **Secret Token**: GitHub のセットアップユーザー（`shortname_admin`）で作成した **Personal Access Token (PAT)**
+
+</div>
+<div>
 
 ![Provisioning 設定画面](/theomonfort/playbook/img/entra-provisioning-config.png)
 
 > PAT は GitHub の **Settings → Developer settings → Personal access tokens** から、`admin:enterprise` スコープ付きで作成してください。
 
-設定後、Entra ID アプリの **Users and groups** にセキュリティグループまたはユーザーを追加すると、**約 40 分ごと**に自動プロビジョニングが実行され、GitHub Enterprise にユーザーが同期されます。
+</div>
+</div>
+
+**Users and groups** にセキュリティグループやユーザーを追加すると、**約 40 分ごと**に GitHub Enterprise に同期されます。
 
 ## IdP グループとチームの同期
 
-プロビジョニングされたユーザーは、デフォルトでは **Unaffiliated（未所属）** の状態で追加されます。Organization やチームへの所属は IdP グループ（**Entra ID の場合はセキュリティグループ**）を同期することで自動化できます。
+ユーザーは **Unaffiliated（未所属）** で追加され、org / team には所属しません。IdP グループ（**Entra ID はセキュリティグループ**）の同期で所属を自動化できます。
+
+<div class="admin-columns admin-setup">
+<div>
 
 | 設定 | 結果 |
 |---|---|
-| **何もしない** | ユーザーは Enterprise に追加されるが Organization/Team には未所属 |
-| **Enterprise Team に IdP グループを紐付け** | IdP グループのメンバーが自動的に Enterprise Team に同期 |
-| **Organization Team に IdP グループを紐付け** | IdP グループのメンバーが自動的に Organization Team に同期（Org にも自動参加） |
+| **グループ同期なし** | Enterprise に所属。org / team は未所属 |
+| **Enterprise Team と同期** | IdP グループのメンバーを Enterprise Team に自動同期 |
+| **Org Team と同期** | IdP グループのメンバーを Org Team に自動同期し、org にも自動参加 |
 
 GitHub の Team 設定画面 → **Identity Provider Group** で、対応する IdP グループを選択します。
 
-> **Entra ID の場合**：紐付けできるのは **セキュリティグループ** のみです。Microsoft 365 グループや、ネストされた（親子関係を持つ）グループ・チームは同期できません。
+</div>
+<div>
 
 ![IdP グループの同期設定](/theomonfort/playbook/img/enterprise-idp-group-sync.png)
+
+> **Entra ID の場合**：紐付けできるのは **セキュリティグループ** のみです。Microsoft 365 グループや、ネストされた（親子関係を持つ）グループ・チームは同期できません。
+
+</div>
+</div>

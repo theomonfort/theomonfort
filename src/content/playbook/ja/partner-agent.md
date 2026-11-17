@@ -33,17 +33,17 @@ links:
     label: Manage policies (Enterprise)
     url: https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-enterprise-policies
   - group: VS Code Docs
-    label: Partner agents in Visual Studio Code
+    label: Partner agents
     url: https://code.visualstudio.com/docs/copilot/agents/third-party-agents
   - group: VS Code Docs
-    label: Cloud agents in Visual Studio Code
+    label: Cloud agents
     url: https://code.visualstudio.com/docs/copilot/agents/cloud-agents
   - group: VS Code Docs
-    label: VS Code agent types (Local / Cloud / Partner)
+    label: Agent types (Local / Cloud / Partner)
     url: https://code.visualstudio.com/docs/copilot/agents/overview#_types-of-agents
   - group: VS Code Docs
-    label: Enterprise — enable/disable agents in VS Code
-    url: https://code.visualstudio.com/docs/enterprise/ai-settings#_enable-or-disable-the-use-of-agents
+    label: Enterprise agent policy
+    url: https://code.visualstudio.com/docs/enterprise/manage-ai-settings#_claude-and-codex-availability
   - group: OpenAI Codex
     label: OpenAI Codex VS Code extension
     url: https://marketplace.visualstudio.com/items?itemName=openai.chatgpt
@@ -57,16 +57,16 @@ links:
     label: Claude Agent SDK
     url: https://code.claude.com/docs/en/agent-sdk/overview
   - group: 📰 Recent Changelog
-    label: "GPT-5.3-Codex is now the base model for Business/Enterprise (2026-05-18)"
+    label: "GPT-5.3-Codex default, Business/Enterprise (2026-05-18)"
     url: https://github.blog/changelog/2026-05-17-gpt-5-3-codex-is-now-the-base-model-for-copilot-business-and-enterprise
   - group: 📰 Recent Changelog
-    label: "JetBrains inline agent mode (preview) (2026-04-24)"
+    label: "JetBrains inline agent preview (2026-04-24)"
     url: https://github.blog/changelog/2026-04-24-inline-agent-mode-in-preview-and-more-in-github-copilot-for-jetbrains-ides
   - group: 📰 Recent Changelog
-    label: "Model selection for Claude and Codex agents on github.com (2026-04-14)"
+    label: "Cloud Claude/Codex model picker (2026-04-14)"
     url: https://github.blog/changelog/2026-04-14-model-selection-for-claude-and-codex-agents-on-github-com
   - group: 📰 Recent Changelog
-    label: "Claude and Codex now available for Business & Pro (2026-02-26)"
+    label: "Claude/Codex for Business & Pro (2026-02-26)"
     url: https://github.blog/changelog/2026-02-26-claude-and-codex-now-available-for-copilot-business-pro-users
 ---
 
@@ -81,72 +81,121 @@ links:
   </p>
 </div>
 
-> 大事なのは、これは **Copilot Chat のモード** ではないということ。**どの provider / harness にタスクを渡すか** の話。請求・rate limit・ガバナンスはすべて **Copilot サブスクリプション側に集約** される。
+## 有効化（Enterprise / Org / 個人） <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/agents/about-third-party-agents" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="demo-partner-policy" class="demo-toggle" /><label class="h2-demo" for="demo-partner-policy">&#9658; DEMO</label>
 
-## 有効化（Enterprise / Org / 個人）
+<div class="demo-panel">
+<label class="demo-scrim" for="demo-partner-policy" aria-label="デモ手順を閉じる"></label>
+<div class="demo-window" role="group" aria-label="デモ手順">
+<div class="demo-head"><span class="demo-tag">DEMO</span><span class="demo-name">Partner-agent policies</span><span class="demo-note">発表者専用</span><label class="demo-close" for="demo-partner-policy" aria-label="閉じる">&#10005;</label></div>
+<ol class="demo-steps">
+<li>
+<p class="demo-step-title">ENTERPRISE: OCTODEMO</p>
+<p><a class="retro-link" href="https://github.com/enterprises/octodemo/ai-controls/copilot/features" target="_blank" rel="noopener noreferrer">Octodemo の AI controls を開く ↗</a>。サイドバーの <b>Agents</b> を選択。</p>
+<p>Claude / Codex の policy と、許可対象の organization を確認。Enterprise owner 権限が必要。</p>
+<p class="demo-out">Enterprise policy が、org owner に許可される範囲を決める。</p>
+</li>
+<li>
+<p class="demo-step-title">ORGANIZATION: THEOMONFORT-ORG</p>
+<p><a class="retro-link" href="https://github.com/organizations/theomonfort-org/settings/copilot/coding_agent" target="_blank" rel="noopener noreferrer">theomonfort-org の agent 設定を開く ↗</a>：<code class="demo-path">Settings → Copilot → Cloud → Partner agents</code>。</p>
+<p><b>Allow Claude coding agent</b> と <b>Allow Codex coding agent</b> を確認。Org owner 権限が必要。</p>
+<p class="demo-out">Enterprise policy の範囲内で、各 partner を個別に制御する。</p>
+</li>
+<li>
+<p class="demo-step-title">PERSONAL ACCOUNT</p>
+<p><a class="retro-link" href="https://github.com/settings/copilot/coding_agent" target="_blank" rel="noopener noreferrer">個人の agent 設定を開く ↗</a>：<code class="demo-path">Settings → Copilot → Cloud agent → Partner agents</code>。</p>
+<p class="demo-out">有料の個人プランでは、cloud agent が有効な自分の repo にトグルが適用される。</p>
+</li>
+<li>
+<p class="demo-step-title">VS CODE と比較</p>
+<p>従来の <b>Local</b> harness に代わる <b>Copilot</b> も、手元のマシンで動く。Copilot で Claude モデルを選んでも、Claude harness には切り替わらない。</p>
+<p>Claude / Codex harness は VS Code 側の別の制御に従う。<a class="retro-link" href="https://code.visualstudio.com/docs/enterprise/manage-ai-settings#_claude-and-codex-availability" target="_blank" rel="noopener noreferrer">Enterprise-managed settings が適用されると無効になる ↗</a>。別途 provider の認証情報を使っても回避できない。</p>
+</li>
+</ol>
+</div>
+</div>
 
-Partner agents は **デフォルトで OFF**。使う前に、契約レベルに応じた管理者が **policy** で許可する必要がある。**3 段階のガバナンス階層** で制御される。
+**GitHub 上で動く partner agents はデフォルトで OFF**。契約レベルに応じて有効化する。Org の設定で Enterprise policy を上書きすることはできない。
 
-| レベル | 誰が設定する | どこで | 何が起こる |
-| --- | --- | --- | --- |
-| **🏢 Enterprise** | Enterprise owner | Enterprise → Policies → Copilot | 配下の **全 org** に対する上限を設定（Allow / Block / No policy） |
-| **🏛️ Organization** | Org owner | Organization → Settings → Copilot → Coding agent | org メンバーに対して Claude / Codex を **個別に ON/OFF** |
-| **👤 個人 (Pro / Pro+)** | 本人 | [Settings → Copilot → Cloud agent → Partner agents](https://github.com/settings/copilot/coding_agent) | 自分の repo で **トグル** で有効化 |
+| レベル | 誰が設定する | 何が起こる |
+| --- | --- | --- |
+| **🏢 Enterprise** | Enterprise owner | **配下の org** の agent 利用範囲を決める |
+| **🏛️ Organization** | Org owner | Claude / Codex を **個別に ON/OFF** |
+| **👤 個人（有料プラン）** | 本人 | **自分の repo** で partner を有効化 |
 
-> ⚠️ VS Code の **local agent**（chat 内で動く Claude / Codex セッション）は **この policy の対象外**。Local の制御は VS Code 側の設定（`github.copilot.chat.claudeAgent.enabled` など）で行う。
+> ⚠️ **Copilot は harness 名であり、cloud 実行という意味ではない**。上の policy は **GitHub 上の agent** が対象。VS Code の **Claude / Codex harness** は別の制御に従い、**Copilot enterprise-managed settings** が適用されると無効になる。
 
 
 ## VS Code × OpenAI Codex
 
 VS Code から Codex を使うには、**OpenAI Codex 拡張** をインストールし、起動時に **「Sign in with Copilot」** を選ぶ。Copilot 経由でログインすれば、別途 OpenAI のアカウント・課金は不要。
 
-**手順**
+<div class="partner-setup-columns">
+<div>
 
-1.  VS Code Marketplace から **OpenAI Codex 拡張** をインストール
-2. 拡張を起動して **「Sign in with Copilot」** をクリック
-3. Agent Sessions ビューに Codex セッションが現れる
+### はじめ方
 
+- VS Code Marketplace から **OpenAI Codex 拡張** をインストール
+- 拡張を起動して **「Sign in with Copilot」** をクリック
+- **Agent Sessions** ビューで Codex セッションを開く
 
-**ポイント**
+</div>
+<div>
 
-- 🧩 **拡張のインストールが必要**（Marketplace から OpenAI Codex 拡張）
-- 🤖 利用可能なモデルは **OpenAI 系のみ**：`Auto` / `GPT-5.2-Codex` / `GPT-5.3-Codex` / `GPT-5.4` / `GPT-5.4 nano`
-- 🌐 リクエストは **すべて Copilot API 経由** — GitHub の billing が適用される
+### 押さえるポイント
 
+- **専用の拡張が必要**。VS Code にインストールして使う
+- **OpenAI モデルのみ**。利用可能なモデルは拡張のピッカーで確認
+- **Copilot で課金**。リクエストはすべて Copilot API 経由
+
+</div>
+</div>
 
 ## VS Code × Claude Code
 
-VS Code Chat の **Session Type ピッカー** で、`Local` の代わりに **`Claude`** を選ぶだけ。**拡張のインストールは不要** — Copilot Chat に直接統合されている。
+VS Code Chat の **harness ピッカー** で、`Copilot` の代わりに **`Claude`** を選ぶ。**拡張のインストールは不要**。Copilot Chat に直接統合されている。
 
-**手順**
+<div class="partner-setup-columns">
+<div>
 
-1. Chat ビューを開き、**New Chat (`+`)** をクリック
-2. **Session Type ドロップダウン** から **`Claude`** を選択
-3. プロンプトを入力 → Claude Agent SDK が直接 workspace 上で動く
+### はじめ方
 
-**ポイント**
+- Chat ビューを開き、**New Chat** をクリック
+- **harness ピッカー** から **`Claude`** を選択
+- プロンプトを入力し、**Claude Agent SDK** を workspace 上で実行
 
-- 🧩 **拡張不要** — Copilot Chat にネイティブ統合（Codex とは違って Marketplace から何も入れない）
-- 🤖 利用可能なモデル：`Auto` / `Claude Opus 4.5` / `Claude Opus 4.6` / `Claude Opus 4.7` / `Claude Sonnet 4.5` / `Claude Sonnet 4.6`
-- 🌐 リクエストは **すべて Copilot API 経由** — GitHub の billing が適用される
-- 🛡️ **Permission モード** が選べる：Edit automatically / Request approval / Plan
-- ⚙️ Claude 専用 slash コマンドが使える
+</div>
+<div>
 
+### 押さえるポイント
+
+- **Copilot で課金**。リクエストはすべて Copilot API 経由
+- **Permission モードを選択**。Edit automatically / Request approval / Plan
+- **Claude 専用コマンド**。専用の slash コマンドが使える
+
+</div>
+</div>
 
 ## Cloud Agent × Codex / Claude SDK
 
-GitHub の **Cloud Agent** にタスクを delegate するとき、ハーネスとして **Copilot / OpenAI Codex SDK / Claude Agent SDK** から選べる。Cloud Agent の枠組み（GitHub Actions 上で実行、PR を返す）はそのまま、**中身のエージェント実装だけ差し替え** られる。
+Copilot Chat のモードではなく、**agent harness** を選ぶ。変わるのは **エージェントの実装**。GitHub の workflow は変わらない。
 
-**選択ポイント**
+<div class="partner-setup-columns">
+<div>
 
-| ハーネス | 強み | 使いどころ |
-| --- | --- | --- |
-| **Copilot** | GitHub に最適化された標準ハーネス | デフォルトの選択肢、Issue → PR の自動化 |
-| **OpenAI Codex SDK** | Codex モデル系列に最適化 | コーディング特化のロングタスク |
-| **Claude Agent SDK** | Anthropic の agentic ループ | 長文の reasoning が必要な実装 |
+### Harness を選ぶ
 
-**共通の利点**
+- **Copilot**。Issue → PR を自動化する GitHub 標準の harness
+- **OpenAI Codex SDK**。長い coding タスク向けの Codex 特化 harness
+- **Claude Agent SDK**。深い reasoning を伴う実装向けの Anthropic の agentic ループ
 
-- ☁️ 実行環境は Cloud Agent と同じ（GitHub Actions runner）
-- 🔐 セキュリティ・検証ツール（CodeQL / Code Review / Secret Scanning / Dependency checks）も **同じ網がかかる**
-- 💰 課金は **Copilot 側** に集約
+</div>
+<div>
+
+### 変わらないこと
+
+- **Actions → PR**。Actions 上で実行し、pull request を返す流れは同じ
+- **同じ安全網**。CodeQL、code review、secret scanning、依存関係チェック
+- **Copilot に集約**。請求、rate limit、ガバナンスを同じ契約で管理
+
+</div>
+</div>

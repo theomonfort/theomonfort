@@ -92,7 +92,7 @@ Gaps compared with EMU on GitHub.com. ❌ unavailable, ⚠️ with conditions.
 
 📖 <a class="retro-link" href="https://docs.github.com/en/enterprise-cloud@latest/admin/data-residency/feature-overview-for-github-enterprise-cloud-with-data-residency" target="_blank" rel="noopener noreferrer">GHE.com feature overview ↗</a>　📖 <a class="retro-link" href="https://docs.github.com/en/enterprise-server@latest/admin/overview/about-github-enterprise-server" target="_blank" rel="noopener noreferrer">About GHES ↗</a>
 
-<div class="ctl-widget">
+<div class="ctl-widget admin-picker">
 <p class="ctl-hint">▸ CLICK + FOR DETAILS</p>
 <div class="ctl-list">
 <details class="ctl-item" name="ghe-gaps">
@@ -376,7 +376,7 @@ flowchart LR
 
 ## GitHub.com → EMU / GHE.com (GEI) <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/migrations/using-github-enterprise-importer/migrating-between-github-products/migrating-organizations-from-githubcom-to-github-enterprise-cloud" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-<div class="ctl-widget ctl-stable ctl-tight">
+<div class="ctl-widget ctl-stable ctl-tight admin-picker">
 <div class="ctl-list">
 <details class="ctl-item" name="emu-org-migration">
 <summary class="ctl-btn"><span class="ctl-name">In a nutshell</span><span class="ctl-toggle" aria-hidden="true"></span></summary>
