@@ -6,6 +6,8 @@ tags: ["secrets", "enterprise", "leak-detection", "secret"]
 
 **Public Monitoring** is an enterprise-wide capability in [[Secret Protection]] (GitHub Enterprise Cloud, surfaced inside [[Security Overview]]) that detects secrets leaked in **public content outside your own repositories** across `github.com` in real time.
 
+**License required:** Your enterprise must have **GitHub Advanced Security (GHAS) or GitHub Secret Protection enabled**. GitHub Enterprise Cloud alone is not enough. [Official requirements](https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring#requirements).
+
 ## Attribution & Scope
 
 - **External public leaks**: Catches credentials accidentally pushed to personal forks, open-source repositories, public issues, PR comments, and discussions.
