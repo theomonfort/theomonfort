@@ -1,1 +1,66 @@
-/* code-quality presentation rules. Scope every selector to .playbook-detail[data-playbook-slug="code-quality"]. */
+/* Keep dense slides readable without changing document-mode typography. */
+body.present-mode .playbook-detail[data-playbook-slug="code-quality"] {
+  padding-block: 4rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="code-quality"] .prose-akq > :is(p, ul, blockquote) {
+  margin-block: 0.3rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="code-quality"] .prose-akq > h2 {
+  margin-bottom: 0.8rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="code-quality"] .prose-akq .vsx-widget {
+  margin-block: 0.4em;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="code-quality"] .prose-akq .vsx-btn {
+  padding-block: 0.18em;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="code-quality"] .prose-akq .tbl-compact :is(th, td) {
+  padding-block: 0.05em;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="code-quality"] .prose-akq .spec-widget {
+  margin-block: 0.5rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="code-quality"] .prose-akq .spec-widget table {
+  font-size: 20px;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="code-quality"] .prose-akq .spec-widget :is(th, td) {
+  padding-block: 0.15em;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="code-quality"] .prose-akq .spec-btn {
+  font-size: 20px;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="code-quality"] .prose-akq .spec-what {
+  font-size: 20px;
+  line-height: 1.35;
+  padding: 0.35em 0.45em;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="code-quality"] .prose-akq a.dl-script {
+  margin-block: 0.25rem;
+  padding-block: 0.35em;
+}
+
+@media (max-width: 640px) {
+  .playbook-detail[data-playbook-slug="code-quality"] .prose-akq .spec-widget :is(table, tbody, tr, td) {
+    display: block;
+    width: 100%;
+  }
+
+  .playbook-detail[data-playbook-slug="code-quality"] .prose-akq .spec-widget :is(colgroup, thead) {
+    display: none;
+  }
+
+  .playbook-detail[data-playbook-slug="code-quality"] .prose-akq .spec-widget td {
+    padding: 0.4em 0.6em;
+  }
+}

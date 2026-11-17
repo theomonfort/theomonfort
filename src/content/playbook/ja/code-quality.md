@@ -71,8 +71,6 @@ links:
 
 ## Code Quality がカバーする範囲 <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-quality/code-quality" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**2026 年 7 月 20 日** に GA。役割は、コードが古くなっても信頼性・保守性・テストカバレッジを保つこと。GitHub Advanced Security に組み込まれた機能ではなく、その**隣に並ぶ独立製品**。
-
 <div class="vsx-widget">
 <input class="vsx-radio" type="radio" name="cq-vs-product" id="cqvs-quality" checked />
 <input class="vsx-radio" type="radio" name="cq-vs-product" id="cqvs-scanning" />
@@ -87,7 +85,7 @@ links:
 <summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">🎯</span><span class="vsx-name">主目的</span></summary>
 <div class="vsx-pane">
 <p class="vsx-head"><span class="vsx-icon" aria-hidden="true">🎯</span><span class="vsx-title">主目的</span><span class="vsx-badge"></span></p>
-<p class="vsx-why" data-side="cq">コードを<b>信頼できて直しやすい</b>状態に保つ。リファクタが安全になり、保守コストが下がり、コードベースが整う。</p>
+<p class="vsx-why" data-side="cq"><b>2026 年 7 月 20 日</b>に GA。GitHub Advanced Security を補完する独立製品。コードの<b>信頼性・保守性とテストカバレッジ</b>を保ち、安全なリファクタ、保守コスト削減、コードベースの整理につなげる。</p>
 <p class="vsx-why" data-side="cs"><b>セキュリティ脆弱性とコーディングエラー</b>を本番に届く前に検出する。</p>
 </div>
 </details>
@@ -144,20 +142,16 @@ links:
 </div>
 </div>
 
-> 🔑 両方使う。Code Scanning は悪用可能なリスク、Code Quality は長期的なコードの健全性を守る。
-
 ## 対応言語 <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-quality/code-quality#supported-languages" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 CodeQL のルールベース解析は **C#, Go, Java, JS/TS, Python, Ruby の 6 言語のみ**。C/C++ や Swift などで使えるのは AI 解析とカバレッジだけ。
 
-<div class="tbl-fit">
+<div class="tbl-compact">
 
 | 機能 | ✅ CodeQL 対応 6 言語 | ⚠️ C/C++ ほか |
 | --- | --- | --- |
-| 🔍 PR の CodeQL finding + Autofix | ✅ | ❌ |
-| 📋 default branch の Standard findings | ✅ | ❌ |
-| 🤖 Agentic Autofix | ✅ | ❌ |
-| 🚧 finding による品質ゲート | ✅ | ❌ |
+| 🔍 PR の finding + Autofix、default branch の finding | ✅ | ❌ |
+| 🤖 Agentic Autofix と finding の品質ゲート | ✅ | ❌ |
 | 🧠 AI 解析（最近変更されたファイル） | ✅ | ✅ |
 | 🧪 カバレッジ（Cobertura XML） | ✅ | ✅ |
 
@@ -167,7 +161,7 @@ CodeQL のルールベース解析は **C#, Go, Java, JS/TS, Python, Ruby の 6 
 
 ## マージ前に修正
 
-AI がコードの大半を書くなら、品質を守るのは PR ごとの ruleset 品質ゲート。GitHub 社内では finding の **67.3%** をマージ前に解消している（<a class="retro-link" href="https://github.blog/changelog/2026-07-20-github-code-quality-is-now-generally-available/" target="_blank" rel="noopener noreferrer">GitHub,&nbsp;2026&nbsp;↗</a>）。
+AI がコードを書く時代、PR ごとの ruleset 品質ゲートが品質を守る。GitHub 社内では finding の **67.3%** をマージ前に解消（<a class="retro-link" href="https://github.blog/changelog/2026-07-20-github-code-quality-is-now-generally-available/" target="_blank" rel="noopener noreferrer">GitHub,&nbsp;2026&nbsp;↗</a>）。
 
 <div class="tbl-compact">
 
@@ -190,18 +184,19 @@ AI がコードの大半を書くなら、品質を守るのは PR ごとの rul
 
 | ステップ | 何が起きるか |
 | --- | --- |
-| 🎯 選択 | **Security and quality → Code quality → Standard findings**。同じページから **1〜25 件**を選択。対象は default branch の CodeQL finding。 |
-| 🤖 委任 | **Assign to Copilot** で cloud agent がブランチ上で修正し、検証して PR を作成。1 件の場合も **Generate fix** に代わる共通フロー。 |
-| 👀 レビュー | 修正内容と CI の結果を確認してマージ。人によるレビューは引き続き必要。 |
+| 🎯 選択 | **Security and quality → Code quality → Standard findings** で default branch の CodeQL finding を同じページから **1〜25 件**選択。 |
+| 🤖 委任 | **Assign to Copilot** は 1 件でも **Generate fix** に代わる。cloud agent がブランチを修正・検証し PR を作成。 |
+| 👀 レビュー | 修正と CI を確認してマージ。人のレビューは引き続き必要。 |
 
 </div>
 
-- 🛂 **利用条件**: Code Quality を有効化した **Team / Enterprise Cloud**（data residency を含む）。既存の enterprise ポリシーを継承し、一括修正専用の設定は不要。
-- 💳 **コスト**: **AI credits** を消費。委任には **Copilot ライセンス**も必要。
+**利用条件:** Code Quality を有効化した **Team / Enterprise Cloud**（data residency 含む）。既存 enterprise ポリシーを継承し、一括修正専用設定は不要。**コスト:** AI credits と Copilot ライセンス。
 
 ## 誰が何をできる? <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/maintain-quality-code/explore-code-quality" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
 **Org owner** は全 repo の Admin。その他のメンバーには、以下の repo 権限が必要。
+
+<div class="tbl-compact">
 
 | 操作 | 場所 | 標準のアクセス権 |
 | --- | --- | --- |
@@ -210,34 +205,31 @@ AI がコードの大半を書くなら、品質を守るのは PR ごとの rul
 | finding を却下する | Repo → Standard findings | **Write+** |
 | Copilot に割り当てる | Repo → Standard findings | 対象 repo の **Write+** |
 
-org dashboard で repo を開き、**Standard findings → Assign to Copilot**。
+</div>
 
-**Security manager** 単独では **Read** のみ。repo の **Write** は付かない。
-
-Code Quality 有効化済み、標準ロール（2026-11-10）。**Write+** = Write / Maintain / Admin。
+org dashboard で repo を開き **Standard findings → Assign to Copilot**。Security manager 単独では Read のみ。**Write+** = Write / Maintain / Admin（有効化済みの標準ロール、2026-11-10）。
 
 ## 有効化と展開 <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/maintain-quality-code/enable-code-quality" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**有効化は 3 階層のカスケード**
+<div class="tbl-compact">
 
-- 🏛️ **Enterprise** — `Policies → Code quality` で Organization の利用を許可
-- 🏢 **Organization** — `Settings → Code quality → Repository access` で対象リポジトリを指定
-- 📦 **Repository** — `Settings → Code quality → Enable code quality` で scan を有効化
+| 階層 | 有効化のカスケード |
+| --- | --- |
+| 🏛️ Enterprise | `Policies → Code quality` で Organization を許可 |
+| 🏢 Organization | `Settings → Code quality → Repository access` で repo を指定 |
+| 📦 Repository | `Settings → Code quality → Enable code quality` で scan を有効化 |
 
-**有効化する前に**
+</div>
 
-- ⚙️ **GitHub Actions** — 決定論的な CodeQL scan は Actions workflow で動く
-- 🏃 **Runner** — GitHub-hosted、または想定 label 付きの self-hosted
-- 🧪 **カバレッジ** — 既存テストの Cobertura XML を upload
-- 🧭 **品質ゲート** — ruleset は Evaluate mode で始めてからマージブロックへ
+**前提:** Actions workflow と GitHub-hosted または想定 label 付き self-hosted runner。テストの Cobertura XML を upload し、ruleset は Evaluate 後にマージをブロック。
 
-> 🏢 **展開状況は Organization 単位でしか確認できない。** dashboard と「Repository access」は Organization スコープで、Enterprise レベルではポリシーの許可リストと消費ライセンスしか見えない。
+展開状況は Organization の dashboard / Repository access で確認。Enterprise にはポリシーの許可リストと消費ライセンスのみ表示。
 
 <a class="dl-script" href="/theomonfort/scripts/gh-code-quality-inventory.sh" download>
   <span class="dl-script-ico">▼</span>
   <span class="dl-script-text">
     <strong>gh-code-quality-inventory.sh</strong>
-    <em>Enterprise slug を渡すだけで全 Organization を巡回し、Code Quality が有効なリポジトリを一覧化</em>
+    <em>Enterprise の全 Organization で有効な repo を一覧化</em>
   </span>
   <span class="dl-script-cmd">./gh-code-quality-inventory.sh &lt;enterprise&gt;</span>
 </a>
@@ -246,9 +238,7 @@ Code Quality 有効化済み、標準ロール（2026-11-10）。**Write+** = Wr
 
 **GitHub Enterprise Cloud** と **GitHub Team** で利用可能。
 
-<p class="spec-hint">▸ + でその項目の詳細を展開</p>
-
-<div class="spec-widget">
+<div class="spec-widget spec-compact">
 <table style="table-layout:fixed">
 <colgroup><col style="width:22%" /><col style="width:40%" /><col style="width:38%" /></colgroup>
 <thead>
@@ -257,7 +247,7 @@ Code Quality 有効化済み、標準ロール（2026-11-10）。**Write+** = Wr
 <tbody>
 <tr>
 <td style="white-space:normal">💺 基本ライセンス</td>
-<td><b>active committer 1 人あたり月額 $10</b>。有効化された repo に直近 90 日以内に commit が push されると active。</td>
+<td><b>active committer 1 人あたり月額 $10</b>。有効な repo に直近 90 日以内に commit を push すると active。</td>
 <td>
 <div class="spec-list">
 <details class="spec-item" name="cq-billing">
@@ -273,7 +263,7 @@ Code Quality 有効化済み、標準ロール（2026-11-10）。**Write+** = Wr
 </tr>
 <tr>
 <td style="white-space:normal">🤖 AI 機能</td>
-<td>AI 検出と Copilot-powered 機能は <b>GitHub AI credits</b> を消費。</td>
+<td>AI 検出と Copilot 機能は <b>GitHub AI credits</b> を消費。</td>
 <td>
 <div class="spec-list">
 <details class="spec-item" name="cq-billing">
@@ -289,7 +279,7 @@ Code Quality 有効化済み、標準ロール（2026-11-10）。**Write+** = Wr
 </tr>
 <tr>
 <td style="white-space:normal">⚙️ 決定論的 scan</td>
-<td>self-hosted runner を使わない場合、CodeQL workflow が <b>GitHub Actions minutes</b> を消費。</td>
+<td>self-hosted 以外では CodeQL workflow が <b>Actions minutes</b> を消費。</td>
 <td>
 <div class="spec-list">
 <details class="spec-item" name="cq-billing">

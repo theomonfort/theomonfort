@@ -65,13 +65,11 @@ links:
     <strong>Code Quality</strong> stops reliability and maintainability problems from becoming tomorrow's technical debt.
   </p>
   <p>
-    It combines <strong>CodeQL rules + AI-assisted analysis</strong>, suggests fixes in pull requests, measures repository health, and can block merges that miss your quality bar.
+    <strong>CodeQL rules + AI analysis</strong> suggest PR fixes, measure repository health, and block merges below your quality bar.
   </p>
 </div>
 
 ## What Code Quality covers <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-quality/code-quality" target="_blank" rel="noopener noreferrer">📖 Docs</a>
-
-Generally available since **July 20, 2026**. Its job is to keep code reliable, maintainable, and covered by tests as it ages. It is a **standalone product that sits next to GitHub Advanced Security**, not a feature bundled inside it.
 
 <div class="vsx-widget">
 <input class="vsx-radio" type="radio" name="cq-vs-product" id="cqvs-quality" checked />
@@ -87,7 +85,7 @@ Generally available since **July 20, 2026**. Its job is to keep code reliable, m
 <summary class="vsx-btn"><span class="vsx-icon" aria-hidden="true">🎯</span><span class="vsx-name">Primary goal</span></summary>
 <div class="vsx-pane">
 <p class="vsx-head"><span class="vsx-icon" aria-hidden="true">🎯</span><span class="vsx-title">Primary goal</span><span class="vsx-badge"></span></p>
-<p class="vsx-why" data-side="cq">Keep the code <b>reliable and maintainable</b>: safer refactors, lower maintenance cost, a cleaner codebase.</p>
+<p class="vsx-why" data-side="cq">GA since <b>July 20, 2026</b>, this standalone product complements GitHub Advanced Security. It keeps code <b>reliable, maintainable and tested</b>: safer refactors, lower maintenance cost and a cleaner codebase.</p>
 <p class="vsx-why" data-side="cs">Catch <b>security vulnerabilities and coding errors</b> before they reach production.</p>
 </div>
 </details>
@@ -144,26 +142,22 @@ Generally available since **July 20, 2026**. Its job is to keep code reliable, m
 </div>
 </div>
 
-> 🔑 Use both: Code Scanning protects against exploitable risk; Code Quality protects long-term code health.
-
 ## Language support <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-quality/code-quality#supported-languages" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-Rule-based CodeQL analysis covers **6 languages only: C#, Go, Java, JS/TS, Python, Ruby**. C/C++, Swift and the rest get AI analysis and coverage, nothing more.
+CodeQL covers **C#, Go, Java, JS/TS, Python and Ruby**. Other languages get AI analysis and coverage only.
 
-<div class="tbl-fit">
+<div class="tbl-compact">
 
 | Feature | ✅ 6 CodeQL languages | ⚠️ C/C++ and others |
 | --- | --- | --- |
-| 🔍 CodeQL findings + Autofix on PRs | ✅ | ❌ |
-| 📋 Standard findings on the default branch | ✅ | ❌ |
-| 🤖 Agentic Autofix | ✅ | ❌ |
-| 🚧 Quality gate on findings | ✅ | ❌ |
+| 🔍 PR findings + Autofix; default-branch findings | ✅ | ❌ |
+| 🤖 Agentic Autofix and quality gates | ✅ | ❌ |
 | 🧠 AI analysis (recently changed files) | ✅ | ✅ |
 | 🧪 Coverage (Cobertura XML) | ✅ | ✅ |
 
 </div>
 
-> 💡 Only CodeQL findings show up on pull requests. For C/C++ PR reviews, add <a class="retro-link" href="/theomonfort/en/playbook/copilot-code-review/">Copilot code review ↗</a> (a separate product).
+> 💡 Only CodeQL findings appear on PRs. For C/C++, add <a class="retro-link" href="/theomonfort/en/playbook/copilot-code-review/">Copilot code review ↗</a> (separate product).
 
 ## Catch issues before merge
 
@@ -190,18 +184,19 @@ When AI writes most of the code, a ruleset quality gate on every PR is what hold
 
 | Step | What happens |
 | --- | --- |
-| 🎯 Select | **Security and quality → Code quality → Standard findings**. Select **1–25 findings on one page**: CodeQL findings on the default branch. |
-| 🤖 Delegate | **Assign to Copilot**: cloud agent edits a branch, validates changes, and opens a PR. Replaces **Generate fix**, even for one finding. |
-| 👀 Review | Review the proposed fixes and CI results, then merge. The agent does not replace human review. |
+| 🎯 Select | **Security and quality → Code quality → Standard findings**: select **1–25 default-branch CodeQL findings on one page**. |
+| 🤖 Delegate | **Assign to Copilot** replaces **Generate fix**, even for one finding. The cloud agent edits a branch, validates and opens a PR. |
+| 👀 Review | Review fixes and CI, then merge. Human review remains necessary. |
 
 </div>
 
-- 🛂 **Access**: Code Quality enabled on **Team / Enterprise Cloud** (data residency included). Existing enterprise policy; no separate bulk setting.
-- 💳 **Cost**: **AI credits** + a **Copilot license** for delegation.
+**Access:** Code Quality on **Team / Enterprise Cloud** (including data residency), with existing enterprise policy and no separate bulk setting. **Cost:** AI credits and a Copilot license.
 
 ## Who can do what? <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/maintain-quality-code/explore-code-quality" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**Org owners:** Admin on every repo. **Other members:** permissions below.
+**Org owners:** Admin on every repo. **Others:** permissions below.
+
+<div class="tbl-compact">
 
 | Action | Where | Default access |
 | --- | --- | --- |
@@ -210,34 +205,31 @@ When AI writes most of the code, a ruleset quality gate on every PR is what hold
 | Dismiss a finding | Repo → Standard findings | **Write+** |
 | Assign Copilot | Repo → Standard findings | **Write+** on the target repo |
 
-**From the org dashboard:** open a repo, then **Standard findings → Assign to Copilot**.
+</div>
 
-**Security manager alone grants Read, not Write.**
-
-Code Quality enabled, standard roles (2026-11-10). **Write+** = Write / Maintain / Admin.
+Org dashboard: open the repo, then **Standard findings → Assign to Copilot**. Security manager alone grants Read, not Write. **Write+** = Write / Maintain / Admin (standard roles, Code Quality enabled; 2026-11-10).
 
 ## Enable and roll out <a class="h2-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/how-tos/maintain-quality-code/enable-code-quality" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-**Enablement is a three-level cascade**
+<div class="tbl-compact">
 
-- 🏛️ **Enterprise** — `Policies → Code quality` allows organizations to use it
-- 🏢 **Organization** — `Settings → Code quality → Repository access` picks the repositories in scope
-- 📦 **Repository** — `Settings → Code quality → Enable code quality` turns the scans on
+| Level | Enablement cascade |
+| --- | --- |
+| 🏛️ Enterprise | `Policies → Code quality`: allow organizations |
+| 🏢 Organization | `Settings → Code quality → Repository access`: select repositories |
+| 📦 Repository | `Settings → Code quality → Enable code quality`: enable scans |
 
-**Before you switch it on**
+</div>
 
-- ⚙️ **GitHub Actions** — deterministic CodeQL scans run as Actions workflows
-- 🏃 **Runners** — GitHub-hosted, or self-hosted with the expected label
-- 🧪 **Coverage** — upload Cobertura XML from your existing test workflow
-- 🧭 **Gates** — start rulesets in evaluate mode, then switch to merge blocking
+**Prerequisites:** Actions workflows, GitHub-hosted or labeled self-hosted runners; upload test Cobertura XML. Evaluate rulesets before enforcing.
 
-> 🏢 **Rollout can only be checked per organization.** The dashboard and "Repository access" are organization-scoped; the enterprise level only shows the policy allow-list and consumed licenses.
+Rollout: org dashboard / Repository access only. Enterprise shows the policy allow-list and consumed licenses.
 
 <a class="dl-script" href="/theomonfort/scripts/gh-code-quality-inventory.sh" download>
   <span class="dl-script-ico">▼</span>
   <span class="dl-script-text">
     <strong>gh-code-quality-inventory.sh</strong>
-    <em>Give it an enterprise slug: it walks every organization and reports which repositories have Code Quality enabled</em>
+    <em>List enabled repositories across an enterprise's organizations</em>
   </span>
   <span class="dl-script-cmd">./gh-code-quality-inventory.sh &lt;enterprise&gt;</span>
 </a>
@@ -246,9 +238,7 @@ Code Quality enabled, standard roles (2026-11-10). **Write+** = Write / Maintain
 
 Available on **GitHub Enterprise Cloud** and **GitHub Team**.
 
-<p class="spec-hint">▸ + UNFOLDS THE DETAIL FOR THAT COST LINE</p>
-
-<div class="spec-widget">
+<div class="spec-widget spec-compact">
 <table style="table-layout:fixed">
 <colgroup><col style="width:22%" /><col style="width:40%" /><col style="width:38%" /></colgroup>
 <thead>
@@ -257,7 +247,7 @@ Available on **GitHub Enterprise Cloud** and **GitHub Team**.
 <tbody>
 <tr>
 <td style="white-space:normal">💺 Base license</td>
-<td><b>$10 per active committer / month</b>. Active means a commit was pushed to an enabled repository in the last 90 days.</td>
+<td><b>$10 / active committer / month</b>. Active: a commit pushed to an enabled repo in the last 90 days.</td>
 <td>
 <div class="spec-list">
 <details class="spec-item" name="cq-billing">
@@ -273,12 +263,12 @@ Available on **GitHub Enterprise Cloud** and **GitHub Team**.
 </tr>
 <tr>
 <td style="white-space:normal">🤖 AI-powered work</td>
-<td>AI-assisted detection and Copilot-powered features consume <b>GitHub AI credits</b>.</td>
+<td>AI detection and Copilot features use <b>GitHub AI credits</b>.</td>
 <td>
 <div class="spec-list">
 <details class="spec-item" name="cq-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">🪪</span><span class="spec-key">Copilot license</span><span class="spec-toggle" aria-hidden="true"></span></summary>
-<p class="spec-what"><b>Not required</b> for AI-assisted detection or Autofix. Only the optional delegation of remediation to Copilot needs a Copilot license.</p>
+<p class="spec-what">AI detection and Autofix <b>do not need a Copilot license</b>. Only delegation to Copilot requires one.</p>
 </details>
 <details class="spec-item" name="cq-billing">
 <summary class="spec-btn"><span class="spec-icon" aria-hidden="true">💳</span><span class="spec-key">Cap the spend</span><span class="spec-toggle" aria-hidden="true"></span></summary>
@@ -289,7 +279,7 @@ Available on **GitHub Enterprise Cloud** and **GitHub Team**.
 </tr>
 <tr>
 <td style="white-space:normal">⚙️ Deterministic scans</td>
-<td>CodeQL workflows consume <b>GitHub Actions minutes</b>, unless self-hosted runners are used.</td>
+<td>CodeQL workflows use <b>Actions minutes</b>, unless self-hosted.</td>
 <td>
 <div class="spec-list">
 <details class="spec-item" name="cq-billing">
