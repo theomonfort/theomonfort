@@ -4451,6 +4451,23 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
   .prose-akq .ctl-btn:focus-visible { outline: 2px solid var(--c-crt-amber); outline-offset: 2px; }
   .prose-akq .ctl-icon { flex: none; font-size: 1em; line-height: 1; }
   .prose-akq .ctl-name { flex: 0 1 auto; min-width: 0; overflow-wrap: break-word; }
+  .prose-akq .ctl-new {
+    display: inline-block;
+    margin-left: 0.35em;
+    padding: 0.05em 0.36em;
+    font-family: var(--font-mono-hud), var(--font-prose);
+    font-size: 0.66em;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: 0.05em;
+    vertical-align: 0.15em;
+    white-space: nowrap;
+    color: var(--c-crt-amber);
+    background: rgb(var(--rgb-crt-amber) / 0.12);
+    border: 1px solid rgb(var(--rgb-crt-amber) / 0.45);
+    border-radius: 2px;
+    text-decoration: none;
+  }
   .prose-akq .ctl-check {
     flex: none;
     width: 1.1em;
@@ -6047,6 +6064,13 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
     font-size: 0.78rem;
     color: var(--cat-color, var(--c-crt-amber));
     min-width: 1.6rem;
+  }
+  html[data-theme='retro'] .prose-akq .ctl-new {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.5em;
+    font-weight: 700;
+    border-radius: 0;
+    text-shadow: 0 0 6px rgb(var(--rgb-crt-amber) / 0.45);
   }
   html[data-theme='retro'] .present-toc .toc-new-badge {
     font-family: 'Press Start 2P', monospace;

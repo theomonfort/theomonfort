@@ -154,13 +154,23 @@ links:
 <p>Configure it across the org: open <a href="https://github.com/organizations/theomonfort-org/settings/security_products/configurations/edit/250834" target="_blank" rel="noopener noreferrer">theomonfort-org → Security configuration ↗</a>, set <b>Push protection</b> to <b>Enabled</b> and <b>Bypass privileges</b> to <b>Specific actors</b>, then select the actors. Click <b>Save configuration</b> and apply it to the target repos. Configuring delegated bypass at the org / enterprise level disables the repo-level setting.</p>
 <p>Demo the request flow as a <b>contributor without bypass privileges</b> (org owners / security managers can always bypass). Submit a request with a justification from the block page; reviewers receive an email notification.</p>
 <p>Review requests: <a href="https://github.com/theomonfort-org/ghas-test-1/security/secret_scanning/bypass_requests" target="_blank" rel="noopener noreferrer">ghas-test-1 → Push protection bypass requests ↗</a> (<b>Security and quality → Requests → Push protection bypass</b>). Filter by <b>All statuses → Open</b>, open a request, and show <b>Approve bypass request</b> / <b>Deny bypass request</b>. After approval, the requester pushes again.</p>
-<p>Gate the merge too: in <a href="https://github.com/theomonfort-org/ghas-test-1/settings/rules/new?target=branch&amp;enforcement=disabled" target="_blank" rel="noopener noreferrer">ghas-test-1 → New branch ruleset ↗</a>, turn on <b>Require secret scanning alerts are resolved</b> (Preview).</p>
-<p class="demo-out">An <b>I'll fix it later</b> secret is still an open alert, so the PR merge is blocked. <b>It's used in tests</b> doesn't block.</p>
+</li>
+<li>
+<p class="demo-step-title">MERGE PROTECTION</p>
+<p>Open the org ruleset: <a href="https://github.com/organizations/theomonfort-org/settings/rules/18296119" target="_blank" rel="noopener noreferrer">theomonfort-org → CODE REVIEW ORG LVL ↗</a> (<b>Active</b>, targets the default branch).</p>
+<p><b>Require secret scanning alerts are resolved</b> (Preview) is on, scoped to <b>Provider patterns</b>. The same ruleset also holds Copilot code review, code scanning, and code quality rules.</p>
+<p>In <code class="demo-path">ghas-test-1</code>, open a PR to <code class="demo-path">main</code> from the branch you bypassed with <b>I'll fix it later</b>.</p>
+<p class="demo-out">The secret is still an open alert, so the PR merge is blocked. A secret bypassed with <b>It's used in tests</b> doesn't block.</p>
 </li>
 <li>
 <p class="demo-step-title">VALIDITY CHECK</p>
 <p>In the default view under <b>Security → Secret scanning</b>, use the <b>Validity filter</b>.</p>
 <p class="demo-out">Triage by real risk: start with the secrets that are still live.</p>
+</li>
+<li>
+<p class="demo-step-title">PUBLIC MONITORING</p>
+<p>Enterprise-level report: open <a href="https://github.com/enterprises/octodemo/security/public-monitoring" target="_blank" rel="noopener noreferrer">octodemo → Public monitoring ↗</a> and review the findings.</p>
+<p>Repository-level alerts: open <a href="https://github.com/theomonfort-org/ghas-test-1/security/secret-scanning" target="_blank" rel="noopener noreferrer">ghas-test-1 → Secret scanning ↗</a>. Compare the enterprise Public monitoring report with this repository's Secret scanning alert list.</p>
 </li>
 </ol>
 </div>
@@ -179,7 +189,7 @@ links:
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🚧</span><span class="ctl-name">Merge protection</span><span class="ctl-when">Before PR merge</span><a class="ctl-doc" href="https://github.blog/changelog/2026-09-09-block-pull-requests-with-exposed-secrets-from-merging/" target="_blank" rel="noopener noreferrer">Changelog</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🚧</span><span class="ctl-name">Merge protection <span class="ctl-new">New!</span></span><span class="ctl-when">Before PR merge</span><a class="ctl-doc" href="https://github.blog/changelog/2026-09-09-block-pull-requests-with-exposed-secrets-from-merging/" target="_blank" rel="noopener noreferrer">Changelog</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">Setup</span><span class="ctl-v">Add <b>Rulesets → Require secret scanning alerts are resolved</b> (Repo / Org / Enterprise)</span></p>
 <p class="ctl-row"><span class="ctl-k">Merge gate</span><span class="ctl-v">Head scan complete, <b>no open PR-introduced alerts</b>. Public preview, Secret Protection / GHAS. Ruleset bypass applies</span></p>
@@ -187,10 +197,10 @@ links:
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔍</span><span class="ctl-name">Secret scanning alerts</span><span class="ctl-when">After commit, continuous</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/secret-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔍</span><span class="ctl-name">Secret scanning alerts <span class="ctl-new">New!</span></span><span class="ctl-when">After commit, continuous</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/secret-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">Notifies you of detected secrets in the <b>Security and quality</b> tab</span></p>
-<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Full Git history on all branches, Issues, PRs, GitHub Discussions, Wikis, secret gists, and <a class="retro-link" href="/theomonfort/en/changelog/#2026-11-09-secret-scanning-workflow-logs">workflow logs ↗</a> (public preview). Existing content is <b>rescanned</b> as new secret types ship</span></p>
+<p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Full Git history on all branches, Issues, PRs, GitHub Discussions, Wikis, secret gists, and <a class="retro-link" href="https://github.blog/changelog/2026-11-09-secret-scanning-detects-secrets-in-github-actions-workflow-logs/" target="_blank" rel="noopener noreferrer">workflow logs ↗</a> <span class="ctl-new">New!</span> (public preview). Existing content is <b>rescanned</b> as new secret types ship</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
@@ -208,7 +218,7 @@ links:
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🌐</span><span class="ctl-name">Public monitoring</span><span class="ctl-when">Real-time across github.com</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🌐</span><span class="ctl-name">Public monitoring <span class="ctl-new">New!</span></span><span class="ctl-when">Real-time across github.com</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">What it does</span><span class="ctl-v">Detects secrets leaked <b>outside your own repos</b> (personal forks, OSS, public issues and PRs) and attributes them to your enterprise</span></p>
 <p class="ctl-row"><span class="ctl-k">Scope</span><span class="ctl-v">Public content only, and it <b>never scans private repos</b>. GHEC Enterprise</span></p>

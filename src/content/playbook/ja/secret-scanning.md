@@ -154,13 +154,23 @@ links:
 <p>Org でまとめて設定：<a href="https://github.com/organizations/theomonfort-org/settings/security_products/configurations/edit/250834" target="_blank" rel="noopener noreferrer">theomonfort-org → Security configuration ↗</a> で <b>Push protection</b> を <b>Enabled</b>、<b>Bypass privileges</b> を <b>Specific actors</b> にして対象を選ぶ。<b>Save configuration</b> 後、対象 repo に適用する。Org / Enterprise 側で delegated bypass を設定すると、repo 側の設定は変更できなくなる。</p>
 <p>申請フローは <b>bypass 権限のない contributor</b> で見せる（Org owner / security manager は常に bypass 可能）。ブロック画面から理由を添えて申請すると、レビュアーにメール通知が届く。</p>
 <p>申請一覧：<a href="https://github.com/theomonfort-org/ghas-test-1/security/secret_scanning/bypass_requests" target="_blank" rel="noopener noreferrer">ghas-test-1 → Push protection bypass requests ↗</a>（<b>Security and quality → Requests → Push protection bypass</b>）。<b>All statuses → Open</b> で絞り込み、申請を開いて <b>Approve bypass request</b> / <b>Deny bypass request</b> を見せる。承認後は申請者が再度 push する。</p>
-<p>merge でも止める：<a href="https://github.com/theomonfort-org/ghas-test-1/settings/rules/new?target=branch&amp;enforcement=disabled" target="_blank" rel="noopener noreferrer">ghas-test-1 → New branch ruleset ↗</a> で <b>Require secret scanning alerts are resolved</b>（Preview）を ON にする。</p>
-<p class="demo-out"><b>I'll fix it later</b> の secret は open アラートなので PR の merge がブロックされる。<b>It's used in tests</b> は止まらない。</p>
+</li>
+<li>
+<p class="demo-step-title">MERGE PROTECTION</p>
+<p>Org の ruleset を開く：<a href="https://github.com/organizations/theomonfort-org/settings/rules/18296119" target="_blank" rel="noopener noreferrer">theomonfort-org → CODE REVIEW ORG LVL ↗</a>（<b>Active</b>、対象はデフォルトブランチ）。</p>
+<p><b>Require secret scanning alerts are resolved</b>（Preview）が ON、対象は <b>Provider patterns</b>。同じ ruleset に Copilot code review・Code scanning・Code quality のルールもある。</p>
+<p><code class="demo-path">ghas-test-1</code> で、<b>I'll fix it later</b> で bypass したブランチから <code class="demo-path">main</code> への PR を作成する。</p>
+<p class="demo-out">secret は open アラートなので PR の merge がブロックされる。<b>It's used in tests</b> で bypass した secret は止まらない。</p>
 </li>
 <li>
 <p class="demo-step-title">VALIDITY CHECK</p>
 <p><b>Security → Secret scanning</b> の default ビューで <b>Validity フィルター</b>を使う。</p>
 <p class="demo-out">「今も有効な secret」から優先的に対応でき、実リスク順にトリアージできる。</p>
+</li>
+<li>
+<p class="demo-step-title">PUBLIC MONITORING</p>
+<p>Enterprise レベルのレポート：<a href="https://github.com/enterprises/octodemo/security/public-monitoring" target="_blank" rel="noopener noreferrer">octodemo → Public monitoring ↗</a> を開き、検出結果を確認する。</p>
+<p>Repo レベルのアラート：<a href="https://github.com/theomonfort-org/ghas-test-1/security/secret-scanning" target="_blank" rel="noopener noreferrer">ghas-test-1 → Secret scanning ↗</a> を開く。Enterprise の Public monitoring レポートと、このリポジトリの Secret scanning アラート一覧を比較する。</p>
 </li>
 </ol>
 </div>
@@ -179,7 +189,7 @@ links:
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🚧</span><span class="ctl-name">Merge protection</span><span class="ctl-when">PR のマージ前</span><a class="ctl-doc" href="https://github.blog/changelog/2026-09-09-block-pull-requests-with-exposed-secrets-from-merging/" target="_blank" rel="noopener noreferrer">Changelog</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🚧</span><span class="ctl-name">Merge protection <span class="ctl-new">New!</span></span><span class="ctl-when">PR のマージ前</span><a class="ctl-doc" href="https://github.blog/changelog/2026-09-09-block-pull-requests-with-exposed-secrets-from-merging/" target="_blank" rel="noopener noreferrer">Changelog</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">設定方法</span><span class="ctl-v"><b>Rulesets → Require secret scanning alerts are resolved</b> を追加（Repo / Org / Enterprise）</span></p>
 <p class="ctl-row"><span class="ctl-k">マージ条件</span><span class="ctl-v">最新コミットのスキャン完了 + <b>PR が持ち込む未解決アラートなし</b>。Secret Protection / GHAS 向け public preview。ruleset の bypass は有効</span></p>
@@ -187,10 +197,10 @@ links:
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔍</span><span class="ctl-name">Secret scanning alerts</span><span class="ctl-when">コミット後・常時</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/secret-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🔍</span><span class="ctl-name">Secret scanning alerts <span class="ctl-new">New!</span></span><span class="ctl-when">コミット後・常時</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/secret-scanning" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">検出された secret を <b>Security and quality</b> タブに通知</span></p>
-<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">全ブランチの Git 履歴全体・Issue・PR・GitHub Discussions・Wiki・secret gists・<a class="retro-link" href="/theomonfort/changelog/#2026-11-09-secret-scanning-workflow-logs">Workflow logs ↗</a>（パブリックプレビュー）。既存の対象は新しい secret type の追加時に<b>再スキャン</b>される</span></p>
+<p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">全ブランチの Git 履歴全体・Issue・PR・GitHub Discussions・Wiki・secret gists・<a class="retro-link" href="https://github.blog/changelog/2026-11-09-secret-scanning-detects-secrets-in-github-actions-workflow-logs/" target="_blank" rel="noopener noreferrer">Workflow logs ↗</a> <span class="ctl-new">New!</span>（パブリックプレビュー）。既存の対象は新しい secret type の追加時に<b>再スキャン</b>される</span></p>
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
@@ -208,7 +218,7 @@ links:
 </div>
 </details>
 <details class="ctl-item" name="ss-controls">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🌐</span><span class="ctl-name">Public monitoring</span><span class="ctl-when">github.com 全体をリアルタイム</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">🌐</span><span class="ctl-name">Public monitoring <span class="ctl-new">New!</span></span><span class="ctl-when">github.com 全体をリアルタイム</span><a class="ctl-doc" href="https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/public-monitoring" target="_blank" rel="noopener noreferrer">Docs</a><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">何をする？</span><span class="ctl-v">自分の repo の外(個人フォーク・OSS・公開 issue / PR)で漏れた secret を <b>エンタープライズに帰属</b>させて通知</span></p>
 <p class="ctl-row"><span class="ctl-k">対象範囲</span><span class="ctl-v">公開コンテンツのみ。<b>private repo は絶対にスキャンしない</b>。GHEC Enterprise 向け</span></p>
