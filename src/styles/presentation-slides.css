@@ -2,6 +2,7 @@
 @import './presentation-develop-cloud.css';
 @import './presentation-operate.css';
 @import './presentation-administration.css';
+@import './presentation-secure.css';
 
 body.present-mode .playbook-detail:is([data-playbook-slug="github-copilot"], [data-playbook-slug="hands-on"]) {
   --presentation-slide-space: 0.3em;

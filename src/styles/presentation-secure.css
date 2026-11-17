@@ -1,0 +1,41 @@
+/* Test & Secure presentation layout. Shared category rules live here; per-entry rules live in their slug file. */
+@import './presentation-secure-secret-scanning.css';
+@import './presentation-secure-github-advanced-security.css';
+@import './presentation-secure-code-quality.css';
+@import './presentation-secure-dependabot.css';
+@import './presentation-secure-code-scanning.css';
+@import './presentation-secure-github-actions.css';
+
+body.present-mode .playbook-detail[data-category="secure"] .links-aside {
+  padding: 1rem 1.2rem;
+}
+
+body.present-mode .playbook-detail[data-category="secure"] .links-aside > div {
+  columns: 3;
+  column-gap: 2rem;
+}
+
+body.present-mode .playbook-detail[data-category="secure"] .links-aside > div > div {
+  min-width: 0;
+  margin: 0 0 0.9rem;
+}
+
+body.present-mode .playbook-detail[data-category="secure"] .links-aside-group {
+  break-after: avoid;
+}
+
+body.present-mode .playbook-detail[data-category="secure"] .links-aside :is(a, h3) {
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+body.present-mode .playbook-detail[data-category="secure"] .links-aside li {
+  margin-block: 0.2em;
+  font-size: 20px;
+  line-height: 1.35;
+  break-inside: avoid;
+}
+
+body.present-mode .playbook-detail[data-category="secure"] .links-aside :is(.links-aside-title, .links-aside-group) {
+  margin-bottom: 0.4rem;
+}
