@@ -227,7 +227,7 @@ PR を中心にブランチをどう構成するか。リリース頻度に合�
 
 <div class="pr-compact pr-stack">
 
-各 PR が 1 つ下のブランチを base にする。巨大な差分ではなく **小さなレイヤーごとにレビュー**。public preview は **2026-07-30** から。
+各 PR が 1 つ下のブランチを base にし、巨大な差分ではなく **小さなレイヤーごとにレビュー**（public preview: **2026-07-30**）。
 
 <div class="split-image">
 <div class="figtabs">
@@ -236,179 +236,207 @@ PR を中心にブランチをどう構成するか。リリース頻度に合�
 <input class="figtabs-radio" type="radio" name="stack-merge-method" id="smm-3">
 <div class="figtabs-bar">
 <label class="figtabs-tab" for="smm-1">マージコミット</label>
-<label class="figtabs-tab" for="smm-2">スカッシュ</label>
-<label class="figtabs-tab" for="smm-3">リベース</label>
+<label class="figtabs-tab" for="smm-2">スカッシュしてマージ</label>
+<label class="figtabs-tab" for="smm-3">リベースしてマージ</label>
 </div>
 <div class="figtabs-panel" data-idx="1">
-<svg viewBox="0 0 900 372" role="img" aria-label="マージコミットを作成: 各ブランチのコミットはそのまま残り、スタック全体が 1 つのマージコミットで main に入る">
+<svg viewBox="0 0 860 302" role="img" aria-label="マージコミット: 6 個のブランチコミットはそのまま残り、親を 2 つ持つマージコミット M 1 つで main に合流する">
   <defs>
-    <marker id="stk-mc" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
+    <marker id="stk-mc" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 3.5 L0 7 Z" fill="#8fa6bc"/>
+    </marker>
+    <marker id="stk-mc-blue" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 3.5 L0 7 Z" fill="#4ec3ff"/>
+    </marker>
+    <marker id="stk-mc-amber" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 3.5 L0 7 Z" fill="var(--c-crt-amber)"/>
     </marker>
   </defs>
-  <rect x="16" y="31" width="118" height="34" rx="4" fill="#a56cff"/><text x="75" y="53" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-c</text>
-  <rect x="16" y="121" width="118" height="34" rx="4" fill="#17d8e0"/><text x="75" y="143" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-b</text>
-  <rect x="16" y="211" width="118" height="34" rx="4" fill="#2fbf76"/><text x="75" y="233" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-a</text>
-  <rect x="16" y="301" width="118" height="34" rx="4" fill="#4ec3ff"/><text x="75" y="323" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">main</text>
-  <g font-size="13" font-weight="bold" text-anchor="middle">
-    <rect x="144" y="33" width="124" height="30" rx="4" fill="#131a2b" stroke="#a56cff" stroke-width="2"/><text x="206" y="53" fill="#a56cff">base: feat-b</text>
-    <rect x="144" y="123" width="124" height="30" rx="4" fill="#131a2b" stroke="#17d8e0" stroke-width="2"/><text x="206" y="143" fill="#17d8e0">base: feat-a</text>
-    <rect x="144" y="213" width="124" height="30" rx="4" fill="#131a2b" stroke="#2fbf76" stroke-width="2"/><text x="206" y="233" fill="#2fbf76">base: main</text>
+  <rect x="6" y="27" width="152" height="36" rx="3" fill="#a56cff"/><text x="82" y="51" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">PR #3 · feat-c</text>
+  <rect x="164" y="29" width="104" height="32" rx="3" fill="var(--c-midnight)" stroke="#a56cff" stroke-width="1.8"/><text x="216" y="51" text-anchor="middle" fill="#a56cff" font-size="16" font-weight="700">→ feat-b</text>
+  <rect x="6" y="97" width="152" height="36" rx="3" fill="#17d8e0"/><text x="82" y="121" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">PR #2 · feat-b</text>
+  <rect x="164" y="99" width="104" height="32" rx="3" fill="var(--c-midnight)" stroke="#17d8e0" stroke-width="1.8"/><text x="216" y="121" text-anchor="middle" fill="#17d8e0" font-size="16" font-weight="700">→ feat-a</text>
+  <rect x="6" y="167" width="152" height="36" rx="3" fill="#2fbf76"/><text x="82" y="191" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">PR #1 · feat-a</text>
+  <rect x="164" y="169" width="104" height="32" rx="3" fill="var(--c-midnight)" stroke="#2fbf76" stroke-width="1.8"/><text x="216" y="191" text-anchor="middle" fill="#2fbf76" font-size="16" font-weight="700">→ main</text>
+  <rect x="6" y="239" width="152" height="36" rx="3" fill="#4ec3ff"/><text x="82" y="263" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">main</text>
+  <g stroke="#8fa6bc" stroke-width="2.6" fill="none">
+    <line x1="305" y1="244" x2="334" y2="199" marker-end="url(#stk-mc)"/>
+    <line x1="362" y1="185" x2="380" y2="185" marker-end="url(#stk-mc)"/>
+    <line x1="408" y1="172" x2="434" y2="129" marker-end="url(#stk-mc)"/>
+    <line x1="460" y1="115" x2="478" y2="115" marker-end="url(#stk-mc)"/>
+    <line x1="506" y1="102" x2="532" y2="59" marker-end="url(#stk-mc)"/>
+    <line x1="558" y1="45" x2="576" y2="45" marker-end="url(#stk-mc)"/>
   </g>
-  <g stroke="#7d8595" stroke-width="2.6" fill="none">
-    <line x1="217" y1="318" x2="752" y2="318" marker-end="url(#stk-mc)"/>
-  </g>
-  <g stroke="#7d8595" stroke-width="2.6" fill="none">
-    <line x1="313" y1="228" x2="326" y2="228" marker-end="url(#stk-mc)"/>
-    <line x1="413" y1="138" x2="426" y2="138" marker-end="url(#stk-mc)"/>
-    <line x1="513" y1="48" x2="526" y2="48" marker-end="url(#stk-mc)"/>
-    <line x1="213" y1="304" x2="287" y2="240" marker-end="url(#stk-mc)"/>
-    <line x1="357" y1="217" x2="390" y2="150" marker-end="url(#stk-mc)"/>
-    <line x1="457" y1="127" x2="490" y2="60" marker-end="url(#stk-mc)"/>
-  </g>
-  <circle cx="300" cy="228" r="13" fill="#2fbf76"/>
-  <circle cx="346" cy="228" r="13" fill="#2fbf76"/>
-  <circle cx="400" cy="138" r="13" fill="#17d8e0"/>
-  <circle cx="446" cy="138" r="13" fill="#17d8e0"/>
-  <circle cx="500" cy="48" r="13" fill="#a56cff"/>
-  <circle cx="546" cy="48" r="13" fill="#a56cff"/>
-  <g stroke="#7d8595" stroke-width="2.6" fill="none">
-    <line x1="557" y1="57" x2="761" y2="303" marker-end="url(#stk-mc)"/>
-  </g>
-  <circle cx="200" cy="318" r="17" fill="#4ec3ff"/>
-  <circle cx="780" cy="318" r="17" fill="#4ec3ff"/>
-  <g font-size="13" font-weight="bold" text-anchor="middle">
-    <text x="894" y="362" text-anchor="end" fill="#4ec3ff">マージコミット 1 つ (PR #1-3)</text>
-  </g>
+  <line x1="311" y1="257" x2="592" y2="257" stroke="#4ec3ff" stroke-width="3" marker-end="url(#stk-mc-blue)"/>
+  <line x1="597" y1="61" x2="613" y2="233" stroke="var(--c-crt-amber)" stroke-width="3" marker-end="url(#stk-mc-amber)"/>
+  <circle cx="294" cy="257" r="17" fill="#4ec3ff"/><text x="294" y="262" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14.5" font-weight="700">m0</text>
+  <circle cx="346" cy="185" r="16" fill="#2fbf76"/><text x="346" y="190" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14.5" font-weight="700">a1</text>
+  <circle cx="398" cy="185" r="16" fill="#2fbf76"/><text x="398" y="190" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14.5" font-weight="700">a2</text>
+  <circle cx="444" cy="115" r="16" fill="#17d8e0"/><text x="444" y="120" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14.5" font-weight="700">b1</text>
+  <circle cx="496" cy="115" r="16" fill="#17d8e0"/><text x="496" y="120" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14.5" font-weight="700">b2</text>
+  <circle cx="542" cy="45" r="16" fill="#a56cff"/><text x="542" y="50" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14.5" font-weight="700">c1</text>
+  <circle cx="594" cy="45" r="16" fill="#a56cff"/><text x="594" y="50" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14.5" font-weight="700">c2</text>
+  <circle cx="616" cy="257" r="20" fill="#4ec3ff" stroke="var(--c-crt-amber)" stroke-width="3"/><text x="616" y="263" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="18" font-weight="800">M</text>
+  <rect x="622" y="22" width="232" height="44" rx="3" fill="var(--c-midnight)" stroke="#2fbf76" stroke-width="1.6"/>
+  <text x="738" y="50" text-anchor="middle" fill="#2fbf76" font-size="15.5" font-weight="700">✓ 6 コミット (a1..c2) を保持</text>
+  <line x1="636" y1="250" x2="648" y2="240" stroke="var(--c-crt-amber)" stroke-width="1.8" stroke-dasharray="4 3"/>
+  <rect x="648" y="164" width="206" height="120" rx="3" fill="var(--c-midnight)" stroke="var(--c-crt-amber)" stroke-width="1.8"/>
+  <text x="660" y="191" fill="var(--c-crt-amber)" font-size="16" font-weight="700">M = マージコミット 1 つ</text>
+  <text x="660" y="218" fill="var(--c-phosphor)" font-size="15.5" font-weight="600">親 2 つ: main + c2</text>
+  <text x="660" y="245" fill="var(--c-fg-body)" font-size="15">差分 = PR #1–3 の統合</text>
+  <text x="660" y="270" fill="var(--c-fg-muted)" font-size="15">新規コード追加なし</text>
 </svg>
-<p class="figtabs-cap">ブランチのコミットはそのまま残り、<b>スタック全体が 1 つのマージコミット</b>で入る。履歴は最も詳しい。</p>
+<div class="pr-method-card">
+  <p class="pr-method-summary">6 個のコミットはそのまま残り、<b>2 つの親を持つ橋渡しコミット <code>M</code></b>（<code>main</code> + <code>c2</code>）で合流。</p>
+  <p class="pr-method-pro">✅ <b>長所:</b> 個々のコミット履歴、元の SHA、細かい <code>git blame</code> を 100% 保持。</p>
+  <p class="pr-method-con">⚠️ <b>短所:</b> <code>wip</code> 等の細かいコミットも残り、分岐ループで履歴が複雑になりやすい。</p>
+</div>
 </div>
 <div class="figtabs-panel" data-idx="2">
-<svg viewBox="0 0 900 372" role="img" aria-label="スカッシュしてマージ: 各 PR は main 上で 1 つのコミットにまとまる">
+<svg viewBox="0 0 860 302" role="img" aria-label="スカッシュしてマージ: PR ごとに 1 つのコミットへ圧縮され、main は直線的な履歴になる">
   <defs>
-    <marker id="stk-sq" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
+    <marker id="stk-sq-line" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 3.5 L0 7 Z" fill="#4ec3ff"/>
+    </marker>
+    <marker id="stk-sq-g" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 3.5 L0 7 Z" fill="#2fbf76"/>
+    </marker>
+    <marker id="stk-sq-c" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 3.5 L0 7 Z" fill="#17d8e0"/>
+    </marker>
+    <marker id="stk-sq-p" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 3.5 L0 7 Z" fill="#a56cff"/>
     </marker>
   </defs>
-  <rect x="16" y="31" width="118" height="34" rx="4" fill="#a56cff"/><text x="75" y="53" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-c</text>
-  <rect x="16" y="121" width="118" height="34" rx="4" fill="#17d8e0"/><text x="75" y="143" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-b</text>
-  <rect x="16" y="211" width="118" height="34" rx="4" fill="#2fbf76"/><text x="75" y="233" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-a</text>
-  <rect x="16" y="301" width="118" height="34" rx="4" fill="#4ec3ff"/><text x="75" y="323" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">main</text>
-  <g font-size="13" font-weight="bold" text-anchor="middle">
-    <rect x="144" y="33" width="124" height="30" rx="4" fill="#131a2b" stroke="#a56cff" stroke-width="2"/><text x="206" y="53" fill="#a56cff">base: feat-b</text>
-    <rect x="144" y="123" width="124" height="30" rx="4" fill="#131a2b" stroke="#17d8e0" stroke-width="2"/><text x="206" y="143" fill="#17d8e0">base: feat-a</text>
-    <rect x="144" y="213" width="124" height="30" rx="4" fill="#131a2b" stroke="#2fbf76" stroke-width="2"/><text x="206" y="233" fill="#2fbf76">base: main</text>
+  <rect x="6" y="27" width="152" height="36" rx="3" fill="#a56cff"/><text x="82" y="51" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">PR #3 · feat-c</text>
+  <rect x="164" y="29" width="104" height="32" rx="3" fill="var(--c-midnight)" stroke="#a56cff" stroke-width="1.8"/><text x="216" y="51" text-anchor="middle" fill="#a56cff" font-size="16" font-weight="700">→ feat-b</text>
+  <rect x="6" y="97" width="152" height="36" rx="3" fill="#17d8e0"/><text x="82" y="121" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">PR #2 · feat-b</text>
+  <rect x="164" y="99" width="104" height="32" rx="3" fill="var(--c-midnight)" stroke="#17d8e0" stroke-width="1.8"/><text x="216" y="121" text-anchor="middle" fill="#17d8e0" font-size="16" font-weight="700">→ feat-a</text>
+  <rect x="6" y="167" width="152" height="36" rx="3" fill="#2fbf76"/><text x="82" y="191" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">PR #1 · feat-a</text>
+  <rect x="164" y="169" width="104" height="32" rx="3" fill="var(--c-midnight)" stroke="#2fbf76" stroke-width="1.8"/><text x="216" y="191" text-anchor="middle" fill="#2fbf76" font-size="16" font-weight="700">→ main</text>
+  <rect x="6" y="239" width="152" height="36" rx="3" fill="#4ec3ff"/><text x="82" y="263" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">main</text>
+  <g stroke="#8fa6bc" stroke-width="2" stroke-dasharray="4 4" fill="none" opacity=".28">
+    <line x1="306" y1="246" x2="389" y2="193"/>
+    <line x1="418" y1="185" x2="442" y2="185"/>
+    <line x1="471" y1="177" x2="565" y2="123"/>
+    <line x1="594" y1="115" x2="618" y2="115"/>
+    <line x1="647" y1="107" x2="741" y2="53"/>
+    <line x1="770" y1="45" x2="794" y2="45"/>
   </g>
-  <g stroke="#7d8595" stroke-width="2.6" fill="none">
-    <line x1="217" y1="318" x2="625" y2="318" marker-end="url(#stk-sq)"/>
-    <line x1="675" y1="318" x2="737" y2="318" marker-end="url(#stk-sq)"/>
-    <line x1="787" y1="318" x2="849" y2="318" marker-end="url(#stk-sq)"/>
+  <g opacity=".36">
+    <circle cx="403" cy="185" r="15" fill="#2fbf76"/><text x="403" y="190" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">a1</text>
+    <circle cx="457" cy="185" r="15" fill="#2fbf76"/><text x="457" y="190" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">a2</text>
+    <circle cx="579" cy="115" r="15" fill="#17d8e0"/><text x="579" y="120" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">b1</text>
+    <circle cx="633" cy="115" r="15" fill="#17d8e0"/><text x="633" y="120" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">b2</text>
+    <circle cx="755" cy="45" r="15" fill="#a56cff"/><text x="755" y="50" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">c1</text>
+    <circle cx="809" cy="45" r="15" fill="#a56cff"/><text x="809" y="50" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">c2</text>
   </g>
-  <g stroke="#7d8595" stroke-width="2.6" fill="none">
-    <line x1="313" y1="228" x2="326" y2="228" marker-end="url(#stk-sq)" opacity=".32"/>
-    <line x1="413" y1="138" x2="426" y2="138" marker-end="url(#stk-sq)" opacity=".32"/>
-    <line x1="513" y1="48" x2="526" y2="48" marker-end="url(#stk-sq)" opacity=".32"/>
-    <line x1="213" y1="304" x2="287" y2="240" marker-end="url(#stk-sq)"/>
-    <line x1="357" y1="217" x2="390" y2="150" marker-end="url(#stk-sq)"/>
-    <line x1="457" y1="127" x2="490" y2="60" marker-end="url(#stk-sq)"/>
+  <line x1="430" y1="202" x2="430" y2="233" stroke="#2fbf76" stroke-width="2.5" stroke-dasharray="5 3" marker-end="url(#stk-sq-g)"/>
+  <line x1="606" y1="132" x2="606" y2="233" stroke="#17d8e0" stroke-width="2.5" stroke-dasharray="5 3" marker-end="url(#stk-sq-c)"/>
+  <line x1="782" y1="62" x2="782" y2="233" stroke="#a56cff" stroke-width="2.5" stroke-dasharray="5 3" marker-end="url(#stk-sq-p)"/>
+  <g stroke="#4ec3ff" stroke-width="3" fill="none">
+    <line x1="311" y1="257" x2="384" y2="257" marker-end="url(#stk-sq-line)"/>
+    <line x1="472" y1="257" x2="560" y2="257" marker-end="url(#stk-sq-line)"/>
+    <line x1="648" y1="257" x2="736" y2="257" marker-end="url(#stk-sq-line)"/>
   </g>
-  <circle cx="300" cy="228" r="13" fill="#2fbf76" opacity=".32"/>
-  <circle cx="346" cy="228" r="13" fill="#2fbf76" opacity=".32"/>
-  <circle cx="400" cy="138" r="13" fill="#17d8e0" opacity=".32"/>
-  <circle cx="446" cy="138" r="13" fill="#17d8e0" opacity=".32"/>
-  <circle cx="500" cy="48" r="13" fill="#a56cff" opacity=".32"/>
-  <circle cx="546" cy="48" r="13" fill="#a56cff" opacity=".32"/>
-  <g stroke="#7d8595" stroke-width="2.6" fill="none">
-    <line x1="359" y1="232" x2="627" y2="311" marker-end="url(#stk-sq)"/>
-    <line x1="458" y1="145" x2="741" y2="306" marker-end="url(#stk-sq)"/>
-    <line x1="557" y1="57" x2="855" y2="303" marker-end="url(#stk-sq)"/>
-  </g>
-  <circle cx="200" cy="318" r="17" fill="#4ec3ff"/>
-  <rect x="633" y="301" width="34" height="34" rx="4" fill="#2fbf76"/>
-  <rect x="745" y="301" width="34" height="34" rx="4" fill="#17d8e0"/>
-  <rect x="857" y="301" width="34" height="34" rx="4" fill="#a56cff"/>
-  <g font-size="13" font-weight="bold" text-anchor="middle">
-    <text x="650" y="362" fill="#2fbf76">PR #1</text>
-    <text x="762" y="362" fill="#17d8e0">PR #2</text>
-    <text x="894" y="362" text-anchor="end" fill="#a56cff">PR #3</text>
-  </g>
+  <circle cx="294" cy="257" r="17" fill="#4ec3ff"/><text x="294" y="262" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14.5" font-weight="700">m0</text>
+  <rect x="388" y="238" width="84" height="38" rx="3" fill="#2fbf76"/><text x="430" y="263" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="800">PR #1</text>
+  <rect x="564" y="238" width="84" height="38" rx="3" fill="#17d8e0"/><text x="606" y="263" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="800">PR #2</text>
+  <rect x="740" y="238" width="84" height="38" rx="3" fill="#a56cff"/><text x="782" y="263" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="800">PR #3</text>
+  <rect x="284" y="22" width="352" height="66" rx="3" fill="var(--c-midnight)" stroke="var(--c-crt-amber)" stroke-width="1.6"/>
+  <text x="298" y="49" fill="var(--c-crt-amber)" font-size="17" font-weight="700">main は一直線: 1 PR = 1 コミット</text>
+  <text x="298" y="75" fill="var(--c-fg-body)" font-size="15.5">途中コミット (a1..c2) は残らない</text>
 </svg>
-<p class="figtabs-cap">PR ごとに <b>1 コミット</b>へまとめて <code>main</code> に載せる。ログは最もきれいだが、個々のコミット（淡色）は失われる。</p>
+<div class="pr-method-card">
+  <p class="pr-method-summary">全体で 1 つではなく、<b>PR ごとに 1 コミット</b>へ圧縮して <code>main</code> に直列配置（計 3 コミット）。</p>
+  <p class="pr-method-pro">✅ <b>長所:</b> <code>main</code> が最もきれいな一直線（<b>1 PR = 1 コミット</b>）。<code>git revert</code> も PR 単位で簡単。</p>
+  <p class="pr-method-con">⚠️ <b>短所:</b> 途中の細かいコミットは <code>main</code> に残らない（PR 画面上では確認可能）。</p>
+</div>
 </div>
 <div class="figtabs-panel" data-idx="3">
-<svg viewBox="0 0 900 372" role="img" aria-label="リベースしてマージ: ブランチのコミットが順に main へ載せ直され、マージコミットは作られない">
+<svg viewBox="0 0 860 302" role="img" aria-label="リベースしてマージ: 6 個のコミットすべてが新しい SHA で順に main へ載せ直され、マージコミットは作られない">
   <defs>
-    <marker id="stk-rb" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
+    <marker id="stk-rb-line" markerWidth="8" markerHeight="8" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L7 3 L0 6 Z" fill="#8fa6bc"/>
+    </marker>
+    <marker id="stk-rb-g" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 3.5 L0 7 Z" fill="#2fbf76"/>
+    </marker>
+    <marker id="stk-rb-c" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 3.5 L0 7 Z" fill="#17d8e0"/>
+    </marker>
+    <marker id="stk-rb-p" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 3.5 L0 7 Z" fill="#a56cff"/>
     </marker>
   </defs>
-  <rect x="16" y="31" width="118" height="34" rx="4" fill="#a56cff"/><text x="75" y="53" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-c</text>
-  <rect x="16" y="121" width="118" height="34" rx="4" fill="#17d8e0"/><text x="75" y="143" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-b</text>
-  <rect x="16" y="211" width="118" height="34" rx="4" fill="#2fbf76"/><text x="75" y="233" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-a</text>
-  <rect x="16" y="301" width="118" height="34" rx="4" fill="#4ec3ff"/><text x="75" y="323" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">main</text>
-  <g font-size="13" font-weight="bold" text-anchor="middle">
-    <rect x="144" y="33" width="124" height="30" rx="4" fill="#131a2b" stroke="#a56cff" stroke-width="2"/><text x="206" y="53" fill="#a56cff">base: feat-b</text>
-    <rect x="144" y="123" width="124" height="30" rx="4" fill="#131a2b" stroke="#17d8e0" stroke-width="2"/><text x="206" y="143" fill="#17d8e0">base: feat-a</text>
-    <rect x="144" y="213" width="124" height="30" rx="4" fill="#131a2b" stroke="#2fbf76" stroke-width="2"/><text x="206" y="233" fill="#2fbf76">base: main</text>
+  <rect x="6" y="27" width="152" height="36" rx="3" fill="#a56cff"/><text x="82" y="51" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">PR #3 · feat-c</text>
+  <rect x="164" y="29" width="104" height="32" rx="3" fill="var(--c-midnight)" stroke="#a56cff" stroke-width="1.8"/><text x="216" y="51" text-anchor="middle" fill="#a56cff" font-size="16" font-weight="700">→ feat-b</text>
+  <rect x="6" y="97" width="152" height="36" rx="3" fill="#17d8e0"/><text x="82" y="121" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">PR #2 · feat-b</text>
+  <rect x="164" y="99" width="104" height="32" rx="3" fill="var(--c-midnight)" stroke="#17d8e0" stroke-width="1.8"/><text x="216" y="121" text-anchor="middle" fill="#17d8e0" font-size="16" font-weight="700">→ feat-a</text>
+  <rect x="6" y="167" width="152" height="36" rx="3" fill="#2fbf76"/><text x="82" y="191" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">PR #1 · feat-a</text>
+  <rect x="164" y="169" width="104" height="32" rx="3" fill="var(--c-midnight)" stroke="#2fbf76" stroke-width="1.8"/><text x="216" y="191" text-anchor="middle" fill="#2fbf76" font-size="16" font-weight="700">→ main</text>
+  <rect x="6" y="239" width="152" height="36" rx="3" fill="#4ec3ff"/><text x="82" y="263" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">main</text>
+  <g stroke="#8fa6bc" stroke-width="2" stroke-dasharray="4 4" fill="none" opacity=".28">
+    <line x1="306" y1="246" x2="389" y2="193"/>
+    <line x1="418" y1="185" x2="442" y2="185"/>
+    <line x1="471" y1="177" x2="565" y2="123"/>
+    <line x1="594" y1="115" x2="618" y2="115"/>
+    <line x1="647" y1="107" x2="741" y2="53"/>
+    <line x1="770" y1="45" x2="794" y2="45"/>
   </g>
-  <g stroke="#7d8595" stroke-width="2.6" fill="none">
-    <line x1="217" y1="318" x2="596" y2="318" marker-end="url(#stk-rb)"/>
-    <line x1="663" y1="318" x2="708" y2="318" marker-end="url(#stk-rb)"/>
-    <line x1="775" y1="318" x2="820" y2="318" marker-end="url(#stk-rb)"/>
+  <g opacity=".34">
+    <circle cx="403" cy="185" r="15" fill="#2fbf76"/><text x="403" y="190" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">a1</text>
+    <circle cx="457" cy="185" r="15" fill="#2fbf76"/><text x="457" y="190" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">a2</text>
+    <circle cx="579" cy="115" r="15" fill="#17d8e0"/><text x="579" y="120" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">b1</text>
+    <circle cx="633" cy="115" r="15" fill="#17d8e0"/><text x="633" y="120" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">b2</text>
+    <circle cx="755" cy="45" r="15" fill="#a56cff"/><text x="755" y="50" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">c1</text>
+    <circle cx="809" cy="45" r="15" fill="#a56cff"/><text x="809" y="50" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">c2</text>
   </g>
-  <g stroke="#7d8595" stroke-width="2.6" fill="none">
-    <line x1="313" y1="228" x2="326" y2="228" marker-end="url(#stk-rb)" opacity=".32"/>
-    <line x1="413" y1="138" x2="426" y2="138" marker-end="url(#stk-rb)" opacity=".32"/>
-    <line x1="513" y1="48" x2="526" y2="48" marker-end="url(#stk-rb)" opacity=".32"/>
-    <line x1="213" y1="304" x2="287" y2="240" marker-end="url(#stk-rb)"/>
-    <line x1="357" y1="217" x2="390" y2="150" marker-end="url(#stk-rb)"/>
-    <line x1="457" y1="127" x2="490" y2="60" marker-end="url(#stk-rb)"/>
+  <line x1="430" y1="202" x2="430" y2="236" stroke="#2fbf76" stroke-width="2.5" stroke-dasharray="5 3" marker-end="url(#stk-rb-g)"/>
+  <line x1="606" y1="132" x2="606" y2="236" stroke="#17d8e0" stroke-width="2.5" stroke-dasharray="5 3" marker-end="url(#stk-rb-c)"/>
+  <line x1="782" y1="62" x2="782" y2="236" stroke="#a56cff" stroke-width="2.5" stroke-dasharray="5 3" marker-end="url(#stk-rb-p)"/>
+  <g stroke="#8fa6bc" stroke-width="2.6" fill="none">
+    <line x1="311" y1="257" x2="381" y2="257" marker-end="url(#stk-rb-line)"/>
+    <line x1="417" y1="257" x2="439" y2="257" marker-end="url(#stk-rb-line)"/>
+    <line x1="475" y1="257" x2="557" y2="257" marker-end="url(#stk-rb-line)"/>
+    <line x1="593" y1="257" x2="615" y2="257" marker-end="url(#stk-rb-line)"/>
+    <line x1="651" y1="257" x2="733" y2="257" marker-end="url(#stk-rb-line)"/>
+    <line x1="769" y1="257" x2="791" y2="257" marker-end="url(#stk-rb-line)"/>
   </g>
-  <circle cx="300" cy="228" r="13" fill="#2fbf76" opacity=".32"/>
-  <circle cx="346" cy="228" r="13" fill="#2fbf76" opacity=".32"/>
-  <circle cx="400" cy="138" r="13" fill="#17d8e0" opacity=".32"/>
-  <circle cx="446" cy="138" r="13" fill="#17d8e0" opacity=".32"/>
-  <circle cx="500" cy="48" r="13" fill="#a56cff" opacity=".32"/>
-  <circle cx="546" cy="48" r="13" fill="#a56cff" opacity=".32"/>
-  <g stroke="#7d8595" stroke-width="2.6" fill="none">
-    <line x1="359" y1="232" x2="593" y2="310" marker-end="url(#stk-rb)"/>
-    <line x1="458" y1="146" x2="708" y2="305" marker-end="url(#stk-rb)"/>
-    <line x1="556" y1="57" x2="822" y2="302" marker-end="url(#stk-rb)"/>
-  </g>
-  <circle cx="200" cy="318" r="17" fill="#4ec3ff"/>
-  <g stroke="#7d8595" stroke-width="2.6">
-    <line x1="629" y1="318" x2="637" y2="318"/>
-    <line x1="741" y1="318" x2="749" y2="318"/>
-    <line x1="853" y1="318" x2="861" y2="318"/>
-  </g>
-  <circle cx="616" cy="318" r="13" fill="#2fbf76"/>
-  <circle cx="650" cy="318" r="13" fill="#2fbf76"/>
-  <circle cx="728" cy="318" r="13" fill="#17d8e0"/>
-  <circle cx="762" cy="318" r="13" fill="#17d8e0"/>
-  <circle cx="840" cy="318" r="13" fill="#a56cff"/>
-  <circle cx="874" cy="318" r="13" fill="#a56cff"/>
-  <g font-size="13" font-weight="bold" text-anchor="middle">
-    <text x="633" y="362" fill="#2fbf76">PR #1</text>
-    <text x="745" y="362" fill="#17d8e0">PR #2</text>
-    <text x="857" y="362" fill="#a56cff">PR #3</text>
-  </g>
+  <circle cx="294" cy="257" r="17" fill="#4ec3ff"/><text x="294" y="262" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14.5" font-weight="700">m0</text>
+  <circle cx="401" cy="257" r="15.5" fill="#2fbf76"/><text x="401" y="262" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="13.5" font-weight="700">a1'</text>
+  <circle cx="459" cy="257" r="15.5" fill="#2fbf76"/><text x="459" y="262" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="13.5" font-weight="700">a2'</text>
+  <circle cx="577" cy="257" r="15.5" fill="#17d8e0"/><text x="577" y="262" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="13.5" font-weight="700">b1'</text>
+  <circle cx="635" cy="257" r="15.5" fill="#17d8e0"/><text x="635" y="262" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="13.5" font-weight="700">b2'</text>
+  <circle cx="753" cy="257" r="15.5" fill="#a56cff"/><text x="753" y="262" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="13.5" font-weight="700">c1'</text>
+  <circle cx="811" cy="257" r="15.5" fill="#a56cff"/><text x="811" y="262" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="13.5" font-weight="700">c2'</text>
+  <text x="430" y="293" text-anchor="middle" fill="#2fbf76" font-size="15" font-weight="700">PR #1</text>
+  <text x="606" y="293" text-anchor="middle" fill="#17d8e0" font-size="15" font-weight="700">PR #2</text>
+  <text x="782" y="293" text-anchor="middle" fill="#a56cff" font-size="15" font-weight="700">PR #3</text>
+  <rect x="284" y="22" width="352" height="66" rx="3" fill="var(--c-midnight)" stroke="var(--c-crt-amber)" stroke-width="1.6"/>
+  <text x="298" y="49" fill="var(--c-crt-amber)" font-size="17" font-weight="700">main は一直線: 6 コミットを再適用</text>
+  <text x="298" y="75" fill="var(--c-fg-body)" font-size="15.5">新 SHA (a1'..c2') / マージコミットなし</text>
 </svg>
-<p class="figtabs-cap">すべてのコミットを順に <code>main</code> へ載せ直す。<b>マージコミットのない直線的な履歴</b>になる。元のコミット（淡色）は書き換えられる。</p>
+<div class="pr-method-card">
+  <p class="pr-method-summary">全 6 コミットを順に <code>main</code> へ再適用（<code>a1'</code>..<code>c2'</code>、<b>新しい SHA / マージコミットなし</b>）。</p>
+  <p class="pr-method-pro">✅ <b>長所:</b> 分岐ループを作らずに、段階的なコミット単位を一直線で残せる。</p>
+  <p class="pr-method-con">⚠️ <b>短所:</b> 元の SHA が書き換わり、<code>wip</code> コミットもそのまま <code>main</code> に載る。</p>
+</div>
 </div>
 </div>
 
 <div class="split-text">
 
-**不可分な 1 回のマージ。** `main` に残る履歴を選ぶ。
+**スタックのマージ動作**
 
-- 🧱 保護ルールと CI は **各レイヤー** に適用
-- 🔄 マージした層より上を **自動 rebase / retarget**
-- ☝️ **1 本、一部、全部** を下からマージ。最上段なら全体が入る
+- ☝️ **1 本 / 一部 / 一括**: 下から順にも、最上段 `PR #3` から **全体を一括マージ** も可能
+- 🔄 **自動 rebase / retarget**: `PR #1` のマージ後、`PR #2` の base を `main` へ自動更新
+- 🛡️ **各レイヤーを保護**: Ruleset、必須レビュー、CI が **全 PR** に個別適用
+- 🧹 **ブランチ削除も安全**: どの方式でもマージ後に `feat-a/b/c` を削除 OK（履歴は `main` に残る）
+- 🛠️ **対応**: github.com、Mobile、API / webhook、`gh extension install github/gh-stack`
 
 </div>
 </div>
-
-🛠️ github.com、Mobile、REST / GraphQL / webhook、`gh extension install github/gh-stack`
 
 </div>
 
