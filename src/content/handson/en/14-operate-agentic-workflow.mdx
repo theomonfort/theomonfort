@@ -16,6 +16,8 @@ import Aside from '../../../components/handson/Aside.astro';
 
 **What is an Agentic Workflow?**: A mechanism that leverages Copilot inside GitHub Actions workflows to execute autonomous tasks (report generation, documentation updates, code fixes, etc.) in response to repository changes.
 
+Use your reviewed, merged working state; the core site after Part 11 is enough. Optional Projects, 3D, Zettelkasten and CLI/audio are not prerequisites.
+
 ### 14.1 — Verify the Copilot policy and Workflow permissions
 
 Previously you had to create and store a Personal Access Token (PAT) to use Copilot, but it now runs on the built-in GitHub Actions `GITHUB_TOKEN`, so a **PAT is no longer needed**. This eliminates the operational and security risks of managing long-lived PATs.
@@ -58,7 +60,7 @@ gh extension install github/gh-aw
 
 Let's create an Agentic Workflow that automatically reports today's repository activity.
 
-Use `[playbook:daily-repo-status]` from the Part 6 catalogue and link the implementation PR to its actual Issue number; this is not part of the CLI fleet batch.
+Use `[playbook:daily-repo-status]` from the Part 6 catalogue and link the implementation PR to its actual Issue number; it is separate from the optional CLI fleet batch.
 
 In agent mode, run the following:
 

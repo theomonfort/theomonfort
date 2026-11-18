@@ -21,20 +21,33 @@ import Aside from '../../../components/handson/Aside.astro';
 
 #### 公式エージェントを安全に準備する
 
-[更新済み Dev Container](https://github.com/theomonfort/Github-copilot-workshop/blob/2ee5b723164850e201d770a0522324bb643ff4b3/.devcontainer/devcontainer.json) は **Node.js 22、Playwright 1.58.2 CLI、対応する Chromium** を自動で準備します。古いコピーではコンテナー設定を更新して再ビルドしてください。プロジェクト内の `@playwright/test` 依存関係、設定、エージェントは別途必要です。
+**更新済み Codespace では Playwright と Chromium を利用できます。** それ以外では Node 22 を使い、以下の依存関係とブラウザーを準備します。Codespaces でプロジェクト依存関係だけが不足する場合は、最初のコマンドだけ実行してください。テスト MCP は次の手順で設定します。
 
-不足するものがある場合だけ、Copilot Chat に準備を依頼します。
-
-```text
-このプロジェクトで不足する Playwright 1.58.2 の依存関係、Chromium、設定を準備してください。
-init-agents --loop=vscode を隔離した場所で実行し、公式 planner/generator を .github/agents に統合してください。
-ツールの接続先はルート .mcp.json の headless な playwright-test MCP 1 つにしてください。
-既存サーバー、workflow、指示、テストは維持し、利用可能なモデルを使ってください。
-testDir は tests/e2e とし、生成テストと /playbook/ を確認する動作する seed をそこに置いてください。
-準備、テスト実行、MCP プロセスすべてに Node 22 を使い、ツールの動作確認後に一時物を片付けてください。
+```bash
+npm install --save-dev --save-exact @playwright/test@1.58.2
+npx playwright install chromium
 ```
 
-[Part 3](/theomonfort/handson/plan-mcp/) の Copilot ハーネスと VS Code 1.105 以降を使います。**Customizations → Agents** を確認し、**MCP Servers → Workspace → playwright-test** を信頼確認のうえ起動してください。コンテナー外で別の Node 版を使う場合は、Copilot に準備、テスト、MCP を `npx --package=node@22.23.4 node ./node_modules/@playwright/test/cli.js` 経由にして MCP を再起動するよう依頼します。ターミナルだけの Node 切り替えは MCP に反映されません。`npx -c` は使わないでください。
+プロジェクトのルートで **公式エージェントを生成**します（VS Code 1.105 以降）。
+
+```bash
+npx playwright init-agents --loop=vscode
+```
+
+次のファイルは **自動生成**されます。手書きする必要はありません。
+
+```text
+.github/agents/
+  playwright-test-planner.agent.md
+  playwright-test-generator.agent.md
+  playwright-test-healer.agent.md
+```
+
+初期化時には `.vscode/mcp.json` とサンプルの seed / setup ファイルも生成されます。既存のファイルと workflow は残してください。[Part 3](/theomonfort/handson/plan-mcp/) のルート設定では、生成した `playwright-test` エントリを `.mcp.json` に統合してエージェントを接続するよう Copilot に依頼します。GitHub と Context7 を残し、ルートファイルの置換やサーバーの二重起動は避けてください。
+
+`playwright.config.ts` がなければ、`testDir: './tests/e2e'` で設定するよう Copilot に依頼します。
+
+**Customizations → MCP Servers → Workspace** で **`playwright-test`** を起動し、信頼確認を行います。コマンドは `npx playwright run-test-mcp-server --headless` で、このプロジェクトから Node 22 で実行します。**Customizations → Agents** で生成したエージェントを確認してください。
 
 #### 実装前にテストを相談する
 
@@ -46,10 +59,10 @@ testDir は tests/e2e とし、生成テストと /playbook/ を確認する動�
 
 #### 画面を調べ、提案から選ぶ
 
-Chat のエージェント選択で **`playwright-test-planner`** を選び、seed テストを添付して送信します。
+Chat のエージェント選択で **`playwright-test-planner`** を選び、起動中のサイトの URL を入れて送信します。
 
 ```text
-テスト MCP で実際の Playbook のプレゼン画面を調べてください。
+テスト MCP で <起動中のサイトのURL> の Playbook プレゼン画面を調べてください。
 矢印キー、Escape、スライドリンクの再読み込みなど、不足する有用なテストを
 期待結果とともに specs/presentation.md に提案してください。
 どれを追加するか私に質問して待ってください。まだ生成しないでください。
@@ -59,7 +72,7 @@ Chat のエージェント選択で **`playwright-test-planner`** を選び、se
 
 #### 選んだテストを生成して実行する
 
-**`playwright-test-generator`** を選び、承認した計画と seed を添付して送信します。
+**`playwright-test-generator`** を選び、承認した計画を添付して送信します。
 
 ```text
 私が選んだケースだけを tests/e2e/presentation.spec.ts に生成してください。
@@ -76,33 +89,22 @@ Chat のエージェント選択で **`playwright-test-planner`** を選び、se
 - **ロジックや API：** ユニットテストや API テストの方がシンプルな場合があります。
 
 <span id="113--任意発表用デモを見る"></span>
+<span id="93--演習を保存して-checkpoint3-と準備済みデモへ進む"></span>
 
-### 9.3 — 演習を保存して checkpoint3 と準備済みデモへ進む
+### 9.3 — 合意したテストを PR の CI で実行する
 
-**演習を `test-creation` に保存、コミット、push し、ブランチ名とコミットを控えます。** 次に [`./checkpoint3`](/theomonfort/handson/intro-2/#checkpoints) を実行してください。別ブランチと PR にスナップショット全体を取り込むため、テスト、エージェント、指示が置き換わる場合があります。自分の作業は保存した演習ブランチに残ります。無条件でマージして上書きしないでください。
+演習の **`test-creation`** ブランチのまま、Copilot に依頼します。
 
-**準備済みの18秒デモは、今生成したテストとは別物**です。講師が checkpoint ブランチで、ブラウザーだけの Codespace ではなく **GUI のあるローカル環境**で実行します。ローカルの依存関係や Chromium が不足していれば、先に Copilot に準備を依頼してください。
-
-```bash
-npx --package=node@22.23.4 node ./node_modules/@playwright/test/cli.js test --config=playwright.demo.config.ts
+```text
+既存の E2E CI を再利用し、なければ Node 22、npm ci、対応する Chromium を使う PR workflow を追加してください。
+tests/e2e の headless テストを実行し、失敗レポートを保存してください。
 ```
-
-`npx -c` で囲まず、そのまま実行します。1つのウィンドウでツアーを表示し、ビルドと起動は別時間です。`tests/e2e` と通常の CI からは除外され、専用 preview は終了後に閉じます。
-
-古い checkpoint3 に [`playwright.demo.config.ts`](https://github.com/theomonfort/Github-copilot-workshop/blob/e40b89ae43baa271e5e4f9503b4ed5492c3b7ac5/playwright.demo.config.ts) と [`tests/demo/playbook.demo.ts`](https://github.com/theomonfort/Github-copilot-workshop/blob/e40b89ae43baa271e5e4f9503b4ed5492c3b7ac5/tests/demo/playbook.demo.ts) がなければ、確認してこの2ファイルだけを追加し、全体を再取り込みしないでください。
 
 <span id="102--pr-で自動実行する-actions-ワークフローを作成する"></span>
 <span id="112--pr-で自動実行する-actions-ワークフローを作成する"></span>
 
 ### 9.4 — PR を確認してからセキュリティへ進む
 
-作業ツリーを clean にして保存した **`test-creation`** ブランチへ戻り、Copilot に依頼します。
-
-```text
-既存の E2E CI を再利用し、なければ Node 22、npm ci、対応する Chromium を使う PR workflow を追加してください。
-通常の headless テストを実行して失敗レポートを保存し、発表用デモは除外してください。
-```
-
-コミットして push し、既存 Issue に関連付けたテスト PR を作ります。Actions のチェックとレポートを確認してください。未マージの checkpoint2 PR が前提なら、先にその PR をレビューしてマージします。
+コミットして push し、既存 Issue に関連付けたテスト PR を作ります。Actions のチェックとレポートを確認してください。前提の PR（利用した場合は checkpoint2 も）を先にレビューしてマージし、続けてテスト PR をマージします。合意したテストと指示を残し、この段階ではチェックポイントを取り込みません。
 
 **続けて [Part 10: Dependabot](/theomonfort/handson/test-secure-dependabot/)、[Part 11: CodeQL](/theomonfort/handson/test-secure-codeql/)、[GHAS](/theomonfort/playbook/github-advanced-security/?present=1) を扱います。** ブラウザーテストの成功はセキュリティチェックの代わりにはなりません。

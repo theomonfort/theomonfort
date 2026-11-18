@@ -125,18 +125,19 @@ Continue from the base site with **8 implementation Issues** that build toward t
 | --- | --- | --- |
 | Part 6 / checkpoint1 | Base site already built | Catalogue and Markdown details |
 | Cloud Agent (optional Part 8), or checkpoint2 | `presentation-core` → `presentation-content` / `mermaid-rendering` / `responsive-navigation` | checkpoint2 |
-| Test & Secure (Part 9) | `presentation-tests` | Save exercise work before the checkpoint3 demo; snapshot also includes 3D |
-| CLI (Part 13) | Build `playbook-3d` manually or reuse checkpoint3 → `galaxy-audio` | 3D first, then ambience |
+| Test & Secure (Part 9) | `presentation-tests` | Agreed tests + PR CI on your exercise branch, then security |
+| Copilot App / Projects (optional Part 12) | Adapt `playbook-3d`, then add Zettelkasten as a separate Project task | Advanced integration; checkpoint3 is optional at the tests + 3D + Zettelkasten milestone |
+| CLI (optional Part 13) | `galaxy-audio` | Add ambience after merging 3D |
 | Operate (Part 14) | `daily-repo-status` | Daily report |
 
-**`./checkpoint1` prepares these Issues in Japanese.** If you ran it, reuse them in the Issues tab rather than generating duplicates. The English prompt below uses the same keys. Older Issue bodies may mention the former Part 11 for tests; use Part 9 in the current flow, without rewriting existing Issues. If you jump straight to `checkpoint2` / `checkpoint3`, check which acceptance criteria are already met and work only on the remaining tasks. Repository policies and security settings still need separate setup.
+**`./checkpoint1` prepares these Issues in Japanese.** If you ran it, reuse them in the Issues tab rather than generating duplicates. The English prompt below uses the same keys. Older Issue bodies may use previous part numbers; follow the current table above without rewriting existing Issues. When using an optional checkpoint at its milestone, check which acceptance criteria are already met and work only on remaining tasks. Repository policies and security settings still need separate setup.
 
 Keep the `[playbook:...]` title keys and `workshop-issue` body markers so the prompt and checkpoint script can recognize existing work. Older repository copies may have a script without Issue seeding; check the Issues tab and use this prompt for missing entries rather than assuming they were created.
 
 `checkpoint1` prepares Issues before stashing or switching branches, reusing existing open or closed Issues without changing them. Even if the snapshot already matches `main`, it prepares missing Issues without another PR. If Issue preparation fails, fix the reported error and rerun `./checkpoint1`; already-created Issues are retained. Run only one import per repository at a time, including across clones. `checkpoint2` / `checkpoint3` do not prepare Issues.
 
 <Aside type="negative">
-**`presentation-core` is required before testing.** Checkpoints 1–2 do not include 3D; checkpoint3 already provides it. Inspect and reuse that implementation rather than rebuilding it. Ambient audio and daily reporting remain separate exercises. Previously created Issue bodies are not rewritten, so use this current checkpoint boundary when selecting remaining work.
+**`presentation-core` is required before testing.** Checkpoints 1–2 do not include 3D. Checkpoint3 is an optional reference after the advanced 3D and Zettelkasten integrations, not a step in the test exercise. Skip optional Parts 12–13 to continue from security directly to Operate. Previously created Issue bodies are not rewritten; use the current table when selecting work.
 </Aside>
 
 On the normal Part 6 path, send this prompt to Copilot Chat to prepare the Issues. It does not start implementation.
@@ -203,7 +204,7 @@ Title: [playbook:presentation-tests] Protect presentation controls with Playwrig
 Body:
 <!-- workshop-issue:presentation-tests -->
 ## Stage
-Test & Secure (Part 9), after merging presentation or starting from checkpoint2. Save the exercise before importing checkpoint3 for the prepared demo.
+Test & Secure (Part 9), after merging presentation or starting from checkpoint2. Complete tests and CI on the exercise branch, then review and merge before security.
 
 ## Acceptance criteria
 - In `tests/e2e/presentation.spec.ts`, enter presentation from a `/playbook` card and test arrow keys, TOC switching, Esc and deep links. Do not assume presentation is the default landing page.
@@ -216,7 +217,7 @@ Title: [playbook:playbook-3d] Recreate the existing 3D Galaxy view
 Body:
 <!-- workshop-issue:playbook-3d -->
 ## Stage
-Manual implementation task for CLI (Part 13). Not included in checkpoint1 / checkpoint2; already implemented in checkpoint3. If using checkpoint3, inspect the acceptance criteria and reuse its implementation instead of rebuilding it.
+Optional Copilot App / Projects (Part 12). Compare the read-only irl-odyssey/3d-solar-system reference with the Word brief and adapt only in the hands-on repo. Checkpoints 1–2 have no 3D. Checkpoint3 provides a reference/catch-up at the tests + 3D + Zettelkasten milestone, after learning both integrations. Reuse features already present instead of rebuilding them.
 
 ## Acceptance criteria
 - Recreate the existing 2D / 3D switch using Three.js: a central SDLC sun, five Plan / Develop / Review / Secure / Operate planets, an Introduction departure station and an Administration mothership. Do not invent a different design.
@@ -232,7 +233,7 @@ Title: [playbook:galaxy-audio] Add Galaxy ambience and clean resource shutdown
 Body:
 <!-- workshop-issue:galaxy-audio -->
 ## Stage
-CLI extension (Part 13), after merging either your manual `playbook-3d` PR or the checkpoint3 PR. Do not implement it concurrently with 3D. Checkpoint3 does not include ambient audio.
+Optional CLI extension (Part 13), after reviewing and merging the 3D prerequisite. Do not implement it concurrently with 3D. Checkpoint3 does not include ambient audio.
 
 ## Acceptance criteria
 - Follow the existing Galaxy ambience, with playback after user interaction and a Music ON / OFF control.

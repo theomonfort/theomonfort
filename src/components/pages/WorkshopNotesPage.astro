@@ -28,6 +28,7 @@ interface TeamsLink {
 }
 interface Item {
   label: string;
+  stepKind?: 'prep' | 'explain' | 'demo';
   checklistIndex?: number;
   checklistKey?: string;
   command?: string;
@@ -113,12 +114,13 @@ const sections: Section[] = [
       { label: 'Demo Agent Mode (Plan), Permission (Allow-all), Models (Fusion)', checklistKey: 'code-agent-configuration' },
       { label: 'Send prompt and validate until switching to Autopilot', checklistKey: 'code-prompt-autopilot' },
       { label: 'Demo inline request (Cmd + I)', checklistIndex: 25 },
-      { label: 'Candidate explanations: Context windows, Token optimization, CLI (Subagents), Copilot (App)', checklistKey: 'code-explanation-candidates' },
+      { label: 'Candidate explanations: Context windows, Token optimization, Subagents, Copilot (App)', checklistKey: 'code-explanation-candidates' },
     ],
   },
   {
     title: 'CODE REVIEW',
     subtitle: '自動レビューを設定',
+    note: 'Optional: save your work, then run ./checkpoint1 if you need the base-site checkpoint.',
     color: 'amber',
     items: [
       // Preserve following progress IDs without reusing retired CODE items.
@@ -136,29 +138,32 @@ const sections: Section[] = [
     color: 'cyan',
     items: [
       { label: 'Show official Playwright planner + generator and test MCP', checklistKey: 'tests-prepare-agents' },
-      { label: 'Add instruction: assess tests, ask which, implement feature + agreed tests', checklistKey: 'tests-feature-instruction' },
+      { label: 'Add instruction', stepKind: 'demo', checklistKey: 'tests-feature-instruction' },
       { label: 'Demo planner: propose tests and ask which to add', checklistKey: 'tests-plan-selection' },
       { label: 'Demo generator: create selected tests, run and explain an assertion', checklistKey: 'tests-generate-assertion' },
+      { label: 'Explain: automate tests with a GitHub Actions workflow on pull_request (hands-on 9.3)', checklistKey: 'tests-explain-pr-workflow' },
       { label: 'Explain tool choice: Playwright for web/localhost; Computer Use or other tools for native apps', checklistKey: 'tests-tool-choice' },
       {
-        label: 'Save exercise work, import checkpoint3, launch the prepared 18s demo',
+        label: 'Presenter only: launch the prepared 18s demo on a separate checkpoint3 checkout',
         checklistKey: 'tests-checkpoint-demo',
         command: 'npx --package=node@22.23.4 node ./node_modules/@playwright/test/cli.js test --config=playwright.demo.config.ts',
-        note: 'Run from checkpoint3 on a local graphical desktop with dependencies and Chromium ready. Save the exercise branch first. This demo is separate from learner tests and CI; run as written, without npx -c.',
+        note: 'Prepare checkpoint3 on a local graphical desktop with dependencies and Chromium ready. Do not replace participant exercise branches. This demo is separate from learner tests and CI; run as written, without npx -c.',
       },
       { label: 'Demo CodeQL on PR', checklistIndex: 41 },
       { label: 'Explain GHAS (SLIDES)' },
     ],
   },
   {
-    title: 'CLI',
-    subtitle: 'CLI と Copilot アプリ',
-    sectionIndex: 7,
-    color: 'amber',
+    title: 'COPILOT APP / PROJECTS',
+    subtitle: '任意の発展編: AI 駆動開発のこれから',
+    sectionIndex: 9,
+    note: 'Optional advanced features: a look at the future of AI-driven development. Skip to OPERATE for the core workshop.',
+    color: 'magenta',
     items: [
-      { label: 'Explain CLI', checklistIndex: 44 },
-      { label: 'Demo CLI Versus Visual Studio Code' },
-      { label: 'Inspect checkpoint3 3D or build [playbook:playbook-3d] manually, then galaxy-audio after merging; audio/reporting are not prebuilt; fleet only independent ready tasks' },
+      { label: 'Save/push the Codespaces branch; continue it in a Copilot App Project with the three repos and Word brief', checklistKey: 'app-project-context' },
+      { label: 'Demo adaptation plan: SDLC categories/routes/theme; reuse existing 3D instead of rebuilding', checklistKey: 'app-project-plan' },
+      { label: 'Demo target-only 3D and read-only Zettelkasten, then optional checkpoint3 reference (English-only TOC)', checklistKey: 'app-project-implementation' },
+      { label: 'Review 3D navigation and read-only graph/search/notes/links, with no visitor write actions or API', checklistKey: 'app-project-review' },
     ],
   },
   {
@@ -167,7 +172,7 @@ const sections: Section[] = [
     sectionIndex: 8,
     color: 'green',
     items: [
-      { label: 'Explain AGENTIC WORKFLOW' },
+      { label: 'Explain AGENTIC WORKFLOW', checklistIndex: 47 },
       { label: 'Demo Send Prompt' },
       { label: 'Demo results in theomonfort repo' },
     ],
@@ -340,7 +345,7 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
                 const teamsText = item.teams
                   ? item.teams.map((t) => `${t.label}\n${t.url}`).join('\n\n')
                   : '';
-                const stepKind =
+                const stepKind = item.stepKind ?? (
                   section.title === 'PREPARATION'
                     ? 'prep'
                     : /^(explain|summarize|candidate explanations)\b/i.test(item.label)
@@ -349,7 +354,7 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
                         ? 'demo'
                         : section.title === 'INTRODUCTION'
                           ? 'explain'
-                          : '';
+                          : '');
                 return (
                   <li>
                     <label

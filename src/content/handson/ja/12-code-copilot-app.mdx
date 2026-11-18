@@ -1,0 +1,87 @@
+---
+title: "CODE: Copilot App / Projects（任意）"
+order: 12
+stepSlug: "code-copilot-app"
+duration: 20
+summary: "任意の発展編として、Copilot App の Project と Word 仕様書で参照リポジトリを適応し、AI 駆動開発のこれからを体験します。"
+---
+
+import Aside from '../../../components/handson/Aside.astro';
+
+<Aside type="reference">
+使うのは **GitHub Copilot App の Project** であり、Issue を管理する GitHub Projects ではありません。[プレイブック / Copilot App](/theomonfort/playbook/copilot-app/) と [Projects の公式ドキュメント](https://docs.github.com/en/copilot/how-tos/github-copilot-app/working-with-projects)を参照してください。
+</Aside>
+
+**任意の発展編です。** 3D と読み取り専用の知識グラフを通じて、AI 駆動開発のこれからを体験します。基本コースだけを進める場合は Part 12〜13 をスキップし、[Part 14: Operate](/theomonfort/handson/operate-agentic-workflow/) に進めます。
+
+### 12.1 — リポジトリと仕様書を集める
+
+まず **Codespaces の作業ブランチを保存、コミット、push** し、ブランチ名とコミットを控えます。ハンズオン repo にアクセスできるアカウントで Copilot App を開きます。古い既定の `main` ではなく、その同じブランチか、レビューしてマージした状態から続けてください。
+
+1. **Projects の横にある +** から、このサイト用の Project を作成します。
+2. 次の3リポジトリを Project に追加します。実装先は自分のハンズオンリポジトリだけです。
+3. [Word 仕様書をダウンロード](/theomonfort/handson/copilot-app-project-brief.docx)し、**Library → Add → Add file…** で添付します。
+
+<table>
+  <thead>
+    <tr><th scope="col">リポジトリ</th><th scope="col">役割</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>自分で作成したハンズオンリポジトリ</td><td>実装の変更はすべてここで行う</td></tr>
+    <tr><td><a href="https://github.com/irl-odyssey/zettelkasten">irl-odyssey/zettelkasten</a></td><td>グラフ、検索、ノート閲覧の読み取り専用の参照</td></tr>
+    <tr><td><a href="https://github.com/irl-odyssey/3d-solar-system">irl-odyssey/3d-solar-system</a></td><td>Three.js デザインの読み取り専用の参照</td></tr>
+  </tbody>
+</table>
+
+太陽系の参照は、太陽と天文学上の8惑星、紺とアンバーの配色、詳細パネルという、サイトとは異なる構成です。そのままコピーせず、データと操作を **SDLC のカテゴリ、Playbook のルート、レトロテーマ**に合わせます。
+
+### 12.2 — 比較してから計画を承認する
+
+リポジトリ名と保存したブランチ / コミットを置き換え、Project に送信します。
+
+```text
+Library の Word 仕様書を読み、3つのリポジトリを比較してください。
+変更可能なのは <自分のハンズオンrepo> だけで、irl-odyssey の2つは読み取り専用の参照です。
+保存した <ブランチ> の <コミット>、またはレビューしてマージした状態を基点にしてください。
+太陽系のデザインを SDLC のカテゴリ、ルート、テーマに合わせる計画と、
+選定した同梱ノートで読み取り専用 Zettelkasten を統合する計画を提案してください。
+checkpoint3 の実装も含め、既存の3Dと Zettelkasten を確認して再利用してください。
+どちらも作り直さず、不足する要件だけを調整し、元のライセンスを守ってください。
+実装済みの内容、必要な調整、テスト候補を示し、私の承認を待ってください。
+```
+
+3D の残作業には Part 6 の `[playbook:playbook-3d]` を再利用します。Zettelkasten は Project 内で別タスクとして扱います。
+
+### 12.3 — 合意した調整だけを実装する
+
+**まず3Dを適応します。** 計画を確認したら、次を送信します。
+
+```text
+承認した3Dの調整だけを <自分のハンズオンrepo> に実装してください。
+合意した基点から統合用ブランチを作り、参照用の2リポジトリは変更しないでください。
+2D一覧、プレゼン、言語を維持し、既存の3Dがあれば再利用してください。
+追加するテストを確認して合意したテストを実装し、差分を示してください。グラフ統合の前で止めてください。
+```
+
+**Overview** と会話で3Dの結果を確認します。移動先がサイトのカテゴリとルートに合い、既存機能が引き続き動くことを確認してください。
+
+**次に読み取り専用グラフを確認して調整します。** 演習と3Dの成果を保持した、レビュー済みのブランチから続けます。
+
+```text
+<自分のハンズオンrepo> の既存 Zettelkasten を、checkpoint3 の実装も含め確認して再利用してください。
+レビューした3Dの状態から続け、承認した不足分だけを実装し、未導入の場合だけ統合してください。
+参照用の2リポジトリと既存機能は維持してください。
+mountZettelkasten を readOnly: true と apiBaseUrl: null で使い、各 vault にも apiBaseUrl: null を設定してください。
+選定した同梱データで、グラフ探索、検索、ノート閲覧、リンクを維持してください。
+訪問者向けの編集、作成、名前変更、削除、インポート操作、編集ショートカット、書き込み API は公開しないでください。
+参照元のエディターは削除せず、既存の読み取り専用設定で対応してください。
+追加するテストを私に確認し、合意したテストを実装して差分を示してください。
+```
+
+グラフ探索、検索、閲覧、リンクが編集や書き込み API なしで使えることを確認します。実装先だけの差分とライセンス表記を確認し、統合 PR を作成してレビュー、マージします。
+
+<Aside type="reference">
+**テスト + 3D + Zettelkasten の到達点で、checkpoint3 は任意です。** 両方の統合を学んだ後の参考や補助として使えます。テスト / CI、3D、読み取り専用 Zettelkasten を含み、**TOC のラベルは日英どちらの画面でも英語のみ**です。環境音と日次レポートは含みません。先に保存、コミット、push してください。[`./checkpoint3`](/theomonfort/handson/intro-2/#checkpoints) はリモート `main` から別ブランチ / PR にスナップショット全体を取り込みます。保存した作業と比較し、自分のテスト、グラフ、指示、その他の変更を残してください。完成した演習を無条件で置き換えないでください。自分の実装が動けば不要です。
+</Aside>
+
+[Part 14: Operate](/theomonfort/handson/operate-agentic-workflow/) に進むか、3D のマージ後に任意の [Part 13: CLI と環境音](/theomonfort/handson/code-cli/) を試せます。グラフ統合も環境音も Operate の前提ではありません。

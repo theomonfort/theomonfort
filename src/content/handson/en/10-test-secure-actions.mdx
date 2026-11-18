@@ -90,23 +90,22 @@ Then return to **Agent**: **“Stop the test MCP's preview, run the chosen tests
 
 <span id="113--optional-watch-the-presenter-demo"></span>
 <span id="93--save-the-exercise-then-checkpoint3-and-the-prepared-demo"></span>
+<span id="93--save-your-work-and-use-checkpoint3"></span>
 
-### 9.3 — Save your work and use checkpoint3
+### 9.3 — Run the agreed tests in PR CI
 
-**Save, commit and push your exercise on `test-creation`; record the branch and commit.** Then run [`./checkpoint3`](/theomonfort/en/handson/intro-2/#checkpoints). It imports a whole snapshot into a separate branch/PR and can replace your tests, agents and instructions. Your work stays on the saved exercise branch: do not blindly merge the snapshot over it.
-
-<span id="102--create-an-actions-workflow-that-runs-automatically-on-prs"></span>
-<span id="112--create-an-actions-workflow-that-runs-automatically-on-prs"></span>
-
-### 9.4 — Check the PR, then continue to security
-
-Return to your saved **`test-creation`** branch with a clean working tree. Ask Copilot:
+Stay on your **`test-creation`** exercise branch. Ask Copilot:
 
 ```text
 Reuse existing E2E CI, or add a PR workflow using Node 22, npm ci and matching Chromium.
 Run the headless tests in tests/e2e and upload the failure report.
 ```
 
-Commit/push and open the test PR, linked to the existing Issue. Inspect its Actions check and report. If based on an unmerged checkpoint2 PR, review and merge that prerequisite first.
+<span id="102--create-an-actions-workflow-that-runs-automatically-on-prs"></span>
+<span id="112--create-an-actions-workflow-that-runs-automatically-on-prs"></span>
+
+### 9.4 — Check the PR, then continue to security
+
+Commit/push and open the test PR, linked to the existing Issue. Inspect its Actions check and report. Review and merge any prerequisite PR first (including checkpoint2 if used), then the test PR. Keep your agreed tests and instructions; no checkpoint import is needed here.
 
 **Continue with [Part 10: Dependabot](/theomonfort/en/handson/test-secure-dependabot/), [Part 11: CodeQL](/theomonfort/en/handson/test-secure-codeql/), then [GHAS](/theomonfort/en/playbook/github-advanced-security/?present=1).** Passing browser tests does not replace security checks.

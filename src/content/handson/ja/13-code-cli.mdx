@@ -1,9 +1,9 @@
 ---
-title: "CODE: CLI"
+title: "CODE: CLI（任意）"
 order: 13
 stepSlug: "code-cli"
 duration: 30
-summary: "checkpoint3 の 3D ギャラクシーを確認するか手動で実装し、Copilot CLI で環境音を追加します。/fleet は独立した未完了タスクだけに使います。"
+summary: "任意の追加演習として、動作する3Dに Copilot CLI で環境音を追加します。/fleet は独立した未完了タスクだけに使います。"
 ---
 
 import Aside from '../../../components/handson/Aside.astro';
@@ -14,9 +14,9 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-ここでは **Part 6 の Issue カタログ**から残りの作業を選びます。手動で進める場合は `[playbook:playbook-3d]` で[既存の 3D ギャラクシービュー](https://theomonfort.github.io/theomonfort/playbook/?view=3d)を再現します。**checkpoint3 にはこの 3D が実装済みです。** 作り直さず、Issue の完了条件に沿って既存実装を確認してください。いずれかの実装をマージ後、`[playbook:galaxy-audio]` に進みます。
+**任意の追加演習です。** [Part 12](/theomonfort/handson/code-copilot-app/) の3Dをレビューしてマージした後、環境音を追加します。**Part 6 の Issue カタログ**の `[playbook:galaxy-audio]` を使い、動作する3Dを再利用します。Zettelkasten は前提ではありません。スキップする場合は [Part 14: Operate](/theomonfort/handson/operate-agentic-workflow/) に進めます。
 
-ここから参加する場合は、`./checkpoint3` でプレゼン機能、テスト / CI、3D ギャラクシーを準備できます。[チェックポイントとサーバー起動](/theomonfort/handson/intro-2/#checkpoints)を参照し、サーバー起動後に `/playbook/?view=3d` を開くか、`/playbook` の **3D** を選んでください。環境音と日次レポートは未実装です。checkpoint1 が準備したカタログを再利用し、スキップした場合は [Part 6 のプロンプト](/theomonfort/handson/code-copilot-chat/#66--改善点を-issue-化する)で不足する Issue だけ作成します。
+3D がなければ先に Part 12 の該当段階を完了します。完成したグラフをスナップショットで置き換えないでください。作業ブランチで `npm run dev` を起動し、`/playbook/?view=3d` を開くか **3D** を選びます。既存の Issue カタログを再利用し、必要なら [Part 6 のプロンプト](/theomonfort/handson/code-copilot-chat/#66--改善点を-issue-化する)で不足分だけ作成します。
 
 ### 13.0 — （Codespace を使っていない場合）Copilot CLI をインストールする
 
@@ -86,15 +86,15 @@ CLI 内で以下を実行：
 
 ### 13.3 — `/fleet` で Issue を並列に実装する
 
-前提の PR がマージ済みの未完了タスクを選びます。checkpoint3 を使う場合は確認済みの 3D を再利用して `galaxy-audio` に進み、使わない場合は先に 3D を実装します。着手可能な作業が 1 件なら CLI の単一セッションで進めます。独立したタスクが複数ある場合は、以下の `/fleet` プロンプトを使います。各実装のラバーダックレビューも依頼しています。
+前提の PR がマージ済みの未完了タスクを選びます。Part 12 または checkpoint3 の 3D を再利用して `galaxy-audio` に進みます。3D がなければ先に Part 12 の3D段階を完了してください。着手可能な作業が 1 件なら CLI の単一セッションで進めます。独立したタスクが複数ある場合は、以下の `/fleet` プロンプトを使います。各実装のラバーダックレビューも依頼しています。
 
 ```
 /fleet [playbook:キー] で識別される Part 6 の Issue と完了条件を読んでください。
 前提の PR がマージ済みの未完了タスクだけを選んでください。
 presentation-tests は Part 9 の結果を確認し、完了済みの検証を重複させないでください。daily-repo-status は Part 14 用に残してください。
-checkpoint3 が playbook-3d の完了条件を満たすか確認し、作り直さず再利用してください。
-3D がない場合は実装してマージし、その後に galaxy-audio を進めてください。
-checkpoint3 を使う場合は、その PR のマージ後に環境音を実装してください。依存する作業を同時に進めないでください。
+Part 12 または checkpoint3 で完成した3Dを再利用し、グラフや3Dの統合を作り直さないでください。
+3D がなければ先に Part 12 の3D段階に戻ります。前提の PR または checkpoint PR をマージしてから
+galaxy-audio に進んでください。依存する作業を同時に進めないでください。
 着手可能な作業が 1 件だけなら、余分なエージェントを起動せずその作業を進めてください。
 open Issue やラベルで一括選択せず、範囲が独立した着手可能タスクだけを並列化してください。
 

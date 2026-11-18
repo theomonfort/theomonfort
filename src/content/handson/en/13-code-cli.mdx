@@ -1,9 +1,9 @@
 ---
-title: "CODE: CLI"
+title: "CODE: CLI (optional)"
 order: 13
 stepSlug: "code-cli"
 duration: 30
-summary: "Inspect checkpoint3's existing 3D Galaxy or build it manually, then add ambience with Copilot CLI. Use /fleet only for independent remaining tasks."
+summary: "Optional extension: add ambience to working 3D with Copilot CLI. Use /fleet only for independent remaining tasks."
 ---
 
 import Aside from '../../../components/handson/Aside.astro';
@@ -14,9 +14,9 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-Use the **Part 6 Issue catalogue** for remaining work. On the manual-build path, implement `[playbook:playbook-3d]` to recreate the [existing 3D Galaxy view](https://theomonfort.github.io/theomonfort/en/playbook/?view=3d). **Checkpoint3 already includes that 3D implementation**: inspect it against the Issue's criteria rather than rebuilding it. After merging either implementation, continue with `[playbook:galaxy-audio]`.
+**Optional extension:** add ambience after reviewing and merging the 3D work from [Part 12](/theomonfort/en/handson/code-copilot-app/). Use the **Part 6 Issue catalogue** for `[playbook:galaxy-audio]` and reuse working 3D; Zettelkasten is not a prerequisite. To skip this extension, continue to [Part 14: Operate](/theomonfort/en/handson/operate-agentic-workflow/).
 
-Joining here? Use `./checkpoint3` for presentation, tests/CI and the 3D Galaxy; see [checkpoint and server instructions](/theomonfort/en/handson/intro-2/#checkpoints). After starting the server, open `/playbook/?view=3d` or select **3D** on `/playbook`. Ambient audio and daily reporting are not prebuilt. Reuse the catalogue seeded by checkpoint1; if you skipped it, use the [Part 6 prompt](/theomonfort/en/handson/code-copilot-chat/#66--file-the-improvements-as-issues) to create only missing Issues.
+If 3D is missing, complete that stage in Part 12 first; do not replace completed graph work with a snapshot. On your working branch, start `npm run dev`, then open `/playbook/?view=3d` or select **3D**. Reuse the existing Issue catalogue; if needed, use the [Part 6 prompt](/theomonfort/en/handson/code-copilot-chat/#66--file-the-improvements-as-issues) for missing Issues only.
 
 ### 13.0 — (If you're not on a Codespace) Install Copilot CLI
 
@@ -86,15 +86,15 @@ Pick the most capable model available (e.g., Claude Opus 4.6).
 
 ### 13.3 — Implement Issues in parallel with `/fleet`
 
-Select unfinished work whose prerequisites are merged. With checkpoint3, reuse its verified 3D and work on `galaxy-audio`; without it, build 3D first. If only one task is ready, use a single CLI session. For multiple independent tasks, use `/fleet` with the prompt below. It also asks for a rubber-duck review.
+Select unfinished work whose prerequisites are merged. Reuse the 3D from Part 12 or checkpoint3 and work on `galaxy-audio`; if 3D is missing, complete Part 12's 3D stage first. If only one task is ready, use a single CLI session. For multiple independent tasks, use `/fleet` with the prompt below. It also asks for a rubber-duck review.
 
 ```
 /fleet Read the Part 6 Issues identified by [playbook:key] and their acceptance criteria.
 Select only unfinished tasks whose prerequisites are merged.
 Review presentation-tests against Part 9; do not duplicate completed coverage. Keep daily-repo-status for Part 14.
-Inspect whether checkpoint3 already satisfies playbook-3d; reuse it instead of rebuilding.
-If 3D is missing, implement and merge it before galaxy-audio. If checkpoint3 supplies it,
-merge the checkpoint PR before starting audio. Do not run dependent tasks concurrently.
+Reuse 3D completed in Part 12 or checkpoint3. Do not recreate the graph or 3D integration.
+If 3D is missing, return to Part 12's 3D stage first. Merge its prerequisite PR (or the checkpoint PR)
+before starting galaxy-audio. Do not run dependent tasks concurrently.
 If only one task is ready, work on that one without spawning extra agents.
 Parallelize only independently scoped ready tasks, not every open Issue or label.
 
