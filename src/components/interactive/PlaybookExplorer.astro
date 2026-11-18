@@ -260,19 +260,11 @@ const systems: ExplorerGalaxyCategory[] = categories.map((category) => ({
         const value = (event.target as HTMLSelectElement).value;
         this.selectCategory(this.systems.find((system) => system.id === value)?.id ?? null);
       }, { signal });
-      this.addEventListener('keydown', (event) => {
+      document.addEventListener('keydown', (event) => {
         if (event.key !== 'Escape' || this.mode !== '3d') return;
         event.preventDefault();
-        if (!this.querySelector<HTMLElement>('.galaxy-panel')!.hidden) {
-          this.setPanelOpen(false);
-          this.querySelector<HTMLButtonElement>('[data-panel-toggle]')!.focus();
-        } else if (this.category) {
-          this.selectCategory(null);
-          this.querySelector<HTMLSelectElement>('select')!.focus();
-        } else {
-          void this.setMode('2d');
-          this.querySelector<HTMLButtonElement>('[data-mode="3d"]')!.focus();
-        }
+        void this.setMode('2d');
+        this.querySelector<HTMLButtonElement>('[data-mode="3d"]')!.focus();
       }, { signal });
       // Dispose before Astro swaps the DOM, including while a dynamic import is pending.
       document.addEventListener('astro:before-swap', () => this.stopScene(), { signal });
