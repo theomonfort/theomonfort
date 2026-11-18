@@ -202,6 +202,9 @@ a.retro-link:hover {
     radial-gradient(circle at 72% 4%, color-mix(in srgb, var(--entry-accent), transparent 84%), transparent 24rem),
     radial-gradient(circle at 12% 18%, rgb(var(--rgb-neon-magenta) / 0.09), transparent 24rem);
   opacity: 0.9;
+  /* Fade the 8vw overflow on each side so the glow never ends in a hard vertical seam on wide screens. */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8vw, #000 calc(100% - 8vw), transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 8vw, #000 calc(100% - 8vw), transparent);
 }
 .handson-shell::after {
   top: 4rem;
