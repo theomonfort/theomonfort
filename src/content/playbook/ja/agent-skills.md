@@ -197,7 +197,7 @@ gh skills install ards-project/connectors skills/github-copilot
 > 🌐 一度作れば VS Code / Copilot CLI / SDK / Copilot アプリで動く。全プランで GA。
 > 🏢 **Enterprise**: 許可するプラグインとマーケットプレイスは従来どおり `managed-settings.json` で統制できる。
 
-## プラグインの導入と利用
+## プラグインの導入と利用 <a class="h2-doc" href="https://awesome-copilot.github.com/plugins/" target="_blank" rel="noopener noreferrer">プラグインを探す ↗</a>
 
 マーケットプレイスは 2 つが標準で使える。**`copilot-plugins`**（GitHub 公式）と **`awesome-copilot`**（コミュニティ）。
 
@@ -207,7 +207,5 @@ gh skills install ards-project/connectors skills/github-copilot
 | 📥 `copilot plugin install <name>@awesome-copilot` | マーケットプレイスから導入 |
 | 📋 `copilot plugin list` | 導入済みと有効状態を確認 |
 | 🗑️ `copilot plugin uninstall <name>` | 削除する |
-
-`owner/repo`、`owner/repo:path`、Git URL からも導入できる。`copilot --plugin-dir ./my-plugin` なら導入せずローカルから読み込める。
 
 > ⚠️ 導入は**リポジトリ単位ではなくユーザー単位**。`~/.copilot/installed-plugins/` に入り、全プロジェクトに適用される。

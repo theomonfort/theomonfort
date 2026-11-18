@@ -197,7 +197,7 @@ Only skills and MCP are standardized. Copilot-specific features stay in a namesp
 > 🌐 Build once, run it in VS Code, Copilot CLI, the SDK, and the Copilot app — GA on all plans.
 > 🏢 **Enterprise**: `managed-settings.json` still governs which plugins and marketplaces are allowed.
 
-## Install and use a plugin
+## Install and use a plugin <a class="h2-doc" href="https://awesome-copilot.github.com/plugins/" target="_blank" rel="noopener noreferrer">Browse plugins ↗</a>
 
 Two marketplaces ship built in: **`copilot-plugins`** (GitHub's own) and **`awesome-copilot`** (community).
 
@@ -207,7 +207,5 @@ Two marketplaces ship built in: **`copilot-plugins`** (GitHub's own) and **`awes
 | 📥 `copilot plugin install <name>@awesome-copilot` | Install from a marketplace |
 | 📋 `copilot plugin list` | Show installed plugins and their state |
 | 🗑️ `copilot plugin uninstall <name>` | Remove it |
-
-Also install from `owner/repo`, `owner/repo:path`, or a git URL. Load from disk without installing: `copilot --plugin-dir ./my-plugin`.
 
 > ⚠️ Installs are **user-level, not per-repo** — they land in `~/.copilot/installed-plugins/` and apply to every project.
