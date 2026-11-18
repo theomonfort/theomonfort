@@ -234,3 +234,30 @@ Choose an **agent harness**, not a Copilot Chat mode. The **implementation chang
 
 </div>
 </div>
+
+## Sandbox boundaries for third-party agents <a class="h2-doc" href="https://code.visualstudio.com/docs/agents/run/agent-sandboxing" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+<div class="partner-setup-columns">
+<div>
+
+### Claude Code
+
+- **Shell sandbox (opt-in, off by default):** Bash / PowerShell commands and children.
+- **Outside it:** Read / Edit / Write, web tools, hooks, local MCP, and LSP (separate controls).
+
+<a class="retro-link" href="https://code.claude.com/docs/en/sandboxing#what-runs-outside-the-sandbox" target="_blank" rel="noopener noreferrer">Claude Code sandbox docs ↗</a>
+
+</div>
+<div>
+
+### OpenAI Codex
+
+- **Local defaults:** sandbox built-in file operations and spawned commands.
+- **Approval is separate:** `danger-full-access` removes sandbox limits.
+
+<a class="retro-link" href="https://learn.chatgpt.com/docs/sandboxing" target="_blank" rel="noopener noreferrer">Codex sandbox docs ↗</a>
+
+</div>
+</div>
+
+> **Scope:** Provider docs describe provider defaults; VS Code behavior may differ. `chat.agent.sandbox.enabled` covers Copilot's shared-runtime default tools only, not Claude / Codex harnesses.
