@@ -29,6 +29,7 @@ interface TeamsLink {
 interface Item {
   label: string;
   checklistIndex?: number;
+  checklistKey?: string;
   teams?: TeamsLink[];
 }
 interface Section {
@@ -104,14 +105,11 @@ const sections: Section[] = [
     subtitle: 'Copilot と同期でコーディング',
     color: 'magenta',
     items: [
-      { label: 'Demo Auto approve + Fusion' },
-      { label: 'Show the customization windows' },
-      { label: 'Demo Plan mode / Grill-me / Prompt' },
-      // Preserve saved progress IDs after removing the Custom Agents item.
-      { label: 'Demo Inline Request', checklistIndex: 25 },
-      { label: 'Explain Context windows' },
-      { label: 'Explain Token Optimization' },
-      { label: 'SUMMARIZE' },
+      { label: 'Show Customization windows', checklistIndex: 22 },
+      { label: 'Demo Agent Mode (Plan), Permission (Allow-all), Models (Fusion)', checklistKey: 'code-agent-configuration' },
+      { label: 'Send prompt and validate until switching to Autopilot', checklistKey: 'code-prompt-autopilot' },
+      { label: 'Demo inline request', checklistIndex: 25 },
+      { label: 'Candidate explanations: Context windows, Token optimization, CLI (Subagents), Copilot (App)', checklistKey: 'code-explanation-candidates' },
     ],
   },
   {
@@ -119,7 +117,8 @@ const sections: Section[] = [
     subtitle: '自動レビューを設定',
     color: 'amber',
     items: [
-      { label: 'Explain Code Review' },
+      // Preserve following progress IDs without reusing retired CODE items.
+      { label: 'Explain Code Review', checklistIndex: 29 },
       { label: 'Demo Rulesets Setting' },
       { label: 'Demo Implementation Result' },
       { label: 'Demo Code Review Result' },
@@ -333,16 +332,16 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
             <ul class="ws-list ml-[6px] pl-5 py-1 space-y-0.5">
               {section.items.map((item) => {
                 counter = item.checklistIndex ?? counter;
-                const id = `ws-${w.id}-${counter++}`;
+                const id = `ws-${w.id}-${item.checklistKey ?? counter++}`;
                 const teamsText = item.teams
                   ? item.teams.map((t) => `${t.label}\n${t.url}`).join('\n\n')
                   : '';
                 const stepKind =
                   section.title === 'PREPARATION'
                     ? 'prep'
-                    : /^(explain|summarize)\b/i.test(item.label)
+                    : /^(explain|summarize|candidate explanations)\b/i.test(item.label)
                       ? 'explain'
-                      : /^(demo|show)\b/i.test(item.label)
+                      : /^(demo|show|send prompt)\b/i.test(item.label)
                         ? 'demo'
                         : section.title === 'INTRODUCTION'
                           ? 'explain'
