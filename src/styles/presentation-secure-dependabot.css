@@ -145,7 +145,7 @@ body.present-mode .playbook-detail[data-playbook-slug="dependabot"] .dependency-
 
 .playbook-detail[data-playbook-slug="dependabot"] .prose-akq .dependency-route-arrow::before {content:"";flex:1;height:2px;background:currentColor}
 
-.playbook-detail[data-playbook-slug="dependabot"] .prose-akq .dependency-route-arrow::after {content:"→"}
+.playbook-detail[data-playbook-slug="dependabot"] .prose-akq .dependency-route-arrow::after {content:"";flex:none;width:0;height:0;border-block:6px solid transparent;border-left:10px solid currentColor}
 
 .playbook-detail[data-playbook-slug="dependabot"] .prose-akq .dependency-route-arrow-long {grid-column:2 / 5}
 
@@ -154,11 +154,11 @@ body.present-mode .playbook-detail[data-playbook-slug="dependabot"] .dependency-
 
 .playbook-detail[data-playbook-slug="dependabot"] .prose-akq .dependency-route-arrow-long {grid-column:auto}
 
-.playbook-detail[data-playbook-slug="dependabot"] .prose-akq .dependency-route-arrow {justify-content:center}
+.playbook-detail[data-playbook-slug="dependabot"] .prose-akq .dependency-route-arrow {flex-direction:column;justify-content:center}
 
-.playbook-detail[data-playbook-slug="dependabot"] .prose-akq .dependency-route-arrow::before {display:none}
+.playbook-detail[data-playbook-slug="dependabot"] .prose-akq .dependency-route-arrow::before {flex:none;width:2px;height:12px}
 
-.playbook-detail[data-playbook-slug="dependabot"] .prose-akq .dependency-route-arrow::after {content:"↓"}
+.playbook-detail[data-playbook-slug="dependabot"] .prose-akq .dependency-route-arrow::after {border-inline:6px solid transparent;border-block:10px solid currentColor;border-bottom:0}
 
 .playbook-detail[data-playbook-slug="dependabot"] .prose-akq .dependency-route-heading {flex-wrap:wrap}
 }
