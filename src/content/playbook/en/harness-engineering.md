@@ -254,8 +254,8 @@ The same "AI scaffold" concept exists across ecosystems, but file locations and 
     <text x="382" y="316" text-anchor="start" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="0.5" fill="var(--c-crt-amber)">Opus 4.8</text>
     <rect x="378" y="374" width="250" height="70" rx="2" fill="var(--c-shadow-ink)"/>
     <rect x="374" y="370" width="250" height="70" rx="2" fill="var(--c-midnight)" stroke="var(--c-neon-cyan)" stroke-width="2"/>
-    <text x="499" y="399" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="var(--c-neon-cyan)">Tester</text>
-    <text x="499" y="421" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">Custom agent</text>
+    <text x="499" y="389" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="var(--c-neon-cyan)" aria-label="playwright-test-generator"><tspan x="499">playwright-test-</tspan><tspan x="499" dy="20">generator</tspan></text>
+    <text x="499" y="426" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">Custom agent</text>
     <text x="616" y="431" text-anchor="end" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="1" fill="var(--c-gb-green)">LOCAL</text>
     <text x="382" y="431" text-anchor="start" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="0.5" fill="var(--c-crt-amber)">GPT-5.5</text>
     <rect x="378" y="489" width="250" height="70" rx="2" fill="var(--c-shadow-ink)"/>
