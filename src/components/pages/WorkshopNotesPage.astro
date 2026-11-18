@@ -28,6 +28,7 @@ interface TeamsLink {
 }
 interface Item {
   label: string;
+  checklistIndex?: number;
   teams?: TeamsLink[];
 }
 interface Section {
@@ -103,11 +104,11 @@ const sections: Section[] = [
     subtitle: 'Copilot と同期でコーディング',
     color: 'magenta',
     items: [
-      { label: 'Demo Autoapprove + Model 4.8' },
-      { label: 'Demo Modes + Tools' },
-      { label: 'Demo Plan + Grill-me + Prompt' },
-      { label: 'Demo Custom Agents (Files + session used tools)' },
-      { label: 'Demo Inline Request' },
+      { label: 'Demo Auto approve + Fusion' },
+      { label: 'Show the customization windows' },
+      { label: 'Demo Plan mode / Grill-me / Prompt' },
+      // Preserve saved progress IDs after removing the Custom Agents item.
+      { label: 'Demo Inline Request', checklistIndex: 25 },
       { label: 'Explain Context windows' },
       { label: 'Explain Token Optimization' },
       { label: 'SUMMARIZE' },
@@ -331,6 +332,7 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
             </summary>
             <ul class="ws-list ml-[6px] pl-5 py-1 space-y-0.5">
               {section.items.map((item) => {
+                counter = item.checklistIndex ?? counter;
                 const id = `ws-${w.id}-${counter++}`;
                 const teamsText = item.teams
                   ? item.teams.map((t) => `${t.label}\n${t.url}`).join('\n\n')
@@ -340,7 +342,7 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
                     ? 'prep'
                     : /^(explain|summarize)\b/i.test(item.label)
                       ? 'explain'
-                      : /^demo\b/i.test(item.label)
+                      : /^(demo|show)\b/i.test(item.label)
                         ? 'demo'
                         : section.title === 'INTRODUCTION'
                           ? 'explain'
