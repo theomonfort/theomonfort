@@ -35,6 +35,8 @@ interface Item {
 interface Section {
   title: string;
   subtitle?: string;
+  sectionIndex?: number;
+  note?: string;
   color: SectionColor;
   duration?: string;
   items: Item[];
@@ -125,36 +127,29 @@ const sections: Section[] = [
     ],
   },
   {
-    title: 'CODE',
-    subtitle: 'Copilot と非同期でコーディング',
-    color: 'magenta',
-    items: [
-      { label: 'Explain CLOUD AGENT (SLIDES)' },
-      { label: 'Demo MCP server for CCA' },
-      { label: 'Demo Assign [playbook:presentation-core] first; merge before TEST & SECURE, then finish the presentation-content / mermaid-rendering / responsive-navigation tasks' },
-      { label: 'Demo Setting' },
-      { label: 'Demo CCA Session (OTHER REPO)' },
-      { label: 'Demo Conflict Resolution' },
-      { label: 'Demo CCA implementation Result' },
-      { label: 'SUMMARIZE' },
-    ],
-  },
-  {
     title: 'TEST & SECURE',
-    subtitle: '脆弱性チェックを設定',
+    subtitle: 'テスト作成からセキュリティへ',
+    sectionIndex: 6,
+    note: 'Requires working presentation; otherwise use checkpoint2. Cloud Agent is optional.',
     color: 'cyan',
     items: [
-      { label: 'Demo CodeQL on PR' },
+      { label: 'Show official Playwright planner + generator and test MCP', checklistKey: 'tests-prepare-agents' },
+      { label: 'Add instruction: assess tests, ask which, implement feature + agreed tests', checklistKey: 'tests-feature-instruction' },
+      { label: 'Demo planner: propose tests and ask which to add', checklistKey: 'tests-plan-selection' },
+      { label: 'Demo generator: create selected tests, run and explain an assertion', checklistKey: 'tests-generate-assertion' },
+      { label: 'Explain tool choice: Playwright for web/localhost; Computer Use or other tools for native apps', checklistKey: 'tests-tool-choice' },
+      { label: 'Save exercise work, import checkpoint3, launch the prepared 18s demo', checklistKey: 'tests-checkpoint-demo' },
+      { label: 'Demo CodeQL on PR', checklistIndex: 41 },
       { label: 'Explain GHAS (SLIDES)' },
-      { label: 'Explain TESTS: open /playbook, enter presentation from a card, then test keyboard navigation' },
     ],
   },
   {
     title: 'CLI',
     subtitle: 'CLI と Copilot アプリ',
+    sectionIndex: 7,
     color: 'amber',
     items: [
-      { label: 'Explain CLI' },
+      { label: 'Explain CLI', checklistIndex: 44 },
       { label: 'Demo CLI Versus Visual Studio Code' },
       { label: 'Inspect checkpoint3 3D or build [playbook:playbook-3d] manually, then galaxy-audio after merging; audio/reporting are not prebuilt; fleet only independent ready tasks' },
     ],
@@ -162,6 +157,7 @@ const sections: Section[] = [
   {
     title: 'OPERATE',
     subtitle: '保守をエージェントワークフローに委任',
+    sectionIndex: 8,
     color: 'green',
     items: [
       { label: 'Explain AGENTIC WORKFLOW' },
@@ -317,7 +313,7 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
       {w.sections.map((section, si) => {
         const c = COLORS[section.color];
         return (
-          <details class="ws-section" data-section={`${w.id}-${si}`} style={`--c:${c.cssVar}`} open>
+          <details class="ws-section" data-section={`${w.id}-${section.sectionIndex ?? si}`} style={`--c:${c.cssVar}`} open>
             <summary class={`ws-summary flex items-center gap-3 cursor-pointer select-none px-2.5 py-2.5 rounded-[var(--radius-card)] ${c.text}`}>
               <span class="ws-node shrink-0" aria-hidden="true"></span>
               <span class="ws-chevron font-mono text-xs transition-transform duration-200">▶</span>
@@ -329,6 +325,7 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
               <button type="button" class="ws-check-all font-mono" aria-label="Toggle all items in this section">✓ ALL</button>
               <span class="ws-section-count font-mono text-xs font-semibold opacity-90">0 / {section.items.length}</span>
             </summary>
+            {section.note && <p class="font-body text-sm text-phosphor px-2.5 py-2">{section.note}</p>}
             <ul class="ws-list ml-[6px] pl-5 py-1 space-y-0.5">
               {section.items.map((item) => {
                 counter = item.checklistIndex ?? counter;

@@ -1,6 +1,6 @@
 ---
 title: "TEST & SECURE: CodeQL"
-order: 10
+order: 11
 stepSlug: "test-secure-codeql"
 duration: 2
 summary: "コードに潜むセキュリティ脆弱性を静的解析でスキャンする CodeQL を有効化します。"
@@ -15,8 +15,9 @@ import Aside from '../../../components/handson/Aside.astro';
 </Aside>
 
 <span id="91--codeql-を有効化する"></span>
+<span id="101--codeql-を有効化する"></span>
 
-### 10.1 — CodeQL を有効化する
+### 11.1 — CodeQL を有効化する
 
 1. リポジトリの **Settings** → **Security and quality** → **Advanced Security**
 2. **Tools** → **CodeQL analysis** → **Set up** → **Default** → **Enable CodeQL**
@@ -36,3 +37,5 @@ import Aside from '../../../components/handson/Aside.astro';
 - **結果の確認場所**: リポジトリの **Security** タブ → **Code scanning** から全アラートを確認できます。PR では該当行に直接コメントが付きます。
 
 </Aside>
+
+[Part 9](/theomonfort/handson/test-secure-actions/) のテストとデモの後に、PR の E2E と CodeQL のチェックを比較し、[GHAS スライド](/theomonfort/playbook/github-advanced-security/?present=1)を開きます。依存関係のセキュリティに加え、コードスキャンとシークレット保護を説明してください。機能テストの成功だけではセキュリティは保証できません。

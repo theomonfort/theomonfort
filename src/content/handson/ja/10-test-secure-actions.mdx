@@ -1,6 +1,6 @@
 ---
 title: "TEST & SECURE: Actions"
-order: 11
+order: 9
 stepSlug: "test-secure-actions"
 duration: 15
 summary: "追加するテストを相談して決め、公式 Playwright エージェントで生成し、GitHub Actions で PR ごとに実行します。"
@@ -16,27 +16,18 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-**前提：** [Step 8](/theomonfort/handson/code-cloud-agent/) または `./checkpoint2` で動作するプレゼンモードを準備します（[チェックポイントとサーバー起動](/theomonfort/handson/intro-2/#checkpoints)）。古いローカルの `main` ではなく、その実装を含むブランチから始めてください。
+**前提：** 現在の実装でプレゼンモードが動作する状態から始めます。未完成なら、作業を保存して `./checkpoint2` を使ってください（[チェックポイントとサーバー起動](/theomonfort/handson/intro-2/#checkpoints)）。[Part 8 の Cloud Agent](/theomonfort/handson/code-cloud-agent/) は実装方法の選択肢であり、この発表の流れでは必須ではありません。古いローカルの `main` ではなく、動作するプレゼン実装を含むブランチから始めてください。
 
 Part 6 の既存の `[playbook:presentation-tests]` Issue を使い、その実際の番号でテスト PR を関連付けます。checkpoint3 から始めた場合は、まず既存テストと CI を確認して実行し、合意した不足分だけを追加してください。テスト一式や workflow を重複生成せず、ワークショップのレトロ UI は維持します。
 
 <span id="101--presentation-モードのテストを作成する"></span>
+<span id="111--presentation-モードのテストを作成する"></span>
 
-### 11.1 — Presentation モードのテストを作成する
-
-#### 実装前にテストを相談する
-
-新しい `test-creation` ブランチで、[Part 4](/theomonfort/handson/plan-instruction/) の **`.github/copilot-instructions.md`** に次のルールを追記します。既存の指示は残してください。
-
-```markdown
-## 機能とテスト
-
-- 機能の実装や変更の前に、適切なテストを提案し、どれを追加または更新するかユーザーに確認する。回答を待ってから、機能と選ばれたテストを一緒に実装し、実行する。
-```
-
-この演習では、生成前に**受講者自身**がテストを選びます。プロンプトや指示はガイドであり、承認を強制する仕組みではありません。Copilot が実際に質問して回答を待つことを確認してください。
+### 9.1 — Presentation モードのテストを作成する
 
 #### 公式エージェントを安全に準備する
+
+動作するプレゼン実装のブランチから、新しい `test-creation` ブランチを作ります。まずツールを準備し、次に指示を追加してテストを選びます。
 
 **VS Code 1.105 以降**を使い、[Part 3](/theomonfort/handson/plan-mcp/) と同じ Copilot ハーネスとルートの MCP 設定を使います。このバージョンは Playwright の最低要件です。現在のハーネスの要件も満たしてください。
 
@@ -110,6 +101,18 @@ tests/e2e/seed.spec.ts を作成し、実際の画面を確認したうえで /p
 
 **Customizations → Agents** に `playwright-test-planner`、`playwright-test-generator`、`playwright-test-healer` が表示されることを確認します。**MCP Servers → Workspace** では、信頼確認の内容を確認してルート `.mcp.json` の `playwright-test` を起動してください。GitHub と Context7 も利用できる状態を維持します。ルート形式は [VS Code MCP 設定リファレンス](https://code.visualstudio.com/docs/agents/reference/mcp-configuration) を参照してください。
 
+#### 実装前にテストを相談する
+
+[Part 4](/theomonfort/handson/plan-instruction/) の **`.github/copilot-instructions.md`** に次のルールを追記します。既存の指示は残してください。
+
+```markdown
+## 機能とテスト
+
+- 機能の追加や変更時には、テストが必要かを検討する。適切なテストを提案し、どれを追加または更新するかユーザーに確認してから、機能と合意したテストを一緒に実装する。
+```
+
+この演習では、生成前に**受講者自身**がテストを選びます。プロンプトや指示はガイドであり、承認を強制する仕組みではありません。Copilot が実際に質問して回答を待つことを確認してください。
+
 #### 画面を調べ、提案から選ぶ
 
 **`playwright-test-planner`** を選び、seed テストを添付して送信します。
@@ -160,19 +163,53 @@ npx --package=node@22.23.4 node ./node_modules/@playwright/test/cli.js test test
 npx --package=node@22.23.4 node ./node_modules/@playwright/test/cli.js test
 ```
 
-コミット前に assertion と失敗理由を確認します。今後の機能開発では、追加した指示を使って **「この機能のテストを提案し、どれを追加するか私に確認してから、機能とテストを一緒に実装してください」** と依頼します。
+成功件数だけでなく、assertion を 1 つ選び、どの具体的な回帰を検知できるか説明します。コミット前に assertion と失敗理由を確認してください。今後の機能開発では、追加した指示を使って **「この機能にテストが必要か検討し、適切なケースを提案してください。どれを追加するか私に確認してから、機能と合意したテストを一緒に実装してください」** と依頼します。
 
 **healer は任意**です。既定の動作では壊れたシナリオを skip する場合があるため、テストの skip や削除、assertion の弱体化、アプリの不具合を隠す修正を明示的に禁止してください。提案された修正をレビューして再実行し、検証を削って「成功」にしないでください。
 
+### 9.2 — Web とデスクトップでツールを選ぶ
+
+| 検証する対象 | 適した方法 |
+| --- | --- |
+| `localhost` で動くものを含む Web アプリ | Playwright でブラウザーを操作し、DOM の挙動を検証します。テストエージェントは再実行可能なテストの計画と生成を支援します。 |
+| ネイティブのデスクトップアプリ | ホストが対応し、権限が許可されていれば Computer Use、または対象プラットフォームに適した自動化ツールを使います。ブラウザーツールだけでネイティブウィンドウを操作できるとは限りません。 |
+| UI を持たないロジックや API | 画面操作より、ユニットテストや API テストの方がシンプルで速い場合があります。 |
+
+「ローカルアプリ」が必ずデスクトップアプリとは限りません。今回のローカル Astro サイトは Web アプリです。Computer Use はネイティブ UI の確認や操作を支援できますが、万能なテストフレームワークではなく、assertion や CI の代わりにもなりません。確認したい挙動に合わせてツールを選んでください。
+
+<span id="113--任意発表用デモを見る"></span>
+
+### 9.3 — 演習を保存して checkpoint3 と準備済みデモへ進む
+
+**チェックポイントの取り込み前に、自分の作業を保存してください。** エディタの内容を保存し、差分を確認して、機能の変更、選んだテスト、計画、エージェントと MCP の設定、指示を `test-creation` にコミットして push します。戻れるようにブランチ名とコミットを控えてください。
+
+自分で作成したリポジトリのルートで、[チェックポイントの説明](/theomonfort/handson/intro-2/#checkpoints)に従い `./checkpoint3` を実行します。これはリモート `main` から新規ブランチと PR を作り、**スナップショット全体**を取り込む操作です。現在の演習ブランチへの追加パッチではありません。新しいテスト、エージェント、MCP エントリー、指示を含め、ファイルが置換または削除される場合があります。作業は保存した演習ブランチに残りますが、checkpoint ブランチへ自動で引き継がれるわけではありません。差分を確認し、表示された stash 参照を控え、無条件でマージして作業を置き換えないでください。
+
+**checkpoint3** には、別の headed デモとして [`playwright.demo.config.ts`](https://github.com/theomonfort/Github-copilot-workshop/blob/e40b89ae43baa271e5e4f9503b4ed5492c3b7ac5/playwright.demo.config.ts) と [`tests/demo/playbook.demo.ts`](https://github.com/theomonfort/Github-copilot-workshop/blob/e40b89ae43baa271e5e4f9503b4ed5492c3b7ac5/tests/demo/playbook.demo.ts) があります。**`tests/e2e` や PR CI には含まれず**、テスト生成の演習とは別です。
+
+この**準備済みの18秒ツアーは、今生成したテストとは別物**です。checkpoint ブランチで `npm ci` と `npx playwright install chromium` を実行し、**GUI のあるローカル環境**で動かしてください。ブラウザーだけの Codespace ではこのネイティブウィンドウは表示されないため、講師がローカルで実行し、受講者が見る形でも構いません。作成済みのテンプレートには自動反映されません。既に checkpoint3 を使っている場合は、全体を再取り込みせず、リンク先の版からこの 2 ファイルだけをレビューして追加してください。
+
+```bash
+npx --package=node@22.23.4 node ./node_modules/@playwright/test/cli.js test --config=playwright.demo.config.ts
+```
+
+Node 26 の trace 問題を避けるため、一時的に Node 22 を使います。グローバルインストールは不要です。コマンドをそのまま実行し、外側を `npx -c` で囲まないでください。
+
+1 つのブラウザーウィンドウで、一覧から GitHub 記事を開き、`P` でプレゼン開始、次スライドへ移動、Copilot と Fusion に切り替え、`Esc` で一覧へ戻ります。表示後の旅程は**約18秒**で、依存関係のダウンロード、ビルド、ブラウザー起動は別時間です。遅い環境で旅程が20秒を超えると、制限を黙って緩めず、デモの時間 assertion が失敗します。
+
+専用ポート **44331** の preview を使い、終了時にデモのブラウザーとサーバーを閉じます。既存の開発サーバーは流用も停止もしません。出力先は `test-results/demo` に分かれているため、起動時に通常テストの結果を削除しません。この意図的な待機を通常テストへ入れないでください。Inspector の手動操作、trace 再生、動画保存、3D デモは不要です。
+
 <span id="102--pr-で自動実行する-actions-ワークフローを作成する"></span>
+<span id="112--pr-で自動実行する-actions-ワークフローを作成する"></span>
 
-### 11.2 — PR で自動実行する Actions ワークフローを作成する
+### 9.4 — PR を確認してからセキュリティへ進む
 
-続けて Copilot Chat に以下を入力してください：
+デモ後は作業ツリーを clean にして、保存した `test-creation` ブランチへ戻ります。選んだテストと指示が残っていることを確認してください。checkpoint PR は、スナップショットと自分の作業をどう統合するかレビューするまで別に保ちます。
+
+Copilot Chat に以下を入力してください：
 
 ```
-同じ `test-creation` ブランチで作業してください。
-
+checkpoint のデモ用ブランチではなく、保存した test-creation ブランチで作業してください。
 既存の E2E workflow があれば再利用し、なければ .github/workflows/test.yml を作成してください。
 PR の作成または更新時にトリガーし、以下を実行してください：
 
@@ -186,28 +223,6 @@ PR の作成または更新時にトリガーし、以下を実行してくだ�
 CI に固定待機、headed ブラウザー、slow motion は追加しないでください。
 ```
 
-⏱ 約2分
+テストと workflow をコミットして push し、`test-creation` から PR を作成します。Actions で E2E チェックと assertion、レポートを確認してください。未マージの checkpoint2 ブランチから始めた場合は、その前提 PR を先にレビューしてマージし、必要に応じてテスト PR を更新します。
 
-テストと workflow をコミットして push し、`test-creation` から PR を作成すると、Actions タブで E2E workflow の実行を確認できます。未マージのチェックポイントブランチから始めた場合は、先にチェックポイント PR をレビューしてマージし、必要に応じてテスト PR を更新してください。プレゼンモードの挙動を変更したときに、この workflow が早期に回帰を検知してくれます。
-
-<Aside type="positive">
-
-**ポイント**: テストを書き、Actions で常時実行しておくことで、Cloud Agent や次の Agentic Workflow が自動的に PR を作るようになっても、レグレッションを検知できる安全網が手に入ります。
-
-</Aside>
-
-### 11.3 — 任意：発表用デモを見る
-
-**checkpoint3** には、別の headed デモとして [`playwright.demo.config.ts`](https://github.com/theomonfort/Github-copilot-workshop/blob/e40b89ae43baa271e5e4f9503b4ed5492c3b7ac5/playwright.demo.config.ts) と [`tests/demo/playbook.demo.ts`](https://github.com/theomonfort/Github-copilot-workshop/blob/e40b89ae43baa271e5e4f9503b4ed5492c3b7ac5/tests/demo/playbook.demo.ts) があります。**`tests/e2e` や PR CI には含まれず**、テスト生成の演習とは別です。
-
-checkpoint3 の実装を使い、`npm ci` と `npx playwright install chromium` を実行した **GUI のあるローカル環境**で動かしてください。ブラウザーだけの Codespace ではこのネイティブウィンドウは表示されません。テンプレートから作成済みのリポジトリには自動反映されません。既に checkpoint3 を使っている場合は、リンク先の版からこの 2 ファイルだけをレビューして追加し、既存テストと設定を維持してください。
-
-```bash
-npx --package=node@22.23.4 node ./node_modules/@playwright/test/cli.js test --config=playwright.demo.config.ts
-```
-
-Node 26 の trace 問題を避けるため、一時的に Node 22 を使います。グローバルインストールは不要です。コマンドをそのまま実行し、外側を `npx -c` で囲まないでください。
-
-1 つのブラウザーウィンドウで、一覧から GitHub 記事を開き、`P` でプレゼン開始、次スライドへ移動、Copilot と Fusion に切り替え、`Esc` で一覧へ戻ります。表示後の旅程は**約18秒**で、依存関係のダウンロード、ビルド、ブラウザー起動は別時間です。遅い環境で旅程が20秒を超えると、制限を黙って緩めず、デモの時間 assertion が失敗します。
-
-専用ポート **44331** の preview を使い、終了時にデモのブラウザーとサーバーを閉じます。既存の開発サーバーは流用も停止もしません。出力先は `test-results/demo` に分かれているため、起動時に通常テストの結果を削除しません。この意図的な待機を通常テストへ入れないでください。Inspector の手動操作、trace 再生、動画保存、3D デモは不要です。
+**この流れの後もセキュリティを扱います。** [Part 10: Dependabot](/theomonfort/handson/test-secure-dependabot/)、[Part 11: CodeQL](/theomonfort/handson/test-secure-codeql/) と進み、[GHAS](/theomonfort/playbook/github-advanced-security/?present=1) を説明します。ブラウザーテストの成功は挙動の確認であり、依存関係のチェック、コードスキャン、シークレット保護の代わりにはなりません。

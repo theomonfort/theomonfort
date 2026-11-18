@@ -124,12 +124,12 @@ Continue from the base site with **8 implementation Issues** that build toward t
 | Stage | Work keys | Milestone |
 | --- | --- | --- |
 | Part 6 / checkpoint1 | Base site already built | Catalogue and Markdown details |
-| Cloud Agent (Part 8) | `presentation-core` → `presentation-content` / `mermaid-rendering` / `responsive-navigation` | checkpoint2 |
-| Test & Secure (Part 11) | `presentation-tests` | checkpoint3 also includes 3D |
+| Cloud Agent (optional Part 8), or checkpoint2 | `presentation-core` → `presentation-content` / `mermaid-rendering` / `responsive-navigation` | checkpoint2 |
+| Test & Secure (Part 9) | `presentation-tests` | Save exercise work before the checkpoint3 demo; snapshot also includes 3D |
 | CLI (Part 13) | Build `playbook-3d` manually or reuse checkpoint3 → `galaxy-audio` | 3D first, then ambience |
 | Operate (Part 14) | `daily-repo-status` | Daily report |
 
-**`./checkpoint1` prepares these same Issues in Japanese.** If you ran it, reuse them in the Issues tab rather than generating duplicates. The English prompt below uses the same keys. If you jump straight to `checkpoint2` / `checkpoint3`, check which acceptance criteria are already met and work only on the remaining tasks. Repository policies and security settings still need separate setup.
+**`./checkpoint1` prepares these Issues in Japanese.** If you ran it, reuse them in the Issues tab rather than generating duplicates. The English prompt below uses the same keys. Older Issue bodies may mention the former Part 11 for tests; use Part 9 in the current flow, without rewriting existing Issues. If you jump straight to `checkpoint2` / `checkpoint3`, check which acceptance criteria are already met and work only on the remaining tasks. Repository policies and security settings still need separate setup.
 
 Keep the `[playbook:...]` title keys and `workshop-issue` body markers so the prompt and checkpoint script can recognize existing work. Older repository copies may have a script without Issue seeding; check the Issues tab and use this prompt for missing entries rather than assuming they were created.
 
@@ -151,7 +151,7 @@ Title: [playbook:presentation-core] Build presentation mode and TOC navigation
 Body:
 <!-- workshop-issue:presentation-core -->
 ## Stage
-Cloud Agent (Part 8), after reviewing and merging the base site (Part 6 / checkpoint1). Milestone: checkpoint2.
+Optional Cloud Agent (Part 8), after reviewing and merging the base site (Part 6 / checkpoint1). Milestone: checkpoint2; importing checkpoint2 is the alternative before tests.
 
 ## Acceptance criteria
 - Keep the `/playbook` catalogue and Markdown details; cards open `/playbook/<slug>/?present=1`.
@@ -164,7 +164,7 @@ Title: [playbook:presentation-content] Finish slide content, heroes and grouped 
 Body:
 <!-- workshop-issue:presentation-content -->
 ## Stage
-Cloud Agent (Part 8), after `presentation-core`. Milestone: checkpoint2.
+Optional Cloud Agent (Part 8), after `presentation-core`. Milestone: checkpoint2.
 
 ## Acceptance criteria
 - Show the first “In a nutshell” section with its category Octocat and speech bubble, without adding a separate duplicate title slide.
@@ -177,7 +177,7 @@ Title: [playbook:mermaid-rendering] Render Mermaid diagrams in documents and sli
 Body:
 <!-- workshop-issue:mermaid-rendering -->
 ## Stage
-Cloud Agent (Part 8), after `presentation-core`. Milestone: checkpoint2.
+Optional Cloud Agent (Part 8), after `presentation-core`. Milestone: checkpoint2.
 
 ## Acceptance criteria
 - Render Mermaid code blocks as diagrams in normal detail pages and presentation mode.
@@ -190,7 +190,7 @@ Title: [playbook:responsive-navigation] Stabilize mobile layouts and presentatio
 Body:
 <!-- workshop-issue:responsive-navigation -->
 ## Stage
-Cloud Agent (Part 8), after `presentation-core`. Milestone: checkpoint2.
+Optional Cloud Agent (Part 8), after `presentation-core`. Milestone: checkpoint2.
 
 ## Acceptance criteria
 - Keep the catalogue and detail pages readable on narrow screens, with presentation falling back to normal details.
@@ -203,7 +203,7 @@ Title: [playbook:presentation-tests] Protect presentation controls with Playwrig
 Body:
 <!-- workshop-issue:presentation-tests -->
 ## Stage
-Test & Secure (Part 11), after merging presentation or starting from checkpoint2. Milestone: checkpoint3.
+Test & Secure (Part 9), after merging presentation or starting from checkpoint2. Save the exercise before importing checkpoint3 for the prepared demo.
 
 ## Acceptance criteria
 - In `tests/e2e/presentation.spec.ts`, enter presentation from a `/playbook` card and test arrow keys, TOC switching, Esc and deep links. Do not assume presentation is the default landing page.

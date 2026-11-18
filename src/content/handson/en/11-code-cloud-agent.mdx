@@ -1,9 +1,9 @@
 ---
-title: "CODE: Cloud Agent"
+title: "CODE: Cloud Agent (optional)"
 order: 8
 stepSlug: "code-cloud-agent"
 duration: 20
-summary: "Have Cloud Agent implement presentation mode before Test & Secure, then delegate other Issues from Step 6."
+summary: "Optional path: delegate presentation mode to Cloud Agent. The presenter flow skips this lesson and uses the existing implementation or checkpoint2 before testing."
 ---
 
 import Aside from '../../../components/handson/Aside.astro';
@@ -14,7 +14,9 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-Start from the reviewed base site: merge the PR from [Step 7](/theomonfort/en/handson/review-copilot-code-review/) before assigning work here.
+**Optional path:** The presenter flow goes directly from review to [Part 9: tests](/theomonfort/en/handson/test-secure-actions/). Use your working presentation mode, or save your work and use `./checkpoint2` ([checkpoint instructions](/theomonfort/en/handson/intro-2/#checkpoints)). This Cloud Agent lesson remains available if you want to implement that milestone by delegation.
+
+If you choose this path, start from the reviewed base site: merge the PR from [Step 7](/theomonfort/en/handson/review-copilot-code-review/) before assigning work here.
 
 <span id="111--set-up-the-context7-mcp-server-for-the-cloud-agent"></span>
 
@@ -44,7 +46,7 @@ The MCP you set up in Part 3 was **for VS Code**. For the Cloud Agent to use MCP
 
 ### 8.2 — Assign an existing Issue to the Cloud Agent
 
-**Required first: `[playbook:presentation-core]` from [Step 6.6](/theomonfort/en/handson/code-copilot-chat/#66--file-the-improvements-as-issues).** Reuse the Issue prepared by `./checkpoint1` or create only the missing catalogue entries. Find it by its key, not an assumed Issue number. Keep `/playbook` as the landing page and add a presentation link from each card to `/playbook/<slug>/?present=1`, with arrow-key navigation and a section TOC. Review, try, and merge this PR before Test & Secure: [Step 11](/theomonfort/en/handson/test-secure-actions/) tests these controls.
+**Required first on this optional path: `[playbook:presentation-core]` from [Step 6.6](/theomonfort/en/handson/code-copilot-chat/#66--file-the-improvements-as-issues).** Reuse the Issue prepared by `./checkpoint1` or create only the missing catalogue entries. Find it by its key, not an assumed Issue number. Keep `/playbook` as the landing page and add a presentation link from each card to `/playbook/<slug>/?present=1`, with arrow-key navigation and a section TOC. Review, try, and merge this PR before testing: [Step 9](/theomonfort/en/handson/test-secure-actions/) tests these controls.
 
 1. On github.com, open your repository.
 2. Click the **Issues** tab at the top.
@@ -62,7 +64,7 @@ When you assign, you can customize:
 
 <Aside type="positive">
 
-**Key point**: The Cloud Agent implements code and opens a PR (⏱ ~15 min per Issue). The validation-tool instructions in Step 4.1 do not enable repository checks. Code Review was configured in Step 7; this workshop adds CodeQL in Step 10 and the Playwright/Actions workflow in Step 11. Do not expect those later checks on this first presentation PR: run it and review the diff yourself.
+**Key point**: The Cloud Agent implements code and opens a PR (⏱ ~15 min per Issue). The validation-tool instructions in Step 4.1 do not enable repository checks. Code Review was configured in Step 7; this workshop adds Playwright/Actions in Step 9 and CodeQL in Step 11. Do not expect those later checks on this first presentation PR: run it and review the diff yourself.
 
 </Aside>
 

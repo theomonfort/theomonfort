@@ -1,9 +1,9 @@
 ---
-title: "CODE: Cloud Agent"
+title: "CODE: Cloud Agent（任意）"
 order: 8
 stepSlug: "code-cloud-agent"
 duration: 20
-summary: "Test & Secure の前に Cloud Agent でプレゼンモードを実装し、Step 6 の残りの Issue も委任します。"
+summary: "任意の進め方として、プレゼンモードの実装を Cloud Agent に委任します。発表ではこの演習を省き、既存実装または checkpoint2 からテストへ進みます。"
 ---
 
 import Aside from '../../../components/handson/Aside.astro';
@@ -14,7 +14,9 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-レビュー済みの基本サイトから始めます。[Step 7](/theomonfort/handson/review-copilot-code-review/) の PR をマージしてから、このステップの作業をアサインしてください。
+**任意の進め方：** 発表ではレビューから [Part 9 のテスト](/theomonfort/handson/test-secure-actions/)へ直接進みます。動作するプレゼンモードを使うか、作業を保存して `./checkpoint2` を利用してください（[チェックポイントの説明](/theomonfort/handson/intro-2/#checkpoints)）。その到達点をエージェントへの委任で実装したい場合は、この Cloud Agent 演習を選べます。
+
+この進め方を選ぶ場合は、レビュー済みの基本サイトから始めます。[Step 7](/theomonfort/handson/review-copilot-code-review/) の PR をマージしてから、このステップの作業をアサインしてください。
 
 <span id="111--cloud-agent-に-context7-mcp-サーバーを設定する"></span>
 
@@ -44,7 +46,7 @@ Part 3 で設定した MCP は **VS Code 用** でした。Cloud Agent が MCP �
 
 ### 8.2 — 既存の Issue に Cloud Agent をアサインする
 
-**最初に必須：[Step 6.6](/theomonfort/handson/code-copilot-chat/#66--改善点を-issue-化する) の `[playbook:presentation-core]`。** `./checkpoint1` が準備した Issue を再利用するか、カタログにない Issue だけ作成します。番号を決めつけず、キーで探してください。`/playbook` は一覧ページのまま残し、各カードから `/playbook/<slug>/?present=1` に入るリンク、矢印キー操作、セクションの目次を追加します。Test & Secure の前に、この PR をレビューして動作確認し、マージしてください。[Step 11](/theomonfort/handson/test-secure-actions/) でこれらの操作をテストします。
+**この任意の進め方で最初に必要：[Step 6.6](/theomonfort/handson/code-copilot-chat/#66--改善点を-issue-化する) の `[playbook:presentation-core]`。** `./checkpoint1` が準備した Issue を再利用するか、カタログにない Issue だけ作成します。番号を決めつけず、キーで探してください。`/playbook` は一覧ページのまま残し、各カードから `/playbook/<slug>/?present=1` に入るリンク、矢印キー操作、セクションの目次を追加します。テストの前に、この PR をレビューして動作確認し、マージしてください。[Step 9](/theomonfort/handson/test-secure-actions/) でこれらの操作をテストします。
 
 1. github.com で自分のリポジトリを開く
 2. 上部の **Issues** タブをクリック
@@ -62,7 +64,7 @@ Part 3 で設定した MCP は **VS Code 用** でした。Cloud Agent が MCP �
 
 <Aside type="positive">
 
-**ポイント**: Cloud Agent がコードを実装して PR を作成します（⏱ 各 Issue につき約15分）。Step 4.1 の Validation Tools の指示だけでは、リポジトリのチェックは有効になりません。Code Review は Step 7 で設定済みですが、CodeQL は Step 10、Playwright / Actions は Step 11 で追加します。この最初のプレゼン PR では後続のチェックを前提にせず、自分で起動して差分を確認してください。
+**ポイント**: Cloud Agent がコードを実装して PR を作成します（⏱ 各 Issue につき約15分）。Step 4.1 の Validation Tools の指示だけでは、リポジトリのチェックは有効になりません。Code Review は Step 7 で設定済みですが、Playwright / Actions は Step 9、CodeQL は Step 11 で追加します。この最初のプレゼン PR では後続のチェックを前提にせず、自分で起動して差分を確認してください。
 
 </Aside>
 

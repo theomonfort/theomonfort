@@ -1,6 +1,6 @@
 ---
 title: "TEST & SECURE: Actions"
-order: 11
+order: 9
 stepSlug: "test-secure-actions"
 duration: 15
 summary: "Agree on useful tests, generate them with official Playwright agents, and run them on every PR with GitHub Actions."
@@ -16,27 +16,18 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-**Prerequisite:** Use the working presentation mode from [Step 8](/theomonfort/en/handson/code-cloud-agent/) or `./checkpoint2` ([checkpoint and server instructions](/theomonfort/en/handson/intro-2/#checkpoints)). Start from the branch containing that implementation, not a stale local `main`.
+**Prerequisite:** Start with working presentation mode from your current implementation. If it is not ready, save your work and use `./checkpoint2` ([checkpoint and server instructions](/theomonfort/en/handson/intro-2/#checkpoints)). [Cloud Agent in Part 8](/theomonfort/en/handson/code-cloud-agent/) is an optional way to build it, not a required step in this presenter flow. Start from the branch containing the working presentation, not a stale local `main`.
 
 Use the existing `[playbook:presentation-tests]` Issue from Part 6 and link the test PR to its actual Issue number. If you started from checkpoint3, inspect and run its existing tests and CI first; only add agreed missing coverage, not a duplicate suite or workflow. Keep the workshop's retro UI unchanged.
 
 <span id="101--create-tests-for-presentation-mode"></span>
+<span id="111--create-tests-for-presentation-mode"></span>
 
-### 11.1 — Create tests for Presentation mode
-
-#### Agree on tests before coding
-
-On a new `test-creation` branch, append this rule to the existing **`.github/copilot-instructions.md`** from [Part 4](/theomonfort/en/handson/plan-instruction/). Keep its other instructions:
-
-```markdown
-## Features and tests
-
-- Before implementing or changing a feature, propose relevant tests and ask the user which to add or update. Wait for their choice, then implement the feature and selected tests together and run them.
-```
-
-For this exercise, the **learner** chooses the tests before generation. A prompt or instruction is guidance, not a guaranteed approval barrier: check that Copilot actually asks and waits.
+### 9.1 — Create tests for Presentation mode
 
 #### Prepare the official agents safely
+
+Create a new `test-creation` branch from the working presentation branch. Prepare the tools first, then add the instruction and choose the tests.
 
 Use **VS Code 1.105 or later**, with the Copilot harness and workspace-root MCP setup from [Part 3](/theomonfort/en/handson/plan-mcp/). That version is Playwright's minimum; the current harness also has its own requirements.
 
@@ -109,6 +100,18 @@ This is the **test-runner MCP server bundled with Playwright**, not the separate
 
 In **Customizations → Agents**, check that `playwright-test-planner`, `playwright-test-generator`, and `playwright-test-healer` appear. In **MCP Servers → Workspace**, start `playwright-test` from root `.mcp.json`, reviewing trust prompts. Keep GitHub and Context7 available. See the [VS Code MCP configuration reference](https://code.visualstudio.com/docs/agents/reference/mcp-configuration) for this root format.
 
+#### Agree on tests before coding
+
+Append this rule to the existing **`.github/copilot-instructions.md`** from [Part 4](/theomonfort/en/handson/plan-instruction/). Keep its other instructions:
+
+```markdown
+## Features and tests
+
+- When adding or changing a feature, assess whether tests are needed. Propose relevant tests and ask the user which to add or update, then implement the feature and agreed tests together.
+```
+
+For this exercise, the **learner** chooses the tests before generation. A prompt or instruction is guidance, not a guaranteed approval barrier: check that Copilot actually asks and waits.
+
 #### Explore, propose, then choose
 
 Select **`playwright-test-planner`**, attach the seed test, and send:
@@ -158,19 +161,53 @@ npx --package=node@22.23.4 node ./node_modules/@playwright/test/cli.js test test
 npx --package=node@22.23.4 node ./node_modules/@playwright/test/cli.js test
 ```
 
-Review assertions and failures before committing. For future feature work, use the new instruction: **“Propose tests for this feature, ask which I want, then implement the feature and those tests together.”**
+Explain one assertion and the concrete regression it would catch, not just the green test count. Review assertions and failures before committing. For future feature work, use the new instruction: **“Assess whether this feature needs tests. Propose relevant cases, ask which I want, then implement the feature and agreed tests together.”**
 
 The **healer is optional**. Its default behavior can skip a broken scenario, so explicitly forbid skipping/deleting tests, weakening assertions or hiding application defects. Review every proposed repair and rerun the tests. Do not accept “green” by removing coverage.
 
+### 9.2 — Choose tools for web and desktop apps
+
+| What you are testing | Suitable approach |
+| --- | --- |
+| A web app, including one running on `localhost` | Playwright controls the browser and verifies DOM behavior. The test agents help plan and generate repeatable tests. |
+| A native desktop app | Computer Use, where the host supports it and permissions allow it, or a suitable platform-specific automation tool. A browser tool does not automatically control native windows. |
+| Logic or an API without a UI | Unit or API tests are often simpler and faster than driving a screen. |
+
+“Local app” does not always mean “desktop app”: the workshop's local Astro site is still a web app. Computer Use can help inspect or interact with native UI, but it is not a universal test framework or a replacement for assertions and CI. Choose the tool for the behavior you want to verify.
+
+<span id="113--optional-watch-the-presenter-demo"></span>
+
+### 9.3 — Save the exercise, then checkpoint3 and the prepared demo
+
+**Save your own work before importing a checkpoint.** Save editor buffers, review the diff, commit your feature changes, chosen tests, plans, agent/MCP setup and instructions on `test-creation`, then push that branch. Record its branch name and commit so you can return to it.
+
+Run `./checkpoint3` from your generated repository's root, following the [checkpoint instructions](/theomonfort/en/handson/intro-2/#checkpoints). This imports a **whole snapshot** into a new branch and PR from remote `main`; it is not an additive patch over your current exercise branch. Files may be replaced or deleted, including your new tests, agents, MCP entry or instructions. They remain on your saved exercise branch, not automatically in the checkpoint branch. Review the diff, keep any printed stash reference, and do not blindly merge the snapshot over your work.
+
+The **checkpoint3** snapshot also has a separate headed demo in [`playwright.demo.config.ts`](https://github.com/theomonfort/Github-copilot-workshop/blob/e40b89ae43baa271e5e4f9503b4ed5492c3b7ac5/playwright.demo.config.ts) and [`tests/demo/playbook.demo.ts`](https://github.com/theomonfort/Github-copilot-workshop/blob/e40b89ae43baa271e5e4f9503b4ed5492c3b7ac5/tests/demo/playbook.demo.ts). It is **not part of `tests/e2e` or PR CI** and is not the test-generation exercise.
+
+This **prepared 18-second tour is not the tests you just generated**. Run it on the checkpoint branch on a **local machine with a graphical desktop**, after `npm ci` and `npx playwright install chromium`. A browser-only Codespace does not display this native window; the presenter can run it locally while participants watch. Existing template copies are not updated automatically: if you already have checkpoint3, review and add only these two files from the linked revision instead of importing the whole snapshot again.
+
+```bash
+npx --package=node@22.23.4 node ./node_modules/@playwright/test/cli.js test --config=playwright.demo.config.ts
+```
+
+This uses Node 22 temporarily, without a global install, to avoid the Node 26 trace issue. Run the command as written, not through an outer `npx -c`.
+
+One browser window automatically visits the catalogue, opens the GitHub article, enters presentation with `P`, advances a slide, switches to Copilot and Fusion, then returns with `Esc`. The visible journey takes about **18 seconds**; dependency download, build and browser startup are additional. A machine that takes over 20 seconds for the journey fails the demo's timing assertion rather than silently relaxing it.
+
+The demo uses its own preview on port **44331** and closes its browser and server on exit. It does not reuse or stop your development server. Its output directory is `test-results/demo`, so starting the demo does not clear normal test results. Keep this deliberate pacing out of ordinary tests; no Inspector steps, trace replay, video recording or 3D demo are required.
+
 <span id="102--create-an-actions-workflow-that-runs-automatically-on-prs"></span>
+<span id="112--create-an-actions-workflow-that-runs-automatically-on-prs"></span>
 
-### 11.2 — Create an Actions workflow that runs automatically on PRs
+### 9.4 — Check the PR, then continue to security
 
-Next, enter the following in Copilot Chat:
+After the demo, return to your saved `test-creation` branch with a clean working tree. Verify that your selected tests and instructions are present. Keep the checkpoint PR separate until you have reviewed how to reconcile its snapshot with your work.
+
+Enter the following in Copilot Chat:
 
 ```
-Continue working on the same `test-creation` branch.
-
+Continue on the saved test-creation branch, not the checkpoint demo branch.
 Reuse the existing E2E workflow if present; otherwise create .github/workflows/test.yml.
 Trigger it on PR open / update, and have it perform the following steps:
 
@@ -184,28 +221,6 @@ Run the normal headless suite only, not the separate presenter demo.
 Do not add fixed waits, a headed browser or slow motion to CI.
 ```
 
-⏱ ~2 minutes
+Commit and push the tests and workflow, then open a PR from `test-creation`. Inspect the E2E check and its assertions/report in Actions. If you started from an unmerged checkpoint2 branch, review and merge that prerequisite PR first, then update the test PR as needed.
 
-Commit and push the tests and workflow, then open a PR from `test-creation`. You'll see the E2E workflow running in the Actions tab. If you started from an unmerged checkpoint branch, review and merge that checkpoint PR first, then update the test PR as needed. Whenever you change Presentation mode behavior, this workflow will catch regressions early.
-
-<Aside type="positive">
-
-**Key point**: By writing tests and running them continuously through Actions, you get a safety net that catches regressions — even as the Cloud Agent and the upcoming Agentic Workflow start opening PRs automatically.
-
-</Aside>
-
-### 11.3 — Optional: watch the presenter demo
-
-The **checkpoint3** snapshot also has a separate headed demo in [`playwright.demo.config.ts`](https://github.com/theomonfort/Github-copilot-workshop/blob/e40b89ae43baa271e5e4f9503b4ed5492c3b7ac5/playwright.demo.config.ts) and [`tests/demo/playbook.demo.ts`](https://github.com/theomonfort/Github-copilot-workshop/blob/e40b89ae43baa271e5e4f9503b4ed5492c3b7ac5/tests/demo/playbook.demo.ts). It is **not part of `tests/e2e` or PR CI** and is not the test-generation exercise.
-
-Use the checkpoint3 implementation on a **local machine with a graphical desktop**, after `npm ci` and `npx playwright install chromium`. A browser-only Codespace does not display this native window. Existing copies of a template are not updated automatically: if you already have checkpoint3, review and add only these two files from the linked revision, preserving your existing tests and configuration.
-
-```bash
-npx --package=node@22.23.4 node ./node_modules/@playwright/test/cli.js test --config=playwright.demo.config.ts
-```
-
-This uses Node 22 temporarily, without a global install, to avoid the Node 26 trace issue. Run the command as written, not through an outer `npx -c`.
-
-One browser window automatically visits the catalogue, opens the GitHub article, enters presentation with `P`, advances a slide, switches to Copilot and Fusion, then returns with `Esc`. The visible journey takes about **18 seconds**; dependency download, build and browser startup are additional. A machine that takes over 20 seconds for the journey fails the demo's timing assertion rather than silently relaxing it.
-
-The demo uses its own preview on port **44331** and closes its browser and server on exit. It does not reuse or stop your development server. Its output directory is `test-results/demo`, so starting the demo does not clear normal test results. Keep this deliberate pacing out of ordinary tests; no Inspector steps, trace replay, video recording or 3D demo are required.
+**Keep the security steps after this flow:** continue with [Part 10: Dependabot](/theomonfort/en/handson/test-secure-dependabot/) and [Part 11: CodeQL](/theomonfort/en/handson/test-secure-codeql/), then discuss [GHAS](/theomonfort/en/playbook/github-advanced-security/?present=1). Passing browser tests checks behavior; it does not replace dependency checks, code scanning or secret protection.

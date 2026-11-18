@@ -124,12 +124,12 @@ npm run dev
 | 段階 | 作業キー | 到達点 |
 | --- | --- | --- |
 | Part 6 / checkpoint1 | 基本サイトは実装済み | 一覧と Markdown 詳細 |
-| Cloud Agent (Part 8) | `presentation-core` → `presentation-content` / `mermaid-rendering` / `responsive-navigation` | checkpoint2 |
-| Test & Secure (Part 11) | `presentation-tests` | checkpoint3 には 3D も含む |
+| Cloud Agent (任意の Part 8)、または checkpoint2 | `presentation-core` → `presentation-content` / `mermaid-rendering` / `responsive-navigation` | checkpoint2 |
+| Test & Secure (Part 9) | `presentation-tests` | 演習を保存して checkpoint3 デモへ。スナップショットには 3D も含む |
 | CLI (Part 13) | `playbook-3d` を手動実装、または checkpoint3 を再利用 → `galaxy-audio` | 3D の後に環境音 |
 | Operate (Part 14) | `daily-repo-status` | 日次レポート |
 
-**`./checkpoint1` は以下と同じ日本語 Issue を準備します。** 実行済みなら Issues タブで再利用し、重複作成しないでください。`checkpoint2` / `checkpoint3` から直接始めた場合は、既に満たす完了条件を確認し、未完了の作業だけ進めます。リポジトリのポリシーやセキュリティ設定は別途必要です。
+**`./checkpoint1` はこれらの日本語 Issue を準備します。** 実行済みなら Issues タブで再利用し、重複作成しないでください。古い Issue 本文ではテストが旧 Part 11 になっている場合がありますが、本文を書き換えず、現在の Part 9 で進めます。`checkpoint2` / `checkpoint3` から直接始めた場合は、既に満たす完了条件を確認し、未完了の作業だけ進めます。リポジトリのポリシーやセキュリティ設定は別途必要です。
 
 プロンプトとスクリプトが既存作業を識別できるよう、タイトルの `[playbook:...]` キーと本文の `workshop-issue` マーカーを残してください。古いリポジトリのコピーでは Issue を準備しない旧スクリプトの場合があります。作成済みと決めつけず、Issues タブを確認し、不足分だけこのプロンプトで準備してください。
 
@@ -151,7 +151,7 @@ open / closed の両方を確認し、本文の workshop-issue マーカーま�
 本文:
 <!-- workshop-issue:presentation-core -->
 ## 段階
-Cloud Agent (Part 8)。基本サイト (Part 6 / checkpoint1) のレビューとマージ後に実装。checkpoint2 の到達点。
+任意の Cloud Agent (Part 8)。基本サイト (Part 6 / checkpoint1) のレビューとマージ後に実装。checkpoint2 の到達点。テスト前に checkpoint2 を取り込む方法でもよい。
 
 ## 完了条件
 - `/playbook` の一覧と Markdown 詳細を残し、カードから `/playbook/<slug>/?present=1` を開ける。
@@ -164,7 +164,7 @@ Cloud Agent (Part 8)。基本サイト (Part 6 / checkpoint1) のレビューと
 本文:
 <!-- workshop-issue:presentation-content -->
 ## 段階
-Cloud Agent (Part 8)。`presentation-core` 完了後。checkpoint2 の到達点。
+任意の Cloud Agent (Part 8)。`presentation-core` 完了後。checkpoint2 の到達点。
 
 ## 完了条件
 - 最初の「一言で」セクションをカテゴリの Octocat と吹き出しで表示し、独立した重複タイトルスライドを増やさない。
@@ -177,7 +177,7 @@ Cloud Agent (Part 8)。`presentation-core` 完了後。checkpoint2 の到達点�
 本文:
 <!-- workshop-issue:mermaid-rendering -->
 ## 段階
-Cloud Agent (Part 8)。`presentation-core` 完了後。checkpoint2 の到達点。
+任意の Cloud Agent (Part 8)。`presentation-core` 完了後。checkpoint2 の到達点。
 
 ## 完了条件
 - Mermaid コードブロックを通常の詳細ページとプレゼンモードで図として描画する。
@@ -190,7 +190,7 @@ Cloud Agent (Part 8)。`presentation-core` 完了後。checkpoint2 の到達点�
 本文:
 <!-- workshop-issue:responsive-navigation -->
 ## 段階
-Cloud Agent (Part 8)。`presentation-core` 完了後。checkpoint2 の到達点。
+任意の Cloud Agent (Part 8)。`presentation-core` 完了後。checkpoint2 の到達点。
 
 ## 完了条件
 - 狭い画面でも一覧と詳細を読めるようにし、プレゼンには通常の詳細表示へのフォールバックを用意する。
@@ -203,7 +203,7 @@ Cloud Agent (Part 8)。`presentation-core` 完了後。checkpoint2 の到達点�
 本文:
 <!-- workshop-issue:presentation-tests -->
 ## 段階
-Test & Secure (Part 11)。プレゼン機能をマージ後、または checkpoint2 から開始。checkpoint3 の到達点。
+Test & Secure (Part 9)。プレゼン機能をマージ後、または checkpoint2 から開始。演習を保存してから、準備済みデモ用の checkpoint3 を取り込む。
 
 ## 完了条件
 - `tests/e2e/presentation.spec.ts` で `/playbook` のカードからプレゼンに入り、矢印キー、目次での切り替え、Esc、深いリンクを検証する。プレゼンを既定のトップページと仮定しない。
