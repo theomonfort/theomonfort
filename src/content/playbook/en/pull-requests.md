@@ -227,7 +227,7 @@ Enforce **merge conditions** at the **organization or repository** level, across
 
 <div class="pr-compact pr-stack">
 
-Each PR targets the branch below it: **small reviewable layers**, not one giant diff. Public preview since **2026-07-30**.
+Each PR targets the branch below it for **small reviewable layers** instead of a giant diff (public preview: **2026-07-30**).
 
 <div class="split-image">
 <div class="figtabs">
@@ -236,179 +236,207 @@ Each PR targets the branch below it: **small reviewable layers**, not one giant 
 <input class="figtabs-radio" type="radio" name="stack-merge-method" id="smm-3">
 <div class="figtabs-bar">
 <label class="figtabs-tab" for="smm-1">Merge commit</label>
-<label class="figtabs-tab" for="smm-2">Squash</label>
-<label class="figtabs-tab" for="smm-3">Rebase</label>
+<label class="figtabs-tab" for="smm-2">Squash and merge</label>
+<label class="figtabs-tab" for="smm-3">Rebase and merge</label>
 </div>
 <div class="figtabs-panel" data-idx="1">
-<svg viewBox="0 0 900 372" role="img" aria-label="Create a merge commit: every branch keeps its own commits, and the whole stack lands on main through a single merge commit">
+<svg viewBox="0 0 860 302" role="img" aria-label="Merge commit: all 6 branch commits remain in Git history, joined onto main by a single 2-parent merge commit M with no new code">
   <defs>
-    <marker id="stk-mc" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
+    <marker id="stk-mc" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 3.5 L0 7 Z" fill="#8fa6bc"/>
+    </marker>
+    <marker id="stk-mc-blue" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 3.5 L0 7 Z" fill="#4ec3ff"/>
+    </marker>
+    <marker id="stk-mc-amber" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 3.5 L0 7 Z" fill="var(--c-crt-amber)"/>
     </marker>
   </defs>
-  <rect x="16" y="31" width="118" height="34" rx="4" fill="#a56cff"/><text x="75" y="53" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-c</text>
-  <rect x="16" y="121" width="118" height="34" rx="4" fill="#17d8e0"/><text x="75" y="143" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-b</text>
-  <rect x="16" y="211" width="118" height="34" rx="4" fill="#2fbf76"/><text x="75" y="233" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-a</text>
-  <rect x="16" y="301" width="118" height="34" rx="4" fill="#4ec3ff"/><text x="75" y="323" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">main</text>
-  <g font-size="13" font-weight="bold" text-anchor="middle">
-    <rect x="144" y="33" width="124" height="30" rx="4" fill="#131a2b" stroke="#a56cff" stroke-width="2"/><text x="206" y="53" fill="#a56cff">base: feat-b</text>
-    <rect x="144" y="123" width="124" height="30" rx="4" fill="#131a2b" stroke="#17d8e0" stroke-width="2"/><text x="206" y="143" fill="#17d8e0">base: feat-a</text>
-    <rect x="144" y="213" width="124" height="30" rx="4" fill="#131a2b" stroke="#2fbf76" stroke-width="2"/><text x="206" y="233" fill="#2fbf76">base: main</text>
+  <rect x="6" y="27" width="152" height="36" rx="3" fill="#a56cff"/><text x="82" y="51" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">PR #3 · feat-c</text>
+  <rect x="164" y="29" width="104" height="32" rx="3" fill="var(--c-midnight)" stroke="#a56cff" stroke-width="1.8"/><text x="216" y="51" text-anchor="middle" fill="#a56cff" font-size="16" font-weight="700">→ feat-b</text>
+  <rect x="6" y="97" width="152" height="36" rx="3" fill="#17d8e0"/><text x="82" y="121" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">PR #2 · feat-b</text>
+  <rect x="164" y="99" width="104" height="32" rx="3" fill="var(--c-midnight)" stroke="#17d8e0" stroke-width="1.8"/><text x="216" y="121" text-anchor="middle" fill="#17d8e0" font-size="16" font-weight="700">→ feat-a</text>
+  <rect x="6" y="167" width="152" height="36" rx="3" fill="#2fbf76"/><text x="82" y="191" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">PR #1 · feat-a</text>
+  <rect x="164" y="169" width="104" height="32" rx="3" fill="var(--c-midnight)" stroke="#2fbf76" stroke-width="1.8"/><text x="216" y="191" text-anchor="middle" fill="#2fbf76" font-size="16" font-weight="700">→ main</text>
+  <rect x="6" y="239" width="152" height="36" rx="3" fill="#4ec3ff"/><text x="82" y="263" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">main</text>
+  <g stroke="#8fa6bc" stroke-width="2.6" fill="none">
+    <line x1="305" y1="244" x2="334" y2="199" marker-end="url(#stk-mc)"/>
+    <line x1="362" y1="185" x2="380" y2="185" marker-end="url(#stk-mc)"/>
+    <line x1="408" y1="172" x2="434" y2="129" marker-end="url(#stk-mc)"/>
+    <line x1="460" y1="115" x2="478" y2="115" marker-end="url(#stk-mc)"/>
+    <line x1="506" y1="102" x2="532" y2="59" marker-end="url(#stk-mc)"/>
+    <line x1="558" y1="45" x2="576" y2="45" marker-end="url(#stk-mc)"/>
   </g>
-  <g stroke="#7d8595" stroke-width="2.6" fill="none">
-    <line x1="217" y1="318" x2="752" y2="318" marker-end="url(#stk-mc)"/>
-  </g>
-  <g stroke="#7d8595" stroke-width="2.6" fill="none">
-    <line x1="313" y1="228" x2="326" y2="228" marker-end="url(#stk-mc)"/>
-    <line x1="413" y1="138" x2="426" y2="138" marker-end="url(#stk-mc)"/>
-    <line x1="513" y1="48" x2="526" y2="48" marker-end="url(#stk-mc)"/>
-    <line x1="213" y1="304" x2="287" y2="240" marker-end="url(#stk-mc)"/>
-    <line x1="357" y1="217" x2="390" y2="150" marker-end="url(#stk-mc)"/>
-    <line x1="457" y1="127" x2="490" y2="60" marker-end="url(#stk-mc)"/>
-  </g>
-  <circle cx="300" cy="228" r="13" fill="#2fbf76"/>
-  <circle cx="346" cy="228" r="13" fill="#2fbf76"/>
-  <circle cx="400" cy="138" r="13" fill="#17d8e0"/>
-  <circle cx="446" cy="138" r="13" fill="#17d8e0"/>
-  <circle cx="500" cy="48" r="13" fill="#a56cff"/>
-  <circle cx="546" cy="48" r="13" fill="#a56cff"/>
-  <g stroke="#7d8595" stroke-width="2.6" fill="none">
-    <line x1="557" y1="57" x2="761" y2="303" marker-end="url(#stk-mc)"/>
-  </g>
-  <circle cx="200" cy="318" r="17" fill="#4ec3ff"/>
-  <circle cx="780" cy="318" r="17" fill="#4ec3ff"/>
-  <g font-size="13" font-weight="bold" text-anchor="middle">
-    <text x="894" y="362" text-anchor="end" fill="#4ec3ff">1 merge commit (PR #1-3)</text>
-  </g>
+  <line x1="311" y1="257" x2="592" y2="257" stroke="#4ec3ff" stroke-width="3" marker-end="url(#stk-mc-blue)"/>
+  <line x1="597" y1="61" x2="613" y2="233" stroke="var(--c-crt-amber)" stroke-width="3" marker-end="url(#stk-mc-amber)"/>
+  <circle cx="294" cy="257" r="17" fill="#4ec3ff"/><text x="294" y="262" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14.5" font-weight="700">m0</text>
+  <circle cx="346" cy="185" r="16" fill="#2fbf76"/><text x="346" y="190" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14.5" font-weight="700">a1</text>
+  <circle cx="398" cy="185" r="16" fill="#2fbf76"/><text x="398" y="190" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14.5" font-weight="700">a2</text>
+  <circle cx="444" cy="115" r="16" fill="#17d8e0"/><text x="444" y="120" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14.5" font-weight="700">b1</text>
+  <circle cx="496" cy="115" r="16" fill="#17d8e0"/><text x="496" y="120" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14.5" font-weight="700">b2</text>
+  <circle cx="542" cy="45" r="16" fill="#a56cff"/><text x="542" y="50" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14.5" font-weight="700">c1</text>
+  <circle cx="594" cy="45" r="16" fill="#a56cff"/><text x="594" y="50" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14.5" font-weight="700">c2</text>
+  <circle cx="616" cy="257" r="20" fill="#4ec3ff" stroke="var(--c-crt-amber)" stroke-width="3"/><text x="616" y="263" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="18" font-weight="800">M</text>
+  <rect x="622" y="22" width="232" height="44" rx="3" fill="var(--c-midnight)" stroke="#2fbf76" stroke-width="1.6"/>
+  <text x="738" y="50" text-anchor="middle" fill="#2fbf76" font-size="16" font-weight="700">✓ 6 commits (a1..c2) kept</text>
+  <line x1="636" y1="250" x2="648" y2="240" stroke="var(--c-crt-amber)" stroke-width="1.8" stroke-dasharray="4 3"/>
+  <rect x="648" y="164" width="206" height="120" rx="3" fill="var(--c-midnight)" stroke="var(--c-crt-amber)" stroke-width="1.8"/>
+  <text x="660" y="191" fill="var(--c-crt-amber)" font-size="16.5" font-weight="700">M = 1 merge commit</text>
+  <text x="660" y="218" fill="var(--c-phosphor)" font-size="15.5" font-weight="600">2 parents: main + c2</text>
+  <text x="660" y="245" fill="var(--c-fg-body)" font-size="15">Diff = PR #1–3 combined</text>
+  <text x="660" y="270" fill="var(--c-fg-muted)" font-size="15">0 new code added</text>
 </svg>
-<p class="figtabs-cap">Branch commits are kept as-is and the <b>whole stack lands through one merge commit</b>. Fullest history.</p>
+<div class="pr-method-card">
+  <p class="pr-method-summary">Keeps all 6 branch commits intact; <b><code>M</code> is a 2-parent bridge</b> joining <code>main</code> and <code>c2</code>.</p>
+  <p class="pr-method-pro">✅ <b>Pro:</b> Preserves 100% of micro-commits, original SHAs, and exact <code>git blame</code>.</p>
+  <p class="pr-method-con">⚠️ <b>Con:</b> <code>wip</code> / <code>fix typo</code> commits stay in <code>git log</code>, creating loop-heavy history.</p>
+</div>
 </div>
 <div class="figtabs-panel" data-idx="2">
-<svg viewBox="0 0 900 372" role="img" aria-label="Squash and merge: each pull request collapses into a single commit on main">
+<svg viewBox="0 0 860 302" role="img" aria-label="Squash and merge: each pull request collapses into 1 commit on a linear main branch, while draft branch commits are dropped">
   <defs>
-    <marker id="stk-sq" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
+    <marker id="stk-sq-line" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 3.5 L0 7 Z" fill="#4ec3ff"/>
+    </marker>
+    <marker id="stk-sq-g" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 3.5 L0 7 Z" fill="#2fbf76"/>
+    </marker>
+    <marker id="stk-sq-c" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 3.5 L0 7 Z" fill="#17d8e0"/>
+    </marker>
+    <marker id="stk-sq-p" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 3.5 L0 7 Z" fill="#a56cff"/>
     </marker>
   </defs>
-  <rect x="16" y="31" width="118" height="34" rx="4" fill="#a56cff"/><text x="75" y="53" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-c</text>
-  <rect x="16" y="121" width="118" height="34" rx="4" fill="#17d8e0"/><text x="75" y="143" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-b</text>
-  <rect x="16" y="211" width="118" height="34" rx="4" fill="#2fbf76"/><text x="75" y="233" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-a</text>
-  <rect x="16" y="301" width="118" height="34" rx="4" fill="#4ec3ff"/><text x="75" y="323" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">main</text>
-  <g font-size="13" font-weight="bold" text-anchor="middle">
-    <rect x="144" y="33" width="124" height="30" rx="4" fill="#131a2b" stroke="#a56cff" stroke-width="2"/><text x="206" y="53" fill="#a56cff">base: feat-b</text>
-    <rect x="144" y="123" width="124" height="30" rx="4" fill="#131a2b" stroke="#17d8e0" stroke-width="2"/><text x="206" y="143" fill="#17d8e0">base: feat-a</text>
-    <rect x="144" y="213" width="124" height="30" rx="4" fill="#131a2b" stroke="#2fbf76" stroke-width="2"/><text x="206" y="233" fill="#2fbf76">base: main</text>
+  <rect x="6" y="27" width="152" height="36" rx="3" fill="#a56cff"/><text x="82" y="51" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">PR #3 · feat-c</text>
+  <rect x="164" y="29" width="104" height="32" rx="3" fill="var(--c-midnight)" stroke="#a56cff" stroke-width="1.8"/><text x="216" y="51" text-anchor="middle" fill="#a56cff" font-size="16" font-weight="700">→ feat-b</text>
+  <rect x="6" y="97" width="152" height="36" rx="3" fill="#17d8e0"/><text x="82" y="121" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">PR #2 · feat-b</text>
+  <rect x="164" y="99" width="104" height="32" rx="3" fill="var(--c-midnight)" stroke="#17d8e0" stroke-width="1.8"/><text x="216" y="121" text-anchor="middle" fill="#17d8e0" font-size="16" font-weight="700">→ feat-a</text>
+  <rect x="6" y="167" width="152" height="36" rx="3" fill="#2fbf76"/><text x="82" y="191" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">PR #1 · feat-a</text>
+  <rect x="164" y="169" width="104" height="32" rx="3" fill="var(--c-midnight)" stroke="#2fbf76" stroke-width="1.8"/><text x="216" y="191" text-anchor="middle" fill="#2fbf76" font-size="16" font-weight="700">→ main</text>
+  <rect x="6" y="239" width="152" height="36" rx="3" fill="#4ec3ff"/><text x="82" y="263" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">main</text>
+  <g stroke="#8fa6bc" stroke-width="2" stroke-dasharray="4 4" fill="none" opacity=".28">
+    <line x1="306" y1="246" x2="389" y2="193"/>
+    <line x1="418" y1="185" x2="442" y2="185"/>
+    <line x1="471" y1="177" x2="565" y2="123"/>
+    <line x1="594" y1="115" x2="618" y2="115"/>
+    <line x1="647" y1="107" x2="741" y2="53"/>
+    <line x1="770" y1="45" x2="794" y2="45"/>
   </g>
-  <g stroke="#7d8595" stroke-width="2.6" fill="none">
-    <line x1="217" y1="318" x2="625" y2="318" marker-end="url(#stk-sq)"/>
-    <line x1="675" y1="318" x2="737" y2="318" marker-end="url(#stk-sq)"/>
-    <line x1="787" y1="318" x2="849" y2="318" marker-end="url(#stk-sq)"/>
+  <g opacity=".36">
+    <circle cx="403" cy="185" r="15" fill="#2fbf76"/><text x="403" y="190" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">a1</text>
+    <circle cx="457" cy="185" r="15" fill="#2fbf76"/><text x="457" y="190" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">a2</text>
+    <circle cx="579" cy="115" r="15" fill="#17d8e0"/><text x="579" y="120" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">b1</text>
+    <circle cx="633" cy="115" r="15" fill="#17d8e0"/><text x="633" y="120" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">b2</text>
+    <circle cx="755" cy="45" r="15" fill="#a56cff"/><text x="755" y="50" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">c1</text>
+    <circle cx="809" cy="45" r="15" fill="#a56cff"/><text x="809" y="50" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">c2</text>
   </g>
-  <g stroke="#7d8595" stroke-width="2.6" fill="none">
-    <line x1="313" y1="228" x2="326" y2="228" marker-end="url(#stk-sq)" opacity=".32"/>
-    <line x1="413" y1="138" x2="426" y2="138" marker-end="url(#stk-sq)" opacity=".32"/>
-    <line x1="513" y1="48" x2="526" y2="48" marker-end="url(#stk-sq)" opacity=".32"/>
-    <line x1="213" y1="304" x2="287" y2="240" marker-end="url(#stk-sq)"/>
-    <line x1="357" y1="217" x2="390" y2="150" marker-end="url(#stk-sq)"/>
-    <line x1="457" y1="127" x2="490" y2="60" marker-end="url(#stk-sq)"/>
+  <line x1="430" y1="202" x2="430" y2="233" stroke="#2fbf76" stroke-width="2.5" stroke-dasharray="5 3" marker-end="url(#stk-sq-g)"/>
+  <line x1="606" y1="132" x2="606" y2="233" stroke="#17d8e0" stroke-width="2.5" stroke-dasharray="5 3" marker-end="url(#stk-sq-c)"/>
+  <line x1="782" y1="62" x2="782" y2="233" stroke="#a56cff" stroke-width="2.5" stroke-dasharray="5 3" marker-end="url(#stk-sq-p)"/>
+  <g stroke="#4ec3ff" stroke-width="3" fill="none">
+    <line x1="311" y1="257" x2="384" y2="257" marker-end="url(#stk-sq-line)"/>
+    <line x1="472" y1="257" x2="560" y2="257" marker-end="url(#stk-sq-line)"/>
+    <line x1="648" y1="257" x2="736" y2="257" marker-end="url(#stk-sq-line)"/>
   </g>
-  <circle cx="300" cy="228" r="13" fill="#2fbf76" opacity=".32"/>
-  <circle cx="346" cy="228" r="13" fill="#2fbf76" opacity=".32"/>
-  <circle cx="400" cy="138" r="13" fill="#17d8e0" opacity=".32"/>
-  <circle cx="446" cy="138" r="13" fill="#17d8e0" opacity=".32"/>
-  <circle cx="500" cy="48" r="13" fill="#a56cff" opacity=".32"/>
-  <circle cx="546" cy="48" r="13" fill="#a56cff" opacity=".32"/>
-  <g stroke="#7d8595" stroke-width="2.6" fill="none">
-    <line x1="359" y1="232" x2="627" y2="311" marker-end="url(#stk-sq)"/>
-    <line x1="458" y1="145" x2="741" y2="306" marker-end="url(#stk-sq)"/>
-    <line x1="557" y1="57" x2="855" y2="303" marker-end="url(#stk-sq)"/>
-  </g>
-  <circle cx="200" cy="318" r="17" fill="#4ec3ff"/>
-  <rect x="633" y="301" width="34" height="34" rx="4" fill="#2fbf76"/>
-  <rect x="745" y="301" width="34" height="34" rx="4" fill="#17d8e0"/>
-  <rect x="857" y="301" width="34" height="34" rx="4" fill="#a56cff"/>
-  <g font-size="13" font-weight="bold" text-anchor="middle">
-    <text x="650" y="362" fill="#2fbf76">PR #1</text>
-    <text x="762" y="362" fill="#17d8e0">PR #2</text>
-    <text x="894" y="362" text-anchor="end" fill="#a56cff">PR #3</text>
-  </g>
+  <circle cx="294" cy="257" r="17" fill="#4ec3ff"/><text x="294" y="262" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14.5" font-weight="700">m0</text>
+  <rect x="388" y="238" width="84" height="38" rx="3" fill="#2fbf76"/><text x="430" y="263" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="800">PR #1</text>
+  <rect x="564" y="238" width="84" height="38" rx="3" fill="#17d8e0"/><text x="606" y="263" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="800">PR #2</text>
+  <rect x="740" y="238" width="84" height="38" rx="3" fill="#a56cff"/><text x="782" y="263" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="800">PR #3</text>
+  <rect x="284" y="22" width="352" height="66" rx="3" fill="var(--c-midnight)" stroke="var(--c-crt-amber)" stroke-width="1.6"/>
+  <text x="298" y="49" fill="var(--c-crt-amber)" font-size="17" font-weight="700">Linear main: 1 commit per PR</text>
+  <text x="298" y="75" fill="var(--c-fg-body)" font-size="15.5">Draft commits (a1..c2) dropped</text>
 </svg>
-<p class="figtabs-cap">Each PR collapses into <b>a single commit</b> on <code>main</code>. Cleanest log, but the individual commits (faded) are lost.</p>
+<div class="pr-method-card">
+  <p class="pr-method-summary">Collapses <b>each PR into 1 commit</b> on <code>main</code> (3 commits total, not 1 for the stack).</p>
+  <p class="pr-method-pro">✅ <b>Pro:</b> Cleanest linear <code>main</code> (<b>1 PR = 1 commit</b>), 1-step <code>git revert</code>, zero WIP noise.</p>
+  <p class="pr-method-con">⚠️ <b>Con:</b> Micro-commits drop from <code>main</code> (<code>git blame</code> shows PR level; PR page keeps them).</p>
+</div>
 </div>
 <div class="figtabs-panel" data-idx="3">
-<svg viewBox="0 0 900 372" role="img" aria-label="Rebase and merge: every branch commit is replayed onto main in order, with no merge commit">
+<svg viewBox="0 0 860 302" role="img" aria-label="Rebase and merge: all 6 branch commits are replayed linearly onto main with new SHAs and no merge commit">
   <defs>
-    <marker id="stk-rb" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M0 0 L7 3 L0 6 Z" fill="#7d8595"/>
+    <marker id="stk-rb-line" markerWidth="8" markerHeight="8" refX="6.5" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L7 3 L0 6 Z" fill="#8fa6bc"/>
+    </marker>
+    <marker id="stk-rb-g" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 3.5 L0 7 Z" fill="#2fbf76"/>
+    </marker>
+    <marker id="stk-rb-c" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 3.5 L0 7 Z" fill="#17d8e0"/>
+    </marker>
+    <marker id="stk-rb-p" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L8 3.5 L0 7 Z" fill="#a56cff"/>
     </marker>
   </defs>
-  <rect x="16" y="31" width="118" height="34" rx="4" fill="#a56cff"/><text x="75" y="53" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-c</text>
-  <rect x="16" y="121" width="118" height="34" rx="4" fill="#17d8e0"/><text x="75" y="143" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-b</text>
-  <rect x="16" y="211" width="118" height="34" rx="4" fill="#2fbf76"/><text x="75" y="233" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">feat-a</text>
-  <rect x="16" y="301" width="118" height="34" rx="4" fill="#4ec3ff"/><text x="75" y="323" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="16" font-weight="bold">main</text>
-  <g font-size="13" font-weight="bold" text-anchor="middle">
-    <rect x="144" y="33" width="124" height="30" rx="4" fill="#131a2b" stroke="#a56cff" stroke-width="2"/><text x="206" y="53" fill="#a56cff">base: feat-b</text>
-    <rect x="144" y="123" width="124" height="30" rx="4" fill="#131a2b" stroke="#17d8e0" stroke-width="2"/><text x="206" y="143" fill="#17d8e0">base: feat-a</text>
-    <rect x="144" y="213" width="124" height="30" rx="4" fill="#131a2b" stroke="#2fbf76" stroke-width="2"/><text x="206" y="233" fill="#2fbf76">base: main</text>
+  <rect x="6" y="27" width="152" height="36" rx="3" fill="#a56cff"/><text x="82" y="51" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">PR #3 · feat-c</text>
+  <rect x="164" y="29" width="104" height="32" rx="3" fill="var(--c-midnight)" stroke="#a56cff" stroke-width="1.8"/><text x="216" y="51" text-anchor="middle" fill="#a56cff" font-size="16" font-weight="700">→ feat-b</text>
+  <rect x="6" y="97" width="152" height="36" rx="3" fill="#17d8e0"/><text x="82" y="121" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">PR #2 · feat-b</text>
+  <rect x="164" y="99" width="104" height="32" rx="3" fill="var(--c-midnight)" stroke="#17d8e0" stroke-width="1.8"/><text x="216" y="121" text-anchor="middle" fill="#17d8e0" font-size="16" font-weight="700">→ feat-a</text>
+  <rect x="6" y="167" width="152" height="36" rx="3" fill="#2fbf76"/><text x="82" y="191" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">PR #1 · feat-a</text>
+  <rect x="164" y="169" width="104" height="32" rx="3" fill="var(--c-midnight)" stroke="#2fbf76" stroke-width="1.8"/><text x="216" y="191" text-anchor="middle" fill="#2fbf76" font-size="16" font-weight="700">→ main</text>
+  <rect x="6" y="239" width="152" height="36" rx="3" fill="#4ec3ff"/><text x="82" y="263" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="17" font-weight="700">main</text>
+  <g stroke="#8fa6bc" stroke-width="2" stroke-dasharray="4 4" fill="none" opacity=".28">
+    <line x1="306" y1="246" x2="389" y2="193"/>
+    <line x1="418" y1="185" x2="442" y2="185"/>
+    <line x1="471" y1="177" x2="565" y2="123"/>
+    <line x1="594" y1="115" x2="618" y2="115"/>
+    <line x1="647" y1="107" x2="741" y2="53"/>
+    <line x1="770" y1="45" x2="794" y2="45"/>
   </g>
-  <g stroke="#7d8595" stroke-width="2.6" fill="none">
-    <line x1="217" y1="318" x2="596" y2="318" marker-end="url(#stk-rb)"/>
-    <line x1="663" y1="318" x2="708" y2="318" marker-end="url(#stk-rb)"/>
-    <line x1="775" y1="318" x2="820" y2="318" marker-end="url(#stk-rb)"/>
+  <g opacity=".34">
+    <circle cx="403" cy="185" r="15" fill="#2fbf76"/><text x="403" y="190" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">a1</text>
+    <circle cx="457" cy="185" r="15" fill="#2fbf76"/><text x="457" y="190" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">a2</text>
+    <circle cx="579" cy="115" r="15" fill="#17d8e0"/><text x="579" y="120" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">b1</text>
+    <circle cx="633" cy="115" r="15" fill="#17d8e0"/><text x="633" y="120" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">b2</text>
+    <circle cx="755" cy="45" r="15" fill="#a56cff"/><text x="755" y="50" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">c1</text>
+    <circle cx="809" cy="45" r="15" fill="#a56cff"/><text x="809" y="50" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14" font-weight="700">c2</text>
   </g>
-  <g stroke="#7d8595" stroke-width="2.6" fill="none">
-    <line x1="313" y1="228" x2="326" y2="228" marker-end="url(#stk-rb)" opacity=".32"/>
-    <line x1="413" y1="138" x2="426" y2="138" marker-end="url(#stk-rb)" opacity=".32"/>
-    <line x1="513" y1="48" x2="526" y2="48" marker-end="url(#stk-rb)" opacity=".32"/>
-    <line x1="213" y1="304" x2="287" y2="240" marker-end="url(#stk-rb)"/>
-    <line x1="357" y1="217" x2="390" y2="150" marker-end="url(#stk-rb)"/>
-    <line x1="457" y1="127" x2="490" y2="60" marker-end="url(#stk-rb)"/>
+  <line x1="430" y1="202" x2="430" y2="236" stroke="#2fbf76" stroke-width="2.5" stroke-dasharray="5 3" marker-end="url(#stk-rb-g)"/>
+  <line x1="606" y1="132" x2="606" y2="236" stroke="#17d8e0" stroke-width="2.5" stroke-dasharray="5 3" marker-end="url(#stk-rb-c)"/>
+  <line x1="782" y1="62" x2="782" y2="236" stroke="#a56cff" stroke-width="2.5" stroke-dasharray="5 3" marker-end="url(#stk-rb-p)"/>
+  <g stroke="#8fa6bc" stroke-width="2.6" fill="none">
+    <line x1="311" y1="257" x2="381" y2="257" marker-end="url(#stk-rb-line)"/>
+    <line x1="417" y1="257" x2="439" y2="257" marker-end="url(#stk-rb-line)"/>
+    <line x1="475" y1="257" x2="557" y2="257" marker-end="url(#stk-rb-line)"/>
+    <line x1="593" y1="257" x2="615" y2="257" marker-end="url(#stk-rb-line)"/>
+    <line x1="651" y1="257" x2="733" y2="257" marker-end="url(#stk-rb-line)"/>
+    <line x1="769" y1="257" x2="791" y2="257" marker-end="url(#stk-rb-line)"/>
   </g>
-  <circle cx="300" cy="228" r="13" fill="#2fbf76" opacity=".32"/>
-  <circle cx="346" cy="228" r="13" fill="#2fbf76" opacity=".32"/>
-  <circle cx="400" cy="138" r="13" fill="#17d8e0" opacity=".32"/>
-  <circle cx="446" cy="138" r="13" fill="#17d8e0" opacity=".32"/>
-  <circle cx="500" cy="48" r="13" fill="#a56cff" opacity=".32"/>
-  <circle cx="546" cy="48" r="13" fill="#a56cff" opacity=".32"/>
-  <g stroke="#7d8595" stroke-width="2.6" fill="none">
-    <line x1="359" y1="232" x2="593" y2="310" marker-end="url(#stk-rb)"/>
-    <line x1="458" y1="146" x2="708" y2="305" marker-end="url(#stk-rb)"/>
-    <line x1="556" y1="57" x2="822" y2="302" marker-end="url(#stk-rb)"/>
-  </g>
-  <circle cx="200" cy="318" r="17" fill="#4ec3ff"/>
-  <g stroke="#7d8595" stroke-width="2.6">
-    <line x1="629" y1="318" x2="637" y2="318"/>
-    <line x1="741" y1="318" x2="749" y2="318"/>
-    <line x1="853" y1="318" x2="861" y2="318"/>
-  </g>
-  <circle cx="616" cy="318" r="13" fill="#2fbf76"/>
-  <circle cx="650" cy="318" r="13" fill="#2fbf76"/>
-  <circle cx="728" cy="318" r="13" fill="#17d8e0"/>
-  <circle cx="762" cy="318" r="13" fill="#17d8e0"/>
-  <circle cx="840" cy="318" r="13" fill="#a56cff"/>
-  <circle cx="874" cy="318" r="13" fill="#a56cff"/>
-  <g font-size="13" font-weight="bold" text-anchor="middle">
-    <text x="633" y="362" fill="#2fbf76">PR #1</text>
-    <text x="745" y="362" fill="#17d8e0">PR #2</text>
-    <text x="857" y="362" fill="#a56cff">PR #3</text>
-  </g>
+  <circle cx="294" cy="257" r="17" fill="#4ec3ff"/><text x="294" y="262" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="14.5" font-weight="700">m0</text>
+  <circle cx="401" cy="257" r="15.5" fill="#2fbf76"/><text x="401" y="262" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="13.5" font-weight="700">a1'</text>
+  <circle cx="459" cy="257" r="15.5" fill="#2fbf76"/><text x="459" y="262" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="13.5" font-weight="700">a2'</text>
+  <circle cx="577" cy="257" r="15.5" fill="#17d8e0"/><text x="577" y="262" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="13.5" font-weight="700">b1'</text>
+  <circle cx="635" cy="257" r="15.5" fill="#17d8e0"/><text x="635" y="262" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="13.5" font-weight="700">b2'</text>
+  <circle cx="753" cy="257" r="15.5" fill="#a56cff"/><text x="753" y="262" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="13.5" font-weight="700">c1'</text>
+  <circle cx="811" cy="257" r="15.5" fill="#a56cff"/><text x="811" y="262" text-anchor="middle" fill="var(--c-shadow-ink)" font-size="13.5" font-weight="700">c2'</text>
+  <text x="430" y="293" text-anchor="middle" fill="#2fbf76" font-size="15" font-weight="700">PR #1</text>
+  <text x="606" y="293" text-anchor="middle" fill="#17d8e0" font-size="15" font-weight="700">PR #2</text>
+  <text x="782" y="293" text-anchor="middle" fill="#a56cff" font-size="15" font-weight="700">PR #3</text>
+  <rect x="284" y="22" width="352" height="66" rx="3" fill="var(--c-midnight)" stroke="var(--c-crt-amber)" stroke-width="1.6"/>
+  <text x="298" y="49" fill="var(--c-crt-amber)" font-size="17" font-weight="700">Linear main: 6 commits replayed</text>
+  <text x="298" y="75" fill="var(--c-fg-body)" font-size="15.5">New SHAs (a1'..c2'), 0 merge commit</text>
 </svg>
-<p class="figtabs-cap">Every commit is replayed onto <code>main</code> in order. <b>Linear history, no merge commit.</b> The originals (faded) are rewritten.</p>
+<div class="pr-method-card">
+  <p class="pr-method-summary">Replays all 6 commits onto <code>main</code> in order (<code>a1'</code>..<code>c2'</code>) with <b>new SHAs and 0 merge commit</b>.</p>
+  <p class="pr-method-pro">✅ <b>Pro:</b> Linear <code>main</code> graph while keeping individual step-by-step commits.</p>
+  <p class="pr-method-con">⚠️ <b>Con:</b> Rewrites original SHAs, and noisy <code>wip</code> commits still land on <code>main</code>.</p>
+</div>
 </div>
 </div>
 
 <div class="split-text">
 
-**One atomic merge.** Choose the history on `main`.
+**How the stack merges**
 
-- 🧱 Protections and CI on **every layer**
-- 🔄 **Auto-rebase / retarget** above merged layers
-- ☝️ **Merge one, some, or all**, bottom-up. Top PR = whole stack
+- ☝️ **One, some, or all**: merge bottom-up; merging `PR #3` lands the **whole stack atomically**
+- 🔄 **Auto-rebase & retarget**: merging `PR #1` updates `PR #2` to target `main`
+- 🛡️ **Gates per layer**: Rulesets, reviews, and CI check **every PR**
+- 🧹 **Safe branch cleanup**: delete `feat-a/b/c` after merge in **any mode** (history stays on `main`)
+- 🛠️ **Surfaces**: github.com, Mobile, APIs / webhooks, `gh extension install github/gh-stack`
 
 </div>
 </div>
-
-🛠️ github.com, Mobile, REST / GraphQL / webhooks, and `gh extension install github/gh-stack`
 
 </div>
 
