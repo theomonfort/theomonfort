@@ -129,37 +129,156 @@ body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"
   padding-block: 0.3rem;
 }
 
-body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-list:has([name="ghas-rollout"]) {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.3rem 0.8rem;
-  align-items: start;
+/* Rollout: vertical step list with a fixed reading pane on the right. */
+.playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-rest-tag {
+  display: none;
 }
 
-body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-list:has([name="ghas-rollout"]) .ctl-item {
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-widget:has([name="ghas-rollout"]) {
+  --rollout-pane: 43%;
+  --rollout-bw: 1px;
+  position: relative;
+  min-height: 27.5rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-widget:has([name="ghas-rollout"]) .ctl-list {
+  width: calc(var(--rollout-pane) - 1.1rem);
+  min-height: 27.5rem;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 0.3rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-item[name="ghas-rollout"] {
+  position: static;
   margin: 0;
-  min-width: 0;
 }
 
-body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-list:has([name="ghas-rollout"]) .ctl-name {
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-item[name="ghas-rollout"]::details-content {
+  transition: none;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-item[name="ghas-rollout"] .ctl-btn {
+  gap: 0.6rem;
+  padding: 0.4rem 0.75rem;
   font-size: 20px;
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
-body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-list:has([name="ghas-rollout"]) .ctl-when {
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-item[name="ghas-rollout"] .ctl-name {
+  flex: 1 1 auto;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-item[name="ghas-rollout"]:not([open]) :is(.ctl-when, .ctl-doc) {
   display: none;
 }
 
-body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-list:has([name="ghas-rollout"][open]) .ctl-item:not([open]) {
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-item[name="ghas-rollout"] .ctl-toggle::before {
+  content: '▸';
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-item[name="ghas-rollout"][open] .ctl-toggle {
+  transform: none;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-item[name="ghas-rollout"][open] {
+  box-shadow: none;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-widget:has([name="ghas-rollout"]) :is(.ctl-rest, .ctl-item[open] .ctl-body) {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--rollout-pane);
+  right: 0;
+  margin: 0;
+  border: var(--rollout-bw) solid color-mix(in srgb, var(--entry-accent, var(--c-neon-cyan)) 55%, transparent);
+  border-radius: 0;
+  background: var(--c-bg-elevated);
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-widget:has([name="ghas-rollout"]) .ctl-rest {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.2rem 1.5rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-widget:has([name="ghas-rollout"]):has(.ctl-item[open]) .ctl-rest {
   display: none;
 }
 
-body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-list:has([name="ghas-rollout"][open]) .ctl-item[open] {
-  grid-column: 1 / -1;
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-widget:has([name="ghas-rollout"]) .ctl-rest p {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.55;
 }
 
-body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"]:has([name="ghas-rollout"][open]) .prose-akq > p.akq-slide-active {
-  display: none;
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-widget:has([name="ghas-rollout"]) .ctl-rest .ctl-rest-tag {
+  display: block;
+  font-family: var(--font-mono-hud), var(--font-prose);
+  font-size: 24px;
+  letter-spacing: 0.08em;
+  color: var(--c-neon-cyan);
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-widget:has([name="ghas-rollout"]) .ctl-rest .ctl-rest-tag::before {
+  content: '▸ ';
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-item[name="ghas-rollout"][open] .ctl-when {
+  position: absolute;
+  z-index: 1;
+  top: var(--rollout-bw);
+  left: calc(var(--rollout-pane) + var(--rollout-bw));
+  right: var(--rollout-bw);
+  display: block;
+  height: 2.75rem;
+  margin: 0;
+  padding: 0 6.6rem 0 1rem;
+  overflow: hidden;
+  line-height: 2.75rem;
+  white-space: nowrap;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--entry-accent, var(--c-neon-cyan)) 30%, transparent);
+  border-radius: 0;
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-item[name="ghas-rollout"][open] .ctl-doc {
+  position: absolute;
+  z-index: 2;
+  top: calc(var(--rollout-bw) + 1.375rem);
+  right: calc(var(--rollout-bw) + 0.85rem);
+  transform: translateY(-50%);
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-item[name="ghas-rollout"][open] .ctl-body {
+  gap: 0.65rem;
+  padding: calc(2.75rem + 0.8rem) 1.1rem 0.8rem;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-item[name="ghas-rollout"][open] .ctl-row {
+  display: block;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-item[name="ghas-rollout"] .ctl-k {
+  margin-right: 0.45em;
+}
+
+html[data-theme='retro'] body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-widget:has([name="ghas-rollout"]) {
+  --rollout-bw: 2px;
+}
+
+html[data-theme='retro'] body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-widget:has([name="ghas-rollout"]) :is(.ctl-rest, .ctl-item[open] .ctl-body) {
+  box-shadow: 4px 4px 0 var(--c-shadow-ink);
 }
 
 body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-item[open] .ctl-body {
@@ -187,4 +306,12 @@ body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"
 body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .trio-foot {
   margin-top: 0.25em;
   padding-top: 0.25em;
+}
+
+html[data-theme='retro'] body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-item[name="ghas-rollout"][open] .ctl-when {
+  font-size: 28px;
+}
+
+html[data-theme='retro'] body.present-mode .playbook-detail[data-playbook-slug="github-advanced-security"] .ctl-widget:has([name="ghas-rollout"]) .ctl-rest .ctl-rest-tag {
+  font-size: 30px;
 }
