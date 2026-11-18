@@ -40,6 +40,8 @@ Part 6 の既存の `[playbook:presentation-tests]` Issue を使い、その実�
 
 **VS Code 1.105 以降**を使い、[Part 3](/theomonfort/handson/plan-mcp/) と同じ Copilot ハーネスとルートの MCP 設定を使います。このバージョンは Playwright の最低要件です。現在のハーネスの要件も満たしてください。
 
+**このワークショップの Playwright 1.58.2 によるテスト生成、MCP サーバー、テスト実行には Node.js 22 LTS を使ってください。** Codespace には導入済みです。この構成では Node 26.13.0 で trace 保存時のハングが再現しました。下のコマンドと MCP 設定は Node 26 のホストでも Node 22.23.4 を明示的に起動し、グローバルインストールは行いません。`npx -c` で囲まないでください。ターミナルだけで Node を切り替えても、起動済みの MCP プロセスは変わりません。設定を更新したら `playwright-test` を停止して再起動してください。
+
 Copilot Chat で、まだシナリオを生成せずにテスト環境を準備します。
 
 ```text
@@ -65,7 +67,7 @@ Playwright **1.58.2** は `npx playwright init-agents --loop=vscode` に対応�
 
 ```bash
 agent_setup="$(mktemp -d ./playwright-agent-setup.XXXXXX)"
-(cd "$agent_setup" && ../node_modules/.bin/playwright init-agents --loop=vscode)
+(cd "$agent_setup" && npx --package=node@22.23.4 node ../node_modules/@playwright/test/cli.js init-agents --loop=vscode)
 printf '%s\n' "$agent_setup"
 ```
 
@@ -98,7 +100,7 @@ tests/e2e/seed.spec.ts を作成し、実際の画面を確認したうえで /p
   "playwright-test": {
     "type": "stdio",
     "command": "npx",
-    "args": ["playwright", "run-test-mcp-server", "--headless"],
+    "args": ["--package=node@22.23.4", "node", "./node_modules/@playwright/test/cli.js", "run-test-mcp-server", "--headless"],
     "tools": ["*"]
   }
 }
@@ -154,8 +156,8 @@ role/label の locator と Playwright の自動待機する assertion を優先�
 通常の **Agent** に戻り、次を実行します。
 
 ```bash
-npx playwright test tests/e2e/presentation.spec.ts --project=chromium
-npx playwright test
+npx --package=node@22.23.4 node ./node_modules/@playwright/test/cli.js test tests/e2e/presentation.spec.ts --project=chromium
+npx --package=node@22.23.4 node ./node_modules/@playwright/test/cli.js test
 ```
 
 コミット前に assertion と失敗理由を確認します。今後の機能開発では、追加した指示を使って **「この機能のテストを提案し、どれを追加するか私に確認してから、機能とテストを一緒に実装してください」** と依頼します。

@@ -40,6 +40,8 @@ For this exercise, the **learner** chooses the tests before generation. A prompt
 
 Use **VS Code 1.105 or later**, with the Copilot harness and workspace-root MCP setup from [Part 3](/theomonfort/en/handson/plan-mcp/). That version is Playwright's minimum; the current harness also has its own requirements.
 
+**Node.js 22 LTS is required for this workshop's Playwright 1.58.2 test generation, MCP server and test runs.** The Codespace already provides it. Node 26.13.0 caused trace-save hangs in this setup. The commands and MCP entry below explicitly launch Node 22.23.4, even on a Node 26 host, without a global install. Do not wrap them in `npx -c`. Changing Node in one terminal does not change an already-running MCP process: stop and restart `playwright-test` after updating its entry.
+
 In Copilot Chat, prepare the runner without generating test scenarios yet:
 
 ```text
@@ -65,7 +67,7 @@ Playwright **1.58.2** supports `npx playwright init-agents --loop=vscode`, but a
 
 ```bash
 agent_setup="$(mktemp -d ./playwright-agent-setup.XXXXXX)"
-(cd "$agent_setup" && ../node_modules/.bin/playwright init-agents --loop=vscode)
+(cd "$agent_setup" && npx --package=node@22.23.4 node ../node_modules/@playwright/test/cli.js init-agents --loop=vscode)
 printf '%s\n' "$agent_setup"
 ```
 
@@ -97,7 +99,7 @@ Merge **only this named entry** into the existing `mcpServers` object, not over 
   "playwright-test": {
     "type": "stdio",
     "command": "npx",
-    "args": ["playwright", "run-test-mcp-server", "--headless"],
+    "args": ["--package=node@22.23.4", "node", "./node_modules/@playwright/test/cli.js", "run-test-mcp-server", "--headless"],
     "tools": ["*"]
   }
 }
@@ -152,8 +154,8 @@ Close the agent-owned browser, then stop **`playwright-test`** in **Customizatio
 Back in the general-purpose **Agent**, run:
 
 ```bash
-npx playwright test tests/e2e/presentation.spec.ts --project=chromium
-npx playwright test
+npx --package=node@22.23.4 node ./node_modules/@playwright/test/cli.js test tests/e2e/presentation.spec.ts --project=chromium
+npx --package=node@22.23.4 node ./node_modules/@playwright/test/cli.js test
 ```
 
 Review assertions and failures before committing. For future feature work, use the new instruction: **“Propose tests for this feature, ask which I want, then implement the feature and those tests together.”**
