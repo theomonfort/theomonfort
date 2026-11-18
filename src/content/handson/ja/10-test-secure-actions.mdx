@@ -196,7 +196,7 @@ CI に固定待機、headed ブラウザー、slow motion は追加しないで�
 
 ### 11.3 — 任意：発表用デモを見る
 
-**checkpoint3** には、別の headed デモとして [`playwright.demo.config.ts`](https://github.com/theomonfort/Github-copilot-workshop/blob/258366ee0be322d64a521284aa9901d104d1b158/playwright.demo.config.ts) と [`tests/demo/playbook.demo.ts`](https://github.com/theomonfort/Github-copilot-workshop/blob/258366ee0be322d64a521284aa9901d104d1b158/tests/demo/playbook.demo.ts) があります。**`tests/e2e` や PR CI には含まれず**、テスト生成の演習とは別です。
+**checkpoint3** には、別の headed デモとして [`playwright.demo.config.ts`](https://github.com/theomonfort/Github-copilot-workshop/blob/e40b89ae43baa271e5e4f9503b4ed5492c3b7ac5/playwright.demo.config.ts) と [`tests/demo/playbook.demo.ts`](https://github.com/theomonfort/Github-copilot-workshop/blob/e40b89ae43baa271e5e4f9503b4ed5492c3b7ac5/tests/demo/playbook.demo.ts) があります。**`tests/e2e` や PR CI には含まれず**、テスト生成の演習とは別です。
 
 checkpoint3 の実装を使い、`npm ci` と `npx playwright install chromium` を実行した **GUI のあるローカル環境**で動かしてください。ブラウザーだけの Codespace ではこのネイティブウィンドウは表示されません。テンプレートから作成済みのリポジトリには自動反映されません。既に checkpoint3 を使っている場合は、リンク先の版からこの 2 ファイルだけをレビューして追加し、既存テストと設定を維持してください。
 
@@ -208,4 +208,4 @@ Node 26 の trace 問題を避けるため、一時的に Node 22 を使いま�
 
 1 つのブラウザーウィンドウで、一覧から GitHub 記事を開き、`P` でプレゼン開始、次スライドへ移動、Copilot と Fusion に切り替え、`Esc` で一覧へ戻ります。表示後の旅程は**約18秒**で、依存関係のダウンロード、ビルド、ブラウザー起動は別時間です。遅い環境で旅程が20秒を超えると、制限を黙って緩めず、デモの時間 assertion が失敗します。
 
-専用ポート **44331** の preview を使い、終了時にデモのブラウザーとサーバーを閉じます。既存の開発サーバーは流用も停止もしません。この意図的な待機を通常テストへ入れないでください。Inspector の手動操作、trace 再生、動画保存、3D デモは不要です。
+専用ポート **44331** の preview を使い、終了時にデモのブラウザーとサーバーを閉じます。既存の開発サーバーは流用も停止もしません。出力先は `test-results/demo` に分かれているため、起動時に通常テストの結果を削除しません。この意図的な待機を通常テストへ入れないでください。Inspector の手動操作、trace 再生、動画保存、3D デモは不要です。

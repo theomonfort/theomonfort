@@ -194,7 +194,7 @@ Commit and push the tests and workflow, then open a PR from `test-creation`. You
 
 ### 11.3 — Optional: watch the presenter demo
 
-The **checkpoint3** snapshot also has a separate headed demo in [`playwright.demo.config.ts`](https://github.com/theomonfort/Github-copilot-workshop/blob/258366ee0be322d64a521284aa9901d104d1b158/playwright.demo.config.ts) and [`tests/demo/playbook.demo.ts`](https://github.com/theomonfort/Github-copilot-workshop/blob/258366ee0be322d64a521284aa9901d104d1b158/tests/demo/playbook.demo.ts). It is **not part of `tests/e2e` or PR CI** and is not the test-generation exercise.
+The **checkpoint3** snapshot also has a separate headed demo in [`playwright.demo.config.ts`](https://github.com/theomonfort/Github-copilot-workshop/blob/e40b89ae43baa271e5e4f9503b4ed5492c3b7ac5/playwright.demo.config.ts) and [`tests/demo/playbook.demo.ts`](https://github.com/theomonfort/Github-copilot-workshop/blob/e40b89ae43baa271e5e4f9503b4ed5492c3b7ac5/tests/demo/playbook.demo.ts). It is **not part of `tests/e2e` or PR CI** and is not the test-generation exercise.
 
 Use the checkpoint3 implementation on a **local machine with a graphical desktop**, after `npm ci` and `npx playwright install chromium`. A browser-only Codespace does not display this native window. Existing copies of a template are not updated automatically: if you already have checkpoint3, review and add only these two files from the linked revision, preserving your existing tests and configuration.
 
@@ -206,4 +206,4 @@ This uses Node 22 temporarily, without a global install, to avoid the Node 26 tr
 
 One browser window automatically visits the catalogue, opens the GitHub article, enters presentation with `P`, advances a slide, switches to Copilot and Fusion, then returns with `Esc`. The visible journey takes about **18 seconds**; dependency download, build and browser startup are additional. A machine that takes over 20 seconds for the journey fails the demo's timing assertion rather than silently relaxing it.
 
-The demo uses its own preview on port **44331** and closes its browser and server on exit. It does not reuse or stop your development server. Keep this deliberate pacing out of ordinary tests; no Inspector steps, trace replay, video recording or 3D demo are required.
+The demo uses its own preview on port **44331** and closes its browser and server on exit. It does not reuse or stop your development server. Its output directory is `test-results/demo`, so starting the demo does not clear normal test results. Keep this deliberate pacing out of ordinary tests; no Inspector steps, trace replay, video recording or 3D demo are required.
