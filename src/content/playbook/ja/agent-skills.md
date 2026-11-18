@@ -181,21 +181,11 @@ gh skills install ards-project/connectors skills/github-copilot
 </div>
 </div>
 
-## Agent Plugins 1.0
+## Plugins
 
-**Agent Plugins 1.0** は、**Agent Skills と MCP サーバーを 1 つのインストール可能なプラグインにまとめる**ベンダー中立のオープン標準。
+スキル、MCP 連携、カスタムエージェント、フック、対話型 canvas などの機能を、1つのパッケージとしてまとめてインストールする。
 
-| パス | 中身 | 可搬性 |
-| --- | --- | --- |
-| 📦 `plugin.json` | マニフェスト。`$schema` で 1.0 を指定 | ✅ 全クライアント |
-| 🧠 `skills/` | スキル 1 つにつき 1 フォルダ + `SKILL.md` | ✅ 全クライアント |
-| 🔌 `mcp.json` | MCP サーバー設定（ローカル / リモート） | ✅ 全クライアント |
-| 🐙 `com.github.copilot/` | カスタムエージェント、コマンド、フック等 | ⬜ Copilot 専用 |
-
-標準化されるのはスキルと MCP。Copilot 固有の機能は名前空間付きフォルダに収まり、他クライアントは読み飛ばす。
-
-> 🌐 一度作れば VS Code / Copilot CLI / SDK / Copilot アプリで動く。全プランで GA。
-> 🏢 **Enterprise**: 許可するプラグインとマーケットプレイスは従来どおり `managed-settings.json` で統制できる。
+例: <a class="retro-link" href="https://github.com/github/awesome-copilot/blob/main/extensions/ai-credits-breakdown/README.md" target="_blank" rel="noopener noreferrer">AI Credits Breakdown</a> は、Copilot アプリに使用量ダッシュボードを追加するプラグイン。
 
 ## プラグインの導入と利用 <a class="h2-doc" href="https://awesome-copilot.github.com/plugins/" target="_blank" rel="noopener noreferrer">プラグインを探す ↗</a>
 

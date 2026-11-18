@@ -181,21 +181,11 @@ gh skills install ards-project/connectors skills/github-copilot
 </div>
 </div>
 
-## Agent Plugins 1.0
+## Plugins
 
-**Agent Plugins 1.0** is a vendor-neutral open standard that packages **Agent Skills and MCP servers into a single installable plugin**.
+Install skills, MCP integrations, custom agents, hooks or interactive canvases together as a single package.
 
-| Path | Contents | Portable? |
-| --- | --- | --- |
-| 📦 `plugin.json` | Manifest — `$schema` targets the 1.0 spec | ✅ All clients |
-| 🧠 `skills/` | One folder per skill, each with `SKILL.md` | ✅ All clients |
-| 🔌 `mcp.json` | Local and remote MCP server config | ✅ All clients |
-| 🐙 `com.github.copilot/` | Custom agents, commands, rules, hooks, canvases | ⬜ Copilot only |
-
-Only skills and MCP are standardized. Copilot-specific features stay in a namespaced folder that other clients skip.
-
-> 🌐 Build once, run it in VS Code, Copilot CLI, the SDK, and the Copilot app — GA on all plans.
-> 🏢 **Enterprise**: `managed-settings.json` still governs which plugins and marketplaces are allowed.
+Example: <a class="retro-link" href="https://github.com/github/awesome-copilot/blob/main/extensions/ai-credits-breakdown/README.md" target="_blank" rel="noopener noreferrer">AI Credits Breakdown</a>, a plugin that adds a usage dashboard to the Copilot app.
 
 ## Install and use a plugin <a class="h2-doc" href="https://awesome-copilot.github.com/plugins/" target="_blank" rel="noopener noreferrer">Browse plugins ↗</a>
 
