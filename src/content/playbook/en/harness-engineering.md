@@ -235,34 +235,34 @@ The same "AI scaffold" concept exists across ecosystems, but file locations and 
     <path d="M624,405 H668 V505 H688" fill="none" stroke="var(--c-gb-green)" stroke-width="2.5" marker-end="url(#hm-arrow)"/>
     <rect x="24" y="249" width="290" height="90" rx="2" fill="var(--c-shadow-ink)"/>
     <rect x="20" y="245" width="290" height="90" rx="2" fill="var(--c-midnight)" stroke="var(--c-neon-cyan)" stroke-width="2"/>
-    <text x="165" y="284" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="var(--c-neon-cyan)">Orchestrator：Theo</text>
-    <text x="165" y="306" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">+ instructions / prompts</text>
+    <text x="165" y="264" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="var(--c-neon-cyan)" aria-label="Orchestrator: Theo OR GitHub App Projects"><tspan x="165">Orchestrator</tspan><tspan x="165" dy="22">Theo OR</tspan><tspan x="165" dy="22">GitHub App Projects</tspan></text>
+    <text x="165" y="329" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">+ instructions / prompts</text>
     <rect x="378" y="29" width="250" height="70" rx="2" fill="var(--c-shadow-ink)"/>
     <rect x="374" y="25" width="250" height="70" rx="2" fill="var(--c-midnight)" stroke="#8b949e" stroke-width="2"/>
     <text x="499" y="54" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="#d0d7de">Explore / Research</text>
     <text x="499" y="76" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">CLI Built-in Agents</text>
     <rect x="378" y="144" width="250" height="70" rx="2" fill="var(--c-shadow-ink)"/>
     <rect x="374" y="140" width="250" height="70" rx="2" fill="var(--c-midnight)" stroke="var(--c-neon-cyan)" stroke-width="2"/>
-    <text x="499" y="169" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="var(--c-neon-cyan)">planner</text>
-    <text x="499" y="191" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">Custom agent</text>
+    <text x="499" y="165" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="var(--c-neon-cyan)">planner</text>
+    <text x="499" y="185" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">Custom agent</text>
     <text x="616" y="201" text-anchor="end" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="1" fill="var(--c-gb-green)">LOCAL</text>
-    <text x="382" y="201" text-anchor="start" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="0.5" fill="var(--c-crt-amber)">Opus 4.8</text>
+    <text x="382" y="201" text-anchor="start" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="0.5" fill="var(--c-crt-amber)">Copilot Fusion</text>
     <rect x="378" y="259" width="250" height="70" rx="2" fill="var(--c-shadow-ink)"/>
     <rect x="374" y="255" width="250" height="70" rx="2" fill="var(--c-midnight)" stroke="#8b949e" stroke-width="2"/>
-    <text x="499" y="284" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="#d0d7de">Coding</text>
-    <text x="499" y="306" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">CLI Built-in Agents</text>
-    <text x="382" y="316" text-anchor="start" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="0.5" fill="var(--c-crt-amber)">Opus 4.8</text>
+    <text x="499" y="280" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="#d0d7de">Coding</text>
+    <text x="499" y="300" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">CLI Built-in Agents</text>
+    <text x="382" y="316" text-anchor="start" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="0.5" fill="var(--c-crt-amber)">Copilot Fusion</text>
     <rect x="378" y="374" width="250" height="70" rx="2" fill="var(--c-shadow-ink)"/>
     <rect x="374" y="370" width="250" height="70" rx="2" fill="var(--c-midnight)" stroke="var(--c-neon-cyan)" stroke-width="2"/>
     <text x="499" y="389" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="var(--c-neon-cyan)" aria-label="playwright-test-generator"><tspan x="499">playwright-test-</tspan><tspan x="499" dy="20">generator</tspan></text>
-    <text x="499" y="426" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">Custom agent</text>
-    <text x="616" y="431" text-anchor="end" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="1" fill="var(--c-gb-green)">LOCAL</text>
-    <text x="382" y="431" text-anchor="start" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="0.5" fill="var(--c-crt-amber)">GPT-5.5</text>
+    <text x="616" y="431" text-anchor="end" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">Custom agent</text>
+    <text x="616" y="409" text-anchor="end" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="1" fill="var(--c-gb-green)">LOCAL</text>
+    <text x="382" y="431" text-anchor="start" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="0.5" fill="var(--c-crt-amber)">Copilot Fusion</text>
     <rect x="378" y="489" width="250" height="70" rx="2" fill="var(--c-shadow-ink)"/>
     <rect x="374" y="485" width="250" height="70" rx="2" fill="var(--c-midnight)" stroke="#8b949e" stroke-width="2"/>
-    <text x="499" y="514" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="#d0d7de">Review</text>
-    <text x="499" y="536" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">CLI Built-in · Rubber Duck</text>
-    <text x="382" y="546" text-anchor="start" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="0.5" fill="var(--c-crt-amber)">GPT family</text>
+    <text x="499" y="510" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="#d0d7de">Review</text>
+    <text x="499" y="530" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="13" fill="#aeb6c2">CLI Built-in · Rubber Duck</text>
+    <text x="382" y="546" text-anchor="start" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="11.5" letter-spacing="0.5" fill="var(--c-crt-amber)">Copilot Fusion</text>
     <rect x="692" y="51" width="240" height="66" rx="2" fill="var(--c-shadow-ink)"/>
     <rect x="688" y="47" width="240" height="66" rx="2" fill="var(--c-midnight)" stroke="var(--c-neon-magenta)" stroke-width="2"/>
     <text x="808" y="74" text-anchor="middle" font-family="'IBM Plex Mono', 'IBM Plex Sans JP', monospace" font-size="19" font-weight="700" fill="var(--c-neon-magenta)">Grill-me</text>

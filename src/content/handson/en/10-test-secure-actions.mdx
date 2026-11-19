@@ -68,19 +68,20 @@ Escape and slide-link reload, each with a concrete expected result.
 Ask which tests I want, then wait. Do not generate them yet.
 ```
 
-Check that browser tools actually ran. Choose your cases, for example: **“Add arrow navigation and Escape; keep the existing sidebar test.”**
+Check that browser tools actually ran, then review all test cases in **`specs/presentation.md`**.
 
 #### Generate and run the chosen tests
 
-Select **`playwright-test-generator`**, attach the approved plan, and send:
+Select **`playwright-test-generator`**, attach **`specs/presentation.md`**, and send:
 
 ```text
-Generate only my approved cases in tests/e2e/presentation.spec.ts.
+I approve all test cases in the attached specs/presentation.md.
+Generate all of them in tests/e2e/presentation.spec.ts without asking me to select cases again.
 Verify selectors and meaningful assertions in the real browser; no duplicates or fixed waits.
 Close the browser/preview you started when finished. Do not hide real app defects.
 ```
 
-Then return to **Agent**: **“Stop the test MCP's preview, run the chosen tests and the normal suite, and explain one assertion and the regression it catches.”** Stop only exercise-owned resources. The optional **healer** must not skip/delete tests or weaken assertions to make them pass.
+Then return to **Agent**: **“Stop the test MCP's preview, run all tests from the plan and the normal suite, and explain one assertion and the regression it catches.”** Stop only exercise-owned resources. The optional **healer** must not skip/delete tests or weaken assertions to make them pass.
 
 ### 9.2 — Choose tools for web and desktop apps
 
