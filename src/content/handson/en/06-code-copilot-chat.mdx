@@ -119,25 +119,29 @@ From the port-forwarding notification, click **"Open in browser"** and try it ou
 
 ### 6.6 — File the improvements as Issues
 
-Continue from the base site with **8 implementation Issues** that build toward the current Playbook. Each `[playbook:...]` is a stable work key, not a GitHub-assigned Issue number.
+Continue from the base site with **6 implementation Issues**. Each `[playbook:...]` is a stable work key, not a GitHub-assigned Issue number. Advanced 3D and Zettelkasten work comes later from the Project and Word brief, not this initial Issue catalogue.
 
-| Stage | Work keys | Milestone |
-| --- | --- | --- |
-| Part 6 / checkpoint1 | Base site already built | Catalogue and Markdown details |
-| Cloud Agent (optional Part 8), or checkpoint2 | `presentation-core` → `presentation-content` / `mermaid-rendering` / `responsive-navigation` | checkpoint2 |
-| Test & Secure (Part 9) | `presentation-tests` | Agreed tests + PR CI on your exercise branch, then security |
-| Copilot App / Projects (optional Part 12) | Adapt `playbook-3d`, then add Zettelkasten as a separate Project task | Advanced integration; checkpoint3 is optional at the tests + 3D + Zettelkasten milestone |
-| CLI (optional Part 13) | `galaxy-audio` | Add ambience after merging 3D |
-| Operate (Part 14) | `daily-repo-status` | Daily report |
+<table>
+  <thead>
+    <tr><th scope="col">Stage</th><th scope="col">Work keys</th><th scope="col">Milestone</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Part 6 / checkpoint1</td><td>Base site already built</td><td>Catalogue and Markdown details</td></tr>
+    <tr><td>Cloud Agent (optional Part 8), or checkpoint2</td><td><code>presentation-core</code> → <code>presentation-content</code> / <code>mermaid-rendering</code> / <code>responsive-navigation</code></td><td>checkpoint2</td></tr>
+    <tr><td>Test &amp; Secure (Parts 9–11)</td><td><code>presentation-tests</code>, then repository security settings</td><td>Your reviewed, merged tests/CI and security work</td></tr>
+    <tr><td>Copilot App / Projects (optional Part 12)</td><td>Project + Word brief, not initial Issues</td><td>3D and read-only Zettelkasten; checkpoint3 is the completed-site reference</td></tr>
+    <tr><td>Operate (Part 13)</td><td><code>daily-repo-status</code></td><td>Daily report</td></tr>
+  </tbody>
+</table>
 
 **`./checkpoint1` prepares these Issues in Japanese.** If you ran it, reuse them in the Issues tab rather than generating duplicates. The English prompt below uses the same keys. Older Issue bodies may use previous part numbers; follow the current table above without rewriting existing Issues. When using an optional checkpoint at its milestone, check which acceptance criteria are already met and work only on remaining tasks. Repository policies and security settings still need separate setup.
 
 Keep the `[playbook:...]` title keys and `workshop-issue` body markers so the prompt and checkpoint script can recognize existing work. Older repository copies may have a script without Issue seeding; check the Issues tab and use this prompt for missing entries rather than assuming they were created.
 
-`checkpoint1` prepares Issues before stashing or switching branches, reusing existing open or closed Issues without changing them. Even if the snapshot already matches `main`, it prepares missing Issues without another PR. If Issue preparation fails, fix the reported error and rerun `./checkpoint1`; already-created Issues are retained. Run only one import per repository at a time, including across clones. `checkpoint2` / `checkpoint3` do not prepare Issues.
+`checkpoint1` prepares Issues before stashing or switching branches, reusing existing open or closed Issues without changing them. Even if the snapshot already matches `main`, it prepares missing Issues without another PR. If Issue preparation fails, fix the reported error and rerun `./checkpoint1`; already-created Issues are retained. Run only one import per repository at a time, including across clones. `checkpoint2` / `checkpoint3` do not prepare Issues. Older copies may have extra Issues; leave them unchanged and use the six keys below.
 
 <Aside type="negative">
-**`presentation-core` is required before testing.** Checkpoints 1–2 do not include 3D. Checkpoint3 is an optional reference after the advanced 3D and Zettelkasten integrations, not a step in the test exercise. Skip optional Parts 12–13 to continue from security directly to Operate. Previously created Issue bodies are not rewritten; use the current table when selecting work.
+**`presentation-core` is required before testing.** Checkpoint2 is the presentation milestone; checkpoint3 already includes tests/CI, 3D and read-only Zettelkasten. After Test & Secure, review and merge your own work before starting a Project. Reuse any integrations already present rather than rebuilding them. Skip optional Part 12 to continue directly to Part 13: Operate. Previously created Issue bodies are not rewritten.
 </Aside>
 
 On the normal Part 6 path, send this prompt to Copilot Chat to prepare the Issues. It does not start implementation.
@@ -213,44 +217,15 @@ Test & Secure (Part 9), after merging presentation or starting from checkpoint2.
 
 Reference: https://theomonfort.github.io/theomonfort/en/handson/test-secure-actions/
 
-Title: [playbook:playbook-3d] Recreate the existing 3D Galaxy view
-Body:
-<!-- workshop-issue:playbook-3d -->
-## Stage
-Optional Copilot App / Projects (Part 12). Compare the read-only irl-odyssey/3d-solar-system reference with the Word brief and adapt only in the hands-on repo. Checkpoints 1–2 have no 3D. Checkpoint3 provides a reference/catch-up at the tests + 3D + Zettelkasten milestone, after learning both integrations. Reuse features already present instead of rebuilding them.
-
-## Acceptance criteria
-- Recreate the existing 2D / 3D switch using Three.js: a central SDLC sun, five Plan / Develop / Review / Secure / Operate planets, an Introduction departure station and an Administration mothership. Do not invent a different design.
-- Share Markdown and category metadata; selecting a world reveals article satellites / missions, their summaries and links to normal detail pages.
-- Provide drag-to-orbit, zoom, pan, camera buttons and return to overview; restore selection from URLs such as `?view=3d&sector=plan`.
-- Check keyboard controls, motion pause, reduced-motion and narrow screens. Lazy-load 3D; on WebGL failure, show an error and retain a usable 2D catalogue.
-
-View: https://theomonfort.github.io/theomonfort/en/playbook/?view=3d
-Implementation reference: https://github.com/theomonfort/theomonfort/blob/main/src/components/interactive/PlaybookExplorer.astro
-Scene reference: https://github.com/theomonfort/theomonfort/blob/main/src/lib/playbook-galaxy-scene.ts
-
-Title: [playbook:galaxy-audio] Add Galaxy ambience and clean resource shutdown
-Body:
-<!-- workshop-issue:galaxy-audio -->
-## Stage
-Optional CLI extension (Part 13), after reviewing and merging the 3D prerequisite. Do not implement it concurrently with 3D. Checkpoint3 does not include ambient audio.
-
-## Acceptance criteria
-- Follow the existing Galaxy ambience, with playback after user interaction and a Music ON / OFF control.
-- Have ambience follow the camera; report audio errors without blocking 3D navigation.
-- Stop and release audio/rendering resources when returning to 2D or leaving the page; re-entry must not duplicate playback.
-
-Reference: https://github.com/theomonfort/theomonfort/blob/main/src/lib/playbook-galaxy-audio.ts
-
 Title: [playbook:daily-repo-status] Report daily development activity with an Agentic Workflow
 Body:
 <!-- workshop-issue:daily-repo-status -->
 ## Stage
-Operate (Part 14), after its policy and permission checks. Not included in checkpoints 1–3.
+Operate (Part 13), after its policy and permission checks. Not included in checkpoints 1–3.
 
 ## Acceptance criteria
 - Define a daily schedule and manual trigger in `.github/workflows/daily-repo-status.md` to summarize Issues, PRs and code changes.
-- Use Part 14's permissions and safe-outputs to create a report Issue prefixed `[repo-status]`. Do not commit credentials.
+- Use Part 13's permissions and safe-outputs to create a report Issue prefixed `[repo-status]`. Do not commit credentials.
 - Review and merge a PR including the lockfile generated by `gh aw compile`, then verify the report from a manual run.
 
 Reference: https://theomonfort.github.io/theomonfort/en/handson/operate-agentic-workflow/

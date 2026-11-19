@@ -1,6 +1,6 @@
 ---
 title: "OPERATE: Agentic Workflow"
-order: 14
+order: 13
 stepSlug: "operate-agentic-workflow"
 duration: 15
 summary: "Combine GitHub Actions with Copilot (AI) to experience an Agentic Workflow that detects code changes and runs autonomous tasks on its own."
@@ -16,9 +16,11 @@ import Aside from '../../../components/handson/Aside.astro';
 
 **What is an Agentic Workflow?**: A mechanism that leverages Copilot inside GitHub Actions workflows to execute autonomous tasks (report generation, documentation updates, code fixes, etc.) in response to repository changes.
 
-Use your reviewed, merged working state; the core site after Part 11 is enough. Optional Projects, 3D, Zettelkasten and CLI/audio are not prerequisites.
+Use your reviewed, merged working state; the core site after Part 11 is enough. Optional Projects, 3D and Zettelkasten are not prerequisites. This workflow is a separate exercise, not prebuilt in checkpoint3.
 
-### 14.1 — Verify the Copilot policy and Workflow permissions
+<span id="141--verify-the-copilot-policy-and-workflow-permissions"></span>
+
+### 13.1 — Verify the Copilot policy and Workflow permissions
 
 Previously you had to create and store a Personal Access Token (PAT) to use Copilot, but it now runs on the built-in GitHub Actions `GITHUB_TOKEN`, so a **PAT is no longer needed**. This eliminates the operational and security risks of managing long-lived PATs.
 
@@ -29,7 +31,7 @@ When you run in an organization-owned repository, the AI credits consumed are bi
 1. In your Organization, go to **Settings** → **Copilot** → **Policies**
 2. Confirm **Allow use of Copilot CLI billed to the organization** is enabled (it's on by default if the existing **Copilot CLI** policy is enabled)
 
-To enable billing to the organization, add `copilot-requests: write` to the `permissions` section in your workflow's front matter (it's included in the prompt in 14.3).
+To enable billing to the organization, add `copilot-requests: write` to the `permissions` section in your workflow's front matter (it's included in the prompt in 13.3).
 
 <Aside type="positive">
 
@@ -42,7 +44,9 @@ To enable billing to the organization, add `copilot-requests: write` to the `per
 1. **Settings** → **Actions** → **General**
 2. Check **Allow GitHub Actions to create and approve pull requests**
 
-### 14.2 — (If you're not on a Codespace) Install the gh-aw extension
+<span id="142--if-youre-not-on-a-codespace-install-the-gh-aw-extension"></span>
+
+### 13.2 — (If you're not on a Codespace) Install the gh-aw extension
 
 The `gh aw` command that compiles Agentic Workflows is provided by the GitHub CLI extension **gh-aw**. The workshop Codespace already has it **pre-installed**, so you can skip this step. Only if you're working locally and don't have it yet, run:
 
@@ -56,11 +60,13 @@ gh extension install github/gh-aw
 
 </Aside>
 
-### 14.3 — Create a Daily Repo Status workflow
+<span id="143--create-a-daily-repo-status-workflow"></span>
+
+### 13.3 — Create a Daily Repo Status workflow
 
 Let's create an Agentic Workflow that automatically reports today's repository activity.
 
-Use `[playbook:daily-repo-status]` from the Part 6 catalogue and link the implementation PR to its actual Issue number; it is separate from the optional CLI fleet batch.
+Use `[playbook:daily-repo-status]` from the Part 6 catalogue and link the implementation PR to its actual Issue number.
 
 In agent mode, run the following:
 

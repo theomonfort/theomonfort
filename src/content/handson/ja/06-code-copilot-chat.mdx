@@ -119,25 +119,29 @@ npm run dev
 
 ### 6.6 — 改善点を Issue 化する
 
-ここからは、基本サイトを現在の Playbook に近づける **8 件の実装 Issue** で進めます。`[playbook:...]` は固定の作業キーであり、GitHub が付ける Issue 番号ではありません。
+ここからは **6 件の実装 Issue** で進めます。`[playbook:...]` は固定の作業キーであり、GitHub が付ける Issue 番号ではありません。発展編の3Dと Zettelkasten は初期 Issue に含めず、後の Project と Word 仕様書で扱います。
 
-| 段階 | 作業キー | 到達点 |
-| --- | --- | --- |
-| Part 6 / checkpoint1 | 基本サイトは実装済み | 一覧と Markdown 詳細 |
-| Cloud Agent (任意の Part 8)、または checkpoint2 | `presentation-core` → `presentation-content` / `mermaid-rendering` / `responsive-navigation` | checkpoint2 |
-| Test & Secure (Part 9) | `presentation-tests` | 演習ブランチで合意したテスト + PR CI を完成し、セキュリティへ |
-| Copilot App / Projects (任意の Part 12) | `playbook-3d` を適応し、Zettelkasten は Project の別タスクとして追加 | 発展的な統合。テスト + 3D + Zettelkasten の到達点で checkpoint3 は任意 |
-| CLI (任意の Part 13) | `galaxy-audio` | 3D をマージしてから環境音を追加 |
-| Operate (Part 14) | `daily-repo-status` | 日次レポート |
+<table>
+  <thead>
+    <tr><th scope="col">段階</th><th scope="col">作業キー</th><th scope="col">到達点</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Part 6 / checkpoint1</td><td>基本サイトは実装済み</td><td>一覧と Markdown 詳細</td></tr>
+    <tr><td>Cloud Agent (任意の Part 8)、または checkpoint2</td><td><code>presentation-core</code> → <code>presentation-content</code> / <code>mermaid-rendering</code> / <code>responsive-navigation</code></td><td>checkpoint2</td></tr>
+    <tr><td>Test &amp; Secure (Part 9〜11)</td><td><code>presentation-tests</code>、続けて repo のセキュリティ設定</td><td>自分のテスト / CI とセキュリティの作業をレビュー、マージ</td></tr>
+    <tr><td>Copilot App / Projects (任意の Part 12)</td><td>初期 Issue ではなく Project + Word 仕様書</td><td>3Dと読み取り専用 Zettelkasten。checkpoint3 は完成サイトの参考</td></tr>
+    <tr><td>Operate (Part 13)</td><td><code>daily-repo-status</code></td><td>日次レポート</td></tr>
+  </tbody>
+</table>
 
 **`./checkpoint1` はこれらの日本語 Issue を準備します。** 実行済みなら Issues タブで再利用し、重複作成しないでください。古い Issue 本文では以前の Part 番号になっている場合がありますが、本文を書き換えず、上の最新の表に沿って進めます。任意のチェックポイントを対応する到達点で使う場合は、既に満たす完了条件を確認し、未完了の作業だけ進めます。リポジトリのポリシーやセキュリティ設定は別途必要です。
 
 プロンプトとスクリプトが既存作業を識別できるよう、タイトルの `[playbook:...]` キーと本文の `workshop-issue` マーカーを残してください。古いリポジトリのコピーでは Issue を準備しない旧スクリプトの場合があります。作成済みと決めつけず、Issues タブを確認し、不足分だけこのプロンプトで準備してください。
 
-`checkpoint1` は stash やブランチ切り替えの前に Issue を準備し、既存の open / closed Issue は変更せず再利用します。スナップショットが `main` と同じ場合も、新しい PR を作らず不足する Issue を準備します。Issue の準備に失敗したら、表示されたエラーを解消して `./checkpoint1` を再実行してください。作成済みの Issue は保持されます。別 clone を含め、同じリポジトリで同時に複数の取り込みを実行しないでください。`checkpoint2` / `checkpoint3` は Issue を準備しません。
+`checkpoint1` は stash やブランチ切り替えの前に Issue を準備し、既存の open / closed Issue は変更せず再利用します。スナップショットが `main` と同じ場合も、新しい PR を作らず不足する Issue を準備します。Issue の準備に失敗したら、表示されたエラーを解消して `./checkpoint1` を再実行してください。作成済みの Issue は保持されます。別 clone を含め、同じリポジトリで同時に複数の取り込みを実行しないでください。`checkpoint2` / `checkpoint3` は Issue を準備しません。古いコピーに余分な Issue があっても変更せず、以下の6キーを使います。
 
 <Aside type="negative">
-**`presentation-core` はテストの前に必須です。** checkpoint1 / checkpoint2 に 3D は含まれません。checkpoint3 は発展編の3Dと Zettelkasten の統合後に使う任意の参考であり、テスト演習の手順ではありません。任意の Part 12〜13 をスキップし、セキュリティから Operate へ進めます。既存の Issue 本文は書き換わらないため、残作業は最新の表に基づいて選びます。
+**`presentation-core` はテストの前に必須です。** checkpoint2 はプレゼンの到達点で、checkpoint3 にはテスト / CI、3D、読み取り専用 Zettelkasten も含まれます。Test & Secure の後、自分の作業をレビューしてマージしてから Project を始めます。統合済みの機能は作り直さず再利用してください。任意の Part 12 をスキップし、Part 13: Operate へ直接進むこともできます。既存の Issue 本文は書き換えません。
 </Aside>
 
 通常の Part 6 では、次のプロンプトを Copilot Chat に送って Issue を準備します。これは実装の依頼ではありません。
@@ -213,44 +217,15 @@ Test & Secure (Part 9)。プレゼン機能をマージ後、または checkpoin
 
 参考: https://theomonfort.github.io/theomonfort/handson/test-secure-actions/
 
-タイトル: [playbook:playbook-3d] 既存の 3D ギャラクシービューを再現する
-本文:
-<!-- workshop-issue:playbook-3d -->
-## 段階
-任意の Copilot App / Projects (Part 12)。読み取り専用の irl-odyssey/3d-solar-system と Word 仕様書を比較し、ハンズオン repo だけに適応する。checkpoint1 / checkpoint2 に3Dは含まれない。checkpoint3 はテスト + 3D + Zettelkasten の到達点で、両方の統合を学んだ後に使える参考や補助。既存機能は作り直さず再利用する。
-
-## 完了条件
-- 既存サイトの 2D / 3D 切り替えを再現し、Three.js で中央の SDLC 太陽、Plan / Develop / Review / Secure / Operate の5惑星、Introduction の出発ステーション、Administration の母艦を表示する。新しい別デザインにはしない。
-- Markdown とカテゴリメタデータを共有し、惑星の選択から記事の衛星 / ミッション一覧、概要、通常の詳細ページへ進める。
-- ドラッグ回転、ズーム、パン、カメラボタンと全体図への復帰を用意し、`?view=3d&sector=plan` のような URL で選択を復元する。
-- キーボード操作、動きの停止、reduced-motion、狭い画面を確認する。3D を遅延読込し、WebGL 失敗時はエラーと使える 2D カタログを残す。
-
-画面: https://theomonfort.github.io/theomonfort/playbook/?view=3d
-実装参考: https://github.com/theomonfort/theomonfort/blob/main/src/components/interactive/PlaybookExplorer.astro
-シーン参考: https://github.com/theomonfort/theomonfort/blob/main/src/lib/playbook-galaxy-scene.ts
-
-タイトル: [playbook:galaxy-audio] 3D ギャラクシーの環境音と終了処理を整える
-本文:
-<!-- workshop-issue:galaxy-audio -->
-## 段階
-任意の CLI 追加実装 (Part 13)。前提の3Dをレビューしてマージ後に開始。3D と同時に実装しない。checkpoint3 に環境音は含まれない。
-
-## 完了条件
-- 既存ギャラクシーを参考に、ユーザー操作後に再生できる環境音と Music ON / OFF を用意する。
-- カメラ移動に環境音を追従させ、音声エラーを表示しても 3D ナビゲーションを妨げない。
-- 2D へ戻るときとページ離脱時に音声と描画リソースを停止 / 解放し、再入場で重複再生しない。
-
-参考: https://github.com/theomonfort/theomonfort/blob/main/src/lib/playbook-galaxy-audio.ts
-
 タイトル: [playbook:daily-repo-status] 日次の開発状況を報告する Agentic Workflow を作る
 本文:
 <!-- workshop-issue:daily-repo-status -->
 ## 段階
-Operate (Part 14)。Part 14 のポリシーと権限の確認後に実施。checkpoint1〜3 には含まれない。
+Operate (Part 13)。Part 13 のポリシーと権限の確認後に実施。checkpoint1〜3 には含まれない。
 
 ## 完了条件
 - `.github/workflows/daily-repo-status.md` で日次スケジュールと手動実行を定義し、Issue / PR / コード変更を要約する。
-- Part 14 の権限と safe-outputs を使い、`[repo-status]` で始まるレポート Issue を作る。資格情報をコミットしない。
+- Part 13 の権限と safe-outputs を使い、`[repo-status]` で始まるレポート Issue を作る。資格情報をコミットしない。
 - `gh aw compile` で生成した lockfile を含む PR をレビュー / マージし、手動実行のレポートを確認する。
 
 参考: https://theomonfort.github.io/theomonfort/handson/operate-agentic-workflow/

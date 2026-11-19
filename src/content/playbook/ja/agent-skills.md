@@ -183,9 +183,14 @@ gh skills install ards-project/connectors skills/github-copilot
 
 ## Plugins
 
-スキル、MCP 連携、カスタムエージェント、フック、対話型 canvas などの機能を、1つのパッケージとしてまとめてインストールする。
+スキル、MCP 連携、カスタムエージェント、フック、対話型 canvas をまとめて導入できるパッケージ。
 
-例: <a class="retro-link" href="https://github.com/github/awesome-copilot/blob/main/extensions/ai-credits-breakdown/README.md" target="_blank" rel="noopener noreferrer">AI Credits Breakdown</a> は、Copilot アプリに使用量ダッシュボードを追加するプラグイン。
+- **設定を減らす:** 関連機能をまとめて導入。
+- **チームで共有:** ツールや手順を複数プロジェクトへ。
+- **既製品も自作も:** コミュニティ製を使うか自作。
+
+**テスト構成例:** 実行スキル + レビューエージェント + テストレポート用 MCP。<br />
+<a class="retro-link" href="https://github.com/github/awesome-copilot/blob/main/extensions/ai-credits-breakdown/README.md" target="_blank" rel="noopener noreferrer">AI Credits Breakdown</a>: Copilot アプリの使用量を調べる対話型 canvas。
 
 ## プラグインの導入と利用 <a class="h2-doc" href="https://awesome-copilot.github.com/plugins/" target="_blank" rel="noopener noreferrer">プラグインを探す ↗</a>
 

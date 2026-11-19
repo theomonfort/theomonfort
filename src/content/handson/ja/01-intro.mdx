@@ -26,8 +26,8 @@ import MonaDialog from '../../../components/handson/MonaDialog.astro';
 - **PLAN**: MCP・Instruction・Skill で Copilot に「文脈」「ルール」「型」を仕込む
 - **CODE**: Copilot Chat（Plan / Agent）でサイトを設計・実装、Copilot Agent で追加フィーチャーを実装
 - **REVIEW**: Copilot Code Review で PR を自動レビューする
-- **TEST & SECURE**: ユーザーが選んだ Playwright テストを生成し、PR チェック、Dependabot、CodeQL / GHAS を確認する
-- **COPILOT APP / PROJECTS（任意の発展編）**: 参照 repo と Word 仕様書から3Dと読み取り専用の知識グラフを適応し、AI 駆動開発のこれからを体験する
+- **TEST & SECURE**: 選んだ Playwright テストを生成し、PR チェック、Dependabot、CodeQL / GHAS を確認して、自分の作業をレビュー、マージする
+- **COPILOT APP / PROJECTS（任意の発展編）**: マージ済みの状態から参照 repo と Word 仕様書で3Dと読み取り専用グラフを適応し、checkpoint3 を完成サイトの参考にする
 - **OPERATE**: Agentic Workflow で日常運用に AI を組み込む
 
 ### 1.2 — 管理者向け
@@ -56,9 +56,9 @@ import MonaDialog from '../../../components/handson/MonaDialog.astro';
 4. **Copilot Cloud Agent**
    - 設定箇所：Your Enterprise → AI Controls → Agents → Available Agents → Copilot Cloud Agent → Enabled
 
-5. **Copilot CLI / Chat / Agent Mode**
+5. **Copilot Chat / Agent Mode と Agentic Workflow の利用**
    - 設定箇所：Your Enterprise → AI Controls → Copilot
-     - Copilot CLI → Enable everywhere
+     - Copilot CLI → Enable everywhere（Agentic Workflows 用）
      - Copilot Agent Mode in IDE Chat → Enable everywhere
      - Auto-Approval in Copilot Agent Mode → Enable everywhere
 
@@ -87,7 +87,7 @@ import MonaDialog from '../../../components/handson/MonaDialog.astro';
 4. **Copilot Cloud Agent**
    - 設定箇所：Org Settings → Copilot → Policies → Features →「Copilot cloud agent」→ Enabled
 
-5. **Copilot CLI**
+5. **Agentic Workflows（Copilot ポリシー）**
    - 設定箇所：Org Settings → Copilot → Policies → Features →「Copilot CLI」→ Enabled
 
 6. **レポジトリを作成する権限**

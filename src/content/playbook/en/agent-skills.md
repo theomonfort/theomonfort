@@ -185,7 +185,12 @@ gh skills install ards-project/connectors skills/github-copilot
 
 Install skills, MCP integrations, custom agents, hooks or interactive canvases together as a single package.
 
-Example: <a class="retro-link" href="https://github.com/github/awesome-copilot/blob/main/extensions/ai-credits-breakdown/README.md" target="_blank" rel="noopener noreferrer">AI Credits Breakdown</a>, a plugin that adds a usage dashboard to the Copilot app.
+- **Less setup:** install related capabilities together.
+- **Share team tools and workflows** across projects.
+- **Use community plugins** or package your own.
+
+**Testing toolkit (illustrative):** test skill + review agent + test-report MCP.<br />
+<a class="retro-link" href="https://github.com/github/awesome-copilot/blob/main/extensions/ai-credits-breakdown/README.md" target="_blank" rel="noopener noreferrer">AI Credits Breakdown</a>: interactive usage canvas for the Copilot app.
 
 ## Install and use a plugin <a class="h2-doc" href="https://awesome-copilot.github.com/plugins/" target="_blank" rel="noopener noreferrer">Browse plugins ↗</a>
 

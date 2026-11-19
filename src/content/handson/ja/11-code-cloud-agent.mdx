@@ -3,7 +3,7 @@ title: "CODE: Cloud Agent（任意）"
 order: 8
 stepSlug: "code-cloud-agent"
 duration: 20
-summary: "任意の進め方として、プレゼンモードの実装を Cloud Agent に委任します。発表ではこの演習を省き、既存実装または checkpoint2 からテストへ進みます。"
+summary: "プレゼンモードと TOC を Cloud Agent に委任し、動く機能をレビュー、マージしてからテストへ進みます。受講者は代わりに checkpoint2 を利用できます。"
 ---
 
 import Aside from '../../../components/handson/Aside.astro';
@@ -14,7 +14,7 @@ import Aside from '../../../components/handson/Aside.astro';
 
 </Aside>
 
-**任意の進め方：** 発表ではレビューから [Part 9 のテスト](/theomonfort/handson/test-secure-actions/)へ直接進みます。動作するプレゼンモードを使うか、作業を保存して `./checkpoint2` を利用してください（[チェックポイントの説明](/theomonfort/handson/intro-2/#checkpoints)）。その到達点をエージェントへの委任で実装したい場合は、この Cloud Agent 演習を選べます。
+**受講者向けの任意の進め方：** プレゼンモードと TOC をここで委任し、レビュー、マージしてから [Part 9 のテスト](/theomonfort/handson/test-secure-actions/)へ進みます。既に動く機能があれば再利用し、追いつく必要があれば作業を保存して `./checkpoint2` を利用できます（[チェックポイントの説明](/theomonfort/handson/intro-2/#checkpoints)）。発表者は Test & Secure の前に coding agent の段階を実演します。
 
 この進め方を選ぶ場合は、レビュー済みの基本サイトから始めます。[Step 7](/theomonfort/handson/review-copilot-code-review/) の PR をマージしてから、このステップの作業をアサインしてください。
 
@@ -74,7 +74,7 @@ Part 3 で設定した MCP は **VS Code 用** でした。Cloud Agent が MCP �
 
 - **まず `presentation-core` をマージ**し、`presentation-content`、`mermaid-rendering`、`responsive-navigation` に進みます。同じレンダラーを変更する場合があるため、独立した作業だけを並列化します。
 - **checkpoint2 の到達点を確認**：テスト前にスライド本文、図、ナビゲーションが動作する状態にします。
-- **高度な統合は任意の Part 12 用に残します。** Copilot App / Projects で3Dと読み取り専用 Zettelkasten を適応し、3D のマージ後に任意の Part 13 で CLI / 環境音を扱います。どちらも、テスト、セキュリティ、Part 14 の `daily-repo-status` へ進む基本コースの前提ではありません。
+- **高度な統合は任意の Part 12 用に残します。** 自分の Test & Secure の作業を完了してマージした後、初期 Issue ではなく Copilot App の Project と Word 仕様書で3Dと読み取り専用 Zettelkasten を計画します。checkpoint3 由来を含む既存の統合は再利用してください。これらの統合は Part 13 の `daily-repo-status` の前提ではありません。
 
 </Aside>
 

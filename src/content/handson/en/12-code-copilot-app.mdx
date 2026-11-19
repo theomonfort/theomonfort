@@ -12,11 +12,11 @@ import Aside from '../../../components/handson/Aside.astro';
 Use a **Project in the GitHub Copilot App**, not a GitHub Projects issue board. See [Playbook / Copilot App](/theomonfort/en/playbook/copilot-app/) and the [Projects documentation](https://docs.github.com/en/copilot/how-tos/github-copilot-app/working-with-projects).
 </Aside>
 
-**Optional advanced extension:** explore the future of AI-driven development with 3D and a read-only knowledge graph. To stay on the core workshop path, skip Parts 12–13 and continue to [Part 14: Operate](/theomonfort/en/handson/operate-agentic-workflow/).
+**Optional advanced extension:** explore the future of AI-driven development with 3D and a read-only knowledge graph. To stay on the core workshop path, skip this part and continue to [Part 13: Operate](/theomonfort/en/handson/operate-agentic-workflow/).
 
 ### 12.1 — Bring the repositories and brief together
 
-First, **save, commit and push your working branch from Codespaces** and note its name/commit. Open the Copilot App with access to your hands-on repository. Continue from that same branch, or its reviewed merged state, not an older default `main`.
+First, **save, commit and push your Codespaces work**, then review and merge your Test & Secure PRs. Note the resulting `main` commit. Open the Copilot App with access to your hands-on repository and continue from that updated, reviewed state, not a stale local `main`. Importing checkpoint3 is not a prerequisite.
 
 1. Use **+ beside Projects** to create a Project for this website.
 2. Add these three repositories to the Project. Only your hands-on repository is an implementation target.
@@ -37,20 +37,20 @@ The solar-system reference deliberately differs from our site: Sun + eight astro
 
 ### 12.2 — Compare first, then approve a plan
 
-Send this to the Project, replacing the repository and saved branch/commit:
+Send this to the Project, replacing the repository and reviewed commit:
 
 ```text
 Read the Word brief in Library and compare all three repositories.
 Only <my hands-on repo> may change; the two irl-odyssey repos are read-only references.
-Use my saved <branch> at <commit> as the base, or its reviewed merged state.
+Use reviewed main at <commit> as the base. Inspect its current features and tests first.
 Propose an adaptation plan: map the solar-system design to our SDLC categories,
 routes and theme, and integrate read-only Zettelkasten with curated bundled notes.
-Inspect and reuse existing 3D and Zettelkasten, including checkpoint3 implementations;
+Inspect and reuse any existing 3D and Zettelkasten from my own work or checkpoint3;
 adapt only missing requirements instead of rebuilding either. Preserve source licenses.
 Show what already works, what needs adapting, and proposed tests. Wait for my approval.
 ```
 
-Reuse `[playbook:playbook-3d]` from Part 6 for remaining 3D work. Track Zettelkasten separately in the Project.
+Plan both integrations as Project tasks from the Word brief, not from the initial Part 6 Issue catalogue. Checkpoint3 already includes both; if they are present in your repository, compare them with the brief and adapt only missing requirements.
 
 ### 12.3 — Implement only the agreed adaptations
 
@@ -59,7 +59,8 @@ Reuse `[playbook:playbook-3d]` from Part 6 for remaining 3D work. Track Zettelka
 ```text
 Implement the approved 3D adaptation only in <my hands-on repo>,
 on an integration branch from the agreed base. Keep both reference repos unchanged.
-Preserve the 2D catalogue, presentation and languages. Reuse 3D already present.
+Preserve the 2D catalogue, presentation and existing localized content.
+Keep TOC labels in English without translating the article content. Reuse 3D already present.
 Ask which tests to add, implement the agreed tests and show the diff. Stop before graph integration.
 ```
 
@@ -68,7 +69,7 @@ Review the 3D result in **Overview** and the conversation: destinations must mat
 **Then inspect and adapt the read-only graph**, on the reviewed branch that retains your exercise work and 3D:
 
 ```text
-Inspect and reuse existing Zettelkasten in <my hands-on repo>, including checkpoint3's version.
+Inspect and reuse any existing Zettelkasten in <my hands-on repo>, including work based on checkpoint3.
 Implement only approved gaps, or integrate it if absent, continuing from our reviewed 3D work.
 Keep both reference repos and existing features unchanged.
 Reuse mountZettelkasten with readOnly: true and apiBaseUrl: null; set apiBaseUrl: null on every vault.
@@ -81,7 +82,7 @@ Ask which proposed tests to add, implement the agreed tests, and show the diff.
 Check that graph exploration, search, reading and links work without editing or a write API. Review the target-only diff and license notices before opening and merging the integration PR.
 
 <Aside type="reference">
-**Optional checkpoint3, at this tests + 3D + Zettelkasten milestone:** use it as a reference or catch-up after learning both integrations. It contains tests/CI, 3D and read-only Zettelkasten, with **English-only TOC labels in both locales**; audio and reporting are not included. Save, commit and push first. [`./checkpoint3`](/theomonfort/en/handson/intro-2/#checkpoints) imports a whole snapshot into a separate branch/PR from remote `main`. Compare it with your saved work and retain your tests, graph, instructions and other changes; do not blindly replace your completed exercise. If your implementation works, skip it.
+**Optional checkpoint3, after the integrations:** this is the prepared completed workshop website reference, including presentation, tests/PR CI, 3D, read-only Zettelkasten and English TOC labels. It does not add unrelated personal-site pages or the daily-report workflow from Part 13. Prefer comparing with it; if importing [`./checkpoint3`](/theomonfort/en/handson/intro-2/#checkpoints), save, commit and push first. It imports a whole snapshot into a separate branch/PR from remote `main` and installs dependencies, without starting a server or merging the PR. Review replacements/deletions, retain your tests, graph, instructions and other work, and merge only after review. Do not overwrite your completed exercise; skip the import if your implementation works.
 </Aside>
 
-Continue to [Part 14: Operate](/theomonfort/en/handson/operate-agentic-workflow/), or optionally add ambience in [Part 13: CLI](/theomonfort/en/handson/code-cli/) after merging 3D. Neither graph integration nor audio is required for Operate.
+Continue to [Part 13: Operate](/theomonfort/en/handson/operate-agentic-workflow/). The advanced integrations are not prerequisites for that part.

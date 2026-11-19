@@ -12,11 +12,11 @@ import Aside from '../../../components/handson/Aside.astro';
 使うのは **GitHub Copilot App の Project** であり、Issue を管理する GitHub Projects ではありません。[プレイブック / Copilot App](/theomonfort/playbook/copilot-app/) と [Projects の公式ドキュメント](https://docs.github.com/en/copilot/how-tos/github-copilot-app/working-with-projects)を参照してください。
 </Aside>
 
-**任意の発展編です。** 3D と読み取り専用の知識グラフを通じて、AI 駆動開発のこれからを体験します。基本コースだけを進める場合は Part 12〜13 をスキップし、[Part 14: Operate](/theomonfort/handson/operate-agentic-workflow/) に進めます。
+**任意の発展編です。** 3D と読み取り専用の知識グラフを通じて、AI 駆動開発のこれからを体験します。基本コースだけを進める場合はこのパートをスキップし、[Part 13: Operate](/theomonfort/handson/operate-agentic-workflow/) に進めます。
 
 ### 12.1 — リポジトリと仕様書を集める
 
-まず **Codespaces の作業ブランチを保存、コミット、push** し、ブランチ名とコミットを控えます。ハンズオン repo にアクセスできるアカウントで Copilot App を開きます。古い既定の `main` ではなく、その同じブランチか、レビューしてマージした状態から続けてください。
+まず **Codespaces の作業を保存、コミット、push** し、Test & Secure の PR をレビューしてマージします。更新後の `main` のコミットを控え、ハンズオン repo にアクセスできるアカウントで Copilot App を開きます。古いローカルの `main` ではなく、このレビュー済みの状態から続けてください。checkpoint3 の取り込みは前提ではありません。
 
 1. **Projects の横にある +** から、このサイト用の Project を作成します。
 2. 次の3リポジトリを Project に追加します。実装先は自分のハンズオンリポジトリだけです。
@@ -37,20 +37,20 @@ import Aside from '../../../components/handson/Aside.astro';
 
 ### 12.2 — 比較してから計画を承認する
 
-リポジトリ名と保存したブランチ / コミットを置き換え、Project に送信します。
+リポジトリ名とレビュー済みのコミットを置き換え、Project に送信します。
 
 ```text
 Library の Word 仕様書を読み、3つのリポジトリを比較してください。
 変更可能なのは <自分のハンズオンrepo> だけで、irl-odyssey の2つは読み取り専用の参照です。
-保存した <ブランチ> の <コミット>、またはレビューしてマージした状態を基点にしてください。
+レビュー済みの main の <コミット> を基点に、現在の機能とテストを最初に確認してください。
 太陽系のデザインを SDLC のカテゴリ、ルート、テーマに合わせる計画と、
 選定した同梱ノートで読み取り専用 Zettelkasten を統合する計画を提案してください。
-checkpoint3 の実装も含め、既存の3Dと Zettelkasten を確認して再利用してください。
+自分の作業や checkpoint3 に由来する既存の3Dと Zettelkasten があれば確認して再利用してください。
 どちらも作り直さず、不足する要件だけを調整し、元のライセンスを守ってください。
 実装済みの内容、必要な調整、テスト候補を示し、私の承認を待ってください。
 ```
 
-3D の残作業には Part 6 の `[playbook:playbook-3d]` を再利用します。Zettelkasten は Project 内で別タスクとして扱います。
+両方の統合を、Part 6 の初期 Issue ではなく Word 仕様書に基づく Project のタスクとして計画します。checkpoint3 には両方とも含まれます。自分の repo に既にある場合は仕様書と比較し、不足する要件だけを調整してください。
 
 ### 12.3 — 合意した調整だけを実装する
 
@@ -59,7 +59,8 @@ checkpoint3 の実装も含め、既存の3Dと Zettelkasten を確認して再�
 ```text
 承認した3Dの調整だけを <自分のハンズオンrepo> に実装してください。
 合意した基点から統合用ブランチを作り、参照用の2リポジトリは変更しないでください。
-2D一覧、プレゼン、言語を維持し、既存の3Dがあれば再利用してください。
+2D一覧、プレゼン、既存の翻訳済みコンテンツを維持してください。
+記事本文を翻訳せず TOC ラベルを英語に保ち、既存の3Dがあれば再利用してください。
 追加するテストを確認して合意したテストを実装し、差分を示してください。グラフ統合の前で止めてください。
 ```
 
@@ -68,7 +69,7 @@ checkpoint3 の実装も含め、既存の3Dと Zettelkasten を確認して再�
 **次に読み取り専用グラフを確認して調整します。** 演習と3Dの成果を保持した、レビュー済みのブランチから続けます。
 
 ```text
-<自分のハンズオンrepo> の既存 Zettelkasten を、checkpoint3 の実装も含め確認して再利用してください。
+<自分のハンズオンrepo> に既存 Zettelkasten があれば、checkpoint3 由来の作業も含め確認して再利用してください。
 レビューした3Dの状態から続け、承認した不足分だけを実装し、未導入の場合だけ統合してください。
 参照用の2リポジトリと既存機能は維持してください。
 mountZettelkasten を readOnly: true と apiBaseUrl: null で使い、各 vault にも apiBaseUrl: null を設定してください。
@@ -81,7 +82,7 @@ mountZettelkasten を readOnly: true と apiBaseUrl: null で使い、各 vault 
 グラフ探索、検索、閲覧、リンクが編集や書き込み API なしで使えることを確認します。実装先だけの差分とライセンス表記を確認し、統合 PR を作成してレビュー、マージします。
 
 <Aside type="reference">
-**テスト + 3D + Zettelkasten の到達点で、checkpoint3 は任意です。** 両方の統合を学んだ後の参考や補助として使えます。テスト / CI、3D、読み取り専用 Zettelkasten を含み、**TOC のラベルは日英どちらの画面でも英語のみ**です。環境音と日次レポートは含みません。先に保存、コミット、push してください。[`./checkpoint3`](/theomonfort/handson/intro-2/#checkpoints) はリモート `main` から別ブランチ / PR にスナップショット全体を取り込みます。保存した作業と比較し、自分のテスト、グラフ、指示、その他の変更を残してください。完成した演習を無条件で置き換えないでください。自分の実装が動けば不要です。
+**統合後の checkpoint3 は任意です。** プレゼン、テスト / PR CI、3D、読み取り専用 Zettelkasten、英語の TOC ラベルを含む、準備済みのワークショップ用サイトの完成版の参考です。無関係な個人サイトのページや Part 13 の日次レポート workflow は追加しません。まず比較用に使い、[`./checkpoint3`](/theomonfort/handson/intro-2/#checkpoints) で取り込む場合は先に保存、コミット、push してください。リモート `main` から別ブランチ / PR にスナップショット全体を取り込み、依存関係をインストールします。サーバー起動や自動マージはしません。置換 / 削除の差分を確認し、自分のテスト、グラフ、指示、その他の作業を残してからレビュー、マージします。完成した演習を上書きせず、自分の実装が動けば取り込みは不要です。
 </Aside>
 
-[Part 14: Operate](/theomonfort/handson/operate-agentic-workflow/) に進むか、3D のマージ後に任意の [Part 13: CLI と環境音](/theomonfort/handson/code-cli/) を試せます。グラフ統合も環境音も Operate の前提ではありません。
+[Part 13: Operate](/theomonfort/handson/operate-agentic-workflow/) に進みます。発展編の統合は、このパートの前提ではありません。

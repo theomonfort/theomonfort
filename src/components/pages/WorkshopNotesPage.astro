@@ -106,7 +106,7 @@ const sections: Section[] = [
     ],
   },
   {
-    title: 'CODE',
+    title: 'DEVELOP',
     subtitle: 'Copilot と同期でコーディング',
     color: 'magenta',
     items: [
@@ -114,7 +114,7 @@ const sections: Section[] = [
       { label: 'Demo Agent Mode (Plan), Permission (Allow-all), Models (Fusion)', checklistKey: 'code-agent-configuration' },
       { label: 'Send prompt and validate until switching to Autopilot', checklistKey: 'code-prompt-autopilot' },
       { label: 'Demo inline request (Cmd + I)', checklistIndex: 25 },
-      { label: 'Candidate explanations: Context windows, Token optimization, Subagents, Copilot (App)', checklistKey: 'code-explanation-candidates' },
+      { label: 'Candidate explanations: Context windows, Token optimization, CLI (Subagents, credit, session), Copilot (App)', checklistKey: 'code-explanation-candidates' },
     ],
   },
   {
@@ -131,10 +131,23 @@ const sections: Section[] = [
     ],
   },
   {
+    title: 'DEVELOP',
+    subtitle: 'Copilot Coding Agent と非同期でコーディング',
+    sectionIndex: 5,
+    note: 'Build presentation and its TOC from the base site, then finish presentation-content / mermaid-rendering / responsive-navigation. If this milestone is not ready, use checkpoint2 as the fallback and review/merge its PR before testing.',
+    color: 'magenta',
+    items: [
+      { label: 'Explain Copilot coding agent (Cloud Agent)', checklistIndex: 33 },
+      { label: 'Demo assign [playbook:presentation-core] to build presentation mode and its TOC', checklistIndex: 35 },
+      { label: 'Demo inspect coding-agent implementation and PR', checklistIndex: 39 },
+      { label: 'Demo review and merge before TEST & SECURE', checklistKey: 'coding-agent-review-merge' },
+    ],
+  },
+  {
     title: 'TEST & SECURE',
     subtitle: 'テスト作成からセキュリティへ',
     sectionIndex: 6,
-    note: 'Requires working presentation; otherwise use checkpoint2. Cloud Agent is optional.',
+    note: 'Requires reviewed, merged presentation and TOC from the coding-agent stage (checkpoint2 milestone). Presenter shortcut: demonstrate selected tests locally in VS Code without pushing. Participants still complete the real tests, CI and PR work in the hands-on.',
     color: 'cyan',
     items: [
       { label: 'Show official Playwright planner + generator and test MCP', checklistKey: 'tests-prepare-agents' },
@@ -154,16 +167,23 @@ const sections: Section[] = [
     ],
   },
   {
-    title: 'COPILOT APP / PROJECTS',
-    subtitle: '任意の発展編: AI 駆動開発のこれから',
+    title: 'DEVELOP',
+    subtitle: 'Copilot App / Projects（任意の発展編）',
     sectionIndex: 9,
-    note: 'Optional advanced features: a look at the future of AI-driven development. Skip to OPERATE for the core workshop.',
+    note: 'Optional advanced features: a look at the future of AI-driven development. Presenter shortcut: the Project uses the reviewed remote checkpoint2 milestone, not the unpushed local test demo. Show planning and initial work, then transparently switch to the prepared complete checkpoint3. Participants follow the full implementation and PR flow in Part 12; skip to OPERATE for the core workshop.',
     color: 'magenta',
     items: [
-      { label: 'Save/push the Codespaces branch; continue it in a Copilot App Project with the three repos and Word brief', checklistKey: 'app-project-context' },
+      { label: 'Create a Copilot App Project from reviewed remote main with the participant repo, two read-only reference repos and Word brief', checklistKey: 'app-project-context' },
       { label: 'Demo adaptation plan: SDLC categories/routes/theme; reuse existing 3D instead of rebuilding', checklistKey: 'app-project-plan' },
-      { label: 'Demo target-only 3D and read-only Zettelkasten, then optional checkpoint3 reference (English-only TOC)', checklistKey: 'app-project-implementation' },
-      { label: 'Review 3D navigation and read-only graph/search/notes/links, with no visitor write actions or API', checklistKey: 'app-project-review' },
+      { label: 'Demo planning and initial target-only 3D / read-only Zettelkasten work from the Word brief', checklistKey: 'app-project-implementation' },
+      {
+        label: 'Presenter only: save local work, then switch to the prepared complete site with ./checkpoint3',
+        stepKind: 'demo',
+        checklistKey: 'app-project-checkpoint3',
+        command: './checkpoint3',
+        note: 'Save editor buffers and commit local work without pushing the partial test demo; record the branch/commit. Imports the prepared checkpoint3 snapshot into a new branch/PR based on remote main, then installs dependencies. It does not finish the live exercise, start a server or merge the PR. Preserve local tests and Project work when reviewing replacements/deletions.',
+      },
+      { label: 'Review the checkpoint3 PR, 3D navigation and read-only graph/search/notes/links; merge only after review', checklistKey: 'app-project-review', note: 'Keep visitor write actions and write APIs disabled. This is the prepared reference, not a claim that the live demo completed all implementation.' },
     ],
   },
   {
