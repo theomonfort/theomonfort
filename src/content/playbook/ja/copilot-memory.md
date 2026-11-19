@@ -37,11 +37,14 @@ links:
   <p>
     <strong>Memory</strong> は repo の知識と自分の好みを記憶。<strong>Dreaming</strong> は記憶を自動で整理。
   </p>
+  <p>
+    repo レベルでは、Dreaming が <strong>ハーネスの更新</strong>（Skills / Instructions）を <strong>PR で提案</strong>することも。
+  </p>
 </div>
 
 ## Repo の知識 / 自分の好み <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-memory#types-of-memories" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-ここで扱うのは **Copilot Memory** のスコープ。アプリの **Project Memory** / ローカルメモリとは別の仕組み。
+Copilot Memory のスコープは 2 つ：**Repository**（repo の全員で共有）と **Personal**（自分だけ、repo をまたぐ）。
 
 <div class="setup-cards">
   <div class="setup-card">

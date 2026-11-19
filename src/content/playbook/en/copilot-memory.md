@@ -37,11 +37,14 @@ links:
   <p>
     <strong>Memory</strong> remembers repo facts and your preferences. <strong>Dreaming</strong> maintains them in the background.
   </p>
+  <p>
+    At repo level, Dreaming can also propose <strong>harness updates</strong> (skills / instructions) through a <strong>PR</strong>.
+  </p>
 </div>
 
 ## Repository / Personal <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-memory#types-of-memories" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-These are **Copilot Memory** scopes, not the app's **Project Memory** or local memory files.
+Copilot Memory has two scopes: **Repository** (shared by everyone on the repo) and **Personal** (only you, across repos).
 
 <div class="setup-cards">
   <div class="setup-card">
