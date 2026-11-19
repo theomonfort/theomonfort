@@ -157,7 +157,7 @@ const sections: Section[] = [
       { label: 'Demo test generator', checklistKey: 'tests-generate-assertion' },
       { label: 'Demo workflow generator (SWITCH TO AGENT first)', checklistKey: 'tests-generate-workflow' },
       { label: 'Explain tool choice', checklistKey: 'tests-tool-choice' },
-      { label: 'Run checkpoint3 (separate demo checkout)', stepKind: 'prep', checklistKey: 'tests-prepare-demo-checkpoint3' },
+      { label: 'Run checkpoint3 (separate demo checkout)', stepKind: 'demo', checklistKey: 'tests-prepare-demo-checkpoint3' },
       {
         label: 'Run demo if necessary',
         stepKind: 'demo',
@@ -175,8 +175,8 @@ const sections: Section[] = [
     sectionIndex: 9,
     color: 'magenta',
     items: [
-      { label: 'If need explain worktree / subsession / Canvas / Automation', stepKind: 'explain', checklistKey: 'app-project-concepts' },
-      { label: 'Add the three remote repos (hands-on remote main: checkpoint2)', checklistKey: 'app-project-context' },
+      { label: 'If need explain worktree / subsession / Canvas / Automation', stepKind: 'demo', checklistKey: 'app-project-concepts' },
+      { label: 'Add the three remote repos (hands-on remote main: checkpoint2)', stepKind: 'demo', checklistKey: 'app-project-context' },
       { label: 'Send the prompt (USE MY HANDS-ON REPO NAME)', stepKind: 'demo', checklistKey: 'app-project-prompt' },
       { label: 'Show Library and Overview', checklistKey: 'app-project-overview' },
       { label: 'Explain Memory/dreaming', checklistKey: 'app-project-memory' },
