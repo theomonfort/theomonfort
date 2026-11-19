@@ -163,7 +163,7 @@ flowchart LR
 </div>
 <div class="fusion-metrics" aria-label="Benchmark results">
 <div class="fusion-metric"><strong>60</strong><span>Coding Agent Index</span><span class="fusion-micro">Fusion Max, within 2 points of Opus 5.5 Max.</span></div>
-<div class="fusion-metric"><strong>1/2</strong><span>Cost / tokens</span><span class="fusion-micro">Average API cost and token usage per task.</span></div>
+<div class="fusion-metric"><strong>71</strong><span>Terminal-Bench 4.0</span><span class="fusion-micro">Fusion Max, the top score in the report (2026-10-28).</span></div>
 <div class="fusion-metric"><strong>40%</strong><span>Less time</span><span class="fusion-micro">About 40% less time per task.</span></div>
 <div class="fusion-metric"><strong>77%</strong><span>Max cost reduction</span><span class="fusion-micro">DeepSWE: Fusion High vs GPT-6 Astra (high), with higher accuracy.</span></div>
 </div>
