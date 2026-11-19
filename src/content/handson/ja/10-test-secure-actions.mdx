@@ -93,11 +93,12 @@ Chat のエージェント選択で **`playwright-test-planner`** を選び、�
 
 ### 9.3 — 合意したテストを PR の CI で実行する
 
-演習の **`test-creation`** ブランチのまま、Copilot に依頼します。
+演習の **`test-creation`** ブランチのまま、**`playwright-test-generator`** から通常の **Agent** に切り替えて依頼します。
 
 ```text
-既存の E2E CI を再利用し、なければ Node 22、npm ci、対応する Chromium を使う PR workflow を追加してください。
-tests/e2e の headless テストを実行し、失敗レポートを保存してください。
+pull request ごとに tests/e2e のテストを実行する GitHub Actions ワークフローを作成してください。
+Node 22、npm ci、対応する Chromium を使い、headless で実行してください。
+失敗時のテストレポートをアーティファクトとして保存してください。
 ```
 
 <span id="102--pr-で自動実行する-actions-ワークフローを作成する"></span>

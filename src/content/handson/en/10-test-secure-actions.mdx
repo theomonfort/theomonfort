@@ -94,11 +94,12 @@ Then return to **Agent**: **“Stop the test MCP's preview, run the chosen tests
 
 ### 9.3 — Run the agreed tests in PR CI
 
-Stay on your **`test-creation`** exercise branch. Ask Copilot:
+Stay on your **`test-creation`** exercise branch. Switch from **`playwright-test-generator`** to the normal **Agent**, then ask Copilot:
 
 ```text
-Reuse existing E2E CI, or add a PR workflow using Node 22, npm ci and matching Chromium.
-Run the headless tests in tests/e2e and upload the failure report.
+Create a GitHub Actions workflow that runs tests/e2e on each pull request.
+Use Node 22, npm ci and matching Chromium, and run headless.
+Upload the test report as an artifact on failure.
 ```
 
 <span id="102--create-an-actions-workflow-that-runs-automatically-on-prs"></span>

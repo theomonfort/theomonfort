@@ -32,6 +32,7 @@ interface Item {
   checklistIndex?: number;
   checklistKey?: string;
   command?: string;
+  commandCopyOnly?: boolean;
   note?: string;
   teams?: TeamsLink[];
 }
@@ -111,7 +112,7 @@ const sections: Section[] = [
     color: 'magenta',
     items: [
       { label: 'Show Customization windows', checklistIndex: 22 },
-      { label: 'Demo Agent Mode (Plan), Permission (Allow-all), Models (Fusion)', checklistKey: 'code-agent-configuration' },
+      { label: 'Demo Agent Mode (Plan), Permission (Allow-all), Models (Fusion), Sandbox (/sandbox policy)', checklistKey: 'code-agent-configuration' },
       { label: 'Send prompt and validate until switching to Autopilot', checklistKey: 'code-prompt-autopilot' },
       { label: 'Demo inline request (Cmd + I)', checklistIndex: 25 },
       { label: 'Candidate explanations: Context windows, Token optimization, CLI (Subagents, credit, session), Copilot (App)', checklistKey: 'code-explanation-candidates' },
@@ -147,43 +148,36 @@ const sections: Section[] = [
     title: 'TEST & SECURE',
     subtitle: 'テスト作成からセキュリティへ',
     sectionIndex: 6,
-    note: 'Requires reviewed, merged presentation and TOC from the coding-agent stage (checkpoint2 milestone). Presenter shortcut: demonstrate selected tests locally in VS Code without pushing. Participants still complete the real tests, CI and PR work in the hands-on.',
+    note: 'Start from reviewed, merged presentation (checkpoint2 milestone).',
     color: 'cyan',
     items: [
-      { label: 'Show official Playwright planner + generator and test MCP', checklistKey: 'tests-prepare-agents' },
-      { label: 'Add instruction', stepKind: 'demo', checklistKey: 'tests-feature-instruction' },
-      { label: 'Demo planner: propose tests and ask which to add', checklistKey: 'tests-plan-selection' },
-      { label: 'Demo generator: create selected tests, run and explain an assertion', checklistKey: 'tests-generate-assertion' },
-      { label: 'Explain: automate tests with a GitHub Actions workflow on pull_request (hands-on 9.3)', checklistKey: 'tests-explain-pr-workflow' },
-      { label: 'Explain tool choice: Playwright for web/localhost; Computer Use or other tools for native apps', checklistKey: 'tests-tool-choice' },
+      { label: 'Run the local server (test agents need it)', stepKind: 'prep', checklistKey: 'tests-run-server' },
+      { label: 'Show how to install and check Playwright agents / MCP', checklistKey: 'tests-prepare-agents' },
+      { label: 'Demo planner (COPY LOCAL SERVER LINK in prompt)', checklistKey: 'tests-plan-selection' },
+      { label: 'Demo test generator', checklistKey: 'tests-generate-assertion' },
+      { label: 'Demo workflow generator (SWITCH TO AGENT first)', checklistKey: 'tests-generate-workflow' },
+      { label: 'Explain tool choice', checklistKey: 'tests-tool-choice' },
+      { label: 'Run checkpoint3 (separate demo checkout)', stepKind: 'prep', checklistKey: 'tests-prepare-demo-checkpoint3' },
       {
-        label: 'Presenter only: launch the prepared 18s demo on a separate checkpoint3 checkout',
+        label: 'Run demo if necessary',
+        stepKind: 'demo',
         checklistKey: 'tests-checkpoint-demo',
         command: 'npx --package=node@22.23.4 node ./node_modules/@playwright/test/cli.js test --config=playwright.demo.config.ts',
-        note: 'Prepare checkpoint3 on a local graphical desktop with dependencies and Chromium ready. Do not replace participant exercise branches. This demo is separate from learner tests and CI; run as written, without npx -c.',
+        commandCopyOnly: true,
       },
-      { label: 'Demo CodeQL on PR', checklistIndex: 41 },
-      { label: 'Explain GHAS (SLIDES)' },
+      { label: 'Demo GHAS and Code Quality on PR', checklistIndex: 41 },
+      { label: 'Explain GHAS' },
     ],
   },
   {
     title: 'DEVELOP',
     subtitle: 'Copilot App / Projects（任意の発展編）',
     sectionIndex: 9,
-    note: 'Optional advanced features: a look at the future of AI-driven development. Presenter shortcut: the Project uses the reviewed remote checkpoint2 milestone, not the unpushed local test demo. Show planning and initial work, then transparently switch to the prepared complete checkpoint3. Participants follow the full implementation and PR flow in Part 12; skip to OPERATE for the core workshop.',
     color: 'magenta',
     items: [
-      { label: 'Create a Copilot App Project from reviewed remote main with the participant repo, two read-only reference repos and Word brief', checklistKey: 'app-project-context' },
-      { label: 'Demo adaptation plan: SDLC categories/routes/theme; reuse existing 3D instead of rebuilding', checklistKey: 'app-project-plan' },
-      { label: 'Demo planning and initial target-only 3D / read-only Zettelkasten work from the Word brief', checklistKey: 'app-project-implementation' },
-      {
-        label: 'Presenter only: save local work, then switch to the prepared complete site with ./checkpoint3',
-        stepKind: 'demo',
-        checklistKey: 'app-project-checkpoint3',
-        command: './checkpoint3',
-        note: 'Save editor buffers and commit local work without pushing the partial test demo; record the branch/commit. Imports the prepared checkpoint3 snapshot into a new branch/PR based on remote main, then installs dependencies. It does not finish the live exercise, start a server or merge the PR. Preserve local tests and Project work when reviewing replacements/deletions.',
-      },
-      { label: 'Review the checkpoint3 PR, 3D navigation and read-only graph/search/notes/links; merge only after review', checklistKey: 'app-project-review', note: 'Keep visitor write actions and write APIs disabled. This is the prepared reference, not a claim that the live demo completed all implementation.' },
+      { label: 'Add the three remote repos (hands-on remote main: checkpoint2)', checklistKey: 'app-project-context' },
+      { label: 'Send the prompt (USE MY HANDS-ON REPO NAME)', stepKind: 'demo', checklistKey: 'app-project-prompt' },
+      { label: 'Show Library and Overview', checklistKey: 'app-project-overview' },
     ],
   },
   {
@@ -362,9 +356,9 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
               {section.items.map((item) => {
                 counter = item.checklistIndex ?? counter;
                 const id = `ws-${w.id}-${item.checklistKey ?? counter++}`;
-                const teamsText = item.teams
+                const copyText = item.teams
                   ? item.teams.map((t) => `${t.label}\n${t.url}`).join('\n\n')
-                  : '';
+                  : item.commandCopyOnly ? item.command : undefined;
                 const stepKind = item.stepKind ?? (
                   section.title === 'PREPARATION'
                     ? 'prep'
@@ -388,14 +382,14 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
                         {stepKind === 'demo' && <img class="ws-step-ico ws-step-demo" src="/theomonfort/icons/arcade-machine.png" alt="" />}
                         {item.label}
                       </span>
-                      {item.teams && (
-                        <button type="button" class="ws-copy shrink-0" data-clip={teamsText} aria-label="Copy Teams message">
+                      {copyText && (
+                        <button type="button" class="ws-copy shrink-0" data-clip={copyText} data-copy-command={item.commandCopyOnly ? '' : undefined} aria-label={item.commandCopyOnly ? 'Copy demo command' : 'Copy Teams message'}>
                           <span class="ws-copy-icon" aria-hidden="true">📋</span>
-                          <span class="ws-copy-text">Copy</span>
+                          <span class="ws-copy-text" role="status" aria-live="polite" aria-atomic="true">Copy</span>
                         </button>
                       )}
                     </label>
-                    {item.command && (
+                    {item.command && !item.commandCopyOnly && (
                       <div class="ml-9 mr-2.5 mb-3 space-y-2">
                         {item.note && <p class="font-body text-sm text-phosphor">{item.note}</p>}
                         <pre class="whitespace-pre-wrap break-words bg-midnight border border-neon-cyan/25 rounded-[var(--radius-card)] p-2.5 text-sm text-phosphor"><code class="font-mono">{item.command}</code></pre>
@@ -652,7 +646,7 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     opacity: 0.92;
   }
 
-  /* Copy-to-clipboard button (Teams message) */
+  /* Copy-to-clipboard button (Teams message or demo command) */
   .ws-copy {
     display: inline-flex;
     align-items: center;
@@ -1089,12 +1083,17 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     const copyBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('.ws-copy'));
     copyBtns.forEach((btn) => {
       const original = btn.querySelector('.ws-copy-text')?.textContent || '';
+      let resetTimer: number | undefined;
       btn.addEventListener('click', async (e) => {
         e.preventDefault();
         e.stopPropagation();
+        if (resetTimer !== undefined) window.clearTimeout(resetTimer);
+        btn.disabled = true;
         const text = btn.dataset.clip || '';
+        let copied = false;
         try {
           await navigator.clipboard.writeText(text);
+          copied = true;
         } catch {
           const ta = document.createElement('textarea');
           ta.value = text;
@@ -1102,13 +1101,20 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
           ta.style.opacity = '0';
           document.body.appendChild(ta);
           ta.select();
-          try { document.execCommand('copy'); } catch {}
-          document.body.removeChild(ta);
+          try {
+            copied = document.execCommand('copy');
+          } catch {
+            copied = false;
+          } finally {
+            ta.remove();
+          }
         }
+        btn.disabled = false;
+        btn.focus({ preventScroll: true });
         const labelEl = btn.querySelector('.ws-copy-text');
-        btn.classList.add('is-copied');
-        if (labelEl) labelEl.textContent = 'Copied ✓';
-        window.setTimeout(() => {
+        btn.classList.toggle('is-copied', copied);
+        if (labelEl) labelEl.textContent = copied ? 'Copied ✓' : 'Copy failed';
+        resetTimer = window.setTimeout(() => {
           btn.classList.remove('is-copied');
           if (labelEl) labelEl.textContent = original;
         }, 1500);
