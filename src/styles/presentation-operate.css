@@ -9,6 +9,32 @@ body.present-mode .playbook-detail[data-category="operate"][data-playbook-slug="
   line-height: 1.4;
 }
 
+/* Let the sparser copilot-memory slides breathe; the Repository / Personal cards slide has no spare height. */
+body.present-mode .playbook-detail[data-category="operate"][data-playbook-slug="copilot-memory"] .prose-akq .hero-quote > p + p {
+  margin-top: 0.5em;
+}
+
+body.present-mode .playbook-detail[data-category="operate"][data-playbook-slug="copilot-memory"]:has(.prose-akq > :is(table, .ctl-widget).akq-slide-active) {
+  --presentation-slide-space: 0.75em;
+}
+
+body.present-mode .playbook-detail[data-category="operate"][data-playbook-slug="copilot-memory"]:has(.prose-akq > :is(table, .ctl-widget).akq-slide-active) .prose-akq {
+  line-height: 1.65;
+}
+
+body.present-mode .playbook-detail[data-category="operate"][data-playbook-slug="copilot-memory"] .prose-akq > table :is(th, td) {
+  padding-block: 0.45em;
+  line-height: 1.5;
+}
+
+body.present-mode .playbook-detail[data-category="operate"][data-playbook-slug="copilot-memory"] .prose-akq .ctl-list {
+  gap: 0.45em;
+}
+
+body.present-mode .playbook-detail[data-category="operate"][data-playbook-slug="copilot-memory"] .prose-akq .ctl-btn {
+  padding-block: 0.45em;
+}
+
 .playbook-detail[data-category="operate"][data-playbook-slug="token-optimization"] .advice6-models :is(th, td):first-child {
   min-width: 0;
   white-space: normal;

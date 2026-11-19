@@ -37,11 +37,14 @@ links:
   <p>
     <strong>Memory</strong> は repo の知識と自分の好みを記憶。<strong>Dreaming</strong> は記憶を自動で整理。
   </p>
+  <p>
+    repo レベルでは、Dreaming が <strong>ハーネスの更新</strong>（Skills / Instructions）を <strong>PR で提案</strong>することも。
+  </p>
 </div>
 
 ## Repo の知識 / 自分の好み <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-memory#types-of-memories" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-ここで扱うのは **Copilot Memory** のスコープ。アプリの **Project Memory** / ローカルメモリとは別の仕組み。
+Copilot Memory のスコープは 2 つ：**Repository**（repo の全員で共有）と **Personal**（自分だけ、repo をまたぐ）。
 
 <div class="setup-cards">
   <div class="setup-card">
@@ -76,9 +79,7 @@ Business / Enterprise：個人記憶は**請求元ごとに分離**。管理者�
 | **② 再利用** | 関連する repo の事実を現在のブランチと照合 |
 | **③ 見直し** | 有用なら upvote、古い情報や誤りなら downvote |
 
-既定 **90 日**で期限切れ。**upvote で延長**、読み出しだけでは延長なし。repo は管理者が 7〜180 日に設定可能（2026-11-11 時点）。
-
-> ⚠️ Memory は規則の遵守を保証しない。継続的に渡したい指示は **Custom instructions** に書く。
+記憶は**作成または最後の upvote から 90 日**で期限切れ。読み出すだけでは延長されない。repo の記憶は管理者が **7〜180 日**に変更可能（2026-11-11 時点）。
 
 ## Copilot Dreaming（NEW） <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-dreaming#how-changes-are-applied" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
@@ -91,21 +92,6 @@ Dreaming は記憶の追加、更新、削除を **自動で行う**。
 | **🔍 Code review** | マージ済み PR のフィードバックと現コードに基づく内部ガイダンス | 内部ガイダンスを更新し、**PR は作らない** |
 
 ファイルは **PR マージ後**に変更。変更なしでも **AI credits を消費**。
-
-## Memory ≠ Dreaming <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-dreaming" target="_blank" rel="noopener noreferrer">📖 Docs</a>
-
-<div class="setup-cards">
-  <div class="setup-card">
-    <div class="setup-card-head"><strong>🧠 Memory</strong><span class="setup-card-tag tag-cyan">普段の作業中</span></div>
-    <p>会話やコードから事実、好みを保存。<br />次の作業で関連する記憶を再利用。<br /><strong>Memory が有効なら、Dreaming OFF でも使える。</strong></p>
-  </div>
-  <div class="setup-card">
-    <div class="setup-card-head"><strong>🌙 Dreaming</strong><span class="setup-card-tag tag-magenta">バックグラウンド</span></div>
-    <p>対象セッションや PR レビューを分析。<br />重複や古い記憶、ガイダンスを見直す。</p>
-  </div>
-</div>
-
-チャットを開いたままにする必要はない。更新するのは**コンテキスト**であり、モデルの学習ではない。
 
 ## 設定もスコープごとに分ける <a class="h2-doc" href="https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-dreaming#availability-and-prerequisites" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
