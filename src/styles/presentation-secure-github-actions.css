@@ -11,6 +11,14 @@
   font-family: var(--font-prose), sans-serif;
 }
 
+.playbook-detail[data-playbook-slug="github-actions"] .actions-sdlc img {
+  display: block;
+  width: auto;
+  max-width: min(100%, 760px);
+  height: auto;
+  margin: 0 auto;
+}
+
 .playbook-detail[data-playbook-slug="github-actions"] .actions-sdlc-nodes {
   fill: var(--c-bg-elevated);
   stroke: var(--c-neon-cyan);
@@ -67,6 +75,10 @@ body.present-mode .playbook-detail[data-playbook-slug="github-actions"] :is(.act
 
 body.present-mode .playbook-detail[data-playbook-slug="github-actions"] :is(.actions-sdlc, .actions-architecture) svg {
   min-width: 0;
+}
+
+body.present-mode .playbook-detail[data-playbook-slug="github-actions"] .actions-sdlc img {
+  max-height: calc(100dvh - 22rem);
 }
 
 body.present-mode .playbook-detail[data-playbook-slug="github-actions"] .prose-akq:has(> .actions-sdlc.akq-slide-active) > :is(h2, p).akq-slide-active,

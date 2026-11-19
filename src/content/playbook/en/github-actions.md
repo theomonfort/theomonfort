@@ -68,27 +68,7 @@ links:
 Beyond CI/CD, GitHub Actions can automate **every stage of the SDLC**, all triggered by events.
 
 <div class="actions-sdlc">
-<svg viewBox="0 0 1100 300" role="img" aria-label="GitHub Actions across the SDLC: plan, code, build, test, release, deploy, operate, and monitor">
-<defs><marker id="actions-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L10 5 L0 10 Z" /></marker></defs>
-<g class="actions-sdlc-links" marker-end="url(#actions-arrow)">
-<path d="M250 65 H274" /><path d="M530 65 H554" /><path d="M810 65 H834" /><path d="M965 120 V175" />
-<path d="M840 235 H816" /><path d="M560 235 H536" /><path d="M280 235 H256" /><path d="M125 180 V125" />
-</g>
-<g class="actions-sdlc-nodes">
-<rect x="0" y="10" width="250" height="110" /><rect x="280" y="10" width="250" height="110" /><rect x="560" y="10" width="250" height="110" /><rect x="840" y="10" width="250" height="110" />
-<rect x="840" y="180" width="250" height="110" /><rect x="560" y="180" width="250" height="110" /><rect x="280" y="180" width="250" height="110" /><rect x="0" y="180" width="250" height="110" />
-</g>
-<g class="actions-sdlc-text">
-<text x="18" y="40"><tspan class="actions-sdlc-title">PLAN</tspan><tspan x="18" dy="27">Project board, issue triage</tspan><tspan x="18" dy="24">Onboarding</tspan></text>
-<text x="298" y="40"><tspan class="actions-sdlc-title">CODE</tspan><tspan x="298" dy="27">Coding standards, licensing</tspan><tspan x="298" dy="24">Linting</tspan></text>
-<text x="578" y="40"><tspan class="actions-sdlc-title">BUILD</tspan><tspan x="578" dy="27">Packaging</tspan><tspan x="578" dy="24">Build</tspan></text>
-<text x="858" y="40"><tspan class="actions-sdlc-title">TEST</tspan><tspan x="858" dy="27">Tests, code scanning</tspan><tspan x="858" dy="24">Security scanning</tspan></text>
-<text x="858" y="210"><tspan class="actions-sdlc-title">RELEASE</tspan><tspan x="858" dy="27">Versioning, release note</tspan><tspan x="858" dy="24">Artifact upload</tspan></text>
-<text x="578" y="210"><tspan class="actions-sdlc-title">DEPLOY</tspan><tspan x="578" dy="27">Deployment</tspan><tspan x="578" dy="24">Protection rule</tspan></text>
-<text x="298" y="210"><tspan class="actions-sdlc-title">OPERATE</tspan><tspan x="298" dy="27">Scheduled maintenance</tspan></text>
-<text x="18" y="210"><tspan class="actions-sdlc-title">MONITOR</tspan><tspan x="18" dy="27">Incident creation</tspan></text>
-</g>
-</svg>
+<img src="/theomonfort/github-actions-sdlc.svg" alt="GitHub Actions across the whole SDLC (Plan, Code, Build, Test, Release, Deploy, Operate, Monitor)" width="919" height="610" />
 </div>
 
 ## The metrics it improves (DORA)
