@@ -163,7 +163,7 @@ flowchart LR
 </div>
 <div class="fusion-metrics" aria-label="ベンチマーク結果">
 <div class="fusion-metric"><strong>60</strong><span>Coding Agent Index</span><span class="fusion-micro">Fusion Max。Opus 5.5 Max との差 2 ポイント以内</span></div>
-<div class="fusion-metric"><strong>1/2</strong><span>コスト・トークン</span><span class="fusion-micro">タスクあたりの平均 API コストとトークン使用量</span></div>
+<div class="fusion-metric"><strong>71</strong><span>Terminal-Bench 4.0</span><span class="fusion-micro">Fusion Max。レポート内で最高スコア（2026-10-28）</span></div>
 <div class="fusion-metric"><strong>40%</strong><span>時間を短縮</span><span class="fusion-micro">タスクあたりの所要時間を約 40% 短縮</span></div>
 <div class="fusion-metric"><strong>77%</strong><span>コスト削減（最大）</span><span class="fusion-micro">DeepSWE：Fusion High と GPT-6 Astra（high）の比較。正答率も上回る</span></div>
 </div>

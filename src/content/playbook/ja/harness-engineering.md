@@ -147,14 +147,14 @@ while True:
 <div class="ctl-widget ctl-compact">
 <div class="ctl-list">
 <details class="ctl-item" name="harness-tools">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📋</span><span class="ctl-name">リポジトリ全体の指示</span><span class="ctl-when"><code>copilot-instructions.md</code></span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📋</span><span class="ctl-name">リポジトリ全体のInstructions</span><span class="ctl-when"><code>copilot-instructions.md</code></span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">置き場所</span><span class="ctl-v"><code>.github/copilot-instructions.md</code></span></p>
 <p class="ctl-row"><span class="ctl-k">用途</span><span class="ctl-v">Repository-wide custom instructions で、リポジトリ全体の規約、ガードレール、検証コマンドを定義する。</span></p>
 </div>
 </details>
 <details class="ctl-item" name="harness-tools">
-<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📂</span><span class="ctl-name">パス別の指示</span><span class="ctl-when"><code>*.instructions.md</code></span><span class="ctl-toggle" aria-hidden="true"></span></summary>
+<summary class="ctl-btn"><span class="ctl-icon" aria-hidden="true">📂</span><span class="ctl-name">パス別のInstructions</span><span class="ctl-when"><code>*.instructions.md</code></span><span class="ctl-toggle" aria-hidden="true"></span></summary>
 <div class="ctl-body">
 <p class="ctl-row"><span class="ctl-k">置き場所</span><span class="ctl-v"><code>.github/instructions/*.instructions.md</code> + <code>applyTo</code></span></p>
 <p class="ctl-row"><span class="ctl-k">用途</span><span class="ctl-v">Path-specific custom instructions で <code>tests/**</code> や <code>api/**</code> など領域別のルールを設定する。VS Code では file-based instructions とも呼ぶ。</span></p>
@@ -198,20 +198,18 @@ while True:
 </div>
 </div>
 
-## エコシステム対応表
+## エコシステム対応表 <a class="h2-doc" href="https://agents.md/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-同じ「AI の足場」でも、置き場所やファイル名はエコシステムごとに少し違う。
+ツール間で共通の形式もあるが、パス別ルールや Custom agents に統一形式はない。
 
 | Layer | GitHub / Copilot | Open ecosystem |
 | --- | --- | --- |
 | Global instructions | `.github/copilot-instructions.md` | `AGENTS.md` |
-| Path-specific rules | `.github/instructions/*.instructions.md` | nested `AGENTS.md` |
+| Path-specific rules | `.github/instructions/*.instructions.md` | 共通の glob 形式なし。`src/AGENTS.md` はディレクトリ単位。 |
 | Skills（project） | `.github/skills/*/SKILL.md` | `.agents/skills/*/SKILL.md` |
 | Skills（personal） | `~/.copilot/skills/` | `~/.agents/skills/` |
-| Custom agents | Copilot custom agents | agent definitions / plugins |
+| Custom agents | <a href="https://docs.github.com/en/copilot/reference/custom-agents-configuration" target="_blank" rel="noopener noreferrer"><code>.github/agents/*.agent.md</code></a> | 例：Claude Code の <a href="https://code.claude.com/docs/en/sub-agents#choose-the-subagent-scope" target="_blank" rel="noopener noreferrer"><code>.claude/agents/*.md</code></a> |
 | MCP / tools | `mcp.config` | `mcp.config` |
-
-> Copilot の強みは、主要ベンダーの形式を native にサポートできること。CLI では `/help` を入力すると、今使える形式やコマンドを確認できる。
 
 ## このサイトを作るハーネス
 
