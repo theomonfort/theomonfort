@@ -198,20 +198,18 @@ while True:
 </div>
 </div>
 
-## Ecosystem Comparison
+## Ecosystem Comparison <a class="h2-doc" href="https://agents.md/" target="_blank" rel="noopener noreferrer">📖 Docs</a>
 
-The same "AI scaffold" concept exists across ecosystems, but file locations and names differ slightly.
+Some formats are shared across tools. Path-specific rules and custom agents have no single cross-tool format.
 
 | Layer | GitHub / Copilot | Open Ecosystem |
 | --- | --- | --- |
 | Global instructions | `.github/copilot-instructions.md` | `AGENTS.md` |
-| Path-specific rules | `.github/instructions/*.instructions.md` | nested `AGENTS.md` |
+| Path-specific rules | `.github/instructions/*.instructions.md` | No shared glob format. `src/AGENTS.md` scopes a directory. |
 | Skills (project) | `.github/skills/*/SKILL.md` | `.agents/skills/*/SKILL.md` |
 | Skills (personal) | `~/.copilot/skills/` | `~/.agents/skills/` |
-| Custom agents | Copilot custom agents | agent definitions / plugins |
+| Custom agents | <a href="https://docs.github.com/en/copilot/reference/custom-agents-configuration" target="_blank" rel="noopener noreferrer"><code>.github/agents/*.agent.md</code></a> | E.g. Claude Code: <a href="https://code.claude.com/docs/en/sub-agents#choose-the-subagent-scope" target="_blank" rel="noopener noreferrer"><code>.claude/agents/*.md</code></a> |
 | MCP / tools | `mcp.config` | `mcp.config` |
-
-> Copilot's strength is native support for the formats of major vendors. In the CLI, type `/help` to see available formats and commands.
 
 ## Harness for coding this website
 
