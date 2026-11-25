@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 710" role="img" aria-labelledby="title">
+  <title id="title">GitHub Event Streams でエージェントが PR のチェックを確認する流れ</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#00f0ff"/>
+    </marker>
+    <style>
+      text { font-family: "DotGothic16", "Noto Sans JP", sans-serif; fill: #e8f4ff; font-size: 19px; text-anchor: middle; }
+      .actor { fill: #1a0b2e; stroke: #00f0ff; stroke-width: 2; }
+      .life { stroke: #5c6e80; stroke-width: 1.5; stroke-dasharray: 6 6; }
+      .message { stroke: #00f0ff; stroke-width: 2; marker-end: url(#arrow); }
+      .reply { stroke-dasharray: 6 4; }
+      .loop { fill: none; stroke: #ffb000; stroke-width: 1.5; stroke-dasharray: 7 5; }
+      .caption { fill: #ffb000; font-size: 16px; }
+      .action { fill: #1a0b2e; stroke: #ff2e88; stroke-width: 1.5; }
+    </style>
+  </defs>
+  <rect width="960" height="710" fill="#0a0e27"/>
+  <rect class="actor" x="30" y="20" width="220" height="54" rx="3"/>
+  <rect class="actor" x="390" y="20" width="180" height="54" rx="3"/>
+  <rect class="actor" x="730" y="20" width="180" height="54" rx="3"/>
+  <text x="140" y="53">Copilot app の agent</text>
+  <text x="480" y="53">GitHub PR</text>
+  <text x="820" y="53">CI</text>
+  <path class="life" d="M140 74 V680 M480 74 V680 M820 74 V680"/>
+
+  <text x="310" y="105">PR を作成</text>
+  <path class="message" d="M140 115 H480"/>
+  <text x="650" y="151">チェックを開始</text>
+  <path class="message" d="M480 161 H820"/>
+  <text x="310" y="197">購読してストリームに接続</text>
+  <path class="message" d="M140 207 H480"/>
+  <text x="310" y="243">現在の PR とチェックを取得</text>
+  <path class="message" d="M140 253 H480"/>
+  <text x="310" y="289">現在の状態</text>
+  <path class="message reply" d="M480 299 H140"/>
+
+  <rect class="loop" x="20" y="322" width="920" height="328" rx="3"/>
+  <text class="caption" x="180" y="346">チェックの完了ごとに繰り返す</text>
+  <text x="650" y="379">チェック・スイートが完了</text>
+  <path class="message reply" d="M820 389 H480"/>
+  <text x="310" y="425">イベントを通知</text>
+  <path class="message reply" d="M480 435 H140"/>
+  <text x="310" y="471">現在の PR とチェックを取得</text>
+  <path class="message" d="M140 481 H480"/>
+  <text x="310" y="517">現在の状態</text>
+  <path class="message reply" d="M480 527 H140"/>
+  <rect class="action" x="39" y="547" width="202" height="40" rx="3"/>
+  <text x="140" y="573">失敗時は修正</text>
+  <text x="310" y="610">修正をプッシュし CI を再実行</text>
+  <path class="message" d="M140 620 H480"/>
+  <text class="caption" x="480" y="687">チェック成功時、または人の判断が必要な場合は終了</text>
+</svg>
