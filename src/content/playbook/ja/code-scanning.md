@@ -363,6 +363,7 @@ CodeQL 対応言語がなければ **CodeQL スキャンも Actions 分の消費
 <li><b>リポジトリ（preview）:</b> デフォルトブランチの全言語を手動スキャン。バックログアラートを作成。</li>
 <li><b>AI アプリ / エージェント（preview）:</b> PR の間接的プロンプトインジェクションを検出。</li>
 </ul>
+<p class="det-why"><b>実行:</b> <a href="https://github.com/theomonfort-org/ghas-test-1/security/code-scanning" target="_blank" rel="noopener noreferrer">リポジトリスキャン ↗</a> / <a href="https://github.com/orgs/theomonfort-org/security/alerts/code-scanning" target="_blank" rel="noopener noreferrer">Org 一括スキャン ↗</a>（右上の <b>AI scan</b>）</p>
 </div>
 </details>
 <details class="det-pick" name="cs-capabilities">
