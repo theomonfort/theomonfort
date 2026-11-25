@@ -363,6 +363,7 @@ No CodeQL-supported language? **No CodeQL scans or Actions minutes**. See the la
 <li><b>Repositories (preview):</b> Any language on the default branch; on demand, backlog alerts.</li>
 <li><b>AI apps / agents (preview):</b> Indirect prompt injection in PRs.</li>
 </ul>
+<p class="det-why"><b>Run it:</b> <a href="https://github.com/theomonfort-org/ghas-test-1/security/code-scanning" target="_blank" rel="noopener noreferrer">Repo scan ↗</a> / <a href="https://github.com/orgs/theomonfort-org/security/alerts/code-scanning" target="_blank" rel="noopener noreferrer">Org bulk scan ↗</a> (<b>AI scan</b>, top right)</p>
 </div>
 </details>
 <details class="det-pick" name="cs-capabilities">
