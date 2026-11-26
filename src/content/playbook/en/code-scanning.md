@@ -359,10 +359,11 @@ No CodeQL-supported language? **No CodeQL scans or Actions minutes**. See the la
 <p class="det-head"><span class="det-title">AI Scan</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan" target="_blank" rel="noopener noreferrer">Docs</a></p>
 <p class="det-doc">PRs / repositories / AI apps</p>
 <ul class="list-disc text-[0.88em] leading-[1.6] !my-0">
-<li><b>PRs (GA):</b> Changes outside CodeQL coverage; automatic, advisory.</li>
-<li><b>Repositories (preview):</b> Any language on the default branch; on demand, backlog alerts.</li>
+<li><b>PRs (GA):</b> CodeQL gaps, e.g. Terraform and Dev Container Dockerfiles; automatic, advisory.</li>
+<li><b>Repositories (preview):</b> Agent-selected default-branch code in any language, e.g. Bicep; on demand, backlog alerts.</li>
 <li><b>AI apps / agents (preview):</b> Indirect prompt injection in PRs.</li>
 </ul>
+<p class="det-why"><b>Repo detection cap:</b> <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan-for-repositories#billing" target="_blank" rel="noopener noreferrer">30 min / 150,000 AI credits</a> (as of 2026-11-26).</p>
 <p class="det-why"><b>Run it:</b> <a href="https://github.com/theomonfort-org/ghas-test-1/security/code-scanning" target="_blank" rel="noopener noreferrer">Repo scan ↗</a> / <a href="https://github.com/orgs/theomonfort-org/security/alerts/code-scanning" target="_blank" rel="noopener noreferrer">Org bulk scan ↗</a> (<b>AI scan</b>, top right)</p>
 </div>
 </details>
