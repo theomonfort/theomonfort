@@ -71,7 +71,7 @@ links:
 | 🔍 **CI Failure Analyst** | 失敗した CI を読み解き、**原因を特定して PR にコメント** |
 | 📝 **Docs Maintainer** | 古いリンク・例・API 説明を検出し、**最新の実装に合わせて修正 PR** を起こす |
 
-テンプレートは <a href="https://github.com/githubnext/agentics" target="_blank" rel="noopener noreferrer" class="retro-link">githubnext/agentics</a>、開発者の実例は <a href="https://github.github.com/gh-aw/blog/2026-01-12-welcome-to-pelis-agent-factory/" target="_blank" rel="noopener noreferrer" class="retro-link">Peli's Agent Factory</a> から確認できる。
+テンプレートは <a href="https://github.com/githubnext/agentics" target="_blank" rel="noopener noreferrer" class="retro-link">githubnext/agentics</a>、実例は <a href="https://github.github.com/gh-aw/blog/2026-01-12-welcome-to-pelis-agent-factory/" target="_blank" rel="noopener noreferrer" class="retro-link">Peli's Agent Factory</a> と <a href="https://github.github.com/gh-aw/gallery/" target="_blank" rel="noopener noreferrer" class="retro-link">gh-aw Gallery</a> から確認できる。
 
 ## 始め方（4 ステップ） <a class="h2-doc" href="https://github.github.com/gh-aw/setup/quick-start/" target="_blank" rel="noopener noreferrer">📖 Docs</a> <input type="checkbox" id="code-agentic-workflow" class="demo-toggle" /><label class="h2-demo h2-info" for="code-agentic-workflow">&lt;/&gt; CODE</label>
 
