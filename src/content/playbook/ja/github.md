@@ -332,14 +332,14 @@ html[data-theme='retro'] .prose-akq .gh-octo-bar{background:var(--bar-color);bor
 <style>
 .prose-akq .gh-investment{max-width:60rem;margin:0 auto;text-align:center;font-family:var(--font-prose),sans-serif}
 .prose-akq h2:has(+ .gh-investment){width:fit-content;margin-inline:auto;text-align:center}
-.prose-akq .gh-investment .gh-invest-lead{margin:0 auto 1.4em;max-width:38em;text-wrap:balance}
+.prose-akq .gh-investment .gh-invest-lead{margin:0 auto .8em;max-width:38em;text-wrap:balance}
 .prose-akq .gh-invest-kicker{color:var(--c-fg-body);font-size:.65em;letter-spacing:.12em;margin:0 0 .6em}
-.prose-akq .gh-invest-resources{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:1.1em 0;border-block:1px solid var(--c-neon-cyan);background:rgb(var(--rgb-deep-purple) / .82)}
+.prose-akq .gh-invest-resources{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:.7em 0;border-block:1px solid var(--c-neon-cyan);background:rgb(var(--rgb-deep-purple) / .82)}
 .prose-akq .gh-invest-resource{padding:.35em .6em}
 .prose-akq .gh-invest-resource+.gh-invest-resource{border-left:1px dashed rgb(var(--rgb-neon-cyan) / .35)}
 .prose-akq .gh-invest-resource strong{display:block;color:var(--c-neon-cyan);font-family:'Orbitron','IBM Plex Mono','IBM Plex Sans JP',sans-serif;font-size:clamp(1.7rem,3.8vw,3.6rem);line-height:1.2;letter-spacing:-.04em;white-space:nowrap}
 .prose-akq .gh-invest-resource span{display:block;margin-top:.5em;font-size:.8em}
-.prose-akq .gh-investment .gh-invest-test{margin:1.5em auto 0;max-width:44em;font-size:.75em;line-height:1.65;text-wrap:balance}
+.prose-akq .gh-investment .gh-invest-test{margin:.3em auto 0;max-width:50em;font-size:.75em;line-height:1.65;text-wrap:balance}
 .prose-akq .gh-invest-test strong{color:var(--c-crt-amber)}
 html[data-theme='retro'] .prose-akq .gh-invest-resource strong{font-family:var(--font-prose),sans-serif}
 @media(max-width:600px){.prose-akq .gh-invest-resources{grid-template-columns:1fr;padding:0 1em}.prose-akq .gh-invest-resource{padding:1em 0}.prose-akq .gh-invest-resource+.gh-invest-resource{border-left:0;border-top:1px dashed rgb(var(--rgb-neon-cyan) / .35)}}
@@ -351,7 +351,9 @@ html[data-theme='retro'] .prose-akq .gh-invest-resource strong{font-family:var(-
 <div class="gh-invest-resource"><strong>+160 PB</strong><span>高速ストレージ</span></div>
 <div class="gh-invest-resource"><strong>+50 Tb/s</strong><span>ネットワーク容量</span></div>
 </div>
-<p class="gh-invest-test">Git インフラも刷新中。1 つのモノレポの負荷テストで<strong>5,000 の「angry agents」→ 毎秒 7,200 件の書き込み</strong>を達成。さらなる処理能力の向上へ。<a class="retro-link" href="https://www.youtube.com/watch?v=MZfqId_rrB0" target="_blank" rel="noopener noreferrer">Universe セッション ↗</a></p>
+<p class="gh-invest-test"><strong>新しい Git アーキテクチャ：</strong>Git オブジェクトを Azure Blob Storage に保存。リポジトリ全体をロックせず、ブランチごとに更新を調整することで、異なるブランチへの並列 push が可能に。<br />
+内部ベンチマークで<strong>書き込みスループットが最大 35 倍</strong>に。1 つのリポジトリの負荷テストで<strong>5,000 エージェントによる毎秒 7,200 回の push</strong>を達成。<br />
+2026 年 11 月 5 日時点：限定プライベートプレビュー。2027 年初頭に提供を拡大予定。<a class="retro-link" href="https://github.blog/engineering/architecture-optimization/inside-githubs-new-git-storage-architecture/" target="_blank" rel="noopener noreferrer">アーキテクチャ ↗</a> / <a class="retro-link" href="https://github.blog/engineering/architecture-optimization/building-git-infrastructure-for-agent-scale-development/" target="_blank" rel="noopener noreferrer">ベンチマーク ↗</a></p>
 </div>
 
 ## <span class="gh-summary-title">業界からの評価</span>
