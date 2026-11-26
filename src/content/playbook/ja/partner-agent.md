@@ -234,3 +234,30 @@ Copilot Chat のモードではなく、**agent harness** を選ぶ。変わる�
 
 </div>
 </div>
+
+## サードパーティ agent の sandbox 境界 <a class="h2-doc" href="https://code.visualstudio.com/docs/agents/run/agent-sandboxing" target="_blank" rel="noopener noreferrer">📖 Docs</a>
+
+<div class="partner-setup-columns">
+<div>
+
+### Claude Code
+
+- **Shell sandbox（opt-in、デフォルト OFF）**：Bash / PowerShell command と子プロセスが対象。
+- **対象外**：Read / Edit / Write、web tool、hook、local MCP、LSP（別の制御）。
+
+<a class="retro-link" href="https://code.claude.com/docs/en/sandboxing#what-runs-outside-the-sandbox" target="_blank" rel="noopener noreferrer">Claude Code の sandbox docs ↗</a>
+
+</div>
+<div>
+
+### OpenAI Codex
+
+- **ローカルの既定**：built-in file operation と起動した command を sandbox 内で実行。
+- **Approval は別の制御**：`danger-full-access` では sandbox の制限がなくなる。
+
+<a class="retro-link" href="https://learn.chatgpt.com/docs/sandboxing" target="_blank" rel="noopener noreferrer">Codex の sandbox docs ↗</a>
+
+</div>
+</div>
+
+> **適用範囲：** provider docs は各 provider の既定値を説明するもので、VS Code 統合では動作が異なる場合がある。`chat.agent.sandbox.enabled` は shared runtime の標準 tool を使う Copilot harness session のみが対象で、Claude / Codex harness には適用されない。
