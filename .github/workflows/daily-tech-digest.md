@@ -118,6 +118,8 @@ safe-outputs:
     create-issue: false
   create-issue:
     max: 1
+    # gh-aw strips an existing prefix before re-adding it once, so the agent's
+    # verbatim prepared.title is published unchanged (checked by checkpoint).
     title-prefix: "[daily-tech-digest] "
     deduplicate-by-title: true
     expires: false
