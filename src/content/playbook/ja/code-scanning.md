@@ -359,10 +359,11 @@ CodeQL 対応言語がなければ **CodeQL スキャンも Actions 分の消費
 <p class="det-head"><span class="det-title">AI Scan</span><a class="ctl-doc" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan" target="_blank" rel="noopener noreferrer">Docs</a></p>
 <p class="det-doc">PR / リポジトリ / AI アプリ</p>
 <ul class="list-disc text-[0.88em] leading-[1.6] !my-0">
-<li><b>PR（GA）:</b> CodeQL 未対応の変更を自動検査。PR 上の助言。</li>
-<li><b>リポジトリ（preview）:</b> デフォルトブランチの全言語を手動スキャン。バックログアラートを作成。</li>
+<li><b>PR（GA）:</b> CodeQL 未対応の変更を自動検査（Terraform、Dev Container の Dockerfile など）。PR 上の助言。</li>
+<li><b>リポジトリ（preview）:</b> 手動で開始。AI がデフォルトブランチからコードを選択（全言語、Bicep など）し、バックログアラートを作成。</li>
 <li><b>AI アプリ / エージェント（preview）:</b> PR の間接的プロンプトインジェクションを検出。</li>
 </ul>
+<p class="det-why"><b>リポジトリの検出上限:</b> <a class="retro-link" href="https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan-for-repositories#billing" target="_blank" rel="noopener noreferrer">30 分 / 150,000 AI credits</a>（2026-11-26 時点）</p>
 <p class="det-why"><b>実行:</b> <a href="https://github.com/theomonfort-org/ghas-test-1/security/code-scanning" target="_blank" rel="noopener noreferrer">リポジトリスキャン ↗</a> / <a href="https://github.com/orgs/theomonfort-org/security/alerts/code-scanning" target="_blank" rel="noopener noreferrer">Org 一括スキャン ↗</a>（右上の <b>AI scan</b>）</p>
 </div>
 </details>
