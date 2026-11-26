@@ -47,3 +47,31 @@ Playbook の 3D マップでは、惑星やミッションの選択中も `Escap
 ## GitHub Actions の依存関係更新
 
 `.github/dependabot.yml` で GitHub Actions の更新を毎週確認します。Dependabot は更新用の PR を作成し、ロックファイルを導入済みの `deploy.yml` のアクションを更新する場合は、`.github/workflows/actions.lock` も同じ PR で更新します。自動マージは設定していないため、変更をレビューしてからマージします。
+
+## Daily Tech Digest
+
+`.github/workflows/daily-tech-digest.md` は独自実装の GitHub Agentic Workflow です。毎日 08:00 JST（23:00 UTC）に GitHub Changelog、GitHub Blog、Microsoft DevBlogs、Microsoft Security Blog の公式 RSS を取得し、日本語のプリセールス向けダイジェストを最大 1 件の Issue にまとめます。管理者向けの変更、セキュリティ、DevOps / プラットフォーム、開発者向けの順に優先します。Actions のスケジュール実行は遅れる場合があります。
+
+前回の成功した実実行のチェックポイントから収集し、保持されたチェックポイントがない場合は直近 24 時間を使います。対象期間は記事公開日時について開始時刻を含まず、終了時刻を含みます。閉じた Issue も含む過去の `[daily-tech-digest]` Issue の出典 URL と照合し、同じ JST 日付の 2 件目は作成しません。対象更新がなければ Issue は作成しません。同日スキップ、失敗、プレビューではチェックポイントを進めず、正常な対象なし判定でもチェックポイントを保存します。RSS に後から掲載された過去日付の記事、フィードから消えた記事、90 日のチェックポイント保持期間を超える停止中の更新は網羅できません。
+
+### 有効化とプレビュー
+
+ソースと生成済みの `daily-tech-digest.lock.yml` を `main` にマージするとスケジュールが有効になります。個人所有のリポジトリなので Copilot の推論には `COPILOT_GITHUB_TOKEN` Actions シークレットが必要です。ユーザー自身を Resource owner とする fine-grained PAT で、Account permissions の **Copilot Requests: Read** と有効な Copilot ライセンスを確認してください。シークレット名が存在しても、有効期限や推論権限は実行時にしか確認できません。`copilot-requests: write` による組織課金の認証は個人リポジトリでは使いません。
+
+Actions が有効で、リポジトリの Issue が有効である必要があります。コレクターとエージェントは読み取り専用です。Issue 書き込み権限は生成済みの safe-output ジョブだけに分離し、トークンはこのリポジトリの `GITHUB_TOKEN` を明示します。ラベル作成、外部リポジトリへの書き込み、設定変更は行いません。
+
+Actions 画面の **Daily Tech Digest** から手動実行できます。`dry_run` は既定で `true` です。プレビューは Issue を作成せず、チェックポイントも変更しません。検証済みの本文または対象なし理由は safe-output ジョブの Step Summary に表示されます。本番の手動実行だけ `dry_run=false` を選びます。セットアップ、フィード取得、履歴照合、検証の失敗は Actions のエラーとして表示し、失敗通知用 Issue は作成しません。
+
+### 更新とローカル検証
+
+生成済みファイルは直接編集せず、リポジトリと同じ `gh-aw v1.2.2` で再生成してください。
+
+```sh
+gh aw compile daily-tech-digest --no-check-update
+python3 -B -m unittest automation.test_daily_tech_digest
+pnpm build
+```
+
+ローカルテストは合成 RSS / API データを使い、Issue を作成しません。Copilot の実際の日本語要約と推論認証の確認には、マージ後の手動 dry-run が必要です。
+
+公式資料: [認証](https://github.github.io/gh-aw/reference/auth/)、[safe outputs](https://github.github.io/gh-aw/reference/safe-outputs/)、[カスタムジョブ](https://github.github.io/gh-aw/reference/steps-jobs/)。
