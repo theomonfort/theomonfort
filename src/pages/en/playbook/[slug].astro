@@ -884,6 +884,12 @@ const hasGroups = linkGroups.some((g) => g.name !== '');
       }
       return;
     }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      const target = e.key === 'ArrowDown' ? section.dataset.next : section.dataset.prev;
+      if (target) navigateSmooth(target + '?present=1');
+      return;
+    }
     if (e.key === 't' || e.key === 'T') {
       e.preventDefault();
       toggleToc();
