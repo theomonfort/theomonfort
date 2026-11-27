@@ -1,24 +1,20 @@
 ---
 import Layout from '../layout/Layout.astro';
-import { type Locale } from '../../lib/i18n';
+import { type Locale, localizedPath } from '../../lib/i18n';
+
+type WorkshopId = 'copilot' | 'github' | 'ghas';
 
 interface Props {
   locale?: Locale;
+  workshop?: WorkshopId;
+  currentPath?: string;
 }
-const { locale = 'ja' } = Astro.props;
+const { locale = 'ja', workshop = 'copilot', currentPath = '/ws' } = Astro.props;
 
 const objectivesText =
   locale === 'en'
     ? 'Give participants a feel for AI-driven development across the full SDLC, and the various tools available to do it. By the end of the workshop, participants will have a clearer idea of the tools available to code with Copilot and can start applying them to their own work.'
     : 'このワークショップの狙いは、計画 → 実装 → レビュー → テスト・セキュリティ → 運用という SDLC 全体を通して、AI 駆動開発の感覚と、それを支えるさまざまなツールを体験してもらうこと。終わったあとには、Copilot でコーディングするために使えるツールの全体像がつかめ、自分の仕事に取り入れ始められる状態を目指す。';
-
-const ucIcon = '/theomonfort/icons/under-construction.png';
-const timeText = locale === 'en' ? '~3 hours' : '約3時間';
-const ucTitle = locale === 'en' ? 'UNDER CONSTRUCTION' : '準備中';
-const ucBody =
-  locale === 'en'
-    ? 'This workshop is coming soon.'
-    : 'このワークショップは現在準備中です。';
 
 type SectionColor = 'magenta' | 'cyan' | 'amber' | 'green';
 
@@ -278,28 +274,152 @@ const objectivesGithub =
     ? 'This GitHub workshop tours the GitHub platform basics — collaboration tools, pull requests and branching, GitHub Actions, and GHAS (Dependabot, Code Scanning, Secret Protection) — to build a solid foundation for team development and security.'
     : 'この GitHub ワークショップでは、GitHub プラットフォームの基本 ── コラボレーションツール、Pull Request とブランチ戦略、GitHub Actions、そして GHAS（Dependabot・Code Scanning・Secret Protection）── を一巡りして、チーム開発とセキュリティの土台を固める。';
 
-const workshops: { id: string; sections: Section[]; objectives: string }[] = [
-  { id: 'copilot', sections, objectives: objectivesText },
-  { id: 'github', sections: githubSections, objectives: objectivesGithub },
+const PLAYBOOK = 'https://theomonfort.github.io/theomonfort/playbook';
+
+const ghasSections: Section[] = [
+  {
+    title: 'PREPARATION',
+    subtitle: '登壇準備',
+    color: 'amber',
+    items: [
+      { label: 'Have the AGENDA (This one) / GHAS, SECRET PROTECTION, CODE SCANNING, CODE QUALITY playbooks / ghas-test-1 open in the browser' },
+      { label: 'Sign in as owner / security manager on octodemo (enterprise) and theomonfort-org' },
+      { label: 'Check push protection, validity checks and delegated bypass are enabled on ghas-test-1' },
+      { label: 'Check the CodeQL Advanced setup workflow has a recent green run on ghas-test-1' },
+      { label: 'Check Code Quality is enabled on ghas-test-1 and the CODE REVIEW ORG LVL ruleset is active' },
+      { label: 'Open a terminal in the local ghas-test-1 clone (push protection script)' },
+      { label: 'Have a contributor account WITHOUT bypass privileges ready (bypass request demo)' },
+    ],
+  },
+  {
+    title: 'GHAS CONCEPT',
+    subtitle: 'GHAS の全体像',
+    color: 'cyan',
+    duration: '20分',
+    items: [
+      { label: 'Self-introduction' },
+      {
+        label: 'Send following message in Teams',
+        teams: [
+          { label: 'GitHub Advanced Security', url: `${PLAYBOOK}/github-advanced-security/` },
+          { label: 'Secret Protection', url: `${PLAYBOOK}/secret-scanning/` },
+          { label: 'Code Scanning', url: `${PLAYBOOK}/code-scanning/` },
+          { label: 'Code Quality', url: `${PLAYBOOK}/code-quality/` },
+        ],
+      },
+      { label: "Explain WHY NOW: FIRST's four recommendations, data leaks in Japan (SLIDE)" },
+      { label: "Explain HOW GHAS ANSWERS IT and WHAT'S INSIDE (SLIDE)" },
+      { label: 'Explain WHO CAN DO WHAT and PRICING (SLIDE)' },
+      { label: 'Explain RISK ASSESSMENTS and ENTERPRISE ROLLOUT (SLIDE)' },
+      { label: 'Demo SECURITY OVERVIEW: Enterprise → Org → Repo (Overview, Coverage, Risk)' },
+    ],
+  },
+  {
+    title: 'SECRET PROTECTION',
+    subtitle: 'シークレットの漏洩を止める',
+    color: 'magenta',
+    duration: '40分',
+    items: [
+      { label: 'Explain WHY SECRETS MATTER in private / internal repos (SLIDE)' },
+      { label: 'Explain MAIN CAPABILITIES: push protection, merge protection, alerts, validity checks (SLIDE)' },
+      {
+        label: 'Demo PUSH PROTECTION: push a generated secret from ghas-test-1, the push is blocked',
+        command: './demo/secret-scanning/01-push-protection.sh',
+        commandCopyOnly: true,
+      },
+      { label: 'Demo PATTERN CONFIGURATIONS (octodemo): push-protected patterns, False positives / Bypass rate columns' },
+      {
+        label: "Demo BYPASS: open the unblock URL, compare “used in tests” vs “I'll fix it later”, push again, show who bypassed and why",
+        command: 'git push origin HEAD',
+        commandCopyOnly: true,
+      },
+      { label: 'Demo DELEGATED BYPASS: Security configuration → Bypass privileges → Specific actors, then contributor request → Approve / Deny' },
+      { label: "Demo MERGE PROTECTION: ruleset “Require secret scanning alerts are resolved”, PR from the “fix later” branch is blocked" },
+      { label: 'Demo VALIDITY CHECK: Secret scanning → Validity filter, triage Active secrets first' },
+      { label: 'Explain WHAT GETS DETECTED: provider vs generic patterns (SLIDE)' },
+      {
+        label: 'Demo CUSTOM PATTERN: “Octodemo internal service token”, Save and dry run, then Publish',
+        command: 'octodemo_(live|test)_[A-Za-z0-9]{32}',
+        commandCopyOnly: true,
+      },
+      { label: 'Demo PUBLIC MONITORING: enterprise report vs repository alerts' },
+      { label: 'Demo SECURITY CAMPAIGN: from secret scanning filters (Validity Active + Unknown), save as draft' },
+      { label: 'Explain MY RECOMMENDED STARTING CHECKLIST (SLIDE)' },
+    ],
+  },
+  {
+    title: 'CODE SCANNING',
+    subtitle: 'CodeQL と Autofix',
+    color: 'amber',
+    duration: '40分',
+    items: [
+      { label: 'Explain CODE SCANNING IS NOT CODEQL and HOW CODEQL WORKS (SLIDE)' },
+      { label: 'Explain READING A CODEQL QUERY and WHAT CODEQL FINDS (SLIDE)' },
+      { label: 'Explain MAIN CAPABILITIES: Default vs Advanced setup (SLIDE)' },
+      { label: 'Demo ADVANCED SETUP: Settings → Advanced Security, codeql.yml (triggers, language matrix, build-mode, CERT / MISRA packs)' },
+      { label: 'Demo CODEQL RUN: Actions → CodeQL per-language Analyze jobs, then Security → Code scanning alerts' },
+      { label: 'Explain WHY SHIFT LEFT and COPILOT AUTOFIX (SLIDE)' },
+      { label: 'Demo SECURITY BOT ON A PR (octodemo #57): CodeQL XSS vs AI Scan findings' },
+      { label: 'Demo MERGE PROTECTION: ruleset “Require code scanning results” (High or higher / Errors), keep disabled' },
+      { label: 'Demo AGENTIC AUTOFIX: org + repo settings, then Assign to Copilot on a backlog alert → draft PR' },
+      { label: 'Explain AUTOFIX vs AGENTIC AUTOFIX (SLIDE)' },
+      { label: 'Show AI SCAN controls (PRs / repositories / AI apps) without starting a paid scan' },
+      { label: 'Demo SECURITY CAMPAIGN: from code scanning filters, save as draft' },
+      { label: 'Explain PRICING: three meters and CODE SECURITY RISK ASSESSMENT (SLIDE)' },
+    ],
+  },
+  {
+    title: 'CODE QUALITY',
+    subtitle: '品質ゲートと技術的負債',
+    color: 'green',
+    duration: '20分',
+    items: [
+      { label: 'Explain WHAT CODE QUALITY COVERS and LANGUAGE SUPPORT (SLIDE)' },
+      { label: 'Explain CATCH ISSUES BEFORE MERGE (SLIDE)' },
+      { label: 'Demo ENABLE: Org Settings → Code quality → Repository access, Repo Settings → Enable code quality' },
+      { label: 'Demo PR GATE: Code Quality findings on a PR + Code quality rule in the CODE REVIEW ORG LVL ruleset' },
+      { label: 'Demo STANDARD FINDINGS: Security and quality → Code quality, review and dismiss a finding' },
+      { label: 'Demo AGENTIC AUTOFIX: select 1–25 findings → Assign to Copilot → review the PR' },
+      { label: 'Demo MEASURE OVER TIME: Org → Insights → Code quality scores and trends' },
+      { label: 'Explain WHO CAN DO WHAT and GA AVAILABILITY / BILLING (SLIDE)' },
+    ],
+  },
 ];
 
-const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
+const objectivesGhas =
+  locale === 'en'
+    ? 'This GHAS workshop starts from why application security matters now, then walks through Secret Protection, Code Scanning and Code Quality with live demos: blocking leaks at push, gating merges, and fixing the backlog with Autofix and security campaigns.'
+    : 'この GHAS ワークショップでは、いまアプリケーションセキュリティが重要な理由から始め、Secret Protection・Code Scanning・Code Quality をデモで一巡りする。push での漏洩ブロック、マージ前のゲート、そして Autofix とセキュリティキャンペーンでのバックログ解消までを体験する。';
+
+const workshops: Record<WorkshopId, { label: string; title: string; time: string; sections: Section[]; objectives: string }> = {
+  github: { label: 'GITHUB', title: 'GITHUB WORKSHOP', time: locale === 'en' ? '~3 hours' : '約3時間', sections: githubSections, objectives: objectivesGithub },
+  copilot: { label: 'COPILOT', title: 'COPILOT WORKSHOP', time: locale === 'en' ? '~3 hours' : '約3時間', sections, objectives: objectivesText },
+  ghas: { label: 'GHAS', title: 'GHAS WORKSHOP', time: locale === 'en' ? '~2 hours' : '約2時間', sections: ghasSections, objectives: objectivesGhas },
+};
+
+const w = { id: workshop, ...workshops[workshop] };
+const totalItems = w.sections.reduce((n, s) => n + s.items.length, 0);
+const tabOrder: WorkshopId[] = ['github', 'copilot', 'ghas'];
 ---
 
-<Layout locale={locale} currentPath="/ws" title="Workshop Presenter Notes">
+<Layout locale={locale} currentPath={currentPath} title={`${w.title} | Presenter Notes`}>
   <section class="max-w-3xl mx-auto px-4 py-12 md:py-16">
     <section class="ws-quest">
-      <span class="ws-quest-time font-mono">⏱ {timeText}</span>
+      <span class="ws-quest-time font-mono">⏱ {w.time}</span>
       <div class="ws-quest-grid">
         <div class="ws-quest-copy">
-          <div class="ws-switch flex items-center gap-2 mb-3" role="tablist" aria-label="Workshop">
-            <button type="button" role="tab" class="ws-tab" data-ws="github" aria-selected="false" aria-controls="ws-notes-github">GITHUB</button>
-            <button type="button" role="tab" class="ws-tab is-active" data-ws="copilot" aria-selected="true" aria-controls="ws-notes">COPILOT</button>
-            <button type="button" role="tab" class="ws-tab" data-ws="ghas" aria-selected="false" aria-controls="ws-construction">GHAS</button>
-          </div>
-          <h1 id="ws-title" class="ws-quest-title font-display">COPILOT WORKSHOP</h1>
+          <nav class="ws-switch flex items-center gap-2 mb-3" aria-label="Workshop">
+            {tabOrder.map((id) => (
+              <a
+                href={localizedPath(locale, `/ws/${id}/`)}
+                class:list={['ws-tab', { 'is-active': id === workshop }]}
+                aria-current={id === workshop ? 'page' : undefined}
+              >{workshops[id].label}</a>
+            ))}
+          </nav>
+          <h1 id="ws-title" class="ws-quest-title font-display">{w.title}</h1>
           <div id="ws-quest-body">
-            <p id="ws-objectives" class="ws-quest-sum font-body">{objectivesText}</p>
+            <p id="ws-objectives" class="ws-quest-sum font-body">{w.objectives}</p>
             <div id="ws-progress" class="ws-quest-progress">
               <div class="ws-exp">
                 <span class="ws-exp-tag">EXP</span>
@@ -325,20 +445,12 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
       </div>
     </section>
 
-    <div id="ws-construction" class="ws-construction" role="tabpanel" hidden>
-      <img src={ucIcon} alt="" width="160" height="160" class="ws-uc-icon" />
-      <p class="ws-uc-title font-display">{ucTitle}</p>
-      <p class="ws-uc-body font-body">{ucBody}</p>
-    </div>
-
-    {workshops.map((w) => {
+    {(() => {
       let counter = 0;
-      const wTotal = w.sections.reduce((n, s) => n + s.items.length, 0);
-      const panelId = w.id === 'copilot' ? 'ws-notes' : `ws-notes-${w.id}`;
       return (
-      <div id={panelId} class="ws-panel" role="tabpanel" data-workshop={w.id} data-objectives={w.objectives} hidden={w.id !== 'copilot'}>
+      <div id={`ws-notes-${w.id}`} class="ws-panel" data-workshop={w.id}>
 
-    <div class="ws-secs" data-total={wTotal} data-workshop={w.id}>
+    <div class="ws-secs" data-total={totalItems} data-workshop={w.id}>
       {w.sections.map((section, si) => {
         const c = COLORS[section.color];
         return (
@@ -408,7 +520,7 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     </div>
     </div>
       );
-    })}
+    })()}
   </section>
 </Layout>
 
@@ -583,6 +695,8 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
 
   /* Workshop selector tabs */
   .ws-tab {
+    display: inline-block;
+    text-decoration: none;
     font-family: var(--font-mono-hud);
     font-size: 11px;
     font-weight: 600;
@@ -605,43 +719,6 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     background: var(--c-neon-cyan);
   }
 
-  /* Under-construction panel for unbuilt workshops */
-  .ws-construction[hidden] { display: none; }
-  .ws-construction {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 1rem;
-    padding: 4rem 1rem 5rem;
-    border-radius: var(--radius-card);
-    border: 1px solid var(--c-border);
-    background: var(--c-bg-elevated);
-  }
-  .ws-uc-icon {
-    width: 160px;
-    height: 160px;
-    filter: drop-shadow(0 0 16px rgb(var(--rgb-crt-amber) / 0.35));
-    animation: ws-uc-float 2.4s ease-in-out infinite;
-  }
-  @keyframes ws-uc-float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .ws-uc-icon { animation: none; }
-  }
-  .ws-uc-title {
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    color: var(--c-crt-amber);
-  }
-  .ws-uc-body {
-    font-size: 0.92rem;
-    color: var(--c-fg-body);
-  }
   .ws-subtitle {
     font-weight: 500;
     text-transform: none;
@@ -874,8 +951,7 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     text-shadow: 0 0 20px rgb(var(--rgb-neon-cyan) / 0.5);
   }
   :global(html[data-theme='retro']) .ws-quest-sum,
-  :global(html[data-theme='retro']) .ws-label,
-  :global(html[data-theme='retro']) .ws-uc-body {
+  :global(html[data-theme='retro']) .ws-label {
     font-family: 'DotGothic16', sans-serif;
   }
   :global(html[data-theme='retro']) .ws-tab {
@@ -911,14 +987,6 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
     font-size: 8px;
     border-radius: 0;
     background: transparent;
-  }
-  :global(html[data-theme='retro']) .ws-construction {
-    border: 2px dashed rgb(var(--rgb-crt-amber) / 0.5);
-    border-radius: 0;
-    background: rgb(var(--rgb-shadow-ink) / 0.85);
-  }
-  :global(html[data-theme='retro']) .ws-uc-title {
-    font-family: 'Press Start 2P', monospace;
   }
   :global(html[data-theme='retro']) .ws-summary {
     border-radius: 0;
@@ -985,9 +1053,7 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
 
     const checks = Array.from(document.querySelectorAll<HTMLInputElement>('.ws-check'));
     const sectionEls = Array.from(document.querySelectorAll<HTMLDetailsElement>('.ws-section'));
-    let activeWs = 'copilot';
-    const activeContainer = () =>
-      document.querySelector<HTMLElement>(`.ws-secs[data-workshop="${activeWs}"]`);
+    const activeContainer = () => document.querySelector<HTMLElement>('.ws-secs');
     const countEl = document.getElementById('ws-count');
     const barEl = document.getElementById('ws-bar');
     const resetBtn = document.getElementById('ws-reset');
@@ -1123,50 +1189,6 @@ const totalItems = sections.reduce((n, s) => n + s.items.length, 0);
         }, 1500);
       });
     });
-
-    const WS_NAMES: Record<string, string> = {
-      copilot: 'COPILOT WORKSHOP',
-      github: 'GITHUB WORKSHOP',
-      ghas: 'GHAS WORKSHOP',
-    };
-    const WS_KEY = 'ws-active-workshop-v1';
-    const REAL = new Set(['copilot', 'github']);
-    const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.ws-tab'));
-    const titleEl = document.getElementById('ws-title');
-    const panels = Array.from(document.querySelectorAll<HTMLElement>('.ws-panel'));
-    const constructionEl = document.getElementById('ws-construction');
-    const questBody = document.getElementById('ws-quest-body');
-    const objectivesEl = document.getElementById('ws-objectives');
-
-    const selectWorkshop = (id: string) => {
-      const active = WS_NAMES[id] ? id : 'copilot';
-      const isReal = REAL.has(active);
-      if (titleEl) titleEl.textContent = WS_NAMES[active];
-      panels.forEach((p) => { p.hidden = p.dataset.workshop !== active; });
-      if (questBody) questBody.hidden = !isReal;
-      if (constructionEl) constructionEl.hidden = isReal;
-      if (isReal) {
-        activeWs = active;
-        const panel = panels.find((p) => p.dataset.workshop === active);
-        if (objectivesEl && panel?.dataset.objectives) {
-          objectivesEl.textContent = panel.dataset.objectives;
-        }
-        refreshGlobal();
-      }
-      tabs.forEach((t) => {
-        const on = t.dataset.ws === active;
-        t.classList.toggle('is-active', on);
-        t.setAttribute('aria-selected', String(on));
-      });
-      try { localStorage.setItem(WS_KEY, active); } catch {}
-    };
-
-    tabs.forEach((t) => {
-      t.addEventListener('click', () => selectWorkshop(t.dataset.ws || 'copilot'));
-    });
-    let savedWs = 'copilot';
-    try { savedWs = localStorage.getItem(WS_KEY) || 'copilot'; } catch {}
-    selectWorkshop(savedWs);
   }
 
   initWorkshopChecklist();
