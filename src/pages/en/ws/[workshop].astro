@@ -1,0 +1,11 @@
+---
+import WorkshopNotesPage from '../../../components/pages/WorkshopNotesPage.astro';
+
+export function getStaticPaths() {
+  return ['copilot', 'github', 'ghas'].map((workshop) => ({ params: { workshop } }));
+}
+
+const workshop = Astro.params.workshop as 'copilot' | 'github' | 'ghas';
+---
+
+<WorkshopNotesPage locale="en" workshop={workshop} currentPath={`/ws/${workshop}`} />
