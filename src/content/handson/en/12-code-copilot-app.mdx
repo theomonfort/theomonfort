@@ -16,7 +16,7 @@ Use a **Project in the GitHub Copilot App**, not a GitHub Projects issue board. 
 
 ### 12.1 — Bring the repositories and brief together
 
-First, **save, commit and push your Codespaces work**, then review and merge your Test & Secure PRs. Note the resulting `main` commit. Open the Copilot App with access to your hands-on repository and continue from that updated, reviewed state, not a stale local `main`. Importing checkpoint3 is not a prerequisite.
+First, **save, commit and push your Codespaces work**, then review and merge your Test & Secure PRs. Open the Copilot App with access to your hands-on repository and continue from that updated, reviewed state, not a stale local `main`.
 
 1. Use **+ beside Projects** to create a Project for this website.
 2. Add these three repositories to the Project. Only your hands-on repository is an implementation target.
@@ -37,52 +37,27 @@ The solar-system reference deliberately differs from our site: Sun + eight astro
 
 ### 12.2 — Compare first, then approve a plan
 
-Send this to the Project, replacing the repository and reviewed commit:
+Send this single prompt to the Project, replacing the repository name:
 
 ```text
 Read the Word brief in Library and compare all three repositories.
 Only <my hands-on repo> may change; the two irl-odyssey repos are read-only references.
-Use reviewed main at <commit> as the base. Inspect its current features and tests first.
-Propose an adaptation plan: map the solar-system design to our SDLC categories,
-routes and theme, and integrate read-only Zettelkasten with curated bundled notes.
-Inspect and reuse any existing 3D and Zettelkasten from my own work or checkpoint3;
-adapt only missing requirements instead of rebuilding either. Preserve source licenses.
-Show what already works, what needs adapting, and proposed tests. Wait for my approval.
+Start from current main; inspect current features and tests.
+Propose one plan and tests for adapting the solar system to our SDLC categories,
+Playbook routes and retro theme, and integrating read-only Zettelkasten with bundled notes.
+Preserve licenses, existing features and content.
+Follow the brief's read-only configuration: no visitor editing, note-write requests or backend.
+Wait for my approval, then implement both agreed integrations and tests on a dedicated branch
+in my repo, reusing existing features without duplication.
+Run relevant checks, show the reviewable diff and results, and stop task-owned browsers/servers.
 ```
 
-Plan both integrations as Project tasks from the Word brief, not from the initial Part 6 Issue catalogue. Checkpoint3 already includes both; if they are present in your repository, compare them with the brief and adapt only missing requirements.
+Review the proposed plan and tests, then approve them in the conversation.
 
-### 12.3 — Implement only the agreed adaptations
+### 12.3 — Review the integrations
 
-**3D first.** After reviewing the plan, send:
+In **Overview** and the conversation, check that 3D destinations match your site's categories/routes and existing features still work. Confirm that graph exploration, search, note reading and links work without editing or note-write requests.
 
-```text
-Implement the approved 3D adaptation only in <my hands-on repo>,
-on an integration branch from the agreed base. Keep both reference repos unchanged.
-Preserve the 2D catalogue, presentation and existing localized content.
-Keep TOC labels in English without translating the article content. Reuse 3D already present.
-Ask which tests to add, implement the agreed tests and show the diff. Stop before graph integration.
-```
-
-Review the 3D result in **Overview** and the conversation: destinations must match your site's categories/routes and the existing site must still work.
-
-**Then inspect and adapt the read-only graph**, on the reviewed branch that retains your exercise work and 3D:
-
-```text
-Inspect and reuse any existing Zettelkasten in <my hands-on repo>, including work based on checkpoint3.
-Implement only approved gaps, or integrate it if absent, continuing from our reviewed 3D work.
-Keep both reference repos and existing features unchanged.
-Reuse mountZettelkasten with readOnly: true and apiBaseUrl: null; set apiBaseUrl: null on every vault.
-Keep graph exploration, search, note reading and links using curated bundled data.
-Expose no visitor edit/create/rename/delete/import actions, editor shortcuts or write endpoints.
-Do not delete the source editor; adapt its existing read-only configuration.
-Ask which proposed tests to add, implement the agreed tests, and show the diff.
-```
-
-Check that graph exploration, search, reading and links work without editing or a write API. Review the target-only diff and license notices before opening and merging the integration PR.
-
-<Aside type="reference">
-**Optional checkpoint3, after the integrations:** this is the prepared completed workshop website reference, including presentation, tests/PR CI, 3D, read-only Zettelkasten and English TOC labels. It does not add unrelated personal-site pages or the daily-report workflow from Part 13. Prefer comparing with it; if importing [`./checkpoint3`](/theomonfort/en/handson/intro-2/#checkpoints), save, commit and push first. It imports a whole snapshot into a separate branch/PR from remote `main` and installs dependencies, without starting a server or merging the PR. Review replacements/deletions, retain your tests, graph, instructions and other work, and merge only after review. Do not overwrite your completed exercise; skip the import if your implementation works.
-</Aside>
+Review the target-only diff, test results and license notices before opening and merging the integration PR.
 
 Continue to [Part 13: Operate](/theomonfort/en/handson/operate-agentic-workflow/). The advanced integrations are not prerequisites for that part.
