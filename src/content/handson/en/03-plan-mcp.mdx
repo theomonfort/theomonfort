@@ -24,31 +24,19 @@ For this step, select the **Copilot** harness in **Session Target** and use **Cu
 
 ### 3.1 — Verify the GitHub MCP Server
 
-The template already configures the GitHub MCP Server in **`.mcp.json` at the repository root**. You will add Context7 in section 3.2.
+For the selected **Copilot** harness, use the **built-in GitHub MCP Server**. No manual GitHub entry is needed in root `.mcp.json`. You will add Context7 in section 3.2.
 
-Open `.mcp.json` and confirm that the following configuration is present:
+Open **Customizations → MCP Servers → Built-in → github-mcp-server**. Click **Start** if shown. Review requested permissions before accepting any trust or sign-in prompts. Never commit credentials.
 
-```json
-{
-  "mcpServers": {
-    "github-mcp-server": {
-      "type": "http",
-      "url": "https://api.githubcopilot.com/mcp/",
-      "tools": ["*"]
-    }
-  }
-}
-```
+In **Customizations → Tools**, confirm that the `github-mcp-server` tools you need (Issues / PRs / code search, etc.) are enabled and available to the session.
 
-Open **Customizations → MCP Servers → Workspace** and confirm that `github-mcp-server` is listed with **`.mcp.json`** as its source. Click **Start** if shown. Review the endpoint and requested permissions before accepting any trust or sign-in prompts. Never commit credentials.
-
-In **Customizations → Tools**, confirm that the `github-mcp-server` tools (Issues / PRs / code search, etc.) are available to the session.
+**Older copies:** If root `.mcp.json` also defines `github-mcp-server`, first confirm that the built-in server and required tools are available, then remove only that duplicate entry. Preserve all other servers.
 
 ⏱ About 1 minute
 
 <Aside type="positive">
 
-**Tip**: The GitHub MCP Server is officially provided by GitHub. It feels like running `gh` commands — Copilot can directly operate Issues / PRs / Actions / Code search.
+**Tip**: GitHub provides this server. Available tools and allowed operations depend on your account, repository access and policies.
 
 </Aside>
 
@@ -64,16 +52,11 @@ In **Customizations → Tools**, confirm that the `github-mcp-server` tools (Iss
 6. If prompted for a destination, choose **Workspace**, saving to root **`.mcp.json`**, not a User / Global configuration
 7. Review any trust or authentication prompts, then start the server if needed
 
-After adding it, confirm that root `.mcp.json` contains **both** servers. Keep the existing GitHub entry:
+After adding it, confirm that root `.mcp.json` contains **`context7`**. This minimal example contains only Context7; preserve any other existing workspace servers:
 
 ```json
 {
   "mcpServers": {
-    "github-mcp-server": {
-      "type": "http",
-      "url": "https://api.githubcopilot.com/mcp/",
-      "tools": ["*"]
-    },
     "context7": {
       "type": "http",
       "url": "https://mcp.context7.com/mcp",
@@ -83,7 +66,7 @@ After adding it, confirm that root `.mcp.json` contains **both** servers. Keep t
 }
 ```
 
-In **Customizations → MCP Servers → Workspace**, both `github-mcp-server` and `context7` should show **`.mcp.json`** as their source. If `context7` shows **Start**, click it.
+In **Customizations → MCP Servers → Workspace**, `context7` should show **`.mcp.json`** as its source. If it shows **Start**, click it. `github-mcp-server` stays under **Built-in**, not Workspace.
 
 To verify it works, try the following in Copilot Chat:
 

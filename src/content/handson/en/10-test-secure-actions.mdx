@@ -43,7 +43,7 @@ These agent files are **generated automatically**, not written by you:
   playwright-test-healer.agent.md
 ```
 
-The initializer also writes `.vscode/mcp.json` and sample seed/setup files. Preserve existing files and workflows. For the [Part 3](/theomonfort/en/handson/plan-mcp/) root setup, ask Copilot to merge the generated `playwright-test` entry into `.mcp.json` and connect the agents to it, keeping GitHub and Context7. Do not replace the root file or start duplicate servers.
+The initializer also writes `.vscode/mcp.json` and sample seed/setup files. Preserve existing files and workflows. For the [Part 3](/theomonfort/en/handson/plan-mcp/) root setup, ask Copilot to merge the generated `playwright-test` entry into `.mcp.json` and connect the agents to it, preserving Context7 and other existing workspace servers. GitHub remains built in; do not add a duplicate entry. Do not replace the root file or start duplicate servers.
 
 If `playwright.config.ts` is missing, ask Copilot to configure the project with `testDir: './tests/e2e'`.
 
@@ -51,10 +51,11 @@ In **Customizations → MCP Servers → Workspace**, start **`playwright-test`**
 
 #### Agree on tests before coding
 
-Append this line to **`.github/copilot-instructions.md`**, keeping the existing rules:
+Append these rules to **`.github/copilot-instructions.md`**, keeping the existing rules:
 
 ```text
 When adding or changing a feature, assess whether tests are needed. Propose relevant tests and ask the user which to add or update, then implement the feature and agreed tests together.
+For browser E2E tests, use `playwright-test-planner` to propose the test plan, then `playwright-test-generator` to create or update the tests after user approval.
 ```
 
 #### Explore, propose, then choose

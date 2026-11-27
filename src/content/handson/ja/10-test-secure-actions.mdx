@@ -43,7 +43,7 @@ npx playwright init-agents --loop=vscode
   playwright-test-healer.agent.md
 ```
 
-初期化時には `.vscode/mcp.json` とサンプルの seed / setup ファイルも生成されます。既存のファイルと workflow は残してください。[Part 3](/theomonfort/handson/plan-mcp/) のルート設定では、生成した `playwright-test` エントリを `.mcp.json` に統合してエージェントを接続するよう Copilot に依頼します。GitHub と Context7 を残し、ルートファイルの置換やサーバーの二重起動は避けてください。
+初期化時には `.vscode/mcp.json` とサンプルの seed / setup ファイルも生成されます。既存のファイルと workflow は残してください。[Part 3](/theomonfort/handson/plan-mcp/) のルート設定では、生成した `playwright-test` エントリを `.mcp.json` に統合してエージェントを接続するよう Copilot に依頼します。Context7 と他の既存ワークスペースサーバーは残してください。GitHub は組み込みを使い、重複エントリを追加しないでください。ルートファイルの置換やサーバーの二重起動は避けてください。
 
 `playwright.config.ts` がなければ、`testDir: './tests/e2e'` で設定するよう Copilot に依頼します。
 
@@ -51,10 +51,11 @@ npx playwright init-agents --loop=vscode
 
 #### 実装前にテストを相談する
 
-**`.github/copilot-instructions.md`** に、既存の指示を残して次の1行を追加します。
+**`.github/copilot-instructions.md`** に、既存の指示を残して次のルールを追加します。
 
 ```text
 機能の追加や変更時には、テストが必要かを検討する。適切なテストを提案し、どれを追加または更新するかユーザーに確認してから、機能と合意したテストを一緒に実装する。
+ブラウザーの E2E テストでは、`playwright-test-planner` でテスト計画を提案し、ユーザーの承認後に `playwright-test-generator` でテストを作成または更新する。
 ```
 
 #### 画面を調べ、提案から選ぶ

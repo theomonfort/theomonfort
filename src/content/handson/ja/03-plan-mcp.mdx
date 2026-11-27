@@ -24,31 +24,19 @@ import Aside from '../../../components/handson/Aside.astro';
 
 ### 3.1 — GitHub MCP Server を確認する
 
-テンプレートには既に GitHub MCP Server が **リポジトリのルートの `.mcp.json`** に設定されています。Context7 は 3.2 で追加します。
+選択した **Copilot** ハーネスでは、**組み込みの GitHub MCP Server** を使います。ルートの `.mcp.json` に GitHub を手動で追加する必要はありません。Context7 は 3.2 で追加します。
 
-`.mcp.json` を開いて、以下の設定があることを確認してください：
+**Customizations → MCP Servers → Built-in → github-mcp-server** を開きます。**Start** が表示されていればクリックしてください。信頼やサインインを求められたら、要求される権限を確認してから進めます。認証情報はコミットしないでください。
 
-```json
-{
-  "mcpServers": {
-    "github-mcp-server": {
-      "type": "http",
-      "url": "https://api.githubcopilot.com/mcp/",
-      "tools": ["*"]
-    }
-  }
-}
-```
+**Customizations → Tools** で、必要な `github-mcp-server` のツール（Issues / PRs / code search など）が有効で、セッションで利用できることを確認しましょう。
 
-**Customizations → MCP Servers → Workspace** を開き、`github-mcp-server` の設定元が **`.mcp.json`** と表示されていることを確認します。**Start** が表示されていればクリックしてください。信頼やサインインを求められたら、接続先と要求される権限を確認してから進めます。認証情報はコミットしないでください。
-
-**Customizations → Tools** で、`github-mcp-server` のツール（Issues / PRs / code search など）がセッションで利用できることを確認しましょう。
+**古いコピーの場合**: ルートの `.mcp.json` にも `github-mcp-server` があれば、組み込みサーバーと必要なツールを利用できることを確認してから、その重複エントリだけを削除します。他のサーバーはすべて残してください。
 
 ⏱ 約1分
 
 <Aside type="positive">
 
-**ポイント**: GitHub MCP Server は GitHub 公式提供。`gh` コマンドを叩く感覚で、Copilot が Issues / PRs / Actions / Code search を直接操作できます。
+**ポイント**: GitHub 公式提供のサーバーです。利用できるツールと操作は、アカウント、リポジトリのアクセス権、ポリシーによって異なります。
 
 </Aside>
 
@@ -64,16 +52,11 @@ import Aside from '../../../components/handson/Aside.astro';
 6. 保存先を聞かれたら **Workspace** を選び、User / Global 設定ではなくルートの **`.mcp.json`** に保存
 7. 信頼や認証の確認に対応し、必要に応じてサーバーを起動
 
-追加後、ルートの `.mcp.json` に **両方** のサーバーがあることを確認してください。既存の GitHub の設定は残します：
+追加後、ルートの `.mcp.json` に **`context7`** があることを確認してください。以下は Context7 だけの最小例です。他の既存ワークスペースサーバーは残します：
 
 ```json
 {
   "mcpServers": {
-    "github-mcp-server": {
-      "type": "http",
-      "url": "https://api.githubcopilot.com/mcp/",
-      "tools": ["*"]
-    },
     "context7": {
       "type": "http",
       "url": "https://mcp.context7.com/mcp",
@@ -83,7 +66,7 @@ import Aside from '../../../components/handson/Aside.astro';
 }
 ```
 
-**Customizations → MCP Servers → Workspace** で、`github-mcp-server` と `context7` の設定元がどちらも **`.mcp.json`** と表示されることを確認します。`context7` に **Start** が表示されていればクリックしてください。
+**Customizations → MCP Servers → Workspace** で、`context7` の設定元が **`.mcp.json`** と表示されることを確認します。**Start** が表示されていればクリックしてください。`github-mcp-server` は Workspace ではなく **Built-in** にあります。
 
 動作確認として、Copilot Chat で以下を試してみましょう：
 
