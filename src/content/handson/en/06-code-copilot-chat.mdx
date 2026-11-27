@@ -162,6 +162,9 @@ Optional Cloud Agent (Part 8), after reviewing and merging the base site (Part 6
 - Keep the `/playbook` catalogue and Markdown details; cards open `/playbook/<slug>/?present=1`.
 - Turn each body H2 into a slide and show the frontmatter title at the start. Arrow keys navigate, Esc returns to the catalogue, and the URL retains the current entry and slide.
 - Use `src/lib/playbook-categories.ts` for a category-grouped TOC that highlights the current entry and switches to another entry's first slide without leaving presentation mode.
+- Center slide content within an appropriate maximum width, balancing headings, body text and spacing. Avoid stretching content across the screen or using oversized cover headings.
+- Keep the TOC closed by default, with a button to toggle it. When open on desktop, it must not overlap content or controls.
+- On a 15-inch Mac in Chrome at 125% zoom with the TOC hidden, verify that headings, body text, diagrams and controls fit the viewport without page overflow or clipping. Do not compensate with tiny text; also check with the TOC open.
 
 Reference: https://theomonfort.github.io/theomonfort/en/playbook/github/?present=1
 
